@@ -22,7 +22,7 @@ export const getSceneModuleWithName = (name?: string): Promise<CreateSceneClass>
 // Sollten wir in zukunft szenen dynamisch rein laden, kann man sie heir auch aus einem
 // als .babylon file importieren
 export const getSceneModule = (): Promise<CreateSceneClass> => {
-  return import('./scenes/Scene1').then((module: CreateSceneModule) => {
+  return import('./components/2D3DCore/Presentation/MainScene/MainSceneView').then((module: CreateSceneModule) => {
     return module.default;
   });
 };
