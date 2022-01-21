@@ -2,7 +2,7 @@
 // Fassade einführen
 
 export class Calculator {
-  public giveAnswer = (trueOrFalse: boolean): boolean => {
-    return trueOrFalse;
-  };
+	public checkInput = (trueOrFalse: boolean): boolean => {
+		return trueOrFalse;
+	};
 }

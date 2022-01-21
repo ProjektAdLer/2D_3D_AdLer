@@ -1,24 +1,46 @@
-import { Color3, Scene, StandardMaterial, VertexData, ActionManager, ExecuteCodeAction } from '@babylonjs/core';
+import {
+	Color3,
+	Scene,
+	StandardMaterial,
+	VertexData,
+	ActionManager,
+	ExecuteCodeAction,
+} from '@babylonjs/core';
 import GameObject from '../../../abstract/GameObject';
+import { BusinessLogic } from '../../BusinessLogic/API/BusinessLogic';
+import { PresentationLogic } from '../API/PresentationLogic';
+import { SBWPresenter } from './SBWPresenter';
 
 export class SBWView extends GameObject {
-  constructor(name: string, scene: Scene) {
-    super(name, scene);
+	private _presenter: SBWPresenter;
 
-    VertexData.CreateBox({ height: 3, width: 3, depth: 3 }).applyToMesh(this);
+	constructor(name: string, scene: Scene) {
+		super(name, scene);
 
-    const SBWMaterial = new StandardMaterial('SBWMaterial', scene);
+		console.log('SBW constructor');
 
-    SBWMaterial.diffuseColor = new Color3(1, 0, 0);
+		// to be fixed with a DI-Container
+		this._presenter = new SBWPresenter(
+			new PresentationLogic(new BusinessLogic())
+		);
 
-    this.material = SBWMaterial;
+		VertexData.CreateBox({ height: 3, width: 3, depth: 3 }).applyToMesh(this);
 
-    this.actionManager = new ActionManager(scene);
+		const SBWMaterial = new StandardMaterial('SBWMaterial', scene);
+		SBWMaterial.diffuseColor = new Color3(1, 0, 0);
+		this.material = SBWMaterial;
 
-    this.actionManager.registerAction(
-      new ExecuteCodeAction(ActionManager.OnPickTrigger, () => {
-        console.log('bla');
-      })
-    );
-  }
+		this.actionManager = new ActionManager(scene);
+		this.actionManager.registerAction(
+			new ExecuteCodeAction(ActionManager.OnPickTrigger, () => {
+				this._presenter.checkInput(true);
+			})
+		);
+
+		this._presenter.getViewModel().add(this.changeColor);
+	}
+
+	private changeColor = (newColor: Color3): void => {
+		(this.material as StandardMaterial).diffuseColor = newColor;
+	};
 }

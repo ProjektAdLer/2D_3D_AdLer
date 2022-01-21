@@ -1,3 +1,3 @@
 export interface IBusinessLogic {
-  giveAnswer(inputToCheck: boolean): void;
+	checkInput(inputToCheck: boolean): boolean;
 }

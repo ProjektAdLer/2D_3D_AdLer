@@ -1,1 +1,3 @@
-export interface IPresentationLogic {}
+export interface IPresentationLogic {
+	checkInput(inputToCheck: boolean): boolean;
+}
