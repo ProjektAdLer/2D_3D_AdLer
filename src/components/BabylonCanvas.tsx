@@ -4,6 +4,14 @@ import { getSceneModule } from '../babylon/createScene';
 
 import '@babylonjs/loaders';
 
+import 'reflect-metadata';
+import { Service } from '../babylon/DI/service';
+import DIContainer from '../babylon/DI/container';
+
+const service: Service = DIContainer.resolve<Service>(Service);
+
+console.log(service.getAllNames());
+
 export default function BabylonCanvas(props: any) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 

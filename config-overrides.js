@@ -1,6 +1,5 @@
-/* config-overrides.js */
+const { override, addBabelPlugin } = require('customize-cra');
+const pluginProposalDecorators = require('@babel/plugin-proposal-decorators');
+const test = require('babel-plugin-transform-typescript-metadata');
 
-module.exports = function override(config, env) {
-  //do stuff with the webpack config...
-  return config;
-};
+module.exports = override(addBabelPlugin([pluginProposalDecorators, { legacy: true }]), addBabelPlugin(test));
