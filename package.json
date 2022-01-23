@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/plugin-proposal-decorators": "^7.16.7",
     "@babylonjs/core": "^4.2.1",
     "@babylonjs/gui": "^4.2.1",
     "@babylonjs/inspector": "^4.2.1",
