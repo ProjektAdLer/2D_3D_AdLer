@@ -6,8 +6,10 @@ import {
 	ActionManager,
 	ExecuteCodeAction,
 } from '@babylonjs/core';
+import { inject } from 'inversify';
 import GameObject from '../../../abstract/GameObject';
 import { BusinessLogic } from '../../BusinessLogic/API/BusinessLogic';
+import CoreDIContainer from '../../DependencyInjection/CoreDIContainer';
 import { PresentationLogic } from '../API/PresentationLogic';
 import { SBWPresenter } from './SBWPresenter';
 
@@ -19,10 +21,7 @@ export class SBWView extends GameObject {
 
 		console.log('SBW constructor');
 
-		// to be fixed with a DI-Container
-		this._presenter = new SBWPresenter(
-			new PresentationLogic(new BusinessLogic())
-		);
+		this._presenter = CoreDIContainer.resolve<SBWPresenter>(SBWPresenter);
 
 		VertexData.CreateBox({ height: 3, width: 3, depth: 3 }).applyToMesh(this);
 

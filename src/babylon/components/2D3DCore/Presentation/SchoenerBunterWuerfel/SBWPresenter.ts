@@ -1,21 +1,28 @@
+import { inject, injectable } from 'inversify';
+import { PresentationLogic } from '../API/PresentationLogic';
 import { IPresentationLogic } from './../API/IPresentationLogic';
 import { SBWViewModel } from './SBWViewModel';
-export class SBWPresenter {
-	private _presentationLogic: IPresentationLogic;
-	private _viewModel: SBWViewModel;
 
-	constructor(presentationLogic: IPresentationLogic) {
-		this._presentationLogic = presentationLogic;
-		this._viewModel = new SBWViewModel();
+@injectable()
+export class SBWPresenter {
+	private presentationLogic: IPresentationLogic;
+	private viewModel: SBWViewModel;
+
+	constructor(
+		@inject(PresentationLogic) presentationLogic: PresentationLogic,
+		@inject(SBWViewModel) viewModel: SBWViewModel
+	) {
+		this.presentationLogic = presentationLogic;
+		this.viewModel = viewModel;
 	}
 
 	public getViewModel(): SBWViewModel {
-		return this._viewModel;
+		return this.viewModel;
 	}
 
 	public checkInput(inputToCheck: boolean): void {
-		if (this._presentationLogic.checkInput(inputToCheck)) {
-			this._viewModel.setColor(inputToCheck);
+		if (this.presentationLogic.checkInput(inputToCheck)) {
+			this.viewModel.setColor(inputToCheck);
 		}
 	}
 }
