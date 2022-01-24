@@ -6,11 +6,8 @@ import {
 	ActionManager,
 	ExecuteCodeAction,
 } from '@babylonjs/core';
-import { inject } from 'inversify';
 import GameObject from '../../../abstract/GameObject';
-import { BusinessLogic } from '../../BusinessLogic/API/BusinessLogic';
 import CoreDIContainer from '../../DependencyInjection/CoreDIContainer';
-import { PresentationLogic } from '../API/PresentationLogic';
 import { SBWPresenter } from './SBWPresenter';
 
 export class SBWView extends GameObject {
@@ -18,8 +15,6 @@ export class SBWView extends GameObject {
 
 	constructor(name: string, scene: Scene) {
 		super(name, scene);
-
-		console.log('SBW constructor');
 
 		this._presenter = CoreDIContainer.resolve<SBWPresenter>(SBWPresenter);
 
@@ -36,7 +31,7 @@ export class SBWView extends GameObject {
 			})
 		);
 
-		this._presenter.getViewModel().add(this.changeColor);
+		this._presenter.getViewModel().addColorChangeObserver(this.changeColor);
 	}
 
 	private changeColor = (newColor: Color3): void => {
