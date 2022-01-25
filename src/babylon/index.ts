@@ -7,7 +7,7 @@ const babylonInit = async (): Promise<void> => {
   canvas.style.height = '100%';
   canvas.id = 'gameCanvas';
   document.body.appendChild(canvas);
-
+  console.log('Hallo');
   const createSceneModule = await getSceneModule();
 
   // Execute the pretasks, if defined
