@@ -1,8 +1,8 @@
-import { injectable } from 'inversify';
+import { injectable } from "inversify";
 
 @injectable()
 export class DependencyA {
-  private readonly name: string = 'DependencyA';
+  private readonly name: string = "DependencyA";
 
   public getName(): string {
     return this.name;
@@ -11,7 +11,7 @@ export class DependencyA {
 
 @injectable()
 export class DependencyB {
-  private readonly name: string = 'DependencyB';
+  private readonly name: string = "DependencyB";
 
   public getName(): string {
     return this.name;

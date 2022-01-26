@@ -1,25 +1,19 @@
 ---
 name: User Story Template
 about: Allgemeine User Story im AdLer Projekt
-title: ''
-labels: ''
-assignees: ''
-
+title: ""
+labels: ""
+assignees: ""
 ---
 
 **User Story**
 
 Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 
- 
-
 **Akzeptanzkriterien**
 
 - [ ] Akzeptanzkriterium 1
 - [ ] Akzeptanzkriterium 2
-
-
- 
 
 **Definition of Ready**
 
@@ -30,8 +24,6 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 - [ ] User Story hat einen Mehrwert für das Produkt oder die Entwicklung
 - [ ] User Story Ursprung ist bekannt (Stakeholder)
 - [ ] User Story ist Realease zugewiesen
-
- 
 
 **Definition of Done**
 

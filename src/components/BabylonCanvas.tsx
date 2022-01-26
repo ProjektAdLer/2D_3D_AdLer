@@ -1,12 +1,19 @@
-import { Engine, Scene, ArcRotateCamera, Vector3, HemisphericLight, MeshBuilder } from '@babylonjs/core';
-import React, { useEffect, useRef } from 'react';
-import { getSceneModule } from '../babylon/createScene';
+import {
+  Engine,
+  Scene,
+  ArcRotateCamera,
+  Vector3,
+  HemisphericLight,
+  MeshBuilder,
+} from "@babylonjs/core";
+import React, { useEffect, useRef } from "react";
+import { getSceneModule } from "../babylon/createScene";
 
-import '@babylonjs/loaders';
+import "@babylonjs/loaders";
 
-import 'reflect-metadata';
-import { Service } from '../babylon/DI/service';
-import DIContainer from '../babylon/DI/container';
+import "reflect-metadata";
+import { Service } from "../babylon/DI/service";
+import DIContainer from "../babylon/DI/container";
 
 const service: Service = DIContainer.resolve<Service>(Service);
 
@@ -36,16 +43,18 @@ export default function BabylonCanvas(props: any) {
         });
 
         // Watch for browser/canvas resize events
-        window.addEventListener('resize', function () {
+        window.addEventListener("resize", function () {
           engine.resize();
         });
 
         console.log(document.addEventListener);
 
-        document.getElementById('overlay')!.addEventListener('click', function () {
-          canvas.requestPointerLock();
-          document.getElementById('overlay')!.style.visibility = 'hidden';
-        });
+        document
+          .getElementById("overlay")!
+          .addEventListener("click", function () {
+            canvas.requestPointerLock();
+            document.getElementById("overlay")!.style.visibility = "hidden";
+          });
 
         engine.runRenderLoop(() => {
           scene.render();
