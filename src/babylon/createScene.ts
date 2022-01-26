@@ -12,17 +12,6 @@ export interface CreateSceneModule {
   default: CreateSceneClass;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 // This gets a Scene by a Name. This serves as an excample and can be ignord for now -PG
 export const getSceneModuleWithName = (
   name?: string
