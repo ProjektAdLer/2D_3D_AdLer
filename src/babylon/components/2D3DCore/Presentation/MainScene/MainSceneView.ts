@@ -1,4 +1,4 @@
-import { SBWView } from '../SchoenerBunterWuerfel/SBWView';
+import { SBWView } from '../../View/SBWView';
 import {
 	Engine,
 	FreeCamera,
@@ -34,8 +34,6 @@ export class MainSceneView implements CreateSceneClass {
 		new HemisphericLight('light', new Vector3(0, 1, 0), scene);
 
 		new GroundMesh('Ground', scene);
-
-		new SBWView('SBW', scene);
 
 		scene.debugLayer.show();
 

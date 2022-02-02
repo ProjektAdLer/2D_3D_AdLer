@@ -5,7 +5,6 @@ import { IPresentationLogic } from './IPresentationLogic';
 
 @injectable()
 export class PresentationLogic implements IPresentationLogic {
-	// @ts-ignore
 	private _businessLogic: IBusinessLogic;
 
 	constructor(@inject(BusinessLogic) businessLogic: BusinessLogic) {

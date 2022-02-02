@@ -1,24 +1,27 @@
-import { Color3, Observable } from '@babylonjs/core';
+import { Color3 } from '@babylonjs/core';
 import { injectable } from 'inversify';
 
 @injectable()
 export class SBWViewModel {
 	private correctColor = new Color3(0, 1, 0);
 	private wrongColor = new Color3(1, 0, 0);
-	private currentColor;
-	private colorChangeObservable: Observable<Color3>;
+	private state: boolean = false;
 
-	constructor() {
-		this.currentColor = this.wrongColor;
-		this.colorChangeObservable = new Observable<Color3>();
-	}
+	// constructor() {}
 
-	public addColorChangeObserver(callback: (eventData: Color3) => void): void {
-		this.colorChangeObservable.add(callback);
-	}
+	public getCurrentColor = (): Color3 => {
+		return this.state ? this.correctColor : this.wrongColor;
+	};
 
-	public setColor(correct: boolean): void {
-		this.currentColor = correct ? this.correctColor : this.wrongColor;
-		this.colorChangeObservable.notifyObservers(this.currentColor);
-	}
+	public getCorrectColor = (): Color3 => {
+		return this.correctColor;
+	};
+
+	public getWrongColor = (): Color3 => {
+		return this.wrongColor;
+	};
+
+	public setState = (newState: boolean): void => {
+		this.state = newState;
+	};
 }
