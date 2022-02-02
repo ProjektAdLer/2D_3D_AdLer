@@ -1,5 +1,5 @@
-type Engine = import('@babylonjs/core/Engines/engine').Engine;
-type Scene = import('@babylonjs/core/scene').Scene;
+type Engine = import("@babylonjs/core/Engines/engine").Engine;
+type Scene = import("@babylonjs/core/scene").Scene;
 
 export interface CreateSceneClass {
   createScene: (engine: Engine, canvas: HTMLCanvasElement) => Promise<Scene>;
@@ -13,8 +13,10 @@ export interface CreateSceneModule {
 }
 
 // This gets a Scene by a Name. This serves as an excample and can be ignord for now -PG
-export const getSceneModuleWithName = (name?: string): Promise<CreateSceneClass> => {
-  return import('./scenes/Scene1').then((module: CreateSceneModule) => {
+export const getSceneModuleWithName = (
+  name?: string
+): Promise<CreateSceneClass> => {
+  return import("./scenes/Scene1").then((module: CreateSceneModule) => {
     return module.default;
   });
 };
@@ -22,7 +24,7 @@ export const getSceneModuleWithName = (name?: string): Promise<CreateSceneClass>
 // Sollten wir in zukunft szenen dynamisch rein laden, kann man sie heir auch aus einem
 // als .babylon file importieren
 export const getSceneModule = (): Promise<CreateSceneClass> => {
-  return import('./scenes/Scene1').then((module: CreateSceneModule) => {
+  return import("./scenes/Scene1").then((module: CreateSceneModule) => {
     return module.default;
   });
 };

@@ -1,5 +1,5 @@
-import { DataAccess } from './../../DataAccess/API/DataAccess';
-import { IDataAccess } from './IDataAccess';
+import { DataAccess } from "./../../DataAccess/API/DataAccess";
+import { IDataAccess } from "./IDataAccess";
 
 export class BusinessLogic {
   // @ts-ignore

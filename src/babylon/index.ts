@@ -1,11 +1,11 @@
-import { Engine } from '@babylonjs/core/Engines/engine';
-import { getSceneModule } from './createScene';
+import { Engine } from "@babylonjs/core/Engines/engine";
+import { getSceneModule } from "./createScene";
 
 const babylonInit = async (): Promise<void> => {
-  const canvas = document.createElement('canvas');
-  canvas.style.width = '100%';
-  canvas.style.height = '100%';
-  canvas.id = 'gameCanvas';
+  const canvas = document.createElement("canvas");
+  canvas.style.width = "100%";
+  canvas.style.height = "100%";
+  canvas.id = "gameCanvas";
   document.body.appendChild(canvas);
 
   const createSceneModule = await getSceneModule();
@@ -24,17 +24,17 @@ const babylonInit = async (): Promise<void> => {
   });
 
   // Watch for browser/canvas resize events
-  window.addEventListener('resize', function () {
+  window.addEventListener("resize", function () {
     engine.resize();
   });
 
-  document.getElementById('overlay')!.addEventListener('click', function () {
+  document.getElementById("overlay")!.addEventListener("click", function () {
     canvas.requestPointerLock();
-    document.getElementById('overlay')!.style.visibility = 'hidden';
+    document.getElementById("overlay")!.style.visibility = "hidden";
   });
 };
 
 babylonInit().then(() => {
   // scene started rendering, everything is initialized
-  console.log('Scene hat fertig geladen!');
+  console.log("Scene hat fertig geladen!");
 });
