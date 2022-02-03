@@ -1,4 +1,4 @@
-import { IBusinessLogic } from './../../Presentation/API/IBusinessLogic';
+import { IBusinessLogic } from '../../Presentation/API/IBusinessLogic';
 import { DataAccess } from '../../DataAccess/API/DataAccess';
 import { Calculator } from '../Calculator';
 import { IDataAccess } from './IDataAccess';

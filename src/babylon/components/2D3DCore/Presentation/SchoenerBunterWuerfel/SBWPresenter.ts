@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { PresentationLogic } from '../API/PresentationLogic';
-import { IPresentationLogic } from './../API/IPresentationLogic';
+import { IPresentationLogic } from '../API/IPresentationLogic';
 import { SBWViewModel } from './SBWViewModel';
 import { ISBWView } from './ISBWView';
 import TYPES from '../../DependencyInjection/types';

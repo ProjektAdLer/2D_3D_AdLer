@@ -1,7 +1,7 @@
 import { Container } from 'inversify';
 import { PresentationLogic } from '../Presentation/API/PresentationLogic';
 import { SBWViewModel } from '../Presentation/SchoenerBunterWuerfel/SBWViewModel';
-import { SBWView } from '../View/SBWView';
+import { SBWView } from '../Presentation/SchoenerBunterWuerfel/SBWView';
 import { BusinessLogic } from '../BusinessLogic/API/BusinessLogic';
 import { Calculator } from '../BusinessLogic/Calculator';
 import { DataAccess } from '../DataAccess/API/DataAccess';

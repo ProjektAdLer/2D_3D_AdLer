@@ -6,9 +6,9 @@ import {
 	StandardMaterial,
 	VertexData,
 } from '@babylonjs/core';
-import GameObject from '../../abstract/GameObject';
-import { SBWViewModel } from '../Presentation/SchoenerBunterWuerfel/SBWViewModel';
-import { ISBWView } from '../Presentation/SchoenerBunterWuerfel/ISBWView';
+import GameObject from '../../../abstract/GameObject';
+import { SBWViewModel } from './SBWViewModel';
+import { ISBWView } from './ISBWView';
 
 export class SBWView extends GameObject implements ISBWView {
 	private onPickTrigger: Observable<void>;
