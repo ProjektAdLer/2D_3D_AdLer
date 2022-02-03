@@ -6,7 +6,7 @@ import {
 	StandardMaterial,
 	VertexData,
 } from '@babylonjs/core';
-import GameObject from '../../../Abstract/GameObject';
+import GameObject from '../../../../Abstract/GameObject';
 import { SBWViewModel } from './SBWViewModel';
 import { ISBWView } from './ISBWView';
 
