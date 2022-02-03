@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import BabylonCanvas from "./components/BabylonCanvas";
+import BabylonCanvas from "./Components/BabylonCanvas";
 
 function App() {
 	return (
