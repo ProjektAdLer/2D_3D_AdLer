@@ -2,7 +2,7 @@ import {
 	Engine
 } from '@babylonjs/core';
 import React, { useEffect, useRef } from 'react';
-import { getSceneModule } from '../../babylon/createScene';
+import { getSceneModule } from '../../Babylon/CreateScene';
 
 import '@babylonjs/loaders';
 

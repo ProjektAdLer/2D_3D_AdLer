@@ -1,5 +1,5 @@
 import { Engine, FreeCamera, Scene, Vector3, HemisphericLight, MeshBuilder, ActionManager } from '@babylonjs/core';
-import { CreateSceneClass } from '../../../../createScene';
+import { CreateSceneClass } from '../../../../CreateScene';
 
 class CoreSceneScreator implements CreateSceneClass {
   preTasks?: Promise<unknown>[] | undefined;

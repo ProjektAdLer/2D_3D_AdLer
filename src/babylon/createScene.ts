@@ -25,7 +25,7 @@ export const getSceneModuleWithName = async (
 // als .babylon file importieren
 export const getSceneModule = (): Promise<CreateSceneClass> => {
 	return import(
-		'./components/2D3DCore/Presentation/MainScene/MainSceneView'
+		'./Components/SBWExample/Presentation/MainScene/MainSceneView'
 	).then((module: CreateSceneModule) => {
 		return module.default;
 	});
