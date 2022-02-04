@@ -32,7 +32,6 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 - [ ] Die Implementierung ist in GitHub
 - [ ] Eine Code Review wurde durchgeführt (oder in Pairing Programm erstellt)
 - [ ] Die Codekonventionen sind eingehalten
-
 - [ ] Unittestabdeckung muss größer 90% sein
 - [ ] Alle Tests müssen bestanden sein
 - [ ] Benutzerdokumentation angelegt (Handbuch)
