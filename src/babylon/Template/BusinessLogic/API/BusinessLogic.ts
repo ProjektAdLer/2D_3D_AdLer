@@ -1,4 +1,4 @@
-import { DataAccess } from "./../../DataAccess/API/DataAccess";
+import { DataAccess } from "../../DataAccess/API/DataAccess";
 import { IDataAccess } from "./IDataAccess";
 
 export class BusinessLogic {
