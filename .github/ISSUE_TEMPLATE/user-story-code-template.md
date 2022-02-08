@@ -23,7 +23,7 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 - [ ] User Story hat Akzeptanzkriterien
 - [ ] User Story hat einen Mehrwert für das Produkt oder die Entwicklung
 - [ ] User Story Ursprung ist bekannt (Stakeholder)
-- [ ] User Story ist Realease zugewiesen
+- [ ] User Story ist Release zugewiesen
 
 **Definition of Done**
 
