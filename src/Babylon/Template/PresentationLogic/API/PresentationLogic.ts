@@ -1,4 +1,4 @@
-import { BusinessLogic } from "./../../BusinessLogic/API/BusinessLogic";
+import { BusinessLogic } from "../../BusinessLogic/API/BusinessLogic";
 import { IBusinessLogic } from "./IBusinessLogic";
 import { IPresentationLogic } from "./IPresentationLogic";
 export class PresentationLogic implements IPresentationLogic {
