@@ -1,10 +1,10 @@
 import { injectable, inject } from "inversify";
 import { BusinessLogic } from "../../BusinessLogic/API/BusinessLogic";
 import { IBusinessLogic } from "./IBusinessLogic";
-import { IPresentationLogic } from "./IPresentationLogic";
+import { IPresentation } from "./IPresentation";
 
 @injectable()
-export class PresentationLogic implements IPresentationLogic {
+export class Presentation implements IPresentation {
   private _businessLogic: IBusinessLogic;
 
   constructor(@inject(BusinessLogic) businessLogic?: IBusinessLogic) {
@@ -15,3 +15,5 @@ export class PresentationLogic implements IPresentationLogic {
     }
   }
 }
+
+//Present walls and floor, depending on data in entities

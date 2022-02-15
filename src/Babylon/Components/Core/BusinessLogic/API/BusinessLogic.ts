@@ -1,4 +1,4 @@
-import { IBusinessLogic } from "../../PresentationLogic/API/IBusinessLogic";
+import { IBusinessLogic } from "../../Presentation/API/IBusinessLogic";
 import { DataAccess } from "../../DataAccess/API/DataAccess";
 import { IDataAccess } from "./IDataAccess";
 import { inject, injectable } from "inversify";
@@ -15,3 +15,5 @@ export class BusinessLogic implements IBusinessLogic {
     }
   }
 }
+
+// probably nothing? Maybe Collision detection kinda?
