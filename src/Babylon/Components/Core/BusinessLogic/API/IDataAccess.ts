@@ -1,1 +1,1 @@
-export interface IDataAccess {}
+export default interface IDataAccess {}

@@ -1,58 +1,22 @@
-import {
-	Engine
-} from '@babylonjs/core';
-import React, { useEffect, useRef } from 'react';
-import { getSceneModule } from '../../Babylon/CreateScene';
+import "reflect-metadata";
 
-import '@babylonjs/loaders';
-
-import 'reflect-metadata';
+import { useEffect, useRef } from "react";
+import ICoreFactory from "../../Babylon/Components/Core/API/ICoreFactory";
+import CoreFactory from "../../Babylon/Components/Core/API/CoreFactory";
 
 export default function BabylonCanvas(props: any) {
-	const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-	useEffect(() => {
-		if (canvasRef) {
-			const canvas = canvasRef.current;
+  useEffect(() => {
+    if (canvasRef) {
+      const canvas = canvasRef.current;
 
-			const engine = new Engine(canvas, true);
+      // We use a Factory here, because React does not support DI - PG
+      const coreFactory: ICoreFactory = new CoreFactory();
+      const engineCore = coreFactory.CreateCore();
+      engineCore.CreateEngine(canvas!);
+    }
+  }, [canvasRef]);
 
-			const babylonInit = async (engine: Engine, canvas: HTMLCanvasElement) => {
-				const createSceneModule = await getSceneModule();
-
-				// Execute the pretasks, if defined
-				await Promise.all(createSceneModule.preTasks || []);
-
-				// Create the scene
-				const scene = await createSceneModule.createScene(engine, canvas);
-
-				// Register a render loop to repeatedly render the scene
-				engine.runRenderLoop(function () {
-					scene.render();
-				});
-
-				// Watch for browser/canvas resize events
-				window.addEventListener('resize', function () {
-					engine.resize();
-				});
-
-				console.log(document.addEventListener);
-
-				document
-					.getElementById('overlay')!
-					.addEventListener('click', function () {
-						canvas.requestPointerLock();
-						document.getElementById('overlay')!.style.visibility = 'hidden';
-					});
-
-				engine.runRenderLoop(() => {
-					scene.render();
-				});
-			};
-
-			babylonInit(engine, canvas!);
-		}
-	}, [canvasRef]);
-
-	return <canvas ref={canvasRef} {...props}></canvas>;
+  return <canvas ref={canvasRef} {...props}></canvas>;
 }

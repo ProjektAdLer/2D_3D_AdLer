@@ -1,17 +1,22 @@
 import { injectable, inject } from "inversify";
-import { BusinessLogic } from "../../BusinessLogic/API/BusinessLogic";
-import { IBusinessLogic } from "./IBusinessLogic";
-import { IPresentation } from "./IPresentation";
+import BusinessLogic from "../../BusinessLogic/API/BusinessLogic";
+import IBusinessLogic from "./IBusinessLogic";
+import IPresentation from "./IPresentation";
 
 @injectable()
-export class Presentation implements IPresentation {
-  private _businessLogic: IBusinessLogic;
+export default class Presentation implements IPresentation {
+  private businessLogic: IBusinessLogic;
 
   constructor(@inject(BusinessLogic) businessLogic?: IBusinessLogic) {
+    console.log("Presentation");
     if (businessLogic) {
-      this._businessLogic = businessLogic;
+      this.businessLogic = businessLogic;
     } else {
-      this._businessLogic = new BusinessLogic();
+      this.businessLogic = new BusinessLogic();
     }
   }
+
+  public getBusinessLogic = (): IBusinessLogic => {
+    return this.businessLogic;
+  };
 }

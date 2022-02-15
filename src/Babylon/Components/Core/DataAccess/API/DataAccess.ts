@@ -1,7 +1,9 @@
 import { injectable } from "inversify";
-import { IDataAccess } from "../../BusinessLogic/API/IDataAccess";
+import IDataAccess from "../../BusinessLogic/API/IDataAccess";
 
 @injectable()
-export class DataAccess implements IDataAccess {
-  constructor() {}
+export default class DataAccess implements IDataAccess {
+  constructor() {
+    console.log("DataAccess");
+  }
 }

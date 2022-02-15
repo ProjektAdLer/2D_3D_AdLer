@@ -1,17 +1,28 @@
-import { IBusinessLogic } from "../../Presentation/API/IBusinessLogic";
-import { DataAccess } from "../../DataAccess/API/DataAccess";
-import { IDataAccess } from "./IDataAccess";
+import IBusinessLogic from "../../Presentation/API/IBusinessLogic";
+import DataAccess from "../../DataAccess/API/DataAccess";
+import IDataAccess from "./IDataAccess";
 import { inject, injectable } from "inversify";
+import SceneManager from "../SceneManager";
 
 @injectable()
-export class BusinessLogic implements IBusinessLogic {
-  private _dataAccess: IDataAccess;
+export default class BusinessLogic implements IBusinessLogic {
+  private dataAccess: IDataAccess;
+  private sceneManager: SceneManager;
 
-  constructor(@inject(DataAccess) dataAccess?: IDataAccess) {
+  constructor(
+    @inject(DataAccess) dataAccess?: IDataAccess,
+    @inject(SceneManager) sceneManager?: SceneManager
+  ) {
+    console.log("BusinessLogic");
+    this.sceneManager = sceneManager!;
     if (dataAccess) {
-      this._dataAccess = dataAccess;
+      this.dataAccess = dataAccess;
     } else {
-      this._dataAccess = new DataAccess();
+      this.dataAccess = new DataAccess();
     }
   }
+
+  public CreateEngine = (canvas: HTMLCanvasElement): void => {
+    this.sceneManager.babylonInit(canvas);
+  };
 }

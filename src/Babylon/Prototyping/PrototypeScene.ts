@@ -6,9 +6,6 @@ import {
   HemisphericLight,
   GroundMesh,
   SceneLoader,
-  MeshBuilder,
-  AnimationGroup,
-  Animation,
 } from "@babylonjs/core";
 
 // required imports
@@ -19,7 +16,7 @@ import { CreateSceneClass } from "../CreateScene";
 // digital assets
 import roomModel from "../../Assets/AdLerDesign01.glb";
 
-export class PrototypeScene implements CreateSceneClass {
+export default class PrototypeScene implements CreateSceneClass {
   // Mit Pretasks können wir dinge erledigen, welche asyncron ablaufen und vor
   // derm Rendern der Szene passieren sollen.
   // In diesem Fall wird das Moodle System initialisiert, es können
@@ -62,5 +59,3 @@ export class PrototypeScene implements CreateSceneClass {
     return scene;
   };
 }
-
-export default new PrototypeScene();
