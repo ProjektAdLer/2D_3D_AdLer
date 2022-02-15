@@ -15,5 +15,3 @@ export class BusinessLogic implements IBusinessLogic {
     }
   }
 }
-
-// probably nothing? Maybe Collision detection kinda?

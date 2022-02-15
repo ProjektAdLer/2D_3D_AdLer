@@ -15,5 +15,3 @@ export class Presentation implements IPresentation {
     }
   }
 }
-
-//Present walls and floor, depending on data in entities
