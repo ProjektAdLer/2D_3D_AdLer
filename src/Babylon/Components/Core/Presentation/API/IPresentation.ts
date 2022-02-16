@@ -1,5 +1,7 @@
 import IBusinessLogic from "./IBusinessLogic";
 
 export default interface IPresentation {
-  getBusinessLogic(): IBusinessLogic;
+  setupBabylon(canvas: HTMLCanvasElement): Promise<void>;
+
+  readonly BusinessLogic: IBusinessLogic;
 }
