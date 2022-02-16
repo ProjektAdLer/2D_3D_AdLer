@@ -14,8 +14,8 @@ export default class ScenePresenter {
 
   constructor(
     @inject(CORE_TYPES.IEngineManager) engineManager: IEngineManager,
-    @inject(CORE_TYPES.ISceneView) sceneView: ISceneView,
-    @inject(SceneViewModel) sceneViewModel: SceneViewModel
+    @inject(SceneViewModel) sceneViewModel: SceneViewModel,
+    @inject(CORE_TYPES.ISceneView) sceneView: ISceneView
   ) {
     this.engineManager = engineManager;
     this.sceneView = sceneView;

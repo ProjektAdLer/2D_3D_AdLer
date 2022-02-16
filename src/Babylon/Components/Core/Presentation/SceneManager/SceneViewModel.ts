@@ -3,10 +3,13 @@ import { Scene } from "@babylonjs/core";
 
 @injectable()
 export default class SceneViewModel {
+  constructor() {
+    console.log("SceneViewModle created!");
+  }
   private scene: Scene;
 
   get Scene(): Scene {
-    if (!this.Scene) throw new Error("Scene not found!");
+    if (!this.scene) throw new Error("Scene not found!");
     return this.scene;
   }
 

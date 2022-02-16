@@ -15,7 +15,7 @@ export default class SceneView implements ISceneView {
     engine.runRenderLoop(this.renderFunction);
   }
 
-  private renderFunction() {
+  private renderFunction = () => {
     this.sceneViewModel.Scene.render();
-  }
+  };
 }
