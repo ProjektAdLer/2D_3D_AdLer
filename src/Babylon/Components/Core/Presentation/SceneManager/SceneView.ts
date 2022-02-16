@@ -1,4 +1,5 @@
 import { Engine } from "@babylonjs/core";
+import bind from "bind-decorator";
 import { injectable, inject } from "inversify";
 import ISceneView from "./ISceneView";
 import SceneViewModel from "./SceneViewModel";
@@ -15,7 +16,8 @@ export default class SceneView implements ISceneView {
     engine.runRenderLoop(this.renderFunction);
   }
 
-  private renderFunction = () => {
+  @bind
+  private renderFunction() {
     this.sceneViewModel.Scene.render();
-  };
+  }
 }
