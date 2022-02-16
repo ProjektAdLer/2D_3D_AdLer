@@ -13,9 +13,9 @@ export default function BabylonCanvas(props: any) {
 
       // We use a Factory here, because React does not support DI - PG
       const coreFactory: ICoreFactory = new CoreFactory();
-      const engineCore = coreFactory.CreateCore();
+      const engineCore = coreFactory.createCore();
       if (canvas) {
-        engineCore.CreateEngine(canvas);
+        engineCore.setupBabylon(canvas);
       } else {
         throw new Error("No Canvas to render on!");
       }

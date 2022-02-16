@@ -1,3 +1,1 @@
-export default interface IBusinessLogic {
-  CreateEngine(canvas: HTMLCanvasElement): void;
-}
+export default interface IBusinessLogic {}
