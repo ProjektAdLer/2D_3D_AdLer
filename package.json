@@ -25,7 +25,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
+    "test": "react-app-rewired test --watchAll",
     "eject": "react-app-rewired eject",
     "prepare": "husky install"
   },
@@ -43,6 +43,18 @@
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/src/Babylon/Template/"
+    ],
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/Template/",
+      "/Prototyping/",
+      "/*.test.ts"
+    ],
+    "coverageProvider": "v8",
+    "coverageReporters": [
+      "text-summary",
+      "lcov"
     ]
   },
   "browserslist": {
