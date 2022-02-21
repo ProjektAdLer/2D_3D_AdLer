@@ -5,4 +5,12 @@
 const { override, addBabelPlugin } = require("customize-cra");
 const babelTsTransformPlugin = require("babel-plugin-transform-typescript-metadata");
 
-module.exports = override(addBabelPlugin(babelTsTransformPlugin));
+module.exports = {
+  webpack: override(addBabelPlugin(babelTsTransformPlugin)),
+  jest: (config) => {
+    config.transformIgnorePatterns = [
+      "<rootDir>/node_modules/(?!@babylonjs)(.*)",
+    ];
+    return config;
+  },
+};

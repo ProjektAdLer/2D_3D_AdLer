@@ -37,9 +37,6 @@
   },
   "jest": {
     "preset": "ts-jest/presets/js-with-ts",
-    "transformIgnorePatterns": [
-      "<rootDir>/node_modules/(?!@babylonjs)(.*)"
-    ],
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/src/Babylon/Template/"
