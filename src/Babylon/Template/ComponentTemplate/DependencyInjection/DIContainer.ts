@@ -1,7 +1,7 @@
 import { Container } from "inversify";
-import IPresentation from "../PresentationLogic/API/IPresentation";
-import Presentation from "../PresentationLogic/API/Presentation";
-import IBusinessLogic from "../PresentationLogic/API/IBusinessLogic";
+import IPresentation from "../Presentation/API/IPresentation";
+import Presentation from "../Presentation/API/Presentation";
+import IBusinessLogic from "../Presentation/API/IBusinessLogic";
 import BusinessLogic from "../BusinessLogic/API/BusinessLogic";
 import IDataAccess from "../BusinessLogic/API/IDataAccess";
 import DataAccess from "../DataAccess/API/DataAccess";
