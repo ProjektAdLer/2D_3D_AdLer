@@ -36,19 +36,15 @@
     ]
   },
   "jest": {
-    "preset": "ts-jest/presets/js-with-ts",
-    "testPathIgnorePatterns": [
-      "<rootDir>/node_modules/",
-      "<rootDir>/src/Babylon/Template/"
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!@babylonjs)(.*)"
     ],
-    "collectCoverage": true,
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/Template/",
       "/Prototyping/",
       "/*.test.ts"
     ],
-    "coverageProvider": "v8",
     "coverageReporters": [
       "text-summary",
       "lcov"

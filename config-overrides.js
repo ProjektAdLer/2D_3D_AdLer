@@ -8,9 +8,17 @@ const babelTsTransformPlugin = require("babel-plugin-transform-typescript-metada
 module.exports = {
   webpack: override(addBabelPlugin(babelTsTransformPlugin)),
   jest: (config) => {
+    config.preset = "ts-jest/presets/js-with-ts";
     config.transformIgnorePatterns = [
       "<rootDir>/node_modules/(?!@babylonjs)(.*)",
     ];
+    config.testPathIgnorePatterns = [
+      "<rootDir>/node_modules/",
+      "<rootDir>/src/Babylon/Template/",
+    ];
+    config.collectCoverage = true;
+    config.coverageProvider = "v8";
+
     return config;
   },
 };
