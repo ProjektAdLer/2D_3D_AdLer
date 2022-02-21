@@ -38,16 +38,6 @@
   "jest": {
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/(?!@babylonjs)(.*)"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/Template/",
-      "/Prototyping/",
-      "/*.test.ts"
-    ],
-    "coverageReporters": [
-      "text-summary",
-      "lcov"
     ]
   },
   "browserslist": {

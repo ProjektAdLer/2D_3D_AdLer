@@ -9,6 +9,7 @@ module.exports = {
   webpack: override(addBabelPlugin(babelTsTransformPlugin)),
   jest: (config) => {
     config.preset = "ts-jest/presets/js-with-ts";
+    config.testEnvironment = "jsdom";
     config.transformIgnorePatterns = [
       "<rootDir>/node_modules/(?!@babylonjs)(.*)",
     ];
@@ -18,6 +19,13 @@ module.exports = {
     ];
     config.collectCoverage = true;
     config.coverageProvider = "v8";
+    config.coveragePathIgnorePatterns = [
+      "/node_modules/",
+      "/Template/",
+      "/Prototyping/",
+      "/*.test.ts",
+    ];
+    config.coverageReporters = ["text-summary", "lcov"];
 
     return config;
   },
