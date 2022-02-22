@@ -4,8 +4,15 @@ import {
   Scene,
   Vector3,
   HemisphericLight,
+  StandardMaterial,
+  Texture,
   GroundMesh,
   SceneLoader,
+  MeshBuilder,
+  ActionManager,
+  ExecuteCodeAction,
+  RecastJSPlugin,
+  ActionEvent,
 } from "@babylonjs/core";
 
 // required imports
@@ -15,6 +22,11 @@ import { CreateSceneClass } from "../CreateScene";
 
 // digital assets
 import roomModel from "../../Assets/AdLerDesign01.glb";
+import link_h5p from "../../Assets/3DLink_H5P.glb";
+import link_text from "../../Assets/3DLink_Text.glb";
+import link_video from "../../Assets/3DLink_Video.glb";
+import link_bild from "../../Assets/3DLink_Bild.glb";
+import BabylonCanvas from "../../React/Components/BabylonCanvas";
 
 export default class PrototypeScene implements CreateSceneClass {
   // Mit Pretasks können wir dinge erledigen, welche asyncron ablaufen und vor
@@ -30,28 +42,52 @@ export default class PrototypeScene implements CreateSceneClass {
     // Wichtig: Hier keinen Code reinschreiben, der die Szene erstellt, sondern nur die jeweilige Klasse erstellen
     // und evtl positionieren oder anderweitig initialisieren / manipulieren - PG
     const scene = new Scene(engine);
+    let navigationPlugin = new RecastJSPlugin();
 
-    var camera = new FreeCamera("camera1", new Vector3(-28, 24, -85.5), scene);
-    camera.setTarget(new Vector3(0, 0, -60));
-    camera.rotation = new Vector3(
-      (33 / 180) * Math.PI,
-      (-667 / 180) * Math.PI,
+    var camera = new FreeCamera("camera1", new Vector3(20, 20, 20), scene);
+    camera.setTarget(new Vector3(0, 0, 0));
+    /*     camera.rotation = new Vector3(
+      (0 / 180) * Math.PI,
+      (0 / 180) * Math.PI,
       0
-    );
-    camera.fov = 0.358;
-    //camera.attachControl(canvas, true);
+    ); */
+    camera.fov = 0.8;
+    camera.attachControl(canvas, true);
 
     new HemisphericLight("light", new Vector3(0, 1, 0), scene);
 
     new GroundMesh("Ground", scene);
 
     const importResult = await SceneLoader.ImportMeshAsync(
-      "",
-      roomModel,
+      "Spot_H5P.005",
+      link_h5p,
       "",
       scene,
       undefined,
       ".glb"
+    );
+
+    var plane = MeshBuilder.CreatePlane(
+      "plane",
+      { width: 15, height: 10 },
+      scene
+    );
+    plane.rotation = new Vector3((90 / 180) * Math.PI, 0, 0);
+    var sphere = MeshBuilder.CreateSphere(
+      "sphere",
+      { diameter: 2, segments: 32 },
+      scene
+    );
+
+    var flurMaterial = new StandardMaterial("flurMaterial", scene);
+    /* flurMaterial.ambientTexture = new Texture("../../Assets/Textur_Holzflur.jpg", scene); */
+    plane.material = flurMaterial;
+
+    sphere.actionManager = new ActionManager(scene);
+    sphere.actionManager.registerAction(
+      new ExecuteCodeAction(ActionManager.OnPickTrigger, function (evt) {
+        console.log("Party, Party!");
+      })
     );
 
     scene.debugLayer.show();
