@@ -27,6 +27,7 @@ import link_text from "../../Assets/3DLink_Text.glb";
 import link_video from "../../Assets/3DLink_Video.glb";
 import link_bild from "../../Assets/3DLink_Bild.glb";
 import BabylonCanvas from "../../React/Components/BabylonCanvas";
+import { debug } from "console";
 
 export default class PrototypeScene implements CreateSceneClass {
   // Mit Pretasks können wir dinge erledigen, welche asyncron ablaufen und vor
@@ -42,7 +43,7 @@ export default class PrototypeScene implements CreateSceneClass {
     // Wichtig: Hier keinen Code reinschreiben, der die Szene erstellt, sondern nur die jeweilige Klasse erstellen
     // und evtl positionieren oder anderweitig initialisieren / manipulieren - PG
     const scene = new Scene(engine);
-    let navigationPlugin = new RecastJSPlugin();
+    /* let navigationPlugin = new RecastJSPlugin(); */
 
     var camera = new FreeCamera("camera1", new Vector3(20, 20, 20), scene);
     camera.setTarget(new Vector3(0, 0, 0));
@@ -59,13 +60,16 @@ export default class PrototypeScene implements CreateSceneClass {
     new GroundMesh("Ground", scene);
 
     const importResult = await SceneLoader.ImportMeshAsync(
-      "Spot_H5P.005",
+      "",
       link_h5p,
       "",
       scene,
       undefined,
       ".glb"
     );
+
+    let env = importResult.meshes[7];
+    console.log(env);
 
     var plane = MeshBuilder.CreatePlane(
       "plane",
