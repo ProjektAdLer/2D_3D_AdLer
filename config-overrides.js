@@ -8,7 +8,7 @@ const babelTsTransformPlugin = require("babel-plugin-transform-typescript-metada
 module.exports = {
   webpack: override(addBabelPlugin(babelTsTransformPlugin)),
   jest: (config) => {
-    config.preset = "ts-jest/presets/js-with-ts";
+    config.preset = "ts-jest";
     config.testEnvironment = "jsdom";
     config.transformIgnorePatterns = [
       "<rootDir>/node_modules/(?!@babylonjs)(.*)",
@@ -26,6 +26,7 @@ module.exports = {
       "/*.test.ts",
     ];
     config.coverageReporters = ["text-summary", "lcov"];
+    config.setupFiles = ["./jest-setup-files.ts"];
 
     return config;
   },
