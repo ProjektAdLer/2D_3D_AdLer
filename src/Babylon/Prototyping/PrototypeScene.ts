@@ -18,7 +18,7 @@ import {
 // required imports
 import "@babylonjs/inspector";
 import "@babylonjs/loaders/glTF";
-import { CreateSceneClass } from "../CreateScene";
+import ICreateSceneClass from "../Components/Core/Presentation/SceneManager/ICreateSceneClass";
 
 // digital assets
 import roomModel from "../../Assets/AdLerDesign01.glb";
@@ -29,7 +29,7 @@ import link_bild from "../../Assets/3DLink_Bild.glb";
 import BabylonCanvas from "../../React/Components/BabylonCanvas";
 import { debug } from "console";
 
-export default class PrototypeScene implements CreateSceneClass {
+export default class PrototypeScene implements ICreateSceneClass {
   // Mit Pretasks können wir dinge erledigen, welche asyncron ablaufen und vor
   // derm Rendern der Szene passieren sollen.
   // In diesem Fall wird das Moodle System initialisiert, es können
