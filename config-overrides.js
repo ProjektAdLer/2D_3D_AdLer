@@ -27,6 +27,7 @@ module.exports = {
     ];
     config.coverageReporters = ["text-summary", "lcov"];
     config.setupFiles = ["./jest-setup-files.ts"];
+    config.verbose = true;
 
     return config;
   },
