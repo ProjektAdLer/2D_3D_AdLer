@@ -18,7 +18,7 @@ import {
 // required imports
 import "@babylonjs/inspector";
 import "@babylonjs/loaders/glTF";
-import ICreateSceneClass from "../Components/Core/Presentation/SceneManager/ICreateSceneClass";
+import ICreateSceneClass from "../Components/Core/Presentation/SceneManagment/ICreateSceneClass";
 
 // digital assets
 import roomModel from "../../Assets/AdLerDesign01.glb";
@@ -28,7 +28,9 @@ import link_video from "../../Assets/3DLink_Video.glb";
 import link_bild from "../../Assets/3DLink_Bild.glb";
 import BabylonCanvas from "../../React/Components/BabylonCanvas";
 import { debug } from "console";
+import { injectable } from "inversify";
 
+@injectable()
 export default class PrototypeScene implements ICreateSceneClass {
   // Mit Pretasks können wir dinge erledigen, welche asyncron ablaufen und vor
   // derm Rendern der Szene passieren sollen.

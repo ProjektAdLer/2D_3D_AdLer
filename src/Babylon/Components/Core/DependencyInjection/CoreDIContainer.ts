@@ -9,12 +9,15 @@ import ICore from "../API/ICore";
 import Core from "../API/Core";
 import IEngineManager from "../Presentation/EngineManager/IEngineManager";
 import EngineManager from "../Presentation/EngineManager/EngineManager";
-import ISceneView from "../Presentation/SceneManager/ISceneView";
-import SceneView from "../Presentation/SceneManager/SceneView";
-import SceneViewModel from "../Presentation/SceneManager/SceneViewModel";
+import ISceneView from "../Presentation/SceneManagment/ISceneView";
+import SceneView from "../Presentation/SceneManagment/SceneView";
+import SceneViewModel from "../Presentation/SceneManagment/SceneViewModel";
+import ScenePresenter from "../Presentation/SceneManagment/ScenePresenter";
+import PrototypeScene from "../../../Prototyping/PrototypeScene";
+import MainScene from "../Presentation/SceneManagment/MainScene";
+import ICreateSceneClass from "../Presentation/SceneManagment/ICreateSceneClass";
 
 import CORE_TYPES from "./types";
-import ScenePresenter from "../Presentation/SceneManager/ScenePresenter";
 
 var CoreDIContainer = new Container();
 
@@ -38,5 +41,10 @@ CoreDIContainer.bind<SceneViewModel>(SceneViewModel)
   .toSelf()
   .inSingletonScope();
 CoreDIContainer.bind<ScenePresenter>(ScenePresenter).toSelf();
+
+// bind other CreateSceneClass here for testing puposes -MK
+CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
+  MainScene
+);
 
 export default CoreDIContainer;

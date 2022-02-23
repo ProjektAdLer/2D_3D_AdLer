@@ -7,6 +7,7 @@ let CORE_TYPES = {
   IPresentation: Symbol("IPresentation"),
   IEngineManager: Symbol("IEngineManager"),
   ISceneView: Symbol("ISceneView"),
+  ICreateSceneClass: Symbol("ICreateSceneClass"),
 };
 
 export default CORE_TYPES;

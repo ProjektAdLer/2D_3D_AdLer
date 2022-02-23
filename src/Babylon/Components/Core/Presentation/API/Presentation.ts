@@ -4,6 +4,7 @@ import IBusinessLogic from "./IBusinessLogic";
 import IPresentation from "./IPresentation";
 import ScenePresenter from "../SceneManager/ScenePresenter";
 import CORE_TYPES from "../../DependencyInjection/types";
+import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 
 @injectable()
 export default class Presentation implements IPresentation {
@@ -25,7 +26,11 @@ export default class Presentation implements IPresentation {
 
   async setupBabylon(canvas: HTMLCanvasElement): Promise<void> {
     this.engineManager.createEngine(canvas);
-    await this.scenePresenter.createScene();
+
+    await this.scenePresenter.createScene(
+      CoreDIContainer.get(CORE_TYPES.ICreateSceneClass)
+    );
+
     this.scenePresenter.createRenderLoop();
   }
 

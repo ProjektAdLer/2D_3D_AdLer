@@ -7,7 +7,7 @@ import {
   GroundMesh,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
-import ICreateSceneClass from "../../../Core/Presentation/SceneManager/ICreateSceneClass";
+import ICreateSceneClass from "../../../Core/Presentation/SceneManagment/ICreateSceneClass";
 
 export class MainSceneView implements ICreateSceneClass {
   // Mit Pretasks können wir dinge erledigen, welche asyncron ablaufen und vor
