@@ -5,5 +5,6 @@ describe("CoreFactory", () => {
   test("createCore method creates Core instance", () => {
     var coreFactory = new CoreFactory();
     expect(coreFactory.createCore()).toBeInstanceOf(Core);
+    // TODO: add more expect statements for more robust testing -MK
   });
 });
