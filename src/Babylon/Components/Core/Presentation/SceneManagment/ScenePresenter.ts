@@ -5,6 +5,7 @@ import SceneViewModel from "./SceneViewModel";
 import CORE_TYPES from "../../DependencyInjection/types";
 
 import PrototypeScene from "../../../../Prototyping/PrototypeScene";
+import ICreateSceneClass from "./ICreateSceneClass";
 
 @injectable()
 export default class ScenePresenter {
@@ -22,14 +23,12 @@ export default class ScenePresenter {
     this.sceneViewModel = sceneViewModel;
   }
 
-  async createScene(): Promise<void> {
-    const createSceneModule = new PrototypeScene();
-
+  async createScene(createSceneClass: ICreateSceneClass): Promise<void> {
     // Execute the pretasks, if defined
-    await Promise.all(createSceneModule.preTasks || []);
+    await Promise.all(createSceneClass.preTasks || []);
 
     // Create the scene
-    this.sceneViewModel.Scene = await createSceneModule.createScene(
+    this.sceneViewModel.Scene = await createSceneClass.createScene(
       this.engineManager.Engine,
       this.engineManager.Engine.getRenderingCanvas()!
     );

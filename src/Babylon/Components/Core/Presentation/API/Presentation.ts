@@ -2,7 +2,7 @@ import { injectable, inject } from "inversify";
 import IEngineManager from "../EngineManager/IEngineManager";
 import IBusinessLogic from "./IBusinessLogic";
 import IPresentation from "./IPresentation";
-import ScenePresenter from "../SceneManager/ScenePresenter";
+import ScenePresenter from "../SceneManagment/ScenePresenter";
 import CORE_TYPES from "../../DependencyInjection/types";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 
@@ -17,8 +17,6 @@ export default class Presentation implements IPresentation {
     @inject(CORE_TYPES.IEngineManager) engineManager: IEngineManager,
     @inject(ScenePresenter) scenePresenter: ScenePresenter
   ) {
-    console.log("Presentation");
-
     this.businessLogic = businessLogic;
     this.engineManager = engineManager;
     this.scenePresenter = scenePresenter;

@@ -3,7 +3,7 @@ import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/types";
 import Presentation from "../../../Core/Presentation/API/Presentation";
 import EngineManager from "../../../Core/Presentation/EngineManager/EngineManager";
-import ScenePresenter from "../../../Core/Presentation/SceneManager/ScenePresenter";
+import ScenePresenter from "../../../Core/Presentation/SceneManagment/ScenePresenter";
 
 const createEngineMock = jest
   .spyOn(EngineManager.prototype, "createEngine")
