@@ -41,11 +41,10 @@ CoreDIContainer.bind<IEngineManager>(CORE_TYPES.IEngineManager)
 CoreDIContainer.bind<ISceneView>(CORE_TYPES.ISceneView)
   .to(SceneView)
   .inSingletonScope();
-CoreDIContainer.bind<SceneViewModel>(SceneViewModel)
-  .toSelf()
-  .inSingletonScope();
-CoreDIContainer.bind<ScenePresenter>(ScenePresenter).toSelf();
-CoreDIContainer.bind<DataTransferObject>(DataTransferObject).toSelf();
+CoreDIContainer.bind(SceneViewModel).toSelf().inSingletonScope();
+CoreDIContainer.bind(ScenePresenter).toSelf();
+CoreDIContainer.bind(DataTransferObject).toSelf();
+
 CoreDIContainer.bind<IRoomConfigurator>(CORE_TYPES.IRoomConfigurator)
   .to(RoomConfigurator)
   .inSingletonScope();
