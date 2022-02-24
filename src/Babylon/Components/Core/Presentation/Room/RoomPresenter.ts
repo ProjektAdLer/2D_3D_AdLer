@@ -1,11 +1,11 @@
 import { injectable, inject } from "inversify";
-import IRoomGenerator from "./IRoomGenerator";
-import { MeshBuilder, Vector4, Mesh } from "@babylonjs/core";
+import IRoomPresenter from "./IRoomPresenter";
+import { MeshBuilder, Mesh } from "@babylonjs/core";
 import Presentation from "../API/Presentation";
 import CORE_TYPES from "../../DependencyInjection/types";
 
 @injectable()
-export default class RoomGenerator implements IRoomGenerator {
+export default class RoomPresenter implements IRoomPresenter {
   private roomSize: any;
   private presentation: Presentation;
   constructor(@inject(CORE_TYPES.IPresentation) presentation: Presentation) {

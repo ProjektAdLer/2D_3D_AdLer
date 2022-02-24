@@ -9,12 +9,10 @@ import {
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { injectable } from "inversify";
-import RoomGenerator from "../RoomGenerator/RoomGenerator";
 
 @injectable()
 export default class MainScene implements ICreateSceneClass {
   preTasks = [];
-  private roomGenerator: RoomGenerator;
 
   createScene = async (
     engine: Engine,
