@@ -5,25 +5,26 @@ import Presentation from "../../../Core/Presentation/API/Presentation";
 import EngineManager from "../../../Core/Presentation/EngineManager/EngineManager";
 import ScenePresenter from "../../../Core/Presentation/SceneManagment/ScenePresenter";
 
-const createEngineMock = jest
-  .spyOn(EngineManager.prototype, "createEngine")
-  .mockImplementation((canvas: HTMLCanvasElement) => {});
+const createEngineMock = jest.spyOn(EngineManager.prototype, "createEngine");
 
-const createSceneMock = jest
-  .spyOn(ScenePresenter.prototype, "createScene")
-  .mockImplementation((): Promise<void> => {
-    return new Promise<void>(() => {});
-  });
+const createSceneMock = jest.spyOn(ScenePresenter.prototype, "createScene");
 
-const createRenderLoopMock = jest
-  .spyOn(ScenePresenter.prototype, "createRenderLoop")
-  .mockImplementation(() => {});
+const createRenderLoopMock = jest.spyOn(
+  ScenePresenter.prototype,
+  "createRenderLoop"
+);
 
 describe("Presentation", () => {
   let presentation: Presentation;
 
   beforeAll(() => {
     presentation = CoreDIContainer.get<Presentation>(CORE_TYPES.IPresentation);
+  });
+
+  afterAll(() => {
+    createEngineMock.mockRestore();
+    createSceneMock.mockRestore();
+    createRenderLoopMock.mockRestore();
   });
 
   test("setupBabylon calls engineManager and scenePresenter", () => {
