@@ -4,7 +4,6 @@ import ISceneView from "./ISceneView";
 import SceneViewModel from "./SceneViewModel";
 import CORE_TYPES from "../../DependencyInjection/types";
 
-import PrototypeScene from "../../../../Prototyping/PrototypeScene";
 import ICreateSceneClass from "./ICreateSceneClass";
 
 @injectable()
