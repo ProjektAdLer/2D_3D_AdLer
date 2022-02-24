@@ -3,6 +3,7 @@ import IEngineManager from "../EngineManager/IEngineManager";
 import ISceneView from "./ISceneView";
 import SceneViewModel from "./SceneViewModel";
 import CORE_TYPES from "../../DependencyInjection/types";
+import { Scene } from "@babylonjs/core";
 
 import ICreateSceneClass from "./ICreateSceneClass";
 
@@ -35,5 +36,9 @@ export default class ScenePresenter {
 
   createRenderLoop(): void {
     this.sceneView.createRenderLoop(this.engineManager.Engine);
+  }
+
+  get Scene(): Scene {
+    return this.sceneViewModel.Scene;
   }
 }

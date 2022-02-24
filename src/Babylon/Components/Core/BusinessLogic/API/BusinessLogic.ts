@@ -3,6 +3,7 @@ import IDataAccess from "./IDataAccess";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/types";
 import IRoomConfigurator from "../RoomConfigurator/IRoomConfigurator";
+import { ROOMSIZE } from "../RoomConfigurator/RoomConfigurator";
 
 @injectable()
 export default class BusinessLogic implements IBusinessLogic {
@@ -10,12 +11,16 @@ export default class BusinessLogic implements IBusinessLogic {
   private roomConfigurator: IRoomConfigurator;
 
   constructor(
-    @inject(CORE_TYPES.IDataAccess) dataAccess?: IDataAccess,
-    @inject(CORE_TYPES.IRoomConfigurator) roomConfigurator?: IRoomConfigurator
+    @inject(CORE_TYPES.IDataAccess) dataAccess: IDataAccess,
+    @inject(CORE_TYPES.IRoomConfigurator) roomConfigurator: IRoomConfigurator
   ) {
+    this.dataAccess = dataAccess;
+    this.roomConfigurator = roomConfigurator;
+
     console.log("BusinessLogic");
   }
-  getRoomSize() {
+
+  get RoomSize(): ROOMSIZE {
     return this.roomConfigurator.RoomSize;
   }
 }

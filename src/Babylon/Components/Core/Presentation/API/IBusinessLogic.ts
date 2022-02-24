@@ -1,3 +1,5 @@
+import { ROOMSIZE } from "../../BusinessLogic/RoomConfigurator/RoomConfigurator";
+
 export default interface IBusinessLogic {
-  getRoomSize(): string;
+  get RoomSize(): ROOMSIZE;
 }

@@ -1,31 +1,42 @@
 import { injectable, inject } from "inversify";
 import IRoomPresenter from "./IRoomPresenter";
-import { MeshBuilder, Mesh } from "@babylonjs/core";
 import Presentation from "../API/Presentation";
 import CORE_TYPES from "../../DependencyInjection/types";
+import RoomViewModel from "./RoomViewModel";
+import { ROOMSIZE } from "../../BusinessLogic/RoomConfigurator/RoomConfigurator";
+import IRoomView from "./IRoomView";
+import ScenePresenter from "../SceneManagment/ScenePresenter";
 
 @injectable()
 export default class RoomPresenter implements IRoomPresenter {
-  private roomSize: any;
   private presentation: Presentation;
-  constructor(@inject(CORE_TYPES.IPresentation) presentation: Presentation) {
-    console.log("room generator roomsize:", this.roomSize);
-    // this.roomSize = this.presentation.BusinessLogic.getRoomSize();
+  private scenePresenter: ScenePresenter;
+  private viewModel: RoomViewModel;
+  private view: IRoomView;
+
+  constructor(
+    @inject(CORE_TYPES.IPresentation) presentation: Presentation,
+    @inject(ScenePresenter) scenePresenter: ScenePresenter,
+    @inject(RoomViewModel) viewModel: RoomViewModel,
+    @inject(CORE_TYPES.IRoomView) view: IRoomView
+  ) {
+    this.presentation = presentation;
+    this.scenePresenter = scenePresenter;
+    this.viewModel = viewModel;
+    this.view = view;
+
+    this.viewModel.RoomSize = this.presentation.BusinessLogic.RoomSize;
   }
 
-  get RoomSize() {
-    return this.roomSize;
+  get RoomSize(): ROOMSIZE {
+    return this.viewModel.RoomSize;
   }
 
   createFloor() {
-    const plane = MeshBuilder.CreatePlane("plane", {
-      width: 20,
-      height: 20,
-      sideOrientation: Mesh.DOUBLESIDE,
-    });
+    this.view.createFloor(this.scenePresenter.Scene);
   }
 
   createWalls() {
-    //todo set wall proportions + material
+    this.view.createWalls(this.scenePresenter.Scene);
   }
 }

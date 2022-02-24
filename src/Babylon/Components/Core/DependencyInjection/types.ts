@@ -9,7 +9,8 @@ let CORE_TYPES = {
   ISceneView: Symbol("ISceneView"),
   ICreateSceneClass: Symbol("ICreateSceneClass"),
   IRoomConfigurator: Symbol("IRoomConfigurator"),
-  IRoomGenerator: Symbol("IRoomGenerator"),
+  IRoomPresenter: Symbol("IRoomPresenter"),
+  IRoomView: Symbol("IRoomView"),
 };
 
 export default CORE_TYPES;
