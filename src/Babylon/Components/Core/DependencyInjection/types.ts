@@ -8,6 +8,8 @@ let CORE_TYPES = {
   IEngineManager: Symbol("IEngineManager"),
   ISceneView: Symbol("ISceneView"),
   ICreateSceneClass: Symbol("ICreateSceneClass"),
+  IRoomConfigurator: Symbol("IRoomConfigurator"),
+  IRoomGenerator: Symbol("IRoomGenerator"),
 };
 
 export default CORE_TYPES;

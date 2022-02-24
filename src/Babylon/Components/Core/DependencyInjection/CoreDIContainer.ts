@@ -13,6 +13,11 @@ import ISceneView from "../Presentation/SceneManagment/ISceneView";
 import SceneView from "../Presentation/SceneManagment/SceneView";
 import SceneViewModel from "../Presentation/SceneManagment/SceneViewModel";
 import ScenePresenter from "../Presentation/SceneManagment/ScenePresenter";
+import DataTransferObject from "../Entities/API/DataTransferObject";
+import IRoomConfigurator from "../BusinessLogic/API/IRoomConfigurator";
+import RoomConfigurator from "../BusinessLogic/API/RoomConfigurator";
+import IRoomGenerator from "../Presentation/SceneManager/IRoomGenerator";
+import RoomGenerator from "../Presentation/SceneManager/RoomGenerator";
 import PrototypeScene from "../../../Prototyping/PrototypeScene";
 import MainScene from "../Presentation/SceneManagment/MainScene";
 import ICreateSceneClass from "../Presentation/SceneManagment/ICreateSceneClass";
@@ -41,6 +46,13 @@ CoreDIContainer.bind<SceneViewModel>(SceneViewModel)
   .toSelf()
   .inSingletonScope();
 CoreDIContainer.bind<ScenePresenter>(ScenePresenter).toSelf();
+CoreDIContainer.bind<DataTransferObject>(DataTransferObject).toSelf();
+CoreDIContainer.bind<IRoomConfigurator>(CORE_TYPES.IRoomConfigurator)
+  .to(RoomConfigurator)
+  .inSingletonScope();
+CoreDIContainer.bind<IRoomGenerator>(CORE_TYPES.IRoomGenerator)
+  .to(RoomGenerator)
+  .inSingletonScope();
 
 // bind other CreateSceneClass here for testing puposes -MK
 CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(

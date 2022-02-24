@@ -19,7 +19,7 @@ export default class DataTransferObject {
     this.dataTransferObjectValues = newDataTransferObjectValues;
   }
 
-  extractElementCount(): number {
+  get ElementCount(): number {
     if (!this.dataTransferObjectValues)
       throw new Error("dataTransferObjectValues not found!");
     if (!this.dataTransferObjectValues.elementCount)
