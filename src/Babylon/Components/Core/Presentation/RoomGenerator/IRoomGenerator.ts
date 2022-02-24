@@ -1,1 +1,5 @@
-export default interface IRoomGenerator {}
+export default interface IRoomGenerator {
+  get RoomSize(): Symbol;
+  createFloor(): void;
+  createWalls(): void;
+}

@@ -8,11 +8,16 @@ import {
   GroundMesh,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
-import { injectable } from "inversify";
+import { injectable, inject } from "inversify";
+import RoomGenerator from "../RoomGenerator/RoomGenerator";
 
 @injectable()
 export default class MainScene implements ICreateSceneClass {
   preTasks = [];
+  private roomGenerator: RoomGenerator;
+  constructor(@inject(RoomGenerator) roomGenerator: RoomGenerator) {
+    this.roomGenerator = roomGenerator;
+  }
 
   createScene = async (
     engine: Engine,
@@ -26,7 +31,7 @@ export default class MainScene implements ICreateSceneClass {
     camera.attachControl(canvas, true);
 
     new HemisphericLight("light", new Vector3(0, 1, 0), scene);
-
+    this.roomGenerator.createFloor();
     new GroundMesh("Ground", scene);
 
     scene.debugLayer.show();

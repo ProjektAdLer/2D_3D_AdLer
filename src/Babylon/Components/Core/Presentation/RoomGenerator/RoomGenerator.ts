@@ -5,13 +5,25 @@ import Presentation from "../API/Presentation";
 
 @injectable()
 export default class RoomGenerator implements IRoomGenerator {
-  private roomSize: string;
+  private roomSize: any;
   private presentation: Presentation;
   constructor(@inject(Presentation) presentation: Presentation) {
+    console.log("room generator roomsize:", this.roomSize);
     this.roomSize = this.presentation.BusinessLogic.getRoomSize();
   }
 
-  createWalls(roomSize: string) {
+  get RoomSize() {
+    return this.roomSize;
+  }
+
+  createFloor() {
+    const plane = MeshBuilder.CreatePlane("plane", {
+      width: 20,
+      height: 20,
+      sideOrientation: Mesh.DOUBLESIDE,
+    });
+  }
+  createWalls() {
     //todo set wall proportions + material
   }
 }

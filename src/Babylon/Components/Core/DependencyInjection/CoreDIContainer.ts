@@ -18,7 +18,6 @@ import IRoomConfigurator from "../BusinessLogic/RoomConfigurator/IRoomConfigurat
 import RoomConfigurator from "../BusinessLogic/RoomConfigurator/RoomConfigurator";
 import IRoomGenerator from "../Presentation/RoomGenerator/IRoomGenerator";
 import RoomGenerator from "../Presentation/RoomGenerator/RoomGenerator";
-import PrototypeScene from "../../../Prototyping/PrototypeScene";
 import MainScene from "../Presentation/SceneManagment/MainScene";
 import ICreateSceneClass from "../Presentation/SceneManagment/ICreateSceneClass";
 
