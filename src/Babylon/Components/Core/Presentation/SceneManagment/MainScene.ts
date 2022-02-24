@@ -8,9 +8,8 @@ import {
   GroundMesh,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
-import { injectable, inject } from "inversify";
+import { injectable } from "inversify";
 import RoomGenerator from "../RoomGenerator/RoomGenerator";
-import CORE_TYPES from "../../DependencyInjection/types";
 
 @injectable()
 export default class MainScene implements ICreateSceneClass {
