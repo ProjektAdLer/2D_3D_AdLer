@@ -1,16 +1,14 @@
 import { injectable, inject } from "inversify";
 import IRoomGenerator from "./IRoomGenerator";
-import RoomConfigurator from "../../BusinessLogic/API/RoomConfigurator";
+import { MeshBuilder, Vector4, Mesh } from "@babylonjs/core";
+import Presentation from "../API/Presentation";
 
 @injectable()
 export default class RoomGenerator implements IRoomGenerator {
   private roomSize: string;
-  constructor(@inject(RoomConfigurator) roomConfigurator: RoomConfigurator) {
-    this.roomSize = roomConfigurator.RoomSize;
-  }
-
-  createFloor(roomSize: string) {
-    //todo set floor proportions + material
+  private presentation: Presentation;
+  constructor(@inject(Presentation) presentation: Presentation) {
+    this.roomSize = this.presentation.BusinessLogic.getRoomSize();
   }
 
   createWalls(roomSize: string) {

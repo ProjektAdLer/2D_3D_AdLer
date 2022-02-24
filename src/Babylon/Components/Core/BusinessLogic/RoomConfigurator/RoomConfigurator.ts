@@ -1,5 +1,5 @@
 import { injectable, inject } from "inversify";
-import DataTransferObject from "../../Entities/API/DataTransferObject";
+import DataTransferObject from "../../Entities/ExternalRoomData";
 import IRoomConfigurator from "./IRoomConfigurator";
 
 @injectable()

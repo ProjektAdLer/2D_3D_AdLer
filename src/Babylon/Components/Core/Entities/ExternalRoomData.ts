@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 
 @injectable()
-export default class DataTransferObject {
+export default class ExternalRoomData {
   constructor() {
     this.dataTransferObjectValues = {
       elementCount: 5,

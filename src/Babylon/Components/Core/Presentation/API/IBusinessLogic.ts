@@ -1,1 +1,3 @@
-export default interface IBusinessLogic {}
+export default interface IBusinessLogic {
+  getRoomSize(): string;
+}
