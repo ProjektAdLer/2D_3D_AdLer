@@ -1,4 +1,3 @@
-import Presentation from "./../Presentation/API/Presentation";
 import { inject, injectable } from "inversify";
 import IPresentation from "../Presentation/API/IPresentation";
 import ICore from "./ICore";

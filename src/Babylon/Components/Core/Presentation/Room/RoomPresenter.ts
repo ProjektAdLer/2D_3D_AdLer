@@ -33,10 +33,12 @@ export default class RoomPresenter implements IRoomPresenter {
   }
 
   createFloor() {
-    this.view.createFloor(this.scenePresenter.Scene);
+    let roomScale: number = this.view.setRoomScale(this.viewModel.RoomSize);
+    this.view.createFloor(this.scenePresenter.Scene, roomScale);
   }
 
   createWalls() {
-    this.view.createWalls(this.scenePresenter.Scene);
+    let roomScale: number = this.view.setRoomScale(this.viewModel.RoomSize);
+    this.view.createWalls(this.scenePresenter.Scene, roomScale);
   }
 }
