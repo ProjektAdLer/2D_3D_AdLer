@@ -41,6 +41,10 @@ export default class RoomPresenter implements IRoomPresenter {
     this.view.createWalls(this.scenePresenter.Scene);
   }
 
+  createRoomVertices() {
+    this.view.createRoomVertices(this.scenePresenter.Scene);
+  }
+
   private calculateRoomScale(roomSize: ROOMSIZE): number {
     if (roomSize === ROOMSIZE.Small) return 1;
     else if (roomSize === ROOMSIZE.Medium) return 2;
