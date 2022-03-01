@@ -4,5 +4,4 @@ export default interface IRoomPresenter {
   get RoomSize(): ROOMSIZE;
   createFloor(): void;
   createWalls(): void;
-  createRoomVertices(): void;
 }

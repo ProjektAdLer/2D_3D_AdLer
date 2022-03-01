@@ -1,97 +1,71 @@
-import {
-  MeshBuilder,
-  Scene,
-  Vector3,
-  Mesh,
-  VertexData,
-  VertexBuffer,
-  StandardMaterial,
-} from "@babylonjs/core";
-import { BaseCameraMouseWheelInput } from "@babylonjs/core/Cameras/Inputs/BaseCameraMouseWheelInput";
-import { injectable, inject } from "inversify";
+import { Scene, Mesh, VertexData } from "@babylonjs/core";
+import { injectable } from "inversify";
 import IRoomView from "./IRoomView";
 import RoomViewModel from "./RoomViewModel";
 
 @injectable()
 export default class RoomView implements IRoomView {
   private viewModel: RoomViewModel;
+  private roomWidth: number;
+  private roomLength: number;
+  private baseHeight: number;
+  private roomHeight: number;
+  private doorWidth: number;
+  private doorHeigth: number;
+  private wallThickness: number;
+  private positions: number[];
+  private floorIndices: number[];
+  private wallIndices: number[];
 
   constructor(viewModel: RoomViewModel) {
     this.viewModel = viewModel;
+    this.roomWidth = 20;
+    this.roomLength = 20;
+    this.baseHeight = 1;
+    this.roomHeight = 2.5;
+    this.doorWidth = 1.5;
+    this.doorHeigth = 2.28;
+    this.wallThickness = 0.5;
+    this.positions = this.createPositions();
+    this.floorIndices = this.createFloorIndices();
+    this.wallIndices = this.createWallIndices();
   }
 
   createFloor(scene: Scene): void {
-    MeshBuilder.CreatePlane(
-      "Floor",
-      {
-        width: 5 * this.viewModel.RoomScale,
-        height: 3.5 * this.viewModel.RoomScale,
-      },
-      scene
-    ).rotate(new Vector3(1, 0, 0), Math.PI / 2);
-  }
+    var floorMesh = new Mesh("Floor", scene);
+    var positions = this.positions;
+    var indices = this.floorIndices;
+    var normals = [] as number[];
+    VertexData.ComputeNormals(positions, indices, normals);
+    var vertexData = new VertexData();
+    vertexData.positions = positions;
+    vertexData.indices = indices;
+    vertexData.normals = normals;
 
+    vertexData.applyToMesh(floorMesh);
+  }
   createWalls(scene: Scene): void {
-    MeshBuilder.CreatePlane(
-      "Northwall",
-      {
-        width: 5 * this.viewModel.RoomScale,
-        height: 3,
-      },
-      scene
-    )
-      .rotate(new Vector3(1, 0, 0), Math.PI)
-      .translate(new Vector3(0, 0, 1), -3.5)
-      .translate(new Vector3(0, -1, 0), -1.5);
+    var wallMesh = new Mesh("Walls", scene);
+    var positions = this.positions;
+    var indices = this.wallIndices;
+    var normals = [] as number[];
+    VertexData.ComputeNormals(positions, indices, normals);
+    var vertexData = new VertexData();
+    vertexData.positions = positions;
+    vertexData.indices = indices;
+    vertexData.normals = normals;
 
-    MeshBuilder.CreatePlane(
-      "Eastwall",
-      {
-        width: 3.5 * this.viewModel.RoomScale,
-        height: 3,
-      },
-      scene
-    )
-      .rotate(new Vector3(0, 1, 0), Math.PI / 2)
-      .rotate(new Vector3(0, 0, 1), Math.PI / 2)
-      .translate(new Vector3(1, 0, 0), 5)
-      .translate(new Vector3(0, 1, 0), 1.5);
-
-    MeshBuilder.CreatePlane(
-      "Southwall",
-      {
-        width: 5 * this.viewModel.RoomScale,
-        height: 3,
-      },
-      scene
-    )
-      .rotate(new Vector3(1, 0, 0), -Math.PI / 2)
-      .rotate(new Vector3(0, 0, 1), -Math.PI / 2)
-      .translate(new Vector3(0, 1, 0), 1.5);
-
-    MeshBuilder.CreatePlane(
-      "Westwall",
-      {
-        width: 3.5 * this.viewModel.RoomScale,
-        height: 3,
-      },
-      scene
-    )
-      .rotate(new Vector3(0, 1, 0), -Math.PI / 2)
-      .rotate(new Vector3(0, 0, 1), -Math.PI / 2)
-      .translate(new Vector3(1, 0, 0), -5)
-      .translate(new Vector3(0, 1, 0), 1.5);
+    vertexData.applyToMesh(wallMesh);
   }
-  createRoomVertices(scene: Scene) {
-    var roomMesh = new Mesh("Room", scene);
-    var roomWidth = 20 / 2;
-    var roomLength = 20 / 2;
-    var baseHeight = 1;
-    var roomHeight = 1.5;
-    var doorWidth = 1.5 / 2;
-    var doorHeight = 2.28;
-    var wallThickness = 0.5;
-    var positions = [
+  createPositions() {
+    var roomWidth = this.roomWidth / 2;
+    var roomLength = this.roomLength / 2;
+    var baseHeight = this.baseHeight;
+    var roomHeight = this.roomHeight;
+    var doorWidth = this.doorWidth / 2;
+    var doorHeight = this.doorHeigth;
+    var wallThickness = this.wallThickness;
+    return [
       roomWidth,
       baseHeight,
       roomLength, // 0 north east, ground
@@ -286,13 +260,19 @@ export default class RoomView implements IRoomView {
       baseHeight,
       doorWidth, // 63, eastern outer floor, north doorpost
     ];
-    var indices = [
+  }
+  createFloorIndices() {
+    return [
       44,
       49,
       54,
       54,
       59,
       44, // floor
+    ];
+  }
+  createWallIndices() {
+    return [
       0,
       4,
       5,
