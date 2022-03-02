@@ -4,6 +4,18 @@ export default function H5PModal(props: any) {
   if (!props.show) {
     return null;
   }
+
+  const convertString = (contextId: number, fileName: string) => {
+    const baseUrl = "https://moodle.cluuub.xyz/h5p/embed.php";
+    const template = `https://moodle.cluuub.xyz/pluginfile.php/${contextId}/mod_h5pactivity/package/0/${encodeURIComponent(
+      fileName
+    )}`;
+
+    return baseUrl + "?url=" + encodeURIComponent(template);
+  };
+
+  console.log(convertString(278, "Metriken Teil 1.h5p"));
+
   return (
     <div className="modal">
       <div className="modal-content">
@@ -13,7 +25,7 @@ export default function H5PModal(props: any) {
         <div className="modal-body">
           {" "}
           <iframe
-            src="http://moodle.cluuub.xyz/h5p/embed.php?url=https%3A%2F%2Fmoodle.cluuub.xyz%2Fpluginfile.php%2F278%2Fmod_h5pactivity%2Fpackage%2F0%2FMetriken%2520Teil%25201.h5p"
+            src="https://moodle.cluuub.xyz/h5p/embed.php?url=https%3A%2F%2Fmoodle.cluuub.xyz%2Fpluginfile.php%2F278%2Fmod_h5pactivity%2Fpackage%2F0%2FMetriken%2520Teil%25201.h5p"
             width=":w"
             height="100%"
             // allowfullscreen="allowfullscreen"
