@@ -1,48 +1,73 @@
-import { Scene, Mesh, VertexData } from "@babylonjs/core";
+import {
+  Scene,
+  Mesh,
+  VertexData,
+  StandardMaterial,
+  Texture,
+  Color3,
+} from "@babylonjs/core";
 import { injectable } from "inversify";
 import IRoomView from "./IRoomView";
 import RoomViewModel from "./RoomViewModel";
+import floorTexture from "../../../../../Assets/wooden_floor.png";
 
 @injectable()
 export default class RoomView implements IRoomView {
-  private viewModel: RoomViewModel;
   private roomWidth: number;
   private roomLength: number;
   private baseHeight: number;
   private roomHeight: number;
   private doorWidth: number;
-  private doorHeigth: number;
+  private doorHeight: number;
   private wallThickness: number;
   private positions: number[];
   private floorIndices: number[];
   private wallIndices: number[];
+  private floorPositions: number[];
 
   constructor(viewModel: RoomViewModel) {
-    this.viewModel = viewModel;
-    this.roomWidth = 20;
-    this.roomLength = 20;
-    this.baseHeight = 1;
-    this.roomHeight = 2.5;
-    this.doorWidth = 1.5;
-    this.doorHeigth = 2.28;
-    this.wallThickness = 0.5;
-    this.positions = this.createPositions();
+    let standardAttributes = {
+      roomWidth: 10,
+      roomLength: 20,
+      baseHeight: 0,
+      roomHeight: 2.5,
+      doorWidth: 1.5,
+      doorHeight: 2.28,
+      wallThickness: 1,
+    };
+    let roomAttributes = {
+      ...standardAttributes,
+      ...viewModel.RoomAttributes,
+    };
+    this.roomWidth = roomAttributes.roomWidth;
+    this.roomLength = roomAttributes.roomLength;
+    this.baseHeight = roomAttributes.baseHeight;
+    this.roomHeight = roomAttributes.roomHeight;
+    this.doorWidth = roomAttributes.doorWidth;
+    this.doorHeight = roomAttributes.doorHeight;
+    this.wallThickness = roomAttributes.wallThickness;
+    this.positions = this.createRoomPositions();
     this.floorIndices = this.createFloorIndices();
     this.wallIndices = this.createWallIndices();
+    this.floorPositions = this.createFloorPositions();
   }
 
   createFloor(scene: Scene): void {
     var floorMesh = new Mesh("Floor", scene);
-    var positions = this.positions;
-    var indices = this.floorIndices;
     var normals = [] as number[];
-    VertexData.ComputeNormals(positions, indices, normals);
+    var uvs = [0, 1, 0, 0, 1, 0, 1, 1];
+    VertexData.ComputeNormals(this.floorPositions, this.floorIndices, normals);
     var vertexData = new VertexData();
-    vertexData.positions = positions;
-    vertexData.indices = indices;
+    vertexData.positions = this.floorPositions;
+    vertexData.indices = this.floorIndices;
     vertexData.normals = normals;
+    vertexData.uvs = uvs;
 
     vertexData.applyToMesh(floorMesh);
+    var floorMaterial = new StandardMaterial("floorMaterial", scene);
+    floorMaterial.diffuseTexture = new Texture(floorTexture, scene);
+
+    floorMesh.material = floorMaterial;
   }
   createWalls(scene: Scene): void {
     var wallMesh = new Mesh("Walls", scene);
@@ -56,14 +81,38 @@ export default class RoomView implements IRoomView {
     vertexData.normals = normals;
 
     vertexData.applyToMesh(wallMesh);
+    wallMesh.convertToFlatShadedMesh();
+    var wallMaterial = new StandardMaterial("wallMaterial", scene);
+    wallMaterial.diffuseColor = new Color3(0.3, 0.6, 0.8);
+    wallMesh.material = wallMaterial;
   }
-  createPositions() {
+  createFloorPositions() {
+    var roomWidth = this.roomWidth / 2;
+    var roomLength = this.roomLength / 2;
+    var baseHeight = this.baseHeight;
+    var wallThickness = this.wallThickness;
+    return [
+      roomWidth + wallThickness,
+      baseHeight,
+      roomLength + wallThickness, // Same as: 44 north east outer floor
+      -roomWidth - wallThickness,
+      baseHeight,
+      roomLength + wallThickness, // Same as: 49 north west outer floor
+      -roomWidth - wallThickness,
+      baseHeight,
+      -roomLength - wallThickness, // Same as: 54 south west outer floor
+      roomWidth + wallThickness,
+      baseHeight,
+      -roomLength - wallThickness, // Same as: 59 south east outer floor
+    ];
+  }
+  createRoomPositions() {
     var roomWidth = this.roomWidth / 2;
     var roomLength = this.roomLength / 2;
     var baseHeight = this.baseHeight;
     var roomHeight = this.roomHeight;
     var doorWidth = this.doorWidth / 2;
-    var doorHeight = this.doorHeigth;
+    var doorHeight = this.doorHeight;
     var wallThickness = this.wallThickness;
     return [
       roomWidth,
@@ -262,14 +311,7 @@ export default class RoomView implements IRoomView {
     ];
   }
   createFloorIndices() {
-    return [
-      44,
-      49,
-      54,
-      54,
-      59,
-      44, // floor
-    ];
+    return [0, 1, 2, 2, 3, 0];
   }
   createWallIndices() {
     return [
