@@ -1,11 +1,13 @@
-import React from "react";
-
 export default function H5PModal(props: any) {
   if (!props.show) {
     return null;
   }
 
+  // contextId: wird in der REST Antwort als "context" angezeigt
+  // fileName: wird in der Rest Antwort als "filename" angezeigt
   const convertString = (contextId: number, fileName: string) => {
+    // In addition to contextId and fileName, in the future, we will also need a package
+    // the package number is indicated by the size of the array returned by the REST call
     const baseUrl = "https://moodle.cluuub.xyz/h5p/embed.php";
     const template = `https://moodle.cluuub.xyz/pluginfile.php/${contextId}/mod_h5pactivity/package/0/${encodeURIComponent(
       fileName
