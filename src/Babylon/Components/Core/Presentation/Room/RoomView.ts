@@ -4,6 +4,7 @@ import {
   VertexData,
   StandardMaterial,
   Texture,
+  Color3,
 } from "@babylonjs/core";
 import { injectable } from "inversify";
 import IRoomView from "./IRoomView";
@@ -81,6 +82,9 @@ export default class RoomView implements IRoomView {
 
     vertexData.applyToMesh(wallMesh);
     wallMesh.convertToFlatShadedMesh();
+    var wallMaterial = new StandardMaterial("wallMaterial", scene);
+    wallMaterial.diffuseColor = new Color3(0.3, 0.6, 0.8);
+    wallMesh.material = wallMaterial;
   }
   createFloorPositions() {
     var roomWidth = this.roomWidth / 2;
