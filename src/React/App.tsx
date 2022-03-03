@@ -10,7 +10,12 @@ function App() {
       <div>
         <button onClick={() => setShowH5P(true)}>Show H5P</button>
         <BabylonCanvas style={{ width: "100%", position: "absolute" }} />
-        <H5PModal show={showH5P} onClose={() => setShowH5P(false)} />
+        <H5PModal
+          show={showH5P}
+          onClose={() => setShowH5P(false)}
+          h5pId={278}
+          h5pFileName="Metriken Teil 1.h5p"
+        />
       </div>
     </React.Fragment>
   );
