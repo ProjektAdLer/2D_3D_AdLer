@@ -25,6 +25,10 @@ import CORE_TYPES from "./types";
 import IRoomView from "../Presentation/Room/IRoomView";
 import RoomView from "../Presentation/Room/RoomView";
 import RoomViewModel from "../Presentation/Room/RoomViewModel";
+import IMoodle from "../BusinessLogic/Moodle/IMoodle";
+import Moodle from "../BusinessLogic/Moodle/Moodle";
+import IMoodleData from "../DataAccess/Moodle/IMoodleData";
+import MoodleData from "../DataAccess/Moodle/MoodleData";
 
 var CoreDIContainer = new Container();
 
@@ -56,6 +60,8 @@ CoreDIContainer.bind<IRoomPresenter>(CORE_TYPES.IRoomPresenter)
   .inSingletonScope();
 CoreDIContainer.bind<IRoomView>(CORE_TYPES.IRoomView).to(RoomView);
 CoreDIContainer.bind(RoomViewModel).toSelf();
+CoreDIContainer.bind<IMoodle>(CORE_TYPES.IMoodle).to(Moodle);
+CoreDIContainer.bind<IMoodleData>(CORE_TYPES.IMoodleData).to(MoodleData);
 
 // bind other CreateSceneClass here for testing puposes -MK
 CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(

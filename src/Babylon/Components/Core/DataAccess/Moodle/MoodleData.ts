@@ -1,12 +1,46 @@
+import { MoodleTokenServerResponse } from "./../../Types/MoodleTokenServerResponse";
+import axios from "axios";
 import IMoodleData from "./IMoodleData";
+import { injectable } from "inversify";
 
+@injectable()
 export default class MoodleData implements IMoodleData {
-  makeApiCall<T>(
-    wsFunction: string,
+  async signInUser(username: string, password: string): Promise<string> {
+    const response = await this.makeApiCall<MoodleTokenServerResponse>(
+      "https://moodle.cluuub.xyz/login/token.php",
+      {
+        username: username,
+        password: password,
+        service: "moodle_mobile_app",
+      }
+    );
+
+    if (!response.token) {
+      throw new Error("No token received from Moodle");
+    }
+
+    return response.token;
+  }
+  async makeApiCall<T>(
     siteUrl: string,
     requestData: Record<string, unknown>,
-    token: string
+    token?: string,
+    wsFunction?: string
   ): Promise<T> {
-    throw new Error("Method not implemented.");
+    const formData = new FormData();
+
+    for (var key in requestData) {
+      // @ts-ignore
+      formData.append(key, requestData[key]);
+    }
+    token && formData.append("wstoken", token);
+
+    const response = await axios.post<T>(siteUrl, formData, {
+      headers: {
+        "content-type": "text/plain",
+      },
+    });
+
+    return response.data;
   }
 }

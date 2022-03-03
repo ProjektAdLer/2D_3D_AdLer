@@ -36,6 +36,8 @@ export default function H5PModal(props: {
   const coreFactory: ICoreFactory = new CoreFactory();
   const engineCore = coreFactory.createCore();
 
+  engineCore.setupMoodle();
+
   return (
     <div className="modal">
       <div className="modal-content">

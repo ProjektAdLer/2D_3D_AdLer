@@ -20,5 +20,7 @@ export default class Core implements ICore {
     await this.presentation.setupBabylon(canvas);
   }
 
-  async setupMoodle(): Promise<void> {}
+  async setupMoodle(): Promise<void> {
+    this.businessLogic.setupMooodle();
+  }
 }

@@ -11,6 +11,8 @@ let CORE_TYPES = {
   IRoomConfigurator: Symbol("IRoomConfigurator"),
   IRoomPresenter: Symbol("IRoomPresenter"),
   IRoomView: Symbol("IRoomView"),
+  IMoodle: Symbol("IMoodle"),
+  IMoodleData: Symbol("IMoodleData"),
 };
 
 export default CORE_TYPES;
