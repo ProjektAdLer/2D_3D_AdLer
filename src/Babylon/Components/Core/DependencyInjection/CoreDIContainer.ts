@@ -67,8 +67,7 @@ CoreDIContainer.bind<IMoodleDataAccess>(CORE_TYPES.IMoodleDataAccess)
   .inSingletonScope();
 
 // No Singleton here - PG
-
-CoreDIContainer.bind(MoodleData).toSelf();
+CoreDIContainer.bind<MoodleData>(CORE_TYPES.MoodleData).to(MoodleData);
 
 // bind other CreateSceneClass here for testing puposes -MK
 CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
