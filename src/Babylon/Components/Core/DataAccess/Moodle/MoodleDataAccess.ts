@@ -1,10 +1,10 @@
-import { MoodleTokenServerResponse } from "./../../Types/MoodleTokenServerResponse";
+import { MoodleTokenServerResponse } from "../../Types/MoodleTokenServerResponse";
 import axios from "axios";
-import IMoodleData from "./IMoodleData";
 import { injectable } from "inversify";
+import IMoodleDataAccess from "./IMoodleDataAccess";
 
 @injectable()
-export default class MoodleData implements IMoodleData {
+export default class MoodleDataAccess implements IMoodleDataAccess {
   async signInUser(username: string, password: string): Promise<string> {
     const response = await this.makeApiCall<MoodleTokenServerResponse>(
       "https://moodle.cluuub.xyz/login/token.php",

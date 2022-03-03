@@ -27,8 +27,9 @@ import RoomView from "../Presentation/Room/RoomView";
 import RoomViewModel from "../Presentation/Room/RoomViewModel";
 import IMoodle from "../BusinessLogic/Moodle/IMoodle";
 import Moodle from "../BusinessLogic/Moodle/Moodle";
-import IMoodleData from "../DataAccess/Moodle/IMoodleData";
-import MoodleData from "../DataAccess/Moodle/MoodleData";
+import MoodleDataAccess from "../DataAccess/Moodle/MoodleDataAccess";
+import IMoodleDataAccess from "../DataAccess/Moodle/IMoodleDataAccess";
+import MoodleData from "../Entities/MoodleData";
 
 var CoreDIContainer = new Container();
 
@@ -60,8 +61,14 @@ CoreDIContainer.bind<IRoomPresenter>(CORE_TYPES.IRoomPresenter)
   .inSingletonScope();
 CoreDIContainer.bind<IRoomView>(CORE_TYPES.IRoomView).to(RoomView);
 CoreDIContainer.bind(RoomViewModel).toSelf();
-CoreDIContainer.bind<IMoodle>(CORE_TYPES.IMoodle).to(Moodle);
-CoreDIContainer.bind<IMoodleData>(CORE_TYPES.IMoodleData).to(MoodleData);
+CoreDIContainer.bind<IMoodle>(CORE_TYPES.IMoodle).to(Moodle).inSingletonScope();
+CoreDIContainer.bind<IMoodleDataAccess>(CORE_TYPES.IMoodleDataAccess)
+  .to(MoodleDataAccess)
+  .inSingletonScope();
+
+// No Singleton here - PG
+
+CoreDIContainer.bind(MoodleData).toSelf();
 
 // bind other CreateSceneClass here for testing puposes -MK
 CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(

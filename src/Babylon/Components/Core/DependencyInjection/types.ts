@@ -12,7 +12,7 @@ let CORE_TYPES = {
   IRoomPresenter: Symbol("IRoomPresenter"),
   IRoomView: Symbol("IRoomView"),
   IMoodle: Symbol("IMoodle"),
-  IMoodleData: Symbol("IMoodleData"),
+  IMoodleDataAccess: Symbol("IMoodleDataAccess"),
 };
 
 export default CORE_TYPES;

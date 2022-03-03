@@ -1,4 +1,4 @@
-export default interface IMoodleData {
+export default interface IMoodleDataAccess {
   makeApiCall<T>(
     siteUrl: string,
     requestData: Record<string, unknown>,
