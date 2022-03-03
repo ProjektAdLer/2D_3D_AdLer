@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import CoreFactory from "../../Babylon/Components/Core/API/CoreFactory";
 import ICoreFactory from "../../Babylon/Components/Core/API/ICoreFactory";
 
@@ -24,19 +25,31 @@ export default function H5PModal(props: {
   h5pFileName: string;
   title?: string;
 }) {
-  // Dont render anything if the H5P is not shown
+  useEffect(() => {
+    if (!props.show) {
+      return;
+    }
+
+    const coreFactory: ICoreFactory = new CoreFactory();
+    const engineCore = coreFactory.createCore();
+
+    engineCore.setupMoodle();
+
+    return () => {
+      // engineCore.dispose(); // TODO
+    };
+  }, [props.show]);
+
   if (!props.show) {
     return null;
   }
+
+  // Dont render anything if the H5P is not shown
 
   // contextId: wird in der REST Antwort als "context" angezeigt
   // fileName: wird in der Rest Antwort als "filename" angezeigt
 
   // We use a Factory here, because React does not support DI - PG
-  const coreFactory: ICoreFactory = new CoreFactory();
-  const engineCore = coreFactory.createCore();
-
-  engineCore.setupMoodle();
 
   return (
     <div className="modal">
