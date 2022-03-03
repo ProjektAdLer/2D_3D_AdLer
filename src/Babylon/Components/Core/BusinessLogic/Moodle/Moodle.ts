@@ -2,17 +2,18 @@ import { inject, injectable } from "inversify";
 import { resolve } from "path/posix";
 import IMoodleData from "../../DataAccess/Moodle/IMoodleData";
 import CORE_TYPES from "../../DependencyInjection/types";
+import IDataAccess from "../API/IDataAccess";
 import IMoodle from "./IMoodle";
 const axios = require("axios").default;
 
 @injectable()
 export default class Moodle implements IMoodle {
   constructor(
-    @inject(CORE_TYPES.IMoodleData) private moodleData: IMoodleData
+    @inject(CORE_TYPES.IDataAccess) private dataAccess: IDataAccess
   ) {}
 
   async setupMoodle(): Promise<void> {
-    const test = await this.moodleData.signInUser(
+    const test = await this.dataAccess.signInUser(
       "Student",
       "wve2rxz7wfm3BPH-ykh"
     );
