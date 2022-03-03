@@ -15,6 +15,7 @@ function App() {
           onClose={() => setShowH5P(false)}
           h5pId={278}
           h5pFileName="Metriken Teil 1.h5p"
+          title="Das Wasserfallmodell"
         />
       </div>
     </React.Fragment>
