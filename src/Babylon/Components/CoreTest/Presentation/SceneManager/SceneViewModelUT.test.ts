@@ -18,6 +18,7 @@ describe("SceneViewModel", () => {
   });
 
   test("Scene setter sets a scene, getter returns the scene", () => {
+    //@ts-ignore
     let testScene = new Scene();
     sceneViewModel.Scene = testScene;
     expect(sceneViewModel.Scene).toStrictEqual(testScene);

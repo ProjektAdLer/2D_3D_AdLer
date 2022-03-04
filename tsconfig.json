@@ -26,5 +26,6 @@
     "types": ["reflect-metadata", "jest"],
     "strictPropertyInitialization": false
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts"]
 }
