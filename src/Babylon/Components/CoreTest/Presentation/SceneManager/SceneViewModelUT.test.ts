@@ -17,7 +17,13 @@ describe("SceneViewModel", () => {
     sceneViewModel = new SceneViewModel();
   });
 
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
   test("Scene setter sets a scene, getter returns the scene", () => {
+    // this just works because the mock overrides the original constructor
+    // should be changed to use the actual Scene constructor -MK
     //@ts-ignore
     let testScene = new Scene();
     sceneViewModel.Scene = testScene;
