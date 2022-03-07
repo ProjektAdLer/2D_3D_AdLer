@@ -22,9 +22,7 @@ describe("Presentation", () => {
   });
 
   afterAll(() => {
-    createEngineMock.mockRestore();
-    createSceneMock.mockRestore();
-    createRenderLoopMock.mockRestore();
+    jest.restoreAllMocks();
   });
 
   test("setupBabylon calls engineManager and scenePresenter", () => {
@@ -38,7 +36,6 @@ describe("Presentation", () => {
   });
 
   test("BusinessLogic getter returns an object of type Businesslogic", () => {
-    // expect(presentation.BusinessLogic).toBeDefined();
     expect(presentation.BusinessLogic).toBeInstanceOf(BusinessLogic);
   });
 });
