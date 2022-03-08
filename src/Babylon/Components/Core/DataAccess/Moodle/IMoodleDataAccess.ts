@@ -1,3 +1,5 @@
+import { H5PForCoursesAPIResponse } from "../../Types/H5PTypes";
+
 export default interface IMoodleDataAccess {
   makeApiCall<T>(
     siteUrl: string,
@@ -7,4 +9,6 @@ export default interface IMoodleDataAccess {
   ): Promise<T>;
 
   signInUser(username: string, password: string): Promise<string>;
+
+  getAllH5pForCourse(courseId: number): Promise<H5PForCoursesAPIResponse>;
 }

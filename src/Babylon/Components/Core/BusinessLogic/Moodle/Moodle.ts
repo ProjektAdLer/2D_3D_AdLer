@@ -2,6 +2,7 @@ import { inject, injectable } from "inversify";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/types";
 import MoodleData from "../../Entities/MoodleData";
+import { H5PForCoursesAPIResponse } from "../../Types/H5PTypes";
 import IDataAccess from "../API/IDataAccess";
 import IMoodle from "./IMoodle";
 const axios = require("axios").default;
@@ -15,25 +16,23 @@ export default class Moodle implements IMoodle {
   ) {}
 
   async setupMoodle(): Promise<void> {
-    const test = await this.dataAccess.signInUser(
+    const userToken = await this.dataAccess.signInUser(
       "Student",
       "wve2rxz7wfm3BPH-ykh"
     );
 
     this.moodleData = CoreDIContainer.get<MoodleData>(CORE_TYPES.MoodleData);
 
-    this.moodleData.token = test;
+    this.moodleData.token = userToken;
 
     console.log(this.moodleData.token);
+
+    const h5ps = await this.getAllH5pForCourse(5);
   }
 
-  async getAllH5pForCourse(courseShortName: string): Promise<any> {
-    const object = {
-      wstoken: "fcc83dae37dad77bda91e3711d51b765",
-      wsfunction: "mod_h5pactivity_get_attempts",
-      h5pactivityid: "7",
-      moodlewsrestformat: "json",
-    };
-    throw new Error("Method not implemented.");
+  async getAllH5pForCourse(
+    courseId: number
+  ): Promise<H5PForCoursesAPIResponse> {
+    return await this.dataAccess.getAllH5pForCourse(5);
   }
 }
