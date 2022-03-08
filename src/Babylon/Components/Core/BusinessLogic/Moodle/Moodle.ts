@@ -31,6 +31,8 @@ export default class Moodle implements IMoodle {
   async getAllH5pForCourse(
     courseId: number
   ): Promise<H5PForCoursesAPIResponse> {
-    return await this.dataAccess.getAllH5pForCourse(5);
+    const resp = await this.dataAccess.getAllH5pForCourse(5);
+
+    return resp;
   }
 }
