@@ -36,8 +36,6 @@ export default class MoodleDataAccess implements IMoodleDataAccess {
       }
     );
 
-    console.log(response);
-
     return response;
   }
 

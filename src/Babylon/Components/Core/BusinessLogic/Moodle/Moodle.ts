@@ -26,8 +26,6 @@ export default class Moodle implements IMoodle {
     this.moodleData.token = userToken;
 
     console.log(this.moodleData.token);
-
-    const h5ps = await this.getAllH5pForCourse(5);
   }
 
   async getAllH5pForCourse(
