@@ -4,7 +4,6 @@ import {
   VertexData,
   StandardMaterial,
   Texture,
-  Color3,
 } from "@babylonjs/core";
 import { injectable } from "inversify";
 import IRoomView from "./IRoomView";
@@ -13,84 +12,66 @@ import floorTexture from "../../../../../Assets/wooden_floor.png";
 
 @injectable()
 export default class RoomView implements IRoomView {
-  private roomWidth: number;
-  private roomLength: number;
-  private baseHeight: number;
-  private roomHeight: number;
-  private doorWidth: number;
-  private doorHeight: number;
-  private wallThickness: number;
-  private positions: number[];
-  private floorIndices: number[];
-  private wallIndices: number[];
-  private floorPositions: number[];
+  private viewModel: RoomViewModel;
 
-  constructor(viewModel: RoomViewModel) {
-    let standardAttributes = {
-      roomWidth: 10,
-      roomLength: 20,
-      baseHeight: 0,
-      roomHeight: 2.5,
-      doorWidth: 1.5,
-      doorHeight: 2.28,
-      wallThickness: 1,
-    };
-    let roomAttributes = {
-      ...standardAttributes,
-      ...viewModel.RoomAttributes,
-    };
-    this.roomWidth = roomAttributes.roomWidth;
-    this.roomLength = roomAttributes.roomLength;
-    this.baseHeight = roomAttributes.baseHeight;
-    this.roomHeight = roomAttributes.roomHeight;
-    this.doorWidth = roomAttributes.doorWidth;
-    this.doorHeight = roomAttributes.doorHeight;
-    this.wallThickness = roomAttributes.wallThickness;
-    this.positions = this.createRoomPositions();
-    this.floorIndices = this.createFloorIndices();
-    this.wallIndices = this.createWallIndices();
-    this.floorPositions = this.createFloorPositions();
+  set ViewModel(newViewModel: RoomViewModel) {
+    this.viewModel = newViewModel;
   }
 
   createFloor(scene: Scene): void {
+    if (!this.viewModel)
+      throw new Error(
+        "ViewModel not set. Use the ViewModel setter before calling this method"
+      );
+
+    var floorIndices = this.createFloorIndices();
+    var floorPositions = this.createFloorPositions();
+
     var floorMesh = new Mesh("Floor", scene);
     var normals = [] as number[];
     var uvs = [0, 1, 0, 0, 1, 0, 1, 1];
-    VertexData.ComputeNormals(this.floorPositions, this.floorIndices, normals);
+    VertexData.ComputeNormals(floorPositions, floorIndices, normals);
     var vertexData = new VertexData();
-    vertexData.positions = this.floorPositions;
-    vertexData.indices = this.floorIndices;
+    vertexData.positions = floorPositions;
+    vertexData.indices = floorIndices;
     vertexData.normals = normals;
     vertexData.uvs = uvs;
-
     vertexData.applyToMesh(floorMesh);
+
     var floorMaterial = new StandardMaterial("floorMaterial", scene);
     floorMaterial.diffuseTexture = new Texture(floorTexture, scene);
-
     floorMesh.material = floorMaterial;
   }
+
   createWalls(scene: Scene): void {
+    if (!this.viewModel)
+      throw new Error(
+        "ViewModel not set. Use the ViewModel setter before calling this method"
+      );
+
+    var positions = this.createRoomPositions();
+    var wallIndices = this.createWallIndices();
+
     var wallMesh = new Mesh("Walls", scene);
-    var positions = this.positions;
-    var indices = this.wallIndices;
     var normals = [] as number[];
-    VertexData.ComputeNormals(positions, indices, normals);
+    VertexData.ComputeNormals(positions, wallIndices, normals);
     var vertexData = new VertexData();
     vertexData.positions = positions;
-    vertexData.indices = indices;
+    vertexData.indices = wallIndices;
     vertexData.normals = normals;
-
     vertexData.applyToMesh(wallMesh);
     wallMesh.convertToFlatShadedMesh();
+
     var wallMaterial = new StandardMaterial("wallMaterial", scene);
-    wallMaterial.diffuseColor = new Color3(0.3, 0.6, 0.8);
+    wallMaterial.diffuseColor = this.viewModel.WallColor;
     wallMesh.material = wallMaterial;
   }
-  createFloorPositions() {
-    var roomWidth = this.roomWidth / 2;
-    var roomLength = this.roomLength / 2;
-    var baseHeight = this.baseHeight;
-    var wallThickness = this.wallThickness;
+
+  private createFloorPositions() {
+    var roomWidth = this.viewModel.RoomWidth / 2;
+    var roomLength = this.viewModel.RoomLength / 2;
+    var baseHeight = this.viewModel.BaseHeight;
+    var wallThickness = this.viewModel.WallThickness;
     return [
       roomWidth + wallThickness,
       baseHeight,
@@ -106,14 +87,15 @@ export default class RoomView implements IRoomView {
       -roomLength - wallThickness, // Same as: 59 south east outer floor
     ];
   }
-  createRoomPositions() {
-    var roomWidth = this.roomWidth / 2;
-    var roomLength = this.roomLength / 2;
-    var baseHeight = this.baseHeight;
-    var roomHeight = this.roomHeight;
-    var doorWidth = this.doorWidth / 2;
-    var doorHeight = this.doorHeight;
-    var wallThickness = this.wallThickness;
+
+  private createRoomPositions() {
+    var roomWidth = this.viewModel.RoomWidth / 2;
+    var roomLength = this.viewModel.RoomLength / 2;
+    var baseHeight = this.viewModel.BaseHeight;
+    var roomHeight = this.viewModel.RoomHeight;
+    var doorWidth = this.viewModel.DoorWidth / 2;
+    var doorHeight = this.viewModel.DoorHeight;
+    var wallThickness = this.viewModel.WallThickness;
     return [
       roomWidth,
       baseHeight,
@@ -310,10 +292,12 @@ export default class RoomView implements IRoomView {
       doorWidth, // 63, eastern outer floor, north doorpost
     ];
   }
-  createFloorIndices() {
+
+  private createFloorIndices() {
     return [0, 1, 2, 2, 3, 0];
   }
-  createWallIndices() {
+
+  private createWallIndices() {
     return [
       0,
       4,
