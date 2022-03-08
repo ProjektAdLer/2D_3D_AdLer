@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CoreFactory from "../../Babylon/Components/Core/API/CoreFactory";
 import ICoreFactory from "../../Babylon/Components/Core/API/ICoreFactory";
+import { H5PForCoursesAPIResponse } from "../../Babylon/Components/Core/Types/H5PTypes";
 
 const createIframeUrl = (contextId: number, fileName: string) => {
   // In addition to contextId and fileName, in the future, we will also need a package
@@ -25,6 +26,8 @@ export default function H5PModal(props: {
   h5pFileName: string;
   title?: string;
 }) {
+  const [h5pData, setH5pData] = useState<H5PForCoursesAPIResponse>();
+
   useEffect(() => {
     if (!props.show) {
       return;
@@ -33,11 +36,15 @@ export default function H5PModal(props: {
     const coreFactory: ICoreFactory = new CoreFactory();
     const engineCore = coreFactory.createCore();
 
-    engineCore.setupMoodle();
+    const fetchH5ps = async () => {
+      await engineCore.setupMoodle();
+      const h5p = await engineCore.getAllH5Ps(5);
+      setH5pData(h5p);
 
-    return () => {
-      // engineCore.dispose(); // TODO
+      console.log(h5p);
     };
+
+    fetchH5ps();
   }, [props.show]);
 
   if (!props.show) {
@@ -60,7 +67,7 @@ export default function H5PModal(props: {
         <div className="modal-body">
           {" "}
           <iframe
-            src={createIframeUrl(props.h5pId, props.h5pFileName)}
+            src={createIframeUrl(278, "Metriken Teil 1.h5p")}
             width=":w"
             height="100%"
             // allowfullscreen="allowfullscreen"

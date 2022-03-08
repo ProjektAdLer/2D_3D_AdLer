@@ -1,4 +1,4 @@
 export default interface IMoodle {
   setupMoodle(): Promise<void>;
-  getAllH5pForCourse(courseShortName: string): Promise<any>; // TODO: Typing
+  getAllH5pForCourse(courseId: number): Promise<any>; // TODO: Typing
 }

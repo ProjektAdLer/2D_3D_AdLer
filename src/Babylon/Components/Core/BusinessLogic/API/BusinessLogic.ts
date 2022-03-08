@@ -5,6 +5,7 @@ import CORE_TYPES from "../../DependencyInjection/types";
 import IRoomConfigurator from "../RoomConfigurator/IRoomConfigurator";
 import { ROOMSIZE } from "../RoomConfigurator/RoomConfigurator";
 import IMoodle from "../Moodle/IMoodle";
+import { H5PForCoursesAPIResponse } from "../../Types/H5PTypes";
 
 @injectable()
 export default class BusinessLogic implements IBusinessLogic {
@@ -22,6 +23,10 @@ export default class BusinessLogic implements IBusinessLogic {
     this.moodleBS = moodle;
 
     console.log("BusinessLogic");
+  }
+
+  async getAllH5Ps(courseId: number): Promise<H5PForCoursesAPIResponse> {
+    return await this.moodleBS.getAllH5pForCourse(courseId);
   }
 
   get RoomSize(): ROOMSIZE {
