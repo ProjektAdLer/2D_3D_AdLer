@@ -9,7 +9,7 @@ function App() {
     <React.Fragment>
       <div>
         <button onClick={() => setShowH5P(true)}>Show H5P</button>
-        <BabylonCanvas style={{ width: "100%", position: "absolute" }} />
+        <BabylonCanvas/>
         <H5PModal
           show={showH5P}
           onClose={() => setShowH5P(false)}
