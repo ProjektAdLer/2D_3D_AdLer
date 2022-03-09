@@ -16,15 +16,16 @@ export default class Core implements ICore {
     this.businessLogic = presentation.BusinessLogic;
     console.log("Core created");
   }
+
   async getAllH5Ps(courseId: number): Promise<H5PForCoursesAPIResponse> {
     return await this.businessLogic.getAllH5Ps(courseId);
   }
 
-  async setupBabylon(canvas: HTMLCanvasElement): Promise<void> {
-    await this.presentation.setupBabylon(canvas);
+  async setupMoodle(): Promise<void> {
+    this.businessLogic.setupMoodle();
   }
 
-  async setupMoodle(): Promise<void> {
-    this.businessLogic.setupMooodle();
+  async setupBabylon(canvas: HTMLCanvasElement): Promise<void> {
+    await this.presentation.setupBabylon(canvas);
   }
 }

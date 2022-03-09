@@ -33,7 +33,7 @@ export default class BusinessLogic implements IBusinessLogic {
     return this.roomConfigurator.RoomSize;
   }
 
-  async setupMooodle(): Promise<void> {
+  async setupMoodle(): Promise<void> {
     await this.moodleBS.setupMoodle();
   }
 }
