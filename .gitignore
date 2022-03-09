@@ -2,3 +2,5 @@ node_modules
 coverage
 build
 .DS_Store
+
+# Das ist ein Test
