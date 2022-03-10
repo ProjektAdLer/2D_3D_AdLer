@@ -24,7 +24,7 @@ section{
 }
 
 button{
-  width: 180px;
+  width: 100px;
   margin: 10px;
   z-index: 5;
   position: fixed;
