@@ -9,6 +9,7 @@ const setupBabylonMock = jest.spyOn(Presentation.prototype, "setupBabylon");
 
 const setupMoodleMock = jest.spyOn(BusinessLogic.prototype, "setupMoodle");
 
+const mock = jest.spyOn(BusinessLogic.prototype, "getAllH5Ps");
 describe("Core", () => {
   let core: ICore;
   beforeEach(() => {
@@ -27,5 +28,10 @@ describe("Core", () => {
   test("setupMoodle calls the business layer API", () => {
     core.setupMoodle();
     expect(setupMoodleMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("getAllH5Ps calls the Business Layern", () => {
+    core.getAllH5Ps(5);
+    expect(mock).toHaveBeenCalledTimes(1);
   });
 });
