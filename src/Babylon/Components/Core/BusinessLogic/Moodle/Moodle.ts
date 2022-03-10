@@ -24,13 +24,13 @@ export default class Moodle implements IMoodle {
     this.moodleData = CoreDIContainer.get<MoodleData>(CORE_TYPES.MoodleData);
 
     this.moodleData.token = userToken;
-
-    console.log(this.moodleData.token);
   }
 
   async getAllH5pForCourse(
     courseId: number
   ): Promise<H5PForCoursesAPIResponse> {
+    if (!this.moodleData.token)
+      throw new Error("No Moodle Token Present. Please call setupMoodle()");
     const resp = await this.dataAccess.getAllH5pForCourse(5);
 
     return resp;
