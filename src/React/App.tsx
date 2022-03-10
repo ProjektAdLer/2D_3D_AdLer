@@ -7,11 +7,11 @@ function App() {
   const [showH5P, setShowH5P] = useState(false);
   return (
     <React.Fragment>
-      <div>
+      <div className="root">
         <section>
           <button onClick={() => setShowH5P(true)}>Show H5P</button>
         </section>
-        <BabylonCanvas/>
+        <BabylonCanvas />
         <H5PModal
           show={showH5P}
           onClose={() => setShowH5P(false)}

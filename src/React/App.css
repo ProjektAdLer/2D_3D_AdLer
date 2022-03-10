@@ -8,12 +8,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-div{
+.root {
   width: 100%;
   height: 100%;
 }
 
-section{
+section {
   display: inline;
   position: fixed;
   top: 0;
@@ -23,7 +23,7 @@ section{
   background-color: #fff;
 }
 
-button{
+button {
   width: 100px;
   margin: 10px;
   z-index: 5;

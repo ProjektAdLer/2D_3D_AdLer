@@ -3,6 +3,8 @@ import CoreFactory from "../../Babylon/Components/Core/API/CoreFactory";
 import ICoreFactory from "../../Babylon/Components/Core/API/ICoreFactory";
 import { H5PForCoursesAPIResponse } from "../../Babylon/Components/Core/Types/H5PTypes";
 
+require("https://h5p.org/sites/all/modules/h5p/library/js/h5p-resizer.js");
+
 const createIframeUrl = (contextId: number, fileName: string) => {
   // In addition to contextId and fileName, in the future, we will also need a package
   // the package number is indicated by the size of the array returned by the REST call
