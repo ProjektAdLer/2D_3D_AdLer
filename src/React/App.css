@@ -63,6 +63,7 @@ code {
 .modal-header,
 .modal-footer {
   padding: 10px;
+  height: 60px;
 }
 
 .modal-title {
