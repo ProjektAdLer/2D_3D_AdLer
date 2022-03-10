@@ -15,6 +15,6 @@ export type APIBaseExternalFile = {
   filesize?: number;
   timemodified?: number;
   mimetype?: string;
-  isexternalfile?: number;
+  isexternalfile?: boolean;
   repositorytype?: string;
 };
