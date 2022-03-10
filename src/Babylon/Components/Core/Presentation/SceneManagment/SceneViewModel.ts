@@ -3,9 +3,6 @@ import { Scene } from "@babylonjs/core";
 
 @injectable()
 export default class SceneViewModel {
-  constructor() {
-    // console.log("SceneViewModle created!");
-  }
   private scene: Scene;
 
   get Scene(): Scene {
