@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import CoreFactory from "../../Babylon/Components/Core/API/CoreFactory";
-import ICoreFactory from "../../Babylon/Components/Core/API/ICoreFactory";
-import { H5PForCoursesAPIResponse } from "../../Babylon/Components/Core/Types/H5PTypes";
+import { useEffect, useRef, useState } from "react";
+import CoreFactory from "../../../../../Babylon/Components/Core/API/CoreFactory";
+import ICoreFactory from "../../../../../Babylon/Components/Core/API/ICoreFactory";
+import { H5PForCoursesAPIResponse } from "../../../../../Babylon/Components/Core/Types/H5PTypes";
 
 const createIframeUrl = (contextId: number, fileName: string) => {
   // In addition to contextId and fileName, in the future, we will also need a package
@@ -27,6 +27,7 @@ export default function H5PModal(props: {
   title?: string;
 }) {
   const [h5pData, setH5pData] = useState<H5PForCoursesAPIResponse>();
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
     if (!props.show) {
@@ -67,6 +68,7 @@ export default function H5PModal(props: {
         <div className="modal-body">
           {" "}
           <iframe
+            ref={iframeRef}
             src={createIframeUrl(278, "Metriken Teil 1.h5p")}
             width=":w"
             height="100%"
@@ -74,6 +76,9 @@ export default function H5PModal(props: {
             // class="h5p-player w-100 border-0"
             style={{ height: "400px", width: "100%" }}
             // id="621fa7f7f1cfb621fa7f7dd88914-h5player"
+            onLoad={(e) => {
+              console.log("Iframe loaded");
+            }}
           ></iframe>
         </div>
         <div className="modal-footer">

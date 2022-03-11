@@ -26,7 +26,7 @@ import link_h5p from "../../Assets/3DLink_H5P.glb";
 import link_text from "../../Assets/3DLink_Text.glb";
 import link_video from "../../Assets/3DLink_Video.glb";
 import link_bild from "../../Assets/3DLink_Bild.glb";
-import BabylonCanvas from "../../React/Components/BabylonCanvas";
+import BabylonCanvas from "../../React/Components/ReactCore/Presentation/BabylonCanvas/BabylonCanvas";
 import { debug } from "console";
 import { injectable } from "inversify";
 
