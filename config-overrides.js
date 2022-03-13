@@ -25,6 +25,8 @@ module.exports = {
       "/Prototyping/",
       "/*.test.ts",
       "/SBWExample/",
+      "/Types/",
+      "/DependencyInjection/",
     ];
     config.coverageReporters = ["text-summary", "lcov"];
     config.setupFiles = ["./jest-setup-files.ts"];
