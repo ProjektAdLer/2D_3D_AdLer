@@ -1,7 +1,7 @@
 import IBusinessLogic from "../../Presentation/API/IBusinessLogic";
 import IDataAccess from "./IDataAccess";
 import { inject, injectable } from "inversify";
-import CORE_TYPES from "../../DependencyInjection/types";
+import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import IRoomConfigurator from "../RoomConfigurator/IRoomConfigurator";
 import { ROOMSIZE } from "../RoomConfigurator/RoomConfigurator";
 import IMoodle from "../Moodle/IMoodle";

@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../DependencyInjection/types";
+import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import MoodleData from "../../Entities/MoodleData";
 import { H5PForCoursesAPIResponse } from "../../Types/H5PTypes";
 import IDataAccess from "../API/IDataAccess";

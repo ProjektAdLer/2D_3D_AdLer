@@ -1,7 +1,7 @@
 import ICore from "./ICore";
 import ICoreFactory from "./ICoreFactory";
 import CoreDIContainer from "../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../DependencyInjection/types";
+import CORE_TYPES from "../DependencyInjection/CoreTypes";
 
 // This Factory is needed, because React does not allow us to use the DI container.
 

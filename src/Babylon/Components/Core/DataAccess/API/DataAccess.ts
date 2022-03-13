@@ -1,6 +1,6 @@
 import { injectable, inject } from "inversify";
 import IDataAccess from "../../BusinessLogic/API/IDataAccess";
-import CORE_TYPES from "../../DependencyInjection/types";
+import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import { H5PForCoursesAPIResponse } from "../../Types/H5PTypes";
 import IMoodleDataAccess from "../Moodle/IMoodleDataAccess";
 

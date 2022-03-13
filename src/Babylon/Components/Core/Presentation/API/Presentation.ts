@@ -3,7 +3,7 @@ import IEngineManager from "../EngineManager/IEngineManager";
 import IBusinessLogic from "./IBusinessLogic";
 import IPresentation from "./IPresentation";
 import ScenePresenter from "../SceneManagment/ScenePresenter";
-import CORE_TYPES from "../../DependencyInjection/types";
+import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 
 @injectable()

@@ -21,7 +21,7 @@ import RoomPresenter from "../Presentation/Room/RoomPresenter";
 import MainScene from "../Presentation/SceneManagment/MainScene";
 import ICreateSceneClass from "../Presentation/SceneManagment/ICreateSceneClass";
 
-import CORE_TYPES from "./types";
+import CORE_TYPES from "./CoreTypes";
 import IRoomView from "../Presentation/Room/IRoomView";
 import RoomView from "../Presentation/Room/RoomView";
 import RoomViewModel from "../Presentation/Room/RoomViewModel";

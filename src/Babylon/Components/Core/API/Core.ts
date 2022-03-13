@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import IPresentation from "../Presentation/API/IPresentation";
 import ICore from "./ICore";
 import IBusinessLogic from "../Presentation/API/IBusinessLogic";
-import CORE_TYPES from "../DependencyInjection/types";
+import CORE_TYPES from "../DependencyInjection/CoreTypes";
 import { H5PForCoursesAPIResponse } from "../Types/H5PTypes";
 
 @injectable()

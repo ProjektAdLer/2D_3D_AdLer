@@ -17,5 +17,3 @@ let CORE_TYPES = {
 };
 
 export default CORE_TYPES;
-
-// TODO: Rename to CoreTypes.ts -FK

@@ -1,7 +1,7 @@
 import { injectable, inject } from "inversify";
 import IRoomPresenter from "./IRoomPresenter";
 import Presentation from "../API/Presentation";
-import CORE_TYPES from "../../DependencyInjection/types";
+import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import RoomViewModel from "./RoomViewModel";
 import { ROOMSIZE } from "../../BusinessLogic/RoomConfigurator/RoomConfigurator";
 import IRoomView from "./IRoomView";
