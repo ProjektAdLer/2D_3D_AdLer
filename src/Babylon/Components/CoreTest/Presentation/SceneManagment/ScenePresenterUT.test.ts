@@ -1,7 +1,7 @@
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import EngineManager from "../../../Core/Presentation/EngineManager/EngineManager";
-import ScenePresenter from "../../../Core/Presentation/SceneManagment/ScenePresenter";
+import IScenePresenter from "../../../Core/Presentation/SceneManagment/IScenePresenter";
 import SceneView from "../../../Core/Presentation/SceneManagment/SceneView";
 import SceneViewModel from "../../../Core/Presentation/SceneManagment/SceneViewModel";
 import ICreateSceneClass from "../../../Core/Presentation/SceneManagment/ICreateSceneClass";
@@ -19,7 +19,7 @@ const getSceneMock = jest.spyOn(SceneViewModel.prototype, "Scene", "get");
 const setSceneMock = jest.spyOn(SceneViewModel.prototype, "Scene", "set");
 
 describe("ScenePresenter", () => {
-  let scenePresenter: ScenePresenter;
+  let scenePresenter: IScenePresenter;
   let engineManager: EngineManager;
 
   beforeEach(() => {
