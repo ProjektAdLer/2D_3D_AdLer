@@ -25,7 +25,7 @@ describe("ScenePresenter", () => {
   beforeEach(() => {
     engineManager = CoreDIContainer.get(CORE_TYPES.IEngineManager);
     engineManager.createEngine(document.createElement("canvas"));
-    scenePresenter = CoreDIContainer.get(ScenePresenter);
+    scenePresenter = CoreDIContainer.get(CORE_TYPES.IScenePresenter);
   });
 
   afterAll(() => {

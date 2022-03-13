@@ -5,17 +5,18 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import RoomViewModel from "./RoomViewModel";
 import { ROOMSIZE } from "../../BusinessLogic/RoomConfigurator/RoomConfigurator";
 import IRoomView from "./IRoomView";
-import ScenePresenter from "../SceneManagment/ScenePresenter";
+import type IScenePresenter from "../SceneManagment/IScenePresenter";
+
 @injectable()
 export default class RoomPresenter implements IRoomPresenter {
   private presentation: Presentation;
-  private scenePresenter: ScenePresenter;
+  private scenePresenter: IScenePresenter;
   private viewModel: RoomViewModel;
   private view: IRoomView;
 
   constructor(
     @inject(CORE_TYPES.IPresentation) presentation: Presentation,
-    @inject(ScenePresenter) scenePresenter: ScenePresenter,
+    @inject(CORE_TYPES.IScenePresenter) scenePresenter: IScenePresenter,
     @inject(RoomViewModel) viewModel: RoomViewModel,
     @inject(CORE_TYPES.IRoomView) view: IRoomView
   ) {
