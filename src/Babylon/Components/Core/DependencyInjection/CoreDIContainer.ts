@@ -1,4 +1,5 @@
 import { Container } from "inversify";
+import CORE_TYPES from "./CoreTypes";
 import IPresentation from "../Presentation/API/IPresentation";
 import Presentation from "../Presentation/API/Presentation";
 import IBusinessLogic from "../Presentation/API/IBusinessLogic";
@@ -20,8 +21,6 @@ import IRoomPresenter from "../Presentation/Room/IRoomPresenter";
 import RoomPresenter from "../Presentation/Room/RoomPresenter";
 import MainScene from "../Presentation/SceneManagment/MainScene";
 import ICreateSceneClass from "../Presentation/SceneManagment/ICreateSceneClass";
-
-import CORE_TYPES from "./CoreTypes";
 import IRoomView from "../Presentation/Room/IRoomView";
 import RoomView from "../Presentation/Room/RoomView";
 import RoomViewModel from "../Presentation/Room/RoomViewModel";
@@ -33,6 +32,8 @@ import MoodleData from "../Entities/MoodleData";
 
 var CoreDIContainer = new Container();
 
+// API classes
+CoreDIContainer.bind<ICore>(CORE_TYPES.ICore).to(Core).inSingletonScope();
 CoreDIContainer.bind<IPresentation>(CORE_TYPES.IPresentation)
   .to(Presentation)
   .inSingletonScope();
@@ -42,17 +43,27 @@ CoreDIContainer.bind<IBusinessLogic>(CORE_TYPES.IBusinessLogic)
 CoreDIContainer.bind<IDataAccess>(CORE_TYPES.IDataAccess)
   .to(DataAccess)
   .inSingletonScope();
-CoreDIContainer.bind<ICore>(CORE_TYPES.ICore).to(Core).inSingletonScope();
+
+// Engine
 CoreDIContainer.bind<IEngineManager>(CORE_TYPES.IEngineManager)
   .to(EngineManager)
   .inSingletonScope();
+
+// Scene
 CoreDIContainer.bind<ISceneView>(CORE_TYPES.ISceneView)
   .to(SceneView)
   .inSingletonScope();
 CoreDIContainer.bind(SceneViewModel).toSelf().inSingletonScope();
 CoreDIContainer.bind(ScenePresenter).toSelf();
+// bind other CreateSceneClass here for testing puposes -MK
+CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
+  MainScene
+);
+
+// DTO
 CoreDIContainer.bind(DataTransferObject).toSelf();
 
+// Room
 CoreDIContainer.bind<IRoomConfigurator>(CORE_TYPES.IRoomConfigurator)
   .to(RoomConfigurator)
   .inSingletonScope();
@@ -61,17 +72,13 @@ CoreDIContainer.bind<IRoomPresenter>(CORE_TYPES.IRoomPresenter)
   .inSingletonScope();
 CoreDIContainer.bind<IRoomView>(CORE_TYPES.IRoomView).to(RoomView);
 CoreDIContainer.bind(RoomViewModel).toSelf();
+
+// Moodle
 CoreDIContainer.bind<IMoodle>(CORE_TYPES.IMoodle).to(Moodle).inSingletonScope();
 CoreDIContainer.bind<IMoodleDataAccess>(CORE_TYPES.IMoodleDataAccess)
   .to(MoodleDataAccess)
   .inSingletonScope();
-
 // No Singleton here - PG
 CoreDIContainer.bind<MoodleData>(CORE_TYPES.MoodleData).to(MoodleData);
-
-// bind other CreateSceneClass here for testing puposes -MK
-CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
-  MainScene
-);
 
 export default CoreDIContainer;
