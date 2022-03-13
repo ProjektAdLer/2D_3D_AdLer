@@ -3,7 +3,7 @@ import { mock } from "jest-mock-extended";
 import IMoodleDataAccess from "../../../Core/DataAccess/Moodle/IMoodleDataAccess";
 import MoodleDataAccess from "../../../Core/DataAccess/Moodle/MoodleDataAccess";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../Core/DependencyInjection/types";
+import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 
 import axios, { AxiosResponse } from "axios";
 

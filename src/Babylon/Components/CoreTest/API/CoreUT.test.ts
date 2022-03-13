@@ -2,7 +2,7 @@ import Core from "../../Core/API/Core";
 import ICore from "../../Core/API/ICore";
 import BusinessLogic from "../../Core/BusinessLogic/API/BusinessLogic";
 import CoreDIContainer from "../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../Core/DependencyInjection/types";
+import CORE_TYPES from "../../Core/DependencyInjection/CoreTypes";
 import Presentation from "../../Core/Presentation/API/Presentation";
 
 const setupBabylonMock = jest.spyOn(Presentation.prototype, "setupBabylon");

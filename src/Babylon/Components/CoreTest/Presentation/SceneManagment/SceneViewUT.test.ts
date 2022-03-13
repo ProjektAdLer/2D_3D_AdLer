@@ -1,6 +1,6 @@
 import { Engine } from "@babylonjs/core";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../Core/DependencyInjection/types";
+import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import SceneView from "../../../Core/Presentation/SceneManagment/SceneView";
 
 jest.mock("@babylonjs/core");

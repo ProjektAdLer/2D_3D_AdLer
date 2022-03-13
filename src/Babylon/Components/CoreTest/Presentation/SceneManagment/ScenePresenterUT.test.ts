@@ -1,5 +1,5 @@
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../Core/DependencyInjection/types";
+import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import EngineManager from "../../../Core/Presentation/EngineManager/EngineManager";
 import ScenePresenter from "../../../Core/Presentation/SceneManagment/ScenePresenter";
 import SceneView from "../../../Core/Presentation/SceneManagment/SceneView";

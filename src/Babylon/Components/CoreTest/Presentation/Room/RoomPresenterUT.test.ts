@@ -1,5 +1,5 @@
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../Core/DependencyInjection/types";
+import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import RoomPresenter from "../../../Core/Presentation/Room/RoomPresenter";
 import RoomView from "../../../Core/Presentation/Room/RoomView";
 import RoomViewModel from "../../../Core/Presentation/Room/RoomViewModel";

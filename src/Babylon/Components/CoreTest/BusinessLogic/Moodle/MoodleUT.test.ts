@@ -4,7 +4,7 @@ import Moodle from "../../../Core/BusinessLogic/Moodle/Moodle";
 import DataAccess from "../../../Core/DataAccess/API/DataAccess";
 import MoodleDataAccess from "../../../Core/DataAccess/Moodle/MoodleDataAccess";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../Core/DependencyInjection/types";
+import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import MoodleData from "../../../Core/Entities/MoodleData";
 import { H5PForCoursesAPIResponse } from "../../../Core/Types/H5PTypes";
 
