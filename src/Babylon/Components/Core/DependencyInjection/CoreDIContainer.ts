@@ -29,6 +29,7 @@ import Moodle from "../BusinessLogic/Moodle/Moodle";
 import MoodleDataAccess from "../DataAccess/Moodle/MoodleDataAccess";
 import IMoodleDataAccess from "../DataAccess/Moodle/IMoodleDataAccess";
 import MoodleData from "../Entities/MoodleData";
+import IScenePresenter from "../Presentation/SceneManagment/IScenePresenter";
 
 var CoreDIContainer = new Container();
 
@@ -54,7 +55,9 @@ CoreDIContainer.bind<ISceneView>(CORE_TYPES.ISceneView)
   .to(SceneView)
   .inSingletonScope();
 CoreDIContainer.bind(SceneViewModel).toSelf().inSingletonScope();
-CoreDIContainer.bind(ScenePresenter).toSelf();
+CoreDIContainer.bind<IScenePresenter>(CORE_TYPES.IScenePresenter).to(
+  ScenePresenter
+);
 // bind other CreateSceneClass here for testing puposes -MK
 CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
   MainScene

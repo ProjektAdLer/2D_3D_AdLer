@@ -6,9 +6,10 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import { Scene } from "@babylonjs/core";
 
 import ICreateSceneClass from "./ICreateSceneClass";
+import IScenePresenter from "./IScenePresenter";
 
 @injectable()
-export default class ScenePresenter {
+export default class ScenePresenter implements IScenePresenter {
   private engineManager: IEngineManager;
   private sceneView: ISceneView;
   private sceneViewModel: SceneViewModel;
