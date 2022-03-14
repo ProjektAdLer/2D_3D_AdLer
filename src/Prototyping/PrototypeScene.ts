@@ -21,13 +21,8 @@ import "@babylonjs/loaders/glTF";
 import ICreateSceneClass from "../Components/Core/Presentation/SceneManagment/ICreateSceneClass";
 
 // digital assets
-import roomModel from "../../Assets/AdLerDesign01.glb";
 import link_h5p from "../../Assets/3DLink_H5P.glb";
-import link_text from "../../Assets/3DLink_Text.glb";
-import link_video from "../../Assets/3DLink_Video.glb";
-import link_bild from "../../Assets/3DLink_Bild.glb";
-import BabylonCanvas from "../../React/Components/ReactCore/Presentation/BabylonCanvas/BabylonCanvas";
-import { debug } from "console";
+
 import { injectable } from "inversify";
 
 @injectable()

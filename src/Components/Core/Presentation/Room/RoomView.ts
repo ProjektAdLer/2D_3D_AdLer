@@ -8,7 +8,7 @@ import {
 import { injectable } from "inversify";
 import IRoomView from "./IRoomView";
 import RoomViewModel from "./RoomViewModel";
-import floorTexture from "../../../../../Assets/wooden_floor.png";
+import floorTexture from "../../../../Assets/wooden_floor.png";
 
 @injectable()
 export default class RoomView implements IRoomView {

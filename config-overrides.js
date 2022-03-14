@@ -13,15 +13,11 @@ module.exports = {
     config.transformIgnorePatterns = [
       "<rootDir>/node_modules/(?!@babylonjs)(.*)",
     ];
-    config.testPathIgnorePatterns = [
-      "<rootDir>/node_modules/",
-      "<rootDir>/src/Babylon/Template/",
-    ];
+    config.testPathIgnorePatterns = ["<rootDir>/node_modules/"];
     config.collectCoverage = true;
     config.coverageProvider = "v8";
     config.coveragePathIgnorePatterns = [
       "/node_modules/",
-      "/Template/",
       "/Prototyping/",
       "/*.test.ts",
       "/SBWExample/",

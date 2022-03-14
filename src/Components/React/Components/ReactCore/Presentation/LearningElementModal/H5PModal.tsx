@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import CoreFactory from "../../../../../Babylon/Components/Core/API/CoreFactory";
-import ICoreFactory from "../../../../../Babylon/Components/Core/API/ICoreFactory";
-import { H5PForCoursesAPIResponse } from "../../../../../Babylon/Components/Core/Types/H5PTypes";
+import ICoreFactory from "../../../../../Core/API/ICoreFactory";
+import { H5PForCoursesAPIResponse } from "../../../../../Core/Types/H5PTypes";
+import CoreFactory from "../../../../../Core/API/CoreFactory";
 
 const createIframeUrl = (contextId: number, fileName: string) => {
   // In addition to contextId and fileName, in the future, we will also need a package
