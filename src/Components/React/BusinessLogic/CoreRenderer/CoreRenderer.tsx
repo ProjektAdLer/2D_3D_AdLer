@@ -1,8 +1,8 @@
 import ICoreRenderer from "./ICoreRenderer";
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "../../App";
 import { injectable } from "inversify";
+import App from "../../Presentation/ReactEntry/App";
 
 @injectable()
 export default class CoreRenderer implements ICoreRenderer {

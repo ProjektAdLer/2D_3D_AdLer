@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import BabylonCanvas from "../BabylonCanvas/BabylonCanvas";
+import H5PModal from "../LearningElementModal/H5PModal";
 import "./App.css";
-import BabylonCanvas from "./Components/ReactCore/Presentation/BabylonCanvas/BabylonCanvas";
-import H5PModal from "./Components/ReactCore/Presentation/LearningElementModal/H5PModal";
 
 function App() {
   const [showH5P, setShowH5P] = useState(false);
