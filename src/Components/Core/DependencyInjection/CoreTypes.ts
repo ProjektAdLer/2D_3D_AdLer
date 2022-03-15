@@ -15,6 +15,9 @@ let CORE_TYPES = {
   IMoodle: Symbol("IMoodle"),
   IMoodleDataAccess: Symbol("IMoodleDataAccess"),
   MoodleData: Symbol("MoodleData"),
+  ILearingElementView: Symbol("ILearingElementView"),
+  ILearingElementPresenter: Symbol("ILearingElementPresenter"),
+  ILearningElementFactory: Symbol("ILearningElementFactory"),
 };
 
 export default CORE_TYPES;

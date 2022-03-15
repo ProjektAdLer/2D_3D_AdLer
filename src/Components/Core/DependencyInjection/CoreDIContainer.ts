@@ -29,8 +29,15 @@ import Moodle from "../BusinessLogic/Moodle/Moodle";
 import MoodleDataAccess from "../DataAccess/Moodle/MoodleDataAccess";
 import IMoodleDataAccess from "../DataAccess/Moodle/IMoodleDataAccess";
 import MoodleData from "../Entities/MoodleData";
+import ILearningElementView from "../Presentation/LearningElement/ILearningElementView";
+import LearningElementView from "../Presentation/LearningElement/LearningElementView";
+import LearningElementViewModel from "../Presentation/LearningElement/LearningElementViewModel";
+import ILearningElementPresenter from "../Presentation/LearningElement/ILearningElementPresenter";
+import LearningElementPresenter from "../Presentation/LearningElement/LearningElementPresenter";
 import IScenePresenter from "../Presentation/SceneManagment/IScenePresenter";
 import reactContainerModule from "../../React/DependencyInjection/ReactDIContainer";
+import ILearningElementFactory from "../Presentation/LearningElement/ILearningElementFactory";
+import LearningElementFactory from "../Presentation/LearningElement/LearningElementFactory";
 
 var CoreDIContainer = new Container();
 
@@ -56,9 +63,9 @@ CoreDIContainer.bind<ISceneView>(CORE_TYPES.ISceneView)
   .to(SceneView)
   .inSingletonScope();
 CoreDIContainer.bind(SceneViewModel).toSelf().inSingletonScope();
-CoreDIContainer.bind<IScenePresenter>(CORE_TYPES.IScenePresenter).to(
-  ScenePresenter
-);
+CoreDIContainer.bind<IScenePresenter>(CORE_TYPES.IScenePresenter)
+  .to(ScenePresenter)
+  .inSingletonScope();
 // bind other CreateSceneClass here for testing puposes -MK
 CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
   MainScene
@@ -84,6 +91,20 @@ CoreDIContainer.bind<IMoodleDataAccess>(CORE_TYPES.IMoodleDataAccess)
   .inSingletonScope();
 // No Singleton here - PG
 CoreDIContainer.bind<MoodleData>(CORE_TYPES.MoodleData).to(MoodleData);
+
+// Learning Element
+CoreDIContainer.bind<ILearningElementFactory>(
+  CORE_TYPES.ILearningElementFactory
+)
+  .to(LearningElementFactory)
+  .inSingletonScope();
+CoreDIContainer.bind<ILearningElementPresenter>(
+  CORE_TYPES.ILearingElementPresenter
+).to(LearningElementPresenter);
+CoreDIContainer.bind<ILearningElementView>(CORE_TYPES.ILearingElementView).to(
+  LearningElementView
+);
+CoreDIContainer.bind(LearningElementViewModel).toSelf();
 
 CoreDIContainer.load(reactContainerModule);
 
