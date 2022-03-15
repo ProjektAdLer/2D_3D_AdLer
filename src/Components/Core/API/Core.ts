@@ -27,7 +27,7 @@ export default class Core implements ICore {
       );
 
       entityManager.setData("Hello from the other side");
-    }, 500);
+    }, 2000);
     return await this.businessLogic.getAllH5Ps(courseId);
   }
 
