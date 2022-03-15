@@ -10,11 +10,13 @@ import IEntityManager from "../Entities/IEntityManager";
 import REACT_TYPES from "./ReactTypes";
 
 let reactContainerModule = new ContainerModule((bind: interfaces.Bind) => {
-  bind<IReactApi>(REACT_TYPES.IReactApi).to(ReactApi);
-  bind<IReactBusinessLogic>(REACT_TYPES.IReactBusinessLogic).to(
-    ReactBusinessLogic
-  );
-  bind<ICoreRenderer>(REACT_TYPES.IReactCoreRenderer).to(CoreRenderer);
+  bind<IReactApi>(REACT_TYPES.IReactApi).to(ReactApi).inSingletonScope();
+  bind<IReactBusinessLogic>(REACT_TYPES.IReactBusinessLogic)
+    .to(ReactBusinessLogic)
+    .inSingletonScope();
+  bind<ICoreRenderer>(REACT_TYPES.IReactCoreRenderer)
+    .to(CoreRenderer)
+    .inSingletonScope();
   bind<IEntityManager>(REACT_TYPES.IEntityManager)
     .to(EntityManager)
     .inSingletonScope();

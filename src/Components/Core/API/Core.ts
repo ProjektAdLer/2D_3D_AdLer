@@ -4,6 +4,9 @@ import ICore from "./ICore";
 import IBusinessLogic from "../Presentation/API/IBusinessLogic";
 import CORE_TYPES from "../DependencyInjection/CoreTypes";
 import { H5PForCoursesAPIResponse } from "../Types/H5PTypes";
+import CoreDIContainer from "../DependencyInjection/CoreDIContainer";
+import IEntityManager from "../../React/Entities/IEntityManager";
+import REACT_TYPES from "../../React/DependencyInjection/ReactTypes";
 
 @injectable()
 export default class Core implements ICore {
@@ -18,6 +21,13 @@ export default class Core implements ICore {
   }
 
   async getAllH5Ps(courseId: number): Promise<H5PForCoursesAPIResponse> {
+    setTimeout(() => {
+      const entityManager = CoreDIContainer.get<IEntityManager>(
+        REACT_TYPES.IEntityManager
+      );
+
+      entityManager.setData("Hello from the other side");
+    }, 500);
     return await this.businessLogic.getAllH5Ps(courseId);
   }
 
