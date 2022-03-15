@@ -5,7 +5,7 @@ import IEntityManager from "./IEntityManager";
 export default class EntityManager implements IEntityManager {
   private subscriber: (data: string) => void;
   setData(data: string): void {
-    this.subscriber("funktioner 2 :))");
+    this.subscriber(data);
   }
   setTestSubscription(fn: (data: string) => void): void {
     this.subscriber = fn;

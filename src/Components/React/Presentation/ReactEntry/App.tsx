@@ -13,8 +13,8 @@ function App() {
     REACT_TYPES.IEntityManager
   );
 
-  const entityTets = () => {
-    setButtonTest("Klappt! :)");
+  const entityTets = (data: string) => {
+    setButtonTest(data);
   };
 
   entityManager.setTestSubscription(entityTets);
