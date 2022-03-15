@@ -11,31 +11,38 @@ body {
 .root {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .button-container {
-  display: inline;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 1rem;
   position: fixed;
   top: 0;
   left: 0;
+  margin: 20px;
   width: 120px;
-  height: 100vh;
+  max-height: 100vh;
   background-color: #fff;
+  border-radius: 0.5rem;
 }
 
 button {
   width: 100px;
+  height: 25px;
   margin: 10px;
   z-index: 5;
-  position: fixed;
-  left: 0;
-  top: 0;
+
+}
+
+button:hover{
+  cursor: pointer;
 }
 
 canvas {
-  width: calc(100% - 100px);
   height: 100%;
-  margin-left: 100px;
 }
 
 code {
@@ -60,8 +67,14 @@ code {
   background-color: #fff;
 }
 
+.modal-header{
+  font-size: 2rem;
+}
+
 .modal-header,
 .modal-footer {
+  display: flex;
+  align-items: center;
   padding: 10px;
   height: 60px;
 }
