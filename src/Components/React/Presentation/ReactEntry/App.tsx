@@ -8,9 +8,9 @@ function App() {
   return (
     <React.Fragment>
       <div className="root">
-        <section>
+        <div className="button-container">
           <button onClick={() => setShowH5P(true)}>Show H5P</button>
-        </section>
+        </div>
         <BabylonCanvas />
         <H5PModal
           show={showH5P}

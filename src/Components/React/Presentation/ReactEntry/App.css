@@ -13,7 +13,7 @@ body {
   height: 100%;
 }
 
-section {
+.button-container {
   display: inline;
   position: fixed;
   top: 0;
