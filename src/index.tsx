@@ -1,7 +1,7 @@
 import "reflect-metadata";
-import ReactDIContainer from "./Components/React/DependencyInjection/ReactDIContainer";
 import IReactApi from "./Components/React/API/IReactAPI";
 import REACT_TYPES from "./Components/React/DependencyInjection/ReactTypes";
+import CoreDIContainer from "./Components/Core/DependencyInjection/CoreDIContainer";
 
-const ReactCore = ReactDIContainer.get<IReactApi>(REACT_TYPES.IReactApi);
+const ReactCore = CoreDIContainer.get<IReactApi>(REACT_TYPES.IReactApi);
 ReactCore.initReact();

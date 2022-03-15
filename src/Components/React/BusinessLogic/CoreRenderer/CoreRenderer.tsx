@@ -4,16 +4,16 @@ import ReactDOM from "react-dom";
 import { injectable } from "inversify";
 import App from "../../Presentation/ReactEntry/App";
 import { Provider } from "inversify-react";
-import ReactDIContainer from "../../DependencyInjection/ReactDIContainer";
 import REACT_TYPES from "../../DependencyInjection/ReactTypes";
 import IEntityManager from "../../Entities/IEntityManager";
+import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 
 @injectable()
 export default class CoreRenderer implements ICoreRenderer {
   setupReact(): void {
     ReactDOM.render(
       <React.StrictMode>
-        <Provider container={ReactDIContainer}>
+        <Provider container={CoreDIContainer}>
           <App />
         </Provider>
       </React.StrictMode>,
@@ -21,7 +21,7 @@ export default class CoreRenderer implements ICoreRenderer {
     );
 
     setTimeout(() => {
-      const entityManager = ReactDIContainer.get<IEntityManager>(
+      const entityManager = CoreDIContainer.get<IEntityManager>(
         REACT_TYPES.IEntityManager
       );
 

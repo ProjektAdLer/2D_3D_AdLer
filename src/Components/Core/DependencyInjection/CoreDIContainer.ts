@@ -30,6 +30,7 @@ import MoodleDataAccess from "../DataAccess/Moodle/MoodleDataAccess";
 import IMoodleDataAccess from "../DataAccess/Moodle/IMoodleDataAccess";
 import MoodleData from "../Entities/MoodleData";
 import IScenePresenter from "../Presentation/SceneManagment/IScenePresenter";
+import reactContainerModule from "../../React/DependencyInjection/ReactDIContainer";
 
 var CoreDIContainer = new Container();
 
@@ -83,5 +84,7 @@ CoreDIContainer.bind<IMoodleDataAccess>(CORE_TYPES.IMoodleDataAccess)
   .inSingletonScope();
 // No Singleton here - PG
 CoreDIContainer.bind<MoodleData>(CORE_TYPES.MoodleData).to(MoodleData);
+
+CoreDIContainer.load(reactContainerModule);
 
 export default CoreDIContainer;
