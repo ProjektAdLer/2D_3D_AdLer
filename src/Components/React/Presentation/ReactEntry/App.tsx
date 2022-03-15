@@ -8,15 +8,23 @@ import IEntityManager from "../../Entities/IEntityManager";
 
 function App() {
   const [showH5P, setShowH5P] = useState(false);
+  const [buttonTest, setButtonTest] = useState("Button");
   const entityManager: IEntityManager = useInjection(
     REACT_TYPES.IEntityManager
   );
+
+  const entityTets = () => {
+    setButtonTest("Klappt! :)");
+  };
+
+  entityManager.setTestSubscription(entityTets);
+
   return (
     <React.Fragment>
       <div className="root">
         <div className="button-container">
           <button className="container-button" onClick={() => setShowH5P(true)}>
-            {entityManager.getData()}
+            {buttonTest}
           </button>
         </div>
         <BabylonCanvas />

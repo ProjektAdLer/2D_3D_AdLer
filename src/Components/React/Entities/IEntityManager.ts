@@ -1,3 +1,4 @@
 export default interface IEntityManager {
-  getData(): string;
+  setData(data: string): void;
+  setTestSubscription(fn: (data: string) => void): void;
 }
