@@ -2,22 +2,19 @@ import React, { useState } from "react";
 import BabylonCanvas from "../BabylonCanvas/BabylonCanvas";
 import H5PModal from "../LearningElementModal/H5PModal";
 import "./App.css";
-import { resolve, useInjection } from "inversify-react";
+import { useInjection } from "inversify-react";
 import REACT_TYPES from "../../DependencyInjection/ReactTypes";
 import IEntityManager from "../../Entities/IEntityManager";
 
 function App() {
   const [showH5P, setShowH5P] = useState(false);
   const [buttonTest, setButtonTest] = useState("Button");
+
   const entityManager: IEntityManager = useInjection(
     REACT_TYPES.IEntityManager
   );
 
-  const entityTets = (data: string) => {
-    setButtonTest(data);
-  };
-
-  entityManager.setTestSubscription(entityTets);
+  entityManager.setTestSubscription(setButtonTest);
 
   return (
     <React.Fragment>
