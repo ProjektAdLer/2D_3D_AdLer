@@ -7,9 +7,9 @@ import IReactApi from "./IReactAPI";
 export default class ReactApi implements IReactApi {
   constructor(
     @inject(REACT_TYPES.IReactBusinessLogic)
-    private buisinessLogic: IReactBusinessLogic
+    private businessLogic: IReactBusinessLogic
   ) {}
   initReact() {
-    this.buisinessLogic.setupReact();
+    this.businessLogic.setupReact();
   }
 }
