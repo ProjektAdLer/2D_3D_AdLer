@@ -29,12 +29,17 @@ body {
   border-radius: 0.5rem;
 }
 
-button {
+.container-button {
   width: 100px;
   height: 25px;
   margin: 10px;
   z-index: 5;
+}
 
+.button-close{
+  margin: 10px;
+  padding: 10px;
+  z-index: 5;
 }
 
 button:hover{
@@ -74,6 +79,7 @@ code {
 .modal-header,
 .modal-footer {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 10px;
   height: 60px;

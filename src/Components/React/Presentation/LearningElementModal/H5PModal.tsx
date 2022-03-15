@@ -64,6 +64,9 @@ export default function H5PModal(props: {
       <div className="modal-content">
         <div className="modal-header">
           {props.title || <h3>H5P Aufgabe</h3>}
+          <button onClick={props.onClose} className="button-close">
+            X
+          </button>
         </div>
         <div className="modal-body">
           {" "}
@@ -82,9 +85,6 @@ export default function H5PModal(props: {
           ></iframe>
         </div>
         <div className="modal-footer">
-          <button onClick={props.onClose} className="button">
-            close
-          </button>
           <p>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
