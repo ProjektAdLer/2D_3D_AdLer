@@ -38,6 +38,9 @@ import IScenePresenter from "../Presentation/SceneManagment/IScenePresenter";
 import reactContainerModule from "../../React/DependencyInjection/ReactDIContainer";
 import ILearningElementFactory from "../Presentation/LearningElement/ILearningElementFactory";
 import LearningElementFactory from "../Presentation/LearningElement/LearningElementFactory";
+import IEntityManager from "../BusinessLogic/EntityManager/IEntityManager";
+import REACT_TYPES from "../../React/DependencyInjection/ReactTypes";
+import EntityManager from "../BusinessLogic/EntityManager/EntityManager";
 
 var CoreDIContainer = new Container();
 
@@ -105,6 +108,11 @@ CoreDIContainer.bind<ILearningElementView>(CORE_TYPES.ILearingElementView).to(
   LearningElementView
 );
 CoreDIContainer.bind(LearningElementViewModel).toSelf();
+
+// Entity Manager
+CoreDIContainer.bind<IEntityManager>(REACT_TYPES.IEntityManager)
+  .to(EntityManager)
+  .inSingletonScope();
 
 CoreDIContainer.load(reactContainerModule);
 

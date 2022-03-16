@@ -1,15 +1,23 @@
-import { useInjection } from "inversify-react";
-import { useState } from "react";
+import { useInjection, useContainer } from "inversify-react";
+import { useState, useEffect } from "react";
 import REACT_TYPES from "../DependencyInjection/ReactTypes";
-import IEntityManager from "../Entities/IEntityManager";
-export default function (initialString: string) {
-  const [data, setData] = useState(initialString);
+import IEntityManager from "../../Core/BusinessLogic/EntityManager/IEntityManager";
 
-  const entityManager: IEntityManager = useInjection(
-    REACT_TYPES.IEntityManager
-  );
+export default function (): [boolean, (input: boolean) => void, () => void] {
+  const [data, setData] = useState(false);
+  let entityManager: IEntityManager = useInjection(REACT_TYPES.IEntityManager);
+  useEffect(() => {
+    entityManager.subscribeH5P(setData);
+    setData(entityManager.H5PData);
+  }, []);
 
-  entityManager.setTestSubscription(setData);
-
-  return [data, setData];
+  return [
+    data,
+    (input: boolean) => {
+      entityManager.setShowH5P(input);
+    },
+    () => {
+      entityManager.unsubscribeH5P(setData);
+    },
+  ];
 }

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import ICoreFactory from "../../../Core/API/ICoreFactory";
 import { H5PForCoursesAPIResponse } from "../../../Core/Types/H5PTypes";
 import CoreFactory from "../../../Core/API/CoreFactory";
+import useEntityManager from "../../CustomHooks/useEntityManager";
 
 const createIframeUrl = (contextId: number, fileName: string) => {
   // In addition to contextId and fileName, in the future, we will also need a package
@@ -38,14 +39,15 @@ export default function H5PModal(props: {
     const engineCore = coreFactory.createCore();
 
     const fetchH5ps = async () => {
-      //await engineCore.setupMoodle();
       const h5p = await engineCore.getAllH5Ps(5);
       setH5pData(h5p);
-
-      console.log(h5p);
     };
 
     fetchH5ps();
+
+    return () => {
+      console.log("H5P Unmountsed");
+    };
   }, [props.show]);
 
   if (!props.show) {

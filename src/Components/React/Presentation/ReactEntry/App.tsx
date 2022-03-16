@@ -5,8 +5,7 @@ import "./App.css";
 import useEntityManager from "../../CustomHooks/useEntityManager";
 
 function App() {
-  const [showH5P, setShowH5P] = useState(false);
-  const [buttonTest] = useEntityManager("Das Wasserfallmodell");
+  const [showH5P, setShowH5P] = useEntityManager();
 
   return (
     <React.Fragment>
@@ -22,7 +21,7 @@ function App() {
           onClose={() => setShowH5P(false)}
           h5pId={278}
           h5pFileName="Metriken Teil 1.h5p"
-          title={buttonTest as string}
+          title={"Das Wasserfallmodell"}
         />
       </div>
     </React.Fragment>
