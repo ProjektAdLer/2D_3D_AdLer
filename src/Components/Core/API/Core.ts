@@ -32,17 +32,5 @@ export default class Core implements ICore {
 
   async setupBabylon(canvas: HTMLCanvasElement): Promise<void> {
     await this.presentation.setupBabylon(canvas);
-
-    let leFactory = CoreDIContainer.get<ILearningElementFactory>(
-      CORE_TYPES.ILearningElementFactory
-    );
-    let le = await leFactory.createLearningElementAsync("h5p");
-    le.registerAction(ActionManager.OnPickTrigger, () => {
-      const entityManager = CoreDIContainer.get<IEntityManager>(
-        REACT_TYPES.IEntityManager
-      );
-
-      entityManager.setShowH5P(true);
-    });
   }
 }
