@@ -38,7 +38,7 @@ export default function H5PModal(props: {
     const engineCore = coreFactory.createCore();
 
     const fetchH5ps = async () => {
-      await engineCore.setupMoodle();
+      //await engineCore.setupMoodle();
       const h5p = await engineCore.getAllH5Ps(5);
       setH5pData(h5p);
 

@@ -34,6 +34,6 @@ export default class BusinessLogic implements IBusinessLogic {
   }
 
   async setupMoodle(): Promise<void> {
-    await this.moodleBS.setupMoodle();
+    return await this.moodleBS.setupMoodle();
   }
 }

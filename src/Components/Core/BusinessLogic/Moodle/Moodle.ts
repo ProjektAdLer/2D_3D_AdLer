@@ -29,6 +29,7 @@ export default class Moodle implements IMoodle {
   async getAllH5pForCourse(
     courseId: number
   ): Promise<H5PForCoursesAPIResponse> {
+    await this.setupMoodle();
     if (!this.moodleData.token)
       throw new Error("No Moodle Token Present. Please call setupMoodle()");
     const resp = await this.dataAccess.getAllH5pForCourse(5);
