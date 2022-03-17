@@ -6,17 +6,21 @@ import ILearningElementPresenter from "./ILearningElementPresenter";
 import { LearningElementTypes } from "./Types/LearningElementTypes";
 
 import link_h5p from "../../../../Assets/3DLink_H5P_fixed.glb";
+import { Vector3 } from "@babylonjs/core";
 
 @injectable()
 export default class LearningElementFactory implements ILearningElementFactory {
   async createLearningElementAsync(
-    type: LearningElementTypes
+    type: LearningElementTypes,
+    position: Vector3,
+    rotation: number
   ): Promise<ILearningElementPresenter> {
     const learningElementPresenter: ILearningElementPresenter =
       CoreDIContainer.get(CORE_TYPES.ILearingElementPresenter);
 
     // TODO: make this generic for all types -MK
     await learningElementPresenter.loadMeshAsync(link_h5p);
+    learningElementPresenter.positionsMesh(position, rotation);
 
     return learningElementPresenter;
   }

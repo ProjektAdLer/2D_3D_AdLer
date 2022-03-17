@@ -4,6 +4,8 @@ import {
   ExecuteCodeAction,
   Mesh,
   SceneLoader,
+  Tools,
+  Vector3,
 } from "@babylonjs/core";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
@@ -34,6 +36,10 @@ export default class LearningElementPresenter
 
     this.scenePresenter = scenePresenter;
     this.roomPresenter = roomPresenter;
+  }
+  positionsMesh(position: Vector3, rotation: number): void {
+    this.viewModel.Meshes[0].position = position;
+    this.viewModel.Meshes[0].rotate(Vector3.Up(), Tools.ToRadians(rotation));
   }
 
   async loadMeshAsync(url: string, meshName?: string): Promise<void> {
