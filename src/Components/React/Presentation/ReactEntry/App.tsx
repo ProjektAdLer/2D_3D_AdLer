@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BabylonCanvas from "../BabylonCanvas/BabylonCanvas";
 import H5PModal from "../LearningElementModal/H5PModal";
 import "./App.css";
-import useH5PFlag from "../../CustomHooks/useH5PFlag";
+import { useH5PFlag } from "../../CustomHooks/EntityManagerHooks";
 
 function App() {
   const [showH5P, setShowH5P] = useH5PFlag();

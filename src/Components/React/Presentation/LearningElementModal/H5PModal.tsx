@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import ICoreFactory from "../../../Core/API/ICoreFactory";
 import { H5PForCoursesAPIResponse } from "../../../Core/Types/H5PTypes";
 import CoreFactory from "../../../Core/API/CoreFactory";
+import { useH5PData } from "../../CustomHooks/EntityManagerHooks";
 
 const createIframeUrl = (contextId: number, fileName: string) => {
   // In addition to contextId and fileName, in the future, we will also need a package
@@ -28,6 +29,8 @@ export default function H5PModal(props: {
 }) {
   const [h5pData, setH5pData] = useState<H5PForCoursesAPIResponse>();
   const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  const [h5pTestData, setH5PTestData] = useH5PData();
 
   useEffect(() => {
     if (!props.show) {
@@ -87,10 +90,11 @@ export default function H5PModal(props: {
         </div>
         <div className="modal-footer">
           <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            {"Ich bin das H5P mit derm Index " + h5pTestData}
+            {/* Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum.
+            et ea rebum. */}
           </p>
         </div>
       </div>

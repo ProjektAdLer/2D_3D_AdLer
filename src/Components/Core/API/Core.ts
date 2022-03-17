@@ -53,9 +53,11 @@ export default class Core implements ICore {
         lePositions[1][i]
       );
       le.registerAction(ActionManager.OnPickTrigger, () => {
-        CoreDIContainer.get<IEntityManager>(
+        const entityManager = CoreDIContainer.get<IEntityManager>(
           REACT_TYPES.IEntityManager
-        ).setShowH5P(true);
+        );
+        entityManager.setH5PData(i + 1);
+        entityManager.setShowH5P(true);
       });
     }
   }
