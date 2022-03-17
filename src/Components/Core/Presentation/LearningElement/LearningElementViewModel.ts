@@ -3,14 +3,14 @@ import { injectable } from "inversify";
 
 @injectable()
 export default class LearningElementViewModel {
-  private mesh: Mesh[];
+  private meshes: Mesh[];
 
   get Meshes(): Mesh[] {
-    return this.mesh;
+    if (this.meshes === undefined) throw new Error("mesh undefined!");
+    return this.meshes;
   }
 
   set Meshes(newMeshes: Mesh[]) {
-    if (newMeshes === undefined) throw new Error("newMesh undefined!");
-    this.mesh = newMeshes;
+    this.meshes = newMeshes;
   }
 }
