@@ -41,6 +41,8 @@ import LearningElementFactory from "../Presentation/LearningElement/LearningElem
 import IEntityManager from "../BusinessLogic/EntityManager/IEntityManager";
 import REACT_TYPES from "../../React/DependencyInjection/ReactTypes";
 import EntityManager from "../BusinessLogic/EntityManager/EntityManager";
+import IRoomFactory from "../Presentation/Room/IRoomFactory";
+import RoomFactory from "../Presentation/Room/RoomFactory";
 
 var CoreDIContainer = new Container();
 
@@ -78,6 +80,9 @@ CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
 CoreDIContainer.bind(DataTransferObject).toSelf();
 
 // Room
+CoreDIContainer.bind<IRoomFactory>(CORE_TYPES.IRoomFactory)
+  .to(RoomFactory)
+  .inSingletonScope();
 CoreDIContainer.bind<IRoomConfigurator>(CORE_TYPES.IRoomConfigurator)
   .to(RoomConfigurator)
   .inSingletonScope();
