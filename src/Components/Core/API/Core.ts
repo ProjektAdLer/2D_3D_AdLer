@@ -9,6 +9,7 @@ import IEntityManager from "../BusinessLogic/EntityManager/IEntityManager";
 import REACT_TYPES from "../../React/DependencyInjection/ReactTypes";
 import ILearningElementFactory from "../Presentation/LearningElement/ILearningElementFactory";
 import { ActionManager } from "@babylonjs/core";
+import IRoomFactory from "../Presentation/Room/IRoomFactory";
 
 @injectable()
 export default class Core implements ICore {
@@ -32,5 +33,30 @@ export default class Core implements ICore {
 
   async setupBabylon(canvas: HTMLCanvasElement): Promise<void> {
     await this.presentation.setupBabylon(canvas);
+
+    // room setup
+    let roomFactory = CoreDIContainer.get<IRoomFactory>(
+      CORE_TYPES.IRoomFactory
+    );
+    let leFactory = CoreDIContainer.get<ILearningElementFactory>(
+      CORE_TYPES.ILearningElementFactory
+    );
+
+    let roomPresenter = roomFactory.createRoom();
+
+    let elemCount = 10;
+    let lePositions = roomPresenter.getLearningElementPositions(elemCount);
+    for (let i = 0; i < elemCount; i++) {
+      let le = await leFactory.createLearningElementAsync(
+        "h5p",
+        lePositions[0][i],
+        lePositions[1][i]
+      );
+      le.registerAction(ActionManager.OnPickTrigger, () => {
+        CoreDIContainer.get<IEntityManager>(
+          REACT_TYPES.IEntityManager
+        ).setShowH5P(true);
+      });
+    }
   }
 }
