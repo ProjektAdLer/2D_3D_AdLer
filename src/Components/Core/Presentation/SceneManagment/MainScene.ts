@@ -20,12 +20,13 @@ export default class MainScene implements ICreateSceneClass {
   ): Promise<Scene> => {
     const scene = new Scene(engine);
 
-    var camera = new FreeCamera("camera1", new Vector3(20, 20, 20), scene);
+    var camera = new FreeCamera("camera1", new Vector3(10, 10, 10), scene);
     camera.setTarget(new Vector3(0, 0, 0));
     camera.fov = 0.8;
     camera.attachControl(canvas, true);
 
-    new HemisphericLight("light", new Vector3(0, 1, 0), scene);
+    let hemi = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
+    hemi.intensity = 0.7;
 
     new GroundMesh("Ground", scene);
 

@@ -9,10 +9,10 @@ export default class RoomViewModel {
   private roomWidth: number = 10;
   private roomLength: number = 10;
   private baseHeight: number = 0.5;
-  private roomHeight: number = 2.5;
+  private roomHeight: number = 1;
   private doorWidth: number = 1.5;
   private doorHeight: number = 2.28;
-  private wallThickness: number = 1;
+  private wallThickness: number = 0.3;
 
   get RoomSize(): ROOMSIZE {
     if (!this.roomSize) throw new Error("roomSize not found!");
