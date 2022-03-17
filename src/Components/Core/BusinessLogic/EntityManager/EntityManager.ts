@@ -1,3 +1,4 @@
+import { H5PData } from "./../../Types/H5PTypes";
 import { injectable } from "inversify";
 import IEntityManager from "./IEntityManager";
 
@@ -7,7 +8,11 @@ export default class EntityManager implements IEntityManager {
 
   private subscriberList: Array<(data: boolean) => void> = [];
   private showH5P: boolean = false;
-  get H5PData(): boolean {
+  private h5pData: number;
+  get H5PData(): number {
+    return this.h5pData;
+  }
+  get ShowH5PFlar(): boolean {
     return this.showH5P;
   }
   setShowH5P(flag: boolean, id?: string): void {
@@ -16,10 +21,10 @@ export default class EntityManager implements IEntityManager {
       fn(this.showH5P);
     });
   }
-  subscribeH5P(fn: (data: boolean) => void): void {
+  subscribeH5PFlag(fn: (data: boolean) => void): void {
     this.subscriberList.push(fn);
   }
-  unsubscribeH5P(fn: (data: boolean) => void): void {
+  unsubscribeH5PFlag(fn: (data: boolean) => void): void {
     this.subscriberList = this.subscriberList.filter((subscriber) => {
       return subscriber !== fn;
     });
