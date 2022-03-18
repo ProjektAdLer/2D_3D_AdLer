@@ -35,8 +35,8 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 - [ ] Alle Tests müssen bestanden sein
 - [ ] Technische Dokumentation innerhalb der Realisierung wurde, falls nötig, erstellt (Quellcode)
 - [ ] Benutzerdokumentation wurde, falls nötig, angelegt (Wiki)
-- [ ] Dokumentation des Vorgehens wurde angelegt (Zenhub Kommentar)
-- [ ] UML Klassendiagramme und Komponentendiagramme wurden erstellt bzw. aktualisiert
+- [ ] Dokumentation des Vorgehens wurde, falls nötig, angelegt (Zenhub Kommentar)
+- [ ] UML Aktivitätsdiagramm wurde erstellt bzw. aktualisiert falls nötig
 - [ ] Changelog des jeweiligen Release wurde aktualisiert (Wiki)
 - [ ] Es gibt keine bekannten Bugs
 - [ ] Die Realisierung der User Story wurde erfolgreich durch den Product Owner abgenommen
