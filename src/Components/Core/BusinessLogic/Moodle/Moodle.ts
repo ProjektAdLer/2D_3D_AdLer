@@ -1,9 +1,11 @@
 import { inject, injectable } from "inversify";
+import REACT_TYPES from "../../../React/DependencyInjection/ReactTypes";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import MoodleData from "../../Entities/MoodleData";
 import { H5PForCoursesAPIResponse } from "../../Types/H5PTypes";
 import IDataAccess from "../API/IDataAccess";
+import IEntityManager from "../EntityManager/IEntityManager";
 import IMoodle from "./IMoodle";
 const axios = require("axios").default;
 
@@ -12,7 +14,8 @@ export default class Moodle implements IMoodle {
   public moodleData: MoodleData;
 
   constructor(
-    @inject(CORE_TYPES.IDataAccess) private dataAccess: IDataAccess
+    @inject(CORE_TYPES.IDataAccess) private dataAccess: IDataAccess,
+    @inject(REACT_TYPES.IEntityManager) private entityManager: IEntityManager
   ) {}
 
   async setupMoodle(): Promise<void> {
@@ -22,6 +25,14 @@ export default class Moodle implements IMoodle {
     );
 
     this.moodleData = CoreDIContainer.get<MoodleData>(CORE_TYPES.MoodleData);
+
+    const callback = (data: boolean) => {
+      console.log("asdasdasddaasdasd");
+    };
+
+    this.entityManager.test.getData().value1.subscribe(callback);
+
+    this.entityManager.test.getData().value1.setData(true);
 
     this.moodleData.token = userToken;
   }
