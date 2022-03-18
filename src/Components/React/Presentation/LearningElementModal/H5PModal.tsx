@@ -67,7 +67,7 @@ export default function H5PModal(props: {
     <div className="modal">
       <div className="modal-content">
         <div className="modal-header">
-          {props.title || <h3>H5P Aufgabe</h3>}
+          {h5pData?.h5pactivities[h5pTestData % 2].name || <h3>H5P Aufgabe</h3>}
           <button onClick={props.onClose} className="button-close">
             X
           </button>
@@ -76,7 +76,10 @@ export default function H5PModal(props: {
           {" "}
           <iframe
             ref={iframeRef}
-            src={createIframeUrl(278, "Metriken Teil 1.h5p")}
+            src={createIframeUrl(
+              h5pData?.h5pactivities[h5pTestData % 2].context!,
+              h5pData?.h5pactivities[h5pTestData % 2].package[0].filename!
+            )}
             width=":w"
             height="100%"
             // allowfullscreen="allowfullscreen"
