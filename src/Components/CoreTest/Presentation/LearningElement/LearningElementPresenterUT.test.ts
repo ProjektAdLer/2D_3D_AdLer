@@ -1,6 +1,23 @@
-export {};
+import ILearningElementPresenter from "../../../Core/Presentation/LearningElement/ILearningElementPresenter";
+import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
+
+jest.mock("@babylonjs/core");
 
 describe("LearningElementPresenter", () => {
-  test.todo("test loadMeshAsync");
+  let learningElementPresenter: ILearningElementPresenter;
+
+  beforeEach(() => {
+    learningElementPresenter = CoreDIContainer.get<ILearningElementPresenter>(
+      CORE_TYPES.ILearingElementPresenter
+    );
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
+  test.todo("loadMeshAsync");
+
   test.todo("test registerAction");
 });
