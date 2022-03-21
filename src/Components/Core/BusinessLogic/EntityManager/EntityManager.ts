@@ -1,11 +1,10 @@
 import { injectable } from "inversify";
-import TestEntity from "../../../../../Template/TestEntity";
 import IEntityManager from "./IEntityManager";
 import ObservableClass from "./ObservableClass";
 
 @injectable()
 export default class EntityManager implements IEntityManager {
-  test = new ObservableClass<TestEntity>(TestEntity);
+  // test = new ObservableClass<TestEntity>(TestEntity);
   //private subscriber: (data: boolean) => void;
 
   private subscriberList: Array<(data: boolean) => void> = [];
