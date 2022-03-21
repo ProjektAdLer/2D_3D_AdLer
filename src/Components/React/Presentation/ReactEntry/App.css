@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -33,13 +37,13 @@ body {
   z-index: 5;
 }
 
-.button-close{
+.button-close {
   margin: 10px;
   padding: 10px;
   z-index: 5;
 }
 
-button:hover{
+button:hover {
   cursor: pointer;
 }
 
@@ -70,7 +74,7 @@ code {
   background-color: #fff;
 }
 
-.modal-header{
+.modal-header {
   font-size: 2rem;
 }
 
@@ -95,7 +99,7 @@ code {
 
 /*Styles für die Anzeige des Inspectors*/
 
-#inspector-host{
+#inspector-host {
   position: fixed !important;
   top: 50vh;
   left: 0px;
@@ -103,7 +107,7 @@ code {
   height: 30vh;
 }
 
-#scene-explorer-host{
+#scene-explorer-host {
   position: fixed !important;
   top: 10vh;
   width: 20vw !important;
