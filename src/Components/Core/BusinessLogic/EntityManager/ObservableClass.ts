@@ -8,6 +8,8 @@ export default class ObservableClass<T>
   constructor(type: { new (): T }) {
     super();
     this.data = new type();
+
+    // This is for getting notified, when one of the members changes - PG
     for (const [key, value] of Object.entries(this.data)) {
       if (value instanceof ObservableBaseClass)
         value.subscribe(() => this.notify(this.data));
