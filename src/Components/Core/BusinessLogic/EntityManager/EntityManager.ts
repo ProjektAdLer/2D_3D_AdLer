@@ -1,6 +1,5 @@
 import { injectable } from "inversify";
 import IEntityManager from "./IEntityManager";
-import ObservableClass from "./ObservableClass";
 
 @injectable()
 export default class EntityManager implements IEntityManager {
