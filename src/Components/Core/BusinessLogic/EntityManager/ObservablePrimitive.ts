@@ -6,6 +6,7 @@ export default class ObservablePrimitive<T>
   implements IObservablePrimitive<T>
 {
   setValue(value: T): void {
-    throw new Error("Method not implemented.");
+    this.data = value;
+    this.notify(value);
   }
 }
