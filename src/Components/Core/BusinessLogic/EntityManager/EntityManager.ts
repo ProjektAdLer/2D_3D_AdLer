@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import TestEntity from "../../Entities/TestEntity";
+import TestEntity from "../../../../../Template/TestEntity";
 import IEntityManager from "./IEntityManager";
 import ObservableClass from "./ObservableClass";
 

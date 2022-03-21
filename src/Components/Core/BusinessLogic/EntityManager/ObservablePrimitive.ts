@@ -1,17 +1,13 @@
-import IObservablePrimitive from "./IObservablePrimitive";
-import ObservableBaseClass from "./ObservableBaseClass";
+import Observable from "./Observable";
 
-export default class ObservablePrimitive<T>
-  extends ObservableBaseClass<T>
-  implements IObservablePrimitive<T>
-{
+export default class ObservablePrimitive<T> extends Observable<T> {
   constructor(value: T) {
     super();
-    this.data = value;
+    this.value = value;
   }
 
-  setValue(value: T): void {
-    this.data = value;
+  set Value(value: T) {
+    this.value = value;
     this.notify(value);
   }
 }

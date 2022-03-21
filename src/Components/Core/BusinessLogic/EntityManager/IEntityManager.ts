@@ -1,4 +1,4 @@
-import TestEntity from "../../Entities/TestEntity";
+import TestEntity from "../../../../../Template/TestEntity";
 import ObservableClass from "./ObservableClass";
 
 export default interface IEntityManager {

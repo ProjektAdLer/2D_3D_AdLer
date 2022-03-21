@@ -26,14 +26,6 @@ export default class Moodle implements IMoodle {
 
     this.moodleData = CoreDIContainer.get<MoodleData>(CORE_TYPES.MoodleData);
 
-    const callback = (data: any) => {
-      console.log(data);
-    };
-
-    this.entityManager.test.subscribe(callback);
-
-    this.entityManager.test.getData().value2.setValue("Das ist mein test");
-
     this.moodleData.token = userToken;
   }
 
