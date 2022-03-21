@@ -1,16 +1,16 @@
 import { injectable } from "inversify";
-import Observable from "../../Entities/API/Observable";
 import TestEntity from "../../Entities/TestEntity";
 import IEntityManager from "./IEntityManager";
+import ObservableClass from "./ObservableClass";
 
 @injectable()
 export default class EntityManager implements IEntityManager {
+  test = new ObservableClass<TestEntity>(TestEntity);
   //private subscriber: (data: boolean) => void;
 
   private subscriberList: Array<(data: boolean) => void> = [];
   private showH5P: boolean = false;
 
-  public test = new Observable<TestEntity>(new TestEntity());
   get H5PData(): boolean {
     return this.showH5P;
   }

@@ -1,6 +1,10 @@
-import Observable from "./API/Observable";
+import ObservableClass from "../BusinessLogic/EntityManager/ObservableClass";
+import ObservablePrimitive from "../BusinessLogic/EntityManager/ObservablePrimitive";
 
-export default class TestEntity extends Observable<TestEntity> {
-  public value1: Observable<boolean> = new Observable<boolean>(true);
-  public value2: Observable<string> = new Observable<string>("false");
+export default class TestEntity {
+  public value1: ObservablePrimitive<boolean> =
+    new ObservablePrimitive<boolean>(true);
+  public value2: ObservablePrimitive<string> = new ObservablePrimitive<string>(
+    "false"
+  );
 }

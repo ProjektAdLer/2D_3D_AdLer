@@ -1,4 +1,3 @@
-import Observable from "../../Entities/API/Observable";
 import IObservableClass from "./IObservableClass";
 import ObservableBaseClass from "./ObservableBaseClass";
 
@@ -10,7 +9,8 @@ export default class ObservableClass<T>
     super();
     this.data = new type();
     for (const [key, value] of Object.entries(this.data)) {
-      if (value instanceof Observable) console.log(key);
+      if (value instanceof ObservableBaseClass)
+        value.subscribe(() => this.notify(this.data));
     }
   }
 }

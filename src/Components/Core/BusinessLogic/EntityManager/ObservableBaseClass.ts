@@ -4,7 +4,7 @@ export default abstract class ObservableBaseClass<T>
   implements IObservableBaseClass<T>
 {
   data: T;
-  subscribers: ((data: T) => void)[];
+  subscribers: ((data: T) => void)[] = [];
   public subscribe(fn: (data: T) => void): void {
     this.subscribers.push(fn);
   }
@@ -14,11 +14,13 @@ export default abstract class ObservableBaseClass<T>
       return subscriber !== fn;
     });
   }
+
   notify(data: T): void {
     this.subscribers.forEach((fn) => {
       fn(data);
     });
   }
+
   getData(): T {
     return this.data;
   }
