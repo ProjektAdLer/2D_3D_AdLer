@@ -62,8 +62,8 @@ export default function H5PModal(props: {
   // We use a Factory here, because React does not support DI - PG
 
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <div className="modal flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-blacktrans50">
+      <div className="modal-content bg-white w-1/2">
         <div className="modal-header">
           {props.title || <h3>H5P Aufgabe</h3>}
           <button onClick={props.onClose} className="button-close">
