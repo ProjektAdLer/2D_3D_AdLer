@@ -3,9 +3,6 @@ import IEntityManager from "./IEntityManager";
 
 @injectable()
 export default class EntityManager implements IEntityManager {
-  // test = new ObservableClass<TestEntity>(TestEntity);
-  //private subscriber: (data: boolean) => void;
-
   private subscriberList: Array<(data: boolean) => void> = [];
   private showH5P: boolean = false;
 

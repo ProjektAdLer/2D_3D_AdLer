@@ -2,10 +2,12 @@ import { inject, injectable } from "inversify";
 import REACT_TYPES from "../../../React/DependencyInjection/ReactTypes";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
+import TestEntity from "../../Entities/Entities/TestEntity";
 import MoodleData from "../../Entities/MoodleData";
 import { H5PForCoursesAPIResponse } from "../../Types/H5PTypes";
 import IDataAccess from "../API/IDataAccess";
 import IEntityManager from "../EntityManager/IEntityManager";
+import INewEntityManager from "../EntityManager/NewEntityManager/INewEntityManager";
 import IMoodle from "./IMoodle";
 const axios = require("axios").default;
 
@@ -15,10 +17,16 @@ export default class Moodle implements IMoodle {
 
   constructor(
     @inject(CORE_TYPES.IDataAccess) private dataAccess: IDataAccess,
-    @inject(REACT_TYPES.IEntityManager) private entityManager: IEntityManager
+    @inject(REACT_TYPES.IEntityManager) private entityManager: IEntityManager,
+    @inject(CORE_TYPES.INewEntityManager)
+    private newEntityManager: INewEntityManager
   ) {}
 
   async setupMoodle(): Promise<void> {
+    this.newEntityManager.createEntity<TestEntity>({
+      member1: true,
+      member2: "Das ist ein Test",
+    });
     const userToken = await this.dataAccess.signInUser(
       "Student",
       "wve2rxz7wfm3BPH-ykh"
@@ -35,8 +43,6 @@ export default class Moodle implements IMoodle {
     await this.setupMoodle();
     if (!this.moodleData.token)
       throw new Error("No Moodle Token Present. Please call setupMoodle()");
-    const resp = await this.dataAccess.getAllH5pForCourse(5);
-
-    return resp;
+    return this.dataAccess.getAllH5pForCourse(5);
   }
 }
