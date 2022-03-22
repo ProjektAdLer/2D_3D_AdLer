@@ -9,13 +9,16 @@ function App() {
 
   return (
     <React.Fragment>
-      <div className="root">
-        <div className="button-container">
-          <button className="container-button" onClick={() => setShowH5P(true)}>
+      <div className="root max-w-1/1 max-h-1/1">
+        <div className="button-container fixed top-0 left-0 flex-col gap-4 m-5 w-120px max-h-full bg-white rounded-lg">
+          <button
+            className="container-button w-24 h-6 m-3 hover:cursor-pointer"
+            onClick={() => setShowH5P(true)}
+          >
             "H5P Öffnen"
           </button>
         </div>
-        <BabylonCanvas />
+        <BabylonCanvas className="w-screen h-screen" />
         <H5PModal
           show={showH5P}
           onClose={() => setShowH5P(false)}
