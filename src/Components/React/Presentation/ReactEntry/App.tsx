@@ -3,9 +3,15 @@ import BabylonCanvas from "../BabylonCanvas/BabylonCanvas";
 import H5PModal from "../LearningElementModal/H5PModal";
 import "./App.css";
 import useEntityManager from "../../CustomHooks/useEntityManager";
+import INewEntityManager from "../../../Core/BusinessLogic/EntityManager/NewEntityManager/INewEntityManager";
+import { useInjection } from "inversify-react";
+import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 
 function App() {
   const [showH5P, setShowH5P] = useEntityManager();
+  const entityManager = useInjection<INewEntityManager>(
+    CORE_TYPES.INewEntityManager
+  );
 
   return (
     <React.Fragment>
@@ -13,7 +19,12 @@ function App() {
         <div className="button-container fixed top-0 left-0 flex-col gap-4 m-5 w-120px max-h-full bg-white rounded-lg">
           <button
             className="container-button w-24 h-6 m-3 hover:cursor-pointer"
-            onClick={() => setShowH5P(true)}
+            onClick={() => {
+              setShowH5P(true);
+
+              entityManager.getRootEntity().Value.memberx.Value =
+                "Test aus dem Knopf heraus";
+            }}
           >
             "H5P Öffnen"
           </button>

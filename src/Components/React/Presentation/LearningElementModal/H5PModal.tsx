@@ -2,7 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import ICoreFactory from "../../../Core/API/ICoreFactory";
 import { H5PForCoursesAPIResponse } from "../../../Core/Types/H5PTypes";
 import CoreFactory from "../../../Core/API/CoreFactory";
-import useEntityManager from "../../CustomHooks/useEntityManager";
+import useEntity from "../../CustomHooks/useEntity";
+import RootEntity from "../../../Core/Entities/Entities/RootEntity";
+import { useInjection } from "inversify-react";
+import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
+import INewEntityManager from "../../../Core/BusinessLogic/EntityManager/NewEntityManager/INewEntityManager";
 
 const createIframeUrl = (contextId: number, fileName: string) => {
   // In addition to contextId and fileName, in the future, we will also need a package
@@ -29,6 +33,13 @@ export default function H5PModal(props: {
 }) {
   const [h5pData, setH5pData] = useState<H5PForCoursesAPIResponse>();
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const entityManager = useInjection<INewEntityManager>(
+    CORE_TYPES.INewEntityManager
+  );
+  const [test] = useEntity<RootEntity>(
+    entityManager.getRootEntity().Value.id,
+    RootEntity
+  );
 
   useEffect(() => {
     if (!props.show) {
@@ -88,10 +99,14 @@ export default function H5PModal(props: {
         </div>
         <div className="modal-footer flex justify-between items-center p-2 h-16">
           <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            {
+              ///@ts-ignore
+              test.memberx.value
+            }
+            {/* Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum.
+            et ea rebum. */}
           </p>
         </div>
       </div>
