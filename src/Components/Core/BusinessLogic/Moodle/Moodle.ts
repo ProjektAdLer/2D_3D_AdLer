@@ -23,7 +23,7 @@ export default class Moodle implements IMoodle {
   ) {}
 
   async setupMoodle(): Promise<void> {
-    this.newEntityManager.createEntity(
+    this.newEntityManager.createEntity<TestEntity>(
       {
         member1: true,
         member2: "Das ist ein Test aus der Moodle BS heraus",
