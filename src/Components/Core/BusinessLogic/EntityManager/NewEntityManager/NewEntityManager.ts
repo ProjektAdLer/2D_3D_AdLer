@@ -5,6 +5,7 @@ import INewEntityManager from "./INewEntityManager";
 
 @injectable()
 export default class NewEntityManager implements INewEntityManager {
+  private entityMap: Map<string, Entity<any>> = new Map();
   createEntity<T>(
     entityData: Partial<Entity<T>>,
     classRef: { new (): T }
