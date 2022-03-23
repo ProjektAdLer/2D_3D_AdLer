@@ -6,7 +6,6 @@ import INewEntityManager from "./INewEntityManager";
 
 @injectable()
 export default class NewEntityManager implements INewEntityManager {
-  // This any is not clean, but i dont know how to make it better :/ - PG
   private entityMap: Map<string, ObservableClass<any>> = new Map();
   createEntity<T extends AbstractEntity>(
     entityData: Partial<Entity<T>>,
@@ -22,5 +21,12 @@ export default class NewEntityManager implements INewEntityManager {
     );
 
     return newObservableWithEntity.Value.id;
+  }
+
+  getEntityById<T extends AbstractEntity>(uudi: string): ObservableClass<T> {
+    if (!this.entityMap.has(uudi)) {
+      throw new Error("Entity with given UUID not found");
+    }
+    return this.entityMap.get(uudi) as ObservableClass<T>;
   }
 }
