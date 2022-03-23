@@ -1,6 +1,8 @@
-import Observable from "./Observable";
+import Observable, { Primitive } from "./Observable";
 
-export default class ObservablePrimitive<T> extends Observable<T> {
+export default class ObservablePrimitive<
+  T extends Primitive
+> extends Observable<T> {
   constructor(value?: T) {
     super();
     if (value) this.value = value;

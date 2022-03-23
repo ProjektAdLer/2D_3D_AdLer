@@ -1,6 +1,9 @@
+import AbstractEntity from "../../../Entities/API/AbstractEntity";
 import Observable from "./Observable";
 
-export default class ObservableClass<T> extends Observable<T> {
+export default class ObservableClass<
+  T extends AbstractEntity
+> extends Observable<T> {
   constructor(type: { new (): T }) {
     super();
     this.value = new type();
