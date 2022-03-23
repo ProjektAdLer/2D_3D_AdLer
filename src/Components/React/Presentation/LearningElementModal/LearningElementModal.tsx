@@ -1,5 +1,4 @@
 import { useInjection } from "inversify-react";
-import { builtinModules } from "module";
 import { useEffect } from "react";
 import INewEntityManager from "../../../Core/BusinessLogic/EntityManager/NewEntityManager/INewEntityManager";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";

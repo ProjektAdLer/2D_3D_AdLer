@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import BabylonCanvas from "../BabylonCanvas/BabylonCanvas";
 import "./App.css";
 import INewEntityManager from "../../../Core/BusinessLogic/EntityManager/NewEntityManager/INewEntityManager";
