@@ -4,7 +4,6 @@ import INewEntityManager from "../../Core/BusinessLogic/EntityManager/NewEntityM
 import CORE_TYPES from "../../Core/DependencyInjection/CoreTypes";
 import AbstractEntity from "../../Core/Entities/API/AbstractEntity";
 import ObservableClass from "../../Core/BusinessLogic/EntityManager/Observables/ObservableClass";
-import RootEntity from "../../Core/Entities/Entities/RootEntity";
 
 export default function useEntity<T extends AbstractEntity>(
   entityId: string,
@@ -17,12 +16,13 @@ export default function useEntity<T extends AbstractEntity>(
 
   let observableEntity: ObservableClass<T>;
 
+  observableEntity = entityManager.getEntityById<T>(entityId, entityClass);
+  setData(observableEntity.Value);
+  observableEntity.subscribe(setData);
+
   useEffect(() => {
-    observableEntity = entityManager.getEntityById<T>(entityId, entityClass);
-    setData(observableEntity.Value);
-    observableEntity.subscribe(setData);
     return () => observableEntity.unsubscribe(setData);
-  });
+  }, []);
 
   return [data as T];
 }

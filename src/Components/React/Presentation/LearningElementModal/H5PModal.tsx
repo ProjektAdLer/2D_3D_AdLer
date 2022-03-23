@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import H5PElement from "../../../Core/Entities/Entities/LearningElements/H5PElement";
+import useEntity from "../../CustomHooks/useEntity";
 
 const createIframeUrl = (contextId: number, fileName: string) => {
   // In addition to contextId and fileName, in the future, we will also need a package
@@ -16,16 +18,17 @@ const createIframeUrl = (contextId: number, fileName: string) => {
   );
 };
 
-export default function H5PModal(props: {
-  h5pId: number;
-  h5pFileName: string;
-}) {
+export default function H5PModal(props: { elementId: string }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [H5PElementEntity] = useEntity<H5PElement>(props.elementId, H5PElement);
 
   return (
     <iframe
       ref={iframeRef}
-      src={createIframeUrl(278, "Metriken Teil 1.h5p")}
+      src={createIframeUrl(
+        H5PElementEntity.h5pContextId.Value,
+        H5PElementEntity.h5pFileName.Value
+      )}
       width=":w"
       height="100%"
       style={{ height: "400px", width: "100%" }}
