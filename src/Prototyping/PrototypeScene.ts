@@ -21,7 +21,7 @@ import "@babylonjs/loaders/glTF";
 import ICreateSceneClass from "../Components/Core/Presentation/SceneManagment/ICreateSceneClass";
 
 // digital assets
-import link_h5p from "../../Assets/3DLink_H5P.glb";
+import link_h5p from "../Assets/3DLink_H5P.glb";
 
 import { injectable } from "inversify";
 
