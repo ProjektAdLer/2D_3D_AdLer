@@ -21,6 +21,7 @@ export default function useEntity<T extends AbstractEntity>(
     observableEntity = entityManager.getEntityById<T>(entityId, entityClass);
     setData(observableEntity.Value);
     observableEntity.subscribe(setData);
+    return () => observableEntity.unsubscribe(setData);
   });
 
   return [data as T];

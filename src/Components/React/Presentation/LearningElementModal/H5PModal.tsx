@@ -7,6 +7,7 @@ import RootEntity from "../../../Core/Entities/Entities/RootEntity";
 import { useInjection } from "inversify-react";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import INewEntityManager from "../../../Core/BusinessLogic/EntityManager/NewEntityManager/INewEntityManager";
+import usePrimitive from "../../CustomHooks/usePrimitive";
 
 const createIframeUrl = (contextId: number, fileName: string) => {
   // In addition to contextId and fileName, in the future, we will also need a package
@@ -36,10 +37,9 @@ export default function H5PModal(props: {
   const entityManager = useInjection<INewEntityManager>(
     CORE_TYPES.INewEntityManager
   );
-  const [test] = useEntity<RootEntity>(
-    entityManager.getRootEntity().Value.id,
-    RootEntity
-  );
+  const rootEntity = entityManager.getRootEntity();
+
+  const [primitive] = usePrimitive(rootEntity.Value.memberx);
 
   useEffect(() => {
     if (!props.show) {
@@ -101,7 +101,7 @@ export default function H5PModal(props: {
           <p>
             {
               ///@ts-ignore
-              test.memberx.value
+              primitive
             }
             {/* Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam

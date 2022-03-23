@@ -6,12 +6,17 @@ import useEntityManager from "../../CustomHooks/useEntityManager";
 import INewEntityManager from "../../../Core/BusinessLogic/EntityManager/NewEntityManager/INewEntityManager";
 import { useInjection } from "inversify-react";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
+import usePrimitive from "../../CustomHooks/usePrimitive";
 
 function App() {
   const [showH5P, setShowH5P] = useEntityManager();
   const entityManager = useInjection<INewEntityManager>(
     CORE_TYPES.INewEntityManager
   );
+
+  const rootEntity = entityManager.getRootEntity();
+
+  const [primitive, setPrimitive] = usePrimitive(rootEntity.Value.memberx);
 
   return (
     <React.Fragment>
@@ -22,8 +27,7 @@ function App() {
             onClick={() => {
               setShowH5P(true);
 
-              entityManager.getRootEntity().Value.memberx.Value =
-                "Test aus dem Knopf heraus";
+              setPrimitive("Das ist ein Test aus dem Knopf heraus ;) ");
             }}
           >
             "H5P Öffnen"
