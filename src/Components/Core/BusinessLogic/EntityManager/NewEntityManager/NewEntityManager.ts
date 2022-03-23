@@ -5,6 +5,9 @@ import ObservableClass from "../Observables/ObservableClass";
 import { Entity, EntityReference } from "../../../Types/EntityManagerTypes";
 import INewEntityManager from "./INewEntityManager";
 
+// TODO: What happens, when we create an Entity, when there is already on Present in the Parent
+// TODO: Implement CRUD Operations
+
 @injectable()
 export default class NewEntityManager implements INewEntityManager {
   private entityMap: Map<string, ObservableClass<any>> = new Map();
