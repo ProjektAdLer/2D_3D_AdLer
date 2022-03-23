@@ -9,14 +9,14 @@ import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import usePrimitive from "../../CustomHooks/usePrimitive";
 
 function App() {
-  const [showH5P, setShowH5P] = useEntityManager();
   const entityManager = useInjection<INewEntityManager>(
     CORE_TYPES.INewEntityManager
   );
 
   const rootEntity = entityManager.getRootEntity();
 
-  const [primitive, setPrimitive] = usePrimitive(rootEntity.Value.memberx);
+  const [, setPrimitive] = usePrimitive(rootEntity.Value.memberx);
+  const [, setShowModal] = usePrimitive(rootEntity.Value.showModal);
 
   return (
     <React.Fragment>
@@ -25,7 +25,8 @@ function App() {
           <button
             className="container-button w-24 h-6 m-3 hover:cursor-pointer"
             onClick={() => {
-              setShowH5P(true);
+              //setShowH5P(true);
+              setShowModal(true);
 
               setPrimitive("Das ist ein Test aus dem Knopf heraus ;) ");
             }}
@@ -35,8 +36,8 @@ function App() {
         </div>
         <BabylonCanvas className="w-screen h-screen" />
         <H5PModal
-          show={showH5P}
-          onClose={() => setShowH5P(false)}
+          //show={showH5P}
+          onClose={() => setShowModal(false)}
           h5pId={278}
           h5pFileName="Metriken Teil 1.h5p"
           title={"Das Wasserfallmodell"}

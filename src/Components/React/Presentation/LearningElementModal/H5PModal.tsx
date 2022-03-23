@@ -2,8 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import ICoreFactory from "../../../Core/API/ICoreFactory";
 import { H5PForCoursesAPIResponse } from "../../../Core/Types/H5PTypes";
 import CoreFactory from "../../../Core/API/CoreFactory";
-import useEntity from "../../CustomHooks/useEntity";
-import RootEntity from "../../../Core/Entities/Entities/RootEntity";
 import { useInjection } from "inversify-react";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import INewEntityManager from "../../../Core/BusinessLogic/EntityManager/NewEntityManager/INewEntityManager";
@@ -27,7 +25,7 @@ const createIframeUrl = (contextId: number, fileName: string) => {
 
 export default function H5PModal(props: {
   onClose: () => void;
-  show: boolean;
+  //show: boolean;
   h5pId: number;
   h5pFileName: string;
   title?: string;
@@ -40,9 +38,10 @@ export default function H5PModal(props: {
   const rootEntity = entityManager.getRootEntity();
 
   const [primitive] = usePrimitive(rootEntity.Value.memberx);
+  const [showModal] = usePrimitive(rootEntity.Value.showModal);
 
   useEffect(() => {
-    if (!props.show) {
+    if (!showModal) {
       return;
     }
 
@@ -59,9 +58,8 @@ export default function H5PModal(props: {
     return () => {
       console.log("H5P Unmountsed");
     };
-  }, [props.show]);
-
-  if (!props.show) {
+  }, [showModal]);
+  if (!showModal) {
     return null;
   }
 
