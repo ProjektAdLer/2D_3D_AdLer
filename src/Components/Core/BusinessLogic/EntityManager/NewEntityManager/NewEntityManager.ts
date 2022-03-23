@@ -2,8 +2,7 @@ import { injectable } from "inversify";
 import AbstractEntity from "../../../Entities/API/AbstractEntity";
 import RootEntity from "../../../Entities/Entities/RootEntity";
 import ObservableClass from "../Observables/ObservableClass";
-import ObservableReadonlyID from "../Observables/ObservableReadonlyID";
-import { Entity, EntityReference } from "./EntityManagerTypes";
+import { Entity, EntityReference } from "../../../Types/EntityManagerTypes";
 import INewEntityManager from "./INewEntityManager";
 
 @injectable()
@@ -50,13 +49,6 @@ export default class NewEntityManager implements INewEntityManager {
       throw new Error("Entity has the wrong Class");
 
     return entity as ObservableClass<T>;
-  }
-
-  addEntityToEntity(targetId: string, idToSet: string, member: string): void {
-    // const entity1: ObservableClass<RootEntity> = this.entityMap.get(targetId)!;
-    // //const entity2 = this.entityMap.get(id2);
-    // // @ts-ignore
-    // entity1.Value["testEntity"].Value = "Funktioniert :) ";
   }
 
   getRootEntity(): ObservableClass<RootEntity> {

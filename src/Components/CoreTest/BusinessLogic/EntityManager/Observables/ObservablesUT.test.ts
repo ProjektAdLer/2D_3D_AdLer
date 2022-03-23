@@ -5,6 +5,7 @@ import REACT_TYPES from "../../../../React/DependencyInjection/ReactTypes";
 import ObservablePrimitive from "../../../../Core/BusinessLogic/EntityManager/Observables/ObservablePrimitive";
 import ObservableClass from "../../../../Core/BusinessLogic/EntityManager/Observables/ObservableClass";
 class TestEntity {
+  public id = "id";
   public member1: ObservablePrimitive<boolean> =
     new ObservablePrimitive<boolean>(true);
   public member2: ObservablePrimitive<string> = new ObservablePrimitive<string>(

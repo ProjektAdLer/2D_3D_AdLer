@@ -24,19 +24,16 @@ export default class Moodle implements IMoodle {
   ) {}
 
   async setupMoodle(): Promise<void> {
-    const testEntityId = this.newEntityManager.createEntity<
-      TestEntity,
-      RootEntity
-    >(
+    const rootId = this.newEntityManager.getRootEntity().Value.id;
+    const newId = this.newEntityManager.createEntity<TestEntity, RootEntity>(
       {
         member1: true,
-        //member2: "Das ist ein Test aus der Moodle BS heraus",
+        member2: "false",
       },
-      this.newEntityManager.getRootEntity().Value.id,
+      rootId,
       "testEntity",
       TestEntity
     );
-
     const userToken = await this.dataAccess.signInUser(
       "Student",
       "wve2rxz7wfm3BPH-ykh"
