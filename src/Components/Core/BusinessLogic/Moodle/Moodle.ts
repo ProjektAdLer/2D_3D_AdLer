@@ -33,7 +33,7 @@ export default class Moodle implements IMoodle {
         //member2: "Das ist ein Test aus der Moodle BS heraus",
       },
       this.newEntityManager.getRootEntity().Value.id,
-      "testEntity",
+      "id",
       TestEntity
     );
 
