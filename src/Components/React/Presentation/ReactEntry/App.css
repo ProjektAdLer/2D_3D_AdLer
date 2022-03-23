@@ -21,12 +21,13 @@ code {
 #inspector-host,
 #scene-explorer-host {
   position: fixed !important;
-  top: 30rem !important;
-  left: 1rem !important;
-  width: 20vw !important;
-  height: 40vh;
+  top: 5rem !important;
+  right: 19rem !important;
+  width: 1vw !important;
+  height: 80%;
 }
 
 #scene-explorer-host {
   top: 5rem !important;
+  left: 1rem !important;
 }
