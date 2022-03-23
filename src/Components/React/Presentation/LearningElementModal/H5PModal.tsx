@@ -63,7 +63,7 @@ export default function H5PModal(props: {
 
   return (
     <div className="modal flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-blacktrans50">
-      <div className="modal-content bg-white w-1/2 border-8 border-blue-200 rounded-lg">
+      <div className="modal-content bg-white w-2/3 border-8 border-blue-200 rounded-lg">
         <div className="modal-header flex justify-between items-center p-2 h-16 text-xl">
           {props.title || <h3>H5P Aufgabe</h3>}
           <button onClick={props.onClose} className="button-close m-2 p-2">
