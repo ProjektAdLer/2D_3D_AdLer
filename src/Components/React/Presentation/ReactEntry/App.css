@@ -18,17 +18,15 @@ code {
 
 /*Styles für die Anzeige des Inspectors*/
 
-#inspector-host {
+#inspector-host,
+#scene-explorer-host {
   position: fixed !important;
-  top: 50vh;
-  left: 0px;
+  top: 30rem !important;
+  left: 1rem !important;
   width: 20vw !important;
-  height: 30vh;
+  height: 40vh;
 }
 
 #scene-explorer-host {
-  position: fixed !important;
-  top: 10vh;
-  width: 20vw !important;
-  height: 30vh;
+  top: 5rem !important;
 }
