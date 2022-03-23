@@ -1,32 +1,65 @@
 import { injectable } from "inversify";
 import AbstractEntity from "../../../Entities/API/AbstractEntity";
+import RootEntity from "../../../Entities/Entities/RootEntity";
 import ObservableClass from "../Observables/ObservableClass";
-import { Entity } from "./EntityManagerTypes";
+import ObservableReadonlyID from "../Observables/ObservableReadonlyID";
+import { Entity, EntityReference } from "./EntityManagerTypes";
 import INewEntityManager from "./INewEntityManager";
 
 @injectable()
 export default class NewEntityManager implements INewEntityManager {
   private entityMap: Map<string, ObservableClass<any>> = new Map();
-  createEntity<T extends AbstractEntity>(
+  private rootEntity: ObservableClass<RootEntity>;
+  constructor() {
+    this.rootEntity = new ObservableClass<RootEntity>(RootEntity);
+    this.entityMap.set(this.rootEntity.Value.id, this.rootEntity);
+  }
+  createEntity<T extends AbstractEntity, U extends AbstractEntity>(
     entityData: Partial<Entity<T>>,
+    parentEntityId: string,
+    parentEntityMember: EntityReference<U>,
     classRef: { new (): T }
   ): string {
     const newObservableWithEntity = new ObservableClass<T>(classRef);
     // This fills all Public Members of the Entity with the Data from the Data Object
     // Typescript ensures, that the Data Object has the same Members as the Entity
     Object.assign(newObservableWithEntity.Value, entityData);
+
     this.entityMap.set(
       newObservableWithEntity.Value.id,
       newObservableWithEntity
     );
 
+    const parent = this.entityMap.get(parentEntityId)!;
+
+    parent.Value[parentEntityMember].Value = newObservableWithEntity.Value.id;
+
     return newObservableWithEntity.Value.id;
   }
 
-  getEntityById<T extends AbstractEntity>(uudi: string): ObservableClass<T> {
-    if (!this.entityMap.has(uudi)) {
+  getEntityById<T extends AbstractEntity>(
+    uuid: string,
+    classRef: { new (): T }
+  ): ObservableClass<T> {
+    if (!this.entityMap.has(uuid))
       throw new Error("Entity with given UUID not found");
-    }
-    return this.entityMap.get(uudi) as ObservableClass<T>;
+
+    const entity = this.entityMap.get(uuid);
+
+    if (!(entity?.Value instanceof classRef))
+      throw new Error("Entity has the wrong Class");
+
+    return entity as ObservableClass<T>;
+  }
+
+  addEntityToEntity(targetId: string, idToSet: string, member: string): void {
+    // const entity1: ObservableClass<RootEntity> = this.entityMap.get(targetId)!;
+    // //const entity2 = this.entityMap.get(id2);
+    // // @ts-ignore
+    // entity1.Value["testEntity"].Value = "Funktioniert :) ";
+  }
+
+  getRootEntity(): ObservableClass<RootEntity> {
+    return this.rootEntity;
   }
 }

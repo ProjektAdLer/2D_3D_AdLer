@@ -2,6 +2,7 @@ import { inject, injectable } from "inversify";
 import REACT_TYPES from "../../../React/DependencyInjection/ReactTypes";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
+import RootEntity from "../../Entities/Entities/RootEntity";
 import TestEntity from "../../Entities/Entities/TestEntity";
 import MoodleData from "../../Entities/MoodleData";
 import { H5PForCoursesAPIResponse } from "../../Types/H5PTypes";
@@ -23,16 +24,19 @@ export default class Moodle implements IMoodle {
   ) {}
 
   async setupMoodle(): Promise<void> {
-    const entityID = this.newEntityManager.createEntity<TestEntity>(
+    const testEntityId = this.newEntityManager.createEntity<
+      TestEntity,
+      RootEntity
+    >(
       {
         member1: true,
-        member2: "Das ist ein Test aus der Moodle BS heraus",
+        //member2: "Das ist ein Test aus der Moodle BS heraus",
       },
+      this.newEntityManager.getRootEntity().Value.id,
+      "testEntity",
       TestEntity
     );
 
-    const entity = this.newEntityManager.getEntityById<TestEntity>(entityID);
-    console.log(entity.Value.member1);
     const userToken = await this.dataAccess.signInUser(
       "Student",
       "wve2rxz7wfm3BPH-ykh"
