@@ -8,7 +8,7 @@ export default class ObservablePrimitive<
     if (value) this.value = value;
   }
 
-  set Value(value: T) {
+  setValue(value: T) {
     this.value = value;
     this.notify(value);
   }

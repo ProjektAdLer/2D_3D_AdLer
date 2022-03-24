@@ -32,5 +32,7 @@ export default class Core implements ICore {
 
   async setupBabylon(canvas: HTMLCanvasElement): Promise<void> {
     await this.presentation.setupBabylon(canvas);
+
+    await this.setupMoodle();
   }
 }

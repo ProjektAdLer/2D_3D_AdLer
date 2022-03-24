@@ -34,6 +34,11 @@ export default class Moodle implements IMoodle {
       "testEntity",
       TestEntity
     );
+
+    const rootEntity = this.newEntityManager.getRootEntity();
+
+    const test = rootEntity.Value.OpenLearningElement.Value;
+
     const userToken = await this.dataAccess.signInUser(
       "Student",
       "wve2rxz7wfm3BPH-ykh"

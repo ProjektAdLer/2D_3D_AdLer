@@ -15,7 +15,7 @@ export default function usePrimitive<U extends Primitive>(
   return [
     data as U,
     (input: U) => {
-      primitive.Value = input;
+      primitive.setValue(input);
     },
   ];
 }
