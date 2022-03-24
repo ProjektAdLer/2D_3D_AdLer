@@ -43,8 +43,7 @@ describe("EntityManager", () => {
       "testEntity",
       TestEntity
     );
-    ///@ts-ignore
-    expect(manager.getRootEntity().Value.testEntity.value).toBe(newId);
+    expect(manager.getRootEntity().Value.testEntity.Value).toBe(newId);
   });
 
   test("getEntityById returns the propper Entity", () => {
@@ -88,7 +87,7 @@ describe("EntityManager", () => {
     ).toThrow();
   });
 
-  test("getEntityById throws, if it is passed a wrong", () => {
+  test("getEntityById throws, if it is passed a wrong Id", () => {
     const manager = CoreDIContainer.get<INewEntityManager>(
       CORE_TYPES.INewEntityManager
     );

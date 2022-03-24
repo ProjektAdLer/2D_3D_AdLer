@@ -12,8 +12,7 @@ const elementBuilder = (entityId: string) => {
   );
 
   const rootEntity = entityManager.getRootEntity();
-  ///@ts-ignore
-  switch (rootEntity.Value.OpenLearningElement.value) {
+  switch (rootEntity.Value.OpenLearningElement.Value) {
     case "H5P":
       return <H5PModal h5pId={0} h5pFileName={""} />;
     default:
