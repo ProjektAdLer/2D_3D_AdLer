@@ -4,6 +4,7 @@ import RootEntity from "../../../Entities/Entities/RootEntity";
 import ObservableClass from "../Observables/ObservableClass";
 import { Entity, EntityReference } from "../../../Types/EntityManagerTypes";
 import INewEntityManager from "./INewEntityManager";
+import ObservablePrimitive from "../Observables/ObservablePrimitive";
 
 // TODO: What happens, when we create an Entity, when there is already on Present in the Parent
 // TODO: Implement CRUD Operations
@@ -25,7 +26,13 @@ export default class NewEntityManager implements INewEntityManager {
     const newObservableWithEntity = new ObservableClass<T>(classRef);
     // This fills all Public Members of the Entity with the Data from the Data Object
     // Typescript ensures, that the Data Object has the same Members as the Entity
+
     Object.assign(newObservableWithEntity.Value, entityData);
+
+    // Object.entries(entityData).forEach(([key, value]) => {
+    //   ///@ts-ignore
+    //   newObservableWithEntity.Value[key].setValue(value);
+    // });
 
     this.entityMap.set(
       newObservableWithEntity.Value.id,
@@ -34,7 +41,7 @@ export default class NewEntityManager implements INewEntityManager {
 
     const parent = this.entityMap.get(parentEntityId)!;
 
-    parent.Value[parentEntityMember].Value = newObservableWithEntity.Value.id;
+    parent.Value[parentEntityMember].setValue(newObservableWithEntity.Value.id);
 
     return newObservableWithEntity.Value.id;
   }

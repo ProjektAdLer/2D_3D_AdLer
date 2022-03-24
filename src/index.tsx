@@ -5,7 +5,39 @@ import CoreDIContainer from "./Components/Core/DependencyInjection/CoreDIContain
 import IEntityManager from "./Components/Core/BusinessLogic/EntityManager/IEntityManager";
 import CORE_TYPES from "./Components/Core/DependencyInjection/CoreTypes";
 import INewEntityManager from "./Components/Core/BusinessLogic/EntityManager/NewEntityManager/INewEntityManager";
+import EGenericLearningElement from "./Components/Core/Entities/Entities/LearningElements/GenericLearningElement";
+import RootEntity from "./Components/Core/Entities/Entities/RootEntity";
+import EH5PLearningElement from "./Components/Core/Entities/Entities/LearningElements/H5PLearningElement";
 
 const ReactCore = CoreDIContainer.get<IReactApi>(REACT_TYPES.IReactApi);
+const entityManager = CoreDIContainer.get<INewEntityManager>(
+  CORE_TYPES.INewEntityManager
+);
+
+const genenericLearningElementId = entityManager.createEntity<
+  EGenericLearningElement,
+  RootEntity
+>(
+  {
+    learningElementTitle: "Titel aus index.ts",
+    learningElementType: "H5P",
+  },
+  entityManager.getRootEntity().Value.id,
+  "CurrentLearningElementId",
+  EGenericLearningElement
+);
+
+const concreteLearningElementId = entityManager.createEntity<
+  EH5PLearningElement,
+  EGenericLearningElement
+>(
+  {
+    h5PcontextId: 278,
+    h5PFileName: "Metriken Teil 1.h5p",
+  },
+  genenericLearningElementId,
+  "concreteLearningElementId",
+  EH5PLearningElement
+);
 
 ReactCore.initReact();

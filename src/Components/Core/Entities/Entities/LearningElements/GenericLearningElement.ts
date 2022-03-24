@@ -2,9 +2,12 @@ import ObservablePrimitive from "../../../BusinessLogic/EntityManager/Observable
 import AbstractEntity from "../../API/AbstractEntity";
 
 export default class EGenericLearningElement extends AbstractEntity {
-  title = new ObservablePrimitive<string>("TestTitle aus Entity");
+  learningElementType = new ObservablePrimitive<string>();
   /**
    * H5PLearningElement
    */
   concreteLearningElementId = new ObservablePrimitive<string>("");
+  learningElementTitle = new ObservablePrimitive<string>(
+    "TestTitle aus Entity"
+  );
 }
