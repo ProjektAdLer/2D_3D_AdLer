@@ -9,4 +9,8 @@ export default class RootEntity extends AbstractEntity {
   Hh5PTitle = new ObservablePrimitive<string>("TestTitel für H5P");
 
   OpenLearningElement = new ObservablePrimitive<string>("H5P");
+  /**
+   * EGenericLearningElement
+   */
+  CurrentLearningElementId = new ObservablePrimitive<string>();
 }

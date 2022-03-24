@@ -24,20 +24,20 @@ export default class Moodle implements IMoodle {
   ) {}
 
   async setupMoodle(): Promise<void> {
-    const rootId = this.newEntityManager.getRootEntity().Value.id;
-    const newId = this.newEntityManager.createEntity<TestEntity, RootEntity>(
-      {
-        member1: true,
-        member2: "false",
-      },
-      rootId,
-      "testEntity",
-      TestEntity
-    );
+    // const rootId = this.newEntityManager.getRootEntity().Value.id;
+    // const newId = this.newEntityManager.createEntity<TestEntity, RootEntity>(
+    //   {
+    //     member1: true,
+    //     member2: "false",
+    //   },
+    //   rootId,
+    //   "testEntity",
+    //   TestEntity
+    // );
 
-    const rootEntity = this.newEntityManager.getRootEntity();
+    // const rootEntity = this.newEntityManager.getRootEntity();
 
-    const test = rootEntity.Value.OpenLearningElement.Value;
+    // const test = rootEntity.Value.OpenLearningElement.Value;
 
     const userToken = await this.dataAccess.signInUser(
       "Student",
