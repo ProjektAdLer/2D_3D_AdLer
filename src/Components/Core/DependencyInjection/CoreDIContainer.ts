@@ -41,7 +41,7 @@ import LearningElementFactory from "../Presentation/LearningElement/LearningElem
 import IEntityManager from "../BusinessLogic/EntityManager/IEntityManager";
 import REACT_TYPES from "../../React/DependencyInjection/ReactTypes";
 import EntityManager from "../BusinessLogic/EntityManager/EntityManager";
-import INewEntityManager from "../BusinessLogic/EntityManager/NewEntityManager/INewEntityManager";
+import IEntityManager from "../BusinessLogic/EntityManager/INewEntityManager";
 import NewEntityManager from "../BusinessLogic/EntityManager/NewEntityManager/NewEntityManager";
 
 var CoreDIContainer = new Container();
@@ -116,7 +116,7 @@ CoreDIContainer.bind<IEntityManager>(REACT_TYPES.IEntityManager)
   .to(EntityManager)
   .inSingletonScope();
 
-CoreDIContainer.bind<INewEntityManager>(CORE_TYPES.INewEntityManager)
+CoreDIContainer.bind<IEntityManager>(CORE_TYPES.INewEntityManager)
   .to(NewEntityManager)
   .inSingletonScope();
 

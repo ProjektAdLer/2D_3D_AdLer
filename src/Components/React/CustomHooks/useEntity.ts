@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useInjection } from "inversify-react";
-import INewEntityManager from "../../Core/BusinessLogic/EntityManager/NewEntityManager/INewEntityManager";
+import IEntityManager from "../../Core/BusinessLogic/EntityManager/INewEntityManager";
 import CORE_TYPES from "../../Core/DependencyInjection/CoreTypes";
 import AbstractEntity from "../../Core/Entities/API/AbstractEntity";
 import ObservableClass from "../../Core/BusinessLogic/EntityManager/Observables/ObservableClass";
@@ -11,7 +11,7 @@ export default function useEntity<T extends AbstractEntity>(
   entityClass: { new (): T }
 ): [T] {
   const [data, setData] = useState<T>();
-  let entityManager: INewEntityManager = useInjection(
+  let entityManager: IEntityManager = useInjection(
     CORE_TYPES.INewEntityManager
   );
 

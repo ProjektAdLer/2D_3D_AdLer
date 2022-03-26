@@ -8,7 +8,7 @@ import MoodleData from "../../Entities/MoodleData";
 import { H5PForCoursesAPIResponse } from "../../Types/H5PTypes";
 import IDataAccess from "../API/IDataAccess";
 import IEntityManager from "../EntityManager/IEntityManager";
-import INewEntityManager from "../EntityManager/NewEntityManager/INewEntityManager";
+import IEntityManager from "../EntityManager/INewEntityManager";
 import IMoodle from "./IMoodle";
 const axios = require("axios").default;
 
@@ -20,7 +20,7 @@ export default class Moodle implements IMoodle {
     @inject(CORE_TYPES.IDataAccess) private dataAccess: IDataAccess,
     @inject(REACT_TYPES.IEntityManager) private entityManager: IEntityManager,
     @inject(CORE_TYPES.INewEntityManager)
-    private newEntityManager: INewEntityManager
+    private newEntityManager: IEntityManager
   ) {}
 
   async setupMoodle(): Promise<void> {

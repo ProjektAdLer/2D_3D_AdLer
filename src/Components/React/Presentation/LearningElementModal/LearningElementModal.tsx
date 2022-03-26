@@ -1,6 +1,6 @@
 import { useInjection } from "inversify-react";
 import { useEffect } from "react";
-import INewEntityManager from "../../../Core/BusinessLogic/EntityManager/NewEntityManager/INewEntityManager";
+import IEntityManager from "../../../Core/BusinessLogic/EntityManager/INewEntityManager";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import EGenericLearningElement from "../../../Core/Entities/Entities/LearningElements/GenericLearningElement";
@@ -23,7 +23,7 @@ import H5PModal from "./H5PModal";
 // };
 
 export default function LearningElementModal() {
-  const entityManager = useInjection<INewEntityManager>(
+  const entityManager = useInjection<IEntityManager>(
     CORE_TYPES.INewEntityManager
   );
 
