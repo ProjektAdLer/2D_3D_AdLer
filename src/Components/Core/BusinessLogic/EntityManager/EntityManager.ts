@@ -3,7 +3,7 @@ import AbstractEntity from "../../Entities/API/AbstractEntity";
 import RootEntity from "../../Entities/Entities/RootEntity";
 import ObservableClass from "./Observables/ObservableClass";
 import { Entity, EntityReference } from "../../Types/EntityManagerTypes";
-import IEntityManager from "./INewEntityManager";
+import IEntityManager from "./IEntityManager";
 import ObservablePrimitive from "./Observables/ObservablePrimitive";
 import Observable from "./Observables/Observable";
 

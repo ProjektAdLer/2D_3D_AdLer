@@ -1,6 +1,6 @@
 import { useInjection } from "inversify-react";
 import { useEffect } from "react";
-import IEntityManager from "../../../Core/BusinessLogic/EntityManager/INewEntityManager";
+import IEntityManager from "../../../Core/BusinessLogic/EntityManager/IEntityManager";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import EGenericLearningElement from "../../../Core/Entities/Entities/LearningElements/GenericLearningElement";

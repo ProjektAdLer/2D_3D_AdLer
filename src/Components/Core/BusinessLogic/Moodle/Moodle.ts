@@ -8,7 +8,6 @@ import MoodleData from "../../Entities/MoodleData";
 import { H5PForCoursesAPIResponse } from "../../Types/H5PTypes";
 import IDataAccess from "../API/IDataAccess";
 import IEntityManager from "../EntityManager/IEntityManager";
-import IEntityManager from "../EntityManager/INewEntityManager";
 import IMoodle from "./IMoodle";
 const axios = require("axios").default;
 
