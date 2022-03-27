@@ -1,5 +1,5 @@
 import ILearningElementPresenter from "./ILearningElementPresenter";
-import { LearningElementTypes } from "./Types/LearningElementTypes";
+import { LearningElementType } from "./Types/LearningElementTypes";
 
 export default interface ILearningElementFactory {
   /**
@@ -8,6 +8,6 @@ export default interface ILearningElementFactory {
    * @return The presenter of the new learning element
    */
   createLearningElementAsync(
-    type: LearningElementTypes
+    type: LearningElementType
   ): Promise<ILearningElementPresenter>;
 }
