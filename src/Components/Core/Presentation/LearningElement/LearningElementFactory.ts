@@ -5,7 +5,12 @@ import ILearningElementFactory from "./ILearningElementFactory";
 import ILearningElementPresenter from "./ILearningElementPresenter";
 import { LearningElementTypes } from "./Types/LearningElementTypes";
 
-import link_h5p from "../../../../Assets/3DLink_H5P_fixed.glb";
+const modelLinks = {
+  h5p: "../../../../Assets/3DLink_H5P.glb",
+  text: "../../../../Assets/3DLink_Text.glb",
+  image: "../../../../Assets/3DLink_Image.glb",
+  video: "../../../../Assets/3DLink_Video.glb",
+};
 
 @injectable()
 export default class LearningElementFactory implements ILearningElementFactory {
@@ -15,8 +20,7 @@ export default class LearningElementFactory implements ILearningElementFactory {
     const learningElementPresenter: ILearningElementPresenter =
       CoreDIContainer.get(CORE_TYPES.ILearingElementPresenter);
 
-    // TODO: make this generic for all types -MK
-    await learningElementPresenter.loadMeshAsync(link_h5p);
+    await learningElementPresenter.loadMeshAsync(modelLinks[type]);
 
     return learningElementPresenter;
   }
