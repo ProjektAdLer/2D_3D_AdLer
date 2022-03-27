@@ -4,7 +4,6 @@ import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import TestEntity from "../../../Core/Entities/Entities/TestEntity";
 
 import { validate as uuidValidate } from "uuid";
-import INewEntityManager from "../../../Core/BusinessLogic/EntityManager/NewEntityManager/INewEntityManager";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import RootEntity from "../../../Core/Entities/Entities/RootEntity";
 
@@ -23,14 +22,14 @@ describe("EntityManager", () => {
   });
 
   test("The Root Entity of the Entity Manager is always defined", () => {
-    const manager = CoreDIContainer.get<INewEntityManager>(
-      CORE_TYPES.INewEntityManager
+    const manager = CoreDIContainer.get<IEntityManager>(
+      CORE_TYPES.IEntityManager
     );
     expect(uuidValidate(manager.getRootEntity().Value.id)).toBe(true);
   });
   test("When an Entity is createt, its ID is referenced in a parent Entity", () => {
-    const manager = CoreDIContainer.get<INewEntityManager>(
-      CORE_TYPES.INewEntityManager
+    const manager = CoreDIContainer.get<IEntityManager>(
+      CORE_TYPES.IEntityManager
     );
 
     const rootId = manager.getRootEntity().Value.id;
@@ -47,8 +46,8 @@ describe("EntityManager", () => {
   });
 
   test("getEntityById returns the propper Entity", () => {
-    const manager = CoreDIContainer.get<INewEntityManager>(
-      CORE_TYPES.INewEntityManager
+    const manager = CoreDIContainer.get<IEntityManager>(
+      CORE_TYPES.IEntityManager
     );
 
     const rootId = manager.getRootEntity().Value.id;
@@ -67,8 +66,8 @@ describe("EntityManager", () => {
   });
 
   test("getEntityById throws, if it is passed the wrong class type", () => {
-    const manager = CoreDIContainer.get<INewEntityManager>(
-      CORE_TYPES.INewEntityManager
+    const manager = CoreDIContainer.get<IEntityManager>(
+      CORE_TYPES.IEntityManager
     );
 
     const rootId = manager.getRootEntity().Value.id;
@@ -88,8 +87,8 @@ describe("EntityManager", () => {
   });
 
   test("getEntityById throws, if it is passed a wrong Id", () => {
-    const manager = CoreDIContainer.get<INewEntityManager>(
-      CORE_TYPES.INewEntityManager
+    const manager = CoreDIContainer.get<IEntityManager>(
+      CORE_TYPES.IEntityManager
     );
 
     expect(() =>

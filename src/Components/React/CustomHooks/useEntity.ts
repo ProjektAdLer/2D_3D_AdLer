@@ -11,9 +11,7 @@ export default function useEntity<T extends AbstractEntity>(
   entityClass: { new (): T }
 ): [T] {
   const [data, setData] = useState<T>();
-  let entityManager: IEntityManager = useInjection(
-    CORE_TYPES.INewEntityManager
-  );
+  let entityManager: IEntityManager = useInjection(CORE_TYPES.IEntityManager);
 
   let observableEntity: ObservableClass<T>;
 

@@ -8,9 +8,7 @@ import usePrimitive from "../../CustomHooks/usePrimitive";
 import LearningElementModal from "../LearningElementModal/LearningElementModal";
 
 function App() {
-  const entityManager = useInjection<IEntityManager>(
-    CORE_TYPES.INewEntityManager
-  );
+  const entityManager = useInjection<IEntityManager>(CORE_TYPES.IEntityManager);
 
   const rootEntity = entityManager.getRootEntity();
 

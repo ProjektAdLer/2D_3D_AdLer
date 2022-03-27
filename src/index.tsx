@@ -10,7 +10,7 @@ import EH5PLearningElement from "./Components/Core/Entities/Entities/LearningEle
 
 const ReactCore = CoreDIContainer.get<IReactApi>(REACT_TYPES.IReactApi);
 const entityManager = CoreDIContainer.get<IEntityManager>(
-  CORE_TYPES.INewEntityManager
+  CORE_TYPES.IEntityManager
 );
 
 const genenericLearningElementId = entityManager.createEntity<

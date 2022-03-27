@@ -23,9 +23,7 @@ import H5PModal from "./H5PModal";
 // };
 
 export default function LearningElementModal() {
-  const entityManager = useInjection<IEntityManager>(
-    CORE_TYPES.INewEntityManager
-  );
+  const entityManager = useInjection<IEntityManager>(CORE_TYPES.IEntityManager);
 
   const rootEntity = entityManager.getRootEntity();
   const [showModal, setShowModal] = usePrimitive(rootEntity.Value.showModal);

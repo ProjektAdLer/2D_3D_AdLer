@@ -17,9 +17,7 @@ export default class Moodle implements IMoodle {
 
   constructor(
     @inject(CORE_TYPES.IDataAccess) private dataAccess: IDataAccess,
-    @inject(REACT_TYPES.IEntityManager) private entityManager: IEntityManager,
-    @inject(CORE_TYPES.INewEntityManager)
-    private newEntityManager: IEntityManager
+    @inject(CORE_TYPES.IEntityManager) private entityManager: IEntityManager
   ) {}
 
   async setupMoodle(): Promise<void> {

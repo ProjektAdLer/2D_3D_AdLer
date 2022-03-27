@@ -110,7 +110,7 @@ CoreDIContainer.bind<ILearningElementView>(CORE_TYPES.ILearingElementView).to(
 CoreDIContainer.bind(LearningElementViewModel).toSelf();
 
 // Entity Manager
-CoreDIContainer.bind<IEntityManager>(REACT_TYPES.IEntityManager)
+CoreDIContainer.bind<IEntityManager>(CORE_TYPES.IEntityManager)
   .to(EntityManager)
   .inSingletonScope();
 
