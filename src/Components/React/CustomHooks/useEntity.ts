@@ -16,9 +16,12 @@ export default function useEntity<T extends AbstractEntity>(
   let observableEntity: ObservableClass<T>;
 
   useEffect(() => {
-    observableEntity = entityManager.getEntityById<T>(entityId, entityClass);
-    setData(observableEntity.Value);
-    observableEntity.subscribe(setData);
+    if (entityId) {
+      observableEntity = entityManager.getEntityById<T>(entityId, entityClass);
+      setData(observableEntity.Value);
+      observableEntity.subscribe(setData);
+    }
+
     return () => observableEntity.unsubscribe(setData);
   });
 

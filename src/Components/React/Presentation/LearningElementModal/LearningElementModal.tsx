@@ -8,19 +8,29 @@ import useEntity from "../../CustomHooks/useEntity";
 import usePrimitive from "../../CustomHooks/usePrimitive";
 import H5PModal from "./H5PModal";
 
-// const elementBuilder = (entityId: string) => {
-//   const entityManager = CoreDIContainer.get<INewEntityManager>(
-//     CORE_TYPES.INewEntityManager
-//   );
+const elementBuilder = (learningElementID: string) => {
+  const entityManager = CoreDIContainer.get(
+    CORE_TYPES.IEntityManager
+  ) as IEntityManager;
 
-//   const rootEntity = entityManager.getRootEntity();
-//   switch (rootEntity.Value.OpenLearningElement.Value) {
-//     case "H5P":
-//       return <H5PModal h5pId={0} h5pFileName={""} />;
-//     default:
-//       return <div>No Learning Element selected</div>;
-//   }
-// };
+  const learningElementConainerEntity =
+    entityManager.getEntityById<EGenericLearningElement>(
+      learningElementID,
+      EGenericLearningElement
+    );
+  switch (learningElementConainerEntity.Value.learningElementType.Value) {
+    case "H5P":
+      return (
+        <H5PModal
+          h5pEntityId={
+            learningElementConainerEntity.Value.concreteLearningElementId.Value
+          }
+        />
+      );
+    default:
+      return <div>No Learning Element selected</div>;
+  }
+};
 
 export default function LearningElementModal() {
   const entityManager = useInjection<IEntityManager>(CORE_TYPES.IEntityManager);
@@ -32,10 +42,6 @@ export default function LearningElementModal() {
     rootEntity.Value.CurrentLearningElementId.Value,
     EGenericLearningElement
   );
-
-  console.log(learningElementEntity);
-
-  //const [modalTitle] = usePrimitive(rootEntity.Value.Hh5PTitle);
 
   useEffect(() => {
     if (!showModal) return;
@@ -56,8 +62,7 @@ export default function LearningElementModal() {
           </button>
         </div>
         <div className="modal-body p-2 border-t-2 border-b-2 border-blue-200">
-          {/* {elementBuilder("")} */}
-          <H5PModal h5pFileName="" h5pId={123} />
+          {elementBuilder(learningElementEntity.id)}
         </div>
         <div className="modal-footer flex justify-between items-center p-2 h-16">
           <p>
