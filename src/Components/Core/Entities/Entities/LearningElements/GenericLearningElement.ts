@@ -1,8 +1,11 @@
+import { LearningElementTypeSymbols } from "./../../../Presentation/LearningElement/Types/LearningElementTypes";
 import ObservablePrimitive from "../../../BusinessLogic/EntityManager/Observables/ObservablePrimitive";
 import AbstractEntity from "../../API/AbstractEntity";
 
 export default class EGenericLearningElement extends AbstractEntity {
-  learningElementType = new ObservablePrimitive<string>();
+  learningElementType = new ObservablePrimitive<Symbol>(
+    LearningElementTypeSymbols.h5p
+  );
   /**
    * H5PLearningElement
    */

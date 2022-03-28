@@ -7,6 +7,7 @@ import CORE_TYPES from "./Components/Core/DependencyInjection/CoreTypes";
 import EGenericLearningElement from "./Components/Core/Entities/Entities/LearningElements/GenericLearningElement";
 import RootEntity from "./Components/Core/Entities/Entities/RootEntity";
 import EH5PLearningElement from "./Components/Core/Entities/Entities/LearningElements/H5PLearningElement";
+import { LearningElementTypeSymbols } from "./Components/Core/Presentation/LearningElement/Types/LearningElementTypes";
 
 const ReactCore = CoreDIContainer.get<IReactApi>(REACT_TYPES.IReactApi);
 const entityManager = CoreDIContainer.get<IEntityManager>(
@@ -19,7 +20,7 @@ const genenericLearningElementId = entityManager.createEntity<
 >(
   {
     learningElementTitle: "Titel aus index.ts",
-    learningElementType: "H5P",
+    learningElementType: LearningElementTypeSymbols.h5p,
   },
   entityManager.getRootEntity().Value.id,
   "CurrentLearningElementId",
