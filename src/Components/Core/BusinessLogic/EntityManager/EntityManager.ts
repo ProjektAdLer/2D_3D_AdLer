@@ -5,7 +5,6 @@ import ObservableClass from "./Observables/ObservableClass";
 import { Entity, EntityReference } from "../../Types/EntityManagerTypes";
 import IEntityManager from "./IEntityManager";
 import ObservablePrimitive from "./Observables/ObservablePrimitive";
-import Observable from "./Observables/Observable";
 
 // TODO: What happens, when we create an Entity, when there is already on Present in the Parent
 // TODO: Implement CRUD Operations

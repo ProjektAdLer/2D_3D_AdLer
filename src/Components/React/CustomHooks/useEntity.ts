@@ -4,7 +4,6 @@ import IEntityManager from "../../Core/BusinessLogic/EntityManager/IEntityManage
 import CORE_TYPES from "../../Core/DependencyInjection/CoreTypes";
 import AbstractEntity from "../../Core/Entities/API/AbstractEntity";
 import ObservableClass from "../../Core/BusinessLogic/EntityManager/Observables/ObservableClass";
-import RootEntity from "../../Core/Entities/Entities/RootEntity";
 
 export default function useEntity<T extends AbstractEntity>(
   entityId: string,
