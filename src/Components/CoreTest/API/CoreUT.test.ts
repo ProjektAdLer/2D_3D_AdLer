@@ -6,7 +6,7 @@ import CORE_TYPES from "../../Core/DependencyInjection/CoreTypes";
 import Presentation from "../../Core/Presentation/API/Presentation";
 
 const setupBabylonMock = jest.spyOn(Presentation.prototype, "setupBabylon");
-
+const setupReactMock = jest.spyOn(Presentation.prototype, "setupReact");
 const setupMoodleMock = jest.spyOn(BusinessLogic.prototype, "setupMoodle");
 
 const mock = jest.spyOn(BusinessLogic.prototype, "getAllH5Ps");
@@ -33,5 +33,10 @@ describe("Core", () => {
   test("getAllH5Ps calls the Business Layern", () => {
     core.getAllH5Ps(5);
     expect(mock).toHaveBeenCalledTimes(1);
+  });
+
+  test("setupReact calls the presentation layer API", () => {
+    core.setupReact();
+    expect(setupReactMock).toHaveBeenCalledTimes(1);
   });
 });

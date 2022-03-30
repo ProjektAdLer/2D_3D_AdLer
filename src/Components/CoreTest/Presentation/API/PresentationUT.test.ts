@@ -2,11 +2,12 @@ import BusinessLogic from "../../../Core/BusinessLogic/API/BusinessLogic";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import Presentation from "../../../Core/Presentation/API/Presentation";
+import CoreRenderer from "../../../Core/Presentation/CoreRenderer/CoreRenderer";
 import EngineManager from "../../../Core/Presentation/EngineManager/EngineManager";
 import ScenePresenter from "../../../Core/Presentation/SceneManagment/ScenePresenter";
 
 const createEngineMock = jest.spyOn(EngineManager.prototype, "createEngine");
-
+const setupReactMock = jest.spyOn(CoreRenderer.prototype, "setupReact");
 const createSceneMock = jest.spyOn(ScenePresenter.prototype, "createScene");
 
 const createRenderLoopMock = jest.spyOn(
@@ -37,5 +38,10 @@ describe("Presentation", () => {
 
   test("BusinessLogic getter returns an object of type Businesslogic", () => {
     expect(presentation.BusinessLogic).toBeInstanceOf(BusinessLogic);
+  });
+
+  test("setupReact calls the CoreRenderer", () => {
+    presentation.setupReact();
+    expect(setupReactMock).toHaveBeenCalledTimes(1);
   });
 });
