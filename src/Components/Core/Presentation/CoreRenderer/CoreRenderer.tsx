@@ -7,7 +7,7 @@ import { Provider } from "inversify-react";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 
 @injectable()
-export default class implements ICoreRenderer {
+export default class CoreRenderer implements ICoreRenderer {
   setupReact(): void {
     ReactDOM.render(
       <React.StrictMode>
