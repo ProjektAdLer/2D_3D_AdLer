@@ -7,7 +7,7 @@ import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import App from "./App";
 
 @injectable()
-export default class implements ICoreRenderer {
+export default class CoreRenderer implements ICoreRenderer {
   setupReact(): void {
     ReactDOM.render(
       <React.StrictMode>
