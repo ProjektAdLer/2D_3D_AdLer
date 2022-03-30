@@ -4,11 +4,6 @@ import ICore from "./ICore";
 import IBusinessLogic from "../Presentation/API/IBusinessLogic";
 import CORE_TYPES from "../DependencyInjection/CoreTypes";
 import { H5PForCoursesAPIResponse } from "../Types/H5PTypes";
-import CoreDIContainer from "../DependencyInjection/CoreDIContainer";
-import IEntityManager from "../BusinessLogic/EntityManager/IEntityManager";
-import REACT_TYPES from "../../React/DependencyInjection/ReactTypes";
-import ILearningElementFactory from "../Presentation/LearningElement/ILearningElementFactory";
-import { ActionManager } from "@babylonjs/core";
 
 @injectable()
 export default class Core implements ICore {
@@ -28,6 +23,10 @@ export default class Core implements ICore {
 
   async setupMoodle(): Promise<void> {
     this.businessLogic.setupMoodle();
+  }
+
+  setupReact(): void {
+    this.presentation.setupReact();
   }
 
   async setupBabylon(canvas: HTMLCanvasElement): Promise<void> {

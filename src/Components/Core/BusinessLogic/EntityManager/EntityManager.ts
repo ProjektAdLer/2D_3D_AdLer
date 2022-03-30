@@ -5,6 +5,7 @@ import ObservableClass from "./Observables/ObservableClass";
 import { Entity, EntityReference } from "../../Types/EntityManagerTypes";
 import IEntityManager from "./IEntityManager";
 import ObservablePrimitive from "./Observables/ObservablePrimitive";
+import ObservableReadonlyID from "./Observables/ObservableReadonlyID";
 
 // TODO: What happens, when we create an Entity, when there is already on Present in the Parent
 // TODO: Implement CRUD Operations
@@ -38,7 +39,9 @@ export default class EntityManager implements IEntityManager {
     this.entityMap.set(newObservableEntity.Value.id, newObservableEntity);
 
     const parent = this.entityMap.get(parentEntityId)!;
-    parent.Value[parentEntityMember].setValue(newObservableEntity.Value.id);
+    (parent.Value[parentEntityMember] as ObservableReadonlyID).setValue(
+      newObservableEntity.Value.id
+    );
 
     return newObservableEntity.Value.id;
   }

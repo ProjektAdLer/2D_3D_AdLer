@@ -1,8 +1,8 @@
 import "reflect-metadata";
 
 import { useEffect, useRef } from "react";
-import ICoreFactory from "../../../Core/API/ICoreFactory";
-import CoreFactory from "../../../Core/API/CoreFactory";
+import ICoreFactory from "../../API/ICoreFactory";
+import CoreFactory from "../../API/CoreFactory";
 
 export default function BabylonCanvas(props: any) {
   const canvasRef = useRef<HTMLCanvasElement>(null);

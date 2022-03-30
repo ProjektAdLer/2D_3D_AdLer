@@ -1,9 +1,9 @@
 import IEntityManager from "../../../../Core/BusinessLogic/EntityManager/IEntityManager";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import REACT_TYPES from "../../../../React/DependencyInjection/ReactTypes";
 
 import ObservablePrimitive from "../../../../Core/BusinessLogic/EntityManager/Observables/ObservablePrimitive";
 import ObservableClass from "../../../../Core/BusinessLogic/EntityManager/Observables/ObservableClass";
+import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 class TestEntity {
   public id = "id";
   public member1: ObservablePrimitive<boolean> =
@@ -16,7 +16,7 @@ class TestEntity {
 describe("Observables", () => {
   beforeEach(() => {
     CoreDIContainer.snapshot();
-    CoreDIContainer.get<IEntityManager>(REACT_TYPES.IEntityManager);
+    CoreDIContainer.get<IEntityManager>(CORE_TYPES.IEntityManager);
   });
 
   afterEach(() => {
@@ -28,7 +28,7 @@ describe("Observables", () => {
     const callback = jest.fn();
 
     test.Value.member2.subscribe(callback);
-    test.Value.member2.Value = "CorrectValue";
+    test.Value.member2.setValue("CorrectValue");
 
     expect(callback).toHaveBeenCalledWith("CorrectValue");
   });
@@ -40,7 +40,7 @@ describe("Observables", () => {
       //@ts-ignore
       expect(input.member2.value).toBe("CorrectValue");
     });
-    test.Value.member2.Value = "CorrectValue";
+    test.Value.member2.setValue("CorrectValue");
   });
 
   test("Callbacks can unsubscribe from the Observer", () => {
@@ -48,9 +48,9 @@ describe("Observables", () => {
     const callback = jest.fn();
 
     test.Value.member2.subscribe(callback);
-    test.Value.member2.Value = "SomeValue";
+    test.Value.member2.setValue("SomeValue");
     test.Value.member2.unsubscribe(callback);
-    test.Value.member2.Value = "SomeOtherValue";
+    test.Value.member2.setValue("SomeOtherValue");
 
     expect(callback).toHaveBeenCalledTimes(1);
     expect(callback).toBeCalledWith("SomeValue");

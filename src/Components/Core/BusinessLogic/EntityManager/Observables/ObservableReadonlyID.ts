@@ -6,7 +6,7 @@ export default class ObservableReadonlyID extends Observable<string> {
     if (value) this.value = value;
   }
 
-  set Value(value: string) {
+  setValue(value: string) {
     this.value = value;
     this.notify(value);
   }

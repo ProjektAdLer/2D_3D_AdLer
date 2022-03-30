@@ -1,9 +1,7 @@
 import { inject, injectable } from "inversify";
-import REACT_TYPES from "../../../React/DependencyInjection/ReactTypes";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
-import RootEntity from "../../Entities/Entities/RootEntity";
-import TestEntity from "../../Entities/Entities/TestEntity";
+
 import MoodleData from "../../Entities/MoodleData";
 import { H5PForCoursesAPIResponse } from "../../Types/H5PTypes";
 import IDataAccess from "../API/IDataAccess";
@@ -21,21 +19,6 @@ export default class Moodle implements IMoodle {
   ) {}
 
   async setupMoodle(): Promise<void> {
-    // const rootId = this.newEntityManager.getRootEntity().Value.id;
-    // const newId = this.newEntityManager.createEntity<TestEntity, RootEntity>(
-    //   {
-    //     member1: true,
-    //     member2: "false",
-    //   },
-    //   rootId,
-    //   "testEntity",
-    //   TestEntity
-    // );
-
-    // const rootEntity = this.newEntityManager.getRootEntity();
-
-    // const test = rootEntity.Value.OpenLearningElement.Value;
-
     const userToken = await this.dataAccess.signInUser(
       "Student",
       "wve2rxz7wfm3BPH-ykh"
@@ -49,7 +32,7 @@ export default class Moodle implements IMoodle {
   async getAllH5pForCourse(
     courseId: number
   ): Promise<H5PForCoursesAPIResponse> {
-    await this.setupMoodle();
+    // await this.setupMoodle();
     if (!this.moodleData.token)
       throw new Error("No Moodle Token Present. Please call setupMoodle()");
     return this.dataAccess.getAllH5pForCourse(5);

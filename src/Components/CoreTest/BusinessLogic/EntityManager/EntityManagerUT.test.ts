@@ -16,7 +16,7 @@ describe("EntityManager", () => {
     CoreDIContainer.restore();
   });
 
-  test("When a new Entity is createt, is has a valid UUID", () => {
+  test("When a new Entity is created, is has a valid UUID", () => {
     const testEntity = new ObservableClass<TestEntity>(TestEntity);
     expect(uuidValidate(testEntity.Value.id)).toBe(true);
   });
@@ -27,7 +27,8 @@ describe("EntityManager", () => {
     );
     expect(uuidValidate(manager.getRootEntity().Value.id)).toBe(true);
   });
-  test("When an Entity is createt, its ID is referenced in a parent Entity", () => {
+
+  test("When an Entity is created, its ID is referenced in a parent Entity", () => {
     const manager = CoreDIContainer.get<IEntityManager>(
       CORE_TYPES.IEntityManager
     );
@@ -42,6 +43,7 @@ describe("EntityManager", () => {
       "testEntity",
       TestEntity
     );
+
     expect(manager.getRootEntity().Value.testEntity.Value).toBe(newId);
   });
 

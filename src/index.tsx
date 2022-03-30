@@ -1,6 +1,4 @@
 import "reflect-metadata";
-import IReactApi from "./Components/React/API/IReactAPI";
-import REACT_TYPES from "./Components/React/DependencyInjection/ReactTypes";
 import CoreDIContainer from "./Components/Core/DependencyInjection/CoreDIContainer";
 import IEntityManager from "./Components/Core/BusinessLogic/EntityManager/IEntityManager";
 import CORE_TYPES from "./Components/Core/DependencyInjection/CoreTypes";
@@ -8,8 +6,9 @@ import EGenericLearningElement from "./Components/Core/Entities/Entities/Learnin
 import RootEntity from "./Components/Core/Entities/Entities/RootEntity";
 import EH5PLearningElement from "./Components/Core/Entities/Entities/LearningElements/H5PLearningElement";
 import { LearningElementTypeSymbols } from "./Components/Core/Presentation/LearningElement/Types/LearningElementTypes";
+import ICore from "./Components/Core/API/ICore";
 
-const ReactCore = CoreDIContainer.get<IReactApi>(REACT_TYPES.IReactApi);
+const Core = CoreDIContainer.get<ICore>(CORE_TYPES.ICore);
 const entityManager = CoreDIContainer.get<IEntityManager>(
   CORE_TYPES.IEntityManager
 );
@@ -40,4 +39,4 @@ const concreteLearningElementId = entityManager.createEntity<
   EH5PLearningElement
 );
 
-ReactCore.initReact();
+Core.setupReact();

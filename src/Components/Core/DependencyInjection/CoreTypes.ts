@@ -19,6 +19,7 @@ let CORE_TYPES = {
   ILearingElementPresenter: Symbol("ILearingElementPresenter"),
   ILearningElementFactory: Symbol("ILearningElementFactory"),
   IEntityManager: Symbol("IEntityManager"),
+  ICoreRenderer: Symbol("ICoreRenderer"),
 };
 
 export default CORE_TYPES;

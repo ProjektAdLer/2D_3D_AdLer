@@ -4,7 +4,7 @@ import "./App.css";
 import IEntityManager from "../../../Core/BusinessLogic/EntityManager/IEntityManager";
 import { useInjection } from "inversify-react";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
-import usePrimitive from "../../CustomHooks/usePrimitive";
+import usePrimitive from "../CustomHooks/usePrimitive";
 import LearningElementModal from "../LearningElementModal/LearningElementModal";
 
 function App() {

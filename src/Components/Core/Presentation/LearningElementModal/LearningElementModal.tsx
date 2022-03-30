@@ -5,8 +5,8 @@ import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import EGenericLearningElement from "../../../Core/Entities/Entities/LearningElements/GenericLearningElement";
 import { LearningElementTypeSymbols } from "../../../Core/Presentation/LearningElement/Types/LearningElementTypes";
-import useEntity from "../../CustomHooks/useEntity";
-import usePrimitive from "../../CustomHooks/usePrimitive";
+import useEntity from "../CustomHooks/useEntity";
+import usePrimitive from "../CustomHooks/usePrimitive";
 import H5PModal from "./H5PModal";
 
 const elementBuilder = (learningElementID: string) => {

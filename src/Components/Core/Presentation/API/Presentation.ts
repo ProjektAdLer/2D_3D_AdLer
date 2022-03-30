@@ -5,6 +5,7 @@ import IPresentation from "./IPresentation";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import type IScenePresenter from "../SceneManagment/IScenePresenter";
+import ICoreRenderer from "../CoreRenderer/ICoreRenderer";
 
 @injectable()
 export default class Presentation implements IPresentation {
@@ -12,14 +13,18 @@ export default class Presentation implements IPresentation {
   private engineManager: IEngineManager;
   private scenePresenter: IScenePresenter;
 
+  private coreRenderer: ICoreRenderer;
+
   constructor(
     @inject(CORE_TYPES.IBusinessLogic) businessLogic: IBusinessLogic,
     @inject(CORE_TYPES.IEngineManager) engineManager: IEngineManager,
-    @inject(CORE_TYPES.IScenePresenter) scenePresenter: IScenePresenter
+    @inject(CORE_TYPES.IScenePresenter) scenePresenter: IScenePresenter,
+    @inject(CORE_TYPES.ICoreRenderer) coreRenderer: ICoreRenderer
   ) {
     this.businessLogic = businessLogic;
     this.engineManager = engineManager;
     this.scenePresenter = scenePresenter;
+    this.coreRenderer = coreRenderer;
   }
 
   async setupBabylon(canvas: HTMLCanvasElement): Promise<void> {
@@ -30,6 +35,10 @@ export default class Presentation implements IPresentation {
     );
 
     this.scenePresenter.createRenderLoop();
+  }
+
+  setupReact(): void {
+    this.coreRenderer.setupReact();
   }
 
   get BusinessLogic(): IBusinessLogic {
