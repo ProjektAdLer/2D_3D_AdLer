@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@automapper/classes": "^8.0.0",
+    "@automapper/core": "^8.0.0",
     "@babylonjs/core": "^4.2.1",
     "@babylonjs/gui": "^4.2.1",
     "@babylonjs/inspector": "^4.2.1",
