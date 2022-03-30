@@ -1,5 +1,5 @@
 import React from "react";
-import BabylonCanvas from "../BabylonCanvas/BabylonCanvas";
+import BabylonCanvas from "./BabylonCanvas";
 import "./App.css";
 import IEntityManager from "../../../Core/BusinessLogic/EntityManager/IEntityManager";
 import { useInjection } from "inversify-react";

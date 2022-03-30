@@ -39,8 +39,8 @@ import ILearningElementFactory from "../Presentation/LearningElement/ILearningEl
 import LearningElementFactory from "../Presentation/LearningElement/LearningElementFactory";
 import EntityManager from "../BusinessLogic/EntityManager/EntityManager";
 import IEntityManager from "../BusinessLogic/EntityManager/IEntityManager";
-import ICoreRenderer from "../Presentation/CoreRenderer/ICoreRenderer";
-import CoreRenderer from "../Presentation/CoreRenderer/CoreRenderer";
+import ICoreRenderer from "../Presentation/ReactBaseComponents/ICoreRenderer";
+import CoreRenderer from "../Presentation/ReactBaseComponents/ReactEntry";
 
 var CoreDIContainer = new Container();
 

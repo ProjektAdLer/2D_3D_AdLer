@@ -5,7 +5,7 @@ import IPresentation from "./IPresentation";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import type IScenePresenter from "../SceneManagment/IScenePresenter";
-import ICoreRenderer from "../CoreRenderer/ICoreRenderer";
+import ICoreRenderer from "../ReactBaseComponents/ICoreRenderer";
 
 @injectable()
 export default class Presentation implements IPresentation {

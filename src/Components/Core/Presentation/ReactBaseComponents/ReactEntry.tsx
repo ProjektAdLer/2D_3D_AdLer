@@ -2,9 +2,9 @@ import ICoreRenderer from "./ICoreRenderer";
 import React from "react";
 import ReactDOM from "react-dom";
 import { injectable } from "inversify";
-import App from "../ReactEntry/App";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
+import App from "./App";
 
 @injectable()
 export default class implements ICoreRenderer {
