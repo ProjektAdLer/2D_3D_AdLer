@@ -37,6 +37,6 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 - [ ] Benutzerdokumentation wurde, falls nötig, angelegt (Wiki)
 - [ ] Dokumentation des Vorgehens wurde, falls nötig, angelegt (Zenhub Kommentar)
 - [ ] UML Aktivitätsdiagramm wurde erstellt bzw. aktualisiert falls nötig
-- [ ] Changelog des jeweiligen Release wurde aktualisiert (Wiki)
+- [ ] Changelog des jeweiligen Release wurde aktualisiert, falls erforderlich (Wiki)
 - [ ] Es gibt keine bekannten Bugs
 - [ ] Die Realisierung der User Story wurde erfolgreich durch den Product Owner abgenommen
