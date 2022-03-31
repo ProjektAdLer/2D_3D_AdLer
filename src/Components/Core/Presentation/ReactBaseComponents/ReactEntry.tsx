@@ -1,4 +1,4 @@
-import ICoreRenderer from "./ICoreRenderer";
+import IReactEntry from "./IReactEntry";
 import React from "react";
 import ReactDOM from "react-dom";
 import { injectable } from "inversify";
@@ -7,7 +7,7 @@ import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import App from "./App";
 
 @injectable()
-export default class CoreRenderer implements ICoreRenderer {
+export default class ReactEntry implements IReactEntry {
   setupReact(): void {
     ReactDOM.render(
       <React.StrictMode>

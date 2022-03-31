@@ -39,8 +39,8 @@ import ILearningElementFactory from "../Presentation/LearningElement/ILearningEl
 import LearningElementFactory from "../Presentation/LearningElement/LearningElementFactory";
 import EntityManager from "../BusinessLogic/EntityManager/EntityManager";
 import IEntityManager from "../BusinessLogic/EntityManager/IEntityManager";
-import ICoreRenderer from "../Presentation/ReactBaseComponents/ICoreRenderer";
-import CoreRenderer from "../Presentation/ReactBaseComponents/ReactEntry";
+import IReactEntry from "../Presentation/ReactBaseComponents/IReactEntry";
+import ReactEntry from "../Presentation/ReactBaseComponents/ReactEntry";
 
 var CoreDIContainer = new Container();
 
@@ -114,9 +114,9 @@ CoreDIContainer.bind<IEntityManager>(CORE_TYPES.IEntityManager)
   .to(EntityManager)
   .inSingletonScope();
 
-// Core Renderer
-CoreDIContainer.bind<ICoreRenderer>(CORE_TYPES.ICoreRenderer)
-  .to(CoreRenderer)
+// React Entry
+CoreDIContainer.bind<IReactEntry>(CORE_TYPES.ICoreRenderer)
+  .to(ReactEntry)
   .inSingletonScope();
 
 export default CoreDIContainer;

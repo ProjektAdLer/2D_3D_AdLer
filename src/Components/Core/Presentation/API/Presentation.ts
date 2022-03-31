@@ -5,7 +5,7 @@ import IPresentation from "./IPresentation";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import type IScenePresenter from "../SceneManagment/IScenePresenter";
-import ICoreRenderer from "../ReactBaseComponents/ICoreRenderer";
+import IReactEntry from "../ReactBaseComponents/IReactEntry";
 
 @injectable()
 export default class Presentation implements IPresentation {
@@ -13,13 +13,13 @@ export default class Presentation implements IPresentation {
   private engineManager: IEngineManager;
   private scenePresenter: IScenePresenter;
 
-  private coreRenderer: ICoreRenderer;
+  private coreRenderer: IReactEntry;
 
   constructor(
     @inject(CORE_TYPES.IBusinessLogic) businessLogic: IBusinessLogic,
     @inject(CORE_TYPES.IEngineManager) engineManager: IEngineManager,
     @inject(CORE_TYPES.IScenePresenter) scenePresenter: IScenePresenter,
-    @inject(CORE_TYPES.ICoreRenderer) coreRenderer: ICoreRenderer
+    @inject(CORE_TYPES.ICoreRenderer) coreRenderer: IReactEntry
   ) {
     this.businessLogic = businessLogic;
     this.engineManager = engineManager;

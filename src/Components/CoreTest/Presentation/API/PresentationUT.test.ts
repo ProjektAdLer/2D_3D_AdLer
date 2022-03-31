@@ -2,12 +2,12 @@ import BusinessLogic from "../../../Core/BusinessLogic/API/BusinessLogic";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import Presentation from "../../../Core/Presentation/API/Presentation";
-import CoreRenderer from "../../../Core/Presentation/CoreRenderer/CoreRenderer";
 import EngineManager from "../../../Core/Presentation/EngineManager/EngineManager";
 import ScenePresenter from "../../../Core/Presentation/SceneManagment/ScenePresenter";
+import ReactEntry from "../../../Core/Presentation/ReactBaseComponents/ReactEntry";
 
 const createEngineMock = jest.spyOn(EngineManager.prototype, "createEngine");
-const setupReactMock = jest.spyOn(CoreRenderer.prototype, "setupReact");
+const setupReactMock = jest.spyOn(ReactEntry.prototype, "setupReact");
 const createSceneMock = jest.spyOn(ScenePresenter.prototype, "createScene");
 
 const createRenderLoopMock = jest.spyOn(
