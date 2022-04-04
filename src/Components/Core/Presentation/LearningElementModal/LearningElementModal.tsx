@@ -55,7 +55,7 @@ export default function LearningElementModal() {
 
   return (
     <div className="modal flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-blacktrans50">
-      <div className="modal-content bg-white w-2/3 h-full border-8 border-blue-200 rounded-lg overflow-auto">
+      <div className="modal-content bg-white w-5/6 h-full lg:h-screen border-8 border-blue-200 rounded-lg overflow-auto">
         <div className="modal-header flex justify-between items-center p-2 h-6 lg:h-16 text-xl">
           {learningElementEntity.learningElementTitle.Value}
           <button
@@ -65,7 +65,7 @@ export default function LearningElementModal() {
             X
           </button>
         </div>
-        <div className="modal-body p-2 border-t-2 border-b-2 border-blue-200">
+        <div className="modal-body flex justify-center p-2 border-t-2 border-b-2 border-blue-200">
           {elementBuilder(learningElementEntity.id)}
         </div>
         <div className="modal-footer flex justify-between items-center p-2 h-16">

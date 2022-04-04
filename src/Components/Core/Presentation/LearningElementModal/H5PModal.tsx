@@ -40,9 +40,7 @@ export default function H5PModal(props: { h5pEntityId: string }) {
         learningElementEntity.h5PcontextId.Value,
         learningElementEntity.h5PFileName.Value
       )}
-      width=":w"
-      height="100%"
-      style={{ height: "400px", width: "100%" }}
+      style={{width: "95%" }}
     ></iframe>
   );
 }
