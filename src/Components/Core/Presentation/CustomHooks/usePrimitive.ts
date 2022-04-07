@@ -5,7 +5,7 @@ import ObservablePrimitive from "../../BusinessLogic/EntityManager/Observables/O
 export default function usePrimitive<U extends Primitive>(
   primitive: ObservablePrimitive<U>
 ): [U, (input: U) => void] {
-  const [data, setData] = useState<U>();
+  const [data, setData] = useState<U>(primitive.Value);
 
   useEffect(() => {
     primitive.subscribe(setData);
