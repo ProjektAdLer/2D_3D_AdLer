@@ -41,6 +41,9 @@ import EntityManager from "../BusinessLogic/EntityManager/EntityManager";
 import IEntityManager from "../BusinessLogic/EntityManager/IEntityManager";
 import IReactEntry from "../Presentation/ReactBaseComponents/IReactEntry";
 import ReactEntry from "../Presentation/ReactBaseComponents/ReactEntry";
+import ILearningElementPanelPresenter from "../Presentation/LearningElementPanel/ILearningElementPanelPresenter";
+import LearningElementPanelPresenter from "../Presentation/LearningElementPanel/LearningElementPanelPresenter";
+import LearningElementPanelViewModel from "../Presentation/LearningElementPanel/LearningElementPanelViewModel";
 
 var CoreDIContainer = new Container();
 
@@ -118,5 +121,11 @@ CoreDIContainer.bind<IEntityManager>(CORE_TYPES.IEntityManager)
 CoreDIContainer.bind<IReactEntry>(CORE_TYPES.ICoreRenderer)
   .to(ReactEntry)
   .inSingletonScope();
+
+// Learning Element Panel
+CoreDIContainer.bind<ILearningElementPanelPresenter>(
+  CORE_TYPES.ILearningElementPanelPresenter
+).to(LearningElementPanelPresenter);
+CoreDIContainer.bind(LearningElementPanelViewModel).toSelf();
 
 export default CoreDIContainer;
