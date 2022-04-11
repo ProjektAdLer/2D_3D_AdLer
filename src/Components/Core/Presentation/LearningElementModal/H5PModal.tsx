@@ -36,11 +36,12 @@ export default function H5PModal(props: { h5pEntityId: string }) {
   return (
     <iframe
       ref={iframeRef}
+      allowFullScreen
       src={createIframeUrl(
         learningElementEntity.h5PcontextId.Value,
         learningElementEntity.h5PFileName.Value
       )}
-      style={{width: "95%" }}
+      style={{ width: "95%" }}
     ></iframe>
   );
 }
