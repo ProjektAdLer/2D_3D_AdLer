@@ -7,6 +7,7 @@ import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import usePrimitive from "../CustomHooks/usePrimitive";
 import LearningElementModal from "../LearningElementModal/LearningElementModal";
 import StyledButton from "../ReactCommon/StyledButton";
+import ButtonContainer from "../ReactCommon/ButtonContainer";
 
 function App() {
   const entityManager = useInjection<IEntityManager>(CORE_TYPES.IEntityManager);
@@ -19,7 +20,7 @@ function App() {
   return (
     <React.Fragment>
       <div className="root max-w-1/1 max-h-1/1 flex bg-babylonbg">
-        <div className="button-container w-1/12 fixed h-fit top-0 left-0 flex flex-col gap-2 p-2 m-3 bg-adlergold rounded-lg">
+        <ButtonContainer>
           <StyledButton
             onClick={() => {
               setShowModal(true);
@@ -50,7 +51,7 @@ function App() {
           >
             "I have the high ground, Anakin."
           </StyledButton>
-        </div>
+        </ButtonContainer>
         <BabylonCanvas className="w-screen h-screen" />
         <LearningElementModal />
       </div>
