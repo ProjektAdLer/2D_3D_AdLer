@@ -68,7 +68,7 @@ export default function LearningElementModal() {
         <div className="modal-body flex justify-center p-2 border-t-2 border-b-2 rounded-lg border-adlerlightblue">
           {elementBuilder(learningElementEntity.id)}
         </div>
-        <div className="modal-footer font-medium flex shrink justify-between items-center p-2 h-16">
+        <div className="modal-footer font-medium flex shrink justify-between items-center p-4 h-16">
           <p>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
