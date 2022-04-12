@@ -20,7 +20,7 @@ function App() {
       <div className="root max-w-1/1 max-h-1/1 flex bg-babylonbg">
         <div className="button-container w-1/12 fixed h-fit top-0 left-0 flex flex-col gap-2 p-2 m-3 bg-adlergold rounded-lg">
           <button
-            className="container-button w-3/4 hover:cursor-pointer text-sm lg:text-xl border-b-4 border-r-4 border-adlerdarkblue active:border-0 m-auto py-1 px-2 bg-adlerblue rounded-lg font-black text-white"
+            className="container-button w-3/4 hover:cursor-pointer text-sm lg:text-xl border-b-4 border-r-4 border-adlerdarkblue active:border-adlergold m-auto py-1 px-2 bg-adlerblue rounded-lg font-black text-white"
             onClick={() => {
               setShowModal(true);
 
@@ -30,7 +30,7 @@ function App() {
             "H5P Öffnen"
           </button>
           <button
-            className="container-button w-3/4 hover:cursor-pointer text-sm lg:text-xl border-b-4 border-r-4 border-adlerdarkblue active:border-0 m-auto py-1 px-2 bg-adlerblue rounded-lg font-black text-white"
+            className="container-button w-3/4 hover:cursor-pointer text-sm lg:text-xl border-b-4 border-r-4 border-adlerdarkblue active:border-adlergold m-auto py-1 px-2 bg-adlerblue rounded-lg font-black text-white"
             onClick={() => {
               setPrimitive("Das ist ein Test aus dem Knopf heraus ;) ");
             }}
@@ -38,7 +38,7 @@ function App() {
             "You were like a brother to me"
           </button>
           <button
-            className="container-button w-3/4 hover:cursor-pointer text-sm lg:text-xl border-b-4 border-r-4 border-adlerdarkblue active:border-0 m-auto py-1 px-2 bg-adlerblue rounded-lg font-black text-white"
+            className="container-button w-3/4 hover:cursor-pointer text-sm lg:text-xl border-b-4 border-r-4 border-adlerdarkblue active:border-adlergold m-auto py-1 px-2 bg-adlerblue rounded-lg font-black text-white"
             onClick={() => {
               setPrimitive("Das ist ein Test aus dem Knopf heraus ;) ");
             }}
@@ -46,7 +46,7 @@ function App() {
             "Don't try it"
           </button>
           <button
-            className="container-button w-3/4 hover:cursor-pointer text-sm lg:text-xl border-b-4 border-r-4 border-adlerdarkblue active:border-0 m-auto py-1 px-2 bg-adlerblue rounded-lg font-black text-white"
+            className="container-button w-3/4 hover:cursor-pointer text-sm lg:text-xl border-b-4 border-r-4 border-adlerdarkblue active:border-adlergold m-auto py-1 px-2 bg-adlerblue rounded-lg font-black text-white"
             onClick={() => {
               setPrimitive("Das ist ein Test aus dem Knopf heraus ;) ");
             }}
