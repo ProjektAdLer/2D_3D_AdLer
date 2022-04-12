@@ -35,6 +35,7 @@ export default function H5PModal(props: { h5pEntityId: string }) {
 
   return (
     <iframe
+      className="rounded-lg"
       ref={iframeRef}
       allowFullScreen
       src={createIframeUrl(
