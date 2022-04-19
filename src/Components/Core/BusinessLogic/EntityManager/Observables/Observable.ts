@@ -1,4 +1,3 @@
-export type Primitive = string | boolean | number | Symbol;
 export default abstract class Observable<T> {
   protected value: T;
   protected subscribers: ((value: T) => void)[] = [];

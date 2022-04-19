@@ -1,4 +1,6 @@
-import Observable, { Primitive } from "./Observable";
+import Observable from "./Observable";
+
+export type Primitive = string | boolean | number | Symbol;
 
 export default class ObservablePrimitive<
   T extends Primitive
