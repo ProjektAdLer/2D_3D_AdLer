@@ -44,6 +44,8 @@ import ReactEntry from "../Presentation/ReactBaseComponents/ReactEntry";
 import ILearningElementPanelPresenter from "../Presentation/LearningElementPanel/ILearningElementPanelPresenter";
 import LearningElementPanelPresenter from "../Presentation/LearningElementPanel/LearningElementPanelPresenter";
 import LearningElementPanelViewModel from "../Presentation/LearningElementPanel/LearningElementPanelViewModel";
+import IViewModelProvider from "../Presentation/ViewModelProvider/IViewModelProvider";
+import ViewModelProvider from "../Presentation/ViewModelProvider/ViewModelProvider";
 
 var CoreDIContainer = new Container();
 
@@ -127,5 +129,10 @@ CoreDIContainer.bind<ILearningElementPanelPresenter>(
   CORE_TYPES.ILearningElementPanelPresenter
 ).to(LearningElementPanelPresenter);
 CoreDIContainer.bind(LearningElementPanelViewModel).toSelf();
+
+// View Model Provider
+CoreDIContainer.bind<IViewModelProvider>(CORE_TYPES.IViewModelProvider)
+  .to(ViewModelProvider)
+  .inSingletonScope();
 
 export default CoreDIContainer;

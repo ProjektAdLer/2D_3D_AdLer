@@ -4,6 +4,9 @@ import ICore from "./ICore";
 import IBusinessLogic from "../Presentation/API/IBusinessLogic";
 import CORE_TYPES from "../DependencyInjection/CoreTypes";
 import { H5PForCoursesAPIResponse } from "../Types/H5PTypes";
+import CoreDIContainer from "../DependencyInjection/CoreDIContainer";
+import IViewModelProvider from "../Presentation/ViewModelProvider/IViewModelProvider";
+import LearningElementPanelViewModel from "../Presentation/LearningElementPanel/LearningElementPanelViewModel";
 
 @injectable()
 export default class Core implements ICore {
@@ -33,5 +36,18 @@ export default class Core implements ICore {
     await this.presentation.setupBabylon(canvas);
 
     await this.setupMoodle();
+
+    var viewModelProvider = CoreDIContainer.get<IViewModelProvider>(
+      CORE_TYPES.IViewModelProvider
+    );
+    var viewModel;
+    for (let index = 0; index < 10; index++) {
+      viewModel = new LearningElementPanelViewModel();
+      viewModel.text.setValue("Panel" + index);
+      viewModelProvider.registerViewModel<LearningElementPanelViewModel>(
+        viewModel,
+        LearningElementPanelViewModel
+      );
+    }
   }
 }

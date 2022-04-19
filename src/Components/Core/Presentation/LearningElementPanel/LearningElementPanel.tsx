@@ -1,13 +1,15 @@
+import { useState } from "react";
 import usePrimitive from "../CustomHooks/usePrimitive";
-import ILearningElementPanelPresenter from "./ILearningElementPanelPresenter";
+import LearningElementPanelPresenter from "./LearningElementPanelPresenter";
+import LearningElementPanelViewModel from "./LearningElementPanelViewModel";
 
 export default function LearningElementPanel(props: {
-  presenter: ILearningElementPanelPresenter;
+  viewModel: LearningElementPanelViewModel;
 }) {
-  const presenter = props.presenter;
-  const viewModel = presenter.getViewModel();
-
-  const [text] = usePrimitive(viewModel.text);
+  const [presenter] = useState(
+    new LearningElementPanelPresenter(props.viewModel)
+  );
+  const [text] = usePrimitive(props.viewModel.text);
 
   return (
     <button

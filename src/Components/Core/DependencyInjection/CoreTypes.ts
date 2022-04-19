@@ -22,6 +22,7 @@ let CORE_TYPES = {
   ICoreRenderer: Symbol("ICoreRenderer"),
   ILearningElementPanelPresenter: Symbol("ILearningElementPanelPresenter"),
   ILearningElementPanelViewModel: Symbol("ILearningElementPanelViewModel"),
+  IViewModelProvider: Symbol("IViewModelProvider"),
 };
 
 export default CORE_TYPES;
