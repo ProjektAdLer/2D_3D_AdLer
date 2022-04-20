@@ -20,7 +20,6 @@ export default class RoomConfigurator implements IRoomConfigurator {
 
     this.roomElementCount &&
       (this.roomSize = this.determineRoomSize(this.roomElementCount));
-    console.log("room config: roomsize", this.roomSize);
   }
 
   get RoomSize(): ROOMSIZE {

@@ -8,9 +8,7 @@ import IMoodleDataAccess from "../Moodle/IMoodleDataAccess";
 export default class DataAccess implements IDataAccess {
   constructor(
     @inject(CORE_TYPES.IMoodleDataAccess) private moodleData: IMoodleDataAccess
-  ) {
-    console.log("DataAccess");
-  }
+  ) {}
   async signInUser(username: string, password: string): Promise<string> {
     return await this.moodleData.signInUser("Student", "wve2rxz7wfm3BPH-ykh");
   }

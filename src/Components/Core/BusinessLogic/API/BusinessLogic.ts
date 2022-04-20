@@ -21,8 +21,6 @@ export default class BusinessLogic implements IBusinessLogic {
     this.dataAccess = dataAccess;
     this.roomConfigurator = roomConfigurator;
     this.moodleBS = moodle;
-
-    console.log("BusinessLogic");
   }
 
   async getAllH5Ps(courseId: number): Promise<H5PForCoursesAPIResponse> {

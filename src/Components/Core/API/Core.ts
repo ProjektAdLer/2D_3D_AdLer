@@ -17,7 +17,6 @@ export default class Core implements ICore {
   ) {
     this.presentation = presentation;
     this.businessLogic = presentation.BusinessLogic;
-    console.log("Core created");
   }
 
   async getAllH5Ps(courseId: number): Promise<H5PForCoursesAPIResponse> {

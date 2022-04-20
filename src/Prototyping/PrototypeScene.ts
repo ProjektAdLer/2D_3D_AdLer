@@ -66,7 +66,6 @@ export default class PrototypeScene implements ICreateSceneClass {
     );
 
     let env = importResult.meshes[7];
-    console.log(env);
 
     var plane = MeshBuilder.CreatePlane(
       "plane",
@@ -86,9 +85,7 @@ export default class PrototypeScene implements ICreateSceneClass {
 
     sphere.actionManager = new ActionManager(scene);
     sphere.actionManager.registerAction(
-      new ExecuteCodeAction(ActionManager.OnPickTrigger, function (evt) {
-        console.log("Party, Party!");
-      })
+      new ExecuteCodeAction(ActionManager.OnPickTrigger, function (evt) {})
     );
 
     scene.debugLayer.show();

@@ -38,8 +38,6 @@ describe("MoodleBS", () => {
     );
     moodleBs.moodleData.token = "testToken";
 
-    console.log(apiResponse.h5pactivities);
-
     const mock = jest
       .spyOn(MoodleDataAccess.prototype, "makeApiCall")
       .mockResolvedValue(apiResponse);
