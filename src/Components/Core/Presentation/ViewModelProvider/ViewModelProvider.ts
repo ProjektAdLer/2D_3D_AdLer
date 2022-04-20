@@ -1,20 +1,21 @@
 import { injectable } from "inversify";
 import IObservableContainer from "./IObservableContainer";
+import IViewModel from "./IViewModel";
 import IViewModelProvider from "./IViewModelProvider";
 import ObservableContainer from "./ObservableContainer";
 
 @injectable()
 export default class ViewModelProvider implements IViewModelProvider {
-  private containers: IObservableContainer<any>[] = [];
+  private containers: IObservableContainer<IViewModel>[] = [];
 
-  public registerRequest<T>(
+  public registerRequest<T extends IViewModel>(
     callback: (viewModels: T[]) => void,
     viewModelClass: { new (): T }
   ): void {
     this.findOrCreateContainer<T>(viewModelClass).registerRequest(callback);
   }
 
-  public cancelRequest<T>(
+  public cancelRequest<T extends IViewModel>(
     callback: (viewModels: T[]) => void,
     viewModelClass: { new (): T }
   ): void {
@@ -22,27 +23,30 @@ export default class ViewModelProvider implements IViewModelProvider {
     container?.cancelRequest(callback);
   }
 
-  public registerViewModel<T>(
+  public registerViewModel<T extends IViewModel>(
     viewModel: T,
     viewModelClass: { new (): T }
   ): void {
     this.findOrCreateContainer<T>(viewModelClass).addNewValue(viewModel);
   }
 
-  public removeViewModel<T>(viewModel: T, viewModelClass: { new (): T }): void {
+  public removeViewModel<T extends IViewModel>(
+    viewModel: T,
+    viewModelClass: { new (): T }
+  ): void {
     var container = this.findContainer<T>(viewModelClass);
     container?.removeValue(viewModel);
   }
 
-  private findContainer<T>(viewModelClass: {
+  private findContainer<T extends IViewModel>(viewModelClass: {
     new (): T;
-  }): IObservableContainer<T> | undefined {
+  }): IObservableContainer<IViewModel> | undefined {
     return this.containers.find((c) => c.matchesType<T>(viewModelClass));
   }
 
-  private findOrCreateContainer<T>(viewModelClass: {
+  private findOrCreateContainer<T extends IViewModel>(viewModelClass: {
     new (): T;
-  }): IObservableContainer<T> {
+  }): IObservableContainer<IViewModel> {
     var container = this.findContainer<T>(viewModelClass);
     if (container === undefined) {
       container = new ObservableContainer<T>(viewModelClass);
