@@ -36,18 +36,5 @@ export default class Core implements ICore {
     await this.presentation.setupBabylon(canvas);
 
     await this.setupMoodle();
-
-    var viewModelProvider = CoreDIContainer.get<IViewModelProvider>(
-      CORE_TYPES.IViewModelProvider
-    );
-    var viewModel;
-    for (let index = 0; index < 10; index++) {
-      viewModel = new LearningElementPanelViewModel();
-      viewModel.text.setValue("Panel" + index);
-      viewModelProvider.registerViewModel<LearningElementPanelViewModel>(
-        viewModel,
-        LearningElementPanelViewModel
-      );
-    }
   }
 }
