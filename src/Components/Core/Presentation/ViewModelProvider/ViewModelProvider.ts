@@ -1,10 +1,11 @@
 import { injectable } from "inversify";
+import IObservableContainer from "./IObservableContainer";
 import IViewModelProvider from "./IViewModelProvider";
-import ViewModelContainer from "./ViewModelContainer";
+import ObservableContainer from "./ObservableContainer";
 
 @injectable()
 export default class ViewModelProvider implements IViewModelProvider {
-  private containers: ViewModelContainer<any>[] = [];
+  private containers: IObservableContainer<any>[] = [];
 
   public registerRequest<T>(
     callback: (viewModels: T[]) => void,
@@ -25,21 +26,26 @@ export default class ViewModelProvider implements IViewModelProvider {
     viewModel: T,
     viewModelClass: { new (): T }
   ): void {
-    this.findOrCreateContainer<T>(viewModelClass).registerViewModel(viewModel);
+    this.findOrCreateContainer<T>(viewModelClass).addNewValue(viewModel);
+  }
+
+  public removeViewModel<T>(viewModel: T, viewModelClass: { new (): T }): void {
+    var container = this.findContainer<T>(viewModelClass);
+    container?.removeValue(viewModel);
   }
 
   private findContainer<T>(viewModelClass: {
     new (): T;
-  }): ViewModelContainer<T> | undefined {
+  }): IObservableContainer<T> | undefined {
     return this.containers.find((c) => c.matchesType<T>(viewModelClass));
   }
 
   private findOrCreateContainer<T>(viewModelClass: {
     new (): T;
-  }): ViewModelContainer<T> {
+  }): IObservableContainer<T> {
     var container = this.findContainer<T>(viewModelClass);
     if (container === undefined) {
-      container = new ViewModelContainer<T>(viewModelClass);
+      container = new ObservableContainer<T>(viewModelClass);
       this.containers.push(container);
     }
     return container;

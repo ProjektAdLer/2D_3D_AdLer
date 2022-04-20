@@ -25,4 +25,11 @@ export default interface IViewModelProvider {
    * @param viewModelClass The type of the registered view model.
    */
   registerViewModel<T>(viewModel: T, viewModelClass: { new (): T }): void;
+
+  /**
+   * Removes a view model from the provider.
+   * @param viewModel The view model to remove.
+   * @param viewModelClass The type of the removed view model.
+   */
+  removeViewModel<T>(viewModel: T, viewModelClass: { new (): T }): void;
 }

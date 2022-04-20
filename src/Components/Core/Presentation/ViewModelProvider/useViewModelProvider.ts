@@ -9,12 +9,16 @@ export default function useViewModelProvider<T>(viewModelType: {
   const viewModelProvider = useInjection<IViewModelProvider>(
     CORE_TYPES.IViewModelProvider
   );
-  const [viewModels, setViewModels] = useState<T[]>(new Array<T>());
+  const [viewModels, setViewModels] = useState<T[]>([]);
+
+  function setState(newState: T[]): void {
+    setViewModels([...newState]);
+  }
 
   useEffect(() => {
-    viewModelProvider.registerRequest<T>(setViewModels, viewModelType);
+    viewModelProvider.registerRequest<T>(setState, viewModelType);
     return () => {
-      viewModelProvider.cancelRequest<T>(setViewModels, viewModelType);
+      viewModelProvider.cancelRequest<T>(setState, viewModelType);
     };
   }, []);
 

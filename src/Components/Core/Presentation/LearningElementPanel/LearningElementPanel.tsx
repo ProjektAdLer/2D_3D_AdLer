@@ -1,4 +1,3 @@
-import { useState } from "react";
 import usePrimitive from "../CustomHooks/usePrimitive";
 import LearningElementPanelPresenter from "./LearningElementPanelPresenter";
 import LearningElementPanelViewModel from "./LearningElementPanelViewModel";
@@ -6,9 +5,7 @@ import LearningElementPanelViewModel from "./LearningElementPanelViewModel";
 export default function LearningElementPanel(props: {
   viewModel: LearningElementPanelViewModel;
 }) {
-  const [presenter] = useState(
-    new LearningElementPanelPresenter(props.viewModel)
-  );
+  const presenter = new LearningElementPanelPresenter(props.viewModel);
   const [text] = usePrimitive(props.viewModel.text);
 
   return (

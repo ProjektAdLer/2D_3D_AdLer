@@ -7,18 +7,13 @@ export default function LearningElementPanelContainer() {
     LearningElementPanelViewModel
   );
 
+  const elements = viewModels?.map((viewModel, index) => (
+    <LearningElementPanel key={index.toString()} viewModel={viewModel} />
+  ));
+
   return (
     <div className="le-panel-container fixed top-0 left-0 flex-col gap-4 m-5 w-120px max-h-full">
-      {viewModels.length > 0 && (
-        <div>
-          {viewModels.map((viewModel, index) => (
-            <LearningElementPanel
-              key={index.toString()}
-              viewModel={viewModel}
-            />
-          ))}
-        </div>
-      )}
+      {viewModels.length > 0 && <div>{elements}</div>}
     </div>
   );
 }
