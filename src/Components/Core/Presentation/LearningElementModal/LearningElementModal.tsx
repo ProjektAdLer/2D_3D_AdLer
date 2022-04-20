@@ -56,7 +56,7 @@ export default function LearningElementModal() {
   return (
     <div className="modal flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-blacktrans50">
       <div className="modal-content bg-adlerlightblue w-full lg:w-5/6 max-h-screen border-8 border-adlerlightblue rounded-lg overflow-auto">
-        <div className="modal-header font-black flex justify-between items-center p-4 h-6 lg:h-16 text-xl lg:text-2xl">
+        <div className="modal-header font-black flex justify-between items-center p-4 h-6 lg:h-16 text-xl lg:text-4xl">
           {learningElementEntity.learningElementTitle.Value}
           <button
             onClick={() => setShowModal(false)}
