@@ -12,7 +12,10 @@ export default class ViewModelProvider implements IViewModelProvider {
     callback: (viewModels: T[]) => void,
     viewModelClass: { new (): T }
   ): void {
-    this.findOrCreateContainer<T>(viewModelClass).registerRequest(callback);
+    var container = this.findOrCreateContainer<T>(viewModelClass);
+    if (container.matchesType<T>(viewModelClass)) {
+      container.registerRequest(callback);
+    }
   }
 
   public cancelRequest<T extends IViewModel>(
@@ -20,7 +23,9 @@ export default class ViewModelProvider implements IViewModelProvider {
     viewModelClass: { new (): T }
   ): void {
     var container = this.findContainer<T>(viewModelClass);
-    container?.cancelRequest(callback);
+    if (container?.matchesType<T>(viewModelClass)) {
+      container?.cancelRequest(callback);
+    }
   }
 
   public registerViewModel<T extends IViewModel>(
