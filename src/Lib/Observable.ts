@@ -1,4 +1,4 @@
-export default abstract class Observable<T> {
+export default class Observable<T> {
   protected value: T;
   protected subscribers: ((value: T) => void)[] = [];
 
@@ -20,5 +20,10 @@ export default abstract class Observable<T> {
 
   get Value(): T {
     return this.value;
+  }
+
+  set Value(value: T) {
+    this.value = value;
+    this.notify(value);
   }
 }

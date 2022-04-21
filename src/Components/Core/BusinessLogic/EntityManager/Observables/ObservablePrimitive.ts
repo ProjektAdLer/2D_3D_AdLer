@@ -1,10 +1,10 @@
-import Observable from "./Observable";
+import AbstractObservable from "./AbstractObservable";
 
 export type Primitive = string | boolean | number | Symbol;
 
 export default class ObservablePrimitive<
   T extends Primitive
-> extends Observable<T> {
+> extends AbstractObservable<T> {
   constructor(value?: T) {
     super();
     if (value) this.value = value;
