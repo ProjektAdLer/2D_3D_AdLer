@@ -26,6 +26,15 @@ describe("ObservableContainer", () => {
     expect(container["callbacks"][0]).toBe(callback);
   });
 
+  test("registerRequest calls new callback immediately if values are available", () => {
+    const callback = jest.fn();
+    const viewModel = new TestClassA();
+    container.addNewValue(viewModel);
+    container.registerRequest(callback);
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(callback).toHaveBeenCalledWith([viewModel]);
+  });
+
   test("cancelRequest cancels a previously registered callback", () => {
     const callback = jest.fn();
     container.registerRequest(callback);
