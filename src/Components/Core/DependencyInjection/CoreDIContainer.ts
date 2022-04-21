@@ -17,8 +17,8 @@ import ScenePresenter from "../Presentation/SceneManagment/ScenePresenter";
 import DataTransferObject from "../Entities/ExternalRoomData";
 import IRoomConfigurator from "../BusinessLogic/RoomConfigurator/IRoomConfigurator";
 import RoomConfigurator from "../BusinessLogic/RoomConfigurator/RoomConfigurator";
-import IRoomPresenter from "../Presentation/Room/IRoomPresenter";
-import RoomPresenter from "../Presentation/Room/RoomPresenter";
+import IRoomController from "../Presentation/Room/IRoomController";
+import RoomController from "../Presentation/Room/RoomController";
 import MainScene from "../Presentation/SceneManagment/MainScene";
 import ICreateSceneClass from "../Presentation/SceneManagment/ICreateSceneClass";
 import IRoomView from "../Presentation/Room/IRoomView";
@@ -86,8 +86,8 @@ CoreDIContainer.bind(DataTransferObject).toSelf();
 CoreDIContainer.bind<IRoomConfigurator>(CORE_TYPES.IRoomConfigurator)
   .to(RoomConfigurator)
   .inSingletonScope();
-CoreDIContainer.bind<IRoomPresenter>(CORE_TYPES.IRoomPresenter)
-  .to(RoomPresenter)
+CoreDIContainer.bind<IRoomController>(CORE_TYPES.IRoomController)
+  .to(RoomController)
   .inSingletonScope();
 CoreDIContainer.bind<IRoomView>(CORE_TYPES.IRoomView).to(RoomView);
 CoreDIContainer.bind(RoomViewModel).toSelf();

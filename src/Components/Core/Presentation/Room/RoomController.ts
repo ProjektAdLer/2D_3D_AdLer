@@ -1,16 +1,14 @@
 import { injectable, inject } from "inversify";
-import IRoomPresenter from "./IRoomPresenter";
+import IRoomController from "./IRoomController";
 import Presentation from "../API/Presentation";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import RoomViewModel from "./RoomViewModel";
-import { ROOMSIZE } from "../../BusinessLogic/RoomConfigurator/RoomConfigurator";
 import IRoomView from "./IRoomView";
 import type IScenePresenter from "../SceneManagment/IScenePresenter";
 
 @injectable()
-export default class RoomPresenter implements IRoomPresenter {
+export default class RoomController implements IRoomController {
   private presentation: Presentation;
-  private scenePresenter: IScenePresenter;
   private viewModel: RoomViewModel;
   private view: IRoomView;
 
@@ -21,25 +19,11 @@ export default class RoomPresenter implements IRoomPresenter {
     @inject(CORE_TYPES.IRoomView) view: IRoomView
   ) {
     this.presentation = presentation;
-    this.scenePresenter = scenePresenter;
     this.viewModel = viewModel;
     this.view = view;
     this.view.ViewModel = this.viewModel;
 
-    this.viewModel.RoomSize = this.presentation.BusinessLogic.RoomSize;
-  }
-
-  // TODO: Create Method for future DTO to set RoomViewModel data
-
-  get RoomSize(): ROOMSIZE {
-    return this.viewModel.RoomSize;
-  }
-
-  createFloor() {
-    this.view.createFloor(this.scenePresenter.Scene);
-  }
-
-  createWalls() {
-    this.view.createWalls(this.scenePresenter.Scene);
+    viewModel.scene.Value = scenePresenter.Scene;
+    this.viewModel.roomSize.Value = this.presentation.BusinessLogic.RoomSize;
   }
 }

@@ -2,6 +2,10 @@ export default class Observable<T> {
   protected value: T;
   protected subscribers: ((value: T) => void)[] = [];
 
+  constructor(defaultValue?: T) {
+    if (defaultValue) this.value = defaultValue;
+  }
+
   public subscribe(fn: (value: T) => void): void {
     this.subscribers.push(fn);
   }
