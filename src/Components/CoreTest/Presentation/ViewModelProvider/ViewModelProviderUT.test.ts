@@ -1,9 +1,7 @@
-import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
-import IViewModelProvider from "../../../Core/Presentation/ViewModelProvider/IViewModelProvider";
 import ViewModelProvider from "../../../Core/Presentation/ViewModelProvider/ViewModelProvider";
 
-class TestViewModel {}
+class TestViewModelA {}
+class TestViewModelB {}
 
 describe("ViewModelProvider", () => {
   let viewModelProvider: ViewModelProvider;
@@ -12,46 +10,75 @@ describe("ViewModelProvider", () => {
     viewModelProvider = new ViewModelProvider();
   });
 
-  test("registerRequest should register a request", () => {
+  test("registerRequest registers a request", () => {
     const callback = jest.fn();
-    viewModelProvider.registerRequest(callback, TestViewModel);
+    viewModelProvider.registerRequest(callback, TestViewModelA);
+
     expect(viewModelProvider["containers"].length).toBe(1);
-    expect(viewModelProvider["containers"][0]["type"]).toBe(TestViewModel);
+    expect(viewModelProvider["containers"][0]["type"]).toBe(TestViewModelA);
     expect(viewModelProvider["containers"][0]["callbacks"].length).toBe(1);
     expect(viewModelProvider["containers"][0]["callbacks"][0]).toBe(callback);
   });
 
-  test("cancelRequest should cancel a previous registered request", () => {
+  test("cancelRequest cancels a previous registered request", () => {
     const callback = jest.fn();
-    viewModelProvider.registerRequest(callback, TestViewModel);
-    viewModelProvider.cancelRequest(callback, TestViewModel);
+
+    viewModelProvider.registerRequest(callback, TestViewModelA);
+    viewModelProvider.cancelRequest(callback, TestViewModelA);
+
     expect(viewModelProvider["containers"].length).toBe(1);
-    expect(viewModelProvider["containers"][0]["type"]).toBe(TestViewModel);
+    expect(viewModelProvider["containers"][0]["type"]).toBe(TestViewModelA);
     expect(viewModelProvider["containers"][0]["callbacks"].length).toBe(0);
   });
 
-  test("should call callback when a view model was registered", () => {
+  test("registerViewModel calls callback when a view model was registered", () => {
     const callback = jest.fn();
-    const viewModel = new TestViewModel();
-    viewModelProvider.registerRequest(callback, TestViewModel);
-    viewModelProvider.registerViewModel(viewModel, TestViewModel);
+    const viewModel = new TestViewModelA();
+
+    viewModelProvider.registerRequest(callback, TestViewModelA);
+    viewModelProvider.registerViewModel(viewModel, TestViewModelA);
+
     expect(callback).toHaveBeenCalledTimes(1);
     expect(callback).toHaveBeenCalledWith([viewModel]);
   });
 
-  test("registerViewModel should register view model", () => {
-    const viewModel = new TestViewModel();
-    viewModelProvider.registerViewModel(viewModel, TestViewModel);
-    expect(viewModelProvider["containers"].length).toBe(1);
-    expect(viewModelProvider["containers"][0]["type"]).toBe(TestViewModel);
-    expect(viewModelProvider["containers"][0].getValues().length).toBe(1);
-    expect(viewModelProvider["containers"][0].getValues()[0]).toBe(viewModel);
+  test("removeViewModel calls callback when a view model was removed", () => {
+    const callback = jest.fn();
+    const viewModel = new TestViewModelA();
+
+    viewModelProvider.registerRequest(callback, TestViewModelA);
+    viewModelProvider.registerViewModel(viewModel, TestViewModelA);
+    viewModelProvider.removeViewModel(viewModel, TestViewModelA);
+
+    expect(callback).toHaveBeenCalledTimes(2);
+    expect(callback).lastCalledWith([]);
   });
 
-  test("removeViewModel should remove a previously added view model", () => {
-    const viewModel = new TestViewModel();
-    viewModelProvider.registerViewModel(viewModel, TestViewModel);
-    viewModelProvider.removeViewModel(viewModel, TestViewModel);
+  test("registerViewModel registers view model", () => {
+    const viewModelA = new TestViewModelA();
+    const viewModelB = new TestViewModelB();
+
+    viewModelProvider.registerViewModel(viewModelA, TestViewModelA);
+    viewModelProvider.registerViewModel<TestViewModelA>(
+      viewModelB,
+      TestViewModelB
+    );
+
+    expect(viewModelProvider["containers"].length).toBe(2);
+    expect(viewModelProvider["containers"][0]["type"]).toBe(TestViewModelA);
+    expect(viewModelProvider["containers"][1]["type"]).toBe(TestViewModelB);
+    expect(viewModelProvider["containers"][0].getValues().length).toBe(1);
+    expect(viewModelProvider["containers"][1].getValues().length).toBe(1);
+    expect(viewModelProvider["containers"][0].getValues()[0]).toBe(viewModelA);
+    expect(viewModelProvider["containers"][1].getValues()[0]).toBe(viewModelB);
+  });
+
+  test("removeViewModel removes a previously added view model", () => {
+    const viewModel = new TestViewModelA();
+
+    viewModelProvider.registerViewModel(viewModel, TestViewModelA);
+    viewModelProvider.removeViewModel(viewModel, TestViewModelA);
+
     expect(viewModelProvider["containers"][0].getValues().length).toBe(0);
   });
 });
