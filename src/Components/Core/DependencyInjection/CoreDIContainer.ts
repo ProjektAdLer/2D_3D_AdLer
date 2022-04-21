@@ -1,3 +1,6 @@
+import { LoadWorldPresenter } from "../Presentation/LoadWorldButton/LoadWorldController";
+import { ILoadWorldPresenter } from "../Presentation/LoadWorldButton/ILoadWorldController";
+import { ILoadWorld } from "./../Domain/LoadWorld/ILoadWorld";
 import { Container } from "inversify";
 import CORE_TYPES from "./CoreTypes";
 import IPresentation from "../Presentation/API/IPresentation";
@@ -46,6 +49,7 @@ import LearningElementPanelPresenter from "../Presentation/LearningElementPanel/
 import LearningElementPanelViewModel from "../Presentation/LearningElementPanel/LearningElementPanelViewModel";
 import IViewModelProvider from "../Presentation/ViewModelProvider/IViewModelProvider";
 import ViewModelProvider from "../Presentation/ViewModelProvider/ViewModelProvider";
+import { LoadWorld } from "../Domain/LoadWorld/LoadWorld";
 
 var CoreDIContainer = new Container();
 
@@ -133,6 +137,17 @@ CoreDIContainer.bind(LearningElementPanelViewModel).toSelf();
 // View Model Provider
 CoreDIContainer.bind<IViewModelProvider>(CORE_TYPES.IViewModelProvider)
   .to(ViewModelProvider)
+  .inSingletonScope();
+
+// Controllers
+CoreDIContainer.bind<ILoadWorldPresenter>(CORE_TYPES.ILoadWorldController)
+  .to(LoadWorldPresenter)
+  .inSingletonScope();
+
+// Use Cases
+// Use Cases always have to be Singleton
+CoreDIContainer.bind<ILoadWorld>(CORE_TYPES.ILoadWorld)
+  .to(LoadWorld)
   .inSingletonScope();
 
 export default CoreDIContainer;
