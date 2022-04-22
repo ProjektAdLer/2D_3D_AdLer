@@ -10,7 +10,7 @@ let CORE_TYPES = {
   IScenePresenter: Symbol("IScenePresenter"),
   ICreateSceneClass: Symbol("ICreateSceneClass"),
   IRoomConfigurator: Symbol("IRoomConfigurator"),
-  IRoomPresenter: Symbol("IRoomPresenter"),
+  IRoomController: Symbol("IRoomController"),
   IRoomView: Symbol("IRoomView"),
   IMoodle: Symbol("IMoodle"),
   IMoodleDataAccess: Symbol("IMoodleDataAccess"),

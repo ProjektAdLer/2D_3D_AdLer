@@ -1,6 +1,6 @@
-import Observable from "./Observable";
+import AbstractObservable from "./AbstractObservable";
 
-export default class ObservableReadonlyID extends Observable<string> {
+export default class ObservableReadonlyID extends AbstractObservable<string> {
   constructor(value?: string) {
     super();
     if (value) this.value = value;

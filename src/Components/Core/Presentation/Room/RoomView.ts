@@ -18,7 +18,12 @@ export default class RoomView implements IRoomView {
     this.viewModel = newViewModel;
   }
 
-  createFloor(scene: Scene): void {
+  public displayRoom(): void {
+    this.createWalls();
+    this.createFloor();
+  }
+
+  private createFloor(): void {
     if (!this.viewModel)
       throw new Error(
         "ViewModel not set. Use the ViewModel setter before calling this method"
@@ -27,7 +32,7 @@ export default class RoomView implements IRoomView {
     var floorIndices = this.createFloorIndices();
     var floorPositions = this.createFloorPositions();
 
-    var floorMesh = new Mesh("Floor", scene);
+    var floorMesh = new Mesh("Floor", this.viewModel.scene.Value);
     var normals = [] as number[];
     var uvs = [0, 1, 0, 0, 1, 0, 1, 1];
     VertexData.ComputeNormals(floorPositions, floorIndices, normals);
@@ -38,12 +43,18 @@ export default class RoomView implements IRoomView {
     vertexData.uvs = uvs;
     vertexData.applyToMesh(floorMesh);
 
-    var floorMaterial = new StandardMaterial("floorMaterial", scene);
-    floorMaterial.diffuseTexture = new Texture(floorTexture, scene);
+    var floorMaterial = new StandardMaterial(
+      "floorMaterial",
+      this.viewModel.scene.Value
+    );
+    floorMaterial.diffuseTexture = new Texture(
+      floorTexture,
+      this.viewModel.scene.Value
+    );
     floorMesh.material = floorMaterial;
   }
 
-  createWalls(scene: Scene): void {
+  private createWalls(): void {
     if (!this.viewModel)
       throw new Error(
         "ViewModel not set. Use the ViewModel setter before calling this method"
@@ -52,7 +63,7 @@ export default class RoomView implements IRoomView {
     var positions = this.createRoomPositions();
     var wallIndices = this.createWallIndices();
 
-    var wallMesh = new Mesh("Walls", scene);
+    var wallMesh = new Mesh("Walls", this.viewModel.scene.Value);
     var normals = [] as number[];
     VertexData.ComputeNormals(positions, wallIndices, normals);
     var vertexData = new VertexData();
@@ -62,16 +73,19 @@ export default class RoomView implements IRoomView {
     vertexData.applyToMesh(wallMesh);
     wallMesh.convertToFlatShadedMesh();
 
-    var wallMaterial = new StandardMaterial("wallMaterial", scene);
-    wallMaterial.diffuseColor = this.viewModel.WallColor;
+    var wallMaterial = new StandardMaterial(
+      "wallMaterial",
+      this.viewModel.scene.Value
+    );
+    wallMaterial.diffuseColor = this.viewModel.wallColor.Value;
     wallMesh.material = wallMaterial;
   }
 
   private createFloorPositions() {
-    var roomWidth = this.viewModel.RoomWidth / 2;
-    var roomLength = this.viewModel.RoomLength / 2;
-    var baseHeight = this.viewModel.BaseHeight;
-    var wallThickness = this.viewModel.WallThickness;
+    var roomWidth = this.viewModel.roomWidth.Value / 2;
+    var roomLength = this.viewModel.roomLength.Value / 2;
+    var baseHeight = this.viewModel.baseHeight.Value;
+    var wallThickness = this.viewModel.wallThickness.Value;
     return [
       roomWidth + wallThickness,
       baseHeight,
@@ -89,13 +103,13 @@ export default class RoomView implements IRoomView {
   }
 
   private createRoomPositions() {
-    var roomWidth = this.viewModel.RoomWidth / 2;
-    var roomLength = this.viewModel.RoomLength / 2;
-    var baseHeight = this.viewModel.BaseHeight;
-    var roomHeight = this.viewModel.RoomHeight;
-    var doorWidth = this.viewModel.DoorWidth / 2;
-    var doorHeight = this.viewModel.DoorHeight;
-    var wallThickness = this.viewModel.WallThickness;
+    var roomWidth = this.viewModel.roomWidth.Value / 2;
+    var roomLength = this.viewModel.roomLength.Value / 2;
+    var baseHeight = this.viewModel.baseHeight.Value;
+    var roomHeight = this.viewModel.roomHeight.Value;
+    var doorWidth = this.viewModel.doorWidth.Value / 2;
+    var doorHeight = this.viewModel.doorHeight.Value;
+    var wallThickness = this.viewModel.wallThickness.Value;
     return [
       roomWidth,
       baseHeight,
