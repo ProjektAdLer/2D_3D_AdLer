@@ -7,9 +7,7 @@ import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import usePrimitive from "../CustomHooks/usePrimitive";
 import LearningElementModal from "../LearningElementModal/LearningElementModal";
 import StyledButton from "../ReactCommon/StyledButton";
-import ButtonContainer from "../ReactCommon/ButtonContainer";
-import LearningElementPanelContainer from "../LearningElementPanel/LearningElementPanelContainer";
-import ScorePanel from "../ReactCommon/ScorePanel";
+import StyledContainer from "../ReactCommon/StyledContainer";
 
 function App() {
   const entityManager = useInjection<IEntityManager>(CORE_TYPES.IEntityManager);
@@ -22,7 +20,7 @@ function App() {
   return (
     <React.Fragment>
       <div className="root max-w-1/1 max-h-1/1 flex bg-babylonbg">
-        <ButtonContainer>
+        <StyledContainer className="top-0 left-0 ">
           <StyledButton
             onClick={() => {
               setShowModal(true);
@@ -95,8 +93,8 @@ function App() {
               />
             </svg>
           </StyledButton>
-        </ButtonContainer>
-        <ScorePanel
+        </StyledContainer>
+        <StyledContainer
           style={{
             padding: 13,
             flexDirection: "row",
@@ -104,6 +102,7 @@ function App() {
             color: "white",
             fontWeight: 800,
           }}
+          className="bottom-0 left-0 "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +119,7 @@ function App() {
             />
           </svg>
           x 10
-        </ScorePanel>
+        </StyledContainer>
         <BabylonCanvas className="w-screen h-screen" />
         <LearningElementModal />
       </div>
