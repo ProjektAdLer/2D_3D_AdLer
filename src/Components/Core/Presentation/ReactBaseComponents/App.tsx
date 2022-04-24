@@ -20,7 +20,7 @@ function App() {
   return (
     <React.Fragment>
       <div className="root max-w-1/1 max-h-1/1 flex bg-babylonbg">
-        <StyledContainer className="top-0 left-0 ">
+        <StyledContainer className="top-0 left-0 flex-col ">
           <StyledButton
             onClick={() => {
               setShowModal(true);
@@ -94,16 +94,7 @@ function App() {
             </svg>
           </StyledButton>
         </StyledContainer>
-        <StyledContainer
-          style={{
-            padding: 13,
-            flexDirection: "row",
-            fontSize: 30,
-            color: "white",
-            fontWeight: 800,
-          }}
-          className="bottom-0 left-0 "
-        >
+        <StyledContainer className="bottom-0 left-0 p-13 text-4xl text-white font-extrabold ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-7 w-7 lg:h10 lg:w-10"

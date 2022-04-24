@@ -9,7 +9,7 @@ export default function ButtonContainer({
     <div
       className={
         className +
-        "button-container w-fit fixed h-fit flex flex-col gap-2 p-2 m-3 bg-adlergold rounded-lg"
+        "button-container w-fit fixed h-fit flex gap-2 p-2 m-3 bg-adlergold rounded-lg items-center"
       }
       {...restProps}
     >
