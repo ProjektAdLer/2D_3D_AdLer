@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ScorePanel({
+export default function ButtonContainer({
   children,
   className,
   ...restProps
@@ -9,7 +9,7 @@ export default function ScorePanel({
     <div
       className={
         className +
-        "button-container w-fit fixed h-fit bottom-0 left-0 flex flex-col gap-2 p-2 m-3 bg-adlergold rounded-lg"
+        "button-container w-fit fixed h-fit flex gap-2 p-2 m-3 bg-adlergold rounded-lg items-center"
       }
       {...restProps}
     >

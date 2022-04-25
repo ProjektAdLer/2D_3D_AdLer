@@ -1,4 +1,4 @@
-export default abstract class Observable<T> {
+export default abstract class AbstractObservable<T> {
   protected value: T;
   protected subscribers: ((value: T) => void)[] = [];
 
