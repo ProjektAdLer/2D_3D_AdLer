@@ -7,6 +7,6 @@ import { ILoadWorld } from "./ILoadWorld";
 export class LoadWorld extends SyncronousUsecase implements ILoadWorld {
   public async execute(): Promise<void> {
     console.log("Hier soll die Welt geladen werden");
-    super.notify({ worldName: "Habeledabele" } as IDTO);
+    //super.notify({ worldName: "Habeledabele" } as IDTO);
   }
 }
