@@ -1,3 +1,5 @@
+import { ILoadWorldPresenter } from "../Presentation/LoadWorldButton/ILoadWorldController";
+import { ILoadWorld } from "./../Domain/LoadWorld/ILoadWorld";
 let CORE_TYPES = {
   ICore: Symbol("ICore"),
   ICoreFactory: Symbol("ICoreFactory"),
@@ -23,6 +25,8 @@ let CORE_TYPES = {
   ILearningElementPanelPresenter: Symbol("ILearningElementPanelPresenter"),
   ILearningElementPanelViewModel: Symbol("ILearningElementPanelViewModel"),
   IViewModelProvider: Symbol("IViewModelProvider"),
+  ILoadWorld: Symbol("ILoadWorld"),
+  ILoadWorldController: Symbol("ILoadWorldController"),
 };
 
 export default CORE_TYPES;
