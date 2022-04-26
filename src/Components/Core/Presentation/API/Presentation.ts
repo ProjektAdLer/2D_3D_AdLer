@@ -3,7 +3,7 @@ import IEngineManager from "../EngineManager/IEngineManager";
 import IPresentation from "./IPresentation";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
-import type IScenePresenter from "../SceneManagment/IScenePresenter";
+import type IScenePresenter from "../SceneManagment/ISceneController";
 import IReactEntry from "../ReactBaseComponents/IReactEntry";
 
 @injectable()

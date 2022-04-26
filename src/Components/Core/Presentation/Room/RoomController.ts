@@ -4,7 +4,7 @@ import Presentation from "../API/Presentation";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import RoomViewModel from "./RoomViewModel";
 import IRoomView from "./IRoomView";
-import type IScenePresenter from "../SceneManagment/IScenePresenter";
+import type ISceneController from "../SceneManagment/ISceneController";
 
 @injectable()
 export default class RoomController implements IRoomController {
@@ -14,7 +14,7 @@ export default class RoomController implements IRoomController {
 
   constructor(
     @inject(CORE_TYPES.IPresentation) presentation: Presentation,
-    @inject(CORE_TYPES.IScenePresenter) scenePresenter: IScenePresenter,
+    @inject(CORE_TYPES.ISceneController) sceneController: ISceneController,
     @inject(RoomViewModel) viewModel: RoomViewModel,
     @inject(CORE_TYPES.IRoomView) view: IRoomView
   ) {
@@ -23,6 +23,6 @@ export default class RoomController implements IRoomController {
     this.view = view;
     this.view.ViewModel = this.viewModel;
 
-    viewModel.scene.Value = scenePresenter.Scene;
+    viewModel.scene.Value = sceneController.Scene;
   }
 }

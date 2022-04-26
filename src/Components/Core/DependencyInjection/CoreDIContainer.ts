@@ -12,7 +12,7 @@ import EngineManager from "../Presentation/EngineManager/EngineManager";
 import ISceneView from "../Presentation/SceneManagment/ISceneView";
 import SceneView from "../Presentation/SceneManagment/SceneView";
 import SceneViewModel from "../Presentation/SceneManagment/SceneViewModel";
-import ScenePresenter from "../Presentation/SceneManagment/ScenePresenter";
+import ScenePresenter from "../Presentation/SceneManagment/SceneController";
 import DataTransferObject from "../Domain/Entities/ExternalRoomData";
 import IRoomController from "../Presentation/Room/IRoomController";
 import RoomController from "../Presentation/Room/RoomController";
@@ -31,7 +31,7 @@ import LearningElementView from "../Presentation/LearningElement/LearningElement
 import LearningElementViewModel from "../Presentation/LearningElement/LearningElementViewModel";
 import ILearningElementPresenter from "../Presentation/LearningElement/ILearningElementPresenter";
 import LearningElementPresenter from "../Presentation/LearningElement/LearningElementPresenter";
-import IScenePresenter from "../Presentation/SceneManagment/IScenePresenter";
+import IScenePresenter from "../Presentation/SceneManagment/ISceneController";
 import ILearningElementFactory from "../Presentation/LearningElement/ILearningElementFactory";
 import LearningElementFactory from "../Presentation/LearningElement/LearningElementFactory";
 import EntityManager from "../Domain/EntityManager/EntityManager";

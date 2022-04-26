@@ -6,7 +6,7 @@ let CORE_TYPES = {
   IPresentation: Symbol("IPresentation"),
   IEngineManager: Symbol("IEngineManager"),
   ISceneView: Symbol("ISceneView"),
-  IScenePresenter: Symbol("IScenePresenter"),
+  ISceneController: Symbol("ISceneController"),
   ICreateSceneClass: Symbol("ICreateSceneClass"),
   IRoomConfigurator: Symbol("IRoomConfigurator"),
   IRoomController: Symbol("IRoomController"),
