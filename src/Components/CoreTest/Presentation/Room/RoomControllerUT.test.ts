@@ -5,7 +5,7 @@ import RoomView from "../../../Core/Presentation/Room/RoomView";
 import SceneController from "../../../Core/Presentation/SceneManagment/SceneController";
 
 const SceneGetterMock = jest.spyOn(SceneController.prototype, "Scene", "get");
-// const CreateFloorViewMock = jest.spyOn(RoomView.prototype, "createFloor");
+const DisplayRoomViewMock = jest.spyOn(RoomView.prototype, "displayRoom");
 // const CreateWallsViewMock = jest.spyOn(RoomView.prototype, "createWalls");
 
 describe("RoomController", () => {
@@ -20,11 +20,11 @@ describe("RoomController", () => {
   });
   //TODO: Update Room tests when Rooms are reimplemented
 
-  // test("createFloor calls createFloor.", () => {
-  //   roomController.createFloor();
-  //   expect(SceneGetterMock).toBeCalledTimes(1);
-  //   expect(CreateFloorViewMock).toBeCalledTimes(1);
-  // });
+  test("displayRoom calls createFloor.", () => {
+    roomController.view.displayRoom();
+    expect(SceneGetterMock).toBeCalledTimes(1);
+    expect(DisplayRoomViewMock).toBeCalledTimes(1);
+  });
 
   // test("createWalls calls createWalls.", () => {
   //   roomController.createWalls();

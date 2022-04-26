@@ -1,4 +1,3 @@
-import { Scene, Engine } from "@babylonjs/core";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import RoomView from "../../../Core/Presentation/Room/RoomView";
@@ -8,7 +7,6 @@ jest.mock("@babylonjs/core");
 
 describe("RoomView", () => {
   let roomView: RoomView;
-  let roomViewModel: RoomViewModel;
 
   beforeEach(() => {
     roomView = CoreDIContainer.get(CORE_TYPES.IRoomView);
@@ -18,21 +16,19 @@ describe("RoomView", () => {
     jest.restoreAllMocks();
   });
 
-  test("CreateFloor throws Error if ViewModel is not set.", () => {
+  test("CreateFloor or CreateWalls throws Error if ViewModel is not set.", () => {
     expect(() => {
-      roomView.createFloor(
-        new Scene(new Engine(document.createElement("canvas")))
-      );
+      roomView.displayRoom();
     }).toThrowError();
   });
 
-  test("CreateWalls throws Error if ViewModel is not set.", () => {
-    expect(() => {
-      roomView.createWalls(
-        new Scene(new Engine(document.createElement("canvas")))
-      );
-    }).toThrowError();
-  });
+  // test("CreateWalls throws Error if ViewModel is not set.", () => {
+  //   expect(() => {
+  //     roomView.createWalls(
+  //       new Scene(new Engine(document.createElement("canvas")))
+  //     );
+  //   }).toThrowError();
+  // });
 
   test("View Model is being Set by the Setter", () => {
     roomView.ViewModel = CoreDIContainer.get(RoomViewModel);
