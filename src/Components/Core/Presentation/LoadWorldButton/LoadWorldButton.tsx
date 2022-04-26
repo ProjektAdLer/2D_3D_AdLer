@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import StyledButton from "../ReactCommon/StyledButton";
-import { ILoadWorldPresenter } from "./ILoadWorldController";
+import ILoadWorldController from "./ILoadWorldController";
 
 export default function LoadWorldButton() {
-  var presenter: ILoadWorldPresenter;
+  var controller: ILoadWorldController;
 
   useEffect(() => {
-    presenter = CoreDIContainer.get<ILoadWorldPresenter>(
+    controller = CoreDIContainer.get<ILoadWorldController>(
       CORE_TYPES.ILoadWorldController
     );
   }, []);
@@ -17,7 +17,7 @@ export default function LoadWorldButton() {
     <StyledButton
       onClick={() => {
         console.log("Load World plz");
-        presenter.loadWorld();
+        controller.loadWorld();
       }}
     >
       <svg
