@@ -1,2 +1,2 @@
 import { ISynchronousUsecase } from "./../Abstract/ISynchronousUsecase";
-export interface ILoadWorld extends ISynchronousUsecase {}
+export default interface ILoadWorld extends ISynchronousUsecase {}

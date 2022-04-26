@@ -1,6 +1,6 @@
-import { LoadWorldPresenter } from "../Presentation/LoadWorldButton/LoadWorldController";
-import { ILoadWorldPresenter } from "../Presentation/LoadWorldButton/ILoadWorldController";
-import { ILoadWorld } from "./../Domain/LoadWorld/ILoadWorld";
+import { LoadWorldController } from "../Presentation/LoadWorldButton/LoadWorldController";
+import ILoadWorldController from "../Presentation/LoadWorldButton/ILoadWorldController";
+import ILoadWorld from "./../Application/LoadWorld/ILoadWorld";
 import { Container } from "inversify";
 import CORE_TYPES from "./CoreTypes";
 import IPresentation from "../Presentation/API/IPresentation";
@@ -49,7 +49,7 @@ import LearningElementPanelPresenter from "../Presentation/LearningElementPanel/
 import LearningElementPanelViewModel from "../Presentation/LearningElementPanel/LearningElementPanelViewModel";
 import IViewModelProvider from "../Presentation/ViewModelProvider/IViewModelProvider";
 import ViewModelProvider from "../Presentation/ViewModelProvider/ViewModelProvider";
-import { LoadWorld } from "../Domain/LoadWorld/LoadWorld";
+import LoadWorld from "../Application/LoadWorld/LoadWorld";
 
 var CoreDIContainer = new Container();
 
@@ -140,8 +140,8 @@ CoreDIContainer.bind<IViewModelProvider>(CORE_TYPES.IViewModelProvider)
   .inSingletonScope();
 
 // Controllers
-CoreDIContainer.bind<ILoadWorldPresenter>(CORE_TYPES.ILoadWorldController)
-  .to(LoadWorldPresenter)
+CoreDIContainer.bind<ILoadWorldController>(CORE_TYPES.ILoadWorldController)
+  .to(LoadWorldController)
   .inSingletonScope();
 
 // Use Cases

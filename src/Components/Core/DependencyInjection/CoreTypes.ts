@@ -1,5 +1,3 @@
-import { ILoadWorldPresenter } from "../Presentation/LoadWorldButton/ILoadWorldController";
-import { ILoadWorld } from "./../Domain/LoadWorld/ILoadWorld";
 let CORE_TYPES = {
   ICore: Symbol("ICore"),
   ICoreFactory: Symbol("ICoreFactory"),
