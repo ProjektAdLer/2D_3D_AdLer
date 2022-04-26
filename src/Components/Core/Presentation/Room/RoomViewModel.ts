@@ -1,12 +1,10 @@
 import { injectable } from "inversify";
-import { ROOMSIZE } from "../../BusinessLogic/RoomConfigurator/RoomConfigurator";
 import { Color3, Scene } from "@babylonjs/core";
 import Observable from "../../../../Lib/Observable";
 
 @injectable()
 export default class RoomViewModel {
   public scene: Observable<Scene> = new Observable<Scene>();
-  public roomSize: Observable<ROOMSIZE> = new Observable();
   public wallColor: Observable<Color3> = new Observable(
     new Color3(0.3, 0.6, 0.8)
   );

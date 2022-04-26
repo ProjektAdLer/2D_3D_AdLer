@@ -1,5 +1,5 @@
 import { injectable, inject } from "inversify";
-import DataTransferObject from "../../Entities/ExternalRoomData";
+import DataTransferObject from "../../src/Components/Core/Domain/Entities/ExternalRoomData";
 import IRoomConfigurator from "./IRoomConfigurator";
 
 export enum ROOMSIZE {

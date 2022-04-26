@@ -24,6 +24,5 @@ export default class RoomController implements IRoomController {
     this.view.ViewModel = this.viewModel;
 
     viewModel.scene.Value = scenePresenter.Scene;
-    this.viewModel.roomSize.Value = this.presentation.BusinessLogic.RoomSize;
   }
 }
