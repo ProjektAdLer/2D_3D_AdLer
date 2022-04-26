@@ -1,4 +1,4 @@
-import IBusinessLogic from "../../src/Components/Core/Presentation/API/IBusinessLogic";
+import IBusinessLogic from "./IBusinessLogic";
 // import IDataAccess from "../../src/Components/Core/BusinessLogic/API/IDataAccess";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../src/Components/Core/DependencyInjection/CoreTypes";
