@@ -25,8 +25,8 @@ import ICreateSceneClass from "../Presentation/SceneManagment/ICreateSceneClass"
 import IRoomView from "../Presentation/Room/IRoomView";
 import RoomView from "../Presentation/Room/RoomView";
 import RoomViewModel from "../Presentation/Room/RoomViewModel";
-import IMoodle from "../BusinessLogic/Moodle/IMoodle";
-import Moodle from "../BusinessLogic/Moodle/Moodle";
+import IMoodle from "../Application/Moodle/IMoodle";
+import Moodle from "../Application/Moodle/Moodle";
 import MoodleDataAccess from "../DataAccess/Moodle/MoodleDataAccess";
 import IMoodleDataAccess from "../DataAccess/Moodle/IMoodleDataAccess";
 import MoodleData from "../Domain/Entities/MoodleData";

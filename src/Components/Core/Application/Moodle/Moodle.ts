@@ -1,11 +1,12 @@
 import { inject, injectable } from "inversify";
+import IDataAccess from "../../DataAccess/API/IDataAccess";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 
 import MoodleData from "../../Domain/Entities/MoodleData";
 import IEntityManager from "../../Domain/EntityManager/IEntityManager";
 import { H5PForCoursesAPIResponse } from "../../Types/H5PTypes";
-import IDataAccess from "../API/IDataAccess";
+// import IDataAccess from "../../BusinessLogic/API/IDataAccess";
 import IMoodle from "./IMoodle";
 const axios = require("axios").default;
 
