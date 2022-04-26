@@ -5,10 +5,6 @@ import { Container } from "inversify";
 import CORE_TYPES from "./CoreTypes";
 import IPresentation from "../Presentation/API/IPresentation";
 import Presentation from "../Presentation/API/Presentation";
-import IBusinessLogic from "../Presentation/API/IBusinessLogic";
-import BusinessLogic from "../BusinessLogic/API/BusinessLogic";
-import IDataAccess from "./../BusinessLogic/API/IDataAccess";
-import DataAccess from "../DataAccess/API/DataAccess";
 import ICore from "../API/ICore";
 import Core from "../API/Core";
 import IEngineManager from "../Presentation/EngineManager/IEngineManager";
@@ -48,6 +44,8 @@ import IViewModelProvider from "../Presentation/ViewModelProvider/IViewModelProv
 import ViewModelProvider from "../Presentation/ViewModelProvider/ViewModelProvider";
 import LoadWorld from "../Application/LoadWorld/LoadWorld";
 import IEntityManager from "../Domain/EntityManager/IEntityManager";
+import IDataAccess from "../DataAccess/API/IDataAccess";
+import DataAccess from "../DataAccess/API/DataAccess";
 
 var CoreDIContainer = new Container();
 
@@ -55,9 +53,6 @@ var CoreDIContainer = new Container();
 CoreDIContainer.bind<ICore>(CORE_TYPES.ICore).to(Core).inSingletonScope();
 CoreDIContainer.bind<IPresentation>(CORE_TYPES.IPresentation)
   .to(Presentation)
-  .inSingletonScope();
-CoreDIContainer.bind<IBusinessLogic>(CORE_TYPES.IBusinessLogic)
-  .to(BusinessLogic)
   .inSingletonScope();
 CoreDIContainer.bind<IDataAccess>(CORE_TYPES.IDataAccess)
   .to(DataAccess)

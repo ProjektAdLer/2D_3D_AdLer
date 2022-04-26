@@ -3,7 +3,6 @@ let CORE_TYPES = {
   ICoreFactory: Symbol("ICoreFactory"),
   IDataAccess: Symbol("IDataAccess"),
   IEntityFactory: Symbol("IEntityFactory"),
-  IBusinessLogic: Symbol("IBusinessLogic"),
   IPresentation: Symbol("IPresentation"),
   IEngineManager: Symbol("IEngineManager"),
   ISceneView: Symbol("ISceneView"),

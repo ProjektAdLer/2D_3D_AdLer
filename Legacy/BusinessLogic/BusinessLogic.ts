@@ -1,9 +1,9 @@
-import IBusinessLogic from "../../Presentation/API/IBusinessLogic";
-import IDataAccess from "./IDataAccess";
+import IBusinessLogic from "../../src/Components/Core/Presentation/API/IBusinessLogic";
+// import IDataAccess from "../../src/Components/Core/BusinessLogic/API/IDataAccess";
 import { inject, injectable } from "inversify";
-import CORE_TYPES from "../../DependencyInjection/CoreTypes";
-import IMoodle from "../Moodle/IMoodle";
-import { H5PForCoursesAPIResponse } from "../../Types/H5PTypes";
+import CORE_TYPES from "../../src/Components/Core/DependencyInjection/CoreTypes";
+import IMoodle from "../../src/Components/Core/Application/Moodle/IMoodle";
+import { H5PForCoursesAPIResponse } from "../../src/Components/Core/Types/H5PTypes";
 
 @injectable()
 export default class BusinessLogic implements IBusinessLogic {
