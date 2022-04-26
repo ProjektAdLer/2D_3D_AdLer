@@ -12,7 +12,7 @@ import EngineManager from "../Presentation/EngineManager/EngineManager";
 import ISceneView from "../Presentation/SceneManagment/ISceneView";
 import SceneView from "../Presentation/SceneManagment/SceneView";
 import SceneViewModel from "../Presentation/SceneManagment/SceneViewModel";
-import ScenePresenter from "../Presentation/SceneManagment/SceneController";
+import SceneController from "../Presentation/SceneManagment/SceneController";
 import DataTransferObject from "../Domain/Entities/ExternalRoomData";
 import IRoomController from "../Presentation/Room/IRoomController";
 import RoomController from "../Presentation/Room/RoomController";
@@ -31,7 +31,7 @@ import LearningElementView from "../Presentation/LearningElement/LearningElement
 import LearningElementViewModel from "../Presentation/LearningElement/LearningElementViewModel";
 import ILearningElementPresenter from "../Presentation/LearningElement/ILearningElementPresenter";
 import LearningElementPresenter from "../Presentation/LearningElement/LearningElementPresenter";
-import IScenePresenter from "../Presentation/SceneManagment/ISceneController";
+import ISceneController from "../Presentation/SceneManagment/ISceneController";
 import ILearningElementFactory from "../Presentation/LearningElement/ILearningElementFactory";
 import LearningElementFactory from "../Presentation/LearningElement/LearningElementFactory";
 import EntityManager from "../Domain/EntityManager/EntityManager";
@@ -68,8 +68,8 @@ CoreDIContainer.bind<ISceneView>(CORE_TYPES.ISceneView)
   .to(SceneView)
   .inSingletonScope();
 CoreDIContainer.bind(SceneViewModel).toSelf().inSingletonScope();
-CoreDIContainer.bind<IScenePresenter>(CORE_TYPES.IScenePresenter)
-  .to(ScenePresenter)
+CoreDIContainer.bind<ISceneController>(CORE_TYPES.ISceneController)
+  .to(SceneController)
   .inSingletonScope();
 // bind other CreateSceneClass here for testing puposes -MK
 CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(

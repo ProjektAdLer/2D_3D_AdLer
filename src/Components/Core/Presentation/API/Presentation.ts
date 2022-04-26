@@ -3,34 +3,33 @@ import IEngineManager from "../EngineManager/IEngineManager";
 import IPresentation from "./IPresentation";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
-import type IScenePresenter from "../SceneManagment/ISceneController";
 import IReactEntry from "../ReactBaseComponents/IReactEntry";
+import ISceneController from "../SceneManagment/ISceneController";
 
 @injectable()
 export default class Presentation implements IPresentation {
   private engineManager: IEngineManager;
-  private scenePresenter: IScenePresenter;
-
+  private sceneController: ISceneController;
   private coreRenderer: IReactEntry;
 
   constructor(
     @inject(CORE_TYPES.IEngineManager) engineManager: IEngineManager,
-    @inject(CORE_TYPES.IScenePresenter) scenePresenter: IScenePresenter,
+    @inject(CORE_TYPES.ISceneController) sceneController: ISceneController,
     @inject(CORE_TYPES.ICoreRenderer) coreRenderer: IReactEntry
   ) {
     this.engineManager = engineManager;
-    this.scenePresenter = scenePresenter;
+    this.sceneController = sceneController;
     this.coreRenderer = coreRenderer;
   }
 
   async setupBabylon(canvas: HTMLCanvasElement): Promise<void> {
     this.engineManager.createEngine(canvas);
 
-    await this.scenePresenter.createScene(
+    await this.sceneController.createScene(
       CoreDIContainer.get(CORE_TYPES.ICreateSceneClass)
     );
 
-    this.scenePresenter.createRenderLoop();
+    this.sceneController.createRenderLoop();
   }
 
   setupReact(): void {

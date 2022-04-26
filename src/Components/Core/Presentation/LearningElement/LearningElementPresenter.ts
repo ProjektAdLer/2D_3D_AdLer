@@ -8,7 +8,7 @@ import {
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import IRoomController from "../Room/IRoomController";
-import type IScenePresenter from "../SceneManagment/ISceneController";
+import ISceneController from "../SceneManagment/ISceneController";
 import ILearningElementView from "./ILearningElementView";
 import ILearningElementPresenter from "./ILearningElementPresenter";
 import LearningElementViewModel from "./LearningElementViewModel";
@@ -17,7 +17,7 @@ import LearningElementViewModel from "./LearningElementViewModel";
 export default class LearningElementPresenter
   implements ILearningElementPresenter
 {
-  private scenePresenter: IScenePresenter;
+  private sceneController: ISceneController;
   private roomPresenter: IRoomController;
   private view: ILearningElementView;
   private viewModel: LearningElementViewModel;
@@ -25,14 +25,14 @@ export default class LearningElementPresenter
   constructor(
     @inject(CORE_TYPES.ILearingElementView) view: ILearningElementView,
     @inject(LearningElementViewModel) viewModel: LearningElementViewModel,
-    @inject(CORE_TYPES.IScenePresenter) scenePresenter: IScenePresenter,
+    @inject(CORE_TYPES.ISceneController) sceneController: ISceneController,
     @inject(CORE_TYPES.IRoomController) roomPresenter: IRoomController
   ) {
     this.view = view;
     this.viewModel = viewModel;
     view.ViewModel = viewModel;
 
-    this.scenePresenter = scenePresenter;
+    this.sceneController = sceneController;
     this.roomPresenter = roomPresenter;
   }
 
@@ -41,12 +41,12 @@ export default class LearningElementPresenter
       meshName ? meshName : "",
       url,
       "",
-      this.scenePresenter.Scene
+      this.sceneController.Scene
     );
 
     this.viewModel.Meshes = result.meshes as Mesh[];
     this.viewModel.Meshes.forEach((mesh) => {
-      mesh.actionManager = new ActionManager(this.scenePresenter.Scene);
+      mesh.actionManager = new ActionManager(this.sceneController.Scene);
     });
   }
 

@@ -2,15 +2,15 @@ import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import Presentation from "../../../Core/Presentation/API/Presentation";
 import EngineManager from "../../../Core/Presentation/EngineManager/EngineManager";
-import ScenePresenter from "../../../Core/Presentation/SceneManagment/ScenePresenter";
+import SceneController from "../../../Core/Presentation/SceneManagment/SceneController";
 import ReactEntry from "../../../Core/Presentation/ReactBaseComponents/ReactEntry";
 
 const createEngineMock = jest.spyOn(EngineManager.prototype, "createEngine");
 const setupReactMock = jest.spyOn(ReactEntry.prototype, "setupReact");
-const createSceneMock = jest.spyOn(ScenePresenter.prototype, "createScene");
+const createSceneMock = jest.spyOn(SceneController.prototype, "createScene");
 
 const createRenderLoopMock = jest.spyOn(
-  ScenePresenter.prototype,
+  SceneController.prototype,
   "createRenderLoop"
 );
 
@@ -25,7 +25,7 @@ describe("Presentation", () => {
     jest.restoreAllMocks();
   });
 
-  test("setupBabylon calls engineManager and scenePresenter", () => {
+  test("setupBabylon calls engineManager and sceneController", () => {
     return presentation
       .setupBabylon(document.createElement("canvas"))
       .then(() => {

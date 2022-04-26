@@ -4,7 +4,7 @@ import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import RoomPresenter from "../../../Core/Presentation/Room/RoomPresenter";
 import RoomView from "../../../Core/Presentation/Room/RoomView";
 import RoomViewModel from "../../../Core/Presentation/Room/RoomViewModel";
-import ScenePresenter from "../../../Core/Presentation/SceneManagment/ScenePresenter";
+import SceneController from "../../../Core/Presentation/SceneManagment/SceneController";
 import { ROOMSIZE } from "../../../Core/BusinessLogic/RoomConfigurator/RoomConfigurator";
 import { Color3 } from "@babylonjs/core";
 
