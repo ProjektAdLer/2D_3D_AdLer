@@ -3,7 +3,7 @@ import { IDTO } from "./IDTO";
 import { IUsecaseObserver } from "./IUsecaseObserver";
 
 @injectable()
-export abstract class SyncronousUsecase {
+export abstract class SynchronousUsecase {
   // Classes are Objects in TS/JS - PG
   private subsribers: IUsecaseObserver[];
 
