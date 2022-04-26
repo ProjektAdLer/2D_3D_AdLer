@@ -1,9 +1,9 @@
-import IEntityManager from "../../../../Core/BusinessLogic/EntityManager/IEntityManager";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 
-import ObservablePrimitive from "../../../../Core/BusinessLogic/EntityManager/Observables/ObservablePrimitive";
-import ObservableClass from "../../../../Core/BusinessLogic/EntityManager/Observables/ObservableClass";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
+import IEntityManager from "../../../../Core/Domain/EntityManager/IEntityManager";
+import ObservableClass from "../../../../Core/Domain/EntityManager/Observables/ObservableClass";
+import ObservablePrimitive from "../../../../Core/Domain/EntityManager/Observables/ObservablePrimitive";
 class TestEntity {
   public id = "id";
   public member1: ObservablePrimitive<boolean> =
@@ -16,7 +16,6 @@ class TestEntity {
 describe("Observables", () => {
   beforeEach(() => {
     CoreDIContainer.snapshot();
-    CoreDIContainer.get<IEntityManager>(CORE_TYPES.IEntityManager);
   });
 
   afterEach(() => {

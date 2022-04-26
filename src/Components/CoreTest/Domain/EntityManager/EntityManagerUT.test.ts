@@ -1,11 +1,11 @@
-import IEntityManager from "../../../Core/BusinessLogic/EntityManager/IEntityManager";
-import ObservableClass from "../../../Core/BusinessLogic/EntityManager/Observables/ObservableClass";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
-import TestEntity from "../../../Core/Entities/Entities/TestEntity";
 
 import { validate as uuidValidate } from "uuid";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
-import RootEntity from "../../../Core/Entities/Entities/RootEntity";
+import IEntityManager from "../../../Core/Domain/EntityManager/IEntityManager";
+import RootEntity from "../../../Core/Domain/Entities/RootEntity";
+import TestEntity from "./TestEntity";
+import ObservableClass from "../../../Core/Domain/EntityManager/Observables/ObservableClass";
 
 describe("EntityManager", () => {
   beforeEach(() => {
@@ -67,7 +67,7 @@ describe("EntityManager", () => {
     );
   });
 
-  test("getEntityById throws, if it is passed the wrong class type", () => {
+  test("getEntityById throws, if it is passed the wrong classw type", () => {
     const manager = CoreDIContainer.get<IEntityManager>(
       CORE_TYPES.IEntityManager
     );

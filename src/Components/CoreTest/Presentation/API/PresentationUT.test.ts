@@ -1,4 +1,3 @@
-import BusinessLogic from "../../../Core/BusinessLogic/API/BusinessLogic";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import Presentation from "../../../Core/Presentation/API/Presentation";
@@ -34,10 +33,6 @@ describe("Presentation", () => {
         expect(createSceneMock).toHaveBeenCalledTimes(1);
         expect(createRenderLoopMock).toHaveBeenCalledTimes(1);
       });
-  });
-
-  test("BusinessLogic getter returns an object of type Businesslogic", () => {
-    expect(presentation.BusinessLogic).toBeInstanceOf(BusinessLogic);
   });
 
   test("setupReact calls the CoreRenderer", () => {
