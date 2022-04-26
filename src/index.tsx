@@ -1,12 +1,12 @@
 import "reflect-metadata";
 import CoreDIContainer from "./Components/Core/DependencyInjection/CoreDIContainer";
-import IEntityManager from "./Components/Core/BusinessLogic/EntityManager/IEntityManager";
 import CORE_TYPES from "./Components/Core/DependencyInjection/CoreTypes";
-import EGenericLearningElement from "./Components/Core/Entities/Entities/LearningElements/GenericLearningElement";
-import RootEntity from "./Components/Core/Entities/Entities/RootEntity";
-import EH5PLearningElement from "./Components/Core/Entities/Entities/LearningElements/H5PLearningElement";
+import EGenericLearningElement from "./Components/Core/Domain/Entities/LearningElements/GenericLearningElement";
+import RootEntity from "./Components/Core/Domain/Entities/RootEntity";
+import EH5PLearningElement from "./Components/Core/Domain/Entities/LearningElements/H5PLearningElement";
 import { LearningElementTypeSymbols } from "./Components/Core/Presentation/LearningElement/Types/LearningElementTypes";
 import ICore from "./Components/Core/API/ICore";
+import IEntityManager from "./Components/Core/Domain/EntityManager/IEntityManager";
 
 const Core = CoreDIContainer.get<ICore>(CORE_TYPES.ICore);
 const entityManager = CoreDIContainer.get<IEntityManager>(

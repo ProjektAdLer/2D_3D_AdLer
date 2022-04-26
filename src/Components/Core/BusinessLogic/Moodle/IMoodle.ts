@@ -1,4 +1,4 @@
-import MoodleData from "../../Entities/MoodleData";
+import MoodleData from "../../Domain/Entities/MoodleData";
 
 export default interface IMoodle {
   moodleData: MoodleData;

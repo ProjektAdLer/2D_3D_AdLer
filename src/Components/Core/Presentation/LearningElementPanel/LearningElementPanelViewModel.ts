@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import ObservablePrimitive from "../../BusinessLogic/EntityManager/Observables/ObservablePrimitive";
+import ObservablePrimitive from "../../Domain/EntityManager/Observables/ObservablePrimitive";
 
 @injectable()
 export default class LearningElementPanelViewModel {

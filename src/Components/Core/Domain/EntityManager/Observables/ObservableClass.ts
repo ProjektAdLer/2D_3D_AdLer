@@ -1,4 +1,4 @@
-import AbstractEntity from "../../../Entities/API/AbstractEntity";
+import AbstractEntity from "../../Entities/AbstractEntity";
 import AbstractObservable from "./AbstractObservable";
 
 export default class ObservableClass<

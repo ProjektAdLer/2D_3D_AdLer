@@ -1,6 +1,6 @@
-import ObservablePrimitive from "../../BusinessLogic/EntityManager/Observables/ObservablePrimitive";
-import ObservableReadonlyID from "../../BusinessLogic/EntityManager/Observables/ObservableReadonlyID";
-import AbstractEntity from "../API/AbstractEntity";
+import ObservablePrimitive from "../EntityManager/Observables/ObservablePrimitive";
+import ObservableReadonlyID from "../EntityManager/Observables/ObservableReadonlyID";
+import AbstractEntity from "./AbstractEntity";
 
 export default class RootEntity extends AbstractEntity {
   testEntity = new ObservableReadonlyID();

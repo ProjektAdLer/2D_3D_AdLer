@@ -17,9 +17,7 @@ import ISceneView from "../Presentation/SceneManagment/ISceneView";
 import SceneView from "../Presentation/SceneManagment/SceneView";
 import SceneViewModel from "../Presentation/SceneManagment/SceneViewModel";
 import ScenePresenter from "../Presentation/SceneManagment/ScenePresenter";
-import DataTransferObject from "../Entities/ExternalRoomData";
-import IRoomConfigurator from "../BusinessLogic/RoomConfigurator/IRoomConfigurator";
-import RoomConfigurator from "../BusinessLogic/RoomConfigurator/RoomConfigurator";
+import DataTransferObject from "../Domain/Entities/ExternalRoomData";
 import IRoomController from "../Presentation/Room/IRoomController";
 import RoomController from "../Presentation/Room/RoomController";
 import MainScene from "../Presentation/SceneManagment/MainScene";
@@ -31,7 +29,7 @@ import IMoodle from "../BusinessLogic/Moodle/IMoodle";
 import Moodle from "../BusinessLogic/Moodle/Moodle";
 import MoodleDataAccess from "../DataAccess/Moodle/MoodleDataAccess";
 import IMoodleDataAccess from "../DataAccess/Moodle/IMoodleDataAccess";
-import MoodleData from "../Entities/MoodleData";
+import MoodleData from "../Domain/Entities/MoodleData";
 import ILearningElementView from "../Presentation/LearningElement/ILearningElementView";
 import LearningElementView from "../Presentation/LearningElement/LearningElementView";
 import LearningElementViewModel from "../Presentation/LearningElement/LearningElementViewModel";
@@ -40,8 +38,7 @@ import LearningElementPresenter from "../Presentation/LearningElement/LearningEl
 import IScenePresenter from "../Presentation/SceneManagment/IScenePresenter";
 import ILearningElementFactory from "../Presentation/LearningElement/ILearningElementFactory";
 import LearningElementFactory from "../Presentation/LearningElement/LearningElementFactory";
-import EntityManager from "../BusinessLogic/EntityManager/EntityManager";
-import IEntityManager from "../BusinessLogic/EntityManager/IEntityManager";
+import EntityManager from "../Domain/EntityManager/EntityManager";
 import IReactEntry from "../Presentation/ReactBaseComponents/IReactEntry";
 import ReactEntry from "../Presentation/ReactBaseComponents/ReactEntry";
 import ILearningElementPanelPresenter from "../Presentation/LearningElementPanel/ILearningElementPanelPresenter";
@@ -50,6 +47,7 @@ import LearningElementPanelViewModel from "../Presentation/LearningElementPanel/
 import IViewModelProvider from "../Presentation/ViewModelProvider/IViewModelProvider";
 import ViewModelProvider from "../Presentation/ViewModelProvider/ViewModelProvider";
 import LoadWorld from "../Application/LoadWorld/LoadWorld";
+import IEntityManager from "../Domain/EntityManager/IEntityManager";
 
 var CoreDIContainer = new Container();
 
@@ -87,9 +85,6 @@ CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
 CoreDIContainer.bind(DataTransferObject).toSelf();
 
 // Room
-CoreDIContainer.bind<IRoomConfigurator>(CORE_TYPES.IRoomConfigurator)
-  .to(RoomConfigurator)
-  .inSingletonScope();
 CoreDIContainer.bind<IRoomController>(CORE_TYPES.IRoomController)
   .to(RoomController)
   .inSingletonScope();

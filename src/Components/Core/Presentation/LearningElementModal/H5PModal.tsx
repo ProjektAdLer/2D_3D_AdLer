@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import EH5PLearningElement from "../../../Core/Entities/Entities/LearningElements/H5PLearningElement";
+import EH5PLearningElement from "../../Domain/Entities/LearningElements/H5PLearningElement";
 import useEntity from "../CustomHooks/useEntity";
 
 const createIframeUrl = (contextId: number, fileName: string) => {

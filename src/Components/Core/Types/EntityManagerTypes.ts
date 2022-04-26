@@ -1,6 +1,6 @@
-import AbstractEntity from "../Entities/API/AbstractEntity";
-import ObservablePrimitive from "../BusinessLogic/EntityManager/Observables/ObservablePrimitive";
-import ObservableReadonlyID from "../BusinessLogic/EntityManager/Observables/ObservableReadonlyID";
+import AbstractEntity from "../Domain/Entities/AbstractEntity";
+import ObservablePrimitive from "../Domain/EntityManager/Observables/ObservablePrimitive";
+import ObservableReadonlyID from "../Domain/EntityManager/Observables/ObservableReadonlyID";
 
 export type Entity<T extends AbstractEntity> = {
   [Property in keyof T]: T[Property] extends ObservablePrimitive<infer U>

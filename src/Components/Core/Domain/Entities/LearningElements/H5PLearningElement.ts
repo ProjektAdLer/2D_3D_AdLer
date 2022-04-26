@@ -1,5 +1,5 @@
-import ObservablePrimitive from "../../../BusinessLogic/EntityManager/Observables/ObservablePrimitive";
-import AbstractEntity from "../../API/AbstractEntity";
+import ObservablePrimitive from "../../EntityManager/Observables/ObservablePrimitive";
+import AbstractEntity from "../AbstractEntity";
 
 export default class EH5PLearningElement extends AbstractEntity {
   h5PcontextId = new ObservablePrimitive<number>();

@@ -1,13 +1,13 @@
 import React from "react";
 import BabylonCanvas from "./BabylonCanvas";
 import "./App.css";
-import IEntityManager from "../../../Core/BusinessLogic/EntityManager/IEntityManager";
 import { useInjection } from "inversify-react";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import usePrimitive from "../CustomHooks/usePrimitive";
 import LearningElementModal from "../LearningElementModal/LearningElementModal";
 import StyledButton from "../ReactCommon/StyledButton";
 import StyledContainer from "../ReactCommon/StyledContainer";
+import IEntityManager from "../../Domain/EntityManager/IEntityManager";
 
 function App() {
   const entityManager = useInjection<IEntityManager>(CORE_TYPES.IEntityManager);

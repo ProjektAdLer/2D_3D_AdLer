@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ObservablePrimitive, {
   Primitive,
-} from "../../BusinessLogic/EntityManager/Observables/ObservablePrimitive";
+} from "../../Domain/EntityManager/Observables/ObservablePrimitive";
 
 export default function usePrimitive<U extends Primitive>(
   primitive: ObservablePrimitive<U>

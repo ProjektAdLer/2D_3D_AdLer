@@ -1,6 +1,6 @@
 import { LearningElementTypeSymbols } from "./../../../Presentation/LearningElement/Types/LearningElementTypes";
-import ObservablePrimitive from "../../../BusinessLogic/EntityManager/Observables/ObservablePrimitive";
-import AbstractEntity from "../../API/AbstractEntity";
+import ObservablePrimitive from "../../EntityManager/Observables/ObservablePrimitive";
+import AbstractEntity from "../AbstractEntity";
 
 export default class EGenericLearningElement extends AbstractEntity {
   learningElementType = new ObservablePrimitive<Symbol>(

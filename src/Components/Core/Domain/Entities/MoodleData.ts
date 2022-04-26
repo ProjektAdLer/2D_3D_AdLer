@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { H5PForCoursesAPIResponse } from "../Types/H5PTypes";
+import { H5PForCoursesAPIResponse } from "../../Types/H5PTypes";
 
 @injectable()
 export default class MoodleData {

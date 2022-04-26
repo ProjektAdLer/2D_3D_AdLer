@@ -1,5 +1,5 @@
-import AbstractEntity from "../../Entities/API/AbstractEntity";
-import RootEntity from "../../Entities/Entities/RootEntity";
+import AbstractEntity from "../../Domain/Entities/AbstractEntity";
+import RootEntity from "../../Domain/Entities/RootEntity";
 import ObservableClass from "./Observables/ObservableClass";
 import { Entity, EntityReference } from "../../Types/EntityManagerTypes";
 
