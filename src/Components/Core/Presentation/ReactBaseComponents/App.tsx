@@ -7,7 +7,7 @@ import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import usePrimitive from "../CustomHooks/usePrimitive";
 import LearningElementModal from "../LearningElementModal/LearningElementModal";
 import StyledButton from "../ReactCommon/StyledButton";
-
+import StyledContainer from "../ReactCommon/StyledContainer";
 
 function App() {
   const entityManager = useInjection<IEntityManager>(CORE_TYPES.IEntityManager);
@@ -96,7 +96,6 @@ function App() {
           </StyledButton>
         </StyledContainer>
         <StyledContainer className="bottom-0 left-0 p-13 text-4xl text-white font-extrabold ">
-
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-7 w-7 lg:h10 lg:w-10"

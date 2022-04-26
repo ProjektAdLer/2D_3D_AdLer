@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ButtonContainer({
+export default function StyledContainer({
   children,
   className,
   ...restProps
