@@ -42,7 +42,7 @@ import LearningElementPanelPresenter from "../Presentation/LearningElementPanel/
 import LearningElementPanelViewModel from "../Presentation/LearningElementPanel/LearningElementPanelViewModel";
 import IViewModelProvider from "../Presentation/ViewModelProvider/IViewModelProvider";
 import ViewModelProvider from "../Presentation/ViewModelProvider/ViewModelProvider";
-import LoadWorld from "../Application/LoadWorld/LoadWorld";
+import LoadWorldUseCase from "../Application/LoadWorld/LoadWorld";
 import IEntityManager from "../Domain/EntityManager/IEntityManager";
 import IDataAccess from "../DataAccess/API/IDataAccess";
 import DataAccess from "../DataAccess/API/DataAccess";
@@ -137,7 +137,7 @@ CoreDIContainer.bind<ILoadWorldController>(CORE_TYPES.ILoadWorldController)
 // Use Cases
 // Use Cases always have to be Singleton
 CoreDIContainer.bind<ILoadWorld>(CORE_TYPES.ILoadWorld)
-  .to(LoadWorld)
+  .to(LoadWorldUseCase)
   .inSingletonScope();
 
 export default CoreDIContainer;

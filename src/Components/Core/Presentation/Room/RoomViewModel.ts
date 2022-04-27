@@ -15,4 +15,7 @@ export default class RoomViewModel {
   public doorWidth: Observable<number> = new Observable(1.5);
   public doorHeight: Observable<number> = new Observable(2.28);
   public wallThickness: Observable<number> = new Observable(1);
+
+  public learningElements: Observable<any> = new Observable([]);
+  public id: string;
 }
