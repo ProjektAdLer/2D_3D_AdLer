@@ -31,7 +31,6 @@ import LearningElementView from "../Presentation/LearningElement/LearningElement
 import LearningElementViewModel from "../Presentation/LearningElement/LearningElementViewModel";
 import ILearningElementPresenter from "../Presentation/LearningElement/ILearningElementPresenter";
 import LearningElementPresenter from "../Presentation/LearningElement/LearningElementPresenter";
-import ISceneController from "../Presentation/SceneManagment/ISceneController";
 import ILearningElementFactory from "../Presentation/LearningElement/ILearningElementFactory";
 import LearningElementFactory from "../Presentation/LearningElement/LearningElementFactory";
 import EntityManager from "../Domain/EntityManager/EntityManager";
@@ -42,10 +41,13 @@ import LearningElementPanelPresenter from "../Presentation/LearningElementPanel/
 import LearningElementPanelViewModel from "../Presentation/LearningElementPanel/LearningElementPanelViewModel";
 import IViewModelProvider from "../Presentation/ViewModelProvider/IViewModelProvider";
 import ViewModelProvider from "../Presentation/ViewModelProvider/ViewModelProvider";
-import LoadWorldUseCase from "../Application/LoadWorld/LoadWorld";
+import LoadWorldUseCase from "../Application/LoadWorld/LoadWorldUseCase";
 import IEntityManager from "../Domain/EntityManager/IEntityManager";
 import IDataAccess from "../DataAccess/API/IDataAccess";
 import DataAccess from "../DataAccess/API/DataAccess";
+import ISceneController from "../Presentation/SceneManagment/ISceneController";
+import ILearningWorldPort from "../Application/LoadWorld/ILearningWorldPort";
+import LearningWorldPresenter from "../Presentation/LearningWorld/LearningWorldPresenter";
 
 var CoreDIContainer = new Container();
 
@@ -138,6 +140,10 @@ CoreDIContainer.bind<ILoadWorldController>(CORE_TYPES.ILoadWorldController)
 // Use Cases always have to be Singleton
 CoreDIContainer.bind<ILoadWorld>(CORE_TYPES.ILoadWorld)
   .to(LoadWorldUseCase)
+  .inSingletonScope();
+
+CoreDIContainer.bind<ILearningWorldPort>(CORE_TYPES.ILearningWorldPort)
+  .to(LearningWorldPresenter)
   .inSingletonScope();
 
 export default CoreDIContainer;

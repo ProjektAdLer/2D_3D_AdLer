@@ -1,7 +1,8 @@
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningWorldEntity from "../../Domain/Entities/LearningWorldEntity";
-import ILearningWorldPort, { LearningWorldTO } from "./ILearningWorldPort";
+import type ILearningWorldPort from "./ILearningWorldPort";
+import { LearningWorldTO } from "./ILearningWorldPort";
 
 @injectable()
 export default class LoadWorldUseCase {
@@ -10,7 +11,7 @@ export default class LoadWorldUseCase {
   private learningWorldPort: ILearningWorldPort;
 
   constructor(
-    @inject(CORE_TYPES.ILearningWorldLoaded)
+    @inject(CORE_TYPES.ILearningWorldPort)
     learningWorldPort: ILearningWorldPort
   ) {
     this.learningWorldPort = learningWorldPort;

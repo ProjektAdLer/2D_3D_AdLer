@@ -8,7 +8,7 @@ import {
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import IRoomController from "../Room/IRoomController";
-import ISceneController from "../SceneManagment/ISceneController";
+import type ISceneController from "../SceneManagment/ISceneController";
 import ILearningElementView from "./ILearningElementView";
 import ILearningElementPresenter from "./ILearningElementPresenter";
 import LearningElementViewModel from "./LearningElementViewModel";

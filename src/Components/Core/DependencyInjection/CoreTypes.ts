@@ -24,7 +24,7 @@ let CORE_TYPES = {
   IViewModelProvider: Symbol("IViewModelProvider"),
   ILoadWorld: Symbol("ILoadWorld"),
   ILoadWorldController: Symbol("ILoadWorldController"),
-  ILearningWorldLoaded: Symbol("ILearnignWorldLoaded"),
+  ILearningWorldPort: Symbol("ILearningWorldPort"),
 };
 
 export default CORE_TYPES;
