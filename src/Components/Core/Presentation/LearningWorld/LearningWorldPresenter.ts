@@ -1,13 +1,11 @@
 import { injectable } from "inversify";
-import ILearningWorldLoadedPort, {
+import ILearningWorldPort, {
   LearningWorldTO,
-} from "../../Application/LoadWorld/ILearningWorldLoadedPort";
+} from "../../Application/LoadWorld/ILearningWorldPort";
 import LearningWorldViewModel from "./LearningWorldViewModel";
 
 @injectable()
-export default class LearningWorldPresenter
-  implements ILearningWorldLoadedPort
-{
+export default class LearningWorldPresenter implements ILearningWorldPort {
   private viewModel: LearningWorldViewModel;
 
   public presentLearningWorld(learningWorldTO: LearningWorldTO): void {

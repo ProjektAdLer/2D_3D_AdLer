@@ -1,29 +1,34 @@
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningWorldEntity from "../../Domain/Entities/LearningWorldEntity";
-import ILearningWorldLoadedPort, {
-  LearningWorldTO,
-} from "./ILearningWorldLoadedPort";
+import ILearningWorldPort, { LearningWorldTO } from "./ILearningWorldPort";
 
 @injectable()
 export default class LoadWorldUseCase {
   private learningWorldEntity: LearningWorldEntity;
 
-  private learningWorldLoadedPort: ILearningWorldLoadedPort;
+  private learningWorldPort: ILearningWorldPort;
 
   constructor(
     @inject(CORE_TYPES.ILearningWorldLoaded)
-    learningWorldLoadedPort: ILearningWorldLoadedPort
+    learningWorldPort: ILearningWorldPort
   ) {
-    this.learningWorldLoadedPort = learningWorldLoadedPort;
+    this.learningWorldPort = learningWorldPort;
   }
 
   public execute(): void {
     this.load();
 
-    var learningElementTO = new LearningWorldTO();
-    learningElementTO.id = this.learningWorldEntity.id;
-    this.learningWorldLoadedPort.presentLearningWorld(learningElementTO);
+    this.learningWorldPort.presentLearningWorld(
+      this.toTO(this.learningWorldEntity)
+    );
+  }
+
+  private toTO(entityToConvert: LearningWorldEntity): LearningWorldTO {
+    return {
+      id: entityToConvert.id,
+      learningRooms: entityToConvert.learningRooms,
+    };
   }
 
   private load(): void {
