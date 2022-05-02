@@ -1,5 +1,4 @@
 import { ContainerModule } from "inversify";
-import { networkInterfaces } from "os";
 import EntityContainer from "../Domain/EntityContainer/EntityContainer";
 import IEntityContainer from "../Domain/EntityContainer/IEntityContainer";
 import EntityManager from "../Domain/EntityManager/EntityManager";

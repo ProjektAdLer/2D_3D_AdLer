@@ -1,5 +1,4 @@
 import { inject, injectable } from "inversify";
-import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import ILearningElementPanelPresenter from "./ILearningElementPanelPresenter";
 import LearningElementPanelViewModel from "./LearningElementPanelViewModel";
 

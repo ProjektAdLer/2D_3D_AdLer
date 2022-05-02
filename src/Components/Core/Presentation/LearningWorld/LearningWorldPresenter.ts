@@ -8,10 +8,18 @@ import LearningWorldViewModel from "./LearningWorldViewModel";
 
 @injectable()
 export default class LearningWorldPresenter implements ILearningWorldPort {
-  private viewModel: LearningWorldViewModel;
+  private viewModel = new LearningWorldViewModel();
+
+  constructor(
+    @inject(CORE_TYPES.IViewModelProvider) private provider: IViewModelProvider
+  ) {
+    provider.registerViewModel<LearningWorldViewModel>(
+      this.viewModel,
+      LearningWorldViewModel
+    );
+  }
 
   public presentLearningWorld(learningWorldTO: LearningWorldTO): void {
     this.viewModel.id = learningWorldTO.id;
-    console.log(this.viewModel);
   }
 }
