@@ -56,7 +56,7 @@ describe("EntityManager", () => {
   });
 
   test("filterEntitiesOfType returns the correct Entites", () => {
-    const container = getContainer();
+    const container: IEntityContainer = getContainer();
 
     const entity1 = container.createEntity<TestEntity>(
       {
