@@ -33,7 +33,6 @@ import ILearningElementPresenter from "../Presentation/LearningElement/ILearning
 import LearningElementPresenter from "../Presentation/LearningElement/LearningElementPresenter";
 import ILearningElementFactory from "../Presentation/LearningElement/ILearningElementFactory";
 import LearningElementFactory from "../Presentation/LearningElement/LearningElementFactory";
-import EntityManager from "../Domain/EntityManager/EntityManager";
 import IReactEntry from "../Presentation/ReactBaseComponents/IReactEntry";
 import ReactEntry from "../Presentation/ReactBaseComponents/ReactEntry";
 import ILearningElementPanelPresenter from "../Presentation/LearningElementPanel/ILearningElementPanelPresenter";
@@ -43,11 +42,15 @@ import IViewModelProvider from "../Presentation/ViewModelProvider/IViewModelProv
 import ViewModelProvider from "../Presentation/ViewModelProvider/ViewModelProvider";
 import LoadWorldUseCase from "../Application/LoadWorld/LoadWorldUseCase";
 import IEntityManager from "../Domain/EntityManager/IEntityManager";
+import EntityManager from "../Domain/EntityManager/EntityManager";
 import IDataAccess from "../DataAccess/API/IDataAccess";
 import DataAccess from "../DataAccess/API/DataAccess";
 import ISceneController from "../Presentation/SceneManagment/ISceneController";
 import ILearningWorldPort from "../Application/LoadWorld/ILearningWorldPort";
 import LearningWorldPresenter from "../Presentation/LearningWorld/LearningWorldPresenter";
+
+import { default as INewEntityManager } from "../Domain/EntityManager/NewEntityManager/IEntityManager";
+import { default as NewEntityManager } from "../Domain/EntityManager/NewEntityManager/EntityManager";
 
 var CoreDIContainer = new Container();
 
@@ -144,6 +147,11 @@ CoreDIContainer.bind<ILoadWorld>(CORE_TYPES.ILoadWorld)
 
 CoreDIContainer.bind<ILearningWorldPort>(CORE_TYPES.ILearningWorldPort)
   .to(LearningWorldPresenter)
+  .inSingletonScope();
+
+// New Entity Manager
+CoreDIContainer.bind<INewEntityManager>(CORE_TYPES.INewEntityManager)
+  .to(NewEntityManager)
   .inSingletonScope();
 
 export default CoreDIContainer;
