@@ -10,10 +10,12 @@ import StyledContainer from "../ReactCommon/StyledContainer";
 import IEntityManager from "../../Domain/EntityManager/IEntityManager";
 import ILoadWorld from "../../Application/LoadWorld/ILoadWorld";
 import LearningWorldComponent from "../LearningWorld/LearningWorldComponent";
+import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
 
 function App() {
   const entityManager = useInjection<IEntityManager>(CORE_TYPES.IEntityManager);
-  const loadWorldUsecase = useInjection<ILoadWorld>(CORE_TYPES.ILoadWorld);
+
+  const loadWorldController = new LoadWorldController();
 
   const rootEntity = entityManager.getRootEntity();
 
@@ -37,7 +39,7 @@ function App() {
             onClick={() => {
               setPrimitive("Das ist ein Test aus dem Knopf heraus ;) ");
 
-              loadWorldUsecase.execute();
+              loadWorldController.loadWorld();
             }}
           >
             {/* https://heroicons.com/ */}

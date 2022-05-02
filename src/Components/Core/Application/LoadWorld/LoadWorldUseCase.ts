@@ -4,9 +4,10 @@ import LearningWorldEntity from "../../Domain/Entities/LearningWorldEntity";
 import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import type ILearningWorldPort from "./ILearningWorldPort";
 import { LearningWorldTO } from "./ILearningWorldPort";
+import ILoadWorld from "./ILoadWorld";
 
 @injectable()
-export default class LoadWorldUseCase {
+export default class LoadWorldUseCase implements ILoadWorld {
   private learningWorldEntity: LearningWorldEntity;
 
   constructor(
