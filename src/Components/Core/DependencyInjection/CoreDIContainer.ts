@@ -33,16 +33,10 @@ import ILearningElementPresenter from "../Presentation/LearningElement/ILearning
 import LearningElementPresenter from "../Presentation/LearningElement/LearningElementPresenter";
 import ILearningElementFactory from "../Presentation/LearningElement/ILearningElementFactory";
 import LearningElementFactory from "../Presentation/LearningElement/LearningElementFactory";
-import EntityManager from "../Domain/EntityManager/EntityManager";
-import IReactEntry from "../Presentation/ReactBaseComponents/IReactEntry";
-import ReactEntry from "../Presentation/ReactBaseComponents/ReactEntry";
 import ILearningElementPanelPresenter from "../Presentation/LearningElementPanel/ILearningElementPanelPresenter";
 import LearningElementPanelPresenter from "../Presentation/LearningElementPanel/LearningElementPanelPresenter";
 import LearningElementPanelViewModel from "../Presentation/LearningElementPanel/LearningElementPanelViewModel";
-import IViewModelProvider from "../Presentation/ViewModelProvider/IViewModelProvider";
-import ViewModelProvider from "../Presentation/ViewModelProvider/ViewModelProvider";
 import LoadWorldUseCase from "../Application/LoadWorld/LoadWorldUseCase";
-import IEntityManager from "../Domain/EntityManager/IEntityManager";
 import IDataAccess from "../DataAccess/API/IDataAccess";
 import DataAccess from "../DataAccess/API/DataAccess";
 import ISceneController from "../Presentation/SceneManagment/ISceneController";

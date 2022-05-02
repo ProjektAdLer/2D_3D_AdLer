@@ -8,9 +8,12 @@ import LearningElementModal from "../LearningElementModal/LearningElementModal";
 import StyledButton from "../ReactCommon/StyledButton";
 import StyledContainer from "../ReactCommon/StyledContainer";
 import IEntityManager from "../../Domain/EntityManager/IEntityManager";
+import ILoadWorld from "../../Application/LoadWorld/ILoadWorld";
+import LearningWorldComponent from "../LearningWorld/LearningWorldComponent";
 
 function App() {
   const entityManager = useInjection<IEntityManager>(CORE_TYPES.IEntityManager);
+  const loadWorldUsecase = useInjection<ILoadWorld>(CORE_TYPES.ILoadWorld);
 
   const rootEntity = entityManager.getRootEntity();
 
@@ -33,6 +36,8 @@ function App() {
           <StyledButton
             onClick={() => {
               setPrimitive("Das ist ein Test aus dem Knopf heraus ;) ");
+
+              loadWorldUsecase.execute();
             }}
           >
             {/* https://heroicons.com/ */}
@@ -96,6 +101,7 @@ function App() {
           </StyledButton>
         </StyledContainer>
         <StyledContainer className="bottom-0 left-0 p-13 text-4xl text-white font-extrabold ">
+          <LearningWorldComponent />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-7 w-7 lg:h10 lg:w-10"
