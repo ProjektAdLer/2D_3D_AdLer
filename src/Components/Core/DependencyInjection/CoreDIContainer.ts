@@ -48,6 +48,7 @@ import DataAccess from "../DataAccess/API/DataAccess";
 import ISceneController from "../Presentation/SceneManagment/ISceneController";
 import ILearningWorldPort from "../Application/LoadWorld/ILearningWorldPort";
 import LearningWorldPresenter from "../Presentation/LearningWorld/LearningWorldPresenter";
+import infrastructureDIContainer from "./InfrastructureDIContainer";
 
 var CoreDIContainer = new Container();
 
@@ -110,26 +111,11 @@ CoreDIContainer.bind<ILearningElementView>(CORE_TYPES.ILearingElementView).to(
 );
 CoreDIContainer.bind(LearningElementViewModel).toSelf();
 
-// Entity Manager
-CoreDIContainer.bind<IEntityManager>(CORE_TYPES.IEntityManager)
-  .to(EntityManager)
-  .inSingletonScope();
-
-// React Entry
-CoreDIContainer.bind<IReactEntry>(CORE_TYPES.ICoreRenderer)
-  .to(ReactEntry)
-  .inSingletonScope();
-
 // Learning Element Panel
 CoreDIContainer.bind<ILearningElementPanelPresenter>(
   CORE_TYPES.ILearningElementPanelPresenter
 ).to(LearningElementPanelPresenter);
 CoreDIContainer.bind(LearningElementPanelViewModel).toSelf();
-
-// View Model Provider
-CoreDIContainer.bind<IViewModelProvider>(CORE_TYPES.IViewModelProvider)
-  .to(ViewModelProvider)
-  .inSingletonScope();
 
 // Controllers
 CoreDIContainer.bind<ILoadWorldController>(CORE_TYPES.ILoadWorldController)
@@ -145,5 +131,7 @@ CoreDIContainer.bind<ILoadWorld>(CORE_TYPES.ILoadWorld)
 CoreDIContainer.bind<ILearningWorldPort>(CORE_TYPES.ILearningWorldPort)
   .to(LearningWorldPresenter)
   .inSingletonScope();
+
+CoreDIContainer.load(infrastructureDIContainer);
 
 export default CoreDIContainer;
