@@ -27,6 +27,10 @@ export default interface IEntityContainer {
     entityType: ConstructorReference<T>
   ): T[];
 
+  /**
+   * @param entityType The type of the entities to filter
+   * @param filter The filter function to apply to the entities
+   */
   filterEntitiesOfTye<T extends AbstractEntity>(
     entityType: ConstructorReference<T>,
     filter: (entity: T) => boolean
