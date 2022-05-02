@@ -55,6 +55,30 @@ describe("EntityManager", () => {
     expect(container.getEntitiesOfType(TestEntity2)).toEqual([]);
   });
 
+  test("FilterEntitesOfType returns the correct Entites", () => {
+    const container = getContainer();
+
+    const entity1 = container.createEntity<TestEntity>(
+      {
+        test1: "entity1",
+      },
+      TestEntity
+    );
+    const entity2 = container.createEntity<TestEntity>(
+      {
+        test1: "entity2",
+      },
+      TestEntity
+    );
+
+    expect(
+      container.filterEntitiesOfTye(
+        TestEntity,
+        (entity) => entity.test1 === "entity1"
+      )
+    ).toEqual([entity1]);
+  });
+
   test("New Entities are Stored Correctly", () => {
     const container = getContainer();
 

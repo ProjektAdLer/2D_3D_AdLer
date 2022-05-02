@@ -27,6 +27,11 @@ export default interface IEntityContainer {
     entityType: ConstructorReference<T>
   ): T[];
 
+  filterEntitiesOfTye<T extends AbstractEntity>(
+    entityType: ConstructorReference<T>,
+    filter: (entity: T) => boolean
+  ): T[];
+
   /**
    * Deletes a given Entity from the EntityManager
    * Caution: This will (at least for now) delete the entity regardless of references in other entities.

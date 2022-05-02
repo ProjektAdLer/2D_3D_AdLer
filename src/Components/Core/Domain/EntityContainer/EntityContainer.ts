@@ -17,6 +17,7 @@ export default class EntityContainer implements IEntityContainer {
     this.rootEntity = new RootEntity();
     this.entityMap.set(RootEntity, [this.rootEntity]);
   }
+
   createEntity<T extends AbstractEntity>(
     entityData: Partial<T>,
     entityType: ConstructorReference<T>
@@ -37,6 +38,15 @@ export default class EntityContainer implements IEntityContainer {
     const retVal = this.entityMap.get(entityType) as T[];
     return retVal || [];
   }
+
+  filterEntitiesOfTye<T extends AbstractEntity>(
+    entityType: ConstructorReference<T>,
+    filter: (entity: T) => boolean
+  ): T[] {
+    const entities = this.getEntitiesOfType(entityType);
+    return entities.filter(filter);
+  }
+
   deleteEntity(entity: AbstractEntity): void {
     const entityType =
       entity.constructor as ConstructorReference<AbstractEntity>;
