@@ -1,6 +1,7 @@
 import { ConstructorReference } from "./../../../Types/EntityManagerTypes";
 import { Entity } from "../../../Types/EntityManagerTypes";
 import AbstractEntity from "../../Entities/AbstractEntity";
+import RootEntity from "../../Entities/RootEntity";
 
 export default interface IEntityManager {
   /**
@@ -14,4 +15,30 @@ export default interface IEntityManager {
     entityData: Partial<T>,
     entityType: ConstructorReference<T>
   ): T;
+
+  /**
+   * Returns all entities of the given type.
+   * In any case a array is returned.
+   *     - empty array if no entities of the given type exist
+   *     - array with one entry if only one Entity exists
+   * @template T The type of the entities
+   * @returns The entities of the given type
+   */
+  getEntitiesOfType<T extends AbstractEntity>(
+    entityType: ConstructorReference<T>
+  ): T[];
+
+  /**
+   * Deletes a given Entity from the EntityManager
+   * Caution: This will (at least for now) delete the entity regardless of references in other entities.
+   * @param entity The entity to delete
+   */
+  deleteEntity(entity: AbstractEntity): void;
+
+  /**
+   *
+   * gets the Root Entity
+   * @deprecated This will likely be removed in the future
+   */
+  getRootEntity(): RootEntity;
 }

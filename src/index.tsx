@@ -46,19 +46,5 @@ const Core = CoreDIContainer.get<ICore>(CORE_TYPES.ICore);
 const NewEntityManager = CoreDIContainer.get<IEntityManager>(
   CORE_TYPES.INewEntityManager
 );
-NewEntityManager.createEntity<newTestEntity>(
-  {
-    test1: "test1",
-    test2: true,
-  },
-  newTestEntity
-);
-NewEntityManager.createEntity<newTestEntity>({}, newTestEntity);
-NewEntityManager.createEntity<newTestEntity2>(
-  {
-    test3: 1337,
-  },
-  newTestEntity2
-);
 
 Core.setupReact();
