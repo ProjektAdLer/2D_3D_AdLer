@@ -55,7 +55,7 @@ describe("EntityManager", () => {
     expect(container.getEntitiesOfType(TestEntity2)).toEqual([]);
   });
 
-  test("FilterEntitesOfType returns the correct Entites", () => {
+  test("filterEntitiesOfTye returns the correct Entites", () => {
     const container = getContainer();
 
     const entity1 = container.createEntity<TestEntity>(
@@ -77,6 +77,30 @@ describe("EntityManager", () => {
         (entity) => entity.test1 === "entity1"
       )
     ).toEqual([entity1]);
+  });
+
+  test("filterEntitiesOfTye returns empty Array, if nothing is found", () => {
+    const container = getContainer();
+
+    const entity1 = container.createEntity<TestEntity>(
+      {
+        test1: "entity1",
+      },
+      TestEntity
+    );
+    const entity2 = container.createEntity<TestEntity>(
+      {
+        test1: "entity2",
+      },
+      TestEntity
+    );
+
+    expect(
+      container.filterEntitiesOfTye(
+        TestEntity,
+        (entity) => entity.test1 === "foo"
+      )
+    ).toEqual([]);
   });
 
   test("New Entities are Stored Correctly", () => {
