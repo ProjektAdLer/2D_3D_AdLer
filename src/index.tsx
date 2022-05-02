@@ -13,30 +13,30 @@ const entityManager = CoreDIContainer.get<IEntityManager>(
   CORE_TYPES.IEntityManager
 );
 
-const genenericLearningElementId = entityManager.createEntity<
-  EGenericLearningElement,
-  RootEntity
->(
-  {
-    learningElementTitle: "Titel aus index.ts",
-    learningElementType: LearningElementTypeSymbols.h5p,
-  },
-  entityManager.getRootEntity().Value.id,
-  "CurrentLearningElementId",
-  EGenericLearningElement
-);
+// const genenericLearningElementId = entityManager.createEntity<
+//   EGenericLearningElement,
+//   RootEntity
+// >(
+//   {
+//     learningElementTitle: "Titel aus index.ts",
+//     learningElementType: LearningElementTypeSymbols.h5p,
+//   },
+//   entityManager.getRootEntity().Value.id,
+//   "CurrentLearningElementId",
+//   EGenericLearningElement
+// );
 
-const concreteLearningElementId = entityManager.createEntity<
-  EH5PLearningElement,
-  EGenericLearningElement
->(
-  {
-    h5PcontextId: 278,
-    h5PFileName: "Metriken Teil 1.h5p",
-  },
-  genenericLearningElementId,
-  "concreteLearningElementId",
-  EH5PLearningElement
-);
+// const concreteLearningElementId = entityManager.createEntity<
+//   EH5PLearningElement,
+//   EGenericLearningElement
+// >(
+//   {
+//     h5PcontextId: 278,
+//     h5PFileName: "Metriken Teil 1.h5p",
+//   },
+//   genenericLearningElementId,
+//   "concreteLearningElementId",
+//   EH5PLearningElement
+// );
 
 Core.setupReact();
