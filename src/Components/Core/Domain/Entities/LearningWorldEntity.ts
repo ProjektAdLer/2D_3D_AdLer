@@ -4,5 +4,6 @@ import LearningRoomEntity from "./LearningRoomEntity";
 
 @injectable()
 export default class LearningWorldEntity extends AbstractEntity {
+  worldName: string;
   public learningRooms: LearningRoomEntity[];
 }

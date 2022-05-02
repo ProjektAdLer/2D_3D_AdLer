@@ -6,5 +6,5 @@ export default function LearningWorldComponent() {
     LearningWorldViewModel
   );
 
-  return <div>{viewModel[0]?.id}</div>;
+  return <div>{viewModel[0]?.worldName}</div>;
 }

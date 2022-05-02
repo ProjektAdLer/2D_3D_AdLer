@@ -2,6 +2,7 @@ import { LearningElementType } from "../../Presentation/LearningElement/Types/Le
 
 export class LearningWorldTO {
   readonly id: string;
+  worldName: string;
   learningRooms: LearningRoomTO[];
 }
 
