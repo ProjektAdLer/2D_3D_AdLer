@@ -6,9 +6,12 @@ import IEntityManager from "./IEntityManager";
 
 @injectable()
 export default class EntityManager implements IEntityManager {
-  entityMap = new Map<ConstructorReference<AbstractEntity>, AbstractEntity[]>();
+  private entityMap = new Map<
+    ConstructorReference<AbstractEntity>,
+    AbstractEntity[]
+  >();
 
-  rootEntity: RootEntity;
+  private rootEntity: RootEntity;
 
   constructor() {
     this.rootEntity = new RootEntity();
