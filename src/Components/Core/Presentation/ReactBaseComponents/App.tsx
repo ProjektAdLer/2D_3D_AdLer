@@ -36,6 +36,7 @@ function App() {
               await loadWorldController.loadWorld();
             }}
           >
+            Debug: Welt laden
             {/* https://heroicons.com/ */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
