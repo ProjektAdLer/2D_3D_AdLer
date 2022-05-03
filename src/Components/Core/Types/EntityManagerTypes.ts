@@ -16,6 +16,6 @@ type EntityWithIds<T extends AbstractEntity> = {
 
 export type EntityReference<T extends AbstractEntity> = keyof EntityWithIds<T>;
 
-export type ConstructorReference<T extends AbstractEntity> = {
+export type ConstructorReference<T> = {
   new (): T;
 };
