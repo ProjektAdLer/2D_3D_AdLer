@@ -2,6 +2,7 @@ import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningWorldEntity from "../../Domain/Entities/LearningWorldEntity";
 import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
+import { IDTO } from "../Abstract/IDTO";
 import type ILearningWorldPort from "./ILearningWorldPort";
 import { LearningWorldTO } from "./ILearningWorldPort";
 import ILoadWorld from "./ILoadWorld";
@@ -18,13 +19,14 @@ export default class LoadWorldUseCase implements ILoadWorld {
   ) {
     this.learningWorldPort = learningWorldPort;
   }
-
-  public execute(): void {
-    this.load();
+  async executeAsync(data?: IDTO): Promise<void> {
+    await this.load();
 
     this.learningWorldPort.presentLearningWorld(
       this.toTO(this.learningWorldEntity)
     );
+
+    return Promise.resolve();
   }
 
   private toTO(entityToConvert: LearningWorldEntity): LearningWorldTO {
@@ -35,11 +37,14 @@ export default class LoadWorldUseCase implements ILoadWorld {
     };
   }
 
-  private load(): void {
+  private async load(): Promise<void> {
+    // Wait for Fake API
+    const worldNameResp = await fakeFakeApi();
+
     if (this.container.getEntitiesOfType(LearningWorldEntity).length === 0) {
       this.container.createEntity<LearningWorldEntity>(
         {
-          worldName: "Test World",
+          worldName: worldNameResp,
         },
         LearningWorldEntity
       );
@@ -49,3 +54,12 @@ export default class LoadWorldUseCase implements ILoadWorld {
       this.container.getEntitiesOfType(LearningWorldEntity)[0];
   }
 }
+
+const fakeFakeApi = async () => {
+  // return Promise.resolve(); after 2 seconds
+  return await new Promise<string>((resolve) => {
+    setTimeout(() => {
+      resolve("Fake Response for World");
+    }, 2000);
+  });
+};

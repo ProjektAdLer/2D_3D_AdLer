@@ -6,9 +6,9 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 
 @injectable()
 export class LoadWorldController implements ILoadWorldController {
-  loadWorld(): void {
+  async loadWorld(): Promise<void> {
     const useCase = CoreDIContainer.get<ILoadWorld>(CORE_TYPES.ILoadWorld);
 
-    useCase.execute();
+    await useCase.executeAsync();
   }
 }

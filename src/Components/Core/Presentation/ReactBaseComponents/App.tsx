@@ -36,10 +36,10 @@ function App() {
             H5P
           </StyledButton>
           <StyledButton
-            onClick={() => {
+            onClick={async () => {
               setPrimitive("Das ist ein Test aus dem Knopf heraus ;) ");
 
-              loadWorldController.loadWorld();
+              await loadWorldController.loadWorld();
             }}
           >
             {/* https://heroicons.com/ */}

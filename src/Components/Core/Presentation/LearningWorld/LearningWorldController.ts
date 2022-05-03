@@ -6,7 +6,7 @@ export default class LearningWorldController {
   constructor(
     @inject(CORE_TYPES.ILoadWorld) private loadWorldUseCase: ILoadWorld
   ) {}
-  public loadWorldName = () => {
-    this.loadWorldUseCase.execute();
+  public loadWorldName = async () => {
+    await this.loadWorldUseCase.executeAsync();
   };
 }
