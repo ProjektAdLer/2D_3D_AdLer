@@ -20,7 +20,7 @@ export default class LearningWorldPresenter implements ILearningWorldPort {
   }
 
   public presentLearningWorld(learningWorldTO: LearningWorldTO): void {
-    this.viewModel.worldName = learningWorldTO.worldName;
-    this.viewModel.test.setValue(learningWorldTO.worldName);
+    this.viewModel.worldName.setValue(learningWorldTO.worldName);
+    this.viewModel.worldNameLoading.setValue(false);
   }
 }

@@ -56,10 +56,9 @@ export default class LoadWorldUseCase implements ILoadWorld {
 }
 
 const fakeFakeApi = async () => {
-  // return Promise.resolve(); after 2 seconds
   return await new Promise<string>((resolve) => {
     setTimeout(() => {
-      resolve("Fake Response for World");
+      resolve("Weltname von Fake API nach 2 Sekunden");
     }, 2000);
   });
 };

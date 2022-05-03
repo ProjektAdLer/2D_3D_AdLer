@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import useNewPrimitive from "../CustomHooks/useNewPrimitive";
-import usePrimitive from "../CustomHooks/usePrimitive";
-import StyledButton from "../ReactCommon/StyledButton";
 import useViewModelProvider from "../ViewModelProvider/useViewModelProvider";
 import LearningWorldViewModel from "./LearningWorldViewModel";
 
@@ -10,18 +8,14 @@ export default function LearningWorldComponent() {
     LearningWorldViewModel
   );
 
-  const [test] = useNewPrimitive<string>(viewModel[0]?.test);
+  const [worldName] = useNewPrimitive<string>(viewModel[0]?.worldName);
+  const [worldNameLoading] = useNewPrimitive<boolean>(
+    viewModel[0]?.worldNameLoading
+  );
 
   return (
     <React.Fragment>
-      <div>{test}</div>
-      <StyledButton
-        onClick={() => {
-          console.log(viewModel[0]?.worldName);
-        }}
-      >
-        Yalla
-      </StyledButton>
+      <div>{worldNameLoading ? "Weltname wird geladen ..." : worldName}</div>
     </React.Fragment>
   );
 }

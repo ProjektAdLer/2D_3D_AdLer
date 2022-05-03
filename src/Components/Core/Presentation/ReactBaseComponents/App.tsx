@@ -8,7 +8,6 @@ import LearningElementModal from "../LearningElementModal/LearningElementModal";
 import StyledButton from "../ReactCommon/StyledButton";
 import StyledContainer from "../ReactCommon/StyledContainer";
 import IEntityManager from "../../Domain/EntityManager/IEntityManager";
-import ILoadWorld from "../../Application/LoadWorld/ILoadWorld";
 import LearningWorldComponent from "../LearningWorld/LearningWorldComponent";
 import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
 
@@ -19,7 +18,6 @@ function App() {
 
   const rootEntity = entityManager.getRootEntity();
 
-  const [, setPrimitive] = usePrimitive(rootEntity.Value.memberx);
   const [, setShowModal] = usePrimitive(rootEntity.Value.showModal);
 
   return (
@@ -29,16 +27,12 @@ function App() {
           <StyledButton
             onClick={() => {
               setShowModal(true);
-
-              setPrimitive("Das ist ein Test aus dem Knopf heraus ;) ");
             }}
           >
             H5P
           </StyledButton>
           <StyledButton
             onClick={async () => {
-              setPrimitive("Das ist ein Test aus dem Knopf heraus ;) ");
-
               await loadWorldController.loadWorld();
             }}
           >
@@ -58,11 +52,7 @@ function App() {
               />
             </svg>
           </StyledButton>
-          <StyledButton
-            onClick={() => {
-              setPrimitive("Das ist ein Test aus dem Knopf heraus ;) ");
-            }}
-          >
+          <StyledButton>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-7 w-7 lg:h10 lg:w-10"
@@ -81,11 +71,7 @@ function App() {
             </svg>
           </StyledButton>
 
-          <StyledButton
-            onClick={() => {
-              setPrimitive("Das ist ein Test aus dem Knopf heraus ;) ");
-            }}
-          >
+          <StyledButton>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-7 w-7 lg:h10 lg:w-10"

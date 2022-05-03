@@ -4,7 +4,7 @@ import ObservablePrimitive from "../../Domain/EntityManager/Observables/Observab
 @injectable()
 export default class LearningWorldViewModel {
   public id: string;
-  public worldName: string;
 
-  public test = new ObservablePrimitive<string>("");
+  public worldName = new ObservablePrimitive<string>("");
+  public worldNameLoading = new ObservablePrimitive<boolean>(false);
 }
