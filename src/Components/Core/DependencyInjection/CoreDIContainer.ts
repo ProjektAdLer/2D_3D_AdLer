@@ -77,10 +77,12 @@ CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
 CoreDIContainer.bind(DataTransferObject).toSelf();
 
 // Room
-CoreDIContainer.bind<ILearningRoomController>(CORE_TYPES.IRoomController)
+CoreDIContainer.bind<ILearningRoomController>(
+  CORE_TYPES.ILearningRoomController
+)
   .to(LearningRoomController)
   .inSingletonScope();
-CoreDIContainer.bind<ILearningRoomView>(CORE_TYPES.IRoomView).to(
+CoreDIContainer.bind<ILearningRoomView>(CORE_TYPES.ILearningRoomView).to(
   LearningRoomView
 );
 CoreDIContainer.bind(LearningRoomViewModel).toSelf();

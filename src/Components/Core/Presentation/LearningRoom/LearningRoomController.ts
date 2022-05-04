@@ -6,14 +6,14 @@ import IRoomView from "./ILearningRoomView";
 import type ISceneController from "../SceneManagment/ISceneController";
 
 @injectable()
-export default class RoomController implements IRoomController {
+export default class LearningRoomController implements IRoomController {
   private viewModel: RoomViewModel;
   private view: IRoomView;
 
   constructor(
     @inject(CORE_TYPES.ISceneController) sceneController: ISceneController,
     @inject(RoomViewModel) viewModel: RoomViewModel,
-    @inject(CORE_TYPES.IRoomView) view: IRoomView
+    @inject(CORE_TYPES.ILearningRoomView) view: IRoomView
   ) {
     this.viewModel = viewModel;
     this.view = view;

@@ -26,7 +26,8 @@ export default class LearningElementPresenter
     @inject(CORE_TYPES.ILearingElementView) view: ILearningElementView,
     @inject(LearningElementViewModel) viewModel: LearningElementViewModel,
     @inject(CORE_TYPES.ISceneController) sceneController: ISceneController,
-    @inject(CORE_TYPES.IRoomController) roomPresenter: ILearningRoomController
+    @inject(CORE_TYPES.ILearningRoomController)
+    roomPresenter: ILearningRoomController
   ) {
     this.view = view;
     this.viewModel = viewModel;

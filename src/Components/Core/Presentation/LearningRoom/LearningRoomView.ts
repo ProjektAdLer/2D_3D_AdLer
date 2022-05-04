@@ -11,7 +11,7 @@ import RoomViewModel from "./LearningRoomViewModel";
 import floorTexture from "../../../../Assets/wooden_floor.png";
 
 @injectable()
-export default class RoomView implements IRoomView {
+export default class LearningRoomView implements IRoomView {
   private viewModel: RoomViewModel;
 
   set ViewModel(newViewModel: RoomViewModel) {
