@@ -14,13 +14,13 @@ import SceneView from "../Presentation/SceneManagment/SceneView";
 import SceneViewModel from "../Presentation/SceneManagment/SceneViewModel";
 import SceneController from "../Presentation/SceneManagment/SceneController";
 import DataTransferObject from "../Domain/Entities/ExternalRoomData";
-import IRoomController from "../Presentation/Room/IRoomController";
-import RoomController from "../Presentation/Room/RoomController";
+import ILearningRoomController from "../Presentation/LearningRoom/ILearningRoomController";
+import LearningRoomController from "../Presentation/LearningRoom/LearningRoomController";
 import MainScene from "../Presentation/SceneManagment/MainScene";
 import ICreateSceneClass from "../Presentation/SceneManagment/ICreateSceneClass";
-import IRoomView from "../Presentation/Room/IRoomView";
-import RoomView from "../Presentation/Room/RoomView";
-import RoomViewModel from "../Presentation/Room/RoomViewModel";
+import ILearningRoomView from "../Presentation/LearningRoom/ILearningRoomView";
+import LearningRoomView from "../Presentation/LearningRoom/LearningRoomView";
+import LearningRoomViewModel from "../Presentation/LearningRoom/LearningRoomViewModel";
 import IMoodle from "../Application/Moodle/IMoodle";
 import Moodle from "../Application/Moodle/Moodle";
 import MoodleDataAccess from "../DataAccess/Moodle/MoodleDataAccess";
@@ -77,11 +77,13 @@ CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
 CoreDIContainer.bind(DataTransferObject).toSelf();
 
 // Room
-CoreDIContainer.bind<IRoomController>(CORE_TYPES.IRoomController)
-  .to(RoomController)
+CoreDIContainer.bind<ILearningRoomController>(CORE_TYPES.IRoomController)
+  .to(LearningRoomController)
   .inSingletonScope();
-CoreDIContainer.bind<IRoomView>(CORE_TYPES.IRoomView).to(RoomView);
-CoreDIContainer.bind(RoomViewModel).toSelf();
+CoreDIContainer.bind<ILearningRoomView>(CORE_TYPES.IRoomView).to(
+  LearningRoomView
+);
+CoreDIContainer.bind(LearningRoomViewModel).toSelf();
 
 // Moodle
 CoreDIContainer.bind<IMoodle>(CORE_TYPES.IMoodle).to(Moodle).inSingletonScope();

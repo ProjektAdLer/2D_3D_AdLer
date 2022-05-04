@@ -6,8 +6,8 @@ import {
   Texture,
 } from "@babylonjs/core";
 import { injectable } from "inversify";
-import IRoomView from "./IRoomView";
-import RoomViewModel from "./RoomViewModel";
+import IRoomView from "./ILearningRoomView";
+import RoomViewModel from "./LearningRoomViewModel";
 import floorTexture from "../../../../Assets/wooden_floor.png";
 
 @injectable()

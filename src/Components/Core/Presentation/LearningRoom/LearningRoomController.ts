@@ -1,8 +1,8 @@
 import { injectable, inject } from "inversify";
-import IRoomController from "./IRoomController";
+import IRoomController from "./ILearningRoomController";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
-import RoomViewModel from "./RoomViewModel";
-import IRoomView from "./IRoomView";
+import RoomViewModel from "./LearningRoomViewModel";
+import IRoomView from "./ILearningRoomView";
 import type ISceneController from "../SceneManagment/ISceneController";
 
 @injectable()

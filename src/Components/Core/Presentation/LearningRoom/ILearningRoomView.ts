@@ -1,4 +1,4 @@
-import RoomViewModel from "./RoomViewModel";
+import RoomViewModel from "./LearningRoomViewModel";
 export default interface IRoomView {
   displayRoom(): void;
   set ViewModel(newViewModel: RoomViewModel);

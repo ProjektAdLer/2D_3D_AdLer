@@ -7,7 +7,7 @@ import {
 } from "@babylonjs/core";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
-import IRoomController from "../Room/IRoomController";
+import ILearningRoomController from "../LearningRoom/ILearningRoomController";
 import type ISceneController from "../SceneManagment/ISceneController";
 import ILearningElementView from "./ILearningElementView";
 import ILearningElementPresenter from "./ILearningElementPresenter";
@@ -18,7 +18,7 @@ export default class LearningElementPresenter
   implements ILearningElementPresenter
 {
   private sceneController: ISceneController;
-  private roomPresenter: IRoomController;
+  private roomPresenter: ILearningRoomController;
   private view: ILearningElementView;
   private viewModel: LearningElementViewModel;
 
@@ -26,7 +26,7 @@ export default class LearningElementPresenter
     @inject(CORE_TYPES.ILearingElementView) view: ILearningElementView,
     @inject(LearningElementViewModel) viewModel: LearningElementViewModel,
     @inject(CORE_TYPES.ISceneController) sceneController: ISceneController,
-    @inject(CORE_TYPES.IRoomController) roomPresenter: IRoomController
+    @inject(CORE_TYPES.IRoomController) roomPresenter: ILearningRoomController
   ) {
     this.view = view;
     this.viewModel = viewModel;
