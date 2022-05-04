@@ -1,4 +1,4 @@
-import ILoadWorld from "../../Application/LoadWorld/ILoadWorld";
+import ILoadWorldUseCase from "../../Application/LoadWorld/ILoadWorldUseCase";
 import { injectable } from "inversify";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import ILoadWorldController from "./ILoadWorldController";
@@ -9,7 +9,9 @@ import IViewModelProvider from "../ViewModelProvider/IViewModelProvider";
 @injectable()
 export class LoadWorldController implements ILoadWorldController {
   async loadWorld(): Promise<void> {
-    const useCase = CoreDIContainer.get<ILoadWorld>(CORE_TYPES.ILoadWorld);
+    const useCase = CoreDIContainer.get<ILoadWorldUseCase>(
+      CORE_TYPES.ILoadWorldUseCase
+    );
 
     const provider = CoreDIContainer.get<IViewModelProvider>(
       CORE_TYPES.IViewModelProvider

@@ -5,10 +5,10 @@ import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import { IDTO } from "../Abstract/IDTO";
 import type ILearningWorldPort from "./ILearningWorldPort";
 import { LearningWorldTO } from "./ILearningWorldPort";
-import ILoadWorld from "./ILoadWorld";
+import ILoadWorldUseCase from "./ILoadWorldUseCase";
 
 @injectable()
-export default class LoadWorldUseCase implements ILoadWorld {
+export default class LoadWorldUseCase implements ILoadWorldUseCase {
   private learningWorldEntity: LearningWorldEntity;
 
   constructor(

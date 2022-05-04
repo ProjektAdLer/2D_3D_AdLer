@@ -1,6 +1,6 @@
 import { LoadWorldController } from "../Presentation/LoadWorldButton/LoadWorldController";
 import ILoadWorldController from "../Presentation/LoadWorldButton/ILoadWorldController";
-import ILoadWorld from "./../Application/LoadWorld/ILoadWorld";
+import ILoadWorldUseCase from "../Application/LoadWorld/ILoadWorldUseCase";
 import { Container } from "inversify";
 import CORE_TYPES from "./CoreTypes";
 import IPresentation from "../Presentation/API/IPresentation";
@@ -118,7 +118,7 @@ CoreDIContainer.bind<ILoadWorldController>(CORE_TYPES.ILoadWorldController)
 
 // Use Cases
 // Use Cases always have to be Singleton
-CoreDIContainer.bind<ILoadWorld>(CORE_TYPES.ILoadWorld)
+CoreDIContainer.bind<ILoadWorldUseCase>(CORE_TYPES.ILoadWorldUseCase)
   .to(LoadWorldUseCase)
   .inSingletonScope();
 

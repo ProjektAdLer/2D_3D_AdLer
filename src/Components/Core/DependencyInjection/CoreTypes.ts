@@ -22,7 +22,7 @@ let CORE_TYPES = {
   ILearningElementPanelPresenter: Symbol("ILearningElementPanelPresenter"),
   ILearningElementPanelViewModel: Symbol("ILearningElementPanelViewModel"),
   IViewModelProvider: Symbol("IViewModelProvider"),
-  ILoadWorld: Symbol("ILoadWorld"),
+  ILoadWorldUseCase: Symbol("ILoadWorldUseCase"),
   ILoadWorldController: Symbol("ILoadWorldController"),
   ILearningWorldPort: Symbol("ILearningWorldPort"),
   IEntityContainer: Symbol("IEntityContainer"),

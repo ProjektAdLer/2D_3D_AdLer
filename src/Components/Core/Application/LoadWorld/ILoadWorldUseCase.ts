@@ -1,2 +1,2 @@
-import { IAsyncUsecase } from "./../Abstract/IAsyncUsecase";
+import { IAsyncUsecase } from "../Abstract/IAsyncUsecase";
 export default interface ILoadWorld extends IAsyncUsecase {}
