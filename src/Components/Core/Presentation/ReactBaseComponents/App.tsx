@@ -90,7 +90,6 @@ function App() {
           </StyledButton>
         </StyledContainer>
         <StyledContainer className="bottom-0 left-0 p-13 text-4xl text-white font-extrabold ">
-          <LearningWorldComponent />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-7 w-7 lg:h10 lg:w-10"
@@ -106,6 +105,9 @@ function App() {
             />
           </svg>
           x 10
+        </StyledContainer>
+        <StyledContainer className="inset-x-1/2 p-13 text-4xl text-white p-0 ">
+          <LearningWorldComponent />
         </StyledContainer>
         <BabylonCanvas className="w-screen h-screen" />
         <LearningElementModal />
