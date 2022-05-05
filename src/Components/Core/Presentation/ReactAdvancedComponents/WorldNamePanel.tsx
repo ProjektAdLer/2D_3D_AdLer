@@ -1,16 +1,33 @@
 import React from "react";
 import StyledContainer from "../ReactCommon/StyledContainer";
-
+import usePrimitive from "../CustomHooks/usePrimitive";
 import LearningWorldComponent from "../LearningWorld/LearningWorldComponent";
+import useViewModelProvider from "../ViewModelProvider/useViewModelProvider";
+import LearningWorldViewModel from "../LearningWorld/LearningWorldViewModel";
 
 export default function WorldNamePanel({
   children,
   className,
   ...rest
 }: React.HTMLProps<HTMLDivElement>) {
+  const viewModel = useViewModelProvider<LearningWorldViewModel>(
+    LearningWorldViewModel
+  );
+
+  const [worldName] = usePrimitive<string>(viewModel[0]?.worldName);
+  const [worldNameLoading] = usePrimitive<boolean>(
+    viewModel[0]?.worldNameLoading
+  );
   return (
-    <StyledContainer className="inset-x-1/2 p-13 text-4xl text-white p-0 ">
-      <LearningWorldComponent />
-    </StyledContainer>
+    <div>
+      {(worldNameLoading || worldName) && (
+        <StyledContainer className="inset-x-1/2 p-13 text-4xl text-white whitespace-nowrap ">
+          <LearningWorldComponent
+            worldName={worldName}
+            worldNameLoading={worldNameLoading}
+          />
+        </StyledContainer>
+      )}
+    </div>
   );
 }
