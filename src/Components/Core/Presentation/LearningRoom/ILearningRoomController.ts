@@ -1,1 +1,1 @@
-export default interface IRoomController {}
+export default interface ILearningRoomController {}
