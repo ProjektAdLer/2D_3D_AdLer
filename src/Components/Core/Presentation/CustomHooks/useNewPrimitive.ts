@@ -15,7 +15,11 @@ export default function useNewPrimitive<U extends Primitive>(
       primitive.subscribe(setData);
     }
 
-    //return () => primitive.unsubscribe(setData);
+    return () => {
+      if (primitive) {
+        primitive.unsubscribe(setData);
+      }
+    };
   }, [primitive]);
 
   return [
