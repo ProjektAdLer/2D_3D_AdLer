@@ -25,7 +25,7 @@ export class LoadWorldController implements ILoadWorldController {
     }, LearningWorldViewModel);
 
     //@ts-ignore
-    viewModel.worldNameLoading.setValue(true);
+    // viewModel.worldNameLoading.setValue(true);
 
     await useCase.executeAsync();
   }
