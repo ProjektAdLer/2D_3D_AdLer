@@ -8,22 +8,20 @@ import LearningWorldViewModel from "./LearningWorldViewModel";
 
 @injectable()
 export default class LearningWorldPresenter implements ILearningWorldPort {
-  private viewModel: LearningWorldViewModel;
+  private viewModel: LearningWorldViewModel = new LearningWorldViewModel();
 
   constructor(
     @inject(CORE_TYPES.IViewModelProvider)
     private viewModelProvider: IViewModelProvider
-  ) {}
-
-  public presentLearningWorld(learningWorldTO: LearningWorldTO): void {
-    this.viewModel.worldName.setValue(learningWorldTO.worldName);
-    this.viewModel.worldNameLoading.setValue(false);
-
-    this.viewModel = new LearningWorldViewModel();
-
+  ) {
     this.viewModelProvider.registerViewModel<LearningWorldViewModel>(
       this.viewModel,
       LearningWorldViewModel
     );
+  }
+
+  public presentLearningWorld(learningWorldTO: LearningWorldTO): void {
+    this.viewModel.worldName.setValue(learningWorldTO.worldName);
+    this.viewModel.worldNameLoading.setValue(false);
   }
 }
