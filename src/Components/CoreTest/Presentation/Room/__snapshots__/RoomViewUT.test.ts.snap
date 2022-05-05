@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`RoomView View Model is being Set by the Setter 1`] = `
-Object {
-  "viewModel": Any<RoomViewModel>,
-}
-`;
