@@ -1,24 +1,57 @@
-import {
-  Scene,
-  Mesh,
-  VertexData,
-  StandardMaterial,
-  Texture,
-} from "@babylonjs/core";
+import { Mesh, VertexData, StandardMaterial, Texture } from "@babylonjs/core";
 import { injectable } from "inversify";
-import IRoomView from "./ILearningRoomView";
-import RoomViewModel from "./LearningRoomViewModel";
+import LearningRoomViewModel from "./LearningRoomViewModel";
 import floorTexture from "../../../../Assets/wooden_floor.png";
+import ILearningRoomController from "./ILearningRoomController";
 
-@injectable()
-export default class LearningRoomView implements IRoomView {
-  private viewModel: RoomViewModel;
+// @injectable()
+export default class LearningRoomView {
+  private viewModel: LearningRoomViewModel;
+  private controller: ILearningRoomController;
 
-  set ViewModel(newViewModel: RoomViewModel) {
-    this.viewModel = newViewModel;
+  constructor(
+    viewModel: LearningRoomViewModel,
+    controller: ILearningRoomController
+  ) {
+    this.viewModel = viewModel;
+    this.controller = controller;
+
+    // setup callbacks for rerendering parts of the room when the view model changes
+    this.viewModel.scene.subscribe(() => {
+      this.displayRoom();
+    });
+    this.viewModel.roomHeight.subscribe(() => {
+      this.displayRoom();
+    });
+    this.viewModel.roomWidth.subscribe(() => {
+      this.displayRoom();
+    });
+    this.viewModel.roomLength.subscribe(() => {
+      this.displayRoom();
+    });
+    this.viewModel.wallThickness.subscribe(() => {
+      this.displayRoom();
+    });
+    this.viewModel.baseHeight.subscribe(() => {
+      this.displayRoom();
+    });
+    this.viewModel.wallColor.subscribe(() => {
+      this.createWalls();
+    });
+    this.viewModel.doorHeight.subscribe(() => {
+      this.createWalls();
+    });
+    this.viewModel.doorWidth.subscribe(() => {
+      this.createWalls();
+    });
+
+    // TODO: setup subscription cancellations
+
+    // initial render
+    this.displayRoom();
   }
 
-  public displayRoom(): void {
+  private displayRoom(): void {
     this.createWalls();
     this.createFloor();
   }

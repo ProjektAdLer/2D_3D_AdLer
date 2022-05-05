@@ -18,7 +18,6 @@ import ILearningRoomController from "../Presentation/LearningRoom/ILearningRoomC
 import LearningRoomController from "../Presentation/LearningRoom/LearningRoomController";
 import MainScene from "../Presentation/SceneManagment/MainScene";
 import ICreateSceneClass from "../Presentation/SceneManagment/ICreateSceneClass";
-import ILearningRoomView from "../Presentation/LearningRoom/ILearningRoomView";
 import LearningRoomView from "../Presentation/LearningRoom/LearningRoomView";
 import LearningRoomViewModel from "../Presentation/LearningRoom/LearningRoomViewModel";
 import IMoodle from "../Application/Moodle/IMoodle";
