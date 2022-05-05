@@ -4,24 +4,24 @@ import IPresentationDirector from "./IPresentationDirector";
 
 @injectable()
 export default class PresentationDirector implements IPresentationDirector {
-  private presentationBuilder: IPresentationBuilder;
-
-  constructor(presentationBuilder: IPresentationBuilder) {
-    this.presentationBuilder = presentationBuilder;
-  }
+  private builder: IPresentationBuilder;
 
   public build(): void {
+    if (!this.builder) {
+      throw new Error("PresentationBuilder is not set");
+    }
+
     // reset builder
-    this.presentationBuilder.reset();
+    this.builder.reset();
 
     // execute build steps
-    this.presentationBuilder.buildViewModel();
-    this.presentationBuilder.buildController();
-    this.presentationBuilder.buildView();
-    this.presentationBuilder.buildPresenter();
+    this.builder.buildViewModel();
+    this.builder.buildController();
+    this.builder.buildView();
+    this.builder.buildPresenter();
   }
 
-  public setBuilder(presentationBuilder: IPresentationBuilder): void {
-    this.presentationBuilder = presentationBuilder;
+  public set Builder(newBuilder: IPresentationBuilder) {
+    this.builder = newBuilder;
   }
 }
