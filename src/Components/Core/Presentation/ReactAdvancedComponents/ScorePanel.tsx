@@ -1,11 +1,7 @@
 import React from "react";
 import StyledContainer from "../ReactCommon/StyledContainer";
 
-export default function ScorePanel({
-  children,
-  className,
-  ...rest
-}: React.HTMLProps<HTMLDivElement>) {
+export default function ScorePanel() {
   return (
     <StyledContainer className="bottom-0 left-0 p-13 text-4xl text-white font-extrabold ">
       <svg

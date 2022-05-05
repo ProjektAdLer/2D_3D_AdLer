@@ -7,11 +7,7 @@ import StyledContainer from "../ReactCommon/StyledContainer";
 import IEntityManager from "../../Domain/EntityManager/IEntityManager";
 import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
 
-export default function MenuBar({
-  children,
-  className,
-  ...restProps
-}: React.HTMLProps<HTMLDivElement>) {
+export default function MenuBar() {
   const entityManager = useInjection<IEntityManager>(CORE_TYPES.IEntityManager);
 
   const loadWorldController = new LoadWorldController();

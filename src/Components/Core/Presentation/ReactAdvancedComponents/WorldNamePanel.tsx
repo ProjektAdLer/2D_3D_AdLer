@@ -5,11 +5,7 @@ import LearningWorldComponent from "../LearningWorld/LearningWorldComponent";
 import useViewModelProvider from "../ViewModelProvider/useViewModelProvider";
 import LearningWorldViewModel from "../LearningWorld/LearningWorldViewModel";
 
-export default function WorldNamePanel({
-  children,
-  className,
-  ...rest
-}: React.HTMLProps<HTMLDivElement>) {
+export default function WorldNamePanel() {
   const viewModel = useViewModelProvider<LearningWorldViewModel>(
     LearningWorldViewModel
   );
