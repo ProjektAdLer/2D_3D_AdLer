@@ -3,7 +3,7 @@ import { Color3, Scene } from "@babylonjs/core";
 import Observable from "../../../../Lib/Observable";
 
 @injectable()
-export default class RoomViewModel {
+export default class LearningRoomViewModel {
   public scene: Observable<Scene> = new Observable<Scene>();
   public wallColor: Observable<Color3> = new Observable(
     new Color3(0.3, 0.6, 0.8)
