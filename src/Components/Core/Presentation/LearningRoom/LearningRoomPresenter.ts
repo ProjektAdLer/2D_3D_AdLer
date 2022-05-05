@@ -1,14 +1,14 @@
 import { injectable } from "inversify";
 import ILearningRoomPort, { LearningElementTO } from "./ILearningRoomPort";
-import RoomViewModel from "./LearningRoomViewModel";
+import LearningRoomViewModel from "./LearningRoomViewModel";
 
 @injectable()
 export default class LearningRoomPresenter implements ILearningRoomPort {
-  private viewModels: RoomViewModel[] = new Array<RoomViewModel>();
+  private viewModel: LearningRoomViewModel;
 
-  addLearningElement(learningElementTO: LearningElementTO): void {
-    this.viewModels
-      .find((vm) => vm.id === learningElementTO.roomId)
-      ?.learningElements.Value.push(learningElementTO);
+  public set ViewModel(viewModel: LearningRoomViewModel) {
+    this.viewModel = viewModel;
   }
+
+  addLearningElement(learningElementTO: LearningElementTO): void {}
 }
