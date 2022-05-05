@@ -3,6 +3,7 @@ import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import ILearningRoomController from "../LearningRoom/ILearningRoomController";
 import ILearningRoomPort from "../LearningRoom/ILearningRoomPort";
+import LearningRoomController from "../LearningRoom/LearningRoomController";
 import LearningRoomPresenter from "../LearningRoom/LearningRoomPresenter";
 import LearningRoomView from "../LearningRoom/LearningRoomView";
 import LearningRoomViewModel from "../LearningRoom/LearningRoomViewModel";
@@ -11,35 +12,51 @@ import IPresentationBuilder from "./IPresentationBuilder";
 
 @injectable()
 export default class LearningRoomBuilder implements IPresentationBuilder {
-  private view: LearningRoomView;
-  private viewModel: LearningRoomViewModel;
-  private presenter: ILearningRoomPort;
-  private controller: ILearningRoomController;
+  private view: LearningRoomView | null = null;
+  private viewModel: LearningRoomViewModel | null = null;
+  private presenter: ILearningRoomPort | null = null;
+  private controller: ILearningRoomController | null = null;
 
-  reset(): void {}
+  reset(): void {
+    this.view = null;
+    this.viewModel = null;
+    this.presenter = null;
+    this.controller = null;
+  }
 
   buildViewModel(): void {
-    this.viewModel = CoreDIContainer.get(LearningRoomViewModel);
+    this.viewModel = new LearningRoomViewModel();
     this.viewModel.scene.Value = CoreDIContainer.get<SceneController>(
       CORE_TYPES.ISceneController
     ).Scene;
   }
 
   buildController(): void {
-    this.controller = CoreDIContainer.get<ILearningRoomController>(
-      CORE_TYPES.ILearningRoomController
-    );
+    this.controller = new LearningRoomController();
   }
 
   buildView(): void {
-    this.view = CoreDIContainer.get<LearningRoomView>(
-      CORE_TYPES.ILearningRoomView
-    );
-    this.view.ViewModel = this.viewModel;
-    this.view.Controller = this.controller;
+    if (!this.viewModel) {
+      throw new Error(
+        "ViewModel isn't build yet. Call buildViewModel() first."
+      );
+    }
+    if (!this.controller) {
+      throw new Error(
+        "Controller isn't build yet. Call buildController() first."
+      );
+    }
+
+    this.view = new LearningRoomView(this.viewModel, this.controller);
   }
 
   buildPresenter(): void {
+    if (!this.viewModel) {
+      throw new Error(
+        "ViewModel isn't build yet. Call buildViewModel() first."
+      );
+    }
+
     this.presenter = CoreDIContainer.get<ILearningRoomPort>(
       CORE_TYPES.ILearningRoomPort
     );
@@ -47,14 +64,29 @@ export default class LearningRoomBuilder implements IPresentationBuilder {
   }
 
   getPresenter(): ILearningRoomPort {
+    if (!this.presenter) {
+      throw new Error(
+        "Presenter isn't build yet. Call buildPresenter() first."
+      );
+    }
     return this.presenter;
   }
 
   getController(): ILearningRoomController {
+    if (!this.controller) {
+      throw new Error(
+        "Controller isn't build yet. Call buildController() first."
+      );
+    }
     return this.controller;
   }
 
   getViewModel(): LearningRoomViewModel {
+    if (!this.viewModel) {
+      throw new Error(
+        "ViewModel isn't build yet. Call buildViewModel() first."
+      );
+    }
     return this.viewModel;
   }
 }
