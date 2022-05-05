@@ -82,15 +82,15 @@ CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
 CoreDIContainer.bind(DataTransferObject).toSelf();
 
 // Room
-CoreDIContainer.bind<ILearningRoomController>(
-  CORE_TYPES.ILearningRoomController
-)
-  .to(LearningRoomController)
-  .inSingletonScope();
-CoreDIContainer.bind<ILearningRoomView>(CORE_TYPES.ILearningRoomView).to(
-  LearningRoomView
-);
-CoreDIContainer.bind(LearningRoomViewModel).toSelf();
+// CoreDIContainer.bind<ILearningRoomController>(
+//   CORE_TYPES.ILearningRoomController
+// )
+//   .to(LearningRoomController)
+//   .inSingletonScope();
+// CoreDIContainer.bind<ILearningRoomView>(CORE_TYPES.ILearningRoomView).to(
+//   LearningRoomView
+// );
+// CoreDIContainer.bind(LearningRoomViewModel).toSelf();
 
 // Moodle
 CoreDIContainer.bind<IMoodle>(CORE_TYPES.IMoodle).to(Moodle).inSingletonScope();
