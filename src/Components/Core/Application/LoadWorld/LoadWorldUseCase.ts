@@ -19,7 +19,8 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   ) {
     this.learningWorldPort = learningWorldPort;
   }
-  async executeAsync(data?: IDTO): Promise<void> {
+
+  async executeAsync(): Promise<void> {
     await this.load();
 
     this.learningWorldPort.presentLearningWorld(
@@ -56,7 +57,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 }
 
 const fakeFakeApi = async () => {
-  return await new Promise<string>((resolve) => {
+  return new Promise<string>((resolve) => {
     setTimeout(() => {
       resolve("Weltname von Fake API nach 2 Sekunden");
     }, 2000);

@@ -1,5 +1,5 @@
 import React from "react";
-import useNewPrimitive from "../CustomHooks/useNewPrimitive";
+import usePrimitive from "../CustomHooks/usePrimitive";
 import useViewModelProvider from "../ViewModelProvider/useViewModelProvider";
 import LearningWorldViewModel from "./LearningWorldViewModel";
 
@@ -8,8 +8,8 @@ export default function LearningWorldComponent() {
     LearningWorldViewModel
   );
 
-  const [worldName] = useNewPrimitive<string>(viewModel[0]?.worldName);
-  const [worldNameLoading] = useNewPrimitive<boolean>(
+  const [worldName] = usePrimitive<string>(viewModel[0]?.worldName);
+  const [worldNameLoading] = usePrimitive<boolean>(
     viewModel[0]?.worldNameLoading
   );
 
