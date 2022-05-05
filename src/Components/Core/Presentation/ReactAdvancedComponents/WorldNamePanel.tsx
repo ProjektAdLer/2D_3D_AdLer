@@ -9,7 +9,7 @@ export default function WorldNamePanel({
   ...rest
 }: React.HTMLProps<HTMLDivElement>) {
   return (
-    <StyledContainer className=" p-13 text-4xl text-white p-0 ">
+    <StyledContainer className="inset-x-1/2 p-13 text-4xl text-white p-0 ">
       <LearningWorldComponent />
     </StyledContainer>
   );

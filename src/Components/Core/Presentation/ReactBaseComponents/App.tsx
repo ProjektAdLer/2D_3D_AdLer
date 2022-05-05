@@ -10,9 +10,9 @@ function App() {
   return (
     <React.Fragment>
       <div className="root max-w-1/1 max-h-1/1 flex bg-babylonbg">
-        <MenuBar className="top-0 left-0" />
-        <ScorePanel className="bottom-0 left-0" />
-        <WorldNamePanel className="inset-x-1/2" />
+        <MenuBar />
+        <ScorePanel />
+        <WorldNamePanel />
         <BabylonCanvas className="w-screen h-screen" />
         <LearningElementModal />
       </div>
