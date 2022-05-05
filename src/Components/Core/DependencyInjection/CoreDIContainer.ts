@@ -43,6 +43,11 @@ import ISceneController from "../Presentation/SceneManagment/ISceneController";
 import ILearningWorldPort from "../Application/LoadWorld/ILearningWorldPort";
 import LearningWorldPresenter from "../Presentation/LearningWorld/LearningWorldPresenter";
 import infrastructureDIContainer from "./InfrastructureDIContainer";
+import ILearningRoomPort from "../Presentation/LearningRoom/ILearningRoomPort";
+import LearningRoomPresenter from "../Presentation/LearningRoom/LearningRoomPresenter";
+import IPresentationDirector from "../Presentation/PresentationBuilder/IPresentationDirector";
+import PresentationDirector from "../Presentation/PresentationBuilder/PresentationDirector";
+import LearningRoomBuilder from "../Presentation/PresentationBuilder/LearningRoomBuilder";
 
 var CoreDIContainer = new Container();
 
@@ -129,6 +134,16 @@ CoreDIContainer.bind<ILoadWorldUseCase>(CORE_TYPES.ILoadWorldUseCase)
 CoreDIContainer.bind<ILearningWorldPort>(CORE_TYPES.ILearningWorldPort)
   .to(LearningWorldPresenter)
   .inSingletonScope();
+
+CoreDIContainer.bind<ILearningRoomPort>(CORE_TYPES.ILearningRoomPort)
+  .to(LearningRoomPresenter)
+  .inSingletonScope();
+
+// Presentation Builder Pattern
+CoreDIContainer.bind<IPresentationDirector>(
+  CORE_TYPES.IPresentationDirector
+).to(PresentationDirector);
+CoreDIContainer.bind(LearningRoomBuilder).toSelf();
 
 CoreDIContainer.load(infrastructureDIContainer);
 

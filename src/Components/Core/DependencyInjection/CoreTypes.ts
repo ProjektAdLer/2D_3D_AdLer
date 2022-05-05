@@ -25,6 +25,8 @@ let CORE_TYPES = {
   ILoadWorldController: Symbol("ILoadWorldController"),
   ILearningWorldPort: Symbol("ILearningWorldPort"),
   IEntityContainer: Symbol("IEntityContainer"),
+  ILearningRoomPort: Symbol("ILearningRoomPort"),
+  IPresentationDirector: Symbol("IPresentationDirector"),
 };
 
 export default CORE_TYPES;
