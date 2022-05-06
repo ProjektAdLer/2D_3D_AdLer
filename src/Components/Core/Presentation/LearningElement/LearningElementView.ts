@@ -6,6 +6,7 @@ import {
   SceneLoader,
 } from "@babylonjs/core";
 import { inject, injectable } from "inversify";
+import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import type ISceneController from "../SceneManagment/ISceneController";
 import ILearningElementController from "./ILearningElementController";
@@ -24,21 +25,26 @@ const modelLinks = {
 export default class LearningElementView implements ILearningElementView {
   private viewModel: LearningElementViewModel;
   private controller: ILearningElementController;
-
-  set ViewModel(newViewModel: LearningElementViewModel) {
-    this.viewModel = newViewModel;
-  }
-
-  set Controller(newController: ILearningElementController) {
-    this.controller = newController;
-  }
+  private sceneController: ISceneController;
 
   constructor(
-    @inject(CORE_TYPES.ISceneController)
-    private sceneController: ISceneController
-  ) {}
+    viewModel: LearningElementViewModel,
+    controller: ILearningElementController
+  ) {
+    this.sceneController = CoreDIContainer.get<ISceneController>(
+      CORE_TYPES.ISceneController
+    );
+    this.viewModel = viewModel;
+    this.controller = controller;
 
-  async loadMeshAsync(url: string, meshName?: string): Promise<void> {
+    // setup interaction actions
+    this.registerAction(ActionManager.OnPickTrigger, this.controller.clicked);
+
+    // setup callbacks for rerendering parts of the room when the view model changes
+    // TODO: call loadMesh here
+  }
+
+  private async loadMeshAsync(url: string, meshName?: string): Promise<void> {
     const result = await SceneLoader.ImportMeshAsync(
       meshName ? meshName : "",
       url,
@@ -52,7 +58,7 @@ export default class LearningElementView implements ILearningElementView {
     });
   }
 
-  registerAction(
+  private registerAction(
     triggerOptions: any,
     callback: (event?: ActionEvent) => void
   ): void {

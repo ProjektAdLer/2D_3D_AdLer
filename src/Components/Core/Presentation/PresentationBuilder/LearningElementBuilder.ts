@@ -5,6 +5,7 @@ import ILearningElementPresenter from "../LearningElement/ILearningElementPresen
 import ILearningElementView from "../LearningElement/ILearningElementView";
 import LearningElementController from "../LearningElement/LearningElementController";
 import LearningElementPresenter from "../LearningElement/LearningElementPresenter";
+import LearningElementView from "../LearningElement/LearningElementView";
 import LearningElementViewModel from "../LearningElement/LearningElementViewModel";
 import IPresentationBuilder from "./IPresentationBuilder";
 
@@ -41,12 +42,7 @@ export default class LearningElementBuilder implements IPresentationBuilder {
       );
     }
 
-    // get view from DI container to inject other dependencies
-    this.view = CoreDIContainer.get<ILearningElementView>(
-      CORE_TYPES.ILearningElementView
-    );
-    this.view.ViewModel = this.viewModel;
-    this.view.Controller = this.controller;
+    this.view = new LearningElementView(this.viewModel, this.controller);
   }
 
   buildPresenter(): void {
