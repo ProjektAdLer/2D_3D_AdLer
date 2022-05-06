@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import ILearningElementFactory from "./ILearningElementFactory";
-import ILearningElementPresenter from "./ILearningElementPresenter";
+import ILearningElementController from "./ILearningElementController";
 import {
   LearningElementType,
   LearningElementTypeSymbols,
@@ -19,8 +19,8 @@ const modelLinks = {
 export default class LearningElementFactory implements ILearningElementFactory {
   async createLearningElementAsync(
     type: LearningElementType
-  ): Promise<ILearningElementPresenter> {
-    const learningElementPresenter: ILearningElementPresenter =
+  ): Promise<ILearningElementController> {
+    const learningElementPresenter: ILearningElementController =
       CoreDIContainer.get(CORE_TYPES.ILearingElementPresenter);
 
     await learningElementPresenter.loadMeshAsync(

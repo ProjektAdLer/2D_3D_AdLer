@@ -28,10 +28,8 @@ import MoodleData from "../Domain/Entities/MoodleData";
 import ILearningElementView from "../Presentation/LearningElement/ILearningElementView";
 import LearningElementView from "../Presentation/LearningElement/LearningElementView";
 import LearningElementViewModel from "../Presentation/LearningElement/LearningElementViewModel";
-import ILearningElementPresenter from "../Presentation/LearningElement/ILearningElementPresenter";
-import LearningElementPresenter from "../Presentation/LearningElement/LearningElementPresenter";
-import ILearningElementFactory from "../Presentation/LearningElement/ILearningElementFactory";
-import LearningElementFactory from "../Presentation/LearningElement/LearningElementFactory";
+import ILearningElementController from "../Presentation/LearningElement/ILearningElementController";
+import LearningElementController from "../Presentation/LearningElement/LearningElementController";
 import ILearningElementPanelPresenter from "../Presentation/LearningElementPanel/ILearningElementPanelPresenter";
 import LearningElementPanelPresenter from "../Presentation/LearningElementPanel/LearningElementPanelPresenter";
 import LearningElementPanelViewModel from "../Presentation/LearningElementPanel/LearningElementPanelViewModel";
@@ -100,15 +98,10 @@ CoreDIContainer.bind<IMoodleDataAccess>(CORE_TYPES.IMoodleDataAccess)
 CoreDIContainer.bind<MoodleData>(CORE_TYPES.MoodleData).to(MoodleData);
 
 // Learning Element
-CoreDIContainer.bind<ILearningElementFactory>(
-  CORE_TYPES.ILearningElementFactory
-)
-  .to(LearningElementFactory)
-  .inSingletonScope();
-CoreDIContainer.bind<ILearningElementPresenter>(
+CoreDIContainer.bind<ILearningElementController>(
   CORE_TYPES.ILearingElementPresenter
-).to(LearningElementPresenter);
-CoreDIContainer.bind<ILearningElementView>(CORE_TYPES.ILearingElementView).to(
+).to(LearningElementController);
+CoreDIContainer.bind<ILearningElementView>(CORE_TYPES.ILearningElementView).to(
   LearningElementView
 );
 CoreDIContainer.bind(LearningElementViewModel).toSelf();

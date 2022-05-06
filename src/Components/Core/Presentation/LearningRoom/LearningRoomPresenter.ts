@@ -10,5 +10,5 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
     this.viewModel = viewModel;
   }
 
-  addLearningElement(learningElementTO: LearningElementTO): void {}
+  presentLearningRoom(learningRoomTO: LearningRoomTO): void {}
 }

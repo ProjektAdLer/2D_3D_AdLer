@@ -1,8 +1,5 @@
-export class LearningElementTO {
-  type: string;
-  roomId: string;
-}
+import { LearningRoomTO } from "../../Application/LoadWorld/ILearningWorldPort";
 
 export default interface ILearningRoomPort {
-  addLearningElement(learningElementTO: LearningElementTO): void;
+  presentLearningRoom(learningRommTO: LearningRoomTO): void;
 }

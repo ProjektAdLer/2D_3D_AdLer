@@ -13,7 +13,7 @@ let CORE_TYPES = {
   IMoodle: Symbol("IMoodle"),
   IMoodleDataAccess: Symbol("IMoodleDataAccess"),
   MoodleData: Symbol("MoodleData"),
-  ILearingElementView: Symbol("ILearingElementView"),
+  ILearningElementView: Symbol("ILearingElementView"),
   ILearingElementPresenter: Symbol("ILearingElementPresenter"),
   ILearningElementFactory: Symbol("ILearningElementFactory"),
   IEntityManager: Symbol("IEntityManager"),

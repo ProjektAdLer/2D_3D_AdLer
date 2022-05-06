@@ -1,9 +1,8 @@
-import { ActionEvent } from "@babylonjs/core";
+import { LearningElementTO } from "../../Application/LoadWorld/ILearningWorldPort";
+import LearningElementViewModel from "./LearningElementViewModel";
 
 export default interface ILearningElementPresenter {
-  loadMeshAsync(url: string, meshName?: string): Promise<void>;
-  registerAction(
-    triggerOptions: any,
-    callback: (evt?: ActionEvent) => void
-  ): void;
+  set ViewModel(newViewModel: LearningElementViewModel);
+
+  presentLearningElement(learningElementTO: LearningElementTO): void;
 }
