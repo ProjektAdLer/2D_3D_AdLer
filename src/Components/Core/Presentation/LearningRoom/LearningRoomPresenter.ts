@@ -1,5 +1,6 @@
 import { injectable } from "inversify";
-import ILearningRoomPort, { LearningElementTO } from "./ILearningRoomPort";
+import { LearningRoomTO } from "../../Application/LoadWorld/ILearningWorldPort";
+import ILearningRoomPort from "./ILearningRoomPort";
 import LearningRoomViewModel from "./LearningRoomViewModel";
 
 @injectable()
