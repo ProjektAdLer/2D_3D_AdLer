@@ -1,5 +1,5 @@
 import React from "react";
-import StyledContainer from "../ReactCommon/StyledContainer";
+import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import usePrimitive from "../CustomHooks/usePrimitive";
 import LearningWorldComponent from "../LearningWorld/LearningWorldComponent";
 import useViewModelProvider from "../ViewModelProvider/useViewModelProvider";

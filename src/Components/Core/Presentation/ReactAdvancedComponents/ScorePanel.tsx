@@ -1,5 +1,5 @@
 import React from "react";
-import StyledContainer from "../ReactCommon/StyledContainer";
+import StyledContainer from "../ReactBaseComponents/StyledContainer";
 
 export default function ScorePanel() {
   return (
