@@ -7,7 +7,7 @@ import {
 } from "@babylonjs/core";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
-import ISceneController from "../SceneManagment/ISceneController";
+import type ISceneController from "../SceneManagment/ISceneController";
 import ILearningElementController from "./ILearningElementController";
 import ILearningElementView from "./ILearningElementView";
 import LearningElementViewModel from "./LearningElementViewModel";
