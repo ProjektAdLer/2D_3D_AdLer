@@ -9,7 +9,7 @@ import WorldNamePanel from "../ReactAdvancedComponents/WorldNamePanel";
 function App() {
   return (
     <React.Fragment>
-      <div className="root max-w-1/1 max-h-1/1 flex bg-babylonbg">
+      <div className="root max-w-1/1 max-h-1/1 bg-babylonbg">
         <MenuBar />
         <ScorePanel />
         <WorldNamePanel />
