@@ -1,4 +1,3 @@
-import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import LearningRoomController from "../../../Core/Presentation/LearningRoom/LearningRoomController";
 import LearningRoomPresenter from "../../../Core/Presentation/LearningRoom/LearningRoomPresenter";
 import LearningRoomView from "../../../Core/Presentation/LearningRoom/LearningRoomView";
@@ -10,7 +9,7 @@ jest.mock("@babylonjs/core");
 const getSceneMock = jest.spyOn(SceneViewModel.prototype, "Scene", "get");
 
 describe("LearningRoomBuilder", () => {
-  let builder: LearningRoomBuilder = CoreDIContainer.get(LearningRoomBuilder);
+  let builder: LearningRoomBuilder = new LearningRoomBuilder();
 
   describe("test building steps", () => {
     test("reset should reset all fields", () => {
