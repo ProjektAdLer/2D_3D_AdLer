@@ -6,7 +6,7 @@ import EGenericLearningElement from "../../Domain/Entities/LearningElements/Gene
 import { LearningElementTypeSymbols } from "../../../Core/Presentation/LearningElement/Types/LearningElementTypes";
 import useEntity from "../CustomHooks/useEntity";
 import usePrimitive from "../CustomHooks/usePrimitive";
-import H5PModal from "./H5PModal";
+import H5PContent from "./H5PContent";
 import IEntityManager from "../../Domain/EntityManager/IEntityManager";
 import StyledModal from "../ReactBaseComponents/StyledModal";
 
@@ -26,7 +26,7 @@ const elementBuilder = (learningElementID: string) => {
   switch (learningElementConainerEntity.Value.learningElementType.Value) {
     case h5p:
       return (
-        <H5PModal
+        <H5PContent
           h5pEntityId={
             learningElementConainerEntity.Value.concreteLearningElementId.Value
           }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 type Props = Partial<{
   showModal: boolean;
@@ -8,6 +8,15 @@ type Props = Partial<{
   footer: string;
 }>;
 
+/**
+ * A generic, styled modal component. Can be used to display any content.
+ *
+ * @param showModal decides, if the modal should be shown
+ * @param children the content of the modal
+ * @param title the title of the modal
+ * @param onClose the callback, that is called, when the modal is closed
+ * @param footer the footer of the modal (For now Only Strings are supported)
+ */
 export default function StyledModal({
   showModal,
   children,
