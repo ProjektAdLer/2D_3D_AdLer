@@ -3,7 +3,7 @@ import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import Presentation from "../../../Core/Presentation/API/Presentation";
 import EngineManager from "../../../Core/Presentation/EngineManager/EngineManager";
 import SceneController from "../../../Core/Presentation/SceneManagment/SceneController";
-import ReactEntry from "../../../Core/Presentation/ReactBaseComponents/ReactEntry";
+import ReactEntry from "../../../Core/Presentation/ReactEntryPoint/ReactEntry";
 
 const createEngineMock = jest.spyOn(EngineManager.prototype, "createEngine");
 const setupReactMock = jest.spyOn(ReactEntry.prototype, "setupReact");
