@@ -8,6 +8,7 @@ import useEntity from "../CustomHooks/useEntity";
 import usePrimitive from "../CustomHooks/usePrimitive";
 import H5PModal from "./H5PModal";
 import IEntityManager from "../../Domain/EntityManager/IEntityManager";
+import StyledModal from "../ReactBaseComponents/StyledModal";
 
 const elementBuilder = (learningElementID: string) => {
   const entityManager = CoreDIContainer.get(
@@ -54,29 +55,13 @@ export default function LearningElementModal() {
   if (!showModal) return null;
 
   return (
-    <div className="modal flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-blacktrans50">
-      <div className="modal-content bg-adlerlightblue w-full lg:w-5/6 max-h-screen border-8 border-adlerlightblue rounded-lg overflow-auto">
-        <div className="modal-header font-black flex justify-between items-center p-4 h-4 lg:h-16 text-xl lg:text-4xl">
-          {learningElementEntity.learningElementTitle.Value}
-          <button
-            onClick={() => setShowModal(false)}
-            className="button-close font-black text-xs lg:text-xl drop-shadow-sm border-b-4 border-r-4 border-adlerdarkblue active:border-0 hover:cursor-pointer py-1 px-2 bg-adlerblue rounded-lg text-white"
-          >
-            X
-          </button>
-        </div>
-        <div className="modal-body flex justify-center p-2 border-t-2 border-b-2 rounded-lg border-adlerlightblue">
-          {elementBuilder(learningElementEntity.id)}
-        </div>
-        {/* Zum Testen auskommentiert <div className="modal-footer font-medium flex shrink justify-between items-center p-4 h-16">
-          <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum.
-          </p>
-        </div> */}
-      </div>
-    </div>
+    <StyledModal
+      onClose={() => setShowModal(false)}
+      title={learningElementEntity.learningElementTitle.Value}
+      showModal={showModal}
+      footer="Ich bin der Fußteil"
+    >
+      {elementBuilder(learningElementEntity.id)}
+    </StyledModal>
   );
 }
