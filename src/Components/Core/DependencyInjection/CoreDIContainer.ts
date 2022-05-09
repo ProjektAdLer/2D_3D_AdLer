@@ -41,6 +41,8 @@ import LearningRoomPresenter from "../Presentation/LearningRoom/LearningRoomPres
 import IPresentationDirector from "../Presentation/PresentationBuilder/IPresentationDirector";
 import PresentationDirector from "../Presentation/PresentationBuilder/PresentationDirector";
 import LearningRoomBuilder from "../Presentation/PresentationBuilder/LearningRoomBuilder";
+import LearningElementBuilder from "../Presentation/PresentationBuilder/LearningElementBuilder";
+import IPresentationBuilder from "../Presentation/PresentationBuilder/IPresentationBuilder";
 
 var CoreDIContainer = new Container();
 
@@ -131,7 +133,12 @@ CoreDIContainer.bind<ILearningRoomPort>(CORE_TYPES.ILearningRoomPort)
 CoreDIContainer.bind<IPresentationDirector>(
   CORE_TYPES.IPresentationDirector
 ).to(PresentationDirector);
-CoreDIContainer.bind(LearningRoomBuilder).toSelf();
+CoreDIContainer.bind<IPresentationBuilder>(CORE_TYPES.ILearningRoomBuilder).to(
+  LearningRoomBuilder
+);
+CoreDIContainer.bind<IPresentationBuilder>(
+  CORE_TYPES.ILearningElementBuilder
+).to(LearningElementBuilder);
 
 CoreDIContainer.load(infrastructureDIContainer);
 

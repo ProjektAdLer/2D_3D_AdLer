@@ -7,7 +7,7 @@ import IPresentationBuilder from "./IPresentationBuilder";
 export default interface IPresentationDirector {
   /**
    * @method build
-   * @description Executes the build process with the set builder. Results can be accessed via the builder.
+   * @description Executes the build process with the set builder. Results can be accessed via the builder. This may be split into multiple methods later on, to customize the build process.
    */
   build(): void;
 

@@ -27,6 +27,8 @@ let CORE_TYPES = {
   IEntityContainer: Symbol("IEntityContainer"),
   ILearningRoomPort: Symbol("ILearningRoomPort"),
   IPresentationDirector: Symbol("IPresentationDirector"),
+  ILearningRoomBuilder: Symbol("ILearningRoomBuilder"),
+  ILearningElementBuilder: Symbol("ILearningElementBuilder"),
 };
 
 export default CORE_TYPES;

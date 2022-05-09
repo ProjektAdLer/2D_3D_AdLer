@@ -1,5 +1,4 @@
-import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../DependencyInjection/CoreTypes";
+import { injectable } from "inversify";
 import ILearningElementController from "../LearningElement/ILearningElementController";
 import ILearningElementPresenter from "../LearningElement/ILearningElementPresenter";
 import ILearningElementView from "../LearningElement/ILearningElementView";
@@ -9,6 +8,7 @@ import LearningElementView from "../LearningElement/LearningElementView";
 import LearningElementViewModel from "../LearningElement/LearningElementViewModel";
 import IPresentationBuilder from "./IPresentationBuilder";
 
+@injectable()
 export default class LearningElementBuilder implements IPresentationBuilder {
   private view: ILearningElementView | null = null;
   private viewModel: LearningElementViewModel | null = null;

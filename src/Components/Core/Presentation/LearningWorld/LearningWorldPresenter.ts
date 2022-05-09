@@ -25,7 +25,9 @@ export default class LearningWorldPresenter implements ILearningWorldPort {
     let director = CoreDIContainer.get<IPresentationDirector>(
       CORE_TYPES.IPresentationDirector
     );
-    let builder = CoreDIContainer.get(LearningRoomBuilder);
+    let builder = CoreDIContainer.get<IPresentationBuilder>(
+      CORE_TYPES.ILearningRoomBuilder
+    );
     director.Builder = builder;
 
     director.build();
