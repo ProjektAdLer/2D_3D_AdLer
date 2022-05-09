@@ -1,8 +1,9 @@
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
+import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
+import LearningRoomEntity from "../../Domain/Entities/LearningRoomEntity";
 import LearningWorldEntity from "../../Domain/Entities/LearningWorldEntity";
 import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
-import { IDTO } from "../Abstract/IDTO";
 import type ILearningWorldPort from "./ILearningWorldPort";
 import { LearningWorldTO } from "./ILearningWorldPort";
 import ILoadWorldUseCase from "./ILoadWorldUseCase";
@@ -43,9 +44,22 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     const worldNameResp = await fakeFakeApi();
 
     if (this.container.getEntitiesOfType(LearningWorldEntity).length === 0) {
+      let elementEntity = this.container.createEntity<LearningElementEntity>(
+        {
+          type: "h5p",
+        },
+        LearningElementEntity
+      );
+      let roomEntity = this.container.createEntity<LearningRoomEntity>(
+        {
+          learningElements: [elementEntity],
+        },
+        LearningRoomEntity
+      );
       this.container.createEntity<LearningWorldEntity>(
         {
           worldName: worldNameResp,
+          learningRooms: [roomEntity],
         },
         LearningWorldEntity
       );

@@ -6,6 +6,7 @@ import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import ILearningRoomPort from "../LearningRoom/ILearningRoomPort";
 import LearningRoomPresenter from "../LearningRoom/LearningRoomPresenter";
+import IPresentationBuilder from "../PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../PresentationBuilder/IPresentationDirector";
 import LearningRoomBuilder from "../PresentationBuilder/LearningRoomBuilder";
 import IViewModelProvider from "../ViewModelProvider/IViewModelProvider";
@@ -32,6 +33,7 @@ export default class LearningWorldPresenter implements ILearningWorldPort {
 
     director.build();
     this.roomPresenter = builder.getPresenter();
+    this.roomPresenter.presentLearningRoom(learningWorldTO.learningRooms[0]);
 
     this.viewModel = new LearningWorldViewModel();
     this.viewModelProvider.registerViewModel<LearningWorldViewModel>(
