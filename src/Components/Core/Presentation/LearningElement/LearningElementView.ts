@@ -4,6 +4,8 @@ import {
   ExecuteCodeAction,
   Mesh,
   SceneLoader,
+  Tools,
+  Vector3,
 } from "@babylonjs/core";
 import { inject, injectable } from "inversify";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
@@ -37,32 +39,49 @@ export default class LearningElementView implements ILearningElementView {
     this.viewModel = viewModel;
     this.controller = controller;
 
-    // setup interaction actions
-    this.registerAction(ActionManager.OnPickTrigger, this.controller.clicked);
-
-    // setup callbacks for rerendering parts of the room when the view model changes
-    // TODO: call loadMesh here
+    // setup callbacks for rerendering when the view model changes
+    viewModel.type.subscribe(async () => {
+      await this.loadMeshAsync();
+      this.registerAction(ActionManager.OnPickTrigger, this.controller.clicked);
+      this.positionMesh();
+    });
+    viewModel.position.subscribe(() => {
+      this.positionMesh();
+    });
+    viewModel.rotation.subscribe(() => {
+      this.positionMesh();
+    });
   }
 
-  private async loadMeshAsync(url: string, meshName?: string): Promise<void> {
+  private async loadMeshAsync(): Promise<void> {
     const result = await SceneLoader.ImportMeshAsync(
-      meshName ? meshName : "",
-      url,
+      "",
+      modelLinks[LearningElementTypeSymbols[this.viewModel.type.Value]],
       "",
       this.sceneController.Scene
     );
 
-    this.viewModel.Meshes = result.meshes as Mesh[];
-    this.viewModel.Meshes.forEach((mesh) => {
+    this.viewModel.meshes.Value = result.meshes as Mesh[];
+    this.viewModel.meshes.Value.forEach((mesh) => {
       mesh.actionManager = new ActionManager(this.sceneController.Scene);
     });
+  }
+
+  private positionMesh(): void {
+    if (this.viewModel.meshes.Value) {
+      this.viewModel.meshes.Value[0].position = this.viewModel.position.Value;
+      this.viewModel.meshes.Value[0].rotate(
+        Vector3.Up(),
+        Tools.ToRadians(this.viewModel.rotation.Value)
+      );
+    }
   }
 
   private registerAction(
     triggerOptions: any,
     callback: (event?: ActionEvent) => void
   ): void {
-    this.viewModel.Meshes.forEach((mesh) => {
+    this.viewModel.meshes.Value.forEach((mesh) => {
       mesh.actionManager?.registerAction(
         new ExecuteCodeAction(triggerOptions, callback)
       );
