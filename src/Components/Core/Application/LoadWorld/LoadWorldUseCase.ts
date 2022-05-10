@@ -50,6 +50,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       (await this.backend.getLearningElements()) as APILearningElementTO[];
 
     if (this.container.getEntitiesOfType(LearningWorldEntity).length === 0) {
+      // Learning Elements
       const learningElementEntities: LearningElementEntity[] = [];
       learningElementResp.forEach((element) => {
         const returnvValue = this.container.createEntity<LearningElementEntity>(
@@ -65,6 +66,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
         learningElementEntities.push(returnvValue);
       });
 
+      // Learning Room
       let roomEntity = this.container.createEntity<LearningRoomEntity>(
         {
           roomId: learningRoomResp[0].id,
@@ -72,16 +74,15 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
         },
         LearningRoomEntity
       );
-      this.container.createEntity<LearningWorldEntity>(
-        {
-          worldName: worldResp.name,
-          learningRooms: [roomEntity],
-        },
-        LearningWorldEntity
-      );
+      // Learning World
+      this.learningWorldEntity =
+        this.container.createEntity<LearningWorldEntity>(
+          {
+            worldName: worldResp.name,
+            learningRooms: [roomEntity],
+          },
+          LearningWorldEntity
+        );
     }
-
-    this.learningWorldEntity =
-      this.container.getEntitiesOfType(LearningWorldEntity)[0];
   }
 }
