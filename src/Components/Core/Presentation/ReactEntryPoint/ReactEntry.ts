@@ -9,13 +9,21 @@ import App from "./App";
 @injectable()
 export default class ReactEntry implements IReactEntry {
   setupReact(): void {
-    ReactDOM.render(
-      <React.StrictMode>
-        <Provider container={CoreDIContainer}>
-          <App />
-        </Provider>
-      </React.StrictMode>,
-      document.getElementById("root")
+    const appComponent = React.createElement(App);
+    const providerComponent = React.createElement(
+      Provider,
+      {
+        container: CoreDIContainer,
+      },
+      appComponent
     );
+
+    const strictModeComponent = React.createElement(
+      React.StrictMode,
+      null,
+      providerComponent
+    );
+
+    ReactDOM.render(strictModeComponent, document.getElementById("root"));
   }
 }
