@@ -1,11 +1,10 @@
 import { Mesh, VertexData, StandardMaterial, Texture } from "@babylonjs/core";
-import { injectable } from "inversify";
 import LearningRoomViewModel from "./LearningRoomViewModel";
 import floorTexture from "../../../../Assets/wooden_floor.png";
 import ILearningRoomController from "./ILearningRoomController";
+import ILearningRoomView from "./ILearningRoomView";
 
-// @injectable()
-export default class LearningRoomView {
+export default class LearningRoomView implements ILearningRoomView {
   private viewModel: LearningRoomViewModel;
   private controller: ILearningRoomController;
 
