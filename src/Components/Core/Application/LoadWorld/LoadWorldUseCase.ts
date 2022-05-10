@@ -1,4 +1,5 @@
 import { inject, injectable } from "inversify";
+import { APILearningElementTO } from "../../Adapters/Backend/APILearningElementTO";
 import { type IBackend } from "../../Adapters/Backend/IBackend";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
@@ -41,25 +42,36 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   }
 
   private async load(): Promise<void> {
-    // Wait for Fake API
-    const worldNameResp = await this.backend.getWorld();
+    const worldResp = await this.backend.getWorld();
+    const learningRoomResp = await this.backend.getLearningRooms();
+    const learningElementResp =
+      (await this.backend.getLearningElements()) as APILearningElementTO[];
 
     if (this.container.getEntitiesOfType(LearningWorldEntity).length === 0) {
-      let elementEntity = this.container.createEntity<LearningElementEntity>(
-        {
-          type: "h5p",
-        },
-        LearningElementEntity
-      );
+      const learningElementEntities: LearningElementEntity[] = [];
+      learningElementResp.forEach((element) => {
+        const returnvValue = this.container.createEntity<LearningElementEntity>(
+          {
+            learningElementId: element.id,
+            type: "h5p",
+            value: element.value[0].value,
+            requirement: element.requirements[0].value,
+          },
+          LearningElementEntity
+        );
+
+        learningElementEntities.push(returnvValue);
+      });
+
       let roomEntity = this.container.createEntity<LearningRoomEntity>(
         {
-          learningElements: [elementEntity],
+          learningElements: learningElementEntities,
         },
         LearningRoomEntity
       );
       this.container.createEntity<LearningWorldEntity>(
         {
-          worldName: worldNameResp.name,
+          worldName: worldResp.name,
           learningRooms: [roomEntity],
         },
         LearningWorldEntity

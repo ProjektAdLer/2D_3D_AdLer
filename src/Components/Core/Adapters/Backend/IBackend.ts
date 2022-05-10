@@ -4,7 +4,7 @@ import { APIWorldTo } from "./APIWorldTO";
 import { APILearningElementTO } from "./APILearningElementTO";
 
 export interface IBackend {
-  getWorld(): Promise<Partial<APIWorldTo>>; // Promise<IWorld>
+  getWorld(): Promise<Partial<APIWorldTo>>;
 
   getLearningRooms(): Promise<Partial<APILearningRoomTO[]>>;
 
