@@ -1,3 +1,4 @@
+import { APILearningRoomTO } from "./../../Adapters/Backend/APILearningRoomTO";
 import { inject, injectable } from "inversify";
 import { APILearningElementTO } from "../../Adapters/Backend/APILearningElementTO";
 import { type IBackend } from "../../Adapters/Backend/IBackend";
@@ -43,7 +44,8 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
   private async load(): Promise<void> {
     const worldResp = await this.backend.getWorld();
-    const learningRoomResp = await this.backend.getLearningRooms();
+    const learningRoomResp =
+      (await this.backend.getLearningRooms()) as APILearningRoomTO[];
     const learningElementResp =
       (await this.backend.getLearningElements()) as APILearningElementTO[];
 
@@ -65,6 +67,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
       let roomEntity = this.container.createEntity<LearningRoomEntity>(
         {
+          roomId: learningRoomResp[0].id,
           learningElements: learningElementEntities,
         },
         LearningRoomEntity
