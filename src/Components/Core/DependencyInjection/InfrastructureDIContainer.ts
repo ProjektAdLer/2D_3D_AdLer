@@ -1,3 +1,5 @@
+import { FakeBackend } from "./../Adapters/Backend/FakeBackend";
+import { IBackend } from "./../Adapters/Backend/IBackend";
 import { ContainerModule } from "inversify";
 import EntityContainer from "../Domain/EntityContainer/EntityContainer";
 import IEntityContainer from "../Domain/EntityContainer/IEntityContainer";
@@ -26,6 +28,9 @@ const infrastructureDIContainer = new ContainerModule((bind) => {
   bind<IEntityManager>(CORE_TYPES.IEntityManager)
     .to(EntityManager)
     .inSingletonScope();
+
+  // Fake Backend
+  bind<IBackend>(CORE_TYPES.IBackend).to(FakeBackend).inSingletonScope();
 });
 
 export default infrastructureDIContainer;

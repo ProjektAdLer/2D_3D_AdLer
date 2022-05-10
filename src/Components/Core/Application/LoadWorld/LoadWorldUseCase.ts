@@ -1,6 +1,8 @@
 import { inject, injectable } from "inversify";
+import { IBackend } from "../../Adapters/Backend/IBackend";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
+
 import LearningRoomEntity from "../../Domain/Entities/LearningRoomEntity";
 import LearningWorldEntity from "../../Domain/Entities/LearningWorldEntity";
 import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
@@ -16,10 +18,9 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     @inject(CORE_TYPES.ILearningWorldPort)
     private learningWorldPort: ILearningWorldPort,
     @inject(CORE_TYPES.IEntityContainer)
-    private container: IEntityContainer
-  ) {
-    this.learningWorldPort = learningWorldPort;
-  }
+    private container: IEntityContainer,
+    @inject(CORE_TYPES.IBackend) private backend: IBackend
+  ) {}
 
   async executeAsync(): Promise<void> {
     await this.load();
@@ -41,7 +42,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
   private async load(): Promise<void> {
     // Wait for Fake API
-    const worldNameResp = await fakeFakeApi();
+    const worldNameResp = await this.backend.getWorld();
 
     if (this.container.getEntitiesOfType(LearningWorldEntity).length === 0) {
       let elementEntity = this.container.createEntity<LearningElementEntity>(
@@ -58,7 +59,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       );
       this.container.createEntity<LearningWorldEntity>(
         {
-          worldName: worldNameResp,
+          worldName: worldNameResp.name,
           learningRooms: [roomEntity],
         },
         LearningWorldEntity
@@ -69,11 +70,3 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       this.container.getEntitiesOfType(LearningWorldEntity)[0];
   }
 }
-
-const fakeFakeApi = async () => {
-  return new Promise<string>((resolve) => {
-    setTimeout(() => {
-      resolve("Weltname von Fake API nach 2 Sekunden");
-    }, 2000);
-  });
-};

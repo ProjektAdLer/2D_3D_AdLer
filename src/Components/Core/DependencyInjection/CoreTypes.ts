@@ -1,3 +1,4 @@
+import { IBackend } from "./../Adapters/Backend/IBackend";
 let CORE_TYPES = {
   ICore: Symbol("ICore"),
   ICoreFactory: Symbol("ICoreFactory"),
@@ -29,6 +30,7 @@ let CORE_TYPES = {
   IPresentationDirector: Symbol("IPresentationDirector"),
   ILearningRoomBuilder: Symbol("ILearningRoomBuilder"),
   ILearningElementBuilder: Symbol("ILearningElementBuilder"),
+  IBackend: Symbol("IBackend"),
 };
 
 export default CORE_TYPES;
