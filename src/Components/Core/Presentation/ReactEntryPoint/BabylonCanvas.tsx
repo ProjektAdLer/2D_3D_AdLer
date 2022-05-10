@@ -1,5 +1,3 @@
-import "reflect-metadata";
-
 import { useEffect, useRef } from "react";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import ICore from "../../API/ICore";
