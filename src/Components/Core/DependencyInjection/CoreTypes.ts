@@ -26,6 +26,7 @@ const CORE_TYPES = {
   ILearningRoomBuilder: Symbol("ILearningRoomBuilder"),
   ILearningElementBuilder: Symbol("ILearningElementBuilder"),
   IBackend: Symbol("IBackend"),
+  ILearningElementPort: Symbol("ILearningElementPort"),
 };
 
 export default CORE_TYPES;

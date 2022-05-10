@@ -1,5 +1,5 @@
 import { LearningElementTO } from "./../LoadWorld/ILearningWorldPort";
-export interface ILearningElementStartedPort {
+export default interface ILearningElementPort {
   presentLearningElementStarted(
     learningElementStartedTO: LearningElementTO
   ): void;
