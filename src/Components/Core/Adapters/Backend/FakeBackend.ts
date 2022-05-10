@@ -8,18 +8,14 @@ import { APILearningElementTO } from "./APILearningElementTO";
 @injectable()
 export class FakeBackend implements IBackend {
   getWorld(): Promise<Partial<APIWorldTo>> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(learningWorld);
-      }, 1000);
-    });
+    return Promise.resolve(learningWorld);
   }
 
   getLearningRooms(): Promise<APILearningRoomTO[]> {
     return Promise.resolve(learningRooms);
   }
 
-  getLearningElements(): Promise<(APILearningElementTO | undefined)[]> {
+  getLearningElements(): Promise<APILearningElementTO[]> {
     return Promise.resolve(learningElements);
   }
 }
