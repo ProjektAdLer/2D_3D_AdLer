@@ -1,6 +1,5 @@
 import { LoadWorldController } from "../Presentation/LoadWorldButton/LoadWorldController";
 import ILoadWorldController from "../Presentation/LoadWorldButton/ILoadWorldController";
-import ILoadWorldUseCase from "../Application/LoadWorld/ILoadWorldUseCase";
 import { Container } from "inversify";
 import CORE_TYPES from "./CoreTypes";
 import IPresentation from "../Presentation/API/IPresentation";
@@ -13,7 +12,6 @@ import ISceneView from "../Presentation/SceneManagment/ISceneView";
 import SceneView from "../Presentation/SceneManagment/SceneView";
 import SceneViewModel from "../Presentation/SceneManagment/SceneViewModel";
 import SceneController from "../Presentation/SceneManagment/SceneController";
-import DataTransferObject from "../Domain/Entities/ExternalRoomData";
 import MainScene from "../Presentation/SceneManagment/MainScene";
 import ICreateSceneClass from "../Presentation/SceneManagment/ICreateSceneClass";
 import ILearningElementView from "../Presentation/LearningElement/ILearningElementView";
@@ -24,7 +22,6 @@ import LearningElementController from "../Presentation/LearningElement/LearningE
 import ILearningElementPanelPresenter from "../Presentation/LearningElementPanel/ILearningElementPanelPresenter";
 import LearningElementPanelPresenter from "../Presentation/LearningElementPanel/LearningElementPanelPresenter";
 import LearningElementPanelViewModel from "../Presentation/LearningElementPanel/LearningElementPanelViewModel";
-import LoadWorldUseCase from "../Application/LoadWorld/LoadWorldUseCase";
 import ISceneController from "../Presentation/SceneManagment/ISceneController";
 import ILearningWorldPort from "../Application/LoadWorld/ILearningWorldPort";
 import LearningWorldPresenter from "../Presentation/LearningWorld/LearningWorldPresenter";
@@ -59,13 +56,11 @@ CoreDIContainer.bind(SceneViewModel).toSelf().inSingletonScope();
 CoreDIContainer.bind<ISceneController>(CORE_TYPES.ISceneController)
   .to(SceneController)
   .inSingletonScope();
+
 // bind other CreateSceneClass here for testing puposes -MK
 CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
   MainScene
 );
-
-// DTO
-CoreDIContainer.bind(DataTransferObject).toSelf();
 
 // Learning Element
 CoreDIContainer.bind<ILearningElementController>(
