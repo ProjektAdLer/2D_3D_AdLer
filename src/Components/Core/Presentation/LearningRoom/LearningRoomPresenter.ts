@@ -22,7 +22,9 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
       throw new Error("ViewModel not set");
     }
 
+    // set view model data
     this.viewModel.id = learningRoomTO.id;
+    this.setRoomDimensions(learningRoomTO);
 
     // create learning elements
     let director = CoreDIContainer.get<IPresentationDirector>(
@@ -41,8 +43,14 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
       director.build();
       let presenter = builder.getPresenter();
       presenter.presentLearningElement(elementTO, elementPositions.shift()!);
-      this.viewModel.learningElements.Value.push(presenter);
     });
+  }
+
+  private setRoomDimensions(learningRoomTO: LearningRoomTO): void {
+    this.viewModel.roomLength.Value =
+      (learningRoomTO.learningElements.length / 2) * 4;
+    this.viewModel.roomWidth.Value =
+      learningRoomTO.learningElements.length > 1 ? 10 : 6;
   }
 
   private getLearningElementPositions(
@@ -50,20 +58,19 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
   ): [Vector3, number][] {
     let positions: [Vector3, number][] = [];
     let sideOffset = -1;
-    let bufferedLength = this.viewModel.roomLength.Value - 2;
 
     for (let i = 0; i < elementCount; i++) {
       positions.push([
         new Vector3(
-          (bufferedLength / elementCount) * i - bufferedLength / 2,
+          (this.viewModel.roomWidth.Value / 2) * sideOffset,
           this.viewModel.baseHeight.Value,
-          (this.viewModel.roomWidth.Value / 2) * sideOffset
+          (this.viewModel.roomLength.Value / (elementCount + 1)) * (i + 1) -
+            this.viewModel.roomLength.Value / 2
         ),
-        -90 * sideOffset,
+        sideOffset === 1 ? 0 : 180,
       ]);
       sideOffset *= -1;
     }
-
     return positions;
   }
 }

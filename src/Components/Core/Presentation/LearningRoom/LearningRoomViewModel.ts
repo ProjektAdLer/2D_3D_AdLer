@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { Color3, Scene } from "@babylonjs/core";
+import { Color3, Mesh, Scene, StandardMaterial } from "@babylonjs/core";
 import Observable from "../../../../Lib/Observable";
 
 @injectable()
@@ -16,6 +16,12 @@ export default class LearningRoomViewModel {
   public doorHeight: Observable<number> = new Observable(2.28);
   public wallThickness: Observable<number> = new Observable(0.3);
 
-  public learningElements: Observable<any> = new Observable([]);
+  public floorMesh: Observable<Mesh> = new Observable<Mesh>();
+  public wallMesh: Observable<Mesh> = new Observable<Mesh>();
+  public floorMaterial: Observable<StandardMaterial> =
+    new Observable<StandardMaterial>();
+  public wallMaterial: Observable<StandardMaterial> =
+    new Observable<StandardMaterial>();
+
   public id: string;
 }

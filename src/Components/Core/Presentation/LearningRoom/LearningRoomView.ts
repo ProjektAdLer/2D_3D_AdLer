@@ -64,7 +64,14 @@ export default class LearningRoomView implements ILearningRoomView {
     var floorIndices = this.createFloorIndices();
     var floorPositions = this.createFloorPositions();
 
-    var floorMesh = new Mesh("Floor", this.viewModel.scene.Value);
+    // create mesh
+    if (!this.viewModel.floorMesh.Value) {
+      this.viewModel.floorMesh.Value = new Mesh(
+        "Floor",
+        this.viewModel.scene.Value
+      );
+    }
+
     var normals = [] as number[];
     var uvs = [0, 1, 0, 0, 1, 0, 1, 1];
     VertexData.ComputeNormals(floorPositions, floorIndices, normals);
@@ -73,17 +80,21 @@ export default class LearningRoomView implements ILearningRoomView {
     vertexData.indices = floorIndices;
     vertexData.normals = normals;
     vertexData.uvs = uvs;
-    vertexData.applyToMesh(floorMesh);
+    vertexData.applyToMesh(this.viewModel.floorMesh.Value);
 
-    var floorMaterial = new StandardMaterial(
-      "floorMaterial",
-      this.viewModel.scene.Value
-    );
-    floorMaterial.diffuseTexture = new Texture(
+    if (!this.viewModel.floorMaterial.Value) {
+      this.viewModel.floorMaterial.Value = new StandardMaterial(
+        "floorMaterial",
+        this.viewModel.scene.Value
+      );
+    }
+
+    this.viewModel.floorMaterial.Value.diffuseTexture = new Texture(
       floorTexture,
       this.viewModel.scene.Value
     );
-    floorMesh.material = floorMaterial;
+    this.viewModel.floorMesh.Value.material =
+      this.viewModel.floorMaterial.Value;
   }
 
   private createWalls(): void {
@@ -95,22 +106,32 @@ export default class LearningRoomView implements ILearningRoomView {
     var positions = this.createRoomPositions();
     var wallIndices = this.createWallIndices();
 
-    var wallMesh = new Mesh("Walls", this.viewModel.scene.Value);
+    // create mesh
+    if (!this.viewModel.wallMesh.Value) {
+      this.viewModel.wallMesh.Value = new Mesh(
+        "Walls",
+        this.viewModel.scene.Value
+      );
+    }
+
     var normals = [] as number[];
     VertexData.ComputeNormals(positions, wallIndices, normals);
     var vertexData = new VertexData();
     vertexData.positions = positions;
     vertexData.indices = wallIndices;
     vertexData.normals = normals;
-    vertexData.applyToMesh(wallMesh);
-    wallMesh.convertToFlatShadedMesh();
+    vertexData.applyToMesh(this.viewModel.wallMesh.Value);
+    this.viewModel.wallMesh.Value.convertToFlatShadedMesh();
 
-    var wallMaterial = new StandardMaterial(
-      "wallMaterial",
-      this.viewModel.scene.Value
-    );
-    wallMaterial.diffuseColor = this.viewModel.wallColor.Value;
-    wallMesh.material = wallMaterial;
+    if (!this.viewModel.wallMaterial.Value) {
+      this.viewModel.wallMaterial.Value = new StandardMaterial(
+        "wallMaterial",
+        this.viewModel.scene.Value
+      );
+    }
+    this.viewModel.wallMaterial.Value.diffuseColor =
+      this.viewModel.wallColor.Value;
+    this.viewModel.wallMesh.Value.material = this.viewModel.wallMaterial.Value;
   }
 
   private createFloorPositions() {

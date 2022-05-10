@@ -2,6 +2,5 @@ import { LearningElementType } from "../../Presentation/LearningElement/Types/Le
 import AbstractEntity from "./AbstractEntity";
 
 export default class LearningElementEntity extends AbstractEntity {
-  public id: string;
   public type: LearningElementType;
 }

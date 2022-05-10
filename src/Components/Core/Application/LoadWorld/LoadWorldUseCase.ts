@@ -45,15 +45,20 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     const worldNameResp = await this.backend.getWorld();
 
     if (this.container.getEntitiesOfType(LearningWorldEntity).length === 0) {
-      let elementEntity = this.container.createEntity<LearningElementEntity>(
-        {
-          type: "h5p",
-        },
-        LearningElementEntity
-      );
+      let elementEntities = new Array<LearningElementEntity>();
+      for (let i = 0; i < 4; i++) {
+        elementEntities.push(
+          this.container.createEntity<LearningElementEntity>(
+            {
+              type: "h5p",
+            },
+            LearningElementEntity
+          )
+        );
+      }
       let roomEntity = this.container.createEntity<LearningRoomEntity>(
         {
-          learningElements: [elementEntity],
+          learningElements: elementEntities,
         },
         LearningRoomEntity
       );
