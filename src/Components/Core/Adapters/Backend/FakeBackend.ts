@@ -1,6 +1,6 @@
 import { APIWorldTo } from "./APIWorldTO";
 import { injectable } from "inversify";
-import { IBackend } from "./IBackend";
+import { type IBackend } from "./IBackend";
 
 @injectable()
 export class FakeBackend implements IBackend {

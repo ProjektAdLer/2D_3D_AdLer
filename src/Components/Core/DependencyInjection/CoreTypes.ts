@@ -1,4 +1,3 @@
-import { IBackend } from "./../Adapters/Backend/IBackend";
 let CORE_TYPES = {
   ICore: Symbol("ICore"),
   ICoreFactory: Symbol("ICoreFactory"),
