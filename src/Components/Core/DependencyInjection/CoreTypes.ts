@@ -1,4 +1,4 @@
-let CORE_TYPES = {
+const CORE_TYPES = {
   ICore: Symbol("ICore"),
   ICoreFactory: Symbol("ICoreFactory"),
   IDataAccess: Symbol("IDataAccess"),
@@ -10,9 +10,6 @@ let CORE_TYPES = {
   ICreateSceneClass: Symbol("ICreateSceneClass"),
   ILearningRoomController: Symbol("ILearningRoomController"),
   ILearningRoomView: Symbol("ILearningRoomView"),
-  IMoodle: Symbol("IMoodle"),
-  IMoodleDataAccess: Symbol("IMoodleDataAccess"),
-  MoodleData: Symbol("MoodleData"),
   ILearningElementView: Symbol("ILearingElementView"),
   ILearingElementPresenter: Symbol("ILearingElementPresenter"),
   ILearningElementFactory: Symbol("ILearningElementFactory"),
@@ -21,7 +18,6 @@ let CORE_TYPES = {
   ILearningElementPanelPresenter: Symbol("ILearningElementPanelPresenter"),
   ILearningElementPanelViewModel: Symbol("ILearningElementPanelViewModel"),
   IViewModelProvider: Symbol("IViewModelProvider"),
-  ILoadWorldUseCase: Symbol("ILoadWorldUseCase"),
   ILoadWorldController: Symbol("ILoadWorldController"),
   ILearningWorldPort: Symbol("ILearningWorldPort"),
   IEntityContainer: Symbol("IEntityContainer"),

@@ -16,11 +16,6 @@ import SceneController from "../Presentation/SceneManagment/SceneController";
 import DataTransferObject from "../Domain/Entities/ExternalRoomData";
 import MainScene from "../Presentation/SceneManagment/MainScene";
 import ICreateSceneClass from "../Presentation/SceneManagment/ICreateSceneClass";
-import IMoodle from "../Application/Moodle/IMoodle";
-import Moodle from "../Application/Moodle/Moodle";
-import MoodleDataAccess from "../DataAccess/Moodle/MoodleDataAccess";
-import IMoodleDataAccess from "../DataAccess/Moodle/IMoodleDataAccess";
-import MoodleData from "../Domain/Entities/MoodleData";
 import ILearningElementView from "../Presentation/LearningElement/ILearningElementView";
 import LearningElementView from "../Presentation/LearningElement/LearningElementView";
 import LearningElementViewModel from "../Presentation/LearningElement/LearningElementViewModel";
@@ -30,8 +25,6 @@ import ILearningElementPanelPresenter from "../Presentation/LearningElementPanel
 import LearningElementPanelPresenter from "../Presentation/LearningElementPanel/LearningElementPanelPresenter";
 import LearningElementPanelViewModel from "../Presentation/LearningElementPanel/LearningElementPanelViewModel";
 import LoadWorldUseCase from "../Application/LoadWorld/LoadWorldUseCase";
-import IDataAccess from "../DataAccess/API/IDataAccess";
-import DataAccess from "../DataAccess/API/DataAccess";
 import ISceneController from "../Presentation/SceneManagment/ISceneController";
 import ILearningWorldPort from "../Application/LoadWorld/ILearningWorldPort";
 import LearningWorldPresenter from "../Presentation/LearningWorld/LearningWorldPresenter";
@@ -43,6 +36,7 @@ import PresentationDirector from "../Presentation/PresentationBuilder/Presentati
 import LearningRoomBuilder from "../Presentation/PresentationBuilder/LearningRoomBuilder";
 import LearningElementBuilder from "../Presentation/PresentationBuilder/LearningElementBuilder";
 import IPresentationBuilder from "../Presentation/PresentationBuilder/IPresentationBuilder";
+import useCaseDIContainer from "./UseCases/UseCaseDIConatiner";
 
 var CoreDIContainer = new Container();
 
@@ -50,9 +44,6 @@ var CoreDIContainer = new Container();
 CoreDIContainer.bind<ICore>(CORE_TYPES.ICore).to(Core).inSingletonScope();
 CoreDIContainer.bind<IPresentation>(CORE_TYPES.IPresentation)
   .to(Presentation)
-  .inSingletonScope();
-CoreDIContainer.bind<IDataAccess>(CORE_TYPES.IDataAccess)
-  .to(DataAccess)
   .inSingletonScope();
 
 // Engine
@@ -76,25 +67,6 @@ CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
 // DTO
 CoreDIContainer.bind(DataTransferObject).toSelf();
 
-// Room
-// CoreDIContainer.bind<ILearningRoomController>(
-//   CORE_TYPES.ILearningRoomController
-// )
-//   .to(LearningRoomController)
-//   .inSingletonScope();
-// CoreDIContainer.bind<ILearningRoomView>(CORE_TYPES.ILearningRoomView).to(
-//   LearningRoomView
-// );
-// CoreDIContainer.bind(LearningRoomViewModel).toSelf();
-
-// Moodle
-CoreDIContainer.bind<IMoodle>(CORE_TYPES.IMoodle).to(Moodle).inSingletonScope();
-CoreDIContainer.bind<IMoodleDataAccess>(CORE_TYPES.IMoodleDataAccess)
-  .to(MoodleDataAccess)
-  .inSingletonScope();
-// No Singleton here - PG
-CoreDIContainer.bind<MoodleData>(CORE_TYPES.MoodleData).to(MoodleData);
-
 // Learning Element
 CoreDIContainer.bind<ILearningElementController>(
   CORE_TYPES.ILearingElementPresenter
@@ -113,12 +85,6 @@ CoreDIContainer.bind(LearningElementPanelViewModel).toSelf();
 // Controllers
 CoreDIContainer.bind<ILoadWorldController>(CORE_TYPES.ILoadWorldController)
   .to(LoadWorldController)
-  .inSingletonScope();
-
-// Use Cases
-// Use Cases always have to be Singleton
-CoreDIContainer.bind<ILoadWorldUseCase>(CORE_TYPES.ILoadWorldUseCase)
-  .to(LoadWorldUseCase)
   .inSingletonScope();
 
 CoreDIContainer.bind<ILearningWorldPort>(CORE_TYPES.ILearningWorldPort)
@@ -141,5 +107,6 @@ CoreDIContainer.bind<IPresentationBuilder>(
 ).to(LearningElementBuilder);
 
 CoreDIContainer.load(infrastructureDIContainer);
+CoreDIContainer.load(useCaseDIContainer);
 
 export default CoreDIContainer;

@@ -5,12 +5,13 @@ import ILoadWorldController from "./ILoadWorldController";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningWorldViewModel from "../LearningWorld/LearningWorldViewModel";
 import IViewModelProvider from "../ViewModelProvider/IViewModelProvider";
+import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_SYMBOLS";
 
 @injectable()
 export class LoadWorldController implements ILoadWorldController {
   async loadWorld(): Promise<void> {
     const useCase = CoreDIContainer.get<ILoadWorldUseCase>(
-      CORE_TYPES.ILoadWorldUseCase
+      USECASE_TYPES.ILoadWorldUseCase
     );
 
     const provider = CoreDIContainer.get<IViewModelProvider>(
