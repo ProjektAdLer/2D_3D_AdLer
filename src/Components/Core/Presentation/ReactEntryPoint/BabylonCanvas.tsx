@@ -12,7 +12,6 @@ export default function BabylonCanvas(props: any) {
     if (canvasRef) {
       const canvas = canvasRef.current;
 
-      // We use a Factory here, because React does not support DI - PG
       const engineCore = CoreDIContainer.get<ICore>(CORE_TYPES.ICore);
       if (canvas) {
         engineCore.setupBabylon(canvas);
