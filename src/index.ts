@@ -3,6 +3,6 @@ import CoreDIContainer from "./Components/Core/DependencyInjection/CoreDIContain
 import CORE_TYPES from "./Components/Core/DependencyInjection/CoreTypes";
 import IReactEntry from "./Components/Core/Presentation/React/ReactEntryPoint/IReactEntry";
 
-const renderer = CoreDIContainer.get<IReactEntry>(CORE_TYPES.ICoreRenderer);
+const reactEntry = CoreDIContainer.get<IReactEntry>(CORE_TYPES.ICoreRenderer);
 
-renderer.setupReact();
+reactEntry.setupReact();
