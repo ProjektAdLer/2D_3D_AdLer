@@ -56,7 +56,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
         const returnvValue = this.container.createEntity<LearningElementEntity>(
           {
             id: element.id,
-            type: "h5p",
+            type: element.elementType,
             value: element.value[0].value,
             requirement: element.requirements[0].value,
           },
