@@ -1,6 +1,5 @@
 import { Scene } from "@babylonjs/core/scene";
-import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
-import SceneViewModel from "../../../Core/Presentation/SceneManagment/SceneViewModel";
+import SceneViewModel from "../../../../Core/Presentation/Babylon/SceneManagment/SceneViewModel";
 
 jest.mock("@babylonjs/core/scene", () => {
   return {

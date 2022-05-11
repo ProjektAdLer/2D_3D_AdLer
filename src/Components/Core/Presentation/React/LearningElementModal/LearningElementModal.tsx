@@ -6,11 +6,12 @@ import EGenericLearningElement from "../../../Domain/Entities/LearningElements/G
 import { LearningElementTypeSymbols } from "../../Babylon/LearningElement/Types/LearningElementTypes";
 import useEntity from "../CustomHooks/useEntity";
 import usePrimitive from "../CustomHooks/usePrimitive";
-import H5PContent from "./H5PContent";
+import H5PComponent from "./H5PComponent";
 import IEntityManager from "../../../Domain/EntityManager/IEntityManager";
 import StyledModal from "../ReactBaseComponents/StyledModal";
-import ImageContent from "./ImageContent";
-import VideoContent from "./VideoContent";
+import ImageComponent from "./ImageComponent";
+import VideoComponent from "./VideoComponent";
+import TextComponent from "./TextComponent";
 
 const elementBuilder = (learningElementID: string) => {
   const entityManager = CoreDIContainer.get(
@@ -22,26 +23,27 @@ const elementBuilder = (learningElementID: string) => {
       learningElementID,
       EGenericLearningElement
     );
-
+  const loremText =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
   const { h5p, video, text, image } = LearningElementTypeSymbols;
   // TODO: Getting the LearningelementID for each type from Usecase ~FK
   switch (learningElementConainerEntity.Value.learningElementType.Value) {
     case h5p:
       return (
-        <H5PContent
+        <H5PComponent
           h5pEntityId={
             learningElementConainerEntity.Value.concreteLearningElementId.Value
           }
         />
       );
     case text:
-      return <div>text TBI</div>;
+      return <TextComponent textContent={loremText} />;
     case video:
-      return <VideoContent embedId="iik25wqIuFo" />;
+      return <VideoComponent embedId="iik25wqIuFo" />;
     case image:
       return (
         <div className="h-100 w-100">
-          <ImageContent
+          <ImageComponent
             imagesrc={
               "https://cdn.discordapp.com/attachments/887582352560246804/949558830486929458/Doku_Raumaufbau.png"
             }

@@ -1,4 +1,4 @@
-export default function ImageContent(props: { imagesrc: string }) {
+export default function ImageComponent(props: { imagesrc: string }) {
   return (
     <img
       alt="Learningimage!"
