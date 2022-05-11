@@ -9,6 +9,7 @@ import usePrimitive from "../CustomHooks/usePrimitive";
 import H5PContent from "./H5PContent";
 import IEntityManager from "../../Domain/EntityManager/IEntityManager";
 import StyledModal from "../ReactBaseComponents/StyledModal";
+import ImageContent from "./ImageContent";
 
 const elementBuilder = (learningElementID: string) => {
   const entityManager = CoreDIContainer.get(
@@ -21,7 +22,7 @@ const elementBuilder = (learningElementID: string) => {
       EGenericLearningElement
     );
 
-  const { h5p } = LearningElementTypeSymbols;
+  const { h5p, video, text, image } = LearningElementTypeSymbols;
 
   switch (learningElementConainerEntity.Value.learningElementType.Value) {
     case h5p:
@@ -29,6 +30,18 @@ const elementBuilder = (learningElementID: string) => {
         <H5PContent
           h5pEntityId={
             learningElementConainerEntity.Value.concreteLearningElementId.Value
+          }
+        />
+      );
+    case text:
+      return <div>text TBI</div>;
+    case video:
+      return <div>video TBI</div>;
+    case image:
+      return (
+        <ImageContent
+          imagesrc={
+            "https://cdn.discordapp.com/attachments/887582352560246804/949558830486929458/Doku_Raumaufbau.png"
           }
         />
       );
