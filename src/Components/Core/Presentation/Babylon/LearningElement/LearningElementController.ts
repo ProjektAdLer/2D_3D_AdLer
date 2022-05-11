@@ -6,16 +6,20 @@ import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_SYMBOLS
 import ILearningElementController from "./ILearningElementController";
 import LearningElementViewModel from "./LearningElementViewModel";
 
-@injectable()
 export default class LearningElementController
   implements ILearningElementController
 {
-  clicked(event?: ActionEvent): void {
+  private viewModel: LearningElementViewModel;
+  constructor(viewModel: LearningElementViewModel) {
+    this.viewModel = viewModel;
+  }
+  clicked = (event?: ActionEvent): void => {
     const useCase = CoreDIContainer.get<ILearningElementStartedUseCase>(
       USECASE_TYPES.ILearningElementStartedUseCase
     );
 
-    useCase.execute();
-    throw new Error("Method not implemented.");
-  }
+    useCase.execute({
+      learningElementId: this.viewModel.id,
+    });
+  };
 }

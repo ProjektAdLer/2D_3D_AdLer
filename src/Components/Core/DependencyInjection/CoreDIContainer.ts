@@ -17,18 +17,14 @@ import ICreateSceneClass from "../Presentation/Babylon/SceneManagment/ICreateSce
 import ILearningElementView from "../Presentation/Babylon/LearningElement/ILearningElementView";
 import LearningElementView from "../Presentation/Babylon/LearningElement/LearningElementView";
 import LearningElementViewModel from "../Presentation/Babylon/LearningElement/LearningElementViewModel";
-import ILearningElementController from "../Presentation/Babylon/LearningElement/ILearningElementController";
-import LearningElementController from "../Presentation/Babylon/LearningElement/LearningElementController";
 import ISceneController from "../Presentation/Babylon/SceneManagment/ISceneController";
 import infrastructureDIContainer from "./InfrastructureDIContainer";
-import LearningRoomPresenter from "../Presentation/Babylon/LearningRoom/LearningRoomPresenter";
 import IPresentationDirector from "../Presentation/PresentationBuilder/IPresentationDirector";
 import PresentationDirector from "../Presentation/PresentationBuilder/PresentationDirector";
 import LearningRoomBuilder from "../Presentation/PresentationBuilder/LearningRoomBuilder";
 import LearningElementBuilder from "../Presentation/PresentationBuilder/LearningElementBuilder";
 import IPresentationBuilder from "../Presentation/PresentationBuilder/IPresentationBuilder";
 import useCaseDIContainer from "./UseCases/UseCaseDIConatiner";
-import ILearningElementPort from "../Application/LearningElementStarted/ILearningElementPort";
 import PortsDIContainer from "./Ports/PortsDIContainer";
 
 var CoreDIContainer = new Container();
@@ -59,9 +55,7 @@ CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
 );
 
 // Learning Element
-CoreDIContainer.bind<ILearningElementController>(
-  CORE_TYPES.ILearingElementPresenter
-).to(LearningElementController);
+
 CoreDIContainer.bind<ILearningElementView>(CORE_TYPES.ILearningElementView).to(
   LearningElementView
 );

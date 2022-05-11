@@ -34,7 +34,12 @@ export default class LearningElementBuilder implements IPresentationBuilder {
   }
 
   buildController(): void {
-    this.controller = new LearningElementController();
+    if (!this.viewModel) {
+      throw new Error(
+        "ViewModel isn't build yet. Call buildViewModel() first."
+      );
+    }
+    this.controller = new LearningElementController(this.viewModel);
   }
 
   buildView(): void {

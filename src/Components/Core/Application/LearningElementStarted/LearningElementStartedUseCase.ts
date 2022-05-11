@@ -1,4 +1,4 @@
-import { inject } from "inversify";
+import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
@@ -6,6 +6,7 @@ import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import ILearningElementPort from "./ILearningElementPort";
 import ILearningElementStartedUseCase from "./ILearningElementStartedUseCase";
 
+@injectable()
 export default class LearningElementStartedUseCase
   implements ILearningElementStartedUseCase
 {
