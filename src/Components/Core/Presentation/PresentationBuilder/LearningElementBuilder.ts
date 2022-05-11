@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import ILearningElementPort from "../../Application/LearningElementStarted/ILearningElementStartedPort";
+import ILearningElementPort from "../../Application/LearningElementStarted/ILearningElementPort";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import ILearningElementController from "../Babylon/LearningElement/ILearningElementController";
 import ILearningElementPresenter from "../Babylon/LearningElement/ILearningElementPresenter";

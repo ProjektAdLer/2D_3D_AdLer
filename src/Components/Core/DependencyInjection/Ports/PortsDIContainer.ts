@@ -1,5 +1,5 @@
 import { ContainerModule } from "inversify";
-import ILearningElementPort from "../../Application/LearningElementStarted/ILearningElementStartedPort";
+import ILearningElementPort from "../../Application/LearningElementStarted/ILearningElementPort";
 import ILearningWorldPort from "../../Application/LoadWorld/ILearningWorldPort";
 import ILearningRoomPort from "../../Presentation/Babylon/LearningRoom/ILearningRoomPort";
 import LearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/LearningRoomPresenter";

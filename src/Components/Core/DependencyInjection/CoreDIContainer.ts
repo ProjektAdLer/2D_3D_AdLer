@@ -28,7 +28,7 @@ import LearningRoomBuilder from "../Presentation/PresentationBuilder/LearningRoo
 import LearningElementBuilder from "../Presentation/PresentationBuilder/LearningElementBuilder";
 import IPresentationBuilder from "../Presentation/PresentationBuilder/IPresentationBuilder";
 import useCaseDIContainer from "./UseCases/UseCaseDIConatiner";
-import ILearningElementPort from "../Application/LearningElementStarted/ILearningElementStartedPort";
+import ILearningElementPort from "../Application/LearningElementStarted/ILearningElementPort";
 import PortsDIContainer from "./Ports/PortsDIContainer";
 
 var CoreDIContainer = new Container();
