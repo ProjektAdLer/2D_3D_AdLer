@@ -15,20 +15,8 @@ export default class LearningElementPort implements ILearningElementPort {
 
     this.learningElementPresenters.push(learningElementPresenter);
   }
-  presentLearningElementStarted(
-    learningElementStartedTO: LearningElementTO
-  ): void {
+  presentLearningElement(learningElementStartedTO: LearningElementTO): void {
+    // Hier muss dann auf das ViewModel des Modals zugegriffen werden
     throw new Error("Method not implemented. (Port)");
-  }
-
-  debugDoesLEExist(learningElementId: number): boolean {
-    if (
-      this.learningElementPresenters.find(
-        (presenter) => presenter.ViewModel.id === learningElementId
-      )
-    ) {
-      return true;
-    }
-    return false;
   }
 }
