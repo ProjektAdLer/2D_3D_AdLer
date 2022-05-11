@@ -6,10 +6,7 @@ import IEntityContainer from "./IEntityContainer";
 
 @injectable()
 export default class EntityContainer implements IEntityContainer {
-  private entityMap = new Map<
-    ConstructorReference<AbstractEntity>,
-    AbstractEntity[]
-  >();
+  private entityMap = new Map<ConstructorReference<object>, object[]>();
 
   private rootEntity: RootEntity;
 
@@ -18,7 +15,7 @@ export default class EntityContainer implements IEntityContainer {
     this.entityMap.set(RootEntity, [this.rootEntity]);
   }
 
-  createEntity<T extends AbstractEntity>(
+  createEntity<T extends object>(
     entityData: Partial<T>,
     entityType: ConstructorReference<T>
   ): T {
@@ -27,19 +24,18 @@ export default class EntityContainer implements IEntityContainer {
     if (!this.entityMap.has(entityType)) {
       this.entityMap.set(entityType, []);
     }
-    //@ts-ignore  TS doesn't know, that the array has been set - PG
-    this.entityMap.get(entityType).push(entity);
+    this.entityMap.get(entityType)!.push(entity);
     return entity;
   }
 
-  getEntitiesOfType<T extends AbstractEntity>(
+  getEntitiesOfType<T extends object>(
     entityType: ConstructorReference<T>
   ): T[] {
     const retVal = this.entityMap.get(entityType) as T[];
     return retVal || [];
   }
 
-  filterEntitiesOfTye<T extends AbstractEntity>(
+  filterEntitiesOfTye<T extends object>(
     entityType: ConstructorReference<T>,
     filter: (entity: T) => boolean
   ): T[] {
@@ -47,7 +43,7 @@ export default class EntityContainer implements IEntityContainer {
     return entities.filter(filter);
   }
 
-  deleteEntity(entity: AbstractEntity): void {
+  deleteEntity(entity: object): void {
     const entityType =
       entity.constructor as ConstructorReference<AbstractEntity>;
 

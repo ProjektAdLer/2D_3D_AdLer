@@ -10,7 +10,7 @@ export default interface IEntityContainer {
    * @param entityData The data of the new entity as object (type checked)
    * @param entityType The type of the new entity (This is needed because of limitations of the TypeScript compiler)
    */
-  createEntity<T extends AbstractEntity>(
+  createEntity<T extends object>(
     entityData: Partial<T>,
     entityType: ConstructorReference<T>
   ): T;
@@ -23,15 +23,13 @@ export default interface IEntityContainer {
    * @template T The type of the entities
    * @returns The entities of the given type
    */
-  getEntitiesOfType<T extends AbstractEntity>(
-    entityType: ConstructorReference<T>
-  ): T[];
+  getEntitiesOfType<T extends object>(entityType: ConstructorReference<T>): T[];
 
   /**
    * @param entityType The type of the entities to filter
    * @param filter The filter function to apply to the entities
    */
-  filterEntitiesOfTye<T extends AbstractEntity>(
+  filterEntitiesOfTye<T extends object>(
     entityType: ConstructorReference<T>,
     filter: (entity: T) => boolean
   ): T[];
@@ -41,7 +39,7 @@ export default interface IEntityContainer {
    * Caution: This will (at least for now) delete the entity regardless of references in other entities.
    * @param entity The entity to delete
    */
-  deleteEntity(entity: AbstractEntity): void;
+  deleteEntity(entity: object): void;
 
   /**
    *
