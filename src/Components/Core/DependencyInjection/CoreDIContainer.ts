@@ -4,8 +4,6 @@ import { Container } from "inversify";
 import CORE_TYPES from "./CoreTypes";
 import IPresentation from "../Presentation/API/IPresentation";
 import Presentation from "../Presentation/API/Presentation";
-import ICore from "../API/ICore";
-import Core from "../API/Core";
 import IEngineManager from "../Presentation/Babylon/EngineManager/IEngineManager";
 import EngineManager from "../Presentation/Babylon/EngineManager/EngineManager";
 import ISceneView from "../Presentation/Babylon/SceneManagment/ISceneView";
@@ -30,7 +28,6 @@ import PortsDIContainer from "./Ports/PortsDIContainer";
 var CoreDIContainer = new Container();
 
 // API classes
-CoreDIContainer.bind<ICore>(CORE_TYPES.ICore).to(Core).inSingletonScope();
 CoreDIContainer.bind<IPresentation>(CORE_TYPES.IPresentation)
   .to(Presentation)
   .inSingletonScope();

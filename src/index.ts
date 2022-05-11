@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import CoreDIContainer from "./Components/Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "./Components/Core/DependencyInjection/CoreTypes";
-import ICore from "./Components/Core/API/ICore";
+import IReactEntry from "./Components/Core/Presentation/React/ReactEntryPoint/IReactEntry";
 
-const Core = CoreDIContainer.get<ICore>(CORE_TYPES.ICore);
+const renderer = CoreDIContainer.get<IReactEntry>(CORE_TYPES.ICoreRenderer);
 
-Core.setupReact();
+renderer.setupReact();
