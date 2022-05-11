@@ -104,7 +104,7 @@ const learningElements = [
       type: "name",
       value: "LOC complete",
     },
-    elementType: "h5p",
+    elementType: "text",
     value: [
       {
         type: "points",

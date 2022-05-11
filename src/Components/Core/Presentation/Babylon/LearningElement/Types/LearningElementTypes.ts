@@ -5,4 +5,7 @@ export const LearningElementTypeSymbols = {
   video: Symbol("Video Learning Element"),
 };
 
-export type LearningElementType = keyof typeof LearningElementTypeSymbols;
+//export type LearningElementType = keyof typeof LearningElementTypeSymbols;
+
+// The LearningElementType will be checked when they come from the backend
+export type LearningElementType = string;
