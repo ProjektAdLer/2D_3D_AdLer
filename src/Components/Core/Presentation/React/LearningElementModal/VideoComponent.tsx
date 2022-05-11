@@ -1,6 +1,6 @@
 import React from "react";
 
-const VideoContent = (props: { embedId: string }) => (
+const VideoComponent = (props: { embedId: string }) => (
   <div>
     <iframe
       width="853"
@@ -13,4 +13,4 @@ const VideoContent = (props: { embedId: string }) => (
     />
   </div>
 );
-export default VideoContent;
+export default VideoComponent;
