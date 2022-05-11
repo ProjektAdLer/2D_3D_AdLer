@@ -1,7 +1,3 @@
-import React from "react";
-import { useInjection } from "inversify-react";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import useObservable from "../CustomHooks/usePrimitive";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
