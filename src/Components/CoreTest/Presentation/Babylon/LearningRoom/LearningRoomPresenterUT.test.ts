@@ -1,7 +1,9 @@
-import { LearningRoomTO } from "../../../Core/Application/LoadWorld/ILearningWorldPort";
-import LearningRoomPresenter from "../../../Core/Presentation/Babylon/LearningRoom/LearningRoomPresenter";
-import LearningRoomViewModel from "../../../Core/Presentation/Babylon/LearningRoom/LearningRoomViewModel";
-import LearningElementBuilder from "../../../Core/Presentation/PresentationBuilder/LearningElementBuilder";
+import { LearningRoomTO } from "../../../../Core/Application/LoadWorld/ILearningWorldPort";
+import LearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementPresenter";
+import LearningRoomPresenter from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomPresenter";
+import LearningRoomViewModel from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomViewModel";
+import LearningElementBuilder from "../../../../Core/Presentation/PresentationBuilder/LearningElementBuilder";
+import PresentationDirector from "../../../../Core/Presentation/PresentationBuilder/PresentationDirector";
 
 var presentLearningElementMock = jest.spyOn(
   LearningElementPresenter.prototype,

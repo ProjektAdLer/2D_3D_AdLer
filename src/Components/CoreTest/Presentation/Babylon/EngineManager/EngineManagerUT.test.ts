@@ -1,5 +1,5 @@
 import { Engine } from "@babylonjs/core";
-import EngineManager from "../../../Core/Presentation/EngineManager/EngineManager";
+import EngineManager from "../../../../Core/Presentation/Babylon/EngineManager/EngineManager";
 
 jest.mock("@babylonjs/core");
 
