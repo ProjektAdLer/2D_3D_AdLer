@@ -1,4 +1,6 @@
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
+import ILearningElementPort from "../../Application/LearningElementStarted/ILearningElementStartedPort";
+import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import ILearningElementController from "../Babylon/LearningElement/ILearningElementController";
 import ILearningElementPresenter from "../Babylon/LearningElement/ILearningElementPresenter";
 import ILearningElementView from "../Babylon/LearningElement/ILearningElementView";
@@ -14,6 +16,11 @@ export default class LearningElementBuilder implements IPresentationBuilder {
   private viewModel: LearningElementViewModel | null = null;
   private controller: ILearningElementController | null = null;
   private presenter: ILearningElementPresenter | null = null;
+
+  constructor(
+    @inject(PORT_TYPES.ILearningElementPort)
+    private learningElemntPort: ILearningElementPort
+  ) {}
 
   reset(): void {
     this.view = null;
@@ -54,6 +61,8 @@ export default class LearningElementBuilder implements IPresentationBuilder {
 
     this.presenter = new LearningElementPresenter();
     this.presenter.ViewModel = this.viewModel;
+
+    this.learningElemntPort.addLearningElementPresenter(this.presenter);
   }
 
   getPresenter(): ILearningElementPresenter {
