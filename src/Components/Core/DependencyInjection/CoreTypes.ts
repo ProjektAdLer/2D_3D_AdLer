@@ -19,14 +19,11 @@ const CORE_TYPES = {
   ILearningElementPanelViewModel: Symbol("ILearningElementPanelViewModel"),
   IViewModelProvider: Symbol("IViewModelProvider"),
   ILoadWorldController: Symbol("ILoadWorldController"),
-  ILearningWorldPort: Symbol("ILearningWorldPort"),
   IEntityContainer: Symbol("IEntityContainer"),
-  ILearningRoomPort: Symbol("ILearningRoomPort"),
   IPresentationDirector: Symbol("IPresentationDirector"),
   ILearningRoomBuilder: Symbol("ILearningRoomBuilder"),
   ILearningElementBuilder: Symbol("ILearningElementBuilder"),
   IBackend: Symbol("IBackend"),
-  ILearningElementPort: Symbol("ILearningElementPort"),
 };
 
 export default CORE_TYPES;

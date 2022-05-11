@@ -11,13 +11,14 @@ import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import type ILearningWorldPort from "./ILearningWorldPort";
 import { LearningWorldTO } from "./ILearningWorldPort";
 import ILoadWorldUseCase from "./ILoadWorldUseCase";
+import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
   private learningWorldEntity: LearningWorldEntity;
 
   constructor(
-    @inject(CORE_TYPES.ILearningWorldPort)
+    @inject(PORT_TYPES.ILearningWorldPort)
     private learningWorldPort: ILearningWorldPort,
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,

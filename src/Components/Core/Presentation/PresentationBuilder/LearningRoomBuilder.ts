@@ -1,6 +1,7 @@
 import { injectable } from "inversify";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
+import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import ILearningRoomController from "../Babylon/LearningRoom/ILearningRoomController";
 import ILearningRoomPort from "../Babylon/LearningRoom/ILearningRoomPort";
 import LearningRoomController from "../Babylon/LearningRoom/LearningRoomController";
@@ -58,7 +59,7 @@ export default class LearningRoomBuilder implements IPresentationBuilder {
     }
 
     this.presenter = CoreDIContainer.get<ILearningRoomPort>(
-      CORE_TYPES.ILearningRoomPort
+      PORT_TYPES.ILearningRoomPort
     );
     (this.presenter as LearningRoomPresenter).ViewModel = this.viewModel;
   }

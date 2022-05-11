@@ -20,10 +20,7 @@ import LearningElementViewModel from "../Presentation/Babylon/LearningElement/Le
 import ILearningElementController from "../Presentation/Babylon/LearningElement/ILearningElementController";
 import LearningElementController from "../Presentation/Babylon/LearningElement/LearningElementController";
 import ISceneController from "../Presentation/Babylon/SceneManagment/ISceneController";
-import ILearningWorldPort from "../Application/LoadWorld/ILearningWorldPort";
-import LearningWorldPort from "../Presentation/Ports/LearningWorldPort/LearningWorldPort";
 import infrastructureDIContainer from "./InfrastructureDIContainer";
-import ILearningRoomPort from "../Presentation/Babylon/LearningRoom/ILearningRoomPort";
 import LearningRoomPresenter from "../Presentation/Babylon/LearningRoom/LearningRoomPresenter";
 import IPresentationDirector from "../Presentation/PresentationBuilder/IPresentationDirector";
 import PresentationDirector from "../Presentation/PresentationBuilder/PresentationDirector";
@@ -32,6 +29,7 @@ import LearningElementBuilder from "../Presentation/PresentationBuilder/Learning
 import IPresentationBuilder from "../Presentation/PresentationBuilder/IPresentationBuilder";
 import useCaseDIContainer from "./UseCases/UseCaseDIConatiner";
 import ILearningElementPort from "../Application/LearningElementStarted/ILearningElementStartedPort";
+import PortsDIContainer from "./Ports/PortsDIContainer";
 
 var CoreDIContainer = new Container();
 
@@ -74,15 +72,6 @@ CoreDIContainer.bind<ILoadWorldController>(CORE_TYPES.ILoadWorldController)
   .to(LoadWorldController)
   .inSingletonScope();
 
-// Ports
-CoreDIContainer.bind<ILearningWorldPort>(CORE_TYPES.ILearningWorldPort)
-  .to(LearningWorldPort)
-  .inSingletonScope();
-
-CoreDIContainer.bind<ILearningRoomPort>(CORE_TYPES.ILearningRoomPort)
-  .to(LearningRoomPresenter)
-  .inSingletonScope();
-
 // CoreDIContainer.bind<ILearningElementStartedPort>(CORE_TYPES.ILearningElementPort)
 //   .to(LearningElementPort)
 // Presentation Builder Pattern
@@ -99,5 +88,6 @@ CoreDIContainer.bind<IPresentationBuilder>(
 
 CoreDIContainer.load(infrastructureDIContainer);
 CoreDIContainer.load(useCaseDIContainer);
+CoreDIContainer.load(PortsDIContainer);
 
 export default CoreDIContainer;
