@@ -18,7 +18,7 @@ const createIframeUrl = (contextId: number, fileName: string) => {
   );
 };
 
-export default function H5PContent(props: { h5pEntityId: string }) {
+export default function H5PContent(props: { h5pEntityId: any }) {
   const [learningElementEntity] = useEntity<EH5PLearningElement>(
     props.h5pEntityId,
     EH5PLearningElement

@@ -1,5 +1,5 @@
 import { useInjection } from "inversify-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import EGenericLearningElement from "../../Domain/Entities/LearningElements/GenericLearningElement";
@@ -7,8 +7,11 @@ import { LearningElementTypeSymbols } from "../../../Core/Presentation/LearningE
 import useEntity from "../CustomHooks/useEntity";
 import usePrimitive from "../CustomHooks/usePrimitive";
 import H5PContent from "./H5PContent";
+import VideoPlayer from "./VideoPlayer";
 import IEntityManager from "../../Domain/EntityManager/IEntityManager";
 import StyledModal from "../ReactBaseComponents/StyledModal";
+
+import useVideoPlayer from "../CustomHooks/useVideoPlayer";
 
 const elementBuilder = (learningElementID: string) => {
   const entityManager = CoreDIContainer.get(
@@ -21,9 +24,9 @@ const elementBuilder = (learningElementID: string) => {
       EGenericLearningElement
     );
 
-  const { h5p } = LearningElementTypeSymbols;
-
-  switch (learningElementConainerEntity.Value.learningElementType.Value) {
+  const { h5p, text, image, video } = LearningElementTypeSymbols;
+  //switch (learningElementConainerEntity.Value.learningElementType.Value) {
+  switch (video) {
     case h5p:
       return (
         <H5PContent
@@ -32,8 +35,14 @@ const elementBuilder = (learningElementID: string) => {
           }
         />
       );
+    case video:
+      return <VideoPlayer videosrc={"../../../../Assets/testVideoEagle.mp4"} />;
+    case text:
+      return <div>Text TBI</div>;
+    case image:
+      return <div>Image TBI</div>;
     default:
-      return <div>No Learning Element selected</div>;
+      return <div>Learning Element type missing!</div>;
   }
 };
 
