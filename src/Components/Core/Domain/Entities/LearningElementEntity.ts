@@ -2,7 +2,7 @@ import { LearningElementType } from "../../Presentation/Babylon/LearningElement/
 import { LearningComponentID } from "../../Types/EnitityTypes";
 
 export default class LearningElementEntity {
-  learningElementId: LearningComponentID;
+  id: LearningComponentID;
   public type: LearningElementType;
   public isOpen: boolean = false;
   public value: number;

@@ -1,6 +1,7 @@
+import { LearningComponentID } from "./../../Types/EnitityTypes";
 import LearningElementEntity from "./LearningElementEntity";
 
 export default class LearningRoomEntity {
-  public roomId: number;
+  public id: LearningComponentID;
   public learningElements: LearningElementEntity[];
 }

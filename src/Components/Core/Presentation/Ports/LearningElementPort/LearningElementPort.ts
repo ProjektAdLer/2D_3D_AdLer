@@ -24,7 +24,7 @@ export default class LearningElementPort implements ILearningElementPort {
   debugDoesLEExist(learningElementId: number): boolean {
     if (
       this.learningElementPresenters.find(
-        (presenter) => presenter.ViewModel.id === learningElementId.toString()
+        (presenter) => presenter.ViewModel.id === learningElementId
       )
     ) {
       return true;

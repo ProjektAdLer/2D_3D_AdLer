@@ -1,18 +1,18 @@
+import { LearningComponentID } from "./../../Types/EnitityTypes";
 import { LearningElementType } from "../../Presentation/Babylon/LearningElement/Types/LearningElementTypes";
 
 export class LearningWorldTO {
-  readonly id: string;
   worldName: string;
   learningRooms: LearningRoomTO[];
 }
 
 export class LearningRoomTO {
-  readonly id: string;
+  id: LearningComponentID;
   learningElements: LearningElementTO[];
 }
 
 export class LearningElementTO {
-  readonly id: string;
+  id: LearningComponentID;
   type: LearningElementType;
 }
 

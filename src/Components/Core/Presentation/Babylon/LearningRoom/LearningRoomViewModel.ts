@@ -1,3 +1,4 @@
+import { LearningComponentID } from "./../../../Types/EnitityTypes";
 import { injectable } from "inversify";
 import { Color3, Mesh, Scene, StandardMaterial } from "@babylonjs/core";
 import Observable from "../../../../../Lib/Observable";
@@ -23,5 +24,5 @@ export default class LearningRoomViewModel {
   public wallMaterial: Observable<StandardMaterial> =
     new Observable<StandardMaterial>();
 
-  public id: string;
+  public id: LearningComponentID;
 }

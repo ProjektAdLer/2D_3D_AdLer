@@ -37,7 +37,6 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
   private toTO(entityToConvert: LearningWorldEntity): LearningWorldTO {
     return {
-      id: entityToConvert.id,
       learningRooms: entityToConvert.learningRooms,
       worldName: entityToConvert.worldName,
     };
@@ -56,7 +55,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       learningElementResp.forEach((element) => {
         const returnvValue = this.container.createEntity<LearningElementEntity>(
           {
-            learningElementId: element.id,
+            id: element.id,
             type: "h5p",
             value: element.value[0].value,
             requirement: element.requirements[0].value,
@@ -70,7 +69,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       // Learning Room
       let roomEntity = this.container.createEntity<LearningRoomEntity>(
         {
-          roomId: learningRoomResp[0].id,
+          id: learningRoomResp[0].id,
           learningElements: learningElementEntities,
         },
         LearningRoomEntity
