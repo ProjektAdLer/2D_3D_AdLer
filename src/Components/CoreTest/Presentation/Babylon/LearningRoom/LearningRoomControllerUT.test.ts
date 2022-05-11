@@ -1,4 +1,4 @@
-import LearningRoomController from "../../../Core/Presentation/LearningRoom/LearningRoomController";
+import LearningRoomController from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomController";
 
 describe("RoomController", () => {
   let learningRoomController: LearningRoomController;
