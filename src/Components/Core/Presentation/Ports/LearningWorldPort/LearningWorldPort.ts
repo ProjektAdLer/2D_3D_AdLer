@@ -8,7 +8,7 @@ import ILearningRoomPort from "../../Babylon/LearningRoom/ILearningRoomPort";
 import LearningRoomPresenter from "../../Babylon/LearningRoom/LearningRoomPresenter";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
-import LearningRoomBuilder from "../../PresentationBuilder/LearningRoomBuilder";
+import LearningRoomBuilder from "../../Babylon/LearningRoom/LearningRoomBuilder";
 import IViewModelProvider from "../../ViewModelProvider/IViewModelProvider";
 import LearningWorldViewModel from "./LearningWorldViewModel";
 
