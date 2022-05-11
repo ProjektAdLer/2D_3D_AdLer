@@ -1,4 +1,6 @@
+import { APILearningRoomTO } from "./../../Adapters/Backend/APILearningRoomTO";
 import { inject, injectable } from "inversify";
+import { APILearningElementTO } from "../../Adapters/Backend/APILearningElementTO";
 import { type IBackend } from "../../Adapters/Backend/IBackend";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
@@ -41,37 +43,46 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   }
 
   private async load(): Promise<void> {
-    // Wait for Fake API
-    const worldNameResp = await this.backend.getWorld();
+    const worldResp = await this.backend.getWorld();
+    const learningRoomResp =
+      (await this.backend.getLearningRooms()) as APILearningRoomTO[];
+    const learningElementResp =
+      (await this.backend.getLearningElements()) as APILearningElementTO[];
 
     if (this.container.getEntitiesOfType(LearningWorldEntity).length === 0) {
-      let elementEntities = new Array<LearningElementEntity>();
-      for (let i = 0; i < 4; i++) {
-        elementEntities.push(
-          this.container.createEntity<LearningElementEntity>(
-            {
-              type: "h5p",
-            },
-            LearningElementEntity
-          )
+      // Learning Elements
+      const learningElementEntities: LearningElementEntity[] = [];
+      learningElementResp.forEach((element) => {
+        const returnvValue = this.container.createEntity<LearningElementEntity>(
+          {
+            learningElementId: element.id,
+            type: "h5p",
+            value: element.value[0].value,
+            requirement: element.requirements[0].value,
+          },
+          LearningElementEntity
         );
-      }
+
+        learningElementEntities.push(returnvValue);
+      });
+
+      // Learning Room
       let roomEntity = this.container.createEntity<LearningRoomEntity>(
         {
-          learningElements: elementEntities,
+          roomId: learningRoomResp[0].id,
+          learningElements: learningElementEntities,
         },
         LearningRoomEntity
       );
-      this.container.createEntity<LearningWorldEntity>(
-        {
-          worldName: worldNameResp.name,
-          learningRooms: [roomEntity],
-        },
-        LearningWorldEntity
-      );
+      // Learning World
+      this.learningWorldEntity =
+        this.container.createEntity<LearningWorldEntity>(
+          {
+            worldName: worldResp.name,
+            learningRooms: [roomEntity],
+          },
+          LearningWorldEntity
+        );
     }
-
-    this.learningWorldEntity =
-      this.container.getEntitiesOfType(LearningWorldEntity)[0];
   }
 }

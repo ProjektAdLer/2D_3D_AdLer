@@ -43,6 +43,7 @@ export default function H5PContent(props: { h5pEntityId: string }) {
         learningElementEntity.h5PFileName.Value
       )}
       style={{ width: "95%" }}
+      title="Embedded H5P"
     ></iframe>
   );
 }

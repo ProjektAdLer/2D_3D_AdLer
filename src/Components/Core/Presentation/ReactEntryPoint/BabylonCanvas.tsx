@@ -1,8 +1,7 @@
-import "reflect-metadata";
-
 import { useEffect, useRef } from "react";
-import ICoreFactory from "../../API/ICoreFactory";
-import CoreFactory from "../../API/CoreFactory";
+import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
+import ICore from "../../API/ICore";
+import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 
 export default function BabylonCanvas(props: any) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -11,9 +10,7 @@ export default function BabylonCanvas(props: any) {
     if (canvasRef) {
       const canvas = canvasRef.current;
 
-      // We use a Factory here, because React does not support DI - PG
-      const coreFactory: ICoreFactory = new CoreFactory();
-      const engineCore = coreFactory.createCore();
+      const engineCore = CoreDIContainer.get<ICore>(CORE_TYPES.ICore);
       if (canvas) {
         engineCore.setupBabylon(canvas);
       } else {
