@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 const VideoContent = (props: { embedId: string }) => (
   <div>
