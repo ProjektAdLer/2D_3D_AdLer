@@ -16,7 +16,7 @@ export default class LearningElementStartedUseCase
     const entity =
       this.entityContainer.filterEntitiesOfTye<LearningElementEntity>(
         LearningElementEntity,
-        (e) => e.learningElementId === data?.learningElementId
+        (e) => e.id === data?.learningElementId
       );
 
     if (entity.length === 0)

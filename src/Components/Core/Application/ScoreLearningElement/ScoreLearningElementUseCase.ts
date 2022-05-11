@@ -1,3 +1,4 @@
+import { LearningComponentID } from "./../../Types/EnitityTypes";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
@@ -13,7 +14,7 @@ export default class ScoreLearningElementUseCase
     private entityContainer: IEntityContainer
   ) {}
 
-  execute(data?: { learningElementId: string }): void {
+  execute(data?: { learningElementId: LearningComponentID }): void {
     if (!data || !data.learningElementId) {
       throw new Error("data is undefined");
     }
