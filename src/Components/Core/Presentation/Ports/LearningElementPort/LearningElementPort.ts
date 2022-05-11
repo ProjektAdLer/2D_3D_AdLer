@@ -18,6 +18,17 @@ export default class LearningElementPort implements ILearningElementPort {
   presentLearningElementStarted(
     learningElementStartedTO: LearningElementTO
   ): void {
-    throw new Error("Method not implemented.");
+    throw new Error("Method not implemented. (Port)");
+  }
+
+  debugDoesLEExist(learningElementId: number): boolean {
+    if (
+      this.learningElementPresenters.find(
+        (presenter) => presenter.ViewModel.id === learningElementId.toString()
+      )
+    ) {
+      return true;
+    }
+    return false;
   }
 }

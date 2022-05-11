@@ -7,4 +7,6 @@ export default interface ILearningElementPort {
   presentLearningElementStarted(
     learningElementStartedTO: LearningElementTO
   ): void;
+
+  debugDoesLEExist(learningElementId: number): boolean;
 }
