@@ -10,6 +10,7 @@ import H5PContent from "./H5PContent";
 import IEntityManager from "../../Domain/EntityManager/IEntityManager";
 import StyledModal from "../ReactBaseComponents/StyledModal";
 import ImageContent from "./ImageContent";
+import VideoContent from "./VideoContent";
 
 const elementBuilder = (learningElementID: string) => {
   const entityManager = CoreDIContainer.get(
@@ -23,7 +24,7 @@ const elementBuilder = (learningElementID: string) => {
     );
 
   const { h5p, video, text, image } = LearningElementTypeSymbols;
-
+  // TODO: Getting the LearningelementID for each type from Usecase ~FK
   switch (learningElementConainerEntity.Value.learningElementType.Value) {
     case h5p:
       return (
@@ -36,14 +37,16 @@ const elementBuilder = (learningElementID: string) => {
     case text:
       return <div>text TBI</div>;
     case video:
-      return <div>video TBI</div>;
+      return <VideoContent embedId="iik25wqIuFo" />;
     case image:
       return (
-        <ImageContent
-          imagesrc={
-            "https://cdn.discordapp.com/attachments/887582352560246804/949558830486929458/Doku_Raumaufbau.png"
-          }
-        />
+        <div className="h-100 w-100">
+          <ImageContent
+            imagesrc={
+              "https://cdn.discordapp.com/attachments/887582352560246804/949558830486929458/Doku_Raumaufbau.png"
+            }
+          />
+        </div>
       );
     default:
       return <div>No Learning Element selected</div>;
