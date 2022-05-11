@@ -1,23 +1,40 @@
-import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
-import ILearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElement/ILearningElementPresenter";
+import { Vector3 } from "@babylonjs/core";
+import { LearningElementTO } from "../../../../Core/Application/LoadWorld/ILearningWorldPort";
+import LearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementPresenter";
+import LearningElementViewModel from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementViewModel";
 
 jest.mock("@babylonjs/core");
 
+const testElementTO: LearningElementTO = {
+  id: "test",
+  type: "h5p",
+};
+const testVector = new Vector3(1, 2, 3);
+
 describe("LearningElementPresenter", () => {
-  let learningElementPresenter: ILearningElementPresenter;
+  let presenter: LearningElementPresenter;
 
   beforeEach(() => {
-    learningElementPresenter = CoreDIContainer.get<ILearningElementPresenter>(
-      CORE_TYPES.ILearingElementPresenter
-    );
+    presenter = new LearningElementPresenter();
   });
 
   afterAll(() => {
     jest.restoreAllMocks();
   });
 
-  test.todo("loadMeshAsync");
+  test("presentLearningElement calls the babylon engine", () => {
+    presenter.ViewModel = new LearningElementViewModel();
+    presenter.presentLearningElement(testElementTO, [testVector, 0]);
 
-  test.todo("test registerAction");
+    expect(presenter["viewModel"].id).toBe(testElementTO.id);
+    expect(presenter["viewModel"].type.Value).toBe(testElementTO.type);
+    expect(presenter["viewModel"].position.Value).toBe(testVector);
+    expect(presenter["viewModel"].rotation.Value).toBe(0);
+  });
+
+  test("presentLearningElement throws error when no view model is set", () => {
+    expect(() => {
+      presenter.presentLearningElement(testElementTO, [testVector, 0]);
+    }).toThrowError("ViewModel not set");
+  });
 });
