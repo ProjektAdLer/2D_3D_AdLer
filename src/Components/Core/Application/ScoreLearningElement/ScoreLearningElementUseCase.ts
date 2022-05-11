@@ -2,7 +2,6 @@ import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
 import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
-import IEntityManager from "../../Domain/EntityManager/IEntityManager";
 import IScoreLearningElementUseCase from "./IScoreLearningElementUseCase";
 
 injectable();
