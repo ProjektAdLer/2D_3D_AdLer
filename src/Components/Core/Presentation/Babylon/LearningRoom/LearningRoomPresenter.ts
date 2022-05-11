@@ -5,7 +5,6 @@ import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
-import LearningElementBuilder from "../../PresentationBuilder/LearningElementBuilder";
 import ILearningRoomPort from "./ILearningRoomPort";
 import LearningRoomViewModel from "./LearningRoomViewModel";
 

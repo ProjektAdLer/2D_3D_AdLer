@@ -1,14 +1,14 @@
 import { inject, injectable } from "inversify";
-import ILearningElementPort from "../../Application/LearningElementStarted/ILearningElementPort";
-import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
-import ILearningElementController from "../Babylon/LearningElement/ILearningElementController";
-import ILearningElementPresenter from "../Babylon/LearningElement/ILearningElementPresenter";
-import ILearningElementView from "../Babylon/LearningElement/ILearningElementView";
-import LearningElementController from "../Babylon/LearningElement/LearningElementController";
-import LearningElementPresenter from "../Babylon/LearningElement/LearningElementPresenter";
-import LearningElementView from "../Babylon/LearningElement/LearningElementView";
-import LearningElementViewModel from "../Babylon/LearningElement/LearningElementViewModel";
-import IPresentationBuilder from "./IPresentationBuilder";
+import ILearningElementPort from "../../../Application/LearningElementStarted/ILearningElementPort";
+import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
+import ILearningElementController from "./ILearningElementController";
+import ILearningElementPresenter from "./ILearningElementPresenter";
+import ILearningElementView from "./ILearningElementView";
+import LearningElementController from "./LearningElementController";
+import LearningElementPresenter from "./LearningElementPresenter";
+import LearningElementView from "./LearningElementView";
+import LearningElementViewModel from "./LearningElementViewModel";
+import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 
 @injectable()
 export default class LearningElementBuilder implements IPresentationBuilder {

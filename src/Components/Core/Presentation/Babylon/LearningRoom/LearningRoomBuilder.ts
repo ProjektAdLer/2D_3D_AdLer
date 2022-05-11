@@ -1,15 +1,15 @@
 import { injectable } from "inversify";
-import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../DependencyInjection/CoreTypes";
-import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
-import ILearningRoomController from "../Babylon/LearningRoom/ILearningRoomController";
-import ILearningRoomPort from "../Babylon/LearningRoom/ILearningRoomPort";
-import LearningRoomController from "../Babylon/LearningRoom/LearningRoomController";
-import LearningRoomPresenter from "../Babylon/LearningRoom/LearningRoomPresenter";
-import LearningRoomView from "../Babylon/LearningRoom/LearningRoomView";
-import LearningRoomViewModel from "../Babylon/LearningRoom/LearningRoomViewModel";
-import SceneController from "../Babylon/SceneManagment/SceneController";
-import IPresentationBuilder from "./IPresentationBuilder";
+import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
+import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
+import ILearningRoomController from "./ILearningRoomController";
+import ILearningRoomPort from "./ILearningRoomPort";
+import LearningRoomController from "./LearningRoomController";
+import LearningRoomPresenter from "./LearningRoomPresenter";
+import LearningRoomView from "./LearningRoomView";
+import LearningRoomViewModel from "./LearningRoomViewModel";
+import SceneController from "../SceneManagment/SceneController";
+import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 
 @injectable()
 export default class LearningRoomBuilder implements IPresentationBuilder {
