@@ -1,7 +1,4 @@
 import { useRef } from "react";
-import EH5PLearningElement from "../../../Domain/Entities/LearningElements/H5PLearningElement";
-import useEntity from "../CustomHooks/useEntity";
-
 const createIframeUrl = (contextId: number, fileName: string) => {
   // In addition to contextId and fileName, in the future, we will also need a package
   // the package number is indicated by the size of the array returned by the REST call
@@ -19,19 +16,19 @@ const createIframeUrl = (contextId: number, fileName: string) => {
 };
 
 export default function H5PContent(props: { h5pEntityId: string }) {
-  const [learningElementEntity] = useEntity<EH5PLearningElement>(
-    props.h5pEntityId,
-    EH5PLearningElement
-  );
+  // const [learningElementEntity] = useEntity<EH5PLearningElement>(
+  //   props.h5pEntityId,
+  //   EH5PLearningElement
+  // );
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  if (!learningElementEntity)
-    return (
-      <div>
-        <h1>Lernelement wird geladen</h1>
-      </div>
-    );
+  // if (!learningElementEntity)
+  //   return (
+  //     <div>
+  //       <h1>Lernelement wird geladen</h1>
+  //     </div>
+  //   );
 
   return (
     <iframe
@@ -39,8 +36,8 @@ export default function H5PContent(props: { h5pEntityId: string }) {
       ref={iframeRef}
       allowFullScreen
       src={createIframeUrl(
-        learningElementEntity.h5PcontextId.Value,
-        learningElementEntity.h5PFileName.Value
+        0, //learningElementEntity.h5PcontextId.Value,
+        "ololo" //learningElementEntity.h5PFileName.Value
       )}
       style={{ width: "95%" }}
       title="Embedded H5P"

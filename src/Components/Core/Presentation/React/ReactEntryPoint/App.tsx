@@ -14,7 +14,7 @@ function App() {
         <ScorePanel />
         <WorldNamePanel />
         <BabylonCanvas className="w-screen h-screen" />
-        <LearningElementModal />
+        {/* <LearningElementModal /> */}
       </div>
     </React.Fragment>
   );

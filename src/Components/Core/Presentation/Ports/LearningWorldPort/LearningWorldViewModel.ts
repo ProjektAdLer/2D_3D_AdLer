@@ -1,10 +1,10 @@
 import { injectable } from "inversify";
-import ObservablePrimitive from "../../../Domain/EntityManager/Observables/ObservablePrimitive";
+import Observable from "../../../../../Lib/Observable";
 
 @injectable()
 export default class LearningWorldViewModel {
   public id: string;
 
-  public worldName = new ObservablePrimitive<string>("");
-  public worldNameLoading = new ObservablePrimitive<boolean>(false);
+  public worldName = new Observable<string>("");
+  public worldNameLoading = new Observable<boolean>(false);
 }

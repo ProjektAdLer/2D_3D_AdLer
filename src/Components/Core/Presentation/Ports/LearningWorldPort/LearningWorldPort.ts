@@ -40,7 +40,7 @@ export default class LearningWorldPort implements ILearningWorldPort {
       this.viewModel,
       LearningWorldViewModel
     );
-    this.viewModel.worldName.setValue(learningWorldTO.worldName);
-    this.viewModel.worldNameLoading.setValue(false);
+    this.viewModel.worldName.Value = learningWorldTO.worldName;
+    this.viewModel.worldNameLoading.Value = false;
   }
 }

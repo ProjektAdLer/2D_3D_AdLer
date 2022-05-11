@@ -1,4 +1,4 @@
-import AbstractEntity from "../../Entities/AbstractEntity";
+import AbstractEntity from "../../../../../../Legacy/AbstractEntity";
 import AbstractObservable from "./AbstractObservable";
 
 export default class ObservableClass<

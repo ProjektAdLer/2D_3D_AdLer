@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import AbstractEntity from "../Entities/AbstractEntity";
+import AbstractEntity from "../../../../../Legacy/AbstractEntity";
 import RootEntity from "../Entities/RootEntity";
 import ObservableClass from "./Observables/ObservableClass";
 import { Entity, EntityReference } from "../../Types/EntityManagerTypes";
@@ -20,7 +20,7 @@ export default class EntityManager implements IEntityManager {
     this.entityMap.set(this.rootEntity.Value.id, this.rootEntity);
   }
 
-  createEntity<T extends AbstractEntity, U extends AbstractEntity>(
+  createEntity<T, U>(
     entityData: Partial<Entity<T>>,
     parentEntityId: string,
     parentEntityMember: EntityReference<U>,

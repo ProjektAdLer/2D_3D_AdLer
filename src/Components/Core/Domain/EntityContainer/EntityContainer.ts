@@ -1,19 +1,11 @@
 import { injectable } from "inversify";
 import { ConstructorReference } from "../../Types/EntityManagerTypes";
-import AbstractEntity from "../Entities/AbstractEntity";
-import RootEntity from "../Entities/RootEntity";
+import AbstractEntity from "../../../../../Legacy/AbstractEntity";
 import IEntityContainer from "./IEntityContainer";
 
 @injectable()
 export default class EntityContainer implements IEntityContainer {
   private entityMap = new Map<ConstructorReference<object>, object[]>();
-
-  private rootEntity: RootEntity;
-
-  constructor() {
-    this.rootEntity = new RootEntity();
-    this.entityMap.set(RootEntity, [this.rootEntity]);
-  }
 
   createEntity<T extends object>(
     entityData: Partial<T>,
@@ -56,10 +48,5 @@ export default class EntityContainer implements IEntityContainer {
         entityList.splice(index, 1);
       }
     }
-  }
-
-  getRootEntity(): RootEntity {
-    if (!this.rootEntity) throw new Error("Root Entity not set");
-    return this.rootEntity;
   }
 }

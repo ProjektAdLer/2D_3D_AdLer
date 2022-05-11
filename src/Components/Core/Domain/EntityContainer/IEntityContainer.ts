@@ -1,6 +1,5 @@
 import { ConstructorReference } from "../../Types/EntityManagerTypes";
-import AbstractEntity from "../Entities/AbstractEntity";
-import RootEntity from "../Entities/RootEntity";
+import AbstractEntity from "../../../../../Legacy/AbstractEntity";
 
 export default interface IEntityContainer {
   /**
@@ -46,5 +45,4 @@ export default interface IEntityContainer {
    * gets the Root Entity
    * @deprecated This will likely be removed in the future
    */
-  getRootEntity(): RootEntity;
 }

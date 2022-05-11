@@ -26,6 +26,11 @@
     "types": ["reflect-metadata", "jest"],
     "strictPropertyInitialization": false
   },
-  "include": ["src", "public/ThirdParty"],
+  "include": [
+    "src",
+    "public/ThirdParty",
+    "Legacy/AbstractEntity.ts",
+    "Legacy/useEntity.ts"
+  ],
   "exclude": ["public/ThirdParty/H5PResizer.js", "src/**/*.test.ts"]
 }

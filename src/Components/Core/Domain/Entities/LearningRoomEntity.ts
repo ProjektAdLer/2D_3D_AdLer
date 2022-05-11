@@ -1,7 +1,6 @@
-import AbstractEntity from "./AbstractEntity";
 import LearningElementEntity from "./LearningElementEntity";
 
-export default class LearningRoomEntity extends AbstractEntity {
+export default class LearningRoomEntity {
   public roomId: number;
   public learningElements: LearningElementEntity[];
 }

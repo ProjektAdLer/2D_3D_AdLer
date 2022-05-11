@@ -4,28 +4,24 @@ import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import usePrimitive from "../CustomHooks/usePrimitive";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
-import IEntityManager from "../../../Domain/EntityManager/IEntityManager";
 import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
 
 export default function MenuBar() {
-  const entityManager = useInjection<IEntityManager>(CORE_TYPES.IEntityManager);
-
   const loadWorldController = new LoadWorldController();
 
-  const rootEntity = entityManager.getRootEntity();
-  const [, setShowModal] = usePrimitive(rootEntity.Value.showModal);
+  // const [, setShowModal] = usePrimitive(rootEntity.Value.showModal);
   return (
     <StyledContainer className="top-0 left-0 flex flex-col justify-center">
       <StyledButton
         onClick={() => {
-          setShowModal(true);
+          // setShowModal(true);
         }}
       >
         <img src="icons/h5p_icon.svg" className="w-10"></img>
       </StyledButton>
       <StyledButton
         onClick={() => {
-          setShowModal(true);
+          // setShowModal(true);
         }}
       >
         <div className="w-100% flex justify-center">
@@ -34,7 +30,7 @@ export default function MenuBar() {
       </StyledButton>
       <StyledButton
         onClick={() => {
-          setShowModal(true);
+          // setShowModal(true);
         }}
       >
         <img src="/icons/bild_icon.svg" className="w-10"></img>
@@ -42,7 +38,7 @@ export default function MenuBar() {
 
       <StyledButton
         onClick={() => {
-          setShowModal(true);
+          // setShowModal(true);
         }}
       >
         <img src="/icons/Zettel_darkblue_text-icon.svg" className="w-10"></img>

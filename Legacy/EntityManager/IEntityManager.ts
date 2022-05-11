@@ -1,5 +1,3 @@
-import AbstractEntity from "../../Domain/Entities/AbstractEntity";
-import RootEntity from "../../Domain/Entities/RootEntity";
 import ObservableClass from "./Observables/ObservableClass";
 import { Entity, EntityReference } from "../../Types/EntityManagerTypes";
 
@@ -16,7 +14,7 @@ export default interface IEntityManager {
    * @param parentEntityMember The member of the parent entity where the new entity will be stored
    * @param entityType The type of the new entity (This is needed because of limitations of the TypeScript compiler)
    */
-  createEntity<T extends AbstractEntity, U extends AbstractEntity>(
+  createEntity<T, U>(
     entityData: Partial<Entity<T>>,
     parentEntityId: string,
     parentEntityMember: EntityReference<U>,
@@ -29,13 +27,9 @@ export default interface IEntityManager {
    * @param uuid The UUID of the entity
    * @param entityType The class of the entity (This is needed because of limitations of the TypeScript compiler)
    */
-  getEntityById<T extends AbstractEntity>(
-    uuid: string,
-    entityType: { new (): T }
-  ): ObservableClass<T>;
+  getEntityById<T>(uuid: string, entityType: { new (): T }): ObservableClass<T>;
 
   /**
    * @returns the Root Entity
    */
-  getRootEntity(): ObservableClass<RootEntity>;
 }

@@ -1,4 +1,4 @@
-import AbstractEntity from "../../../Core/Domain/Entities/AbstractEntity";
+import AbstractEntity from "../../../../../Legacy/AbstractEntity";
 
 export class TestEntity extends AbstractEntity {
   test1: string;

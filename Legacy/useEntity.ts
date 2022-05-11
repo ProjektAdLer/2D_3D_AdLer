@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useInjection } from "inversify-react";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import AbstractEntity from "../../../Domain/Entities/AbstractEntity";
+import CORE_TYPES from "../src/Components/Core/DependencyInjection/CoreTypes";
+import AbstractEntity from "./AbstractEntity";
 import ObservableClass from "../../../Domain/EntityManager/Observables/ObservableClass";
 import IEntityManager from "../../../Domain/EntityManager/IEntityManager";
 
