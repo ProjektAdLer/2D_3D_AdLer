@@ -1,7 +1,7 @@
 import React from "react";
 import { useInjection } from "inversify-react";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import usePrimitive from "../CustomHooks/usePrimitive";
+import useObservable from "../CustomHooks/usePrimitive";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
@@ -9,7 +9,7 @@ import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
 export default function MenuBar() {
   const loadWorldController = new LoadWorldController();
 
-  // const [, setShowModal] = usePrimitive(rootEntity.Value.showModal);
+  // const [, setShowModal] = useObservable(rootEntity.Value.showModal);
   return (
     <StyledContainer className="top-0 left-0 flex flex-col justify-center">
       <StyledButton

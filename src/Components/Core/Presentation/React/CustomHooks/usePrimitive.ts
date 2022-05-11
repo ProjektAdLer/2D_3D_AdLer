@@ -1,31 +1,29 @@
 import { useEffect, useState } from "react";
-import ObservablePrimitive, {
-  Primitive,
-} from "../../../Domain/EntityManager/Observables/ObservablePrimitive";
+import Observable from "../../../../../Lib/Observable";
 
-export default function usePrimitive<U extends Primitive>(
-  primitive: ObservablePrimitive<U>
+export default function useObservable<U>(
+  observable: Observable<U>
 ): [U, (input: U) => void] {
   const [data, setData] = useState<U>();
 
   useEffect(() => {
-    if (primitive) {
-      setData(primitive.Value);
+    if (observable) {
+      setData(observable.Value);
 
-      primitive.subscribe(setData);
+      observable.subscribe(setData);
     }
 
     return () => {
-      if (primitive) {
-        primitive.unsubscribe(setData);
+      if (observable) {
+        observable.unsubscribe(setData);
       }
     };
-  }, [primitive]);
+  }, [observable]);
 
   return [
     data as U,
     (input: U) => {
-      primitive.setValue(input);
+      observable.Value = input;
     },
   ];
 }

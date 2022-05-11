@@ -1,6 +1,6 @@
 import React from "react";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
-import usePrimitive from "../CustomHooks/usePrimitive";
+import useObservable from "../CustomHooks/usePrimitive";
 import LearningWorldComponent from "../../Ports/LearningWorldPort/LearningWorldComponent";
 import useViewModelProvider from "../../ViewModelProvider/useViewModelProvider";
 import LearningWorldViewModel from "../../Ports/LearningWorldPort/LearningWorldViewModel";
@@ -10,8 +10,8 @@ export default function WorldNamePanel() {
     LearningWorldViewModel
   );
 
-  const [worldName] = usePrimitive<string>(viewModel[0]?.worldName);
-  const [worldNameLoading] = usePrimitive<boolean>(
+  const [worldName] = useObservable<string>(viewModel[0]?.worldName);
+  const [worldNameLoading] = useObservable<boolean>(
     viewModel[0]?.worldNameLoading
   );
   return (

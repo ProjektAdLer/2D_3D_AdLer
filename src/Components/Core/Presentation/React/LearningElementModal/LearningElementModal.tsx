@@ -5,7 +5,7 @@ import H5PComponent from "./H5PComponent";
 import ImageComponent from "./ImageComponent";
 import VideoComponent from "./VideoComponent";
 import TextComponent from "./TextComponent";
-import LearningElementEntity from "../../../Domain/Entities/LearningElementEntity";
+import useObservableentEntity from "../../../Domain/Entities/LearningElementEntity";
 
 const elementBuilder = (learningElementID: string) => {
   const loremText =
