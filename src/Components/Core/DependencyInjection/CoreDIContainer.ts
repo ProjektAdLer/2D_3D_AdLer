@@ -2,8 +2,6 @@ import { LoadWorldController } from "../Presentation/React/LoadWorldButton/LoadW
 import ILoadWorldController from "../Presentation/React/LoadWorldButton/ILoadWorldController";
 import { Container } from "inversify";
 import CORE_TYPES from "./CoreTypes";
-import IEngineManager from "../Presentation/Babylon/EngineManager/IEngineManager";
-import EngineManager from "../Presentation/Babylon/EngineManager/EngineManager";
 import ISceneView from "../Presentation/Babylon/SceneManagment/ISceneView";
 import SceneView from "../Presentation/Babylon/SceneManagment/SceneView";
 import SceneViewModel from "../Presentation/Babylon/SceneManagment/SceneViewModel";
@@ -25,11 +23,6 @@ import PortsDIContainer from "./Ports/PortsDIContainer";
 
 var CoreDIContainer = new Container();
 
-// Engine
-CoreDIContainer.bind<IEngineManager>(CORE_TYPES.IEngineManager)
-  .to(EngineManager)
-  .inSingletonScope();
-
 // Scene
 CoreDIContainer.bind<ISceneView>(CORE_TYPES.ISceneView)
   .to(SceneView)
@@ -39,13 +32,7 @@ CoreDIContainer.bind<ISceneController>(CORE_TYPES.ISceneController)
   .to(SceneController)
   .inSingletonScope();
 
-// bind other CreateSceneClass here for testing puposes -MK
-CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
-  MainScene
-);
-
 // Learning Element
-
 CoreDIContainer.bind<ILearningElementView>(CORE_TYPES.ILearningElementView).to(
   LearningElementView
 );
@@ -56,19 +43,21 @@ CoreDIContainer.bind<ILoadWorldController>(CORE_TYPES.ILoadWorldController)
   .to(LoadWorldController)
   .inSingletonScope();
 
-// CoreDIContainer.bind<ILearningElementStartedPort>(CORE_TYPES.ILearningElementPort)
-//   .to(LearningElementPort)
-// Presentation Builder Pattern
-
 CoreDIContainer.bind<IPresentationDirector>(
   CORE_TYPES.IPresentationDirector
 ).to(PresentationDirector);
 CoreDIContainer.bind<IPresentationBuilder>(CORE_TYPES.ILearningRoomBuilder).to(
   LearningRoomBuilder
 );
+
 CoreDIContainer.bind<IPresentationBuilder>(
   CORE_TYPES.ILearningElementBuilder
 ).to(LearningElementBuilder);
+
+// bind other CreateSceneClass here for testing puposes -MK
+CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
+  MainScene
+);
 
 CoreDIContainer.load(infrastructureDIContainer);
 CoreDIContainer.load(useCaseDIContainer);

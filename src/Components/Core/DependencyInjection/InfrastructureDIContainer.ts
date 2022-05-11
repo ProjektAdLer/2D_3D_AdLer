@@ -8,8 +8,14 @@ import ReactEntry from "../Presentation/React/ReactEntryPoint/ReactEntry";
 import IViewModelProvider from "../Presentation/ViewModelProvider/IViewModelProvider";
 import ViewModelProvider from "../Presentation/ViewModelProvider/ViewModelProvider";
 import CORE_TYPES from "./CoreTypes";
+import IEngineManager from "../Presentation/Babylon/EngineManager/IEngineManager";
+import EngineManager from "../Presentation/Babylon/EngineManager/EngineManager";
 
 const infrastructureDIContainer = new ContainerModule((bind) => {
+  bind<IEngineManager>(CORE_TYPES.IEngineManager)
+    .to(EngineManager)
+    .inSingletonScope();
+
   bind<IEntityContainer>(CORE_TYPES.IEntityContainer)
     .to(EntityContainer)
     .inSingletonScope();

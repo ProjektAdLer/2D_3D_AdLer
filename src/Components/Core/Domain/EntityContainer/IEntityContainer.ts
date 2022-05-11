@@ -1,5 +1,4 @@
 import { ConstructorReference } from "../../Types/EntityManagerTypes";
-import AbstractEntity from "../../../../../Legacy/AbstractEntity";
 
 export default interface IEntityContainer {
   /**

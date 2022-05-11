@@ -1,4 +1,3 @@
-import React from "react";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import useObservable from "../CustomHooks/usePrimitive";
 import LearningWorldComponent from "../../Ports/LearningWorldPort/LearningWorldComponent";
