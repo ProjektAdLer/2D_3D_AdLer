@@ -1,8 +1,10 @@
 import { inject } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
+import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
 import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import { IDTO } from "../Abstract/IDTO";
+import ILearningElementPort from "./ILearningElementPort";
 import ILearningElementStartedUseCase from "./ILearningElementStartedUseCase";
 
 export default class LearningElementStartedUseCase
@@ -10,9 +12,11 @@ export default class LearningElementStartedUseCase
 {
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
-    private entityContainer: IEntityContainer
+    private entityContainer: IEntityContainer,
+    @inject(PORT_TYPES.ILearningElementPort)
+    private learningElementPort: ILearningElementPort
   ) {}
-  execute(data?: { learningElementId: number }): Promise<void> {
+  execute(data?: { learningElementId: number }): void {
     const entity =
       this.entityContainer.filterEntitiesOfTye<LearningElementEntity>(
         LearningElementEntity,
@@ -24,8 +28,6 @@ export default class LearningElementStartedUseCase
         `Could not find learning element with id ${data?.learningElementId}`
       );
 
-    entity[0].isOpen = true;
-
-    return Promise.resolve();
+    this.learningElementPort.presentLearningElement(entity[0]);
   }
 }
