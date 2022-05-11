@@ -1,4 +1,4 @@
-import { LearningElementTypeSymbols } from "./../../../Presentation/LearningElement/Types/LearningElementTypes";
+import { LearningElementTypeSymbols } from "./../../../Presentation/Babylon/LearningElement/Types/LearningElementTypes";
 import ObservablePrimitive from "../../EntityManager/Observables/ObservablePrimitive";
 import AbstractEntity from "../AbstractEntity";
 

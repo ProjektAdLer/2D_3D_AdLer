@@ -1,11 +1,11 @@
 import { injectable } from "inversify";
-import ILearningElementController from "../LearningElement/ILearningElementController";
-import ILearningElementPresenter from "../LearningElement/ILearningElementPresenter";
-import ILearningElementView from "../LearningElement/ILearningElementView";
-import LearningElementController from "../LearningElement/LearningElementController";
-import LearningElementPresenter from "../LearningElement/LearningElementPresenter";
-import LearningElementView from "../LearningElement/LearningElementView";
-import LearningElementViewModel from "../LearningElement/LearningElementViewModel";
+import ILearningElementController from "../Babylon/LearningElement/ILearningElementController";
+import ILearningElementPresenter from "../Babylon/LearningElement/ILearningElementPresenter";
+import ILearningElementView from "../Babylon/LearningElement/ILearningElementView";
+import LearningElementController from "../Babylon/LearningElement/LearningElementController";
+import LearningElementPresenter from "../Babylon/LearningElement/LearningElementPresenter";
+import LearningElementView from "../Babylon/LearningElement/LearningElementView";
+import LearningElementViewModel from "../Babylon/LearningElement/LearningElementViewModel";
 import IPresentationBuilder from "./IPresentationBuilder";
 
 @injectable()

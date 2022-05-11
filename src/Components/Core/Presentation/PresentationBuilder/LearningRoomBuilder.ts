@@ -1,13 +1,13 @@
 import { injectable } from "inversify";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
-import ILearningRoomController from "../LearningRoom/ILearningRoomController";
-import ILearningRoomPort from "../LearningRoom/ILearningRoomPort";
-import LearningRoomController from "../LearningRoom/LearningRoomController";
-import LearningRoomPresenter from "../LearningRoom/LearningRoomPresenter";
-import LearningRoomView from "../LearningRoom/LearningRoomView";
-import LearningRoomViewModel from "../LearningRoom/LearningRoomViewModel";
-import SceneController from "../SceneManagment/SceneController";
+import ILearningRoomController from "../Babylon/LearningRoom/ILearningRoomController";
+import ILearningRoomPort from "../Babylon/LearningRoom/ILearningRoomPort";
+import LearningRoomController from "../Babylon/LearningRoom/LearningRoomController";
+import LearningRoomPresenter from "../Babylon/LearningRoom/LearningRoomPresenter";
+import LearningRoomView from "../Babylon/LearningRoom/LearningRoomView";
+import LearningRoomViewModel from "../Babylon/LearningRoom/LearningRoomViewModel";
+import SceneController from "../Babylon/SceneManagment/SceneController";
 import IPresentationBuilder from "./IPresentationBuilder";
 
 @injectable()

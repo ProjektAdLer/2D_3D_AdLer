@@ -1,33 +1,30 @@
-import { LoadWorldController } from "../Presentation/LoadWorldButton/LoadWorldController";
-import ILoadWorldController from "../Presentation/LoadWorldButton/ILoadWorldController";
+import { LoadWorldController } from "../Presentation/React/LoadWorldButton/LoadWorldController";
+import ILoadWorldController from "../Presentation/React/LoadWorldButton/ILoadWorldController";
 import { Container } from "inversify";
 import CORE_TYPES from "./CoreTypes";
 import IPresentation from "../Presentation/API/IPresentation";
 import Presentation from "../Presentation/API/Presentation";
 import ICore from "../API/ICore";
 import Core from "../API/Core";
-import IEngineManager from "../Presentation/EngineManager/IEngineManager";
-import EngineManager from "../Presentation/EngineManager/EngineManager";
-import ISceneView from "../Presentation/SceneManagment/ISceneView";
-import SceneView from "../Presentation/SceneManagment/SceneView";
-import SceneViewModel from "../Presentation/SceneManagment/SceneViewModel";
-import SceneController from "../Presentation/SceneManagment/SceneController";
-import MainScene from "../Presentation/SceneManagment/MainScene";
-import ICreateSceneClass from "../Presentation/SceneManagment/ICreateSceneClass";
-import ILearningElementView from "../Presentation/LearningElement/ILearningElementView";
-import LearningElementView from "../Presentation/LearningElement/LearningElementView";
-import LearningElementViewModel from "../Presentation/LearningElement/LearningElementViewModel";
-import ILearningElementController from "../Presentation/LearningElement/ILearningElementController";
-import LearningElementController from "../Presentation/LearningElement/LearningElementController";
-import ILearningElementPanelPresenter from "../Presentation/LearningElementPanel/ILearningElementPanelPresenter";
-import LearningElementPanelPresenter from "../Presentation/LearningElementPanel/LearningElementPanelPresenter";
-import LearningElementPanelViewModel from "../Presentation/LearningElementPanel/LearningElementPanelViewModel";
-import ISceneController from "../Presentation/SceneManagment/ISceneController";
+import IEngineManager from "../Presentation/Babylon/EngineManager/IEngineManager";
+import EngineManager from "../Presentation/Babylon/EngineManager/EngineManager";
+import ISceneView from "../Presentation/Babylon/SceneManagment/ISceneView";
+import SceneView from "../Presentation/Babylon/SceneManagment/SceneView";
+import SceneViewModel from "../Presentation/Babylon/SceneManagment/SceneViewModel";
+import SceneController from "../Presentation/Babylon/SceneManagment/SceneController";
+import MainScene from "../Presentation/Babylon/SceneManagment/MainScene";
+import ICreateSceneClass from "../Presentation/Babylon/SceneManagment/ICreateSceneClass";
+import ILearningElementView from "../Presentation/Babylon/LearningElement/ILearningElementView";
+import LearningElementView from "../Presentation/Babylon/LearningElement/LearningElementView";
+import LearningElementViewModel from "../Presentation/Babylon/LearningElement/LearningElementViewModel";
+import ILearningElementController from "../Presentation/Babylon/LearningElement/ILearningElementController";
+import LearningElementController from "../Presentation/Babylon/LearningElement/LearningElementController";
+import ISceneController from "../Presentation/Babylon/SceneManagment/ISceneController";
 import ILearningWorldPort from "../Application/LoadWorld/ILearningWorldPort";
-import LearningWorldPresenter from "../Presentation/LearningWorld/LearningWorldPresenter";
+import LearningWorldPort from "../Presentation/Ports/LearningWorldPort/LearningWorldPort";
 import infrastructureDIContainer from "./InfrastructureDIContainer";
-import ILearningRoomPort from "../Presentation/LearningRoom/ILearningRoomPort";
-import LearningRoomPresenter from "../Presentation/LearningRoom/LearningRoomPresenter";
+import ILearningRoomPort from "../Presentation/Babylon/LearningRoom/ILearningRoomPort";
+import LearningRoomPresenter from "../Presentation/Babylon/LearningRoom/LearningRoomPresenter";
 import IPresentationDirector from "../Presentation/PresentationBuilder/IPresentationDirector";
 import PresentationDirector from "../Presentation/PresentationBuilder/PresentationDirector";
 import LearningRoomBuilder from "../Presentation/PresentationBuilder/LearningRoomBuilder";
@@ -72,12 +69,6 @@ CoreDIContainer.bind<ILearningElementView>(CORE_TYPES.ILearningElementView).to(
 );
 CoreDIContainer.bind(LearningElementViewModel).toSelf();
 
-// Learning Element Panel
-CoreDIContainer.bind<ILearningElementPanelPresenter>(
-  CORE_TYPES.ILearningElementPanelPresenter
-).to(LearningElementPanelPresenter);
-CoreDIContainer.bind(LearningElementPanelViewModel).toSelf();
-
 // Controllers
 CoreDIContainer.bind<ILoadWorldController>(CORE_TYPES.ILoadWorldController)
   .to(LoadWorldController)
@@ -85,7 +76,7 @@ CoreDIContainer.bind<ILoadWorldController>(CORE_TYPES.ILoadWorldController)
 
 // Ports
 CoreDIContainer.bind<ILearningWorldPort>(CORE_TYPES.ILearningWorldPort)
-  .to(LearningWorldPresenter)
+  .to(LearningWorldPort)
   .inSingletonScope();
 
 CoreDIContainer.bind<ILearningRoomPort>(CORE_TYPES.ILearningRoomPort)

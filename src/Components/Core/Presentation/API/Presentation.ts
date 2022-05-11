@@ -1,10 +1,10 @@
 import { injectable, inject } from "inversify";
-import IEngineManager from "../EngineManager/IEngineManager";
+import IEngineManager from "../Babylon/EngineManager/IEngineManager";
 import IPresentation from "./IPresentation";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
-import IReactEntry from "../ReactEntryPoint/IReactEntry";
-import type ISceneController from "../SceneManagment/ISceneController";
+import IReactEntry from "../React/ReactEntryPoint/IReactEntry";
+import type ISceneController from "../Babylon/SceneManagment/ISceneController";
 
 @injectable()
 export default class Presentation implements IPresentation {

@@ -77,4 +77,46 @@ const learningElements = [
     ],
     name: "Text Lernelement",
   },
+  {
+    id: 42,
+    identifier: {
+      type: "name",
+      value: "LOC complete",
+    },
+    elementType: "text",
+    value: [
+      {
+        type: "points",
+        value: 10,
+      },
+    ],
+    requirements: [
+      {
+        type: "points",
+        value: 5,
+      },
+    ],
+    name: "H5P Lernelement",
+  },
+  {
+    id: 4,
+    identifier: {
+      type: "name",
+      value: "LOC complete",
+    },
+    elementType: "h5p",
+    value: [
+      {
+        type: "points",
+        value: 10,
+      },
+    ],
+    requirements: [
+      {
+        type: "points",
+        value: 5,
+      },
+    ],
+    name: "H5P Lernelement",
+  },
 ];
