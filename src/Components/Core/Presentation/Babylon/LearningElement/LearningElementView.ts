@@ -14,7 +14,10 @@ import type ISceneController from "../SceneManagment/ISceneController";
 import ILearningElementController from "./ILearningElementController";
 import ILearningElementView from "./ILearningElementView";
 import LearningElementViewModel from "./LearningElementViewModel";
-import { LearningElementTypeSymbols } from "./Types/LearningElementTypes";
+import {
+  getLearningElementSymbol,
+  LearningElementTypeSymbols,
+} from "./Types/LearningElementTypes";
 
 const modelLinks = {
   [LearningElementTypeSymbols.h5p]: require("../../../../../Assets/3DLink_H5P.glb"),
@@ -56,7 +59,7 @@ export default class LearningElementView implements ILearningElementView {
   private async loadMeshAsync(): Promise<void> {
     const result = await SceneLoader.ImportMeshAsync(
       "",
-      modelLinks[LearningElementTypeSymbols[this.viewModel.type.Value]],
+      modelLinks[getLearningElementSymbol(this.viewModel.type.Value)],
       "",
       this.sceneController.Scene
     );
