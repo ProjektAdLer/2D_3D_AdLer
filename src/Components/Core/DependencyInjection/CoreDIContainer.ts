@@ -2,8 +2,6 @@ import { LoadWorldController } from "../Presentation/React/LoadWorldButton/LoadW
 import ILoadWorldController from "../Presentation/React/LoadWorldButton/ILoadWorldController";
 import { Container } from "inversify";
 import CORE_TYPES from "./CoreTypes";
-import IPresentation from "../Presentation/API/IPresentation";
-import Presentation from "../Presentation/API/Presentation";
 import IEngineManager from "../Presentation/Babylon/EngineManager/IEngineManager";
 import EngineManager from "../Presentation/Babylon/EngineManager/EngineManager";
 import ISceneView from "../Presentation/Babylon/SceneManagment/ISceneView";
@@ -26,11 +24,6 @@ import useCaseDIContainer from "./UseCases/UseCaseDIConatiner";
 import PortsDIContainer from "./Ports/PortsDIContainer";
 
 var CoreDIContainer = new Container();
-
-// API classes
-CoreDIContainer.bind<IPresentation>(CORE_TYPES.IPresentation)
-  .to(Presentation)
-  .inSingletonScope();
 
 // Engine
 CoreDIContainer.bind<IEngineManager>(CORE_TYPES.IEngineManager)

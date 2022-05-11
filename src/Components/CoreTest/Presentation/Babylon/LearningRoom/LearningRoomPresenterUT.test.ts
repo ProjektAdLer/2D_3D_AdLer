@@ -1,8 +1,8 @@
 import { LearningRoomTO } from "../../../../Core/Application/LoadWorld/ILearningWorldPort";
+import LearningElementBuilder from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementBuilder";
 import LearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementPresenter";
 import LearningRoomPresenter from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomPresenter";
 import LearningRoomViewModel from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomViewModel";
-import LearningElementBuilder from "../../../../Core/Presentation/PresentationBuilder/LearningElementBuilder";
 import PresentationDirector from "../../../../Core/Presentation/PresentationBuilder/PresentationDirector";
 
 var presentLearningElementMock = jest.spyOn(
@@ -29,7 +29,7 @@ describe("LearningRoomPresenter", () => {
   test("presentLearningRoom throws error when viewmodel is not set", () => {
     expect(() => {
       roomPresenter.presentLearningRoom({
-        id: "",
+        id: 1,
         learningElements: [],
       });
     }).toThrowError("ViewModel not set");
@@ -46,7 +46,7 @@ describe("LearningRoomPresenter", () => {
     roomPresenter.ViewModel = viewModel;
 
     const roomTO: LearningRoomTO = {
-      id: "1",
+      id: 1,
       learningElements: [],
     };
 
@@ -59,10 +59,10 @@ describe("LearningRoomPresenter", () => {
     const viewModel = new LearningRoomViewModel();
     roomPresenter.ViewModel = viewModel;
     roomPresenter.presentLearningRoom({
-      id: "1",
+      id: 1,
       learningElements: [
         {
-          id: "2",
+          id: 2,
           type: "h5p",
         },
       ],
