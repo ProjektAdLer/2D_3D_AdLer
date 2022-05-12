@@ -14,8 +14,10 @@ export default function useViewModelProvider<VM, C = unknown>(
   const [controllers, setControllers] = useState<C[]>([]);
 
   function setState(newViewModel: VM[], newController: C[]): void {
-    if (newViewModel !== viewModels) setViewModels([...newViewModel]);
-    if (newController !== controllers) setControllers([...newController]);
+    if (newViewModel !== viewModels && isIterable(newViewModel))
+      setViewModels([...newViewModel]);
+    if (newController !== controllers && isIterable(newController))
+      setControllers([...newController]);
   }
 
   useEffect(() => {
@@ -26,4 +28,12 @@ export default function useViewModelProvider<VM, C = unknown>(
   }, []);
 
   return [viewModels, controllers];
+}
+
+function isIterable(obj: any) {
+  // checks for null and undefined
+  if (obj == null) {
+    return false;
+  }
+  return typeof obj[Symbol.iterator] === "function";
 }
