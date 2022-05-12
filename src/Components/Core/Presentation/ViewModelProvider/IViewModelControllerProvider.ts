@@ -1,3 +1,4 @@
+import { ConstructorReference } from "../../Types/EntityManagerTypes";
 export type callbackType<VM, C> = (viewModels: VM[], controllers: C[]) => void;
 
 export default interface IViewModelControllerProvider {
@@ -8,7 +9,7 @@ export default interface IViewModelControllerProvider {
    */
   registerTupelRequest<VM, C>(
     callback: callbackType<VM, C>,
-    viewModelClass: { new (): VM }
+    viewModelClass: ConstructorReference<VM>
   ): void;
 
   /**
@@ -17,8 +18,8 @@ export default interface IViewModelControllerProvider {
    * @param viewModelClass The type of view model to cancel the registration for.
    */
   cancelRequest<VM>(
-    callback: (viewModels: VM[]) => void,
-    viewModelClass: { new (): VM }
+    callback: callbackType<VM, unknown>,
+    viewModelClass: ConstructorReference<VM>
   ): void;
 
   /**
@@ -26,14 +27,30 @@ export default interface IViewModelControllerProvider {
    * @param viewModel The view model to register.
    * @param viewModelClass The type of the registered view model.
    */
-  registerViewModelOnly<T>(viewModel: T, viewModelClass: { new (): T }): void;
 
-  registerTupel<T>(viewModel: T, viewModelClass: { new (): T }): void;
+  registerViewModelOnly<VM>(
+    viewModel: VM,
+    viewModelClass: ConstructorReference<VM>
+  ): void;
+
+  /**
+   * Registers a view model and controller Tupel to be provided to all callbacks of the given type.
+   * @param viewModel The view model to register.
+   * @param controller The controller to register.
+   * @param viewModelClass The type of the registered view model.
+   * @param controllerClass The type of the registered controller.
+   */
+  registerTupel<VM, C>(
+    viewModel: VM,
+    controller: C,
+    viewModelClass: ConstructorReference<VM>,
+    controllerClass: ConstructorReference<C>
+  ): void;
 
   /**
    * Removes a view model from the provider.
    * @param viewModel The view model to remove.
    * @param viewModelClass The type of the removed view model.
    */
-  removeViewModel<T>(viewModel: T, viewModelClass: { new (): T }): void;
+  removeTupel<T>(viewModel: T, viewModelClass: ConstructorReference<T>): void;
 }

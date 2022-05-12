@@ -5,7 +5,7 @@ import EntityContainer from "../Domain/EntityContainer/EntityContainer";
 import IEntityContainer from "../Domain/EntityContainer/IEntityContainer";
 import IReactEntry from "../Presentation/React/ReactEntryPoint/IReactEntry";
 import ReactEntry from "../Presentation/React/ReactEntryPoint/ReactEntry";
-import IViewModelControllerProvider from "../Presentation/ViewModelProvider/IViewModelProvider";
+import IViewModelControllerProvider from "../Presentation/ViewModelProvider/IViewModelControllerProvider";
 import ViewModelProvider from "../Presentation/ViewModelProvider/ViewModelProvider";
 import CORE_TYPES from "./CoreTypes";
 import IEngineManager from "../Presentation/Babylon/EngineManager/IEngineManager";

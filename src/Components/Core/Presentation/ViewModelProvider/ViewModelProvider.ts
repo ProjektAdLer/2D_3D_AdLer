@@ -1,13 +1,19 @@
 import { injectable } from "inversify";
+import { ConstructorReference } from "../../Types/EntityManagerTypes";
 import IObservableContainer from "./IObservableContainer";
 import IViewModelControllerProvider, {
   callbackType,
-} from "./IViewModelProvider";
+} from "./IViewModelControllerProvider";
 import ObservableContainer from "./ObservableContainer";
 
 @injectable()
 export default class ViewModelProvider implements IViewModelControllerProvider {
-  registerViewModelOnly<T>(viewModel: T, viewModelClass: new () => T): void {
+  registerTupel<VM, C>(
+    viewModel: VM,
+    controller: C,
+    viewModelClass: ConstructorReference<VM>,
+    controllerClass: ConstructorReference<C>
+  ): void {
     throw new Error("Method not implemented.");
   }
   private containers: IObservableContainer<unknown>[] = [];
@@ -23,21 +29,25 @@ export default class ViewModelProvider implements IViewModelControllerProvider {
     }
   }
 
-  public cancelRequest<T>(
-    callback: (viewModels: T[]) => void,
-    viewModelClass: { new (): T }
+  public cancelRequest<VM>(
+    callback: callbackType<VM, unknown>,
+    viewModelClass: { new (): VM }
   ): void {
-    var container = this.findContainer<T>(viewModelClass);
-    if (container?.matchesType<T>(viewModelClass)) {
+    var container = this.findContainer<VM>(viewModelClass);
+    if (container?.matchesType<VM>(viewModelClass)) {
+      // @ts-ignore
       container?.cancelRequest(callback);
     }
   }
 
-  public registerTupel<T>(viewModel: T, viewModelClass: { new (): T }): void {
+  public registerViewModelOnly<T>(
+    viewModel: T,
+    viewModelClass: { new (): T }
+  ): void {
     this.findOrCreateContainer<T>(viewModelClass).addNewValue(viewModel);
   }
 
-  public removeViewModel<T>(viewModel: T, viewModelClass: { new (): T }): void {
+  public removeTupel<T>(viewModel: T, viewModelClass: { new (): T }): void {
     var container = this.findContainer<T>(viewModelClass);
     container?.removeValue(viewModel);
   }
