@@ -1,18 +1,24 @@
 import { injectable } from "inversify";
 import IObservableContainer from "./IObservableContainer";
-import IViewModelProvider from "./IViewModelProvider";
+import IViewModelControllerProvider, {
+  callbackType,
+} from "./IViewModelProvider";
 import ObservableContainer from "./ObservableContainer";
 
 @injectable()
-export default class ViewModelProvider implements IViewModelProvider {
+export default class ViewModelProvider implements IViewModelControllerProvider {
+  registerViewModelOnly<T>(viewModel: T, viewModelClass: new () => T): void {
+    throw new Error("Method not implemented.");
+  }
   private containers: IObservableContainer<unknown>[] = [];
 
-  public registerRequest<T>(
-    callback: (viewModels: T[]) => void,
+  public registerTupelRequest<T, C>(
+    callback: callbackType<T, C>,
     viewModelClass: { new (): T }
   ): void {
     var container = this.findOrCreateContainer<T>(viewModelClass);
     if (container.matchesType<T>(viewModelClass)) {
+      // @ts-ignore
       container.registerRequest(callback);
     }
   }
@@ -27,10 +33,7 @@ export default class ViewModelProvider implements IViewModelProvider {
     }
   }
 
-  public registerViewModel<T>(
-    viewModel: T,
-    viewModelClass: { new (): T }
-  ): void {
+  public registerTupel<T>(viewModel: T, viewModelClass: { new (): T }): void {
     this.findOrCreateContainer<T>(viewModelClass).addNewValue(viewModel);
   }
 

@@ -28,6 +28,6 @@ export default class LearningElementModalBuilder extends PresentationBuilder<
     super.buildViewModel();
     CoreDIContainer.get<ViewModelProvider>(
       CORE_TYPES.IViewModelProvider
-    ).registerViewModel(this.viewModel, LearningElementModalViewModel);
+    ).registerTupel(this.viewModel, LearningElementModalViewModel);
   }
 }

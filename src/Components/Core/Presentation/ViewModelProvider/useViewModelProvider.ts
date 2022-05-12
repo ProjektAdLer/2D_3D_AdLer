@@ -2,12 +2,12 @@ import { ConstructorReference } from "./../../Types/EntityManagerTypes";
 import { useInjection } from "inversify-react";
 import { useEffect, useState } from "react";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
-import IViewModelProvider from "./IViewModelProvider";
+import IViewModelControllerProvider from "./IViewModelProvider";
 
 export default function useViewModelProvider<VM, C>(
   viewModelType: ConstructorReference<VM>
 ): [VM[], C[]] {
-  const viewModelProvider = useInjection<IViewModelProvider>(
+  const viewModelProvider = useInjection<IViewModelControllerProvider>(
     CORE_TYPES.IViewModelProvider
   );
   const [viewModels, setViewModels] = useState<VM[]>([]);
@@ -18,7 +18,7 @@ export default function useViewModelProvider<VM, C>(
   }
 
   useEffect(() => {
-    viewModelProvider.registerRequest<VM>(setState, viewModelType);
+    viewModelProvider.registerTupelRequest<VM, C>(setState, viewModelType);
     return () => {
       viewModelProvider.cancelRequest<VM>(setState, viewModelType);
     };

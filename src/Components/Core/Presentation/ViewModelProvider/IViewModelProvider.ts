@@ -1,12 +1,14 @@
-export default interface IViewModelProvider {
+export type callbackType<VM, C> = (viewModels: VM[], controllers: C[]) => void;
+
+export default interface IViewModelControllerProvider {
   /**
    * Registers a callback for all view models of the given type. The callback is called every time a new view model of the given type is registered.
    * @param callback The callback to be called when a new view model is registered.
    * @param viewModelClass The type of view model to register for.
    */
-  registerRequest<T>(
-    callback: (viewModels: T[]) => void,
-    viewModelClass: { new (): T }
+  registerTupelRequest<VM, C>(
+    callback: callbackType<VM, C>,
+    viewModelClass: { new (): VM }
   ): void;
 
   /**
@@ -14,9 +16,9 @@ export default interface IViewModelProvider {
    * @param callback The callback to be cancelled.
    * @param viewModelClass The type of view model to cancel the registration for.
    */
-  cancelRequest<T>(
-    callback: (viewModels: T[]) => void,
-    viewModelClass: { new (): T }
+  cancelRequest<VM>(
+    callback: (viewModels: VM[]) => void,
+    viewModelClass: { new (): VM }
   ): void;
 
   /**
@@ -24,7 +26,9 @@ export default interface IViewModelProvider {
    * @param viewModel The view model to register.
    * @param viewModelClass The type of the registered view model.
    */
-  registerViewModel<T>(viewModel: T, viewModelClass: { new (): T }): void;
+  registerViewModelOnly<T>(viewModel: T, viewModelClass: { new (): T }): void;
+
+  registerTupel<T>(viewModel: T, viewModelClass: { new (): T }): void;
 
   /**
    * Removes a view model from the provider.

@@ -7,7 +7,7 @@ import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import ILearningRoomPort from "../../Babylon/LearningRoom/ILearningRoomPort";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
-import IViewModelProvider from "../../ViewModelProvider/IViewModelProvider";
+import IViewModelControllerProvider from "../../ViewModelProvider/IViewModelProvider";
 import LearningWorldViewModel from "./LearningWorldViewModel";
 
 @injectable()
@@ -17,7 +17,7 @@ export default class LearningWorldPort implements ILearningWorldPort {
 
   constructor(
     @inject(CORE_TYPES.IViewModelProvider)
-    private viewModelProvider: IViewModelProvider
+    private viewModelProvider: IViewModelControllerProvider
   ) {}
 
   public presentLearningWorld(learningWorldTO: LearningWorldTO): void {
@@ -34,7 +34,7 @@ export default class LearningWorldPort implements ILearningWorldPort {
     this.roomPresenter.presentLearningRoom(learningWorldTO.learningRooms[0]);
 
     this.viewModel = new LearningWorldViewModel();
-    this.viewModelProvider.registerViewModel<LearningWorldViewModel>(
+    this.viewModelProvider.registerTupel<LearningWorldViewModel>(
       this.viewModel,
       LearningWorldViewModel
     );
