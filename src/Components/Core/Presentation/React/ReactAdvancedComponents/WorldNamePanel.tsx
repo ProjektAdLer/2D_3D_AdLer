@@ -1,12 +1,12 @@
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import useObservable from "../CustomHooks/useObservable";
 import LearningWorldComponent from "../../Ports/LearningWorldPort/LearningWorldComponent";
-import useViewModelProvider from "../../ViewModelProvider/useViewModelProvider";
+import useViewModelControllerProvider from "../../ViewModelProvider/useViewModelControllerProvider";
 import LearningWorldViewModel from "../../Ports/LearningWorldPort/LearningWorldViewModel";
 import LearningWorldController from "../../Ports/LearningWorldPort/LearningWorldController";
 
 export default function WorldNamePanel() {
-  const [viewModel] = useViewModelProvider<LearningWorldViewModel>(
+  const [viewModel] = useViewModelControllerProvider<LearningWorldViewModel>(
     LearningWorldViewModel
   );
 

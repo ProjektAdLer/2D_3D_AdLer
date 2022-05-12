@@ -6,7 +6,9 @@ import TextComponent from "./SubComponents/TextComponent";
 import LearningElementModalViewModel from "./LearningElementModalViewModel";
 import StyledModal from "../ReactBaseComponents/StyledModal";
 import useObservable from "../CustomHooks/useObservable";
-import useViewModelProvider from "../../ViewModelProvider/useViewModelProvider";
+import useViewModelControllerProvider from "../../ViewModelProvider/useViewModelControllerProvider";
+import { useEffect } from "react";
+import LearningElementModalController from "./LearningElementModalController";
 
 const elementBuilder = (type: LearningElementType) => {
   const loremText =
@@ -34,13 +36,17 @@ const elementBuilder = (type: LearningElementType) => {
 };
 
 export default function LearningElementModal() {
-  const [viewModels] = useViewModelProvider(LearningElementModalViewModel);
+  const [viewModels, controllers] = useViewModelControllerProvider<
+    LearningElementModalViewModel,
+    LearningElementModalController
+  >(LearningElementModalViewModel);
   const [isOpen, setOpen] = useObservable<boolean>(viewModels[0]?.isOpen);
 
   return (
     <StyledModal
       onClose={() => {
         setOpen(false);
+        controllers[0].scoreLearningElement(viewModels[0]?.id.Value);
       }}
       //title={learningElementEntity.learningElementTitle.Value}
       footer="Ich bin der Fußteil"

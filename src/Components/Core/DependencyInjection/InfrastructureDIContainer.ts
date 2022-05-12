@@ -6,7 +6,7 @@ import IEntityContainer from "../Domain/EntityContainer/IEntityContainer";
 import IReactEntry from "../Presentation/React/ReactEntryPoint/IReactEntry";
 import ReactEntry from "../Presentation/React/ReactEntryPoint/ReactEntry";
 import IViewModelControllerProvider from "../Presentation/ViewModelProvider/IViewModelControllerProvider";
-import ViewModelProvider from "../Presentation/ViewModelProvider/ViewModelProvider";
+import ViewModelControllerProvider from "../Presentation/ViewModelProvider/ViewModelControllerProvider";
 import CORE_TYPES from "./CoreTypes";
 import IEngineManager from "../Presentation/Babylon/EngineManager/IEngineManager";
 import EngineManager from "../Presentation/Babylon/EngineManager/EngineManager";
@@ -22,7 +22,7 @@ const infrastructureDIContainer = new ContainerModule((bind) => {
 
   // View Model Provider
   bind<IViewModelControllerProvider>(CORE_TYPES.IViewModelProvider)
-    .to(ViewModelProvider)
+    .to(ViewModelControllerProvider)
     .inSingletonScope();
 
   // React Entry

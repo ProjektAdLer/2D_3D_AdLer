@@ -1,10 +1,10 @@
-import { ConstructorReference } from "./../../Types/EntityManagerTypes";
+import { ConstructorReference } from "../../Types/EntityManagerTypes";
 import { useInjection } from "inversify-react";
 import { useEffect, useState } from "react";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import IViewModelControllerProvider from "./IViewModelControllerProvider";
 
-export default function useViewModelProvider<VM, C = unknown>(
+export default function useViewModelControllerProvider<VM, C = unknown>(
   viewModelType: ConstructorReference<VM>
 ): [VM[], C[]] {
   const viewModelProvider = useInjection<IViewModelControllerProvider>(
@@ -13,17 +13,19 @@ export default function useViewModelProvider<VM, C = unknown>(
   const [viewModels, setViewModels] = useState<VM[]>([]);
   const [controllers, setControllers] = useState<C[]>([]);
 
-  function setState(newViewModel: VM[], newController: C[]): void {
-    if (newViewModel !== viewModels && isIterable(newViewModel))
-      setViewModels([...newViewModel]);
-    if (newController !== controllers && isIterable(newController))
-      setControllers([...newController]);
+  function callback(tupels: [VM, C][]): void {
+    const viewModels = tupels.map((tupel) => tupel[0]);
+    const controllers = tupels.map((tupel) => tupel[1]);
+
+    setViewModels([...viewModels]);
+
+    setControllers([...controllers]);
   }
 
   useEffect(() => {
-    viewModelProvider.registerTupelRequest<VM, C>(setState, viewModelType);
+    viewModelProvider.registerTupelRequest<VM, C>(callback, viewModelType);
     return () => {
-      viewModelProvider.cancelRequest<VM, C>(setState, viewModelType);
+      viewModelProvider.cancelRequest<VM, C>(callback, viewModelType);
     };
   }, []);
 

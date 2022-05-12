@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
-import ViewModelProvider from "../../ViewModelProvider/ViewModelProvider";
+import ViewModelControllerProvider from "../../ViewModelProvider/ViewModelControllerProvider";
 import LearningElementModalController from "./LearningElementModalController";
 import LearningElementModalPresenter from "./LearningElementModalPresenter";
 import LearningElementModalViewModel from "./LearningElementModalViewModel";
@@ -24,10 +24,16 @@ export default class LearningElementModalBuilder extends PresentationBuilder<
     );
   }
 
-  override buildViewModel(): void {
-    super.buildViewModel();
-    CoreDIContainer.get<ViewModelProvider>(
+  override buildController(): void {
+    super.buildController();
+    CoreDIContainer.get<ViewModelControllerProvider>(
       CORE_TYPES.IViewModelProvider
-    ).registerViewModelOnly(this.viewModel, LearningElementModalViewModel);
+    ).registerTupel(
+      this.viewModel,
+      this.controller,
+      LearningElementModalViewModel
+    );
   }
 }
+
+// registerViewModelOnly(this.viewModel, LearningElementModalViewModel);
