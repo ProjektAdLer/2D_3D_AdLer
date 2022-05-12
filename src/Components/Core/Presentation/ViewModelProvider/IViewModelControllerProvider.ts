@@ -1,8 +1,8 @@
 import { ConstructorReference } from "../../Types/EntityManagerTypes";
-export type VMCProviderCallbackType<VM, C> = (
-  viewModels: VM[],
-  controllers: C[]
-) => void;
+export type VMCProviderCallbackType<VM, C> = ([viewModels, controllers]: [
+  VM,
+  C
+][]) => void;
 
 export default interface IViewModelControllerProvider {
   /**
@@ -52,8 +52,11 @@ export default interface IViewModelControllerProvider {
 
   /**
    * Removes a view model from the provider.
-   * @param viewModel The view model to remove.
+   * @param tupel The view model to remove.
    * @param viewModelClass The type of the removed view model.
    */
-  removeTupel<T>(viewModel: T, viewModelClass: ConstructorReference<T>): void;
+  removeTupel<VM, C>(
+    tupel: [VM, C],
+    viewModelClass: ConstructorReference<VM>
+  ): void;
 }

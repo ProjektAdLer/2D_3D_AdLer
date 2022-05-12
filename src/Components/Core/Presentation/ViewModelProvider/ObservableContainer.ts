@@ -1,21 +1,23 @@
 import IObservableContainer from "./IObservableContainer";
 
-export default class ObservableContainer<T> implements IObservableContainer<T> {
-  private values: T[] = [];
-  private callbacks: ((values: T[]) => void)[] = [];
+export default class ObservableContainer<T, U>
+  implements IObservableContainer<T, U>
+{
+  private values: U[] = [];
+  private callbacks: ((values: U[]) => void)[] = [];
   private type: unknown;
 
   constructor(type: new () => T) {
     this.type = type;
   }
 
-  public matchesType<S>(
-    typeToMatch: new () => S
-  ): this is ObservableContainer<S> {
+  public matchesType<T, U>(
+    typeToMatch: new () => T
+  ): this is IObservableContainer<T, U> {
     return typeToMatch === this.type;
   }
 
-  public registerRequest(callback: (values: T[]) => void): void {
+  public registerRequest(callback: (values: U[]) => void): void {
     if (this.callbacks.indexOf(callback) === -1) {
       // file new callback
       this.callbacks.push(callback);
@@ -29,12 +31,12 @@ export default class ObservableContainer<T> implements IObservableContainer<T> {
     }
   }
 
-  public cancelRequest(callback: (values: T[]) => void): void {
+  public cancelRequest(callback: (values: U[]) => void): void {
     var index = this.callbacks.indexOf(callback);
     if (index !== -1) this.callbacks.splice(index, 1);
   }
 
-  public addNewValue(values: T): void {
+  public addNewValue(values: U): void {
     if (this.values.indexOf(values) === -1) {
       // file new value
       this.values.push(values);
@@ -44,7 +46,7 @@ export default class ObservableContainer<T> implements IObservableContainer<T> {
     }
   }
 
-  public removeValue(value: T): void {
+  public removeValue(value: U): void {
     var index = this.values.indexOf(value);
     if (index !== -1) {
       this.values.splice(index, 1);
@@ -52,7 +54,7 @@ export default class ObservableContainer<T> implements IObservableContainer<T> {
     }
   }
 
-  public getValues(): T[] {
+  public getValues(): U[] {
     return this.values;
   }
 }
