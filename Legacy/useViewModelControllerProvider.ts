@@ -1,11 +1,12 @@
-import { ConstructorReference } from "../../Types/EntityManagerTypes";
+import { ConstructorReference } from "../../../Types/EntityManagerTypes";
 import { useInjection } from "inversify-react";
 import { useEffect, useState } from "react";
-import CORE_TYPES from "../../DependencyInjection/CoreTypes";
-import IViewModelControllerProvider from "./IViewModelControllerProvider";
+import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
+import IViewModelControllerProvider from "../../ViewModelProvider/IViewModelControllerProvider";
 
 export default function useViewModelControllerProvider<VM, C = unknown>(
-  viewModelType: ConstructorReference<VM>
+  viewModelType: ConstructorReference<VM>,
+  filter?: (entity: VM) => boolean
 ): [VM[], C[]] {
   const viewModelProvider = useInjection<IViewModelControllerProvider>(
     CORE_TYPES.IViewModelProvider
@@ -14,12 +15,18 @@ export default function useViewModelControllerProvider<VM, C = unknown>(
   const [controllers, setControllers] = useState<C[]>([]);
 
   function callback(tupels: [VM, C][]): void {
-    const viewModels = tupels.map((tupel) => tupel[0]);
-    const controllers = tupels.map((tupel) => tupel[1]);
+    let filteredTupels: [VM, C][] = [];
 
-    setViewModels([...viewModels]);
+    if (filter) {
+      filteredTupels = tupels.filter((tupel) => filter(tupel[0]));
+    } else {
+      filteredTupels = tupels;
+    }
+    const newViewModels = filteredTupels.map((tupel) => tupel[0]);
+    const newControllers = filteredTupels.map((tupel) => tupel[1]);
 
-    setControllers([...controllers]);
+    setViewModels([...newViewModels]);
+    setControllers([...newControllers]);
   }
 
   useEffect(() => {

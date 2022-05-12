@@ -6,8 +6,7 @@ import TextComponent from "./SubComponents/TextComponent";
 import LearningElementModalViewModel from "./LearningElementModalViewModel";
 import StyledModal from "../ReactBaseComponents/StyledModal";
 import useObservable from "../CustomHooks/useObservable";
-import useViewModelControllerProvider from "../../ViewModelProvider/useViewModelControllerProvider";
-import { useEffect } from "react";
+import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import LearningElementModalController from "./LearningElementModalController";
 
 const elementBuilder = (type: LearningElementType) => {
