@@ -20,6 +20,10 @@ import LearningElementBuilder from "../Presentation/Babylon/LearningElement/Lear
 import IPresentationBuilder from "../Presentation/PresentationBuilder/IPresentationBuilder";
 import useCaseDIContainer from "./UseCases/UseCaseDIConatiner";
 import PortsDIContainer from "./Ports/PortsDIContainer";
+import LearningElementModalViewModel from "../Presentation/React/LearningElementModal/LearningElementModalViewModel";
+import ILearningElementModalPresenter from "../Presentation/React/LearningElementModal/ILearningElementModalPresenter";
+import LearningElementModalPresenter from "../Presentation/React/LearningElementModal/LearningElementModalPresenter";
+import LearningElementModalBuilder from "../Presentation/React/LearningElementModal/LearningElementModalBuilder";
 
 var CoreDIContainer = new Container();
 
@@ -58,6 +62,10 @@ CoreDIContainer.bind<IPresentationBuilder>(
 CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
   MainScene
 );
+
+CoreDIContainer.bind<IPresentationBuilder>(
+  CORE_TYPES.ILearningElementModalBuilder
+).to(LearningElementModalBuilder);
 
 CoreDIContainer.load(infrastructureDIContainer);
 CoreDIContainer.load(useCaseDIContainer);

@@ -4,5 +4,7 @@ export default interface ILearningElementPort {
   addLearningElementPresenter(
     learningElementPresenter: ILearningElementPresenter
   ): void;
-  presentLearningElement(learningElementStartedTO: LearningElementTO): void;
+  startLearningElementEditing(
+    learningElementStartedTO: LearningElementTO
+  ): void;
 }

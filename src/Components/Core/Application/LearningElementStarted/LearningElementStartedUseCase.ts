@@ -28,6 +28,6 @@ export default class LearningElementStartedUseCase
         `Could not find learning element with id ${data?.learningElementId}`
       );
 
-    this.learningElementPort.presentLearningElement(entity[0]);
+    this.learningElementPort.startLearningElementEditing(entity[0]);
   }
 }

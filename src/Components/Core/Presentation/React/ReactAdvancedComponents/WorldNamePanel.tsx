@@ -1,5 +1,5 @@
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
-import useObservable from "../CustomHooks/usePrimitive";
+import useObservable from "../CustomHooks/useObservable";
 import LearningWorldComponent from "../../Ports/LearningWorldPort/LearningWorldComponent";
 import useViewModelProvider from "../../ViewModelProvider/useViewModelProvider";
 import LearningWorldViewModel from "../../Ports/LearningWorldPort/LearningWorldViewModel";

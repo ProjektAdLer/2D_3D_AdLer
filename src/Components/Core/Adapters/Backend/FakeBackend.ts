@@ -83,7 +83,7 @@ const learningElements = [
       type: "name",
       value: "LOC complete",
     },
-    elementType: "text",
+    elementType: "video",
     value: [
       {
         type: "points",
@@ -104,7 +104,7 @@ const learningElements = [
       type: "name",
       value: "LOC complete",
     },
-    elementType: "text",
+    elementType: "image",
     value: [
       {
         type: "points",

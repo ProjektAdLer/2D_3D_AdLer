@@ -1,10 +1,10 @@
 import React from "react";
 import BabylonCanvas from "./BabylonCanvas";
 import "./App.css";
-import LearningElementModal from "../LearningElementModal/LearningElementModal";
 import MenuBar from "../ReactAdvancedComponents/MenuBar";
 import ScorePanel from "../ReactAdvancedComponents/ScorePanel";
 import WorldNamePanel from "../ReactAdvancedComponents/WorldNamePanel";
+import LearningElementModal from "../LearningElementModal/LearningElementModal";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <ScorePanel />
         <WorldNamePanel />
         <BabylonCanvas className="w-screen h-screen" />
-        {/* <LearningElementModal /> */}
+        <LearningElementModal />
       </div>
     </React.Fragment>
   );
