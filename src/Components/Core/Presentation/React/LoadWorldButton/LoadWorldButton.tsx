@@ -16,7 +16,6 @@ export default function LoadWorldButton() {
   return (
     <StyledButton
       onClick={() => {
-        console.log("Load World plz");
         controller.loadWorld();
       }}
     >

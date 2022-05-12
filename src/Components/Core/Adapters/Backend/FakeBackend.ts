@@ -1,3 +1,4 @@
+import { LearningComponentID } from "./../../Types/EnitityTypes";
 import { APIWorldTo } from "./APIWorldTO";
 import { injectable } from "inversify";
 import { type IBackend } from "./IBackend";
@@ -7,6 +8,12 @@ import { APILearningElementTO } from "./APILearningElementTO";
 
 @injectable()
 export class FakeBackend implements IBackend {
+  scoreLearningElement(learningElementId: LearningComponentID): Promise<void> {
+    console.log(
+      `Scoring learning element with id ${learningElementId} via FakeBackend`
+    );
+    return Promise.resolve();
+  }
   getWorld(): Promise<Partial<APIWorldTo>> {
     return Promise.resolve(learningWorld);
   }

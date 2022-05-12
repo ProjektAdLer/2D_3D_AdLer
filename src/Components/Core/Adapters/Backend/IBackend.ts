@@ -1,3 +1,4 @@
+import { LearningComponentID } from "./../../Types/EnitityTypes";
 import { APILearningRoomTO } from "./APILearningRoomTO";
 
 import { APIWorldTo } from "./APIWorldTO";
@@ -9,4 +10,5 @@ export interface IBackend {
   getLearningRooms(): Promise<Partial<APILearningRoomTO[]>>;
 
   getLearningElements(): Promise<Partial<APILearningElementTO[]>>;
+  scoreLearningElement(learningElementId: LearningComponentID): Promise<void>;
 }
