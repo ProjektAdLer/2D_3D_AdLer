@@ -47,10 +47,6 @@ export default class DoorView {
   }
 
   private setupAnimation(): void {
-    this.viewModel.meshes.Value.forEach((mesh) => {
-      mesh.rotationQuaternion = null;
-    });
-
     let animation = new Animation(
       "doorAnimation",
       "rotation.y",
@@ -74,6 +70,9 @@ export default class DoorView {
     result.meshes.forEach(
       (mesh) => (mesh.isVisible = this.viewModel.isVisible.Value)
     );
+    this.viewModel.meshes.Value.forEach((mesh) => {
+      mesh.rotationQuaternion = null;
+    });
     this.viewModel.meshes.Value = result.meshes as Mesh[];
   }
 
