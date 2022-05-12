@@ -34,7 +34,7 @@ const elementBuilder = (type: LearningElementType) => {
 };
 
 export default function LearningElementModal() {
-  const viewModels = useViewModelProvider(LearningElementModalViewModel);
+  const [viewModels] = useViewModelProvider(LearningElementModalViewModel);
   const [isOpen, setOpen] = useObservable<boolean>(viewModels[0]?.isOpen);
 
   return (
