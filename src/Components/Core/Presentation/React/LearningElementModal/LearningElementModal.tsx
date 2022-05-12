@@ -17,7 +17,7 @@ const elementBuilder = (type: LearningElementType) => {
     case "text":
       return <TextComponent textContent={loremText} />;
     case "video":
-      return <VideoComponent embedId="iik25wqIuFo" />;
+      return <VideoComponent embedId="iik25wqIuFo?autoplay=1" />;
     case "image":
       return (
         <div className="h-100 w-100">
@@ -34,7 +34,7 @@ const elementBuilder = (type: LearningElementType) => {
 };
 
 export default function LearningElementModal() {
-  const viewModels = useViewModelProvider(LearningElementModalViewModel);
+  const [viewModels] = useViewModelProvider(LearningElementModalViewModel);
   const [isOpen, setOpen] = useObservable<boolean>(viewModels[0]?.isOpen);
 
   return (

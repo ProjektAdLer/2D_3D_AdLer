@@ -4,6 +4,7 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
 import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import IScoreLearningElementUseCase from "./IScoreLearningElementUseCase";
+import { type IBackend } from "../../Adapters/Backend/IBackend";
 
 injectable();
 export default class ScoreLearningElementUseCase
@@ -11,29 +12,41 @@ export default class ScoreLearningElementUseCase
 {
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
-    private entityContainer: IEntityContainer
+    private entityContainer: IEntityContainer,
+    @inject(CORE_TYPES.IBackend)
+    private backend: IBackend
   ) {}
 
-  execute(data?: { learningElementId: LearningComponentID }): void {
+  async executeAsync(data?: {
+    learningElementId: LearningComponentID;
+  }): Promise<void> {
     if (!data || !data.learningElementId) {
       throw new Error("data is undefined");
     }
-    let entities =
+    let learningElements =
       this.entityContainer.filterEntitiesOfType<LearningElementEntity>(
         LearningElementEntity,
         (entity) => {
           return entity.id === data.learningElementId;
         }
       );
-    if (entities.length === 0)
+    if (learningElements.length === 0)
       throw new Error(
         `Could not find learning element with id ${data?.learningElementId}`
       );
-    else if (entities.length > 1)
+    else if (learningElements.length > 1)
       throw new Error(
         `Found more than one learning element with id ${data?.learningElementId}`
       );
 
-    // entities[0];
+    await this.backend
+      .scoreLearningElement(learningElements[0].id)
+      .catch((err) => {
+        throw new Error("Could not score learning element via Backend");
+      });
+
+    learningElements[0].hasScored = true;
+
+    return Promise.resolve();
   }
 }

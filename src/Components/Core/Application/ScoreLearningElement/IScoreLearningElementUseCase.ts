@@ -1,4 +1,3 @@
-import { ISynchronousUsecase } from "../Abstract/ISynchronousUsecase";
+import { IAsyncUsecase } from "../Abstract/IAsyncUsecase";
 
-export default interface IScoreLearningElementUseCase
-  extends ISynchronousUsecase {}
+export default interface IScoreLearningElementUseCase extends IAsyncUsecase {}
