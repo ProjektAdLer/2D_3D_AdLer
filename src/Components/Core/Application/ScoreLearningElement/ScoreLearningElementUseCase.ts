@@ -6,7 +6,7 @@ import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import IScoreLearningElementUseCase from "./IScoreLearningElementUseCase";
 import { type IBackend } from "../../Adapters/Backend/IBackend";
 
-injectable();
+@injectable()
 export default class ScoreLearningElementUseCase
   implements IScoreLearningElementUseCase
 {
