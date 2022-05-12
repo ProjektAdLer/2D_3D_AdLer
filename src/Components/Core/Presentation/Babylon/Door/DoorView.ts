@@ -42,21 +42,24 @@ export default class DoorView {
 
   private async setup(): Promise<void> {
     await this.loadMeshAsync();
-    this.setupAnimation();
+
     this.positionMesh();
+    this.setupAnimation();
+    this.viewModel.isOpen.Value = true;
   }
 
   private setupAnimation(): void {
     let animation = new Animation(
       "doorAnimation",
-      "rotation",
+      "rotation.y",
       30,
       Animation.ANIMATIONTYPE_FLOAT
     );
     animation.setKeys([
-      { frame: 0, value: this.viewModel.rotation.Value },
-      { frame: 45, value: this.viewModel.rotation.Value + 80 },
+      { frame: 0, value: 0 },
+      { frame: 45, value: Tools.ToRadians(80) },
     ]);
+    this.viewModel.meshes.Value[0].rotationQuaternion = null;
     this.viewModel.meshes.Value[0].animations.push(animation);
   }
 
