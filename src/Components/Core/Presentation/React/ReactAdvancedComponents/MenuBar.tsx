@@ -5,19 +5,22 @@ import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
 export default function MenuBar() {
   const loadWorldController = new LoadWorldController();
 
-  // const [, setShowModal] = useObservable(rootEntity.Value.showModal);
   return (
     <StyledContainer className="top-0 left-0 flex flex-col justify-center">
       <StyledButton
         onClick={() => {
-          // setShowModal(true);
+          alert(
+            "Lernelemente werden jetzt über die 3D Elemente geöffnet.  Bitte zuerst die Welt laden"
+          );
         }}
       >
         <img src="icons/h5p_icon.svg" className="w-10"></img>
       </StyledButton>
       <StyledButton
         onClick={() => {
-          // setShowModal(true);
+          alert(
+            "Lernelemente werden jetzt über die 3D Elemente geöffnet.  Bitte zuerst die Welt laden"
+          );
         }}
       >
         <div className="w-100% flex justify-center">
@@ -26,7 +29,9 @@ export default function MenuBar() {
       </StyledButton>
       <StyledButton
         onClick={() => {
-          // setShowModal(true);
+          alert(
+            "Lernelemente werden jetzt über die 3D Elemente geöffnet.  Bitte zuerst die Welt laden"
+          );
         }}
       >
         <img src="/icons/bild_icon.svg" className="w-10"></img>
@@ -34,7 +39,9 @@ export default function MenuBar() {
 
       <StyledButton
         onClick={() => {
-          // setShowModal(true);
+          alert(
+            "Lernelemente werden jetzt über die 3D Elemente geöffnet.  Bitte zuerst die Welt laden"
+          );
         }}
       >
         <img src="/icons/Zettel_darkblue_text-icon.svg" className="w-10"></img>
