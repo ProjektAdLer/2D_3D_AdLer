@@ -11,7 +11,7 @@ import LearningElementModalViewModel from "./LearningElementModalViewModel";
 export default class LearningElementModalBuilder extends PresentationBuilder<
   LearningElementModalViewModel,
   LearningElementModalController,
-  null,
+  undefined,
   LearningElementModalPresenter
 > {
   constructor();
@@ -19,7 +19,7 @@ export default class LearningElementModalBuilder extends PresentationBuilder<
     super(
       LearningElementModalViewModel,
       LearningElementModalController,
-      null,
+      undefined,
       LearningElementModalPresenter
     );
   }

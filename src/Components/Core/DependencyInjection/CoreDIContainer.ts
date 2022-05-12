@@ -24,6 +24,7 @@ import LearningElementModalViewModel from "../Presentation/React/LearningElement
 import ILearningElementModalPresenter from "../Presentation/React/LearningElementModal/ILearningElementModalPresenter";
 import LearningElementModalPresenter from "../Presentation/React/LearningElementModal/LearningElementModalPresenter";
 import LearningElementModalBuilder from "../Presentation/React/LearningElementModal/LearningElementModalBuilder";
+import DoorBuilder from "../Presentation/Babylon/Door/DoorBuilder";
 
 var CoreDIContainer = new Container();
 
@@ -66,6 +67,10 @@ CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
 CoreDIContainer.bind<IPresentationBuilder>(
   CORE_TYPES.ILearningElementModalBuilder
 ).to(LearningElementModalBuilder);
+
+CoreDIContainer.bind<IPresentationBuilder>(CORE_TYPES.IDoorBuilder).to(
+  DoorBuilder
+);
 
 CoreDIContainer.load(infrastructureDIContainer);
 CoreDIContainer.load(useCaseDIContainer);
