@@ -4,7 +4,7 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
 import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import IScoreLearningElementUseCase from "./IScoreLearningElementUseCase";
-import { IBackend } from "../../Adapters/Backend/IBackend";
+import { type IBackend } from "../../Adapters/Backend/IBackend";
 
 injectable();
 export default class ScoreLearningElementUseCase
