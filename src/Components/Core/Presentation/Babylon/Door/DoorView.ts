@@ -67,12 +67,16 @@ export default class DoorView {
       "",
       this.sceneController.Scene
     );
+
     result.meshes.forEach(
       (mesh) => (mesh.isVisible = this.viewModel.isVisible.Value)
     );
+
+    // reset quaternion rotation because it can prevent mesh.rotate to have any effect
     this.viewModel.meshes.Value.forEach((mesh) => {
       mesh.rotationQuaternion = null;
     });
+
     this.viewModel.meshes.Value = result.meshes as Mesh[];
   }
 
