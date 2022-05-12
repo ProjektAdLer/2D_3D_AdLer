@@ -42,13 +42,15 @@ export default class DoorView {
 
   private async setup(): Promise<void> {
     await this.loadMeshAsync();
-
     this.positionMesh();
     this.setupAnimation();
-    this.viewModel.isOpen.Value = true;
   }
 
   private setupAnimation(): void {
+    this.viewModel.meshes.Value.forEach((mesh) => {
+      mesh.rotationQuaternion = null;
+    });
+
     let animation = new Animation(
       "doorAnimation",
       "rotation.y",
@@ -59,7 +61,6 @@ export default class DoorView {
       { frame: 0, value: 0 },
       { frame: 45, value: Tools.ToRadians(80) },
     ]);
-    this.viewModel.meshes.Value[0].rotationQuaternion = null;
     this.viewModel.meshes.Value[0].animations.push(animation);
   }
 
