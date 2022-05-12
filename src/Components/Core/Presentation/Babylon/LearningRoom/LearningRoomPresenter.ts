@@ -5,13 +5,14 @@ import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
+import IDoorPresenter from "../Door/IDoorPresenter";
 import ILearningRoomPort from "./ILearningRoomPort";
 import LearningRoomViewModel from "./LearningRoomViewModel";
 
 @injectable()
 export default class LearningRoomPresenter implements ILearningRoomPort {
   private viewModel: LearningRoomViewModel;
-
+  private doorPresenter: IDoorPresenter;
   public set ViewModel(viewModel: LearningRoomViewModel) {
     this.viewModel = viewModel;
   }
@@ -51,6 +52,8 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
     director.Builder = builder;
     director.build();
     builder.getPresenter().presentDoor(this.getDoorPosition());
+
+    this.doorPresenter = builder.getPresenter();
   }
 
   private setRoomDimensions(learningRoomTO: LearningRoomTO): void {
@@ -91,5 +94,9 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
       ),
       90,
     ];
+  }
+
+  openRoomDoor(): void {
+    this.doorPresenter.openDoor();
   }
 }

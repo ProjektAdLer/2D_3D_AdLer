@@ -5,6 +5,8 @@ import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
 import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import IScoreLearningElementUseCase from "./IScoreLearningElementUseCase";
 import { type IBackend } from "../../Adapters/Backend/IBackend";
+import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
+import ILearningRoomPort from "../../Presentation/Babylon/LearningRoom/ILearningRoomPort";
 
 @injectable()
 export default class ScoreLearningElementUseCase
@@ -14,7 +16,9 @@ export default class ScoreLearningElementUseCase
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(CORE_TYPES.IBackend)
-    private backend: IBackend
+    private backend: IBackend,
+    @inject(PORT_TYPES.ILearningRoomPort)
+    private learningRoomPort: ILearningRoomPort
   ) {}
 
   async executeAsync(data?: {
@@ -46,6 +50,8 @@ export default class ScoreLearningElementUseCase
       });
 
     learningElements[0].hasScored = true;
+
+    this.learningRoomPort.openRoomDoor();
 
     return Promise.resolve();
   }

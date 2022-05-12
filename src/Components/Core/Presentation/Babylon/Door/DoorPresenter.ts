@@ -4,6 +4,9 @@ import IDoorPresenter from "./IDoorPresenter";
 
 export default class DoorPresenter implements IDoorPresenter {
   constructor(private viewModel: DoorViewModel) {}
+  openDoor(): void {
+    this.viewModel.isOpen.Value = true;
+  }
 
   presentDoor(position: [Vector3, number]): void {
     if (!this.viewModel) {

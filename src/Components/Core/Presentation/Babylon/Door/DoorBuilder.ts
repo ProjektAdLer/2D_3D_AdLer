@@ -1,5 +1,8 @@
 import { injectable } from "inversify";
+import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
+import ViewModelControllerProvider from "../../ViewModelProvider/ViewModelControllerProvider";
 import DoorPresenter from "./DoorPresenter";
 import DoorView from "./DoorView";
 import DoorViewModel from "./DoorViewModel";
@@ -13,5 +16,12 @@ export default class DoorBuilder extends PresentationBuilder<
 > {
   constructor() {
     super(DoorViewModel, undefined, DoorView, DoorPresenter);
+  }
+
+  override buildController(): void {
+    super.buildController();
+    CoreDIContainer.get<ViewModelControllerProvider>(
+      CORE_TYPES.IViewModelProvider
+    ).registerTupel(this.viewModel, this.controller, DoorViewModel);
   }
 }

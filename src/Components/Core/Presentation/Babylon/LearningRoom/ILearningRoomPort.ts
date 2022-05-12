@@ -2,4 +2,6 @@ import { LearningRoomTO } from "../../../Application/LoadWorld/ILearningWorldPor
 
 export default interface ILearningRoomPort {
   presentLearningRoom(learningRommTO: LearningRoomTO): void;
+
+  openRoomDoor(): void;
 }
