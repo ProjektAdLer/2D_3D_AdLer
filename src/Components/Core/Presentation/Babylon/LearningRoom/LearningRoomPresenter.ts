@@ -43,6 +43,14 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
       let presenter = builder.getPresenter();
       presenter.presentLearningElement(elementTO, elementPositions.shift()!);
     });
+
+    // create door
+    builder = CoreDIContainer.get<IPresentationBuilder>(
+      CORE_TYPES.IDoorBuilder
+    );
+    director.Builder = builder;
+    director.build();
+    builder.getPresenter().presentDoor(this.getDoorPosition());
   }
 
   private setRoomDimensions(learningRoomTO: LearningRoomTO): void {
@@ -73,17 +81,15 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
     return positions;
   }
 
-  private getDoorPositions(): [Vector3, number][] {
-    let doorPositions: [Vector3, number][] = [];
-    doorPositions.push([
+  private getDoorPosition(): [Vector3, number] {
+    return [
       new Vector3(
-        this.viewModel.roomWidth.Value / 2,
+        this.viewModel.doorWidth.Value / 2,
         this.viewModel.baseHeight.Value,
         -(this.viewModel.roomLength.Value / 2) -
           this.viewModel.wallThickness.Value / 2
       ),
-      0,
-    ]);
-    return doorPositions;
+      90,
+    ];
   }
 }

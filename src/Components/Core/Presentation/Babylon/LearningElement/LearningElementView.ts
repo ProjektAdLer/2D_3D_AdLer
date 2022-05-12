@@ -44,6 +44,7 @@ export default class LearningElementView implements ILearningElementView {
 
     // setup callbacks for rerendering when the view model changes
     viewModel.type.subscribe(async () => {
+      // this.viewModel.meshes.Value.forEach((mesh) => mesh.dispose());
       await this.loadMeshAsync();
       this.registerAction(ActionManager.OnPickTrigger, this.controller.clicked);
       this.positionMesh();

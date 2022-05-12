@@ -15,6 +15,7 @@ const CORE_TYPES = {
   ILearningElementBuilder: Symbol("ILearningElementBuilder"),
   IBackend: Symbol("IBackend"),
   ILearningElementModalBuilder: Symbol("ILearningElementModalBuilder"),
+  IDoorBuilder: Symbol("IDoorBuilder"),
 };
 
 export default CORE_TYPES;
