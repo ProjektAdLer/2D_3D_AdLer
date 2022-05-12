@@ -24,10 +24,16 @@ export default class LearningElementModalBuilder extends PresentationBuilder<
     );
   }
 
-  override buildViewModel(): void {
-    super.buildViewModel();
+  override buildController(): void {
+    super.buildController();
     CoreDIContainer.get<ViewModelControllerProvider>(
       CORE_TYPES.IViewModelProvider
-    ).registerViewModelOnly(this.viewModel, LearningElementModalViewModel);
+    ).registerTupel(
+      this.viewModel,
+      this.controller,
+      LearningElementModalViewModel
+    );
   }
 }
+
+// registerViewModelOnly(this.viewModel, LearningElementModalViewModel);

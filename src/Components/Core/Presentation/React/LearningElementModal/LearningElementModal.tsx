@@ -7,6 +7,7 @@ import LearningElementModalViewModel from "./LearningElementModalViewModel";
 import StyledModal from "../ReactBaseComponents/StyledModal";
 import useObservable from "../CustomHooks/useObservable";
 import useViewModelControllerProvider from "../../ViewModelProvider/useViewModelControllerProvider";
+import { useEffect } from "react";
 
 const elementBuilder = (type: LearningElementType) => {
   const loremText =
@@ -34,10 +35,15 @@ const elementBuilder = (type: LearningElementType) => {
 };
 
 export default function LearningElementModal() {
-  const [viewModels] = useViewModelControllerProvider(
+  const [viewModels, controllers] = useViewModelControllerProvider(
     LearningElementModalViewModel
   );
   const [isOpen, setOpen] = useObservable<boolean>(viewModels[0]?.isOpen);
+
+  // monitor controllers
+  useEffect(() => {
+    console.log(controllers);
+  }, [controllers]);
 
   return (
     <StyledModal

@@ -36,8 +36,7 @@ export default class ViewModelControllerProvider
   registerTupel<VM, C>(
     viewModel: VM,
     controller: C,
-    viewModelClass: ConstructorReference<VM>,
-    controllerClass: ConstructorReference<C>
+    viewModelClass: ConstructorReference<VM>
   ): void {
     this.findOrCreateContainer<VM, C>(viewModelClass).addNewValue([
       viewModel,

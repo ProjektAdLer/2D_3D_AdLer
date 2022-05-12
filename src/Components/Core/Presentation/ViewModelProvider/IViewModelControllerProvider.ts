@@ -46,8 +46,7 @@ export default interface IViewModelControllerProvider {
   registerTupel<VM, C>(
     viewModel: VM,
     controller: C,
-    viewModelClass: ConstructorReference<VM>,
-    controllerClass: ConstructorReference<C>
+    viewModelClass: ConstructorReference<VM>
   ): void;
 
   /**
