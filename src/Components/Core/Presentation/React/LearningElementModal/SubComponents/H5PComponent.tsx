@@ -16,19 +16,7 @@ const createIframeUrl = (contextId: number, fileName: string) => {
 };
 
 export default function H5PContent(props: { h5pEntityId: string }) {
-  // const [learningElementEntity] = useEntity<EH5PLearningElement>(
-  //   props.h5pEntityId,
-  //   EH5PLearningElement
-  // );
-
   const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  // if (!learningElementEntity)
-  //   return (
-  //     <div>
-  //       <h1>Lernelement wird geladen</h1>
-  //     </div>
-  //   );
 
   return (
     <iframe
@@ -36,8 +24,8 @@ export default function H5PContent(props: { h5pEntityId: string }) {
       ref={iframeRef}
       allowFullScreen
       src={createIframeUrl(
-        0, //learningElementEntity.h5PcontextId.Value,
-        "ololo" //learningElementEntity.h5PFileName.Value
+        278, //learningElementEntity.h5PcontextId.Value,
+        "Metriken Teil 1.h5p" //learningElementEntity.h5PFileName.Value
       )}
       style={{ width: "95%" }}
       title="Embedded H5P"
