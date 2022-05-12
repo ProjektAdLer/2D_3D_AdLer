@@ -1,5 +1,8 @@
 import { ConstructorReference } from "../../Types/EntityManagerTypes";
-export type callbackType<VM, C> = (viewModels: VM[], controllers: C[]) => void;
+export type VMCProviderCallbackType<VM, C> = (
+  viewModels: VM[],
+  controllers: C[]
+) => void;
 
 export default interface IViewModelControllerProvider {
   /**
@@ -7,8 +10,8 @@ export default interface IViewModelControllerProvider {
    * @param callback The callback to be called when a new view model is registered.
    * @param viewModelClass The type of view model to register for.
    */
-  registerTupelRequest<VM, C>(
-    callback: callbackType<VM, C>,
+  registerTupelRequest<VM, C = unknown>(
+    callback: VMCProviderCallbackType<VM, C>,
     viewModelClass: ConstructorReference<VM>
   ): void;
 
@@ -18,7 +21,7 @@ export default interface IViewModelControllerProvider {
    * @param viewModelClass The type of view model to cancel the registration for.
    */
   cancelRequest<VM, C>(
-    callback: callbackType<VM, C>,
+    callback: VMCProviderCallbackType<VM, C>,
     viewModelClass: ConstructorReference<VM>
   ): void;
 
