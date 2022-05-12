@@ -27,7 +27,7 @@ export default class EntityContainer implements IEntityContainer {
     return retVal || [];
   }
 
-  filterEntitiesOfTye<T extends object>(
+  filterEntitiesOfType<T extends object>(
     entityType: ConstructorReference<T>,
     filter: (entity: T) => boolean
   ): T[] {

@@ -27,7 +27,7 @@ export default interface IEntityContainer {
    * @param entityType The type of the entities to filter
    * @param filter The filter function to apply to the entities
    */
-  filterEntitiesOfTye<T extends object>(
+  filterEntitiesOfType<T extends object>(
     entityType: ConstructorReference<T>,
     filter: (entity: T) => boolean
   ): T[];
