@@ -72,4 +72,18 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
     }
     return positions;
   }
+
+  private getDoorPositions(): [Vector3, number][] {
+    let doorPositions: [Vector3, number][] = [];
+    doorPositions.push([
+      new Vector3(
+        this.viewModel.roomWidth.Value / 2,
+        this.viewModel.baseHeight.Value,
+        -(this.viewModel.roomLength.Value / 2) -
+          this.viewModel.wallThickness.Value / 2
+      ),
+      0,
+    ]);
+    return doorPositions;
+  }
 }
