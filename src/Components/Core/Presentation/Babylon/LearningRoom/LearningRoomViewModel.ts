@@ -13,8 +13,8 @@ export default class LearningRoomViewModel {
   public roomLength: Observable<number> = new Observable(10);
   public baseHeight: Observable<number> = new Observable(0.5);
   public roomHeight: Observable<number> = new Observable(1.5);
-  public doorWidth: Observable<number> = new Observable(1.5);
-  public doorHeight: Observable<number> = new Observable(2.28);
+  public doorWidth: Observable<number> = new Observable(1.1);
+  public doorHeight: Observable<number> = new Observable(2.19);
   public wallThickness: Observable<number> = new Observable(0.3);
 
   public floorMesh: Observable<Mesh> = new Observable<Mesh>();
