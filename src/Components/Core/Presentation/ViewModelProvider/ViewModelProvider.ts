@@ -29,8 +29,8 @@ export default class ViewModelProvider implements IViewModelControllerProvider {
     }
   }
 
-  public cancelRequest<VM>(
-    callback: callbackType<VM, unknown>,
+  public cancelRequest<VM, C>(
+    callback: callbackType<VM, C>,
     viewModelClass: { new (): VM }
   ): void {
     var container = this.findContainer<VM>(viewModelClass);

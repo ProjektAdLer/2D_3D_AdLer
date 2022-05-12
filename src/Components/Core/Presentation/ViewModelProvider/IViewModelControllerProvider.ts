@@ -17,8 +17,8 @@ export default interface IViewModelControllerProvider {
    * @param callback The callback to be cancelled.
    * @param viewModelClass The type of view model to cancel the registration for.
    */
-  cancelRequest<VM>(
-    callback: callbackType<VM, unknown>,
+  cancelRequest<VM, C>(
+    callback: callbackType<VM, C>,
     viewModelClass: ConstructorReference<VM>
   ): void;
 

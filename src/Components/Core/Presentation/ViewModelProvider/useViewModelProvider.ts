@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import IViewModelControllerProvider from "./IViewModelControllerProvider";
 
-export default function useViewModelProvider<VM, C>(
+export default function useViewModelProvider<VM, C = unknown>(
   viewModelType: ConstructorReference<VM>
 ): [VM[], C[]] {
   const viewModelProvider = useInjection<IViewModelControllerProvider>(
@@ -13,14 +13,15 @@ export default function useViewModelProvider<VM, C>(
   const [viewModels, setViewModels] = useState<VM[]>([]);
   const [controllers, setControllers] = useState<C[]>([]);
 
-  function setState(newState: VM[]): void {
-    setViewModels([...newState]);
+  function setState(newViewModel: VM[], newController: C[]): void {
+    if (newViewModel !== viewModels) setViewModels([...newViewModel]);
+    if (newController !== controllers) setControllers([...newController]);
   }
 
   useEffect(() => {
     viewModelProvider.registerTupelRequest<VM, C>(setState, viewModelType);
     return () => {
-      viewModelProvider.cancelRequest<VM>(setState, viewModelType);
+      viewModelProvider.cancelRequest<VM, C>(setState, viewModelType);
     };
   }, []);
 

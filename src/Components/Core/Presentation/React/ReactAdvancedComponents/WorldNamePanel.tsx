@@ -6,10 +6,9 @@ import LearningWorldViewModel from "../../Ports/LearningWorldPort/LearningWorldV
 import LearningWorldController from "../../Ports/LearningWorldPort/LearningWorldController";
 
 export default function WorldNamePanel() {
-  const [viewModel, controller] = useViewModelProvider<
-    LearningWorldViewModel,
-    LearningWorldController
-  >(LearningWorldViewModel);
+  const [viewModel] = useViewModelProvider<LearningWorldViewModel>(
+    LearningWorldViewModel
+  );
 
   const [worldName] = useObservable<string>(viewModel[0]?.worldName);
   const [worldNameLoading] = useObservable<boolean>(
