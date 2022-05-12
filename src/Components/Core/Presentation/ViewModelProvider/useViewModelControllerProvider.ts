@@ -1,10 +1,10 @@
-import { ConstructorReference } from "./../../Types/EntityManagerTypes";
+import { ConstructorReference } from "../../Types/EntityManagerTypes";
 import { useInjection } from "inversify-react";
 import { useEffect, useState } from "react";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import IViewModelControllerProvider from "./IViewModelControllerProvider";
 
-export default function useViewModelProvider<VM, C = unknown>(
+export default function useViewModelControllerProvider<VM, C = unknown>(
   viewModelType: ConstructorReference<VM>
 ): [VM[], C[]] {
   const viewModelProvider = useInjection<IViewModelControllerProvider>(

@@ -7,7 +7,9 @@ import IViewModelControllerProvider, {
 import ObservableContainer from "./ObservableContainer";
 
 @injectable()
-export default class ViewModelProvider implements IViewModelControllerProvider {
+export default class ViewModelControllerProvider
+  implements IViewModelControllerProvider
+{
   private containers: IObservableContainer<unknown, [unknown, unknown]>[] = [];
 
   public registerTupelRequest<VM, C>(
