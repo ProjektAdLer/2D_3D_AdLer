@@ -19,7 +19,7 @@ export default class ScoreLearningElementUseCase
       throw new Error("data is undefined");
     }
     let entities =
-      this.entityContainer.filterEntitiesOfTye<LearningElementEntity>(
+      this.entityContainer.filterEntitiesOfType<LearningElementEntity>(
         LearningElementEntity,
         (entity) => {
           return entity.id === data.learningElementId;

@@ -18,7 +18,7 @@ export default class LearningElementStartedUseCase
   ) {}
   execute(data?: { learningElementId: number }): void {
     const entity =
-      this.entityContainer.filterEntitiesOfTye<LearningElementEntity>(
+      this.entityContainer.filterEntitiesOfType<LearningElementEntity>(
         LearningElementEntity,
         (e) => e.id === data?.learningElementId
       );
