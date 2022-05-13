@@ -72,7 +72,7 @@ describe("EntityManager", () => {
     );
 
     expect(
-      container.filterEntitiesOfTye(
+      container.filterEntitiesOfType(
         TestEntity,
         (entity) => entity.test1 === "entity1"
       )
@@ -96,7 +96,7 @@ describe("EntityManager", () => {
     );
 
     expect(
-      container.filterEntitiesOfTye(
+      container.filterEntitiesOfType(
         TestEntity,
         (entity) => entity.test1 === "foo"
       )
