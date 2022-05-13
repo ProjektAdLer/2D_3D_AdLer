@@ -21,7 +21,7 @@ export default class DoorBuilder extends PresentationBuilder<
   override buildController(): void {
     super.buildController();
     CoreDIContainer.get<ViewModelControllerProvider>(
-      CORE_TYPES.IViewModelProvider
+      CORE_TYPES.IViewModelControllerProvider
     ).registerTupel(this.viewModel, this.controller, DoorViewModel);
   }
 }

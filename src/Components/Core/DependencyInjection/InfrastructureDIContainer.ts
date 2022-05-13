@@ -21,7 +21,7 @@ const infrastructureDIContainer = new ContainerModule((bind) => {
     .inSingletonScope();
 
   // View Model Provider
-  bind<IViewModelControllerProvider>(CORE_TYPES.IViewModelProvider)
+  bind<IViewModelControllerProvider>(CORE_TYPES.IViewModelControllerProvider)
     .to(ViewModelControllerProvider)
     .inSingletonScope();
 

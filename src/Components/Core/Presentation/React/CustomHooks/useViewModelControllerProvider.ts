@@ -8,7 +8,7 @@ export default function useViewModelControllerProvider<VM, C = unknown>(
   viewModelType: ConstructorReference<VM>
 ): [VM[], C[]] {
   const viewModelProvider = useInjection<IViewModelControllerProvider>(
-    CORE_TYPES.IViewModelProvider
+    CORE_TYPES.IViewModelControllerProvider
   );
   const [viewModels, setViewModels] = useState<VM[]>([]);
   const [controllers, setControllers] = useState<C[]>([]);

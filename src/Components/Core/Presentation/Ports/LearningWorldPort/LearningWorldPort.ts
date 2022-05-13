@@ -16,7 +16,7 @@ export default class LearningWorldPort implements ILearningWorldPort {
   private roomPresenter: ILearningRoomPort;
 
   constructor(
-    @inject(CORE_TYPES.IViewModelProvider)
+    @inject(CORE_TYPES.IViewModelControllerProvider)
     private viewModelProvider: IViewModelControllerProvider
   ) {}
 
