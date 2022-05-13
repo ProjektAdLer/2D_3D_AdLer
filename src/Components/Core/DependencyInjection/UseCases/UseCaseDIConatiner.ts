@@ -1,4 +1,6 @@
 import { ContainerModule } from "inversify";
+import CalculateTotalRoomScore from "../../Application/CalculateTotalRoomScore/CalculateTotalRoomScore";
+import ICalculateTotalRoomScore from "../../Application/CalculateTotalRoomScore/ICalculateTotalRoomScore";
 import ILearningElementStartedUseCase from "../../Application/LearningElementStarted/ILearningElementStartedUseCase";
 import LearningElementStartedUseCase from "../../Application/LearningElementStarted/LearningElementStartedUseCase";
 import ILoadWorldUseCase from "../../Application/LoadWorld/ILoadWorldUseCase";
@@ -22,6 +24,10 @@ const useCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.ILearningElementStartedUseCase
   )
     .to(LearningElementStartedUseCase)
+    .inSingletonScope();
+
+  bind<ICalculateTotalRoomScore>(USECASE_TYPES.ICalculateTotalRoomScore)
+    .to(CalculateTotalRoomScore)
     .inSingletonScope();
 });
 
