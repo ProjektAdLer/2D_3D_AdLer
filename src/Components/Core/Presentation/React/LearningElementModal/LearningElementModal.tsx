@@ -18,7 +18,7 @@ const elementBuilder = (type: LearningElementType) => {
     case "text":
       return <TextComponent textContent={loremText} />;
     case "video":
-      return <VideoComponent embedId="AtaSpjuBtXY?autoplay=1" />;
+      return <VideoComponent embedId="iik25wqIuFo?autoplay=1" />;
     case "image":
       return (
         <div className="h-100 w-100">
