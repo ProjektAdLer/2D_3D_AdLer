@@ -25,6 +25,7 @@ import ILearningElementModalPresenter from "../Presentation/React/LearningElemen
 import LearningElementModalPresenter from "../Presentation/React/LearningElementModal/LearningElementModalPresenter";
 import LearningElementModalBuilder from "../Presentation/React/LearningElementModal/LearningElementModalBuilder";
 import DoorBuilder from "../Presentation/Babylon/Door/DoorBuilder";
+import ScorePanelBuilder from "../Presentation/React/ScorePanel/ScorePanelBuilder";
 
 var CoreDIContainer = new Container();
 
@@ -70,6 +71,9 @@ CoreDIContainer.bind<IPresentationBuilder>(
 
 CoreDIContainer.bind<IPresentationBuilder>(CORE_TYPES.IDoorBuilder).to(
   DoorBuilder
+);
+CoreDIContainer.bind<IPresentationBuilder>(CORE_TYPES.IScorePanelBuilder).to(
+  ScorePanelBuilder
 );
 
 CoreDIContainer.load(infrastructureDIContainer);

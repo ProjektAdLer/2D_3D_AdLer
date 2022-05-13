@@ -1,3 +1,4 @@
+import { injectable } from "inversify";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
@@ -5,6 +6,7 @@ import IViewModelControllerProvider from "../../ViewModelProvider/IViewModelCont
 import ScorePanelPresenter from "./ScorePanelPresenter";
 import ScorePanelViewModel from "./ScorePanelViewModel";
 
+@injectable()
 export default class ScorePanelBuilder extends PresentationBuilder<
   ScorePanelViewModel,
   undefined,
@@ -20,10 +22,5 @@ export default class ScorePanelBuilder extends PresentationBuilder<
     CoreDIContainer.get<IViewModelControllerProvider>(
       CORE_TYPES.IViewModelControllerProvider
     ).registerViewModelOnly(this.viewModel, ScorePanelViewModel);
-  }
-
-  override buildPresenter(): void {
-    super.buildPresenter();
-    // TODO: register presenter with its port
   }
 }

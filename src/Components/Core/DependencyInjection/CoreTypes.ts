@@ -7,7 +7,7 @@ const CORE_TYPES = {
   ILearningRoomView: Symbol("ILearningRoomView"),
   ILearningElementView: Symbol("ILearingElementView"),
   ICoreRenderer: Symbol("ICoreRenderer"),
-  IViewModelProvider: Symbol("IViewModelProvider"),
+  IViewModelControllerProvider: Symbol("IViewModelControllerProvider"),
   ILoadWorldController: Symbol("ILoadWorldController"),
   IEntityContainer: Symbol("IEntityContainer"),
   IPresentationDirector: Symbol("IPresentationDirector"),
@@ -16,6 +16,7 @@ const CORE_TYPES = {
   IBackend: Symbol("IBackend"),
   ILearningElementModalBuilder: Symbol("ILearningElementModalBuilder"),
   IDoorBuilder: Symbol("IDoorBuilder"),
+  IScorePanelBuilder: Symbol("IScorePanelBuilder"),
 };
 
 export default CORE_TYPES;
