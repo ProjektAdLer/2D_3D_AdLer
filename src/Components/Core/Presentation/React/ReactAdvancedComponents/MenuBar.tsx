@@ -7,7 +7,7 @@ export default function MenuBar() {
 
   return (
     <StyledContainer className="top-0 left-0 flex flex-col justify-center">
-      <StyledButton
+      {/*       <StyledButton
         onClick={() => {
           alert(
             "Lernelemente werden jetzt über die 3D Elemente geöffnet.  Bitte zuerst die Welt laden"
@@ -15,8 +15,9 @@ export default function MenuBar() {
         }}
       >
         <img src="icons/h5p_icon.svg" className="w-10"></img>
-      </StyledButton>
-      <StyledButton
+      </StyledButton> */}
+
+      {/*       <StyledButton
         onClick={() => {
           alert(
             "Lernelemente werden jetzt über die 3D Elemente geöffnet.  Bitte zuerst die Welt laden"
@@ -26,8 +27,9 @@ export default function MenuBar() {
         <div className="w-100% flex justify-center">
           <img src="icons/video_icon_screen_button.svg" className="w-10"></img>
         </div>
-      </StyledButton>
-      <StyledButton
+      </StyledButton> */}
+
+      {/*       <StyledButton
         onClick={() => {
           alert(
             "Lernelemente werden jetzt über die 3D Elemente geöffnet.  Bitte zuerst die Welt laden"
@@ -35,9 +37,9 @@ export default function MenuBar() {
         }}
       >
         <img src="/icons/bild_icon.svg" className="w-10"></img>
-      </StyledButton>
+      </StyledButton> */}
 
-      <StyledButton
+      {/*       <StyledButton
         onClick={() => {
           alert(
             "Lernelemente werden jetzt über die 3D Elemente geöffnet.  Bitte zuerst die Welt laden"
@@ -45,7 +47,7 @@ export default function MenuBar() {
         }}
       >
         <img src="/icons/Zettel_darkblue_text-icon.svg" className="w-10"></img>
-      </StyledButton>
+      </StyledButton> */}
       <StyledButton
         onClick={async () => {
           await loadWorldController.loadWorld();
