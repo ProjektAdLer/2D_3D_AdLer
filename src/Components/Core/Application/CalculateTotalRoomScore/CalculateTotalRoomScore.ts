@@ -35,7 +35,7 @@ export default class CalculateTotalRoomScore
     }, 0);
 
     // TODO: This has to be more refined
-    this.learningRoomPort.presentNewScore(roomScore, roomScore >= 1);
+    this.learningRoomPort.presentNewScore(roomScore, roomScore >= 20);
 
     console.log("Total Room Score:", roomScore);
   }
