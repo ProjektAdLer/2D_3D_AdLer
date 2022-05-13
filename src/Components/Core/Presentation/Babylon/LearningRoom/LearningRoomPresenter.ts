@@ -109,7 +109,7 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
         -(this.viewModel.roomLength.Value / 2) -
           this.viewModel.wallThickness.Value / 2
       ),
-      90,
+      -90,
     ];
   }
 }

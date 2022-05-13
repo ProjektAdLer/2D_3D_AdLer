@@ -54,8 +54,11 @@ export default class DoorView {
       Animation.ANIMATIONTYPE_FLOAT
     );
     animation.setKeys([
-      { frame: 0, value: 0 },
-      { frame: 45, value: Tools.ToRadians(80) },
+      { frame: 0, value: Tools.ToRadians(this.viewModel.rotation.Value) },
+      {
+        frame: 45,
+        value: Tools.ToRadians(this.viewModel.rotation.Value - 80),
+      },
     ]);
     this.viewModel.meshes.Value[0].animations.push(animation);
   }
@@ -71,11 +74,8 @@ export default class DoorView {
     result.meshes.forEach(
       (mesh) => (mesh.isVisible = this.viewModel.isVisible.Value)
     );
-
     // reset quaternion rotation because it can prevent mesh.rotate to have any effect
-    this.viewModel.meshes.Value.forEach((mesh) => {
-      mesh.rotationQuaternion = null;
-    });
+    result.meshes.forEach((mesh) => (mesh.rotationQuaternion = null));
 
     this.viewModel.meshes.Value = result.meshes as Mesh[];
   }
@@ -83,9 +83,10 @@ export default class DoorView {
   private positionMesh(): void {
     if (this.viewModel.meshes.Value && this.viewModel.meshes.Value.length > 0) {
       this.viewModel.meshes.Value[0].position = this.viewModel.position.Value;
-      this.viewModel.meshes.Value[0].rotate(
-        Vector3.Up(),
-        Tools.ToRadians(this.viewModel.rotation.Value)
+      this.viewModel.meshes.Value[0].rotation = new Vector3(
+        0.0,
+        Tools.ToRadians(this.viewModel.rotation.Value),
+        0.0
       );
     }
   }
