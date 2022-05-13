@@ -19,16 +19,17 @@ export default function H5PContent(props: { h5pEntityId: string }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   return (
-    <iframe
-      className="rounded-lg"
-      ref={iframeRef}
-      allowFullScreen
-      src={createIframeUrl(
-        278, //learningElementEntity.h5PcontextId.Value,
-        "Metriken Teil 1.h5p" //learningElementEntity.h5PFileName.Value
-      )}
-      style={{ width: "95%" }}
-      title="Embedded H5P"
-    ></iframe>
+    <div className="flex justify-center items-top w80vw lg:w-5/6">
+      <iframe
+        className="rounded-lg"
+        ref={iframeRef}
+        allowFullScreen
+        src={createIframeUrl(
+          278, //learningElementEntity.h5PcontextId.Value,
+          "Metriken Teil 1.h5p" //learningElementEntity.h5PFileName.Value
+        )}
+        title="Embedded H5P"
+      ></iframe>
+    </div>
   );
 }

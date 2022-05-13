@@ -3,8 +3,16 @@
 @tailwind utilities;
 
 @layer components {
-  .h95prozent {
-    height: 95%;
+  .h90vh {
+    height: 90vh;
+  }
+
+  .w95vw {
+    width: 95vw;
+  }
+
+  .w80vw {
+    width: 80vw;
   }
 }
 

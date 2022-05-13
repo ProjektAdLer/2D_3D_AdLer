@@ -32,7 +32,7 @@ export default function StyledModal({
       className="modal flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-blacktrans50"
       {...restProps}
     >
-      <div className="modal-content bg-adlerlightblue w-full lg:w-5/6 h-screen border-8 border-adlerlightblue rounded-lg overflow-auto">
+      <div className="modal-content bg-adlerlightblue w-full lg:w95vw h-fit max-h-screen border-8 border-adlerlightblue rounded-lg overflow-auto">
         <div className="modal-header font-black flex justify-between items-center p-4 h-4 lg:h-16 text-xl lg:text-4xl">
           {title}
           <button
@@ -42,10 +42,10 @@ export default function StyledModal({
             X
           </button>
         </div>
-        <div className="modal-body flex justify-center items-center lg:h-full p-2 border-t-2 border-b-2 rounded-lg border-adlerlightblue">
+        <div className="modal-body flex h-fit justify-center items-center p-2 border-t-2 border-b-2 rounded-lg border-adlerlightblue">
           {children}
         </div>
-        <div className="modal-footer font-medium flex shrink justify-between items-center p-4 h-10">
+        <div className="modal-footer font-medium flex shrink justify-between items-center p-4 h-fit">
           <p>{footer}</p>
         </div>
       </div>
