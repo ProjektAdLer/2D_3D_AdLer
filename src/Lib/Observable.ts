@@ -2,7 +2,7 @@ export default class Observable<T> {
   protected value: T;
   protected subscribers: ((value: T) => void)[] = [];
 
-  constructor(defaultValue?: T) {
+  constructor(defaultValue?: T, protected notifyOnSameValue: boolean = false) {
     if (defaultValue) this.value = defaultValue;
   }
 
@@ -27,7 +27,9 @@ export default class Observable<T> {
   }
 
   set Value(value: T) {
-    this.value = value;
-    this.notify(value);
+    if (this.notifyOnSameValue || value !== this.value) {
+      this.value = value;
+      this.notify(value);
+    }
   }
 }
