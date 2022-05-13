@@ -2,7 +2,7 @@ import React from "react";
 import BabylonCanvas from "./BabylonCanvas";
 import "./App.css";
 import MenuBar from "../ReactAdvancedComponents/MenuBar";
-import ScorePanel from "../ReactAdvancedComponents/ScorePanel";
+import ScorePanel from "../ScorePanel/ScorePanel";
 import WorldNamePanel from "../ReactAdvancedComponents/WorldNamePanel";
 import LearningElementModal from "../LearningElementModal/LearningElementModal";
 
