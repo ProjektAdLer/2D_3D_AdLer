@@ -17,6 +17,7 @@ export default class CalculateTotalRoomScore
     @inject(PORT_TYPES.ILearningRoomPort)
     private learningRoomPort: ILearningRoomPort
   ) {}
+
   execute(data: { roomId: number }): void {
     const room = this.entitiyContainer.filterEntitiesOfType<LearningRoomEntity>(
       LearningRoomEntity,
@@ -34,10 +35,8 @@ export default class CalculateTotalRoomScore
     }, 0);
 
     // TODO: This has to be more refined
-    if (roomScore >= 1) {
-      this.learningRoomPort.openRoomDoor();
-    }
+    this.learningRoomPort.presentNewScore(roomScore, roomScore >= 1);
 
-    console.log("Totoal Room Score:", roomScore);
+    console.log("Total Room Score:", roomScore);
   }
 }

@@ -5,6 +5,7 @@ import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
+import IScorePanelPresenter from "../../React/ScorePanel/IScorePanelPresenter";
 import IDoorPresenter from "../Door/IDoorPresenter";
 import ILearningRoomPort from "./ILearningRoomPort";
 import LearningRoomViewModel from "./LearningRoomViewModel";
@@ -13,6 +14,8 @@ import LearningRoomViewModel from "./LearningRoomViewModel";
 export default class LearningRoomPresenter implements ILearningRoomPort {
   private viewModel: LearningRoomViewModel;
   private doorPresenter: IDoorPresenter;
+  private scorePanelPresenter: IScorePanelPresenter;
+
   public set ViewModel(viewModel: LearningRoomViewModel) {
     this.viewModel = viewModel;
   }
@@ -52,8 +55,22 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
     director.Builder = builder;
     director.build();
     builder.getPresenter().presentDoor(this.getDoorPosition());
-
     this.doorPresenter = builder.getPresenter();
+
+    // create score panel
+    builder = CoreDIContainer.get<IPresentationBuilder>(
+      CORE_TYPES.IScorePanelBuilder
+    );
+    director.Builder = builder;
+    director.build();
+    this.scorePanelPresenter = builder.getPresenter();
+  }
+
+  presentNewScore(score: number, completed: boolean): void {
+    this.scorePanelPresenter.presentScore(score);
+    if (completed) {
+      this.doorPresenter.openDoor();
+    }
   }
 
   private setRoomDimensions(learningRoomTO: LearningRoomTO): void {
@@ -94,9 +111,5 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
       ),
       90,
     ];
-  }
-
-  openRoomDoor(): void {
-    this.doorPresenter.openDoor();
   }
 }
