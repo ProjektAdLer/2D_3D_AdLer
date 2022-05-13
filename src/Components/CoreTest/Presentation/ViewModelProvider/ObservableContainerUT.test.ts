@@ -8,10 +8,10 @@ class TestClassB {
 }
 
 describe("ObservableContainer", () => {
-  let container: ObservableContainer<TestClassA>;
+  let container: ObservableContainer<TestClassA, TestClassB>;
 
   beforeEach(() => {
-    container = new ObservableContainer<TestClassA>(TestClassA);
+    container = new ObservableContainer<TestClassA, TestClassB>(TestClassA);
   });
 
   test("matchesType compares the container type with a given type and return a corresponding bool", () => {
@@ -28,11 +28,12 @@ describe("ObservableContainer", () => {
 
   test("registerRequest calls new callback immediately if values are available", () => {
     const callback = jest.fn();
-    const viewModel = new TestClassA();
-    container.addNewValue(viewModel);
+    const testClassA = new TestClassA();
+    const testClassB = new TestClassB();
+    container.addNewValue(testClassB);
     container.registerRequest(callback);
     expect(callback).toHaveBeenCalledTimes(1);
-    expect(callback).toHaveBeenCalledWith([viewModel]);
+    expect(callback).toHaveBeenCalledWith([testClassA]);
   });
 
   test("cancelRequest cancels a previously registered callback", () => {
@@ -43,42 +44,42 @@ describe("ObservableContainer", () => {
   });
 
   test("addNewValue adds a new value to the container", () => {
-    const viewModel = new TestClassA();
-    container.addNewValue(viewModel);
+    const testClass = new TestClassB();
+    container.addNewValue(testClass);
     expect(container["values"].length).toBe(1);
-    expect(container["values"][0]).toBe(viewModel);
+    expect(container["values"][0]).toBe(testClass);
   });
 
   test("addNewValue calls registered callbacks", () => {
     const callback = jest.fn();
     container.registerRequest(callback);
-    const viewModel = new TestClassA();
-    container.addNewValue(viewModel);
+    const testClassB = new TestClassB();
+    container.addNewValue(testClassB);
     expect(callback).toHaveBeenCalledTimes(1);
-    expect(callback).toHaveBeenCalledWith([viewModel]);
+    expect(callback).toHaveBeenCalledWith([testClassB]);
   });
 
   test("removeValue removes a previously added value", () => {
-    const viewModel = new TestClassA();
-    container.addNewValue(viewModel);
-    container.removeValue(viewModel);
+    const testClassB = new TestClassB();
+    container.addNewValue(testClassB);
+    container.removeValue(testClassB);
     expect(container["values"].length).toBe(0);
   });
 
   test("removeValue calls registered callbacks", () => {
     const callback = jest.fn();
     container.registerRequest(callback);
-    const viewModel = new TestClassA();
-    container.addNewValue(viewModel);
-    container.removeValue(viewModel);
+    const testClass = new TestClassB();
+    container.addNewValue(testClass);
+    container.removeValue(testClass);
     expect(callback).toHaveBeenCalledTimes(2);
     expect(callback).lastCalledWith([]);
   });
 
   test("getValues returns all previously added values", () => {
-    const valueA = new TestClassA();
-    container.addNewValue(valueA);
+    const value = new TestClassB();
+    container.addNewValue(value);
     console.log(container.getValues());
-    expect(container.getValues()).toEqual([valueA]);
+    expect(container.getValues()).toEqual([value]);
   });
 });
