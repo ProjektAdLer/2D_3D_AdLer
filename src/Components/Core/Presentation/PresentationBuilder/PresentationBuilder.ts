@@ -25,9 +25,10 @@ export default abstract class PresentationBuilder<VM, C, V, P>
   protected view: V | undefined;
   protected presenter: P | undefined;
 
+  // parameters are decorated with @unmanaged to prevent automatic dependency injection
   constructor(
     @unmanaged()
-    private viewModelConstructorRef: (new () => VM) | undefined,
+    private viewModelConstructorRef: new () => VM | undefined,
     @unmanaged()
     private controllerConstructorRef: (new (viewModel: VM) => C) | undefined,
     @unmanaged()
@@ -36,7 +37,9 @@ export default abstract class PresentationBuilder<VM, C, V, P>
       | undefined,
     @unmanaged()
     private presenterConstructorRef: (new (viewModel: VM) => P) | undefined
-  ) {}
+  ) {
+    this.reset();
+  }
 
   reset(): void {
     this.view = undefined;
