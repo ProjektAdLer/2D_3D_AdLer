@@ -9,8 +9,8 @@ jest.mock("@babylonjs/core");
 
 describe("LearningElementView", () => {
   test("constructor sets up render callbacks", () => {
-    const controller = new LearningElementController();
     const viewModel = new LearningElementViewModel();
+    const controller = new LearningElementController(viewModel);
     const view = new LearningElementView(viewModel, controller);
 
     expect(view["controller"]).toBe(controller);
