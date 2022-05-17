@@ -6,7 +6,7 @@ import LearningElementViewModel from "../../../../Core/Presentation/Babylon/Lear
 jest.mock("@babylonjs/core");
 
 const testElementTO: LearningElementTO = {
-  id: "test",
+  id: 0,
   type: "h5p",
 };
 const testVector = new Vector3(1, 2, 3);
