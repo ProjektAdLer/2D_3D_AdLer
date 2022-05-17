@@ -4,7 +4,6 @@ import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import LearningRoomEntity from "../../Domain/Entities/LearningRoomEntity";
 import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import ILearningRoomPort from "../../Presentation/Babylon/LearningRoom/ILearningRoomPort";
-import ILearningElementPort from "../LearningElementStarted/ILearningElementPort";
 import ICalculateTotalRoomScore from "./ICalculateTotalRoomScore";
 
 @injectable()
@@ -36,7 +35,5 @@ export default class CalculateTotalRoomScore
 
     // TODO: This has to be more refined
     this.learningRoomPort.presentNewScore(roomScore, roomScore >= 20);
-
-    console.log("Total Room Score:", roomScore);
   }
 }
