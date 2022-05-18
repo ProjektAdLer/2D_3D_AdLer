@@ -2,14 +2,15 @@ import { injectable, unmanaged } from "inversify";
 import IPresentationBuilder from "./IPresentationBuilder";
 
 /**
- * @class PresentationBuilder
- *
  * @description Generic class for building ViewModel, Controller, View and Presenter.
  *
- * Pass undefined in the type parameter and constructor to ignore building that component.
- * Override build methods (calling base implementations if needed) to customize the build process.
+ * Type Parameters define the type of the ViewModel, Controller, View and Presenter, that are exposed to the client. These should be interfaces where possible.
  *
- * The derived class must call the super constructor with the constructor references or undefined for each of ViewModel, Controller, View and Presenter.
+ * Constructor references passed to the constructor define the types of the ViewModel, Controller, View and Presenter, that are instantiated.
+ * The derived class must call the super constructor with the constructor reference or undefined for each of ViewModel, Controller, View and Presenter.
+ *
+ * Pass undefined in the type parameter and constructor to skip building that component. The view model cannot be skipped.
+ * Override build methods (calling base implementations if needed) to customize the build process.
  *
  * @typeparam VM - ViewModel type.
  * @typeparam C - Controller type.
@@ -20,25 +21,53 @@ import IPresentationBuilder from "./IPresentationBuilder";
 export default abstract class PresentationBuilder<VM, C, V, P>
   implements IPresentationBuilder
 {
-  protected viewModel: VM | undefined;
-  protected controller: C | undefined;
-  protected view: V | undefined;
-  protected presenter: P | undefined;
+  // build products
+  protected viewModel: VM | undefined = undefined;
+  protected controller: C | undefined = undefined;
+  protected view: V | undefined = undefined;
+  protected presenter: P | undefined = undefined;
+
+  // constructor references
+  private viewModelConstructorRef: new () => VM;
+  private controllerConstructorRef: (new (viewModel: VM) => C) | undefined;
+  private viewConstructorRef:
+    | ((new (viewModel: VM, controller: C) => V) & (new (viewModel: VM) => V))
+    | undefined;
+  private presenterConstructorRef: (new (viewModel: VM) => P) | undefined;
+
+  // constructor for view constructor reference with viewModel and controller
+  constructor(
+    viewModelConstructorRef: new () => VM,
+    controllerConstructorRef: (new (viewModel: VM) => C) | undefined,
+    viewConstructorRef: (new (viewModel: VM, controller: C) => V) | undefined,
+    presenterConstructorRef: (new (viewModel: VM) => P) | undefined
+  );
+
+  // constructor for view constructor reference with only viewModel
+  constructor(
+    viewModelConstructorRef: new () => VM,
+    controllerConstructorRef: (new (viewModel: VM) => C) | undefined,
+    viewConstructorRef: (new (viewModel: VM) => V) | undefined,
+    presenterConstructorRef: (new (viewModel: VM) => P) | undefined
+  );
 
   // parameters are decorated with @unmanaged to prevent automatic dependency injection
   constructor(
     @unmanaged()
-    private viewModelConstructorRef: new () => VM | undefined,
+    viewModelConstructorRef: new () => VM,
     @unmanaged()
-    private controllerConstructorRef: (new (viewModel: VM) => C) | undefined,
+    controllerConstructorRef: (new (viewModel: VM) => C) | undefined,
     @unmanaged()
-    private viewConstructorRef:
-      | (new (viewmodel: VM, controller?: C) => V)
+    viewConstructorRef:
+      | ((new (viewModel: VM, controller: C) => V) & (new (viewModel: VM) => V))
       | undefined,
     @unmanaged()
-    private presenterConstructorRef: (new (viewModel: VM) => P) | undefined
+    presenterConstructorRef: (new (viewModel: VM) => P) | undefined
   ) {
-    this.reset();
+    this.viewModelConstructorRef = viewModelConstructorRef;
+    this.controllerConstructorRef = controllerConstructorRef;
+    this.viewConstructorRef = viewConstructorRef;
+    this.presenterConstructorRef = presenterConstructorRef;
   }
 
   reset(): void {
@@ -48,14 +77,23 @@ export default abstract class PresentationBuilder<VM, C, V, P>
     this.controller = undefined;
   }
 
+  /**
+   * @description Builds the ViewModel.
+   * Override this method to customize the view model building step.
+   * Call the super method to call the base implementation.
+   */
   buildViewModel(): void {
-    if (this.viewModelConstructorRef === undefined) return;
     this.viewModel = new this.viewModelConstructorRef();
   }
 
+  /**
+   * @description Builds the Controller.
+   * This step is skipped if undefined was passed as the controller constructor reference.
+   * Override this method to customize the controller building step.
+   */
   buildController(): void {
-    if (!this.controllerConstructorRef) return;
-    if (!this.viewModel) {
+    if (this.controllerConstructorRef === undefined) return;
+    if (this.viewModel === undefined) {
       throw new Error(
         "ViewModel isn't build yet. Call buildViewModel() first."
       );
@@ -63,9 +101,14 @@ export default abstract class PresentationBuilder<VM, C, V, P>
     this.controller = new this.controllerConstructorRef(this.viewModel);
   }
 
+  /**
+   * @description Builds the View.
+   * This step is skipped if undefined was passed as the view constructor reference.
+   * Override this method to customize the view building step.
+   */
   buildView(): void {
     if (this.viewConstructorRef === undefined) return;
-    if (!this.viewModel) {
+    if (this.viewModel === undefined) {
       throw new Error(
         "ViewModel isn't build yet. Call buildViewModel() first."
       );
@@ -75,12 +118,22 @@ export default abstract class PresentationBuilder<VM, C, V, P>
         "Controller isn't build yet. Call buildController() first."
       );
     }
-    this.view = new this.viewConstructorRef(this.viewModel, this.controller);
+
+    if (this.viewConstructorRef.length === 2) {
+      this.view = new this.viewConstructorRef(this.viewModel, this.controller!);
+    } else if (this.viewConstructorRef.length === 1) {
+      this.view = new this.viewConstructorRef(this.viewModel);
+    }
   }
 
+  /**
+   * @description Builds the Presenter.
+   * This step is skipped if undefined was passed as the presenter constructor reference.
+   * Override this method to customize the presenter building step.
+   */
   buildPresenter(): void {
     if (this.presenterConstructorRef === undefined) return;
-    if (!this.viewModel) {
+    if (this.viewModel === undefined) {
       throw new Error(
         "ViewModel isn't build yet. Call buildViewModel() first."
       );
@@ -88,13 +141,27 @@ export default abstract class PresentationBuilder<VM, C, V, P>
     this.presenter = new this.presenterConstructorRef(this.viewModel);
   }
 
-  getPresenter() {
+  /**
+   * @returns The build presenter or undefined if the build process was not started yet or isn't complete.
+   * @description This method should not be overridden.
+   */
+  getPresenter(): P | undefined {
     return this.presenter;
   }
-  getController() {
+
+  /**
+   * @returns The build controller or undefined if the build process was not started yet or isn't complete.
+   * @description This method should not be overridden.
+   */
+  getController(): C | undefined {
     return this.controller;
   }
-  getViewModel() {
+
+  /**
+   * @returns The build view model or undefined if the build process was not started yet or isn't complete.
+   * @description This method should not be overridden.
+   */
+  getViewModel(): VM | undefined {
     return this.viewModel;
   }
 }
