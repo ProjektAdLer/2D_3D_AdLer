@@ -9,10 +9,8 @@ import LearningElementViewModel from "./LearningElementViewModel";
 export default class LearningElementController
   implements ILearningElementController
 {
-  private viewModel: LearningElementViewModel;
-  constructor(viewModel: LearningElementViewModel) {
-    this.viewModel = viewModel;
-  }
+  constructor(private viewModel: LearningElementViewModel) {}
+
   clicked = (event?: ActionEvent): void => {
     const useCase = CoreDIContainer.get<ILearningElementStartedUseCase>(
       USECASE_TYPES.ILearningElementStartedUseCase
