@@ -4,7 +4,10 @@ export default function StyledButton({
   children,
   className,
   ...rest
-}: React.HTMLAttributes<HTMLButtonElement>) {
+}: React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>) {
   return (
     <button
       className={

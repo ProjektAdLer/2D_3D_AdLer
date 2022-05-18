@@ -1,1 +1,3 @@
-export default interface IMoodleLoginFormController {}
+export default interface IMoodleLoginFormController {
+  loginAsync(username: string, password: string): Promise<void>;
+}

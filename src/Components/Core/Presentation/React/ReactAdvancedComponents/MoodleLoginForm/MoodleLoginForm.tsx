@@ -1,3 +1,4 @@
+import { useState } from "react";
 import useObservable from "../../CustomHooks/useObservable";
 import useViewModelControllerProvider from "../../CustomHooks/useViewModelControllerProvider";
 import StyledButton from "../../ReactBaseComponents/StyledButton";
@@ -13,22 +14,38 @@ export default function MoodleLoginForm() {
     MoodleLoginFormController
   >(MoodleLoginFormViewModel);
 
-  const [test, setTest] = useObservable<string>(viewModels[0]?.test);
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <StyledContainer className="top-0 right-0 flex">
       <div className="login-screen flex flex-col justify-center gap-2">
         <div className="app-title flex justify-center text-white lg:text-2xl font-bold">
-          <h1>{test}</h1>
+          <h1>{viewModels[0]?.test.Value}</h1>
         </div>
 
-        <StyledInputField />
+        <StyledInputField
+          placeholder="Nutzername"
+          onChange={(newVal) => {
+            setUserName(newVal.target.value);
+          }}
+        />
 
-        <StyledPasswordField />
+        <StyledPasswordField
+          placeholder="Passwort"
+          onChange={(newVal) => {
+            setPassword(newVal.target.value);
+          }}
+        />
 
         <StyledButton
-          onClick={() => {
-            alert("Du wirst nun in moodle angemeldet!");
+          onClick={async () => {
+            try {
+              await controllers[0].loginAsync(userName, password);
+              alert(`${userName} logged in`);
+            } catch (error) {
+              console.log(error);
+            }
           }}
         >
           <p>Login</p>
