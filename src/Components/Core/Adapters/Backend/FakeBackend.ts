@@ -6,9 +6,16 @@ import { type IBackend } from "./IBackend";
 import { APILearningRoomTO } from "./APILearningRoomTO";
 import { APILearningElementTO } from "./APILearningElementTO";
 
+import axios from "axios";
+
 @injectable()
 export class FakeBackend implements IBackend {
-  logInUser(username: string, password: string): Promise<string> {
+  async logInUser(username: string, password: string): Promise<string> {
+    // const response = await axios.get<string>(
+    //   "https://localhost:49155/WeatherForecast"
+    // );
+
+    // return response.data;
     return Promise.resolve(`${username}_token`);
   }
   scoreLearningElement(learningElementId: LearningComponentID): Promise<void> {
