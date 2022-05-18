@@ -9,7 +9,7 @@ export default function StyledInputField({
     <div className="control-group flex justify-center">
       <input
         type="text"
-        className="login-field login-field border-adlerdarkblue border-2 rounded-lg p-2"
+        className="login-field rounded-lg p-2"
         placeholder="Meesa Input Field!"
       ></input>
     </div>
