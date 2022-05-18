@@ -1,4 +1,4 @@
-import { Engine, Scene } from "@babylonjs/core";
+import { Engine, Scene, SceneLoader } from "@babylonjs/core";
 import LearningElementController from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementController";
 import LearningElementView from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementView";
 import LearningElementViewModel from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementViewModel";
@@ -9,9 +9,7 @@ jest.mock("@babylonjs/core");
 
 describe("LearningElementView", () => {
   test("constructor sets up render callbacks", () => {
-    const viewModel = new LearningElementViewModel();
-    const controller = new LearningElementController(viewModel);
-    const view = new LearningElementView(viewModel, controller);
+    const [viewModel, controller, view] = setup();
 
     expect(view["controller"]).toBe(controller);
     expect(view["viewModel"]).toBe(viewModel);
@@ -20,3 +18,14 @@ describe("LearningElementView", () => {
     expect(viewModel.rotation.subscribe).toHaveBeenCalledTimes(1);
   });
 });
+
+function setup(): [
+  LearningElementViewModel,
+  LearningElementController,
+  LearningElementView
+] {
+  const viewModel = new LearningElementViewModel();
+  const controller = new LearningElementController(viewModel);
+  const view = new LearningElementView(viewModel, controller);
+  return [viewModel, controller, view];
+}
