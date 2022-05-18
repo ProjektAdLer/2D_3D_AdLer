@@ -11,9 +11,9 @@ export default function MoodleLoginForm() {
           <h1>Moodle Login</h1>
         </div>
 
-        <StyledInputField></StyledInputField>
+        <StyledInputField />
 
-        <StyledPasswordField></StyledPasswordField>
+        <StyledPasswordField />
 
         <StyledButton
           onClick={() => {
