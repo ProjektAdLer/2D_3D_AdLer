@@ -5,6 +5,7 @@ import MenuBar from "../ReactAdvancedComponents/MenuBar";
 import ScorePanel from "../ScorePanel/ScorePanel";
 import WorldNamePanel from "../ReactAdvancedComponents/WorldNamePanel";
 import LearningElementModal from "../LearningElementModal/LearningElementModal";
+import MoodleLoginForm from "../ReactAdvancedComponents/MoodleLoginForm";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <WorldNamePanel />
         <BabylonCanvas className="w-screen h-screen" />
         <LearningElementModal />
+        <MoodleLoginForm />
       </div>
     </React.Fragment>
   );
