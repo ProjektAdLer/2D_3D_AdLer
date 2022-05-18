@@ -29,7 +29,7 @@ export default function MoodleLoginForm() {
           }}
         >
           <p className="text-xs">
-            Bruda! <br></br> Du hasch dein <br></br> Passwort vergesse?!
+            Bruda! <br></br> Du hasch dein <br></br> Passwort vergessen?!
           </p>
         </StyledButton>
       </div>
