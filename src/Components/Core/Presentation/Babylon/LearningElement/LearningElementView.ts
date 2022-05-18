@@ -7,7 +7,7 @@ import {
   Tools,
   Vector3,
 } from "@babylonjs/core";
-import { inject, injectable } from "inversify";
+import { injectable } from "inversify";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import type ISceneController from "../SceneManagment/ISceneController";

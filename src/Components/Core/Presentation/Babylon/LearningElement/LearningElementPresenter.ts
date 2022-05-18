@@ -6,12 +6,7 @@ import LearningElementViewModel from "./LearningElementViewModel";
 export default class LearningElementPresenter
   implements ILearningElementPresenter
 {
-  private viewModel: LearningElementViewModel;
-
-  public set ViewModel(newViewModel: LearningElementViewModel) {
-    this.viewModel = newViewModel;
-  }
-
+  constructor(private viewModel: LearningElementViewModel) {}
   public presentLearningElement(
     learningElementTO: LearningElementTO,
     position: [Vector3, number]
