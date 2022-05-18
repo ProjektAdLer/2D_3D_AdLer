@@ -21,7 +21,7 @@ const elementBuilder = (type: LearningElementType) => {
       return <VideoComponent embedId="iik25wqIuFo?autoplay=1" />;
     case "image":
       return (
-        <div className="h-100 w-100">
+        <div className="h-full w-full">
           <ImageComponent
             imagesrc={
               "https://cdn.discordapp.com/attachments/887582352560246804/949558830486929458/Doku_Raumaufbau.png"
