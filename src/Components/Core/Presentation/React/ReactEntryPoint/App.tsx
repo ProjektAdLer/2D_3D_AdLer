@@ -5,7 +5,7 @@ import MenuBar from "../ReactAdvancedComponents/MenuBar";
 import ScorePanel from "../ScorePanel/ScorePanel";
 import WorldNamePanel from "../ReactAdvancedComponents/WorldNamePanel";
 import LearningElementModal from "../LearningElementModal/LearningElementModal";
-import MoodleLoginForm from "../ReactAdvancedComponents/MoodleLoginForm";
+import MoodleLoginForm from "../ReactAdvancedComponents/MoodleLoginForm/MoodleLoginForm";
 
 function App() {
   return (

@@ -1,7 +1,7 @@
-import StyledButton from "../ReactBaseComponents/StyledButton";
-import StyledContainer from "../ReactBaseComponents/StyledContainer";
-import StyledInputField from "../ReactBaseComponents/StyledInputField";
-import StyledPasswordField from "../ReactBaseComponents/StyledPasswordField";
+import StyledButton from "../../ReactBaseComponents/StyledButton";
+import StyledContainer from "../../ReactBaseComponents/StyledContainer";
+import StyledInputField from "../../ReactBaseComponents/StyledInputField";
+import StyledPasswordField from "../../ReactBaseComponents/StyledPasswordField";
 
 export default function MoodleLoginForm() {
   return (
