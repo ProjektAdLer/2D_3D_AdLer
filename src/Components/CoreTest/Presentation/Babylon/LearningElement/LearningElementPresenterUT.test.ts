@@ -14,16 +14,12 @@ const testVector = new Vector3(1, 2, 3);
 describe("LearningElementPresenter", () => {
   let presenter: LearningElementPresenter;
 
-  beforeEach(() => {
-    presenter = new LearningElementPresenter();
-  });
-
   afterAll(() => {
     jest.restoreAllMocks();
   });
 
   test("presentLearningElement calls the babylon engine", () => {
-    presenter.ViewModel = new LearningElementViewModel();
+    presenter = new LearningElementPresenter(new LearningElementViewModel());
     presenter.presentLearningElement(testElementTO, [testVector, 0]);
 
     expect(presenter["viewModel"].id).toBe(testElementTO.id);
@@ -33,8 +29,9 @@ describe("LearningElementPresenter", () => {
   });
 
   test("presentLearningElement throws error when no view model is set", () => {
+    presenter = new LearningElementPresenter(null);
     expect(() => {
       presenter.presentLearningElement(testElementTO, [testVector, 0]);
-    }).toThrowError("ViewModel not set");
+    }).toThrowError();
   });
 });

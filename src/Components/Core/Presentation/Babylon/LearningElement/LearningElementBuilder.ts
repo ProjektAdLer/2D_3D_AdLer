@@ -1,4 +1,4 @@
-import { inject, injectable } from "inversify";
+import { injectable } from "inversify";
 import ILearningElementPort from "../../../Application/LearningElementStarted/ILearningElementPort";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import ILearningElementController from "./ILearningElementController";
@@ -8,92 +8,30 @@ import LearningElementController from "./LearningElementController";
 import LearningElementPresenter from "./LearningElementPresenter";
 import LearningElementView from "./LearningElementView";
 import LearningElementViewModel from "./LearningElementViewModel";
-import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
+import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
+import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 
 @injectable()
-export default class LearningElementBuilder implements IPresentationBuilder {
-  private view: ILearningElementView | null = null;
-  private viewModel: LearningElementViewModel | null = null;
-  private controller: ILearningElementController | null = null;
-  private presenter: ILearningElementPresenter | null = null;
-
-  constructor(
-    @inject(PORT_TYPES.ILearningElementPort)
-    private learningElemntPort: ILearningElementPort
-  ) {}
-
-  reset(): void {
-    this.view = null;
-    this.viewModel = null;
-    this.controller = null;
-    this.presenter = null;
-  }
-
-  buildViewModel(): void {
-    this.viewModel = new LearningElementViewModel();
-  }
-
-  buildController(): void {
-    if (!this.viewModel) {
-      throw new Error(
-        "ViewModel isn't build yet. Call buildViewModel() first."
-      );
-    }
-    this.controller = new LearningElementController(this.viewModel);
-  }
-
-  buildView(): void {
-    if (!this.viewModel) {
-      throw new Error(
-        "ViewModel isn't build yet. Call buildViewModel() first."
-      );
-    }
-    if (!this.controller) {
-      throw new Error(
-        "Controller isn't build yet. Call buildController() first."
-      );
-    }
-
-    this.view = new LearningElementView(this.viewModel, this.controller);
+export default class LearningElementBuilder extends PresentationBuilder<
+  LearningElementViewModel,
+  ILearningElementController,
+  ILearningElementView,
+  ILearningElementPresenter
+> {
+  constructor() {
+    super(
+      LearningElementViewModel,
+      LearningElementController,
+      LearningElementView,
+      LearningElementPresenter
+    );
   }
 
   buildPresenter(): void {
-    if (!this.viewModel) {
-      throw new Error(
-        "ViewModel isn't build yet. Call buildViewModel() first."
-      );
-    }
+    super.buildPresenter();
 
-    this.presenter = new LearningElementPresenter();
-    this.presenter.ViewModel = this.viewModel;
-
-    this.learningElemntPort.addLearningElementPresenter(this.presenter);
-  }
-
-  getPresenter(): ILearningElementPresenter {
-    if (!this.presenter) {
-      throw new Error(
-        "Presenter isn't build yet. Call buildPresenter() first."
-      );
-    }
-    return this.presenter;
-  }
-
-  getController(): ILearningElementController {
-    if (!this.controller) {
-      throw new Error(
-        "Controller isn't build yet. Call buildController() first."
-      );
-    }
-    return this.controller;
-  }
-
-  getViewModel(): LearningElementViewModel {
-    if (!this.viewModel) {
-      throw new Error(
-        "ViewModel isn't build yet. Call buildViewModel() first."
-      );
-    }
-    return this.viewModel;
+    CoreDIContainer.get<ILearningElementPort>(
+      PORT_TYPES.ILearningElementPort
+    ).addLearningElementPresenter(this.presenter!);
   }
 }

@@ -3,8 +3,6 @@ import { LearningElementTO } from "../../../Application/LoadWorld/ILearningWorld
 import LearningElementViewModel from "./LearningElementViewModel";
 
 export default interface ILearningElementPresenter {
-  set ViewModel(newViewModel: LearningElementViewModel);
-
   presentLearningElement(
     learningElementTO: LearningElementTO,
     positions: [Vector3, number]
