@@ -26,15 +26,14 @@ export default function StyledModal({
   ...restProps
 }: Props) {
   if (!showModal) return null;
-
   return (
     <div
-      className="modal flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-blacktrans50"
+      className="modal flex justify-center items-center fixed max-h-full top-0 left-0 right-0 bottom-0 bg-blacktrans50"
       {...restProps}
     >
-      <div className="modal-content bg-adlerlightblue w-full lg:w95vw h-fit max-h-screen border-8 border-adlerlightblue rounded-lg overflow-auto">
-        <div className="modal-header font-black flex justify-between items-center p-4 h-4 lg:h-16 text-xl lg:text-4xl">
-          {title}
+      <div className="modal-content bg-adlerlightblue lg:w95vw border-8 max-h-90pro border-adlerlightblue rounded-lg overflow-auto">
+        <div className="modal-header font-black flex justify-end items-center p-4 h-4 lg:h-16 text-xl lg:text-4xl">
+          <div className="w-full "> {title}</div>
           <button
             onClick={onClose}
             className="button-close font-black text-xs lg:text-xl drop-shadow-sm border-b-4 border-r-4 border-adlerdarkblue active:border-0 hover:cursor-pointer py-1 px-2 bg-adlerblue rounded-lg text-white"
@@ -42,7 +41,7 @@ export default function StyledModal({
             X
           </button>
         </div>
-        <div className="modal-body flex h-fit justify-center items-center p-2 border-t-2 border-b-2 rounded-lg border-adlerlightblue">
+        <div className="modal-body flex max-h-fit justify-center items-center p-2 border-t-2 border-b-2 rounded-lg border-adlerlightblue">
           {children}
         </div>
         <div className="modal-footer font-medium flex shrink justify-between items-center p-4 h-fit">
