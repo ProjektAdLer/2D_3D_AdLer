@@ -6,7 +6,7 @@ export default function StyledInputField({
   ...rest
 }: React.HTMLAttributes<HTMLInputElement>) {
   return (
-    <div className="control-group flex justify-center">
+    <div className={className + " control-group flex justify-center"}>
       <input
         type="text"
         className="login-field rounded-lg p-2"

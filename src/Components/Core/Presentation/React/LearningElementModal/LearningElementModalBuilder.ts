@@ -35,5 +35,3 @@ export default class LearningElementModalBuilder extends PresentationBuilder<
     );
   }
 }
-
-// registerViewModelOnly(this.viewModel, LearningElementModalViewModel);
