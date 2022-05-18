@@ -5,6 +5,8 @@ import ILearningElementStartedUseCase from "../../Application/LearningElementSta
 import LearningElementStartedUseCase from "../../Application/LearningElementStarted/LearningElementStartedUseCase";
 import ILoadWorldUseCase from "../../Application/LoadWorld/ILoadWorldUseCase";
 import LoadWorldUseCase from "../../Application/LoadWorld/LoadWorldUseCase";
+import ILogUserIntoMoodleUseCase from "../../Application/LogUserIntoMoodle/ILogUserIntoMoodleUseCase";
+import LogUserIntoMoodleUseCase from "../../Application/LogUserIntoMoodle/LogUserIntoMoodleUseCase";
 import IScoreLearningElementUseCase from "../../Application/ScoreLearningElement/IScoreLearningElementUseCase";
 import ScoreLearningElementUseCase from "../../Application/ScoreLearningElement/ScoreLearningElementUseCase";
 import USECASE_TYPES from "./USECASE_SYMBOLS";
@@ -28,6 +30,10 @@ const useCaseDIContainer = new ContainerModule((bind) => {
 
   bind<ICalculateTotalRoomScore>(USECASE_TYPES.ICalculateTotalRoomScore)
     .to(CalculateTotalRoomScore)
+    .inSingletonScope();
+
+  bind<ILogUserIntoMoodleUseCase>(USECASE_TYPES.ILogUserIntoMoodleUseCase)
+    .to(LogUserIntoMoodleUseCase)
     .inSingletonScope();
 });
 

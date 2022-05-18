@@ -40,12 +40,8 @@ export default function MoodleLoginForm() {
 
         <StyledButton
           onClick={async () => {
-            try {
-              await controllers[0].loginAsync(userName, password);
-              alert(`${userName} logged in`);
-            } catch (error) {
-              console.log(error);
-            }
+            await controllers[0].loginAsync(userName, password);
+            alert(`${userName} logged in`);
           }}
         >
           <p>Login</p>
