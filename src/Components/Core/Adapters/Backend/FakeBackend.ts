@@ -8,6 +8,9 @@ import { APILearningElementTO } from "./APILearningElementTO";
 
 @injectable()
 export class FakeBackend implements IBackend {
+  logInUser(username: string, password: string): Promise<string> {
+    return Promise.resolve(`${username}_token`);
+  }
   scoreLearningElement(learningElementId: LearningComponentID): Promise<void> {
     console.log(
       `Scoring learning element with id ${learningElementId} via FakeBackend`

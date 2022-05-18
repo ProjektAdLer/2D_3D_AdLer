@@ -2,4 +2,5 @@ import IMoodleLoginFormPresenter from "../../React/ReactAdvancedComponents/Moodl
 
 export default interface IMoodlePort {
   registerMoodleLoginPresenter(presenter: IMoodleLoginFormPresenter): void;
+  debug_DisplayUserToken(userToken: string): void;
 }

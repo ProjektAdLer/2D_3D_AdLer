@@ -14,6 +14,10 @@ export default function MoodleLoginForm() {
     MoodleLoginFormController
   >(MoodleLoginFormViewModel);
 
+  const [userToken, setUserToken] = useObservable<string>(
+    viewModels[0]?.userToken
+  );
+
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -56,6 +60,7 @@ export default function MoodleLoginForm() {
             Bruda! <br></br> Du hasch dein <br></br> Passwort vergessen?!
           </p>
         </StyledButton>
+        <h3>User-Token: {userToken}</h3>
       </div>
     </StyledContainer>
   );

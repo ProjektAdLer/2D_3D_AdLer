@@ -10,4 +10,10 @@ export default class MoodlePort implements IMoodlePort {
       throw new Error("MoodlePort is already registered");
     this.moodleLoginFormPresenter = presenter;
   }
+
+  debug_DisplayUserToken(userToken: string): void {
+    if (!this.moodleLoginFormPresenter)
+      throw new Error("MoodlePort is not registered");
+    this.moodleLoginFormPresenter.debug_DisplayUserToken(userToken);
+  }
 }

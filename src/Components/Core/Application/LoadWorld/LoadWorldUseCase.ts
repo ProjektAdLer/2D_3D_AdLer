@@ -22,7 +22,8 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     private learningWorldPort: ILearningWorldPort,
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
-    @inject(CORE_TYPES.IBackend) private backend: IBackend
+    @inject(CORE_TYPES.IBackend)
+    private backend: IBackend
   ) {}
 
   async executeAsync(): Promise<void> {
