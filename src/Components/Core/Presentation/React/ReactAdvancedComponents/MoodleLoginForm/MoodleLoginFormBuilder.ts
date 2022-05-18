@@ -1,6 +1,8 @@
 import { injectable } from "inversify";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
+import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
+import IMoodlePort from "../../../Ports/MoodlePort/IMoodlePort";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
 import MoodleLoginFormController from "./MoodleLoginFormController";
@@ -29,5 +31,13 @@ export default class MoodleLoginFormPresenterBuilder extends PresentationBuilder
     CoreDIContainer.get<ViewModelControllerProvider>(
       CORE_TYPES.IViewModelControllerProvider
     ).registerTupel(this.viewModel, this.controller, MoodleLoginFormViewModel);
+  }
+
+  override buildPresenter(): void {
+    super.buildPresenter();
+
+    CoreDIContainer.get<IMoodlePort>(
+      PORT_TYPES.IMoodlePort
+    ).registerMoodleLoginPresenter(this.presenter!);
   }
 }

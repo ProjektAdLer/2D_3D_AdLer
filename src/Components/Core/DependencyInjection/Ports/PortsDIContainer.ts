@@ -5,6 +5,8 @@ import ILearningRoomPort from "../../Presentation/Babylon/LearningRoom/ILearning
 import LearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/LearningRoomPresenter";
 import LearningElementPort from "../../Presentation/Ports/LearningElementPort/LearningElementPort";
 import LearningWorldPort from "../../Presentation/Ports/LearningWorldPort/LearningWorldPort";
+import IMoodlePort from "../../Presentation/Ports/MoodlePort/IMoodlePort";
+import MoodlePort from "../../Presentation/Ports/MoodlePort/MoodlePort";
 import PORT_TYPES from "./PORT_TYPES";
 const PortsDIContainer = new ContainerModule((bind) => {
   // Ports
@@ -19,6 +21,8 @@ const PortsDIContainer = new ContainerModule((bind) => {
   bind<ILearningElementPort>(PORT_TYPES.ILearningElementPort)
     .to(LearningElementPort)
     .inSingletonScope();
+
+  bind<IMoodlePort>(PORT_TYPES.IMoodlePort).to(MoodlePort).inSingletonScope();
 });
 
 export default PortsDIContainer;
