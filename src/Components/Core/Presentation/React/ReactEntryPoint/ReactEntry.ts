@@ -5,6 +5,9 @@ import { injectable } from "inversify";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import App from "./App";
+import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
+import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
+import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 
 @injectable()
 export default class ReactEntry implements IReactEntry {
@@ -24,6 +27,19 @@ export default class ReactEntry implements IReactEntry {
       providerComponent
     );
 
+    this.buildViewModels();
+
     ReactDOM.render(strictModeComponent, document.getElementById("root"));
+  }
+
+  private buildViewModels(): void {
+    let director = CoreDIContainer.get<IPresentationDirector>(
+      CORE_TYPES.IPresentationDirector
+    );
+    let builder = CoreDIContainer.get<IPresentationBuilder>(
+      CORE_TYPES.IMoodleLoginFormBuilder
+    );
+    director.Builder = builder;
+    director.build();
   }
 }

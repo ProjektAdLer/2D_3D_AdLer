@@ -26,6 +26,7 @@ import LearningElementModalPresenter from "../Presentation/React/LearningElement
 import LearningElementModalBuilder from "../Presentation/React/LearningElementModal/LearningElementModalBuilder";
 import DoorBuilder from "../Presentation/Babylon/Door/DoorBuilder";
 import ScorePanelBuilder from "../Presentation/React/ScorePanel/ScorePanelBuilder";
+import MoodleLoginFormPresenterBuilder from "../Presentation/React/ReactAdvancedComponents/MoodleLoginForm/MoodleLoginFormBuilder";
 
 var CoreDIContainer = new Container();
 
@@ -75,6 +76,11 @@ CoreDIContainer.bind<IPresentationBuilder>(CORE_TYPES.IDoorBuilder).to(
 CoreDIContainer.bind<IPresentationBuilder>(CORE_TYPES.IScorePanelBuilder).to(
   ScorePanelBuilder
 );
+CoreDIContainer.bind<MoodleLoginFormPresenterBuilder>(
+  CORE_TYPES.IMoodleLoginFormBuilder
+)
+  .to(MoodleLoginFormPresenterBuilder)
+  .inSingletonScope();
 
 CoreDIContainer.load(infrastructureDIContainer);
 CoreDIContainer.load(useCaseDIContainer);
