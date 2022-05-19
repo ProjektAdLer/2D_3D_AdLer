@@ -31,7 +31,7 @@ export default function StyledModal({
       className="modal flex justify-center items-center fixed max-h-full top-0 left-0 right-0 bottom-0 bg-blacktrans50"
       {...restProps}
     >
-      <div className="modal-content bg-adlerlightblue w95vw border-8 max-h-90pro border-adlerlightblue rounded-lg overflow-auto">
+      <div className="modal-content flex flex-col bg-adlerlightblue w-fit h-fit border-8 max-h-90pro border-adlerlightblue rounded-lg">
         <div className="modal-header font-black flex justify-end items-center p-4 h-4 lg:h-16 text-xl lg:text-4xl">
           <div className="w-full "> {title}</div>
           <button
@@ -41,7 +41,7 @@ export default function StyledModal({
             X
           </button>
         </div>
-        <div className="modal-body flex max-h-fit justify-center items-center p-2 border-t-2 border-b-2 rounded-lg border-adlerlightblue">
+        <div className="modal-body p-2 border-t-2 border-b-2 rounded-lg border-adlerlightblue overflow-auto">
           {children}
         </div>
         <div className="modal-footer font-medium flex shrink justify-between items-center p-4 h-fit">

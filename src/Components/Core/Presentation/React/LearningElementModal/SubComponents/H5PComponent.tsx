@@ -19,7 +19,7 @@ export default function H5PContent(props: { h5pEntityId: string }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   return (
-    <div className="flex justify-center items-top w80vw lg:w-5/6">
+    <div className="flex justify-center items-top max-h-90pro sm:w-[300px] md:w-[315px] lg:w-[700px] xl:w-[900px] 2xl:w-[1100px]">
       <iframe
         className="rounded-lg"
         ref={iframeRef}
