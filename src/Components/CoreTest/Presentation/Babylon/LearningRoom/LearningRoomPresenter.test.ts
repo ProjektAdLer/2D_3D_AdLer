@@ -15,59 +15,41 @@ var getPresenterMock = jest.spyOn(
 );
 // var buildMock = jest.spyOn(PresentationDirector.prototype, "build");
 
+const roomTO: LearningRoomTO = {
+  id: 1,
+  learningElements: [
+    {
+      id: 2,
+      type: "h5p",
+    },
+  ],
+};
+
 describe("LearningRoomPresenter", () => {
   let roomPresenter: LearningRoomPresenter;
 
   beforeEach(() => {
-    roomPresenter = new LearningRoomPresenter();
+    roomPresenter = new LearningRoomPresenter(new LearningRoomViewModel());
   });
 
   afterAll(() => {
     jest.clearAllMocks();
   });
 
-  test("presentLearningRoom throws error when viewmodel is not set", () => {
+  test("constructor throws error if viewModel is not defined", () => {
     expect(() => {
-      roomPresenter.presentLearningRoom({
-        id: 1,
-        learningElements: [],
-      });
-    }).toThrowError("ViewModel not set");
-  });
-
-  test("presentLearningRoom sets viewmodel data", () => {
-    const viewModel = new LearningRoomViewModel();
-    roomPresenter.ViewModel = viewModel;
-    expect(roomPresenter["viewModel"]).toBe(viewModel);
+      new LearningRoomPresenter(undefined);
+    }).toThrowError("ViewModel");
   });
 
   test("presentLearningRoom sets room viewmodel", () => {
-    const viewModel = new LearningRoomViewModel();
-    roomPresenter.ViewModel = viewModel;
-
-    const roomTO: LearningRoomTO = {
-      id: 1,
-      learningElements: [],
-    };
-
     roomPresenter.presentLearningRoom(roomTO);
-    expect(viewModel.id).toBe(roomTO.id);
+    expect(roomPresenter["viewModel"].id).toBe(roomTO.id);
     // TODO: add additional expectations here for set viewmodel data
   });
 
   test("presentLearningRoom creates learning elements", () => {
-    const viewModel = new LearningRoomViewModel();
-    roomPresenter.ViewModel = viewModel;
-    roomPresenter.presentLearningRoom({
-      id: 1,
-      learningElements: [
-        {
-          id: 2,
-          type: "h5p",
-        },
-      ],
-    });
-    // expect(buildMock).toHaveBeenCalledTimes(1);
+    roomPresenter.presentLearningRoom(roomTO);
     expect(presentLearningElementMock).toHaveBeenCalledTimes(1);
     expect(getPresenterMock).toHaveBeenCalledTimes(1);
   });
