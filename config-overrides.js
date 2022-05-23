@@ -23,7 +23,7 @@ module.exports = {
       "/SBWExample/",
       "/Types/",
       "/DependencyInjection/",
-      "/I[A-z]*.ts",
+      "/I[A-Z]{1}[A-z]*.ts",
     ];
     config.coverageReporters = ["text-summary", "lcov"];
     config.setupFiles = ["./jest-setup-files.ts"];
