@@ -8,7 +8,7 @@ export default interface IViewModelControllerProvider {
   /**
    * Registers a callback for all view models of the given type. The callback is called every time a new view model of the given type is registered.
    * @param callback The callback to be called when a new view model is registered.
-   * @param viewModelClass The type of view model to register for.
+   * @param viewModelClass The constructor reference of view model to register for.
    */
   registerTupelRequest<VM, C = unknown>(
     callback: VMCProviderCallbackType<VM, C>,
@@ -18,7 +18,7 @@ export default interface IViewModelControllerProvider {
   /**
    * Cancels a registered callback for view models of the given type.
    * @param callback The callback to be cancelled.
-   * @param viewModelClass The type of view model to cancel the registration for.
+   * @param viewModelClass The constructor reference of view model to cancel the registration for.
    */
   cancelRequest<VM, C>(
     callback: VMCProviderCallbackType<VM, C>,
@@ -28,7 +28,7 @@ export default interface IViewModelControllerProvider {
   /**
    * Registers a view model to be provided to all callbacks of the given type.
    * @param viewModel The view model to register.
-   * @param viewModelClass The type of the registered view model.
+   * @param viewModelClass The constructor reference of the registered view model.
    */
 
   registerViewModelOnly<VM>(
@@ -40,8 +40,7 @@ export default interface IViewModelControllerProvider {
    * Registers a view model and controller Tupel to be provided to all callbacks of the given type.
    * @param viewModel The view model to register.
    * @param controller The controller to register.
-   * @param viewModelClass The type of the registered view model.
-   * @param controllerClass The type of the registered controller.
+   * @param viewModelClass The constructor reference of the registered view model.
    */
   registerTupel<VM, C>(
     viewModel: VM,
@@ -51,8 +50,8 @@ export default interface IViewModelControllerProvider {
 
   /**
    * Removes a view model from the provider.
-   * @param tupel The view model to remove.
-   * @param viewModelClass The type of the removed view model.
+   * @param tupel The tupel of view model and controller to remove.
+   * @param viewModelClass The constructor reference of the removed view model.
    */
   removeTupel<VM, C>(
     tupel: [VM, C],
