@@ -1,7 +1,7 @@
 import { LearningRoomTO } from "../../../Application/LoadWorld/ILearningWorldPort";
 
-export default interface ILearningRoomPort {
+export default interface ILearningRoomPresenter {
+  get LearningRoomId(): number;
   presentLearningRoom(learningRommTO: LearningRoomTO): void;
-
-  presentNewScore(score: number, completed: boolean): void;
+  openDoor(): void;
 }

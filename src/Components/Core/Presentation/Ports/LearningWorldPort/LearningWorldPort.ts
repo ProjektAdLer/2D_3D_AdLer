@@ -5,16 +5,16 @@ import ILearningWorldPort, {
 import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import ILearningRoomPort from "../../Babylon/LearningRoom/ILearningRoomPort";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
 import IViewModelControllerProvider from "../../ViewModelProvider/IViewModelControllerProvider";
 import LearningWorldViewModel from "./LearningWorldViewModel";
+import ILearningRoomPresenter from "../../Babylon/LearningRoom/ILearningRoomPresenter";
 
 @injectable()
 export default class LearningWorldPort implements ILearningWorldPort {
   private viewModel: LearningWorldViewModel;
-  private roomPresenter: ILearningRoomPort;
+  private roomPresenter: ILearningRoomPresenter;
 
   constructor(
     @inject(CORE_TYPES.IViewModelControllerProvider)
@@ -32,6 +32,8 @@ export default class LearningWorldPort implements ILearningWorldPort {
 
     director.build();
     this.roomPresenter = builder.getPresenter();
+
+    // TODO: use all the data from the learningWorldTO to create multiple rooms
     this.roomPresenter.presentLearningRoom(learningWorldTO.learningRooms[0]);
 
     this.viewModel = new LearningWorldViewModel();

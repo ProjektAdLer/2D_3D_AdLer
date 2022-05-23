@@ -5,9 +5,6 @@ import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_SYMBOLS";
 import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import IScoreLearningElementUseCase from "./IScoreLearningElementUseCase";
 import { type IBackend } from "../../Adapters/Backend/IBackend";
-import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
-import ILearningRoomPort from "../../Presentation/Babylon/LearningRoom/ILearningRoomPort";
-import ILearningElementPort from "../LearningElementStarted/ILearningElementPort";
 import ICalculateTotalRoomScore from "../CalculateTotalRoomScore/ICalculateTotalRoomScore";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
 import LearningRoomEntity from "../../Domain/Entities/LearningRoomEntity";
@@ -21,8 +18,6 @@ export default class ScoreLearningElementUseCase
     private entityContainer: IEntityContainer,
     @inject(CORE_TYPES.IBackend)
     private backend: IBackend,
-    @inject(PORT_TYPES.ILearningRoomPort)
-    private learningRoomPort: ILearningRoomPort,
     @inject(USECASE_TYPES.ICalculateTotalRoomScore)
     private calculateTotalRoomScoreUseCase: ICalculateTotalRoomScore
   ) {}

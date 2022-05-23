@@ -3,7 +3,7 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import LearningRoomEntity from "../../Domain/Entities/LearningRoomEntity";
 import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
-import ILearningRoomPort from "../../Presentation/Babylon/LearningRoom/ILearningRoomPort";
+import ILearningRoomPort from "./ILearningRoomPort";
 import ICalculateTotalRoomScore from "./ICalculateTotalRoomScore";
 
 @injectable()
@@ -34,6 +34,10 @@ export default class CalculateTotalRoomScore
     }, 0);
 
     // TODO: This has to be more refined
-    this.learningRoomPort.presentNewScore(roomScore, roomScore >= 20);
+    this.learningRoomPort.presentNewScore(
+      roomScore,
+      roomScore >= 20,
+      data.roomId
+    );
   }
 }

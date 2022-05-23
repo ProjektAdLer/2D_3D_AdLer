@@ -3,12 +3,11 @@ import ICalculateTotalRoomScore from "../../../Core/Application/CalculateTotalRo
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_SYMBOLS";
-import EntityContainer from "../../../Core/Domain/EntityContainer/EntityContainer";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
-import LearningRoomPresenter from "../../../Core/Presentation/Babylon/LearningRoom/LearningRoomPresenter";
+import LearningRoomPort from "../../../Core/Presentation/Ports/LearningRoomPort/LearningRoomPort";
 import { ConstructorReference } from "../../../Core/Types/EntityManagerTypes";
 
-const portMock = jest.spyOn(LearningRoomPresenter.prototype, "presentNewScore");
+const portMock = jest.spyOn(LearningRoomPort.prototype, "presentNewScore");
 
 @injectable()
 //@ts-ignore
@@ -49,6 +48,8 @@ class EntityContainerMock0Elements implements IEntityContainer {
   }
 }
 
+const roomTO = { roomId: 1 };
+
 describe("Calculate Total Room Score UseCase", () => {
   beforeEach(() => {
     CoreDIContainer.snapshot();
@@ -69,11 +70,9 @@ describe("Calculate Total Room Score UseCase", () => {
         USECASE_TYPES.ICalculateTotalRoomScore
       );
 
-    calculateTotalRoomScoreUseCase.execute({
-      roomId: 1,
-    });
+    calculateTotalRoomScoreUseCase.execute(roomTO);
 
-    expect(portMock).toHaveBeenCalledWith(20, true);
+    expect(portMock).toHaveBeenCalledWith(20, true, roomTO.roomId);
   });
 
   it("should return 0 and false when no Learning Elements are present", () => {
@@ -89,11 +88,9 @@ describe("Calculate Total Room Score UseCase", () => {
 
     portMock.mockReset();
 
-    calculateTotalRoomScoreUseCase.execute({
-      roomId: 1,
-    });
+    calculateTotalRoomScoreUseCase.execute(roomTO);
 
-    expect(portMock).toHaveBeenCalledWith(0, false);
+    expect(portMock).toHaveBeenCalledWith(0, false, roomTO.roomId);
   });
 
   it("should throw an error if the room is not found", () => {

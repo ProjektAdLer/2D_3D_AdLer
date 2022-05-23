@@ -7,11 +7,11 @@ import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
 import IScorePanelPresenter from "../../React/ScorePanel/IScorePanelPresenter";
 import IDoorPresenter from "../Door/IDoorPresenter";
-import ILearningRoomPort from "./ILearningRoomPort";
 import LearningRoomViewModel from "./LearningRoomViewModel";
+import ILearningRoomPresenter from "./ILearningRoomPresenter";
 
 @injectable()
-export default class LearningRoomPresenter implements ILearningRoomPort {
+export default class LearningRoomPresenter implements ILearningRoomPresenter {
   private doorPresenter: IDoorPresenter;
   private scorePanelPresenter: IScorePanelPresenter;
 
@@ -19,6 +19,10 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
     if (!this.viewModel) {
       throw new Error("ViewModel is not defined");
     }
+  }
+
+  get LearningRoomId(): number {
+    return this.viewModel.id;
   }
 
   presentLearningRoom(learningRoomTO: LearningRoomTO): void {
@@ -55,21 +59,10 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
     director.build();
     builder.getPresenter().presentDoor(this.getDoorPosition());
     this.doorPresenter = builder.getPresenter();
-
-    // create score panel
-    builder = CoreDIContainer.get<IPresentationBuilder>(
-      BUILDER_TYPES.IScorePanelBuilder
-    );
-    director.Builder = builder;
-    director.build();
-    this.scorePanelPresenter = builder.getPresenter();
   }
 
-  presentNewScore(score: number, completed: boolean): void {
-    this.scorePanelPresenter.presentScore(score);
-    if (completed) {
-      this.doorPresenter.openDoor();
-    }
+  openDoor(): void {
+    this.doorPresenter.openDoor();
   }
 
   private setRoomDimensions(learningRoomTO: LearningRoomTO): void {
