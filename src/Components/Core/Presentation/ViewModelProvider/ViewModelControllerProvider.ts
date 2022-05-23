@@ -27,9 +27,9 @@ export default class ViewModelControllerProvider
     viewModelClass: { new (): VM }
   ): void {
     var container = this.findContainer<VM, C>(viewModelClass);
-    if (container?.matchesType<VM, C>(viewModelClass)) {
-      // @ts-ignore
-      container?.cancelRequest(callback);
+    if (!container) return;
+    if (container.matchesType<VM, C>(viewModelClass)) {
+      container.cancelRequest(callback);
     }
   }
 
@@ -66,8 +66,7 @@ export default class ViewModelControllerProvider
     new (): VM;
   }): IObservableContainer<VM, [VM, C]> | undefined {
     var container = this.containers.find((c) => {
-      const match = c.matchesType<VM, [VM, C]>(viewModelClass);
-      return match;
+      return c.matchesType<VM, [VM, C]>(viewModelClass);
     });
     if (container?.matchesType<VM, [VM, C]>(viewModelClass)) {
       return container;
