@@ -7,7 +7,6 @@ import {
   Tools,
   Vector3,
 } from "@babylonjs/core";
-import { injectable } from "inversify";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import type ISceneController from "../SceneManagment/ISceneController";
@@ -26,7 +25,6 @@ const modelLinks = {
   [LearningElementTypeSymbols.video]: require("../../../../../Assets/3DLink_Video.glb"),
 };
 
-@injectable()
 export default class LearningElementView implements ILearningElementView {
   private viewModel: LearningElementViewModel;
   private controller: ILearningElementController;
