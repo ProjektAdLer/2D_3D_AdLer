@@ -10,13 +10,12 @@ import MoodleLoginFormPresenter from "./MoodleLoginFormPresenter";
 import MoodleLoginFormViewModel from "./MoodleLoginFormViewModel";
 
 @injectable()
-export default class MoodleLoginFormPresenterBuilder extends PresentationBuilder<
+export default class MoodleLoginFormBuilder extends PresentationBuilder<
   MoodleLoginFormViewModel,
   MoodleLoginFormController,
   undefined,
   MoodleLoginFormPresenter
 > {
-  constructor();
   constructor() {
     super(
       MoodleLoginFormViewModel,

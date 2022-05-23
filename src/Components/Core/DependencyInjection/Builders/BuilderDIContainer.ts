@@ -6,7 +6,7 @@ import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresen
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
 import PresentationDirector from "../../Presentation/PresentationBuilder/PresentationDirector";
 import LearningElementModalBuilder from "../../Presentation/React/LearningElementModal/LearningElementModalBuilder";
-import MoodleLoginFormPresenterBuilder from "../../Presentation/React/ReactAdvancedComponents/MoodleLoginForm/MoodleLoginFormBuilder";
+import MoodleLoginFormBuilder from "../../Presentation/React/ReactAdvancedComponents/MoodleLoginForm/MoodleLoginFormBuilder";
 import ScorePanelBuilder from "../../Presentation/React/ScorePanel/ScorePanelBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
 
@@ -20,7 +20,7 @@ const BuilderDIContainer = new ContainerModule((bind) => {
     ScorePanelBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IMoodleLoginFormBuilder).to(
-    MoodleLoginFormPresenterBuilder
+    MoodleLoginFormBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementModalBuilder).to(
     LearningElementModalBuilder
