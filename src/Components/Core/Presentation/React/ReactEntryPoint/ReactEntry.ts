@@ -6,8 +6,8 @@ import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import App from "./App";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
+import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 
 @injectable()
 export default class ReactEntry implements IReactEntry {
@@ -34,10 +34,10 @@ export default class ReactEntry implements IReactEntry {
 
   private buildViewModels(): void {
     let director = CoreDIContainer.get<IPresentationDirector>(
-      CORE_TYPES.IPresentationDirector
+      BUILDER_TYPES.IPresentationDirector
     );
     let builder = CoreDIContainer.get<IPresentationBuilder>(
-      CORE_TYPES.IMoodleLoginFormBuilder
+      BUILDER_TYPES.IMoodleLoginFormBuilder
     );
     director.Builder = builder;
     director.build();

@@ -2,6 +2,7 @@ import { inject, injectable } from "inversify";
 import ILearningWorldPort, {
   LearningWorldTO,
 } from "../../../Application/LoadWorld/ILearningWorldPort";
+import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import ILearningRoomPort from "../../Babylon/LearningRoom/ILearningRoomPort";
@@ -22,10 +23,10 @@ export default class LearningWorldPort implements ILearningWorldPort {
 
   public presentLearningWorld(learningWorldTO: LearningWorldTO): void {
     let director = CoreDIContainer.get<IPresentationDirector>(
-      CORE_TYPES.IPresentationDirector
+      BUILDER_TYPES.IPresentationDirector
     );
     let builder = CoreDIContainer.get<IPresentationBuilder>(
-      CORE_TYPES.ILearningRoomBuilder
+      BUILDER_TYPES.ILearningRoomBuilder
     );
     director.Builder = builder;
 

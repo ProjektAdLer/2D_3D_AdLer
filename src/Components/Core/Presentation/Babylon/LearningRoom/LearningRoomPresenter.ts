@@ -1,8 +1,8 @@
 import { Vector3 } from "@babylonjs/core";
 import { injectable } from "inversify";
 import { LearningRoomTO } from "../../../Application/LoadWorld/ILearningWorldPort";
+import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
 import IScorePanelPresenter from "../../React/ScorePanel/IScorePanelPresenter";
@@ -26,12 +26,14 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
     this.viewModel.id = learningRoomTO.id;
     this.setRoomDimensions(learningRoomTO);
 
-    // create learning elements
     let director = CoreDIContainer.get<IPresentationDirector>(
-      CORE_TYPES.IPresentationDirector
+      BUILDER_TYPES.IPresentationDirector
     );
-    let builder = CoreDIContainer.get<IPresentationBuilder>(
-      CORE_TYPES.ILearningElementBuilder
+    let builder: IPresentationBuilder;
+
+    // create learning elements
+    builder = CoreDIContainer.get<IPresentationBuilder>(
+      BUILDER_TYPES.ILearningElementBuilder
     );
     director.Builder = builder;
 
@@ -47,7 +49,7 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
 
     // create door
     builder = CoreDIContainer.get<IPresentationBuilder>(
-      CORE_TYPES.IDoorBuilder
+      BUILDER_TYPES.IDoorBuilder
     );
     director.Builder = builder;
     director.build();
@@ -56,7 +58,7 @@ export default class LearningRoomPresenter implements ILearningRoomPort {
 
     // create score panel
     builder = CoreDIContainer.get<IPresentationBuilder>(
-      CORE_TYPES.IScorePanelBuilder
+      BUILDER_TYPES.IScorePanelBuilder
     );
     director.Builder = builder;
     director.build();

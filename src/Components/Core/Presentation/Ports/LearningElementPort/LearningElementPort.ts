@@ -1,8 +1,8 @@
-import { inject, injectable } from "inversify";
+import { injectable } from "inversify";
 import ILearningElementPort from "../../../Application/LearningElementStarted/ILearningElementPort";
 import { LearningElementTO } from "../../../Application/LoadWorld/ILearningWorldPort";
+import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import ILearningElementPresenter from "../../Babylon/LearningElement/ILearningElementPresenter";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
@@ -27,10 +27,10 @@ export default class LearningElementPort implements ILearningElementPort {
   ): void {
     if (!this.modalPresenter) {
       let director = CoreDIContainer.get<IPresentationDirector>(
-        CORE_TYPES.IPresentationDirector
+        BUILDER_TYPES.IPresentationDirector
       );
       let builder = CoreDIContainer.get<IPresentationBuilder>(
-        CORE_TYPES.ILearningElementModalBuilder
+        BUILDER_TYPES.ILearningElementModalBuilder
       );
       director.Builder = builder;
       director.build();

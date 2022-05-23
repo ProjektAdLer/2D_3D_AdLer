@@ -10,14 +10,7 @@ const CORE_TYPES = {
   IViewModelControllerProvider: Symbol("IViewModelControllerProvider"),
   ILoadWorldController: Symbol("ILoadWorldController"),
   IEntityContainer: Symbol("IEntityContainer"),
-  IPresentationDirector: Symbol("IPresentationDirector"),
-  ILearningRoomBuilder: Symbol("ILearningRoomBuilder"),
-  ILearningElementBuilder: Symbol("ILearningElementBuilder"),
   IBackend: Symbol("IBackend"),
-  ILearningElementModalBuilder: Symbol("ILearningElementModalBuilder"),
-  IDoorBuilder: Symbol("IDoorBuilder"),
-  IScorePanelBuilder: Symbol("IScorePanelBuilder"),
-  IMoodleLoginFormBuilder: Symbol("IMoodleLoginFormBuilder"),
 };
 
 export default CORE_TYPES;
