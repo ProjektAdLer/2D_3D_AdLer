@@ -12,19 +12,16 @@ import LearningRoomViewModel from "./LearningRoomViewModel";
 
 @injectable()
 export default class LearningRoomPresenter implements ILearningRoomPort {
-  private viewModel: LearningRoomViewModel;
   private doorPresenter: IDoorPresenter;
   private scorePanelPresenter: IScorePanelPresenter;
 
-  public set ViewModel(viewModel: LearningRoomViewModel) {
-    this.viewModel = viewModel;
+  constructor(private viewModel: LearningRoomViewModel) {
+    if (!this.viewModel) {
+      throw new Error("ViewModel is not defined");
+    }
   }
 
   presentLearningRoom(learningRoomTO: LearningRoomTO): void {
-    if (!this.viewModel) {
-      throw new Error("ViewModel not set");
-    }
-
     // set view model data
     this.viewModel.id = learningRoomTO.id;
     this.setRoomDimensions(learningRoomTO);
