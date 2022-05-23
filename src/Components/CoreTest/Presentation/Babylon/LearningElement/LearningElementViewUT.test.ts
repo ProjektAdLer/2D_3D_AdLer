@@ -1,8 +1,6 @@
-import { Engine, Scene, SceneLoader } from "@babylonjs/core";
 import LearningElementController from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementController";
 import LearningElementView from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementView";
 import LearningElementViewModel from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementViewModel";
-import SceneViewModel from "../../../../Core/Presentation/Babylon/SceneManagment/SceneViewModel";
 
 jest.mock("../../../../../Lib/Observable.ts");
 jest.mock("@babylonjs/core");
