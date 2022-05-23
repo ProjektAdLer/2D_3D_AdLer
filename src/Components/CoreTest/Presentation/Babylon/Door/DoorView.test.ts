@@ -16,6 +16,10 @@ describe("DoorView", () => {
     view = new DoorView(new DoorViewModel());
   });
 
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
+
   test("constructor", () => {
     expect(view["sceneController"]).toBeDefined();
 
