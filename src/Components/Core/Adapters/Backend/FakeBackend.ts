@@ -1,7 +1,7 @@
 import { LearningComponentID } from "./../../Types/EnitityTypes";
 import { APIWorldTo } from "./APIWorldTO";
 import { injectable } from "inversify";
-import { type IBackend } from "./IBackend";
+import type IBackend from "./IBackend";
 
 import { APILearningRoomTO } from "./APILearningRoomTO";
 import { APILearningElementTO } from "./APILearningElementTO";

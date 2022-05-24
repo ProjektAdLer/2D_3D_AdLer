@@ -1,5 +1,5 @@
 import { FakeBackend } from "./../Adapters/Backend/FakeBackend";
-import { IBackend } from "./../Adapters/Backend/IBackend";
+import IBackend from "./../Adapters/Backend/IBackend";
 import { ContainerModule } from "inversify";
 import EntityContainer from "../Domain/EntityContainer/EntityContainer";
 import IEntityContainer from "../Domain/EntityContainer/IEntityContainer";
