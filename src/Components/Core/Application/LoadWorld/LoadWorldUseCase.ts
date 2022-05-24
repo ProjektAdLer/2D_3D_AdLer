@@ -1,7 +1,7 @@
 import { APILearningRoomTO } from "./../../Adapters/Backend/APILearningRoomTO";
 import { inject, injectable } from "inversify";
 import { APILearningElementTO } from "../../Adapters/Backend/APILearningElementTO";
-import { type IBackend } from "../../Adapters/Backend/IBackend";
+import type IBackend from "../../Adapters/Backend/IBackend";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
 
@@ -54,7 +54,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       // Learning Elements
       const learningElementEntities: LearningElementEntity[] = [];
       learningElementResp.forEach((element) => {
-        const returnvValue = this.container.createEntity<LearningElementEntity>(
+        const returnValue = this.container.createEntity<LearningElementEntity>(
           {
             id: element.id,
             type: element.elementType,
@@ -64,7 +64,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
           LearningElementEntity
         );
 
-        learningElementEntities.push(returnvValue);
+        learningElementEntities.push(returnValue);
       });
 
       // Learning Room
