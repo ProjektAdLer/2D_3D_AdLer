@@ -44,11 +44,11 @@ export default class ScoreLearningElementUseCase
         `Found more than one learning element with id ${data?.learningElementId}`
       );
 
-    await this.backend
-      .scoreLearningElement(learningElements[0].id)
-      .catch((err) => {
-        throw new Error("Could not score learning element via Backend");
-      });
+    try {
+      await this.backend.scoreLearningElement(learningElements[0].id);
+    } catch {
+      throw new Error("Could not score learning element via Backend");
+    }
 
     learningElements[0].hasScored = true;
 
