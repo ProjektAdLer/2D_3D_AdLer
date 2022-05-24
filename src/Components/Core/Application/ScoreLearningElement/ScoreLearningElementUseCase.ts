@@ -4,7 +4,7 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_SYMBOLS";
 import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import IScoreLearningElementUseCase from "./IScoreLearningElementUseCase";
-import { type IBackend } from "../../Adapters/Backend/IBackend";
+import type IBackend from "../../Adapters/Backend/IBackend";
 import ICalculateTotalRoomScore from "../CalculateTotalRoomScore/ICalculateTotalRoomScore";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
 import LearningRoomEntity from "../../Domain/Entities/LearningRoomEntity";
