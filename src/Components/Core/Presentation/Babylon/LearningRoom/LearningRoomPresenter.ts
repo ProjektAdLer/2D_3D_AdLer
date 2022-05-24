@@ -62,6 +62,7 @@ export default class LearningRoomPresenter implements ILearningRoomPresenter {
   }
 
   openDoor(): void {
+    if (!this.doorPresenter) return;
     this.doorPresenter.openDoor();
   }
 
