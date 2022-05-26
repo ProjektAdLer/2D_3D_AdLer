@@ -39,6 +39,7 @@ class LearningRoomPresenterStubWithId2 implements ILearningRoomPresenter {
 }
 
 @injectable()
+//@ts-ignore
 class ScorePanelBuilderMock extends PresentationBuilder<
   ScorePanelViewModel,
   undefined,

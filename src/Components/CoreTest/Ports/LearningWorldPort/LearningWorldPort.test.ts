@@ -30,6 +30,7 @@ const registerViewModelOnlyMock = jest.spyOn(
 );
 
 @injectable()
+//@ts-ignore
 class LearningRoomBuilderMock extends PresentationBuilder<
   LearningRoomViewModel,
   undefined,
