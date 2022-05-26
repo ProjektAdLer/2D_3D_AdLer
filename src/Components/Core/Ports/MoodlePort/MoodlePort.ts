@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import IMoodleLoginFormPresenter from "../../React/ReactAdvancedComponents/MoodleLoginForm/IMoodleLoginFormPresenter";
+import IMoodleLoginFormPresenter from "../../Presentation/React/ReactAdvancedComponents/MoodleLoginForm/IMoodleLoginFormPresenter";
 import IMoodlePort from "./IMoodlePort";
 
 @injectable()

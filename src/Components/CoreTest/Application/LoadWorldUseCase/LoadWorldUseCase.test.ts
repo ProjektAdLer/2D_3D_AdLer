@@ -4,10 +4,10 @@ import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_SY
 import type IBackend from "../../../Core/Adapters/Backend/IBackend";
 import { injectable } from "inversify";
 import { APIWorldTo } from "../../../Core/Adapters/Backend/APIWorldTO";
-import LearningWorldPort from "../../../Core/Presentation/Ports/LearningWorldPort/LearningWorldPort";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import { APILearningElementTO } from "../../../Core/Adapters/Backend/APILearningElementTO";
 import { APILearningRoomTO } from "../../../Core/Adapters/Backend/APILearningRoomTO";
+import LearningWorldPort from "../../../Core/Ports/LearningWorldPort/LearningWorldPort";
 
 const apiWorldTo: APIWorldTo = {
   name: "test",

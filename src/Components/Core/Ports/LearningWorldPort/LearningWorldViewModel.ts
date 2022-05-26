@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import Observable from "../../../../../Lib/Observable";
+import Observable from "../../../../Lib/Observable";
 
 @injectable()
 export default class LearningWorldViewModel {

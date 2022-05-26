@@ -5,7 +5,7 @@ import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_SYMBOLS";
 import UserDataEntity from "../../../Core/Domain/Entities/UserData";
 import EntityContainer from "../../../Core/Domain/EntityContainer/EntityContainer";
-import MoodlePort from "../../../Core/Presentation/Ports/MoodlePort/MoodlePort";
+import MoodlePort from "../../../Core/Ports/MoodlePort/MoodlePort";
 
 @injectable()
 //@ts-ignore

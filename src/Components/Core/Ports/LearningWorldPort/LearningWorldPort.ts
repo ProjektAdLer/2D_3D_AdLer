@@ -1,15 +1,15 @@
 import { inject, injectable } from "inversify";
 import ILearningWorldPort, {
   LearningWorldTO,
-} from "../../../Application/LoadWorld/ILearningWorldPort";
-import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
-import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
-import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
-import IViewModelControllerProvider from "../../ViewModelProvider/IViewModelControllerProvider";
+} from "../../Application/LoadWorld/ILearningWorldPort";
+import BUILDER_TYPES from "../../DependencyInjection/Builders/BUILDER_TYPES";
+import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "../../DependencyInjection/CoreTypes";
+import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
+import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
+import IViewModelControllerProvider from "../../Presentation/ViewModelProvider/IViewModelControllerProvider";
 import LearningWorldViewModel from "./LearningWorldViewModel";
-import ILearningRoomPresenter from "../../Babylon/LearningRoom/ILearningRoomPresenter";
+import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
 
 @injectable()
 export default class LearningWorldPort implements ILearningWorldPort {

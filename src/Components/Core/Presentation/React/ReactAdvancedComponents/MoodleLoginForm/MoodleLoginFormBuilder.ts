@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
-import IMoodlePort from "../../../Ports/MoodlePort/IMoodlePort";
+import IMoodlePort from "../../../../Ports/MoodlePort/IMoodlePort";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
 import MoodleLoginFormController from "./MoodleLoginFormController";

@@ -4,7 +4,7 @@ import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_SYMBOLS";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
-import LearningElementPort from "../../../Core/Presentation/Ports/LearningElementPort/LearningElementPort";
+import LearningElementPort from "../../../Core/Ports/LearningElementPort/LearningElementPort";
 import { ConstructorReference } from "../../../Core/Types/EntityManagerTypes";
 
 const portMock = jest.spyOn(

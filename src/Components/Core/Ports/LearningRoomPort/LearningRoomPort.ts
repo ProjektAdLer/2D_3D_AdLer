@@ -1,11 +1,11 @@
-import ILearningRoomPort from "../../../Application/CalculateTotalRoomScore/ILearningRoomPort";
-import IScorePanelPresenter from "../../React/ScorePanel/IScorePanelPresenter";
-import IDoorPresenter from "../../Babylon/Door/IDoorPresenter";
-import ILearningRoomPresenter from "../../Babylon/LearningRoom/ILearningRoomPresenter";
-import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
-import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
-import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
+import ILearningRoomPort from "../../Application/CalculateTotalRoomScore/ILearningRoomPort";
+import IScorePanelPresenter from "../../Presentation/React/ScorePanel/IScorePanelPresenter";
+import IDoorPresenter from "../../Presentation/Babylon/Door/IDoorPresenter";
+import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
+import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
+import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
+import BUILDER_TYPES from "../../DependencyInjection/Builders/BUILDER_TYPES";
+import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
 import { injectable } from "inversify";
 
 @injectable()
