@@ -1,6 +1,5 @@
 import ILearningRoomPort from "../../Application/CalculateTotalRoomScore/ILearningRoomPort";
 import IScorePanelPresenter from "../../Presentation/React/ScorePanel/IScorePanelPresenter";
-import IDoorPresenter from "../../Presentation/Babylon/Door/IDoorPresenter";
 import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
@@ -12,7 +11,6 @@ import { injectable } from "inversify";
 export default class LearningRoomPort implements ILearningRoomPort {
   private scorePanelPresenter: IScorePanelPresenter;
   private learningRoomPresenters: ILearningRoomPresenter[] = [];
-  private doorPresenter: IDoorPresenter;
 
   addLearningRoomPresenter(
     learningRoomPresenter: ILearningRoomPresenter
