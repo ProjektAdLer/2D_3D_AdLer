@@ -15,10 +15,6 @@ import IPresentationBuilder from "../../../Core/Presentation/PresentationBuilder
 import PresentationBuilder from "../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
 import ViewModelControllerProvider from "../../../Core/Presentation/ViewModelProvider/ViewModelControllerProvider";
 
-// jest.mock(
-//   "../../../Core/Presentation/Babylon/LearningRoom/LearningRoomBuilder.ts"
-// );
-
 const presentLearningRoomMock = jest.spyOn(
   LearningRoomPresenter.prototype,
   "presentLearningRoom"

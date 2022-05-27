@@ -79,7 +79,7 @@ describe("LearningRoomPort", () => {
     );
   });
 
-  test("addLearningRoomPresenter throws error if passe dpresenter is undefined", () => {
+  test("addLearningRoomPresenter throws error if passed presenter is undefined", () => {
     expect(() => {
       learningRoomPort.addLearningRoomPresenter(undefined);
     }).toThrowError("not defined");
