@@ -7,7 +7,9 @@ export default class Observable<T> {
   }
 
   public subscribe(fn: (value: T) => void): void {
-    this.subscribers.push(fn);
+    if (!this.subscribers.includes(fn)) {
+      this.subscribers.push(fn);
+    }
   }
 
   public unsubscribe(fn: (value: T) => void): void {
