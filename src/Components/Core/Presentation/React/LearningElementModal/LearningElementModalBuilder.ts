@@ -26,6 +26,8 @@ export default class LearningElementModalBuilder extends PresentationBuilder<
 
   override buildController(): void {
     super.buildController();
+
+    // viewModel is for sure built when this is executed
     CoreDIContainer.get<ViewModelControllerProvider>(
       CORE_TYPES.IViewModelControllerProvider
     ).registerTupel(
