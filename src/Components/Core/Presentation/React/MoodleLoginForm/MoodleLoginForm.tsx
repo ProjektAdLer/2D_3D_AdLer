@@ -1,10 +1,10 @@
 import { useState } from "react";
-import useObservable from "../../CustomHooks/useObservable";
-import useViewModelControllerProvider from "../../CustomHooks/useViewModelControllerProvider";
-import StyledButton from "../../ReactBaseComponents/StyledButton";
-import StyledContainer from "../../ReactBaseComponents/StyledContainer";
-import StyledInputField from "../../ReactBaseComponents/StyledInputField";
-import StyledPasswordField from "../../ReactBaseComponents/StyledPasswordField";
+import useObservable from "../CustomHooks/useObservable";
+import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
+import StyledButton from "../ReactBaseComponents/StyledButton";
+import StyledContainer from "../ReactBaseComponents/StyledContainer";
+import StyledInputField from "../ReactBaseComponents/StyledInputField";
+import StyledPasswordField from "../ReactBaseComponents/StyledPasswordField";
 import MoodleLoginFormController from "./MoodleLoginFormController";
 import MoodleLoginFormViewModel from "./MoodleLoginFormViewModel";
 

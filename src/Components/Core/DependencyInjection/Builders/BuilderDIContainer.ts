@@ -6,7 +6,7 @@ import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresen
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
 import PresentationDirector from "../../Presentation/PresentationBuilder/PresentationDirector";
 import LearningElementModalBuilder from "../../Presentation/React/LearningElementModal/LearningElementModalBuilder";
-import MoodleLoginFormBuilder from "../../Presentation/React/ReactAdvancedComponents/MoodleLoginForm/MoodleLoginFormBuilder";
+import MoodleLoginFormBuilder from "../../Presentation/React/MoodleLoginForm/MoodleLoginFormBuilder";
 import ScorePanelBuilder from "../../Presentation/React/ScorePanel/ScorePanelBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
 

@@ -1,4 +1,4 @@
-import IMoodleLoginFormPresenter from "../../Presentation/React/ReactAdvancedComponents/MoodleLoginForm/IMoodleLoginFormPresenter";
+import IMoodleLoginFormPresenter from "../../Presentation/React/MoodleLoginForm/IMoodleLoginFormPresenter";
 
 export default interface IMoodlePort {
   registerMoodleLoginPresenter(presenter: IMoodleLoginFormPresenter): void;

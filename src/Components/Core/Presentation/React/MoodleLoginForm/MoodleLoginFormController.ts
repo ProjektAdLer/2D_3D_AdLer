@@ -1,6 +1,6 @@
-import ILogUserIntoMoodleUseCase from "../../../../Application/LogUserIntoMoodle/ILogUserIntoMoodleUseCase";
-import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
-import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_SYMBOLS";
+import ILogUserIntoMoodleUseCase from "../../../Application/LogUserIntoMoodle/ILogUserIntoMoodleUseCase";
+import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
+import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_SYMBOLS";
 import IMoodleLoginFormController from "./IMoodleLoginFormController";
 
 export default class MoodleLoginFormController
