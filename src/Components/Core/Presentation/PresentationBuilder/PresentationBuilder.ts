@@ -10,7 +10,8 @@ import IPresentationBuilder from "./IPresentationBuilder";
  * The derived class must call the super constructor with the constructor reference or undefined for each of ViewModel, Controller, View and Presenter.
  *
  * Pass undefined in the type parameter and constructor to skip building that component. The view model cannot be skipped.
- * Override build methods (calling base implementations if needed) to customize the build process.
+ *
+ *  Override build methods (calling base implementations if needed) to customize the build process.
  *
  * @typeparam VM - ViewModel type.
  * @typeparam C - Controller type.
