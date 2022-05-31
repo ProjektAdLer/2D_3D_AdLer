@@ -50,11 +50,11 @@ export default interface IViewModelControllerProvider {
 
   /**
    * Removes a view model from the provider.
-   * @param tupel The tupel of view model and controller to remove.
+   * @param viewModel The tupel of view model and controller to remove.
    * @param viewModelClass The constructor reference of the removed view model.
    */
-  removeTupel<VM, C>(
-    tupel: [VM, C],
+  removeByViewModel<VM>(
+    viewModel: VM,
     viewModelClass: ConstructorReference<VM>
   ): void;
 }
