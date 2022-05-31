@@ -69,21 +69,26 @@ describe("ViewModelProvider", () => {
   });
 
   test("removeTupel calls callback when a view model was removed", () => {
-    const callback = jest.fn();
+    const myCallback = jest.fn();
     const viewModel = new TestViewModelA();
 
-    viewModelControllerProvider.registerTupelRequest(callback, TestViewModelA);
     viewModelControllerProvider.registerViewModelOnly(
       viewModel,
       TestViewModelA
     );
-    viewModelControllerProvider.removeTupel(
-      [viewModel, undefined],
+
+    viewModelControllerProvider.registerTupelRequest(
+      myCallback,
       TestViewModelA
     );
 
-    expect(callback).toHaveBeenCalledTimes(2);
-    expect(callback).lastCalledWith([]);
+    viewModelControllerProvider.removeByViewModel(viewModel, TestViewModelA);
+
+    // The callback gets called twice, because:
+    // 1. The callback gets called onece, when registered
+    // 2. The callback gets called onece, when the view model was removed
+    expect(myCallback).toHaveBeenCalledTimes(2);
+    expect(myCallback).lastCalledWith([]);
   });
 
   test("registerViewModelOnly registers view model", () => {
@@ -122,13 +127,16 @@ describe("ViewModelProvider", () => {
 
   test("removeTupel removes a previously added view model", () => {
     const viewModel = new TestViewModelA();
+    const controller = new TestControllerA();
 
-    viewModelControllerProvider.registerViewModelOnly(
+    viewModelControllerProvider.registerTupel(
       viewModel,
+      controller,
       TestViewModelA
     );
-    viewModelControllerProvider.removeTupel(
-      [viewModel, undefined],
+
+    viewModelControllerProvider.removeByViewModel<TestViewModelA>(
+      viewModel,
       TestViewModelA
     );
 
