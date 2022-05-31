@@ -1,3 +1,4 @@
 export default interface ILoadWorldController {
   loadWorld(): void;
+  loadCharacter(): void;
 }

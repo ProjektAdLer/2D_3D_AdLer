@@ -1,4 +1,5 @@
 import ILoadWorldUseCase from "../../../Application/LoadWorld/ILoadWorldUseCase";
+import ILoadCharacterUseCase from "../../../Application/LoadCharacter/ILoadCharacterUseCase";
 import { injectable } from "inversify";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import ILoadWorldController from "./ILoadWorldController";
@@ -12,5 +13,10 @@ export class LoadWorldController implements ILoadWorldController {
     );
 
     await useCase.executeAsync();
+  }
+  async loadCharacter(): Promise<void> {
+    const useCase = CoreDIContainer.get<ILoadCharacterUseCase>(
+      USECASE_TYPES.ILoadCharacterUseCase
+    );
   }
 }
