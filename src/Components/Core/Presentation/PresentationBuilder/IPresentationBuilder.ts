@@ -1,5 +1,4 @@
 export default interface PresentationBuilder {
-  // reset can maybe be ommitted - MK
   reset(): void;
   buildViewModel(): void;
   buildController(): void;
