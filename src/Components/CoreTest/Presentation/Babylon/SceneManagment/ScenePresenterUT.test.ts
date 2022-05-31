@@ -2,10 +2,10 @@ import { mock, mockClear } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import EngineManager from "../../../../Core/Presentation/Babylon/EngineManager/EngineManager";
-import ICreateSceneClass from "../../../../Core/Presentation/Babylon/SceneManagment/ICreateSceneClass";
-import ISceneController from "../../../../Core/Presentation/Babylon/SceneManagment/ISceneController";
-import SceneView from "../../../../Core/Presentation/Babylon/SceneManagment/SceneView";
-import SceneViewModel from "../../../../Core/Presentation/Babylon/SceneManagment/SceneViewModel";
+import ICreateSceneClass from "../../../../Core/Presentation/Babylon/SceneManagement/ICreateSceneClass";
+import ISceneController from "../../../../Core/Presentation/Babylon/SceneManagement/ISceneController";
+import SceneView from "../../../../Core/Presentation/Babylon/SceneManagement/SceneView";
+import SceneViewModel from "../../../../Core/Presentation/Babylon/SceneManagement/SceneViewModel";
 
 jest.mock("@babylonjs/core");
 

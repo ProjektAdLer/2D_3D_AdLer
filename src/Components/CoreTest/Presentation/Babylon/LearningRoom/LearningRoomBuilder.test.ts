@@ -1,7 +1,7 @@
 import LearningRoomPresenter from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomPresenter";
 import LearningRoomViewModel from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomViewModel";
 import LearningRoomBuilder from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomBuilder";
-import SceneViewModel from "../../../../Core/Presentation/Babylon/SceneManagment/SceneViewModel";
+import SceneViewModel from "../../../../Core/Presentation/Babylon/SceneManagement/SceneViewModel";
 import LearningRoomPort from "../../../../Core/Ports/LearningRoomPort/LearningRoomPort";
 
 jest.mock("@babylonjs/core");

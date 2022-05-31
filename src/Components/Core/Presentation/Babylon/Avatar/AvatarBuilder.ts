@@ -18,6 +18,7 @@ export default class AvatarBuilder extends PresentationBuilder<
   }
 
   buildPresenter(): void {
+    // create presenter via DI because it also acts as port for the avatar
     this.presenter = CoreDIContainer.get<IAvatarPresenter>(
       PORT_TYPES.IAvatarPort
     );

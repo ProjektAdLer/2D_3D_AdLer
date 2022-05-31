@@ -2,7 +2,7 @@ import IAvatarPort from "../../../Core/Application/LoadAvatar/IAvatarPort";
 import LoadAvatarUseCase from "../../../Core/Application/LoadAvatar/LoadAvatarUseCase";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import SceneController from "../../../Core/Presentation/Babylon/SceneManagment/SceneController";
+import SceneController from "../../../Core/Presentation/Babylon/SceneManagement/SceneController";
 
 // to prevent errors in tests for undefined scene
 jest.spyOn(SceneController.prototype, "Scene", "get");

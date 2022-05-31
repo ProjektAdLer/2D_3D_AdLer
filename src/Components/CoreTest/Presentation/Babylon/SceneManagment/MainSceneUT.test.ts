@@ -1,5 +1,5 @@
 import { DebugLayer, Engine, Scene } from "@babylonjs/core";
-import MainScene from "../../../../Core/Presentation/Babylon/SceneManagment/MainScene";
+import MainScene from "../../../../Core/Presentation/Babylon/SceneManagement/MainScene";
 
 jest.mock("@babylonjs/core");
 

@@ -9,7 +9,7 @@ import {
 } from "@babylonjs/core";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import type ISceneController from "../SceneManagment/ISceneController";
+import type ISceneController from "../SceneManagement/ISceneController";
 import ILearningElementController from "./ILearningElementController";
 import ILearningElementView from "./ILearningElementView";
 import LearningElementViewModel from "./LearningElementViewModel";

@@ -6,7 +6,7 @@ import LearningRoomController from "./LearningRoomController";
 import LearningRoomPresenter from "./LearningRoomPresenter";
 import LearningRoomView from "./LearningRoomView";
 import LearningRoomViewModel from "./LearningRoomViewModel";
-import SceneController from "../SceneManagment/SceneController";
+import SceneController from "../SceneManagement/SceneController";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 import ILearningRoomView from "./ILearningRoomView";
 import ILearningRoomPresenter from "./ILearningRoomPresenter";
