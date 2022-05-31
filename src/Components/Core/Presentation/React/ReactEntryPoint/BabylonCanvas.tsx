@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import IEngineManager from "../../Babylon/EngineManager/IEngineManager";
-import ISceneController from "../../Babylon/SceneManagment/ISceneController";
+import ISceneController from "../../Babylon/SceneManagement/ISceneController";
 
 export default function BabylonCanvas(props: any) {
   const canvasRef = useRef<HTMLCanvasElement>(null);

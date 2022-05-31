@@ -1,7 +1,7 @@
 import { Animation, Mesh, SceneLoader, Tools, Vector3 } from "@babylonjs/core";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import ISceneController from "../SceneManagment/SceneController";
+import ISceneController from "../SceneManagement/SceneController";
 import DoorViewModel from "./DoorViewModel";
 
 const modelLink = require("../../../../../Assets/Door.glb");

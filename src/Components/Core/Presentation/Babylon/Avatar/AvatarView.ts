@@ -1,7 +1,7 @@
 import { Mesh, SceneLoader } from "@babylonjs/core";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import ISceneController from "../SceneManagment/ISceneController";
+import ISceneController from "../SceneManagement/ISceneController";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
 

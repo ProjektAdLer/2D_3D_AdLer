@@ -1,5 +1,5 @@
 import { Scene } from "@babylonjs/core/scene";
-import SceneViewModel from "../../../../Core/Presentation/Babylon/SceneManagment/SceneViewModel";
+import SceneViewModel from "../../../../Core/Presentation/Babylon/SceneManagement/SceneViewModel";
 
 jest.mock("@babylonjs/core/scene", () => {
   return {

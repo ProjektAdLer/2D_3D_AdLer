@@ -18,7 +18,7 @@ import {
 // required imports
 import "@babylonjs/inspector";
 import "@babylonjs/loaders/glTF";
-import ICreateSceneClass from "../Components/Core/Presentation/Babylon/SceneManagment/ICreateSceneClass";
+import ICreateSceneClass from "../Components/Core/Presentation/Babylon/SceneManagement/ICreateSceneClass";
 
 // digital assets
 import link_h5p from "../Assets/3DLink_H5P.glb";
