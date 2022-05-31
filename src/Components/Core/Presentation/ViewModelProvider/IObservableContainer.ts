@@ -36,6 +36,8 @@ export default interface IObservableContainer<T, U> {
    */
   removeValueWithTupelIdentitfyer(tupelIdentifier: T): void;
 
+  removeValue(value: U): void;
+
   /**
    * Returns the values contained in this container.
    */
