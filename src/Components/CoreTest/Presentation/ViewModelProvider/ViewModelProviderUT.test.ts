@@ -143,4 +143,40 @@ describe("ViewModelProvider", () => {
       viewModelControllerProvider["containers"][0].getValues().length
     ).toBe(0);
   });
+
+  test("removeTupel throws, if the value in a given container is now found", () => {
+    const viewModel = new TestViewModelA();
+    const wrongViewModel = new TestViewModelB();
+    const controller = new TestControllerA();
+
+    viewModelControllerProvider.registerTupel(
+      viewModel,
+      controller,
+      TestViewModelA
+    );
+
+    expect(() => {
+      viewModelControllerProvider.removeByViewModel<TestViewModelA>(
+        wrongViewModel,
+        TestViewModelA
+      );
+    }).toThrow();
+  });
+  test("removeTupel throws, if container is not found", () => {
+    const viewModel = new TestViewModelA();
+    const controller = new TestControllerA();
+
+    viewModelControllerProvider.registerTupel(
+      viewModel,
+      controller,
+      TestViewModelA
+    );
+
+    expect(() => {
+      viewModelControllerProvider.removeByViewModel<TestViewModelB>(
+        viewModel,
+        TestViewModelB
+      );
+    }).toThrow();
+  });
 });

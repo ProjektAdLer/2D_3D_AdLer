@@ -59,7 +59,9 @@ export default class ViewModelControllerProvider
     viewModelClass: { new (): VM }
   ): void {
     var container = this.findContainer<VM, unknown>(viewModelClass);
-    // TODO: Throw, if conatiner is not found or if tupel is not in container
+
+    if (!container) throw new Error("Container not found");
+
     container?.removeValueWithTupelIdentitfyer(viewModel);
   }
 
