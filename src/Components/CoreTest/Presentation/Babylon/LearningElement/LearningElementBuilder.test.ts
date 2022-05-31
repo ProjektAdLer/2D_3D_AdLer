@@ -1,6 +1,6 @@
+import LearningElementPort from "../../../../Core/Ports/LearningElementPort/LearningElementPort";
 import LearningElementBuilder from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementBuilder";
 import LearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementPresenter";
-import LearningElementPort from "../../../../Core/Presentation/Ports/LearningElementPort/LearningElementPort";
 
 const addLearningElementPresenterMock = jest.spyOn(
   LearningElementPort.prototype,
