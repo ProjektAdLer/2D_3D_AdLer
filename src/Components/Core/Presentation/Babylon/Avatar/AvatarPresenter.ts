@@ -11,7 +11,7 @@ import IAvatarPresenter from "./IAvatarPresenter";
 
 /**
  * @class AvatarBuilder
- * @description Presenter and Port for the Avatar. The first call to presentAvatar created View, ViewModel and Controller for the Avatar.
+ * @description Presenter and Port for the Avatar. The first call to presentAvatar creates View, ViewModel and Controller for the Avatar.
  */
 @injectable()
 export default class AvatarPresenter implements IAvatarPresenter, IAvatarPort {
