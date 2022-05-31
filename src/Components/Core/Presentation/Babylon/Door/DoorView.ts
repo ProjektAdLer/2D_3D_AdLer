@@ -1,16 +1,16 @@
 import { Animation, Mesh, SceneLoader, Tools, Vector3 } from "@babylonjs/core";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import SceneController from "../SceneManagment/SceneController";
+import ISceneController from "../SceneManagment/SceneController";
 import DoorViewModel from "./DoorViewModel";
 
 const modelLink = require("../../../../../Assets/Door.glb");
 
 export default class DoorView {
-  private sceneController: SceneController;
+  private sceneController: ISceneController;
 
   constructor(private viewModel: DoorViewModel) {
-    this.sceneController = CoreDIContainer.get<SceneController>(
+    this.sceneController = CoreDIContainer.get<ISceneController>(
       CORE_TYPES.ISceneController
     );
 
