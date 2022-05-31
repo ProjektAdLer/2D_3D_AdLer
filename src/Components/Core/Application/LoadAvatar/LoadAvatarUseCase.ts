@@ -1,8 +1,8 @@
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
-import ILoadCharacterUseCase from "./ILoadCharacterUseCase";
+import ILoadAvatarUseCase from "./ILoadAvatarUseCase";
 
-export default class LoadCharacterUseCase implements ILoadCharacterUseCase {
+export default class LoadAvatarUseCase implements ILoadAvatarUseCase {
   async executeAsync(): Promise<void> {
     return Promise.resolve();
   }

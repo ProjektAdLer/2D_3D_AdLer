@@ -1,3 +1,3 @@
-export default class CharacterEntity {
-  characterName: string;
+export default class AvatarEntity {
+  avatarName: string;
 }

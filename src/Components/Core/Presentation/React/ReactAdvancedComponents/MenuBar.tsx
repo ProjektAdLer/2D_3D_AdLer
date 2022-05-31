@@ -10,7 +10,7 @@ export default function MenuBar() {
       <StyledButton
         onClick={async () => {
           await loadWorldController.loadWorld();
-          await loadWorldController.loadCharacter();
+          await loadWorldController.loadAvatar();
         }}
       >
         <div>Debug:</div>

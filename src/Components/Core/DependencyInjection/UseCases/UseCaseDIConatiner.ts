@@ -3,8 +3,8 @@ import CalculateTotalRoomScore from "../../Application/CalculateTotalRoomScore/C
 import ICalculateTotalRoomScore from "../../Application/CalculateTotalRoomScore/ICalculateTotalRoomScore";
 import ILearningElementStartedUseCase from "../../Application/LearningElementStarted/ILearningElementStartedUseCase";
 import LearningElementStartedUseCase from "../../Application/LearningElementStarted/LearningElementStartedUseCase";
-import ILoadCharacterUseCase from "../../Application/LoadCharacter/ILoadCharacterUseCase";
-import LoadCharacterUseCase from "../../Application/LoadCharacter/LoadCharacterUseCase";
+import ILoadAvatarUseCase from "../../Application/LoadAvatar/ILoadAvatarUseCase";
+import LoadAvatarUseCase from "../../Application/LoadAvatar/LoadAvatarUseCase";
 import ILoadWorldUseCase from "../../Application/LoadWorld/ILoadWorldUseCase";
 import LoadWorldUseCase from "../../Application/LoadWorld/LoadWorldUseCase";
 import ILogUserIntoMoodleUseCase from "../../Application/LogUserIntoMoodle/ILogUserIntoMoodleUseCase";
@@ -20,8 +20,8 @@ const useCaseDIContainer = new ContainerModule((bind) => {
     .to(LoadWorldUseCase)
     .inSingletonScope();
 
-  bind<ILoadCharacterUseCase>(USECASE_TYPES.ILoadCharacterUseCase)
-    .to(LoadCharacterUseCase)
+  bind<ILoadAvatarUseCase>(USECASE_TYPES.ILoadAvatarUseCase)
+    .to(LoadAvatarUseCase)
     .inSingletonScope();
 
   bind<IScoreLearningElementUseCase>(USECASE_TYPES.IScoreLearningElementUseCase)
