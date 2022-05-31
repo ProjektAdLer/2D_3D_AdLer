@@ -1,4 +1,5 @@
 import { ContainerModule } from "inversify";
+import AvatarBuilder from "../../Presentation/Babylon/Avatar/AvatarBuilder";
 import DoorBuilder from "../../Presentation/Babylon/Door/DoorBuilder";
 import LearningElementBuilder from "../../Presentation/Babylon/LearningElement/LearningElementBuilder";
 import LearningRoomBuilder from "../../Presentation/Babylon/LearningRoom/LearningRoomBuilder";
@@ -31,6 +32,7 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementBuilder).to(
     LearningElementBuilder
   );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarBuilder).to(AvatarBuilder);
 });
 
 export default BuilderDIContainer;

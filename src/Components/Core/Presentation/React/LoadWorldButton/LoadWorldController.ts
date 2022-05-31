@@ -18,5 +18,7 @@ export class LoadWorldController implements ILoadWorldController {
     const useCase = CoreDIContainer.get<ILoadAvatarUseCase>(
       USECASE_TYPES.ILoadAvatarUseCase
     );
+
+    useCase.executeAsync();
   }
 }

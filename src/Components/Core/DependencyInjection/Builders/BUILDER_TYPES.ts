@@ -6,6 +6,7 @@ const BUILDER_TYPES = {
   IScorePanelBuilder: Symbol("IScorePanelBuilder"),
   IMoodleLoginFormBuilder: Symbol("IMoodleLoginFormBuilder"),
   ILearningElementModalBuilder: Symbol("ILearningElementModalBuilder"),
+  IAvatarBuilder: Symbol("IAvatarBuilder"),
 };
 
 export default BUILDER_TYPES;

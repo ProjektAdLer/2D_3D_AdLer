@@ -1,16 +1,26 @@
+import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
+import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 import AvatarController from "./AvatarController";
 import AvatarView from "./AvatarView";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
+import IAvatarPresenter from "./IAvatarPresenter";
 
 export default class AvatarBuilder extends PresentationBuilder<
   AvatarViewModel,
   IAvatarController,
   AvatarView,
-  IAvatarController
+  IAvatarPresenter
 > {
   constructor() {
-    super(AvatarViewModel, AvatarController, AvatarView, AvatarController);
+    super(AvatarViewModel, AvatarController, AvatarView, undefined);
+  }
+
+  buildPresenter(): void {
+    this.presenter = CoreDIContainer.get<IAvatarPresenter>(
+      PORT_TYPES.IAvatarPort
+    );
+    this.presenter.ViewModel = this.viewModel!;
   }
 }
