@@ -53,6 +53,16 @@ export default class ObservableContainer<T, U>
       this.callbacks.forEach((callback) => callback(this.values));
     }
   }
+  removeValueWithTupelIdentitfyer(tupelIdentifier: T): void {
+    var index = this.values.findIndex(
+      (value: any) => value[0] === tupelIdentifier
+    );
+
+    if (index !== -1) {
+      this.values.splice(index, 1);
+      this.callbacks.forEach((callback) => callback(this.values));
+    }
+  }
 
   public getValues(): U[] {
     return this.values;

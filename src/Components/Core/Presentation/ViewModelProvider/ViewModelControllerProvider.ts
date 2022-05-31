@@ -54,12 +54,13 @@ export default class ViewModelControllerProvider
     ]);
   }
 
-  public removeTupel<VM, C>(
-    tupel: [VM, C],
+  public removeByViewModel<VM>(
+    viewModel: VM,
     viewModelClass: { new (): VM }
   ): void {
-    var container = this.findContainer<VM, any>(viewModelClass);
-    container?.removeValue(tupel);
+    var container = this.findContainer<VM, unknown>(viewModelClass);
+    // TODO: Throw, if conatiner is not found or if tupel is not in container
+    container?.removeValueWithTupelIdentitfyer(viewModel);
   }
 
   private findContainer<VM, C>(viewModelClass: {

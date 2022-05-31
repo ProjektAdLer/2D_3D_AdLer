@@ -1,3 +1,7 @@
+/**
+ * T = The identifier
+ * U = The value
+ */
 export default interface IObservableContainer<T, U> {
   /**
    * User-defined type guard that determines whether this container's elements match the given type.
@@ -31,6 +35,12 @@ export default interface IObservableContainer<T, U> {
    * @param value The value to remove.
    */
   removeValue(value: U): void;
+
+  /**
+   * Removes a Tupel by its first element. (By 21.05.22 it is always a View Model)
+   * @param tupelIdentifier  the identifyer of the tupel to remove
+   */
+  removeValueWithTupelIdentitfyer(tupelIdentifier: T): void;
 
   /**
    * Returns the values contained in this container.
