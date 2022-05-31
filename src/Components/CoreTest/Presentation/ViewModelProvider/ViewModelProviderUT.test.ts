@@ -2,7 +2,6 @@ import ViewModelControllerProvider from "../../../Core/Presentation/ViewModelPro
 class TestViewModelA {}
 class TestControllerA {}
 class TestViewModelB {}
-class TestControllerB {}
 
 describe("ViewModelProvider", () => {
   let viewModelControllerProvider: ViewModelControllerProvider;
