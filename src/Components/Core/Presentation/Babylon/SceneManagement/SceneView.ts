@@ -12,7 +12,7 @@ export default class SceneView implements ISceneView {
     this.sceneViewModel = sceneViewModel;
   }
 
-  createRenderLoop(engine: Engine): void {
+  startRenderLoop(engine: Engine): void {
     engine.runRenderLoop(this.renderFunction);
   }
 

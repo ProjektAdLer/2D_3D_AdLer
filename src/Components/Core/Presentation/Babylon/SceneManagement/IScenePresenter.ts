@@ -1,8 +1,8 @@
 import { Scene } from "@babylonjs/core";
 import ICreateSceneClass from "./ICreateSceneClass";
 
-export default interface ISceneController {
+export default interface IScenePresenter {
   createScene(createSceneClass: ICreateSceneClass): Promise<void>;
-  createRenderLoop(): void;
+  startRenderLoop(): void;
   get Scene(): Scene;
 }

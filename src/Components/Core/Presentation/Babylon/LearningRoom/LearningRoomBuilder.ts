@@ -6,7 +6,7 @@ import LearningRoomController from "./LearningRoomController";
 import LearningRoomPresenter from "./LearningRoomPresenter";
 import LearningRoomView from "./LearningRoomView";
 import LearningRoomViewModel from "./LearningRoomViewModel";
-import SceneController from "../SceneManagement/SceneController";
+import ScenePresenter from "../SceneManagement/ScenePresenter";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 import ILearningRoomView from "./ILearningRoomView";
 import ILearningRoomPresenter from "./ILearningRoomPresenter";
@@ -31,8 +31,8 @@ export default class LearningRoomBuilder extends PresentationBuilder<
 
   override buildViewModel(): void {
     super.buildViewModel();
-    this.viewModel!.scene.Value = CoreDIContainer.get<SceneController>(
-      CORE_TYPES.ISceneController
+    this.viewModel!.scene.Value = CoreDIContainer.get<ScenePresenter>(
+      CORE_TYPES.IscenePresenter
     ).Scene;
   }
 

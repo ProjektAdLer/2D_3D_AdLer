@@ -6,10 +6,10 @@ import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import { Scene } from "@babylonjs/core";
 
 import ICreateSceneClass from "./ICreateSceneClass";
-import ISceneController from "./ISceneController";
+import IScenePresenter from "./IScenePresenter";
 
 @injectable()
-export default class SceneController implements ISceneController {
+export default class ScenePresenter implements IScenePresenter {
   private engineManager: IEngineManager;
   private sceneView: ISceneView;
   private sceneViewModel: SceneViewModel;
@@ -35,8 +35,8 @@ export default class SceneController implements ISceneController {
     );
   }
 
-  createRenderLoop(): void {
-    this.sceneView.createRenderLoop(this.engineManager.Engine);
+  startRenderLoop(): void {
+    this.sceneView.startRenderLoop(this.engineManager.Engine);
   }
 
   get Scene(): Scene {

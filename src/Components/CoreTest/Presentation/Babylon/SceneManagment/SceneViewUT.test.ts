@@ -18,8 +18,8 @@ describe("SceneView", () => {
     jest.restoreAllMocks();
   });
 
-  test("createRenderLoop call the babylon engine", () => {
-    sceneView.createRenderLoop(new Engine(document.createElement("canvas")));
+  test("startRenderLoop call the babylon engine", () => {
+    sceneView.startRenderLoop(new Engine(document.createElement("canvas")));
     expect(runRenderLoopMock).toHaveBeenCalledTimes(1);
     // todo: maybe extend this to expect to be called with another function as argument -MK
   });

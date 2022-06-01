@@ -1,17 +1,17 @@
 import { Animation, Mesh, SceneLoader, Tools, Vector3 } from "@babylonjs/core";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import ISceneController from "../SceneManagement/SceneController";
+import IscenePresenter from "../SceneManagement/ScenePresenter";
 import DoorViewModel from "./DoorViewModel";
 
 const modelLink = require("../../../../../Assets/Door.glb");
 
 export default class DoorView {
-  private sceneController: ISceneController;
+  private scenePresenter: IscenePresenter;
 
   constructor(private viewModel: DoorViewModel) {
-    this.sceneController = CoreDIContainer.get<ISceneController>(
-      CORE_TYPES.ISceneController
+    this.scenePresenter = CoreDIContainer.get<IscenePresenter>(
+      CORE_TYPES.IscenePresenter
     );
 
     // setup callbacks for rerendering when the view model changes
@@ -28,7 +28,7 @@ export default class DoorView {
     });
     viewModel.isOpen.subscribe(() => {
       if (this.viewModel.isOpen.Value) {
-        this.sceneController.Scene.beginAnimation(
+        this.scenePresenter.Scene.beginAnimation(
           viewModel.meshes.Value[0],
           0,
           45
@@ -68,7 +68,7 @@ export default class DoorView {
       "",
       modelLink,
       "",
-      this.sceneController.Scene
+      this.scenePresenter.Scene
     );
 
     result.meshes.forEach(

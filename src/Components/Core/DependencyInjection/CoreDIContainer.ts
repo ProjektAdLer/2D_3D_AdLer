@@ -5,13 +5,13 @@ import CORE_TYPES from "./CoreTypes";
 import ISceneView from "../Presentation/Babylon/SceneManagement/ISceneView";
 import SceneView from "../Presentation/Babylon/SceneManagement/SceneView";
 import SceneViewModel from "../Presentation/Babylon/SceneManagement/SceneViewModel";
-import SceneController from "../Presentation/Babylon/SceneManagement/SceneController";
+import ScenePresenter from "../Presentation/Babylon/SceneManagement/ScenePresenter";
 import MainScene from "../Presentation/Babylon/SceneManagement/MainScene";
 import ICreateSceneClass from "../Presentation/Babylon/SceneManagement/ICreateSceneClass";
 import ILearningElementView from "../Presentation/Babylon/LearningElement/ILearningElementView";
 import LearningElementView from "../Presentation/Babylon/LearningElement/LearningElementView";
 import LearningElementViewModel from "../Presentation/Babylon/LearningElement/LearningElementViewModel";
-import ISceneController from "../Presentation/Babylon/SceneManagement/ISceneController";
+import IScenePresenter from "../Presentation/Babylon/SceneManagement/IScenePresenter";
 import infrastructureDIContainer from "./InfrastructureDIContainer";
 import useCaseDIContainer from "./UseCases/UseCaseDIConatiner";
 import PortsDIContainer from "./Ports/PortsDIContainer";
@@ -24,8 +24,8 @@ CoreDIContainer.bind<ISceneView>(CORE_TYPES.ISceneView)
   .to(SceneView)
   .inSingletonScope();
 CoreDIContainer.bind(SceneViewModel).toSelf().inSingletonScope();
-CoreDIContainer.bind<ISceneController>(CORE_TYPES.ISceneController)
-  .to(SceneController)
+CoreDIContainer.bind<IScenePresenter>(CORE_TYPES.IscenePresenter)
+  .to(ScenePresenter)
   .inSingletonScope();
 
 // Learning Element

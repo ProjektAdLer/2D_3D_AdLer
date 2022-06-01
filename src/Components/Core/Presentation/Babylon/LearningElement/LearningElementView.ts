@@ -9,7 +9,7 @@ import {
 } from "@babylonjs/core";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import type ISceneController from "../SceneManagement/ISceneController";
+import type IScenePresenter from "../SceneManagement/IScenePresenter";
 import ILearningElementController from "./ILearningElementController";
 import ILearningElementView from "./ILearningElementView";
 import LearningElementViewModel from "./LearningElementViewModel";
@@ -28,14 +28,14 @@ const modelLinks = {
 export default class LearningElementView implements ILearningElementView {
   private viewModel: LearningElementViewModel;
   private controller: ILearningElementController;
-  private sceneController: ISceneController;
+  private scenePresenter: IScenePresenter;
 
   constructor(
     viewModel: LearningElementViewModel,
     controller: ILearningElementController
   ) {
-    this.sceneController = CoreDIContainer.get<ISceneController>(
-      CORE_TYPES.ISceneController
+    this.scenePresenter = CoreDIContainer.get<IScenePresenter>(
+      CORE_TYPES.IscenePresenter
     );
     this.viewModel = viewModel;
     this.controller = controller;
@@ -60,12 +60,12 @@ export default class LearningElementView implements ILearningElementView {
       "",
       modelLinks[getLearningElementSymbol(this.viewModel.type.Value)],
       "",
-      this.sceneController.Scene
+      this.scenePresenter.Scene
     );
 
     this.viewModel.meshes.Value = result.meshes as Mesh[];
     this.viewModel.meshes.Value.forEach((mesh) => {
-      mesh.actionManager = new ActionManager(this.sceneController.Scene);
+      mesh.actionManager = new ActionManager(this.scenePresenter.Scene);
     });
   }
 

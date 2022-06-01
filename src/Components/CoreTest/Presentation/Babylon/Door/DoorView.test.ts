@@ -21,7 +21,7 @@ describe("DoorView", () => {
   });
 
   test("constructor", () => {
-    expect(view["sceneController"]).toBeDefined();
+    expect(view["scenePresenter"]).toBeDefined();
 
     expect(view["viewModel"].position.subscribe).toHaveBeenCalledTimes(1);
     expect(view["viewModel"].rotation.subscribe).toHaveBeenCalledTimes(1);

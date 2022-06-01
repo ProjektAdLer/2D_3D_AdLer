@@ -1,7 +1,7 @@
 const CORE_TYPES = {
   IEngineManager: Symbol("IEngineManager"),
   ISceneView: Symbol("ISceneView"),
-  ISceneController: Symbol("ISceneController"),
+  IscenePresenter: Symbol("IscenePresenter"),
   ICreateSceneClass: Symbol("ICreateSceneClass"),
   ILearningRoomController: Symbol("ILearningRoomController"),
   ILearningRoomView: Symbol("ILearningRoomView"),
