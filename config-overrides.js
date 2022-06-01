@@ -6,7 +6,15 @@ const { override, addBabelPlugin } = require("customize-cra");
 const babelTsTransformPlugin = require("babel-plugin-transform-typescript-metadata");
 
 module.exports = {
-  webpack: override(addBabelPlugin(babelTsTransformPlugin)),
+  webpack: override(addBabelPlugin(babelTsTransformPlugin), (config) => {
+    const fallback = config.resolve.fallback || {};
+    Object.assign(fallback, {
+      path: require.resolve("path-browserify"),
+      fs: false,
+    });
+    config.resolve.fallback = fallback;
+    return config;
+  }),
   jest: (config) => {
     config.preset = "ts-jest";
     config.testEnvironment = "jsdom";
