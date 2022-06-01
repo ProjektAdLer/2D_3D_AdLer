@@ -12,3 +12,6 @@ declare module "*.stl";
 declare module "*.jpeg";
 declare module "*.gif";
 declare module "*.mp4";
+
+// Babylon Navigation Plugin Dependency
+declare module "recast-detour";
