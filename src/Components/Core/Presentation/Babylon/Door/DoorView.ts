@@ -11,7 +11,7 @@ export default class DoorView {
 
   constructor(private viewModel: DoorViewModel) {
     this.scenePresenter = CoreDIContainer.get<IscenePresenter>(
-      CORE_TYPES.IscenePresenter
+      CORE_TYPES.IScenePresenter
     );
 
     // setup callbacks for rerendering when the view model changes

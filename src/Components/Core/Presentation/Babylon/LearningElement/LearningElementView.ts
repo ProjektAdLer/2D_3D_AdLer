@@ -35,7 +35,7 @@ export default class LearningElementView implements ILearningElementView {
     controller: ILearningElementController
   ) {
     this.scenePresenter = CoreDIContainer.get<IScenePresenter>(
-      CORE_TYPES.IscenePresenter
+      CORE_TYPES.IScenePresenter
     );
     this.viewModel = viewModel;
     this.controller = controller;

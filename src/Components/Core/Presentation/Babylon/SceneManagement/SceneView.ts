@@ -18,6 +18,6 @@ export default class SceneView implements ISceneView {
 
   @bind
   private renderFunction() {
-    this.sceneViewModel.Scene.render();
+    this.sceneViewModel.scene.render();
   }
 }
