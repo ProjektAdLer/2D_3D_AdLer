@@ -1,4 +1,4 @@
-import { Mesh, SceneLoader } from "@babylonjs/core";
+import { FollowCamera, Mesh, SceneLoader } from "@babylonjs/core";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import ISceneController from "../SceneManagement/ISceneController";
@@ -30,5 +30,9 @@ export default class AvatarView {
     );
 
     this.viewModel.meshes.Value = result.meshes as Mesh[];
+
+    // Set FollowCamera to follow the avatar (~FK):
+    var camera = this.sceneController.Scene.cameras[0];
+    (camera as FollowCamera).lockedTarget = result.meshes[0];
   }
 }
