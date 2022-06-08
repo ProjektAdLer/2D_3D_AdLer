@@ -21,7 +21,13 @@ export default function MenuBar() {
       <StyledButton
         onClick={() => {
           if (screenfull.isEnabled) {
-            screenfull.toggle();
+            if (screenfull.isFullscreen) {
+              screenfull.exit();
+              window.screen.orientation.unlock();
+            } else {
+              screenfull.request();
+              window.screen.orientation.lock("landscape");
+            }
           }
         }}
       >
