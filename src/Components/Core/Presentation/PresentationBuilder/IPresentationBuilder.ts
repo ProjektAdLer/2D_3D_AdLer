@@ -1,4 +1,4 @@
-export default interface PresentationBuilder {
+export default interface IPresentationBuilder {
   reset(): void;
   buildViewModel(): void;
   buildController(): void;
