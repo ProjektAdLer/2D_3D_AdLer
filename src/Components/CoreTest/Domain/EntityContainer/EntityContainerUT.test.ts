@@ -121,6 +121,18 @@ describe("EntityManager", () => {
     expect(container.getEntitiesOfType(TestEntity).length).toBe(1);
     expect(container.getEntitiesOfType(TestEntity)[0]).toBe(entity2);
   });
+
+  test("UseSingletonEntity returns a alreay exisiting Entity", () => {
+    const container = getContainer();
+
+    const entity1 = container.createEntity<TestEntity>({}, TestEntity);
+    container.createEntity<TestEntity2>({}, TestEntity2);
+
+    const entity3 = container.useSingletonEntity<TestEntity>({}, TestEntity);
+
+    expect(entity3).toBe(entity1);
+    expect(container.getEntitiesOfType(TestEntity).length).toBe(2);
+  });
 });
 function getContainer() {
   return CoreDIContainer.get<IEntityContainer>(CORE_TYPES.IEntityContainer);

@@ -2,8 +2,6 @@ import StyledButton from "../ReactBaseComponents/StyledButton";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
 
-import screenfull from "screenfull";
-
 export default function MenuBar() {
   const loadWorldController = new LoadWorldController();
 
@@ -20,14 +18,12 @@ export default function MenuBar() {
       </StyledButton>
       <StyledButton
         onClick={() => {
-          if (screenfull.isEnabled) {
-            if (screenfull.isFullscreen) {
-              screenfull.exit();
-              window.screen.orientation.unlock();
-            } else {
-              screenfull.request();
-              window.screen.orientation.lock("landscape");
-            }
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+            window.screen.orientation.unlock();
+          } else {
+            document.documentElement.requestFullscreen();
+            window.screen.orientation.lock("landscape");
           }
         }}
       >
