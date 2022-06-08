@@ -14,11 +14,16 @@ export class FakeBackend implements IBackend {
     username: string;
     password: string;
   }): Promise<string> {
-    const response = await axios.get<string>(
-      "https://api.cluuub.xyz/userlogin"
+    // const response = await axios.get<string>(
+    //   "https://api.cluuub.xyz/userlogin"
+    // );
+
+    const token = await axios.post<string>(
+      "https://api.cluuub.xyz/userlogin",
+      userCredentials
     );
 
-    return response.data;
+    return token.data;
     //return Promise.resolve(`${userCredentials.username}_token`);
   }
   scoreLearningElement(learningElementId: LearningComponentID): Promise<void> {

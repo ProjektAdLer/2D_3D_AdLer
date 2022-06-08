@@ -25,9 +25,6 @@ export default class LogUserIntoMoodleUseCase
       username: data.username,
       password: data.password,
     });
-    console.log(
-      `Logging user ${data.username} into moodle with Token: ${userToken}`
-    );
 
     this.container.createEntity<UserDataEntity>(
       {

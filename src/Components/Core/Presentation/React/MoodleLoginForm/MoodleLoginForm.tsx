@@ -14,9 +14,7 @@ export default function MoodleLoginForm() {
     MoodleLoginFormController
   >(MoodleLoginFormViewModel);
 
-  const [userToken, setUserToken] = useObservable<string>(
-    viewModels[0]?.userToken
-  );
+  const [userToken] = useObservable<string>(viewModels[0]?.userToken);
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -45,7 +43,6 @@ export default function MoodleLoginForm() {
         <StyledButton
           onClick={async () => {
             await controllers[0].loginAsync(userName, password);
-            alert(`${userName} logged in`);
           }}
         >
           <p>Login</p>
