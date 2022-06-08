@@ -1,24 +1,24 @@
-import { Mesh, VertexData, StandardMaterial, Texture } from "@babylonjs/core";
+import { VertexData, StandardMaterial, Texture } from "@babylonjs/core";
 import LearningRoomViewModel from "./LearningRoomViewModel";
 import floorTexture from "../../../../../Assets/wooden_floor.png";
 import ILearningRoomController from "./ILearningRoomController";
 import ILearningRoomView from "./ILearningRoomView";
+import IScenePresenter from "../SceneManagement/IScenePresenter";
+import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 
 export default class LearningRoomView implements ILearningRoomView {
-  private viewModel: LearningRoomViewModel;
-  private controller: ILearningRoomController;
+  private scenePresenter: IScenePresenter;
 
   constructor(
-    viewModel: LearningRoomViewModel,
-    controller: ILearningRoomController
+    private viewModel: LearningRoomViewModel,
+    private controller: ILearningRoomController
   ) {
-    this.viewModel = viewModel;
-    this.controller = controller;
+    this.scenePresenter = CoreDIContainer.get<IScenePresenter>(
+      CORE_TYPES.IScenePresenter
+    );
 
     // setup callbacks for rerendering parts of the room when the view model changes
-    this.viewModel.scene.subscribe(() => {
-      this.displayRoom();
-    });
     this.viewModel.roomHeight.subscribe(() => {
       this.displayRoom();
     });
@@ -66,9 +66,9 @@ export default class LearningRoomView implements ILearningRoomView {
 
     // create mesh
     if (!this.viewModel.floorMesh.Value) {
-      this.viewModel.floorMesh.Value = new Mesh(
+      this.viewModel.floorMesh.Value = this.scenePresenter.createMesh(
         "Floor",
-        this.viewModel.scene.Value
+        true
       );
     }
 
@@ -85,13 +85,13 @@ export default class LearningRoomView implements ILearningRoomView {
     if (!this.viewModel.floorMaterial.Value) {
       this.viewModel.floorMaterial.Value = new StandardMaterial(
         "floorMaterial",
-        this.viewModel.scene.Value
+        this.scenePresenter.Scene
       );
     }
 
     this.viewModel.floorMaterial.Value.diffuseTexture = new Texture(
       floorTexture,
-      this.viewModel.scene.Value
+      this.scenePresenter.Scene
     );
     this.viewModel.floorMesh.Value.material =
       this.viewModel.floorMaterial.Value;
@@ -108,9 +108,9 @@ export default class LearningRoomView implements ILearningRoomView {
 
     // create mesh
     if (!this.viewModel.wallMesh.Value) {
-      this.viewModel.wallMesh.Value = new Mesh(
+      this.viewModel.wallMesh.Value = this.scenePresenter.createMesh(
         "Walls",
-        this.viewModel.scene.Value
+        true
       );
     }
 
@@ -126,7 +126,7 @@ export default class LearningRoomView implements ILearningRoomView {
     if (!this.viewModel.wallMaterial.Value) {
       this.viewModel.wallMaterial.Value = new StandardMaterial(
         "wallMaterial",
-        this.viewModel.scene.Value
+        this.scenePresenter.Scene
       );
     }
     this.viewModel.wallMaterial.Value.diffuseColor =

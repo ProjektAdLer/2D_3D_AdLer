@@ -25,6 +25,9 @@ import * as Recast from "recast-detour";
  */
 @injectable()
 export default class ScenePresenter implements IScenePresenter {
+  private navMeshDebug: Mesh;
+  private matDebug: StandardMaterial;
+
   constructor(
     @inject(CORE_TYPES.IEngineManager) private engineManager: IEngineManager,
     @inject(SceneViewModel) private viewModel: SceneViewModel,
@@ -54,13 +57,6 @@ export default class ScenePresenter implements IScenePresenter {
     return this.viewModel.scene;
   }
 
-  /**
-   * Loads a model from given url into the scene
-   * @param url the url to the model
-   * @param isRelevantForNavigation defines if the model is considered when creating the NavMesh (default: false)
-   * @param onProgress  the callback function for progress events (optional)
-   * @returns a promise with the loaded meshes
-   */
   async loadModel(
     url: string,
     isRelevantForNavigation: boolean = false,
@@ -76,10 +72,21 @@ export default class ScenePresenter implements IScenePresenter {
 
     if (isRelevantForNavigation) {
       this.viewModel.navigationMeshes.push(...result.meshes);
-      this.createNavMesh();
+      // this.createNavMesh();
     }
 
     return result.meshes;
+  }
+
+  createMesh(name: string, isRelevantForNavigation: boolean = false): Mesh {
+    let mesh = new Mesh(name, this.viewModel.scene);
+
+    if (isRelevantForNavigation) {
+      this.viewModel.navigationMeshes.push(mesh);
+      this.createNavMesh();
+    }
+
+    return mesh;
   }
 
   async createScene(createSceneClass: ICreateSceneClass): Promise<void> {
@@ -98,11 +105,10 @@ export default class ScenePresenter implements IScenePresenter {
   }
 
   private async setupNavigation(): Promise<void> {
-    let recast = await new Recast();
-    this.viewModel.navigation = new RecastJSPlugin(recast);
+    this.viewModel.navigation = new RecastJSPlugin(await new Recast());
 
     // create first NavMesh so that it's not undefined
-    this.createNavMesh();
+    // this.createNavMesh();
 
     this.viewModel.navigationCrowd = this.viewModel.navigation.createCrowd(
       this.viewModel.maxAgentCount,
@@ -111,21 +117,22 @@ export default class ScenePresenter implements IScenePresenter {
     );
   }
 
-  private createNavMesh(): void {
+  createNavMesh(): void {
     this.viewModel.navigation.createNavMesh(
-      // this.viewModel.navigationMeshes as Mesh[],
-      this.viewModel.scene.meshes as Mesh[],
+      this.viewModel.navigationMeshes as Mesh[],
+      // this.viewModel.scene.meshes as Mesh[],
       this.viewModel.navmeshParameters
     );
 
     // debug: colored navmesh representation
-    var navmeshdebug = this.viewModel.navigation.createDebugNavMesh(
+    this.navMeshDebug?.dispose();
+    this.navMeshDebug = this.viewModel.navigation.createDebugNavMesh(
       this.viewModel.scene
     );
-    navmeshdebug.position = new Vector3(0, 0.01, 0);
-    var matdebug = new StandardMaterial("matdebug", this.viewModel.scene);
-    matdebug.diffuseColor = new Color3(0.1, 0.2, 1);
-    matdebug.alpha = 0.2;
-    navmeshdebug.material = matdebug;
+    this.navMeshDebug.position = new Vector3(0, 0.01, 0);
+    this.matDebug = new StandardMaterial("matdebug", this.viewModel.scene);
+    this.matDebug.diffuseColor = new Color3(0.1, 0.2, 1);
+    this.matDebug.alpha = 0.2;
+    this.navMeshDebug.material = this.matDebug;
   }
 }
