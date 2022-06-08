@@ -17,7 +17,7 @@ export default function BabylonCanvas(props: any) {
             CORE_TYPES.IEngineManager
           );
           const scenePresenter = CoreDIContainer.get<IScenePresenter>(
-            CORE_TYPES.IscenePresenter
+            CORE_TYPES.IScenePresenter
           );
 
           engineManager.createEngine(canvas);

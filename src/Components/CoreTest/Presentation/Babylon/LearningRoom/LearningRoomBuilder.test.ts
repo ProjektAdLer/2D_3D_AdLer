@@ -3,9 +3,10 @@ import LearningRoomViewModel from "../../../../Core/Presentation/Babylon/Learnin
 import LearningRoomBuilder from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomBuilder";
 import SceneViewModel from "../../../../Core/Presentation/Babylon/SceneManagement/SceneViewModel";
 import LearningRoomPort from "../../../../Core/Ports/LearningRoomPort/LearningRoomPort";
+import ScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/ScenePresenter";
 
 jest.mock("@babylonjs/core");
-const getSceneMock = jest.spyOn(SceneViewModel.prototype, "Scene", "get");
+const getSceneMock = jest.spyOn(ScenePresenter.prototype, "Scene", "get");
 const addLearningRoomPresenterMock = jest.spyOn(
   LearningRoomPort.prototype,
   "addLearningRoomPresenter"

@@ -29,13 +29,6 @@ export default class LearningRoomBuilder extends PresentationBuilder<
     );
   }
 
-  override buildViewModel(): void {
-    super.buildViewModel();
-    this.viewModel!.scene.Value = CoreDIContainer.get<ScenePresenter>(
-      CORE_TYPES.IscenePresenter
-    ).Scene;
-  }
-
   override buildPresenter(): void {
     super.buildPresenter();
     CoreDIContainer.get<ILearningRoomPort>(

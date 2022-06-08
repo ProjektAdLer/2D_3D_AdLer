@@ -12,7 +12,7 @@ export default function MenuBar() {
       <StyledButton
         onClick={async () => {
           await loadWorldController.loadWorld();
-          await loadWorldController.loadAvatar();
+          // await loadWorldController.loadAvatar();
         }}
       >
         <div style={{ color: "#ff0000" }}>Debug:</div>

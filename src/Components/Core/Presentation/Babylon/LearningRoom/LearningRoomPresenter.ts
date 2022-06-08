@@ -9,6 +9,7 @@ import IScorePanelPresenter from "../../React/ScorePanel/IScorePanelPresenter";
 import IDoorPresenter from "../Door/IDoorPresenter";
 import LearningRoomViewModel from "./LearningRoomViewModel";
 import ILearningRoomPresenter from "./ILearningRoomPresenter";
+import ILearningElementPresenter from "../LearningElement/ILearningElementPresenter";
 
 @injectable()
 export default class LearningRoomPresenter implements ILearningRoomPresenter {
@@ -47,7 +48,7 @@ export default class LearningRoomPresenter implements ILearningRoomPresenter {
 
     learningRoomTO.learningElements.forEach((elementTO) => {
       director.build();
-      let presenter = builder.getPresenter();
+      let presenter = builder.getPresenter() as ILearningElementPresenter;
       presenter.presentLearningElement(elementTO, elementPositions.shift()!);
     });
 

@@ -33,7 +33,7 @@ export default class MainScene implements ICreateSceneClass {
     return scene;
   };
 
-  setCamera(scene: Scene) {
+  private setCamera(scene: Scene) {
     // Old free camera for debug purposes (might break in AvatarView.ts due to FollowCamera Code) (~FK):
     // var camera = new FreeCamera("camera1", new Vector3(20, 20, 20), scene);
     // camera.setTarget(new Vector3(0, 0, 0));
