@@ -34,14 +34,6 @@ export default function MenuBar() {
         <div style={{ color: "#ff0000" }}>Debug:</div>
         <div>Toggle full screen mode</div>
       </StyledButton>
-      <StyledButton
-        onClick={() => {
-          window.scrollTo(0, 1);
-        }}
-      >
-        <div style={{ color: "#ff0000" }}>Debug:</div>
-        <div>Hide Adress bar on Mobile</div>
-      </StyledButton>
     </StyledContainer>
   );
 }
