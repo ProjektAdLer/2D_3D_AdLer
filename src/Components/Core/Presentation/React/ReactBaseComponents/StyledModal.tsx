@@ -4,6 +4,7 @@ type Props = Partial<{
   showModal: boolean;
   children: React.ReactNode;
   title: string;
+  canClose: boolean;
   onClose: () => void;
   footer: string;
 }>;
@@ -16,11 +17,13 @@ type Props = Partial<{
  * @param title the title of the modal
  * @param onClose the callback, that is called, when the modal is closed
  * @param footer the footer of the modal (For now Only Strings are supported)
+ * @param canClose decides, if the modal can be closed by the User
  */
 export default function StyledModal({
   showModal,
   children,
   title,
+  canClose = true,
   onClose,
   footer,
   ...restProps
@@ -34,12 +37,14 @@ export default function StyledModal({
       <div className="modal-body flex flex-col bg-adlerlightblue w-fit h-fit border-8 max-h-90pro border-adlerlightblue rounded-lg">
         <div className="modal-header font-black flex justify-end items-center p-4 h-4 lg:h-16 text-xl lg:text-4xl">
           <div className="w-full "> {title}</div>
-          <button
-            onClick={onClose}
-            className="button-close font-black text-xs lg:text-xl drop-shadow-sm border-b-4 border-r-4 border-adlerdarkblue active:border-0 hover:cursor-pointer py-1 px-2 bg-adlerblue rounded-lg text-white"
-          >
-            X
-          </button>
+          {canClose && (
+            <button
+              onClick={onClose}
+              className="button-close font-black text-xs lg:text-xl drop-shadow-sm border-b-4 border-r-4 border-adlerdarkblue active:border-0 hover:cursor-pointer py-1 px-2 bg-adlerblue rounded-lg text-white"
+            >
+              X
+            </button>
+          )}
         </div>
         <div className="modal-content p-2 border-t-2 border-b-2 rounded-lg border-adlerlightblue overflow-auto">
           {children}

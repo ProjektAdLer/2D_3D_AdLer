@@ -23,7 +23,6 @@
     "npm": "^8.12.1",
     "path-browserify": "^1.0.1",
     "react": "^17.0.2",
-    "react-device-detect": "^2.2.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
     "recast-detour": "^1.5.0",
