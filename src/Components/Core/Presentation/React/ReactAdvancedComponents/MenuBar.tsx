@@ -2,15 +2,7 @@ import StyledButton from "../ReactBaseComponents/StyledButton";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
 
-const toggleFullSceen = (): void => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    }
-  }
-};
+import screenfull from "screenfull";
 
 export default function MenuBar() {
   const loadWorldController = new LoadWorldController();
@@ -23,11 +15,26 @@ export default function MenuBar() {
           await loadWorldController.loadAvatar();
         }}
       >
-        <div>Debug:</div>
+        <div style={{ color: "#ff0000" }}>Debug:</div>
         <div>Welt laden</div>
       </StyledButton>
-      <StyledButton onClick={() => toggleFullSceen()}>
-        Toggle full screen mode
+      <StyledButton
+        onClick={() => {
+          if (screenfull.isEnabled) {
+            screenfull.toggle();
+          }
+        }}
+      >
+        <div style={{ color: "#ff0000" }}>Debug:</div>
+        <div>Toggle full screen mode</div>
+      </StyledButton>
+      <StyledButton
+        onClick={() => {
+          window.scrollTo(0, 1);
+        }}
+      >
+        <div style={{ color: "#ff0000" }}>Debug:</div>
+        <div>Hide Adress bar on Mobile</div>
       </StyledButton>
     </StyledContainer>
   );
