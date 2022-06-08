@@ -10,6 +10,7 @@ import IPresentationDirector from "../../Presentation/PresentationBuilder/IPrese
 import IViewModelControllerProvider from "../../Presentation/ViewModelProvider/IViewModelControllerProvider";
 import LearningWorldViewModel from "./LearningWorldViewModel";
 import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
+import IScenePresenter from "../../Presentation/Babylon/SceneManagement/IScenePresenter";
 
 @injectable()
 export default class LearningWorldPort implements ILearningWorldPort {
@@ -43,5 +44,9 @@ export default class LearningWorldPort implements ILearningWorldPort {
     );
     this.viewModel.worldName.Value = learningWorldTO.worldName;
     this.viewModel.worldNameLoading.Value = false;
+
+    CoreDIContainer.get<IScenePresenter>(
+      CORE_TYPES.IScenePresenter
+    ).setupNavigation();
   }
 }

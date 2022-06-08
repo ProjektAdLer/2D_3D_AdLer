@@ -43,7 +43,6 @@ export default class AvatarPresenter implements IAvatarPresenter, IAvatarPort {
 
       // inititialize the avatar
       await this.loadMeshAsync();
-      this.setupNavigation();
     }
     // TODO: apply avatar customization here
   }
@@ -60,13 +59,5 @@ export default class AvatarPresenter implements IAvatarPresenter, IAvatarPort {
     // Set FollowCamera to follow the avatar (~FK):
     var camera = this.scenePresenter.Scene.cameras[0];
     (camera as FollowCamera).lockedTarget = this.viewModel.meshes.Value[0];
-  }
-
-  private async setupNavigation(): Promise<void> {
-    // this.viewModel.agentIndex = this.scenePresenter.NavigationCrowd.addAgent(
-    //   this.viewModel.meshes.Value[0].position,
-    //   this.viewModel.agentParams,
-    //   this.viewModel.meshes.Value[0]
-    // );
   }
 }

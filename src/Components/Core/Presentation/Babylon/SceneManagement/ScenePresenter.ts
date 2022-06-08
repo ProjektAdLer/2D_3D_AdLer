@@ -32,9 +32,7 @@ export default class ScenePresenter implements IScenePresenter {
     @inject(CORE_TYPES.IEngineManager) private engineManager: IEngineManager,
     @inject(SceneViewModel) private viewModel: SceneViewModel,
     @inject(CORE_TYPES.ISceneView) private view: ISceneView
-  ) {
-    this.setupNavigation();
-  }
+  ) {}
 
   get NavigationCrowd(): ICrowd {
     if (!this.viewModel.navigationCrowd) {
@@ -72,7 +70,6 @@ export default class ScenePresenter implements IScenePresenter {
 
     if (isRelevantForNavigation) {
       this.viewModel.navigationMeshes.push(...result.meshes);
-      // this.createNavMesh();
     }
 
     return result.meshes;
@@ -83,7 +80,6 @@ export default class ScenePresenter implements IScenePresenter {
 
     if (isRelevantForNavigation) {
       this.viewModel.navigationMeshes.push(mesh);
-      this.createNavMesh();
     }
 
     return mesh;
@@ -104,20 +100,15 @@ export default class ScenePresenter implements IScenePresenter {
     this.view.startRenderLoop();
   }
 
-  private async setupNavigation(): Promise<void> {
+  async setupNavigation(): Promise<void> {
+    if (this.viewModel.navigation) {
+      console.warn("Repeated call to setupNavigation");
+    }
+
+    // -- Navigation Plugin --
     this.viewModel.navigation = new RecastJSPlugin(await new Recast());
 
-    // create first NavMesh so that it's not undefined
-    // this.createNavMesh();
-
-    this.viewModel.navigationCrowd = this.viewModel.navigation.createCrowd(
-      this.viewModel.maxAgentCount,
-      this.viewModel.maxAgentRadius,
-      this.viewModel.scene
-    );
-  }
-
-  createNavMesh(): void {
+    // -- NavMesh --
     this.viewModel.navigation.createNavMesh(
       this.viewModel.navigationMeshes as Mesh[],
       // this.viewModel.scene.meshes as Mesh[],
@@ -134,5 +125,12 @@ export default class ScenePresenter implements IScenePresenter {
     this.matDebug.diffuseColor = new Color3(0.1, 0.2, 1);
     this.matDebug.alpha = 0.2;
     this.navMeshDebug.material = this.matDebug;
+
+    // -- Navigation Crowd --
+    this.viewModel.navigationCrowd = this.viewModel.navigation.createCrowd(
+      this.viewModel.maxAgentCount,
+      this.viewModel.maxAgentRadius,
+      this.viewModel.scene
+    );
   }
 }

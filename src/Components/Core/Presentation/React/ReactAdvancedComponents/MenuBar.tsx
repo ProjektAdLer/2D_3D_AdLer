@@ -21,9 +21,9 @@ export default function MenuBar() {
       </StyledButton>
       <StyledButton
         onClick={() => {
-          CoreDIContainer.get<IScenePresenter>(
-            CORE_TYPES.IScenePresenter
-          ).createNavMesh();
+          // CoreDIContainer.get<IScenePresenter>(
+          //   CORE_TYPES.IScenePresenter
+          // ).createNavMesh();
         }}
       >
         <div>Debug:</div>
