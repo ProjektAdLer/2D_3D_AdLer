@@ -36,11 +36,10 @@ export default class LogUserIntoMoodleUseCase
     if (userToken === "Falsche Daten!")
       return Promise.reject("Wrong Password oder Username");
 
-    this.container.createEntity<UserDataEntity>(
+    this.container.useSingletonEntity<UserDataEntity>(
       {
         isLoggedIn: true,
         username: data.username,
-        password: data.password,
         userToken: userToken,
       },
       UserDataEntity

@@ -11,7 +11,7 @@ export default class EntityContainer implements IEntityContainer {
   ): T {
     const entities = this.getEntitiesOfType(entityType);
 
-    if (entities.length >= 1) {
+    if (entities.length > 1) {
       throw new Error(
         "Multible Enitites of this type exist - Singleton expected"
       );
