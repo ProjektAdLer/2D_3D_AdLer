@@ -21,10 +21,20 @@ export default class LogUserIntoMoodleUseCase
     username: string;
     password: string;
   }): Promise<void> {
+    if (
+      this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0]
+        ?.isLoggedIn
+    ) {
+      return Promise.reject("User is already logged in");
+    }
+
     const userToken = await this.backend.logInUser({
       username: data.username,
       password: data.password,
     });
+
+    if (userToken === "Falsche Daten!")
+      return Promise.reject("Wrong Password oder Username");
 
     this.container.createEntity<UserDataEntity>(
       {

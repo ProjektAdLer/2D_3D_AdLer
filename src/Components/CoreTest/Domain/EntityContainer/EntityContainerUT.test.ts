@@ -12,11 +12,6 @@ describe("EntityManager", () => {
     CoreDIContainer.restore();
   });
 
-  test.skip("The Root Entity of the Entity Manager is always defined", () => {
-    // const container = getContainer();
-    // expect(container.getRootEntity()).toBeDefined();
-  });
-
   test("getEntitiesofType returns the propper Entities as an Array in correct order", () => {
     const container = getContainer();
 
@@ -39,13 +34,13 @@ describe("EntityManager", () => {
   test("getEntityOfType returns Empty array if no Entity is found", () => {
     const container = getContainer();
 
-    const entity1 = container.createEntity<TestEntity>(
+    container.createEntity<TestEntity>(
       {
         test1: "entity1",
       },
       TestEntity
     );
-    const entity2 = container.createEntity<TestEntity>(
+    container.createEntity<TestEntity>(
       {
         test1: "entity2",
       },
@@ -82,13 +77,13 @@ describe("EntityManager", () => {
   test("filterEntitiesOfType returns empty Array, if nothing is found", () => {
     const container = getContainer();
 
-    const entity1 = container.createEntity<TestEntity>(
+    container.createEntity<TestEntity>(
       {
         test1: "entity1",
       },
       TestEntity
     );
-    const entity2 = container.createEntity<TestEntity>(
+    container.createEntity<TestEntity>(
       {
         test1: "entity2",
       },

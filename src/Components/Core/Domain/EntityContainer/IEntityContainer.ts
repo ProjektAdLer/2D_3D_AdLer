@@ -13,7 +13,8 @@ export default interface IEntityContainer {
     entityType: ConstructorReference<T>
   ): T;
 
-  getOrCreateSingetonEntity<T extends object>(
+  useSingletonEntity<T extends object>(
+    entityData: Partial<T>,
     entityType: ConstructorReference<T>
   ): T;
 
