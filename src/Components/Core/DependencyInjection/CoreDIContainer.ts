@@ -24,7 +24,7 @@ CoreDIContainer.bind<ISceneView>(CORE_TYPES.ISceneView)
   .to(SceneView)
   .inSingletonScope();
 CoreDIContainer.bind(SceneViewModel).toSelf().inSingletonScope();
-CoreDIContainer.bind<IScenePresenter>(CORE_TYPES.IscenePresenter)
+CoreDIContainer.bind<IScenePresenter>(CORE_TYPES.IScenePresenter)
   .to(ScenePresenter)
   .inSingletonScope();
 

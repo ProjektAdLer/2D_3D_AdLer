@@ -4,7 +4,6 @@ import { APILearningElementTO } from "../../Adapters/Backend/APILearningElementT
 import type IBackend from "../../Adapters/Backend/IBackend";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
-
 import LearningRoomEntity from "../../Domain/Entities/LearningRoomEntity";
 import LearningWorldEntity from "../../Domain/Entities/LearningWorldEntity";
 import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
@@ -12,6 +11,9 @@ import type ILearningWorldPort from "./ILearningWorldPort";
 import { LearningWorldTO } from "./ILearningWorldPort";
 import ILoadWorldUseCase from "./ILoadWorldUseCase";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
+import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
+import ILoadAvatarUseCase from "../LoadAvatar/ILoadAvatarUseCase";
+import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_SYMBOLS";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -32,6 +34,11 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     this.learningWorldPort.presentLearningWorld(
       this.toTO(this.learningWorldEntity)
     );
+
+    const loadAvatarUseCase = CoreDIContainer.get<ILoadAvatarUseCase>(
+      USECASE_TYPES.ILoadAvatarUseCase
+    );
+    await loadAvatarUseCase.executeAsync();
 
     return Promise.resolve();
   }

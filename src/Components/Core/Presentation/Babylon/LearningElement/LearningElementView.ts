@@ -35,7 +35,7 @@ export default class LearningElementView implements ILearningElementView {
     controller: ILearningElementController
   ) {
     this.scenePresenter = CoreDIContainer.get<IScenePresenter>(
-      CORE_TYPES.IscenePresenter
+      CORE_TYPES.IScenePresenter
     );
     this.viewModel = viewModel;
     this.controller = controller;
@@ -56,14 +56,11 @@ export default class LearningElementView implements ILearningElementView {
   }
 
   private async loadMeshAsync(): Promise<void> {
-    const result = await SceneLoader.ImportMeshAsync(
-      "",
+    this.viewModel.meshes.Value = (await this.scenePresenter.loadModel(
       modelLinks[getLearningElementSymbol(this.viewModel.type.Value)],
-      "",
-      this.scenePresenter.Scene
-    );
+      true
+    )) as Mesh[];
 
-    this.viewModel.meshes.Value = result.meshes as Mesh[];
     this.viewModel.meshes.Value.forEach((mesh) => {
       mesh.actionManager = new ActionManager(this.scenePresenter.Scene);
     });
