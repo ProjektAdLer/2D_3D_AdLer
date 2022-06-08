@@ -21,10 +21,10 @@ export default class LogUserIntoMoodleUseCase
     username: string;
     password: string;
   }): Promise<void> {
-    const userToken = await this.backend.logInUser(
-      data.username,
-      data.password
-    );
+    const userToken = await this.backend.logInUser({
+      username: data.username,
+      password: data.password,
+    });
     console.log(
       `Logging user ${data.username} into moodle with Token: ${userToken}`
     );

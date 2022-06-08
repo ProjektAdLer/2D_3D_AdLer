@@ -11,5 +11,8 @@ export default interface IBackend {
 
   getLearningElements(): Promise<Partial<APILearningElementTO[]>>;
   scoreLearningElement(learningElementId: LearningComponentID): Promise<void>;
-  logInUser(username: string, password: string): Promise<string>;
+  logInUser(userCredentials: {
+    username: string;
+    password: string;
+  }): Promise<string>;
 }

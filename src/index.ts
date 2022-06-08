@@ -3,6 +3,8 @@ import CoreDIContainer from "./Components/Core/DependencyInjection/CoreDIContain
 import CORE_TYPES from "./Components/Core/DependencyInjection/CoreTypes";
 import IReactEntry from "./Components/Core/Presentation/React/ReactEntryPoint/IReactEntry";
 
+window.scrollTo(0, 1);
+
 const reactEntry = CoreDIContainer.get<IReactEntry>(CORE_TYPES.ICoreRenderer);
 
 reactEntry.setupReact();

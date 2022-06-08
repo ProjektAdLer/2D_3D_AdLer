@@ -10,13 +10,16 @@ import axios from "axios";
 
 @injectable()
 export class FakeBackend implements IBackend {
-  async logInUser(username: string, password: string): Promise<string> {
-    // const response = await axios.get<string>(
-    //   "https://localhost:49155/WeatherForecast"
-    // );
+  async logInUser(userCredentials: {
+    username: string;
+    password: string;
+  }): Promise<string> {
+    const response = await axios.get<string>(
+      "https://api.cluuub.xyz/userlogin"
+    );
 
-    // return response.data;
-    return Promise.resolve(`${username}_token`);
+    return response.data;
+    //return Promise.resolve(`${userCredentials.username}_token`);
   }
   scoreLearningElement(learningElementId: LearningComponentID): Promise<void> {
     console.log(
