@@ -2,6 +2,16 @@ import StyledButton from "../ReactBaseComponents/StyledButton";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
 
+const toggleFullSceen = (): void => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+};
+
 export default function MenuBar() {
   const loadWorldController = new LoadWorldController();
 
@@ -15,6 +25,9 @@ export default function MenuBar() {
       >
         <div>Debug:</div>
         <div>Welt laden</div>
+      </StyledButton>
+      <StyledButton onClick={() => toggleFullSceen()}>
+        Toggle full screen mode
       </StyledButton>
     </StyledContainer>
   );
