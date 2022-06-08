@@ -1,9 +1,10 @@
 ---
 name: Research User Story Template
 about: Research User Story im AdLer Projekt
-title: ""
-labels: ""
-assignees: ""
+title: ''
+labels: research
+assignees: ''
+
 ---
 
 **User Story**

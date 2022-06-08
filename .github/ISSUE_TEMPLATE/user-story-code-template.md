@@ -1,9 +1,10 @@
 ---
 name: Coding User Story Template
 about: Coding User Story im AdLer Projekt
-title: ""
-labels: ""
-assignees: ""
+title: ''
+labels: coding
+assignees: ''
+
 ---
 
 **User Story**
