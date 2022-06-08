@@ -101,7 +101,7 @@ export default class ScenePresenter implements IScenePresenter {
   }
 
   startRenderLoop(): void {
-    this.view.startRenderLoop(this.engineManager.Engine);
+    this.view.startRenderLoop();
   }
 
   private async setupNavigation(): Promise<void> {
