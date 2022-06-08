@@ -1,6 +1,9 @@
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
+import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
+import IScenePresenter from "../../Babylon/SceneManagement/IScenePresenter";
+import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 
 export default function MenuBar() {
   const loadWorldController = new LoadWorldController();
@@ -15,6 +18,16 @@ export default function MenuBar() {
       >
         <div>Debug:</div>
         <div>Welt laden</div>
+      </StyledButton>
+      <StyledButton
+        onClick={() => {
+          CoreDIContainer.get<IScenePresenter>(
+            CORE_TYPES.IScenePresenter
+          ).createNavMesh();
+        }}
+      >
+        <div>Debug:</div>
+        <div>NavMesh</div>
       </StyledButton>
     </StyledContainer>
   );
