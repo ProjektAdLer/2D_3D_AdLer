@@ -10,12 +10,10 @@ import StyledModal from "../ReactBaseComponents/StyledModal";
 import React from "react";
 
 function App() {
-  const isMobilePortrait = useIsMobilePortrait();
-
   return (
     <React.Fragment>
       <div className="root max-w-1/1 max-h-1/1 bg-babylonbg">
-        <StyledModal canClose={false} showModal={isMobilePortrait}>
+        <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
           <h1>Bruder, nutz Landscape!</h1>
         </StyledModal>
         <MenuBar />
