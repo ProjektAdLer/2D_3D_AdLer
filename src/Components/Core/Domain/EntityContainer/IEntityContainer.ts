@@ -13,6 +13,10 @@ export default interface IEntityContainer {
     entityType: ConstructorReference<T>
   ): T;
 
+  getOrCreateSingetonEntity<T extends object>(
+    entityType: ConstructorReference<T>
+  ): T;
+
   /**
    * Returns all entities of the given type.
    * In any case a array is returned.

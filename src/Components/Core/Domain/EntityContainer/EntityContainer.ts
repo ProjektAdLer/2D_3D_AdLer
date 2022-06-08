@@ -5,6 +5,15 @@ import IEntityContainer from "./IEntityContainer";
 
 @injectable()
 export default class EntityContainer implements IEntityContainer {
+  getOrCreateSingetonEntity<T extends object>(
+    entityType: ConstructorReference<T>
+  ): T {
+    const entities = this.getEntitiesOfType(entityType);
+    if (entities.length === 0) {
+      return this.createEntity({}, entityType);
+    }
+    return entities[0];
+  }
   private entityMap = new Map<ConstructorReference<object>, object[]>();
 
   createEntity<T extends object>(
