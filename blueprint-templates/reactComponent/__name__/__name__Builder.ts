@@ -3,6 +3,9 @@ import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 import {{name}}Controller from "./{{name}}Controller";
 import {{name}}Presenter from "./{{name}}Presenter";
 import {{name}}ViewModel from "./{{name}}ViewModel";
+import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
+import ViewModelControllerProvider from "../../ViewModelProvider/ViewModelControllerProvider";
 
 /*
 This Template Provides the whole scaffolding for a React Component.
