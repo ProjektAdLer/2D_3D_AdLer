@@ -1,4 +1,10 @@
-import { LinesMesh, MeshBuilder, Vector3 } from "@babylonjs/core";
+import {
+  Axis,
+  LinesMesh,
+  MeshBuilder,
+  Quaternion,
+  Vector3,
+} from "@babylonjs/core";
 import bind from "bind-decorator";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
@@ -57,14 +63,14 @@ export default class AvatarView {
 
         this.debug_displayVelocity(velocity, desiredRotation);
 
-        this.viewModel.meshes.Value[0].rotation.y +=
-          (desiredRotation - this.viewModel.meshes.Value[0].rotation.y) * 0.05;
+        this.viewModel.meshes.Value[0].rotationQuaternion =
+          Quaternion.RotationAxis(Axis.Y, desiredRotation);
       }
     }
   }
 
   private debug_displayVelocity(velocity: Vector3, rotation: number): void {
-    if (counter % 1 === 0) {
+    if (counter % 10 === 0) {
       let points: Vector3[] = [
         this.viewModel.meshes.Value[0].position,
         this.viewModel.meshes.Value[0].position.add(velocity),
@@ -83,7 +89,7 @@ export default class AvatarView {
           " " +
           rotation +
           " " +
-          this.viewModel.meshes.Value[0].rotation.y
+          this.viewModel.meshes.Value[0].rotationQuaternion?.y
       );
     }
     counter++;

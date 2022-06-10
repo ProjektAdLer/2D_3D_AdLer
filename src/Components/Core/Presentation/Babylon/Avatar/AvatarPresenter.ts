@@ -1,5 +1,4 @@
-import { ArcFollowCamera, Mesh } from "@babylonjs/core";
-import { create } from "domain";
+import { ArcFollowCamera, Mesh, Quaternion } from "@babylonjs/core";
 import { inject, injectable } from "inversify";
 import IAvatarPort, {
   AvatarTO,
@@ -56,6 +55,12 @@ export default class AvatarPresenter implements IAvatarPresenter, IAvatarPort {
 
     this.viewModel.meshes.Value.forEach(
       (mesh) => (mesh.rotationQuaternion = null)
+    );
+    this.viewModel.meshes.Value[0].rotationQuaternion = new Quaternion(
+      0,
+      0,
+      0,
+      1
     );
   }
 
