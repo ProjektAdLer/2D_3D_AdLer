@@ -5,6 +5,7 @@ import {
   ISceneLoaderProgressEvent,
   Mesh,
   Nullable,
+  Observable,
   RecastJSPlugin,
   Scene,
   SceneLoader,
@@ -27,6 +28,8 @@ import * as Recast from "recast-detour";
 export default class ScenePresenter implements IScenePresenter {
   private navMeshDebug: Mesh;
   private matDebug: StandardMaterial;
+
+  public onNavigationReadyObservable: Observable<void> = new Observable<void>();
 
   constructor(
     @inject(CORE_TYPES.IEngineManager) private engineManager: IEngineManager,
@@ -132,5 +135,7 @@ export default class ScenePresenter implements IScenePresenter {
       this.viewModel.maxAgentRadius,
       this.viewModel.scene
     );
+
+    this.onNavigationReadyObservable.notifyObservers();
   }
 }

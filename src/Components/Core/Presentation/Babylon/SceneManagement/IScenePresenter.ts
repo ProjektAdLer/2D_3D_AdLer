@@ -4,6 +4,7 @@ import {
   ISceneLoaderProgressEvent,
   Mesh,
   Nullable,
+  Observable,
   RecastJSPlugin,
   Scene,
 } from "@babylonjs/core";
@@ -13,6 +14,8 @@ export default interface IScenePresenter {
   get Scene(): Scene;
   get Navigation(): RecastJSPlugin;
   get NavigationCrowd(): ICrowd;
+
+  onNavigationReadyObservable: Observable<void>;
 
   createScene(createSceneClass: ICreateSceneClass): Promise<void>;
   startRenderLoop(): void;
