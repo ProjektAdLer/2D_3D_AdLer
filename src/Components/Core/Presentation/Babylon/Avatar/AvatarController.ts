@@ -32,7 +32,6 @@ export default class AvatarController implements IAvatarController {
         this.scenePresenter.Navigation.getClosestPoint(startingPoint)
       );
 
-      // debug: draw path as line
       let pathPoints = this.scenePresenter.Navigation.computePath(
         this.scenePresenter.NavigationCrowd.getAgentPosition(
           this.viewModel.agentIndex
