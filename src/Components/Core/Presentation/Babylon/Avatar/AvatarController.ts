@@ -33,7 +33,7 @@ export default class AvatarController implements IAvatarController {
       );
 
       // debug: draw path as line
-      var pathPoints = this.scenePresenter.Navigation.computePath(
+      let pathPoints = this.scenePresenter.Navigation.computePath(
         this.scenePresenter.NavigationCrowd.getAgentPosition(
           this.viewModel.agentIndex
         ),
@@ -48,7 +48,7 @@ export default class AvatarController implements IAvatarController {
   }
 
   private getGroundPosition() {
-    var pickinfo = this.scenePresenter.Scene.pick(
+    let pickinfo = this.scenePresenter.Scene.pick(
       this.scenePresenter.Scene.pointerX,
       this.scenePresenter.Scene.pointerY
     );

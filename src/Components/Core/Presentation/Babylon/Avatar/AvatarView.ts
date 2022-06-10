@@ -1,9 +1,13 @@
+import { LinesMesh, MeshBuilder, Vector3 } from "@babylonjs/core";
 import bind from "bind-decorator";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
+
+let velocityLine: LinesMesh;
+let counter: number = 0;
 
 export default class AvatarView {
   private scenePresenter: IScenePresenter;
@@ -43,16 +47,45 @@ export default class AvatarView {
         this.scenePresenter.NavigationCrowd.getAgentPosition(
           this.viewModel.agentIndex
         );
-      let vel = this.scenePresenter.NavigationCrowd.getAgentVelocity(
+      let velocity = this.scenePresenter.NavigationCrowd.getAgentVelocity(
         this.viewModel.agentIndex
       );
-      if (vel.length() > 0.2) {
-        vel.normalize();
-        let desiredRotation = Math.atan2(vel.x, vel.z);
-        this.viewModel.meshes.Value[0].rotation.y =
-          this.viewModel.meshes.Value[0].rotation.y +
+
+      if (velocity.length() > 0.2) {
+        velocity.normalize();
+        let desiredRotation = Math.atan2(velocity.x, velocity.z);
+
+        this.debug_displayVelocity(velocity, desiredRotation);
+
+        this.viewModel.meshes.Value[0].rotation.y +=
           (desiredRotation - this.viewModel.meshes.Value[0].rotation.y) * 0.05;
       }
     }
+  }
+
+  private debug_displayVelocity(velocity: Vector3, rotation: number): void {
+    if (counter % 1 === 0) {
+      let points: Vector3[] = [
+        this.viewModel.meshes.Value[0].position,
+        this.viewModel.meshes.Value[0].position.add(velocity),
+      ];
+      velocityLine = MeshBuilder.CreateDashedLines(
+        "avatar velocity",
+        {
+          points: points,
+          updatable: true,
+          instance: velocityLine,
+        },
+        this.scenePresenter.Scene
+      );
+      console.log(
+        velocity.toString() +
+          " " +
+          rotation +
+          " " +
+          this.viewModel.meshes.Value[0].rotation.y
+      );
+    }
+    counter++;
   }
 }
