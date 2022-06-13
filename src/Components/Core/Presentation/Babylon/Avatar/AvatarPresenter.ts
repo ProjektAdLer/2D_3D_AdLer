@@ -12,7 +12,7 @@ import type IScenePresenter from "../SceneManagement/IScenePresenter";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarPresenter from "./IAvatarPresenter";
 
-const modelLink = require("../../../../../Assets/Avatar_Pinguin.glb");
+const modelLink = require("../../../../../Assets/Avatar_Character.glb");
 
 /**
  * @class AvatarPresenter
