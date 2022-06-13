@@ -11,11 +11,13 @@ import type IViewModelControllerProvider from "../../Presentation/ViewModelProvi
 import LearningWorldViewModel from "./LearningWorldViewModel";
 import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
 import IScenePresenter from "../../Presentation/Babylon/SceneManagement/IScenePresenter";
+import ILearningElementsDropdownPresenter from "../../Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
 
 @injectable()
 export default class LearningWorldPort implements ILearningWorldPort {
   private viewModel: LearningWorldViewModel;
   private roomPresenter: ILearningRoomPresenter;
+  private _learningElementDropdownPresenter: ILearningElementsDropdownPresenter;
 
   constructor(
     @inject(CORE_TYPES.IViewModelControllerProvider)
@@ -48,5 +50,15 @@ export default class LearningWorldPort implements ILearningWorldPort {
     CoreDIContainer.get<IScenePresenter>(
       CORE_TYPES.IScenePresenter
     ).setupNavigation();
+
+    this._learningElementDropdownPresenter.presentLearningElements(
+      learningWorldTO.learningRooms[0].learningElements
+    );
+  }
+
+  public set learningElementDropdownPresenter(
+    value: ILearningElementsDropdownPresenter
+  ) {
+    this._learningElementDropdownPresenter = value;
   }
 }

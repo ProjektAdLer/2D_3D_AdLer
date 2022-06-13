@@ -6,6 +6,8 @@ import LearningElementsDropdownViewModel from "./LearningElementsDropdownViewMod
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import ViewModelControllerProvider from "../../ViewModelProvider/ViewModelControllerProvider";
+import ILearningWorldPort from "../../../Application/LoadWorld/ILearningWorldPort";
+import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 
 /*
 This Template Provides the whole scaffolding for a React Component.
@@ -40,5 +42,12 @@ export default class LearningElementsDropdownBuilder extends PresentationBuilder
       this.controller,
       LearningElementsDropdownViewModel
     );
+  }
+
+  override buildPresenter(): void {
+    super.buildPresenter();
+    CoreDIContainer.get<ILearningWorldPort>(
+      PORT_TYPES.ILearningWorldPort
+    ).learningElementDropdownPresenter = this.presenter!;
   }
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import useObservable from "../CustomHooks/useObservable";
 import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import LearningElementsDropdownController from "./LearningElementsDropdownController";
@@ -9,6 +10,10 @@ export default function LearningElementsDropdown() {
     LearningElementsDropdownViewModel,
     LearningElementsDropdownController
   >(LearningElementsDropdownViewModel);
+
+  const [learningElementNames] = useObservable<string[]>(
+    viewModels[0]?.learningElementNames
+  );
 
   const [dropDownOpen, setDropDownOpen] = useState(false);
   return (
@@ -21,23 +26,27 @@ export default function LearningElementsDropdown() {
       >
         {!dropDownOpen ? "V" : "^"}
       </StyledButton>
-      <Dropdown isOpen={dropDownOpen} />
+      <Dropdown isOpen={dropDownOpen} elements={learningElementNames} />
     </div>
   );
 }
 
-function Dropdown({ isOpen }: { isOpen: boolean }) {
+function Dropdown({
+  isOpen,
+  elements,
+}: {
+  isOpen: boolean;
+  elements: string[];
+}) {
   if (!isOpen) return null; // Dropdown is closed
   return (
     <ul>
-      <li>
-        <img src="icons/coin_icon.svg" className="w-10"></img>
-        <h3>Lernelement 1</h3>
-      </li>
-      <li>
-        <img src="icons/coin_icon.svg" className="w-10"></img>
-        <h3>Lernelement 2</h3>
-      </li>
+      {elements.map((elementName, index) => (
+        <li key={index}>
+          <img src="icons/coin_icon.svg" className="w-10"></img>
+          <h3>{elementName}</h3>
+        </li>
+      ))}
     </ul>
   );
 }

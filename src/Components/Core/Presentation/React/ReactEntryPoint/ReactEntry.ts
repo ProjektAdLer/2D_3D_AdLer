@@ -41,5 +41,12 @@ export default class ReactEntry implements IReactEntry {
     );
     director.Builder = builder;
     director.build();
+
+    builder = CoreDIContainer.get<IPresentationBuilder>(
+      BUILDER_TYPES.ILearningElementsDropdownBuilder
+    );
+
+    director.Builder = builder;
+    director.build();
   }
 }
