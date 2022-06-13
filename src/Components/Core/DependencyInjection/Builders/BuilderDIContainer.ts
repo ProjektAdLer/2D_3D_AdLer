@@ -7,6 +7,7 @@ import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresen
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
 import PresentationDirector from "../../Presentation/PresentationBuilder/PresentationDirector";
 import LearningElementModalBuilder from "../../Presentation/React/LearningElementModal/LearningElementModalBuilder";
+import LearningElementsDropdownBuilder from "../../Presentation/React/LearningElementsDropdown/LearningElementsDropdownBuilder";
 import MoodleLoginFormBuilder from "../../Presentation/React/MoodleLoginForm/MoodleLoginFormBuilder";
 import ScorePanelBuilder from "../../Presentation/React/ScorePanel/ScorePanelBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
@@ -33,6 +34,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
     LearningElementBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarBuilder).to(AvatarBuilder);
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementsDropdownBuilder).to(
+    LearningElementsDropdownBuilder
+  );
 });
 
 export default BuilderDIContainer;

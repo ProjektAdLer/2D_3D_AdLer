@@ -1,6 +1,7 @@
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
+import LearningElementsDropdown from "../LearningElementsDropdown/LearningElementsDropdown";
 
 export default function MenuBar() {
   const loadWorldController = new LoadWorldController();
@@ -30,6 +31,7 @@ export default function MenuBar() {
         <div style={{ color: "#ff0000" }}>Debug:</div>
         <div>Toggle full screen mode</div>
       </StyledButton>
+      <LearningElementsDropdown />
     </StyledContainer>
   );
 }
