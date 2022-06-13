@@ -4,7 +4,7 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import UserDataEntity from "../../Domain/Entities/UserData";
 import type IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
-import IMoodlePort from "../../Ports/MoodlePort/IMoodlePort";
+import type IMoodlePort from "../../Ports/MoodlePort/IMoodlePort";
 import ILogUserIntoMoodleUseCase from "./ILogUserIntoMoodleUseCase";
 
 @injectable()

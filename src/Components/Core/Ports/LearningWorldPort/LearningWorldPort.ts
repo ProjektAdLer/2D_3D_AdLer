@@ -7,7 +7,7 @@ import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
-import IViewModelControllerProvider from "../../Presentation/ViewModelProvider/IViewModelControllerProvider";
+import type IViewModelControllerProvider from "../../Presentation/ViewModelProvider/IViewModelControllerProvider";
 import LearningWorldViewModel from "./LearningWorldViewModel";
 import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
 import IScenePresenter from "../../Presentation/Babylon/SceneManagement/IScenePresenter";

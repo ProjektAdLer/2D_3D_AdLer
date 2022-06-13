@@ -14,7 +14,7 @@ import {
 } from "@babylonjs/core";
 import { inject, injectable } from "inversify";
 import type IEngineManager from "../EngineManager/IEngineManager";
-import ISceneView from "./ISceneView";
+import type ISceneView from "./ISceneView";
 import SceneViewModel from "./SceneViewModel";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import ICreateSceneClass from "./ICreateSceneClass";
