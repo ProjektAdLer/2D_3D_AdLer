@@ -14,7 +14,15 @@ export default interface IScenePresenter {
   get Navigation(): RecastJSPlugin;
   get NavigationCrowd(): ICrowd;
 
+  /**
+   * Creates a new scene with the given CreateSceneClass configuration.
+   * @param createSceneClass The configuration for the scene creation.
+   */
   createScene(createSceneClass: ICreateSceneClass): Promise<void>;
+
+  /**
+   * Starts the render loop.
+   */
   startRenderLoop(): void;
 
   /**
@@ -39,7 +47,7 @@ export default interface IScenePresenter {
   createMesh(name: string, isRelevantForNavigation?: boolean): Mesh;
 
   /**
-   * Creates the navmesh and navigation crowd, accsesible via the Navigation and NavigationCrowd properties.
+   * Creates the navmesh and navigation crowd, accessible via the Navigation and NavigationCrowd properties.
    * Should be called after all meshes have been loaded into the scene. Calling this method multiple times will break the agents registered to the crowd.
    */
   setupNavigation(): void;
