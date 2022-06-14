@@ -6,7 +6,7 @@ import Observable from "../../../../../Lib/Observable";
 @injectable()
 export default class LearningRoomViewModel {
   public wallColor: Observable<Color3> = new Observable(
-    new Color3(0.3, 0.6, 0.8)
+    new Color3(0.97, 0.95, 0.95)
   );
   public roomWidth: Observable<number> = new Observable(10);
   public roomLength: Observable<number> = new Observable(10);
