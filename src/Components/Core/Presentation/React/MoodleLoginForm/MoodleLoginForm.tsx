@@ -53,9 +53,7 @@ export default function MoodleLoginForm() {
             alert("Dann mach' dir e' neuesch du Saubeidel!");
           }}
         >
-          <p className="text-xs">
-            Bruda! <br></br> Du hasch dein <br></br> Passwort vergessen?!
-          </p>
+          <p className="text-xs">Passwort vergessen?</p>
         </StyledButton>
         <h3>User-Token: {userToken}</h3>
       </div>
