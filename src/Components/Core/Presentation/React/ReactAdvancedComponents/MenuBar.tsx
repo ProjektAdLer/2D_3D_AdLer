@@ -7,14 +7,14 @@ export default function MenuBar() {
   const loadWorldController = new LoadWorldController();
 
   return (
-    <StyledContainer className="top-0 left-0 flex flex-col justify-center">
+    <StyledContainer className="bottom-0 right-0 flex flex-col justify-center">
       <StyledButton
         onClick={async () => {
           await loadWorldController.loadWorld();
           // await loadWorldController.loadAvatar();
         }}
       >
-        <div style={{ color: "#ff0000" }}>Debug:</div>
+        <div className="text-red-700">Debug:</div>
         <div>Welt laden</div>
       </StyledButton>
       <StyledButton
@@ -28,7 +28,7 @@ export default function MenuBar() {
           }
         }}
       >
-        <div style={{ color: "#ff0000" }}>Debug:</div>
+        <div className="text-red-700">Debug:</div>
         <div>Toggle full screen mode</div>
       </StyledButton>
       <LearningElementsDropdown />
