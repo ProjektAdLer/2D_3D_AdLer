@@ -50,7 +50,7 @@ export default function MoodleLoginForm() {
 
         <StyledButton
           onClick={() => {
-            alert("Dann mach' dir e' neuesch du Saubeidel!");
+            alert("Hier kannst du bald dein neues Passwort bekommen!");
           }}
         >
           <p className="text-xs">Passwort vergessen?</p>
