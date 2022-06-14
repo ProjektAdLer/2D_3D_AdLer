@@ -11,6 +11,7 @@ import LearningWorldViewModel from "../../../Core/Ports/LearningWorldPort/Learni
 import LearningRoomBuilder from "../../../Core/Presentation/Babylon/LearningRoom/LearningRoomBuilder";
 import LearningRoomPresenter from "../../../Core/Presentation/Babylon/LearningRoom/LearningRoomPresenter";
 import LearningRoomViewModel from "../../../Core/Presentation/Babylon/LearningRoom/LearningRoomViewModel";
+import ScenePresenter from "../../../Core/Presentation/Babylon/SceneManagement/ScenePresenter";
 import IPresentationBuilder from "../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
 import PresentationBuilder from "../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
 import ViewModelControllerProvider from "../../../Core/Presentation/ViewModelProvider/ViewModelControllerProvider";
@@ -23,6 +24,11 @@ const presentLearningRoomMock = jest.spyOn(
 const registerViewModelOnlyMock = jest.spyOn(
   ViewModelControllerProvider.prototype,
   "registerViewModelOnly"
+);
+
+const setupNavigationMock = jest.spyOn(
+  ScenePresenter.prototype,
+  "setupNavigation"
 );
 
 @injectable()
@@ -76,6 +82,7 @@ describe("LearningWorldPort", () => {
 
     expect(presentLearningRoomMock).toHaveBeenCalledTimes(1);
     expect(presentLearningRoomMock).toHaveBeenCalledWith(learningRoomTO);
+
     expect(registerViewModelOnlyMock).toHaveBeenCalledTimes(1);
     expect(registerViewModelOnlyMock).toHaveBeenCalledWith(
       learningWorldPort["viewModel"],
@@ -86,5 +93,7 @@ describe("LearningWorldPort", () => {
       learningWorldTO.worldName
     );
     expect(learningWorldPort["viewModel"].worldNameLoading.Value).toBe(false);
+
+    expect(setupNavigationMock).toHaveBeenCalledTimes(1);
   });
 });
