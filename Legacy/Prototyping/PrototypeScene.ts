@@ -15,13 +15,13 @@ import {
   ActionEvent,
 } from "@babylonjs/core";
 
-// required imports
-import "@babylonjs/inspector";
-import "@babylonjs/loaders/glTF";
-import ICreateSceneClass from "../Components/Core/Presentation/Babylon/SceneManagement/ICreateSceneClass";
+// // required imports
+// import "@babylonjs/inspector";
+// import "@babylonjs/loaders/glTF";
+// import ICreateSceneClass from "../Components/Core/Presentation/Babylon/SceneManagement/ICreateSceneClass";
 
-// digital assets
-import link_h5p from "../Assets/3DLink_H5P.glb";
+// // digital assets
+// import link_h5p from "../Assets/3DLink_H5P.glb";
 
 import { injectable } from "inversify";
 
