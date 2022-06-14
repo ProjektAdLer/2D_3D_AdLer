@@ -6,7 +6,6 @@ import LearningRoomPort from "../../../../Core/Ports/LearningRoomPort/LearningRo
 import ScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/ScenePresenter";
 
 jest.mock("@babylonjs/core");
-const getSceneMock = jest.spyOn(ScenePresenter.prototype, "Scene", "get");
 const addLearningRoomPresenterMock = jest.spyOn(
   LearningRoomPort.prototype,
   "addLearningRoomPresenter"
@@ -28,7 +27,6 @@ describe("LearningRoomBuilder", () => {
     expect(builder["viewModel"]).toBeDefined();
     expect(builder.getViewModel()).toBeDefined();
     expect(builder.getViewModel()).toBeInstanceOf(LearningRoomViewModel);
-    expect(getSceneMock).toHaveBeenCalledTimes(1);
   });
 
   test("buildPresenter concludes the build step successfully and registers the presneter with the port", () => {
