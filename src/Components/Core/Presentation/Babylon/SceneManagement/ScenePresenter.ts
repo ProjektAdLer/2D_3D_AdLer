@@ -114,7 +114,6 @@ export default class ScenePresenter implements IScenePresenter {
     // -- NavMesh --
     this.viewModel.navigation.createNavMesh(
       this.viewModel.navigationMeshes as Mesh[],
-      // this.viewModel.scene.meshes as Mesh[],
       this.viewModel.navmeshParameters
     );
 

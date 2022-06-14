@@ -17,6 +17,10 @@ export default interface IScenePresenter {
 
   onNavigationReadyObservable: Observable<void>;
 
+  /**
+   * Creates a new scene with the given CreateSceneClass configuration.
+   * @param createSceneClass The scene configuration class that will be used to create the scene.
+   */
   createScene(createSceneClass: ICreateSceneClass): Promise<void>;
 
   /**

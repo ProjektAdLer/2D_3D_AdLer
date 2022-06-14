@@ -12,6 +12,7 @@ import IScenePresenter from "../SceneManagement/IScenePresenter";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
 
+// debug: used for debug method
 let velocityLine: LinesMesh;
 let counter: number = 0;
 
