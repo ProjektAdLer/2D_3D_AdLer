@@ -2,7 +2,7 @@
 name: Prototyping User Story Template
 about: Prototyping User Story im AdLer Projekt
 title: ""
-labels: ""
+labels: coding
 assignees: ""
 ---
 

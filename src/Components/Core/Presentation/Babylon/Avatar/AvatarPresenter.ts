@@ -1,4 +1,4 @@
-import { FollowCamera, Mesh } from "@babylonjs/core";
+import { ArcFollowCamera, Mesh, Quaternion } from "@babylonjs/core";
 import { inject, injectable } from "inversify";
 import IAvatarPort, {
   AvatarTO,
@@ -12,7 +12,7 @@ import type IScenePresenter from "../SceneManagement/IScenePresenter";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarPresenter from "./IAvatarPresenter";
 
-const modelLink = require("../../../../../Assets/Avatar_Pinguin.glb");
+const modelLink = require("../../../../../Assets/Avatar_Character.glb");
 
 /**
  * @class AvatarPresenter
@@ -43,6 +43,7 @@ export default class AvatarPresenter implements IAvatarPresenter, IAvatarPort {
 
       // inititialize the avatar
       await this.loadMeshAsync();
+      this.createCamera();
     }
     // TODO: apply avatar customization here
   }
@@ -55,9 +56,24 @@ export default class AvatarPresenter implements IAvatarPresenter, IAvatarPort {
     this.viewModel.meshes.Value.forEach(
       (mesh) => (mesh.rotationQuaternion = null)
     );
+    this.viewModel.meshes.Value[0].rotationQuaternion = new Quaternion(
+      0,
+      0,
+      0,
+      1
+    );
+  }
 
+  // temporary until babylon component is better structured
+  private createCamera(): void {
     // Set FollowCamera to follow the avatar (~FK):
-    var camera = this.scenePresenter.Scene.cameras[0];
-    (camera as FollowCamera).lockedTarget = this.viewModel.meshes.Value[0];
+    new ArcFollowCamera(
+      "ArcFollowCamera",
+      0,
+      Math.PI / 4,
+      20,
+      this.viewModel.meshes.Value[0],
+      this.scenePresenter.Scene
+    );
   }
 }

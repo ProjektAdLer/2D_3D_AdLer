@@ -2,7 +2,7 @@
 name: Research User Story Template
 about: Research User Story im AdLer Projekt
 title: ""
-labels: ""
+labels: research
 assignees: ""
 ---
 

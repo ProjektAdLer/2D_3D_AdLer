@@ -12,11 +12,6 @@ describe("EntityManager", () => {
     CoreDIContainer.restore();
   });
 
-  test.skip("The Root Entity of the Entity Manager is always defined", () => {
-    // const container = getContainer();
-    // expect(container.getRootEntity()).toBeDefined();
-  });
-
   test("getEntitiesofType returns the propper Entities as an Array in correct order", () => {
     const container = getContainer();
 
@@ -39,13 +34,13 @@ describe("EntityManager", () => {
   test("getEntityOfType returns Empty array if no Entity is found", () => {
     const container = getContainer();
 
-    const entity1 = container.createEntity<TestEntity>(
+    container.createEntity<TestEntity>(
       {
         test1: "entity1",
       },
       TestEntity
     );
-    const entity2 = container.createEntity<TestEntity>(
+    container.createEntity<TestEntity>(
       {
         test1: "entity2",
       },
@@ -82,13 +77,13 @@ describe("EntityManager", () => {
   test("filterEntitiesOfType returns empty Array, if nothing is found", () => {
     const container = getContainer();
 
-    const entity1 = container.createEntity<TestEntity>(
+    container.createEntity<TestEntity>(
       {
         test1: "entity1",
       },
       TestEntity
     );
-    const entity2 = container.createEntity<TestEntity>(
+    container.createEntity<TestEntity>(
       {
         test1: "entity2",
       },
@@ -125,6 +120,66 @@ describe("EntityManager", () => {
 
     expect(container.getEntitiesOfType(TestEntity).length).toBe(1);
     expect(container.getEntitiesOfType(TestEntity)[0]).toBe(entity2);
+  });
+
+  test("UseSingletonEntity returns a alreay exisiting Entity", () => {
+    const container = getContainer();
+
+    const entity1 = container.createEntity<TestEntity>({}, TestEntity);
+    container.createEntity<TestEntity2>({}, TestEntity2);
+
+    const entity3 = container.useSingletonEntity<TestEntity>({}, TestEntity);
+
+    expect(entity3).toBe(entity1);
+    expect(container.getEntitiesOfType(TestEntity).length).toBe(1);
+  });
+
+  test("UseSingletonEntity creates a new Entity with Data, if no Entity is found", () => {
+    const container = getContainer();
+
+    const entity = container.useSingletonEntity<TestEntity>(
+      {
+        test1: "test",
+      },
+      TestEntity
+    );
+
+    expect(entity.test1).toBe("test");
+  });
+
+  test("UseSingletonEntity changes the Data of an Existing Entity", () => {
+    const container = getContainer();
+
+    container.createEntity<TestEntity>(
+      {
+        test1: "test",
+        test2: true,
+      },
+      TestEntity
+    );
+
+    container.useSingletonEntity<TestEntity>(
+      {
+        test2: false,
+      },
+      TestEntity
+    );
+
+    const entityToTest = container.getEntitiesOfType(TestEntity)[0];
+
+    expect(entityToTest.test1).toBe("test");
+    expect(entityToTest.test2).toBe(false);
+  });
+
+  test("UseSingletonEntity throws, if the Entity exists multible times", () => {
+    const container = getContainer();
+
+    container.createEntity<TestEntity>({}, TestEntity);
+    container.createEntity<TestEntity>({}, TestEntity);
+
+    expect(() => {
+      container.useSingletonEntity<TestEntity>({}, TestEntity);
+    }).toThrow();
   });
 });
 function getContainer() {

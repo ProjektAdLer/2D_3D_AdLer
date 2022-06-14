@@ -5,6 +5,7 @@ import {
   ISceneLoaderProgressEvent,
   Mesh,
   Nullable,
+  Observable,
   RecastJSPlugin,
   Scene,
   SceneLoader,
@@ -13,7 +14,7 @@ import {
 } from "@babylonjs/core";
 import { inject, injectable } from "inversify";
 import type IEngineManager from "../EngineManager/IEngineManager";
-import ISceneView from "./ISceneView";
+import type ISceneView from "./ISceneView";
 import SceneViewModel from "./SceneViewModel";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import ICreateSceneClass from "./ICreateSceneClass";
@@ -27,6 +28,8 @@ import * as Recast from "recast-detour";
 export default class ScenePresenter implements IScenePresenter {
   private navMeshDebug: Mesh;
   private matDebug: StandardMaterial;
+
+  public onNavigationReadyObservable: Observable<void> = new Observable<void>();
 
   constructor(
     @inject(CORE_TYPES.IEngineManager) private engineManager: IEngineManager,
@@ -132,5 +135,7 @@ export default class ScenePresenter implements IScenePresenter {
       this.viewModel.maxAgentRadius,
       this.viewModel.scene
     );
+
+    this.onNavigationReadyObservable.notifyObservers();
   }
 }

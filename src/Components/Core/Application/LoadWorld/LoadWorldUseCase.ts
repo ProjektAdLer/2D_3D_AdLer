@@ -6,7 +6,7 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
 import LearningRoomEntity from "../../Domain/Entities/LearningRoomEntity";
 import LearningWorldEntity from "../../Domain/Entities/LearningWorldEntity";
-import IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
+import type IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import type ILearningWorldPort from "./ILearningWorldPort";
 import { LearningWorldTO } from "./ILearningWorldPort";
 import ILoadWorldUseCase from "./ILoadWorldUseCase";
@@ -67,6 +67,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
             type: element.elementType,
             value: element.value[0].value,
             requirement: element.requirements[0].value,
+            name: "testName",
           },
           LearningElementEntity
         );

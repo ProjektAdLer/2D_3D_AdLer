@@ -13,6 +13,11 @@ export default interface IEntityContainer {
     entityType: ConstructorReference<T>
   ): T;
 
+  useSingletonEntity<T extends object>(
+    entityData: Partial<T>,
+    entityType: ConstructorReference<T>
+  ): T;
+
   /**
    * Returns all entities of the given type.
    * In any case a array is returned.

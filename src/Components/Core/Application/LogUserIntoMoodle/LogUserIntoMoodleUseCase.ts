@@ -4,7 +4,7 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import UserDataEntity from "../../Domain/Entities/UserData";
 import type IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
-import IMoodlePort from "../../Ports/MoodlePort/IMoodlePort";
+import type IMoodlePort from "../../Ports/MoodlePort/IMoodlePort";
 import ILogUserIntoMoodleUseCase from "./ILogUserIntoMoodleUseCase";
 
 @injectable()
@@ -21,19 +21,25 @@ export default class LogUserIntoMoodleUseCase
     username: string;
     password: string;
   }): Promise<void> {
-    const userToken = await this.backend.logInUser(
-      data.username,
-      data.password
-    );
-    console.log(
-      `Logging user ${data.username} into moodle with Token: ${userToken}`
-    );
+    if (
+      this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0]
+        ?.isLoggedIn
+    ) {
+      return Promise.reject("User is already logged in");
+    }
 
-    this.container.createEntity<UserDataEntity>(
+    const userToken = await this.backend.logInUser({
+      username: data.username,
+      password: data.password,
+    });
+
+    if (userToken === "Falsche Daten!")
+      return Promise.reject("Wrong Password oder Username");
+
+    this.container.useSingletonEntity<UserDataEntity>(
       {
         isLoggedIn: true,
         username: data.username,
-        password: data.password,
         userToken: userToken,
       },
       UserDataEntity

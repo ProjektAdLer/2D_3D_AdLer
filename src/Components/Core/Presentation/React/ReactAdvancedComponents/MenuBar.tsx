@@ -1,34 +1,37 @@
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
-import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import IScenePresenter from "../../Babylon/SceneManagement/IScenePresenter";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
+import LearningElementsDropdown from "../LearningElementsDropdown/LearningElementsDropdown";
 
 export default function MenuBar() {
   const loadWorldController = new LoadWorldController();
 
   return (
-    <StyledContainer className="top-0 left-0 flex flex-col justify-center">
+    <StyledContainer className="bottom-0 right-0 flex flex-col justify-center">
       <StyledButton
         onClick={async () => {
           await loadWorldController.loadWorld();
-          await loadWorldController.loadAvatar();
+          // await loadWorldController.loadAvatar();
         }}
       >
-        <div>Debug:</div>
+        <div className="text-red-700">Debug:</div>
         <div>Welt laden</div>
       </StyledButton>
       <StyledButton
         onClick={() => {
-          // CoreDIContainer.get<IScenePresenter>(
-          //   CORE_TYPES.IScenePresenter
-          // ).createNavMesh();
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+            window.screen.orientation.unlock();
+          } else {
+            document.documentElement.requestFullscreen();
+            window.screen.orientation.lock("landscape");
+          }
         }}
       >
-        <div>Debug:</div>
-        <div>NavMesh</div>
+        <div className="text-red-700">Debug:</div>
+        <div>Toggle full screen mode</div>
       </StyledButton>
+      <LearningElementsDropdown />
     </StyledContainer>
   );
 }

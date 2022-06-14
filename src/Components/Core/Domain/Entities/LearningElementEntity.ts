@@ -7,4 +7,5 @@ export default class LearningElementEntity {
   public value: number;
   public requirement: number;
   public hasScored: boolean;
+  public name: string;
 }

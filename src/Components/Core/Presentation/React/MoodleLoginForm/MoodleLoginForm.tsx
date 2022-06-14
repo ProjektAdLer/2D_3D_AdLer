@@ -14,15 +14,13 @@ export default function MoodleLoginForm() {
     MoodleLoginFormController
   >(MoodleLoginFormViewModel);
 
-  const [userToken, setUserToken] = useObservable<string>(
-    viewModels[0]?.userToken
-  );
+  const [userToken] = useObservable<string>(viewModels[0]?.userToken);
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   return (
-    <StyledContainer className="top-0 right-0 flex">
+    <StyledContainer className="bottom-0 left-0 flex">
       <div className="login-screen flex flex-col justify-center gap-2">
         <div className="app-title flex justify-center text-white lg:text-2xl font-bold">
           <h1>{viewModels[0]?.test.Value}</h1>
@@ -45,7 +43,6 @@ export default function MoodleLoginForm() {
         <StyledButton
           onClick={async () => {
             await controllers[0].loginAsync(userName, password);
-            alert(`${userName} logged in`);
           }}
         >
           <p>Login</p>
@@ -53,12 +50,10 @@ export default function MoodleLoginForm() {
 
         <StyledButton
           onClick={() => {
-            alert("Dann mach' dir e' neuesch du Saubeidel!");
+            alert("Hier kannst du bald dein neues Passwort bekommen!");
           }}
         >
-          <p className="text-xs">
-            Bruda! <br></br> Du hasch dein <br></br> Passwort vergessen?!
-          </p>
+          <p className="text-xs">Passwort vergessen?</p>
         </StyledButton>
         <h3>User-Token: {userToken}</h3>
       </div>
