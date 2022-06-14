@@ -17,7 +17,13 @@ import INavigation from "../../Presentation/Babylon/Navigation/INavigation";
 export default class LearningWorldPort implements ILearningWorldPort {
   private viewModel: LearningWorldViewModel;
   private roomPresenter: ILearningRoomPresenter;
-  private _learningElementDropdownPresenter: ILearningElementsDropdownPresenter;
+  private learningElementDropdownPresenter: ILearningElementsDropdownPresenter;
+
+  public set LearningElementDropdownPresenter(
+    value: ILearningElementsDropdownPresenter
+  ) {
+    this.learningElementDropdownPresenter = value;
+  }
 
   constructor(
     @inject(CORE_TYPES.IViewModelControllerProvider)
@@ -49,14 +55,8 @@ export default class LearningWorldPort implements ILearningWorldPort {
 
     CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation).setupNavigation();
 
-    this._learningElementDropdownPresenter.presentLearningElements(
+    this.learningElementDropdownPresenter.presentLearningElements(
       learningWorldTO.learningRooms[0].learningElements
     );
-  }
-
-  public set learningElementDropdownPresenter(
-    value: ILearningElementsDropdownPresenter
-  ) {
-    this._learningElementDropdownPresenter = value;
   }
 }

@@ -20,7 +20,7 @@ export class LearningElementTO {
 
 export default interface ILearningWorldPort {
   presentLearningWorld(learningWorldTO: LearningWorldTO): void;
-  set learningElementDropdownPresenter(
+  set LearningElementDropdownPresenter(
     value: ILearningElementsDropdownPresenter
   );
 }

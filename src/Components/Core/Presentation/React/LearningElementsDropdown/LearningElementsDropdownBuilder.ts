@@ -48,6 +48,6 @@ export default class LearningElementsDropdownBuilder extends PresentationBuilder
     super.buildPresenter();
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).learningElementDropdownPresenter = this.presenter!;
+    ).LearningElementDropdownPresenter = this.presenter!;
   }
 }
