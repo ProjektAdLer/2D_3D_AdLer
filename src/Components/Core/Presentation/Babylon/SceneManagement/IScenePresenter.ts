@@ -1,21 +1,19 @@
 import {
   AbstractMesh,
-  ICrowd,
   ISceneLoaderProgressEvent,
   Mesh,
   Nullable,
-  Observable,
-  RecastJSPlugin,
   Scene,
 } from "@babylonjs/core";
 import ICreateSceneClass from "./ICreateSceneClass";
 
 export default interface IScenePresenter {
   get Scene(): Scene;
-  get Navigation(): RecastJSPlugin;
-  get NavigationCrowd(): ICrowd;
 
-  onNavigationReadyObservable: Observable<void>;
+  /**
+   * @returns all registered meshes in the scene that are marked to influence the navigation.
+   */
+  get NavigationMeshes(): Mesh[];
 
   /**
    * Creates a new scene with the given CreateSceneClass configuration.
@@ -48,10 +46,4 @@ export default interface IScenePresenter {
    * @returns the newly created mesh
    */
   createMesh(name: string, isRelevantForNavigation?: boolean): Mesh;
-
-  /**
-   * Creates the navmesh and navigation crowd, accessible via the Navigation and NavigationCrowd properties.
-   * Should be called after all meshes have been loaded into the scene. Calling this method multiple times will break the agents registered to the crowd.
-   */
-  setupNavigation(): void;
 }

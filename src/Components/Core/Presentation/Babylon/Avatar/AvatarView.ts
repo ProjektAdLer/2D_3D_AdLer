@@ -8,6 +8,7 @@ import {
 import bind from "bind-decorator";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
+import INavigation from "../Navigation/INavigation";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
@@ -18,6 +19,7 @@ let counter: number = 0;
 
 export default class AvatarView {
   private scenePresenter: IScenePresenter;
+  private navigation: INavigation;
 
   constructor(
     private viewModel: AvatarViewModel,
@@ -26,23 +28,24 @@ export default class AvatarView {
     this.scenePresenter = CoreDIContainer.get<IScenePresenter>(
       CORE_TYPES.IScenePresenter
     );
+    this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
 
     // setup event callback for internal navigation setup after global scene navigation setup is completed
-    this.scenePresenter.onNavigationReadyObservable.add(
+    this.navigation.onNavigationReadyObservable.subscribe(
       this.setupAvatarNavigation
     );
   }
 
   @bind
   private setupAvatarNavigation(): void {
-    this.viewModel.agentIndex = this.scenePresenter.NavigationCrowd.addAgent(
+    this.viewModel.agentIndex = this.navigation.Crowd.addAgent(
       this.viewModel.meshes.Value[0].position,
       this.viewModel.agentParams,
       this.viewModel.meshes.Value[0]
     );
     this.scenePresenter.Scene.onBeforeRenderObservable.add(this.moveAvatar);
 
-    this.scenePresenter.onNavigationReadyObservable.removeCallback(
+    this.navigation.onNavigationReadyObservable.unsubscribe(
       this.setupAvatarNavigation
     );
   }
@@ -51,10 +54,8 @@ export default class AvatarView {
   private moveAvatar(): void {
     if (this.viewModel.meshes.Value.length > 0) {
       this.viewModel.meshes.Value[0].position =
-        this.scenePresenter.NavigationCrowd.getAgentPosition(
-          this.viewModel.agentIndex
-        );
-      let velocity = this.scenePresenter.NavigationCrowd.getAgentVelocity(
+        this.navigation.Crowd.getAgentPosition(this.viewModel.agentIndex);
+      let velocity = this.navigation.Crowd.getAgentVelocity(
         this.viewModel.agentIndex
       );
 
@@ -70,6 +71,7 @@ export default class AvatarView {
     }
   }
 
+  // debug: this needs to be extracted from the class and to not be in the build
   private debug_displayVelocity(velocity: Vector3, rotation: number): void {
     if (counter % 10 === 0) {
       let points: Vector3[] = [

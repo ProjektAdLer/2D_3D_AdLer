@@ -10,8 +10,8 @@ import IPresentationDirector from "../../Presentation/PresentationBuilder/IPrese
 import type IViewModelControllerProvider from "../../Presentation/ViewModelProvider/IViewModelControllerProvider";
 import LearningWorldViewModel from "./LearningWorldViewModel";
 import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
-import IScenePresenter from "../../Presentation/Babylon/SceneManagement/IScenePresenter";
 import ILearningElementsDropdownPresenter from "../../Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
+import INavigation from "../../Presentation/Babylon/Navigation/INavigation";
 
 @injectable()
 export default class LearningWorldPort implements ILearningWorldPort {
@@ -47,9 +47,7 @@ export default class LearningWorldPort implements ILearningWorldPort {
     this.viewModel.worldName.Value = learningWorldTO.worldName;
     this.viewModel.worldNameLoading.Value = false;
 
-    CoreDIContainer.get<IScenePresenter>(
-      CORE_TYPES.IScenePresenter
-    ).setupNavigation();
+    CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation).setupNavigation();
 
     this._learningElementDropdownPresenter.presentLearningElements(
       learningWorldTO.learningRooms[0].learningElements

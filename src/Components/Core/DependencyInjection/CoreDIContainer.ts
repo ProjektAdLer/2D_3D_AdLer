@@ -8,14 +8,14 @@ import SceneViewModel from "../Presentation/Babylon/SceneManagement/SceneViewMod
 import ScenePresenter from "../Presentation/Babylon/SceneManagement/ScenePresenter";
 import MainScene from "../Presentation/Babylon/SceneManagement/MainScene";
 import ICreateSceneClass from "../Presentation/Babylon/SceneManagement/ICreateSceneClass";
-import ILearningElementView from "../Presentation/Babylon/LearningElement/ILearningElementView";
-import LearningElementView from "../Presentation/Babylon/LearningElement/LearningElementView";
-import LearningElementViewModel from "../Presentation/Babylon/LearningElement/LearningElementViewModel";
 import IScenePresenter from "../Presentation/Babylon/SceneManagement/IScenePresenter";
 import infrastructureDIContainer from "./InfrastructureDIContainer";
 import useCaseDIContainer from "./UseCases/UseCaseDIConatiner";
 import PortsDIContainer from "./Ports/PortsDIContainer";
 import BuilderDIContainer from "./Builders/BuilderDIContainer";
+import INavigation from "../Presentation/Babylon/Navigation/INavigation";
+import Navigation from "../Presentation/Babylon/Navigation/Navigation";
+import NavigationConfiguration from "../Presentation/Babylon/Navigation/NavigationConfiguration";
 
 var CoreDIContainer = new Container();
 
@@ -28,11 +28,11 @@ CoreDIContainer.bind<IScenePresenter>(CORE_TYPES.IScenePresenter)
   .to(ScenePresenter)
   .inSingletonScope();
 
-// Learning Element
-CoreDIContainer.bind<ILearningElementView>(CORE_TYPES.ILearningElementView).to(
-  LearningElementView
-);
-CoreDIContainer.bind(LearningElementViewModel).toSelf();
+// Navigation
+CoreDIContainer.bind<INavigation>(CORE_TYPES.INavigation)
+  .to(Navigation)
+  .inSingletonScope();
+CoreDIContainer.bind(NavigationConfiguration).toSelf();
 
 // Controllers
 CoreDIContainer.bind<ILoadWorldController>(CORE_TYPES.ILoadWorldController)

@@ -11,6 +11,7 @@ const CORE_TYPES = {
   ILoadWorldController: Symbol("ILoadWorldController"),
   IEntityContainer: Symbol("IEntityContainer"),
   IBackend: Symbol("IBackend"),
+  INavigation: Symbol("INavigation"),
 };
 
 export default CORE_TYPES;
