@@ -46,7 +46,7 @@ export default function StyledModal({
             </button>
           )}
         </div>
-        <div className="modal-content p-2 border-t-2 border-b-2 rounded-lg border-adlerlightblue overflow-auto">
+        <div className="modal-content p-4 border-t-2 border-b-2 rounded-lg border-adlerlightblue overflow-auto">
           {children}
         </div>
         <div className="modal-footer font-medium flex shrink justify-between items-center p-4 h-fit">
