@@ -1,3 +1,1 @@
-export default interface IAvatarController {
-  pointerDown(): void;
-}
+export default interface IAvatarController {}

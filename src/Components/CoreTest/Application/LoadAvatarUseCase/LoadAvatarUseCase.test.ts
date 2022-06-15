@@ -2,10 +2,9 @@ import IAvatarPort from "../../../Core/Application/LoadAvatar/IAvatarPort";
 import LoadAvatarUseCase from "../../../Core/Application/LoadAvatar/LoadAvatarUseCase";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import scenePresenter from "../../../Core/Presentation/Babylon/SceneManagement/scenePresenter";
+import PresentationDirector from "../../../Core/Presentation/PresentationBuilder/PresentationDirector";
 
-// to prevent errors in tests for undefined scene
-jest.spyOn(scenePresenter.prototype, "Scene", "get");
+const buildMock = jest.spyOn(PresentationDirector.prototype, "build");
 
 describe("LoadAvatarUseCase", () => {
   let useCase: LoadAvatarUseCase;
@@ -16,7 +15,7 @@ describe("LoadAvatarUseCase", () => {
     );
   });
 
-  test("executeAsync calls the avatar port's presentAvatar method", async () => {
+  test("executeAsync builds the avatar via its builder", async () => {
     const presentAvatarSpy = jest.spyOn(
       CoreDIContainer.get<IAvatarPort>(PORT_TYPES.IAvatarPort),
       "presentAvatar"
@@ -24,9 +23,6 @@ describe("LoadAvatarUseCase", () => {
 
     await useCase.executeAsync();
 
-    expect(presentAvatarSpy).toHaveBeenCalledTimes(1);
-    expect(presentAvatarSpy).toHaveBeenCalledWith({
-      avatarName: "PlaceholderCharacter",
-    });
+    expect(buildMock).toHaveBeenCalledTimes(1);
   });
 });

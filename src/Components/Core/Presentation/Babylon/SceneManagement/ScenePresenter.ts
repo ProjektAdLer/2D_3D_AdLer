@@ -53,7 +53,7 @@ export default class ScenePresenter implements IScenePresenter {
       this.viewModel.navigationMeshes.push(...result.meshes);
     }
 
-    return result.meshes;
+    return Promise.resolve(result.meshes);
   }
 
   createMesh(name: string, isRelevantForNavigation: boolean = false): Mesh {

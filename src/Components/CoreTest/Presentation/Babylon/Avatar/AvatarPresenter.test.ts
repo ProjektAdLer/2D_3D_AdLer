@@ -21,9 +21,5 @@ describe("AvatarPresenter", () => {
     expect(presenter["viewModel"]).toBe(viewModel);
   });
 
-  test.todo("presentAvatar sets customization info in the viewmodel", () => {
-    const avatarTO = {
-      avatarName: "test",
-    };
-  });
+  test.todo("presentAvatar sets customization info in the viewmodel");
 });

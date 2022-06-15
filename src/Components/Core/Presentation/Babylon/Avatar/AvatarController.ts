@@ -27,7 +27,7 @@ export default class AvatarController implements IAvatarController {
     });
   }
 
-  public pointerDown() {
+  private pointerDown() {
     let startingPoint = this.getGroundPosition();
     if (startingPoint) {
       this.navigation.Crowd.agentGoto(
