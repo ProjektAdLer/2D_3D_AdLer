@@ -36,10 +36,6 @@ const presentLearningWorldMock = jest.spyOn(
   "presentLearningWorld"
 );
 
-// TODO: this is a temporary solution to test the use case
-// load should be tested when the backend is better defined
-LoadWorldUseCase.prototype["load"] = jest.fn();
-
 describe("LoadWorldUseCase", () => {
   let useCase: LoadWorldUseCase;
 
