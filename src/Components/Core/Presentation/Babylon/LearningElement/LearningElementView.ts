@@ -19,10 +19,10 @@ import {
 } from "./Types/LearningElementTypes";
 
 const modelLinks = {
-  [LearningElementTypeSymbols.h5p]: require("../../../../../Assets/3DLink_H5P.glb"),
-  [LearningElementTypeSymbols.text]: require("../../../../../Assets/3DLink_Text.glb"),
-  [LearningElementTypeSymbols.image]: require("../../../../../Assets/3DLink_Image.glb"),
-  [LearningElementTypeSymbols.video]: require("../../../../../Assets/3DLink_Video.glb"),
+  [LearningElementTypeSymbols.h5p]: require("../../../../../Assets/3DModel_LElement_H5P.glb"),
+  [LearningElementTypeSymbols.text]: require("../../../../../Assets/3DModel_LElement_Text.glb"),
+  [LearningElementTypeSymbols.image]: require("../../../../../Assets/3DModel_LElement_Image.glb"),
+  [LearningElementTypeSymbols.video]: require("../../../../../Assets/3DModel_LElement_Video.glb"),
 };
 
 export default class LearningElementView implements ILearningElementView {

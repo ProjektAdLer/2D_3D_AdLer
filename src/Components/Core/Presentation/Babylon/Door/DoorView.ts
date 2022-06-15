@@ -4,7 +4,7 @@ import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import IscenePresenter from "../SceneManagement/ScenePresenter";
 import DoorViewModel from "./DoorViewModel";
 
-const modelLink = require("../../../../../Assets/Door.glb");
+const modelLink = require("../../../../../Assets/3DModel_Door.glb");
 
 export default class DoorView {
   private scenePresenter: IscenePresenter;
