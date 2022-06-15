@@ -17,7 +17,7 @@ export default class AvatarBuilder extends PresentationBuilder<
     super(AvatarViewModel, AvatarController, AvatarView, undefined);
   }
 
-  buildPresenter(): void {
+  override buildPresenter(): void {
     // create presenter via DI because it also acts as port for the avatar
     this.presenter = CoreDIContainer.get<IAvatarPresenter>(
       PORT_TYPES.IAvatarPort
