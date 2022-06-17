@@ -6,7 +6,7 @@ import LearningElementsDropdownController from "./LearningElementsDropdownContro
 import LearningElementsDropdownViewModel from "./LearningElementsDropdownViewModel";
 
 export default function LearningElementsDropdown() {
-  const [viewModels, controllers] = useViewModelControllerProvider<
+  const [viewModels] = useViewModelControllerProvider<
     LearningElementsDropdownViewModel,
     LearningElementsDropdownController
   >(LearningElementsDropdownViewModel);
