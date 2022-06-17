@@ -14,6 +14,7 @@ export default function LogoMenuBar() {
           ></img>
         }
         initialOpen={true}
+        useAsTriggerOnly={true}
       >
         <MenuBar />
         <MoodleLoginForm />

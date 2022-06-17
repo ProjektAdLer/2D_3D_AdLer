@@ -6,6 +6,7 @@ type Props = {
   headerElement?: React.ReactNode;
   children?: React.ReactNode;
   initialOpen?: boolean;
+  useAsTriggerOnly?: boolean;
 };
 /**
  * @param managed controlls, if the dropdown is managed by the component or not
@@ -14,6 +15,7 @@ type Props = {
  * @param icon the icon of the dropdown
  * @param children the content of the dropdown
  * @param initialOpen controlls, weather the dropdown is open or not on mount
+ * @param useAsTriggerOnly The Dropdown can be used as a trigger only. It will only enable and disable its children and wont render a content container
  * @author Philipp
  */
 export default function CustomDropdown({
@@ -22,6 +24,7 @@ export default function CustomDropdown({
   headerElement,
   children,
   initialOpen = false,
+  useAsTriggerOnly = false,
 }: Props) {
   const [isOpenState, setIsOpenState] = useState(initialOpen);
 
@@ -32,13 +35,18 @@ export default function CustomDropdown({
   };
 
   const shouldShowDropdown = managed ? isOpen : isOpenState;
+  const content = !useAsTriggerOnly ? (
+    <StyledContainer>{children}</StyledContainer>
+  ) : (
+    children
+  );
 
   return (
     <div className="dropdown">
       <div className="dropdown-header" onClick={handleClick}>
         {headerElement}
       </div>
-      {shouldShowDropdown && <StyledContainer>{children}</StyledContainer>}
+      {shouldShowDropdown && content}
     </div>
   );
 }
