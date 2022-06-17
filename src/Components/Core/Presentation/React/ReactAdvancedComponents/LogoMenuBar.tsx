@@ -1,4 +1,5 @@
 import LearningElementsDropdown from "../LearningElementsDropdown/LearningElementsDropdown";
+import MoodleLoginForm from "../MoodleLoginForm/MoodleLoginForm";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 
