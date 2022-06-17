@@ -12,11 +12,11 @@ export default function ScorePanel() {
 
   return (
     <StyledContainer className="top-0 right-0 p-13 text-4xl text-white font-extrabold bg-transparent">
+      {score ? score : 0}
       <img
         src="icons/coin_icon.svg"
-        className="xl:w-20 lg:w-16 md:w-10 sm:w-8"
+        className="xl:w-16 lg:w-10 md:w-8 sm:w-8"
       ></img>
-      {score ? score : 0}
     </StyledContainer>
   );
 }
