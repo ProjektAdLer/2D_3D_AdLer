@@ -24,7 +24,6 @@ export default function LearningElementsDropdown() {
         }}
       >
         <h2 className="text-white text-2xl">Lernelemente</h2>
-        {!dropDownOpen ? "" : ""}
       </StyledButton>
       <Dropdown isOpen={dropDownOpen} elements={learningElementNames} />
     </div>
