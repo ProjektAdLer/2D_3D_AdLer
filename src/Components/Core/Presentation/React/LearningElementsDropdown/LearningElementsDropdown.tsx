@@ -42,12 +42,16 @@ function Dropdown({
   return (
     <ul className="flex flex-col gap-2 mt-2">
       {elements.map((elementName, index) => (
-        <li className="flex items-center" key={index}>
-          <img
-            src="icons/bild_icon.svg"
-            className="w-12 border-b-4 border-r-4 border-adlerdarkblue rounded-lg active:border-transparent"
-          ></img>
-          <h3 className="ml-2 text-white text-xl">{elementName}</h3>
+        <li key={index}>
+          <StyledButton className="flex items-center">
+            <img
+              className="w-10"
+              src="icons/video_icon_screen_button.svg"
+            ></img>
+            <h3 className="ml-2 text-white self-center text-xl">
+              {elementName}
+            </h3>
+          </StyledButton>
         </li>
       ))}
     </ul>
