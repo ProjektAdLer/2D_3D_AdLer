@@ -1,12 +1,12 @@
 import MoodleLoginForm from "../MoodleLoginForm/MoodleLoginForm";
-import Dropdown from "../ReactBaseComponents/Dropdown";
+import CustomDropdown from "../ReactBaseComponents/CustomDropdown";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import MenuBar from "./MenuBar";
 
 export default function LogoMenuBar() {
   return (
     <StyledContainer className="top-0 left-0 bg-transparent flex flex-col justify-center">
-      <Dropdown
+      <CustomDropdown
         headerElement={
           <img
             src="icons/adlerEngine_flat_logo_simple.svg"
@@ -17,15 +17,20 @@ export default function LogoMenuBar() {
       >
         <MenuBar />
         <MoodleLoginForm />
-        <p>
+        <p
+          style={{
+            fontSize: "0.8rem",
+          }}
+        >
           Hier ist der Content des Dropdowns, <br />
           Login und Menübar sind nicht drin,
           <br />
           weil sie mit Tailwind
           <br /> absolut positioniert wurden
           <br /> zu finden in: LegoMenuBar.tsx
+          <br /> oder LearningElementsDropdown.tsx
         </p>
-      </Dropdown>
+      </CustomDropdown>
     </StyledContainer>
   );
 }

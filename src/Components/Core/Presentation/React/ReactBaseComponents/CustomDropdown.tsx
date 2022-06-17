@@ -8,17 +8,15 @@ type Props = {
   initialOpen?: boolean;
 };
 /**
- *
  * @param managed controlls, if the dropdown is managed by the component or not
  * @param isOpen controlls, if the dropdown is open or not (only works, of the component is managed)
  * @param headerElement the header element of the dropdown
  * @param icon the icon of the dropdown
  * @param children the content of the dropdown
  * @param initialOpen controlls, weather the dropdown is open or not on mount
- * @returns
+ * @author Philipp
  */
-
-export default function Dropdown({
+export default function CustomDropdown({
   isOpen = false,
   managed = false,
   headerElement,
