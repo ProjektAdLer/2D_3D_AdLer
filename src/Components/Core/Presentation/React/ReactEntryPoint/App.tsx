@@ -8,14 +8,18 @@ import MoodleLoginForm from "../MoodleLoginForm/MoodleLoginForm";
 import useIsMobilePortrait from "../CustomHooks/useIsMobilePortrait";
 import StyledModal from "../ReactBaseComponents/StyledModal";
 import React from "react";
+import LogoMenuBar from "../ReactAdvancedComponents/LogoMenuBar";
+import LearningElementsDropdown from "../LearningElementsDropdown/LearningElementsDropdown";
 
 function App() {
   return (
     <React.Fragment>
       <div className="root max-w-1/1 max-h-1/1 bg-babylonbg">
         <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
-          <h1>Bruder, nutz Landscape!</h1>
+          <h1>Bitte nutze den Landscape Modus!</h1>
         </StyledModal>
+        <LogoMenuBar />
+        <LearningElementsDropdown />
         <MenuBar />
         <ScorePanel />
         <WorldNamePanel />
