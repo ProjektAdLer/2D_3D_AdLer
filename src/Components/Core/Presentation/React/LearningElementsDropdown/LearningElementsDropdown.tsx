@@ -18,6 +18,25 @@ export default function LearningElementsDropdown() {
     viewModels[0]?.learningElements
   );
 
+  const getIcon = (learningElement: LearningElementTO) => {
+    switch (learningElement.type) {
+      case "text":
+        return (
+          <img className="w-10" src="icons/Zettel_darkblue_text-icon.svg"></img>
+        );
+      case "video":
+        return (
+          <img className="w-10" src="icons/video_icon_screen_button.svg"></img>
+        );
+      case "image":
+        return <img className="w-10" src="icons/bild_icon.svg"></img>;
+      case "h5p":
+        return <img className="w-10" src="icons/h5p_icon.svg"></img>;
+      default:
+        return null;
+    }
+  };
+
   const [dropDownOpen, setDropDownOpen] = useState(false);
   return (
     <div className="top-6 left-64 fixed flex flex-col justify-end bg-adlergold rounded-lg p-2">
@@ -42,10 +61,7 @@ export default function LearningElementsDropdown() {
                 className="flex items-center"
                 onClick={() => controllers[0]?.startLearningElement(element.id)}
               >
-                <img
-                  className="w-10"
-                  src="icons/video_icon_screen_button.svg"
-                ></img>
+                {getIcon(element)}
                 <h3 className="ml-2 text-white self-center text-xl">
                   {element.name}
                 </h3>
