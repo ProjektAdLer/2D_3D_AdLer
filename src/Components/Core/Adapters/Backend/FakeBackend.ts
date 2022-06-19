@@ -46,7 +46,7 @@ export class FakeBackend implements IBackend {
 }
 
 const learningWorld = {
-  name: "Fake World from FakeApi",
+  name: "SWEGED: Metriken",
   description: "This is a fake world",
   learningRoommIds: [1],
 };
