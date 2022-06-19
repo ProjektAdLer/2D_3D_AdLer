@@ -27,6 +27,7 @@ export default class LogUserIntoMoodleUseCase
       this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0]
         ?.isLoggedIn
     ) {
+      this.errorPort.displayErrorModal("You are already logged in to Moodle");
       return Promise.reject("User is already logged in");
     }
 

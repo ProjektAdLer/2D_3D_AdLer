@@ -17,6 +17,8 @@ export default function ErrorModalManager() {
   return (
     <StyledModal
       showModal={errors?.length > 0}
+      title="Error"
+      footer="Error aus ErrorModalManager.tsx"
       onClose={() => {
         setErrors(
           errors.filter((error) => error !== errors[errors?.length - 1])
