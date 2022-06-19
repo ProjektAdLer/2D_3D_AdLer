@@ -36,17 +36,20 @@ export default class ReactEntry implements IReactEntry {
     let director = CoreDIContainer.get<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
     );
-    let builder = CoreDIContainer.get<IPresentationBuilder>(
+    director.Builder = CoreDIContainer.get<IPresentationBuilder>(
       BUILDER_TYPES.IMoodleLoginFormBuilder
     );
-    director.Builder = builder;
     director.build();
 
-    builder = CoreDIContainer.get<IPresentationBuilder>(
+    director.Builder = CoreDIContainer.get<IPresentationBuilder>(
       BUILDER_TYPES.ILearningElementsDropdownBuilder
     );
+    director.build();
 
-    director.Builder = builder;
+    director.Builder = CoreDIContainer.get<IPresentationBuilder>(
+      BUILDER_TYPES.IErrorModalManagerBuilder
+    );
+
     director.build();
   }
 }

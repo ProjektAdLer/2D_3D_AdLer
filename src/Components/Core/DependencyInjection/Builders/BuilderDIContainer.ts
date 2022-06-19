@@ -10,6 +10,7 @@ import LearningElementModalBuilder from "../../Presentation/React/LearningElemen
 import LearningElementsDropdownBuilder from "../../Presentation/React/LearningElementsDropdown/LearningElementsDropdownBuilder";
 import MoodleLoginFormBuilder from "../../Presentation/React/MoodleLoginForm/MoodleLoginFormBuilder";
 import ScorePanelBuilder from "../../Presentation/React/ScorePanel/ScorePanelBuilder";
+import ErrorModalManagerBuilder from "../../Presentation/React/ErrorModalManager/ErrorModalManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
@@ -36,6 +37,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarBuilder).to(AvatarBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementsDropdownBuilder).to(
     LearningElementsDropdownBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IErrorModalManagerBuilder).to(
+    ErrorModalManagerBuilder
   );
 });
 

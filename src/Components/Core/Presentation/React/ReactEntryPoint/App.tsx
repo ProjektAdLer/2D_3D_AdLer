@@ -8,6 +8,7 @@ import StyledModal from "../ReactBaseComponents/StyledModal";
 import React from "react";
 import LogoMenuBar from "../ReactAdvancedComponents/LogoMenuBar";
 import LearningElementsDropdown from "../LearningElementsDropdown/LearningElementsDropdown";
+import ErrorModalManager from "../ErrorModalManager/ErrorModalManager";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         </StyledModal>
         <LogoMenuBar />
         <LearningElementsDropdown />
-
+        <ErrorModalManager />
         <ScorePanel />
         <WorldNamePanel />
         <BabylonCanvas className="w-screen h-screen" />

@@ -4,6 +4,7 @@ const PORT_TYPES = {
   ILearningWorldPort: Symbol("ILearningWorldPort"),
   IMoodlePort: Symbol("IMoodlePort"),
   IAvatarPort: Symbol("IAvatarPort"),
+  IErrorPort: Symbol("IErrorPort"),
 };
 
 export default PORT_TYPES;

@@ -8,6 +8,7 @@ const BUILDER_TYPES = {
   ILearningElementModalBuilder: Symbol("ILearningElementModalBuilder"),
   IAvatarBuilder: Symbol("IAvatarBuilder"),
   ILearningElementsDropdownBuilder: Symbol("ILearningElementsDropdownBuilder"),
+  IErrorModalManagerBuilder: Symbol("IErrorModalManagerBuilder"),
 };
 
 export default BUILDER_TYPES;
