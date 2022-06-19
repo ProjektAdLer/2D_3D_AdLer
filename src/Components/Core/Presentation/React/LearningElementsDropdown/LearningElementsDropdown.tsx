@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { LearningElementTO } from "../../../Application/LoadWorld/ILearningWorldPort";
+import { LearningComponentID } from "../../../Types/EnitityTypes";
 import useObservable from "../CustomHooks/useObservable";
 import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import CustomDropdown from "../ReactBaseComponents/CustomDropdown";
@@ -7,13 +9,13 @@ import LearningElementsDropdownController from "./LearningElementsDropdownContro
 import LearningElementsDropdownViewModel from "./LearningElementsDropdownViewModel";
 
 export default function LearningElementsDropdown() {
-  const [viewModels] = useViewModelControllerProvider<
+  const [viewModels, controllers] = useViewModelControllerProvider<
     LearningElementsDropdownViewModel,
     LearningElementsDropdownController
   >(LearningElementsDropdownViewModel);
 
-  const [learningElementNames] = useObservable<string[]>(
-    viewModels[0]?.learningElementNames
+  const [learningElements] = useObservable<LearningElementTO[]>(
+    viewModels[0]?.learningElements
   );
 
   const [dropDownOpen, setDropDownOpen] = useState(false);
@@ -34,15 +36,18 @@ export default function LearningElementsDropdown() {
         initialOpen
       >
         <ul className="flex flex-col gap-2 mt-2">
-          {learningElementNames?.map((elementName, index) => (
+          {learningElements?.map((element, index) => (
             <li key={index}>
-              <StyledButton className="flex items-center">
+              <StyledButton
+                className="flex items-center"
+                onClick={() => controllers[0]?.startLearningElement(element.id)}
+              >
                 <img
                   className="w-10"
                   src="icons/video_icon_screen_button.svg"
                 ></img>
                 <h3 className="ml-2 text-white self-center text-xl">
-                  {elementName}
+                  {element.name}
                 </h3>
               </StyledButton>
             </li>

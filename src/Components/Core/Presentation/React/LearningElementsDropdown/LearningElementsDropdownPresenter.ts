@@ -10,5 +10,7 @@ export default class LearningElementsDropdownPresenter
     this.viewModel.learningElementNames.Value = learningElements.map(
       (learningElement) => learningElement.name
     );
+
+    this.viewModel.learningElements.Value = learningElements;
   }
 }
