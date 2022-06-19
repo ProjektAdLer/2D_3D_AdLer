@@ -121,7 +121,7 @@ const learningElements = [
         value: 5,
       },
     ],
-    name: "H5P Lernelement",
+    name: "Video Lernelement",
   },
   {
     id: 4,
@@ -142,6 +142,6 @@ const learningElements = [
         value: 5,
       },
     ],
-    name: "H5P Lernelement",
+    name: "Image Lernelement",
   },
 ];

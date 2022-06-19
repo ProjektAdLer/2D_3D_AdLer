@@ -1,5 +1,6 @@
 export class APILearningElementTO {
   id: number;
+  name: string;
   elementType: string;
   value: {
     type: string;

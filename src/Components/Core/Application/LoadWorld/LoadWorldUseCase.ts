@@ -67,7 +67,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
             type: element.elementType,
             value: element.value[0].value,
             requirement: element.requirements[0].value,
-            name: "testName",
+            name: element.name,
           },
           LearningElementEntity
         );
