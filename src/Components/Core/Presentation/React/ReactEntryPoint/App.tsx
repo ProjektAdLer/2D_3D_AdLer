@@ -8,7 +8,7 @@ import StyledModal from "../ReactBaseComponents/StyledModal";
 import React from "react";
 import LogoMenuBar from "../ReactAdvancedComponents/LogoMenuBar";
 import LearningElementsDropdown from "../LearningElementsDropdown/LearningElementsDropdown";
-import ErrorModalManager from "../ErrorModalManager/ErrorModalManager";
+import ModalManager from "../ModalManager/ModalManager";
 import MoodleLoginForm from "../MoodleLoginForm/MoodleLoginForm";
 import BottomTooltip from "../BottomTooltip/BottomTooltip";
 
@@ -29,7 +29,7 @@ function App() {
         </StyledModal>
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
-        <ErrorModalManager />
+        <ModalManager />
       </div>
     </React.Fragment>
   );

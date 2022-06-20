@@ -1,16 +1,11 @@
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
-import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import IMoodlePort from "../../../Ports/MoodlePort/IMoodlePort";
-import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
+
 import MoodleLoginButton from "../MoodleLoginButton/MoodleLoginButton";
 
 export default function MenuBar() {
   const loadWorldController = new LoadWorldController();
-  const moodleLoginPort = CoreDIContainer.get<IMoodlePort>(
-    PORT_TYPES.IMoodlePort
-  );
 
   return (
     <StyledContainer className="flex flex-col">

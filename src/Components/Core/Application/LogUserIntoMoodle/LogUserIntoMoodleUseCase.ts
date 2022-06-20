@@ -4,8 +4,8 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import UserDataEntity from "../../Domain/Entities/UserData";
 import type IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
-import type IErrorPort from "../../Ports/ErrorPort/IErrorPort";
 import type IMoodlePort from "../../Ports/MoodlePort/IMoodlePort";
+import type IUIPort from "../../Ports/UIPort/IUIPort";
 import ILogUserIntoMoodleUseCase from "./ILogUserIntoMoodleUseCase";
 
 @injectable()
@@ -17,7 +17,7 @@ export default class LogUserIntoMoodleUseCase
     private container: IEntityContainer,
     @inject(CORE_TYPES.IBackend) private backend: IBackend,
     @inject(PORT_TYPES.IMoodlePort) private moodlePort: IMoodlePort,
-    @inject(PORT_TYPES.IErrorPort) private errorPort: IErrorPort
+    @inject(PORT_TYPES.IUIPort) private errorPort: IUIPort
   ) {}
   async executeAsync(data: {
     username: string;
@@ -27,7 +27,10 @@ export default class LogUserIntoMoodleUseCase
       this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0]
         ?.isLoggedIn
     ) {
-      this.errorPort.displayErrorModal("You are already logged in to Moodle");
+      this.errorPort.displayModal(
+        "You are already logged in to Moodle",
+        "error"
+      );
       return Promise.reject("User is already logged in");
     }
 
@@ -37,7 +40,7 @@ export default class LogUserIntoMoodleUseCase
     });
 
     if (userToken === "Falsche Daten!") {
-      this.errorPort.displayErrorModal("Falsche Daten!");
+      this.errorPort.displayModal("Falsche Daten!", "error");
       return Promise.reject("Wrong Password oder Username");
     }
 
