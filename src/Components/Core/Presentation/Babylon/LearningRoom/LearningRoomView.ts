@@ -137,7 +137,7 @@ export default class LearningRoomView implements ILearningRoomView {
   private createFloorPositions() {
     var roomWidth = this.viewModel.roomWidth.Value / 2;
     var roomLength = this.viewModel.roomLength.Value / 2;
-    var baseHeight = this.viewModel.baseHeight.Value;
+    var baseHeight = this.viewModel.baseHeight.Value || 0;
     var wallThickness = this.viewModel.wallThickness.Value;
     return [
       roomWidth + wallThickness,
@@ -158,7 +158,7 @@ export default class LearningRoomView implements ILearningRoomView {
   private createRoomPositions() {
     var roomWidth = this.viewModel.roomWidth.Value / 2;
     var roomLength = this.viewModel.roomLength.Value / 2;
-    var baseHeight = this.viewModel.baseHeight.Value;
+    var baseHeight = this.viewModel.baseHeight.Value || 0;
     var roomHeight = this.viewModel.roomHeight.Value;
     var doorWidth = this.viewModel.doorWidth.Value / 2;
     var doorHeight = this.viewModel.doorHeight.Value;
