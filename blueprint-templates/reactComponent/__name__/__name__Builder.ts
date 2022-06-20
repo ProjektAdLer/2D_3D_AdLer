@@ -13,6 +13,11 @@ Copy below lines in the DI Container and its Types
 
 bind<IPresentationBuilder>(BUILDER_TYPES.I{{name}}Builder).to({{name}}Builder);
 I{{name}}Builder: Symbol("I{{name}}Builder"),
+
+director.Builder = CoreDIContainer.get<IPresentationBuilder>(
+  BUILDER_TYPES.I{{name}}Builder
+);
+director.build();
 */
 
 @injectable()
