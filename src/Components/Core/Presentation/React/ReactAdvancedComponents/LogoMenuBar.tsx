@@ -17,7 +17,6 @@ export default function LogoMenuBar() {
         useAsTriggerOnly={true}
       >
         <MenuBar />
-        <MoodleLoginForm />
       </CustomDropdown>
     </StyledContainer>
   );

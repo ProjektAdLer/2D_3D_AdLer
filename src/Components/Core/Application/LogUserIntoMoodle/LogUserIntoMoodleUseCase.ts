@@ -52,6 +52,8 @@ export default class LogUserIntoMoodleUseCase
 
     this.moodlePort.debug_DisplayUserToken(userToken);
 
+    this.moodlePort.loginSuccessful();
+
     return Promise.resolve();
   }
 }

@@ -5,6 +5,12 @@ import IMoodlePort from "./IMoodlePort";
 @injectable()
 export default class MoodlePort implements IMoodlePort {
   private moodleLoginFormPresenter: IMoodleLoginFormPresenter;
+  displayLoginForm = () => {
+    this.moodleLoginFormPresenter.displayLoginForm();
+  };
+  loginSuccessful(): void {
+    this.moodleLoginFormPresenter.loginSuccessful();
+  }
   registerMoodleLoginPresenter(presenter: IMoodleLoginFormPresenter): void {
     if (this.moodleLoginFormPresenter)
       throw new Error("MoodlePort is already registered");

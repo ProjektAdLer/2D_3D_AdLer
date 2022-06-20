@@ -9,6 +9,7 @@ import React from "react";
 import LogoMenuBar from "../ReactAdvancedComponents/LogoMenuBar";
 import LearningElementsDropdown from "../LearningElementsDropdown/LearningElementsDropdown";
 import ErrorModalManager from "../ErrorModalManager/ErrorModalManager";
+import MoodleLoginForm from "../MoodleLoginForm/MoodleLoginForm";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <LearningElementsDropdown />
         <ErrorModalManager />
         <ScorePanel />
+        <MoodleLoginForm />
         <WorldNamePanel />
         <BabylonCanvas className="w-screen h-screen" />
         <LearningElementModal />
