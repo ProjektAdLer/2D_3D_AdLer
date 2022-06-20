@@ -71,6 +71,8 @@ export default class AvatarView {
       0,
       1
     );
+    // place model 0.1 above the ground ~ FK
+    this.viewModel.meshes.Value[0].position = new Vector3(0, 0.1, 0);
   }
 
   // temporary until babylon component is better structured
