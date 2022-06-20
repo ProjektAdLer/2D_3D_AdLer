@@ -13,8 +13,7 @@ export default function MenuBar() {
           // await loadWorldController.loadAvatar();
         }}
       >
-        <div className="text-red-700">Debug:</div>
-        <div>Welt laden</div>
+        <img className="w-10" src="icons/debug-icon.svg"></img>
       </StyledButton>
       <StyledButton
         onClick={() => {
