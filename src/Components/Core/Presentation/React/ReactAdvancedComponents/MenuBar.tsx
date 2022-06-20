@@ -26,10 +26,7 @@ export default function MenuBar() {
           }
         }}
       >
-        <div className="text-red-700">Debug:</div>
-        <div>
-          Toggle full<br></br>screen mode
-        </div>
+        <img className="w-10" src="icons/fullscreen-icon.svg"></img>
       </StyledButton>
     </StyledContainer>
   );
