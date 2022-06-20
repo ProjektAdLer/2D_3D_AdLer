@@ -10,6 +10,8 @@ import LearningRoomPort from "../../Ports/LearningRoomPort/LearningRoomPort";
 import LearningWorldPort from "../../Ports/LearningWorldPort/LearningWorldPort";
 import IMoodlePort from "../../Ports/MoodlePort/IMoodlePort";
 import MoodlePort from "../../Ports/MoodlePort/MoodlePort";
+import IUIPort from "../../Ports/UIPort/IUIPort";
+import UIPort from "../../Ports/UIPort/UIPort";
 import AvatarPresenter from "../../Presentation/Babylon/Avatar/AvatarPresenter";
 import PORT_TYPES from "./PORT_TYPES";
 
@@ -34,6 +36,7 @@ const PortsDIContainer = new ContainerModule((bind) => {
     .inSingletonScope();
 
   bind<IErrorPort>(PORT_TYPES.IErrorPort).to(ErrorPort).inSingletonScope();
+  bind<IUIPort>(PORT_TYPES.IUIPort).to(UIPort).inSingletonScope();
 });
 
 export default PortsDIContainer;

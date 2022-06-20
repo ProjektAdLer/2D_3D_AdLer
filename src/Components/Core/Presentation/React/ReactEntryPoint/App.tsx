@@ -10,6 +10,7 @@ import LogoMenuBar from "../ReactAdvancedComponents/LogoMenuBar";
 import LearningElementsDropdown from "../LearningElementsDropdown/LearningElementsDropdown";
 import ErrorModalManager from "../ErrorModalManager/ErrorModalManager";
 import MoodleLoginForm from "../MoodleLoginForm/MoodleLoginForm";
+import BottomTooltip from "../BottomTooltip/BottomTooltip";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <WorldNamePanel />
         <BabylonCanvas className="w-screen h-screen" />
         <LearningElementModal />
+        <BottomTooltip />
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         <ErrorModalManager />
       </div>

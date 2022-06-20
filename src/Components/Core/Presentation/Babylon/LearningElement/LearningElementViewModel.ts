@@ -10,4 +10,5 @@ export default class LearningElementViewModel {
   public rotation: Observable<number> = new Observable<number>();
   public type: Observable<LearningElementType> =
     new Observable<LearningElementType>();
+  public name: Observable<string> = new Observable<string>();
 }
