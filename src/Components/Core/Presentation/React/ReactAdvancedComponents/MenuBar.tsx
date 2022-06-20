@@ -35,7 +35,7 @@ export default function MenuBar() {
         <img className="w-10" src="icons/fullscreen-icon.svg"></img>
       </StyledButton>
       <StyledButton onClick={moodleLoginPort.displayLoginForm}>
-        <img className="w-10" src="icons/user-icon.svg"></img>
+        <img className="w-10" src="icons/moodle-icon.svg"></img>
       </StyledButton>
     </StyledContainer>
   );
