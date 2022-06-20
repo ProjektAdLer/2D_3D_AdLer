@@ -1,4 +1,3 @@
-import { ArcFollowCamera } from "@babylonjs/core";
 import { inject, injectable } from "inversify";
 import IAvatarPort, {
   AvatarTO,
