@@ -10,6 +10,7 @@ import LogoMenuBar from "../ReactAdvancedComponents/LogoMenuBar";
 import LearningElementsDropdown from "../LearningElementsDropdown/LearningElementsDropdown";
 import ErrorModalManager from "../ErrorModalManager/ErrorModalManager";
 import MoodleLoginForm from "../MoodleLoginForm/MoodleLoginForm";
+import BottomTooltip from "../BottomTooltip/BottomTooltip";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <BabylonCanvas className="w-screen h-screen" />
         <LearningElementModal />
         <MoodleLoginForm />
+        <BottomTooltip />
         <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
           <h1>Bitte nutze den Landscape Modus!</h1>
         </StyledModal>

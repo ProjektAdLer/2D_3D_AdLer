@@ -45,6 +45,14 @@ export default class LearningElementView implements ILearningElementView {
       // this.viewModel.meshes.Value.forEach((mesh) => mesh.dispose());
       await this.loadMeshAsync();
       this.registerAction(ActionManager.OnPickTrigger, this.controller.clicked);
+      this.registerAction(
+        ActionManager.OnPointerOverTrigger,
+        this.controller.pointerOver
+      );
+      this.registerAction(
+        ActionManager.OnPointerOutTrigger,
+        this.controller.pointerOut
+      );
       this.positionMesh();
     });
     viewModel.position.subscribe(() => {

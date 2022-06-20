@@ -13,6 +13,7 @@ import ScorePanelBuilder from "../../Presentation/React/ScorePanel/ScorePanelBui
 import ErrorModalManagerBuilder from "../../Presentation/React/ErrorModalManager/ErrorModalManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
 import MoodleLoginButtonBuilder from "../../Presentation/React/MoodleLoginButton/MoodleLoginButtonBuilder";
+import BottomTooltipBuilder from "../../Presentation/React/BottomTooltip/BottomTooltipBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -44,6 +45,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IMoodleLoginButtonBuilder).to(
     MoodleLoginButtonBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IBottomTooltipBuilder).to(
+    BottomTooltipBuilder
   );
 });
 

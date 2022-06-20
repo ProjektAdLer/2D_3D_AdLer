@@ -10,6 +10,7 @@ const BUILDER_TYPES = {
   ILearningElementsDropdownBuilder: Symbol("ILearningElementsDropdownBuilder"),
   IErrorModalManagerBuilder: Symbol("IErrorModalManagerBuilder"),
   IMoodleLoginButtonBuilder: Symbol("IMoodleLoginButtonBuilder"),
+  IBottomTooltipBuilder: Symbol("IBottomTooltipBuilder"),
 };
 
 export default BUILDER_TYPES;
