@@ -6,8 +6,7 @@ import {
   Vector3,
   HemisphericLight,
   GroundMesh,
-  FollowCamera,
-  ArcFollowCamera,
+  Color4,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { injectable } from "inversify";
@@ -24,6 +23,7 @@ export default class MainScene implements ICreateSceneClass {
     canvas: HTMLCanvasElement
   ): Promise<Scene> => {
     const scene = new Scene(engine);
+    scene.clearColor = new Color4(0, 0, 0, 1);
 
     this.setCamera(scene);
 
@@ -32,7 +32,7 @@ export default class MainScene implements ICreateSceneClass {
     new GroundMesh("Ground", scene);
 
     // TODO: move this somewhere else or wrap with some sort of environmental condition -MK
-    //scene.debugLayer.show();
+    // scene.debugLayer.show();
 
     return scene;
   };
