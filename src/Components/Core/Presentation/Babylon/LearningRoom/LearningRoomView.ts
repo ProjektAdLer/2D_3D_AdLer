@@ -1,6 +1,6 @@
 import { VertexData, StandardMaterial, Texture } from "@babylonjs/core";
 import LearningRoomViewModel from "./LearningRoomViewModel";
-import floorTexture from "../../../../../Assets/wooden_floor.png";
+import floorTexture from "../../../../../Assets/Texture_Floor_Wood.png";
 import ILearningRoomController from "./ILearningRoomController";
 import ILearningRoomView from "./ILearningRoomView";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
