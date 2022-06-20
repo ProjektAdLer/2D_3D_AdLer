@@ -28,6 +28,9 @@ export default function MenuBar() {
       >
         <img className="w-10" src="icons/fullscreen-icon.svg"></img>
       </StyledButton>
+      <StyledButton>
+        <img className="w-10" src="icons/user-icon.svg"></img>
+      </StyledButton>
     </StyledContainer>
   );
 }
