@@ -20,7 +20,7 @@ export default function MoodleLoginForm() {
   const [password, setPassword] = useState("");
 
   return (
-    <StyledContainer className="bottom-0 left-0 flex">
+    <StyledContainer className="bg-adlergold bottom-0 left-0 flex">
       <div className="login-screen flex flex-col justify-center gap-2">
         <div className="app-title flex justify-center text-white lg:text-2xl font-bold">
           <h1>{viewModels[0]?.test.Value}</h1>

@@ -9,7 +9,7 @@ export default function StyledContainer({
     <div
       className={
         className +
-        " button-container w-fit fixed h-fit flex gap-2 p-2 m-3 bg-adlergold rounded-lg items-center"
+        " button-container w-fit fixed h-fit flex gap-2 p-2 m-3 rounded-lg items-center"
       }
       {...restProps}
     >
