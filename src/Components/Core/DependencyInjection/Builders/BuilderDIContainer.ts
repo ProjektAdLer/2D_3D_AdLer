@@ -10,7 +10,7 @@ import LearningElementModalBuilder from "../../Presentation/React/LearningElemen
 import LearningElementsDropdownBuilder from "../../Presentation/React/LearningElementsDropdown/LearningElementsDropdownBuilder";
 import MoodleLoginFormBuilder from "../../Presentation/React/MoodleLoginForm/MoodleLoginFormBuilder";
 import ScorePanelBuilder from "../../Presentation/React/ScorePanel/ScorePanelBuilder";
-import ErrorModalManagerBuilder from "../../Presentation/React/ErrorModalManager/ErrorModalManagerBuilder";
+import ModalManagerBuilder from "../../Presentation/React/ModalManager/ModalManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
 import MoodleLoginButtonBuilder from "../../Presentation/React/MoodleLoginButton/MoodleLoginButtonBuilder";
 import BottomTooltipBuilder from "../../Presentation/React/BottomTooltip/BottomTooltipBuilder";
@@ -41,7 +41,7 @@ const BuilderDIContainer = new ContainerModule((bind) => {
     LearningElementsDropdownBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IErrorModalManagerBuilder).to(
-    ErrorModalManagerBuilder
+    ModalManagerBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IMoodleLoginButtonBuilder).to(
     MoodleLoginButtonBuilder
