@@ -82,7 +82,6 @@ export default class DoorView {
 
   private positionMesh(): void {
     if (this.viewModel.meshes.Value && this.viewModel.meshes.Value.length > 0) {
-      console.log("this viewmodel meshes", this.viewModel.meshes);
       this.viewModel.meshes.Value[0].position = this.viewModel.position.Value;
       //Placeholder Positioning of inner door. ~FK
       this.viewModel.meshes.Value[1].position = new Vector3(0, 0, 0.47);
