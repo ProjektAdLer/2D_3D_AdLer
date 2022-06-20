@@ -10,7 +10,7 @@ export default class LearningRoomViewModel {
   );
   public roomWidth: Observable<number> = new Observable(10);
   public roomLength: Observable<number> = new Observable(10);
-  public baseHeight: Observable<number> = new Observable(0.5);
+  public baseHeight: Observable<number> = new Observable(-0.1);
   public roomHeight: Observable<number> = new Observable(1.5);
   public doorWidth: Observable<number> = new Observable(1.0);
   public doorHeight: Observable<number> = new Observable(2.19);
