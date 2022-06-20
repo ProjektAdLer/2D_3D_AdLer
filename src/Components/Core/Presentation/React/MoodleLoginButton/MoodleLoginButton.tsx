@@ -21,7 +21,7 @@ export default function MoodleLoginButton() {
     >
       <img
         className="w-10"
-        src="icons/user-icon.svg"
+        src="icons/moodle-icon.svg"
         style={loginSuccessful ? { background: "green" } : {}}
       ></img>
     </StyledButton>
