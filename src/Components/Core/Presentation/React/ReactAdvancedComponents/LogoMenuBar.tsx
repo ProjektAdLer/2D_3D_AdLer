@@ -18,19 +18,6 @@ export default function LogoMenuBar() {
       >
         <MenuBar />
         <MoodleLoginForm />
-        <p
-          style={{
-            fontSize: "0.8rem",
-          }}
-        >
-          Hier ist der Content des Dropdowns, <br />
-          Login und Menübar sind nicht drin,
-          <br />
-          weil sie mit Tailwind
-          <br /> absolut positioniert wurden
-          <br /> zu finden in: LegoMenuBar.tsx
-          <br /> oder LearningElementsDropdown.tsx
-        </p>
       </CustomDropdown>
     </StyledContainer>
   );
