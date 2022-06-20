@@ -12,6 +12,7 @@ import MoodleLoginFormBuilder from "../../Presentation/React/MoodleLoginForm/Moo
 import ScorePanelBuilder from "../../Presentation/React/ScorePanel/ScorePanelBuilder";
 import ErrorModalManagerBuilder from "../../Presentation/React/ErrorModalManager/ErrorModalManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
+import MoodleLoginButtonBuilder from "../../Presentation/React/MoodleLoginButton/MoodleLoginButtonBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -40,6 +41,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IErrorModalManagerBuilder).to(
     ErrorModalManagerBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IMoodleLoginButtonBuilder).to(
+    MoodleLoginButtonBuilder
   );
 });
 

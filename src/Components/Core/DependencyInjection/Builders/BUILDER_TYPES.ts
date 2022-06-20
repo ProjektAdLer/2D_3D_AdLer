@@ -9,6 +9,7 @@ const BUILDER_TYPES = {
   IAvatarBuilder: Symbol("IAvatarBuilder"),
   ILearningElementsDropdownBuilder: Symbol("ILearningElementsDropdownBuilder"),
   IErrorModalManagerBuilder: Symbol("IErrorModalManagerBuilder"),
+  IMoodleLoginButtonBuilder: Symbol("IMoodleLoginButtonBuilder"),
 };
 
 export default BUILDER_TYPES;

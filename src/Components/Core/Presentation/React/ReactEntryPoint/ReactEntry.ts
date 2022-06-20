@@ -49,7 +49,11 @@ export default class ReactEntry implements IReactEntry {
     director.Builder = CoreDIContainer.get<IPresentationBuilder>(
       BUILDER_TYPES.IErrorModalManagerBuilder
     );
+    director.build();
 
+    director.Builder = CoreDIContainer.get<IPresentationBuilder>(
+      BUILDER_TYPES.IMoodleLoginButtonBuilder
+    );
     director.build();
   }
 }
