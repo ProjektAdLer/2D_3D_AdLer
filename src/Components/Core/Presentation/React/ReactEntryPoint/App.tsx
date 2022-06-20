@@ -14,18 +14,19 @@ import MoodleLoginForm from "../MoodleLoginForm/MoodleLoginForm";
 function App() {
   return (
     <React.Fragment>
-      <MoodleLoginForm />
       <div className="root max-w-1/1 max-h-1/1 bg-babylonbg">
-        <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
-          <h1>Bitte nutze den Landscape Modus!</h1>
-        </StyledModal>
         <LogoMenuBar />
         <LearningElementsDropdown />
         <ScorePanel />
         <WorldNamePanel />
         <BabylonCanvas className="w-screen h-screen" />
         <LearningElementModal />
+        <MoodleLoginForm />
+        <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
+          <h1>Bitte nutze den Landscape Modus!</h1>
+        </StyledModal>
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
+        {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
         <ErrorModalManager />
       </div>
     </React.Fragment>
