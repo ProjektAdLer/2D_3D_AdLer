@@ -33,8 +33,14 @@ export default function MenuBar() {
         <img className="w-10" src="icons/fullscreen-icon.svg"></img>
       </StyledButton>
       <MoodleLoginButton />
+      <StyledButton onClick={debug}>
+        <img
+          className="w-10"
+          src="icons/download_file_moodle.svg"
+          alt="Download File from Moodle"
+        ></img>
+      </StyledButton>
       <DebugPanel />
-      <StyledButton onClick={debug}>Download file from Moodle</StyledButton>
     </StyledContainer>
   );
 }
