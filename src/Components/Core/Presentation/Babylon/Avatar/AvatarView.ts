@@ -1,10 +1,12 @@
 import {
-  ArcFollowCamera,
+  ArcRotateCamera,
+  ArcRotateCameraPointersInput,
   Axis,
   LinesMesh,
   Mesh,
   MeshBuilder,
   Quaternion,
+  TransformNode,
   Vector3,
 } from "@babylonjs/core";
 import bind from "bind-decorator";
@@ -39,6 +41,11 @@ export default class AvatarView {
   }
 
   private async loadAvatarAsync(): Promise<void> {
+    this.viewModel.parentNode.Value = new TransformNode(
+      "AvatarParentNode",
+      this.scenePresenter.Scene
+    );
+
     await this.loadMeshAsync();
     this.createCamera();
   }
@@ -48,7 +55,7 @@ export default class AvatarView {
     this.viewModel.agentIndex = this.navigation.Crowd.addAgent(
       this.viewModel.meshes.Value[0].position,
       this.viewModel.agentParams,
-      this.viewModel.meshes.Value[0]
+      this.viewModel.parentNode.Value
     );
     this.scenePresenter.Scene.onBeforeRenderObservable.add(this.moveAvatar);
 
@@ -62,6 +69,11 @@ export default class AvatarView {
       modelLink
     )) as Mesh[];
 
+    this.viewModel.meshes.Value[0].setParent(this.viewModel.parentNode.Value);
+
+    // place model 0.1 above the ground ~ FK
+    this.viewModel.meshes.Value[0].position = new Vector3(0, 0.05, 0);
+    this.viewModel.meshes.Value[0].scaling = new Vector3(1, 1, -1);
     this.viewModel.meshes.Value.forEach(
       (mesh) => (mesh.rotationQuaternion = null)
     );
@@ -71,8 +83,6 @@ export default class AvatarView {
       0,
       1
     );
-    // place model 0.1 above the ground ~ FK
-    this.viewModel.meshes.Value[0].position = new Vector3(0, 0.1, 0);
   }
 
   // temporary until babylon component is better structured
@@ -88,6 +98,7 @@ export default class AvatarView {
     );
     camera.upperBetaLimit = Math.PI / 2;
 
+    // camera.inputs.attached.mousewheel.attachControl();
     camera.inputs.attached.pointers.attachControl();
     // only rotate with the left mouse button (index: 0)
     (camera.inputs.attached.pointers as ArcRotateCameraPointersInput).buttons =
