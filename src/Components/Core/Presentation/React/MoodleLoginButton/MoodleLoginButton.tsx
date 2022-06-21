@@ -20,7 +20,7 @@ export default function MoodleLoginButton() {
       }}
     >
       <img
-        className="w-10"
+        className="w-10 rounded-lg"
         src="icons/moodle-icon.svg"
         style={loginSuccessful ? { background: "green" } : {}}
       ></img>
