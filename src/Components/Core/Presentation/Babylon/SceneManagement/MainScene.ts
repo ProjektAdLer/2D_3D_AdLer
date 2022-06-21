@@ -23,7 +23,7 @@ export default class MainScene implements ICreateSceneClass {
     canvas: HTMLCanvasElement
   ): Promise<Scene> => {
     const scene = new Scene(engine);
-    scene.clearColor = new Color4(0.91, 0.53, 0.45, 1);
+    scene.clearColor = new Color4(0.66, 0.83, 0.98, 1);
 
     this.setCamera(scene);
 
