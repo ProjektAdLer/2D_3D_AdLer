@@ -1,18 +1,21 @@
+import bind from "bind-decorator";
 import { injectable } from "inversify";
-import IDebugPanelPresenter from "../../Presentation/React/DebugPanel/IDebugPanelPresenter";
+import type IDebugPanelPresenter from "../../Presentation/React/DebugPanel/IDebugPanelPresenter";
 import IDebugPort from "./IDebugPort";
 
 @injectable()
 export default class DebugPort implements IDebugPort {
+  private debugPanelPresenter: IDebugPanelPresenter;
+  @bind
   setUserToken(userToken: string): void {
     if (!this.debugPanelPresenter) {
       throw new Error("DebugPanelPresenter is not registered");
     }
 
-    // call the presenter to set the user token
+    this.debugPanelPresenter.setMoodleToken(userToken);
   }
-  private debugPanelPresenter: IDebugPanelPresenter;
 
+  @bind
   public registerDebugPanelPresenter(
     debugPanelPresenter: IDebugPanelPresenter
   ): void {

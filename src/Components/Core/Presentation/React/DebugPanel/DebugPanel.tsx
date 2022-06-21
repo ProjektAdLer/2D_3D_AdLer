@@ -1,27 +1,30 @@
+import useObservable from "../CustomHooks/useObservable";
 import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
-import div from "../ReactBaseComponents/StyledContainer";
 import DebugPanelController from "./DebugPanelController";
 import DebugPanelViewModel from "./DebugPanelViewModel";
 
 export default function DebugPanel() {
-  const [viewModels, controllers] = useViewModelControllerProvider<
+  const [viewModels] = useViewModelControllerProvider<
     DebugPanelViewModel,
     DebugPanelController
   >(DebugPanelViewModel);
+
+  const [moodleToken] = useObservable<string>(viewModels[0]?.moodleToken);
+
   return (
     /*
     Hi Daniel,
     das div "trennungsstrich" soll ein horizontaler Strich sein, um Kategoreieren voneinander zu trennen.(also zum beispiel Moodle und Babylon informationen)
 
-    kann auch gerne in dem debug menü unter dem adler logo versteckt sein
+    kann auch gerne in dem debug menü unter dem adler logo versteckt sein. Sollte aber fix an der links unteren ecke sein, da die informationen teilweise recht lang sind.
     */
     <div>
       <ul>
-        <li>Eintrag 1</li>
+        <li>Moodle Token: {moodleToken}</li>
         <li>Eintrag 2</li>
         <li>Eintrag 3</li>
-        <li>Eintrag 4</li>
         <div className="trennungsstrich"></div>
+        <li>Eintrag 4</li>
       </ul>
     </div>
   );

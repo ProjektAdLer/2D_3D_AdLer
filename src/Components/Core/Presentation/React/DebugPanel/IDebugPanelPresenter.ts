@@ -1,1 +1,3 @@
-export default interface IDebugPanelPresenter {}
+export default interface IDebugPanelPresenter {
+  setMoodleToken(moodleToken: string): void;
+}

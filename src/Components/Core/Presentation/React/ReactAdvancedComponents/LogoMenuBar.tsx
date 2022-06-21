@@ -1,4 +1,3 @@
-import MoodleLoginForm from "../MoodleLoginForm/MoodleLoginForm";
 import CustomDropdown from "../ReactBaseComponents/CustomDropdown";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import MenuBar from "./MenuBar";
