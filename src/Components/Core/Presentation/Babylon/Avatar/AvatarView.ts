@@ -1,10 +1,12 @@
 import {
-  ArcFollowCamera,
+  ArcRotateCamera,
+  ArcRotateCameraPointersInput,
   Axis,
   LinesMesh,
   Mesh,
   MeshBuilder,
   Quaternion,
+  TransformNode,
   Vector3,
 } from "@babylonjs/core";
 import bind from "bind-decorator";
@@ -39,6 +41,11 @@ export default class AvatarView {
   }
 
   private async loadAvatarAsync(): Promise<void> {
+    this.viewModel.parentNode.Value = new TransformNode(
+      "AvatarParentNode",
+      this.scenePresenter.Scene
+    );
+
     await this.loadMeshAsync();
     this.createCamera();
   }
@@ -48,7 +55,7 @@ export default class AvatarView {
     this.viewModel.agentIndex = this.navigation.Crowd.addAgent(
       this.viewModel.meshes.Value[0].position,
       this.viewModel.agentParams,
-      this.viewModel.meshes.Value[0]
+      this.viewModel.parentNode.Value
     );
     this.scenePresenter.Scene.onBeforeRenderObservable.add(this.moveAvatar);
 
@@ -62,6 +69,11 @@ export default class AvatarView {
       modelLink
     )) as Mesh[];
 
+    this.viewModel.meshes.Value[0].setParent(this.viewModel.parentNode.Value);
+
+    // place model 0.1 above the ground ~ FK
+    this.viewModel.meshes.Value[0].position = new Vector3(0, 0.05, 0);
+    this.viewModel.meshes.Value[0].scaling = new Vector3(1, 1, -1);
     this.viewModel.meshes.Value.forEach(
       (mesh) => (mesh.rotationQuaternion = null)
     );
@@ -71,28 +83,37 @@ export default class AvatarView {
       0,
       1
     );
-    // place model 0.1 above the ground ~ FK
-    this.viewModel.meshes.Value[0].position = new Vector3(0, 0.1, 0);
   }
 
   // temporary until babylon component is better structured
   private createCamera(): void {
     // Set FollowCamera to follow the avatar (~FK):
-    let camera = new ArcFollowCamera(
-      "ArcFollowCamera",
-      0,
+    let camera = new ArcRotateCamera(
+      "AvatarCamera",
+      Math.PI / 4,
       Math.PI / 4,
       20,
-      this.viewModel.meshes.Value[0],
+      this.viewModel.parentNode.Value.position,
       this.scenePresenter.Scene
     );
+    camera.upperBetaLimit = Math.PI / 2;
+
+    // camera.inputs.attached.mousewheel.attachControl();
+    camera.inputs.attached.pointers.attachControl();
+    // only rotate with the left mouse button (index: 0)
+    (camera.inputs.attached.pointers as ArcRotateCameraPointersInput).buttons =
+      [0];
+
+    console.log(camera.inputs.attached);
+
+    camera.parent = this.viewModel.parentNode.Value;
     this.scenePresenter.Scene.activeCamera = camera;
   }
 
   @bind
   private moveAvatar(): void {
     if (this.viewModel.meshes.Value.length > 0) {
-      this.viewModel.meshes.Value[0].position =
+      this.viewModel.parentNode.Value.position =
         this.navigation.Crowd.getAgentPosition(this.viewModel.agentIndex);
       let velocity = this.navigation.Crowd.getAgentVelocity(
         this.viewModel.agentIndex
@@ -102,12 +123,12 @@ export default class AvatarView {
         velocity.normalize();
         let desiredRotation = Math.atan2(velocity.x, velocity.z);
 
-        debug_displayVelocity(
-          this.viewModel,
-          this.scenePresenter,
-          velocity,
-          desiredRotation
-        );
+        // debug_displayVelocity(
+        //   this.viewModel,
+        //   this.scenePresenter,
+        //   velocity,
+        //   desiredRotation
+        // );
 
         this.viewModel.meshes.Value[0].rotationQuaternion =
           Quaternion.RotationAxis(Axis.Y, desiredRotation);
@@ -128,8 +149,8 @@ let debug_displayVelocity = (
 ): void => {
   if (counter % 10 === 0) {
     let points: Vector3[] = [
-      viewModel.meshes.Value[0].position,
-      viewModel.meshes.Value[0].position.add(velocity),
+      viewModel.parentNode.Value.position,
+      viewModel.parentNode.Value.position.add(velocity),
     ];
     velocityLine = MeshBuilder.CreateDashedLines(
       "avatar velocity",

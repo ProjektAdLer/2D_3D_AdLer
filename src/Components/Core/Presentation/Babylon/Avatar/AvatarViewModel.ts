@@ -1,8 +1,9 @@
-import { IAgentParameters, Mesh } from "@babylonjs/core";
+import { IAgentParameters, Mesh, TransformNode } from "@babylonjs/core";
 import Observable from "../../../../../Lib/Observable";
 
 export default class AvatarViewModel {
   public meshes = new Observable<Mesh[]>([]);
+  public parentNode = new Observable<TransformNode>();
 
   public agentIndex: number;
   public agentParams: IAgentParameters = {

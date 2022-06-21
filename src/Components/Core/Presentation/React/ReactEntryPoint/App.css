@@ -27,6 +27,9 @@
   .text-shadow{
     text-shadow: 2px 2px 0.5px rgb(23,45,77);
   }
+  .text-shadow-sm{
+    text-shadow: 1px 1px 0.5px rgb(23,45,77);
+  }
 }
 
 /*Styles für die Anzeige des Inspectors*/
