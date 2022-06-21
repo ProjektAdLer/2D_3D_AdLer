@@ -82,8 +82,6 @@ export default class DoorView {
 
   private positionMesh(): void {
     if (this.viewModel.meshes.Value && this.viewModel.meshes.Value.length > 0) {
-      console.log(this.viewModel.position.Value);
-
       this.viewModel.meshes.Value[0].position = this.viewModel.position.Value;
       this.viewModel.meshes.Value[0].rotation = new Vector3(
         0.0,
