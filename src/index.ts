@@ -7,3 +7,11 @@ import "./Components/Core/Types/array.extensions";
 const reactEntry = CoreDIContainer.get<IReactEntry>(CORE_TYPES.ICoreRenderer);
 
 reactEntry.setupReact();
+
+window.addEventListener(
+  "message",
+  (event) => {
+    if (event.origin === "https://moodle.cluuub.xyz") console.log(event);
+  },
+  false
+);

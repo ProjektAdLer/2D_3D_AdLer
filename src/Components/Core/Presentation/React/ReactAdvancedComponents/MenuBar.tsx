@@ -4,6 +4,7 @@ import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
 
 import MoodleLoginButton from "../MoodleLoginButton/MoodleLoginButton";
 import DebugPanel from "../DebugPanel/DebugPanel";
+import axios from "axios";
 
 export default function MenuBar() {
   const loadWorldController = new LoadWorldController();
@@ -33,6 +34,22 @@ export default function MenuBar() {
       </StyledButton>
       <MoodleLoginButton />
       <DebugPanel />
+      <StyledButton onClick={debug}>Download file from Moodle</StyledButton>
     </StyledContainer>
   );
 }
+
+const debug = () => {
+  axios({
+    url: "https://moodle.cluuub.xyz/webservice/pluginfile.php/278/mod_h5pactivity/package/0/Metriken%20Teil%201.h5p?token=86215250e2e449dccec1559ff8629b17", //your url
+    method: "GET",
+    responseType: "blob", // important
+  }).then((response) => {
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "file.h5p"); //or any other extension
+    document.body.appendChild(link);
+    link.click();
+  });
+};
