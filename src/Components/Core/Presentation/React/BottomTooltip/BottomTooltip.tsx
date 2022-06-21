@@ -34,7 +34,7 @@ export default function BottomTooltip() {
 
   return (
     <div className="flex justify-center items-end">
-      <StyledContainer className="text-white text-2xl fixed bg-adlerblue">
+      <StyledContainer className="text-white roboto-black text-shadow text-2xl fixed bg-adlerblue">
         {getIcon(type)}
         {text}
       </StyledContainer>

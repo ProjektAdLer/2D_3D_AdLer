@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer components {
+  .roboto-black {
+    font-family: "roboto";
+    font-weight: 900;
+  }
   .h90vh {
     height: 90vh;
   }
@@ -19,6 +23,9 @@
   }
   .h-90pro {
     height: 90%;
+  }
+  .text-shadow{
+    text-shadow: 2px 2px 0.5px rgb(23,45,77);
   }
 }
 

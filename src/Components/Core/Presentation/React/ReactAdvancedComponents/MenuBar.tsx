@@ -9,7 +9,7 @@ export default function MenuBar() {
   const loadWorldController = new LoadWorldController();
 
   return (
-    <StyledContainer className="flex flex-col">
+    <StyledContainer className="flex flex-col ml-0">
       <StyledButton
         onClick={async () => {
           await loadWorldController.loadWorld();

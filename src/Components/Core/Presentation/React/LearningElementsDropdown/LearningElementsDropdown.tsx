@@ -39,7 +39,7 @@ export default function LearningElementsDropdown() {
 
   const [dropDownOpen, setDropDownOpen] = useState(false);
   return (
-    <div className="top-6 left-64 fixed flex flex-col rounded-lg p-2">
+    <div className="top-6 left-64 fixed flex flex-col rounded-lg">
       <CustomDropdown
         headerElement={
           <StyledButton
@@ -47,7 +47,7 @@ export default function LearningElementsDropdown() {
               setDropDownOpen(!dropDownOpen);
             }}
           >
-            <h2 className="text-white text-2xl">Lernelemente</h2>
+            <h2 className="text-white text-2xl text-shadow">Lernelemente</h2>
           </StyledButton>
         }
         isOpen={dropDownOpen}
