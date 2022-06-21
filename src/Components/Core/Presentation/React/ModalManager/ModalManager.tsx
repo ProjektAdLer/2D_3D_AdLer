@@ -30,13 +30,8 @@ export default function ModalManager() {
     <StyledModal
       showModal={notifications?.length > 0}
       title={getTypeString(notifications[notifications?.length - 1].type)}
-      footer="Error aus ErrorModalManager.tsx"
       onClose={() => {
-        setNotifications(
-          notifications.filter(
-            (error) => error !== notifications[notifications?.length - 1]
-          )
-        );
+        setNotifications(notifications.splice(0, -1));
       }}
     >
       {notifications[notifications?.length - 1].message}
