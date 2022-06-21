@@ -11,6 +11,7 @@ import LearningElementsDropdown from "../LearningElementsDropdown/LearningElemen
 import ModalManager from "../ModalManager/ModalManager";
 import MoodleLoginForm from "../MoodleLoginForm/MoodleLoginForm";
 import BottomTooltip from "../BottomTooltip/BottomTooltip";
+import H5PPlayer from "../H5PPlayer/H5PPlayer";
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
         <ModalManager />
+        <StyledModal showModal={false}>
+          <H5PPlayer />
+        </StyledModal>
       </div>
     </React.Fragment>
   );
