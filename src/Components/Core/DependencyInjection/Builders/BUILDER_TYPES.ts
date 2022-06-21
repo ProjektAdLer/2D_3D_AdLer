@@ -11,6 +11,7 @@ const BUILDER_TYPES = {
   IErrorModalManagerBuilder: Symbol("IErrorModalManagerBuilder"),
   IMoodleLoginButtonBuilder: Symbol("IMoodleLoginButtonBuilder"),
   IBottomTooltipBuilder: Symbol("IBottomTooltipBuilder"),
+  IDebugPanelBuilder: Symbol("IDebugPanelBuilder"),
 };
 
 export default BUILDER_TYPES;

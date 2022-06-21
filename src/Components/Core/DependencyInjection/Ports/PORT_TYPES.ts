@@ -5,6 +5,7 @@ const PORT_TYPES = {
   IMoodlePort: Symbol("IMoodlePort"),
   IAvatarPort: Symbol("IAvatarPort"),
   IUIPort: Symbol("IUIPort"),
+  IDebugPort: Symbol("IDebugPort"),
 };
 
 export default PORT_TYPES;

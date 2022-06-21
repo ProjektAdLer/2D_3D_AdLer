@@ -3,6 +3,7 @@ import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import { LoadWorldController } from "../LoadWorldButton/LoadWorldController";
 
 import MoodleLoginButton from "../MoodleLoginButton/MoodleLoginButton";
+import DebugPanel from "../DebugPanel/DebugPanel";
 
 export default function MenuBar() {
   const loadWorldController = new LoadWorldController();
@@ -31,6 +32,7 @@ export default function MenuBar() {
         <img className="w-10" src="icons/fullscreen-icon.svg"></img>
       </StyledButton>
       <MoodleLoginButton />
+      <DebugPanel />
     </StyledContainer>
   );
 }

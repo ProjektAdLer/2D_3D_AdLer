@@ -3,6 +3,8 @@ import ILearningRoomPort from "../../Application/CalculateTotalRoomScore/ILearni
 import ILearningElementPort from "../../Application/LearningElementStarted/ILearningElementPort";
 import IAvatarPort from "../../Application/LoadAvatar/IAvatarPort";
 import ILearningWorldPort from "../../Application/LoadWorld/ILearningWorldPort";
+import DebugPort from "../../Ports/DebugPort/DebugPort";
+import IDebugPort from "../../Ports/DebugPort/IDebugPort";
 import LearningElementPort from "../../Ports/LearningElementPort/LearningElementPort";
 import LearningRoomPort from "../../Ports/LearningRoomPort/LearningRoomPort";
 import LearningWorldPort from "../../Ports/LearningWorldPort/LearningWorldPort";
@@ -34,6 +36,7 @@ const PortsDIContainer = new ContainerModule((bind) => {
     .inSingletonScope();
 
   bind<IUIPort>(PORT_TYPES.IUIPort).to(UIPort).inSingletonScope();
+  bind<IDebugPort>(PORT_TYPES.IDebugPort).to(DebugPort).inSingletonScope();
 });
 
 export default PortsDIContainer;
