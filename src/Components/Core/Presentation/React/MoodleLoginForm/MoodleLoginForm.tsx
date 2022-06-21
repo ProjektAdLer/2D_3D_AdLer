@@ -24,6 +24,10 @@ export default function MoodleLoginForm() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
+  const handeSubmit = async () => {
+    await controllers[0].loginAsync(userName, password);
+  };
+
   return (
     <StyledModal
       showModal={modalVisible}
@@ -32,7 +36,13 @@ export default function MoodleLoginForm() {
       }}
     >
       <StyledContainer className="bg-adlergold ">
-        <div className="login-screen flex flex-col justify-center gap-2">
+        <form
+          className="login-screen flex flex-col justify-center gap-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handeSubmit();
+          }}
+        >
           <div className="app-title flex justify-center text-white lg:text-2xl font-bold">
             <h1>In Moodle einloggen</h1>
           </div>
@@ -51,11 +61,7 @@ export default function MoodleLoginForm() {
             }}
           />
 
-          <StyledButton
-            onClick={async () => {
-              await controllers[0].loginAsync(userName, password);
-            }}
-          >
+          <StyledButton onClick={handeSubmit}>
             <p>Login</p>
           </StyledButton>
 
@@ -67,7 +73,7 @@ export default function MoodleLoginForm() {
             <p className="text-xs">Passwort vergessen?</p>
           </StyledButton>
           <h3>User-Token: {userToken}</h3>
-        </div>
+        </form>
       </StyledContainer>
     </StyledModal>
   );
