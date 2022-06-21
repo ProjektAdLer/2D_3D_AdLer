@@ -11,7 +11,7 @@ export default function ScorePanel() {
   const [score] = useObservable<number>(viewModels[0]?.score);
 
   return (
-    <StyledContainer className="fixed top-0 right-0 p-13 text-4xl text-white text-shadow font-extrabold bg-transparent">
+    <StyledContainer className="text-4xl text-white text-shadow font-extrabold bg-transparent">
       {score ? score : 0}
       <img
         src="icons/coin_icon.svg"
