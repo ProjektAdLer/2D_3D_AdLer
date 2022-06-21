@@ -17,7 +17,7 @@ export default function MenuBar() {
           // await loadWorldController.loadAvatar();
         }}
       >
-        <img className="w-10" src="icons/debug-icon.svg"></img>
+        <img className="w-6 lg:w-10" src="icons/debug-icon.svg"></img>
       </StyledButton>
       <StyledButton
         onClick={() => {
@@ -30,12 +30,12 @@ export default function MenuBar() {
           }
         }}
       >
-        <img className="w-10" src="icons/fullscreen-icon.svg"></img>
+        <img className="w-6 lg:w-10" src="icons/fullscreen-icon.svg"></img>
       </StyledButton>
       <MoodleLoginButton />
       <StyledButton onClick={debug}>
         <img
-          className="w-10"
+          className="w-6 lg:w-10"
           src="icons/download_file_moodle.svg"
           alt="Download File from Moodle"
         ></img>

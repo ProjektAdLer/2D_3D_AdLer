@@ -14,10 +14,10 @@ export default function WorldNamePanel() {
     viewModel[0]?.worldNameLoading
   );
   return (
-    <div className="flex justify-center">
+    <div className="">
       {(worldNameLoading || worldName) && (
-        <StyledContainer className="fixed flex p-13 text-4xl font-extrabold text-white text-shadow whitespace-nowrap">
-          <img className="w-16" src="icons/lernraum_icon.svg"></img>
+        <StyledContainer className="p-13 text-xl lg:text-4xl font-extrabold text-white text-shadow whitespace-nowrap">
+          <img className="w-8 lg:w-16" src="icons/lernraum_icon.svg"></img>
           <LearningWorldComponent
             worldName={worldName}
             worldNameLoading={worldNameLoading}
