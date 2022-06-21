@@ -1,6 +1,6 @@
 import { VertexData, StandardMaterial, Texture } from "@babylonjs/core";
 import LearningRoomViewModel from "./LearningRoomViewModel";
-import floorTexture from "../../../../../Assets/wooden_floor.png";
+import floorTexture from "../../../../../Assets/Texture_Floor_Parquet3.png";
 import ILearningRoomController from "./ILearningRoomController";
 import ILearningRoomView from "./ILearningRoomView";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
@@ -93,6 +93,8 @@ export default class LearningRoomView implements ILearningRoomView {
       floorTexture,
       this.scenePresenter.Scene
     );
+    (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).uScale = 2;
+    (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 2;
     this.viewModel.floorMesh.Value.material =
       this.viewModel.floorMaterial.Value;
   }

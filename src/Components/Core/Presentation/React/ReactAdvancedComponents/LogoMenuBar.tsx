@@ -5,7 +5,7 @@ import MenuBar from "./MenuBar";
 
 export default function LogoMenuBar() {
   return (
-    <StyledContainer className="top-0 left-0 bg-transparent flex flex-col justify-center">
+    <StyledContainer className="fixed top-0 left-0 bg-transparent">
       <CustomDropdown
         headerElement={
           <img
