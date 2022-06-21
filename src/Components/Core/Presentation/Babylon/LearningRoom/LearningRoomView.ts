@@ -1,4 +1,11 @@
-import { VertexData, StandardMaterial, Texture } from "@babylonjs/core";
+import {
+  Path2,
+  Vector2,
+  VertexData,
+  StandardMaterial,
+  Texture,
+  PolygonMeshBuilder,
+} from "@babylonjs/core";
 import LearningRoomViewModel from "./LearningRoomViewModel";
 import floorTexture from "../../../../../Assets/Texture_Floor_Parquet3.png";
 import ILearningRoomController from "./ILearningRoomController";
@@ -6,6 +13,8 @@ import ILearningRoomView from "./ILearningRoomView";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
+import * as earcut from "earcut";
+(window as any).earcut = earcut;
 
 export default class LearningRoomView implements ILearningRoomView {
   private scenePresenter: IScenePresenter;
@@ -43,6 +52,9 @@ export default class LearningRoomView implements ILearningRoomView {
     this.viewModel.doorWidth.subscribe(() => {
       this.createWalls();
     });
+    this.viewModel.roomCornerPoints.subscribe(() => {
+      this.displayRoom();
+    });
 
     // TODO: setup subscription cancellations
 
@@ -53,8 +65,37 @@ export default class LearningRoomView implements ILearningRoomView {
   private displayRoom(): void {
     this.createWalls();
     this.createFloor();
+
+    //creating floor via roomCornerPoints ~FK
+    //this.createFloorViaCorners();
   }
 
+  private createFloorViaCorners(): void {
+    if (!this.viewModel)
+      throw new Error(
+        "ViewModel not set. Use the ViewModel setter before calling this method"
+      );
+    const cornerCount = this.viewModel.roomCornerPoints.Value.length;
+    if (cornerCount < 3)
+      throw new Error(
+        "Not enough corners found to generate floor. Please review the Roomdata."
+      );
+    const startCorner = Object.values(this.viewModel.roomCornerPoints.Value[0]);
+    let polyPath = new Path2(startCorner[0], startCorner[1]);
+    for (let i = 0; i++; i < cornerCount) {
+      if (i > 0) {
+        const corner = Object.values(this.viewModel.roomCornerPoints.Value[i]);
+        polyPath.addLineTo(corner[0], corner[1]);
+      }
+    }
+    const polyMesh = new PolygonMeshBuilder(
+      "FloorPolyMesh",
+      this.viewModel.roomCornerPoints.Value
+    );
+    const floor2 = polyMesh.build();
+    //todo: normals, uvs
+    this.viewModel.floorMesh.Value = floor2;
+  }
   private createFloor(): void {
     if (!this.viewModel)
       throw new Error(
