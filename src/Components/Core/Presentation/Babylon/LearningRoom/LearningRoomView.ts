@@ -71,15 +71,18 @@ export default class LearningRoomView implements ILearningRoomView {
   }
 
   private createFloorViaCorners(): void {
+    // Check if viewModel is set
     if (!this.viewModel)
       throw new Error(
         "ViewModel not set. Use the ViewModel setter before calling this method"
       );
+    // Check if cornerCount is higher than 2
     const cornerCount = this.viewModel.roomCornerPoints.Value.length;
     if (cornerCount < 3)
       throw new Error(
         "Not enough corners found to generate floor. Please review the Roomdata."
       );
+    // Create Mesh
     const startCorner = Object.values(this.viewModel.roomCornerPoints.Value[0]);
     let polyPath = new Path2(startCorner[0], startCorner[1]);
     for (let i = 0; i++; i < cornerCount) {
@@ -92,9 +95,25 @@ export default class LearningRoomView implements ILearningRoomView {
       "FloorPolyMesh",
       this.viewModel.roomCornerPoints.Value
     );
-    const floor2 = polyMesh.build();
-    //todo: normals, uvs
-    this.viewModel.floorMesh.Value = floor2;
+    if (!this.viewModel.floorMesh.Value) {
+      this.viewModel.floorMesh.Value = polyMesh.build();
+    }
+    // Floor Material
+    if (!this.viewModel.floorMaterial.Value) {
+      this.viewModel.floorMaterial.Value = new StandardMaterial(
+        "floorMaterial",
+        this.scenePresenter.Scene
+      );
+    }
+    // Floor texture
+    this.viewModel.floorMaterial.Value.diffuseTexture = new Texture(
+      floorTexture,
+      this.scenePresenter.Scene
+    );
+    (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).uScale = 2;
+    (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 2;
+    this.viewModel.floorMesh.Value.material =
+      this.viewModel.floorMaterial.Value;
   }
   private createFloor(): void {
     if (!this.viewModel)
