@@ -1,4 +1,4 @@
-import { Vector3 } from "@babylonjs/core";
+import { Vector2, Vector3 } from "@babylonjs/core";
 import { injectable } from "inversify";
 import { LearningRoomTO } from "../../../Application/LoadWorld/ILearningWorldPort";
 import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
@@ -30,6 +30,7 @@ export default class LearningRoomPresenter implements ILearningRoomPresenter {
     // set view model data
     this.viewModel.id = learningRoomTO.id;
     this.setRoomDimensions(learningRoomTO);
+    this.setRoomCornersSquare(learningRoomTO);
 
     let director = CoreDIContainer.get<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
@@ -72,6 +73,17 @@ export default class LearningRoomPresenter implements ILearningRoomPresenter {
       (learningRoomTO.learningElements.length / 2) * 4;
     this.viewModel.roomWidth.Value =
       learningRoomTO.learningElements.length > 1 ? 10 : 6;
+  }
+  private setRoomCornersSquare(learningRoomTO: LearningRoomTO): void {
+    const roomLength = this.viewModel.roomLength.Value;
+    const roomWidth = this.viewModel.roomWidth.Value;
+    const wallThickness = this.viewModel.wallThickness.Value;
+    this.viewModel.roomCornerPoints.Value = [
+      new Vector2(roomWidth + wallThickness, roomLength + wallThickness),
+      new Vector2(-roomWidth - wallThickness, roomLength + wallThickness),
+      new Vector2(-roomWidth - wallThickness, -roomLength - wallThickness),
+      new Vector2(roomWidth + wallThickness, -roomLength - wallThickness),
+    ];
   }
 
   private getLearningElementPositions(
