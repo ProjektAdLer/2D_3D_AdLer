@@ -33,7 +33,7 @@ export default function BottomTooltip() {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="grid justify-center">
       <StyledContainer className="text-white font-extrabold text-shadow text-2xl bg-adlerblue">
         {getIcon(type)}
         {text}

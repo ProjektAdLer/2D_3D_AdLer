@@ -32,7 +32,7 @@ function App() {
         <div className="col-start-1 col-span-5 row-start-1 row-span-3">
           <BabylonCanvas className="w-screen h-screen" />
         </div>
-        <div className="col-start-3 row-start-3 place-content-center z-10">
+        <div className="col-start-3 row-start-3 z-10">
           <BottomTooltip />
         </div>
         <div className="z-50">
