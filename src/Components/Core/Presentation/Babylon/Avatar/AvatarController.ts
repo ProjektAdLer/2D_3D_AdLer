@@ -20,6 +20,7 @@ export default class AvatarController implements IAvatarController {
     this.scenePresenter.Scene.onPointerObservable.add((pointerInfo) => {
       if (
         pointerInfo.type === PointerEventTypes.POINTERDOWN &&
+        pointerInfo.event.button === 2 &&
         pointerInfo.pickInfo?.hit
       ) {
         this.pointerDown();
