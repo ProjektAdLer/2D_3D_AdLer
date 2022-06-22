@@ -46,4 +46,10 @@ export default interface IScenePresenter {
    * @returns the newly created mesh
    */
   createMesh(name: string, isRelevantForNavigation?: boolean): Mesh;
+
+  /**
+   * Registers a mesh with the scene that need to be taken into consideration for navigation purposes
+   * @param mesh the mesh to be registered
+   */
+  registerNavigationMesh(mesh: Mesh): void;
 }

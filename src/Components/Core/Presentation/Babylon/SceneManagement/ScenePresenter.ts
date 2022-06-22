@@ -66,6 +66,10 @@ export default class ScenePresenter implements IScenePresenter {
     return mesh;
   }
 
+  registerNavigationMesh(mesh: Mesh): void {
+    this.viewModel.navigationMeshes.push(mesh);
+  }
+
   async createScene(createSceneClass: ICreateSceneClass): Promise<void> {
     // Execute the pretasks, if defined
     await Promise.all(createSceneClass.preTasks || []);

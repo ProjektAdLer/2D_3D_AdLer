@@ -64,10 +64,10 @@ export default class LearningRoomView implements ILearningRoomView {
 
   private displayRoom(): void {
     this.createWalls();
-    this.createFloor();
+    // this.createFloor();
 
     //creating floor via roomCornerPoints ~FK
-    //this.createFloorViaCorners();
+    this.createFloorViaCorners();
   }
 
   private createFloorViaCorners(): void {
@@ -76,15 +76,19 @@ export default class LearningRoomView implements ILearningRoomView {
       throw new Error(
         "ViewModel not set. Use the ViewModel setter before calling this method"
       );
+
     // Errorhandling: Check if cornerCount is higher than 2
     const cornerCount = this.viewModel.roomCornerPoints.Value.length;
     if (cornerCount < 3)
       throw new Error(
         "Not enough corners found to generate floor. Please review the Roomdata."
       );
+
     // Create Mesh
-    const startCorner = Object.values(this.viewModel.roomCornerPoints.Value[0]);
-    let polyPath = new Path2(startCorner[0], startCorner[1]);
+    let polyPath = new Path2(
+      this.viewModel.roomCornerPoints.Value[0].x,
+      this.viewModel.roomCornerPoints.Value[0].y
+    );
     for (let i = 0; i++; i < cornerCount) {
       if (i > 0) {
         const corner = Object.values(this.viewModel.roomCornerPoints.Value[i]);
@@ -98,6 +102,8 @@ export default class LearningRoomView implements ILearningRoomView {
     if (!this.viewModel.floorMesh.Value) {
       this.viewModel.floorMesh.Value = polyMesh.build();
     }
+    this.scenePresenter.registerNavigationMesh(this.viewModel.floorMesh.Value);
+
     // Floor Material
     if (!this.viewModel.floorMaterial.Value) {
       this.viewModel.floorMaterial.Value = new StandardMaterial(
@@ -105,6 +111,7 @@ export default class LearningRoomView implements ILearningRoomView {
         this.scenePresenter.Scene
       );
     }
+
     // Floor texture
     this.viewModel.floorMaterial.Value.diffuseTexture = new Texture(
       floorTexture,
@@ -115,6 +122,7 @@ export default class LearningRoomView implements ILearningRoomView {
     this.viewModel.floorMesh.Value.material =
       this.viewModel.floorMaterial.Value;
   }
+
   private createFloor(): void {
     if (!this.viewModel)
       throw new Error(
