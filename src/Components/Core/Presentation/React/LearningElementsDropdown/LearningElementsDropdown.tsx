@@ -63,7 +63,7 @@ export default function LearningElementsDropdown() {
                 className="flex items-start"
                 onClick={() => controllers[0]?.startLearningElement(element.id)}
               >
-                <div className="w-10">{getIcon(element)}</div>
+                <div className="lg:w-10 w-5">{getIcon(element)}</div>
                 <h3 className="ml-2 text-white self-center text-sm lg:text-lg">
                   {element.name}
                 </h3>
