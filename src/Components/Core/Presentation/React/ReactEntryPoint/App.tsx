@@ -16,7 +16,7 @@ import H5PPlayer from "../H5PPlayer/H5PPlayer";
 function App() {
   return (
     <React.Fragment>
-      <div className="root grid grid-cols-5 grid-rows-3 max-w-1/1 max-h-1/1">
+      <div className="root grid grid-cols-5 grid-rows-3 max-h-screen">
         <div className="col-start-1 row-start-1 z-10">
           <LogoMenuBar />
         </div>
