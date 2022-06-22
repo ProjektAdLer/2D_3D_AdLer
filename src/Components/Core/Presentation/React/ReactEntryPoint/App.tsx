@@ -35,18 +35,24 @@ function App() {
         <div className="col-start-3 row-start-3 place-content-center z-10">
           <BottomTooltip />
         </div>
-        <LearningElementModal />
-        <MoodleLoginForm />
-        <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
-          <div className="text-lg text-white text-shadow-sm font-bold">
-            <h1>
-              Die AdLer Engine ist für den<br></br>
-              Landscape Modus konzipiert.<br></br>
-              Bitte nimm dein Smartphone quer.<br></br>
-              Danke!
-            </h1>
-          </div>
-        </StyledModal>
+        <div className="z-50">
+          <LearningElementModal />
+        </div>
+        <div className="z-50">
+          <MoodleLoginForm />
+        </div>
+        <div className="z-50">
+          <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
+            <div className="text-lg text-white text-shadow-sm font-bold">
+              <h1>
+                Die AdLer Engine ist für den<br></br>
+                Landscape Modus konzipiert.<br></br>
+                Bitte nimm dein Smartphone quer.<br></br>
+                Danke!
+              </h1>
+            </div>
+          </StyledModal>
+        </div>
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
         <ModalManager />
