@@ -56,7 +56,7 @@ function App() {
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
         <ModalManager />
-        <StyledModal showModal={true}>
+        <StyledModal showModal={false}>
           <H5PPlayer />
         </StyledModal>
       </div>
