@@ -16,23 +16,23 @@ import H5PPlayer from "../H5PPlayer/H5PPlayer";
 function App() {
   return (
     <React.Fragment>
-      <div className="root grid grid-cols-5 grid-rows-3 max-h-screen">
+      <div className="root grid grid-cols-9 grid-rows-6 max-h-screen">
         <div className="col-start-1 row-start-1 z-10">
           <LogoMenuBar />
         </div>
-        <div className="col-start-2 row-start-1 z-10">
+        <div className="col-start-2 col-span-3 row-start-1 z-10">
           <LearningElementsDropdown />
         </div>
-        <div className="col-start-5 row-start-1 z-10">
+        <div className="col-start-9 col-span-2 row-start-1 z-10">
           <ScorePanel />
         </div>
-        <div className="col-start-3 row-start-1 z-10">
+        <div className="col-start-3 col-span-5 row-start-1 z-10">
           <WorldNamePanel />
         </div>
         <div className="col-start-1 col-span-5 row-start-1 row-span-3">
           <BabylonCanvas className="w-screen h-screen" />
         </div>
-        <div className="col-start-3 row-start-3 z-10">
+        <div className="col-start-4 row-start-6 col-span-3 z-10">
           <BottomTooltip />
         </div>
         <div className="z-50">

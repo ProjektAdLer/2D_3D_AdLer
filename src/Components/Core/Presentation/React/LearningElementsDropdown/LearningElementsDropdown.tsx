@@ -39,7 +39,7 @@ export default function LearningElementsDropdown() {
 
   const [dropDownOpen, setDropDownOpen] = useState(false);
   return (
-    <div className="flex flex-col mt-4 lg:mt-6 rounded-lg">
+    <div className="flex flex-col mt-4 lg:mt-10 rounded-lg">
       <CustomDropdown
         headerElement={
           <StyledButton
@@ -56,15 +56,15 @@ export default function LearningElementsDropdown() {
         managed={true}
         initialOpen
       >
-        <ul className="flex flex-col gap-2 mt-2">
+        <ul className="flex flex-col gap-2 mt-2 grow">
           {learningElements?.map((element, index) => (
-            <li key={index}>
+            <li key={index} className="flex self-start">
               <StyledButton
                 className="flex items-start"
                 onClick={() => controllers[0]?.startLearningElement(element.id)}
               >
                 <div className="w-10">{getIcon(element)}</div>
-                <h3 className="ml-2 text-white self-center text-sm lg:text-xl">
+                <h3 className="ml-2 text-white self-center text-sm lg:text-lg">
                   {element.name}
                 </h3>
               </StyledButton>
