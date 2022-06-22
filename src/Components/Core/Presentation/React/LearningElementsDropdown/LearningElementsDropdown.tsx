@@ -63,8 +63,8 @@ export default function LearningElementsDropdown() {
                 className="flex items-start"
                 onClick={() => controllers[0]?.startLearningElement(element.id)}
               >
-                {getIcon(element)}
-                <h3 className="ml-2 text-white self-center text-md lg:text-xl">
+                <div className="w-10">{getIcon(element)}</div>
+                <h3 className="ml-2 text-white self-center text-sm lg:text-xl">
                   {element.name}
                 </h3>
               </StyledButton>
