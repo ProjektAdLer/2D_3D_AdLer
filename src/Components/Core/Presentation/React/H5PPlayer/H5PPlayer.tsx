@@ -22,7 +22,12 @@ export default function H5PPlayer() {
       H5P.externalDispatcher.on("xAPI", (event) => {
         //do something useful with the event
         console.log("xAPI event: ", event);
-        console.log(JSON.stringify(event.data.statement));
+        if (
+          event.data.statement.verb.id ===
+          "http://adlnet.gov/expapi/verbs/completed"
+        ) {
+          console.log("Completed!");
+        }
       });
     }
   });
