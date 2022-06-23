@@ -10,4 +10,5 @@ export class APILearningElementTO {
     type: string;
     value: number;
   }[];
+  metaData: { key: string; value: string }[];
 }

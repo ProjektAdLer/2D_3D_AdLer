@@ -16,6 +16,7 @@ export class LearningElementTO {
   id: LearningComponentID;
   type: LearningElementType;
   name: string;
+  metaData: { key: string; value: string }[];
 }
 
 export default interface ILearningWorldPort {

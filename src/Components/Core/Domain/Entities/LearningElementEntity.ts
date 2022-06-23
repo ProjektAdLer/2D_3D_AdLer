@@ -8,4 +8,5 @@ export default class LearningElementEntity {
   public requirement: number;
   public hasScored: boolean;
   public name: string;
+  public metaData: { key: string; value: string }[];
 }

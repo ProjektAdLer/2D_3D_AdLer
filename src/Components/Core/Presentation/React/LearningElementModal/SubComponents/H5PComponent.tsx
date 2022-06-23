@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import LearningElementModalViewModel from "../LearningElementModalViewModel";
 const createIframeUrl = (contextId: number, fileName: string) => {
   // In addition to contextId and fileName, in the future, we will also need a package
   // the package number is indicated by the size of the array returned by the REST call
@@ -15,8 +16,16 @@ const createIframeUrl = (contextId: number, fileName: string) => {
   );
 };
 
-export default function H5PContent(props: { h5pEntityId: string }) {
+export default function H5PContent(props: {
+  viewModel: LearningElementModalViewModel;
+}) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const contentId = props.viewModel.metaData.Value.find(
+    (e) => e.key === "contentId"
+  )?.value;
+  const fileName = props.viewModel.metaData.Value.find(
+    (e) => e.key === "fileName"
+  )?.value;
 
   return (
     <div className="flex justify-center items-top max-h-90pro sm:w-[300px] md:w-[315px] lg:w-[700px] xl:w-[900px] 2xl:w-[1100px]">

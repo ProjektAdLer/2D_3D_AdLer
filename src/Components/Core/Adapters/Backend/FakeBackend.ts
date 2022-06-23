@@ -41,7 +41,8 @@ export class FakeBackend implements IBackend {
   }
 
   getLearningElements(): Promise<APILearningElementTO[]> {
-    return Promise.resolve(learningElements);
+    // return Promise.resolve(learningElements);
+    throw new Error("Method not implemented.");
   }
 }
 
