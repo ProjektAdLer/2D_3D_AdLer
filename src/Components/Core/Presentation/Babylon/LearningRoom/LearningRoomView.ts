@@ -64,10 +64,10 @@ export default class LearningRoomView implements ILearningRoomView {
 
   private displayRoom(): void {
     this.createWalls();
-    // this.createFloor();
+    this.createFloor();
 
     //creating floor via roomCornerPoints ~FK
-    this.createFloorViaCorners();
+    // this.createFloorViaCorners();
   }
 
   private createFloorViaCorners(): void {
