@@ -20,7 +20,7 @@ function App() {
         <div className="col-start-1 row-start-1 z-10">
           <LogoMenuBar />
         </div>
-        <div className="col-start-2 col-span-3 row-start-1 z-10">
+        <div className="col-start-2 col-span-2 row-start-1 z-10">
           <LearningElementsDropdown />
         </div>
         <div className="col-start-9 col-span-2 row-start-1 z-10">
@@ -29,30 +29,28 @@ function App() {
         <div className="col-start-3 col-span-5 row-start-1 z-10">
           <WorldNamePanel />
         </div>
-        <div className="col-start-1 col-span-5 row-start-1 row-span-3">
+        <div className="col-start-1 col-span-9 row-start-1 row-span-6">
           <BabylonCanvas className="w-screen h-screen" />
         </div>
         <div className="col-start-4 row-start-6 col-span-3 z-10">
           <BottomTooltip />
         </div>
-        <div className="z-50">
+        <div className="z-10">
           <LearningElementModal />
         </div>
-        <div className="z-50">
+        <div className="z-10">
           <MoodleLoginForm />
         </div>
-        <div className="z-50">
-          <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
-            <div className="text-lg text-white text-shadow-sm font-bold">
-              <h1>
-                Die AdLer Engine ist für den<br></br>
-                Landscape Modus konzipiert.<br></br>
-                Bitte nimm dein Smartphone quer.<br></br>
-                Danke!
-              </h1>
-            </div>
-          </StyledModal>
-        </div>
+        <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
+          <div className="text-lg text-white text-shadow-sm font-bold">
+            <h1>
+              Die AdLer Engine ist für den<br></br>
+              Landscape Modus konzipiert.<br></br>
+              Bitte nimm dein Smartphone quer.<br></br>
+              Danke!
+            </h1>
+          </div>
+        </StyledModal>
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
         <ModalManager />

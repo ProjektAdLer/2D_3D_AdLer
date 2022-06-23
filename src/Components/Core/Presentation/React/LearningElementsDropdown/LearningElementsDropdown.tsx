@@ -22,16 +22,22 @@ export default function LearningElementsDropdown() {
     switch (learningElement.type) {
       case "text":
         return (
-          <img className="w-10" src="icons/Zettel_darkblue_text-icon.svg"></img>
+          <img
+            className="lg:w-10 w-5"
+            src="icons/Zettel_darkblue_text-icon.svg"
+          ></img>
         );
       case "video":
         return (
-          <img className="w-10" src="icons/video_icon_screen_button.svg"></img>
+          <img
+            className="lg:w-10 w-5"
+            src="icons/video_icon_screen_button.svg"
+          ></img>
         );
       case "image":
-        return <img className="w-10" src="icons/bild_icon.svg"></img>;
+        return <img className="lg:w-10 w-5" src="icons/bild_icon.svg"></img>;
       case "h5p":
-        return <img className="w-10" src="icons/h5p_icon.svg"></img>;
+        return <img className="lg:w-10 w-5" src="icons/h5p_icon.svg"></img>;
       default:
         return null;
     }
