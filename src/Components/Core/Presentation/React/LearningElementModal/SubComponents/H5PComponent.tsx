@@ -20,11 +20,11 @@ export default function H5PContent(props: {
   viewModel: LearningElementModalViewModel;
 }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const contentId = props.viewModel.metaData.Value.find(
-    (e) => e.key === "contentId"
+  const contextId = props.viewModel.metaData.Value.find(
+    (e) => e.key === "h5pContextId"
   )?.value;
   const fileName = props.viewModel.metaData.Value.find(
-    (e) => e.key === "fileName"
+    (e) => e.key === "h5pFileName"
   )?.value;
 
   return (
@@ -34,8 +34,8 @@ export default function H5PContent(props: {
         ref={iframeRef}
         allowFullScreen
         src={createIframeUrl(
-          278, //learningElementEntity.h5PcontextId.Value,
-          "Metriken Teil 1.h5p" //learningElementEntity.h5PFileName.Value
+          Number.parseInt(contextId!), //learningElementEntity.h5PcontextId.Value,
+          fileName! //learningElementEntity.h5PFileName.Value
         )}
         title="Embedded H5P"
       ></iframe>
