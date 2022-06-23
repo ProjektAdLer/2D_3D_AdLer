@@ -32,20 +32,18 @@ export default class Backend implements IBackend {
 
   async getLearningElements(): Promise<(APILearningElementTO | undefined)[]> {
     let dsl = await this.getDSL();
-    return dsl.learningWorld.learningElements
-      .filter((element) => {
-        return element.elementType in LearningElementTypeSymbols;
-      })
-      .map((element) => {
-        return {
-          id: element.id,
-          name: element.identifier.value,
-          elementType: element.elementType,
-          // mocked with debugging values
-          value: [{ type: "points", value: 10 }],
-          requirements: [],
-        } as APILearningElementTO;
-      });
+    return dsl.learningWorld.learningElements.flatMap((element) =>
+      element.elementType in LearningElementTypeSymbols
+        ? ({
+            id: element.id,
+            name: element.identifier.value,
+            elementType: element.elementType,
+            // mocked with debugging values
+            value: [{ type: "points", value: 10 }],
+            requirements: [],
+          } as APILearningElementTO)
+        : []
+    );
   }
 
   async scoreLearningElement(learningElementId: number): Promise<void> {
