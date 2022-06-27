@@ -1,5 +1,6 @@
 import { LearningElementType } from "../../Presentation/Babylon/LearningElement/Types/LearningElementTypes";
 import { LearningComponentID } from "../../Types/EnitityTypes";
+import AbstractLearningElement from "./SpecificLearningElements/AbstractLearningElement";
 
 export default class LearningElementEntity {
   id: LearningComponentID;
@@ -8,4 +9,5 @@ export default class LearningElementEntity {
   public requirement: number;
   public hasScored: boolean;
   public name: string;
+  public learningElementData: AbstractLearningElement;
 }
