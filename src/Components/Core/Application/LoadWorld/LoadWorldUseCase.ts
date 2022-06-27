@@ -14,6 +14,9 @@ import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import ILoadAvatarUseCase from "../LoadAvatar/ILoadAvatarUseCase";
 import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_SYMBOLS";
+import AbstractLearningElement from "../../Domain/Entities/SpecificLearningElements/AbstractLearningElement";
+import H5PLearningElementData from "../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
+import TextLearningElementData from "../../Domain/Entities/SpecificLearningElements/TextLearningElementData";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -50,6 +53,45 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     };
   }
 
+  private mapLearningElement = (
+    element: APILearningElementTO
+  ): LearningElementEntity => {
+    const entityToStore: Partial<LearningElementEntity> = {
+      id: element.id,
+      value: element.value[0].value,
+      requirement: element.requirements[0]?.value,
+      name: element.name,
+      type: element.elementType,
+    };
+
+    switch (element.elementType) {
+      case "text":
+        entityToStore.learningElementData = {
+          type: "text",
+        } as TextLearningElementData;
+        break;
+      case "image":
+        entityToStore.learningElementData = {
+          type: "image",
+        } as TextLearningElementData;
+        break;
+      case "video":
+        entityToStore.learningElementData = {
+          type: "video",
+        } as TextLearningElementData;
+        break;
+      case "h5p":
+        entityToStore.learningElementData = {
+          type: "h5p",
+        } as H5PLearningElementData;
+    }
+
+    return this.container.createEntity<LearningElementEntity>(
+      entityToStore,
+      LearningElementEntity
+    );
+  };
+
   private async load(): Promise<void> {
     const worldResp = await this.backend.getWorld();
     const learningRoomResp =
@@ -61,18 +103,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       // Learning Elements
       const learningElementEntities: LearningElementEntity[] = [];
       learningElementResp.forEach((element) => {
-        const returnValue = this.container.createEntity<LearningElementEntity>(
-          {
-            id: element.id,
-            type: element.elementType,
-            value: element.value[0].value,
-            requirement: element.requirements[0]?.value,
-            name: element.name,
-          },
-          LearningElementEntity
-        );
-
-        learningElementEntities.push(returnValue);
+        learningElementEntities.push(this.mapLearningElement(element));
       });
 
       // Learning Room
