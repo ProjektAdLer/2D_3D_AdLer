@@ -41,7 +41,7 @@ export default class LearningElementView implements ILearningElementView {
     this.controller = controller;
 
     // setup callbacks for rerendering when the view model changes
-    viewModel.type.subscribe(async () => {
+    viewModel.learningElementData.subscribe(async () => {
       // this.viewModel.meshes.Value.forEach((mesh) => mesh.dispose());
       await this.loadMeshAsync();
       this.registerAction(ActionManager.OnPickTrigger, this.controller.clicked);
@@ -65,7 +65,9 @@ export default class LearningElementView implements ILearningElementView {
 
   private async loadMeshAsync(): Promise<void> {
     this.viewModel.meshes.Value = (await this.scenePresenter.loadModel(
-      modelLinks[getLearningElementSymbol(this.viewModel.type.Value)],
+      modelLinks[
+        getLearningElementSymbol(this.viewModel.learningElementData.Value.type)
+      ],
       true
     )) as Mesh[];
 

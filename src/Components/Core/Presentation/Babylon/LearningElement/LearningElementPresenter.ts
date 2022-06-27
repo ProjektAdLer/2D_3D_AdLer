@@ -18,7 +18,6 @@ export default class LearningElementPresenter
     this.viewModel.id = learningElementTO.id;
     this.viewModel.position.Value = position[0];
     this.viewModel.rotation.Value = position[1];
-    this.viewModel.type.Value = learningElementTO.learningElementData.type;
     this.viewModel.name.Value = learningElementTO.name;
     this.viewModel.learningElementData.Value =
       learningElementTO.learningElementData;
