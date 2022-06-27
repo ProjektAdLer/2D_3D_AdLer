@@ -101,6 +101,10 @@ const mockDSL: DSL = {
         elementType: "h5p",
         learningElementValue: null,
         requirements: null,
+        metaData: [
+          { key: "h5pContextId", value: "123" },
+          { key: "h5pFileName", value: "bla.h5p" },
+        ],
       },
       {
         id: 2,
@@ -111,6 +115,10 @@ const mockDSL: DSL = {
         elementType: "h5p",
         learningElementValue: null,
         requirements: null,
+        metaData: [
+          { key: "h5pContextId", value: "123" },
+          { key: "h5pFileName", value: "bla.h5p" },
+        ],
       },
       {
         id: 3,
@@ -121,6 +129,10 @@ const mockDSL: DSL = {
         elementType: "h5p",
         learningElementValue: null,
         requirements: null,
+        metaData: [
+          { key: "h5pContextId", value: "123" },
+          { key: "h5pFileName", value: "bla.h5p" },
+        ],
       },
       {
         id: 4,
@@ -131,6 +143,10 @@ const mockDSL: DSL = {
         elementType: "json",
         learningElementValue: null,
         requirements: null,
+        metaData: [
+          { key: "h5pContextId", value: "123" },
+          { key: "h5pFileName", value: "bla.h5p" },
+        ],
       },
     ],
   },
