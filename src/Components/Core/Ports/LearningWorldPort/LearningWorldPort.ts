@@ -12,6 +12,7 @@ import LearningWorldViewModel from "./LearningWorldViewModel";
 import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
 import ILearningElementsDropdownPresenter from "../../Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
 import INavigation from "../../Presentation/Babylon/Navigation/INavigation";
+import bind from "bind-decorator";
 
 @injectable()
 export default class LearningWorldPort implements ILearningWorldPort {
@@ -53,6 +54,15 @@ export default class LearningWorldPort implements ILearningWorldPort {
     this.viewModel.worldName.Value = learningWorldTO.worldName;
     this.viewModel.worldNameLoading.Value = false;
 
+    setTimeout<[LearningWorldTO]>(
+      this.resumePresentLearningWorld,
+      200,
+      learningWorldTO
+    );
+  }
+
+  @bind
+  private resumePresentLearningWorld(learningWorldTO: LearningWorldTO): void {
     CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation).setupNavigation();
 
     this.learningElementDropdownPresenter.presentLearningElements(
