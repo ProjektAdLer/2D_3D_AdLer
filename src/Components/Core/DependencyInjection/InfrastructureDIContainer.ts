@@ -30,7 +30,7 @@ const infrastructureDIContainer = new ContainerModule((bind) => {
   bind<IReactEntry>(CORE_TYPES.ICoreRenderer).to(ReactEntry).inSingletonScope();
 
   // Fake Backend
-  bind<IBackend>(CORE_TYPES.IBackend).to(Backend).inSingletonScope();
+  bind<IBackend>(CORE_TYPES.IBackend).to(FakeBackend).inSingletonScope();
 });
 
 export default infrastructureDIContainer;
