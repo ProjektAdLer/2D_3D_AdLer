@@ -19,7 +19,7 @@ export default function LearningElementsDropdown() {
   );
 
   const getIcon = (learningElement: LearningElementTO) => {
-    switch (learningElement.type) {
+    switch (learningElement.learningElementData.type) {
       case "text":
         return (
           <img

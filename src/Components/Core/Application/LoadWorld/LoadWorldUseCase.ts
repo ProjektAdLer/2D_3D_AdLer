@@ -61,7 +61,6 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       value: element.value[0].value,
       requirement: element.requirements[0]?.value,
       name: element.name,
-      type: element.elementType,
     };
 
     switch (element.elementType) {

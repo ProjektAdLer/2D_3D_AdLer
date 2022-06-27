@@ -6,7 +6,6 @@ export default class LearningElementEntity {
   id: LearningComponentID;
   public value: number;
   public requirement: number;
-  public type: string;
   public hasScored: boolean;
   public name: string;
   public learningElementData: AbstractLearningElement;

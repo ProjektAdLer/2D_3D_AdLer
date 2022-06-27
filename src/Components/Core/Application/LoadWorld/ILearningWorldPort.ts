@@ -1,6 +1,7 @@
 import { LearningComponentID } from "./../../Types/EnitityTypes";
 import { LearningElementType } from "../../Presentation/Babylon/LearningElement/Types/LearningElementTypes";
 import ILearningElementsDropdownPresenter from "../../Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
+import AbstractLearningElement from "../../Domain/Entities/SpecificLearningElements/AbstractLearningElement";
 
 export class LearningWorldTO {
   worldName: string;
@@ -14,8 +15,8 @@ export class LearningRoomTO {
 
 export class LearningElementTO {
   id: LearningComponentID;
-  type: LearningElementType;
   name: string;
+  learningElementData: AbstractLearningElement;
 }
 
 export default interface ILearningWorldPort {

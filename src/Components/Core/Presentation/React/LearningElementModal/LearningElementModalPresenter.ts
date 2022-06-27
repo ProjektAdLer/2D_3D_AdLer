@@ -8,7 +8,7 @@ export default class LearningElementModalPresenter
   constructor(private viewModel: LearningElementModalViewModel) {}
 
   presentLearningElementModal(learningeElementTO: LearningElementTO): void {
-    this.viewModel.type.Value = learningeElementTO.type;
+    this.viewModel.type.Value = learningeElementTO.learningElementData.type;
     this.viewModel.isOpen.Value = true;
     this.viewModel.id.Value = learningeElementTO.id;
   }

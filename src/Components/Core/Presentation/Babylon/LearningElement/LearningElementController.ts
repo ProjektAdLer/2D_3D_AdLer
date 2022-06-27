@@ -18,7 +18,7 @@ export default class LearningElementController
 
     port.displayLearningElementTooltip({
       name: this.viewModel.name.Value,
-      type: this.viewModel.type.Value,
+      learningElementData: this.viewModel.learningElementData.Value,
       id: this.viewModel.id,
     });
   }
