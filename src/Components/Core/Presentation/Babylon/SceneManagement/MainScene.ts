@@ -40,7 +40,7 @@ export default class MainScene implements ICreateSceneClass {
     new GroundMesh("Ground", scene);
 
     // TODO: move this somewhere else or wrap with some sort of environmental condition -MK
-    scene.debugLayer.show();
+    // scene.debugLayer.show();
 
     return scene;
   };
