@@ -97,8 +97,14 @@ export default class AvatarView {
       this.scenePresenter.Scene
     );
     camera.upperBetaLimit = Math.PI / 2;
+    camera.lowerRadiusLimit = 5;
+    camera.upperRadiusLimit = 30;
 
-    // camera.inputs.attached.mousewheel.attachControl();
+    camera.inputs.attached.mousewheel.attachControl();
+    (
+      camera.inputs.attached.mousewheel as ArcRotateCameraMouseWheelInput
+    ).wheelDeltaPercentage = 0.01;
+
     camera.inputs.attached.pointers.attachControl();
     // only rotate with the left mouse button (index: 0)
     (camera.inputs.attached.pointers as ArcRotateCameraPointersInput).buttons =
