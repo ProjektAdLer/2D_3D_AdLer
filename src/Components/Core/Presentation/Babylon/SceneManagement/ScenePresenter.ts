@@ -3,6 +3,7 @@ import {
   ISceneLoaderProgressEvent,
   Mesh,
   Nullable,
+  PBRMaterial,
   Scene,
   SceneLoader,
 } from "@babylonjs/core";
@@ -48,6 +49,12 @@ export default class ScenePresenter implements IScenePresenter {
       this.viewModel.scene,
       onProgress
     );
+
+    result.meshes.forEach((mesh) => {
+      // use standard light falloff for consistent lighting with non-PBR materials
+      if (mesh.material)
+        (mesh.material as PBRMaterial).usePhysicalLightFalloff = false;
+    });
 
     if (isRelevantForNavigation) {
       this.viewModel.navigationMeshes.push(...result.meshes);

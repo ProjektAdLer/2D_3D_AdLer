@@ -7,6 +7,7 @@ import {
   HemisphericLight,
   GroundMesh,
   Color4,
+  PointLight,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { injectable } from "inversify";
@@ -30,12 +31,16 @@ export default class MainScene implements ICreateSceneClass {
 
     this.setCamera(scene);
 
-    new HemisphericLight("light", new Vector3(0, 1, 0), scene);
+    let hemi = new HemisphericLight("hemi light", new Vector3(0, 1, 0), scene);
+    hemi.intensity = 0.3;
+
+    let pointLight = new PointLight("point light", new Vector3(0, 5, 0), scene);
+    pointLight.intensity = 1.15;
 
     new GroundMesh("Ground", scene);
 
     // TODO: move this somewhere else or wrap with some sort of environmental condition -MK
-    // scene.debugLayer.show();
+    scene.debugLayer.show();
 
     return scene;
   };

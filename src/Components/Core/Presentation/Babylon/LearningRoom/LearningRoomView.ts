@@ -5,6 +5,7 @@ import {
   StandardMaterial,
   Texture,
   PolygonMeshBuilder,
+  Color3,
 } from "@babylonjs/core";
 import LearningRoomViewModel from "./LearningRoomViewModel";
 import floorTexture from "../../../../../Assets/Texture_Floor_Parquet3.png";
@@ -165,6 +166,11 @@ export default class LearningRoomView implements ILearningRoomView {
     (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 2;
     this.viewModel.floorMesh.Value.material =
       this.viewModel.floorMaterial.Value;
+    this.viewModel.floorMaterial.Value.specularColor = new Color3(
+      0.2,
+      0.2,
+      0.2
+    );
   }
 
   private createWalls(): void {

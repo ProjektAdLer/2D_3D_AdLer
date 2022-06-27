@@ -60,6 +60,7 @@ export default class Navigation implements INavigation {
     this.navMeshDebug.position = new Vector3(0, 0.01, 0);
     this.matDebug = new StandardMaterial("matdebug", this.scenePresenter.Scene);
     this.matDebug.diffuseColor = new Color3(0.1, 0.2, 1);
+    this.matDebug.specularColor = new Color3(0, 0, 0);
     this.matDebug.alpha = 0.2;
     this.navMeshDebug.material = this.matDebug;
 
