@@ -1,30 +1,38 @@
+type Identifier = {
+  type: string;
+  value: string;
+};
+
+type Requirement =
+  | {
+      type: string;
+      value: number;
+    }[]
+  | null;
+
+type LearningElementValue = {
+  type: string;
+  value: number;
+} | null;
+
 export default interface DSL {
   learningWorld: {
-    identifier: {
-      type: string;
-      value: string;
-    };
+    identifier: Identifier;
     learningWorldContent: number[];
     topics: number[];
     learningSpaces: {
       spaceId: number;
       learningSpaceName: string;
-      identifier: {
-        type: string;
-        value: string;
-      };
+      identifier: Identifier;
       learningSpaceContent: number[];
-      requirements: { type: string; value: number }[] | null;
+      requirements: Requirement;
     }[];
     learningElements: {
       id: number;
-      identifier: {
-        type: string;
-        value: string;
-      };
+      identifier: Identifier;
       elementType: string;
-      learningElementValue: { type: string; value: number } | null;
-      requirements: { type: string; value: number }[] | null;
+      learningElementValue: LearningElementValue;
+      requirements: Requirement;
       metaData: { key: string; value: string }[];
     }[];
   };
