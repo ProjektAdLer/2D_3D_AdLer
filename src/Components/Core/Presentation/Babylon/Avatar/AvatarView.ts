@@ -1,5 +1,6 @@
 import {
   ArcRotateCamera,
+  ArcRotateCameraMouseWheelInput,
   ArcRotateCameraPointersInput,
   Axis,
   LinesMesh,
