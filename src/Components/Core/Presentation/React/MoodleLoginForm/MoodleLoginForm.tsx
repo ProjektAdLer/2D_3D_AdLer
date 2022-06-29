@@ -24,22 +24,26 @@ export default function MoodleLoginForm() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  const [debug_UserName, setDebug_UserName] = useState("");
-  const [debug_Password, setDebug_Password] = useState("");
-  // Used for Debug Values
-  useEffect(() => {
-    if (process.env.REACT_APP_IS_DEBUG === "true") {
-      setDebug_UserName(process.env.REACT_APP_DEBUG_USERNAME || "");
-      setDebug_Password(process.env.REACT_APP_DEBUG_PASSWORD || "");
-      setUserName("test");
-      setPassword("test");
-      console.log(process.env.REACT_APP_DEBUG_USERNAME || "kaputt");
-    }
-  }, []);
-
-  const handeSubmit = async () => {
+  const handleSubmit = async () => {
     await controllers[0].loginAsync(userName, password);
   };
+
+  // Used for Debug Values
+  // useEffect(() => {
+  //   const fun = async () => {
+  //     setTimeout(async () => {
+  //       if (process.env.REACT_APP_IS_DEBUG === "true") {
+  //         setUserName(process.env.REACT_APP_DEBUG_USERNAME || "");
+  //         setPassword(process.env.REACT_APP_DEBUG_PASSWORD || "");
+  //         await controllers[0].loginAsync(
+  //           process.env.REACT_APP_DEBUG_USERNAME || "",
+  //           process.env.REACT_APP_DEBUG_PASSWORD || ""
+  //         );
+  //       }
+  //     }, 10);
+  //   };
+  //   fun();
+  // }, [modalVisible]);
 
   return (
     <StyledModal
@@ -53,7 +57,7 @@ export default function MoodleLoginForm() {
           className="login-screen flex flex-col justify-center gap-2"
           onSubmit={(e) => {
             e.preventDefault();
-            handeSubmit();
+            handleSubmit();
           }}
         >
           <div className="app-title flex justify-center text-white lg:text-2xl font-bold">
@@ -62,7 +66,7 @@ export default function MoodleLoginForm() {
 
           <StyledInputField
             placeholder="Nutzername"
-            defaultValue={debug_UserName}
+            defaultValue={userName}
             onChange={(newVal) => {
               setUserName(newVal.target.value);
             }}
@@ -70,13 +74,13 @@ export default function MoodleLoginForm() {
 
           <StyledPasswordField
             placeholder="Passwort"
-            defaultValue={debug_Password}
+            defaultValue={password}
             onChange={(newVal) => {
               setPassword(newVal.target.value);
             }}
           />
 
-          <StyledButton onClick={handeSubmit}>
+          <StyledButton onClick={handleSubmit}>
             <p>Login</p>
           </StyledButton>
 

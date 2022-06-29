@@ -3,4 +3,4 @@ coverage
 build
 .DS_Store
 // Client Secrets are stored in .env file
-.env
+//.env.development

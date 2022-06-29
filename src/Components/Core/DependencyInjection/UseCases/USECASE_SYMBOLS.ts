@@ -5,6 +5,7 @@ const USECASE_TYPES = {
   IScoreLearningElementUseCase: Symbol("IScoreLearningElementUseCase"),
   ICalculateTotalRoomScore: Symbol("ICalculateTotalRoomScore"),
   ILogUserIntoMoodleUseCase: Symbol("ILogUserIntoMoodleUseCase"),
+  IDebugUseCase: Symbol("IDebugUseCase"),
 };
 
 export default USECASE_TYPES;

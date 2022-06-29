@@ -8,6 +8,9 @@ import App from "./App";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
+import ILogUserIntoMoodleUseCase from "../../../Application/LogUserIntoMoodle/ILogUserIntoMoodleUseCase";
+import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_SYMBOLS";
+import IDebugUseCase from "../../../Application/DebugUseCase/IDebugUseCase";
 
 @injectable()
 export default class ReactEntry implements IReactEntry {
@@ -30,6 +33,10 @@ export default class ReactEntry implements IReactEntry {
     this.buildViewModels();
 
     ReactDOM.render(strictModeComponent, document.getElementById("root"));
+
+    CoreDIContainer.get<IDebugUseCase>(
+      USECASE_TYPES.IDebugUseCase
+    ).executeAsync();
   }
 
   private buildViewModels(): void {
