@@ -34,9 +34,14 @@ export default class ReactEntry implements IReactEntry {
 
     ReactDOM.render(strictModeComponent, document.getElementById("root"));
 
-    CoreDIContainer.get<IDebugUseCase>(
-      USECASE_TYPES.IDebugUseCase
-    ).executeAsync();
+    if (
+      process.env.NODE_ENV === "development" &&
+      process.env.REACT_APP_IS_DEBUG === "true"
+    ) {
+      CoreDIContainer.get<IDebugUseCase>(
+        USECASE_TYPES.IDebugUseCase
+      ).executeAsync();
+    }
   }
 
   private buildViewModels(): void {
