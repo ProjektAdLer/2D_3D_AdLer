@@ -10,11 +10,16 @@ export default class DebugUseCase implements IDebugUseCase {
     @inject(USECASE_TYPES.ILogUserIntoMoodleUseCase)
     private loginUsecase: ILogUserIntoMoodleUseCase
   ) {}
-  executeAsync(data?: IDTO | undefined): Promise<void> {
+  async executeAsync(data?: IDTO | undefined): Promise<void> {
     console.log("Debug: Automaticly loggin in User from environement variable");
-    return this.loginUsecase.executeAsync({
+
+    await this.loginUsecase.executeAsync({
       username: process.env.REACT_APP_DEBUG_USERNAME,
       password: process.env.REACT_APP_DEBUG_PASSWORD,
     });
+
+    console.log("Debug: User logged in");
+
+    return Promise.resolve();
   }
 }
