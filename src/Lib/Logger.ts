@@ -39,7 +39,7 @@ export class ConsoleLogger implements Logger {
       return;
     }
 
-    this.log = console.trace.bind(console, "[LOG] ");
+    this.log = console.log.bind(console, " [LOG] ");
   }
 }
 
