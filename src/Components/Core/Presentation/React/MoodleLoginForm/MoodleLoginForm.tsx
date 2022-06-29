@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useObservable from "../CustomHooks/useObservable";
 import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import StyledButton from "../ReactBaseComponents/StyledButton";
@@ -23,6 +23,19 @@ export default function MoodleLoginForm() {
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
+  const [debug_UserName, setDebug_UserName] = useState("");
+  const [debug_Password, setDebug_Password] = useState("");
+  // Used for Debug Values
+  useEffect(() => {
+    if (process.env.REACT_APP_IS_DEBUG === "true") {
+      setDebug_UserName(process.env.REACT_APP_DEBUG_USERNAME || "");
+      setDebug_Password(process.env.REACT_APP_DEBUG_PASSWORD || "");
+      setUserName("test");
+      setPassword("test");
+      console.log(process.env.REACT_APP_DEBUG_USERNAME || "kaputt");
+    }
+  }, []);
 
   const handeSubmit = async () => {
     await controllers[0].loginAsync(userName, password);
@@ -49,6 +62,7 @@ export default function MoodleLoginForm() {
 
           <StyledInputField
             placeholder="Nutzername"
+            defaultValue={debug_UserName}
             onChange={(newVal) => {
               setUserName(newVal.target.value);
             }}
@@ -56,6 +70,7 @@ export default function MoodleLoginForm() {
 
           <StyledPasswordField
             placeholder="Passwort"
+            defaultValue={debug_Password}
             onChange={(newVal) => {
               setPassword(newVal.target.value);
             }}
