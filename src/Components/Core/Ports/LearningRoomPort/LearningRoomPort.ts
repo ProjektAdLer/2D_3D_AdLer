@@ -34,11 +34,10 @@ export default class LearningRoomPort implements ILearningRoomPort {
       let director = CoreDIContainer.get<IPresentationDirector>(
         BUILDER_TYPES.IPresentationDirector
       );
-      let builder = CoreDIContainer.get<IPresentationBuilder>(
+      const builder = CoreDIContainer.get<IPresentationBuilder>(
         BUILDER_TYPES.IScorePanelBuilder
       );
-      director.Builder = builder;
-      director.build();
+      director.build(builder);
       this.scorePanelPresenter = builder.getPresenter();
     }
 

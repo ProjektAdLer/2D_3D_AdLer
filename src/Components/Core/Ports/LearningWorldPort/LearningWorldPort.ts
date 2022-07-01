@@ -34,12 +34,11 @@ export default class LearningWorldPort implements ILearningWorldPort {
     let director = CoreDIContainer.get<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
     );
-    let builder = CoreDIContainer.get<IPresentationBuilder>(
+    const builder = CoreDIContainer.get<IPresentationBuilder>(
       BUILDER_TYPES.ILearningRoomBuilder
     );
-    director.Builder = builder;
 
-    director.build();
+    director.build(builder);
     this.roomPresenter = builder.getPresenter();
 
     // TODO: use all the data from the learningWorldTO to create multiple rooms

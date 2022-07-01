@@ -17,11 +17,10 @@ export default class LoadAvatarUseCase implements ILoadAvatarUseCase {
     let director = CoreDIContainer.get<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
     );
-    let builder = CoreDIContainer.get<IPresentationBuilder>(
+    const builder = CoreDIContainer.get<IPresentationBuilder>(
       BUILDER_TYPES.IAvatarBuilder
     );
-    director.Builder = builder;
-    director.build();
+    director.build(builder);
 
     // this.avatarPort.presentAvatar({ avatarName: "PlaceholderCharacter" });
 

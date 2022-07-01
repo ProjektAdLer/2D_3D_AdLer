@@ -10,27 +10,13 @@ describe("PresentationDirector", () => {
     director = new PresentationDirector();
   });
 
-  test("Builder setter", () => {
-    expect(director["builder"]).toBeUndefined();
-    let builder = new TestBuilder();
-    director.Builder = builder;
-    expect(director["builder"]).toBe(builder);
-  });
-
   test("build calls all build steps", () => {
     let builder = new TestBuilder();
-    director.Builder = builder;
-    director.build();
+    director.build(builder);
     expect(builder.reset).toHaveBeenCalledTimes(1);
     expect(builder.buildViewModel).toHaveBeenCalledTimes(1);
     expect(builder.buildController).toHaveBeenCalledTimes(1);
     expect(builder.buildView).toHaveBeenCalledTimes(1);
     expect(builder.buildPresenter).toHaveBeenCalledTimes(1);
-  });
-
-  test("build throws error if builder is not set", () => {
-    expect(() => {
-      director.build();
-    }).toThrowError("PresentationBuilder is not set");
   });
 });

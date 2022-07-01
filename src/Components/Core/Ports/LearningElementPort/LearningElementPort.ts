@@ -29,11 +29,10 @@ export default class LearningElementPort implements ILearningElementPort {
       let director = CoreDIContainer.get<IPresentationDirector>(
         BUILDER_TYPES.IPresentationDirector
       );
-      let builder = CoreDIContainer.get<IPresentationBuilder>(
+      const builder = CoreDIContainer.get<IPresentationBuilder>(
         BUILDER_TYPES.ILearningElementModalBuilder
       );
-      director.Builder = builder;
-      director.build();
+      director.build(builder);
       this.modalPresenter = builder.getPresenter();
     }
     this.modalPresenter.presentLearningElementModal(learningElementStartedTO);

@@ -35,32 +35,30 @@ export default class LearningRoomPresenter implements ILearningRoomPresenter {
     let director = CoreDIContainer.get<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
     );
-    let builder: IPresentationBuilder;
-
-    // create learning elements
-    builder = CoreDIContainer.get<IPresentationBuilder>(
+    const learningElementBuilder = CoreDIContainer.get<IPresentationBuilder>(
       BUILDER_TYPES.ILearningElementBuilder
     );
-    director.Builder = builder;
 
+    // create learning elements
     let elementPositions = this.getLearningElementPositions(
       learningRoomTO.learningElements.length
     );
 
     learningRoomTO.learningElements.forEach((elementTO) => {
-      director.build();
-      let presenter = builder.getPresenter() as ILearningElementPresenter;
+      director.build(learningElementBuilder);
+      let presenter =
+        learningElementBuilder.getPresenter() as ILearningElementPresenter;
       presenter.presentLearningElement(elementTO, elementPositions.shift()!);
     });
 
     // create door
-    builder = CoreDIContainer.get<IPresentationBuilder>(
+    const doorBuilder = CoreDIContainer.get<IPresentationBuilder>(
       BUILDER_TYPES.IDoorBuilder
     );
-    director.Builder = builder;
-    director.build();
-    builder.getPresenter().presentDoor(this.getDoorPosition());
-    this.doorPresenter = builder.getPresenter();
+
+    director.build(doorBuilder);
+    doorBuilder.getPresenter().presentDoor(this.getDoorPosition());
+    this.doorPresenter = doorBuilder.getPresenter();
   }
 
   openDoor(): void {
