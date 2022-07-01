@@ -11,7 +11,7 @@ describe("LearningElementView", () => {
 
     expect(view["controller"]).toBe(controller);
     expect(view["viewModel"]).toBe(viewModel);
-    expect(viewModel.type.subscribe).toHaveBeenCalledTimes(1);
+    expect(viewModel.learningElementData.subscribe).toHaveBeenCalledTimes(1);
     expect(viewModel.position.subscribe).toHaveBeenCalledTimes(1);
     expect(viewModel.rotation.subscribe).toHaveBeenCalledTimes(1);
   });

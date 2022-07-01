@@ -14,7 +14,10 @@ describe("LearningElementModalPresenter", () => {
   test("presentLearningElementModal sets the values in its viewModel", () => {
     const learningElementTO: LearningElementTO = {
       id: 1,
-      type: "h5p",
+      name: "Test",
+      learningElementData: {
+        type: "h5p",
+      },
     };
 
     learningElementModalPresenter.presentLearningElementModal(
@@ -22,7 +25,7 @@ describe("LearningElementModalPresenter", () => {
     );
 
     expect(learningElementModalPresenter["viewModel"].type.Value).toBe(
-      learningElementTO.type
+      learningElementTO.learningElementData.type
     );
     expect(learningElementModalPresenter["viewModel"].isOpen.Value).toBe(true);
     expect(learningElementModalPresenter["viewModel"].id.Value).toBe(
