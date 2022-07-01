@@ -5,9 +5,9 @@
 - Node Laufzeitumgebung
 - `$ npm i` muss ausgeführt werden, um die benötigten Bibliotheken zu installieren
 - Für debugging sind einige Umgebungsvraiablen verfügbar. dafür muss auf dem root level das `.env.development`-File existieren.
-  - `REACT_APP_IS_DEBUG`: `true` oder `false` (Wenn false, werden alle DEBUG variablem ignoriert)
-  - `REACT_APP_DEBUG_USERNAME`: `Der Moodle Nutzername für einen Amtomatischen Login`
-  - `REACT_APP_DEBUG_PASSWORD`: `Das Passwort für den Automatischen Login`
+  - `REACT_APP_IS_DEBUG`=`true` oder `false` (Wenn false, werden alle DEBUG variablem ignoriert)
+  - `REACT_APP_DEBUG_USERNAME`=`"Der Moodle Nutzername für einen Amtomatischen Login"`
+  - `REACT_APP_DEBUG_PASSWORD`= `"Das Passwort für den Automatischen Login"`
 
 ## Verfügbare Commands
 
