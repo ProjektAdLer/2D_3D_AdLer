@@ -9,6 +9,7 @@ const reactEntry = CoreDIContainer.get<IReactEntry>(CORE_TYPES.ICoreRenderer);
 
 reactEntry.setupReact();
 
-logger.warn("This is a warning");
-logger.error("This is an error");
-logger.log("This is a log");
+// Excample for the new logger
+// logger.warn("This is a warning");
+// logger.error("This is an error");
+// logger.log("This is a log");
