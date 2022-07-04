@@ -2,10 +2,12 @@ import { useEffect, useRef, useState } from "react";
 
 import { H5P } from "h5p-standalone";
 import LearningElementModalViewModel from "../LearningElementModalViewModel";
+import { logger } from "../../../../../../Lib/Logger";
+import H5PLearningElementData from "../../../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
 export default function NewH5PContent({
   viewModel,
 }: {
-  viewModel: LearningElementModalViewModel;
+  viewModel: LearningElementModalViewModel<H5PLearningElementData>;
 }) {
   const h5pContainerRef = useRef<HTMLDivElement>(null);
 
