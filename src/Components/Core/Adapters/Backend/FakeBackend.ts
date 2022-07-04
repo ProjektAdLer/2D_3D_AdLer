@@ -42,6 +42,7 @@ export class FakeBackend implements IBackend {
   }
 
   getLearningElements(): Promise<APILearningElementTO[]> {
+    //@ts-ignore
     return Promise.resolve(learningElements);
   }
 }

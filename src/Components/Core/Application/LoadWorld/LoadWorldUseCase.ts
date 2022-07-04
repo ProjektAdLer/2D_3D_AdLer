@@ -82,6 +82,13 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       case "h5p":
         entityToStore.learningElementData = {
           type: "h5p",
+          fileName: element.metaData.find(
+            (metaData) => metaData.key === "h5pFileName"
+          )?.value,
+          contextId: Number.parseInt(
+            element.metaData.find((metaData) => metaData.key === "h5pContextId")
+              ?.value || "0"
+          ),
         } as H5PLearningElementData;
     }
 

@@ -42,6 +42,7 @@ export default class Backend implements IBackend {
             // mocked with debugging values
             value: [{ type: "points", value: 10 }],
             requirements: [],
+            metaData: element.metaData,
           } as APILearningElementTO)
         : []
     );

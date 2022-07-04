@@ -45,12 +45,15 @@ export default function LearningElementModal() {
 
   return (
     <StyledModal
+      title={
+        viewModels[0]?.learningElementData.Value.type.toUpperCase() +
+        " Learning Element"
+      }
       onClose={() => {
         setOpen(false);
         controllers[0].scoreLearningElement(viewModels[0]?.id.Value);
       }}
       //title={learningElementEntity.learningElementTitle.Value}
-      footer="Ich bin der Fußteil"
       showModal={isOpen}
     >
       {isOpen && elementBuilder(viewModels[0])}
