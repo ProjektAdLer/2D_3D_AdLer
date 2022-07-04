@@ -1,7 +1,7 @@
 import useObservable from "../CustomHooks/useObservable";
 import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import DebugPanelController from "./DebugPanelController";
-import DebugPanelViewModel from "./DebugPanelViewModel";
+import DebugPanelViewModel, { MiscEntries } from "./DebugPanelViewModel";
 
 export default function DebugPanel() {
   const [viewModels] = useViewModelControllerProvider<
@@ -10,6 +10,7 @@ export default function DebugPanel() {
   >(DebugPanelViewModel);
 
   const [moodleToken] = useObservable<string>(viewModels[0]?.moodleToken);
+  const [miscItems] = useObservable<MiscEntries>(viewModels[0]?.misc);
 
   return (
     /*
@@ -21,10 +22,12 @@ export default function DebugPanel() {
     <div className="fixed bottom-0 left-0 m-2 font-light text-xs lg:text-md text-white text-shadow-sm bg-slate-400 rounded-lg p-2">
       <ul>
         <li>Moodle Token: {moodleToken}</li>
-        <li>Eintrag 2</li>
-        <li>Eintrag 3</li>
         <div className="trennungsstrich h-[1px] m-2 bg-white"></div>
-        <li>Eintrag 4</li>
+        {miscItems?.map((item) => (
+          <li key={item.key}>
+            {item.key}: {item.value}
+          </li>
+        ))}
       </ul>
     </div>
   );
