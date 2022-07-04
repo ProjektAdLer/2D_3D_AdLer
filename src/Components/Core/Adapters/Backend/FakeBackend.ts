@@ -7,6 +7,7 @@ import { APILearningRoomTO } from "./APILearningRoomTO";
 import { APILearningElementTO } from "./APILearningElementTO";
 
 import axios from "axios";
+import { logger } from "../../../../Lib/Logger";
 
 @injectable()
 export class FakeBackend implements IBackend {
@@ -27,7 +28,7 @@ export class FakeBackend implements IBackend {
     //return Promise.resolve(`${userCredentials.username}_token`);
   }
   scoreLearningElement(learningElementId: LearningComponentID): Promise<void> {
-    console.log(
+    logger.log(
       `Scoring learning element with id ${learningElementId} via FakeBackend`
     );
     return Promise.resolve();

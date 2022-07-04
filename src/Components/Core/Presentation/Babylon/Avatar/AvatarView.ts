@@ -10,6 +10,7 @@ import {
   Vector3,
 } from "@babylonjs/core";
 import bind from "bind-decorator";
+import { logger } from "../../../../../Lib/Logger";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import INavigation from "../Navigation/INavigation";
@@ -104,7 +105,7 @@ export default class AvatarView {
     (camera.inputs.attached.pointers as ArcRotateCameraPointersInput).buttons =
       [0];
 
-    console.log(camera.inputs.attached);
+    logger.log(camera.inputs.attached);
 
     camera.parent = this.viewModel.parentNode.Value;
     this.scenePresenter.Scene.activeCamera = camera;
@@ -161,7 +162,8 @@ let debug_displayVelocity = (
       },
       scenePresenter.Scene
     );
-    console.log(
+
+    logger.log(
       velocity.toString() +
         " " +
         rotation +

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { injectable } from "inversify";
+import { logger } from "../../../../Lib/Logger";
 import { LearningElementTypeSymbols } from "../../Presentation/Babylon/LearningElement/Types/LearningElementTypes";
 import { APILearningElementTO } from "./APILearningElementTO";
 import { APILearningRoomTO } from "./APILearningRoomTO";
@@ -47,7 +48,7 @@ export default class Backend implements IBackend {
   }
 
   async scoreLearningElement(learningElementId: number): Promise<void> {
-    console.log(
+    logger.warn(
       `Tried to score Learningelement ${learningElementId}. Functionality not implemented yet.`
     );
     return Promise.resolve();

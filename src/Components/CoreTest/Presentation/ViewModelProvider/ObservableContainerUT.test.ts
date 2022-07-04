@@ -79,7 +79,6 @@ describe("ObservableContainer", () => {
   test("getValues returns all previously added values", () => {
     const value = new TestClassB();
     container.addNewValue(value);
-    console.log(container.getValues());
     expect(container.getValues()).toEqual([value]);
   });
 });

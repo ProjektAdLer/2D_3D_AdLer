@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import { H5P as H5PStandalone } from "h5p-standalone"; //you need you an alias due to conflict
+import { logger } from "../../../../../Lib/Logger";
 export default function H5PPlayer() {
   useEffect(function () {
     func();
@@ -16,17 +17,17 @@ export default function H5PPlayer() {
 
       await new H5PStandalone(el, options);
 
-      console.log("Geladen!");
+      logger.log("Geladen!");
 
       //@ts-ignore
       H5P.externalDispatcher.on("xAPI", (event) => {
         //do something useful with the event
-        console.log("xAPI event: ", event);
+        logger.log("xAPI event: ", event);
         if (
           event.data.statement.verb.id ===
           "http://adlnet.gov/expapi/verbs/completed"
         ) {
-          console.log("Completed!");
+          logger.log("Completed!");
         }
       });
     }
