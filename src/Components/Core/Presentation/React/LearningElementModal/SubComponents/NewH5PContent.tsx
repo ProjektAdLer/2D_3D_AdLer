@@ -1,7 +1,12 @@
 import { useEffect, useRef } from "react";
 
 import { H5P } from "h5p-standalone";
-export default function NewH5PContent(props: { h5pEntityId: string }) {
+import LearningElementModalViewModel from "../LearningElementModalViewModel";
+export default function NewH5PContent({
+  viewModel,
+}: {
+  viewModel: LearningElementModalViewModel;
+}) {
   const iframeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,7 +32,9 @@ export default function NewH5PContent(props: { h5pEntityId: string }) {
           width: "800px",
         }}
         ref={iframeRef}
-      ></div>
+      >
+        <p>{viewModel.type.Value}</p>
+      </div>
     </div>
   );
 }
