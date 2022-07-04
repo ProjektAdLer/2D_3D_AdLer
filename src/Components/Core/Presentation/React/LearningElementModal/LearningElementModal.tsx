@@ -46,7 +46,7 @@ export default function LearningElementModal() {
   return (
     <StyledModal
       title={
-        viewModels[0]?.learningElementData.Value.type.toUpperCase() +
+        viewModels[0]?.learningElementData?.Value?.type?.toUpperCase() +
         " Learning Element"
       }
       onClose={() => {
