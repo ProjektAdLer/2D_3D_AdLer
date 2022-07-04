@@ -7,13 +7,5 @@ export type MiscEntries = {
 
 export default class DebugPanelViewModel {
   moodleToken = new Observable<string>("", true);
-  misc = new Observable<MiscEntries>(
-    [
-      {
-        key: "test",
-        value: "wert",
-      },
-    ],
-    true
-  );
+  misc = new Observable<MiscEntries>([], true);
 }

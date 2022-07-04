@@ -3,4 +3,5 @@ import IDebugPanelPresenter from "../../Presentation/React/DebugPanel/IDebugPane
 export default interface IDebugPort {
   registerDebugPanelPresenter(debugPanelPresenter: IDebugPanelPresenter): void;
   setUserToken(userToken: string): void;
+  addToMisc(key: string, value: string): void;
 }

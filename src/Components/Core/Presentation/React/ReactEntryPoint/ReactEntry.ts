@@ -10,6 +10,9 @@ import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder
 import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_SYMBOLS";
 import IDebugUseCase from "../../../Application/DebugUseCase/IDebugUseCase";
+import { logger } from "../../../../../Lib/Logger";
+
+var isInDebug = false;
 
 @injectable()
 export default class ReactEntry implements IReactEntry {
@@ -37,9 +40,19 @@ export default class ReactEntry implements IReactEntry {
       process.env.NODE_ENV === "development" &&
       process.env.REACT_APP_IS_DEBUG === "true"
     ) {
-      CoreDIContainer.get<IDebugUseCase>(
-        USECASE_TYPES.IDebugUseCase
-      ).executeAsync();
+      document.onkeyup = function (e) {
+        if (e.ctrlKey && e.key == "F1") {
+          if (isInDebug) {
+            alert("Alerady in Debug Mode");
+            logger.warn("Already in Debug Mode");
+            return;
+          }
+          isInDebug = true;
+          CoreDIContainer.get<IDebugUseCase>(
+            USECASE_TYPES.IDebugUseCase
+          ).executeAsync();
+        }
+      };
     }
   }
 
