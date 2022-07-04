@@ -15,3 +15,6 @@ declare module "*.mp4";
 
 // Babylon Navigation Plugin Dependency
 declare module "recast-detour";
+
+// h5p standalone plugin
+declare module "h5p-standalone";
