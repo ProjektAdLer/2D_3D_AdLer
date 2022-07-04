@@ -15,3 +15,6 @@
 - `$ npm start` startet den Dev-Server
 - `$ npm run build` erstellt die HTML-Dateien
 - `$ npm run test` startet die Tests
+
+## Debugging
+Wenn die variablen in env.development dementsprechend gesetzt sind, kann mit dem Shortcut "STRG + F1" der Debug Modus aktiviert und der Nutzer autmatisch in Moodle angemeldet werden
