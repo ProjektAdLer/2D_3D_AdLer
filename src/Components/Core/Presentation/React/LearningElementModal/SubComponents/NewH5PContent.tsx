@@ -17,10 +17,12 @@ export default function NewH5PContent({
     const debug = async () => {
       if (h5pContainerRef.current && !h5pShown) {
         const el = h5pContainerRef.current;
+        const serverURL =
+          process.env.REACT_APP_API_SERVER_URL || "https://localhost:49153";
         const options = {
-          h5pJsonPath: "https://localhost:7117/h5p/",
-          frameJs: "../../ThirdParty/assets/frame.bundle.js",
-          frameCss: "../../ThirdParty/styles/h5p.css",
+          h5pJsonPath: serverURL + "/h5p/",
+          frameJs: serverURL + "/h5pBase/frame.bundle.js",
+          frameCss: serverURL + "/h5pBase/styles/h5p.css",
         };
         await new H5P(el, options);
         setH5pShown(true);
