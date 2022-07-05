@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { LearningElementTO } from "../../../Application/LoadWorld/ILearningWorldPort";
-import { LearningComponentID } from "../../../Types/EnitityTypes";
+import { getIcon } from "../../Utils/GetIcon";
 import useObservable from "../CustomHooks/useObservable";
 import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import CustomDropdown from "../ReactBaseComponents/CustomDropdown";
@@ -17,31 +17,6 @@ export default function LearningElementsDropdown() {
   const [learningElements] = useObservable<LearningElementTO[]>(
     viewModels[0]?.learningElements
   );
-
-  const getIcon = (learningElement: LearningElementTO) => {
-    switch (learningElement.learningElementData.type) {
-      case "text":
-        return (
-          <img
-            className="lg:w-10 w-5"
-            src="icons/Zettel_darkblue_text-icon.svg"
-          ></img>
-        );
-      case "video":
-        return (
-          <img
-            className="lg:w-10 w-5"
-            src="icons/video_icon_screen_button.svg"
-          ></img>
-        );
-      case "image":
-        return <img className="lg:w-10 w-5" src="icons/bild_icon.svg"></img>;
-      case "h5p":
-        return <img className="lg:w-10 w-5" src="icons/h5p_icon.svg"></img>;
-      default:
-        return null;
-    }
-  };
 
   const [dropDownOpen, setDropDownOpen] = useState(false);
   return (
@@ -69,7 +44,9 @@ export default function LearningElementsDropdown() {
                 className="flex items-start"
                 onClick={() => controllers[0]?.startLearningElement(element.id)}
               >
-                <div className="lg:w-10 w-5">{getIcon(element)}</div>
+                <div className="lg:w-10 w-5">
+                  {getIcon(element.learningElementData.type)}
+                </div>
                 <h3 className="ml-2 text-white self-center text-sm lg:text-lg">
                   {element.name}
                 </h3>
