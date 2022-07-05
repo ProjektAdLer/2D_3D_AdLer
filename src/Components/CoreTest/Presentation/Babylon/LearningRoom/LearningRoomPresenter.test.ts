@@ -5,7 +5,6 @@ import LearningElementBuilder from "../../../../Core/Presentation/Babylon/Learni
 import LearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementPresenter";
 import LearningRoomPresenter from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomPresenter";
 import LearningRoomViewModel from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomViewModel";
-import PresentationDirector from "../../../../Core/Presentation/PresentationBuilder/PresentationDirector";
 
 const presentLearningElementMock = jest.spyOn(
   LearningElementPresenter.prototype,
@@ -16,7 +15,6 @@ const getPresenterMock = jest.spyOn(
   "getPresenter"
 );
 const openDoorMock = jest.spyOn(DoorPresenter.prototype, "openDoor");
-// var buildMock = jest.spyOn(PresentationDirector.prototype, "build");
 
 const roomTO: LearningRoomTO = {
   id: 1,

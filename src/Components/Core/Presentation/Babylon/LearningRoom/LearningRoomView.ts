@@ -63,18 +63,18 @@ export default class LearningRoomView implements ILearningRoomView {
   }
 
   private displayRoom(): void {
-    this.createWalls();
-    this.createFloor();
+    //  this.createWalls();
+    //  this.createFloor();
 
     //creating floor via roomCornerPoints ~FK
-    // this.createFloorViaCorners();
+    this.createFloorViaCorners();
   }
 
   private createFloorViaCorners(): void {
     // Errorhandling: Check if viewModel is set
     if (!this.viewModel)
       throw new Error(
-        "ViewModel not set. Use the ViewModel setter before calling this method"
+        "ViewModel not set. Check if the Builder is set up properly."
       );
 
     // Errorhandling: Check if cornerCount is higher than 2
