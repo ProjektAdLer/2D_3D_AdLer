@@ -18,7 +18,7 @@ export default function NewH5PContent({
       if (h5pContainerRef.current && !h5pShown) {
         const el = h5pContainerRef.current;
         const options = {
-          h5pJsonPath: "https://localhost:7117/h5p/",
+          h5pJsonPath: "https://api.cluuub.xyz/userlogin/h5p/",
           frameJs: "../../ThirdParty/assets/frame.bundle.js",
           frameCss: "../../ThirdParty/styles/h5p.css",
         };
