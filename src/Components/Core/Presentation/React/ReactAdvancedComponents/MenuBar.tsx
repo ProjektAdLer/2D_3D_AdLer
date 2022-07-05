@@ -6,6 +6,10 @@ import MoodleLoginButton from "../MoodleLoginButton/MoodleLoginButton";
 import DebugPanel from "../DebugPanel/DebugPanel";
 import axios from "axios";
 
+import debugIcon from "../../../../../Assets/icons/debug-icon.svg";
+import downloadIcon from "../../../../../Assets/icons/download_file_moodle.svg";
+import fullscreenIcon from "../../../../../Assets/icons/fullscreen-icon.svg";
+
 export default function MenuBar() {
   const loadWorldController = new LoadWorldController();
 
@@ -17,7 +21,7 @@ export default function MenuBar() {
           // await loadWorldController.loadAvatar();
         }}
       >
-        <img className="w-6 lg:w-10" src="icons/debug-icon.svg"></img>
+        <img className="w-6 lg:w-10" src={debugIcon}></img>
       </StyledButton>
       <StyledButton
         onClick={() => {
@@ -30,13 +34,13 @@ export default function MenuBar() {
           }
         }}
       >
-        <img className="w-6 lg:w-10" src="icons/fullscreen-icon.svg"></img>
+        <img className="w-6 lg:w-10" src={fullscreenIcon}></img>
       </StyledButton>
       <MoodleLoginButton />
       <StyledButton onClick={debug}>
         <img
           className="w-6 lg:w-10"
-          src="icons/download_file_moodle.svg"
+          src={downloadIcon}
           alt="Download File from Moodle"
         ></img>
       </StyledButton>

@@ -4,6 +4,8 @@ import StyledButton from "../ReactBaseComponents/StyledButton";
 import MoodleLoginButtonController from "./MoodleLoginButtonController";
 import MoodleLoginButtonViewModel from "./MoodleLoginButtonViewModel";
 
+import moodleIcon from "../../../../../Assets/icons/moodle-icon.svg";
+
 export default function MoodleLoginButton() {
   const [viewModels, controllers] = useViewModelControllerProvider<
     MoodleLoginButtonViewModel,
@@ -21,7 +23,7 @@ export default function MoodleLoginButton() {
     >
       <img
         className="w-6 lg:w-10 rounded-lg"
-        src="icons/moodle-icon.svg"
+        src={moodleIcon}
         style={loginSuccessful ? { background: "green" } : {}}
       ></img>
     </StyledButton>

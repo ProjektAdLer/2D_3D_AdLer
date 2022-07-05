@@ -3,6 +3,8 @@ import useViewModelControllerProvider from "../CustomHooks/useViewModelControlle
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import ScorePanelViewModel from "./ScorePanelViewModel";
 
+import coinIcon from "../../../../../Assets/icons/coin_icon.svg";
+
 export default function ScorePanel() {
   const [viewModels] = useViewModelControllerProvider<
     ScorePanelViewModel,
@@ -14,10 +16,7 @@ export default function ScorePanel() {
     <div className="grid justify-end">
       <StyledContainer className="text-lg lg:text-4xl text-white text-shadow font-extrabold bg-transparent">
         {score ? score : 0}
-        <img
-          src="icons/coin_icon.svg"
-          className="xl:w-16 lg:w-10 md:w-8 sm:w-8"
-        ></img>
+        <img src={coinIcon} className="xl:w-16 lg:w-10 md:w-8 sm:w-8"></img>
       </StyledContainer>
     </div>
   );
