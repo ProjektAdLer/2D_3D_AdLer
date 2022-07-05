@@ -4,6 +4,8 @@ import useViewModelControllerProvider from "../CustomHooks/useViewModelControlle
 import LearningWorldViewModel from "../../../Ports/LearningWorldPort/LearningWorldViewModel";
 import LearningWorldComponent from "../../../Ports/LearningWorldPort/LearningWorldComponent";
 
+import roomIcon from "../../../../../Assets/icons/lernraum_icon.svg";
+
 export default function WorldNamePanel() {
   const [viewModel] = useViewModelControllerProvider<LearningWorldViewModel>(
     LearningWorldViewModel
@@ -17,7 +19,7 @@ export default function WorldNamePanel() {
     <div className="flex justify-center">
       {(worldNameLoading || worldName) && (
         <StyledContainer className="p-13 text-xl lg:text-4xl font-extrabold text-white text-shadow whitespace-nowrap">
-          <img className="w-8 lg:w-16" src="icons/lernraum_icon.svg"></img>
+          <img className="w-8 lg:w-16" src={roomIcon}></img>
           <LearningWorldComponent
             worldName={worldName}
             worldNameLoading={worldNameLoading}
