@@ -4,7 +4,7 @@ import useViewModelControllerProvider from "../CustomHooks/useViewModelControlle
 import LearningWorldViewModel from "../../../Ports/LearningWorldPort/LearningWorldViewModel";
 import LearningWorldComponent from "../../../Ports/LearningWorldPort/LearningWorldComponent";
 
-import roomIcon from "../../../../../Assets/icons/lernraum_icon.svg";
+import roomIcon from "../../../../../Assets/icons/Lernraum_icon.svg";
 
 export default function WorldNamePanel() {
   const [viewModel] = useViewModelControllerProvider<LearningWorldViewModel>(
