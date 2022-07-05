@@ -4,6 +4,7 @@
 
 const { override, addBabelPlugin } = require("customize-cra");
 const babelTsTransformPlugin = require("babel-plugin-transform-typescript-metadata");
+const rewireWebpackBundleAnalyzer = require("react-app-rewire-webpack-bundle-analyzer");
 
 module.exports = {
   webpack: override(addBabelPlugin(babelTsTransformPlugin), (config) => {
@@ -13,6 +14,14 @@ module.exports = {
       fs: false,
     });
     config.resolve.fallback = fallback;
+
+    if (process.env === "production") {
+      config = rewireWebpackBundleAnalyzer(config, env, {
+        analyzerMode: "static",
+        reportFilename: "report.html",
+      });
+    }
+
     return config;
   }),
   jest: (config) => {
