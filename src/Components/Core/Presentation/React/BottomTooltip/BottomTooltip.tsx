@@ -3,11 +3,6 @@ import useViewModelControllerProvider from "../CustomHooks/useViewModelControlle
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
 
-import imageIcon from "../../../../../Assets/icons/bild_icon.svg";
-import h5pIcon from "../../../../../Assets/icons/h5p_icon.svg";
-import textIcon from "../../../../../Assets/icons/Zettel_darkblue_text-icon.svg";
-import videoIcon from "../../../../../Assets/icons/video_icon_screen_button.svg";
-
 export default function BottomTooltip() {
   const [viewModels] = useViewModelControllerProvider<BottomTooltipViewModel>(
     BottomTooltipViewModel
@@ -21,13 +16,17 @@ export default function BottomTooltip() {
   const getIcon = (type: string) => {
     switch (type) {
       case "text":
-        return <img className="w-10" src={textIcon}></img>;
+        return (
+          <img className="w-10" src="icons/Zettel_darkblue_text-icon.svg"></img>
+        );
       case "video":
-        return <img className="w-10" src={videoIcon}></img>;
+        return (
+          <img className="w-10" src="icons/video_icon_screen_button.svg"></img>
+        );
       case "image":
-        return <img className="w-10" src={imageIcon}></img>;
+        return <img className="w-10" src="icons/bild_icon.svg"></img>;
       case "h5p":
-        return <img className="w-10" src={h5pIcon}></img>;
+        return <img className="w-10" src="icons/h5p_icon.svg"></img>;
       default:
         return null;
     }

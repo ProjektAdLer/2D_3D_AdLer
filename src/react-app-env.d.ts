@@ -4,7 +4,6 @@
 declare module "*.jpg";
 declare module "*.png";
 declare module "*.env";
-declare module "*.svg";
 
 // 3D types
 declare module "*.glb";

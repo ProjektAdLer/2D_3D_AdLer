@@ -8,22 +8,11 @@ const babelTsTransformPlugin = require("babel-plugin-transform-typescript-metada
 module.exports = {
   webpack: override(addBabelPlugin(babelTsTransformPlugin), (config) => {
     const fallback = config.resolve.fallback || {};
-
     Object.assign(fallback, {
       path: require.resolve("path-browserify"),
       fs: false,
     });
     config.resolve.fallback = fallback;
-
-    // const rules = config.module.rules || [];
-
-    // rules.push({
-    //   test: /\.svg?$/,
-    //   type: "asset/resource",
-    // });
-
-    // config.module.rules = rules;
-
     return config;
   }),
   jest: (config) => {
