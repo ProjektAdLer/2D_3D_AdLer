@@ -3,7 +3,7 @@ const getBool = (input: string | boolean): boolean => {
   return input === "true";
 };
 export const config = {
-  isDebug: getBool(process.env.DEBUG || false),
+  isDebug: getBool(process.env.REACT_APP_IS_DEBUG || false),
   useAutoLogin: getBool(process.env.REACT_APP_USE_AUTOLOGIN || false),
   userName: process.env.REACT_APP_DEBUG_USERNAME || "",
   password: process.env.REACT_APP_DEBUG_PASSWORD || "",

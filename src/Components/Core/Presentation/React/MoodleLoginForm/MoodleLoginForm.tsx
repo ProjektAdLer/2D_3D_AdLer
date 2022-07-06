@@ -28,23 +28,6 @@ export default function MoodleLoginForm() {
     await controllers[0].loginAsync(userName, password);
   };
 
-  // Used for Debug Values
-  // useEffect(() => {
-  //   const fun = async () => {
-  //     setTimeout(async () => {
-  //       if (process.env.REACT_APP_IS_DEBUG === "true") {
-  //         setUserName(process.env.REACT_APP_DEBUG_USERNAME || "");
-  //         setPassword(process.env.REACT_APP_DEBUG_PASSWORD || "");
-  //         await controllers[0].loginAsync(
-  //           process.env.REACT_APP_DEBUG_USERNAME || "",
-  //           process.env.REACT_APP_DEBUG_PASSWORD || ""
-  //         );
-  //       }
-  //     }, 10);
-  //   };
-  //   fun();
-  // }, [modalVisible]);
-
   return (
     <StyledModal
       showModal={modalVisible}

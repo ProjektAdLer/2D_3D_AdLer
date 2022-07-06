@@ -1,4 +1,5 @@
 import { inject, injectable } from "inversify";
+import { config } from "../../../../config";
 import { logger } from "../../../../Lib/Logger";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_SYMBOLS";
@@ -17,15 +18,17 @@ export default class DebugUseCase implements IDebugUseCase {
   ) {}
   async executeAsync(data?: IDTO | undefined): Promise<void> {
     this.debugPort.addToMisc("Debug-Mode", "enabled");
-    logger.log("Debug: Automaticly loggin in User from environement variable");
-
-    await this.loginUsecase.executeAsync({
-      username: process.env.REACT_APP_DEBUG_USERNAME,
-      password: process.env.REACT_APP_DEBUG_PASSWORD,
-    });
-
-    logger.log("Debug: User logged in");
-
+    await this.logIn();
     return Promise.resolve();
   }
+
+  logIn = async (): Promise<void> => {
+    if (!config.useAutoLogin) throw new Error("AutoLogin is disabled");
+    logger.log("Debug: Automaticly loggin in User from environement variable");
+    await this.loginUsecase.executeAsync({
+      username: config.userName,
+      password: config.password,
+    });
+    logger.log("Debug: User logged in");
+  };
 }

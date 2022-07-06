@@ -1,3 +1,5 @@
+import { config } from "../config";
+
 interface LogFn {
   (message?: any, ...optionalParams: any[]): void;
 }
@@ -44,5 +46,5 @@ export class ConsoleLogger implements Logger {
 }
 
 export const logger = new ConsoleLogger({
-  level: (process.env.REACT_APP_LOGLEVEL || defaultLogLevel) as LogLevel,
+  level: (config.logLevel || defaultLogLevel) as LogLevel,
 });

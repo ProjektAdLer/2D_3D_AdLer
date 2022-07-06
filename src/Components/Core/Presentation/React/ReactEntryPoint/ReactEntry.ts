@@ -11,6 +11,7 @@ import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_SYMBOLS";
 import IDebugUseCase from "../../../Application/DebugUseCase/IDebugUseCase";
 import { logger } from "../../../../../Lib/Logger";
+import { config } from "../../../../../config";
 
 var isInDebug = false;
 
@@ -36,10 +37,7 @@ export default class ReactEntry implements IReactEntry {
 
     ReactDOM.render(strictModeComponent, document.getElementById("root"));
 
-    if (
-      process.env.NODE_ENV === "development" &&
-      process.env.REACT_APP_IS_DEBUG === "true"
-    ) {
+    if (process.env.NODE_ENV === "development" && config.isDebug) {
       document.onkeyup = function (e) {
         if (e.ctrlKey && e.key == "F1") {
           if (isInDebug) {
