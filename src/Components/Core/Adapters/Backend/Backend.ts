@@ -69,17 +69,18 @@ export default class Backend implements IBackend {
   }
 
   private async getDSL(): Promise<DSL> {
-    // TODO: replace this with a cached get request to the API-Server
-    return mockDSL;
+    if (config.useFakeBackend) {
+      return mockDSL;
+    }
 
-    // const response = await axios.post<DSL>(
-    //   config.serverURL +"/LearningWorld",
-    //   {
-    //     wsToken: "86215250e2e449dccec1559ff8629b17",
-    //     courseName: "Lernwelt Autorentool",
-    //   }
-    // );
-    // return response.data;
+    const response = await axios.post<DSL>(
+      config.serverURL + "/LearningWorld",
+      {
+        wsToken: "86215250e2e449dccec1559ff8629b17",
+        courseName: "Lernwelt Autorentool",
+      }
+    );
+    return response.data;
   }
 }
 
