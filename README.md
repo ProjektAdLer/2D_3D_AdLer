@@ -12,6 +12,7 @@
   - `REACT_APP_API_SERVER_URL`=`URL zum server` meinstens `https://api.cluuub.xyz/`
   - `REACT_APP_USE_AUTOLOGIN`=`true | false`
   - `REACT_APP_USE_FAKEBACKEND`=`true | false`
+  - `REACT_APP_AUTO_LOGIN_WITHOUT_SHORTCUT=true`
 
 ## Verfügbare Commands
 
