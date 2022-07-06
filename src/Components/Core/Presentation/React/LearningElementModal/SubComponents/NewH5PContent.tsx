@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { H5P } from "h5p-standalone";
+import { H5P as H5PPlayer } from "h5p-standalone";
 import LearningElementModalViewModel from "../LearningElementModalViewModel";
 import { logger } from "../../../../../../Lib/Logger";
 import H5PLearningElementData from "../../../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
@@ -27,8 +27,9 @@ export default function NewH5PContent({
           frameJs: serverURL + "/TestH5P/" + "/h5pBase/frame.bundle.js",
           frameCss: serverURL + "/TestH5P/" + "/h5pBase/styles/h5p.css",
         };
-        new H5P(el, options).then(() => {
+        new H5PPlayer(el, options).then(() => {
           console.log("H5P Geladen");
+          //@ts-ignore
           H5P.externalDispatcher.on("xAPI", (event: any) => {
             //do something useful with the event
             console.log("xAPI event: ", event);
