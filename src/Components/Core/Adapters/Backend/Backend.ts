@@ -75,7 +75,7 @@ export default class Backend implements IBackend {
       "https://api.cluuub.xyz/LearningWorld",
       {
         wsToken: "86215250e2e449dccec1559ff8629b17",
-        courseName: "Lernwelt Metriken",
+        courseName: "Lernwelt Autorentool",
       }
     );
     return response.data;

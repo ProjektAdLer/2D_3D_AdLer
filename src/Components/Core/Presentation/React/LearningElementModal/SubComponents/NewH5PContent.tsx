@@ -20,16 +20,26 @@ export default function NewH5PContent({
         const serverURL =
           process.env.REACT_APP_API_SERVER_URL || "https://localhost:49153";
         const options = {
-          h5pJsonPath: serverURL + "/h5p/",
+          h5pJsonPath:
+            serverURL + "/h5p/" + viewModel.learningElementData.Value.fileName,
           frameJs: serverURL + "/h5pBase/frame.bundle.js",
           frameCss: serverURL + "/h5pBase/styles/h5p.css",
         };
-        await new H5P(el, options);
+        new H5P(el, options).then(() => {
+          console.log("H5P Geladen");
+          H5P.externalDispatcher.on("xAPI", (event: any) => {
+            //do something useful with the event
+            console.log("xAPI event: ", event);
+          });
+        });
+
         setH5pShown(true);
       }
     };
     debug();
   }, []);
+
+  console.log("VM", viewModel);
 
   return (
     <div className="App">
