@@ -11,6 +11,7 @@
   - `REACT_APP_LOGLEVEL`=`"log"|"warn"|"error"`
   - `REACT_APP_API_SERVER_URL`=`URL zum server` meinstens `https://api.cluuub.xyz/`
   - `REACT_APP_USE_AUTOLOGIN`=`true | false`
+  - ``EACT_APP_USE_FAKEBACKEND`=`true | false`
 
 ## Verfügbare Commands
 
