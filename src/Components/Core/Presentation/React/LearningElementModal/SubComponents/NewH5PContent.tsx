@@ -18,12 +18,14 @@ export default function NewH5PContent({
       if (h5pContainerRef.current && !h5pShown) {
         const el = h5pContainerRef.current;
         const serverURL =
-          process.env.REACT_APP_API_SERVER_URL || "https://localhost:49153";
+          process.env.REACT_APP_API_SERVER_URL || "https://localhost:1771";
         const options = {
           h5pJsonPath:
-            serverURL + "/h5p/" + viewModel.learningElementData.Value.fileName,
-          frameJs: serverURL + "/h5pBase/frame.bundle.js",
-          frameCss: serverURL + "/h5pBase/styles/h5p.css",
+            serverURL +
+            "/TestH5P/" +
+            viewModel.learningElementData.Value.fileName,
+          frameJs: serverURL + "/TestH5P/" + "/h5pBase/frame.bundle.js",
+          frameCss: serverURL + "/TestH5P/" + "/h5pBase/styles/h5p.css",
         };
         new H5P(el, options).then(() => {
           console.log("H5P Geladen");
