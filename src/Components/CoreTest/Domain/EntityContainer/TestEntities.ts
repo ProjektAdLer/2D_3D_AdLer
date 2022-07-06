@@ -1,10 +1,8 @@
-import AbstractEntity from "../../../../../Legacy/AbstractEntity";
-
-export class TestEntity extends AbstractEntity {
+export class TestEntity {
   test1: string;
   test2: boolean;
 }
 
-export class TestEntity2 extends AbstractEntity {
+export class TestEntity2 {
   test1: string;
 }

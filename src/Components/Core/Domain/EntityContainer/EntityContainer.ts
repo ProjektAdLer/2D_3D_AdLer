@@ -1,6 +1,5 @@
 import { injectable } from "inversify";
 import { ConstructorReference } from "../../Types/EntityManagerTypes";
-import AbstractEntity from "../../../../../Legacy/AbstractEntity";
 import IEntityContainer from "./IEntityContainer";
 
 @injectable()
@@ -55,8 +54,7 @@ export default class EntityContainer implements IEntityContainer {
   }
 
   deleteEntity(entity: object): void {
-    const entityType =
-      entity.constructor as ConstructorReference<AbstractEntity>;
+    const entityType = entity.constructor as ConstructorReference<object>;
 
     const entityList = this.entityMap.get(entityType);
 
