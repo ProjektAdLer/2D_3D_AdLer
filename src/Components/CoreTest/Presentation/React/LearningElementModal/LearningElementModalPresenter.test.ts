@@ -24,9 +24,9 @@ describe("LearningElementModalPresenter", () => {
       learningElementTO
     );
 
-    expect(learningElementModalPresenter["viewModel"].type.Value).toBe(
-      learningElementTO.learningElementData.type
-    );
+    expect(
+      learningElementModalPresenter["viewModel"].learningElementData.Value.type
+    ).toBe(learningElementTO.learningElementData.type);
     expect(learningElementModalPresenter["viewModel"].isOpen.Value).toBe(true);
     expect(learningElementModalPresenter["viewModel"].id.Value).toBe(
       learningElementTO.id
