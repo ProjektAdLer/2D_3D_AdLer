@@ -7,12 +7,18 @@ import { APILearningElementTO } from "./APILearningElementTO";
 import { APILearningRoomTO } from "./APILearningRoomTO";
 import { APIWorldTo } from "./APIWorldTO";
 import DSL from "./DSL";
-import IBackend from "./IBackend";
+import IBackend, { tempApiInfo } from "./IBackend";
 
 @injectable()
 export default class Backend implements IBackend {
-  async getWorld(): Promise<Partial<APIWorldTo>> {
-    let dsl = await this.getDSL();
+  async getWorld({
+    userToken,
+    worldName,
+  }: tempApiInfo): Promise<Partial<APIWorldTo>> {
+    let dsl = await this.getDSL({
+      userToken,
+      worldName,
+    });
     return {
       name: dsl.learningWorld.identifier.value,
       learningRoomIds: dsl.learningWorld.learningSpaces.map((space) => {
@@ -21,8 +27,11 @@ export default class Backend implements IBackend {
     } as Partial<APIWorldTo>;
   }
 
-  async getLearningRooms(): Promise<(APILearningRoomTO | undefined)[]> {
-    let dsl = await this.getDSL();
+  async getLearningRooms({
+    userToken,
+    worldName,
+  }: tempApiInfo): Promise<(APILearningRoomTO | undefined)[]> {
+    let dsl = await this.getDSL({ userToken, worldName });
     return dsl.learningWorld.learningSpaces.map((space) => {
       return {
         id: space.spaceId,
@@ -32,8 +41,11 @@ export default class Backend implements IBackend {
     });
   }
 
-  async getLearningElements(): Promise<(APILearningElementTO | undefined)[]> {
-    let dsl = await this.getDSL();
+  async getLearningElements({
+    userToken,
+    worldName,
+  }: tempApiInfo): Promise<(APILearningElementTO | undefined)[]> {
+    let dsl = await this.getDSL({ userToken, worldName });
     return dsl.learningWorld.learningElements.flatMap((element) =>
       element.elementType in LearningElementTypeSymbols
         ? ({
@@ -68,7 +80,7 @@ export default class Backend implements IBackend {
     return token.data;
   }
 
-  private async getDSL(): Promise<DSL> {
+  private async getDSL({ userToken, worldName }: tempApiInfo): Promise<DSL> {
     if (config.useFakeBackend) {
       return mockDSL;
     }
@@ -76,8 +88,8 @@ export default class Backend implements IBackend {
     const response = await axios.post<DSL>(
       config.serverURL + "/LearningWorld",
       {
-        wsToken: "86215250e2e449dccec1559ff8629b17",
-        courseName: "Lernwelt Autorentool",
+        wsToken: userToken,
+        courseName: worldName,
       }
     );
     return response.data;

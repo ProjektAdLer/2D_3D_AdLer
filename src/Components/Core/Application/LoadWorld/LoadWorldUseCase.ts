@@ -1,3 +1,4 @@
+import { type tempApiInfo } from "./../../Adapters/Backend/IBackend";
 import { APILearningRoomTO } from "./../../Adapters/Backend/APILearningRoomTO";
 import { inject, injectable } from "inversify";
 import { APILearningElementTO } from "../../Adapters/Backend/APILearningElementTO";
@@ -6,6 +7,7 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
 import LearningRoomEntity from "../../Domain/Entities/LearningRoomEntity";
 import LearningWorldEntity from "../../Domain/Entities/LearningWorldEntity";
+import UserDataEntity from "../../Domain/Entities/UserData";
 import type IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import type ILearningWorldPort from "./ILearningWorldPort";
 import { LearningWorldTO } from "./ILearningWorldPort";
@@ -14,9 +16,9 @@ import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import ILoadAvatarUseCase from "../LoadAvatar/ILoadAvatarUseCase";
 import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_SYMBOLS";
-import AbstractLearningElement from "../../Domain/Entities/SpecificLearningElements/AbstractLearningElement";
 import H5PLearningElementData from "../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
 import TextLearningElementData from "../../Domain/Entities/SpecificLearningElements/TextLearningElementData";
+import type IUIPort from "../../Ports/UIPort/IUIPort";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -28,11 +30,20 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
     @inject(CORE_TYPES.IBackend)
-    private backend: IBackend
+    private backend: IBackend,
+    @inject(PORT_TYPES.IUIPort)
+    private uiPort: IUIPort
   ) {}
 
   async executeAsync(): Promise<void> {
-    await this.load();
+    const userData = this.container.getEntitiesOfType(UserDataEntity);
+
+    if (userData.length === 0) {
+      this.uiPort.displayModal("User is not logged in!", "error");
+      return Promise.reject("User is not logged in");
+    }
+
+    await this.load(userData[0]);
 
     this.learningWorldPort.presentLearningWorld(
       this.toTO(this.learningWorldEntity)
@@ -98,12 +109,21 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     );
   };
 
-  private async load(): Promise<void> {
-    const worldResp = await this.backend.getWorld();
-    const learningRoomResp =
-      (await this.backend.getLearningRooms()) as APILearningRoomTO[];
-    const learningElementResp =
-      (await this.backend.getLearningElements()) as APILearningElementTO[];
+  private async load(userData: UserDataEntity): Promise<void> {
+    const worldName = "Lernwelt Autorentool";
+
+    var test = {
+      userToken: userData.userToken,
+      worldName: worldName,
+    } as tempApiInfo;
+
+    const worldResp = await this.backend.getWorld(test);
+    const learningRoomResp = (await this.backend.getLearningRooms(
+      test
+    )) as APILearningRoomTO[];
+    const learningElementResp = (await this.backend.getLearningElements(
+      test
+    )) as APILearningElementTO[];
 
     if (this.container.getEntitiesOfType(LearningWorldEntity).length === 0) {
       // Learning Elements
