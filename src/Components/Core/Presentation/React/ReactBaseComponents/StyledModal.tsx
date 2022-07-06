@@ -7,6 +7,7 @@ type Props = Partial<{
   canClose: boolean;
   onClose: () => void;
   footer: string;
+  [x: string]: any;
 }>;
 
 /**

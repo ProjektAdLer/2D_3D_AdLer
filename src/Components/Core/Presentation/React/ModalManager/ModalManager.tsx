@@ -5,7 +5,7 @@ import ModalManagerController from "./ModalManagerController";
 import { ErrorMessage, NotificationType } from "./ModalManagerPresenter";
 import ModalManagerViewModel from "./ModalManagerViewModel";
 
-export default function ModalManager() {
+export default function ModalManager({ ...restProps }: { [x: string]: any }) {
   const [viewModels] = useViewModelControllerProvider<
     ModalManagerViewModel,
     ModalManagerController
@@ -33,6 +33,7 @@ export default function ModalManager() {
       onClose={() => {
         setNotifications(notifications.splice(0, -1));
       }}
+      {...restProps}
     >
       {notifications.last().message}
     </StyledModal>
