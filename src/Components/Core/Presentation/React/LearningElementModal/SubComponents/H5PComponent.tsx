@@ -1,11 +1,14 @@
 import { useRef } from "react";
+import { config } from "../../../../../../config";
 const createIframeUrl = (contextId: number, fileName: string) => {
   // In addition to contextId and fileName, in the future, we will also need a package
   // the package number is indicated by the size of the array returned by the REST call
-  const baseUrl = "https://moodle.cluuub.xyz/h5p/embed.php";
-  const template = `https://moodle.cluuub.xyz/pluginfile.php/${contextId}/mod_h5pactivity/package/0/${encodeURIComponent(
-    fileName
-  )}`;
+  const baseUrl = config.serverURL + "/h5p/embed.php";
+  const template =
+    config.serverURL +
+    `/pluginfile.php/${contextId}/mod_h5pactivity/package/0/${encodeURIComponent(
+      fileName
+    )}`;
 
   return (
     baseUrl +

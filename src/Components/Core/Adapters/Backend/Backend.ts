@@ -1,5 +1,6 @@
 import axios from "axios";
 import { injectable } from "inversify";
+import { config } from "../../../../config";
 import { logger } from "../../../../Lib/Logger";
 import { LearningElementTypeSymbols } from "../../Presentation/Babylon/LearningElement/Types/LearningElementTypes";
 import { APILearningElementTO } from "./APILearningElementTO";
@@ -60,7 +61,7 @@ export default class Backend implements IBackend {
     password: string;
   }): Promise<string> {
     const token = await axios.post<string>(
-      "https://api.cluuub.xyz/userlogin",
+      config.serverURL + "/userlogin",
       userCredentials
     );
 
@@ -72,7 +73,7 @@ export default class Backend implements IBackend {
     return mockDSL;
 
     // const response = await axios.post<DSL>(
-    //   "https://api.cluuub.xyz/LearningWorld",
+    //   config.serverURL +"/LearningWorld",
     //   {
     //     wsToken: "86215250e2e449dccec1559ff8629b17",
     //     courseName: "Lernwelt Autorentool",

@@ -4,6 +4,7 @@ import { H5P as H5PPlayer } from "h5p-standalone";
 import LearningElementModalViewModel from "../LearningElementModalViewModel";
 import { logger } from "../../../../../../Lib/Logger";
 import H5PLearningElementData from "../../../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
+import { config } from "../../../../../../config";
 export default function NewH5PContent({
   viewModel,
 }: {
@@ -17,15 +18,14 @@ export default function NewH5PContent({
     const debug = async () => {
       if (h5pContainerRef.current && !h5pShown) {
         const el = h5pContainerRef.current;
-        const serverURL =
-          process.env.REACT_APP_API_SERVER_URL || "https://localhost:1771";
+
         const options = {
           h5pJsonPath:
-            serverURL +
+            config.serverURL +
             "/TestH5P/" +
             viewModel.learningElementData.Value.fileName,
-          frameJs: serverURL + "/TestH5P/" + "/h5pBase/frame.bundle.js",
-          frameCss: serverURL + "/TestH5P/" + "/h5pBase/styles/h5p.css",
+          frameJs: config.serverURL + "/TestH5P/" + "/h5pBase/frame.bundle.js",
+          frameCss: config.serverURL + "/TestH5P/" + "/h5pBase/styles/h5p.css",
         };
         new H5PPlayer(el, options).then(() => {
           console.log("H5P Geladen");

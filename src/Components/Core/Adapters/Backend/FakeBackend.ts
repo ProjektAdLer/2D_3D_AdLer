@@ -8,6 +8,7 @@ import { APILearningElementTO } from "./APILearningElementTO";
 
 import axios from "axios";
 import { logger } from "../../../../Lib/Logger";
+import { config } from "../../../../config";
 
 @injectable()
 export class FakeBackend implements IBackend {
@@ -16,11 +17,11 @@ export class FakeBackend implements IBackend {
     password: string;
   }): Promise<string> {
     // const response = await axios.get<string>(
-    //   "https://api.cluuub.xyz/userlogin"
+    //   config.serverURL +"/userlogin"
     // );
 
     const token = await axios.post<string>(
-      "https://api.cluuub.xyz/userlogin",
+      config.serverURL + "/userlogin",
       userCredentials
     );
 
