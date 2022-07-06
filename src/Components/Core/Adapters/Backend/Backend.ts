@@ -69,16 +69,16 @@ export default class Backend implements IBackend {
 
   private async getDSL(): Promise<DSL> {
     // TODO: replace this with a cached get request to the API-Server
-    //return mockDSL;
+    return mockDSL;
 
-    const response = await axios.post<DSL>(
-      "https://api.cluuub.xyz/LearningWorld",
-      {
-        wsToken: "86215250e2e449dccec1559ff8629b17",
-        courseName: "Lernwelt Autorentool",
-      }
-    );
-    return response.data;
+    // const response = await axios.post<DSL>(
+    //   "https://api.cluuub.xyz/LearningWorld",
+    //   {
+    //     wsToken: "86215250e2e449dccec1559ff8629b17",
+    //     courseName: "Lernwelt Autorentool",
+    //   }
+    // );
+    // return response.data;
   }
 }
 
@@ -114,7 +114,7 @@ const mockDSL: DSL = {
         requirements: null,
         metaData: [
           { key: "h5pContextId", value: "123" },
-          { key: "h5pFileName", value: "bla.h5p" },
+          { key: "h5pFileName", value: "Metriken Teil 1" },
         ],
       },
       {
@@ -128,7 +128,7 @@ const mockDSL: DSL = {
         requirements: null,
         metaData: [
           { key: "h5pContextId", value: "123" },
-          { key: "h5pFileName", value: "bla.h5p" },
+          { key: "h5pFileName", value: "Schiebespiel Metriken" },
         ],
       },
       {
@@ -142,7 +142,7 @@ const mockDSL: DSL = {
         requirements: null,
         metaData: [
           { key: "h5pContextId", value: "123" },
-          { key: "h5pFileName", value: "bla.h5p" },
+          { key: "h5pFileName", value: "Wortsuche Metriken" },
         ],
       },
       {
