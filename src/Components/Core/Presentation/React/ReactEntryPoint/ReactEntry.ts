@@ -37,6 +37,18 @@ export default class ReactEntry implements IReactEntry {
 
     ReactDOM.render(strictModeComponent, document.getElementById("root"));
 
+    if (
+      config.autoLoginWithoutShortct &&
+      process.env.NODE_ENV === "development" &&
+      config.isDebug &&
+      !isInDebug
+    ) {
+      isInDebug = true;
+      CoreDIContainer.get<IDebugUseCase>(
+        USECASE_TYPES.IDebugUseCase
+      ).executeAsync();
+    }
+
     if (process.env.NODE_ENV === "development" && config.isDebug) {
       document.onkeyup = function (e) {
         if (e.ctrlKey && e.key == "F1") {

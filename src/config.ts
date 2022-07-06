@@ -10,4 +10,7 @@ export const config = {
   logLevel: process.env.REACT_APP_LOGLEVEL || "warn",
   serverURL: process.env.REACT_APP_API_SERVER_URL || "https://api.cluuub.xyz",
   useFakeBackend: getBool(process.env.REACT_APP_USE_FAKEBACKEND || false),
+  autoLoginWithoutShortct: getBool(
+    process.env.REACT_APP_AUTO_LOGIN_WITHOUT_SHORTCUT || false
+  ),
 };
