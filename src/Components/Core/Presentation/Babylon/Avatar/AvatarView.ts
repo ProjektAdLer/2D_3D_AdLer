@@ -1,5 +1,6 @@
 import {
   ArcRotateCamera,
+  ArcRotateCameraMouseWheelInput,
   ArcRotateCameraPointersInput,
   Axis,
   LinesMesh,
@@ -10,6 +11,7 @@ import {
   Vector3,
 } from "@babylonjs/core";
 import bind from "bind-decorator";
+import { config } from "../../../../../config";
 import { logger } from "../../../../../Lib/Logger";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
@@ -97,16 +99,23 @@ export default class AvatarView {
       this.viewModel.parentNode.Value.position,
       this.scenePresenter.Scene
     );
-    camera.upperBetaLimit = Math.PI / 2;
 
-    // camera.inputs.attached.mousewheel.attachControl();
+    // add camera zoom
+    camera.lowerRadiusLimit = 5;
+    camera.upperRadiusLimit = 30;
+    camera.inputs.attached.mousewheel.attachControl();
+    (
+      camera.inputs.attached.mousewheel as ArcRotateCameraMouseWheelInput
+    ).wheelDeltaPercentage = 0.01;
+
+    // add camera rotation
+    camera.upperBetaLimit = Math.PI / 2;
     camera.inputs.attached.pointers.attachControl();
     // only rotate with the left mouse button (index: 0)
     (camera.inputs.attached.pointers as ArcRotateCameraPointersInput).buttons =
       [0];
 
-    logger.log(camera.inputs.attached);
-
+    // set camera parent
     camera.parent = this.viewModel.parentNode.Value;
     this.scenePresenter.Scene.activeCamera = camera;
   }
@@ -124,52 +133,54 @@ export default class AvatarView {
         velocity.normalize();
         let desiredRotation = Math.atan2(velocity.x, velocity.z);
 
-        // debug_displayVelocity(
-        //   this.viewModel,
-        //   this.scenePresenter,
-        //   velocity,
-        //   desiredRotation
-        // );
+        if (config.isDebug) {
+          this.debug_displayVelocity(
+            this.viewModel,
+            this.scenePresenter,
+            velocity,
+            desiredRotation
+          );
+        }
 
         this.viewModel.meshes.Value[0].rotationQuaternion =
           Quaternion.RotationAxis(Axis.Y, desiredRotation);
       }
     }
   }
+
+  // TODO: this debug function needs to be excluded from the build
+  private velocityLine: LinesMesh;
+  private counter: number = 0;
+
+  private debug_displayVelocity = (
+    viewModel: AvatarViewModel,
+    scenePresenter: IScenePresenter,
+    velocity: Vector3,
+    rotation: number
+  ): void => {
+    if (this.counter % 10 === 0) {
+      let points: Vector3[] = [
+        viewModel.parentNode.Value.position,
+        viewModel.parentNode.Value.position.add(velocity),
+      ];
+      this.velocityLine = MeshBuilder.CreateDashedLines(
+        "avatar velocity",
+        {
+          points: points,
+          updatable: true,
+          instance: this.velocityLine,
+        },
+        scenePresenter.Scene
+      );
+
+      logger.log(
+        velocity.toString() +
+          " " +
+          rotation +
+          " " +
+          viewModel.meshes.Value[0].rotationQuaternion?.y
+      );
+    }
+    this.counter++;
+  };
 }
-
-// TODO: this debug function needs to be excluded from the build
-let velocityLine: LinesMesh;
-let counter: number = 0;
-
-let debug_displayVelocity = (
-  viewModel: AvatarViewModel,
-  scenePresenter: IScenePresenter,
-  velocity: Vector3,
-  rotation: number
-): void => {
-  if (counter % 10 === 0) {
-    let points: Vector3[] = [
-      viewModel.parentNode.Value.position,
-      viewModel.parentNode.Value.position.add(velocity),
-    ];
-    velocityLine = MeshBuilder.CreateDashedLines(
-      "avatar velocity",
-      {
-        points: points,
-        updatable: true,
-        instance: velocityLine,
-      },
-      scenePresenter.Scene
-    );
-
-    logger.log(
-      velocity.toString() +
-        " " +
-        rotation +
-        " " +
-        viewModel.meshes.Value[0].rotationQuaternion?.y
-    );
-  }
-  counter++;
-};
