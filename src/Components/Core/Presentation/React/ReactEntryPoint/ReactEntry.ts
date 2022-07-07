@@ -8,7 +8,7 @@ import App from "./App";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
-import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_SYMBOLS";
+import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import IDebugUseCase from "../../../Application/DebugUseCase/IDebugUseCase";
 import { logger } from "../../../../../Lib/Logger";
 import { config } from "../../../../../config";

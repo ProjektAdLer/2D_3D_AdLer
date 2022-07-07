@@ -15,7 +15,7 @@ import ILoadWorldUseCase from "./ILoadWorldUseCase";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import ILoadAvatarUseCase from "../LoadAvatar/ILoadAvatarUseCase";
-import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_SYMBOLS";
+import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_TYPES";
 import H5PLearningElementData from "../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
 import TextLearningElementData from "../../Domain/Entities/SpecificLearningElements/TextLearningElementData";
 import type IUIPort from "../../Ports/UIPort/IUIPort";

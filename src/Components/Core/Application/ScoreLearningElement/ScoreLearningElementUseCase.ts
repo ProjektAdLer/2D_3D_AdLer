@@ -1,7 +1,7 @@
 import { LearningComponentID } from "./../../Types/EnitityTypes";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
-import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_SYMBOLS";
+import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import IScoreLearningElementUseCase from "./IScoreLearningElementUseCase";
 import type IBackend from "../../Adapters/Backend/IBackend";

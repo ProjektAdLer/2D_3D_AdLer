@@ -1,6 +1,6 @@
 import { inject } from "inversify";
 import type ILoadWorldUseCase from "../../Application/LoadWorld/ILoadWorldUseCase";
-import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_SYMBOLS";
+import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_TYPES";
 
 export default class LearningWorldController {
   constructor(

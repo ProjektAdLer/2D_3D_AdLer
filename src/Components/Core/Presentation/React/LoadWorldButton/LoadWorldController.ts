@@ -3,7 +3,7 @@ import ILoadAvatarUseCase from "../../../Application/LoadAvatar/ILoadAvatarUseCa
 import { injectable } from "inversify";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import ILoadWorldController from "./ILoadWorldController";
-import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_SYMBOLS";
+import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 
 @injectable()
 export class LoadWorldController implements ILoadWorldController {

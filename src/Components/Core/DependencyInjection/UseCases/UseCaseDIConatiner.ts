@@ -13,7 +13,7 @@ import ILogUserIntoMoodleUseCase from "../../Application/LogUserIntoMoodle/ILogU
 import LogUserIntoMoodleUseCase from "../../Application/LogUserIntoMoodle/LogUserIntoMoodleUseCase";
 import IScoreLearningElementUseCase from "../../Application/ScoreLearningElement/IScoreLearningElementUseCase";
 import ScoreLearningElementUseCase from "../../Application/ScoreLearningElement/ScoreLearningElementUseCase";
-import USECASE_TYPES from "./USECASE_SYMBOLS";
+import USECASE_TYPES from "./USECASE_TYPES";
 
 const useCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases

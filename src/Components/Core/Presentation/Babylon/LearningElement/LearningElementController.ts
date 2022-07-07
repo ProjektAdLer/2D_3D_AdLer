@@ -3,7 +3,7 @@ import bind from "bind-decorator";
 import ILearningElementStartedUseCase from "../../../Application/LearningElementStarted/ILearningElementStartedUseCase";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
-import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_SYMBOLS";
+import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import IUIPort from "../../../Ports/UIPort/IUIPort";
 import ILearningElementController from "./ILearningElementController";
 import LearningElementViewModel from "./LearningElementViewModel";
