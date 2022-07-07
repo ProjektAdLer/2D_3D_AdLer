@@ -7,7 +7,7 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
 import LearningRoomEntity from "../../Domain/Entities/LearningRoomEntity";
 import LearningWorldEntity from "../../Domain/Entities/LearningWorldEntity";
-import UserDataEntity from "../../Domain/Entities/UserData";
+import UserDataEntity from "../../Domain/Entities/UserDataEntity";
 import type IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import type ILearningWorldPort from "./ILearningWorldPort";
 import { LearningWorldTO } from "./ILearningWorldPort";

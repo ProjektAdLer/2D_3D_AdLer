@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import type IBackend from "../../Adapters/Backend/IBackend";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
-import UserDataEntity from "../../Domain/Entities/UserData";
+import UserDataEntity from "../../Domain/Entities/UserDataEntity";
 import type IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import type IDebugPort from "../../Ports/DebugPort/IDebugPort";
 import type IMoodlePort from "../../Ports/MoodlePort/IMoodlePort";
