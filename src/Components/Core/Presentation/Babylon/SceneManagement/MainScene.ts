@@ -1,7 +1,6 @@
 import ICreateSceneClass from "./ICreateSceneClass";
 import {
   Engine,
-  FreeCamera,
   Scene,
   Vector3,
   HemisphericLight,
@@ -10,19 +9,13 @@ import {
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { injectable } from "inversify";
-import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import IEngineManager from "../EngineManager/IEngineManager";
 import { config } from "../../../../../config";
 
 @injectable()
 export default class MainScene implements ICreateSceneClass {
   preTasks = [];
 
-  createScene = async (
-    engine: Engine,
-    canvas: HTMLCanvasElement
-  ): Promise<Scene> => {
+  createScene = async (engine: Engine): Promise<Scene> => {
     const scene = new Scene(engine);
     scene.clearColor = new Color4(0.66, 0.83, 0.98, 1); /* Lightblue */
     /* scene.clearColor = new Color4(0.97, 0.67, 0.44, 1); */ /* Orange */

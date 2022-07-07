@@ -76,8 +76,7 @@ export default class ScenePresenter implements IScenePresenter {
 
     // Create the scene
     this.viewModel.scene = await createSceneClass.createScene(
-      this.engineManager.Engine,
-      this.engineManager.Engine.getRenderingCanvas()!
+      this.engineManager.Engine
     );
   }
 
