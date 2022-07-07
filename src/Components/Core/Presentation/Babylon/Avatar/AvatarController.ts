@@ -36,15 +36,17 @@ export default class AvatarController implements IAvatarController {
         this.navigation.Plugin.getClosestPoint(startingPoint)
       );
 
-      let pathPoints = this.navigation.Plugin.computePath(
-        this.navigation.Crowd.getAgentPosition(this.viewModel.agentIndex),
-        this.navigation.Plugin.getClosestPoint(startingPoint)
-      );
-      this.pathLine = MeshBuilder.CreateDashedLines(
-        "navigation path",
-        { points: pathPoints, updatable: true, instance: this.pathLine },
-        this.scenePresenter.Scene
-      );
+      if (process.env.REACT_APP_IS_DEBUG === "true") {
+        let pathPoints = this.navigation.Plugin.computePath(
+          this.navigation.Crowd.getAgentPosition(this.viewModel.agentIndex),
+          this.navigation.Plugin.getClosestPoint(startingPoint)
+        );
+        this.pathLine = MeshBuilder.CreateDashedLines(
+          "navigation path",
+          { points: pathPoints, updatable: true, instance: this.pathLine },
+          this.scenePresenter.Scene
+        );
+      }
     }
   }
 

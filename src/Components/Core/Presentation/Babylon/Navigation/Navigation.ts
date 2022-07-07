@@ -53,15 +53,20 @@ export default class Navigation implements INavigation {
     );
 
     // debug: colored navmesh representation
-    this.navMeshDebug?.dispose();
-    this.navMeshDebug = this.plugin.createDebugNavMesh(
-      this.scenePresenter.Scene
-    );
-    this.navMeshDebug.position = new Vector3(0, 0.01, 0);
-    this.matDebug = new StandardMaterial("matdebug", this.scenePresenter.Scene);
-    this.matDebug.diffuseColor = new Color3(0.1, 0.2, 1);
-    this.matDebug.alpha = 0.2;
-    this.navMeshDebug.material = this.matDebug;
+    if (process.env.REACT_APP_IS_DEBUG === "true") {
+      this.navMeshDebug?.dispose();
+      this.navMeshDebug = this.plugin.createDebugNavMesh(
+        this.scenePresenter.Scene
+      );
+      this.navMeshDebug.position = new Vector3(0, 0.01, 0);
+      this.matDebug = new StandardMaterial(
+        "matdebug",
+        this.scenePresenter.Scene
+      );
+      this.matDebug.diffuseColor = new Color3(0.1, 0.2, 1);
+      this.matDebug.alpha = 0.2;
+      this.navMeshDebug.material = this.matDebug;
+    }
 
     // -- Navigation Crowd --
     this.crowd = this.plugin.createCrowd(
