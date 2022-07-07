@@ -1,12 +1,9 @@
-import { injectable } from "inversify";
 import LogUserIntoMoodleUseCase from "../../../Core/Application/LogUserIntoMoodle/LogUserIntoMoodleUseCase";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import UserDataEntity from "../../../Core/Domain/Entities/UserData";
-import EntityContainer from "../../../Core/Domain/EntityContainer/EntityContainer";
 import IMoodlePort from "../../../Core/Ports/MoodlePort/IMoodlePort";
-
 import { mock } from "jest-mock-extended";
 import IBackend from "../../../Core/Adapters/Backend/IBackend";
 import IDebugPort from "../../../Core/Ports/DebugPort/IDebugPort";
@@ -14,8 +11,8 @@ import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContai
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendMock = mock<IBackend>();
-const debugMock = mock<IDebugPort>();
-const moodleMock = mock<IMoodlePort>();
+const debugPortMock = mock<IDebugPort>();
+const moodlePortMock = mock<IMoodlePort>();
 
 describe("LogUserIntoMoodleUseCase", () => {
   let useCase: LogUserIntoMoodleUseCase;
@@ -24,10 +21,12 @@ describe("LogUserIntoMoodleUseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.unbind(PORT_TYPES.IMoodlePort);
-    CoreDIContainer.bind(PORT_TYPES.IMoodlePort).toConstantValue(moodleMock);
+    CoreDIContainer.bind(PORT_TYPES.IMoodlePort).toConstantValue(
+      moodlePortMock
+    );
 
     CoreDIContainer.unbind(PORT_TYPES.IDebugPort);
-    CoreDIContainer.bind(PORT_TYPES.IDebugPort).toConstantValue(debugMock);
+    CoreDIContainer.bind(PORT_TYPES.IDebugPort).toConstantValue(debugPortMock);
 
     CoreDIContainer.unbind(CORE_TYPES.IBackend);
     CoreDIContainer.bind(CORE_TYPES.IBackend).toConstantValue(backendMock);
@@ -38,12 +37,11 @@ describe("LogUserIntoMoodleUseCase", () => {
     );
   });
 
-  afterAll(() => {
-    CoreDIContainer.restore();
-  });
-
   beforeEach(() => {
     useCase = CoreDIContainer.resolve(LogUserIntoMoodleUseCase);
+  });
+  afterAll(() => {
+    CoreDIContainer.restore();
   });
 
   test("executeAsync calls the backend and stores correct user data in Enity", async () => {
@@ -69,6 +67,6 @@ describe("LogUserIntoMoodleUseCase", () => {
       UserDataEntity
     );
 
-    expect(moodleMock.loginSuccessful).toHaveBeenCalled();
+    expect(moodlePortMock.loginSuccessful).toHaveBeenCalled();
   });
 });
