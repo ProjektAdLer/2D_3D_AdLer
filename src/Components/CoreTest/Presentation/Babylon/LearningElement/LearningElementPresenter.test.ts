@@ -23,7 +23,6 @@ describe("LearningElementPresenter", () => {
     presenter.presentLearningElement(testElementTO, [testVector, 0]);
 
     expect(presenter["viewModel"].id).toBe(testElementTO.id);
-    expect(presenter["viewModel"].type.Value).toBe(testElementTO.type);
     expect(presenter["viewModel"].position.Value).toBe(testVector);
     expect(presenter["viewModel"].rotation.Value).toBe(0);
   });
