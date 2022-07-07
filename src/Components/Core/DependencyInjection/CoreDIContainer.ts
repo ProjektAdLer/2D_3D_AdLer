@@ -17,7 +17,7 @@ import INavigation from "../Presentation/Babylon/Navigation/INavigation";
 import Navigation from "../Presentation/Babylon/Navigation/Navigation";
 import NavigationConfiguration from "../Presentation/Babylon/Navigation/NavigationConfiguration";
 
-var CoreDIContainer = new Container();
+const CoreDIContainer = new Container();
 
 // Scene
 CoreDIContainer.bind<ISceneView>(CORE_TYPES.ISceneView)

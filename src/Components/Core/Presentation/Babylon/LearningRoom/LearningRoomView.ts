@@ -1,6 +1,5 @@
 import {
   Path2,
-  Vector2,
   VertexData,
   StandardMaterial,
   Texture,
@@ -129,8 +128,8 @@ export default class LearningRoomView implements ILearningRoomView {
         "ViewModel not set. Use the ViewModel setter before calling this method"
       );
 
-    var floorIndices = this.createFloorIndices();
-    var floorPositions = this.createFloorPositions();
+    let floorIndices = this.createFloorIndices();
+    let floorPositions = this.createFloorPositions();
 
     // create mesh
     if (!this.viewModel.floorMesh.Value) {
@@ -140,10 +139,10 @@ export default class LearningRoomView implements ILearningRoomView {
       );
     }
 
-    var normals = [] as number[];
-    var uvs = [0, 1, 0, 0, 1, 0, 1, 1];
+    let normals = [] as number[];
+    let uvs = [0, 1, 0, 0, 1, 0, 1, 1];
     VertexData.ComputeNormals(floorPositions, floorIndices, normals);
-    var vertexData = new VertexData();
+    let vertexData = new VertexData();
     vertexData.positions = floorPositions;
     vertexData.indices = floorIndices;
     vertexData.normals = normals;
@@ -173,8 +172,8 @@ export default class LearningRoomView implements ILearningRoomView {
         "ViewModel not set. Use the ViewModel setter before calling this method"
       );
 
-    var positions = this.createRoomPositions();
-    var wallIndices = this.createWallIndices();
+    let positions = this.createRoomPositions();
+    let wallIndices = this.createWallIndices();
 
     // create mesh
     if (!this.viewModel.wallMesh.Value) {
@@ -184,9 +183,9 @@ export default class LearningRoomView implements ILearningRoomView {
       );
     }
 
-    var normals = [] as number[];
+    let normals = [] as number[];
     VertexData.ComputeNormals(positions, wallIndices, normals);
-    var vertexData = new VertexData();
+    let vertexData = new VertexData();
     vertexData.positions = positions;
     vertexData.indices = wallIndices;
     vertexData.normals = normals;
@@ -205,10 +204,10 @@ export default class LearningRoomView implements ILearningRoomView {
   }
 
   private createFloorPositions() {
-    var roomWidth = this.viewModel.roomWidth.Value / 2;
-    var roomLength = this.viewModel.roomLength.Value / 2;
-    var baseHeight = this.viewModel.baseHeight.Value || 0;
-    var wallThickness = this.viewModel.wallThickness.Value;
+    let roomWidth = this.viewModel.roomWidth.Value / 2;
+    let roomLength = this.viewModel.roomLength.Value / 2;
+    let baseHeight = this.viewModel.baseHeight.Value || 0;
+    let wallThickness = this.viewModel.wallThickness.Value;
     return [
       roomWidth + wallThickness,
       baseHeight,
@@ -226,13 +225,13 @@ export default class LearningRoomView implements ILearningRoomView {
   }
 
   private createRoomPositions() {
-    var roomWidth = this.viewModel.roomWidth.Value / 2;
-    var roomLength = this.viewModel.roomLength.Value / 2;
-    var baseHeight = this.viewModel.baseHeight.Value || 0;
-    var roomHeight = this.viewModel.roomHeight.Value;
-    var doorWidth = this.viewModel.doorWidth.Value / 2;
-    var doorHeight = this.viewModel.doorHeight.Value;
-    var wallThickness = this.viewModel.wallThickness.Value;
+    let roomWidth = this.viewModel.roomWidth.Value / 2;
+    let roomLength = this.viewModel.roomLength.Value / 2;
+    let baseHeight = this.viewModel.baseHeight.Value || 0;
+    let roomHeight = this.viewModel.roomHeight.Value;
+    let doorWidth = this.viewModel.doorWidth.Value / 2;
+    let doorHeight = this.viewModel.doorHeight.Value;
+    let wallThickness = this.viewModel.wallThickness.Value;
     return [
       roomWidth,
       baseHeight,

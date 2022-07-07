@@ -22,17 +22,6 @@ class TestBuilder extends PresentationBuilder<
   }
 }
 
-// class TestBuilderWithUndefined extends PresentationBuilder<
-//   TestViewModel,
-//   undefined,
-//   TestView,
-//   TestPresenter
-// > {
-//   constructor() {
-//     super(undefined, undefined, TestView, TestPresenter);
-//   }
-// }
-
 describe("PresentationBuilder", () => {
   test("reset sets members to undefined", () => {
     const builder = new TestBuilder();
@@ -48,10 +37,6 @@ describe("PresentationBuilder", () => {
     builder.buildViewModel();
     expect(builder["viewModel"]).toBeInstanceOf(TestViewModel);
   });
-
-  //   test("buildViewModel if viewModelConstructorRef is undefined", () => {
-  //     const builder = new TestBuilderWithUndefined();
-  //   });
 
   test("buildController", () => {
     const builder = new TestBuilder();

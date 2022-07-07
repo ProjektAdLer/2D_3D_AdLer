@@ -112,7 +112,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   private async load(userData: UserDataEntity): Promise<void> {
     const worldName = "Lernwelt Autorentool";
 
-    var test = {
+    let test = {
       userToken: userData.userToken,
       worldName: worldName,
     } as tempApiInfo;

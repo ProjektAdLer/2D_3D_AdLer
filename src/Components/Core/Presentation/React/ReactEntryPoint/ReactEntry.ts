@@ -13,7 +13,7 @@ import IDebugUseCase from "../../../Application/DebugUseCase/IDebugUseCase";
 import { logger } from "../../../../../Lib/Logger";
 import { config } from "../../../../../config";
 
-var isInDebug = false;
+let isInDebug = false;
 
 @injectable()
 export default class ReactEntry implements IReactEntry {
@@ -53,7 +53,7 @@ export default class ReactEntry implements IReactEntry {
       document.onkeyup = function (e) {
         if (e.ctrlKey && e.key == "F1") {
           if (isInDebug) {
-            alert("Alerady in Debug Mode");
+            alert("Already in Debug Mode");
             logger.warn("Already in Debug Mode");
             return;
           }

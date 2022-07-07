@@ -16,7 +16,7 @@ export default class ViewModelControllerProvider
     callback: VMCProviderCallbackType<VM, C>,
     viewModelClass: ConstructorReference<VM>
   ): void {
-    var container = this.findOrCreateContainer<VM, C>(viewModelClass);
+    let container = this.findOrCreateContainer<VM, C>(viewModelClass);
     if (container.matchesType<VM, C>(viewModelClass)) {
       container.registerRequest(callback);
     }
@@ -26,7 +26,7 @@ export default class ViewModelControllerProvider
     callback: VMCProviderCallbackType<VM, C>,
     viewModelClass: { new (): VM }
   ): void {
-    var container = this.findContainer<VM, C>(viewModelClass);
+    let container = this.findContainer<VM, C>(viewModelClass);
     if (!container) return;
     if (container.matchesType<VM, C>(viewModelClass)) {
       container.cancelRequest(callback);
@@ -58,7 +58,7 @@ export default class ViewModelControllerProvider
     viewModel: VM,
     viewModelClass: { new (): VM }
   ): void {
-    var container = this.findContainer<VM, unknown>(viewModelClass);
+    let container = this.findContainer<VM, unknown>(viewModelClass);
 
     if (!container) throw new Error("Container not found");
 
@@ -68,7 +68,7 @@ export default class ViewModelControllerProvider
   private findContainer<VM, C>(viewModelClass: {
     new (): VM;
   }): IObservableContainer<VM, [VM, C]> | undefined {
-    var container = this.containers.find((c) => {
+    let container = this.containers.find((c) => {
       return c.matchesType<VM, [VM, C]>(viewModelClass);
     });
     if (container?.matchesType<VM, [VM, C]>(viewModelClass)) {
@@ -80,7 +80,7 @@ export default class ViewModelControllerProvider
   private findOrCreateContainer<VM, C>(viewModelClass: {
     new (): VM;
   }): IObservableContainer<VM, [VM, C]> {
-    var container = this.findContainer<VM, C>(viewModelClass);
+    let container = this.findContainer<VM, C>(viewModelClass);
     if (container === undefined) {
       container = new ObservableContainer<VM, [VM, C]>(viewModelClass);
       this.containers.push(container);
