@@ -16,7 +16,6 @@ export default function MenuBar() {
       <StyledButton
         onClick={async () => {
           await loadWorldController.loadWorld();
-          // await loadWorldController.loadAvatar();
         }}
       >
         <img className="w-6 lg:w-10" src={debugIcon}></img>

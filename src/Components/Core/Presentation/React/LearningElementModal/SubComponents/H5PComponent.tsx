@@ -18,7 +18,7 @@ const createIframeUrl = (contextId: number, fileName: string) => {
   );
 };
 
-export default function H5PContent(props: { h5pEntityId: string }) {
+export default function H5PContent() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   return (

@@ -12,9 +12,10 @@ export default function MoodleLoginButton() {
     MoodleLoginButtonController
   >(MoodleLoginButtonViewModel);
 
-  const [loginSuccessful, setLoginSuccessful] = useObservable<boolean>(
+  const [loginSuccessful] = useObservable<boolean>(
     viewModels[0]?.loginSuccessful
   );
+
   return (
     <StyledButton
       onClick={() => {
