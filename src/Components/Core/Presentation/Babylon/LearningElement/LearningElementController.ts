@@ -13,7 +13,7 @@ export default class LearningElementController
 {
   constructor(private viewModel: LearningElementViewModel) {}
   @bind
-  pointerOver(event?: ActionEvent | undefined): void {
+  pointerOver(): void {
     const port = CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort);
 
     port.displayLearningElementTooltip({
@@ -22,12 +22,14 @@ export default class LearningElementController
       id: this.viewModel.id,
     });
   }
+
   @bind
-  pointerOut(event?: ActionEvent | undefined): void {
+  pointerOut(): void {
     CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort).hide();
   }
 
-  clicked = (event?: ActionEvent): void => {
+  @bind
+  clicked(): void {
     const useCase = CoreDIContainer.get<ILearningElementStartedUseCase>(
       USECASE_TYPES.ILearningElementStartedUseCase
     );
@@ -35,5 +37,5 @@ export default class LearningElementController
     useCase.execute({
       learningElementId: this.viewModel.id,
     });
-  };
+  }
 }

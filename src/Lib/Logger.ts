@@ -1,8 +1,6 @@
 import { config } from "../config";
 
-interface LogFn {
-  (message?: any, ...optionalParams: any[]): void;
-}
+type LogFn = (message?: any, ...optionalParams: any[]) => void;
 
 interface Logger {
   log: LogFn;
@@ -14,7 +12,7 @@ type LogLevel = "log" | "warn" | "error";
 
 const defaultLogLevel = "warn";
 
-const NO_OP: LogFn = (message?: any, ...optionalParams: any[]) => {};
+const NO_OP: LogFn = (_message?: any, ..._optionalParams: any[]) => {};
 
 export class ConsoleLogger implements Logger {
   readonly log: LogFn;

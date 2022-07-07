@@ -22,7 +22,7 @@ export default class LoadAvatarUseCase implements ILoadAvatarUseCase {
     );
     director.build(builder);
 
-    // this.avatarPort.presentAvatar({ avatarName: "PlaceholderCharacter" });
+    // TODO: Call port to present loaded avatar data
 
     return Promise.resolve();
   }

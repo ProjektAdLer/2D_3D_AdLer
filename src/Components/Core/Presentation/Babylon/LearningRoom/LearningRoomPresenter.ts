@@ -30,7 +30,7 @@ export default class LearningRoomPresenter implements ILearningRoomPresenter {
     // set view model data
     this.viewModel.id = learningRoomTO.id;
     this.setRoomDimensions(learningRoomTO);
-    this.setRoomCornersSquare(learningRoomTO);
+    this.setRoomCornersSquare();
 
     let director = CoreDIContainer.get<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
@@ -72,7 +72,8 @@ export default class LearningRoomPresenter implements ILearningRoomPresenter {
     this.viewModel.roomWidth.Value =
       learningRoomTO.learningElements.length > 1 ? 10 : 6;
   }
-  private setRoomCornersSquare(learningRoomTO: LearningRoomTO): void {
+
+  private setRoomCornersSquare(): void {
     const roomLength = this.viewModel.roomLength.Value;
     const roomWidth = this.viewModel.roomWidth.Value;
     const wallThickness = this.viewModel.wallThickness.Value;

@@ -13,6 +13,7 @@ import { injectable } from "inversify";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import IEngineManager from "../EngineManager/IEngineManager";
+import { config } from "../../../../../config";
 
 @injectable()
 export default class MainScene implements ICreateSceneClass {
@@ -28,28 +29,12 @@ export default class MainScene implements ICreateSceneClass {
     /* scene.clearColor = new Color4(0.65, 0.96, 0.72, 1); */ /* Leichtes Türkis */
     /* scene.clearColor = new Color4(0.87, 0.96, 0.84, 1); */ /* Ultraleichtes Grün */
 
-    this.setCamera(scene);
-
     new HemisphericLight("light", new Vector3(0, 1, 0), scene);
 
     new GroundMesh("Ground", scene);
 
-    // TODO: move this somewhere else or wrap with some sort of environmental condition -MK
-    // scene.debugLayer.show();
+    if (config.isDebug) scene.debugLayer.show();
 
     return scene;
   };
-
-  private setCamera(scene: Scene) {
-    // Old free camera for debug purposes (might break in AvatarView.ts due to FollowCamera Code) (~FK):
-    let camera1 = new FreeCamera("FreeCamera", new Vector3(20, 20, 20), scene);
-    camera1.setTarget(new Vector3(0, 0, 0));
-    camera1.fov = 0.8;
-    camera1.attachControl(
-      CoreDIContainer.get<IEngineManager>(
-        CORE_TYPES.IEngineManager
-      ).Engine.getRenderingCanvas(),
-      true
-    );
-  }
 }
