@@ -8,9 +8,9 @@ export default interface IObservableContainer<T, U> {
    * @param typeToMatch The type to match with this containers elemtn type.
    * @returns True if this container's elements match the given type, false otherwise.
    */
-  matchesType<T, U>(
-    typeToMatch: new () => T
-  ): this is IObservableContainer<T, U>;
+  matchesType<X, Y>(
+    typeToMatch: new () => X
+  ): this is IObservableContainer<X, Y>;
 
   /**
    * Registers a callback. The callback is called every time a value is added or removed.

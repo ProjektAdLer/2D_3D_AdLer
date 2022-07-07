@@ -11,9 +11,9 @@ export default class ObservableContainer<T, U>
     this.type = type;
   }
 
-  public matchesType<T, U>(
-    typeToMatch: new () => T
-  ): this is IObservableContainer<T, U> {
+  public matchesType<X, Y>(
+    typeToMatch: new () => X
+  ): this is IObservableContainer<X, Y> {
     return typeToMatch === this.type;
   }
 
