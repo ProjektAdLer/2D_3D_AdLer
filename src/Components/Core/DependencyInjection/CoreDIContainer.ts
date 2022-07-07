@@ -10,7 +10,7 @@ import MainScene from "../Presentation/Babylon/SceneManagement/MainScene";
 import ICreateSceneClass from "../Presentation/Babylon/SceneManagement/ICreateSceneClass";
 import IScenePresenter from "../Presentation/Babylon/SceneManagement/IScenePresenter";
 import infrastructureDIContainer from "./InfrastructureDIContainer";
-import useCaseDIContainer from "./UseCases/UseCaseDIConatiner";
+import UseCaseDIContainer from "./UseCases/UseCaseDIConatiner";
 import PortsDIContainer from "./Ports/PortsDIContainer";
 import BuilderDIContainer from "./Builders/BuilderDIContainer";
 import INavigation from "../Presentation/Babylon/Navigation/INavigation";
@@ -45,7 +45,7 @@ CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
 );
 
 CoreDIContainer.load(infrastructureDIContainer);
-CoreDIContainer.load(useCaseDIContainer);
+CoreDIContainer.load(UseCaseDIContainer);
 CoreDIContainer.load(PortsDIContainer);
 CoreDIContainer.load(BuilderDIContainer);
 

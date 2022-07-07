@@ -15,7 +15,7 @@ import IScoreLearningElementUseCase from "../../Application/ScoreLearningElement
 import ScoreLearningElementUseCase from "../../Application/ScoreLearningElement/ScoreLearningElementUseCase";
 import USECASE_TYPES from "./USECASE_TYPES";
 
-const useCaseDIContainer = new ContainerModule((bind) => {
+const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
   // Use Cases always have to be Singleton
   bind<ILoadWorldUseCase>(USECASE_TYPES.ILoadWorldUseCase)
@@ -49,4 +49,4 @@ const useCaseDIContainer = new ContainerModule((bind) => {
     .inSingletonScope();
 });
 
-export default useCaseDIContainer;
+export default UseCaseDIContainer;
