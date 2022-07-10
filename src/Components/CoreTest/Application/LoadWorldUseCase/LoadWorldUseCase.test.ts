@@ -1,6 +1,6 @@
 import LoadWorldUseCase from "../../../Core/Application/LoadWorld/LoadWorldUseCase";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
-import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_SYMBOLS";
+import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import type IBackend from "../../../Core/Adapters/Backend/IBackend";
 import { injectable } from "inversify";
 import { APIWorldTo } from "../../../Core/Adapters/Backend/APIWorldTO";

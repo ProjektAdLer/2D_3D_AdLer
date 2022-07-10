@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import ICalculateTotalRoomScore from "../../../Core/Application/CalculateTotalRoomScore/ICalculateTotalRoomScore";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
-import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_SYMBOLS";
+import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
 import LearningRoomPort from "../../../Core/Ports/LearningRoomPort/LearningRoomPort";
 import { ConstructorReference } from "../../../Core/Types/EntityManagerTypes";

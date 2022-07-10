@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import ILearningElementStartedUseCase from "../../../Core/Application/LearningElementStarted/ILearningElementStartedUseCase";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
-import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_SYMBOLS";
+import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
 import LearningElementPort from "../../../Core/Ports/LearningElementPort/LearningElementPort";
 import { ConstructorReference } from "../../../Core/Types/EntityManagerTypes";

@@ -3,7 +3,7 @@ import CalculateTotalRoomScore from "../../../Core/Application/CalculateTotalRoo
 import ScoreLearningElementUseCase from "../../../Core/Application/ScoreLearningElement/ScoreLearningElementUseCase";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
-import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_SYMBOLS";
+import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
 import { LearningComponentID } from "../../../Core/Types/EnitityTypes";
 import { ConstructorReference } from "../../../Core/Types/EntityManagerTypes";

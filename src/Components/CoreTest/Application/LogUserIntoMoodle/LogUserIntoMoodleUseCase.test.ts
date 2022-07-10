@@ -2,7 +2,7 @@ import LogUserIntoMoodleUseCase from "../../../Core/Application/LogUserIntoMoodl
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import UserDataEntity from "../../../Core/Domain/Entities/UserData";
+import UserDataEntity from "../../../Core/Domain/Entities/UserDataEntity";
 import IMoodlePort from "../../../Core/Ports/MoodlePort/IMoodlePort";
 import { mock } from "jest-mock-extended";
 import IBackend from "../../../Core/Adapters/Backend/IBackend";
