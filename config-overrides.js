@@ -33,6 +33,7 @@ module.exports = {
       "/Types/",
       "/DependencyInjection/",
       "/I[A-Z]{1}[A-z]*.ts",
+      "TO.ts",
     ];
     config.coverageReporters = ["text-summary", "lcov"];
     config.setupFiles = ["./jest-setup-files.ts"];

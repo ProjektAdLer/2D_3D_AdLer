@@ -6,7 +6,7 @@ import { LearningElementTypeSymbols } from "../../Presentation/Babylon/LearningE
 import { APILearningElementTO } from "./APILearningElementTO";
 import { APILearningRoomTO } from "./APILearningRoomTO";
 import { APIWorldTo } from "./APIWorldTO";
-import DSL from "./DSL";
+import DSL from "./IDSL";
 import IBackend, { tempApiInfo } from "./IBackend";
 
 @injectable()
