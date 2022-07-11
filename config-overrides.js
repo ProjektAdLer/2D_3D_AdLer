@@ -24,7 +24,7 @@ module.exports = {
     ];
     config.testPathIgnorePatterns = ["<rootDir>/node_modules/"];
     config.collectCoverage = true;
-    config.coverageProvider = "v8";
+    //config.coverageProvider = "v8";
     config.coveragePathIgnorePatterns = [
       "/node_modules/",
       "/Prototyping/",
