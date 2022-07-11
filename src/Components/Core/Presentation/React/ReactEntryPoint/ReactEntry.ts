@@ -1,6 +1,6 @@
 import IReactEntry from "./IReactEntry";
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { injectable } from "inversify";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
@@ -35,7 +35,9 @@ export default class ReactEntry implements IReactEntry {
 
     this.buildViewModels();
 
-    ReactDOM.render(strictModeComponent, document.getElementById("root"));
+    ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+      strictModeComponent
+    );
 
     if (
       config.autoLoginWithoutShortct &&
