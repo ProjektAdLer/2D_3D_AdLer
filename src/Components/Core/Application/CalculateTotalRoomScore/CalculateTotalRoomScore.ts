@@ -18,12 +18,17 @@ export default class CalculateTotalRoomScore
   ) {}
 
   execute(data: { roomId: number }): void {
-    const room = this.entitiyContainer.filterEntitiesOfType<LearningRoomEntity>(
-      LearningRoomEntity,
-      (e) => e.id === data.roomId
-    )[0];
+    const rooms =
+      this.entitiyContainer.filterEntitiesOfType<LearningRoomEntity>(
+        LearningRoomEntity,
+        (e) => e.id === data.roomId
+      );
 
-    if (!room) throw new Error(`Could not find room with id ${data.roomId}`);
+    if (rooms.length === 0) {
+      throw new Error(`Could not find room with id ${data.roomId}`);
+    }
+
+    const room = rooms[0];
 
     const roomScore = room.learningElements.reduce((acumulator, current) => {
       if (current.hasScored) {

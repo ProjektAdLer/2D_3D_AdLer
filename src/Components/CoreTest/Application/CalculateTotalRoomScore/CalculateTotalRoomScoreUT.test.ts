@@ -5,6 +5,8 @@ import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContai
 import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import CalculateTotalRoomScore from "../../../Core/Application/CalculateTotalRoomScore/CalculateTotalRoomScore";
+import LearningRoomEntity from "../../../Core/Domain/Entities/LearningRoomEntity";
+import { ConstructorReference } from "../../../Core/Types/EntityManagerTypes";
 
 const roomTO = { roomId: 1 };
 
@@ -36,7 +38,30 @@ describe("Calculate Total Room Score UseCase", () => {
     );
   });
 
-  it("should calculate the total room score", () => {
+  test("filter Callback should return a boolean", () => {
+    let filterReturn: boolean;
+    entityContainerMock.filterEntitiesOfType.mockImplementation(
+      <T>(
+        entityType: ConstructorReference<T>,
+        filter: (entity: T) => boolean
+      ) => {
+        filterReturn = filter(new entityType());
+        return [
+          {
+            learningElements: [],
+          },
+        ];
+      }
+    );
+
+    calculateTotalRoomScoreUseCase.execute(roomTO);
+
+    // @ts-ignore TS does not know about the mock
+    expect(filterReturn).toBe(false);
+    entityContainerMock.filterEntitiesOfType.mockReset();
+  });
+
+  it("should calculate the correct total room score", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
         learningElements: [
@@ -48,11 +73,20 @@ describe("Calculate Total Room Score UseCase", () => {
             hasScored: true,
             value: 10,
           },
+          {
+            hasScored: false,
+            value: 10,
+          },
         ],
       },
     ]);
 
     calculateTotalRoomScoreUseCase.execute(roomTO);
+
+    expect(entityContainerMock.filterEntitiesOfType).toHaveBeenCalledWith(
+      LearningRoomEntity,
+      expect.any(Function)
+    );
 
     expect(learningRoomPortMock.presentNewScore).toHaveBeenCalledWith(
       20,
@@ -78,12 +112,10 @@ describe("Calculate Total Room Score UseCase", () => {
   });
 
   it("should throw an error if the room is not found", () => {
-    const data = {
-      roomId: 2,
-    };
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 
     expect(() => {
-      calculateTotalRoomScoreUseCase.execute(data);
+      calculateTotalRoomScoreUseCase.execute(roomTO);
     }).toThrow();
   });
 });
