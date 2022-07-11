@@ -27,13 +27,11 @@ module.exports = {
     //config.coverageProvider = "v8";
     config.coveragePathIgnorePatterns = [
       "/node_modules/",
-      "/Prototyping/",
       "/*.test.ts",
-      "/SBWExample/",
-      "/Types/",
       "/DependencyInjection/",
-      "/I[A-Z]{1}[A-z]*.ts",
-      "TO.ts",
+      "/Entities/",
+      //"/I[A-Z]{1}[A-z]*.ts",
+      //"TO.ts",
     ];
     config.coverageReporters = ["text-summary", "lcov"];
     config.setupFiles = ["./jest-setup-files.ts"];
