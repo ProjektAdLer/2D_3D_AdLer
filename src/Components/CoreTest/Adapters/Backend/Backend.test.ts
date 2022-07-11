@@ -2,6 +2,7 @@ import { config } from "../../../../config";
 import Backend from "../../../../Components/Core/Adapters/Backend/Backend";
 import axios from "axios";
 import { APILearningElementTO } from "../../../Core/Adapters/Backend/APILearningElementTO";
+import DSL from "../../../Core/Adapters/Backend/IDSL";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -61,6 +62,26 @@ describe("Backend", () => {
       password: "test",
     });
     expect(returnedVal).resolves.toBe("token");
+  });
+
+  test("Backend calls Axios.Post corectly", async () => {
+    config.useFakeBackend = false;
+    mockedAxios.post.mockResolvedValue({ data: mockDSL });
+    const backend = new Backend();
+
+    await backend.getWorld({
+      userToken: "Test_Token",
+      worldName: "Test_Welt",
+    });
+
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      config.serverURL + "/LearningWorld",
+      {
+        wsToken: "Test_Token",
+        courseName: "Test_Welt",
+      }
+    );
+    config.useFakeBackend = true;
   });
 });
 
@@ -140,4 +161,85 @@ const correctFakeRoomResponse = [
 const correctFakeWorldResponse = {
   name: "Lernwelt Metriken",
   learningRoomIds: [1],
+};
+
+const mockDSL: DSL = {
+  learningWorld: {
+    identifier: {
+      type: "name",
+      value: "Lernwelt Metriken",
+    },
+    learningWorldContent: [],
+    topics: [],
+    learningSpaces: [
+      {
+        spaceId: 1,
+        learningSpaceName: "Lernraum Metriken",
+        identifier: {
+          type: "name",
+          value: "Lernraum Metriken",
+        },
+        learningSpaceContent: [1, 2, 3],
+        requirements: null,
+      },
+    ],
+    learningElements: [
+      {
+        id: 1,
+        identifier: {
+          type: "FileName",
+          value: "Metriken Einstiegsvideo",
+        },
+        elementType: "h5p",
+        learningElementValue: null,
+        requirements: null,
+        metaData: [
+          { key: "h5pContextId", value: "123" },
+          { key: "h5pFileName", value: "Metriken Teil 1" },
+        ],
+      },
+      {
+        id: 2,
+        identifier: {
+          type: "FileName",
+          value: "Metriken Schiebespiel",
+        },
+        elementType: "h5p",
+        learningElementValue: null,
+        requirements: null,
+        metaData: [
+          { key: "h5pContextId", value: "123" },
+          { key: "h5pFileName", value: "Schiebespiel Metriken" },
+        ],
+      },
+      {
+        id: 3,
+        identifier: {
+          type: "FileName",
+          value: "Metriken Wortsuche",
+        },
+        elementType: "h5p",
+        learningElementValue: null,
+        requirements: null,
+        metaData: [
+          { key: "h5pContextId", value: "123" },
+          { key: "h5pFileName", value: "Wortsuche Metriken" },
+        ],
+      },
+      {
+        id: 4,
+        identifier: {
+          type: "FileName",
+          value: "DSL Dokument",
+        },
+        elementType: "json",
+        learningElementValue: null,
+        requirements: null,
+        metaData: [
+          { key: "h5pContextId", value: "123" },
+          { key: "h5pFileName", value: "bla.h5p" },
+        ],
+      },
+    ],
+  },
 };
