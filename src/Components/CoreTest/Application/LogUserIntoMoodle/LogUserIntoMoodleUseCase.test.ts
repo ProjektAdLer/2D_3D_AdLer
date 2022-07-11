@@ -8,11 +8,13 @@ import { mock } from "jest-mock-extended";
 import IBackend from "../../../Core/Adapters/Backend/IBackend";
 import IDebugPort from "../../../Core/Ports/DebugPort/IDebugPort";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
+import IUIPort from "../../../Core/Ports/UIPort/IUIPort";
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendMock = mock<IBackend>();
 const debugPortMock = mock<IDebugPort>();
 const moodlePortMock = mock<IMoodlePort>();
+const uiPortMock = mock<IUIPort>();
 
 describe("LogUserIntoMoodleUseCase", () => {
   let useCase: LogUserIntoMoodleUseCase;
@@ -35,6 +37,9 @@ describe("LogUserIntoMoodleUseCase", () => {
     CoreDIContainer.bind(CORE_TYPES.IEntityContainer).toConstantValue(
       entityContainerMock
     );
+
+    CoreDIContainer.unbind(PORT_TYPES.IUIPort);
+    CoreDIContainer.bind(PORT_TYPES.IUIPort).toConstantValue(uiPortMock);
   });
 
   beforeEach(() => {
@@ -42,6 +47,32 @@ describe("LogUserIntoMoodleUseCase", () => {
   });
   afterAll(() => {
     CoreDIContainer.restore();
+  });
+
+  test("throws, if user is already logged in", async () => {
+    entityContainerMock.getEntitiesOfType.mockReturnValue([
+      {
+        isLoggedIn: true,
+      },
+    ]);
+
+    const badCall = async () => {
+      await useCase.executeAsync({
+        username: "test",
+        password: "test",
+      });
+    };
+
+    await badCall().catch((error) => {
+      expect(error).toBe("User is already logged in");
+    });
+
+    expect(uiPortMock.displayModal).toHaveBeenCalledWith(
+      expect.any(String),
+      "error"
+    );
+
+    uiPortMock.displayModal.mockReset();
   });
 
   test("executeAsync calls the backend and stores correct user data in Enity", async () => {
@@ -68,5 +99,21 @@ describe("LogUserIntoMoodleUseCase", () => {
     );
 
     expect(moodlePortMock.loginSuccessful).toHaveBeenCalled();
+  });
+
+  test("Throws, if wrong userData is sent to the Backend", async () => {
+    backendMock.logInUser.mockResolvedValue("Falsche Daten!");
+    entityContainerMock.getEntitiesOfType.mockReturnValue([]);
+
+    const badCall = async () => {
+      await useCase.executeAsync({
+        username: "username",
+        password: "password",
+      });
+    };
+
+    badCall().catch((error) => {
+      expect(error).toBe("Wrong Password oder Username");
+    });
   });
 });

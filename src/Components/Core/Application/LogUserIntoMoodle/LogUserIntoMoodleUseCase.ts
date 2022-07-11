@@ -18,7 +18,7 @@ export default class LogUserIntoMoodleUseCase
     private container: IEntityContainer,
     @inject(CORE_TYPES.IBackend) private backend: IBackend,
     @inject(PORT_TYPES.IMoodlePort) private moodlePort: IMoodlePort,
-    @inject(PORT_TYPES.IUIPort) private errorPort: IUIPort,
+    @inject(PORT_TYPES.IUIPort) private uiPort: IUIPort,
     @inject(PORT_TYPES.IDebugPort) private debugPort: IDebugPort
   ) {}
   async executeAsync(data: {
@@ -29,10 +29,7 @@ export default class LogUserIntoMoodleUseCase
       this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0]
         ?.isLoggedIn
     ) {
-      this.errorPort.displayModal(
-        "You are already logged in to Moodle",
-        "error"
-      );
+      this.uiPort.displayModal("You are already logged in to Moodle", "error");
       return Promise.reject("User is already logged in");
     }
 
@@ -42,7 +39,7 @@ export default class LogUserIntoMoodleUseCase
     });
 
     if (userToken === "Falsche Daten!") {
-      this.errorPort.displayModal("Falsche Daten!", "error");
+      this.uiPort.displayModal("Falsche Daten!", "error");
       return Promise.reject("Wrong Password oder Username");
     }
 
