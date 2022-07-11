@@ -1,22 +1,43 @@
-import { injectable } from "inversify";
-import ICalculateTotalRoomScore from "../../../Core/Application/CalculateTotalRoomScore/ICalculateTotalRoomScore";
+import ILearningRoomPort from "../../../Core/Application/CalculateTotalRoomScore/ILearningRoomPort";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
-import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
-import LearningRoomPort from "../../../Core/Ports/LearningRoomPort/LearningRoomPort";
-import { ConstructorReference } from "../../../Core/Types/EntityManagerTypes";
+import { mock } from "jest-mock-extended";
+import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import CalculateTotalRoomScore from "../../../Core/Application/CalculateTotalRoomScore/CalculateTotalRoomScore";
 
-const portMock = jest.spyOn(LearningRoomPort.prototype, "presentNewScore");
+const roomTO = { roomId: 1 };
 
-@injectable()
-//@ts-ignore
-class EntityContainerMock2Elements implements IEntityContainer {
-  filterEntitiesOfType<T extends object>(
-    entityType: ConstructorReference<T>,
-    filter: (entity: T) => boolean
-  ): T[] {
-    return [
+const learningRoomPortMock = mock<ILearningRoomPort>();
+const entityContainerMock = mock<IEntityContainer>();
+
+describe("Calculate Total Room Score UseCase", () => {
+  let calculateTotalRoomScoreUseCase: CalculateTotalRoomScore;
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+    CoreDIContainer.unbind(CORE_TYPES.IEntityContainer);
+    CoreDIContainer.bind(CORE_TYPES.IEntityContainer).toConstantValue(
+      entityContainerMock
+    );
+
+    CoreDIContainer.unbind(PORT_TYPES.ILearningRoomPort);
+    CoreDIContainer.bind(PORT_TYPES.ILearningRoomPort).toConstantValue(
+      learningRoomPortMock
+    );
+  });
+
+  afterAll(() => {
+    CoreDIContainer.restore();
+  });
+
+  beforeEach(() => {
+    calculateTotalRoomScoreUseCase = CoreDIContainer.resolve(
+      CalculateTotalRoomScore
+    );
+  });
+
+  it("should calculate the total room score", () => {
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
         learningElements: [
           {
@@ -28,77 +49,35 @@ class EntityContainerMock2Elements implements IEntityContainer {
             value: 10,
           },
         ],
-      } as T,
-    ];
-  }
-}
-
-@injectable()
-//@ts-ignore
-class EntityContainerMock0Elements implements IEntityContainer {
-  filterEntitiesOfType<T extends object>(
-    entityType: ConstructorReference<T>,
-    filter: (entity: T) => boolean
-  ): T[] {
-    return [
-      {
-        learningElements: [],
-      } as T,
-    ];
-  }
-}
-
-const roomTO = { roomId: 1 };
-
-describe("Calculate Total Room Score UseCase", () => {
-  beforeEach(() => {
-    CoreDIContainer.snapshot();
-  });
-
-  afterEach(() => {
-    CoreDIContainer.restore();
-  });
-
-  it("should calculate the total room score", () => {
-    CoreDIContainer.unbind(CORE_TYPES.IEntityContainer);
-    CoreDIContainer.bind(CORE_TYPES.IEntityContainer).to(
-      EntityContainerMock2Elements
-    );
-
-    const calculateTotalRoomScoreUseCase =
-      CoreDIContainer.get<ICalculateTotalRoomScore>(
-        USECASE_TYPES.ICalculateTotalRoomScore
-      );
+      },
+    ]);
 
     calculateTotalRoomScoreUseCase.execute(roomTO);
 
-    expect(portMock).toHaveBeenCalledWith(20, true, roomTO.roomId);
+    expect(learningRoomPortMock.presentNewScore).toHaveBeenCalledWith(
+      20,
+      true,
+      roomTO.roomId
+    );
   });
 
   it("should return 0 and false when no Learning Elements are present", () => {
-    CoreDIContainer.unbind(CORE_TYPES.IEntityContainer);
-    CoreDIContainer.bind(CORE_TYPES.IEntityContainer).to(
-      EntityContainerMock0Elements
-    );
-
-    const calculateTotalRoomScoreUseCase =
-      CoreDIContainer.get<ICalculateTotalRoomScore>(
-        USECASE_TYPES.ICalculateTotalRoomScore
-      );
-
-    portMock.mockReset();
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      {
+        learningElements: [],
+      },
+    ]);
 
     calculateTotalRoomScoreUseCase.execute(roomTO);
 
-    expect(portMock).toHaveBeenCalledWith(0, false, roomTO.roomId);
+    expect(learningRoomPortMock.presentNewScore).toHaveBeenCalledWith(
+      0,
+      false,
+      roomTO.roomId
+    );
   });
 
   it("should throw an error if the room is not found", () => {
-    const calculateTotalRoomScoreUseCase =
-      CoreDIContainer.get<ICalculateTotalRoomScore>(
-        USECASE_TYPES.ICalculateTotalRoomScore
-      );
-
     const data = {
       roomId: 2,
     };
