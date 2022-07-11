@@ -30,6 +30,7 @@ module.exports = {
       "/*.test.ts",
       "/DependencyInjection/",
       "/Entities/",
+      "/[A-z]*Debug[A-z]*.ts",
       //"/I[A-Z]{1}[A-z]*.ts",
       //"TO.ts",
     ];
