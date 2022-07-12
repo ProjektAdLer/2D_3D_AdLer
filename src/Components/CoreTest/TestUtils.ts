@@ -1,14 +1,15 @@
 import { ConstructorReference } from "../Core/Types/EntityManagerTypes";
 
 export function filterEntitiesOfTypeMockImplUtil<T extends object>(
-  filterReturns: boolean[],
-  returnValue: T[]
+  returnValue: T[],
+  filterFunction?: (entity: T) => boolean
 ) {
-  return <T>(
+  return (
     entityType: ConstructorReference<T>,
     filter: (entity: T) => boolean
   ) => {
-    filterReturns.push(filter(new entityType()));
+    filter(new entityType());
+    if (filterFunction) filterFunction = filter;
     return returnValue;
   };
 }

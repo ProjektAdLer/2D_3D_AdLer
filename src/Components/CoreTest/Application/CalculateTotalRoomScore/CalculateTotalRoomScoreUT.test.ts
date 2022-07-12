@@ -41,7 +41,7 @@ describe("Calculate Total Room Score UseCase", () => {
     const filterReturns: boolean[] = [];
 
     entityContainerMock.filterEntitiesOfType.mockImplementation(
-      filterEntitiesOfTypeMockImplUtil<LearningRoomEntity>(filterReturns, [
+      filterEntitiesOfTypeMockImplUtil([
         {
           id: 42,
           learningElements: [],

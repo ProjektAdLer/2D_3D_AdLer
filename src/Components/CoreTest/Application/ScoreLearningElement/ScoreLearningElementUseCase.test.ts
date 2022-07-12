@@ -7,6 +7,7 @@ import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_TY
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
 import { LearningComponentID } from "../../../Core/Types/EnitityTypes";
 import { ConstructorReference } from "../../../Core/Types/EntityManagerTypes";
+import { filterEntitiesOfTypeMockImplUtil } from "../../TestUtils";
 
 const executeTotalRoomScoreMock = jest.spyOn(
   CalculateTotalRoomScore.prototype,
@@ -105,8 +106,10 @@ describe("ScoreLearningElementUseCase", () => {
 
     EntityContainerMock.prototype.filterEntitiesOfType = jest
       .fn()
-      .mockReturnValueOnce(LearningElementEntities)
-      .mockReturnValueOnce([]);
+      .mockImplementationOnce(
+        filterEntitiesOfTypeMockImplUtil(LearningElementEntities)
+      )
+      .mockImplementationOnce(filterEntitiesOfTypeMockImplUtil([]));
 
     await expect(
       useCase.executeAsync({ learningElementId: 1 })

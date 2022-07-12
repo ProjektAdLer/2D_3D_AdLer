@@ -55,7 +55,7 @@ export default class ScoreLearningElementUseCase
     const learningRoom =
       this.entityContainer.filterEntitiesOfType<LearningRoomEntity>(
         LearningRoomEntity,
-        (room) => room.learningElements.includes(learningElements[0])
+        (room) => room?.learningElements?.includes(learningElements[0])
       )[0];
 
     if (!learningRoom)
