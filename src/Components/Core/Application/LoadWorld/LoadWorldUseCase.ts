@@ -38,7 +38,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   async executeAsync(): Promise<void> {
     const userData = this.container.getEntitiesOfType(UserDataEntity);
 
-    if (userData.length === 0) {
+    if (userData.length === 0 || userData[0]?.isLoggedIn === false) {
       this.uiPort.displayModal("User is not logged in!", "error");
       return Promise.reject("User is not logged in");
     }
@@ -112,17 +112,19 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   private async load(userData: UserDataEntity): Promise<void> {
     const worldName = "Lernwelt Autorentool";
 
-    let test = {
+    let apiData = {
       userToken: userData.userToken,
       worldName: worldName,
     } as tempApiInfo;
 
-    const worldResp = await this.backend.getWorld(test);
+    const worldResp = await this.backend.getWorld(apiData);
+
     const learningRoomResp = (await this.backend.getLearningRooms(
-      test
+      apiData
     )) as APILearningRoomTO[];
+
     const learningElementResp = (await this.backend.getLearningElements(
-      test
+      apiData
     )) as APILearningElementTO[];
 
     if (this.container.getEntitiesOfType(LearningWorldEntity).length === 0) {
