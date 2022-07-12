@@ -1,5 +1,4 @@
 import Observable from "../../../../../Lib/Observable";
-import { LearningElementTO } from "../../../Ports/LearningWorldPort/ILearningWorldPort";
 
 export default class BottomTooltipViewModel {
   show = new Observable<boolean>(false, true);

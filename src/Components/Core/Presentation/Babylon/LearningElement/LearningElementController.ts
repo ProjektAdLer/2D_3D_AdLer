@@ -1,4 +1,3 @@
-import { ActionEvent } from "@babylonjs/core";
 import bind from "bind-decorator";
 import ILearningElementStartedUseCase from "../../../Application/LearningElementStarted/ILearningElementStartedUseCase";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";

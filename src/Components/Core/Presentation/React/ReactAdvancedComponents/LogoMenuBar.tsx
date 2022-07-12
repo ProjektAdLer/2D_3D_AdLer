@@ -9,7 +9,11 @@ export default function LogoMenuBar() {
     <StyledContainer className="">
       <CustomDropdown
         headerElement={
-          <img src={engineLogo} className="xl:w-20 lg:w-16 md:w-10 w-12"></img>
+          <img
+            src={engineLogo}
+            className="xl:w-20 lg:w-16 md:w-10 w-12"
+            alt="EngineLogo"
+          ></img>
         }
         initialOpen={true}
         useAsTriggerOnly={true}

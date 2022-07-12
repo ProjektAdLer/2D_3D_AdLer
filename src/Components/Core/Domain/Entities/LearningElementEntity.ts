@@ -1,4 +1,3 @@
-import { LearningElementType } from "../../Presentation/Babylon/LearningElement/Types/LearningElementTypes";
 import { LearningComponentID } from "../../Types/EnitityTypes";
 import AbstractLearningElement from "./SpecificLearningElements/AbstractLearningElement";
 

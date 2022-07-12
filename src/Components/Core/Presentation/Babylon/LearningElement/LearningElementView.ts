@@ -3,7 +3,6 @@ import {
   ActionManager,
   ExecuteCodeAction,
   Mesh,
-  SceneLoader,
   Tools,
   Vector3,
 } from "@babylonjs/core";
