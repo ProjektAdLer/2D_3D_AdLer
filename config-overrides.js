@@ -1,9 +1,12 @@
 // This file is used together with react-scripts-rewire to overwrite the webpack config of your CRA App to add capability for:
 // Typescript Decorators
-// TODO: have entry Point of App in src/React/Index.tsx
 
 const { override, addBabelPlugin } = require("customize-cra");
 const babelTsTransformPlugin = require("babel-plugin-transform-typescript-metadata");
+
+// Environment Variables can be set here
+// IMPORTANT: environment variables, that contain a Secret are set in .env.development or .env.production
+process.env.GENERATE_SOURCEMAP = "false"; // disable sourcemap generation (removes warnings while building)
 
 module.exports = {
   webpack: override(addBabelPlugin(babelTsTransformPlugin), (config) => {
@@ -24,15 +27,12 @@ module.exports = {
     ];
     config.testPathIgnorePatterns = ["<rootDir>/node_modules/"];
     config.collectCoverage = true;
-    //config.coverageProvider = "v8";
     config.coveragePathIgnorePatterns = [
       "/node_modules/",
       "/*.test.ts",
       "/DependencyInjection/",
       "/Entities/",
       "/[A-z]*Debug[A-z]*.ts",
-      //"/I[A-Z]{1}[A-z]*.ts",
-      //"TO.ts",
     ];
     config.coverageReporters = ["text-summary", "lcov"];
     config.coverageThreshold = {
