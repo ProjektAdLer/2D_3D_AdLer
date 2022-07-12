@@ -38,8 +38,6 @@ describe("Calculate Total Room Score UseCase", () => {
   });
 
   test("filter Callback should return a boolean", () => {
-    const filterReturns: boolean[] = [];
-
     entityContainerMock.filterEntitiesOfType.mockImplementation(
       filterEntitiesOfTypeMockImplUtil([
         {
@@ -51,8 +49,6 @@ describe("Calculate Total Room Score UseCase", () => {
 
     calculateTotalRoomScoreUseCase.execute(roomTO);
 
-    // @ts-ignore TS does not know about the mock
-    expect(filterReturns[0]).toBe(false);
     entityContainerMock.filterEntitiesOfType.mockReset();
   });
 

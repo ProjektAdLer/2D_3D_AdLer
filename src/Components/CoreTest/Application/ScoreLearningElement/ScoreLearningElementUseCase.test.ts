@@ -103,12 +103,11 @@ describe("ScoreLearningElementUseCase", () => {
         learningElement,
       },
     ];
+    const mock = filterEntitiesOfTypeMockImplUtil(LearningElementEntities);
 
     EntityContainerMock.prototype.filterEntitiesOfType = jest
       .fn()
-      .mockImplementationOnce(
-        filterEntitiesOfTypeMockImplUtil(LearningElementEntities)
-      )
+      .mockImplementationOnce(mock)
       .mockImplementationOnce(filterEntitiesOfTypeMockImplUtil([]));
 
     await expect(
