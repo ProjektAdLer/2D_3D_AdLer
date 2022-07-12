@@ -17,7 +17,7 @@ const moodlePortMock = mock<IMoodlePort>();
 const uiPortMock = mock<IUIPort>();
 
 describe("LogUserIntoMoodleUseCase", () => {
-  let useCase: LogUserIntoMoodleUseCase;
+  let systemUnderTest: LogUserIntoMoodleUseCase;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -43,7 +43,7 @@ describe("LogUserIntoMoodleUseCase", () => {
   });
 
   beforeEach(() => {
-    useCase = CoreDIContainer.resolve(LogUserIntoMoodleUseCase);
+    systemUnderTest = CoreDIContainer.resolve(LogUserIntoMoodleUseCase);
   });
   afterAll(() => {
     CoreDIContainer.restore();
@@ -57,7 +57,7 @@ describe("LogUserIntoMoodleUseCase", () => {
     ]);
 
     const badCall = async () => {
-      await useCase.executeAsync({
+      await systemUnderTest.executeAsync({
         username: "test",
         password: "test",
       });
@@ -79,7 +79,7 @@ describe("LogUserIntoMoodleUseCase", () => {
     backendMock.logInUser.mockResolvedValue("token");
     entityContainerMock.getEntitiesOfType.mockReturnValue([]);
 
-    await useCase.executeAsync({
+    await systemUnderTest.executeAsync({
       username: "username",
       password: "password",
     });
@@ -106,7 +106,7 @@ describe("LogUserIntoMoodleUseCase", () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([]);
 
     const badCall = async () => {
-      await useCase.executeAsync({
+      await systemUnderTest.executeAsync({
         username: "username",
         password: "password",
       });
