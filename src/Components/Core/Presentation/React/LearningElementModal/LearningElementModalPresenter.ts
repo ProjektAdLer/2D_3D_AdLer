@@ -1,4 +1,4 @@
-import { LearningElementTO } from "../../../Application/LoadWorld/ILearningWorldPort";
+import { LearningElementTO } from "../../../Ports/LearningWorldPort/ILearningWorldPort";
 import ILearningElementModalPresenter from "./ILearningElementModalPresenter";
 import LearningElementModalViewModel from "./LearningElementModalViewModel";
 

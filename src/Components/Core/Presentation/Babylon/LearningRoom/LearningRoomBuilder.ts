@@ -10,7 +10,7 @@ import ScenePresenter from "../SceneManagement/ScenePresenter";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 import ILearningRoomView from "./ILearningRoomView";
 import ILearningRoomPresenter from "./ILearningRoomPresenter";
-import ILearningRoomPort from "../../../Application/CalculateTotalRoomScore/ILearningRoomPort";
+import ILearningRoomPort from "../../../Ports/LearningRoomPort/ILearningRoomPort";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 
 @injectable()

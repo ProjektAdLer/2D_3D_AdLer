@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import ILearningElementPort from "../../../Application/LearningElementStarted/ILearningElementPort";
+import ILearningElementPort from "../../../Ports/LearningElementPort/ILearningElementPort";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import ILearningElementController from "./ILearningElementController";
 import ILearningElementPresenter from "./ILearningElementPresenter";

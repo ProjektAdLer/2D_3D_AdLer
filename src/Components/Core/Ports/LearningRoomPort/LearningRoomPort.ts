@@ -1,4 +1,4 @@
-import ILearningRoomPort from "../../Application/CalculateTotalRoomScore/ILearningRoomPort";
+import ILearningRoomPort from "./ILearningRoomPort";
 import IScorePanelPresenter from "../../Presentation/React/ScorePanel/IScorePanelPresenter";
 import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";

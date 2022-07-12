@@ -1,8 +1,8 @@
 import { ContainerModule } from "inversify";
-import ILearningRoomPort from "../../Application/CalculateTotalRoomScore/ILearningRoomPort";
-import ILearningElementPort from "../../Application/LearningElementStarted/ILearningElementPort";
+import ILearningRoomPort from "../../Ports/LearningRoomPort/ILearningRoomPort";
+import ILearningElementPort from "../../Ports/LearningElementPort/ILearningElementPort";
 import IAvatarPort from "../../Application/LoadAvatar/IAvatarPort";
-import ILearningWorldPort from "../../Application/LoadWorld/ILearningWorldPort";
+import ILearningWorldPort from "../../Ports/LearningWorldPort/ILearningWorldPort";
 import DebugPort from "../../Ports/DebugPort/DebugPort";
 import IDebugPort from "../../Ports/DebugPort/IDebugPort";
 import LearningElementPort from "../../Ports/LearningElementPort/LearningElementPort";

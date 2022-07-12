@@ -3,7 +3,7 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
 import type IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
-import type ILearningElementPort from "./ILearningElementPort";
+import type ILearningElementPort from "../../Ports/LearningElementPort/ILearningElementPort";
 import ILearningElementStartedUseCase from "./ILearningElementStartedUseCase";
 
 @injectable()

@@ -1,6 +1,6 @@
 import { Vector2, Vector3 } from "@babylonjs/core";
 import { injectable } from "inversify";
-import { LearningRoomTO } from "../../../Application/LoadWorld/ILearningWorldPort";
+import { LearningRoomTO } from "../../../Ports/LearningWorldPort/ILearningWorldPort";
 import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";

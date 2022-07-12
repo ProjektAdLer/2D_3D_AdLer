@@ -3,7 +3,7 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import LearningRoomEntity from "../../Domain/Entities/LearningRoomEntity";
 import type IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
-import type ILearningRoomPort from "./ILearningRoomPort";
+import type ILearningRoomPort from "../../Ports/LearningRoomPort/ILearningRoomPort";
 import ICalculateTotalRoomScore from "./ICalculateTotalRoomScore";
 
 @injectable()

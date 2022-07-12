@@ -1,4 +1,4 @@
-import { LearningRoomTO } from "../../../Application/LoadWorld/ILearningWorldPort";
+import { LearningRoomTO } from "../../../Ports/LearningWorldPort/ILearningWorldPort";
 
 export default interface ILearningRoomPresenter {
   get LearningRoomId(): number;

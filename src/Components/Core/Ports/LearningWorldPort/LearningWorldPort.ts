@@ -1,13 +1,10 @@
-import { inject, injectable } from "inversify";
-import ILearningWorldPort, {
-  LearningWorldTO,
-} from "../../Application/LoadWorld/ILearningWorldPort";
+import { injectable } from "inversify";
+import ILearningWorldPort, { LearningWorldTO } from "./ILearningWorldPort";
 import BUILDER_TYPES from "../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
-import type IViewModelControllerProvider from "../../Presentation/ViewModelProvider/IViewModelControllerProvider";
 import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
 import ILearningElementsDropdownPresenter from "../../Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
 import INavigation from "../../Presentation/Babylon/Navigation/INavigation";

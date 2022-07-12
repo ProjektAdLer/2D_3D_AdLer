@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
-import ILearningElementPort from "../../Application/LearningElementStarted/ILearningElementPort";
-import { LearningElementTO } from "../../Application/LoadWorld/ILearningWorldPort";
+import ILearningElementPort from "./ILearningElementPort";
+import { LearningElementTO } from "../LearningWorldPort/ILearningWorldPort";
 import BUILDER_TYPES from "../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import ILearningElementPresenter from "../../Presentation/Babylon/LearningElement/ILearningElementPresenter";

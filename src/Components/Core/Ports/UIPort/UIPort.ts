@@ -1,6 +1,6 @@
 import { NotificationType } from "../../Presentation/React/ModalManager/ModalManagerPresenter";
 import { injectable } from "inversify";
-import { LearningElementTO } from "../../Application/LoadWorld/ILearningWorldPort";
+import { LearningElementTO } from "../LearningWorldPort/ILearningWorldPort";
 import IBottomTooltipPresenter from "../../Presentation/React/BottomTooltip/IBottomTooltipPresenter";
 import IModalManagerPresenter from "../../Presentation/React/ModalManager/IModalManagerPresenter";
 import IUIPort from "./IUIPort";

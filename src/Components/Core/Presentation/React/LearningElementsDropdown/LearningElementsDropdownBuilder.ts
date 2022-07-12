@@ -6,7 +6,7 @@ import LearningElementsDropdownViewModel from "./LearningElementsDropdownViewMod
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import ViewModelControllerProvider from "../../ViewModelProvider/ViewModelControllerProvider";
-import ILearningWorldPort from "../../../Application/LoadWorld/ILearningWorldPort";
+import ILearningWorldPort from "../../../Ports/LearningWorldPort/ILearningWorldPort";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 
 /*

@@ -7,7 +7,7 @@ import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import ViewModelControllerProvider from "../../ViewModelProvider/ViewModelControllerProvider";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
-import ILearningWorldPort from "../../../Application/LoadWorld/ILearningWorldPort";
+import ILearningWorldPort from "../../../Ports/LearningWorldPort/ILearningWorldPort";
 
 @injectable()
 export default class LearningWorldNamePanelBuilder extends PresentationBuilder<

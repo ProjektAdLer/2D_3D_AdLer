@@ -1,5 +1,5 @@
 import { NotificationType } from "../../Presentation/React/ModalManager/ModalManagerPresenter";
-import { LearningElementTO } from "../../Application/LoadWorld/ILearningWorldPort";
+import { LearningElementTO } from "../LearningWorldPort/ILearningWorldPort";
 import IBottomTooltipPresenter from "../../Presentation/React/BottomTooltip/IBottomTooltipPresenter";
 import IModalManagerPresenter from "../../Presentation/React/ModalManager/IModalManagerPresenter";
 
