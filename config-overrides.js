@@ -35,6 +35,14 @@ module.exports = {
       //"TO.ts",
     ];
     config.coverageReporters = ["text-summary", "lcov"];
+    config.coverageThreshold = {
+      global: {
+        branches: 92,
+        functions: 92,
+        lines: 92,
+        statements: 92,
+      },
+    };
     config.setupFiles = ["./jest-setup-files.ts"];
     config.verbose = true;
 
