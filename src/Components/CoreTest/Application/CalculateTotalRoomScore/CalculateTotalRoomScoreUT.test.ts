@@ -6,7 +6,7 @@ import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import CalculateTotalRoomScore from "../../../Core/Application/CalculateTotalRoomScore/CalculateTotalRoomScore";
 import LearningRoomEntity from "../../../Core/Domain/Entities/LearningRoomEntity";
-import { ConstructorReference } from "../../../Core/Types/EntityManagerTypes";
+import { filterEntitiesOfTypeMockImplUtil } from "../../../CoreTest/TestUtils";
 
 const roomTO = { roomId: 1 };
 
@@ -17,13 +17,12 @@ describe("Calculate Total Room Score UseCase", () => {
   let calculateTotalRoomScoreUseCase: CalculateTotalRoomScore;
   beforeAll(() => {
     CoreDIContainer.snapshot();
-    CoreDIContainer.unbind(CORE_TYPES.IEntityContainer);
-    CoreDIContainer.bind(CORE_TYPES.IEntityContainer).toConstantValue(
+
+    CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
       entityContainerMock
     );
 
-    CoreDIContainer.unbind(PORT_TYPES.ILearningRoomPort);
-    CoreDIContainer.bind(PORT_TYPES.ILearningRoomPort).toConstantValue(
+    CoreDIContainer.rebind(PORT_TYPES.ILearningRoomPort).toConstantValue(
       learningRoomPortMock
     );
   });
@@ -39,25 +38,21 @@ describe("Calculate Total Room Score UseCase", () => {
   });
 
   test("filter Callback should return a boolean", () => {
-    let filterReturn: boolean;
+    const filterReturns: boolean[] = [];
+
     entityContainerMock.filterEntitiesOfType.mockImplementation(
-      <T>(
-        entityType: ConstructorReference<T>,
-        filter: (entity: T) => boolean
-      ) => {
-        filterReturn = filter(new entityType());
-        return [
-          {
-            learningElements: [],
-          },
-        ];
-      }
+      filterEntitiesOfTypeMockImplUtil<LearningRoomEntity>(filterReturns, [
+        {
+          id: 42,
+          learningElements: [],
+        },
+      ])
     );
 
     calculateTotalRoomScoreUseCase.execute(roomTO);
 
     // @ts-ignore TS does not know about the mock
-    expect(filterReturn).toBe(false);
+    expect(filterReturns[0]).toBe(false);
     entityContainerMock.filterEntitiesOfType.mockReset();
   });
 
