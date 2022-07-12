@@ -15,6 +15,7 @@ import BUILDER_TYPES from "./BUILDER_TYPES";
 import MoodleLoginButtonBuilder from "../../Presentation/React/MoodleLoginButton/MoodleLoginButtonBuilder";
 import BottomTooltipBuilder from "../../Presentation/React/BottomTooltip/BottomTooltipBuilder";
 import DebugPanelBuilder from "../../Presentation/React/DebugPanel/DebugPanelBuilder";
+import LearningWorldNamePanelBuilder from "../../Presentation/React/LearningWorldNamePanel/LearningWorldNamePanelBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -52,6 +53,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IDebugPanelBuilder).to(
     DebugPanelBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldNamePanelBuilder).to(
+    LearningWorldNamePanelBuilder
   );
 });
 

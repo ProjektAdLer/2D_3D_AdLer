@@ -1,7 +1,6 @@
 import BabylonCanvas from "./BabylonCanvas";
 import "./App.css";
 import ScorePanel from "../ScorePanel/ScorePanel";
-import WorldNamePanel from "../ReactAdvancedComponents/WorldNamePanel";
 import LearningElementModal from "../LearningElementModal/LearningElementModal";
 import useIsMobilePortrait from "../CustomHooks/useIsMobilePortrait";
 import StyledModal from "../ReactBaseComponents/StyledModal";
@@ -11,6 +10,7 @@ import LearningElementsDropdown from "../LearningElementsDropdown/LearningElemen
 import ModalManager from "../ModalManager/ModalManager";
 import MoodleLoginForm from "../MoodleLoginForm/MoodleLoginForm";
 import BottomTooltip from "../BottomTooltip/BottomTooltip";
+import LearningWorldNamePanel from "../LearningWorldNamePanel/LearningWorldNamePanel";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
           <ScorePanel />
         </div>
         <div className="col-start-3 col-span-5 row-start-1 z-10">
-          <WorldNamePanel />
+          <LearningWorldNamePanel />
         </div>
         <div className="col-start-1 col-span-9 row-start-1 row-span-6">
           <BabylonCanvas className="w-screen h-screen" />

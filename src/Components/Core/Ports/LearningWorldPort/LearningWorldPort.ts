@@ -8,27 +8,23 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
 import type IViewModelControllerProvider from "../../Presentation/ViewModelProvider/IViewModelControllerProvider";
-import LearningWorldViewModel from "./LearningWorldViewModel";
 import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
 import ILearningElementsDropdownPresenter from "../../Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
 import INavigation from "../../Presentation/Babylon/Navigation/INavigation";
+import ILearningWorldNamePanelPresenter from "../../Presentation/React/LearningWorldNamePanel/ILearningWorldNamePanelPresenter";
 
 @injectable()
 export default class LearningWorldPort implements ILearningWorldPort {
-  private viewModel: LearningWorldViewModel;
   private roomPresenter: ILearningRoomPresenter;
   private learningElementDropdownPresenter: ILearningElementsDropdownPresenter;
+
+  private learningWorldPanelPresenter: ILearningWorldNamePanelPresenter;
 
   public set LearningElementDropdownPresenter(
     value: ILearningElementsDropdownPresenter
   ) {
     this.learningElementDropdownPresenter = value;
   }
-
-  constructor(
-    @inject(CORE_TYPES.IViewModelControllerProvider)
-    private viewModelProvider: IViewModelControllerProvider
-  ) {}
 
   public presentLearningWorld(learningWorldTO: LearningWorldTO): void {
     let director = CoreDIContainer.get<IPresentationDirector>(
@@ -44,18 +40,23 @@ export default class LearningWorldPort implements ILearningWorldPort {
     // TODO: use all the data from the learningWorldTO to create multiple rooms
     this.roomPresenter.presentLearningRoom(learningWorldTO.learningRooms[0]);
 
-    this.viewModel = new LearningWorldViewModel();
-    this.viewModelProvider.registerViewModelOnly<LearningWorldViewModel>(
-      this.viewModel,
-      LearningWorldViewModel
+    this.learningWorldPanelPresenter.displayWorldName(
+      learningWorldTO.worldName
     );
-    this.viewModel.worldName.Value = learningWorldTO.worldName;
-    this.viewModel.worldNameLoading.Value = false;
 
     CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation).setupNavigation();
 
     this.learningElementDropdownPresenter.presentLearningElements(
       learningWorldTO.learningRooms[0].learningElements
     );
+  }
+
+  public registerLearningWorldPanelPresenter(
+    learningWorldPanelPresenter: ILearningWorldNamePanelPresenter
+  ): void {
+    if (this.learningWorldPanelPresenter) {
+      throw new Error("LearningWorldPanelPresenter is already registered");
+    }
+    this.learningWorldPanelPresenter = learningWorldPanelPresenter;
   }
 }

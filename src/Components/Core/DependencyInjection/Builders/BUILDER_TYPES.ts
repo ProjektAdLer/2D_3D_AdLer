@@ -12,6 +12,7 @@ const BUILDER_TYPES = {
   IMoodleLoginButtonBuilder: Symbol("IMoodleLoginButtonBuilder"),
   IBottomTooltipBuilder: Symbol("IBottomTooltipBuilder"),
   IDebugPanelBuilder: Symbol("IDebugPanelBuilder"),
+  ILearningWorldNamePanelBuilder: Symbol("ILearningWorldNamePanelBuilder"),
 };
 
 export default BUILDER_TYPES;

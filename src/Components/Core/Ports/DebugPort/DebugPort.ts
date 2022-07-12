@@ -5,6 +5,7 @@ import IDebugPort from "./IDebugPort";
 
 @injectable()
 export default class DebugPort implements IDebugPort {
+  private debugPanelPresenter: IDebugPanelPresenter;
   addToMisc(key: string, value: string): void {
     if (!this.debugPanelPresenter) {
       throw new Error("DebugPanelPresenter is not registered");
@@ -12,7 +13,6 @@ export default class DebugPort implements IDebugPort {
 
     this.debugPanelPresenter.setMisc({ key, value });
   }
-  private debugPanelPresenter: IDebugPanelPresenter;
   @bind
   setUserToken(userToken: string): void {
     if (!this.debugPanelPresenter) {
