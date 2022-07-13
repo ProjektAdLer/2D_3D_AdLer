@@ -1,5 +1,5 @@
 import LearningElementModalPresenter from "../../../../../../src/Components/Core/Presentation/React/LearningElementModal/LearningElementModalPresenter";
-import { LearningElementTO } from "../../../../Core/Application/LoadWorld/ILearningWorldPort";
+import { LearningElementTO } from "../../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
 import LearningElementModalViewModel from "../../../../Core/Presentation/React/LearningElementModal/LearningElementModalViewModel";
 
 describe("LearningElementModalPresenter", () => {

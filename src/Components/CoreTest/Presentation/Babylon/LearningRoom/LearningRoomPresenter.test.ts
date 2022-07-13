@@ -1,4 +1,4 @@
-import { LearningRoomTO } from "../../../../Core/Application/LoadWorld/ILearningWorldPort";
+import { LearningRoomTO } from "../../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
 import DoorPresenter from "../../../../Core/Presentation/Babylon/Door/DoorPresenter";
 import DoorViewModel from "../../../../Core/Presentation/Babylon/Door/DoorViewModel";
 import LearningElementBuilder from "../../../../Core/Presentation/Babylon/LearningElement/LearningElementBuilder";

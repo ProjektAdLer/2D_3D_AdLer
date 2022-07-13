@@ -1,8 +1,3 @@
-import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
-import IViewModelProvider from "../../../Core/Presentation/ViewModelProvider/IViewModelProvider";
-import useViewModelProvider from "../../../Core/Presentation/ViewModelProvider/useViewModelProvider";
-
 class TestViewModelA {}
 
 describe("useViewModelProvider", () => {

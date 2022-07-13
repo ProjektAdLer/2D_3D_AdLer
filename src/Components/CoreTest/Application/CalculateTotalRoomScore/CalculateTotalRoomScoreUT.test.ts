@@ -1,4 +1,3 @@
-import ILearningRoomPort from "../../../Core/Application/CalculateTotalRoomScore/ILearningRoomPort";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
@@ -7,6 +6,7 @@ import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import CalculateTotalRoomScore from "../../../Core/Application/CalculateTotalRoomScore/CalculateTotalRoomScore";
 import LearningRoomEntity from "../../../Core/Domain/Entities/LearningRoomEntity";
 import { filterEntitiesOfTypeMockImplUtil } from "../../../CoreTest/TestUtils";
+import ILearningRoomPort from "../../../Core/Ports/LearningRoomPort/ILearningRoomPort";
 
 const roomTO = { roomId: 1 };
 

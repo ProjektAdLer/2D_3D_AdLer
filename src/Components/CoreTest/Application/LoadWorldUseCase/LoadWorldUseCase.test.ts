@@ -3,7 +3,6 @@ import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import IBackend from "../../../Core/Adapters/Backend/IBackend";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import { mock } from "jest-mock-extended";
-import ILearningWorldPort from "../../../Core/Application/LoadWorld/ILearningWorldPort";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
 import IUIPort from "../../../Core/Ports/UIPort/IUIPort";
@@ -13,7 +12,7 @@ import {
   correctFakeRoomResponse,
   correctFakeWorldResponse,
 } from "../../Adapters/Backend/BackendResponses";
-import EntityContainer from "../../../Core/Domain/EntityContainer/EntityContainer";
+import ILearningWorldPort from "../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
 
 const backendMock = mock<IBackend>();
 const learningWorldPortMock = mock<ILearningWorldPort>();

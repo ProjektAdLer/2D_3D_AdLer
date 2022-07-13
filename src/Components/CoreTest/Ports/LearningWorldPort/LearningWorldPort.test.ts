@@ -1,18 +1,16 @@
 import { injectable } from "inversify";
+
+import BUILDER_TYPES from "../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
+import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import {
   LearningElementTO,
   LearningRoomTO,
   LearningWorldTO,
-} from "../../../Core/Application/LoadWorld/ILearningWorldPort";
-import BUILDER_TYPES from "../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
-import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
+} from "../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
 import LearningWorldPort from "../../../Core/Ports/LearningWorldPort/LearningWorldPort";
-import LearningWorldViewModel from "../../../Core/Ports/LearningWorldPort/LearningWorldViewModel";
-import LearningRoomBuilder from "../../../Core/Presentation/Babylon/LearningRoom/LearningRoomBuilder";
 import LearningRoomPresenter from "../../../Core/Presentation/Babylon/LearningRoom/LearningRoomPresenter";
 import LearningRoomViewModel from "../../../Core/Presentation/Babylon/LearningRoom/LearningRoomViewModel";
 import Navigation from "../../../Core/Presentation/Babylon/Navigation/Navigation";
-import ScenePresenter from "../../../Core/Presentation/Babylon/SceneManagement/ScenePresenter";
 import IPresentationBuilder from "../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
 import PresentationBuilder from "../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
 import LearningElementsDropdownPresenter from "../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownPresenter";

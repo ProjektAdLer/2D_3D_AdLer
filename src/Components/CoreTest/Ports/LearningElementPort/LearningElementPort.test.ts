@@ -1,5 +1,5 @@
-import { LearningElementTO } from "../../../Core/Application/LoadWorld/ILearningWorldPort";
 import LearningElementPort from "../../../Core/Ports/LearningElementPort/LearningElementPort";
+import { LearningElementTO } from "../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
 import ILearningElementPresenter from "../../../Core/Presentation/Babylon/LearningElement/ILearningElementPresenter";
 import LearningElementModalPresenter from "../../../Core/Presentation/React/LearningElementModal/LearningElementModalPresenter";
 

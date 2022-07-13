@@ -1,16 +1,12 @@
-import { injectable } from "inversify";
-import ILearningElementStartedUseCase from "../../../Core/Application/LearningElementStarted/ILearningElementStartedUseCase";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
-import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
-import LearningElementPort from "../../../Core/Ports/LearningElementPort/LearningElementPort";
 import { ConstructorReference } from "../../../Core/Types/EntityManagerTypes";
 
 import { mock } from "jest-mock-extended";
-import ILearningElementPort from "../../../Core/Application/LearningElementStarted/ILearningElementPort";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import LearningElementStartedUseCase from "../../../Core/Application/LearningElementStarted/LearningElementStartedUseCase";
+import ILearningElementPort from "../../../Core/Ports/LearningElementPort/ILearningElementPort";
 
 const learningElementPortMock = mock<ILearningElementPort>();
 const entityContainerMock = mock<IEntityContainer>();

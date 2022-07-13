@@ -3,7 +3,6 @@ import BUILDER_TYPES from "../../../Core/DependencyInjection/Builders/BUILDER_TY
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import LearningRoomPort from "../../../Core/Ports/LearningRoomPort/LearningRoomPort";
 import ILearningRoomPresenter from "../../../Core/Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
-import LearningRoomPresenter from "../../../Core/Presentation/Babylon/LearningRoom/LearningRoomPresenter";
 import IPresentationBuilder from "../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
 import PresentationBuilder from "../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
 import ScorePanelPresenter from "../../../Core/Presentation/React/ScorePanel/ScorePanelPresenter";

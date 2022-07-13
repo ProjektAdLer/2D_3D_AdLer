@@ -2,7 +2,6 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import AvatarPresenter from "../../../../Core/Presentation/Babylon/Avatar/AvatarPresenter";
 import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
-import PresentationDirector from "../../../../Core/Presentation/PresentationBuilder/PresentationDirector";
 
 describe("AvatarPresenter", () => {
   let presenter: AvatarPresenter;
