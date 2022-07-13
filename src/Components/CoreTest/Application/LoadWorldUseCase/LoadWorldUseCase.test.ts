@@ -13,6 +13,9 @@ import {
   correctFakeWorldResponse,
 } from "../../Adapters/Backend/BackendResponses";
 import ILearningWorldPort from "../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
+import { APILearningElementTO } from "../../../Core/Adapters/Backend/APILearningElementTO";
+import LearningElementEntity from "../../../Core/Domain/Entities/LearningElementEntity";
+import H5PLearningElementData from "../../../Core/Domain/Entities/SpecificLearningElements/H5PLearningElementData";
 
 const backendMock = mock<IBackend>();
 const learningWorldPortMock = mock<ILearningWorldPort>();
@@ -101,16 +104,53 @@ describe("LoadWorldUseCase", () => {
     );
   });
 
-  test.skip("Loads world, if correct Data is provided", async () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValue([
-      {
-        userToken: "token",
-        isLoggedIn: true,
-      },
-    ] as UserDataEntity[]);
+  test("MapLearningElement", () => {
+    const functionUnderTest = systemUnderTest["mapLearningElement"];
 
-    await systemUnderTest.executeAsync().catch((error) => {
-      expect(error).toBeUndefined();
-    });
+    const input: APILearningElementTO = {
+      id: 1,
+      name: "Test",
+      elementType: "h5p",
+      value: [
+        {
+          type: "number",
+          value: 1,
+        },
+      ],
+      requirements: [
+        {
+          type: "number",
+          value: 1,
+        },
+      ],
+      metaData: [
+        {
+          key: "h5pFileName",
+          value: "testFileName",
+        },
+        {
+          key: "h5pContextId",
+          value: "1337",
+        },
+      ],
+    };
+    functionUnderTest(input);
+
+    const expected: Partial<LearningElementEntity> = {
+      id: 1,
+      name: "Test",
+      value: 1,
+      requirement: 1,
+      learningElementData: {
+        type: "h5p",
+        contextId: 1337,
+        fileName: "testFileName",
+      } as H5PLearningElementData,
+    };
+
+    expect(entityContainerMock.createEntity).toHaveBeenCalledWith(
+      expected,
+      LearningElementEntity
+    );
   });
 });
