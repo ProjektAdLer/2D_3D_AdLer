@@ -22,24 +22,21 @@ describe("LogUserIntoMoodleUseCase", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.unbind(PORT_TYPES.IMoodlePort);
-    CoreDIContainer.bind(PORT_TYPES.IMoodlePort).toConstantValue(
+    CoreDIContainer.rebind<IMoodlePort>(PORT_TYPES.IMoodlePort).toConstantValue(
       moodlePortMock
     );
-
-    CoreDIContainer.unbind(PORT_TYPES.IDebugPort);
-    CoreDIContainer.bind(PORT_TYPES.IDebugPort).toConstantValue(debugPortMock);
-
-    CoreDIContainer.unbind(CORE_TYPES.IBackend);
-    CoreDIContainer.bind(CORE_TYPES.IBackend).toConstantValue(backendMock);
-
-    CoreDIContainer.unbind(CORE_TYPES.IEntityContainer);
-    CoreDIContainer.bind(CORE_TYPES.IEntityContainer).toConstantValue(
-      entityContainerMock
+    CoreDIContainer.rebind<IBackend>(CORE_TYPES.IBackend).toConstantValue(
+      backendMock
     );
-
-    CoreDIContainer.unbind(PORT_TYPES.IUIPort);
-    CoreDIContainer.bind(PORT_TYPES.IUIPort).toConstantValue(uiPortMock);
+    CoreDIContainer.rebind<IDebugPort>(PORT_TYPES.IDebugPort).toConstantValue(
+      debugPortMock
+    );
+    CoreDIContainer.rebind<IEntityContainer>(
+      CORE_TYPES.IEntityContainer
+    ).toConstantValue(entityContainerMock);
+    CoreDIContainer.rebind<IUIPort>(PORT_TYPES.IUIPort).toConstantValue(
+      uiPortMock
+    );
   });
 
   beforeEach(() => {
