@@ -64,9 +64,8 @@ export default class LearningRoomView implements ILearningRoomView {
   private displayRoom(): void {
     this.createWalls();
     this.createFloor();
-
-    //creating floor via roomCornerPoints ~FK
     this.createFloorViaCorners();
+    //creating floor via roomCornerPoints ~FK
   }
 
   private createFloorViaCorners(): void {
@@ -84,16 +83,17 @@ export default class LearningRoomView implements ILearningRoomView {
       );
 
     // Create Mesh
+    // Initial Starting Point
     let polyPath = new Path2(
       this.viewModel.roomCornerPoints.Value[0].x,
       this.viewModel.roomCornerPoints.Value[0].y
     );
-    for (let i = 0; i++; i < cornerCount) {
-      if (i > 0) {
-        const corner = Object.values(this.viewModel.roomCornerPoints.Value[i]);
-        polyPath.addLineTo(corner[0], corner[1]);
-      }
+    // Remaining Points (Array Position 1 and onwards)
+    for (let i = 1; i < cornerCount; i++) {
+      const corner = Object.values(this.viewModel.roomCornerPoints.Value[i]);
+      polyPath.addLineTo(corner[0], corner[1]);
     }
+
     const polyMesh = new PolygonMeshBuilder(
       "FloorPolyMesh",
       this.viewModel.roomCornerPoints.Value
