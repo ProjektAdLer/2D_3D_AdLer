@@ -3,16 +3,17 @@ import { LearningElementTO } from "../../../Core/Ports/LearningWorldPort/ILearni
 import ILearningElementPresenter from "../../../Core/Presentation/Babylon/LearningElement/ILearningElementPresenter";
 import LearningElementModalPresenter from "../../../Core/Presentation/React/LearningElementModal/LearningElementModalPresenter";
 
+// Spyon still needed because presentLearningElementModal from Modal presenter is needed. ~FK
 const presentLearningElementModalMock = jest.spyOn(
   LearningElementModalPresenter.prototype,
   "presentLearningElementModal"
 );
 
 describe("LearningElementPort", () => {
-  let learningElementPort: LearningElementPort;
+  let systemUnderTest: LearningElementPort;
 
   beforeEach(() => {
-    learningElementPort = new LearningElementPort();
+    systemUnderTest = new LearningElementPort();
   });
 
   test("addLearningElementPresenter adds new presenter", () => {
@@ -20,9 +21,9 @@ describe("LearningElementPort", () => {
       presentLearningElement: jest.fn(),
     };
 
-    learningElementPort.addLearningElementPresenter(learningElementPresenter);
+    systemUnderTest.addLearningElementPresenter(learningElementPresenter);
 
-    expect(learningElementPort["learningElementPresenters"]).toContain(
+    expect(systemUnderTest["learningElementPresenters"]).toContain(
       learningElementPresenter
     );
   });
@@ -32,31 +33,37 @@ describe("LearningElementPort", () => {
       presentLearningElement: jest.fn(),
     };
 
-    learningElementPort.addLearningElementPresenter(learningElementPresenter);
+    systemUnderTest.addLearningElementPresenter(learningElementPresenter);
 
     expect(() => {
-      learningElementPort.addLearningElementPresenter(learningElementPresenter);
+      systemUnderTest.addLearningElementPresenter(learningElementPresenter);
     }).toThrowError("already added");
   });
 
   test("startLearningElementEditing builds new LearningElementModalPresenter if its the first time it is called", () => {
-    expect(learningElementPort["modalPresenter"]).not.toBeDefined();
+    expect(systemUnderTest["modalPresenter"]).not.toBeDefined();
 
-    learningElementPort.startLearningElementEditing({
+    systemUnderTest.startLearningElementEditing({
       id: 1,
-      type: "h5p",
+      name: "test",
+      learningElementData: {
+        type: "h5p",
+      },
     } as LearningElementTO);
 
-    expect(learningElementPort["modalPresenter"]).toBeDefined();
+    expect(systemUnderTest["modalPresenter"]).toBeDefined();
   });
 
   test("startLearningElementEditing calls presentLearningElementModal on learningElementModalPresenter", () => {
     const learningElementTO: LearningElementTO = {
       id: 1,
-      type: "h5p",
+      name: "test",
+      learningElementData: {
+        type: "h5p",
+      },
     };
 
-    learningElementPort.startLearningElementEditing(learningElementTO);
+    systemUnderTest.startLearningElementEditing(learningElementTO);
 
     expect(presentLearningElementModalMock).toHaveBeenCalledTimes(1);
     expect(presentLearningElementModalMock).toHaveBeenCalledWith(
