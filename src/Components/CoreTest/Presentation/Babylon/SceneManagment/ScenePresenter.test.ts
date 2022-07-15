@@ -12,13 +12,13 @@ jest.mock("@babylonjs/core");
 const startRenderLoopMock = jest.spyOn(SceneView.prototype, "startRenderLoop");
 
 describe("scenePresenter", () => {
-  let scenePresenter: IscenePresenter;
+  let systemUnderTest: IscenePresenter;
   let engineManager: EngineManager;
 
   beforeEach(() => {
     engineManager = CoreDIContainer.get(CORE_TYPES.IEngineManager);
     engineManager.createEngine(document.createElement("canvas"));
-    scenePresenter = CoreDIContainer.get(CORE_TYPES.IScenePresenter);
+    systemUnderTest = CoreDIContainer.get(CORE_TYPES.IScenePresenter);
   });
 
   afterAll(() => {
@@ -29,23 +29,23 @@ describe("scenePresenter", () => {
     const createSceneClassMock = mock<ICreateSceneClass>();
     createSceneClassMock.preTasks = undefined;
 
-    scenePresenter.createScene(createSceneClassMock).then(() => {
+    systemUnderTest.createScene(createSceneClassMock).then(() => {
       expect(createSceneClassMock.createScene).toHaveBeenCalledTimes(1);
-      expect(scenePresenter["viewModel"].scene).toBe(
+      expect(systemUnderTest["viewModel"].scene).toBe(
         createSceneClassMock.createScene.mock.results[0].value
       );
     });
   });
 
   test("createRenderLoop calls the sceneView", () => {
-    scenePresenter.startRenderLoop();
+    systemUnderTest.startRenderLoop();
     expect(startRenderLoopMock).toHaveBeenCalledTimes(1);
   });
 
   test("Scene getter returns scene from viewmodel", () => {
     let createdScene = new Scene(new NullEngine());
-    scenePresenter["viewModel"].scene = createdScene;
+    systemUnderTest["viewModel"].scene = createdScene;
 
-    expect(scenePresenter.Scene).toBe(createdScene);
+    expect(systemUnderTest.Scene).toBe(createdScene);
   });
 });
