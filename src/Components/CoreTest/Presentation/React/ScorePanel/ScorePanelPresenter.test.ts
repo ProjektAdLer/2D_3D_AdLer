@@ -2,15 +2,15 @@ import ScorePanelPresenter from "../../../../Core/Presentation/React/ScorePanel/
 import ScorePanelViewModel from "../../../../Core/Presentation/React/ScorePanel/ScorePanelViewModel";
 
 describe("ScorePanelPresenter", () => {
-  let scorePanelPresenter: ScorePanelPresenter;
+  let systemUnderTest: ScorePanelPresenter;
 
   beforeEach(() => {
-    scorePanelPresenter = new ScorePanelPresenter(new ScorePanelViewModel());
+    systemUnderTest = new ScorePanelPresenter(new ScorePanelViewModel());
   });
 
   test("presentScore sets the score in the ViewModel", () => {
-    scorePanelPresenter.presentScore(420);
+    systemUnderTest.presentScore(420);
 
-    expect(scorePanelPresenter["viewModel"].score.Value).toBe(420);
+    expect(systemUnderTest["viewModel"].score.Value).toBe(420);
   });
 });
