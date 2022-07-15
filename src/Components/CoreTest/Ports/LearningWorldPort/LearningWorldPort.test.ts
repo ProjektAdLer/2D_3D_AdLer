@@ -48,19 +48,16 @@ class LearningRoomBuilderMock extends PresentationBuilder<
 }
 
 describe("LearningWorldPort", () => {
-  let learningWorldPort: LearningWorldPort;
+  let systemUnderTest: LearningWorldPort;
 
   beforeEach(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.unbind(BUILDER_TYPES.ILearningRoomBuilder);
-    CoreDIContainer.bind<IPresentationBuilder>(
-      BUILDER_TYPES.ILearningRoomBuilder
-    ).to(LearningRoomBuilderMock);
-
-    learningWorldPort = new LearningWorldPort(
-      new ViewModelControllerProvider()
+    CoreDIContainer.rebind(BUILDER_TYPES.ILearningRoomBuilder).to(
+      LearningRoomBuilderMock
     );
+
+    systemUnderTest = new LearningWorldPort(new ViewModelControllerProvider());
   });
 
   afterEach(() => {
@@ -72,9 +69,9 @@ describe("LearningWorldPort", () => {
       new LearningElementsDropdownPresenter(
         new LearningElementsDropdownViewModel()
       );
-    learningWorldPort.LearningElementDropdownPresenter =
+    systemUnderTest.LearningElementDropdownPresenter =
       learningElementDropdownPresenter;
-    expect(learningWorldPort["learningElementDropdownPresenter"]).toBe(
+    expect(systemUnderTest["learningElementDropdownPresenter"]).toBe(
       learningElementDropdownPresenter
     );
   });
@@ -82,7 +79,9 @@ describe("LearningWorldPort", () => {
   test("presentLearningWorld", () => {
     const learningElementTO: LearningElementTO = {
       id: 1,
-      type: "h5p",
+      learningElementData: {
+        type: "h5p",
+      },
       name: "test",
     };
     const learningRoomTO: LearningRoomTO = {
@@ -94,26 +93,26 @@ describe("LearningWorldPort", () => {
       learningRooms: [learningRoomTO],
     };
 
-    learningWorldPort.LearningElementDropdownPresenter =
+    systemUnderTest.LearningElementDropdownPresenter =
       new LearningElementsDropdownPresenter(
         new LearningElementsDropdownViewModel()
       );
 
-    learningWorldPort.presentLearningWorld(learningWorldTO);
+    systemUnderTest.presentLearningWorld(learningWorldTO);
 
     expect(presentLearningRoomMock).toHaveBeenCalledTimes(1);
     expect(presentLearningRoomMock).toHaveBeenCalledWith(learningRoomTO);
 
     expect(registerViewModelOnlyMock).toHaveBeenCalledTimes(1);
     expect(registerViewModelOnlyMock).toHaveBeenCalledWith(
-      learningWorldPort["viewModel"],
+      systemUnderTest["viewModel"],
       LearningWorldViewModel
     );
-    expect(learningWorldPort["viewModel"]).toBeDefined();
-    expect(learningWorldPort["viewModel"].worldName.Value).toBe(
+    expect(systemUnderTest["viewModel"]).toBeDefined();
+    expect(systemUnderTest["viewModel"].worldName.Value).toBe(
       learningWorldTO.worldName
     );
-    expect(learningWorldPort["viewModel"].worldNameLoading.Value).toBe(false);
+    expect(systemUnderTest["viewModel"].worldNameLoading.Value).toBe(false);
 
     expect(setupNavigationMock).toHaveBeenCalledTimes(1);
 
