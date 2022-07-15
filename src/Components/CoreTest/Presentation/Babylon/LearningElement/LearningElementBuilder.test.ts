@@ -8,18 +8,20 @@ const addLearningElementPresenterMock = jest.spyOn(
 );
 
 describe("LearningElementViewModel", () => {
-  let builder: LearningElementBuilder;
+  let systemUnderTest: LearningElementBuilder;
 
   beforeEach(() => {
-    builder = new LearningElementBuilder();
+    systemUnderTest = new LearningElementBuilder();
   });
 
   test("buildPresenter concludes the build step successfully and registers the presneter with the port", () => {
-    builder.buildViewModel();
-    builder.buildPresenter();
-    expect(builder["presenter"]).toBeDefined();
-    expect(builder.getPresenter()).toBeDefined();
-    expect(builder.getPresenter()).toBeInstanceOf(LearningElementPresenter);
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildPresenter();
+    expect(systemUnderTest["presenter"]).toBeDefined();
+    expect(systemUnderTest.getPresenter()).toBeDefined();
+    expect(systemUnderTest.getPresenter()).toBeInstanceOf(
+      LearningElementPresenter
+    );
     expect(addLearningElementPresenterMock).toHaveBeenCalledTimes(1);
   });
 });

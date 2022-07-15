@@ -1,10 +1,10 @@
 import LearningRoomController from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomController";
 
 describe("RoomController", () => {
-  let learningRoomController: LearningRoomController;
+  let systemUnderTest: LearningRoomController;
 
   beforeEach(() => {
-    learningRoomController = new LearningRoomController();
+    systemUnderTest = new LearningRoomController();
   });
 
   test.todo("write tests when controller has functionality");
