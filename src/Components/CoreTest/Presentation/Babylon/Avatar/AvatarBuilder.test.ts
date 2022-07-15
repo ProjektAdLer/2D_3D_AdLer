@@ -11,17 +11,17 @@ const setViewModelMock = jest.spyOn(
 );
 
 describe("AvatarBuilder", () => {
-  let builder: AvatarBuilder;
+  let systemUnderTest: AvatarBuilder;
 
   beforeEach(() => {
-    builder = new AvatarBuilder();
+    systemUnderTest = new AvatarBuilder();
   });
 
   test("buildPresenter builds the AvatarPresenter and sets the ViewModel with its setter", () => {
-    builder.buildPresenter();
+    systemUnderTest.buildPresenter();
 
-    expect(builder["presenter"]).toBeInstanceOf(AvatarPresenter);
-    expect(builder["presenter"]).toBe(
+    expect(systemUnderTest["presenter"]).toBeInstanceOf(AvatarPresenter);
+    expect(systemUnderTest["presenter"]).toBe(
       CoreDIContainer.get<IAvatarPort>(PORT_TYPES.IAvatarPort)
     );
     expect(setViewModelMock).toHaveBeenCalledTimes(1);
