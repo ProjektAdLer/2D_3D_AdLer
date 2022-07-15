@@ -2,10 +2,10 @@ import AvatarController from "../../../../Core/Presentation/Babylon/Avatar/Avata
 import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
 
 describe("AvatarController", () => {
-  let avatarController: AvatarController;
+  let systemUnderTest: AvatarController;
 
   beforeEach(() => {
-    avatarController = new AvatarController(new AvatarViewModel());
+    systemUnderTest = new AvatarController(new AvatarViewModel());
   });
 
   test.todo("add tests for testable methods");

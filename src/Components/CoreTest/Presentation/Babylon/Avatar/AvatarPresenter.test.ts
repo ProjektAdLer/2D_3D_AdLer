@@ -4,10 +4,12 @@ import AvatarPresenter from "../../../../Core/Presentation/Babylon/Avatar/Avatar
 import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
 
 describe("AvatarPresenter", () => {
-  let presenter: AvatarPresenter;
+  let systemUnderTest: AvatarPresenter;
 
   beforeEach(() => {
-    presenter = CoreDIContainer.get<AvatarPresenter>(PORT_TYPES.IAvatarPort);
+    systemUnderTest = CoreDIContainer.get<AvatarPresenter>(
+      PORT_TYPES.IAvatarPort
+    );
   });
 
   afterAll(() => {
@@ -16,8 +18,8 @@ describe("AvatarPresenter", () => {
 
   test("ViewModel setter sets the private viewModel member", () => {
     const viewModel = new AvatarViewModel();
-    presenter.ViewModel = viewModel;
-    expect(presenter["viewModel"]).toBe(viewModel);
+    systemUnderTest.ViewModel = viewModel;
+    expect(systemUnderTest["viewModel"]).toBe(viewModel);
   });
 
   test.todo("presentAvatar sets customization info in the viewmodel");
