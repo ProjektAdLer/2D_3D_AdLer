@@ -15,39 +15,39 @@ const registerMoodleLoginPresenterMock = jest.spyOn(
 );
 
 describe("MoodleLoginFormBuilder", () => {
-  let moodleLoginFormBuilder: MoodleLoginFormBuilder;
+  let systemUnderTest: MoodleLoginFormBuilder;
 
   beforeEach(() => {
-    moodleLoginFormBuilder = new MoodleLoginFormBuilder();
+    systemUnderTest = new MoodleLoginFormBuilder();
   });
 
   test("buildController builds the controller and registers it and the viewModel with the VMCProvider", () => {
-    moodleLoginFormBuilder.buildViewModel();
-    moodleLoginFormBuilder.buildController();
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildController();
 
-    expect(moodleLoginFormBuilder["controller"]).toBeDefined();
-    expect(moodleLoginFormBuilder["controller"]).toBeInstanceOf(
+    expect(systemUnderTest["controller"]).toBeDefined();
+    expect(systemUnderTest["controller"]).toBeInstanceOf(
       MoodleLoginFormController
     );
     expect(registerTupelMock).toHaveBeenCalledTimes(1);
     expect(registerTupelMock).toHaveBeenCalledWith(
-      moodleLoginFormBuilder["viewModel"],
-      moodleLoginFormBuilder["controller"],
+      systemUnderTest["viewModel"],
+      systemUnderTest["controller"],
       MoodleLoginFormViewModel
     );
   });
 
   test("buildPresenter build the presenter and register it with the MoodlePort", () => {
-    moodleLoginFormBuilder.buildViewModel();
-    moodleLoginFormBuilder.buildPresenter();
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildPresenter();
 
-    expect(moodleLoginFormBuilder["presenter"]).toBeDefined();
-    expect(moodleLoginFormBuilder["presenter"]).toBeInstanceOf(
+    expect(systemUnderTest["presenter"]).toBeDefined();
+    expect(systemUnderTest["presenter"]).toBeInstanceOf(
       MoodleLoginFormPresenter
     );
     expect(registerMoodleLoginPresenterMock).toHaveBeenCalledTimes(1);
     expect(registerMoodleLoginPresenterMock).toHaveBeenCalledWith(
-      moodleLoginFormBuilder["presenter"]
+      systemUnderTest["presenter"]
     );
   });
 });

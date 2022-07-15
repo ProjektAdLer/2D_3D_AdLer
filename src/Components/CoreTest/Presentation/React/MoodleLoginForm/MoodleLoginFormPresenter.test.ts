@@ -2,10 +2,12 @@ import MoodleLoginFormPresenter from "../../../../Core/Presentation/React/Moodle
 import MoodleLoginFormViewModel from "../../../../Core/Presentation/React/MoodleLoginForm/MoodleLoginFormViewModel";
 
 describe("MoodleLoginFormPresenter", () => {
-  let presenter: MoodleLoginFormPresenter;
+  let systemUnderTest: MoodleLoginFormPresenter;
 
   beforeEach(() => {
-    presenter = new MoodleLoginFormPresenter(new MoodleLoginFormViewModel());
+    systemUnderTest = new MoodleLoginFormPresenter(
+      new MoodleLoginFormViewModel()
+    );
   });
 
   test.todo("add tests here");
