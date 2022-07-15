@@ -1,42 +1,42 @@
 import SimpleEvent from "../SimpleEvent";
 
 describe("Observable", () => {
-  let event: SimpleEvent;
+  let systemUnderTest: SimpleEvent;
 
   beforeEach(() => {
-    event = new SimpleEvent();
+    systemUnderTest = new SimpleEvent();
   });
 
   test("subscribe adds subscriber", () => {
     const subscriber = jest.fn();
-    event.subscribe(subscriber);
+    systemUnderTest.subscribe(subscriber);
 
-    expect(event["subscribers"]).toContain(subscriber);
+    expect(systemUnderTest["subscribers"]).toContain(subscriber);
   });
 
   test("subscribe doesn't add the same subscriber twice", () => {
     const subscriber = jest.fn();
-    event.subscribe(subscriber);
-    event.subscribe(subscriber);
+    systemUnderTest.subscribe(subscriber);
+    systemUnderTest.subscribe(subscriber);
 
-    expect(event["subscribers"].length).toBe(1);
-    expect(event["subscribers"]).toContain(subscriber);
+    expect(systemUnderTest["subscribers"].length).toBe(1);
+    expect(systemUnderTest["subscribers"]).toContain(subscriber);
   });
 
   test("unsubscribe removes subscriber", () => {
     const subscriber = jest.fn();
 
-    event.subscribe(subscriber);
-    expect(event["subscribers"]).toContain(subscriber);
+    systemUnderTest.subscribe(subscriber);
+    expect(systemUnderTest["subscribers"]).toContain(subscriber);
 
-    event.unsubscribe(subscriber);
-    expect(event["subscribers"]).not.toContain(subscriber);
+    systemUnderTest.unsubscribe(subscriber);
+    expect(systemUnderTest["subscribers"]).not.toContain(subscriber);
   });
 
   test("notifySubscribers notifies all subscribers", () => {
     const subscriber = jest.fn();
-    event.subscribe(subscriber);
-    event.notifySubscribers();
+    systemUnderTest.subscribe(subscriber);
+    systemUnderTest.notifySubscribers();
 
     expect(subscriber).toHaveBeenCalledTimes(1);
   });
