@@ -11,7 +11,6 @@ import LearningWorldPort from "../../../Core/Ports/LearningWorldPort/LearningWor
 import LearningRoomPresenter from "../../../Core/Presentation/Babylon/LearningRoom/LearningRoomPresenter";
 import LearningRoomViewModel from "../../../Core/Presentation/Babylon/LearningRoom/LearningRoomViewModel";
 import Navigation from "../../../Core/Presentation/Babylon/Navigation/Navigation";
-import IPresentationBuilder from "../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
 import PresentationBuilder from "../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
 import LearningElementsDropdownPresenter from "../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownPresenter";
 import LearningElementsDropdownViewModel from "../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownViewModel";

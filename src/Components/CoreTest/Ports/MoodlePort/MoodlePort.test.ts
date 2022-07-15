@@ -2,29 +2,29 @@ import MoodlePort from "../../../Core/Ports/MoodlePort/MoodlePort";
 import IMoodleLoginFormPresenter from "../../../Core/Presentation/React/MoodleLoginForm/IMoodleLoginFormPresenter";
 
 describe("MoodlePort", () => {
-  let moodlePort: MoodlePort;
+  let systemUnderTest: MoodlePort;
 
   beforeEach(() => {
-    moodlePort = new MoodlePort();
+    systemUnderTest = new MoodlePort();
   });
 
-  test("registerMoodleLoginPresenter registers the presenter if non present", () => {
-    expect(moodlePort["moodleLoginFormPresenter"]).not.toBeDefined();
+  test("registerMoodleLoginPresenter registers the presenter if none are present", () => {
+    expect(systemUnderTest["moodleLoginFormPresenter"]).not.toBeDefined();
 
     const presenter = {} as IMoodleLoginFormPresenter;
-    moodlePort.registerMoodleLoginPresenter(presenter);
+    systemUnderTest.registerMoodleLoginPresenter(presenter);
 
-    expect(moodlePort["moodleLoginFormPresenter"]).toBe(presenter);
+    expect(systemUnderTest["moodleLoginFormPresenter"]).toBe(presenter);
   });
 
   test("registerMoodleLoginPresenter throws an error if a presenter was already registered", () => {
-    expect(moodlePort["moodleLoginFormPresenter"]).not.toBeDefined();
+    expect(systemUnderTest["moodleLoginFormPresenter"]).not.toBeDefined();
 
     const presenter = {} as IMoodleLoginFormPresenter;
-    moodlePort.registerMoodleLoginPresenter(presenter);
+    systemUnderTest.registerMoodleLoginPresenter(presenter);
 
     expect(() => {
-      moodlePort.registerMoodleLoginPresenter(presenter);
+      systemUnderTest.registerMoodleLoginPresenter(presenter);
     }).toThrowError("already registered");
   });
 });
