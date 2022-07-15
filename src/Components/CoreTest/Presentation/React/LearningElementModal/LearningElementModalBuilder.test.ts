@@ -8,22 +8,22 @@ const registerTupelMock = jest.spyOn(
 );
 
 describe("LearningElementModalBuilder", () => {
-  let learningElementModalBuilder: LearningElementModalBuilder;
+  let systemUnderTest: LearningElementModalBuilder;
 
   beforeEach(() => {
-    learningElementModalBuilder = new LearningElementModalBuilder();
+    systemUnderTest = new LearningElementModalBuilder();
   });
 
   test("buildController builds the controller and registers the viewModel and controller", () => {
-    learningElementModalBuilder.buildViewModel();
-    learningElementModalBuilder.buildController();
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildController();
 
-    expect(learningElementModalBuilder["viewModel"]).toBeDefined();
-    expect(learningElementModalBuilder["controller"]).toBeDefined();
+    expect(systemUnderTest["viewModel"]).toBeDefined();
+    expect(systemUnderTest["controller"]).toBeDefined();
     expect(registerTupelMock).toHaveBeenCalledTimes(1);
     expect(registerTupelMock).toHaveBeenCalledWith(
-      learningElementModalBuilder["viewModel"],
-      learningElementModalBuilder["controller"],
+      systemUnderTest["viewModel"],
+      systemUnderTest["controller"],
       LearningElementModalViewModel
     );
   });

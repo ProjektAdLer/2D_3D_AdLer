@@ -7,14 +7,14 @@ const executeAsyncMock = jest.spyOn(
 );
 
 describe("LearningElementModalController", () => {
-  let learningElementModalController: LearningElementModalController;
+  let systemUnderTest: LearningElementModalController;
 
   beforeEach(() => {
-    learningElementModalController = new LearningElementModalController();
+    systemUnderTest = new LearningElementModalController();
   });
 
   test("scoreLearningElement calls the ScoreLearningElementUseCase", async () => {
-    await learningElementModalController.scoreLearningElement(1);
+    await systemUnderTest.scoreLearningElement(1);
 
     expect(executeAsyncMock).toHaveBeenCalledTimes(1);
     expect(executeAsyncMock).toHaveBeenCalledWith({
