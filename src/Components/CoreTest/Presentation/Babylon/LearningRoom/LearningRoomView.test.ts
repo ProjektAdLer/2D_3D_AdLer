@@ -36,7 +36,7 @@ describe("LearningRoomView", () => {
     expect(() => {
       //@ts-ignore
       new LearningRoomView(undefined, roomControllerMock);
-    }).toThrowError("ViewModel not set");
+    }).toThrowError("ViewModel is not set");
   });
 
   test("createFloorViaCorners throws error if cornerCount is smaller than 3", () => {
@@ -61,3 +61,4 @@ describe("LearningRoomView", () => {
     expect(displayRoomMock).toHaveBeenCalled();
   });
 });
+// todo: tests for the subscribe methods
