@@ -25,7 +25,11 @@ export default class LearningRoomView implements ILearningRoomView {
     this.scenePresenter = CoreDIContainer.get<IScenePresenter>(
       CORE_TYPES.IScenePresenter
     );
-
+    // Errorhandling: Check if viewModel is set
+    if (!this.viewModel)
+      throw new Error(
+        "ViewModel not set. Check if the Builder is set up properly."
+      );
     // setup callbacks for rerendering parts of the room when the view model changes
     this.viewModel.roomHeight.subscribe(() => {
       this.displayRoom();
@@ -61,20 +65,15 @@ export default class LearningRoomView implements ILearningRoomView {
     this.displayRoom();
   }
 
-  private displayRoom(): void {
-    this.createWalls();
-    this.createFloor();
+  public displayRoom(): void {
+    // Currently disabled. create Walls will be Modernized soon, create Floor is deprecated. ~ FK
+    // this.createWalls();
+    // this.createFloor();
     this.createFloorViaCorners();
-    //creating floor via roomCornerPoints ~FK
+    //creating floor via roomCornerPoints ~ FK
   }
 
   private createFloorViaCorners(): void {
-    // Errorhandling: Check if viewModel is set
-    if (!this.viewModel)
-      throw new Error(
-        "ViewModel not set. Check if the Builder is set up properly."
-      );
-
     // Errorhandling: Check if cornerCount is higher than 2
     const cornerCount = this.viewModel.roomCornerPoints.Value.length;
     if (cornerCount < 3)
@@ -103,23 +102,22 @@ export default class LearningRoomView implements ILearningRoomView {
     }
     this.scenePresenter.registerNavigationMesh(this.viewModel.floorMesh.Value);
 
-    // Floor Material
+    // Floor Material and Texture
     if (!this.viewModel.floorMaterial.Value) {
       this.viewModel.floorMaterial.Value = new StandardMaterial(
         "floorMaterial",
         this.scenePresenter.Scene
       );
-    }
 
-    // Floor texture
-    this.viewModel.floorMaterial.Value.diffuseTexture = new Texture(
-      floorTexture,
-      this.scenePresenter.Scene
-    );
-    (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).uScale = 2;
-    (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 2;
-    this.viewModel.floorMesh.Value.material =
-      this.viewModel.floorMaterial.Value;
+      this.viewModel.floorMaterial.Value.diffuseTexture = new Texture(
+        floorTexture,
+        this.scenePresenter.Scene
+      );
+      (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).uScale = 2;
+      (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 2;
+      this.viewModel.floorMesh.Value.material =
+        this.viewModel.floorMaterial.Value;
+    }
   }
 
   private createFloor(): void {
