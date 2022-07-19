@@ -72,6 +72,9 @@ export default class Backend implements IBackend {
     username: string;
     password: string;
   }): Promise<string> {
+    if (config.useFakeBackend) {
+      return Promise.resolve("fakeToken");
+    }
     const token = await axios.post<string>(
       config.serverURL + "/userlogin",
       userCredentials
