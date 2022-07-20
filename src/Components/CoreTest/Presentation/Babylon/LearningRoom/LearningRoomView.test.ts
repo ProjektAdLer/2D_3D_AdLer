@@ -1,6 +1,6 @@
 import LearningRoomView from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomView";
 import LearningRoomViewModel from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomViewModel";
-import { Mesh, StandardMaterial, Vector2 } from "@babylonjs/core";
+import { Color3, Mesh, StandardMaterial, Vector2 } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import ILearningRoomController from "../../../../Core/Presentation/Babylon/LearningRoom/ILearningRoomController";
@@ -50,15 +50,35 @@ describe("LearningRoomView", () => {
       "Not enough corners found to generate floor. Please review the Roomdata."
     );
   });
+  test("displayRoom is being called", () => {
+    const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");
+    //@ts-ignore
+    systemUnderTest.viewModel.roomHeight.Value = 20;
+    expect(displayRoomMock).toHaveBeenCalled();
+  });
+  test("subscribe Methods in the constructor calls displayRoom", () => {
+    const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");
+
+    systemUnderTest.viewModel.roomHeight.Value = 20;
+    systemUnderTest.viewModel.roomWidth.Value = 21;
+    systemUnderTest.viewModel.roomLength.Value = 22;
+    systemUnderTest.viewModel.wallThickness.Value = 23;
+    systemUnderTest.viewModel.baseHeight.Value = 24;
+    // these three attributes cannot be tested as of now, as setting them would trigger babylon code ~ fk
+    // systemUnderTest.viewModel.wallColor.Value = new Color3(0.25, 0.26, 0.27);
+    // systemUnderTest.viewModel.doorHeight.Value = 28;
+    // systemUnderTest.viewModel.doorWidth.Value = 29;
+    systemUnderTest.viewModel.roomCornerPoints.Value = [
+      new Vector2(30, 31),
+      new Vector2(32, 33),
+      new Vector2(34, 35),
+    ];
+    expect(displayRoomMock).toHaveBeenCalledTimes(6);
+  });
 
   test.skip("createFloorViaCorners creates a Mesh", () => {
     const mesh = viewModel.floorMesh.Value;
     expect(mesh).toBe(!undefined);
-  });
-  test.skip("displayRoom is being called", () => {
-    const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");
-    systemUnderTest = new LearningRoomView(viewModel, roomControllerMock);
-    expect(displayRoomMock).toHaveBeenCalled();
   });
 });
 // todo: tests for the subscribe methods

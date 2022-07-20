@@ -1,5 +1,35 @@
 import DSL from "../../../Core/Adapters/Backend/IDSL";
 
+export const correctFakeLearningElementsMinimalResponse = [
+  {
+    id: 1,
+    name: "Test",
+    elementType: "h5p",
+    value: [
+      {
+        type: "points",
+        value: 10,
+      },
+    ],
+    requirements: [
+      {
+        type: "points",
+        value: 10,
+      },
+    ],
+    metaData: [
+      {
+        key: "h5pContextId",
+        value: "123",
+      },
+      {
+        key: "h5pFileName",
+        value: "fileName",
+      },
+    ],
+  },
+];
+
 export const correctFakeLearningElementResponse = [
   {
     id: 1,
@@ -71,6 +101,10 @@ export const correctFakeLearningElementResponse = [
 
 export const correctFakeRoomResponse = [
   { id: 1, name: "Lernraum Metriken", learningElementIds: [1, 2, 3] },
+];
+
+export const correctFakeRoomResponseMinimal = [
+  { id: 1, name: "Lernraum Metriken", learningElementIds: [1] },
 ];
 
 export const correctFakeWorldResponse = {

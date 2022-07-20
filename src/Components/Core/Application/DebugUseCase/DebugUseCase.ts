@@ -16,7 +16,7 @@ export default class DebugUseCase implements IDebugUseCase {
     @inject(PORT_TYPES.IDebugPort)
     private debugPort: IDebugPort
   ) {}
-  async executeAsync(data?: IDTO | undefined): Promise<void> {
+  async executeAsync(): Promise<void> {
     this.debugPort.addToMisc("Debug-Mode", "enabled");
     await this.logIn();
     return Promise.resolve();
@@ -25,9 +25,10 @@ export default class DebugUseCase implements IDebugUseCase {
   logIn = async (): Promise<void> => {
     if (!config.useAutoLogin) throw new Error("AutoLogin is disabled");
     logger.log("Debug: Automaticly loggin in User from environement variable");
+
     await this.loginUsecase.executeAsync({
-      username: config.userName,
-      password: config.password,
+      username: !config.useFakeBackend ? config.userName : "fakeUser",
+      password: !config.useFakeBackend ? config.password : "fakePassword",
     });
     logger.log("Debug: User logged in");
   };

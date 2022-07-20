@@ -14,10 +14,12 @@ import { LearningWorldTO } from "../../Ports/LearningWorldPort/ILearningWorldPor
 import ILoadWorldUseCase from "./ILoadWorldUseCase";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
-import ILoadAvatarUseCase from "../LoadAvatar/ILoadAvatarUseCase";
+import type ILoadAvatarUseCase from "../LoadAvatar/ILoadAvatarUseCase";
 import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_TYPES";
 import H5PLearningElementData from "../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
 import TextLearningElementData from "../../Domain/Entities/SpecificLearningElements/TextLearningElementData";
+import VideoLearningElementData from "../../Domain/Entities/SpecificLearningElements/VideoLearningElementData";
+import ImageLearningElementData from "../../Domain/Entities/SpecificLearningElements/ImageLearningElementData";
 import type IUIPort from "../../Ports/UIPort/IUIPort";
 
 @injectable()
@@ -32,7 +34,9 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     @inject(CORE_TYPES.IBackend)
     private backend: IBackend,
     @inject(PORT_TYPES.IUIPort)
-    private uiPort: IUIPort
+    private uiPort: IUIPort,
+    @inject(USECASE_TYPES.ILoadAvatarUseCase)
+    private loadAvatarUseCase: ILoadAvatarUseCase
   ) {}
 
   async executeAsync(): Promise<void> {
@@ -48,11 +52,8 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     this.learningWorldPort.presentLearningWorld(
       this.toTO(this.learningWorldEntity)
     );
-
-    const loadAvatarUseCase = CoreDIContainer.get<ILoadAvatarUseCase>(
-      USECASE_TYPES.ILoadAvatarUseCase
-    );
-    await loadAvatarUseCase.executeAsync();
+    // TODO: Move this outside of this use case - PG
+    await this.loadAvatarUseCase.executeAsync();
 
     return Promise.resolve();
   }
@@ -83,12 +84,12 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       case "image":
         entityToStore.learningElementData = {
           type: "image",
-        } as TextLearningElementData;
+        } as ImageLearningElementData;
         break;
       case "video":
         entityToStore.learningElementData = {
           type: "video",
-        } as TextLearningElementData;
+        } as VideoLearningElementData;
         break;
       case "h5p":
         entityToStore.learningElementData = {
