@@ -6,17 +6,12 @@ import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
 import IUIPort from "../../../Core/Ports/UIPort/IUIPort";
-import {
-  correctFakeLearningElementResponse,
-  correctFakeRoomResponse,
-  correctFakeWorldResponse,
-} from "../../Adapters/Backend/BackendResponses";
 import ILearningWorldPort from "../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
 import { APILearningElementTO } from "../../../Core/Adapters/Backend/APILearningElementTO";
 import LearningElementEntity from "../../../Core/Domain/Entities/LearningElementEntity";
 import H5PLearningElementData from "../../../Core/Domain/Entities/SpecificLearningElements/H5PLearningElementData";
 import TextLearningElementData from "../../../Core/Domain/Entities/SpecificLearningElements/TextLearningElementData";
-import ImageLeanringElementData from "../../../Core/Domain/Entities/SpecificLearningElements/ImageLeanringElementData";
+import ImageLeanringElementData from "../../../Core/Domain/Entities/SpecificLearningElements/ImageLearningElementData";
 import VideoLearningElementData from "../../../Core/Domain/Entities/SpecificLearningElements/VideoLearningElementData";
 const backendMock = mock<IBackend>();
 const learningWorldPortMock = mock<ILearningWorldPort>();
@@ -31,12 +26,6 @@ describe("LoadWorldUseCase", () => {
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
-
-    backendMock.getLearningElements.mockResolvedValue(
-      correctFakeLearningElementResponse
-    );
-    backendMock.getLearningRooms.mockResolvedValue(correctFakeRoomResponse);
-    backendMock.getWorld.mockResolvedValue(correctFakeWorldResponse);
 
     CoreDIContainer.rebind(CORE_TYPES.IBackend).toConstantValue(backendMock);
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
