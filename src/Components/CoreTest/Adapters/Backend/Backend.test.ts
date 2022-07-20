@@ -56,12 +56,22 @@ describe("Backend", () => {
     expect(systemUnderTest.scoreLearningElement(1)).resolves.not.toThrow();
   });
 
+  test("Loggs user in to Moodle with fake backend", () => {
+    const returnedVal = systemUnderTest.logInUser({
+      username: "test",
+      password: "test",
+    });
+    expect(returnedVal).resolves.toBe("fakeToken");
+  });
+
   test("Loggs user in to Moodle", () => {
+    config.useFakeBackend = false;
     mockedAxios.post.mockResolvedValue({ data: "token" });
     const returnedVal = systemUnderTest.logInUser({
       username: "test",
       password: "test",
     });
+    config.useFakeBackend = true;
     expect(returnedVal).resolves.toBe("token");
   });
 
