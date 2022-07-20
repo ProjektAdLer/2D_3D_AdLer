@@ -21,7 +21,10 @@ const roomTO: LearningRoomTO = {
   learningElements: [
     {
       id: 2,
-      type: "h5p",
+      name: "test",
+      learningElementData: {
+        type: "h5p",
+      },
     },
   ],
 };
@@ -30,10 +33,10 @@ const roomViewModel: LearningRoomViewModel = new LearningRoomViewModel();
 roomViewModel.id = 1;
 
 describe("LearningRoomPresenter", () => {
-  let roomPresenter: LearningRoomPresenter;
+  let systemUnderTest: LearningRoomPresenter;
 
   beforeEach(() => {
-    roomPresenter = new LearningRoomPresenter(roomViewModel);
+    systemUnderTest = new LearningRoomPresenter(roomViewModel);
   });
 
   afterAll(() => {
@@ -42,33 +45,34 @@ describe("LearningRoomPresenter", () => {
 
   test("constructor throws error if viewModel is not defined", () => {
     expect(() => {
+      // @ts-ignore
       new LearningRoomPresenter(undefined);
     }).toThrowError("ViewModel");
   });
 
   test("LearningRoomId returns ID from viewModel", () => {
-    expect(roomPresenter.LearningRoomId).toBe(1);
+    expect(systemUnderTest.LearningRoomId).toBe(1);
   });
 
   test("openDoor returns without calling the doorPresenter if its not defined", () => {
-    roomPresenter.openDoor();
+    systemUnderTest.openDoor();
     expect(openDoorMock).not.toHaveBeenCalled();
   });
 
   test("openDoor calls the doorPresenter", () => {
-    roomPresenter["doorPresenter"] = new DoorPresenter(new DoorViewModel());
-    roomPresenter.openDoor();
+    systemUnderTest["doorPresenter"] = new DoorPresenter(new DoorViewModel());
+    systemUnderTest.openDoor();
     expect(openDoorMock).toHaveBeenCalled();
   });
 
   test("presentLearningRoom sets room viewmodel", () => {
-    roomPresenter.presentLearningRoom(roomTO);
-    expect(roomPresenter["viewModel"].id).toBe(roomTO.id);
+    systemUnderTest.presentLearningRoom(roomTO);
+    expect(systemUnderTest["viewModel"].id).toBe(roomTO.id);
     // TODO: add additional expectations here for set viewmodel data
   });
 
   test("presentLearningRoom creates learning elements", () => {
-    roomPresenter.presentLearningRoom(roomTO);
+    systemUnderTest.presentLearningRoom(roomTO);
     expect(presentLearningElementMock).toHaveBeenCalledTimes(1);
     expect(getPresenterMock).toHaveBeenCalledTimes(1);
   });

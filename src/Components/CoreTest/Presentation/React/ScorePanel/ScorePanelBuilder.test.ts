@@ -8,19 +8,19 @@ const registerViewModelOnlyMock = jest.spyOn(
 );
 
 describe("ScorePanelBuilder", () => {
-  let scorePanelBuilder: ScorePanelBuilder;
+  let systemUnderTest: ScorePanelBuilder;
 
   beforeEach(() => {
-    scorePanelBuilder = new ScorePanelBuilder();
+    systemUnderTest = new ScorePanelBuilder();
   });
 
   test("buildViewModel builds the viewModel, and registers it with the VMCProvider", () => {
-    scorePanelBuilder.buildViewModel();
+    systemUnderTest.buildViewModel();
 
-    expect(scorePanelBuilder["viewModel"]).toBeDefined();
+    expect(systemUnderTest["viewModel"]).toBeDefined();
     expect(registerViewModelOnlyMock).toHaveBeenCalledTimes(1);
     expect(registerViewModelOnlyMock).toHaveBeenCalledWith(
-      scorePanelBuilder["viewModel"],
+      systemUnderTest["viewModel"],
       ScorePanelViewModel
     );
   });

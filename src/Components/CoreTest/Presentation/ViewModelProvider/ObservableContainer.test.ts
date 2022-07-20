@@ -8,77 +8,79 @@ class TestClassB {
 }
 
 describe("ObservableContainer", () => {
-  let container: ObservableContainer<TestClassA, TestClassB>;
+  let systemUnderTest: ObservableContainer<TestClassA, TestClassB>;
 
   beforeEach(() => {
-    container = new ObservableContainer<TestClassA, TestClassB>(TestClassA);
+    systemUnderTest = new ObservableContainer<TestClassA, TestClassB>(
+      TestClassA
+    );
   });
 
   test("matchesType compares the container type with a given type and return a corresponding bool", () => {
-    expect(container.matchesType(TestClassA)).toBe(true);
-    expect(container.matchesType(TestClassB)).toBe(false);
+    expect(systemUnderTest.matchesType(TestClassA)).toBe(true);
+    expect(systemUnderTest.matchesType(TestClassB)).toBe(false);
   });
 
   test("registerRequest registers a callback", () => {
     const callback = jest.fn();
-    container.registerRequest(callback);
-    expect(container["callbacks"].length).toBe(1);
-    expect(container["callbacks"][0]).toBe(callback);
+    systemUnderTest.registerRequest(callback);
+    expect(systemUnderTest["callbacks"].length).toBe(1);
+    expect(systemUnderTest["callbacks"][0]).toBe(callback);
   });
 
   test("registerRequest calls new callback immediately if values are available", () => {
     const callback = jest.fn();
     const testClassA = new TestClassA();
     const testClassB = new TestClassB();
-    container.addNewValue(testClassB);
-    container.registerRequest(callback);
+    systemUnderTest.addNewValue(testClassB);
+    systemUnderTest.registerRequest(callback);
     expect(callback).toHaveBeenCalledTimes(1);
     expect(callback).toHaveBeenCalledWith([testClassA]);
   });
 
   test("cancelRequest cancels a previously registered callback", () => {
     const callback = jest.fn();
-    container.registerRequest(callback);
-    container.cancelRequest(callback);
-    expect(container["callbacks"].length).toBe(0);
+    systemUnderTest.registerRequest(callback);
+    systemUnderTest.cancelRequest(callback);
+    expect(systemUnderTest["callbacks"].length).toBe(0);
   });
 
   test("addNewValue adds a new value to the container", () => {
     const testClass = new TestClassB();
-    container.addNewValue(testClass);
-    expect(container["values"].length).toBe(1);
-    expect(container["values"][0]).toBe(testClass);
+    systemUnderTest.addNewValue(testClass);
+    expect(systemUnderTest["values"].length).toBe(1);
+    expect(systemUnderTest["values"][0]).toBe(testClass);
   });
 
   test("addNewValue calls registered callbacks", () => {
     const callback = jest.fn();
-    container.registerRequest(callback);
+    systemUnderTest.registerRequest(callback);
     const testClassB = new TestClassB();
-    container.addNewValue(testClassB);
+    systemUnderTest.addNewValue(testClassB);
     expect(callback).toHaveBeenCalledTimes(1);
     expect(callback).toHaveBeenCalledWith([testClassB]);
   });
 
   test("removeValue removes a previously added value", () => {
     const testClassB = new TestClassB();
-    container.addNewValue(testClassB);
-    container.removeValue(testClassB);
-    expect(container["values"].length).toBe(0);
+    systemUnderTest.addNewValue(testClassB);
+    systemUnderTest.removeValue(testClassB);
+    expect(systemUnderTest["values"].length).toBe(0);
   });
 
   test("removeValue calls registered callbacks", () => {
     const callback = jest.fn();
-    container.registerRequest(callback);
+    systemUnderTest.registerRequest(callback);
     const testClass = new TestClassB();
-    container.addNewValue(testClass);
-    container.removeValue(testClass);
+    systemUnderTest.addNewValue(testClass);
+    systemUnderTest.removeValue(testClass);
     expect(callback).toHaveBeenCalledTimes(2);
     expect(callback).lastCalledWith([]);
   });
 
   test("getValues returns all previously added values", () => {
     const value = new TestClassB();
-    container.addNewValue(value);
-    expect(container.getValues()).toEqual([value]);
+    systemUnderTest.addNewValue(value);
+    expect(systemUnderTest.getValues()).toEqual([value]);
   });
 });

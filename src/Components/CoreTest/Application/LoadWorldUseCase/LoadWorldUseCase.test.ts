@@ -86,7 +86,7 @@ describe("LoadWorldUseCase", () => {
     );
   });
 
-  test("Displays error, if User is not logged in ", async () => {
+  test("Displays error, if User is not logged in", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       {
         isLoggedIn: false,

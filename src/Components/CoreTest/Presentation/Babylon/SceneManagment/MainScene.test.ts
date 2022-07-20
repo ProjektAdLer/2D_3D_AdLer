@@ -4,10 +4,10 @@ import MainScene from "../../../../Core/Presentation/Babylon/SceneManagement/Mai
 jest.mock("@babylonjs/core");
 
 describe("MainScene", () => {
-  let mainScene: MainScene;
+  let systemUnderTest: MainScene;
 
   beforeEach(() => {
-    mainScene = new MainScene();
+    systemUnderTest = new MainScene();
   });
 
   afterAll(() => {
@@ -19,7 +19,7 @@ describe("MainScene", () => {
     let engine = new Engine(canvas);
 
     // this will break when the debugLayer is called in createScene
-    mainScene.createScene(engine, canvas).then((data) => {
+    systemUnderTest.createScene(engine, canvas).then((data) => {
       expect(data).toBeInstanceOf(Scene);
     });
   });

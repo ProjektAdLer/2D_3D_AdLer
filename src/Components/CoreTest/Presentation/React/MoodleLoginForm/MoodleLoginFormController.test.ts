@@ -7,14 +7,14 @@ const executeAsyncMock = jest.spyOn(
 );
 
 describe("MoodleLoginFormController", () => {
-  let moodleLoginFormController: MoodleLoginFormController;
+  let systemUnderTest: MoodleLoginFormController;
 
   beforeEach(() => {
-    moodleLoginFormController = new MoodleLoginFormController();
+    systemUnderTest = new MoodleLoginFormController();
   });
 
   test("loginAsync calls the use case", () => {
-    moodleLoginFormController.loginAsync("username", "password");
+    systemUnderTest.loginAsync("username", "password");
 
     expect(executeAsyncMock).toHaveBeenCalledTimes(1);
     expect(executeAsyncMock).toHaveBeenCalledWith({

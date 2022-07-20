@@ -10,10 +10,10 @@ const addLearningRoomPresenterMock = jest.spyOn(
 );
 
 describe("LearningRoomBuilder", () => {
-  let builder: LearningRoomBuilder;
+  let systemUnderTest: LearningRoomBuilder;
 
   beforeEach(() => {
-    builder = new LearningRoomBuilder();
+    systemUnderTest = new LearningRoomBuilder();
   });
 
   afterAll(() => {
@@ -21,18 +21,22 @@ describe("LearningRoomBuilder", () => {
   });
 
   test("buildViewModel concludes the build step successfully and sets the Scene in the VM", () => {
-    builder.buildViewModel();
-    expect(builder["viewModel"]).toBeDefined();
-    expect(builder.getViewModel()).toBeDefined();
-    expect(builder.getViewModel()).toBeInstanceOf(LearningRoomViewModel);
+    systemUnderTest.buildViewModel();
+    expect(systemUnderTest["viewModel"]).toBeDefined();
+    expect(systemUnderTest.getViewModel()).toBeDefined();
+    expect(systemUnderTest.getViewModel()).toBeInstanceOf(
+      LearningRoomViewModel
+    );
   });
 
   test("buildPresenter concludes the build step successfully and registers the presneter with the port", () => {
-    builder.buildViewModel();
-    builder.buildPresenter();
-    expect(builder["presenter"]).toBeDefined();
-    expect(builder.getPresenter()).toBeDefined();
-    expect(builder.getPresenter()).toBeInstanceOf(LearningRoomPresenter);
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildPresenter();
+    expect(systemUnderTest["presenter"]).toBeDefined();
+    expect(systemUnderTest.getPresenter()).toBeDefined();
+    expect(systemUnderTest.getPresenter()).toBeInstanceOf(
+      LearningRoomPresenter
+    );
     expect(addLearningRoomPresenterMock).toHaveBeenCalledTimes(1);
   });
 });

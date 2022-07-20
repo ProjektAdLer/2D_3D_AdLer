@@ -8,18 +8,21 @@ const registerTupelMock = jest.spyOn(
 );
 
 describe("DoorBuilder", () => {
-  let builder: DoorBuilder = new DoorBuilder();
+  let systemUnderTest: DoorBuilder;
 
+  beforeEach(() => {
+    systemUnderTest = new DoorBuilder();
+  });
   afterAll(() => {
     registerTupelMock.mockRestore();
   });
 
   test("constructor", () => {
-    expect(builder).toBeInstanceOf(PresentationBuilder);
+    expect(systemUnderTest).toBeInstanceOf(PresentationBuilder);
   });
 
   test("buildController registers view model and controller with the provider", () => {
-    builder.buildController();
+    systemUnderTest.buildController();
     expect(registerTupelMock).toHaveBeenCalledTimes(1);
   });
 });

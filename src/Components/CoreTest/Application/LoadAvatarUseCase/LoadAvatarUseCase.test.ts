@@ -7,21 +7,16 @@ import PresentationDirector from "../../../Core/Presentation/PresentationBuilder
 const buildMock = jest.spyOn(PresentationDirector.prototype, "build");
 
 describe("LoadAvatarUseCase", () => {
-  let useCase: LoadAvatarUseCase;
+  let systemUnderTest: LoadAvatarUseCase;
 
   beforeEach(() => {
-    useCase = new LoadAvatarUseCase(
+    systemUnderTest = new LoadAvatarUseCase(
       CoreDIContainer.get<IAvatarPort>(PORT_TYPES.IAvatarPort)
     );
   });
 
   test("executeAsync builds the avatar via its builder", async () => {
-    const presentAvatarSpy = jest.spyOn(
-      CoreDIContainer.get<IAvatarPort>(PORT_TYPES.IAvatarPort),
-      "presentAvatar"
-    );
-
-    await useCase.executeAsync();
+    await systemUnderTest.executeAsync();
 
     expect(buildMock).toHaveBeenCalledTimes(1);
   });

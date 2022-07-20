@@ -1,4 +1,4 @@
-import { Engine, NullEngine, Scene } from "@babylonjs/core";
+import { NullEngine, Scene } from "@babylonjs/core";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import SceneView from "../../../../Core/Presentation/Babylon/SceneManagement/SceneView";
@@ -6,11 +6,11 @@ import SceneView from "../../../../Core/Presentation/Babylon/SceneManagement/Sce
 const runRenderLoopMock = jest.spyOn(NullEngine.prototype, "runRenderLoop");
 
 describe("SceneView", () => {
-  let sceneView: SceneView;
+  let systemUnderTest: SceneView;
 
   beforeEach(() => {
-    sceneView = CoreDIContainer.get(CORE_TYPES.ISceneView);
-    sceneView["viewModel"].scene = new Scene(new NullEngine());
+    systemUnderTest = CoreDIContainer.get(CORE_TYPES.ISceneView);
+    systemUnderTest["viewModel"].scene = new Scene(new NullEngine());
   });
 
   afterAll(() => {
@@ -18,7 +18,7 @@ describe("SceneView", () => {
   });
 
   test("startRenderLoop call the babylon engine", () => {
-    sceneView.startRenderLoop();
+    systemUnderTest.startRenderLoop();
     expect(runRenderLoopMock).toHaveBeenCalledTimes(1);
   });
 });

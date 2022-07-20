@@ -1,7 +1,5 @@
-import { Provider } from "inversify-react";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import App from "../../../../Core/Presentation/React/ReactEntryPoint/App";
 import ReactEntry from "../../../../Core/Presentation/React/ReactEntryPoint/ReactEntry";
 
@@ -9,14 +7,14 @@ const createElementMock = jest.spyOn(React, "createElement");
 const renderMock = jest.spyOn(ReactDOM, "createRoot");
 
 describe("ReactEntry", () => {
-  let reactEntry: ReactEntry;
+  let systemUnderTest: ReactEntry;
 
   beforeEach(() => {
-    reactEntry = new ReactEntry();
+    systemUnderTest = new ReactEntry();
   });
 
   test.skip("setupReact", () => {
-    reactEntry.setupReact();
+    systemUnderTest.setupReact();
 
     // TODO: extend this
     expect(createElementMock).toHaveBeenCalledTimes(3);

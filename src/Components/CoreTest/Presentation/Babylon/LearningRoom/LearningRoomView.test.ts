@@ -1,13 +1,13 @@
 import LearningRoomView from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomView";
 import LearningRoomViewModel from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomViewModel";
-import { Vector2 } from "@babylonjs/core";
+import { Mesh, StandardMaterial, Vector2 } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import ILearningRoomController from "../../../../Core/Presentation/Babylon/LearningRoom/ILearningRoomController";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 
-const roomComtrollerMock = mock<ILearningRoomController>();
+const roomControllerMock = mock<ILearningRoomController>();
 const scenePresenterMock = mock<IScenePresenter>();
 
 describe("LearningRoomView", () => {
@@ -23,30 +23,41 @@ describe("LearningRoomView", () => {
 
   beforeEach(() => {
     viewModel = new LearningRoomViewModel();
-    // viewModel.id = 1;
-    systemUnderTest = new LearningRoomView(viewModel, roomComtrollerMock);
+    viewModel.floorMesh.Value = true as unknown as Mesh;
+    viewModel.floorMaterial.Value = true as unknown as StandardMaterial;
+    systemUnderTest = new LearningRoomView(viewModel, roomControllerMock);
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
   });
   // Tests are currently skipped due to babylon specific code that is being executed in the LearningRoomView Constructor ~ fk
-  test.skip("createFloorViaCorners throws error if viewModel is not set", () => {
-    //@ts-ignore
-    viewModel = undefined;
-    expect(systemUnderTest).toThrowError("ViewModel not set");
+  test("createFloorViaCorners throws error if viewModel is not set", () => {
+    expect(() => {
+      //@ts-ignore
+      new LearningRoomView(undefined, roomControllerMock);
+    }).toThrowError("ViewModel not set");
   });
 
-  test.skip("createFloorViaCorners throws error if cornerCount is smaller than 3", () => {
-    viewModel.roomCornerPoints.Value = [
-      new Vector2(5.3, 4.3),
-      new Vector2(-5.3, 4.3),
-    ];
-    expect(systemUnderTest).toThrowError("Not enough corners");
+  test("createFloorViaCorners throws error if cornerCount is smaller than 3", () => {
+    expect(() => {
+      //@ts-ignore
+      systemUnderTest.viewModel.roomCornerPoints.Value = [
+        new Vector2(5.3, 4.3),
+        new Vector2(-5.3, 4.3),
+      ];
+    }).toThrowError(
+      "Not enough corners found to generate floor. Please review the Roomdata."
+    );
   });
 
   test.skip("createFloorViaCorners creates a Mesh", () => {
     const mesh = viewModel.floorMesh.Value;
     expect(mesh).toBe(!undefined);
+  });
+  test.skip("displayRoom is being called", () => {
+    const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");
+    systemUnderTest = new LearningRoomView(viewModel, roomControllerMock);
+    expect(displayRoomMock).toHaveBeenCalled();
   });
 });

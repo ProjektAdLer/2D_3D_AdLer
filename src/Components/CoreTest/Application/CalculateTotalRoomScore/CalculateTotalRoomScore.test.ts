@@ -5,7 +5,7 @@ import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import CalculateTotalRoomScore from "../../../Core/Application/CalculateTotalRoomScore/CalculateTotalRoomScore";
 import LearningRoomEntity from "../../../Core/Domain/Entities/LearningRoomEntity";
-import { filterEntitiesOfTypeMockImplUtil } from "../../../CoreTest/TestUtils";
+import { filterEntitiesOfTypeMockImplUtil } from "../../TestUtils";
 import ILearningRoomPort from "../../../Core/Ports/LearningRoomPort/ILearningRoomPort";
 
 const roomTO = { roomId: 1 };
@@ -14,7 +14,7 @@ const learningRoomPortMock = mock<ILearningRoomPort>();
 const entityContainerMock = mock<IEntityContainer>();
 
 describe("Calculate Total Room Score UseCase", () => {
-  let calculateTotalRoomScoreUseCase: CalculateTotalRoomScore;
+  let systemUnderTest: CalculateTotalRoomScore;
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
@@ -32,9 +32,7 @@ describe("Calculate Total Room Score UseCase", () => {
   });
 
   beforeEach(() => {
-    calculateTotalRoomScoreUseCase = CoreDIContainer.resolve(
-      CalculateTotalRoomScore
-    );
+    systemUnderTest = CoreDIContainer.resolve(CalculateTotalRoomScore);
   });
 
   test("filter Callback should return a boolean", () => {
@@ -47,7 +45,7 @@ describe("Calculate Total Room Score UseCase", () => {
       ])
     );
 
-    calculateTotalRoomScoreUseCase.execute(roomTO);
+    systemUnderTest.execute(roomTO);
 
     entityContainerMock.filterEntitiesOfType.mockReset();
   });
@@ -72,7 +70,7 @@ describe("Calculate Total Room Score UseCase", () => {
       },
     ]);
 
-    calculateTotalRoomScoreUseCase.execute(roomTO);
+    systemUnderTest.execute(roomTO);
 
     expect(entityContainerMock.filterEntitiesOfType).toHaveBeenCalledWith(
       LearningRoomEntity,
@@ -93,7 +91,7 @@ describe("Calculate Total Room Score UseCase", () => {
       },
     ]);
 
-    calculateTotalRoomScoreUseCase.execute(roomTO);
+    systemUnderTest.execute(roomTO);
 
     expect(learningRoomPortMock.presentNewScore).toHaveBeenCalledWith(
       0,
@@ -106,7 +104,7 @@ describe("Calculate Total Room Score UseCase", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 
     expect(() => {
-      calculateTotalRoomScoreUseCase.execute(roomTO);
+      systemUnderTest.execute(roomTO);
     }).toThrow();
   });
 });

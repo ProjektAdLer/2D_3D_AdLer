@@ -1,8 +1,5 @@
-import Observable from "../../../../../Lib/Observable";
 import DoorView from "../../../../Core/Presentation/Babylon/Door/DoorView";
 import DoorViewModel from "../../../../Core/Presentation/Babylon/Door/DoorViewModel";
-
-// const subscribeMock = jest.spyOn(Observable.prototype, "subscribe");
 jest.mock("../../../../../Lib/Observable.ts");
 jest.mock("@babylonjs/core");
 
@@ -10,10 +7,10 @@ jest.mock("@babylonjs/core");
 DoorView.prototype.setup = jest.fn();
 
 describe("DoorView", () => {
-  let view: DoorView;
+  let systemUnderTest: DoorView;
 
   beforeEach(() => {
-    view = new DoorView(new DoorViewModel());
+    systemUnderTest = new DoorView(new DoorViewModel());
   });
 
   afterAll(() => {
@@ -21,12 +18,20 @@ describe("DoorView", () => {
   });
 
   test("constructor", () => {
-    expect(view["scenePresenter"]).toBeDefined();
+    expect(systemUnderTest["scenePresenter"]).toBeDefined();
 
-    expect(view["viewModel"].position.subscribe).toHaveBeenCalledTimes(1);
-    expect(view["viewModel"].rotation.subscribe).toHaveBeenCalledTimes(1);
-    expect(view["viewModel"].isOpen.subscribe).toHaveBeenCalledTimes(1);
-    expect(view["viewModel"].isVisible.subscribe).toHaveBeenCalledTimes(1);
+    expect(
+      systemUnderTest["viewModel"].position.subscribe
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      systemUnderTest["viewModel"].rotation.subscribe
+    ).toHaveBeenCalledTimes(1);
+    expect(systemUnderTest["viewModel"].isOpen.subscribe).toHaveBeenCalledTimes(
+      1
+    );
+    expect(
+      systemUnderTest["viewModel"].isVisible.subscribe
+    ).toHaveBeenCalledTimes(1);
 
     expect(DoorView.prototype["setup"]).toHaveBeenCalledTimes(1);
   });

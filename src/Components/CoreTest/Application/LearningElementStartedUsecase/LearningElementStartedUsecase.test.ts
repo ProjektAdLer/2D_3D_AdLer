@@ -12,22 +12,19 @@ const learningElementPortMock = mock<ILearningElementPort>();
 const entityContainerMock = mock<IEntityContainer>();
 
 describe("Calculate Total Room Score UseCase", () => {
-  let useCaseToTest;
+  let systemUnderTest;
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.unbind(CORE_TYPES.IEntityContainer);
-    CoreDIContainer.bind<IEntityContainer>(
-      CORE_TYPES.IEntityContainer
-    ).toConstantValue(entityContainerMock);
-
-    CoreDIContainer.unbind(PORT_TYPES.ILearningElementPort);
-    CoreDIContainer.bind(PORT_TYPES.ILearningElementPort).toConstantValue(
+    CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
+      entityContainerMock
+    );
+    CoreDIContainer.rebind(PORT_TYPES.ILearningElementPort).toConstantValue(
       learningElementPortMock
     );
   });
   beforeEach(() => {
-    useCaseToTest = CoreDIContainer.resolve(LearningElementStartedUseCase);
+    systemUnderTest = CoreDIContainer.resolve(LearningElementStartedUseCase);
   });
 
   afterAll(() => {
@@ -41,7 +38,7 @@ describe("Calculate Total Room Score UseCase", () => {
       },
     ]);
 
-    useCaseToTest.execute({
+    systemUnderTest.execute({
       learningElementId: 1,
     });
 
@@ -55,7 +52,7 @@ describe("Calculate Total Room Score UseCase", () => {
   it("should throw, if the learning Element is not found", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
     expect(() => {
-      useCaseToTest.execute({
+      systemUnderTest.execute({
         learningElementId: 2,
       });
     }).toThrow();
@@ -77,7 +74,7 @@ describe("Calculate Total Room Score UseCase", () => {
       }
     );
 
-    useCaseToTest.execute({
+    systemUnderTest.execute({
       learningElementId: 1,
     });
 

@@ -7,30 +7,36 @@ jest.mock("@babylonjs/core");
 
 const testElementTO: LearningElementTO = {
   id: 0,
-  type: "h5p",
+  name: "test",
+  learningElementData: {
+    type: "h5p",
+  },
 };
 const testVector = new Vector3(1, 2, 3);
 
 describe("LearningElementPresenter", () => {
-  let presenter: LearningElementPresenter;
+  let systemUnderTest: LearningElementPresenter;
 
   afterAll(() => {
     jest.restoreAllMocks();
   });
 
   test("presentLearningElement calls the babylon engine", () => {
-    presenter = new LearningElementPresenter(new LearningElementViewModel());
-    presenter.presentLearningElement(testElementTO, [testVector, 0]);
+    systemUnderTest = new LearningElementPresenter(
+      new LearningElementViewModel()
+    );
+    systemUnderTest.presentLearningElement(testElementTO, [testVector, 0]);
 
-    expect(presenter["viewModel"].id).toBe(testElementTO.id);
-    expect(presenter["viewModel"].position.Value).toBe(testVector);
-    expect(presenter["viewModel"].rotation.Value).toBe(0);
+    expect(systemUnderTest["viewModel"].id).toBe(testElementTO.id);
+    expect(systemUnderTest["viewModel"].position.Value).toBe(testVector);
+    expect(systemUnderTest["viewModel"].rotation.Value).toBe(0);
   });
 
   test("presentLearningElement throws error when no view model is set", () => {
-    presenter = new LearningElementPresenter(null);
+    //@ts-ignore
+    systemUnderTest = new LearningElementPresenter(null);
     expect(() => {
-      presenter.presentLearningElement(testElementTO, [testVector, 0]);
+      systemUnderTest.presentLearningElement(testElementTO, [testVector, 0]);
     }).toThrowError();
   });
 });

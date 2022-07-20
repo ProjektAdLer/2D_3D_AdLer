@@ -3,7 +3,6 @@ import BUILDER_TYPES from "../../../Core/DependencyInjection/Builders/BUILDER_TY
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import LearningRoomPort from "../../../Core/Ports/LearningRoomPort/LearningRoomPort";
 import ILearningRoomPresenter from "../../../Core/Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
-import IPresentationBuilder from "../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
 import PresentationBuilder from "../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
 import ScorePanelPresenter from "../../../Core/Presentation/React/ScorePanel/ScorePanelPresenter";
 import ScorePanelViewModel from "../../../Core/Presentation/React/ScorePanel/ScorePanelViewModel";
@@ -51,17 +50,16 @@ class ScorePanelBuilderMock extends PresentationBuilder<
 }
 
 describe("LearningRoomPort", () => {
-  let learningRoomPort: LearningRoomPort;
+  let systemUnderTest: LearningRoomPort;
 
   beforeEach(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.unbind(BUILDER_TYPES.IScorePanelBuilder);
-    CoreDIContainer.bind<IPresentationBuilder>(
-      BUILDER_TYPES.IScorePanelBuilder
-    ).to(ScorePanelBuilderMock);
+    CoreDIContainer.rebind(BUILDER_TYPES.IScorePanelBuilder).to(
+      ScorePanelBuilderMock
+    );
 
-    learningRoomPort = new LearningRoomPort();
+    systemUnderTest = new LearningRoomPort();
   });
 
   afterEach(() => {
@@ -71,38 +69,39 @@ describe("LearningRoomPort", () => {
   test("addLearningRoomPresenter adds new presenter", () => {
     const learningRoomPresenter = new LearningRoomPresenterStubWithId1();
 
-    learningRoomPort.addLearningRoomPresenter(learningRoomPresenter);
+    systemUnderTest.addLearningRoomPresenter(learningRoomPresenter);
 
-    expect(learningRoomPort["learningRoomPresenters"]).toContain(
+    expect(systemUnderTest["learningRoomPresenters"]).toContain(
       learningRoomPresenter
     );
   });
 
   test("addLearningRoomPresenter throws error if passed presenter is undefined", () => {
     expect(() => {
-      learningRoomPort.addLearningRoomPresenter(undefined);
+      //@ts-ignore
+      systemUnderTest.addLearningRoomPresenter(undefined);
     }).toThrowError("not defined");
   });
 
   test("addLearningRoomPresenter doesn't add presenter if it already exists", () => {
     const learningRoomPresenter = new LearningRoomPresenterStubWithId1();
 
-    learningRoomPort.addLearningRoomPresenter(learningRoomPresenter);
-    learningRoomPort.addLearningRoomPresenter(learningRoomPresenter);
+    systemUnderTest.addLearningRoomPresenter(learningRoomPresenter);
+    systemUnderTest.addLearningRoomPresenter(learningRoomPresenter);
 
-    expect(learningRoomPort["learningRoomPresenters"].length).toBe(1);
+    expect(systemUnderTest["learningRoomPresenters"].length).toBe(1);
   });
 
   test("presentNewScore builds new ScorePanelPresenter if its the first time it is called", () => {
-    expect(learningRoomPort["scorePanelPresenter"]).not.toBeDefined();
+    expect(systemUnderTest["scorePanelPresenter"]).not.toBeDefined();
 
-    learningRoomPort.presentNewScore(1, false, 1);
+    systemUnderTest.presentNewScore(1, false, 1);
 
-    expect(learningRoomPort["scorePanelPresenter"]).toBeDefined();
+    expect(systemUnderTest["scorePanelPresenter"]).toBeDefined();
   });
 
   test("presentNewScore calls presentScore on scorePanelPresenter", () => {
-    learningRoomPort.presentNewScore(1, false, 1);
+    systemUnderTest.presentNewScore(1, false, 1);
 
     expect(presentScoreMock).toHaveBeenCalledTimes(1);
     expect(presentScoreMock).toHaveBeenCalledWith(1);
@@ -114,10 +113,10 @@ describe("LearningRoomPort", () => {
     const learningRoomPresenter1 = new LearningRoomPresenterStubWithId1();
     const learningRoomPresenter2 = new LearningRoomPresenterStubWithId2();
 
-    learningRoomPort.addLearningRoomPresenter(learningRoomPresenter1);
-    learningRoomPort.addLearningRoomPresenter(learningRoomPresenter2);
+    systemUnderTest.addLearningRoomPresenter(learningRoomPresenter1);
+    systemUnderTest.addLearningRoomPresenter(learningRoomPresenter2);
 
-    learningRoomPort.presentNewScore(1, true, 1);
+    systemUnderTest.presentNewScore(1, true, 1);
 
     expect(learningRoomPresenter1.openDoor).toHaveBeenCalledTimes(1);
     expect(learningRoomPresenter2.openDoor).toHaveBeenCalledTimes(0);

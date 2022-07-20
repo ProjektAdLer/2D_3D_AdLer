@@ -8,12 +8,12 @@ const executeMock = jest.spyOn(
 );
 
 describe("LearningElementController", () => {
+  const viewModel = new LearningElementViewModel();
+  const systemUnderTest = new LearningElementController(viewModel);
   test("clicked calls useCase", () => {
-    const viewModel = new LearningElementViewModel();
-    const controller = new LearningElementController(viewModel);
     viewModel.id = 42;
 
-    controller.clicked();
+    systemUnderTest.clicked();
 
     expect(executeMock).toHaveBeenCalledTimes(1);
     expect(executeMock).toHaveBeenCalledWith({

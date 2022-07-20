@@ -3,10 +3,10 @@ import { LearningElementTO } from "../../../../Core/Ports/LearningWorldPort/ILea
 import LearningElementModalViewModel from "../../../../Core/Presentation/React/LearningElementModal/LearningElementModalViewModel";
 
 describe("LearningElementModalPresenter", () => {
-  let learningElementModalPresenter: LearningElementModalPresenter;
+  let systemUnderTest: LearningElementModalPresenter;
 
   beforeEach(() => {
-    learningElementModalPresenter = new LearningElementModalPresenter(
+    systemUnderTest = new LearningElementModalPresenter(
       new LearningElementModalViewModel()
     );
   });
@@ -20,16 +20,12 @@ describe("LearningElementModalPresenter", () => {
       },
     };
 
-    learningElementModalPresenter.presentLearningElementModal(
-      learningElementTO
-    );
+    systemUnderTest.presentLearningElementModal(learningElementTO);
 
-    expect(
-      learningElementModalPresenter["viewModel"].learningElementData.Value.type
-    ).toBe(learningElementTO.learningElementData.type);
-    expect(learningElementModalPresenter["viewModel"].isOpen.Value).toBe(true);
-    expect(learningElementModalPresenter["viewModel"].id.Value).toBe(
-      learningElementTO.id
+    expect(systemUnderTest["viewModel"].learningElementData.Value.type).toBe(
+      learningElementTO.learningElementData.type
     );
+    expect(systemUnderTest["viewModel"].isOpen.Value).toBe(true);
+    expect(systemUnderTest["viewModel"].id.Value).toBe(learningElementTO.id);
   });
 });

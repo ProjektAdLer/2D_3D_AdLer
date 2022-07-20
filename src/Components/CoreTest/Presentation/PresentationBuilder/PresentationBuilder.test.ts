@@ -23,90 +23,82 @@ class TestBuilder extends PresentationBuilder<
 }
 
 describe("PresentationBuilder", () => {
+  let systemUnderTest: TestBuilder;
+  beforeEach(() => {
+    systemUnderTest = new TestBuilder();
+  });
   test("reset sets members to undefined", () => {
-    const builder = new TestBuilder();
-    builder.reset();
-    expect(builder["viewModel"]).toBeUndefined();
-    expect(builder["controller"]).toBeUndefined();
-    expect(builder["view"]).toBeUndefined();
-    expect(builder["presenter"]).toBeUndefined();
+    systemUnderTest.reset();
+    expect(systemUnderTest["viewModel"]).toBeUndefined();
+    expect(systemUnderTest["controller"]).toBeUndefined();
+    expect(systemUnderTest["view"]).toBeUndefined();
+    expect(systemUnderTest["presenter"]).toBeUndefined();
   });
 
   test("buildViewModel", () => {
-    const builder = new TestBuilder();
-    builder.buildViewModel();
-    expect(builder["viewModel"]).toBeInstanceOf(TestViewModel);
+    systemUnderTest.buildViewModel();
+    expect(systemUnderTest["viewModel"]).toBeInstanceOf(TestViewModel);
   });
 
   test("buildController", () => {
-    const builder = new TestBuilder();
-    builder.buildViewModel();
-    builder.buildController();
-    expect(builder["controller"]).toBeInstanceOf(TestController);
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildController();
+    expect(systemUnderTest["controller"]).toBeInstanceOf(TestController);
   });
 
   test("buildController throws error if viewModel isn't build yet", () => {
-    const builder = new TestBuilder();
-    expect(() => builder.buildController()).toThrowError();
+    expect(() => systemUnderTest.buildController()).toThrowError();
   });
 
   test("buildView", () => {
-    const builder = new TestBuilder();
-    builder.buildViewModel();
-    builder.buildController();
-    builder.buildView();
-    expect(builder["view"]).toBeInstanceOf(TestView);
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildController();
+    systemUnderTest.buildView();
+    expect(systemUnderTest["view"]).toBeInstanceOf(TestView);
   });
 
   test("buildView throws error if viewModel is not build", () => {
-    const builder = new TestBuilder();
-    expect(() => builder.buildView()).toThrowError();
+    expect(() => systemUnderTest.buildView()).toThrowError();
   });
 
   test("buildView throws error if controller is not build", () => {
-    const builder = new TestBuilder();
-    builder.buildViewModel();
-    expect(() => builder.buildView()).toThrowError();
+    systemUnderTest.buildViewModel();
+    expect(() => systemUnderTest.buildView()).toThrowError();
   });
 
   test("buildPresenter", () => {
-    const builder = new TestBuilder();
-    builder.buildViewModel();
-    builder.buildController();
-    builder.buildView();
-    builder.buildPresenter();
-    expect(builder["presenter"]).toBeInstanceOf(TestPresenter);
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildController();
+    systemUnderTest.buildView();
+    systemUnderTest.buildPresenter();
+    expect(systemUnderTest["presenter"]).toBeInstanceOf(TestPresenter);
   });
 
   test("buildPresenter throws error if viewModel is not build", () => {
-    const builder = new TestBuilder();
-    expect(() => builder.buildPresenter()).toThrowError();
+    expect(() => systemUnderTest.buildPresenter()).toThrowError();
   });
 
   test("getPresenter", () => {
-    const builder = new TestBuilder();
-    builder.buildViewModel();
-    builder.buildController();
-    builder.buildView();
-    builder.buildPresenter();
-    expect(builder.getPresenter()).toBeInstanceOf(TestPresenter);
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildController();
+    systemUnderTest.buildView();
+    systemUnderTest.buildPresenter();
+    expect(systemUnderTest.getPresenter()).toBeInstanceOf(TestPresenter);
   });
 
   test("getController", () => {
-    const builder = new TestBuilder();
-    builder.buildViewModel();
-    builder.buildController();
-    builder.buildView();
-    builder.buildPresenter();
-    expect(builder.getController()).toBeInstanceOf(TestController);
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildController();
+    systemUnderTest.buildView();
+    systemUnderTest.buildPresenter();
+    expect(systemUnderTest.getController()).toBeInstanceOf(TestController);
   });
 
   test("getViewModel", () => {
-    const builder = new TestBuilder();
-    builder.buildViewModel();
-    builder.buildController();
-    builder.buildView();
-    builder.buildPresenter();
-    expect(builder.getViewModel()).toBeInstanceOf(TestViewModel);
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildController();
+    systemUnderTest.buildView();
+    systemUnderTest.buildPresenter();
+    expect(systemUnderTest.getViewModel()).toBeInstanceOf(TestViewModel);
   });
 });
