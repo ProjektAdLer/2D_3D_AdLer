@@ -28,8 +28,8 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 **Definition of Done**
 
 - [ ] Alle Akzeptanzkriterien sind erfüllt
-- [ ] Die Implementierung ist in GitHub auf einem Prototype Branch
-- [ ] Unittestabdeckung muss größer 90% sein
+- [ ] Die Implementierung liegt in GitHub auf einem Prototype Branch
+- [ ] Unittestabdeckung muss größer 92% sein
 - [ ] Alle Tests müssen bestanden sein
 - [ ] Prototype Dokumentation wurde angelegt (Wiki (Version mit angeben!)(Changelog bis dahin verlinken!))
 - [ ] Dokumentation des Vorgehens wurde angelegt (Zenhub Kommentar)

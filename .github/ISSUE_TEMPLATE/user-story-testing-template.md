@@ -1,6 +1,6 @@
 ---
-name: Coding User Story Template
-about: Coding User Story im AdLer Projekt
+name: Testing User Story Template
+about: Testing User Story im AdLer Projekt
 title: ""
 labels: coding
 assignees: ""
@@ -12,13 +12,13 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 
 **Akzeptanzkriterien**
 
-- [ ] Akzeptanzkriterium 1
+- [ ] > Testpfad 1>
 - [ ] Akzeptanzkriterium 2
 
 **Definition of Ready**
 
 - [ ] User Story ist klein genug für Sprint
-- [ ] User Story ist für jeden beteiligten Entwickler klar verständlich
+- [ ] User Story ist für jeden Beteiligten klar verständlich
 - [ ] User Story Aufwand ist geschätzt
 - [ ] User Story hat Akzeptanzkriterien
 - [ ] User Story hat einen Mehrwert für das Produkt oder die Entwicklung
@@ -31,12 +31,9 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 - [ ] Die Implementierung ist gepusht
 - [ ] Die Codekonventionen sind eingehalten
 - [ ] Eine Code Review wurde durchgeführt (oder in Paired Programming gearbeitet)
-- [ ] Unittestabdeckung muss größer 92% sein
+- [ ] Unittestabdeckung ist über 92% oder so hoch wie möglich mit validen Gründen weshalb die 92% nicht erreicht werden können
 - [ ] Alle Tests müssen bestanden sein
 - [ ] Technische Dokumentation innerhalb der Realisierung wurde, falls nötig, erstellt (Quellcode)
-- [ ] Benutzerdokumentation wurde, falls nötig, angelegt (Wiki)
 - [ ] Dokumentation des Vorgehens wurde, falls nötig, angelegt (Zenhub Kommentar)
-- [ ] UML Aktivitätsdiagramm wurde erstellt bzw. aktualisiert falls nötig
-- [ ] Changelog des jeweiligen Release wurde aktualisiert, falls erforderlich (Wiki)
 - [ ] Es gibt keine bekannten Bugs
 - [ ] Die Realisierung der User Story wurde erfolgreich durch den Product Owner abgenommen
