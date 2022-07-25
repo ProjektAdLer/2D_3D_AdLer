@@ -40,7 +40,7 @@ export default class ReactEntry implements IReactEntry {
     );
 
     if (
-      config.autoLoginWithoutShortct &&
+      config.autoLoginWithoutShortcut &&
       process.env.NODE_ENV === "development" &&
       config.isDebug &&
       !isInDebug
