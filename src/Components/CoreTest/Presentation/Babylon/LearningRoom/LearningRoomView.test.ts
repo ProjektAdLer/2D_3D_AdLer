@@ -13,6 +13,7 @@ const scenePresenterMock = mock<IScenePresenter>();
 describe("LearningRoomView", () => {
   let systemUnderTest: LearningRoomView;
   let viewModel: LearningRoomViewModel;
+
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
@@ -31,7 +32,7 @@ describe("LearningRoomView", () => {
   afterAll(() => {
     CoreDIContainer.restore();
   });
-  // Tests are currently skipped due to babylon specific code that is being executed in the LearningRoomView Constructor ~ fk
+
   test("createFloorViaCorners throws error if viewModel is not set", () => {
     expect(() => {
       //@ts-ignore
@@ -41,8 +42,7 @@ describe("LearningRoomView", () => {
 
   test("createFloorViaCorners throws error if cornerCount is smaller than 3", () => {
     expect(() => {
-      //@ts-ignore
-      systemUnderTest.viewModel.roomCornerPoints.Value = [
+      systemUnderTest["viewModel"].roomCornerPoints.Value = [
         new Vector2(5.3, 4.3),
         new Vector2(-5.3, 4.3),
       ];
@@ -50,35 +50,80 @@ describe("LearningRoomView", () => {
       "Not enough corners found to generate floor. Please review the Roomdata."
     );
   });
-  test("displayRoom is being called", () => {
-    const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");
-    //@ts-ignore
-    systemUnderTest.viewModel.roomHeight.Value = 20;
-    expect(displayRoomMock).toHaveBeenCalled();
-  });
-  test("subscribe Methods in the constructor calls displayRoom", () => {
+
+  test("change to roomHeight triggers callback to displayRoom", () => {
     const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");
 
-    systemUnderTest.viewModel.roomHeight.Value = 20;
-    systemUnderTest.viewModel.roomWidth.Value = 21;
-    systemUnderTest.viewModel.roomLength.Value = 22;
-    systemUnderTest.viewModel.wallThickness.Value = 23;
-    systemUnderTest.viewModel.baseHeight.Value = 24;
-    // these three attributes cannot be tested as of now, as setting them would trigger babylon code ~ fk
-    // systemUnderTest.viewModel.wallColor.Value = new Color3(0.25, 0.26, 0.27);
-    // systemUnderTest.viewModel.doorHeight.Value = 28;
-    // systemUnderTest.viewModel.doorWidth.Value = 29;
-    systemUnderTest.viewModel.roomCornerPoints.Value = [
+    systemUnderTest["viewModel"].roomHeight.Value = 20;
+
+    expect(displayRoomMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("change to roomWidth triggers callback to displayRoom", () => {
+    const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");
+
+    systemUnderTest["viewModel"].roomWidth.Value = 20;
+
+    expect(displayRoomMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("change to roomLength triggers callback to displayRoom", () => {
+    const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");
+
+    systemUnderTest["viewModel"].roomLength.Value = 20;
+
+    expect(displayRoomMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("change to wallThickness triggers callback to displayRoom", () => {
+    const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");
+
+    systemUnderTest["viewModel"].wallThickness.Value = 20;
+
+    expect(displayRoomMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("change to baseHeight triggers callback to displayRoom", () => {
+    const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");
+
+    systemUnderTest["viewModel"].baseHeight.Value = 20;
+
+    expect(displayRoomMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("change to doorHeight triggers callback to displayRoom", () => {
+    const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");
+
+    systemUnderTest["viewModel"].doorHeight.Value = 20;
+
+    expect(displayRoomMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("change to doorWidth triggers callback to displayRoom", () => {
+    const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");
+
+    systemUnderTest["viewModel"].doorWidth.Value = 20;
+
+    expect(displayRoomMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("change to wallColor triggers callback to displayRoom", () => {
+    const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");
+
+    systemUnderTest["viewModel"].wallColor.Value = new Color3(0.25, 0.26, 0.27);
+
+    expect(displayRoomMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("change to roomCornerPoints triggers callback to displayRoom", () => {
+    const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");
+
+    systemUnderTest["viewModel"].roomCornerPoints.Value = [
       new Vector2(30, 31),
       new Vector2(32, 33),
       new Vector2(34, 35),
     ];
-    expect(displayRoomMock).toHaveBeenCalledTimes(6);
-  });
 
-  test.skip("createFloorViaCorners creates a Mesh", () => {
-    const mesh = viewModel.floorMesh.Value;
-    expect(mesh).toBe(!undefined);
+    expect(displayRoomMock).toHaveBeenCalledTimes(1);
   });
 });
-// todo: tests for the subscribe methods
