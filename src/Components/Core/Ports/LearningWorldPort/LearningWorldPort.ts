@@ -1,13 +1,13 @@
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
 import ILearningWorldPort, { LearningWorldTO } from "./ILearningWorldPort";
 import BUILDER_TYPES from "../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
-import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
-import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
+import type IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
+import type IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
 import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
 import ILearningElementsDropdownPresenter from "../../Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
-import INavigation from "../../Presentation/Babylon/Navigation/INavigation";
+import type INavigation from "../../Presentation/Babylon/Navigation/INavigation";
 import ILearningWorldNamePanelPresenter from "../../Presentation/React/LearningWorldNamePanel/ILearningWorldNamePanelPresenter";
 
 @injectable()
@@ -23,15 +23,19 @@ export default class LearningWorldPort implements ILearningWorldPort {
     this.learningElementDropdownPresenter = value;
   }
 
+  constructor(
+    @inject(CORE_TYPES.INavigation)
+    private navigation: INavigation,
+    @inject(BUILDER_TYPES.IPresentationDirector)
+    private director: IPresentationDirector
+  ) {}
+
   public presentLearningWorld(learningWorldTO: LearningWorldTO): void {
-    let director = CoreDIContainer.get<IPresentationDirector>(
-      BUILDER_TYPES.IPresentationDirector
-    );
     const builder = CoreDIContainer.get<IPresentationBuilder>(
       BUILDER_TYPES.ILearningRoomBuilder
     );
 
-    director.build(builder);
+    this.director.build(builder);
     this.roomPresenter = builder.getPresenter();
 
     // TODO: use all the data from the learningWorldTO to create multiple rooms
@@ -41,7 +45,7 @@ export default class LearningWorldPort implements ILearningWorldPort {
       learningWorldTO.worldName
     );
 
-    CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation).setupNavigation();
+    this.navigation.setupNavigation();
 
     this.learningElementDropdownPresenter.presentLearningElements(
       learningWorldTO.learningRooms[0].learningElements

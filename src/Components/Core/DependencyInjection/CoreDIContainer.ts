@@ -32,6 +32,7 @@ CoreDIContainer.bind<IScenePresenter>(CORE_TYPES.IScenePresenter)
 CoreDIContainer.bind<INavigation>(CORE_TYPES.INavigation)
   .to(Navigation)
   .inSingletonScope();
+
 CoreDIContainer.bind(NavigationConfiguration).toSelf();
 
 // Controllers
