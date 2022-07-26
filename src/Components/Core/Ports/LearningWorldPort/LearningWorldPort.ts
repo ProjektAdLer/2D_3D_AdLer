@@ -9,47 +9,50 @@ import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILea
 import ILearningElementsDropdownPresenter from "../../Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
 import type INavigation from "../../Presentation/Babylon/Navigation/INavigation";
 import ILearningWorldNamePanelPresenter from "../../Presentation/React/LearningWorldNamePanel/ILearningWorldNamePanelPresenter";
+import LearningRoomBuilder from "../../Presentation/Babylon/LearningRoom/LearningRoomBuilder";
 
 @injectable()
 export default class LearningWorldPort implements ILearningWorldPort {
   private roomPresenter: ILearningRoomPresenter;
   private learningElementDropdownPresenter: ILearningElementsDropdownPresenter;
-
   private learningWorldPanelPresenter: ILearningWorldNamePanelPresenter;
-
-  public set LearningElementDropdownPresenter(
-    value: ILearningElementsDropdownPresenter
-  ) {
-    this.learningElementDropdownPresenter = value;
-  }
 
   constructor(
     @inject(CORE_TYPES.INavigation)
     private navigation: INavigation,
     @inject(BUILDER_TYPES.IPresentationDirector)
-    private director: IPresentationDirector
+    private director: IPresentationDirector,
+    @inject(BUILDER_TYPES.ILearningRoomBuilder)
+    private learningRoomBuilder: IPresentationBuilder
   ) {}
 
   public presentLearningWorld(learningWorldTO: LearningWorldTO): void {
-    const builder = CoreDIContainer.get<IPresentationBuilder>(
-      BUILDER_TYPES.ILearningRoomBuilder
-    );
-
-    this.director.build(builder);
-    this.roomPresenter = builder.getPresenter();
+    this.director.build(this.learningRoomBuilder);
+    this.roomPresenter = this.learningRoomBuilder.getPresenter();
 
     // TODO: use all the data from the learningWorldTO to create multiple rooms
     this.roomPresenter.presentLearningRoom(learningWorldTO.learningRooms[0]);
 
+    // initialize navigation for the room
+    // TODO: move this to a better location
+    this.navigation.setupNavigation();
+
+    // call UI presenter to present new data
     this.learningWorldPanelPresenter.displayWorldName(
       learningWorldTO.worldName
     );
-
-    this.navigation.setupNavigation();
-
     this.learningElementDropdownPresenter.presentLearningElements(
       learningWorldTO.learningRooms[0].learningElements
     );
+  }
+
+  public registerLearningElementDropdownPresenter(
+    learningElementDropdownPresenter: ILearningElementsDropdownPresenter
+  ): void {
+    if (this.learningElementDropdownPresenter) {
+      throw new Error("LearningElementDropdownPresenter is already registered");
+    }
+    this.learningElementDropdownPresenter = learningElementDropdownPresenter;
   }
 
   public registerLearningWorldPanelPresenter(
