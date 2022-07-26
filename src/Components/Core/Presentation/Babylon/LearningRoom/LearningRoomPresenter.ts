@@ -1,6 +1,9 @@
 import { Vector2, Vector3 } from "@babylonjs/core";
 import { injectable } from "inversify";
-import { LearningRoomTO } from "../../../Ports/LearningWorldPort/ILearningWorldPort";
+import {
+  LearningElementTO,
+  LearningRoomTO,
+} from "../../../Ports/LearningWorldPort/ILearningWorldPort";
 import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
@@ -27,43 +30,20 @@ export default class LearningRoomPresenter implements ILearningRoomPresenter {
   }
 
   presentLearningRoom(learningRoomTO: LearningRoomTO): void {
-    // set view model data
-    this.viewModel.id = learningRoomTO.id;
-    this.setRoomDimensions(learningRoomTO);
-    this.setRoomCornersSquare();
-
-    let director = CoreDIContainer.get<IPresentationDirector>(
-      BUILDER_TYPES.IPresentationDirector
-    );
-    const learningElementBuilder = CoreDIContainer.get<IPresentationBuilder>(
-      BUILDER_TYPES.ILearningElementBuilder
-    );
-
-    // create learning elements
-    let elementPositions = this.getLearningElementPositions(
-      learningRoomTO.learningElements.length
-    );
-
-    learningRoomTO.learningElements.forEach((elementTO) => {
-      director.build(learningElementBuilder);
-      let presenter =
-        learningElementBuilder.getPresenter() as ILearningElementPresenter;
-      presenter.presentLearningElement(elementTO, elementPositions.shift()!);
-    });
-
-    // create door
-    const doorBuilder = CoreDIContainer.get<IPresentationBuilder>(
-      BUILDER_TYPES.IDoorBuilder
-    );
-
-    director.build(doorBuilder);
-    doorBuilder.getPresenter().presentDoor(this.getDoorPosition());
-    this.doorPresenter = doorBuilder.getPresenter();
+    this.setViewModelData(learningRoomTO);
+    this.createLearningElements(learningRoomTO.learningElements);
+    this.createDoor();
   }
 
   openDoor(): void {
     if (!this.doorPresenter) return;
     this.doorPresenter.openDoor();
+  }
+
+  private setViewModelData(learningRoomTO: LearningRoomTO): void {
+    this.viewModel.id = learningRoomTO.id;
+    this.setRoomDimensions(learningRoomTO);
+    this.setRoomCornersSquare();
   }
 
   private setRoomDimensions(learningRoomTO: LearningRoomTO): void {
@@ -85,6 +65,29 @@ export default class LearningRoomPresenter implements ILearningRoomPresenter {
     ];
   }
 
+  private createLearningElements(
+    learningElementTOs: LearningElementTO[]
+  ): void {
+    const director = CoreDIContainer.get<IPresentationDirector>(
+      BUILDER_TYPES.IPresentationDirector
+    );
+    const learningElementBuilder = CoreDIContainer.get<IPresentationBuilder>(
+      BUILDER_TYPES.ILearningElementBuilder
+    );
+
+    let elementPositions = this.getLearningElementPositions(
+      learningElementTOs.length
+    );
+
+    learningElementTOs.forEach((elementTO) => {
+      director.build(learningElementBuilder);
+      (
+        learningElementBuilder.getPresenter() as ILearningElementPresenter
+      ).presentLearningElement(elementTO, elementPositions.shift()!);
+      learningElementBuilder.reset();
+    });
+  }
+
   private getLearningElementPositions(
     elementCount: number
   ): [Vector3, number][] {
@@ -104,6 +107,19 @@ export default class LearningRoomPresenter implements ILearningRoomPresenter {
       sideOffset *= -1;
     }
     return positions;
+  }
+
+  private createDoor(): void {
+    const director = CoreDIContainer.get<IPresentationDirector>(
+      BUILDER_TYPES.IPresentationDirector
+    );
+    const doorBuilder = CoreDIContainer.get<IPresentationBuilder>(
+      BUILDER_TYPES.IDoorBuilder
+    );
+
+    director.build(doorBuilder);
+    this.doorPresenter = doorBuilder.getPresenter() as IDoorPresenter;
+    this.doorPresenter.presentDoor(this.getDoorPosition());
   }
 
   private getDoorPosition(): [Vector3, number] {
