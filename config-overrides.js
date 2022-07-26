@@ -33,6 +33,7 @@ module.exports = {
       "/DependencyInjection/",
       "/Entities/",
       "/[A-z]*Debug[A-z]*.ts",
+      "TestUtils.ts",
     ];
     config.coverageReporters = ["text-summary", "lcov"];
     config.coverageThreshold = {
