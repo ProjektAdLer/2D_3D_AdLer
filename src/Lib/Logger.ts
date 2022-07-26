@@ -8,7 +8,7 @@ interface Logger {
   error: LogFn;
 }
 
-type LogLevel = "log" | "warn" | "error";
+export type LogLevel = "log" | "warn" | "error";
 
 const defaultLogLevel = "warn";
 
