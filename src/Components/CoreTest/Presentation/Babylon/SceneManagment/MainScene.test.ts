@@ -1,4 +1,5 @@
-import { Engine, Scene } from "@babylonjs/core";
+import { NullEngine, Scene } from "@babylonjs/core";
+import { config } from "../../../../../config";
 import MainScene from "../../../../Core/Presentation/Babylon/SceneManagement/MainScene";
 
 jest.mock("@babylonjs/core");
@@ -14,12 +15,12 @@ describe("MainScene", () => {
     jest.restoreAllMocks();
   });
 
+  // basic smoke test
   test("createScene returns an object of type Scene", () => {
-    let canvas = document.createElement("canvas");
-    let engine = new Engine(canvas);
+    // set environment variable to prevent a call to the babylon debug layer
+    config.isDebug = false;
 
-    // this will break when the debugLayer is called in createScene
-    systemUnderTest.createScene(engine, canvas).then((data) => {
+    systemUnderTest.createScene(new NullEngine()).then((data) => {
       expect(data).toBeInstanceOf(Scene);
     });
   });
