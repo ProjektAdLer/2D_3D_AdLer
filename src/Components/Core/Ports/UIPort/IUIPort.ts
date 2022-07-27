@@ -7,7 +7,7 @@ export default interface IUIPort {
   registerModalManager(presenter: IModalManagerPresenter): void;
   displayModal(errorMessage: string, type: NotificationType): void;
   displayLearningElementTooltip(learningElement: LearningElementTO): void;
-  hide(): void;
+  hideBottomTooltip(): void;
   registerBottomTooltipPresenter(
     bottomTooltipPresenter: IBottomTooltipPresenter
   ): void;

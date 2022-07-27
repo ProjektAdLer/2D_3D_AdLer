@@ -11,12 +11,26 @@ export default class UIPort implements IUIPort {
   private modalManagerPresenter: IModalManagerPresenter;
 
   displayModal(errorMessage: string, type: NotificationType): void {
+    if (!this.modalManagerPresenter) {
+      throw new Error("ModalManagerPresenter is not registered");
+    }
+
     this.modalManagerPresenter.presentErrorMessage(errorMessage, type);
   }
-  hide(): void {
+
+  hideBottomTooltip(): void {
+    if (!this.bottomTooltipPresenter) {
+      throw new Error("BottomTooltipPresenter not registered");
+    }
+
     this.bottomTooltipPresenter.hide();
   }
+
   displayLearningElementTooltip = (learningElement: LearningElementTO) => {
+    if (!this.bottomTooltipPresenter) {
+      throw new Error("BottomTooltipPresenter not registered");
+    }
+
     this.bottomTooltipPresenter.displayLearningElement(learningElement);
   };
 

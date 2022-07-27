@@ -24,7 +24,7 @@ export default class LearningElementController
 
   @bind
   pointerOut(): void {
-    CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort).hide();
+    CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort).hideBottomTooltip();
   }
 
   @bind
