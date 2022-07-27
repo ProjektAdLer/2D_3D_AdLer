@@ -21,7 +21,9 @@ import IScenePresenter from "./IScenePresenter";
 export default class ScenePresenter implements IScenePresenter {
   get Scene(): Scene {
     if (!this.viewModel.scene) {
-      throw new Error("SceneViewModel is not defined");
+      throw new Error(
+        "There is no scene set. Create the scene first before requesting it."
+      );
     }
     return this.viewModel.scene;
   }
