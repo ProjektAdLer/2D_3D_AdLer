@@ -160,13 +160,21 @@ describe("AvatarView", () => {
 
   test("constructor calls the scenePresenter to load avatar models", () => {
     let quaternion = new Quaternion(0, 0, 0, 1);
-    quaternion._isDirty = false;
 
     expect(avatarView["viewModel"].meshes.Value).toHaveLength(1);
     expect(avatarView["viewModel"].meshes.Value[0].name).toBe("testmesh");
-    expect(avatarView["viewModel"].meshes.Value[0].rotationQuaternion).toEqual(
-      quaternion
-    );
+    expect(
+      avatarView["viewModel"].meshes.Value[0].rotationQuaternion?.x
+    ).toEqual(quaternion.x);
+    expect(
+      avatarView["viewModel"].meshes.Value[0].rotationQuaternion?.y
+    ).toEqual(quaternion.y);
+    expect(
+      avatarView["viewModel"].meshes.Value[0].rotationQuaternion?.z
+    ).toEqual(quaternion.z);
+    expect(
+      avatarView["viewModel"].meshes.Value[0].rotationQuaternion?.w
+    ).toEqual(quaternion.w);
   });
 
   test("constructor registeres callback for navigation setup", () => {
