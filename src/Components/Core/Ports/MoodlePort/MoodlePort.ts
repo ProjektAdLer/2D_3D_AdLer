@@ -7,23 +7,32 @@ import IMoodlePort from "./IMoodlePort";
 export default class MoodlePort implements IMoodlePort {
   private moodleLoginFormPresenter: IMoodleLoginFormPresenter;
   private moodleLoginButtonPresenter: IMoodleLoginButtonPresenter;
-  displayLoginForm = () => {
+
+  displayLoginForm(): void {
+    if (!this.moodleLoginFormPresenter)
+      throw new Error("MoodleLoginFormPresenter is not registered");
+
     this.moodleLoginFormPresenter.displayLoginForm();
-  };
+  }
+
   loginSuccessful(): void {
+    if (!this.moodleLoginFormPresenter)
+      throw new Error("MoodleLoginFormPresenter is not registered");
+    if (!this.moodleLoginButtonPresenter)
+      throw new Error("MoodleLoginButtonPresenter is not registered");
+
     this.moodleLoginFormPresenter.loginSuccessful();
     this.moodleLoginButtonPresenter.setLoginSuccessful();
   }
 
   debug_DisplayUserToken(userToken: string): void {
     if (!this.moodleLoginFormPresenter)
-      throw new Error("MoodlePort is not registered");
+      throw new Error("MoodleLoginFormPresenter is not registered");
     this.moodleLoginFormPresenter.debug_DisplayUserToken(userToken);
   }
 
-  //Setter for Presenters
-
-  registerMoodleLoginPresenter(presenter: IMoodleLoginFormPresenter): void {
+  // setter for presenters
+  registerMoodleLoginFormPresenter(presenter: IMoodleLoginFormPresenter): void {
     if (this.moodleLoginFormPresenter)
       throw new Error("MoodlePort is already registered");
     this.moodleLoginFormPresenter = presenter;

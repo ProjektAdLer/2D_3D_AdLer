@@ -1,24 +1,37 @@
-import MoodlePort from "../../../../Core/Ports/MoodlePort/MoodlePort";
+import { mock } from "jest-mock-extended";
+import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
+import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import IMoodlePort from "../../../../Core/Ports/MoodlePort/IMoodlePort";
 import MoodleLoginFormBuilder from "../../../../Core/Presentation/React/MoodleLoginForm/MoodleLoginFormBuilder";
 import MoodleLoginFormController from "../../../../Core/Presentation/React/MoodleLoginForm/MoodleLoginFormController";
 import MoodleLoginFormPresenter from "../../../../Core/Presentation/React/MoodleLoginForm/MoodleLoginFormPresenter";
 import MoodleLoginFormViewModel from "../../../../Core/Presentation/React/MoodleLoginForm/MoodleLoginFormViewModel";
-import ViewModelControllerProvider from "../../../../Core/Presentation/ViewModelProvider/ViewModelControllerProvider";
+import IViewModelControllerProvider from "../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
-const registerTupelMock = jest.spyOn(
-  ViewModelControllerProvider.prototype,
-  "registerTupel"
-);
-const registerMoodleLoginPresenterMock = jest.spyOn(
-  MoodlePort.prototype,
-  "registerMoodleLoginPresenter"
-);
+const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
+const moodlePortMock = mock<IMoodlePort>();
 
 describe("MoodleLoginFormBuilder", () => {
   let systemUnderTest: MoodleLoginFormBuilder;
 
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+
+    CoreDIContainer.rebind(PORT_TYPES.IMoodlePort).toConstantValue(
+      moodlePortMock
+    );
+    CoreDIContainer.rebind(
+      CORE_TYPES.IViewModelControllerProvider
+    ).toConstantValue(viewModelControllerProviderMock);
+  });
+
   beforeEach(() => {
     systemUnderTest = new MoodleLoginFormBuilder();
+  });
+
+  afterAll(() => {
+    CoreDIContainer.restore();
   });
 
   test("buildController builds the controller and registers it and the viewModel with the VMCProvider", () => {
@@ -29,15 +42,17 @@ describe("MoodleLoginFormBuilder", () => {
     expect(systemUnderTest["controller"]).toBeInstanceOf(
       MoodleLoginFormController
     );
-    expect(registerTupelMock).toHaveBeenCalledTimes(1);
-    expect(registerTupelMock).toHaveBeenCalledWith(
+    expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledTimes(
+      1
+    );
+    expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledWith(
       systemUnderTest["viewModel"],
       systemUnderTest["controller"],
       MoodleLoginFormViewModel
     );
   });
 
-  test("buildPresenter build the presenter and register it with the MoodlePort", () => {
+  test("buildPresenter builds the presenter and register it with the MoodlePort", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 
@@ -45,9 +60,11 @@ describe("MoodleLoginFormBuilder", () => {
     expect(systemUnderTest["presenter"]).toBeInstanceOf(
       MoodleLoginFormPresenter
     );
-    expect(registerMoodleLoginPresenterMock).toHaveBeenCalledTimes(1);
-    expect(registerMoodleLoginPresenterMock).toHaveBeenCalledWith(
-      systemUnderTest["presenter"]
-    );
+    expect(
+      moodlePortMock.registerMoodleLoginFormPresenter
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      moodlePortMock.registerMoodleLoginFormPresenter
+    ).toHaveBeenCalledWith(systemUnderTest["presenter"]);
   });
 });

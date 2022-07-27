@@ -27,6 +27,7 @@ export default class MoodleLoginFormBuilder extends PresentationBuilder<
 
   override buildController(): void {
     super.buildController();
+
     CoreDIContainer.get<ViewModelControllerProvider>(
       CORE_TYPES.IViewModelControllerProvider
     ).registerTupel(this.viewModel, this.controller, MoodleLoginFormViewModel);
@@ -37,6 +38,6 @@ export default class MoodleLoginFormBuilder extends PresentationBuilder<
 
     CoreDIContainer.get<IMoodlePort>(
       PORT_TYPES.IMoodlePort
-    ).registerMoodleLoginPresenter(this.presenter!);
+    ).registerMoodleLoginFormPresenter(this.presenter!);
   }
 }

@@ -2,7 +2,7 @@ import IMoodleLoginButtonPresenter from "../../Presentation/React/MoodleLoginBut
 import IMoodleLoginFormPresenter from "../../Presentation/React/MoodleLoginForm/IMoodleLoginFormPresenter";
 
 export default interface IMoodlePort {
-  registerMoodleLoginPresenter(presenter: IMoodleLoginFormPresenter): void;
+  registerMoodleLoginFormPresenter(presenter: IMoodleLoginFormPresenter): void;
   registerMoodleLoginButtonPresenter(
     presenter: IMoodleLoginButtonPresenter
   ): void;
