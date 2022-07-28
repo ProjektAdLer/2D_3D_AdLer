@@ -1,5 +1,4 @@
-import { render, fireEvent, waitFor, screen } from "@testing-library/react";
-import * as hooks from "../../../../Core/Presentation/React/CustomHooks/useViewModelControllerProvider";
+import { render } from "@testing-library/react";
 import ScorePanel from "../../../../Core/Presentation/React/ScorePanel/ScorePanel";
 import ScorePanelViewModel from "../../../../Core/Presentation/React/ScorePanel/ScorePanelViewModel";
 import useViewModelControllerProviderMock from "../CustomHooks/UseViewModelControllerProvider/useViewModelControllerProviderMock";

@@ -19,7 +19,7 @@ export default function LearningElementsDropdown() {
   );
 
   const [dropDownOpen, setDropDownOpen] = useState(false);
-  if (learningElements?.length === 0) return null;
+  if (learningElements?.length === 0 || !learningElements) return null;
   return (
     <div className="flex flex-col mt-4 lg:mt-10 rounded-lg">
       <CustomDropdown
