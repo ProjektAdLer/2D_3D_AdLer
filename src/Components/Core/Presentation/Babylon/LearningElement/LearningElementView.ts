@@ -12,16 +12,13 @@ import type IScenePresenter from "../SceneManagement/IScenePresenter";
 import ILearningElementController from "./ILearningElementController";
 import ILearningElementView from "./ILearningElementView";
 import LearningElementViewModel from "./LearningElementViewModel";
-import {
-  getLearningElementSymbol,
-  LearningElementTypeSymbols,
-} from "./Types/LearningElementTypes";
+import { LearningElementTypes } from "./Types/LearningElementTypes";
 
-const modelLinks = {
-  [LearningElementTypeSymbols.h5p]: require("../../../../../Assets/3DModel_LElement_H5P.glb"),
-  [LearningElementTypeSymbols.text]: require("../../../../../Assets/3DModel_LElement_Text.glb"),
-  [LearningElementTypeSymbols.image]: require("../../../../../Assets/3DModel_LElement_Image.glb"),
-  [LearningElementTypeSymbols.video]: require("../../../../../Assets/3DModel_LElement_Video.glb"),
+const modelLinks: { [key in LearningElementTypes]?: any } = {
+  [LearningElementTypes.h5p]: require("../../../../../Assets/3DModel_LElement_H5P.glb"),
+  [LearningElementTypes.text]: require("../../../../../Assets/3DModel_LElement_Text.glb"),
+  [LearningElementTypes.image]: require("../../../../../Assets/3DModel_LElement_Image.glb"),
+  [LearningElementTypes.video]: require("../../../../../Assets/3DModel_LElement_Video.glb"),
 };
 
 export default class LearningElementView implements ILearningElementView {
@@ -64,7 +61,7 @@ export default class LearningElementView implements ILearningElementView {
   private async loadMeshAsync(): Promise<void> {
     this.viewModel.meshes.Value = (await this.scenePresenter.loadModel(
       modelLinks[
-        getLearningElementSymbol(this.viewModel.learningElementData.Value.type)
+        this.viewModel.learningElementData.Value.type as LearningElementTypes
       ],
       true
     )) as Mesh[];
