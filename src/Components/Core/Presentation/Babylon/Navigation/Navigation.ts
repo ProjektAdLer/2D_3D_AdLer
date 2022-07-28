@@ -13,6 +13,7 @@ import { inject, injectable } from "inversify";
 import type IScenePresenter from "../SceneManagement/IScenePresenter";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import NavigationConfiguration from "./NavigationConfiguration";
+import { config } from "../../../../../config";
 
 @injectable()
 export default class Navigation implements INavigation {
@@ -44,7 +45,8 @@ export default class Navigation implements INavigation {
     }
 
     // -- Navigation Plugin --
-    this.plugin = new RecastJSPlugin(await new Recast());
+    let recast = await new Recast();
+    this.plugin = new RecastJSPlugin(recast);
 
     // -- NavMesh --
     this.plugin.createNavMesh(
@@ -53,7 +55,7 @@ export default class Navigation implements INavigation {
     );
 
     // debug: colored navmesh representation
-    if (process.env.REACT_APP_IS_DEBUG === "true") {
+    if (config.isDebug === true) {
       this.navMeshDebug?.dispose();
       this.navMeshDebug = this.plugin.createDebugNavMesh(
         this.scenePresenter.Scene
