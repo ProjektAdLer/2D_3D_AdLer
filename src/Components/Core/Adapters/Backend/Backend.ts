@@ -2,7 +2,7 @@ import axios from "axios";
 import { injectable } from "inversify";
 import { config } from "../../../../config";
 import { logger } from "../../../../Lib/Logger";
-import { LearningElementTypeSymbols } from "../../Presentation/Babylon/LearningElement/Types/LearningElementTypes";
+import { LearningElementTypes } from "../../Presentation/Babylon/LearningElement/Types/LearningElementTypes";
 import { APILearningElementTO } from "./APILearningElementTO";
 import { APILearningRoomTO } from "./APILearningRoomTO";
 import { APIWorldTo } from "./APIWorldTO";
@@ -47,7 +47,7 @@ export default class Backend implements IBackend {
   }: tempApiInfo): Promise<(APILearningElementTO | undefined)[]> {
     let dsl = await this.getDSL({ userToken, worldName });
     return dsl.learningWorld.learningElements.flatMap((element) =>
-      element.elementType in LearningElementTypeSymbols
+      element.elementType in LearningElementTypes
         ? ({
             id: element.id,
             name: element.identifier.value,
