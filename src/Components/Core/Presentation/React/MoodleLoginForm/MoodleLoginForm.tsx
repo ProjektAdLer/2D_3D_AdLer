@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useObservable from "../CustomHooks/useObservable";
 import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import StyledButton from "../ReactBaseComponents/StyledButton";
