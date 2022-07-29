@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-
 import { H5P as H5PPlayer } from "h5p-standalone";
 import LearningElementModalViewModel from "../LearningElementModalViewModel";
-import { logger } from "../../../../../../Lib/Logger";
 import H5PLearningElementData from "../../../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
 import { config } from "../../../../../../config";
+import { logger } from "../../../../../../Lib/Logger";
+
 export default function NewH5PContent({
   viewModel,
 }: {
@@ -28,11 +28,10 @@ export default function NewH5PContent({
           frameCss: config.serverURL + "/TestH5P/" + "/h5pBase/styles/h5p.css",
         };
         new H5PPlayer(el, options).then(() => {
-          console.log("H5P Geladen");
           //@ts-ignore
           H5P.externalDispatcher.on("xAPI", (event: any) => {
             //do something useful with the event
-            console.log("xAPI event: ", event);
+            logger.log("xAPI event: ", event);
           });
         });
 
@@ -41,8 +40,6 @@ export default function NewH5PContent({
     };
     debug();
   }, []);
-
-  console.log("VM", viewModel);
 
   return (
     <div className="App">
