@@ -51,17 +51,22 @@ describe("LearningElementDrowdownView", () => {
     expect(elementUnderTest.getByText("Element 2")).toBeInTheDocument();
   });
 
-  it("chould call controller, when element in clicked", () => {
+  it("should call controller with LearningElement Idd, when element in clicked", () => {
+    // Arrnge
     useViewModelControllerProviderMock<
       LearningElementsDropdownViewModel,
       LearningElementsDropdownController
     >([[modelWithElements], [mockedController]]);
+
+    // Act
     // simulate click on the dropdown button
     const elementUnderTest = render(<LearningElementsDropdown />);
     fireEvent.click(elementUnderTest.getByRole("button"));
 
     fireEvent.click(elementUnderTest.getByText("Element 1"));
 
+    // Assert
+    // 1 is the Id of the first element
     expect(mockedController.startLearningElement).toHaveBeenCalledWith(1);
   });
 });
