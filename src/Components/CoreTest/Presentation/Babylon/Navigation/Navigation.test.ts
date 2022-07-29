@@ -1,69 +1,51 @@
-import {
-  Scene,
-  Mesh,
-  Nullable,
-  ISceneLoaderProgressEvent,
-  AbstractMesh,
-  NullEngine,
-} from "@babylonjs/core";
+import mock from "jest-mock-extended/lib/Mock";
 import SimpleEvent from "../../../../../Lib/SimpleEvent";
 import Navigation from "../../../../Core/Presentation/Babylon/Navigation/Navigation";
 import NavigationConfiguration from "../../../../Core/Presentation/Babylon/Navigation/NavigationConfiguration";
-import ICreateSceneClass from "../../../../Core/Presentation/Babylon/SceneManagement/ICreateSceneClass";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
+import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
+import { RecastJSPlugin } from "@babylonjs/core";
 
 const notifySubscribersMock = jest.spyOn(
   SimpleEvent.prototype,
   "notifySubscribers"
 );
 
-class ScenePresenterMock implements IScenePresenter {
-  get Scene(): Scene {
-    return new Scene(new NullEngine());
-  }
-  get NavigationMeshes(): Mesh[] {
-    throw new Error("Method not implemented.");
-  }
-  createScene(createSceneClass: ICreateSceneClass): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
-  startRenderLoop(): void {
-    throw new Error("Method not implemented.");
-  }
-  loadModel(
-    url: string,
-    isRelevantForNavigation?: boolean | undefined,
-    onProgress?:
-      | Nullable<(event: ISceneLoaderProgressEvent) => void>
-      | undefined
-  ): Promise<AbstractMesh[]> {
-    throw new Error("Method not implemented.");
-  }
-  createMesh(
-    name: string,
-    isRelevantForNavigation?: boolean | undefined
-  ): Mesh {
-    throw new Error("Method not implemented.");
-  }
-}
+jest.mock("@babylonjs/core");
+jest.mock("recast-detour");
+
+const scenePresenterMock = mock<IScenePresenter>();
 
 describe("Navigation", () => {
-  let navigation: Navigation;
+  let systemUnderTest: Navigation;
+
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+
+    CoreDIContainer.rebind<IScenePresenter>(
+      CORE_TYPES.IScenePresenter
+    ).toConstantValue(scenePresenterMock);
+  });
 
   beforeEach(() => {
-    navigation = new Navigation(
-      new ScenePresenterMock(),
+    systemUnderTest = new Navigation(
+      scenePresenterMock,
       new NavigationConfiguration()
     );
   });
 
-  test.todo("fix tests using Recast");
-  // test("setupNavigation creates a plugin instance, a navMesh and a crowd", async () => {
-  //   await navigation.setupNavigation();
+  afterAll(() => {
+    CoreDIContainer.restore();
+  });
 
-  //   expect(navigation["plugin"]).toBeDefined();
-  //   expect(navigation["crowd"]).toBeDefined();
-  //   expect(navigation.Plugin.navMesh).toBeDefined();
-  //   expect(notifySubscribersMock).toHaveBeenCalledTimes(1);
-  // });
+  test.skip("createNavigationMesh creates a navigation mesh", () => {
+    let mesh = systemUnderTest.setupNavigation();
+  });
+
+  test.skip("Plugin getter returns plugin", () => {
+    systemUnderTest.setupNavigation();
+
+    expect(systemUnderTest.Plugin).toBeInstanceOf(RecastJSPlugin);
+  });
 });
