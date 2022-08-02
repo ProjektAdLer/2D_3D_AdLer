@@ -33,25 +33,22 @@ export default class ReactEntry implements IReactEntry {
       providerComponent
     );
 
-    this.buildViewModels();
-
-    ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-      strictModeComponent
+    const bla = ReactDOM.createRoot(
+      document.getElementById("root") as HTMLElement
     );
 
-    if (
-      config.autoLoginWithoutShortcut &&
-      process.env.NODE_ENV === "development" &&
-      config.isDebug &&
-      !isInDebug
-    ) {
-      isInDebug = true;
-      CoreDIContainer.get<IDebugUseCase>(
-        USECASE_TYPES.IDebugUseCase
-      ).executeAsync();
-    }
+    bla.render(strictModeComponent);
 
+    this.buildViewModels();
+
+    this.startDebugUseCase();
+
+    this.setDebugShortcut();
+  }
+
+  private setDebugShortcut() {
     if (process.env.NODE_ENV === "development" && config.isDebug) {
+      /* istanbul ignore next */
       document.onkeyup = function (e) {
         if (e.ctrlKey && e.key == "F1") {
           if (isInDebug) {
@@ -65,6 +62,20 @@ export default class ReactEntry implements IReactEntry {
           ).executeAsync();
         }
       };
+    }
+  }
+
+  private startDebugUseCase() {
+    if (
+      config.autoLoginWithoutShortcut &&
+      config.nodeEnv === "development" &&
+      config.isDebug &&
+      !isInDebug
+    ) {
+      isInDebug = true;
+      CoreDIContainer.get<IDebugUseCase>(
+        USECASE_TYPES.IDebugUseCase
+      ).executeAsync();
     }
   }
 
