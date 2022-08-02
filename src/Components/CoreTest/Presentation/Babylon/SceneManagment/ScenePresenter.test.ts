@@ -23,7 +23,7 @@ describe("scenePresenter", () => {
   });
 
   beforeEach(() => {
-    // snapshot and restore the container to clear all singletons between tests
+    // snapshot and restore the container to clear all injected singletons between tests
     CoreDIContainer.snapshot();
     systemUnderTest = CoreDIContainer.resolve(ScenePresenter);
     CoreDIContainer.restore();
