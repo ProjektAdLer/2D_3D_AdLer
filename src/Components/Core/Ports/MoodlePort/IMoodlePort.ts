@@ -8,5 +8,4 @@ export default interface IMoodlePort {
   ): void;
   displayLoginForm(): void;
   loginSuccessful(): void;
-  debug_DisplayUserToken(userToken: string): void;
 }

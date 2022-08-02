@@ -15,8 +15,6 @@ export default function MoodleLoginForm() {
     MoodleLoginFormController
   >(MoodleLoginFormViewModel);
 
-  const [userToken] = useObservable<string>(viewModels[0]?.userToken);
-
   const [modalVisible, setModalVisible] = useObservable<boolean>(
     viewModels[0]?.visible
   );
@@ -74,7 +72,6 @@ export default function MoodleLoginForm() {
           >
             <p className="text-xs">Passwort vergessen?</p>
           </StyledButton>
-          <h3>User-Token: {userToken}</h3>
         </form>
       </StyledContainer>
     </StyledModal>

@@ -40,6 +40,15 @@ describe("ViewModelProvider", () => {
     expect(systemUnderTest["containers"][0]["callbacks"].length).toBe(0);
   });
 
+  test("cancleRequest should just return, if there is nor request to cancle", () => {
+    systemUnderTest.cancelRequest<TestViewModelA, TestControllerA>(
+      jest.fn(),
+      TestViewModelA
+    );
+
+    expect(systemUnderTest["containers"].length).toBe(0);
+  });
+
   test("registerViewModelOnly calls callback when a view model was registered", () => {
     const callback = jest.fn();
     const viewModel = new TestViewModelA();

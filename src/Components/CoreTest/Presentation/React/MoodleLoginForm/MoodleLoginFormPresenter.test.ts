@@ -1,14 +1,23 @@
-import MoodleLoginFormPresenter from "../../../../Core/Presentation/React/MoodleLoginForm/MoodleLoginFormPresenter";
-import MoodleLoginFormViewModel from "../../../../Core/Presentation/React/MoodleLoginForm/MoodleLoginFormViewModel";
+import MoodleLoginFormPresenter from "../../../../../../src/Components/Core/Presentation/React/MoodleLoginForm/MoodleLoginFormPresenter";
+import IMoodleLoginFormPresenter from "../../../../../../src/Components/Core/Presentation/React/MoodleLoginForm/IMoodleLoginFormPresenter";
+import MoodleLoginFormViewModel from "../../../../../../src/Components/Core/Presentation/React/MoodleLoginForm/MoodleLoginFormViewModel";
 
 describe("MoodleLoginFormPresenter", () => {
-  let systemUnderTest: MoodleLoginFormPresenter;
+  let systemUnderTest: IMoodleLoginFormPresenter;
+  let vm: MoodleLoginFormViewModel;
 
   beforeEach(() => {
-    systemUnderTest = new MoodleLoginFormPresenter(
-      new MoodleLoginFormViewModel()
-    );
+    vm = new MoodleLoginFormViewModel();
+    systemUnderTest = new MoodleLoginFormPresenter(vm);
   });
 
-  test.todo("add tests here");
+  test("should set visible to fale, if login is successfull", () => {
+    systemUnderTest.loginSuccessful();
+    expect(vm.visible.Value).toBe(false);
+  });
+
+  test("should set visible to true, if login should be displayed", () => {
+    systemUnderTest.displayLoginForm();
+    expect(vm.visible.Value).toBe(true);
+  });
 });

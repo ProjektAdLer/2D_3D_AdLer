@@ -72,29 +72,6 @@ describe("MoodlePort", () => {
     ).toHaveBeenCalledTimes(1);
   });
 
-  test("debug_DisplayUserToken throws error if MoodleLoginFormPresenter is not registered", () => {
-    expect(() => systemUnderTest.debug_DisplayUserToken("")).toThrowError(
-      "MoodleLoginFormPresenter is not registered"
-    );
-  });
-
-  test("debug_DisplayUserToken calls the loginFormPresenter", () => {
-    const moodleLoginFormPresenterMock = mock<IMoodleLoginFormPresenter>();
-    systemUnderTest.registerMoodleLoginFormPresenter(
-      moodleLoginFormPresenterMock
-    );
-    const testToken = "testToken";
-
-    systemUnderTest.debug_DisplayUserToken(testToken);
-
-    expect(
-      moodleLoginFormPresenterMock.debug_DisplayUserToken
-    ).toHaveBeenCalledTimes(1);
-    expect(
-      moodleLoginFormPresenterMock.debug_DisplayUserToken
-    ).toHaveBeenCalledWith(testToken);
-  });
-
   test("registerMoodleLoginPresenter registers the presenter if none are present", () => {
     expect(systemUnderTest["moodleLoginFormPresenter"]).not.toBeDefined();
 
