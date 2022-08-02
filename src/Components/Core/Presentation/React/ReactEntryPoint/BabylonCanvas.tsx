@@ -27,8 +27,6 @@ export default function BabylonCanvas(props: any) {
           );
 
           scenePresenter.startRenderLoop();
-        } else {
-          throw new Error("No Canvas to render on!");
         }
       }
     };
