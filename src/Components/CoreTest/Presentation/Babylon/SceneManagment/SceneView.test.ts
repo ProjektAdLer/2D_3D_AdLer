@@ -4,6 +4,7 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import SceneView from "../../../../Core/Presentation/Babylon/SceneManagement/SceneView";
 
 const runRenderLoopMock = jest.spyOn(NullEngine.prototype, "runRenderLoop");
+const renderMock = jest.spyOn(Scene.prototype, "render");
 
 describe("SceneView", () => {
   let systemUnderTest: SceneView;
@@ -20,5 +21,10 @@ describe("SceneView", () => {
   test("startRenderLoop call the babylon engine", () => {
     systemUnderTest.startRenderLoop();
     expect(runRenderLoopMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("renderFunction calls render on the scene", () => {
+    systemUnderTest["renderFunction"]();
+    expect(renderMock).toHaveBeenCalledTimes(1);
   });
 });
