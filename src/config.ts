@@ -12,6 +12,7 @@ export const config = {
   autoLoginWithoutShortcut: parseBool(
     process.env.REACT_APP_AUTO_LOGIN_WITHOUT_SHORTCUT || true
   ),
+  nodeEnv: process.env.NODE_ENV || "development",
 } as {
   isDebug: boolean;
   useAutoLogin: boolean;
@@ -21,4 +22,5 @@ export const config = {
   serverURL: string;
   useFakeBackend: boolean;
   autoLoginWithoutShortcut: boolean;
+  nodeEnv: string;
 };
