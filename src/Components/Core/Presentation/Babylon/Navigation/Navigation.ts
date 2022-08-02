@@ -39,14 +39,14 @@ export default class Navigation implements INavigation {
 
   async setupNavigation(): Promise<void> {
     if (this.plugin) {
-      console.warn(
+      console.error(
         "Repeated call to setupNavigation. This can break the agents indices."
       );
     }
 
     // -- Navigation Plugin --
-    let recast = await new Recast();
-    this.plugin = new RecastJSPlugin(recast);
+    // call to Recast.default for compatibility in production and tests
+    this.plugin = new RecastJSPlugin(await Recast.default());
 
     // -- NavMesh --
     this.plugin.createNavMesh(
