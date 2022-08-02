@@ -25,12 +25,6 @@ export default class MoodlePort implements IMoodlePort {
     this.moodleLoginButtonPresenter.setLoginSuccessful();
   }
 
-  debug_DisplayUserToken(userToken: string): void {
-    if (!this.moodleLoginFormPresenter)
-      throw new Error("MoodleLoginFormPresenter is not registered");
-    this.moodleLoginFormPresenter.debug_DisplayUserToken(userToken);
-  }
-
   // setter for presenters
   registerMoodleLoginFormPresenter(presenter: IMoodleLoginFormPresenter): void {
     if (this.moodleLoginFormPresenter)

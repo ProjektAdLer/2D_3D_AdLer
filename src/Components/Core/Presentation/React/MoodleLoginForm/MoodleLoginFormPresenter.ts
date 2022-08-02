@@ -11,8 +11,4 @@ export default class MoodleLoginFormPresenter
   displayLoginForm(): void {
     this.viewModel.visible.Value = true;
   }
-
-  debug_DisplayUserToken(userToken: string): void {
-    this.viewModel.userToken.Value = userToken;
-  }
 }

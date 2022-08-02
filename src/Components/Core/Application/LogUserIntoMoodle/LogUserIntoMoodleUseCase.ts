@@ -52,8 +52,6 @@ export default class LogUserIntoMoodleUseCase
       UserDataEntity
     );
 
-    this.moodlePort.debug_DisplayUserToken(userToken);
-
     this.moodlePort.loginSuccessful();
 
     this.debugPort.setUserToken(userToken);
