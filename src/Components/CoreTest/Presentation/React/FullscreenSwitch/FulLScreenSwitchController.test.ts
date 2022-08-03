@@ -1,7 +1,7 @@
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import FullscreenSwitchController from "../../../../Core/Presentation/React/FullscreenSwitch/FullscreenSwitchController";
 
-describe("LearningElementsDropdownController", () => {
+describe("FullscreenSwitchController", () => {
   let systemUnderTest: FullscreenSwitchController;
 
   beforeAll(() => {
