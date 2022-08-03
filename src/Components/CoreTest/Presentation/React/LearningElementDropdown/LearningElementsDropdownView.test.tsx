@@ -28,7 +28,7 @@ modelWithElements.learningElements.Value = [
 
 const mockedController = mock<ILearningElementsDropdownController>();
 
-describe("LearningElementDrowdownView", () => {
+describe("LearningElementsDrowdownView", () => {
   it("does no render, if no Learning Elements are provided", () => {
     useViewModelControllerProviderMock<
       LearningElementsDropdownViewModel,

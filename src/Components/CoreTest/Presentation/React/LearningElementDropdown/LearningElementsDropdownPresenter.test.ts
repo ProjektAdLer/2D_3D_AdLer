@@ -1,7 +1,7 @@
 import ILearningElementsDropdownPresenter from "../../../../Core/Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
 import LearningElementsDropdownViewModel from "../../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownViewModel";
 import LearningElementDropdownPresenter from "../../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownPresenter";
-describe("LearningElementDropDownPresenter", () => {
+describe("LearningElementsDropDownPresenter", () => {
   let systemUnderTest: ILearningElementsDropdownPresenter;
   let vm: LearningElementsDropdownViewModel;
   beforeEach(() => {

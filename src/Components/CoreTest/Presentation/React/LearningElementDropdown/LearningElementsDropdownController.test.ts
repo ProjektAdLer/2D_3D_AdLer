@@ -6,7 +6,7 @@ import LearningElementsDropdownController from "../../../../Core/Presentation/Re
 
 const useCaseMock = mock<ILearningElementStartedUseCase>();
 
-describe("LearningElementDropdownController", () => {
+describe("LearningElementsDropdownController", () => {
   let systemUnderTest: LearningElementsDropdownController;
 
   beforeAll(() => {
