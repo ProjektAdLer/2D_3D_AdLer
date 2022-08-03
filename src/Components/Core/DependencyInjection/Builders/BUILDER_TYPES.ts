@@ -13,6 +13,8 @@ const BUILDER_TYPES = {
   IBottomTooltipBuilder: Symbol("IBottomTooltipBuilder"),
   IDebugPanelBuilder: Symbol("IDebugPanelBuilder"),
   ILearningWorldNamePanelBuilder: Symbol("ILearningWorldNamePanelBuilder"),
+  ILoadLearningWorldButtonBuilder: Symbol("ILoadLearningWorldButtonBuilder"),
+  IFullscreenSwitchBuilder: Symbol("IFullscreenSwitchBuilder"),
 };
 
 export default BUILDER_TYPES;

@@ -16,6 +16,8 @@ import MoodleLoginButtonBuilder from "../../Presentation/React/MoodleLoginButton
 import BottomTooltipBuilder from "../../Presentation/React/BottomTooltip/BottomTooltipBuilder";
 import DebugPanelBuilder from "../../Presentation/React/DebugPanel/DebugPanelBuilder";
 import LearningWorldNamePanelBuilder from "../../Presentation/React/LearningWorldNamePanel/LearningWorldNamePanelBuilder";
+import LoadLearningWorldButtonBuilder from "../../Presentation/React/LoadLearningWorldButton/LoadLearningWorldButtonBuilder";
+import FullscreenSwitchBuilder from "../../Presentation/React/FullscreenSwitch/FullscreenSwitchBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -56,6 +58,12 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldNamePanelBuilder).to(
     LearningWorldNamePanelBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILoadLearningWorldButtonBuilder).to(
+    LoadLearningWorldButtonBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IFullscreenSwitchBuilder).to(
+    FullscreenSwitchBuilder
   );
 });
 

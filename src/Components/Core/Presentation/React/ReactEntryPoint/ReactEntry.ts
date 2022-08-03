@@ -125,5 +125,17 @@ export default class ReactEntry implements IReactEntry {
         BUILDER_TYPES.ILearningWorldNamePanelBuilder
       )
     );
+
+    director.build(
+      CoreDIContainer.get<IPresentationBuilder>(
+        BUILDER_TYPES.ILoadLearningWorldButtonBuilder
+      )
+    );
+
+    director.build(
+      CoreDIContainer.get<IPresentationBuilder>(
+        BUILDER_TYPES.IFullscreenSwitchBuilder
+      )
+    );
   }
 }

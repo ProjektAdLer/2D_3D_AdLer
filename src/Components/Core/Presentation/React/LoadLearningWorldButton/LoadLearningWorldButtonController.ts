@@ -1,12 +1,12 @@
-import ILoadWorldUseCase from "../../../Application/LoadWorld/ILoadWorldUseCase";
 import ILoadAvatarUseCase from "../../../Application/LoadAvatar/ILoadAvatarUseCase";
-import { injectable } from "inversify";
+import ILoadWorldUseCase from "../../../Application/LoadWorld/ILoadWorldUseCase";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import ILoadWorldController from "./ILoadWorldController";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
+import ILoadLearningWorldButtonController from "./ILoadLearningWorldButtonController";
 
-@injectable()
-export class LoadWorldController implements ILoadWorldController {
+export default class LoadLearningWorldButtonController
+  implements ILoadLearningWorldButtonController
+{
   async loadWorld(): Promise<void> {
     const useCase = CoreDIContainer.get<ILoadWorldUseCase>(
       USECASE_TYPES.ILoadWorldUseCase

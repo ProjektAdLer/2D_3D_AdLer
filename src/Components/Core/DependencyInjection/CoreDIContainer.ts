@@ -1,5 +1,3 @@
-import { LoadWorldController } from "../Presentation/React/LoadWorldButton/LoadWorldController";
-import ILoadWorldController from "../Presentation/React/LoadWorldButton/ILoadWorldController";
 import { Container } from "inversify";
 import CORE_TYPES from "./CoreTypes";
 import ISceneView from "../Presentation/Babylon/SceneManagement/ISceneView";
@@ -34,11 +32,6 @@ CoreDIContainer.bind<INavigation>(CORE_TYPES.INavigation)
   .inSingletonScope();
 
 CoreDIContainer.bind(NavigationConfiguration).toSelf();
-
-// Controllers
-CoreDIContainer.bind<ILoadWorldController>(CORE_TYPES.ILoadWorldController)
-  .to(LoadWorldController)
-  .inSingletonScope();
 
 // bind other CreateSceneClass here for testing puposes -MK
 CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
