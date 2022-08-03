@@ -34,6 +34,7 @@ module.exports = {
       "/Entities/",
       "/[A-z]*Debug[A-z]*.ts",
       "/[A-z]*Test[A-z]*/",
+      "index.ts",
     ];
     config.coverageReporters = ["text-summary", "lcov"];
     config.coverageThreshold = {
