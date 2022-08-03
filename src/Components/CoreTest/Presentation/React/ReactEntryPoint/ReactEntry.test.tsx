@@ -53,7 +53,7 @@ describe("ReactEntry", () => {
 
   test("should build all view models", () => {
     systemUnderTest["buildViewModels"]();
-    expect(directorMock.build).toHaveBeenCalledTimes(7);
+    expect(directorMock.build).toHaveBeenCalledTimes(9);
   });
 
   test("should call the debug usecase if in  debug mode", () => {
