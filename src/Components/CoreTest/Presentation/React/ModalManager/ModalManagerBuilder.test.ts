@@ -2,32 +2,30 @@ import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import ILearningWorldPort from "../../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
-import LearningElementsDropdownBuilder from "../../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownBuilder";
-import LearningElementsDropdownController from "../../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownController";
-import LearningElementsDropdownPresenter from "../../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownPresenter";
-import LearningElementsDropdownViewModel from "../../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownViewModel";
+import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
+import ModalManagerBuilder from "../../../../Core/Presentation/React/ModalManager/ModalManagerBuilder";
+import ModalManagerController from "../../../../Core/Presentation/React/ModalManager/ModalManagerController";
+import ModalManagerPresenter from "../../../../Core/Presentation/React/ModalManager/ModalManagerPresenter";
+import ModalManagerViewModel from "../../../../Core/Presentation/React/ModalManager/ModalManagerViewModel";
 import IViewModelControllerProvider from "../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
-const learningWorldPortMock = mock<ILearningWorldPort>();
+const UIPortMock = mock<IUIPort>();
 
-describe("LearningElementsDropdownBuilder", () => {
-  let systemUnderTest: LearningElementsDropdownBuilder;
+describe("ModalManagerBuilder", () => {
+  let systemUnderTest: ModalManagerBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      learningWorldPortMock
-    );
+    CoreDIContainer.rebind(PORT_TYPES.IUIPort).toConstantValue(UIPortMock);
     CoreDIContainer.rebind(
       CORE_TYPES.IViewModelControllerProvider
     ).toConstantValue(viewModelControllerProviderMock);
   });
 
   beforeEach(() => {
-    systemUnderTest = new LearningElementsDropdownBuilder();
+    systemUnderTest = new ModalManagerBuilder();
   });
 
   afterAll(() => {
@@ -40,7 +38,7 @@ describe("LearningElementsDropdownBuilder", () => {
 
     expect(systemUnderTest["controller"]).toBeDefined();
     expect(systemUnderTest["controller"]).toBeInstanceOf(
-      LearningElementsDropdownController
+      ModalManagerController
     );
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledTimes(
       1
@@ -48,7 +46,7 @@ describe("LearningElementsDropdownBuilder", () => {
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledWith(
       systemUnderTest["viewModel"],
       systemUnderTest["controller"],
-      LearningElementsDropdownViewModel
+      ModalManagerViewModel
     );
   });
 
@@ -57,14 +55,10 @@ describe("LearningElementsDropdownBuilder", () => {
     systemUnderTest.buildPresenter();
 
     expect(systemUnderTest["presenter"]).toBeDefined();
-    expect(systemUnderTest["presenter"]).toBeInstanceOf(
-      LearningElementsDropdownPresenter
+    expect(systemUnderTest["presenter"]).toBeInstanceOf(ModalManagerPresenter);
+    expect(UIPortMock.registerModalManager).toHaveBeenCalledTimes(1);
+    expect(UIPortMock.registerModalManager).toHaveBeenCalledWith(
+      systemUnderTest["presenter"]
     );
-    expect(
-      learningWorldPortMock.registerLearningElementDropdownPresenter
-    ).toHaveBeenCalledTimes(1);
-    expect(
-      learningWorldPortMock.registerLearningElementDropdownPresenter
-    ).toHaveBeenCalledWith(systemUnderTest["presenter"]);
   });
 });
