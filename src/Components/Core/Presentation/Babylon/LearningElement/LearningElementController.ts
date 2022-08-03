@@ -11,11 +11,12 @@ export default class LearningElementController
   implements ILearningElementController
 {
   constructor(private viewModel: LearningElementViewModel) {}
+
   @bind
   pointerOver(): void {
-    const port = CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort);
-
-    port.displayLearningElementTooltip({
+    CoreDIContainer.get<IUIPort>(
+      PORT_TYPES.IUIPort
+    ).displayLearningElementTooltip({
       name: this.viewModel.name.Value,
       learningElementData: this.viewModel.learningElementData.Value,
       id: this.viewModel.id,
@@ -29,11 +30,9 @@ export default class LearningElementController
 
   @bind
   clicked(): void {
-    const useCase = CoreDIContainer.get<ILearningElementStartedUseCase>(
+    CoreDIContainer.get<ILearningElementStartedUseCase>(
       USECASE_TYPES.ILearningElementStartedUseCase
-    );
-
-    useCase.execute({
+    ).execute({
       learningElementId: this.viewModel.id,
     });
   }

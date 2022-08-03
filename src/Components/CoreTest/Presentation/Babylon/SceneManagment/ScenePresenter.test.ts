@@ -1,4 +1,11 @@
-import { Mesh, NullEngine, Scene } from "@babylonjs/core";
+import {
+  ISceneLoaderAsyncResult,
+  ISceneLoaderProgressEvent,
+  Mesh,
+  NullEngine,
+  Scene,
+  SceneLoader,
+} from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
@@ -44,6 +51,47 @@ describe("scenePresenter", () => {
     systemUnderTest["viewModel"].scene = createdScene;
 
     expect(systemUnderTest.Scene).toBe(createdScene);
+  });
+
+  test("loadModel calls SceneLoader.ImportMeshAsync", async () => {
+    const url = "test.glb";
+    const meshMock = mock<Mesh>();
+    const onProgress = (event: ISceneLoaderProgressEvent) => {};
+    SceneLoader.ImportMeshAsync = jest.fn().mockImplementation(() => {
+      let result = mock<ISceneLoaderAsyncResult>();
+      //@ts-ignore
+      result.meshes = [meshMock];
+      return Promise.resolve(result);
+    });
+
+    let result = await systemUnderTest.loadModel(url, false, onProgress);
+
+    expect(SceneLoader.ImportMeshAsync).toHaveBeenCalledTimes(1);
+    expect(SceneLoader.ImportMeshAsync).toHaveBeenCalledWith(
+      "",
+      url,
+      "",
+      systemUnderTest["viewModel"].scene,
+      onProgress
+    );
+    expect(result).toEqual([meshMock]);
+  });
+
+  test("loadModel adds mesh to navigation meshes, when isRelevantForNavigation in set true", async () => {
+    const url = "test.glb";
+    const meshMock = mock<Mesh>();
+    SceneLoader.ImportMeshAsync = jest.fn().mockImplementation(() => {
+      let result = mock<ISceneLoaderAsyncResult>();
+      //@ts-ignore
+      result.meshes = [meshMock];
+      return Promise.resolve(result);
+    });
+
+    await systemUnderTest.loadModel(url, true);
+
+    expect(SceneLoader.ImportMeshAsync).toHaveBeenCalledTimes(1);
+    expect(systemUnderTest["viewModel"].navigationMeshes).toHaveLength(1);
+    expect(systemUnderTest["viewModel"].navigationMeshes).toContain(meshMock);
   });
 
   test("createMesh creates a mesh", () => {

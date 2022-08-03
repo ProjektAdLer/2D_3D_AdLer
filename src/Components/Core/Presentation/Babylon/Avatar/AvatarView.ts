@@ -150,12 +150,9 @@ export default class AvatarView {
   }
 
   // TODO: this debug function needs to be excluded from the build
-  /* istanbul ignore next */
   private velocityLine: LinesMesh;
-  /* istanbul ignore next */
   private counter: number = 0;
 
-  /* istanbul ignore next */
   private debug_displayVelocity = (
     viewModel: AvatarViewModel,
     scenePresenter: IScenePresenter,
