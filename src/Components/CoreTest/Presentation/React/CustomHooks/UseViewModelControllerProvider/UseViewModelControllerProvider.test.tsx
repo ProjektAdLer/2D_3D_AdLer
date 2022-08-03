@@ -1,7 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import useViewModelControllerProvider from "../../../../../Core/Presentation/React/CustomHooks/useViewModelControllerProvider";
 import Observable from "../../../../../../Lib/Observable";
-import * as useInjection from "inversify-react";
 import { Provider } from "inversify-react";
 import { mock } from "jest-mock-extended";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
