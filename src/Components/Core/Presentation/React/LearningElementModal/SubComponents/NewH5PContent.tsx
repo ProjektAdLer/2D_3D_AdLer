@@ -24,16 +24,16 @@ export default function NewH5PContent({
             config.serverURL +
             "/TestH5P/" +
             viewModel.learningElementData.Value.fileName,
-          frameJs: config.serverURL + "/TestH5P/" + "/h5pBase/frame.bundle.js",
-          frameCss: config.serverURL + "/TestH5P/" + "/h5pBase/styles/h5p.css",
+          frameJs: config.serverURL + "/TestH5P/" + "h5pBase/frame.bundle.js",
+          frameCss: config.serverURL + "/TestH5P/" + "h5pBase/styles/h5p.css",
         };
-        new H5PPlayer(el, options).then(() => {
-          //@ts-ignore
-          H5P.externalDispatcher.on("xAPI", (event: any) => {
-            //do something useful with the event
-            logger.log("xAPI event: ", event);
-          });
-        });
+
+        await new H5PPlayer(el, options);
+        //@ts-ignore
+        // H5P.externalDispatcher.on("xAPI", (event: any) => {
+        //   //do something useful with the event
+        //   logger.log("xAPI event: ", event);
+        // });
 
         setH5pShown(true);
       }
