@@ -6,7 +6,7 @@ import * as useViewModelControllerProvider from "../../../../../Core/Presentatio
  *
  */
 export default function useViewModelControllerProviderMock<VM, C>(
-  mockedTupels: [VM[], C[]]
+  mockedTupels: [VM[], C[]] = [[], []]
 ) {
   jest
     .spyOn(useViewModelControllerProvider, "default")
