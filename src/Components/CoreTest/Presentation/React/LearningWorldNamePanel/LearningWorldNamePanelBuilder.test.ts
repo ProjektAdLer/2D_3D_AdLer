@@ -3,17 +3,17 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldPort from "../../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
-import LearningElementsDropdownBuilder from "../../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownBuilder";
-import LearningElementsDropdownController from "../../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownController";
-import LearningElementsDropdownPresenter from "../../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownPresenter";
-import LearningElementsDropdownViewModel from "../../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownViewModel";
+import LearningWorldNamePanelBuilder from "../../../../Core/Presentation/React/LearningWorldNamePanel/LearningWorldNamePanelBuilder";
+import LearningWorldNamePanelController from "../../../../Core/Presentation/React/LearningWorldNamePanel/LearningWorldNamePanelController";
+import LearningWorldNamePanelPresenter from "../../../../Core/Presentation/React/LearningWorldNamePanel/LearningWorldNamePanelPresenter";
+import LearningWorldNamePanelViewModel from "../../../../Core/Presentation/React/LearningWorldNamePanel/LearningWorldNamePanelViewModel";
 import IViewModelControllerProvider from "../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
 const learningWorldPort = mock<ILearningWorldPort>();
 
-describe("LearningElementsDropdownBuilder", () => {
-  let systemUnderTest: LearningElementsDropdownBuilder;
+describe("LearningWorldNamePanelBuilder", () => {
+  let systemUnderTest: LearningWorldNamePanelBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -27,7 +27,7 @@ describe("LearningElementsDropdownBuilder", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new LearningElementsDropdownBuilder();
+    systemUnderTest = new LearningWorldNamePanelBuilder();
   });
 
   afterAll(() => {
@@ -40,7 +40,7 @@ describe("LearningElementsDropdownBuilder", () => {
 
     expect(systemUnderTest["controller"]).toBeDefined();
     expect(systemUnderTest["controller"]).toBeInstanceOf(
-      LearningElementsDropdownController
+      LearningWorldNamePanelController
     );
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledTimes(
       1
@@ -48,7 +48,7 @@ describe("LearningElementsDropdownBuilder", () => {
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledWith(
       systemUnderTest["viewModel"],
       systemUnderTest["controller"],
-      LearningElementsDropdownViewModel
+      LearningWorldNamePanelViewModel
     );
   });
 
@@ -58,13 +58,13 @@ describe("LearningElementsDropdownBuilder", () => {
 
     expect(systemUnderTest["presenter"]).toBeDefined();
     expect(systemUnderTest["presenter"]).toBeInstanceOf(
-      LearningElementsDropdownPresenter
+      LearningWorldNamePanelPresenter
     );
     expect(
-      learningWorldPort.registerLearningElementDropdownPresenter
+      learningWorldPort.registerLearningWorldPanelPresenter
     ).toHaveBeenCalledTimes(1);
     expect(
-      learningWorldPort.registerLearningElementDropdownPresenter
+      learningWorldPort.registerLearningWorldPanelPresenter
     ).toHaveBeenCalledWith(systemUnderTest["presenter"]);
   });
 });
