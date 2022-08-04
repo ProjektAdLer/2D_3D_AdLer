@@ -5,12 +5,12 @@ import LearningElementModal from "../LearningElementModal/LearningElementModal";
 import useIsMobilePortrait from "../CustomHooks/useIsMobilePortrait";
 import StyledModal from "../ReactBaseComponents/StyledModal";
 import React from "react";
-import LogoMenuBar from "../ReactAdvancedComponents/LogoMenuBar";
+import LogoMenuBar from "~ReactComponents/ReactAdvancedComponents/LogoMenuBar";
 import LearningElementsDropdown from "../LearningElementsDropdown/LearningElementsDropdown";
 import ModalManager from "../ModalManager/ModalManager";
 import MoodleLoginForm from "../MoodleLoginForm/MoodleLoginForm";
 import BottomTooltip from "../BottomTooltip/BottomTooltip";
-import LearningWorldNamePanel from "../LearningWorldNamePanel/LearningWorldNamePanel";
+import LearningWorldNamePanel from "~ReactComponents/LearningWorldNamePanel/LearningWorldNamePanel";
 
 function App() {
   return (

@@ -3,6 +3,7 @@
 
 const { override, addBabelPlugin } = require("customize-cra");
 const babelTsTransformPlugin = require("babel-plugin-transform-typescript-metadata");
+var path = require("path");
 
 // Environment Variables can be set here
 // IMPORTANT: environment variables, that contain a Secret are set in .env.development or .env.production
@@ -15,6 +16,14 @@ module.exports = {
       path: require.resolve("path-browserify"),
       fs: false,
     });
+
+    config.resolve.alias = {
+      "~ReactComponents": path.resolve(
+        __dirname,
+        "src/Components/Core/Presentation/React/"
+      ),
+    };
+
     config.resolve.fallback = fallback;
 
     return config;

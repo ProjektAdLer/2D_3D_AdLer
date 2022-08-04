@@ -36,7 +36,10 @@
   "jest": {
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/(?!@babylonjs)(.*)"
-    ]
+    ],
+    "moduleNameMapper": {
+      "^~ReactComponents(.*)$": "<rootDir>/src/Components/Core/Presentation/React/$1"
+    }
   },
   "browserslist": {
     "production": [
