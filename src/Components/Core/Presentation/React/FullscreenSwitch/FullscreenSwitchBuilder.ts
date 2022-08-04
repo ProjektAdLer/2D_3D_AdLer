@@ -7,19 +7,6 @@ import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import ViewModelControllerProvider from "../../ViewModelProvider/ViewModelControllerProvider";
 
-/*
-This Template Provides the whole scaffolding for a React Component.
-Copy below lines in the DI Container and its Types
-
-bind<IPresentationBuilder>(BUILDER_TYPES.IFullscreenSwitchBuilder).to(FullscreenSwitchBuilder);
-IFullscreenSwitchBuilder: Symbol("IFullscreenSwitchBuilder"),
-
-director.Builder = CoreDIContainer.get<IPresentationBuilder>(
-  BUILDER_TYPES.IFullscreenSwitchBuilder
-);
-director.build();
-*/
-
 @injectable()
 export default class FullscreenSwitchBuilder extends PresentationBuilder<
   FullscreenSwitchViewModel,
