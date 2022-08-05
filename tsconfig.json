@@ -27,7 +27,8 @@
     "strictPropertyInitialization": false,
     "baseUrl": ".",
     "paths": {
-      "~ReactComponents/*": ["src/Components/Core/Presentation/React/*"]
+      "~ReactComponents/*": ["src/Components/Core/Presentation/React/*"],
+      "~DependencyInjection/*": ["src/Components/Core/DependencyInjection/*"]
     }
   },
   "include": ["src", "public/ThirdParty"],
