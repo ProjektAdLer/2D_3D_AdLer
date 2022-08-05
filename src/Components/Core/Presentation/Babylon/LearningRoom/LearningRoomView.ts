@@ -4,6 +4,8 @@ import {
   StandardMaterial,
   Texture,
   PolygonMeshBuilder,
+  MeshBuilder,
+  Vector3,
 } from "@babylonjs/core";
 import LearningRoomViewModel from "./LearningRoomViewModel";
 import floorTexture from "../../../../../Assets/Texture_Floor_Parquet3.png";
@@ -66,19 +68,19 @@ export default class LearningRoomView implements ILearningRoomView {
   }
 
   public displayRoom(): void {
+    // Errorhandling: Check if cornerCount is higher than 2
+    if (this.viewModel.roomCornerPoints.Value.length < 3)
+      throw new Error(
+        "Not enough corners found to generate room. Please review the Roomdata."
+      );
     // TODO: create walls via roomCornerPoints ~ FK
+    this.createWallViaCorners();
     this.createFloorViaCorners();
     //creating floor via roomCornerPoints ~ FK
   }
 
   private createFloorViaCorners(): void {
-    // Errorhandling: Check if cornerCount is higher than 2
     const cornerCount = this.viewModel.roomCornerPoints.Value.length;
-    if (cornerCount < 3)
-      throw new Error(
-        "Not enough corners found to generate floor. Please review the Roomdata."
-      );
-
     // Create Mesh
     // Initial Starting Point
     let polyPath = new Path2(
@@ -116,5 +118,56 @@ export default class LearningRoomView implements ILearningRoomView {
       this.viewModel.floorMesh.Value.material =
         this.viewModel.floorMaterial.Value;
     }
+  }
+
+  private createWallViaCorners(): void {
+    const cornerCount = this.viewModel.roomCornerPoints.Value.length;
+    for (let i = 0; i < cornerCount; i++) {
+      const corner = Object.values(this.viewModel.roomCornerPoints.Value[i]);
+      const nextCorner = Object.values(
+        this.viewModel.roomCornerPoints.Value[(i + 1) % cornerCount]
+      );
+      this.createWallSegment(corner, nextCorner);
+    }
+  }
+
+  private createWallSegment(corner1: number[], corner2: number[]): void {
+    //debug
+    const points = [
+      new Vector3(corner1[0], 0, corner1[1]),
+      new Vector3(corner2[0], 0, corner2[1]),
+    ];
+    MeshBuilder.CreateLines(
+      "debug Lines",
+      { points: points },
+      this.scenePresenter.Scene
+    );
+    console.log("corner2[0]", corner2[0]);
+    //enddebug
+    const WallLength = Math.sqrt(
+      Math.pow(corner2[0] - corner1[0], 2) +
+        Math.pow(corner2[1] - corner1[1], 2)
+    );
+    let wallSegmentOptions = {
+      height: this.viewModel.roomHeight.Value,
+      width: WallLength,
+      depth: this.viewModel.wallThickness.Value,
+    };
+    const wallSegment = MeshBuilder.CreateBox(
+      "Wallsegment",
+      wallSegmentOptions,
+      this.scenePresenter.Scene
+    );
+    wallSegment.position.x = (corner1[0] + corner2[0]) / 2;
+    wallSegment.position.y = this.viewModel.baseHeight.Value || 0;
+    wallSegment.position.z = (corner1[1] + corner2[1]) / 2;
+    wallSegment.rotation.y = Math.atan2(
+      corner2[1] - corner1[1],
+      corner2[0] - corner1[0]
+    );
+    wallSegment.material = new StandardMaterial(
+      "wallMaterial",
+      this.scenePresenter.Scene
+    );
   }
 }
