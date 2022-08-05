@@ -5,6 +5,8 @@ const { override, addBabelPlugin } = require("customize-cra");
 const babelTsTransformPlugin = require("babel-plugin-transform-typescript-metadata");
 var path = require("path");
 
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+
 // Environment Variables can be set here
 // IMPORTANT: environment variables, that contain a Secret are set in .env.development or .env.production
 process.env.GENERATE_SOURCEMAP = "false"; // disable sourcemap generation (removes warnings while building)
@@ -17,14 +19,9 @@ module.exports = {
       fs: false,
     });
 
-    config.resolve.alias = {
-      "~ReactComponents": path.resolve(
-        __dirname,
-        "src/Components/Core/Presentation/React/"
-      ),
-    };
-
     config.resolve.fallback = fallback;
+
+    config.resolve.plugins = [new TsconfigPathsPlugin()];
 
     return config;
   }),
@@ -57,6 +54,19 @@ module.exports = {
     config.setupFiles = ["./jest-setup-files.ts"];
     config.verbose = true;
 
+    config.moduleNameMapper = addJestMappings();
+
     return config;
   },
 };
+function addJestMappings() {
+  const tsConfig = require(path.resolve(__dirname, "tsconfig.json"));
+  const obj = {};
+  for (const key in tsConfig.compilerOptions.paths) {
+    obj["^" + key.replace("/*", "(.*)$")] =
+      "<rootDir>/" +
+      tsConfig.compilerOptions.paths[key][0].replace("/*", "/$1");
+  }
+  obj["^src/(.*)$"] = "<rootDir>/src/$1";
+  return obj;
+}
