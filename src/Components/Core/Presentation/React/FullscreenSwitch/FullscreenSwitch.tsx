@@ -1,16 +1,20 @@
-import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import FullscreenSwitchController from "./FullscreenSwitchController";
 import FullscreenSwitchViewModel from "./FullscreenSwitchViewModel";
 import fullscreenIcon from "../../../../../Assets/icons/fullscreen-icon.svg";
+import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 
 export default function FullscreenSwitch() {
-  const [viewModels, controllers] = useViewModelControllerProvider<
+  const [, controller] = useBuilder<
     FullscreenSwitchViewModel,
     FullscreenSwitchController
-  >(FullscreenSwitchViewModel);
+  >(BUILDER_TYPES.IFullscreenSwitchBuilder);
+
+  if (!controller) return null;
+
   return (
-    <StyledButton onClick={controllers[0]?.toggleFullscreen}>
+    <StyledButton onClick={controller?.toggleFullscreen}>
       <img className="w-6 lg:w-10" src={fullscreenIcon}></img>
     </StyledButton>
   );
