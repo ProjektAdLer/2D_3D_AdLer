@@ -6,6 +6,7 @@ import {
   PolygonMeshBuilder,
   MeshBuilder,
   Vector3,
+  Mesh,
 } from "@babylonjs/core";
 import LearningRoomViewModel from "./LearningRoomViewModel";
 import floorTexture from "../../../../../Assets/Texture_Floor_Parquet3.png";
@@ -74,12 +75,16 @@ export default class LearningRoomView implements ILearningRoomView {
         "Not enough corners found to generate room. Please review the Roomdata."
       );
     // TODO: create walls via roomCornerPoints ~ FK
+    this.cleanupOldWalls();
     this.createWalls();
     this.createWallCornerPoles();
     this.createFloor();
     //creating floor via roomCornerPoints ~ FK
   }
 
+  private cleanupOldWalls(): void {
+    this.scenePresenter.Scene.removeMesh("WallSegment");
+  }
   private createFloor(): void {
     const cornerCount = this.viewModel.roomCornerPoints.Value.length;
     // Create Mesh
@@ -132,7 +137,7 @@ export default class LearningRoomView implements ILearningRoomView {
     }
   }
 
-  private createWallSegment(corner1: number[], corner2: number[]): void {
+  private createWallSegment(corner1: number[], corner2: number[]): Mesh {
     const WallLength = Math.sqrt(
       Math.pow(corner2[0] - corner1[0], 2) +
         Math.pow(corner2[1] - corner1[1], 2)
@@ -143,10 +148,11 @@ export default class LearningRoomView implements ILearningRoomView {
       depth: this.viewModel.wallThickness.Value,
     };
     const wallSegment = MeshBuilder.CreateBox(
-      "Wallsegment",
+      "WallSegment",
       wallSegmentOptions,
       this.scenePresenter.Scene
     );
+
     wallSegment.position.x = (corner1[0] + corner2[0]) / 2;
     wallSegment.position.y = this.viewModel.baseHeight.Value || 0;
     wallSegment.position.z = (corner1[1] + corner2[1]) / 2;
@@ -159,6 +165,7 @@ export default class LearningRoomView implements ILearningRoomView {
       this.scenePresenter.Scene
     );
     this.applyWallColor();
+    return wallSegment;
   }
 
   private applyWallColor(): void {
