@@ -74,12 +74,13 @@ export default class LearningRoomView implements ILearningRoomView {
         "Not enough corners found to generate room. Please review the Roomdata."
       );
     // TODO: create walls via roomCornerPoints ~ FK
-    this.createWallViaCorners();
-    this.createFloorViaCorners();
+    this.createWalls();
+    this.createWallCornerPoles();
+    this.createFloor();
     //creating floor via roomCornerPoints ~ FK
   }
 
-  private createFloorViaCorners(): void {
+  private createFloor(): void {
     const cornerCount = this.viewModel.roomCornerPoints.Value.length;
     // Create Mesh
     // Initial Starting Point
@@ -120,7 +121,7 @@ export default class LearningRoomView implements ILearningRoomView {
     }
   }
 
-  private createWallViaCorners(): void {
+  private createWalls(): void {
     const cornerCount = this.viewModel.roomCornerPoints.Value.length;
     for (let i = 0; i < cornerCount; i++) {
       const corner = Object.values(this.viewModel.roomCornerPoints.Value[i]);
@@ -132,18 +133,6 @@ export default class LearningRoomView implements ILearningRoomView {
   }
 
   private createWallSegment(corner1: number[], corner2: number[]): void {
-    //debug
-    const points = [
-      new Vector3(corner1[0], 0, corner1[1]),
-      new Vector3(corner2[0], 0, corner2[1]),
-    ];
-    MeshBuilder.CreateLines(
-      "debug Lines",
-      { points: points },
-      this.scenePresenter.Scene
-    );
-    console.log("corner2[0]", corner2[0]);
-    //enddebug
     const WallLength = Math.sqrt(
       Math.pow(corner2[0] - corner1[0], 2) +
         Math.pow(corner2[1] - corner1[1], 2)
@@ -173,7 +162,37 @@ export default class LearningRoomView implements ILearningRoomView {
   }
 
   private applyWallColor(): void {
-    this.viewModel.wallMaterial.Value.diffuseColor =
-      this.viewModel.wallColor.Value;
+    this.viewModel.wallMaterial.Value &&
+      (this.viewModel.wallMaterial.Value.diffuseColor =
+        this.viewModel.wallColor.Value);
+  }
+
+  private createWallCornerPoles(): void {
+    const cornerCount = this.viewModel.roomCornerPoints.Value.length;
+    for (let i = 0; i < cornerCount; i++) {
+      const corner = Object.values(this.viewModel.roomCornerPoints.Value[i]);
+      this.createPole(corner);
+    }
+  }
+
+  private createPole(corner: number[]): void {
+    const poleOptions = {
+      height: this.viewModel.roomHeight.Value,
+      diameter: this.viewModel.wallThickness.Value * 1.5,
+    };
+    const pole = MeshBuilder.CreateCylinder(
+      "Pole",
+      poleOptions,
+      this.scenePresenter.Scene
+    );
+    pole.position.x = corner[0];
+    pole.position.y = this.viewModel.baseHeight.Value || 0;
+    pole.position.z = corner[1];
+
+    pole.material = new StandardMaterial(
+      "wallMaterial",
+      this.scenePresenter.Scene
+    );
+    this.applyWallColor();
   }
 }
