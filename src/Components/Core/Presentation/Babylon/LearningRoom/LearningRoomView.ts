@@ -49,7 +49,7 @@ export default class LearningRoomView implements ILearningRoomView {
       this.displayRoom();
     });
     this.viewModel.wallColor.subscribe(() => {
-      this.displayRoom();
+      this.applyWallColor();
     });
     this.viewModel.doorHeight.subscribe(() => {
       this.displayRoom();
@@ -169,5 +169,11 @@ export default class LearningRoomView implements ILearningRoomView {
       "wallMaterial",
       this.scenePresenter.Scene
     );
+    this.applyWallColor();
+  }
+
+  private applyWallColor(): void {
+    this.viewModel.wallMaterial.Value.diffuseColor =
+      this.viewModel.wallColor.Value;
   }
 }
