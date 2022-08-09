@@ -74,16 +74,35 @@ export default class LearningRoomView implements ILearningRoomView {
       throw new Error(
         "Not enough corners found to generate room. Please review the Roomdata."
       );
-    // TODO: create walls via roomCornerPoints ~ FK
     this.cleanupOldWalls();
+    this.cleanupOldPoles();
     this.createWalls();
     this.createWallCornerPoles();
     this.createFloor();
-    //creating floor via roomCornerPoints ~ FK
+  }
+
+  private cleanupOldPoles(): void {
+    if (!this.viewModel.cornerPoleMeshes.Value) {
+      this.viewModel.cornerPoleMeshes.Value = [];
+      return;
+    }
+    const cornerPoleMeshesArray = this.viewModel.cornerPoleMeshes.Value;
+    for (let i = 0; i < cornerPoleMeshesArray.length; i++) {
+      cornerPoleMeshesArray[i].dispose();
+    }
+    this.viewModel.cornerPoleMeshes.Value = [];
   }
 
   private cleanupOldWalls(): void {
-    this.scenePresenter.Scene.removeMesh("WallSegment");
+    if (!this.viewModel.wallMeshes.Value) {
+      this.viewModel.wallMeshes.Value = [];
+      return;
+    }
+    const wallMeshesArray = this.viewModel.wallMeshes.Value;
+    for (let i = 0; i < wallMeshesArray.length; i++) {
+      wallMeshesArray[i].dispose();
+    }
+    this.viewModel.wallMeshes.Value = [];
   }
   private createFloor(): void {
     const cornerCount = this.viewModel.roomCornerPoints.Value.length;
@@ -133,7 +152,10 @@ export default class LearningRoomView implements ILearningRoomView {
       const nextCorner = Object.values(
         this.viewModel.roomCornerPoints.Value[(i + 1) % cornerCount]
       );
-      this.createWallSegment(corner, nextCorner);
+      this.viewModel.wallMeshes.Value[i] = this.createWallSegment(
+        corner,
+        nextCorner
+      );
     }
   }
 
@@ -168,6 +190,7 @@ export default class LearningRoomView implements ILearningRoomView {
     return wallSegment;
   }
 
+  //todo: paint the right wall
   private applyWallColor(): void {
     this.viewModel.wallMaterial.Value &&
       (this.viewModel.wallMaterial.Value.diffuseColor =
@@ -178,11 +201,11 @@ export default class LearningRoomView implements ILearningRoomView {
     const cornerCount = this.viewModel.roomCornerPoints.Value.length;
     for (let i = 0; i < cornerCount; i++) {
       const corner = Object.values(this.viewModel.roomCornerPoints.Value[i]);
-      this.createPole(corner);
+      this.viewModel.cornerPoleMeshes.Value[i] = this.createPole(corner);
     }
   }
 
-  private createPole(corner: number[]): void {
+  private createPole(corner: number[]): Mesh {
     const poleOptions = {
       height: this.viewModel.roomHeight.Value,
       diameter: this.viewModel.wallThickness.Value * 1.5,
@@ -201,5 +224,6 @@ export default class LearningRoomView implements ILearningRoomView {
       this.scenePresenter.Scene
     );
     this.applyWallColor();
+    return pole;
   }
 }
