@@ -76,11 +76,19 @@ export default class LearningRoomView implements ILearningRoomView {
       );
     this.cleanupOldWalls();
     this.cleanupOldPoles();
+    this.cleanupOldFloor();
     this.createWalls();
     this.createWallCornerPoles();
     this.createFloor();
   }
 
+  private cleanupOldFloor(): void {
+    if (!this.viewModel.floorMesh.Value) {
+      return;
+    }
+    const floorMesh = this.viewModel.floorMesh.Value;
+    floorMesh.dispose();
+  }
   private cleanupOldPoles(): void {
     if (!this.viewModel.cornerPoleMeshes.Value) {
       this.viewModel.cornerPoleMeshes.Value = [];
@@ -122,27 +130,27 @@ export default class LearningRoomView implements ILearningRoomView {
       "FloorPolyMesh",
       this.viewModel.roomCornerPoints.Value
     );
-    if (!this.viewModel.floorMesh.Value) {
-      this.viewModel.floorMesh.Value = polyMesh.build();
-    }
+    // if (!this.viewModel.floorMesh.Value) {
+    this.viewModel.floorMesh.Value = polyMesh.build();
+    // }
     this.scenePresenter.registerNavigationMesh(this.viewModel.floorMesh.Value);
 
     // Floor Material and Texture
-    if (!this.viewModel.floorMaterial.Value) {
-      this.viewModel.floorMaterial.Value = new StandardMaterial(
-        "floorMaterial",
-        this.scenePresenter.Scene
-      );
+    // if (!this.viewModel.floorMaterial.Value) {
+    this.viewModel.floorMaterial.Value = new StandardMaterial(
+      "floorMaterial",
+      this.scenePresenter.Scene
+    );
 
-      this.viewModel.floorMaterial.Value.diffuseTexture = new Texture(
-        floorTexture,
-        this.scenePresenter.Scene
-      );
-      (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).uScale = 2;
-      (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 2;
-      this.viewModel.floorMesh.Value.material =
-        this.viewModel.floorMaterial.Value;
-    }
+    this.viewModel.floorMaterial.Value.diffuseTexture = new Texture(
+      floorTexture,
+      this.scenePresenter.Scene
+    );
+    (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).uScale = 2;
+    (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 2;
+    this.viewModel.floorMesh.Value.material =
+      this.viewModel.floorMaterial.Value;
+    // }
   }
 
   private createWalls(): void {
@@ -190,7 +198,6 @@ export default class LearningRoomView implements ILearningRoomView {
     return wallSegment;
   }
 
-  //todo: paint the right wall
   private applyWallColor(): void {
     this.viewModel.wallMaterial.Value &&
       (this.viewModel.wallMaterial.Value.diffuseColor =
