@@ -50,7 +50,7 @@ export default class LearningRoomPresenter implements ILearningRoomPresenter {
     this.viewModel.roomLength.Value =
       (learningRoomTO.learningElements.length / 2) * 4;
     this.viewModel.roomWidth.Value =
-      learningRoomTO.learningElements.length > 1 ? 10 : 6;
+      learningRoomTO.learningElements.length > 1 ? 8 : 6;
   }
 
   private setRoomCornersSquare(): void {
@@ -92,19 +92,20 @@ export default class LearningRoomPresenter implements ILearningRoomPresenter {
     elementCount: number
   ): [Vector3, number][] {
     let positions: [Vector3, number][] = [];
-    let sideOffset = -1;
+    let sideAlternation = -1;
+    const sideOffset = 0.9;
 
     for (let i = 0; i < elementCount; i++) {
       positions.push([
         new Vector3(
-          (this.viewModel.roomWidth.Value / 2) * sideOffset,
+          this.viewModel.roomWidth.Value * sideOffset * sideAlternation,
           this.viewModel.baseHeight.Value,
           (this.viewModel.roomLength.Value / (elementCount + 1)) * (i + 1) -
             this.viewModel.roomLength.Value / 2
         ),
-        sideOffset === 1 ? 0 : 180,
+        sideAlternation >= 0 ? 0 : 180,
       ]);
-      sideOffset *= -1;
+      sideAlternation *= -1;
     }
     return positions;
   }
@@ -127,8 +128,7 @@ export default class LearningRoomPresenter implements ILearningRoomPresenter {
       new Vector3(
         this.viewModel.doorWidth.Value / 2,
         this.viewModel.baseHeight.Value,
-        -(this.viewModel.roomLength.Value / 2) -
-          this.viewModel.wallThickness.Value / 2
+        -this.viewModel.roomLength.Value - this.viewModel.wallThickness.Value
       ),
       -90,
     ];
