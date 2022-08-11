@@ -1,11 +1,9 @@
 import {
   Path2,
-  VertexData,
   StandardMaterial,
   Texture,
   PolygonMeshBuilder,
   MeshBuilder,
-  Vector3,
   Mesh,
 } from "@babylonjs/core";
 import LearningRoomViewModel from "./LearningRoomViewModel";
@@ -65,7 +63,7 @@ export default class LearningRoomView implements ILearningRoomView {
     // TODO: setup subscription cancellations
 
     // initial render
-    this.displayRoom();
+    // this.displayRoom();
   }
 
   public displayRoom(): void {
@@ -130,13 +128,11 @@ export default class LearningRoomView implements ILearningRoomView {
       "FloorPolyMesh",
       this.viewModel.roomCornerPoints.Value
     );
-    // if (!this.viewModel.floorMesh.Value) {
+
     this.viewModel.floorMesh.Value = polyMesh.build();
-    // }
     this.scenePresenter.registerNavigationMesh(this.viewModel.floorMesh.Value);
 
     // Floor Material and Texture
-    // if (!this.viewModel.floorMaterial.Value) {
     this.viewModel.floorMaterial.Value = new StandardMaterial(
       "floorMaterial",
       this.scenePresenter.Scene
@@ -150,7 +146,6 @@ export default class LearningRoomView implements ILearningRoomView {
     (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 2;
     this.viewModel.floorMesh.Value.material =
       this.viewModel.floorMaterial.Value;
-    // }
   }
 
   private createWalls(): void {

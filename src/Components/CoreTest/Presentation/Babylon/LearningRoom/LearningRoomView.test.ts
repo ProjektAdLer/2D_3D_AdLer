@@ -1,6 +1,12 @@
 import LearningRoomView from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomView";
 import LearningRoomViewModel from "../../../../Core/Presentation/Babylon/LearningRoom/LearningRoomViewModel";
-import { Color3, Mesh, StandardMaterial, Vector2 } from "@babylonjs/core";
+import {
+  Color3,
+  Mesh,
+  NullEngine,
+  StandardMaterial,
+  Vector2,
+} from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import ILearningRoomController from "../../../../Core/Presentation/Babylon/LearningRoom/ILearningRoomController";
@@ -9,7 +15,7 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 
 const roomControllerMock = mock<ILearningRoomController>();
 const scenePresenterMock = mock<IScenePresenter>();
-
+const babylonMock = new NullEngine();
 describe("LearningRoomView", () => {
   let systemUnderTest: LearningRoomView;
   let viewModel: LearningRoomViewModel;
