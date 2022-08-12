@@ -61,9 +61,6 @@ export default class LearningRoomView implements ILearningRoomView {
     });
 
     // TODO: setup subscription cancellations
-
-    // initial render
-    // this.displayRoom();
   }
 
   public displayRoom(): void {

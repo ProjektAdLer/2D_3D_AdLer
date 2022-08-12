@@ -39,6 +39,20 @@ describe("LearningRoomView", () => {
     CoreDIContainer.restore();
   });
 
+  test("cleanup Old Walls returns if viewModel.wallMeshes is empty", () => {
+    expect(() => {
+      //@ts-ignore
+      new LearningRoomView(viewModel, undefined);
+    }).toReturn();
+  });
+
+  test("cleanup Old Walls removes any wallsMeshes in the viewModel", () => {
+    expect(() => {
+      //@ts-ignore
+      new LearningRoomView(undefined, undefined);
+    }).toReturn();
+  });
+
   test("createFloorViaCorners throws error if viewModel is not set", () => {
     expect(() => {
       //@ts-ignore
