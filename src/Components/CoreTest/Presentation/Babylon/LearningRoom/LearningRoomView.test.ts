@@ -39,37 +39,36 @@ describe("LearningRoomView", () => {
     CoreDIContainer.restore();
   });
 
-  test("cleanup Old Walls returns if viewModel.wallMeshes is empty", () => {
-    expect(() => {
-      //@ts-ignore
-      new LearningRoomView(viewModel, undefined);
-    }).toReturn();
-  });
-
-  test("cleanup Old Walls removes any wallsMeshes in the viewModel", () => {
-    expect(() => {
-      //@ts-ignore
-      new LearningRoomView(undefined, undefined);
-    }).toReturn();
-  });
-
-  test("createFloorViaCorners throws error if viewModel is not set", () => {
+  test("Learning Room View throws error if viewModel is not set", () => {
     expect(() => {
       //@ts-ignore
       new LearningRoomView(undefined, roomControllerMock);
     }).toThrowError("ViewModel is not set");
   });
 
-  test("createFloorViaCorners throws error if cornerCount is smaller than 3", () => {
+  test("displayRoom throws error if cornerCount is smaller than 3", () => {
     expect(() => {
       systemUnderTest["viewModel"].roomCornerPoints.Value = [
         new Vector2(5.3, 4.3),
         new Vector2(-5.3, 4.3),
       ];
     }).toThrowError(
-      "Not enough corners found to generate floor. Please review the Roomdata."
+      "Not enough corners found to generate room. Please review the Roomdata."
     );
   });
+
+  test("cleanup Old Walls returns if viewModel.wallMeshes is empty", () => {
+    systemUnderTest["viewModel"].wallMeshes.Value = [];
+    expect(viewModel.wallMeshes.Value).toBe([]);
+  });
+
+  test("cleanup Old Walls removes any wallMeshes in the viewModel", () => {
+    // Needs to be checked once more
+    systemUnderTest["wallMeshes"] = 1 as unknown as Mesh[];
+    expect(viewModel.wallMeshes.Value).toBe(undefined);
+  });
+
+  // copy paste for poles and floor
 
   test("change to roomHeight triggers callback to displayRoom", () => {
     const displayRoomMock = jest.spyOn(systemUnderTest, "displayRoom");

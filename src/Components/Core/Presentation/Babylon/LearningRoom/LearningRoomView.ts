@@ -96,7 +96,7 @@ export default class LearningRoomView implements ILearningRoomView {
     this.viewModel.cornerPoleMeshes.Value = [];
   }
 
-  private cleanupOldWalls(): void {
+  public cleanupOldWalls(): void {
     if (!this.viewModel.wallMeshes.Value) {
       this.viewModel.wallMeshes.Value = [];
       return;
