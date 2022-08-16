@@ -15,7 +15,7 @@ export default function FullscreenSwitch() {
 
   return (
     <StyledButton onClick={controller.toggleFullscreen}>
-      <img className="" src={fullscreenIcon}></img>
+      <img className="" src={fullscreenIcon} alt="Fullscreen-Icon"></img>
     </StyledButton>
   );
 }
