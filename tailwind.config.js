@@ -10,6 +10,7 @@ module.exports = {
         adlerdarkblue: "rgb(23,45,77)",
         adlergold: "rgb(229,189,115)",
         adlerbrown: "rgb(77,62,54)",
+        adlergreen: "#009900",
       },
     },
   },

@@ -18,15 +18,12 @@ export default function MoodleLoginButton() {
 
   return (
     <StyledButton
+      color={loginSuccessful ? "login" : "default"}
       onClick={() => {
         controllers[0].displayLoginForm();
       }}
     >
-      <img
-        className="w-6 lg:w-10 rounded-lg"
-        src={moodleIcon}
-        style={loginSuccessful ? { background: "green" } : {}}
-      ></img>
+      <img className="rounded-lg" src={moodleIcon} alt="Moodle-Logo"></img>
     </StyledButton>
   );
 }

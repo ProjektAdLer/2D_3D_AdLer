@@ -126,7 +126,7 @@ const mockDSL: DSL = {
           type: "FileName",
           value: "Metriken Einstiegsvideo",
         },
-        elementType: "h5p",
+        elementType: "text",
         learningElementValue: null,
         requirements: null,
         metaData: [
@@ -140,7 +140,7 @@ const mockDSL: DSL = {
           type: "FileName",
           value: "Metriken Schiebespiel",
         },
-        elementType: "h5p",
+        elementType: "video",
         learningElementValue: null,
         requirements: null,
         metaData: [

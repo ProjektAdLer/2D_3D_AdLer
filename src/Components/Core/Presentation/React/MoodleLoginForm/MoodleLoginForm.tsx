@@ -35,13 +35,13 @@ export default function MoodleLoginForm() {
     >
       <StyledContainer className="bg-adlergold ">
         <form
-          className="login-screen flex flex-col justify-center gap-2"
+          className="flex flex-col justify-center gap-2 login-screen"
           onSubmit={(e) => {
             e.preventDefault();
             handleSubmit();
           }}
         >
-          <div className="app-title flex justify-center text-white lg:text-2xl font-bold">
+          <div className="flex justify-center font-bold text-white app-title lg:text-2xl">
             <h1>In Moodle einloggen</h1>
           </div>
 
@@ -61,11 +61,12 @@ export default function MoodleLoginForm() {
             }}
           />
 
-          <StyledButton onClick={handleSubmit}>
+          <StyledButton shape="free" onClick={handleSubmit}>
             <p>Login</p>
           </StyledButton>
 
           <StyledButton
+            shape="free"
             onClick={() => {
               alert("Hier kannst du bald dein neues Passwort bekommen!");
             }}

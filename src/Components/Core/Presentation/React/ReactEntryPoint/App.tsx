@@ -15,23 +15,23 @@ import LearningWorldNamePanel from "~ReactComponents/LearningWorldNamePanel/Lear
 function App() {
   return (
     <React.Fragment>
-      <div className="root grid grid-cols-9 grid-rows-6 max-h-screen">
-        <div className="col-start-1 row-start-1 z-10">
+      <div className="grid max-h-screen grid-cols-9 grid-rows-6 root">
+        <div className="z-10 col-start-1 row-start-1">
           <LogoMenuBar />
         </div>
-        <div className="col-start-2 col-span-2 row-start-1 z-10">
+        <div className="z-10 col-span-2 col-start-2 row-start-1">
           <LearningElementsDropdown />
         </div>
-        <div className="col-start-9 col-span-2 row-start-1 z-10">
+        <div className="z-10 col-span-2 col-start-9 row-start-1">
           <ScorePanel />
         </div>
-        <div className="col-start-3 col-span-5 row-start-1 z-10">
+        <div className="z-10 col-span-5 col-start-3 row-start-1">
           <LearningWorldNamePanel />
         </div>
-        <div className="col-start-1 col-span-9 row-start-1 row-span-6">
+        <div className="col-span-9 col-start-1 row-span-6 row-start-1">
           <BabylonCanvas className="w-screen h-screen" />
         </div>
-        <div className="col-start-4 row-start-6 col-span-3 z-10">
+        <div className="z-10 col-span-3 col-start-4 row-start-6">
           <BottomTooltip />
         </div>
         <div className="z-10">
@@ -41,7 +41,7 @@ function App() {
           <MoodleLoginForm />
         </div>
         <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
-          <div className="text-lg text-white text-shadow-sm font-bold">
+          <div className="text-lg font-bold text-white text-shadow-sm">
             <h1>
               Die AdLer Engine ist für den<br></br>
               Landscape Modus konzipiert.<br></br>

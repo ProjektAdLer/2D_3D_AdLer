@@ -11,7 +11,7 @@ export default function LogoMenuBar() {
         headerElement={
           <img
             src={engineLogo}
-            className="xl:w-20 lg:w-16 md:w-10 w-12"
+            className="xl:w-20 lg:w-16 md:w-14 sm:w-12"
             alt="EngineLogo"
           ></img>
         }

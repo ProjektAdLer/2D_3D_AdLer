@@ -16,7 +16,7 @@ export default function LoadLearningWorldButton() {
         await controllers[0].loadWorld();
       }}
     >
-      <img className="w-6 lg:w-10" src={debugIcon}></img>
+      <img className="" src={debugIcon}></img>
     </StyledButton>
   );
 }

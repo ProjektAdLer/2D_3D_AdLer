@@ -16,7 +16,7 @@ export default function LearningWorldNamePanel() {
 
   return (
     <div className="flex justify-center">
-      <StyledContainer className="p-13 text-xl lg:text-4xl font-extrabold text-white text-shadow whitespace-nowrap">
+      <StyledContainer className="text-xl font-extrabold text-white p-13 lg:text-4xl text-shadow whitespace-nowrap">
         <img className="w-8 lg:w-16" src={roomIcon}></img>
         {learningWorldName}
       </StyledContainer>
