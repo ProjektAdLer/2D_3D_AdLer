@@ -154,7 +154,7 @@ const mockDSL: DSL = {
           type: "FileName",
           value: "Metriken Wortsuche",
         },
-        elementType: "h5p",
+        elementType: "image",
         learningElementValue: null,
         requirements: null,
         metaData: [

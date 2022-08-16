@@ -32,25 +32,25 @@ export default function StyledModal({
   if (!showModal) return null;
   return (
     <div
-      className="modal flex justify-center items-center fixed max-h-full top-0 left-0 right-0 bottom-0 bg-blacktrans50"
+      className="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center max-h-full modal bg-blacktrans50"
       {...restProps}
     >
-      <div className="modal-body flex flex-col bg-adlerlightblue w-fit h-fit border-8 max-h-90pro border-adlerlightblue rounded-lg">
-        <div className="modal-header font-black flex justify-end items-center p-4 h-4 lg:h-16 text-xl lg:text-4xl">
+      <div className="flex flex-col border-8 rounded-lg modal-body bg-adlerlightblue w-fit h-fit max-h-90pro border-adlerlightblue">
+        <div className="flex items-center justify-end h-4 p-4 text-xl font-black modal-header lg:h-16 lg:text-4xl">
           <div className="w-full "> {title}</div>
           {canClose && (
             <button
               onClick={onClose}
-              className="button-close font-black text-xs lg:text-xl drop-shadow-sm border-b-4 border-r-4 border-adlerdarkblue active:border-0 hover:cursor-pointer py-1 px-2 bg-adlerblue rounded-lg text-white"
+              className="px-2 py-1 text-xs font-black text-white border-b-4 border-r-4 rounded-lg button-close lg:text-xl drop-shadow-sm border-adlerdarkblue active:border-0 hover:cursor-pointer bg-adlerblue"
             >
               X
             </button>
           )}
         </div>
-        <div className="modal-content p-4 border-t-2 border-b-2 rounded-lg border-adlerlightblue overflow-auto">
+        <div className="p-4 overflow-auto border-t-2 border-b-2 rounded-lg modal-content border-adlerlightblue">
           {children}
         </div>
-        <div className="modal-footer font-medium flex shrink justify-between items-center p-4 h-fit">
+        <div className="flex items-center justify-between p-4 font-medium modal-footer shrink h-fit">
           <p>{footer}</p>
         </div>
       </div>
