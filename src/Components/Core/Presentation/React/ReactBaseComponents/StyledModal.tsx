@@ -34,32 +34,31 @@ export default function StyledModal({
 }: Props) {
   if (!showModal) return null;
   return (
-    <StyledContainer
-      className="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center max-h-full modal bg-blacktrans50"
-      {...restProps}
-    >
-      {/*Header with optional close button*/}
-      <div className="flex flex-col justify-center gap-2 p-2 m-3 rounded-lg button-container w-fit h-fit">
-        <div className="w-full "> {title}</div>
-        {canClose && (
-          <button
-            onClick={onClose}
-            className="px-2 py-1 text-xs font-black text-white border-b-4 border-r-4 rounded-lg button-close lg:text-xl drop-shadow-sm border-adlerdarkblue active:border-0 hover:cursor-pointer bg-adlerblue"
-          >
-            X
-          </button>
-        )}
-      </div>
-      {/*Content*/}
-      <div className="overflow-auto border-t-2 border-b-2 rounded-lg modal-content border-adlerlightblue">
-        {children}
-      </div>
-      {/*Optional Footer*/}
-      {hasFooter && (
-        <div className="modal-footer ">
-          <p>{footer}</p>
+    <StyledContainer {...restProps}>
+      <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center max-h-full bg-blacktrans50">
+        {/*Header with optional close button*/}
+        <div className="p-2 rounded-lg bg-adlergold">
+          <div className="flex items-center justify-center w-full gap-2 p-1 text-2xl font-black text-white text-shadow lg:text-3xl h-fit bg-adlergold">
+            <div className="w-full ">{title}</div>
+            {canClose && (
+              <button
+                onClick={onClose}
+                className="px-2 py-1 text-xs font-black text-white border-b-4 border-r-4 rounded-lg button-close lg:text-xl border-adlerdarkblue active:border-0 hover:cursor-pointer bg-adlerblue"
+              >
+                X
+              </button>
+            )}
+          </div>
+          {/*Content*/}
+          <div className="overflow-auto bg-adlergold">{children}</div>
+          {/*Optional Footer*/}
+          {hasFooter && (
+            <div className="modal-footer ">
+              <p>{footer}</p>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </StyledContainer>
   );
 }

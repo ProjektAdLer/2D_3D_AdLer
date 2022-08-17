@@ -2,11 +2,6 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import LogoMenuBar from "../../../../Core/Presentation/React/ReactAdvancedComponents/LogoMenuBar";
 
-jest.mock(
-  "../../../../Core/Presentation/React/ReactAdvancedComponents/MenuBar",
-  () => "string"
-);
-
 describe("LogoMenuBar", () => {
   test("should render", () => {
     // disable console.error

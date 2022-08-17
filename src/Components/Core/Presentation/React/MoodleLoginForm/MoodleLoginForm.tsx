@@ -28,6 +28,7 @@ export default function MoodleLoginForm() {
 
   return (
     <StyledModal
+      title="Moodle Login"
       showModal={modalVisible}
       onClose={() => {
         setModalVisible(false);
@@ -41,10 +42,6 @@ export default function MoodleLoginForm() {
             handleSubmit();
           }}
         >
-          <div className="flex justify-center font-bold text-white app-title lg:text-2xl">
-            <h1>In Moodle einloggen</h1>
-          </div>
-
           <StyledInputField
             placeholder="Nutzername"
             defaultValue={userName}

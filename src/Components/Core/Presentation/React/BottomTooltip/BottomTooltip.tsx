@@ -15,9 +15,11 @@ export default function BottomTooltip() {
 
   return (
     <div className="grid justify-center">
-      <StyledContainer className="text-white font-extrabold text-shadow text-2xl bg-adlerblue">
-        {getIcon(type)}
-        {text}
+      <StyledContainer>
+        <div className="flex items-center p-2 text-2xl font-extrabold text-white rounded-lg text-shadow bg-adlerblue">
+          {getIcon(type)}
+          {text}
+        </div>
       </StyledContainer>
     </div>
   );

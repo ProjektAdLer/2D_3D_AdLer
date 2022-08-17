@@ -16,10 +16,10 @@ function App() {
   return (
     <React.Fragment>
       <div className="grid max-h-screen grid-cols-9 grid-rows-6 root">
-        <div className="z-10 col-start-1 row-start-1">
+        <div className="z-10 col-start-1 row-start-1 m-2">
           <LogoMenuBar />
         </div>
-        <div className="z-10 col-span-2 col-start-2 row-start-1">
+        <div className="z-10 col-span-2 col-start-2 row-start-1 m-2">
           <LearningElementsDropdown />
         </div>
         <div className="z-10 col-span-2 col-start-9 row-start-1">

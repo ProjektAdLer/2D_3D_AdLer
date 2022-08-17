@@ -23,7 +23,7 @@ export default function MoodleLoginButton() {
         controllers[0].displayLoginForm();
       }}
     >
-      <img className="rounded-lg" src={moodleIcon} alt="Moodle-Logo"></img>
+      <img src={moodleIcon} alt="Moodle-Logo"></img>
     </StyledButton>
   );
 }

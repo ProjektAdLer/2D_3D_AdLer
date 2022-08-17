@@ -6,13 +6,7 @@ export default function StyledContainer({
   ...restProps
 }: React.HTMLProps<HTMLDivElement>) {
   return (
-    <div
-      className={
-        className +
-        "flex items-center gap-2 p-2 m-3 rounded-lg button-container w-fit h-fit "
-      }
-      {...restProps}
-    >
+    <div className={className + "flex gap-2 m-3 w-fit h-fit"} {...restProps}>
       {children}
     </div>
   );
