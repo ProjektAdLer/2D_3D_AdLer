@@ -20,7 +20,7 @@ const elementBuilder = (modalViewModel: LearningElementModalViewModel<any>) => {
       return <VideoComponent embedId="iik25wqIuFo?autoplay=1" />;
     case "image":
       return (
-        <div className="h-full w-full">
+        <div className="w-full h-full">
           <ImageComponent
             imagesrc={
               "https://cdn.discordapp.com/attachments/887582352560246804/949558830486929458/Doku_Raumaufbau.png"
@@ -41,7 +41,20 @@ export default function LearningElementModal() {
   const [isOpen, setOpen] = useObservable<boolean>(viewModels[0]?.isOpen);
 
   if (!isOpen) return null;
+  if (!viewModels[0]) return null;
 
+  const modalConfig = {
+    text: "",
+    image: "",
+    video: "",
+    h5p: "",
+  };
+  const modalType = viewModels[0].learningElementData.Value.type as
+    | "text"
+    | "image"
+    | "video"
+    | "h5p";
+  console.log(modalType);
   return (
     <StyledModal
       title={
@@ -53,6 +66,7 @@ export default function LearningElementModal() {
         controllers[0].scoreLearningElement(viewModels[0]?.id.Value);
       }}
       showModal={isOpen}
+      className={`flex flex-col justify-center gap-2 p-2 m-3 rounded-lg button-container w-fit h-fit ${modalConfig[modalType]} `}
     >
       {elementBuilder(viewModels[0])}
     </StyledModal>
