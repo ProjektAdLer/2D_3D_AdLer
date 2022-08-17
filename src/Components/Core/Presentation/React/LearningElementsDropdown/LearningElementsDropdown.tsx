@@ -39,7 +39,7 @@ export default function LearningElementsDropdown() {
       managed={true}
       initialOpen
     >
-      <StyledContainer className="flex">
+      <StyledContainer className="flex flex-col gap-2">
         {learningElements?.map((element, index) => (
           <StyledButton
             key={index}
