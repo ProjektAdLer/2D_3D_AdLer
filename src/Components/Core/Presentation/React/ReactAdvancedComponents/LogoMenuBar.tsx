@@ -22,7 +22,7 @@ export default function LogoMenuBar() {
       initialOpen={true}
       useAsTriggerOnly={true}
     >
-      <StyledContainer className="flex flex-col ml-1 bg-transparent lg:ml-2">
+      <StyledContainer className="flex flex-col bg-transparent">
         <LoadLearningWorldButton />
         <FullscreenSwitch />
         <MoodleLoginButton />

@@ -115,13 +115,27 @@ const mockDSL: DSL = {
           type: "name",
           value: "Lernraum Metriken",
         },
-        learningSpaceContent: [1, 2, 3],
+        learningSpaceContent: [1, 2, 3, 4],
         requirements: null,
       },
     ],
     learningElements: [
       {
         id: 1,
+        identifier: {
+          type: "FileName",
+          value: "Metriken Einstiegsvideo",
+        },
+        elementType: "h5p",
+        learningElementValue: null,
+        requirements: null,
+        metaData: [
+          { key: "h5pContextId", value: "123" },
+          { key: "h5pFileName", value: "Metriken Teil 1" },
+        ],
+      },
+      {
+        id: 4,
         identifier: {
           type: "FileName",
           value: "Metriken Einstiegsvideo",
