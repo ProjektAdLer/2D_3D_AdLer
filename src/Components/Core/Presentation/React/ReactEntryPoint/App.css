@@ -24,11 +24,11 @@
   .h-90pro {
     height: 90%;
   }
-  .text-shadow{
-    text-shadow: 2px 2px 0.5px rgb(23,45,77);
+  .text-shadow {
+    text-shadow: 2px 2px 0.5px rgb(23, 45, 77);
   }
-  .text-shadow-sm{
-    text-shadow: 1px 1px 0.5px rgb(23,45,77);
+  .text-shadow-sm {
+    text-shadow: 1px 1px 0.5px rgb(23, 45, 77);
   }
 }
 
@@ -36,6 +36,7 @@
 
 #inspector-host,
 #scene-explorer-host {
+  z-index: 999;
   position: fixed !important;
   top: 5rem !important;
   right: 19rem !important;
