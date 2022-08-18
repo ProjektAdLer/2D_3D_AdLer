@@ -2,7 +2,7 @@ import useViewModelControllerProvider from "../CustomHooks/useViewModelControlle
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import LearningWorldNamePanelController from "./LearningWorldNamePanelController";
 import LearningWorldNamePanelViewModel from "./LearningWorldNamePanelViewModel";
-import roomIcon from "../../../../../Assets/icons/lernraum_icon.svg";
+import worldIcon from "../../../../../Assets/icons/lernwelt_icon.svg";
 import useObservable from "../CustomHooks/useObservable";
 export default function LearningWorldNamePanel() {
   const [viewModels] = useViewModelControllerProvider<
@@ -19,7 +19,7 @@ export default function LearningWorldNamePanel() {
       <StyledContainer className="flex items-center justify-center text-xl font-extrabold text-white bg-transparent p-13 lg:text-4xl text-shadow whitespace-nowrap">
         <img
           className="w-8 lg:w-16"
-          src={roomIcon}
+          src={worldIcon}
           alt="Learning-Room-Icon"
         ></img>
         {learningWorldName}
