@@ -24,6 +24,7 @@ export default function StyledButton({
     <button
       className={
         className +
+        " " +
         `flex items-center px-2 py-1 text-sm font-black text-white text-shadow border-b-4 border-r-4 rounded-lg container-button hover:cursor-pointer lg:text-xl active:border-transparent border-adlerdarkblue ${buttonConfig[color]} ${buttonConfig[shape]}`
       }
       {...rest}
