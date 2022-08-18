@@ -6,13 +6,13 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 export default function StyledButton({
   shape = "square",
-  color = "success",
+  color = "default",
   children,
   className,
   ...rest
 }: React.DetailedHTMLProps<ButtonProps, HTMLButtonElement>) {
   const buttonConfig = {
-    // Border Colors
+    // Background Colors
     default: "bg-adlerblue",
     success: "bg-adlergreen",
 

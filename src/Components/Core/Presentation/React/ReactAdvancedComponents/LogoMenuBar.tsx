@@ -14,7 +14,7 @@ export default function LogoMenuBar() {
         <StyledButton>
           <img
             src={engineLogo}
-            className="xl:w-20 lg:w-16 md:w-14 sm:w-12"
+            className="lg:w-20 md:w-16 sm:w-14"
             alt="EngineLogo"
           ></img>
         </StyledButton>
