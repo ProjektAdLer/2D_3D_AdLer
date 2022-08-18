@@ -18,7 +18,7 @@ export default function MoodleLoginButton() {
 
   return (
     <StyledButton
-      color={loginSuccessful ? "login" : "default"}
+      color={loginSuccessful ? "success" : "default"}
       onClick={() => {
         controllers[0].displayLoginForm();
       }}

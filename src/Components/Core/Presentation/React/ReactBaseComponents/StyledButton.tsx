@@ -2,11 +2,11 @@ import React from "react";
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   shape?: "square" | "free";
-  color?: "default" | "login";
+  color?: "default" | "success";
 }
 export default function StyledButton({
   shape = "square",
-  color = "default",
+  color = "success",
   children,
   className,
   ...rest
@@ -14,7 +14,7 @@ export default function StyledButton({
   const buttonConfig = {
     // Border Colors
     default: "bg-adlerblue",
-    login: "bg-adlergreen",
+    success: "bg-adlergreen",
 
     // Shapes
     square: "justify-center p-1 lg:w-16 md:w-14 sm:w-12 aspect-square",
