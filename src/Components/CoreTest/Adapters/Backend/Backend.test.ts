@@ -47,8 +47,6 @@ describe("Backend", () => {
       worldName: "",
     });
 
-    console.log(worlds);
-
     expect(worlds).toStrictEqual(correctFakeWorldResponse);
   });
 

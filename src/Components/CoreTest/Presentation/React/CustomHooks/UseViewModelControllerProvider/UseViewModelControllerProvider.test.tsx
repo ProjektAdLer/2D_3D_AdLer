@@ -60,8 +60,5 @@ describe("UseViewModelControllerProviderHook", () => {
     );
 
     callbackReturn([[new TestVM(), new TestController()]]);
-
-    //@ts-ignore
-    console.log(systemUnderTest["viewModels"]);
   });
 });

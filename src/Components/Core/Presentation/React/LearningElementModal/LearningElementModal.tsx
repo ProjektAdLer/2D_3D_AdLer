@@ -54,7 +54,6 @@ export default function LearningElementModal() {
     | "image"
     | "video"
     | "h5p";
-  console.log(modalType);
   return (
     <StyledModal
       title={
