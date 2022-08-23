@@ -44,10 +44,10 @@ export default function LearningElementModal() {
   if (!viewModels[0]) return null;
 
   const modalConfig = {
-    text: "",
+    text: "h-[80vh]",
     image: "",
     video: "",
-    h5p: "w-fit h-fit",
+    h5p: "",
   };
   const modalType = viewModels[0].learningElementData.Value.type as
     | "text"
