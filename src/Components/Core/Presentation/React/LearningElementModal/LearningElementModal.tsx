@@ -47,7 +47,7 @@ export default function LearningElementModal() {
     text: "",
     image: "",
     video: "",
-    h5p: "",
+    h5p: "w-fit h-fit",
   };
   const modalType = viewModels[0].learningElementData.Value.type as
     | "text"
@@ -65,7 +65,7 @@ export default function LearningElementModal() {
         controllers[0].scoreLearningElement(viewModels[0]?.id.Value);
       }}
       showModal={isOpen}
-      className={`flex flex-col justify-center gap-2 p-2 m-3 rounded-lg button-container w-fit h-fit ${modalConfig[modalType]} `}
+      className={`flex flex-col justify-center gap-2 p-2 m-3 rounded-lg ${modalConfig[modalType]} `}
     >
       {elementBuilder(viewModels[0])}
     </StyledModal>
