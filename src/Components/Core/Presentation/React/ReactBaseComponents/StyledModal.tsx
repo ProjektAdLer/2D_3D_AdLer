@@ -50,7 +50,7 @@ export default function StyledModal({
             )}
           </div>
           {/*Content*/}
-          <div className="overflow-auto rounded-lg bg-adlergold">
+          <div className="overflow-auto rounded-lg bg-adlergold h-[80vh]">
             {children}
           </div>
           {/*Optional Footer*/}
