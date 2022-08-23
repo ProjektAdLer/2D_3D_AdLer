@@ -25,6 +25,9 @@ const elementBuilder = (modalViewModel: LearningElementModalViewModel<any>) => {
           <ImageComponent
             imagesrc={
               "https://www.xtrafondos.com/wallpapers/vertical/stormtrooper-de-star-wars-battlefront-5226.jpg"
+              // Alternative Images zum testen
+              // https://hdqwalls.com/wallpapers/star-wars-the-last-jedi-2017-5k-j8.jpg (Relativ Quadratisch)
+              // https://wallpaperaccess.com/full/652304.jpg (Breiter als hoch)
             }
           />
         </div>
