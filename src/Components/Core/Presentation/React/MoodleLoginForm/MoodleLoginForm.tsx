@@ -58,17 +58,12 @@ export default function MoodleLoginForm() {
             }}
           />
 
-          <StyledButton
-            className="flex justify-center"
-            shape="free"
-            onClick={handleSubmit}
-          >
+          <StyledButton shape="freefloatcenter" onClick={handleSubmit}>
             <p>Login</p>
           </StyledButton>
 
           <StyledButton
-            className="flex justify-center"
-            shape="free"
+            shape="freefloatcenter"
             onClick={() => {
               alert("Hier kannst du bald dein neues Passwort bekommen!");
             }}

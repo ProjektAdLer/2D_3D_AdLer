@@ -25,7 +25,7 @@ export default function LearningElementsDropdown() {
     <CustomDropdown
       headerElement={
         <StyledButton
-          shape="free"
+          shape="freefloatleft"
           onClick={() => {
             setDropDownOpen(!dropDownOpen);
           }}
@@ -43,7 +43,7 @@ export default function LearningElementsDropdown() {
         {learningElements?.map((element, index) => (
           <StyledButton
             key={index}
-            shape="free"
+            shape="freefloatleft"
             onClick={() => controllers[0]?.startLearningElement(element.id)}
           >
             <div className="w-5 lg:w-10">

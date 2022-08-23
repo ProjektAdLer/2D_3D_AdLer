@@ -1,7 +1,7 @@
 import React from "react";
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  shape?: "square" | "free";
+  shape?: "square" | "freefloatleft" | "freefloatcenter";
   color?: "default" | "success";
 }
 export default function StyledButton({
@@ -18,7 +18,8 @@ export default function StyledButton({
 
     // Shapes
     square: "justify-center p-1 lg:w-16 md:w-14 sm:w-12 aspect-square",
-    free: "p-1",
+    freefloatleft: "p-1",
+    freefloatcenter: "p-1 justify-center",
   };
   return (
     <button
