@@ -48,3 +48,8 @@
   top: 5rem !important;
   left: 1rem !important;
 }
+
+/*Styles für die Anzeige von iframes*/
+
+iframe {
+}
