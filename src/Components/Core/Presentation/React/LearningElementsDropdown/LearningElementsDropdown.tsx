@@ -44,13 +44,12 @@ export default function LearningElementsDropdown() {
           <StyledButton
             key={index}
             shape="free"
-            className="flex items-start"
             onClick={() => controllers[0]?.startLearningElement(element.id)}
           >
             <div className="w-5 lg:w-10">
               {getIcon(element.learningElementData.type)}
             </div>
-            <h3 className="self-center ml-1 text-sm text-white lg:text-lg">
+            <h3 className="ml-1 text-sm text-white lg:text-lg">
               {element.name}
             </h3>
           </StyledButton>

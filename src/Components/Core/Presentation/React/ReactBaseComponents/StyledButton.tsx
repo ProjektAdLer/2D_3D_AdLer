@@ -18,7 +18,7 @@ export default function StyledButton({
 
     // Shapes
     square: "justify-center p-1 lg:w-16 md:w-14 sm:w-12 aspect-square",
-    free: "p-1 justify-center",
+    free: "p-1",
   };
   return (
     <button
