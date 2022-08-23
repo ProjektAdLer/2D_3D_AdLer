@@ -31,9 +31,9 @@ export default function ModalManager({ ...restProps }: { [x: string]: any }) {
       showModal={notifications?.length > 0}
       title={getTypeString(notifications.last().type)}
       onClose={() => {
-        const bla = [...notifications];
-        bla.pop();
-        setNotifications(bla);
+        const remainingNotifications = [...notifications];
+        remainingNotifications.pop();
+        setNotifications(remainingNotifications);
       }}
       {...restProps}
     >
