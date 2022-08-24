@@ -24,8 +24,10 @@ const elementBuilder = (modalViewModel: LearningElementModalViewModel<any>) => {
         <div className="max-h[90vh]">
           <ImageComponent
             imagesrc={
-              "https://www.xtrafondos.com/wallpapers/vertical/stormtrooper-de-star-wars-battlefront-5226.jpg"
+              "https://cdn.wallpapersafari.com/40/25/JehHWc.jpg"
               // Alternative Images zum testen
+              // https://www.xtrafondos.com/wallpapers/vertical/stormtrooper-de-star-wars-battlefront-5226.jpg
+              //
               // https://hdqwalls.com/wallpapers/star-wars-the-last-jedi-2017-5k-j8.jpg (Relativ Quadratisch)
               // https://wallpaperaccess.com/full/652304.jpg (Breiter als hoch)
             }
