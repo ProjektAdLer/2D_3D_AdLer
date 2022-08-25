@@ -3,17 +3,17 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldPort from "../../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
-import LearningWorldNamePanelBuilder from "../../../../Core/Presentation/React/LearningWorldNamePanel/LearningWorldNamePanelBuilder";
-import LearningWorldNamePanelController from "../../../../Core/Presentation/React/LearningWorldNamePanel/LearningWorldNamePanelController";
-import LearningWorldNamePanelPresenter from "../../../../Core/Presentation/React/LearningWorldNamePanel/LearningWorldNamePanelPresenter";
-import LearningWorldNamePanelViewModel from "../../../../Core/Presentation/React/LearningWorldNamePanel/LearningWorldNamePanelViewModel";
+import LearningWorldGoalPanelBuilder from "../../../../Core/Presentation/React/LearningWorldGoalPanel/LearningWorldGoalPanelBuilder";
+import LearningWorldGoalPanelController from "../../../../Core/Presentation/React/LearningWorldGoalPanel/LearningWorldGoalPanelController";
+import LearningWorldGoalPanelPresenter from "../../../../Core/Presentation/React/LearningWorldGoalPanel/LearningWorldGoalPanelPresenter";
+import LearningWorldGoalPanelViewModel from "../../../../Core/Presentation/React/LearningWorldGoalPanel/LearningWorldGoalPanelViewModel";
 import IViewModelControllerProvider from "../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
 const learningWorldPort = mock<ILearningWorldPort>();
 
-describe("LearningWorldNamePanelBuilder", () => {
-  let systemUnderTest: LearningWorldNamePanelBuilder;
+describe("LearningWorldGoalPanelBuilder", () => {
+  let systemUnderTest: LearningWorldGoalPanelBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -27,7 +27,7 @@ describe("LearningWorldNamePanelBuilder", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new LearningWorldNamePanelBuilder();
+    systemUnderTest = new LearningWorldGoalPanelBuilder();
   });
 
   afterAll(() => {
@@ -40,7 +40,7 @@ describe("LearningWorldNamePanelBuilder", () => {
 
     expect(systemUnderTest["controller"]).toBeDefined();
     expect(systemUnderTest["controller"]).toBeInstanceOf(
-      LearningWorldNamePanelController
+      LearningWorldGoalPanelController
     );
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledTimes(
       1
@@ -48,7 +48,7 @@ describe("LearningWorldNamePanelBuilder", () => {
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledWith(
       systemUnderTest["viewModel"],
       systemUnderTest["controller"],
-      LearningWorldNamePanelViewModel
+      LearningWorldGoalPanelViewModel
     );
   });
 
@@ -58,13 +58,13 @@ describe("LearningWorldNamePanelBuilder", () => {
 
     expect(systemUnderTest["presenter"]).toBeDefined();
     expect(systemUnderTest["presenter"]).toBeInstanceOf(
-      LearningWorldNamePanelPresenter
+      LearningWorldGoalPanelPresenter
     );
     expect(
-      learningWorldPort.registerLearningWorldNamePanelPresenter
+      learningWorldPort.registerLearningWorldGoalPanelPresenter
     ).toHaveBeenCalledTimes(1);
     expect(
-      learningWorldPort.registerLearningWorldNamePanelPresenter
+      learningWorldPort.registerLearningWorldGoalPanelPresenter
     ).toHaveBeenCalledWith(systemUnderTest["presenter"]);
   });
 });

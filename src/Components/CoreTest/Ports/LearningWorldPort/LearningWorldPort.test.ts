@@ -22,7 +22,7 @@ const navigationMock = mock<INavigation>();
 
 const learningElementDropdownPresenterMock =
   mock<ILearningElementsDropdownPresenter>();
-const learningWorldPanelPresenterMock =
+const learningWorldNamePanelPresenterMock =
   mock<ILearningWorldNamePanelPresenter>();
 
 describe("LearningWorldPort", () => {
@@ -74,26 +74,26 @@ describe("LearningWorldPort", () => {
     }).toThrowError("LearningElementDropdownPresenter is already registered");
   });
 
-  test("registerLearningWorldPanelPresenter sets private member", () => {
-    systemUnderTest.registerLearningWorldPanelPresenter(
-      learningWorldPanelPresenterMock
+  test("registerLearningWorldNamePanelPresenter sets private member", () => {
+    systemUnderTest.registerLearningWorldNamePanelPresenter(
+      learningWorldNamePanelPresenterMock
     );
 
-    expect(systemUnderTest["learningWorldPanelPresenter"]).toBe(
-      learningWorldPanelPresenterMock
+    expect(systemUnderTest["learningWorldNamePanelPresenter"]).toBe(
+      learningWorldNamePanelPresenterMock
     );
   });
 
   test("registerLearningWorldPanelPresenter throws error if presenter is already registered", () => {
-    systemUnderTest.registerLearningWorldPanelPresenter(
-      learningWorldPanelPresenterMock
+    systemUnderTest.registerLearningWorldNamePanelPresenter(
+      learningWorldNamePanelPresenterMock
     );
 
     expect(() => {
-      systemUnderTest.registerLearningWorldPanelPresenter(
-        learningWorldPanelPresenterMock
+      systemUnderTest.registerLearningWorldNamePanelPresenter(
+        learningWorldNamePanelPresenterMock
       );
-    }).toThrowError("LearningWorldPanelPresenter is already registered");
+    }).toThrowError("LearningWorldNamePanelPresenter is already registered");
   });
 
   // this needs to be reworked, when more than one learning room is supported
@@ -124,8 +124,8 @@ describe("LearningWorldPort", () => {
     systemUnderTest.registerLearningElementDropdownPresenter(
       learningElementDropdownPresenterMock
     );
-    systemUnderTest.registerLearningWorldPanelPresenter(
-      learningWorldPanelPresenterMock
+    systemUnderTest.registerLearningWorldNamePanelPresenter(
+      learningWorldNamePanelPresenterMock
     );
 
     // ACT
@@ -148,10 +148,10 @@ describe("LearningWorldPort", () => {
 
     // UI presentation
     expect(
-      learningWorldPanelPresenterMock.displayWorldName
+      learningWorldNamePanelPresenterMock.displayWorldName
     ).toHaveBeenCalledTimes(1);
     expect(
-      learningWorldPanelPresenterMock.displayWorldName
+      learningWorldNamePanelPresenterMock.displayWorldName
     ).toHaveBeenCalledWith(learningWorldTO.worldName);
     expect(
       learningElementDropdownPresenterMock.presentLearningElements

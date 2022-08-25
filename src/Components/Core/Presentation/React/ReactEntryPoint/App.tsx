@@ -11,6 +11,7 @@ import ModalManager from "../ModalManager/ModalManager";
 import MoodleLoginForm from "../MoodleLoginForm/MoodleLoginForm";
 import BottomTooltip from "../BottomTooltip/BottomTooltip";
 import LearningWorldNamePanel from "~ReactComponents/LearningWorldNamePanel/LearningWorldNamePanel";
+import LearningWorldGoalPanel from "~ReactComponents/LearningWorldGoalPanel/LearningWorldGoalPanel";
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
         </div>
         <div className="z-10 col-span-5 col-start-3 row-start-1">
           <LearningWorldNamePanel />
+        </div>
+        <div className="z-10 col-span-5 col-start-3 row-start-1">
+          <LearningWorldGoalPanel />
         </div>
         <div className="col-span-9 col-start-1 row-span-6 row-start-1">
           <BabylonCanvas className="w-screen h-screen" />

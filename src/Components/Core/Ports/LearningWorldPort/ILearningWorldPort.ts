@@ -1,8 +1,8 @@
 import { LearningComponentID } from "../../Types/EnitityTypes";
-import { LearningElementType } from "../../Presentation/Babylon/LearningElement/Types/LearningElementTypes";
 import ILearningElementsDropdownPresenter from "../../Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
 import AbstractLearningElement from "../../Domain/Entities/SpecificLearningElements/AbstractLearningElement";
 import ILearningWorldNamePanelPresenter from "../../Presentation/React/LearningWorldNamePanel/ILearningWorldNamePanelPresenter";
+import ILearningWorldGoalPanelPresenter from "~ReactComponents/LearningWorldGoalPanel/ILearningWorldGoalPanelPresenter";
 
 export class LearningWorldTO {
   worldName: string;
@@ -27,7 +27,11 @@ export default interface ILearningWorldPort {
     learningElementDropdownPresenter: ILearningElementsDropdownPresenter
   ): void;
 
-  registerLearningWorldPanelPresenter(
-    learningWorldPanelPresenter: ILearningWorldNamePanelPresenter
+  registerLearningWorldNamePanelPresenter(
+    learningWorldNamePanelPresenter: ILearningWorldNamePanelPresenter
+  ): void;
+
+  registerLearningWorldGoalPanelPresenter(
+    learningWorldGoalPanelPresenter: ILearningWorldGoalPanelPresenter
   ): void;
 }

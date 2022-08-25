@@ -1,7 +1,6 @@
 import { inject, injectable } from "inversify";
 import ILearningWorldPort, { LearningWorldTO } from "./ILearningWorldPort";
 import BUILDER_TYPES from "../../DependencyInjection/Builders/BUILDER_TYPES";
-import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import type IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
 import type IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
@@ -9,13 +8,14 @@ import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILea
 import ILearningElementsDropdownPresenter from "../../Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
 import type INavigation from "../../Presentation/Babylon/Navigation/INavigation";
 import ILearningWorldNamePanelPresenter from "../../Presentation/React/LearningWorldNamePanel/ILearningWorldNamePanelPresenter";
-import LearningRoomBuilder from "../../Presentation/Babylon/LearningRoom/LearningRoomBuilder";
+import ILearningWorldGoalPanelPresenter from "~ReactComponents/LearningWorldGoalPanel/ILearningWorldGoalPanelPresenter";
 
 @injectable()
 export default class LearningWorldPort implements ILearningWorldPort {
   private roomPresenter: ILearningRoomPresenter;
   private learningElementDropdownPresenter: ILearningElementsDropdownPresenter;
-  private learningWorldPanelPresenter: ILearningWorldNamePanelPresenter;
+  private learningWorldNamePanelPresenter: ILearningWorldNamePanelPresenter;
+  private learningWorldGoalPanelPresenter: ILearningWorldGoalPanelPresenter;
 
   constructor(
     @inject(CORE_TYPES.INavigation)
@@ -38,7 +38,7 @@ export default class LearningWorldPort implements ILearningWorldPort {
     this.navigation.setupNavigation();
 
     // call UI presenter to present new data
-    this.learningWorldPanelPresenter.displayWorldName(
+    this.learningWorldNamePanelPresenter.displayWorldName(
       learningWorldTO.worldName
     );
     this.learningElementDropdownPresenter.presentLearningElements(
@@ -55,12 +55,20 @@ export default class LearningWorldPort implements ILearningWorldPort {
     this.learningElementDropdownPresenter = learningElementDropdownPresenter;
   }
 
-  public registerLearningWorldPanelPresenter(
-    learningWorldPanelPresenter: ILearningWorldNamePanelPresenter
+  public registerLearningWorldNamePanelPresenter(
+    learningWorldNamePanelPresenter: ILearningWorldNamePanelPresenter
   ): void {
-    if (this.learningWorldPanelPresenter) {
-      throw new Error("LearningWorldPanelPresenter is already registered");
+    if (this.learningWorldNamePanelPresenter) {
+      throw new Error("LearningWorldNamePanelPresenter is already registered");
     }
-    this.learningWorldPanelPresenter = learningWorldPanelPresenter;
+    this.learningWorldNamePanelPresenter = learningWorldNamePanelPresenter;
+  }
+  public registerLearningWorldGoalPanelPresenter(
+    learningWorldGoalPanelPresenter: ILearningWorldGoalPanelPresenter
+  ): void {
+    if (this.learningWorldGoalPanelPresenter) {
+      throw new Error("LearningWorldGoalPanelPresenter is already registered");
+    }
+    this.learningWorldGoalPanelPresenter = learningWorldGoalPanelPresenter;
   }
 }

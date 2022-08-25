@@ -1,8 +1,8 @@
 import { injectable } from "inversify";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
-import LearningWorldNamePanelController from "./LearningWorldNamePanelController";
-import LearningWorldNamePanelPresenter from "./LearningWorldNamePanelPresenter";
-import LearningWorldNamePanelViewModel from "./LearningWorldNamePanelViewModel";
+import LearningWorldGoalPanelController from "./LearningWorldGoalPanelController";
+import LearningWorldGoalPanelPresenter from "./LearningWorldGoalPanelPresenter";
+import LearningWorldGoalPanelViewModel from "./LearningWorldGoalPanelViewModel";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import ViewModelControllerProvider from "../../ViewModelProvider/ViewModelControllerProvider";
@@ -10,18 +10,18 @@ import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldPort from "../../../Ports/LearningWorldPort/ILearningWorldPort";
 
 @injectable()
-export default class LearningWorldNamePanelBuilder extends PresentationBuilder<
-  LearningWorldNamePanelViewModel,
-  LearningWorldNamePanelController,
+export default class LearningWorldGoalPanelBuilder extends PresentationBuilder<
+  LearningWorldGoalPanelViewModel,
+  LearningWorldGoalPanelController,
   undefined,
-  LearningWorldNamePanelPresenter
+  LearningWorldGoalPanelPresenter
 > {
   constructor() {
     super(
-      LearningWorldNamePanelViewModel,
-      LearningWorldNamePanelController,
+      LearningWorldGoalPanelViewModel,
+      LearningWorldGoalPanelController,
       undefined,
-      LearningWorldNamePanelPresenter
+      LearningWorldGoalPanelPresenter
     );
   }
 
@@ -32,7 +32,7 @@ export default class LearningWorldNamePanelBuilder extends PresentationBuilder<
     ).registerTupel(
       this.viewModel,
       this.controller,
-      LearningWorldNamePanelViewModel
+      LearningWorldGoalPanelViewModel
     );
   }
 
@@ -40,6 +40,6 @@ export default class LearningWorldNamePanelBuilder extends PresentationBuilder<
     super.buildPresenter();
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).registerLearningWorldNamePanelPresenter(this.presenter!);
+    ).registerLearningWorldGoalPanelPresenter(this.presenter!);
   }
 }
