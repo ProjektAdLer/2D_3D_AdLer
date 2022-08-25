@@ -29,7 +29,7 @@ function App() {
         <div className="z-10 col-span-5 col-start-3 row-start-1">
           <LearningWorldNamePanel />
         </div>
-        <div className="z-10 col-span-5 col-start-3 row-start-1">
+        <div className="z-10 col-span-1 col-start-3 row-start-1">
           <LearningWorldGoalPanel />
         </div>
         <div className="col-span-9 col-start-1 row-span-6 row-start-1">

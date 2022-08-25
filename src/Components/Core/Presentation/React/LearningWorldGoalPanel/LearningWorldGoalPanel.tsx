@@ -2,7 +2,7 @@ import useViewModelControllerProvider from "../CustomHooks/useViewModelControlle
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import LearningWorldGoalPanelController from "./LearningWorldGoalPanelController";
 import LearningWorldGoalPanelViewModel from "./LearningWorldGoalPanelViewModel";
-import goalIcon from "../../../../../Assets/icons/download_file_moodle.svg";
+import goalIcon from "../../../../../Assets/icons/lernziel-icon-nobg.svg";
 import useObservable from "../CustomHooks/useObservable";
 import { useState } from "react";
 
@@ -24,11 +24,9 @@ export default function LearningWorldGoalPanel() {
           onClick={() => {
             setIsOpen(!isOpen);
           }}
-          className=""
-          style={{ color: "red", backgroundColor: "red" }}
         >
           <img
-            className="w-8 lg:w-16"
+            className="w-4 lg:w-10"
             src={goalIcon}
             alt="Learning-Room-Icon"
           ></img>
@@ -39,20 +37,19 @@ export default function LearningWorldGoalPanel() {
   //Wenn geklickt
   else
     return (
-      <div className="flex justify-center">
+      <div className="flex justify-center text-2xl text-white roboto-black text-shadow">
         <StyledContainer
+          className="flex flex-row justify-center"
           onClick={() => {
             setIsOpen(!isOpen);
           }}
-          className=""
-          style={{ color: "red", backgroundColor: "red" }}
         >
           <img
-            className="w-8 lg:w-16"
+            className="w-4 lg:w-10"
             src={goalIcon}
             alt="Learning-Goal-Icon"
           ></img>
-          Lernziel
+          <p>Lernziel</p>
         </StyledContainer>
       </div>
     );
