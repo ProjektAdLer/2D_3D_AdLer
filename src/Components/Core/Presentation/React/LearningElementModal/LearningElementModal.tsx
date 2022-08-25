@@ -20,10 +20,15 @@ const elementBuilder = (modalViewModel: LearningElementModalViewModel<any>) => {
       return <VideoComponent embedId="iik25wqIuFo?autoplay=1" />;
     case "image":
       return (
-        <div className="w-full h-full">
+        // max-h-[90vh] falls mehrere ImageComponents benutzt werden, sonst schiebts über die Fensterhöhe hinaus [DG]
+        <div className="max-h[90vh]">
           <ImageComponent
             imagesrc={
-              "https://cdn.discordapp.com/attachments/887582352560246804/949558830486929458/Doku_Raumaufbau.png"
+              "https://cdn.wallpapersafari.com/40/25/JehHWc.jpg"
+              // Alternative Images zum testen
+              // https://www.xtrafondos.com/wallpapers/vertical/stormtrooper-de-star-wars-battlefront-5226.jpg
+              // https://hdqwalls.com/wallpapers/star-wars-the-last-jedi-2017-5k-j8.jpg (Relativ Quadratisch)
+              // https://wallpaperaccess.com/full/652304.jpg (Breiter als hoch)
             }
           />
         </div>
@@ -45,7 +50,7 @@ export default function LearningElementModal() {
 
   const modalConfig = {
     text: "h-[80vh]",
-    image: "",
+    image: "max-h-[90vh]",
     video: "",
     h5p: "",
   };

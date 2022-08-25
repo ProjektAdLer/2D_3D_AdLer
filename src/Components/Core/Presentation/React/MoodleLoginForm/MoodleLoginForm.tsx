@@ -58,12 +58,12 @@ export default function MoodleLoginForm() {
             }}
           />
 
-          <StyledButton shape="free" onClick={handleSubmit}>
+          <StyledButton shape="freefloatcenter" onClick={handleSubmit}>
             <p>Login</p>
           </StyledButton>
 
           <StyledButton
-            shape="free"
+            shape="freefloatcenter"
             onClick={() => {
               alert("Hier kannst du bald dein neues Passwort bekommen!");
             }}
