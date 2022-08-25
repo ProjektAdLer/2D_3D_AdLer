@@ -2,7 +2,7 @@ import useViewModelControllerProvider from "../CustomHooks/useViewModelControlle
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import LearningWorldGoalPanelController from "./LearningWorldGoalPanelController";
 import LearningWorldGoalPanelViewModel from "./LearningWorldGoalPanelViewModel";
-import goalIcon from "../../../../../Assets/icons/lernziel-icon-nobg.svg";
+import goalIcon from "../../../../../Assets/icons/learninggoal-icon-nobg.svg";
 import useObservable from "../CustomHooks/useObservable";
 import { useState } from "react";
 
