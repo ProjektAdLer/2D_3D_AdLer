@@ -23,7 +23,8 @@ export default class LearningRoomViewModel {
   ]);
 
   public floorMesh: Observable<Mesh> = new Observable<Mesh>();
-  public wallMesh: Observable<Mesh> = new Observable<Mesh>();
+  public wallMeshes: Observable<Mesh[]> = new Observable<Mesh[]>();
+  public cornerPoleMeshes: Observable<Mesh[]> = new Observable<Mesh[]>();
   public floorMaterial: Observable<StandardMaterial> =
     new Observable<StandardMaterial>();
   public wallMaterial: Observable<StandardMaterial> =

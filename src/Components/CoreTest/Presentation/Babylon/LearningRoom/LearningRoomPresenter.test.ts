@@ -115,7 +115,7 @@ describe("LearningRoomPresenter", () => {
     expect(systemUnderTest["viewModel"].roomWidth.Value).toEqual(6);
   });
 
-  test("setRoomDimensions sets the room dimensions to array_length/2*4 length and 10 width for 2 or more LearningElements", () => {
+  test("setRoomDimensions sets the room dimensions to array_length/2*4 length and 8 width for 2 or more LearningElements", () => {
     roomTO.learningElements.push({
       id: 3,
       name: "test",
@@ -129,7 +129,7 @@ describe("LearningRoomPresenter", () => {
     expect(systemUnderTest["viewModel"].roomLength.Value).toEqual(
       (roomTO.learningElements.length / 2) * 4
     );
-    expect(systemUnderTest["viewModel"].roomWidth.Value).toEqual(10);
+    expect(systemUnderTest["viewModel"].roomWidth.Value).toEqual(8);
   });
 
   test("createLearningElements calls the builder for each LearningElement", () => {
