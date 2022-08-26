@@ -38,6 +38,10 @@ jest.mock(
   "../../../../Core/Presentation/React/ScorePanel/ScorePanel",
   () => "mocked"
 );
+jest.mock(
+  "~ReactComponents/LearningWorldGoalPanel/LearningWorldGoalPanel",
+  () => "mocked"
+);
 
 describe("App", () => {
   test("should render", () => {
