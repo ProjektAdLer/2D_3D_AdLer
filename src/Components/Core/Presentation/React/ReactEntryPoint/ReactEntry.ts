@@ -119,11 +119,5 @@ export default class ReactEntry implements IReactEntry {
         BUILDER_TYPES.IDebugPanelBuilder
       )
     );
-
-    director.build(
-      CoreDIContainer.get<IPresentationBuilder>(
-        BUILDER_TYPES.ILearningWorldNamePanelBuilder
-      )
-    );
   }
 }

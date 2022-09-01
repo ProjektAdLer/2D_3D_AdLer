@@ -2,17 +2,14 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import LearningWorldNamePanel from "../../../../Core/Presentation/React/LearningWorldNamePanel/LearningWorldNamePanel";
 import LearningWorldNamePanelViewModel from "../../../../Core/Presentation/React/LearningWorldNamePanel/LearningWorldNamePanelViewModel";
-import useViewModelControllerProviderMock from "../CustomHooks/UseViewModelControllerProvider/useViewModelControllerProviderMock";
+import useBuilderMock from "../CustomHooks/useBuilder/useBuilderMock";
 
 const fakeModel = new LearningWorldNamePanelViewModel();
 
 describe("LearningWorldNamePanel", () => {
   test("should render", () => {
     fakeModel.worldName.Value = "Test World";
-    useViewModelControllerProviderMock<
-      LearningWorldNamePanelViewModel,
-      undefined
-    >([[fakeModel], []]);
+    useBuilderMock([fakeModel, undefined]);
 
     const componentUnderTest = render(<LearningWorldNamePanel />);
 
@@ -20,10 +17,7 @@ describe("LearningWorldNamePanel", () => {
   });
 
   test("should nor render, if no Learning World name is provided", () => {
-    useViewModelControllerProviderMock<
-      LearningWorldNamePanelViewModel,
-      undefined
-    >([[new LearningWorldNamePanelViewModel()], []]);
+    useBuilderMock([new LearningWorldNamePanelViewModel(), undefined]);
 
     const componentUnderTest = render(<LearningWorldNamePanel />);
 

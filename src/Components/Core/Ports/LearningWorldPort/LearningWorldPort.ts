@@ -9,6 +9,7 @@ import ILearningElementsDropdownPresenter from "../../Presentation/React/Learnin
 import type INavigation from "../../Presentation/Babylon/Navigation/INavigation";
 import ILearningWorldNamePanelPresenter from "../../Presentation/React/LearningWorldNamePanel/ILearningWorldNamePanelPresenter";
 import ILearningWorldGoalPanelPresenter from "~ReactComponents/LearningWorldGoalPanel/ILearningWorldGoalPanelPresenter";
+import { logger } from "src/Lib/Logger";
 
 @injectable()
 export default class LearningWorldPort implements ILearningWorldPort {
@@ -50,7 +51,7 @@ export default class LearningWorldPort implements ILearningWorldPort {
     learningElementDropdownPresenter: ILearningElementsDropdownPresenter
   ): void {
     if (this.learningElementDropdownPresenter) {
-      throw new Error("LearningElementDropdownPresenter is already registered");
+      logger.warn("LearningElementDropdownPresenter is already registered");
     }
     this.learningElementDropdownPresenter = learningElementDropdownPresenter;
   }
@@ -59,7 +60,7 @@ export default class LearningWorldPort implements ILearningWorldPort {
     learningWorldNamePanelPresenter: ILearningWorldNamePanelPresenter
   ): void {
     if (this.learningWorldNamePanelPresenter) {
-      throw new Error("LearningWorldNamePanelPresenter is already registered");
+      logger.warn("LearningWorldNamePanelPresenter is already registered");
     }
     this.learningWorldNamePanelPresenter = learningWorldNamePanelPresenter;
   }
@@ -67,7 +68,7 @@ export default class LearningWorldPort implements ILearningWorldPort {
     learningWorldGoalPanelPresenter: ILearningWorldGoalPanelPresenter
   ): void {
     if (this.learningWorldGoalPanelPresenter) {
-      throw new Error("LearningWorldGoalPanelPresenter is already registered");
+      logger.warn("LearningWorldGoalPanelPresenter is already registered");
     }
     this.learningWorldGoalPanelPresenter = learningWorldGoalPanelPresenter;
   }

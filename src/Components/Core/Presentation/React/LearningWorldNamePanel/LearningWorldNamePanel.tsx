@@ -1,16 +1,18 @@
-import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import LearningWorldNamePanelController from "./LearningWorldNamePanelController";
 import LearningWorldNamePanelViewModel from "./LearningWorldNamePanelViewModel";
 import worldIcon from "../../../../../Assets/icons/lernwelt_icon.svg";
 import useObservable from "../CustomHooks/useObservable";
+import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
+
 export default function LearningWorldNamePanel() {
-  const [viewModels] = useViewModelControllerProvider<
+  const [viewModel] = useBuilder<
     LearningWorldNamePanelViewModel,
     LearningWorldNamePanelController
-  >(LearningWorldNamePanelViewModel);
+  >(BUILDER_TYPES.ILearningWorldNamePanelBuilder);
 
-  const [learningWorldName] = useObservable<string>(viewModels[0]?.worldName);
+  const [learningWorldName] = useObservable<string>(viewModel?.worldName);
 
   if (!learningWorldName) return null;
 

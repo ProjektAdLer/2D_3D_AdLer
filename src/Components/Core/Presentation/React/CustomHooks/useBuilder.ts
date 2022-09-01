@@ -11,10 +11,11 @@ export default function useBuilder<ViewModel, Controller>(
   const director = useInjection<IPresentationDirector>(
     BUILDER_TYPES.IPresentationDirector
   );
-
   const builder = useInjection<IPresentationBuilder>(builderType);
+
   const [controller, setController] = useState<Controller>();
   const [viewModel, setViewModel] = useState<ViewModel>();
+
   useEffect(() => {
     director.build(builder);
 
