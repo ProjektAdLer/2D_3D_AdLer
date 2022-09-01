@@ -93,7 +93,7 @@ export default class LearningRoomPresenter implements ILearningRoomPresenter {
   ): [Vector3, number][] {
     let positions: [Vector3, number][] = [];
     let sideAlternation = -1;
-    const sideOffset = 0.9;
+    const sideOffset = 1;
 
     for (let i = 0; i < elementCount; i++) {
       positions.push([
