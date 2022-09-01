@@ -1,16 +1,16 @@
 import useObservable from "../CustomHooks/useObservable";
-import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import ScorePanelViewModel from "./ScorePanelViewModel";
+import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 
 import coinIcon from "../../../../../Assets/icons/coin_icon.svg";
 
 export default function ScorePanel() {
-  const [viewModels] = useViewModelControllerProvider<
-    ScorePanelViewModel,
-    undefined
-  >(ScorePanelViewModel);
-  const [score] = useObservable<number>(viewModels[0]?.score);
+  const [viewModel] = useBuilder<ScorePanelViewModel, undefined>(
+    BUILDER_TYPES.IScorePanelBuilder
+  );
+  const [score] = useObservable<number>(viewModel?.score);
 
   return (
     <div className="grid justify-end">

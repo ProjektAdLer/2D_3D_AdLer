@@ -6,7 +6,7 @@ import LearningRoomPort from "../../../../Core/Ports/LearningRoomPort/LearningRo
 jest.mock("@babylonjs/core");
 const addLearningRoomPresenterMock = jest.spyOn(
   LearningRoomPort.prototype,
-  "addLearningRoomPresenter"
+  "registerLearningRoomPresenter"
 );
 
 describe("LearningRoomBuilder", () => {

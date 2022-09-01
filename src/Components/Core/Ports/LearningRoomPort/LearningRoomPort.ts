@@ -10,6 +10,13 @@ export default class LearningRoomPort implements ILearningRoomPort {
   private learningRoomPresenters: ILearningRoomPresenter[] = [];
 
   presentNewScore(score: number, completed: boolean, roomId: number): void {
+    if (!this.scorePanelPresenter) {
+      throw new Error("ScorePanelPresenter is not registered");
+    }
+    if (this.learningRoomPresenters.length === 0) {
+      throw new Error("No LearningRoomPresenter is registered");
+    }
+
     this.scorePanelPresenter.presentScore(score);
 
     if (completed) {
@@ -22,6 +29,10 @@ export default class LearningRoomPort implements ILearningRoomPort {
   registerLearningRoomPresenter(
     learningRoomPresenter: ILearningRoomPresenter
   ): void {
+    if (learningRoomPresenter === undefined) {
+      throw new Error("Passed learningRoomPresenter is undefined");
+    }
+
     if (
       this.learningRoomPresenters.find(
         (lrp) => lrp === learningRoomPresenter
@@ -33,25 +44,11 @@ export default class LearningRoomPort implements ILearningRoomPort {
     }
   }
 
-  presentNewScore(score: number, completed: boolean, roomId: number): void {
-    // create score panel the first time a score is displayed
-    if (!this.scorePanelPresenter) {
-      let director = CoreDIContainer.get<IPresentationDirector>(
-        BUILDER_TYPES.IPresentationDirector
-      );
-      const builder = CoreDIContainer.get<IPresentationBuilder>(
-        BUILDER_TYPES.IScorePanelBuilder
-      );
-      director.build(builder);
-      this.scorePanelPresenter = builder.getPresenter();
+  registerScorePanelPresenter(scorePanelPresenter: IScorePanelPresenter): void {
+    if (scorePanelPresenter) {
+      logger.warn("ScorePanelPresenter is already registered");
     }
 
-    this.scorePanelPresenter.presentScore(score);
-
-    if (completed) {
-      this.learningRoomPresenters
-        .find((presenter) => presenter.LearningRoomId === roomId)
-        ?.openDoor();
-    }
+    this.scorePanelPresenter = scorePanelPresenter;
   }
 }
