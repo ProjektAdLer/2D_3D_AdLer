@@ -3,6 +3,9 @@ import MoodlePort from "../../../Core/Ports/MoodlePort/MoodlePort";
 import IMoodleLoginButtonPresenter from "../../../Core/Presentation/React/MoodleLoginButton/IMoodleLoginButtonPresenter";
 import IMoodleLoginFormPresenter from "../../../Core/Presentation/React/MoodleLoginForm/IMoodleLoginFormPresenter";
 import CoreDIContainer from "../../../../Components/Core/DependencyInjection/CoreDIContainer";
+import { logger } from "../../../../Lib/Logger";
+
+jest.mock("src/Lib/Logger");
 
 describe("MoodlePort", () => {
   let systemUnderTest: MoodlePort;
@@ -81,15 +84,14 @@ describe("MoodlePort", () => {
     expect(systemUnderTest["moodleLoginFormPresenter"]).toBe(presenter);
   });
 
-  test("registerMoodleLoginPresenter throws an error if a presenter was already registered", () => {
+  test("registerMoodleLoginPresenter warns an error if a presenter was already registered", () => {
     expect(systemUnderTest["moodleLoginFormPresenter"]).not.toBeDefined();
 
     const presenter = mock<IMoodleLoginFormPresenter>();
     systemUnderTest.registerMoodleLoginFormPresenter(presenter);
+    systemUnderTest.registerMoodleLoginFormPresenter(presenter);
 
-    expect(() => {
-      systemUnderTest.registerMoodleLoginFormPresenter(presenter);
-    }).toThrowError("already registered");
+    expect(logger.warn).toHaveBeenCalledTimes(1);
   });
 
   test("registerMoodleLoginButtonPresenter registers the presenter if none are present", () => {
@@ -101,14 +103,13 @@ describe("MoodlePort", () => {
     expect(systemUnderTest["moodleLoginButtonPresenter"]).toBe(presenter);
   });
 
-  test("registerMoodleLoginButtonPresenter throws an error if a presenter was already registered", () => {
+  test("registerMoodleLoginButtonPresenter warns an error if a presenter was already registered", () => {
     expect(systemUnderTest["moodleLoginButtonPresenter"]).not.toBeDefined();
 
     const presenter = mock<IMoodleLoginButtonPresenter>();
     systemUnderTest.registerMoodleLoginButtonPresenter(presenter);
+    systemUnderTest.registerMoodleLoginButtonPresenter(presenter);
 
-    expect(() => {
-      systemUnderTest.registerMoodleLoginButtonPresenter(presenter);
-    }).toThrowError("already registered");
+    expect(logger.warn).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,26 +1,27 @@
 import useObservable from "../CustomHooks/useObservable";
-import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import MoodleLoginButtonController from "./MoodleLoginButtonController";
 import MoodleLoginButtonViewModel from "./MoodleLoginButtonViewModel";
 
 import moodleIcon from "../../../../../Assets/icons/moodle-icon.svg";
+import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 
 export default function MoodleLoginButton() {
-  const [viewModels, controllers] = useViewModelControllerProvider<
+  const [viewModel, controller] = useBuilder<
     MoodleLoginButtonViewModel,
     MoodleLoginButtonController
-  >(MoodleLoginButtonViewModel);
+  >(BUILDER_TYPES.IMoodleLoginButtonBuilder);
 
-  const [loginSuccessful] = useObservable<boolean>(
-    viewModels[0]?.loginSuccessful
-  );
+  const [loginSuccessful] = useObservable<boolean>(viewModel?.loginSuccessful);
+
+  if (!controller || !viewModel) return null;
 
   return (
     <StyledButton
       color={loginSuccessful ? "success" : "default"}
       onClick={() => {
-        controllers[0].displayLoginForm();
+        controller.displayLoginForm();
       }}
     >
       <img src={moodleIcon} alt="Moodle-Logo"></img>

@@ -1,4 +1,5 @@
 import { injectable } from "inversify";
+import { logger } from "src/Lib/Logger";
 import IMoodleLoginButtonPresenter from "../../Presentation/React/MoodleLoginButton/IMoodleLoginButtonPresenter";
 import IMoodleLoginFormPresenter from "../../Presentation/React/MoodleLoginForm/IMoodleLoginFormPresenter";
 import IMoodlePort from "./IMoodlePort";
@@ -28,7 +29,7 @@ export default class MoodlePort implements IMoodlePort {
   // setter for presenters
   registerMoodleLoginFormPresenter(presenter: IMoodleLoginFormPresenter): void {
     if (this.moodleLoginFormPresenter)
-      throw new Error("MoodlePort is already registered");
+      logger.warn("MoodlePort is already registered");
     this.moodleLoginFormPresenter = presenter;
   }
 
@@ -36,7 +37,7 @@ export default class MoodlePort implements IMoodlePort {
     presenter: IMoodleLoginButtonPresenter
   ): void {
     if (this.moodleLoginButtonPresenter)
-      throw new Error("MoodlePort is already registered");
+      logger.warn("MoodlePort is already registered");
     this.moodleLoginButtonPresenter = presenter;
   }
 }
