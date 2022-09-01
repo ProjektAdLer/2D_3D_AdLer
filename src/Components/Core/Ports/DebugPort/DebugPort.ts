@@ -9,7 +9,7 @@ export default class DebugPort implements IDebugPort {
   private debugPanelPresenter: IDebugPanelPresenter;
   addToMisc(key: string, value: string): void {
     if (!this.debugPanelPresenter) {
-      logger.warn("DebugPanelPresenter is not registered");
+      logger.error("DebugPanelPresenter is not registered");
     }
 
     this.debugPanelPresenter.setMisc({ key, value });
@@ -17,7 +17,7 @@ export default class DebugPort implements IDebugPort {
   @bind
   setUserToken(userToken: string): void {
     if (!this.debugPanelPresenter) {
-      logger.warn("DebugPanelPresenter is not registered");
+      logger.error("DebugPanelPresenter is not registered");
     }
 
     this.debugPanelPresenter.setMoodleToken(userToken);
