@@ -1,4 +1,5 @@
 import { mock } from "jest-mock-extended";
+import { logger } from "../../../../Lib/Logger";
 import BUILDER_TYPES from "../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
@@ -14,6 +15,8 @@ import IPresentationBuilder from "../../../Core/Presentation/PresentationBuilder
 import IPresentationDirector from "../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
 import ILearningElementsDropdownPresenter from "../../../Core/Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
 import ILearningWorldNamePanelPresenter from "../../../Core/Presentation/React/LearningWorldNamePanel/ILearningWorldNamePanelPresenter";
+
+jest.mock("src/Lib/Logger");
 
 const directorMock = mock<IPresentationDirector>();
 const builderMock = mock<IPresentationBuilder>();
@@ -62,16 +65,15 @@ describe("LearningWorldPort", () => {
     );
   });
 
-  test("registerLearningElementDropdownPresenter throws error if presenter is already registered", () => {
+  test("registerLearningElementDropdownPresenter warns error if presenter is already registered", () => {
+    systemUnderTest.registerLearningElementDropdownPresenter(
+      learningElementDropdownPresenterMock
+    );
     systemUnderTest.registerLearningElementDropdownPresenter(
       learningElementDropdownPresenterMock
     );
 
-    expect(() => {
-      systemUnderTest.registerLearningElementDropdownPresenter(
-        learningElementDropdownPresenterMock
-      );
-    }).toThrowError("LearningElementDropdownPresenter is already registered");
+    expect(logger.warn).toBeCalledTimes(1);
   });
 
   test("registerLearningWorldNamePanelPresenter sets private member", () => {
@@ -84,16 +86,15 @@ describe("LearningWorldPort", () => {
     );
   });
 
-  test("registerLearningWorldPanelPresenter throws error if presenter is already registered", () => {
+  test("registerLearningWorldPanelPresenter warns error if presenter is already registered", () => {
+    systemUnderTest.registerLearningWorldNamePanelPresenter(
+      learningWorldNamePanelPresenterMock
+    );
     systemUnderTest.registerLearningWorldNamePanelPresenter(
       learningWorldNamePanelPresenterMock
     );
 
-    expect(() => {
-      systemUnderTest.registerLearningWorldNamePanelPresenter(
-        learningWorldNamePanelPresenterMock
-      );
-    }).toThrowError("LearningWorldNamePanelPresenter is already registered");
+    expect(logger.warn).toHaveBeenCalledTimes(1);
   });
 
   // this needs to be reworked, when more than one learning room is supported
