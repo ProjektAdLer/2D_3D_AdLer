@@ -1,11 +1,10 @@
 import { fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import LearningElementsDropdown from "../../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdown";
-import useViewModelControllerProviderMock from "../CustomHooks/UseViewModelControllerProvider/useViewModelControllerProviderMock";
 import LearningElementsDropdownViewModel from "../../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownViewModel";
-import LearningElementsDropdownController from "../../../../Core/Presentation/React/LearningElementsDropdown/LearningElementsDropdownController";
 import mock from "jest-mock-extended/lib/Mock";
 import ILearningElementsDropdownController from "../../../../Core/Presentation/React/LearningElementsDropdown/ILearningElementsDropdownController";
+import useBuilderMock from "../CustomHooks/useBuilder/useBuilderMock";
 
 const modelWithElements = new LearningElementsDropdownViewModel();
 modelWithElements.learningElementNames.Value = ["Element 1", "Element 2"];
@@ -29,20 +28,20 @@ modelWithElements.learningElements.Value = [
 const mockedController = mock<ILearningElementsDropdownController>();
 
 describe("LearningElementsDrowdownView", () => {
-  it("does no render, if no Learning Elements are provided", () => {
-    useViewModelControllerProviderMock<
-      LearningElementsDropdownViewModel,
-      LearningElementsDropdownController
-    >([[], []]);
+  test("does no render, if no Learning Elements are provided", () => {
+    useBuilderMock([undefined, mockedController]);
     const elementUnderTest = render(<LearningElementsDropdown />);
     expect(elementUnderTest.container.children).toBeEmptyDOMElement;
   });
 
-  it("renders its Learning Elements", () => {
-    useViewModelControllerProviderMock<
-      LearningElementsDropdownViewModel,
-      LearningElementsDropdownController
-    >([[modelWithElements], []]);
+  test("does no render, if no controller is provided", () => {
+    useBuilderMock([undefined, undefined]);
+    const elementUnderTest = render(<LearningElementsDropdown />);
+    expect(elementUnderTest.container.children).toBeEmptyDOMElement;
+  });
+
+  test("renders its Learning Elements", () => {
+    useBuilderMock([modelWithElements, mockedController]);
     // simulate click on the dropdown button
     const elementUnderTest = render(<LearningElementsDropdown />);
     fireEvent.click(elementUnderTest.getByRole("button"));
@@ -51,12 +50,9 @@ describe("LearningElementsDrowdownView", () => {
     expect(elementUnderTest.getByText("Element 2")).toBeInTheDocument();
   });
 
-  it("should call controller with LearningElement Idd, when element in clicked", () => {
+  test("should call controller with LearningElement Idd, when element in clicked", () => {
     // Arrnge
-    useViewModelControllerProviderMock<
-      LearningElementsDropdownViewModel,
-      LearningElementsDropdownController
-    >([[modelWithElements], [mockedController]]);
+    useBuilderMock([modelWithElements, mockedController]);
 
     // Act
     // simulate click on the dropdown button

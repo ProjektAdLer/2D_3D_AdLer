@@ -8,19 +8,24 @@ import StyledButton from "../ReactBaseComponents/StyledButton";
 import LearningElementsDropdownController from "./LearningElementsDropdownController";
 import LearningElementsDropdownViewModel from "./LearningElementsDropdownViewModel";
 import StyledContainer from "~ReactComponents/ReactBaseComponents/StyledContainer";
+import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 
 export default function LearningElementsDropdown() {
-  const [viewModels, controllers] = useViewModelControllerProvider<
+  const [viewModel, controller] = useBuilder<
     LearningElementsDropdownViewModel,
     LearningElementsDropdownController
-  >(LearningElementsDropdownViewModel);
+  >(BUILDER_TYPES.ILearningElementsDropdownBuilder);
 
   const [learningElements] = useObservable<LearningElementTO[]>(
-    viewModels[0]?.learningElements
+    viewModel?.learningElements
   );
 
   const [dropDownOpen, setDropDownOpen] = useState(false);
+
   if (learningElements?.length === 0 || !learningElements) return null;
+  if (!controller) return null;
+
   return (
     <CustomDropdown
       headerElement={
@@ -44,7 +49,7 @@ export default function LearningElementsDropdown() {
           <StyledButton
             key={index}
             shape="freefloatleft"
-            onClick={() => controllers[0]?.startLearningElement(element.id)}
+            onClick={() => controller?.startLearningElement(element.id)}
           >
             <div className="w-5 lg:w-10">
               {getIcon(element.learningElementData.type)}
