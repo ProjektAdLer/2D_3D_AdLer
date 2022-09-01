@@ -33,6 +33,6 @@ export default class LearningRoomBuilder extends PresentationBuilder<
     super.buildPresenter();
     CoreDIContainer.get<ILearningRoomPort>(
       PORT_TYPES.ILearningRoomPort
-    ).addLearningRoomPresenter(this.presenter!);
+    ).registerLearningRoomPresenter(this.presenter!);
   }
 }

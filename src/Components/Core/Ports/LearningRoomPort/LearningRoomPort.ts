@@ -1,30 +1,35 @@
 import ILearningRoomPort from "./ILearningRoomPort";
 import IScorePanelPresenter from "../../Presentation/React/ScorePanel/IScorePanelPresenter";
 import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
-import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
-import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
-import BUILDER_TYPES from "../../DependencyInjection/Builders/BUILDER_TYPES";
-import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
 import { injectable } from "inversify";
+import { logger } from "src/Lib/Logger";
 
 @injectable()
 export default class LearningRoomPort implements ILearningRoomPort {
   private scorePanelPresenter: IScorePanelPresenter;
   private learningRoomPresenters: ILearningRoomPresenter[] = [];
 
-  addLearningRoomPresenter(
+  presentNewScore(score: number, completed: boolean, roomId: number): void {
+    this.scorePanelPresenter.presentScore(score);
+
+    if (completed) {
+      this.learningRoomPresenters
+        .find((presenter) => presenter.LearningRoomId === roomId)
+        ?.openDoor();
+    }
+  }
+
+  registerLearningRoomPresenter(
     learningRoomPresenter: ILearningRoomPresenter
   ): void {
-    if (!learningRoomPresenter) {
-      throw new Error("LearningRoomPresenter is not defined");
-    }
-
     if (
       this.learningRoomPresenters.find(
         (lrp) => lrp === learningRoomPresenter
       ) === undefined
     ) {
       this.learningRoomPresenters.push(learningRoomPresenter);
+    } else {
+      logger.warn("LearningRoomPresenter is already registered");
     }
   }
 
