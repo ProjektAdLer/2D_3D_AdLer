@@ -3,18 +3,18 @@ import { fireEvent, render } from "@testing-library/react";
 import { mock } from "jest-mock-extended";
 import ILoadLearningWorldButtonController from "../../../../Core/Presentation/React/LoadLearningWorldButton/ILoadLearningWorldButtonController";
 import LoadLearningWorldButton from "../../../../Core/Presentation/React/LoadLearningWorldButton/LoadLearningWorldButton";
-import useViewModelControllerProviderMock from "../CustomHooks/UseViewModelControllerProvider/useViewModelControllerProviderMock";
+import useBuilderMock from "../CustomHooks/useBuilder/useBuilderMock";
 
 const fakeController = mock<ILoadLearningWorldButtonController>();
 
 describe("LoadLearningWorldButtonView", () => {
   test("should render", () => {
-    useViewModelControllerProviderMock();
+    useBuilderMock([undefined, undefined]);
     render(<LoadLearningWorldButton />);
   });
 
   test("should call controller when clicked", () => {
-    useViewModelControllerProviderMock([[], [fakeController]]);
+    useBuilderMock([undefined, fakeController]);
 
     const componentUnderTest = render(<LoadLearningWorldButton />);
 
