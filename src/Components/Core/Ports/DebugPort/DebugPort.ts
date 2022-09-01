@@ -1,5 +1,6 @@
 import bind from "bind-decorator";
 import { injectable } from "inversify";
+import { logger } from "src/Lib/Logger";
 import type IDebugPanelPresenter from "../../Presentation/React/DebugPanel/IDebugPanelPresenter";
 import IDebugPort from "./IDebugPort";
 
@@ -8,7 +9,7 @@ export default class DebugPort implements IDebugPort {
   private debugPanelPresenter: IDebugPanelPresenter;
   addToMisc(key: string, value: string): void {
     if (!this.debugPanelPresenter) {
-      throw new Error("DebugPanelPresenter is not registered");
+      logger.warn("DebugPanelPresenter is not registered");
     }
 
     this.debugPanelPresenter.setMisc({ key, value });
@@ -16,7 +17,7 @@ export default class DebugPort implements IDebugPort {
   @bind
   setUserToken(userToken: string): void {
     if (!this.debugPanelPresenter) {
-      throw new Error("DebugPanelPresenter is not registered");
+      logger.warn("DebugPanelPresenter is not registered");
     }
 
     this.debugPanelPresenter.setMoodleToken(userToken);
@@ -27,9 +28,7 @@ export default class DebugPort implements IDebugPort {
     debugPanelPresenter: IDebugPanelPresenter
   ): void {
     if (this.debugPanelPresenter) {
-      throw new Error(
-        "DebugPort already has a debug panel presenter registered."
-      );
+      logger.warn("DebugPort already has a debug panel presenter registered.");
     }
     this.debugPanelPresenter = debugPanelPresenter;
   }

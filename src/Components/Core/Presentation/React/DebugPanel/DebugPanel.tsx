@@ -1,16 +1,16 @@
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
+import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
 import useObservable from "../CustomHooks/useObservable";
-import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import DebugPanelController from "./DebugPanelController";
 import DebugPanelViewModel, { MiscEntries } from "./DebugPanelViewModel";
 
 export default function DebugPanel() {
-  const [viewModels] = useViewModelControllerProvider<
-    DebugPanelViewModel,
-    DebugPanelController
-  >(DebugPanelViewModel);
+  const [viewModel] = useBuilder<DebugPanelViewModel, DebugPanelController>(
+    BUILDER_TYPES.IDebugPanelBuilder
+  );
 
-  const [moodleToken] = useObservable<string>(viewModels[0]?.moodleToken);
-  const [miscItems] = useObservable<MiscEntries>(viewModels[0]?.misc);
+  const [moodleToken] = useObservable<string>(viewModel?.moodleToken);
+  const [miscItems] = useObservable<MiscEntries>(viewModel?.misc);
 
   return (
     /*
