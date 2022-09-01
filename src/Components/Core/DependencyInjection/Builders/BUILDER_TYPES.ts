@@ -8,7 +8,7 @@ const BUILDER_TYPES = {
   ILearningElementModalBuilder: Symbol("ILearningElementModalBuilder"),
   IAvatarBuilder: Symbol("IAvatarBuilder"),
   ILearningElementsDropdownBuilder: Symbol("ILearningElementsDropdownBuilder"),
-  IErrorModalManagerBuilder: Symbol("IErrorModalManagerBuilder"),
+  IModalManagerBuilder: Symbol("IModalManagerBuilder"),
   IMoodleLoginButtonBuilder: Symbol("IMoodleLoginButtonBuilder"),
   IBottomTooltipBuilder: Symbol("IBottomTooltipBuilder"),
   IDebugPanelBuilder: Symbol("IDebugPanelBuilder"),

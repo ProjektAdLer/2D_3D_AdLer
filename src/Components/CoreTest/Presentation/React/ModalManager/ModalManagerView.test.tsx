@@ -4,8 +4,8 @@ import { mock } from "jest-mock-extended";
 import IModalManagerController from "../../../../Core/Presentation/React/ModalManager/IModalManagerController";
 import ModalManager from "../../../../Core/Presentation/React/ModalManager/ModalManager";
 import ModalManagerViewModel from "../../../../Core/Presentation/React/ModalManager/ModalManagerViewModel";
-import useViewModelControllerProviderMock from "../CustomHooks/UseViewModelControllerProvider/useViewModelControllerProviderMock";
 import "../../../../Core/Types/array.extensions";
+import useBuilderMock from "../CustomHooks/useBuilder/useBuilderMock";
 
 let fakeModel = new ModalManagerViewModel();
 const fakeController = mock<IModalManagerController>();
@@ -26,10 +26,7 @@ describe("ModalManager", () => {
         type: "notification",
       },
     ];
-    useViewModelControllerProviderMock<
-      ModalManagerViewModel,
-      IModalManagerController
-    >([[fakeModel], [fakeController]]);
+    useBuilderMock([fakeModel, fakeController]);
     const componentUnderTest = render(<ModalManager />);
 
     expect(componentUnderTest.getByText("test2")).toBeInTheDocument();

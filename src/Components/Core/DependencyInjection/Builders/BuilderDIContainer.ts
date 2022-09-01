@@ -44,7 +44,7 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementsDropdownBuilder).to(
     LearningElementsDropdownBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IErrorModalManagerBuilder).to(
+  bind<IPresentationBuilder>(BUILDER_TYPES.IModalManagerBuilder).to(
     ModalManagerBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IMoodleLoginButtonBuilder).to(
