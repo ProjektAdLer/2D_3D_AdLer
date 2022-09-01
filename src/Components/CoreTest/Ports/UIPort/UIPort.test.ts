@@ -4,6 +4,9 @@ import { mock } from "jest-mock-extended";
 import IModalManagerPresenter from "../../../Core/Presentation/React/ModalManager/IModalManagerPresenter";
 import IBottomTooltipPresenter from "../../../Core/Presentation/React/BottomTooltip/IBottomTooltipPresenter";
 import { LearningElementTO } from "../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
+import { logger } from "../../../../Lib/Logger";
+
+jest.mock("src/Lib/Logger");
 
 describe("UIPort", () => {
   let systemUnderTest: UIPort;
@@ -90,17 +93,16 @@ describe("UIPort", () => {
     );
   });
 
-  test("registerBottomTooltipPresenter throws error if BottomTooltipPresenter is already registered", () => {
+  test("registerBottomTooltipPresenter warns if BottomTooltipPresenter is already registered", () => {
     const mockBottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
     systemUnderTest.registerBottomTooltipPresenter(
       mockBottomTooltipPresenterMock
     );
+    systemUnderTest.registerBottomTooltipPresenter(
+      mockBottomTooltipPresenterMock
+    );
 
-    expect(() => {
-      systemUnderTest.registerBottomTooltipPresenter(
-        mockBottomTooltipPresenterMock
-      );
-    }).toThrowError("BottomTooltipPresenter already registered");
+    expect(logger.warn).toHaveBeenCalledTimes(1);
   });
 
   test("registerModalManager registers the presenter if none is present", () => {
@@ -116,9 +118,8 @@ describe("UIPort", () => {
   test("registerModalManager throws error if ModalManagerPresenter is already registered", () => {
     const mockModalManagerPresenterMock = mock<IModalManagerPresenter>();
     systemUnderTest.registerModalManager(mockModalManagerPresenterMock);
+    systemUnderTest.registerModalManager(mockModalManagerPresenterMock);
 
-    expect(() => {
-      systemUnderTest.registerModalManager(mockModalManagerPresenterMock);
-    }).toThrowError("ModalManagerPresenter already registered");
+    expect(logger.warn).toHaveBeenCalledTimes(1);
   });
 });

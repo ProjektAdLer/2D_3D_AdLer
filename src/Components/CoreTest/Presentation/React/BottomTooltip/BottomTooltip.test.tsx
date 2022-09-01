@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import BottomTooltip from "../../../../Core/Presentation/React/BottomTooltip/BottomTooltip";
 import BottomTooltipViewModel from "../../../../Core/Presentation/React/BottomTooltip/BottomTooltipViewModel";
-import useViewModelControllerProviderMock from "../CustomHooks/UseViewModelControllerProvider/useViewModelControllerProviderMock";
+import useBuilderMock from "../CustomHooks/useBuilder/useBuilderMock";
 
 let fakeModel = new BottomTooltipViewModel();
 
@@ -12,10 +12,7 @@ describe("BottomTooltip", () => {
     fakeModel.iconType.Value = "test";
     fakeModel.text.Value = "testText";
 
-    useViewModelControllerProviderMock<BottomTooltipViewModel, undefined>([
-      [fakeModel],
-      [],
-    ]);
+    useBuilderMock([fakeModel, undefined]);
 
     const componentUnderTest = render(<BottomTooltip />);
 
@@ -27,10 +24,7 @@ describe("BottomTooltip", () => {
     fakeModel.iconType.Value = "test";
     fakeModel.text.Value = "testText";
 
-    useViewModelControllerProviderMock<BottomTooltipViewModel, undefined>([
-      [fakeModel],
-      [],
-    ]);
+    useBuilderMock([fakeModel, undefined]);
 
     const componentUnderTest = render(<BottomTooltip />);
 

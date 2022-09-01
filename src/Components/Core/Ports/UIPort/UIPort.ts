@@ -4,6 +4,7 @@ import { LearningElementTO } from "../LearningWorldPort/ILearningWorldPort";
 import IBottomTooltipPresenter from "../../Presentation/React/BottomTooltip/IBottomTooltipPresenter";
 import IModalManagerPresenter from "../../Presentation/React/ModalManager/IModalManagerPresenter";
 import IUIPort from "./IUIPort";
+import { logger } from "src/Lib/Logger";
 
 @injectable()
 export default class UIPort implements IUIPort {
@@ -39,14 +40,14 @@ export default class UIPort implements IUIPort {
     bottomTooltipPresenter: IBottomTooltipPresenter
   ): void {
     if (this.bottomTooltipPresenter) {
-      throw new Error("BottomTooltipPresenter already registered");
+      logger.warn("BottomTooltipPresenter already registered");
     }
     this.bottomTooltipPresenter = bottomTooltipPresenter;
   }
 
   registerModalManager(presenter: IModalManagerPresenter): void {
     if (this.modalManagerPresenter) {
-      throw new Error("ModalManagerPresenter already registered");
+      logger.warn("ModalManagerPresenter already registered");
     }
     this.modalManagerPresenter = presenter;
   }

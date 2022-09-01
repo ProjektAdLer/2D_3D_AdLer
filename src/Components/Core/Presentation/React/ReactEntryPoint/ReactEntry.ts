@@ -107,11 +107,5 @@ export default class ReactEntry implements IReactEntry {
         BUILDER_TYPES.IMoodleLoginButtonBuilder
       )
     );
-
-    director.build(
-      CoreDIContainer.get<IPresentationBuilder>(
-        BUILDER_TYPES.IBottomTooltipBuilder
-      )
-    );
   }
 }

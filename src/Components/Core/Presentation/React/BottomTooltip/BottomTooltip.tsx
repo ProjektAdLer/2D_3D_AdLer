@@ -1,17 +1,18 @@
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
+import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
 import { getIcon } from "../../Utils/GetIcon";
 import useObservable from "../CustomHooks/useObservable";
-import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
 export default function BottomTooltip() {
-  const [viewModels] = useViewModelControllerProvider<BottomTooltipViewModel>(
-    BottomTooltipViewModel
+  const [viewModel] = useBuilder<BottomTooltipViewModel, undefined>(
+    BUILDER_TYPES.IBottomTooltipBuilder
   );
-  const [show] = useObservable<boolean>(viewModels[0]?.show);
-  const [type] = useObservable<string>(viewModels[0]?.iconType);
-  const [text] = useObservable<string>(viewModels[0]?.text);
+  const [show] = useObservable<boolean>(viewModel?.show);
+  const [type] = useObservable<string>(viewModel?.iconType);
+  const [text] = useObservable<string>(viewModel?.text);
 
-  if (!show || viewModels.length === 0) return null;
+  if (!show || !text || !type) return null;
 
   return (
     <div className="grid justify-center">
