@@ -1,6 +1,7 @@
 import { useState } from "react";
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
+import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
 import useObservable from "../CustomHooks/useObservable";
-import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import StyledInputField from "../ReactBaseComponents/StyledInputField";
@@ -10,20 +11,22 @@ import MoodleLoginFormController from "./MoodleLoginFormController";
 import MoodleLoginFormViewModel from "./MoodleLoginFormViewModel";
 
 export default function MoodleLoginForm() {
-  const [viewModels, controllers] = useViewModelControllerProvider<
+  const [viewModel, controller] = useBuilder<
     MoodleLoginFormViewModel,
     MoodleLoginFormController
-  >(MoodleLoginFormViewModel);
+  >(BUILDER_TYPES.IMoodleLoginFormBuilder);
 
   const [modalVisible, setModalVisible] = useObservable<boolean>(
-    viewModels[0]?.visible
+    viewModel?.visible
   );
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
+  if (!viewModel || !controller) return null;
+
   const handleSubmit = async () => {
-    await controllers[0].loginAsync(userName, password);
+    await controller.loginAsync(userName, password);
   };
 
   return (

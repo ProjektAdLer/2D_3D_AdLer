@@ -39,8 +39,6 @@ export default class ReactEntry implements IReactEntry {
 
     bla.render(strictModeComponent);
 
-    this.buildViewModels();
-
     this.startDebugUseCase();
 
     this.setDebugShortcut();
@@ -77,17 +75,5 @@ export default class ReactEntry implements IReactEntry {
         USECASE_TYPES.IDebugUseCase
       ).executeAsync();
     }
-  }
-
-  private buildViewModels(): void {
-    let director = CoreDIContainer.get<IPresentationDirector>(
-      BUILDER_TYPES.IPresentationDirector
-    );
-
-    director.build(
-      CoreDIContainer.get<IPresentationBuilder>(
-        BUILDER_TYPES.IMoodleLoginFormBuilder
-      )
-    );
   }
 }
