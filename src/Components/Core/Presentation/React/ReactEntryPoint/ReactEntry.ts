@@ -113,11 +113,5 @@ export default class ReactEntry implements IReactEntry {
         BUILDER_TYPES.IBottomTooltipBuilder
       )
     );
-
-    director.build(
-      CoreDIContainer.get<IPresentationBuilder>(
-        BUILDER_TYPES.IDebugPanelBuilder
-      )
-    );
   }
 }
