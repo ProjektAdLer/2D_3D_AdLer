@@ -1,19 +1,22 @@
-import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import LoadLearningWorldButtonController from "./LoadLearningWorldButtonController";
 import LoadLearningWorldButtonViewModel from "./LoadLearningWorldButtonViewModel";
-
 import debugIcon from "../../../../../Assets/icons/debug-icon.svg";
+import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 
 export default function LoadLearningWorldButton() {
-  const [, controllers] = useViewModelControllerProvider<
+  const [, controller] = useBuilder<
     LoadLearningWorldButtonViewModel,
     LoadLearningWorldButtonController
-  >(LoadLearningWorldButtonViewModel);
+  >(BUILDER_TYPES.ILoadLearningWorldButtonBuilder);
+
+  if (!controller) return null;
+
   return (
     <StyledButton
       onClick={async () => {
-        await controllers[0].loadWorld();
+        await controller.loadWorld();
       }}
     >
       <img className="" src={debugIcon} alt="Debug-Icon"></img>
