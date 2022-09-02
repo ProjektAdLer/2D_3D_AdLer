@@ -7,6 +7,7 @@ import ILearningElementPresenter from "../../Presentation/Babylon/LearningElemen
 import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
 import ILearningElementModalPresenter from "../../Presentation/React/LearningElementModal/ILearningElementModalPresenter";
+import { logger } from "src/Lib/Logger";
 
 @injectable()
 export default class LearningElementPort implements ILearningElementPort {
@@ -26,15 +27,14 @@ export default class LearningElementPort implements ILearningElementPort {
     learningElementStartedTO: LearningElementTO
   ): void {
     if (!this.modalPresenter) {
-      let director = CoreDIContainer.get<IPresentationDirector>(
-        BUILDER_TYPES.IPresentationDirector
-      );
-      const builder = CoreDIContainer.get<IPresentationBuilder>(
-        BUILDER_TYPES.ILearningElementModalBuilder
-      );
-      director.build(builder);
-      this.modalPresenter = builder.getPresenter();
+      throw new Error("LearningElementModalPresenter is not registered.");
     }
     this.modalPresenter.presentLearningElementModal(learningElementStartedTO);
+  }
+
+  registerModalPresenter(modalPresenter: ILearningElementModalPresenter): void {
+    if (this.modalPresenter)
+      logger.warn("LearningElementModalPresenter is already registered.");
+    this.modalPresenter = modalPresenter;
   }
 }

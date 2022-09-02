@@ -6,7 +6,7 @@ import LearningElementModal from "../../../../Core/Presentation/React/LearningEl
 import LearningElementModalController from "../../../../Core/Presentation/React/LearningElementModal/LearningElementModalController";
 import LearningElementModalViewModel from "../../../../Core/Presentation/React/LearningElementModal/LearningElementModalViewModel";
 import * as NewH5PContent from "../../../../Core/Presentation/React/LearningElementModal/SubComponents/NewH5PContent";
-import useViewModelControllerProviderMock from "../CustomHooks/UseViewModelControllerProvider/useViewModelControllerProviderMock";
+import useBuilderMock from "../CustomHooks/useBuilder/useBuilderMock";
 
 let fakeModel = new LearningElementModalViewModel();
 fakeModel.isOpen.Value = true;
@@ -19,20 +19,18 @@ const fakeController = mock<LearningElementModalController>();
 
 describe("LearningElementModal", () => {
   test("should not render when closed", () => {
-    useViewModelControllerProviderMock<
-      LearningElementModalViewModel,
-      LearningElementModalController
-    >([[], []]);
+    fakeModel.isOpen.Value = false;
+
+    useBuilderMock([fakeModel, fakeController]);
 
     const componentUnderTest = render(<LearningElementModal />);
     expect(componentUnderTest.container.childElementCount).toBe(0);
+
+    fakeModel.isOpen.Value = true;
   });
 
   test("should render its content", () => {
-    useViewModelControllerProviderMock<
-      LearningElementModalViewModel,
-      LearningElementModalController
-    >([[fakeModel], []]);
+    useBuilderMock([fakeModel, fakeController]);
 
     const componentUnderTest = render(<LearningElementModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
@@ -54,10 +52,7 @@ describe("LearningElementModal", () => {
         jest.spyOn(NewH5PContent, "default").mockReturnValue(<div></div>);
       }
 
-      useViewModelControllerProviderMock<
-        LearningElementModalViewModel,
-        LearningElementModalController
-      >([[fakeModel], []]);
+      useBuilderMock([fakeModel, fakeController]);
 
       const componentUnderTest = render(<LearningElementModal />);
       expect(componentUnderTest.container.childElementCount).toBe(1);
@@ -68,10 +63,7 @@ describe("LearningElementModal", () => {
     fakeModel.learningElementData.Value = {
       type: "type",
     };
-    useViewModelControllerProviderMock<
-      LearningElementModalViewModel,
-      LearningElementModalController
-    >([[fakeModel], []]);
+    useBuilderMock([fakeModel, fakeController]);
 
     const componentUnderTest = render(<LearningElementModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
@@ -81,10 +73,7 @@ describe("LearningElementModal", () => {
   });
 
   test("should call controller with learning element id when closed", () => {
-    useViewModelControllerProviderMock<
-      LearningElementModalViewModel,
-      LearningElementModalController
-    >([[fakeModel], [fakeController]]);
+    useBuilderMock([fakeModel, fakeController]);
 
     const componentUnderTest = render(<LearningElementModal />);
     fireEvent.click(componentUnderTest.getByRole("button"));

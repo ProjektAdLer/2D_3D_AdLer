@@ -4,9 +4,10 @@ import TextComponent from "./SubComponents/TextComponent";
 import LearningElementModalViewModel from "./LearningElementModalViewModel";
 import StyledModal from "../ReactBaseComponents/StyledModal";
 import useObservable from "../CustomHooks/useObservable";
-import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import LearningElementModalController from "./LearningElementModalController";
 import NewH5PContent from "./SubComponents/NewH5PContent";
+import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 
 const elementBuilder = (modalViewModel: LearningElementModalViewModel<any>) => {
   const loremText =
@@ -39,14 +40,14 @@ const elementBuilder = (modalViewModel: LearningElementModalViewModel<any>) => {
 };
 
 export default function LearningElementModal() {
-  const [viewModels, controllers] = useViewModelControllerProvider<
+  const [viewModel, controller] = useBuilder<
     LearningElementModalViewModel,
     LearningElementModalController
-  >(LearningElementModalViewModel);
-  const [isOpen, setOpen] = useObservable<boolean>(viewModels[0]?.isOpen);
+  >(BUILDER_TYPES.ILearningElementModalBuilder);
+  const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
 
+  if (!viewModel || !controller) return null;
   if (!isOpen) return null;
-  if (!viewModels[0]) return null;
 
   const modalConfig = {
     text: "h-[80vh]",
@@ -54,7 +55,7 @@ export default function LearningElementModal() {
     video: "",
     h5p: "",
   };
-  const modalType = viewModels[0].learningElementData.Value.type as
+  const modalType = viewModel.learningElementData.Value.type as
     | "text"
     | "image"
     | "video"
@@ -62,17 +63,17 @@ export default function LearningElementModal() {
   return (
     <StyledModal
       title={
-        viewModels[0]?.learningElementData?.Value?.type?.toUpperCase() +
+        viewModel?.learningElementData?.Value?.type?.toUpperCase() +
         " Learning Element"
       }
       onClose={() => {
         setOpen(false);
-        controllers[0].scoreLearningElement(viewModels[0]?.id.Value);
+        controller.scoreLearningElement(viewModel?.id.Value);
       }}
       showModal={isOpen}
       className={`flex flex-col justify-center gap-2 p-2 m-3 rounded-lg ${modalConfig[modalType]} `}
     >
-      {elementBuilder(viewModels[0])}
+      {elementBuilder(viewModel)}
     </StyledModal>
   );
 }

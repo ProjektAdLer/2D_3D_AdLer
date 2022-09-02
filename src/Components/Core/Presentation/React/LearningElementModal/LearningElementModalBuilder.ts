@@ -1,4 +1,6 @@
 import { injectable } from "inversify";
+import ILearningElementPort from "src/Components/Core/Ports/LearningElementPort/ILearningElementPort";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
@@ -35,5 +37,13 @@ export default class LearningElementModalBuilder extends PresentationBuilder<
       this.controller,
       LearningElementModalViewModel
     );
+  }
+
+  override buildPresenter(): void {
+    super.buildPresenter();
+
+    CoreDIContainer.get<ILearningElementPort>(
+      PORT_TYPES.ILearningElementPort
+    ).registerModalPresenter(this.presenter!);
   }
 }

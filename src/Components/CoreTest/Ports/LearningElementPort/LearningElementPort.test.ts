@@ -1,13 +1,11 @@
 import LearningElementPort from "../../../Core/Ports/LearningElementPort/LearningElementPort";
 import { LearningElementTO } from "../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
 import ILearningElementPresenter from "../../../Core/Presentation/Babylon/LearningElement/ILearningElementPresenter";
-import LearningElementModalPresenter from "../../../Core/Presentation/React/LearningElementModal/LearningElementModalPresenter";
+import ILearningElementModalPresenter from "../../../Core/Presentation/React/LearningElementModal/ILearningElementModalPresenter";
+import { mock } from "jest-mock-extended";
+import { logger } from "../../../../Lib/Logger";
 
-// Spyon still needed because presentLearningElementModal from Modal presenter is needed. ~FK
-const presentLearningElementModalMock = jest.spyOn(
-  LearningElementModalPresenter.prototype,
-  "presentLearningElementModal"
-);
+jest.mock("src/Lib/Logger");
 
 describe("LearningElementPort", () => {
   let systemUnderTest: LearningElementPort;
@@ -40,18 +38,18 @@ describe("LearningElementPort", () => {
     }).toThrowError("already added");
   });
 
-  test("startLearningElementEditing builds new LearningElementModalPresenter if its the first time it is called", () => {
+  test("startLearningElementEditing throws error if no LearningElementModalPresenter is registered", () => {
     expect(systemUnderTest["modalPresenter"]).not.toBeDefined();
 
-    systemUnderTest.startLearningElementEditing({
-      id: 1,
-      name: "test",
-      learningElementData: {
-        type: "h5p",
-      },
-    } as LearningElementTO);
-
-    expect(systemUnderTest["modalPresenter"]).toBeDefined();
+    expect(() => {
+      systemUnderTest.startLearningElementEditing({
+        id: 1,
+        name: "test",
+        learningElementData: {
+          type: "h5p",
+        },
+      } as LearningElementTO);
+    }).toThrowError("not registered");
   });
 
   test("startLearningElementEditing calls presentLearningElementModal on learningElementModalPresenter", () => {
@@ -62,12 +60,52 @@ describe("LearningElementPort", () => {
         type: "h5p",
       },
     };
+    const learningElementModalPresenterMock =
+      mock<ILearningElementModalPresenter>();
+    systemUnderTest.registerModalPresenter(learningElementModalPresenterMock);
 
     systemUnderTest.startLearningElementEditing(learningElementTO);
 
-    expect(presentLearningElementModalMock).toHaveBeenCalledTimes(1);
-    expect(presentLearningElementModalMock).toHaveBeenCalledWith(
-      learningElementTO
+    expect(
+      learningElementModalPresenterMock.presentLearningElementModal
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      learningElementModalPresenterMock.presentLearningElementModal
+    ).toHaveBeenCalledWith(learningElementTO);
+  });
+
+  test("registerModalPresenter registers modalPresenter", () => {
+    const learningElementModalPresenterMock =
+      mock<ILearningElementModalPresenter>();
+
+    systemUnderTest.registerModalPresenter(learningElementModalPresenterMock);
+
+    expect(systemUnderTest["modalPresenter"]).toBe(
+      learningElementModalPresenterMock
+    );
+  });
+
+  test("registerModalPresenter warns if modalPresenter is already registered", () => {
+    const learningElementModalPresenterMock1 =
+      mock<ILearningElementModalPresenter>();
+    systemUnderTest.registerModalPresenter(learningElementModalPresenterMock1);
+
+    systemUnderTest.registerModalPresenter(learningElementModalPresenterMock1);
+
+    expect(logger.warn).toHaveBeenCalledTimes(1);
+  });
+
+  test("registerModalPresenter overrides already registered presenter", () => {
+    const learningElementModalPresenterMock1 =
+      mock<ILearningElementModalPresenter>();
+    systemUnderTest.registerModalPresenter(learningElementModalPresenterMock1);
+    const learningElementModalPresenterMock2 =
+      mock<ILearningElementModalPresenter>();
+
+    systemUnderTest.registerModalPresenter(learningElementModalPresenterMock2);
+
+    expect(systemUnderTest["modalPresenter"]).toBe(
+      learningElementModalPresenterMock2
     );
   });
 });
