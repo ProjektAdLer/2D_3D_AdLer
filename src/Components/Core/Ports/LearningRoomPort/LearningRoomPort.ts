@@ -44,11 +44,13 @@ export default class LearningRoomPort implements ILearningRoomPort {
     }
   }
 
-  registerScorePanelPresenter(scorePanelPresenter: IScorePanelPresenter): void {
-    if (scorePanelPresenter) {
+  registerScorePanelPresenter(
+    newScorePanelPresenter: IScorePanelPresenter
+  ): void {
+    if (this.scorePanelPresenter) {
       logger.warn("ScorePanelPresenter is already registered");
     }
 
-    this.scorePanelPresenter = scorePanelPresenter;
+    this.scorePanelPresenter = newScorePanelPresenter;
   }
 }
