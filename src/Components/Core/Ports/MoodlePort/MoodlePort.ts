@@ -29,7 +29,7 @@ export default class MoodlePort implements IMoodlePort {
   // setter for presenters
   registerMoodleLoginFormPresenter(presenter: IMoodleLoginFormPresenter): void {
     if (this.moodleLoginFormPresenter)
-      logger.warn("MoodlePort is already registered");
+      logger.warn("MoodleLoginFormPresenter is already registered");
     this.moodleLoginFormPresenter = presenter;
   }
 
@@ -37,7 +37,7 @@ export default class MoodlePort implements IMoodlePort {
     presenter: IMoodleLoginButtonPresenter
   ): void {
     if (this.moodleLoginButtonPresenter)
-      logger.warn("MoodlePort is already registered");
+      logger.warn("MoodleLoginButtonPresenter is already registered");
     this.moodleLoginButtonPresenter = presenter;
   }
 }

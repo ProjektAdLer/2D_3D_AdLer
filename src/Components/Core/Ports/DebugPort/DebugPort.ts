@@ -30,7 +30,7 @@ export default class DebugPort implements IDebugPort {
     debugPanelPresenter: IDebugPanelPresenter
   ): void {
     if (this.debugPanelPresenter) {
-      logger.warn("DebugPort already has a debug panel presenter registered.");
+      logger.warn("DebugPanelPresenter is already registered.");
     }
     this.debugPanelPresenter = debugPanelPresenter;
   }
