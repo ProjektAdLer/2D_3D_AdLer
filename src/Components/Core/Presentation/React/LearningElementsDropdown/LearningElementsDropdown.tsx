@@ -2,7 +2,6 @@ import { useState } from "react";
 import { LearningElementTO } from "../../../Ports/LearningWorldPort/ILearningWorldPort";
 import { getIcon } from "../../Utils/GetIcon";
 import useObservable from "../CustomHooks/useObservable";
-import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import CustomDropdown from "../ReactBaseComponents/CustomDropdown";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import LearningElementsDropdownController from "./LearningElementsDropdownController";

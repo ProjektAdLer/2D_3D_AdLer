@@ -1,21 +1,22 @@
-import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
 import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import LearningWorldGoalPanelController from "./LearningWorldGoalPanelController";
 import LearningWorldGoalPanelViewModel from "./LearningWorldGoalPanelViewModel";
 import goalIcon from "../../../../../Assets/icons/learninggoal-icon-nobg.svg";
 import useObservable from "../CustomHooks/useObservable";
 import { useState } from "react";
+import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 
 export default function LearningWorldGoalPanel() {
-  const [viewModels] = useViewModelControllerProvider<
+  const [viewModel] = useBuilder<
     LearningWorldGoalPanelViewModel,
     LearningWorldGoalPanelController
-  >(LearningWorldGoalPanelViewModel);
+  >(BUILDER_TYPES.ILearningWorldGoalPanelBuilder);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [learningWorldGoal] = useObservable<string>(viewModels[0]?.worldGoal);
+  const [learningWorldGoal] = useObservable<string>(viewModel?.worldGoal);
 
-  //   if (!learningWorldGoal) return null;
+  // if (!learningWorldGoal) return null;
   if (!isOpen)
     // wenn nicht geklickt
     return (
