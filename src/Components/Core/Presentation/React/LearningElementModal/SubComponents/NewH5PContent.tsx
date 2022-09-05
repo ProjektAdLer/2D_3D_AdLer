@@ -3,7 +3,6 @@ import { H5P as H5PPlayer } from "h5p-standalone";
 import LearningElementModalViewModel from "../LearningElementModalViewModel";
 import H5PLearningElementData from "../../../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
 import { config } from "../../../../../../config";
-import { logger } from "../../../../../../Lib/Logger";
 
 export default function NewH5PContent({
   viewModel,
@@ -12,11 +11,9 @@ export default function NewH5PContent({
 }) {
   const h5pContainerRef = useRef<HTMLDivElement>(null);
 
-  const [h5pShown, setH5pShown] = useState(false);
-
   useEffect(() => {
     const debug = async () => {
-      if (h5pContainerRef.current && !h5pShown) {
+      if (h5pContainerRef.current) {
         const el = h5pContainerRef.current;
 
         const options = {
@@ -34,8 +31,6 @@ export default function NewH5PContent({
         //   //do something useful with the event
         //   logger.log("xAPI event: ", event);
         // });
-
-        setH5pShown(true);
       }
     };
     debug();
