@@ -1,8 +1,10 @@
 import { Engine } from "@babylonjs/core";
 import EngineManager from "../../../../Core/Presentation/Babylon/EngineManager/EngineManager";
 import { fireEvent } from "@testing-library/dom";
+import { logger } from "../../../../../Lib/Logger";
 
 jest.mock("@babylonjs/core");
+jest.mock("src/Lib/Logger.ts");
 
 describe("EngineManager", () => {
   let systemUnderTest: EngineManager;
@@ -13,6 +15,18 @@ describe("EngineManager", () => {
 
   afterAll(() => {
     jest.restoreAllMocks();
+  });
+
+  test("createEngine creates engine", () => {
+    systemUnderTest.createEngine(document.createElement("canvas"));
+    expect(Engine).toBeCalledTimes(1);
+  });
+
+  test("createEngine creates warns when an engine was already created", () => {
+    systemUnderTest.createEngine(document.createElement("canvas"));
+    systemUnderTest.createEngine(document.createElement("canvas"));
+    expect(Engine).toBeCalledTimes(1);
+    expect(logger.warn).toBeCalledTimes(1);
   });
 
   test("Engine getter returns an object of type Engine after engine is created", () => {
