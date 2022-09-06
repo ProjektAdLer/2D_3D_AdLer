@@ -3,4 +3,8 @@ import HeaderBarViewModel from "./HeaderBarViewModel";
 
 export default class HeaderBarPresenter implements IHeaderBarPresenter {
   constructor(private viewModel: HeaderBarViewModel) {}
+
+  displayLearningWorldTitle(title: string): void {
+    this.viewModel.title.Value = title;
+  }
 }

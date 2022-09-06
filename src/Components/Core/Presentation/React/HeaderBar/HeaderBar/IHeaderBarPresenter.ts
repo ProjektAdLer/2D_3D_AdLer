@@ -1,1 +1,3 @@
-export default interface IHeaderBarPresenter {}
+export default interface IHeaderBarPresenter {
+  displayLearningWorldTitle(title: string): void;
+}
