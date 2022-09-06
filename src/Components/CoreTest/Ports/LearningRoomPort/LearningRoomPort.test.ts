@@ -7,6 +7,7 @@ import PresentationBuilder from "../../../Core/Presentation/PresentationBuilder/
 import ScorePanelPresenter from "../../../Core/Presentation/React/ScorePanel/ScorePanelPresenter";
 import ScorePanelViewModel from "../../../Core/Presentation/React/ScorePanel/ScorePanelViewModel";
 import { mock } from "jest-mock-extended";
+import { logger } from "../../../../Lib/Logger";
 
 jest.mock("src/Lib/Logger");
 
@@ -50,20 +51,39 @@ describe("LearningRoomPort", () => {
     );
   });
 
-  test("addLearningRoomPresenter throws error if passed presenter is undefined", () => {
+  test("registerLearningRoomPresenter throws error if passed presenter is undefined", () => {
     expect(() => {
       //@ts-ignore
       systemUnderTest.registerLearningRoomPresenter(undefined);
     }).toThrowError("is undefined");
   });
 
-  test("addLearningRoomPresenter doesn't add presenter if it already exists", () => {
+  test("registerLearningRoomPresenter doesn't add presenter if it already exists", () => {
     const learningRoomPresenter = mock<ILearningRoomPresenter>();
 
     systemUnderTest.registerLearningRoomPresenter(learningRoomPresenter);
     systemUnderTest.registerLearningRoomPresenter(learningRoomPresenter);
 
     expect(systemUnderTest["learningRoomPresenters"].length).toBe(1);
+  });
+
+  test("registerScorePanelPresenter adds new presenter", () => {
+    const scorePanelPresenter = mock<ScorePanelPresenter>();
+
+    systemUnderTest.registerScorePanelPresenter(scorePanelPresenter);
+
+    expect(systemUnderTest["scorePanelPresenter"]).toBe(scorePanelPresenter);
+  });
+
+  test("registerScorePanelPresenter warns if its called the second time", () => {
+    const scorePanelPresenter1 = mock<ScorePanelPresenter>();
+    const scorePanelPresenter2 = mock<ScorePanelPresenter>();
+
+    systemUnderTest.registerScorePanelPresenter(scorePanelPresenter1);
+    systemUnderTest.registerScorePanelPresenter(scorePanelPresenter2);
+
+    expect(logger.warn).toBeCalledTimes(1);
+    expect(systemUnderTest["scorePanelPresenter"]).toBe(scorePanelPresenter2);
   });
 
   test("presentNewScore throws if no scorePanelPresenter is registered", () => {
