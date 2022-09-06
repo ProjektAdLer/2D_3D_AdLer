@@ -20,6 +20,7 @@ import LoadLearningWorldButtonBuilder from "../../Presentation/React/LoadLearnin
 import FullscreenSwitchBuilder from "../../Presentation/React/FullscreenSwitch/FullscreenSwitchBuilder";
 import LearningWorldGoalPanelBuilder from "~ReactComponents/LearningWorldGoalPanel/LearningWorldGoalPanelBuilder";
 import HeaderBarBuilder from "~ReactComponents/HeaderBar/HeaderBarBuilder";
+import LearningRoomSelectionBuilder from "~ReactComponents/LearningRoomSelection/LearningRoomSelectionBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -72,6 +73,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IHeaderBarBuilder).to(
     HeaderBarBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningRoomSelectionBuilder).to(
+    LearningRoomSelectionBuilder
   );
 });
 
