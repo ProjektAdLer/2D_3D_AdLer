@@ -3,9 +3,6 @@ import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 import {{name}}Controller from "./{{name}}Controller";
 import {{name}}Presenter from "./{{name}}Presenter";
 import {{name}}ViewModel from "./{{name}}ViewModel";
-import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import ViewModelControllerProvider from "../../ViewModelProvider/ViewModelControllerProvider";
 
 /*
 This Template Provides the whole scaffolding for a React Component.
@@ -35,13 +32,4 @@ export default class {{name}}Builder extends PresentationBuilder<
       {{name}}Presenter
     );
   }
-
-  override buildController(): void {
-    super.buildController();
-    CoreDIContainer.get<ViewModelControllerProvider>(
-      CORE_TYPES.IViewModelControllerProvider
-    ).registerTupel(this.viewModel, this.controller, {{name}}ViewModel);
-  }
-
-
 }
