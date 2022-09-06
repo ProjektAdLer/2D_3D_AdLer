@@ -1,8 +1,14 @@
-import ILearningRoomSelectionPresenter from "./ILearningRoomSelectionPresenter";
-import LearningRoomSelectionViewModel from "./LearningRoomSelectionViewModel";
+import LearningRoomSelectionPresenter from "../../../../Core/Presentation/React/LearningRoomSelection/LearningRoomSelectionPresenter";
+import LearningRoomSelectionViewModel from "../../../../Core/Presentation/React/LearningRoomSelection/LearningRoomSelectionViewModel";
 
-export default class LearningRoomSelectionPresenter
-  implements ILearningRoomSelectionPresenter
-{
-  constructor(private viewModel: LearningRoomSelectionViewModel) {}
-}
+describe("LearningRoomSelectionPresenter", () => {
+  let systemUnderTest: LearningRoomSelectionPresenter;
+
+  beforeEach(() => {
+    systemUnderTest = new LearningRoomSelectionPresenter(
+      new LearningRoomSelectionViewModel()
+    );
+  });
+
+  test.todo("add tests, when the presenter is implemented");
+});
