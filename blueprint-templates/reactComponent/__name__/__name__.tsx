@@ -1,12 +1,15 @@
-import useViewModelControllerProvider from "../CustomHooks/useViewModelControllerProvider";
+import useBuilder from "../CustomHooks/useBuilder";
 import {{name}}Controller from "./{{name}}Controller";
 import {{name}}ViewModel from "./{{name}}ViewModel";
 
 export default function {{name}}() {
-  const [viewModels, controllers] = useViewModelControllerProvider<
+  const [viewModel, controller] = useBuilder<
   {{name}}ViewModel,
   {{name}}Controller
->({{name}}ViewModel);
+>(BUILDER_TYPES.I{{name}}Builder);
+
+  if (!viewModel || !controller) return null;
+
   return (
     <div>{{name}}</div>
   );

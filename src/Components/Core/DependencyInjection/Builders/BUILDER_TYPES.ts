@@ -16,6 +16,7 @@ const BUILDER_TYPES = {
   ILoadLearningWorldButtonBuilder: Symbol("ILoadLearningWorldButtonBuilder"),
   IFullscreenSwitchBuilder: Symbol("IFullscreenSwitchBuilder"),
   ILearningWorldGoalPanelBuilder: Symbol("ILearningWorldGoalPanelBuilder"),
+  IHeaderBarBuilder: Symbol("IHeaderBarBuilder"),
 };
 
 export default BUILDER_TYPES;
