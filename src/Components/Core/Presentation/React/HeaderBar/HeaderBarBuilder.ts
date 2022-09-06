@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
+import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 import HeaderBarController from "./HeaderBarController";
 import HeaderBarPresenter from "./HeaderBarPresenter";
 import HeaderBarViewModel from "./HeaderBarViewModel";
