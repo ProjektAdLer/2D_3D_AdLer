@@ -19,7 +19,7 @@ import LearningWorldNamePanelBuilder from "../../Presentation/React/LearningWorl
 import LoadLearningWorldButtonBuilder from "../../Presentation/React/LoadLearningWorldButton/LoadLearningWorldButtonBuilder";
 import FullscreenSwitchBuilder from "../../Presentation/React/FullscreenSwitch/FullscreenSwitchBuilder";
 import LearningWorldGoalPanelBuilder from "~ReactComponents/LearningWorldGoalPanel/LearningWorldGoalPanelBuilder";
-import HeaderBarBuilder from "~ReactComponents/HeaderBar/HeaderBar/HeaderBarBuilder";
+import HeaderBarBuilder from "~ReactComponents/HeaderBar/HeaderBarBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
