@@ -1,4 +1,4 @@
-import HeaderBar from "~ReactComponents/HeaderBar/HeaderBar/HeaderBar";
+import HeaderBar from "~ReactComponents/HeaderBar/HeaderBar";
 
 export default function LearningWorldMenu() {
   return <HeaderBar />;
