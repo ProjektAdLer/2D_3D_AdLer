@@ -26,7 +26,6 @@ export default class Backend implements IBackend {
         return space.spaceId;
       }),
     };
-    console.log("getWorld", response);
     return response as Partial<APIWorldTo>;
   }
 
@@ -42,7 +41,6 @@ export default class Backend implements IBackend {
         learningElementIds: space.learningSpaceContent,
       } as APILearningRoomTO;
     });
-    console.log("getLearningRooms", response);
     return response;
   }
 
@@ -64,7 +62,6 @@ export default class Backend implements IBackend {
           } as APILearningElementTO)
         : []
     );
-    console.log(response);
     return response;
   }
 
