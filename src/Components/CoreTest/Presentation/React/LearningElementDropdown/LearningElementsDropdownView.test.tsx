@@ -35,7 +35,7 @@ describe("LearningElementsDrowdownView", () => {
   });
 
   test("does no render, if no controller is provided", () => {
-    useBuilderMock([undefined, undefined]);
+    useBuilderMock([modelWithElements, undefined]);
     const elementUnderTest = render(<LearningElementsDropdown />);
     expect(elementUnderTest.container.children).toBeEmptyDOMElement;
   });
