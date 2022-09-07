@@ -1,5 +1,6 @@
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
+import useObservable from "~ReactComponents/CustomHooks/useObservable";
 import StyledButton from "~ReactComponents/ReactBaseComponents/StyledButton";
 import StyledContainer from "~ReactComponents/ReactBaseComponents/StyledContainer";
 import HeaderBarController from "./HeaderBarController";
@@ -11,13 +12,15 @@ export default function HeaderBar() {
     HeaderBarController
   >(BUILDER_TYPES.IHeaderBarBuilder);
 
+  const [title] = useObservable<string>(viewModel?.title);
+
   if (!viewModel || !controller) return null;
 
   return (
     <StyledContainer>
       <StyledButton onClick={controller.onMenuButtonClicked}>Menu</StyledButton>
       <StyledButton onClick={controller.onBackButtonClicked}>Back</StyledButton>
-      {viewModel.title.Value}
+      {title}
     </StyledContainer>
   );
 }
