@@ -4,8 +4,8 @@ import LearningWorldMenu from "./LearningWorldMenu";
 
 function App() {
   return (
-    //<LearningRoom />
-    <LearningWorldMenu />
+    <LearningRoom />
+    // <LearningWorldMenu />
   );
 }
 

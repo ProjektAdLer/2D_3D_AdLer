@@ -1,7 +1,5 @@
 import { type tempApiInfo } from "./../../Adapters/Backend/IBackend";
-import { APILearningRoomTO } from "./../../Adapters/Backend/APILearningRoomTO";
 import { inject, injectable } from "inversify";
-import { APILearningElementTO } from "../../Adapters/Backend/APILearningElementTO";
 import type IBackend from "../../Adapters/Backend/IBackend";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
@@ -20,6 +18,7 @@ import VideoLearningElementData from "../../Domain/Entities/SpecificLearningElem
 import ImageLearningElementData from "../../Domain/Entities/SpecificLearningElements/ImageLearningElementData";
 import type IUIPort from "../../Ports/UIPort/IUIPort";
 import LearningWorldTO from "../DataTransportObjects/LearningWorldTO";
+import LearningElementTO from "../DataTransportObjects/LearningElementTO";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -57,25 +56,17 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     return Promise.resolve();
   }
 
-  private toTO(entityToConvert: LearningWorldEntity): LearningWorldTO {
-    return {
-      learningRooms: entityToConvert.learningRooms,
-      worldName: entityToConvert.worldName,
-      worldGoal: entityToConvert.worldGoal,
-    };
-  }
-
   private mapLearningElement = (
-    element: APILearningElementTO
+    element: LearningElementTO
   ): LearningElementEntity => {
     const entityToStore: Partial<LearningElementEntity> = {
       id: element.id,
-      value: element.value[0].value,
-      requirement: element.requirements[0]?.value,
+      value: element.value,
+      requirements: element.requirements ?? [],
       name: element.name,
     };
 
-    switch (element.elementType) {
+    switch (element.learningElementData.type) {
       case "text":
         entityToStore.learningElementData = {
           type: "text",
@@ -92,15 +83,12 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
         } as VideoLearningElementData;
         break;
       case "h5p":
+        let h5pElementData =
+          element.learningElementData as H5PLearningElementData;
         entityToStore.learningElementData = {
           type: "h5p",
-          fileName: element.metaData.find(
-            (metaData) => metaData.key === "h5pFileName"
-          )?.value,
-          contextId: Number.parseInt(
-            element.metaData.find((metaData) => metaData.key === "h5pContextId")
-              ?.value || "0"
-          ),
+          fileName: h5pElementData.fileName,
+          contextId: h5pElementData.contextId,
         } as H5PLearningElementData;
     }
 
@@ -118,41 +106,61 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       worldName: worldName,
     } as tempApiInfo;
 
-    const worldResp = await this.backend.getWorld(apiData);
-
-    const learningRoomResp = (await this.backend.getLearningRooms(
-      apiData
-    )) as APILearningRoomTO[];
-
-    const learningElementResp = (await this.backend.getLearningElements(
-      apiData
-    )) as APILearningElementTO[];
+    const response = await this.backend.getLearningWorldData(apiData);
 
     if (this.container.getEntitiesOfType(LearningWorldEntity).length === 0) {
-      // Learning Elements
-      const learningElementEntities: LearningElementEntity[] = [];
-      learningElementResp.forEach((element) => {
-        learningElementEntities.push(this.mapLearningElement(element));
+      // learningRooms with learningElements
+      const learningRoomEntities: LearningRoomEntity[] = [];
+      response.learningRooms?.forEach((room) => {
+        let learningElementEntities: LearningElementEntity[] = [];
+        room.learningElements?.forEach((element) => {
+          learningElementEntities.push(this.mapLearningElement(element));
+        });
+
+        learningRoomEntities.push(
+          this.container.createEntity<LearningRoomEntity>(
+            {
+              id: room.id,
+              name: room.name,
+              learningElements: learningElementEntities,
+            },
+            LearningRoomEntity
+          )
+        );
       });
 
-      // Learning Room
-      let roomEntity = this.container.createEntity<LearningRoomEntity>(
-        {
-          id: learningRoomResp[0].id,
-          learningElements: learningElementEntities,
-        },
-        LearningRoomEntity
-      );
       // Learning World
       this.learningWorldEntity =
         this.container.createEntity<LearningWorldEntity>(
           {
-            worldName: worldResp.name,
-            learningRooms: [roomEntity],
-            worldGoal: worldResp.goal,
+            worldName: response.worldName,
+            learningRooms: learningRoomEntities,
+            worldGoal: response.worldGoal,
           },
           LearningWorldEntity
         );
     }
+  }
+
+  private toTO(entityToConvert: LearningWorldEntity): LearningWorldTO {
+    return {
+      learningRooms: entityToConvert.learningRooms.map((room) => {
+        return {
+          id: room.id,
+          name: room.name,
+          learningElements: room.learningElements.map((element) => {
+            return {
+              id: element.id,
+              name: element.name,
+              value: element.value,
+              requirements: element.requirements,
+              learningElementData: element.learningElementData,
+            };
+          }),
+        };
+      }),
+      worldName: entityToConvert.worldName,
+      worldGoal: entityToConvert.worldGoal,
+    };
   }
 }

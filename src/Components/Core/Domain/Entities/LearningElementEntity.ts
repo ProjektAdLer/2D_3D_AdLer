@@ -4,7 +4,7 @@ import AbstractLearningElement from "./SpecificLearningElements/AbstractLearning
 export default class LearningElementEntity {
   id: LearningComponentID;
   public value: number;
-  public requirement: number;
+  public requirements: { type: string; value: number }[];
   public hasScored: boolean;
   public name: string;
   public learningElementData: AbstractLearningElement;

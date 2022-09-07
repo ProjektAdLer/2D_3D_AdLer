@@ -15,6 +15,7 @@ modelWithElements.learningElements.Value = [
     learningElementData: {
       type: "h5p",
     },
+    value: 10,
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ modelWithElements.learningElements.Value = [
     learningElementData: {
       type: "text",
     },
+    value: 10,
   },
 ];
 

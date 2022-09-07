@@ -3,67 +3,97 @@ import { injectable } from "inversify";
 import { config } from "../../../../config";
 import { logger } from "../../../../Lib/Logger";
 import { LearningElementTypes } from "../../Presentation/Babylon/LearningElement/Types/LearningElementTypes";
-import { APILearningElementTO } from "./APILearningElementTO";
-import { APILearningRoomTO } from "./APILearningRoomTO";
-import { APIWorldTo } from "./APIWorldTO";
-import IDSL from "./IDSL";
+import IDSL, { APILearningElement, APILearningRoom } from "./Types/IDSL";
 import IBackend, { tempApiInfo } from "./IBackend";
+import LearningWorldTO from "../../Application/DataTransportObjects/LearningWorldTO";
+import LearningElementTO from "../../Application/DataTransportObjects/LearningElementTO";
+import TextLearningElementData from "../../Domain/Entities/SpecificLearningElements/TextLearningElementData";
+import ImageLearningElementData from "../../Domain/Entities/SpecificLearningElements/ImageLearningElementData";
+import VideoLearningElementData from "../../Domain/Entities/SpecificLearningElements/VideoLearningElementData";
+import H5PLearningElementData from "../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
+import LearningRoomTO from "../../Application/DataTransportObjects/LearningRoomTO";
 
 @injectable()
 export default class Backend implements IBackend {
   async getLearningWorldData({
     userToken,
     worldName,
-  }: tempApiInfo): Promise<Partial<APIWorldTo>> {
+  }: tempApiInfo): Promise<Partial<LearningWorldTO>> {
+    // get DSL
     let dsl = await this.getDSL({
       userToken,
       worldName,
     });
-    let response = {
-      name: dsl.learningWorld.identifier.value,
-      goal: dsl.learningWorld.goal,
-      learningRoomIds: dsl.learningWorld.learningSpaces.map((space) => {
-        return space.spaceId;
-      }),
-    };
-    return response as Partial<APIWorldTo>;
-  }
 
-  async getLearningRooms({
-    userToken,
-    worldName,
-  }: tempApiInfo): Promise<(APILearningRoomTO | undefined)[]> {
-    let dsl = await this.getDSL({ userToken, worldName });
-    let response = dsl.learningWorld.learningSpaces.map((space) => {
+    // create LearningWorldTO with learning world data
+    let response: Partial<LearningWorldTO> = {
+      worldName: dsl.learningWorld.identifier.value,
+      worldGoal: dsl.learningWorld.goal,
+    };
+
+    // create LearningElementTOs
+    let learningElements: LearningElementTO[] =
+      dsl.learningWorld.learningElements.flatMap((element) =>
+        element.elementType in LearningElementTypes
+          ? this.mapLearningElement(element)
+          : []
+      );
+
+    // create LearningRoomTOs and connect it with its learning elements
+    response.learningRooms = dsl.learningWorld.learningSpaces.map((space) => {
       return {
         id: space.spaceId,
         name: space.identifier.value,
-        learningElementIds: space.learningSpaceContent,
-      } as APILearningRoomTO;
+        learningElements: learningElements.filter((element) =>
+          space.learningSpaceContent.includes(element.id)
+        ),
+      } as LearningRoomTO;
     });
+
     return response;
   }
 
-  async getLearningElements({
-    userToken,
-    worldName,
-  }: tempApiInfo): Promise<(APILearningElementTO | undefined)[]> {
-    let dsl = await this.getDSL({ userToken, worldName });
-    let response = dsl.learningWorld.learningElements.flatMap((element) =>
-      element.elementType in LearningElementTypes
-        ? ({
-            id: element.id,
-            name: element.identifier.value,
-            elementType: element.elementType,
-            // mocked with debugging values
-            value: [{ type: "points", value: 10 }],
-            requirements: [],
-            metaData: element.metaData,
-          } as APILearningElementTO)
-        : []
-    );
-    return response;
-  }
+  private mapLearningElement = (
+    element: APILearningElement
+  ): LearningElementTO => {
+    const learningElementTO: Partial<LearningElementTO> = {
+      id: element.id,
+      value: element.learningElementValue?.value,
+      requirements: element.requirements ? element.requirements : [],
+      name: element.identifier?.value,
+    };
+
+    switch (element.elementType) {
+      case "text":
+        learningElementTO.learningElementData = {
+          type: "text",
+        } as TextLearningElementData;
+        break;
+      case "image":
+        learningElementTO.learningElementData = {
+          type: "image",
+        } as ImageLearningElementData;
+        break;
+      case "video":
+        learningElementTO.learningElementData = {
+          type: "video",
+        } as VideoLearningElementData;
+        break;
+      case "h5p":
+        learningElementTO.learningElementData = {
+          type: "h5p",
+          fileName: element.metaData.find(
+            (metaData) => metaData.key === "h5pFileName"
+          )?.value,
+          contextId: Number.parseInt(
+            element.metaData.find((metaData) => metaData.key === "h5pContextId")
+              ?.value || "0"
+          ),
+        } as H5PLearningElementData;
+    }
+
+    return learningElementTO as LearningElementTO;
+  };
 
   async scoreLearningElement(learningElementId: number): Promise<void> {
     logger.warn(
