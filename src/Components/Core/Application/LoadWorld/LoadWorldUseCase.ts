@@ -143,7 +143,6 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
         },
         LearningRoomEntity
       );
-      console.log("world response", worldResp.goal);
       // Learning World
       this.learningWorldEntity =
         this.container.createEntity<LearningWorldEntity>(
