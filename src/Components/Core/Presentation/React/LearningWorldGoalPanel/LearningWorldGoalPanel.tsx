@@ -15,6 +15,9 @@ export default function LearningWorldGoalPanel() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [learningWorldGoal] = useObservable<string>(viewModel?.worldGoal);
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
 
   if (!learningWorldGoal) return null;
   if (!isOpen)
@@ -23,13 +26,13 @@ export default function LearningWorldGoalPanel() {
       <div className="flex justify-center">
         <StyledContainer
           onClick={() => {
-            setIsOpen(!isOpen);
+            handleClick();
           }}
         >
           <img
             className="w-4 lg:w-10"
             src={goalIcon}
-            alt="Learning-Room-Icon"
+            alt="Learning-Goal-Icon"
           ></img>
           {learningWorldGoal}
         </StyledContainer>
@@ -42,7 +45,7 @@ export default function LearningWorldGoalPanel() {
         <StyledContainer
           className="flex flex-row justify-center"
           onClick={() => {
-            setIsOpen(!isOpen);
+            handleClick();
           }}
         >
           <img

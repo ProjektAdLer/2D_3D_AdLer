@@ -1,15 +1,15 @@
 import "@testing-library/jest-dom";
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import LearningWorldGoalPanel from "../../../../Core/Presentation/React/LearningWorldGoalPanel/LearningWorldGoalPanel";
 import LearningWorldGoalPanelViewModel from "../../../../Core/Presentation/React/LearningWorldGoalPanel/LearningWorldGoalPanelViewModel";
 import useBuilderMock from "../CustomHooks/useBuilder/useBuilderMock";
 
-const fakeModel = new LearningWorldGoalPanelViewModel();
+const viewModelMock = new LearningWorldGoalPanelViewModel();
 
 describe("LearningWorldGoalPanel", () => {
   test("should render", () => {
-    fakeModel.worldGoal.Value = "Test World";
-    useBuilderMock([fakeModel, undefined]);
+    viewModelMock.worldGoal.Value = "Test World";
+    useBuilderMock([viewModelMock, undefined]);
 
     const componentUnderTest = render(<LearningWorldGoalPanel />);
 
@@ -18,11 +18,30 @@ describe("LearningWorldGoalPanel", () => {
 
   test("should not render, if no Learning World Goal is provided", () => {
     //@ts-ignore
-    fakeModel.worldGoal.Value = undefined;
-    useBuilderMock([fakeModel, undefined]);
+    viewModelMock.worldGoal.Value = undefined;
+    useBuilderMock([viewModelMock, undefined]);
 
     const componentUnderTest = render(<LearningWorldGoalPanel />);
 
     expect(componentUnderTest.queryByText("Test World")).toBeNull();
+  });
+
+  test("onClick sets isOpen state correctly", () => {
+    viewModelMock.worldGoal.Value = "Test World";
+    useBuilderMock([viewModelMock, undefined]);
+
+    const componentUnderTest = render(
+      <LearningWorldGoalPanel key="LearningWorldGoalPanel" />
+    );
+
+    expect(componentUnderTest.getByText("Test World")).toBeInTheDocument();
+    fireEvent.click(componentUnderTest.getByRole("img"));
+    expect(
+      componentUnderTest.queryByText("Test World")
+    ).not.toBeInTheDocument();
+    expect(componentUnderTest.getByText("Lernziel")).toBeInTheDocument();
+    fireEvent.click(componentUnderTest.getByRole("img"));
+    expect(componentUnderTest.queryByText("Lernziel")).not.toBeInTheDocument();
+    expect(componentUnderTest.getByText("Test World")).toBeInTheDocument();
   });
 });
