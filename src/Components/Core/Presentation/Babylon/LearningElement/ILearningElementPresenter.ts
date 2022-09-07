@@ -1,5 +1,5 @@
 import { Vector3 } from "@babylonjs/core";
-import { LearningElementTO } from "../../../Ports/LearningWorldPort/ILearningWorldPort";
+import LearningElementTO from "src/Components/Core/Application/DataTransportObjects/LearningElementTO";
 import LearningElementViewModel from "./LearningElementViewModel";
 
 export default interface ILearningElementPresenter {

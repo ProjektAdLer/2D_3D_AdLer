@@ -1,7 +1,7 @@
 import { NotificationType } from "../../Presentation/React/ModalManager/ModalManagerPresenter";
-import { LearningElementTO } from "../LearningWorldPort/ILearningWorldPort";
 import IBottomTooltipPresenter from "../../Presentation/React/BottomTooltip/IBottomTooltipPresenter";
 import IModalManagerPresenter from "../../Presentation/React/ModalManager/IModalManagerPresenter";
+import LearningElementTO from "../../Application/DataTransportObjects/LearningElementTO";
 
 export default interface IUIPort {
   registerModalManager(presenter: IModalManagerPresenter): void;

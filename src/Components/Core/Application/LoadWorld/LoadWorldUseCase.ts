@@ -10,7 +10,6 @@ import LearningWorldEntity from "../../Domain/Entities/LearningWorldEntity";
 import UserDataEntity from "../../Domain/Entities/UserDataEntity";
 import type IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import type ILearningWorldPort from "../../Ports/LearningWorldPort/ILearningWorldPort";
-import { LearningWorldTO } from "../../Ports/LearningWorldPort/ILearningWorldPort";
 import ILoadWorldUseCase from "./ILoadWorldUseCase";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import type ILoadAvatarUseCase from "../LoadAvatar/ILoadAvatarUseCase";
@@ -20,6 +19,7 @@ import TextLearningElementData from "../../Domain/Entities/SpecificLearningEleme
 import VideoLearningElementData from "../../Domain/Entities/SpecificLearningElements/VideoLearningElementData";
 import ImageLearningElementData from "../../Domain/Entities/SpecificLearningElements/ImageLearningElementData";
 import type IUIPort from "../../Ports/UIPort/IUIPort";
+import LearningWorldTO from "../DataTransportObjects/LearningWorldTO";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
