@@ -13,7 +13,6 @@ import type ILearningWorldPort from "../../Ports/LearningWorldPort/ILearningWorl
 import { LearningWorldTO } from "../../Ports/LearningWorldPort/ILearningWorldPort";
 import ILoadWorldUseCase from "./ILoadWorldUseCase";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
-import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import type ILoadAvatarUseCase from "../LoadAvatar/ILoadAvatarUseCase";
 import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_TYPES";
 import H5PLearningElementData from "../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
@@ -62,6 +61,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     return {
       learningRooms: entityToConvert.learningRooms,
       worldName: entityToConvert.worldName,
+      worldGoal: entityToConvert.worldGoal,
     };
   }
 
@@ -143,12 +143,14 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
         },
         LearningRoomEntity
       );
+      console.log("world response", worldResp.goal);
       // Learning World
       this.learningWorldEntity =
         this.container.createEntity<LearningWorldEntity>(
           {
             worldName: worldResp.name,
             learningRooms: [roomEntity],
+            worldGoal: worldResp.goal,
           },
           LearningWorldEntity
         );

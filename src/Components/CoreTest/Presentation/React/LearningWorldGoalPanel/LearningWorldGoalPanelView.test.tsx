@@ -16,7 +16,7 @@ describe("LearningWorldGoalPanel", () => {
     expect(componentUnderTest.getByText("Test World")).toBeInTheDocument();
   });
 
-  test("should nor render, if no Learning World Goal is provided", () => {
+  test("should not render, if no Learning World Goal is provided", () => {
     //@ts-ignore
     fakeModel.worldGoal.Value = undefined;
     useBuilderMock([fakeModel, undefined]);

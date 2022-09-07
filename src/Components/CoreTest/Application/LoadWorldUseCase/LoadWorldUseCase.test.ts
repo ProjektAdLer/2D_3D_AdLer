@@ -109,7 +109,7 @@ describe("LoadWorldUseCase", () => {
     );
   });
 
-  test("loads the Learnign World and notifies its presenters", async () => {
+  test("loads the Learning World and notifies its presenters", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
       {
         isLoggedIn: true,
@@ -148,6 +148,7 @@ describe("LoadWorldUseCase", () => {
 
     const learningWorldObject = {
       worldName: "Lernwelt Metriken",
+      worldGoal: "Testgoal",
       learningRooms: [learningRoomObject],
     } as LearningWorldEntity;
 

@@ -20,6 +20,7 @@ export default interface DSL {
     identifier: Identifier;
     learningWorldContent: number[];
     topics: number[];
+    goal: string;
     learningSpaces: {
       spaceId: number;
       learningSpaceName: string;

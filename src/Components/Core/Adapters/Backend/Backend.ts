@@ -19,12 +19,15 @@ export default class Backend implements IBackend {
       userToken,
       worldName,
     });
-    return {
+    let response = {
       name: dsl.learningWorld.identifier.value,
+      goal: dsl.learningWorld.goal,
       learningRoomIds: dsl.learningWorld.learningSpaces.map((space) => {
         return space.spaceId;
       }),
-    } as Partial<APIWorldTo>;
+    };
+    console.log("getWorld", response);
+    return response as Partial<APIWorldTo>;
   }
 
   async getLearningRooms({
@@ -32,13 +35,15 @@ export default class Backend implements IBackend {
     worldName,
   }: tempApiInfo): Promise<(APILearningRoomTO | undefined)[]> {
     let dsl = await this.getDSL({ userToken, worldName });
-    return dsl.learningWorld.learningSpaces.map((space) => {
+    let response = dsl.learningWorld.learningSpaces.map((space) => {
       return {
         id: space.spaceId,
         name: space.identifier.value,
         learningElementIds: space.learningSpaceContent,
       } as APILearningRoomTO;
     });
+    console.log("getLearningRooms", response);
+    return response;
   }
 
   async getLearningElements({
@@ -46,7 +51,7 @@ export default class Backend implements IBackend {
     worldName,
   }: tempApiInfo): Promise<(APILearningElementTO | undefined)[]> {
     let dsl = await this.getDSL({ userToken, worldName });
-    return dsl.learningWorld.learningElements.flatMap((element) =>
+    let response = dsl.learningWorld.learningElements.flatMap((element) =>
       element.elementType in LearningElementTypes
         ? ({
             id: element.id,
@@ -59,6 +64,8 @@ export default class Backend implements IBackend {
           } as APILearningElementTO)
         : []
     );
+    console.log(response);
+    return response;
   }
 
   async scoreLearningElement(learningElementId: number): Promise<void> {
@@ -107,6 +114,7 @@ const mockDSL: DSL = {
     },
     learningWorldContent: [],
     topics: [],
+    goal: "Testgoal",
     learningSpaces: [
       {
         spaceId: 1,
@@ -127,20 +135,6 @@ const mockDSL: DSL = {
           value: "Metriken Einstiegsvideo",
         },
         elementType: "h5p",
-        learningElementValue: null,
-        requirements: null,
-        metaData: [
-          { key: "h5pContextId", value: "123" },
-          { key: "h5pFileName", value: "Metriken Teil 1" },
-        ],
-      },
-      {
-        id: 4,
-        identifier: {
-          type: "FileName",
-          value: "Metriken Einstiegsvideo",
-        },
-        elementType: "text",
         learningElementValue: null,
         requirements: null,
         metaData: [
@@ -178,6 +172,20 @@ const mockDSL: DSL = {
       },
       {
         id: 4,
+        identifier: {
+          type: "FileName",
+          value: "Metriken Einstiegsvideo",
+        },
+        elementType: "text",
+        learningElementValue: null,
+        requirements: null,
+        metaData: [
+          { key: "h5pContextId", value: "123" },
+          { key: "h5pFileName", value: "Metriken Teil 1" },
+        ],
+      },
+      {
+        id: 5,
         identifier: {
           type: "FileName",
           value: "DSL Dokument",

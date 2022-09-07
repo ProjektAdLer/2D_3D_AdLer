@@ -7,6 +7,7 @@ import ILearningWorldGoalPanelPresenter from "~ReactComponents/LearningWorldGoal
 export class LearningWorldTO {
   worldName: string;
   learningRooms: LearningRoomTO[];
+  worldGoal: string;
 }
 
 export class LearningRoomTO {
