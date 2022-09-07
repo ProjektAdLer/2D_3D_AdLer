@@ -1,7 +1,7 @@
 import ILearningElementStartedUseCase from "../../../Application/LearningElementStarted/ILearningElementStartedUseCase";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
-import { LearningComponentID } from "../../../Types/EnitityTypes";
+import { LearningComponentID } from "../../../Domain/Types/EntityTypes";
 import ILearningElementsDropdownController from "./ILearningElementsDropdownController";
 
 export default class LearningElementsDropdownController

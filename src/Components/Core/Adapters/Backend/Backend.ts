@@ -6,12 +6,12 @@ import { LearningElementTypes } from "../../Presentation/Babylon/LearningElement
 import { APILearningElementTO } from "./APILearningElementTO";
 import { APILearningRoomTO } from "./APILearningRoomTO";
 import { APIWorldTo } from "./APIWorldTO";
-import DSL from "./IDSL";
+import IDSL from "./IDSL";
 import IBackend, { tempApiInfo } from "./IBackend";
 
 @injectable()
 export default class Backend implements IBackend {
-  async getWorld({
+  async getLearningWorldData({
     userToken,
     worldName,
   }: tempApiInfo): Promise<Partial<APIWorldTo>> {
@@ -87,12 +87,12 @@ export default class Backend implements IBackend {
     return token.data;
   }
 
-  private async getDSL({ userToken, worldName }: tempApiInfo): Promise<DSL> {
+  private async getDSL({ userToken, worldName }: tempApiInfo): Promise<IDSL> {
     if (config.useFakeBackend) {
       return mockDSL;
     }
 
-    const response = await axios.post<DSL>(
+    const response = await axios.post<IDSL>(
       config.serverURL + "/LearningWorld",
       {
         wsToken: userToken,
@@ -103,7 +103,7 @@ export default class Backend implements IBackend {
   }
 }
 
-const mockDSL: DSL = {
+const mockDSL: IDSL = {
   learningWorld: {
     identifier: {
       type: "name",

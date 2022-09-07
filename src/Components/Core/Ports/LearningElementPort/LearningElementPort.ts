@@ -1,6 +1,5 @@
 import { injectable } from "inversify";
 import ILearningElementPort from "./ILearningElementPort";
-import { LearningElementTO } from "../LearningWorldPort/ILearningWorldPort";
 import BUILDER_TYPES from "../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import ILearningElementPresenter from "../../Presentation/Babylon/LearningElement/ILearningElementPresenter";
@@ -8,6 +7,7 @@ import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresen
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
 import ILearningElementModalPresenter from "../../Presentation/React/LearningElementModal/ILearningElementModalPresenter";
 import { logger } from "src/Lib/Logger";
+import LearningElementTO from "../../Application/DataTransportObjects/LearningElementTO";
 
 @injectable()
 export default class LearningElementPort implements ILearningElementPort {

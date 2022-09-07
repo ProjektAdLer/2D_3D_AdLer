@@ -1,10 +1,10 @@
 import { NotificationType } from "../../Presentation/React/ModalManager/ModalManagerPresenter";
 import { injectable } from "inversify";
-import { LearningElementTO } from "../LearningWorldPort/ILearningWorldPort";
 import IBottomTooltipPresenter from "../../Presentation/React/BottomTooltip/IBottomTooltipPresenter";
 import IModalManagerPresenter from "../../Presentation/React/ModalManager/IModalManagerPresenter";
 import IUIPort from "./IUIPort";
 import { logger } from "src/Lib/Logger";
+import LearningElementTO from "../../Application/DataTransportObjects/LearningElementTO";
 
 @injectable()
 export default class UIPort implements IUIPort {

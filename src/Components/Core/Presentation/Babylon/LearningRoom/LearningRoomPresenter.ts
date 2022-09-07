@@ -1,9 +1,5 @@
 import { Vector2, Vector3 } from "@babylonjs/core";
 import { injectable } from "inversify";
-import {
-  LearningElementTO,
-  LearningRoomTO,
-} from "../../../Ports/LearningWorldPort/ILearningWorldPort";
 import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
@@ -13,6 +9,8 @@ import IDoorPresenter from "../Door/IDoorPresenter";
 import LearningRoomViewModel from "./LearningRoomViewModel";
 import ILearningRoomPresenter from "./ILearningRoomPresenter";
 import ILearningElementPresenter from "../LearningElement/ILearningElementPresenter";
+import LearningRoomTO from "src/Components/Core/Application/DataTransportObjects/LearningRoomTO";
+import LearningElementTO from "src/Components/Core/Application/DataTransportObjects/LearningElementTO";
 
 @injectable()
 export default class LearningRoomPresenter implements ILearningRoomPresenter {
