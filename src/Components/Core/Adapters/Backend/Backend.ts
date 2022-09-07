@@ -6,12 +6,12 @@ import { LearningElementTypes } from "../../Presentation/Babylon/LearningElement
 import { APILearningElementTO } from "./APILearningElementTO";
 import { APILearningRoomTO } from "./APILearningRoomTO";
 import { APIWorldTo } from "./APIWorldTO";
-import DSL from "./IDSL";
+import IDSL from "./IDSL";
 import IBackend, { tempApiInfo } from "./IBackend";
 
 @injectable()
 export default class Backend implements IBackend {
-  async getWorld({
+  async getLearningWorldData({
     userToken,
     worldName,
   }: tempApiInfo): Promise<Partial<APIWorldTo>> {
@@ -19,12 +19,14 @@ export default class Backend implements IBackend {
       userToken,
       worldName,
     });
-    return {
+    let response = {
       name: dsl.learningWorld.identifier.value,
+      goal: dsl.learningWorld.goal,
       learningRoomIds: dsl.learningWorld.learningSpaces.map((space) => {
         return space.spaceId;
       }),
-    } as Partial<APIWorldTo>;
+    };
+    return response as Partial<APIWorldTo>;
   }
 
   async getLearningRooms({
@@ -32,13 +34,14 @@ export default class Backend implements IBackend {
     worldName,
   }: tempApiInfo): Promise<(APILearningRoomTO | undefined)[]> {
     let dsl = await this.getDSL({ userToken, worldName });
-    return dsl.learningWorld.learningSpaces.map((space) => {
+    let response = dsl.learningWorld.learningSpaces.map((space) => {
       return {
         id: space.spaceId,
         name: space.identifier.value,
         learningElementIds: space.learningSpaceContent,
       } as APILearningRoomTO;
     });
+    return response;
   }
 
   async getLearningElements({
@@ -46,7 +49,7 @@ export default class Backend implements IBackend {
     worldName,
   }: tempApiInfo): Promise<(APILearningElementTO | undefined)[]> {
     let dsl = await this.getDSL({ userToken, worldName });
-    return dsl.learningWorld.learningElements.flatMap((element) =>
+    let response = dsl.learningWorld.learningElements.flatMap((element) =>
       element.elementType in LearningElementTypes
         ? ({
             id: element.id,
@@ -59,6 +62,7 @@ export default class Backend implements IBackend {
           } as APILearningElementTO)
         : []
     );
+    return response;
   }
 
   async scoreLearningElement(learningElementId: number): Promise<void> {
@@ -83,12 +87,12 @@ export default class Backend implements IBackend {
     return token.data;
   }
 
-  private async getDSL({ userToken, worldName }: tempApiInfo): Promise<DSL> {
+  private async getDSL({ userToken, worldName }: tempApiInfo): Promise<IDSL> {
     if (config.useFakeBackend) {
       return mockDSL;
     }
 
-    const response = await axios.post<DSL>(
+    const response = await axios.post<IDSL>(
       config.serverURL + "/LearningWorld",
       {
         wsToken: userToken,
@@ -99,7 +103,7 @@ export default class Backend implements IBackend {
   }
 }
 
-const mockDSL: DSL = {
+const mockDSL: IDSL = {
   learningWorld: {
     identifier: {
       type: "name",
@@ -107,6 +111,7 @@ const mockDSL: DSL = {
     },
     learningWorldContent: [],
     topics: [],
+    goal: "Testgoal",
     learningSpaces: [
       {
         spaceId: 1,
@@ -127,20 +132,6 @@ const mockDSL: DSL = {
           value: "Metriken Einstiegsvideo",
         },
         elementType: "h5p",
-        learningElementValue: null,
-        requirements: null,
-        metaData: [
-          { key: "h5pContextId", value: "123" },
-          { key: "h5pFileName", value: "Metriken Teil 1" },
-        ],
-      },
-      {
-        id: 4,
-        identifier: {
-          type: "FileName",
-          value: "Metriken Einstiegsvideo",
-        },
-        elementType: "text",
         learningElementValue: null,
         requirements: null,
         metaData: [
@@ -178,6 +169,20 @@ const mockDSL: DSL = {
       },
       {
         id: 4,
+        identifier: {
+          type: "FileName",
+          value: "Metriken Einstiegsvideo",
+        },
+        elementType: "text",
+        learningElementValue: null,
+        requirements: null,
+        metaData: [
+          { key: "h5pContextId", value: "123" },
+          { key: "h5pFileName", value: "Metriken Teil 1" },
+        ],
+      },
+      {
+        id: 5,
         identifier: {
           type: "FileName",
           value: "DSL Dokument",

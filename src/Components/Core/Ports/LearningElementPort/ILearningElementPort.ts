@@ -1,6 +1,6 @@
 import ILearningElementModalPresenter from "~ReactComponents/LearningElementModal/ILearningElementModalPresenter";
+import LearningElementTO from "../../Application/DataTransportObjects/LearningElementTO";
 import ILearningElementPresenter from "../../Presentation/Babylon/LearningElement/ILearningElementPresenter";
-import { LearningElementTO } from "../LearningWorldPort/ILearningWorldPort";
 
 export default interface ILearningElementPort {
   addLearningElementPresenter(

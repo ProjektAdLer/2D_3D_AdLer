@@ -7,12 +7,12 @@ import useBuilderMock from "../CustomHooks/useBuilder/useBuilderMock";
 
 describe("HeaderBar", () => {
   test("should render", () => {
-    useBuilderMock([mock<HeaderBarViewModel>(), mock<IHeaderBarController>()]);
+    useBuilderMock([new HeaderBarViewModel(), mock<IHeaderBarController>()]);
     render(<HeaderBar />);
   });
 
   test("doesn't render without controller", () => {
-    useBuilderMock([mock<HeaderBarViewModel>(), undefined]);
+    useBuilderMock([new HeaderBarViewModel(), undefined]);
     const { container } = render(<HeaderBar />);
     expect(container.firstChild).toBeNull();
   });

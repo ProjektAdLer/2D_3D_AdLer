@@ -42,7 +42,7 @@ describe("Backend", () => {
   });
 
   test("should return Worlds", async () => {
-    const worlds = await systemUnderTest.getWorld({
+    const worlds = await systemUnderTest.getLearningWorldData({
       userToken: "",
       worldName: "",
     });
@@ -77,7 +77,7 @@ describe("Backend", () => {
     config.useFakeBackend = false;
     mockedAxios.post.mockResolvedValue({ data: mockDSL });
 
-    await systemUnderTest.getWorld({
+    await systemUnderTest.getLearningWorldData({
       userToken: "Test_Token",
       worldName: "Test_Welt",
     });

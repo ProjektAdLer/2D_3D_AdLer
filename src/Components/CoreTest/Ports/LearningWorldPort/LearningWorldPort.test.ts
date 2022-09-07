@@ -15,6 +15,7 @@ import IPresentationBuilder from "../../../Core/Presentation/PresentationBuilder
 import IPresentationDirector from "../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
 import ILearningElementsDropdownPresenter from "../../../Core/Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
 import ILearningWorldNamePanelPresenter from "../../../Core/Presentation/React/LearningWorldNamePanel/ILearningWorldNamePanelPresenter";
+import ILearningWorldGoalPanelPresenter from "../../../Core/Presentation/React/LearningWorldGoalPanel/ILearningWorldGoalPanelPresenter";
 
 jest.mock("src/Lib/Logger");
 
@@ -27,6 +28,8 @@ const learningElementDropdownPresenterMock =
   mock<ILearningElementsDropdownPresenter>();
 const learningWorldNamePanelPresenterMock =
   mock<ILearningWorldNamePanelPresenter>();
+const learningWorldGoalPanelPresenterMock =
+  mock<ILearningWorldGoalPanelPresenter>();
 
 describe("LearningWorldPort", () => {
   let systemUnderTest: LearningWorldPort;
@@ -85,13 +88,32 @@ describe("LearningWorldPort", () => {
       learningWorldNamePanelPresenterMock
     );
   });
+  test("registerLearningWorldGoalPanelPresenter sets private member", () => {
+    systemUnderTest.registerLearningWorldGoalPanelPresenter(
+      learningWorldGoalPanelPresenterMock
+    );
 
-  test("registerLearningWorldPanelPresenter warns error if presenter is already registered", () => {
+    expect(systemUnderTest["learningWorldGoalPanelPresenter"]).toBe(
+      learningWorldGoalPanelPresenterMock
+    );
+  });
+
+  test("registerLearningWorldNamePanelPresenter warns error if presenter is already registered", () => {
     systemUnderTest.registerLearningWorldNamePanelPresenter(
       learningWorldNamePanelPresenterMock
     );
     systemUnderTest.registerLearningWorldNamePanelPresenter(
       learningWorldNamePanelPresenterMock
+    );
+
+    expect(logger.warn).toHaveBeenCalledTimes(1);
+  });
+  test("registerLearningWorldGoalPanelPresenter warns error if presenter is already registered", () => {
+    systemUnderTest.registerLearningWorldGoalPanelPresenter(
+      learningWorldGoalPanelPresenterMock
+    );
+    systemUnderTest.registerLearningWorldGoalPanelPresenter(
+      learningWorldGoalPanelPresenterMock
     );
 
     expect(logger.warn).toHaveBeenCalledTimes(1);
@@ -114,6 +136,7 @@ describe("LearningWorldPort", () => {
     };
     const learningWorldTO: LearningWorldTO = {
       worldName: "test",
+      worldGoal: "test",
       learningRooms: [learningRoomTO],
     };
 
@@ -127,6 +150,9 @@ describe("LearningWorldPort", () => {
     );
     systemUnderTest.registerLearningWorldNamePanelPresenter(
       learningWorldNamePanelPresenterMock
+    );
+    systemUnderTest.registerLearningWorldGoalPanelPresenter(
+      learningWorldGoalPanelPresenterMock
     );
 
     // ACT
@@ -154,6 +180,12 @@ describe("LearningWorldPort", () => {
     expect(
       learningWorldNamePanelPresenterMock.displayWorldName
     ).toHaveBeenCalledWith(learningWorldTO.worldName);
+    expect(
+      learningWorldGoalPanelPresenterMock.displayWorldGoal
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      learningWorldGoalPanelPresenterMock.displayWorldGoal
+    ).toHaveBeenCalledWith(learningWorldTO.worldGoal);
     expect(
       learningElementDropdownPresenterMock.presentLearningElements
     ).toHaveBeenCalledTimes(1);

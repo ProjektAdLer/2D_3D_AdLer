@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import ILearningWorldPort, { LearningWorldTO } from "./ILearningWorldPort";
+import ILearningWorldPort from "./ILearningWorldPort";
 import BUILDER_TYPES from "../../DependencyInjection/Builders/BUILDER_TYPES";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import type IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
@@ -10,6 +10,7 @@ import type INavigation from "../../Presentation/Babylon/Navigation/INavigation"
 import ILearningWorldNamePanelPresenter from "../../Presentation/React/LearningWorldNamePanel/ILearningWorldNamePanelPresenter";
 import ILearningWorldGoalPanelPresenter from "~ReactComponents/LearningWorldGoalPanel/ILearningWorldGoalPanelPresenter";
 import { logger } from "src/Lib/Logger";
+import LearningWorldTO from "../../Application/DataTransportObjects/LearningWorldTO";
 
 @injectable()
 export default class LearningWorldPort implements ILearningWorldPort {
@@ -42,6 +43,10 @@ export default class LearningWorldPort implements ILearningWorldPort {
     this.learningWorldNamePanelPresenter.displayWorldName(
       learningWorldTO.worldName
     );
+    this.learningWorldGoalPanelPresenter.displayWorldGoal(
+      learningWorldTO.worldGoal
+    );
+    console.log("world goaL", learningWorldTO.worldGoal);
     this.learningElementDropdownPresenter.presentLearningElements(
       learningWorldTO.learningRooms[0].learningElements
     );

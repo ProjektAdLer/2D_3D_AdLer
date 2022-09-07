@@ -10,10 +10,8 @@ import LearningWorldEntity from "../../Domain/Entities/LearningWorldEntity";
 import UserDataEntity from "../../Domain/Entities/UserDataEntity";
 import type IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import type ILearningWorldPort from "../../Ports/LearningWorldPort/ILearningWorldPort";
-import { LearningWorldTO } from "../../Ports/LearningWorldPort/ILearningWorldPort";
 import ILoadWorldUseCase from "./ILoadWorldUseCase";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
-import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import type ILoadAvatarUseCase from "../LoadAvatar/ILoadAvatarUseCase";
 import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_TYPES";
 import H5PLearningElementData from "../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
@@ -21,6 +19,7 @@ import TextLearningElementData from "../../Domain/Entities/SpecificLearningEleme
 import VideoLearningElementData from "../../Domain/Entities/SpecificLearningElements/VideoLearningElementData";
 import ImageLearningElementData from "../../Domain/Entities/SpecificLearningElements/ImageLearningElementData";
 import type IUIPort from "../../Ports/UIPort/IUIPort";
+import LearningWorldTO from "../DataTransportObjects/LearningWorldTO";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -62,6 +61,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     return {
       learningRooms: entityToConvert.learningRooms,
       worldName: entityToConvert.worldName,
+      worldGoal: entityToConvert.worldGoal,
     };
   }
 
@@ -149,6 +149,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
           {
             worldName: worldResp.name,
             learningRooms: [roomEntity],
+            worldGoal: worldResp.goal,
           },
           LearningWorldEntity
         );

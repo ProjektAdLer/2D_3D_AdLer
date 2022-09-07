@@ -16,7 +16,7 @@ export default function LearningWorldGoalPanel() {
   const [isOpen, setIsOpen] = useState(false);
   const [learningWorldGoal] = useObservable<string>(viewModel?.worldGoal);
 
-  // if (!learningWorldGoal) return null;
+  if (!learningWorldGoal) return null;
   if (!isOpen)
     // wenn nicht geklickt
     return (

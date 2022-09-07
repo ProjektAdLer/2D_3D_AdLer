@@ -1,5 +1,5 @@
+import LearningElementTO from "src/Components/Core/Application/DataTransportObjects/LearningElementTO";
 import Observable from "../../../../../Lib/Observable";
-import { LearningElementTO } from "../../../Ports/LearningWorldPort/ILearningWorldPort";
 
 export default class LearningElementsDropdownViewModel {
   learningElementNames = new Observable<string[]>([], true);

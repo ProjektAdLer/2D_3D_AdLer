@@ -18,6 +18,18 @@ fakeModel.learningElementData.Value = {
 const fakeController = mock<LearningElementModalController>();
 
 describe("LearningElementModal", () => {
+  test("doesn't render without controller", () => {
+    useBuilderMock([fakeModel, undefined]);
+    const { container } = render(<LearningElementModal />);
+    expect(container.firstChild).toBeNull();
+  });
+
+  test("doesn't render without view model", () => {
+    useBuilderMock([undefined, fakeController]);
+    const { container } = render(<LearningElementModal />);
+    expect(container.firstChild).toBeNull();
+  });
+
   test("should not render when closed", () => {
     fakeModel.isOpen.Value = false;
 

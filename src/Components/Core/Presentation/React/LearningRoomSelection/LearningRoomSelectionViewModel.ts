@@ -1,4 +1,4 @@
-import { LearningComponentID } from "src/Components/Core/Types/EnitityTypes";
+import { LearningComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import Observable from "src/Lib/Observable";
 
 export default class LearningRoomSelectionViewModel {

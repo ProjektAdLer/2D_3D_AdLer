@@ -1,6 +1,6 @@
 import IBottomTooltipPresenter from "./IBottomTooltipPresenter";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
-import { LearningElementTO } from "../../../Ports/LearningWorldPort/ILearningWorldPort";
+import LearningElementTO from "src/Components/Core/Application/DataTransportObjects/LearningElementTO";
 
 export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
   constructor(private viewModel: BottomTooltipViewModel) {}

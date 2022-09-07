@@ -1,4 +1,4 @@
-import { LearningComponentID } from "../../Types/EnitityTypes";
+import { LearningComponentID } from "../Types/EntityTypes";
 import AbstractLearningElement from "./SpecificLearningElements/AbstractLearningElement";
 
 export default class LearningElementEntity {

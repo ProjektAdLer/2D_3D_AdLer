@@ -1,4 +1,4 @@
-import DSL from "../../../Core/Adapters/Backend/IDSL";
+import IDSL from "../../../Core/Adapters/Backend/IDSL";
 
 export const correctFakeLearningElementsMinimalResponse = [
   {
@@ -56,7 +56,7 @@ export const correctFakeLearningElementResponse = [
   {
     id: 2,
     name: "Metriken Schiebespiel",
-    elementType: "h5p",
+    elementType: "video",
     value: [
       {
         type: "points",
@@ -78,7 +78,7 @@ export const correctFakeLearningElementResponse = [
   {
     id: 3,
     name: "Metriken Wortsuche",
-    elementType: "h5p",
+    elementType: "image",
     value: [
       {
         type: "points",
@@ -97,10 +97,32 @@ export const correctFakeLearningElementResponse = [
       },
     ],
   },
+  {
+    id: 4,
+    name: "Metriken Einstiegsvideo",
+    elementType: "text",
+    value: [
+      {
+        type: "points",
+        value: 10,
+      },
+    ],
+    requirements: [],
+    metaData: [
+      {
+        key: "h5pContextId",
+        value: "123",
+      },
+      {
+        key: "h5pFileName",
+        value: "Metriken Teil 1",
+      },
+    ],
+  },
 ];
 
 export const correctFakeRoomResponse = [
-  { id: 1, name: "Lernraum Metriken", learningElementIds: [1, 2, 3] },
+  { id: 1, name: "Lernraum Metriken", learningElementIds: [1, 2, 3, 4] },
 ];
 
 export const correctFakeRoomResponseMinimal = [
@@ -110,9 +132,10 @@ export const correctFakeRoomResponseMinimal = [
 export const correctFakeWorldResponse = {
   name: "Lernwelt Metriken",
   learningRoomIds: [1],
+  goal: "Testgoal",
 };
 
-export const mockDSL: DSL = {
+export const mockDSL: IDSL = {
   learningWorld: {
     identifier: {
       type: "name",
@@ -120,6 +143,7 @@ export const mockDSL: DSL = {
     },
     learningWorldContent: [],
     topics: [],
+    goal: "Testgoal",
     learningSpaces: [
       {
         spaceId: 1,

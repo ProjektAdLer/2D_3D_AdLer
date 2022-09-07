@@ -109,14 +109,16 @@ describe("LoadWorldUseCase", () => {
     );
   });
 
-  test("loads the Learnign World and notifies its presenters", async () => {
+  test("loads the Learning World and notifies its presenters", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
       {
         isLoggedIn: true,
         userToken: "token",
       } as UserDataEntity,
     ]);
-    backendMock.getWorld.mockResolvedValueOnce(correctFakeWorldResponse);
+    backendMock.getLearningWorldData.mockResolvedValueOnce(
+      correctFakeWorldResponse
+    );
     backendMock.getLearningRooms.mockResolvedValueOnce(
       correctFakeRoomResponseMinimal
     );
@@ -148,6 +150,7 @@ describe("LoadWorldUseCase", () => {
 
     const learningWorldObject = {
       worldName: "Lernwelt Metriken",
+      worldGoal: "Testgoal",
       learningRooms: [learningRoomObject],
     } as LearningWorldEntity;
 

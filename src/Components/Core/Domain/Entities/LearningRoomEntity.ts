@@ -1,4 +1,4 @@
-import { LearningComponentID } from "./../../Types/EnitityTypes";
+import { LearningComponentID } from "../Types/EntityTypes";
 import LearningElementEntity from "./LearningElementEntity";
 
 export default class LearningRoomEntity {

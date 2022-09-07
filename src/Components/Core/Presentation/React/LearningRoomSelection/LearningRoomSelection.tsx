@@ -1,21 +1,26 @@
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
+import useObservable from "~ReactComponents/CustomHooks/useObservable";
 import useBuilder from "../CustomHooks/useBuilder";
-import LearningRoomSelectionController from "./LearningRoomSelectionController";
+import ILearningRoomSelectionController from "./ILearningRoomSelectionController";
 import LearningRoomSelectionRow from "./LearningRoomSelectionRow";
 import LearningRoomSelectionViewModel from "./LearningRoomSelectionViewModel";
 
 export default function LearningRoomSelection() {
   const [viewModel, controller] = useBuilder<
     LearningRoomSelectionViewModel,
-    LearningRoomSelectionController
+    ILearningRoomSelectionController
   >(BUILDER_TYPES.ILearningRoomSelectionBuilder);
+
+  const [learningRoomTitles] = useObservable<string[]>(
+    viewModel?.learningRoomTitles
+  );
 
   if (!viewModel || !controller) return null;
 
   return (
     <ul className="flex flex-col justify-center gap-4">
-      {viewModel.learningRoomTitles.Value.map((title, index) => (
-        <li key={title}>
+      {learningRoomTitles?.map((title, index) => (
+        <li key={index}>
           <LearningRoomSelectionRow
             learningRoomTitle={title}
             onClickCallback={() =>

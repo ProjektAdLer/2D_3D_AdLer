@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { LearningElementTO } from "../../../Ports/LearningWorldPort/ILearningWorldPort";
 import { getIcon } from "../../Utils/GetIcon";
 import useObservable from "../CustomHooks/useObservable";
 import CustomDropdown from "../ReactBaseComponents/CustomDropdown";
@@ -9,6 +8,7 @@ import LearningElementsDropdownViewModel from "./LearningElementsDropdownViewMod
 import StyledContainer from "~ReactComponents/ReactBaseComponents/StyledContainer";
 import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
+import LearningElementTO from "src/Components/Core/Application/DataTransportObjects/LearningElementTO";
 
 export default function LearningElementsDropdown() {
   const [viewModel, controller] = useBuilder<
