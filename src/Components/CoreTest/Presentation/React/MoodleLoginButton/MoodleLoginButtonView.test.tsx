@@ -10,6 +10,18 @@ let fakeModel = new MoodleLoginButtonViewModel();
 const fakeController = mock<IMoodleLoginButtonController>();
 
 describe("MoodleLoginButton", () => {
+  test("doesn't render without controller", () => {
+    useBuilderMock([fakeModel, undefined]);
+    const { container } = render(<MoodleLoginButton />);
+    expect(container.firstChild).toBeNull();
+  });
+
+  test("doesn't render without view model", () => {
+    useBuilderMock([undefined, fakeController]);
+    const { container } = render(<MoodleLoginButton />);
+    expect(container.firstChild).toBeNull();
+  });
+
   test("MoodleLoginButton Tailwind Styling contains normal backgroundColor if not logged in", () => {
     fakeModel.loginSuccessful.Value = false;
     useBuilderMock([fakeModel, fakeController]);

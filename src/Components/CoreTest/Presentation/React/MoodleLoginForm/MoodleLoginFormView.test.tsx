@@ -10,6 +10,18 @@ let fakeModel = new MoodleLoginFormViewModel();
 const fakeController = mock<IMoodleLoginFormController>();
 
 describe("MoodleLoginFomr", () => {
+  test("doesn't render without controller", () => {
+    useBuilderMock([fakeModel, undefined]);
+    const { container } = render(<MoodleLoginForm />);
+    expect(container.firstChild).toBeNull();
+  });
+
+  test("doesn't render without view model", () => {
+    useBuilderMock([undefined, fakeController]);
+    const { container } = render(<MoodleLoginForm />);
+    expect(container.firstChild).toBeNull();
+  });
+
   test("should render if visible", () => {
     fakeModel.visible.Value = true;
     useBuilderMock([fakeModel, fakeController]);
