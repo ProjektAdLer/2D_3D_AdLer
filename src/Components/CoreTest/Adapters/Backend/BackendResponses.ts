@@ -1,4 +1,4 @@
-import DSL from "../../../Core/Adapters/Backend/IDSL";
+import IDSL from "../../../Core/Adapters/Backend/IDSL";
 
 export const correctFakeLearningElementsMinimalResponse = [
   {
@@ -135,7 +135,7 @@ export const correctFakeWorldResponse = {
   goal: "Testgoal",
 };
 
-export const mockDSL: DSL = {
+export const mockDSL: IDSL = {
   learningWorld: {
     identifier: {
       type: "name",

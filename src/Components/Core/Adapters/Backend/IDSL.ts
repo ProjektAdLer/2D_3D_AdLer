@@ -15,7 +15,7 @@ type LearningElementValue = {
   value: number;
 } | null;
 
-export default interface DSL {
+export default interface IDSL {
   learningWorld: {
     identifier: Identifier;
     learningWorldContent: number[];

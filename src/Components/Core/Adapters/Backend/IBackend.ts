@@ -3,6 +3,7 @@ import { APILearningRoomTO } from "./APILearningRoomTO";
 
 import { APIWorldTo } from "./APIWorldTO";
 import { APILearningElementTO } from "./APILearningElementTO";
+import IDSL from "./IDSL";
 
 export type tempApiInfo = {
   userToken: string;
@@ -10,7 +11,10 @@ export type tempApiInfo = {
 };
 
 export default interface IBackend {
-  getWorld({ userToken, worldName }: tempApiInfo): Promise<Partial<APIWorldTo>>;
+  getLearningWorldData({
+    userToken,
+    worldName,
+  }: tempApiInfo): Promise<Partial<APIWorldTo>>;
 
   getLearningRooms({
     userToken,
@@ -21,7 +25,9 @@ export default interface IBackend {
     userToken,
     worldName,
   }: tempApiInfo): Promise<Partial<APILearningElementTO[]>>;
+
   scoreLearningElement(learningElementId: LearningComponentID): Promise<void>;
+
   logInUser(userCredentials: {
     username: string;
     password: string;
