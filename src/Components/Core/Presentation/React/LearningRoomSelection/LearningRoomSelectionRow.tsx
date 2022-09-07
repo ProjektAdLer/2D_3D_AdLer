@@ -8,6 +8,8 @@ export default function LearningRoomSelectionRow({
   onClickCallback: () => void;
 }) {
   return (
-    <StyledButton onClick={onClickCallback}>{learningRoomTitle}</StyledButton>
+    <StyledButton shape="freefloatcenter" onClick={onClickCallback}>
+      {learningRoomTitle}
+    </StyledButton>
   );
 }

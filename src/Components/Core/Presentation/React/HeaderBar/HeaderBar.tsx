@@ -1,3 +1,4 @@
+import React from "react";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
 import StyledButton from "~ReactComponents/ReactBaseComponents/StyledButton";
@@ -14,10 +15,24 @@ export default function HeaderBar() {
   if (!viewModel || !controller) return null;
 
   return (
-    <StyledContainer>
-      <StyledButton onClick={controller.onMenuButtonClicked}>Menu</StyledButton>
-      <StyledButton onClick={controller.onBackButtonClicked}>Back</StyledButton>
-      {viewModel.title.Value}
-    </StyledContainer>
+    <React.Fragment>
+      <div className="flex justify-between">
+        <StyledButton
+          className="col-span-1 col-start-1"
+          onClick={controller.onMenuButtonClicked}
+        >
+          Menu
+        </StyledButton>
+        <StyledContainer className="text-4xl grow">
+          {viewModel.title.Value}
+        </StyledContainer>
+        <StyledButton
+          className="col-span-1 col-start-8"
+          onClick={controller.onBackButtonClicked}
+        >
+          Back
+        </StyledButton>
+      </div>
+    </React.Fragment>
   );
 }
