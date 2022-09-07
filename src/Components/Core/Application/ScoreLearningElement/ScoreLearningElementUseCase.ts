@@ -1,4 +1,4 @@
-import { LearningComponentID } from "./../../Types/EnitityTypes";
+import { LearningComponentID } from "../../Domain/Types/EntityTypes";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_TYPES";

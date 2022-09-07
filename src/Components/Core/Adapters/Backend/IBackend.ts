@@ -1,4 +1,4 @@
-import { LearningComponentID } from "./../../Types/EnitityTypes";
+import { LearningComponentID } from "../../Domain/Types/EntityTypes";
 import { APILearningRoomTO } from "./APILearningRoomTO";
 
 import { APIWorldTo } from "./APIWorldTO";

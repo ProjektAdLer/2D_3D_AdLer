@@ -1,4 +1,4 @@
-import { LearningComponentID } from "./../../../Types/EnitityTypes";
+import { LearningComponentID } from "../../../Domain/Types/EntityTypes";
 import { injectable } from "inversify";
 import { Vector2, Color3, Mesh, StandardMaterial } from "@babylonjs/core";
 import Observable from "../../../../../Lib/Observable";

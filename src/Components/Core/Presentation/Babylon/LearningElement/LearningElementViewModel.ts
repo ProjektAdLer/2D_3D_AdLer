@@ -1,4 +1,4 @@
-import { LearningComponentID } from "./../../../Types/EnitityTypes";
+import { LearningComponentID } from "../../../Domain/Types/EntityTypes";
 import { Mesh, Vector3 } from "@babylonjs/core";
 import Observable from "../../../../../Lib/Observable";
 import AbstractLearningElement from "../../../Domain/Entities/SpecificLearningElements/AbstractLearningElement";

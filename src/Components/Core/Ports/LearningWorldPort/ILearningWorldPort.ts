@@ -1,4 +1,4 @@
-import { LearningComponentID } from "../../Types/EnitityTypes";
+import { LearningComponentID } from "../../Domain/Types/EntityTypes";
 import ILearningElementsDropdownPresenter from "../../Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
 import AbstractLearningElement from "../../Domain/Entities/SpecificLearningElements/AbstractLearningElement";
 import ILearningWorldNamePanelPresenter from "../../Presentation/React/LearningWorldNamePanel/ILearningWorldNamePanelPresenter";
