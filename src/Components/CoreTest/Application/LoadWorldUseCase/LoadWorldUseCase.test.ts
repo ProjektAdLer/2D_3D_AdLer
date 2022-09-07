@@ -116,7 +116,9 @@ describe("LoadWorldUseCase", () => {
         userToken: "token",
       } as UserDataEntity,
     ]);
-    backendMock.getWorld.mockResolvedValueOnce(correctFakeWorldResponse);
+    backendMock.getLearningWorldData.mockResolvedValueOnce(
+      correctFakeWorldResponse
+    );
     backendMock.getLearningRooms.mockResolvedValueOnce(
       correctFakeRoomResponseMinimal
     );
