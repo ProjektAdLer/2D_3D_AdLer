@@ -8,8 +8,7 @@ export default function StyledContainer({
   return (
     <div
       className={
-        className +
-        "flex gap-2 m-3 w-fit h-fit text-xl font-extrabold text-white text-shadow"
+        className + "flex gap-2 m-3 w-fit h-fit font-extrabold text-white"
       }
       {...restProps}
     >

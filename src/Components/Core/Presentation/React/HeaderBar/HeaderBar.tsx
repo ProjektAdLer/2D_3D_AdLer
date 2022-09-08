@@ -20,13 +20,12 @@ export default function HeaderBar() {
   return (
     <React.Fragment>
       <div className="flex justify-between">
-        <StyledButton
-          className="col-span-1 col-start-1"
-          onClick={controller.onMenuButtonClicked}
-        >
+        <StyledButton className="" onClick={controller.onMenuButtonClicked}>
           Menu
         </StyledButton>
-        <StyledContainer className="text-4xl grow">{title}</StyledContainer>
+        <div className="!text-shadow">
+          <StyledContainer>{title}</StyledContainer>
+        </div>
         <StyledButton
           className="col-span-1 col-start-8"
           onClick={controller.onBackButtonClicked}
