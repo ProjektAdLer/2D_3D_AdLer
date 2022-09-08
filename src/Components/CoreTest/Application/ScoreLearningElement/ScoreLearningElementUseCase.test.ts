@@ -3,13 +3,13 @@ import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
 import { filterEntitiesOfTypeMockImplUtil } from "../../TestUtils";
 import ICalculateTotalRoomScore from "../../../Core/Application/CalculateTotalRoomScore/ICalculateTotalRoomScore";
-import IBackend from "../../../Core/Adapters/Backend/IBackend";
 import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import { mock } from "jest-mock-extended";
+import IBackendAdapter from "../../../Core/Adapters/BackendAdapter/IBackendAdapter";
 
 const entityContainerMock = mock<IEntityContainer>();
-const backendMock = mock<IBackend>();
+const backendMock = mock<IBackendAdapter>();
 const CalculateTotalRoomScoreMock = mock<ICalculateTotalRoomScore>();
 
 describe("ScoreLearningElementUseCase", () => {
@@ -23,9 +23,9 @@ describe("ScoreLearningElementUseCase", () => {
     CoreDIContainer.rebind<IEntityContainer>(
       CORE_TYPES.IEntityContainer
     ).toConstantValue(entityContainerMock);
-    CoreDIContainer.rebind<IBackend>(CORE_TYPES.IBackend).toConstantValue(
-      backendMock
-    );
+    CoreDIContainer.rebind<IBackendAdapter>(
+      CORE_TYPES.IBackendAdapter
+    ).toConstantValue(backendMock);
     CoreDIContainer.rebind<ICalculateTotalRoomScore>(
       USECASE_TYPES.ICalculateTotalRoomScore
     ).toConstantValue(CalculateTotalRoomScoreMock);

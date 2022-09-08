@@ -3,8 +3,8 @@ import { injectable } from "inversify";
 import { config } from "../../../../config";
 import { logger } from "../../../../Lib/Logger";
 import { LearningElementTypes } from "../../Presentation/Babylon/LearningElement/Types/LearningElementTypes";
-import IDSL, { APILearningElement, APILearningRoom } from "./Types/IDSL";
-import IBackend, { tempApiInfo } from "./IBackend";
+import IDSL, { APILearningElement } from "./Types/IDSL";
+import IBackendAdapter, { tempApiInfo } from "./IBackendAdapter";
 import LearningWorldTO from "../../Application/DataTransportObjects/LearningWorldTO";
 import LearningElementTO from "../../Application/DataTransportObjects/LearningElementTO";
 import TextLearningElementData from "../../Domain/Entities/SpecificLearningElements/TextLearningElementData";
@@ -14,7 +14,7 @@ import H5PLearningElementData from "../../Domain/Entities/SpecificLearningElemen
 import LearningRoomTO from "../../Application/DataTransportObjects/LearningRoomTO";
 
 @injectable()
-export default class Backend implements IBackend {
+export default class BackendAdapter implements IBackendAdapter {
   async getLearningWorldData({
     userToken,
     worldName,
@@ -39,7 +39,7 @@ export default class Backend implements IBackend {
           : []
       );
 
-    // create LearningRoomTOs and connect it with its learning elements
+    // create LearningRoomTOs and connect them with their learning elements
     response.learningRooms = dsl.learningWorld.learningSpaces.map((space) => {
       return {
         id: space.spaceId,

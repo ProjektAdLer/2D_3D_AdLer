@@ -1,6 +1,6 @@
-import { type tempApiInfo } from "./../../Adapters/Backend/IBackend";
+import { type tempApiInfo } from "../../Adapters/BackendAdapter/IBackendAdapter";
 import { inject, injectable } from "inversify";
-import type IBackend from "../../Adapters/Backend/IBackend";
+import type IBackendAdapter from "../../Adapters/BackendAdapter/IBackendAdapter";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
 import LearningRoomEntity from "../../Domain/Entities/LearningRoomEntity";
@@ -29,8 +29,8 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     private learningWorldPort: ILearningWorldPort,
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
-    @inject(CORE_TYPES.IBackend)
-    private backend: IBackend,
+    @inject(CORE_TYPES.IBackendAdapter)
+    private backendAdapter: IBackendAdapter,
     @inject(PORT_TYPES.IUIPort)
     private uiPort: IUIPort,
     @inject(USECASE_TYPES.ILoadAvatarUseCase)
@@ -106,7 +106,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       worldName: worldName,
     } as tempApiInfo;
 
-    const response = await this.backend.getLearningWorldData(apiData);
+    const response = await this.backendAdapter.getLearningWorldData(apiData);
 
     if (this.container.getEntitiesOfType(LearningWorldEntity).length === 0) {
       // learningRooms with learningElements
