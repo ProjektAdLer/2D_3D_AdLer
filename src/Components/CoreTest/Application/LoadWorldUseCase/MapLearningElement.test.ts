@@ -1,33 +1,34 @@
 import LoadWorldUseCase from "../../../Core/Application/LoadWorld/LoadWorldUseCase";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
-import IBackend from "../../../Core/Adapters/Backend/IBackend";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
 import IUIPort from "../../../Core/Ports/UIPort/IUIPort";
 import ILearningWorldPort from "../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
-import { APILearningElementTO } from "../../../Core/Adapters/Backend/APILearningElementTO";
 import LearningElementEntity from "../../../Core/Domain/Entities/LearningElementEntity";
 import H5PLearningElementData from "../../../Core/Domain/Entities/SpecificLearningElements/H5PLearningElementData";
 import TextLearningElementData from "../../../Core/Domain/Entities/SpecificLearningElements/TextLearningElementData";
 import ImageLeanringElementData from "../../../Core/Domain/Entities/SpecificLearningElements/ImageLearningElementData";
 import VideoLearningElementData from "../../../Core/Domain/Entities/SpecificLearningElements/VideoLearningElementData";
-const backendMock = mock<IBackend>();
+import LearningElementTO from "../../../Core/Application/DataTransportObjects/LearningElementTO";
+import IBackendAdapter from "../../../Core/Adapters/BackendAdapter/IBackendAdapter";
+
+const backendMock = mock<IBackendAdapter>();
 const learningWorldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const uiPortMock = mock<IUIPort>();
 
 describe("LoadWorldUseCase", () => {
   let systemUnderTest: LoadWorldUseCase;
-  let functionUnderTest: (
-    element: APILearningElementTO
-  ) => LearningElementEntity;
+  let functionUnderTest: (element: LearningElementTO) => LearningElementEntity;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind(CORE_TYPES.IBackend).toConstantValue(backendMock);
+    CoreDIContainer.rebind(CORE_TYPES.IBackendAdapter).toConstantValue(
+      backendMock
+    );
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
       learningWorldPortMock
     );
@@ -46,7 +47,7 @@ describe("LoadWorldUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  const h5pInput: APILearningElementTO = {
+  const h5pInput: LearningElementTO = {
     id: 1,
     name: "Test",
     elementType: "h5p",
@@ -86,7 +87,7 @@ describe("LoadWorldUseCase", () => {
     } as H5PLearningElementData,
   };
 
-  const textInput: APILearningElementTO = {
+  const textInput: LearningElementTO = {
     id: 2,
     name: "TestText",
     elementType: "text",
@@ -105,7 +106,7 @@ describe("LoadWorldUseCase", () => {
     metaData: [],
   };
 
-  const imageInput: APILearningElementTO = {
+  const imageInput: LearningElementTO = {
     id: 2,
     name: "TestImage",
     elementType: "image",
@@ -124,7 +125,7 @@ describe("LoadWorldUseCase", () => {
     metaData: [],
   };
 
-  const videoInput: APILearningElementTO = {
+  const videoInput: LearningElementTO = {
     id: 2,
     name: "TestVideo",
     elementType: "video",
@@ -188,7 +189,7 @@ describe("LoadWorldUseCase", () => {
     "Maps Learnign Element to Learning Element Entity for %s",
     (
       _text: string,
-      i: APILearningElementTO,
+      i: LearningElementTO,
       e: Partial<LearningElementEntity>
     ) => {
       functionUnderTest(i);

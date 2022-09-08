@@ -1,34 +1,27 @@
+import LearningWorldTO from "src/Components/Core/Application/DataTransportObjects/LearningWorldTO";
 import IDSL from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
 
-export const correctFakeLearningElementsMinimalResponse = [
-  {
-    id: 1,
-    name: "Test",
-    elementType: "h5p",
-    value: [
-      {
-        type: "points",
-        value: 10,
-      },
-    ],
-    requirements: [
-      {
-        type: "points",
-        value: 10,
-      },
-    ],
-    metaData: [
-      {
-        key: "h5pContextId",
-        value: "123",
-      },
-      {
-        key: "h5pFileName",
-        value: "fileName",
-      },
-    ],
-  },
-];
+export const minimalGetLearningWorldDataResponse: LearningWorldTO = {
+  worldName: "TestWorld",
+  worldGoal: "TestGoal",
+  learningRooms: [
+    {
+      id: 1,
+      name: "TestRoom",
+      learningElements: [
+        {
+          id: 1,
+          name: "TestElement",
+          value: 42,
+          requirements: undefined,
+          learningElementData: {
+            type: "text",
+          },
+        },
+      ],
+    },
+  ],
+};
 
 export const correctFakeLearningElementResponse = [
   {
@@ -123,10 +116,6 @@ export const correctFakeLearningElementResponse = [
 
 export const correctFakeRoomResponse = [
   { id: 1, name: "Lernraum Metriken", learningElementIds: [1, 2, 3, 4] },
-];
-
-export const correctFakeRoomResponseMinimal = [
-  { id: 1, name: "Lernraum Metriken", learningElementIds: [1] },
 ];
 
 export const correctFakeWorldResponse = {
