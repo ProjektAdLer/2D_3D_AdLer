@@ -10,6 +10,8 @@ import IEngineManager from "../Presentation/Babylon/EngineManager/IEngineManager
 import EngineManager from "../Presentation/Babylon/EngineManager/EngineManager";
 import IBackendAdapter from "../Adapters/BackendAdapter/IBackendAdapter";
 import BackendAdapter from "../Adapters/BackendAdapter/BackendAdapter";
+import { config } from "src/config";
+import MockBackendAdapter from "../Adapters/BackendAdapter/MockBackendAdapter";
 
 const infrastructureDIContainer = new ContainerModule((bind) => {
   bind<IEngineManager>(CORE_TYPES.IEngineManager)
@@ -28,10 +30,16 @@ const infrastructureDIContainer = new ContainerModule((bind) => {
   // React Entry
   bind<IReactEntry>(CORE_TYPES.ICoreRenderer).to(ReactEntry).inSingletonScope();
 
-  // Fake Backend
-  bind<IBackendAdapter>(CORE_TYPES.IBackendAdapter)
-    .to(BackendAdapter)
-    .inSingletonScope();
+  // Backend Adapter
+  if (config.useFakeBackend) {
+    bind<IBackendAdapter>(CORE_TYPES.IBackendAdapter)
+      .to(MockBackendAdapter)
+      .inSingletonScope();
+  } else {
+    bind<IBackendAdapter>(CORE_TYPES.IBackendAdapter)
+      .to(BackendAdapter)
+      .inSingletonScope();
+  }
 });
 
 export default infrastructureDIContainer;

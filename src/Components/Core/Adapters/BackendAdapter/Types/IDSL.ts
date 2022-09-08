@@ -1,3 +1,5 @@
+// these types define the JSON data structure of the DSL that is returned by the backend
+
 type Identifier = {
   type: string;
   value: string;
