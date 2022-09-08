@@ -18,9 +18,9 @@ export default function LearningRoomSelection() {
   if (!viewModel || !controller) return null;
 
   return (
-    <ul className="flex flex-col justify-center gap-4">
+    <ul className="flex flex-col gap-4 w-[100%]">
       {learningRoomTitles?.map((title, index) => (
-        <li key={index}>
+        <li className="flex items-center" key={index}>
           <LearningRoomSelectionRow
             learningRoomTitle={title}
             onClickCallback={() =>
