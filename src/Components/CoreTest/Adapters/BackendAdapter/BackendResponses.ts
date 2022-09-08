@@ -1,4 +1,4 @@
-import IDSL from "../../../Core/Adapters/Backend/Types/IDSL";
+import IDSL from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
 
 export const correctFakeLearningElementsMinimalResponse = [
   {

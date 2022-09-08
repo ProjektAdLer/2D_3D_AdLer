@@ -4,7 +4,7 @@ import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
 import IScoreLearningElementUseCase from "./IScoreLearningElementUseCase";
-import type IBackend from "../../Adapters/Backend/IBackend";
+import type IBackendAdapter from "../../Adapters/BackendAdapter/IBackendAdapter";
 import type ICalculateTotalRoomScore from "../CalculateTotalRoomScore/ICalculateTotalRoomScore";
 import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
 import LearningRoomEntity from "../../Domain/Entities/LearningRoomEntity";
@@ -16,8 +16,8 @@ export default class ScoreLearningElementUseCase
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
-    @inject(CORE_TYPES.IBackend)
-    private backend: IBackend,
+    @inject(CORE_TYPES.IBackendAdapter)
+    private backendAdapter: IBackendAdapter,
     @inject(USECASE_TYPES.ICalculateTotalRoomScore)
     private calculateTotalRoomScoreUseCase: ICalculateTotalRoomScore
   ) {}
@@ -45,7 +45,7 @@ export default class ScoreLearningElementUseCase
       );
 
     try {
-      await this.backend.scoreLearningElement(learningElements[0].id);
+      await this.backendAdapter.scoreLearningElement(learningElements[0].id);
     } catch {
       throw new Error("Could not score learning element via Backend");
     }

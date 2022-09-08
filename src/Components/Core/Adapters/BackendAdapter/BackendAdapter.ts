@@ -3,8 +3,8 @@ import { injectable } from "inversify";
 import { config } from "../../../../config";
 import { logger } from "../../../../Lib/Logger";
 import { LearningElementTypes } from "../../Presentation/Babylon/LearningElement/Types/LearningElementTypes";
-import IDSL, { APILearningElement, APILearningRoom } from "./Types/IDSL";
-import IBackend, { tempApiInfo } from "./IBackend";
+import IDSL, { APILearningElement } from "./Types/IDSL";
+import IBackendAdapter, { tempApiInfo } from "./IBackendAdapter";
 import LearningWorldTO from "../../Application/DataTransportObjects/LearningWorldTO";
 import LearningElementTO from "../../Application/DataTransportObjects/LearningElementTO";
 import TextLearningElementData from "../../Domain/Entities/SpecificLearningElements/TextLearningElementData";
@@ -14,7 +14,7 @@ import H5PLearningElementData from "../../Domain/Entities/SpecificLearningElemen
 import LearningRoomTO from "../../Application/DataTransportObjects/LearningRoomTO";
 
 @injectable()
-export default class Backend implements IBackend {
+export default class BackendAdapter implements IBackendAdapter {
   async getLearningWorldData({
     userToken,
     worldName,
@@ -39,7 +39,7 @@ export default class Backend implements IBackend {
           : []
       );
 
-    // create LearningRoomTOs and connect it with its learning elements
+    // create LearningRoomTOs and connect them with their learning elements
     response.learningRooms = dsl.learningWorld.learningSpaces.map((space) => {
       return {
         id: space.spaceId,
@@ -99,6 +99,7 @@ export default class Backend implements IBackend {
     logger.warn(
       `Tried to score Learningelement ${learningElementId}. Functionality not implemented yet.`
     );
+
     return Promise.resolve();
   }
 
@@ -106,9 +107,6 @@ export default class Backend implements IBackend {
     username: string;
     password: string;
   }): Promise<string> {
-    if (config.useFakeBackend) {
-      return Promise.resolve("fakeToken");
-    }
     const token = await axios.post<string>(
       config.serverURL + "/userlogin",
       userCredentials
@@ -118,10 +116,6 @@ export default class Backend implements IBackend {
   }
 
   private async getDSL({ userToken, worldName }: tempApiInfo): Promise<IDSL> {
-    if (config.useFakeBackend) {
-      return mockDSL;
-    }
-
     const response = await axios.post<IDSL>(
       config.serverURL + "/LearningWorld",
       {
@@ -129,102 +123,7 @@ export default class Backend implements IBackend {
         courseName: worldName,
       }
     );
+
     return response.data;
   }
 }
-
-const mockDSL: IDSL = {
-  learningWorld: {
-    identifier: {
-      type: "name",
-      value: "Lernwelt Metriken",
-    },
-    learningWorldContent: [],
-    topics: [],
-    goal: "Testgoal",
-    learningSpaces: [
-      {
-        spaceId: 1,
-        learningSpaceName: "Lernraum Metriken",
-        identifier: {
-          type: "name",
-          value: "Lernraum Metriken",
-        },
-        learningSpaceContent: [1, 2, 3, 4],
-        requirements: null,
-      },
-    ],
-    learningElements: [
-      {
-        id: 1,
-        identifier: {
-          type: "FileName",
-          value: "Metriken Einstiegsvideo",
-        },
-        elementType: "h5p",
-        learningElementValue: null,
-        requirements: null,
-        metaData: [
-          { key: "h5pContextId", value: "123" },
-          { key: "h5pFileName", value: "Metriken Teil 1" },
-        ],
-      },
-      {
-        id: 2,
-        identifier: {
-          type: "FileName",
-          value: "Metriken Schiebespiel",
-        },
-        elementType: "video",
-        learningElementValue: null,
-        requirements: null,
-        metaData: [
-          { key: "h5pContextId", value: "123" },
-          { key: "h5pFileName", value: "Schiebespiel Metriken" },
-        ],
-      },
-      {
-        id: 3,
-        identifier: {
-          type: "FileName",
-          value: "Metriken Wortsuche",
-        },
-        elementType: "image",
-        learningElementValue: null,
-        requirements: null,
-        metaData: [
-          { key: "h5pContextId", value: "123" },
-          { key: "h5pFileName", value: "Wortsuche Metriken" },
-        ],
-      },
-      {
-        id: 4,
-        identifier: {
-          type: "FileName",
-          value: "Metriken Einstiegsvideo",
-        },
-        elementType: "text",
-        learningElementValue: null,
-        requirements: null,
-        metaData: [
-          { key: "h5pContextId", value: "123" },
-          { key: "h5pFileName", value: "Metriken Teil 1" },
-        ],
-      },
-      {
-        id: 5,
-        identifier: {
-          type: "FileName",
-          value: "DSL Dokument",
-        },
-        elementType: "json",
-        learningElementValue: null,
-        requirements: null,
-        metaData: [
-          { key: "h5pContextId", value: "123" },
-          { key: "h5pFileName", value: "bla.h5p" },
-        ],
-      },
-    ],
-  },
-};

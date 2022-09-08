@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import type IBackend from "../../Adapters/Backend/IBackend";
+import type IBackendAdapter from "../../Adapters/BackendAdapter/IBackendAdapter";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import UserDataEntity from "../../Domain/Entities/UserDataEntity";
@@ -16,7 +16,7 @@ export default class LogUserIntoMoodleUseCase
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
-    @inject(CORE_TYPES.IBackend) private backend: IBackend,
+    @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendAdapter,
     @inject(PORT_TYPES.IMoodlePort) private moodlePort: IMoodlePort,
     @inject(PORT_TYPES.IUIPort) private uiPort: IUIPort,
     @inject(PORT_TYPES.IDebugPort) private debugPort: IDebugPort
@@ -33,7 +33,7 @@ export default class LogUserIntoMoodleUseCase
       return Promise.reject("User is already logged in");
     }
 
-    const userToken = await this.backend.logInUser({
+    const userToken = await this.backendAdapter.logInUser({
       username: data.username,
       password: data.password,
     });

@@ -5,7 +5,7 @@ import {
   mockDSL,
 } from "./BackendResponses";
 import { config } from "../../../../config";
-import Backend from "../../../../Components/Core/Adapters/Backend/Backend";
+import BackendAdapter from "../../../Core/Adapters/BackendAdapter/BackendAdapter";
 import axios from "axios";
 
 jest.mock("axios");
@@ -14,31 +14,15 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 const oldConfigValue = config.useFakeBackend;
 
 describe("Backend", () => {
-  let systemUnderTest: Backend;
+  let systemUnderTest: BackendAdapter;
   beforeAll(() => {
     config.useFakeBackend = true;
   });
   beforeEach(() => {
-    systemUnderTest = new Backend();
+    systemUnderTest = new BackendAdapter();
   });
   afterAll(() => {
     config.useFakeBackend = oldConfigValue;
-  });
-  test("should return Learning Elements", async () => {
-    const learningElements = await systemUnderTest.getLearningElements({
-      userToken: "",
-      worldName: "",
-    });
-
-    expect(learningElements).toMatchObject(correctFakeLearningElementResponse);
-  });
-
-  test("should return Learning Rooms", async () => {
-    const learningRooms = await systemUnderTest.getLearningRooms({
-      userToken: "",
-      worldName: "",
-    });
-    expect(learningRooms).toStrictEqual(correctFakeRoomResponse);
   });
 
   test("should return Worlds", async () => {

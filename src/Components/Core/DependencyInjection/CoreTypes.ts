@@ -10,7 +10,7 @@ const CORE_TYPES = {
   IViewModelControllerProvider: Symbol("IViewModelControllerProvider"),
   ILoadWorldController: Symbol("ILoadWorldController"),
   IEntityContainer: Symbol("IEntityContainer"),
-  IBackend: Symbol("IBackend"),
+  IBackendAdapter: Symbol("IBackendAdapter"),
   INavigation: Symbol("INavigation"),
 };
 
