@@ -23,105 +23,26 @@ export const minimalGetLearningWorldDataResponse: LearningWorldTO = {
   ],
 };
 
-export const correctFakeLearningElementResponse = [
-  {
-    id: 1,
-    name: "Metriken Einstiegsvideo",
-    elementType: "h5p",
-    value: [
-      {
-        type: "points",
-        value: 10,
-      },
-    ],
-    requirements: [],
-    metaData: [
-      {
-        key: "h5pContextId",
-        value: "123",
-      },
-      {
-        key: "h5pFileName",
-        value: "Metriken Teil 1",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Metriken Schiebespiel",
-    elementType: "video",
-    value: [
-      {
-        type: "points",
-        value: 10,
-      },
-    ],
-    requirements: [],
-    metaData: [
-      {
-        key: "h5pContextId",
-        value: "123",
-      },
-      {
-        key: "h5pFileName",
-        value: "Schiebespiel Metriken",
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "Metriken Wortsuche",
-    elementType: "image",
-    value: [
-      {
-        type: "points",
-        value: 10,
-      },
-    ],
-    requirements: [],
-    metaData: [
-      {
-        key: "h5pContextId",
-        value: "123",
-      },
-      {
-        key: "h5pFileName",
-        value: "Wortsuche Metriken",
-      },
-    ],
-  },
-  {
-    id: 4,
-    name: "Metriken Einstiegsvideo",
-    elementType: "text",
-    value: [
-      {
-        type: "points",
-        value: 10,
-      },
-    ],
-    requirements: [],
-    metaData: [
-      {
-        key: "h5pContextId",
-        value: "123",
-      },
-      {
-        key: "h5pFileName",
-        value: "Metriken Teil 1",
-      },
-    ],
-  },
-];
-
-export const correctFakeRoomResponse = [
-  { id: 1, name: "Lernraum Metriken", learningElementIds: [1, 2, 3, 4] },
-];
-
-export const correctFakeWorldResponse = {
-  name: "Lernwelt Metriken",
-  learningRoomIds: [1],
-  goal: "Testgoal",
+// expected structure of the LearningWorldTO
+// this needs to be updated if the LearningWorldTO changes
+export const expectedLearningWorldTO: LearningWorldTO = {
+  worldName: expect.any(String),
+  worldGoal: expect.any(String),
+  learningRooms: expect.arrayContaining([
+    expect.objectContaining({
+      id: expect.any(Number),
+      name: expect.any(String),
+      learningElements: expect.arrayContaining([
+        expect.objectContaining({
+          id: expect.any(Number),
+          name: expect.any(String),
+          value: expect.any(Number),
+          requirements: expect.any(Array),
+          learningElementData: expect.any(Object),
+        }),
+      ]),
+    }),
+  ]),
 };
 
 export const mockDSL: IDSL = {
