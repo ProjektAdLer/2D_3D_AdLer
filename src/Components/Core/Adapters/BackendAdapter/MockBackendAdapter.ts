@@ -9,7 +9,7 @@ import UserCredentials from "./Types/UserCredentials";
 export default class MockBackendAdapter implements IBackendAdapter {
   getLearningWorldData({
     userToken,
-    worldName,
+    worldId,
   }: tempApiInfo): Promise<Partial<LearningWorldTO>> {
     const learningWorldTO: Partial<LearningWorldTO> = {
       worldName: "MockWorld",

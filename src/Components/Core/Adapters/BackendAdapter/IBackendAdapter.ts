@@ -4,13 +4,13 @@ import UserCredentials from "./Types/UserCredentials";
 
 export type tempApiInfo = {
   userToken: string;
-  worldName: string;
+  worldId: number;
 };
 
 export default interface IBackend {
   getLearningWorldData({
     userToken,
-    worldName,
+    worldId,
   }: tempApiInfo): Promise<Partial<LearningWorldTO>>;
 
   scoreLearningElement(learningElementId: LearningComponentID): Promise<void>;

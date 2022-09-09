@@ -61,7 +61,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     // TODO: remove hardcoded worldName when a learning world is selected
     let apiData = {
       userToken: userData.userToken,
-      worldName: "Lernwelt Autorentool",
+      worldId: 1, // TODO: This van be a random number for now
     } as tempApiInfo;
 
     const response = await this.backendAdapter.getLearningWorldData(apiData);

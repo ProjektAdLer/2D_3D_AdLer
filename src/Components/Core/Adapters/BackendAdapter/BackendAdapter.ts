@@ -17,12 +17,12 @@ import LearningRoomTO from "../../Application/DataTransportObjects/LearningRoomT
 export default class BackendAdapter implements IBackendAdapter {
   async getLearningWorldData({
     userToken,
-    worldName,
+    worldId,
   }: tempApiInfo): Promise<Partial<LearningWorldTO>> {
     // get DSL
     let dsl = await this.getDSL({
       userToken,
-      worldName,
+      worldId,
     });
 
     // create LearningWorldTO with learning world data
@@ -53,6 +53,29 @@ export default class BackendAdapter implements IBackendAdapter {
     return response;
   }
 
+  async scoreLearningElement(learningElementId: number): Promise<void> {
+    logger.warn(
+      `Tried to score Learningelement ${learningElementId}. Functionality not implemented yet.`
+    );
+
+    return Promise.resolve();
+  }
+
+  async logInUser(userCredentials: {
+    username: string;
+    password: string;
+  }): Promise<string> {
+    const token = await axios.get<{
+      moodleToken: string;
+    }>(config.serverURL + "/MoodleLogin/Login", {
+      params: {
+        UserName: userCredentials.username,
+        Password: userCredentials.password,
+      },
+    });
+
+    return token.data.moodleToken;
+  }
   private mapLearningElement = (
     element: APILearningElement
   ): LearningElementTO => {
@@ -96,39 +119,20 @@ export default class BackendAdapter implements IBackendAdapter {
 
     return learningElementTO as LearningElementTO;
   };
+  private async getDSL({ userToken, worldId }: tempApiInfo): Promise<IDSL> {
+    // const response = await axios.post<IDSL>(
+    //   config.serverURL + "/LearningWorld",
+    //   {
+    //     wsToken: userToken,
+    //     courseName: worldName,
+    //   }
+    // );
 
-  async scoreLearningElement(learningElementId: number): Promise<void> {
-    logger.warn(
-      `Tried to score Learningelement ${learningElementId}. Functionality not implemented yet.`
-    );
-
-    return Promise.resolve();
-  }
-
-  async logInUser(userCredentials: {
-    username: string;
-    password: string;
-  }): Promise<string> {
-    const token = await axios.get<{
-      moodleToken: string;
-    }>(config.serverURL + "/MoodleLogin/Login", {
-      params: {
-        UserName: userCredentials.username,
-        Password: userCredentials.password,
+    const response = await axios.get<IDSL>(config.serverURL + "/Courses/5", {
+      headers: {
+        token: userToken,
       },
     });
-
-    return token.data.moodleToken;
-  }
-
-  private async getDSL({ userToken, worldName }: tempApiInfo): Promise<IDSL> {
-    const response = await axios.post<IDSL>(
-      config.serverURL + "/LearningWorld",
-      {
-        wsToken: userToken,
-        courseName: worldName,
-      }
-    );
 
     return response.data;
   }
