@@ -1,4 +1,5 @@
 import { injectable } from "inversify";
+import CourseListTO from "../../Application/DataTransportObjects/CourseListTO";
 import LearningElementTO from "../../Application/DataTransportObjects/LearningElementTO";
 import LearningRoomTO from "../../Application/DataTransportObjects/LearningRoomTO";
 import LearningWorldTO from "../../Application/DataTransportObjects/LearningWorldTO";
@@ -7,6 +8,18 @@ import UserCredentials from "./Types/UserCredentials";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendAdapter {
+  getCoursesAvalibaleForUser(userToken: string): Promise<CourseListTO> {
+    const test = {
+      courses: [
+        {
+          courseId: 1,
+          courseName: "Testkurs",
+        },
+      ],
+    } as CourseListTO;
+
+    return Promise.resolve(test);
+  }
   getLearningWorldData({
     userToken,
     worldId,

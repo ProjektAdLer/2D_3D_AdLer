@@ -12,9 +12,25 @@ import ImageLearningElementData from "../../Domain/Entities/SpecificLearningElem
 import VideoLearningElementData from "../../Domain/Entities/SpecificLearningElements/VideoLearningElementData";
 import H5PLearningElementData from "../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
 import LearningRoomTO from "../../Application/DataTransportObjects/LearningRoomTO";
+import CourseListTO from "../../Application/DataTransportObjects/CourseListTO";
 
 @injectable()
 export default class BackendAdapter implements IBackendAdapter {
+  async getCoursesAvalibaleForUser(userToken: string): Promise<CourseListTO> {
+    const response = await axios.get<CourseListTO>(
+      config.serverURL + "/Courses",
+      {
+        params: {
+          limitToEnrolled: false,
+        },
+        headers: {
+          token: userToken,
+        },
+      }
+    );
+
+    return response.data;
+  }
   async getLearningWorldData({
     userToken,
     worldId,
@@ -120,19 +136,14 @@ export default class BackendAdapter implements IBackendAdapter {
     return learningElementTO as LearningElementTO;
   };
   private async getDSL({ userToken, worldId }: tempApiInfo): Promise<IDSL> {
-    // const response = await axios.post<IDSL>(
-    //   config.serverURL + "/LearningWorld",
-    //   {
-    //     wsToken: userToken,
-    //     courseName: worldName,
-    //   }
-    // );
-
-    const response = await axios.get<IDSL>(config.serverURL + "/Courses/5", {
-      headers: {
-        token: userToken,
-      },
-    });
+    const response = await axios.get<IDSL>(
+      config.serverURL + "/Courses/" + worldId,
+      {
+        headers: {
+          token: userToken,
+        },
+      }
+    );
 
     return response.data;
   }
