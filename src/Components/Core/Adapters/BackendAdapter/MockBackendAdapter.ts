@@ -28,6 +28,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
       worldName: "MockWorld",
       worldGoal: "MockGoal",
       learningRooms: [
+        {}, // This is nessesary because the LearningWorldPresenter expects an array of LearningRoomTOs with the first on reserved for the DSL file
         {
           id: 1,
           name: "MockRoom1",
