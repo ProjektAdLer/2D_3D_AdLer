@@ -1,145 +1,57 @@
+import LearningElementTO from "src/Components/Core/Application/DataTransportObjects/LearningElementTO";
+import LearningRoomTO from "src/Components/Core/Application/DataTransportObjects/LearningRoomTO";
+import LearningWorldTO from "src/Components/Core/Application/DataTransportObjects/LearningWorldTO";
 import IDSL from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
 
-export const correctFakeLearningElementsMinimalResponse = [
-  {
-    id: 1,
-    name: "Test",
-    elementType: "h5p",
-    value: [
-      {
-        type: "points",
-        value: 10,
-      },
-    ],
-    requirements: [
-      {
-        type: "points",
-        value: 10,
-      },
-    ],
-    metaData: [
-      {
-        key: "h5pContextId",
-        value: "123",
-      },
-      {
-        key: "h5pFileName",
-        value: "fileName",
-      },
-    ],
-  },
-];
+export const minimalGetLearningWorldDataResponse: LearningWorldTO = {
+  worldName: "TestWorld",
+  worldGoal: "TestGoal",
+  learningRooms: [
+    {
+      id: 1,
+      name: "TestRoom",
+      learningElements: [
+        {
+          id: 1,
+          name: "TestElement",
+          value: 42,
+          requirements: undefined,
+          learningElementData: {
+            type: "text",
+          },
+        },
+      ],
+    },
+  ],
+};
 
-export const correctFakeLearningElementResponse = [
-  {
-    id: 1,
-    name: "Metriken Einstiegsvideo",
-    elementType: "h5p",
-    value: [
-      {
-        type: "points",
-        value: 10,
-      },
-    ],
-    requirements: [],
-    metaData: [
-      {
-        key: "h5pContextId",
-        value: "123",
-      },
-      {
-        key: "h5pFileName",
-        value: "Metriken Teil 1",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Metriken Schiebespiel",
-    elementType: "video",
-    value: [
-      {
-        type: "points",
-        value: 10,
-      },
-    ],
-    requirements: [],
-    metaData: [
-      {
-        key: "h5pContextId",
-        value: "123",
-      },
-      {
-        key: "h5pFileName",
-        value: "Schiebespiel Metriken",
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "Metriken Wortsuche",
-    elementType: "image",
-    value: [
-      {
-        type: "points",
-        value: 10,
-      },
-    ],
-    requirements: [],
-    metaData: [
-      {
-        key: "h5pContextId",
-        value: "123",
-      },
-      {
-        key: "h5pFileName",
-        value: "Wortsuche Metriken",
-      },
-    ],
-  },
-  {
-    id: 4,
-    name: "Metriken Einstiegsvideo",
-    elementType: "text",
-    value: [
-      {
-        type: "points",
-        value: 10,
-      },
-    ],
-    requirements: [],
-    metaData: [
-      {
-        key: "h5pContextId",
-        value: "123",
-      },
-      {
-        key: "h5pFileName",
-        value: "Metriken Teil 1",
-      },
-    ],
-  },
-];
+// expected structure of the TOs
+// this needs to be updated if the TOs changes
+export const expectedLearningWorldTO: LearningWorldTO = {
+  worldName: expect.any(String),
+  worldGoal: expect.any(String),
+  learningRooms: expect.any(Array),
+};
 
-export const correctFakeRoomResponse = [
-  { id: 1, name: "Lernraum Metriken", learningElementIds: [1, 2, 3, 4] },
-];
+export const expectedLearningRoomTO: LearningRoomTO = {
+  id: expect.any(Number),
+  name: expect.any(String),
+  learningElements: expect.any(Array),
+};
 
-export const correctFakeRoomResponseMinimal = [
-  { id: 1, name: "Lernraum Metriken", learningElementIds: [1] },
-];
-
-export const correctFakeWorldResponse = {
-  name: "Lernwelt Metriken",
-  learningRoomIds: [1],
-  goal: "Testgoal",
+export const expectedLearningElementTO: LearningElementTO = {
+  id: expect.any(Number),
+  name: expect.any(String),
+  value: expect.any(Number),
+  requirements: expect.any(Array),
+  learningElementData: expect.any(Object),
 };
 
 export const mockDSL: IDSL = {
   learningWorld: {
     identifier: {
       type: "name",
-      value: "Lernwelt Metriken",
+      value: "TestWelt",
     },
     learningWorldContent: [],
     topics: [],
@@ -147,12 +59,12 @@ export const mockDSL: IDSL = {
     learningSpaces: [
       {
         spaceId: 1,
-        learningSpaceName: "Lernraum Metriken",
+        learningSpaceName: "TestRaum",
         identifier: {
           type: "name",
-          value: "Lernraum Metriken",
+          value: "Testraum",
         },
-        learningSpaceContent: [1, 2, 3],
+        learningSpaceContent: [1, 2, 3, 4],
         requirements: null,
       },
     ],
@@ -161,10 +73,13 @@ export const mockDSL: IDSL = {
         id: 1,
         identifier: {
           type: "FileName",
-          value: "Metriken Einstiegsvideo",
+          value: "TestH5P",
         },
         elementType: "h5p",
-        learningElementValue: null,
+        learningElementValue: {
+          type: "points",
+          value: 10,
+        },
         requirements: null,
         metaData: [
           { key: "h5pContextId", value: "123" },
@@ -175,32 +90,40 @@ export const mockDSL: IDSL = {
         id: 2,
         identifier: {
           type: "FileName",
-          value: "Metriken Schiebespiel",
+          value: "TestText",
         },
-        elementType: "h5p",
-        learningElementValue: null,
+        elementType: "text",
+        learningElementValue: {
+          type: "points",
+          value: 10,
+        },
         requirements: null,
-        metaData: [
-          { key: "h5pContextId", value: "123" },
-          { key: "h5pFileName", value: "Schiebespiel Metriken" },
-        ],
+        metaData: [],
       },
       {
         id: 3,
         identifier: {
           type: "FileName",
-          value: "Metriken Wortsuche",
+          value: "TestImage",
         },
-        elementType: "h5p",
+        elementType: "image",
         learningElementValue: null,
         requirements: null,
-        metaData: [
-          { key: "h5pContextId", value: "123" },
-          { key: "h5pFileName", value: "Wortsuche Metriken" },
-        ],
+        metaData: [],
       },
       {
         id: 4,
+        identifier: {
+          type: "FileName",
+          value: "TestVideo",
+        },
+        elementType: "video",
+        learningElementValue: null,
+        requirements: null,
+        metaData: [],
+      },
+      {
+        id: 5,
         identifier: {
           type: "FileName",
           value: "DSL Dokument",

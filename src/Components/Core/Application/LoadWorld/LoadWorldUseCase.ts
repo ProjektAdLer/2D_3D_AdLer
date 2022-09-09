@@ -22,8 +22,6 @@ import LearningElementTO from "../DataTransportObjects/LearningElementTO";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
-  private learningWorldEntity: LearningWorldEntity;
-
   constructor(
     @inject(PORT_TYPES.ILearningWorldPort)
     private learningWorldPort: ILearningWorldPort,
@@ -45,15 +43,61 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       return Promise.reject("User is not logged in");
     }
 
-    await this.load(userData[0]);
+    let learningWorldEntity =
+      this.container.getEntitiesOfType(LearningWorldEntity)[0];
 
-    this.learningWorldPort.presentLearningWorld(
-      this.toTO(this.learningWorldEntity)
-    );
+    if (!learningWorldEntity) {
+      learningWorldEntity = await this.load(userData[0]);
+    }
+
+    this.learningWorldPort.presentLearningWorld(this.toTO(learningWorldEntity));
     // TODO: Move this outside of this use case - PG
     await this.loadAvatarUseCase.executeAsync();
 
     return Promise.resolve();
+  }
+
+  private async load(userData: UserDataEntity): Promise<LearningWorldEntity> {
+    // TODO: remove hardcoded worldName when a learning world is selected
+    let apiData = {
+      userToken: userData.userToken,
+      worldName: "Lernwelt Autorentool",
+    } as tempApiInfo;
+
+    const response = await this.backendAdapter.getLearningWorldData(apiData);
+
+    // create learning room entities with learning element entities
+    const learningRoomEntities: LearningRoomEntity[] = [];
+    response.learningRooms?.forEach((room) => {
+      let learningElementEntities: LearningElementEntity[] = [];
+      room.learningElements?.forEach((element) => {
+        learningElementEntities.push(this.mapLearningElement(element));
+      });
+
+      learningRoomEntities.push(
+        this.container.createEntity<LearningRoomEntity>(
+          {
+            id: room.id,
+            name: room.name,
+            learningElements: learningElementEntities,
+          },
+          LearningRoomEntity
+        )
+      );
+    });
+
+    // create learning world entity
+    const learningWorldEntity =
+      this.container.createEntity<LearningWorldEntity>(
+        {
+          worldName: response.worldName,
+          learningRooms: learningRoomEntities,
+          worldGoal: response.worldGoal,
+        },
+        LearningWorldEntity
+      );
+
+    return learningWorldEntity;
   }
 
   private mapLearningElement = (
@@ -98,69 +142,9 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     );
   };
 
-  private async load(userData: UserDataEntity): Promise<void> {
-    const worldName = "Lernwelt Autorentool";
-
-    let apiData = {
-      userToken: userData.userToken,
-      worldName: worldName,
-    } as tempApiInfo;
-
-    const response = await this.backendAdapter.getLearningWorldData(apiData);
-
-    if (this.container.getEntitiesOfType(LearningWorldEntity).length === 0) {
-      // learningRooms with learningElements
-      const learningRoomEntities: LearningRoomEntity[] = [];
-      response.learningRooms?.forEach((room) => {
-        let learningElementEntities: LearningElementEntity[] = [];
-        room.learningElements?.forEach((element) => {
-          learningElementEntities.push(this.mapLearningElement(element));
-        });
-
-        learningRoomEntities.push(
-          this.container.createEntity<LearningRoomEntity>(
-            {
-              id: room.id,
-              name: room.name,
-              learningElements: learningElementEntities,
-            },
-            LearningRoomEntity
-          )
-        );
-      });
-
-      // Learning World
-      this.learningWorldEntity =
-        this.container.createEntity<LearningWorldEntity>(
-          {
-            worldName: response.worldName,
-            learningRooms: learningRoomEntities,
-            worldGoal: response.worldGoal,
-          },
-          LearningWorldEntity
-        );
-    }
-  }
-
   private toTO(entityToConvert: LearningWorldEntity): LearningWorldTO {
-    return {
-      learningRooms: entityToConvert.learningRooms.map((room) => {
-        return {
-          id: room.id,
-          name: room.name,
-          learningElements: room.learningElements.map((element) => {
-            return {
-              id: element.id,
-              name: element.name,
-              value: element.value,
-              requirements: element.requirements,
-              learningElementData: element.learningElementData,
-            };
-          }),
-        };
-      }),
-      worldName: entityToConvert.worldName,
-      worldGoal: entityToConvert.worldGoal,
-    };
+    // spread to prevent passing a reference
+    // this will need to be changed when entity and TO are not matching in structure anymore
+    return { ...entityToConvert } as LearningWorldTO;
   }
 }

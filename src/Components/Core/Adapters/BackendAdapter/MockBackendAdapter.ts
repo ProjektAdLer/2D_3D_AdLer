@@ -11,7 +11,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
     userToken,
     worldName,
   }: tempApiInfo): Promise<Partial<LearningWorldTO>> {
-    return Promise.resolve({
+    const learningWorldTO: Partial<LearningWorldTO> = {
       worldName: "MockWorld",
       worldGoal: "MockGoal",
       learningRooms: [
@@ -62,7 +62,9 @@ export default class MockBackendAdapter implements IBackendAdapter {
           ],
         } as LearningRoomTO,
       ],
-    } as Partial<LearningWorldTO>);
+    } as Partial<LearningWorldTO>;
+
+    return Promise.resolve(learningWorldTO);
   }
 
   scoreLearningElement(learningElementId: number): Promise<void> {

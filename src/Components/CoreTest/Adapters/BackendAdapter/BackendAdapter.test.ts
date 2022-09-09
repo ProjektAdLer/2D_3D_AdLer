@@ -1,7 +1,7 @@
 import {
-  correctFakeLearningElementResponse,
-  correctFakeRoomResponse,
-  correctFakeWorldResponse,
+  expectedLearningElementTO,
+  expectedLearningRoomTO,
+  expectedLearningWorldTO,
   mockDSL,
 } from "./BackendResponses";
 import { config } from "../../../../config";
@@ -13,66 +13,100 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 const oldConfigValue = config.useFakeBackend;
 
-describe("Backend", () => {
+describe("BackendAdapter", () => {
   let systemUnderTest: BackendAdapter;
+
   beforeAll(() => {
-    config.useFakeBackend = true;
+    config.useFakeBackend = false;
   });
+
   beforeEach(() => {
     systemUnderTest = new BackendAdapter();
   });
+
   afterAll(() => {
     config.useFakeBackend = oldConfigValue;
   });
 
-  test("should return Worlds", async () => {
-    const worlds = await systemUnderTest.getLearningWorldData({
+  test("getLearningWorldData calls backend to get DSL file", async () => {
+    const userToken = "testToken";
+    const worldName = "testWorld";
+
+    mockedAxios.post.mockResolvedValue({ data: mockDSL });
+
+    await systemUnderTest.getLearningWorldData({
+      userToken: userToken,
+      worldName: worldName,
+    });
+
+    expect(mockedAxios.post).toHaveBeenCalledTimes(1);
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      config.serverURL + "/LearningWorld",
+      {
+        wsToken: userToken,
+        courseName: worldName,
+      }
+    );
+  });
+
+  test("getLearningWorldData converts DSL to TOs", async () => {
+    mockedAxios.post.mockResolvedValue({ data: mockDSL });
+
+    const result = await systemUnderTest.getLearningWorldData({
       userToken: "",
       worldName: "",
     });
 
-    expect(worlds).toStrictEqual(correctFakeWorldResponse);
+    // check that the result matches the expected structure of LearningWorldTO
+    expect(result).toEqual(expect.objectContaining(expectedLearningWorldTO));
+    result.learningRooms?.forEach((learningRoom) => {
+      expect(learningRoom).toEqual(expectedLearningRoomTO);
+
+      learningRoom.learningElements?.forEach((learningElement) => {
+        expect(learningElement).toEqual(expectedLearningElementTO);
+      });
+    });
+
+    // check that the result has the same amount of learning rooms as the DSL
+    expect(result.learningRooms).toHaveLength(
+      mockDSL.learningWorld.learningSpaces.length
+    );
+
+    result.learningRooms?.forEach((learningRoom, index) => {
+      // check that the results learning rooms have
+      // the same amount of learning elements as in the DSL
+      expect(learningRoom.learningElements).toHaveLength(
+        mockDSL.learningWorld.learningSpaces[index].learningSpaceContent.length
+      );
+    });
+
+    // TODO: add further comparisons between mockDSL and created TOs
+    // eg. check that the learning elements have the correct type/metadata
   });
 
-  test("Scores a Learning Element", () => {
+  test("scoreLearningElement resolves and doesn't throw", () => {
     expect(systemUnderTest.scoreLearningElement(1)).resolves.not.toThrow();
   });
 
-  test("Loggs user in to Moodle with fake backend", () => {
+  test("logInUser calls backend and returns a token", () => {
+    const token = "token";
+    const userName = "userName";
+    const password = "password";
+
+    mockedAxios.post.mockResolvedValue({ data: token });
     const returnedVal = systemUnderTest.logInUser({
-      username: "test",
-      password: "test",
-    });
-    expect(returnedVal).resolves.toBe("fakeToken");
-  });
-
-  test("Loggs user in to Moodle", () => {
-    config.useFakeBackend = false;
-    mockedAxios.post.mockResolvedValue({ data: "token" });
-    const returnedVal = systemUnderTest.logInUser({
-      username: "test",
-      password: "test",
-    });
-    config.useFakeBackend = true;
-    expect(returnedVal).resolves.toBe("token");
-  });
-
-  test("Backend calls Axios.Post corectly", async () => {
-    config.useFakeBackend = false;
-    mockedAxios.post.mockResolvedValue({ data: mockDSL });
-
-    await systemUnderTest.getLearningWorldData({
-      userToken: "Test_Token",
-      worldName: "Test_Welt",
+      username: userName,
+      password: password,
     });
 
+    expect(mockedAxios.post).toHaveBeenCalledTimes(1);
     expect(mockedAxios.post).toHaveBeenCalledWith(
-      config.serverURL + "/LearningWorld",
+      config.serverURL + "/userlogin",
       {
-        wsToken: "Test_Token",
-        courseName: "Test_Welt",
+        username: userName,
+        password: password,
       }
     );
-    config.useFakeBackend = true;
+    expect(returnedVal).resolves.toBe(token);
   });
 });

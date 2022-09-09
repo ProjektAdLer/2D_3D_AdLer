@@ -58,8 +58,10 @@ export default class BackendAdapter implements IBackendAdapter {
   ): LearningElementTO => {
     const learningElementTO: Partial<LearningElementTO> = {
       id: element.id,
-      value: element.learningElementValue?.value,
-      requirements: element.requirements ? element.requirements : [],
+      value: element.learningElementValue
+        ? element.learningElementValue.value
+        : 0,
+      requirements: element.requirements ?? [],
       name: element.identifier?.value,
     };
 
