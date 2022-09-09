@@ -11,21 +11,27 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <p>This is the welcome page.</p>
+    <div className="grid grid-cols-5 grid-rows-5 max-h-[100vh] bg-adlerlightblue">
+      <p className="self-center col-span-3 col-start-2 row-start-1 p-5 text-2xl font-extrabold text-white border-4 rounded-lg lg:border-8 border-adlerdarkblue justify-self-center bg-adlergold text-shadow lg:text-4xl">
+        Willkommen bei AdLer!
+      </p>
 
-      <p>
+      <p className="flex flex-col items-center justify-center col-start-3 row-start-5 gap-4">
         <StyledButton
           shape="freefloatleft"
           onClick={() => navigate("/worldmenu")}
         >
-          Go to Menu by onclick button
+          Gehe zum Lernraum Menü
         </StyledButton>
         <StyledButton shape="freefloatleft" onClick={() => navigate("/room")}>
-          Go to room by onclick button
+          Gehe zum Lernraum
         </StyledButton>
       </p>
-      <img className="absolute w-full h-full" src={logo} alt="Adler Logo" />
+      <img
+        className="animate-pulse col-start-2 col-span-3 row-start-2 row-span-3 w-[70vh] h-[70vh] self-center justify-self-center"
+        src={logo}
+        alt="Adler Logo"
+      />
     </div>
   );
 };
