@@ -12,7 +12,6 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
 
   return (
     <div>
-      <img className="absolute w-full h-full" src={logo} alt="Adler Logo" />
       <p>This is the welcome page.</p>
 
       <p>
@@ -26,6 +25,7 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
           Go to room by onclick button
         </StyledButton>
       </p>
+      <img className="absolute w-full h-full" src={logo} alt="Adler Logo" />
     </div>
   );
 };
