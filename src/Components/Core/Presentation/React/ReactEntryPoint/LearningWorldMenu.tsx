@@ -5,11 +5,11 @@ import LearningRoomSelection from "~ReactComponents/LearningRoomSelection/Learni
 export default function LearningWorldMenu() {
   return (
     <React.Fragment>
-      <div className="grid h-[90vh] max-h-screen grid-cols-10 grid-rows-6 m-6 border-8 rounded-lg root bg-adlerlightblue border-adlerdarkblue">
-        <div className="col-span-10 col-start-1 row-start-1 p-2 text-4xl border-b-8 border-adlerdarkblue">
+      <div className="grid h-[90vh] max-h-screen grid-cols-10 grid-rows-24 m-6 border-8 rounded-lg root bg-adlerlightblue border-adlerdarkblue">
+        <div className="col-span-10 col-start-1 row-span-2 row-start-1 p-2 text-4xl border-b-8 border-adlerdarkblue">
           <HeaderBar />
         </div>
-        <div className="flex justify-center col-span-5 col-start-1 row-span-5 row-start-2 p-2 border-r-8 border-adlerdarkblue bg-green-50">
+        <div className="flex justify-center col-span-5 col-start-1 row-start-3 p-8 border-r-8 row-span-full border-adlerdarkblue bg-green-50">
           <LearningRoomSelection />
         </div>
       </div>
