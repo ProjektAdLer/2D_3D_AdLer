@@ -32,13 +32,14 @@ export default class LogUserIntoMoodleUseCase
       this.uiPort.displayModal("You are already logged in to Moodle", "error");
       return Promise.reject("User is already logged in");
     }
+    let userToken: string;
 
-    const userToken = await this.backendAdapter.logInUser({
-      username: data.username,
-      password: data.password,
-    });
-
-    if (userToken === "Falsche Daten!") {
+    try {
+      userToken = await this.backendAdapter.logInUser({
+        username: data.username,
+        password: data.password,
+      });
+    } catch (error) {
       this.uiPort.displayModal("Falsche Daten!", "error");
       return Promise.reject("Wrong Password oder Username");
     }

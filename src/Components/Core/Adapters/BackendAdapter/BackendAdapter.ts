@@ -109,12 +109,16 @@ export default class BackendAdapter implements IBackendAdapter {
     username: string;
     password: string;
   }): Promise<string> {
-    const token = await axios.post<string>(
-      config.serverURL + "/userlogin",
-      userCredentials
-    );
+    const token = await axios.get<{
+      moodleToken: string;
+    }>(config.serverURL + "/MoodleLogin/Login", {
+      params: {
+        UserName: userCredentials.username,
+        Password: userCredentials.password,
+      },
+    });
 
-    return token.data;
+    return token.data.moodleToken;
   }
 
   private async getDSL({ userToken, worldName }: tempApiInfo): Promise<IDSL> {
