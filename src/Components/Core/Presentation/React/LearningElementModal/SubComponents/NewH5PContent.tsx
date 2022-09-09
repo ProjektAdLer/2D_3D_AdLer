@@ -18,11 +18,14 @@ export default function NewH5PContent({
 
         const options = {
           h5pJsonPath:
-            config.serverURL +
-            "/TestH5P/" +
+            config.serverURL.replace("/api", "/") +
             viewModel.learningElementData.Value.fileName,
-          frameJs: config.serverURL + "/TestH5P/" + "h5pBase/frame.bundle.js",
-          frameCss: config.serverURL + "/TestH5P/" + "h5pBase/styles/h5p.css",
+          frameJs:
+            config.serverURL.replace("/api", "/") +
+            "common/h5pBase/frame.bundle.js",
+          frameCss:
+            config.serverURL.replace("/api", "/") +
+            "common/h5pBase/styles/h5p.css",
         };
 
         await new H5PPlayer(el, options);
