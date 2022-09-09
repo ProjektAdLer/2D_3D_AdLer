@@ -79,6 +79,9 @@ describe("BackendAdapter", () => {
         mockDSL.learningWorld.learningSpaces[index].learningSpaceContent.length
       );
     });
+
+    // TODO: add further comparisons between mockDSL and created TOs
+    // eg. check that the learning elements have the correct type/metadata
   });
 
   test("scoreLearningElement resolves and doesn't throw", () => {
