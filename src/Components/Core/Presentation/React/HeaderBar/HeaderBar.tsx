@@ -6,8 +6,10 @@ import StyledButton from "~ReactComponents/ReactBaseComponents/StyledButton";
 import StyledContainer from "~ReactComponents/ReactBaseComponents/StyledContainer";
 import HeaderBarController from "./HeaderBarController";
 import HeaderBarViewModel from "./HeaderBarViewModel";
+import { useNavigate } from "react-router-dom";
 
 export default function HeaderBar() {
+  const navigate = useNavigate();
   const [viewModel, controller] = useBuilder<
     HeaderBarViewModel,
     HeaderBarController
@@ -20,7 +22,11 @@ export default function HeaderBar() {
   return (
     <React.Fragment>
       <div className="flex justify-between">
-        <StyledButton className="" onClick={controller.onMenuButtonClicked}>
+        <StyledButton
+          className=""
+          onClick={() => navigate("/room")}
+          // onClick={controller.onMenuButtonClicked}
+        >
           Menu
         </StyledButton>
         <div className="!text-shadow">
@@ -28,7 +34,8 @@ export default function HeaderBar() {
         </div>
         <StyledButton
           className="col-span-1 col-start-8"
-          onClick={controller.onBackButtonClicked}
+          onClick={() => navigate(-1)}
+          // onClick={controller.onBackButtonClicked}
         >
           Back
         </StyledButton>
