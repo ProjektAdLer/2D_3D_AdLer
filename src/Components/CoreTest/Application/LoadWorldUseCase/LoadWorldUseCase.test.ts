@@ -7,21 +7,28 @@ import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContai
 import IUIPort from "../../../Core/Ports/UIPort/IUIPort";
 import UserDataEntity from "../../../Core/Domain/Entities/UserDataEntity";
 import ILearningWorldPort from "../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
-import H5PLearningElementData from "../../../Core/Domain/Entities/SpecificLearningElements/H5PLearningElementData";
 import LearningRoomEntity from "../../../Core/Domain/Entities/LearningRoomEntity";
 import LearningElementEntity from "../../../Core/Domain/Entities/LearningElementEntity";
 import LearningWorldEntity from "../../../Core/Domain/Entities/LearningWorldEntity";
 import ILoadAvatarUseCase from "../../../Core/Application/LoadAvatar/ILoadAvatarUseCase";
 import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IBackend from "../../../Core/Adapters/BackendAdapter/IBackendAdapter";
-import LearningWorldTO from "../../../Core/Application/DataTransportObjects/LearningWorldTO";
 import { minimalGetLearningWorldDataResponse } from "../../Adapters/BackendAdapter/BackendResponses";
+import { mapLearningElementInputAndExpected } from "./LoadWorldMockedObjects";
+import LearningElementTO from "../../../Core/Application/DataTransportObjects/LearningElementTO";
 
 const backendMock = mock<IBackend>();
 const learningWorldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const uiPortMock = mock<IUIPort>();
 const loadAvatarUsecaseMock = mock<ILoadAvatarUseCase>();
+
+const mockedGetEntitiesOfTypeUserDataReturnValue = [
+  {
+    isLoggedIn: true,
+    userToken: "token",
+  } as UserDataEntity,
+];
 
 /*
   Note: The test for the "mapLearningElement" extracted in its own file, sice it is
@@ -109,14 +116,31 @@ describe("LoadWorldUseCase", () => {
     );
   });
 
+  test("doesn't load a Learning World, if a entity is available", async () => {
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+      mockedGetEntitiesOfTypeUserDataReturnValue
+    );
+
+    const mockedLearningWorldEntity = new LearningWorldEntity();
+    mockedLearningWorldEntity.worldName =
+      minimalGetLearningWorldDataResponse.worldName;
+    mockedLearningWorldEntity.worldGoal =
+      minimalGetLearningWorldDataResponse.worldGoal;
+    mockedLearningWorldEntity.learningRooms = [];
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
+      mockedLearningWorldEntity,
+    ]);
+
+    await systemUnderTest.executeAsync();
+
+    expect(entityContainerMock.createEntity).not.toHaveBeenCalled();
+  });
+
   test("loads the Learning World and notifies its presenters", async () => {
     // mock user data response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
-      {
-        isLoggedIn: true,
-        userToken: "token",
-      } as UserDataEntity,
-    ]);
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+      mockedGetEntitiesOfTypeUserDataReturnValue
+    );
     // mock learning world response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([]);
 
@@ -145,9 +169,24 @@ describe("LoadWorldUseCase", () => {
 
     await systemUnderTest.executeAsync();
 
+    expect(backendMock.getLearningWorldData).toHaveBeenCalledTimes(1);
+    expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(3);
     expect(learningWorldPortMock.presentLearningWorld).toHaveBeenCalledTimes(1);
-    expect(learningWorldPortMock.presentLearningWorld).toHaveBeenCalledWith(
-      expect.any(LearningWorldTO)
-    );
   });
+
+  test.each(mapLearningElementInputAndExpected)(
+    "mapLearningElement maps LearningElementTO to LearningElementEntity for %s",
+    (
+      _text: string,
+      i: LearningElementTO,
+      e: Partial<LearningElementEntity>
+    ) => {
+      systemUnderTest["mapLearningElement"](i);
+
+      expect(entityContainerMock.createEntity).toHaveBeenCalledWith(
+        e,
+        LearningElementEntity
+      );
+    }
+  );
 });

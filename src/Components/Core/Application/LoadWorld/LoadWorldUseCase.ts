@@ -144,6 +144,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
   private toTO(entityToConvert: LearningWorldEntity): LearningWorldTO {
     // spread to prevent passing a reference
+    // this will need to be changed when entity and TO are not matching in structure anymore
     return { ...entityToConvert } as LearningWorldTO;
   }
 }
