@@ -12,7 +12,7 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
 
   return (
     <div className="grid grid-cols-5 grid-rows-5 max-h-[100vh] bg-adlerlightblue">
-      <p className="self-center col-span-3 col-start-2 row-start-1 p-5 text-2xl font-extrabold text-white border-4 rounded-lg lg:border-8 border-adlerdarkblue justify-self-center bg-adlergold text-shadow lg:text-4xl">
+      <p className="self-center col-span-3 col-start-2 row-start-1 p-5 text-2xl font-extrabold text-white border-4 border-white rounded-lg lg:border-8 justify-self-center bg-adlergold text-shadow lg:text-4xl">
         Willkommen bei AdLer!
       </p>
 
