@@ -1,8 +1,11 @@
 import { config } from "../../../../config";
 import MockBackendAdapter from "../../../Core/Adapters/BackendAdapter/MockBackendAdapter";
-import LearningWorldTO from "../../../Core/Application/DataTransportObjects/LearningWorldTO";
 import { LearningElementTypes } from "../../../Core/Presentation/Babylon/LearningElement/Types/LearningElementTypes";
-import { expectedLearningWorldTO } from "./BackendResponses";
+import {
+  expectedLearningElementTO,
+  expectedLearningRoomTO,
+  expectedLearningWorldTO,
+} from "./BackendResponses";
 
 const oldConfigValue = config.useFakeBackend;
 
@@ -29,6 +32,13 @@ describe("MockBackendAdapter", () => {
 
     // check that the result matches the expected structure of LearningWorldTO
     expect(result).toEqual(expect.objectContaining(expectedLearningWorldTO));
+    result.learningRooms?.forEach((learningRoom) => {
+      expect(learningRoom).toEqual(expectedLearningRoomTO);
+
+      learningRoom.learningElements?.forEach((learningElement) => {
+        expect(learningElement).toEqual(expectedLearningElementTO);
+      });
+    });
 
     // check that the result has only one learning room
     expect(result.learningRooms).toHaveLength(1);
