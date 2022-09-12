@@ -11,9 +11,14 @@ import ILearningWorldNamePanelPresenter from "../../Presentation/React/LearningW
 import ILearningWorldGoalPanelPresenter from "~ReactComponents/LearningWorldGoalPanel/ILearningWorldGoalPanelPresenter";
 import { logger } from "src/Lib/Logger";
 import LearningWorldTO from "../../Application/DataTransportObjects/LearningWorldTO";
+import AbstractPort from "../AbstractPort/AbstractPort";
+import ILearningWorldAdapter from "./ILearningWorldAdapter";
 
 @injectable()
-export default class LearningWorldPort implements ILearningWorldPort {
+export default class LearningWorldPort
+  extends AbstractPort<ILearningWorldAdapter>
+  implements ILearningWorldPort
+{
   private roomPresenter: ILearningRoomPresenter;
   private learningElementDropdownPresenter: ILearningElementsDropdownPresenter;
   private learningWorldNamePanelPresenter: ILearningWorldNamePanelPresenter;
@@ -26,9 +31,15 @@ export default class LearningWorldPort implements ILearningWorldPort {
     private director: IPresentationDirector,
     @inject(BUILDER_TYPES.ILearningRoomBuilder)
     private learningRoomBuilder: IPresentationBuilder
-  ) {}
+  ) {
+    super();
+  }
 
   public presentLearningWorld(learningWorldTO: LearningWorldTO): void {
+    this.adapters.forEach((adapter) =>
+      adapter.onLearningWorldLoaded(learningWorldTO)
+    );
+
     this.director.build(this.learningRoomBuilder);
     this.roomPresenter = this.learningRoomBuilder.getPresenter();
 

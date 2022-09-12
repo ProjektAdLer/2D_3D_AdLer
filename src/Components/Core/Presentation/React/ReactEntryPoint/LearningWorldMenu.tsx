@@ -1,8 +1,19 @@
-import React from "react";
+import { useInjection } from "inversify-react";
+import React, { useEffect } from "react";
+import ILoadWorldUseCase from "src/Components/Core/Application/LoadWorld/ILoadWorldUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import HeaderBar from "~ReactComponents/HeaderBar/HeaderBar";
 import LearningRoomSelection from "~ReactComponents/LearningRoomSelection/LearningRoomSelection";
 
 export default function LearningWorldMenu() {
+  const loadWorldUseCase = useInjection<ILoadWorldUseCase>(
+    USECASE_TYPES.ILoadWorldUseCase
+  );
+
+  useEffect(() => {
+    loadWorldUseCase.executeAsync();
+  }, []);
+
   return (
     <React.Fragment>
       <div className="grid h-[90vh] max-h-screen grid-cols-10 grid-rows-24 m-6 border-8 rounded-lg root bg-adlerlightblue border-adlerdarkblue">
