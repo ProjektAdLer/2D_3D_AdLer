@@ -46,7 +46,6 @@ export default class LearningWorldPort implements ILearningWorldPort {
     this.learningWorldGoalPanelPresenter.displayWorldGoal(
       learningWorldTO.worldGoal
     );
-    console.log("world goaL", learningWorldTO.worldGoal);
     this.learningElementDropdownPresenter.presentLearningElements(
       learningWorldTO.learningRooms[0].learningElements
     );
