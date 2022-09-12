@@ -12,8 +12,8 @@ export default function StyledContainer({
 }: React.DetailedHTMLProps<ContainerProps, HTMLDivElement>) {
   const containerConfig = {
     // Text Colors
-    black: "adlertextgrey",
-    white: "white",
+    black: "text-adlertextgrey",
+    white: "text-white",
   };
 
   return (

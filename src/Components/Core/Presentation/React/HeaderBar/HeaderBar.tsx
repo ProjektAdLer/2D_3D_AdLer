@@ -29,8 +29,10 @@ export default function HeaderBar() {
         >
           Menu
         </StyledButton>
-        <div className="!text-shadow">
-          <StyledContainer>{title}</StyledContainer>
+        <div>
+          <StyledContainer className="text-shadow" textColor="white">
+            {title}
+          </StyledContainer>
         </div>
         <StyledButton
           className="col-span-1 col-start-8"
