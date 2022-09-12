@@ -7,7 +7,7 @@ export type tempApiInfo = {
   worldName: string;
 };
 
-export default interface IBackend {
+export default interface IBackendAdapter {
   getLearningWorldData({
     userToken,
     worldName,
