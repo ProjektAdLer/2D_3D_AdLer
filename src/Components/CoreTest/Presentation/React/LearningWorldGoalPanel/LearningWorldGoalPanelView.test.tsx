@@ -13,7 +13,7 @@ describe("LearningWorldGoalPanel", () => {
 
     const componentUnderTest = render(<LearningWorldGoalPanel />);
 
-    expect(componentUnderTest.getByText("Test World")).toBeInTheDocument();
+    expect(componentUnderTest.getByText("Lernziel")).toBeInTheDocument();
   });
 
   test("should not render, if no Learning World Goal is provided", () => {
@@ -34,14 +34,14 @@ describe("LearningWorldGoalPanel", () => {
       <LearningWorldGoalPanel key="LearningWorldGoalPanel" />
     );
 
+    expect(componentUnderTest.getByText("Lernziel")).toBeInTheDocument();
+    fireEvent.click(componentUnderTest.getByRole("img"));
+    expect(componentUnderTest.queryByText("Lernziel")).not.toBeInTheDocument();
     expect(componentUnderTest.getByText("Test World")).toBeInTheDocument();
     fireEvent.click(componentUnderTest.getByRole("img"));
     expect(
       componentUnderTest.queryByText("Test World")
     ).not.toBeInTheDocument();
     expect(componentUnderTest.getByText("Lernziel")).toBeInTheDocument();
-    fireEvent.click(componentUnderTest.getByRole("img"));
-    expect(componentUnderTest.queryByText("Lernziel")).not.toBeInTheDocument();
-    expect(componentUnderTest.getByText("Test World")).toBeInTheDocument();
   });
 });
