@@ -1,16 +1,16 @@
 import React from "react";
 
-interface DivProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   textColor?: "white" | "black";
 }
 
 export default function StyledContainer({
-  color = "black",
+  textColor = "black",
   children,
   className,
   ...rest
-}: React.DetailedHTMLProps<DivProps, HTMLDivElement>) {
-  const divConfig = {
+}: React.DetailedHTMLProps<ContainerProps, HTMLDivElement>) {
+  const containerConfig = {
     // Text Colors
     black: "adlertextgrey",
     white: "white",
@@ -18,7 +18,11 @@ export default function StyledContainer({
 
   return (
     <div
-      className={className + " " + "flex gap-2 m-3 w-fit h-fit font-extrabold"}
+      className={
+        className +
+        " " +
+        `flex gap-2 m-3 w-fit h-fit font-extrabold ${containerConfig[textColor]}`
+      }
       {...rest}
     >
       {children}
