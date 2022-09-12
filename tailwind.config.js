@@ -11,6 +11,7 @@ module.exports = {
         adlergold: "rgb(229,189,115)",
         adlerbrown: "rgb(77,62,54)",
         adlergreen: "#009900",
+        adlertextgrey: "#111111",
       },
       gridTemplateRows: {
         12: "repeat(12, minmax(0, 1fr))",

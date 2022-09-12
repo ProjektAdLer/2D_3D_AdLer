@@ -14,7 +14,10 @@ export default function ScorePanel() {
 
   return (
     <div className="grid justify-end">
-      <StyledContainer className="flex items-center text-lg font-extrabold text-white lg:text-4xl text-shadow">
+      <StyledContainer
+        textColor="white"
+        className="flex items-center text-lg font-extrabold text-white lg:text-4xl text-shadow"
+      >
         {score ? score : 0}
         <img
           src={coinIcon}

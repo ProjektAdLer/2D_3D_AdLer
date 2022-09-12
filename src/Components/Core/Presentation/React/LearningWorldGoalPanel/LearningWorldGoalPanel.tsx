@@ -25,6 +25,7 @@ export default function LearningWorldGoalPanel() {
     return (
       <div className="flex justify-center">
         <StyledContainer
+          textColor="white"
           onClick={() => {
             handleClick();
           }}
@@ -41,8 +42,9 @@ export default function LearningWorldGoalPanel() {
   //Wenn geklickt
   else
     return (
-      <div className="flex justify-center text-2xl text-white roboto-black text-shadow">
+      <div className="flex justify-center text-2xl roboto-black text-shadow">
         <StyledContainer
+          textColor="white"
           className="flex flex-row justify-center"
           onClick={() => {
             handleClick();
@@ -53,7 +55,7 @@ export default function LearningWorldGoalPanel() {
             src={goalIcon}
             alt="Learning-Goal-Icon"
           ></img>
-          <p>Lernziel</p>
+          <p className="text-white">Lernziel</p>
         </StyledContainer>
       </div>
     );
