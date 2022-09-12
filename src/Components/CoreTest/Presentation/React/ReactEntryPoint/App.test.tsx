@@ -10,6 +10,10 @@ jest.mock(
   "../../../../Core/Presentation/React/ReactEntryPoint/LearningWorldMenu.tsx",
   () => "mocked"
 );
+jest.mock(
+  "../../../../Core/Presentation/React/ReactEntryPoint/WelcomePage.tsx",
+  () => "mocked"
+);
 
 describe("App", () => {
   test("should render", () => {
