@@ -149,6 +149,15 @@ describe("LoadWorldUseCase", () => {
       minimalGetLearningWorldDataResponse
     );
 
+    backendMock.getCoursesAvalibaleForUser.mockResolvedValue({
+      courses: [
+        {
+          courseId: 1,
+          courseName: "Testkurs",
+        },
+      ],
+    });
+
     // mock entity creation
     const mockedLearningWorldEntity = new LearningWorldEntity();
     mockedLearningWorldEntity.worldName =

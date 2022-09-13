@@ -33,7 +33,7 @@ export default class LearningWorldPort implements ILearningWorldPort {
     this.roomPresenter = this.learningRoomBuilder.getPresenter();
 
     // TODO: use all the data from the learningWorldTO to create multiple rooms
-    this.roomPresenter.presentLearningRoom(learningWorldTO.learningRooms[1]); // Since Room 0 is only the DSL, we get room 1 here
+    this.roomPresenter.presentLearningRoom(learningWorldTO.learningRooms[0]);
 
     // initialize navigation for the room
     // TODO: move this to a better location
