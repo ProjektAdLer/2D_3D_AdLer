@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import ILoadWorldUseCase from "src/Components/Core/Application/LoadWorld/ILoadWorldUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import HeaderBar from "~ReactComponents/LearningRoomMenu/HeaderBar/HeaderBar";
+import LearningRoomDetail from "~ReactComponents/LearningRoomMenu/LearningRoomDetail/LearningRoomDetail";
 import LearningRoomSelection from "~ReactComponents/LearningRoomMenu/LearningRoomSelection/LearningRoomSelection";
 
 export default function LearningWorldMenu() {
@@ -22,6 +23,9 @@ export default function LearningWorldMenu() {
         </div>
         <div className="flex justify-center col-span-5 col-start-1 row-start-4 p-8 border-r-8 row-span-full border-adlerdarkblue bg-green-50">
           <LearningRoomSelection />
+        </div>
+        <div className="flex justify-center col-span-5 col-start-6 row-start-4 p-8 border-r-8 row-span-full border-adlerdarkblue bg-green-50">
+          <LearningRoomDetail />
         </div>
       </div>
     </React.Fragment>

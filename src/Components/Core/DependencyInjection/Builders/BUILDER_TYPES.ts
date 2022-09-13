@@ -18,6 +18,7 @@ const BUILDER_TYPES = {
   ILearningWorldGoalPanelBuilder: Symbol("ILearningWorldGoalPanelBuilder"),
   IHeaderBarBuilder: Symbol("IHeaderBarBuilder"),
   ILearningRoomSelectionBuilder: Symbol("ILearningRoomSelectionBuilder"),
+  ILearningRoomDetailBuilder: Symbol("ILearningRoomDetailBuilder"),
 };
 
 export default BUILDER_TYPES;

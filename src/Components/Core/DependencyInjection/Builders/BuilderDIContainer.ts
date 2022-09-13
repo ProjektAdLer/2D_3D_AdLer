@@ -21,6 +21,7 @@ import FullscreenSwitchBuilder from "../../Presentation/React/LearningRoomDispla
 import LearningWorldGoalPanelBuilder from "~ReactComponents/LearningRoomDisplay/LearningWorldGoalPanel/LearningWorldGoalPanelBuilder";
 import HeaderBarBuilder from "~ReactComponents/LearningRoomMenu/HeaderBar/HeaderBarBuilder";
 import LearningRoomSelectionBuilder from "~ReactComponents/LearningRoomMenu/LearningRoomSelection/LearningRoomSelectionBuilder";
+import LearningRoomDetailBuilder from "~ReactComponents/LearningRoomMenu/LearningRoomDetail/LearningRoomDetailBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -76,6 +77,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningRoomSelectionBuilder).to(
     LearningRoomSelectionBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningRoomDetailBuilder).to(
+    LearningRoomDetailBuilder
   );
 });
 
