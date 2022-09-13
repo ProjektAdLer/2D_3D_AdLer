@@ -2,6 +2,8 @@ import { injectable } from "inversify";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 import {{name}}Controller from "./{{name}}Controller";
 import {{name}}Presenter from "./{{name}}Presenter";
+import I{{name}}Controller from "./I{{name}}Controller";
+import I{{name}}Presenter from "./I{{name}}Presenter";
 import {{name}}ViewModel from "./{{name}}ViewModel";
 
 /*
@@ -20,9 +22,9 @@ director.build();
 @injectable()
 export default class {{name}}Builder extends PresentationBuilder<
   {{name}}ViewModel,
-  {{name}}Controller,
+  I{{name}}Controller,
   undefined,
-  {{name}}Presenter
+  I{{name}}Presenter
 > {
   constructor() {
     super(
