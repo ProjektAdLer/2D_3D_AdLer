@@ -1,10 +1,10 @@
-import useObservable from "../CustomHooks/useObservable";
-import StyledButton from "../ReactBaseComponents/StyledButton";
+import useObservable from "../ReactRelated/CustomHooks/useObservable";
+import StyledButton from "../ReactRelated/ReactBaseComponents/StyledButton";
 import MoodleLoginButtonController from "./MoodleLoginButtonController";
 import MoodleLoginButtonViewModel from "./MoodleLoginButtonViewModel";
 
 import moodleIcon from "../../../../../Assets/icons/moodle-icon.svg";
-import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
+import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 
 export default function MoodleLoginButton() {

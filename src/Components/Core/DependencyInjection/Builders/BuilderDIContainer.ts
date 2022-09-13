@@ -6,21 +6,21 @@ import LearningRoomBuilder from "../../Presentation/Babylon/LearningRoom/Learnin
 import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
 import PresentationDirector from "../../Presentation/PresentationBuilder/PresentationDirector";
-import LearningElementModalBuilder from "../../Presentation/React/LearningElementModal/LearningElementModalBuilder";
-import LearningElementsDropdownBuilder from "../../Presentation/React/LearningElementsDropdown/LearningElementsDropdownBuilder";
+import LearningElementModalBuilder from "../../Presentation/React/LearningRoomDisplay/LearningElementModal/LearningElementModalBuilder";
+import LearningElementsDropdownBuilder from "../../Presentation/React/LearningRoomDisplay/LearningElementsDropdown/LearningElementsDropdownBuilder";
 import MoodleLoginFormBuilder from "../../Presentation/React/MoodleLoginForm/MoodleLoginFormBuilder";
-import ScorePanelBuilder from "../../Presentation/React/ScorePanel/ScorePanelBuilder";
-import ModalManagerBuilder from "../../Presentation/React/ModalManager/ModalManagerBuilder";
+import ScorePanelBuilder from "../../Presentation/React/LearningRoomDisplay/ScorePanel/ScorePanelBuilder";
+import ModalManagerBuilder from "../../Presentation/React/LearningRoomDisplay/ModalManager/ModalManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
 import MoodleLoginButtonBuilder from "../../Presentation/React/MoodleLoginButton/MoodleLoginButtonBuilder";
-import BottomTooltipBuilder from "../../Presentation/React/BottomTooltip/BottomTooltipBuilder";
-import DebugPanelBuilder from "../../Presentation/React/DebugPanel/DebugPanelBuilder";
-import LearningWorldNamePanelBuilder from "../../Presentation/React/LearningWorldNamePanel/LearningWorldNamePanelBuilder";
-import LoadLearningWorldButtonBuilder from "../../Presentation/React/LoadLearningWorldButton/LoadLearningWorldButtonBuilder";
-import FullscreenSwitchBuilder from "../../Presentation/React/FullscreenSwitch/FullscreenSwitchBuilder";
-import LearningWorldGoalPanelBuilder from "~ReactComponents/LearningWorldGoalPanel/LearningWorldGoalPanelBuilder";
-import HeaderBarBuilder from "~ReactComponents/HeaderBar/HeaderBarBuilder";
-import LearningRoomSelectionBuilder from "~ReactComponents/LearningRoomSelection/LearningRoomSelectionBuilder";
+import BottomTooltipBuilder from "../../Presentation/React/LearningRoomDisplay/BottomTooltip/BottomTooltipBuilder";
+import DebugPanelBuilder from "../../Presentation/React/LearningRoomDisplay/DebugPanel/DebugPanelBuilder";
+import LearningWorldNamePanelBuilder from "../../Presentation/React/LearningRoomDisplay/LearningWorldNamePanel/LearningWorldNamePanelBuilder";
+import LoadLearningWorldButtonBuilder from "../../Presentation/React/LearningRoomDisplay/LoadLearningWorldButton/LoadLearningWorldButtonBuilder";
+import FullscreenSwitchBuilder from "../../Presentation/React/LearningRoomDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
+import LearningWorldGoalPanelBuilder from "~ReactComponents/LearningRoomDisplay/LearningWorldGoalPanel/LearningWorldGoalPanelBuilder";
+import HeaderBarBuilder from "~ReactComponents/LearningRoomMenu/HeaderBar/HeaderBarBuilder";
+import LearningRoomSelectionBuilder from "~ReactComponents/LearningRoomMenu/LearningRoomSelection/LearningRoomSelectionBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(

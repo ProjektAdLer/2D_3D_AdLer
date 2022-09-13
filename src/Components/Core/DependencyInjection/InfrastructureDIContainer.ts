@@ -1,8 +1,8 @@
 import { ContainerModule } from "inversify";
 import EntityContainer from "../Domain/EntityContainer/EntityContainer";
 import IEntityContainer from "../Domain/EntityContainer/IEntityContainer";
-import IReactEntry from "../Presentation/React/ReactEntryPoint/IReactEntry";
-import ReactEntry from "../Presentation/React/ReactEntryPoint/ReactEntry";
+import IReactEntry from "../Presentation/React/ReactRelated/ReactEntryPoint/IReactEntry";
+import ReactEntry from "../Presentation/React/ReactRelated/ReactEntryPoint/ReactEntry";
 import IViewModelControllerProvider from "../Presentation/ViewModelProvider/IViewModelControllerProvider";
 import ViewModelControllerProvider from "../Presentation/ViewModelProvider/ViewModelControllerProvider";
 import CORE_TYPES from "./CoreTypes";

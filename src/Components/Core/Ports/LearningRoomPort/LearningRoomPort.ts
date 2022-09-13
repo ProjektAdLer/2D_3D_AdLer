@@ -1,5 +1,5 @@
 import ILearningRoomPort from "./ILearningRoomPort";
-import IScorePanelPresenter from "../../Presentation/React/ScorePanel/IScorePanelPresenter";
+import IScorePanelPresenter from "../../Presentation/React/LearningRoomDisplay/ScorePanel/IScorePanelPresenter";
 import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
 import { injectable } from "inversify";
 import { logger } from "src/Lib/Logger";

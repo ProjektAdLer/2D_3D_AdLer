@@ -1,4 +1,4 @@
-import ILearningElementModalPresenter from "~ReactComponents/LearningElementModal/ILearningElementModalPresenter";
+import ILearningElementModalPresenter from "~ReactComponents/LearningRoomDisplay/LearningElementModal/ILearningElementModalPresenter";
 import LearningElementTO from "../../Application/DataTransportObjects/LearningElementTO";
 import ILearningElementPresenter from "../../Presentation/Babylon/LearningElement/ILearningElementPresenter";
 

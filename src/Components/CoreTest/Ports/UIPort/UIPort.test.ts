@@ -1,8 +1,8 @@
 import UIPort from "../../../Core/Ports/UIPort/UIPort";
 import CoreDIContainer from "../../../../Components/Core/DependencyInjection/CoreDIContainer";
 import { mock } from "jest-mock-extended";
-import IModalManagerPresenter from "../../../Core/Presentation/React/ModalManager/IModalManagerPresenter";
-import IBottomTooltipPresenter from "../../../Core/Presentation/React/BottomTooltip/IBottomTooltipPresenter";
+import IModalManagerPresenter from "../../../Core/Presentation/React/LearningRoomDisplay/ModalManager/IModalManagerPresenter";
+import IBottomTooltipPresenter from "../../../Core/Presentation/React/LearningRoomDisplay/BottomTooltip/IBottomTooltipPresenter";
 import { LearningElementTO } from "../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
 import { logger } from "../../../../Lib/Logger";
 

@@ -1,4 +1,4 @@
-import IScorePanelPresenter from "~ReactComponents/ScorePanel/IScorePanelPresenter";
+import IScorePanelPresenter from "~ReactComponents/LearningRoomDisplay/ScorePanel/IScorePanelPresenter";
 import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
 
 export default interface ILearningRoomPort {

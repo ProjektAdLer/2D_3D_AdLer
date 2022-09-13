@@ -4,8 +4,8 @@ import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import LearningRoomPort from "../../../Core/Ports/LearningRoomPort/LearningRoomPort";
 import ILearningRoomPresenter from "../../../Core/Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
 import PresentationBuilder from "../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
-import ScorePanelPresenter from "../../../Core/Presentation/React/ScorePanel/ScorePanelPresenter";
-import ScorePanelViewModel from "../../../Core/Presentation/React/ScorePanel/ScorePanelViewModel";
+import ScorePanelPresenter from "../../../Core/Presentation/React/LearningRoomDisplay/ScorePanel/ScorePanelPresenter";
+import ScorePanelViewModel from "../../../Core/Presentation/React/LearningRoomDisplay/ScorePanel/ScorePanelViewModel";
 import { mock } from "jest-mock-extended";
 import { logger } from "../../../../Lib/Logger";
 

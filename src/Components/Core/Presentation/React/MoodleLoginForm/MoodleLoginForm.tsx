@@ -1,12 +1,12 @@
 import { useState } from "react";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import useBuilder from "~ReactComponents/CustomHooks/useBuilder";
-import useObservable from "../CustomHooks/useObservable";
-import StyledButton from "../ReactBaseComponents/StyledButton";
-import StyledContainer from "../ReactBaseComponents/StyledContainer";
-import StyledInputField from "../ReactBaseComponents/StyledInputField";
-import StyledModal from "../ReactBaseComponents/StyledModal";
-import StyledPasswordField from "../ReactBaseComponents/StyledPasswordField";
+import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
+import useObservable from "../ReactRelated/CustomHooks/useObservable";
+import StyledButton from "../ReactRelated/ReactBaseComponents/StyledButton";
+import StyledContainer from "../ReactRelated/ReactBaseComponents/StyledContainer";
+import StyledInputField from "../ReactRelated/ReactBaseComponents/StyledInputField";
+import StyledModal from "../ReactRelated/ReactBaseComponents/StyledModal";
+import StyledPasswordField from "../ReactRelated/ReactBaseComponents/StyledPasswordField";
 import MoodleLoginFormController from "./MoodleLoginFormController";
 import MoodleLoginFormViewModel from "./MoodleLoginFormViewModel";
 

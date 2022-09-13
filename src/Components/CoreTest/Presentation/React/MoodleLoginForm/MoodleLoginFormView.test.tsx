@@ -4,7 +4,7 @@ import { mock } from "jest-mock-extended";
 import IMoodleLoginFormController from "../../../../Core/Presentation/React/MoodleLoginForm/IMoodleLoginFormController";
 import MoodleLoginForm from "../../../../Core/Presentation/React/MoodleLoginForm/MoodleLoginForm";
 import MoodleLoginFormViewModel from "../../../../Core/Presentation/React/MoodleLoginForm/MoodleLoginFormViewModel";
-import useBuilderMock from "../CustomHooks/useBuilder/useBuilderMock";
+import useBuilderMock from "../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 
 let fakeModel = new MoodleLoginFormViewModel();
 const fakeController = mock<IMoodleLoginFormController>();

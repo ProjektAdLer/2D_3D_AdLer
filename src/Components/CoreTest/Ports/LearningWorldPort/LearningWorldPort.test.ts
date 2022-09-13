@@ -13,9 +13,9 @@ import ILearningRoomPresenter from "../../../Core/Presentation/Babylon/LearningR
 import INavigation from "../../../Core/Presentation/Babylon/Navigation/INavigation";
 import IPresentationBuilder from "../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
-import ILearningElementsDropdownPresenter from "../../../Core/Presentation/React/LearningElementsDropdown/ILearningElementsDropdownPresenter";
-import ILearningWorldNamePanelPresenter from "../../../Core/Presentation/React/LearningWorldNamePanel/ILearningWorldNamePanelPresenter";
-import ILearningWorldGoalPanelPresenter from "../../../Core/Presentation/React/LearningWorldGoalPanel/ILearningWorldGoalPanelPresenter";
+import ILearningElementsDropdownPresenter from "../../../Core/Presentation/React/LearningRoomDisplay/LearningElementsDropdown/ILearningElementsDropdownPresenter";
+import ILearningWorldNamePanelPresenter from "../../../Core/Presentation/React/LearningRoomDisplay/LearningWorldNamePanel/ILearningWorldNamePanelPresenter";
+import ILearningWorldGoalPanelPresenter from "../../../Core/Presentation/React/LearningRoomDisplay/LearningWorldGoalPanel/ILearningWorldGoalPanelPresenter";
 
 jest.mock("src/Lib/Logger");
 

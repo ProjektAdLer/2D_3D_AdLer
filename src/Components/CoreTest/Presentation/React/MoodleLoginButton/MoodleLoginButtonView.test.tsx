@@ -4,7 +4,7 @@ import { mock } from "jest-mock-extended";
 import IMoodleLoginButtonController from "../../../../Core/Presentation/React/MoodleLoginButton/IMoodleLoginButtonController";
 import MoodleLoginButton from "../../../../Core/Presentation/React/MoodleLoginButton/MoodleLoginButton";
 import MoodleLoginButtonViewModel from "../../../../Core/Presentation/React/MoodleLoginButton/MoodleLoginButtonViewModel";
-import useBuilderMock from "../CustomHooks/useBuilder/useBuilderMock";
+import useBuilderMock from "../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 
 let fakeModel = new MoodleLoginButtonViewModel();
 const fakeController = mock<IMoodleLoginButtonController>();

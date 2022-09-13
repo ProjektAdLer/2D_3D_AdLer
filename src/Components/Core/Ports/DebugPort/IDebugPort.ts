@@ -1,4 +1,4 @@
-import IDebugPanelPresenter from "../../Presentation/React/DebugPanel/IDebugPanelPresenter";
+import IDebugPanelPresenter from "../../Presentation/React/LearningRoomDisplay/DebugPanel/IDebugPanelPresenter";
 
 export default interface IDebugPort {
   registerDebugPanelPresenter(debugPanelPresenter: IDebugPanelPresenter): void;

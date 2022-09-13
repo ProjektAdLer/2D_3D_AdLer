@@ -1,7 +1,7 @@
-import { NotificationType } from "../../Presentation/React/ModalManager/ModalManagerPresenter";
+import { NotificationType } from "../../Presentation/React/LearningRoomDisplay/ModalManager/ModalManagerPresenter";
 import { injectable } from "inversify";
-import IBottomTooltipPresenter from "../../Presentation/React/BottomTooltip/IBottomTooltipPresenter";
-import IModalManagerPresenter from "../../Presentation/React/ModalManager/IModalManagerPresenter";
+import IBottomTooltipPresenter from "../../Presentation/React/LearningRoomDisplay/BottomTooltip/IBottomTooltipPresenter";
+import IModalManagerPresenter from "../../Presentation/React/LearningRoomDisplay/ModalManager/IModalManagerPresenter";
 import IUIPort from "./IUIPort";
 import { logger } from "src/Lib/Logger";
 import LearningElementTO from "../../Application/DataTransportObjects/LearningElementTO";

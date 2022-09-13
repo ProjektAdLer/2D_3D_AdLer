@@ -4,7 +4,7 @@ import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
-import IScorePanelPresenter from "../../React/ScorePanel/IScorePanelPresenter";
+import IScorePanelPresenter from "../../React/LearningRoomDisplay/ScorePanel/IScorePanelPresenter";
 import IDoorPresenter from "../Door/IDoorPresenter";
 import LearningRoomViewModel from "./LearningRoomViewModel";
 import ILearningRoomPresenter from "./ILearningRoomPresenter";

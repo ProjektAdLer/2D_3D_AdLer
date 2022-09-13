@@ -5,7 +5,7 @@ import CoreDIContainer from "../../DependencyInjection/CoreDIContainer";
 import ILearningElementPresenter from "../../Presentation/Babylon/LearningElement/ILearningElementPresenter";
 import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
-import ILearningElementModalPresenter from "../../Presentation/React/LearningElementModal/ILearningElementModalPresenter";
+import ILearningElementModalPresenter from "../../Presentation/React/LearningRoomDisplay/LearningElementModal/ILearningElementModalPresenter";
 import { logger } from "src/Lib/Logger";
 import LearningElementTO from "../../Application/DataTransportObjects/LearningElementTO";
 
