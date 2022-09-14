@@ -52,8 +52,21 @@ module.exports = {
           800: "rgb(229,165,46)",
           900: "rgb(229,157,23)",
         },
-        adlerbrown: "rgb(77,62,54)",
-        adlergreen: "#009900",
+        adlerbrown: {
+          DEFAULT: "rgb(77,62,54)", //DEFAULT = 300
+          100: "rgb(77,72,69)",
+          200: "rgb(77,67,61)",
+          300: "rgb(77,62,54)",
+          400: "rgb(77,57,46)",
+          500: "rgb(77,52,38)",
+          600: "rgb(77,47,31)",
+          700: "rgb(77,42,23)",
+          800: "rgb(77,37,15)",
+          900: "rgb(77,32,8)",
+        },
+        adlergreen: {
+          DEFAULT: "#009900",
+        },
         adlertextgrey: "#111111",
       },
       gridTemplateRows: {
