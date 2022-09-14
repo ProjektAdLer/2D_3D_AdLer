@@ -1,14 +1,12 @@
-import LearningRoomDetailPresenter from "../../../../../Core/Presentation/React/LearningRoomMenu/LearningRoomDetail/LearningRoomDetailPresenter";
-import LearningRoomDetailViewModel from "../../../../../Core/Presentation/React/LearningRoomMenu/LearningRoomDetail/LearningRoomDetailViewModel";
+import DetailSectionPresenter from "../../../../../Core/Presentation/React/RoomMenu/DetailSection/DetailSectionPresenter";
+import DetailSectionViewModel from "../../../../../Core/Presentation/React/RoomMenu/DetailSection/DetailSectionViewModel";
 import LearningRoomTO from "../../../../../Core/Application/DataTransportObjects/LearningRoomTO";
 
-describe("LearningRoomDetailPresenter", () => {
-  let systemUnderTest: LearningRoomDetailPresenter;
+describe("DetailSectionPresenter", () => {
+  let systemUnderTest: DetailSectionPresenter;
 
   beforeEach(() => {
-    systemUnderTest = new LearningRoomDetailPresenter(
-      new LearningRoomDetailViewModel()
-    );
+    systemUnderTest = new DetailSectionPresenter(new DetailSectionViewModel());
   });
 
   test("onLearningRoomLoaded sets data in the view model", () => {

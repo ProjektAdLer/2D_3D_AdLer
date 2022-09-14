@@ -1,5 +1,5 @@
 import { logger } from "../../../../../../Lib/Logger";
-import HeaderBarController from "../../../../../Core/Presentation/React/LearningRoomMenu/HeaderBar/HeaderBarController";
+import HeaderBarController from "../../../../../Core/Presentation/React/RoomMenu/HeaderBar/HeaderBarController";
 
 jest.mock("../../../../../../Lib/Logger.ts");
 

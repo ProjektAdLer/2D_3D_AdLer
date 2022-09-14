@@ -1,3 +1,3 @@
 export default interface IHeaderBarPresenter {
-  displayLearningWorldTitle(title: string): void;
+  displayWorldTitle(title: string): void;
 }
