@@ -11,7 +11,7 @@ export default function DetailSection() {
 
   return (
     <div className="grid w-[100%] justify-start">
-      <div className="flex flex-row items-center">
+      <div className="flex flex-row items-center p-1 rounded-lg shadow-lg">
         <img
           src={roomIcon}
           className="xl:w-8 lg:w-6 md:w-2 sm:w-2"

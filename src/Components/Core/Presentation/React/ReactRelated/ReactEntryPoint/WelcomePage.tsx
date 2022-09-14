@@ -17,7 +17,7 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
       <div className="z-10">
         <MoodleLoginForm />
       </div>
-      <div className="grid grid-cols-5 grid-rows-5 max-h-[100vh] bg-adlerlightblue p-6">
+      <div className="grid grid-cols-5 grid-rows-5 max-h-[100vh] bg-adlerblue-100 p-6">
         <MoodleLoginButton />
         <p className="self-center col-span-2 col-start-4 row-start-1 p-2 text-xl font-extrabold text-white rounded-lg lg:col-span-3 lg:col-start-2 lg:row-start-1 lg:p-5 justify-self-center bg-adlergold text-shadow lg:text-4xl">
           Willkommen bei AdLer!
