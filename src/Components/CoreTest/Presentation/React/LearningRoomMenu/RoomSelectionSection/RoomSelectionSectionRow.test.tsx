@@ -1,14 +1,14 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
-import LearningRoomSelectionRow from "~ReactComponents/LearningRoomMenu/LearningRoomSelection/LearningRoomSelectionRow";
+import RoomSelectionSectionRow from "~ReactComponents/RoomMenu/RoomSelectionSection/RoomSelectionSectionRow";
 
-describe("LearningRoomSelectionRow", () => {
+describe("RoomSelectionSectionRow", () => {
   test("should render", () => {
     const testTitle = "testTitle";
 
     const result = render(
-      <LearningRoomSelectionRow
-        learningRoomTitle={testTitle}
+      <RoomSelectionSectionRow
+        roomTitle={testTitle}
         onClickCallback={() => {}}
       />
     );

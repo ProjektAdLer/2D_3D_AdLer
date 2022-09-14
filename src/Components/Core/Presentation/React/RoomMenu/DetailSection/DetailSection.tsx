@@ -1,12 +1,12 @@
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import CheckBoxEntry from "./CheckBoxEntry";
-import LearningRoomDetailViewModel from "./LearningRoomDetailViewModel";
+import DetailSectionViewModel from "./DetailSectionViewModel";
 import roomIcon from "../../../../../../Assets/icons/lernraum_icon.svg";
 
-export default function LearningRoomDetail() {
-  const [viewModel] = useBuilder<LearningRoomDetailViewModel, undefined>(
-    BUILDER_TYPES.ILearningRoomDetailBuilder
+export default function DetailSection() {
+  const [viewModel] = useBuilder<DetailSectionViewModel, undefined>(
+    BUILDER_TYPES.IDetailSectionBuilder
   );
 
   return (

@@ -3,12 +3,12 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import AbstractPort from "../../../../../Core/Ports/AbstractPort/AbstractPort";
 import ILearningWorldAdapter from "../../../../../Core/Ports/LearningWorldPort/ILearningWorldAdapter";
-import LearningRoomSelectionBuilder from "../../../../../Core/Presentation/React/LearningRoomMenu/LearningRoomSelection/LearningRoomSelectionBuilder";
+import RoomSelectionSectionBuilder from "../../../../../Core/Presentation/React/RoomMenu/RoomSelectionSection/RoomSelectionSectionBuilder";
 
 const learningWorldPortMock = mock<AbstractPort<ILearningWorldAdapter>>();
 
-describe("HeaderBarBuilder", () => {
-  let systemUnderTest: LearningRoomSelectionBuilder;
+describe("RoomSelectionSectionBuilder", () => {
+  let systemUnderTest: RoomSelectionSectionBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -19,7 +19,7 @@ describe("HeaderBarBuilder", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new LearningRoomSelectionBuilder();
+    systemUnderTest = new RoomSelectionSectionBuilder();
   });
 
   afterAll(() => {

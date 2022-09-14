@@ -2,9 +2,9 @@ import { useInjection } from "inversify-react";
 import React, { useEffect } from "react";
 import ILoadWorldUseCase from "src/Components/Core/Application/LoadWorld/ILoadWorldUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import HeaderBar from "~ReactComponents/LearningRoomMenu/HeaderBar/HeaderBar";
-import LearningRoomDetail from "~ReactComponents/LearningRoomMenu/LearningRoomDetail/LearningRoomDetail";
-import LearningRoomSelection from "~ReactComponents/LearningRoomMenu/LearningRoomSelection/LearningRoomSelection";
+import HeaderBar from "~ReactComponents/RoomMenu/HeaderBar/HeaderBar";
+import DetailSection from "~ReactComponents/RoomMenu/DetailSection/DetailSection";
+import RoomSelectionSection from "~ReactComponents/RoomMenu/RoomSelectionSection/RoomSelectionSection";
 
 export default function LearningWorldMenu() {
   const loadWorldUseCase = useInjection<ILoadWorldUseCase>(
@@ -22,10 +22,10 @@ export default function LearningWorldMenu() {
           <HeaderBar />
         </div>
         <div className="flex justify-center col-span-5 col-start-1 row-start-4 p-8 border-r-8 row-span-full border-adlerdarkblue bg-adlergold">
-          <LearningRoomSelection />
+          <RoomSelectionSection />
         </div>
         <div className="flex justify-center col-span-5 col-start-6 row-start-4 p-8 row-span-full bg-adlergold">
-          <LearningRoomDetail />
+          <DetailSection />
         </div>
       </div>
     </React.Fragment>

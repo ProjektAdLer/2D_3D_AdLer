@@ -17,8 +17,8 @@ const BUILDER_TYPES = {
   IFullscreenSwitchBuilder: Symbol("IFullscreenSwitchBuilder"),
   ILearningWorldGoalPanelBuilder: Symbol("ILearningWorldGoalPanelBuilder"),
   IHeaderBarBuilder: Symbol("IHeaderBarBuilder"),
-  ILearningRoomSelectionBuilder: Symbol("ILearningRoomSelectionBuilder"),
-  ILearningRoomDetailBuilder: Symbol("ILearningRoomDetailBuilder"),
+  IRoomSelectionSectionBuilder: Symbol("IRoomSelectionSectionBuilder"),
+  IDetailSectionBuilder: Symbol("ILearningRoomDetailBuilder"),
 };
 
 export default BUILDER_TYPES;

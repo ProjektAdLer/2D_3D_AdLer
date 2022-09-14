@@ -1,13 +1,13 @@
 import LearningWorldTO from "../../../../../Core/Application/DataTransportObjects/LearningWorldTO";
-import LearningRoomSelectionPresenter from "../../../../../Core/Presentation/React/LearningRoomMenu/LearningRoomSelection/LearningRoomSelectionPresenter";
-import LearningRoomSelectionViewModel from "../../../../../Core/Presentation/React/LearningRoomMenu/LearningRoomSelection/LearningRoomSelectionViewModel";
+import RoomSelectionSectionPresenter from "../../../../../Core/Presentation/React/RoomMenu/RoomSelectionSection/RoomSelectionSectionPresenter";
+import RoomSelectionSectionViewModel from "../../../../../Core/Presentation/React/RoomMenu/RoomSelectionSection/RoomSelectionSectionViewModel";
 
-describe("LearningRoomSelectionPresenter", () => {
-  let systemUnderTest: LearningRoomSelectionPresenter;
+describe("RoomSelectionSectionPresenter", () => {
+  let systemUnderTest: RoomSelectionSectionPresenter;
 
   beforeEach(() => {
-    systemUnderTest = new LearningRoomSelectionPresenter(
-      new LearningRoomSelectionViewModel()
+    systemUnderTest = new RoomSelectionSectionPresenter(
+      new RoomSelectionSectionViewModel()
     );
   });
 
@@ -31,8 +31,8 @@ describe("LearningRoomSelectionPresenter", () => {
 
     systemUnderTest.onLearningWorldLoaded(learningWorldTO);
 
-    expect(systemUnderTest["viewModel"].learningRoomIDs.Value).toEqual([1, 2]);
-    expect(systemUnderTest["viewModel"].learningRoomTitles.Value).toEqual([
+    expect(systemUnderTest["viewModel"].roomIDs.Value).toEqual([1, 2]);
+    expect(systemUnderTest["viewModel"].roomTitles.Value).toEqual([
       "Test Learning Room 1",
       "Test Learning Room 2",
     ]);

@@ -4,7 +4,7 @@ import {
   LearningElementTypeStrings,
 } from "../../../Babylon/LearningElement/Types/LearningElementTypes";
 
-export default class LearningRoomDetailViewModel {
+export default class DetailSectionViewModel {
   // TODO: remove default values when they are set from real data
   name: Observable<string> = new Observable<string>("NAME");
   description: Observable<string> = new Observable<string>(

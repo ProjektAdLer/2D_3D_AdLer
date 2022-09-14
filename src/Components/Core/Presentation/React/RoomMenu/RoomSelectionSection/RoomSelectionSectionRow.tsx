@@ -1,10 +1,10 @@
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
-export default function LearningRoomSelectionRow({
-  learningRoomTitle,
+export default function RoomSelectionSectionRow({
+  roomTitle,
   onClickCallback,
 }: {
-  learningRoomTitle: string;
+  roomTitle: string;
   onClickCallback: () => void;
 }) {
   return (
@@ -13,7 +13,7 @@ export default function LearningRoomSelectionRow({
       shape="freefloatcenter"
       onClick={onClickCallback}
     >
-      {learningRoomTitle}
+      {roomTitle}
     </StyledButton>
   );
 }

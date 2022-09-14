@@ -4,25 +4,25 @@ import ILearningWorldAdapter from "src/Components/Core/Ports/LearningWorldPort/I
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
-import ILearningRoomSelectionController from "./ILearningRoomSelectionController";
-import ILearningRoomSelectionPresenter from "./ILearningRoomSelectionPresenter";
-import LearningRoomSelectionController from "./LearningRoomSelectionController";
-import LearningRoomSelectionPresenter from "./LearningRoomSelectionPresenter";
-import LearningRoomSelectionViewModel from "./LearningRoomSelectionViewModel";
+import IRoomSelectionSectionController from "./IRoomSelectionSectionController";
+import IRoomSelectionSectionPresenter from "./IRoomSelectionSectionPresenter";
+import RoomSelectionSectionController from "./RoomSelectionSectionController";
+import RoomSelectionSectionPresenter from "./RoomSelectionSectionPresenter";
+import RoomSelectionSectionViewModel from "./RoomSelectionSectionViewModel";
 
 @injectable()
 export default class LearningRoomSelectionBuilder extends PresentationBuilder<
-  LearningRoomSelectionViewModel,
-  ILearningRoomSelectionController,
+  RoomSelectionSectionViewModel,
+  IRoomSelectionSectionController,
   undefined,
-  ILearningRoomSelectionPresenter
+  IRoomSelectionSectionPresenter
 > {
   constructor() {
     super(
-      LearningRoomSelectionViewModel,
-      LearningRoomSelectionController,
+      RoomSelectionSectionViewModel,
+      RoomSelectionSectionController,
       undefined,
-      LearningRoomSelectionPresenter
+      RoomSelectionSectionPresenter
     );
   }
 

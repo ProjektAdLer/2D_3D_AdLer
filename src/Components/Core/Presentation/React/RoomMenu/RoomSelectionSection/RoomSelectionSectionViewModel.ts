@@ -1,14 +1,14 @@
 import { LearningComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import Observable from "src/Lib/Observable";
 
-export default class LearningRoomSelectionViewModel {
+export default class RoomSelectionSectionViewModel {
   // TODO: replace default values when they are set from actual data
-  public learningRoomTitles: Observable<string[]> = new Observable<string[]>([
+  public roomTitles: Observable<string[]> = new Observable<string[]>([
     "Lernraum 1",
     "Lernraum 2",
     "Lernraum 3",
   ]);
-  public learningRoomIDs: Observable<LearningComponentID[]> = new Observable<
+  public roomIDs: Observable<LearningComponentID[]> = new Observable<
     LearningComponentID[]
   >([1, 2, 3]);
 }

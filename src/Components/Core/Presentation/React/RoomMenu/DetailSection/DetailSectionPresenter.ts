@@ -3,13 +3,11 @@ import {
   LearningElementType,
   LearningElementTypeStrings,
 } from "../../../Babylon/LearningElement/Types/LearningElementTypes";
-import ILearningRoomDetailPresenter from "./ILearningRoomDetailPresenter";
-import LearningRoomDetailViewModel from "./LearningRoomDetailViewModel";
+import IDetailSectionPresenter from "./IDetailSectionPresenter";
+import DetailSectionViewModel from "./DetailSectionViewModel";
 
-export default class LearningRoomDetailPresenter
-  implements ILearningRoomDetailPresenter
-{
-  constructor(private viewModel: LearningRoomDetailViewModel) {}
+export default class DetailSectionPresenter implements IDetailSectionPresenter {
+  constructor(private viewModel: DetailSectionViewModel) {}
 
   onLearningRoomLoaded(learningRoomTO: LearningRoomTO): void {
     this.viewModel.name.Value = learningRoomTO.name;
