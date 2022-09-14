@@ -21,10 +21,10 @@ export default function LearningWorldMenu() {
         <div className="col-span-10 col-start-1 row-span-3 row-start-1 p-2 text-4xl border-b-8 border-adlerdarkblue">
           <HeaderBar />
         </div>
-        <div className="flex justify-center col-span-5 col-start-1 row-start-4 p-8 border-r-8 row-span-full border-adlerdarkblue bg-green-50">
+        <div className="flex justify-center col-span-5 col-start-1 row-start-4 p-8 border-r-8 row-span-full border-adlerdarkblue bg-adlergold">
           <LearningRoomSelection />
         </div>
-        <div className="flex justify-center col-span-5 col-start-6 row-start-4 p-8 border-r-8 row-span-full border-adlerdarkblue bg-green-50">
+        <div className="flex justify-center col-span-5 col-start-6 row-start-4 p-8 row-span-full bg-adlergold">
           <LearningRoomDetail />
         </div>
       </div>
