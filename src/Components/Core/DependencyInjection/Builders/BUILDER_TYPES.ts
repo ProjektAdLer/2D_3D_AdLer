@@ -13,12 +13,12 @@ const BUILDER_TYPES = {
   IBottomTooltipBuilder: Symbol("IBottomTooltipBuilder"),
   IDebugPanelBuilder: Symbol("IDebugPanelBuilder"),
   ILearningWorldNamePanelBuilder: Symbol("ILearningWorldNamePanelBuilder"),
-  ILoadLearningWorldButtonBuilder: Symbol("ILoadLearningWorldButtonBuilder"),
+  ILoadRoomButtonBuilder: Symbol("ILoadRoomButtonBuilder"),
   IFullscreenSwitchBuilder: Symbol("IFullscreenSwitchBuilder"),
   ILearningWorldGoalPanelBuilder: Symbol("ILearningWorldGoalPanelBuilder"),
   IHeaderBarBuilder: Symbol("IHeaderBarBuilder"),
-  ILearningRoomSelectionBuilder: Symbol("ILearningRoomSelectionBuilder"),
-  ILearningRoomDetailBuilder: Symbol("ILearningRoomDetailBuilder"),
+  IRoomSelectionSectionBuilder: Symbol("IRoomSelectionSectionBuilder"),
+  IDetailSectionBuilder: Symbol("ILearningRoomDetailBuilder"),
 };
 
 export default BUILDER_TYPES;

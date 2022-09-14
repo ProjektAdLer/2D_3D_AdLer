@@ -59,9 +59,14 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
   private async load(userData: UserDataEntity): Promise<LearningWorldEntity> {
     // TODO: remove hardcoded worldName when a learning world is selected
+
+    const coursesList = await this.backendAdapter.getCoursesAvalibaleForUser(
+      userData.userToken
+    );
+
     let apiData = {
       userToken: userData.userToken,
-      worldName: "Lernwelt Autorentool",
+      worldId: coursesList.courses[0].courseId, // TODO: This can be a random number for now
     } as tempApiInfo;
 
     const response = await this.backendAdapter.getLearningWorldData(apiData);

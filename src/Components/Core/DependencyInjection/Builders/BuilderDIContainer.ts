@@ -16,12 +16,12 @@ import MoodleLoginButtonBuilder from "../../Presentation/React/MoodleLoginButton
 import BottomTooltipBuilder from "../../Presentation/React/LearningRoomDisplay/BottomTooltip/BottomTooltipBuilder";
 import DebugPanelBuilder from "../../Presentation/React/LearningRoomDisplay/DebugPanel/DebugPanelBuilder";
 import LearningWorldNamePanelBuilder from "../../Presentation/React/LearningRoomDisplay/LearningWorldNamePanel/LearningWorldNamePanelBuilder";
-import LoadLearningWorldButtonBuilder from "../../Presentation/React/LearningRoomDisplay/LoadLearningWorldButton/LoadLearningWorldButtonBuilder";
+import LoadRoomButtonBuilder from "../../Presentation/React/LearningRoomDisplay/LoadRoomButton/LoadRoomButtonBuilder";
 import FullscreenSwitchBuilder from "../../Presentation/React/LearningRoomDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
 import LearningWorldGoalPanelBuilder from "~ReactComponents/LearningRoomDisplay/LearningWorldGoalPanel/LearningWorldGoalPanelBuilder";
-import HeaderBarBuilder from "~ReactComponents/LearningRoomMenu/HeaderBar/HeaderBarBuilder";
-import LearningRoomSelectionBuilder from "~ReactComponents/LearningRoomMenu/LearningRoomSelection/LearningRoomSelectionBuilder";
-import LearningRoomDetailBuilder from "~ReactComponents/LearningRoomMenu/LearningRoomDetail/LearningRoomDetailBuilder";
+import HeaderBarBuilder from "~ReactComponents/RoomMenu/HeaderBar/HeaderBarBuilder";
+import LearningRoomSelectionBuilder from "~ReactComponents/RoomMenu/RoomSelectionSection/RoomSelectionSectionBuilder";
+import DetailSectionBuilder from "~ReactComponents/RoomMenu/DetailSection/DetailSectionBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -63,8 +63,8 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldNamePanelBuilder).to(
     LearningWorldNamePanelBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ILoadLearningWorldButtonBuilder).to(
-    LoadLearningWorldButtonBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILoadRoomButtonBuilder).to(
+    LoadRoomButtonBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IFullscreenSwitchBuilder).to(
     FullscreenSwitchBuilder
@@ -75,11 +75,11 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IHeaderBarBuilder).to(
     HeaderBarBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningRoomSelectionBuilder).to(
+  bind<IPresentationBuilder>(BUILDER_TYPES.IRoomSelectionSectionBuilder).to(
     LearningRoomSelectionBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningRoomDetailBuilder).to(
-    LearningRoomDetailBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.IDetailSectionBuilder).to(
+    DetailSectionBuilder
   );
 });
 

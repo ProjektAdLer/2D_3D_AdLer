@@ -17,7 +17,7 @@ jest.mock(
 );
 
 jest.mock(
-  "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadLearningWorldButton/LoadLearningWorldButton",
+  "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadRoomButton/LoadRoomButton",
   () => "string"
 );
 describe("LogoMenuBar", () => {

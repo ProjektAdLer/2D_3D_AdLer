@@ -16,13 +16,16 @@ export default function NewH5PContent({
       if (h5pContainerRef.current) {
         const el = h5pContainerRef.current;
 
+        const baseURL = config.serverURL.replace("/api", "/");
+
+        let h5pJsonURL =
+          baseURL +
+          viewModel.learningElementData.Value.fileName.replaceAll("\\", "/");
+
         const options = {
-          h5pJsonPath:
-            config.serverURL +
-            "/TestH5P/" +
-            viewModel.learningElementData.Value.fileName,
-          frameJs: config.serverURL + "/TestH5P/" + "h5pBase/frame.bundle.js",
-          frameCss: config.serverURL + "/TestH5P/" + "h5pBase/styles/h5p.css",
+          h5pJsonPath: h5pJsonURL,
+          frameJs: baseURL + "common/h5pBase/frame.bundle.js",
+          frameCss: baseURL + "common/h5pBase/styles/h5p.css",
         };
 
         await new H5PPlayer(el, options);
