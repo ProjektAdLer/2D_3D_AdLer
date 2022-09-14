@@ -35,7 +35,7 @@ export default function StyledModal({
   if (!showModal) return null;
   return (
     <StyledContainer {...restProps}>
-      <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center h-full bg-blacktrans50">
+      <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center h-full bg-blacktrans-500">
         {/*Header with optional close button*/}
         <div className="p-2 rounded-lg bg-adlergold">
           <div className="flex items-center justify-center w-full gap-2 p-1 pb-3 text-2xl font-black text-white text-shadow lg:text-3xl h-fit bg-adlergold">
