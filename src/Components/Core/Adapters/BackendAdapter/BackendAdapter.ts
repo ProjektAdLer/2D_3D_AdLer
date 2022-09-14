@@ -12,18 +12,38 @@ import ImageLearningElementData from "../../Domain/Entities/SpecificLearningElem
 import VideoLearningElementData from "../../Domain/Entities/SpecificLearningElements/VideoLearningElementData";
 import H5PLearningElementData from "../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
 import LearningRoomTO from "../../Application/DataTransportObjects/LearningRoomTO";
+import CourseListTO from "../../Application/DataTransportObjects/CourseListTO";
 
 @injectable()
 export default class BackendAdapter implements IBackendAdapter {
+  async getCoursesAvalibaleForUser(userToken: string): Promise<CourseListTO> {
+    const response = await axios.get<CourseListTO>(
+      config.serverURL + "/Courses",
+      {
+        params: {
+          limitToEnrolled: false,
+        },
+        headers: {
+          token: userToken,
+        },
+      }
+    );
+
+    return response.data;
+  }
   async getLearningWorldData({
     userToken,
-    worldName,
+    worldId,
   }: tempApiInfo): Promise<Partial<LearningWorldTO>> {
     // get DSL
     let dsl = await this.getDSL({
       userToken,
-      worldName,
+      worldId,
     });
+
+    // omit first learning room, since it is only used to store the dsl
+    dsl.learningWorld.learningSpaces =
+      dsl.learningWorld.learningSpaces.slice(1);
 
     // create LearningWorldTO with learning world data
     let response: Partial<LearningWorldTO> = {
@@ -53,6 +73,29 @@ export default class BackendAdapter implements IBackendAdapter {
     return response;
   }
 
+  async scoreLearningElement(learningElementId: number): Promise<void> {
+    logger.warn(
+      `Tried to score Learningelement ${learningElementId}. Functionality not implemented yet.`
+    );
+
+    return Promise.resolve();
+  }
+
+  async logInUser(userCredentials: {
+    username: string;
+    password: string;
+  }): Promise<string> {
+    const token = await axios.get<{
+      moodleToken: string;
+    }>(config.serverURL + "/MoodleLogin/Login", {
+      params: {
+        UserName: userCredentials.username,
+        Password: userCredentials.password,
+      },
+    });
+
+    return token.data.moodleToken;
+  }
   private mapLearningElement = (
     element: APILearningElement
   ): LearningElementTO => {
@@ -96,33 +139,13 @@ export default class BackendAdapter implements IBackendAdapter {
 
     return learningElementTO as LearningElementTO;
   };
-
-  async scoreLearningElement(learningElementId: number): Promise<void> {
-    logger.warn(
-      `Tried to score Learningelement ${learningElementId}. Functionality not implemented yet.`
-    );
-
-    return Promise.resolve();
-  }
-
-  async logInUser(userCredentials: {
-    username: string;
-    password: string;
-  }): Promise<string> {
-    const token = await axios.post<string>(
-      config.serverURL + "/userlogin",
-      userCredentials
-    );
-
-    return token.data;
-  }
-
-  private async getDSL({ userToken, worldName }: tempApiInfo): Promise<IDSL> {
-    const response = await axios.post<IDSL>(
-      config.serverURL + "/LearningWorld",
+  private async getDSL({ userToken, worldId }: tempApiInfo): Promise<IDSL> {
+    const response = await axios.get<IDSL>(
+      config.serverURL + "/Courses/" + worldId,
       {
-        wsToken: userToken,
-        courseName: worldName,
+        headers: {
+          token: userToken,
+        },
       }
     );
 
