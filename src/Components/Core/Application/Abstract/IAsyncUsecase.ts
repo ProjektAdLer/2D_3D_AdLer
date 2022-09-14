@@ -1,4 +1,3 @@
-import { IDTO } from "./IDTO";
 export interface IAsyncUsecase {
-  executeAsync(data?: IDTO): Promise<void>;
+  executeAsync(data?: object): Promise<void>;
 }

@@ -4,7 +4,6 @@ import { logger } from "../../../../Lib/Logger";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IDebugPort from "../../Ports/DebugPort/IDebugPort";
-import { IDTO } from "../Abstract/IDTO";
 import type ILogUserIntoMoodleUseCase from "../LogUserIntoMoodle/ILogUserIntoMoodleUseCase";
 import IDebugUseCase from "./IDebugUseCase";
 
