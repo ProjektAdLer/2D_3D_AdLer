@@ -13,7 +13,7 @@ const BUILDER_TYPES = {
   IBottomTooltipBuilder: Symbol("IBottomTooltipBuilder"),
   IDebugPanelBuilder: Symbol("IDebugPanelBuilder"),
   ILearningWorldNamePanelBuilder: Symbol("ILearningWorldNamePanelBuilder"),
-  ILoadLearningWorldButtonBuilder: Symbol("ILoadLearningWorldButtonBuilder"),
+  ILoadRoomButtonBuilder: Symbol("ILoadRoomButtonBuilder"),
   IFullscreenSwitchBuilder: Symbol("IFullscreenSwitchBuilder"),
   ILearningWorldGoalPanelBuilder: Symbol("ILearningWorldGoalPanelBuilder"),
   IHeaderBarBuilder: Symbol("IHeaderBarBuilder"),

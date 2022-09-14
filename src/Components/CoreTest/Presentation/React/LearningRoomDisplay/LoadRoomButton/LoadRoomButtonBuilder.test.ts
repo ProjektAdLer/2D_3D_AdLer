@@ -1,16 +1,16 @@
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
-import LoadLearningWorldButtonBuilder from "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadLearningWorldButton/LoadLearningWorldButtonBuilder";
-import LoadLearningWorldButtonController from "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadLearningWorldButton/LoadLearningWorldButtonController";
-import LoadLearningWorldButtonPresenter from "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadLearningWorldButton/LoadLearningWorldButtonPresenter";
-import LoadLearningWorldButtonViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadLearningWorldButton/LoadLearningWorldButtonViewModel";
+import LoadRoomButtonBuilder from "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadRoomButton/LoadRoomButtonBuilder";
+import LoadRoomButtonController from "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadRoomButton/LoadRoomButtonController";
+import LoadRoomButtonPresenter from "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadRoomButton/LoadRoomButtonPresenter";
+import LoadRoomButtonViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadRoomButton/LoadRoomButtonViewModel";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
 
-describe("LoadLearningWorldButtonBuilder", () => {
-  let systemUnderTest: LoadLearningWorldButtonBuilder;
+describe("LoadRoomButtonBuilder", () => {
+  let systemUnderTest: LoadRoomButtonBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -21,7 +21,7 @@ describe("LoadLearningWorldButtonBuilder", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new LoadLearningWorldButtonBuilder();
+    systemUnderTest = new LoadRoomButtonBuilder();
   });
 
   afterAll(() => {
@@ -34,7 +34,7 @@ describe("LoadLearningWorldButtonBuilder", () => {
 
     expect(systemUnderTest["controller"]).toBeDefined();
     expect(systemUnderTest["controller"]).toBeInstanceOf(
-      LoadLearningWorldButtonController
+      LoadRoomButtonController
     );
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledTimes(
       1
@@ -42,7 +42,7 @@ describe("LoadLearningWorldButtonBuilder", () => {
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledWith(
       systemUnderTest["viewModel"],
       systemUnderTest["controller"],
-      LoadLearningWorldButtonViewModel
+      LoadRoomButtonViewModel
     );
   });
 
@@ -52,7 +52,7 @@ describe("LoadLearningWorldButtonBuilder", () => {
 
     expect(systemUnderTest["presenter"]).toBeDefined();
     expect(systemUnderTest["presenter"]).toBeInstanceOf(
-      LoadLearningWorldButtonPresenter
+      LoadRoomButtonPresenter
     );
   });
 });

@@ -2,11 +2,11 @@ import { mock } from "jest-mock-extended";
 import ILoadWorldUseCase from "../../../../../Core/Application/LoadWorld/ILoadWorldUseCase";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import LoadLearningWorldButtonController from "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadLearningWorldButton/LoadLearningWorldButtonController";
+import LoadRoomButtonController from "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadRoomButton/LoadRoomButtonController";
 
 const unseCaseMock = mock<ILoadWorldUseCase>();
-describe("LoadLearningWorldButtonController", () => {
-  let systemUnderTest: LoadLearningWorldButtonController;
+describe("LoadRoomButtonController", () => {
+  let systemUnderTest: LoadRoomButtonController;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -17,7 +17,7 @@ describe("LoadLearningWorldButtonController", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new LoadLearningWorldButtonController();
+    systemUnderTest = new LoadRoomButtonController();
   });
 
   afterEach(() => {

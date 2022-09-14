@@ -1,10 +1,10 @@
 import ILoadWorldUseCase from "../../../../Application/LoadWorld/ILoadWorldUseCase";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPES";
-import ILoadLearningWorldButtonController from "./ILoadLearningWorldButtonController";
+import ILoadRoomButtonController from "./ILoadRoomButtonController";
 
-export default class LoadLearningWorldButtonController
-  implements ILoadLearningWorldButtonController
+export default class LoadRoomButtonController
+  implements ILoadRoomButtonController
 {
   async loadWorld(): Promise<void> {
     const useCase = CoreDIContainer.get<ILoadWorldUseCase>(

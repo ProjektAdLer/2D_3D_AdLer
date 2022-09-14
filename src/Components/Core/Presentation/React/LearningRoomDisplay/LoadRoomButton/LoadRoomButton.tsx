@@ -1,15 +1,15 @@
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
-import LoadLearningWorldButtonController from "./LoadLearningWorldButtonController";
-import LoadLearningWorldButtonViewModel from "./LoadLearningWorldButtonViewModel";
+import LoadRoomButtonController from "./LoadRoomButtonController";
+import LoadRoomButtonViewModel from "./LoadRoomButtonViewModel";
 import debugIcon from "../../../../../../Assets/icons/debug-icon.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 
-export default function LoadLearningWorldButton() {
+export default function LoadRoomButton() {
   const [, controller] = useBuilder<
-    LoadLearningWorldButtonViewModel,
-    LoadLearningWorldButtonController
-  >(BUILDER_TYPES.ILoadLearningWorldButtonBuilder);
+    LoadRoomButtonViewModel,
+    LoadRoomButtonController
+  >(BUILDER_TYPES.ILoadRoomButtonBuilder);
 
   if (!controller) return null;
 
