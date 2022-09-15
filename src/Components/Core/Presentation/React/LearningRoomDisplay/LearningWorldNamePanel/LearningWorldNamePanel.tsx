@@ -18,13 +18,15 @@ export default function LearningWorldNamePanel() {
 
   return (
     <div className="flex justify-center">
-      <StyledContainer className="flex items-center justify-center text-xl font-extrabold text-white bg-transparent p-13 lg:text-4xl text-shadow whitespace-nowrap">
+      <StyledContainer className="flex items-center justify-center bg-transparent p-13 whitespace-nowrap">
         <img
           className="w-8 lg:w-16"
           src={worldIcon}
           alt="Learning-Room-Icon"
         ></img>
-        {learningWorldName}
+        <div className="text-xl font-extrabold text-white lg:text-4xl text-shadow">
+          {learningWorldName}
+        </div>
       </StyledContainer>
     </div>
   );
