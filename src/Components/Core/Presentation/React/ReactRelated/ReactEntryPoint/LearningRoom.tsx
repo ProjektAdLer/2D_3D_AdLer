@@ -55,7 +55,9 @@ export default function LearningRoom() {
         </StyledModal>
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
-        <ModalManager />
+        <div className="z-50">
+          <ModalManager />
+        </div>
       </div>
     </React.Fragment>
   );

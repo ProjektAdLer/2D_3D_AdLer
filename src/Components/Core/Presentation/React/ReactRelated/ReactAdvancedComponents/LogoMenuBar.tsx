@@ -25,7 +25,6 @@ export default function LogoMenuBar() {
       <StyledContainer className="flex flex-col bg-transparent">
         <LoadLearningWorldButton />
         <FullscreenSwitch />
-        <MoodleLoginButton />
         <DebugPanel />
       </StyledContainer>
     </CustomDropdown>
