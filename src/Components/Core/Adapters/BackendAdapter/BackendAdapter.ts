@@ -48,7 +48,7 @@ export default class BackendAdapter implements IBackendAdapter {
     // create LearningWorldTO with learning world data
     let response: Partial<LearningWorldTO> = {
       worldName: dsl.learningWorld.identifier.value,
-      worldGoal: dsl.learningWorld.goal,
+      worldGoal: dsl.learningWorld.goals,
     };
 
     // create LearningElementTOs
@@ -101,8 +101,8 @@ export default class BackendAdapter implements IBackendAdapter {
   ): LearningElementTO => {
     const learningElementTO: Partial<LearningElementTO> = {
       id: element.id,
-      value: element.learningElementValue
-        ? element.learningElementValue.value
+      value: element.learningElementValueList
+        ? Number.parseInt(element.learningElementValueList[0]?.value ?? "0")
         : 0,
       requirements: element.requirements ?? [],
       name: element.identifier?.value,
@@ -127,12 +127,13 @@ export default class BackendAdapter implements IBackendAdapter {
       case "h5p":
         learningElementTO.learningElementData = {
           type: "h5p",
-          fileName: element.metaData.find(
+          fileName: element.metaData?.find(
             (metaData) => metaData.key === "h5pFileName"
           )?.value,
           contextId: Number.parseInt(
-            element.metaData.find((metaData) => metaData.key === "h5pContextId")
-              ?.value || "0"
+            element.metaData?.find(
+              (metaData) => metaData.key === "h5pContextId"
+            )?.value || "0"
           ),
         } as H5PLearningElementData;
     }
