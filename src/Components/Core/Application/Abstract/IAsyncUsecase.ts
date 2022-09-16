@@ -1,3 +1,3 @@
-export interface IAsyncUsecase {
-  executeAsync(data?: object): Promise<void>;
+export interface IAsyncUsecase<TParams, TResponse> {
+  executeAsync(data?: TParams): Promise<TResponse>;
 }
