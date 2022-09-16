@@ -35,7 +35,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     private loadAvatarUseCase: ILoadAvatarUseCase
   ) {}
 
-  async executeAsync(): Promise<void> {
+  async executeAsync(): Promise<LearningWorldTO> {
     const userData = this.container.getEntitiesOfType(UserDataEntity);
 
     if (userData.length === 0 || userData[0]?.isLoggedIn === false) {
@@ -54,7 +54,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     // TODO: Move this outside of this use case - PG
     await this.loadAvatarUseCase.executeAsync();
 
-    return Promise.resolve();
+    return Promise.resolve(this.toTO(learningWorldEntity));
   }
 
   private async load(userData: UserDataEntity): Promise<LearningWorldEntity> {

@@ -16,11 +16,11 @@ export default class LearningElementStartedUseCase
     @inject(PORT_TYPES.ILearningElementPort)
     private learningElementPort: ILearningElementPort
   ) {}
-  execute(data?: { learningElementId: number }): void {
+  execute(data: { learningElementId: number }): void {
     const entity =
       this.entityContainer.filterEntitiesOfType<LearningElementEntity>(
         LearningElementEntity,
-        (e) => e.id === data?.learningElementId
+        (e) => e.id === data.learningElementId
       );
 
     if (entity.length === 0)

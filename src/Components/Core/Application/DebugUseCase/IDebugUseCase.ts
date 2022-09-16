@@ -1,6 +1,6 @@
 import { IAsyncUsecase } from "./../Abstract/IAsyncUsecase";
 
-export default interface IDebugUseCase extends IAsyncUsecase {
+export default interface IDebugUseCase extends IAsyncUsecase<void, void> {
   /**
    * Log user into Moodle
    */
