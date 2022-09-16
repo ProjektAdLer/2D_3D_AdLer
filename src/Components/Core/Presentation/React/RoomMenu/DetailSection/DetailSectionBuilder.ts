@@ -3,6 +3,10 @@ import DetailSectionPresenter from "./DetailSectionPresenter";
 import IDetailSectionPresenter from "./IDetailSectionPresenter";
 import DetailSectionViewModel from "./DetailSectionViewModel";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
+import IRoomAdapter from "src/Components/Core/Ports/LearningRoomPort/IRoomAdapter";
 
 @injectable()
 export default class DetailSectionBuilder extends PresentationBuilder<
@@ -13,5 +17,12 @@ export default class DetailSectionBuilder extends PresentationBuilder<
 > {
   constructor() {
     super(DetailSectionViewModel, undefined, undefined, DetailSectionPresenter);
+  }
+
+  override buildPresenter(): void {
+    super.buildPresenter();
+    CoreDIContainer.get<AbstractPort<IRoomAdapter>>(
+      PORT_TYPES.ILearningRoomPort
+    ).registerAdapter(this.presenter as IRoomAdapter);
   }
 }

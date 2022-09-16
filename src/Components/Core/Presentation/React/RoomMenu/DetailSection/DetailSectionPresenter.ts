@@ -8,9 +8,18 @@ import DetailSectionViewModel from "./DetailSectionViewModel";
 
 export default class DetailSectionPresenter implements IDetailSectionPresenter {
   constructor(private viewModel: DetailSectionViewModel) {}
-
-  onLearningRoomLoaded(learningRoomTO: LearningRoomTO): void {
+  onRoomDataLoaded(learningRoomTO: LearningRoomTO): void {
     this.viewModel.name.Value = learningRoomTO.name;
+
+    // TODO: set description when it exists
+    this.viewModel.description.Value = "";
+
+    // TODO: set requirements when they exist
+    this.viewModel.requirements.Value = [];
+
+    // TODO: set conditions when they exist
+    this.viewModel.conditions.Value = [];
+
     this.viewModel.learningElements.Value = learningRoomTO.learningElements.map(
       (learningElementTO) => [
         learningElementTO.learningElementData

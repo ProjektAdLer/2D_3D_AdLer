@@ -6,6 +6,7 @@ const USECASE_TYPES = {
   ICalculateTotalRoomScore: Symbol("ICalculateTotalRoomScore"),
   ILogUserIntoMoodleUseCase: Symbol("ILogUserIntoMoodleUseCase"),
   IDebugUseCase: Symbol("IDebugUseCase"),
+  ILoadRoomUseCase: Symbol("ILoadRoomUseCase"),
 };
 
 export default USECASE_TYPES;

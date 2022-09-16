@@ -6,12 +6,13 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import LearningWorldMenu from "~ReactComponents/ReactRelated/ReactEntryPoint/LearningWorldMenu";
 
+jest.mock("~ReactComponents/RoomMenu/HeaderBar/HeaderBar", () => "mocked");
 jest.mock(
-  "~ReactComponents/LearningRoomMenu/HeaderBar/HeaderBar",
+  "~ReactComponents/RoomMenu/RoomSelectionSection/RoomSelectionSection",
   () => "mocked"
 );
 jest.mock(
-  "~ReactComponents/LearningRoomMenu/LearningRoomSelection/LearningRoomSelection",
+  "~ReactComponents/RoomMenu/DetailSection/DetailSection",
   () => "mocked"
 );
 

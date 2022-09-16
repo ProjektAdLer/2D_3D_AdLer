@@ -31,7 +31,7 @@ describe("DetailSectionPresenter", () => {
       ],
     };
 
-    systemUnderTest.onLearningRoomLoaded(learningRoomTO);
+    systemUnderTest.onRoomDataLoaded(learningRoomTO);
 
     expect(systemUnderTest["viewModel"].name.Value).toEqual(
       learningRoomTO.name

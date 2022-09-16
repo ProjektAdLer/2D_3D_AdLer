@@ -7,6 +7,8 @@ import ILearningElementStartedUseCase from "../../Application/LearningElementSta
 import LearningElementStartedUseCase from "../../Application/LearningElementStarted/LearningElementStartedUseCase";
 import ILoadAvatarUseCase from "../../Application/LoadAvatar/ILoadAvatarUseCase";
 import LoadAvatarUseCase from "../../Application/LoadAvatar/LoadAvatarUseCase";
+import ILoadRoomUseCase from "../../Application/LoadRoom/ILoadRoomUseCase";
+import LoadRoomUseCase from "../../Application/LoadRoom/LoadRoomUseCase";
 import ILoadWorldUseCase from "../../Application/LoadWorld/ILoadWorldUseCase";
 import LoadWorldUseCase from "../../Application/LoadWorld/LoadWorldUseCase";
 import ILogUserIntoMoodleUseCase from "../../Application/LogUserIntoMoodle/ILogUserIntoMoodleUseCase";
@@ -46,6 +48,10 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<IDebugUseCase>(USECASE_TYPES.IDebugUseCase)
     .to(DebugUseCase)
+    .inSingletonScope();
+
+  bind<ILoadRoomUseCase>(USECASE_TYPES.ILoadRoomUseCase)
+    .to(LoadRoomUseCase)
     .inSingletonScope();
 });
 

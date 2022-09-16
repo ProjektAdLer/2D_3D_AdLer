@@ -7,7 +7,7 @@ export default function CheckBoxEntry({
 }) {
   return (
     <div className="flex flex-row">
-      <input type="checkbox" checked={checked} />
+      <input type="checkbox" checked={checked} readOnly={true} />
       <div>{text}</div>
     </div>
   );

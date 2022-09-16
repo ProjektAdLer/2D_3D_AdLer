@@ -3,11 +3,23 @@ import IScorePanelPresenter from "../../Presentation/React/LearningRoomDisplay/S
 import ILearningRoomPresenter from "../../Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
 import { injectable } from "inversify";
 import { logger } from "src/Lib/Logger";
+import LearningRoomTO from "../../Application/DataTransportObjects/LearningRoomTO";
+import AbstractPort from "../AbstractPort/AbstractPort";
+import IRoomAdapter from "./IRoomAdapter";
 
 @injectable()
-export default class LearningRoomPort implements ILearningRoomPort {
+export default class LearningRoomPort
+  extends AbstractPort<IRoomAdapter>
+  implements ILearningRoomPort
+{
   private scorePanelPresenter: IScorePanelPresenter;
   private learningRoomPresenters: ILearningRoomPresenter[] = [];
+
+  onRoomDataLoaded(learningRoomTO: LearningRoomTO): void {
+    this.adapters.forEach((adapter) =>
+      adapter.onRoomDataLoaded(learningRoomTO)
+    );
+  }
 
   presentNewScore(score: number, completed: boolean, roomId: number): void {
     if (!this.scorePanelPresenter) {
