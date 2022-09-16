@@ -16,11 +16,16 @@ export default function NewH5PContent({
       if (h5pContainerRef.current) {
         const el = h5pContainerRef.current;
 
-        const baseURL = config.serverURL.replace("/api", "/");
+        const baseURL = config.serverURL.replace(
+          "https://api.cluuub.xyz/api",
+          "https://api.cluuub.xyz/"
+        );
 
         let h5pJsonURL =
           baseURL +
-          viewModel.learningElementData.Value.fileName.replaceAll("\\", "/");
+          viewModel.learningElementData.Value.fileName
+            .replaceAll("wwwroot/", "")
+            .replaceAll("\\", "/");
 
         const options = {
           h5pJsonPath: h5pJsonURL,

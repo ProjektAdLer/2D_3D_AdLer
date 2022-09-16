@@ -41,9 +41,9 @@ export default class BackendAdapter implements IBackendAdapter {
       worldId,
     });
 
-    // omit first learning room, since it is only used to store the dsl
-    dsl.learningWorld.learningSpaces =
-      dsl.learningWorld.learningSpaces.slice(1);
+    // // omit first learning room, since it is only used to store the dsl
+    // dsl.learningWorld.learningSpaces =
+    //   dsl.learningWorld.learningSpaces.slice(1);
 
     // create LearningWorldTO with learning world data
     let response: Partial<LearningWorldTO> = {
