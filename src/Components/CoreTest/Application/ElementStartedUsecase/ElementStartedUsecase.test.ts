@@ -5,13 +5,13 @@ import { ConstructorReference } from "../../../Core/Types/EntityManagerTypes";
 
 import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import LearningElementStartedUseCase from "../../../Core/Application/LearningElementStarted/LearningElementStartedUseCase";
-import ILearningElementPort from "../../../Core/Ports/LearningElementPort/ILearningElementPort";
+import ElementStartedUseCase from "../../../Core/Application/ElementStarted/ElementStartedUseCase";
+import IElementPort from "../../../Core/Ports/ElementPort/IElementPort";
 
-const learningElementPortMock = mock<ILearningElementPort>();
+const elementPortMock = mock<IElementPort>();
 const entityContainerMock = mock<IEntityContainer>();
 
-describe("Calculate Total Room Score UseCase", () => {
+describe("Element Started Usecase", () => {
   let systemUnderTest;
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -19,19 +19,19 @@ describe("Calculate Total Room Score UseCase", () => {
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
       entityContainerMock
     );
-    CoreDIContainer.rebind(PORT_TYPES.ILearningElementPort).toConstantValue(
-      learningElementPortMock
+    CoreDIContainer.rebind(PORT_TYPES.IElementPort).toConstantValue(
+      elementPortMock
     );
   });
   beforeEach(() => {
-    systemUnderTest = CoreDIContainer.resolve(LearningElementStartedUseCase);
+    systemUnderTest = CoreDIContainer.resolve(ElementStartedUseCase);
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
   });
 
-  it("should call the presenter of the Room with the LE ", () => {
+  it("should call the presenter of the Space with the LE ", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
         id: 1,
@@ -39,21 +39,19 @@ describe("Calculate Total Room Score UseCase", () => {
     ]);
 
     systemUnderTest.execute({
-      learningElementId: 1,
+      elementId: 1,
     });
 
-    expect(
-      learningElementPortMock.startLearningElementEditing
-    ).toHaveBeenCalledWith({
+    expect(elementPortMock.startElementEditing).toHaveBeenCalledWith({
       id: 1,
     });
   });
 
-  it("should throw, if the learning Element is not found", () => {
+  it("should throw, if the Element is not found", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
     expect(() => {
       systemUnderTest.execute({
-        learningElementId: 2,
+        elementId: 2,
       });
     }).toThrow();
   });
@@ -68,14 +66,14 @@ describe("Calculate Total Room Score UseCase", () => {
         filterReturn = filter(new entityType());
         return [
           {
-            learningElements: [],
+            elements: [],
           },
         ];
       }
     );
 
     systemUnderTest.execute({
-      learningElementId: 1,
+      elementId: 1,
     });
 
     // @ts-ignore TS does not know about the mock
