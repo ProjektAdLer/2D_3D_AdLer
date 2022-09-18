@@ -1,9 +1,9 @@
 import UIPort from "../../../Core/Ports/UIPort/UIPort";
 import CoreDIContainer from "../../../../Components/Core/DependencyInjection/CoreDIContainer";
 import { mock } from "jest-mock-extended";
-import IModalManagerPresenter from "../../../Core/Presentation/React/LearningRoomDisplay/ModalManager/IModalManagerPresenter";
-import IBottomTooltipPresenter from "../../../Core/Presentation/React/LearningRoomDisplay/BottomTooltip/IBottomTooltipPresenter";
-import { LearningElementTO } from "../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
+import IModalManagerPresenter from "../../../Core/Presentation/React/SpaceDisplay/ModalManager/IModalManagerPresenter";
+import IBottomTooltipPresenter from "../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
+import { ElementTO } from "../../../Core/Ports/WorldPort/IWorldPort";
 import { logger } from "../../../../Lib/Logger";
 
 jest.mock("src/Lib/Logger");
@@ -52,33 +52,33 @@ describe("UIPort", () => {
     expect(mockBottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
   });
 
-  test("displayLearningElementTooltip throws error if BottomTooltipPresenter is not registered", () => {
+  test("displayElementTooltip throws error if BottomTooltipPresenter is not registered", () => {
     expect(() => {
-      systemUnderTest.displayLearningElementTooltip({});
+      systemUnderTest.displayElementTooltip({} as ElementTO);
     }).toThrowError("BottomTooltipPresenter not registered");
   });
 
-  test("displayLearningElementTooltip calls the BottomTooltipPresenter displayLearningElement method", () => {
+  test("displayElementTooltip calls the BottomTooltipPresenter displayElement method", () => {
     const mockBottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
     systemUnderTest.registerBottomTooltipPresenter(
       mockBottomTooltipPresenterMock
     );
-    const LearningElementTO: LearningElementTO = {
+    const ElementTO: ElementTO = {
       id: 42,
       name: "name",
-      learningElementData: {
+      elementData: {
         type: "h5p",
       },
     };
 
-    systemUnderTest.displayLearningElementTooltip(LearningElementTO);
+    systemUnderTest.displayElementTooltip(ElementTO);
 
-    expect(
-      mockBottomTooltipPresenterMock.displayLearningElement
-    ).toHaveBeenCalledTimes(1);
-    expect(
-      mockBottomTooltipPresenterMock.displayLearningElement
-    ).toHaveBeenCalledWith(LearningElementTO);
+    expect(mockBottomTooltipPresenterMock.displayElement).toHaveBeenCalledTimes(
+      1
+    );
+    expect(mockBottomTooltipPresenterMock.displayElement).toHaveBeenCalledWith(
+      ElementTO
+    );
   });
 
   test("registerBottomTooltipPresenter registeres the presenter if none is present", () => {

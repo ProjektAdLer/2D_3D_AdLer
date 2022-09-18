@@ -110,7 +110,7 @@ describe("SpacePort", () => {
     expect(scorePanelPresenterMock.presentScore).toHaveBeenCalledWith(1);
   });
 
-  test("presentNewScore calls openDoor at the roomPresenter with matching ID", () => {
+  test("presentNewScore calls openDoor at the spacePresenter with matching ID", () => {
     const spacePresenter1 = mock<ISpacePresenter>();
     const spacePresenter2 = mock<ISpacePresenter>();
     //@ts-ignore
