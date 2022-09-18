@@ -13,8 +13,8 @@ import ILoadWorldUseCase from "../../Application/LoadWorld/ILoadWorldUseCase";
 import LoadWorldUseCase from "../../Application/LoadWorld/LoadWorldUseCase";
 import ILogUserIntoMoodleUseCase from "../../Application/LogUserIntoMoodle/ILogUserIntoMoodleUseCase";
 import LogUserIntoMoodleUseCase from "../../Application/LogUserIntoMoodle/LogUserIntoMoodleUseCase";
-import IScoreElementUseCase from "../../Application/ScoreElement/IScoreElementUseCase";
-import ScoreElementUseCase from "../../Application/ScoreElement/ScoreElementUseCase";
+import IScoreElementUseCase from "../../Application/ScoreElementUseCase/IScoreElementUseCase";
+import ScoreElementUseCase from "../../Application/ScoreElementUseCase/ScoreElementUseCase";
 import USECASE_TYPES from "./USECASE_TYPES";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {

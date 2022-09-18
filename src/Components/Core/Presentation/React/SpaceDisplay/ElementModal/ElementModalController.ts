@@ -1,4 +1,4 @@
-import IScoreElementUseCase from "../../../../Application/ScoreElement/IScoreElementUseCase";
+import IScoreElementUseCase from "../../../../Application/ScoreElementUseCase/IScoreElementUseCase";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPES";
 import { ElementID } from "../../../../Domain/Types/EntityTypes";

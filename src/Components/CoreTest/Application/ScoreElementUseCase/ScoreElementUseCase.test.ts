@@ -1,8 +1,8 @@
-import ScoreLearningElementUseCase from "../../../Core/Application/ScoreLearningElement/ScoreLearningElementUseCase";
+import ScoreElementUseCase from "../../../Core/Application/ScoreElementUseCase/ScoreElementUseCase";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
 import { filterEntitiesOfTypeMockImplUtil } from "../../TestUtils";
-import ICalculateTotalRoomScore from "../../../Core/Application/CalculateTotalRoomScore/ICalculateTotalRoomScore";
+import ICalculateSpaceScore from "../../../Core/Application/CalculateSpaceScore/ICalculateSpaceScore";
 import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import { mock } from "jest-mock-extended";
@@ -10,10 +10,10 @@ import IBackendAdapter from "../../../Core/Adapters/BackendAdapter/IBackendAdapt
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendMock = mock<IBackendAdapter>();
-const CalculateTotalRoomScoreMock = mock<ICalculateTotalRoomScore>();
+const CalculateSpaceScoreMock = mock<ICalculateSpaceScore>();
 
-describe("ScoreLearningElementUseCase", () => {
-  let systemUnderTest: ScoreLearningElementUseCase;
+describe("ScoreElementUseCase", () => {
+  let systemUnderTest: ScoreElementUseCase;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -26,25 +26,25 @@ describe("ScoreLearningElementUseCase", () => {
     CoreDIContainer.rebind<IBackendAdapter>(
       CORE_TYPES.IBackendAdapter
     ).toConstantValue(backendMock);
-    CoreDIContainer.rebind<ICalculateTotalRoomScore>(
-      USECASE_TYPES.ICalculateTotalRoomScore
-    ).toConstantValue(CalculateTotalRoomScoreMock);
+    CoreDIContainer.rebind<ICalculateSpaceScore>(
+      USECASE_TYPES.ICalculateSpaceScore
+    ).toConstantValue(CalculateSpaceScoreMock);
 
-    systemUnderTest = CoreDIContainer.resolve(ScoreLearningElementUseCase);
+    systemUnderTest = CoreDIContainer.resolve(ScoreElementUseCase);
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
   });
 
-  test("executeAsync throws error if learningElementId is not provided", async () => {
+  test("executeAsync throws error if ElementId is not provided", async () => {
     await expect(systemUnderTest.executeAsync()).rejects.toThrowError();
   });
 
   test("executeAsync throws error if entity container returns no element entity with matching ID", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
     expect(() =>
-      systemUnderTest.executeAsync({ learningElementId: 1 })
+      systemUnderTest.executeAsync({ elementId: 1 })
     ).rejects.toThrowError("Could not find");
   });
 
@@ -55,29 +55,29 @@ describe("ScoreLearningElementUseCase", () => {
     ]);
 
     expect(() =>
-      systemUnderTest.executeAsync({ learningElementId: 1 })
+      systemUnderTest.executeAsync({ elementId: 1 })
     ).rejects.toThrowError("Found more than one");
   });
 
   test("executeAsync throws error if backend throws error", async () => {
     containerSetup();
 
-    backendMock.scoreLearningElement.mockRejectedValue("error");
+    backendMock.scoreElement.mockRejectedValue("error");
 
     await expect(
-      systemUnderTest.executeAsync({ learningElementId: 1 })
-    ).rejects.toThrowError("Could not score learning element via Backend");
+      systemUnderTest.executeAsync({ elementId: 1 })
+    ).rejects.toThrowError("Could not score");
   });
 
   test("executeAsync throws error if entity container returns no matching room", async () => {
-    const LearningElementEntities = [
+    const ElementEntities = [
       {
         id: 1,
         hasScored: false,
         value: 10,
       },
     ];
-    const mock = filterEntitiesOfTypeMockImplUtil(LearningElementEntities);
+    const mock = filterEntitiesOfTypeMockImplUtil(ElementEntities);
 
     entityContainerMock.filterEntitiesOfType.mockImplementationOnce(mock);
     entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
@@ -85,48 +85,46 @@ describe("ScoreLearningElementUseCase", () => {
     );
 
     await expect(
-      systemUnderTest.executeAsync({ learningElementId: 1 })
-    ).rejects.toThrowError("Could not find room");
+      systemUnderTest.executeAsync({ elementId: 1 })
+    ).rejects.toThrowError("Could not find");
   });
 
-  test("executeAsync successfully gets element with given id, scores it, gets the room id and starts use case to calcualte new room score", async () => {
+  test("executeAsync successfully gets element with given id, scores it, gets the space id and starts use case to calcualte new space score", async () => {
     containerSetup();
 
     await expect(
       systemUnderTest.executeAsync({
-        learningElementId: 1,
+        elementId: 1,
       })
     ).resolves.toBeUndefined();
 
-    expect(CalculateTotalRoomScoreMock.execute).toHaveBeenCalledTimes(1);
+    expect(CalculateSpaceScoreMock.execute).toHaveBeenCalledTimes(1);
   });
 });
 
 function containerSetup(): void {
-  const learningElementId = 1;
-  const learningElement = {
-    id: learningElementId,
+  const elementId = 1;
+  const element = {
+    id: elementId,
     hasScored: false,
     value: 10,
   };
-  const LearningElementEntities = [
+  const ElementEntities = [
     {
-      learningElement,
+      element: element,
     },
   ];
   const roomId = 1;
   const room = {
     id: roomId,
-    learningElements: [learningElement],
+    elements: [element],
   };
-  const roomEntites = [
+  const spaceEntites = [
     {
       room,
     },
   ];
 
-  entityContainerMock.filterEntitiesOfType.mockReturnValueOnce(
-    LearningElementEntities
-  );
-  entityContainerMock.filterEntitiesOfType.mockReturnValueOnce(roomEntites);
+  entityContainerMock.filterEntitiesOfType.mockReturnValueOnce(ElementEntities);
+  entityContainerMock.filterEntitiesOfType.mockReturnValueOnce(spaceEntites);
 }
