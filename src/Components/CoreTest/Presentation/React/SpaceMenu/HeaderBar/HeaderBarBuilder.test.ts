@@ -1,4 +1,4 @@
-import HeaderBarBuilder from "../../../../../Core/Presentation/React/RoomMenu/HeaderBar/HeaderBarBuilder";
+import HeaderBarBuilder from "../../../../../Core/Presentation/React/SpaceMenu/HeaderBar/HeaderBarBuilder";
 
 describe("HeaderBarBuilder", () => {
   let systemUnderTest: HeaderBarBuilder;

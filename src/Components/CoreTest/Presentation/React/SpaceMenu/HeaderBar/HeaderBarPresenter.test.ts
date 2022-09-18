@@ -1,5 +1,5 @@
-import HeaderBarPresenter from "../../../../../Core/Presentation/React/RoomMenu/HeaderBar/HeaderBarPresenter";
-import HeaderBarViewModel from "../../../../../Core/Presentation/React/RoomMenu/HeaderBar/HeaderBarViewModel";
+import HeaderBarPresenter from "../../../../../Core/Presentation/React/SpaceMenu/HeaderBar/HeaderBarPresenter";
+import HeaderBarViewModel from "../../../../../Core/Presentation/React/SpaceMenu/HeaderBar/HeaderBarViewModel";
 
 describe("HeaderBarPresenter", () => {
   let systemUnderTest: HeaderBarPresenter;
