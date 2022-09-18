@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import TextComponent from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/TextComponent";
 
-describe("TextLearningElementSubComponent", () => {
+describe("TextElementSubComponent", () => {
   test("should render its Text", () => {
     const text = "Hello World";
     const { getByText } = render(<TextComponent textContent={text} />);

@@ -1,9 +1,9 @@
 import mock from "jest-mock-extended/lib/Mock";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import ILearningElementPort from "../../../../../Core/Ports/LearningElementPort/ILearningElementPort";
-import LearningElementModalBuilder from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningElementModal/LearningElementModalBuilder";
-import LearningElementModalViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningElementModal/LearningElementModalViewModel";
+import IElementPort from "../../../../../Core/Ports/ElementPort/IElementPort";
+import ElementModalBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalBuilder";
+import ElementModalViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
 import ViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/ViewModelControllerProvider";
 
 const registerTupelMock = jest.spyOn(
@@ -11,20 +11,20 @@ const registerTupelMock = jest.spyOn(
   "registerTupel"
 );
 
-const learningElementPortMock = mock<ILearningElementPort>();
+const elementPortMock = mock<IElementPort>();
 
-describe("LearningElementModalBuilder", () => {
-  let systemUnderTest: LearningElementModalBuilder;
+describe("elementModalBuilder", () => {
+  let systemUnderTest: ElementModalBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
-    CoreDIContainer.rebind<ILearningElementPort>(
-      PORT_TYPES.ILearningElementPort
-    ).toConstantValue(learningElementPortMock);
+    CoreDIContainer.rebind<IElementPort>(
+      PORT_TYPES.IElementPort
+    ).toConstantValue(elementPortMock);
   });
 
   beforeEach(() => {
-    systemUnderTest = new LearningElementModalBuilder();
+    systemUnderTest = new ElementModalBuilder();
   });
 
   afterAll(() => {
@@ -41,19 +41,17 @@ describe("LearningElementModalBuilder", () => {
     expect(registerTupelMock).toHaveBeenCalledWith(
       systemUnderTest["viewModel"],
       systemUnderTest["controller"],
-      LearningElementModalViewModel
+      ElementModalViewModel
     );
   });
 
-  test("buildPresenter builds the presenter and registers presenter with the LearningElementPort", () => {
+  test("buildPresenter builds the presenter and registers presenter with the ElementPort", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 
     expect(systemUnderTest["presenter"]).toBeDefined();
-    expect(
-      learningElementPortMock.registerModalPresenter
-    ).toHaveBeenCalledTimes(1);
-    expect(learningElementPortMock.registerModalPresenter).toHaveBeenCalledWith(
+    expect(elementPortMock.registerModalPresenter).toHaveBeenCalledTimes(1);
+    expect(elementPortMock.registerModalPresenter).toHaveBeenCalledWith(
       systemUnderTest["presenter"]
     );
   });

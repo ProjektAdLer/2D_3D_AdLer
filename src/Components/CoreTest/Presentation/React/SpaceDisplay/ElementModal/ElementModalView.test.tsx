@@ -17,7 +17,7 @@ fakeModel.elementData.Value = {
 
 const fakeController = mock<ElementModalController>();
 
-describe("LearningElementModal", () => {
+describe("ElementModal", () => {
   test("doesn't render without controller", () => {
     useBuilderMock([fakeModel, undefined]);
     const { container } = render(<ElementModal />);
@@ -80,11 +80,11 @@ describe("LearningElementModal", () => {
     const componentUnderTest = render(<ElementModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
     expect(
-      componentUnderTest.getByText("No Learning Element selected")
+      componentUnderTest.getByText("No Element selected")
     ).toBeInTheDocument();
   });
 
-  test("should call controller with learning element id when closed", () => {
+  test("should call controller with element id when closed", () => {
     useBuilderMock([fakeModel, fakeController]);
 
     const componentUnderTest = render(<ElementModal />);
