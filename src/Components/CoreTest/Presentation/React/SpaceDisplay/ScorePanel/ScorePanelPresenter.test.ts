@@ -1,5 +1,5 @@
-import ScorePanelPresenter from "../../../../../Core/Presentation/React/LearningRoomDisplay/ScorePanel/ScorePanelPresenter";
-import ScorePanelViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/ScorePanel/ScorePanelViewModel";
+import ScorePanelPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanelPresenter";
+import ScorePanelViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanelViewModel";
 
 describe("ScorePanelPresenter", () => {
   let systemUnderTest: ScorePanelPresenter;
