@@ -3,9 +3,9 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import IUIPort from "../../../../../Core/Ports/UIPort/IUIPort";
-import BottomTooltipBuilder from "../../../../../Core/Presentation/React/LearningRoomDisplay/BottomTooltip/BottomTooltipBuilder";
-import BottomTooltipPresenter from "../../../../../Core/Presentation/React/LearningRoomDisplay/BottomTooltip/BottomTooltipPresenter";
-import BottomTooltipViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/BottomTooltip/BottomTooltipViewModel";
+import BottomTooltipBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipBuilder";
+import BottomTooltipPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipPresenter";
+import BottomTooltipViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipViewModel";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
