@@ -6,7 +6,7 @@ import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilder
 
 const viewModelMock = new WorldGoalPanelViewModel();
 
-describe("LearningWorldGoalPanel", () => {
+describe("WorldGoalPanel", () => {
   test("should render", () => {
     viewModelMock.worldGoal.Value = "Test World";
     useBuilderMock([viewModelMock, undefined]);
@@ -16,7 +16,7 @@ describe("LearningWorldGoalPanel", () => {
     expect(componentUnderTest.getByText("Lernziel")).toBeInTheDocument();
   });
 
-  test("should not render, if no Learning World Goal is provided", () => {
+  test("should not render, if no  World Goal is provided", () => {
     //@ts-ignore
     viewModelMock.worldGoal.Value = undefined;
     useBuilderMock([viewModelMock, undefined]);
@@ -30,9 +30,7 @@ describe("LearningWorldGoalPanel", () => {
     viewModelMock.worldGoal.Value = "Test World";
     useBuilderMock([viewModelMock, undefined]);
 
-    const componentUnderTest = render(
-      <WorldGoalPanel key="LearningWorldGoalPanel" />
-    );
+    const componentUnderTest = render(<WorldGoalPanel key="WorldGoalPanel" />);
 
     expect(componentUnderTest.getByText("Lernziel")).toBeInTheDocument();
     fireEvent.click(componentUnderTest.getByRole("img"));
