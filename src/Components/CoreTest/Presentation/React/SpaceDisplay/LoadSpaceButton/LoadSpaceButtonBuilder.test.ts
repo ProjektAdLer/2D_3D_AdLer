@@ -1,16 +1,16 @@
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
-import LoadRoomButtonBuilder from "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadRoomButton/LoadRoomButtonBuilder";
-import LoadRoomButtonController from "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadRoomButton/LoadRoomButtonController";
-import LoadRoomButtonPresenter from "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadRoomButton/LoadRoomButtonPresenter";
-import LoadRoomButtonViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadRoomButton/LoadRoomButtonViewModel";
+import LoadSpaceButtonBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/LoadSpaceButton/LoadSpaceButtonBuilder";
+import LoadSpaceButtonController from "../../../../../Core/Presentation/React/SpaceDisplay/LoadSpaceButton/LoadSpaceButtonController";
+import LoadSpaceButtonPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/LoadSpaceButton/LoadSpaceButtonPresenter";
+import LoadSpaceButtonViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/LoadSpaceButton/LoadSpaceButtonViewModel";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
 
-describe("LoadRoomButtonBuilder", () => {
-  let systemUnderTest: LoadRoomButtonBuilder;
+describe("LoadSpaceButtonBuilder", () => {
+  let systemUnderTest: LoadSpaceButtonBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -21,7 +21,7 @@ describe("LoadRoomButtonBuilder", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new LoadRoomButtonBuilder();
+    systemUnderTest = new LoadSpaceButtonBuilder();
   });
 
   afterAll(() => {
@@ -34,7 +34,7 @@ describe("LoadRoomButtonBuilder", () => {
 
     expect(systemUnderTest["controller"]).toBeDefined();
     expect(systemUnderTest["controller"]).toBeInstanceOf(
-      LoadRoomButtonController
+      LoadSpaceButtonController
     );
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledTimes(
       1
@@ -42,7 +42,7 @@ describe("LoadRoomButtonBuilder", () => {
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledWith(
       systemUnderTest["viewModel"],
       systemUnderTest["controller"],
-      LoadRoomButtonViewModel
+      LoadSpaceButtonViewModel
     );
   });
 
@@ -52,7 +52,7 @@ describe("LoadRoomButtonBuilder", () => {
 
     expect(systemUnderTest["presenter"]).toBeDefined();
     expect(systemUnderTest["presenter"]).toBeInstanceOf(
-      LoadRoomButtonPresenter
+      LoadSpaceButtonPresenter
     );
   });
 });

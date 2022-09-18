@@ -7,7 +7,7 @@ import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilder
 
 const fakeController = mock<ILoadSpaceButtonController>();
 
-describe("LoadRoomButtonView", () => {
+describe("LoadSpaceButtonView", () => {
   test("should render", () => {
     useBuilderMock([undefined, undefined]);
     render(<LoadSpaceButton />);
