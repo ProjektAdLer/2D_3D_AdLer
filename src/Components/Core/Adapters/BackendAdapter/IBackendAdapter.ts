@@ -14,5 +14,5 @@ export default interface IBackendAdapter {
   scoreElement(elementId: ElementID): Promise<void>;
 
   logInUser(userCredentials: UserCredentials): Promise<string>;
-  getCoursesAvalibaleForUser(userToken: string): Promise<CourseListTO>;
+  getCoursesAvailableForUser(userToken: string): Promise<CourseListTO>;
 }

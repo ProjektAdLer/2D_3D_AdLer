@@ -1,8 +1,8 @@
 import ElementTO from "src/Components/Core/Application/DataTransportObjects/ElementTO";
 import ElementEntity from "src/Components/Core/Domain/Entities/ElementEntity";
 import H5PElementData from "src/Components/Core/Domain/Entities/ElementData/H5PElementData";
-import ImageLearningElementData from "src/Components/Core/Domain/Entities/ElementData/ImageElementData";
-import TextLearningElementData from "src/Components/Core/Domain/Entities/ElementData/TextElementData";
+import ImageElementData from "src/Components/Core/Domain/Entities/ElementData/ImageElementData";
+import TextElementData from "src/Components/Core/Domain/Entities/ElementData/TextElementData";
 import VideoElementData from "src/Components/Core/Domain/Entities/ElementData/VideoElementData";
 
 export const h5pInput: ElementTO = {
@@ -51,7 +51,7 @@ export const textInput: ElementTO = {
   ],
   elementData: {
     type: "text",
-  } as TextLearningElementData,
+  } as TextElementData,
 };
 
 export const textExpected: Partial<ElementEntity> = {
@@ -66,7 +66,7 @@ export const textExpected: Partial<ElementEntity> = {
   ],
   elementData: {
     type: "text",
-  } as TextLearningElementData,
+  } as TextElementData,
 };
 
 export const imageInput: ElementTO = {
@@ -81,7 +81,7 @@ export const imageInput: ElementTO = {
   ],
   elementData: {
     type: "image",
-  } as ImageLearningElementData,
+  } as ImageElementData,
 };
 
 export const imageExpected: Partial<ElementEntity> = {
@@ -96,7 +96,7 @@ export const imageExpected: Partial<ElementEntity> = {
   ],
   elementData: {
     type: "image",
-  } as ImageLearningElementData,
+  } as ImageElementData,
 };
 
 export const videoInput: ElementTO = {
@@ -129,7 +129,7 @@ export const videoExpected: Partial<ElementEntity> = {
   } as VideoElementData,
 };
 
-export const mapLearningElementInputAndExpected: [
+export const mapElementInputAndExpected: [
   string,
   ElementTO,
   Partial<ElementEntity>

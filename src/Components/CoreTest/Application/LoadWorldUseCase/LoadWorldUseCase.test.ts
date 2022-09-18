@@ -6,19 +6,19 @@ import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
 import IUIPort from "../../../Core/Ports/UIPort/IUIPort";
 import UserDataEntity from "../../../Core/Domain/Entities/UserDataEntity";
-import ILearningWorldPort from "../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
-import LearningRoomEntity from "../../../Core/Domain/Entities/LearningRoomEntity";
-import LearningElementEntity from "../../../Core/Domain/Entities/LearningElementEntity";
-import LearningWorldEntity from "../../../Core/Domain/Entities/LearningWorldEntity";
+import IWorldPort from "../../../Core/Ports/WorldPort/IWorldPort";
+import SpaceEntity from "../../../Core/Domain/Entities/SpaceEntity";
+import ElementEntity from "../../../Core/Domain/Entities/ElementEntity";
+import WorldEntity from "../../../Core/Domain/Entities/WorldEntity";
 import ILoadAvatarUseCase from "../../../Core/Application/LoadAvatar/ILoadAvatarUseCase";
 import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IBackend from "../../../Core/Adapters/BackendAdapter/IBackendAdapter";
-import { minimalGetLearningWorldDataResponse } from "../../Adapters/BackendAdapter/BackendResponses";
-import { mapLearningElementInputAndExpected } from "./LoadWorldMockedObjects";
-import LearningElementTO from "../../../Core/Application/DataTransportObjects/LearningElementTO";
+import { minimalGetWorldDataResponse } from "../../Adapters/BackendAdapter/BackendResponses";
+import { mapElementInputAndExpected } from "./LoadWorldMockedObjects";
+import elementTO from "../../../Core/Application/DataTransportObjects/ElementTO";
 
 const backendMock = mock<IBackend>();
-const learningWorldPortMock = mock<ILearningWorldPort>();
+const worldPortMock = mock<IWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const uiPortMock = mock<IUIPort>();
 const loadAvatarUsecaseMock = mock<ILoadAvatarUseCase>();
@@ -42,8 +42,8 @@ describe("LoadWorldUseCase", () => {
     CoreDIContainer.rebind(CORE_TYPES.IBackendAdapter).toConstantValue(
       backendMock
     );
-    CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      learningWorldPortMock
+    CoreDIContainer.rebind(PORT_TYPES.IWorldPort).toConstantValue(
+      worldPortMock
     );
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
       entityContainerMock
@@ -114,19 +114,17 @@ describe("LoadWorldUseCase", () => {
     );
   });
 
-  test("doesn't load a Learning World, if a entity is available", async () => {
+  test("doesn't load a World, if an entity is available", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
       mockedGetEntitiesOfTypeUserDataReturnValue
     );
 
-    const mockedLearningWorldEntity = new LearningWorldEntity();
-    mockedLearningWorldEntity.worldName =
-      minimalGetLearningWorldDataResponse.worldName;
-    mockedLearningWorldEntity.worldGoal =
-      minimalGetLearningWorldDataResponse.worldGoal;
-    mockedLearningWorldEntity.learningRooms = [];
+    const mockedWorldEntity = new WorldEntity();
+    mockedWorldEntity.worldName = minimalGetWorldDataResponse.worldName;
+    mockedWorldEntity.worldGoal = minimalGetWorldDataResponse.worldGoal;
+    mockedWorldEntity.spaces = [];
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
-      mockedLearningWorldEntity,
+      mockedWorldEntity,
     ]);
 
     await systemUnderTest.executeAsync();
@@ -134,20 +132,18 @@ describe("LoadWorldUseCase", () => {
     expect(entityContainerMock.createEntity).not.toHaveBeenCalled();
   });
 
-  test("loads the Learning World and notifies its presenters", async () => {
+  test("loads the World and notifies its presenters", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
       mockedGetEntitiesOfTypeUserDataReturnValue
     );
-    // mock learning world response
+    // mock world response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([]);
 
     // mock backend response
-    backendMock.getLearningWorldData.mockResolvedValueOnce(
-      minimalGetLearningWorldDataResponse
-    );
+    backendMock.getWorldData.mockResolvedValueOnce(minimalGetWorldDataResponse);
 
-    backendMock.getCoursesAvalibaleForUser.mockResolvedValue({
+    backendMock.getCoursesAvailableForUser.mockResolvedValue({
       courses: [
         {
           courseId: 1,
@@ -157,42 +153,30 @@ describe("LoadWorldUseCase", () => {
     });
 
     // mock entity creation
-    const mockedLearningWorldEntity = new LearningWorldEntity();
-    mockedLearningWorldEntity.worldName =
-      minimalGetLearningWorldDataResponse.worldName;
-    mockedLearningWorldEntity.worldGoal =
-      minimalGetLearningWorldDataResponse.worldGoal;
-    mockedLearningWorldEntity.learningRooms = [];
+    const mockedWorldEntity = new WorldEntity();
+    mockedWorldEntity.worldName = minimalGetWorldDataResponse.worldName;
+    mockedWorldEntity.worldGoal = minimalGetWorldDataResponse.worldGoal;
+    mockedWorldEntity.spaces = [];
 
-    entityContainerMock.createEntity.mockReturnValueOnce(
-      mock<LearningElementEntity>()
-    );
-    entityContainerMock.createEntity.mockReturnValueOnce(
-      mock<LearningRoomEntity>()
-    );
-    entityContainerMock.createEntity.mockReturnValueOnce(
-      mockedLearningWorldEntity
-    );
+    entityContainerMock.createEntity.mockReturnValueOnce(mock<ElementEntity>());
+    entityContainerMock.createEntity.mockReturnValueOnce(mock<SpaceEntity>());
+    entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
 
     await systemUnderTest.executeAsync();
 
-    expect(backendMock.getLearningWorldData).toHaveBeenCalledTimes(1);
+    expect(backendMock.getWorldData).toHaveBeenCalledTimes(1);
     expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(3);
-    expect(learningWorldPortMock.presentLearningWorld).toHaveBeenCalledTimes(1);
+    expect(worldPortMock.presentWorld).toHaveBeenCalledTimes(1);
   });
 
-  test.each(mapLearningElementInputAndExpected)(
-    "mapLearningElement maps LearningElementTO to LearningElementEntity for %s",
-    (
-      _text: string,
-      i: LearningElementTO,
-      e: Partial<LearningElementEntity>
-    ) => {
-      systemUnderTest["mapLearningElement"](i);
+  test.each(mapElementInputAndExpected)(
+    "mapElement maps ElementTO to ElementEntity for %s",
+    (_text: string, i: elementTO, e: Partial<ElementEntity>) => {
+      systemUnderTest["mapElement"](i);
 
       expect(entityContainerMock.createEntity).toHaveBeenCalledWith(
         e,
-        LearningElementEntity
+        ElementEntity
       );
     }
   );
