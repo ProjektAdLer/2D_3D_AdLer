@@ -2,7 +2,7 @@ import { ContainerModule } from "inversify";
 import AvatarBuilder from "../../Presentation/Babylon/Avatar/AvatarBuilder";
 import DoorBuilder from "../../Presentation/Babylon/Door/DoorBuilder";
 import ElementBuilder from "../../Presentation/Babylon/Elements/ElementBuilder";
-import SpaceBuilder from "../../Presentation/Babylon/Space/SpaceBuilder";
+import SpaceBuilder from "../../Presentation/Babylon/Spaces/SpaceBuilder";
 import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
 import PresentationDirector from "../../Presentation/PresentationBuilder/PresentationDirector";

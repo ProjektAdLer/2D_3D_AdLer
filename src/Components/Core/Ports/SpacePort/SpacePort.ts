@@ -1,6 +1,6 @@
 import ISpacePort from "./ISpacePort";
 import IScorePanelPresenter from "../../Presentation/React/SpaceDisplay/ScorePanel/IScorePanelPresenter";
-import ISpacePresenter from "../../Presentation/Babylon/Space/ISpacePresenter";
+import ISpacePresenter from "../../Presentation/Babylon/Spaces/ISpacePresenter";
 import { injectable } from "inversify";
 import { logger } from "src/Lib/Logger";
 import SpaceTO from "../../Application/DataTransportObjects/SpaceTO";

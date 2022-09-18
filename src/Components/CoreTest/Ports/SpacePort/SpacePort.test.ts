@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import BUILDER_TYPES from "../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import SpacePort from "../../../Core/Ports/SpacePort/SpacePort";
-import ISpacePresenter from "../../../Core/Presentation/Babylon/Space/ISpacePresenter";
+import ISpacePresenter from "../../../Core/Presentation/Babylon/Spaces/ISpacePresenter";
 import PresentationBuilder from "../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
 import ScorePanelPresenter from "../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanelPresenter";
 import ScorePanelViewModel from "../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanelViewModel";

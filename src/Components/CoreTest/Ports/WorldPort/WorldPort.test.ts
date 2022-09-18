@@ -9,7 +9,7 @@ import {
   WorldTO,
 } from "../../../Core/Ports/WorldPort/IWorldPort";
 import WorldPort from "../../../Core/Ports/WorldPort/WorldPort";
-import ISpacePresenter from "../../../Core/Presentation/Babylon/Space/ISpacePresenter";
+import ISpacePresenter from "../../../Core/Presentation/Babylon/Spaces/ISpacePresenter";
 import INavigation from "../../../Core/Presentation/Babylon/Navigation/INavigation";
 import IPresentationBuilder from "../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../../Core/Presentation/PresentationBuilder/IPresentationDirector";

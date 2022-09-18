@@ -4,7 +4,7 @@ import BUILDER_TYPES from "../../DependencyInjection/Builders/BUILDER_TYPES";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import type IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
 import type IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
-import ISpacePresenter from "../../Presentation/Babylon/Space/ISpacePresenter";
+import ISpacePresenter from "../../Presentation/Babylon/Spaces/ISpacePresenter";
 import IDropdownPresenter from "../../Presentation/React/SpaceDisplay/ElementsDropdown/IElementsDropdownPresenter";
 import type INavigation from "../../Presentation/Babylon/Navigation/INavigation";
 import IWorldNamePanelPresenter from "../../Presentation/React/SpaceDisplay/WorldNamePanel/IWorldNamePanelPresenter";
