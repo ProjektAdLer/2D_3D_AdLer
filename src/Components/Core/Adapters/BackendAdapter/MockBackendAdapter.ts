@@ -14,7 +14,7 @@ import UserCredentials from "./Types/UserCredentials";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendAdapter {
-  getCoursesAvalibaleForUser(userToken: string): Promise<CourseListTO> {
+  getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
     const test = {
       courses: [
         {

@@ -7,17 +7,17 @@ jest.mock(
 );
 
 jest.mock(
-  "../../../../../Core/Presentation/React/LearningRoomDisplay/FullscreenSwitch/FullscreenSwitch",
+  "../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitch",
   () => "string"
 );
 
 jest.mock(
-  "../../../../../Core/Presentation/React/LearningRoomDisplay/DebugPanel/DebugPanel",
+  "../../../../../Core/Presentation/React/SpaceDisplay/DebugPanel/DebugPanel",
   () => "string"
 );
 
 jest.mock(
-  "../../../../../Core/Presentation/React/LearningRoomDisplay/LoadRoomButton/LoadRoomButton",
+  "../../../../../Core/Presentation/React/SpaceDisplay/LoadSpaceButton/LoadSpaceButton",
   () => "string"
 );
 describe("LogoMenuBar", () => {

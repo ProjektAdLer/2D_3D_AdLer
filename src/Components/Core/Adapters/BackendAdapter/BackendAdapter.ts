@@ -16,7 +16,7 @@ import CourseListTO from "../../Application/DataTransportObjects/CourseListTO";
 
 @injectable()
 export default class BackendAdapter implements IBackendAdapter {
-  async getCoursesAvalibaleForUser(userToken: string): Promise<CourseListTO> {
+  async getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
     const response = await axios.get<CourseListTO>(
       config.serverURL + "/Courses",
       {
@@ -41,22 +41,22 @@ export default class BackendAdapter implements IBackendAdapter {
       worldId,
     });
 
-    // // omit first learning room, since it is only used to store the dsl
-    // dsl.learningWorld.learningSpaces =
-    //   dsl.learningWorld.learningSpaces.slice(1);
+    // // omit first space, since it is only used to store the dsl
+    // dsl.world.spaces =
+    //   dsl.world.spaces.slice(1);
 
-    // create LearningWorldTO with learning world data
+    // create WorldTO with world data
     let response: Partial<WorldTO> = {
       worldName: dsl.world.identifier.value,
       worldGoal: dsl.world.goals,
     };
 
-    // create LearningElementTOs
+    // create ElementTOs
     let elements: ElementTO[] = dsl.world.elements.flatMap((element) =>
       element.elementType in ElementTypes ? this.mapElement(element) : []
     );
 
-    // create LearningRoomTOs and connect them with their learning elements
+    // create SpaceTOs and connect them with their elements
     response.spaces = dsl.world.spaces.map((space) => {
       return {
         id: space.spaceId,
