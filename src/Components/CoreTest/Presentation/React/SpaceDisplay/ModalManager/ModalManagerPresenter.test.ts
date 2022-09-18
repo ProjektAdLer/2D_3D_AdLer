@@ -1,6 +1,6 @@
-import ModalManagerPresenter from "../../../../../../../src/Components/Core/Presentation/React/LearningRoomDisplay/ModalManager/ModalManagerPresenter";
-import IModalManagerPresenter from "../../../../../../../src/Components/Core/Presentation/React/LearningRoomDisplay/ModalManager/IModalManagerPresenter";
-import ModalManagerViewModel from "../../../../../../../src/Components/Core/Presentation/React/LearningRoomDisplay/ModalManager/ModalManagerViewModel";
+import ModalManagerPresenter from "../../../../../../../src/Components/Core/Presentation/React/SpaceDisplay/ModalManager/ModalManagerPresenter";
+import IModalManagerPresenter from "../../../../../../../src/Components/Core/Presentation/React/SpaceDisplay/ModalManager/IModalManagerPresenter";
+import ModalManagerViewModel from "../../../../../../../src/Components/Core/Presentation/React/SpaceDisplay/ModalManager/ModalManagerViewModel";
 
 describe("ModalManagerPresenter", () => {
   let systemUnderTest: IModalManagerPresenter;

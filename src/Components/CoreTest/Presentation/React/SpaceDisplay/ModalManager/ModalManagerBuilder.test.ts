@@ -3,10 +3,10 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import IUIPort from "../../../../../Core/Ports/UIPort/IUIPort";
-import ModalManagerBuilder from "../../../../../Core/Presentation/React/LearningRoomDisplay/ModalManager/ModalManagerBuilder";
-import ModalManagerController from "../../../../../Core/Presentation/React/LearningRoomDisplay/ModalManager/ModalManagerController";
-import ModalManagerPresenter from "../../../../../Core/Presentation/React/LearningRoomDisplay/ModalManager/ModalManagerPresenter";
-import ModalManagerViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/ModalManager/ModalManagerViewModel";
+import ModalManagerBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/ModalManager/ModalManagerBuilder";
+import ModalManagerController from "../../../../../Core/Presentation/React/SpaceDisplay/ModalManager/ModalManagerController";
+import ModalManagerPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/ModalManager/ModalManagerPresenter";
+import ModalManagerViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ModalManager/ModalManagerViewModel";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
