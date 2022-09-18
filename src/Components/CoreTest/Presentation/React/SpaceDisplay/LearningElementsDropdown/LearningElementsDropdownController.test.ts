@@ -1,35 +1,35 @@
 import { mock } from "jest-mock-extended";
-import ILearningElementStartedUseCase from "../../../../../Core/Application/LearningElementStarted/ILearningElementStartedUseCase";
+import IElementStartedUseCase from "../../../../../Core/Application/ElementStarted/IElementStartedUseCase";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import LearningElementsDropdownController from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningElementsDropdown/LearningElementsDropdownController";
+import ElementsDropdownController from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownController";
 
-const useCaseMock = mock<ILearningElementStartedUseCase>();
+const useCaseMock = mock<IElementStartedUseCase>();
 
-describe("LearningElementsDropdownController", () => {
-  let systemUnderTest: LearningElementsDropdownController;
+describe("ElementsDropdownController", () => {
+  let systemUnderTest: ElementsDropdownController;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.unbindAll();
-    CoreDIContainer.bind(
-      USECASE_TYPES.ILearningElementStartedUseCase
-    ).toConstantValue(useCaseMock);
+    CoreDIContainer.bind(USECASE_TYPES.IElementStartedUseCase).toConstantValue(
+      useCaseMock
+    );
   });
 
   beforeEach(() => {
-    systemUnderTest = new LearningElementsDropdownController();
+    systemUnderTest = new ElementsDropdownController();
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
   });
 
-  test("should call the startLearningElement UseCase", () => {
-    systemUnderTest.startLearningElement(1337);
+  test("should call the startElement UseCase", () => {
+    systemUnderTest.startElement(1337);
     expect(useCaseMock.execute).toHaveBeenCalledTimes(1);
     expect(useCaseMock.execute).toHaveBeenCalledWith({
-      learningElementId: 1337,
+      elementId: 1337,
     });
   });
 });

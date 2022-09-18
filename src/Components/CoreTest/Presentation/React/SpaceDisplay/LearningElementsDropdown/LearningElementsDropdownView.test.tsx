@@ -29,20 +29,20 @@ modelWithElements.elements.Value = [
 
 const mockedController = mock<IElementsDropdownController>();
 
-describe("LearningElementsDrowdownView", () => {
-  test("does no render, if no Learning Elements are provided", () => {
+describe("ElementsDropdownView", () => {
+  test("does not render, if no Elements are provided", () => {
     useBuilderMock([undefined, mockedController]);
     const elementUnderTest = render(<ElementsDropdown />);
     expect(elementUnderTest.container.children).toBeEmptyDOMElement;
   });
 
-  test("does no render, if no controller is provided", () => {
+  test("does not render, if no controller is provided", () => {
     useBuilderMock([modelWithElements, undefined]);
     const elementUnderTest = render(<ElementsDropdown />);
     expect(elementUnderTest.container.children).toBeEmptyDOMElement;
   });
 
-  test("renders its Learning Elements", () => {
+  test("renders its Elements", () => {
     useBuilderMock([modelWithElements, mockedController]);
     // simulate click on the dropdown button
     const elementUnderTest = render(<ElementsDropdown />);
@@ -52,7 +52,7 @@ describe("LearningElementsDrowdownView", () => {
     expect(elementUnderTest.getByText("Element 2")).toBeInTheDocument();
   });
 
-  test("should call controller with LearningElement Idd, when element in clicked", () => {
+  test("should call controller with Element Id, when element in clicked", () => {
     // Arrnge
     useBuilderMock([modelWithElements, mockedController]);
 

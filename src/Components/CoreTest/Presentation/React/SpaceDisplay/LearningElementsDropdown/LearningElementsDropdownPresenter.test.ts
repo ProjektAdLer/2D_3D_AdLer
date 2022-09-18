@@ -1,25 +1,25 @@
-import ILearningElementsDropdownPresenter from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningElementsDropdown/ILearningElementsDropdownPresenter";
-import LearningElementsDropdownViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningElementsDropdown/LearningElementsDropdownViewModel";
-import LearningElementDropdownPresenter from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningElementsDropdown/LearningElementsDropdownPresenter";
-describe("LearningElementsDropDownPresenter", () => {
-  let systemUnderTest: ILearningElementsDropdownPresenter;
-  let vm: LearningElementsDropdownViewModel;
+import IElementsDropdownPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/IElementsDropdownPresenter";
+import ElementsDropdownViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownViewModel";
+import ElementsDropdownPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownPresenter";
+describe("ElementsDropDownPresenter", () => {
+  let systemUnderTest: IElementsDropdownPresenter;
+  let vm: ElementsDropdownViewModel;
   beforeEach(() => {
-    vm = new LearningElementsDropdownViewModel();
-    systemUnderTest = new LearningElementDropdownPresenter(vm);
+    vm = new ElementsDropdownViewModel();
+    systemUnderTest = new ElementsDropdownPresenter(vm);
   });
 
-  test("should set the Learning Elements in the ViewModel", () => {
-    const learningElements = [
+  test("should set the  Elements in the ViewModel", () => {
+    const elements = [
       {
         id: 1,
         name: "Test",
-        learningElementData: {
+        elementData: {
           type: "text",
         },
       },
     ];
-    systemUnderTest.presentLearningElements(learningElements);
-    expect(vm.learningElements.Value).toBe(learningElements);
+    systemUnderTest.presentElements(elements);
+    expect(vm.elements.Value).toBe(elements);
   });
 });
