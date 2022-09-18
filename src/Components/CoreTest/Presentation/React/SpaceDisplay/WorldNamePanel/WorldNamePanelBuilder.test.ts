@@ -2,32 +2,30 @@ import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import ILearningWorldPort from "../../../../../Core/Ports/LearningWorldPort/ILearningWorldPort";
-import LearningWorldNamePanelBuilder from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningWorldNamePanel/LearningWorldNamePanelBuilder";
-import LearningWorldNamePanelController from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningWorldNamePanel/LearningWorldNamePanelController";
-import LearningWorldNamePanelPresenter from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningWorldNamePanel/LearningWorldNamePanelPresenter";
-import LearningWorldNamePanelViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningWorldNamePanel/LearningWorldNamePanelViewModel";
+import IWorldPort from "../../../../../Core/Ports/WorldPort/IWorldPort";
+import WorldNamePanelBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/WorldNamePanel/WorldNamePanelBuilder";
+import WorldNamePanelController from "../../../../../Core/Presentation/React/SpaceDisplay/WorldNamePanel/WorldNamePanelController";
+import WorldNamePanelPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/WorldNamePanel/WorldNamePanelPresenter";
+import WorldNamePanelViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/WorldNamePanel/WorldNamePanelViewModel";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
-const learningWorldPort = mock<ILearningWorldPort>();
+const worldPort = mock<IWorldPort>();
 
-describe("LearningWorldNamePanelBuilder", () => {
-  let systemUnderTest: LearningWorldNamePanelBuilder;
+describe("WorldNamePanelBuilder", () => {
+  let systemUnderTest: WorldNamePanelBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      learningWorldPort
-    );
+    CoreDIContainer.rebind(PORT_TYPES.IWorldPort).toConstantValue(worldPort);
     CoreDIContainer.rebind(
       CORE_TYPES.IViewModelControllerProvider
     ).toConstantValue(viewModelControllerProviderMock);
   });
 
   beforeEach(() => {
-    systemUnderTest = new LearningWorldNamePanelBuilder();
+    systemUnderTest = new WorldNamePanelBuilder();
   });
 
   afterAll(() => {
@@ -40,7 +38,7 @@ describe("LearningWorldNamePanelBuilder", () => {
 
     expect(systemUnderTest["controller"]).toBeDefined();
     expect(systemUnderTest["controller"]).toBeInstanceOf(
-      LearningWorldNamePanelController
+      WorldNamePanelController
     );
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledTimes(
       1
@@ -48,23 +46,21 @@ describe("LearningWorldNamePanelBuilder", () => {
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledWith(
       systemUnderTest["viewModel"],
       systemUnderTest["controller"],
-      LearningWorldNamePanelViewModel
+      WorldNamePanelViewModel
     );
   });
 
-  test("buildPresenter builds the presenter and register it with the learningWorldPort", () => {
+  test("buildPresenter builds the presenter and register it with the worldPort", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 
     expect(systemUnderTest["presenter"]).toBeDefined();
     expect(systemUnderTest["presenter"]).toBeInstanceOf(
-      LearningWorldNamePanelPresenter
+      WorldNamePanelPresenter
     );
-    expect(
-      learningWorldPort.registerLearningWorldNamePanelPresenter
-    ).toHaveBeenCalledTimes(1);
-    expect(
-      learningWorldPort.registerLearningWorldNamePanelPresenter
-    ).toHaveBeenCalledWith(systemUnderTest["presenter"]);
+    expect(worldPort.registerWorldNamePanelPresenter).toHaveBeenCalledTimes(1);
+    expect(worldPort.registerWorldNamePanelPresenter).toHaveBeenCalledWith(
+      systemUnderTest["presenter"]
+    );
   });
 });
