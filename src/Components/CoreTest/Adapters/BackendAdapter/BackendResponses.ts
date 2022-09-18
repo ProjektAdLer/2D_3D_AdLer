@@ -3,13 +3,13 @@ import SpaceTO from "src/Components/Core/Application/DataTransportObjects/SpaceT
 import WorldTO from "src/Components/Core/Application/DataTransportObjects/WorldTO";
 import IDSL from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
 
-export const minimalGetLearningWorldDataResponse: WorldTO = {
+export const minimalGetWorldDataResponse: WorldTO = {
   worldName: "TestWorld",
   worldGoal: "TestGoal",
   spaces: [
     {
       id: 1,
-      name: "TestRoom",
+      name: "TestSpace",
       elements: [
         {
           id: 1,
@@ -27,19 +27,19 @@ export const minimalGetLearningWorldDataResponse: WorldTO = {
 
 // expected structure of the TOs
 // this needs to be updated if the TOs changes
-export const expectedLearningWorldTO: WorldTO = {
+export const expectedWorldTO: WorldTO = {
   worldName: expect.any(String),
   worldGoal: expect.any(String),
   spaces: expect.any(Array),
 };
 
-export const expectedLearningRoomTO: SpaceTO = {
+export const expectedSpaceTO: SpaceTO = {
   id: expect.any(Number),
   name: expect.any(String),
   elements: expect.any(Array),
 };
 
-export const expectedLearningElementTO: ElementTO = {
+export const expectedElementTO: ElementTO = {
   id: expect.any(Number),
   name: expect.any(String),
   value: expect.any(Number),

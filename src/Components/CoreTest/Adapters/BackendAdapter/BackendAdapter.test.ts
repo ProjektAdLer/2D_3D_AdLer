@@ -1,7 +1,7 @@
 import {
-  expectedLearningElementTO,
-  expectedLearningRoomTO,
-  expectedLearningWorldTO,
+  expectedElementTO,
+  expectedSpaceTO,
+  expectedWorldTO,
   mockDSL,
 } from "./BackendResponses";
 import { config } from "../../../../config";
@@ -28,13 +28,13 @@ describe("BackendAdapter", () => {
     config.useFakeBackend = oldConfigValue;
   });
 
-  test("getLearningWorldData calls backend to get DSL file", async () => {
+  test("getWorldData calls backend to get DSL file", async () => {
     const userToken = "testToken";
     const worldName = "testWorld";
 
     mockedAxios.post.mockResolvedValue({ data: mockDSL });
 
-    await systemUnderTest.getLearningWorldData({
+    await systemUnderTest.getWorldData({
       userToken: userToken,
       worldName: worldName,
     });
@@ -49,34 +49,32 @@ describe("BackendAdapter", () => {
     );
   });
 
-  test("getLearningWorldData converts DSL to TOs", async () => {
+  test("getWorldData converts DSL to TOs", async () => {
     mockedAxios.post.mockResolvedValue({ data: mockDSL });
 
-    const result = await systemUnderTest.getLearningWorldData({
+    const result = await systemUnderTest.getWorldData({
       userToken: "",
       worldName: "",
     });
 
     // check that the result matches the expected structure of LearningWorldTO
-    expect(result).toEqual(expect.objectContaining(expectedLearningWorldTO));
-    result.learningRooms?.forEach((learningRoom) => {
-      expect(learningRoom).toEqual(expectedLearningRoomTO);
+    expect(result).toEqual(expect.objectContaining(expectedWorldTO));
+    result.spaces?.forEach((space) => {
+      expect(space).toEqual(expectedSpaceTO);
 
-      learningRoom.learningElements?.forEach((learningElement) => {
-        expect(learningElement).toEqual(expectedLearningElementTO);
+      space.elements?.forEach((element) => {
+        expect(element).toEqual(expectedElementTO);
       });
     });
 
     // check that the result has the same amount of learning rooms as the DSL
-    expect(result.learningRooms).toHaveLength(
-      mockDSL.learningWorld.learningSpaces.length
-    );
+    expect(result.spaces).toHaveLength(mockDSL.world.spaces.length);
 
-    result.learningRooms?.forEach((learningRoom, index) => {
+    result.spaces?.forEach((space, index) => {
       // check that the results learning rooms have
       // the same amount of learning elements as in the DSL
-      expect(learningRoom.learningElements).toHaveLength(
-        mockDSL.learningWorld.learningSpaces[index].learningSpaceContent.length
+      expect(space.elements).toHaveLength(
+        mockDSL.world.spaces[index].spaceContent.length
       );
     });
 
@@ -84,8 +82,8 @@ describe("BackendAdapter", () => {
     // eg. check that the learning elements have the correct type/metadata
   });
 
-  test("scoreLearningElement resolves and doesn't throw", () => {
-    expect(systemUnderTest.scoreLearningElement(1)).resolves.not.toThrow();
+  test("scoreElement resolves and doesn't throw", () => {
+    expect(systemUnderTest.scoreElement(1)).resolves.not.toThrow();
   });
 
   test("logInUser calls backend and returns a token", () => {
