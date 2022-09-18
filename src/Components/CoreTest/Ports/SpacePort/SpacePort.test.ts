@@ -1,11 +1,11 @@
 import { injectable } from "inversify";
 import BUILDER_TYPES from "../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
-import LearningRoomPort from "../../../Core/Ports/LearningRoomPort/LearningRoomPort";
-import ILearningRoomPresenter from "../../../Core/Presentation/Babylon/LearningRoom/ILearningRoomPresenter";
+import SpacePort from "../../../Core/Ports/SpacePort/SpacePort";
+import ISpacePresenter from "../../../Core/Presentation/Babylon/Space/ISpacePresenter";
 import PresentationBuilder from "../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
-import ScorePanelPresenter from "../../../Core/Presentation/React/LearningRoomDisplay/ScorePanel/ScorePanelPresenter";
-import ScorePanelViewModel from "../../../Core/Presentation/React/LearningRoomDisplay/ScorePanel/ScorePanelViewModel";
+import ScorePanelPresenter from "../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanelPresenter";
+import ScorePanelViewModel from "../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanelViewModel";
 import { mock } from "jest-mock-extended";
 import { logger } from "../../../../Lib/Logger";
 
@@ -24,8 +24,8 @@ class ScorePanelBuilderMock extends PresentationBuilder<
   }
 }
 
-describe("LearningRoomPort", () => {
-  let systemUnderTest: LearningRoomPort;
+describe("SpacePort", () => {
+  let systemUnderTest: SpacePort;
 
   beforeEach(() => {
     CoreDIContainer.snapshot();
@@ -34,37 +34,35 @@ describe("LearningRoomPort", () => {
       ScorePanelBuilderMock
     );
 
-    systemUnderTest = new LearningRoomPort();
+    systemUnderTest = new SpacePort();
   });
 
   afterEach(() => {
     CoreDIContainer.restore();
   });
 
-  test("addLearningRoomPresenter adds new presenter", () => {
-    const learningRoomPresenter = mock<ILearningRoomPresenter>();
+  test("addSpacePresenter adds new presenter", () => {
+    const spacePresenter = mock<ISpacePresenter>();
 
-    systemUnderTest.registerLearningRoomPresenter(learningRoomPresenter);
+    systemUnderTest.registerSpacePresenter(spacePresenter);
 
-    expect(systemUnderTest["learningRoomPresenters"]).toContain(
-      learningRoomPresenter
-    );
+    expect(systemUnderTest["spacePresenters"]).toContain(spacePresenter);
   });
 
-  test("registerLearningRoomPresenter throws error if passed presenter is undefined", () => {
+  test("registerSpacePresenter throws error if passed presenter is undefined", () => {
     expect(() => {
       //@ts-ignore
-      systemUnderTest.registerLearningRoomPresenter(undefined);
+      systemUnderTest.registerSpacePresenter(undefined);
     }).toThrowError("is undefined");
   });
 
-  test("registerLearningRoomPresenter doesn't add presenter if it already exists", () => {
-    const learningRoomPresenter = mock<ILearningRoomPresenter>();
+  test("registerSpacePresenter doesn't add presenter if it already exists", () => {
+    const spacePresenter = mock<ISpacePresenter>();
 
-    systemUnderTest.registerLearningRoomPresenter(learningRoomPresenter);
-    systemUnderTest.registerLearningRoomPresenter(learningRoomPresenter);
+    systemUnderTest.registerSpacePresenter(spacePresenter);
+    systemUnderTest.registerSpacePresenter(spacePresenter);
 
-    expect(systemUnderTest["learningRoomPresenters"].length).toBe(1);
+    expect(systemUnderTest["spacePresenters"].length).toBe(1);
   });
 
   test("registerScorePanelPresenter adds new presenter", () => {
@@ -92,19 +90,19 @@ describe("LearningRoomPort", () => {
     }).toThrowError("ScorePanelPresenter is not registered");
   });
 
-  test("presentNewScore throws if no learningRoomPresenter is registered", () => {
+  test("presentNewScore throws if no spacePresenter is registered", () => {
     systemUnderTest.registerScorePanelPresenter(mock<ScorePanelPresenter>());
 
     expect(() => {
       systemUnderTest.presentNewScore(0, false, 0);
-    }).toThrowError("No LearningRoomPresenter is registered");
+    }).toThrowError("No SpacePresenter is registered");
   });
 
   test("presentNewScore calls presentScore on scorePanelPresenter", () => {
     const scorePanelPresenterMock = mock<ScorePanelPresenter>();
     systemUnderTest.registerScorePanelPresenter(scorePanelPresenterMock);
-    const learningRoomPresenterMock = mock<ILearningRoomPresenter>();
-    systemUnderTest.registerLearningRoomPresenter(learningRoomPresenterMock);
+    const spacePresenterMock = mock<ISpacePresenter>();
+    systemUnderTest.registerSpacePresenter(spacePresenterMock);
 
     systemUnderTest.presentNewScore(1, false, 1);
 
@@ -113,23 +111,23 @@ describe("LearningRoomPort", () => {
   });
 
   test("presentNewScore calls openDoor at the roomPresenter with matching ID", () => {
-    const learningRoomPresenter1 = mock<ILearningRoomPresenter>();
-    const learningRoomPresenter2 = mock<ILearningRoomPresenter>();
+    const spacePresenter1 = mock<ISpacePresenter>();
+    const spacePresenter2 = mock<ISpacePresenter>();
     //@ts-ignore
-    learningRoomPresenter1.LearningRoomId = 1;
+    spacePresenter1.spaceId = 1;
     //@ts-ignore
-    learningRoomPresenter2.LearningRoomId = 2;
+    spacePresenter2.spaceId = 2;
 
     const scorePanelPresenterMock = mock<ScorePanelPresenter>();
 
-    systemUnderTest.registerLearningRoomPresenter(learningRoomPresenter1);
-    systemUnderTest.registerLearningRoomPresenter(learningRoomPresenter2);
+    systemUnderTest.registerSpacePresenter(spacePresenter1);
+    systemUnderTest.registerSpacePresenter(spacePresenter2);
 
     systemUnderTest.registerScorePanelPresenter(scorePanelPresenterMock);
 
     systemUnderTest.presentNewScore(1, true, 1);
 
-    expect(learningRoomPresenter1.openDoor).toHaveBeenCalledTimes(1);
-    expect(learningRoomPresenter2.openDoor).toHaveBeenCalledTimes(0);
+    expect(spacePresenter1.openDoor).toHaveBeenCalledTimes(1);
+    expect(spacePresenter2.openDoor).toHaveBeenCalledTimes(0);
   });
 });
