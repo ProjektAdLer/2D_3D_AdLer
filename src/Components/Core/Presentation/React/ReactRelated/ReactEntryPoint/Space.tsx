@@ -5,9 +5,9 @@ import ElementModal from "~ReactComponents/SpaceDisplay/ElementModal/ElementModa
 import ElementsDropdown from "~ReactComponents/SpaceDisplay/ElementsDropdown/ElementsDropdown";
 import WorldGoalPanel from "~ReactComponents/SpaceDisplay/WorldGoalPanel/WorldGoalPanel";
 import WorldNamePanel from "~ReactComponents/SpaceDisplay/WorldNamePanel/WorldNamePanel";
-import ModalManager from "~ReactComponents/SpaceDisplay/ModalManager/ModalManager";
-import MoodleLoginForm from "~ReactComponents/MoodleLoginForm/MoodleLoginForm";
-import LogoMenuBar from "~ReactComponents/ReactRelated/ReactAdvancedComponents/LogoMenuBar";
+import NotificationManager from "~ReactComponents/GeneralComponents/NotificationManager/NotificationManager";
+import MoodleLoginForm from "~ReactComponents/GeneralComponents/MoodleLoginForm/MoodleLoginForm";
+import LogoMenuBar from "~ReactComponents/GeneralComponents/LogoMenuBar/LogoMenuBar";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import ScorePanel from "~ReactComponents/SpaceDisplay/ScorePanel/ScorePanel";
 import BabylonCanvas from "./BabylonCanvas";
@@ -56,7 +56,7 @@ export default function Space() {
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
         <div className="z-50">
-          <ModalManager />
+          <NotificationManager />
         </div>
       </div>
     </React.Fragment>

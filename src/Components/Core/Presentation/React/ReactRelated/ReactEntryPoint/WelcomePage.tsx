@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import MoodleLoginButton from "~ReactComponents/MoodleLoginButton/MoodleLoginButton";
-import MoodleLoginForm from "~ReactComponents/MoodleLoginForm/MoodleLoginForm";
+import MoodleLoginButton from "~ReactComponents/GeneralComponents/MoodleLoginButton/MoodleLoginButton";
+import MoodleLoginForm from "~ReactComponents/GeneralComponents/MoodleLoginForm/MoodleLoginForm";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 import logo from "../../../../../../Assets/icons/adLerEngine_flat_logo_simple.svg";

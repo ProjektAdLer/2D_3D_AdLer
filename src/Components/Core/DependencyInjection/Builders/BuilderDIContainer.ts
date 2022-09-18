@@ -8,15 +8,15 @@ import IPresentationDirector from "../../Presentation/PresentationBuilder/IPrese
 import PresentationDirector from "../../Presentation/PresentationBuilder/PresentationDirector";
 import ElementModalBuilder from "../../Presentation/React/SpaceDisplay/ElementModal/ElementModalBuilder";
 import ElementsDropdownBuilder from "../../Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownBuilder";
-import MoodleLoginFormBuilder from "../../Presentation/React/MoodleLoginForm/MoodleLoginFormBuilder";
+import MoodleLoginFormBuilder from "../../Presentation/React/GeneralComponents/MoodleLoginForm/MoodleLoginFormBuilder";
 import ScorePanelBuilder from "../../Presentation/React/SpaceDisplay/ScorePanel/ScorePanelBuilder";
-import ModalManagerBuilder from "../../Presentation/React/SpaceDisplay/ModalManager/ModalManagerBuilder";
+import NotificationManagerBuilder from "../../Presentation/React/GeneralComponents/NotificationManager/NotificationManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
-import MoodleLoginButtonBuilder from "../../Presentation/React/MoodleLoginButton/MoodleLoginButtonBuilder";
+import MoodleLoginButtonBuilder from "../../Presentation/React/GeneralComponents/MoodleLoginButton/MoodleLoginButtonBuilder";
 import BottomTooltipBuilder from "../../Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipBuilder";
 import DebugPanelBuilder from "../../Presentation/React/SpaceDisplay/DebugPanel/DebugPanelBuilder";
 import WorldNamePanelBuilder from "../../Presentation/React/SpaceDisplay/WorldNamePanel/WorldNamePanelBuilder";
-import LoadSpaceButtonBuilder from "../../Presentation/React/SpaceDisplay/LoadSpaceButton/LoadSpaceButtonBuilder";
+import LoadSpaceButtonBuilder from "../../Presentation/React/GeneralComponents/LoadSpaceButton/LoadSpaceButtonBuilder";
 import FullscreenSwitchBuilder from "../../Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
 import WorldGoalPanelBuilder from "~ReactComponents/SpaceDisplay/WorldGoalPanel/WorldGoalPanelBuilder";
 import HeaderBarBuilder from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBarBuilder";
@@ -45,7 +45,7 @@ const BuilderDIContainer = new ContainerModule((bind) => {
     ElementsDropdownBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IModalManagerBuilder).to(
-    ModalManagerBuilder
+    NotificationManagerBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IMoodleLoginButtonBuilder).to(
     MoodleLoginButtonBuilder

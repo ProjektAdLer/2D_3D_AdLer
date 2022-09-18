@@ -1,5 +1,5 @@
 import ElementModalController from "../../../../../../../src/Components/Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalController";
-import ScoreElementUseCase from "../../../../../Core/Application/ScoreElementUseCase/ScoreElementUseCase";
+import ScoreElementUseCase from "../../../../../Core/Application/UseCases/ScoreElement/ScoreElementUseCase";
 
 const executeAsyncMock = jest.spyOn(
   ScoreElementUseCase.prototype,

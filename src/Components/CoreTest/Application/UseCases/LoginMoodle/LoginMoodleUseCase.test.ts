@@ -64,12 +64,12 @@ describe("LoginMoodleUseCase", () => {
       expect(error).toBe("User is already logged in");
     });
 
-    expect(uiPortMock.displayModal).toHaveBeenCalledWith(
+    expect(uiPortMock.displayNotification).toHaveBeenCalledWith(
       expect.any(String),
       "error"
     );
 
-    uiPortMock.displayModal.mockReset();
+    uiPortMock.displayNotification.mockReset();
   });
 
   test("executeAsync calls the backend and stores correct user data in Enity", async () => {

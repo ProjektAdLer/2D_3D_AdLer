@@ -39,7 +39,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     const userData = this.container.getEntitiesOfType(UserDataEntity);
 
     if (userData.length === 0 || userData[0]?.isLoggedIn === false) {
-      this.uiPort.displayModal("User is not logged in!", "error");
+      this.uiPort.displayNotification("User is not logged in!", "error");
       return Promise.reject("User is not logged in");
     }
 

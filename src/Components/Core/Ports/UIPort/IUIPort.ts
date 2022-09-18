@@ -1,11 +1,11 @@
-import { NotificationType } from "../../Presentation/React/SpaceDisplay/ModalManager/ModalManagerPresenter";
+import { NotificationType } from "../../Presentation/React/GeneralComponents/NotificationManager/NotificationManagerPresenter";
 import IBottomTooltipPresenter from "../../Presentation/React/SpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
-import IModalManagerPresenter from "../../Presentation/React/SpaceDisplay/ModalManager/IModalManagerPresenter";
+import INotificationManagerPresenter from "../../Presentation/React/GeneralComponents/NotificationManager/INotificationManagerPresenter";
 import ElementTO from "../../Application/DataTransportObjects/ElementTO";
 
 export default interface IUIPort {
-  registerModalManager(presenter: IModalManagerPresenter): void;
-  displayModal(errorMessage: string, type: NotificationType): void;
+  registerNotificationManager(presenter: INotificationManagerPresenter): void;
+  displayNotification(errorMessage: string, type: NotificationType): void;
   displayElementTooltip(element: ElementTO): void;
   hideBottomTooltip(): void;
   registerBottomTooltipPresenter(

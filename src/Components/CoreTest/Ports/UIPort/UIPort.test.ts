@@ -1,7 +1,7 @@
 import UIPort from "../../../Core/Ports/UIPort/UIPort";
 import CoreDIContainer from "../../../../Components/Core/DependencyInjection/CoreDIContainer";
 import { mock } from "jest-mock-extended";
-import IModalManagerPresenter from "../../../Core/Presentation/React/SpaceDisplay/ModalManager/IModalManagerPresenter";
+import INotificationManagerPresenter from "../../../Core/Presentation/React/GeneralComponents/NotificationManager/INotificationManagerPresenter";
 import IBottomTooltipPresenter from "../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import { ElementTO } from "../../../Core/Ports/WorldPort/IWorldPort";
 import { logger } from "../../../../Lib/Logger";
@@ -15,23 +15,26 @@ describe("UIPort", () => {
     systemUnderTest = CoreDIContainer.resolve(UIPort);
   });
 
-  test("displayModal throws error if MoodleLoginFormPresenter is not registered", () => {
+  test("displayNotification throws error if MoodleLoginFormPresenter is not registered", () => {
     expect(() => {
-      systemUnderTest.displayModal("error message", "error");
-    }).toThrowError("ModalManagerPresenter is not registered");
+      systemUnderTest.displayNotification("error message", "error");
+    }).toThrowError("NotificationManagerPresenter is not registered");
   });
 
-  test("displayModal calls the ModalManagerPresenter with given message and notification type", () => {
-    const mockModalManagerPresenterMock = mock<IModalManagerPresenter>();
-    systemUnderTest.registerModalManager(mockModalManagerPresenterMock);
+  test("displayNotification calls the NotificationManagerPresenter with given message and notification type", () => {
+    const mockNotificationManagerPresenterMock =
+      mock<INotificationManagerPresenter>();
+    systemUnderTest.registerNotificationManager(
+      mockNotificationManagerPresenterMock
+    );
 
-    systemUnderTest.displayModal("error message", "error");
+    systemUnderTest.displayNotification("error message", "error");
 
     expect(
-      mockModalManagerPresenterMock.presentErrorMessage
+      mockNotificationManagerPresenterMock.presentErrorMessage
     ).toHaveBeenCalledTimes(1);
     expect(
-      mockModalManagerPresenterMock.presentErrorMessage
+      mockNotificationManagerPresenterMock.presentErrorMessage
     ).toHaveBeenCalledWith("error message", "error");
   });
 
@@ -105,20 +108,28 @@ describe("UIPort", () => {
     expect(logger.warn).toHaveBeenCalledTimes(1);
   });
 
-  test("registerModalManager registers the presenter if none is present", () => {
-    const mockModalManagerPresenterMock = mock<IModalManagerPresenter>();
+  test("registerNotificationManager registers the presenter if none is present", () => {
+    const mockNotificationManagerPresenterMock =
+      mock<INotificationManagerPresenter>();
 
-    systemUnderTest.registerModalManager(mockModalManagerPresenterMock);
+    systemUnderTest.registerNotificationManager(
+      mockNotificationManagerPresenterMock
+    );
 
-    expect(systemUnderTest["modalManagerPresenter"]).toBe(
-      mockModalManagerPresenterMock
+    expect(systemUnderTest["notificationManagerPresenter"]).toBe(
+      mockNotificationManagerPresenterMock
     );
   });
 
-  test("registerModalManager throws error if ModalManagerPresenter is already registered", () => {
-    const mockModalManagerPresenterMock = mock<IModalManagerPresenter>();
-    systemUnderTest.registerModalManager(mockModalManagerPresenterMock);
-    systemUnderTest.registerModalManager(mockModalManagerPresenterMock);
+  test("registerNotificationManager throws error if NotificationManagerPresenter is already registered", () => {
+    const mockNotificationManagerPresenterMock =
+      mock<INotificationManagerPresenter>();
+    systemUnderTest.registerNotificationManager(
+      mockNotificationManagerPresenterMock
+    );
+    systemUnderTest.registerNotificationManager(
+      mockNotificationManagerPresenterMock
+    );
 
     expect(logger.warn).toHaveBeenCalledTimes(1);
   });

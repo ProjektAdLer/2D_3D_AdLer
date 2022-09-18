@@ -18,15 +18,15 @@ jest.mock(
   () => "mocked"
 );
 jest.mock(
-  "../../../../../Core/Presentation/React/SpaceDisplay/ModalManager/ModalManager",
+  "../../../../../Core/Presentation/React/GeneralComponents/NotificationManager/NotificationManager",
   () => "mocked"
 );
 jest.mock(
-  "../../../../../Core/Presentation/React/MoodleLoginForm/MoodleLoginForm",
+  "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginForm/MoodleLoginForm",
   () => "mocked"
 );
 jest.mock(
-  "../../../../../Core/Presentation/React/ReactRelated/ReactAdvancedComponents/LogoMenuBar",
+  "../../../../../Core/Presentation/React/GeneralComponents/LogoMenuBar/LogoMenuBar",
   () => "mocked"
 );
 jest.mock(

@@ -77,7 +77,7 @@ describe("LoadWorldUseCase", () => {
       UserDataEntity
     );
 
-    expect(uiPortMock.displayModal).toHaveBeenCalledWith(
+    expect(uiPortMock.displayNotification).toHaveBeenCalledWith(
       "User is not logged in!",
       "error"
     );
@@ -108,7 +108,7 @@ describe("LoadWorldUseCase", () => {
       UserDataEntity
     );
 
-    expect(uiPortMock.displayModal).toHaveBeenCalledWith(
+    expect(uiPortMock.displayNotification).toHaveBeenCalledWith(
       "User is not logged in!",
       "error"
     );

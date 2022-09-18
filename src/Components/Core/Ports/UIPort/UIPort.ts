@@ -1,7 +1,7 @@
-import { NotificationType } from "../../Presentation/React/SpaceDisplay/ModalManager/ModalManagerPresenter";
+import { NotificationType } from "../../Presentation/React/GeneralComponents/NotificationManager/NotificationManagerPresenter";
 import { injectable } from "inversify";
 import IBottomTooltipPresenter from "../../Presentation/React/SpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
-import IModalManagerPresenter from "../../Presentation/React/SpaceDisplay/ModalManager/IModalManagerPresenter";
+import INotificationManagerPresenter from "../../Presentation/React/GeneralComponents/NotificationManager/INotificationManagerPresenter";
 import IUIPort from "./IUIPort";
 import { logger } from "src/Lib/Logger";
 import ElementTO from "../../Application/DataTransportObjects/ElementTO";
@@ -9,14 +9,14 @@ import ElementTO from "../../Application/DataTransportObjects/ElementTO";
 @injectable()
 export default class UIPort implements IUIPort {
   private bottomTooltipPresenter: IBottomTooltipPresenter;
-  private modalManagerPresenter: IModalManagerPresenter;
+  private notificationManagerPresenter: INotificationManagerPresenter;
 
-  displayModal(errorMessage: string, type: NotificationType): void {
-    if (!this.modalManagerPresenter) {
-      throw new Error("ModalManagerPresenter is not registered");
+  displayNotification(errorMessage: string, type: NotificationType): void {
+    if (!this.notificationManagerPresenter) {
+      throw new Error("NotificationManagerPresenter is not registered");
     }
 
-    this.modalManagerPresenter.presentErrorMessage(errorMessage, type);
+    this.notificationManagerPresenter.presentErrorMessage(errorMessage, type);
   }
 
   hideBottomTooltip(): void {
@@ -45,10 +45,10 @@ export default class UIPort implements IUIPort {
     this.bottomTooltipPresenter = bottomTooltipPresenter;
   }
 
-  registerModalManager(presenter: IModalManagerPresenter): void {
-    if (this.modalManagerPresenter) {
-      logger.warn("ModalManagerPresenter already registered");
+  registerNotificationManager(presenter: INotificationManagerPresenter): void {
+    if (this.notificationManagerPresenter) {
+      logger.warn("NotificationManagerPresenter already registered");
     }
-    this.modalManagerPresenter = presenter;
+    this.notificationManagerPresenter = presenter;
   }
 }

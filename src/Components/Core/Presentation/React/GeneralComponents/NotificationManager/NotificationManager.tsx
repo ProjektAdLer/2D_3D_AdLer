@@ -1,0 +1,48 @@
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
+import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
+import useObservable from "../../ReactRelated/CustomHooks/useObservable";
+import StyledModal from "../../ReactRelated/ReactBaseComponents/StyledModal";
+import NotificationManagerController from "./NotificationManagerController";
+import { ErrorMessage, NotificationType } from "./NotificationManagerPresenter";
+import NotificationManagerViewModel from "./NotificationManagerViewModel";
+
+export default function NotificationManager({
+  ...restProps
+}: {
+  [x: string]: any;
+}) {
+  const [viewModel] = useBuilder<
+    NotificationManagerViewModel,
+    NotificationManagerController
+  >(BUILDER_TYPES.IModalManagerBuilder);
+
+  const [notifications, setNotifications] = useObservable<ErrorMessage[]>(
+    viewModel?.errors
+  );
+
+  if (notifications == null || notifications.length === 0) return null;
+
+  const getTypeString = (type: NotificationType) => {
+    switch (type) {
+      case "error":
+        return "Error";
+      case "notification":
+        return "Notification";
+    }
+  };
+
+  return (
+    <StyledModal
+      showModal={notifications?.length > 0}
+      title={getTypeString(notifications.last().type)}
+      onClose={() => {
+        const remainingNotifications = [...notifications];
+        remainingNotifications.pop();
+        setNotifications(remainingNotifications);
+      }}
+      {...restProps}
+    >
+      {notifications.last().message}
+    </StyledModal>
+  );
+}

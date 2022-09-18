@@ -27,7 +27,10 @@ export default class LoginMoodleUseCase implements ILoginMoodleUseCase {
       this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0]
         ?.isLoggedIn
     ) {
-      this.uiPort.displayModal("You are already logged in to Moodle", "error");
+      this.uiPort.displayNotification(
+        "You are already logged in to Moodle",
+        "error"
+      );
       return Promise.reject("User is already logged in");
     }
     let userToken: string;
@@ -38,7 +41,7 @@ export default class LoginMoodleUseCase implements ILoginMoodleUseCase {
         password: data.password,
       });
     } catch (error) {
-      this.uiPort.displayModal("Falsche Daten!", "error");
+      this.uiPort.displayNotification("Falsche Daten!", "error");
       return Promise.reject("Wrong Password oder Username");
     }
 
