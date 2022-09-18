@@ -2,14 +2,14 @@ import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
 import { mock, mockClear } from "jest-mock-extended";
 import { act } from "react-dom/test-utils";
-import H5PLearningElementData from "../../../../../Core/Domain/Entities/SpecificLearningElements/H5PLearningElementData";
-import LearningElementModalViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningElementModal/LearningElementModalViewModel";
-import NewH5PContent from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningElementModal/SubComponents/NewH5PContent";
+import H5PElementData from "../../../../../Core/Domain/Entities/ElementData/H5PElementData";
+import ElementModalViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
+import NewH5PContent from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/NewH5PContent";
 
-const viewModel = mock<LearningElementModalViewModel<H5PLearningElementData>>();
+const viewModel = mock<ElementModalViewModel<H5PElementData>>();
 
-viewModel.learningElementData.Value = new H5PLearningElementData();
-viewModel.learningElementData.Value.fileName = "test.h5p";
+viewModel.elementData.Value = new H5PElementData();
+viewModel.elementData.Value.fileName = "test.h5p";
 
 jest.mock("h5p-standalone");
 

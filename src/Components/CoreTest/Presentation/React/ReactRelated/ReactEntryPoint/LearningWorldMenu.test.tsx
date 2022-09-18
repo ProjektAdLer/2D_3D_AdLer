@@ -4,7 +4,7 @@ import { mock } from "jest-mock-extended";
 import ILoadWorldUseCase from "src/Components/Core/Application/LoadWorld/ILoadWorldUseCase";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import LearningWorldMenu from "~ReactComponents/ReactRelated/ReactEntryPoint/LearningWorldMenu";
+import WorldMenu from "~ReactComponents/ReactRelated/ReactEntryPoint/WorldMenu";
 
 jest.mock("~ReactComponents/RoomMenu/HeaderBar/HeaderBar", () => "mocked");
 jest.mock(
@@ -33,7 +33,7 @@ describe("LearningWorldMenu", () => {
   test("should render", () => {
     render(
       <Provider container={CoreDIContainer}>
-        <LearningWorldMenu />
+        <WorldMenu />
       </Provider>
     );
   });

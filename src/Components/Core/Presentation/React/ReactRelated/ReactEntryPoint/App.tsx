@@ -1,6 +1,6 @@
 import "./App.css";
-import LearningRoom from "./LearningRoom";
-import LearningWorldMenu from "./LearningWorldMenu";
+import Space from "./Space";
+import WorldMenu from "./WorldMenu";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import WelcomePage from "./WelcomePage";
@@ -13,9 +13,9 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="worldmenu">
-          <Route index element={<LearningWorldMenu />} />
+          <Route index element={<WorldMenu />} />
         </Route>
-        <Route path="room" element={<LearningRoom />} />
+        <Route path="space" element={<Space />} />
       </Routes>
     </BrowserRouter>
   );

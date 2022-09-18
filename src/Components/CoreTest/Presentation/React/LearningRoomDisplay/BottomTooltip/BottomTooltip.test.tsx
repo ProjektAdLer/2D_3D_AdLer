@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
-import BottomTooltip from "../../../../../Core/Presentation/React/LearningRoomDisplay/BottomTooltip/BottomTooltip";
-import BottomTooltipViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/BottomTooltip/BottomTooltipViewModel";
+import BottomTooltip from "../../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltip";
+import BottomTooltipViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 
 let fakeModel = new BottomTooltipViewModel();

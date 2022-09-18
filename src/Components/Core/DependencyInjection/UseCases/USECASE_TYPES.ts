@@ -1,12 +1,12 @@
 const USECASE_TYPES = {
   ILoadWorldUseCase: Symbol("ILoadWorldUseCase"),
   ILoadAvatarUseCase: Symbol("ILoadAvatarUseCase"),
-  ILearningElementStartedUseCase: Symbol("ILearningElementStartedUseCase"),
-  IScoreLearningElementUseCase: Symbol("IScoreLearningElementUseCase"),
-  ICalculateTotalRoomScore: Symbol("ICalculateTotalRoomScore"),
+  IElementStartedUseCase: Symbol("IElementStartedUseCase"),
+  IScoreElementUseCase: Symbol("IScoreElementUseCase"),
+  ICalculateSpaceScore: Symbol("ICalculateSpaceScore"),
   ILogUserIntoMoodleUseCase: Symbol("ILogUserIntoMoodleUseCase"),
   IDebugUseCase: Symbol("IDebugUseCase"),
-  ILoadRoomUseCase: Symbol("ILoadRoomUseCase"),
+  ILoadSpaceUseCase: Symbol("ILoadSpaceUseCase"),
 };
 
 export default USECASE_TYPES;

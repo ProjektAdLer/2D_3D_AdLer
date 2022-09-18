@@ -1,30 +1,30 @@
 import { mock, mockDeep } from "jest-mock-extended";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
-import IRoomSelectionSectionController from "~ReactComponents/RoomMenu/RoomSelectionSection/IRoomSelectionSectionController";
-import RoomSelectionSectionViewModel from "~ReactComponents/RoomMenu/RoomSelectionSection/RoomSelectionSectionViewModel";
-import RoomSelectionSection from "~ReactComponents/RoomMenu/RoomSelectionSection/RoomSelectionSection";
+import ISpaceSelectionController from "~ReactComponents/SpaceMenu/SpaceSelection/ISpaceSelectionController";
+import SpaceSelectionViewModel from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelectionViewModel";
+import SpaceSelection from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection";
 import { render } from "@testing-library/react";
 
 describe("LearningRoomSelection", () => {
   test("should render", () => {
     useBuilderMock([
-      mockDeep<RoomSelectionSectionViewModel>(),
-      mock<IRoomSelectionSectionController>(),
+      mockDeep<SpaceSelectionViewModel>(),
+      mock<ISpaceSelectionController>(),
     ]);
-    render(<RoomSelectionSection />);
+    render(<SpaceSelection />);
   });
 
   test.todo("extend tests, to test for correct mapping to rows");
 
   test("doesn't render without controller", () => {
-    useBuilderMock([mockDeep<RoomSelectionSectionViewModel>(), undefined]);
-    const { container } = render(<RoomSelectionSection />);
+    useBuilderMock([mockDeep<SpaceSelectionViewModel>(), undefined]);
+    const { container } = render(<SpaceSelection />);
     expect(container.firstChild).toBeNull();
   });
 
   test("doesn't render without view model", () => {
-    useBuilderMock([undefined, mock<IRoomSelectionSectionController>()]);
-    const { container } = render(<RoomSelectionSection />);
+    useBuilderMock([undefined, mock<ISpaceSelectionController>()]);
+    const { container } = render(<SpaceSelection />);
     expect(container.firstChild).toBeNull();
   });
 });

@@ -1,7 +1,7 @@
 import bind from "bind-decorator";
 import { injectable } from "inversify";
 import { logger } from "src/Lib/Logger";
-import type IDebugPanelPresenter from "../../Presentation/React/LearningRoomDisplay/DebugPanel/IDebugPanelPresenter";
+import type IDebugPanelPresenter from "../../Presentation/React/SpaceDisplay/DebugPanel/IDebugPanelPresenter";
 import IDebugPort from "./IDebugPort";
 
 @injectable()

@@ -12,7 +12,7 @@ type Requirements =
     }[]
   | null;
 
-type LearningElementValueList = {
+type ElementValueList = {
   type: string;
   value: string;
 } | null;
@@ -22,40 +22,40 @@ type MetaData = {
   value: string;
 };
 
-export type APILearningWorld = {
+export type APIWorld = {
   idNumber: string;
   identifier: Identifier;
-  learningWorldContent: number[];
+  worldContent: number[];
   topics: number[];
   goals: string;
-  learningSpaces: APILearningRoom[];
-  learningElements: APILearningElement[];
+  spaces: APISpace[];
+  elements: APIElement[];
   description: string;
 };
 
-export type APILearningRoom = {
+export type APISpace = {
   spaceId: number;
   identifier: Identifier;
   description: string;
   goals: string;
-  learningSpaceContent: number[];
+  spaceContent: number[];
   requirements: Requirements;
 };
 
-export type APILearningElement = {
+export type APIElement = {
   id: number;
   identifier: Identifier;
   description: string;
   goals: string;
   elementType: string;
-  learningElementValueList: LearningElementValueList[];
-  learningSpaceParentId: number;
+  elementValueList: ElementValueList[];
+  spaceParentId: number;
   requirements?: any;
   metaData: MetaData[] | null;
 };
 
 type IDSL = {
-  learningWorld: APILearningWorld;
+  world: APIWorld;
 };
 
 export default IDSL;

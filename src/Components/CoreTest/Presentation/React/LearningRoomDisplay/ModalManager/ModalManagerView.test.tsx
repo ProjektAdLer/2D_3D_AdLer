@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
 import { mock } from "jest-mock-extended";
-import IModalManagerController from "../../../../../Core/Presentation/React/LearningRoomDisplay/ModalManager/IModalManagerController";
-import ModalManager from "../../../../../Core/Presentation/React/LearningRoomDisplay/ModalManager/ModalManager";
-import ModalManagerViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/ModalManager/ModalManagerViewModel";
+import IModalManagerController from "../../../../../Core/Presentation/React/SpaceDisplay/ModalManager/IModalManagerController";
+import ModalManager from "../../../../../Core/Presentation/React/SpaceDisplay/ModalManager/ModalManager";
+import ModalManagerViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ModalManager/ModalManagerViewModel";
 import "../../../../../Core/Types/array.extensions";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 

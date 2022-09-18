@@ -1,15 +1,15 @@
 import { injectable } from "inversify";
 import CourseListTO from "../../Application/DataTransportObjects/CourseListTO";
-import LearningElementTO from "../../Application/DataTransportObjects/LearningElementTO";
-import LearningRoomTO from "../../Application/DataTransportObjects/LearningRoomTO";
-import LearningWorldTO from "../../Application/DataTransportObjects/LearningWorldTO";
-import H5PLearningElementData from "../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
-import ImageLearningElementData from "../../Domain/Entities/SpecificLearningElements/ImageLearningElementData";
-import TextLearningElementData from "../../Domain/Entities/SpecificLearningElements/TextLearningElementData";
-import VideoLearningElementData from "../../Domain/Entities/SpecificLearningElements/VideoLearningElementData";
-import { LearningElementTypes } from "../../Presentation/Babylon/LearningElement/Types/LearningElementTypes";
+import ElementTO from "../../Application/DataTransportObjects/ElementTO";
+import SpaceTO from "../../Application/DataTransportObjects/SpaceTO";
+import WorldTO from "../../Application/DataTransportObjects/WorldTO";
+import H5PElementData from "../../Domain/Entities/ElementData/H5PElementData";
+import ImageElementData from "../../Domain/Entities/ElementData/ImageElementData";
+import TextElementData from "../../Domain/Entities/ElementData/TextElementData";
+import VideoElementData from "../../Domain/Entities/ElementData/VideoElementData";
+import { ElementTypes } from "../../Presentation/Babylon/Elements/Types/ElementTypes";
 import IBackendAdapter, { tempApiInfo } from "./IBackendAdapter";
-import IDSL, { APILearningElement } from "./Types/IDSL";
+import IDSL, { APIElement } from "./Types/IDSL";
 import UserCredentials from "./Types/UserCredentials";
 
 @injectable()
@@ -26,46 +26,43 @@ export default class MockBackendAdapter implements IBackendAdapter {
 
     return Promise.resolve(test);
   }
-  async getLearningWorldData({
+  async getWorldData({
     userToken,
     worldId,
-  }: tempApiInfo): Promise<Partial<LearningWorldTO>> {
+  }: tempApiInfo): Promise<Partial<WorldTO>> {
     // get DSL
-    let dsl = this.learningWorldTO;
+    let dsl = this.worldTO;
 
     // // omit first learning room, since it is only used to store the dsl
     // dsl.learningWorld.learningSpaces =
     //   dsl.learningWorld.learningSpaces.slice(1);
 
     // create LearningWorldTO with learning world data
-    let response: Partial<LearningWorldTO> = {
-      worldName: dsl.learningWorld.identifier.value,
-      worldGoal: dsl.learningWorld.goals,
+    let response: Partial<WorldTO> = {
+      worldName: dsl.world.identifier.value,
+      worldGoal: dsl.world.goals,
     };
 
     // create LearningElementTOs
-    let learningElements: LearningElementTO[] =
-      dsl.learningWorld.learningElements.flatMap((element) =>
-        element.elementType in LearningElementTypes
-          ? this.mapLearningElement(element)
-          : []
-      );
+    let elements: ElementTO[] = dsl.world.elements.flatMap((element) =>
+      element.elementType in ElementTypes ? this.mapElement(element) : []
+    );
 
     // create LearningRoomTOs and connect them with their learning elements
-    response.learningRooms = dsl.learningWorld.learningSpaces.map((space) => {
+    response.spaces = dsl.world.spaces.map((space) => {
       return {
         id: space.spaceId,
         name: space.identifier.value,
-        learningElements: learningElements.filter((element) =>
-          space.learningSpaceContent.includes(element.id)
+        elements: elements.filter((element) =>
+          space.spaceContent.includes(element.id)
         ),
-      } as LearningRoomTO;
+      } as SpaceTO;
     });
 
     return response;
   }
 
-  scoreLearningElement(learningElementId: number): Promise<void> {
+  scoreElement(elementId: number): Promise<void> {
     return Promise.resolve();
   }
 
@@ -73,13 +70,11 @@ export default class MockBackendAdapter implements IBackendAdapter {
     return Promise.resolve("fakeToken");
   }
 
-  private mapLearningElement = (
-    element: APILearningElement
-  ): LearningElementTO => {
-    const learningElementTO: Partial<LearningElementTO> = {
+  private mapElement = (element: APIElement): ElementTO => {
+    const elementTO: Partial<ElementTO> = {
       id: element.id,
-      value: element.learningElementValueList
-        ? Number.parseInt(element.learningElementValueList[0]?.value ?? "0")
+      value: element.elementValueList
+        ? Number.parseInt(element.elementValueList[0]?.value ?? "0")
         : 0,
       requirements: element.requirements ?? [],
       name: element.identifier?.value,
@@ -87,22 +82,22 @@ export default class MockBackendAdapter implements IBackendAdapter {
 
     switch (element.elementType) {
       case "text":
-        learningElementTO.learningElementData = {
+        elementTO.elementData = {
           type: "text",
-        } as TextLearningElementData;
+        } as TextElementData;
         break;
       case "image":
-        learningElementTO.learningElementData = {
+        elementTO.elementData = {
           type: "image",
-        } as ImageLearningElementData;
+        } as ImageElementData;
         break;
       case "video":
-        learningElementTO.learningElementData = {
+        elementTO.elementData = {
           type: "video",
-        } as VideoLearningElementData;
+        } as VideoElementData;
         break;
       case "h5p":
-        learningElementTO.learningElementData = {
+        elementTO.elementData = {
           type: "h5p",
           fileName: element.metaData?.find(
             (metaData) => metaData.key === "h5pFileName"
@@ -112,14 +107,14 @@ export default class MockBackendAdapter implements IBackendAdapter {
               (metaData) => metaData.key === "h5pContextId"
             )?.value || "0"
           ),
-        } as H5PLearningElementData;
+        } as H5PElementData;
     }
 
-    return learningElementTO as LearningElementTO;
+    return elementTO as ElementTO;
   };
 
-  learningWorldTO: IDSL = {
-    learningWorld: {
+  worldTO: IDSL = {
+    world: {
       idNumber: "1a28a418-00f5-4b24-8ac0-5b4e03ed3f73",
       identifier: {
         type: "name",
@@ -127,9 +122,9 @@ export default class MockBackendAdapter implements IBackendAdapter {
       },
       description: "Mock Beschreibung der Welt",
       goals: "Mock Ziele der Welt",
-      learningWorldContent: [],
+      worldContent: [],
       topics: [],
-      learningSpaces: [
+      spaces: [
         {
           spaceId: 0,
           identifier: {
@@ -138,11 +133,11 @@ export default class MockBackendAdapter implements IBackendAdapter {
           },
           description: "Diese Lernelemente sind keinem Lernraum zugeordnet",
           goals: "",
-          learningSpaceContent: [1, 2, 3, 4, 5],
+          spaceContent: [1, 2, 3, 4, 5],
           requirements: null,
         },
       ],
-      learningElements: [
+      elements: [
         {
           id: 1,
           identifier: {
@@ -152,13 +147,13 @@ export default class MockBackendAdapter implements IBackendAdapter {
           description: "",
           goals: "",
           elementType: "json",
-          learningElementValueList: [
+          elementValueList: [
             {
               type: "Points",
               value: "0",
             },
           ],
-          learningSpaceParentId: 0,
+          spaceParentId: 0,
           requirements: null,
           metaData: null,
         },
@@ -171,13 +166,13 @@ export default class MockBackendAdapter implements IBackendAdapter {
           description: "Diies ist die Beschreibung des H5P Elements.",
           goals: "Ziel des H5P Lernelements",
           elementType: "h5p",
-          learningElementValueList: [
+          elementValueList: [
             {
               type: "Points",
               value: "15",
             },
           ],
-          learningSpaceParentId: 0,
+          spaceParentId: 0,
           requirements: null,
           metaData: [
             {
@@ -200,13 +195,13 @@ export default class MockBackendAdapter implements IBackendAdapter {
           description: "Dies ist die Beschreibung des Text Lernelements",
           goals: "Ziel des Text-Elements",
           elementType: "text",
-          learningElementValueList: [
+          elementValueList: [
             {
               type: "Points",
               value: "25",
             },
           ],
-          learningSpaceParentId: 0,
+          spaceParentId: 0,
           requirements: null,
           metaData: [],
         },
@@ -220,13 +215,13 @@ export default class MockBackendAdapter implements IBackendAdapter {
             "Dies ist die Beschreibung des Bildes. Hier wird das Bild erklärt.",
           goals: "Ziel des Bild-Elements.",
           elementType: "image",
-          learningElementValueList: [
+          elementValueList: [
             {
               type: "Points",
               value: "25",
             },
           ],
-          learningSpaceParentId: 0,
+          spaceParentId: 0,
           requirements: null,
           metaData: [],
         },
@@ -240,13 +235,13 @@ export default class MockBackendAdapter implements IBackendAdapter {
             "Das ist die beschreibung für das Videoelement. Hier wird das Video erklärt.",
           goals: "Ziel des Video-Elements",
           elementType: "video",
-          learningElementValueList: [
+          elementValueList: [
             {
               type: "Points",
               value: "30",
             },
           ],
-          learningSpaceParentId: 0,
+          spaceParentId: 0,
           requirements: null,
           metaData: [],
         },

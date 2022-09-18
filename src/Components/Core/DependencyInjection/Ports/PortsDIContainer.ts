@@ -1,13 +1,13 @@
 import { ContainerModule } from "inversify";
-import ILearningRoomPort from "../../Ports/LearningRoomPort/ILearningRoomPort";
-import ILearningElementPort from "../../Ports/LearningElementPort/ILearningElementPort";
+import ISpacePort from "../../Ports/SpacePort/ISpacePort";
+import IElementPort from "../../Ports/ElementPort/IElementPort";
 import IAvatarPort from "../../Application/LoadAvatar/IAvatarPort";
-import ILearningWorldPort from "../../Ports/LearningWorldPort/ILearningWorldPort";
+import IWorldPort from "../../Ports/WorldPort/IWorldPort";
 import DebugPort from "../../Ports/DebugPort/DebugPort";
 import IDebugPort from "../../Ports/DebugPort/IDebugPort";
-import LearningElementPort from "../../Ports/LearningElementPort/LearningElementPort";
-import LearningRoomPort from "../../Ports/LearningRoomPort/LearningRoomPort";
-import LearningWorldPort from "../../Ports/LearningWorldPort/LearningWorldPort";
+import ElementPort from "../../Ports/ElementPort/ElementPort";
+import SpacePort from "../../Ports/SpacePort/SpacePort";
+import WorldPort from "../../Ports/WorldPort/WorldPort";
 import IMoodlePort from "../../Ports/MoodlePort/IMoodlePort";
 import MoodlePort from "../../Ports/MoodlePort/MoodlePort";
 import IUIPort from "../../Ports/UIPort/IUIPort";
@@ -17,16 +17,12 @@ import PORT_TYPES from "./PORT_TYPES";
 
 const PortsDIContainer = new ContainerModule((bind) => {
   // Ports
-  bind<ILearningWorldPort>(PORT_TYPES.ILearningWorldPort)
-    .to(LearningWorldPort)
-    .inSingletonScope();
+  bind<IWorldPort>(PORT_TYPES.IWorldPort).to(WorldPort).inSingletonScope();
 
-  bind<ILearningRoomPort>(PORT_TYPES.ILearningRoomPort)
-    .to(LearningRoomPort)
-    .inSingletonScope();
+  bind<ISpacePort>(PORT_TYPES.ISpacePort).to(SpacePort).inSingletonScope();
 
-  bind<ILearningElementPort>(PORT_TYPES.ILearningElementPort)
-    .to(LearningElementPort)
+  bind<IElementPort>(PORT_TYPES.IElementPort)
+    .to(ElementPort)
     .inSingletonScope();
 
   bind<IMoodlePort>(PORT_TYPES.IMoodlePort).to(MoodlePort).inSingletonScope();

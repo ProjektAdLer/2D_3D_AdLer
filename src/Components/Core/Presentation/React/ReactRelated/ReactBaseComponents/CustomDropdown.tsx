@@ -3,7 +3,7 @@ import StyledContainer from "./StyledContainer";
 type Props = {
   managed?: boolean;
   isOpen?: boolean;
-  headerElement?: React.ReactNode;
+  headerPart?: React.ReactNode;
   children?: React.ReactNode;
   initialOpen?: boolean;
   useAsTriggerOnly?: boolean;
@@ -11,7 +11,7 @@ type Props = {
 /**
  * @param managed controlls, if the dropdown is managed by the component or not
  * @param isOpen controlls, if the dropdown is open or not (only works, of the component is managed)
- * @param headerElement the header element of the dropdown
+ * @param headerPart the header element of the dropdown
  * @param icon the icon of the dropdown
  * @param children the content of the dropdown
  * @param initialOpen controlls, weather the dropdown is open or not on mount
@@ -21,7 +21,7 @@ type Props = {
 export default function CustomDropdown({
   isOpen = false,
   managed = false,
-  headerElement,
+  headerPart,
   children,
   initialOpen = false,
   useAsTriggerOnly = false,
@@ -44,7 +44,7 @@ export default function CustomDropdown({
   return (
     <div className="dropdown">
       <div className="dropdown-header" onClick={handleClick}>
-        {headerElement}
+        {headerPart}
       </div>
       {shouldShowDropdown && content}
     </div>

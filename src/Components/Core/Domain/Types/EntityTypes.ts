@@ -1,1 +1,1 @@
-export type LearningComponentID = number;
+export type ElementID = number;

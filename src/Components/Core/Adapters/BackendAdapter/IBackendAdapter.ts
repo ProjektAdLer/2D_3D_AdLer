@@ -1,5 +1,5 @@
-import { LearningComponentID } from "../../Domain/Types/EntityTypes";
-import LearningWorldTO from "../../Application/DataTransportObjects/LearningWorldTO";
+import { ElementID } from "../../Domain/Types/EntityTypes";
+import WorldTO from "../../Application/DataTransportObjects/WorldTO";
 import UserCredentials from "./Types/UserCredentials";
 import CourseListTO from "../../Application/DataTransportObjects/CourseListTO";
 
@@ -9,12 +9,9 @@ export type tempApiInfo = {
 };
 
 export default interface IBackendAdapter {
-  getLearningWorldData({
-    userToken,
-    worldId,
-  }: tempApiInfo): Promise<Partial<LearningWorldTO>>;
+  getWorldData({ userToken, worldId }: tempApiInfo): Promise<Partial<WorldTO>>;
 
-  scoreLearningElement(learningElementId: LearningComponentID): Promise<void>;
+  scoreElement(elementId: ElementID): Promise<void>;
 
   logInUser(userCredentials: UserCredentials): Promise<string>;
   getCoursesAvalibaleForUser(userToken: string): Promise<CourseListTO>;

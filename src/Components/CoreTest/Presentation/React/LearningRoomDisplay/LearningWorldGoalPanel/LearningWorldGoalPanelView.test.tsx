@@ -1,17 +1,17 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
-import LearningWorldGoalPanel from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningWorldGoalPanel/LearningWorldGoalPanel";
-import LearningWorldGoalPanelViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningWorldGoalPanel/LearningWorldGoalPanelViewModel";
+import WorldGoalPanel from "../../../../../Core/Presentation/React/SpaceDisplay/WorldGoalPanel/WorldGoalPanel";
+import WorldGoalPanelViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/WorldGoalPanel/WorldGoalPanelViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 
-const viewModelMock = new LearningWorldGoalPanelViewModel();
+const viewModelMock = new WorldGoalPanelViewModel();
 
 describe("LearningWorldGoalPanel", () => {
   test("should render", () => {
     viewModelMock.worldGoal.Value = "Test World";
     useBuilderMock([viewModelMock, undefined]);
 
-    const componentUnderTest = render(<LearningWorldGoalPanel />);
+    const componentUnderTest = render(<WorldGoalPanel />);
 
     expect(componentUnderTest.getByText("Lernziel")).toBeInTheDocument();
   });
@@ -21,7 +21,7 @@ describe("LearningWorldGoalPanel", () => {
     viewModelMock.worldGoal.Value = undefined;
     useBuilderMock([viewModelMock, undefined]);
 
-    const componentUnderTest = render(<LearningWorldGoalPanel />);
+    const componentUnderTest = render(<WorldGoalPanel />);
 
     expect(componentUnderTest.queryByText("Test World")).toBeNull();
   });
@@ -31,7 +31,7 @@ describe("LearningWorldGoalPanel", () => {
     useBuilderMock([viewModelMock, undefined]);
 
     const componentUnderTest = render(
-      <LearningWorldGoalPanel key="LearningWorldGoalPanel" />
+      <WorldGoalPanel key="LearningWorldGoalPanel" />
     );
 
     expect(componentUnderTest.getByText("Lernziel")).toBeInTheDocument();

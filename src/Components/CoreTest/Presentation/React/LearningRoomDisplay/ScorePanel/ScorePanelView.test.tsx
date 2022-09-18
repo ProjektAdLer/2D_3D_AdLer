@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
-import ScorePanel from "../../../../../Core/Presentation/React/LearningRoomDisplay/ScorePanel/ScorePanel";
-import ScorePanelViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/ScorePanel/ScorePanelViewModel";
+import ScorePanel from "../../../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanel";
+import ScorePanelViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanelViewModel";
 import "@testing-library/jest-dom";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 

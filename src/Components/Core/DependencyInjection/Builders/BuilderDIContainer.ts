@@ -1,27 +1,27 @@
 import { ContainerModule } from "inversify";
 import AvatarBuilder from "../../Presentation/Babylon/Avatar/AvatarBuilder";
 import DoorBuilder from "../../Presentation/Babylon/Door/DoorBuilder";
-import LearningElementBuilder from "../../Presentation/Babylon/LearningElement/LearningElementBuilder";
-import LearningRoomBuilder from "../../Presentation/Babylon/LearningRoom/LearningRoomBuilder";
+import ElementBuilder from "../../Presentation/Babylon/Elements/ElementBuilder";
+import SpaceBuilder from "../../Presentation/Babylon/Space/SpaceBuilder";
 import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
 import PresentationDirector from "../../Presentation/PresentationBuilder/PresentationDirector";
-import LearningElementModalBuilder from "../../Presentation/React/LearningRoomDisplay/LearningElementModal/LearningElementModalBuilder";
-import LearningElementsDropdownBuilder from "../../Presentation/React/LearningRoomDisplay/LearningElementsDropdown/LearningElementsDropdownBuilder";
+import ElementModalBuilder from "../../Presentation/React/SpaceDisplay/ElementModal/ElementModalBuilder";
+import ElementsDropdownBuilder from "../../Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownBuilder";
 import MoodleLoginFormBuilder from "../../Presentation/React/MoodleLoginForm/MoodleLoginFormBuilder";
-import ScorePanelBuilder from "../../Presentation/React/LearningRoomDisplay/ScorePanel/ScorePanelBuilder";
-import ModalManagerBuilder from "../../Presentation/React/LearningRoomDisplay/ModalManager/ModalManagerBuilder";
+import ScorePanelBuilder from "../../Presentation/React/SpaceDisplay/ScorePanel/ScorePanelBuilder";
+import ModalManagerBuilder from "../../Presentation/React/SpaceDisplay/ModalManager/ModalManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
 import MoodleLoginButtonBuilder from "../../Presentation/React/MoodleLoginButton/MoodleLoginButtonBuilder";
-import BottomTooltipBuilder from "../../Presentation/React/LearningRoomDisplay/BottomTooltip/BottomTooltipBuilder";
-import DebugPanelBuilder from "../../Presentation/React/LearningRoomDisplay/DebugPanel/DebugPanelBuilder";
-import LearningWorldNamePanelBuilder from "../../Presentation/React/LearningRoomDisplay/LearningWorldNamePanel/LearningWorldNamePanelBuilder";
-import LoadRoomButtonBuilder from "../../Presentation/React/LearningRoomDisplay/LoadRoomButton/LoadRoomButtonBuilder";
-import FullscreenSwitchBuilder from "../../Presentation/React/LearningRoomDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
-import LearningWorldGoalPanelBuilder from "~ReactComponents/LearningRoomDisplay/LearningWorldGoalPanel/LearningWorldGoalPanelBuilder";
-import HeaderBarBuilder from "~ReactComponents/RoomMenu/HeaderBar/HeaderBarBuilder";
-import LearningRoomSelectionBuilder from "~ReactComponents/RoomMenu/RoomSelectionSection/RoomSelectionSectionBuilder";
-import DetailSectionBuilder from "~ReactComponents/RoomMenu/DetailSection/DetailSectionBuilder";
+import BottomTooltipBuilder from "../../Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipBuilder";
+import DebugPanelBuilder from "../../Presentation/React/SpaceDisplay/DebugPanel/DebugPanelBuilder";
+import WorldNamePanelBuilder from "../../Presentation/React/SpaceDisplay/WorldNamePanel/WorldNamePanelBuilder";
+import LoadSpaceButtonBuilder from "../../Presentation/React/SpaceDisplay/LoadSpaceButton/LoadSpaceButtonBuilder";
+import FullscreenSwitchBuilder from "../../Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
+import WorldGoalPanelBuilder from "~ReactComponents/SpaceDisplay/WorldGoalPanel/WorldGoalPanelBuilder";
+import HeaderBarBuilder from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBarBuilder";
+import SpaceSelectionBuilder from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelectionBuilder";
+import DetailSectionBuilder from "~ReactComponents/SpaceMenu/DetailSection/DetailSectionBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -35,18 +35,14 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IMoodleLoginFormBuilder).to(
     MoodleLoginFormBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementModalBuilder).to(
-    LearningElementModalBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.IElementModalBuilder).to(
+    ElementModalBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningRoomBuilder).to(
-    LearningRoomBuilder
-  );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementBuilder).to(
-    LearningElementBuilder
-  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceBuilder).to(SpaceBuilder);
+  bind<IPresentationBuilder>(BUILDER_TYPES.IElementBuilder).to(ElementBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarBuilder).to(AvatarBuilder);
-  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementsDropdownBuilder).to(
-    LearningElementsDropdownBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.IElementsDropdownBuilder).to(
+    ElementsDropdownBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IModalManagerBuilder).to(
     ModalManagerBuilder
@@ -60,23 +56,23 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IDebugPanelBuilder).to(
     DebugPanelBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldNamePanelBuilder).to(
-    LearningWorldNamePanelBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.IWorldNamePanelBuilder).to(
+    WorldNamePanelBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ILoadRoomButtonBuilder).to(
-    LoadRoomButtonBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILoadSpaceButtonBuilder).to(
+    LoadSpaceButtonBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IFullscreenSwitchBuilder).to(
     FullscreenSwitchBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldGoalPanelBuilder).to(
-    LearningWorldGoalPanelBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.IWorldGoalPanelBuilder).to(
+    WorldGoalPanelBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IHeaderBarBuilder).to(
     HeaderBarBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IRoomSelectionSectionBuilder).to(
-    LearningRoomSelectionBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceSelectionBuilder).to(
+    SpaceSelectionBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IDetailSectionBuilder).to(
     DetailSectionBuilder

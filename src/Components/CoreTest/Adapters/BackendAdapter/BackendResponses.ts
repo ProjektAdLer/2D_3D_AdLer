@@ -1,22 +1,22 @@
-import LearningElementTO from "src/Components/Core/Application/DataTransportObjects/LearningElementTO";
-import LearningRoomTO from "src/Components/Core/Application/DataTransportObjects/LearningRoomTO";
-import LearningWorldTO from "src/Components/Core/Application/DataTransportObjects/LearningWorldTO";
+import ElementTO from "src/Components/Core/Application/DataTransportObjects/ElementTO";
+import SpaceTO from "src/Components/Core/Application/DataTransportObjects/SpaceTO";
+import WorldTO from "src/Components/Core/Application/DataTransportObjects/WorldTO";
 import IDSL from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
 
-export const minimalGetLearningWorldDataResponse: LearningWorldTO = {
+export const minimalGetLearningWorldDataResponse: WorldTO = {
   worldName: "TestWorld",
   worldGoal: "TestGoal",
-  learningRooms: [
+  spaces: [
     {
       id: 1,
       name: "TestRoom",
-      learningElements: [
+      elements: [
         {
           id: 1,
           name: "TestElement",
           value: 42,
           requirements: undefined,
-          learningElementData: {
+          elementData: {
             type: "text",
           },
         },
@@ -27,28 +27,28 @@ export const minimalGetLearningWorldDataResponse: LearningWorldTO = {
 
 // expected structure of the TOs
 // this needs to be updated if the TOs changes
-export const expectedLearningWorldTO: LearningWorldTO = {
+export const expectedLearningWorldTO: WorldTO = {
   worldName: expect.any(String),
   worldGoal: expect.any(String),
-  learningRooms: expect.any(Array),
+  spaces: expect.any(Array),
 };
 
-export const expectedLearningRoomTO: LearningRoomTO = {
+export const expectedLearningRoomTO: SpaceTO = {
   id: expect.any(Number),
   name: expect.any(String),
-  learningElements: expect.any(Array),
+  elements: expect.any(Array),
 };
 
-export const expectedLearningElementTO: LearningElementTO = {
+export const expectedLearningElementTO: ElementTO = {
   id: expect.any(Number),
   name: expect.any(String),
   value: expect.any(Number),
   requirements: expect.any(Array),
-  learningElementData: expect.any(Object),
+  elementData: expect.any(Object),
 };
 
 export const mockDSL: IDSL = {
-  learningWorld: {
+  world: {
     idNumber: "1a28a418-00f5-4b24-8ac0-5b4e03ed3f73",
     identifier: {
       type: "name",
@@ -58,9 +58,9 @@ export const mockDSL: IDSL = {
       "Diese Lernwelt soll den Lernenden, Metriken verständlich erklären.",
     goals:
       "Lernende können nach Abschluss der Lernwelt Metriken identifizieren und anwenden.",
-    learningWorldContent: [],
+    worldContent: [],
     topics: [],
-    learningSpaces: [
+    spaces: [
       {
         spaceId: 0,
         identifier: {
@@ -69,11 +69,11 @@ export const mockDSL: IDSL = {
         },
         description: "Diese Lernelemente sind keinem Lernraum zugeordnet",
         goals: "",
-        learningSpaceContent: [1, 2, 3, 4, 5],
+        spaceContent: [1, 2, 3, 4, 5],
         requirements: null,
       },
     ],
-    learningElements: [
+    elements: [
       {
         id: 1,
         identifier: {
@@ -83,13 +83,13 @@ export const mockDSL: IDSL = {
         description: "",
         goals: "",
         elementType: "json",
-        learningElementValueList: [
+        elementValueList: [
           {
             type: "Points",
             value: "0",
           },
         ],
-        learningSpaceParentId: 0,
+        spaceParentId: 0,
         requirements: null,
         metaData: null,
       },
@@ -104,13 +104,13 @@ export const mockDSL: IDSL = {
         goals:
           "Lernende verstehen was Metriken sind und wofür sie genutzt werden. ",
         elementType: "h5p",
-        learningElementValueList: [
+        elementValueList: [
           {
             type: "Points",
             value: "15",
           },
         ],
-        learningSpaceParentId: 0,
+        spaceParentId: 0,
         requirements: null,
         metaData: [
           {
@@ -133,13 +133,13 @@ export const mockDSL: IDSL = {
         description: "In diesem Video werden weitere Metriken erklärt.",
         goals: "Lernende haben ein vertieftes Verständnis über Metriken",
         elementType: "h5p",
-        learningElementValueList: [
+        elementValueList: [
           {
             type: "Points",
             value: "25",
           },
         ],
-        learningSpaceParentId: 0,
+        spaceParentId: 0,
         requirements: null,
         metaData: [
           {
@@ -163,13 +163,13 @@ export const mockDSL: IDSL = {
           "Es ist eine große Wort Tafel gegeben. Auf dieser müssen verschiedene Begriffe gesucht und gefunden werden.",
         goals: "Finde alle Wörter um 100% zu erreichen.",
         elementType: "h5p",
-        learningElementValueList: [
+        elementValueList: [
           {
             type: "Points",
             value: "25",
           },
         ],
-        learningSpaceParentId: 0,
+        spaceParentId: 0,
         requirements: null,
         metaData: [
           {
@@ -194,13 +194,13 @@ export const mockDSL: IDSL = {
         goals:
           "Grundlegende Begriffe über Metriken werden nochmals wiederholt.",
         elementType: "h5p",
-        learningElementValueList: [
+        elementValueList: [
           {
             type: "Points",
             value: "30",
           },
         ],
-        learningSpaceParentId: 0,
+        spaceParentId: 0,
         requirements: null,
         metaData: [
           {

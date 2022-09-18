@@ -1,7 +1,7 @@
 const PORT_TYPES = {
-  ILearningElementPort: Symbol("ILearningElementPort"),
-  ILearningRoomPort: Symbol("ILearningRoomPort"),
-  ILearningWorldPort: Symbol("ILearningWorldPort"),
+  IElementPort: Symbol("IElementPort"),
+  ISpacePort: Symbol("ISpacePort"),
+  IWorldPort: Symbol("IWorldPort"),
   IMoodlePort: Symbol("IMoodlePort"),
   IAvatarPort: Symbol("IAvatarPort"),
   IUIPort: Symbol("IUIPort"),

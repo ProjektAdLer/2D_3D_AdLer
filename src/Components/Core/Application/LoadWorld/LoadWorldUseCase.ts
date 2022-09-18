@@ -2,29 +2,29 @@ import { type tempApiInfo } from "../../Adapters/BackendAdapter/IBackendAdapter"
 import { inject, injectable } from "inversify";
 import type IBackendAdapter from "../../Adapters/BackendAdapter/IBackendAdapter";
 import CORE_TYPES from "../../DependencyInjection/CoreTypes";
-import LearningElementEntity from "../../Domain/Entities/LearningElementEntity";
-import LearningRoomEntity from "../../Domain/Entities/LearningRoomEntity";
-import LearningWorldEntity from "../../Domain/Entities/LearningWorldEntity";
+import ElementEntity from "../../Domain/Entities/ElementEntity";
+import SpaceEntity from "../../Domain/Entities/SpaceEntity";
+import WorldEntity from "../../Domain/Entities/WorldEntity";
 import UserDataEntity from "../../Domain/Entities/UserDataEntity";
 import type IEntityContainer from "../../Domain/EntityContainer/IEntityContainer";
-import type ILearningWorldPort from "../../Ports/LearningWorldPort/ILearningWorldPort";
+import type IWorldPort from "../../Ports/WorldPort/IWorldPort";
 import ILoadWorldUseCase from "./ILoadWorldUseCase";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import type ILoadAvatarUseCase from "../LoadAvatar/ILoadAvatarUseCase";
 import USECASE_TYPES from "../../DependencyInjection/UseCases/USECASE_TYPES";
-import H5PLearningElementData from "../../Domain/Entities/SpecificLearningElements/H5PLearningElementData";
-import TextLearningElementData from "../../Domain/Entities/SpecificLearningElements/TextLearningElementData";
-import VideoLearningElementData from "../../Domain/Entities/SpecificLearningElements/VideoLearningElementData";
-import ImageLearningElementData from "../../Domain/Entities/SpecificLearningElements/ImageLearningElementData";
+import H5PElementData from "../../Domain/Entities/ElementData/H5PElementData";
+import TextElementData from "../../Domain/Entities/ElementData/TextElementData";
+import VideoElementData from "../../Domain/Entities/ElementData/VideoElementData";
+import ImageElementData from "../../Domain/Entities/ElementData/ImageElementData";
 import type IUIPort from "../../Ports/UIPort/IUIPort";
-import LearningWorldTO from "../DataTransportObjects/LearningWorldTO";
-import LearningElementTO from "../DataTransportObjects/LearningElementTO";
+import WorldTO from "../DataTransportObjects/WorldTO";
+import ElementTO from "../DataTransportObjects/ElementTO";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
   constructor(
-    @inject(PORT_TYPES.ILearningWorldPort)
-    private learningWorldPort: ILearningWorldPort,
+    @inject(PORT_TYPES.IWorldPort)
+    private worldPort: IWorldPort,
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter)
@@ -35,7 +35,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     private loadAvatarUseCase: ILoadAvatarUseCase
   ) {}
 
-  async executeAsync(): Promise<LearningWorldTO> {
+  async executeAsync(): Promise<WorldTO> {
     const userData = this.container.getEntitiesOfType(UserDataEntity);
 
     if (userData.length === 0 || userData[0]?.isLoggedIn === false) {
@@ -43,21 +43,20 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       return Promise.reject("User is not logged in");
     }
 
-    let learningWorldEntity =
-      this.container.getEntitiesOfType(LearningWorldEntity)[0];
+    let worldEntity = this.container.getEntitiesOfType(WorldEntity)[0];
 
-    if (!learningWorldEntity) {
-      learningWorldEntity = await this.load(userData[0]);
+    if (!worldEntity) {
+      worldEntity = await this.load(userData[0]);
     }
 
-    this.learningWorldPort.presentLearningWorld(this.toTO(learningWorldEntity));
+    this.worldPort.presentWorld(this.toTO(worldEntity));
     // TODO: Move this outside of this use case - PG
     await this.loadAvatarUseCase.executeAsync();
 
-    return Promise.resolve(this.toTO(learningWorldEntity));
+    return Promise.resolve(this.toTO(worldEntity));
   }
 
-  private async load(userData: UserDataEntity): Promise<LearningWorldEntity> {
+  private async load(userData: UserDataEntity): Promise<WorldEntity> {
     // TODO: remove hardcoded worldName when a learning world is selected
 
     const coursesList = await this.backendAdapter.getCoursesAvalibaleForUser(
@@ -69,87 +68,83 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       worldId: coursesList.courses[0].courseId, // TODO: This can be a random number for now
     } as tempApiInfo;
 
-    const response = await this.backendAdapter.getLearningWorldData(apiData);
+    const response = await this.backendAdapter.getWorldData(apiData);
 
     // create learning room entities with learning element entities
-    const learningRoomEntities: LearningRoomEntity[] = [];
-    response.learningRooms?.forEach((room) => {
-      let learningElementEntities: LearningElementEntity[] = [];
-      room.learningElements?.forEach((element) => {
-        learningElementEntities.push(this.mapLearningElement(element));
+    const spaceEntities: SpaceEntity[] = [];
+    response.spaces?.forEach((space) => {
+      let elementEntities: ElementEntity[] = [];
+      space.elements?.forEach((element) => {
+        elementEntities.push(this.mapElement(element));
       });
 
-      learningRoomEntities.push(
-        this.container.createEntity<LearningRoomEntity>(
+      spaceEntities.push(
+        this.container.createEntity<SpaceEntity>(
           {
-            id: room.id,
-            name: room.name,
-            learningElements: learningElementEntities,
+            id: space.id,
+            name: space.name,
+            elements: elementEntities,
           },
-          LearningRoomEntity
+          SpaceEntity
         )
       );
     });
 
     // create learning world entity
-    const learningWorldEntity =
-      this.container.createEntity<LearningWorldEntity>(
-        {
-          worldName: response.worldName,
-          learningRooms: learningRoomEntities,
-          worldGoal: response.worldGoal,
-        },
-        LearningWorldEntity
-      );
+    const worldEntity = this.container.createEntity<WorldEntity>(
+      {
+        worldName: response.worldName,
+        spaces: spaceEntities,
+        worldGoal: response.worldGoal,
+      },
+      WorldEntity
+    );
 
-    return learningWorldEntity;
+    return worldEntity;
   }
 
-  private mapLearningElement = (
-    element: LearningElementTO
-  ): LearningElementEntity => {
-    const entityToStore: Partial<LearningElementEntity> = {
+  private mapElement = (element: ElementTO): ElementEntity => {
+    const entityToStore: Partial<ElementEntity> = {
       id: element.id,
       value: element.value,
       requirements: element.requirements ?? [],
       name: element.name,
     };
 
-    switch (element.learningElementData.type) {
+    switch (element.elementData.type) {
       case "text":
-        entityToStore.learningElementData = {
+        entityToStore.elementData = {
           type: "text",
-        } as TextLearningElementData;
+        } as TextElementData;
         break;
       case "image":
-        entityToStore.learningElementData = {
+        entityToStore.elementData = {
           type: "image",
-        } as ImageLearningElementData;
+        } as ImageElementData;
         break;
       case "video":
-        entityToStore.learningElementData = {
+        entityToStore.elementData = {
           type: "video",
-        } as VideoLearningElementData;
+        } as VideoElementData;
         break;
       case "h5p":
-        let h5pElementData =
-          element.learningElementData as H5PLearningElementData;
-        entityToStore.learningElementData = {
+        let h5pElementData = element.elementData as H5PElementData;
+        entityToStore.elementData = {
           type: "h5p",
           fileName: h5pElementData.fileName,
           contextId: h5pElementData.contextId,
-        } as H5PLearningElementData;
+        } as H5PElementData;
     }
 
-    return this.container.createEntity<LearningElementEntity>(
+    return this.container.createEntity<ElementEntity>(
       entityToStore,
-      LearningElementEntity
+      ElementEntity
     );
   };
 
-  private toTO(entityToConvert: LearningWorldEntity): LearningWorldTO {
+  private toTO(entityToConvert: WorldEntity): WorldTO {
     // spread to prevent passing a reference
     // this will need to be changed when entity and TO are not matching in structure anymore
-    return structuredClone(entityToConvert) as LearningWorldTO;
+    return structuredClone(entityToConvert) as WorldTO;
   }
 }

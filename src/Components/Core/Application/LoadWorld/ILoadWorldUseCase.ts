@@ -1,4 +1,4 @@
 import { IAsyncUsecase } from "../Abstract/IAsyncUsecase";
-import LearningWorldTO from "../DataTransportObjects/LearningWorldTO";
+import WorldTO from "../DataTransportObjects/WorldTO";
 export default interface ILoadWorldUseCase
-  extends IAsyncUsecase<void, LearningWorldTO> {}
+  extends IAsyncUsecase<void, WorldTO> {}

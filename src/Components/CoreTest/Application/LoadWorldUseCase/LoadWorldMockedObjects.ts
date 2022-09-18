@@ -1,11 +1,11 @@
-import LearningElementTO from "src/Components/Core/Application/DataTransportObjects/LearningElementTO";
-import LearningElementEntity from "src/Components/Core/Domain/Entities/LearningElementEntity";
-import H5PLearningElementData from "src/Components/Core/Domain/Entities/SpecificLearningElements/H5PLearningElementData";
-import ImageLearningElementData from "src/Components/Core/Domain/Entities/SpecificLearningElements/ImageLearningElementData";
-import TextLearningElementData from "src/Components/Core/Domain/Entities/SpecificLearningElements/TextLearningElementData";
-import VideoLearningElementData from "src/Components/Core/Domain/Entities/SpecificLearningElements/VideoLearningElementData";
+import ElementTO from "src/Components/Core/Application/DataTransportObjects/ElementTO";
+import ElementEntity from "src/Components/Core/Domain/Entities/ElementEntity";
+import H5PElementData from "src/Components/Core/Domain/Entities/ElementData/H5PElementData";
+import ImageLearningElementData from "src/Components/Core/Domain/Entities/ElementData/ImageElementData";
+import TextLearningElementData from "src/Components/Core/Domain/Entities/ElementData/TextElementData";
+import VideoElementData from "src/Components/Core/Domain/Entities/ElementData/VideoElementData";
 
-export const h5pInput: LearningElementTO = {
+export const h5pInput: ElementTO = {
   id: 1,
   name: "Test",
   value: 10,
@@ -15,14 +15,14 @@ export const h5pInput: LearningElementTO = {
       value: 1,
     },
   ],
-  learningElementData: {
+  elementData: {
     type: "h5p",
     contextId: 1337,
     fileName: "testFileName",
-  } as H5PLearningElementData,
+  } as H5PElementData,
 };
 
-export const h5pExpected: Partial<LearningElementEntity> = {
+export const h5pExpected: Partial<ElementEntity> = {
   id: 1,
   name: "Test",
   value: 10,
@@ -32,14 +32,14 @@ export const h5pExpected: Partial<LearningElementEntity> = {
       value: 1,
     },
   ],
-  learningElementData: {
+  elementData: {
     type: "h5p",
     contextId: 1337,
     fileName: "testFileName",
-  } as H5PLearningElementData,
+  } as H5PElementData,
 };
 
-export const textInput: LearningElementTO = {
+export const textInput: ElementTO = {
   id: 2,
   name: "Test",
   value: 10,
@@ -49,12 +49,12 @@ export const textInput: LearningElementTO = {
       value: 1,
     },
   ],
-  learningElementData: {
+  elementData: {
     type: "text",
   } as TextLearningElementData,
 };
 
-export const textExpected: Partial<LearningElementEntity> = {
+export const textExpected: Partial<ElementEntity> = {
   id: 2,
   name: "Test",
   value: 10,
@@ -64,12 +64,12 @@ export const textExpected: Partial<LearningElementEntity> = {
       value: 1,
     },
   ],
-  learningElementData: {
+  elementData: {
     type: "text",
   } as TextLearningElementData,
 };
 
-export const imageInput: LearningElementTO = {
+export const imageInput: ElementTO = {
   id: 3,
   name: "Test",
   value: 10,
@@ -79,12 +79,12 @@ export const imageInput: LearningElementTO = {
       value: 1,
     },
   ],
-  learningElementData: {
+  elementData: {
     type: "image",
   } as ImageLearningElementData,
 };
 
-export const imageExpected: Partial<LearningElementEntity> = {
+export const imageExpected: Partial<ElementEntity> = {
   id: 3,
   name: "Test",
   value: 10,
@@ -94,12 +94,12 @@ export const imageExpected: Partial<LearningElementEntity> = {
       value: 1,
     },
   ],
-  learningElementData: {
+  elementData: {
     type: "image",
   } as ImageLearningElementData,
 };
 
-export const videoInput: LearningElementTO = {
+export const videoInput: ElementTO = {
   id: 4,
   name: "Test",
   value: 10,
@@ -109,12 +109,12 @@ export const videoInput: LearningElementTO = {
       value: 1,
     },
   ],
-  learningElementData: {
+  elementData: {
     type: "video",
-  } as VideoLearningElementData,
+  } as VideoElementData,
 };
 
-export const videoExpected: Partial<LearningElementEntity> = {
+export const videoExpected: Partial<ElementEntity> = {
   id: 4,
   name: "Test",
   value: 10,
@@ -124,15 +124,15 @@ export const videoExpected: Partial<LearningElementEntity> = {
       value: 1,
     },
   ],
-  learningElementData: {
+  elementData: {
     type: "video",
-  } as VideoLearningElementData,
+  } as VideoElementData,
 };
 
 export const mapLearningElementInputAndExpected: [
   string,
-  LearningElementTO,
-  Partial<LearningElementEntity>
+  ElementTO,
+  Partial<ElementEntity>
 ][] = [
   ["h5p", h5pInput, h5pExpected],
   ["text", textInput, textExpected],

@@ -1,10 +1,10 @@
-import { NotificationType } from "../../Presentation/React/LearningRoomDisplay/ModalManager/ModalManagerPresenter";
+import { NotificationType } from "../../Presentation/React/SpaceDisplay/ModalManager/ModalManagerPresenter";
 import { injectable } from "inversify";
-import IBottomTooltipPresenter from "../../Presentation/React/LearningRoomDisplay/BottomTooltip/IBottomTooltipPresenter";
-import IModalManagerPresenter from "../../Presentation/React/LearningRoomDisplay/ModalManager/IModalManagerPresenter";
+import IBottomTooltipPresenter from "../../Presentation/React/SpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
+import IModalManagerPresenter from "../../Presentation/React/SpaceDisplay/ModalManager/IModalManagerPresenter";
 import IUIPort from "./IUIPort";
 import { logger } from "src/Lib/Logger";
-import LearningElementTO from "../../Application/DataTransportObjects/LearningElementTO";
+import ElementTO from "../../Application/DataTransportObjects/ElementTO";
 
 @injectable()
 export default class UIPort implements IUIPort {
@@ -27,12 +27,12 @@ export default class UIPort implements IUIPort {
     this.bottomTooltipPresenter.hide();
   }
 
-  displayLearningElementTooltip = (learningElement: LearningElementTO) => {
+  displayElementTooltip = (element: ElementTO) => {
     if (!this.bottomTooltipPresenter) {
       throw new Error("BottomTooltipPresenter not registered");
     }
 
-    this.bottomTooltipPresenter.displayLearningElement(learningElement);
+    this.bottomTooltipPresenter.displayElement(element);
   };
 
   // Setter for presenters

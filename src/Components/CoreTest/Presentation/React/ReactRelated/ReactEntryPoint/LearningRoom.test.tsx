@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import LearningRoom from "~ReactComponents/ReactRelated/ReactEntryPoint/LearningRoom";
+import Space from "~ReactComponents/ReactRelated/ReactEntryPoint/Space";
 
 jest.mock(
   "../../../../../Core/Presentation/React/LearningRoomDisplay/BottomTooltip/BottomTooltip",
@@ -44,6 +44,6 @@ jest.mock(
 
 describe("LearningRoom.tsx", () => {
   test("should render", () => {
-    render(<LearningRoom />);
+    render(<Space />);
   });
 });

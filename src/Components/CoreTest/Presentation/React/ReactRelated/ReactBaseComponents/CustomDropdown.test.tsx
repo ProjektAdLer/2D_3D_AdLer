@@ -19,7 +19,7 @@ describe("Custom Dropdown", () => {
 
   it("should open when clicked", () => {
     const componentUnderTest = render(
-      <CustomDropdown headerElement={"OpenElement"} useAsTriggerOnly={true}>
+      <CustomDropdown headerPart={"OpenElement"} useAsTriggerOnly={true}>
         <div>Test</div>
       </CustomDropdown>
     );

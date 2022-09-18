@@ -27,7 +27,10 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
           >
             Gehe zum Lernraum Menü
           </StyledButton>
-          <StyledButton shape="freefloatleft" onClick={() => navigate("/room")}>
+          <StyledButton
+            shape="freefloatleft"
+            onClick={() => navigate("/space")}
+          >
             Gehe zum Lernraum
           </StyledButton>
         </p>

@@ -1,10 +1,10 @@
 import { renderHook } from "@testing-library/react";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import FullscreenSwitchController from "~ReactComponents/LearningRoomDisplay/FullscreenSwitch/FullscreenSwitchController";
-import FullscreenSwitchViewModel from "~ReactComponents/LearningRoomDisplay/FullscreenSwitch/FullscreenSwitchViewModel";
+import FullscreenSwitchController from "~ReactComponents/SpaceDisplay/FullscreenSwitch/FullscreenSwitchController";
+import FullscreenSwitchViewModel from "~ReactComponents/SpaceDisplay/FullscreenSwitch/FullscreenSwitchViewModel";
 import * as useInjection from "inversify-react";
-import FullscreenSwitchBuilder from "~ReactComponents/LearningRoomDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
+import FullscreenSwitchBuilder from "~ReactComponents/SpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
 import { act } from "react-dom/test-utils";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import { mock } from "jest-mock-extended";

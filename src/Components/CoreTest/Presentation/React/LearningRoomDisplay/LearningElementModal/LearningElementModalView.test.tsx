@@ -1,32 +1,32 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
 import { mock } from "jest-mock-extended";
-import H5PLearningElementData from "../../../../../Core/Domain/Entities/SpecificLearningElements/H5PLearningElementData";
-import LearningElementModal from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningElementModal/LearningElementModal";
-import LearningElementModalController from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningElementModal/LearningElementModalController";
-import LearningElementModalViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningElementModal/LearningElementModalViewModel";
-import * as NewH5PContent from "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningElementModal/SubComponents/NewH5PContent";
+import H5PElementData from "../../../../../Core/Domain/Entities/ElementData/H5PElementData";
+import ElementModal from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModal";
+import ElementModalController from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalController";
+import ElementModalViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
+import * as NewH5PContent from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/NewH5PContent";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 
-let fakeModel = new LearningElementModalViewModel();
+let fakeModel = new ElementModalViewModel();
 fakeModel.isOpen.Value = true;
 fakeModel.id.Value = 123;
-fakeModel.learningElementData.Value = {
+fakeModel.elementData.Value = {
   type: "text",
 };
 
-const fakeController = mock<LearningElementModalController>();
+const fakeController = mock<ElementModalController>();
 
 describe("LearningElementModal", () => {
   test("doesn't render without controller", () => {
     useBuilderMock([fakeModel, undefined]);
-    const { container } = render(<LearningElementModal />);
+    const { container } = render(<ElementModal />);
     expect(container.firstChild).toBeNull();
   });
 
   test("doesn't render without view model", () => {
     useBuilderMock([undefined, fakeController]);
-    const { container } = render(<LearningElementModal />);
+    const { container } = render(<ElementModal />);
     expect(container.firstChild).toBeNull();
   });
 
@@ -35,7 +35,7 @@ describe("LearningElementModal", () => {
 
     useBuilderMock([fakeModel, fakeController]);
 
-    const componentUnderTest = render(<LearningElementModal />);
+    const componentUnderTest = render(<ElementModal />);
     expect(componentUnderTest.container.childElementCount).toBe(0);
 
     fakeModel.isOpen.Value = true;
@@ -44,40 +44,40 @@ describe("LearningElementModal", () => {
   test("should render its content", () => {
     useBuilderMock([fakeModel, fakeController]);
 
-    const componentUnderTest = render(<LearningElementModal />);
+    const componentUnderTest = render(<ElementModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
 
   test.each([["text"], ["image"], ["video"], ["h5p"]])(
     "should render its content with the correct type",
     (type) => {
-      fakeModel.learningElementData.Value = {
+      fakeModel.elementData.Value = {
         type,
       };
 
       if (type === "h5p") {
-        fakeModel.learningElementData.Value = {
+        fakeModel.elementData.Value = {
           type,
           contextId: 123,
           fileName: "test.h5p",
-        } as H5PLearningElementData;
+        } as H5PElementData;
         jest.spyOn(NewH5PContent, "default").mockReturnValue(<div></div>);
       }
 
       useBuilderMock([fakeModel, fakeController]);
 
-      const componentUnderTest = render(<LearningElementModal />);
+      const componentUnderTest = render(<ElementModal />);
       expect(componentUnderTest.container.childElementCount).toBe(1);
     }
   );
 
   test("should render error, if no element is selected", () => {
-    fakeModel.learningElementData.Value = {
+    fakeModel.elementData.Value = {
       type: "type",
     };
     useBuilderMock([fakeModel, fakeController]);
 
-    const componentUnderTest = render(<LearningElementModal />);
+    const componentUnderTest = render(<ElementModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
     expect(
       componentUnderTest.getByText("No Learning Element selected")
@@ -87,10 +87,10 @@ describe("LearningElementModal", () => {
   test("should call controller with learning element id when closed", () => {
     useBuilderMock([fakeModel, fakeController]);
 
-    const componentUnderTest = render(<LearningElementModal />);
+    const componentUnderTest = render(<ElementModal />);
     fireEvent.click(componentUnderTest.getByRole("button"));
 
-    expect(fakeController.scoreLearningElement).toHaveBeenCalledWith(
+    expect(fakeController.scoreElement).toHaveBeenCalledWith(
       fakeModel.id.Value
     );
   });
