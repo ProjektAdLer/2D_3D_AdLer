@@ -1,10 +1,10 @@
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
-import FullscreenSwitchBuilder from "../../../../../Core/Presentation/React/LearningRoomDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
-import FullscreenSwitchController from "../../../../../Core/Presentation/React/LearningRoomDisplay/FullscreenSwitch/FullscreenSwitchController";
-import FullscreenSwitchPresenter from "../../../../../Core/Presentation/React/LearningRoomDisplay/FullscreenSwitch/FullscreenSwitchPresenter";
-import FullscreenSwitchViewModel from "../../../../../Core/Presentation/React/LearningRoomDisplay/FullscreenSwitch/FullscreenSwitchViewModel";
+import FullscreenSwitchBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
+import FullscreenSwitchController from "../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchController";
+import FullscreenSwitchPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchPresenter";
+import FullscreenSwitchViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchViewModel";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();

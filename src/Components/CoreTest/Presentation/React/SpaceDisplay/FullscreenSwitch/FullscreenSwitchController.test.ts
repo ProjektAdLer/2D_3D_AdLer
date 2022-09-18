@@ -1,5 +1,5 @@
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import FullscreenSwitchController from "../../../../../Core/Presentation/React/LearningRoomDisplay/FullscreenSwitch/FullscreenSwitchController";
+import FullscreenSwitchController from "../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchController";
 
 describe("FullscreenSwitchController", () => {
   let systemUnderTest: FullscreenSwitchController;
