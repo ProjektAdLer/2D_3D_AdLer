@@ -1,20 +1,20 @@
 import { ContainerModule } from "inversify";
-import CalculateSpaceScore from "../../Application/CalculateSpaceScore/CalculateSpaceScore";
-import ICalculateSpaceScore from "../../Application/CalculateSpaceScore/ICalculateSpaceScore";
-import DebugUseCase from "../../Application/DebugUseCase/DebugUseCase";
-import IDebugUseCase from "../../Application/DebugUseCase/IDebugUseCase";
-import IElementStartedUseCase from "../../Application/ElementStarted/IElementStartedUseCase";
-import ElementStartedUseCase from "../../Application/ElementStarted/ElementStartedUseCase";
-import ILoadAvatarUseCase from "../../Application/LoadAvatar/ILoadAvatarUseCase";
-import LoadAvatarUseCase from "../../Application/LoadAvatar/LoadAvatarUseCase";
-import ILoadSpaceUseCase from "../../Application/LoadSpace/ILoadSpaceUseCase";
-import LoadSpaceUseCase from "../../Application/LoadSpace/LoadSpaceUseCase";
-import ILoadWorldUseCase from "../../Application/LoadWorld/ILoadWorldUseCase";
-import LoadWorldUseCase from "../../Application/LoadWorld/LoadWorldUseCase";
-import ILogUserIntoMoodleUseCase from "../../Application/LogUserIntoMoodle/ILogUserIntoMoodleUseCase";
-import LogUserIntoMoodleUseCase from "../../Application/LogUserIntoMoodle/LogUserIntoMoodleUseCase";
-import IScoreElementUseCase from "../../Application/ScoreElementUseCase/IScoreElementUseCase";
-import ScoreElementUseCase from "../../Application/ScoreElementUseCase/ScoreElementUseCase";
+import CalculateSpaceScoreUseCase from "../../Application/UseCases/CalculateSpaceScore/CalculateSpaceScoreUseCase";
+import ICalculateSpaceScoreUseCase from "../../Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
+import DebugUseCase from "../../Application/UseCases/Debug/DebugUseCase";
+import IDebugUseCase from "../../Application/UseCases/Debug/IDebugUseCase";
+import IElementStartedUseCase from "../../Application/UseCases/ElementStarted/IElementStartedUseCase";
+import ElementStartedUseCase from "../../Application/UseCases/ElementStarted/ElementStartedUseCase";
+import ILoadAvatarUseCase from "../../Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
+import LoadAvatarUseCase from "../../Application/UseCases/LoadAvatar/LoadAvatarUseCase";
+import ILoadSpaceUseCase from "../../Application/UseCases/LoadSpace/ILoadSpaceUseCase";
+import LoadSpaceUseCase from "../../Application/UseCases/LoadSpace/LoadSpaceUseCase";
+import ILoadWorldUseCase from "../../Application/UseCases/LoadWorld/ILoadWorldUseCase";
+import LoadWorldUseCase from "../../Application/UseCases/LoadWorld/LoadWorldUseCase";
+import ILoginMoodleUseCase from "../../Application/UseCases/LoginMoodle/ILoginMoodleUseCase";
+import LoginMoodleUseCase from "../../Application/UseCases/LoginMoodle/LoginMoodleUseCase";
+import IScoreElementUseCase from "../../Application/UseCases/ScoreElement/IScoreElementUseCase";
+import ScoreElementUseCase from "../../Application/UseCases/ScoreElement/ScoreElementUseCase";
 import USECASE_TYPES from "./USECASE_TYPES";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
@@ -36,12 +36,12 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(ElementStartedUseCase)
     .inSingletonScope();
 
-  bind<ICalculateSpaceScore>(USECASE_TYPES.ICalculateSpaceScore)
-    .to(CalculateSpaceScore)
+  bind<ICalculateSpaceScoreUseCase>(USECASE_TYPES.ICalculateSpaceScore)
+    .to(CalculateSpaceScoreUseCase)
     .inSingletonScope();
 
-  bind<ILogUserIntoMoodleUseCase>(USECASE_TYPES.ILogUserIntoMoodleUseCase)
-    .to(LogUserIntoMoodleUseCase)
+  bind<ILoginMoodleUseCase>(USECASE_TYPES.ILogUserIntoMoodleUseCase)
+    .to(LoginMoodleUseCase)
     .inSingletonScope();
 
   bind<IDebugUseCase>(USECASE_TYPES.IDebugUseCase)

@@ -1,6 +1,6 @@
 import { useInjection } from "inversify-react";
 import React, { useEffect } from "react";
-import ILoadWorldUseCase from "src/Components/Core/Application/LoadWorld/ILoadWorldUseCase";
+import ILoadWorldUseCase from "src/Components/Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import HeaderBar from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBar";
 import DetailSection from "~ReactComponents/SpaceMenu/DetailSection/DetailSection";

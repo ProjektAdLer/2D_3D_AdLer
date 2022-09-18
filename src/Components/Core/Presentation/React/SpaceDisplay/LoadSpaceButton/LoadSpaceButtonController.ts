@@ -1,4 +1,4 @@
-import ILoadWorldUseCase from "../../../../Application/LoadWorld/ILoadWorldUseCase";
+import ILoadWorldUseCase from "../../../../Application/UseCases/LoadWorld/ILoadWorldUseCase";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPES";
 import ILoadSpaceButtonController from "./ILoadSpaceButtonController";

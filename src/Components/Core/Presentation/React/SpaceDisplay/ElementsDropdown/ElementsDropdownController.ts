@@ -1,4 +1,4 @@
-import IElementStartedUseCase from "../../../../Application/ElementStarted/IElementStartedUseCase";
+import IElementStartedUseCase from "../../../../Application/UseCases/ElementStarted/IElementStartedUseCase";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPES";
 import { ElementID } from "../../../../Domain/Types/EntityTypes";

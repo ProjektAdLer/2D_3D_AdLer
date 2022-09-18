@@ -1,5 +1,5 @@
 import bind from "bind-decorator";
-import IElementStartedUseCase from "../../../Application/ElementStarted/IElementStartedUseCase";
+import IElementStartedUseCase from "../../../Application/UseCases/ElementStarted/IElementStartedUseCase";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";

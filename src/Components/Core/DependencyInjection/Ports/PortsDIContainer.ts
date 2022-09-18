@@ -1,7 +1,7 @@
 import { ContainerModule } from "inversify";
 import ISpacePort from "../../Ports/SpacePort/ISpacePort";
 import IElementPort from "../../Ports/ElementPort/IElementPort";
-import IAvatarPort from "../../Application/LoadAvatar/IAvatarPort";
+import IAvatarPort from "../../Application/UseCases/LoadAvatar/IAvatarPort";
 import IWorldPort from "../../Ports/WorldPort/IWorldPort";
 import DebugPort from "../../Ports/DebugPort/DebugPort";
 import IDebugPort from "../../Ports/DebugPort/IDebugPort";

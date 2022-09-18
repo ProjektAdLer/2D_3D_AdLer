@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import IAvatarPort, {
   AvatarTO,
-} from "../../../Application/LoadAvatar/IAvatarPort";
+} from "../../../Application/UseCases/LoadAvatar/IAvatarPort";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import type IScenePresenter from "../SceneManagement/IScenePresenter";
 import AvatarViewModel from "./AvatarViewModel";

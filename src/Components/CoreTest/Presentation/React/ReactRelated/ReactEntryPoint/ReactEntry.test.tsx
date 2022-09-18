@@ -1,6 +1,6 @@
 import { mock } from "jest-mock-extended";
 import { config } from "../../../../../../config";
-import IDebugUseCase from "../../../../../Core/Application/DebugUseCase/IDebugUseCase";
+import IDebugUseCase from "../../../../../Core/Application/UseCases/Debug/IDebugUseCase";
 import BUILDER_TYPES from "../../../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";

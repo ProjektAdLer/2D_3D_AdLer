@@ -1,4 +1,4 @@
-import ILoadSpaceUseCase from "src/Components/Core/Application/LoadSpace/ILoadSpaceUseCase";
+import ILoadSpaceUseCase from "src/Components/Core/Application/UseCases/LoadSpace/ILoadSpaceUseCase";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import ISpaceSelectionController from "./ISpaceSelectionController";
