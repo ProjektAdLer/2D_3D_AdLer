@@ -3,18 +3,18 @@ import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
 import IEntityContainer from "../../../Core/Domain/EntityContainer/IEntityContainer";
 import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import CalculateTotalRoomScore from "../../../Core/Application/CalculateTotalRoomScore/CalculateTotalRoomScore";
-import LearningRoomEntity from "../../../Core/Domain/Entities/LearningRoomEntity";
+import CalculateSpaceScore from "../../../Core/Application/CalculateSpaceScore/CalculateSpaceScore";
+import SpaceEntity from "../../../Core/Domain/Entities/SpaceEntity";
 import { filterEntitiesOfTypeMockImplUtil } from "../../TestUtils";
-import ILearningRoomPort from "../../../Core/Ports/LearningRoomPort/ILearningRoomPort";
+import ISpacePort from "../../../Core/Ports/SpacePort/ISpacePort";
 
-const roomTO = { roomId: 1 };
+const spaceTO = { spaceId: 1 };
 
-const learningRoomPortMock = mock<ILearningRoomPort>();
+const spacePortMock = mock<ISpacePort>();
 const entityContainerMock = mock<IEntityContainer>();
 
-describe("Calculate Total Room Score UseCase", () => {
-  let systemUnderTest: CalculateTotalRoomScore;
+describe("Calculate Space Score UseCase", () => {
+  let systemUnderTest: CalculateSpaceScore;
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
@@ -22,8 +22,8 @@ describe("Calculate Total Room Score UseCase", () => {
       entityContainerMock
     );
 
-    CoreDIContainer.rebind(PORT_TYPES.ILearningRoomPort).toConstantValue(
-      learningRoomPortMock
+    CoreDIContainer.rebind(PORT_TYPES.ISpacePort).toConstantValue(
+      spacePortMock
     );
   });
 
@@ -32,7 +32,7 @@ describe("Calculate Total Room Score UseCase", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = CoreDIContainer.resolve(CalculateTotalRoomScore);
+    systemUnderTest = CoreDIContainer.resolve(CalculateSpaceScore);
   });
 
   test("filter Callback should return a boolean", () => {
@@ -40,20 +40,20 @@ describe("Calculate Total Room Score UseCase", () => {
       filterEntitiesOfTypeMockImplUtil([
         {
           id: 42,
-          learningElements: [],
+          elements: [],
         },
       ])
     );
 
-    systemUnderTest.execute(roomTO);
+    systemUnderTest.execute(spaceTO);
 
     entityContainerMock.filterEntitiesOfType.mockReset();
   });
 
-  it("should calculate the correct total room score", () => {
+  it("should calculate the correct total space score", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
-        learningElements: [
+        elements: [
           {
             hasScored: true,
             value: 10,
@@ -70,41 +70,41 @@ describe("Calculate Total Room Score UseCase", () => {
       },
     ]);
 
-    systemUnderTest.execute(roomTO);
+    systemUnderTest.execute(spaceTO);
 
     expect(entityContainerMock.filterEntitiesOfType).toHaveBeenCalledWith(
-      LearningRoomEntity,
+      SpaceEntity,
       expect.any(Function)
     );
 
-    expect(learningRoomPortMock.presentNewScore).toHaveBeenCalledWith(
+    expect(spacePortMock.presentNewScore).toHaveBeenCalledWith(
       20,
       true,
-      roomTO.roomId
+      spaceTO.spaceId
     );
   });
 
-  it("should return 0 and false when no Learning Elements are present", () => {
+  it("should return 0 and false when no Elements are present", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
-        learningElements: [],
+        elements: [],
       },
     ]);
 
-    systemUnderTest.execute(roomTO);
+    systemUnderTest.execute(spaceTO);
 
-    expect(learningRoomPortMock.presentNewScore).toHaveBeenCalledWith(
+    expect(spacePortMock.presentNewScore).toHaveBeenCalledWith(
       0,
       false,
-      roomTO.roomId
+      spaceTO.spaceId
     );
   });
 
-  it("should throw an error if the room is not found", () => {
+  it("should throw an error if the space is not found", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 
     expect(() => {
-      systemUnderTest.execute(roomTO);
+      systemUnderTest.execute(spaceTO);
     }).toThrow();
   });
 });
