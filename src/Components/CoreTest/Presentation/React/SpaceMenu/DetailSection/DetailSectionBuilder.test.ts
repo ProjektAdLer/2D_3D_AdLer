@@ -1,4 +1,4 @@
-import DetailSectionBuilder from "../../../../../Core/Presentation/React/RoomMenu/DetailSection/DetailSectionBuilder";
+import DetailSectionBuilder from "../../../../../Core/Presentation/React/SpaceMenu/DetailSection/DetailSectionBuilder";
 
 describe("DetailSectionBuilder", () => {
   let systemUnderTest: DetailSectionBuilder;
