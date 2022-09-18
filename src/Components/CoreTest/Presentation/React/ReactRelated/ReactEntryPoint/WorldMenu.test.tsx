@@ -6,19 +6,19 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import WorldMenu from "~ReactComponents/ReactRelated/ReactEntryPoint/WorldMenu";
 
-jest.mock("~ReactComponents/RoomMenu/HeaderBar/HeaderBar", () => "mocked");
+jest.mock("~ReactComponents/SpaceMenu/HeaderBar/HeaderBar", () => "mocked");
 jest.mock(
-  "~ReactComponents/RoomMenu/RoomSelectionSection/RoomSelectionSection",
+  "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection",
   () => "mocked"
 );
 jest.mock(
-  "~ReactComponents/RoomMenu/DetailSection/DetailSection",
+  "~ReactComponents/SpaceMenu/DetailSection/DetailSection",
   () => "mocked"
 );
 
 const loadWorldUseCaseMock = mock<ILoadWorldUseCase>();
 
-describe("LearningWorldMenu", () => {
+describe("WorldMenu", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(USECASE_TYPES.ILoadWorldUseCase).toConstantValue(

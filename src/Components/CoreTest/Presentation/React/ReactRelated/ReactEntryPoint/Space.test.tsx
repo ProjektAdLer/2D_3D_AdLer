@@ -2,23 +2,23 @@ import { render } from "@testing-library/react";
 import Space from "~ReactComponents/ReactRelated/ReactEntryPoint/Space";
 
 jest.mock(
-  "../../../../../Core/Presentation/React/LearningRoomDisplay/BottomTooltip/BottomTooltip",
+  "../../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltip",
   () => "mocked"
 );
 jest.mock(
-  "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningElementModal/LearningElementModal",
+  "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModal",
   () => "mocked"
 );
 jest.mock(
-  "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningElementsDropdown/LearningElementsDropdown",
+  "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdown",
   () => "mocked"
 );
 jest.mock(
-  "../../../../../Core/Presentation/React/LearningRoomDisplay/LearningWorldNamePanel/LearningWorldNamePanel",
+  "../../../../../Core/Presentation/React/SpaceDisplay/WorldNamePanel/WorldNamePanel",
   () => "mocked"
 );
 jest.mock(
-  "../../../../../Core/Presentation/React/LearningRoomDisplay/ModalManager/ModalManager",
+  "../../../../../Core/Presentation/React/SpaceDisplay/ModalManager/ModalManager",
   () => "mocked"
 );
 jest.mock(
@@ -34,15 +34,15 @@ jest.mock(
   () => "mocked"
 );
 jest.mock(
-  "../../../../../Core/Presentation/React/LearningRoomDisplay/ScorePanel/ScorePanel",
+  "../../../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanel",
   () => "mocked"
 );
 jest.mock(
-  "~ReactComponents/LearningRoomDisplay/LearningWorldGoalPanel/LearningWorldGoalPanel",
+  "~ReactComponents/SpaceDisplay/WorldGoalPanel/WorldGoalPanel",
   () => "mocked"
 );
 
-describe("LearningRoom.tsx", () => {
+describe("Space.tsx", () => {
   test("should render", () => {
     render(<Space />);
   });
