@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import SpaceSelectionRow from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelectionRow";
 
-describe("RoomSelectionSectionRow", () => {
+describe("SpaceSelectionRow", () => {
   test("should render", () => {
     const testTitle = "testTitle";
 

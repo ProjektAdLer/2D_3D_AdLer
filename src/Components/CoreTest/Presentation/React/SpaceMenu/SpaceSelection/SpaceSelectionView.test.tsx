@@ -5,7 +5,7 @@ import SpaceSelectionViewModel from "~ReactComponents/SpaceMenu/SpaceSelection/S
 import SpaceSelection from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection";
 import { render } from "@testing-library/react";
 
-describe("LearningRoomSelection", () => {
+describe("SpaceSelection", () => {
   test("should render", () => {
     useBuilderMock([
       mockDeep<SpaceSelectionViewModel>(),
