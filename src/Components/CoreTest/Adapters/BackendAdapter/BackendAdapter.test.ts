@@ -40,13 +40,10 @@ describe("BackendAdapter", () => {
     });
 
     expect(mockedAxios.post).toHaveBeenCalledTimes(1);
-    expect(mockedAxios.post).toHaveBeenCalledWith(
-      config.serverURL + "/LearningWorld",
-      {
-        wsToken: userToken,
-        courseName: worldName,
-      }
-    );
+    expect(mockedAxios.post).toHaveBeenCalledWith(config.serverURL + "/World", {
+      wsToken: userToken,
+      courseName: worldName,
+    });
   });
 
   test("getWorldData converts DSL to TOs", async () => {

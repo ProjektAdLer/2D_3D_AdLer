@@ -64,19 +64,19 @@ export default class WorldPort
   }
 
   public registerWorldNamePanelPresenter(
-    learningWorldNamePanelPresenter: IWorldNamePanelPresenter
+    worldNamePanelPresenter: IWorldNamePanelPresenter
   ): void {
     if (this.worldNamePanelPresenter) {
-      logger.warn("LearningWorldNamePanelPresenter is already registered");
+      logger.warn("WorldNamePanelPresenter is already registered");
     }
-    this.worldNamePanelPresenter = learningWorldNamePanelPresenter;
+    this.worldNamePanelPresenter = worldNamePanelPresenter;
   }
   public registerWorldGoalPanelPresenter(
-    learningWorldGoalPanelPresenter: IWorldGoalPanelPresenter
+    worldGoalPanelPresenter: IWorldGoalPanelPresenter
   ): void {
     if (this.worldGoalPanelPresenter) {
-      logger.warn("LearningWorldGoalPanelPresenter is already registered");
+      logger.warn("WorldGoalPanelPresenter is already registered");
     }
-    this.worldGoalPanelPresenter = learningWorldGoalPanelPresenter;
+    this.worldGoalPanelPresenter = worldGoalPanelPresenter;
   }
 }

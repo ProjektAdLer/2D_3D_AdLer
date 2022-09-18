@@ -69,7 +69,7 @@ describe("ScoreElementUseCase", () => {
     ).rejects.toThrowError("Could not score");
   });
 
-  test("executeAsync throws error if entity container returns no matching room", async () => {
+  test("executeAsync throws error if entity container returns no matching space", async () => {
     const ElementEntities = [
       {
         id: 1,
@@ -114,14 +114,14 @@ function containerSetup(): void {
       element: element,
     },
   ];
-  const roomId = 1;
-  const room = {
-    id: roomId,
+  const spaceId = 1;
+  const space = {
+    id: spaceId,
     elements: [element],
   };
   const spaceEntites = [
     {
-      room,
+      space,
     },
   ];
 

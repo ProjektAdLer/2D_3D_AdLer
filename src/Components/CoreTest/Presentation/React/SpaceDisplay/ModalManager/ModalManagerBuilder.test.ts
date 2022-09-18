@@ -50,7 +50,7 @@ describe("ModalManagerBuilder", () => {
     );
   });
 
-  test("buildPresenter builds the presenter and register it with the learningWorldPort", () => {
+  test("buildPresenter builds the presenter and register it with the worldPort", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 

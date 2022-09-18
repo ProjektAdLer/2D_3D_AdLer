@@ -6,7 +6,7 @@ import MoodleLoginButtonController from "../../../../Core/Presentation/React/Moo
 
 const portMock = mock<IMoodlePort>();
 
-describe("LearningElementDropdownController", () => {
+describe("ElementDropdownController", () => {
   let systemUnderTest: MoodleLoginButtonController;
 
   beforeAll(() => {

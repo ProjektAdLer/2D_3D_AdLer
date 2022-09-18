@@ -12,7 +12,7 @@ describe("DetailSectionPresenter", () => {
   test("onSpaceLoaded sets data in the view model", () => {
     const spaceTO: SpaceTO = {
       id: 42,
-      name: "Test Room",
+      name: "Test Space",
       elements: [
         {
           id: 1,

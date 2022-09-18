@@ -2,7 +2,7 @@ import { getIcon } from "../../../Core/Presentation/Utils/GetIcon";
 
 // Only smoketest here, because the only idfference between the returned
 // components is the path to the icon.
-describe("GetIcon should return a react component for valid learningelement types", () => {
+describe("GetIcon should return a react component for valid element types", () => {
   test.each([["text"], ["image"], ["video"], ["h5p"]])(
     "[Smoketest] should run for",
     (type) => {

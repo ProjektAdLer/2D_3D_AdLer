@@ -1,6 +1,6 @@
 import { ElementID } from "../../Domain/Types/EntityTypes";
 import IDropdownPresenter from "../../Presentation/React/SpaceDisplay/ElementsDropdown/IElementsDropdownPresenter";
-import AbstractLearningElement from "../../Domain/Entities/ElementData/AbstractElementData";
+import AbstractElement from "../../Domain/Entities/ElementData/AbstractElementData";
 import IWorldNamePanelPresenter from "../../Presentation/React/SpaceDisplay/WorldNamePanel/IWorldNamePanelPresenter";
 import IWorldGoalPanelPresenter from "~ReactComponents/SpaceDisplay/WorldGoalPanel/IWorldGoalPanelPresenter";
 import WorldTO from "../../Application/DataTransportObjects/WorldTO";
