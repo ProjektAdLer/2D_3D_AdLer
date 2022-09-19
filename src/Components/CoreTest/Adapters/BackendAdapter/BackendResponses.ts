@@ -48,7 +48,7 @@ export const expectedElementTO: ElementTO = {
 };
 
 export const mockDSL: IDSL = {
-  world: {
+  learningWorld: {
     idNumber: "1a28a418-00f5-4b24-8ac0-5b4e03ed3f73",
     identifier: {
       type: "name",
@@ -58,9 +58,9 @@ export const mockDSL: IDSL = {
       "Diese Lernwelt soll den Lernenden, Metriken verständlich erklären.",
     goals:
       "Lernende können nach Abschluss der Lernwelt Metriken identifizieren und anwenden.",
-    worldContent: [],
+    learningWorldContent: [],
     topics: [],
-    spaces: [
+    learningSpaces: [
       {
         spaceId: 0,
         identifier: {
@@ -69,11 +69,11 @@ export const mockDSL: IDSL = {
         },
         description: "Diese Lernelemente sind keinem Lernraum zugeordnet",
         goals: "",
-        spaceContent: [1, 2, 3, 4, 5],
+        learningSpaceContent: [1, 2, 3, 4, 5],
         requirements: null,
       },
     ],
-    elements: [
+    learningElements: [
       {
         id: 1,
         identifier: {
@@ -83,13 +83,13 @@ export const mockDSL: IDSL = {
         description: "",
         goals: "",
         elementType: "json",
-        elementValueList: [
+        learningElementValueList: [
           {
             type: "Points",
             value: "0",
           },
         ],
-        spaceParentId: 0,
+        learningSpaceParentId: 0,
         requirements: null,
         metaData: null,
       },
@@ -104,13 +104,13 @@ export const mockDSL: IDSL = {
         goals:
           "Lernende verstehen was Metriken sind und wofür sie genutzt werden. ",
         elementType: "h5p",
-        elementValueList: [
+        learningElementValueList: [
           {
             type: "Points",
             value: "15",
           },
         ],
-        spaceParentId: 0,
+        learningSpaceParentId: 0,
         requirements: null,
         metaData: [
           {
@@ -133,13 +133,13 @@ export const mockDSL: IDSL = {
         description: "In diesem Video werden weitere Metriken erklärt.",
         goals: "Lernende haben ein vertieftes Verständnis über Metriken",
         elementType: "h5p",
-        elementValueList: [
+        learningElementValueList: [
           {
             type: "Points",
             value: "25",
           },
         ],
-        spaceParentId: 0,
+        learningSpaceParentId: 0,
         requirements: null,
         metaData: [
           {
@@ -163,13 +163,13 @@ export const mockDSL: IDSL = {
           "Es ist eine große Wort Tafel gegeben. Auf dieser müssen verschiedene Begriffe gesucht und gefunden werden.",
         goals: "Finde alle Wörter um 100% zu erreichen.",
         elementType: "h5p",
-        elementValueList: [
+        learningElementValueList: [
           {
             type: "Points",
             value: "25",
           },
         ],
-        spaceParentId: 0,
+        learningSpaceParentId: 0,
         requirements: null,
         metaData: [
           {
@@ -194,13 +194,13 @@ export const mockDSL: IDSL = {
         goals:
           "Grundlegende Begriffe über Metriken werden nochmals wiederholt.",
         elementType: "h5p",
-        elementValueList: [
+        learningElementValueList: [
           {
             type: "Points",
             value: "30",
           },
         ],
-        spaceParentId: 0,
+        learningSpaceParentId: 0,
         requirements: null,
         metaData: [
           {

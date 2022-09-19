@@ -47,22 +47,23 @@ export default class BackendAdapter implements IBackendAdapter {
 
     // create WorldTO with world data
     let response: Partial<WorldTO> = {
-      worldName: dsl.world.identifier.value,
-      worldGoal: dsl.world.goals,
+      worldName: dsl.learningWorld.identifier.value,
+      worldGoal: dsl.learningWorld.goals,
     };
 
     // create ElementTOs
-    let elements: ElementTO[] = dsl.world.elements.flatMap((element) =>
-      element.elementType in ElementTypes ? this.mapElement(element) : []
+    let elements: ElementTO[] = dsl.learningWorld.learningElements.flatMap(
+      (element) =>
+        element.elementType in ElementTypes ? this.mapElement(element) : []
     );
 
     // create SpaceTOs and connect them with their elements
-    response.spaces = dsl.world.spaces.map((space) => {
+    response.spaces = dsl.learningWorld.learningSpaces.map((space) => {
       return {
         id: space.spaceId,
         name: space.identifier.value,
         elements: elements.filter((element) =>
-          space.spaceContent.includes(element.id)
+          space.learningSpaceContent.includes(element.id)
         ),
       } as SpaceTO;
     });
@@ -96,8 +97,8 @@ export default class BackendAdapter implements IBackendAdapter {
   private mapElement = (element: APIElement): ElementTO => {
     const elementTO: Partial<ElementTO> = {
       id: element.id,
-      value: element.elementValueList
-        ? Number.parseInt(element.elementValueList[0]?.value ?? "0")
+      value: element.learningElementValueList
+        ? Number.parseInt(element.learningElementValueList[0]?.value ?? "0")
         : 0,
       requirements: element.requirements ?? [],
       name: element.identifier?.value,

@@ -25,11 +25,11 @@ type MetaData = {
 export type APIWorld = {
   idNumber: string;
   identifier: Identifier;
-  worldContent: number[];
+  learningWorldContent: number[];
   topics: number[];
   goals: string;
-  spaces: APISpace[];
-  elements: APIElement[];
+  learningSpaces: APISpace[];
+  learningElements: APIElement[];
   description: string;
 };
 
@@ -38,7 +38,7 @@ export type APISpace = {
   identifier: Identifier;
   description: string;
   goals: string;
-  spaceContent: number[];
+  learningSpaceContent: number[];
   requirements: Requirements;
 };
 
@@ -48,14 +48,14 @@ export type APIElement = {
   description: string;
   goals: string;
   elementType: string;
-  elementValueList: ElementValueList[];
-  spaceParentId: number;
+  learningElementValueList: ElementValueList[];
+  learningSpaceParentId: number;
   requirements?: any;
   metaData: MetaData[] | null;
 };
 
 type IDSL = {
-  world: APIWorld;
+  learningWorld: APIWorld;
 };
 
 export default IDSL;
