@@ -30,28 +30,32 @@ describe("BackendAdapter", () => {
 
   test("getWorldData calls backend to get DSL file", async () => {
     const userToken = "testToken";
-    const worldName = "testWorld";
+    const worldID = 1337;
 
-    mockedAxios.post.mockResolvedValue({ data: mockDSL });
+    mockedAxios.get.mockResolvedValue({ data: mockDSL });
 
     await systemUnderTest.getWorldData({
       userToken: userToken,
-      worldName: worldName,
+      worldId: worldID,
     });
 
-    expect(mockedAxios.post).toHaveBeenCalledTimes(1);
-    expect(mockedAxios.post).toHaveBeenCalledWith(config.serverURL + "/World", {
-      wsToken: userToken,
-      courseName: worldName,
-    });
+    expect(mockedAxios.get).toHaveBeenCalledTimes(1);
+    expect(mockedAxios.get).toHaveBeenCalledWith(
+      config.serverURL + "/Courses/" + worldID,
+      {
+        headers: {
+          token: userToken,
+        },
+      }
+    );
   });
 
   test("getWorldData converts DSL to TOs", async () => {
-    mockedAxios.post.mockResolvedValue({ data: mockDSL });
+    mockedAxios.get.mockResolvedValue({ data: mockDSL });
 
     const result = await systemUnderTest.getWorldData({
       userToken: "",
-      worldName: "",
+      worldId: 1337,
     });
 
     // check that the result matches the expected structure of LearningWorldTO
@@ -65,14 +69,15 @@ describe("BackendAdapter", () => {
     });
 
     // check that the result has the same amount of learning rooms as the DSL
-    expect(result.spaces).toHaveLength(mockDSL.world.spaces.length);
+    expect(result.spaces).toHaveLength(
+      mockDSL.learningWorld.learningSpaces.length
+    );
 
     result.spaces?.forEach((space, index) => {
       // check that the results learning rooms have
       // the same amount of learning elements as in the DSL
-      expect(space.elements).toHaveLength(
-        mockDSL.world.spaces[index].spaceContent.length
-      );
+      // 4: Are the 4 Basic learning elements in the DSL
+      expect(space.elements).toHaveLength(4);
     });
 
     // TODO: add further comparisons between mockDSL and created TOs
@@ -83,25 +88,31 @@ describe("BackendAdapter", () => {
     expect(systemUnderTest.scoreElement(1)).resolves.not.toThrow();
   });
 
-  test("logInUser calls backend and returns a token", () => {
+  test("logInUser calls backend and returns a token", async () => {
     const token = "token";
     const userName = "userName";
     const password = "password";
 
-    mockedAxios.post.mockResolvedValue({ data: token });
-    const returnedVal = systemUnderTest.logInUser({
+    mockedAxios.get.mockResolvedValue({
+      data: {
+        moodleToken: token,
+      },
+    });
+    const returnedVal = await systemUnderTest.logInUser({
       username: userName,
       password: password,
     });
 
-    expect(mockedAxios.post).toHaveBeenCalledTimes(1);
-    expect(mockedAxios.post).toHaveBeenCalledWith(
-      config.serverURL + "/userlogin",
+    expect(mockedAxios.get).toHaveBeenCalledTimes(1);
+    expect(mockedAxios.get).toHaveBeenCalledWith(
+      config.serverURL + "/MoodleLogin/Login",
       {
-        username: userName,
-        password: password,
+        params: {
+          UserName: userName,
+          Password: password,
+        },
       }
     );
-    expect(returnedVal).resolves.toBe(token);
+    expect(returnedVal).toBe(token);
   });
 });
