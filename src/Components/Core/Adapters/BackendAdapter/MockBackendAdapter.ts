@@ -39,22 +39,23 @@ export default class MockBackendAdapter implements IBackendAdapter {
 
     // create LearningWorldTO with learning world data
     let response: Partial<WorldTO> = {
-      worldName: dsl.world.identifier.value,
-      worldGoal: dsl.world.goals,
+      worldName: dsl.learningWorld.identifier.value,
+      worldGoal: dsl.learningWorld.goals,
     };
 
     // create LearningElementTOs
-    let elements: ElementTO[] = dsl.world.elements.flatMap((element) =>
-      element.elementType in ElementTypes ? this.mapElement(element) : []
+    let elements: ElementTO[] = dsl.learningWorld.learningElements.flatMap(
+      (element) =>
+        element.elementType in ElementTypes ? this.mapElement(element) : []
     );
 
     // create LearningRoomTOs and connect them with their learning elements
-    response.spaces = dsl.world.spaces.map((space) => {
+    response.spaces = dsl.learningWorld.learningSpaces.map((space) => {
       return {
         id: space.spaceId,
         name: space.identifier.value,
         elements: elements.filter((element) =>
-          space.spaceContent.includes(element.id)
+          space.learningSpaceContent.includes(element.id)
         ),
       } as SpaceTO;
     });
@@ -73,8 +74,8 @@ export default class MockBackendAdapter implements IBackendAdapter {
   private mapElement = (element: APIElement): ElementTO => {
     const elementTO: Partial<ElementTO> = {
       id: element.id,
-      value: element.elementValueList
-        ? Number.parseInt(element.elementValueList[0]?.value ?? "0")
+      value: element.learningElementValueList
+        ? Number.parseInt(element.learningElementValueList[0]?.value ?? "0")
         : 0,
       requirements: element.requirements ?? [],
       name: element.identifier?.value,
@@ -114,7 +115,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
   };
 
   worldTO: IDSL = {
-    world: {
+    learningWorld: {
       idNumber: "1a28a418-00f5-4b24-8ac0-5b4e03ed3f73",
       identifier: {
         type: "name",
@@ -122,9 +123,9 @@ export default class MockBackendAdapter implements IBackendAdapter {
       },
       description: "Mock Beschreibung der Welt",
       goals: "Mock Ziele der Welt",
-      worldContent: [],
+      learningWorldContent: [],
       topics: [],
-      spaces: [
+      learningSpaces: [
         {
           spaceId: 0,
           identifier: {
@@ -133,11 +134,11 @@ export default class MockBackendAdapter implements IBackendAdapter {
           },
           description: "Diese Lernelemente sind keinem Lernraum zugeordnet",
           goals: "",
-          spaceContent: [1, 2, 3, 4, 5],
+          learningSpaceContent: [1, 2, 3, 4, 5],
           requirements: null,
         },
       ],
-      elements: [
+      learningElements: [
         {
           id: 1,
           identifier: {
@@ -147,13 +148,13 @@ export default class MockBackendAdapter implements IBackendAdapter {
           description: "",
           goals: "",
           elementType: "json",
-          elementValueList: [
+          learningElementValueList: [
             {
               type: "Points",
               value: "0",
             },
           ],
-          spaceParentId: 0,
+          learningSpaceParentId: 0,
           requirements: null,
           metaData: null,
         },
@@ -166,13 +167,13 @@ export default class MockBackendAdapter implements IBackendAdapter {
           description: "Diies ist die Beschreibung des H5P Elements.",
           goals: "Ziel des H5P Lernelements",
           elementType: "h5p",
-          elementValueList: [
+          learningElementValueList: [
             {
               type: "Points",
               value: "15",
             },
           ],
-          spaceParentId: 0,
+          learningSpaceParentId: 0,
           requirements: null,
           metaData: [
             {
@@ -195,13 +196,13 @@ export default class MockBackendAdapter implements IBackendAdapter {
           description: "Dies ist die Beschreibung des Text Lernelements",
           goals: "Ziel des Text-Elements",
           elementType: "text",
-          elementValueList: [
+          learningElementValueList: [
             {
               type: "Points",
               value: "25",
             },
           ],
-          spaceParentId: 0,
+          learningSpaceParentId: 0,
           requirements: null,
           metaData: [],
         },
@@ -215,13 +216,13 @@ export default class MockBackendAdapter implements IBackendAdapter {
             "Dies ist die Beschreibung des Bildes. Hier wird das Bild erklärt.",
           goals: "Ziel des Bild-Elements.",
           elementType: "image",
-          elementValueList: [
+          learningElementValueList: [
             {
               type: "Points",
               value: "25",
             },
           ],
-          spaceParentId: 0,
+          learningSpaceParentId: 0,
           requirements: null,
           metaData: [],
         },
@@ -235,13 +236,13 @@ export default class MockBackendAdapter implements IBackendAdapter {
             "Das ist die beschreibung für das Videoelement. Hier wird das Video erklärt.",
           goals: "Ziel des Video-Elements",
           elementType: "video",
-          elementValueList: [
+          learningElementValueList: [
             {
               type: "Points",
               value: "30",
             },
           ],
-          spaceParentId: 0,
+          learningSpaceParentId: 0,
           requirements: null,
           metaData: [],
         },

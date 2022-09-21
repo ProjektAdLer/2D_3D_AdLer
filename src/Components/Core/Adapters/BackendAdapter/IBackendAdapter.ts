@@ -3,6 +3,7 @@ import WorldTO from "../../Application/DataTransportObjects/WorldTO";
 import UserCredentials from "./Types/UserCredentials";
 import CourseListTO from "../../Application/DataTransportObjects/CourseListTO";
 
+// TODO: Restructure in meaningful types
 export type tempApiInfo = {
   userToken: string;
   worldId: number;
