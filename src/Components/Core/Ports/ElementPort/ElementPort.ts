@@ -3,7 +3,7 @@ import IElementPort from "./IElementPort";
 import IElementPresenter from "../../Presentation/Babylon/Elements/IElementPresenter";
 import IElementModalPresenter from "../../Presentation/React/SpaceDisplay/ElementModal/IElementModalPresenter";
 import { logger } from "src/Lib/Logger";
-import ElementTO from "../../Application/DataTransportObjects/ElementTO";
+import ElementTO from "../../Application/DataTransferObjects/ElementTO";
 
 @injectable()
 export default class ElementPort implements IElementPort {

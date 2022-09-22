@@ -1,5 +1,5 @@
 import IScorePanelPresenter from "~ReactComponents/SpaceDisplay/ScorePanel/IScorePanelPresenter";
-import SpaceTO from "../../Application/DataTransportObjects/SpaceTO";
+import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
 import ISpacePresenter from "../../Presentation/Babylon/Spaces/ISpacePresenter";
 
 export default interface ISpacePort {

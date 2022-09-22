@@ -1,8 +1,8 @@
 import { injectable } from "inversify";
-import CourseListTO from "../../Application/DataTransportObjects/CourseListTO";
-import ElementTO from "../../Application/DataTransportObjects/ElementTO";
-import SpaceTO from "../../Application/DataTransportObjects/SpaceTO";
-import WorldTO from "../../Application/DataTransportObjects/WorldTO";
+import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
+import ElementTO from "../../Application/DataTransferObjects/ElementTO";
+import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
+import WorldTO from "../../Application/DataTransferObjects/WorldTO";
 import H5PElementData from "../../Domain/Entities/ElementData/H5PElementData";
 import ImageElementData from "../../Domain/Entities/ElementData/ImageElementData";
 import TextElementData from "../../Domain/Entities/ElementData/TextElementData";

@@ -1,4 +1,4 @@
-import ElementTO from "src/Components/Core/Application/DataTransportObjects/ElementTO";
+import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
 import IDropdownPresenter from "./IElementsDropdownPresenter";
 import ElementsDropdownViewModel from "./ElementsDropdownViewModel";
 

@@ -17,8 +17,8 @@ import TextElementData from "../../../Domain/Entities/ElementData/TextElementDat
 import VideoElementData from "../../../Domain/Entities/ElementData/VideoElementData";
 import ImageElementData from "../../../Domain/Entities/ElementData/ImageElementData";
 import type IUIPort from "../../../Ports/UIPort/IUIPort";
-import WorldTO from "../../DataTransportObjects/WorldTO";
-import ElementTO from "../../DataTransportObjects/ElementTO";
+import WorldTO from "../../DataTransferObjects/WorldTO";
+import ElementTO from "../../DataTransferObjects/ElementTO";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {

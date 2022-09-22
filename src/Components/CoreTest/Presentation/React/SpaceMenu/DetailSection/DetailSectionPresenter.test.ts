@@ -1,6 +1,6 @@
 import DetailSectionPresenter from "../../../../../Core/Presentation/React/SpaceMenu/DetailSection/DetailSectionPresenter";
 import DetailSectionViewModel from "../../../../../Core/Presentation/React/SpaceMenu/DetailSection/DetailSectionViewModel";
-import SpaceTO from "../../../../../Core/Application/DataTransportObjects/SpaceTO";
+import SpaceTO from "../../../../../Core/Application/DataTransferObjects/SpaceTO";
 
 describe("DetailSectionPresenter", () => {
   let systemUnderTest: DetailSectionPresenter;

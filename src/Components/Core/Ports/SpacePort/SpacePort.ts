@@ -3,7 +3,7 @@ import IScorePanelPresenter from "../../Presentation/React/SpaceDisplay/ScorePan
 import ISpacePresenter from "../../Presentation/Babylon/Spaces/ISpacePresenter";
 import { injectable } from "inversify";
 import { logger } from "src/Lib/Logger";
-import SpaceTO from "../../Application/DataTransportObjects/SpaceTO";
+import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
 import AbstractPort from "../AbstractPort/AbstractPort";
 import ISpaceAdapter from "./ISpaceAdapter";
 

@@ -5,14 +5,14 @@ import { logger } from "../../../../Lib/Logger";
 import { ElementTypes } from "../../Presentation/Babylon/Elements/Types/ElementTypes";
 import IDSL, { APIElement } from "./Types/IDSL";
 import IBackendAdapter, { tempApiInfo } from "./IBackendAdapter";
-import WorldTO from "../../Application/DataTransportObjects/WorldTO";
-import ElementTO from "../../Application/DataTransportObjects/ElementTO";
+import WorldTO from "../../Application/DataTransferObjects/WorldTO";
+import ElementTO from "../../Application/DataTransferObjects/ElementTO";
 import TextElementData from "../../Domain/Entities/ElementData/TextElementData";
 import ImageElementData from "../../Domain/Entities/ElementData/ImageElementData";
 import VideoElementData from "../../Domain/Entities/ElementData/VideoElementData";
 import H5PElementData from "../../Domain/Entities/ElementData/H5PElementData";
-import SpaceTO from "../../Application/DataTransportObjects/SpaceTO";
-import CourseListTO from "../../Application/DataTransportObjects/CourseListTO";
+import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
+import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 
 @injectable()
 export default class BackendAdapter implements IBackendAdapter {

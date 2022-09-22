@@ -8,7 +8,7 @@ import ElementsDropdownViewModel from "./ElementsDropdownViewModel";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import ElementTO from "src/Components/Core/Application/DataTransportObjects/ElementTO";
+import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
 
 export default function ElementsDropdown() {
   const [viewModel, controller] = useBuilder<

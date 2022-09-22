@@ -1,5 +1,5 @@
 import IElementModalPresenter from "~ReactComponents/SpaceDisplay/ElementModal/IElementModalPresenter";
-import ElementTO from "../../Application/DataTransportObjects/ElementTO";
+import ElementTO from "../../Application/DataTransferObjects/ElementTO";
 import IElementPresenter from "../../Presentation/Babylon/Elements/IElementPresenter";
 
 export default interface IElementPort {

@@ -1,4 +1,4 @@
-import WorldTO from "../../../../../Core/Application/DataTransportObjects/WorldTO";
+import WorldTO from "../../../../../Core/Application/DataTransferObjects/WorldTO";
 import SpaceSelectionPresenter from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionPresenter";
 import SpaceSelectionViewModel from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionViewModel";
 

@@ -1,4 +1,4 @@
-import ElementTO from "src/Components/Core/Application/DataTransportObjects/ElementTO";
+import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
 import ElementEntity from "src/Components/Core/Domain/Entities/ElementEntity";
 import H5PElementData from "src/Components/Core/Domain/Entities/ElementData/H5PElementData";
 import ImageElementData from "src/Components/Core/Domain/Entities/ElementData/ImageElementData";

@@ -1,4 +1,4 @@
-import WorldTO from "../../Application/DataTransportObjects/WorldTO";
+import WorldTO from "../../Application/DataTransferObjects/WorldTO";
 
 /**
  * This interface is used to register with the LearningWorldPort and defines all the methods that can be called by the LearningWorldPort.

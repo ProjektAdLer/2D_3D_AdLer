@@ -1,6 +1,6 @@
 import IBottomTooltipPresenter from "./IBottomTooltipPresenter";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
-import ElementTO from "src/Components/Core/Application/DataTransportObjects/ElementTO";
+import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
 
 export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
   constructor(private viewModel: BottomTooltipViewModel) {}

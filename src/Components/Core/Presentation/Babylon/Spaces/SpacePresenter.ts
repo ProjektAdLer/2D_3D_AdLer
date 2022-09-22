@@ -9,8 +9,8 @@ import IDoorPresenter from "../Door/IDoorPresenter";
 import SpaceViewModel from "./SpaceViewModel";
 import ISpacePresenter from "./ISpacePresenter";
 import IElementPresenter from "../Elements/IElementPresenter";
-import SpaceTO from "src/Components/Core/Application/DataTransportObjects/SpaceTO";
-import ElementTO from "src/Components/Core/Application/DataTransportObjects/ElementTO";
+import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
+import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
 
 @injectable()
 export default class SpacePresenter implements ISpacePresenter {

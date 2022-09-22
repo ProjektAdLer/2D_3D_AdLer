@@ -1,5 +1,5 @@
 import { Vector3 } from "@babylonjs/core";
-import ElementTO from "src/Components/Core/Application/DataTransportObjects/ElementTO";
+import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
 import IElementPresenter from "./IElementPresenter";
 import ElementViewModel from "./ElementViewModel";
 
