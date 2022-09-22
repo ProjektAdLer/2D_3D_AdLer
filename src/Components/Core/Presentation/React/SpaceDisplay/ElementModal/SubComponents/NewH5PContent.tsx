@@ -22,8 +22,8 @@ export default function NewH5PContent({
         const el = h5pContainerRef.current;
 
         const baseURL = config.serverURL.replace(
-          "https://api.cluuub.xyz/api",
-          "https://api.cluuub.xyz/"
+          "https://localhost/api",
+          "https://localhost/"
         );
 
         let h5pJsonURL =

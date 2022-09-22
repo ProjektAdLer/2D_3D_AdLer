@@ -26,6 +26,7 @@ export default class BackendAdapter implements IBackendAdapter {
         rawH5PEvent: data.rawH5PEvent,
         userEmail: data.email,
         userName: data.userName,
+        h5pName: data.h5pName,
       },
       {
         headers: {
