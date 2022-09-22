@@ -4,7 +4,10 @@ import { config } from "../../../../config";
 import { logger } from "../../../../Lib/Logger";
 import { ElementTypes } from "../../Presentation/Babylon/Elements/Types/ElementTypes";
 import IDSL, { APIElement } from "./Types/IDSL";
-import IBackendAdapter, { tempApiInfo } from "./IBackendAdapter";
+import IBackendAdapter, {
+  ScoreH5PElementRequest,
+  tempApiInfo,
+} from "./IBackendAdapter";
 import WorldTO from "../../Application/DataTransportObjects/WorldTO";
 import ElementTO from "../../Application/DataTransportObjects/ElementTO";
 import TextElementData from "../../Domain/Entities/ElementData/TextElementData";
@@ -16,6 +19,24 @@ import CourseListTO from "../../Application/DataTransportObjects/CourseListTO";
 
 @injectable()
 export default class BackendAdapter implements IBackendAdapter {
+  async scoreH5PElement(data: ScoreH5PElementRequest): Promise<void> {
+    const response = await axios.patch(
+      config.serverURL + "/LearningElements/H5P/" + data.h5pId,
+      {
+        rawH5PEvent: data.rawH5PEvent,
+        userEmail: data.email,
+        userName: data.userName,
+      },
+      {
+        headers: {
+          token: data.userToken,
+        },
+      }
+    );
+
+    return response.data;
+  }
+
   async getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
     const response = await axios.get<CourseListTO>(
       config.serverURL + "/Courses",
@@ -41,9 +62,9 @@ export default class BackendAdapter implements IBackendAdapter {
       worldId,
     });
 
-    // // omit first space, since it is only used to store the dsl
-    // dsl.world.spaces =
-    //   dsl.world.spaces.slice(1);
+    // omit first space, since it is only used to store the dsl
+    dsl.learningWorld.learningSpaces =
+      dsl.learningWorld.learningSpaces.slice(1);
 
     // create WorldTO with world data
     let response: Partial<WorldTO> = {

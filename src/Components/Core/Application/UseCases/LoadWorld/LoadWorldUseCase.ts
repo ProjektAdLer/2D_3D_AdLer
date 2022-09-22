@@ -65,7 +65,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
     let apiData = {
       userToken: userData.userToken,
-      worldId: coursesList.courses[0].courseId, // TODO: This can be a random number for now
+      worldId: coursesList.courses[1].courseId, // TODO: This can be a random number for now
     } as tempApiInfo;
 
     const response = await this.backendAdapter.getWorldData(apiData);

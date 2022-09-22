@@ -16,6 +16,8 @@ import LoginMoodleUseCase from "../../Application/UseCases/LoginMoodle/LoginMood
 import IScoreElementUseCase from "../../Application/UseCases/ScoreElement/IScoreElementUseCase";
 import ScoreElementUseCase from "../../Application/UseCases/ScoreElement/ScoreElementUseCase";
 import USECASE_TYPES from "./USECASE_TYPES";
+import IScoreH5PElement from "../../Application/UseCases/ScoreH5PElement/IScoreH5PElement";
+import ScoreH5PElement from "../../Application/UseCases/ScoreH5PElement/ScoreH5PElement";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -50,6 +52,10 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<ILoadSpaceUseCase>(USECASE_TYPES.ILoadSpaceUseCase)
     .to(LoadSpaceUseCase)
+    .inSingletonScope();
+
+  bind<IScoreH5PElement>(USECASE_TYPES.IScoreH5PElement)
+    .to(ScoreH5PElement)
     .inSingletonScope();
 });
 
