@@ -1,4 +1,4 @@
-import WorldTO from "src/Components/Core/Application/DataTransportObjects/WorldTO";
+import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
 import IWorldAdapter from "src/Components/Core/Ports/WorldPort/IWorldAdapter";
 import ISpaceSelectionPresenter from "./ISpaceSelectionPresenter";
 import SpaceSelectionViewModel from "./SpaceSelectionViewModel";

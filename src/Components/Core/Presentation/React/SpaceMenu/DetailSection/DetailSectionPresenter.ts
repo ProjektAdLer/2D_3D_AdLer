@@ -1,4 +1,4 @@
-import SpaceTO from "src/Components/Core/Application/DataTransportObjects/SpaceTO";
+import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
 import { ElementTypeStrings } from "../../../Babylon/Elements/Types/ElementTypes";
 import IDetailSectionPresenter from "./IDetailSectionPresenter";
 import DetailSectionViewModel from "./DetailSectionViewModel";

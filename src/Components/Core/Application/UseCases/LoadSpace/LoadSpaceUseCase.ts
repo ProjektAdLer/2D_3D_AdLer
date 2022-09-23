@@ -8,7 +8,7 @@ import type ISpacePort from "../../../Ports/SpacePort/ISpacePort";
 import type IUIPort from "../../../Ports/UIPort/IUIPort";
 import type ILoadWorldUseCase from "../LoadWorld/ILoadWorldUseCase";
 import ILoadSpaceUseCase from "./ILoadSpaceUseCase";
-import SpaceTO from "../../DataTransportObjects/SpaceTO";
+import SpaceTO from "../../DataTransferObjects/SpaceTO";
 import { ElementID } from "../../../Domain/Types/EntityTypes";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
 

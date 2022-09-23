@@ -4,7 +4,7 @@ import IBottomTooltipPresenter from "../../Presentation/React/SpaceDisplay/Botto
 import INotificationManagerPresenter from "../../Presentation/React/GeneralComponents/NotificationManager/INotificationManagerPresenter";
 import IUIPort from "./IUIPort";
 import { logger } from "src/Lib/Logger";
-import ElementTO from "../../Application/DataTransportObjects/ElementTO";
+import ElementTO from "../../Application/DataTransferObjects/ElementTO";
 
 @injectable()
 export default class UIPort implements IUIPort {

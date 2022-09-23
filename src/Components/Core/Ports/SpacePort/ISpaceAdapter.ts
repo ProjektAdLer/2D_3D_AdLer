@@ -1,4 +1,4 @@
-import SpaceTO from "../../Application/DataTransportObjects/SpaceTO";
+import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
 
 export default interface ISpaceAdapter {
   onSpaceDataLoaded(spaceTO: SpaceTO): void;

@@ -10,7 +10,7 @@ import type INavigation from "../../Presentation/Babylon/Navigation/INavigation"
 import IWorldNamePanelPresenter from "../../Presentation/React/SpaceDisplay/WorldNamePanel/IWorldNamePanelPresenter";
 import IWorldGoalPanelPresenter from "~ReactComponents/SpaceDisplay/WorldGoalPanel/IWorldGoalPanelPresenter";
 import { logger } from "src/Lib/Logger";
-import WorldTO from "../../Application/DataTransportObjects/WorldTO";
+import WorldTO from "../../Application/DataTransferObjects/WorldTO";
 import AbstractPort from "../AbstractPort/AbstractPort";
 import IWorldAdapter from "./IWorldAdapter";
 

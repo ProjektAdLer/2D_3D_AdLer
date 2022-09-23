@@ -14,8 +14,8 @@ import TextElementData from "../../Domain/Entities/ElementData/TextElementData";
 import ImageElementData from "../../Domain/Entities/ElementData/ImageElementData";
 import VideoElementData from "../../Domain/Entities/ElementData/VideoElementData";
 import H5PElementData from "../../Domain/Entities/ElementData/H5PElementData";
-import SpaceTO from "../../Application/DataTransportObjects/SpaceTO";
-import CourseListTO from "../../Application/DataTransportObjects/CourseListTO";
+import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
+import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 
 @injectable()
 export default class BackendAdapter implements IBackendAdapter {

@@ -3,7 +3,7 @@ import IDropdownPresenter from "../../Presentation/React/SpaceDisplay/ElementsDr
 import AbstractElement from "../../Domain/Entities/ElementData/AbstractElementData";
 import IWorldNamePanelPresenter from "../../Presentation/React/SpaceDisplay/WorldNamePanel/IWorldNamePanelPresenter";
 import IWorldGoalPanelPresenter from "~ReactComponents/SpaceDisplay/WorldGoalPanel/IWorldGoalPanelPresenter";
-import WorldTO from "../../Application/DataTransportObjects/WorldTO";
+import WorldTO from "../../Application/DataTransferObjects/WorldTO";
 
 export default interface IWorldPort {
   presentWorld(worldTO: WorldTO): void;

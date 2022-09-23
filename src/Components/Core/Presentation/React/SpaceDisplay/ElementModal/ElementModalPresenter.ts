@@ -1,4 +1,4 @@
-import ElementTO from "src/Components/Core/Application/DataTransportObjects/ElementTO";
+import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
 import IElementModalPresenter from "./IElementModalPresenter";
 import ElementModalViewModel from "./ElementModalViewModel";
 
