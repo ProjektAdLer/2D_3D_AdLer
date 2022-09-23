@@ -12,10 +12,7 @@ export type tempApiInfo = {
 
 export type ScoreH5PElementRequest = {
   userToken: string;
-  email: string;
   h5pId: number;
-  h5pName: string;
-  userName: string;
   rawH5PEvent: XAPiEvent;
 };
 

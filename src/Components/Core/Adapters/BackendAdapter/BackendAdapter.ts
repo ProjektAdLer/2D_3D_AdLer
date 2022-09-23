@@ -23,10 +23,7 @@ export default class BackendAdapter implements IBackendAdapter {
     const response = await axios.patch(
       config.serverURL + "/LearningElements/H5P/" + data.h5pId,
       {
-        rawH5PEvent: data.rawH5PEvent,
-        userEmail: data.email,
-        userName: data.userName,
-        h5pName: data.h5pName,
+        serializedXAPIEvent: JSON.stringify(data.rawH5PEvent),
       },
       {
         headers: {

@@ -20,6 +20,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
   scoreH5PElement(data: ScoreH5PElementRequest): Promise<void> {
     throw new Error("Method not implemented.");
   }
+
   getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
     const test = {
       courses: [

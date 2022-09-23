@@ -44,10 +44,17 @@ export default function NewH5PContent({
           //do something useful with the event
           //logger.log("xAPI event: ", event);
           const xapiData = event.data.statement;
-          if (xapiData.verb.id === "http://adlnet.gov/expapi/verbs/answered") {
+          if (
+            xapiData.verb.id === "http://adlnet.gov/expapi/verbs/completed" ||
+            (xapiData.verb.id === "http://adlnet.gov/expapi/verbs/answered" &&
+              typeof xapiData.result.success !== "undefined")
+          ) {
             CoreDIContainer.get<IScoreH5PElement>(
               USECASE_TYPES.IScoreH5PElement
-            ).executeAsync({ xapiData: xapiData });
+            ).executeAsync({
+              xapiData: xapiData,
+              h5pContextId: viewModel.elementData.Value.contextId,
+            });
           }
         });
       }
