@@ -8,12 +8,19 @@ import ImageElementData from "../../Domain/Entities/ElementData/ImageElementData
 import TextElementData from "../../Domain/Entities/ElementData/TextElementData";
 import VideoElementData from "../../Domain/Entities/ElementData/VideoElementData";
 import { ElementTypes } from "../../Presentation/Babylon/Elements/Types/ElementTypes";
-import IBackendAdapter, { tempApiInfo } from "./IBackendAdapter";
+import IBackendAdapter, {
+  ScoreH5PElementRequest,
+  tempApiInfo,
+} from "./IBackendAdapter";
 import IDSL, { APIElement } from "./Types/IDSL";
 import UserCredentials from "./Types/UserCredentials";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendAdapter {
+  scoreH5PElement(data: ScoreH5PElementRequest): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
+
   getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
     const test = {
       courses: [

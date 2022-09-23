@@ -3,6 +3,11 @@ import { H5P as H5PPlayer } from "h5p-standalone";
 import ElementModalViewModel from "../ElementModalViewModel";
 import H5PElementData from "../../../../../Domain/Entities/ElementData/H5PElementData";
 import { config } from "../../../../../../../config";
+import { logger } from "src/Lib/Logger";
+import XAPI from "@xapi/xapi";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import IScoreH5PElement from "src/Components/Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 export default function NewH5PContent({
   viewModel,
@@ -17,8 +22,8 @@ export default function NewH5PContent({
         const el = h5pContainerRef.current;
 
         const baseURL = config.serverURL.replace(
-          "https://api.cluuub.xyz/api",
-          "https://api.cluuub.xyz/"
+          "https://localhost/api",
+          "https://localhost/"
         );
 
         let h5pJsonURL =
@@ -35,10 +40,23 @@ export default function NewH5PContent({
 
         await new H5PPlayer(el, options);
         //@ts-ignore
-        // H5P.externalDispatcher.on("xAPI", (event: any) => {
-        //   //do something useful with the event
-        //   logger.log("xAPI event: ", event);
-        // });
+        H5P.externalDispatcher.on("xAPI", (event: any) => {
+          //do something useful with the event
+          //logger.log("xAPI event: ", event);
+          const xapiData = event.data.statement;
+          if (
+            xapiData.verb.id === "http://adlnet.gov/expapi/verbs/completed" ||
+            (xapiData.verb.id === "http://adlnet.gov/expapi/verbs/answered" &&
+              typeof xapiData.result.success !== "undefined")
+          ) {
+            CoreDIContainer.get<IScoreH5PElement>(
+              USECASE_TYPES.IScoreH5PElement
+            ).executeAsync({
+              xapiData: xapiData,
+              h5pContextId: viewModel.elementData.Value.contextId,
+            });
+          }
+        });
       }
     };
     debug();

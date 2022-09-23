@@ -1,7 +1,7 @@
 {
   "actor": {
     "name": "student",
-    "mbox": "mailto:foofoo@barbar.com",
+    "mbox": "stu@dent.com",
     "objectType": "Agent"
   },
   "verb": {

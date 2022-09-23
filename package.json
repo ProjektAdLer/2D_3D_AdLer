@@ -7,6 +7,7 @@
     "@babylonjs/gui": "^5.14.1",
     "@babylonjs/loaders": "^5.14.1",
     "@types/node": "^18.0.3",
+    "@xapi/xapi": "^2.0.2",
     "axios": "^0.27.2",
     "bind-decorator": "^1.0.11",
     "earcut": "^2.2.4",

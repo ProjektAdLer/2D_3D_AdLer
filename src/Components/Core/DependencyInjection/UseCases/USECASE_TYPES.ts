@@ -7,6 +7,7 @@ const USECASE_TYPES = {
   ILogUserIntoMoodleUseCase: Symbol("ILogUserIntoMoodleUseCase"),
   IDebugUseCase: Symbol("IDebugUseCase"),
   ILoadSpaceUseCase: Symbol("ILoadSpaceUseCase"),
+  IScoreH5PElement: Symbol("IScoreH5PElement"),
 };
 
 export default USECASE_TYPES;
