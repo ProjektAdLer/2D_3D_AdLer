@@ -35,6 +35,8 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     private loadAvatarUseCase: ILoadAvatarUseCase
   ) {}
 
+  private usedWorldId: number;
+
   async executeAsync(): Promise<WorldTO> {
     const userData = this.container.getEntitiesOfType(UserDataEntity);
 
@@ -63,9 +65,11 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       userData.userToken
     );
 
+    this.usedWorldId = coursesList.courses[1].courseId;
+
     let apiData = {
       userToken: userData.userToken,
-      worldId: coursesList.courses[1].courseId, // TODO: This can be a random number for now
+      worldId: this.usedWorldId, // TODO: This can be a random number for now
     } as tempApiInfo;
 
     const response = await this.backendAdapter.getWorldData(apiData);
@@ -96,6 +100,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
         worldName: response.worldName,
         spaces: spaceEntities,
         worldGoal: response.worldGoal,
+        worldID: this.usedWorldId,
       },
       WorldEntity
     );
@@ -109,6 +114,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       value: element.value,
       requirements: element.requirements ?? [],
       name: element.name,
+      parentCourseId: this.usedWorldId,
     };
 
     switch (element.elementData.type) {

@@ -3,6 +3,7 @@ import { ElementID } from "../../Domain/Types/EntityTypes";
 
 export default class ElementTO {
   id: ElementID;
+  parentCourseId: ElementID;
   name: string;
   value?: number;
   // TODO: make this not optional sometime

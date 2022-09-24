@@ -17,6 +17,9 @@ import UserCredentials from "./Types/UserCredentials";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendAdapter {
+  getH5PFileName(elementId: number, courseId: number): Promise<string> {
+    throw new Error("Method not implemented.");
+  }
   scoreH5PElement(data: ScoreH5PElementRequest): Promise<void> {
     throw new Error("Method not implemented.");
   }

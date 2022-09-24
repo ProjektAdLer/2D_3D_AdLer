@@ -13,6 +13,7 @@ export type tempApiInfo = {
 export type ScoreH5PElementRequest = {
   userToken: string;
   h5pId: number;
+  courseId: number;
   rawH5PEvent: XAPiEvent;
 };
 
@@ -25,4 +26,5 @@ export default interface IBackendAdapter {
 
   logInUser(userCredentials: UserCredentials): Promise<string>;
   getCoursesAvailableForUser(userToken: string): Promise<CourseListTO>;
+  getH5PFileName(elementId: number, courseId: number): Promise<string>;
 }

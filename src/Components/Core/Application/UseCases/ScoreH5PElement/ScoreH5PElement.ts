@@ -12,15 +12,16 @@ export default class ScoreH5PElement implements IScoreH5PElement {
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer
   ) {}
-  async executeAsync(
-    data?:
-      | { xapiData: XAPiEvent; h5pContextId: number; h5PName: string }
-      | undefined
-  ): Promise<boolean> {
+  async executeAsync(data?: {
+    xapiData: XAPiEvent;
+    elementId: number;
+    courseId: number;
+  }): Promise<boolean> {
     const userEntity = this.container.getEntitiesOfType(UserDataEntity)[0];
     const backendResponse = await this.backendAdapter.scoreH5PElement({
       userToken: userEntity.userToken,
-      h5pId: data!.h5pContextId,
+      h5pId: data!.elementId,
+      courseId: data!.courseId,
       rawH5PEvent: data!.xapiData,
     });
     return Promise.resolve(true);

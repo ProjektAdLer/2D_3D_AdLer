@@ -1,4 +1,5 @@
 import { inject, injectable } from "inversify";
+import WorldEntity from "src/Components/Core/Domain/Entities/WorldEntity";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import ElementEntity from "../../../Domain/Entities/ElementEntity";
@@ -19,6 +20,9 @@ export default class ElementStartedUseCase implements IElementStartedUseCase {
       ElementEntity,
       (e) => e.id === data.elementId
     );
+
+    const course =
+      this.entityContainer.getEntitiesOfType<WorldEntity>(WorldEntity);
 
     if (entity.length === 0)
       throw new Error(`Could not find element with id ${data?.elementId}`);

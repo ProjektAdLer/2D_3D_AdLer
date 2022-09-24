@@ -1,13 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { H5P as H5PPlayer } from "h5p-standalone";
 import ElementModalViewModel from "../ElementModalViewModel";
 import H5PElementData from "../../../../../Domain/Entities/ElementData/H5PElementData";
 import { config } from "../../../../../../../config";
-import { logger } from "src/Lib/Logger";
-import XAPI from "@xapi/xapi";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import IScoreH5PElement from "src/Components/Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
 
 export default function NewH5PContent({
   viewModel,
@@ -26,11 +26,12 @@ export default function NewH5PContent({
           "https://localhost/"
         );
 
+        const filePath = await CoreDIContainer.get<IBackendAdapter>(
+          CORE_TYPES.IBackendAdapter
+        ).getH5PFileName(viewModel.id.Value, viewModel.parentCourseId.Value);
+
         let h5pJsonURL =
-          baseURL +
-          viewModel.elementData.Value.fileName
-            .replaceAll("wwwroot/", "")
-            .replaceAll("\\", "/");
+          baseURL + filePath.replaceAll("\\", "/").replaceAll("wwwroot/", "");
 
         const options = {
           h5pJsonPath: h5pJsonURL,
@@ -53,7 +54,8 @@ export default function NewH5PContent({
               USECASE_TYPES.IScoreH5PElement
             ).executeAsync({
               xapiData: xapiData,
-              h5pContextId: viewModel.elementData.Value.contextId,
+              elementId: viewModel.id.Value,
+              courseId: viewModel.parentCourseId.Value,
             });
           }
         });
