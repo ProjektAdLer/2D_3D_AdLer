@@ -3,6 +3,7 @@ import AbstractElementData from "./ElementData/AbstractElementData";
 
 export default class ElementEntity {
   id: ElementID;
+  parentCourseId: ElementID;
   public value: number;
   public requirements: { type: string; value: number }[];
   public hasScored: boolean;

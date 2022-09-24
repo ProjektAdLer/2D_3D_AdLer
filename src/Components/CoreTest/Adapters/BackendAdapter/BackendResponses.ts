@@ -14,6 +14,7 @@ export const minimalGetWorldDataResponse: WorldTO = {
         {
           id: 1,
           name: "TestElement",
+          parentCourseId: 1,
           value: 42,
           requirements: undefined,
           elementData: {
@@ -42,6 +43,7 @@ export const expectedSpaceTO: SpaceTO = {
 export const expectedElementTO: ElementTO = {
   id: expect.any(Number),
   name: expect.any(String),
+  parentCourseId: expect.any(Number),
   value: expect.any(Number),
   requirements: expect.any(Array),
   elementData: expect.any(Object),

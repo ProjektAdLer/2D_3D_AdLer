@@ -8,6 +8,7 @@ import VideoElementData from "src/Components/Core/Domain/Entities/ElementData/Vi
 export const h5pInput: ElementTO = {
   id: 1,
   name: "Test",
+  parentCourseId: 1,
   value: 10,
   requirements: [
     {
@@ -42,6 +43,7 @@ export const h5pExpected: Partial<ElementEntity> = {
 export const textInput: ElementTO = {
   id: 2,
   name: "Test",
+  parentCourseId: 1,
   value: 10,
   requirements: [
     {
@@ -72,6 +74,7 @@ export const textExpected: Partial<ElementEntity> = {
 export const imageInput: ElementTO = {
   id: 3,
   name: "Test",
+  parentCourseId: 1,
   value: 10,
   requirements: [
     {
@@ -103,6 +106,7 @@ export const videoInput: ElementTO = {
   id: 4,
   name: "Test",
   value: 10,
+  parentCourseId: 1,
   requirements: [
     {
       type: "number",

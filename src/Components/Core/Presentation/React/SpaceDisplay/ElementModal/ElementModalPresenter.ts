@@ -9,5 +9,6 @@ export default class ElementModalPresenter implements IElementModalPresenter {
     this.viewModel.elementData.Value = elementTO.elementData;
     this.viewModel.isOpen.Value = true;
     this.viewModel.id.Value = elementTO.id;
+    this.viewModel.parentCourseId.Value = elementTO.parentCourseId;
   }
 }

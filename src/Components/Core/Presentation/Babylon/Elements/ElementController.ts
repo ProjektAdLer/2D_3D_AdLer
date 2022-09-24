@@ -15,6 +15,7 @@ export default class ElementController implements IElementController {
     CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort).displayElementTooltip({
       name: this.viewModel.name.Value,
       elementData: this.viewModel.elementData.Value,
+      parentCourseId: 1,
       id: this.viewModel.id,
     });
   }

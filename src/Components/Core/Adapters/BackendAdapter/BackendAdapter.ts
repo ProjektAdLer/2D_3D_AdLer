@@ -19,9 +19,29 @@ import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 
 @injectable()
 export default class BackendAdapter implements IBackendAdapter {
+  getH5PFileName(elementId: number, courseId: number): Promise<string> {
+    return axios
+      .get<{ filePath: string }>(
+        config.serverURL +
+          "/LearningElements/H5P/FilePath/Course/" +
+          courseId +
+          "/Element/" +
+          elementId,
+        {
+          headers: {
+            token: "token",
+          },
+        }
+      )
+      .then((response) => response.data.filePath);
+  }
   async scoreH5PElement(data: ScoreH5PElementRequest): Promise<void> {
     const response = await axios.patch(
-      config.serverURL + "/LearningElements/H5P/" + data.h5pId,
+      config.serverURL +
+        "/LearningElements/Course/" +
+        data.courseId +
+        "/Element/" +
+        data.h5pId,
       {
         serializedXAPIEvent: JSON.stringify(data.rawH5PEvent),
       },
