@@ -21,10 +21,9 @@ export default function NewH5PContent({
       if (h5pContainerRef.current) {
         const el = h5pContainerRef.current;
 
-        const baseURL = config.serverURL.replace(
-          "https://localhost/api",
-          "https://localhost/"
-        );
+        const baseURL = config.serverURL
+          .replace("https://localhost/api", "https://localhost/")
+          .replace("https://api.cluuub.xyz/api", "https://api.cluuub.xyz/");
 
         const filePath = await CoreDIContainer.get<IBackendAdapter>(
           CORE_TYPES.IBackendAdapter
