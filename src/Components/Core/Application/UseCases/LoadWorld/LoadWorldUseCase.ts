@@ -65,7 +65,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       userData.userToken
     );
 
-    this.usedWorldId = coursesList.courses[1].courseId;
+    this.usedWorldId = coursesList.courses[0].courseId;
 
     let apiData = {
       userToken: userData.userToken,
