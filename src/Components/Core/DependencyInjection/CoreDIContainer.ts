@@ -1,8 +1,5 @@
 import { Container } from "inversify";
 import CORE_TYPES from "./CoreTypes";
-import ISceneView from "../Presentation/Babylon/SceneManagement/ISceneView";
-import SceneView from "../Presentation/Babylon/SceneManagement/SceneView";
-import SceneViewModel from "../Presentation/Babylon/SceneManagement/SceneViewModel";
 import ScenePresenter from "../Presentation/Babylon/SceneManagement/ScenePresenter";
 import MainScene from "../Presentation/Babylon/SceneManagement/MainScene";
 import ICreateSceneClass from "../Presentation/Babylon/SceneManagement/ICreateSceneClass";
@@ -18,10 +15,6 @@ import NavigationConfiguration from "../Presentation/Babylon/Navigation/Navigati
 const CoreDIContainer = new Container();
 
 // Scene
-CoreDIContainer.bind<ISceneView>(CORE_TYPES.ISceneView)
-  .to(SceneView)
-  .inSingletonScope();
-CoreDIContainer.bind(SceneViewModel).toSelf().inSingletonScope();
 CoreDIContainer.bind<IScenePresenter>(CORE_TYPES.IScenePresenter)
   .to(ScenePresenter)
   .inSingletonScope();

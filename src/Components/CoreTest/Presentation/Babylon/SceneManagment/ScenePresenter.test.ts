@@ -9,24 +9,16 @@ import {
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
-import IEngineManager from "../../../../Core/Presentation/Babylon/EngineManager/IEngineManager";
 import ICreateSceneClass from "../../../../Core/Presentation/Babylon/SceneManagement/ICreateSceneClass";
 import ScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/ScenePresenter";
-import SceneView from "../../../../Core/Presentation/Babylon/SceneManagement/SceneView";
 
 jest.mock("@babylonjs/core");
-
-const startRenderLoopMock = jest.spyOn(SceneView.prototype, "startRenderLoop");
 
 describe("scenePresenter", () => {
   let systemUnderTest: ScenePresenter;
 
   beforeAll(() => {
-    // setup engine manager with NullEngine for testing
-    let engineManager = CoreDIContainer.get<IEngineManager>(
-      CORE_TYPES.IEngineManager
-    );
-    engineManager["engine"] = new NullEngine();
+    // TODO: setup NullEngine for testing
   });
 
   beforeEach(() => {

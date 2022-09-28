@@ -6,18 +6,12 @@ import ReactEntry from "../Presentation/React/ReactRelated/ReactEntryPoint/React
 import IViewModelControllerProvider from "../Presentation/ViewModelProvider/IViewModelControllerProvider";
 import ViewModelControllerProvider from "../Presentation/ViewModelProvider/ViewModelControllerProvider";
 import CORE_TYPES from "./CoreTypes";
-import IEngineManager from "../Presentation/Babylon/EngineManager/IEngineManager";
-import EngineManager from "../Presentation/Babylon/EngineManager/EngineManager";
 import IBackendAdapter from "../Adapters/BackendAdapter/IBackendAdapter";
 import BackendAdapter from "../Adapters/BackendAdapter/BackendAdapter";
 import { config } from "src/config";
 import MockBackendAdapter from "../Adapters/BackendAdapter/MockBackendAdapter";
 
 const infrastructureDIContainer = new ContainerModule((bind) => {
-  bind<IEngineManager>(CORE_TYPES.IEngineManager)
-    .to(EngineManager)
-    .inSingletonScope();
-
   bind<IEntityContainer>(CORE_TYPES.IEntityContainer)
     .to(EntityContainer)
     .inSingletonScope();
