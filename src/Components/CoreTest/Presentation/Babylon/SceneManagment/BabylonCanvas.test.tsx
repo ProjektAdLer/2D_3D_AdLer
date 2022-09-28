@@ -1,11 +1,11 @@
 import { mock } from "jest-mock-extended";
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
-import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
-import IEngineManager from "../../../../../Core/Presentation/Babylon/EngineManager/IEngineManager";
-import IScenePresenter from "../../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
-import BabylonCanvas from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/BabylonCanvas";
+import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
+import IEngineManager from "../../../../Core/Presentation/Babylon/EngineManager/IEngineManager";
+import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
+import BabylonCanvas from "../../../../Core/Presentation/Babylon/SceneManagement/BabylonCanvas";
 
 const engineManagerMock = mock<IEngineManager>();
 const scenePresenterMock = mock<IScenePresenter>();

@@ -10,7 +10,7 @@ import MoodleLoginForm from "~ReactComponents/GeneralComponents/MoodleLoginForm/
 import LogoMenuBar from "~ReactComponents/GeneralComponents/LogoMenuBar/LogoMenuBar";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import ScorePanel from "~ReactComponents/SpaceDisplay/ScorePanel/ScorePanel";
-import BabylonCanvas from "./BabylonCanvas";
+import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
 
 export default function Space() {
   return (
