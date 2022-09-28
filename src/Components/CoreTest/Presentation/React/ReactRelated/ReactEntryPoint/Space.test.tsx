@@ -30,7 +30,7 @@ jest.mock(
   () => "mocked"
 );
 jest.mock(
-  "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/BabylonCanvas",
+  "../../../../../Core/Presentation/Babylon/SceneManagement/BabylonCanvas",
   () => "mocked"
 );
 jest.mock(

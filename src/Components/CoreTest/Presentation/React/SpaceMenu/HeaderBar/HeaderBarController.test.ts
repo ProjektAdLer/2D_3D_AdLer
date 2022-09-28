@@ -1,7 +1,9 @@
 import { logger } from "../../../../../../Lib/Logger";
 import HeaderBarController from "../../../../../Core/Presentation/React/SpaceMenu/HeaderBar/HeaderBarController";
+import history from "history/browser";
 
 jest.mock("../../../../../../Lib/Logger.ts");
+const mockHistoryBack = jest.spyOn(history, "back");
 
 describe("HeaderBarController", () => {
   let systemUnderTest: HeaderBarController;
@@ -15,8 +17,8 @@ describe("HeaderBarController", () => {
     expect(logger.warn).toBeCalled();
   });
 
-  test("onBackButtonClicked calls logger.warn", () => {
+  test("onBackButtonClicked calls history.back", () => {
     systemUnderTest.onBackButtonClicked();
-    expect(logger.warn).toBeCalled();
+    expect(mockHistoryBack).toBeCalled();
   });
 });

@@ -6,7 +6,6 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import HeaderBarController from "./HeaderBarController";
 import HeaderBarViewModel from "./HeaderBarViewModel";
-import { useNavigate } from "react-router-dom";
 
 export default function HeaderBar() {
   const [viewModel, controller] = useBuilder<

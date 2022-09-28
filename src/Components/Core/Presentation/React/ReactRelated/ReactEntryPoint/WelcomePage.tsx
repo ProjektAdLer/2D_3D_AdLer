@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import MoodleLoginButton from "~ReactComponents/GeneralComponents/MoodleLoginButton/MoodleLoginButton";
 import MoodleLoginForm from "~ReactComponents/GeneralComponents/MoodleLoginForm/MoodleLoginForm";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
