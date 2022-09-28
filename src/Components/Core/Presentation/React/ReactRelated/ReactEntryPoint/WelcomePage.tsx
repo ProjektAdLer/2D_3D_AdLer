@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MoodleLoginButton from "~ReactComponents/GeneralComponents/MoodleLoginButton/MoodleLoginButton";
 import MoodleLoginForm from "~ReactComponents/GeneralComponents/MoodleLoginForm/MoodleLoginForm";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import history from "history/browser";
 
 import logo from "../../../../../../Assets/icons/adLerEngine_flat_logo_simple.svg";
 
@@ -10,8 +11,6 @@ export interface IWelcomePageProps {}
 
 // THIS IS A BIG TODO FOR ANOTHER TIME
 const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
-  const navigate = useNavigate();
-
   return (
     <React.Fragment>
       <div className="grid grid-cols-5 grid-rows-5 max-h-[100vh] bg-adlerblue-100 p-6">
@@ -23,13 +22,13 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
         <p className="flex flex-col items-center justify-center col-span-2 col-start-4 row-span-3 row-start-2 gap-4 lg:col-span-3 lg:col-start-2 lg:row-start-5">
           <StyledButton
             shape="freefloatleft"
-            onClick={() => navigate("/worldmenu")}
+            onClick={() => history.push("/worldmenu")}
           >
             Gehe zum Lernraum Menü
           </StyledButton>
           <StyledButton
             shape="freefloatleft"
-            onClick={() => navigate("/space")}
+            onClick={() => history.push("/space")}
           >
             Gehe zum Lernraum
           </StyledButton>
