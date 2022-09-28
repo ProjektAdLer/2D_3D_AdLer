@@ -37,8 +37,9 @@ describe("ElementController", () => {
     expect(uiPortMock.displayElementTooltip).toHaveBeenCalledTimes(1);
     expect(uiPortMock.displayElementTooltip).toHaveBeenCalledWith({
       name: viewModel.name.Value,
-      ElementData: viewModel.elementData.Value,
+      elementData: viewModel.elementData.Value,
       id: viewModel.id,
+      parentCourseId: 1,
     });
   });
 
