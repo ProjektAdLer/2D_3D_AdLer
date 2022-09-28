@@ -48,14 +48,14 @@
 #inspector-host,
 #scene-explorer-host {
   z-index: 999;
-  position: fixed !important;
+  /* position: fixed !important;
   top: 5rem !important;
   right: 19rem !important;
   width: 1vw !important;
-  height: 80%;
+  height: 80%; */
 }
-
+/* 
 #scene-explorer-host {
   top: 5rem !important;
   left: 1rem !important;
-}
+} */

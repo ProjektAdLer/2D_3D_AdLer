@@ -5,38 +5,34 @@ import {
   Nullable,
   Scene,
   SceneLoader,
+  SceneOptions,
+  Engine,
 } from "@babylonjs/core";
-import { inject, injectable } from "inversify";
-import type IEngineManager from "../EngineManager/IEngineManager";
-import type ISceneView from "./ISceneView";
-import SceneViewModel from "./SceneViewModel";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
+import { injectable } from "inversify";
 import ICreateSceneClass from "./ICreateSceneClass";
 import IScenePresenter from "./IScenePresenter";
+import { logger } from "src/Lib/Logger";
 
 /**
  * @description This class is responsible for creating the Scene and managing the NavMesh navigation.
  */
 @injectable()
 export default class ScenePresenter implements IScenePresenter {
+  private scene: Scene;
+  private navigationMeshes: AbstractMesh[] = [];
+
   get Scene(): Scene {
-    if (!this.viewModel.scene) {
+    if (!this.scene) {
       throw new Error(
         "There is no scene set. Create the scene first before requesting it."
       );
     }
-    return this.viewModel.scene;
+    return this.scene;
   }
 
   get NavigationMeshes(): Mesh[] {
-    return this.viewModel.navigationMeshes as Mesh[];
+    return this.navigationMeshes as Mesh[];
   }
-
-  constructor(
-    @inject(CORE_TYPES.IEngineManager) private engineManager: IEngineManager,
-    @inject(SceneViewModel) private viewModel: SceneViewModel,
-    @inject(CORE_TYPES.ISceneView) private view: ISceneView
-  ) {}
 
   async loadModel(
     url: string,
@@ -47,42 +43,50 @@ export default class ScenePresenter implements IScenePresenter {
       "",
       url,
       "",
-      this.viewModel.scene,
+      this.scene,
       onProgress
     );
 
     if (isRelevantForNavigation) {
-      this.viewModel.navigationMeshes.push(...result.meshes);
+      this.navigationMeshes.push(...result.meshes);
     }
 
     return Promise.resolve(result.meshes);
   }
 
   createMesh(name: string, isRelevantForNavigation: boolean = false): Mesh {
-    let mesh = new Mesh(name, this.viewModel.scene);
+    let mesh = new Mesh(name, this.scene);
 
     if (isRelevantForNavigation) {
-      this.viewModel.navigationMeshes.push(mesh);
+      this.navigationMeshes.push(mesh);
     }
 
     return mesh;
   }
 
   registerNavigationMesh(mesh: Mesh): void {
-    this.viewModel.navigationMeshes.push(mesh);
+    this.navigationMeshes.push(mesh);
   }
 
-  async createScene(createSceneClass: ICreateSceneClass): Promise<void> {
+  async createScene(
+    engine: Engine,
+    createSceneClass: ICreateSceneClass,
+    sceneOptions?: SceneOptions
+  ): Promise<void> {
     // Execute the pretasks, if defined
     await Promise.all(createSceneClass.preTasks || []);
 
     // Create the scene
-    this.viewModel.scene = await createSceneClass.createScene(
-      this.engineManager.Engine
-    );
+    this.scene = await createSceneClass.createScene(engine, sceneOptions);
   }
 
   startRenderLoop(): void {
-    this.view.startRenderLoop();
+    this.scene.getEngine().runRenderLoop(() => {
+      if (this.scene.activeCamera) {
+        this.scene.render();
+      } else {
+        logger.warn("no active camera..");
+      }
+    });
   }
 }

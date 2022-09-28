@@ -1,38 +1,76 @@
+import { Engine, EngineOptions, SceneOptions } from "@babylonjs/core";
 import { useEffect, useRef } from "react";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import IEngineManager from "../EngineManager/IEngineManager";
+import ICreateSceneClass from "./ICreateSceneClass";
 import IScenePresenter from "./IScenePresenter";
 
-export default function BabylonCanvas(props: any) {
+export type BabylonjsProps = {
+  createSceneClass: ICreateSceneClass;
+  antialias?: boolean;
+  engineOptions?: EngineOptions;
+  adaptToDeviceRatio?: boolean;
+  renderChildrenWhenReady?: boolean;
+  sceneOptions?: SceneOptions;
+  observeCanvasResize?: boolean;
+  children?: React.ReactNode;
+};
+
+export default function BabylonCanvas(
+  props: BabylonjsProps & React.HTMLAttributes<HTMLCanvasElement>
+) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const {
+    createSceneClass,
+    antialias,
+    engineOptions,
+    adaptToDeviceRatio,
+    sceneOptions,
+    renderChildrenWhenReady,
+    children,
+    ...rest
+  } = props;
 
   useEffect(() => {
     const asyncFunc = async () => {
-      if (canvasRef) {
-        const canvas = canvasRef.current;
+      if (!canvasRef.current) return null;
 
-        if (canvas) {
-          const engineManager = CoreDIContainer.get<IEngineManager>(
-            CORE_TYPES.IEngineManager
-          );
-          const scenePresenter = CoreDIContainer.get<IScenePresenter>(
-            CORE_TYPES.IScenePresenter
-          );
+      // create engine
+      const engine = new Engine(
+        canvasRef.current,
+        antialias,
+        engineOptions,
+        adaptToDeviceRatio
+      );
 
-          engineManager.createEngine(canvas);
+      // create scene
+      const scenePresenter = CoreDIContainer.get<IScenePresenter>(
+        CORE_TYPES.IScenePresenter
+      );
+      await scenePresenter.createScene(engine, createSceneClass, sceneOptions);
 
-          await scenePresenter.createScene(
-            CoreDIContainer.get(CORE_TYPES.ICreateSceneClass)
-          );
+      scenePresenter.startRenderLoop();
 
-          scenePresenter.startRenderLoop();
-        }
-      }
+      // add callback to handle canvas resize
+      const resize = () => {
+        engine.resize();
+      };
+      if (window) window.addEventListener("resize", resize);
+
+      return () => {
+        engine.dispose();
+        if (window) window.removeEventListener("resize", resize);
+      };
     };
 
     asyncFunc();
-  }, [canvasRef]);
+  }, [
+    antialias,
+    engineOptions,
+    adaptToDeviceRatio,
+    sceneOptions,
+    createSceneClass,
+  ]);
 
-  return <canvas ref={canvasRef} {...props}></canvas>;
+  return <canvas ref={canvasRef} {...rest}></canvas>;
 }

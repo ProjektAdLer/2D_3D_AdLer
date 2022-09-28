@@ -6,6 +6,7 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import IEngineManager from "../../../../Core/Presentation/Babylon/EngineManager/IEngineManager";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import BabylonCanvas from "../../../../Core/Presentation/Babylon/SceneManagement/BabylonCanvas";
+import ICreateSceneClass from "src/Components/Core/Presentation/Babylon/SceneManagement/ICreateSceneClass";
 
 const engineManagerMock = mock<IEngineManager>();
 const scenePresenterMock = mock<IScenePresenter>();
@@ -23,7 +24,14 @@ describe("Babylon Canvas", () => {
   afterAll(() => {
     CoreDIContainer.restore();
   });
+
   it("should render", () => {
-    render(<BabylonCanvas />);
+    render(
+      <BabylonCanvas
+        createSceneClass={CoreDIContainer.get<ICreateSceneClass>(
+          CORE_TYPES.ICreateSceneClass
+        )}
+      />
+    );
   });
 });

@@ -27,10 +27,6 @@ export default class MainScene implements ICreateSceneClass {
 
     new GroundMesh("Ground", scene);
 
-    // camera to prevent rendering the scene without camera
-    // TODO: remove this when Babylon component is better initilized
-    new FreeCamera("FreeCamera", new Vector3(20, 20, 20), scene);
-
     if (config.isDebug) scene.debugLayer.show();
 
     return scene;

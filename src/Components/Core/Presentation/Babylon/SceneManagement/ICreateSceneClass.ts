@@ -1,7 +1,6 @@
-type Engine = import("@babylonjs/core/Engines/engine").Engine;
-type Scene = import("@babylonjs/core/scene").Scene;
+import { Engine, Scene, SceneOptions } from "@babylonjs/core";
 
 export default interface ICreateSceneClass {
-  createScene: (engine: Engine) => Promise<Scene>;
+  createScene: (engine: Engine, sceneOptions?: SceneOptions) => Promise<Scene>;
   preTasks?: Promise<unknown>[];
 }

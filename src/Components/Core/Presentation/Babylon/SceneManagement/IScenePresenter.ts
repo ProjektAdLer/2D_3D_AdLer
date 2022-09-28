@@ -4,6 +4,8 @@ import {
   Mesh,
   Nullable,
   Scene,
+  Engine,
+  SceneOptions,
 } from "@babylonjs/core";
 import ICreateSceneClass from "./ICreateSceneClass";
 
@@ -19,7 +21,11 @@ export default interface IScenePresenter {
    * Creates a new scene with the given CreateSceneClass configuration.
    * @param createSceneClass The scene configuration class that will be used to create the scene.
    */
-  createScene(createSceneClass: ICreateSceneClass): Promise<void>;
+  createScene(
+    engine: Engine,
+    createSceneClass: ICreateSceneClass,
+    sceneOptions?: SceneOptions
+  ): Promise<void>;
 
   /**
    * Starts the render loop.
