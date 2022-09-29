@@ -32,38 +32,37 @@ export default function BabylonCanvas(
   } = props;
 
   useEffect(() => {
-    const asyncFunc = async () => {
-      if (!canvasRef.current) return null;
+    if (!canvasRef.current) return;
 
-      // create engine
-      const engine = new Engine(
-        canvasRef.current,
-        antialias,
-        engineOptions,
-        adaptToDeviceRatio
-      );
+    // create engine
+    const engine = new Engine(
+      canvasRef.current,
+      antialias,
+      engineOptions,
+      adaptToDeviceRatio
+    );
 
-      // create scene
-      const scenePresenter = CoreDIContainer.get<IScenePresenter>(
-        CORE_TYPES.IScenePresenter
-      );
+    // create scene
+    const scenePresenter = CoreDIContainer.get<IScenePresenter>(
+      CORE_TYPES.IScenePresenter
+    );
+    const createSceneAsync = async () => {
       await scenePresenter.createScene(engine, createSceneClass, sceneOptions);
-
-      scenePresenter.startRenderLoop();
-
-      // add callback to handle canvas resize
-      const resize = () => {
-        engine.resize();
-      };
-      if (window) window.addEventListener("resize", resize);
-
-      return () => {
-        engine.dispose();
-        if (window) window.removeEventListener("resize", resize);
-      };
     };
+    createSceneAsync();
 
-    asyncFunc();
+    scenePresenter.startRenderLoop();
+
+    // add callback to handle canvas resize
+    const resize = () => {
+      engine.resize();
+    };
+    if (window) window.addEventListener("resize", resize);
+
+    return () => {
+      engine.dispose();
+      if (window) window.removeEventListener("resize", resize);
+    };
   }, [
     antialias,
     engineOptions,
