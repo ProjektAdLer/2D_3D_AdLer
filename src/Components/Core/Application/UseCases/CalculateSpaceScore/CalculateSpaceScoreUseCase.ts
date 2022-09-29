@@ -24,11 +24,16 @@ export default class CalculateSpaceScoreUseCase
     );
 
     if (spaces.length === 0) {
+      throw new Error(`Could not find any spaces`);
+    }
+
+    // get the requested space
+    const space = spaces.find((s) => s.id === data.spaceId);
+    if (!space) {
       throw new Error(`Could not find space with id ${data.spaceId}`);
     }
 
-    const space = spaces[0];
-
+    // sum up score
     const spaceScore = space.elements.reduce((acumulator, current) => {
       if (current.hasScored) {
         return acumulator + current.value;

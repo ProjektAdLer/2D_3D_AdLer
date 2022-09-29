@@ -39,7 +39,7 @@ describe("Calculate Space Score UseCase", () => {
     entityContainerMock.filterEntitiesOfType.mockImplementation(
       filterEntitiesOfTypeMockImplUtil([
         {
-          id: 42,
+          id: 1,
           elements: [],
         },
       ])
@@ -50,9 +50,10 @@ describe("Calculate Space Score UseCase", () => {
     entityContainerMock.filterEntitiesOfType.mockReset();
   });
 
-  it("should calculate the correct total space score", () => {
+  test("should calculate the correct total space score", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
+        id: 1,
         elements: [
           {
             hasScored: true,
@@ -84,9 +85,10 @@ describe("Calculate Space Score UseCase", () => {
     );
   });
 
-  it("should return 0 and false when no Elements are present", () => {
+  test("should return 0 and false when no Elements are present", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
+        id: 1,
         elements: [],
       },
     ]);
@@ -100,8 +102,21 @@ describe("Calculate Space Score UseCase", () => {
     );
   });
 
-  it("should throw an error if the space is not found", () => {
+  test("should throw an error if the space is not found", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
+
+    expect(() => {
+      systemUnderTest.execute(spaceTO);
+    }).toThrow();
+  });
+
+  test("should throw an error if no space with given id can be found", () => {
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      {
+        id: 42,
+        elements: [],
+      },
+    ]);
 
     expect(() => {
       systemUnderTest.execute(spaceTO);
