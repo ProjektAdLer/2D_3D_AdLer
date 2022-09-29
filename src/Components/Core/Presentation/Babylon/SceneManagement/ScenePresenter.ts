@@ -12,6 +12,7 @@ import { injectable } from "inversify";
 import ICreateSceneClass from "./ICreateSceneClass";
 import IScenePresenter from "./IScenePresenter";
 import { logger } from "src/Lib/Logger";
+import bind from "bind-decorator";
 
 /**
  * @description This class is responsible for creating the Scene and managing the NavMesh navigation.
@@ -81,12 +82,15 @@ export default class ScenePresenter implements IScenePresenter {
   }
 
   startRenderLoop(): void {
-    this.scene.getEngine().runRenderLoop(() => {
-      if (this.scene.activeCamera) {
-        this.scene.render();
-      } else {
-        logger.warn("no active camera..");
-      }
-    });
+    this.scene.getEngine().runRenderLoop(this.renderFunction);
+  }
+
+  @bind
+  private renderFunction(): void {
+    if (this.scene.activeCamera) {
+      this.scene.render();
+    } else {
+      logger.warn("no active camera..");
+    }
   }
 }
