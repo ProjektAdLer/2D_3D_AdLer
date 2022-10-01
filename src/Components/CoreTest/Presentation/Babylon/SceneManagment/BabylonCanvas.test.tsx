@@ -1,12 +1,12 @@
 import { mock } from "jest-mock-extended";
 import "@testing-library/jest-dom";
-import { cleanup, fireEvent, render } from "@testing-library/react";
+import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import BabylonCanvas from "../../../../Core/Presentation/Babylon/SceneManagement/BabylonCanvas";
-import ICreateSceneClass from "src/Components/Core/Presentation/Babylon/SceneManagement/ICreateSceneClass";
 import { Engine } from "@babylonjs/core";
+import ICreateSceneClass from "../../../../Core/Presentation/Babylon/SceneManagement/ICreateSceneClass";
 
 jest.mock("@babylonjs/core");
 const scenePresenterMock = mock<IScenePresenter>();
@@ -53,7 +53,9 @@ describe("Babylon Canvas", () => {
       />
     );
 
-    expect(scenePresenterMock.startRenderLoop).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(scenePresenterMock.startRenderLoop).toHaveBeenCalledTimes(1);
+    });
   });
 
   test("window resize event calls callback", () => {

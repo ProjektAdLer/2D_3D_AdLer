@@ -48,10 +48,9 @@ export default function BabylonCanvas(
     );
     const createSceneAsync = async () => {
       await scenePresenter.createScene(engine, createSceneClass, sceneOptions);
+      scenePresenter.startRenderLoop();
     };
     createSceneAsync();
-
-    scenePresenter.startRenderLoop();
 
     // add callback to handle canvas resize
     const resize = () => {
