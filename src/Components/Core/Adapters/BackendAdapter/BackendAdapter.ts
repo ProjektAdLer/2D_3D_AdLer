@@ -16,7 +16,11 @@ import { ElementID } from "../../Domain/Types/EntityTypes";
 
 @injectable()
 export default class BackendAdapter implements IBackendAdapter {
-  getElementSource(elementId: number, courseId: number): Promise<string> {
+  getElementSource(
+    userToken: string,
+    elementId: number,
+    courseId: number
+  ): Promise<string> {
     return axios
       .get<{ filePath: string }>(
         config.serverURL +
@@ -112,6 +116,7 @@ export default class BackendAdapter implements IBackendAdapter {
   }
 
   async scoreElement(
+    userToken: string,
     elementId: ElementID,
     courseId: ElementID
   ): Promise<boolean> {

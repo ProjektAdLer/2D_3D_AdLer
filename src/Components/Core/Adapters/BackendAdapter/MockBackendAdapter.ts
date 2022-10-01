@@ -8,7 +8,11 @@ import UserCredentials from "./Types/UserCredentials";
 
 @injectable()
 export default class MockBackendAdapter extends BackendAdapter {
-  getElementSource(elementId: number, courseId: number): Promise<string> {
+  getElementSource(
+    userToken: string,
+    elementId: number,
+    courseId: number
+  ): Promise<string> {
     const elementType = this.worldTO.learningWorld.learningElements.find(
       (element) => element.id === elementId
     )!.elementCategory;
@@ -49,7 +53,11 @@ export default class MockBackendAdapter extends BackendAdapter {
     });
   }
 
-  scoreElement(elementId: ElementID, courseId: ElementID): Promise<boolean> {
+  scoreElement(
+    userToken: string,
+    elementId: ElementID,
+    courseId: ElementID
+  ): Promise<boolean> {
     return Promise.resolve(true);
   }
 
