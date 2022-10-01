@@ -9,10 +9,33 @@ import UserCredentials from "./Types/UserCredentials";
 @injectable()
 export default class MockBackendAdapter extends BackendAdapter {
   getElementSource(elementId: number, courseId: number): Promise<string> {
-    throw new Error("Method not implemented.");
+    const elementType = this.worldTO.learningWorld.learningElements.find(
+      (element) => element.id === elementId
+    )!.elementCategory;
+
+    switch (elementType) {
+      case "h5p":
+        return Promise.resolve(
+          "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel"
+        );
+      case "video":
+        return Promise.resolve(
+          "https://www.youtube.com/watch?v=UEJpDrXuP98&ab_channel=AbroadinJapan&token=46dd4cbdafda7fc864c8ce73aae3a897"
+        );
+      case "image":
+        return Promise.resolve(
+          "https://testmoodle.cluuub.xyz/webservice/pluginfile.php/284/mod_resource/content/0/Cars%20is%20cool.jpg?forcedownload=1&token=46dd4cbdafda7fc864c8ce73aae3a897"
+        );
+      case "text":
+        return Promise.resolve(
+          "https://testmoodle.cluuub.xyz/webservice/pluginfile.php/282/mod_resource/content/0/Text-File-Example.txt?forcedownload=1&token=46dd4cbdafda7fc864c8ce73aae3a897"
+        );
+      default:
+        throw new Error("Unknown element type");
+    }
   }
   scoreH5PElement(data: ScoreH5PElementRequest): Promise<boolean> {
-    throw new Error("Method not implemented.");
+    return Promise.resolve(true);
   }
 
   getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
