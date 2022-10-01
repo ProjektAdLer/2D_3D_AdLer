@@ -1,4 +1,7 @@
 import { inject, injectable } from "inversify";
+import IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { config } from "../../../../../config";
 import { logger } from "../../../../../Lib/Logger";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";

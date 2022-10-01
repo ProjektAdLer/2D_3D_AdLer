@@ -24,7 +24,7 @@ export default interface IBackendAdapter {
   deletePlayerData(userToken: string): Promise<boolean>;
   updatePlayerData(
     userToken: string,
-    playerData: PlayerDataTO
+    playerData: Partial<PlayerDataTO>
   ): Promise<PlayerDataTO>;
   getPlayerData(userToken: string): Promise<PlayerDataTO>;
   getElementScore(

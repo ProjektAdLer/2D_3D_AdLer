@@ -5,19 +5,18 @@ import { injectable } from "inversify";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import App from "./App";
-import IPresentationDirector from "../../../PresentationBuilder/IPresentationDirector";
-import IPresentationBuilder from "../../../PresentationBuilder/IPresentationBuilder";
-import BUILDER_TYPES from "../../../../DependencyInjection/Builders/BUILDER_TYPES";
 import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPES";
 import IDebugUseCase from "../../../../Application/UseCases/Debug/IDebugUseCase";
 import { logger } from "../../../../../../Lib/Logger";
 import { config } from "../../../../../../config";
+import IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
 
 let isInDebug = false;
 
 @injectable()
 export default class ReactEntry implements IReactEntry {
-  setupReact(): void {
+  async setupReact(): Promise<void> {
     const appComponent = React.createElement(App);
     const providerComponent = React.createElement(
       Provider,
@@ -42,6 +41,12 @@ export default class ReactEntry implements IReactEntry {
     this.startDebugUseCase();
 
     this.setDebugShortcut();
+
+    const bla2 = await CoreDIContainer.get<IBackendAdapter>(
+      CORE_TYPES.IBackendAdapter
+    ).scoreElement("46dd4cbdafda7fc864c8ce73aae3a897", 4, 1);
+
+    console.log(bla2);
   }
 
   private setDebugShortcut() {

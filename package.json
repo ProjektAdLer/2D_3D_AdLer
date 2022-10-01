@@ -20,7 +20,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
     "recast-detour": "^1.5.0",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "rfc6902": "^5.0.1"
   },
   "scripts": {
     "start": "react-app-rewired start",

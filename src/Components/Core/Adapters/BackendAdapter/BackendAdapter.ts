@@ -17,29 +17,87 @@ import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
 import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
 import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 
+import { applyPatch, createPatch } from "rfc6902";
+
 @injectable()
 export default class BackendAdapter implements IBackendAdapter {
-  deletePlayerData(userToken: string): Promise<boolean> {
-    throw new Error("Method not implemented.");
+  async deletePlayerData(userToken: string): Promise<boolean> {
+    const isSuceess = await axios.delete<boolean>(
+      config.serverURL + "/PlayerData",
+      {
+        headers: {
+          token: userToken,
+        },
+      }
+    );
+
+    return isSuceess.data;
   }
-  updatePlayerData(
+  async updatePlayerData(
     userToken: string,
-    playerData: PlayerDataTO
+    playerData: Partial<PlayerDataTO>
   ): Promise<PlayerDataTO> {
-    throw new Error("Method not implemented.");
+    const patchRequest = createPatch({}, playerData);
+
+    const resp = await axios.patch<PlayerDataTO>(
+      config.serverURL + "/PlayerData",
+      patchRequest,
+      {
+        headers: {
+          token: userToken,
+        },
+      }
+    );
+
+    return resp.data;
   }
-  getPlayerData(userToken: string): Promise<PlayerDataTO> {
-    throw new Error("Method not implemented.");
+  async getPlayerData(userToken: string): Promise<PlayerDataTO> {
+    const resp = await axios.get<PlayerDataTO>(
+      config.serverURL + "/PlayerData",
+      {
+        headers: {
+          token: userToken,
+        },
+      }
+    );
+
+    return resp.data;
   }
-  getElementScore(
+  async getElementScore(
     userToken: string,
     elementId: ElementID,
     courseId: ElementID
   ): Promise<ElementScoreTO> {
-    throw new Error("Method not implemented.");
+    const resp = await axios.get<ElementScoreTO>(
+      config.serverURL +
+        "/LearningElements/Course/" +
+        courseId +
+        "/Element/" +
+        elementId +
+        "/Score",
+      {
+        headers: {
+          token: userToken,
+        },
+      }
+    );
+
+    return resp.data;
   }
-  getWorldStatus(userToken: string, worldId: number): Promise<WorldStatusTO> {
-    throw new Error("Method not implemented.");
+  async getWorldStatus(
+    userToken: string,
+    worldId: number
+  ): Promise<WorldStatusTO> {
+    const resp = await axios.get<WorldStatusTO>(
+      config.serverURL + "/Courses/" + worldId + "/status",
+      {
+        headers: {
+          token: userToken,
+        },
+      }
+    );
+
+    return resp.data;
   }
   getElementSource(
     userToken: string,
@@ -49,13 +107,13 @@ export default class BackendAdapter implements IBackendAdapter {
     return axios
       .get<{ filePath: string }>(
         config.serverURL +
-          "/LearningElements/H5P/FilePath/Course/" +
+          "/LearningElements/FilePath/Course/" +
           courseId +
           "/Element/" +
           elementId,
         {
           headers: {
-            token: "token",
+            token: userToken,
           },
         }
       )
@@ -145,11 +203,23 @@ export default class BackendAdapter implements IBackendAdapter {
     elementId: ElementID,
     courseId: ElementID
   ): Promise<boolean> {
-    logger.warn(
-      `Tried to score Element ${elementId}. Functionality not implemented yet.`
+    const response = await axios.patch<{
+      isSuceess: true;
+    }>(
+      config.serverURL +
+        "/LearningElements/Course/" +
+        courseId +
+        "/Element/" +
+        elementId,
+      {},
+      {
+        headers: {
+          token: userToken,
+        },
+      }
     );
 
-    return Promise.resolve(true);
+    return response.data.isSuceess;
   }
 
   async logInUser(userCredentials: {

@@ -18,9 +18,9 @@ export default class MockBackendAdapter extends BackendAdapter {
   }
   updatePlayerData(
     userToken: string,
-    playerData: PlayerDataTO
+    playerData: Partial<PlayerDataTO>
   ): Promise<PlayerDataTO> {
-    return Promise.resolve(playerData);
+    return Promise.resolve(new PlayerDataTO());
   }
   getPlayerData(userToken: string): Promise<PlayerDataTO> {
     return Promise.resolve({
