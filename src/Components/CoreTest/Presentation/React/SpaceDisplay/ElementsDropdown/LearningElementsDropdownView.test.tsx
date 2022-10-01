@@ -16,6 +16,7 @@ modelWithElements.elements.Value = [
     goals: "goals",
     description: "description",
     value: 10,
+    parentSpaceId: 1,
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ modelWithElements.elements.Value = [
     description: "This is a text element",
     goals: "goals",
     value: 10,
+    parentSpaceId: 1,
   },
 ];
 

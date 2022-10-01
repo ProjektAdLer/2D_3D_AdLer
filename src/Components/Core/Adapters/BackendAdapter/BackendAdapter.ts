@@ -69,35 +69,41 @@ export default class BackendAdapter implements IBackendAdapter {
   async getWorldData({
     userToken,
     worldId,
-  }: getWorldDataParams): Promise<Partial<WorldTO>> {
+  }: getWorldDataParams): Promise<WorldTO> {
     // get DSL
     let dsl = await this.getDSL({
       userToken,
       worldId,
     });
 
-    // create WorldTO with world data
-    let response: Partial<WorldTO> = {
-      worldName: dsl.learningWorld.identifier.value,
-      worldGoal: dsl.learningWorld.goals,
-    };
-
     // create ElementTOs
-    let elements: ElementTO[] = dsl.learningWorld.learningElements.flatMap(
+    const elements: ElementTO[] = dsl.learningWorld.learningElements.flatMap(
       (element) =>
         element.elementCategory in ElementTypes ? this.mapElement(element) : []
     );
 
     // create SpaceTOs and connect them with their elements
-    response.spaces = dsl.learningWorld.learningSpaces.map((space) => {
+    const spaces = dsl.learningWorld.learningSpaces.map((space) => {
       return {
         id: space.spaceId,
         name: space.identifier.value,
         elements: elements.filter((element) =>
           space.learningSpaceContent.includes(element.id)
         ),
+        description: space.description,
+        goals: space.goals,
+        requirements: space.requirements,
       } as SpaceTO;
     });
+
+    // create WorldTO with world data
+    let response: WorldTO = {
+      worldName: dsl.learningWorld.identifier.value,
+      worldGoal: dsl.learningWorld.goals,
+      spaces: spaces,
+      description: dsl.learningWorld.description,
+      goals: dsl.learningWorld.goals,
+    };
 
     return response;
   }
@@ -133,6 +139,7 @@ export default class BackendAdapter implements IBackendAdapter {
       name: element.identifier.value,
       type: element.elementCategory,
       value: Number.parseInt(element.learningElementValueList[0].value) || 0,
+      parentSpaceId: element.learningSpaceParentId,
     } as ElementTO;
   };
   public async getDSL({

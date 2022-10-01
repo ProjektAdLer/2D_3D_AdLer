@@ -6,8 +6,13 @@ import IDSL from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
 export const minimalGetWorldDataResponse: WorldTO = {
   worldName: "TestWorld",
   worldGoal: "TestGoal",
+  description: "TestDescription",
+  goals: "TestGoals",
   spaces: [
     {
+      description: "TestDescription",
+      goals: "TestGoals",
+      requirements: [],
       id: 1,
       name: "TestSpace",
       elements: [
@@ -18,6 +23,7 @@ export const minimalGetWorldDataResponse: WorldTO = {
           type: "text",
           description: "TestDescription",
           goals: "TestGoals",
+          parentSpaceId: 1,
         },
       ],
     },
@@ -30,12 +36,17 @@ export const expectedWorldTO: WorldTO = {
   worldName: expect.any(String),
   worldGoal: expect.any(String),
   spaces: expect.any(Array),
+  description: expect.any(String),
+  goals: expect.any(String),
 };
 
 export const expectedSpaceTO: SpaceTO = {
   id: expect.any(Number),
   name: expect.any(String),
   elements: expect.any(Array),
+  description: expect.any(String),
+  goals: expect.any(String),
+  requirements: expect.any(Array),
 };
 
 export const expectedElementTO: ElementTO = {
@@ -45,6 +56,7 @@ export const expectedElementTO: ElementTO = {
   description: expect.any(String),
   goals: expect.any(String),
   type: expect.any(String),
+  parentSpaceId: expect.any(Number),
 };
 
 export const mockDSL: IDSL = {

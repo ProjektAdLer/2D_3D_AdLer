@@ -84,6 +84,9 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
             id: space.id,
             name: space.name,
             elements: elementEntities,
+            description: space.description,
+            goals: space.goals,
+            requirements: space.requirements,
           },
           SpaceEntity
         )
@@ -123,6 +126,12 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   private toTO(entityToConvert: WorldEntity): WorldTO {
     // spread to prevent passing a reference
     // this will need to be changed when entity and TO are not matching in structure anymore
-    return structuredClone(entityToConvert) as WorldTO;
+    return {
+      description: entityToConvert.description,
+      goals: entityToConvert.goals,
+      worldGoal: entityToConvert.worldGoal,
+      worldName: entityToConvert.worldName,
+      spaces: entityToConvert.spaces,
+    } as WorldTO;
   }
 }

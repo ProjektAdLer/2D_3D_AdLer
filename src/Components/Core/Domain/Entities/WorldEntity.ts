@@ -5,4 +5,6 @@ export default class WorldEntity {
   public spaces: SpaceEntity[];
   worldGoal: string;
   worldID: number;
+  description: string;
+  goals: string;
 }

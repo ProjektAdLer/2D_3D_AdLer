@@ -5,4 +5,7 @@ export default class SpaceTO {
   id: ElementID;
   name: string;
   elements: ElementTO[];
+  description: string;
+  goals: string;
+  requirements: ElementID[];
 }

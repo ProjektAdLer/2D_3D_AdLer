@@ -8,4 +8,5 @@ export default class ElementEntity {
   public description: string;
   public goals: string;
   public type: string;
+  parentSpaceId: ElementID;
 }

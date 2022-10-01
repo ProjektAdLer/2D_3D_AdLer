@@ -1,8 +1,8 @@
 import { Vector3 } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
+import SpaceTO from "../../../../Core/Application/DataTransferObjects/SpaceTO";
 import BUILDER_TYPES from "../../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import { SpaceTO } from "../../../../Core/Ports/SpacePort/ISpacePort";
 import IDoorPresenter from "../../../../Core/Presentation/Babylon/Door/IDoorPresenter";
 import IElementPresenter from "../../../../Core/Presentation/Babylon/Elements/IElementPresenter";
 import SpacePresenter from "../../../../Core/Presentation/Babylon/Spaces/SpacePresenter";
@@ -15,13 +15,19 @@ const builderMock = mock<IPresentationBuilder>();
 
 const spaceTO: SpaceTO = {
   id: 1,
+  description: "TestDescription",
+  goals: "TestGoals",
+  requirements: [],
+  name: "TestSpace",
   elements: [
     {
       id: 2,
       name: "test",
-      elementData: {
-        type: "h5p",
-      },
+      type: "h5p",
+      description: "test",
+      goals: "test",
+      value: 42,
+      parentSpaceId: 1,
     },
   ],
 };
@@ -119,9 +125,11 @@ describe("SpacePresenter", () => {
     spaceTO.elements.push({
       id: 3,
       name: "test",
-      elementData: {
-        type: "h5p",
-      },
+      description: "test",
+      goals: "test",
+      value: 42,
+      type: "h5p",
+      parentSpaceId: 1,
     });
 
     systemUnderTest["setSpaceDimensions"](spaceTO);
