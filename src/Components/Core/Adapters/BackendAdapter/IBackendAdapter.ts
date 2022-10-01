@@ -5,7 +5,7 @@ import { XAPiEvent } from "../../Application/UseCases/ScoreH5PElement/IScoreH5PE
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 
 // TODO: Restructure in meaningful types
-export type tempApiInfo = {
+export type getWorldDataParams = {
   userToken: string;
   worldId: number;
 };
@@ -18,7 +18,10 @@ export type ScoreH5PElementRequest = {
 };
 
 export default interface IBackendAdapter {
-  getWorldData({ userToken, worldId }: tempApiInfo): Promise<Partial<WorldTO>>;
+  getWorldData({
+    userToken,
+    worldId,
+  }: getWorldDataParams): Promise<Partial<WorldTO>>;
 
   scoreElement(elementId: ElementID): Promise<void>;
 

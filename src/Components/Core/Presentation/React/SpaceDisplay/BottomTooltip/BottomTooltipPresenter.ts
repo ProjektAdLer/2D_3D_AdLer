@@ -6,7 +6,7 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
   constructor(private viewModel: BottomTooltipViewModel) {}
   displayElement(element: ElementTO): void {
     this.viewModel.text.Value = element.name;
-    this.viewModel.iconType.Value = element.elementData.type;
+    this.viewModel.iconType.Value = element.type;
     this.viewModel.show.Value = true;
   }
   hide(): void {

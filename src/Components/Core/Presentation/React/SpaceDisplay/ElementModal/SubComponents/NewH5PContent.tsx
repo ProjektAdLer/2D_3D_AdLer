@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { H5P as H5PPlayer } from "h5p-standalone";
 import ElementModalViewModel from "../ElementModalViewModel";
-import H5PElementData from "../../../../../Domain/Entities/ElementData/H5PElementData";
 import { config } from "../../../../../../../config";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import IScoreH5PElement from "src/Components/Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
@@ -12,7 +11,7 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 export default function NewH5PContent({
   viewModel,
 }: {
-  viewModel: ElementModalViewModel<H5PElementData>;
+  viewModel: ElementModalViewModel;
 }) {
   const h5pContainerRef = useRef<HTMLDivElement>(null);
 
@@ -27,7 +26,7 @@ export default function NewH5PContent({
 
         const filePath = await CoreDIContainer.get<IBackendAdapter>(
           CORE_TYPES.IBackendAdapter
-        ).getH5PFileName(viewModel.id.Value, viewModel.parentCourseId.Value);
+        ).getH5PFileName(viewModel.id.Value, 1);
 
         let h5pJsonURL =
           baseURL + filePath.replaceAll("\\", "/").replaceAll("wwwroot/", "");
@@ -54,7 +53,7 @@ export default function NewH5PContent({
             ).executeAsync({
               xapiData: xapiData,
               elementId: viewModel.id.Value,
-              courseId: viewModel.parentCourseId.Value,
+              courseId: 1, // TODO: get from somewhere
             });
           }
         });

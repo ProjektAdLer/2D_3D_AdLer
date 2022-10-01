@@ -11,20 +11,18 @@ modelWithElements.elementNames.Value = ["Element 1", "Element 2"];
 modelWithElements.elements.Value = [
   {
     id: 1,
-    parentCourseId: 1,
     name: "Element 1",
-    elementData: {
-      type: "h5p",
-    },
+    type: "h5p",
+    goals: "goals",
+    description: "description",
     value: 10,
   },
   {
     id: 2,
-    parentCourseId: 1,
     name: "Element 2",
-    elementData: {
-      type: "text",
-    },
+    type: "text",
+    description: "This is a text element",
+    goals: "goals",
     value: 10,
   },
 ];

@@ -17,6 +17,6 @@ export default class ElementPresenter implements IElementPresenter {
     this.viewModel.position.Value = position[0];
     this.viewModel.rotation.Value = position[1];
     this.viewModel.name.Value = elementTO.name;
-    this.viewModel.elementData.Value = elementTO.elementData;
+    this.viewModel.type.Value = elementTO.type;
   }
 }

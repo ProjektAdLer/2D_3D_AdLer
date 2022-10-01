@@ -48,9 +48,7 @@ export default function ElementsDropdown() {
             shape="freefloatleft"
             onClick={() => controller?.startElement(element.id)}
           >
-            <div className="w-5 lg:w-10">
-              {getIcon(element.elementData.type)}
-            </div>
+            <div className="w-5 lg:w-10">{getIcon(element.type)}</div>
             <h3 className="ml-1 text-sm text-white lg:text-lg">
               {element.name}
             </h3>

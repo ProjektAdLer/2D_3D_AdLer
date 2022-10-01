@@ -14,12 +14,10 @@ export const minimalGetWorldDataResponse: WorldTO = {
         {
           id: 1,
           name: "TestElement",
-          parentCourseId: 1,
           value: 42,
-          requirements: undefined,
-          elementData: {
-            type: "text",
-          },
+          type: "text",
+          description: "TestDescription",
+          goals: "TestGoals",
         },
       ],
     },
@@ -43,36 +41,37 @@ export const expectedSpaceTO: SpaceTO = {
 export const expectedElementTO: ElementTO = {
   id: expect.any(Number),
   name: expect.any(String),
-  parentCourseId: expect.any(Number),
   value: expect.any(Number),
-  requirements: expect.any(Array),
-  elementData: expect.any(Object),
+  description: expect.any(String),
+  goals: expect.any(String),
+  type: expect.any(String),
 };
 
 export const mockDSL: IDSL = {
   learningWorld: {
-    idNumber: "1a28a418-00f5-4b24-8ac0-5b4e03ed3f73",
+    idNumber: "ac187daa-e3a7-4dbc-820d-1f9b1a978964",
     identifier: {
       type: "name",
-      value: "Lernwelt Metriken - 4 H5P",
+      value: "World_For_Evaluation",
     },
     description:
-      "Diese Lernwelt soll den Lernenden, Metriken verständlich erklären.",
+      "Eine coole Welt für die Evaluation, welche alle Lernelemente enthält die zur Verfügung stehen",
     goals:
-      "Lernende können nach Abschluss der Lernwelt Metriken identifizieren und anwenden.",
-    learningWorldContent: [],
-    topics: [],
+      "Eine coole Welt für die Evaluation, welche alle Lernelemente enthält die zur Verfügung stehen",
+    learningWorldContent: [1],
     learningSpaces: [
       {
-        spaceId: 0,
+        spaceId: 1,
         identifier: {
           type: "name",
-          value: "Freie Lernelemente",
+          value: "Space_Number_1",
         },
-        description: "Diese Lernelemente sind keinem Lernraum zugeordnet",
-        goals: "",
-        learningSpaceContent: [1, 2, 3, 4, 5],
-        requirements: null,
+        description: "Der erste und einzige Lernraum",
+        goals: "Der erste und einzige Lernraum",
+        learningSpaceContent: [1, 2, 3, 4],
+        requiredPoints: 100,
+        includedPoints: 150,
+        requirements: [],
       },
     ],
     learningElements: [
@@ -80,141 +79,69 @@ export const mockDSL: IDSL = {
         id: 1,
         identifier: {
           type: "FileName",
-          value: "DSL_Document",
+          value: "Youtube-Link-English",
         },
-        description: "",
-        goals: "",
-        elementType: "json",
+        description: "Ein video zur Vortbildung",
+        goals: "Bitte anschauen",
+        elementCategory: "video",
         learningElementValueList: [
           {
             type: "Points",
-            value: "0",
+            value: "50",
           },
         ],
-        learningSpaceParentId: 0,
-        requirements: null,
-        metaData: null,
+        learningSpaceParentId: 1,
       },
       {
         id: 2,
         identifier: {
           type: "FileName",
-          value: "Einführungsvideo",
+          value: "Text-File-Example",
         },
-        description:
-          "In diesem Video werden Metriken grundlegend erklärt und auf ihre Funktion eingegangen",
-        goals:
-          "Lernende verstehen was Metriken sind und wofür sie genutzt werden. ",
-        elementType: "h5p",
+        description: "Text-File-Example from the Internet",
+        goals: "Text-File-Example",
+        elementCategory: "text",
         learningElementValueList: [
           {
             type: "Points",
-            value: "15",
+            value: "25",
           },
         ],
-        learningSpaceParentId: 0,
-        requirements: null,
-        metaData: [
-          {
-            key: "h5pFileName",
-            value:
-              "wwwroot/courses/2/Lernwelt Metriken - 4 H5P/h5p/Einführungsvideo",
-          },
-          {
-            key: "h5pContextId",
-            value: "1337",
-          },
-        ],
+        learningSpaceParentId: 1,
       },
       {
         id: 3,
         identifier: {
           type: "FileName",
-          value: "Folge-Video",
+          value: "H5P-SchiebeSpiel",
         },
-        description: "In diesem Video werden weitere Metriken erklärt.",
-        goals: "Lernende haben ein vertieftes Verständnis über Metriken",
-        elementType: "h5p",
+        description: "H5P-SchiebeSpiel not too easy",
+        goals: "Do something here",
+        elementCategory: "h5p",
         learningElementValueList: [
           {
             type: "Points",
-            value: "25",
+            value: "50",
           },
         ],
-        learningSpaceParentId: 0,
-        requirements: null,
-        metaData: [
-          {
-            key: "h5pFileName",
-            value:
-              "wwwroot/courses/2/Lernwelt Metriken - 4 H5P/h5p/Folge-Video",
-          },
-          {
-            key: "h5pContextId",
-            value: "1337",
-          },
-        ],
+        learningSpaceParentId: 1,
       },
       {
         id: 4,
         identifier: {
           type: "FileName",
-          value: "Suche die Wörter - Metriken",
+          value: "Cars is cool",
         },
-        description:
-          "Es ist eine große Wort Tafel gegeben. Auf dieser müssen verschiedene Begriffe gesucht und gefunden werden.",
-        goals: "Finde alle Wörter um 100% zu erreichen.",
-        elementType: "h5p",
+        description: "2 Cars",
+        goals: "What colors are those cars",
+        elementCategory: "image",
         learningElementValueList: [
           {
             type: "Points",
             value: "25",
           },
         ],
-        learningSpaceParentId: 0,
-        requirements: null,
-        metaData: [
-          {
-            key: "h5pFileName",
-            value:
-              "wwwroot/courses/2/Lernwelt Metriken - 4 H5P/h5p/Suche die Wörter - Metriken",
-          },
-          {
-            key: "h5pContextId",
-            value: "1337",
-          },
-        ],
-      },
-      {
-        id: 5,
-        identifier: {
-          type: "FileName",
-          value: "Verschiebe die Wörter",
-        },
-        description:
-          "Das letzte Spiel dieser Lernwelt überprüft dein Verständnis über Metriken",
-        goals:
-          "Grundlegende Begriffe über Metriken werden nochmals wiederholt.",
-        elementType: "h5p",
-        learningElementValueList: [
-          {
-            type: "Points",
-            value: "30",
-          },
-        ],
-        learningSpaceParentId: 0,
-        requirements: null,
-        metaData: [
-          {
-            key: "h5pFileName",
-            value:
-              "wwwroot/courses/2/Lernwelt Metriken - 4 H5P/h5p/Verschiebe die Wörter",
-          },
-          {
-            key: "h5pContextId",
-            value: "1337",
-          },
-        ],
+        learningSpaceParentId: 1,
       },
     ],
   },

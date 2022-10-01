@@ -1,6 +1,6 @@
 import ElementModalPresenter from "../../../../../../../src/Components/Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalPresenter";
-import { ElementTO } from "../../../../../Core/Ports/WorldPort/IWorldPort";
 import ElementModalViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
+import ElementTO from "../../../../../Core/Application/DataTransferObjects/ElementTO";
 
 describe("ElementModalPresenter", () => {
   let systemUnderTest: ElementModalPresenter;
@@ -13,16 +13,15 @@ describe("ElementModalPresenter", () => {
     const elementTO: ElementTO = {
       id: 1,
       name: "Test",
-      elementData: {
-        type: "h5p",
-      },
+      description: "Test",
+      goals: "Test",
+      type: "h5p",
+      value: 1,
     };
 
     systemUnderTest.presentElementModal(elementTO);
 
-    expect(systemUnderTest["viewModel"].elementData.Value.type).toBe(
-      elementTO.elementData.type
-    );
+    expect(systemUnderTest["viewModel"].type.Value).toBe(elementTO.type);
     expect(systemUnderTest["viewModel"].isOpen.Value).toBe(true);
     expect(systemUnderTest["viewModel"].id.Value).toBe(elementTO.id);
   });

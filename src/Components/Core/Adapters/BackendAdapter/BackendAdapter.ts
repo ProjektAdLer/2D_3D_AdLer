@@ -6,12 +6,8 @@ import { ElementTypes } from "../../Presentation/Babylon/Elements/Types/ElementT
 import IDSL, { APIElement } from "./Types/IDSL";
 import IBackendAdapter, {
   ScoreH5PElementRequest,
-  tempApiInfo,
+  getWorldDataParams,
 } from "./IBackendAdapter";
-import TextElementData from "../../Domain/Entities/ElementData/TextElementData";
-import ImageElementData from "../../Domain/Entities/ElementData/ImageElementData";
-import VideoElementData from "../../Domain/Entities/ElementData/VideoElementData";
-import H5PElementData from "../../Domain/Entities/ElementData/H5PElementData";
 import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import ElementTO from "../../Application/DataTransferObjects/ElementTO";
@@ -73,16 +69,12 @@ export default class BackendAdapter implements IBackendAdapter {
   async getWorldData({
     userToken,
     worldId,
-  }: tempApiInfo): Promise<Partial<WorldTO>> {
+  }: getWorldDataParams): Promise<Partial<WorldTO>> {
     // get DSL
     let dsl = await this.getDSL({
       userToken,
       worldId,
     });
-
-    // omit first space, since it is only used to store the dsl
-    dsl.learningWorld.learningSpaces =
-      dsl.learningWorld.learningSpaces.slice(1);
 
     // create WorldTO with world data
     let response: Partial<WorldTO> = {
@@ -93,7 +85,7 @@ export default class BackendAdapter implements IBackendAdapter {
     // create ElementTOs
     let elements: ElementTO[] = dsl.learningWorld.learningElements.flatMap(
       (element) =>
-        element.elementType in ElementTypes ? this.mapElement(element) : []
+        element.elementCategory in ElementTypes ? this.mapElement(element) : []
     );
 
     // create SpaceTOs and connect them with their elements
@@ -133,49 +125,20 @@ export default class BackendAdapter implements IBackendAdapter {
 
     return token.data.moodleToken;
   }
-  private mapElement = (element: APIElement): ElementTO => {
-    const elementTO: Partial<ElementTO> = {
+  public mapElement = (element: APIElement): ElementTO => {
+    return {
       id: element.id,
-      value: element.learningElementValueList
-        ? Number.parseInt(element.learningElementValueList[0]?.value ?? "0")
-        : 0,
-      requirements: element.requirements ?? [],
-      name: element.identifier?.value,
-    };
-
-    switch (element.elementType) {
-      case "text":
-        elementTO.elementData = {
-          type: "text",
-        } as TextElementData;
-        break;
-      case "image":
-        elementTO.elementData = {
-          type: "image",
-        } as ImageElementData;
-        break;
-      case "video":
-        elementTO.elementData = {
-          type: "video",
-        } as VideoElementData;
-        break;
-      case "h5p":
-        elementTO.elementData = {
-          type: "h5p",
-          fileName: element.metaData?.find(
-            (metaData) => metaData.key === "h5pFileName"
-          )?.value,
-          contextId: Number.parseInt(
-            element.metaData?.find(
-              (metaData) => metaData.key === "h5pContextId"
-            )?.value || "0"
-          ),
-        } as H5PElementData;
-    }
-
-    return elementTO as ElementTO;
+      description: element.description,
+      goals: element.goals,
+      name: element.identifier.value,
+      type: element.elementCategory,
+      value: Number.parseInt(element.learningElementValueList[0].value) || 0,
+    } as ElementTO;
   };
-  private async getDSL({ userToken, worldId }: tempApiInfo): Promise<IDSL> {
+  public async getDSL({
+    userToken,
+    worldId,
+  }: getWorldDataParams): Promise<IDSL> {
     const response = await axios.get<IDSL>(
       config.serverURL + "/Courses/" + worldId,
       {

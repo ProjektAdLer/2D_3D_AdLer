@@ -27,7 +27,7 @@ describe("MockBackendAdapter", () => {
   test("getWorldData returns WorldTO with one space and every element type", async () => {
     const result = await systemUnderTest.getWorldData({
       userToken: "",
-      worldName: "",
+      worldId: 1,
     });
 
     // check that the result matches the expected structure of LearningWorldTO
@@ -48,9 +48,7 @@ describe("MockBackendAdapter", () => {
       expect.arrayContaining(
         Object.keys(ElementTypes).map((elementType) =>
           expect.objectContaining({
-            elementData: expect.objectContaining({
-              type: elementType,
-            }),
+            type: elementType,
           })
         )
       )

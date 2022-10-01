@@ -1,7 +1,6 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
 import { mock } from "jest-mock-extended";
-import H5PElementData from "../../../../../Core/Domain/Entities/ElementData/H5PElementData";
 import ElementModal from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModal";
 import ElementModalController from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalController";
 import ElementModalViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
@@ -11,9 +10,7 @@ import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilder
 let fakeModel = new ElementModalViewModel();
 fakeModel.isOpen.Value = true;
 fakeModel.id.Value = 123;
-fakeModel.elementData.Value = {
-  type: "text",
-};
+fakeModel.type.Value = "text";
 
 const fakeController = mock<ElementModalController>();
 
@@ -51,16 +48,9 @@ describe("ElementModal", () => {
   test.each([["text"], ["image"], ["video"], ["h5p"]])(
     "should render its content with the correct type",
     (type) => {
-      fakeModel.elementData.Value = {
-        type,
-      };
+      fakeModel.type.Value = type;
 
       if (type === "h5p") {
-        fakeModel.elementData.Value = {
-          type,
-          contextId: 123,
-          fileName: "test.h5p",
-        } as H5PElementData;
         jest.spyOn(NewH5PContent, "default").mockReturnValue(<div></div>);
       }
 
@@ -72,9 +62,7 @@ describe("ElementModal", () => {
   );
 
   test("should render error, if no element is selected", () => {
-    fakeModel.elementData.Value = {
-      type: "type",
-    };
+    fakeModel.type.Value = "type";
     useBuilderMock([fakeModel, fakeController]);
 
     const componentUnderTest = render(<ElementModal />);

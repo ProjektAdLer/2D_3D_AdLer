@@ -1,4 +1,4 @@
-import { type tempApiInfo } from "../../../Adapters/BackendAdapter/IBackendAdapter";
+import { type getWorldDataParams } from "../../../Adapters/BackendAdapter/IBackendAdapter";
 import { inject, injectable } from "inversify";
 import type IBackendAdapter from "../../../Adapters/BackendAdapter/IBackendAdapter";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
@@ -12,10 +12,6 @@ import ILoadWorldUseCase from "./ILoadWorldUseCase";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import type ILoadAvatarUseCase from "../LoadAvatar/ILoadAvatarUseCase";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
-import H5PElementData from "../../../Domain/Entities/ElementData/H5PElementData";
-import TextElementData from "../../../Domain/Entities/ElementData/TextElementData";
-import VideoElementData from "../../../Domain/Entities/ElementData/VideoElementData";
-import ImageElementData from "../../../Domain/Entities/ElementData/ImageElementData";
 import type IUIPort from "../../../Ports/UIPort/IUIPort";
 import WorldTO from "../../DataTransferObjects/WorldTO";
 import ElementTO from "../../DataTransferObjects/ElementTO";
@@ -70,7 +66,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     let apiData = {
       userToken: userData.userToken,
       worldId: this.usedWorldId, // TODO: This can be a random number for now
-    } as tempApiInfo;
+    } as getWorldDataParams;
 
     const response = await this.backendAdapter.getWorldData(apiData);
 
@@ -111,36 +107,12 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   private mapElement = (element: ElementTO): ElementEntity => {
     const entityToStore: Partial<ElementEntity> = {
       id: element.id,
-      value: element.value,
-      requirements: element.requirements ?? [],
+      description: element.description,
+      goals: element.goals,
       name: element.name,
-      parentCourseId: this.usedWorldId,
+      type: element.type,
+      value: element.value || 0,
     };
-
-    switch (element.elementData.type) {
-      case "text":
-        entityToStore.elementData = {
-          type: "text",
-        } as TextElementData;
-        break;
-      case "image":
-        entityToStore.elementData = {
-          type: "image",
-        } as ImageElementData;
-        break;
-      case "video":
-        entityToStore.elementData = {
-          type: "video",
-        } as VideoElementData;
-        break;
-      case "h5p":
-        let h5pElementData = element.elementData as H5PElementData;
-        entityToStore.elementData = {
-          type: "h5p",
-          fileName: h5pElementData.fileName,
-          contextId: h5pElementData.contextId,
-        } as H5PElementData;
-    }
 
     return this.container.createEntity<ElementEntity>(
       entityToStore,

@@ -1,32 +1,14 @@
 // these types define the JSON data structure of the DSL that is returned by the backend
 
-type Identifier = {
+type KeyValuePair = {
   type: string;
-  value: string;
-};
-
-type Requirements =
-  | {
-      type: string;
-      value: number;
-    }[]
-  | null;
-
-type ElementValueList = {
-  type: string;
-  value: string;
-} | null;
-
-type MetaData = {
-  key: string;
   value: string;
 };
 
 export type APIWorld = {
   idNumber: string;
-  identifier: Identifier;
+  identifier: KeyValuePair;
   learningWorldContent: number[];
-  topics: number[];
   goals: string;
   learningSpaces: APISpace[];
   learningElements: APIElement[];
@@ -35,23 +17,23 @@ export type APIWorld = {
 
 export type APISpace = {
   spaceId: number;
-  identifier: Identifier;
+  identifier: KeyValuePair;
   description: string;
   goals: string;
   learningSpaceContent: number[];
-  requirements: Requirements;
+  requirements: number[];
+  requiredPoints: number;
+  includedPoints: number;
 };
 
 export type APIElement = {
   id: number;
-  identifier: Identifier;
+  identifier: KeyValuePair;
   description: string;
   goals: string;
-  elementType: string;
-  learningElementValueList: ElementValueList[];
+  elementCategory: string;
+  learningElementValueList: KeyValuePair[];
   learningSpaceParentId: number;
-  requirements?: any;
-  metaData: MetaData[] | null;
 };
 
 type IDSL = {

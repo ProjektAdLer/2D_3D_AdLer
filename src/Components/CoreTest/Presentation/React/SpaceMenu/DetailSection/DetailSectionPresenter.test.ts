@@ -17,16 +17,19 @@ describe("DetailSectionPresenter", () => {
         {
           id: 1,
           name: "Test Element 1",
-          elementData: {
-            type: "h5p",
-          },
+
+          type: "h5p",
+          description: "Test Description 1",
+          goals: "TestGoal",
+          value: 1,
         },
         {
           id: 2,
           name: "Test Element 2",
-          elementData: {
-            type: "text",
-          },
+          type: "text",
+          description: "Test Description 1",
+          goals: "TestGoal",
+          value: 1,
         },
       ],
     };

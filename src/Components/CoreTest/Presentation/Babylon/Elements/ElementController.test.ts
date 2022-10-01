@@ -1,5 +1,5 @@
 import { mock } from "jest-mock-extended";
-import IElementStartedUseCase from "../../../../Core/Application/ElementStarted/IElementStartedUseCase";
+import IElementStartedUseCase from "../../../../Core/Application/UseCases/ElementStarted/IElementStartedUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
@@ -35,12 +35,6 @@ describe("ElementController", () => {
     systemUnderTest.pointerOver();
 
     expect(uiPortMock.displayElementTooltip).toHaveBeenCalledTimes(1);
-    expect(uiPortMock.displayElementTooltip).toHaveBeenCalledWith({
-      name: viewModel.name.Value,
-      elementData: viewModel.elementData.Value,
-      id: viewModel.id,
-      parentCourseId: 1,
-    });
   });
 
   test("pointerOut calls IUIPort.hideBottomTooltip", () => {

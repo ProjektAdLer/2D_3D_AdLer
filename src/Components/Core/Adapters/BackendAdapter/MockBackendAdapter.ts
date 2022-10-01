@@ -1,22 +1,12 @@
 import { injectable } from "inversify";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
-import ElementTO from "../../Application/DataTransferObjects/ElementTO";
-import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
-import WorldTO from "../../Application/DataTransferObjects/WorldTO";
-import H5PElementData from "../../Domain/Entities/ElementData/H5PElementData";
-import ImageElementData from "../../Domain/Entities/ElementData/ImageElementData";
-import TextElementData from "../../Domain/Entities/ElementData/TextElementData";
-import VideoElementData from "../../Domain/Entities/ElementData/VideoElementData";
-import { ElementTypes } from "../../Presentation/Babylon/Elements/Types/ElementTypes";
-import IBackendAdapter, {
-  ScoreH5PElementRequest,
-  tempApiInfo,
-} from "./IBackendAdapter";
-import IDSL, { APIElement } from "./Types/IDSL";
+import BackendAdapter from "./BackendAdapter";
+import { ScoreH5PElementRequest, getWorldDataParams } from "./IBackendAdapter";
+import IDSL from "./Types/IDSL";
 import UserCredentials from "./Types/UserCredentials";
 
 @injectable()
-export default class MockBackendAdapter implements IBackendAdapter {
+export default class MockBackendAdapter extends BackendAdapter {
   getH5PFileName(elementId: number, courseId: number): Promise<string> {
     throw new Error("Method not implemented.");
   }
@@ -36,42 +26,6 @@ export default class MockBackendAdapter implements IBackendAdapter {
 
     return Promise.resolve(test);
   }
-  async getWorldData({
-    userToken,
-    worldId,
-  }: tempApiInfo): Promise<Partial<WorldTO>> {
-    // get DSL
-    let dsl = this.worldTO;
-
-    // // omit first learning room, since it is only used to store the dsl
-    // dsl.learningWorld.learningSpaces =
-    //   dsl.learningWorld.learningSpaces.slice(1);
-
-    // create LearningWorldTO with learning world data
-    let response: Partial<WorldTO> = {
-      worldName: dsl.learningWorld.identifier.value,
-      worldGoal: dsl.learningWorld.goals,
-    };
-
-    // create LearningElementTOs
-    let elements: ElementTO[] = dsl.learningWorld.learningElements.flatMap(
-      (element) =>
-        element.elementType in ElementTypes ? this.mapElement(element) : []
-    );
-
-    // create LearningRoomTOs and connect them with their learning elements
-    response.spaces = dsl.learningWorld.learningSpaces.map((space) => {
-      return {
-        id: space.spaceId,
-        name: space.identifier.value,
-        elements: elements.filter((element) =>
-          space.learningSpaceContent.includes(element.id)
-        ),
-      } as SpaceTO;
-    });
-
-    return response;
-  }
 
   scoreElement(elementId: number): Promise<void> {
     return Promise.resolve();
@@ -81,71 +35,38 @@ export default class MockBackendAdapter implements IBackendAdapter {
     return Promise.resolve("fakeToken");
   }
 
-  private mapElement = (element: APIElement): ElementTO => {
-    const elementTO: Partial<ElementTO> = {
-      id: element.id,
-      value: element.learningElementValueList
-        ? Number.parseInt(element.learningElementValueList[0]?.value ?? "0")
-        : 0,
-      requirements: element.requirements ?? [],
-      name: element.identifier?.value,
-    };
-
-    switch (element.elementType) {
-      case "text":
-        elementTO.elementData = {
-          type: "text",
-        } as TextElementData;
-        break;
-      case "image":
-        elementTO.elementData = {
-          type: "image",
-        } as ImageElementData;
-        break;
-      case "video":
-        elementTO.elementData = {
-          type: "video",
-        } as VideoElementData;
-        break;
-      case "h5p":
-        elementTO.elementData = {
-          type: "h5p",
-          fileName: element.metaData?.find(
-            (metaData) => metaData.key === "h5pFileName"
-          )?.value,
-          contextId: Number.parseInt(
-            element.metaData?.find(
-              (metaData) => metaData.key === "h5pContextId"
-            )?.value || "0"
-          ),
-        } as H5PElementData;
-    }
-
-    return elementTO as ElementTO;
-  };
+  public async getDSL({
+    userToken,
+    worldId,
+  }: getWorldDataParams): Promise<IDSL> {
+    return this.worldTO;
+  }
 
   worldTO: IDSL = {
     learningWorld: {
-      idNumber: "1a28a418-00f5-4b24-8ac0-5b4e03ed3f73",
+      idNumber: "ac187daa-e3a7-4dbc-820d-1f9b1a978964",
       identifier: {
         type: "name",
-        value: "Lernwelt Metriken - 4 H5P",
+        value: "World_For_Evaluation",
       },
-      description: "Mock Beschreibung der Welt",
-      goals: "Mock Ziele der Welt",
-      learningWorldContent: [],
-      topics: [],
+      description:
+        "Eine coole Welt für die Evaluation, welche alle Lernelemente enthält die zur Verfügung stehen",
+      goals:
+        "Eine coole Welt für die Evaluation, welche alle Lernelemente enthält die zur Verfügung stehen",
+      learningWorldContent: [1],
       learningSpaces: [
         {
-          spaceId: 0,
+          spaceId: 1,
           identifier: {
             type: "name",
-            value: "Freie Lernelemente",
+            value: "Space_Number_1",
           },
-          description: "Diese Lernelemente sind keinem Lernraum zugeordnet",
-          goals: "",
-          learningSpaceContent: [1, 2, 3, 4, 5],
-          requirements: null,
+          description: "Der erste und einzige Lernraum",
+          goals: "Der erste und einzige Lernraum",
+          learningSpaceContent: [1, 2, 3, 4],
+          requiredPoints: 100,
+          includedPoints: 150,
+          requirements: [],
         },
       ],
       learningElements: [
@@ -153,108 +74,69 @@ export default class MockBackendAdapter implements IBackendAdapter {
           id: 1,
           identifier: {
             type: "FileName",
-            value: "DSL_Document",
+            value: "Youtube-Link-English",
           },
-          description: "",
-          goals: "",
-          elementType: "json",
+          description: "Ein video zur Vortbildung",
+          goals: "Bitte anschauen",
+          elementCategory: "video",
           learningElementValueList: [
             {
               type: "Points",
-              value: "0",
+              value: "50",
             },
           ],
-          learningSpaceParentId: 0,
-          requirements: null,
-          metaData: null,
+          learningSpaceParentId: 1,
         },
         {
           id: 2,
           identifier: {
             type: "FileName",
-            value: "H5P Element",
+            value: "Text-File-Example",
           },
-          description: "Diies ist die Beschreibung des H5P Elements.",
-          goals: "Ziel des H5P Lernelements",
-          elementType: "h5p",
+          description: "Text-File-Example from the Internet",
+          goals: "Text-File-Example",
+          elementCategory: "text",
           learningElementValueList: [
             {
               type: "Points",
-              value: "15",
+              value: "25",
             },
           ],
-          learningSpaceParentId: 0,
-          requirements: null,
-          metaData: [
-            {
-              key: "h5pFileName",
-              value:
-                "wwwroot/courses/2/Lernwelt Metriken - 4 H5P/h5p/Einführungsvideo",
-            },
-            {
-              key: "h5pContextId",
-              value: "1337",
-            },
-          ],
+          learningSpaceParentId: 1,
         },
         {
           id: 3,
           identifier: {
             type: "FileName",
-            value: "Textelement",
+            value: "H5P-SchiebeSpiel",
           },
-          description: "Dies ist die Beschreibung des Text Lernelements",
-          goals: "Ziel des Text-Elements",
-          elementType: "text",
+          description: "H5P-SchiebeSpiel not too easy",
+          goals: "Do something here",
+          elementCategory: "h5p",
           learningElementValueList: [
             {
               type: "Points",
-              value: "25",
+              value: "50",
             },
           ],
-          learningSpaceParentId: 0,
-          requirements: null,
-          metaData: [],
+          learningSpaceParentId: 1,
         },
         {
           id: 4,
           identifier: {
             type: "FileName",
-            value: "Bildelement",
+            value: "Cars is cool",
           },
-          description:
-            "Dies ist die Beschreibung des Bildes. Hier wird das Bild erklärt.",
-          goals: "Ziel des Bild-Elements.",
-          elementType: "image",
+          description: "2 Cars",
+          goals: "What colors are those cars",
+          elementCategory: "image",
           learningElementValueList: [
             {
               type: "Points",
               value: "25",
             },
           ],
-          learningSpaceParentId: 0,
-          requirements: null,
-          metaData: [],
-        },
-        {
-          id: 5,
-          identifier: {
-            type: "FileName",
-            value: "Videoelement",
-          },
-          description:
-            "Das ist die beschreibung für das Videoelement. Hier wird das Video erklärt.",
-          goals: "Ziel des Video-Elements",
-          elementType: "video",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "30",
-            },
-          ],
-          learningSpaceParentId: 0,
-          requirements: null,
-          metaData: [],
+          learningSpaceParentId: 1,
         },
       ],
     },

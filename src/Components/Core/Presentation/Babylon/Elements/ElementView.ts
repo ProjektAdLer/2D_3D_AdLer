@@ -34,7 +34,7 @@ export default class ElementView implements IElementView {
     this.controller = controller;
 
     // setup callbacks for rerendering when the view model changes
-    viewModel.elementData.subscribe(async () => {
+    viewModel.type.subscribe(async () => {
       await this.loadMeshAsync();
       this.registerAction(ActionManager.OnPickTrigger, this.controller.clicked);
       this.registerAction(
@@ -57,7 +57,7 @@ export default class ElementView implements IElementView {
 
   private async loadMeshAsync(): Promise<void> {
     this.viewModel.meshes.Value = (await this.scenePresenter.loadModel(
-      modelLinks[this.viewModel.elementData.Value.type as ElementTypes],
+      modelLinks[this.viewModel.type.Value as ElementTypes],
       true
     )) as Mesh[];
 
