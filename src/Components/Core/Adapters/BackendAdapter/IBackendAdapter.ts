@@ -23,11 +23,11 @@ export default interface IBackendAdapter {
     worldId,
   }: getWorldDataParams): Promise<Partial<WorldTO>>;
 
-  scoreElement(elementId: ElementID): Promise<void>;
+  scoreElement(elementId: ElementID, courseId: ElementID): Promise<boolean>;
 
-  scoreH5PElement(data: ScoreH5PElementRequest): Promise<void>;
+  scoreH5PElement(data: ScoreH5PElementRequest): Promise<boolean>;
 
   logInUser(userCredentials: UserCredentials): Promise<string>;
   getCoursesAvailableForUser(userToken: string): Promise<CourseListTO>;
-  getH5PFileName(elementId: number, courseId: number): Promise<string>;
+  getElementSource(elementId: number, courseId: number): Promise<string>;
 }

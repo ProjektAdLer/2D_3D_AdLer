@@ -36,7 +36,7 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
       throw new Error(`Found more than one element with id ${data?.elementId}`);
 
     try {
-      await this.backendAdapter.scoreElement(elements[0].id);
+      await this.backendAdapter.scoreElement(elements[0].id, 1); // TODOPG: get course id
     } catch {
       throw new Error("Could not score element via Backend");
     }

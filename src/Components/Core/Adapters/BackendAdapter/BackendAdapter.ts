@@ -12,10 +12,11 @@ import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import ElementTO from "../../Application/DataTransferObjects/ElementTO";
 import WorldTO from "../../Application/DataTransferObjects/WorldTO";
+import { ElementID } from "../../Domain/Types/EntityTypes";
 
 @injectable()
 export default class BackendAdapter implements IBackendAdapter {
-  getH5PFileName(elementId: number, courseId: number): Promise<string> {
+  getElementSource(elementId: number, courseId: number): Promise<string> {
     return axios
       .get<{ filePath: string }>(
         config.serverURL +
@@ -31,8 +32,10 @@ export default class BackendAdapter implements IBackendAdapter {
       )
       .then((response) => response.data.filePath);
   }
-  async scoreH5PElement(data: ScoreH5PElementRequest): Promise<void> {
-    const response = await axios.patch(
+  async scoreH5PElement(data: ScoreH5PElementRequest): Promise<boolean> {
+    const response = await axios.patch<{
+      isSuceess: true;
+    }>(
       config.serverURL +
         "/LearningElements/Course/" +
         data.courseId +
@@ -48,7 +51,7 @@ export default class BackendAdapter implements IBackendAdapter {
       }
     );
 
-    return response.data;
+    return response.data.isSuceess;
   }
 
   async getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
@@ -108,12 +111,15 @@ export default class BackendAdapter implements IBackendAdapter {
     return response;
   }
 
-  async scoreElement(elementId: number): Promise<void> {
+  async scoreElement(
+    elementId: ElementID,
+    courseId: ElementID
+  ): Promise<boolean> {
     logger.warn(
       `Tried to score Element ${elementId}. Functionality not implemented yet.`
     );
 
-    return Promise.resolve();
+    return Promise.resolve(true);
   }
 
   async logInUser(userCredentials: {

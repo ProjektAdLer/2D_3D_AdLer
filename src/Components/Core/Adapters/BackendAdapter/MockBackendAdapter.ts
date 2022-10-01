@@ -1,5 +1,6 @@
 import { injectable } from "inversify";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
+import { ElementID } from "../../Domain/Types/EntityTypes";
 import BackendAdapter from "./BackendAdapter";
 import { ScoreH5PElementRequest, getWorldDataParams } from "./IBackendAdapter";
 import IDSL from "./Types/IDSL";
@@ -7,28 +8,26 @@ import UserCredentials from "./Types/UserCredentials";
 
 @injectable()
 export default class MockBackendAdapter extends BackendAdapter {
-  getH5PFileName(elementId: number, courseId: number): Promise<string> {
+  getElementSource(elementId: number, courseId: number): Promise<string> {
     throw new Error("Method not implemented.");
   }
-  scoreH5PElement(data: ScoreH5PElementRequest): Promise<void> {
+  scoreH5PElement(data: ScoreH5PElementRequest): Promise<boolean> {
     throw new Error("Method not implemented.");
   }
 
   getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
-    const test = {
+    return Promise.resolve({
       courses: [
         {
           courseId: 1,
           courseName: "Testkurs",
         },
       ],
-    } as CourseListTO;
-
-    return Promise.resolve(test);
+    });
   }
 
-  scoreElement(elementId: number): Promise<void> {
-    return Promise.resolve();
+  scoreElement(elementId: ElementID, courseId: ElementID): Promise<boolean> {
+    return Promise.resolve(true);
   }
 
   logInUser(userCredentials: UserCredentials): Promise<string> {

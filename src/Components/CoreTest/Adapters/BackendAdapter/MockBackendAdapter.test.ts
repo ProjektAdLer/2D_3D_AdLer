@@ -56,7 +56,7 @@ describe("MockBackendAdapter", () => {
   });
 
   test("scoreElement resolves", async () => {
-    await expect(systemUnderTest.scoreElement(42)).resolves.toBeUndefined();
+    await expect(systemUnderTest.scoreElement(42, 1)).resolves.toBeTruthy();
   });
 
   test("logInUser resolves with a fakeToken", async () => {
