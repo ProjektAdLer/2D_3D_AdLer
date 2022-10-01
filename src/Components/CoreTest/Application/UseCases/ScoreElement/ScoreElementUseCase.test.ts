@@ -7,6 +7,7 @@ import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import { mock } from "jest-mock-extended";
 import IBackendAdapter from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
+import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendMock = mock<IBackendAdapter>();
@@ -90,6 +91,10 @@ describe("ScoreElementUseCase", () => {
   });
 
   test("executeAsync successfully gets element with given id, scores it, gets the space id and starts use case to calcualte new space score", async () => {
+    const userEntity = new UserDataEntity();
+    userEntity.userToken = "token";
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userEntity]);
+
     containerSetup();
 
     await expect(
