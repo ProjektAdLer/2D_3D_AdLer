@@ -1,5 +1,8 @@
 import { injectable } from "inversify";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
+import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
+import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
+import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
 import { ElementID } from "../../Domain/Types/EntityTypes";
 import BackendAdapter from "./BackendAdapter";
 import { ScoreH5PElementRequest, getWorldDataParams } from "./IBackendAdapter";
@@ -8,6 +11,56 @@ import UserCredentials from "./Types/UserCredentials";
 
 @injectable()
 export default class MockBackendAdapter extends BackendAdapter {
+  deletePlayerData(userToken: string): Promise<boolean> {
+    throw new Error(
+      "Method not implemented, since we are in the Fake Backend."
+    );
+  }
+  updatePlayerData(
+    userToken: string,
+    playerData: PlayerDataTO
+  ): Promise<PlayerDataTO> {
+    return Promise.resolve(playerData);
+  }
+  getPlayerData(userToken: string): Promise<PlayerDataTO> {
+    return Promise.resolve({
+      playerGender: "Male",
+      playerWorldColor: "Blue",
+    });
+  }
+  getElementScore(
+    userToken: string,
+    elementId: ElementID,
+    courseId: ElementID
+  ): Promise<ElementScoreTO> {
+    return Promise.resolve({
+      elementId: elementId,
+      successss: true,
+    });
+  }
+  getWorldStatus(userToken: string, worldId: number): Promise<WorldStatusTO> {
+    return Promise.resolve({
+      courseId: 1,
+      learningElements: [
+        {
+          elementId: 1,
+          successss: false,
+        },
+        {
+          elementId: 2,
+          successss: false,
+        },
+        {
+          elementId: 3,
+          successss: false,
+        },
+        {
+          elementId: 4,
+          successss: false,
+        },
+      ],
+    });
+  }
   getElementSource(
     userToken: string,
     elementId: number,

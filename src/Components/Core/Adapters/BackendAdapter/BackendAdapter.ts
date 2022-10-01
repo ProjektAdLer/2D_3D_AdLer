@@ -13,9 +13,34 @@ import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import ElementTO from "../../Application/DataTransferObjects/ElementTO";
 import WorldTO from "../../Application/DataTransferObjects/WorldTO";
 import { ElementID } from "../../Domain/Types/EntityTypes";
+import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
+import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
+import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 
 @injectable()
 export default class BackendAdapter implements IBackendAdapter {
+  deletePlayerData(userToken: string): Promise<boolean> {
+    throw new Error("Method not implemented.");
+  }
+  updatePlayerData(
+    userToken: string,
+    playerData: PlayerDataTO
+  ): Promise<PlayerDataTO> {
+    throw new Error("Method not implemented.");
+  }
+  getPlayerData(userToken: string): Promise<PlayerDataTO> {
+    throw new Error("Method not implemented.");
+  }
+  getElementScore(
+    userToken: string,
+    elementId: ElementID,
+    courseId: ElementID
+  ): Promise<ElementScoreTO> {
+    throw new Error("Method not implemented.");
+  }
+  getWorldStatus(userToken: string, worldId: number): Promise<WorldStatusTO> {
+    throw new Error("Method not implemented.");
+  }
   getElementSource(
     userToken: string,
     elementId: number,
