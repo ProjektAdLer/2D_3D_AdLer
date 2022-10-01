@@ -26,7 +26,7 @@ export default function NewH5PContent({
 
         const filePath = await CoreDIContainer.get<IBackendAdapter>(
           CORE_TYPES.IBackendAdapter
-        ).getElementSource(viewModel.id.Value, 1);
+        ).getElementSource("token", viewModel.id.Value, 1);
 
         let h5pJsonURL =
           baseURL + filePath.replaceAll("\\", "/").replaceAll("wwwroot/", "");

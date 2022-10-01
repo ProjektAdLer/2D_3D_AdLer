@@ -8,6 +8,7 @@ import type IBackendAdapter from "../../../Adapters/BackendAdapter/IBackendAdapt
 import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
+import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 
 @injectable()
 export default class ScoreElementUseCase implements IScoreElementUseCase {
@@ -30,13 +31,21 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
         return entity.id === data.elementId;
       }
     );
+
+    const userEntity =
+      this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
+
     if (elements.length === 0)
       throw new Error(`Could not find element with id ${data?.elementId}`);
     else if (elements.length > 1)
       throw new Error(`Found more than one element with id ${data?.elementId}`);
 
     try {
-      await this.backendAdapter.scoreElement(elements[0].id, 1); // TODOPG: get course id
+      await this.backendAdapter.scoreElement(
+        userEntity.userToken,
+        elements[0].id,
+        1
+      ); // TODOPG: get course id
     } catch {
       throw new Error("Could not score element via Backend");
     }
