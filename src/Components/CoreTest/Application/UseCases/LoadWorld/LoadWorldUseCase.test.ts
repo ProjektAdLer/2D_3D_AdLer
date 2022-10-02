@@ -14,7 +14,6 @@ import ILoadAvatarUseCase from "../../../../Core/Application/UseCases/LoadAvatar
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IBackend from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
 import { minimalGetWorldDataResponse } from "../../../Adapters/BackendAdapter/BackendResponses";
-import { mapElementInputAndExpected } from "./LoadWorldMockedObjects";
 import elementTO from "../../../../Core/Application/DataTransferObjects/ElementTO";
 
 const backendMock = mock<IBackend>();
@@ -168,16 +167,4 @@ describe("LoadWorldUseCase", () => {
     expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(3);
     expect(worldPortMock.presentWorld).toHaveBeenCalledTimes(1);
   });
-
-  test.each(mapElementInputAndExpected)(
-    "mapElement maps ElementTO to ElementEntity for %s",
-    (_text: string, i: elementTO, e: Partial<ElementEntity>) => {
-      systemUnderTest["mapElement"](i);
-
-      expect(entityContainerMock.createEntity).toHaveBeenCalledWith(
-        e,
-        ElementEntity
-      );
-    }
-  );
 });

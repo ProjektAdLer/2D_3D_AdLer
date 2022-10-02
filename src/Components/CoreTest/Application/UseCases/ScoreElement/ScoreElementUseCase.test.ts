@@ -39,17 +39,29 @@ describe("ScoreElementUseCase", () => {
   });
 
   test("executeAsync throws error if ElementId is not provided", async () => {
+    const userEntity = new UserDataEntity();
+    userEntity.userToken = "token";
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userEntity]);
+
     await expect(systemUnderTest.executeAsync()).rejects.toThrowError();
   });
 
   test("executeAsync throws error if entity container returns no element entity with matching ID", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
+
+    const userEntity = new UserDataEntity();
+    userEntity.userToken = "token";
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userEntity]);
     expect(() =>
       systemUnderTest.executeAsync({ elementId: 1 })
     ).rejects.toThrowError("Could not find");
   });
 
   test("executeAsync throws error if entity container returns multiple element entities with matching ID", () => {
+    const userEntity = new UserDataEntity();
+    userEntity.userToken = "token";
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userEntity]);
+
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
       { id: 1 },
       { id: 1 },
@@ -61,6 +73,10 @@ describe("ScoreElementUseCase", () => {
   });
 
   test("executeAsync throws error if backend throws error", async () => {
+    const userEntity = new UserDataEntity();
+    userEntity.userToken = "token";
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userEntity]);
+
     containerSetup();
 
     backendMock.scoreElement.mockRejectedValue("error");
@@ -71,6 +87,10 @@ describe("ScoreElementUseCase", () => {
   });
 
   test("executeAsync throws error if entity container returns no matching space", async () => {
+    const userEntity = new UserDataEntity();
+    userEntity.userToken = "token";
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userEntity]);
+
     const ElementEntities = [
       {
         id: 1,
