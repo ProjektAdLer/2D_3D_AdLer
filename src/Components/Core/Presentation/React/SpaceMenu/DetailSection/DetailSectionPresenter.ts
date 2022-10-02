@@ -8,10 +8,10 @@ export default class DetailSectionPresenter implements IDetailSectionPresenter {
   onSpaceDataLoaded(spaceTO: SpaceTO): void {
     this.viewModel.name.Value = spaceTO.name;
     // TODO: set description when it exists
-    this.viewModel.description.Value = "";
-    // TODO: set requirements when they exist
-    this.viewModel.requirements.Value = [];
-    // TODO: set conditions when they exist
+    this.viewModel.description.Value = spaceTO.description;
+    // TODO: set requirements when they exist, this needs to be calcculated before TODOPG
+    //this.viewModel.requirements.Value = spaceTO.requirements; TODOPG
+    // TODO: set conditions when they exist, they need to be calculated before TODOPG
     this.viewModel.conditions.Value = [];
     this.viewModel.elements.Value = spaceTO.elements.map((elementTO) => [
       elementTO.type as ElementTypeStrings,
