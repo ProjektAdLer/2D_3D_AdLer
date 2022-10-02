@@ -87,6 +87,7 @@ export default class MockBackendAdapter extends BackendAdapter {
         return Promise.resolve(
           "https://testmoodle.cluuub.xyz/webservice/pluginfile.php/282/mod_resource/content/0/Text-File-Example.txt?forcedownload=1&token=46dd4cbdafda7fc864c8ce73aae3a897"
         );
+      /* istanbul ignore next */
       default:
         throw new Error("Unknown element type");
     }

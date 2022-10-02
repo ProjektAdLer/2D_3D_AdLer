@@ -1,5 +1,8 @@
+import { mock } from "jest-mock-extended";
 import { config } from "../../../../config";
 import MockBackendAdapter from "../../../Core/Adapters/BackendAdapter/MockBackendAdapter";
+import PlayerDataTO from "../../../Core/Application/DataTransferObjects/PlayerDataTO";
+import { XAPiEvent } from "../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
 import { ElementTypes } from "../../../Core/Presentation/Babylon/Elements/Types/ElementTypes";
 import {
   expectedElementTO,
@@ -56,7 +59,9 @@ describe("MockBackendAdapter", () => {
   });
 
   test("scoreElement resolves", async () => {
-    await expect(systemUnderTest.scoreElement(42, 1)).resolves.toBeTruthy();
+    await expect(
+      systemUnderTest.scoreElement("token", 42, 1)
+    ).resolves.toBeTruthy();
   });
 
   test("logInUser resolves with a fakeToken", async () => {
@@ -66,5 +71,92 @@ describe("MockBackendAdapter", () => {
         password: "test",
       })
     ).resolves.toEqual("fakeToken");
+  });
+  test("should get Courses Available For User", async () => {
+    await expect(
+      systemUnderTest.getCoursesAvailableForUser("token")
+    ).resolves.toEqual({
+      courses: [
+        {
+          courseId: 1,
+          courseName: "Testkurs",
+        },
+      ],
+    });
+  });
+
+  test("should score H5P Element", async () => {
+    const h5pMock = mock<XAPiEvent>();
+    await expect(
+      systemUnderTest.scoreH5PElement({
+        courseId: 1,
+        h5pId: 1,
+        userToken: "token",
+        rawH5PEvent: h5pMock,
+      })
+    ).resolves.toEqual(true);
+  });
+
+  test.each([[1], [2], [3], [4]])(
+    "should get Element Source",
+    async (element) => {
+      await expect(
+        systemUnderTest.getElementSource("token", element, 1)
+      ).resolves.toEqual(expect.any(String));
+    }
+  );
+
+  test("should throw when souce of invalid element is requested", () => {
+    async (element) => {
+      await expect(systemUnderTest.getElementSource("token", 55, 1)).toThrow();
+    };
+  });
+
+  test("should get World Status", async () => {
+    await expect(systemUnderTest.getWorldStatus("token", 1)).resolves.toEqual({
+      courseId: 1,
+      learningElements: [
+        {
+          elementId: 1,
+          successss: false,
+        },
+        {
+          elementId: 2,
+          successss: false,
+        },
+        {
+          elementId: 3,
+          successss: false,
+        },
+        {
+          elementId: 4,
+          successss: false,
+        },
+      ],
+    });
+  });
+  test("should get Element Score", async () => {
+    await expect(
+      systemUnderTest.getElementScore("token", 1, 1)
+    ).resolves.toEqual({
+      elementId: 1,
+      successss: true,
+    });
+  });
+  test("should get Player Data", async () => {
+    await expect(systemUnderTest.getPlayerData("token")).resolves.toEqual({
+      playerGender: "Male",
+      playerWorldColor: "Blue",
+    });
+  });
+  test("should update Player Data", async () => {
+    await expect(
+      systemUnderTest.updatePlayerData("token", {})
+    ).resolves.toEqual(new PlayerDataTO());
+  });
+  test("should throw when try to delete Player Data", async () => {
+    async (element) => {
+      await expect(systemUnderTest.deletePlayerData("token")).toThrow();
+    };
   });
 });
