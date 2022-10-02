@@ -203,7 +203,7 @@ export default class BackendAdapter implements IBackendAdapter {
     courseId: ElementID
   ): Promise<boolean> {
     const response = await axios.patch<{
-      isSuceess: true;
+      isSuceess: boolean;
     }>(
       config.serverURL +
         "/LearningElements/Course/" +

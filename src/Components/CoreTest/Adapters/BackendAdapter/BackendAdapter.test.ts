@@ -7,6 +7,7 @@ import {
 import { config } from "../../../../config";
 import BackendAdapter from "../../../Core/Adapters/BackendAdapter/BackendAdapter";
 import axios from "axios";
+import CourseListTO from "../../../Core/Application/DataTransferObjects/CourseListTO";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -110,5 +111,55 @@ describe("BackendAdapter", () => {
       }
     );
     expect(returnedVal).toBe(token);
+  });
+
+  test("should score a Learning Element", async () => {
+    mockedAxios.patch.mockResolvedValue({
+      data: {
+        isSuceess: true,
+      },
+    });
+    const returnedVal = await systemUnderTest.scoreElement("token", 1, 1);
+
+    expect(mockedAxios.patch).toHaveBeenCalledTimes(1);
+    expect(mockedAxios.patch).toHaveBeenCalledWith(
+      config.serverURL + "/LearningElements/Course/" + 1 + "/Element/" + 1,
+      {},
+      {
+        headers: {
+          token: "token",
+        },
+      }
+    );
+    expect(returnedVal).toBe(true);
+  });
+
+  test("should Get All Avalaibale Courses for a User", async () => {
+    mockedAxios.get.mockResolvedValue({
+      data: [
+        {
+          courses: { courseId: 1, courseName: "string" },
+        },
+      ],
+    });
+    const returnedVal = await systemUnderTest.getCoursesAvailableForUser(
+      "token"
+    );
+
+    expect(mockedAxios.get).toHaveBeenCalledTimes(1);
+    expect(mockedAxios.get).toHaveBeenCalledWith(
+      config.serverURL + "/Courses",
+      {
+        params: {
+          limitToEnrolled: false,
+        },
+        headers: {
+          token: "token",
+        },
+      }
+    );
+    expect(returnedVal).toEqual([
+      { courses: { courseId: 1, courseName: "string" } },
+    ]);
   });
 });
