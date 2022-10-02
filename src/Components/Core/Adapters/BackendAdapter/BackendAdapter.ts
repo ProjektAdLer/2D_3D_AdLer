@@ -1,7 +1,6 @@
 import axios from "axios";
 import { injectable } from "inversify";
 import { config } from "../../../../config";
-import { logger } from "../../../../Lib/Logger";
 import { ElementTypes } from "../../Presentation/Babylon/Elements/Types/ElementTypes";
 import IDSL, { APIElement } from "./Types/IDSL";
 import IBackendAdapter, {
@@ -17,7 +16,7 @@ import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
 import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
 import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 
-import { applyPatch, createPatch } from "rfc6902";
+import { createPatch } from "rfc6902";
 
 @injectable()
 export default class BackendAdapter implements IBackendAdapter {
