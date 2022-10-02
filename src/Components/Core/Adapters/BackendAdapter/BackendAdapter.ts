@@ -228,7 +228,7 @@ export default class BackendAdapter implements IBackendAdapter {
   }): Promise<string> {
     const token = await axios.get<{
       moodleToken: string;
-    }>(config.serverURL + "/MoodleLogin/Login", {
+    }>(config.serverURL + "/Users/Login", {
       params: {
         UserName: userCredentials.username,
         Password: userCredentials.password,
