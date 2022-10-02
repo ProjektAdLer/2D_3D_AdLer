@@ -8,4 +8,5 @@ export default class SpaceEntity {
   public description: string;
   public goals: string;
   public requirements: ElementID[];
+  public requiredPoints: number;
 }

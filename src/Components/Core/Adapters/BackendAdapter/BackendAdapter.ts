@@ -182,6 +182,7 @@ export default class BackendAdapter implements IBackendAdapter {
         description: space.description,
         goals: space.goals,
         requirements: space.requirements,
+        requiredPoints: space.requiredPoints,
       } as SpaceTO;
     });
 

@@ -15,6 +15,7 @@ export const minimalGetWorldDataResponse: WorldTO = {
       requirements: [],
       id: 1,
       name: "TestSpace",
+      requiredPoints: 0,
       elements: [
         {
           id: 1,
@@ -47,6 +48,7 @@ export const expectedSpaceTO: SpaceTO = {
   description: expect.any(String),
   goals: expect.any(String),
   requirements: expect.any(Array),
+  requiredPoints: expect.any(Number),
 };
 
 export const expectedElementTO: ElementTO = {
