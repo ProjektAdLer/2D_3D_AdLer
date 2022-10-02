@@ -15,6 +15,8 @@ import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IUIPort from "../../../Ports/UIPort/IUIPort";
 import WorldTO from "../../DataTransferObjects/WorldTO";
 import ElementTO from "../../DataTransferObjects/ElementTO";
+import SpaceTO from "../../DataTransferObjects/SpaceTO";
+import { mergeObjectsWithRemainder } from "src/Lib/MergeWithRemainder";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -47,16 +49,20 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       worldEntity = await this.load(userData[0]);
     }
 
-    this.worldPort.presentWorld(this.toTO(worldEntity));
+    const worldTO = mergeObjectsWithRemainder<WorldEntity, WorldTO>(
+      WorldTO,
+      worldEntity,
+      {}
+    );
+
+    this.worldPort.presentWorld(worldTO);
     // TODO: Move this outside of this use case - PG
     await this.loadAvatarUseCase.executeAsync();
 
-    return Promise.resolve(this.toTO(worldEntity));
+    return Promise.resolve(worldTO);
   }
 
   private async load(userData: UserDataEntity): Promise<WorldEntity> {
-    // TODO: remove hardcoded worldName when a learning world is selected
-
     const coursesList = await this.backendAdapter.getCoursesAvailableForUser(
       userData.userToken
     );
@@ -65,7 +71,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
     let apiData = {
       userToken: userData.userToken,
-      worldId: this.usedWorldId, // TODO: This can be a random number for now
+      worldId: this.usedWorldId,
     } as getWorldDataParams;
 
     const response = await this.backendAdapter.getWorldData(apiData);
@@ -75,19 +81,16 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     response.spaces?.forEach((space) => {
       let elementEntities: ElementEntity[] = [];
       space.elements?.forEach((element) => {
-        elementEntities.push(this.mapElement(element));
+        elementEntities.push(this.createElementEntity(element));
       });
 
       spaceEntities.push(
         this.container.createEntity<SpaceEntity>(
-          {
-            id: space.id,
-            name: space.name,
-            elements: elementEntities,
-            description: space.description,
-            goals: space.goals,
-            requirements: space.requirements,
-          },
+          mergeObjectsWithRemainder<SpaceTO, SpaceEntity>(
+            SpaceEntity,
+            space,
+            {}
+          ),
           SpaceEntity
         )
       );
@@ -95,43 +98,27 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
     // create learning world entity
     const worldEntity = this.container.createEntity<WorldEntity>(
-      {
-        worldName: response.worldName,
+      mergeObjectsWithRemainder<WorldTO, WorldEntity>(WorldEntity, response, {
         spaces: spaceEntities,
-        worldGoal: response.worldGoal,
         worldID: this.usedWorldId,
-      },
+      }),
       WorldEntity
     );
 
     return worldEntity;
   }
 
-  private mapElement = (element: ElementTO): ElementEntity => {
-    const entityToStore: Partial<ElementEntity> = {
-      id: element.id,
-      description: element.description,
-      goals: element.goals,
-      name: element.name,
-      type: element.type,
-      value: element.value || 0,
-    };
-
+  private createElementEntity = (element: ElementTO): ElementEntity => {
     return this.container.createEntity<ElementEntity>(
-      entityToStore,
+      mergeObjectsWithRemainder<ElementTO, ElementEntity>(
+        ElementEntity,
+        element,
+        {
+          hasScored: false,
+          value: element.value || 0,
+        }
+      ),
       ElementEntity
     );
   };
-
-  private toTO(entityToConvert: WorldEntity): WorldTO {
-    // spread to prevent passing a reference
-    // this will need to be changed when entity and TO are not matching in structure anymore
-    return {
-      description: entityToConvert.description,
-      goals: entityToConvert.goals,
-      worldGoal: entityToConvert.worldGoal,
-      worldName: entityToConvert.worldName,
-      spaces: entityToConvert.spaces,
-    } as WorldTO;
-  }
 }
