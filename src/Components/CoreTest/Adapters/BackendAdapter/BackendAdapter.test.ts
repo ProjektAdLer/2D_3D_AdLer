@@ -84,10 +84,6 @@ describe("BackendAdapter", () => {
     // eg. check that the learning elements have the correct type/metadata
   });
 
-  test("scoreElement resolves and doesn't throw", () => {
-    expect(systemUnderTest.scoreElement(1)).resolves.not.toThrow();
-  });
-
   test("logInUser calls backend and returns a token", async () => {
     const token = "token";
     const userName = "userName";
@@ -105,7 +101,7 @@ describe("BackendAdapter", () => {
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      config.serverURL + "/MoodleLogin/Login",
+      config.serverURL + "/Users/Login",
       {
         params: {
           UserName: userName,
