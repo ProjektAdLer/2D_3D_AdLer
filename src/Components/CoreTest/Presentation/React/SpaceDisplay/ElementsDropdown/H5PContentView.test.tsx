@@ -1,11 +1,11 @@
 import "@testing-library/jest-dom";
-import { fireEvent, render } from "@testing-library/react";
-import { mock, mockClear } from "jest-mock-extended";
-import { act } from "react-dom/test-utils";
+import { render } from "@testing-library/react";
+import { mock } from "jest-mock-extended";
 import ElementModalViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
 import NewH5PContent from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/NewH5PContent";
 
-const viewModel = mock<ElementModalViewModel>();
+const viewModel = new ElementModalViewModel();
+viewModel.id.Value = 1;
 
 jest.mock("h5p-standalone");
 
