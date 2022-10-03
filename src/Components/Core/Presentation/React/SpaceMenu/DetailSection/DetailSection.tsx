@@ -13,21 +13,17 @@ export default function DetailSection() {
 
   const [name] = useObservable<string>(viewModel.name);
   const [description] = useObservable<string>(viewModel.description);
-  const [requirements] = useObservable<[boolean, string][]>(
-    viewModel.requirements
-  );
-  const [conditions] = useObservable<[boolean, string][]>(viewModel.conditions);
+  const [goals] = useObservable<string>(viewModel.goals);
   const [elements] = useObservable<[ElementTypeStrings, string][]>(
     viewModel.elements
   );
+  const [requiredPoints] = useObservable<number>(viewModel.requiredPoints);
+  // const [includedPoints] = useObservable<number>(viewModel.includedPoints);
+  const [requirements] = useObservable<[boolean, string][]>(
+    viewModel.requirements
+  );
 
-  if (
-    name === undefined ||
-    description === undefined ||
-    requirements === undefined ||
-    conditions === undefined ||
-    elements === undefined
-  )
+  if (name === undefined || description === undefined || elements === undefined)
     return null;
 
   return (
@@ -53,11 +49,55 @@ export default function DetailSection() {
           </div>
         </div>
       )}
-
+      {goals !== "" && (
+        <div>
+          <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+            Lernziele:
+          </div>
+          <div className="items-start ml-6 text-lg roboto-regular">{goals}</div>
+        </div>
+      )}
+      {elements.length > 0 && (
+        <div>
+          <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+            Lernelemente:
+          </div>
+          <div className="items-start ml-6 text-lg roboto-regular">
+            {elements.map((content) => {
+              // TODO: add learning element icon
+              return (
+                <div key={content[1]} className="flex flex-row">
+                  <div>{content[0] + " " + content[1]}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+      {requiredPoints && (
+        <div>
+          <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+            Benötigte Punkte:
+          </div>
+          <div className="items-start ml-6 text-lg roboto-regular">
+            {requiredPoints}
+          </div>
+        </div>
+      )}
+      {/* {includedPoints && (
+        <div>
+          <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+            Maximal erreichbare Punkte:
+          </div>
+          <div className="items-start ml-6 text-lg roboto-regular">
+            {includedPoints}
+          </div>
+        </div>
+      )} */}
       {requirements.length > 0 && (
         <div>
           <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
-            Bedingungen Freischaltung:
+            Benötigte Räume zur Freischaltung:
           </div>
           <div className="items-start ml-6 text-lg roboto-regular">
             {requirements.map((requirement) => {
@@ -67,43 +107,6 @@ export default function DetailSection() {
                   checked={requirement[0]}
                   text={requirement[1]}
                 />
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {conditions.length > 0 && (
-        <div>
-          <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
-            Bedingungen Abschluss:
-          </div>
-          <div className="items-start ml-6 text-lg roboto-regular">
-            {conditions.map((condition) => {
-              return (
-                <CheckBoxEntry
-                  key={condition[1]}
-                  checked={condition[0]}
-                  text={condition[1]}
-                />
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {elements.length > 0 && (
-        <div>
-          <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
-            Lernelemente:
-          </div>
-          <div className="items-start ml-6 text-lg roboto-regular">
-            {elements.map((element) => {
-              // TODO: add learning element icon
-              return (
-                <div key={element[1]} className="flex flex-row">
-                  <div>{element[0] + " " + element[1]}</div>
-                </div>
               );
             })}
           </div>

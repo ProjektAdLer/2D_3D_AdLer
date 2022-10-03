@@ -2,18 +2,26 @@ import Observable from "src/Lib/Observable";
 import { ElementTypeStrings } from "../../../Babylon/Elements/Types/ElementTypes";
 
 export default class DetailSectionViewModel {
-  name: Observable<string> = new Observable<string>("");
-  description: Observable<string> = new Observable<string>("");
-  // Eine Liste von Räumen, die der Spieler beenden muss, damit er auf diesen hier zugreifen kann
-  requirements: Observable<[boolean, string][]> = new Observable<
-    [boolean, string][]
-  >([]);
-  // Eine Liste aus den Lernenelementen, welche in einem Raum sind und deren Status
-  conditions: Observable<[boolean, string][]> = new Observable<
-    [boolean, string][]
-  >([]);
-  // Eine auflistung, welche elemente in diesen Raum vorhanden sind?
+  name: Observable<string> = new Observable<string>("Placeholder Name");
+  description: Observable<string> = new Observable<string>(
+    "Placeholder Description"
+  );
+  goals: Observable<string> = new Observable<string>("Placeholder Goals");
+
   elements: Observable<[ElementTypeStrings, string][]> = new Observable<
     [ElementTypeStrings, string][]
   >([]);
+  requiredPoints: Observable<number> = new Observable<number>(0);
+  // includedPoints: Observable<number> = new Observable<number>(0);
+  requirements: Observable<[boolean, string][]> = new Observable<
+    [boolean, string][]
+  >([]);
 }
+// DSL CONTENT:
+// name(identifier, value) string
+// description string
+// goals string
+// content ElementTO array
+// requiredPoints number
+// includedPoints number
+// requirements [bool, ElementTO] Array (done or not done, name)
