@@ -1,6 +1,6 @@
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import { getIcon } from "../../../Utils/GetIcon";
+import { getElementIcon } from "../../../Utils/GetIcon";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
@@ -18,7 +18,7 @@ export default function BottomTooltip() {
     <div className="grid justify-center">
       <StyledContainer>
         <div className="flex items-center gap-1 p-2 text-2xl font-extrabold text-white rounded-lg text-shadow bg-adlerblue">
-          {getIcon(type)}
+          {getElementIcon(type)}
           {text}
         </div>
       </StyledContainer>

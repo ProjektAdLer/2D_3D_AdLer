@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getIcon } from "../../../Utils/GetIcon";
+import { getElementIcon } from "../../../Utils/GetIcon";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import CustomDropdown from "../../ReactRelated/ReactBaseComponents/CustomDropdown";
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
@@ -48,7 +48,7 @@ export default function ElementsDropdown() {
             shape="freefloatleft"
             onClick={() => controller?.startElement(element.id)}
           >
-            <div className="w-5 lg:w-10">{getIcon(element.type)}</div>
+            <div className="w-5 lg:w-10">{getElementIcon(element.type)}</div>
             <h3 className="ml-1 text-sm text-white lg:text-lg">
               {element.name}
             </h3>
