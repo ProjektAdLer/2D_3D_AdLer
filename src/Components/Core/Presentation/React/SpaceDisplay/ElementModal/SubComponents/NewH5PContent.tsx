@@ -55,7 +55,6 @@ export default function NewH5PContent({
             ).executeAsync({
               xapiData: xapiData,
               elementId: viewModel.id.Value,
-              courseId: 1, // TODO: get from somewhere
             });
           }
         });
