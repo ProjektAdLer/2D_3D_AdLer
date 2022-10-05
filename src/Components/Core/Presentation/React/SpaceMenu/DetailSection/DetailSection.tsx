@@ -3,6 +3,10 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import CheckBoxEntry from "./CheckBoxEntry";
 import DetailSectionViewModel from "./DetailSectionViewModel";
 import spaceIcon from "../../../../../../Assets/icons/lernraum_icon.svg";
+import textIcon from "../../../../../../Assets/icons/06-text/text-icon-gold.svg";
+import imageIcon from "../../../../../../Assets/icons/04-image/image-icon.svg";
+import videoIcon from "../../../../../../Assets/icons/07-video/video-icon.svg";
+import h5pIcon from "../../../../../../Assets/icons/05-h5p/h5p-icon.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import { ElementTypeStrings } from "../../../Babylon/Elements/Types/ElementTypes";
 
@@ -64,17 +68,22 @@ export default function DetailSection() {
           </div>
           <div className="items-start ml-6 text-lg roboto-regular">
             {elements.map((content) => {
-              // TODO: add learning element icon
+              const icon = getElementIcon(content[0]);
               return (
                 <div key={content[1]} className="flex flex-row">
-                  <div>{content[0] + " " + content[1]}</div>
+                  <img
+                    src={icon}
+                    className="p-1 xl:w-8 lg:w-6 md:w-2 sm:w-2"
+                    alt="Element-Icon"
+                  ></img>
+                  <div>{" " + content[1] + " (" + content[0] + ")"}</div>
                 </div>
               );
             })}
           </div>
         </div>
       )}
-      {requiredPoints && (
+      {!!requiredPoints && (
         <div>
           <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
             Benötigte Punkte:
@@ -114,4 +123,18 @@ export default function DetailSection() {
       )}
     </div>
   );
+  function getElementIcon(type: ElementTypeStrings) {
+    switch (type) {
+      case "text":
+        return textIcon;
+      case "image":
+        return imageIcon;
+      case "video":
+        return videoIcon;
+      case "h5p":
+        return h5pIcon;
+      default:
+        return h5pIcon;
+    }
+  }
 }
