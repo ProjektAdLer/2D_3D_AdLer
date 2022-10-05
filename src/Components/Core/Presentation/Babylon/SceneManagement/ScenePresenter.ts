@@ -75,7 +75,7 @@ export default class ScenePresenter implements IScenePresenter {
     sceneOptions?: SceneOptions
   ): Promise<void> {
     // Execute the pretasks, if defined
-    await Promise.all(createSceneClass.preTasks || []);
+    createSceneClass.preTasks?.forEach(async (task) => await task());
 
     // Create the scene
     this.scene = await createSceneClass.createScene(engine, sceneOptions);
