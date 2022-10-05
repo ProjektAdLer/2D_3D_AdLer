@@ -9,11 +9,14 @@ import videoIcon from "../../../../../../Assets/icons/07-video/video-icon.svg";
 import h5pIcon from "../../../../../../Assets/icons/05-h5p/h5p-icon.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import { ElementTypeStrings } from "../../../Babylon/Elements/Types/ElementTypes";
+import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import DetailSectionController from "./DetailSectionController";
 
 export default function DetailSection() {
-  const [viewModel] = useBuilder<DetailSectionViewModel, undefined>(
-    BUILDER_TYPES.IDetailSectionBuilder
-  );
+  const [viewModel, controller] = useBuilder<
+    DetailSectionViewModel,
+    DetailSectionController
+  >(BUILDER_TYPES.IDetailSectionBuilder);
 
   const [name] = useObservable<string>(viewModel.name);
   const [description] = useObservable<string>(viewModel.description);
@@ -121,6 +124,13 @@ export default function DetailSection() {
           </div>
         </div>
       )}
+      <StyledButton
+        shape="freefloatleft"
+        className=""
+        onClick={controller.onSpaceButtonClicked}
+      >
+        {"Lernraum '" + name + "' betreten!"}
+      </StyledButton>
     </div>
   );
   function getElementIcon(type: ElementTypeStrings) {

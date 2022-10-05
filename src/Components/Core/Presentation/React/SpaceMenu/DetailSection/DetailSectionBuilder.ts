@@ -7,16 +7,22 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
 import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
+import DetailSectionController from "./DetailSectionController";
 
 @injectable()
 export default class DetailSectionBuilder extends PresentationBuilder<
   DetailSectionViewModel,
-  undefined,
+  DetailSectionController,
   undefined,
   IDetailSectionPresenter
 > {
   constructor() {
-    super(DetailSectionViewModel, undefined, undefined, DetailSectionPresenter);
+    super(
+      DetailSectionViewModel,
+      DetailSectionController,
+      undefined,
+      DetailSectionPresenter
+    );
   }
 
   override buildPresenter(): void {
