@@ -1,14 +1,14 @@
 import { NullEngine, Scene } from "@babylonjs/core";
 import { config } from "../../../../../config";
-import MainScene from "../../../../Core/Presentation/Babylon/SceneManagement/MainScene";
+import SpaceScene from "../../../../Core/Presentation/Babylon/SceneManagement/SpaceScene";
 
 jest.mock("@babylonjs/core");
 
-describe("MainScene", () => {
-  let systemUnderTest: MainScene;
+describe("SpaceScene", () => {
+  let systemUnderTest: SpaceScene;
 
   beforeEach(() => {
-    systemUnderTest = new MainScene();
+    systemUnderTest = new SpaceScene();
   });
 
   afterAll(() => {

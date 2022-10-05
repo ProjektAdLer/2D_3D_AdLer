@@ -1,7 +1,7 @@
 import { Container } from "inversify";
 import CORE_TYPES from "./CoreTypes";
 import ScenePresenter from "../Presentation/Babylon/SceneManagement/ScenePresenter";
-import MainScene from "../Presentation/Babylon/SceneManagement/MainScene";
+import SpaceScene from "../Presentation/Babylon/SceneManagement/SpaceScene";
 import ICreateSceneClass from "../Presentation/Babylon/SceneManagement/ICreateSceneClass";
 import IScenePresenter from "../Presentation/Babylon/SceneManagement/IScenePresenter";
 import infrastructureDIContainer from "./InfrastructureDIContainer";
@@ -28,7 +28,7 @@ CoreDIContainer.bind(NavigationConfiguration).toSelf();
 
 // bind other CreateSceneClass here for testing puposes -MK
 CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
-  MainScene
+  SpaceScene
 );
 
 CoreDIContainer.load(infrastructureDIContainer);

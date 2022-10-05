@@ -13,7 +13,7 @@ import { injectable } from "inversify";
 import { config } from "../../../../../config";
 
 @injectable()
-export default class MainScene implements ICreateSceneClass {
+export default class SpaceScene implements ICreateSceneClass {
   preTasks = [];
 
   createScene = async (engine: Engine): Promise<Scene> => {
