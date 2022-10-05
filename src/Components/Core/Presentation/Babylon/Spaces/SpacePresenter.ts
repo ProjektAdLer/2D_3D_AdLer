@@ -4,7 +4,6 @@ import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
-import IScorePanelPresenter from "../../React/SpaceDisplay/ScorePanel/IScorePanelPresenter";
 import IDoorPresenter from "../Door/IDoorPresenter";
 import SpaceViewModel from "./SpaceViewModel";
 import ISpacePresenter from "./ISpacePresenter";
@@ -15,7 +14,6 @@ import ElementTO from "src/Components/Core/Application/DataTransferObjects/Eleme
 @injectable()
 export default class SpacePresenter implements ISpacePresenter {
   private doorPresenter: IDoorPresenter;
-  private scorePanelPresenter: IScorePanelPresenter;
 
   constructor(private viewModel: SpaceViewModel) {
     if (!this.viewModel) {
