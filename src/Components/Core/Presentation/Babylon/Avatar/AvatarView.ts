@@ -20,7 +20,7 @@ import IScenePresenter from "../SceneManagement/IScenePresenter";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
 
-const modelLink = require("../../../../../Assets/3DModel_Avatar_Character.glb");
+const modelLink = require("../../../../../Assets/3DModel_Avatar_Character_male.glb");
 
 export default class AvatarView {
   private scenePresenter: IScenePresenter;
