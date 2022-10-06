@@ -90,16 +90,7 @@ export default function DetailSection() {
           </div>
         </div>
       )}
-      {/* {includedPoints && (
-        <div>
-          <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
-            Maximal erreichbare Punkte:
-          </div>
-          <div className="items-start ml-6 text-lg roboto-regular">
-            {includedPoints}
-          </div>
-        </div>
-      )} */}
+      {/* TODO: IncludedPoints*/}
       {requirements.length > 0 && (
         <div>
           <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
