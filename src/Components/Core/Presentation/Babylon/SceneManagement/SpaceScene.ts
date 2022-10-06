@@ -5,6 +5,7 @@ import {
   Vector3,
   HemisphericLight,
   Color4,
+  SceneOptions,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { inject, injectable } from "inversify";
@@ -23,9 +24,11 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type ILoadSpaceUseCase from "src/Components/Core/Application/UseCases/LoadSpace/ILoadSpaceUseCase";
 import ISpacePresenter from "../Spaces/ISpacePresenter";
 import type ILoadAvatarUseCase from "src/Components/Core/Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
+import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
 
 @injectable()
 export default class SpaceScene implements ICreateSceneClass, ISpaceAdapter {
+  spaceID: ElementID;
   private spaceTO: SpaceTO;
 
   constructor(
@@ -47,8 +50,11 @@ export default class SpaceScene implements ICreateSceneClass, ISpaceAdapter {
 
   preTasks = [this.loadSpace, this.loadAvatar];
 
-  createScene = async (engine: Engine): Promise<Scene> => {
-    const scene = new Scene(engine);
+  async createScene(
+    engine: Engine,
+    sceneOptions?: SceneOptions
+  ): Promise<Scene> {
+    const scene = new Scene(engine, sceneOptions);
 
     scene.clearColor = new Color4(0.66, 0.83, 0.98, 1);
     new HemisphericLight("light", new Vector3(0, 1, 0), scene);
@@ -67,7 +73,7 @@ export default class SpaceScene implements ICreateSceneClass, ISpaceAdapter {
     if (config.isDebug) scene.debugLayer.show();
 
     return scene;
-  };
+  }
 
   onSpaceDataLoaded(spaceTO: SpaceTO): void {
     this.spaceTO = spaceTO;
@@ -76,7 +82,7 @@ export default class SpaceScene implements ICreateSceneClass, ISpaceAdapter {
   @bind
   private async loadSpace(): Promise<void> {
     this.spacePort.registerAdapter(this);
-    await this.loadSpaceUseCase.executeAsync();
+    await this.loadSpaceUseCase.executeAsync(this.spaceID);
     this.spacePort.unregisterAdapter(this);
   }
 

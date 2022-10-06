@@ -7,6 +7,8 @@ import { logger } from "src/Lib/Logger";
 export default class DetailSectionPresenter implements IDetailSectionPresenter {
   constructor(private viewModel: DetailSectionViewModel) {}
   onSpaceDataLoaded(spaceTO: SpaceTO): void {
+    spaceTO.id && (this.viewModel.id.Value = spaceTO.id);
+
     !spaceTO.name && logger.warn("SpaceTO has no name!");
     spaceTO.name && (this.viewModel.name.Value = spaceTO.name);
 

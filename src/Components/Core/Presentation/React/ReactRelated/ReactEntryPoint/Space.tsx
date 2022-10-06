@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BottomTooltip from "~ReactComponents/SpaceDisplay/BottomTooltip/BottomTooltip";
 import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 import ElementModal from "~ReactComponents/SpaceDisplay/ElementModal/ElementModal";
@@ -11,11 +11,20 @@ import LogoMenuBar from "~ReactComponents/GeneralComponents/LogoMenuBar/LogoMenu
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import ScorePanel from "~ReactComponents/SpaceDisplay/ScorePanel/ScorePanel";
 import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ICreateSceneClass from "../../../Babylon/SceneManagement/ICreateSceneClass";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { useInjection } from "inversify-react";
+import SpaceScene from "../../../Babylon/SceneManagement/SpaceScene";
+import history from "history/browser";
 
 export default function Space() {
+  const [createSceneClass] = useState<ICreateSceneClass>(
+    useInjection<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass)
+  );
+  (createSceneClass as SpaceScene).spaceID = Number.parseInt(
+    history.location.pathname.split("/")[2]
+  );
+
   return (
     <React.Fragment>
       <div className="grid max-h-screen grid-cols-9 grid-rows-6 root">
@@ -36,9 +45,7 @@ export default function Space() {
         </div>
         <div className="col-span-9 col-start-1 row-span-6 row-start-1">
           <BabylonCanvas
-            createSceneClass={CoreDIContainer.get<ICreateSceneClass>(
-              CORE_TYPES.ICreateSceneClass
-            )}
+            createSceneClass={createSceneClass}
             className="w-screen h-screen"
           />
         </div>
