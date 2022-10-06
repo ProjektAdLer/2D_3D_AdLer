@@ -12,7 +12,7 @@ import type IScenePresenter from "../SceneManagement/IScenePresenter";
 import IElementController from "./IElementController";
 import IElementView from "./IElementView";
 import ElementViewModel from "./ElementViewModel";
-import { ElementTypes } from "./Types/ElementTypes";
+import { ElementTypes } from "../../../Domain/Types/ElementTypes";
 
 const modelLinks: { [key in ElementTypes]?: any } = {
   [ElementTypes.h5p]: require("../../../../../Assets/3DModel_LElement_H5P.glb"),

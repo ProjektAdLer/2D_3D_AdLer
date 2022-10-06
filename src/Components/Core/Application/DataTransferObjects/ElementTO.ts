@@ -1,4 +1,5 @@
 import { ElementID } from "../../Domain/Types/EntityTypes";
+import { ElementTypeStrings } from "../../Domain/Types/ElementTypes";
 
 export default class ElementTO {
   id: ElementID;
@@ -7,5 +8,5 @@ export default class ElementTO {
   name: string;
   description: string;
   goals: string;
-  type: string;
+  type: ElementTypeStrings;
 }

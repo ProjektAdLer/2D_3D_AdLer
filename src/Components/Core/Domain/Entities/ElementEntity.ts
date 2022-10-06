@@ -1,3 +1,4 @@
+import { ElementTypeStrings } from "../Types/ElementTypes";
 import { ElementID } from "../Types/EntityTypes";
 
 export default class ElementEntity {
@@ -7,6 +8,6 @@ export default class ElementEntity {
   public name: string;
   public description: string;
   public goals: string;
-  public type: string;
+  public type: ElementTypeStrings;
   public parentSpaceId: ElementID;
 }

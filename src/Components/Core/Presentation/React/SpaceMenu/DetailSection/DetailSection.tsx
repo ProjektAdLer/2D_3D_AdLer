@@ -3,14 +3,11 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import CheckBoxEntry from "./CheckBoxEntry";
 import DetailSectionViewModel from "./DetailSectionViewModel";
 import spaceIcon from "../../../../../../Assets/icons/lernraum_icon.svg";
-import textIcon from "../../../../../../Assets/icons/06-text/text-icon-gold.svg";
-import imageIcon from "../../../../../../Assets/icons/04-image/image-icon.svg";
-import videoIcon from "../../../../../../Assets/icons/07-video/video-icon.svg";
-import h5pIcon from "../../../../../../Assets/icons/05-h5p/h5p-icon.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
-import { ElementTypeStrings } from "../../../Babylon/Elements/Types/ElementTypes";
+import { ElementTypeStrings } from "../../../../Domain/Types/ElementTypes";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import DetailSectionController from "./DetailSectionController";
+import { getElementIcon } from "../../../Utils/GetIcon";
 
 export default function DetailSection() {
   const [viewModel, controller] = useBuilder<
@@ -70,16 +67,13 @@ export default function DetailSection() {
             Lernelemente:
           </div>
           <div className="items-start ml-6 text-lg roboto-regular">
-            {elements.map((content) => {
-              const icon = getElementIcon(content[0]);
+            {elements.map((element) => {
               return (
-                <div key={content[1]} className="flex flex-row">
-                  <img
-                    src={icon}
-                    className="p-1 xl:w-8 lg:w-6 md:w-2 sm:w-2"
-                    alt="Element-Icon"
-                  ></img>
-                  <div>{" " + content[1] + " (" + content[0] + ")"}</div>
+                <div key={element[1]} className="flex flex-row">
+                  <div className="p-1 xl:w-8 lg:w-6 md:w-2 sm:w-2">
+                    {getElementIcon(element[0])}
+                  </div>
+                  <div>{" " + element[1] + " (" + element[0] + ")"}</div>
                 </div>
               );
             })}
@@ -133,18 +127,4 @@ export default function DetailSection() {
       </StyledButton>
     </div>
   );
-  function getElementIcon(type: ElementTypeStrings) {
-    switch (type) {
-      case "text":
-        return textIcon;
-      case "image":
-        return imageIcon;
-      case "video":
-        return videoIcon;
-      case "h5p":
-        return h5pIcon;
-      default:
-        return h5pIcon;
-    }
-  }
 }

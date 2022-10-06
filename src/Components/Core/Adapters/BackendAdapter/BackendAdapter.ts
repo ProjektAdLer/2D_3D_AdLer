@@ -1,7 +1,7 @@
 import axios from "axios";
 import { injectable } from "inversify";
 import { config } from "../../../../config";
-import { ElementTypes } from "../../Presentation/Babylon/Elements/Types/ElementTypes";
+import { ElementTypes } from "../../Domain/Types/ElementTypes";
 import IDSL, { APIElement } from "./Types/IDSL";
 import IBackendAdapter, {
   ScoreH5PElementRequest,

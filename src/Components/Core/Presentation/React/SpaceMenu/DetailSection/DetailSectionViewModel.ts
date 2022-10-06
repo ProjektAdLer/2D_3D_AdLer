@@ -1,5 +1,5 @@
 import Observable from "src/Lib/Observable";
-import { ElementTypeStrings } from "../../../Babylon/Elements/Types/ElementTypes";
+import { ElementTypeStrings } from "../../../../Domain/Types/ElementTypes";
 
 export default class DetailSectionViewModel {
   name: Observable<string> = new Observable<string>("Placeholder Name");

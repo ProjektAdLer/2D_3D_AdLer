@@ -9,7 +9,7 @@ let fakeModel = new BottomTooltipViewModel();
 describe("BottomTooltip", () => {
   test("should render when open", () => {
     fakeModel.show.Value = true;
-    fakeModel.iconType.Value = "test";
+    fakeModel.iconType.Value = "text";
     fakeModel.text.Value = "testText";
 
     useBuilderMock([fakeModel, undefined]);
@@ -21,7 +21,7 @@ describe("BottomTooltip", () => {
 
   test("should not render when closed", () => {
     fakeModel.show.Value = false;
-    fakeModel.iconType.Value = "test";
+    fakeModel.iconType.Value = "text";
     fakeModel.text.Value = "testText";
 
     useBuilderMock([fakeModel, undefined]);

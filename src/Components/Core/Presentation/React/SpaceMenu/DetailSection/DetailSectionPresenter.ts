@@ -1,5 +1,4 @@
 import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
-import { ElementTypeStrings } from "../../../Babylon/Elements/Types/ElementTypes";
 import IDetailSectionPresenter from "./IDetailSectionPresenter";
 import DetailSectionViewModel from "./DetailSectionViewModel";
 import { logger } from "src/Lib/Logger";
@@ -20,7 +19,7 @@ export default class DetailSectionPresenter implements IDetailSectionPresenter {
     !spaceTO.elements && logger.warn("SpaceTO has no elements!");
     spaceTO.elements &&
       (this.viewModel.elements.Value = spaceTO.elements.map((elementTO) => [
-        elementTO.type as ElementTypeStrings,
+        elementTO.type,
         elementTO.name,
       ]));
 
