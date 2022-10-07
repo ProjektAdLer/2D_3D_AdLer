@@ -20,7 +20,6 @@ import bind from "bind-decorator";
 @injectable()
 export default class ScenePresenter implements IScenePresenter {
   private navigationMeshes: AbstractMesh[] = [];
-  private sceneDefinition: AbstractSceneDefinition;
 
   get Scene(): Scene {
     return this.sceneDefinition.Scene;
@@ -29,6 +28,8 @@ export default class ScenePresenter implements IScenePresenter {
   get NavigationMeshes(): Mesh[] {
     return this.navigationMeshes as Mesh[];
   }
+
+  constructor(private sceneDefinition: AbstractSceneDefinition) {}
 
   async loadModel(
     url: string,
@@ -66,10 +67,8 @@ export default class ScenePresenter implements IScenePresenter {
 
   async createScene(
     engine: Engine,
-    sceneDefinition: AbstractSceneDefinition,
     sceneOptions?: SceneOptions
   ): Promise<void> {
-    this.sceneDefinition = sceneDefinition;
     await this.sceneDefinition.createScene(engine, sceneOptions);
   }
 

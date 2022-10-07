@@ -18,13 +18,13 @@ import history from "history/browser";
 import SpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/SpaceSceneDefinition";
 
 export default function Space() {
-  const [createSceneClass] = useState<AbstractSceneDefinition>(
-    useInjection<AbstractSceneDefinition>(CORE_TYPES.AbstractSceneDefinition)
-  );
-  // TODO: make this more reliable
-  (createSceneClass as SpaceSceneDefinition).spaceID = Number.parseInt(
-    history.location.pathname.split("/")[2]
-  );
+  // const [createSceneClass] = useState<AbstractSceneDefinition>(
+  //   useInjection<AbstractSceneDefinition>(CORE_TYPES.AbstractSceneDefinition)
+  // );
+  // // TODO: make this more reliable
+  // (createSceneClass as SpaceSceneDefinition).spaceID = Number.parseInt(
+  //   history.location.pathname.split("/")[2]
+  // );
 
   return (
     <React.Fragment>
@@ -46,7 +46,7 @@ export default function Space() {
         </div>
         <div className="col-span-9 col-start-1 row-span-6 row-start-1">
           <BabylonCanvas
-            createSceneClass={createSceneClass}
+            sceneDefinition={SpaceSceneDefinition}
             className="w-screen h-screen"
           />
         </div>

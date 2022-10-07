@@ -1,12 +1,6 @@
-import { inject, injectable } from "inversify";
+import { injectable } from "inversify";
 import IWorldPort from "./IWorldPort";
-import BUILDER_TYPES from "../../DependencyInjection/Builders/BUILDER_TYPES";
-import CORE_TYPES from "../../DependencyInjection/CoreTypes";
-import type IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
-import type IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
-import ISpacePresenter from "../../Presentation/Babylon/Spaces/ISpacePresenter";
 import IDropdownPresenter from "../../Presentation/React/SpaceDisplay/ElementsDropdown/IElementsDropdownPresenter";
-import type INavigation from "../../Presentation/Babylon/Navigation/INavigation";
 import IWorldNamePanelPresenter from "../../Presentation/React/SpaceDisplay/WorldNamePanel/IWorldNamePanelPresenter";
 import IWorldGoalPanelPresenter from "~ReactComponents/SpaceDisplay/WorldGoalPanel/IWorldGoalPanelPresenter";
 import { logger } from "src/Lib/Logger";
@@ -22,15 +16,6 @@ export default class WorldPort
   private elementDropdownPresenter: IDropdownPresenter;
   private worldNamePanelPresenter: IWorldNamePanelPresenter;
   private worldGoalPanelPresenter: IWorldGoalPanelPresenter;
-
-  constructor(
-    @inject(CORE_TYPES.INavigation)
-    private navigation: INavigation,
-    @inject(BUILDER_TYPES.IPresentationDirector)
-    private director: IPresentationDirector
-  ) {
-    super();
-  }
 
   public presentWorld(worldTO: WorldTO): void {
     this.adapters.forEach((adapter) => adapter.onWorldLoaded(worldTO));

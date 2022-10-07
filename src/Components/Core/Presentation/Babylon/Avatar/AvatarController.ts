@@ -5,11 +5,15 @@ import {
   PointerInfo,
 } from "@babylonjs/core";
 import bind from "bind-decorator";
+import SCENE_TYPES, {
+  ScenePresenterFactory,
+} from "~DependencyInjection/Scenes/SCENE_TYPES";
 import { config } from "../../../../../config";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import INavigation from "../Navigation/INavigation";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
+import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
 
@@ -19,10 +23,11 @@ export default class AvatarController implements IAvatarController {
   private pathLine: LinesMesh;
 
   constructor(private viewModel: AvatarViewModel) {
-    this.scenePresenter = CoreDIContainer.get<IScenePresenter>(
-      CORE_TYPES.IScenePresenter
-    );
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
+    let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
+      SCENE_TYPES.ScenePresenterFactory
+    );
+    this.scenePresenter = scenePresenterFactory(SpaceSceneDefinition);
 
     this.scenePresenter.Scene.onPointerObservable.add(this.processPointerEvent);
   }

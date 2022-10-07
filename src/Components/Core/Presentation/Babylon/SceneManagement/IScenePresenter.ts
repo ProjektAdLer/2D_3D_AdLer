@@ -21,11 +21,7 @@ export default interface IScenePresenter {
    * Creates a new scene with the given CreateSceneClass configuration.
    * @param createSceneClass The scene configuration class that will be used to create the scene.
    */
-  createScene(
-    engine: Engine,
-    createSceneClass: AbstractSceneDefinition,
-    sceneOptions?: SceneOptions
-  ): Promise<void>;
+  createScene(engine: Engine, sceneOptions?: SceneOptions): Promise<void>;
 
   /**
    * Starts the render loop.

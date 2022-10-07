@@ -12,8 +12,11 @@ import ISpaceController from "./ISpaceController";
 import ISpaceView from "./ISpaceView";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import * as earcut from "earcut";
+import SCENE_TYPES, {
+  ScenePresenterFactory,
+} from "~DependencyInjection/Scenes/SCENE_TYPES";
+import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
 (window as any).earcut = earcut;
 
 export default class SpaceView implements ISpaceView {
@@ -23,9 +26,11 @@ export default class SpaceView implements ISpaceView {
     private viewModel: SpaceViewModel,
     private controller: ISpaceController
   ) {
-    this.scenePresenter = CoreDIContainer.get<IScenePresenter>(
-      CORE_TYPES.IScenePresenter
+    let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
+      SCENE_TYPES.ScenePresenterFactory
     );
+    this.scenePresenter = scenePresenterFactory(SpaceSceneDefinition);
+
     if (!this.viewModel)
       throw new Error(
         "ViewModel is not set! Check if the builder is set up properly."

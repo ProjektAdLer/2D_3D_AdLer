@@ -1,18 +1,22 @@
 import { Animation, Mesh, SceneLoader, Tools, Vector3 } from "@babylonjs/core";
+import SCENE_TYPES, {
+  ScenePresenterFactory,
+} from "~DependencyInjection/Scenes/SCENE_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import IscenePresenter from "../SceneManagement/ScenePresenter";
+import IScenePresenter from "../SceneManagement/IScenePresenter";
+import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
 import DoorViewModel from "./DoorViewModel";
 
 const modelLink = require("../../../../../Assets/3DModel_Door.glb");
 
 export default class DoorView {
-  private scenePresenter: IscenePresenter;
+  private scenePresenter: IScenePresenter;
 
   constructor(private viewModel: DoorViewModel) {
-    this.scenePresenter = CoreDIContainer.get<IscenePresenter>(
-      CORE_TYPES.IScenePresenter
+    let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
+      SCENE_TYPES.ScenePresenterFactory
     );
+    this.scenePresenter = scenePresenterFactory(SpaceSceneDefinition);
 
     // setup callbacks for rerendering when the view model changes
     viewModel.position.subscribe(() => {
