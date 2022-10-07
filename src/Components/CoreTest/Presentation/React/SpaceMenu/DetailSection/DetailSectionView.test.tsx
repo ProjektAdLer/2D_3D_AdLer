@@ -23,8 +23,6 @@ describe("DetailSection in Space Menu", () => {
     useBuilderMock([mockViewmodel, new DetailSectionController()]);
     mockViewmodel.elements = mockElements;
     mockViewmodel.requirements = mockRequirements;
-
-    //TODO: elements has to be included in the detailsection
     render(<DetailSection />);
   });
 });
