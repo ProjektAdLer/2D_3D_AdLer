@@ -7,7 +7,7 @@ import {
   Engine,
   SceneOptions,
 } from "@babylonjs/core";
-import ICreateSceneClass from "./ICreateSceneClass";
+import AbstractSceneDefinition from "./Scenes/AbstractSceneDefinition";
 
 export default interface IScenePresenter {
   get Scene(): Scene;
@@ -23,7 +23,7 @@ export default interface IScenePresenter {
    */
   createScene(
     engine: Engine,
-    createSceneClass: ICreateSceneClass,
+    createSceneClass: AbstractSceneDefinition,
     sceneOptions?: SceneOptions
   ): Promise<void>;
 

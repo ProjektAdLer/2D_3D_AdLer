@@ -2,7 +2,7 @@ const CORE_TYPES = {
   IEngineManager: Symbol("IEngineManager"),
   ISceneView: Symbol("ISceneView"),
   IScenePresenter: Symbol("IscenePresenter"),
-  ICreateSceneClass: Symbol("ICreateSceneClass"),
+  AbstractSceneDefinition: Symbol("ICreateSceneClass"),
   ISpaceController: Symbol("ISpaceController"),
   ISpaceView: Symbol("ISpaceView"),
   IElementView: Symbol("IElementView"),

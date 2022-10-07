@@ -2,11 +2,11 @@ import { Engine, EngineOptions, SceneOptions } from "@babylonjs/core";
 import { useEffect, useRef } from "react";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import ICreateSceneClass from "./ICreateSceneClass";
+import AbstractSceneDefinition from "./Scenes/AbstractSceneDefinition";
 import IScenePresenter from "./IScenePresenter";
 
 export type BabylonjsProps = {
-  createSceneClass: ICreateSceneClass;
+  createSceneClass: AbstractSceneDefinition;
   antialias?: boolean;
   engineOptions?: EngineOptions;
   adaptToDeviceRatio?: boolean;

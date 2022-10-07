@@ -9,7 +9,7 @@ import {
   Engine,
 } from "@babylonjs/core";
 import { injectable } from "inversify";
-import ICreateSceneClass from "./ICreateSceneClass";
+import AbstractSceneDefinition from "./Scenes/AbstractSceneDefinition";
 import IScenePresenter from "./IScenePresenter";
 import { logger } from "src/Lib/Logger";
 import bind from "bind-decorator";
@@ -19,16 +19,11 @@ import bind from "bind-decorator";
  */
 @injectable()
 export default class ScenePresenter implements IScenePresenter {
-  private scene: Scene;
   private navigationMeshes: AbstractMesh[] = [];
+  private sceneDefinition: AbstractSceneDefinition;
 
   get Scene(): Scene {
-    if (!this.scene) {
-      throw new Error(
-        "There is no scene set. Create the scene first before requesting it."
-      );
-    }
-    return this.scene;
+    return this.sceneDefinition.Scene;
   }
 
   get NavigationMeshes(): Mesh[] {
@@ -44,7 +39,7 @@ export default class ScenePresenter implements IScenePresenter {
       "",
       url,
       "",
-      this.scene,
+      this.Scene,
       onProgress
     );
 
@@ -56,7 +51,7 @@ export default class ScenePresenter implements IScenePresenter {
   }
 
   createMesh(name: string, isRelevantForNavigation: boolean = false): Mesh {
-    let mesh = new Mesh(name, this.scene);
+    let mesh = new Mesh(name, this.Scene);
 
     if (isRelevantForNavigation) {
       this.navigationMeshes.push(mesh);
@@ -71,26 +66,21 @@ export default class ScenePresenter implements IScenePresenter {
 
   async createScene(
     engine: Engine,
-    createSceneClass: ICreateSceneClass,
+    sceneDefinition: AbstractSceneDefinition,
     sceneOptions?: SceneOptions
   ): Promise<void> {
-    // Execute the pretasks, if defined
-    createSceneClass.preTasks?.forEach(async (task) => {
-      await task();
-    });
-
-    // Create the scene
-    this.scene = await createSceneClass.createScene(engine, sceneOptions);
+    this.sceneDefinition = sceneDefinition;
+    await this.sceneDefinition.createScene(engine, sceneOptions);
   }
 
   startRenderLoop(): void {
-    this.scene.getEngine().runRenderLoop(this.renderFunction);
+    this.Scene.getEngine().runRenderLoop(this.renderFunction);
   }
 
   @bind
   private renderFunction(): void {
-    if (this.scene.activeCamera) {
-      this.scene.render();
+    if (this.Scene.activeCamera) {
+      this.Scene.render();
     } else {
       logger.warn("no active camera..");
     }

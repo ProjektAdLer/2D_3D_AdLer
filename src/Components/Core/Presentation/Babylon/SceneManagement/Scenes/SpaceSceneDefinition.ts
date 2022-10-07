@@ -1,20 +1,9 @@
-import ICreateSceneClass from "./ICreateSceneClass";
-import {
-  Engine,
-  Scene,
-  Vector3,
-  HemisphericLight,
-  Color4,
-  SceneOptions,
-} from "@babylonjs/core";
+import AbstractSceneDefinition from "./AbstractSceneDefinition";
+import { Vector3, HemisphericLight, Color4 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { inject, injectable } from "inversify";
-import { config } from "../../../../../config";
-import type IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
-import type IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import type INavigation from "../Navigation/INavigation";
 import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
 import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
@@ -22,12 +11,18 @@ import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
 import bind from "bind-decorator";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type ILoadSpaceUseCase from "src/Components/Core/Application/UseCases/LoadSpace/ILoadSpaceUseCase";
-import ISpacePresenter from "../Spaces/ISpacePresenter";
 import type ILoadAvatarUseCase from "src/Components/Core/Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
 import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
+import type IPresentationDirector from "../../../PresentationBuilder/IPresentationDirector";
+import type IPresentationBuilder from "../../../PresentationBuilder/IPresentationBuilder";
+import type INavigation from "../../Navigation/INavigation";
+import ISpacePresenter from "../../Spaces/ISpacePresenter";
 
 @injectable()
-export default class SpaceScene implements ICreateSceneClass, ISpaceAdapter {
+export default class SpaceSceneDefinition
+  extends AbstractSceneDefinition
+  implements ISpaceAdapter
+{
   spaceID: ElementID;
   private spaceTO: SpaceTO;
 
@@ -46,18 +41,15 @@ export default class SpaceScene implements ICreateSceneClass, ISpaceAdapter {
     private loadSpaceUseCase: ILoadSpaceUseCase,
     @inject(USECASE_TYPES.ILoadAvatarUseCase)
     private loadAvatarUseCase: ILoadAvatarUseCase
-  ) {}
+  ) {
+    super();
+  }
 
-  preTasks = [this.loadSpace, this.loadAvatar];
+  override preTasks = [this.loadSpacePreTask, this.loadAvatarPreTask];
 
-  async createScene(
-    engine: Engine,
-    sceneOptions?: SceneOptions
-  ): Promise<Scene> {
-    const scene = new Scene(engine, sceneOptions);
-
-    scene.clearColor = new Color4(0.66, 0.83, 0.98, 1);
-    new HemisphericLight("light", new Vector3(0, 1, 0), scene);
+  override async initializeScene(): Promise<void> {
+    this.scene.clearColor = new Color4(0.66, 0.83, 0.98, 1);
+    new HemisphericLight("light", new Vector3(0, 1, 0), this.scene);
 
     // create space
     this.director.build(this.spaceBuilder);
@@ -69,10 +61,6 @@ export default class SpaceScene implements ICreateSceneClass, ISpaceAdapter {
 
     // initialize navigation for the room
     this.navigation.setupNavigation();
-
-    if (config.isDebug) scene.debugLayer.show();
-
-    return scene;
   }
 
   onSpaceDataLoaded(spaceTO: SpaceTO): void {
@@ -80,14 +68,14 @@ export default class SpaceScene implements ICreateSceneClass, ISpaceAdapter {
   }
 
   @bind
-  private async loadSpace(): Promise<void> {
+  private async loadSpacePreTask(): Promise<void> {
     this.spacePort.registerAdapter(this);
     await this.loadSpaceUseCase.executeAsync(this.spaceID);
     this.spacePort.unregisterAdapter(this);
   }
 
   @bind
-  private async loadAvatar(): Promise<void> {
+  private async loadAvatarPreTask(): Promise<void> {
     await this.loadAvatarUseCase.executeAsync();
   }
 }

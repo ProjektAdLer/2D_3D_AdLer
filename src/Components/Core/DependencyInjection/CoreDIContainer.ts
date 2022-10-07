@@ -1,8 +1,7 @@
 import { Container } from "inversify";
 import CORE_TYPES from "./CoreTypes";
 import ScenePresenter from "../Presentation/Babylon/SceneManagement/ScenePresenter";
-import SpaceScene from "../Presentation/Babylon/SceneManagement/SpaceScene";
-import ICreateSceneClass from "../Presentation/Babylon/SceneManagement/ICreateSceneClass";
+import AbstractSceneDefinition from "../Presentation/Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
 import IScenePresenter from "../Presentation/Babylon/SceneManagement/IScenePresenter";
 import infrastructureDIContainer from "./InfrastructureDIContainer";
 import UseCaseDIContainer from "./UseCases/UseCaseDIConatiner";
@@ -11,6 +10,7 @@ import BuilderDIContainer from "./Builders/BuilderDIContainer";
 import INavigation from "../Presentation/Babylon/Navigation/INavigation";
 import Navigation from "../Presentation/Babylon/Navigation/Navigation";
 import NavigationConfiguration from "../Presentation/Babylon/Navigation/NavigationConfiguration";
+import SpaceSceneDefinition from "../Presentation/Babylon/SceneManagement/Scenes/SpaceSceneDefinition";
 
 const CoreDIContainer = new Container();
 
@@ -27,9 +27,9 @@ CoreDIContainer.bind<INavigation>(CORE_TYPES.INavigation)
 CoreDIContainer.bind(NavigationConfiguration).toSelf();
 
 // bind other CreateSceneClass here for testing puposes -MK
-CoreDIContainer.bind<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass).to(
-  SpaceScene
-);
+CoreDIContainer.bind<AbstractSceneDefinition>(
+  CORE_TYPES.AbstractSceneDefinition
+).to(SpaceSceneDefinition);
 
 CoreDIContainer.load(infrastructureDIContainer);
 CoreDIContainer.load(UseCaseDIContainer);

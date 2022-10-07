@@ -11,17 +11,18 @@ import LogoMenuBar from "~ReactComponents/GeneralComponents/LogoMenuBar/LogoMenu
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import ScorePanel from "~ReactComponents/SpaceDisplay/ScorePanel/ScorePanel";
 import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
-import ICreateSceneClass from "../../../Babylon/SceneManagement/ICreateSceneClass";
+import AbstractSceneDefinition from "../../../Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { useInjection } from "inversify-react";
-import SpaceScene from "../../../Babylon/SceneManagement/SpaceScene";
 import history from "history/browser";
+import SpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/SpaceSceneDefinition";
 
 export default function Space() {
-  const [createSceneClass] = useState<ICreateSceneClass>(
-    useInjection<ICreateSceneClass>(CORE_TYPES.ICreateSceneClass)
+  const [createSceneClass] = useState<AbstractSceneDefinition>(
+    useInjection<AbstractSceneDefinition>(CORE_TYPES.AbstractSceneDefinition)
   );
-  (createSceneClass as SpaceScene).spaceID = Number.parseInt(
+  // TODO: make this more reliable
+  (createSceneClass as SpaceSceneDefinition).spaceID = Number.parseInt(
     history.location.pathname.split("/")[2]
   );
 
