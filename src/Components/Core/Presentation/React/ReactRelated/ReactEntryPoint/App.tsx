@@ -9,7 +9,7 @@ import { Location, Update } from "history";
 export interface IAppProps {}
 
 const App: React.FunctionComponent<IAppProps> = (props) => {
-  const [location, setLocation] = useState<Location>();
+  const [location, setLocation] = useState<Location>(history.location);
 
   useEffect(() => {
     const unlisten = history.listen((update: Update) => {
