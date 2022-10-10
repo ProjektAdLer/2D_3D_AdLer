@@ -46,6 +46,7 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     else {
       let spaceTO = this.toTO(spaceEntity);
       this.spacePort.onSpaceDataLoaded(spaceTO);
+
       return Promise.resolve(spaceTO);
     }
   }

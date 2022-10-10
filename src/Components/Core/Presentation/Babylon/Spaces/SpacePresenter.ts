@@ -10,6 +10,8 @@ import ISpacePresenter from "./ISpacePresenter";
 import IElementPresenter from "../Elements/IElementPresenter";
 import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
 import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
+import ICalculateSpaceScoreUseCase from "src/Components/Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 @injectable()
 export default class SpacePresenter implements ISpacePresenter {
@@ -29,6 +31,9 @@ export default class SpacePresenter implements ISpacePresenter {
     this.setViewModelData(spaceTO);
     this.createElements(spaceTO.elements);
     this.createDoor();
+    CoreDIContainer.get<ICalculateSpaceScoreUseCase>(
+      USECASE_TYPES.ICalculateSpaceScore
+    ).execute({ spaceId: spaceTO.id });
   }
 
   openDoor(): void {
