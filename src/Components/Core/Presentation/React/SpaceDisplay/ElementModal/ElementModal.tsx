@@ -18,7 +18,7 @@ const elementBuilder = (modalViewModel: ElementModalViewModel) => {
     case "text":
       return <TextComponent viewModel={modalViewModel} />;
     case "video":
-      return <VideoComponent embedId="iik25wqIuFo?autoplay=1" />;
+      return <VideoComponent viewModel={modalViewModel} />;
     case "image":
       return (
         // max-h-[90vh] falls mehrere ImageComponents benutzt werden, sonst schiebts über die Fensterhöhe hinaus [DG]
