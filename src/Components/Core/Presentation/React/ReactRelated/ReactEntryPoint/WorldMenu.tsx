@@ -1,13 +1,10 @@
 import { useInjection } from "inversify-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ILoadWorldUseCase from "src/Components/Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import HeaderBar from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBar";
 import DetailSection from "~ReactComponents/SpaceMenu/DetailSection/DetailSection";
 import SpaceSelection from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection";
-import IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
-import CORE_TYPES from "~DependencyInjection/CoreTypes";
-import WorldEntity from "src/Components/Core/Domain/Entities/WorldEntity";
 
 export default function WorldMenu() {
   const loadWorldUseCase = useInjection<ILoadWorldUseCase>(

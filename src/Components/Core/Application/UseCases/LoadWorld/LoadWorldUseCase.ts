@@ -16,6 +16,7 @@ import type IUIPort from "../../../Ports/UIPort/IUIPort";
 import WorldTO from "../../DataTransferObjects/WorldTO";
 import ElementTO from "../../DataTransferObjects/ElementTO";
 import { Semaphore } from "src/Lib/Somaphore";
+import WorldStatusTO from "../../DataTransferObjects/WorldStatusTO";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -37,9 +38,6 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   private semaphore = new Semaphore("LoadWorld in Use", 1);
 
   async executeAsync(): Promise<WorldTO> {
-    // Eliminate Race Condition by waiting for a random ammount of time
-    //await new Promise((resolve) => setTimeout(resolve, Math.random() * 100));
-
     const lock = await this.semaphore.acquire();
 
     const userData = this.container.getEntitiesOfType(UserDataEntity);
@@ -66,27 +64,31 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   }
 
   private async load(userData: UserDataEntity): Promise<WorldEntity> {
-    // TODO: remove hardcoded worldName when a learning world is selected
-
     const coursesList = await this.backendAdapter.getCoursesAvailableForUser(
       userData.userToken
     );
 
     this.usedWorldId = coursesList.courses[0].courseId;
 
-    let apiData = {
+    let apiWorldData = {
       userToken: userData.userToken,
       worldId: this.usedWorldId, // TODO: This can be a random number for now
     } as getWorldDataParams;
 
-    const response = await this.backendAdapter.getWorldData(apiData);
+    const apiWorldDataResponse = await this.backendAdapter.getWorldData(
+      apiWorldData
+    );
+    const apiWorldScoreResponse = await this.backendAdapter.getWorldStatus(
+      userData.userToken,
+      this.usedWorldId
+    );
 
     // create learning room entities with learning element entities
     const spaceEntities: SpaceEntity[] = [];
-    response.spaces?.forEach((space) => {
+    apiWorldDataResponse.spaces?.forEach((space) => {
       let elementEntities: ElementEntity[] = [];
       space.elements?.forEach((element) => {
-        elementEntities.push(this.mapElement(element));
+        elementEntities.push(this.mapElement(element, apiWorldScoreResponse));
       });
 
       spaceEntities.push(
@@ -108,9 +110,9 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     // create learning world entity
     const worldEntity = this.container.createEntity<WorldEntity>(
       {
-        worldName: response.worldName,
+        worldName: apiWorldDataResponse.worldName,
         spaces: spaceEntities,
-        worldGoal: response.worldGoal,
+        worldGoal: apiWorldDataResponse.worldGoal,
         worldID: this.usedWorldId,
       },
       WorldEntity
@@ -119,14 +121,21 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     return worldEntity;
   }
 
-  private mapElement = (element: ElementTO): ElementEntity => {
-    const entityToStore: Partial<ElementEntity> = {
+  private mapElement = (
+    element: ElementTO,
+    worldStatus: WorldStatusTO
+  ): ElementEntity => {
+    const entityToStore: ElementEntity = {
       id: element.id,
       description: element.description,
       goals: element.goals,
       name: element.name,
       type: element.type,
       value: element.value || 0,
+      parentSpaceId: element.parentSpaceId,
+      hasScored:
+        worldStatus.learningElements.find((e) => e.elementId === element.id)
+          ?.successss || false,
     };
 
     return this.container.createEntity<ElementEntity>(
