@@ -44,7 +44,7 @@ export default class MockBackendAdapter extends BackendAdapter {
       learningElements: [
         {
           elementId: 1,
-          successss: false,
+          successss: true,
         },
         {
           elementId: 2,
