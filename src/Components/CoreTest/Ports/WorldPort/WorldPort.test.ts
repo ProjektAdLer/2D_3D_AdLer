@@ -3,20 +3,17 @@ import { logger } from "../../../../Lib/Logger";
 import BUILDER_TYPES from "../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../Core/DependencyInjection/CoreTypes";
-import {
-  ElementTO,
-  SpaceTO,
-  WorldTO,
-} from "../../../Core/Ports/WorldPort/IWorldPort";
+
 import WorldPort from "../../../Core/Ports/WorldPort/WorldPort";
-import ISpacePresenter from "../../../Core/Presentation/Babylon/Spaces/ISpacePresenter";
 import INavigation from "../../../Core/Presentation/Babylon/Navigation/INavigation";
 import IPresentationBuilder from "../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
 import IElementsDropdownPresenter from "../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/IElementsDropdownPresenter";
 import IWorldNamePanelPresenter from "../../../Core/Presentation/React/SpaceDisplay/WorldNamePanel/IWorldNamePanelPresenter";
 import IWorldGoalPanelPresenter from "../../../Core/Presentation/React/SpaceDisplay/WorldGoalPanel/IWorldGoalPanelPresenter";
-import IWorldAdapter from "../../../Core/Ports/WorldPort/IWorldAdapter";
+import ElementTO from "../../../Core/Application/DataTransferObjects/ElementTO";
+import SpaceTO from "../../../Core/Application/DataTransferObjects/SpaceTO";
+import WorldTO from "../../../Core/Application/DataTransferObjects/WorldTO";
 
 jest.mock("src/Lib/Logger");
 
@@ -123,19 +120,28 @@ describe("WorldPort", () => {
     // setup TOs
     const elementTO: ElementTO = {
       id: 1,
-      elementData: {
-        type: "h5p",
-      },
       name: "test",
+      value: 0,
+      parentSpaceId: 0,
+      description: "test",
+      goals: "test",
+      type: "h5p",
     };
     const spaceTO: SpaceTO = {
       id: 1,
       elements: [elementTO],
+      name: "test",
+      description: "test",
+      goals: "test",
+      requirements: [],
+      requiredPoints: 0,
     };
     const worldTO: WorldTO = {
+      description: "test",
+      goals: "test",
+      spaces: [spaceTO],
       worldName: "test",
       worldGoal: "test",
-      spaces: [spaceTO],
     };
 
     // register UI presenter
