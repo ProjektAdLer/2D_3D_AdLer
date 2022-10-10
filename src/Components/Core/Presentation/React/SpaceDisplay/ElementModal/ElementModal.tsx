@@ -16,7 +16,7 @@ const elementBuilder = (modalViewModel: ElementModalViewModel) => {
     case "h5p":
       return <NewH5PContent viewModel={modalViewModel} />;
     case "text":
-      return <TextComponent textContent={loremText} />;
+      return <TextComponent viewModel={modalViewModel} />;
     case "video":
       return <VideoComponent embedId="iik25wqIuFo?autoplay=1" />;
     case "image":
@@ -25,7 +25,7 @@ const elementBuilder = (modalViewModel: ElementModalViewModel) => {
         <div className="max-h[90vh]">
           <ImageComponent
             imagesrc={
-              "https://cdn.wallpapersafari.com/40/25/JehHWc.jpg"
+              "https://www.xtrafondos.com/wallpapers/vertical/stormtrooper-de-star-wars-battlefront-5226.jpg"
               // Alternative Images zum testen
               // https://www.xtrafondos.com/wallpapers/vertical/stormtrooper-de-star-wars-battlefront-5226.jpg
               // https://hdqwalls.com/wallpapers/star-wars-the-last-jedi-2017-5k-j8.jpg (Relativ Quadratisch)
