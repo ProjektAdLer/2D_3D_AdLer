@@ -11,6 +11,7 @@ import { logger } from "../../../../../../Lib/Logger";
 import { config } from "../../../../../../config";
 import IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 
 let isInDebug = false;
 
@@ -61,6 +62,14 @@ export default class ReactEntry implements IReactEntry {
           CoreDIContainer.get<IDebugUseCase>(
             USECASE_TYPES.IDebugUseCase
           ).executeAsync();
+        }
+        // clg all entities on ctrl + f2
+        if (e.ctrlKey && e.key == "F2") {
+          const entityMap = CoreDIContainer.get<IEntityContainer>(
+            CORE_TYPES.IEntityContainer
+          ).getAllEntities();
+
+          logger.log(entityMap);
         }
       };
     }

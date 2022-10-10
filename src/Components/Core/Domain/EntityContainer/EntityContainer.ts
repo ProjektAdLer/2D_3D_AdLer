@@ -4,6 +4,9 @@ import IEntityContainer from "./IEntityContainer";
 
 @injectable()
 export default class EntityContainer implements IEntityContainer {
+  getAllEntities(): Map<ConstructorReference<object>, object[]> {
+    return this.entityMap;
+  }
   useSingletonEntity<T extends object>(
     entityData: Partial<T>,
     entityType: ConstructorReference<T>

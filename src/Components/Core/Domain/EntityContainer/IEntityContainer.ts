@@ -45,8 +45,8 @@ export default interface IEntityContainer {
   deleteEntity(entity: object): void;
 
   /**
-   *
-   * gets the Root Entity
-   * @deprecated This will likely be removed in the future
+   * Gets all Entites in a Map
+   * This is used for Debugging
    */
+  getAllEntities(): Map<ConstructorReference<object>, object[]>;
 }
