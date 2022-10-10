@@ -16,6 +16,7 @@ import IPresentationDirector from "../../../Core/Presentation/PresentationBuilde
 import IElementsDropdownPresenter from "../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/IElementsDropdownPresenter";
 import IWorldNamePanelPresenter from "../../../Core/Presentation/React/SpaceDisplay/WorldNamePanel/IWorldNamePanelPresenter";
 import IWorldGoalPanelPresenter from "../../../Core/Presentation/React/SpaceDisplay/WorldGoalPanel/IWorldGoalPanelPresenter";
+import IWorldAdapter from "../../../Core/Ports/WorldPort/IWorldAdapter";
 
 jest.mock("src/Lib/Logger");
 
@@ -137,10 +138,6 @@ describe("WorldPort", () => {
       spaces: [spaceTO],
     };
 
-    // setup mocks
-    const spacePresenterMock = mock<ISpacePresenter>();
-    builderMock.getPresenter.mockReturnValue(spacePresenterMock);
-
     // register UI presenter
     systemUnderTest.registerElementDropdownPresenter(
       elementDropdownPresenterMock
@@ -156,19 +153,6 @@ describe("WorldPort", () => {
     systemUnderTest.presentWorld(worldTO);
 
     // ASSERT
-    // building the space
-    expect(directorMock.build).toHaveBeenCalledTimes(1);
-    expect(directorMock.build).toHaveBeenCalledWith(builderMock);
-    expect(systemUnderTest["spacePresenter"]).toBe(spacePresenterMock);
-
-    // presenting the space
-    expect(spacePresenterMock.presentSpace).toHaveBeenCalledTimes(1);
-    expect(spacePresenterMock.presentSpace).toHaveBeenCalledWith(spaceTO);
-
-    // navigation setup
-    expect(navigationMock.setupNavigation).toHaveBeenCalledTimes(1);
-
-    // UI presentation
     expect(worldNamePanelPresenterMock.displayWorldName).toHaveBeenCalledTimes(
       1
     );
