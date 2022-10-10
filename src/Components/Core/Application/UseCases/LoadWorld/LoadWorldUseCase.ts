@@ -15,6 +15,7 @@ import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IUIPort from "../../../Ports/UIPort/IUIPort";
 import WorldTO from "../../DataTransferObjects/WorldTO";
 import ElementTO from "../../DataTransferObjects/ElementTO";
+import { Semaphore } from "src/Lib/Somaphore";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -33,7 +34,14 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
   private usedWorldId: number;
 
+  private semaphore = new Semaphore("LoadWorld in Use", 1);
+
   async executeAsync(): Promise<WorldTO> {
+    // Eliminate Race Condition by waiting for a random ammount of time
+    //await new Promise((resolve) => setTimeout(resolve, Math.random() * 100));
+
+    const lock = await this.semaphore.acquire();
+
     const userData = this.container.getEntitiesOfType(UserDataEntity);
 
     if (userData.length === 0 || userData[0]?.isLoggedIn === false) {
@@ -41,7 +49,9 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       return Promise.reject("User is not logged in");
     }
 
-    let worldEntity = this.container.getEntitiesOfType(WorldEntity)[0];
+    let worldEntitys = this.container.getEntitiesOfType(WorldEntity);
+
+    let worldEntity = worldEntitys[0];
 
     if (!worldEntity) {
       worldEntity = await this.load(userData[0]);
@@ -51,6 +61,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     // TODO: Move this outside of this use case - PG
     await this.loadAvatarUseCase.executeAsync();
 
+    lock.release();
     return Promise.resolve(this.toTO(worldEntity));
   }
 

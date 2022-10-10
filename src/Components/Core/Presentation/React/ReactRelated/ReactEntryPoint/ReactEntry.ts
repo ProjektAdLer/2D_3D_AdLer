@@ -12,6 +12,7 @@ import { config } from "../../../../../../config";
 import IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
+import WorldEntity from "src/Components/Core/Domain/Entities/WorldEntity";
 
 let isInDebug = false;
 
