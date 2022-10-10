@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babylonjs/core": "^5.27.0",
-    "@babylonjs/gui": "^5.27.0",
-    "@babylonjs/loaders": "^5.27.0",
+    "@babylonjs/core": "^5.14.1",
+    "@babylonjs/gui": "^5.14.1",
+    "@babylonjs/loaders": "^5.14.1",
     "@types/node": "^18.0.3",
     "@xapi/xapi": "^2.0.2",
     "axios": "^0.27.2",

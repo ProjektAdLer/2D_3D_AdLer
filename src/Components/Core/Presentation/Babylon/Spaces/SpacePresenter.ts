@@ -28,12 +28,12 @@ export default class SpacePresenter implements ISpacePresenter {
   }
 
   presentSpace(spaceTO: SpaceTO): void {
-    this.setViewModelData(spaceTO);
-    this.createElements(spaceTO.elements);
-    this.createDoor();
     CoreDIContainer.get<ICalculateSpaceScoreUseCase>(
       USECASE_TYPES.ICalculateSpaceScore
     ).execute({ spaceId: spaceTO.id });
+    this.setViewModelData(spaceTO);
+    this.createElements(spaceTO.elements);
+    this.createDoor();
   }
 
   openDoor(): void {
