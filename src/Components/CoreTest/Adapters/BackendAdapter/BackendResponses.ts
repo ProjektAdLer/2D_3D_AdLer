@@ -25,6 +25,7 @@ export const minimalGetWorldDataResponse: WorldTO = {
           description: "TestDescription",
           goals: "TestGoals",
           parentSpaceId: 1,
+          parentCourseId: 1,
         },
       ],
     },
@@ -59,6 +60,7 @@ export const expectedElementTO: ElementTO = {
   goals: expect.any(String),
   type: expect.any(String),
   parentSpaceId: expect.any(Number),
+  parentCourseId: expect.any(Number),
 };
 
 export const mockDSL: IDSL = {

@@ -18,6 +18,8 @@ import ScoreElementUseCase from "../../Application/UseCases/ScoreElement/ScoreEl
 import USECASE_TYPES from "./USECASE_TYPES";
 import IScoreH5PElement from "../../Application/UseCases/ScoreH5PElement/IScoreH5PElement";
 import ScoreH5PElement from "../../Application/UseCases/ScoreH5PElement/ScoreH5PElement";
+import IGetElementSourceUseCase from "../../Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
+import GetElementSourceUseCase from "../../Application/UseCases/GetElementSourceUseCase/GetElementSourceUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -56,6 +58,10 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<IScoreH5PElement>(USECASE_TYPES.IScoreH5PElement)
     .to(ScoreH5PElement)
+    .inSingletonScope();
+
+  bind<IGetElementSourceUseCase>(USECASE_TYPES.IGetElementSource)
+    .to(GetElementSourceUseCase)
     .inSingletonScope();
 });
 

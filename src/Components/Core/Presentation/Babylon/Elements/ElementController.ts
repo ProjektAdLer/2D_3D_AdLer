@@ -20,6 +20,7 @@ export default class ElementController implements IElementController {
       goals: this.viewModel.goals.Value,
       value: this.viewModel.value.Value,
       parentSpaceId: 0,
+      parentCourseId: 0,
     });
   }
 

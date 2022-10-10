@@ -8,6 +8,7 @@ const USECASE_TYPES = {
   IDebugUseCase: Symbol("IDebugUseCase"),
   ILoadSpaceUseCase: Symbol("ILoadSpaceUseCase"),
   IScoreH5PElement: Symbol("IScoreH5PElement"),
+  IGetElementSource: Symbol("IGetElementSourdce"),
 };
 
 export default USECASE_TYPES;

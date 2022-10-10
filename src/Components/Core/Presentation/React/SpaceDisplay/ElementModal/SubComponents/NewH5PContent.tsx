@@ -5,8 +5,8 @@ import { config } from "../../../../../../../config";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import IScoreH5PElement from "src/Components/Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
-import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { useInjection } from "inversify-react";
+import IGetElementSourceUseCase from "src/Components/Core/Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
 
 export default function NewH5PContent({
   viewModel,
@@ -15,6 +15,10 @@ export default function NewH5PContent({
 }) {
   const h5pContainerRef = useRef<HTMLDivElement>(null);
 
+  const getElementSourceUseCase = useInjection<IGetElementSourceUseCase>(
+    USECASE_TYPES.IGetElementSource
+  );
+
   useEffect(() => {
     const debug = async () => {
       if (h5pContainerRef.current) {
@@ -22,13 +26,10 @@ export default function NewH5PContent({
 
         let baseURL = config.serverURL.replace(/api\/?$/, "");
 
-        const filePath = await CoreDIContainer.get<IBackendAdapter>(
-          CORE_TYPES.IBackendAdapter
-        ).getElementSource(
-          "token goes here", //TODOPG: get token from somewhere
-          viewModel.id.Value,
-          1 // TODOPG: get CourrseID from somewhere
-        );
+        const filePath = await getElementSourceUseCase.executeAsync({
+          courseId: viewModel.parentCourseId.Value,
+          elementId: viewModel.id.Value,
+        });
 
         let h5pJsonURL =
           baseURL + filePath.replaceAll("\\", "/").replaceAll("wwwroot/", "");
