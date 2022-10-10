@@ -1,0 +1,57 @@
+import { Engine, Scene, SceneOptions } from "@babylonjs/core";
+import { injectable } from "inversify";
+import { config } from "src/config";
+
+/**
+ * @description This class is responsible for creating a Scene.
+ */
+@injectable()
+export default abstract class AbstractSceneDefinition {
+  /**
+   * This array contains functions that need to be executed before the scene is created.
+   * This is useful for loading data that is required for the scene.
+   * The functions will be executed in the order they are added to the array.
+   **/
+  protected preTasks: (() => Promise<void> | void)[] = [];
+
+  protected scene: Scene;
+  /**
+   * Getter for the scene.
+   **/
+  get Scene(): Scene {
+    return this.scene;
+  }
+
+  /**
+   * This function creates the scene and initializes it.
+   **/
+  async createScene(
+    engine: Engine,
+    sceneOptions?: SceneOptions
+  ): Promise<void> {
+    this.scene = new Scene(engine, sceneOptions);
+
+    // execute pretasks in order, waiting inbetween
+    this.preTasks.forEach(async (task) => {
+      await task();
+    });
+
+    await this.initializeScene();
+
+    this.applyDebugLayer();
+  }
+
+  /**
+   * This array contains functions creates the scene and returns it.
+   * Can be overridden to add custom scene creation and setup logic.
+   **/
+  protected abstract initializeScene(): Promise<void>;
+
+  /**
+   * This function applies the debug layer to the scene if config.isDebug is set to true.
+   * Can be overridden to apply custom debug elements or with a empty function to prevent the debug layer from beeing applied.
+   */
+  protected applyDebugLayer(): void {
+    if (config.isDebug) this.scene.debugLayer.show();
+  }
+}

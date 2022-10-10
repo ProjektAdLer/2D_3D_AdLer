@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BottomTooltip from "~ReactComponents/SpaceDisplay/BottomTooltip/BottomTooltip";
 import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 import ElementModal from "~ReactComponents/SpaceDisplay/ElementModal/ElementModal";
@@ -11,9 +11,7 @@ import LogoMenuBar from "~ReactComponents/GeneralComponents/LogoMenuBar/LogoMenu
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import ScorePanel from "~ReactComponents/SpaceDisplay/ScorePanel/ScorePanel";
 import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import ICreateSceneClass from "../../../Babylon/SceneManagement/ICreateSceneClass";
-import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import SpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/SpaceSceneDefinition";
 
 export default function Space() {
   return (
@@ -36,9 +34,7 @@ export default function Space() {
         </div>
         <div className="col-span-9 col-start-1 row-span-6 row-start-1">
           <BabylonCanvas
-            createSceneClass={CoreDIContainer.get<ICreateSceneClass>(
-              CORE_TYPES.ICreateSceneClass
-            )}
+            sceneDefinitionType={SpaceSceneDefinition}
             className="w-screen h-screen"
           />
         </div>

@@ -21,14 +21,12 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
     };
   }, []);
 
-  switch (location?.pathname) {
-    default:
-    case "/":
-      return <WelcomePage />;
-    case "/worldmenu":
-      return <WorldMenu />;
-    case "/space":
-      return <Space />;
+  if (location?.pathname.includes("/space")) {
+    return <Space />;
+  } else if (location?.pathname.includes("/worldmenu")) {
+    return <WorldMenu />;
+  } else {
+    return <WelcomePage />;
   }
 };
 

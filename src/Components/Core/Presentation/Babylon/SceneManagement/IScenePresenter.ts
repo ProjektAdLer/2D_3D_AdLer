@@ -7,7 +7,7 @@ import {
   Engine,
   SceneOptions,
 } from "@babylonjs/core";
-import ICreateSceneClass from "./ICreateSceneClass";
+import AbstractSceneDefinition from "./Scenes/AbstractSceneDefinition";
 
 export default interface IScenePresenter {
   get Scene(): Scene;
@@ -21,11 +21,7 @@ export default interface IScenePresenter {
    * Creates a new scene with the given CreateSceneClass configuration.
    * @param createSceneClass The scene configuration class that will be used to create the scene.
    */
-  createScene(
-    engine: Engine,
-    createSceneClass: ICreateSceneClass,
-    sceneOptions?: SceneOptions
-  ): Promise<void>;
+  createScene(engine: Engine, sceneOptions?: SceneOptions): Promise<void>;
 
   /**
    * Starts the render loop.

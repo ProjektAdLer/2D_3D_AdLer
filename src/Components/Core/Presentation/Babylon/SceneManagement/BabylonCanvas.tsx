@@ -1,12 +1,13 @@
 import { Engine, EngineOptions, SceneOptions } from "@babylonjs/core";
 import { useEffect, useRef } from "react";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
-import ICreateSceneClass from "./ICreateSceneClass";
-import IScenePresenter from "./IScenePresenter";
+import AbstractSceneDefinition from "./Scenes/AbstractSceneDefinition";
+import SCENE_TYPES, {
+  ScenePresenterFactory,
+} from "~DependencyInjection/Scenes/SCENE_TYPES";
 
 export type BabylonjsProps = {
-  createSceneClass: ICreateSceneClass;
+  sceneDefinitionType: { new (...args: any[]): AbstractSceneDefinition };
   antialias?: boolean;
   engineOptions?: EngineOptions;
   adaptToDeviceRatio?: boolean;
@@ -21,7 +22,7 @@ export default function BabylonCanvas(
 ) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const {
-    createSceneClass,
+    sceneDefinitionType: sceneDefinitionType,
     antialias,
     engineOptions,
     adaptToDeviceRatio,
@@ -43,11 +44,12 @@ export default function BabylonCanvas(
     );
 
     // create scene
-    const scenePresenter = CoreDIContainer.get<IScenePresenter>(
-      CORE_TYPES.IScenePresenter
+    const scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
+      SCENE_TYPES.ScenePresenterFactory
     );
+    const scenePresenter = scenePresenterFactory(sceneDefinitionType);
     const createSceneAsync = async () => {
-      await scenePresenter.createScene(engine, createSceneClass, sceneOptions);
+      await scenePresenter.createScene(engine, sceneOptions);
       scenePresenter.startRenderLoop();
     };
     createSceneAsync();
@@ -67,7 +69,7 @@ export default function BabylonCanvas(
     engineOptions,
     adaptToDeviceRatio,
     sceneOptions,
-    createSceneClass,
+    sceneDefinitionType,
   ]);
 
   return <canvas ref={canvasRef} {...rest}></canvas>;

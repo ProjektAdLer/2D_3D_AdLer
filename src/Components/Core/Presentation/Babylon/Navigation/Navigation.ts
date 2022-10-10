@@ -11,9 +11,11 @@ import INavigation from "./INavigation";
 import * as Recast from "recast-detour";
 import { inject, injectable } from "inversify";
 import type IScenePresenter from "../SceneManagement/IScenePresenter";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import NavigationConfiguration from "./NavigationConfiguration";
 import { config } from "../../../../../config";
+import SCENE_TYPES from "~DependencyInjection/Scenes/SCENE_TYPES";
+import type { ScenePresenterFactory } from "~DependencyInjection/Scenes/SCENE_TYPES";
+import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
 
 @injectable()
 export default class Navigation implements INavigation {
@@ -21,11 +23,13 @@ export default class Navigation implements INavigation {
   private crowd: ICrowd;
   private navMeshDebug: Mesh;
   private matDebug: StandardMaterial;
+  private scenePresenter: IScenePresenter;
 
   public onNavigationReadyObservable: SimpleEvent = new SimpleEvent();
 
   constructor(
-    @inject(CORE_TYPES.IScenePresenter) private scenePresenter: IScenePresenter,
+    @inject(SCENE_TYPES.ScenePresenterFactory)
+    private scenePresenterFactory: ScenePresenterFactory,
     @inject(NavigationConfiguration)
     private navigationConfiguration: NavigationConfiguration
   ) {}
@@ -43,6 +47,9 @@ export default class Navigation implements INavigation {
         "Repeated call to setupNavigation. This can break the agents indices."
       );
     }
+
+    // create scenePresenter via factory (delayed creation to ensure that the scene is created)
+    this.scenePresenter = this.scenePresenterFactory(SpaceSceneDefinition);
 
     // -- Navigation Plugin --
     // call to Recast.default for compatibility in production and tests

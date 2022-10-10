@@ -1,7 +1,9 @@
+import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
 import Observable from "src/Lib/Observable";
 import { ElementTypeStrings } from "../../../../Domain/Types/ElementTypes";
 
 export default class DetailSectionViewModel {
+  id: Observable<ElementID> = new Observable<ElementID>();
   name: Observable<string> = new Observable<string>("Placeholder Name");
   description: Observable<string> = new Observable<string>(
     "Placeholder Description"

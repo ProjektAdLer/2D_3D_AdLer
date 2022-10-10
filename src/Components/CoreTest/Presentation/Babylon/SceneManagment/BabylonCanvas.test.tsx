@@ -6,7 +6,7 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import BabylonCanvas from "../../../../Core/Presentation/Babylon/SceneManagement/BabylonCanvas";
 import { Engine } from "@babylonjs/core";
-import ICreateSceneClass from "../../../../Core/Presentation/Babylon/SceneManagement/ICreateSceneClass";
+import AbstractSceneDefinition from "../../../../Core/Presentation/Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
 
 jest.mock("@babylonjs/core");
 const scenePresenterMock = mock<IScenePresenter>();
@@ -29,14 +29,16 @@ describe("Babylon Canvas", () => {
   });
 
   test("should render", () => {
-    render(<BabylonCanvas createSceneClass={mock<ICreateSceneClass>()} />);
+    render(
+      <BabylonCanvas createSceneClass={mock<AbstractSceneDefinition>()} />
+    );
   });
 
   test("calls createScene on scenePresenter", () => {
     render(
       <BabylonCanvas
-        createSceneClass={CoreDIContainer.get<ICreateSceneClass>(
-          CORE_TYPES.ICreateSceneClass
+        createSceneClass={CoreDIContainer.get<AbstractSceneDefinition>(
+          CORE_TYPES.AbstractSceneDefinition
         )}
       />
     );
@@ -47,8 +49,8 @@ describe("Babylon Canvas", () => {
   test("calls startRenderLoop on scenePresenter", () => {
     render(
       <BabylonCanvas
-        createSceneClass={CoreDIContainer.get<ICreateSceneClass>(
-          CORE_TYPES.ICreateSceneClass
+        createSceneClass={CoreDIContainer.get<AbstractSceneDefinition>(
+          CORE_TYPES.AbstractSceneDefinition
         )}
       />
     );
@@ -61,8 +63,8 @@ describe("Babylon Canvas", () => {
   test("window resize event calls callback", () => {
     render(
       <BabylonCanvas
-        createSceneClass={CoreDIContainer.get<ICreateSceneClass>(
-          CORE_TYPES.ICreateSceneClass
+        createSceneClass={CoreDIContainer.get<AbstractSceneDefinition>(
+          CORE_TYPES.AbstractSceneDefinition
         )}
       />
     );
@@ -75,8 +77,8 @@ describe("Babylon Canvas", () => {
   test("unmount disposes of the engine", () => {
     const { unmount } = render(
       <BabylonCanvas
-        createSceneClass={CoreDIContainer.get<ICreateSceneClass>(
-          CORE_TYPES.ICreateSceneClass
+        createSceneClass={CoreDIContainer.get<AbstractSceneDefinition>(
+          CORE_TYPES.AbstractSceneDefinition
         )}
       />
     );
@@ -89,8 +91,8 @@ describe("Babylon Canvas", () => {
   test("unmount removes window resize event listener", () => {
     const container = render(
       <BabylonCanvas
-        createSceneClass={CoreDIContainer.get<ICreateSceneClass>(
-          CORE_TYPES.ICreateSceneClass
+        createSceneClass={CoreDIContainer.get<AbstractSceneDefinition>(
+          CORE_TYPES.AbstractSceneDefinition
         )}
       />
     );

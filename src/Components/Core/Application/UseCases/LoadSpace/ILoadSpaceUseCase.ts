@@ -8,4 +8,6 @@ import SpaceTO from "../../DataTransferObjects/SpaceTO";
  * @returns {SpaceTO} Transfer Object of the room
  */
 export default interface ILoadSpaceUseCase
-  extends IAsyncUsecase<ElementID, SpaceTO> {}
+  extends IAsyncUsecase<ElementID, SpaceTO> {
+  executeAsync(spaceId: ElementID): Promise<SpaceTO>;
+}

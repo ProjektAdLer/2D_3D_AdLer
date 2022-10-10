@@ -7,12 +7,15 @@ import {
   Vector3,
 } from "@babylonjs/core";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import type IScenePresenter from "../SceneManagement/IScenePresenter";
 import IElementController from "./IElementController";
 import IElementView from "./IElementView";
 import ElementViewModel from "./ElementViewModel";
 import { ElementTypes } from "../../../Domain/Types/ElementTypes";
+import SCENE_TYPES, {
+  ScenePresenterFactory,
+} from "~DependencyInjection/Scenes/SCENE_TYPES";
+import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
 
 const modelLinks: { [key in ElementTypes]?: any } = {
   [ElementTypes.h5p]: require("../../../../../Assets/3DModel_LElement_H5P.glb"),
@@ -27,9 +30,10 @@ export default class ElementView implements IElementView {
   private scenePresenter: IScenePresenter;
 
   constructor(viewModel: ElementViewModel, controller: IElementController) {
-    this.scenePresenter = CoreDIContainer.get<IScenePresenter>(
-      CORE_TYPES.IScenePresenter
+    let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
+      SCENE_TYPES.ScenePresenterFactory
     );
+    this.scenePresenter = scenePresenterFactory(SpaceSceneDefinition);
     this.viewModel = viewModel;
     this.controller = controller;
 
