@@ -19,10 +19,7 @@ import ISpacePresenter from "../../Spaces/ISpacePresenter";
 import history from "history/browser";
 
 @injectable()
-export default class SpaceSceneDefinition
-  extends AbstractSceneDefinition
-  implements ISpaceAdapter
-{
+export default class SpaceSceneDefinition extends AbstractSceneDefinition {
   private spaceTO: SpaceTO;
 
   constructor(
@@ -44,9 +41,9 @@ export default class SpaceSceneDefinition
     super();
   }
 
-  override preTasks = [this.loadSpacePreTask, this.loadAvatarPreTask];
+  protected override preTasks = [this.loadSpacePreTask, this.loadAvatarPreTask];
 
-  override async initializeScene(): Promise<void> {
+  protected override async initializeScene(): Promise<void> {
     this.scene.clearColor = new Color4(0.66, 0.83, 0.98, 1);
     new HemisphericLight("light", new Vector3(0, 1, 0), this.scene);
 
@@ -62,22 +59,20 @@ export default class SpaceSceneDefinition
     this.navigation.setupNavigation();
   }
 
-  onSpaceDataLoaded(spaceTO: SpaceTO): void {
-    this.spaceTO = spaceTO;
-  }
-
   @bind
   private async loadSpacePreTask(): Promise<void> {
-    this.spacePort.registerAdapter(this);
     // TODO: make extraction of the space ID more reliable
-    await this.loadSpaceUseCase.executeAsync(
-      Number.parseInt(history.location.pathname.split("/")[2])
+    this.spaceTO = await this.loadSpaceUseCase.executeAsync(
+      this.parseSpaceIdFromLocation()
     );
-    this.spacePort.unregisterAdapter(this);
   }
 
   @bind
   private async loadAvatarPreTask(): Promise<void> {
     await this.loadAvatarUseCase.executeAsync();
+  }
+
+  private parseSpaceIdFromLocation(): number {
+    return Number.parseInt(history.location.pathname.split("/")[2]);
   }
 }
