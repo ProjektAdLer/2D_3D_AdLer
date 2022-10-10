@@ -7,7 +7,7 @@ import SCENE_TYPES, {
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 
 export type BabylonjsProps = {
-  sceneDefinition: { new (...args: any[]): AbstractSceneDefinition };
+  sceneDefinitionType: { new (...args: any[]): AbstractSceneDefinition };
   antialias?: boolean;
   engineOptions?: EngineOptions;
   adaptToDeviceRatio?: boolean;
@@ -22,7 +22,7 @@ export default function BabylonCanvas(
 ) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const {
-    sceneDefinition,
+    sceneDefinitionType: sceneDefinitionType,
     antialias,
     engineOptions,
     adaptToDeviceRatio,
@@ -47,7 +47,7 @@ export default function BabylonCanvas(
     const scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
       SCENE_TYPES.ScenePresenterFactory
     );
-    const scenePresenter = scenePresenterFactory(sceneDefinition);
+    const scenePresenter = scenePresenterFactory(sceneDefinitionType);
     const createSceneAsync = async () => {
       await scenePresenter.createScene(engine, sceneOptions);
       scenePresenter.startRenderLoop();
@@ -69,7 +69,7 @@ export default function BabylonCanvas(
     engineOptions,
     adaptToDeviceRatio,
     sceneOptions,
-    sceneDefinition,
+    sceneDefinitionType,
   ]);
 
   return <canvas ref={canvasRef} {...rest}></canvas>;

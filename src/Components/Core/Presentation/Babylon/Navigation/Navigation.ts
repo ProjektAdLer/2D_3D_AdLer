@@ -29,12 +29,10 @@ export default class Navigation implements INavigation {
 
   constructor(
     @inject(SCENE_TYPES.ScenePresenterFactory)
-    scenePresenterFactory: ScenePresenterFactory,
+    private scenePresenterFactory: ScenePresenterFactory,
     @inject(NavigationConfiguration)
     private navigationConfiguration: NavigationConfiguration
-  ) {
-    this.scenePresenter = scenePresenterFactory(SpaceSceneDefinition);
-  }
+  ) {}
 
   get Plugin(): RecastJSPlugin {
     return this.plugin;
@@ -49,6 +47,9 @@ export default class Navigation implements INavigation {
         "Repeated call to setupNavigation. This can break the agents indices."
       );
     }
+
+    // create scenePresenter via factory (delayed creation to ensure that the scene is created)
+    this.scenePresenter = this.scenePresenterFactory(SpaceSceneDefinition);
 
     // -- Navigation Plugin --
     // call to Recast.default for compatibility in production and tests

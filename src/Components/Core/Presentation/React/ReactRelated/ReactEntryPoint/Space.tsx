@@ -11,21 +11,9 @@ import LogoMenuBar from "~ReactComponents/GeneralComponents/LogoMenuBar/LogoMenu
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import ScorePanel from "~ReactComponents/SpaceDisplay/ScorePanel/ScorePanel";
 import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
-import AbstractSceneDefinition from "../../../Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
-import CORE_TYPES from "~DependencyInjection/CoreTypes";
-import { useInjection } from "inversify-react";
-import history from "history/browser";
 import SpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/SpaceSceneDefinition";
 
 export default function Space() {
-  // const [createSceneClass] = useState<AbstractSceneDefinition>(
-  //   useInjection<AbstractSceneDefinition>(CORE_TYPES.AbstractSceneDefinition)
-  // );
-  // // TODO: make this more reliable
-  // (createSceneClass as SpaceSceneDefinition).spaceID = Number.parseInt(
-  //   history.location.pathname.split("/")[2]
-  // );
-
   return (
     <React.Fragment>
       <div className="grid max-h-screen grid-cols-9 grid-rows-6 root">
@@ -46,7 +34,7 @@ export default function Space() {
         </div>
         <div className="col-span-9 col-start-1 row-span-6 row-start-1">
           <BabylonCanvas
-            sceneDefinition={SpaceSceneDefinition}
+            sceneDefinitionType={SpaceSceneDefinition}
             className="w-screen h-screen"
           />
         </div>

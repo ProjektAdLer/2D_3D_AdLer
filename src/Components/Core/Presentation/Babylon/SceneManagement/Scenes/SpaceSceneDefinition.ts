@@ -12,18 +12,17 @@ import bind from "bind-decorator";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type ILoadSpaceUseCase from "src/Components/Core/Application/UseCases/LoadSpace/ILoadSpaceUseCase";
 import type ILoadAvatarUseCase from "src/Components/Core/Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
-import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
 import type IPresentationDirector from "../../../PresentationBuilder/IPresentationDirector";
 import type IPresentationBuilder from "../../../PresentationBuilder/IPresentationBuilder";
 import type INavigation from "../../Navigation/INavigation";
 import ISpacePresenter from "../../Spaces/ISpacePresenter";
+import history from "history/browser";
 
 @injectable()
 export default class SpaceSceneDefinition
   extends AbstractSceneDefinition
   implements ISpaceAdapter
 {
-  spaceID: ElementID;
   private spaceTO: SpaceTO;
 
   constructor(
@@ -70,7 +69,10 @@ export default class SpaceSceneDefinition
   @bind
   private async loadSpacePreTask(): Promise<void> {
     this.spacePort.registerAdapter(this);
-    await this.loadSpaceUseCase.executeAsync(this.spaceID);
+    // TODO: make extraction of the space ID more reliable
+    await this.loadSpaceUseCase.executeAsync(
+      Number.parseInt(history.location.pathname.split("/")[2])
+    );
     this.spacePort.unregisterAdapter(this);
   }
 
