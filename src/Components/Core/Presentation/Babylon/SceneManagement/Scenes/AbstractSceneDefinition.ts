@@ -32,9 +32,11 @@ export default abstract class AbstractSceneDefinition {
     this.scene = new Scene(engine, sceneOptions);
 
     // execute pretasks in order, waiting inbetween
-    this.preTasks.forEach(async (task) => {
-      await task();
-    });
+    await Promise.all(
+      this.preTasks.map(async (task) => {
+        await task();
+      })
+    );
 
     await this.initializeScene();
 

@@ -61,7 +61,6 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
 
   @bind
   private async loadSpacePreTask(): Promise<void> {
-    // TODO: make extraction of the space ID more reliable
     this.spaceTO = await this.loadSpaceUseCase.executeAsync(
       this.parseSpaceIdFromLocation()
     );
@@ -73,6 +72,7 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
   }
 
   private parseSpaceIdFromLocation(): number {
+    // TODO: make extraction of the space ID more reliable
     return Number.parseInt(history.location.pathname.split("/")[2]);
   }
 }
