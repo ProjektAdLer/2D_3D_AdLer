@@ -1,12 +1,18 @@
 import { Engine, Scene, SceneOptions } from "@babylonjs/core";
 import { injectable } from "inversify";
 import { config } from "src/config";
+import { Semaphore } from "src/Lib/Somaphore";
 
 /**
  * @description This class is responsible for creating a Scene.
  */
 @injectable()
 export default abstract class AbstractSceneDefinition {
+  private semaphore = new Semaphore(
+    "AbstractSceneDefinition scene creation running",
+    1
+  );
+
   /**
    * This array contains functions that need to be executed before the scene is created.
    * This is useful for loading data that is required for the scene.
@@ -29,6 +35,8 @@ export default abstract class AbstractSceneDefinition {
     engine: Engine,
     sceneOptions?: SceneOptions
   ): Promise<void> {
+    let lock = await this.semaphore.acquire();
+
     this.scene = new Scene(engine, sceneOptions);
 
     // execute pretasks in order, waiting inbetween
@@ -41,6 +49,8 @@ export default abstract class AbstractSceneDefinition {
     await this.initializeScene();
 
     this.applyDebugLayer();
+
+    lock.release();
   }
 
   /**
