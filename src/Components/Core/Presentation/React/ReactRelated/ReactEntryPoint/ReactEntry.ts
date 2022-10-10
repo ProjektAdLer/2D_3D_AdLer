@@ -38,7 +38,7 @@ export default class ReactEntry implements IReactEntry {
       document.getElementById("root") as HTMLElement
     );
 
-    bla.render(strictModeComponent);
+    bla.render(providerComponent);
 
     this.startDebugUseCase();
 
