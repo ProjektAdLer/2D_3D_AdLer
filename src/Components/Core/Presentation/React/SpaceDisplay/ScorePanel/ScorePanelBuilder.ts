@@ -1,4 +1,6 @@
 import { injectable } from "inversify";
+import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
+import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
 import ISpacePort from "src/Components/Core/Ports/SpacePort/ISpacePort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
@@ -28,8 +30,8 @@ export default class ScorePanelBuilder extends PresentationBuilder<
 
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<ISpacePort>(
+    CoreDIContainer.get<AbstractPort<ISpaceAdapter>>(
       PORT_TYPES.ISpacePort
-    ).registerScorePanelPresenter(this.presenter!);
+    ).registerAdapter(this.presenter!);
   }
 }

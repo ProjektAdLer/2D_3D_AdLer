@@ -7,6 +7,14 @@ export default class SpaceGoalPanelPresenter
   implements ISpaceGoalPanelPresenter, ISpaceAdapter
 {
   constructor(private viewModel: SpaceGoalPanelViewModel) {}
+
+  onScoreChanged(
+    score: number,
+    requiredScore: number,
+    maxScore: number,
+    spaceID: number
+  ): void {}
+
   onSpaceDataLoaded(spaceTO: SpaceTO): void {
     this.viewModel.goal.Value = spaceTO.goals;
   }

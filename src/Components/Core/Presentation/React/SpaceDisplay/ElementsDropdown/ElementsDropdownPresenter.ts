@@ -8,6 +8,13 @@ export default class ElementsDropdownPresenter
 {
   constructor(private viewModel: ElementsDropdownViewModel) {}
 
+  onScoreChanged(
+    score: number,
+    requiredScore: number,
+    maxScore: number,
+    spaceID: number
+  ): void {}
+
   onSpaceDataLoaded(spaceTO: SpaceTO): void {
     this.viewModel.elementNames.Value = spaceTO.elements.map(
       (element) => element.name

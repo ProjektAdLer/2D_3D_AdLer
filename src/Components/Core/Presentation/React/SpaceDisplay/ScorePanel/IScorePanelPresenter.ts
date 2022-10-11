@@ -1,3 +1,1 @@
-export default interface IScorePanelPresenter {
-  presentScore(score: number): void;
-}
+export default interface IScorePanelPresenter {}

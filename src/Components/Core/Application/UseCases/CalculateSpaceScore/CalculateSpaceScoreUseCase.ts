@@ -34,7 +34,9 @@ export default class CalculateSpaceScoreUseCase
     }
 
     // sum up score
-    const spaceScore = space.elements.reduce((acumulator, current) => {
+    let maxPoints = 0;
+    const currentScore = space.elements.reduce((acumulator, current) => {
+      maxPoints += acumulator;
       if (current.hasScored) {
         return acumulator + current.value;
       } else {
@@ -42,7 +44,11 @@ export default class CalculateSpaceScoreUseCase
       }
     }, 0);
 
-    // TODO: This has to be more refined
-    this.spacePort.presentNewScore(spaceScore, spaceScore >= 20, data.spaceId);
+    this.spacePort.onScoreChanged(
+      currentScore,
+      space.requiredPoints,
+      maxPoints,
+      data.spaceId
+    );
   }
 }
