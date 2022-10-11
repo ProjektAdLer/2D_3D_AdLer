@@ -53,7 +53,9 @@ export default function ElementModal() {
       title={viewModel?.type?.Value?.toUpperCase() + " Learning Element"}
       onClose={() => {
         setOpen(false);
-        controller.scoreElement(viewModel?.id.Value);
+        if (viewModel?.type?.Value !== "h5p") {
+          controller.scoreElement(viewModel?.id.Value);
+        }
       }}
       showModal={isOpen}
       className={`flex flex-col justify-center gap-2 p-2 m-3 rounded-lg ${modalConfig[modalType]} `}
