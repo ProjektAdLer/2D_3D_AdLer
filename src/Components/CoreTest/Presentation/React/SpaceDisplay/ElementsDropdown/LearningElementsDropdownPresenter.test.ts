@@ -1,6 +1,8 @@
 import IElementsDropdownPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/IElementsDropdownPresenter";
 import ElementsDropdownViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownViewModel";
 import ElementsDropdownPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownPresenter";
+import SpaceTO from "../../../../../Core/Application/DataTransferObjects/SpaceTO";
+import ElementTO from "../../../../../Core/Application/DataTransferObjects/ElementTO";
 describe("ElementsDropDownPresenter", () => {
   let systemUnderTest: IElementsDropdownPresenter;
   let vm: ElementsDropdownViewModel;
@@ -10,16 +12,30 @@ describe("ElementsDropDownPresenter", () => {
   });
 
   test("should set the  Elements in the ViewModel", () => {
-    const elements = [
+    const elements: ElementTO[] = [
       {
         id: 1,
         name: "Test",
-        elementData: {
-          type: "text",
-        },
+        value: 0,
+        parentSpaceId: 0,
+        parentCourseId: 0,
+        description: "",
+        goals: "",
+        type: "video",
       },
     ];
-    systemUnderTest.presentElements(elements);
+
+    const spaceTO: SpaceTO = {
+      id: 0,
+      name: "",
+      elements: elements,
+      description: "",
+      goals: "",
+      requirements: [],
+      requiredPoints: 0,
+    };
+
+    systemUnderTest.onSpaceDataLoaded(spaceTO);
     expect(vm.elements.Value).toBe(elements);
   });
 });
