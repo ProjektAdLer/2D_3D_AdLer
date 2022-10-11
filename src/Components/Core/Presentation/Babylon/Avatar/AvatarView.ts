@@ -29,6 +29,7 @@ const modelLink = require("../../../../../Assets/3DModel_Avatar_Character_male.g
 export default class AvatarView {
   private scenePresenter: IScenePresenter;
   private navigation: INavigation;
+  private navigationReady: boolean = false;
 
   constructor(
     private viewModel: AvatarViewModel,
@@ -39,14 +40,13 @@ export default class AvatarView {
     );
     this.scenePresenter = scenePresenterFactory(SpaceSceneDefinition);
 
+    // setup event callback for internal navigation setup after global scene navigation setup is completed
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
+    this.navigation.onNavigationReadyObservable.subscribe(
+      () => (this.navigationReady = true)
+    );
 
     this.loadAvatarAsync();
-
-    // setup event callback for internal navigation setup after global scene navigation setup is completed
-    this.navigation.onNavigationReadyObservable.subscribe(
-      this.setupAvatarNavigation
-    );
   }
 
   private async loadAvatarAsync(): Promise<void> {
@@ -57,6 +57,11 @@ export default class AvatarView {
 
     await this.loadMeshAsync();
     this.createCamera();
+
+    while (!this.navigationReady) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+    this.setupAvatarNavigation();
   }
 
   @bind
