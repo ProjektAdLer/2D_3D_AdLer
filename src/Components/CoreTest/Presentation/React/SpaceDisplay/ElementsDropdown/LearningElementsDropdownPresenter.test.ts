@@ -1,10 +1,9 @@
-import IElementsDropdownPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/IElementsDropdownPresenter";
 import ElementsDropdownViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownViewModel";
 import ElementsDropdownPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownPresenter";
 import SpaceTO from "../../../../../Core/Application/DataTransferObjects/SpaceTO";
 import ElementTO from "../../../../../Core/Application/DataTransferObjects/ElementTO";
 describe("ElementsDropDownPresenter", () => {
-  let systemUnderTest: IElementsDropdownPresenter;
+  let systemUnderTest: ElementsDropdownPresenter;
   let vm: ElementsDropdownViewModel;
   beforeEach(() => {
     vm = new ElementsDropdownViewModel();
