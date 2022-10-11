@@ -2,6 +2,8 @@ import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import AbstractPort from "../../../../../Core/Ports/AbstractPort/AbstractPort";
+import ISpaceAdapter from "../../../../../Core/Ports/SpacePort/ISpaceAdapter";
 import IWorldPort from "../../../../../Core/Ports/WorldPort/IWorldPort";
 import ElementsDropdownBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownBuilder";
 import ElementsDropdownController from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownController";
@@ -10,7 +12,7 @@ import ElementsDropdownViewModel from "../../../../../Core/Presentation/React/Sp
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
-const worldPortMock = mock<IWorldPort>();
+const spacePortMock = mock<AbstractPort<ISpaceAdapter>>();
 
 describe("ElementsDropdownBuilder", () => {
   let systemUnderTest: ElementsDropdownBuilder;
@@ -18,8 +20,8 @@ describe("ElementsDropdownBuilder", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind(PORT_TYPES.IWorldPort).toConstantValue(
-      worldPortMock
+    CoreDIContainer.rebind(PORT_TYPES.ISpacePort).toConstantValue(
+      spacePortMock
     );
     CoreDIContainer.rebind(
       CORE_TYPES.IViewModelControllerProvider
@@ -56,14 +58,7 @@ describe("ElementsDropdownBuilder", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 
-    expect(systemUnderTest["presenter"]).toBeDefined();
-    expect(systemUnderTest["presenter"]).toBeInstanceOf(
-      ElementsDropdownPresenter
-    );
-    expect(
-      worldPortMock.registerElementDropdownPresenter
-    ).toHaveBeenCalledTimes(1);
-    expect(worldPortMock.registerElementDropdownPresenter).toHaveBeenCalledWith(
+    expect(spacePortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"]
     );
   });
