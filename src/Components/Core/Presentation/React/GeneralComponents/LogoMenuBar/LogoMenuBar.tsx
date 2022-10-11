@@ -18,13 +18,13 @@ export default function LogoMenuBar() {
           ></img>
         </StyledButton>
       }
-      initialOpen={true}
+      initialOpen={false}
       useAsTriggerOnly={true}
     >
       <StyledContainer className="flex flex-col bg-transparent">
-        <LoadSpaceButton />
+        {/* <LoadSpaceButton /> */}
         <FullscreenSwitch />
-        <DebugPanel />
+        {/* <DebugPanel /> */}
       </StyledContainer>
     </CustomDropdown>
   );
