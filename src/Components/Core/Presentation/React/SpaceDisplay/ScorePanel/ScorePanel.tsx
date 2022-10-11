@@ -11,6 +11,7 @@ export default function ScorePanel() {
     BUILDER_TYPES.IScorePanelBuilder
   );
   const [score] = useObservable<number>(viewModel?.score);
+  const [maxScore] = useObservable<number>(viewModel?.maxScore);
 
   return (
     <div className="grid justify-end">
@@ -18,7 +19,7 @@ export default function ScorePanel() {
         textColor="white"
         className="flex items-center text-lg font-extrabold text-white lg:text-4xl text-shadow"
       >
-        {score ? score : 0}
+        {(score ? score : 0) + " / " + (maxScore ? maxScore : 0)}
         <img
           src={coinIcon}
           className="xl:w-16 lg:w-10 md:w-8 sm:w-8"

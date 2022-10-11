@@ -56,8 +56,6 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     }
 
     this.worldPort.presentWorld(this.toTO(worldEntity));
-    // TODO: Move this outside of this use case - PG
-    await this.loadAvatarUseCase.executeAsync();
 
     lock.release();
     return Promise.resolve(this.toTO(worldEntity));

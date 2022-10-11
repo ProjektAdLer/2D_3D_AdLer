@@ -2,9 +2,18 @@ import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO
 import IDetailSectionPresenter from "./IDetailSectionPresenter";
 import DetailSectionViewModel from "./DetailSectionViewModel";
 import { logger } from "src/Lib/Logger";
+import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
 
 export default class DetailSectionPresenter implements IDetailSectionPresenter {
   constructor(private viewModel: DetailSectionViewModel) {}
+
+  onScoreChanged(
+    score: number,
+    requiredScore: number,
+    maxScore: number,
+    spaceID: ElementID
+  ): void {}
+
   onSpaceDataLoaded(spaceTO: SpaceTO): void {
     spaceTO.id && (this.viewModel.id.Value = spaceTO.id);
 
@@ -34,11 +43,5 @@ export default class DetailSectionPresenter implements IDetailSectionPresenter {
       (this.viewModel.requirements.Value = spaceTO.requirements.map(
         (requirement) => [false, `TBD ${requirement}`]
       ));
-
-    // Old code (Now content):
-    // this.viewModel.content.Value = spaceTO.elements.map((elementTO) => [
-    //   elementTO.elementData.type as ElementTypeStrings,
-    //   elementTO.name,
-    // ]);
   }
 }
