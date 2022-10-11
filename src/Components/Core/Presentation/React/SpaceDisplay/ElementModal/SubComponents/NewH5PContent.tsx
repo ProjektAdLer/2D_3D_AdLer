@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { H5P as H5PPlayer } from "h5p-standalone";
 import ElementModalViewModel from "../ElementModalViewModel";
 import { config } from "../../../../../../../config";
@@ -41,6 +41,7 @@ export default function NewH5PContent({
         };
 
         await new H5PPlayer(el, options);
+
         //@ts-ignore
         H5P.externalDispatcher.on("xAPI", (event: any) => {
           //do something useful with the event
@@ -62,6 +63,14 @@ export default function NewH5PContent({
       }
     };
     debug();
+
+    return () => {
+      // Remove event listener
+      //@ts-ignore
+      H5P.externalDispatcher.off("xAPI");
+      //@ts-ignore
+      H5PIntegration.contents = {};
+    };
   }, []);
 
   return (
