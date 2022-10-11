@@ -68,6 +68,8 @@ export default function NewH5PContent({
       // Remove event listener
       //@ts-ignore
       H5P.externalDispatcher.off("xAPI");
+      //@ts-ignore
+      H5PIntegration.contents = {};
     };
   }, []);
 
