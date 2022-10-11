@@ -4,10 +4,8 @@ import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import AbstractPort from "../../../../../Core/Ports/AbstractPort/AbstractPort";
 import ISpaceAdapter from "../../../../../Core/Ports/SpacePort/ISpaceAdapter";
-import IWorldPort from "../../../../../Core/Ports/WorldPort/IWorldPort";
 import ElementsDropdownBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownBuilder";
 import ElementsDropdownController from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownController";
-import ElementsDropdownPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownPresenter";
 import ElementsDropdownViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownViewModel";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
