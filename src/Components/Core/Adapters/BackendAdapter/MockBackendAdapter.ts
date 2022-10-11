@@ -128,29 +128,62 @@ export default class MockBackendAdapter extends BackendAdapter {
 
   worldTO: IDSL = {
     learningWorld: {
-      idNumber: "ac187daa-e3a7-4dbc-820d-1f9b1a978964",
+      idNumber: "c841bcde-56f6-41b2-97b7-f0f82b0fb0c1",
       identifier: {
         type: "name",
-        value: "World_For_Evaluation",
+        value: "Lernwelt für Evaluation",
       },
-      description:
-        "Eine coole Welt für die Evaluation, welche alle Lernelemente enthält die zur Verfügung stehen",
-      goals:
-        "Eine coole Welt für die Evaluation, welche alle Lernelemente enthält die zur Verfügung stehen",
-      learningWorldContent: [1],
+      description: "Lernwelt für Evaluation",
+      goals: "Lernwelt für Evaluation",
+      learningWorldContent: [],
       learningSpaces: [
         {
           spaceId: 1,
           identifier: {
             type: "name",
-            value: "Space_Number_1",
+            value: "Space_Nummer_1",
           },
-          description: "Der erste und einzige Lernraum",
-          goals: "Der erste und einzige Lernraum",
+          description: "Space_Nummer_1",
+          goals: "Space_Nummer_1",
           learningSpaceContent: [1, 2, 3, 4],
-          requiredPoints: 100,
-          includedPoints: 150,
+          requiredPoints: 0,
           requirements: [],
+        },
+        {
+          spaceId: 2,
+          identifier: {
+            type: "name",
+            value: "Space_Nummer_2",
+          },
+          description: "Space_Nummer_2",
+          goals: "Space_Nummer_2",
+          learningSpaceContent: [5, 6, 7, 8],
+          requiredPoints: 50,
+          requirements: [1, 3],
+        },
+        {
+          spaceId: 3,
+          identifier: {
+            type: "name",
+            value: "Space_Nummer_3",
+          },
+          description: "Space_Nummer_3",
+          goals: "Space_Nummer_3",
+          learningSpaceContent: [9, 10, 11, 12],
+          requiredPoints: 50,
+          requirements: [1],
+        },
+        {
+          spaceId: 4,
+          identifier: {
+            type: "name",
+            value: "Space_Nummer_4",
+          },
+          description: "Space_Nummer_4",
+          goals: "Space_Nummer_4",
+          learningSpaceContent: [13, 14, 15, 16],
+          requiredPoints: 250,
+          requirements: [2, 3],
         },
       ],
       learningElements: [
@@ -158,11 +191,11 @@ export default class MockBackendAdapter extends BackendAdapter {
           id: 1,
           identifier: {
             type: "FileName",
-            value: "Youtube-Link-English",
+            value: "H5p",
           },
-          description: "Ein video zur Vortbildung",
-          goals: "Bitte anschauen",
-          elementCategory: "video",
+          description: "H5p",
+          goals: "H5p",
+          elementCategory: "h5p",
           learningElementValueList: [
             {
               type: "Points",
@@ -175,10 +208,10 @@ export default class MockBackendAdapter extends BackendAdapter {
           id: 2,
           identifier: {
             type: "FileName",
-            value: "Text-File-Example",
+            value: "Text datei",
           },
-          description: "Text-File-Example from the Internet",
-          goals: "Text-File-Example",
+          description: "Text datei",
+          goals: "Text datei",
           elementCategory: "text",
           learningElementValueList: [
             {
@@ -192,27 +225,10 @@ export default class MockBackendAdapter extends BackendAdapter {
           id: 3,
           identifier: {
             type: "FileName",
-            value: "H5P-SchiebeSpiel",
+            value: "2 - Autos",
           },
-          description: "H5P-SchiebeSpiel not too easy",
-          goals: "Do something here",
-          elementCategory: "h5p",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "50",
-            },
-          ],
-          learningSpaceParentId: 1,
-        },
-        {
-          id: 4,
-          identifier: {
-            type: "FileName",
-            value: "Cars is cool",
-          },
-          description: "2 Cars",
-          goals: "What colors are those cars",
+          description: "2 - Autos",
+          goals: "2 - Autos",
           elementCategory: "image",
           learningElementValueList: [
             {
@@ -221,6 +237,227 @@ export default class MockBackendAdapter extends BackendAdapter {
             },
           ],
           learningSpaceParentId: 1,
+        },
+        {
+          id: 4,
+          identifier: {
+            type: "FileName",
+            value: "Video-Url",
+          },
+          description: "Video-Url",
+          goals: "Video-Url",
+          elementCategory: "video",
+          learningElementValueList: [
+            {
+              type: "Points",
+              value: "25",
+            },
+          ],
+          learningSpaceParentId: 1,
+        },
+        {
+          id: 5,
+          identifier: {
+            type: "FileName",
+            value: "Schiebespiel",
+          },
+          description: "Schiebespiel",
+          goals: "Schiebespiel",
+          elementCategory: "h5p",
+          learningElementValueList: [
+            {
+              type: "Points",
+              value: "50",
+            },
+          ],
+          learningSpaceParentId: 2,
+        },
+        {
+          id: 6,
+          identifier: {
+            type: "FileName",
+            value: "Video-Link-Wichtig",
+          },
+          description: "Video-Link-Wichtig",
+          goals: "Video-Link-Wichtig",
+          elementCategory: "video",
+          learningElementValueList: [
+            {
+              type: "Points",
+              value: "75",
+            },
+          ],
+          learningSpaceParentId: 2,
+        },
+        {
+          id: 7,
+          identifier: {
+            type: "FileName",
+            value: "Generisches Bild",
+          },
+          description: "Generisches Bild",
+          goals: "Generisches Bild",
+          elementCategory: "image",
+          learningElementValueList: [
+            {
+              type: "Points",
+              value: "50",
+            },
+          ],
+          learningSpaceParentId: 2,
+        },
+        {
+          id: 8,
+          identifier: {
+            type: "FileName",
+            value: "Ich habe getrunken datei",
+          },
+          description: "Ich habe getrunken datei",
+          goals: "Ich habe getrunken datei",
+          elementCategory: "text",
+          learningElementValueList: [
+            {
+              type: "Points",
+              value: "25",
+            },
+          ],
+          learningSpaceParentId: 2,
+        },
+        {
+          id: 9,
+          identifier: {
+            type: "FileName",
+            value: "H5P-Schieben",
+          },
+          description: "H5P-Schieben",
+          goals: "H5P-Schieben",
+          elementCategory: "h5p",
+          learningElementValueList: [
+            {
+              type: "Points",
+              value: "25",
+            },
+          ],
+          learningSpaceParentId: 3,
+        },
+        {
+          id: 10,
+          identifier: {
+            type: "FileName",
+            value: "Text-Datei script",
+          },
+          description: "Text-Datei script",
+          goals: "Text-Datei script",
+          elementCategory: "text",
+          learningElementValueList: [
+            {
+              type: "Points",
+              value: "25",
+            },
+          ],
+          learningSpaceParentId: 3,
+        },
+        {
+          id: 11,
+          identifier: {
+            type: "FileName",
+            value: "Laptop-Bild",
+          },
+          description: "Laptop-Bild",
+          goals: "Laptop-Bild",
+          elementCategory: "image",
+          learningElementValueList: [
+            {
+              type: "Points",
+              value: "123",
+            },
+          ],
+          learningSpaceParentId: 3,
+        },
+        {
+          id: 12,
+          identifier: {
+            type: "FileName",
+            value: "Video-Url-Youtube",
+          },
+          description: "Video-Url-Youtube",
+          goals: "Video-Url-Youtube",
+          elementCategory: "video",
+          learningElementValueList: [
+            {
+              type: "Points",
+              value: "25",
+            },
+          ],
+          learningSpaceParentId: 3,
+        },
+        {
+          id: 13,
+          identifier: {
+            type: "FileName",
+            value: "Das letzte H5p video",
+          },
+          description: "Das letzte H5p video",
+          goals: "Das letzte H5p video",
+          elementCategory: "h5p",
+          learningElementValueList: [
+            {
+              type: "Points",
+              value: "50",
+            },
+          ],
+          learningSpaceParentId: 4,
+        },
+        {
+          id: 14,
+          identifier: {
+            type: "FileName",
+            value: "Drehbuch zum letzten treffen",
+          },
+          description: "Drehbuch zum letzten treffen",
+          goals: "Drehbuch zum letzten treffen",
+          elementCategory: "text",
+          learningElementValueList: [
+            {
+              type: "Points",
+              value: "45",
+            },
+          ],
+          learningSpaceParentId: 4,
+        },
+        {
+          id: 15,
+          identifier: {
+            type: "FileName",
+            value: "youtube-link-zeug",
+          },
+          description: "youtube-link-zeug",
+          goals: "youtube-link-zeug",
+          elementCategory: "video",
+          learningElementValueList: [
+            {
+              type: "Points",
+              value: "50",
+            },
+          ],
+          learningSpaceParentId: 4,
+        },
+        {
+          id: 16,
+          identifier: {
+            type: "FileName",
+            value: "trickfilm autos",
+          },
+          description: "trickfilm autos",
+          goals: "trickfilm autos",
+          elementCategory: "image",
+          learningElementValueList: [
+            {
+              type: "Points",
+              value: "25",
+            },
+          ],
+          learningSpaceParentId: 4,
         },
       ],
     },

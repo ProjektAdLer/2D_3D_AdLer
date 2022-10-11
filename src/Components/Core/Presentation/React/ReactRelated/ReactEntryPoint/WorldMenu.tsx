@@ -1,20 +1,9 @@
-import { useInjection } from "inversify-react";
-import React, { useEffect } from "react";
-import ILoadWorldUseCase from "src/Components/Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
-import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import React from "react";
 import HeaderBar from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBar";
 import DetailSection from "~ReactComponents/SpaceMenu/DetailSection/DetailSection";
 import SpaceSelection from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection";
 
 export default function WorldMenu() {
-  const loadWorldUseCase = useInjection<ILoadWorldUseCase>(
-    USECASE_TYPES.ILoadWorldUseCase
-  );
-
-  useEffect(() => {
-    loadWorldUseCase.executeAsync();
-  }, []);
-
   return (
     <React.Fragment>
       <div className="grid h-[90vh] max-h-screen grid-cols-10 grid-rows-24 m-6 border-8 rounded-lg root bg-adlerblue-100 border-adlerdarkblue">

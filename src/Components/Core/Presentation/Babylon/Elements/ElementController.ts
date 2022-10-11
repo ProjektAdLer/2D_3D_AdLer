@@ -21,6 +21,7 @@ export default class ElementController implements IElementController {
       value: this.viewModel.value.Value,
       parentSpaceId: 0,
       parentCourseId: 0,
+      hasScored: false,
     });
   }
 

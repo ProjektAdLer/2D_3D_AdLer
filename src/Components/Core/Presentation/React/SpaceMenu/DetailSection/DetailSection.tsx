@@ -18,16 +18,27 @@ export default function DetailSection() {
   const [name] = useObservable<string>(viewModel.name);
   const [description] = useObservable<string>(viewModel.description);
   const [goals] = useObservable<string>(viewModel.goals);
-  const [elements] = useObservable<[ElementTypeStrings, string][]>(
+  const [elements] = useObservable<[ElementTypeStrings, string, boolean][]>(
     viewModel.elements
   );
   const [requiredPoints] = useObservable<number>(viewModel.requiredPoints);
-  // const [includedPoints] = useObservable<number>(viewModel.includedPoints);
-  const [requirements] = useObservable<[boolean, string][]>(
-    viewModel.requirements
+  const [requirements] = useObservable<number[]>(viewModel.requirements);
+  const [spaces] = useObservable<[number, string][]>(viewModel.spaces);
+  const [spaceCompleted] = useObservable<[number, boolean][]>(
+    viewModel.spaceCompleted
   );
 
-  if (name === undefined || description === undefined || elements === undefined)
+  // return if any of the observables is undefined
+  if (
+    name === undefined ||
+    description === undefined ||
+    goals === undefined ||
+    elements === undefined ||
+    requiredPoints === undefined ||
+    requirements === undefined ||
+    spaces === undefined ||
+    spaceCompleted === undefined
+  )
     return null;
 
   return (
@@ -70,10 +81,12 @@ export default function DetailSection() {
             {elements.map((element) => {
               return (
                 <div key={element[1]} className="flex flex-row">
-                  <div className="p-1 xl:w-8 lg:w-6 md:w-2 sm:w-2">
-                    {getElementIcon(element[0])}
-                  </div>
-                  <div>{" " + element[1] + " (" + element[0] + ")"}</div>
+                  <CheckBoxEntry checked={element[2]}>
+                    <div className="p-1 xl:w-8 lg:w-6 md:w-2 sm:w-2">
+                      {getElementIcon(element[0])}
+                    </div>
+                    <div>{" " + element[1] + " (" + element[0] + ")"}</div>
+                  </CheckBoxEntry>
                 </div>
               );
             })}
@@ -90,7 +103,6 @@ export default function DetailSection() {
           </div>
         </div>
       )}
-      {/* TODO: IncludedPoints*/}
       {requirements.length > 0 && (
         <div>
           <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
@@ -98,12 +110,15 @@ export default function DetailSection() {
           </div>
           <div className="items-start ml-6 text-lg roboto-regular">
             {requirements.map((requirement) => {
+              let name = spaces.find((space) => space[0] === requirement)![1];
+              let completed = spaceCompleted.find(
+                (space) => space[0] === requirement
+              )![1];
+
               return (
-                <CheckBoxEntry
-                  key={requirement[1]}
-                  checked={requirement[0]}
-                  text={requirement[1]}
-                />
+                <CheckBoxEntry key={name + requirement} checked={completed}>
+                  {name}
+                </CheckBoxEntry>
               );
             })}
           </div>

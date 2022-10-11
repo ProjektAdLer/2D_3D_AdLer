@@ -26,6 +26,7 @@ export const minimalGetWorldDataResponse: WorldTO = {
           goals: "TestGoals",
           parentSpaceId: 1,
           parentCourseId: 1,
+          hasScored: false,
         },
       ],
     },
@@ -61,6 +62,7 @@ export const expectedElementTO: ElementTO = {
   type: expect.any(String),
   parentSpaceId: expect.any(Number),
   parentCourseId: expect.any(Number),
+  hasScored: expect.any(Boolean),
 };
 
 export const mockDSL: IDSL = {
@@ -86,7 +88,6 @@ export const mockDSL: IDSL = {
         goals: "Der erste und einzige Lernraum",
         learningSpaceContent: [1, 2, 3, 4],
         requiredPoints: 100,
-        includedPoints: 150,
         requirements: [],
       },
     ],

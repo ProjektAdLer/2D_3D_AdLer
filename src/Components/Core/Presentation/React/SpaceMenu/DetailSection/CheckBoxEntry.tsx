@@ -1,14 +1,16 @@
+import { ReactNode } from "react";
+
 export default function CheckBoxEntry({
   checked,
-  text,
+  children,
 }: {
   checked: boolean;
-  text: string;
+  children: ReactNode;
 }) {
   return (
     <div className="flex flex-row">
       <input type="checkbox" checked={checked} readOnly={true} />
-      <div>{text}</div>
+      <div>{children}</div>
     </div>
   );
 }

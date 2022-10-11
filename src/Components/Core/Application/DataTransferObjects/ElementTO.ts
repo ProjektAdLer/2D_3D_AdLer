@@ -10,4 +10,5 @@ export default class ElementTO {
   description: string;
   goals: string;
   type: ElementTypeStrings;
+  hasScored: boolean;
 }

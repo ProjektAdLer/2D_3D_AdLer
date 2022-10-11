@@ -23,7 +23,6 @@ export type APISpace = {
   learningSpaceContent: number[];
   requirements: number[];
   requiredPoints: number;
-  includedPoints: number;
 };
 
 export type APIElement = {
