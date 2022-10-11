@@ -1,20 +1,20 @@
 import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
-import WorldNamePanelController from "./WorldNamePanelController";
-import WorldNamePanelViewModel from "./WorldNamePanelViewModel";
+import SpaceNamePanelController from "./SpaceNamePanelController";
+import SpaceNamePanelViewModel from "./SpaceNamePanelViewModel";
 import worldIcon from "../../../../../../Assets/icons/lernwelt_icon.svg";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 
-export default function WorldNamePanel() {
+export default function SpaceNamePanel() {
   const [viewModel] = useBuilder<
-    WorldNamePanelViewModel,
-    WorldNamePanelController
+    SpaceNamePanelViewModel,
+    SpaceNamePanelController
   >(BUILDER_TYPES.IWorldNamePanelBuilder);
 
-  const [worldName] = useObservable<string>(viewModel?.worldName);
+  const [name] = useObservable<string>(viewModel?.name);
 
-  if (!worldName) return null;
+  if (!name) return null;
 
   return (
     <div className="flex justify-center">
@@ -25,7 +25,7 @@ export default function WorldNamePanel() {
           alt="Learning-Space-Icon"
         ></img>
         <div className="text-xl font-extrabold text-white lg:text-4xl text-shadow">
-          {worldName}
+          {name}
         </div>
       </StyledContainer>
     </div>

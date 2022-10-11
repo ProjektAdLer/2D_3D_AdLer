@@ -4,7 +4,7 @@ import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIs
 import ElementModal from "~ReactComponents/SpaceDisplay/ElementModal/ElementModal";
 import ElementsDropdown from "~ReactComponents/SpaceDisplay/ElementsDropdown/ElementsDropdown";
 import SpaceGoalPanel from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanel";
-import WorldNamePanel from "~ReactComponents/SpaceDisplay/WorldNamePanel/WorldNamePanel";
+import SpaceNamePanel from "~ReactComponents/SpaceDisplay/SpaceNamePanel/SpaceNamePanel";
 import NotificationManager from "~ReactComponents/GeneralComponents/NotificationManager/NotificationManager";
 import MoodleLoginForm from "~ReactComponents/GeneralComponents/MoodleLoginForm/MoodleLoginForm";
 import LogoMenuBar from "~ReactComponents/GeneralComponents/LogoMenuBar/LogoMenuBar";
@@ -27,7 +27,7 @@ export default function Space() {
           <ScorePanel />
         </div>
         <div className="z-10 col-span-5 col-start-3 row-start-1">
-          <WorldNamePanel />
+          <SpaceNamePanel />
         </div>
         <div className="z-10 col-span-1 col-start-3 row-start-1">
           <SpaceGoalPanel />

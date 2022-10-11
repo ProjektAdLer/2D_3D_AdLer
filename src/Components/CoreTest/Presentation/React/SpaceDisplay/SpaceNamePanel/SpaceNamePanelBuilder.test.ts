@@ -2,30 +2,33 @@ import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import IWorldPort from "../../../../../Core/Ports/WorldPort/IWorldPort";
-import WorldNamePanelBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/WorldNamePanel/WorldNamePanelBuilder";
-import WorldNamePanelController from "../../../../../Core/Presentation/React/SpaceDisplay/WorldNamePanel/WorldNamePanelController";
-import WorldNamePanelPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/WorldNamePanel/WorldNamePanelPresenter";
-import WorldNamePanelViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/WorldNamePanel/WorldNamePanelViewModel";
+import AbstractPort from "../../../../../Core/Ports/AbstractPort/AbstractPort";
+import ISpaceAdapter from "../../../../../Core/Ports/SpacePort/ISpaceAdapter";
+import SpaceNamePanelBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/SpaceNamePanel/SpaceNamePanelBuilder";
+import SpaceNamePanelController from "../../../../../Core/Presentation/React/SpaceDisplay/SpaceNamePanel/SpaceNamePanelController";
+import SpaceNamePanelPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/SpaceNamePanel/SpaceNamePanelPresenter";
+import SpaceNamePanelViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/SpaceNamePanel/SpaceNamePanelViewModel";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
-const worldPort = mock<IWorldPort>();
+const spacePortMock = mock<AbstractPort<ISpaceAdapter>>();
 
-describe("WorldNamePanelBuilder", () => {
-  let systemUnderTest: WorldNamePanelBuilder;
+describe("SpaceNamePanelBuilder", () => {
+  let systemUnderTest: SpaceNamePanelBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind(PORT_TYPES.IWorldPort).toConstantValue(worldPort);
+    CoreDIContainer.rebind(PORT_TYPES.ISpacePort).toConstantValue(
+      spacePortMock
+    );
     CoreDIContainer.rebind(
       CORE_TYPES.IViewModelControllerProvider
     ).toConstantValue(viewModelControllerProviderMock);
   });
 
   beforeEach(() => {
-    systemUnderTest = new WorldNamePanelBuilder();
+    systemUnderTest = new SpaceNamePanelBuilder();
   });
 
   afterAll(() => {
@@ -38,7 +41,7 @@ describe("WorldNamePanelBuilder", () => {
 
     expect(systemUnderTest["controller"]).toBeDefined();
     expect(systemUnderTest["controller"]).toBeInstanceOf(
-      WorldNamePanelController
+      SpaceNamePanelController
     );
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledTimes(
       1
@@ -46,7 +49,7 @@ describe("WorldNamePanelBuilder", () => {
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledWith(
       systemUnderTest["viewModel"],
       systemUnderTest["controller"],
-      WorldNamePanelViewModel
+      SpaceNamePanelViewModel
     );
   });
 
@@ -56,10 +59,9 @@ describe("WorldNamePanelBuilder", () => {
 
     expect(systemUnderTest["presenter"]).toBeDefined();
     expect(systemUnderTest["presenter"]).toBeInstanceOf(
-      WorldNamePanelPresenter
+      SpaceNamePanelPresenter
     );
-    expect(worldPort.registerWorldNamePanelPresenter).toHaveBeenCalledTimes(1);
-    expect(worldPort.registerWorldNamePanelPresenter).toHaveBeenCalledWith(
+    expect(spacePortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"]
     );
   });
