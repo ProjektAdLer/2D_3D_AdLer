@@ -8,7 +8,7 @@ export default class HeaderBarController implements IHeaderBarController {
       "Menu button functionality not implemented. Current functionality is mock only."
     );
 
-    history.push("/space");
+    history.push("/");
   }
   onBackButtonClicked(): void {
     history.back();
