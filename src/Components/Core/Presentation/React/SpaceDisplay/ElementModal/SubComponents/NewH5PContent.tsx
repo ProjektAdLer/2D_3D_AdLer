@@ -7,7 +7,6 @@ import IScoreH5PElement from "src/Components/Core/Application/UseCases/ScoreH5PE
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import { useInjection } from "inversify-react";
 import IGetElementSourceUseCase from "src/Components/Core/Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
-import { logger } from "src/Lib/Logger";
 
 export default function NewH5PContent({
   viewModel,
@@ -15,8 +14,6 @@ export default function NewH5PContent({
   viewModel: ElementModalViewModel;
 }) {
   const h5pContainerRef = useRef<HTMLDivElement>(null);
-
-  const [h5pId, setH5pId] = useState<string>();
 
   const getElementSourceUseCase = useInjection<IGetElementSourceUseCase>(
     USECASE_TYPES.IGetElementSource
@@ -41,16 +38,10 @@ export default function NewH5PContent({
           h5pJsonPath: h5pJsonURL,
           frameJs: baseURL + "common/h5pBase/frame.bundle.js",
           frameCss: baseURL + "common/h5pBase/styles/h5p.css",
-          id: "______________________________________",
         };
 
         await new H5PPlayer(el, options);
 
-        //@ts-ignore
-        const h5pId = Object.keys(H5PIntegration.contents)[0];
-        //@ts-ignore
-
-        setH5pId(h5pId);
         //@ts-ignore
         H5P.externalDispatcher.on("xAPI", (event: any) => {
           //do something useful with the event
