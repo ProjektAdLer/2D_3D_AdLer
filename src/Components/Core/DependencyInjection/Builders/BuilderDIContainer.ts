@@ -18,7 +18,7 @@ import DebugPanelBuilder from "../../Presentation/React/SpaceDisplay/DebugPanel/
 import WorldNamePanelBuilder from "../../Presentation/React/SpaceDisplay/WorldNamePanel/WorldNamePanelBuilder";
 import LoadSpaceButtonBuilder from "../../Presentation/React/GeneralComponents/LoadSpaceButton/LoadSpaceButtonBuilder";
 import FullscreenSwitchBuilder from "../../Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
-import WorldGoalPanelBuilder from "~ReactComponents/SpaceDisplay/WorldGoalPanel/WorldGoalPanelBuilder";
+import SpaceGoalPanelBuilder from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanelBuilder";
 import HeaderBarBuilder from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBarBuilder";
 import SpaceSelectionBuilder from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelectionBuilder";
 import DetailSectionBuilder from "~ReactComponents/SpaceMenu/DetailSection/DetailSectionBuilder";
@@ -65,8 +65,8 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IFullscreenSwitchBuilder).to(
     FullscreenSwitchBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IWorldGoalPanelBuilder).to(
-    WorldGoalPanelBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceGoalPanelBuilder).to(
+    SpaceGoalPanelBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IHeaderBarBuilder).to(
     HeaderBarBuilder

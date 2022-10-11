@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import BottomTooltip from "~ReactComponents/SpaceDisplay/BottomTooltip/BottomTooltip";
 import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 import ElementModal from "~ReactComponents/SpaceDisplay/ElementModal/ElementModal";
 import ElementsDropdown from "~ReactComponents/SpaceDisplay/ElementsDropdown/ElementsDropdown";
-import WorldGoalPanel from "~ReactComponents/SpaceDisplay/WorldGoalPanel/WorldGoalPanel";
+import SpaceGoalPanel from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanel";
 import WorldNamePanel from "~ReactComponents/SpaceDisplay/WorldNamePanel/WorldNamePanel";
 import NotificationManager from "~ReactComponents/GeneralComponents/NotificationManager/NotificationManager";
 import MoodleLoginForm from "~ReactComponents/GeneralComponents/MoodleLoginForm/MoodleLoginForm";
@@ -30,7 +30,7 @@ export default function Space() {
           <WorldNamePanel />
         </div>
         <div className="z-10 col-span-1 col-start-3 row-start-1">
-          <WorldGoalPanel />
+          <SpaceGoalPanel />
         </div>
         <div className="col-span-9 col-start-1 row-span-6 row-start-1">
           <BabylonCanvas

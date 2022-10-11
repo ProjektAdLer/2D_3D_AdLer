@@ -15,7 +15,7 @@ const BUILDER_TYPES = {
   IWorldNamePanelBuilder: Symbol("IWorldNamePanelBuilder"),
   ILoadSpaceButtonBuilder: Symbol("ILoadSpaceButtonBuilder"),
   IFullscreenSwitchBuilder: Symbol("IFullscreenSwitchBuilder"),
-  IWorldGoalPanelBuilder: Symbol("IWorldGoalPanelBuilder"),
+  ISpaceGoalPanelBuilder: Symbol("ISpaceGoalPanelBuilder"),
   IHeaderBarBuilder: Symbol("IHeaderBarBuilder"),
   ISpaceSelectionBuilder: Symbol("ISpaceSelectionBuilder"),
   IDetailSectionBuilder: Symbol("IDetailSectionBuilder"),

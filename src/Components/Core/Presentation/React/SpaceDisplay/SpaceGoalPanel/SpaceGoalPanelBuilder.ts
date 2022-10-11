@@ -1,27 +1,29 @@
 import { injectable } from "inversify";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
-import WorldGoalPanelController from "./WorldGoalPanelController";
-import WorldGoalPanelPresenter from "./WorldGoalPanelPresenter";
-import WorldGoalPanelViewModel from "./WorldGoalPanelViewModel";
+import SpaceGoalPanelController from "./SpaceGoalPanelController";
+import SpaceGoalPanelPresenter from "./SpaceGoalPanelPresenter";
+import SpaceGoalPanelViewModel from "./SpaceGoalPanelViewModel";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
 import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import IWorldPort from "../../../../Ports/WorldPort/IWorldPort";
+import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
+import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
 
 @injectable()
-export default class WorldGoalPanelBuilder extends PresentationBuilder<
-  WorldGoalPanelViewModel,
-  WorldGoalPanelController,
+export default class SpaceGoalPanelBuilder extends PresentationBuilder<
+  SpaceGoalPanelViewModel,
+  SpaceGoalPanelController,
   undefined,
-  WorldGoalPanelPresenter
+  SpaceGoalPanelPresenter
 > {
   constructor() {
     super(
-      WorldGoalPanelViewModel,
-      WorldGoalPanelController,
+      SpaceGoalPanelViewModel,
+      SpaceGoalPanelController,
       undefined,
-      WorldGoalPanelPresenter
+      SpaceGoalPanelPresenter
     );
   }
 
@@ -29,13 +31,13 @@ export default class WorldGoalPanelBuilder extends PresentationBuilder<
     super.buildController();
     CoreDIContainer.get<ViewModelControllerProvider>(
       CORE_TYPES.IViewModelControllerProvider
-    ).registerTupel(this.viewModel, this.controller, WorldGoalPanelViewModel);
+    ).registerTupel(this.viewModel, this.controller, SpaceGoalPanelViewModel);
   }
 
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<IWorldPort>(
-      PORT_TYPES.IWorldPort
-    ).registerWorldGoalPanelPresenter(this.presenter!);
+    CoreDIContainer.get<AbstractPort<ISpaceAdapter>>(
+      PORT_TYPES.ISpacePort
+    ).registerAdapter(this.presenter!);
   }
 }

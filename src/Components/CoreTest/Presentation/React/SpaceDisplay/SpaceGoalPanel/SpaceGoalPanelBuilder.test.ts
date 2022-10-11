@@ -2,30 +2,33 @@ import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import IWorldPort from "../../../../../Core/Ports/WorldPort/IWorldPort";
-import WorldGoalPanelBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/WorldGoalPanel/WorldGoalPanelBuilder";
-import WorldGoalPanelController from "../../../../../Core/Presentation/React/SpaceDisplay/WorldGoalPanel/WorldGoalPanelController";
-import WorldGoalPanelPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/WorldGoalPanel/WorldGoalPanelPresenter";
-import WorldGoalPanelViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/WorldGoalPanel/WorldGoalPanelViewModel";
+import AbstractPort from "../../../../../Core/Ports/AbstractPort/AbstractPort";
+import ISpaceAdapter from "../../../../../Core/Ports/SpacePort/ISpaceAdapter";
+import SpaceGoalPanelBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanelBuilder";
+import SpaceGoalPanelController from "../../../../../Core/Presentation/React/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanelController";
+import SpaceGoalPanelPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanelPresenter";
+import SpaceGoalPanelViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanelViewModel";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
-const worldPort = mock<IWorldPort>();
+const spacePortMock = mock<AbstractPort<ISpaceAdapter>>();
 
 describe("WorldGoalPanelBuilder", () => {
-  let systemUnderTest: WorldGoalPanelBuilder;
+  let systemUnderTest: SpaceGoalPanelBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind(PORT_TYPES.IWorldPort).toConstantValue(worldPort);
+    CoreDIContainer.rebind(PORT_TYPES.ISpacePort).toConstantValue(
+      spacePortMock
+    );
     CoreDIContainer.rebind(
       CORE_TYPES.IViewModelControllerProvider
     ).toConstantValue(viewModelControllerProviderMock);
   });
 
   beforeEach(() => {
-    systemUnderTest = new WorldGoalPanelBuilder();
+    systemUnderTest = new SpaceGoalPanelBuilder();
   });
 
   afterAll(() => {
@@ -38,7 +41,7 @@ describe("WorldGoalPanelBuilder", () => {
 
     expect(systemUnderTest["controller"]).toBeDefined();
     expect(systemUnderTest["controller"]).toBeInstanceOf(
-      WorldGoalPanelController
+      SpaceGoalPanelController
     );
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledTimes(
       1
@@ -46,7 +49,7 @@ describe("WorldGoalPanelBuilder", () => {
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledWith(
       systemUnderTest["viewModel"],
       systemUnderTest["controller"],
-      WorldGoalPanelViewModel
+      SpaceGoalPanelViewModel
     );
   });
 
@@ -56,10 +59,9 @@ describe("WorldGoalPanelBuilder", () => {
 
     expect(systemUnderTest["presenter"]).toBeDefined();
     expect(systemUnderTest["presenter"]).toBeInstanceOf(
-      WorldGoalPanelPresenter
+      SpaceGoalPanelPresenter
     );
-    expect(worldPort.registerWorldGoalPanelPresenter).toHaveBeenCalledTimes(1);
-    expect(worldPort.registerWorldGoalPanelPresenter).toHaveBeenCalledWith(
+    expect(spacePortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"]
     );
   });

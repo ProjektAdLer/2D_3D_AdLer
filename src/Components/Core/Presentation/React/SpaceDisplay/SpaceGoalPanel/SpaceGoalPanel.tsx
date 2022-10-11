@@ -1,25 +1,25 @@
 import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
-import WorldGoalPanelController from "./WorldGoalPanelController";
-import WorldGoalPanelViewModel from "./WorldGoalPanelViewModel";
+import SpaceGoalPanelController from "./SpaceGoalPanelController";
+import SpaceGoalPanelViewModel from "./SpaceGoalPanelViewModel";
 import goalIcon from "../../../../../../Assets/icons/learninggoal-icon-nobg.svg";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import { useState } from "react";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 
-export default function WorldGoalPanel() {
+export default function SpaceGoalPanel() {
   const [viewModel] = useBuilder<
-    WorldGoalPanelViewModel,
-    WorldGoalPanelController
-  >(BUILDER_TYPES.IWorldGoalPanelBuilder);
+    SpaceGoalPanelViewModel,
+    SpaceGoalPanelController
+  >(BUILDER_TYPES.ISpaceGoalPanelBuilder);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [worldGoal] = useObservable<string>(viewModel?.worldGoal);
+  const [goal] = useObservable<string>(viewModel?.goal);
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
 
-  if (!worldGoal) return null;
+  if (!goal) return null;
   if (!isOpen)
     // wenn nicht geklickt
     return (
@@ -55,7 +55,7 @@ export default function WorldGoalPanel() {
             src={goalIcon}
             alt="Learning-Goal-Icon"
           ></img>
-          {worldGoal}
+          {goal}
         </StyledContainer>
       </div>
     );
