@@ -25,12 +25,6 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
           >
             Gehe zum Lernraum Menü
           </StyledButton>
-          <StyledButton
-            shape="freefloatleft"
-            onClick={() => history.push("/space")}
-          >
-            Gehe zum Lernraum
-          </StyledButton>
         </p>
         <img
           className="col-start-1 row-start-1 col-span-3 row-span-4 m-4 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-3 w-[60vw] h-[60vh] self-center justify-self-center"
