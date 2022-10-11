@@ -6,8 +6,9 @@ import ElementsDropdownViewModel from "./ElementsDropdownViewModel";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
 import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
-import IWorldPort from "../../../../Ports/WorldPort/IWorldPort";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
+import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
+import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
 
 /*
 This Template Provides the whole scaffolding for a React Component.
@@ -42,8 +43,8 @@ export default class ElementsDropdownBuilder extends PresentationBuilder<
 
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<IWorldPort>(
-      PORT_TYPES.IWorldPort
-    ).registerElementDropdownPresenter(this.presenter!);
+    CoreDIContainer.get<AbstractPort<ISpaceAdapter>>(
+      PORT_TYPES.ISpacePort
+    ).registerAdapter(this.presenter!);
   }
 }

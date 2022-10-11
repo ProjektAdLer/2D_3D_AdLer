@@ -1,6 +1,5 @@
 import { injectable } from "inversify";
 import IWorldPort from "./IWorldPort";
-import IDropdownPresenter from "../../Presentation/React/SpaceDisplay/ElementsDropdown/IElementsDropdownPresenter";
 import IWorldNamePanelPresenter from "../../Presentation/React/SpaceDisplay/WorldNamePanel/IWorldNamePanelPresenter";
 import IWorldGoalPanelPresenter from "~ReactComponents/SpaceDisplay/WorldGoalPanel/IWorldGoalPanelPresenter";
 import { logger } from "src/Lib/Logger";
@@ -13,7 +12,6 @@ export default class WorldPort
   extends AbstractPort<IWorldAdapter>
   implements IWorldPort
 {
-  private elementDropdownPresenter: IDropdownPresenter;
   private worldNamePanelPresenter: IWorldNamePanelPresenter;
   private worldGoalPanelPresenter: IWorldGoalPanelPresenter;
 
@@ -23,16 +21,6 @@ export default class WorldPort
     // call UI presenter to present new data
     this.worldNamePanelPresenter.displayWorldName(worldTO.worldName);
     this.worldGoalPanelPresenter.displayWorldGoal(worldTO.worldGoal);
-    this.elementDropdownPresenter.presentElements(worldTO.spaces[0].elements);
-  }
-
-  public registerElementDropdownPresenter(
-    elementDropdownPresenter: IDropdownPresenter
-  ): void {
-    if (this.elementDropdownPresenter) {
-      logger.warn("ElementDropdownPresenter is already registered");
-    }
-    this.elementDropdownPresenter = elementDropdownPresenter;
   }
 
   public registerWorldNamePanelPresenter(
