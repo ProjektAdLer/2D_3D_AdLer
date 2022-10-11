@@ -1,8 +1,11 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
+import { Provider } from "inversify-react";
 import { mock } from "jest-mock-extended";
-import ElementModalViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
-import NewH5PContent from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/NewH5PContent";
+import ElementModalViewModel from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
+import NewH5PContent from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/NewH5PContent";
+import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
+import React from "react";
 
 const viewModel = new ElementModalViewModel();
 viewModel.id.Value = 1;
