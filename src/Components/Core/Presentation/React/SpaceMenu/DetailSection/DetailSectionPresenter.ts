@@ -29,31 +29,23 @@ export default class DetailSectionPresenter implements IDetailSectionPresenter {
   }
 
   onSpaceDataLoaded(spaceTO: SpaceTO): void {
-    spaceTO.id && (this.viewModel.id.Value = spaceTO.id);
+    this.viewModel.id.Value = spaceTO.id;
 
-    !spaceTO.name && logger.warn("SpaceTO has no name!");
-    spaceTO.name && (this.viewModel.name.Value = spaceTO.name);
+    this.viewModel.name.Value = spaceTO.name;
 
-    !spaceTO.description &&
-      logger.warn("SpaceTO has an undefined description!");
-    spaceTO.description &&
-      (this.viewModel.description.Value = spaceTO.description);
+    this.viewModel.description.Value = spaceTO.description;
 
-    spaceTO.goals && (this.viewModel.goals.Value = spaceTO.goals);
+    this.viewModel.goals.Value = spaceTO.goals;
 
-    !spaceTO.elements && logger.warn("SpaceTO has no elements!");
-    spaceTO.elements &&
-      (this.viewModel.elements.Value = spaceTO.elements.map((elementTO) => [
-        elementTO.type,
-        elementTO.name,
-        elementTO.hasScored,
-        elementTO.value,
-      ]));
+    this.viewModel.elements.Value = spaceTO.elements.map((elementTO) => [
+      elementTO.type,
+      elementTO.name,
+      elementTO.hasScored,
+      elementTO.value,
+    ]);
 
-    spaceTO.requiredPoints &&
-      (this.viewModel.requiredPoints.Value = spaceTO.requiredPoints);
+    this.viewModel.requiredPoints.Value = spaceTO.requiredPoints;
 
-    spaceTO.requirements &&
-      (this.viewModel.requirements.Value = spaceTO.requirements);
+    this.viewModel.requirements.Value = spaceTO.requirements;
   }
 }

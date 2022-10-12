@@ -24,7 +24,7 @@ export default function DetailSection() {
   const [requiredPoints] = useObservable<number>(viewModel.requiredPoints);
   const [requirements] = useObservable<number[]>(viewModel.requirements);
   const [spaces] = useObservable<[number, string][]>(viewModel.spaces);
-  const [spaceCompleted] = useObservable<[number, boolean][]>(
+  const [spacesCompleted] = useObservable<[number, boolean][]>(
     viewModel.spaceCompleted
   );
 
@@ -37,7 +37,7 @@ export default function DetailSection() {
     requiredPoints === undefined ||
     requirements === undefined ||
     spaces === undefined ||
-    spaceCompleted === undefined
+    spacesCompleted === undefined
   )
     return null;
 
@@ -119,7 +119,7 @@ export default function DetailSection() {
           <div className="items-start ml-6 text-lg roboto-regular">
             {requirements.map((requirement) => {
               let name = spaces.find((space) => space[0] === requirement)![1];
-              let completed = spaceCompleted.find(
+              let completed = spacesCompleted.find(
                 (space) => space[0] === requirement
               )![1];
 
@@ -132,13 +132,23 @@ export default function DetailSection() {
           </div>
         </div>
       )}
-      <StyledButton
-        shape="freefloatleft"
-        className=""
-        onClick={controller.onSpaceButtonClicked}
-      >
-        {"Lernraum '" + name + "' betreten!"}
-      </StyledButton>
+      {viewModel.requirements.Value.every((requirement) => {
+        // check for each requirement if the space is completed
+        let spaceCompletedTuple = spacesCompleted.find(
+          (space) => space[0] === requirement
+        );
+        return spaceCompletedTuple !== undefined
+          ? spaceCompletedTuple[1]
+          : false;
+      }) && (
+        <StyledButton
+          shape="freefloatleft"
+          className=""
+          onClick={controller.onSpaceButtonClicked}
+        >
+          {"Lernraum '" + name + "' betreten!"}
+        </StyledButton>
+      )}
     </div>
   );
 }

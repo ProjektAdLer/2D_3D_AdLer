@@ -12,12 +12,10 @@ export default class DetailSectionViewModel {
   >([]);
 
   // space data
-  id: Observable<ElementID> = new Observable<ElementID>();
-  name: Observable<string> = new Observable<string>("Placeholder Name");
-  description: Observable<string> = new Observable<string>(
-    "Placeholder Description"
-  );
-  goals: Observable<string> = new Observable<string>("Placeholder Goals");
+  id: Observable<ElementID> = new Observable<ElementID>(undefined);
+  name: Observable<string> = new Observable<string>("");
+  description: Observable<string> = new Observable<string>("");
+  goals: Observable<string> = new Observable<string>("");
   requiredPoints: Observable<number> = new Observable<number>(0);
   requirements: Observable<number[]> = new Observable<number[]>([]);
 
