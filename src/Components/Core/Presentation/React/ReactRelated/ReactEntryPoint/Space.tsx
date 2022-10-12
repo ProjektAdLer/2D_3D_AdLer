@@ -12,6 +12,7 @@ import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/Style
 import ScorePanel from "~ReactComponents/SpaceDisplay/ScorePanel/ScorePanel";
 import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
 import SpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/SpaceSceneDefinition";
+import SpaceCompletionModal from "~ReactComponents/SpaceDisplay/SpaceCompletionModal/SpaceCompletionModal";
 
 export default function Space() {
   return (
@@ -44,6 +45,7 @@ export default function Space() {
         <div className="z-10">
           <ElementModal />
         </div>
+        {/* <SpaceCompletionModal /> */}
         <div className="z-10">
           <MoodleLoginForm />
         </div>
