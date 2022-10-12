@@ -47,6 +47,7 @@ export default class DetailSectionPresenter implements IDetailSectionPresenter {
         elementTO.type,
         elementTO.name,
         elementTO.hasScored,
+        elementTO.value,
       ]));
 
     spaceTO.requiredPoints &&

@@ -18,11 +18,12 @@ export default class DetailSectionViewModel {
     "Placeholder Description"
   );
   goals: Observable<string> = new Observable<string>("Placeholder Goals");
-
-  elements: Observable<[ElementTypeStrings, string, boolean][]> =
-    new Observable<[ElementTypeStrings, string, boolean][]>([]);
   requiredPoints: Observable<number> = new Observable<number>(0);
   requirements: Observable<number[]> = new Observable<number[]>([]);
+
+  // element data (type, name, hasScored, points)
+  elements: Observable<[ElementTypeStrings, string, boolean, number][]> =
+    new Observable<[ElementTypeStrings, string, boolean, number][]>([]);
 }
 
 // DSL CONTENT:

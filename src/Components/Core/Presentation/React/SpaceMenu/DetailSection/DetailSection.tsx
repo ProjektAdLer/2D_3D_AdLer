@@ -18,9 +18,9 @@ export default function DetailSection() {
   const [name] = useObservable<string>(viewModel.name);
   const [description] = useObservable<string>(viewModel.description);
   const [goals] = useObservable<string>(viewModel.goals);
-  const [elements] = useObservable<[ElementTypeStrings, string, boolean][]>(
-    viewModel.elements
-  );
+  const [elements] = useObservable<
+    [ElementTypeStrings, string, boolean, number][]
+  >(viewModel.elements);
   const [requiredPoints] = useObservable<number>(viewModel.requiredPoints);
   const [requirements] = useObservable<number[]>(viewModel.requirements);
   const [spaces] = useObservable<[number, string][]>(viewModel.spaces);
@@ -85,7 +85,15 @@ export default function DetailSection() {
                     <div className="p-1 xl:w-8 lg:w-6 md:w-2 sm:w-2">
                       {getElementIcon(element[0])}
                     </div>
-                    <div>{" " + element[1] + " (" + element[0] + ")"}</div>
+                    <div>
+                      {" " +
+                        element[1] +
+                        " (" +
+                        element[0] +
+                        ", " +
+                        element[3] +
+                        " Punkte)"}
+                    </div>
                   </CheckBoxEntry>
                 </div>
               );
