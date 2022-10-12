@@ -22,6 +22,7 @@ import SpaceGoalPanelBuilder from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/
 import HeaderBarBuilder from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBarBuilder";
 import SpaceSelectionBuilder from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelectionBuilder";
 import DetailSectionBuilder from "~ReactComponents/SpaceMenu/DetailSection/DetailSectionBuilder";
+import SpaceCompletionModalBuilder from "~ReactComponents/SpaceDisplay/SpaceCompletionModal/SpaceCompletionModalBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -76,6 +77,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IDetailSectionBuilder).to(
     DetailSectionBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceCompletionModalBuilder).to(
+    SpaceCompletionModalBuilder
   );
 });
 

@@ -19,6 +19,7 @@ const BUILDER_TYPES = {
   IHeaderBarBuilder: Symbol("IHeaderBarBuilder"),
   ISpaceSelectionBuilder: Symbol("ISpaceSelectionBuilder"),
   IDetailSectionBuilder: Symbol("IDetailSectionBuilder"),
+  ISpaceCompletionModalBuilder: Symbol("ISpaceCompletionModalBuilder"),
 };
 
 export default BUILDER_TYPES;
