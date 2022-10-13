@@ -28,12 +28,14 @@ export default function HeaderBar() {
             {title}
           </StyledContainer>
         </div>
-        {/* <StyledButton
+        <div>
+          {/* <StyledButton
           className="col-span-1 col-start-8"
           onClick={controller.onBackButtonClicked}
         >
           Back
         </StyledButton> */}
+        </div>
       </div>
     </React.Fragment>
   );
