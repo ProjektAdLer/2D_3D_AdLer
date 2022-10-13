@@ -7,14 +7,14 @@ import { ElementTypeStrings } from "../../Domain/Types/ElementTypes";
 export const getElementIcon = (type: ElementTypeStrings) => {
   switch (type) {
     case "text":
-      return <img src={textIcon}></img>;
+      return <img src={textIcon} className="h-8 lg:h-12 mr-2"></img>;
     case "video":
-      return <img src={videoIcon}></img>;
+      return <img src={videoIcon} className="h-8 lg:h-12 mr-2"></img>;
     case "image":
-      return <img src={imageIcon}></img>;
+      return <img src={imageIcon} className="h-8 lg:h-12 mr-2"></img>;
     case "h5p":
-      return <img src={h5pIcon}></img>;
+      return <img src={h5pIcon} className="h-8 lg:h-12 mr-2"></img>;
     default:
-      return <img src={h5pIcon}></img>;
+      return <img src={h5pIcon} className="h-8 lg:h-12 mr-2"></img>;
   }
 };
