@@ -42,7 +42,7 @@ export default function DetailSection() {
     return null;
 
   return (
-    <div className="grid w-[100%] justify-start">
+    <div className="grid w-[100%]">
       <div className="flex flex-row items-center p-1 rounded-lg">
         <img
           src={spaceIcon}
@@ -143,7 +143,7 @@ export default function DetailSection() {
       }) && (
         <StyledButton
           shape="freefloatleft"
-          className=""
+          className="self-center justify-self-center"
           onClick={controller.onSpaceButtonClicked}
         >
           {"Lernraum '" + name + "' betreten!"}
