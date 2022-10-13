@@ -36,7 +36,7 @@ export default class CalculateSpaceScoreUseCase
     // sum up score
     let maxPoints = 0;
     const currentScore = space.elements.reduce((acumulator, current) => {
-      maxPoints += acumulator;
+      maxPoints += current.value;
       if (current.hasScored) {
         return acumulator + current.value;
       } else {
