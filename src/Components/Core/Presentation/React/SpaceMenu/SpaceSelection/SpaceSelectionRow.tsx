@@ -2,9 +2,11 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 
 export default function SpaceSelectionRow({
   spaceTitle: spaceTitle,
+  selected: selected,
   onClickCallback,
 }: {
   spaceTitle: string;
+  selected: boolean;
   onClickCallback: () => void;
 }) {
   return (
@@ -12,6 +14,7 @@ export default function SpaceSelectionRow({
       className="w-[100%]"
       shape="freefloatcenter"
       onClick={onClickCallback}
+      color={selected ? "success" : "default"}
     >
       {spaceTitle}
     </StyledButton>
