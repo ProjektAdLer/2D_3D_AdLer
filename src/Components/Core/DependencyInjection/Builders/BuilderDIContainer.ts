@@ -23,6 +23,7 @@ import HeaderBarBuilder from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBarBuil
 import SpaceSelectionBuilder from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelectionBuilder";
 import DetailSectionBuilder from "~ReactComponents/SpaceMenu/DetailSection/DetailSectionBuilder";
 import SpaceCompletionModalBuilder from "~ReactComponents/SpaceDisplay/SpaceCompletionModal/SpaceCompletionModalBuilder";
+import WorldCompletionModalBuilder from "~ReactComponents/SpaceMenu/WorldCompletionModal/WorldCompletionModalBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -80,6 +81,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceCompletionModalBuilder).to(
     SpaceCompletionModalBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IWorldCompletionModalBuilder).to(
+    WorldCompletionModalBuilder
   );
 });
 

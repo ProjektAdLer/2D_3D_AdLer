@@ -20,6 +20,7 @@ const BUILDER_TYPES = {
   ISpaceSelectionBuilder: Symbol("ISpaceSelectionBuilder"),
   IDetailSectionBuilder: Symbol("IDetailSectionBuilder"),
   ISpaceCompletionModalBuilder: Symbol("ISpaceCompletionModalBuilder"),
+  IWorldCompletionModalBuilder: Symbol("IWorldCompletionModalBuilder"),
 };
 
 export default BUILDER_TYPES;
