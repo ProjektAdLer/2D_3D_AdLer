@@ -15,6 +15,9 @@ export default function SpaceCompletionModal() {
   >(BUILDER_TYPES.ISpaceCompletionModalBuilder);
 
   const [showModal] = useObservable(viewModel.showModal);
+  const [score] = useObservable<number>(viewModel.score);
+  const [maxScore] = useObservable<number>(viewModel.maxScore);
+  const [requiredScore] = useObservable<number>(viewModel.requiredScore);
 
   if (!viewModel || !controller) return null;
 
@@ -33,10 +36,11 @@ export default function SpaceCompletionModal() {
         {<img className="w-32 mb-4" src={RubicsCube} alt=""></img>}
         <div className="w-96">
           <p className="mb-4">
-            Du hast die erforderlichen Punkte erreicht und den Lernraum
-            erfolgreich abgeschlossen. Schließe das Fenster, um den Lernraum
-            weiter zu erkunden oder klicke den unteren Button, um einen anderen
-            Lernraum aus dem Menü zu wählen.
+            Du hast {score} von {maxScore} und somit mehr als die erforderlichen{" "}
+            {requiredScore} Punkte erreicht und den Lernraum erfolgreich
+            abgeschlossen. Schließe das Fenster, um den Lernraum weiter zu
+            erkunden oder klicke den unteren Button, um einen anderen Lernraum
+            aus dem Menü zu wählen.
           </p>
         </div>
 

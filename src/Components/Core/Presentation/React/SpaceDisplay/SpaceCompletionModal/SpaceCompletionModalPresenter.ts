@@ -16,6 +16,9 @@ export default class SpaceCompletionModalPresenter
     maxScore: number,
     spaceID: number
   ): void {
+    this.viewModel.score.Value = score;
+    this.viewModel.maxScore.Value = maxScore;
+    this.viewModel.requiredScore.Value = requiredScore;
     if (score >= requiredScore) {
       this.viewModel.showModal.Value = true;
     }
