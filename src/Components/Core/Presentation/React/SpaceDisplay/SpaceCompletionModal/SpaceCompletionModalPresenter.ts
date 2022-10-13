@@ -1,8 +1,23 @@
+import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
+import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
 import ISpaceCompletionModalPresenter from "./ISpaceCompletionModalPresenter";
 import SpaceCompletionModalViewModel from "./SpaceCompletionModalViewModel";
 
 export default class SpaceCompletionModalPresenter
-  implements ISpaceCompletionModalPresenter
+  implements ISpaceCompletionModalPresenter, ISpaceAdapter
 {
   constructor(private viewModel: SpaceCompletionModalViewModel) {}
+
+  onSpaceDataLoaded(spaceTO: SpaceTO): void {}
+
+  onScoreChanged(
+    score: number,
+    requiredScore: number,
+    maxScore: number,
+    spaceID: number
+  ): void {
+    if (score >= requiredScore) {
+      this.viewModel.showModal.Value = true;
+    }
+  }
 }

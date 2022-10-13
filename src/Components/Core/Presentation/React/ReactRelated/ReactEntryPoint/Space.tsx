@@ -45,9 +45,9 @@ export default function Space() {
         <div className="z-10">
           <ElementModal />
         </div>
-        {/*         <div className="z-10">
-        <SpaceCompletionModal />
-        </div> */}
+        <div className="z-10">
+          <SpaceCompletionModal />
+        </div>
         <div className="z-10">
           <MoodleLoginForm />
         </div>

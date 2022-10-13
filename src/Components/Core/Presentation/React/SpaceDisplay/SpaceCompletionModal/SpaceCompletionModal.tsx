@@ -6,6 +6,7 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import ISpaceCompletionModalController from "./ISpaceCompletionModalController";
 import SpaceCompletionModalViewModel from "./SpaceCompletionModalViewModel";
 import RubicsCube from "../../../../../../Assets/icons/17-solution/rubicscube-check-solution-icon-nobg.svg";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 
 export default function SpaceCompletionModal() {
   const [viewModel, controller] = useBuilder<
@@ -13,9 +14,11 @@ export default function SpaceCompletionModal() {
     ISpaceCompletionModalController
   >(BUILDER_TYPES.ISpaceCompletionModalBuilder);
 
-  const [showModal, setShowModal] = useState(true);
+  const [showModal] = useObservable(viewModel.showModal);
 
   if (!viewModel || !controller) return null;
+
+  if (!showModal) return null;
 
   return (
     <StyledModal
@@ -23,7 +26,7 @@ export default function SpaceCompletionModal() {
       title="Raum abgeschlossen!"
       showModal={showModal}
       onClose={() => {
-        setShowModal(false);
+        controller.CloseButtonClicked();
       }}
     >
       <div className="flex flex-col justify-center items-center">
@@ -31,13 +34,17 @@ export default function SpaceCompletionModal() {
         <div className="w-96">
           <p className="mb-4">
             Du hast die erforderlichen Punkte erreicht und den Lernraum
-            erfolgreich abgeschlossen. Schließe das Fenster, um den Lenrraum
-            weiter zu erkunden oder klicke den unteren Button um einen anderen
+            erfolgreich abgeschlossen. Schließe das Fenster, um den Lernraum
+            weiter zu erkunden oder klicke den unteren Button, um einen anderen
             Lernraum aus dem Menü zu wählen.
           </p>
         </div>
 
-        <StyledButton className="mb-4" shape="freefloatleft">
+        <StyledButton
+          className="mb-4"
+          shape="freefloatleft"
+          onClick={() => controller.ReturnWorldMenuButtonClicked()}
+        >
           Zurück zum Lernraum-Menü
         </StyledButton>
       </div>

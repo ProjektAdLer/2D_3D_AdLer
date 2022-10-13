@@ -1,1 +1,5 @@
-export default interface ISpaceCompletionModalController {}
+export default interface ISpaceCompletionModalController {
+  CloseButtonClicked(): void;
+
+  ReturnWorldMenuButtonClicked(): void;
+}
