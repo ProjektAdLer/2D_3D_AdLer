@@ -1,5 +1,5 @@
 import { useInjection } from "inversify-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ICalculateSpaceScoreUseCase from "src/Components/Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import ILoadWorldUseCase from "src/Components/Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
@@ -37,6 +37,7 @@ export default function SpaceSelection() {
   const [spacesCompleted] = useObservable<[number, boolean][]>(
     viewModel.spacesCompleted
   );
+  const [selectedRowID] = useObservable<number>(viewModel.selectedRowID);
 
   if (!viewModel || !controller) return null;
 
@@ -51,6 +52,7 @@ export default function SpaceSelection() {
                   ? "[\u2713] " + name
                   : name
               }
+              selected={selectedRowID === id}
               onClickCallback={() => controller.onSpaceRowClicked(id)}
             />
           </li>
