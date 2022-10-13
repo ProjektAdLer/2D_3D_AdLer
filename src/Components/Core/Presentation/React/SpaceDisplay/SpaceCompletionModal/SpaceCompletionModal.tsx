@@ -19,24 +19,27 @@ export default function SpaceCompletionModal() {
 
   return (
     <StyledModal
-      className="justify-center"
-      title="Sie haben gewonnen!"
+      className="flex flex-col justify-center items-center"
+      title="Raum abgeschlossen!"
       showModal={showModal}
       onClose={() => {
         setShowModal(false);
       }}
     >
       <div className="flex flex-col justify-center items-center">
-        <h1 className="text-4xl">Der große Gewinner-Screen</h1>
-        <p className="w-1/2">
-          Ja, sie haben es geschafft und das ist gut so! Es war ein langer Weg,
-          umso schöner endlich angekommen zu sein. Wenn Sie noch nicht genug
-          haben, klicken sie einfach auf den Button.
-        </p>
-        <StyledButton shape="freefloatleft">
-          Ja, what soll hier schon stehen, ne?!?!
+        {<img className="w-32 mb-4" src={RubicsCube} alt=""></img>}
+        <div className="w-96">
+          <p className="mb-4">
+            Du hast die erforderlichen Punkte erreicht und den Lernraum
+            erfolgreich abgeschlossen. Schließe das Fenster, um den Lenrraum
+            weiter zu erkunden oder klicke den unteren Button um einen anderen
+            Lernraum aus dem Menü zu wählen.
+          </p>
+        </div>
+
+        <StyledButton className="mb-4" shape="freefloatleft">
+          Zurück zum Lernraum-Menü
         </StyledButton>
-        <img className="w-64" src={RubicsCube}></img>
       </div>
     </StyledModal>
   );
