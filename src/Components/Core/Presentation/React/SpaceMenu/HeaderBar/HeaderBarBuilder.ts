@@ -1,15 +1,21 @@
 import { injectable } from "inversify";
+import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
+import IWorldAdapter from "src/Components/Core/Ports/WorldPort/IWorldAdapter";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import HeaderBarController from "./HeaderBarController";
 import HeaderBarPresenter from "./HeaderBarPresenter";
 import HeaderBarViewModel from "./HeaderBarViewModel";
+import IHeaderBarController from "./IHeaderBarController";
+import IHeaderBarPresenter from "./IHeaderBarPresenter";
 
 @injectable()
 export default class HeaderBarBuilder extends PresentationBuilder<
   HeaderBarViewModel,
-  HeaderBarController,
+  IHeaderBarController,
   undefined,
-  HeaderBarPresenter
+  IHeaderBarPresenter
 > {
   constructor() {
     super(
@@ -18,5 +24,13 @@ export default class HeaderBarBuilder extends PresentationBuilder<
       undefined,
       HeaderBarPresenter
     );
+  }
+
+  override buildPresenter(): void {
+    super.buildPresenter();
+
+    CoreDIContainer.get<AbstractPort<IWorldAdapter>>(
+      PORT_TYPES.IWorldPort
+    ).registerAdapter(this.presenter!);
   }
 }
