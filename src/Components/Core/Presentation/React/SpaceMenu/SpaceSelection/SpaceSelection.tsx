@@ -33,27 +33,29 @@ export default function SpaceSelection() {
     loadWorldAsync();
   }, []);
 
-  const [spaces] = useObservable<[number, string][]>(viewModel?.spaces);
+  const [spaces] = useObservable<[number, string][]>(viewModel.spaces);
   const [spacesCompleted] = useObservable<[number, boolean][]>(
-    viewModel?.spacesCompleted
+    viewModel.spacesCompleted
   );
 
   if (!viewModel || !controller) return null;
 
   return (
     <ul className="flex flex-col gap-4 w-[100%]">
-      {spaces?.map(([id, name]) => (
-        <li className="flex items-center" key={id.toString() + name}>
-          <SpaceSelectionRow
-            spaceTitle={
-              spacesCompleted.find((tuple) => tuple[0] === id)
-                ? "X "
-                : "" + name
-            }
-            onClickCallback={() => controller.onSpaceRowClicked(id)}
-          />
-        </li>
-      ))}
+      {spaces?.map(([id, name]) => {
+        return (
+          <li className="flex items-center" key={id.toString() + name}>
+            <SpaceSelectionRow
+              spaceTitle={
+                spacesCompleted?.find((tuple) => tuple[0] === id)?.[1]
+                  ? "[\u2713] " + name
+                  : name
+              }
+              onClickCallback={() => controller.onSpaceRowClicked(id)}
+            />
+          </li>
+        );
+      })}
     </ul>
   );
 }
