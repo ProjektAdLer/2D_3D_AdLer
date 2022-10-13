@@ -37,6 +37,7 @@ export default function Space() {
           <BabylonCanvas
             sceneDefinitionType={SpaceSceneDefinition}
             className="w-screen h-screen"
+            engineOptions={{ stencil: true }}
           />
         </div>
         <div className="z-10 col-span-3 col-start-4 row-start-6">

@@ -1,4 +1,4 @@
-import { Engine, Scene, SceneOptions } from "@babylonjs/core";
+import { Engine, HighlightLayer, Scene, SceneOptions } from "@babylonjs/core";
 import { injectable } from "inversify";
 import { config } from "src/config";
 import { Semaphore } from "src/Lib/Somaphore";
@@ -26,6 +26,14 @@ export default abstract class AbstractSceneDefinition {
    **/
   get Scene(): Scene {
     return this.scene;
+  }
+
+  protected highlighLayer: HighlightLayer;
+  /**
+   * Getter for the highligh layer.
+   **/
+  get HighlightLayer(): any {
+    return this.highlighLayer;
   }
 
   /**

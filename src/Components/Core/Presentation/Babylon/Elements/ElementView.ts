@@ -1,6 +1,7 @@
 import {
   ActionEvent,
   ActionManager,
+  Color3,
   ExecuteCodeAction,
   Mesh,
   Tools,
@@ -57,6 +58,9 @@ export default class ElementView implements IElementView {
     viewModel.rotation.subscribe(() => {
       this.positionMesh();
     });
+    viewModel.hasScored.subscribe(() => {
+      this.onElementScored();
+    });
   }
 
   private async loadMeshAsync(): Promise<void> {
@@ -67,6 +71,13 @@ export default class ElementView implements IElementView {
 
     this.viewModel.meshes.Value.forEach((mesh) => {
       mesh.actionManager = new ActionManager(this.scenePresenter.Scene);
+    });
+
+    this.viewModel.meshes.Value.forEach((mesh) => {
+      this.scenePresenter.HighlightLayer.addMesh(
+        mesh,
+        this.viewModel.hasScored.Value ? Color3.Green() : Color3.Red()
+      );
     });
   }
 
@@ -87,6 +98,16 @@ export default class ElementView implements IElementView {
     this.viewModel.meshes.Value.forEach((mesh) => {
       mesh.actionManager?.registerAction(
         new ExecuteCodeAction(triggerOptions, callback)
+      );
+    });
+  }
+
+  private onElementScored(): void {
+    this.viewModel.meshes.Value?.forEach((mesh) => {
+      this.scenePresenter.HighlightLayer.removeMesh(mesh);
+      this.scenePresenter.HighlightLayer.addMesh(
+        mesh,
+        this.viewModel.hasScored.Value ? Color3.Green() : Color3.Red()
       );
     });
   }

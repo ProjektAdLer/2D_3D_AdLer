@@ -7,6 +7,7 @@ import {
   SceneLoader,
   SceneOptions,
   Engine,
+  HighlightLayer,
 } from "@babylonjs/core";
 import { injectable } from "inversify";
 import AbstractSceneDefinition from "./Scenes/AbstractSceneDefinition";
@@ -23,6 +24,10 @@ export default class ScenePresenter implements IScenePresenter {
 
   get Scene(): Scene {
     return this.sceneDefinition.Scene;
+  }
+
+  get HighlightLayer(): HighlightLayer {
+    return this.sceneDefinition.HighlightLayer;
   }
 
   get NavigationMeshes(): Mesh[] {

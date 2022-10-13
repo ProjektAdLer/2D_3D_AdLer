@@ -9,6 +9,8 @@ import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateS
 import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import type IElementPort from "src/Components/Core/Ports/ElementPort/IElementPort";
 
 @injectable()
 export default class ScoreElementUseCase implements IScoreElementUseCase {
@@ -18,7 +20,9 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
     @inject(CORE_TYPES.IBackendAdapter)
     private backendAdapter: IBackendAdapter,
     @inject(USECASE_TYPES.ICalculateSpaceScore)
-    private calculateSpaceScoreUseCase: ICalculateSpaceScoreUseCase
+    private calculateSpaceScoreUseCase: ICalculateSpaceScoreUseCase,
+    @inject(PORT_TYPES.IElementPort)
+    private elementPort: IElementPort
   ) {}
 
   async executeAsync(data?: { elementId: ElementID }): Promise<void> {
@@ -63,6 +67,8 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
     this.calculateSpaceScoreUseCase.execute({
       spaceId: space.id,
     });
+
+    this.elementPort.onElementScored(true, data.elementId);
 
     return Promise.resolve();
   }

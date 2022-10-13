@@ -3,4 +3,6 @@ import ElementTO from "src/Components/Core/Application/DataTransferObjects/Eleme
 
 export default interface IElementPresenter {
   presentElement(elementTO: ElementTO, positions: [Vector3, number]): void;
+
+  onElementScored(hasScored: boolean, elementID: number): void;
 }

@@ -2,7 +2,9 @@ import { inject, injectable } from "inversify";
 import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
+import type IElementPort from "src/Components/Core/Ports/ElementPort/IElementPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import IScoreH5PElement, { XAPiEvent } from "./IScoreH5PElement";
 
 @injectable()
@@ -10,7 +12,8 @@ export default class ScoreH5PElement implements IScoreH5PElement {
   constructor(
     @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendAdapter,
     @inject(CORE_TYPES.IEntityContainer)
-    private container: IEntityContainer
+    private container: IEntityContainer,
+    @inject(PORT_TYPES.IElementPort) private elementPort: IElementPort
   ) {}
   async executeAsync(data?: {
     xapiData: XAPiEvent;
@@ -23,6 +26,9 @@ export default class ScoreH5PElement implements IScoreH5PElement {
       courseId: 1, // TODOPG: get course id
       rawH5PEvent: data!.xapiData,
     });
+
+    this.elementPort.onElementScored(true, data!.elementId);
+
     return Promise.resolve(true);
   }
 }

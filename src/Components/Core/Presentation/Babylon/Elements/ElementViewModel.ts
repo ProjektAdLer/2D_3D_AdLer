@@ -13,4 +13,5 @@ export default class ElementViewModel {
   public description = new Observable<string>();
   public goals = new Observable<string>();
   public value = new Observable<number>();
+  public hasScored = new Observable<boolean>();
 }

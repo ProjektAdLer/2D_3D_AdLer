@@ -6,11 +6,13 @@ import {
   Scene,
   Engine,
   SceneOptions,
+  HighlightLayer,
 } from "@babylonjs/core";
-import AbstractSceneDefinition from "./Scenes/AbstractSceneDefinition";
 
 export default interface IScenePresenter {
   get Scene(): Scene;
+
+  get HighlightLayer(): HighlightLayer;
 
   /**
    * @returns all registered meshes in the scene that are marked to influence the navigation.

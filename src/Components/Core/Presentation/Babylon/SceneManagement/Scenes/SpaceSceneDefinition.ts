@@ -1,5 +1,10 @@
 import AbstractSceneDefinition from "./AbstractSceneDefinition";
-import { Vector3, HemisphericLight, Color4 } from "@babylonjs/core";
+import {
+  Vector3,
+  HemisphericLight,
+  Color4,
+  HighlightLayer,
+} from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
@@ -46,6 +51,11 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
   protected override async initializeScene(): Promise<void> {
     this.scene.clearColor = new Color4(0.66, 0.83, 0.98, 1);
     new HemisphericLight("light", new Vector3(0, 1, 0), this.scene);
+
+    this.highlighLayer = new HighlightLayer("highlightLayer", this.scene);
+    this.highlighLayer.innerGlow = false;
+    this.highlighLayer.blurHorizontalSize = 1;
+    this.highlighLayer.blurVerticalSize = 1;
 
     // create space
     this.director.build(this.spaceBuilder);

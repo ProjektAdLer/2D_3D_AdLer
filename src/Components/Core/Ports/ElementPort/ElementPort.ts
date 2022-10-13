@@ -29,4 +29,10 @@ export default class ElementPort implements IElementPort {
       logger.warn("ElementModalPresenter is already registered.");
     this.modalPresenter = modalPresenter;
   }
+
+  onElementScored(hasScored: boolean, elementID: number): void {
+    this.elementPresenters.forEach((elementPresenter) => {
+      elementPresenter.onElementScored(hasScored, elementID);
+    });
+  }
 }
