@@ -26,26 +26,31 @@ export default function SpaceSelection() {
   useEffect(() => {
     const loadWorldAsync = async (): Promise<void> => {
       await loadWorldUseCase.executeAsync();
-      viewModel.spaceIDs.Value.forEach((id) =>
+      viewModel.spaces.Value.forEach(([id]) =>
         calculateSpaceScoreUseCase.execute({ spaceId: id })
       );
     };
     loadWorldAsync();
   }, []);
 
-  const [spaceTitles] = useObservable<string[]>(viewModel?.spaceTitles);
+  const [spaces] = useObservable<[number, string][]>(viewModel?.spaces);
+  const [spacesCompleted] = useObservable<[number, boolean][]>(
+    viewModel?.spacesCompleted
+  );
 
   if (!viewModel || !controller) return null;
 
   return (
     <ul className="flex flex-col gap-4 w-[100%]">
-      {spaceTitles?.map((title, index) => (
-        <li className="flex items-center" key={index}>
+      {spaces?.map(([id, name]) => (
+        <li className="flex items-center" key={id.toString() + name}>
           <SpaceSelectionRow
-            spaceTitle={title}
-            onClickCallback={() =>
-              controller.onSpaceRowClicked(viewModel.spaceIDs.Value[index])
+            spaceTitle={
+              spacesCompleted.find((tuple) => tuple[0] === id)
+                ? "X "
+                : "" + name
             }
+            onClickCallback={() => controller.onSpaceRowClicked(id)}
           />
         </li>
       ))}
