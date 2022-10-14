@@ -42,7 +42,7 @@ export default function SpaceSelection() {
   if (!viewModel || !controller) return null;
 
   return (
-    <ul className="flex flex-col gap-4 w-[100%]">
+    <ul className="flex flex-col gap-4 w-[100%] overflow-auto">
       {spaces?.map(([id, name]) => {
         return (
           <li className="flex items-center" key={id.toString() + name}>
