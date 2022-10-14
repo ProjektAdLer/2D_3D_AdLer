@@ -22,7 +22,7 @@ export default function BabylonCanvas(
 ) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const {
-    sceneDefinitionType: sceneDefinitionType,
+    sceneDefinitionType,
     antialias,
     engineOptions,
     adaptToDeviceRatio,

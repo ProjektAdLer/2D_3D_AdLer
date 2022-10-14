@@ -2,22 +2,24 @@ import { mock } from "jest-mock-extended";
 import "@testing-library/jest-dom";
 import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import BabylonCanvas from "../../../../Core/Presentation/Babylon/SceneManagement/BabylonCanvas";
 import { Engine } from "@babylonjs/core";
-import AbstractSceneDefinition from "../../../../Core/Presentation/Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
+import React from "react";
+import TestSceneDefinition from "./TestSceneDefinition";
+import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 
 jest.mock("@babylonjs/core");
 const scenePresenterMock = mock<IScenePresenter>();
+const scenePresenterFactoryMock = () => scenePresenterMock;
 
 describe("Babylon Canvas", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind<IScenePresenter>(
-      CORE_TYPES.IScenePresenter
-    ).toConstantValue(scenePresenterMock);
+    CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
+      scenePresenterFactoryMock
+    );
   });
 
   afterEach(() => {
@@ -29,31 +31,17 @@ describe("Babylon Canvas", () => {
   });
 
   test("should render", () => {
-    render(
-      <BabylonCanvas createSceneClass={mock<AbstractSceneDefinition>()} />
-    );
+    render(<BabylonCanvas sceneDefinitionType={TestSceneDefinition} />);
   });
 
   test("calls createScene on scenePresenter", () => {
-    render(
-      <BabylonCanvas
-        createSceneClass={CoreDIContainer.get<AbstractSceneDefinition>(
-          CORE_TYPES.AbstractSceneDefinition
-        )}
-      />
-    );
+    render(<BabylonCanvas sceneDefinitionType={TestSceneDefinition} />);
 
     expect(scenePresenterMock.createScene).toHaveBeenCalledTimes(1);
   });
 
   test("calls startRenderLoop on scenePresenter", () => {
-    render(
-      <BabylonCanvas
-        createSceneClass={CoreDIContainer.get<AbstractSceneDefinition>(
-          CORE_TYPES.AbstractSceneDefinition
-        )}
-      />
-    );
+    render(<BabylonCanvas sceneDefinitionType={TestSceneDefinition} />);
 
     waitFor(() => {
       expect(scenePresenterMock.startRenderLoop).toHaveBeenCalledTimes(1);
@@ -61,13 +49,7 @@ describe("Babylon Canvas", () => {
   });
 
   test("window resize event calls callback", () => {
-    render(
-      <BabylonCanvas
-        createSceneClass={CoreDIContainer.get<AbstractSceneDefinition>(
-          CORE_TYPES.AbstractSceneDefinition
-        )}
-      />
-    );
+    render(<BabylonCanvas sceneDefinitionType={TestSceneDefinition} />);
 
     fireEvent(window, new Event("resize"));
 
@@ -76,11 +58,7 @@ describe("Babylon Canvas", () => {
 
   test("unmount disposes of the engine", () => {
     const { unmount } = render(
-      <BabylonCanvas
-        createSceneClass={CoreDIContainer.get<AbstractSceneDefinition>(
-          CORE_TYPES.AbstractSceneDefinition
-        )}
-      />
+      <BabylonCanvas sceneDefinitionType={TestSceneDefinition} />
     );
 
     unmount();
@@ -90,11 +68,7 @@ describe("Babylon Canvas", () => {
 
   test("unmount removes window resize event listener", () => {
     const container = render(
-      <BabylonCanvas
-        createSceneClass={CoreDIContainer.get<AbstractSceneDefinition>(
-          CORE_TYPES.AbstractSceneDefinition
-        )}
-      />
+      <BabylonCanvas sceneDefinitionType={TestSceneDefinition} />
     );
     container.unmount();
 
