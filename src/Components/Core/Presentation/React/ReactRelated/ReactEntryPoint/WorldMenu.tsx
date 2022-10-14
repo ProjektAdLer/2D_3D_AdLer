@@ -2,6 +2,7 @@ import React from "react";
 import HeaderBar from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBar";
 import DetailSection from "~ReactComponents/SpaceMenu/DetailSection/DetailSection";
 import SpaceSelection from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection";
+import WorldCompletionModal from "~ReactComponents/SpaceMenu/WorldCompletionModal/WorldCompletionModal";
 
 export default function WorldMenu() {
   return (
@@ -16,6 +17,11 @@ export default function WorldMenu() {
         <div className="flex justify-center col-span-5 col-start-6 row-start-4 p-8 row-span-full bg-adlergold">
           <DetailSection />
         </div>
+        {
+          <div>
+            <WorldCompletionModal />
+          </div>
+        }
       </div>
     </React.Fragment>
   );
