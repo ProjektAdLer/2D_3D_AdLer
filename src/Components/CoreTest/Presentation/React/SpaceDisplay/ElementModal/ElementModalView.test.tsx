@@ -1,11 +1,12 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
 import { mock } from "jest-mock-extended";
-import ElementModal from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModal";
+import React from "react";
 import ElementModalController from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalController";
 import ElementModalViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
-import * as NewH5PContent from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/NewH5PContent";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import ElementModal from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModal";
+import NewH5PContent from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/NewH5PContent";
 
 let fakeModel = new ElementModalViewModel();
 fakeModel.isOpen.Value = true;
@@ -13,6 +14,26 @@ fakeModel.id.Value = 123;
 fakeModel.type.Value = "text";
 
 const fakeController = mock<ElementModalController>();
+
+jest.mock(
+  "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/ImageComponent.tsx",
+  () => () => <div>Hello World</div>
+);
+
+jest.mock(
+  "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/NewH5PContent",
+  () => () => <div>Hello World</div>
+);
+
+jest.mock(
+  "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/VideoComponent.tsx",
+  () => () => <div>Hello World</div>
+);
+
+jest.mock(
+  "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/TextComponent.tsx",
+  () => () => <div>Hello World</div>
+);
 
 describe("ElementModal", () => {
   test("doesn't render without controller", () => {
@@ -51,7 +72,6 @@ describe("ElementModal", () => {
       fakeModel.type.Value = type;
 
       if (type === "h5p") {
-        jest.spyOn(NewH5PContent, "default").mockReturnValue(<div></div>);
       }
 
       useBuilderMock([fakeModel, fakeController]);

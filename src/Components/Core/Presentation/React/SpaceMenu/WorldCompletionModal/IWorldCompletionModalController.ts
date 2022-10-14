@@ -1,1 +1,3 @@
-export default interface IWorldCompletionModalController {}
+export default interface IWorldCompletionModalController {
+  CloseButtonClicked(): void;
+}

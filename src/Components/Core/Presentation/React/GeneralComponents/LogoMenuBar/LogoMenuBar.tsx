@@ -5,6 +5,7 @@ import LoadSpaceButton from "~ReactComponents/GeneralComponents/LoadSpaceButton/
 import FullscreenSwitch from "~ReactComponents/SpaceDisplay/FullscreenSwitch/FullscreenSwitch";
 import DebugPanel from "~ReactComponents/SpaceDisplay/DebugPanel/DebugPanel";
 import engineLogo from "../../../../../../Assets/icons/adLerEngine_flat_logo_simple.svg";
+import history from "history/browser";
 
 export default function LogoMenuBar() {
   return (
@@ -24,6 +25,13 @@ export default function LogoMenuBar() {
       <StyledContainer className="flex flex-col bg-transparent">
         {/* <LoadSpaceButton /> */}
         <FullscreenSwitch />
+        <StyledButton
+          onClick={() => {
+            history.back();
+          }}
+        >
+          Menü
+        </StyledButton>
         {/* <DebugPanel /> */}
       </StyledContainer>
     </CustomDropdown>

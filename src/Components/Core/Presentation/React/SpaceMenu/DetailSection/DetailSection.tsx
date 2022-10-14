@@ -8,6 +8,7 @@ import { ElementTypeStrings } from "../../../../Domain/Types/ElementTypes";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import DetailSectionController from "./DetailSectionController";
 import { getElementIcon } from "../../../Utils/GetIcon";
+import coinIcon from "../../../../../../Assets/icons/coin_icon.svg";
 
 export default function DetailSection() {
   const [viewModel, controller] = useBuilder<
@@ -42,8 +43,8 @@ export default function DetailSection() {
     return null;
 
   return (
-    <div className="grid w-[100%]">
-      <div className="flex flex-row items-center p-1 rounded-lg">
+    <div className="flex flex-col gap-2 w-[100%] overflow-auto">
+      <div className="flex flex-row items-center p-1 pb-4 border-b border-gray-500">
         <img
           src={spaceIcon}
           className="xl:w-8 lg:w-6 md:w-2 sm:w-2"
@@ -55,7 +56,7 @@ export default function DetailSection() {
       </div>
 
       {description !== "" && (
-        <div>
+        <div className="border-b pb-2 border-gray-500">
           <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
             Beschreibung:
           </div>
@@ -65,7 +66,7 @@ export default function DetailSection() {
         </div>
       )}
       {goals !== "" && (
-        <div>
+        <div className="border-b pb-2 border-gray-500">
           <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
             Lernziele:
           </div>
@@ -73,26 +74,26 @@ export default function DetailSection() {
         </div>
       )}
       {elements.length > 0 && (
-        <div>
+        <div className="border-b pb-2 border-gray-500">
           <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
             Lernelemente:
           </div>
           <div className="items-start ml-6 text-lg roboto-regular">
             {elements.map((element) => {
               return (
-                <div key={element[1]} className="flex flex-row">
+                <div key={element[1]} className="">
                   <CheckBoxEntry checked={element[2]}>
-                    <div className="p-1 xl:w-8 lg:w-6 md:w-2 sm:w-2">
+                    <div className=" xl:w-8 lg:w-6 md:w-2 sm:w-2">
                       {getElementIcon(element[0])}
                     </div>
-                    <div>
-                      {" " +
-                        element[1] +
-                        " (" +
-                        element[0] +
-                        ", " +
-                        element[3] +
-                        " Punkte)"}
+                    <div className="flex flex-row mt-3 ml-2">
+                      {" " + element[1] + " (" + element[0] + ", " + element[3]}
+                      <img
+                        src={coinIcon}
+                        className="w-6 ml-1 mb-4"
+                        alt="Coin-Icon"
+                      ></img>
+                      {" )"}
                     </div>
                   </CheckBoxEntry>
                 </div>
@@ -102,7 +103,7 @@ export default function DetailSection() {
         </div>
       )}
       {!!requiredPoints && (
-        <div>
+        <div className="border-b pb-2 border-gray-500">
           <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
             Benötigte Punkte:
           </div>
@@ -112,7 +113,7 @@ export default function DetailSection() {
         </div>
       )}
       {requirements.length > 0 && (
-        <div>
+        <div className="border-b pb-2 border-gray-500">
           <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
             Benötigte Räume zur Freischaltung:
           </div>
@@ -143,7 +144,7 @@ export default function DetailSection() {
       }) && (
         <StyledButton
           shape="freefloatleft"
-          className="self-center justify-self-center"
+          className="self-center justify-self-center mt-2"
           onClick={controller.onSpaceButtonClicked}
         >
           {"Lernraum '" + name + "' betreten!"}

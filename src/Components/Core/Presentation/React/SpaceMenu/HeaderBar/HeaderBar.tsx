@@ -21,7 +21,7 @@ export default function HeaderBar() {
     <React.Fragment>
       <div className="flex justify-between">
         <StyledButton className="" onClick={controller.onMenuButtonClicked}>
-          Menu
+          Home
         </StyledButton>
         <div>
           <StyledContainer className="text-shadow" textColor="white">

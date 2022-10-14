@@ -36,11 +36,10 @@ export default function SpaceCompletionModal() {
         {<img className="w-32 mb-4" src={RubicsCube} alt=""></img>}
         <div className="w-96">
           <p className="mb-4">
-            Du hast {score} von {maxScore} und somit mehr als die erforderlichen{" "}
-            {requiredScore} Punkte erreicht und den Lernraum erfolgreich
-            abgeschlossen. Schließe das Fenster, um den Lernraum weiter zu
-            erkunden oder klicke den unteren Button, um einen anderen Lernraum
-            aus dem Menü zu wählen.
+            Du hast {score} von {requiredScore} erforderlichen Punkten erreicht
+            und somit den Lernraum erfolgreich abgeschlossen. Schließe das
+            Fenster, um den Lernraum weiter zu erkunden oder klicke den unteren
+            Button, um einen anderen Lernraum aus dem Menü zu wählen.
           </p>
         </div>
 

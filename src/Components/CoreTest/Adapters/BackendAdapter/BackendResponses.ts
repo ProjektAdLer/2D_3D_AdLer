@@ -53,7 +53,7 @@ export const expectedSpaceTO: SpaceTO = {
   requiredPoints: expect.any(Number),
 };
 
-export const expectedElementTO: ElementTO = {
+export const expectedElementTO: Partial<ElementTO> = {
   id: expect.any(Number),
   name: expect.any(String),
   value: expect.any(Number),
@@ -61,8 +61,6 @@ export const expectedElementTO: ElementTO = {
   goals: expect.any(String),
   type: expect.any(String),
   parentSpaceId: expect.any(Number),
-  parentCourseId: expect.any(Number),
-  hasScored: expect.any(Boolean),
 };
 
 export const mockDSL: IDSL = {

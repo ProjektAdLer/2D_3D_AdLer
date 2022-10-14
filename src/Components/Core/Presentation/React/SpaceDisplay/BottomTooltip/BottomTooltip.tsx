@@ -5,6 +5,8 @@ import { getElementIcon } from "../../../Utils/GetIcon";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
+import coinIcon from "../../../../../../Assets/icons/coin_icon.svg";
+
 export default function BottomTooltip() {
   const [viewModel] = useBuilder<BottomTooltipViewModel, undefined>(
     BUILDER_TYPES.IBottomTooltipBuilder
@@ -12,6 +14,7 @@ export default function BottomTooltip() {
   const [show] = useObservable<boolean>(viewModel?.show);
   const [type] = useObservable<ElementTypeStrings>(viewModel?.iconType);
   const [text] = useObservable<string>(viewModel?.text);
+  const [points] = useObservable<number>(viewModel?.points);
 
   if (!show || !text || !type) return null;
 
@@ -21,6 +24,11 @@ export default function BottomTooltip() {
         <div className="flex items-center gap-1 p-2 text-2xl font-extrabold text-white rounded-lg text-shadow bg-adlerblue">
           {getElementIcon(type)}
           {text}
+          <div className="text-xl ml-2 flex flex-row">
+            {points}
+            <div className="ml-2"></div>
+            <img src={coinIcon} alt="" className="w-8"></img>
+          </div>
         </div>
       </StyledContainer>
     </div>
