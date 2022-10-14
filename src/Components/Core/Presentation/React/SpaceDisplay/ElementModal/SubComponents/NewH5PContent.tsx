@@ -8,6 +8,27 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import { useInjection } from "inversify-react";
 import IGetElementSourceUseCase from "src/Components/Core/Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
 
+export const h5pEventCalled = (
+  event: any,
+  viewModel: ElementModalViewModel
+) => {
+  //do something useful with the event
+  //logger.log("xAPI event: ", event);
+  const xapiData = event.data.statement;
+  if (
+    xapiData.verb.id === "http://adlnet.gov/expapi/verbs/completed" ||
+    (xapiData.verb.id === "http://adlnet.gov/expapi/verbs/answered" &&
+      typeof xapiData.result.success !== "undefined")
+  ) {
+    CoreDIContainer.get<IScoreH5PElement>(
+      USECASE_TYPES.IScoreH5PElement
+    ).executeAsync({
+      xapiData: xapiData,
+      elementId: viewModel.id.Value,
+    });
+  }
+};
+
 export default function NewH5PContent({
   viewModel,
 }: {
@@ -42,23 +63,11 @@ export default function NewH5PContent({
 
         await new H5PPlayer(el, options);
 
+        /* istanbul ignore next */
         //@ts-ignore
         H5P.externalDispatcher.on("xAPI", (event: any) => {
-          //do something useful with the event
-          //logger.log("xAPI event: ", event);
-          const xapiData = event.data.statement;
-          if (
-            xapiData.verb.id === "http://adlnet.gov/expapi/verbs/completed" ||
-            (xapiData.verb.id === "http://adlnet.gov/expapi/verbs/answered" &&
-              typeof xapiData.result.success !== "undefined")
-          ) {
-            CoreDIContainer.get<IScoreH5PElement>(
-              USECASE_TYPES.IScoreH5PElement
-            ).executeAsync({
-              xapiData: xapiData,
-              elementId: viewModel.id.Value,
-            });
-          }
+          /* istanbul ignore next */
+          h5pEventCalled(event, viewModel);
         });
       }
     };

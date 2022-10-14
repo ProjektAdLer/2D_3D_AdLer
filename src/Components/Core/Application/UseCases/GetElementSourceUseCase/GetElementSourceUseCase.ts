@@ -1,5 +1,5 @@
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
-import IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
+import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
@@ -12,7 +12,9 @@ export default class GetElementSourceUseCase
 {
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
-    private entityContainer: IEntityContainer
+    private entityContainer: IEntityContainer,
+    @inject(CORE_TYPES.IBackendAdapter)
+    private backend: IBackendAdapter
   ) {}
   async executeAsync(data: {
     elementId: number;
@@ -22,9 +24,7 @@ export default class GetElementSourceUseCase
       this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0]
         .userToken;
 
-    const resp = await CoreDIContainer.get<IBackendAdapter>(
-      CORE_TYPES.IBackendAdapter
-    ).getElementSource(
+    const resp = await this.backend.getElementSource(
       token,
       data.elementId,
       data.courseId // TODOPG: get CourrseID from somewhere

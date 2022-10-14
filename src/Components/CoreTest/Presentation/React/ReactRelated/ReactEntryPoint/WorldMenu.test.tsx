@@ -6,6 +6,8 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import WorldMenu from "~ReactComponents/ReactRelated/ReactEntryPoint/WorldMenu";
 
+import React from "react";
+
 jest.mock("~ReactComponents/SpaceMenu/HeaderBar/HeaderBar", () => "mocked");
 jest.mock(
   "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection",
