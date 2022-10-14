@@ -149,42 +149,42 @@ export default class MockBackendAdapter extends BackendAdapter {
           requiredPoints: 0,
           requirements: [],
         },
-        {
-          spaceId: 2,
-          identifier: {
-            type: "name",
-            value: "Space_Nummer_2",
-          },
-          description: "Space_Nummer_2",
-          goals: "Space_Nummer_2",
-          learningSpaceContent: [5, 6, 7, 8],
-          requiredPoints: 50,
-          requirements: [1, 3],
-        },
-        {
-          spaceId: 3,
-          identifier: {
-            type: "name",
-            value: "Space_Nummer_3",
-          },
-          description: "Space_Nummer_3",
-          goals: "Space_Nummer_3",
-          learningSpaceContent: [9, 10, 11, 12],
-          requiredPoints: 50,
-          requirements: [1],
-        },
-        {
-          spaceId: 4,
-          identifier: {
-            type: "name",
-            value: "Space_Nummer_4",
-          },
-          description: "Space_Nummer_4",
-          goals: "Space_Nummer_4",
-          learningSpaceContent: [13, 14, 15, 16],
-          requiredPoints: 250,
-          requirements: [2, 3],
-        },
+        // {
+        //   spaceId: 2,
+        //   identifier: {
+        //     type: "name",
+        //     value: "Space_Nummer_2",
+        //   },
+        //   description: "Space_Nummer_2",
+        //   goals: "Space_Nummer_2",
+        //   learningSpaceContent: [5, 6, 7, 8],
+        //   requiredPoints: 50,
+        //   requirements: [1, 3],
+        // },
+        // {
+        //   spaceId: 3,
+        //   identifier: {
+        //     type: "name",
+        //     value: "Space_Nummer_3",
+        //   },
+        //   description: "Space_Nummer_3",
+        //   goals: "Space_Nummer_3",
+        //   learningSpaceContent: [9, 10, 11, 12],
+        //   requiredPoints: 50,
+        //   requirements: [1],
+        // },
+        // {
+        //   spaceId: 4,
+        //   identifier: {
+        //     type: "name",
+        //     value: "Space_Nummer_4",
+        //   },
+        //   description: "Space_Nummer_4",
+        //   goals: "Space_Nummer_4",
+        //   learningSpaceContent: [13, 14, 15, 16],
+        //   requiredPoints: 250,
+        //   requirements: [2, 3],
+        // },
       ],
       learningElements: [
         {

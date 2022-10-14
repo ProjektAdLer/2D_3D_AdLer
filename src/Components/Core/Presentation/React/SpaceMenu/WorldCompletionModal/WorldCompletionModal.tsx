@@ -6,6 +6,7 @@ import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/Style
 import IWorldCompletionModalController from "./IWorldCompletionModalController";
 import WorldCompletionModalViewModel from "./WorldCompletionModalViewModel";
 import SolutionIcon from "../../../../../../Assets/icons/17-solution/check-solution-icon_nobg.svg";
+import IWorldCompletionModalPresenter from "./IWorldCompletionModalPresenter";
 
 export default function WorldCompletionModal() {
   const [viewModel, controller] = useBuilder<
@@ -16,8 +17,6 @@ export default function WorldCompletionModal() {
   const [showModal] = useObservable(viewModel.showModal);
 
   if (!viewModel || !controller) return null;
-
-  if (!showModal) return null;
 
   return (
     <StyledModal
