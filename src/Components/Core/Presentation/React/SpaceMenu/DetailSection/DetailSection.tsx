@@ -83,7 +83,7 @@ export default function DetailSection() {
               return (
                 <div key={element[1]} className="">
                   <CheckBoxEntry checked={element[2]}>
-                    <div className=" ml-2 xl:w-8 lg:w-6 md:w-2 sm:w-2">
+                    <div className=" xl:w-8 lg:w-6 md:w-2 sm:w-2">
                       {getElementIcon(element[0])}
                     </div>
                     <div className="flex flex-row mt-3 ml-2">

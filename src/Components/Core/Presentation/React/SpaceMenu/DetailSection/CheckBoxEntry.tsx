@@ -8,7 +8,7 @@ export default function CheckBoxEntry({
   children: ReactNode;
 }) {
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row gap-x-2">
       <input className="" type="checkbox" checked={checked} readOnly={true} />
       <div className="flex flex-row">{children}</div>
     </div>
