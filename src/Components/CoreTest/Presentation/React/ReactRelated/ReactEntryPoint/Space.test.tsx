@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
-import Space from "~ReactComponents/ReactRelated/ReactEntryPoint/Space";
+import Space from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/Space";
+import React from "react";
 
 jest.mock(
   "../../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltip",
@@ -11,10 +12,6 @@ jest.mock(
 );
 jest.mock(
   "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdown",
-  () => "mocked"
-);
-jest.mock(
-  "../../../../../Core/Presentation/React/SpaceDisplay/WorldNamePanel/WorldNamePanel",
   () => "mocked"
 );
 jest.mock(
@@ -38,7 +35,15 @@ jest.mock(
   () => "mocked"
 );
 jest.mock(
-  "~ReactComponents/SpaceDisplay/WorldGoalPanel/WorldGoalPanel",
+  "../../../../../Core/Presentation/React/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanel",
+  () => "mocked"
+);
+jest.mock(
+  "../../../../../Core/Presentation/React/SpaceDisplay/SpaceNamePanel/SpaceNamePanel",
+  () => "mocked"
+);
+jest.mock(
+  "../../../../../Core/Presentation/React/SpaceDisplay/SpaceCompletionModal/SpaceCompletionModal",
   () => "mocked"
 );
 
