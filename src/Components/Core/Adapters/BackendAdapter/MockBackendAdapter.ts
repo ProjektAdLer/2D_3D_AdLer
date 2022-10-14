@@ -182,7 +182,7 @@ export default class MockBackendAdapter extends BackendAdapter {
           description: "Space_Nummer_4",
           goals: "Space_Nummer_4",
           learningSpaceContent: [13, 14, 15, 16],
-          requiredPoints: 250,
+          requiredPoints: 50,
           requirements: [2, 3],
         },
       ],
