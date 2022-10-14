@@ -1,16 +1,24 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
-import { Provider } from "inversify-react";
-import { mock } from "jest-mock-extended";
 import ElementModalViewModel from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
-import NewH5PContent from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/NewH5PContent";
-import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
+import NewH5PContent, {
+  h5pEventCalled,
+} from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/NewH5PContent";
 import React from "react";
+import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
+import USECASE_TYPES from "../../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import mock from "jest-mock-extended/lib/Mock";
+import IGetElementSourceUseCase from "../../../../../../Core/Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
+import { Provider } from "inversify-react";
+import IScoreH5PElement from "../../../../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
 
 const viewModel = new ElementModalViewModel();
 viewModel.id.Value = 1;
 
 jest.mock("h5p-standalone");
+
+const sourceUseCaseMock = mock<IGetElementSourceUseCase>();
+const scoreH5PUseCase = mock<IScoreH5PElement>();
 
 global.console = {
   ...console,
@@ -23,22 +31,54 @@ global.console = {
 };
 
 beforeAll(() => {
+  CoreDIContainer.snapshot();
+  CoreDIContainer.unbindAll();
+  CoreDIContainer.bind(USECASE_TYPES.IGetElementSource).toConstantValue(
+    sourceUseCaseMock
+  );
+  CoreDIContainer.bind(USECASE_TYPES.IScoreH5PElement).toConstantValue(
+    scoreH5PUseCase
+  );
   jest.spyOn(console, "error").mockImplementation(() => {});
 });
 
 afterAll(() => {
+  CoreDIContainer.restore();
   jest.clearAllMocks();
 });
 
 describe("H5PContentView", () => {
   test("should render", () => {
+    sourceUseCaseMock.executeAsync.mockResolvedValue(
+      "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel"
+    );
     const oldError = console.error;
     console.error = jest.fn();
 
-    const { container } = render(<NewH5PContent viewModel={viewModel} />);
-
-    //expect(container).toBeInTheDocument();
+    const { container } = render(
+      <Provider container={CoreDIContainer}>
+        <NewH5PContent viewModel={viewModel} />
+      </Provider>
+    );
 
     console.error = oldError;
+  });
+
+  test("should handle a xapi call", () => {
+    h5pEventCalled(
+      {
+        data: {
+          statement: {
+            verb: {
+              id: "http://adlnet.gov/expapi/verbs/answered",
+            },
+            result: {
+              success: true,
+            },
+          },
+        },
+      },
+      viewModel
+    );
   });
 });
