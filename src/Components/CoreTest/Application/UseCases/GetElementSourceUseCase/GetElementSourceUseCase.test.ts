@@ -1,4 +1,3 @@
-import { bind } from "bind-decorator";
 import { mock } from "jest-mock-extended";
 import IBackendAdapter from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
 import GetElementSourceUseCase from "../../../../Core/Application/UseCases/GetElementSourceUseCase/GetElementSourceUseCase";
@@ -36,9 +35,17 @@ describe("GetElementSource", () => {
       },
     ]);
 
+    backendMock.getElementSource.mockResolvedValue(
+      "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel"
+    );
+
     const result = await systemUnderTest.executeAsync({
       elementId: 1,
       courseId: 1,
     });
+
+    expect(result).toBe(
+      "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel"
+    );
   });
 });
