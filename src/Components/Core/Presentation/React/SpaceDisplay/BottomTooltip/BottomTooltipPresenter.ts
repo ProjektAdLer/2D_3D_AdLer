@@ -8,6 +8,7 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
     this.viewModel.text.Value = element.name;
     this.viewModel.iconType.Value = element.type;
     this.viewModel.show.Value = true;
+    this.viewModel.points.Value = element.value;
   }
   hide(): void {
     this.viewModel.show.Value = false;
