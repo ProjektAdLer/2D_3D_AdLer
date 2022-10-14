@@ -8,6 +8,7 @@ import { ElementTypeStrings } from "../../../../Domain/Types/ElementTypes";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import DetailSectionController from "./DetailSectionController";
 import { getElementIcon } from "../../../Utils/GetIcon";
+import coinIcon from "../../../../../../Assets/icons/coin_icon.svg";
 
 export default function DetailSection() {
   const [viewModel, controller] = useBuilder<
@@ -80,19 +81,19 @@ export default function DetailSection() {
           <div className="items-start ml-6 text-lg roboto-regular">
             {elements.map((element) => {
               return (
-                <div key={element[1]} className="flex flex-row">
+                <div key={element[1]} className="">
                   <CheckBoxEntry checked={element[2]}>
-                    <div className="p-1 xl:w-8 lg:w-6 md:w-2 sm:w-2">
+                    <div className=" ml-2 xl:w-8 lg:w-6 md:w-2 sm:w-2">
                       {getElementIcon(element[0])}
                     </div>
-                    <div>
-                      {" " +
-                        element[1] +
-                        " (" +
-                        element[0] +
-                        ", " +
-                        element[3] +
-                        " Punkte)"}
+                    <div className="flex flex-row mt-3 ml-2">
+                      {" " + element[1] + " (" + element[0] + ", " + element[3]}
+                      <img
+                        src={coinIcon}
+                        className="w-6 ml-1 mb-4"
+                        alt="Coin-Icon"
+                      ></img>
+                      {" )"}
                     </div>
                   </CheckBoxEntry>
                 </div>
