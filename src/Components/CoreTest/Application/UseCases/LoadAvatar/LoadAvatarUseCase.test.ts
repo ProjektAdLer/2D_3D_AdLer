@@ -4,8 +4,6 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import PresentationDirector from "../../../../Core/Presentation/PresentationBuilder/PresentationDirector";
 
-const buildMock = jest.spyOn(PresentationDirector.prototype, "build");
-
 describe("LoadAvatarUseCase", () => {
   let systemUnderTest: LoadAvatarUseCase;
 
@@ -15,9 +13,9 @@ describe("LoadAvatarUseCase", () => {
     );
   });
 
-  test("executeAsync builds the avatar via its builder", async () => {
-    await systemUnderTest.executeAsync();
+  test("resolves to be true", async () => {
+    const result = await systemUnderTest.executeAsync();
 
-    expect(buildMock).toHaveBeenCalledTimes(1);
+    expect(result).toBeTruthy();
   });
 });
