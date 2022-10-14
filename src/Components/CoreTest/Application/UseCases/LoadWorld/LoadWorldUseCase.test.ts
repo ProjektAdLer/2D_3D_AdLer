@@ -22,9 +22,6 @@ const entityContainerMock = mock<IEntityContainer>();
 const uiPortMock = mock<IUIPort>();
 const loadAvatarUsecaseMock = mock<ILoadAvatarUseCase>();
 
-// mock structuredClone
-global.structuredClone = jest.fn((val) => JSON.parse(JSON.stringify(val)));
-
 const mockedGetEntitiesOfTypeUserDataReturnValue = [
   {
     isLoggedIn: true,
