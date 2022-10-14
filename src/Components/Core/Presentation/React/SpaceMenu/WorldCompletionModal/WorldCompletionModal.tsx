@@ -5,7 +5,7 @@ import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservab
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import IWorldCompletionModalController from "./IWorldCompletionModalController";
 import WorldCompletionModalViewModel from "./WorldCompletionModalViewModel";
-import SolutionIcon from "../../../../../../Assets/icons/17-solution/check-solution-icon_nobg.svg";
+import SolutionIcon from "../../../../../../Assets/icons/14-1_world-completed/world-completed-icon-nobg.svg";
 import IWorldCompletionModalPresenter from "./IWorldCompletionModalPresenter";
 
 export default function WorldCompletionModal() {
