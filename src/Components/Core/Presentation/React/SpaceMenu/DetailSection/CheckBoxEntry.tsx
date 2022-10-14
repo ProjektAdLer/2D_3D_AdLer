@@ -9,8 +9,8 @@ export default function CheckBoxEntry({
 }) {
   return (
     <div className="flex flex-row">
-      <input type="checkbox" checked={checked} readOnly={true} />
-      <div>{children}</div>
+      <input className="" type="checkbox" checked={checked} readOnly={true} />
+      <div className="flex flex-row">{children}</div>
     </div>
   );
 }
