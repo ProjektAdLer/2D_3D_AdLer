@@ -68,7 +68,8 @@ describe("Calculate Space Score UseCase", () => {
             value: 10,
           },
         ],
-      },
+        requiredPoints: 20,
+      } as SpaceEntity,
     ]);
 
     systemUnderTest.execute(spaceTO);
@@ -78,11 +79,7 @@ describe("Calculate Space Score UseCase", () => {
       expect.any(Function)
     );
 
-    expect(spacePortMock.presentNewScore).toHaveBeenCalledWith(
-      20,
-      true,
-      spaceTO.spaceId
-    );
+    expect(spacePortMock.onScoreChanged).toHaveBeenCalledWith(20, 20, 30, 1);
   });
 
   test("should return 0 and false when no Elements are present", () => {
@@ -90,16 +87,17 @@ describe("Calculate Space Score UseCase", () => {
       {
         id: 1,
         elements: [],
-      },
+        description: "test",
+        requiredPoints: 0,
+        name: "test",
+        goals: "test",
+        requirements: [],
+      } as SpaceEntity,
     ]);
 
     systemUnderTest.execute(spaceTO);
 
-    expect(spacePortMock.presentNewScore).toHaveBeenCalledWith(
-      0,
-      false,
-      spaceTO.spaceId
-    );
+    expect(spacePortMock.onScoreChanged).toHaveBeenCalledWith(0, 0, 0, 1);
   });
 
   test("should throw an error if the space is not found", () => {
