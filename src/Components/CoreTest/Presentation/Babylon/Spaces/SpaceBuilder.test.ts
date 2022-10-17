@@ -6,7 +6,7 @@ import SpacePort from "../../../../Core/Ports/SpacePort/SpacePort";
 jest.mock("@babylonjs/core");
 const addSpacePresenterMock = jest.spyOn(
   SpacePort.prototype,
-  "registerSpacePresenter"
+  "registerAdapter"
 );
 
 describe("SpaceBuilder", () => {
@@ -30,9 +30,9 @@ describe("SpaceBuilder", () => {
   test("buildPresenter concludes the build step successfully and registers the presenter with the port", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
-    expect(systemUnderTest["presenter"]).toBeDefined();
-    expect(systemUnderTest.getPresenter()).toBeDefined();
-    expect(systemUnderTest.getPresenter()).toBeInstanceOf(SpacePresenter);
     expect(addSpacePresenterMock).toHaveBeenCalledTimes(1);
+    expect(addSpacePresenterMock).toHaveBeenCalledWith(
+      systemUnderTest["presenter"]
+    );
   });
 });

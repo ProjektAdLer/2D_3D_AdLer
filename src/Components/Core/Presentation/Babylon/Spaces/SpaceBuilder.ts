@@ -24,8 +24,8 @@ export default class SpaceBuilder extends PresentationBuilder<
 
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<ISpacePort>(
-      PORT_TYPES.ISpacePort
-    ).registerSpacePresenter(this.presenter!);
+    CoreDIContainer.get<ISpacePort>(PORT_TYPES.ISpacePort).registerAdapter(
+      this.presenter!
+    );
   }
 }

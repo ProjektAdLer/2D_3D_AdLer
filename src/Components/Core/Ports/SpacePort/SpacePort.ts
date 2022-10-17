@@ -1,5 +1,4 @@
 import ISpacePort from "./ISpacePort";
-import IScorePanelPresenter from "../../Presentation/React/SpaceDisplay/ScorePanel/IScorePanelPresenter";
 import ISpacePresenter from "../../Presentation/Babylon/Spaces/ISpacePresenter";
 import { injectable } from "inversify";
 import { logger } from "src/Lib/Logger";
@@ -12,7 +11,6 @@ export default class SpacePort
   extends AbstractPort<ISpaceAdapter>
   implements ISpacePort
 {
-  private scorePanelPresenter: IScorePanelPresenter;
   private spacePresenters: ISpacePresenter[] = [];
 
   onSpaceDataLoaded(spaceTO: SpaceTO): void {

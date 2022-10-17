@@ -1,11 +1,12 @@
-import { SpaceEntity } from "src/Components/Core/Domain/Entities/SpaceEntity";
 import { mock } from "jest-mock-extended";
+import ICalculateSpaceScoreUseCase from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import LoadSpaceUseCase from "../../../../Core/Application/UseCases/LoadSpace/LoadSpaceUseCase";
 import ILoadWorldUseCase from "../../../../Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import WorldEntity from "../../../../Core/Domain/Entities/WorldEntity";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import ISpacePort from "../../../../Core/Ports/SpacePort/ISpacePort";
@@ -15,6 +16,7 @@ const entityContainerMock = mock<IEntityContainer>();
 const uiPortMock = mock<IUIPort>();
 const loadWorldMock = mock<ILoadWorldUseCase>();
 const spacePortMock = mock<ISpacePort>();
+const calculateSpaceScoreMock = mock<ICalculateSpaceScoreUseCase>();
 
 describe("LoadSpaceUseCase", () => {
   let systemUnderTest: LoadSpaceUseCase;
@@ -37,6 +39,10 @@ describe("LoadSpaceUseCase", () => {
     CoreDIContainer.bind<ISpacePort>(PORT_TYPES.ISpacePort).toConstantValue(
       spacePortMock
     );
+
+    CoreDIContainer.bind<ICalculateSpaceScoreUseCase>(
+      USECASE_TYPES.ICalculateSpaceScore
+    ).toConstantValue(calculateSpaceScoreMock);
 
     systemUnderTest = CoreDIContainer.resolve(LoadSpaceUseCase);
   });

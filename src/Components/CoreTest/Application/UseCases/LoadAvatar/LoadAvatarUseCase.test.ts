@@ -13,9 +13,7 @@ describe("LoadAvatarUseCase", () => {
     );
   });
 
-  test("resolves to be true", async () => {
-    const result = await systemUnderTest.executeAsync();
-
-    expect(result).toBeTruthy();
+  test("resolves", async () => {
+    await systemUnderTest.executeAsync();
   });
 });

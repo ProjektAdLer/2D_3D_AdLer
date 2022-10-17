@@ -1,3 +1,4 @@
+import type ICalculateSpaceScoreUseCase from "src/Components/Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
@@ -22,7 +23,9 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     @inject(USECASE_TYPES.ILoadWorldUseCase)
     private loadWorldUseCase: ILoadWorldUseCase,
     @inject(PORT_TYPES.ISpacePort)
-    private spacePort: ISpacePort
+    private spacePort: ISpacePort,
+    @inject(USECASE_TYPES.ICalculateSpaceScore)
+    private calculateSpaceScore: ICalculateSpaceScoreUseCase
   ) {}
 
   async executeAsync(id: ElementID): Promise<SpaceTO> {
@@ -46,7 +49,7 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     else {
       let spaceTO = this.toTO(spaceEntity);
       this.spacePort.onSpaceDataLoaded(spaceTO);
-
+      this.calculateSpaceScore.execute({ spaceId: spaceTO.id });
       return Promise.resolve(spaceTO);
     }
   }

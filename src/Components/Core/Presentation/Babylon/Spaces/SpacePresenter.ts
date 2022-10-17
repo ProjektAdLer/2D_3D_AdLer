@@ -22,21 +22,25 @@ export default class SpacePresenter implements ISpacePresenter {
       throw new Error("ViewModel is not defined");
     }
   }
-
-  get SpaceId(): number {
-    return this.viewModel.id;
-  }
-
-  presentSpace(spaceTO: SpaceTO): void {
-    CoreDIContainer.get<ICalculateSpaceScoreUseCase>(
-      USECASE_TYPES.ICalculateSpaceScore
-    ).execute({ spaceId: spaceTO.id });
+  onSpaceDataLoaded(spaceTO: SpaceTO): void {
+    // CoreDIContainer.get<ICalculateSpaceScoreUseCase>(
+    //   USECASE_TYPES.ICalculateSpaceScore
+    // ).execute({ spaceId: spaceTO.id });
     this.setViewModelData(spaceTO);
     this.createElements(spaceTO.elements);
     this.createDoor();
   }
+  onScoreChanged(
+    score: number,
+    requiredScore: number,
+    maxScore: number,
+    spaceID: number
+  ): void {
+    if (spaceID !== this.viewModel.id) return;
+    if (score >= requiredScore) this.openDoor();
+  }
 
-  openDoor(): void {
+  private openDoor(): void {
     if (!this.doorPresenter) return;
     this.doorPresenter.openDoor();
   }
