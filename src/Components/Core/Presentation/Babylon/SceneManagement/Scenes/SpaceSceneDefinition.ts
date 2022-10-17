@@ -60,7 +60,7 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
     // create space
     this.director.build(this.spaceBuilder);
     const spacePresenter = this.spaceBuilder.getPresenter() as ISpacePresenter;
-    spacePresenter.presentSpace(this.spaceTO);
+    spacePresenter.onSpaceDataLoaded(this.spaceTO);
 
     // create avatar
     this.director.build(this.avatarBuilder);

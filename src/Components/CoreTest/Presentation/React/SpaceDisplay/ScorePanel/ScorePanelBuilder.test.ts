@@ -47,8 +47,8 @@ describe("ScorePanelBuilder", () => {
     systemUnderTest.buildPresenter();
 
     expect(systemUnderTest["presenter"]).toBeDefined();
-    expect(spacePortMock.registerScorePanelPresenter).toHaveBeenCalledTimes(1);
-    expect(spacePortMock.registerScorePanelPresenter).toHaveBeenCalledWith(
+    expect(spacePortMock.registerAdapter).toHaveBeenCalledTimes(1);
+    expect(spacePortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"]
     );
   });
