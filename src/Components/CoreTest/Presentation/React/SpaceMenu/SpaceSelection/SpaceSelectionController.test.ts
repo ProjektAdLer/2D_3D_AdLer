@@ -1,13 +1,16 @@
 import SpaceSelectionController from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionController";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import { logger } from "../../../../../../Lib/Logger";
-import ILoadSpaceUseCase from "../../../../../Core/Application/LoadSpace/ILoadSpaceUseCase";
+
 import { mock } from "jest-mock-extended";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import ILoadSpaceUseCase from "../../../../../Core/Application/UseCases/LoadSpace/ILoadSpaceUseCase";
+import SpaceSelectionViewModel from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionViewModel";
 
 jest.mock("src/Lib/Logger");
 
 const loadSpaceUseCaseMock = mock<ILoadSpaceUseCase>();
+
+const viewModel = new SpaceSelectionViewModel();
 
 describe("SpaceSelectionController", () => {
   let systemUnderTest: SpaceSelectionController;
@@ -20,7 +23,7 @@ describe("SpaceSelectionController", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new SpaceSelectionController();
+    systemUnderTest = new SpaceSelectionController(viewModel);
   });
 
   afterAll(() => {
