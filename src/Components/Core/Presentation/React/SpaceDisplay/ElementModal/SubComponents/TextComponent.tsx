@@ -26,8 +26,8 @@ export default function TextComponent({
         courseId: viewModel.parentCourseId.Value,
         elementId: viewModel.id.Value,
       });
-
-      setText(await showFile(path));
+      const bla = await showFile(path);
+      setText(bla);
     };
     debug();
   }, []);
