@@ -1,5 +1,5 @@
 import { useInjection } from "inversify-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ICalculateSpaceScoreUseCase from "src/Components/Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import ILoadWorldUseCase from "src/Components/Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
@@ -30,15 +30,14 @@ export default function SpaceSelection() {
         calculateSpaceScoreUseCase.execute({ spaceId: id })
       );
     };
-    loadWorldAsync();
+    if (viewModel) loadWorldAsync();
   }, []);
 
-  const [spaces] = useObservable<[number, string][]>(viewModel.spaces);
+  const [spaces] = useObservable<[number, string][]>(viewModel?.spaces);
   const [spacesCompleted] = useObservable<[number, boolean][]>(
-    viewModel.spacesCompleted
+    viewModel?.spacesCompleted
   );
-  const [selectedRowID] = useObservable<number>(viewModel.selectedRowID);
-
+  const [selectedRowID] = useObservable<number>(viewModel?.selectedRowID);
   if (!viewModel || !controller) return null;
 
   return (

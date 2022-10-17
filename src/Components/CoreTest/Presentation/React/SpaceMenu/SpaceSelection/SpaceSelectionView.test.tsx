@@ -1,30 +1,66 @@
 import { mock, mockDeep } from "jest-mock-extended";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
-import ISpaceSelectionController from "~ReactComponents/SpaceMenu/SpaceSelection/ISpaceSelectionController";
-import SpaceSelectionViewModel from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelectionViewModel";
-import SpaceSelection from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection";
 import { render } from "@testing-library/react";
+import SpaceSelectionViewModel from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionViewModel";
+import React from "react";
+import SpaceSelection from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelection";
+import ISpaceSelectionController from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/ISpaceSelectionController";
+import { Provider } from "inversify-react";
+import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
+import ILoadWorldUseCase from "../../../../../Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
+import ICalculateSpaceScoreUseCase from "../../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
+import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+
+const loadWorldUseCase = mock<ILoadWorldUseCase>();
+const calculateSpaceScoreUseCase = mock<ICalculateSpaceScoreUseCase>();
 
 describe("SpaceSelection", () => {
-  test("should render", () => {
-    useBuilderMock([
-      mockDeep<SpaceSelectionViewModel>(),
-      mock<ISpaceSelectionController>(),
-    ]);
-    render(<SpaceSelection />);
-  });
+  beforeAll(() => {
+    CoreDIContainer.unbindAll();
 
-  test.todo("extend tests, to test for correct mapping to rows");
+    CoreDIContainer.bind<ILoadWorldUseCase>(
+      USECASE_TYPES.ILoadWorldUseCase
+    ).toConstantValue(loadWorldUseCase);
+
+    CoreDIContainer.bind<ICalculateSpaceScoreUseCase>(
+      USECASE_TYPES.ICalculateSpaceScore
+    ).toConstantValue(calculateSpaceScoreUseCase);
+  });
+  test("should render and call controller on click", () => {
+    const vm = new SpaceSelectionViewModel();
+    vm.spaces.Value = [[1, "test"]];
+    vm.spacesCompleted.Value = [[1, true]];
+
+    const controllerMock = mock<ISpaceSelectionController>();
+    useBuilderMock([vm, controllerMock]);
+    const container = render(
+      <Provider container={CoreDIContainer}>
+        <SpaceSelection />
+      </Provider>
+    );
+
+    // click on the first row
+    container.getByText("[\u2713] test").click();
+    expect(controllerMock.onSpaceRowClicked).toBeCalledWith(1);
+  });
 
   test("doesn't render without controller", () => {
     useBuilderMock([mockDeep<SpaceSelectionViewModel>(), undefined]);
-    const { container } = render(<SpaceSelection />);
+    const { container } = render(
+      <Provider container={CoreDIContainer}>
+        <SpaceSelection />
+      </Provider>
+    );
     expect(container.firstChild).toBeNull();
   });
 
   test("doesn't render without view model", () => {
     useBuilderMock([undefined, mock<ISpaceSelectionController>()]);
-    const { container } = render(<SpaceSelection />);
+    const { container } = render(
+      <Provider container={CoreDIContainer}>
+        <SpaceSelection />
+      </Provider>
+    );
     expect(container.firstChild).toBeNull();
   });
 });
