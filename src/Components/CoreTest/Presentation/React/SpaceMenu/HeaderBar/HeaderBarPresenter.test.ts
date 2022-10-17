@@ -1,15 +1,18 @@
 import HeaderBarPresenter from "../../../../../Core/Presentation/React/SpaceMenu/HeaderBar/HeaderBarPresenter";
 import HeaderBarViewModel from "../../../../../Core/Presentation/React/SpaceMenu/HeaderBar/HeaderBarViewModel";
 
-describe("HeaderBarPresenter", () => {
-  let systemUnderTest: HeaderBarPresenter;
+let systemUnderTest: HeaderBarPresenter;
 
+describe("HeaderBarPresenter", () => {
   beforeEach(() => {
-    systemUnderTest = new HeaderBarPresenter(new HeaderBarViewModel());
+    const vm = new HeaderBarViewModel();
+
+    vm.title.Value = "Lernwelt12354";
+    systemUnderTest = new HeaderBarPresenter(vm);
   });
 
   test("displayWorldTitle sets viewModel variable", () => {
-    systemUnderTest.displayWorldTitle("test");
+    systemUnderTest.onWorldLoaded({ worldName: "test" });
     expect(systemUnderTest["viewModel"].title.Value).toBe("test");
   });
 });
