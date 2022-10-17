@@ -9,8 +9,10 @@ describe("ScorePanelPresenter", () => {
   });
 
   test("presentScore sets the score in the ViewModel", () => {
-    systemUnderTest.presentScore(420);
+    systemUnderTest.onScoreChanged(1, 2, 3);
 
-    expect(systemUnderTest["viewModel"].score.Value).toBe(420);
+    expect(systemUnderTest["viewModel"].score.Value).toBe(1);
+    expect(systemUnderTest["viewModel"].requiredScore.Value).toBe(2);
+    expect(systemUnderTest["viewModel"].maxScore.Value).toBe(3);
   });
 });
