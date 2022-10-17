@@ -19,6 +19,7 @@ const spaceTO: SpaceTO = {
   goals: "TestGoals",
   requirements: [],
   name: "TestSpace",
+  requiredPoints: 1,
   elements: [
     {
       id: 2,
@@ -28,6 +29,8 @@ const spaceTO: SpaceTO = {
       goals: "test",
       value: 42,
       parentSpaceId: 1,
+      hasScored: false,
+      parentCourseId: 1,
     },
   ],
 };
@@ -69,27 +72,6 @@ describe("SpacePresenter", () => {
     }).toThrowError("ViewModel");
   });
 
-  test("SpaceId returns ID from viewModel", () => {
-    expect(systemUnderTest.SpaceId).toBe(1);
-  });
-
-  test("nothing happens when the doorpresenter is not set and openDoor is called", () => {
-    //@ts-ignore
-    systemUnderTest["doorPresenter"] = undefined;
-    expect(() => {
-      systemUnderTest.openDoor();
-    }).not.toThrow();
-  });
-
-  test("openDoor calls the doorPresenter", () => {
-    const doorPresenterMock = mock<IDoorPresenter>();
-    systemUnderTest["doorPresenter"] = doorPresenterMock;
-
-    systemUnderTest.openDoor();
-
-    expect(doorPresenterMock.openDoor).toHaveBeenCalledTimes(1);
-  });
-
   test("presentSpace calls private subroutines", () => {
     // mock sub routines here, they are tested separately later
     const setViewModelDataMock = jest.fn();
@@ -99,7 +81,7 @@ describe("SpacePresenter", () => {
     const createDoorMock = jest.fn();
     systemUnderTest["createDoor"] = createDoorMock;
 
-    systemUnderTest.presentSpace(spaceTO);
+    systemUnderTest.onSpaceDataLoaded(spaceTO);
 
     expect(setViewModelDataMock).toHaveBeenCalledTimes(1);
     expect(createElementsMock).toHaveBeenCalledTimes(1);
@@ -130,6 +112,8 @@ describe("SpacePresenter", () => {
       value: 42,
       type: "h5p",
       parentSpaceId: 1,
+      hasScored: false,
+      parentCourseId: 1,
     });
 
     systemUnderTest["setSpaceDimensions"](spaceTO);
@@ -187,4 +171,26 @@ describe("SpacePresenter", () => {
   });
 
   test.todo("test door position/rotation calculation, when its well defined");
+
+  test("should open door, when winning score is presented", () => {
+    const doorPresenterMock = mock<IDoorPresenter>();
+    systemUnderTest["doorPresenter"] = doorPresenterMock;
+
+    systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
+    systemUnderTest.onScoreChanged(42, 42, 42, 1);
+    expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(1);
+    expect(doorPresenterMock.openDoor).toHaveBeenCalledTimes(1);
+  });
+
+  test("should not open door, when winning score is presented but id is wrong", () => {
+    systemUnderTest["openDoor"] = jest.fn();
+    systemUnderTest.onScoreChanged(42, 42, 42, 2);
+    expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(0);
+  });
+
+  test("should not open door, when winning score is presented but presenter is not registred", () => {
+    systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
+    systemUnderTest.onScoreChanged(42, 42, 42, 1);
+    expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(1);
+  });
 });
