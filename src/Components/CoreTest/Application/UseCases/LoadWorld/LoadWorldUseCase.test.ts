@@ -14,7 +14,7 @@ import ILoadAvatarUseCase from "../../../../Core/Application/UseCases/LoadAvatar
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IBackend from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
 import { minimalGetWorldDataResponse } from "../../../Adapters/BackendAdapter/BackendResponses";
-import elementTO from "../../../../Core/Application/DataTransferObjects/ElementTO";
+import WorldStatusTO from "../../../../Core/Application/DataTransferObjects/WorldStatusTO";
 
 const backendMock = mock<IBackend>();
 const worldPortMock = mock<IWorldPort>();
@@ -157,6 +157,11 @@ describe("LoadWorldUseCase", () => {
     entityContainerMock.createEntity.mockReturnValueOnce(mock<ElementEntity>());
     entityContainerMock.createEntity.mockReturnValueOnce(mock<SpaceEntity>());
     entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
+
+    backendMock.getWorldStatus.mockResolvedValue({
+      courseId: 1,
+      learningElements: [{}],
+    } as WorldStatusTO);
 
     await systemUnderTest.executeAsync();
 
