@@ -2,7 +2,7 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import CheckBoxEntry from "./CheckBoxEntry";
 import DetailSectionViewModel from "./DetailSectionViewModel";
-import spaceIcon from "../../../../../../Assets/icons/lernraum_icon.svg";
+import spaceIcon from "../../../../../../Assets/icons/13-space/space-icon-nobg.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import { ElementTypeStrings } from "../../../../Domain/Types/ElementTypes";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
@@ -56,7 +56,7 @@ export default function DetailSection() {
       </div>
 
       {description !== "" && (
-        <div className="border-b pb-2 border-gray-500">
+        <div className="pb-2 border-b border-gray-500">
           <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
             Beschreibung:
           </div>
@@ -66,7 +66,7 @@ export default function DetailSection() {
         </div>
       )}
       {goals !== "" && (
-        <div className="border-b pb-2 border-gray-500">
+        <div className="pb-2 border-b border-gray-500">
           <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
             Lernziele:
           </div>
@@ -74,7 +74,7 @@ export default function DetailSection() {
         </div>
       )}
       {elements.length > 0 && (
-        <div className="border-b pb-2 border-gray-500">
+        <div className="pb-2 border-b border-gray-500">
           <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
             Lernelemente:
           </div>
@@ -90,7 +90,7 @@ export default function DetailSection() {
                       {" " + element[1] + " (" + element[0] + ", " + element[3]}
                       <img
                         src={coinIcon}
-                        className="w-6 ml-1 mb-4"
+                        className="w-6 mb-4 ml-1"
                         alt="Coin-Icon"
                       ></img>
                       {" )"}
@@ -103,7 +103,7 @@ export default function DetailSection() {
         </div>
       )}
       {!!requiredPoints && (
-        <div className="border-b pb-2 border-gray-500">
+        <div className="pb-2 border-b border-gray-500">
           <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
             Benötigte Punkte:
           </div>
@@ -113,7 +113,7 @@ export default function DetailSection() {
         </div>
       )}
       {requirements.length > 0 && (
-        <div className="border-b pb-2 border-gray-500">
+        <div className="pb-2 border-b border-gray-500">
           <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
             Benötigte Räume zur Freischaltung:
           </div>
@@ -144,7 +144,7 @@ export default function DetailSection() {
       }) && (
         <StyledButton
           shape="freefloatleft"
-          className="self-center justify-self-center mt-2"
+          className="self-center mt-2 justify-self-center"
           onClick={controller.onSpaceButtonClicked}
         >
           {"Lernraum '" + name + "' betreten!"}
