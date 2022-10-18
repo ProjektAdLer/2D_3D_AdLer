@@ -27,7 +27,7 @@ const VideoComponent = ({
       const videoId = path.match(regex);
       const test = videoId![0];
 
-      setvideoUrl(test.split("/")[1]);
+      setvideoUrl(test.split("/")[1].split("=")[1]);
     };
     debug();
   }, []);
@@ -36,7 +36,7 @@ const VideoComponent = ({
     <div className="flex justify-center items-top max-h-90pro sm:w-[300px] md:w-[315px] lg:w-[900px]">
       <iframe
         className="w-full rounded-lg aspect-video"
-        src={`https://www.youtube.com/embed/${"UEJpDrXuP98"}`}
+        src={`https://www.youtube.com/embed/${videoUrl}`}
         frameBorder="0"
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
