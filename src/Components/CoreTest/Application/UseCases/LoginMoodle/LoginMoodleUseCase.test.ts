@@ -98,8 +98,8 @@ describe("LoginMoodleUseCase", () => {
     expect(moodlePortMock.loginSuccessful).toHaveBeenCalled();
   });
 
-  test("Throws, if wrong userData is sent to the Backend", async () => {
-    backendMock.logInUser.mockResolvedValue("Falsche Daten!");
+  test("Throws and displays error, if wrong userData is sent to the Backend", async () => {
+    backendMock.logInUser.mockRejectedValue("error");
     entityContainerMock.getEntitiesOfType.mockReturnValue([]);
 
     const badCall = async () => {
@@ -111,6 +111,10 @@ describe("LoginMoodleUseCase", () => {
 
     badCall().catch((error) => {
       expect(error).toBe("Wrong Password oder Username");
+      expect(uiPortMock.displayNotification).toHaveBeenCalledWith(
+        expect.any(String),
+        "error"
+      );
     });
   });
 });
