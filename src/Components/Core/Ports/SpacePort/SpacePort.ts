@@ -1,7 +1,5 @@
 import ISpacePort from "./ISpacePort";
-import ISpacePresenter from "../../Presentation/Babylon/Spaces/ISpacePresenter";
 import { injectable } from "inversify";
-import { logger } from "src/Lib/Logger";
 import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
 import AbstractPort from "../AbstractPort/AbstractPort";
 import ISpaceAdapter from "./ISpaceAdapter";
@@ -11,8 +9,6 @@ export default class SpacePort
   extends AbstractPort<ISpaceAdapter>
   implements ISpacePort
 {
-  private spacePresenters: ISpacePresenter[] = [];
-
   onSpaceDataLoaded(spaceTO: SpaceTO): void {
     this.adapters.forEach((adapter) => {
       adapter.onSpaceDataLoaded(spaceTO);
@@ -28,19 +24,5 @@ export default class SpacePort
     this.adapters.forEach((adapter) => {
       adapter.onScoreChanged(score, requiredScore, maxScore, spaceId);
     });
-  }
-
-  registerSpacePresenter(spacePresenter: ISpacePresenter): void {
-    if (spacePresenter === undefined) {
-      throw new Error("Passed spacePresenter is undefined");
-    }
-
-    if (
-      this.spacePresenters.find((lrp) => lrp === spacePresenter) === undefined
-    ) {
-      this.spacePresenters.push(spacePresenter);
-    } else {
-      logger.warn("SpacePresenter is already registered");
-    }
   }
 }
