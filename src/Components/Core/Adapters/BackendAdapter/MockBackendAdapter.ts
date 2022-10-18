@@ -5,24 +5,20 @@ import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
 import { ElementID } from "../../Domain/Types/EntityTypes";
 import BackendAdapter from "./BackendAdapter";
-import { ScoreH5PElementRequest, getWorldDataParams } from "./IBackendAdapter";
 import IDSL from "./Types/IDSL";
 import UserCredentials from "./Types/UserCredentials";
 
 @injectable()
 export default class MockBackendAdapter extends BackendAdapter {
-  deletePlayerData(userToken: string): Promise<boolean> {
+  deletePlayerData(): Promise<boolean> {
     throw new Error(
       "Method not implemented, since we are in the Fake Backend."
     );
   }
-  updatePlayerData(
-    userToken: string,
-    playerData: Partial<PlayerDataTO>
-  ): Promise<PlayerDataTO> {
+  updatePlayerData(): Promise<PlayerDataTO> {
     return Promise.resolve(new PlayerDataTO());
   }
-  getPlayerData(userToken: string): Promise<PlayerDataTO> {
+  getPlayerData(): Promise<PlayerDataTO> {
     return Promise.resolve({
       playerGender: "Male",
       playerWorldColor: "Blue",
@@ -30,15 +26,14 @@ export default class MockBackendAdapter extends BackendAdapter {
   }
   getElementScore(
     userToken: string,
-    elementId: ElementID,
-    courseId: ElementID
+    elementId: ElementID
   ): Promise<ElementScoreTO> {
     return Promise.resolve({
       elementId: elementId,
       successss: true,
     });
   }
-  getWorldStatus(userToken: string, worldId: number): Promise<WorldStatusTO> {
+  getWorldStatus(): Promise<WorldStatusTO> {
     return Promise.resolve({
       courseId: 1,
       learningElements: [
@@ -61,11 +56,7 @@ export default class MockBackendAdapter extends BackendAdapter {
       ],
     });
   }
-  getElementSource(
-    userToken: string,
-    elementId: number,
-    courseId: number
-  ): Promise<string> {
+  getElementSource(userToken: string, elementId: number): Promise<string> {
     const elementType = this.worldTO.learningWorld.learningElements.find(
       (element) => element.id === elementId
     )!.elementCategory;
@@ -92,11 +83,11 @@ export default class MockBackendAdapter extends BackendAdapter {
         throw new Error("Unknown element type");
     }
   }
-  scoreH5PElement(data: ScoreH5PElementRequest): Promise<boolean> {
+  scoreH5PElement(): Promise<boolean> {
     return Promise.resolve(true);
   }
 
-  getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
+  getCoursesAvailableForUser(): Promise<CourseListTO> {
     return Promise.resolve({
       courses: [
         {
@@ -107,11 +98,7 @@ export default class MockBackendAdapter extends BackendAdapter {
     });
   }
 
-  scoreElement(
-    userToken: string,
-    elementId: ElementID,
-    courseId: ElementID
-  ): Promise<boolean> {
+  scoreElement(): Promise<boolean> {
     return Promise.resolve(true);
   }
 
@@ -119,10 +106,7 @@ export default class MockBackendAdapter extends BackendAdapter {
     return Promise.resolve("fakeToken");
   }
 
-  public async getDSL({
-    userToken,
-    worldId,
-  }: getWorldDataParams): Promise<IDSL> {
+  public async getDSL(): Promise<IDSL> {
     return this.worldTO;
   }
 
