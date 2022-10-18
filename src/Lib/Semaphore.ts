@@ -20,7 +20,6 @@ type WaitingPromise = {
 export class Semaphore {
   private running = 0;
   private waiting: WaitingPromise[] = [];
-  private debugLogging = true;
 
   constructor(private label: string, public max: number) {
     if (max < 1) {
@@ -51,21 +50,9 @@ export class Semaphore {
    * ! Returns a function to release the lock, it is critical that this function is called when the task is finished with the resource.
    */
   acquire = (): Promise<Lock> => {
-    if (this.debugLogging) {
-      console.log(
-        `Lock requested for the ${this.label} resource - ${this.running} active, ${this.waiting.length} waiting`
-      );
-    }
-
     if (this.running < this.max) {
       this.running++;
       return Promise.resolve({ release: this.release });
-    }
-
-    if (this.debugLogging) {
-      console.log(
-        `Max active locks hit for the ${this.label} resource - there are ${this.running} tasks running and ${this.waiting.length} waiting.`
-      );
     }
 
     return new Promise<Lock>((resolve, reject) => {
@@ -79,27 +66,5 @@ export class Semaphore {
   private release = () => {
     this.running--;
     this.take();
-  };
-
-  /**
-   * Purge all waiting tasks from the [[Semaphore]]
-   */
-  purge = () => {
-    if (this.debugLogging) {
-      console.info(
-        `Purge requested on the ${this.label} semaphore, ${this.waiting.length} pending tasks will be cancelled.`
-      );
-    }
-
-    this.waiting.forEach((task) => {
-      task.reject(
-        new Error(
-          "The semaphore was purged and as a result this task has been cancelled"
-        )
-      );
-    });
-
-    this.running = 0;
-    this.waiting = [];
   };
 }

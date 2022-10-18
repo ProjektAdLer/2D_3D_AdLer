@@ -1,7 +1,7 @@
 import { Engine, HighlightLayer, Scene, SceneOptions } from "@babylonjs/core";
 import { injectable } from "inversify";
 import { config } from "src/config";
-import { Semaphore } from "src/Lib/Somaphore";
+import { Semaphore } from "src/Lib/Semaphore";
 
 /**
  * @description This class is responsible for creating a Scene.

@@ -172,4 +172,16 @@ describe("EntityManager", () => {
       systemUnderTest.useSingletonEntity<TestEntity>({}, TestEntity);
     }).toThrow();
   });
+
+  test("should get all Entites", () => {
+    const entity1 = systemUnderTest.createEntity<TestEntity>({}, TestEntity);
+    const entity2 = systemUnderTest.createEntity<TestEntity>({}, TestEntity);
+    const entity3 = systemUnderTest.createEntity<TestEntity2>({}, TestEntity2);
+
+    expect(systemUnderTest.getAllEntities()).toEqual([
+      entity1,
+      entity2,
+      entity3,
+    ]);
+  });
 });
