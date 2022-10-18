@@ -9,7 +9,7 @@ describe("GetIcon should return a react component for valid element types", () =
     ["image" as ElementTypeStrings],
     ["video" as ElementTypeStrings],
     ["h5p" as ElementTypeStrings],
-  ])("[Smoketest] should run for %s", (type) => {
+  ])("should run for %s", (type) => {
     const result = getElementIcon(type);
     if (type === "image") expect(result.props["src"]).toContain("bild");
     // Warum nutzen wir nicht nur englische Begriffe :( - PG
