@@ -15,7 +15,7 @@ import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IUIPort from "../../../Ports/UIPort/IUIPort";
 import WorldTO from "../../DataTransferObjects/WorldTO";
 import ElementTO from "../../DataTransferObjects/ElementTO";
-import { Semaphore } from "src/Lib/Somaphore";
+import { Semaphore } from "src/Lib/Semaphore";
 import WorldStatusTO from "../../DataTransferObjects/WorldStatusTO";
 
 @injectable()
