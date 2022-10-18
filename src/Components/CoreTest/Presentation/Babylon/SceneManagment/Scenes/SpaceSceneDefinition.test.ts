@@ -1,22 +1,20 @@
 import { NullEngine, Scene } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
-import { config } from "../../../../../config";
-import SpaceTO from "../../../../Core/Application/DataTransferObjects/SpaceTO";
-import ILoadAvatarUseCase from "../../../../Core/Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
-import ILoadSpaceUseCase from "../../../../Core/Application/UseCases/LoadSpace/ILoadSpaceUseCase";
-import BuilderDIContainer from "../../../../Core/DependencyInjection/Builders/BuilderDIContainer";
-import BUILDER_TYPES from "../../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
-import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
-import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import AbstractPort from "../../../../Core/Ports/AbstractPort/AbstractPort";
-import ISpaceAdapter from "../../../../Core/Ports/SpacePort/ISpaceAdapter";
-import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
-import SpaceSceneDefinition from "../../../../Core/Presentation/Babylon/SceneManagement/Scenes/SpaceSceneDefinition";
-import ISpacePresenter from "../../../../Core/Presentation/Babylon/Spaces/ISpacePresenter";
-import IPresentationBuilder from "../../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
-import IPresentationDirector from "../../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
+import SpaceTO from "../../../../../Core/Application/DataTransferObjects/SpaceTO";
+import ILoadAvatarUseCase from "../../../../../Core/Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
+import ILoadSpaceUseCase from "../../../../../Core/Application/UseCases/LoadSpace/ILoadSpaceUseCase";
+import BUILDER_TYPES from "../../../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
+import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
+import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import AbstractPort from "../../../../../Core/Ports/AbstractPort/AbstractPort";
+import ISpaceAdapter from "../../../../../Core/Ports/SpacePort/ISpaceAdapter";
+import INavigation from "../../../../../Core/Presentation/Babylon/Navigation/INavigation";
+import SpaceSceneDefinition from "../../../../../Core/Presentation/Babylon/SceneManagement/Scenes/SpaceSceneDefinition";
+import ISpacePresenter from "../../../../../Core/Presentation/Babylon/Spaces/ISpacePresenter";
+import IPresentationBuilder from "../../../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
+import IPresentationDirector from "../../../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
 import history from "history/browser";
 
 jest.mock("@babylonjs/core");
@@ -94,16 +92,16 @@ describe("SpaceScene", () => {
 
     await systemUnderTest["initializeScene"]();
 
-    expect(presenterMock.presentSpace).toHaveBeenCalledWith(spaceTO);
+    expect(presenterMock.onSpaceDataLoaded).toHaveBeenCalledWith(spaceTO);
   });
 
-  test("preTasks contain call to loadSpaceUseCase", async () => {
+  test("preTasks contains call to loadSpaceUseCase", async () => {
     await systemUnderTest["preTasks"].forEach((task) => task());
 
     expect(loadSpaceUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
   });
 
-  test("preTasks contain call to loadAvatarUseCase", async () => {
+  test("preTasks contains call to loadAvatarUseCase", async () => {
     await systemUnderTest["preTasks"].forEach((task) => task());
 
     expect(loadAvatarUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
