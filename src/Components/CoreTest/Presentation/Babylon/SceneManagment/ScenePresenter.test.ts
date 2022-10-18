@@ -1,5 +1,6 @@
 import {
   Camera,
+  HighlightLayer,
   ISceneLoaderAsyncResult,
   ISceneLoaderProgressEvent,
   Mesh,
@@ -41,11 +42,24 @@ describe("scenePresenter", () => {
     }).toThrowError("Scene is not initialized yet");
   });
 
-  test("Scene getter returns scene from viewmodel", () => {
+  test("Scene getter returns scene from sceneDefinition", () => {
     const createdScene =
       fillTestSceneDefinitionSceneGetter(testSceneDefinition);
 
     expect(systemUnderTest.Scene).toBe(createdScene);
+  });
+
+  test("HighlightLayer getter throws if not set", () => {
+    expect(() => {
+      systemUnderTest.HighlightLayer;
+    }).toThrowError("HighlightLayer is not initialized yet");
+  });
+
+  test("HighlightLayer getter returns layer from sceneDefinition", () => {
+    const highlighLayerMock = mock<HighlightLayer>();
+    testSceneDefinition["highlighLayer"] = highlighLayerMock;
+
+    expect(systemUnderTest.HighlightLayer).toBe(highlighLayerMock);
   });
 
   test("loadModel calls SceneLoader.ImportMeshAsync", async () => {

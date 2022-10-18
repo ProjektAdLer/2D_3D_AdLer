@@ -30,6 +30,9 @@ export default class ScenePresenter implements IScenePresenter {
   }
 
   get HighlightLayer(): HighlightLayer {
+    if (!this.sceneDefinition.HighlightLayer) {
+      throw new Error("HighlightLayer is not initialized yet");
+    }
     return this.sceneDefinition.HighlightLayer;
   }
 
