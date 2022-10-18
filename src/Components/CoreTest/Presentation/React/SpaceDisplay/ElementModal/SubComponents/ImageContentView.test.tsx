@@ -7,12 +7,12 @@ import { act } from "@testing-library/react";
 import IGetElementSourceUseCase from "../../../../../../Core/Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
 import USECASE_TYPES from "../../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
-import VideoComponent from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/VideoComponent";
+import ImageComponent from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/ImageComponent";
 import ElementModalViewModel from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
 
 const sourceUseCase = mock<IGetElementSourceUseCase>();
 
-describe("VideoComponent", () => {
+describe("ImageComponent", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.unbindAll();
@@ -20,7 +20,7 @@ describe("VideoComponent", () => {
     //@ts-ignore
     sourceUseCase["executeAsync"] = () =>
       Promise.resolve(
-        "https://www.youtube.com/watch?v=UEJpDrXuP98&ab_channel=AbroadinJapan&token=46dd4cbdafda7fc864c8ce73aae3a897"
+        "https://testmoodle.cluuub.xyz/webservice/pluginfile.php/284/mod_resource/content/0/Cars%20is%20cool.jpg?forcedownload=1&token=46dd4cbdafda7fc864c8ce73aae3a897"
       );
 
     CoreDIContainer.bind<IGetElementSourceUseCase>(
@@ -41,7 +41,7 @@ describe("VideoComponent", () => {
     await act(async () => {
       component = render(
         <Provider container={CoreDIContainer}>
-          <VideoComponent viewModel={vm} />
+          <ImageComponent viewModel={vm} />
         </Provider>
       );
     });
