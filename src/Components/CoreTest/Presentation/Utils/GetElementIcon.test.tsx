@@ -1,4 +1,4 @@
-import { ElementTypeStrings } from "src/Components/Core/Domain/Types/ElementTypes";
+import { ElementTypeStrings } from "../../../Core/Domain/Types/ElementTypes";
 import { getElementIcon } from "../../../Core/Presentation/Utils/GetIcon";
 
 // Only smoketest here, because the only idfference between the returned
@@ -9,13 +9,15 @@ describe("GetIcon should return a react component for valid element types", () =
     ["image" as ElementTypeStrings],
     ["video" as ElementTypeStrings],
     ["h5p" as ElementTypeStrings],
-  ])("[Smoketest] should run for", (type) => {
+  ])("[Smoketest] should run for %s", (type) => {
     const result = getElementIcon(type);
-    expect(result).toBeDefined();
+    if (type === "image") expect(result.props["src"]).toContain("bild");
+    // Warum nutzen wir nicht nur englische Begriffe :( - PG
+    else expect(result.props["src"]).toContain(type);
   });
 
-  // test.skip("should return null, if no valid input is delivered", () => {
-  //   const result = getElementIcon("");
-  //   expect(result).toBeNull();
-  // });
+  test("should return h5p, if no valid input is delivered", () => {
+    const result = getElementIcon("" as ElementTypeStrings);
+    expect(result.props["src"]).toContain("h5p");
+  });
 });
