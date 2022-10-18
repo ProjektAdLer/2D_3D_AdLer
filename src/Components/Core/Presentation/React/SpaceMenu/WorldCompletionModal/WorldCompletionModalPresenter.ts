@@ -34,6 +34,8 @@ export default class WorldCompletionModalPresenter
 
         // if the space isn't found, it hasn't been completed
         if (completed === undefined) {
+          // Booleans cant be undefined
+          /* istanbul ignore next */
           completed = false;
         }
 

@@ -1,12 +1,6 @@
-import { mock } from "jest-mock-extended";
 import WorldTO from "../../../../../Core/Application/DataTransferObjects/WorldTO";
 import SpaceSelectionPresenter from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionPresenter";
 import SpaceSelectionViewModel from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionViewModel";
-
-import { mock as mock2 } from "intermock";
-import SpaceTO from "../../../../../Core/Application/DataTransferObjects/SpaceTO";
-
-import fs from "fs";
 
 describe("SpaceSelectionPresenter", () => {
   let systemUnderTest: SpaceSelectionPresenter;
