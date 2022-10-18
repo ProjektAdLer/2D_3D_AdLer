@@ -4,3 +4,4 @@ coverage
 build
 .DS_Store
 scripts/*/*.js
+.vscode/settings.json
