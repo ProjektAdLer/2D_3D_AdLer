@@ -8,26 +8,27 @@ import {
   SceneLoader,
 } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
+import { config } from "../../../../../config";
 import { logger } from "../../../../../Lib/Logger";
-import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import ICreateSceneClass from "../../../../Core/Presentation/Babylon/SceneManagement/ICreateSceneClass";
 import ScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/ScenePresenter";
+import TestSceneDefinition, {
+  fillTestSceneDefinitionSceneGetter,
+} from "./TestSceneDefinition";
 
 jest.mock("@babylonjs/core");
 jest.mock("src/Lib/Logger");
 
 describe("scenePresenter", () => {
   let systemUnderTest: ScenePresenter;
+  let testSceneDefinition: TestSceneDefinition;
 
   beforeAll(() => {
-    // TODO: setup NullEngine for testing
+    config.isDebug = false;
   });
 
   beforeEach(() => {
-    // snapshot and restore the container to clear all injected singletons between tests
-    CoreDIContainer.snapshot();
-    systemUnderTest = CoreDIContainer.resolve(ScenePresenter);
-    CoreDIContainer.restore();
+    testSceneDefinition = new TestSceneDefinition();
+    systemUnderTest = new ScenePresenter(testSceneDefinition);
   });
 
   afterAll(() => {
@@ -37,12 +38,12 @@ describe("scenePresenter", () => {
   test("Scene getter throws if no scene is set", () => {
     expect(() => {
       systemUnderTest.Scene;
-    }).toThrowError("There is no scene set.");
+    }).toThrowError("Scene is not initialized yet");
   });
 
   test("Scene getter returns scene from viewmodel", () => {
-    let createdScene = new Scene(new NullEngine());
-    systemUnderTest["scene"] = createdScene;
+    const createdScene =
+      fillTestSceneDefinitionSceneGetter(testSceneDefinition);
 
     expect(systemUnderTest.Scene).toBe(createdScene);
   });
@@ -57,6 +58,7 @@ describe("scenePresenter", () => {
       result.meshes = [meshMock];
       return Promise.resolve(result);
     });
+    fillTestSceneDefinitionSceneGetter(testSceneDefinition);
 
     let result = await systemUnderTest.loadModel(url, false, onProgress);
 
@@ -65,7 +67,7 @@ describe("scenePresenter", () => {
       "",
       url,
       "",
-      systemUnderTest["scene"],
+      systemUnderTest.Scene,
       onProgress
     );
     expect(result).toEqual([meshMock]);
@@ -80,6 +82,7 @@ describe("scenePresenter", () => {
       result.meshes = [meshMock];
       return Promise.resolve(result);
     });
+    fillTestSceneDefinitionSceneGetter(testSceneDefinition);
 
     await systemUnderTest.loadModel(url, true);
 
@@ -89,6 +92,8 @@ describe("scenePresenter", () => {
   });
 
   test("createMesh creates a mesh", () => {
+    fillTestSceneDefinitionSceneGetter(testSceneDefinition);
+
     let mesh = systemUnderTest.createMesh("testMesh");
 
     expect(mesh).toBeInstanceOf(Mesh);
@@ -96,6 +101,8 @@ describe("scenePresenter", () => {
   });
 
   test("createMesh adds mesh to navigation meshes, when isRelevantForNavigation in set true", () => {
+    fillTestSceneDefinitionSceneGetter(testSceneDefinition);
+
     let mesh = systemUnderTest.createMesh("testMesh", true);
 
     expect(mesh).toBeInstanceOf(Mesh);
@@ -103,6 +110,7 @@ describe("scenePresenter", () => {
   });
 
   test("NavigationMeshes getter returns navigation meshes from viewmodel", () => {
+    fillTestSceneDefinitionSceneGetter(testSceneDefinition);
     let testMeshes = [systemUnderTest.createMesh("test", true)];
 
     expect(systemUnderTest.NavigationMeshes).toEqual(testMeshes);
@@ -117,29 +125,17 @@ describe("scenePresenter", () => {
   });
 
   test("createScene sets a new scene in the SceneViewModel", () => {
-    const createSceneClassMock = mock<ICreateSceneClass>();
-    createSceneClassMock.preTasks = [];
-
-    systemUnderTest
-      .createScene(new NullEngine(), createSceneClassMock)
-      .then(() => {
-        expect(createSceneClassMock.createScene).toHaveBeenCalledTimes(1);
-        expect(systemUnderTest["scene"]).toBe(
-          createSceneClassMock.createScene.mock.results[0].value
-        );
-      });
+    testSceneDefinition.createScene = jest.fn();
+    systemUnderTest.createScene(new NullEngine()).then(() => {
+      expect(testSceneDefinition.createScene).toHaveBeenCalledTimes(1);
+    });
   });
 
   test("createRenderLoop calls the sceneView", async () => {
-    const createSceneClassMock = mock<ICreateSceneClass>();
-    createSceneClassMock.preTasks = [];
     const nullEngine = new NullEngine();
     const sceneMock = mock<Scene>();
     sceneMock.getEngine.mockReturnValue(nullEngine);
-    createSceneClassMock.createScene.mockResolvedValue(sceneMock);
-
-    // create scene to register engine by extension
-    await systemUnderTest.createScene(nullEngine, createSceneClassMock);
+    testSceneDefinition["scene"] = sceneMock;
 
     systemUnderTest.startRenderLoop();
 
@@ -149,13 +145,9 @@ describe("scenePresenter", () => {
   });
 
   test("renderFunction calls render on the scene", async () => {
-    const createSceneClassMock = mock<ICreateSceneClass>();
-    createSceneClassMock.preTasks = [];
     const sceneMock = mock<Scene>();
-    createSceneClassMock.createScene.mockResolvedValue(sceneMock);
+    testSceneDefinition["scene"] = sceneMock;
     sceneMock.activeCamera = mock<Camera>();
-
-    await systemUnderTest.createScene(new NullEngine(), createSceneClassMock);
 
     systemUnderTest["renderFunction"]();
 
@@ -163,13 +155,9 @@ describe("scenePresenter", () => {
   });
 
   test("renderFunction warns if no active camera is in the scene", async () => {
-    const createSceneClassMock = mock<ICreateSceneClass>();
-    createSceneClassMock.preTasks = [];
     const sceneMock = mock<Scene>();
-    createSceneClassMock.createScene.mockResolvedValue(sceneMock);
+    testSceneDefinition["scene"] = sceneMock;
     sceneMock.activeCamera = null;
-
-    await systemUnderTest.createScene(new NullEngine(), createSceneClassMock);
 
     systemUnderTest["renderFunction"]();
 

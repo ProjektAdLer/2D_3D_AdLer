@@ -23,6 +23,9 @@ export default class ScenePresenter implements IScenePresenter {
   private navigationMeshes: AbstractMesh[] = [];
 
   get Scene(): Scene {
+    if (!this.sceneDefinition.Scene) {
+      throw new Error("Scene is not initialized yet");
+    }
     return this.sceneDefinition.Scene;
   }
 
