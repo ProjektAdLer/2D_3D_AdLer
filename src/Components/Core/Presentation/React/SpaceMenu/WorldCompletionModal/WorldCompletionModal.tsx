@@ -6,7 +6,6 @@ import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/Style
 import IWorldCompletionModalController from "./IWorldCompletionModalController";
 import WorldCompletionModalViewModel from "./WorldCompletionModalViewModel";
 import SolutionIcon from "../../../../../../Assets/icons/14-1_world-completed/world-completed-icon-nobg.svg";
-import IWorldCompletionModalPresenter from "./IWorldCompletionModalPresenter";
 
 export default function WorldCompletionModal() {
   const [viewModel, controller] = useBuilder<
