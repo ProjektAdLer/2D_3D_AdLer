@@ -1,21 +1,16 @@
 import SpaceView from "../../../../Core/Presentation/Babylon/Spaces/SpaceView";
 import SpaceViewModel from "../../../../Core/Presentation/Babylon/Spaces/SpaceViewModel";
-import {
-  Color3,
-  Mesh,
-  NullEngine,
-  StandardMaterial,
-  Vector2,
-} from "@babylonjs/core";
+import { Color3, Mesh, StandardMaterial, Vector2 } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import ISpaceController from "../../../../Core/Presentation/Babylon/Spaces/ISpaceController";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
-import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
+import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 
 const spaceControllerMock = mock<ISpaceController>();
 const scenePresenterMock = mock<IScenePresenter>();
-const babylonMock = new NullEngine();
+const scenePresenterFactoryMock = () => scenePresenterMock;
+
 describe("SpaceView", () => {
   let systemUnderTest: SpaceView;
   let viewModel: SpaceViewModel;
@@ -23,9 +18,9 @@ describe("SpaceView", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind<IScenePresenter>(
-      CORE_TYPES.IScenePresenter
-    ).toConstantValue(scenePresenterMock);
+    CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
+      scenePresenterFactoryMock
+    );
   });
 
   beforeEach(() => {
