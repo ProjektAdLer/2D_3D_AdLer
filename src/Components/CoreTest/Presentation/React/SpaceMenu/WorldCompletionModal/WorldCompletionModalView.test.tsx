@@ -13,12 +13,21 @@ describe("WorldCompletionModalView", () => {
     const vm = new WorldCompletionModalViewModel();
     vm.showModal.Value = true;
     useBuilderMock([vm, controllerMock]);
-    const { container } = render(<WorldCompletionModal />);
-    expect(container).toBeInTheDocument();
+    const container = render(<WorldCompletionModal />);
+    expect(
+      container.getByText(
+        "Du hast alle Lernräume erfolgreich abgeschlossen und somit die Lernwelt bestanden, herzlichen Glückwunsch!"
+      )
+    ).toBeInTheDocument();
   });
-  test("should net render when not openend", () => {
-    useBuilderMock([new WorldCompletionModalViewModel(), undefined]);
-    const { container } = render(<WorldCompletionModal />);
+  test("should not render when not openend", () => {
+    const vm = new WorldCompletionModalViewModel();
+    vm.showModal.Value = false;
+    useBuilderMock([vm, undefined]);
+    const container = render(<WorldCompletionModal />);
+    expect(
+      container.queryByText("Du hast alle Lernräume erfolgreich")
+    ).not.toBeInTheDocument();
   });
 
   test("should call controller when clicked", () => {
@@ -26,9 +35,9 @@ describe("WorldCompletionModalView", () => {
     vm.showModal.Value = true;
     vm.spaceIDs.Value = [1, 2, 3];
     vm.spacesCompleted.Value = 3;
-    useBuilderMock([new WorldCompletionModalViewModel(), controllerMock]);
+    useBuilderMock([vm, controllerMock]);
     const component = render(<WorldCompletionModal />);
     fireEvent.click(component.getByRole("button"));
-    expect(controllerMock.CloseButtonClicked).toBeCalled();
+    expect(controllerMock.CloseButtonClicked).toHaveBeenCalled();
   });
 });
