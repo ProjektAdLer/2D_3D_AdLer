@@ -10,7 +10,9 @@ import "@testing-library/jest-dom";
 const controllerMock = mock<WorldCompletionModalController>();
 describe("WorldCompletionModalView", () => {
   test("should render when openend", () => {
-    useBuilderMock([new WorldCompletionModalViewModel(), controllerMock]);
+    const vm = new WorldCompletionModalViewModel();
+    vm.showModal.Value = true;
+    useBuilderMock([vm, controllerMock]);
     const { container } = render(<WorldCompletionModal />);
     expect(container).toBeInTheDocument();
   });
@@ -20,9 +22,13 @@ describe("WorldCompletionModalView", () => {
   });
 
   test("should call controller when clicked", () => {
+    const vm = new WorldCompletionModalViewModel();
+    vm.showModal.Value = true;
+    vm.spaceIDs.Value = [1, 2, 3];
+    vm.spacesCompleted.Value = 3;
     useBuilderMock([new WorldCompletionModalViewModel(), controllerMock]);
     const component = render(<WorldCompletionModal />);
-    fireEvent.click(component.getByText("X", { exact: false }));
+    fireEvent.click(component.getByRole("button"));
     expect(controllerMock.CloseButtonClicked).toBeCalled();
   });
 });
