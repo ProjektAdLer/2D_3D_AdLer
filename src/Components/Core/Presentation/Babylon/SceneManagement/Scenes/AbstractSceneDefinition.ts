@@ -28,12 +28,12 @@ export default abstract class AbstractSceneDefinition {
     return this.scene;
   }
 
-  protected highlighLayer: HighlightLayer;
+  protected highlightLayer: HighlightLayer;
   /**
    * Getter for the highligh layer.
    **/
   get HighlightLayer(): any {
-    return this.highlighLayer;
+    return this.highlightLayer;
   }
 
   /**

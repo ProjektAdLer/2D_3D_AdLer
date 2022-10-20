@@ -13,6 +13,7 @@ import { config } from "../../../../../config";
 import { logger } from "../../../../../Lib/Logger";
 import ScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/ScenePresenter";
 import TestSceneDefinition, {
+  fillTestSceneDefinitionHighlightLayerGetter,
   fillTestSceneDefinitionSceneGetter,
 } from "./TestSceneDefinition";
 
@@ -56,10 +57,10 @@ describe("scenePresenter", () => {
   });
 
   test("HighlightLayer getter returns layer from sceneDefinition", () => {
-    const highlighLayerMock = mock<HighlightLayer>();
-    testSceneDefinition["highlighLayer"] = highlighLayerMock;
+    const createdHighlighLayer =
+      fillTestSceneDefinitionHighlightLayerGetter(testSceneDefinition);
 
-    expect(systemUnderTest.HighlightLayer).toBe(highlighLayerMock);
+    expect(systemUnderTest.HighlightLayer).toBe(createdHighlighLayer);
   });
 
   test("loadModel calls SceneLoader.ImportMeshAsync", async () => {
