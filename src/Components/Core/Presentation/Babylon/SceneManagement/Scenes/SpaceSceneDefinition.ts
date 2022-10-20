@@ -13,10 +13,7 @@ import "@babylonjs/inspector";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
 import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
-import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
 import bind from "bind-decorator";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type ILoadSpaceUseCase from "src/Components/Core/Application/UseCases/LoadSpace/ILoadSpaceUseCase";
@@ -41,8 +38,7 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
     private avatarBuilder: IPresentationBuilder,
     @inject(CORE_TYPES.INavigation)
     private navigation: INavigation,
-    @inject(PORT_TYPES.ISpacePort)
-    private spacePort: AbstractPort<ISpaceAdapter>,
+
     @inject(USECASE_TYPES.ILoadSpaceUseCase)
     private loadSpaceUseCase: ILoadSpaceUseCase,
     @inject(USECASE_TYPES.ILoadAvatarUseCase)
@@ -57,10 +53,10 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
     this.scene.clearColor = new Color4(0.66, 0.83, 0.98, 1);
     new HemisphericLight("light", new Vector3(0, 1, 0), this.scene);
 
-    this.highlighLayer = new HighlightLayer("highlightLayer", this.scene);
-    this.highlighLayer.innerGlow = false;
-    this.highlighLayer.blurHorizontalSize = 1;
-    this.highlighLayer.blurVerticalSize = 1;
+    this.highlightLayer = new HighlightLayer("highlightLayer", this.scene);
+    this.highlightLayer.innerGlow = false;
+    this.highlightLayer.blurHorizontalSize = 1;
+    this.highlightLayer.blurVerticalSize = 1;
 
     // create space
     this.director.build(this.spaceBuilder);
