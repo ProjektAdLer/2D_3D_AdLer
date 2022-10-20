@@ -4,7 +4,9 @@ import {
   NullEngine,
   Quaternion,
   Scene,
+  TransformNode,
 } from "@babylonjs/core";
+import { waitFor } from "@testing-library/react";
 import { any, mock, mockDeep } from "jest-mock-extended";
 import Observable from "../../../../../Lib/Observable";
 import SimpleEvent from "../../../../../Lib/SimpleEvent";
@@ -21,21 +23,20 @@ jest.mock("@babylonjs/core");
 
 // setup navigation mock
 const navigationMock = mock<INavigation>();
-navigationMock.onNavigationReadyObservable = new SimpleEvent();
 
 // setup scene presenter mock
 const scene = new Scene(new NullEngine());
 scene.getTransformNodeByName = jest
   .fn()
-  .mockReturnValue(new AbstractMesh("AvatarParentNode", scene));
+  .mockReturnValue(new TransformNode("AvatarParentNode", scene));
 const scenePresenterMock = mockDeep<IScenePresenter>();
-//@ts-ignore
-scenePresenterMock.Scene = scene;
+
+const scenePresenterFactoryMock = () => scenePresenterMock;
+
+// setup return values for mocked dependencies
 const loadModelMockReturnValue = [
   new AbstractMesh("TestMesh", new Scene(new NullEngine())),
 ];
-
-const scenePresenterFactoryMock = () => scenePresenterMock;
 
 // util function to create system under test
 function createAvatarView(): AvatarView {
@@ -60,32 +61,23 @@ describe("AvatarView", () => {
   });
 
   beforeEach(() => {
+    // set return value before each test to prevent resetting between tests
     scenePresenterMock.loadModel.mockResolvedValue(loadModelMockReturnValue);
+
+    // reset navigation ready event
+    navigationMock.onNavigationReadyObservable = new SimpleEvent();
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
   });
 
-  test.skip("constructor calls the scenePresenter to load avatar models", () => {
+  test("constructor calls the scenePresenter to load avatar models", async () => {
     systemUnderTest = createAvatarView();
 
-    let quaternion = new Quaternion(0, 0, 0, 1);
-
-    expect(systemUnderTest["viewModel"].meshes.Value).toHaveLength(1);
-    expect(systemUnderTest["viewModel"].meshes.Value[0].name).toBe("TestMesh");
-    expect(
-      systemUnderTest["viewModel"].meshes.Value[0].rotationQuaternion?.x
-    ).toEqual(quaternion.x);
-    expect(
-      systemUnderTest["viewModel"].meshes.Value[0].rotationQuaternion?.y
-    ).toEqual(quaternion.y);
-    expect(
-      systemUnderTest["viewModel"].meshes.Value[0].rotationQuaternion?.z
-    ).toEqual(quaternion.z);
-    expect(
-      systemUnderTest["viewModel"].meshes.Value[0].rotationQuaternion?.w
-    ).toEqual(quaternion.w);
+    waitFor(() => {
+      expect(systemUnderTest["viewModel"].meshes.Value).toHaveLength(1);
+    });
   });
 
   test("constructor registeres callback for navigation setup", () => {
@@ -96,20 +88,38 @@ describe("AvatarView", () => {
     ).toHaveLength(1);
   });
 
-  test.skip("setupAvatarNavigation is called when the event in the navigation is fired", () => {
+  test("setupAvatarNavigation is called when the event in the navigation is fired", async () => {
     navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
-    systemUnderTest["viewModel"].meshes.Value =
-      loadModelMockReturnValue as Mesh[];
-    //@ts-ignore
-    scenePresenterMock.Scene.onBeforeRenderObservable =
-      mockDeep<Observable<any>>();
 
     systemUnderTest = createAvatarView();
-
     navigationMock.onNavigationReadyObservable.notifySubscribers();
-    expect(systemUnderTest["viewModel"].agentIndex).toBe(42);
-    expect(
-      navigationMock.onNavigationReadyObservable["subscribers"]
-    ).toHaveLength(0);
+
+    waitFor(() => {
+      expect(systemUnderTest["viewModel"].agentIndex).toBe(42);
+      expect(
+        navigationMock.onNavigationReadyObservable["subscribers"]
+      ).toHaveLength(0);
+    });
+  });
+
+  test("moveAvatar gets new position and velocity from navigation crowd", async () => {
+    navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
+    navigationMock.onNavigationReadyObservable.notifySubscribers();
+    systemUnderTest = createAvatarView();
+
+    navigationMock.Crowd.getAgentPosition = jest
+      .fn()
+      .mockReturnValue([1, 2, 3]);
+    navigationMock.Crowd.getAgentVelocity = jest
+      .fn()
+      .mockReturnValue([4, 5, 6]);
+
+    //TODO: remove waitFor prevent incorrect coverage
+    waitFor(() => {
+      systemUnderTest["moveAvatar"]();
+
+      expect(navigationMock.Crowd.getAgentPosition).toBeCalledWith(42);
+      expect(navigationMock.Crowd.getAgentVelocity).toBeCalledWith(42);
+    });
   });
 });

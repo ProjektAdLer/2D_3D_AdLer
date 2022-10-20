@@ -1,16 +1,13 @@
 import {
-  ArcRotateCamera,
-  ArcRotateCameraMouseWheelInput,
-  ArcRotateCameraPointersInput,
   Axis,
   LinesMesh,
   Mesh,
   MeshBuilder,
   Quaternion,
-  TransformNode,
   Vector3,
 } from "@babylonjs/core";
 import bind from "bind-decorator";
+import { Semaphore } from "src/Lib/Semaphore";
 import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
@@ -29,7 +26,10 @@ const modelLink = require("../../../../../Assets/3DModel_Avatar_Character_male.g
 export default class AvatarView {
   private scenePresenter: IScenePresenter;
   private navigation: INavigation;
-  private navigationReady: boolean = false;
+  private navigationSetupReady: Semaphore = new Semaphore(
+    "Avatar: naviationSetupReady",
+    1
+  );
 
   constructor(
     private viewModel: AvatarViewModel,
@@ -50,14 +50,20 @@ export default class AvatarView {
   }
 
   private async loadAvatarAsync(): Promise<void> {
+    let navigationSetupLocked = await this.navigationSetupReady.acquire();
+
     this.viewModel.parentNode.Value =
       this.scenePresenter.Scene.getTransformNodeByName("AvatarParentNode")!;
 
     await this.loadMeshAsync();
+
+    navigationSetupLocked.release();
   }
 
   @bind
-  private setupAvatarNavigation(): void {
+  private async setupAvatarNavigation(): Promise<void> {
+    let navigationSetupLocked = await this.navigationSetupReady.acquire();
+
     this.viewModel.agentIndex = this.navigation.Crowd.addAgent(
       this.viewModel.meshes.Value[0].position,
       this.viewModel.agentParams,
@@ -68,6 +74,8 @@ export default class AvatarView {
     this.navigation.onNavigationReadyObservable.unsubscribe(
       this.setupAvatarNavigation
     );
+
+    navigationSetupLocked.release();
   }
 
   private async loadMeshAsync(): Promise<void> {
@@ -104,6 +112,9 @@ export default class AvatarView {
         velocity.normalize();
         let desiredRotation = Math.atan2(velocity.x, velocity.z);
 
+        this.viewModel.meshes.Value[0].rotationQuaternion =
+          Quaternion.RotationAxis(Axis.Y, desiredRotation);
+
         /* istanbul ignore next */
         if (config.isDebug) {
           this.debug_displayVelocity(
@@ -113,9 +124,6 @@ export default class AvatarView {
             desiredRotation
           );
         }
-
-        this.viewModel.meshes.Value[0].rotationQuaternion =
-          Quaternion.RotationAxis(Axis.Y, desiredRotation);
       }
     }
   }
