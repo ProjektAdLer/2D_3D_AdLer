@@ -4,6 +4,10 @@ import {
   HemisphericLight,
   Color4,
   HighlightLayer,
+  ArcRotateCamera,
+  ArcRotateCameraMouseWheelInput,
+  ArcRotateCameraPointersInput,
+  TransformNode,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { inject, injectable } from "inversify";
@@ -22,6 +26,7 @@ import type IPresentationBuilder from "../../../PresentationBuilder/IPresentatio
 import type INavigation from "../../Navigation/INavigation";
 import ISpacePresenter from "../../Spaces/ISpacePresenter";
 import history from "history/browser";
+import { logger } from "src/Lib/Logger";
 
 @injectable()
 export default class SpaceSceneDefinition extends AbstractSceneDefinition {
@@ -63,7 +68,9 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
     spacePresenter.onSpaceDataLoaded(this.spaceTO);
 
     // create avatar
+    new TransformNode("AvatarParentNode", this.scene);
     this.director.build(this.avatarBuilder);
+    this.createAvatarCamera();
 
     // initialize navigation for the room
     this.navigation.setupNavigation();
@@ -84,5 +91,44 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
   private parseSpaceIdFromLocation(): number {
     // TODO: make extraction of the space ID more reliable
     return Number.parseInt(history.location.pathname.split("/")[2]);
+  }
+
+  private createAvatarCamera(): void {
+    let avatarParentNode =
+      this.scene.getTransformNodeByName("AvatarParentNode");
+
+    if (avatarParentNode === null) {
+      logger.error("AvatarParentNode not found");
+      return;
+    }
+
+    // Set FollowCamera to follow the avatar (~FK):
+    let camera = new ArcRotateCamera(
+      "AvatarCamera",
+      Math.PI / 4,
+      Math.PI / 4,
+      20,
+      avatarParentNode.position,
+      this.scene
+    );
+
+    // add camera zoom
+    camera.lowerRadiusLimit = 5;
+    camera.upperRadiusLimit = 30;
+    camera.inputs.attached.mousewheel.attachControl();
+    (
+      camera.inputs.attached.mousewheel as ArcRotateCameraMouseWheelInput
+    ).wheelDeltaPercentage = 0.01;
+
+    // add camera rotation
+    camera.upperBetaLimit = Math.PI / 2;
+    camera.inputs.attached.pointers.attachControl();
+    // only rotate with the left mouse button (index: 0)
+    (camera.inputs.attached.pointers as ArcRotateCameraPointersInput).buttons =
+      [0];
+
+    // set camera parent
+    camera.parent = avatarParentNode;
+    this.scene.activeCamera = camera;
   }
 }

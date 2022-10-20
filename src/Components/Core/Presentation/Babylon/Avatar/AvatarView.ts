@@ -42,26 +42,18 @@ export default class AvatarView {
 
     // setup event callback for internal navigation setup after global scene navigation setup is completed
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
-    this.navigation.onNavigationReadyObservable.subscribe(
-      () => (this.navigationReady = true)
+    this.navigation.onNavigationReadyObservable.subscribe(() =>
+      this.setupAvatarNavigation()
     );
 
     this.loadAvatarAsync();
   }
 
   private async loadAvatarAsync(): Promise<void> {
-    this.viewModel.parentNode.Value = new TransformNode(
-      "AvatarParentNode",
-      this.scenePresenter.Scene
-    );
+    this.viewModel.parentNode.Value =
+      this.scenePresenter.Scene.getTransformNodeByName("AvatarParentNode")!;
 
     await this.loadMeshAsync();
-    this.createCamera();
-
-    while (!this.navigationReady) {
-      await new Promise((resolve) => setTimeout(resolve, 100));
-    }
-    this.setupAvatarNavigation();
   }
 
   @bind
@@ -97,38 +89,6 @@ export default class AvatarView {
       0,
       1
     );
-  }
-
-  // temporary until babylon component is better structured
-  private createCamera(): void {
-    // Set FollowCamera to follow the avatar (~FK):
-    let camera = new ArcRotateCamera(
-      "AvatarCamera",
-      Math.PI / 4,
-      Math.PI / 4,
-      20,
-      this.viewModel.parentNode.Value.position,
-      this.scenePresenter.Scene
-    );
-
-    // add camera zoom
-    camera.lowerRadiusLimit = 5;
-    camera.upperRadiusLimit = 30;
-    camera.inputs.attached.mousewheel.attachControl();
-    (
-      camera.inputs.attached.mousewheel as ArcRotateCameraMouseWheelInput
-    ).wheelDeltaPercentage = 0.01;
-
-    // add camera rotation
-    camera.upperBetaLimit = Math.PI / 2;
-    camera.inputs.attached.pointers.attachControl();
-    // only rotate with the left mouse button (index: 0)
-    (camera.inputs.attached.pointers as ArcRotateCameraPointersInput).buttons =
-      [0];
-
-    // set camera parent
-    camera.parent = this.viewModel.parentNode.Value;
-    this.scenePresenter.Scene.activeCamera = camera;
   }
 
   @bind

@@ -1,12 +1,12 @@
 import {
   AbstractMesh,
-  Camera,
-  CameraInputsManager,
+  Mesh,
   NullEngine,
   Quaternion,
   Scene,
 } from "@babylonjs/core";
 import { any, mock, mockDeep } from "jest-mock-extended";
+import Observable from "../../../../../Lib/Observable";
 import SimpleEvent from "../../../../../Lib/SimpleEvent";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
@@ -24,11 +24,18 @@ const navigationMock = mock<INavigation>();
 navigationMock.onNavigationReadyObservable = new SimpleEvent();
 
 // setup scene presenter mock
-const scenePresenterMock = mock<IScenePresenter>();
-const scenePresenterFactoryMock = () => scenePresenterMock;
+const scene = new Scene(new NullEngine());
+scene.getTransformNodeByName = jest
+  .fn()
+  .mockReturnValue(new AbstractMesh("AvatarParentNode", scene));
+const scenePresenterMock = mockDeep<IScenePresenter>();
+//@ts-ignore
+scenePresenterMock.Scene = scene;
 const loadModelMockReturnValue = [
   new AbstractMesh("TestMesh", new Scene(new NullEngine())),
 ];
+
+const scenePresenterFactoryMock = () => scenePresenterMock;
 
 // util function to create system under test
 function createAvatarView(): AvatarView {
@@ -60,7 +67,7 @@ describe("AvatarView", () => {
     CoreDIContainer.restore();
   });
 
-  test("constructor calls the scenePresenter to load avatar models", () => {
+  test.skip("constructor calls the scenePresenter to load avatar models", () => {
     systemUnderTest = createAvatarView();
 
     let quaternion = new Quaternion(0, 0, 0, 1);
@@ -81,7 +88,7 @@ describe("AvatarView", () => {
     ).toEqual(quaternion.w);
   });
 
-  test.skip("constructor registeres callback for navigation setup", () => {
+  test("constructor registeres callback for navigation setup", () => {
     systemUnderTest = createAvatarView();
 
     expect(
@@ -90,6 +97,13 @@ describe("AvatarView", () => {
   });
 
   test.skip("setupAvatarNavigation is called when the event in the navigation is fired", () => {
+    navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
+    systemUnderTest["viewModel"].meshes.Value =
+      loadModelMockReturnValue as Mesh[];
+    //@ts-ignore
+    scenePresenterMock.Scene.onBeforeRenderObservable =
+      mockDeep<Observable<any>>();
+
     systemUnderTest = createAvatarView();
 
     navigationMock.onNavigationReadyObservable.notifySubscribers();
