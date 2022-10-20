@@ -13,6 +13,7 @@ import mock, { mockDeep } from "jest-mock-extended/lib/Mock";
 import { config } from "../../../../../config";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
+import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 import AvatarController from "../../../../Core/Presentation/Babylon/Avatar/AvatarController";
 import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
@@ -21,6 +22,7 @@ import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManageme
 jest.mock("@babylonjs/core");
 
 const scenePresenterMock = mockDeep<IScenePresenter>();
+const scenePresenterFactoryMock = () => scenePresenterMock;
 
 const recastJSPluginMock = mock<RecastJSPlugin>();
 const crowdMock = mock<ICrowd>();
@@ -59,9 +61,9 @@ describe("AvatarController", () => {
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
-    CoreDIContainer.rebind<IScenePresenter>(
-      CORE_TYPES.IScenePresenter
-    ).toConstantValue(scenePresenterMock);
+    CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
+      scenePresenterFactoryMock
+    );
     CoreDIContainer.rebind<INavigation>(CORE_TYPES.INavigation).toConstantValue(
       navigationMock
     );
