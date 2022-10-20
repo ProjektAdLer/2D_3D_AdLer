@@ -62,8 +62,9 @@ export default abstract class AbstractSceneDefinition {
   }
 
   /**
-   * This array contains functions creates the scene and returns it.
-   * Can be overridden to add custom scene creation and setup logic.
+   * This function initializes the scene.
+   * Must be overridden.
+   * Add custom scene creation and setup logic here.
    **/
   protected abstract initializeScene(): Promise<void>;
 
