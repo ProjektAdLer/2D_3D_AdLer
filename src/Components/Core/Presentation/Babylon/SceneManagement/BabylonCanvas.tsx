@@ -6,7 +6,7 @@ import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 
-export type BabylonjsProps = {
+export type BabylonCanvasProps = {
   sceneDefinitionType: { new (...args: any[]): AbstractSceneDefinition };
   antialias?: boolean;
   engineOptions?: EngineOptions;
@@ -18,7 +18,7 @@ export type BabylonjsProps = {
 };
 
 export default function BabylonCanvas(
-  props: BabylonjsProps & React.HTMLAttributes<HTMLCanvasElement>
+  props: BabylonCanvasProps & React.HTMLAttributes<HTMLCanvasElement>
 ) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const {
