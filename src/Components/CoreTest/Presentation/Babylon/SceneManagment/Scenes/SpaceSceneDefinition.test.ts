@@ -1,5 +1,10 @@
-import { NullEngine, Scene } from "@babylonjs/core";
-import { mock } from "jest-mock-extended";
+import {
+  Camera,
+  CameraInputsManager,
+  NullEngine,
+  Scene,
+} from "@babylonjs/core";
+import { mock, mockDeep } from "jest-mock-extended";
 import SpaceTO from "../../../../../Core/Application/DataTransferObjects/SpaceTO";
 import ILoadAvatarUseCase from "../../../../../Core/Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
 import ILoadSpaceUseCase from "../../../../../Core/Application/UseCases/LoadSpace/ILoadSpaceUseCase";
@@ -16,8 +21,6 @@ import ISpacePresenter from "../../../../../Core/Presentation/Babylon/Spaces/ISp
 import IPresentationBuilder from "../../../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
 import history from "history/browser";
-
-jest.mock("@babylonjs/core");
 
 const presentationDirectorMock = mock<IPresentationDirector>();
 const presentationBuilderMock = mock<IPresentationBuilder>();
@@ -77,7 +80,7 @@ describe("SpaceScene", () => {
 
   test("initializeScene calls presentSpace on the space presenter", async () => {
     systemUnderTest["scene"] = new Scene(new NullEngine());
-    const presenterMock = mock<ISpacePresenter>();
+    const presenterMock = mockDeep<ISpacePresenter>();
     presentationBuilderMock.getPresenter.mockReturnValue(presenterMock);
     const spaceTO: SpaceTO = {
       id: 0,

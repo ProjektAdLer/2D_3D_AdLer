@@ -26,11 +26,11 @@ import type IPresentationBuilder from "../../../PresentationBuilder/IPresentatio
 import type INavigation from "../../Navigation/INavigation";
 import ISpacePresenter from "../../Spaces/ISpacePresenter";
 import history from "history/browser";
-import { logger } from "src/Lib/Logger";
 
 @injectable()
 export default class SpaceSceneDefinition extends AbstractSceneDefinition {
   private spaceTO: SpaceTO;
+  private avatarParentNode: TransformNode;
 
   constructor(
     @inject(BUILDER_TYPES.IPresentationDirector)
@@ -68,7 +68,7 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
     spacePresenter.onSpaceDataLoaded(this.spaceTO);
 
     // create avatar
-    new TransformNode("AvatarParentNode", this.scene);
+    this.avatarParentNode = new TransformNode("AvatarParentNode", this.scene);
     this.director.build(this.avatarBuilder);
     this.createAvatarCamera();
 
@@ -94,21 +94,13 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
   }
 
   private createAvatarCamera(): void {
-    let avatarParentNode =
-      this.scene.getTransformNodeByName("AvatarParentNode");
-
-    if (avatarParentNode === null) {
-      logger.error("AvatarParentNode not found");
-      return;
-    }
-
     // Set FollowCamera to follow the avatar (~FK):
     let camera = new ArcRotateCamera(
       "AvatarCamera",
       Math.PI / 4,
       Math.PI / 4,
       20,
-      avatarParentNode.position,
+      this.avatarParentNode.position,
       this.scene
     );
 
@@ -128,7 +120,7 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
       [0];
 
     // set camera parent
-    camera.parent = avatarParentNode;
+    camera.parent = this.avatarParentNode;
     this.scene.activeCamera = camera;
   }
 }
