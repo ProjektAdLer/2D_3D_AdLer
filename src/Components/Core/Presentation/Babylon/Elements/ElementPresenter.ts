@@ -13,10 +13,6 @@ export default class ElementPresenter implements IElementPresenter {
   }
 
   presentElement(elementTO: ElementTO, position: [Vector3, number]): void {
-    if (!this.viewModel) {
-      throw new Error("ViewModel not set");
-    }
-
     this.viewModel.id = elementTO.id;
     this.viewModel.position.Value = position[0];
     this.viewModel.rotation.Value = position[1];
