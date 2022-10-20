@@ -178,9 +178,11 @@ describe("EntityManager", () => {
     const entity2 = systemUnderTest.createEntity<TestEntity>({}, TestEntity);
     const entity3 = systemUnderTest.createEntity<TestEntity2>({}, TestEntity2);
 
-    expect(systemUnderTest.getAllEntities()).toEqual([
+    expect(systemUnderTest.getAllEntities().get(TestEntity)).toEqual([
       entity1,
       entity2,
+    ]);
+    expect(systemUnderTest.getAllEntities().get(TestEntity2)).toEqual([
       entity3,
     ]);
   });
