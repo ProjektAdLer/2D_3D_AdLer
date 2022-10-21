@@ -7,14 +7,16 @@ import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilder
 
 const viewModelMock = new SpaceGoalPanelViewModel();
 
-describe("WorldGoalPanel", () => {
+describe("SpaceGoalPanel", () => {
   test("should render", () => {
-    viewModelMock.goal.Value = "Test World";
+    viewModelMock.goal.Value = "Lernziel";
     useBuilderMock([viewModelMock, undefined]);
 
     const componentUnderTest = render(<SpaceGoalPanel />);
 
-    expect(componentUnderTest.getByText("Lernziel")).toBeInTheDocument();
+    expect(
+      componentUnderTest.getByAltText("Learning-Goal-Icon")
+    ).toBeInTheDocument();
   });
 
   test("should not render, if no  World Goal is provided", () => {
@@ -33,14 +35,17 @@ describe("WorldGoalPanel", () => {
 
     const componentUnderTest = render(<SpaceGoalPanel key="WorldGoalPanel" />);
 
-    expect(componentUnderTest.getByText("Lernziel")).toBeInTheDocument();
+    expect(
+      componentUnderTest.queryByText("Test World")
+    ).not.toBeInTheDocument();
     fireEvent.click(componentUnderTest.getByRole("img"));
-    expect(componentUnderTest.queryByText("Lernziel")).not.toBeInTheDocument();
     expect(componentUnderTest.getByText("Test World")).toBeInTheDocument();
     fireEvent.click(componentUnderTest.getByRole("img"));
     expect(
       componentUnderTest.queryByText("Test World")
     ).not.toBeInTheDocument();
-    expect(componentUnderTest.getByText("Lernziel")).toBeInTheDocument();
+    expect(
+      componentUnderTest.queryByText("Test World")
+    ).not.toBeInTheDocument();
   });
 });
