@@ -21,18 +21,18 @@ export default function Space() {
         <div className="z-10 col-start-1 row-start-1 m-2">
           <LogoMenuBar />
         </div>
-        <div className="z-10 col-span-2 col-start-2 row-start-1 m-2">
+        {/*<div className="z-10 col-span-2 col-start-2 row-start-1 m-2">
           <ElementsDropdown />
-        </div>
-        <div className="z-10 col-span-2 col-start-9 row-start-1">
+        </div>*/}
+        <div className="z-10 col-span-2 col-start-8 row-start-1">
           <ScorePanel />
         </div>
         <div className="z-10 col-span-5 col-start-3 row-start-1">
           <SpaceNamePanel />
         </div>
-        <div className="z-10 col-span-1 col-start-3 row-start-1">
+        {/*<div className="z-10 col-span-1 col-start-7 row-start-1 m-2">
           <SpaceGoalPanel />
-        </div>
+        </div>*/}
         <div className="col-span-9 col-start-1 row-span-6 row-start-1">
           <BabylonCanvas
             sceneDefinitionType={SpaceSceneDefinition}

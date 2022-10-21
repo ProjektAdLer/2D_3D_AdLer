@@ -25,21 +25,24 @@ export default function SpaceCompletionModal() {
 
   return (
     <StyledModal
-      className="flex flex-col justify-center items-center"
+      className="flex flex-col items-center justify-center"
       title="Raum abgeschlossen!"
       showModal={showModal}
       onClose={() => {
         controller.CloseButtonClicked();
       }}
     >
-      <div className="flex flex-col justify-center items-center">
-        {<img className="w-32 mb-4" src={RubicsCube} alt=""></img>}
-        <div className="w-96">
-          <p className="mb-4">
-            Du hast {score} von {requiredScore} erforderlichen Punkten erreicht
-            und somit den Lernraum erfolgreich abgeschlossen. Schließe das
-            Fenster, um den Lernraum weiter zu erkunden oder klicke den unteren
-            Button, um einen anderen Lernraum aus dem Menü zu wählen.
+      <div className="flex flex-col items-center justify-center">
+        {<img className="mb-4 w-14 lg:w-32" src={RubicsCube} alt=""></img>}
+        <div className="p-4 mb-4 w-96">
+          <p className="p-1 text-sm lg:text:xl">
+            Du hast {score} von {requiredScore} erforderlichen Punkten erreicht!{" "}
+          </p>
+
+          <p className="p-1 text-sm lg:text:xl">
+            Schließe dieses Fenster, um den Lernraum weiter zu erkunden. Klicke
+            den unteren Button, um einen anderen Lernraum aus dem Menü zu
+            wählen.
           </p>
         </div>
 

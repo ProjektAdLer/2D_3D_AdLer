@@ -6,6 +6,8 @@ import FullscreenSwitch from "~ReactComponents/SpaceDisplay/FullscreenSwitch/Ful
 import DebugPanel from "~ReactComponents/SpaceDisplay/DebugPanel/DebugPanel";
 import engineLogo from "../../../../../../Assets/icons/adLerEngine_flat_logo_simple.svg";
 import history from "history/browser";
+import SpaceGoalPanel from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanel";
+import ElementsDropdown from "~ReactComponents/SpaceDisplay/ElementsDropdown/ElementsDropdown";
 
 export default function LogoMenuBar() {
   return (
@@ -32,6 +34,11 @@ export default function LogoMenuBar() {
         >
           Menü
         </StyledButton>
+
+        <SpaceGoalPanel />
+
+        <ElementsDropdown />
+
         {/* <DebugPanel /> */}
       </StyledContainer>
     </CustomDropdown>

@@ -24,7 +24,7 @@ export default function MoodleLoginButton() {
         controller.displayLoginForm();
       }}
     >
-      <img src={moodleIcon} alt="Moodle-Logo"></img>
+      <img src={moodleIcon} alt="Moodle-Icon"></img>
     </StyledButton>
   );
 }

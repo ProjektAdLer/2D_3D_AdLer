@@ -21,7 +21,7 @@ export default function StyledContainer({
       className={
         className +
         " " +
-        `flex gap-2 m-3 w-fit h-fit font-extrabold ${containerConfig[textColor]}`
+        `flex gap-2 m-3 w-fit h-fit font-bold ${containerConfig[textColor]}`
       }
       {...rest}
     >

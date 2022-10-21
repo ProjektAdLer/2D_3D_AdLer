@@ -1,4 +1,5 @@
 import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
+import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import SpaceGoalPanelController from "./SpaceGoalPanelController";
 import SpaceGoalPanelViewModel from "./SpaceGoalPanelViewModel";
 import goalIcon from "../../../../../../Assets/icons/learninggoal-icon-nobg.svg";
@@ -23,9 +24,9 @@ export default function SpaceGoalPanel() {
   if (!isOpen)
     // wenn nicht geklickt
     return (
-      <div className="flex justify-center text-2xl roboto-black text-shadow">
-        <StyledContainer
-          textColor="white"
+      <div className="flex justify-center text-md lg:text-2xl roboto-black text-shadow">
+        <StyledButton
+          shape="square"
           className="flex flex-row justify-center"
           onClick={() => {
             handleClick();
@@ -36,16 +37,15 @@ export default function SpaceGoalPanel() {
             src={goalIcon}
             alt="Learning-Goal-Icon"
           ></img>
-          <p className="text-white">Lernziel</p>
-        </StyledContainer>
+        </StyledButton>
       </div>
     );
   //Wenn geklickt
   else
     return (
-      <div className="flex justify-center">
+      <div className="flex justify-center text-sm lg:text-lg">
         <StyledContainer
-          textColor="white"
+          textColor="black"
           onClick={() => {
             handleClick();
           }}

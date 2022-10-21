@@ -6,6 +6,7 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import HeaderBarController from "./HeaderBarController";
 import HeaderBarViewModel from "./HeaderBarViewModel";
+import homeIcon from "../../../../../../Assets/icons/22-home-icon/home-icon-nobg.svg";
 
 export default function HeaderBar() {
   const [viewModel, controller] = useBuilder<
@@ -21,10 +22,13 @@ export default function HeaderBar() {
     <React.Fragment>
       <div className="flex justify-between">
         <StyledButton className="" onClick={controller.onMenuButtonClicked}>
-          Home
+          <img className="w-12 xl:w-14" src={homeIcon} alt="Home Icon" />
         </StyledButton>
         <div>
-          <StyledContainer className="text-shadow text-xl" textColor="white">
+          <StyledContainer
+            className="text-xl text-shadow xl:text-4xl"
+            textColor="white"
+          >
             {title}
           </StyledContainer>
         </div>

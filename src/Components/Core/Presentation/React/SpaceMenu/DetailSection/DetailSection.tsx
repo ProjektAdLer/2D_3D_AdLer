@@ -45,8 +45,8 @@ export default function DetailSection() {
   return (
     <div className="flex flex-col gap-2 w-[100%] overflow-auto">
       <div className="flex flex-row items-center p-1 pb-4 border-b border-gray-500">
-        <img src={spaceIcon} className="xl:w-8 w-6" alt="Lernraum-Icon"></img>
-        <div className="ml-2 text-lg text-2xl text-white roboto-black text-shadow">
+        <img src={spaceIcon} className="w-6 xl:w-8" alt="Lernraum-Icon"></img>
+        <div className="ml-2 text-lg text-white lg:text-2xl roboto-black text-shadow">
           {name}
         </div>
       </div>

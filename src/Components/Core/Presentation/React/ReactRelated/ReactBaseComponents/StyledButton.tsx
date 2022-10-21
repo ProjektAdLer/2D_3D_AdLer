@@ -17,7 +17,8 @@ export default function StyledButton({
     success: "bg-adlergreen",
 
     // Shapes
-    square: "justify-center p-1 lg:w-16 md:w-14 sm:w-12 aspect-square",
+    square:
+      "justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square",
     freefloatleft: "p-1",
     freefloatcenter: "p-1 justify-center",
   };

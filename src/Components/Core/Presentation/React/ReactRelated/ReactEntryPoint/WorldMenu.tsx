@@ -7,19 +7,23 @@ import WorldCompletionModal from "~ReactComponents/SpaceMenu/WorldCompletionModa
 export default function WorldMenu() {
   return (
     <React.Fragment>
-      <div>
-        <WorldCompletionModal />
-      </div>
+      <div className="max-h-screen">
+        <div>
+          <WorldCompletionModal />
+        </div>
 
-      <div className="grid h-screen grid-cols-10 grid-rows-6 lg:rounded-lg root bg-adlerblue-100 border-adlerdarkblue">
-        <div className="col-span-10 col-start-1 p-2 text-4xl border-b-2 border-adlerdarkblue">
+        <div className="self-center p-2 bg-adlerblue-100">
           <HeaderBar />
         </div>
-        <div className="flex justify-center col-span-5 col-start-1 row-start-2 row-span-5 p-8 border-r-2 border-adlerdarkblue bg-adlergold">
-          <SpaceSelection />
-        </div>
-        <div className="flex justify-center col-span-5 col-start-6 row-start-2 row-span-5 p-8 bg-adlergold">
-          <DetailSection />
+
+        <div className="grid h-screen grid-cols-2 grid-rows-1 lg:rounded-lg">
+          <div className="flex justify-center col-start-1 p-8 border-r-2 border-adlerdarkblue bg-adlergold">
+            <SpaceSelection />
+          </div>
+
+          <div className="flex justify-center col-start-2 p-8 bg-adlergold">
+            <DetailSection />
+          </div>
         </div>
       </div>
     </React.Fragment>
