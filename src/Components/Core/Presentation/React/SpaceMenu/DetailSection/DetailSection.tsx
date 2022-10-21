@@ -46,47 +46,49 @@ export default function DetailSection() {
     <div className="flex flex-col gap-2 w-[100%] overflow-auto">
       <div className="flex flex-row items-center p-1 pb-4 border-b border-gray-500">
         <img src={spaceIcon} className="w-6 xl:w-8" alt="Lernraum-Icon"></img>
-        <div className="ml-2 text-lg text-white lg:text-2xl roboto-black text-shadow">
+        <div className="ml-2 text-white text-md lg:text-2xl roboto-black text-shadow">
           {name}
         </div>
       </div>
 
       {description !== "" && (
         <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+          <div className="self-center ml-2 text-white text-md roboto-black text-shadow">
             Beschreibung:
           </div>
-          <div className="items-start ml-6 text-lg roboto-regular">
+          <div className="items-start ml-6 text-sm roboto-regular">
             {description}
           </div>
         </div>
       )}
       {goals !== "" && (
         <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+          <div className="self-center ml-2 text-white text-md roboto-black text-shadow">
             Lernziele:
           </div>
-          <div className="items-start ml-6 text-lg roboto-regular">{goals}</div>
+          <div className="items-start ml-6 text-sm lg:text:lg roboto-regular">
+            {goals}
+          </div>
         </div>
       )}
       {elements.length > 0 && (
         <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+          <div className="self-center ml-2 text-white text-md lg:text-xl roboto-black text-shadow">
             Lernelemente:
           </div>
-          <div className="items-start ml-6 text-lg roboto-regular">
+          <div className="flex flex-col items-start ml-6 text-sm lg:text-lg roboto-regular">
             {elements.map((element) => {
               return (
                 <div key={element[1]} className="">
                   <CheckBoxEntry checked={element[2]}>
-                    <div className=" xl:w-8 lg:w-6 md:w-2 sm:w-2">
+                    <div className="w-6 lg:w-8">
                       {getElementIcon(element[0])}
                     </div>
-                    <div className="flex flex-row mt-3 ml-2">
+                    <div className="flex flex-row items-center ml-1">
                       {" " + element[1] + " (" + element[0] + ", " + element[3]}
                       <img
                         src={coinIcon}
-                        className="w-6 mb-4 ml-1"
+                        className="self-center w-6 ml-1 lg:w-8"
                         alt="Coin-Icon"
                       ></img>
                       {" )"}
@@ -140,7 +142,7 @@ export default function DetailSection() {
       }) && (
         <StyledButton
           shape="freefloatleft"
-          className="self-center mt-2 justify-self-center"
+          className="self-center mt-2 mb-2 justify-self-center"
           onClick={controller.onSpaceButtonClicked}
         >
           {"Lernraum '" + name + "' betreten!"}
