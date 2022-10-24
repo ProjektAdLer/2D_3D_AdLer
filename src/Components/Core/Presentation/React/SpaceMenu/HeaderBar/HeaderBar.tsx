@@ -26,7 +26,7 @@ export default function HeaderBar() {
         </StyledButton>
         <div>
           <StyledContainer
-            className="text-xl text-shadow xl:text-4xl"
+            className="font-black roboto-black text-shadow "
             textColor="white"
           >
             {title}
