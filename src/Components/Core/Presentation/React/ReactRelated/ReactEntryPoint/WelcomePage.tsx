@@ -12,10 +12,11 @@ export interface IWelcomePageProps {}
 const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
   return (
     <React.Fragment>
-      <div className="grid grid-cols-5 grid-rows-5 max-h-[100vh] bg-adlerblue-100 p-6">
-        <div className="col-start-1 row-start-1">
+      <div className="grid h-0 min-h-screen grid-cols-5 grid-rows-5 p-6 bg-adlerblue-100">
+        <div className="z-10 col-start-1 row-start-1">
           <MoodleLoginButton />
         </div>
+
         <p className="self-center col-span-2 col-start-4 row-start-1 p-2 text-lg font-extrabold text-white rounded-lg lg:col-span-3 lg:col-start-2 lg:row-start-1 lg:p-5 justify-self-center bg-adlergold text-shadow lg:text-4xl">
           Willkommen bei AdLer!
         </p>
@@ -29,17 +30,17 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
           </StyledButton>
         </div>
 
-        <img
-          className="col-start-1 row-start-1 col-span-3 row-span-4 m-4 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-3 w-[60vw] h-[60vh] self-center justify-self-center"
-          src={logo}
-          alt="Adler Logo"
-        />
+        <div className="flex items-center justify-center col-span-3 col-start-1 row-span-4 row-start-1 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-3">
+          <img className="w-56 m-4 lg:w-3/6" src={logo} alt="Adler Logo" />
+        </div>
+
         <p className="self-end col-span-5 col-start-1 row-start-5 p-2 text-xs text-center text-black rounded-lg lg:text-md lg:font-semibold font-regular justify-self-center bg-adlergold">
           © Projekt AdLer, Technische Hochschule Aschaffenburg, Hochschule für
           angewandte Wissenschaften Kempten, ZFH - Zentrum für Fernstudien im
           Hochschulverbund
         </p>
       </div>
+
       <div className="z-10">
         <MoodleLoginForm />
         {/*MoodleLoginForm muss immer am Ende der Komponenten platziert werden. Sonst buggt es mit komischen Abständen.*/}
