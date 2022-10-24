@@ -26,6 +26,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
+    "build-dev": "dotenv -e .env.development react-app-rewired build",
     "test": "react-app-rewired test --watchAll",
     "eject": "react-app-rewired eject",
     "prepare": "husky install"
@@ -62,6 +63,7 @@
     "@types/react-router-dom": "^5.3.3",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "customize-cra": "^1.0.0",
+    "dotenv-cli": "^6.0.0",
     "husky": "^8.0.1",
     "jest": "^28.1.2",
     "jest-environment-jsdom": "^28.1.2",

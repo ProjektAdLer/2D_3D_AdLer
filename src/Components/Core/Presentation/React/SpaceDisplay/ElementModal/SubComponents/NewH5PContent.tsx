@@ -57,8 +57,16 @@ export default function NewH5PContent({
 
         const options = {
           h5pJsonPath: h5pJsonURL,
-          frameJs: baseURL + "common/h5pBase/frame.bundle.js",
-          frameCss: baseURL + "common/h5pBase/styles/h5p.css",
+          frameJs:
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            "/h5pBase/frame.bundle.js",
+          frameCss:
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            "/h5pBase/styles/h5p.css",
         };
 
         await new H5PPlayer(el, options);

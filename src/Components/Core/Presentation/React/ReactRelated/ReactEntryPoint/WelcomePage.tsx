@@ -21,7 +21,7 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
           Willkommen bei AdLer!
         </p>
 
-        <div className="flex flex-col items-center justify-center col-span-2 col-start-4 row-span-3 row-start-2 gap-4 m-1 lg:self-start lg:col-span-3 lg:col-start-2 lg:row-start-5">
+        <div className="flex flex-col items-center justify-center col-span-2 col-start-4 row-span-3 row-start-2 gap-4 m-1 lg:col-span-3 lg:col-start-2 lg:row-start-5">
           <StyledButton
             shape="freefloatleft"
             onClick={() => history.push("/worldmenu")}
@@ -31,7 +31,11 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
         </div>
 
         <div className="flex items-center justify-center col-span-3 col-start-1 row-span-4 row-start-1 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-3">
-          <img className="w-56 m-4 lg:w-3/6" src={logo} alt="Adler Logo" />
+          <img
+            className="w-56 max-h-full m-4 lg:w-3/6"
+            src={logo}
+            alt="Adler Logo"
+          />
         </div>
 
         <p className="self-end col-span-5 col-start-1 row-start-5 p-2 text-xs text-center text-black rounded-lg lg:text-md lg:font-semibold font-regular justify-self-center bg-adlergold">
