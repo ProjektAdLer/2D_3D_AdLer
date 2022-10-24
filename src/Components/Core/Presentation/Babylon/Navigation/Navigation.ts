@@ -43,8 +43,9 @@ export default class Navigation implements INavigation {
 
   async setupNavigation(): Promise<void> {
     if (this.plugin) {
-      console.error(
-        "Repeated call to setupNavigation. This can break the agents indices."
+      console.warn(
+        "Repeated call to setupNavigation. " +
+          " This may break the agents indices if it happens while a scene is running."
       );
     }
 

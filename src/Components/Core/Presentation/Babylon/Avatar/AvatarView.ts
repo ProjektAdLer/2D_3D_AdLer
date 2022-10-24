@@ -42,8 +42,8 @@ export default class AvatarView {
 
     // setup event callback for internal navigation setup after global scene navigation setup is completed
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
-    this.navigation.onNavigationReadyObservable.subscribe(() =>
-      this.setupAvatarNavigation()
+    this.navigation.onNavigationReadyObservable.subscribe(
+      this.setupAvatarNavigation
     );
 
     this.loadAvatarAsync();
