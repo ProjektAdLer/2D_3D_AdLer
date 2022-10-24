@@ -22,11 +22,11 @@ export default function HeaderBar() {
     <React.Fragment>
       <div className="flex items-center justify-between">
         <StyledButton className="" onClick={controller.onMenuButtonClicked}>
-          <img className="w-12 xl:w-14" src={homeIcon} alt="Home Icon" />
+          <img className="w-10 xl:w-12" src={homeIcon} alt="Home Icon" />
         </StyledButton>
         <div>
           <StyledContainer
-            className="font-black roboto-black text-shadow "
+            className="text-xl lg:text-4xl roboto-black text-shadow"
             textColor="white"
           >
             {title}
