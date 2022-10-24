@@ -21,10 +21,10 @@ export default function BottomTooltip() {
   return (
     <div className="grid justify-center">
       <StyledContainer>
-        <div className="flex items-center gap-1 p-2 text-2xl font-extrabold text-white rounded-lg text-shadow bg-adlerblue">
+        <div className="flex items-center gap-1 p-2 text-lg text-white rounded-lg lg:text-2xl roboto-black text-shadow bg-adlerblue">
           {getElementIcon(type)}
           {text}
-          <div className="text-xl ml-2 flex flex-row">
+          <div className="flex flex-row ml-2">
             {points}
             <div className="ml-2"></div>
             <img src={coinIcon} alt="" className="w-8"></img>

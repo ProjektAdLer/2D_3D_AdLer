@@ -17,7 +17,7 @@ import SpaceCompletionModal from "~ReactComponents/SpaceDisplay/SpaceCompletionM
 export default function Space() {
   return (
     <React.Fragment>
-      <div className="grid max-h-screen grid-cols-9 grid-rows-6 root">
+      <div className="grid h-0 min-h-screen grid-cols-9 grid-rows-6 root">
         <div className="z-10 col-start-1 row-start-1 m-2">
           <LogoMenuBar />
         </div>
