@@ -33,7 +33,13 @@ export default function SpaceCompletionModal() {
       }}
     >
       <div className="flex flex-col items-center justify-center">
-        {<img className="w-20 mb-4 lg:w-32" src={RubicsCube} alt=""></img>}
+        {
+          <img
+            className="w-20 mb-4 lg:w-32"
+            src={RubicsCube}
+            alt="Lösung-Icon"
+          ></img>
+        }
         <div className="p-4 mb-4 w-96">
           <p className="p-1 text-sm lg:text:xl">
             Du hast {score} von {requiredScore} erforderlichen Punkten erreicht!{" "}
