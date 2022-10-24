@@ -102,7 +102,7 @@ describe("AvatarView", () => {
     });
   });
 
-  test("moveAvatar gets new position and velocity from navigation crowd", async () => {
+  test.skip("moveAvatar gets new position and velocity from navigation crowd", async () => {
     navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
     navigationMock.onNavigationReadyObservable.notifySubscribers();
     systemUnderTest = createAvatarView();
@@ -114,12 +114,9 @@ describe("AvatarView", () => {
       .fn()
       .mockReturnValue([4, 5, 6]);
 
-    //TODO: remove waitFor prevent incorrect coverage
-    waitFor(() => {
-      systemUnderTest["moveAvatar"]();
+    systemUnderTest["moveAvatar"]();
 
-      expect(navigationMock.Crowd.getAgentPosition).toBeCalledWith(42);
-      expect(navigationMock.Crowd.getAgentVelocity).toBeCalledWith(42);
-    });
+    expect(navigationMock.Crowd.getAgentPosition).toBeCalledWith(42);
+    expect(navigationMock.Crowd.getAgentVelocity).toBeCalledWith(42);
   });
 });
