@@ -61,6 +61,7 @@ export default function BabylonCanvas(
     if (window) window.addEventListener("resize", resize);
 
     return () => {
+      scenePresenter.disposeScene();
       engine.dispose();
       if (window) window.removeEventListener("resize", resize);
     };

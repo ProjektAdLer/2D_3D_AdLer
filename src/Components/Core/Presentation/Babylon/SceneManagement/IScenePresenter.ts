@@ -25,6 +25,8 @@ export default interface IScenePresenter {
    */
   createScene(engine: Engine, sceneOptions?: SceneOptions): Promise<void>;
 
+  disposeScene(): void;
+
   /**
    * Starts the render loop.
    */

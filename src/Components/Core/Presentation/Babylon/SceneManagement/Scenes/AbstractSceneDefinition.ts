@@ -61,6 +61,10 @@ export default abstract class AbstractSceneDefinition {
     lock.release();
   }
 
+  disposeScene(): void {
+    this.scene.dispose();
+  }
+
   /**
    * This function initializes the scene.
    * Must be overridden.

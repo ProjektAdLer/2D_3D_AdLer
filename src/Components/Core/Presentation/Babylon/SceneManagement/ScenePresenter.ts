@@ -83,6 +83,10 @@ export default class ScenePresenter implements IScenePresenter {
     await this.sceneDefinition.createScene(engine, sceneOptions);
   }
 
+  disposeScene(): void {
+    this.sceneDefinition.disposeScene();
+  }
+
   startRenderLoop(): void {
     this.Scene.getEngine().runRenderLoop(this.renderFunction);
   }

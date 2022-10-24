@@ -11,6 +11,8 @@ import IElementPresenter from "../Elements/IElementPresenter";
 import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
 import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
 import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
+import ISpacePort from "src/Components/Core/Ports/SpacePort/ISpacePort";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 
 @injectable()
 export default class SpacePresenter implements ISpaceAdapter, ISpacePresenter {
@@ -21,11 +23,19 @@ export default class SpacePresenter implements ISpaceAdapter, ISpacePresenter {
       throw new Error("ViewModel is not defined");
     }
   }
+
+  dispose(): void {
+    CoreDIContainer.get<ISpacePort>(PORT_TYPES.ISpacePort).unregisterAdapter(
+      this
+    );
+  }
+
   onSpaceDataLoaded(spaceTO: SpaceTO): void {
     this.setViewModelData(spaceTO);
     this.createElements(spaceTO.elements);
     this.createDoor();
   }
+
   onScoreChanged(
     score: number,
     requiredScore: number,

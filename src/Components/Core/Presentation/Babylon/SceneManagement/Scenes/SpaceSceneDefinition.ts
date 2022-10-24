@@ -28,6 +28,7 @@ import history from "history/browser";
 export default class SpaceSceneDefinition extends AbstractSceneDefinition {
   private spaceTO: SpaceTO;
   private avatarParentNode: TransformNode;
+  private spacePresenter: ISpacePresenter;
 
   constructor(
     @inject(BUILDER_TYPES.IPresentationDirector)
@@ -60,8 +61,8 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
 
     // create space
     this.director.build(this.spaceBuilder);
-    const spacePresenter = this.spaceBuilder.getPresenter() as ISpacePresenter;
-    spacePresenter.onSpaceDataLoaded(this.spaceTO);
+    this.spacePresenter = this.spaceBuilder.getPresenter() as ISpacePresenter;
+    this.spacePresenter.onSpaceDataLoaded(this.spaceTO);
 
     // create avatar
     this.avatarParentNode = new TransformNode("AvatarParentNode", this.scene);
@@ -70,6 +71,11 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
 
     // initialize navigation for the room
     this.navigation.setupNavigation();
+  }
+
+  override disposeScene(): void {
+    this.spacePresenter.dispose();
+    super.disposeScene();
   }
 
   @bind
