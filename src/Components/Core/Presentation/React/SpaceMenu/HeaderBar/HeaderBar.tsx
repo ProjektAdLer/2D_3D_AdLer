@@ -20,7 +20,7 @@ export default function HeaderBar() {
 
   return (
     <React.Fragment>
-      <div className="flex justify-between">
+      <div className="flex items-center justify-between">
         <StyledButton className="" onClick={controller.onMenuButtonClicked}>
           <img className="w-12 xl:w-14" src={homeIcon} alt="Home Icon" />
         </StyledButton>
