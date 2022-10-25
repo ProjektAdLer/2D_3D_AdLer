@@ -24,6 +24,7 @@ import SpaceSelectionBuilder from "~ReactComponents/SpaceMenu/SpaceSelection/Spa
 import DetailSectionBuilder from "~ReactComponents/SpaceMenu/DetailSection/DetailSectionBuilder";
 import SpaceCompletionModalBuilder from "~ReactComponents/SpaceDisplay/SpaceCompletionModal/SpaceCompletionModalBuilder";
 import WorldCompletionModalBuilder from "~ReactComponents/SpaceMenu/WorldCompletionModal/WorldCompletionModalBuilder";
+import MenuBarBuilder from "~ReactComponents/GeneralComponents/MenuBar/MenuBarBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -85,6 +86,7 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IWorldCompletionModalBuilder).to(
     WorldCompletionModalBuilder
   );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IMenuBarBuilder).to(MenuBarBuilder);
 });
 
 export default BuilderDIContainer;

@@ -1,6 +1,12 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
-import LogoMenuBar from "../../../../../Core/Presentation/React/GeneralComponents/LogoMenuBar/LogoMenuBar";
+import history from "history/browser";
+import mock from "jest-mock-extended/lib/Mock";
+import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import IMenuBarController from "~ReactComponents/GeneralComponents/MenuBar/IMenuBarController";
+import MenuBar from "~ReactComponents/GeneralComponents/MenuBar/MenuBar";
+
+const mockHistoryBack = jest.spyOn(history, "back");
 jest.mock(
   "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginButton/MoodleLoginButton",
   () => "string"
@@ -11,21 +17,13 @@ jest.mock(
   () => "string"
 );
 
-jest.mock(
-  "../../../../../Core/Presentation/React/SpaceDisplay/DebugPanel/DebugPanel",
-  () => "string"
-);
-
-jest.mock(
-  "../../../../../Core/Presentation/React/GeneralComponents/LoadSpaceButton/LoadSpaceButton",
-  () => "string"
-);
-describe("LogoMenuBar", () => {
+describe("MenuBar", () => {
   test("should render", () => {
+    useBuilderMock([undefined, mock<IMenuBarController>()]);
     // disable console.error
     const originalError = console.error;
     console.error = jest.fn();
-    render(<LogoMenuBar />);
+    render(<MenuBar />);
     // restore console.error
     console.error = originalError;
   });

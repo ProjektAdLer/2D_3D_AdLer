@@ -7,7 +7,7 @@ import SpaceGoalPanel from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/SpaceGo
 import SpaceNamePanel from "~ReactComponents/SpaceDisplay/SpaceNamePanel/SpaceNamePanel";
 import NotificationManager from "~ReactComponents/GeneralComponents/NotificationManager/NotificationManager";
 import MoodleLoginForm from "~ReactComponents/GeneralComponents/MoodleLoginForm/MoodleLoginForm";
-import LogoMenuBar from "~ReactComponents/GeneralComponents/LogoMenuBar/LogoMenuBar";
+import MenuBar from "~ReactComponents/GeneralComponents/MenuBar/MenuBar";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import ScorePanel from "~ReactComponents/SpaceDisplay/ScorePanel/ScorePanel";
 import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
@@ -19,7 +19,7 @@ export default function Space() {
     <React.Fragment>
       <div className="grid h-0 min-h-screen grid-cols-9 grid-rows-6 root">
         <div className="z-10 col-start-1 row-start-1 m-2">
-          <LogoMenuBar />
+          <MenuBar />
         </div>
         {/*<div className="z-10 col-span-2 col-start-2 row-start-1 m-2">
           <ElementsDropdown />

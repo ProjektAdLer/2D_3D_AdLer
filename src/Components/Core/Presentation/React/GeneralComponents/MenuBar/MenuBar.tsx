@@ -1,15 +1,20 @@
 import CustomDropdown from "../../ReactRelated/ReactBaseComponents/CustomDropdown";
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
-import LoadSpaceButton from "~ReactComponents/GeneralComponents/LoadSpaceButton/LoadSpaceButton";
 import FullscreenSwitch from "~ReactComponents/SpaceDisplay/FullscreenSwitch/FullscreenSwitch";
-import DebugPanel from "~ReactComponents/SpaceDisplay/DebugPanel/DebugPanel";
 import engineLogo from "../../../../../../Assets/icons/adLerEngine_flat_logo_simple.svg";
-import history from "history/browser";
+import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import SpaceGoalPanel from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanel";
 import ElementsDropdown from "~ReactComponents/SpaceDisplay/ElementsDropdown/ElementsDropdown";
+import MenuBarViewModel from "./MenuBarViewModel";
+import MenuBarController from "./MenuBarController";
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 
-export default function LogoMenuBar() {
+export default function MenuBar() {
+  const [viewModel, controller] = useBuilder<
+    MenuBarViewModel,
+    MenuBarController
+  >(BUILDER_TYPES.IMenuBarBuilder);
   return (
     <CustomDropdown
       headerPart={
@@ -25,21 +30,12 @@ export default function LogoMenuBar() {
       useAsTriggerOnly={true}
     >
       <StyledContainer className="flex flex-col bg-transparent">
-        {/* <LoadSpaceButton /> */}
         <FullscreenSwitch />
-        <StyledButton
-          onClick={() => {
-            history.back();
-          }}
-        >
-          Menü
+        <StyledButton onClick={controller.onExitButtonClicked}>
+          Menu
         </StyledButton>
-
         <SpaceGoalPanel />
-
         <ElementsDropdown />
-
-        {/* <DebugPanel /> */}
       </StyledContainer>
     </CustomDropdown>
   );
