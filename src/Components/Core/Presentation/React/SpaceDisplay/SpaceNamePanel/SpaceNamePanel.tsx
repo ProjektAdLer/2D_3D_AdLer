@@ -18,13 +18,13 @@ export default function SpaceNamePanel() {
 
   return (
     <div className="flex justify-center">
-      <StyledContainer className="flex items-center justify-center bg-transparent p-13 whitespace-nowrap">
+      <StyledContainer className="flex items-center">
         <img
-          className="w-8 lg:w-16"
+          className="w-8 lg:w-14"
           src={worldIcon}
-          alt="Learning-Space-Icon"
+          alt="Learning-World-Icon"
         ></img>
-        <div className="text-xl font-extrabold text-white lg:text-4xl text-shadow">
+        <div className="text-xl text-white roboto-black lg:text-4xl text-shadow">
           {name}
         </div>
       </StyledContainer>

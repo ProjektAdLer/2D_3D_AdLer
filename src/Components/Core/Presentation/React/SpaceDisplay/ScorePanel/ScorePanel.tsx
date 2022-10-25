@@ -14,17 +14,13 @@ export default function ScorePanel() {
   const [requiredScore] = useObservable<number>(viewModel?.requiredScore);
 
   return (
-    <div className="grid justify-end">
+    <div className="flex justify-end">
       <StyledContainer
         textColor="white"
-        className="flex items-center text-lg font-extrabold text-white lg:text-4xl text-shadow"
+        className="flex items-center text-lg roboto-black lg:text-2xl text-shadow"
       >
         {(score ? score : 0) + " / " + (requiredScore ? requiredScore : 0)}
-        <img
-          src={coinIcon}
-          className="xl:w-16 lg:w-10 md:w-8 sm:w-8"
-          alt="Coin-Icon"
-        ></img>
+        <img src={coinIcon} className="w-8 lg:w-10" alt="Coin-Icon"></img>
       </StyledContainer>
     </div>
   );
