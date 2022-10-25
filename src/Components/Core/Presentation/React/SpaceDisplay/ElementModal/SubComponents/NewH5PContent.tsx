@@ -93,7 +93,7 @@ export default function NewH5PContent({
   return (
     <div className="App">
       <div
-        className="w-[800px] h-[600px] aspect-video"
+        className="h-[80vh] lg:w-[800px] lg:h-[600px] aspect-video"
         id="h5p-container"
         ref={h5pContainerRef}
       ></div>
