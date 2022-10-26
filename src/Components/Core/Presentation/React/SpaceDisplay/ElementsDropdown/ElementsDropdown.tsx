@@ -27,14 +27,12 @@ export default function ElementsDropdown() {
     <CustomDropdown
       headerPart={
         <StyledButton
-          shape="freefloatleft"
+          shape="square"
           onClick={() => {
             setDropDownOpen(!dropDownOpen);
           }}
         >
-          <h2 className="text-white text-md lg:text-2xl text-shadow">
-            Lernelemente
-          </h2>
+          <h2 className="text-white text-md lg:text-2xl text-shadow">LE</h2>
         </StyledButton>
       }
       isOpen={dropDownOpen}
@@ -48,7 +46,7 @@ export default function ElementsDropdown() {
             shape="freefloatleft"
             onClick={() => controller?.startElement(element.id)}
           >
-            <div className="w-5 lg:w-10">{getElementIcon(element.type)}</div>
+            <div className="w-10 lg:w-10">{getElementIcon(element.type)}</div>
             <h3 className="ml-1 text-sm text-white lg:text-lg">
               {element.name}
             </h3>
