@@ -43,10 +43,6 @@ export default class ReactEntry implements IReactEntry {
     this.startDebugUseCase();
 
     this.setDebugShortcut();
-
-    const bla2 = await CoreDIContainer.get<IBackendAdapter>(
-      CORE_TYPES.IBackendAdapter
-    ).scoreElement("46dd4cbdafda7fc864c8ce73aae3a897", 4, 1);
   }
 
   private setDebugShortcut() {
