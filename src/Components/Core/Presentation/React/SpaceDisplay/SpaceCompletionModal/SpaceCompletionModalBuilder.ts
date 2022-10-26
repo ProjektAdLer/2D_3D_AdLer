@@ -5,7 +5,6 @@ import ISpaceCompletionModalController from "./ISpaceCompletionModalController";
 import ISpaceCompletionModalPresenter from "./ISpaceCompletionModalPresenter";
 import SpaceCompletionModalViewModel from "./SpaceCompletionModalViewModel";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
-import ISpaceAdapter from "../../../../Ports/SpacePort/ISpaceAdapter";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ISpacePort from "../../../../Ports/SpacePort/ISpacePort";
