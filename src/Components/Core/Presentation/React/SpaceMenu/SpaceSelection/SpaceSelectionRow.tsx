@@ -14,7 +14,7 @@ export default function SpaceSelectionRow({
       className="w-[100%]"
       shape="freefloatcenter"
       onClick={onClickCallback}
-      color={selected ? "success" : "default"}
+      color={selected ? "pressed" : "default"}
     >
       {spaceTitle}
     </StyledButton>
