@@ -5,23 +5,10 @@ import ISpaceCompletionModalController from "./ISpaceCompletionModalController";
 import ISpaceCompletionModalPresenter from "./ISpaceCompletionModalPresenter";
 import SpaceCompletionModalViewModel from "./SpaceCompletionModalViewModel";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
-import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
-import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
+import ISpaceAdapter from "../../../../Ports/SpacePort/ISpaceAdapter";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-
-/*
-This Template Provides the whole scaffolding for a React Component.
-Copy below lines in the DI Container and its Types
-
-bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceCompletionModalBuilder).to(SpaceCompletionModalBuilder);
-ISpaceCompletionModalBuilder: Symbol("ISpaceCompletionModalBuilder"),
-
-director.Builder = CoreDIContainer.get<IPresentationBuilder>(
-  BUILDER_TYPES.ISpaceCompletionModalBuilder
-);
-director.build();
-*/
+import ISpacePort from "../../../../Ports/SpacePort/ISpacePort";
 
 @injectable()
 export default class SpaceCompletionModalBuilder extends PresentationBuilder<
@@ -42,8 +29,8 @@ export default class SpaceCompletionModalBuilder extends PresentationBuilder<
   override buildPresenter(): void {
     super.buildPresenter();
 
-    CoreDIContainer.get<AbstractPort<ISpaceAdapter>>(
-      PORT_TYPES.ISpacePort
-    ).registerAdapter(this.presenter as ISpaceAdapter);
+    CoreDIContainer.get<ISpacePort>(PORT_TYPES.ISpacePort).registerAdapter(
+      this.presenter!
+    );
   }
 }

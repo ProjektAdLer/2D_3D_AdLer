@@ -1,4 +1,4 @@
-import Observable from "src/Lib/Observable";
+import Observable from "../../../../../../Lib/Observable";
 
 export default class SpaceCompletionModalViewModel {
   showModal = new Observable<boolean>(false);

@@ -1,10 +1,9 @@
-import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
-import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
+import SpaceTO from "../../../../Application/DataTransferObjects/SpaceTO";
 import ISpaceCompletionModalPresenter from "./ISpaceCompletionModalPresenter";
 import SpaceCompletionModalViewModel from "./SpaceCompletionModalViewModel";
 
 export default class SpaceCompletionModalPresenter
-  implements ISpaceCompletionModalPresenter, ISpaceAdapter
+  implements ISpaceCompletionModalPresenter
 {
   constructor(private viewModel: SpaceCompletionModalViewModel) {}
 

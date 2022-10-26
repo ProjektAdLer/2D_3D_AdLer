@@ -1,4 +1,3 @@
-import { useState } from "react";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
@@ -14,12 +13,11 @@ export default function SpaceCompletionModal() {
     ISpaceCompletionModalController
   >(BUILDER_TYPES.ISpaceCompletionModalBuilder);
 
+  if (!viewModel || !controller) return null;
+
   const [showModal] = useObservable(viewModel.showModal);
   const [score] = useObservable<number>(viewModel.score);
-  const [maxScore] = useObservable<number>(viewModel.maxScore);
   const [requiredScore] = useObservable<number>(viewModel.requiredScore);
-
-  if (!viewModel || !controller) return null;
 
   if (!showModal) return null;
 
