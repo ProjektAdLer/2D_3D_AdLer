@@ -40,9 +40,7 @@ export default function Space() {
             engineOptions={{ stencil: true }}
           />
         </div>
-        <div className="z-10 col-span-3 col-start-4 row-start-6">
-          <BottomTooltip />
-        </div>
+        <BottomTooltip />
         <div className="z-10">
           <ElementModal />
         </div>

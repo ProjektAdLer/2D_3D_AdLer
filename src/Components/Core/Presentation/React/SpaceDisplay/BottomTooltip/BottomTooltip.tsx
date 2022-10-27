@@ -19,7 +19,7 @@ export default function BottomTooltip() {
   if (!show || !text || !type) return null;
 
   return (
-    <div className="flex justify-center">
+    <div className="w-screen flex justify-center absolute bottom-0 md:bottom-10 lg:bottom-20">
       <StyledContainer textColor="white">
         <div className="flex items-center gap-1 p-2 rounded-lg text-md lg:text-2xl roboto-bold text-shadow bg-adlerblue">
           {getElementIcon(type)}
