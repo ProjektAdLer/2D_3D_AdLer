@@ -27,14 +27,12 @@ export default function ElementsDropdown() {
     <CustomDropdown
       headerPart={
         <StyledButton
-          shape="freefloatleft"
+          shape="square"
           onClick={() => {
             setDropDownOpen(!dropDownOpen);
           }}
         >
-          <h2 className="text-white text-md lg:text-2xl text-shadow">
-            Lernelemente
-          </h2>
+          <h2 className="text-white text-md lg:text-2xl text-shadow">LE</h2>
         </StyledButton>
       }
       isOpen={dropDownOpen}
