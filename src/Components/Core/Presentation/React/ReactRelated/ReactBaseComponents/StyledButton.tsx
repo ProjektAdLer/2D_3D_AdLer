@@ -15,7 +15,7 @@ export default function StyledButton({
     // Background Colors
     default: "bg-adlerblue",
     success: "bg-adlergreen",
-    pressed: "bg-adlerblue-900",
+    pressed: "bg-buttonpressedblue",
 
     // Shapes
     square:

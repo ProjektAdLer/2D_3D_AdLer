@@ -26,7 +26,7 @@ module.exports = {
           600: "rgb(92,170,229)",
           700: "rgb(69,160,229)",
           800: "rgb(46,150,229)",
-          900: "rgb(0,120,229)",
+          900: "rgb(23,140,229)",
         },
         adlerdarkblue: {
           DEFAULT: "rgb(23,45,77)", //DEFAULT = 700
@@ -67,6 +67,7 @@ module.exports = {
         adlergreen: {
           DEFAULT: "#009900",
         },
+        buttonpressedblue: "rgb(0,120,229)",
         adlertextgrey: "#111111",
       },
       gridTemplateRows: {
