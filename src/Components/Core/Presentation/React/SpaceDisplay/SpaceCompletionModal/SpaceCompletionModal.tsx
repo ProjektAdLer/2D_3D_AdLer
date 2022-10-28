@@ -12,14 +12,11 @@ export default function SpaceCompletionModal() {
     SpaceCompletionModalViewModel,
     ISpaceCompletionModalController
   >(BUILDER_TYPES.ISpaceCompletionModalBuilder);
-
-  if (!viewModel || !controller) return null;
-
   const [showModal] = useObservable(viewModel.showModal);
   const [score] = useObservable<number>(viewModel.score);
   const [requiredScore] = useObservable<number>(viewModel.requiredScore);
 
-  if (!showModal) return null;
+  if (!viewModel || !controller || !showModal) return null;
 
   return (
     <StyledModal

@@ -26,14 +26,6 @@ describe("SpaceCompletionModal", () => {
     expect(componentUnderTest.container).toBeEmptyDOMElement();
   });
 
-  test("should not render, if controller or viewModel is undefined", () => {
-    useBuilderMock([undefined, undefined]);
-
-    const componentUnderTest = render(<SpaceCompletionModal />);
-
-    expect(componentUnderTest.container).toBeEmptyDOMElement();
-  });
-
   test("onClose of the modal should call the controller", () => {
     const viewModel = new SpaceCompletionModalViewModel();
     viewModel.showModal.Value = true;
