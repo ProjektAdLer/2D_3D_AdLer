@@ -27,7 +27,7 @@ export default function Space() {
         <div className="z-10 col-span-2 col-start-8 row-start-1">
           <ScorePanel />
         </div>
-        <div className="z-10 col-span-5 col-start-3 row-start-1">
+        <div className="z-10 col-span-5 col-start-3 row-start-1 pointer-events-none">
           <SpaceNamePanel />
         </div>
         {/*<div className="z-10 col-span-1 col-start-7 row-start-1 m-2">
