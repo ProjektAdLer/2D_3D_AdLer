@@ -52,7 +52,7 @@ describe("DetailSectionPresenter", () => {
 
     systemUnderTest.onScoreChanged(42, 42, 42, 42);
 
-    expect(systemUnderTest["viewModel"].spaceCompleted.Value).toEqual([
+    expect(systemUnderTest["viewModel"].spacesCompleted.Value).toEqual([
       [42, true],
     ]);
   });

@@ -7,7 +7,7 @@ export default class DetailSectionViewModel {
   spaces: Observable<[number, string][]> = new Observable<[number, string][]>(
     []
   );
-  spaceCompleted: Observable<[number, boolean][]> = new Observable<
+  spacesCompleted: Observable<[number, boolean][]> = new Observable<
     [number, boolean][]
   >([]);
 
