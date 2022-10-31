@@ -18,7 +18,7 @@ export default function Space() {
   return (
     <React.Fragment>
       <div className="grid h-0 min-h-screen grid-cols-9 grid-rows-6 root">
-        <div className="z-10 col-start-1 row-start-1 m-2">
+        <div className="z-10 col-start-1 col-span-3 row-start-1 m-2 pointer-events-none">
           <MenuBar />
         </div>
         {/*<div className="z-10 col-span-2 col-start-2 row-start-1 m-2">

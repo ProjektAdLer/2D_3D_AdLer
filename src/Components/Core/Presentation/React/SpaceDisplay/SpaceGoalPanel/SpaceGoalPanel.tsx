@@ -44,19 +44,20 @@ export default function SpaceGoalPanel() {
   else
     return (
       <div className="flex justify-center text-sm lg:text-lg">
-        <StyledContainer
-          textColor="black"
+        <StyledButton
+          shape="freefloatleft"
+          className="flex flex-row justify-center h-10 md:h-14 lg:h-16"
           onClick={() => {
             handleClick();
           }}
         >
           <img
-            className="w-4 lg:w-10"
+            className="w-4 lg:w-10 mr-4"
             src={goalIcon}
             alt="Learning-Goal-Icon"
           ></img>
           {goal}
-        </StyledContainer>
+        </StyledButton>
       </div>
     );
 }

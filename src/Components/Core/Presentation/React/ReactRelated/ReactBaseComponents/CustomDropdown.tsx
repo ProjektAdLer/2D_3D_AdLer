@@ -42,8 +42,8 @@ export default function CustomDropdown({
   );
 
   return (
-    <div className="dropdown">
-      <div className="dropdown-header" onClick={handleClick}>
+    <div className="dropdown pointer-events-auto">
+      <div className="dropdown-header " onClick={handleClick}>
         {headerPart}
       </div>
       {shouldShowDropdown && content}
