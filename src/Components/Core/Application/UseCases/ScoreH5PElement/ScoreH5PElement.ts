@@ -1,9 +1,11 @@
 import { inject, injectable } from "inversify";
 import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
+import ElementEntity from "src/Components/Core/Domain/Entities/ElementEntity";
 import SpaceEntity from "src/Components/Core/Domain/Entities/SpaceEntity";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import type IElementPort from "src/Components/Core/Ports/ElementPort/IElementPort";
+import { logger } from "src/Lib/Logger";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
@@ -15,38 +17,79 @@ export default class ScoreH5PElement implements IScoreH5PElement {
   constructor(
     @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendAdapter,
     @inject(CORE_TYPES.IEntityContainer)
-    private container: IEntityContainer,
+    private entityContainer: IEntityContainer,
     @inject(PORT_TYPES.IElementPort) private elementPort: IElementPort,
     @inject(USECASE_TYPES.ICalculateSpaceScore)
     private calculateSpaceScoreUseCase: ICalculateSpaceScoreUseCase
   ) {}
+
   async executeAsync(data?: {
     xapiData: XAPiEvent;
     elementId: number;
   }): Promise<boolean> {
-    const userEntity = this.container.getEntitiesOfType(UserDataEntity)[0];
-    const backendResponse = await this.backendAdapter.scoreH5PElement({
+    if (!data || !data.elementId || !data.xapiData) {
+      return this.rejectWithWarning("data is (atleast partly) undefined!");
+    }
+
+    // get user token
+    const userEntity =
+      this.entityContainer.getEntitiesOfType(UserDataEntity)[0];
+
+    if (!userEntity || !userEntity.isLoggedIn) {
+      return this.rejectWithWarning("User is not logged in!");
+    }
+
+    // call backend
+    const scoredSuccessful = await this.backendAdapter.scoreH5PElement({
       userToken: userEntity.userToken,
-      h5pId: data!.elementId,
+      h5pId: data.elementId,
       courseId: 1, // TODOPG: get course id
-      rawH5PEvent: data!.xapiData,
+      rawH5PEvent: data.xapiData,
     });
 
-    const space = this.container.filterEntitiesOfType<SpaceEntity>(
-      SpaceEntity,
-      (space) =>
-        space?.elements?.some((element) => element.id === data!.elementId)
-    )[0];
+    // do scoring, if backend call returned successful scoring
+    if (scoredSuccessful) {
+      // get element
+      const elements: ElementEntity[] =
+        this.entityContainer.filterEntitiesOfType<ElementEntity>(
+          ElementEntity,
+          (entity) => {
+            return entity.id === data.elementId;
+          }
+        );
 
-    if (!space)
-      throw new Error(`Could not find space with element ${data?.elementId}`);
+      if (elements.length === 0)
+        return this.rejectWithWarning("No matching element found!");
+      else if (elements.length > 1)
+        return this.rejectWithWarning("More than one matching element found!");
 
-    this.calculateSpaceScoreUseCase.execute({
-      spaceId: space.id,
-    });
+      const element: ElementEntity = elements[0];
 
-    this.elementPort.onElementScored(true, data!.elementId);
+      // get space
+      const space: SpaceEntity =
+        this.entityContainer.filterEntitiesOfType<SpaceEntity>(
+          SpaceEntity,
+          (space) => space?.id === element.parentSpaceId
+        )[0];
 
-    return Promise.resolve(true);
+      if (!space) {
+        return this.rejectWithWarning("Space with given element not found!");
+      }
+
+      element.hasScored = true;
+
+      this.calculateSpaceScoreUseCase.execute({
+        spaceId: space.id,
+      });
+
+      this.elementPort.onElementScored(true, data.elementId);
+    }
+
+    return Promise.resolve(scoredSuccessful);
+  }
+
+  private rejectWithWarning(message: string): Promise<boolean> {
+    logger.warn("Tried scoring H5P learning element. " + message);
+    return Promise.reject(message);
   }
 }
