@@ -3,6 +3,8 @@ import MoodleLoginButton from "~ReactComponents/GeneralComponents/MoodleLoginBut
 import MoodleLoginForm from "~ReactComponents/GeneralComponents/MoodleLoginForm/MoodleLoginForm";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import history from "history/browser";
+import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
+import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 
 import logo from "../../../../../../Assets/icons/adLerEngine_flat_logo_simple.svg";
 
@@ -49,6 +51,16 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
         <MoodleLoginForm />
         {/*MoodleLoginForm muss immer am Ende der Komponenten platziert werden. Sonst buggt es mit komischen Abständen.*/}
       </div>
+      <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
+        <div className="text-lg font-bold text-white text-shadow-sm">
+          <h1>
+            Die AdLer Engine ist für den<br></br>
+            Landscape Modus konzipiert.<br></br>
+            Bitte nimm dein Smartphone quer.<br></br>
+            Danke!
+          </h1>
+        </div>
+      </StyledModal>
     </React.Fragment>
   );
 };
