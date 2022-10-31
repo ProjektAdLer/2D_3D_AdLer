@@ -26,7 +26,7 @@ export default function DetailSection() {
   const [requirements] = useObservable<number[]>(viewModel.requirements);
   const [spaces] = useObservable<[number, string][]>(viewModel.spaces);
   const [spacesCompleted] = useObservable<[number, boolean][]>(
-    viewModel.spaceCompleted
+    viewModel.spacesCompleted
   );
 
   // return if any of the observables is undefined

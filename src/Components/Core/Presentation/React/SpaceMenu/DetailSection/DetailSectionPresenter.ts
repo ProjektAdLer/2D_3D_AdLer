@@ -25,7 +25,10 @@ export default class DetailSectionPresenter implements IDetailSectionPresenter {
     maxScore: number,
     spaceID: ElementID
   ): void {
-    this.viewModel.spaceCompleted.Value.push([spaceID, score >= requiredScore]);
+    this.viewModel.spacesCompleted.Value.push([
+      spaceID,
+      score >= requiredScore,
+    ]);
   }
 
   onSpaceDataLoaded(spaceTO: SpaceTO): void {
