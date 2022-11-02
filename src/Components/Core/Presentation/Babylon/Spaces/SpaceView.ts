@@ -1,3 +1,8 @@
+// earcut is needed for triangulation used in the Babylon PolyMeshBuilder
+// see also: https://doc.babylonjs.com/features/featuresDeepDive/mesh/creation/param/polyMeshBuilder
+import * as earcut from "earcut";
+(window as any).earcut = earcut;
+
 import {
   Path2,
   StandardMaterial,
@@ -16,11 +21,7 @@ import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
-
-// earcut is needed for triangulation used in the Babylon PolyMeshBuilder
-// see also: https://doc.babylonjs.com/features/featuresDeepDive/mesh/creation/param/polyMeshBuilder
-import * as earcut from "earcut";
-(window as any).earcut = earcut;
+import bind from "bind-decorator";
 
 export default class SpaceView implements ISpaceView {
   private scenePresenter: IScenePresenter;
@@ -39,39 +40,15 @@ export default class SpaceView implements ISpaceView {
         "ViewModel is not set! Check if the builder is set up properly."
       );
 
-    // setup callbacks for rerendering parts of the room when the view model changes
-    this.viewModel.spaceHeight.subscribe(() => {
-      this.displaySpace();
-    });
-    this.viewModel.spaceWidth.subscribe(() => {
-      this.displaySpace();
-    });
-    this.viewModel.spaceLength.subscribe(() => {
-      this.displaySpace();
-    });
-    this.viewModel.wallThickness.subscribe(() => {
-      this.displaySpace();
-    });
-    this.viewModel.baseHeight.subscribe(() => {
-      this.displaySpace();
-    });
-    this.viewModel.wallColor.subscribe(() => {
-      this.applyWallColor();
-    });
-    this.viewModel.doorHeight.subscribe(() => {
-      this.displaySpace();
-    });
-    this.viewModel.doorWidth.subscribe(() => {
-      this.displaySpace();
-    });
-    this.viewModel.spaceCornerPoints.subscribe(() => {
-      this.displaySpace();
-    });
+    this.scenePresenter.Scene.onBeforeRenderObservable.add(this.displaySpace);
 
     // TODO: setup subscription cancellations
   }
 
+  @bind
   public displaySpace(): void {
+    if (!this.viewModel.isDirty) return;
+
     // Errorhandling: Check if cornerCount is higher than 2
     if (this.viewModel.spaceCornerPoints.Value.length < 3)
       throw new Error(
@@ -83,6 +60,8 @@ export default class SpaceView implements ISpaceView {
     this.createWalls();
     this.createWallCornerPoles();
     this.createFloor();
+
+    this.viewModel.isDirty = false;
   }
 
   private cleanupOldFloor(): void {

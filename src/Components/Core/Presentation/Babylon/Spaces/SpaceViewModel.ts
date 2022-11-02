@@ -2,9 +2,21 @@ import { ElementID } from "../../../Domain/Types/EntityTypes";
 import { injectable } from "inversify";
 import { Vector2, Color3, Mesh, StandardMaterial } from "@babylonjs/core";
 import Observable from "../../../../../Lib/Observable";
+import AbstractViewModel from "../Abstract/AbstractViewModel";
 
 @injectable()
-export default class SpaceViewModel {
+export default class SpaceViewModel extends AbstractViewModel {
+  constructor() {
+    super();
+    this.wallColor.subscribe(this.setIsDirtyTrue);
+    this.spaceWidth.subscribe(this.setIsDirtyTrue);
+    this.spaceHeight.subscribe(this.setIsDirtyTrue);
+    this.spaceLength.subscribe(this.setIsDirtyTrue);
+    this.wallThickness.subscribe(this.setIsDirtyTrue);
+    this.baseHeight.subscribe(this.setIsDirtyTrue);
+    this.spaceCornerPoints.subscribe(this.setIsDirtyTrue);
+  }
+
   public wallColor: Observable<Color3> = new Observable(
     new Color3(0.97, 0.95, 0.95)
   );
