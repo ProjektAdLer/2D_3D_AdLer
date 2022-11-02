@@ -1,5 +1,5 @@
-import { ElementID } from "../../../Domain/Types/EntityTypes";
 import { inject, injectable } from "inversify";
+import { ElementID } from "../../../Domain/Types/EntityTypes";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
@@ -8,9 +8,10 @@ import type IBackendAdapter from "../../../Adapters/BackendAdapter/IBackendAdapt
 import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
-import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
+import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import type IElementPort from "src/Components/Core/Ports/ElementPort/IElementPort";
+import type IElementPort from "../../../Ports/ElementPort/IElementPort";
+import { logger } from "../../../../../Lib/Logger";
 
 @injectable()
 export default class ScoreElementUseCase implements IScoreElementUseCase {
@@ -27,34 +28,49 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
 
   async executeAsync(data?: { elementId: ElementID }): Promise<void> {
     if (!data || !data.elementId) {
-      throw new Error("data is undefined");
+      return this.rejectWithWarning(
+        "data is (atleast partly) undefined!",
+        undefined
+      );
     }
-    let elements = this.entityContainer.filterEntitiesOfType<ElementEntity>(
-      ElementEntity,
-      (entity) => {
-        return entity.id === data.elementId;
-      }
-    );
 
+    // get user token
     const userEntity =
-      this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
+      this.entityContainer.getEntitiesOfType(UserDataEntity)[0];
 
-    if (elements.length === 0)
-      throw new Error(`Could not find element with id ${data?.elementId}`);
-    else if (elements.length > 1)
-      throw new Error(`Found more than one element with id ${data?.elementId}`);
+    if (!userEntity || !userEntity.isLoggedIn) {
+      return this.rejectWithWarning("User is not logged in!", data.elementId);
+    }
 
+    // call backend
     try {
       await this.backendAdapter.scoreElement(
         userEntity.userToken,
-        elements[0].id,
-        1
-      ); // TODOPG: get course id
-    } catch {
-      throw new Error("Could not score element via Backend");
+        data.elementId,
+        1 // TODOPG: get course id
+      );
+    } catch (e) {
+      return this.rejectWithWarning(
+        "Backend call failed with error: " + e,
+        data.elementId
+      );
     }
 
-    elements[0].hasScored = true;
+    const elements = this.entityContainer.filterEntitiesOfType<ElementEntity>(
+      ElementEntity,
+      (entity) => entity.id === data.elementId
+    );
+
+    if (elements.length === 0)
+      return this.rejectWithWarning(
+        "No matching element found!",
+        data.elementId
+      );
+    else if (elements.length > 1)
+      return this.rejectWithWarning(
+        "More than one matching element found!",
+        data.elementId
+      );
 
     const space = this.entityContainer.filterEntitiesOfType<SpaceEntity>(
       SpaceEntity,
@@ -62,7 +78,9 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
     )[0];
 
     if (!space)
-      throw new Error(`Could not find space with element ${data?.elementId}`);
+      return this.rejectWithWarning("No matching space found!", data.elementId);
+
+    elements[0].hasScored = true;
 
     this.calculateSpaceScoreUseCase.execute({
       spaceId: space.id,
@@ -71,5 +89,10 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
     this.elementPort.onElementScored(true, data.elementId);
 
     return Promise.resolve();
+  }
+
+  private rejectWithWarning(message: string, id?: ElementID): Promise<void> {
+    logger.warn(`Tried scoring H5P learning element with ID ${id}. ` + message);
+    return Promise.reject(message);
   }
 }

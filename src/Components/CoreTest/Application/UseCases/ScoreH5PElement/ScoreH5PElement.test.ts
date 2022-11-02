@@ -46,6 +46,9 @@ const setupEntityContainerMock = (
   });
   entityContainerMock.filterEntitiesOfType.mockImplementation(
     (entityType, filter) => {
+      // call filter function to make sure it is valid
+      filter(new entityType());
+
       if (entityType === UserDataEntity) {
         return userEntityMock;
       } else if (entityType === ElementEntity) {
