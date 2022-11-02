@@ -9,6 +9,7 @@ import ElementsDropdown from "~ReactComponents/SpaceDisplay/ElementsDropdown/Ele
 import MenuBarViewModel from "./MenuBarViewModel";
 import MenuBarController from "./MenuBarController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
+import menuIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
 
 export default function MenuBar() {
   const [viewModel, controller] = useBuilder<
@@ -32,7 +33,7 @@ export default function MenuBar() {
       <StyledContainer className="flex flex-col bg-transparent">
         <FullscreenSwitch />
         <StyledButton onClick={controller.onExitButtonClicked}>
-          Menu
+          <img src={menuIcon} alt="" />
         </StyledButton>
         <SpaceGoalPanel />
         <ElementsDropdown />
