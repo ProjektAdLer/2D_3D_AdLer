@@ -1,7 +1,6 @@
 // earcut is needed for triangulation used in the Babylon PolyMeshBuilder
 // see also: https://doc.babylonjs.com/features/featuresDeepDive/mesh/creation/param/polyMeshBuilder
 import * as earcut from "earcut";
-(window as any).earcut = earcut;
 
 import {
   Path2,
@@ -22,6 +21,8 @@ import SCENE_TYPES, {
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
 import bind from "bind-decorator";
+
+(window as any).earcut = earcut;
 
 export default class SpaceView implements ISpaceView {
   private scenePresenter: IScenePresenter;
