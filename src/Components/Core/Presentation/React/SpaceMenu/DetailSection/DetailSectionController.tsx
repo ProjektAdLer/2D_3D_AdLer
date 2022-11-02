@@ -1,4 +1,3 @@
-import { logger } from "src/Lib/Logger";
 import IDetailSectionController from "./IDetailSectionController";
 import history from "history/browser";
 import DetailSectionViewModel from "./DetailSectionViewModel";

@@ -9,6 +9,7 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import DetailSectionController from "./DetailSectionController";
 import { getElementIcon } from "../../../Utils/GetIcon";
 import coinIcon from "../../../../../../Assets/icons/coin_icon.svg";
+import { logger } from "src/Lib/Logger";
 
 export default function DetailSection() {
   const [viewModel, controller] = useBuilder<
@@ -24,10 +25,7 @@ export default function DetailSection() {
   >(viewModel.elements);
   const [requiredPoints] = useObservable<number>(viewModel.requiredPoints);
   const [requirements] = useObservable<number[]>(viewModel.requirements);
-  const [spaces] = useObservable<[number, string][]>(viewModel.spaces);
-  const [spacesCompleted] = useObservable<[number, boolean][]>(
-    viewModel.spacesCompleted
-  );
+  const [spaces] = useObservable<[number, string, boolean][]>(viewModel.spaces);
 
   // return if any of the observables is undefined
   if (
@@ -37,8 +35,7 @@ export default function DetailSection() {
     elements === undefined ||
     requiredPoints === undefined ||
     requirements === undefined ||
-    spaces === undefined ||
-    spacesCompleted === undefined
+    spaces === undefined
   )
     return null;
 
@@ -115,10 +112,15 @@ export default function DetailSection() {
           </div>
           <div className="items-start ml-6 text-lg roboto-regular">
             {requirements.map((requirement) => {
-              let name = spaces.find((space) => space[0] === requirement)![1];
-              let completed = spacesCompleted.find(
-                (space) => space[0] === requirement
-              )![1];
+              let name;
+              let completed;
+              const lookup = spaces.find((space) => space[0] === requirement);
+              if (lookup === undefined) {
+                logger.warn("Requirement not found in spaces.");
+                return;
+              }
+              name = lookup[1];
+              completed = lookup[2];
 
               return (
                 <CheckBoxEntry key={name + requirement} checked={completed}>
@@ -131,12 +133,8 @@ export default function DetailSection() {
       )}
       {viewModel.requirements.Value.every((requirement) => {
         // check for each requirement if the space is completed
-        let spaceCompletedTuple = spacesCompleted.find(
-          (space) => space[0] === requirement
-        );
-        return spaceCompletedTuple !== undefined
-          ? spaceCompletedTuple[1]
-          : false;
+        let requiredSpaces = spaces.find((space) => space[0] === requirement);
+        return requiredSpaces !== undefined ? requiredSpaces[2] : false;
       }) && (
         <StyledButton
           shape="freefloatleft"

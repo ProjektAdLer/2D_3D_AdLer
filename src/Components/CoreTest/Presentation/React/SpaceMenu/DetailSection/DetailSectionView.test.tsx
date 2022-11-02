@@ -1,22 +1,19 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
-import { ElementTypeStrings } from "src/Components/Core/Domain/Types/ElementTypes";
-import Observable from "src/Lib/Observable";
-import DetailSection from "~ReactComponents/SpaceMenu/DetailSection/DetailSection";
-import DetailSectionController from "~ReactComponents/SpaceMenu/DetailSection/DetailSectionController";
-import DetailSectionViewModel from "~ReactComponents/SpaceMenu/DetailSection/DetailSectionViewModel";
+import { ElementTypeStrings } from "../../../../../Core/Domain/Types/ElementTypes";
+import Observable from "../../../../../../Lib/Observable";
+import DetailSection from "../../../../../Core/Presentation/React/SpaceMenu/DetailSection/DetailSection";
+import DetailSectionController from "../../../../../Core/Presentation/React/SpaceMenu/DetailSection/DetailSectionController";
+import DetailSectionViewModel from "../../../../../Core/Presentation/React/SpaceMenu/DetailSection/DetailSectionViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import React from "react";
 
 let mockViewModel = new DetailSectionViewModel();
 //world data
-const mockSpaces: Observable<[number, string][]> = new Observable(
-  [1, "spacesTest1"],
-  [2, "spacesTest2"]
-);
-const mockSpacesCompleted: Observable<[number, string][]> = new Observable(
-  [10, "spacesTest1"],
-  [20, "spacesTest2"]
-);
+const mockSpaces: Observable<[number, string, boolean][]> = new Observable([
+  [1, "spacesTest1", true],
+  [2, "spacesTest2", false],
+]);
 //space data
 const mockName: Observable<string> = new Observable("nameTest");
 const mockDescription: Observable<string> = new Observable("descriptionTest");
@@ -28,12 +25,11 @@ const mockElements: Observable<[ElementTypeStrings, string][]> = new Observable(
   ]
 );
 const mockRequiredPoints: Observable<number> = new Observable(1);
-//TODO: Fill this with a value
-const mockRequirements: Observable<number[]> = new Observable([]);
+const mockRequirements: Observable<number[]> = new Observable([1]);
 
 describe("DetailSection in Space Menu", () => {
   beforeEach(() => {
-    useBuilderMock([mockViewModel, new DetailSectionController()]);
+    useBuilderMock([mockViewModel, new DetailSectionController(mockViewModel)]);
     mockViewModel.name = mockName;
     mockViewModel.description = mockDescription;
     mockViewModel.goals = mockGoals;
@@ -41,9 +37,12 @@ describe("DetailSection in Space Menu", () => {
     mockViewModel.requiredPoints = mockRequiredPoints;
     mockViewModel.requirements = mockRequirements;
     mockViewModel.spaces = mockSpaces;
-    mockViewModel.spacesCompleted = mockSpacesCompleted;
   });
   test("should render", () => {
+    render(<DetailSection />);
+  });
+  test("should render without requirements if requirement does not match with spaceid.", () => {
+    mockViewModel.requirements.Value = [20];
     render(<DetailSection />);
   });
   test("should not render if name is undefined", () => {
@@ -78,11 +77,6 @@ describe("DetailSection in Space Menu", () => {
   });
   test("should not render if spaces is undefined", () => {
     mockViewModel.spaces = undefined;
-    const componentUnderTest = render(<DetailSection />);
-    expect(componentUnderTest.container).toBeEmptyDOMElement();
-  });
-  test("should not render if spacesCompleted is undefined", () => {
-    mockViewModel.spacesCompleted = undefined;
     const componentUnderTest = render(<DetailSection />);
     expect(componentUnderTest.container).toBeEmptyDOMElement();
   });

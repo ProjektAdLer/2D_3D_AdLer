@@ -1,7 +1,6 @@
 import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
 import IDetailSectionPresenter from "./IDetailSectionPresenter";
 import DetailSectionViewModel from "./DetailSectionViewModel";
-import { logger } from "src/Lib/Logger";
 import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
 import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
 
@@ -9,10 +8,10 @@ export default class DetailSectionPresenter implements IDetailSectionPresenter {
   constructor(private viewModel: DetailSectionViewModel) {}
 
   onWorldLoaded(world: WorldTO): void {
-    let spaces: [number, string][] = [];
+    let spaces: [number, string, boolean][] = [];
 
     world.spaces.forEach((space) => {
-      spaces.push([space.id, space.name]);
+      spaces.push([space.id, space.name, false]);
     });
 
     // set all values at once to avoid multiple re-renders
@@ -25,10 +24,12 @@ export default class DetailSectionPresenter implements IDetailSectionPresenter {
     maxScore: number,
     spaceID: ElementID
   ): void {
-    this.viewModel.spacesCompleted.Value.push([
-      spaceID,
-      score >= requiredScore,
-    ]);
+    const lookup = this.viewModel.spaces.Value.find(
+      (space) => space[0] === spaceID
+    );
+    if (score >= requiredScore && lookup !== undefined) {
+      lookup[2] = true;
+    }
   }
 
   onSpaceDataLoaded(spaceTO: SpaceTO): void {

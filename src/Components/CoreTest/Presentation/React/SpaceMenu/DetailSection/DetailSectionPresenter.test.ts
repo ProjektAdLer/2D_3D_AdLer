@@ -11,7 +11,9 @@ describe("DetailSectionPresenter", () => {
 
   test("should set view Model on World loaded", () => {
     systemUnderTest.onWorldLoaded({ spaces: [{ id: 1, name: "test" }] });
-    expect(systemUnderTest["viewModel"].spaces.Value).toEqual([[1, "test"]]);
+    expect(systemUnderTest["viewModel"].spaces.Value).toEqual([
+      [1, "test", false],
+    ]);
   });
 
   test("should set viewModel Data when score has changed", () => {
@@ -50,10 +52,10 @@ describe("DetailSectionPresenter", () => {
 
     systemUnderTest.onSpaceDataLoaded(spaceTO);
 
-    systemUnderTest.onScoreChanged(42, 42, 42, 42);
+    systemUnderTest.onScoreChanged(3, 3, 0, 1);
 
-    expect(systemUnderTest["viewModel"].spacesCompleted.Value).toEqual([
-      [42, true],
+    expect(systemUnderTest["viewModel"].spaces.Value).toEqual([
+      [1, "Placeholder", true],
     ]);
   });
 

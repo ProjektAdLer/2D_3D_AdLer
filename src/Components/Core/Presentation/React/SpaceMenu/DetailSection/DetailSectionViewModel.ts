@@ -4,12 +4,10 @@ import { ElementTypeStrings } from "../../../../Domain/Types/ElementTypes";
 
 export default class DetailSectionViewModel {
   // world data
-  spaces: Observable<[number, string][]> = new Observable<[number, string][]>(
-    []
-  );
-  spacesCompleted: Observable<[number, boolean][]> = new Observable<
-    [number, boolean][]
-  >([]);
+  // spaces (id, name, isCompleted)
+  spaces: Observable<[number, string, boolean][]> = new Observable<
+    [number, string, boolean][]
+  >([[1, "Placeholder", false]]);
 
   // space data
   id: Observable<ElementID> = new Observable<ElementID>(undefined);
@@ -17,18 +15,9 @@ export default class DetailSectionViewModel {
   description: Observable<string> = new Observable<string>("");
   goals: Observable<string> = new Observable<string>("");
   requiredPoints: Observable<number> = new Observable<number>(0);
-  requirements: Observable<number[]> = new Observable<number[]>([]);
+  requirements: Observable<number[]> = new Observable<number[]>([1]);
 
   // element data (type, name, hasScored, points)
   elements: Observable<[ElementTypeStrings, string, boolean, number][]> =
     new Observable<[ElementTypeStrings, string, boolean, number][]>([]);
 }
-
-// DSL CONTENT:
-// name(identifier, value) string
-// description string
-// goals string
-// content ElementTO array
-// requiredPoints number
-// includedPoints number
-// requirements [bool, ElementTO] Array (done or not done, name)
