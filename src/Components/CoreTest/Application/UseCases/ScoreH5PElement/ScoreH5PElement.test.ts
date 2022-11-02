@@ -1,4 +1,3 @@
-import exp from "constants";
 import { mock } from "jest-mock-extended";
 import { logger } from "../../../../../Lib/Logger";
 import IBackendAdapter from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
