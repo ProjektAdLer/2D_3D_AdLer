@@ -12,11 +12,14 @@ import ISpaceController from "./ISpaceController";
 import ISpaceView from "./ISpaceView";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import * as earcut from "earcut";
 import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
+
+// earcut is needed for triangulation used in the Babylon PolyMeshBuilder
+// see also: https://doc.babylonjs.com/features/featuresDeepDive/mesh/creation/param/polyMeshBuilder
+import * as earcut from "earcut";
 (window as any).earcut = earcut;
 
 export default class SpaceView implements ISpaceView {
