@@ -9,6 +9,8 @@ import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/S
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
+import elementsIcon from "../../../../../../Assets/icons/24-elements/elements-icon.svg";
+import menuIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
 
 export default function ElementsDropdown() {
   const [viewModel, controller] = useBuilder<
@@ -32,7 +34,7 @@ export default function ElementsDropdown() {
             setDropDownOpen(!dropDownOpen);
           }}
         >
-          <h2 className="text-white text-md lg:text-2xl text-shadow">LE</h2>
+          <img className="" src={elementsIcon} alt="" />
         </StyledButton>
       }
       isOpen={dropDownOpen}
