@@ -5,11 +5,12 @@ import { ElementID } from "../../../../Domain/Types/EntityTypes";
 import IElementModalController from "./IElementModalController";
 
 export default class ElementModalController implements IElementModalController {
-  async scoreElement(elementId: ElementID): Promise<void> {
+  async scoreElement(elementId: ElementID, courseId: ElementID): Promise<void> {
     await CoreDIContainer.get<IScoreElementUseCase>(
       USECASE_TYPES.IScoreElementUseCase
     ).executeAsync({
       elementId: elementId,
+      courseId: courseId,
     });
   }
 }

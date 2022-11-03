@@ -5,6 +5,7 @@ export default interface IScoreElementUseCase
   extends IAsyncUsecase<
     {
       elementId: ElementID;
+      courseId: ElementID;
     },
     void
   > {}

@@ -54,7 +54,10 @@ export default function ElementModal() {
       onClose={() => {
         setOpen(false);
         if (viewModel?.type?.Value !== "h5p") {
-          controller.scoreElement(viewModel?.id.Value);
+          controller.scoreElement(
+            viewModel?.id.Value,
+            viewModel?.parentCourseId.Value
+          );
         }
       }}
       showModal={isOpen}

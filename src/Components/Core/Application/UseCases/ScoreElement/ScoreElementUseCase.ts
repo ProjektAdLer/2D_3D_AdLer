@@ -26,7 +26,10 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
     private elementPort: IElementPort
   ) {}
 
-  async executeAsync(data?: { elementId: ElementID }): Promise<void> {
+  async executeAsync(data: {
+    elementId: ElementID;
+    courseId: ElementID;
+  }): Promise<void> {
     if (!data || !data.elementId) {
       return this.rejectWithWarning(
         "data is (atleast partly) undefined!",
@@ -47,7 +50,7 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
       await this.backendAdapter.scoreElement(
         userEntity.userToken,
         data.elementId,
-        1 // TODOPG: get course id
+        data.courseId
       );
     } catch (e) {
       return this.rejectWithWarning(
