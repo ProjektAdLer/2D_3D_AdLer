@@ -1,9 +1,10 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
 import { mock } from "jest-mock-extended";
-import FullscreenSwitch from "~ReactComponents/SpaceDisplay/FullscreenSwitch/FullscreenSwitch";
-import IFullscreenSwitchController from "~ReactComponents/SpaceDisplay/FullscreenSwitch/IFullscreenSwitchController";
+import FullscreenSwitch from "../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitch";
+import IFullscreenSwitchController from "../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/IFullscreenSwitchController";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import React from "react";
 
 const controllerMock = mock<IFullscreenSwitchController>();
 

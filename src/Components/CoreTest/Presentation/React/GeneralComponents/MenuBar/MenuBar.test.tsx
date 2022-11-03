@@ -3,8 +3,8 @@ import { render } from "@testing-library/react";
 import history from "history/browser";
 import mock from "jest-mock-extended/lib/Mock";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
-import IMenuBarController from "~ReactComponents/GeneralComponents/MenuBar/IMenuBarController";
-import MenuBar from "~ReactComponents/GeneralComponents/MenuBar/MenuBar";
+import IMenuBarController from "../../../../../Core/Presentation/React/GeneralComponents/MenuBar/IMenuBarController";
+import MenuBar from "../../../../../Core/Presentation/React/GeneralComponents/MenuBar/MenuBar";
 
 const mockHistoryBack = jest.spyOn(history, "back");
 jest.mock(

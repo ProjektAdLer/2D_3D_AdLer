@@ -1,7 +1,7 @@
 import { mock } from "jest-mock-extended";
 import MoodlePort from "../../../Core/Ports/MoodlePort/MoodlePort";
-import IMoodleLoginButtonPresenter from "../../../Core/Presentation/React/MoodleLoginButton/IMoodleLoginButtonPresenter";
-import IMoodleLoginFormPresenter from "../../../Core/Presentation/React/MoodleLoginForm/IMoodleLoginFormPresenter";
+import IMoodleLoginButtonPresenter from "../../../Core/Presentation/React/GeneralComponents/MoodleLoginButton/IMoodleLoginButtonPresenter";
+import IMoodleLoginFormPresenter from "../../../Core/Presentation/React/GeneralComponents/MoodleLoginForm/IMoodleLoginFormPresenter";
 import CoreDIContainer from "../../../../Components/Core/DependencyInjection/CoreDIContainer";
 import { logger } from "../../../../Lib/Logger";
 

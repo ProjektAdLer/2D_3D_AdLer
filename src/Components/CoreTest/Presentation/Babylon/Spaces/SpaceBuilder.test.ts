@@ -1,4 +1,3 @@
-import SpacePresenter from "../../../../Core/Presentation/Babylon/Spaces/SpacePresenter";
 import SpaceViewModel from "../../../../Core/Presentation/Babylon/Spaces/SpaceViewModel";
 import SpaceBuilder from "../../../../Core/Presentation/Babylon/Spaces/SpaceBuilder";
 import SpacePort from "../../../../Core/Ports/SpacePort/SpacePort";

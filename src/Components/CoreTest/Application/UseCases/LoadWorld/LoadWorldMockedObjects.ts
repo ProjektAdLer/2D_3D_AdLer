@@ -1,5 +1,5 @@
-import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
-import ElementEntity from "src/Components/Core/Domain/Entities/ElementEntity";
+import ElementTO from "../../../../Core/Application/DataTransferObjects/ElementTO";
+import ElementEntity from "../../../../Core/Domain/Entities/ElementEntity";
 
 const baseElement = {
   id: 4,

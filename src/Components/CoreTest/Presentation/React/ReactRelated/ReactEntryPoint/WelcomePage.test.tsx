@@ -1,5 +1,5 @@
 import WelcomePage from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/WelcomePage";
-import { fireEvent, render, within, screen } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import useBuilderMock from "../CustomHooks/useBuilder/useBuilderMock";
 import history from "history/browser";
 import "@testing-library/jest-dom";

@@ -5,6 +5,7 @@ import BUILDER_TYPES from "../../../../../Core/DependencyInjection/Builders/BUIL
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IPresentationDirector from "../../../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
+import React from "react";
 
 import ReactEntry from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/ReactEntry";
 

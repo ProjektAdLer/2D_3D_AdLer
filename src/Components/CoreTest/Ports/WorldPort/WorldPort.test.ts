@@ -3,9 +3,7 @@ import WorldPort from "../../../Core/Ports/WorldPort/WorldPort";
 import ElementTO from "../../../Core/Application/DataTransferObjects/ElementTO";
 import SpaceTO from "../../../Core/Application/DataTransferObjects/SpaceTO";
 import WorldTO from "../../../Core/Application/DataTransferObjects/WorldTO";
-import ISpaceAdapter from "../../../Core/Ports/SpacePort/ISpaceAdapter";
 import { mock } from "jest-mock-extended";
-import IWorldPort from "../../../Core/Ports/WorldPort/IWorldPort";
 import IWorldAdapter from "../../../Core/Ports/WorldPort/IWorldAdapter";
 
 describe("WorldPort", () => {

@@ -6,7 +6,6 @@ import ElementModalController from "../../../../../Core/Presentation/React/Space
 import ElementModalViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import ElementModal from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModal";
-import NewH5PContent from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/NewH5PContent";
 
 let fakeModel = new ElementModalViewModel();
 fakeModel.isOpen.Value = true;

@@ -1,9 +1,4 @@
-import {
-  Camera,
-  CameraInputsManager,
-  NullEngine,
-  Scene,
-} from "@babylonjs/core";
+import { NullEngine, Scene } from "@babylonjs/core";
 import { mock, mockDeep } from "jest-mock-extended";
 import SpaceTO from "../../../../../Core/Application/DataTransferObjects/SpaceTO";
 import ILoadAvatarUseCase from "../../../../../Core/Application/UseCases/LoadAvatar/ILoadAvatarUseCase";

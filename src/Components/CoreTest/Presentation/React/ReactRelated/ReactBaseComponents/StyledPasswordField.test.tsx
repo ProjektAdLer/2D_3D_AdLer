@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import StyledPasswordField from "../../../../../Core/Presentation/React/ReactRelated/ReactBaseComponents/StyledPasswordField";
+import React from "react";
 
 describe("StyledPasswordField", () => {
   it("should render an input field", () => {

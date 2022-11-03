@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import StyledContainer from "../../../../../Core/Presentation/React/ReactRelated/ReactBaseComponents/StyledContainer";
 import "@testing-library/jest-dom";
+import React from "react";
 
 describe("Styled Container", () => {
   test("should render", () => {

@@ -1,6 +1,6 @@
-import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
-import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
-import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
+import ElementTO from "../../../Core/Application/DataTransferObjects/ElementTO";
+import SpaceTO from "../../../Core/Application/DataTransferObjects/SpaceTO";
+import WorldTO from "../../../Core/Application/DataTransferObjects/WorldTO";
 import IDSL from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
 
 export const minimalGetWorldDataResponse: WorldTO = {

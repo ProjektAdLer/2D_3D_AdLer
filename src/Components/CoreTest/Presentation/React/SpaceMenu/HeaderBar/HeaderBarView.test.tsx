@@ -1,9 +1,10 @@
 import { render } from "@testing-library/react";
 import mock from "jest-mock-extended/lib/Mock";
-import HeaderBar from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBar";
-import HeaderBarViewModel from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBarViewModel";
-import IHeaderBarController from "~ReactComponents/SpaceMenu/HeaderBar/IHeaderBarController";
+import HeaderBar from "../../../../../Core/Presentation/React/SpaceMenu/HeaderBar/HeaderBar";
+import HeaderBarViewModel from "../../../../../Core/Presentation/React/SpaceMenu/HeaderBar/HeaderBarViewModel";
+import IHeaderBarController from "../../../../../Core/Presentation/React/SpaceMenu/HeaderBar/IHeaderBarController";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import React from "react";
 
 describe("HeaderBar", () => {
   test("should render", () => {

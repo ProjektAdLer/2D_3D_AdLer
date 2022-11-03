@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import StyledInputField from "../../../../../Core/Presentation/React/ReactRelated/ReactBaseComponents/StyledInputField";
+import React from "react";
 
 describe("Styled Input Field", () => {
   it("should render an input field", () => {

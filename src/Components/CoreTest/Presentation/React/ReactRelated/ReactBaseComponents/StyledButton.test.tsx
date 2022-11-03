@@ -1,6 +1,7 @@
 import StyledButton from "../../../../../Core/Presentation/React/ReactRelated/ReactBaseComponents/StyledButton";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import React from "react";
 
 describe("Styled Button", () => {
   it("should render a button", () => {

@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import App from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/App";
 import history from "history/browser";
+import React from "react";
 
 jest.mock(
   "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/Space.tsx",

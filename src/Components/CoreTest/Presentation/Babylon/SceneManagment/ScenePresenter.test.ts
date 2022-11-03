@@ -1,6 +1,5 @@
 import {
   Camera,
-  HighlightLayer,
   ISceneLoaderAsyncResult,
   ISceneLoaderProgressEvent,
   Mesh,

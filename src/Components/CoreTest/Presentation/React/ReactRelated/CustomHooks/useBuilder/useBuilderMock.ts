@@ -1,4 +1,4 @@
-import * as useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
+import * as useBuilder from "../../../../../../Core/Presentation/React/ReactRelated/CustomHooks/useBuilder";
 
 /**
  * Mocks the useViewModelControllerProvider hook.

@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import StyledModal from "../../../../../Core/Presentation/React/ReactRelated/ReactBaseComponents/StyledModal";
+import React from "react";
 
 describe("StyledModal", () => {
   test("should render children if open", () => {

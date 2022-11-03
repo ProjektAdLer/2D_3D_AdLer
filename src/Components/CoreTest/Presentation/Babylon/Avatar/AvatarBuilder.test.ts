@@ -1,4 +1,4 @@
-import IAvatarPort from "../../../../Core/Application/LoadAvatar/IAvatarPort";
+import IAvatarPort from "../../../../Core/Application/UseCases/LoadAvatar/IAvatarPort";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import AvatarBuilder from "../../../../Core/Presentation/Babylon/Avatar/AvatarBuilder";

@@ -1,14 +1,11 @@
 import {
   AbstractMesh,
-  Mesh,
   NullEngine,
-  Quaternion,
   Scene,
   TransformNode,
 } from "@babylonjs/core";
 import { waitFor } from "@testing-library/react";
-import { any, mock, mockDeep } from "jest-mock-extended";
-import Observable from "../../../../../Lib/Observable";
+import { mock, mockDeep } from "jest-mock-extended";
 import SimpleEvent from "../../../../../Lib/SimpleEvent";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";

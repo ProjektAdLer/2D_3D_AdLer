@@ -1,16 +1,15 @@
 import { renderHook } from "@testing-library/react";
-import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import FullscreenSwitchController from "~ReactComponents/SpaceDisplay/FullscreenSwitch/FullscreenSwitchController";
-import FullscreenSwitchViewModel from "~ReactComponents/SpaceDisplay/FullscreenSwitch/FullscreenSwitchViewModel";
+import BUILDER_TYPES from "../../../../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
+import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "../../../../../../Core/DependencyInjection/CoreTypes";
+import useBuilder from "../../../../../../Core/Presentation/React/ReactRelated/CustomHooks/useBuilder";
+import FullscreenSwitchController from "../../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchController";
+import FullscreenSwitchViewModel from "../../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchViewModel";
+import FullscreenSwitchBuilder from "../../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
+import PresentationDirector from "../../../../../../Core/Presentation/PresentationBuilder/PresentationDirector";
+import ViewModelControllerProvider from "../../../../../../Core/Presentation/ViewModelProvider/ViewModelControllerProvider";
 import * as useInjection from "inversify-react";
-import FullscreenSwitchBuilder from "~ReactComponents/SpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
-import { act } from "react-dom/test-utils";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import { mock } from "jest-mock-extended";
-import PresentationDirector from "src/Components/Core/Presentation/PresentationBuilder/PresentationDirector";
-import CORE_TYPES from "~DependencyInjection/CoreTypes";
-import ViewModelControllerProvider from "src/Components/Core/Presentation/ViewModelProvider/ViewModelControllerProvider";
+import React from "react";
 
 describe("useBuilderHook", () => {
   beforeAll(() => {
