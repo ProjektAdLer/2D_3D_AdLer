@@ -24,12 +24,10 @@ import IAvatarController from "./IAvatarController";
 const modelLink = require("../../../../../Assets/3DModel_Avatar_Character_male.glb");
 
 export default class AvatarView {
+  isReady: Promise<void>;
+
   private scenePresenter: IScenePresenter;
   private navigation: INavigation;
-  private navigationSetupReady: Semaphore = new Semaphore(
-    "Avatar: naviationSetupReady",
-    1
-  );
 
   constructor(
     private viewModel: AvatarViewModel,
@@ -39,53 +37,30 @@ export default class AvatarView {
       SCENE_TYPES.ScenePresenterFactory
     );
     this.scenePresenter = scenePresenterFactory(SpaceSceneDefinition);
-
-    // setup event callback for internal navigation setup after global scene navigation setup is completed
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
-    this.navigation.onNavigationReadyObservable.subscribe(
-      this.setupAvatarNavigation
-    );
 
-    this.loadAvatarAsync();
+    // start async setup
+    this.isReady = this.asyncSetup();
+  }
+
+  private async asyncSetup(): Promise<void> {
+    await this.loadAvatarAsync();
+    await this.navigation.isReady.then(this.setupAvatarNavigation);
+
+    return Promise.resolve();
   }
 
   private async loadAvatarAsync(): Promise<void> {
-    let navigationSetupLocked = await this.navigationSetupReady.acquire();
-
     this.viewModel.parentNode.Value =
       this.scenePresenter.Scene.getTransformNodeByName("AvatarParentNode")!;
 
-    await this.loadMeshAsync();
-
-    navigationSetupLocked.release();
-  }
-
-  @bind
-  private async setupAvatarNavigation(): Promise<void> {
-    let navigationSetupLocked = await this.navigationSetupReady.acquire();
-
-    this.viewModel.agentIndex = this.navigation.Crowd.addAgent(
-      this.viewModel.meshes.Value[0].position,
-      this.viewModel.agentParams,
-      this.viewModel.parentNode.Value
-    );
-    this.scenePresenter.Scene.onBeforeRenderObservable.add(this.moveAvatar);
-
-    this.navigation.onNavigationReadyObservable.unsubscribe(
-      this.setupAvatarNavigation
-    );
-
-    navigationSetupLocked.release();
-  }
-
-  private async loadMeshAsync(): Promise<void> {
     this.viewModel.meshes.Value = (await this.scenePresenter.loadModel(
       modelLink
     )) as Mesh[];
 
     this.viewModel.meshes.Value[0].setParent(this.viewModel.parentNode.Value);
 
-    // place model 0.1 above the ground ~ FK
+    // place model 0.05 above the ground ~ FK
     this.viewModel.meshes.Value[0].position = new Vector3(0, 0.05, 0);
     this.viewModel.meshes.Value[0].scaling = new Vector3(1, 1, -1);
     this.viewModel.meshes.Value.forEach(
@@ -97,6 +72,16 @@ export default class AvatarView {
       0,
       1
     );
+  }
+
+  @bind
+  private async setupAvatarNavigation(): Promise<void> {
+    this.viewModel.agentIndex = this.navigation.Crowd.addAgent(
+      this.viewModel.meshes.Value[0].position,
+      this.viewModel.agentParams,
+      this.viewModel.parentNode.Value
+    );
+    this.scenePresenter.Scene.onBeforeRenderObservable.add(this.moveAvatar);
   }
 
   @bind

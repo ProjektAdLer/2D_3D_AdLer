@@ -6,6 +6,7 @@ export default interface INavigation {
   get Crowd(): ICrowd;
 
   onNavigationReadyObservable: SimpleEvent;
+  isReady: Promise<void>;
 
   /**
    * Creates the navmesh and navigation crowd, accessible via the NavigationPlugin and NavigationCrowd properties.

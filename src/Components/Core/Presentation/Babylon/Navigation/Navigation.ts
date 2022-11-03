@@ -26,6 +26,7 @@ export default class Navigation implements INavigation {
   private scenePresenter: IScenePresenter;
 
   public onNavigationReadyObservable: SimpleEvent = new SimpleEvent();
+  isReady: Promise<void>;
 
   constructor(
     @inject(SCENE_TYPES.ScenePresenterFactory)
@@ -85,6 +86,8 @@ export default class Navigation implements INavigation {
       this.scenePresenter.Scene
     );
 
-    this.onNavigationReadyObservable.notifySubscribers();
+    // this.onNavigationReadyObservable.notifySubscribers();
+
+    this.isReady = Promise.resolve();
   }
 }
