@@ -1,10 +1,12 @@
+import { ElementID } from "./../../../Domain/Types/EntityTypes";
 import { IAsyncUsecase } from "../../Abstract/IAsyncUsecase";
 
 export default interface IScoreH5PElement
   extends IAsyncUsecase<
     {
       xapiData: XAPiEvent;
-      elementId: number;
+      elementId: ElementID;
+      courseId: ElementID;
     },
     boolean
   > {}

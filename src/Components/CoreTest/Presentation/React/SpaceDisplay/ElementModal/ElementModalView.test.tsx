@@ -11,6 +11,7 @@ let fakeModel = new ElementModalViewModel();
 fakeModel.isOpen.Value = true;
 fakeModel.id.Value = 123;
 fakeModel.type.Value = "text";
+fakeModel.parentCourseId.Value = 456;
 
 const fakeController = mock<ElementModalController>();
 
@@ -98,7 +99,8 @@ describe("ElementModal", () => {
     fireEvent.click(componentUnderTest.getByRole("button"));
 
     expect(fakeController.scoreElement).toHaveBeenCalledWith(
-      fakeModel.id.Value
+      fakeModel.id.Value,
+      fakeModel.parentCourseId.Value
     );
   });
 });

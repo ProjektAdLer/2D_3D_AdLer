@@ -70,6 +70,7 @@ const calculateSpaceScoreUseCaseMock = mock<ICalculateSpaceScoreUseCase>();
 const executeAsyncParams = {
   xapiData: {} as XAPiEvent,
   elementId: 42,
+  courseId: 1,
 };
 
 describe("ScoreH5PElement", () => {

@@ -1,3 +1,4 @@
+import { ElementID } from "./../../../Domain/Types/EntityTypes";
 import { inject, injectable } from "inversify";
 import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
 import ElementEntity from "src/Components/Core/Domain/Entities/ElementEntity";
@@ -25,7 +26,8 @@ export default class ScoreH5PElement implements IScoreH5PElement {
 
   async executeAsync(data?: {
     xapiData: XAPiEvent;
-    elementId: number;
+    elementId: ElementID;
+    courseId: ElementID;
   }): Promise<boolean> {
     if (!data || !data.elementId || !data.xapiData) {
       return this.rejectWithWarning("data is (atleast partly) undefined!");
@@ -43,7 +45,7 @@ export default class ScoreH5PElement implements IScoreH5PElement {
     const scoredSuccessful = await this.backendAdapter.scoreH5PElement({
       userToken: userEntity.userToken,
       h5pId: data.elementId,
-      courseId: 1, // TODOPG: get course id
+      courseId: data.courseId, // TODOPG: get course id
       rawH5PEvent: data.xapiData,
     });
 
