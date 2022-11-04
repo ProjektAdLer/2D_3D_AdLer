@@ -73,13 +73,13 @@ describe("Navigation", () => {
     expect(RecastJSPlugin.prototype.createCrowd).toHaveBeenCalledTimes(1);
   });
 
-  test("setupNavigation calls notifySubscribers on the onNavigationReadyObservable event", async () => {
+  test("setupNavigation resolves isReady promise", async () => {
     // ensure that debug code isn't executed
     config.isDebug = false;
 
     await systemUnderTest.setupNavigation();
 
-    expect(SimpleEvent.prototype.notifySubscribers).toHaveBeenCalledTimes(1);
+    expect(systemUnderTest.isReady).resolves.toBeUndefined();
   });
 
   test("setupNavigation creates a debug NavMesh when config.isDebug is true", async () => {
