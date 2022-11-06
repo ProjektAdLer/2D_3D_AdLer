@@ -1,0 +1,249 @@
+[
+  {
+    "actor": {
+      "name": "student",
+      "objectType": "Agent",
+      "account": {
+        "name": "3",
+        "homePage": "https://adler.softwarearchitektur-hs-kempten.de"
+      }
+    },
+    "verb": {
+      "id": "http://adlnet.gov/expapi/verbs/answered",
+      "display": {
+        "en-US": "answered"
+      }
+    },
+    "object": {
+      "id": "https://adler.softwarearchitektur-hs-kempten.de/xapi/activity/65",
+      "objectType": "Activity",
+      "definition": {
+        "extensions": {
+          "http://h5p.org/x-api/h5p-local-content-id": 2
+        },
+        "name": {
+          "en-US": "Metriken Teil 1"
+        },
+        "interactionType": "compound",
+        "type": "http://adlnet.gov/expapi/activities/cmi.interaction",
+        "description": {
+          "en-US": ""
+        }
+      }
+    },
+    "context": {
+      "contextActivities": {
+        "category": [
+          {
+            "id": "http://h5p.org/libraries/H5P.InteractiveVideo-1.22",
+            "objectType": "Activity"
+          }
+        ]
+      }
+    },
+    "result": {
+      "score": {
+        "min": 0,
+        "max": 13,
+        "raw": 13,
+        "scaled": 1
+      },
+      "completion": true,
+      "success": true,
+      "duration": "PT698.24S"
+    }
+  },
+  {
+    "actor": {
+      "name": "student",
+      "objectType": "Agent",
+      "account": {
+        "name": "3",
+        "homePage": "https://adler.softwarearchitektur-hs-kempten.de"
+      }
+    },
+    "verb": {
+      "id": "http://adlnet.gov/expapi/verbs/answered",
+      "display": {
+        "en-US": "answered"
+      }
+    },
+    "object": {
+      "id": "https://adler.softwarearchitektur-hs-kempten.de/xapi/activity/65?subContentId=d72ecc5d-9f18-4017-aa4e-29f1932de84b",
+      "objectType": "Activity",
+      "definition": {
+        "extensions": {
+          "http://h5p.org/x-api/h5p-local-content-id": 2,
+          "http://h5p.org/x-api/h5p-subContentId": "d72ecc5d-9f18-4017-aa4e-29f1932de84b"
+        },
+        "name": {
+          "en-US": "Wörter einordnen"
+        },
+        "interactionType": "fill-in",
+        "type": "http://adlnet.gov/expapi/activities/cmi.interaction",
+        "description": {
+          "en-US": "<p>Ziehe die Wörter in die richtigen Felder!</p>\n<br/>Eine __________ ist im Software Engineering eine __________ Aussage über ein __________, einen __________, oder __________."
+        },
+        "correctResponsesPattern": [
+          "Metrik[,]quantifizierte[,]Artefakt[,]Prozess[,]Projekte"
+        ]
+      }
+    },
+    "context": {
+      "contextActivities": {
+        "parent": [
+          {
+            "id": "https://adler.softwarearchitektur-hs-kempten.de/xapi/activity/65",
+            "objectType": "Activity"
+          }
+        ],
+        "category": [
+          {
+            "id": "http://h5p.org/libraries/H5P.DragText-1.8",
+            "objectType": "Activity"
+          }
+        ]
+      }
+    },
+    "result": {
+      "response": "Metrik[,]quantifizierte[,]Artefakt[,]Prozess[,]Projekte",
+      "score": {
+        "min": 0,
+        "raw": 5,
+        "max": 5,
+        "scaled": 1
+      },
+      "duration": "PT1358.3S",
+      "completion": true
+    }
+  },
+  {
+    "actor": {
+      "name": "student",
+      "objectType": "Agent",
+      "account": {
+        "name": "3",
+        "homePage": "https://adler.softwarearchitektur-hs-kempten.de"
+      }
+    },
+    "verb": {
+      "id": "http://adlnet.gov/expapi/verbs/answered",
+      "display": {
+        "en-US": "answered"
+      }
+    },
+    "object": {
+      "id": "https://adler.softwarearchitektur-hs-kempten.de/xapi/activity/65?subContentId=446cb9b3-f616-49ba-9f39-7470e88924b8",
+      "objectType": "Activity",
+      "definition": {
+        "extensions": {
+          "http://h5p.org/x-api/h5p-local-content-id": 2,
+          "http://h5p.org/x-api/h5p-subContentId": "446cb9b3-f616-49ba-9f39-7470e88924b8"
+        },
+        "name": {
+          "en-US": "Zuordnungsaufgabe"
+        },
+        "description": {
+          "en-US": "Zuordnungsaufgabe"
+        },
+        "type": "http://adlnet.gov/expapi/activities/cmi.interaction",
+        "interactionType": "matching",
+        "source": [
+          {
+            "id": "0",
+            "description": {
+              "en-US": "Feedback\n"
+            }
+          },
+          {
+            "id": "1",
+            "description": {
+              "en-US": "Vergleich\n"
+            }
+          },
+          {
+            "id": "2",
+            "description": {
+              "en-US": "Kontrolle\n"
+            }
+          },
+          {
+            "id": "3",
+            "description": {
+              "en-US": "Beurteilung\n"
+            }
+          },
+          {
+            "id": "4",
+            "description": {
+              "en-US": "Abschätzung\n"
+            }
+          },
+          {
+            "id": "5",
+            "description": {
+              "en-US": "Transparenz\n"
+            }
+          },
+          {
+            "id": "6",
+            "description": {
+              "en-US": "Beziehung\n"
+            }
+          },
+          {
+            "id": "7",
+            "description": {
+              "en-US": "Gesund werden\n"
+            }
+          }
+        ],
+        "correctResponsesPattern": [
+          "0[.]0[,]0[.]1[,]0[.]2[,]0[.]3[,]0[.]4[,]0[.]5[,]1[.]6[,]1[.]7"
+        ],
+        "target": [
+          {
+            "id": "0",
+            "description": {
+              "en-US": "Plus\n"
+            }
+          },
+          {
+            "id": "1",
+            "description": {
+              "en-US": "minus\n"
+            }
+          }
+        ]
+      }
+    },
+    "context": {
+      "contextActivities": {
+        "parent": [
+          {
+            "id": "https://adler.softwarearchitektur-hs-kempten.de/xapi/activity/65",
+            "objectType": "Activity"
+          }
+        ],
+        "category": [
+          {
+            "id": "http://h5p.org/libraries/H5P.DragQuestion-1.13",
+            "objectType": "Activity"
+          }
+        ]
+      }
+    },
+    "result": {
+      "score": {
+        "min": 0,
+        "max": 8,
+        "raw": 8,
+        "scaled": 1
+      },
+      "completion": true,
+      "success": true,
+      "duration": "PT29.6S",
+      "response": "0[.]0[,]0[.]1[,]0[.]2[,]0[.]3[,]0[.]4[,]0[.]5[,]1[.]6[,]1[.]7"
+    }
+  }
+]
