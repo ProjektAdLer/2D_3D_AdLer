@@ -86,7 +86,7 @@ describe("ElementView", () => {
     ]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
-    await systemUnderTest.setupAvatar();
+    await systemUnderTest.setupElement();
 
     expect(scenePresenterMock.loadModel).toBeCalledTimes(1);
   });
@@ -99,7 +99,7 @@ describe("ElementView", () => {
     ]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
-    await systemUnderTest.setupAvatar();
+    await systemUnderTest.setupElement();
 
     viewModel.meshes.Value.forEach((mesh) => {
       expect(mesh.actionManager).toBeDefined();
@@ -116,7 +116,7 @@ describe("ElementView", () => {
     ]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
-    await systemUnderTest.setupAvatar();
+    await systemUnderTest.setupElement();
 
     // check to see if registerAction was called with the onPickTrigger callback
     expect(registerActionSpy.mock.calls).toEqual(
@@ -141,7 +141,7 @@ describe("ElementView", () => {
     ]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
-    await systemUnderTest.setupAvatar();
+    await systemUnderTest.setupElement();
 
     // check to see if registerAction was called with the onPointerOverTrigger callback
     expect(registerActionSpy.mock.calls).toEqual(
@@ -166,7 +166,7 @@ describe("ElementView", () => {
     ]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
-    await systemUnderTest.setupAvatar();
+    await systemUnderTest.setupElement();
 
     // check to see if registerAction was called with the onPointerOutTrigger callback
     expect(registerActionSpy.mock.calls).toEqual(
@@ -186,7 +186,7 @@ describe("ElementView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([mesh]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
-    await systemUnderTest.setupAvatar();
+    await systemUnderTest.setupElement();
 
     expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
       mesh,
@@ -200,7 +200,7 @@ describe("ElementView", () => {
     ]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
-    await systemUnderTest.setupAvatar();
+    await systemUnderTest.setupElement();
 
     viewModel.position.Value = new Vector3(42, 42, 42);
     expect(viewModel.meshes.Value[0].position).toEqual(new Vector3(42, 42, 42));
@@ -211,7 +211,7 @@ describe("ElementView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([mockedMesh]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
-    await systemUnderTest.setupAvatar();
+    await systemUnderTest.setupElement();
 
     viewModel.rotation.Value = 42;
     expect(mockedMesh.rotate).toBeCalledWith(Vector3.Up(), Tools.ToRadians(42));
@@ -223,7 +223,7 @@ describe("ElementView", () => {
     ]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
-    await systemUnderTest.setupAvatar();
+    await systemUnderTest.setupElement();
 
     viewModel.hasScored.Value = true;
     expect(scenePresenterMock.HighlightLayer.removeMesh).toHaveBeenCalledWith(
