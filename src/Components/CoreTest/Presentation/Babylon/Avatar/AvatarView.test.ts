@@ -49,10 +49,6 @@ describe("AvatarView", () => {
     );
   });
 
-  beforeEach(() => {
-    // set return value before each test to prevent resetting between tests
-  });
-
   afterAll(() => {
     jest.restoreAllMocks();
     CoreDIContainer.restore();
