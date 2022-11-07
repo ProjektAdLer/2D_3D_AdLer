@@ -22,6 +22,26 @@ class TestBuilder extends PresentationBuilder<
   }
 }
 
+class TestViewWithoutController {
+  constructor(viewModel: TestViewModel) {}
+}
+
+class TestBuilderViewWithoutController extends PresentationBuilder<
+  TestViewModel,
+  TestController,
+  TestViewWithoutController,
+  TestPresenter
+> {
+  constructor() {
+    super(
+      TestViewModel,
+      TestController,
+      TestViewWithoutController,
+      TestPresenter
+    );
+  }
+}
+
 describe("PresentationBuilder", () => {
   let systemUnderTest: TestBuilder;
   beforeEach(() => {
@@ -55,6 +75,14 @@ describe("PresentationBuilder", () => {
     systemUnderTest.buildController();
     systemUnderTest.buildView();
     expect(systemUnderTest["view"]).toBeInstanceOf(TestView);
+  });
+
+  test("buildView with view constructor without controller", () => {
+    const systemUnderTest = new TestBuilderViewWithoutController();
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildController();
+    systemUnderTest.buildView();
+    expect(systemUnderTest["view"]).toBeInstanceOf(TestViewWithoutController);
   });
 
   test("buildView throws error if viewModel is not build", () => {
@@ -100,5 +128,13 @@ describe("PresentationBuilder", () => {
     systemUnderTest.buildView();
     systemUnderTest.buildPresenter();
     expect(systemUnderTest.getViewModel()).toBeInstanceOf(TestViewModel);
+  });
+
+  test("getView", () => {
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildController();
+    systemUnderTest.buildView();
+    systemUnderTest.buildPresenter();
+    expect(systemUnderTest.getView()).toBeInstanceOf(TestView);
   });
 });
