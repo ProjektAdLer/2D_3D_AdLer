@@ -26,8 +26,6 @@ const modelLinks: { [key in ElementTypes]?: any } = {
 };
 
 export default class ElementView {
-  isReady: Promise<void>;
-
   private scenePresenter: IScenePresenter;
 
   constructor(
@@ -47,11 +45,9 @@ export default class ElementView {
         this.viewModel.hasScored.Value ? Color3.Green() : Color3.Red()
       );
     });
-
-    this.isReady = this.asyncSetup();
   }
 
-  private async asyncSetup(): Promise<void> {
+  public async setupElement(): Promise<void> {
     // load meshes
     this.viewModel.meshes.Value = (await this.scenePresenter.loadModel(
       modelLinks[this.viewModel.type.Value as ElementTypes],

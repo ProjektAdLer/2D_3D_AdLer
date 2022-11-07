@@ -86,10 +86,9 @@ describe("ElementView", () => {
     ]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    await systemUnderTest.setupAvatar();
 
-    await systemUnderTest.isReady.then(() => {
-      expect(scenePresenterMock.loadModel).toBeCalledTimes(1);
-    });
+    expect(scenePresenterMock.loadModel).toBeCalledTimes(1);
   });
 
   test("async setup creates a new action manager for each mesh", async () => {
@@ -100,11 +99,10 @@ describe("ElementView", () => {
     ]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    await systemUnderTest.setupAvatar();
 
-    await systemUnderTest.isReady.then(() => {
-      viewModel.meshes.Value.forEach((mesh) => {
-        expect(mesh.actionManager).toBeDefined();
-      });
+    viewModel.meshes.Value.forEach((mesh) => {
+      expect(mesh.actionManager).toBeDefined();
     });
   });
 
@@ -118,20 +116,19 @@ describe("ElementView", () => {
     ]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    await systemUnderTest.setupAvatar();
 
-    await systemUnderTest.isReady.then(() => {
-      // check to see if registerAction was called with the onPickTrigger callback
-      expect(registerActionSpy.mock.calls).toEqual(
-        expect.arrayContaining([
-          [
-            expect.objectContaining({
-              trigger: ActionManager.OnPickTrigger,
-              func: controller.clicked,
-            }),
-          ],
-        ])
-      );
-    });
+    // check to see if registerAction was called with the onPickTrigger callback
+    expect(registerActionSpy.mock.calls).toEqual(
+      expect.arrayContaining([
+        [
+          expect.objectContaining({
+            trigger: ActionManager.OnPickTrigger,
+            func: controller.clicked,
+          }),
+        ],
+      ])
+    );
   });
 
   test("async setup registers onPointerOverTrigger callback for the all meshes", async () => {
@@ -144,20 +141,19 @@ describe("ElementView", () => {
     ]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    await systemUnderTest.setupAvatar();
 
-    await systemUnderTest.isReady.then(() => {
-      // check to see if registerAction was called with the onPointerOverTrigger callback
-      expect(registerActionSpy.mock.calls).toEqual(
-        expect.arrayContaining([
-          [
-            expect.objectContaining({
-              trigger: ActionManager.OnPointerOverTrigger,
-              func: controller.pointerOver,
-            }),
-          ],
-        ])
-      );
-    });
+    // check to see if registerAction was called with the onPointerOverTrigger callback
+    expect(registerActionSpy.mock.calls).toEqual(
+      expect.arrayContaining([
+        [
+          expect.objectContaining({
+            trigger: ActionManager.OnPointerOverTrigger,
+            func: controller.pointerOver,
+          }),
+        ],
+      ])
+    );
   });
 
   test("async setup registers onPointerOutTrigger callback for the all meshes", async () => {
@@ -170,20 +166,19 @@ describe("ElementView", () => {
     ]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    await systemUnderTest.setupAvatar();
 
-    await systemUnderTest.isReady.then(() => {
-      // check to see if registerAction was called with the onPointerOutTrigger callback
-      expect(registerActionSpy.mock.calls).toEqual(
-        expect.arrayContaining([
-          [
-            expect.objectContaining({
-              trigger: ActionManager.OnPointerOutTrigger,
-              func: controller.pointerOut,
-            }),
-          ],
-        ])
-      );
-    });
+    // check to see if registerAction was called with the onPointerOutTrigger callback
+    expect(registerActionSpy.mock.calls).toEqual(
+      expect.arrayContaining([
+        [
+          expect.objectContaining({
+            trigger: ActionManager.OnPointerOutTrigger,
+            func: controller.pointerOut,
+          }),
+        ],
+      ])
+    );
   });
 
   test("async setup adds each mesh to the scene presenters HighlightLayer", async () => {
@@ -191,13 +186,12 @@ describe("ElementView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([mesh]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    await systemUnderTest.setupAvatar();
 
-    await systemUnderTest.isReady.then(() => {
-      expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
-        mesh,
-        expect.any(Color3)
-      );
-    });
+    expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
+      mesh,
+      expect.any(Color3)
+    );
   });
 
   test("positionModel changes the model position when the position value in the viewModel is changed", async () => {
@@ -206,13 +200,10 @@ describe("ElementView", () => {
     ]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    await systemUnderTest.setupAvatar();
 
-    await systemUnderTest.isReady.then(() => {
-      viewModel.position.Value = new Vector3(42, 42, 42);
-      expect(viewModel.meshes.Value[0].position).toEqual(
-        new Vector3(42, 42, 42)
-      );
-    });
+    viewModel.position.Value = new Vector3(42, 42, 42);
+    expect(viewModel.meshes.Value[0].position).toEqual(new Vector3(42, 42, 42));
   });
 
   test("positionModel changes the model rotation when the rotation value in the viewModel is changed", async () => {
@@ -220,14 +211,10 @@ describe("ElementView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([mockedMesh]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    await systemUnderTest.setupAvatar();
 
-    await systemUnderTest.isReady.then(() => {
-      viewModel.rotation.Value = 42;
-      expect(mockedMesh.rotate).toBeCalledWith(
-        Vector3.Up(),
-        Tools.ToRadians(42)
-      );
-    });
+    viewModel.rotation.Value = 42;
+    expect(mockedMesh.rotate).toBeCalledWith(Vector3.Up(), Tools.ToRadians(42));
   });
 
   test("changeHighlightColor changes the color of the highlight layer when the hasScored value in the viewModel is set", async () => {
@@ -236,16 +223,15 @@ describe("ElementView", () => {
     ]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    await systemUnderTest.setupAvatar();
 
-    await systemUnderTest.isReady.then(() => {
-      viewModel.hasScored.Value = true;
-      expect(scenePresenterMock.HighlightLayer.removeMesh).toHaveBeenCalledWith(
-        viewModel.meshes.Value[0]
-      );
-      expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
-        viewModel.meshes.Value[0],
-        expect.any(Color3)
-      );
-    });
+    viewModel.hasScored.Value = true;
+    expect(scenePresenterMock.HighlightLayer.removeMesh).toHaveBeenCalledWith(
+      viewModel.meshes.Value[0]
+    );
+    expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
+      viewModel.meshes.Value[0],
+      expect.any(Color3)
+    );
   });
 });

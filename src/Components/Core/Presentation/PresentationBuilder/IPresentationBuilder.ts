@@ -7,4 +7,5 @@ export default interface IPresentationBuilder {
   getPresenter(): any;
   getController(): any;
   getViewModel(): any;
+  getView(): any;
 }

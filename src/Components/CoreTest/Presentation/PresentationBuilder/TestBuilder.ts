@@ -9,4 +9,5 @@ export default class TestBuilder implements IPresentationBuilder {
   getPresenter() {}
   getController() {}
   getViewModel() {}
+  getView() {}
 }

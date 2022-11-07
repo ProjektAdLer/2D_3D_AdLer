@@ -4,6 +4,7 @@ import SpaceTO from "../../../../Core/Application/DataTransferObjects/SpaceTO";
 import BUILDER_TYPES from "../../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import IDoorPresenter from "../../../../Core/Presentation/Babylon/Door/IDoorPresenter";
+import ElementView from "../../../../Core/Presentation/Babylon/Elements/ElementView";
 import IElementPresenter from "../../../../Core/Presentation/Babylon/Elements/IElementPresenter";
 import SpacePresenter from "../../../../Core/Presentation/Babylon/Spaces/SpacePresenter";
 import SpaceViewModel from "../../../../Core/Presentation/Babylon/Spaces/SpaceViewModel";
@@ -126,6 +127,7 @@ describe("SpacePresenter", () => {
 
   test("createElements calls the builder for each Element", () => {
     builderMock.getPresenter.mockReturnValue(mock<IElementPresenter>());
+    builderMock.getView.mockReturnValue(mock<ElementView>());
 
     systemUnderTest["createElements"](spaceTO.elements);
 
@@ -137,6 +139,7 @@ describe("SpacePresenter", () => {
   test("createElements calls the elementPresenter for each Element", () => {
     const elementPresenterMock = mock<IElementPresenter>();
     builderMock.getPresenter.mockReturnValue(elementPresenterMock);
+    builderMock.getView.mockReturnValue(mock<ElementView>());
 
     systemUnderTest["createElements"](spaceTO.elements);
 
@@ -153,6 +156,18 @@ describe("SpacePresenter", () => {
         [expect.any(Vector3), expect.any(Number)]
       );
     }
+  });
+
+  test("createElements calls the elementView for each Element", () => {
+    builderMock.getPresenter.mockReturnValue(mock<IElementPresenter>());
+    const elementViewMock = mock<ElementView>();
+    builderMock.getView.mockReturnValue(elementViewMock);
+
+    systemUnderTest["createElements"](spaceTO.elements);
+
+    expect(elementViewMock.setupElement).toHaveBeenCalledTimes(
+      spaceTO.elements.length
+    );
   });
 
   test.todo(

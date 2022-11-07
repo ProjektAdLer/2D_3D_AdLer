@@ -165,4 +165,8 @@ export default abstract class PresentationBuilder<VM, C, V, P>
   getViewModel(): VM | undefined {
     return this.viewModel;
   }
+
+  getView(): V | undefined {
+    return this.view;
+  }
 }

@@ -3,7 +3,6 @@ import IElementPort from "../../../Ports/ElementPort/IElementPort";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import IElementController from "./IElementController";
 import IElementPresenter from "./IElementPresenter";
-import IElementView from "./IElementView";
 import ElementController from "./ElementController";
 import ElementPresenter from "./ElementPresenter";
 import ElementView from "./ElementView";
@@ -15,7 +14,7 @@ import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 export default class ElementBuilder extends PresentationBuilder<
   ElementViewModel,
   IElementController,
-  IElementView,
+  ElementView,
   IElementPresenter
 > {
   constructor() {
