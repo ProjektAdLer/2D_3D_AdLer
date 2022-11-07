@@ -187,14 +187,16 @@ describe("ElementView", () => {
   });
 
   test("async setup adds each mesh to the scene presenters HighlightLayer", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
+    const mesh = new AbstractMesh("TestMesh1", new Scene(new NullEngine()));
+    scenePresenterMock.loadModel.mockResolvedValue([mesh]);
 
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
 
     await systemUnderTest.isReady.then(() => {
-      expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledTimes(1);
+      expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
+        mesh,
+        expect.any(Color3)
+      );
     });
   });
 
@@ -242,7 +244,7 @@ describe("ElementView", () => {
       );
       expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
         viewModel.meshes.Value[0],
-        Color3.Green()
+        expect.any(Color3)
       );
     });
   });
