@@ -7,7 +7,6 @@ import {
   Vector3,
 } from "@babylonjs/core";
 import bind from "bind-decorator";
-import { Semaphore } from "src/Lib/Semaphore";
 import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
