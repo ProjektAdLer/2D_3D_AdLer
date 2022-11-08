@@ -74,19 +74,28 @@ export default function DetailSection() {
           <div className="flex flex-col items-start ml-6 lg:text-lg roboto-regular">
             {elements.map((element) => {
               return (
-                <div key={element[1]} className="">
-                  <CheckBoxEntry checked={element[2]}>
-                    <div className="w-6 ml-2 mr-2 lg:w-8">
-                      {getElementIcon(element[0])}
-                    </div>
-                    <div className="flex flex-row items-center ml-1">
-                      {" " + element[1] + " (" + element[0] + ", " + element[3]}
-                      <img
-                        src={coinIcon}
-                        className="self-center w-6 ml-1 lg:w-8"
-                        alt="Coin-Icon"
-                      ></img>
-                      {" )"}
+                <div key={element[1]} className="w-full">
+                  <CheckBoxEntry className="w-full" checked={element[2]}>
+                    <div className="flex flex-row justify-between w-full lg:w-3/4">
+                      <div className="flex flex-row items-center gap-x-2">
+                        <div className="w-6 ml-2 mr-2 lg:w-8">
+                          {getElementIcon(element[0])}
+                        </div>
+                        <div className="flex flex-row items-center ml-1">
+                          {" " + element[1] + " (" + element[0] + ")"}
+                        </div>
+                      </div>
+                      <div className="flex flex-row items-center ml-1 place-items-end">
+                        {/* //TODO: Add real current points  */}
+                        {element[2]
+                          ? element[3] + "/" + element[3]
+                          : "0/" + element[3]}
+                        <img
+                          src={coinIcon}
+                          className="self-center w-6 ml-1 lg:w-8"
+                          alt="Coin-Icon"
+                        ></img>
+                      </div>
                     </div>
                   </CheckBoxEntry>
                 </div>
@@ -102,6 +111,16 @@ export default function DetailSection() {
           </div>
           <div className="items-start ml-6 text-lg roboto-regular">
             {requiredPoints}
+          </div>
+        </div>
+      )}
+      {elements.length > 0 && (
+        <div className="pb-2 border-b border-gray-500">
+          <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+            Maximal erreichbare Punkte:
+          </div>
+          <div className="items-start ml-6 text-lg roboto-regular">
+            {elements.reduce((acc, element) => acc + element[3], 0)}
           </div>
         </div>
       )}
