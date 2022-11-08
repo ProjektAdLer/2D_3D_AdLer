@@ -16,6 +16,5 @@ export default class DoorPresenter implements IDoorPresenter {
   presentDoor(position: [Vector3, number]): void {
     this.viewModel.position.Value = position[0];
     this.viewModel.rotation.Value = position[1];
-    this.viewModel.isVisible.Value = true;
   }
 }

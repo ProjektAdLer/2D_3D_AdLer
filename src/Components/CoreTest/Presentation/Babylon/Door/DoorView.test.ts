@@ -29,9 +29,6 @@ describe("DoorView", () => {
     expect(systemUnderTest["viewModel"].isOpen.subscribe).toHaveBeenCalledTimes(
       1
     );
-    expect(
-      systemUnderTest["viewModel"].isVisible.subscribe
-    ).toHaveBeenCalledTimes(1);
 
     expect(DoorView.prototype["setup"]).toHaveBeenCalledTimes(1);
   });

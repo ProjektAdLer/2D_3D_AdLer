@@ -10,6 +10,8 @@ import DoorViewModel from "./DoorViewModel";
 const modelLink = require("../../../../../Assets/3DModel_Door.glb");
 
 export default class DoorView {
+  isReady: Promise<void>;
+
   private scenePresenter: IScenePresenter;
 
   constructor(private viewModel: DoorViewModel) {
@@ -25,23 +27,20 @@ export default class DoorView {
     viewModel.rotation.subscribe(() => {
       this.positionMesh();
     });
-    viewModel.isVisible.subscribe(() => {
-      this.viewModel.meshes.Value.forEach(
-        (mesh) => (mesh.isVisible = this.viewModel.isVisible.Value)
-      );
-    });
     viewModel.isOpen.subscribe(() => {
       if (this.viewModel.isOpen.Value) {
-        this.scenePresenter.Scene.beginAnimation(
-          viewModel.meshes.Value[0],
-          0,
-          45
-        );
+        this.isReady.then(() => {
+          this.scenePresenter.Scene.beginAnimation(
+            viewModel.meshes.Value[0],
+            0,
+            45
+          );
+        });
       }
     });
 
     // initial setup
-    this.setup();
+    this.isReady = this.setup();
   }
 
   private async setup(): Promise<void> {
@@ -75,9 +74,6 @@ export default class DoorView {
       this.scenePresenter.Scene
     );
 
-    result.meshes.forEach(
-      (mesh) => (mesh.isVisible = this.viewModel.isVisible.Value)
-    );
     // reset quaternion rotation because it can prevent mesh.rotate to have any effect
     result.meshes.forEach((mesh) => (mesh.rotationQuaternion = null));
 
