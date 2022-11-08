@@ -13,6 +13,7 @@ import ElementTO from "src/Components/Core/Application/DataTransferObjects/Eleme
 import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
 import ISpacePort from "src/Components/Core/Ports/SpacePort/ISpacePort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import ElementView from "../Elements/ElementView";
 
 @injectable()
 export default class SpacePresenter implements ISpaceAdapter, ISpacePresenter {
@@ -90,6 +91,7 @@ export default class SpacePresenter implements ISpaceAdapter, ISpacePresenter {
         elementTO,
         elementPositions.shift()!
       );
+      (elementBuilder.getView() as ElementView).setupElement();
       elementBuilder.reset();
     });
   }
