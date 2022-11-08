@@ -6,7 +6,6 @@ import {
   Vector3,
   Color3,
 } from "@babylonjs/core";
-import SimpleEvent from "../../../../../Lib/SimpleEvent";
 import INavigation from "./INavigation";
 import * as Recast from "recast-detour";
 import { inject, injectable } from "inversify";
@@ -16,24 +15,24 @@ import { config } from "../../../../../config";
 import SCENE_TYPES from "~DependencyInjection/Scenes/SCENE_TYPES";
 import type { ScenePresenterFactory } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
+import Readyable from "../../../../../Lib/Readyable";
 
 @injectable()
-export default class Navigation implements INavigation {
+export default class Navigation extends Readyable implements INavigation {
   private plugin: RecastJSPlugin;
   private crowd: ICrowd;
   private navMeshDebug: Mesh;
   private matDebug: StandardMaterial;
   private scenePresenter: IScenePresenter;
 
-  public onNavigationReadyObservable: SimpleEvent = new SimpleEvent();
-  isReady: Promise<void>;
-
   constructor(
     @inject(SCENE_TYPES.ScenePresenterFactory)
     private scenePresenterFactory: ScenePresenterFactory,
     @inject(NavigationConfiguration)
     private navigationConfiguration: NavigationConfiguration
-  ) {}
+  ) {
+    super();
+  }
 
   get Plugin(): RecastJSPlugin {
     return this.plugin;
@@ -86,8 +85,6 @@ export default class Navigation implements INavigation {
       this.scenePresenter.Scene
     );
 
-    // this.onNavigationReadyObservable.notifySubscribers();
-
-    this.isReady = Promise.resolve();
+    this.resolveReady();
   }
 }
