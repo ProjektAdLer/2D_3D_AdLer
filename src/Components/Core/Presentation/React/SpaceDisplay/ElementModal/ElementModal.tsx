@@ -50,13 +50,13 @@ export default function ElementModal() {
   const modalType = viewModel.type.Value as "text" | "image" | "video" | "h5p";
   return (
     <StyledModal
-      title={viewModel?.type?.Value?.toUpperCase() + " Learning Element"}
+      title={viewModel.name.Value}
       onClose={() => {
         setOpen(false);
-        if (viewModel?.type?.Value !== "h5p") {
+        if (viewModel.type?.Value !== "h5p") {
           controller.scoreElement(
-            viewModel?.id.Value,
-            viewModel?.parentCourseId.Value
+            viewModel.id.Value,
+            viewModel.parentCourseId.Value
           );
         }
       }}
