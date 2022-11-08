@@ -32,7 +32,7 @@ export default abstract class AbstractSceneDefinition {
   /**
    * Getter for the highligh layer.
    **/
-  get HighlightLayer(): any {
+  get HighlightLayer(): HighlightLayer {
     return this.highlightLayer;
   }
 
