@@ -48,7 +48,7 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
     super();
   }
 
-  protected override preTasks = [this.loadSpacePreTask, this.loadAvatarPreTask];
+  protected override preTasks = [this.loadAvatarPreTask];
 
   protected override async initializeScene(): Promise<void> {
     this.scene.clearColor = new Color4(0.66, 0.83, 0.98, 1);
@@ -62,7 +62,9 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
     // create space
     this.director.build(this.spaceBuilder);
     this.spacePresenter = this.spaceBuilder.getPresenter() as ISpacePresenter;
-    this.spacePresenter.onSpaceDataLoaded(this.spaceTO);
+
+    // execute loadSpace use case to fill space with data
+    await this.loadSpaceUseCase.executeAsync(this.parseSpaceIdFromLocation());
 
     // create avatar
     this.avatarParentNode = new TransformNode("AvatarParentNode", this.scene);
@@ -76,13 +78,6 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
   override disposeScene(): void {
     this.spacePresenter.dispose();
     super.disposeScene();
-  }
-
-  @bind
-  private async loadSpacePreTask(): Promise<void> {
-    this.spaceTO = await this.loadSpaceUseCase.executeAsync(
-      this.parseSpaceIdFromLocation()
-    );
   }
 
   @bind

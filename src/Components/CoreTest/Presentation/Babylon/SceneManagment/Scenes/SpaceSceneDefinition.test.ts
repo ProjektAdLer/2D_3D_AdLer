@@ -73,28 +73,10 @@ describe("SpaceScene", () => {
     ).not.toThrow();
   });
 
-  test("initializeScene calls presentSpace on the space presenter", async () => {
+  test("initializeScene calls the LoadSpace use case", async () => {
     systemUnderTest["scene"] = new Scene(new NullEngine());
-    const presenterMock = mockDeep<ISpacePresenter>();
-    presentationBuilderMock.getPresenter.mockReturnValue(presenterMock);
-    const spaceTO: SpaceTO = {
-      id: 0,
-      name: "",
-      elements: [],
-      description: "",
-      goals: "",
-      requirements: [],
-      requiredPoints: 0,
-    };
-    systemUnderTest["spaceTO"] = spaceTO;
 
     await systemUnderTest["initializeScene"]();
-
-    expect(presenterMock.onSpaceDataLoaded).toHaveBeenCalledWith(spaceTO);
-  });
-
-  test("preTasks contains call to loadSpaceUseCase", async () => {
-    await systemUnderTest["preTasks"].forEach((task) => task());
 
     expect(loadSpaceUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
   });
@@ -112,5 +94,15 @@ describe("SpaceScene", () => {
     const spaceId = systemUnderTest["parseSpaceIdFromLocation"]();
 
     expect(spaceId).toBe(1);
+  });
+
+  test("disposeScene calls dispose on the scenePresenter", () => {
+    const spacePresenterMock = mock<ISpacePresenter>();
+    systemUnderTest["spacePresenter"] = spacePresenterMock;
+    systemUnderTest["scene"] = new Scene(new NullEngine());
+
+    systemUnderTest["disposeScene"]();
+
+    expect(spacePresenterMock.dispose).toHaveBeenCalledTimes(1);
   });
 });
