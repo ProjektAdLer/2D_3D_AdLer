@@ -3,6 +3,7 @@ import HeaderBar from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBar";
 import DetailSection from "~ReactComponents/SpaceMenu/DetailSection/DetailSection";
 import SpaceSelection from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection";
 import WorldCompletionModal from "~ReactComponents/SpaceMenu/WorldCompletionModal/WorldCompletionModal";
+import MenuTutorial from "~ReactComponents/SpaceMenu/MenuTutorial/MenuTutorial";
 
 export default function WorldMenu() {
   return (
@@ -24,6 +25,7 @@ export default function WorldMenu() {
           <div className="flex justify-center col-start-2 p-2 lg:p-8 bg-adlergold">
             <DetailSection />
           </div>
+          <MenuTutorial />
         </div>
       </div>
     </React.Fragment>
