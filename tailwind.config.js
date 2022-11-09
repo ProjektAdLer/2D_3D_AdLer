@@ -67,6 +67,18 @@ module.exports = {
         adlergreen: {
           DEFAULT: "#009900",
         },
+        adlergrey: {
+          DEFAULT: "#009900",
+          100: "rgb(26,26,26)",
+          200: "rgb(51,51,51)",
+          300: "rgb(77,77,77)",
+          400: "rgb(102,102,102)",
+          500: "rgb(128,128,128)",
+          600: "rgb(153,153,153)",
+          700: "rgb(179,179,179)",
+          800: "rgb(204,204,204)",
+          900: "rgb(230,230,230)",
+        },
         buttonpressedblue: "rgb(0,120,229)",
         adlertextgrey: "#111111",
         adlerdeactivated: "#e9e9e9",
