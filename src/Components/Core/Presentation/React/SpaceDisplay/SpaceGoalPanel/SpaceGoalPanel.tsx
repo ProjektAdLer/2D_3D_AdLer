@@ -1,4 +1,3 @@
-import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import SpaceGoalPanelController from "./SpaceGoalPanelController";
 import SpaceGoalPanelViewModel from "./SpaceGoalPanelViewModel";
@@ -27,7 +26,6 @@ export default function SpaceGoalPanel() {
       <div className=" text-md lg:text-2xl roboto-black text-shadow">
         <StyledButton
           shape="square"
-          className="flex flex-row justify-center"
           onClick={() => {
             handleClick();
           }}
@@ -52,7 +50,7 @@ export default function SpaceGoalPanel() {
           }}
         >
           <img
-            className="w-4 lg:w-10 mr-4"
+            className="w-4 mr-4 lg:w-10"
             src={goalIcon}
             alt="Learning-Goal-Icon"
           ></img>

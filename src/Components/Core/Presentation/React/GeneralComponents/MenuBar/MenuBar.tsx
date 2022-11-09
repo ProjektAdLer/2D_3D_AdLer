@@ -27,7 +27,9 @@ export default function MenuBar() {
           ></img>
         </StyledButton>
       }
-      initialOpen={false}
+      // initialOpen has to be true for it to render properly on intialization
+      // Depends on LoadSpace useCase within SpaceSceneDefinition
+      initialOpen={true}
       useAsTriggerOnly={true}
     >
       <StyledContainer className="flex flex-col bg-transparent">
