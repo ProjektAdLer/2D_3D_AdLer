@@ -69,6 +69,7 @@ module.exports = {
         },
         buttonpressedblue: "rgb(0,120,229)",
         adlertextgrey: "#111111",
+        adlerdeactivated: "#e9e9e9",
       },
       gridTemplateRows: {
         12: "repeat(12, minmax(0, 1fr))",
