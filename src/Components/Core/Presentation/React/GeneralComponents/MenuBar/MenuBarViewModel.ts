@@ -1,1 +1,1 @@
-export default class HeaderBarViewModel {}
+export default class MenuBarViewModel {}
