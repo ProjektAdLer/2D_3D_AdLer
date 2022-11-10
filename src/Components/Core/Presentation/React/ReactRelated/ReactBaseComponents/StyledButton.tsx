@@ -3,10 +3,12 @@ import React from "react";
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   shape?: "square" | "freefloatleft" | "freefloatcenter";
   color?: "default" | "success" | "pressed";
+  disabled?: boolean;
 }
 export default function StyledButton({
   shape = "square",
   color = "default",
+  disabled = false,
   children,
   className,
   ...rest
@@ -25,10 +27,17 @@ export default function StyledButton({
   };
   return (
     <button
+      disabled={disabled}
       className={
         className +
         " " +
-        `flex items-center text-sm font-black text-white text-shadow border-b-4 border-r-4 rounded-lg hover:cursor-pointer lg:text-xl active:border-transparent border-adlerdarkblue ${buttonConfig[color]} ${buttonConfig[shape]}`
+        `flex items-center text-sm font-black  rounded-lg hover:cursor-pointer lg:text-xl active:border-transparent border-adlerdarkblue ${
+          disabled
+            ? "text-adlergrey-700 bg-adlerdeactivated border-b-2 border-r-2"
+            : buttonConfig[color] +
+              " " +
+              "text-white text-shadow border-b-4 border-r-4"
+        } ${buttonConfig[shape]}`
       }
       {...rest}
     >

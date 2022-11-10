@@ -23,6 +23,7 @@ const BUILDER_TYPES = {
   IWorldCompletionModalBuilder: Symbol("IWorldCompletionModalBuilder"),
   IMenuBarBuilder: Symbol("IMenuBarBuilder"),
   IUseGuideBuilder: Symbol("IUseGuideBuilder"),
+  IWorldMenuButtonBuilder: Symbol("IWorldMenuButtonBuilder"),
 };
 
 export default BUILDER_TYPES;

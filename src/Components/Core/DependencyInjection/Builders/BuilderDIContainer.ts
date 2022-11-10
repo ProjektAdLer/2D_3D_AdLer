@@ -26,6 +26,7 @@ import SpaceCompletionModalBuilder from "~ReactComponents/SpaceDisplay/SpaceComp
 import WorldCompletionModalBuilder from "~ReactComponents/SpaceMenu/WorldCompletionModal/WorldCompletionModalBuilder";
 import MenuBarBuilder from "~ReactComponents/GeneralComponents/MenuBar/MenuBarBuilder";
 import UseGuideBuilder from "~ReactComponents/SpaceDisplay/UseGuide/UseGuideBuilder";
+import WorldMenuButtonBuilder from "~ReactComponents/WelcomePage/WorldMenuButton/WorldMenuButtonBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -90,6 +91,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IMenuBarBuilder).to(MenuBarBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IUseGuideBuilder).to(
     UseGuideBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IWorldMenuButtonBuilder).to(
+    WorldMenuButtonBuilder
   );
 });
 
