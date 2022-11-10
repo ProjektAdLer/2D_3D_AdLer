@@ -23,7 +23,7 @@ export default function UseGuide() {
         }}
       >
         {isOpen ? (
-          <div className="flex flex-col items-end overflow-auto  text-shadow-none h-72 lg:h-full">
+          <div className="flex flex-col items-end overflow-auto text-shadow-none h-72 lg:h-full">
             <img className="h-10 pb-2 lg:h-14 md:h-12" src={helpIcon} alt="" />
             <ul className="p-3 pl-5 list-disc ">
               <li>

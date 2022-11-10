@@ -12,7 +12,7 @@ export default function MenuTutorial() {
         }}
       >
         {isOpen ? (
-          <div className="flex flex-col items-end  text-shadow-none">
+          <div className="flex flex-col items-end text-shadow-none">
             <img className="h-10 pb-2 lg:h-14 md:h-12" src={helpIcon} alt="" />
             <ul className="p-3 pl-5 list-disc ">
               <li>
