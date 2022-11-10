@@ -9,7 +9,7 @@ import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/S
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
-import elementsIcon from "../../../../../../Assets/icons/25-elements/elements-icon.svg";
+import elementsIcon from "../../../../../../Assets/icons/24-elements/elements-icon.svg";
 import menuIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
 
 export default function ElementsDropdown() {
