@@ -4,7 +4,7 @@ import ScorePanelViewModel from "./ScorePanelViewModel";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 
-import coinIcon from "../../../../../../Assets/icons/coin_icon.svg";
+import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
 
 export default function ScorePanel() {
   const [viewModel] = useBuilder<ScorePanelViewModel, undefined>(

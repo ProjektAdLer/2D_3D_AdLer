@@ -1,7 +1,7 @@
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import LoadSpaceButtonController from "./LoadSpaceButtonController";
 import LoadSpaceButtonViewModel from "./LoadSpaceButtonViewModel";
-import debugIcon from "../../../../../../Assets/icons/debug-icon.svg";
+import debugIcon from "../../../../../../Assets/icons/09-debug/debug-icon-nobg.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 

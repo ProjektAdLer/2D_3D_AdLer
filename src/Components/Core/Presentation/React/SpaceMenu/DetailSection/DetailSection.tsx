@@ -8,7 +8,7 @@ import { ElementTypeStrings } from "../../../../Domain/Types/ElementTypes";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import DetailSectionController from "./DetailSectionController";
 import { getElementIcon } from "../../../Utils/GetIcon";
-import coinIcon from "../../../../../../Assets/icons/coin_icon.svg";
+import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
 import { logger } from "src/Lib/Logger";
 
 export default function DetailSection() {

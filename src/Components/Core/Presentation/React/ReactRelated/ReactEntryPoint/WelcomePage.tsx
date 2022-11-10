@@ -6,7 +6,7 @@ import history from "history/browser";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 
-import logo from "../../../../../../Assets/icons/adLerEngine_flat_logo_simple.svg";
+import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
 
 export interface IWelcomePageProps {}
 

@@ -6,14 +6,14 @@ export default function MenuTutorial() {
   return (
     <div className="fixed right-2 top-2">
       <div
-        className="flex flex-col text-shadow text-white p-1 bg-adlerblue-700 rounded active:border-transparent border-adlerdarkblue border-b-4 border-r-4"
+        className="flex flex-col p-1 text-white border-b-4 border-r-4 rounded-lg text-shadow bg-adlerblue-700 active:border-transparent border-adlerdarkblue"
         onClick={() => {
           setIsOpen(!isOpen);
         }}
       >
         {isOpen ? (
-          <div className=" flex flex-col items-end text-shadow-none">
-            <img className="h-14 pb-2 " src={helpIcon} alt="" />
+          <div className="flex flex-col items-end text-shadow-none">
+            <img className="pb-2 h-14 " src={helpIcon} alt="" />
             <ul className="p-3 pl-5 list-disc">
               <li>Top Left Button gets you back to Title Screen </li>
               <li> Leftclick on a Room Button to see Details </li>
