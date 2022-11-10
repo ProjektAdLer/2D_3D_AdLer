@@ -17,14 +17,14 @@ export default function UseGuide() {
   return (
     <div className="fixed left-2 bottom-2 max-h-3/4">
       <div
-        className="flex flex-col  text-shadow text-white p-1 bg-adlerblue-700 rounded active:border-transparent border-adlerdarkblue border-b-4 border-r-4 "
+        className="flex flex-col p-1 text-white border-b-4 border-r-4 rounded-lg text-shadow bg-adlerblue-700 active:border-transparent border-adlerdarkblue "
         onClick={() => {
           setIsOpen(!isOpen);
         }}
       >
         {isOpen ? (
-          <div className=" flex flex-col items-end text-shadow-none h-72 lg:h-full overflow-auto ">
-            <img className="pb-2 lg:h-14 md:h-12 h-10" src={helpIcon} alt="" />
+          <div className="flex flex-col items-end overflow-auto  text-shadow-none h-72 lg:h-full">
+            <img className="h-10 pb-2 lg:h-14 md:h-12" src={helpIcon} alt="" />
             <ul className="p-3 pl-5 list-disc ">
               <li>
                 Links oben befindet sich der Button um die MenüBar zu öffnen
@@ -69,7 +69,7 @@ export default function UseGuide() {
             </ul>
           </div>
         ) : (
-          <img className="lg:h-12 md:h-10 h-8 " src={helpIcon} alt="" />
+          <img className="h-8 lg:h-12 md:h-10 " src={helpIcon} alt="" />
         )}
       </div>
     </div>
