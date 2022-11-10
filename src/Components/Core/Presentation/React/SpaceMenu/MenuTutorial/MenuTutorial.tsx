@@ -2,7 +2,7 @@ import { useState } from "react";
 import helpIcon from "../../../../../../Assets/icons/25-help/help-icon-02.svg";
 
 export default function MenuTutorial() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="fixed right-2 top-2">
       <div
