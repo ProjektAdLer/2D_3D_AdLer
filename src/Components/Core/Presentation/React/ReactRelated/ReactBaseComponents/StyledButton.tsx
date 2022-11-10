@@ -33,7 +33,7 @@ export default function StyledButton({
         " " +
         `flex items-center text-sm font-black  rounded-lg hover:cursor-pointer lg:text-xl active:border-transparent border-adlerdarkblue ${
           disabled
-            ? "text-adlergrey-700 bg-adlerdeactivated border-b-2 border-r-2"
+            ? "text-adlergrey-300 bg-adlerdeactivated"
             : buttonConfig[color] +
               " " +
               "text-white text-shadow border-b-4 border-r-4"
