@@ -3,9 +3,8 @@ import MoodleLoginButton from "~ReactComponents/GeneralComponents/MoodleLoginBut
 import MoodleLoginForm from "~ReactComponents/GeneralComponents/MoodleLoginForm/MoodleLoginForm";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
-
-import logo from "../../../../../../Assets/icons/adLerEngine_flat_logo_simple.svg";
 import WorldMenuButton from "~ReactComponents/WelcomePage/WorldMenuButton/WorldMenuButtonView";
+import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
 
 export interface IWelcomePageProps {}
 

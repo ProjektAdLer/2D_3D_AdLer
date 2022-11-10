@@ -13,6 +13,7 @@ import ScorePanel from "~ReactComponents/SpaceDisplay/ScorePanel/ScorePanel";
 import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
 import SpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/SpaceSceneDefinition";
 import SpaceCompletionModal from "~ReactComponents/SpaceDisplay/SpaceCompletionModal/SpaceCompletionModal";
+import UseGuide from "~ReactComponents/SpaceDisplay/UseGuide/UseGuide";
 
 export default function Space() {
   return (
@@ -60,6 +61,7 @@ export default function Space() {
             </h1>
           </div>
         </StyledModal>
+        <UseGuide></UseGuide>
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
         <div className="z-50">

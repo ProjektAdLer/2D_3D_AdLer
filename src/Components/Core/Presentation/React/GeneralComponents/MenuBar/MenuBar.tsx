@@ -2,7 +2,7 @@ import CustomDropdown from "../../ReactRelated/ReactBaseComponents/CustomDropdow
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import FullscreenSwitch from "~ReactComponents/SpaceDisplay/FullscreenSwitch/FullscreenSwitch";
-import engineLogo from "../../../../../../Assets/icons/adLerEngine_flat_logo_simple.svg";
+import engineLogo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import SpaceGoalPanel from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanel";
 import ElementsDropdown from "~ReactComponents/SpaceDisplay/ElementsDropdown/ElementsDropdown";

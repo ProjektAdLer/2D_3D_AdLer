@@ -1,7 +1,7 @@
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import SpaceGoalPanelController from "./SpaceGoalPanelController";
 import SpaceGoalPanelViewModel from "./SpaceGoalPanelViewModel";
-import goalIcon from "../../../../../../Assets/icons/learninggoal-icon-nobg.svg";
+import goalIcon from "../../../../../../Assets/icons/20-goal/goal-icon-nobg.svg";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import { useState } from "react";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";

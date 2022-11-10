@@ -3,7 +3,7 @@ import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import MoodleLoginButtonController from "./MoodleLoginButtonController";
 import MoodleLoginButtonViewModel from "./MoodleLoginButtonViewModel";
 
-import moodleIcon from "../../../../../../Assets/icons/moodle-icon.svg";
+import moodleIcon from "../../../../../../Assets/icons/16-moodle/moodle-icon-nobg.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 

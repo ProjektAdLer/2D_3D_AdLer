@@ -5,7 +5,7 @@ import { getElementIcon } from "../../../Utils/GetIcon";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
-import coinIcon from "../../../../../../Assets/icons/coin_icon.svg";
+import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
 
 export default function BottomTooltip() {
   const [viewModel] = useBuilder<BottomTooltipViewModel, undefined>(
