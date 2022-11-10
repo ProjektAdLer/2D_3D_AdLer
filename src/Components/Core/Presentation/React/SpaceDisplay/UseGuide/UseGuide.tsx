@@ -3,7 +3,7 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import IUseGuideController from "./IUseGuideController";
 import UseGuideViewModel from "./UseGuideViewModel";
-import helpIcon from "../../../../../../Assets/icons/25-help/help-icon-02.svg";
+import helpIcon from "../../../../../../Assets/icons/26-help/help-icon.svg";
 
 export default function UseGuide() {
   const [viewModel, controller] = useBuilder<

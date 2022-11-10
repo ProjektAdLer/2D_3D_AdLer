@@ -1,5 +1,5 @@
 import { useState } from "react";
-import helpIcon from "../../../../../../Assets/icons/25-help/help-icon-02.svg";
+import helpIcon from "../../../../../../Assets/icons/26-help/help-icon.svg";
 
 export default function MenuTutorial() {
   const [isOpen, setIsOpen] = useState(false);
