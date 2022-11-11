@@ -11,8 +11,8 @@ describe("GetIcon should return a react component for valid element types", () =
     ["h5p" as ElementTypeStrings],
   ])("should run for %s", (type) => {
     const result = getElementIcon(type);
-    if (type === "image") expect(result.props["src"]).toContain("bild");
-    // Warum nutzen wir nicht nur englische Begriffe :( - PG
+    if (type === "image")
+      expect(result.props["src"]).toContain("image-icon.svg");
     else expect(result.props["src"]).toContain(type);
   });
 
