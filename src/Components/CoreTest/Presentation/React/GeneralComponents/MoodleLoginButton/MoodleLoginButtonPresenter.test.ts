@@ -1,6 +1,6 @@
-import MoodleLoginButtonPresenter from "../../../../../../../src/Components/Core/Presentation/React/GeneralComponents/MoodleLoginButton/MoodleLoginButtonPresenter";
-import IMoodleLoginButtonPresenter from "../../../../../../../src/Components/Core/Presentation/React/GeneralComponents/MoodleLoginButton/IMoodleLoginButtonPresenter";
-import MoodleLoginButtonViewModel from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginButton/MoodleLoginButtonViewModel";
+import MoodleLoginButtonPresenter from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonPresenter";
+import IMoodleLoginButtonPresenter from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/IMoodleLoginButtonPresenter";
+import MoodleLoginButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonViewModel";
 
 describe("MoodleLoginButtonPresenter", () => {
   let systemUnderTest: IMoodleLoginButtonPresenter;

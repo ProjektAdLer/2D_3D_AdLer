@@ -1,9 +1,10 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
 import { mock } from "jest-mock-extended";
-import IMoodleLoginButtonController from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginButton/IMoodleLoginButtonController";
-import MoodleLoginButton from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginButton/MoodleLoginButton";
-import MoodleLoginButtonViewModel from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginButton/MoodleLoginButtonViewModel";
+import React from "react";
+import IMoodleLoginButtonController from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/IMoodleLoginButtonController";
+import MoodleLoginButton from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButton";
+import MoodleLoginButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 
 let fakeModel = new MoodleLoginButtonViewModel();

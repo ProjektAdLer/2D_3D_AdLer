@@ -1,5 +1,5 @@
 import React from "react";
-import MoodleLoginButton from "~ReactComponents/GeneralComponents/MoodleLoginButton/MoodleLoginButton";
+import MoodleLoginButton from "~ReactComponents/WelcomePage/MoodleLoginButton/MoodleLoginButton";
 import MoodleLoginForm from "~ReactComponents/GeneralComponents/MoodleLoginForm/MoodleLoginForm";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";

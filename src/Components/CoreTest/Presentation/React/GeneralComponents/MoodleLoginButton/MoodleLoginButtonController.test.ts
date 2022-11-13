@@ -2,7 +2,7 @@ import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import IMoodlePort from "../../../../../Core/Ports/MoodlePort/IMoodlePort";
-import MoodleLoginButtonController from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginButton/MoodleLoginButtonController";
+import MoodleLoginButtonController from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonController";
 
 const portMock = mock<IMoodlePort>();
 

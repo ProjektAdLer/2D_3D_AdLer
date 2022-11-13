@@ -12,7 +12,7 @@ import MoodleLoginFormBuilder from "../../Presentation/React/GeneralComponents/M
 import ScorePanelBuilder from "../../Presentation/React/SpaceDisplay/ScorePanel/ScorePanelBuilder";
 import NotificationManagerBuilder from "../../Presentation/React/GeneralComponents/NotificationManager/NotificationManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
-import MoodleLoginButtonBuilder from "../../Presentation/React/GeneralComponents/MoodleLoginButton/MoodleLoginButtonBuilder";
+import MoodleLoginButtonBuilder from "../../Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonBuilder";
 import BottomTooltipBuilder from "../../Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipBuilder";
 import DebugPanelBuilder from "../../Presentation/React/SpaceDisplay/DebugPanel/DebugPanelBuilder";
 import SpaceNamePanelBuilder from "../../Presentation/React/SpaceDisplay/SpaceNamePanel/SpaceNamePanelBuilder";

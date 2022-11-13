@@ -3,10 +3,10 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import IMoodlePort from "../../../../../Core/Ports/MoodlePort/IMoodlePort";
-import MoodleLoginButtonBuilder from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginButton/MoodleLoginButtonBuilder";
-import MoodleLoginButtonController from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginButton/MoodleLoginButtonController";
-import MoodleLoginButtonPresenter from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginButton/MoodleLoginButtonPresenter";
-import MoodleLoginButtonViewModel from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginButton/MoodleLoginButtonViewModel";
+import MoodleLoginButtonBuilder from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonBuilder";
+import MoodleLoginButtonController from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonController";
+import MoodleLoginButtonPresenter from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonPresenter";
+import MoodleLoginButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonViewModel";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();

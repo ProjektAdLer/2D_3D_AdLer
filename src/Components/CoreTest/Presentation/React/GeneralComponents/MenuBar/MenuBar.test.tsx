@@ -7,10 +7,6 @@ import IMenuBarController from "../../../../../Core/Presentation/React/GeneralCo
 import MenuBar from "../../../../../Core/Presentation/React/GeneralComponents/MenuBar/MenuBar";
 
 const mockHistoryBack = jest.spyOn(history, "back");
-jest.mock(
-  "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginButton/MoodleLoginButton",
-  () => "string"
-);
 
 jest.mock(
   "../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitch",

@@ -1,5 +1,5 @@
 import IWorldMenuButtonPresenter from "~ReactComponents/WelcomePage/WorldMenuButton/IWorldMenuButtonPresenter";
-import IMoodleLoginButtonPresenter from "../../Presentation/React/GeneralComponents/MoodleLoginButton/IMoodleLoginButtonPresenter";
+import IMoodleLoginButtonPresenter from "../../Presentation/React/WelcomePage/MoodleLoginButton/IMoodleLoginButtonPresenter";
 import IMoodleLoginFormPresenter from "../../Presentation/React/GeneralComponents/MoodleLoginForm/IMoodleLoginFormPresenter";
 
 export default interface IMoodlePort {
