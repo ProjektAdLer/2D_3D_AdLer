@@ -4,11 +4,13 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   shape?: "square" | "freefloatleft" | "freefloatcenter";
   color?: "default" | "success" | "pressed";
   disabled?: boolean;
+  icon?: string;
 }
 export default function StyledButton({
   shape = "square",
   color = "default",
   disabled = false,
+  icon,
   children,
   className,
   ...rest
@@ -41,6 +43,7 @@ export default function StyledButton({
       }
       {...rest}
     >
+      {icon && <img className={"h-10 w-10"} src={icon}></img>}
       {children}
     </button>
   );
