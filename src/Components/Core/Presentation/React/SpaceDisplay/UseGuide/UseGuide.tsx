@@ -15,7 +15,7 @@ export default function UseGuide() {
   if (!viewModel || !controller) return null;
 
   return (
-    <div className="fixed left-2 bottom-2 max-h-3/4">
+    <div className="fixed left-2 bottom-2 max-h-3/4 z-20">
       <div
         className="flex flex-col p-1 text-white border-b-4 border-r-4 rounded-lg text-shadow bg-adlerblue-700 active:border-transparent border-adlerdarkblue "
         onClick={() => {
