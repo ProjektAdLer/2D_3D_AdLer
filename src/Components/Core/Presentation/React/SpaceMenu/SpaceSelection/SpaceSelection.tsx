@@ -10,6 +10,10 @@ import ISpaceSelectionController from "./ISpaceSelectionController";
 import SpaceSelectionRow from "./SpaceSelectionRow";
 import SpaceSelectionViewModel from "./SpaceSelectionViewModel";
 
+import check from "../../../../../../Assets/icons/07-video/video-icon-nobg.svg";
+
+import circle from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
+
 export default function SpaceSelection() {
   const loadWorldUseCase = useInjection<ILoadWorldUseCase>(
     USECASE_TYPES.ILoadWorldUseCase
@@ -17,6 +21,7 @@ export default function SpaceSelection() {
   const calculateSpaceScoreUseCase = useInjection<ICalculateSpaceScoreUseCase>(
     USECASE_TYPES.ICalculateSpaceScore
   );
+  //load space callen
 
   const [viewModel, controller] = useBuilder<
     SpaceSelectionViewModel,
@@ -33,26 +38,30 @@ export default function SpaceSelection() {
     if (viewModel) loadWorldAsync();
   }, []);
 
-  const [spaces] = useObservable<[number, string][]>(viewModel?.spaces);
-  const [spacesCompleted] = useObservable<[number, boolean][]>(
-    viewModel?.spacesCompleted
+  const [spaces] = useObservable<[number, string, boolean, boolean][]>(
+    viewModel.spaces
   );
   const [selectedRowID] = useObservable<number>(viewModel?.selectedRowID);
   if (!viewModel || !controller) return null;
-
   return (
     <ul className="flex flex-col gap-4 w-[100%] overflow-auto">
-      {spaces?.map(([id, name]) => {
+      {spaces?.map((space) => {
+        // spaces: 0 = id, 1 = name, 2 = isAvailable, 3 = isCompleted
+        let displayedString = "[\u2717] " + space[1];
+        if (!space[2])
+          displayedString = "[\u2712] " + space[1] + " (Not Available)";
+        if (space[3]) displayedString = "[\u2713] " + space[1] + " (Completed)";
+
         return (
-          <li className="flex items-center" key={id.toString() + name}>
+          <li
+            className="flex items-center"
+            key={space[0].toString() + space[1]}
+          >
             <SpaceSelectionRow
-              spaceTitle={
-                spacesCompleted?.find((tuple) => tuple[0] === id)?.[1]
-                  ? "[\u2713] " + name
-                  : name
-              }
-              selected={selectedRowID === id}
-              onClickCallback={() => controller.onSpaceRowClicked(id)}
+              icon={space[3] ? check : circle}
+              spaceTitle={displayedString}
+              selected={selectedRowID === space[0]}
+              onClickCallback={() => controller.onSpaceRowClicked(space[0])}
             />
           </li>
         );

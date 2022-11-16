@@ -8,14 +8,14 @@ export default class DetailSectionPresenter implements IDetailSectionPresenter {
   constructor(private viewModel: DetailSectionViewModel) {}
 
   onWorldLoaded(world: WorldTO): void {
-    let spaces: [number, string, boolean][] = [];
+    let newSpaces: [number, string, boolean][] = [];
 
     world.spaces.forEach((space) => {
-      spaces.push([space.id, space.name, false]);
+      newSpaces.push([space.id, space.name, false]);
     });
 
     // set all values at once to avoid multiple re-renders
-    this.viewModel.spaces.Value = spaces;
+    this.viewModel.spaces.Value = newSpaces;
   }
 
   onScoreChanged(
