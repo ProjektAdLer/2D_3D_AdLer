@@ -8,16 +8,28 @@ import {
   StandardMaterial,
   Vector2,
 } from "@babylonjs/core";
-import { mock } from "jest-mock-extended";
+import { mock, mockDeep, MockProxy } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import ISpaceController from "../../../../Core/Presentation/Babylon/Spaces/ISpaceController";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
+import { create } from "domain";
 
-const spaceControllerMock = mock<ISpaceController>();
-const scenePresenterMock = mock<IScenePresenter>();
-scenePresenterMock.Scene.onBeforeRenderObservable = mock<Observable<Scene>>();
+// setup scene presenter mock
+const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
+// scenePresenterMock.Scene.onBeforeRenderObservable = mock<Observable<Scene>>();
+
+function createSystemUnderTest(): [
+  SpaceView,
+  ISpaceController,
+  SpaceViewModel
+] {
+  const viewModel = new SpaceViewModel();
+  const spaceControllerMock = mock<ISpaceController>();
+  const systemUnderTest = new SpaceView(viewModel, spaceControllerMock);
+  return [systemUnderTest, spaceControllerMock, viewModel];
+}
 
 describe("SpaceView", () => {
   let systemUnderTest: SpaceView;
@@ -25,28 +37,21 @@ describe("SpaceView", () => {
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
-
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
       scenePresenterFactoryMock
     );
-  });
-
-  beforeEach(() => {
-    viewModel = new SpaceViewModel();
-    viewModel.floorMesh.Value = true as unknown as Mesh;
-    viewModel.floorMaterial.Value = true as unknown as StandardMaterial;
-    systemUnderTest = new SpaceView(viewModel, spaceControllerMock);
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
   });
 
-  test("Space View throws error if viewModel is not set", () => {
-    expect(() => {
-      //@ts-ignore
-      new SpaceView(undefined, spaceControllerMock);
-    }).toThrowError("ViewModel is not set");
+  test.skip("constructor adds displayScene to onBeforeRenderObservable on the scene", () => {
+    const [systemUnderTest] = createSystemUnderTest();
+
+    expect(
+      scenePresenterMock.Scene.onBeforeRenderObservable.add
+    ).toBeCalledWith(systemUnderTest.displaySpace);
   });
 
   test.skip("displaySpace throws error if cornerCount is smaller than 3", () => {

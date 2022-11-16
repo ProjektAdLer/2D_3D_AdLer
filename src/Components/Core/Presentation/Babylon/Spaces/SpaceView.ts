@@ -3,12 +3,12 @@
 import * as earcut from "earcut";
 
 import {
-  Path2,
   StandardMaterial,
   Texture,
   PolygonMeshBuilder,
   MeshBuilder,
   Mesh,
+  Vector2,
 } from "@babylonjs/core";
 import SpaceViewModel from "./SpaceViewModel";
 import floorTexture from "../../../../../Assets/Texture_Floor_Parquet3.png";
@@ -22,6 +22,7 @@ import SCENE_TYPES, {
 import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
 import bind from "bind-decorator";
 
+// apply earcut (see also top of the page)
 (window as any).earcut = earcut;
 
 export default class SpaceView implements ISpaceView {
@@ -36,14 +37,11 @@ export default class SpaceView implements ISpaceView {
     );
     this.scenePresenter = scenePresenterFactory(SpaceSceneDefinition);
 
-    if (!this.viewModel)
-      throw new Error(
-        "ViewModel is not set! Check if the builder is set up properly."
-      );
-
     this.scenePresenter.Scene.onBeforeRenderObservable.add(this.displaySpace);
 
-    // TODO: setup subscription cancellations
+    // create materials
+    this.createFloorMaterial();
+    this.createWallMaterial();
   }
 
   @bind
@@ -55,12 +53,14 @@ export default class SpaceView implements ISpaceView {
       throw new Error(
         "Not enough corners found to generate space. Please review the Spacedata."
       );
+
     this.cleanupOldWalls();
     this.cleanupOldPoles();
     this.cleanupOldFloor();
     this.createWalls();
     this.createWallCornerPoles();
     this.createFloor();
+    this.applyWallColor();
 
     this.viewModel.isDirty = false;
   }
@@ -72,15 +72,16 @@ export default class SpaceView implements ISpaceView {
     const floorMesh = this.viewModel.floorMesh.Value;
     floorMesh.dispose();
   }
+
   private cleanupOldPoles(): void {
     if (!this.viewModel.cornerPoleMeshes.Value) {
       this.viewModel.cornerPoleMeshes.Value = [];
       return;
     }
-    const cornerPoleMeshesArray = this.viewModel.cornerPoleMeshes.Value;
-    for (let i = 0; i < cornerPoleMeshesArray.length; i++) {
-      cornerPoleMeshesArray[i].dispose();
-    }
+
+    this.viewModel.cornerPoleMeshes.Value.forEach((poleMesh) => {
+      poleMesh.dispose();
+    });
     this.viewModel.cornerPoleMeshes.Value = [];
   }
 
@@ -89,35 +90,14 @@ export default class SpaceView implements ISpaceView {
       this.viewModel.wallMeshes.Value = [];
       return;
     }
-    const wallMeshesArray = this.viewModel.wallMeshes.Value;
-    for (let i = 0; i < wallMeshesArray.length; i++) {
-      wallMeshesArray[i].dispose();
-    }
+
+    this.viewModel.wallMeshes.Value.forEach((wallMesh) => {
+      wallMesh.dispose();
+    });
     this.viewModel.wallMeshes.Value = [];
   }
-  private createFloor(): void {
-    const cornerCount = this.viewModel.spaceCornerPoints.Value.length;
-    // Create Mesh
-    // Initial Starting Point
-    let polyPath = new Path2(
-      this.viewModel.spaceCornerPoints.Value[0].x,
-      this.viewModel.spaceCornerPoints.Value[0].y
-    );
-    // Remaining Points (Array Position 1 and onwards)
-    for (let i = 1; i < cornerCount; i++) {
-      const corner = Object.values(this.viewModel.spaceCornerPoints.Value[i]);
-      polyPath.addLineTo(corner[0], corner[1]);
-    }
 
-    const polyMesh = new PolygonMeshBuilder(
-      "FloorPolyMesh",
-      this.viewModel.spaceCornerPoints.Value
-    );
-
-    this.viewModel.floorMesh.Value = polyMesh.build();
-    this.scenePresenter.registerNavigationMesh(this.viewModel.floorMesh.Value);
-
-    // Floor Material and Texture
+  private createFloorMaterial(): void {
     this.viewModel.floorMaterial.Value = new StandardMaterial(
       "floorMaterial",
       this.scenePresenter.Scene
@@ -129,32 +109,50 @@ export default class SpaceView implements ISpaceView {
     );
     (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).uScale = 2;
     (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 2;
+  }
+
+  private createFloor(): void {
+    // create floor mesh
+    const polyMesh = new PolygonMeshBuilder(
+      "FloorPolyMesh",
+      this.viewModel.spaceCornerPoints.Value
+    );
+    this.viewModel.floorMesh.Value = polyMesh.build();
+    this.scenePresenter.registerNavigationMesh(this.viewModel.floorMesh.Value);
+
+    // apply material
     this.viewModel.floorMesh.Value.material =
       this.viewModel.floorMaterial.Value;
   }
 
+  private createWallMaterial(): void {
+    this.viewModel.wallMaterial.Value = new StandardMaterial(
+      "wallMaterial",
+      this.scenePresenter.Scene
+    );
+    this.applyWallColor();
+  }
+
   private createWalls(): void {
     const cornerCount = this.viewModel.spaceCornerPoints.Value.length;
+
     for (let i = 0; i < cornerCount; i++) {
-      const corner = Object.values(this.viewModel.spaceCornerPoints.Value[i]);
-      const nextCorner = Object.values(
-        this.viewModel.spaceCornerPoints.Value[(i + 1) % cornerCount]
-      );
       this.viewModel.wallMeshes.Value[i] = this.createWallSegment(
-        corner,
-        nextCorner
+        this.viewModel.spaceCornerPoints.Value[i],
+        this.viewModel.spaceCornerPoints.Value[(i + 1) % cornerCount]
       );
     }
   }
 
-  private createWallSegment(corner1: number[], corner2: number[]): Mesh {
-    const WallLength = Math.sqrt(
-      Math.pow(corner2[0] - corner1[0], 2) +
-        Math.pow(corner2[1] - corner1[1], 2)
+  private createWallSegment(startPoint: Vector2, endPoint: Vector2): Mesh {
+    // create mesh
+    const wallLength = Math.sqrt(
+      Math.pow(endPoint.x - endPoint.y, 2) +
+        Math.pow(endPoint.y - startPoint.y, 2)
     );
-    let wallSegmentOptions = {
+    const wallSegmentOptions = {
       height: this.viewModel.spaceHeight.Value,
-      width: WallLength,
+      width: wallLength,
       depth: this.viewModel.wallThickness.Value,
     };
     const wallSegment = MeshBuilder.CreateBox(
@@ -162,19 +160,20 @@ export default class SpaceView implements ISpaceView {
       wallSegmentOptions,
       this.scenePresenter.Scene
     );
+    this.scenePresenter.registerNavigationMesh(wallSegment);
 
-    wallSegment.position.x = (corner1[0] + corner2[0]) / 2;
+    // set position
+    wallSegment.position.x = (startPoint.x + endPoint.x) / 2;
     wallSegment.position.y = this.viewModel.baseHeight.Value || 0;
-    wallSegment.position.z = (corner1[1] + corner2[1]) / 2;
+    wallSegment.position.z = (startPoint.y + endPoint.y) / 2;
     wallSegment.rotation.y = Math.atan2(
-      corner2[1] - corner1[1],
-      corner2[0] - corner1[0]
+      endPoint.y - startPoint.y,
+      endPoint.x - startPoint.x
     );
-    wallSegment.material = new StandardMaterial(
-      "wallMaterial",
-      this.scenePresenter.Scene
-    );
-    this.applyWallColor();
+
+    // apply material
+    wallSegment.material = this.viewModel.wallMaterial.Value;
+
     return wallSegment;
   }
 
@@ -185,14 +184,13 @@ export default class SpaceView implements ISpaceView {
   }
 
   private createWallCornerPoles(): void {
-    const cornerCount = this.viewModel.spaceCornerPoints.Value.length;
-    for (let i = 0; i < cornerCount; i++) {
-      const corner = Object.values(this.viewModel.spaceCornerPoints.Value[i]);
-      this.viewModel.cornerPoleMeshes.Value[i] = this.createPole(corner);
-    }
+    this.viewModel.spaceCornerPoints.Value.forEach((cornerPoint) => {
+      this.viewModel.cornerPoleMeshes.Value.push(this.createPole(cornerPoint));
+    });
   }
 
-  private createPole(corner: number[]): Mesh {
+  private createPole(corner: Vector2): Mesh {
+    // create pole mesh
     const poleOptions = {
       height: this.viewModel.spaceHeight.Value,
       diameter: this.viewModel.wallThickness.Value * 1.5,
@@ -202,15 +200,18 @@ export default class SpaceView implements ISpaceView {
       poleOptions,
       this.scenePresenter.Scene
     );
-    pole.position.x = corner[0];
-    pole.position.y = this.viewModel.baseHeight.Value || 0;
-    pole.position.z = corner[1];
 
+    // position pole
+    pole.position.x = corner.x;
+    pole.position.y = this.viewModel.baseHeight.Value || 0;
+    pole.position.z = corner.y;
+
+    // apply wall material
     pole.material = new StandardMaterial(
       "wallMaterial",
       this.scenePresenter.Scene
     );
-    this.applyWallColor();
+
     return pole;
   }
 }
