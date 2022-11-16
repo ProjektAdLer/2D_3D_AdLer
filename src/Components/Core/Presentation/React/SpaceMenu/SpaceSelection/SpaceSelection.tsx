@@ -39,7 +39,7 @@ export default function SpaceSelection() {
   }, []);
 
   const [spaces] = useObservable<[number, string, boolean, boolean][]>(
-    viewModel.spaces
+    viewModel?.spaces
   );
   const [selectedRowID] = useObservable<number>(viewModel?.selectedRowID);
   if (!viewModel || !controller) return null;
