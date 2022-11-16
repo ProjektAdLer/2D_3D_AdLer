@@ -80,7 +80,7 @@ describe("DoorView", () => {
     ]);
   });
 
-  test("loadMeshAsync calls scenePresenter.loadModel", async () => {
+  test("asyncSetup/loadMeshAsync calls scenePresenter.loadModel", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
@@ -92,7 +92,7 @@ describe("DoorView", () => {
     });
   });
 
-  test("loadMeshAsync sets rotationQuaternion of each loaded mesh to null", async () => {
+  test("asyncSetup/loadMeshAsync sets rotationQuaternion of each loaded mesh to null", async () => {
     const mesh1 = new AbstractMesh("TestMesh1", new Scene(new NullEngine()));
     mesh1.rotationQuaternion = new Quaternion();
     const mesh2 = new AbstractMesh("TestMesh2", new Scene(new NullEngine()));
@@ -107,7 +107,7 @@ describe("DoorView", () => {
     });
   });
 
-  test("asyncSetup creates a new animation and applies it to the first mesh", async () => {
+  test("asyncSetup/setupAnimation creates a new animation and applies it to the first mesh", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
