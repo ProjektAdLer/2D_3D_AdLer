@@ -1,4 +1,6 @@
-import { Animation, Mesh, SceneLoader, Tools, Vector3 } from "@babylonjs/core";
+import { Animation, Mesh, Tools, Vector3 } from "@babylonjs/core";
+import bind from "bind-decorator";
+import Readyable from "../../../../../Lib/Readyable";
 import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
@@ -9,44 +11,42 @@ import DoorViewModel from "./DoorViewModel";
 
 const modelLink = require("../../../../../Assets/3DModel_Door.glb");
 
-export default class DoorView {
-  isReady: Promise<void>;
-
+export default class DoorView extends Readyable {
   private scenePresenter: IScenePresenter;
 
   constructor(private viewModel: DoorViewModel) {
+    super();
+
+    // inject scenePresenter via factory
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
       SCENE_TYPES.ScenePresenterFactory
     );
     this.scenePresenter = scenePresenterFactory(SpaceSceneDefinition);
 
     // setup callbacks for rerendering when the view model changes
-    viewModel.position.subscribe(() => {
-      this.positionMesh();
-    });
-    viewModel.rotation.subscribe(() => {
-      this.positionMesh();
-    });
-    viewModel.isOpen.subscribe(() => {
-      if (this.viewModel.isOpen.Value) {
-        this.isReady.then(() => {
-          this.scenePresenter.Scene.beginAnimation(
-            viewModel.meshes.Value[0],
-            0,
-            45
-          );
-        });
-      }
-    });
+    viewModel.position.subscribe(this.positionMesh);
+    viewModel.rotation.subscribe(this.positionMesh);
+    viewModel.isOpen.subscribe(this.onIsOpenChanged);
 
     // initial setup
-    this.isReady = this.setup();
+    this.asyncSetup();
   }
 
-  private async setup(): Promise<void> {
+  private async asyncSetup(): Promise<void> {
     await this.loadMeshAsync();
     this.positionMesh();
     this.setupAnimation();
+
+    this.resolveIsReady();
+  }
+
+  private async loadMeshAsync(): Promise<void> {
+    const results = await this.scenePresenter.loadModel(modelLink);
+
+    // reset quaternion rotation because it can prevent mesh.rotate to have any effect
+    results.forEach((mesh) => (mesh.rotationQuaternion = null));
+
+    this.viewModel.meshes.Value = results as Mesh[];
   }
 
   private setupAnimation(): void {
@@ -66,20 +66,7 @@ export default class DoorView {
     this.viewModel.meshes.Value[0].animations.push(animation);
   }
 
-  private async loadMeshAsync(): Promise<void> {
-    const result = await SceneLoader.ImportMeshAsync(
-      "",
-      modelLink,
-      "",
-      this.scenePresenter.Scene
-    );
-
-    // reset quaternion rotation because it can prevent mesh.rotate to have any effect
-    result.meshes.forEach((mesh) => (mesh.rotationQuaternion = null));
-
-    this.viewModel.meshes.Value = result.meshes as Mesh[];
-  }
-
+  @bind
   private positionMesh(): void {
     if (this.viewModel.meshes.Value && this.viewModel.meshes.Value.length > 0) {
       this.viewModel.meshes.Value[0].position = this.viewModel.position.Value;
@@ -88,6 +75,19 @@ export default class DoorView {
         Tools.ToRadians(this.viewModel.rotation.Value),
         0.0
       );
+    }
+  }
+
+  @bind
+  private onIsOpenChanged(newIsOpen: boolean): void {
+    if (newIsOpen) {
+      this.isReady.then(() => {
+        this.scenePresenter.Scene.beginAnimation(
+          this.viewModel.meshes.Value[0],
+          0,
+          45
+        );
+      });
     }
   }
 }
