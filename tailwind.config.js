@@ -69,7 +69,7 @@ module.exports = {
         },
         adlergrey: {
           DEFAULT: "rgb(128,128,128)", //DEFAULT = 500
-          100: "rgb(230,230,230)",
+          100: "rgb(230,230,230)", // hell
           200: "rgb(204,204,204)",
           300: "rgb(179,179,179)",
           400: "rgb(153,153,153)",
@@ -77,7 +77,7 @@ module.exports = {
           600: "rgb(102,102,102)",
           700: "rgb(77,77,77)",
           800: "rgb(51,51,51)",
-          900: "rgb(26,26,26)",
+          900: "rgb(26,26,26)", // dunkel
         },
         buttonpressedblue: "rgb(0,120,229)",
         adlertextgrey: "#111111",
