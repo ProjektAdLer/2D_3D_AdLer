@@ -85,6 +85,6 @@ export default class Navigation extends Readyable implements INavigation {
       this.scenePresenter.Scene
     );
 
-    this.resolveReady();
+    this.resolveIsReady();
   }
 }
