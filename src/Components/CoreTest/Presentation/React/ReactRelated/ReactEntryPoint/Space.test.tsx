@@ -1,6 +1,8 @@
 import { render } from "@testing-library/react";
 import Space from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/Space";
 import React from "react";
+import { Provider } from "inversify-react";
+import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 
 jest.mock(
   "../../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltip",
@@ -49,6 +51,10 @@ jest.mock(
 
 describe("Space.tsx", () => {
   test("should render", () => {
-    render(<Space />);
+    render(
+      <Provider container={CoreDIContainer}>
+        <Space />
+      </Provider>
+    );
   });
 });
