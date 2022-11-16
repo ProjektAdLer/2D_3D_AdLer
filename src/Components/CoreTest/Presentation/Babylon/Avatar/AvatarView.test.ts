@@ -56,6 +56,7 @@ describe("AvatarView", () => {
 
   test("async setup calls the scenePresenter to load avatar models", async () => {
     navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
+    //@ts-ignore
     navigationMock.isReady = Promise.resolve();
 
     scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
@@ -74,6 +75,7 @@ describe("AvatarView", () => {
 
   test("async setup gets the parent node for the avatar", async () => {
     navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
+    //@ts-ignore
     navigationMock.isReady = Promise.resolve();
 
     scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
@@ -94,6 +96,7 @@ describe("AvatarView", () => {
 
   test("async setup sets the parent node as parent of the first loaded mesh", async () => {
     navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
+    //@ts-ignore
     navigationMock.isReady = Promise.resolve();
 
     scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
@@ -114,6 +117,7 @@ describe("AvatarView", () => {
 
   test("async setup calls addAgent with the navigation crowd", async () => {
     navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
+    //@ts-ignore
     navigationMock.isReady = Promise.resolve();
 
     scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
@@ -143,6 +147,7 @@ describe("AvatarView", () => {
 
     expect(systemUnderTest["viewModel"].agentIndex).toBeUndefined();
 
+    //@ts-ignore
     navigationMock.isReady = Promise.resolve();
 
     await systemUnderTest.isReady.then(() => {
@@ -154,6 +159,7 @@ describe("AvatarView", () => {
     config.isDebug = false;
 
     navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
+    //@ts-ignore
     navigationMock.isReady = Promise.resolve();
 
     scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
@@ -193,6 +199,7 @@ describe("AvatarView", () => {
 
     expect(systemUnderTest["viewModel"].agentIndex).toBeUndefined();
 
+    //@ts-ignore
     navigationMock.isReady = Promise.resolve();
 
     await systemUnderTest.isReady.then(() => {
@@ -204,6 +211,7 @@ describe("AvatarView", () => {
     config.isDebug = false;
 
     navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
+    //@ts-ignore
     navigationMock.isReady = Promise.resolve();
 
     scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
@@ -236,6 +244,7 @@ describe("AvatarView", () => {
 
   test("debug_displayVelocity calls MeshBuilder.CreateDashedLines", async () => {
     navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
+    //@ts-ignore
     navigationMock.isReady = Promise.resolve();
 
     scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
@@ -270,6 +279,7 @@ describe("AvatarView", () => {
 
   test("debug_displayVelocity calls logger.log", async () => {
     navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
+    //@ts-ignore
     navigationMock.isReady = Promise.resolve();
 
     scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
