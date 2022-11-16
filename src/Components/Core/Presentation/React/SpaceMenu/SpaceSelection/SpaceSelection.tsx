@@ -10,9 +10,9 @@ import ISpaceSelectionController from "./ISpaceSelectionController";
 import SpaceSelectionRow from "./SpaceSelectionRow";
 import SpaceSelectionViewModel from "./SpaceSelectionViewModel";
 
-import check from "../../../../../../Assets/icons/07-video/video-icon-nobg.svg";
-
-import circle from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
+import spaceSolved from "../../../../../../Assets/icons/17-solution/check-solution-icon_nobg.svg";
+import spaceAvailable from "../../../../../../Assets/icons/27-1_lockOpen/lock-icon-open-nobg.svg";
+import spaceLocked from "../../../../../../Assets/icons/27_lockClosed/lock-icon-closed-nobg.svg";
 
 export default function SpaceSelection() {
   const loadWorldUseCase = useInjection<ILoadWorldUseCase>(
@@ -47,10 +47,9 @@ export default function SpaceSelection() {
     <ul className="flex flex-col gap-4 w-[100%] overflow-auto">
       {spaces?.map((space) => {
         // spaces: 0 = id, 1 = name, 2 = isAvailable, 3 = isCompleted
-        let displayedString = "[\u2717] " + space[1];
-        if (!space[2])
-          displayedString = "[\u2712] " + space[1] + " (Not Available)";
-        if (space[3]) displayedString = "[\u2713] " + space[1] + " (Completed)";
+        let displayedString = space[1];
+        if (!space[2]) displayedString = space[1];
+        if (space[3]) displayedString = space[1];
 
         return (
           <li
@@ -58,7 +57,9 @@ export default function SpaceSelection() {
             key={space[0].toString() + space[1]}
           >
             <SpaceSelectionRow
-              icon={space[3] ? check : circle}
+              icon={
+                space[3] ? spaceSolved : space[2] ? spaceAvailable : spaceLocked
+              }
               spaceTitle={displayedString}
               selected={selectedRowID === space[0]}
               onClickCallback={() => controller.onSpaceRowClicked(space[0])}
