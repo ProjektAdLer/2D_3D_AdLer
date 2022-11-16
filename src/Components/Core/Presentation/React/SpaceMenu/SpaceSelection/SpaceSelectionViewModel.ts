@@ -9,10 +9,7 @@ export default class SpaceSelectionViewModel {
   // Array of [id, array of required space ids]
   requirementsList: Observable<[number, number[]][]> = new Observable<
     [number, number[]][]
-  >([
-    [1, []],
-    [2, [1]],
-  ]);
+  >([]);
 
   selectedRowID: Observable<number> = new Observable<number>(-1);
 }

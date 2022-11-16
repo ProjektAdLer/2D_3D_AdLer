@@ -49,18 +49,82 @@ describe("SpaceSelectionPresenter", () => {
     );
   });
 
-  test("should set Winning Condition of its spaces", () => {
+  test("onScoreChanged should set isComplete of its spaces", () => {
+    systemUnderTest["viewModel"].spaces.Value = [
+      [42, "Test Space 1", false, false],
+    ];
+    systemUnderTest["viewModel"].requirementsList.Value = [[42, []]];
     systemUnderTest.onScoreChanged(42, 42, 42, 42);
-    expect(systemUnderTest["viewModel"].spacesCompleted.Value).toEqual(
-      expect.arrayContaining([expect.arrayContaining([42, true])])
+    expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
+      expect.arrayContaining([
+        expect.arrayContaining([42, "Test Space 1", true, true]),
+      ])
+    );
+  });
+  test("onScoreChanged should return if lookup is undefined", () => {
+    systemUnderTest["viewModel"].spaces.Value = [
+      [1, "Test Space 1", false, false],
+    ];
+    systemUnderTest.onScoreChanged(42, 42, 42, 42);
+    expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
+      expect.arrayContaining([
+        expect.arrayContaining([1, "Test Space 1", false, false]),
+      ])
+    );
+  });
+  test("onScoreChanged should not set isComplete, if requiredScore is too high", () => {
+    systemUnderTest["viewModel"].spaces.Value = [
+      [42, "Test Space 1", false, false],
+    ];
+    systemUnderTest["viewModel"].requirementsList.Value = [[42, []]];
+    systemUnderTest.onScoreChanged(42, 43, 42, 42);
+    expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
+      expect.arrayContaining([
+        expect.arrayContaining([42, "Test Space 1", true, false]),
+      ])
+    );
+  });
+  test("onScoreChanged should not set isAvailable, if no SpaceRequirement correspends with spaceId", () => {
+    systemUnderTest["viewModel"].spaces.Value = [
+      [42, "Test Space 1", false, false],
+    ];
+    systemUnderTest["viewModel"].requirementsList.Value = [[1, []]];
+    systemUnderTest.onScoreChanged(42, 43, 42, 42);
+    expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
+      expect.arrayContaining([
+        expect.arrayContaining([42, "Test Space 1", false, false]),
+      ])
+    );
+  });
+  test("onScoreChanged should set isAvailable (requiredSpace defined)", () => {
+    systemUnderTest["viewModel"].spaces.Value = [
+      [42, "Test Space 1", false, false],
+      [1, "Test Space 2", true, true],
+    ];
+    systemUnderTest["viewModel"].requirementsList.Value = [[42, [1]]];
+    systemUnderTest.onScoreChanged(42, 43, 42, 42);
+    expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
+      expect.arrayContaining([
+        expect.arrayContaining([42, "Test Space 1", true, false]),
+      ])
+    );
+  });
+  test("onScoreChanged should throw error if requiredSpace is undefined", () => {
+    systemUnderTest["viewModel"].spaces.Value = [
+      [42, "Test Space 1", false, false],
+      [1, "Test Space 2", true, true],
+    ];
+    systemUnderTest["viewModel"].requirementsList.Value = [[42, [5]]];
+    expect(() => systemUnderTest.onScoreChanged(42, 43, 42, 42)).toThrowError(
+      "Required space not found"
     );
   });
 
-  test("should do NOTHING, on Space Data Loaded", () => {
-    const vmBefore = systemUnderTest["viewModel"];
+  // test("should do NOTHING, on Space Data Loaded", () => {
+  //   const vmBefore = systemUnderTest["viewModel"];
 
-    systemUnderTest.onSpaceDataLoaded(undefined);
+  //   systemUnderTest.onWorldLoaded(undefined);
 
-    expect(systemUnderTest["viewModel"]).toEqual(vmBefore);
-  });
+  //   expect(systemUnderTest["viewModel"]).toEqual(vmBefore);
+  // });
 });

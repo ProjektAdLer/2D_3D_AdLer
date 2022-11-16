@@ -28,8 +28,7 @@ describe("SpaceSelection", () => {
   });
   test("should render and call controller on click", () => {
     const vm = new SpaceSelectionViewModel();
-    vm.spaces.Value = [[1, "test"]];
-    vm.spacesCompleted.Value = [[1, true]];
+    vm.spaces.Value = [[1, "test", true, true]];
 
     const controllerMock = mock<ISpaceSelectionController>();
     useBuilderMock([vm, controllerMock]);
@@ -40,7 +39,7 @@ describe("SpaceSelection", () => {
     );
 
     // click on the first row
-    container.getByText("[\u2713] test").click();
+    container.getByRole("button").click();
     expect(controllerMock.onSpaceRowClicked).toBeCalledWith(1);
   });
 

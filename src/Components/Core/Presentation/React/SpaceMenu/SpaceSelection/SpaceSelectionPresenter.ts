@@ -20,7 +20,7 @@ export default class SpaceSelectionPresenter
     this.viewModel.spaces.Value = newSpaces;
 
     world.spaces.forEach((space) => {
-      this.onSpaceDataLoaded(space);
+      this.spaceDataLoaded(space);
     });
   }
 
@@ -30,35 +30,31 @@ export default class SpaceSelectionPresenter
     maxScore: number,
     spaceID: number
   ): void {
-    const lookup = this.viewModel.spaces.Value.find(
+    const spacesLookup = this.viewModel.spaces.Value.find(
       (space) => space[0] === spaceID
     );
-    if (lookup === undefined) return;
+    const requirementsLookup = this.viewModel.requirementsList.Value.find(
+      (spaceRequirement) => spaceRequirement[0] === spaceID
+    );
+    if (spacesLookup === undefined) return;
     //check if space is completed
     if (score >= requiredScore) {
-      lookup[3] = true;
+      spacesLookup[3] = true;
     }
     //check if all space requirements are completed
-    this.viewModel.requirementsList.Value.forEach((spaceRequirement) => {
-      if (spaceRequirement[0] === spaceID) {
-        if (
-          spaceRequirement[1].every((requiredSpaceId) => {
-            let requiredSpaces = this.viewModel.spaces.Value.find(
-              (space) => space[0] === requiredSpaceId
-            );
-            if (requiredSpaces === undefined) return true;
-            return requiredSpaces[3];
-          })
-        ) {
-          lookup[2] = true;
-        } else {
-          lookup[2] = false;
+    requirementsLookup !== undefined &&
+      (spacesLookup[2] = requirementsLookup[1].every((requiredSpaceId) => {
+        let requiredSpace = this.viewModel.spaces.Value.find(
+          (space) => space[0] === requiredSpaceId
+        );
+        if (requiredSpace === undefined) {
+          throw new Error("Required space not found");
         }
-      }
-    });
+        return requiredSpace[3];
+      }));
   }
 
-  private onSpaceDataLoaded(spaceTO: SpaceTO): void {
+  private spaceDataLoaded(spaceTO: SpaceTO): void {
     const idArray = this.extractRequirementsIds(
       this.viewModel.requirementsList.Value
     );
