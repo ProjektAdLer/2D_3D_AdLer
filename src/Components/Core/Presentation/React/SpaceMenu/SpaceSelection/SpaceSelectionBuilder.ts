@@ -31,10 +31,10 @@ export default class SpaceSelectionBuilder extends PresentationBuilder<
     super.buildPresenter();
     CoreDIContainer.get<AbstractPort<IWorldAdapter>>(
       PORT_TYPES.IWorldPort
-    ).registerAdapter(this.presenter! as IWorldAdapter);
+    ).registerAdapter(this.presenter!);
 
     CoreDIContainer.get<AbstractPort<ISpaceAdapter>>(
       PORT_TYPES.ISpacePort
-    ).registerAdapter(this.presenter! as ISpaceAdapter);
+    ).registerAdapter(this.presenter!);
   }
 }

@@ -1,13 +1,13 @@
 import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
 import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
-import IWorldAdapter from "src/Components/Core/Ports/WorldPort/IWorldAdapter";
 import ISpaceSelectionPresenter from "./ISpaceSelectionPresenter";
 import SpaceSelectionViewModel from "./SpaceSelectionViewModel";
 
 export default class SpaceSelectionPresenter
-  implements ISpaceSelectionPresenter, IWorldAdapter
+  implements ISpaceSelectionPresenter
 {
   constructor(private viewModel: SpaceSelectionViewModel) {}
+  onSpaceDataLoaded(spaceTO: SpaceTO): void {}
 
   onWorldLoaded(world: WorldTO): void {
     let newSpaces: [number, string, boolean, boolean][] = [];
