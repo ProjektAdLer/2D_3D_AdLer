@@ -15,7 +15,7 @@ export default function UseGuide() {
   if (!viewModel || !controller) return null;
 
   return (
-    <div className="fixed left-2 bottom-2 max-h-3/4 z-20">
+    <div className="fixed z-20 left-2 bottom-2 max-h-3/4">
       <div
         className="flex flex-col p-1 text-white border-b-4 border-r-4 rounded-lg text-shadow bg-adlerblue-700 active:border-transparent border-adlerdarkblue "
         onClick={() => {
@@ -24,8 +24,8 @@ export default function UseGuide() {
       >
         {isOpen ? (
           <div className="flex flex-col items-end overflow-auto text-shadow-none h-72 lg:h-full">
-            <div className="w-full flex justify-between content-center">
-              <h1 className="pl-4 pt-1 lg:pt-2 font-bold text-xl lg:text-2xl text-shadow">
+            <div className="flex content-center justify-between w-full">
+              <h1 className="pt-1 pl-4 text-xl font-bold lg:pt-2 lg:text-2xl text-shadow">
                 Steuerung 3D-Lernraum
               </h1>
               <img
@@ -34,7 +34,7 @@ export default function UseGuide() {
                 alt=""
               />
             </div>
-            <ul className="p-3 pl-5 list-disc leading-loose">
+            <ul className="p-3 pl-5 leading-loose list-disc">
               <li>
                 Links oben befindet sich der Button um die <b>MenüBar</b> zu
                 öffnen
@@ -87,7 +87,11 @@ export default function UseGuide() {
             </ul>
           </div>
         ) : (
-          <img className="h-8 lg:h-12 md:h-10 " src={helpIcon} alt="" />
+          <img
+            className="h-8 lg:h-12 md:h-10 "
+            src={helpIcon}
+            alt="Fragezeichen"
+          />
         )}
       </div>
     </div>
