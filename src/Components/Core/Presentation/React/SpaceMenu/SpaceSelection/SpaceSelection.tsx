@@ -48,8 +48,6 @@ export default function SpaceSelection() {
       {spaces?.map((space) => {
         // spaces: 0 = id, 1 = name, 2 = isAvailable, 3 = isCompleted
         let displayedString = space[1];
-        if (!space[2]) displayedString = space[1];
-        if (space[3]) displayedString = space[1];
 
         return (
           <li

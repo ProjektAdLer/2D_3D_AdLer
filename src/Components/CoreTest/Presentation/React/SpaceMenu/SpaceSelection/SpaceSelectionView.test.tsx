@@ -62,4 +62,26 @@ describe("SpaceSelection", () => {
     );
     expect(container.firstChild).toBeNull();
   });
+  test("should render uncompleted room buttons without issues.", () => {
+    const vm = new SpaceSelectionViewModel();
+    vm.spaces.Value = [[1, "test", true, false]];
+    const controllerMock = mock<ISpaceSelectionController>();
+    useBuilderMock([vm, controllerMock]);
+    render(
+      <Provider container={CoreDIContainer}>
+        <SpaceSelection />
+      </Provider>
+    );
+  });
+  test("should render uncompleted, unavailable room buttons without issues.", () => {
+    const vm = new SpaceSelectionViewModel();
+    vm.spaces.Value = [[1, "test", false, false]];
+    const controllerMock = mock<ISpaceSelectionController>();
+    useBuilderMock([vm, controllerMock]);
+    render(
+      <Provider container={CoreDIContainer}>
+        <SpaceSelection />
+      </Provider>
+    );
+  });
 });
