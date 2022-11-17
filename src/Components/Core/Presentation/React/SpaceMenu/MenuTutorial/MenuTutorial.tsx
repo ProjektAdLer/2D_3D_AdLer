@@ -12,27 +12,40 @@ export default function MenuTutorial() {
         }}
       >
         {isOpen ? (
-          <div className="flex flex-col items-end text-shadow-none">
-            <img className="h-10 pb-2 lg:h-14 md:h-12" src={helpIcon} alt="" />
+          <div className="flex flex-col items-end text-shadow-none leading-loose">
+            <div className="w-full flex justify-between content-center">
+              <h1 className="pl-4 pt-1 lg:pt-2 font-bold text-xl lg:text-2xl text-shadow">
+                Steuerung Menü
+              </h1>
+              <img
+                className="h-10 pb-2 lg:h-14 md:h-12"
+                src={helpIcon}
+                alt=""
+              />
+            </div>
+
             <ul className="p-3 pl-5 list-disc ">
               <li>
-                In der linken Spalte sind die Lernräume der Lernwelt aufgeführt
+                In der linken Spalte sind die <b> Lernräume</b> der Lernwelt
+                aufgeführt
               </li>
               <li>
                 Mit einem Klick auf einen Lernraum-Button öffnet sich in <br />{" "}
-                der rechten Spalte die dazugehörige Detailansicht
+                der rechten Spalte die dazugehörige <b> Detailansicht</b>
               </li>
               <li>
                 Ist ein Lernraum freigeschaltet, befindet sich am Ende <br />{" "}
-                der Detailansicht ein Button, zum Betreten des 3D-Lernraums
+                der Detailansicht ein Button, zum{" "}
+                <b> Betreten des 3D-Lernraums</b>
               </li>
               <li>
                 Mit einem Klick auf den Home Button links oben geht es zurück{" "}
-                <br /> zum Startmenü
+                <br /> zum <b> Startmenü</b>
               </li>
               <li>
-                Dieser Hilfetext wird über einen Klick geschlossen und <br />{" "}
-                kann über den Hilfebutton rechts oben wieder geöffnet werden
+                Dieser <b> Hilfetext</b> wird über einen Klick geschlossen und{" "}
+                <br /> kann über den Hilfebutton rechts oben wieder geöffnet
+                werden
               </li>
             </ul>
           </div>
