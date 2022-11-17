@@ -54,20 +54,20 @@ export default class SpaceSelectionPresenter
       }));
   }
 
-  private spaceDataLoaded(spaceTO: SpaceTO): void {
+  private spaceDataLoaded(space: SpaceTO): void {
     const idArray = this.extractRequirementsIds(
       this.viewModel.requirementsList.Value
     );
-    if (spaceTO.id === idArray.find((spaceId) => spaceId === spaceTO.id)) {
-      let arrayId = idArray.indexOf(spaceTO.id);
+    if (space.id === idArray.find((spaceId) => spaceId === space.id)) {
+      let arrayId = idArray.indexOf(space.id);
       this.viewModel.requirementsList.Value[arrayId] = [
-        spaceTO.id,
-        spaceTO.requirements,
+        space.id,
+        space.requirements,
       ];
     } else {
       this.viewModel.requirementsList.Value.push([
-        spaceTO.id,
-        spaceTO.requirements,
+        space.id,
+        space.requirements,
       ]);
     }
   }

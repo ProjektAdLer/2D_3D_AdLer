@@ -120,11 +120,41 @@ describe("SpaceSelectionPresenter", () => {
     );
   });
 
-  // test("should do NOTHING, on Space Data Loaded", () => {
-  //   const vmBefore = systemUnderTest["viewModel"];
+  test("spaceDataLoaded should push new information into the requirementsList, if Room with establised id is given", () => {
+    const vmBefore = systemUnderTest["viewModel"];
+    systemUnderTest["viewModel"].spaces.Value = [
+      [42, "Test Space 1", false, false],
+      [1, "Test Space 2", true, true],
+    ];
+    const worldTO: WorldTO = {
+      worldName: "Test World",
+      worldGoal: "Test World Goal",
+      description: "Test World Description",
+      goals: "Test World Goals",
+      spaces: [
+        {
+          id: 42,
+          name: "Test Space 1",
+          elements: [],
+          description: "Test Space 1 Description",
+          goals: "Test Space 1 Goals",
+          requiredPoints: 0,
+          requirements: [1, 42],
+        },
+        {
+          id: 42,
+          name: "Test Space 1",
+          elements: [],
+          description: "Test Space 1 Description",
+          goals: "Test Space 1 Goals",
+          requiredPoints: 0,
+          requirements: [20, 42],
+        },
+      ],
+    };
 
-  //   systemUnderTest.onWorldLoaded(undefined);
+    systemUnderTest.onWorldLoaded(worldTO);
 
-  //   expect(systemUnderTest["viewModel"]).toEqual(vmBefore);
-  // });
+    expect(systemUnderTest["viewModel"]).toEqual(vmBefore);
+  });
 });
