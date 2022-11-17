@@ -2,7 +2,7 @@ import React from "react";
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   shape?: "square" | "freefloatleft" | "freefloatcenter";
-  color?: "default" | "success" | "pressed";
+  color?: "default" | "success" | "pressed" | "locked";
   disabled?: boolean;
   icon?: string;
 }
@@ -20,6 +20,7 @@ export default function StyledButton({
     default: "bg-adlerblue",
     success: "bg-adlergreen",
     pressed: "bg-buttonpressedblue",
+    locked: "bg-adlergrey-200",
 
     // Shapes
     square:

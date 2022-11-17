@@ -60,6 +60,7 @@ export default function SpaceSelection() {
               icon={
                 space[3] ? spaceSolved : space[2] ? spaceAvailable : spaceLocked
               }
+              locked={!space[2]}
               spaceTitle={displayedString}
               selected={selectedRowID === space[0]}
               onClickCallback={() => controller.onSpaceRowClicked(space[0])}
