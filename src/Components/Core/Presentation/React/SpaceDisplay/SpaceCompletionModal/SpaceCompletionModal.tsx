@@ -4,7 +4,7 @@ import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/Style
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import ISpaceCompletionModalController from "./ISpaceCompletionModalController";
 import SpaceCompletionModalViewModel from "./SpaceCompletionModalViewModel";
-import RubicsCube from "../../../../../../Assets/icons/17-solution/rubicscube-check-solution-icon-nobg.svg";
+import RubicsCube from "../../../../../../Assets/icons/17-solutionRubicsCube/rubicscube-check-solution-icon-nobg.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 
 export default function SpaceCompletionModal() {

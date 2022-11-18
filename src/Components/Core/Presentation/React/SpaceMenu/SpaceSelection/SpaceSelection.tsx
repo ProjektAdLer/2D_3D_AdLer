@@ -10,7 +10,7 @@ import ISpaceSelectionController from "./ISpaceSelectionController";
 import SpaceSelectionRow from "./SpaceSelectionRow";
 import SpaceSelectionViewModel from "./SpaceSelectionViewModel";
 
-import spaceSolved from "../../../../../../Assets/icons/17-solution/check-solution-icon_nobg.svg";
+import spaceSolved from "../../../../../../Assets/icons/17-1-solutionCheck/check-solution-icon_nobg.svg";
 import spaceAvailable from "../../../../../../Assets/icons/27-1_lockOpen/lock-icon-open-nobg.svg";
 import spaceLocked from "../../../../../../Assets/icons/27_lockClosed/lock-icon-closed-nobg.svg";
 
