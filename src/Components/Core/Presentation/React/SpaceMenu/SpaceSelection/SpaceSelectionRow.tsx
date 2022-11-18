@@ -17,7 +17,7 @@ export default function SpaceSelectionRow({
     <StyledButton
       icon={icon}
       className="xl:pl-8 w-[100%]"
-      shape="freefloatleft"
+      shape="freefloatcenter"
       onClick={onClickCallback}
       color={/* locked ? "locked" :  */ selected ? "pressed" : "default"}
     >
