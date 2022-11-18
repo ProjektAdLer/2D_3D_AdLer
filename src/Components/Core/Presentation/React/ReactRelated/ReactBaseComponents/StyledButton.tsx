@@ -44,8 +44,10 @@ export default function StyledButton({
       }
       {...rest}
     >
-      {icon && <img className={"h-10 w-10"} src={icon}></img>}
+      {icon && <img className={"h-6 lg:h-8 "} src={icon}></img>}
+      <div className="w-1 lg:w-4"></div>
       {children}
+      <div className="w-1 lg:w-4"></div>
     </button>
   );
 }
