@@ -7,6 +7,9 @@ import IScoreH5PElement from "src/Components/Core/Application/UseCases/ScoreH5PE
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import { useInjection } from "inversify-react";
 import IGetElementSourceUseCase from "src/Components/Core/Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
+
+//TODOPG: This need to be stripped into a Controller. Until then, this code is ugly
+
 export const h5pEventCalled = (
   event: any,
   viewModel: ElementModalViewModel
@@ -37,7 +40,7 @@ export const h5pEventCalled = (
   if (isCompleted && !isChild) {
     const xapiData = event.data.statement as XAPIData;
 
-    statement.result.success = statement.result.score.scaled == 1 || false;
+    statement.result.success = statement?.result?.score?.scaled == 1 || false;
 
     CoreDIContainer.get<IScoreH5PElement>(
       USECASE_TYPES.IScoreH5PElement

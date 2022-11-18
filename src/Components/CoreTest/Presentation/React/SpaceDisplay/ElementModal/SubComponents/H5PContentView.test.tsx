@@ -14,11 +14,12 @@ import IScoreH5PElement from "../../../../../../Core/Application/UseCases/ScoreH
 
 const viewModel = new ElementModalViewModel();
 viewModel.id.Value = 1;
+viewModel.parentCourseId.Value = 1;
 
 jest.mock("h5p-standalone");
 
 const sourceUseCaseMock = mock<IGetElementSourceUseCase>();
-const scoreH5PUseCase = mock<IScoreH5PElement>();
+const scoreH5PUseCaseMock = mock<IScoreH5PElement>();
 
 global.console = {
   ...console,
@@ -37,7 +38,7 @@ beforeAll(() => {
     sourceUseCaseMock
   );
   CoreDIContainer.bind(USECASE_TYPES.IScoreH5PElement).toConstantValue(
-    scoreH5PUseCase
+    scoreH5PUseCaseMock
   );
   jest.spyOn(console, "error").mockImplementation(() => {});
 });
@@ -64,7 +65,7 @@ describe("H5PContentView", () => {
     console.error = oldError;
   });
 
-  test("should handle a xapi call", () => {
+  test("should handle a xapi call with a statement", () => {
     h5pEventCalled(
       {
         data: {
@@ -80,5 +81,47 @@ describe("H5PContentView", () => {
       },
       viewModel
     );
+
+    expect(scoreH5PUseCaseMock.executeAsync).toBeCalledWith({
+      xapiData: {
+        verb: {
+          id: "http://adlnet.gov/expapi/verbs/answered",
+        },
+        result: {
+          success: false,
+        },
+      },
+      elementId: 1,
+      courseId: 1,
+    });
+  });
+
+  test("should not call useCase with invalid data", () => {
+    h5pEventCalled(
+      {
+        data: {},
+      },
+      viewModel
+    );
+
+    expect(scoreH5PUseCaseMock.executeAsync).not.toHaveBeenCalled();
+  });
+
+  test("should not call usecase with invalid h5p verb", () => {
+    h5pEventCalled(
+      {
+        data: {
+          statement: {
+            verb: {},
+            result: {
+              success: true,
+            },
+          },
+        },
+      },
+      viewModel
+    );
+
+    expect(scoreH5PUseCaseMock.executeAsync).not.toHaveBeenCalled();
   });
 });
