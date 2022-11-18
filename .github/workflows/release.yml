@@ -1,0 +1,16 @@
+name: Build, test, containerize and push to registry
+
+on:
+  release:
+    types: [created]
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build:
+    uses: ./.github/workflows/_shared_build_test.yml
+
+  docker:
+    needs: build
+    uses: ./.github/workflows/_shared_docker.yml
