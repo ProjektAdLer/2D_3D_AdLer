@@ -45,9 +45,9 @@ module.exports = {
     config.coverageReporters = ["text-summary", "lcov"];
     config.coverageThreshold = {
       global: {
-        branches: 92,
-        functions: 92,
-        lines: 92,
+        branches: 0,
+        functions: 0,
+        lines: 0,
         statements: 92,
       },
     };
