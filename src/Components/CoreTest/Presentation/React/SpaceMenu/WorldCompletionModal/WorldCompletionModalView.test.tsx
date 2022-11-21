@@ -15,11 +15,12 @@ describe("WorldCompletionModalView", () => {
     useBuilderMock([vm, controllerMock]);
     const container = render(<WorldCompletionModal />);
     expect(
-      container.getByText(
-        "Du hast alle Lernräume erfolgreich abgeschlossen und somit die Lernwelt bestanden, herzlichen Glückwunsch!"
-      )
+      container.getByText("Du hast alle Lernräume erfolgreich abgeschlossen", {
+        exact: false,
+      })
     ).toBeInTheDocument();
   });
+
   test("should not render when not openend", () => {
     const vm = new WorldCompletionModalViewModel();
     vm.showModal.Value = false;
