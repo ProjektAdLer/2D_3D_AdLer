@@ -10,7 +10,6 @@ import "./Components/Core/Types/array.extensions";
 
 console.log(config.serverURL);
 console.log(window.location.host);
-console.log(window.location.host);
 
 const reactEntry = CoreDIContainer.get<IReactEntry>(CORE_TYPES.ICoreRenderer);
 
