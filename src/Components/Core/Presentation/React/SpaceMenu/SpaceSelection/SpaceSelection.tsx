@@ -42,7 +42,15 @@ export default function SpaceSelection() {
     viewModel?.spaces
   );
   const [selectedRowID] = useObservable<number>(viewModel?.selectedRowID);
-  if (!viewModel || !controller) return null;
+  if (!viewModel || !controller || !spaces?.length)
+    return (
+      <div>
+        <div className="spinner-container">
+          Bitte warten, Welt wird geladen...
+          <div className="loading-spinner"></div>
+        </div>
+      </div>
+    );
   return (
     <ul className="flex flex-col gap-4 w-[100%] overflow-auto">
       {spaces?.map((space) => {
