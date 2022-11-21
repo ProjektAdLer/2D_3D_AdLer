@@ -147,7 +147,7 @@ export default class SpaceView implements ISpaceView {
   private createWallSegment(startPoint: Vector2, endPoint: Vector2): Mesh {
     // create mesh
     const wallLength = Math.sqrt(
-      Math.pow(endPoint.x - endPoint.y, 2) +
+      Math.pow(endPoint.x - startPoint.x, 2) +
         Math.pow(endPoint.y - startPoint.y, 2)
     );
     const wallSegmentOptions = {
