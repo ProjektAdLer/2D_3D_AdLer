@@ -76,7 +76,7 @@ export default class AvatarView {
   @bind
   private async setupAvatarNavigation(): Promise<void> {
     this.viewModel.agentIndex = this.navigation.Crowd.addAgent(
-      this.viewModel.meshes.Value[0].position,
+      this.viewModel.parentNode.Value.position,
       this.viewModel.agentParams,
       this.viewModel.parentNode.Value
     );
@@ -92,7 +92,7 @@ export default class AvatarView {
         this.viewModel.agentIndex
       );
 
-      if (velocity.length() > 0.2) {
+      if (velocity.length() > 0.1) {
         velocity.normalize();
         let desiredRotation = Math.atan2(velocity.x, velocity.z);
 

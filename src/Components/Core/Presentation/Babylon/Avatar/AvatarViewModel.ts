@@ -9,10 +9,11 @@ export default class AvatarViewModel {
   public agentParams: IAgentParameters = {
     radius: 0.5,
     height: 1,
-    maxAcceleration: 4.0,
-    maxSpeed: 1.0,
+    maxAcceleration: 5.0,
+    maxSpeed: 3.0,
     collisionQueryRange: 0.5,
     pathOptimizationRange: 0.0,
     separationWeight: 1.0,
+    reachRadius: 1.0,
   };
 }

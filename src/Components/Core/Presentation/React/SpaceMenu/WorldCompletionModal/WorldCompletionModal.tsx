@@ -31,7 +31,15 @@ export default function WorldCompletionModal() {
         <div className="w-96">
           <p className="mb-4">
             Du hast alle Lernräume erfolgreich abgeschlossen und somit die
-            Lernwelt bestanden, herzlichen Glückwunsch!
+            Lernwelt bestanden, herzlichen Glückwunsch! <br />
+            Bitte fülle jetzt hier den{" "}
+            <b className="text-adlerblue-900">
+              {" "}
+              <a href="https://adler3d.softwarearchitektur-hs-kempten.de">
+                Evaluationsfragebogen{" "}
+              </a>{" "}
+            </b>{" "}
+            aus!
           </p>
         </div>
       </div>
