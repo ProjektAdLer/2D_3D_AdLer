@@ -35,7 +35,7 @@ export default function WorldCompletionModal() {
             Bitte fülle jetzt hier den{" "}
             <b className="text-adlerblue-900">
               {" "}
-              <a href="ww3.unipark.de/uc/softwareengineeringkempten/">
+              <a href="https://ww3.unipark.de/uc/softwareengineeringkempten/">
                 Evaluationsfragebogen{" "}
               </a>{" "}
             </b>{" "}
