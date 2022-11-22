@@ -22,3 +22,14 @@
 
 ## Debugging
 Wenn die variablen in env.development dementsprechend gesetzt sind, kann mit dem Shortcut "STRG + F1" der Debug Modus aktiviert und der Nutzer autmatisch in Moodle angemeldet werden
+
+
+## Docker
+`Dockerfile` wird für die Pipeline genutzt, `Dockerfile-twostage` ermöglicht einfaches lokales bauen eines Docker containers. 
+Die folgenden Befehle bauen und starten einen Container:
+
+```
+docker build -f Dockerfile-twostage -t 2d3d .
+docker run 2d3d
+```
+

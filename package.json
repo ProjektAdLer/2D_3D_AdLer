@@ -1,6 +1,6 @@
 {
   "name": "adler-engine",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@babylonjs/core": "^5.14.1",
@@ -28,6 +28,7 @@
     "build": "react-app-rewired build",
     "build-dev": "dotenv -e .env.development react-app-rewired build",
     "test": "react-app-rewired test --watchAll",
+    "test-ci": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "prepare": "husky install"
   },
