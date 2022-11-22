@@ -21,13 +21,15 @@ export default function HeaderBar() {
   return (
     <React.Fragment>
       <div className="flex items-center justify-between">
-        <StyledButton
+        {/* <StyledButton
           disabled
           className=""
           onClick={controller.onMenuButtonClicked}
         >
           <img className="w-10 xl:w-12" src={homeIcon} alt="Home Icon" />
-        </StyledButton>
+        </StyledButton> */}{" "}
+        {/* Auskommentiert, wegen Evaluation */}
+        <div></div> {/* Dieser leere <div> hält das Layout zusammen*/}
         <div>
           <StyledContainer
             className="text-xl lg:text-4xl roboto-black text-shadow"
