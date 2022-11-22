@@ -43,24 +43,16 @@ describe("SpaceSelection", () => {
     expect(controllerMock.onSpaceRowClicked).toBeCalledWith(1);
   });
 
-  test("doesn't render without controller", () => {
+  test("doesn't render without controller, viewModel or Data", () => {
     useBuilderMock([mockDeep<SpaceSelectionViewModel>(), undefined]);
-    const { container } = render(
+    const container = render(
       <Provider container={CoreDIContainer}>
         <SpaceSelection />
       </Provider>
     );
-    expect(container.firstChild).toBeNull();
-  });
 
-  test("doesn't render without view model", () => {
-    useBuilderMock([undefined, mock<ISpaceSelectionController>()]);
-    const { container } = render(
-      <Provider container={CoreDIContainer}>
-        <SpaceSelection />
-      </Provider>
-    );
-    expect(container.firstChild).toBeNull();
+    const element = container.queryByText("Bitte warten, Welt wird geladen...");
+    expect(element).not.toBeNull();
   });
   test("should render uncompleted room buttons without issues.", () => {
     const vm = new SpaceSelectionViewModel();
