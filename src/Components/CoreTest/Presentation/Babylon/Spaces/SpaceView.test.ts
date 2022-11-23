@@ -3,22 +3,27 @@ import SpaceViewModel from "../../../../Core/Presentation/Babylon/Spaces/SpaceVi
 import {
   Color3,
   Mesh,
-  Observable,
+  MeshBuilder,
+  NullEngine,
+  PolygonMeshBuilder,
   Scene,
   StandardMaterial,
+  Texture,
   Vector2,
 } from "@babylonjs/core";
-import { mock, mockDeep, MockProxy } from "jest-mock-extended";
+import { mock, mockDeep } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import ISpaceController from "../../../../Core/Presentation/Babylon/Spaces/ISpaceController";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
-import { create } from "domain";
+
+// mock necessary Babylon objects
+jest.mock("@babylonjs/core/Materials");
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
-// scenePresenterMock.Scene.onBeforeRenderObservable = mock<Observable<Scene>>();
+scenePresenterMock.Scene.lights = [];
 
 function createSystemUnderTest(): [
   SpaceView,
@@ -32,9 +37,6 @@ function createSystemUnderTest(): [
 }
 
 describe("SpaceView", () => {
-  let systemUnderTest: SpaceView;
-  let viewModel: SpaceViewModel;
-
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
@@ -42,11 +44,16 @@ describe("SpaceView", () => {
     );
   });
 
-  afterAll(() => {
-    CoreDIContainer.restore();
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
-  test.skip("constructor adds displayScene to onBeforeRenderObservable on the scene", () => {
+  afterAll(() => {
+    CoreDIContainer.restore();
+    jest.restoreAllMocks();
+  });
+
+  test("constructor adds displayScene to onBeforeRenderObservable on the scene", () => {
     const [systemUnderTest] = createSystemUnderTest();
 
     expect(
@@ -54,103 +61,236 @@ describe("SpaceView", () => {
     ).toBeCalledWith(systemUnderTest.displaySpace);
   });
 
-  test.skip("displaySpace throws error if cornerCount is smaller than 3", () => {
-    expect(() => {
-      systemUnderTest["viewModel"].spaceCornerPoints.Value = [
+  describe("Material Creation Methods", () => {
+    test("createFloorMaterial creates a material", () => {
+      const [, , viewModel] = createSystemUnderTest();
+
+      expect(viewModel.floorMaterial.Value).toBeInstanceOf(StandardMaterial);
+    });
+
+    test("createFloorMaterial sets a texture for the floor material", () => {
+      const [, , viewModel] = createSystemUnderTest();
+
+      expect(viewModel.floorMaterial.Value.diffuseTexture).toBeInstanceOf(
+        Texture
+      );
+    });
+
+    test("createFloorMaterial sets uv scaling for the floor material's texture", () => {
+      const [, , viewModel] = createSystemUnderTest();
+
+      expect(
+        (viewModel.floorMaterial.Value.diffuseTexture as Texture).uScale
+      ).toBe(2);
+      expect(
+        (viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale
+      ).toBe(2);
+    });
+
+    test("createWallMaterial creates a material", () => {
+      const [, , viewModel] = createSystemUnderTest();
+
+      expect(viewModel.wallMaterial.Value).toBeInstanceOf(StandardMaterial);
+    });
+  });
+
+  describe("displaySpace Method", () => {
+    test("displaySpace returns if viewModel.isDirty is false", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      viewModel.isDirty = false;
+
+      systemUnderTest.displaySpace();
+
+      expect(scenePresenterMock.Scene.meshes).toHaveLength(0);
+    });
+
+    test("displaySpace throws error if cornerCount is smaller than 3", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      viewModel.spaceCornerPoints.Value = [
         new Vector2(5.3, 4.3),
         new Vector2(-5.3, 4.3),
       ];
-    }).toThrowError(
-      "Not enough corners found to generate space. Please review the Spacedata."
-    );
+
+      expect(() => {
+        systemUnderTest.displaySpace();
+      }).toThrowError(
+        "Not enough corners found to generate space. Please review the Spacedata."
+      );
+    });
+
+    test("displaySpace resets viewModel.isDirty to false", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      viewModel.spaceCornerPoints.Value = [
+        new Vector2(5.3, 4.3),
+        new Vector2(-5.3, 4.3),
+        new Vector2(-5.3, -4.3),
+      ];
+      viewModel.isDirty = true;
+      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
+      jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
+      jest
+        .spyOn(PolygonMeshBuilder.prototype, "build")
+        .mockReturnValue(mock<Mesh>());
+
+      systemUnderTest.displaySpace();
+
+      expect(viewModel.isDirty).toBe(false);
+    });
   });
 
-  test.skip("cleanup Old Walls returns if viewModel.wallMeshes is empty", () => {
-    systemUnderTest["viewModel"].wallMeshes.Value = [];
-    expect(viewModel.wallMeshes.Value).toBe([]);
+  describe("Cleanup Methods", () => {
+    test("cleanupOldWalls sets viewModel.wallMeshes to an empty array when its previously undefined", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      //@ts-ignore
+      viewModel.wallMeshes.Value = undefined;
+
+      systemUnderTest["cleanupOldWalls"]();
+
+      expect(viewModel.wallMeshes.Value).toHaveLength(0);
+    });
+
+    test("cleanupOldWalls calls dispose on all meshes in viewModel.wallMeshes", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      const mockedMesh1 = mock<Mesh>();
+      const mockedMesh2 = mock<Mesh>();
+      viewModel.wallMeshes.Value = [mockedMesh1, mockedMesh2];
+
+      systemUnderTest["cleanupOldWalls"]();
+
+      expect(mockedMesh1.dispose).toBeCalledTimes(1);
+      expect(mockedMesh2.dispose).toBeCalledTimes(1);
+    });
+
+    test("cleanupOldWalls sets viewModel.wallMeshes to an empty array when its previously filled with meshes", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      viewModel.wallMeshes.Value = [mock<Mesh>(), mock<Mesh>()];
+
+      systemUnderTest["cleanupOldWalls"]();
+
+      expect(viewModel.wallMeshes.Value).toHaveLength(0);
+    });
+
+    test("cleanupOldPoles sets viewModel.cornerPoleMeshes to an empty array when its previously undefined", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      //@ts-ignore
+      viewModel.cornerPoleMeshes.Value = undefined;
+
+      systemUnderTest["cleanupOldPoles"]();
+
+      expect(viewModel.cornerPoleMeshes.Value).toHaveLength(0);
+    });
+
+    test("cleanupOldPoles calls dispose on all meshes in viewModel.cornerPoleMeshes", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      const mockedMesh1 = mock<Mesh>();
+      const mockedMesh2 = mock<Mesh>();
+      viewModel.cornerPoleMeshes.Value = [mockedMesh1, mockedMesh2];
+
+      systemUnderTest["cleanupOldPoles"]();
+
+      expect(mockedMesh1.dispose).toBeCalledTimes(1);
+      expect(mockedMesh2.dispose).toBeCalledTimes(1);
+    });
+
+    test("cleanupOldPoles sets viewModel.cornerPoleMeshes to an empty array when its previously filled with meshes", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      viewModel.cornerPoleMeshes.Value = [mock<Mesh>(), mock<Mesh>()];
+
+      systemUnderTest["cleanupOldPoles"]();
+
+      expect(viewModel.cornerPoleMeshes.Value).toHaveLength(0);
+    });
+
+    test("cleanupOldFloor calls dispose on viewModel.floorMesh", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      const mockedMesh = mock<Mesh>();
+      viewModel.floorMesh.Value = mockedMesh;
+
+      systemUnderTest["cleanupOldFloor"]();
+
+      expect(mockedMesh.dispose).toBeCalledTimes(1);
+    });
   });
 
-  test.skip("cleanup Old Walls removes any wallMeshes in the viewModel", () => {
-    // Needs to be checked once more
-    systemUnderTest["wallMeshes"] = 1 as unknown as Mesh[];
-    expect(viewModel.wallMeshes.Value).toBe(undefined);
-  });
+  describe("Creation Methods", () => {
+    test("createFloor creates builds a mesh with the PolyMeshBuilder", () => {
+      const [systemUnderTest, ,] = createSystemUnderTest();
+      jest
+        .spyOn(PolygonMeshBuilder.prototype, "build")
+        .mockReturnValue(mock<Mesh>());
 
-  // copy paste for poles and floor
+      systemUnderTest["createFloor"]();
 
-  test.skip("change to spaceHeight triggers callback to displaySpace", () => {
-    const displaySpaceMock = jest.spyOn(systemUnderTest, "displaySpace");
+      expect(PolygonMeshBuilder.prototype.build).toBeCalledTimes(1);
+    });
 
-    systemUnderTest["viewModel"].spaceHeight.Value = 20;
+    test("createFloor calls scenePresenter.registerNavigationMesh with the new mesh", () => {
+      const [systemUnderTest, ,] = createSystemUnderTest();
+      const mockedMesh = mock<Mesh>();
+      jest
+        .spyOn(PolygonMeshBuilder.prototype, "build")
+        .mockReturnValue(mockedMesh);
 
-    expect(displaySpaceMock).toHaveBeenCalledTimes(1);
-  });
+      systemUnderTest["createFloor"]();
 
-  test.skip("change to spaceWidth triggers callback to displaySpace", () => {
-    const displaySpaceMock = jest.spyOn(systemUnderTest, "displaySpace");
+      expect(scenePresenterMock.registerNavigationMesh).toBeCalledTimes(1);
+      expect(scenePresenterMock.registerNavigationMesh).toBeCalledWith(
+        mockedMesh
+      );
+    });
 
-    systemUnderTest["viewModel"].spaceWidth.Value = 20;
+    test("createFloor applies the floorMaterial to the new mesh", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      const mockedMesh = mock<Mesh>();
+      jest
+        .spyOn(PolygonMeshBuilder.prototype, "build")
+        .mockReturnValue(mockedMesh);
 
-    expect(displaySpaceMock).toHaveBeenCalledTimes(1);
-  });
+      systemUnderTest["createFloor"]();
 
-  test.skip("change to spaceLength triggers callback to displaySpace", () => {
-    const displaySpaceMock = jest.spyOn(systemUnderTest, "displaySpace");
+      expect(viewModel.floorMesh.Value.material).toStrictEqual(
+        viewModel.floorMaterial.Value
+      );
+    });
 
-    systemUnderTest["viewModel"].spaceLength.Value = 20;
+    test("createWalls creates 3 wall meshes when there are 3 corners", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      viewModel.spaceCornerPoints.Value = [
+        new Vector2(5.3, 4.3),
+        new Vector2(-5.3, 4.3),
+        new Vector2(-5.3, -4.3),
+      ];
+      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
+      jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
+      systemUnderTest["cleanupOldWalls"]();
 
-    expect(displaySpaceMock).toHaveBeenCalledTimes(1);
-  });
+      systemUnderTest["createWalls"]();
 
-  test.skip("change to wallThickness triggers callback to displaySpace", () => {
-    const displaySpaceMock = jest.spyOn(systemUnderTest, "displaySpace");
+      expect(viewModel.wallMeshes.Value).toHaveLength(3);
+    });
 
-    systemUnderTest["viewModel"].wallThickness.Value = 20;
+    test("createWallSegment returns a mesh", () => {
+      //@ts-ignore
+      scenePresenterMock.Scene = new Scene(new NullEngine());
+      const [systemUnderTest, ,] = createSystemUnderTest();
 
-    expect(displaySpaceMock).toHaveBeenCalledTimes(1);
-  });
+      const result = systemUnderTest["createWallSegment"](
+        new Vector2(0, 0),
+        new Vector2(1, 1)
+      );
 
-  test.skip("change to baseHeight triggers callback to displaySpace", () => {
-    const displaySpaceMock = jest.spyOn(systemUnderTest, "displaySpace");
+      expect(result).toBeInstanceOf(Mesh);
+    });
 
-    systemUnderTest["viewModel"].baseHeight.Value = 20;
+    test("applyWallColor applies the color from the viewmodel to the wall texture", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      viewModel.wallColor.Value = Color3.Red();
 
-    expect(displaySpaceMock).toHaveBeenCalledTimes(1);
-  });
+      systemUnderTest["applyWallColor"]();
 
-  test.skip("change to doorHeight triggers callback to displaySpace", () => {
-    const displaySpaceMock = jest.spyOn(systemUnderTest, "displaySpace");
-
-    systemUnderTest["viewModel"].doorHeight.Value = 20;
-
-    expect(displaySpaceMock).toHaveBeenCalledTimes(1);
-  });
-
-  test.skip("change to doorWidth triggers callback to displaySpace", () => {
-    const displaySpaceMock = jest.spyOn(systemUnderTest, "displaySpace");
-
-    systemUnderTest["viewModel"].doorWidth.Value = 20;
-
-    expect(displaySpaceMock).toHaveBeenCalledTimes(1);
-  });
-
-  test.skip("change to wallColor triggers callback to displaySpace", () => {
-    const displaySpaceMock = jest.spyOn(systemUnderTest, "displaySpace");
-
-    systemUnderTest["viewModel"].wallColor.Value = new Color3(0.25, 0.26, 0.27);
-
-    expect(displaySpaceMock).toHaveBeenCalledTimes(1);
-  });
-
-  test.skip("change to spaceCornerPoints triggers callback to displaySpace", () => {
-    const displaySpaceMock = jest.spyOn(systemUnderTest, "displaySpace");
-
-    systemUnderTest["viewModel"].spaceCornerPoints.Value = [
-      new Vector2(30, 31),
-      new Vector2(32, 33),
-      new Vector2(34, 35),
-    ];
-
-    expect(displaySpaceMock).toHaveBeenCalledTimes(1);
+      expect(viewModel.wallMaterial.Value.diffuseColor).toStrictEqual(
+        Color3.Red()
+      );
+    });
   });
 });

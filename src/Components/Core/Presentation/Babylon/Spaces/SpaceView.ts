@@ -69,8 +69,7 @@ export default class SpaceView implements ISpaceView {
     if (!this.viewModel.floorMesh.Value) {
       return;
     }
-    const floorMesh = this.viewModel.floorMesh.Value;
-    floorMesh.dispose();
+    this.viewModel.floorMesh.Value.dispose();
   }
 
   private cleanupOldPoles(): void {
@@ -85,7 +84,7 @@ export default class SpaceView implements ISpaceView {
     this.viewModel.cornerPoleMeshes.Value = [];
   }
 
-  public cleanupOldWalls(): void {
+  private cleanupOldWalls(): void {
     if (!this.viewModel.wallMeshes.Value) {
       this.viewModel.wallMeshes.Value = [];
       return;
