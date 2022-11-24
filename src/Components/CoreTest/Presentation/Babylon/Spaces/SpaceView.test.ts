@@ -10,6 +10,7 @@ import {
   StandardMaterial,
   Texture,
   Vector2,
+  Vector3,
 } from "@babylonjs/core";
 import { mock, mockDeep } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
@@ -282,6 +283,49 @@ describe("SpaceView", () => {
       expect(result).toBeInstanceOf(Mesh);
     });
 
+    test("createWallSegment calls MeshBuilder.CreateBox", () => {
+      const [systemUnderTest, ,] = createSystemUnderTest();
+      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
+
+      systemUnderTest["createWallSegment"](
+        new Vector2(0, 0),
+        new Vector2(1, 1)
+      );
+
+      expect(MeshBuilder.CreateBox).toBeCalledTimes(1);
+    });
+
+    test("createWallSegment calls scenePresenter.registerNavigationMesh with the new mesh", () => {
+      const [systemUnderTest, ,] = createSystemUnderTest();
+      const mockedMesh = mock<Mesh>();
+      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mockedMesh);
+
+      systemUnderTest["createWallSegment"](
+        new Vector2(0, 0),
+        new Vector2(1, 1)
+      );
+
+      expect(scenePresenterMock.registerNavigationMesh).toBeCalledTimes(1);
+      expect(scenePresenterMock.registerNavigationMesh).toBeCalledWith(
+        mockedMesh
+      );
+    });
+
+    test("createWallSegment applies the wall material to the new mesh", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      const mockedMesh = mock<Mesh>();
+      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mockedMesh);
+
+      systemUnderTest["createWallSegment"](
+        new Vector2(0, 0),
+        new Vector2(1, 1)
+      );
+
+      expect(mockedMesh.material).toStrictEqual(viewModel.wallMaterial.Value);
+    });
+
+    test.todo("createWallSegment sets position, rotation and length correctly");
+
     test("applyWallColor applies the color from the viewmodel to the wall texture", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.wallColor.Value = Color3.Red();
@@ -291,6 +335,57 @@ describe("SpaceView", () => {
       expect(viewModel.wallMaterial.Value.diffuseColor).toStrictEqual(
         Color3.Red()
       );
+    });
+
+    test("createCornerPoles creates 3 corner pole meshes when there are 3 corners", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      viewModel.spaceCornerPoints.Value = [
+        new Vector2(5.3, 4.3),
+        new Vector2(-5.3, 4.3),
+        new Vector2(-5.3, -4.3),
+      ];
+      jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
+      systemUnderTest["cleanupOldPoles"]();
+
+      systemUnderTest["createCornerPoles"]();
+
+      expect(viewModel.cornerPoleMeshes.Value).toHaveLength(3);
+    });
+
+    test("createPole returns a mesh", () => {
+      const [systemUnderTest, ,] = createSystemUnderTest();
+
+      const result = systemUnderTest["createPole"](new Vector2(0, 0));
+
+      expect(result).toBeInstanceOf(Mesh);
+    });
+
+    test("createPole calls MeshBuilder.CreateCylinder", () => {
+      const [systemUnderTest, ,] = createSystemUnderTest();
+      jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
+
+      systemUnderTest["createPole"](new Vector2(0, 0));
+
+      expect(MeshBuilder.CreateCylinder).toBeCalledTimes(1);
+    });
+
+    test("createPole applies the wall material to the new mesh", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      const mockedMesh = mock<Mesh>();
+      jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mockedMesh);
+
+      systemUnderTest["createPole"](new Vector2(0, 0));
+
+      expect(mockedMesh.material).toStrictEqual(viewModel.wallMaterial.Value);
+    });
+
+    test("createPole sets position correctly", () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      viewModel.baseHeight.Value = 2;
+
+      let result = systemUnderTest["createPole"](new Vector2(1, 3));
+
+      expect(result.position).toStrictEqual(new Vector3(1, 2, 3));
     });
   });
 });

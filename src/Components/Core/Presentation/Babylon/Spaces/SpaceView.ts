@@ -58,7 +58,7 @@ export default class SpaceView implements ISpaceView {
     this.cleanupOldPoles();
     this.cleanupOldFloor();
     this.createWalls();
-    this.createWallCornerPoles();
+    this.createCornerPoles();
     this.createFloor();
     this.applyWallColor();
 
@@ -182,7 +182,7 @@ export default class SpaceView implements ISpaceView {
         this.viewModel.wallColor.Value);
   }
 
-  private createWallCornerPoles(): void {
+  private createCornerPoles(): void {
     this.viewModel.spaceCornerPoints.Value.forEach((cornerPoint) => {
       this.viewModel.cornerPoleMeshes.Value.push(this.createPole(cornerPoint));
     });
@@ -206,10 +206,7 @@ export default class SpaceView implements ISpaceView {
     pole.position.z = corner.y;
 
     // apply wall material
-    pole.material = new StandardMaterial(
-      "wallMaterial",
-      this.scenePresenter.Scene
-    );
+    pole.material = this.viewModel.wallMaterial.Value;
 
     return pole;
   }
