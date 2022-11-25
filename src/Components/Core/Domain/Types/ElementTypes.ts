@@ -6,6 +6,3 @@ export enum ElementTypes {
 }
 
 export type ElementTypeStrings = keyof typeof ElementTypes;
-
-// The LearningElementType will be checked when they come from the backend
-export type ElementType = string;
