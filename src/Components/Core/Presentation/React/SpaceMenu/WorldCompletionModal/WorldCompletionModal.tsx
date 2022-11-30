@@ -32,14 +32,8 @@ export default function WorldCompletionModal() {
           <p className="mb-4">
             Du hast alle Lernräume erfolgreich abgeschlossen und somit die
             Lernwelt bestanden, herzlichen Glückwunsch! <br />
-            Bitte fülle jetzt hier den{" "}
-            <b className="text-adlerblue-900">
-              {" "}
-              <a href="https://ww3.unipark.de/uc/softwareengineeringadlerintern/">
-                Evaluationsfragebogen{" "}
-              </a>{" "}
-            </b>{" "}
-            aus!
+            Bitte nimm jetzt an der Evaluation teil, um uns Feedback zu geben.
+            Den Link findest du in der Anleitung.
           </p>
         </div>
       </div>
