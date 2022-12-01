@@ -16,7 +16,6 @@ import MoodleLoginButtonBuilder from "../../Presentation/React/WelcomePage/Moodl
 import BottomTooltipBuilder from "../../Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipBuilder";
 import DebugPanelBuilder from "../../Presentation/React/SpaceDisplay/DebugPanel/DebugPanelBuilder";
 import SpaceNamePanelBuilder from "../../Presentation/React/SpaceDisplay/SpaceNamePanel/SpaceNamePanelBuilder";
-import LoadSpaceButtonBuilder from "../../Presentation/React/GeneralComponents/LoadSpaceButton/LoadSpaceButtonBuilder";
 import FullscreenSwitchBuilder from "../../Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
 import SpaceGoalPanelBuilder from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanelBuilder";
 import HeaderBarBuilder from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBarBuilder";
@@ -63,9 +62,6 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IWorldNamePanelBuilder).to(
     SpaceNamePanelBuilder
-  );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ILoadSpaceButtonBuilder).to(
-    LoadSpaceButtonBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IFullscreenSwitchBuilder).to(
     FullscreenSwitchBuilder

@@ -1,11 +1,11 @@
 import { mock } from "jest-mock-extended";
-import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
+import CoreDIContainer from "../../src/Components/Core/DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "../../src/Components/Core/DependencyInjection/CoreTypes";
 import LoadSpaceButtonBuilder from "../../../../../Core/Presentation/React/GeneralComponents/LoadSpaceButton/LoadSpaceButtonBuilder";
 import LoadSpaceButtonController from "../../../../../Core/Presentation/React/GeneralComponents/LoadSpaceButton/LoadSpaceButtonController";
 import LoadSpaceButtonPresenter from "../../../../../Core/Presentation/React/GeneralComponents/LoadSpaceButton/LoadSpaceButtonPresenter";
 import LoadSpaceButtonViewModel from "../../../../../Core/Presentation/React/GeneralComponents/LoadSpaceButton/LoadSpaceButtonViewModel";
-import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
+import IViewModelControllerProvider from "../../src/Components/Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
 
