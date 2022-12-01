@@ -32,7 +32,7 @@ export default class DetailSectionPresenter implements IDetailSectionPresenter {
     }
   }
 
-  onSpaceDataLoaded(spaceTO: SpaceTO): void {
+  onSpaceLoaded(spaceTO: SpaceTO): void {
     this.viewModel.id.Value = spaceTO.id;
 
     this.viewModel.name.Value = spaceTO.name;

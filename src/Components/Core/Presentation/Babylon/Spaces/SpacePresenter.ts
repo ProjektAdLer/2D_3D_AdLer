@@ -31,7 +31,7 @@ export default class SpacePresenter implements ISpaceAdapter, ISpacePresenter {
     );
   }
 
-  onSpaceDataLoaded(spaceTO: SpaceTO): void {
+  onSpaceLoaded(spaceTO: SpaceTO): void {
     this.setViewModelData(spaceTO);
     this.createElements(spaceTO.elements);
     this.createDoor();

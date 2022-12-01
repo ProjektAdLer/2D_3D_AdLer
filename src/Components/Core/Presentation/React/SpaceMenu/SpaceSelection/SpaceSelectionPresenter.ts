@@ -7,7 +7,7 @@ export default class SpaceSelectionPresenter
   implements ISpaceSelectionPresenter
 {
   constructor(private viewModel: SpaceSelectionViewModel) {}
-  onSpaceDataLoaded(spaceTO: SpaceTO): void {}
+  onSpaceLoaded(spaceTO: SpaceTO): void {}
 
   onWorldLoaded(world: WorldTO): void {
     let newSpaces: [number, string, boolean, boolean][] = [];

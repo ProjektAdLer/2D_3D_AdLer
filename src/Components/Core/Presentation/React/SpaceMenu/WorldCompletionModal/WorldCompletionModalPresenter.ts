@@ -12,7 +12,7 @@ export default class WorldCompletionModalPresenter
     this.viewModel.spaceIDs.Value = world.spaces.map((space) => space.id);
   }
 
-  onSpaceDataLoaded(spaceTO: SpaceTO): void {}
+  onSpaceLoaded(spaceTO: SpaceTO): void {}
 
   onScoreChanged(
     score: number,

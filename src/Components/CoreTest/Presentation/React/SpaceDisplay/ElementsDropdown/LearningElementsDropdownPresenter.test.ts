@@ -21,6 +21,7 @@ describe("ElementsDropDownPresenter", () => {
         description: "",
         goals: "",
         type: "video",
+        hasScored: false,
       },
     ];
 
@@ -34,7 +35,7 @@ describe("ElementsDropDownPresenter", () => {
       requiredPoints: 0,
     };
 
-    systemUnderTest.onSpaceDataLoaded(spaceTO);
+    systemUnderTest.onSpaceLoaded(spaceTO);
     expect(vm.elements.Value).toBe(elements);
   });
 });

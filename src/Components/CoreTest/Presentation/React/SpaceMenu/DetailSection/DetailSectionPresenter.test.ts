@@ -50,7 +50,7 @@ describe("DetailSectionPresenter", () => {
       ],
     };
 
-    systemUnderTest.onSpaceDataLoaded(spaceTO);
+    systemUnderTest.onSpaceLoaded(spaceTO);
 
     systemUnderTest.onScoreChanged(3, 3, 0, 1);
 
@@ -93,7 +93,7 @@ describe("DetailSectionPresenter", () => {
       ],
     };
 
-    systemUnderTest.onSpaceDataLoaded(spaceTO);
+    systemUnderTest.onSpaceLoaded(spaceTO);
 
     expect(systemUnderTest["viewModel"].name.Value).toEqual(spaceTO.name);
     expect(systemUnderTest["viewModel"].elements.Value).toEqual([

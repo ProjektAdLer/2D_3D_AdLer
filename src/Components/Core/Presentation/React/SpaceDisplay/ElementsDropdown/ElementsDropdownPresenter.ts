@@ -15,7 +15,7 @@ export default class ElementsDropdownPresenter
     spaceID: number
   ): void {}
 
-  onSpaceDataLoaded(spaceTO: SpaceTO): void {
+  onSpaceLoaded(spaceTO: SpaceTO): void {
     this.viewModel.elementNames.Value = spaceTO.elements.map(
       (element) => element.name
     );

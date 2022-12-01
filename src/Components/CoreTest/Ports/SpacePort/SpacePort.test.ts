@@ -89,7 +89,7 @@ describe("SpacePort", () => {
     const spacePresenterMock = mock<SpacePresenter>();
     systemUnderTest.registerAdapter(spacePresenterMock);
 
-    systemUnderTest.onSpaceDataLoaded({
+    systemUnderTest.onSpaceLoaded({
       id: 1,
       name: "Space1",
       elements: [],
@@ -99,8 +99,8 @@ describe("SpacePort", () => {
       requirements: [],
     } as SpaceTO);
 
-    expect(spacePresenterMock.onSpaceDataLoaded).toHaveBeenCalledTimes(1);
-    expect(spacePresenterMock.onSpaceDataLoaded).toHaveBeenCalledWith({
+    expect(spacePresenterMock.onSpaceLoaded).toHaveBeenCalledTimes(1);
+    expect(spacePresenterMock.onSpaceLoaded).toHaveBeenCalledWith({
       id: 1,
       name: "Space1",
       elements: [],

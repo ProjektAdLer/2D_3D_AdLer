@@ -7,7 +7,7 @@ export default class SpaceCompletionModalPresenter
 {
   constructor(private viewModel: SpaceCompletionModalViewModel) {}
 
-  onSpaceDataLoaded(spaceTO: SpaceTO): void {}
+  onSpaceLoaded(spaceTO: SpaceTO): void {}
 
   onScoreChanged(
     score: number,

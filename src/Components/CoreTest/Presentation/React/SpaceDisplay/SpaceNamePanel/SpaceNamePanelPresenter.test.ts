@@ -23,7 +23,7 @@ describe("WorldNamePanel", () => {
       requiredPoints: 0,
     };
 
-    systemUnderTest.onSpaceDataLoaded(spaceTO);
+    systemUnderTest.onSpaceLoaded(spaceTO);
     expect(vm.name.Value).toEqual(testName);
   });
 });

@@ -9,9 +9,9 @@ export default class SpacePort
   extends AbstractPort<ISpaceAdapter>
   implements ISpacePort
 {
-  onSpaceDataLoaded(spaceTO: SpaceTO): void {
+  onSpaceLoaded(spaceTO: SpaceTO): void {
     this.adapters.forEach((adapter) => {
-      adapter.onSpaceDataLoaded(spaceTO);
+      adapter.onSpaceLoaded(spaceTO);
     });
   }
 

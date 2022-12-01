@@ -3,7 +3,7 @@ import { IAbstractPort } from "./../AbstractPort/IAbstractPort";
 import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
 
 export default interface ISpacePort extends IAbstractPort<ISpaceAdapter> {
-  onSpaceDataLoaded(spaceTO: SpaceTO): void;
+  onSpaceLoaded(spaceTO: SpaceTO): void;
   onScoreChanged(
     score: number,
     requiredScore: number,

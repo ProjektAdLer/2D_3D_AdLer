@@ -48,7 +48,7 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
       return Promise.reject("SpaceEntity with " + id + " not found");
     else {
       let spaceTO = this.toTO(spaceEntity);
-      this.spacePort.onSpaceDataLoaded(spaceTO);
+      this.spacePort.onSpaceLoaded(spaceTO);
       this.calculateSpaceScore.execute({ spaceId: spaceTO.id });
       return Promise.resolve(spaceTO);
     }

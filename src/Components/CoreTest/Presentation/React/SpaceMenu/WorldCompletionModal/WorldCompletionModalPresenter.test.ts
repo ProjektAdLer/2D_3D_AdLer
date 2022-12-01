@@ -34,7 +34,7 @@ describe("WorldCompletionModalPresenter", () => {
 
   test("should do nothing on Space Data Loaded", () => {
     const vmBefore = vm;
-    systemUnderTest.onSpaceDataLoaded(1);
+    systemUnderTest.onSpaceLoaded(1);
     expect(vm).toEqual(vmBefore);
   });
 

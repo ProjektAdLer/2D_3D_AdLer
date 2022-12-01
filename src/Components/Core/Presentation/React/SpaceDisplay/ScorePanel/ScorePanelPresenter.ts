@@ -14,5 +14,5 @@ export default class ScorePanelPresenter
     this.viewModel.maxScore.Value = maxScore;
   }
 
-  onSpaceDataLoaded(spaceTO: SpaceTO): void {}
+  onSpaceLoaded(spaceTO: SpaceTO): void {}
 }

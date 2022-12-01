@@ -22,7 +22,7 @@ describe("WorldGoalPanel", () => {
       requiredPoints: 0,
     };
 
-    systemUnderTest.onSpaceDataLoaded(spaceTO);
+    systemUnderTest.onSpaceLoaded(spaceTO);
 
     expect(vm.goal.Value).toEqual(goal);
   });

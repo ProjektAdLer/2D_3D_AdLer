@@ -82,7 +82,7 @@ describe("SpacePresenter", () => {
     const createDoorMock = jest.fn();
     systemUnderTest["createDoor"] = createDoorMock;
 
-    systemUnderTest.onSpaceDataLoaded(spaceTO);
+    systemUnderTest.onSpaceLoaded(spaceTO);
 
     expect(setViewModelDataMock).toHaveBeenCalledTimes(1);
     expect(createElementsMock).toHaveBeenCalledTimes(1);

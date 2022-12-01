@@ -15,7 +15,7 @@ export default class SpaceGoalPanelPresenter
     spaceID: number
   ): void {}
 
-  onSpaceDataLoaded(spaceTO: SpaceTO): void {
+  onSpaceLoaded(spaceTO: SpaceTO): void {
     this.viewModel.goal.Value = spaceTO.goals;
   }
 }

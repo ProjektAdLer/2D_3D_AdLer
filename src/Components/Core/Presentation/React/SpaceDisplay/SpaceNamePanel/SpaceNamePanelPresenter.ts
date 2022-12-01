@@ -16,7 +16,7 @@ export default class SpaceNamePanelPresenter
     spaceID: ElementID
   ): void {}
 
-  onSpaceDataLoaded(spaceTO: SpaceTO): void {
+  onSpaceLoaded(spaceTO: SpaceTO): void {
     this.viewModel.name.Value = spaceTO.name;
   }
 }
