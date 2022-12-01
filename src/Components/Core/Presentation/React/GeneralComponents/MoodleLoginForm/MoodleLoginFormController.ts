@@ -8,7 +8,7 @@ export default class MoodleLoginFormController
 {
   async loginAsync(username: string, password: string): Promise<void> {
     CoreDIContainer.get<ILoginMoodleUseCase>(
-      USECASE_TYPES.ILogUserIntoMoodleUseCase
+      USECASE_TYPES.ILoginMoodleUseCase
     ).executeAsync({
       username: username,
       password: password,

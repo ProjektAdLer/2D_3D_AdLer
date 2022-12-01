@@ -44,7 +44,7 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(CalculateSpaceScoreUseCase)
     .inSingletonScope();
 
-  bind<ILoginMoodleUseCase>(USECASE_TYPES.ILogUserIntoMoodleUseCase)
+  bind<ILoginMoodleUseCase>(USECASE_TYPES.ILoginMoodleUseCase)
     .to(LoginMoodleUseCase)
     .inSingletonScope();
 

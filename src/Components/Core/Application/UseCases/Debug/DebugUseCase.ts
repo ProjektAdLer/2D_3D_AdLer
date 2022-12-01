@@ -13,7 +13,7 @@ import IDebugUseCase from "./IDebugUseCase";
 @injectable()
 export default class DebugUseCase implements IDebugUseCase {
   constructor(
-    @inject(USECASE_TYPES.ILogUserIntoMoodleUseCase)
+    @inject(USECASE_TYPES.ILoginMoodleUseCase)
     private loginUsecase: ILoginMoodleUseCase,
     @inject(PORT_TYPES.IDebugPort)
     private debugPort: IDebugPort
