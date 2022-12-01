@@ -54,7 +54,7 @@ describe("WorldPort", () => {
     const worldAdapterMock = mock<IWorldAdapter>();
     systemUnderTest.registerAdapter(worldAdapterMock);
 
-    systemUnderTest.presentWorld(worldTO);
+    systemUnderTest.onWorldLoaded(worldTO);
 
     expect(worldAdapterMock.onWorldLoaded).toBeCalledWith(worldTO);
   });

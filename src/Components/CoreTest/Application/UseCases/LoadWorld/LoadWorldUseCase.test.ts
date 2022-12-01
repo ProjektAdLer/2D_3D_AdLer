@@ -167,6 +167,6 @@ describe("LoadWorldUseCase", () => {
 
     expect(backendMock.getWorldData).toHaveBeenCalledTimes(1);
     expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(3);
-    expect(worldPortMock.presentWorld).toHaveBeenCalledTimes(1);
+    expect(worldPortMock.onWorldLoaded).toHaveBeenCalledTimes(1);
   });
 });
