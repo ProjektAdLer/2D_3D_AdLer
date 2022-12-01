@@ -55,7 +55,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       worldEntity = await this.load(userData[0]);
     }
 
-    this.worldPort.presentWorld(this.toTO(worldEntity));
+    this.worldPort.onWorldLoaded(this.toTO(worldEntity));
 
     lock.release();
     return Promise.resolve(this.toTO(worldEntity));

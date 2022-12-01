@@ -9,7 +9,7 @@ export default class WorldPort
   extends AbstractPort<IWorldAdapter>
   implements IWorldPort
 {
-  public presentWorld(worldTO: WorldTO): void {
+  public onWorldLoaded(worldTO: WorldTO): void {
     this.adapters.forEach((adapter) => adapter.onWorldLoaded(worldTO));
   }
 }
