@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import ElementModalViewModel from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
-import NewH5PContent, {
+import H5PContent, {
   h5pEventCalled,
-} from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/NewH5PContent";
+} from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/H5PContent";
 import React from "react";
 import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
@@ -31,24 +31,24 @@ global.console = {
   // error: jest.fn(),
 };
 
-beforeAll(() => {
-  CoreDIContainer.snapshot();
-  CoreDIContainer.unbindAll();
-  CoreDIContainer.bind(USECASE_TYPES.IGetElementSource).toConstantValue(
-    sourceUseCaseMock
-  );
-  CoreDIContainer.bind(USECASE_TYPES.IScoreH5PElement).toConstantValue(
-    scoreH5PUseCaseMock
-  );
-  jest.spyOn(console, "error").mockImplementation(() => {});
-});
-
-afterAll(() => {
-  CoreDIContainer.restore();
-  jest.clearAllMocks();
-});
-
 describe("H5PContentView", () => {
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+    CoreDIContainer.unbindAll();
+    CoreDIContainer.bind(USECASE_TYPES.IGetElementSource).toConstantValue(
+      sourceUseCaseMock
+    );
+    CoreDIContainer.bind(USECASE_TYPES.IScoreH5PElement).toConstantValue(
+      scoreH5PUseCaseMock
+    );
+    jest.spyOn(console, "error").mockImplementation(() => {});
+  });
+
+  afterAll(() => {
+    CoreDIContainer.restore();
+    jest.clearAllMocks();
+  });
+
   test("should render", () => {
     sourceUseCaseMock.executeAsync.mockResolvedValue(
       "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel"
@@ -58,7 +58,7 @@ describe("H5PContentView", () => {
 
     const { container } = render(
       <Provider container={CoreDIContainer}>
-        <NewH5PContent viewModel={viewModel} />
+        <H5PContent viewModel={viewModel} />
       </Provider>
     );
 

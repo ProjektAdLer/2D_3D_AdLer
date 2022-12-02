@@ -21,7 +21,7 @@ jest.mock(
 );
 
 jest.mock(
-  "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/NewH5PContent",
+  "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/H5PContent",
   () => () => <div>Hello World</div>
 );
 
