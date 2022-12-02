@@ -11,15 +11,18 @@ import mock from "jest-mock-extended/lib/Mock";
 import IGetElementSourceUseCase from "../../../../../../Core/Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
 import { Provider } from "inversify-react";
 import IScoreH5PElement from "../../../../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
+import GetElementSourceUseCase from "../../../../../../Core/Application/UseCases/GetElementSourceUseCase/GetElementSourceUseCase";
 
 const viewModel = new ElementModalViewModel();
 viewModel.id.Value = 1;
 viewModel.parentCourseId.Value = 1;
+viewModel.filePath.Value = "test";
 
 jest.mock("h5p-standalone");
 
 const sourceUseCaseMock = mock<IGetElementSourceUseCase>();
 const scoreH5PUseCaseMock = mock<IScoreH5PElement>();
+const getElementSourceUseCaseMock = mock<GetElementSourceUseCase>();
 
 global.console = {
   ...console,
@@ -40,6 +43,9 @@ describe("H5PContentView", () => {
     );
     CoreDIContainer.bind(USECASE_TYPES.IScoreH5PElement).toConstantValue(
       scoreH5PUseCaseMock
+    );
+    CoreDIContainer.rebind(USECASE_TYPES.IGetElementSource).toConstantValue(
+      getElementSourceUseCaseMock
     );
     jest.spyOn(console, "error").mockImplementation(() => {});
   });

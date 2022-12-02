@@ -1,12 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { H5P as H5PPlayer } from "h5p-standalone";
 import ElementModalViewModel from "../ElementModalViewModel";
 import { config } from "../../../../../../../config";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import IScoreH5PElement from "src/Components/Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import { useInjection } from "inversify-react";
-import IGetElementSourceUseCase from "src/Components/Core/Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
 
 //TODOPG: This need to be stripped into a Controller. Until then, this code is ugly
 
@@ -60,10 +58,6 @@ export default function H5PContent({
 }) {
   const h5pContainerRef = useRef<HTMLDivElement>(null);
 
-  const getElementSourceUseCase = useInjection<IGetElementSourceUseCase>(
-    USECASE_TYPES.IGetElementSource
-  );
-
   useEffect(() => {
     const debug = async () => {
       if (h5pContainerRef.current) {
@@ -71,13 +65,12 @@ export default function H5PContent({
 
         let baseURL = config.serverURL.replace(/api\/?$/, "");
 
-        const filePath = await getElementSourceUseCase.executeAsync({
-          courseId: viewModel.parentCourseId.Value,
-          elementId: viewModel.id.Value,
-        });
-
         let h5pJsonURL =
-          baseURL + filePath.replaceAll("\\", "/").replaceAll("wwwroot/", "");
+          baseURL +
+          viewModel.filePath.Value.replaceAll("\\", "/").replaceAll(
+            "wwwroot/",
+            ""
+          );
 
         const options = {
           h5pJsonPath: h5pJsonURL,

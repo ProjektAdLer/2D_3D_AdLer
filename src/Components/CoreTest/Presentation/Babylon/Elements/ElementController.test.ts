@@ -43,14 +43,12 @@ describe("ElementController", () => {
     expect(uiPortMock.hideBottomTooltip).toHaveBeenCalledTimes(1);
   });
 
-  test("clicked calls IElementStartedUseCase.execute", () => {
+  test("clicked calls IElementStartedUseCase.executeAsync", () => {
     viewModel.id = 42;
 
     systemUnderTest.clicked();
 
-    expect(elementStartedUseCaseMock.execute).toHaveBeenCalledTimes(1);
-    expect(elementStartedUseCaseMock.execute).toHaveBeenCalledWith({
-      elementId: 42,
-    });
+    expect(elementStartedUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
+    expect(elementStartedUseCaseMock.executeAsync).toHaveBeenCalledWith(42);
   });
 });

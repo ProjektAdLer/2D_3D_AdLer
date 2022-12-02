@@ -1,35 +1,20 @@
-import { useInjection } from "inversify-react";
-import React, { useEffect, useState } from "react";
-import IGetElementSourceUseCase from "src/Components/Core/Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
-import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import { useEffect, useState } from "react";
 import ElementModalViewModel from "../ElementModalViewModel";
 
-const VideoComponent = ({
+export default function VideoComponent({
   viewModel,
 }: {
   viewModel: ElementModalViewModel;
-}) => {
+}) {
   const [videoUrl, setvideoUrl] = useState("second");
 
-  const getElementSourceUseCase = useInjection<IGetElementSourceUseCase>(
-    USECASE_TYPES.IGetElementSource
-  );
-
   useEffect(() => {
-    const debug = async () => {
-      const path = await getElementSourceUseCase.executeAsync({
-        courseId: viewModel.parentCourseId.Value,
-        elementId: viewModel.id.Value,
-      });
+    const regex =
+      /(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/;
+    const videoId = viewModel.filePath.Value.match(regex);
+    const test = videoId![0];
 
-      const regex =
-        /(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/;
-      const videoId = path.match(regex);
-      const test = videoId![0];
-
-      setvideoUrl(test.split("/")[1].split("=")[1]);
-    };
-    debug();
+    setvideoUrl(test.split("/")[1].split("=")[1]);
   }, []);
 
   return (
@@ -44,5 +29,4 @@ const VideoComponent = ({
       />
     </div>
   );
-};
-export default VideoComponent;
+}

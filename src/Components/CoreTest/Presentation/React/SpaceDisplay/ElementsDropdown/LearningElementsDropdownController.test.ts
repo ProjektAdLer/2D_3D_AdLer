@@ -27,9 +27,8 @@ describe("ElementsDropdownController", () => {
 
   test("should call the startElement UseCase", () => {
     systemUnderTest.startElement(1337);
-    expect(useCaseMock.execute).toHaveBeenCalledTimes(1);
-    expect(useCaseMock.execute).toHaveBeenCalledWith({
-      elementId: 1337,
-    });
+
+    expect(useCaseMock.executeAsync).toHaveBeenCalledTimes(1);
+    expect(useCaseMock.executeAsync).toHaveBeenCalledWith(1337);
   });
 });

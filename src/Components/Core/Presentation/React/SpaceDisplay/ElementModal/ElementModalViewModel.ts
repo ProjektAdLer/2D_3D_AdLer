@@ -6,6 +6,7 @@ export default class ElementModalViewModel {
   isOpen: Observable<boolean> = new Observable<boolean>(false);
   name: Observable<string> = new Observable<string>();
   type = new Observable<string>();
+  filePath = new Observable<string>();
 
   parentSpaceId = new Observable<ElementID>();
   parentCourseId = new Observable<ElementID>();

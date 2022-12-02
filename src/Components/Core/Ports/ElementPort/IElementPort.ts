@@ -6,7 +6,7 @@ import IElementPresenter from "../../Presentation/Babylon/Elements/IElementPrese
 export default interface IElementPort {
   addElementPresenter(elementPresenter: IElementPresenter): void;
 
-  startElementEditing(elementStartedTO: ElementTO): void;
+  onElementLoaded(elementStartedTO: ElementTO): void;
 
   registerModalPresenter(modalPresenter: IElementModalPresenter): void;
 

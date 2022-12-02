@@ -34,8 +34,6 @@ export default class ElementController implements IElementController {
   clicked(): void {
     CoreDIContainer.get<IElementStartedUseCase>(
       USECASE_TYPES.IElementStartedUseCase
-    ).execute({
-      elementId: this.viewModel.id,
-    });
+    ).executeAsync(this.viewModel.id);
   }
 }

@@ -46,7 +46,7 @@ describe("ElementPort", () => {
     expect(systemUnderTest["modalPresenter"]).not.toBeDefined();
 
     expect(() => {
-      systemUnderTest.startElementEditing({
+      systemUnderTest.onElementLoaded({
         id: 1,
         name: "test",
       } as ElementTO);
@@ -61,7 +61,7 @@ describe("ElementPort", () => {
     const elementModalPresenterMock = mock<IElementModalPresenter>();
     systemUnderTest.registerModalPresenter(elementModalPresenterMock);
 
-    systemUnderTest.startElementEditing(elementTO);
+    systemUnderTest.onElementLoaded(elementTO);
 
     expect(elementModalPresenterMock.presentElementModal).toHaveBeenCalledTimes(
       1

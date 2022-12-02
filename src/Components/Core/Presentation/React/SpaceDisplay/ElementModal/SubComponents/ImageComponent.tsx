@@ -1,7 +1,4 @@
-import { useInjection } from "inversify-react";
-import { useEffect, useState } from "react";
-import IGetElementSourceUseCase from "src/Components/Core/Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
-import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import { useState } from "react";
 import ElementModalViewModel from "../ElementModalViewModel";
 
 export default function ImageComponent({
@@ -9,23 +6,7 @@ export default function ImageComponent({
 }: {
   viewModel: ElementModalViewModel;
 }) {
-  const [imageUrl, setimageUrl] = useState("second");
-
-  const getElementSourceUseCase = useInjection<IGetElementSourceUseCase>(
-    USECASE_TYPES.IGetElementSource
-  );
-
-  useEffect(() => {
-    const debug = async () => {
-      const path = await getElementSourceUseCase.executeAsync({
-        courseId: viewModel.parentCourseId.Value,
-        elementId: viewModel.id.Value,
-      });
-
-      setimageUrl(path);
-    };
-    debug();
-  }, []);
+  const [imageUrl, setimageUrl] = useState(viewModel.filePath.Value);
 
   return (
     <div className="flex justify-center overflow-auto items-top max-h-[90vh] max-w-[90vw]">

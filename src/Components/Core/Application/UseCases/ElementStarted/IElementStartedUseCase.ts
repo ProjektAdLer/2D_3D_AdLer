@@ -1,6 +1,5 @@
-import { ISynchronousUsecase } from "../../Abstract/ISynchronousUsecase";
+import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
+import { IAsyncUsecase } from "../../Abstract/IAsyncUsecase";
 
 export default interface IElementStartedUseCase
-  extends ISynchronousUsecase<{ elementId: number }> {
-  execute(data?: { elementId: number }): void;
-}
+  extends IAsyncUsecase<ElementID, void> {}

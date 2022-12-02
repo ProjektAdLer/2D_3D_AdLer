@@ -12,5 +12,6 @@ export default class ElementModalPresenter implements IElementModalPresenter {
     this.viewModel.parentSpaceId.Value = elementTO.parentSpaceId;
     this.viewModel.parentCourseId.Value = elementTO.parentCourseId;
     this.viewModel.name.Value = elementTO.name;
+    this.viewModel.filePath.Value = elementTO.filePath ?? "";
   }
 }

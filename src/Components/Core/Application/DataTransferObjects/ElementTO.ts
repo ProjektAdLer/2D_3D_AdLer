@@ -11,4 +11,5 @@ export default class ElementTO {
   goals: string;
   type: ElementTypeStrings;
   hasScored: boolean;
+  filePath?: string;
 }

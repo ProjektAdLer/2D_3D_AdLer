@@ -13,30 +13,13 @@ import ElementModalViewModel from "../../../../../../Core/Presentation/React/Spa
 const sourceUseCase = mock<IGetElementSourceUseCase>();
 
 describe("VideoComponent", () => {
-  beforeAll(() => {
-    CoreDIContainer.snapshot();
-    CoreDIContainer.unbindAll();
-
-    //@ts-ignore
-    sourceUseCase["executeAsync"] = () =>
-      Promise.resolve(
-        "https://www.youtube.com/watch?v=UEJpDrXuP98&ab_channel=AbroadinJapan&token=46dd4cbdafda7fc864c8ce73aae3a897"
-      );
-
-    CoreDIContainer.bind<IGetElementSourceUseCase>(
-      USECASE_TYPES.IGetElementSource
-    ).toConstantValue(sourceUseCase);
-  });
-
-  afterAll(() => {
-    CoreDIContainer.restore();
-  });
-
-  it("should render", async () => {
+  test("should render", async () => {
     let component: RenderResult;
     const vm = new ElementModalViewModel();
     vm.parentCourseId.Value = 1;
     vm.id.Value = 1;
+    vm.filePath.Value =
+      "https://www.youtube.com/watch?v=UEJpDrXuP98&ab_channel=AbroadinJapan&token=46dd4cbdafda7fc864c8ce73aae3a897";
 
     await act(async () => {
       component = render(

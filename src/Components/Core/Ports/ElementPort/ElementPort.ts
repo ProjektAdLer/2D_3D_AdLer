@@ -17,7 +17,7 @@ export default class ElementPort implements IElementPort {
     this.elementPresenters.push(elementPresenter);
   }
 
-  startElementEditing(elementStartedTO: ElementTO): void {
+  onElementLoaded(elementStartedTO: ElementTO): void {
     if (!this.modalPresenter) {
       throw new Error("ElementModalPresenter is not registered.");
     }

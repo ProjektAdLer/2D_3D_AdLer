@@ -10,8 +10,6 @@ export default class ElementsDropdownController
   startElement(elementId: ElementID): void {
     CoreDIContainer.get<IElementStartedUseCase>(
       USECASE_TYPES.IElementStartedUseCase
-    ).execute({
-      elementId: elementId,
-    });
+    ).executeAsync(elementId);
   }
 }
