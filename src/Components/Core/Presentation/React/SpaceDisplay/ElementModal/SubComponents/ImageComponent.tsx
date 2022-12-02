@@ -1,4 +1,4 @@
-import { useState } from "react";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import ElementModalViewModel from "../ElementModalViewModel";
 
 export default function ImageComponent({
@@ -6,7 +6,7 @@ export default function ImageComponent({
 }: {
   viewModel: ElementModalViewModel;
 }) {
-  const [imageUrl, setimageUrl] = useState(viewModel.filePath.Value);
+  const [imageUrl] = useObservable(viewModel.filePath);
 
   return (
     <div className="flex justify-center overflow-auto items-top max-h-[90vh] max-w-[90vw]">
