@@ -53,7 +53,7 @@ export const h5pEventCalled = (
   }
 };
 
-export default function NewH5PContent({
+export default function H5PContent({
   viewModel,
 }: {
   viewModel: ElementModalViewModel;
