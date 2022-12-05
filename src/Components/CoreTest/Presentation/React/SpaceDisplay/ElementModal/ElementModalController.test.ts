@@ -4,6 +4,7 @@ import IScoreElementUseCase from "../../../../../Core/Application/UseCases/Score
 import IScoreH5PElement from "../../../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import { ElementTypes } from "../../../../../Core/Domain/Types/ElementTypes";
 import ElementModalViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
 
 const scoreElementUseCaseMock = mock<IScoreElementUseCase>();
@@ -11,6 +12,7 @@ const scoreH5PUseCaseMock = mock<IScoreH5PElement>();
 
 describe("ElementModalController", () => {
   let systemUnderTest: ElementModalController;
+  let viewModel: ElementModalViewModel;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -23,7 +25,8 @@ describe("ElementModalController", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new ElementModalController(new ElementModalViewModel());
+    viewModel = new ElementModalViewModel();
+    systemUnderTest = new ElementModalController(viewModel);
   });
 
   afterAll(() => {
@@ -31,6 +34,8 @@ describe("ElementModalController", () => {
   });
 
   test("scoreElement calls the ScoreElementUseCase", async () => {
+    viewModel.type.Value = ElementTypes.image;
+
     await systemUnderTest.scoreElement(1, 1);
 
     expect(scoreElementUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
