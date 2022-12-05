@@ -1,17 +1,15 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import ElementModalViewModel from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
-import H5PContent, {
-  h5pEventCalled,
-} from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/H5PContent";
+import H5PContent from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/SubComponents/H5PContent";
 import React from "react";
 import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import mock from "jest-mock-extended/lib/Mock";
 import IGetElementSourceUseCase from "../../../../../../Core/Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
 import { Provider } from "inversify-react";
-import IScoreH5PElement from "../../../../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
 import GetElementSourceUseCase from "../../../../../../Core/Application/UseCases/GetElementSourceUseCase/GetElementSourceUseCase";
+import IElementModalController from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/IElementModalController";
 
 const viewModel = new ElementModalViewModel();
 viewModel.id.Value = 1;
@@ -21,8 +19,8 @@ viewModel.filePath.Value = "test";
 jest.mock("h5p-standalone");
 
 const sourceUseCaseMock = mock<IGetElementSourceUseCase>();
-const scoreH5PUseCaseMock = mock<IScoreH5PElement>();
 const getElementSourceUseCaseMock = mock<GetElementSourceUseCase>();
+const elementModalControllerMock = mock<IElementModalController>();
 
 global.console = {
   ...console,
@@ -40,9 +38,6 @@ describe("H5PContentView", () => {
     CoreDIContainer.unbindAll();
     CoreDIContainer.bind(USECASE_TYPES.IGetElementSource).toConstantValue(
       sourceUseCaseMock
-    );
-    CoreDIContainer.bind(USECASE_TYPES.IScoreH5PElement).toConstantValue(
-      scoreH5PUseCaseMock
     );
     CoreDIContainer.rebind(USECASE_TYPES.IGetElementSource).toConstantValue(
       getElementSourceUseCaseMock
@@ -64,70 +59,13 @@ describe("H5PContentView", () => {
 
     const { container } = render(
       <Provider container={CoreDIContainer}>
-        <H5PContent viewModel={viewModel} />
+        <H5PContent
+          viewModel={viewModel}
+          controller={elementModalControllerMock}
+        />
       </Provider>
     );
 
     console.error = oldError;
-  });
-
-  test("should handle a xapi call with a statement", () => {
-    h5pEventCalled(
-      {
-        data: {
-          statement: {
-            verb: {
-              id: "http://adlnet.gov/expapi/verbs/answered",
-            },
-            result: {
-              success: true,
-            },
-          },
-        },
-      },
-      viewModel
-    );
-
-    expect(scoreH5PUseCaseMock.executeAsync).toBeCalledWith({
-      xapiData: {
-        verb: {
-          id: "http://adlnet.gov/expapi/verbs/answered",
-        },
-        result: {
-          success: false,
-        },
-      },
-      elementId: 1,
-      courseId: 1,
-    });
-  });
-
-  test("should not call useCase with invalid data", () => {
-    h5pEventCalled(
-      {
-        data: {},
-      },
-      viewModel
-    );
-
-    expect(scoreH5PUseCaseMock.executeAsync).not.toHaveBeenCalled();
-  });
-
-  test("should not call usecase with invalid h5p verb", () => {
-    h5pEventCalled(
-      {
-        data: {
-          statement: {
-            verb: {},
-            result: {
-              success: true,
-            },
-          },
-        },
-      },
-      viewModel
-    );
-
-    expect(scoreH5PUseCaseMock.executeAsync).not.toHaveBeenCalled();
   });
 });
