@@ -38,6 +38,20 @@ describe("Element Started Usecase", () => {
     CoreDIContainer.restore();
   });
 
+  test("calls executeAsync on the GetElementUseCase", () => {
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      {
+        id: 1,
+      },
+    ]);
+    entityContainerMock.getEntitiesOfType.mockReturnValue([{}]);
+    getElementSourceUseCaseMock.executeAsync.mockResolvedValue("path");
+
+    systemUnderTest.executeAsync(1);
+
+    expect(getElementSourceUseCaseMock.executeAsync).toBeCalledTimes(1);
+  });
+
   test("calls the port with the TO", async () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
@@ -58,7 +72,57 @@ describe("Element Started Usecase", () => {
   test("should throw, if the Element is not found", async () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 
-    await expect(systemUnderTest.executeAsync(2)).rejects.toThrow();
+    await expect(systemUnderTest.executeAsync(2)).rejects.toThrow(
+      "Could not find element"
+    );
+  });
+
+  test("should throw, if more than one Element is found", async () => {
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      {
+        id: 1,
+      },
+      {
+        id: 1,
+      },
+    ]);
+
+    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
+      "Found more than one element"
+    );
+  });
+
+  test("should throw, if the course is not found", async () => {
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      {
+        id: 1,
+      },
+    ]);
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([]);
+
+    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
+      "Could not find any world"
+    );
+  });
+
+  test("should throw, if more than one course is found", async () => {
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      {
+        id: 1,
+      },
+    ]);
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
+      {
+        id: 1,
+      },
+      {
+        id: 1,
+      },
+    ]);
+
+    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
+      "Found more than one world"
+    );
   });
 
   test("filter Callback should return a boolean", async () => {

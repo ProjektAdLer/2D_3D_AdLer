@@ -21,16 +21,16 @@ export default class ElementStartedUseCase implements IElementStartedUseCase {
     private getElementSourceUseCase: GetElementSourceUseCase
   ) {}
 
-  async executeAsync(data: number): Promise<void> {
+  async executeAsync(elementID: number): Promise<void> {
     const entity = this.entityContainer.filterEntitiesOfType<ElementEntity>(
       ElementEntity,
-      (e) => e.id === data
+      (e) => e.id === elementID
     );
 
     if (entity.length === 0)
-      throw new Error(`Could not find element with id ${data}`);
+      throw new Error(`Could not find element with id ${elementID}`);
     else if (entity.length > 1)
-      throw new Error(`Found more than one element with id ${data}`);
+      throw new Error(`Found more than one element with id ${elementID}`);
 
     const course =
       this.entityContainer.getEntitiesOfType<WorldEntity>(WorldEntity);
@@ -43,7 +43,7 @@ export default class ElementStartedUseCase implements IElementStartedUseCase {
     let elementTO = this.toTO(entity[0]);
 
     elementTO.filePath = await this.getElementSourceUseCase.executeAsync({
-      elementId: data,
+      elementId: elementID,
       courseId: course[0].worldID,
     });
 
