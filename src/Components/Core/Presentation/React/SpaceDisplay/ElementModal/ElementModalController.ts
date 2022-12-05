@@ -1,4 +1,5 @@
 import IScoreH5PElement from "src/Components/Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
+import { ElementTypes } from "src/Components/Core/Domain/Types/ElementTypes";
 import IScoreElementUseCase from "../../../../Application/UseCases/ScoreElement/IScoreElementUseCase";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPES";
@@ -10,12 +11,14 @@ export default class ElementModalController implements IElementModalController {
   constructor(private viewModel: ElementModalViewModel) {}
 
   async scoreElement(elementId: ElementID, courseId: ElementID): Promise<void> {
-    await CoreDIContainer.get<IScoreElementUseCase>(
-      USECASE_TYPES.IScoreElementUseCase
-    ).executeAsync({
-      elementId: elementId,
-      courseId: courseId,
-    });
+    if (this.viewModel.type.Value !== ElementTypes.h5p) {
+      await CoreDIContainer.get<IScoreElementUseCase>(
+        USECASE_TYPES.IScoreElementUseCase
+      ).executeAsync({
+        elementId: elementId,
+        courseId: courseId,
+      });
+    }
   }
 
   async h5pEventCalled(event: any): Promise<void> {
