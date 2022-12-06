@@ -1,4 +1,7 @@
 import {
+  EventState,
+  KeyboardEventTypes,
+  KeyboardInfo,
   LinesMesh,
   MeshBuilder,
   PointerEventTypes,
@@ -30,14 +33,61 @@ export default class AvatarController implements IAvatarController {
     this.scenePresenter = scenePresenterFactory(SpaceSceneDefinition);
 
     this.scenePresenter.Scene.onPointerObservable.add(this.processPointerEvent);
+    this.scenePresenter.Scene.onKeyboardObservable.add(
+      this.processKeyboardEvent
+    );
+  }
+
+  @bind
+  private processKeyboardEvent(
+    eventData: KeyboardInfo,
+    eventState: EventState
+  ) {
+    if (eventData.type === KeyboardEventTypes.KEYDOWN) {
+      let move = this.navigation.Plugin.getClosestPoint(
+        this.viewModel.parentNode.Value.position.add(
+          this.viewModel.parentNode.Value.forward
+        )
+      );
+      console.log(move);
+
+      switch (eventData.event.key) {
+        case "w":
+          // this.navigation.Crowd.agentGoto(
+          //   this.viewModel.agentIndex,
+          //   this.navigation.Plugin.getClosestPoint(
+          //     this.viewModel.parentNode.Value.position.add(
+          //       this.viewModel.parentNode.Value.forward
+          //     )
+          //   )
+          // );
+          break;
+      }
+
+      // debug: draw path line
+      if (config.isDebug === true) {
+        let pathPoints = this.navigation.Plugin.computePath(
+          this.navigation.Crowd.getAgentPosition(this.viewModel.agentIndex),
+          this.navigation.Plugin.getClosestPoint(
+            this.viewModel.parentNode.Value.position.add(
+              this.viewModel.parentNode.Value.forward
+            )
+          )
+        );
+        this.pathLine = MeshBuilder.CreateDashedLines(
+          "navigation path",
+          { points: pathPoints, updatable: true, instance: this.pathLine },
+          this.scenePresenter.Scene
+        );
+      }
+    }
   }
 
   @bind
   private processPointerEvent(pointerInfo: PointerInfo) {
     // quit if not right mouse button down or if no mesh was hit
     if (
-      pointerInfo.type !== PointerEventTypes.POINTERDOWN ||
-      pointerInfo.event.button !== 2 ||
+      pointerInfo.type !== PointerEventTypes.POINTERTAP ||
       pointerInfo.pickInfo === null ||
       pointerInfo.pickInfo.pickedPoint === null
     )

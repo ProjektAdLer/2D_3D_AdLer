@@ -33,13 +33,11 @@ Object.defineProperty(navigationMock, "Crowd", { value: crowdMock });
 
 // creates a new PointerInfo object with given paramters for use in testing
 function setupMockedPointerInfo(
-  type: number,
-  button: number,
-  isPickInfoNull: boolean,
-  pickedPoint: Vector3 | null
+  type: number = PointerEventTypes.POINTERTAP,
+  isPickInfoNull: boolean = false,
+  pickedPoint: Vector3 | null = new Vector3(0, 0, 0)
 ): PointerInfo {
   const mouseEventMock = mock<IMouseEvent>();
-  mouseEventMock.button = button;
 
   let pickInfoMock: PickingInfo | null;
   if (!isPickInfoNull) {
@@ -89,7 +87,6 @@ describe("AvatarController", () => {
   test("processPointerEvent returns when pointer event type isn't POINTERDOWN", () => {
     let invalidPointerInfo = setupMockedPointerInfo(
       PointerEventTypes.POINTERMOVE,
-      0,
       false,
       new Vector3(0, 0, 0)
     );
@@ -103,7 +100,6 @@ describe("AvatarController", () => {
   test("processPointerEvent returns when pointer event button isnt 2 (right mouse button)", () => {
     let invalidPointerInfo = setupMockedPointerInfo(
       PointerEventTypes.POINTERDOWN,
-      1,
       false,
       new Vector3(0, 0, 0)
     );
@@ -117,7 +113,6 @@ describe("AvatarController", () => {
   test("processPointerEvent returns when pickInfo is null", () => {
     let invalidPointerInfo = setupMockedPointerInfo(
       PointerEventTypes.POINTERDOWN,
-      2,
       true,
       new Vector3(0, 0, 0)
     );
@@ -146,12 +141,7 @@ describe("AvatarController", () => {
     // prevent execution of debug code
     config.isDebug = false;
 
-    const pointerInfo = setupMockedPointerInfo(
-      PointerEventTypes.POINTERDOWN,
-      2,
-      false,
-      new Vector3(0, 0, 0)
-    );
+    const pointerInfo = setupMockedPointerInfo();
 
     systemUnderTest["processPointerEvent"](pointerInfo);
 
@@ -162,12 +152,7 @@ describe("AvatarController", () => {
   test("processPointerEvent computes a path and draws it when config.isDebug is set true", () => {
     config.isDebug = true;
 
-    const pointerInfo = setupMockedPointerInfo(
-      PointerEventTypes.POINTERDOWN,
-      2,
-      false,
-      new Vector3(0, 0, 0)
-    );
+    const pointerInfo = setupMockedPointerInfo();
 
     systemUnderTest["processPointerEvent"](pointerInfo);
 
