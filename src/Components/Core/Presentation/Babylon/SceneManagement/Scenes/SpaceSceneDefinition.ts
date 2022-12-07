@@ -23,6 +23,7 @@ import type IPresentationBuilder from "../../../PresentationBuilder/IPresentatio
 import type INavigation from "../../Navigation/INavigation";
 import ISpacePresenter from "../../Spaces/ISpacePresenter";
 import history from "history/browser";
+import AvatarCameraViewModel from "../../AvatarCamera/AvatarCameraViewModel";
 
 @injectable()
 export default class SpaceSceneDefinition extends AbstractSceneDefinition {
@@ -39,11 +40,12 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
     private avatarBuilder: IPresentationBuilder,
     @inject(CORE_TYPES.INavigation)
     private navigation: INavigation,
-
     @inject(USECASE_TYPES.ILoadSpaceUseCase)
     private loadSpaceUseCase: ILoadSpaceUseCase,
     @inject(USECASE_TYPES.ILoadAvatarUseCase)
-    private loadAvatarUseCase: ILoadAvatarUseCase
+    private loadAvatarUseCase: ILoadAvatarUseCase,
+    @inject(BUILDER_TYPES.IAvatarCameraBuilder)
+    private avatarCameraBuilder: IPresentationBuilder
   ) {
     super();
   }
@@ -69,7 +71,10 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
     // create avatar
     this.avatarParentNode = new TransformNode("AvatarParentNode", this.scene);
     this.director.build(this.avatarBuilder);
-    this.createAvatarCamera();
+    this.director.build(this.avatarCameraBuilder);
+    (
+      this.avatarCameraBuilder.getViewModel() as AvatarCameraViewModel
+    ).parentNode.Value = this.avatarParentNode;
 
     // initialize navigation for the room
     this.navigation.setupNavigation();
@@ -88,36 +93,5 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
   private parseSpaceIdFromLocation(): number {
     // TODO: make extraction of the space ID more reliable
     return Number.parseInt(history.location.pathname.split("/")[2]);
-  }
-
-  private createAvatarCamera(): void {
-    // Set FollowCamera to follow the avatar (~FK):
-    let camera = new ArcRotateCamera(
-      "AvatarCamera",
-      Math.PI / 4,
-      Math.PI / 4,
-      20,
-      this.avatarParentNode.position,
-      this.scene
-    );
-
-    // add camera zoom
-    camera.lowerRadiusLimit = 5;
-    camera.upperRadiusLimit = 30;
-    camera.inputs.attached.mousewheel.attachControl();
-    (
-      camera.inputs.attached.mousewheel as ArcRotateCameraMouseWheelInput
-    ).wheelDeltaPercentage = 0.01;
-
-    // add camera rotation
-    camera.upperBetaLimit = Math.PI / 2;
-    camera.inputs.attached.pointers.attachControl();
-    // only rotate with the left mouse button (index: 0)
-    (camera.inputs.attached.pointers as ArcRotateCameraPointersInput).buttons =
-      [0];
-
-    // set camera parent
-    camera.parent = this.avatarParentNode;
-    this.scene.activeCamera = camera;
   }
 }

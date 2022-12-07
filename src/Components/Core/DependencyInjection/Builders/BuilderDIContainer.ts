@@ -26,6 +26,7 @@ import WorldCompletionModalBuilder from "~ReactComponents/SpaceMenu/WorldComplet
 import MenuBarBuilder from "~ReactComponents/GeneralComponents/MenuBar/MenuBarBuilder";
 import UseGuideBuilder from "~ReactComponents/SpaceDisplay/UseGuide/UseGuideBuilder";
 import WorldMenuButtonBuilder from "~ReactComponents/WelcomePage/WorldMenuButton/WorldMenuButtonBuilder";
+import AvatarCameraBuilder from "../../Presentation/Babylon/AvatarCamera/AvatarCameraBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -90,6 +91,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IWorldMenuButtonBuilder).to(
     WorldMenuButtonBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarCameraBuilder).to(
+    AvatarCameraBuilder
   );
 });
 

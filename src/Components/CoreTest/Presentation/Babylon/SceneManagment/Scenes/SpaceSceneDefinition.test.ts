@@ -16,6 +16,7 @@ import ISpacePresenter from "../../../../../Core/Presentation/Babylon/Spaces/ISp
 import IPresentationBuilder from "../../../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
 import history from "history/browser";
+import AvatarCameraViewModel from "../../../../../Core/Presentation/Babylon/AvatarCamera/AvatarCameraViewModel";
 
 const presentationDirectorMock = mock<IPresentationDirector>();
 const presentationBuilderMock = mock<IPresentationBuilder>();
@@ -37,6 +38,9 @@ describe("SpaceScene", () => {
       presentationBuilderMock
     );
     CoreDIContainer.rebind(BUILDER_TYPES.IAvatarBuilder).toConstantValue(
+      presentationBuilderMock
+    );
+    CoreDIContainer.rebind(BUILDER_TYPES.IAvatarCameraBuilder).toConstantValue(
       presentationBuilderMock
     );
     CoreDIContainer.rebind(CORE_TYPES.INavigation).toConstantValue(
@@ -67,6 +71,9 @@ describe("SpaceScene", () => {
     presentationBuilderMock.getPresenter.mockReturnValue(
       mock<ISpacePresenter>()
     );
+    presentationBuilderMock.getViewModel.mockReturnValue(
+      new AvatarCameraViewModel()
+    );
 
     expect(
       async () => await systemUnderTest["initializeScene"]()
@@ -75,6 +82,9 @@ describe("SpaceScene", () => {
 
   test("initializeScene calls the LoadSpace use case", async () => {
     systemUnderTest["scene"] = new Scene(new NullEngine());
+    presentationBuilderMock.getViewModel.mockReturnValue(
+      new AvatarCameraViewModel()
+    );
 
     await systemUnderTest["initializeScene"]();
 

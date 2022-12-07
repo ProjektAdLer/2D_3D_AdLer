@@ -24,6 +24,7 @@ const BUILDER_TYPES = {
   IMenuBarBuilder: Symbol("IMenuBarBuilder"),
   IUseGuideBuilder: Symbol("IUseGuideBuilder"),
   IWorldMenuButtonBuilder: Symbol("IWorldMenuButtonBuilder"),
+  IAvatarCameraBuilder: Symbol("IAvatarCameraBuilder"),
 };
 
 export default BUILDER_TYPES;

@@ -44,23 +44,22 @@ export default class AvatarController implements IAvatarController {
     eventState: EventState
   ) {
     if (eventData.type === KeyboardEventTypes.KEYDOWN) {
-      let move = this.navigation.Plugin.getClosestPoint(
-        this.viewModel.parentNode.Value.position.add(
-          this.viewModel.parentNode.Value.forward
-        )
-      );
-      console.log(move);
+      // let move = this.navigation.Plugin.getClosestPoint(
+      //   this.viewModel.parentNode.Value.position.add(
+      //     this.viewModel.parentNode.Value.forward
+      //   )
+      // );
 
       switch (eventData.event.key) {
         case "w":
-          // this.navigation.Crowd.agentGoto(
-          //   this.viewModel.agentIndex,
-          //   this.navigation.Plugin.getClosestPoint(
-          //     this.viewModel.parentNode.Value.position.add(
-          //       this.viewModel.parentNode.Value.forward
-          //     )
-          //   )
-          // );
+          this.navigation.Crowd.agentGoto(
+            this.viewModel.agentIndex,
+            this.navigation.Plugin.getClosestPoint(
+              this.viewModel.parentNode.Value.position.add(
+                this.viewModel.parentNode.Value.forward
+              )
+            )
+          );
           break;
       }
 
