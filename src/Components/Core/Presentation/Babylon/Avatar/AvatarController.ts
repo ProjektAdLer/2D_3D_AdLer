@@ -1,4 +1,6 @@
 import {
+  ArcRotateCamera,
+  Camera,
   EventState,
   KeyboardEventTypes,
   KeyboardInfo,
@@ -6,8 +8,12 @@ import {
   MeshBuilder,
   PointerEventTypes,
   PointerInfo,
+  TransformNode,
+  Vector3,
 } from "@babylonjs/core";
 import bind from "bind-decorator";
+import { listMetadataForTarget } from "inversify/lib/utils/serialization";
+import { logger } from "src/Lib/Logger";
 import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
@@ -19,6 +25,8 @@ import IScenePresenter from "../SceneManagement/IScenePresenter";
 import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
+
+const validKeys = ["w", "a", "s", "d"];
 
 export default class AvatarController implements IAvatarController {
   private scenePresenter: IScenePresenter;
@@ -36,6 +44,36 @@ export default class AvatarController implements IAvatarController {
     this.scenePresenter.Scene.onKeyboardObservable.add(
       this.processKeyboardEvent
     );
+    this.scenePresenter.Scene.onBeforeRenderObservable.add(this.applyInputs);
+  }
+
+  @bind
+  private applyInputs(): void {
+    if (!this.viewModel.keyMovementTarget.equals(Vector3.Zero())) {
+      this.navigation.Crowd.agentGoto(
+        this.viewModel.agentIndex,
+        this.navigation.Plugin.getClosestPoint(
+          this.viewModel.parentNode.Value.position.add(
+            this.viewModel.keyMovementTarget
+          )
+        )
+      );
+
+      this.debug_drawPath(this.viewModel.keyMovementTarget);
+
+      this.viewModel.keyMovementTarget = Vector3.Zero();
+    } else if (!this.viewModel.pointerMovementTarget.equals(Vector3.Zero())) {
+      this.navigation.Crowd.agentGoto(
+        this.viewModel.agentIndex,
+        this.navigation.Plugin.getClosestPoint(
+          this.viewModel.pointerMovementTarget
+        )
+      );
+
+      this.debug_drawPath(this.viewModel.pointerMovementTarget);
+
+      this.viewModel.pointerMovementTarget = Vector3.Zero();
+    }
   }
 
   @bind
@@ -43,43 +81,35 @@ export default class AvatarController implements IAvatarController {
     eventData: KeyboardInfo,
     eventState: EventState
   ) {
-    if (eventData.type === KeyboardEventTypes.KEYDOWN) {
-      // let move = this.navigation.Plugin.getClosestPoint(
-      //   this.viewModel.parentNode.Value.position.add(
-      //     this.viewModel.parentNode.Value.forward
-      //   )
-      // );
+    if (
+      eventData.type !== KeyboardEventTypes.KEYDOWN ||
+      !validKeys.includes(eventData.event.key)
+    )
+      return;
 
-      switch (eventData.event.key) {
-        case "w":
-          this.navigation.Crowd.agentGoto(
-            this.viewModel.agentIndex,
-            this.navigation.Plugin.getClosestPoint(
-              this.viewModel.parentNode.Value.position.add(
-                this.viewModel.parentNode.Value.forward
-              )
-            )
-          );
-          break;
-      }
+    logger.log("key pressed: " + eventData.event.key);
 
-      // debug: draw path line
-      if (config.isDebug === true) {
-        let pathPoints = this.navigation.Plugin.computePath(
-          this.navigation.Crowd.getAgentPosition(this.viewModel.agentIndex),
-          this.navigation.Plugin.getClosestPoint(
-            this.viewModel.parentNode.Value.position.add(
-              this.viewModel.parentNode.Value.forward
-            )
-          )
-        );
-        this.pathLine = MeshBuilder.CreateDashedLines(
-          "navigation path",
-          { points: pathPoints, updatable: true, instance: this.pathLine },
-          this.scenePresenter.Scene
-        );
-      }
+    this.viewModel.keyMovementTarget = this.viewModel.keyMovementTarget
+      .add(
+        this.viewModel.parentNode.Value.getChildren<ArcRotateCamera>()![0]
+          .getDirection(this.getReferenceAxisByKey(eventData.event.key))
+          .normalize()
+      )
+      .normalize();
+  }
+
+  private getReferenceAxisByKey(key: string): Vector3 {
+    switch (key) {
+      case "w":
+        return Vector3.Up();
+      case "a":
+        return Vector3.Left();
+      case "s":
+        return Vector3.Down();
+      case "d":
+        return Vector3.Right();
     }
+    return Vector3.Zero();
   }
 
   @bind
@@ -92,23 +122,20 @@ export default class AvatarController implements IAvatarController {
     )
       return;
 
-    // set target in navigation crowd
-    this.navigation.Crowd.agentGoto(
-      this.viewModel.agentIndex,
-      this.navigation.Plugin.getClosestPoint(pointerInfo.pickInfo.pickedPoint)
-    );
+    this.viewModel.pointerMovementTarget = pointerInfo.pickInfo.pickedPoint;
+  }
 
-    // debug: draw path line
-    if (config.isDebug === true) {
-      let pathPoints = this.navigation.Plugin.computePath(
-        this.navigation.Crowd.getAgentPosition(this.viewModel.agentIndex),
-        this.navigation.Plugin.getClosestPoint(pointerInfo.pickInfo.pickedPoint)
-      );
-      this.pathLine = MeshBuilder.CreateDashedLines(
-        "navigation path",
-        { points: pathPoints, updatable: true, instance: this.pathLine },
-        this.scenePresenter.Scene
-      );
-    }
+  private debug_drawPath(target: Vector3): void {
+    if (config.isDebug === false) return;
+
+    let pathPoints = this.navigation.Plugin.computePath(
+      this.navigation.Crowd.getAgentPosition(this.viewModel.agentIndex),
+      this.navigation.Plugin.getClosestPoint(target)
+    );
+    this.pathLine = MeshBuilder.CreateDashedLines(
+      "navigation path",
+      { points: pathPoints, updatable: true, instance: this.pathLine },
+      this.scenePresenter.Scene
+    );
   }
 }

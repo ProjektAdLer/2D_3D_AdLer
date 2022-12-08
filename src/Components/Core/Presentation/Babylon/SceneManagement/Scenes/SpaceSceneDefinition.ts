@@ -4,16 +4,12 @@ import {
   HemisphericLight,
   Color4,
   HighlightLayer,
-  ArcRotateCamera,
-  ArcRotateCameraMouseWheelInput,
-  ArcRotateCameraPointersInput,
   TransformNode,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
 import bind from "bind-decorator";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type ILoadSpaceUseCase from "src/Components/Core/Application/UseCases/LoadSpace/ILoadSpaceUseCase";
@@ -27,7 +23,6 @@ import AvatarCameraViewModel from "../../AvatarCamera/AvatarCameraViewModel";
 
 @injectable()
 export default class SpaceSceneDefinition extends AbstractSceneDefinition {
-  private spaceTO: SpaceTO;
   private avatarParentNode: TransformNode;
   private spacePresenter: ISpacePresenter;
 
