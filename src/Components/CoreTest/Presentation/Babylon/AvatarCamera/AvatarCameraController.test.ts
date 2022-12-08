@@ -1,6 +1,6 @@
 import AvatarCameraViewModel from "../../../../Core/Presentation/Babylon/AvatarCamera/AvatarCameraViewModel";
 import AvatarCameraController from "../../../../Core/Presentation/Babylon/AvatarCamera/AvatarCameraController";
-import { ArcRotateCamera } from "@babylonjs/core";
+import { ArcRotateCamera, ArcRotateCameraPointersInput } from "@babylonjs/core";
 import { mockDeep } from "jest-mock-extended";
 
 describe("AvatarCameraController", () => {
@@ -45,5 +45,15 @@ describe("AvatarCameraController", () => {
     systemUnderTest["applyCameraControls"](camera);
 
     expect(camera.wheelDeltaPercentage).toBe(viewModel.wheelDeltaPercentage);
+  });
+
+  test("applyCameraControls applies upperBetaLimit from viewModel to camera", () => {
+    const viewModel = new AvatarCameraViewModel();
+    const camera = mockDeep<ArcRotateCamera>();
+    systemUnderTest = new AvatarCameraController(viewModel);
+
+    systemUnderTest["applyCameraControls"](camera);
+
+    expect(camera.upperBetaLimit).toBe(viewModel.upperBetaLimit);
   });
 });
