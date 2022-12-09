@@ -11,7 +11,6 @@ const BUILDER_TYPES = {
   IModalManagerBuilder: Symbol("IModalManagerBuilder"),
   IMoodleLoginButtonBuilder: Symbol("IMoodleLoginButtonBuilder"),
   IBottomTooltipBuilder: Symbol("IBottomTooltipBuilder"),
-  IDebugPanelBuilder: Symbol("IDebugPanelBuilder"),
   IWorldNamePanelBuilder: Symbol("IWorldNamePanelBuilder"),
   ILoadSpaceButtonBuilder: Symbol("ILoadSpaceButtonBuilder"),
   IFullscreenSwitchBuilder: Symbol("IFullscreenSwitchBuilder"),

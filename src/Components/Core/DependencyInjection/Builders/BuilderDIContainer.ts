@@ -14,7 +14,6 @@ import NotificationManagerBuilder from "../../Presentation/React/GeneralComponen
 import BUILDER_TYPES from "./BUILDER_TYPES";
 import MoodleLoginButtonBuilder from "../../Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonBuilder";
 import BottomTooltipBuilder from "../../Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipBuilder";
-import DebugPanelBuilder from "../../Presentation/React/SpaceDisplay/DebugPanel/DebugPanelBuilder";
 import SpaceNamePanelBuilder from "../../Presentation/React/SpaceDisplay/SpaceNamePanel/SpaceNamePanelBuilder";
 import FullscreenSwitchBuilder from "../../Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
 import SpaceGoalPanelBuilder from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanelBuilder";
@@ -57,9 +56,6 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IBottomTooltipBuilder).to(
     BottomTooltipBuilder
-  );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IDebugPanelBuilder).to(
-    DebugPanelBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IWorldNamePanelBuilder).to(
     SpaceNamePanelBuilder

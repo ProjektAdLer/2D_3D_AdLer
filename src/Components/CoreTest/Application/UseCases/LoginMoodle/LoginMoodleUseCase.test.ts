@@ -5,14 +5,12 @@ import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 import IMoodlePort from "../../../../Core/Ports/MoodlePort/IMoodlePort";
 import { mock } from "jest-mock-extended";
-import IDebugPort from "../../../../Core/Ports/DebugPort/IDebugPort";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
 import IBackendAdapter from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendMock = mock<IBackendAdapter>();
-const debugPortMock = mock<IDebugPort>();
 const moodlePortMock = mock<IMoodlePort>();
 const uiPortMock = mock<IUIPort>();
 
@@ -28,9 +26,6 @@ describe("LoginMoodleUseCase", () => {
     CoreDIContainer.rebind<IBackendAdapter>(
       CORE_TYPES.IBackendAdapter
     ).toConstantValue(backendMock);
-    CoreDIContainer.rebind<IDebugPort>(PORT_TYPES.IDebugPort).toConstantValue(
-      debugPortMock
-    );
     CoreDIContainer.rebind<IEntityContainer>(
       CORE_TYPES.IEntityContainer
     ).toConstantValue(entityContainerMock);

@@ -4,7 +4,6 @@ import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
-import type IDebugPort from "../../../Ports/DebugPort/IDebugPort";
 import type IMoodlePort from "../../../Ports/MoodlePort/IMoodlePort";
 import type IUIPort from "../../../Ports/UIPort/IUIPort";
 import ILoginMoodleUseCase from "./ILoginMoodleUseCase";
@@ -16,8 +15,7 @@ export default class LoginMoodleUseCase implements ILoginMoodleUseCase {
     private container: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendAdapter,
     @inject(PORT_TYPES.IMoodlePort) private moodlePort: IMoodlePort,
-    @inject(PORT_TYPES.IUIPort) private uiPort: IUIPort,
-    @inject(PORT_TYPES.IDebugPort) private debugPort: IDebugPort
+    @inject(PORT_TYPES.IUIPort) private uiPort: IUIPort
   ) {}
   async executeAsync(data: {
     username: string;
@@ -55,8 +53,6 @@ export default class LoginMoodleUseCase implements ILoginMoodleUseCase {
     );
 
     this.moodlePort.loginSuccessful();
-
-    this.debugPort.setUserToken(userToken);
 
     return Promise.resolve();
   }

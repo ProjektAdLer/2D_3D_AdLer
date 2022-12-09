@@ -6,7 +6,6 @@ import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import App from "./App";
 import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPES";
-import IDebugUseCase from "../../../../Application/UseCases/Debug/IDebugUseCase";
 import { logger } from "../../../../../../Lib/Logger";
 import { config } from "../../../../../../config";
 import IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
@@ -34,13 +33,11 @@ export default class ReactEntry implements IReactEntry {
       providerComponent
     );
 
-    const bla = ReactDOM.createRoot(
+    const rootComponent = ReactDOM.createRoot(
       document.getElementById("root") as HTMLElement
     );
 
-    bla.render(providerComponent);
-
-    this.startDebugUseCase();
+    rootComponent.render(providerComponent);
 
     this.setDebugShortcut();
   }
@@ -49,17 +46,21 @@ export default class ReactEntry implements IReactEntry {
     if (process.env.NODE_ENV === "development" && config.isDebug) {
       /* istanbul ignore next */
       document.onkeyup = function (e) {
-        if (e.ctrlKey && e.key == "F1") {
-          if (isInDebug) {
-            alert("Already in Debug Mode");
-            logger.warn("Already in Debug Mode");
-            return;
-          }
-          isInDebug = true;
-          CoreDIContainer.get<IDebugUseCase>(
-            USECASE_TYPES.IDebugUseCase
-          ).executeAsync();
-        }
+        //TODO: Fix Login as Debug
+
+        // // login as debug on ctrl + f1
+        // if (e.ctrlKey && e.key == "F1") {
+        //   if (isInDebug) {
+        //     alert("Already in Debug Mode");
+        //     logger.warn("Already in Debug Mode");
+        //     return;
+        //   }
+        //   isInDebug = true;
+        //   CoreDIContainer.get<ILoginUseCase>(
+        //     USECASE_TYPES.ILoginUseCase
+        //   ).executeAsync();
+        // }
+
         // clg all entities on ctrl + f2
         if (e.ctrlKey && e.key == "F2") {
           const entityMap = CoreDIContainer.get<IEntityContainer>(
@@ -69,20 +70,6 @@ export default class ReactEntry implements IReactEntry {
           logger.log(entityMap);
         }
       };
-    }
-  }
-
-  private startDebugUseCase() {
-    if (
-      config.autoLoginWithoutShortcut &&
-      config.nodeEnv === "development" &&
-      config.isDebug &&
-      !isInDebug
-    ) {
-      isInDebug = true;
-      CoreDIContainer.get<IDebugUseCase>(
-        USECASE_TYPES.IDebugUseCase
-      ).executeAsync();
     }
   }
 }

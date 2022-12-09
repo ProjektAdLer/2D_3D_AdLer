@@ -1,8 +1,6 @@
 import { ContainerModule } from "inversify";
 import CalculateSpaceScoreUseCase from "../../Application/UseCases/CalculateSpaceScore/CalculateSpaceScoreUseCase";
 import ICalculateSpaceScoreUseCase from "../../Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
-import DebugUseCase from "../../Application/UseCases/Debug/DebugUseCase";
-import IDebugUseCase from "../../Application/UseCases/Debug/IDebugUseCase";
 import IElementStartedUseCase from "../../Application/UseCases/ElementStarted/IElementStartedUseCase";
 import ElementStartedUseCase from "../../Application/UseCases/ElementStarted/ElementStartedUseCase";
 import ILoadAvatarUseCase from "../../Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
@@ -46,10 +44,6 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<ILoginMoodleUseCase>(USECASE_TYPES.ILoginMoodleUseCase)
     .to(LoginMoodleUseCase)
-    .inSingletonScope();
-
-  bind<IDebugUseCase>(USECASE_TYPES.IDebugUseCase)
-    .to(DebugUseCase)
     .inSingletonScope();
 
   bind<ILoadSpaceUseCase>(USECASE_TYPES.ILoadSpaceUseCase)

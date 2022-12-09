@@ -1,6 +1,5 @@
 import { mock } from "jest-mock-extended";
 import { config } from "../../../../../../config";
-import IDebugUseCase from "../../../../../Core/Application/UseCases/Debug/IDebugUseCase";
 import BUILDER_TYPES from "../../../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
@@ -10,7 +9,6 @@ import React from "react";
 import ReactEntry from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/ReactEntry";
 
 const directorMock = mock<IPresentationDirector>();
-const debugUseCaseMock = mock<IDebugUseCase>();
 
 jest.mock(
   "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/App",
@@ -25,10 +23,6 @@ describe("ReactEntry", () => {
     CoreDIContainer.rebind<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
     ).toConstantValue(directorMock);
-
-    CoreDIContainer.rebind<IDebugUseCase>(
-      USECASE_TYPES.IDebugUseCase
-    ).toConstantValue(debugUseCaseMock);
   });
 
   beforeEach(() => {
@@ -50,19 +44,5 @@ describe("ReactEntry", () => {
     systemUnderTest.setupReact();
     // restore console.error
     console.error = originalError;
-  });
-
-  test("should call the debug usecase if in  debug mode", () => {
-    const oldconfig = config;
-
-    config.autoLoginWithoutShortcut = true;
-    config.nodeEnv = "development";
-    config.isDebug = true;
-
-    systemUnderTest["startDebugUseCase"]();
-
-    config.autoLoginWithoutShortcut = oldconfig.autoLoginWithoutShortcut;
-    config.nodeEnv = oldconfig.nodeEnv;
-    config.isDebug = oldconfig.isDebug;
   });
 });
