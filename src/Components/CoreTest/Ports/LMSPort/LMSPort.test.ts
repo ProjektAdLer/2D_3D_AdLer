@@ -1,14 +1,14 @@
 import { mock } from "jest-mock-extended";
-import MoodlePort from "../../../Core/Ports/MoodlePort/MoodlePort";
-import IMoodleLoginButtonPresenter from "../../../Core/Presentation/React/GeneralComponents/MoodleLoginButton/IMoodleLoginButtonPresenter";
+import MoodlePort from "../../../Core/Ports/LMSPort/LMSPort";
+import IMoodleLoginButtonPresenter from "../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/IMoodleLoginButtonPresenter";
 import IMoodleLoginFormPresenter from "../../../Core/Presentation/React/GeneralComponents/MoodleLoginForm/IMoodleLoginFormPresenter";
-import CoreDIContainer from "../../../../Components/Core/DependencyInjection/CoreDIContainer";
+import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import { logger } from "../../../../Lib/Logger";
 import IWorldMenuButtonPresenter from "../../../Core/Presentation/React/WelcomePage/WorldMenuButton/IWorldMenuButtonPresenter";
 
 jest.mock("src/Lib/Logger");
 
-describe("MoodlePort", () => {
+describe("LMSPort", () => {
   let systemUnderTest: MoodlePort;
 
   beforeEach(() => {
@@ -34,7 +34,7 @@ describe("MoodlePort", () => {
     );
   });
 
-  test("loginSuccessful throws error if MoodleLoginFormPresenter is not registered", () => {
+  test("loginMoodleSuccessful throws error if MoodleLoginFormPresenter is not registered", () => {
     const moodleLoginButtonPresenterMock = mock<IMoodleLoginButtonPresenter>();
     systemUnderTest.registerMoodleLoginButtonPresenter(
       moodleLoginButtonPresenterMock
@@ -44,12 +44,12 @@ describe("MoodlePort", () => {
       worldMenuButtonPresenterMock
     );
 
-    expect(() => systemUnderTest.loginSuccessful()).toThrowError(
+    expect(() => systemUnderTest.loginMoodleSuccessful()).toThrowError(
       "MoodleLoginFormPresenter is not registered"
     );
   });
 
-  test("loginSuccessful throws error if MoodleLoginButtonPresenter is not registered", () => {
+  test("loginMoodleSuccessful throws error if MoodleLoginButtonPresenter is not registered", () => {
     const moodleLoginFormPresenterMock = mock<IMoodleLoginFormPresenter>();
     systemUnderTest.registerMoodleLoginFormPresenter(
       moodleLoginFormPresenterMock
@@ -59,11 +59,11 @@ describe("MoodlePort", () => {
       worldMenuButtonPresenterMock
     );
 
-    expect(() => systemUnderTest.loginSuccessful()).toThrowError(
+    expect(() => systemUnderTest.loginMoodleSuccessful()).toThrowError(
       "MoodleLoginButtonPresenter is not registered"
     );
   });
-  test("loginSuccessful throws error if WorldMenuButtonPresenter is not registered", () => {
+  test("loginMoodleSuccessful throws error if WorldMenuButtonPresenter is not registered", () => {
     const moodleLoginFormPresenterMock = mock<IMoodleLoginFormPresenter>();
     systemUnderTest.registerMoodleLoginFormPresenter(
       moodleLoginFormPresenterMock
@@ -73,12 +73,12 @@ describe("MoodlePort", () => {
       moodleLoginButtonPresenterMock
     );
 
-    expect(() => systemUnderTest.loginSuccessful()).toThrowError(
+    expect(() => systemUnderTest.loginMoodleSuccessful()).toThrowError(
       "WorldMenuButtonPresenter is not registered"
     );
   });
 
-  test("loginSuccessful calls the loginFormPresenter and the loginButtonPresenter", () => {
+  test("loginMoodleSuccessful calls the loginFormPresenter and the loginButtonPresenter", () => {
     const moodleLoginFormPresenterMock = mock<IMoodleLoginFormPresenter>();
     const moodleLoginButtonPresenterMock = mock<IMoodleLoginButtonPresenter>();
     const worldMenuButtonPresenterMock = mock<IWorldMenuButtonPresenter>();
@@ -92,11 +92,11 @@ describe("MoodlePort", () => {
       worldMenuButtonPresenterMock
     );
 
-    systemUnderTest.loginSuccessful();
+    systemUnderTest.loginMoodleSuccessful();
 
-    expect(moodleLoginFormPresenterMock.loginSuccessful).toHaveBeenCalledTimes(
-      1
-    );
+    expect(
+      moodleLoginFormPresenterMock.setLoginSuccessful
+    ).toHaveBeenCalledTimes(1);
     expect(
       moodleLoginButtonPresenterMock.setLoginSuccessful
     ).toHaveBeenCalledTimes(1);

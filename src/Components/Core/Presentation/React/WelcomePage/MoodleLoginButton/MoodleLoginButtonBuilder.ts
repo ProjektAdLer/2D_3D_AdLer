@@ -6,7 +6,7 @@ import MoodleLoginButtonViewModel from "./MoodleLoginButtonViewModel";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
 import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
-import IMoodlePort from "../../../../Ports/MoodlePort/IMoodlePort";
+import ILMSPort from "../../../../Ports/LMSPort/ILMSPort";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 
 @injectable()
@@ -38,7 +38,7 @@ export default class MoodleLoginButtonBuilder extends PresentationBuilder<
 
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<IMoodlePort>(
+    CoreDIContainer.get<ILMSPort>(
       PORT_TYPES.IMoodlePort
     ).registerMoodleLoginButtonPresenter(this.presenter!);
   }

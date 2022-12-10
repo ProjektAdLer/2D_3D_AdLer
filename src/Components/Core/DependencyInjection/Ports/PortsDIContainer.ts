@@ -6,8 +6,8 @@ import IWorldPort from "../../Ports/WorldPort/IWorldPort";
 import ElementPort from "../../Ports/ElementPort/ElementPort";
 import SpacePort from "../../Ports/SpacePort/SpacePort";
 import WorldPort from "../../Ports/WorldPort/WorldPort";
-import IMoodlePort from "../../Ports/MoodlePort/IMoodlePort";
-import MoodlePort from "../../Ports/MoodlePort/MoodlePort";
+import ILMSPort from "../../Ports/LMSPort/ILMSPort";
+import LMSPort from "../../Ports/LMSPort/LMSPort";
 import IUIPort from "../../Ports/UIPort/IUIPort";
 import UIPort from "../../Ports/UIPort/UIPort";
 import AvatarPresenter from "../../Presentation/Babylon/Avatar/AvatarPresenter";
@@ -23,7 +23,7 @@ const PortsDIContainer = new ContainerModule((bind) => {
     .to(ElementPort)
     .inSingletonScope();
 
-  bind<IMoodlePort>(PORT_TYPES.IMoodlePort).to(MoodlePort).inSingletonScope();
+  bind<ILMSPort>(PORT_TYPES.IMoodlePort).to(LMSPort).inSingletonScope();
 
   bind<IAvatarPort>(PORT_TYPES.IAvatarPort)
     .to(AvatarPresenter)

@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
-import IMoodlePort from "../../../../Ports/MoodlePort/IMoodlePort";
+import ILMSPort from "../../../../Ports/LMSPort/ILMSPort";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
 import MoodleLoginFormController from "./MoodleLoginFormController";
@@ -36,7 +36,7 @@ export default class MoodleLoginFormBuilder extends PresentationBuilder<
   override buildPresenter(): void {
     super.buildPresenter();
 
-    CoreDIContainer.get<IMoodlePort>(
+    CoreDIContainer.get<ILMSPort>(
       PORT_TYPES.IMoodlePort
     ).registerMoodleLoginFormPresenter(this.presenter!);
   }

@@ -5,7 +5,7 @@ export default class MoodleLoginFormPresenter
   implements IMoodleLoginFormPresenter
 {
   constructor(private viewModel: MoodleLoginFormViewModel) {}
-  loginSuccessful(): void {
+  setLoginSuccessful(): void {
     this.viewModel.visible.Value = false;
   }
   displayLoginForm(): void {

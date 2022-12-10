@@ -12,7 +12,7 @@ describe("MoodleLoginFormPresenter", () => {
   });
 
   test("should set visible to fale, if login is successfull", () => {
-    systemUnderTest.loginSuccessful();
+    systemUnderTest.setLoginSuccessful();
     expect(vm.visible.Value).toBe(false);
   });
 

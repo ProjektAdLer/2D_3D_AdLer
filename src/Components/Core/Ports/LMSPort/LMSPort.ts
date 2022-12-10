@@ -2,11 +2,11 @@ import { injectable } from "inversify";
 import { logger } from "src/Lib/Logger";
 import IMoodleLoginButtonPresenter from "../../Presentation/React/WelcomePage/MoodleLoginButton/IMoodleLoginButtonPresenter";
 import IMoodleLoginFormPresenter from "../../Presentation/React/GeneralComponents/MoodleLoginForm/IMoodleLoginFormPresenter";
-import IMoodlePort from "./IMoodlePort";
+import ILMSPort from "./ILMSPort";
 import IWorldMenuButtonPresenter from "../../Presentation/React/WelcomePage/WorldMenuButton/IWorldMenuButtonPresenter";
 
 @injectable()
-export default class MoodlePort implements IMoodlePort {
+export default class LMSPort implements ILMSPort {
   private moodleLoginFormPresenter: IMoodleLoginFormPresenter;
   private moodleLoginButtonPresenter: IMoodleLoginButtonPresenter;
   private worldMenuButtonPresenter: IWorldMenuButtonPresenter;
@@ -18,7 +18,7 @@ export default class MoodlePort implements IMoodlePort {
     this.moodleLoginFormPresenter.displayLoginForm();
   }
 
-  loginSuccessful(): void {
+  loginMoodleSuccessful(): void {
     if (!this.moodleLoginFormPresenter)
       throw new Error("MoodleLoginFormPresenter is not registered");
     if (!this.moodleLoginButtonPresenter)
@@ -26,7 +26,7 @@ export default class MoodlePort implements IMoodlePort {
     if (!this.worldMenuButtonPresenter)
       throw new Error("WorldMenuButtonPresenter is not registered");
 
-    this.moodleLoginFormPresenter.loginSuccessful();
+    this.moodleLoginFormPresenter.setLoginSuccessful();
     this.moodleLoginButtonPresenter.setLoginSuccessful();
     this.worldMenuButtonPresenter.setLoginSuccessful();
   }

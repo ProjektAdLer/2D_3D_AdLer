@@ -3,7 +3,7 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
-import IMoodlePort from "../../../../Core/Ports/MoodlePort/IMoodlePort";
+import ILMSPort from "../../../../Core/Ports/LMSPort/ILMSPort";
 import { mock } from "jest-mock-extended";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
@@ -11,7 +11,7 @@ import IBackendAdapter from "../../../../Core/Adapters/BackendAdapter/IBackendAd
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendMock = mock<IBackendAdapter>();
-const moodlePortMock = mock<IMoodlePort>();
+const lmsPortMock = mock<ILMSPort>();
 const uiPortMock = mock<IUIPort>();
 
 describe("LoginMoodleUseCase", () => {
@@ -20,8 +20,8 @@ describe("LoginMoodleUseCase", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind<IMoodlePort>(PORT_TYPES.IMoodlePort).toConstantValue(
-      moodlePortMock
+    CoreDIContainer.rebind<ILMSPort>(PORT_TYPES.IMoodlePort).toConstantValue(
+      lmsPortMock
     );
     CoreDIContainer.rebind<IBackendAdapter>(
       CORE_TYPES.IBackendAdapter
@@ -90,7 +90,7 @@ describe("LoginMoodleUseCase", () => {
       UserDataEntity
     );
 
-    expect(moodlePortMock.loginSuccessful).toHaveBeenCalled();
+    expect(lmsPortMock.loginMoodleSuccessful).toHaveBeenCalled();
   });
 
   test("Throws and displays error, if wrong userData is sent to the Backend", async () => {

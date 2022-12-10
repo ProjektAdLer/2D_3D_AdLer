@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
-import IMoodlePort from "../../../../Ports/MoodlePort/IMoodlePort";
+import ILMSPort from "../../../../Ports/LMSPort/ILMSPort";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import WorldMenuButtonViewModel from "./WorldMenuButtonViewModel";
 import WorldMenuButtonPresenter from "./WorldMenuButtonPresenter";
@@ -24,7 +24,7 @@ export default class WorldMenuButtonBuilder extends PresentationBuilder<
 
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<IMoodlePort>(
+    CoreDIContainer.get<ILMSPort>(
       PORT_TYPES.IMoodlePort
     ).registerWorldMenuButtonPresenter(this.presenter!);
   }
