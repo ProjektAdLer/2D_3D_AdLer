@@ -23,7 +23,7 @@ const PortsDIContainer = new ContainerModule((bind) => {
     .to(ElementPort)
     .inSingletonScope();
 
-  bind<ILMSPort>(PORT_TYPES.IMoodlePort).to(LMSPort).inSingletonScope();
+  bind<ILMSPort>(PORT_TYPES.ILMSPort).to(LMSPort).inSingletonScope();
 
   bind<IAvatarPort>(PORT_TYPES.IAvatarPort)
     .to(AvatarPresenter)

@@ -7,6 +7,6 @@ export default class MoodleLoginButtonController
   implements IMoodleLoginButtonController
 {
   displayLoginForm(): void {
-    CoreDIContainer.get<ILMSPort>(PORT_TYPES.IMoodlePort).displayLoginForm();
+    CoreDIContainer.get<ILMSPort>(PORT_TYPES.ILMSPort).displayLoginForm();
   }
 }

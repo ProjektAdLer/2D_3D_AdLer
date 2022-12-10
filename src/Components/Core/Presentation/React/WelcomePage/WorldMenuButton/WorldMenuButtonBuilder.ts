@@ -25,7 +25,7 @@ export default class WorldMenuButtonBuilder extends PresentationBuilder<
   override buildPresenter(): void {
     super.buildPresenter();
     CoreDIContainer.get<ILMSPort>(
-      PORT_TYPES.IMoodlePort
+      PORT_TYPES.ILMSPort
     ).registerWorldMenuButtonPresenter(this.presenter!);
   }
 }

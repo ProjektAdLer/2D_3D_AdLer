@@ -2,13 +2,13 @@ import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import IMoodlePort from "../../../../../Core/Ports/MoodlePort/IMoodlePort";
+import ILMSPort from "../../../../../Core/Ports/LMSPort/ILMSPort";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 import WorldMenuButtonBuilder from "../../../../../Core/Presentation/React/WelcomePage/WorldMenuButton/WorldMenuButtonBuilder";
 import WorldMenuButtonPresenter from "../../../../../Core/Presentation/React/WelcomePage/WorldMenuButton/WorldMenuButtonPresenter";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
-const moodlePortMock = mock<IMoodlePort>();
+const lmsPortMock = mock<ILMSPort>();
 
 describe("WorldMenuButtonBuilder", () => {
   let systemUnderTest: WorldMenuButtonBuilder;
@@ -16,9 +16,7 @@ describe("WorldMenuButtonBuilder", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind(PORT_TYPES.IMoodlePort).toConstantValue(
-      moodlePortMock
-    );
+    CoreDIContainer.rebind(PORT_TYPES.ILMSPort).toConstantValue(lmsPortMock);
     CoreDIContainer.rebind(
       CORE_TYPES.IViewModelControllerProvider
     ).toConstantValue(viewModelControllerProviderMock);
@@ -32,7 +30,7 @@ describe("WorldMenuButtonBuilder", () => {
     CoreDIContainer.restore();
   });
 
-  test("buildPresenter builds the presenter and register it with the MoodlePort", () => {
+  test("buildPresenter builds the presenter and register it with the LMSPort", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 
@@ -40,11 +38,11 @@ describe("WorldMenuButtonBuilder", () => {
     expect(systemUnderTest["presenter"]).toBeInstanceOf(
       WorldMenuButtonPresenter
     );
-    expect(
-      moodlePortMock.registerWorldMenuButtonPresenter
-    ).toHaveBeenCalledTimes(1);
-    expect(
-      moodlePortMock.registerWorldMenuButtonPresenter
-    ).toHaveBeenCalledWith(systemUnderTest["presenter"]);
+    expect(lmsPortMock.registerWorldMenuButtonPresenter).toHaveBeenCalledTimes(
+      1
+    );
+    expect(lmsPortMock.registerWorldMenuButtonPresenter).toHaveBeenCalledWith(
+      systemUnderTest["presenter"]
+    );
   });
 });

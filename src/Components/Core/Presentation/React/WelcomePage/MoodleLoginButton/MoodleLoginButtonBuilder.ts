@@ -39,7 +39,7 @@ export default class MoodleLoginButtonBuilder extends PresentationBuilder<
   override buildPresenter(): void {
     super.buildPresenter();
     CoreDIContainer.get<ILMSPort>(
-      PORT_TYPES.IMoodlePort
+      PORT_TYPES.ILMSPort
     ).registerMoodleLoginButtonPresenter(this.presenter!);
   }
 }

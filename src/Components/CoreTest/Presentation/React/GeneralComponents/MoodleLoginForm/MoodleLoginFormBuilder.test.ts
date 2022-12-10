@@ -2,7 +2,7 @@ import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import IMoodlePort from "../../../../../Core/Ports/MoodlePort/IMoodlePort";
+import ILMSPort from "../../../../../Core/Ports/LMSPort/ILMSPort";
 import MoodleLoginFormBuilder from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginForm/MoodleLoginFormBuilder";
 import MoodleLoginFormController from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginForm/MoodleLoginFormController";
 import MoodleLoginFormPresenter from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginForm/MoodleLoginFormPresenter";
@@ -10,7 +10,7 @@ import MoodleLoginFormViewModel from "../../../../../Core/Presentation/React/Gen
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
-const moodlePortMock = mock<IMoodlePort>();
+const lmsPortMock = mock<ILMSPort>();
 
 describe("MoodleLoginFormBuilder", () => {
   let systemUnderTest: MoodleLoginFormBuilder;
@@ -18,9 +18,7 @@ describe("MoodleLoginFormBuilder", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind(PORT_TYPES.IMoodlePort).toConstantValue(
-      moodlePortMock
-    );
+    CoreDIContainer.rebind(PORT_TYPES.ILMSPort).toConstantValue(lmsPortMock);
     CoreDIContainer.rebind(
       CORE_TYPES.IViewModelControllerProvider
     ).toConstantValue(viewModelControllerProviderMock);
@@ -52,7 +50,7 @@ describe("MoodleLoginFormBuilder", () => {
     );
   });
 
-  test("buildPresenter builds the presenter and register it with the MoodlePort", () => {
+  test("buildPresenter builds the presenter and register it with the LMSPort", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 
@@ -60,11 +58,11 @@ describe("MoodleLoginFormBuilder", () => {
     expect(systemUnderTest["presenter"]).toBeInstanceOf(
       MoodleLoginFormPresenter
     );
-    expect(
-      moodlePortMock.registerMoodleLoginFormPresenter
-    ).toHaveBeenCalledTimes(1);
-    expect(
-      moodlePortMock.registerMoodleLoginFormPresenter
-    ).toHaveBeenCalledWith(systemUnderTest["presenter"]);
+    expect(lmsPortMock.registerMoodleLoginFormPresenter).toHaveBeenCalledTimes(
+      1
+    );
+    expect(lmsPortMock.registerMoodleLoginFormPresenter).toHaveBeenCalledWith(
+      systemUnderTest["presenter"]
+    );
   });
 });

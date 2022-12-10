@@ -2,7 +2,7 @@ import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import IMoodlePort from "../../../../../Core/Ports/MoodlePort/IMoodlePort";
+import ILMSPort from "../../../../../Core/Ports/LMSPort/ILMSPort";
 import MoodleLoginButtonBuilder from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonBuilder";
 import MoodleLoginButtonController from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonController";
 import MoodleLoginButtonPresenter from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonPresenter";
@@ -10,7 +10,7 @@ import MoodleLoginButtonViewModel from "../../../../../Core/Presentation/React/W
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
-const moodlePortMock = mock<IMoodlePort>();
+const lmsPortMock = mock<ILMSPort>();
 
 describe("MoodleLoginButtonBuilder", () => {
   let systemUnderTest: MoodleLoginButtonBuilder;
@@ -18,9 +18,7 @@ describe("MoodleLoginButtonBuilder", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind(PORT_TYPES.IMoodlePort).toConstantValue(
-      moodlePortMock
-    );
+    CoreDIContainer.rebind(PORT_TYPES.ILMSPort).toConstantValue(lmsPortMock);
     CoreDIContainer.rebind(
       CORE_TYPES.IViewModelControllerProvider
     ).toConstantValue(viewModelControllerProviderMock);
@@ -52,7 +50,7 @@ describe("MoodleLoginButtonBuilder", () => {
     );
   });
 
-  test("buildPresenter builds the presenter and register it with the MoodlePort", () => {
+  test("buildPresenter builds the presenter and register it with the LMSPort", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 
@@ -61,10 +59,10 @@ describe("MoodleLoginButtonBuilder", () => {
       MoodleLoginButtonPresenter
     );
     expect(
-      moodlePortMock.registerMoodleLoginButtonPresenter
+      lmsPortMock.registerMoodleLoginButtonPresenter
     ).toHaveBeenCalledTimes(1);
-    expect(
-      moodlePortMock.registerMoodleLoginButtonPresenter
-    ).toHaveBeenCalledWith(systemUnderTest["presenter"]);
+    expect(lmsPortMock.registerMoodleLoginButtonPresenter).toHaveBeenCalledWith(
+      systemUnderTest["presenter"]
+    );
   });
 });

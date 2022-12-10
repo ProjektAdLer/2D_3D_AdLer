@@ -20,7 +20,7 @@ describe("LoginMoodleUseCase", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind<ILMSPort>(PORT_TYPES.IMoodlePort).toConstantValue(
+    CoreDIContainer.rebind<ILMSPort>(PORT_TYPES.ILMSPort).toConstantValue(
       lmsPortMock
     );
     CoreDIContainer.rebind<IBackendAdapter>(

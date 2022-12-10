@@ -37,7 +37,7 @@ export default class MoodleLoginFormBuilder extends PresentationBuilder<
     super.buildPresenter();
 
     CoreDIContainer.get<ILMSPort>(
-      PORT_TYPES.IMoodlePort
+      PORT_TYPES.ILMSPort
     ).registerMoodleLoginFormPresenter(this.presenter!);
   }
 }

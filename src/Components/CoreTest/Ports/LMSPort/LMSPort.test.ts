@@ -1,5 +1,5 @@
 import { mock } from "jest-mock-extended";
-import MoodlePort from "../../../Core/Ports/LMSPort/LMSPort";
+import LMSPort from "../../../Core/Ports/LMSPort/LMSPort";
 import IMoodleLoginButtonPresenter from "../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/IMoodleLoginButtonPresenter";
 import IMoodleLoginFormPresenter from "../../../Core/Presentation/React/GeneralComponents/MoodleLoginForm/IMoodleLoginFormPresenter";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
@@ -9,10 +9,10 @@ import IWorldMenuButtonPresenter from "../../../Core/Presentation/React/WelcomeP
 jest.mock("src/Lib/Logger");
 
 describe("LMSPort", () => {
-  let systemUnderTest: MoodlePort;
+  let systemUnderTest: LMSPort;
 
   beforeEach(() => {
-    systemUnderTest = CoreDIContainer.resolve(MoodlePort);
+    systemUnderTest = CoreDIContainer.resolve(LMSPort);
   });
 
   test("displayLoginForm throws error if MoodleLoginFormPresenter is not registered", () => {

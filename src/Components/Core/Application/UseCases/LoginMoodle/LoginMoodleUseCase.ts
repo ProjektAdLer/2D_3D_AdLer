@@ -14,7 +14,7 @@ export default class LoginMoodleUseCase implements ILoginMoodleUseCase {
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendAdapter,
-    @inject(PORT_TYPES.IMoodlePort) private moodlePort: ILMSPort,
+    @inject(PORT_TYPES.ILMSPort) private lmsPort: ILMSPort,
     @inject(PORT_TYPES.IUIPort) private uiPort: IUIPort
   ) {}
   async executeAsync(data: {
@@ -52,7 +52,7 @@ export default class LoginMoodleUseCase implements ILoginMoodleUseCase {
       UserDataEntity
     );
 
-    this.moodlePort.loginMoodleSuccessful();
+    this.lmsPort.loginMoodleSuccessful();
 
     return Promise.resolve();
   }

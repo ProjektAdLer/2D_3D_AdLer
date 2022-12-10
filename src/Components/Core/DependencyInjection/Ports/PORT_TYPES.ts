@@ -2,7 +2,7 @@ const PORT_TYPES = {
   IElementPort: Symbol("IElementPort"),
   ISpacePort: Symbol("ISpacePort"),
   IWorldPort: Symbol("IWorldPort"),
-  IMoodlePort: Symbol("IMoodlePort"),
+  ILMSPort: Symbol("ILMSPort"),
   IAvatarPort: Symbol("IAvatarPort"),
   IUIPort: Symbol("IUIPort"),
 };
