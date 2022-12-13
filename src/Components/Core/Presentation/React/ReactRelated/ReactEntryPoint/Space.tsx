@@ -4,7 +4,7 @@ import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIs
 import ElementModal from "~ReactComponents/SpaceDisplay/ElementModal/ElementModal";
 import SpaceNamePanel from "~ReactComponents/SpaceDisplay/SpaceNamePanel/SpaceNamePanel";
 import NotificationManager from "~ReactComponents/GeneralComponents/NotificationManager/NotificationManager";
-import MoodleLoginForm from "~ReactComponents/GeneralComponents/MoodleLoginForm/MoodleLoginForm";
+import LoginModal from "~ReactComponents/GeneralComponents/LoginModal/LoginModal";
 import MenuBar from "~ReactComponents/GeneralComponents/MenuBar/MenuBar";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import ScorePanel from "~ReactComponents/SpaceDisplay/ScorePanel/ScorePanel";
@@ -47,7 +47,7 @@ export default function Space() {
           <SpaceCompletionModal />
         </div>
         <div className="z-10">
-          <MoodleLoginForm />
+          <LoginModal />
         </div>
         <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
           <div className="text-lg font-bold text-white text-shadow-sm">

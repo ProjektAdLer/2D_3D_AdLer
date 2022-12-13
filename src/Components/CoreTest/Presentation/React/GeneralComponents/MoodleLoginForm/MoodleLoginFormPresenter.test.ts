@@ -1,14 +1,14 @@
-import MoodleLoginFormPresenter from "../../../../../../../src/Components/Core/Presentation/React/GeneralComponents/MoodleLoginForm/MoodleLoginFormPresenter";
-import IMoodleLoginFormPresenter from "../../../../../../../src/Components/Core/Presentation/React/GeneralComponents/MoodleLoginForm/IMoodleLoginFormPresenter";
-import MoodleLoginFormViewModel from "../../../../../../../src/Components/Core/Presentation/React/GeneralComponents/MoodleLoginForm/MoodleLoginFormViewModel";
+import LoginModalPresenter from "../../../../../../../src/Components/Core/Presentation/React/GeneralComponents/LoginModal/LoginModalPresenter";
+import ILoginModalPresenter from "../../../../../../../src/Components/Core/Presentation/React/GeneralComponents/LoginModal/ILoginModalPresenter";
+import LoginModalViewModel from "../../../../../../../src/Components/Core/Presentation/React/GeneralComponents/LoginModal/LoginModalViewModel";
 
-describe("MoodleLoginFormPresenter", () => {
-  let systemUnderTest: IMoodleLoginFormPresenter;
-  let vm: MoodleLoginFormViewModel;
+describe("LoginModalPresenter", () => {
+  let systemUnderTest: ILoginModalPresenter;
+  let vm: LoginModalViewModel;
 
   beforeEach(() => {
-    vm = new MoodleLoginFormViewModel();
-    systemUnderTest = new MoodleLoginFormPresenter(vm);
+    vm = new LoginModalViewModel();
+    systemUnderTest = new LoginModalPresenter(vm);
   });
 
   test("should set visible to fale, if login is successfull", () => {

@@ -1,4 +1,4 @@
-export default interface IMoodleLoginFormPresenter {
+export default interface ILoginModalPresenter {
   displayLoginForm(): void;
   setLoginSuccessful(): void;
 }

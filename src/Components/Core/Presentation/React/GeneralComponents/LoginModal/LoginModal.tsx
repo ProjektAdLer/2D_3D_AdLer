@@ -7,14 +7,14 @@ import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContai
 import StyledInputField from "../../ReactRelated/ReactBaseComponents/StyledInputField";
 import StyledModal from "../../ReactRelated/ReactBaseComponents/StyledModal";
 import StyledPasswordField from "../../ReactRelated/ReactBaseComponents/StyledPasswordField";
-import MoodleLoginFormController from "./MoodleLoginFormController";
-import MoodleLoginFormViewModel from "./MoodleLoginFormViewModel";
+import LoginModalController from "./LoginModalController";
+import LoginModalViewModel from "./LoginModalViewModel";
 
-export default function MoodleLoginForm() {
+export default function LoginModal() {
   const [viewModel, controller] = useBuilder<
-    MoodleLoginFormViewModel,
-    MoodleLoginFormController
-  >(BUILDER_TYPES.IMoodleLoginFormBuilder);
+    LoginModalViewModel,
+    LoginModalController
+  >(BUILDER_TYPES.ILoginModalBuilder);
 
   const [modalVisible, setModalVisible] = useObservable<boolean>(
     viewModel?.visible
