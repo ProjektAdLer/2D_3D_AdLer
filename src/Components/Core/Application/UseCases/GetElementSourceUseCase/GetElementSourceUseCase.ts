@@ -1,7 +1,6 @@
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import IGetElementSourceUseCase from "./IGetElementSourceUseCase";
 import { inject, injectable } from "inversify";

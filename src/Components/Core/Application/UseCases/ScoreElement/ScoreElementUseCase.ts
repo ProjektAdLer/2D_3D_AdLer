@@ -31,10 +31,7 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
     courseId: ElementID;
   }): Promise<void> {
     if (!data || !data.elementId) {
-      return this.rejectWithWarning(
-        "data is (atleast partly) undefined!",
-        undefined
-      );
+      return this.rejectWithWarning("data is (atleast partly) undefined!");
     }
 
     // get user token

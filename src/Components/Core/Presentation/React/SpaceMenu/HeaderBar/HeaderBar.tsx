@@ -2,11 +2,9 @@ import React from "react";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
-import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import HeaderBarController from "./HeaderBarController";
 import HeaderBarViewModel from "./HeaderBarViewModel";
-import homeIcon from "../../../../../../Assets/icons/22-home-icon/home-icon-nobg.svg";
 
 export default function HeaderBar() {
   const [viewModel, controller] = useBuilder<

@@ -1,9 +1,4 @@
-import {
-  ArcRotateCamera,
-  ArcRotateCameraMouseWheelInput,
-  ArcRotateCameraPointersInput,
-  Camera,
-} from "@babylonjs/core";
+import { ArcRotateCamera, ArcRotateCameraPointersInput } from "@babylonjs/core";
 import bind from "bind-decorator";
 import AvatarCameraViewModel from "./AvatarCameraViewModel";
 import IAvatarCameraController from "./IAvatarCameraController";

@@ -3,7 +3,7 @@
 
 const { override, addBabelPlugin } = require("customize-cra");
 const babelTsTransformPlugin = require("babel-plugin-transform-typescript-metadata");
-var path = require("path");
+const path = require("path");
 
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 

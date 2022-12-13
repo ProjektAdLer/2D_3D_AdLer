@@ -7,7 +7,6 @@ import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
 import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
-import IWorldPort from "../../../../Ports/WorldPort/IWorldPort";
 import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
 import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
 

@@ -12,10 +12,9 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import menuIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
 
 export default function MenuBar() {
-  const [viewModel, controller] = useBuilder<
-    MenuBarViewModel,
-    MenuBarController
-  >(BUILDER_TYPES.IMenuBarBuilder);
+  const [, controller] = useBuilder<MenuBarViewModel, MenuBarController>(
+    BUILDER_TYPES.IMenuBarBuilder
+  );
   return (
     <CustomDropdown
       headerPart={

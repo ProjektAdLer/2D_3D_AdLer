@@ -10,7 +10,6 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
 import elementsIcon from "../../../../../../Assets/icons/25-elements/elements-icon.svg";
-import menuIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
 
 export default function ElementsDropdown() {
   const [viewModel, controller] = useBuilder<

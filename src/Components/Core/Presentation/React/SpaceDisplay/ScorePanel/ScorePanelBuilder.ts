@@ -1,7 +1,6 @@
 import { injectable } from "inversify";
 import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
 import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
-import ISpacePort from "src/Components/Core/Ports/SpacePort/ISpacePort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";

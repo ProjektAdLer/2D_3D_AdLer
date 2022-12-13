@@ -2,8 +2,6 @@ import React from "react";
 import BottomTooltip from "~ReactComponents/SpaceDisplay/BottomTooltip/BottomTooltip";
 import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 import ElementModal from "~ReactComponents/SpaceDisplay/ElementModal/ElementModal";
-import ElementsDropdown from "~ReactComponents/SpaceDisplay/ElementsDropdown/ElementsDropdown";
-import SpaceGoalPanel from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanel";
 import SpaceNamePanel from "~ReactComponents/SpaceDisplay/SpaceNamePanel/SpaceNamePanel";
 import NotificationManager from "~ReactComponents/GeneralComponents/NotificationManager/NotificationManager";
 import MoodleLoginForm from "~ReactComponents/GeneralComponents/MoodleLoginForm/MoodleLoginForm";

@@ -5,13 +5,10 @@ import { injectable } from "inversify";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import App from "./App";
-import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPES";
 import { logger } from "../../../../../../Lib/Logger";
 import { config } from "../../../../../../config";
-import IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
-import WorldEntity from "src/Components/Core/Domain/Entities/WorldEntity";
 
 let isInDebug = false;
 

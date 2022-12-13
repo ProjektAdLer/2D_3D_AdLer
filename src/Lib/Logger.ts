@@ -44,5 +44,5 @@ export class ConsoleLogger implements Logger {
 }
 
 export const logger = new ConsoleLogger({
-  level: (config.logLevel || defaultLogLevel) as LogLevel,
+  level: config.logLevel || defaultLogLevel,
 });

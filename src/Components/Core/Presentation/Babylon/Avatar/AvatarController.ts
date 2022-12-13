@@ -1,6 +1,5 @@
 import {
   ArcRotateCamera,
-  Camera,
   EventState,
   KeyboardEventTypes,
   KeyboardInfo,
@@ -8,11 +7,9 @@ import {
   MeshBuilder,
   PointerEventTypes,
   PointerInfo,
-  TransformNode,
   Vector3,
 } from "@babylonjs/core";
 import bind from "bind-decorator";
-import { listMetadataForTarget } from "inversify/lib/utils/serialization";
 import { logger } from "src/Lib/Logger";
 import SCENE_TYPES, {
   ScenePresenterFactory,

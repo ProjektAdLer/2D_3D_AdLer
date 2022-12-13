@@ -6,7 +6,7 @@ import { IAbstractPort } from "./IAbstractPort";
 /**
  * The AbstractPort class is a base class for all ports. It provides a basic methods for registering and unregistering adapters.
  */
-export default abstract class AbstractPort<T> {
+export default abstract class AbstractPort<T> implements IAbstractPort<T> {
   protected adapters: T[] = [];
 
   public registerAdapter(adapter: T): void {

@@ -2,7 +2,6 @@ import IAvatarCameraController from "./IAvatarCameraController";
 import AvatarCameraViewModel from "./AvatarCameraViewModel";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import { ArcRotateCamera, TransformNode } from "@babylonjs/core";
-import type { Nullable } from "@babylonjs/core";
 import bind from "bind-decorator";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import SCENE_TYPES, {
