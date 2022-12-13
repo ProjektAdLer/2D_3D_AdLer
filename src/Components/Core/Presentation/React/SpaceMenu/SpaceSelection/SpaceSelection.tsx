@@ -48,6 +48,10 @@ export default function SpaceSelection() {
       {spaces?.map((space) => {
         // spaces: 0 = id, 1 = name, 2 = isAvailable, 3 = isCompleted
         let displayedString = space[1];
+        let spaceIcon: string;
+        if (space[3]) spaceIcon = spaceSolved;
+        else if (space[2]) spaceIcon = spaceAvailable;
+        else spaceIcon = spaceLocked;
 
         return (
           <li
@@ -55,9 +59,7 @@ export default function SpaceSelection() {
             key={space[0].toString() + space[1]}
           >
             <SpaceSelectionRow
-              icon={
-                space[3] ? spaceSolved : space[2] ? spaceAvailable : spaceLocked
-              }
+              icon={spaceIcon}
               locked={!space[2]}
               spaceTitle={displayedString}
               selected={selectedRowID === space[0]}
