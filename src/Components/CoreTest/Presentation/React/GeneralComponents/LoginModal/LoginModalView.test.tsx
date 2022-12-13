@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
 import { mock } from "jest-mock-extended";
+import React from "react";
 import ILoginModalController from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/ILoginModalController";
 import LoginModal from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModal";
 import LoginModalViewModel from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModalViewModel";

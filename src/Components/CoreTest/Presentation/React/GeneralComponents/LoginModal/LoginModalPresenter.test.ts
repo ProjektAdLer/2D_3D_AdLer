@@ -1,6 +1,6 @@
-import LoginModalPresenter from "../../../../../../../src/Components/Core/Presentation/React/GeneralComponents/LoginModal/LoginModalPresenter";
-import ILoginModalPresenter from "../../../../../../../src/Components/Core/Presentation/React/GeneralComponents/LoginModal/ILoginModalPresenter";
-import LoginModalViewModel from "../../../../../../../src/Components/Core/Presentation/React/GeneralComponents/LoginModal/LoginModalViewModel";
+import LoginModalPresenter from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModalPresenter";
+import ILoginModalPresenter from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/ILoginModalPresenter";
+import LoginModalViewModel from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModalViewModel";
 
 describe("LoginModalPresenter", () => {
   let systemUnderTest: ILoginModalPresenter;
