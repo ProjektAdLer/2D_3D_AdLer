@@ -47,7 +47,7 @@ export default interface IBackendAdapter {
 
   scoreH5PElement(data: ScoreH5PElementRequest): Promise<boolean>;
 
-  logInUser(userCredentials: UserCredentials): Promise<string>;
+  loginUser(userCredentials: UserCredentials): Promise<string>;
   getCoursesAvailableForUser(userToken: string): Promise<CourseListTO>;
   getElementSource(
     userToken: string,

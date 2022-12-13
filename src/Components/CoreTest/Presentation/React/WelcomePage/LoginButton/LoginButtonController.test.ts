@@ -25,6 +25,6 @@ describe("ElementDropdownController", () => {
 
   test("should call the moodle port to open the login window", () => {
     systemUnderTest.displayLoginForm();
-    expect(portMock.displayLoginForm).toHaveBeenCalledTimes(1);
+    expect(portMock.displayLoginModal).toHaveBeenCalledTimes(1);
   });
 });

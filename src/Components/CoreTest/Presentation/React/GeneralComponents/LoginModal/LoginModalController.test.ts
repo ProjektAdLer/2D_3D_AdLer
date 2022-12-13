@@ -1,10 +1,7 @@
-import LogUserIntoMoodleUseCase from "../../../../../Core/Application/UseCases/LoginMoodle/LoginMoodleUseCase";
+import LoginUseCase from "../../../../../Core/Application/UseCases/Login/LoginUseCase";
 import LoginModalController from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModalController";
 
-const executeAsyncMock = jest.spyOn(
-  LogUserIntoMoodleUseCase.prototype,
-  "executeAsync"
-);
+const executeAsyncMock = jest.spyOn(LoginUseCase.prototype, "executeAsync");
 
 describe("LoginModalController", () => {
   let systemUnderTest: LoginModalController;

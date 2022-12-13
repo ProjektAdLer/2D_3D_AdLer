@@ -16,7 +16,7 @@ describe("LMSPort", () => {
   });
 
   test("displayLoginForm throws error if LoginModalPresenter is not registered", () => {
-    expect(() => systemUnderTest.displayLoginForm()).toThrowError(
+    expect(() => systemUnderTest.displayLoginModal()).toThrowError(
       "LoginModalPresenter is not registered"
     );
   });
@@ -25,7 +25,7 @@ describe("LMSPort", () => {
     const loginModalPresenterMock = mock<ILoginModalPresenter>();
     systemUnderTest.registerLoginModalPresenter(loginModalPresenterMock);
 
-    systemUnderTest.displayLoginForm();
+    systemUnderTest.displayLoginModal();
 
     expect(loginModalPresenterMock.displayLoginForm).toHaveBeenCalledTimes(1);
   });
@@ -38,7 +38,7 @@ describe("LMSPort", () => {
       worldMenuButtonPresenterMock
     );
 
-    expect(() => systemUnderTest.loginMoodleSuccessful()).toThrowError(
+    expect(() => systemUnderTest.loginSuccessful()).toThrowError(
       "LoginModalPresenter is not registered"
     );
   });
@@ -51,7 +51,7 @@ describe("LMSPort", () => {
       worldMenuButtonPresenterMock
     );
 
-    expect(() => systemUnderTest.loginMoodleSuccessful()).toThrowError(
+    expect(() => systemUnderTest.loginSuccessful()).toThrowError(
       "LoginButtonPresenter is not registered"
     );
   });
@@ -61,7 +61,7 @@ describe("LMSPort", () => {
     const loginButtonPresenterMock = mock<ILoginButtonPresenter>();
     systemUnderTest.registerLoginButtonPresenter(loginButtonPresenterMock);
 
-    expect(() => systemUnderTest.loginMoodleSuccessful()).toThrowError(
+    expect(() => systemUnderTest.loginSuccessful()).toThrowError(
       "WorldMenuButtonPresenter is not registered"
     );
   });
@@ -76,7 +76,7 @@ describe("LMSPort", () => {
       worldMenuButtonPresenterMock
     );
 
-    systemUnderTest.loginMoodleSuccessful();
+    systemUnderTest.loginSuccessful();
 
     expect(loginModalPresenterMock.setLoginSuccessful).toHaveBeenCalledTimes(1);
     expect(loginButtonPresenterMock.setLoginSuccessful).toHaveBeenCalledTimes(

@@ -6,10 +6,10 @@ import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import type ILMSPort from "../../../Ports/LMSPort/ILMSPort";
 import type IUIPort from "../../../Ports/UIPort/IUIPort";
-import ILoginMoodleUseCase from "./ILoginMoodleUseCase";
+import ILoginUseCase from "./ILoginUseCase";
 
 @injectable()
-export default class LoginMoodleUseCase implements ILoginMoodleUseCase {
+export default class LoginUseCase implements ILoginUseCase {
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
@@ -34,7 +34,7 @@ export default class LoginMoodleUseCase implements ILoginMoodleUseCase {
     let userToken: string;
 
     try {
-      userToken = await this.backendAdapter.logInUser({
+      userToken = await this.backendAdapter.loginUser({
         username: data.username,
         password: data.password,
       });
@@ -52,7 +52,7 @@ export default class LoginMoodleUseCase implements ILoginMoodleUseCase {
       UserDataEntity
     );
 
-    this.lmsPort.loginMoodleSuccessful();
+    this.lmsPort.loginSuccessful();
 
     return Promise.resolve();
   }

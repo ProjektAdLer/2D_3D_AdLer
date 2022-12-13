@@ -222,7 +222,7 @@ export default class BackendAdapter implements IBackendAdapter {
     return response.data.isSuceess;
   }
 
-  async logInUser(userCredentials: {
+  async loginUser(userCredentials: {
     username: string;
     password: string;
   }): Promise<string> {

@@ -97,7 +97,7 @@ describe("BackendAdapter", () => {
         moodleToken: token,
       },
     });
-    const returnedVal = await systemUnderTest.logInUser({
+    const returnedVal = await systemUnderTest.loginUser({
       username: userName,
       password: password,
     });

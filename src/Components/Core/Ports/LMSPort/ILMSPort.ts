@@ -6,6 +6,6 @@ export default interface ILMSPort {
   registerLoginModalPresenter(presenter: ILoginModalPresenter): void;
   registerLoginButtonPresenter(presenter: ILoginButtonPresenter): void;
   registerWorldMenuButtonPresenter(presenter: IWorldMenuButtonPresenter): void;
-  displayLoginForm(): void;
-  loginMoodleSuccessful(): void;
+  displayLoginModal(): void;
+  loginSuccessful(): void;
 }

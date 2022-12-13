@@ -1,4 +1,4 @@
-import LoginMoodleUseCase from "../../../../Core/Application/UseCases/LoginMoodle/LoginMoodleUseCase";
+import LoginUseCase from "../../../../Core/Application/UseCases/Login/LoginUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
@@ -14,8 +14,8 @@ const backendMock = mock<IBackendAdapter>();
 const lmsPortMock = mock<ILMSPort>();
 const uiPortMock = mock<IUIPort>();
 
-describe("LoginMoodleUseCase", () => {
-  let systemUnderTest: LoginMoodleUseCase;
+describe("LoginUseCase", () => {
+  let systemUnderTest: LoginUseCase;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -35,7 +35,7 @@ describe("LoginMoodleUseCase", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = CoreDIContainer.resolve(LoginMoodleUseCase);
+    systemUnderTest = CoreDIContainer.resolve(LoginUseCase);
   });
   afterAll(() => {
     CoreDIContainer.restore();
@@ -68,7 +68,7 @@ describe("LoginMoodleUseCase", () => {
   });
 
   test("executeAsync calls the backend and stores correct user data in Enity", async () => {
-    backendMock.logInUser.mockResolvedValue("token");
+    backendMock.loginUser.mockResolvedValue("token");
     entityContainerMock.getEntitiesOfType.mockReturnValue([]);
 
     await systemUnderTest.executeAsync({
@@ -76,7 +76,7 @@ describe("LoginMoodleUseCase", () => {
       password: "password",
     });
 
-    expect(backendMock.logInUser).toHaveBeenCalledWith({
+    expect(backendMock.loginUser).toHaveBeenCalledWith({
       username: "username",
       password: "password",
     });
@@ -90,11 +90,11 @@ describe("LoginMoodleUseCase", () => {
       UserDataEntity
     );
 
-    expect(lmsPortMock.loginMoodleSuccessful).toHaveBeenCalled();
+    expect(lmsPortMock.loginSuccessful).toHaveBeenCalled();
   });
 
   test("Throws and displays error, if wrong userData is sent to the Backend", async () => {
-    backendMock.logInUser.mockRejectedValue("error");
+    backendMock.loginUser.mockRejectedValue("error");
     entityContainerMock.getEntitiesOfType.mockReturnValue([]);
 
     const badCall = async () => {

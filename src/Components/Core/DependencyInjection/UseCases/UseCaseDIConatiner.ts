@@ -9,8 +9,8 @@ import ILoadSpaceUseCase from "../../Application/UseCases/LoadSpace/ILoadSpaceUs
 import LoadSpaceUseCase from "../../Application/UseCases/LoadSpace/LoadSpaceUseCase";
 import ILoadWorldUseCase from "../../Application/UseCases/LoadWorld/ILoadWorldUseCase";
 import LoadWorldUseCase from "../../Application/UseCases/LoadWorld/LoadWorldUseCase";
-import ILoginMoodleUseCase from "../../Application/UseCases/LoginMoodle/ILoginMoodleUseCase";
-import LoginMoodleUseCase from "../../Application/UseCases/LoginMoodle/LoginMoodleUseCase";
+import ILoginUseCase from "../../Application/UseCases/Login/ILoginUseCase";
+import LoginUseCase from "../../Application/UseCases/Login/LoginUseCase";
 import IScoreElementUseCase from "../../Application/UseCases/ScoreElement/IScoreElementUseCase";
 import ScoreElementUseCase from "../../Application/UseCases/ScoreElement/ScoreElementUseCase";
 import USECASE_TYPES from "./USECASE_TYPES";
@@ -42,8 +42,8 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(CalculateSpaceScoreUseCase)
     .inSingletonScope();
 
-  bind<ILoginMoodleUseCase>(USECASE_TYPES.ILoginMoodleUseCase)
-    .to(LoginMoodleUseCase)
+  bind<ILoginUseCase>(USECASE_TYPES.ILoginUseCase)
+    .to(LoginUseCase)
     .inSingletonScope();
 
   bind<ILoadSpaceUseCase>(USECASE_TYPES.ILoadSpaceUseCase)

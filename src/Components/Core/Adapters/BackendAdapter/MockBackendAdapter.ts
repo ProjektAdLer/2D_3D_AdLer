@@ -100,7 +100,7 @@ export default class MockBackendAdapter extends BackendAdapter {
     return Promise.resolve(true);
   }
 
-  logInUser(userCredentials: UserCredentials): Promise<string> {
+  loginUser(userCredentials: UserCredentials): Promise<string> {
     return Promise.resolve("fakeToken");
   }
 

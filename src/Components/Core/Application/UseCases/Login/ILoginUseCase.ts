@@ -1,6 +1,6 @@
 import { IAsyncUsecase } from "../../Abstract/IAsyncUsecase";
 
-export default interface ILoginMoodleUseCase
+export default interface ILoginUseCase
   extends IAsyncUsecase<
     {
       username: string;

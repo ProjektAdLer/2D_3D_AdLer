@@ -65,7 +65,7 @@ describe("MockBackendAdapter", () => {
 
   test("logInUser resolves with a fakeToken", async () => {
     await expect(
-      systemUnderTest.logInUser({
+      systemUnderTest.loginUser({
         username: "test",
         password: "test",
       })

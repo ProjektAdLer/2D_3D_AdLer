@@ -11,14 +11,14 @@ export default class LMSPort implements ILMSPort {
   private loginButtonPresenter: ILoginButtonPresenter;
   private worldMenuButtonPresenter: IWorldMenuButtonPresenter;
 
-  displayLoginForm(): void {
+  displayLoginModal(): void {
     if (!this.loginModalPresenter)
       throw new Error("LoginModalPresenter is not registered");
 
     this.loginModalPresenter.displayLoginForm();
   }
 
-  loginMoodleSuccessful(): void {
+  loginSuccessful(): void {
     if (!this.loginModalPresenter)
       throw new Error("LoginModalPresenter is not registered");
     if (!this.loginButtonPresenter)

@@ -5,6 +5,6 @@ import ILoginButtonController from "./ILoginButtonController";
 
 export default class LoginButtonController implements ILoginButtonController {
   displayLoginForm(): void {
-    CoreDIContainer.get<ILMSPort>(PORT_TYPES.ILMSPort).displayLoginForm();
+    CoreDIContainer.get<ILMSPort>(PORT_TYPES.ILMSPort).displayLoginModal();
   }
 }
