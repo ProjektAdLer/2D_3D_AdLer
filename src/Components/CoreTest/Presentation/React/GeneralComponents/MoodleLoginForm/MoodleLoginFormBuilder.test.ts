@@ -3,17 +3,17 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import ILMSPort from "../../../../../Core/Ports/LMSPort/ILMSPort";
-import MoodleLoginFormBuilder from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginForm/MoodleLoginFormBuilder";
-import MoodleLoginFormController from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginForm/MoodleLoginFormController";
-import MoodleLoginFormPresenter from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginForm/MoodleLoginFormPresenter";
-import MoodleLoginFormViewModel from "../../../../../Core/Presentation/React/GeneralComponents/MoodleLoginForm/MoodleLoginFormViewModel";
+import LoginModalBuilder from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModalBuilder";
+import LoginModalController from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModalController";
+import LoginModalPresenter from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModalPresenter";
+import LoginModalViewModel from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModalViewModel";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
 const lmsPortMock = mock<ILMSPort>();
 
-describe("MoodleLoginFormBuilder", () => {
-  let systemUnderTest: MoodleLoginFormBuilder;
+describe("LoginModalBuilder", () => {
+  let systemUnderTest: LoginModalBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -25,7 +25,7 @@ describe("MoodleLoginFormBuilder", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new MoodleLoginFormBuilder();
+    systemUnderTest = new LoginModalBuilder();
   });
 
   afterAll(() => {
@@ -37,16 +37,14 @@ describe("MoodleLoginFormBuilder", () => {
     systemUnderTest.buildController();
 
     expect(systemUnderTest["controller"]).toBeDefined();
-    expect(systemUnderTest["controller"]).toBeInstanceOf(
-      MoodleLoginFormController
-    );
+    expect(systemUnderTest["controller"]).toBeInstanceOf(LoginModalController);
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledTimes(
       1
     );
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledWith(
       systemUnderTest["viewModel"],
       systemUnderTest["controller"],
-      MoodleLoginFormViewModel
+      LoginModalViewModel
     );
   });
 
@@ -55,13 +53,9 @@ describe("MoodleLoginFormBuilder", () => {
     systemUnderTest.buildPresenter();
 
     expect(systemUnderTest["presenter"]).toBeDefined();
-    expect(systemUnderTest["presenter"]).toBeInstanceOf(
-      MoodleLoginFormPresenter
-    );
-    expect(lmsPortMock.registerMoodleLoginFormPresenter).toHaveBeenCalledTimes(
-      1
-    );
-    expect(lmsPortMock.registerMoodleLoginFormPresenter).toHaveBeenCalledWith(
+    expect(systemUnderTest["presenter"]).toBeInstanceOf(LoginModalPresenter);
+    expect(lmsPortMock.registerLoginModalPresenter).toHaveBeenCalledTimes(1);
+    expect(lmsPortMock.registerLoginModalPresenter).toHaveBeenCalledWith(
       systemUnderTest["presenter"]
     );
   });

@@ -1,6 +1,6 @@
 import React from "react";
 import LoginButton from "~ReactComponents/WelcomePage/LoginButton/LoginButton";
-import MoodleLoginForm from "~ReactComponents/GeneralComponents/MoodleLoginForm/MoodleLoginForm";
+import LoginModal from "~ReactComponents/GeneralComponents/LoginModal/LoginModal";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 import WorldMenuButton from "~ReactComponents/WelcomePage/WorldMenuButton/WorldMenuButtonView";
@@ -40,8 +40,8 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
       </div>
 
       <div className="z-10">
-        <MoodleLoginForm />
-        {/*MoodleLoginForm muss immer am Ende der Komponenten platziert werden. Sonst buggt es mit komischen Abständen.*/}
+        <LoginModal />
+        {/*LoginModal muss immer am Ende der Komponenten platziert werden. Sonst buggt es mit komischen Abständen.*/}
       </div>
       <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
         <div className="text-lg font-bold text-white text-shadow-sm">

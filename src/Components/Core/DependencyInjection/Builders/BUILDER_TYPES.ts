@@ -4,7 +4,7 @@ const BUILDER_TYPES = {
   IElementBuilder: Symbol("IElementBuilder"),
   IDoorBuilder: Symbol("IDoorBuilder"),
   IScorePanelBuilder: Symbol("IScorePanelBuilder"),
-  IMoodleLoginFormBuilder: Symbol("IMoodleLoginFormBuilder"),
+  ILoginModalBuilder: Symbol("ILoginModalBuilder"),
   IElementModalBuilder: Symbol("IElementModalBuilder"),
   IAvatarBuilder: Symbol("IAvatarBuilder"),
   IElementsDropdownBuilder: Symbol("IElementsDropdownBuilder"),

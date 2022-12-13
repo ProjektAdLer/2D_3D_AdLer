@@ -1,7 +1,7 @@
 import { mock } from "jest-mock-extended";
 import LMSPort from "../../../Core/Ports/LMSPort/LMSPort";
 import ILoginButtonPresenter from "../../../Core/Presentation/React/WelcomePage/LoginButton/ILoginButtonPresenter";
-import IMoodleLoginFormPresenter from "../../../Core/Presentation/React/GeneralComponents/MoodleLoginForm/IMoodleLoginFormPresenter";
+import ILoginModalPresenter from "../../../Core/Presentation/React/GeneralComponents/LoginModal/ILoginModalPresenter";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import { logger } from "../../../../Lib/Logger";
 import IWorldMenuButtonPresenter from "../../../Core/Presentation/React/WelcomePage/WorldMenuButton/IWorldMenuButtonPresenter";
@@ -15,26 +15,22 @@ describe("LMSPort", () => {
     systemUnderTest = CoreDIContainer.resolve(LMSPort);
   });
 
-  test("displayLoginForm throws error if MoodleLoginFormPresenter is not registered", () => {
+  test("displayLoginForm throws error if LoginModalPresenter is not registered", () => {
     expect(() => systemUnderTest.displayLoginForm()).toThrowError(
-      "MoodleLoginFormPresenter is not registered"
+      "LoginModalPresenter is not registered"
     );
   });
 
   test("displayLoginForm calls the loginFormPresenter", () => {
-    const moodleLoginFormPresenterMock = mock<IMoodleLoginFormPresenter>();
-    systemUnderTest.registerMoodleLoginFormPresenter(
-      moodleLoginFormPresenterMock
-    );
+    const loginModalPresenterMock = mock<ILoginModalPresenter>();
+    systemUnderTest.registerLoginModalPresenter(loginModalPresenterMock);
 
     systemUnderTest.displayLoginForm();
 
-    expect(moodleLoginFormPresenterMock.displayLoginForm).toHaveBeenCalledTimes(
-      1
-    );
+    expect(loginModalPresenterMock.displayLoginForm).toHaveBeenCalledTimes(1);
   });
 
-  test("loginMoodleSuccessful throws error if MoodleLoginFormPresenter is not registered", () => {
+  test("loginMoodleSuccessful throws error if LoginModalPresenter is not registered", () => {
     const loginButtonPresenterMock = mock<ILoginButtonPresenter>();
     systemUnderTest.registerLoginButtonPresenter(loginButtonPresenterMock);
     const worldMenuButtonPresenterMock = mock<IWorldMenuButtonPresenter>();
@@ -43,15 +39,13 @@ describe("LMSPort", () => {
     );
 
     expect(() => systemUnderTest.loginMoodleSuccessful()).toThrowError(
-      "MoodleLoginFormPresenter is not registered"
+      "LoginModalPresenter is not registered"
     );
   });
 
   test("loginMoodleSuccessful throws error if LoginButtonPresenter is not registered", () => {
-    const moodleLoginFormPresenterMock = mock<IMoodleLoginFormPresenter>();
-    systemUnderTest.registerMoodleLoginFormPresenter(
-      moodleLoginFormPresenterMock
-    );
+    const loginModalPresenterMock = mock<ILoginModalPresenter>();
+    systemUnderTest.registerLoginModalPresenter(loginModalPresenterMock);
     const worldMenuButtonPresenterMock = mock<IWorldMenuButtonPresenter>();
     systemUnderTest.registerWorldMenuButtonPresenter(
       worldMenuButtonPresenterMock
@@ -62,10 +56,8 @@ describe("LMSPort", () => {
     );
   });
   test("loginMoodleSuccessful throws error if WorldMenuButtonPresenter is not registered", () => {
-    const moodleLoginFormPresenterMock = mock<IMoodleLoginFormPresenter>();
-    systemUnderTest.registerMoodleLoginFormPresenter(
-      moodleLoginFormPresenterMock
-    );
+    const loginModalPresenterMock = mock<ILoginModalPresenter>();
+    systemUnderTest.registerLoginModalPresenter(loginModalPresenterMock);
     const loginButtonPresenterMock = mock<ILoginButtonPresenter>();
     systemUnderTest.registerLoginButtonPresenter(loginButtonPresenterMock);
 
@@ -75,12 +67,10 @@ describe("LMSPort", () => {
   });
 
   test("loginMoodleSuccessful calls the loginFormPresenter and the loginButtonPresenter", () => {
-    const moodleLoginFormPresenterMock = mock<IMoodleLoginFormPresenter>();
+    const loginModalPresenterMock = mock<ILoginModalPresenter>();
     const loginButtonPresenterMock = mock<ILoginButtonPresenter>();
     const worldMenuButtonPresenterMock = mock<IWorldMenuButtonPresenter>();
-    systemUnderTest.registerMoodleLoginFormPresenter(
-      moodleLoginFormPresenterMock
-    );
+    systemUnderTest.registerLoginModalPresenter(loginModalPresenterMock);
     systemUnderTest.registerLoginButtonPresenter(loginButtonPresenterMock);
     systemUnderTest.registerWorldMenuButtonPresenter(
       worldMenuButtonPresenterMock
@@ -88,9 +78,7 @@ describe("LMSPort", () => {
 
     systemUnderTest.loginMoodleSuccessful();
 
-    expect(
-      moodleLoginFormPresenterMock.setLoginSuccessful
-    ).toHaveBeenCalledTimes(1);
+    expect(loginModalPresenterMock.setLoginSuccessful).toHaveBeenCalledTimes(1);
     expect(loginButtonPresenterMock.setLoginSuccessful).toHaveBeenCalledTimes(
       1
     );
@@ -100,20 +88,20 @@ describe("LMSPort", () => {
   });
 
   test("registerMoodleLoginPresenter registers the presenter if none are present", () => {
-    expect(systemUnderTest["moodleLoginFormPresenter"]).not.toBeDefined();
+    expect(systemUnderTest["loginModalPresenter"]).not.toBeDefined();
 
-    const presenter = mock<IMoodleLoginFormPresenter>();
-    systemUnderTest.registerMoodleLoginFormPresenter(presenter);
+    const presenter = mock<ILoginModalPresenter>();
+    systemUnderTest.registerLoginModalPresenter(presenter);
 
-    expect(systemUnderTest["moodleLoginFormPresenter"]).toBe(presenter);
+    expect(systemUnderTest["loginModalPresenter"]).toBe(presenter);
   });
 
   test("registerMoodleLoginPresenter warns an error if a presenter was already registered", () => {
-    expect(systemUnderTest["moodleLoginFormPresenter"]).not.toBeDefined();
+    expect(systemUnderTest["loginModalPresenter"]).not.toBeDefined();
 
-    const presenter = mock<IMoodleLoginFormPresenter>();
-    systemUnderTest.registerMoodleLoginFormPresenter(presenter);
-    systemUnderTest.registerMoodleLoginFormPresenter(presenter);
+    const presenter = mock<ILoginModalPresenter>();
+    systemUnderTest.registerLoginModalPresenter(presenter);
+    systemUnderTest.registerLoginModalPresenter(presenter);
 
     expect(logger.warn).toHaveBeenCalledTimes(1);
   });

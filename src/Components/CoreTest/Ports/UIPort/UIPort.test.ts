@@ -15,7 +15,7 @@ describe("UIPort", () => {
     systemUnderTest = CoreDIContainer.resolve(UIPort);
   });
 
-  test("displayNotification throws error if MoodleLoginFormPresenter is not registered", () => {
+  test("displayNotification throws error if LoginModalPresenter is not registered", () => {
     expect(() => {
       systemUnderTest.displayNotification("error message", "error");
     }).toThrowError("NotificationManagerPresenter is not registered");
