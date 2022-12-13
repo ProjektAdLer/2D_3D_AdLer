@@ -3,17 +3,17 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import ILMSPort from "../../../../../Core/Ports/LMSPort/ILMSPort";
-import MoodleLoginButtonBuilder from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonBuilder";
-import MoodleLoginButtonController from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonController";
-import MoodleLoginButtonPresenter from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonPresenter";
-import MoodleLoginButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonViewModel";
+import LoginButtonBuilder from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonBuilder";
+import LoginButtonController from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonController";
+import LoginButtonPresenter from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonPresenter";
+import LoginButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonViewModel";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
 const lmsPortMock = mock<ILMSPort>();
 
-describe("MoodleLoginButtonBuilder", () => {
-  let systemUnderTest: MoodleLoginButtonBuilder;
+describe("LoginButtonBuilder", () => {
+  let systemUnderTest: LoginButtonBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -25,7 +25,7 @@ describe("MoodleLoginButtonBuilder", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new MoodleLoginButtonBuilder();
+    systemUnderTest = new LoginButtonBuilder();
   });
 
   afterAll(() => {
@@ -37,16 +37,14 @@ describe("MoodleLoginButtonBuilder", () => {
     systemUnderTest.buildController();
 
     expect(systemUnderTest["controller"]).toBeDefined();
-    expect(systemUnderTest["controller"]).toBeInstanceOf(
-      MoodleLoginButtonController
-    );
+    expect(systemUnderTest["controller"]).toBeInstanceOf(LoginButtonController);
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledTimes(
       1
     );
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledWith(
       systemUnderTest["viewModel"],
       systemUnderTest["controller"],
-      MoodleLoginButtonViewModel
+      LoginButtonViewModel
     );
   });
 
@@ -55,13 +53,9 @@ describe("MoodleLoginButtonBuilder", () => {
     systemUnderTest.buildPresenter();
 
     expect(systemUnderTest["presenter"]).toBeDefined();
-    expect(systemUnderTest["presenter"]).toBeInstanceOf(
-      MoodleLoginButtonPresenter
-    );
-    expect(
-      lmsPortMock.registerMoodleLoginButtonPresenter
-    ).toHaveBeenCalledTimes(1);
-    expect(lmsPortMock.registerMoodleLoginButtonPresenter).toHaveBeenCalledWith(
+    expect(systemUnderTest["presenter"]).toBeInstanceOf(LoginButtonPresenter);
+    expect(lmsPortMock.registerLoginButtonPresenter).toHaveBeenCalledTimes(1);
+    expect(lmsPortMock.registerLoginButtonPresenter).toHaveBeenCalledWith(
       systemUnderTest["presenter"]
     );
   });

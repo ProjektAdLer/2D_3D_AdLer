@@ -1,17 +1,17 @@
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
-import MoodleLoginButtonController from "./MoodleLoginButtonController";
-import MoodleLoginButtonViewModel from "./MoodleLoginButtonViewModel";
+import LoginButtonController from "./LoginButtonController";
+import LoginButtonViewModel from "./LoginButtonViewModel";
 
 import moodleIcon from "../../../../../../Assets/icons/16-moodle/moodle-icon-nobg.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 
-export default function MoodleLoginButton() {
+export default function LoginButton() {
   const [viewModel, controller] = useBuilder<
-    MoodleLoginButtonViewModel,
-    MoodleLoginButtonController
-  >(BUILDER_TYPES.IMoodleLoginButtonBuilder);
+    LoginButtonViewModel,
+    LoginButtonController
+  >(BUILDER_TYPES.ILoginButtonBuilder);
 
   const [loginSuccessful] = useObservable<boolean>(viewModel?.loginSuccessful);
 

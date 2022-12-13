@@ -1,8 +1,8 @@
 import { injectable } from "inversify";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
-import MoodleLoginButtonController from "./MoodleLoginButtonController";
-import MoodleLoginButtonPresenter from "./MoodleLoginButtonPresenter";
-import MoodleLoginButtonViewModel from "./MoodleLoginButtonViewModel";
+import LoginButtonController from "./LoginButtonController";
+import LoginButtonPresenter from "./LoginButtonPresenter";
+import LoginButtonViewModel from "./LoginButtonViewModel";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
 import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
@@ -10,18 +10,18 @@ import ILMSPort from "../../../../Ports/LMSPort/ILMSPort";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 
 @injectable()
-export default class MoodleLoginButtonBuilder extends PresentationBuilder<
-  MoodleLoginButtonViewModel,
-  MoodleLoginButtonController,
+export default class LoginButtonBuilder extends PresentationBuilder<
+  LoginButtonViewModel,
+  LoginButtonController,
   undefined,
-  MoodleLoginButtonPresenter
+  LoginButtonPresenter
 > {
   constructor() {
     super(
-      MoodleLoginButtonViewModel,
-      MoodleLoginButtonController,
+      LoginButtonViewModel,
+      LoginButtonController,
       undefined,
-      MoodleLoginButtonPresenter
+      LoginButtonPresenter
     );
   }
 
@@ -29,17 +29,13 @@ export default class MoodleLoginButtonBuilder extends PresentationBuilder<
     super.buildController();
     CoreDIContainer.get<ViewModelControllerProvider>(
       CORE_TYPES.IViewModelControllerProvider
-    ).registerTupel(
-      this.viewModel,
-      this.controller,
-      MoodleLoginButtonViewModel
-    );
+    ).registerTupel(this.viewModel, this.controller, LoginButtonViewModel);
   }
 
   override buildPresenter(): void {
     super.buildPresenter();
     CoreDIContainer.get<ILMSPort>(
       PORT_TYPES.ILMSPort
-    ).registerMoodleLoginButtonPresenter(this.presenter!);
+    ).registerLoginButtonPresenter(this.presenter!);
   }
 }

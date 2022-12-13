@@ -2,12 +2,12 @@ import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import ILMSPort from "../../../../../Core/Ports/LMSPort/ILMSPort";
-import MoodleLoginButtonController from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonController";
+import LoginButtonController from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonController";
 
 const portMock = mock<ILMSPort>();
 
 describe("ElementDropdownController", () => {
-  let systemUnderTest: MoodleLoginButtonController;
+  let systemUnderTest: LoginButtonController;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -16,7 +16,7 @@ describe("ElementDropdownController", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new MoodleLoginButtonController();
+    systemUnderTest = new LoginButtonController();
   });
 
   afterAll(() => {

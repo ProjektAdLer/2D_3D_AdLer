@@ -12,7 +12,7 @@ import MoodleLoginFormBuilder from "../../Presentation/React/GeneralComponents/M
 import ScorePanelBuilder from "../../Presentation/React/SpaceDisplay/ScorePanel/ScorePanelBuilder";
 import NotificationManagerBuilder from "../../Presentation/React/GeneralComponents/NotificationManager/NotificationManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
-import MoodleLoginButtonBuilder from "../../Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonBuilder";
+import LoginButtonBuilder from "../../Presentation/React/WelcomePage/LoginButton/LoginButtonBuilder";
 import BottomTooltipBuilder from "../../Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipBuilder";
 import SpaceNamePanelBuilder from "../../Presentation/React/SpaceDisplay/SpaceNamePanel/SpaceNamePanelBuilder";
 import FullscreenSwitchBuilder from "../../Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
@@ -51,8 +51,8 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IModalManagerBuilder).to(
     NotificationManagerBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IMoodleLoginButtonBuilder).to(
-    MoodleLoginButtonBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILoginButtonBuilder).to(
+    LoginButtonBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IBottomTooltipBuilder).to(
     BottomTooltipBuilder

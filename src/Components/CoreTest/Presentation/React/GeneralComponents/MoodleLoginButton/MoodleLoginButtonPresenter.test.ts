@@ -1,14 +1,14 @@
-import MoodleLoginButtonPresenter from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonPresenter";
-import IMoodleLoginButtonPresenter from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/IMoodleLoginButtonPresenter";
-import MoodleLoginButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/MoodleLoginButton/MoodleLoginButtonViewModel";
+import LoginButtonPresenter from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonPresenter";
+import ILoginButtonPresenter from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/ILoginButtonPresenter";
+import LoginButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonViewModel";
 
-describe("MoodleLoginButtonPresenter", () => {
-  let systemUnderTest: IMoodleLoginButtonPresenter;
-  let vm: MoodleLoginButtonViewModel;
+describe("LoginButtonPresenter", () => {
+  let systemUnderTest: ILoginButtonPresenter;
+  let vm: LoginButtonViewModel;
 
   beforeEach(() => {
-    vm = new MoodleLoginButtonViewModel();
-    systemUnderTest = new MoodleLoginButtonPresenter(vm);
+    vm = new LoginButtonViewModel();
+    systemUnderTest = new LoginButtonPresenter(vm);
   });
 
   test("should set login successfull in VM", () => {
