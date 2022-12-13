@@ -21,7 +21,6 @@ export default function SpaceSelection() {
   const calculateSpaceScoreUseCase = useInjection<ICalculateSpaceScoreUseCase>(
     USECASE_TYPES.ICalculateSpaceScore
   );
-  //load space callen
 
   const [viewModel, controller] = useBuilder<
     SpaceSelectionViewModel,
@@ -29,6 +28,7 @@ export default function SpaceSelection() {
   >(BUILDER_TYPES.ISpaceSelectionBuilder);
 
   useEffect(() => {
+    // call load world use case to get relevant data
     const loadWorldAsync = async (): Promise<void> => {
       await loadWorldUseCase.executeAsync();
       viewModel.spaces.Value.forEach(([id]) =>
@@ -42,12 +42,14 @@ export default function SpaceSelection() {
     viewModel?.spaces
   );
   const [selectedRowID] = useObservable<number>(viewModel?.selectedRowID);
+
   if (!viewModel || !controller) return null;
+
   return (
     <ul className="flex flex-col gap-4 w-[100%] overflow-auto">
       {spaces?.map((space) => {
-        // spaces: 0 = id, 1 = name, 2 = isAvailable, 3 = isCompleted
-        let displayedString = space[1];
+        // spaces array elements by index:
+        // 0 = id, 1 = name, 2 = isAvailable, 3 = isCompleted
         let spaceIcon: string;
         if (space[3]) spaceIcon = spaceSolved;
         else if (space[2]) spaceIcon = spaceAvailable;
@@ -61,7 +63,7 @@ export default function SpaceSelection() {
             <SpaceSelectionRow
               icon={spaceIcon}
               locked={!space[2]}
-              spaceTitle={displayedString}
+              spaceTitle={space[1]}
               selected={selectedRowID === space[0]}
               onClickCallback={() => controller.onSpaceRowClicked(space[0])}
             />
