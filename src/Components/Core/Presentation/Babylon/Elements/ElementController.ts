@@ -6,12 +6,38 @@ import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import IUIPort from "../../../Ports/UIPort/IUIPort";
 import IElementController from "./IElementController";
 import ElementViewModel from "./ElementViewModel";
+import { ActionEvent } from "@babylonjs/core/Actions/actionEvent";
 
 export default class ElementController implements IElementController {
+  private tooltipOpen: boolean = false;
+
   constructor(private viewModel: ElementViewModel) {}
 
   @bind
   pointerOver(): void {
+    this.displayTooltip();
+  }
+
+  @bind
+  pointerOut(): void {
+    CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort).hideBottomTooltip();
+  }
+
+  @bind
+  clicked(event?: ActionEvent | undefined): void {
+    const pointerType = (event?.sourceEvent as PointerEvent).pointerType;
+    if (pointerType === "mouse") {
+      CoreDIContainer.get<IElementStartedUseCase>(
+        USECASE_TYPES.IElementStartedUseCase
+      ).executeAsync(this.viewModel.id);
+    } else if (pointerType === "touch") {
+      this.displayTooltip();
+    }
+  }
+
+  private displayTooltip(): void {
+    this.tooltipOpen = true;
+
     CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort).displayElementTooltip({
       name: this.viewModel.name.Value,
       type: this.viewModel.type.Value,
@@ -23,17 +49,5 @@ export default class ElementController implements IElementController {
       parentCourseId: 0,
       hasScored: false,
     });
-  }
-
-  @bind
-  pointerOut(): void {
-    CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort).hideBottomTooltip();
-  }
-
-  @bind
-  clicked(): void {
-    CoreDIContainer.get<IElementStartedUseCase>(
-      USECASE_TYPES.IElementStartedUseCase
-    ).executeAsync(this.viewModel.id);
   }
 }

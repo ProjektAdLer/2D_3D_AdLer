@@ -27,19 +27,6 @@ describe("BottomTooltipBuilder", () => {
   afterAll(() => {
     CoreDIContainer.restore();
   });
-  test("buildViewModel registers the viewModel with the VMCProvider", () => {
-    systemUnderTest.buildViewModel();
-
-    expect(
-      viewModelControllerProviderMock.registerViewModelOnly
-    ).toHaveBeenCalledTimes(1);
-    expect(
-      viewModelControllerProviderMock.registerViewModelOnly
-    ).toHaveBeenCalledWith(
-      systemUnderTest["viewModel"],
-      BottomTooltipViewModel
-    );
-  });
 
   test("buildPresenter builds the presenter", () => {
     systemUnderTest.buildViewModel();

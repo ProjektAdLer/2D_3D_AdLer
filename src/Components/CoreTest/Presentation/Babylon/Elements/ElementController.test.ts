@@ -1,3 +1,4 @@
+import { ActionEvent } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
 import IElementStartedUseCase from "../../../../Core/Application/UseCases/ElementStarted/IElementStartedUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
@@ -43,12 +44,37 @@ describe("ElementController", () => {
     expect(uiPortMock.hideBottomTooltip).toHaveBeenCalledTimes(1);
   });
 
-  test("clicked calls IElementStartedUseCase.executeAsync", () => {
+  test("clicked calls IElementStartedUseCase.executeAsync when pointerType is mouse", () => {
     viewModel.id = 42;
+    const mockedEvent: ActionEvent = {
+      sourceEvent: {
+        pointerType: "mouse",
+      },
+      source: undefined,
+      pointerX: 0,
+      pointerY: 0,
+      meshUnderPointer: null,
+    };
 
-    systemUnderTest.clicked();
+    systemUnderTest.clicked(mockedEvent);
 
     expect(elementStartedUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
     expect(elementStartedUseCaseMock.executeAsync).toHaveBeenCalledWith(42);
+  });
+
+  test("clicked calls IUIPort.displayElementTooltip when pointerType is touch", () => {
+    const mockedEvent: ActionEvent = {
+      sourceEvent: {
+        pointerType: "touch",
+      },
+      source: undefined,
+      pointerX: 0,
+      pointerY: 0,
+      meshUnderPointer: null,
+    };
+
+    systemUnderTest.clicked(mockedEvent);
+
+    expect(uiPortMock.displayElementTooltip).toHaveBeenCalledTimes(1);
   });
 });

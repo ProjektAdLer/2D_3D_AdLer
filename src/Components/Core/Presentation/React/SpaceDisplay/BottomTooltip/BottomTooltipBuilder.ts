@@ -8,23 +8,23 @@ import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelCon
 import IUIPort from "../../../../Ports/UIPort/IUIPort";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import IBottomTooltipPresenter from "./IBottomTooltipPresenter";
+import IBottomTooltipController from "./IBottomTooltipController";
+import BottomTooltipController from "./BottomTooltipController";
 
 @injectable()
 export default class BottomTooltipBuilder extends PresentationBuilder<
   BottomTooltipViewModel,
-  undefined,
+  IBottomTooltipController,
   undefined,
   IBottomTooltipPresenter
 > {
   constructor() {
-    super(BottomTooltipViewModel, undefined, undefined, BottomTooltipPresenter);
-  }
-
-  override buildViewModel(): void {
-    super.buildViewModel();
-    CoreDIContainer.get<ViewModelControllerProvider>(
-      CORE_TYPES.IViewModelControllerProvider
-    ).registerViewModelOnly(this.viewModel, BottomTooltipViewModel);
+    super(
+      BottomTooltipViewModel,
+      BottomTooltipController,
+      undefined,
+      BottomTooltipPresenter
+    );
   }
 
   override buildPresenter(): void {
