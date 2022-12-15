@@ -1,12 +1,18 @@
 import {
+  ArcRotateCamera,
+  EventState,
   ICrowd,
+  IKeyboardEvent,
   IMouseEvent,
   IPointerEvent,
+  KeyboardEventTypes,
+  KeyboardInfo,
   MeshBuilder,
   PickingInfo,
   PointerEventTypes,
   PointerInfo,
   RecastJSPlugin,
+  TransformNode,
   Vector3,
 } from "@babylonjs/core";
 import mock, { mockDeep } from "jest-mock-extended/lib/Mock";
@@ -19,7 +25,7 @@ import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/Avatar
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 
-jest.mock("@babylonjs/core");
+jest.mock("@babylonjs/core/Meshes");
 
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
@@ -79,11 +85,137 @@ describe("AvatarController", () => {
     CoreDIContainer.restore();
   });
 
-  test("observer callback is added to the onPointerObservable in the constructor", () => {
+  test("observer callback is added to onPointerObservable in the constructor", () => {
     expect(
       scenePresenterMock.Scene.onPointerObservable.add
     ).toHaveBeenCalledWith(systemUnderTest["processPointerEvent"]);
   });
+
+  test("observer callback is added to onKeyboardObservable in the constructor", () => {
+    expect(
+      scenePresenterMock.Scene.onKeyboardObservable.add
+    ).toHaveBeenCalledWith(systemUnderTest["processKeyboardEvent"]);
+  });
+
+  test("observer callback is added to onBeforeRenderObservable in the constructor", () => {
+    expect(
+      scenePresenterMock.Scene.onBeforeRenderObservable.add
+    ).toHaveBeenCalledWith(systemUnderTest["applyInputs"]);
+  });
+
+  test(
+    "applyInputs applies the pointerMovementTarget to the avatar " +
+      "when keyMovementTarget is zero and pointerMovementTarget is non-zero",
+    () => {
+      viewModel.keyMovementTarget = Vector3.Zero();
+      viewModel.pointerMovementTarget = new Vector3(42, 42, 42);
+
+      systemUnderTest["applyInputs"]();
+
+      expect(crowdMock.agentGoto).toHaveBeenCalledTimes(1);
+      expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledTimes(1);
+      expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledWith(
+        new Vector3(42, 42, 42)
+      );
+    }
+  );
+
+  test(
+    "applyInputs applies the keyMovementTarget to the avatar " +
+      "when keyMovementTarget is non-zero",
+    () => {
+      viewModel.pointerMovementTarget = Vector3.Zero();
+      viewModel.keyMovementTarget = new Vector3(41, 41, 41);
+      viewModel.parentNode.Value = new TransformNode("parentNode");
+      viewModel.parentNode.Value.position = new Vector3(1, 1, 1);
+
+      systemUnderTest["applyInputs"]();
+
+      expect(crowdMock.agentGoto).toHaveBeenCalledTimes(1);
+      expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledTimes(1);
+      expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledWith(
+        new Vector3(42, 42, 42)
+      );
+    }
+  );
+
+  test("applyInputs resets keyMovementTarget and pointerMovementTarget to zero", () => {
+    viewModel.keyMovementTarget = new Vector3(41, 41, 41);
+    viewModel.pointerMovementTarget = new Vector3(42, 42, 42);
+    viewModel.parentNode.Value = new TransformNode("parentNode");
+    viewModel.parentNode.Value.position = new Vector3(1, 1, 1);
+
+    systemUnderTest["applyInputs"]();
+
+    expect(viewModel.keyMovementTarget.x).toBe(0);
+    expect(viewModel.keyMovementTarget.y).toBe(0);
+    expect(viewModel.keyMovementTarget.z).toBe(0);
+    expect(viewModel.pointerMovementTarget.x).toBe(0);
+    expect(viewModel.pointerMovementTarget.y).toBe(0);
+    expect(viewModel.pointerMovementTarget.z).toBe(0);
+  });
+
+  test("processKeyboardEvent returns if the keyboard event type isn't KEYDOWN", () => {
+    const keyboardInfoMock = mock<KeyboardInfo>();
+    keyboardInfoMock.type = KeyboardEventTypes.KEYUP;
+    const eventStateMock = mock<EventState>();
+    viewModel.keyMovementTarget = Vector3.Zero();
+
+    systemUnderTest["processKeyboardEvent"](keyboardInfoMock, eventStateMock);
+
+    expect(viewModel.keyMovementTarget.x).toBe(0);
+    expect(viewModel.keyMovementTarget.y).toBe(0);
+    expect(viewModel.keyMovementTarget.z).toBe(0);
+  });
+
+  test("processKeyboardEvent returns if the keyboard event key isn't a valid key", () => {
+    const keyboardInfoMock = mock<KeyboardInfo>();
+    keyboardInfoMock.type = KeyboardEventTypes.KEYDOWN;
+    keyboardInfoMock.event.key = "z";
+    const eventStateMock = mock<EventState>();
+    viewModel.keyMovementTarget = Vector3.Zero();
+
+    systemUnderTest["processKeyboardEvent"](keyboardInfoMock, eventStateMock);
+
+    expect(viewModel.keyMovementTarget.x).toBe(0);
+    expect(viewModel.keyMovementTarget.y).toBe(0);
+    expect(viewModel.keyMovementTarget.z).toBe(0);
+  });
+
+  // TODO: fix test with correct camera setup on the parentNode
+  test.skip("processKeyboardEvent sets the keyMovementTarget in the viewModel", () => {
+    const keyboardInfoMock = mock<KeyboardInfo>();
+    keyboardInfoMock.type = KeyboardEventTypes.KEYDOWN;
+    keyboardInfoMock.event.key = "w";
+    const eventStateMock = mock<EventState>();
+    viewModel.keyMovementTarget = Vector3.Zero();
+    viewModel.parentNode.Value = new TransformNode("mockParentNode");
+    // viewModel.parentNode.Value
+    const camera = mockDeep<ArcRotateCamera>();
+
+    systemUnderTest["processKeyboardEvent"](keyboardInfoMock, eventStateMock);
+
+    expect(viewModel.keyMovementTarget.x).toBe(0);
+    expect(viewModel.keyMovementTarget.y).toBe(0);
+    expect(viewModel.keyMovementTarget.z).toBe(1);
+  });
+
+  test.each([
+    ["w", Vector3.Up()],
+    ["a", Vector3.Left()],
+    ["s", Vector3.Down()],
+    ["d", Vector3.Right()],
+    ["x", Vector3.Zero()],
+  ])(
+    'getReferenceAxisByKey returns the correct axis for key "%s"',
+    (key, expected) => {
+      const result = systemUnderTest["getReferenceAxisByKey"](key);
+
+      expect(result.x).toEqual(expected.x);
+      expect(result.y).toEqual(expected.y);
+      expect(result.z).toEqual(expected.z);
+    }
+  );
 
   test("processPointerEvent returns when pointer event type isn't POINTERDOWN", () => {
     let invalidPointerInfo = setupMockedPointerInfo(
@@ -137,8 +269,7 @@ describe("AvatarController", () => {
     expect(crowdMock.agentGoto).not.toHaveBeenCalled();
   });
 
-  // TODO: remove complete mock of babylonjs and check for correct vector values
-  test.skip("processPointerEvent sets the pointerMovementTarget in the viewModel", () => {
+  test("processPointerEvent sets the pointerMovementTarget in the viewModel", () => {
     // prevent execution of debug code
     config.isDebug = false;
 
@@ -151,7 +282,16 @@ describe("AvatarController", () => {
     expect(viewModel.pointerMovementTarget.z).toBe(42);
   });
 
+  test("debug_drawPath returns when config.isDebug is set false", () => {
+    config.isDebug = false;
+
+    systemUnderTest["debug_drawPath"](new Vector3(1, 2, 3));
+
+    expect(recastJSPluginMock.computePath).toHaveBeenCalledTimes(0);
+  });
+
   test("debug_drawPath computes a path and draws it when config.isDebug is set true", () => {
+    // const createDashedLinesMock = jest.spyOn(MeshBuilder, "CreateDashedLines");
     config.isDebug = true;
 
     systemUnderTest["debug_drawPath"](new Vector3(1, 2, 3));

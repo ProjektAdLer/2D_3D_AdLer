@@ -68,9 +68,9 @@ export default class AvatarController implements IAvatarController {
       );
 
       this.debug_drawPath(this.viewModel.pointerMovementTarget);
-
-      this.viewModel.pointerMovementTarget = Vector3.Zero();
     }
+    this.viewModel.pointerMovementTarget = Vector3.Zero();
+    this.viewModel.keyMovementTarget = Vector3.Zero();
   }
 
   @bind
@@ -84,7 +84,7 @@ export default class AvatarController implements IAvatarController {
     )
       return;
 
-    logger.log("key pressed: " + eventData.event.key);
+    // logger.log("key pressed: " + eventData.event.key);
 
     this.viewModel.keyMovementTarget = this.viewModel.keyMovementTarget
       .add(
