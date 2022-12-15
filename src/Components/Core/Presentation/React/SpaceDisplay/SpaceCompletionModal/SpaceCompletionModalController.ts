@@ -13,5 +13,6 @@ export default class SpaceCompletionModalController
 
   CloseButtonClicked(): void {
     this.viewModel.showModal.Value = false;
+    this.viewModel.wasClosedOnce = true;
   }
 }

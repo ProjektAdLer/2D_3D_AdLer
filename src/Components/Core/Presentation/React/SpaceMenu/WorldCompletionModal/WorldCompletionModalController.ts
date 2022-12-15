@@ -8,5 +8,6 @@ export default class WorldCompletionModalController
 
   CloseButtonClicked(): void {
     this.viewModel.showModal.Value = false;
+    this.viewModel.wasClosedOnce = true;
   }
 }

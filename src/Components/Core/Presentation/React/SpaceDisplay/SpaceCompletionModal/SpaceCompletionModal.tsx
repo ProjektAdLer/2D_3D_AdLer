@@ -22,7 +22,7 @@ export default function SpaceCompletionModal() {
     <StyledModal
       className="flex flex-col items-center justify-center"
       title="Raum abgeschlossen!"
-      showModal={showModal}
+      showModal={showModal && !viewModel.wasClosedOnce}
       onClose={() => {
         controller.CloseButtonClicked();
       }}

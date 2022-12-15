@@ -21,7 +21,7 @@ export default function WorldCompletionModal() {
     <StyledModal
       className="flex flex-col justify-center items-center"
       title="Lernwelt abgeschlossen!"
-      showModal={showModal}
+      showModal={showModal && !viewModel.wasClosedOnce}
       onClose={() => {
         controller.CloseButtonClicked();
       }}
