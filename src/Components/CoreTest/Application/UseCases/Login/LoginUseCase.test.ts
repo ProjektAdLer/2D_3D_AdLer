@@ -90,7 +90,7 @@ describe("LoginUseCase", () => {
       UserDataEntity
     );
 
-    expect(lmsPortMock.loginSuccessful).toHaveBeenCalled();
+    expect(lmsPortMock.onLoginSuccessful).toHaveBeenCalled();
   });
 
   test("Throws and displays error, if wrong userData is sent to the Backend", async () => {

@@ -12,7 +12,7 @@ describe("LoginButtonPresenter", () => {
   });
 
   test("should set login successfull in VM", () => {
-    systemUnderTest.setLoginSuccessful();
+    systemUnderTest.onLoginSuccessful();
     expect(vm.loginSuccessful.Value).toBe(true);
   });
 });

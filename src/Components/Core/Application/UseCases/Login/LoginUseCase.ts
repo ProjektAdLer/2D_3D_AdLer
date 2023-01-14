@@ -52,7 +52,7 @@ export default class LoginUseCase implements ILoginUseCase {
       UserDataEntity
     );
 
-    this.lmsPort.loginSuccessful();
+    this.lmsPort.onLoginSuccessful();
 
     return Promise.resolve();
   }

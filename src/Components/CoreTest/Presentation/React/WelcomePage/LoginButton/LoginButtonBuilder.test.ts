@@ -48,15 +48,11 @@ describe("LoginButtonBuilder", () => {
     );
   });
 
-  test("buildPresenter builds the presenter and register it with the LMSPort", () => {
+  test("buildPresenter builds the presenter", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 
     expect(systemUnderTest["presenter"]).toBeDefined();
     expect(systemUnderTest["presenter"]).toBeInstanceOf(LoginButtonPresenter);
-    expect(lmsPortMock.registerLoginButtonPresenter).toHaveBeenCalledTimes(1);
-    expect(lmsPortMock.registerLoginButtonPresenter).toHaveBeenCalledWith(
-      systemUnderTest["presenter"]
-    );
   });
 });

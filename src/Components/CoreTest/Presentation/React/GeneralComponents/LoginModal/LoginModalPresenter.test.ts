@@ -12,12 +12,12 @@ describe("LoginModalPresenter", () => {
   });
 
   test("should set visible to fale, if login is successfull", () => {
-    systemUnderTest.setLoginSuccessful();
+    systemUnderTest.onLoginSuccessful();
     expect(vm.visible.Value).toBe(false);
   });
 
   test("should set visible to true, if login should be displayed", () => {
-    systemUnderTest.displayLoginForm();
+    systemUnderTest.displayLoginModal();
     expect(vm.visible.Value).toBe(true);
   });
 });

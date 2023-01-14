@@ -6,8 +6,9 @@ import LoginButtonViewModel from "./LoginButtonViewModel";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
 import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
-import ILMSPort from "../../../../Ports/LMSPort/ILMSPort";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
+import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
+import ILMSAdapter from "src/Components/Core/Ports/LMSPort/ILMSAdapter";
 
 @injectable()
 export default class LoginButtonBuilder extends PresentationBuilder<
@@ -34,8 +35,8 @@ export default class LoginButtonBuilder extends PresentationBuilder<
 
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<ILMSPort>(
+    CoreDIContainer.get<AbstractPort<ILMSAdapter>>(
       PORT_TYPES.ILMSPort
-    ).registerLoginButtonPresenter(this.presenter!);
+    ).registerAdapter(this.presenter!);
   }
 }

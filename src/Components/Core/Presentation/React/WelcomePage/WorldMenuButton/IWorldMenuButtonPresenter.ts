@@ -1,3 +1,3 @@
 export default interface IWorldMenuButtonPresenter {
-  setLoginSuccessful(): void;
+  onLoginSuccessful(): void;
 }

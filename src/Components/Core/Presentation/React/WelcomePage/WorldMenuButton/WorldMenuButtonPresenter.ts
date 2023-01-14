@@ -5,7 +5,8 @@ export default class WorldMenuButtonPresenter
   implements IWorldMenuButtonPresenter
 {
   constructor(private viewModel: WorldMenuButtonViewModel) {}
-  setLoginSuccessful(): void {
+  displayLoginModal(): void {}
+  onLoginSuccessful(): void {
     this.viewModel.loggedInMoodle.Value = true;
   }
 }

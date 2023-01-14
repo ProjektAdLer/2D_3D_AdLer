@@ -1,8 +1,9 @@
 import { injectable } from "inversify";
+import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
+import ILMSAdapter from "src/Components/Core/Ports/LMSPort/ILMSAdapter";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
-import ILMSPort from "../../../../Ports/LMSPort/ILMSPort";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
 import LoginModalController from "./LoginModalController";
@@ -35,9 +36,8 @@ export default class LoginModalBuilder extends PresentationBuilder<
 
   override buildPresenter(): void {
     super.buildPresenter();
-
-    CoreDIContainer.get<ILMSPort>(
+    CoreDIContainer.get<AbstractPort<ILMSAdapter>>(
       PORT_TYPES.ILMSPort
-    ).registerLoginModalPresenter(this.presenter!);
+    ).registerAdapter(this.presenter!);
   }
 }

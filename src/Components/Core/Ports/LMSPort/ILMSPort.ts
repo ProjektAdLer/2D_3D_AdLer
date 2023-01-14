@@ -1,11 +1,7 @@
-import IWorldMenuButtonPresenter from "~ReactComponents/WelcomePage/WorldMenuButton/IWorldMenuButtonPresenter";
-import ILoginButtonPresenter from "../../Presentation/React/WelcomePage/LoginButton/ILoginButtonPresenter";
-import ILoginModalPresenter from "../../Presentation/React/GeneralComponents/LoginModal/ILoginModalPresenter";
+import ILMSAdapter from "./ILMSAdapter";
+import { IAbstractPort } from "./../AbstractPort/IAbstractPort";
 
-export default interface ILMSPort {
-  registerLoginModalPresenter(presenter: ILoginModalPresenter): void;
-  registerLoginButtonPresenter(presenter: ILoginButtonPresenter): void;
-  registerWorldMenuButtonPresenter(presenter: IWorldMenuButtonPresenter): void;
+export default interface ILMSPort extends IAbstractPort<ILMSAdapter> {
   displayLoginModal(): void;
-  loginSuccessful(): void;
+  onLoginSuccessful(): void;
 }

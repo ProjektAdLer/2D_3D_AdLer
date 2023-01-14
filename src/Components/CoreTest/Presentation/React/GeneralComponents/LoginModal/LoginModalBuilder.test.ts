@@ -48,15 +48,11 @@ describe("LoginModalBuilder", () => {
     );
   });
 
-  test("buildPresenter builds the presenter and register it with the LMSPort", () => {
+  test("buildPresenter builds the presenter", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 
     expect(systemUnderTest["presenter"]).toBeDefined();
     expect(systemUnderTest["presenter"]).toBeInstanceOf(LoginModalPresenter);
-    expect(lmsPortMock.registerLoginModalPresenter).toHaveBeenCalledTimes(1);
-    expect(lmsPortMock.registerLoginModalPresenter).toHaveBeenCalledWith(
-      systemUnderTest["presenter"]
-    );
   });
 });

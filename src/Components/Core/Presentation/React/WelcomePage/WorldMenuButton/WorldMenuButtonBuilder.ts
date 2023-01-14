@@ -1,10 +1,11 @@
 import { injectable } from "inversify";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
-import ILMSPort from "../../../../Ports/LMSPort/ILMSPort";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import WorldMenuButtonViewModel from "./WorldMenuButtonViewModel";
 import WorldMenuButtonPresenter from "./WorldMenuButtonPresenter";
+import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
+import ILMSAdapter from "src/Components/Core/Ports/LMSPort/ILMSAdapter";
 
 @injectable()
 export default class WorldMenuButtonBuilder extends PresentationBuilder<
@@ -24,8 +25,8 @@ export default class WorldMenuButtonBuilder extends PresentationBuilder<
 
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<ILMSPort>(
+    CoreDIContainer.get<AbstractPort<ILMSAdapter>>(
       PORT_TYPES.ILMSPort
-    ).registerWorldMenuButtonPresenter(this.presenter!);
+    ).registerAdapter(this.presenter!);
   }
 }
