@@ -1,44 +1,16 @@
-import { injectable } from "inversify";
-import BUILDER_TYPES from "../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
-import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import SpacePort from "../../../Core/Ports/SpacePort/SpacePort";
-import PresentationBuilder from "../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
 import ScorePanelPresenter from "../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanelPresenter";
-import ScorePanelViewModel from "../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanelViewModel";
 import { mock } from "jest-mock-extended";
 import SpacePresenter from "../../../Core/Presentation/Babylon/Spaces/SpacePresenter";
 import SpaceTO from "../../../Core/Application/DataTransferObjects/SpaceTO";
 
 jest.mock("src/Lib/Logger");
 
-@injectable()
-//@ts-ignore
-class ScorePanelBuilderMock extends PresentationBuilder<
-  ScorePanelViewModel,
-  undefined,
-  undefined,
-  ScorePanelPresenter
-> {
-  constructor() {
-    super(ScorePanelViewModel, undefined, undefined, ScorePanelPresenter);
-  }
-}
-
 describe("SpacePort", () => {
   let systemUnderTest: SpacePort;
 
   beforeEach(() => {
-    CoreDIContainer.snapshot();
-
-    CoreDIContainer.rebind(BUILDER_TYPES.IScorePanelBuilder).to(
-      ScorePanelBuilderMock
-    );
-
     systemUnderTest = new SpacePort();
-  });
-
-  afterEach(() => {
-    CoreDIContainer.restore();
   });
 
   test("registerAdapter adds new presenter", () => {
