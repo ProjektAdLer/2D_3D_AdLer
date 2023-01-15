@@ -16,8 +16,10 @@
     "inversify": "^6.0.1",
     "inversify-react": "^1.0.2",
     "path-browserify": "^1.0.1",
+    "pdfobject": "^2.2.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-pdf": "^6.2.2",
     "react-router-dom": "^6.3.0",
     "recast-detour": "^1.5.0",
     "reflect-metadata": "^0.1.13",
@@ -59,10 +61,13 @@
     "@types/glob": "^7.2.0",
     "@types/inversify": "^2.0.33",
     "@types/jest": "^28.1.4",
+    "@types/pdfobject": "^2.2.3",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "@types/react-pdf": "^6.2.0",
     "@types/react-router-dom": "^5.3.3",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
+    "cross-env": "^7.0.3",
     "customize-cra": "^1.0.0",
     "dotenv-cli": "^6.0.0",
     "husky": "^8.0.1",
@@ -79,8 +84,7 @@
     "ts-jest": "^28.0.5",
     "ts-node": "^10.8.2",
     "tsconfig-paths-webpack-plugin": "^4.0.0",
-    "typescript": "^4.7.4",
-    "cross-env": "^7.0.3"
+    "typescript": "^4.7.4"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"

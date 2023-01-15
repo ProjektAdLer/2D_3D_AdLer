@@ -9,6 +9,7 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import IElementModalController from "./IElementModalController";
 import { ElementTypes } from "src/Components/Core/Domain/Types/ElementTypes";
+import PDFComponent from "./SubComponents/PDFComponent";
 
 const elementBuilder = (
   viewModel: ElementModalViewModel,
@@ -28,6 +29,8 @@ const elementBuilder = (
           <ImageComponent viewModel={viewModel} />
         </div>
       );
+    case ElementTypes.pdf:
+      return <PDFComponent viewModel={viewModel} />;
     default:
       return <div>No Element selected</div>;
   }
