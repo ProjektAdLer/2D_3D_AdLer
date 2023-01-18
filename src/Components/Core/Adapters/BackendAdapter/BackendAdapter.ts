@@ -32,6 +32,7 @@ export default class BackendAdapter implements IBackendAdapter {
 
     return isSuceess.data;
   }
+
   async updatePlayerData(
     userToken: string,
     playerData: Partial<PlayerDataTO>
@@ -50,6 +51,7 @@ export default class BackendAdapter implements IBackendAdapter {
 
     return resp.data;
   }
+
   async getPlayerData(userToken: string): Promise<PlayerDataTO> {
     const resp = await axios.get<PlayerDataTO>(
       config.serverURL + "/PlayerData",
@@ -62,6 +64,7 @@ export default class BackendAdapter implements IBackendAdapter {
 
     return resp.data;
   }
+
   async getElementScore(
     userToken: string,
     elementId: ElementID,
@@ -83,6 +86,7 @@ export default class BackendAdapter implements IBackendAdapter {
 
     return resp.data;
   }
+
   async getWorldStatus(
     userToken: string,
     worldId: number
@@ -98,6 +102,7 @@ export default class BackendAdapter implements IBackendAdapter {
 
     return resp.data;
   }
+
   getElementSource(
     userToken: string,
     elementId: number,
@@ -118,6 +123,7 @@ export default class BackendAdapter implements IBackendAdapter {
       )
       .then((response) => response.data.filePath);
   }
+
   async scoreH5PElement(data: ScoreH5PElementRequest): Promise<boolean> {
     const response = await axios.patch<{
       isSuceess: true;
@@ -155,6 +161,7 @@ export default class BackendAdapter implements IBackendAdapter {
 
     return response.data;
   }
+
   async getWorldData({
     userToken,
     worldId,
@@ -237,6 +244,7 @@ export default class BackendAdapter implements IBackendAdapter {
 
     return token.data.moodleToken;
   }
+
   public mapElement = (element: APIElement): ElementTO => {
     return {
       id: element.id,
@@ -248,6 +256,7 @@ export default class BackendAdapter implements IBackendAdapter {
       parentSpaceId: element.learningSpaceParentId,
     } as ElementTO;
   };
+
   public async getDSL({
     userToken,
     worldId,
