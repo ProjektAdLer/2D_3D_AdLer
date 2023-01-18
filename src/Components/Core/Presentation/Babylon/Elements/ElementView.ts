@@ -21,6 +21,7 @@ import bind from "bind-decorator";
 const modelLinks: { [key in ElementTypes]?: any } = {
   [ElementTypes.h5p]: require("../../../../../Assets/3DModel_LElement_H5P.glb"),
   [ElementTypes.text]: require("../../../../../Assets/3DModel_LElement_Text.glb"),
+  [ElementTypes.pdf]: require("../../../../../Assets/3DModel_LElement_Text.glb"),
   [ElementTypes.image]: require("../../../../../Assets/3DModel_LElement_Image.glb"),
   [ElementTypes.video]: require("../../../../../Assets/3DModel_LElement_Video.glb"),
 };

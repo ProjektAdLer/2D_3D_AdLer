@@ -15,15 +15,18 @@ export default class MockBackendAdapter extends BackendAdapter {
       "Method not implemented, since we are in the Fake Backend."
     );
   }
+
   updatePlayerData(): Promise<PlayerDataTO> {
     return Promise.resolve(new PlayerDataTO());
   }
+
   getPlayerData(): Promise<PlayerDataTO> {
     return Promise.resolve({
       playerGender: "Male",
       playerWorldColor: "Blue",
     });
   }
+
   getElementScore(
     userToken: string,
     elementId: ElementID
@@ -33,6 +36,7 @@ export default class MockBackendAdapter extends BackendAdapter {
       successss: true,
     });
   }
+
   getWorldStatus(): Promise<WorldStatusTO> {
     return Promise.resolve({
       courseId: 1,
@@ -56,6 +60,7 @@ export default class MockBackendAdapter extends BackendAdapter {
       ],
     });
   }
+
   getElementSource(userToken: string, elementId: number): Promise<string> {
     const elementType = this.worldTO.learningWorld.learningElements.find(
       (element) => element.id === elementId
@@ -67,7 +72,7 @@ export default class MockBackendAdapter extends BackendAdapter {
           "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel"
         );
       case "video":
-        return Promise.resolve("https://www.youtube.com/watch?v=_bcfxty39Cw");
+        return Promise.resolve("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
       case "image":
         return Promise.resolve(
           "https://testmoodle.cluuub.xyz/webservice/pluginfile.php/284/mod_resource/content/0/Cars%20is%20cool.jpg?forcedownload=1&token=46dd4cbdafda7fc864c8ce73aae3a897"
@@ -76,11 +81,16 @@ export default class MockBackendAdapter extends BackendAdapter {
         return Promise.resolve(
           "https://testmoodle.cluuub.xyz/webservice/pluginfile.php/282/mod_resource/content/0/Text-File-Example.txt?forcedownload=1&token=46dd4cbdafda7fc864c8ce73aae3a897"
         );
+      case "pdf":
+        return Promise.resolve(
+          "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+        );
       /* istanbul ignore next */
       default:
         throw new Error("Unknown element type");
     }
   }
+
   scoreH5PElement(): Promise<boolean> {
     return Promise.resolve(true);
   }
@@ -127,7 +137,7 @@ export default class MockBackendAdapter extends BackendAdapter {
           },
           description: "Beschreibung des Raumes 1",
           goals: "Lernziel des Raumes 1",
-          learningSpaceContent: [1, 2, 3, 4],
+          learningSpaceContent: [1, 2, 3, 4, 17],
           requiredPoints: 0,
           requirements: [],
         },
@@ -440,6 +450,23 @@ export default class MockBackendAdapter extends BackendAdapter {
             },
           ],
           learningSpaceParentId: 4,
+        },
+        {
+          id: 17,
+          identifier: {
+            type: "FileName",
+            value: "Sample PDF",
+          },
+          description: "PDF datei",
+          goals: "PDF datei",
+          elementCategory: "pdf",
+          learningElementValueList: [
+            {
+              type: "Points",
+              value: "25",
+            },
+          ],
+          learningSpaceParentId: 1,
         },
       ],
     },
