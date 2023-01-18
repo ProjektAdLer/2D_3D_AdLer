@@ -116,7 +116,8 @@ export default class MockBackendAdapter extends BackendAdapter {
         value: "Lernwelt mit dem aktuellen Stand",
       },
       description: "Hier wird der aktuelle Stand der Lernwelt beschrieben.",
-      goals: "Die Zuschauer nicht langweilen",
+      goals:
+        "Studierenden benennen den englischen Begriff und die Abk\u00FCrzung.\nStudierende nennen die Bestandteile, Daten und Methoden, von abstrakten Datentypen.\nStudierende nennen zu den Bestandteilen auch die Eigenschaften, implementierbar in versch. Sprachen, versch. Anwendungsgebiete.\nStudierende beschreiben die zwei Datenkategorien Nutzerdaten und Verwaltungsdaten in Abstrakten Datentypen.\nStudierende beschreiben Gemeinsamkeiten und Unterschiede von Abstrakten Datentypen gg\u00FC.(klassischen) Datentypen.\nStudierende z\u00E4hlen verschiedene Abstrakte Datentypen auf.",
       learningWorldContent: [],
       learningSpaces: [
         {
@@ -126,7 +127,8 @@ export default class MockBackendAdapter extends BackendAdapter {
             value: "Raum Nummer 1",
           },
           description: "Beschreibung des Raumes 1",
-          goals: "Lernziel des Raumes 1",
+          goals:
+            "Studierenden benennen den englischen Begriff und die Abk\u00FCrzung.\nStudierende nennen die Bestandteile, Daten und Methoden, von abstrakten Datentypen.\nStudierende nennen zu den Bestandteilen auch die Eigenschaften, implementierbar in versch. Sprachen, versch. Anwendungsgebiete.\nStudierende beschreiben die zwei Datenkategorien Nutzerdaten und Verwaltungsdaten in Abstrakten Datentypen.\nStudierende beschreiben Gemeinsamkeiten und Unterschiede von Abstrakten Datentypen gg\u00FC.(klassischen) Datentypen.\nStudierende z\u00E4hlen verschiedene Abstrakte Datentypen auf.",
           learningSpaceContent: [1, 2, 3, 4],
           requiredPoints: 0,
           requirements: [],

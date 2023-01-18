@@ -6,6 +6,7 @@ import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import { useState } from "react";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
+import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
 
 export default function SpaceGoalPanel() {
   const [viewModel] = useBuilder<
@@ -54,7 +55,7 @@ export default function SpaceGoalPanel() {
             src={goalIcon}
             alt="Learning-Goal-Icon"
           ></img>
-          {goal}
+          <TextWithLineBreaks text={goal} />
         </StyledButton>
       </div>
     );
