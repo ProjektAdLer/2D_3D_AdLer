@@ -10,6 +10,7 @@ import DetailSectionController from "./DetailSectionController";
 import { getElementIcon } from "../../../Utils/GetIcon";
 import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
 import { logger } from "src/Lib/Logger";
+import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
 
 export default function DetailSection() {
   const [viewModel, controller] = useBuilder<
@@ -53,7 +54,9 @@ export default function DetailSection() {
           <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
             Beschreibung:
           </div>
-          <div className="items-start ml-6 roboto-regular">{description}</div>
+          <div className="items-start ml-6 roboto-regular">
+            <TextWithLineBreaks text={description} />
+          </div>
         </div>
       )}
       {goals !== "" && (
@@ -62,7 +65,7 @@ export default function DetailSection() {
             Lernziele:
           </div>
           <div className="items-start ml-6 lg:text:lg roboto-regular">
-            {goals}
+            <TextWithLineBreaks text={goals} />
           </div>
         </div>
       )}
