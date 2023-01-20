@@ -72,7 +72,7 @@ export default class MockBackendAdapter extends BackendAdapter {
           "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel"
         );
       case "video":
-        return Promise.resolve("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+        return Promise.resolve("https://youtu.be/8X4cDoM3R7E?t=189");
       case "image":
         return Promise.resolve(
           "https://testmoodle.cluuub.xyz/webservice/pluginfile.php/284/mod_resource/content/0/Cars%20is%20cool.jpg?forcedownload=1&token=46dd4cbdafda7fc864c8ce73aae3a897"
