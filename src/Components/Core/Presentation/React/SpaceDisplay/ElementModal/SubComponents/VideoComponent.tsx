@@ -37,6 +37,7 @@ export default function VideoComponent({
       }
     }
 
+    // TODO: Run this only if the viewmodel has a value
     getVideoUrl();
   }, []);
 
