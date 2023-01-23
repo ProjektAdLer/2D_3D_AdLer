@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import ElementModalViewModel from "../ElementModalViewModel";
 import PDFObject from "pdfobject";
 import { Document, Page, pdfjs } from "react-pdf";
+import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import axios from "axios";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 export default function PDFComponent({
@@ -11,13 +13,15 @@ export default function PDFComponent({
 }) {
   return (
     <div className="w-[400px] lg:w-[800px] h-[80vh] text-black font-medium overflow-auto bg-adlerblue-100 p-3">
-      {PDFObject.supportsPDFs ? (
-        // comment in to test mobile version on desktop
-        // {false ? (
-        <DesktopPDFComponent viewModel={viewModel} />
-      ) : (
-        <MobilePDFComponent viewModel={viewModel} />
-      )}
+      {
+        // comment in "false ? (" and comment out "PDFObject.supportsPDFs ? (" to test mobile version on desktop, reverse before pushing!!!
+        PDFObject.supportsPDFs ? (
+          // false ? (
+          <DesktopPDFComponent viewModel={viewModel} />
+        ) : (
+          <MobilePDFComponent viewModel={viewModel} />
+        )
+      }
     </div>
   );
 }
@@ -29,11 +33,8 @@ function DesktopPDFComponent({
 }: {
   viewModel: ElementModalViewModel;
 }) {
-  // options object can be used to set height and width of the PDF viewer, remove if not necessary
-  const options: PDFObject.Options = { height: "100%", width: "100%" };
-
   useEffect(() => {
-    PDFObject.embed(viewModel.filePath.Value, "#pdf", options);
+    PDFObject.embed(viewModel.filePath.Value, "#pdf");
   });
 
   return <div id="pdf" className="h-full" />;
@@ -54,18 +55,35 @@ function MobilePDFComponent({
     setNumPages(numPages);
   }
 
-  // TODO: add buttons to change page, let them call setPageNumber onClick
   return (
     <div className="h-full">
       <Document
         file={viewModel.filePath.Value}
         onLoadSuccess={onDocumentLoadSuccess}
       >
-        <Page pageNumber={pageNumber} />
+        <Page
+          pageNumber={pageNumber}
+          renderTextLayer={false}
+          renderAnnotationLayer={false}
+        />
       </Document>
+      <StyledButton
+        onClick={() => {
+          setPageNumber(Math.max(pageNumber - 1, 1));
+        }}
+      >
+        {"<"}
+      </StyledButton>
       <p>
         Page {pageNumber} of {numPages}
       </p>
+      <StyledButton
+        onClick={() => {
+          setPageNumber(Math.min(pageNumber + 1, numPages!));
+        }}
+      >
+        {">"}
+      </StyledButton>
     </div>
   );
 }

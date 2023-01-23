@@ -83,7 +83,7 @@ export default class MockBackendAdapter extends BackendAdapter {
         );
       case "pdf":
         return Promise.resolve(
-          "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+          "https://www.africau.edu/images/default/sample.pdf"
         );
       /* istanbul ignore next */
       default:
