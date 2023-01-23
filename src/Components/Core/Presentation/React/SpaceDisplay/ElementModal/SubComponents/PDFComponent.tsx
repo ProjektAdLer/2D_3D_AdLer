@@ -36,7 +36,7 @@ function DesktopPDFComponent({
     PDFObject.embed(viewModel.filePath.Value, "#pdf", options);
   });
 
-  return <div id="pdf" />;
+  return <div id="pdf" className="h-full" />;
 }
 
 // Mobile component uses react-pdf to display the PDF, because most mobile-browsers don't support inline PDFs
@@ -56,7 +56,7 @@ function MobilePDFComponent({
 
   // TODO: add buttons to change page, let them call setPageNumber onClick
   return (
-    <div>
+    <div className="h-full">
       <Document
         file={viewModel.filePath.Value}
         onLoadSuccess={onDocumentLoadSuccess}
