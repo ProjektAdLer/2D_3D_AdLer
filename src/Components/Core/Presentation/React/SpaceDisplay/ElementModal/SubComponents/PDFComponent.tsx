@@ -3,7 +3,6 @@ import ElementModalViewModel from "../ElementModalViewModel";
 import PDFObject from "pdfobject";
 import { Document, Page, pdfjs } from "react-pdf";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-import axios from "axios";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 export default function PDFComponent({
