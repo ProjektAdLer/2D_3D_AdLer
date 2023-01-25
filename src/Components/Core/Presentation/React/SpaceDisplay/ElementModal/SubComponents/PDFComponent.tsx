@@ -14,8 +14,8 @@ export default function PDFComponent({
     <div className="w-[400px] lg:w-[800px] h-[80vh] text-black font-medium overflow-auto bg-adlerblue-100 p-3">
       {
         // comment in "false ? (" and comment out "PDFObject.supportsPDFs ? (" to test mobile version on desktop, reverse before pushing!!!
-        // PDFObject.supportsPDFs ? (
-        false ? (
+        PDFObject.supportsPDFs ? (
+          // false ? (
           <DesktopPDFComponent viewModel={viewModel} />
         ) : (
           <MobilePDFComponent viewModel={viewModel} />
