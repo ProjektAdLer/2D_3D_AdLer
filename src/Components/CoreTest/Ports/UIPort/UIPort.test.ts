@@ -55,13 +55,31 @@ describe("UIPort", () => {
     expect(mockBottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
   });
 
-  test("displayElementTooltip throws error if BottomTooltipPresenter is not registered", () => {
+  test("displayExitQueryTooltip throws error if BottomTooltipPresenter is not registered", () => {
     expect(() => {
-      systemUnderTest.displayElementTooltip({} as ElementTO);
+      systemUnderTest.displayExitQueryTooltip();
     }).toThrowError("BottomTooltipPresenter not registered");
   });
 
-  test("displayElementTooltip calls the BottomTooltipPresenter displayElement method", () => {
+  test("displayElementSummaryTooltip throws error if BottomTooltipPresenter is not registered", () => {
+    expect(() => {
+      systemUnderTest.displayElementSummaryTooltip({} as ElementTO);
+    }).toThrowError("BottomTooltipPresenter not registered");
+  });
+  test("displayExitQueryTooltip calls the corresponding BottomTooltipPresenter method", () => {
+    const mockBottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
+    systemUnderTest.registerBottomTooltipPresenter(
+      mockBottomTooltipPresenterMock
+    );
+
+    systemUnderTest.displayExitQueryTooltip();
+
+    expect(
+      mockBottomTooltipPresenterMock.displayExitQueryTooltip
+    ).toHaveBeenCalledTimes(1);
+  });
+
+  test("displayElementSummaryTooltip calls the corresponding BottomTooltipPresenter method", () => {
     const mockBottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
     systemUnderTest.registerBottomTooltipPresenter(
       mockBottomTooltipPresenterMock
@@ -74,14 +92,14 @@ describe("UIPort", () => {
       },
     };
 
-    systemUnderTest.displayElementTooltip(ElementTO);
+    systemUnderTest.displayElementSummaryTooltip(ElementTO);
 
-    expect(mockBottomTooltipPresenterMock.displayElement).toHaveBeenCalledTimes(
-      1
-    );
-    expect(mockBottomTooltipPresenterMock.displayElement).toHaveBeenCalledWith(
-      ElementTO
-    );
+    expect(
+      mockBottomTooltipPresenterMock.displayElementSummaryTooltip
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      mockBottomTooltipPresenterMock.displayElementSummaryTooltip
+    ).toHaveBeenCalledWith(ElementTO);
   });
 
   test("registerBottomTooltipPresenter registeres the presenter if none is present", () => {

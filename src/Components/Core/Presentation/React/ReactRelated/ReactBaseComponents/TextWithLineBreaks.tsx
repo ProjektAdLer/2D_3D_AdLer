@@ -6,7 +6,7 @@ export default function TextWithLineBreaks({ text, ...restProps }: Props) {
   return (
     <div {...restProps}>
       {text!.split("\n").map((str) => (
-        <p>{str}</p>
+        <p key={str}>{str}</p>
       ))}
     </div>
   );

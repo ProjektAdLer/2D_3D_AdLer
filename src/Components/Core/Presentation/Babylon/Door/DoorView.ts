@@ -1,4 +1,12 @@
-import { Animation, Mesh, Tools, Vector3 } from "@babylonjs/core";
+import {
+  ActionManager,
+  Animation,
+  Color3,
+  ExecuteCodeAction,
+  Mesh,
+  Tools,
+  Vector3,
+} from "@babylonjs/core";
 import bind from "bind-decorator";
 import Readyable from "../../../../../Lib/Readyable";
 import SCENE_TYPES, {
@@ -8,13 +16,17 @@ import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
 import DoorViewModel from "./DoorViewModel";
+import DoorController from "./DoorController";
 
 const modelLink = require("../../../../../Assets/3DModel_Door.glb");
 
 export default class DoorView extends Readyable {
   private scenePresenter: IScenePresenter;
 
-  constructor(private viewModel: DoorViewModel) {
+  constructor(
+    private viewModel: DoorViewModel,
+    private controller: DoorController
+  ) {
     super();
 
     // inject scenePresenter via factory
@@ -36,6 +48,8 @@ export default class DoorView extends Readyable {
     await this.loadMeshAsync();
     this.positionMesh();
     this.setupAnimation();
+    this.registerActions();
+    this.addToHighlightLayer();
 
     this.resolveIsReady();
   }
@@ -89,5 +103,35 @@ export default class DoorView extends Readyable {
         );
       });
     }
+  }
+  @bind
+  private addToHighlightLayer(): void {
+    this.viewModel.meshes.Value.forEach((mesh) => {
+      this.scenePresenter.HighlightLayer.addMesh(mesh, Color3.Blue());
+    });
+  }
+  @bind
+  public registerActions(): void {
+    this.viewModel.meshes.Value.forEach((mesh) => {
+      mesh.actionManager = new ActionManager(this.scenePresenter.Scene);
+      mesh.actionManager.registerAction(
+        new ExecuteCodeAction(
+          ActionManager.OnPickTrigger,
+          this.controller.clicked
+        )
+      );
+      mesh.actionManager.registerAction(
+        new ExecuteCodeAction(
+          ActionManager.OnPointerOverTrigger,
+          this.controller.pointerOver
+        )
+      );
+      mesh.actionManager.registerAction(
+        new ExecuteCodeAction(
+          ActionManager.OnPointerOutTrigger,
+          this.controller.pointerOut
+        )
+      );
+    });
   }
 }

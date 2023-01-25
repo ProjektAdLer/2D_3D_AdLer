@@ -15,7 +15,7 @@ describe("BottomTooltipPresenter", () => {
   });
 
   test("should set the Text of Panel and show it", () => {
-    systemUnderTest.displayElement({
+    systemUnderTest.displayElementSummaryTooltip({
       id: 1,
       name: "Test",
       elementData: {
@@ -23,6 +23,12 @@ describe("BottomTooltipPresenter", () => {
       },
     });
     expect(vm.text.Value).toBe("Test");
+    expect(vm.show.Value).toBe(true);
+  });
+  test("displayExitQueryTooltip should set text and type correctly ", () => {
+    systemUnderTest.displayExitQueryTooltip();
+    expect(vm.text.Value).toBe("Raum verlassen?");
+    expect(vm.iconType.Value).toBe("notAnElement");
     expect(vm.show.Value).toBe(true);
   });
 });
