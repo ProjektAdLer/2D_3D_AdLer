@@ -5,6 +5,9 @@ import { Document, Page, pdfjs } from "react-pdf";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
+// set to true to always show the mobile version of the PDF component
+const debug_allwaysShowMobile = false;
+
 export default function PDFComponent({
   viewModel,
 }: {
@@ -12,15 +15,11 @@ export default function PDFComponent({
 }) {
   return (
     <div className="w-[400px] lg:w-[800px] h-[80vh] text-black font-medium overflow-auto bg-adlerblue-100 p-3">
-      {
-        // comment in "false ? (" and comment out "PDFObject.supportsPDFs ? (" to test mobile version on desktop, reverse before pushing!!!
-        PDFObject.supportsPDFs ? (
-          // false ? (
-          <DesktopPDFComponent viewModel={viewModel} />
-        ) : (
-          <MobilePDFComponent viewModel={viewModel} />
-        )
-      }
+      {PDFObject.supportsPDFs || debug_allwaysShowMobile ? (
+        <DesktopPDFComponent viewModel={viewModel} />
+      ) : (
+        <MobilePDFComponent viewModel={viewModel} />
+      )}
     </div>
   );
 }
@@ -72,6 +71,7 @@ function MobilePDFComponent({
         onLoadSuccess={onDocumentLoadSuccess}
       >
         <Page
+          data-testid="pdfPage"
           pageNumber={pageNumber}
           renderTextLayer={false}
           renderAnnotationLayer={false}

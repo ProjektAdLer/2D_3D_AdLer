@@ -51,7 +51,7 @@ module.exports = {
         statements: 92,
       },
     };
-    config.setupFiles = ["./jest-setup-files.ts"];
+    config.setupFilesAfterEnv = ["./jest-setup-files.ts"];
     config.verbose = true;
 
     config.moduleNameMapper = addJestMappings();
