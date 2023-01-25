@@ -6,7 +6,8 @@ import ElementTO from "../../Application/DataTransferObjects/ElementTO";
 export default interface IUIPort {
   registerNotificationManager(presenter: INotificationManagerPresenter): void;
   displayNotification(errorMessage: string, type: NotificationType): void;
-  displayElementTooltip(element: ElementTO): void;
+  displayExitQueryTooltip(): void;
+  displayElementSummaryTooltip(element: ElementTO): void;
   hideBottomTooltip(): void;
   registerBottomTooltipPresenter(
     bottomTooltipPresenter: IBottomTooltipPresenter

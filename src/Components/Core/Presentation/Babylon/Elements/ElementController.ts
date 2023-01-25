@@ -9,8 +9,6 @@ import ElementViewModel from "./ElementViewModel";
 import { ActionEvent } from "@babylonjs/core/Actions/actionEvent";
 
 export default class ElementController implements IElementController {
-  private tooltipOpen: boolean = false;
-
   constructor(private viewModel: ElementViewModel) {}
 
   @bind
@@ -36,9 +34,9 @@ export default class ElementController implements IElementController {
   }
 
   private displayTooltip(): void {
-    this.tooltipOpen = true;
-
-    CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort).displayElementTooltip({
+    CoreDIContainer.get<IUIPort>(
+      PORT_TYPES.IUIPort
+    ).displayElementSummaryTooltip({
       name: this.viewModel.name.Value,
       type: this.viewModel.type.Value,
       id: this.viewModel.id,

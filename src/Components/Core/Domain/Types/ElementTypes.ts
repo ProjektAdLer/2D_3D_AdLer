@@ -4,6 +4,7 @@ export enum ElementTypes {
   image = "image",
   video = "video",
   pdf = "pdf",
+  notAnElement = "notAnElement",
 }
 
 export type ElementTypeStrings = keyof typeof ElementTypes;
