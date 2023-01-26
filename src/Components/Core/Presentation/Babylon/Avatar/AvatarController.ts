@@ -10,7 +10,6 @@ import {
   Vector3,
 } from "@babylonjs/core";
 import bind from "bind-decorator";
-import { logger } from "src/Lib/Logger";
 import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
@@ -83,8 +82,6 @@ export default class AvatarController implements IAvatarController {
       !validKeys.includes(eventData.event.key)
     )
       return;
-
-    // logger.log("key pressed: " + eventData.event.key);
 
     this.viewModel.keyMovementTarget = this.viewModel.keyMovementTarget
       .add(
