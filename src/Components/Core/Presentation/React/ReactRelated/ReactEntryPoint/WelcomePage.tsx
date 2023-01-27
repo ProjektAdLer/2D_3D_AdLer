@@ -1,6 +1,6 @@
 import React from "react";
 import LoginButton from "~ReactComponents/WelcomePage/LoginButton/LoginButton";
-import LoginModal from "~ReactComponents/GeneralComponents/LoginModal/LoginModal";
+import LoginModal from "~ReactComponents/WelcomePage/LoginModal/LoginModal";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 import WorldMenuButton from "~ReactComponents/WelcomePage/WorldMenuButton/WorldMenuButtonView";

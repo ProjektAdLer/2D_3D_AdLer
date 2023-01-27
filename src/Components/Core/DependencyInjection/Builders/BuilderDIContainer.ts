@@ -8,7 +8,7 @@ import IPresentationDirector from "../../Presentation/PresentationBuilder/IPrese
 import PresentationDirector from "../../Presentation/PresentationBuilder/PresentationDirector";
 import ElementModalBuilder from "../../Presentation/React/SpaceDisplay/ElementModal/ElementModalBuilder";
 import ElementsDropdownBuilder from "../../Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownBuilder";
-import LoginModalBuilder from "../../Presentation/React/GeneralComponents/LoginModal/LoginModalBuilder";
+import LoginModalBuilder from "../../Presentation/React/WelcomePage/LoginModal/LoginModalBuilder";
 import ScorePanelBuilder from "../../Presentation/React/SpaceDisplay/ScorePanel/ScorePanelBuilder";
 import NotificationManagerBuilder from "../../Presentation/React/GeneralComponents/NotificationManager/NotificationManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
