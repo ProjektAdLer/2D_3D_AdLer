@@ -40,12 +40,12 @@ describe("LoginButton", () => {
     expect(style).toContain("bg-adlergreen");
   });
 
-  test("should call controller when clicked", () => {
+  test("should render modal when clicked", () => {
     useBuilderMock([fakeModel, fakeController]);
     const componentUnderTest = render(<LoginButton />);
 
     fireEvent.click(componentUnderTest.container.children[0].children[0]);
 
-    expect(fakeController.displayLoginForm).toHaveBeenCalled();
+    expect(componentUnderTest.findByTitle("Moodle Login")).toBeTruthy();
   });
 });

@@ -1,30 +1,23 @@
-import { mock } from "jest-mock-extended";
-import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import ILMSPort from "../../../../../Core/Ports/LMSPort/ILMSPort";
+import LoginUseCase from "../../../../../Core/Application/UseCases/Login/LoginUseCase";
 import LoginButtonController from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonController";
+import LoginButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonViewModel";
 
-const portMock = mock<ILMSPort>();
+const executeAsyncMock = jest.spyOn(LoginUseCase.prototype, "executeAsync");
 
 describe("ElementDropdownController", () => {
   let systemUnderTest: LoginButtonController;
 
-  beforeAll(() => {
-    CoreDIContainer.snapshot();
-    CoreDIContainer.unbindAll();
-    CoreDIContainer.bind(PORT_TYPES.ILMSPort).toConstantValue(portMock);
-  });
-
   beforeEach(() => {
-    systemUnderTest = new LoginButtonController();
+    systemUnderTest = new LoginButtonController(new LoginButtonViewModel());
   });
 
-  afterAll(() => {
-    CoreDIContainer.restore();
-  });
+  test("loginAsync calls the use case", () => {
+    systemUnderTest.loginAsync("username", "password");
 
-  test("should call the moodle port to open the login window", () => {
-    systemUnderTest.displayLoginForm();
-    expect(portMock.displayLoginModal).toHaveBeenCalledTimes(1);
+    expect(executeAsyncMock).toHaveBeenCalledTimes(1);
+    expect(executeAsyncMock).toHaveBeenCalledWith({
+      username: "username",
+      password: "password",
+    });
   });
 });

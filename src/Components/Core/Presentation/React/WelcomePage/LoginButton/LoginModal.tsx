@@ -1,41 +1,33 @@
+import React from "react";
 import { useState } from "react";
-import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import useObservable from "../../ReactRelated/CustomHooks/useObservable";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
 import StyledInputField from "../../ReactRelated/ReactBaseComponents/StyledInputField";
 import StyledModal from "../../ReactRelated/ReactBaseComponents/StyledModal";
 import StyledPasswordField from "../../ReactRelated/ReactBaseComponents/StyledPasswordField";
-import LoginModalController from "./LoginModalController";
-import LoginModalViewModel from "./LoginModalViewModel";
+import ILoginButtonController from "./ILoginButtonController";
+import LoginButtonViewModel from "./LoginButtonViewModel";
 
-export default function LoginModal() {
-  const [viewModel, controller] = useBuilder<
-    LoginModalViewModel,
-    LoginModalController
-  >(BUILDER_TYPES.ILoginModalBuilder);
-
-  const [modalVisible, setModalVisible] = useObservable<boolean>(
-    viewModel?.visible
-  );
-
+export default function LoginModal(props: {
+  viewModel: LoginButtonViewModel;
+  controller: ILoginButtonController;
+}) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [modalVisible, setModalVisible] = useObservable<boolean>(
+    props.viewModel.modalVisible
+  );
 
-  if (!viewModel || !controller) return null;
-
-  const handleSubmit = async () => {
-    await controller.loginAsync(userName, password);
-  };
+  const handleSubmit = React.useCallback(async () => {
+    await props.controller.loginAsync(userName, password);
+  }, [userName, password]);
 
   return (
     <StyledModal
       title="Moodle Login"
       showModal={modalVisible}
-      onClose={() => {
-        setModalVisible(false);
-      }}
+      onClose={() => setModalVisible(false)}
     >
       <StyledContainer className="bg-adlergold ">
         <form

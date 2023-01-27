@@ -1,14 +1,11 @@
 import React from "react";
 import LoginButton from "~ReactComponents/WelcomePage/LoginButton/LoginButton";
-import LoginModal from "~ReactComponents/WelcomePage/LoginModal/LoginModal";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 import WorldMenuButton from "~ReactComponents/WelcomePage/WorldMenuButton/WorldMenuButtonView";
 import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
 
-export interface IWelcomePageProps {}
-
-const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
+export default function WelcomePage() {
   return (
     <React.Fragment>
       <div className="grid h-0 min-h-screen grid-cols-5 grid-rows-5 p-6 bg-adlerblue-200">
@@ -39,10 +36,6 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
         </p>
       </div>
 
-      <div className="z-10">
-        <LoginModal />
-        {/*LoginModal muss immer am Ende der Komponenten platziert werden. Sonst buggt es mit komischen Abständen.*/}
-      </div>
       <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
         <div className="text-lg font-bold text-white text-shadow-sm">
           <h1>
@@ -55,6 +48,4 @@ const WelcomePage: React.FunctionComponent<IWelcomePageProps> = (props) => {
       </StyledModal>
     </React.Fragment>
   );
-};
-
-export default WelcomePage;
+}

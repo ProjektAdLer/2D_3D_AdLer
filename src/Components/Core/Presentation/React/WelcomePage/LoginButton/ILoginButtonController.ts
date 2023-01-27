@@ -1,3 +1,3 @@
 export default interface ILoginButtonController {
-  displayLoginForm(): void;
+  loginAsync(username: string, password: string): Promise<void>;
 }

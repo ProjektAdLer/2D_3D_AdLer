@@ -8,12 +8,6 @@ export default class LMSPort
   extends AbstractPort<ILMSAdapter>
   implements ILMSPort
 {
-  displayLoginModal(): void {
-    this.adapters.forEach((adapter) => {
-      adapter.displayLoginModal();
-    });
-  }
-
   onLoginSuccessful(): void {
     this.adapters.forEach((adapter) => {
       adapter.onLoginSuccessful();

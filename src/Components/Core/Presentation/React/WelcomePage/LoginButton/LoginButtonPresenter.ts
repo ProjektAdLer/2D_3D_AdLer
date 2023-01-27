@@ -3,8 +3,9 @@ import LoginButtonViewModel from "./LoginButtonViewModel";
 
 export default class LoginButtonPresenter implements ILoginButtonPresenter {
   constructor(private viewModel: LoginButtonViewModel) {}
-  displayLoginModal(): void {}
+
   onLoginSuccessful(): void {
     this.viewModel.loginSuccessful.Value = true;
+    this.viewModel.modalVisible.Value = false;
   }
 }
