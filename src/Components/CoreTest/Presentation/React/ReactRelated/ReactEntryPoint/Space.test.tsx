@@ -21,10 +21,6 @@ jest.mock(
   () => "mocked"
 );
 jest.mock(
-  "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModal",
-  () => "mocked"
-);
-jest.mock(
   "../../../../../Core/Presentation/React/GeneralComponents/MenuBar/MenuBar",
   () => "mocked"
 );

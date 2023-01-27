@@ -1,5 +1,5 @@
 import LoginUseCase from "../../../../../Core/Application/UseCases/Login/LoginUseCase";
-import LoginModalController from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModalController";
+import LoginModalController from "../../../../../Core/Presentation/React/WelcomePage/LoginModal/LoginModalController";
 
 const executeAsyncMock = jest.spyOn(LoginUseCase.prototype, "executeAsync");
 

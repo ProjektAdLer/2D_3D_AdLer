@@ -3,10 +3,10 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import ILMSPort from "../../../../../Core/Ports/LMSPort/ILMSPort";
-import LoginModalBuilder from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModalBuilder";
-import LoginModalController from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModalController";
-import LoginModalPresenter from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModalPresenter";
-import LoginModalViewModel from "../../../../../Core/Presentation/React/GeneralComponents/LoginModal/LoginModalViewModel";
+import LoginModalBuilder from "../../../../../Core/Presentation/React/WelcomePage/LoginModal/LoginModalBuilder";
+import LoginModalController from "../../../../../Core/Presentation/React/WelcomePage/LoginModal/LoginModalController";
+import LoginModalPresenter from "../../../../../Core/Presentation/React/WelcomePage/LoginModal/LoginModalPresenter";
+import LoginModalViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginModal/LoginModalViewModel";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
