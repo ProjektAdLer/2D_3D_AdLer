@@ -5,11 +5,13 @@ import INotificationManagerPresenter from "../../Presentation/React/GeneralCompo
 import IUIPort from "./IUIPort";
 import { logger } from "src/Lib/Logger";
 import ElementTO from "../../Application/DataTransferObjects/ElementTO";
+import IExitModalPresenter from "../../Presentation/React/SpaceDisplay/ExitModal/IExitModalPresenter";
 
 @injectable()
 export default class UIPort implements IUIPort {
   private bottomTooltipPresenter: IBottomTooltipPresenter;
   private notificationManagerPresenter: INotificationManagerPresenter;
+  private exitModalPresenter: IExitModalPresenter;
 
   displayNotification(errorMessage: string, type: NotificationType): void {
     if (!this.notificationManagerPresenter) {
@@ -34,6 +36,13 @@ export default class UIPort implements IUIPort {
 
     this.bottomTooltipPresenter.displayExitQueryTooltip();
   };
+  openExitModal = () => {
+    if (!this.exitModalPresenter) {
+      throw new Error("ExitModalPresenter not registered");
+    }
+
+    this.exitModalPresenter.openExitModal();
+  };
   displayElementSummaryTooltip = (element: ElementTO) => {
     if (!this.bottomTooltipPresenter) {
       throw new Error("BottomTooltipPresenter not registered");
@@ -57,5 +66,11 @@ export default class UIPort implements IUIPort {
       logger.warn("NotificationManagerPresenter already registered");
     }
     this.notificationManagerPresenter = presenter;
+  }
+  registerExitModalPresenter(exitModalPresenter: IExitModalPresenter): void {
+    if (this.exitModalPresenter) {
+      logger.warn("ExitModalPresenter already registered");
+    }
+    this.exitModalPresenter = exitModalPresenter;
   }
 }

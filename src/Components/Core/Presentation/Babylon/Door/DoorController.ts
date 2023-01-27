@@ -23,7 +23,7 @@ export default class DoorController implements IDoorController {
   clicked(event?: ActionEvent | undefined): void {
     const pointerType = (event?.sourceEvent as PointerEvent).pointerType;
     if (pointerType === "mouse") {
-      //open modal
+      this.openExitModal();
     } else if (pointerType === "touch") {
       this.displayTooltip();
     }
@@ -31,5 +31,8 @@ export default class DoorController implements IDoorController {
 
   private displayTooltip(): void {
     CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort).displayExitQueryTooltip();
+  }
+  private openExitModal(): void {
+    CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort).openExitModal();
   }
 }

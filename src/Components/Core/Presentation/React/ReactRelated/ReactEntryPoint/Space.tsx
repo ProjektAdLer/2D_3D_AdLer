@@ -12,12 +12,13 @@ import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
 import SpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/SpaceSceneDefinition";
 import SpaceCompletionModal from "~ReactComponents/SpaceDisplay/SpaceCompletionModal/SpaceCompletionModal";
 import UseGuide from "~ReactComponents/SpaceDisplay/UseGuide/UseGuide";
+import ExitModal from "~ReactComponents/SpaceDisplay/ExitModal/ExitModal";
 
 export default function Space() {
   return (
     <React.Fragment>
       <div className="grid h-0 min-h-screen grid-cols-9 grid-rows-6 root">
-        <div className="z-10 col-start-1 col-span-3 row-start-1 m-2 pointer-events-none">
+        <div className="z-10 col-span-3 col-start-1 row-start-1 m-2 pointer-events-none">
           <MenuBar />
         </div>
         {/*<div className="z-10 col-span-2 col-start-2 row-start-1 m-2">
@@ -40,8 +41,12 @@ export default function Space() {
           />
         </div>
         <BottomTooltip />
+
         <div className="z-10">
           <ElementModal />
+        </div>
+        <div className="z-10">
+          <ExitModal />
         </div>
         <div className="z-10">
           <SpaceCompletionModal />
