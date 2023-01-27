@@ -1,1 +1,3 @@
-export default interface IExitModalController {}
+export default interface IExitModalController {
+  onExitButtonClicked(): void;
+}

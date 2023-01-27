@@ -5,6 +5,7 @@ import StyledModal from "../../../React/ReactRelated/ReactBaseComponents/StyledM
 import StyledButton from "../../../React/ReactRelated/ReactBaseComponents/StyledButton";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import IExitModalController from "./IExitModalController";
+import { useCallback } from "react";
 
 export default function ExitModal() {
   const [viewModel, controller] = useBuilder<
@@ -12,20 +13,30 @@ export default function ExitModal() {
     IExitModalController
   >(BUILDER_TYPES.IExitModalBuilder);
   const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
+  const closeModal = useCallback(() => {
+    setOpen(false);
+  }, []);
 
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;
 
   return (
-    <StyledModal
-      title={viewModel.modalTitle.Value}
-      onClose={() => {
-        setOpen(false);
-      }}
-      showModal={isOpen}
-      className={`flex flex-col justify-center gap-2 p-2 m-3 rounded-lg h-[80vh] `}
-    >
-      <StyledButton>Test</StyledButton>
-    </StyledModal>
+    <div>
+      <StyledModal
+        title={viewModel.modalTitle.Value}
+        onClose={closeModal}
+        showModal={isOpen}
+        className="flex flex-col justify-center gap-2 p-2 m-3 rounded-lg"
+      >
+        <StyledButton
+          disabled={false}
+          shape="freefloatcenter"
+          className="flex w-[100%]"
+          onClick={controller.onExitButtonClicked}
+        >
+          {viewModel.exitButtonTitle.Value}
+        </StyledButton>
+      </StyledModal>
+    </div>
   );
 }
