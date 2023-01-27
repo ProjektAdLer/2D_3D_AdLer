@@ -2,6 +2,7 @@ import { NotificationType } from "../../Presentation/React/GeneralComponents/Not
 import IBottomTooltipPresenter from "../../Presentation/React/SpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import INotificationManagerPresenter from "../../Presentation/React/GeneralComponents/NotificationManager/INotificationManagerPresenter";
 import ElementTO from "../../Application/DataTransferObjects/ElementTO";
+import IExitModalPresenter from "~ReactComponents/SpaceDisplay/ExitModal/IExitModalPresenter";
 
 export default interface IUIPort {
   registerNotificationManager(presenter: INotificationManagerPresenter): void;
@@ -12,4 +13,6 @@ export default interface IUIPort {
   registerBottomTooltipPresenter(
     bottomTooltipPresenter: IBottomTooltipPresenter
   ): void;
+  openExitModal(): void;
+  registerExitModalPresenter(exitModalPresenter: IExitModalPresenter): void;
 }
