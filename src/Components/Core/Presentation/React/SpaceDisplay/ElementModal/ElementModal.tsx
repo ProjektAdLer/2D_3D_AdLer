@@ -11,7 +11,7 @@ import IElementModalController from "./IElementModalController";
 import { ElementTypes } from "src/Components/Core/Domain/Types/ElementTypes";
 import PDFComponent from "./SubComponents/PDFComponent";
 
-const elementBuilder = (
+const createModalContent = (
   viewModel: ElementModalViewModel,
   controller: IElementModalController
 ) => {
@@ -70,7 +70,7 @@ export default function ElementModal() {
       showModal={isOpen}
       className={`flex flex-col justify-center gap-2 p-2 m-3 rounded-lg ${modalConfig[modalType]} `}
     >
-      {elementBuilder(viewModel, controller)}
+      {createModalContent(viewModel, controller)}
     </StyledModal>
   );
 }
