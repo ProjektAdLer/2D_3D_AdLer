@@ -82,7 +82,7 @@ function MobilePDFComponent({
         </StyledButton>
       </div>
 
-      <div>
+      <div className="overflow-auto">
         <Document
           file={viewModel.filePath.Value}
           onLoadSuccess={onDocumentLoadSuccess}
