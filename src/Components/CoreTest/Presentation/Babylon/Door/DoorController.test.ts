@@ -37,24 +37,6 @@ describe("DoorController", () => {
     expect(uiPortMock.hideBottomTooltip).toHaveBeenCalledTimes(1);
   });
 
-  test.skip("clicked calls IElementStartedUseCase.executeAsync when pointerType is mouse", () => {
-    viewModel.id = 42;
-    const mockedEvent: ActionEvent = {
-      sourceEvent: {
-        pointerType: "mouse",
-      },
-      source: undefined,
-      pointerX: 0,
-      pointerY: 0,
-      meshUnderPointer: null,
-    };
-
-    systemUnderTest.clicked(mockedEvent);
-
-    expect(elementStartedUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
-    expect(elementStartedUseCaseMock.executeAsync).toHaveBeenCalledWith(42);
-  });
-
   test("clicked calls IUIPort.displayExitQueryTooltip when pointerType is touch", () => {
     const mockedEvent: ActionEvent = {
       sourceEvent: {
