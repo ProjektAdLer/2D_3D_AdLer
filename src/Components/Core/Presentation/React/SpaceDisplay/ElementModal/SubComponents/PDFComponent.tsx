@@ -65,23 +65,36 @@ function MobilePDFComponent({
   }, [pageNumber, numPages]);
 
   return (
-    <div className="h-full">
-      <Document
-        file={viewModel.filePath.Value}
-        onLoadSuccess={onDocumentLoadSuccess}
-      >
-        <Page
-          data-testid="pdfPage"
-          pageNumber={pageNumber}
-          renderTextLayer={false}
-          renderAnnotationLayer={false}
-        />
-      </Document>
-      <StyledButton onClick={previousPage}>{"<"}</StyledButton>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
-      <StyledButton onClick={nextPage}>{">"}</StyledButton>
+    <div className="h-full flex-col ">
+      <div className="flex flex-row w-full justify-between h-6">
+        <StyledButton
+          shape="freefloatcenter"
+          className=""
+          onClick={previousPage}
+        >
+          {"<"}
+        </StyledButton>
+        <p className="">
+          Page {pageNumber} of {numPages}
+        </p>
+        <StyledButton shape="freefloatcenter" className="" onClick={nextPage}>
+          {">"}
+        </StyledButton>
+      </div>
+
+      <div>
+        <Document
+          file={viewModel.filePath.Value}
+          onLoadSuccess={onDocumentLoadSuccess}
+        >
+          <Page
+            data-testid="pdfPage"
+            pageNumber={pageNumber}
+            renderTextLayer={false}
+            renderAnnotationLayer={false}
+          />
+        </Document>
+      </div>
     </div>
   );
 }
