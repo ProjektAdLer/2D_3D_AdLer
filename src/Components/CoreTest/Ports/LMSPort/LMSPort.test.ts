@@ -3,8 +3,6 @@ import LMSPort from "../../../Core/Ports/LMSPort/LMSPort";
 import LoginButtonPresenter from "../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonPresenter";
 import WorldMenuButtonPresenter from "../../../Core/Presentation/React/WelcomePage/WorldMenuButton/WorldMenuButtonPresenter";
 
-jest.mock("src/Lib/Logger");
-
 describe("LMSPort", () => {
   let systemUnderTest: LMSPort;
 
@@ -12,30 +10,19 @@ describe("LMSPort", () => {
     systemUnderTest = new LMSPort();
   });
 
-  //TODO: Convert tests to 'for each' tests
-  test("registerAdapter adds new presenter", () => {
-    const loginButtonPresenter = mock<LoginButtonPresenter>();
-
-    systemUnderTest.registerAdapter(loginButtonPresenter);
-
-    expect(systemUnderTest["adapters"][0]).toBe(loginButtonPresenter);
-  });
-
   test("onLoginSuccessful is being called on scorePanelPresenter", () => {
-    const loginButtonPresenter = mock<LoginButtonPresenter>();
-    systemUnderTest.registerAdapter(loginButtonPresenter);
+    const mockedLoginButtonPresenter = mock<LoginButtonPresenter>();
+    const mockedWorldMenuButtonPresenter = mock<WorldMenuButtonPresenter>();
+    systemUnderTest.registerAdapter(mockedWorldMenuButtonPresenter);
+    systemUnderTest.registerAdapter(mockedLoginButtonPresenter);
 
     systemUnderTest.onLoginSuccessful();
 
-    expect(loginButtonPresenter.onLoginSuccessful).toHaveBeenCalledTimes(1);
-  });
-
-  test("onLoginSuccessful is being called on worldMenuButtonPresenter", () => {
-    const worldMenuButtonPresenter = mock<WorldMenuButtonPresenter>();
-    systemUnderTest.registerAdapter(worldMenuButtonPresenter);
-
-    systemUnderTest.onLoginSuccessful();
-
-    expect(worldMenuButtonPresenter.onLoginSuccessful).toHaveBeenCalledTimes(1);
+    expect(
+      mockedWorldMenuButtonPresenter.onLoginSuccessful
+    ).toHaveBeenCalledTimes(1);
+    expect(mockedLoginButtonPresenter.onLoginSuccessful).toHaveBeenCalledTimes(
+      1
+    );
   });
 });
