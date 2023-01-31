@@ -37,7 +37,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
   private semaphore = new Semaphore("LoadWorld in Use", 1);
 
-  async executeAsync(): Promise<WorldTO> {
+  async executeAsync(): Promise<void> {
     const lock = await this.semaphore.acquire();
 
     const userData = this.container.getEntitiesOfType(UserDataEntity);
@@ -58,7 +58,6 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     this.worldPort.onWorldLoaded(this.toTO(worldEntity));
 
     lock.release();
-    return Promise.resolve(this.toTO(worldEntity));
   }
 
   private async load(userData: UserDataEntity): Promise<WorldEntity> {
@@ -144,8 +143,9 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   };
 
   private toTO(entityToConvert: WorldEntity): WorldTO {
-    // spread to prevent passing a reference
     // this will need to be changed when entity and TO are not matching in structure anymore
-    return structuredClone(entityToConvert) as WorldTO;
+    let worldTO = new WorldTO();
+    worldTO = Object.assign(worldTO, structuredClone(entityToConvert));
+    return worldTO;
   }
 }
