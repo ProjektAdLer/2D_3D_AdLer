@@ -1,13 +1,13 @@
-import MenuBarController from "../../../../../Core/Presentation/React/GeneralComponents/MenuBar/MenuBarController";
+import SideBarController from "../../../../../Core/Presentation/React/SpaceDisplay/SideBar/SideBarController";
 import history from "history/browser";
 
 const mockHistoryBack = jest.spyOn(history, "back");
 
-describe("MenuBarController", () => {
-  let systemUnderTest: MenuBarController;
+describe("SideBarController", () => {
+  let systemUnderTest: SideBarController;
 
   beforeEach(() => {
-    systemUnderTest = new MenuBarController();
+    systemUnderTest = new SideBarController();
   });
 
   test("onExitButtonClicked calls history.back", () => {

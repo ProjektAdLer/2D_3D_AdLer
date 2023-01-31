@@ -21,7 +21,7 @@ import SpaceSelectionBuilder from "~ReactComponents/SpaceMenu/SpaceSelection/Spa
 import SpaceDetailBuilder from "~ReactComponents/SpaceMenu/SpaceDetail/SpaceDetailBuilder";
 import SpaceCompletionModalBuilder from "~ReactComponents/SpaceDisplay/SpaceCompletionModal/SpaceCompletionModalBuilder";
 import WorldCompletionModalBuilder from "~ReactComponents/SpaceMenu/WorldCompletionModal/WorldCompletionModalBuilder";
-import MenuBarBuilder from "~ReactComponents/GeneralComponents/MenuBar/MenuBarBuilder";
+import SideBarBuilder from "~ReactComponents/SpaceDisplay/SideBar/SideBarBuilder";
 import UseGuideBuilder from "~ReactComponents/SpaceDisplay/UseGuide/UseGuideBuilder";
 import WorldMenuButtonBuilder from "~ReactComponents/WelcomePage/WorldMenuButton/WorldMenuButtonBuilder";
 import AvatarCameraBuilder from "../../Presentation/Babylon/AvatarCamera/AvatarCameraBuilder";
@@ -78,7 +78,7 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IWorldCompletionModalBuilder).to(
     WorldCompletionModalBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IMenuBarBuilder).to(MenuBarBuilder);
+  bind<IPresentationBuilder>(BUILDER_TYPES.IMenuBarBuilder).to(SideBarBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IUseGuideBuilder).to(
     UseGuideBuilder
   );

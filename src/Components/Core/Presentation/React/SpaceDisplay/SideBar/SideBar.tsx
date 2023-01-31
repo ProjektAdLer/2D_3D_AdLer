@@ -6,13 +6,13 @@ import engineLogo from "../../../../../../Assets/icons/00-engine-logo/adler-engi
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import SpaceGoalPanel from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanel";
 import ElementsDropdown from "~ReactComponents/SpaceDisplay/ElementsDropdown/ElementsDropdown";
-import MenuBarViewModel from "./MenuBarViewModel";
-import MenuBarController from "./MenuBarController";
+import SideBarViewModel from "./SideBarViewModel";
+import SideBarController from "./SideBarController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import menuIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
 
-export default function MenuBar() {
-  const [, controller] = useBuilder<MenuBarViewModel, MenuBarController>(
+export default function SideBar() {
+  const [, controller] = useBuilder<SideBarViewModel, SideBarController>(
     BUILDER_TYPES.IMenuBarBuilder
   );
   return (

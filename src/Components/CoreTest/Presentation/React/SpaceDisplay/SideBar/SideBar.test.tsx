@@ -3,8 +3,9 @@ import { render } from "@testing-library/react";
 import history from "history/browser";
 import mock from "jest-mock-extended/lib/Mock";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
-import IMenuBarController from "../../../../../Core/Presentation/React/GeneralComponents/MenuBar/IMenuBarController";
-import MenuBar from "../../../../../Core/Presentation/React/GeneralComponents/MenuBar/MenuBar";
+import ISideBarController from "../../../../../Core/Presentation/React/SpaceDisplay/SideBar/ISideBarController";
+import SideBar from "../../../../../Core/Presentation/React/SpaceDisplay/SideBar/SideBar";
+import React from "react";
 
 const mockHistoryBack = jest.spyOn(history, "back");
 
@@ -13,13 +14,13 @@ jest.mock(
   () => "string"
 );
 
-describe("MenuBar", () => {
+describe("SideBar", () => {
   test("should render", () => {
-    useBuilderMock([undefined, mock<IMenuBarController>()]);
+    useBuilderMock([undefined, mock<ISideBarController>()]);
     // disable console.error
     const originalError = console.error;
     console.error = jest.fn();
-    render(<MenuBar />);
+    render(<SideBar />);
     // restore console.error
     console.error = originalError;
   });
