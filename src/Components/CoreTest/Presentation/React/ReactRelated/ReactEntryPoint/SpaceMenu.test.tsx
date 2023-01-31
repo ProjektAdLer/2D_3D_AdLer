@@ -13,10 +13,7 @@ jest.mock(
   "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection",
   () => "mocked"
 );
-jest.mock(
-  "~ReactComponents/SpaceMenu/DetailSection/DetailSection",
-  () => "mocked"
-);
+jest.mock("~ReactComponents/SpaceMenu/SpaceDetail/SpaceDetail", () => "mocked");
 
 const loadWorldUseCaseMock = mock<ILoadWorldUseCase>();
 
