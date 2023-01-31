@@ -16,7 +16,7 @@ import BottomTooltipBuilder from "../../Presentation/React/SpaceDisplay/BottomTo
 import SpaceNamePanelBuilder from "../../Presentation/React/SpaceDisplay/SpaceNamePanel/SpaceNamePanelBuilder";
 import FullscreenSwitchBuilder from "../../Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
 import SpaceGoalPanelBuilder from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanelBuilder";
-import HeaderBarBuilder from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBarBuilder";
+import MenuHeaderBarBuilder from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBarBuilder";
 import SpaceSelectionBuilder from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelectionBuilder";
 import SpaceDetailBuilder from "~ReactComponents/SpaceMenu/SpaceDetail/SpaceDetailBuilder";
 import SpaceCompletionModalBuilder from "~ReactComponents/SpaceDisplay/SpaceCompletionModal/SpaceCompletionModalBuilder";
@@ -64,7 +64,7 @@ const BuilderDIContainer = new ContainerModule((bind) => {
     SpaceGoalPanelBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IHeaderBarBuilder).to(
-    HeaderBarBuilder
+    MenuHeaderBarBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceSelectionBuilder).to(
     SpaceSelectionBuilder

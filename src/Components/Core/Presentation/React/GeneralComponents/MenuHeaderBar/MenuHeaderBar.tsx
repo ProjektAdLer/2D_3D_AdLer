@@ -2,14 +2,16 @@ import React from "react";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
+import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
-import HeaderBarController from "./HeaderBarController";
-import HeaderBarViewModel from "./HeaderBarViewModel";
+import MenuHeaderBarController from "./MenuHeaderBarController";
+import MenuHeaderBarViewModel from "./MenuHeaderBarViewModel";
+import homeIcon from "../../../../../../Assets/icons/22-home-icon/home-icon-nobg.svg";
 
-export default function HeaderBar() {
+export default function MenuHeaderBar() {
   const [viewModel, controller] = useBuilder<
-    HeaderBarViewModel,
-    HeaderBarController
+    MenuHeaderBarViewModel,
+    MenuHeaderBarController
   >(BUILDER_TYPES.IHeaderBarBuilder);
 
   const [title] = useObservable<string>(viewModel?.title);
@@ -19,14 +21,13 @@ export default function HeaderBar() {
   return (
     <React.Fragment>
       <div className="flex items-center justify-between">
-        {/* <StyledButton
+        <StyledButton
           disabled
           className=""
           onClick={controller.onMenuButtonClicked}
         >
           <img className="w-10 xl:w-12" src={homeIcon} alt="Home Icon" />
-        </StyledButton> */}{" "}
-        {/* Auskommentiert, wegen Evaluation */}
+        </StyledButton>{" "}
         <div></div> {/* Dieser leere <div> hält das Layout zusammen*/}
         <div>
           <StyledContainer

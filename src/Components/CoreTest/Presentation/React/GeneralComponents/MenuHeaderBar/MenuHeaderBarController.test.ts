@@ -1,15 +1,15 @@
 import { logger } from "../../../../../../Lib/Logger";
-import HeaderBarController from "../../../../../Core/Presentation/React/SpaceMenu/HeaderBar/HeaderBarController";
+import MenuHeaderBarController from "../../../../../Core/Presentation/React/GeneralComponents/MenuHeaderBar/MenuHeaderBarController";
 import history from "history/browser";
 
 jest.mock("../../../../../../Lib/Logger.ts");
 const mockHistoryBack = jest.spyOn(history, "back");
 
-describe("HeaderBarController", () => {
-  let systemUnderTest: HeaderBarController;
+describe("MenuHeaderBarController", () => {
+  let systemUnderTest: MenuHeaderBarController;
 
   beforeEach(() => {
-    systemUnderTest = new HeaderBarController();
+    systemUnderTest = new MenuHeaderBarController();
   });
 
   test("onMenuButtonClicked calls logger.warn", () => {

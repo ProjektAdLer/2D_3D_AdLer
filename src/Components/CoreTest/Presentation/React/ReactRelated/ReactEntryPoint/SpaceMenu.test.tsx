@@ -8,7 +8,10 @@ import SpaceMenu from "../../../../../Core/Presentation/React/ReactRelated/React
 
 import React from "react";
 
-jest.mock("~ReactComponents/SpaceMenu/HeaderBar/HeaderBar", () => "mocked");
+jest.mock(
+  "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBar",
+  () => "mocked"
+);
 jest.mock(
   "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection",
   () => "mocked"

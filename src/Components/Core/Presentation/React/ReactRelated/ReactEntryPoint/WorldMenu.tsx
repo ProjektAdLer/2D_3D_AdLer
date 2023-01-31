@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderBar from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBar";
+import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBar";
 import MenuTutorial from "~ReactComponents/SpaceMenu/MenuTutorial/MenuTutorial";
 
 export default function SpaceMenu() {
@@ -7,7 +7,7 @@ export default function SpaceMenu() {
     <React.Fragment>
       <div className="flex flex-col min-h-screen">
         <div className="self-center w-full p-2 bg-adlerblue-100">
-          <HeaderBar />
+          <MenuHeaderBar />
         </div>
 
         <div className="grid h-0 min-h-full grid-cols-2 grid-rows-1 grow lg:rounded-lg">

@@ -2,12 +2,12 @@ import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import IWorldPort from "../../../../../Core/Ports/WorldPort/IWorldPort";
-import HeaderBarBuilder from "../../../../../Core/Presentation/React/SpaceMenu/HeaderBar/HeaderBarBuilder";
+import MenuHeaderBarBuilder from "../../../../../Core/Presentation/React/GeneralComponents/MenuHeaderBar/MenuHeaderBarBuilder";
 
 const worldPortMock = mock<IWorldPort>();
 
-describe("HeaderBarBuilder", () => {
-  let systemUnderTest: HeaderBarBuilder;
+describe("MenuHeaderBarBuilder", () => {
+  let systemUnderTest: MenuHeaderBarBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -17,7 +17,7 @@ describe("HeaderBarBuilder", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new HeaderBarBuilder();
+    systemUnderTest = new MenuHeaderBarBuilder();
   });
 
   afterAll(() => {

@@ -3,25 +3,25 @@ import IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
-import HeaderBarController from "./HeaderBarController";
-import HeaderBarPresenter from "./HeaderBarPresenter";
-import HeaderBarViewModel from "./HeaderBarViewModel";
-import IHeaderBarController from "./IHeaderBarController";
-import IHeaderBarPresenter from "./IHeaderBarPresenter";
+import MenuHeaderBarController from "./MenuHeaderBarController";
+import MenuHeaderBarPresenter from "./MenuHeaderBarPresenter";
+import MenuHeaderBarViewModel from "./MenuHeaderBarViewModel";
+import IMenuHeaderBarController from "./IMenuHeaderBarController";
+import IMenuHeaderBarPresenter from "./IMenuHeaderBarPresenter";
 
 @injectable()
-export default class HeaderBarBuilder extends PresentationBuilder<
-  HeaderBarViewModel,
-  IHeaderBarController,
+export default class MenuHeaderBarBuilder extends PresentationBuilder<
+  MenuHeaderBarViewModel,
+  IMenuHeaderBarController,
   undefined,
-  IHeaderBarPresenter
+  IMenuHeaderBarPresenter
 > {
   constructor() {
     super(
-      HeaderBarViewModel,
-      HeaderBarController,
+      MenuHeaderBarViewModel,
+      MenuHeaderBarController,
       undefined,
-      HeaderBarPresenter
+      MenuHeaderBarPresenter
     );
   }
 

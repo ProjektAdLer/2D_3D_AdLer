@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderBar from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBar";
+import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBar";
 import SpaceDetail from "~ReactComponents/SpaceMenu/SpaceDetail/SpaceDetail";
 import SpaceSelection from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection";
 import WorldCompletionModal from "~ReactComponents/SpaceMenu/WorldCompletionModal/WorldCompletionModal";
@@ -14,7 +14,7 @@ export default function SpaceMenu() {
         </div>
 
         <div className="self-center w-full p-2 bg-adlerblue-100">
-          <HeaderBar />
+          <MenuHeaderBar />
         </div>
 
         <div className="grid h-0 min-h-full grid-cols-2 grid-rows-1 grow lg:rounded-lg">

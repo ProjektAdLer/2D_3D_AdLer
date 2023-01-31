@@ -1,4 +1,4 @@
-export default interface IHeaderBarController {
+export default interface IMenuHeaderBarController {
   onMenuButtonClicked(): void;
   onBackButtonClicked(): void;
 }
