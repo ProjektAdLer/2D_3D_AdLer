@@ -13,7 +13,6 @@ import ISpacePort from "../../../../Core/Ports/SpacePort/ISpacePort";
 import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
 
 const entityContainerMock = mock<IEntityContainer>();
-const uiPortMock = mock<IUIPort>();
 const loadWorldMock = mock<ILoadWorldUseCase>();
 const spacePortMock = mock<ISpacePort>();
 const calculateSpaceScoreMock = mock<ICalculateSpaceScoreUseCase>();
@@ -23,24 +22,17 @@ describe("LoadSpaceUseCase", () => {
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
-    CoreDIContainer.unbindAll();
-    CoreDIContainer.bind<IEntityContainer>(
+
+    CoreDIContainer.rebind<IEntityContainer>(
       CORE_TYPES.IEntityContainer
     ).toConstantValue(entityContainerMock);
-
-    CoreDIContainer.bind<IUIPort>(PORT_TYPES.IUIPort).toConstantValue(
-      uiPortMock
-    );
-
-    CoreDIContainer.bind<ILoadWorldUseCase>(
+    CoreDIContainer.rebind<ILoadWorldUseCase>(
       USECASE_TYPES.ILoadWorldUseCase
     ).toConstantValue(loadWorldMock);
-
-    CoreDIContainer.bind<ISpacePort>(PORT_TYPES.ISpacePort).toConstantValue(
+    CoreDIContainer.rebind<ISpacePort>(PORT_TYPES.ISpacePort).toConstantValue(
       spacePortMock
     );
-
-    CoreDIContainer.bind<ICalculateSpaceScoreUseCase>(
+    CoreDIContainer.rebind<ICalculateSpaceScoreUseCase>(
       USECASE_TYPES.ICalculateSpaceScore
     ).toConstantValue(calculateSpaceScoreMock);
 
@@ -63,9 +55,11 @@ describe("LoadSpaceUseCase", () => {
 
     entityContainerMock.getEntitiesOfType.mockReturnValue([worldEntity]);
 
-    const result = await systemUnderTest.executeAsync(1);
+    await systemUnderTest.executeAsync(1);
 
-    expect(result).toEqual(worldEntity.spaces[0]);
+    expect(spacePortMock.onSpaceLoaded).toHaveBeenCalledWith(
+      worldEntity.spaces[0]
+    );
   });
 
   test("should load space when World Entity is not present", async () => {
@@ -83,9 +77,11 @@ describe("LoadSpaceUseCase", () => {
 
     loadWorldMock.executeAsync.mockResolvedValue(worldEntity);
 
-    const result = await systemUnderTest.executeAsync(1);
+    await systemUnderTest.executeAsync(1);
 
-    expect(result).toEqual(worldEntity.spaces[0]);
+    expect(spacePortMock.onSpaceLoaded).toHaveBeenCalledWith(
+      worldEntity.spaces[0]
+    );
   });
 
   test("should throw error when space is not found", async () => {
