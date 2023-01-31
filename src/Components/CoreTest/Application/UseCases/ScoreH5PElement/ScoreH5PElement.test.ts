@@ -170,9 +170,9 @@ describe("ScoreH5PElement", () => {
       console.log(e);
     }
 
-    expect(calculateSpaceScoreUseCaseMock.execute).toHaveBeenCalledWith({
-      spaceId: spaceEntityMock.id,
-    });
+    expect(calculateSpaceScoreUseCaseMock.execute).toHaveBeenCalledWith(
+      spaceEntityMock.id
+    );
   });
 
   test("executeAsync should call elementPort.onElementScored", async () => {

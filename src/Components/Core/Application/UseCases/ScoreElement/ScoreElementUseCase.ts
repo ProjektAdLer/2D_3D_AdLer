@@ -82,9 +82,7 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
 
     elements[0].hasScored = true;
 
-    this.calculateSpaceScoreUseCase.execute({
-      spaceId: space.id,
-    });
+    this.calculateSpaceScoreUseCase.execute(space.id);
 
     this.elementPort.onElementScored(true, data.elementId);
 

@@ -97,7 +97,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
             description: space.description,
             goals: space.goals,
             requirements: space.requirements,
-            requiredPoints: space.requiredPoints,
+            requiredPoints: space.requiredScore,
           },
           SpaceEntity
         )

@@ -1,4 +1,5 @@
 import { mock } from "jest-mock-extended";
+import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/SpaceScoreTO";
 import ICalculateSpaceScoreUseCase from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import LoadSpaceUseCase from "../../../../Core/Application/UseCases/LoadSpace/LoadSpaceUseCase";
 import ILoadWorldUseCase from "../../../../Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
@@ -45,48 +46,57 @@ describe("LoadSpaceUseCase", () => {
 
   test("should load space when World Entity is already present", async () => {
     const worldEntity: WorldEntity = new WorldEntity();
-
     worldEntity.spaces = [
       {
         id: 1,
         name: "Space 1",
       } as SpaceEntity,
     ];
-
     entityContainerMock.getEntitiesOfType.mockReturnValue([worldEntity]);
+
+    const spaceScoreTO: SpaceScoreTO = {
+      currentScore: 0,
+      requiredScore: 0,
+      maxScore: 0,
+      spaceID: 1,
+    };
+    calculateSpaceScoreMock.execute.mockReturnValue(spaceScoreTO);
 
     await systemUnderTest.executeAsync(1);
 
     expect(spacePortMock.onSpaceLoaded).toHaveBeenCalledWith(
-      worldEntity.spaces[0]
+      expect.objectContaining(worldEntity.spaces[0])
     );
   });
 
   test("should load space when World Entity is not present", async () => {
     const worldEntity: WorldEntity = new WorldEntity();
-
     worldEntity.spaces = [
       {
         id: 1,
         name: "Space 1",
       } as SpaceEntity,
     ];
-
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([]);
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([worldEntity]);
 
-    loadWorldMock.executeAsync.mockResolvedValue(worldEntity);
+    const spaceScoreTO: SpaceScoreTO = {
+      currentScore: 0,
+      requiredScore: 0,
+      maxScore: 0,
+      spaceID: 1,
+    };
+    calculateSpaceScoreMock.execute.mockReturnValue(spaceScoreTO);
 
     await systemUnderTest.executeAsync(1);
 
     expect(spacePortMock.onSpaceLoaded).toHaveBeenCalledWith(
-      worldEntity.spaces[0]
+      expect.objectContaining(worldEntity.spaces[0])
     );
   });
 
   test("should throw error when space is not found", async () => {
     const worldEntity: WorldEntity = new WorldEntity();
-
     worldEntity.spaces = [
       {
         id: 1,

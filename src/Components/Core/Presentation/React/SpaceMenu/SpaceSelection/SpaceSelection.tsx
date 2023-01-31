@@ -32,11 +32,11 @@ export default function SpaceSelection() {
     const loadWorldAsync = async (): Promise<void> => {
       await loadWorldUseCase.executeAsync();
       viewModel.spaces.Value.forEach(([id]) =>
-        calculateSpaceScoreUseCase.execute({ spaceId: id })
+        calculateSpaceScoreUseCase.execute(id)
       );
     };
     if (viewModel) loadWorldAsync();
-  }, []);
+  }, [viewModel]);
 
   const [spaces] = useObservable<[number, string, boolean, boolean][]>(
     viewModel?.spaces
