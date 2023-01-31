@@ -1,12 +1,12 @@
-import DetailSectionPresenter from "../../../../../Core/Presentation/React/SpaceMenu/DetailSection/DetailSectionPresenter";
-import DetailSectionViewModel from "../../../../../Core/Presentation/React/SpaceMenu/DetailSection/DetailSectionViewModel";
+import SpaceDetailPresenter from "../../../../../Core/Presentation/React/SpaceMenu/SpaceDetail/SpaceDetailPresenter";
+import SpaceDetailViewModel from "../../../../../Core/Presentation/React/SpaceMenu/SpaceDetail/SpaceDetailViewModel";
 import SpaceTO from "../../../../../Core/Application/DataTransferObjects/SpaceTO";
 
-describe("DetailSectionPresenter", () => {
-  let systemUnderTest: DetailSectionPresenter;
+describe("SpaceDetailPresenter", () => {
+  let systemUnderTest: SpaceDetailPresenter;
 
   beforeEach(() => {
-    systemUnderTest = new DetailSectionPresenter(new DetailSectionViewModel());
+    systemUnderTest = new SpaceDetailPresenter(new SpaceDetailViewModel());
   });
 
   test("should set view Model on World loaded", () => {

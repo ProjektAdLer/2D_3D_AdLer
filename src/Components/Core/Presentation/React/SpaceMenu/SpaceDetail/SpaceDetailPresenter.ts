@@ -1,11 +1,11 @@
 import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
-import IDetailSectionPresenter from "./IDetailSectionPresenter";
-import DetailSectionViewModel from "./DetailSectionViewModel";
+import ISpaceDetailPresenter from "./ISpaceDetailPresenter";
+import SpaceDetailViewModel from "./SpaceDetailViewModel";
 import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
 import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
 
-export default class DetailSectionPresenter implements IDetailSectionPresenter {
-  constructor(private viewModel: DetailSectionViewModel) {}
+export default class SpaceDetailPresenter implements ISpaceDetailPresenter {
+  constructor(private viewModel: SpaceDetailViewModel) {}
 
   onWorldLoaded(world: WorldTO): void {
     let newSpaces: [number, string, boolean][] = [];

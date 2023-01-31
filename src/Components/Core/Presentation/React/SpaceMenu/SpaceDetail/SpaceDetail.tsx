@@ -1,21 +1,21 @@
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import CheckBoxEntry from "./CheckBoxEntry";
-import DetailSectionViewModel from "./DetailSectionViewModel";
+import SpaceDetailViewModel from "./SpaceDetailViewModel";
 import spaceIcon from "../../../../../../Assets/icons/13-space/space-icon-nobg.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import { ElementTypeStrings } from "../../../../Domain/Types/ElementTypes";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-import DetailSectionController from "./DetailSectionController";
+import SpaceDetailController from "./SpaceDetailController";
 import { getElementIcon } from "../../../Utils/GetIcon";
 import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
 import { logger } from "src/Lib/Logger";
 import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
 
-export default function DetailSection() {
+export default function SpaceDetail() {
   const [viewModel, controller] = useBuilder<
-    DetailSectionViewModel,
-    DetailSectionController
+    SpaceDetailViewModel,
+    SpaceDetailController
   >(BUILDER_TYPES.IDetailSectionBuilder);
 
   const [name] = useObservable<string>(viewModel.name);

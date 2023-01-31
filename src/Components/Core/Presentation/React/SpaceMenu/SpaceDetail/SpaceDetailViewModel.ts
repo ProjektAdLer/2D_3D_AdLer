@@ -2,7 +2,7 @@ import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
 import Observable from "src/Lib/Observable";
 import { ElementTypeStrings } from "../../../../Domain/Types/ElementTypes";
 
-export default class DetailSectionViewModel {
+export default class SpaceDetailViewModel {
   // world data
   // spaces (id, name, isCompleted)
   spaces: Observable<[number, string, boolean][]> = new Observable<

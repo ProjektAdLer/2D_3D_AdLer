@@ -1,6 +1,6 @@
 import "./App.css";
 import Space from "./Space";
-import WorldMenu from "./WorldMenu";
+import SpaceMenu from "./SpaceMenu";
 import React, { useEffect, useState } from "react";
 import WelcomePage from "./WelcomePage";
 import history from "history/browser";
@@ -24,7 +24,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
   if (location?.pathname.includes("/space")) {
     return <Space />;
   } else if (location?.pathname.includes("/worldmenu")) {
-    return <WorldMenu />;
+    return <SpaceMenu />;
   } else {
     return <WelcomePage />;
   }

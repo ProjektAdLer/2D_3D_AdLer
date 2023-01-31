@@ -1,28 +1,28 @@
 import { injectable } from "inversify";
-import DetailSectionPresenter from "./DetailSectionPresenter";
-import IDetailSectionPresenter from "./IDetailSectionPresenter";
-import DetailSectionViewModel from "./DetailSectionViewModel";
+import SpaceDetailPresenter from "./SpaceDetailPresenter";
+import ISpaceDetailPresenter from "./ISpaceDetailPresenter";
+import SpaceDetailViewModel from "./SpaceDetailViewModel";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
 import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
-import DetailSectionController from "./DetailSectionController";
+import SpaceDetailController from "./SpaceDetailController";
 import IWorldAdapter from "src/Components/Core/Ports/WorldPort/IWorldAdapter";
 
 @injectable()
-export default class DetailSectionBuilder extends PresentationBuilder<
-  DetailSectionViewModel,
-  DetailSectionController,
+export default class SpaceDetailBuilder extends PresentationBuilder<
+  SpaceDetailViewModel,
+  SpaceDetailController,
   undefined,
-  IDetailSectionPresenter
+  ISpaceDetailPresenter
 > {
   constructor() {
     super(
-      DetailSectionViewModel,
-      DetailSectionController,
+      SpaceDetailViewModel,
+      SpaceDetailController,
       undefined,
-      DetailSectionPresenter
+      SpaceDetailPresenter
     );
   }
 

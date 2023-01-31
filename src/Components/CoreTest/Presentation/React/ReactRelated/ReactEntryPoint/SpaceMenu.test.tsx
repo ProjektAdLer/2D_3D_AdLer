@@ -4,7 +4,7 @@ import { mock } from "jest-mock-extended";
 import ILoadWorldUseCase from "../../../../../Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import WorldMenu from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/WorldMenu";
+import SpaceMenu from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/SpaceMenu";
 
 import React from "react";
 
@@ -20,7 +20,7 @@ jest.mock(
 
 const loadWorldUseCaseMock = mock<ILoadWorldUseCase>();
 
-describe("WorldMenu", () => {
+describe("SpaceMenu", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(USECASE_TYPES.ILoadWorldUseCase).toConstantValue(
@@ -35,7 +35,7 @@ describe("WorldMenu", () => {
   test("should render", () => {
     render(
       <Provider container={CoreDIContainer}>
-        <WorldMenu />
+        <SpaceMenu />
       </Provider>
     );
   });

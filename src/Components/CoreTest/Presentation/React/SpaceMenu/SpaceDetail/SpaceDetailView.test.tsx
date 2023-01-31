@@ -2,13 +2,13 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { ElementTypeStrings } from "../../../../../Core/Domain/Types/ElementTypes";
 import Observable from "../../../../../../Lib/Observable";
-import DetailSection from "../../../../../Core/Presentation/React/SpaceMenu/DetailSection/DetailSection";
-import DetailSectionController from "../../../../../Core/Presentation/React/SpaceMenu/DetailSection/DetailSectionController";
-import DetailSectionViewModel from "../../../../../Core/Presentation/React/SpaceMenu/DetailSection/DetailSectionViewModel";
+import SpaceDetail from "../../../../../Core/Presentation/React/SpaceMenu/SpaceDetail/SpaceDetail";
+import SpaceDetailController from "../../../../../Core/Presentation/React/SpaceMenu/SpaceDetail/SpaceDetailController";
+import SpaceDetailViewModel from "../../../../../Core/Presentation/React/SpaceMenu/SpaceDetail/SpaceDetailViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import React from "react";
 
-let mockViewModel = new DetailSectionViewModel();
+let mockViewModel = new SpaceDetailViewModel();
 //world data
 const mockSpaces: Observable<[number, string, boolean][]> = new Observable([
   [1, "spacesTest1", true],
@@ -27,9 +27,9 @@ const mockElements: Observable<[ElementTypeStrings, string][]> = new Observable(
 const mockRequiredPoints: Observable<number> = new Observable(1);
 const mockRequirements: Observable<number[]> = new Observable([1]);
 
-describe("DetailSection in Space Menu", () => {
+describe("SpaceDetail in Space Menu", () => {
   beforeEach(() => {
-    useBuilderMock([mockViewModel, new DetailSectionController(mockViewModel)]);
+    useBuilderMock([mockViewModel, new SpaceDetailController(mockViewModel)]);
     mockViewModel.name = mockName;
     mockViewModel.description = mockDescription;
     mockViewModel.goals = mockGoals;
@@ -39,45 +39,45 @@ describe("DetailSection in Space Menu", () => {
     mockViewModel.spaces = mockSpaces;
   });
   test("should render", () => {
-    render(<DetailSection />);
+    render(<SpaceDetail />);
   });
   test("should render without requirements if requirement does not match with spaceid.", () => {
     mockViewModel.requirements.Value = [20];
-    render(<DetailSection />);
+    render(<SpaceDetail />);
   });
   test("should not render if name is undefined", () => {
     mockViewModel.name = undefined;
-    const componentUnderTest = render(<DetailSection />);
+    const componentUnderTest = render(<SpaceDetail />);
     expect(componentUnderTest.container).toBeEmptyDOMElement();
   });
   test("should not render if description is undefined", () => {
     mockViewModel.description = undefined;
-    const componentUnderTest = render(<DetailSection />);
+    const componentUnderTest = render(<SpaceDetail />);
     expect(componentUnderTest.container).toBeEmptyDOMElement();
   });
   test("should not render if goals is undefined", () => {
     mockViewModel.goals = undefined;
-    const componentUnderTest = render(<DetailSection />);
+    const componentUnderTest = render(<SpaceDetail />);
     expect(componentUnderTest.container).toBeEmptyDOMElement();
   });
   test("should not render if elements is undefined", () => {
     mockViewModel.elements = undefined;
-    const componentUnderTest = render(<DetailSection />);
+    const componentUnderTest = render(<SpaceDetail />);
     expect(componentUnderTest.container).toBeEmptyDOMElement();
   });
   test("should not render if requiredPoints is undefined", () => {
     mockViewModel.requiredPoints = undefined;
-    const componentUnderTest = render(<DetailSection />);
+    const componentUnderTest = render(<SpaceDetail />);
     expect(componentUnderTest.container).toBeEmptyDOMElement();
   });
   test("should not render if requirements is undefined", () => {
     mockViewModel.requirements = undefined;
-    const componentUnderTest = render(<DetailSection />);
+    const componentUnderTest = render(<SpaceDetail />);
     expect(componentUnderTest.container).toBeEmptyDOMElement();
   });
   test("should not render if spaces is undefined", () => {
     mockViewModel.spaces = undefined;
-    const componentUnderTest = render(<DetailSection />);
+    const componentUnderTest = render(<SpaceDetail />);
     expect(componentUnderTest.container).toBeEmptyDOMElement();
   });
 });

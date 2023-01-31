@@ -3,11 +3,11 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import ISpacePort from "../../../../../Core/Ports/SpacePort/ISpacePort";
 import AbstractPort from "../../../../../Core/Ports/AbstractPort/AbstractPort";
-import DetailSectionBuilder from "../../../../../Core/Presentation/React/SpaceMenu/DetailSection/DetailSectionBuilder";
+import SpaceDetailBuilder from "../../../../../Core/Presentation/React/SpaceMenu/SpaceDetail/SpaceDetailBuilder";
 
 const spacePortMock = mock<AbstractPort<ISpacePort>>();
-describe("DetailSectionBuilder", () => {
-  let systemUnderTest: DetailSectionBuilder;
+describe("SpaceDetailBuilder", () => {
+  let systemUnderTest: SpaceDetailBuilder;
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
@@ -17,7 +17,7 @@ describe("DetailSectionBuilder", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new DetailSectionBuilder();
+    systemUnderTest = new SpaceDetailBuilder();
   });
   afterAll(() => {
     CoreDIContainer.restore();
