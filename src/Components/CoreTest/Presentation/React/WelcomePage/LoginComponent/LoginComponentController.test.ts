@@ -1,14 +1,16 @@
 import LoginUseCase from "../../../../../Core/Application/UseCases/Login/LoginUseCase";
-import LoginButtonController from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonController";
-import LoginButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonViewModel";
+import LoginComponentController from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentController";
+import LoginComponentViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentViewModel";
 
 const executeAsyncMock = jest.spyOn(LoginUseCase.prototype, "executeAsync");
 
 describe("ElementDropdownController", () => {
-  let systemUnderTest: LoginButtonController;
+  let systemUnderTest: LoginComponentController;
 
   beforeEach(() => {
-    systemUnderTest = new LoginButtonController(new LoginButtonViewModel());
+    systemUnderTest = new LoginComponentController(
+      new LoginComponentViewModel()
+    );
   });
 
   test("loginAsync calls the use case", () => {

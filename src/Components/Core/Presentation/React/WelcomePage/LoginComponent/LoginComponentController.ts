@@ -1,11 +1,13 @@
 import ILoginUseCase from "src/Components/Core/Application/UseCases/Login/ILoginUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
-import ILoginButtonController from "./ILoginButtonController";
-import LoginButtonViewModel from "./LoginButtonViewModel";
+import ILoginComponentController from "./ILoginComponentController";
+import LoginComponentViewModel from "./LoginComponentViewModel";
 
-export default class LoginButtonController implements ILoginButtonController {
-  constructor(private viewModel: LoginButtonViewModel) {}
+export default class LoginComponentController
+  implements ILoginComponentController
+{
+  constructor(private viewModel: LoginComponentViewModel) {}
 
   async loginAsync(username: string, password: string): Promise<void> {
     CoreDIContainer.get<ILoginUseCase>(

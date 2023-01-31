@@ -6,12 +6,12 @@ import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContai
 import StyledInputField from "../../ReactRelated/ReactBaseComponents/StyledInputField";
 import StyledModal from "../../ReactRelated/ReactBaseComponents/StyledModal";
 import StyledPasswordField from "../../ReactRelated/ReactBaseComponents/StyledPasswordField";
-import ILoginButtonController from "./ILoginButtonController";
-import LoginButtonViewModel from "./LoginButtonViewModel";
+import ILoginComponentController from "./ILoginComponentController";
+import LoginComponentViewModel from "./LoginComponentViewModel";
 
 export default function LoginModal(props: {
-  viewModel: LoginButtonViewModel;
-  controller: ILoginButtonController;
+  viewModel: LoginComponentViewModel;
+  controller: ILoginComponentController;
 }) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");

@@ -3,17 +3,17 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import ILMSPort from "../../../../../Core/Ports/LMSPort/ILMSPort";
-import LoginButtonBuilder from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonBuilder";
-import LoginButtonController from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonController";
-import LoginButtonPresenter from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonPresenter";
-import LoginButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonViewModel";
+import LoginComponentBuilder from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentBuilder";
+import LoginComponentController from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentController";
+import LoginComponentPresenter from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentPresenter";
+import LoginComponentViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentViewModel";
 import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
 const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
 const lmsPortMock = mock<ILMSPort>();
 
-describe("LoginButtonBuilder", () => {
-  let systemUnderTest: LoginButtonBuilder;
+describe("LoginComponentBuilder", () => {
+  let systemUnderTest: LoginComponentBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -25,7 +25,7 @@ describe("LoginButtonBuilder", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new LoginButtonBuilder();
+    systemUnderTest = new LoginComponentBuilder();
   });
 
   afterAll(() => {
@@ -37,14 +37,16 @@ describe("LoginButtonBuilder", () => {
     systemUnderTest.buildController();
 
     expect(systemUnderTest["controller"]).toBeDefined();
-    expect(systemUnderTest["controller"]).toBeInstanceOf(LoginButtonController);
+    expect(systemUnderTest["controller"]).toBeInstanceOf(
+      LoginComponentController
+    );
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledTimes(
       1
     );
     expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledWith(
       systemUnderTest["viewModel"],
       systemUnderTest["controller"],
-      LoginButtonViewModel
+      LoginComponentViewModel
     );
   });
 
@@ -53,6 +55,8 @@ describe("LoginButtonBuilder", () => {
     systemUnderTest.buildPresenter();
 
     expect(systemUnderTest["presenter"]).toBeDefined();
-    expect(systemUnderTest["presenter"]).toBeInstanceOf(LoginButtonPresenter);
+    expect(systemUnderTest["presenter"]).toBeInstanceOf(
+      LoginComponentPresenter
+    );
   });
 });

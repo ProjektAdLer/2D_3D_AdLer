@@ -1,7 +1,7 @@
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
-import LoginButtonController from "./LoginButtonController";
-import LoginButtonViewModel from "./LoginButtonViewModel";
+import LoginComponentController from "./LoginComponentController";
+import LoginComponentViewModel from "./LoginComponentViewModel";
 import moodleIcon from "../../../../../../Assets/icons/16-moodle/moodle-icon-nobg.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
@@ -12,10 +12,10 @@ import React from "react";
 /**
  * React Component that displays a login button. When clicked, a modal will be overlayed.
  */
-export default function LoginButton() {
+export default function LoginComponent() {
   const [viewModel, controller] = useBuilder<
-    LoginButtonViewModel,
-    LoginButtonController
+    LoginComponentViewModel,
+    LoginComponentController
   >(BUILDER_TYPES.ILoginButtonBuilder);
 
   const [, setModalVisible] = useObservable<boolean>(viewModel?.modalVisible);

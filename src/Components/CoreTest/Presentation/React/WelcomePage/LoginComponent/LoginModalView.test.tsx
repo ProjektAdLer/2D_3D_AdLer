@@ -2,13 +2,13 @@ import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
 import { mock } from "jest-mock-extended";
 import React from "react";
-import LoginButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonViewModel";
+import LoginComponentViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
-import LoginModal from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/LoginModal";
-import ILoginButtonController from "../../../../../Core/Presentation/React/WelcomePage/LoginButton/ILoginButtonController";
+import LoginModal from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginModal";
+import ILoginComponentController from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/ILoginComponentController";
 
-let viewModel = new LoginButtonViewModel();
-const mockedController = mock<ILoginButtonController>();
+let viewModel = new LoginComponentViewModel();
+const mockedController = mock<ILoginComponentController>();
 
 describe("LoginModal", () => {
   test("should render if visible", () => {

@@ -1,8 +1,8 @@
 import { injectable } from "inversify";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
-import LoginButtonController from "./LoginButtonController";
-import LoginButtonPresenter from "./LoginButtonPresenter";
-import LoginButtonViewModel from "./LoginButtonViewModel";
+import LoginComponentController from "./LoginComponentController";
+import LoginComponentPresenter from "./LoginComponentPresenter";
+import LoginComponentViewModel from "./LoginComponentViewModel";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
 import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
@@ -11,18 +11,18 @@ import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
 import ILMSAdapter from "src/Components/Core/Ports/LMSPort/ILMSAdapter";
 
 @injectable()
-export default class LoginButtonBuilder extends PresentationBuilder<
-  LoginButtonViewModel,
-  LoginButtonController,
+export default class LoginComponentBuilder extends PresentationBuilder<
+  LoginComponentViewModel,
+  LoginComponentController,
   undefined,
-  LoginButtonPresenter
+  LoginComponentPresenter
 > {
   constructor() {
     super(
-      LoginButtonViewModel,
-      LoginButtonController,
+      LoginComponentViewModel,
+      LoginComponentController,
       undefined,
-      LoginButtonPresenter
+      LoginComponentPresenter
     );
   }
 
@@ -30,7 +30,7 @@ export default class LoginButtonBuilder extends PresentationBuilder<
     super.buildController();
     CoreDIContainer.get<ViewModelControllerProvider>(
       CORE_TYPES.IViewModelControllerProvider
-    ).registerTupel(this.viewModel, this.controller, LoginButtonViewModel);
+    ).registerTupel(this.viewModel, this.controller, LoginComponentViewModel);
   }
 
   override buildPresenter(): void {
