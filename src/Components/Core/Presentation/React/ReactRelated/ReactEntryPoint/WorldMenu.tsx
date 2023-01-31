@@ -1,8 +1,5 @@
 import React from "react";
 import HeaderBar from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBar";
-import SpaceDetail from "~ReactComponents/SpaceMenu/SpaceDetail/SpaceDetail";
-import SpaceSelection from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection";
-import WorldCompletionModal from "~ReactComponents/SpaceMenu/WorldCompletionModal/WorldCompletionModal";
 import MenuTutorial from "~ReactComponents/SpaceMenu/MenuTutorial/MenuTutorial";
 
 export default function SpaceMenu() {
