@@ -50,7 +50,7 @@ export default function SpaceCompletionModal() {
         <StyledButton
           className="mb-4"
           shape="freefloatleft"
-          onClick={() => controller.ReturnWorldMenuButtonClicked()}
+          onClick={() => controller.ReturnSpaceMenuButtonClicked()}
         >
           Zurück zum Lernraum-Menü
         </StyledButton>

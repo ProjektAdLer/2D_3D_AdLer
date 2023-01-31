@@ -11,17 +11,17 @@ import ElementsDropdownBuilder from "../../Presentation/React/SpaceDisplay/Eleme
 import ScorePanelBuilder from "../../Presentation/React/SpaceDisplay/ScorePanel/ScorePanelBuilder";
 import NotificationManagerBuilder from "../../Presentation/React/GeneralComponents/NotificationManager/NotificationManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
-import LoginButtonBuilder from "../../Presentation/React/WelcomePage/LoginButton/LoginButtonBuilder";
+import LoginComponentBuilder from "../../Presentation/React/WelcomePage/LoginComponent/LoginComponentBuilder";
 import BottomTooltipBuilder from "../../Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipBuilder";
 import SpaceNamePanelBuilder from "../../Presentation/React/SpaceDisplay/SpaceNamePanel/SpaceNamePanelBuilder";
 import FullscreenSwitchBuilder from "../../Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
 import SpaceGoalPanelBuilder from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanelBuilder";
-import HeaderBarBuilder from "~ReactComponents/SpaceMenu/HeaderBar/HeaderBarBuilder";
+import MenuHeaderBarBuilder from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBarBuilder";
 import SpaceSelectionBuilder from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelectionBuilder";
-import DetailSectionBuilder from "~ReactComponents/SpaceMenu/DetailSection/DetailSectionBuilder";
+import SpaceDetailBuilder from "~ReactComponents/SpaceMenu/SpaceDetail/SpaceDetailBuilder";
 import SpaceCompletionModalBuilder from "~ReactComponents/SpaceDisplay/SpaceCompletionModal/SpaceCompletionModalBuilder";
 import WorldCompletionModalBuilder from "~ReactComponents/SpaceMenu/WorldCompletionModal/WorldCompletionModalBuilder";
-import MenuBarBuilder from "~ReactComponents/GeneralComponents/MenuBar/MenuBarBuilder";
+import SideBarBuilder from "~ReactComponents/SpaceDisplay/SideBar/SideBarBuilder";
 import UseGuideBuilder from "~ReactComponents/SpaceDisplay/UseGuide/UseGuideBuilder";
 import WorldMenuButtonBuilder from "~ReactComponents/WelcomePage/WorldMenuButton/WorldMenuButtonBuilder";
 import AvatarCameraBuilder from "../../Presentation/Babylon/AvatarCamera/AvatarCameraBuilder";
@@ -49,7 +49,7 @@ const BuilderDIContainer = new ContainerModule((bind) => {
     NotificationManagerBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILoginButtonBuilder).to(
-    LoginButtonBuilder
+    LoginComponentBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IBottomTooltipBuilder).to(
     BottomTooltipBuilder
@@ -64,13 +64,13 @@ const BuilderDIContainer = new ContainerModule((bind) => {
     SpaceGoalPanelBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IHeaderBarBuilder).to(
-    HeaderBarBuilder
+    MenuHeaderBarBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceSelectionBuilder).to(
     SpaceSelectionBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IDetailSectionBuilder).to(
-    DetailSectionBuilder
+    SpaceDetailBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceCompletionModalBuilder).to(
     SpaceCompletionModalBuilder
@@ -78,7 +78,7 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IWorldCompletionModalBuilder).to(
     WorldCompletionModalBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IMenuBarBuilder).to(MenuBarBuilder);
+  bind<IPresentationBuilder>(BUILDER_TYPES.IMenuBarBuilder).to(SideBarBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IUseGuideBuilder).to(
     UseGuideBuilder
   );

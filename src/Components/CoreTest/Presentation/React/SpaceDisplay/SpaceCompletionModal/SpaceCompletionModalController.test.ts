@@ -11,12 +11,12 @@ describe("SpaceCompletionModalController", () => {
     systemUnderTest = new SpaceCompletionModalController(viewModel);
   });
 
-  test("ReturnWorldMenuButtonClicked should push /worldmenu to history", () => {
+  test("ReturnWorldMenuButtonClicked should push /spacemenu to history", () => {
     const historyPushSpy = jest.spyOn(history, "push");
 
-    systemUnderTest.ReturnWorldMenuButtonClicked();
+    systemUnderTest.ReturnSpaceMenuButtonClicked();
 
-    expect(historyPushSpy).toHaveBeenCalledWith("/worldmenu");
+    expect(historyPushSpy).toHaveBeenCalledWith("/spacemenu");
   });
 
   test("CloseButtonClicked should set showModal in the viewmodel to false", () => {
