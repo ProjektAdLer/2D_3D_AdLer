@@ -1,9 +1,9 @@
 import ElementTO from "../../../Core/Application/DataTransferObjects/ElementTO";
-import SpaceTO from "../../../Core/Application/DataTransferObjects/SpaceTO";
-import WorldTO from "../../../Core/Application/DataTransferObjects/WorldTO";
 import IDSL from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
+import BackendSpaceTO from "src/Components/Core/Application/DataTransferObjects/BackendSpaceTO";
+import BackendWorldTO from "src/Components/Core/Application/DataTransferObjects/BackendWorldTO";
 
-export const minimalGetWorldDataResponse: WorldTO = {
+export const minimalGetWorldDataResponse: BackendWorldTO = {
   worldName: "TestWorld",
   worldGoal: "TestGoal",
   description: "TestDescription",
@@ -15,7 +15,7 @@ export const minimalGetWorldDataResponse: WorldTO = {
       requirements: [],
       id: 1,
       name: "TestSpace",
-      requiredPoints: 0,
+      requiredScore: 0,
       elements: [
         {
           id: 1,
@@ -35,7 +35,7 @@ export const minimalGetWorldDataResponse: WorldTO = {
 
 // expected structure of the TOs
 // this needs to be updated if the TOs changes
-export const expectedWorldTO: WorldTO = {
+export const expectedWorldTO: BackendWorldTO = {
   worldName: expect.any(String),
   worldGoal: expect.any(String),
   spaces: expect.any(Array),
@@ -43,14 +43,14 @@ export const expectedWorldTO: WorldTO = {
   goals: expect.any(String),
 };
 
-export const expectedSpaceTO: SpaceTO = {
+export const expectedSpaceTO: BackendSpaceTO = {
   id: expect.any(Number),
   name: expect.any(String),
   elements: expect.any(Array),
   description: expect.any(String),
   goals: expect.any(String),
   requirements: expect.any(Array),
-  requiredPoints: expect.any(Number),
+  requiredScore: expect.any(Number),
 };
 
 export const expectedElementTO: Partial<ElementTO> = {
