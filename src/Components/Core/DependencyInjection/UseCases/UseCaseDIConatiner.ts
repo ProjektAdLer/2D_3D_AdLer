@@ -54,7 +54,7 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(ScoreH5PElement)
     .inSingletonScope();
 
-  bind<IGetElementSourceUseCase>(USECASE_TYPES.IGetElementSource)
+  bind<IGetElementSourceUseCase>(USECASE_TYPES.IGetElementSourceUseCase)
     .to(GetElementSourceUseCase)
     .inSingletonScope();
 });

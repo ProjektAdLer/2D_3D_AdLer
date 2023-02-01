@@ -7,7 +7,7 @@ import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import type IElementPort from "../../../Ports/ElementPort/IElementPort";
 import ElementTO from "../../DataTransferObjects/ElementTO";
-import GetElementSourceUseCase from "../GetElementSourceUseCase/GetElementSourceUseCase";
+import type IGetElementSourceUseCase from "../GetElementSourceUseCase/IGetElementSourceUseCase";
 import IElementStartedUseCase from "./IElementStartedUseCase";
 
 @injectable()
@@ -17,8 +17,8 @@ export default class ElementStartedUseCase implements IElementStartedUseCase {
     private entityContainer: IEntityContainer,
     @inject(PORT_TYPES.IElementPort)
     private elementPort: IElementPort,
-    @inject(USECASE_TYPES.IGetElementSource)
-    private getElementSourceUseCase: GetElementSourceUseCase
+    @inject(USECASE_TYPES.IGetElementSourceUseCase)
+    private getElementSourceUseCase: IGetElementSourceUseCase
   ) {}
 
   async executeAsync(elementID: number): Promise<void> {
