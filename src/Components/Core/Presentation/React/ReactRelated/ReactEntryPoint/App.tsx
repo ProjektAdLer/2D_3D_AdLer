@@ -22,7 +22,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
     };
   }, []);
 
-  if (location?.pathname.includes("/space")) {
+  if (location?.pathname.includes("/spacedisplay")) {
     return <Space />;
   } else if (location?.pathname.includes("/worldmenu")) {
     return <WorldMenu />;
