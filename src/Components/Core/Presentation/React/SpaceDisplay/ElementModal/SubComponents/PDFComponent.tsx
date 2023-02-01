@@ -6,7 +6,7 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 // set to true to always show the mobile version of the PDF component
-const debug_allwaysShowMobile = false;
+const debug_alwaysShowMobile = false;
 
 export default function PDFComponent({
   viewModel,
@@ -15,7 +15,7 @@ export default function PDFComponent({
 }) {
   return (
     <div className="w-[400px] lg:w-[800px] h-[80vh] text-black font-medium overflow-auto bg-adlerblue-100 p-3">
-      {PDFObject.supportsPDFs || debug_allwaysShowMobile ? (
+      {PDFObject.supportsPDFs || debug_alwaysShowMobile ? (
         <DesktopPDFComponent viewModel={viewModel} />
       ) : (
         <MobilePDFComponent viewModel={viewModel} />
