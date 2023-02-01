@@ -10,13 +10,13 @@ import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContai
 import type IWorldPort from "../../../Ports/WorldPort/IWorldPort";
 import ILoadWorldUseCase from "./ILoadWorldUseCase";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
-import type ILoadAvatarUseCase from "../LoadAvatar/ILoadAvatarUseCase";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IUIPort from "../../../Ports/UIPort/IUIPort";
 import WorldTO from "../../DataTransferObjects/WorldTO";
 import ElementTO from "../../DataTransferObjects/ElementTO";
 import { Semaphore } from "src/Lib/Semaphore";
 import WorldStatusTO from "../../DataTransferObjects/WorldStatusTO";
+import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -29,8 +29,8 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     private backendAdapter: IBackendAdapter,
     @inject(PORT_TYPES.IUIPort)
     private uiPort: IUIPort,
-    @inject(USECASE_TYPES.ILoadAvatarUseCase)
-    private loadAvatarUseCase: ILoadAvatarUseCase
+    @inject(USECASE_TYPES.ICalculateSpaceScore)
+    private calculateSpaceScore: ICalculateSpaceScoreUseCase
   ) {}
 
   private usedWorldId: number;
@@ -55,7 +55,14 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       worldEntity = await this.load(userData[0]);
     }
 
-    this.worldPort.onWorldLoaded(this.toTO(worldEntity));
+    let worldTO = this.toTO(worldEntity);
+    worldTO.spaces.forEach((space) => {
+      let spaceScores = this.calculateSpaceScore.execute(space.id);
+      space.currentScore = spaceScores.currentScore;
+      space.maxScore = spaceScores.maxScore;
+    });
+
+    this.worldPort.onWorldLoaded(worldTO);
 
     lock.release();
   }
