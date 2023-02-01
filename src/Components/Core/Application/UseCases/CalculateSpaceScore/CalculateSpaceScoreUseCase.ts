@@ -48,13 +48,14 @@ export default class CalculateSpaceScoreUseCase
 
     this.spacePort.onScoreChanged(
       currentScore,
-      space.requiredPoints,
+      space.requiredScore,
       maxPoints,
       spaceID
     );
+
     return {
       currentScore: currentScore,
-      requiredScore: space.requiredPoints,
+      requiredScore: space.requiredScore,
       maxScore: maxPoints,
       spaceID: spaceID,
     } as SpaceScoreTO;

@@ -1,7 +1,9 @@
 import { mock, mockDeep } from "jest-mock-extended";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import { render } from "@testing-library/react";
-import SpaceSelectionViewModel from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionViewModel";
+import SpaceSelectionViewModel, {
+  SpaceSelectionSpaceData,
+} from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionViewModel";
 import React from "react";
 import SpaceSelection from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelection";
 import ISpaceSelectionController from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/ISpaceSelectionController";
@@ -26,9 +28,17 @@ describe("SpaceSelection", () => {
       USECASE_TYPES.ICalculateSpaceScore
     ).toConstantValue(calculateSpaceScoreUseCase);
   });
+
   test("should render and call controller on click", () => {
     const vm = new SpaceSelectionViewModel();
-    vm.spaces.Value = [[1, "test", true, true]];
+    vm.spaces.Value = [
+      {
+        id: 1,
+        name: "test",
+        isAvailable: true,
+        isCompleted: true,
+      } as SpaceSelectionSpaceData,
+    ];
 
     const controllerMock = mock<ISpaceSelectionController>();
     useBuilderMock([vm, controllerMock]);
@@ -40,44 +50,67 @@ describe("SpaceSelection", () => {
 
     // click on the first row
     container.getByRole("button").click();
+
     expect(controllerMock.onSpaceRowClicked).toBeCalledWith(1);
   });
 
   test("doesn't render without controller", () => {
     useBuilderMock([mockDeep<SpaceSelectionViewModel>(), undefined]);
+
     const { container } = render(
       <Provider container={CoreDIContainer}>
         <SpaceSelection />
       </Provider>
     );
+
     expect(container.firstChild).toBeNull();
   });
 
   test("doesn't render without view model", () => {
     useBuilderMock([undefined, mock<ISpaceSelectionController>()]);
+
     const { container } = render(
       <Provider container={CoreDIContainer}>
         <SpaceSelection />
       </Provider>
     );
+
     expect(container.firstChild).toBeNull();
   });
+
   test("should render uncompleted room buttons without issues.", () => {
     const vm = new SpaceSelectionViewModel();
-    vm.spaces.Value = [[1, "test", true, false]];
+    vm.spaces.Value = [
+      {
+        id: 1,
+        name: "test",
+        isAvailable: true,
+        isCompleted: false,
+      } as SpaceSelectionSpaceData,
+    ];
     const controllerMock = mock<ISpaceSelectionController>();
     useBuilderMock([vm, controllerMock]);
+
     render(
       <Provider container={CoreDIContainer}>
         <SpaceSelection />
       </Provider>
     );
   });
+
   test("should render uncompleted, unavailable room buttons without issues.", () => {
     const vm = new SpaceSelectionViewModel();
-    vm.spaces.Value = [[1, "test", false, false]];
+    vm.spaces.Value = [
+      {
+        id: 1,
+        name: "test",
+        isAvailable: false,
+        isCompleted: false,
+      } as SpaceSelectionSpaceData,
+    ];
     const controllerMock = mock<ISpaceSelectionController>();
     useBuilderMock([vm, controllerMock]);
+
     render(
       <Provider container={CoreDIContainer}>
         <SpaceSelection />

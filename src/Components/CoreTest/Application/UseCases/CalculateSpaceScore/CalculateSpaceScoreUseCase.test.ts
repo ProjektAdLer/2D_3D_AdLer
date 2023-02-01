@@ -66,7 +66,7 @@ describe("Calculate Space Score UseCase", () => {
             value: 10,
           },
         ],
-        requiredPoints: 20,
+        requiredScore: 20,
       } as SpaceEntity,
     ]);
 
@@ -86,7 +86,7 @@ describe("Calculate Space Score UseCase", () => {
         id: 1,
         elements: [],
         description: "test",
-        requiredPoints: 0,
+        requiredScore: 0,
         name: "test",
         goals: "test",
         requirements: [],
