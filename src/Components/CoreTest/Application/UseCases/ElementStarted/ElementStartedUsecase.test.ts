@@ -25,9 +25,9 @@ describe("Element Started Usecase", () => {
     CoreDIContainer.rebind(PORT_TYPES.IElementPort).toConstantValue(
       elementPortMock
     );
-    CoreDIContainer.rebind(USECASE_TYPES.IGetElementSource).toConstantValue(
-      getElementSourceUseCaseMock
-    );
+    CoreDIContainer.rebind(
+      USECASE_TYPES.IGetElementSourceUseCase
+    ).toConstantValue(getElementSourceUseCaseMock);
   });
 
   beforeEach(() => {

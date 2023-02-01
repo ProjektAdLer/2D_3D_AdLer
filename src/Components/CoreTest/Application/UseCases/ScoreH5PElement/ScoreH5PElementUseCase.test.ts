@@ -73,7 +73,7 @@ const executeAsyncParams = {
   courseId: 1,
 };
 
-describe("ScoreH5PElement", () => {
+describe("ScoreH5PElementUseCase", () => {
   let systemUnderTest: ScoreH5PElement;
 
   beforeAll(() => {
@@ -94,7 +94,9 @@ describe("ScoreH5PElement", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = CoreDIContainer.get(USECASE_TYPES.IScoreH5PElement);
+    systemUnderTest = CoreDIContainer.get(
+      USECASE_TYPES.IScoreH5PElementUseCase
+    );
   });
 
   afterAll(() => {

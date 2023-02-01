@@ -51,7 +51,7 @@ export default class ElementModalController implements IElementModalController {
       statement.result.success = statement?.result?.score?.scaled == 1 || false;
 
       await CoreDIContainer.get<IScoreH5PElement>(
-        USECASE_TYPES.IScoreH5PElement
+        USECASE_TYPES.IScoreH5PElementUseCase
       ).executeAsync({
         //@ts-ignore
         xapiData: xapiData,
