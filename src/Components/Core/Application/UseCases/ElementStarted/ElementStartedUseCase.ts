@@ -7,7 +7,7 @@ import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import type IElementPort from "../../../Ports/ElementPort/IElementPort";
 import ElementTO from "../../DataTransferObjects/ElementTO";
-import type IGetElementSourceUseCase from "../GetElementSourceUseCase/IGetElementSourceUseCase";
+import type IGetElementSourceUseCase from "../GetElementSource/IGetElementSourceUseCase";
 import IElementStartedUseCase from "./IElementStartedUseCase";
 
 @injectable()

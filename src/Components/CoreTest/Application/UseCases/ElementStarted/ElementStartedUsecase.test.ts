@@ -7,7 +7,7 @@ import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import ElementStartedUseCase from "../../../../Core/Application/UseCases/ElementStarted/ElementStartedUseCase";
 import IElementPort from "../../../../Core/Ports/ElementPort/IElementPort";
-import GetElementSourceUseCase from "../../../../Core/Application/UseCases/GetElementSourceUseCase/GetElementSourceUseCase";
+import GetElementSourceUseCase from "../../../../Core/Application/UseCases/GetElementSource/GetElementSourceUseCase";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 
 const elementPortMock = mock<IElementPort>();

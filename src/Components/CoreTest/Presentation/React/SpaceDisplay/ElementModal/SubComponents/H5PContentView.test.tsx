@@ -6,7 +6,7 @@ import React from "react";
 import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import mock from "jest-mock-extended/lib/Mock";
-import IGetElementSourceUseCase from "../../../../../../Core/Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
+import IGetElementSourceUseCase from "../../../../../../Core/Application/UseCases/GetElementSource/IGetElementSourceUseCase";
 import { Provider } from "inversify-react";
 import IElementModalController from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/IElementModalController";
 
