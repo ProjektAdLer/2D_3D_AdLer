@@ -8,6 +8,6 @@ export default class SpaceDetailController implements ISpaceDetailController {
 
   @bind
   onSpaceButtonClicked(): void {
-    history.push("/space/" + this.viewModel.id.Value);
+    history.push("/spacedisplay/" + this.viewModel.id.Value);
   }
 }
