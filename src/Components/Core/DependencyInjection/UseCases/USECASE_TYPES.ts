@@ -6,8 +6,8 @@ const USECASE_TYPES = {
   ICalculateSpaceScore: Symbol("ICalculateSpaceScore"),
   ILoginUseCase: Symbol("ILoginUseCase"),
   ILoadSpaceUseCase: Symbol("ILoadSpaceUseCase"),
-  IScoreH5PElement: Symbol("IScoreH5PElement"),
-  IGetElementSourceUseCase: Symbol("IGetElementSource"),
+  IScoreH5PElementUseCase: Symbol("IScoreH5PElementUseCase"),
+  IGetElementSourceUseCase: Symbol("IGetElementSourceUseCase"),
 };
 
 export default USECASE_TYPES;

@@ -8,7 +8,6 @@ import USECASE_TYPES from "../../../../../../Core/DependencyInjection/UseCases/U
 import mock from "jest-mock-extended/lib/Mock";
 import IGetElementSourceUseCase from "../../../../../../Core/Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
 import { Provider } from "inversify-react";
-import GetElementSourceUseCase from "../../../../../../Core/Application/UseCases/GetElementSourceUseCase/GetElementSourceUseCase";
 import IElementModalController from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/IElementModalController";
 
 const viewModel = new ElementModalViewModel();
@@ -18,8 +17,7 @@ viewModel.filePath.Value = "test";
 
 jest.mock("h5p-standalone");
 
-const sourceUseCaseMock = mock<IGetElementSourceUseCase>();
-const getElementSourceUseCaseMock = mock<GetElementSourceUseCase>();
+const getElementSourceUseCaseMock = mock<IGetElementSourceUseCase>();
 const elementModalControllerMock = mock<IElementModalController>();
 
 global.console = {
@@ -35,13 +33,9 @@ global.console = {
 describe("H5PContentView", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
-    CoreDIContainer.unbindAll();
-    CoreDIContainer.bind(USECASE_TYPES.IGetElementSource).toConstantValue(
-      sourceUseCaseMock
-    );
-    CoreDIContainer.rebind(USECASE_TYPES.IGetElementSource).toConstantValue(
-      getElementSourceUseCaseMock
-    );
+    CoreDIContainer.rebind(
+      USECASE_TYPES.IGetElementSourceUseCase
+    ).toConstantValue(getElementSourceUseCaseMock);
     jest.spyOn(console, "error").mockImplementation(() => {});
   });
 
@@ -51,7 +45,7 @@ describe("H5PContentView", () => {
   });
 
   test("should render", () => {
-    sourceUseCaseMock.executeAsync.mockResolvedValue(
+    getElementSourceUseCaseMock.executeAsync.mockResolvedValue(
       "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel"
     );
     const oldError = console.error;

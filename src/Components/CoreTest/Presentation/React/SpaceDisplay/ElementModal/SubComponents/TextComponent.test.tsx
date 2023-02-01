@@ -26,7 +26,7 @@ describe("TextElementSubComponent", () => {
     sourceUseCase.executeAsync.mockResolvedValue("test");
 
     CoreDIContainer.bind<IGetElementSourceUseCase>(
-      USECASE_TYPES.IGetElementSource
+      USECASE_TYPES.IGetElementSourceUseCase
     ).toConstantValue(sourceUseCase);
   });
 
