@@ -13,7 +13,7 @@ export default function ImageComponent({
       <img
         className="object-scale-down max-h-[93vh] w-fit max-w-[90vw] lg:max-w-[99vw]"
         alt="LearningImage!"
-        src="https://www.xtrafondos.com/wallpapers/vertical/stormtrooper-de-star-wars-battlefront-5226.jpg"
+        src={imageUrl}
       ></img>
     </div>
   );
