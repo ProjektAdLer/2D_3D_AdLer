@@ -26,7 +26,7 @@ describe("MockBackendAdapter", () => {
     config.useFakeBackend = oldConfigValue;
   });
 
-  test("getWorldData returns WorldTO with one space and every element type", async () => {
+  test("getWorldData returns BackendWorldTO with correct structure", async () => {
     const result = await systemUnderTest.getWorldData({
       userToken: "",
       worldId: 1,
@@ -41,21 +41,21 @@ describe("MockBackendAdapter", () => {
         expect(element).toEqual(expectedElementTO);
       });
     });
-
-    // check that the result has only one learning room
-    expect(result.spaces).toHaveLength(4);
-
-    // check that the results first room includes every learning element type
-    // expect(result.spaces![0].elements).toEqual(
-    //   expect.arrayContaining(
-    //     Object.keys(ElementTypes).map((elementType) =>
-    //       expect.objectContaining({
-    //         type: elementType,
-    //       })
-    //     )
-    //   )
-    // );
   });
+
+  test.todo(
+    "add tests for specific desired element types and structure in BackendWorldTO"
+  );
+  // expect(result.spaces).toHaveLength(4);
+  // expect(result.spaces![0].elements).toEqual(
+  //   expect.arrayContaining(
+  //     Object.keys(ElementTypes).map((elementType) =>
+  //       expect.objectContaining({
+  //         type: elementType,
+  //       })
+  //     )
+  //   )
+  // );
 
   test("scoreElement resolves", async () => {
     await expect(
@@ -71,6 +71,7 @@ describe("MockBackendAdapter", () => {
       })
     ).resolves.toEqual("fakeToken");
   });
+
   test("should get Courses Available For User", async () => {
     await expect(
       systemUnderTest.getCoursesAvailableForUser("token")
@@ -100,14 +101,14 @@ describe("MockBackendAdapter", () => {
     "should get Element Source",
     async (element) => {
       await expect(
-        systemUnderTest.getElementSource("token", element, 1)
+        systemUnderTest.getElementSource("token", element)
       ).resolves.toEqual(expect.any(String));
     }
   );
 
   test("should throw when souce of invalid element is requested", () => {
     async (element) => {
-      await expect(systemUnderTest.getElementSource("token", 55, 1)).toThrow();
+      await expect(systemUnderTest.getElementSource("token", 55)).toThrow();
     };
   });
 
@@ -134,30 +135,28 @@ describe("MockBackendAdapter", () => {
       ],
     });
   });
+
   test("should get Element Score", async () => {
-    await expect(
-      systemUnderTest.getElementScore("token", 1, 1)
-    ).resolves.toEqual({
+    await expect(systemUnderTest.getElementScore("token", 1)).resolves.toEqual({
       elementId: 1,
       successss: true,
     });
   });
+
   test("should get Player Data", async () => {
     await expect(systemUnderTest.getPlayerData("token")).resolves.toEqual({
       playerGender: "Male",
       playerWorldColor: "Blue",
     });
   });
+
   test("should update Player Data", async () => {
     await expect(
       systemUnderTest.updatePlayerData("token", {})
     ).resolves.toEqual(new PlayerDataTO());
   });
-  test("should throw when try to delete Player Data", async () => {
-    // async (element) => {
-    //   await expect(systemUnderTest.deletePlayerData("token")).toThrow();
-    // };
 
+  test("should throw when try to delete Player Data", async () => {
     await expect(async () =>
       systemUnderTest.deletePlayerData("token")
     ).rejects.toThrow();

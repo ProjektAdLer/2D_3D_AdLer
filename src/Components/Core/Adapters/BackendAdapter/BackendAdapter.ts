@@ -1,22 +1,20 @@
 import axios from "axios";
 import { injectable } from "inversify";
 import { config } from "../../../../config";
-import { ElementTypes } from "../../Domain/Types/ElementTypes";
-import IDSL, { APIElement } from "./Types/IDSL";
+import IDSL from "./Types/IDSL";
 import IBackendAdapter, {
   ScoreH5PElementRequest,
   getWorldDataParams,
 } from "./IBackendAdapter";
-import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
-import ElementTO from "../../Application/DataTransferObjects/ElementTO";
-import WorldTO from "../../Application/DataTransferObjects/WorldTO";
 import { ElementID } from "../../Domain/Types/EntityTypes";
 import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
 import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
 import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 
 import { createPatch } from "rfc6902";
+import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
+import BackendAdapterUtils from "./BackendAdapterUtils";
 
 @injectable()
 export default class BackendAdapter implements IBackendAdapter {
@@ -165,44 +163,17 @@ export default class BackendAdapter implements IBackendAdapter {
   async getWorldData({
     userToken,
     worldId,
-  }: getWorldDataParams): Promise<WorldTO> {
-    // get DSL
-    let dsl = await this.getDSL({
-      userToken,
-      worldId,
-    });
-
-    // create ElementTOs
-    const elements: ElementTO[] = dsl.learningWorld.learningElements.flatMap(
-      (element) =>
-        element.elementCategory in ElementTypes ? this.mapElement(element) : []
+  }: getWorldDataParams): Promise<BackendWorldTO> {
+    const response = await axios.get<IDSL>(
+      config.serverURL + "/Courses/" + worldId,
+      {
+        headers: {
+          token: userToken,
+        },
+      }
     );
 
-    // create SpaceTOs and connect them with their elements
-    const spaces = dsl.learningWorld.learningSpaces.map((space) => {
-      return {
-        id: space.spaceId,
-        name: space.identifier.value,
-        elements: elements.filter((element) =>
-          space.learningSpaceContent.includes(element.id)
-        ),
-        description: space.description,
-        goals: space.goals,
-        requirements: space.requirements,
-        requiredPoints: space.requiredPoints,
-      } as SpaceTO;
-    });
-
-    // create WorldTO with world data
-    let response: WorldTO = {
-      worldName: dsl.learningWorld.identifier.value,
-      worldGoal: dsl.learningWorld.goals,
-      spaces: spaces,
-      description: dsl.learningWorld.description,
-      goals: dsl.learningWorld.goals,
-    };
-
-    return response;
+    return BackendAdapterUtils.parseDSL(response.data);
   }
 
   async scoreElement(
@@ -243,33 +214,5 @@ export default class BackendAdapter implements IBackendAdapter {
     });
 
     return token.data.moodleToken;
-  }
-
-  public mapElement = (element: APIElement): ElementTO => {
-    return {
-      id: element.id,
-      description: element.description,
-      goals: element.goals,
-      name: element.identifier.value,
-      type: element.elementCategory,
-      value: Number.parseInt(element.learningElementValueList[0].value) || 0,
-      parentSpaceId: element.learningSpaceParentId,
-    } as ElementTO;
-  };
-
-  public async getDSL({
-    userToken,
-    worldId,
-  }: getWorldDataParams): Promise<IDSL> {
-    const response = await axios.get<IDSL>(
-      config.serverURL + "/Courses/" + worldId,
-      {
-        headers: {
-          token: userToken,
-        },
-      }
-    );
-
-    return response.data;
   }
 }

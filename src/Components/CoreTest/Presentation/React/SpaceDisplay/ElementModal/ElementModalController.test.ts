@@ -20,7 +20,7 @@ describe("ElementModalController", () => {
       USECASE_TYPES.IScoreElementUseCase
     ).toConstantValue(scoreElementUseCaseMock);
     CoreDIContainer.rebind<IScoreH5PElement>(
-      USECASE_TYPES.IScoreH5PElement
+      USECASE_TYPES.IScoreH5PElementUseCase
     ).toConstantValue(scoreH5PUseCaseMock);
   });
 

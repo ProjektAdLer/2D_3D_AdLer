@@ -12,14 +12,13 @@ import ILoadSpaceUseCase from "./ILoadSpaceUseCase";
 import SpaceTO from "../../DataTransferObjects/SpaceTO";
 import { ElementID } from "../../../Domain/Types/EntityTypes";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
+import ElementTO from "../../DataTransferObjects/ElementTO";
 
 @injectable()
 export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
-    @inject(PORT_TYPES.IUIPort)
-    private uiPort: IUIPort,
     @inject(USECASE_TYPES.ILoadWorldUseCase)
     private loadWorldUseCase: ILoadWorldUseCase,
     @inject(PORT_TYPES.ISpacePort)
@@ -28,7 +27,7 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     private calculateSpaceScore: ICalculateSpaceScoreUseCase
   ) {}
 
-  async executeAsync(id: ElementID): Promise<SpaceTO> {
+  async executeAsync(id: ElementID): Promise<void> {
     // try to get the world entity from the container, there should always be only one at most
     let worldEntity = this.container.getEntitiesOfType(WorldEntity)[0];
 
@@ -46,15 +45,19 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
 
     if (!spaceEntity)
       return Promise.reject("SpaceEntity with " + id + " not found");
-    else {
-      let spaceTO = this.toTO(spaceEntity);
-      this.spacePort.onSpaceLoaded(spaceTO);
-      this.calculateSpaceScore.execute({ spaceId: spaceTO.id });
-      return Promise.resolve(spaceTO);
-    }
+
+    // create SpaceTO and fill with scoring data
+    let spaceTO = this.toTO(spaceEntity);
+    const spaceScoreTO = this.calculateSpaceScore.execute(spaceTO.id);
+    spaceTO.currentScore = spaceScoreTO.currentScore;
+    spaceTO.maxScore = spaceScoreTO.maxScore;
+
+    this.spacePort.onSpaceLoaded(spaceTO);
   }
 
   private toTO(spaceEntity: SpaceEntity): SpaceTO {
-    return structuredClone(spaceEntity) as SpaceTO;
+    let spaceTO = new SpaceTO();
+    spaceTO = Object.assign(spaceTO, structuredClone(spaceEntity));
+    return spaceTO;
   }
 }

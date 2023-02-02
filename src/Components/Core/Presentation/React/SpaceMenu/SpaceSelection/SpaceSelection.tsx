@@ -8,7 +8,9 @@ import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservab
 import useBuilder from "../../ReactRelated/CustomHooks/useBuilder";
 import ISpaceSelectionController from "./ISpaceSelectionController";
 import SpaceSelectionRow from "./SpaceSelectionRow";
-import SpaceSelectionViewModel from "./SpaceSelectionViewModel";
+import SpaceSelectionViewModel, {
+  SpaceSelectionSpaceData,
+} from "./SpaceSelectionViewModel";
 
 import spaceSolved from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import spaceAvailable from "../../../../../../Assets/icons/27-1-lock-open/lock-icon-open-nobg.svg";
@@ -17,9 +19,6 @@ import spaceLocked from "../../../../../../Assets/icons/27-lock-closed/lock-icon
 export default function SpaceSelection() {
   const loadWorldUseCase = useInjection<ILoadWorldUseCase>(
     USECASE_TYPES.ILoadWorldUseCase
-  );
-  const calculateSpaceScoreUseCase = useInjection<ICalculateSpaceScoreUseCase>(
-    USECASE_TYPES.ICalculateSpaceScore
   );
 
   const [viewModel, controller] = useBuilder<
@@ -31,41 +30,34 @@ export default function SpaceSelection() {
     // call load world use case to get relevant data
     const loadWorldAsync = async (): Promise<void> => {
       await loadWorldUseCase.executeAsync();
-      viewModel.spaces.Value.forEach(([id]) =>
-        calculateSpaceScoreUseCase.execute({ spaceId: id })
-      );
     };
     if (viewModel) loadWorldAsync();
-  }, []);
+  }, [viewModel]);
 
-  const [spaces] = useObservable<[number, string, boolean, boolean][]>(
-    viewModel?.spaces
-  );
-  const [selectedRowID] = useObservable<number>(viewModel?.selectedRowID);
+  const [spaces] = useObservable<SpaceSelectionSpaceData[]>(viewModel?.spaces);
+  const [selectedRowID] = useObservable<number>(viewModel?.selectedRowSpaceID);
 
   if (!viewModel || !controller) return null;
 
   return (
     <ul className="flex flex-col gap-4 w-[100%] overflow-auto">
       {spaces?.map((space) => {
-        // spaces array elements by index:
-        // 0 = id, 1 = name, 2 = isAvailable, 3 = isCompleted
         let spaceIcon: string;
-        if (space[3]) spaceIcon = spaceSolved;
-        else if (space[2]) spaceIcon = spaceAvailable;
+        if (space.isCompleted) spaceIcon = spaceSolved;
+        else if (space.isAvailable) spaceIcon = spaceAvailable;
         else spaceIcon = spaceLocked;
 
         return (
           <li
             className="flex items-center"
-            key={space[0].toString() + space[1]}
+            key={space.id.toString() + space.name}
           >
             <SpaceSelectionRow
               icon={spaceIcon}
-              locked={!space[2]}
-              spaceTitle={space[1]}
-              selected={selectedRowID === space[0]}
-              onClickCallback={() => controller.onSpaceRowClicked(space[0])}
+              locked={!space.isAvailable}
+              spaceTitle={space.name}
+              selected={selectedRowID === space.id}
+              onClickCallback={() => controller.onSpaceRowClicked(space.id)}
             />
           </li>
         );

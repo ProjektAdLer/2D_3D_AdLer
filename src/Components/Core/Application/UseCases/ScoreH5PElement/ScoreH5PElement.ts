@@ -80,9 +80,7 @@ export default class ScoreH5PElement implements IScoreH5PElement {
 
       element.hasScored = true;
 
-      this.calculateSpaceScoreUseCase.execute({
-        spaceId: space.id,
-      });
+      this.calculateSpaceScoreUseCase.execute(space.id);
 
       this.elementPort.onElementScored(true, data.elementId);
     }

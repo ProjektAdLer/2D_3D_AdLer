@@ -8,8 +8,6 @@ import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import { filterEntitiesOfTypeMockImplUtil } from "../../../TestUtils";
 import ISpacePort from "../../../../Core/Ports/SpacePort/ISpacePort";
 
-const spaceTO = { spaceId: 1 };
-
 const spacePortMock = mock<ISpacePort>();
 const entityContainerMock = mock<IEntityContainer>();
 
@@ -45,7 +43,7 @@ describe("Calculate Space Score UseCase", () => {
       ])
     );
 
-    systemUnderTest.execute(spaceTO);
+    systemUnderTest.execute(1);
 
     entityContainerMock.filterEntitiesOfType.mockReset();
   });
@@ -68,11 +66,11 @@ describe("Calculate Space Score UseCase", () => {
             value: 10,
           },
         ],
-        requiredPoints: 20,
+        requiredScore: 20,
       } as SpaceEntity,
     ]);
 
-    systemUnderTest.execute(spaceTO);
+    systemUnderTest.execute(1);
 
     expect(entityContainerMock.filterEntitiesOfType).toHaveBeenCalledWith(
       SpaceEntity,
@@ -88,14 +86,14 @@ describe("Calculate Space Score UseCase", () => {
         id: 1,
         elements: [],
         description: "test",
-        requiredPoints: 0,
+        requiredScore: 0,
         name: "test",
         goals: "test",
         requirements: [],
       } as SpaceEntity,
     ]);
 
-    systemUnderTest.execute(spaceTO);
+    systemUnderTest.execute(1);
 
     expect(spacePortMock.onScoreChanged).toHaveBeenCalledWith(0, 0, 0, 1);
   });
@@ -104,7 +102,7 @@ describe("Calculate Space Score UseCase", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 
     expect(() => {
-      systemUnderTest.execute(spaceTO);
+      systemUnderTest.execute(1);
     }).toThrow();
   });
 
@@ -117,7 +115,7 @@ describe("Calculate Space Score UseCase", () => {
     ]);
 
     expect(() => {
-      systemUnderTest.execute(spaceTO);
+      systemUnderTest.execute(1);
     }).toThrow();
   });
 });

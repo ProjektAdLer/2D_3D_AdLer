@@ -1,5 +1,5 @@
 import React from "react";
-import LoginButton from "~ReactComponents/WelcomePage/LoginButton/LoginButton";
+import LoginComponent from "~ReactComponents/WelcomePage/LoginComponent/LoginComponent";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 import WorldMenuButton from "~ReactComponents/WelcomePage/WorldMenuButton/WorldMenuButtonView";
@@ -10,7 +10,7 @@ export default function WelcomePage() {
     <React.Fragment>
       <div className="grid h-0 min-h-screen grid-cols-5 grid-rows-5 p-6 bg-adlerblue-200">
         <div className="z-10 col-start-1 row-start-1">
-          <LoginButton />
+          <LoginComponent />
         </div>
 
         <p className="self-center col-span-2 col-start-4 row-start-1 p-2 text-lg font-extrabold text-white rounded-lg lg:col-span-3 lg:col-start-2 lg:row-start-1 lg:p-5 justify-self-center bg-adlergold text-shadow lg:text-4xl">

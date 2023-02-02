@@ -1,11 +1,11 @@
 import { ElementID } from "../../Domain/Types/EntityTypes";
-import WorldTO from "../../Application/DataTransferObjects/WorldTO";
 import UserCredentials from "./Types/UserCredentials";
 import { XAPiEvent } from "../../Application/UseCases/ScoreH5PElement/IScoreH5PElement";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
 import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
 import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
+import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
 
 // TODO: Restructure in meaningful types
 export type getWorldDataParams = {
@@ -22,20 +22,24 @@ export type ScoreH5PElementRequest = {
 
 export default interface IBackendAdapter {
   deletePlayerData(userToken: string): Promise<boolean>;
+
   updatePlayerData(
     userToken: string,
     playerData: Partial<PlayerDataTO>
   ): Promise<PlayerDataTO>;
+
   getPlayerData(userToken: string): Promise<PlayerDataTO>;
+
   getElementScore(
     userToken: string,
     elementId: ElementID,
     courseId: ElementID
   ): Promise<ElementScoreTO>;
+
   getWorldData({
     userToken,
     worldId,
-  }: getWorldDataParams): Promise<Partial<WorldTO>>;
+  }: getWorldDataParams): Promise<Partial<BackendWorldTO>>;
 
   scoreElement(
     userToken: string,
@@ -48,7 +52,9 @@ export default interface IBackendAdapter {
   scoreH5PElement(data: ScoreH5PElementRequest): Promise<boolean>;
 
   loginUser(userCredentials: UserCredentials): Promise<string>;
+
   getCoursesAvailableForUser(userToken: string): Promise<CourseListTO>;
+
   getElementSource(
     userToken: string,
     elementId: number,

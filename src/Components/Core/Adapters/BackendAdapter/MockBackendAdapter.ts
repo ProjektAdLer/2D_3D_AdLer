@@ -1,26 +1,34 @@
 import { injectable } from "inversify";
+import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
 import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
 import { ElementID } from "../../Domain/Types/EntityTypes";
-import BackendAdapter from "./BackendAdapter";
+import BackendAdapterUtils from "./BackendAdapterUtils";
+import IBackendAdapter, {
+  getWorldDataParams,
+  ScoreH5PElementRequest,
+} from "./IBackendAdapter";
 import IDSL from "./Types/IDSL";
 import UserCredentials from "./Types/UserCredentials";
 
 @injectable()
-export default class MockBackendAdapter extends BackendAdapter {
-  deletePlayerData(): Promise<boolean> {
+export default class MockBackendAdapter implements IBackendAdapter {
+  deletePlayerData(userToken: string): Promise<boolean> {
     throw new Error(
       "Method not implemented, since we are in the Fake Backend."
     );
   }
 
-  updatePlayerData(): Promise<PlayerDataTO> {
+  updatePlayerData(
+    userToken: string,
+    playerData: Partial<PlayerDataTO>
+  ): Promise<PlayerDataTO> {
     return Promise.resolve(new PlayerDataTO());
   }
 
-  getPlayerData(): Promise<PlayerDataTO> {
+  getPlayerData(userToken: string): Promise<PlayerDataTO> {
     return Promise.resolve({
       playerGender: "Male",
       playerWorldColor: "Blue",
@@ -37,7 +45,7 @@ export default class MockBackendAdapter extends BackendAdapter {
     });
   }
 
-  getWorldStatus(): Promise<WorldStatusTO> {
+  getWorldStatus(userToken: string, worldId: number): Promise<WorldStatusTO> {
     return Promise.resolve({
       courseId: 1,
       learningElements: [
@@ -91,11 +99,11 @@ export default class MockBackendAdapter extends BackendAdapter {
     }
   }
 
-  scoreH5PElement(): Promise<boolean> {
+  scoreH5PElement(data: ScoreH5PElementRequest): Promise<boolean> {
     return Promise.resolve(true);
   }
 
-  getCoursesAvailableForUser(): Promise<CourseListTO> {
+  getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
     return Promise.resolve({
       courses: [
         {
@@ -106,7 +114,11 @@ export default class MockBackendAdapter extends BackendAdapter {
     });
   }
 
-  scoreElement(): Promise<boolean> {
+  scoreElement(
+    userToken: string,
+    elementId: ElementID,
+    courseId: ElementID
+  ): Promise<boolean> {
     return Promise.resolve(true);
   }
 
@@ -114,8 +126,11 @@ export default class MockBackendAdapter extends BackendAdapter {
     return Promise.resolve("fakeToken");
   }
 
-  public async getDSL(): Promise<IDSL> {
-    return this.worldTO;
+  getWorldData({
+    userToken,
+    worldId,
+  }: getWorldDataParams): Promise<Partial<BackendWorldTO>> {
+    return Promise.resolve(BackendAdapterUtils.parseDSL(this.worldTO));
   }
 
   worldTO: IDSL = {

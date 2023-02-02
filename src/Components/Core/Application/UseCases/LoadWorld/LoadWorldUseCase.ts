@@ -10,13 +10,13 @@ import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContai
 import type IWorldPort from "../../../Ports/WorldPort/IWorldPort";
 import ILoadWorldUseCase from "./ILoadWorldUseCase";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
-import type ILoadAvatarUseCase from "../LoadAvatar/ILoadAvatarUseCase";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IUIPort from "../../../Ports/UIPort/IUIPort";
 import WorldTO from "../../DataTransferObjects/WorldTO";
 import ElementTO from "../../DataTransferObjects/ElementTO";
 import { Semaphore } from "src/Lib/Semaphore";
 import WorldStatusTO from "../../DataTransferObjects/WorldStatusTO";
+import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -29,15 +29,15 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     private backendAdapter: IBackendAdapter,
     @inject(PORT_TYPES.IUIPort)
     private uiPort: IUIPort,
-    @inject(USECASE_TYPES.ILoadAvatarUseCase)
-    private loadAvatarUseCase: ILoadAvatarUseCase
+    @inject(USECASE_TYPES.ICalculateSpaceScore)
+    private calculateSpaceScore: ICalculateSpaceScoreUseCase
   ) {}
 
   private usedWorldId: number;
 
   private semaphore = new Semaphore("LoadWorld in Use", 1);
 
-  async executeAsync(): Promise<WorldTO> {
+  async executeAsync(): Promise<void> {
     const lock = await this.semaphore.acquire();
 
     const userData = this.container.getEntitiesOfType(UserDataEntity);
@@ -55,10 +55,16 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       worldEntity = await this.load(userData[0]);
     }
 
-    this.worldPort.onWorldLoaded(this.toTO(worldEntity));
+    let worldTO = this.toTO(worldEntity);
+    worldTO.spaces.forEach((space) => {
+      let spaceScores = this.calculateSpaceScore.execute(space.id);
+      space.currentScore = spaceScores.currentScore;
+      space.maxScore = spaceScores.maxScore;
+    });
+
+    this.worldPort.onWorldLoaded(worldTO);
 
     lock.release();
-    return Promise.resolve(this.toTO(worldEntity));
   }
 
   private async load(userData: UserDataEntity): Promise<WorldEntity> {
@@ -98,7 +104,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
             description: space.description,
             goals: space.goals,
             requirements: space.requirements,
-            requiredPoints: space.requiredPoints,
+            requiredScore: space.requiredScore,
           },
           SpaceEntity
         )
@@ -144,8 +150,9 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   };
 
   private toTO(entityToConvert: WorldEntity): WorldTO {
-    // spread to prevent passing a reference
     // this will need to be changed when entity and TO are not matching in structure anymore
-    return structuredClone(entityToConvert) as WorldTO;
+    let worldTO = new WorldTO();
+    worldTO = Object.assign(worldTO, structuredClone(entityToConvert));
+    return worldTO;
   }
 }

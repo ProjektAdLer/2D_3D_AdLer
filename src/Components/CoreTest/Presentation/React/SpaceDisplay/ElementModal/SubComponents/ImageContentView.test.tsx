@@ -24,7 +24,7 @@ describe("ImageComponent", () => {
       );
 
     CoreDIContainer.bind<IGetElementSourceUseCase>(
-      USECASE_TYPES.IGetElementSource
+      USECASE_TYPES.IGetElementSourceUseCase
     ).toConstantValue(sourceUseCase);
   });
 

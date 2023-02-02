@@ -144,9 +144,9 @@ describe("ScoreElementUseCase", () => {
       console.log(e);
     }
 
-    expect(CalculateSpaceScoreMock.execute).toHaveBeenCalledWith({
-      spaceId: spaceEntity.id,
-    });
+    expect(CalculateSpaceScoreMock.execute).toHaveBeenCalledWith(
+      spaceEntity.id
+    );
   });
 
   test("executeAsync should call elementPort.onElementScored", async () => {

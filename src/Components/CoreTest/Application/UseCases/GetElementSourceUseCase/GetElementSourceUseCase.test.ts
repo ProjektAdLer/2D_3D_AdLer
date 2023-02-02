@@ -1,6 +1,6 @@
 import { mock } from "jest-mock-extended";
 import IBackendAdapter from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
-import GetElementSourceUseCase from "../../../../Core/Application/UseCases/GetElementSourceUseCase/GetElementSourceUseCase";
+import GetElementSourceUseCase from "../../../../Core/Application/UseCases/GetElementSource/GetElementSourceUseCase";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";

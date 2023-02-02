@@ -6,7 +6,7 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 // set to true to always show the mobile version of the PDF component
-const debug_allwaysShowMobile = true;
+const debug_alwaysShowMobile = false;
 
 export default function PDFComponent({
   viewModel,
@@ -65,23 +65,36 @@ function MobilePDFComponent({
   }, [pageNumber, numPages]);
 
   return (
-    <div className="h-full">
-      <Document
-        file={viewModel.filePath.Value}
-        onLoadSuccess={onDocumentLoadSuccess}
-      >
-        <Page
-          data-testid="pdfPage"
-          pageNumber={pageNumber}
-          renderTextLayer={false}
-          renderAnnotationLayer={false}
-        />
-      </Document>
-      <StyledButton onClick={previousPage}>{"<"}</StyledButton>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
-      <StyledButton onClick={nextPage}>{">"}</StyledButton>
+    <div className="flex-col h-full ">
+      <div className="flex flex-row justify-between w-full h-6">
+        <StyledButton
+          shape="freefloatcenter"
+          className=""
+          onClick={previousPage}
+        >
+          {"<"}
+        </StyledButton>
+        <p className="">
+          Page {pageNumber} of {numPages}
+        </p>
+        <StyledButton shape="freefloatcenter" className="" onClick={nextPage}>
+          {">"}
+        </StyledButton>
+      </div>
+
+      <div className="overflow-auto">
+        <Document
+          file={viewModel.filePath.Value}
+          onLoadSuccess={onDocumentLoadSuccess}
+        >
+          <Page
+            data-testid="pdfPage"
+            pageNumber={pageNumber}
+            renderTextLayer={false}
+            renderAnnotationLayer={false}
+          />
+        </Document>
+      </div>
     </div>
   );
 }

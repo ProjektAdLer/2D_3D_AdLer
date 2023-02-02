@@ -1,15 +1,16 @@
 import Observable from "src/Lib/Observable";
 
+export interface SpaceSelectionSpaceData {
+  id: number;
+  name: string;
+  isAvailable: boolean;
+  isCompleted: boolean;
+}
+
 export default class SpaceSelectionViewModel {
-  //id, name, isAvailable, isCompleted
-  spaces: Observable<[number, string, boolean, boolean][]> = new Observable<
-    [number, string, boolean, boolean][]
+  spaces: Observable<SpaceSelectionSpaceData[]> = new Observable<
+    SpaceSelectionSpaceData[]
   >([]);
 
-  // Array of [id, array of required space ids]
-  requirementsList: Observable<[number, number[]][]> = new Observable<
-    [number, number[]][]
-  >([]);
-
-  selectedRowID: Observable<number> = new Observable<number>(-1);
+  selectedRowSpaceID: Observable<number> = new Observable<number>(-1);
 }

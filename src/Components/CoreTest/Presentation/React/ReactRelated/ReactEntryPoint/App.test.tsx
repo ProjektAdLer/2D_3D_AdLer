@@ -9,7 +9,7 @@ jest.mock(
   () => "mocked"
 );
 jest.mock(
-  "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/WorldMenu.tsx",
+  "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/SpaceMenu.tsx",
   () => "mocked"
 );
 jest.mock(
@@ -22,14 +22,14 @@ describe("App", () => {
     render(<App />);
   });
   //TODO: Tests are not entering the switch case constructs yet.
-  test("App works if pathname is /space", () => {
+  test("App works if pathname is /spacedisplay", () => {
     render(<App />);
-    history.push("/space");
-    expect(history.location.pathname).toBe("/space");
+    history.push("/spacedisplay");
+    expect(history.location.pathname).toBe("/spacedisplay");
   });
-  test("App works if pathname is /worldmenu", () => {
+  test("App works if pathname is /spacemenu", () => {
     render(<App />);
-    history.push("/worldmenu");
-    expect(history.location.pathname).toBe("/worldmenu");
+    history.push("/spacemenu");
+    expect(history.location.pathname).toBe("/spacemenu");
   });
 });

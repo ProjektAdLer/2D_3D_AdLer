@@ -1,3 +1,3 @@
-export interface ISynchronousUsecase<TParams> {
-  execute(data?: TParams): void;
+export interface ISynchronousUsecase<TParams, TResponse = void> {
+  execute(data?: TParams): TResponse;
 }

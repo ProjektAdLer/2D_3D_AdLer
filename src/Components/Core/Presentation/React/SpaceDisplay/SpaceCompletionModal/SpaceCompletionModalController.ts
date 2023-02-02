@@ -7,8 +7,8 @@ export default class SpaceCompletionModalController
 {
   constructor(private viewModel: SpaceCompletionModalViewModel) {}
 
-  ReturnWorldMenuButtonClicked(): void {
-    history.push("/worldmenu");
+  ReturnSpaceMenuButtonClicked(): void {
+    history.push("/spacemenu");
   }
 
   CloseButtonClicked(): void {

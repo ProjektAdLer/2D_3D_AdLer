@@ -47,6 +47,6 @@ describe("SpaceCompletionModal", () => {
     const componentUnderTest = render(<SpaceCompletionModal />);
     fireEvent.click(componentUnderTest.getByText("Zurück zum Lernraum-Menü"));
 
-    expect(controllerMock.ReturnWorldMenuButtonClicked).toBeCalledTimes(1);
+    expect(controllerMock.ReturnSpaceMenuButtonClicked).toBeCalledTimes(1);
   });
 });

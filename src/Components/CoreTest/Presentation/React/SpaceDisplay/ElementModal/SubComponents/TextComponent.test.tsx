@@ -4,7 +4,7 @@ import { Provider } from "inversify-react";
 import { mock } from "jest-mock-extended";
 import React from "react";
 import { act } from "@testing-library/react";
-import IGetElementSourceUseCase from "../../../../../../Core/Application/UseCases/GetElementSourceUseCase/IGetElementSourceUseCase";
+import IGetElementSourceUseCase from "../../../../../../Core/Application/UseCases/GetElementSource/IGetElementSourceUseCase";
 import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import ElementModalViewModel from "../../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
@@ -26,7 +26,7 @@ describe("TextElementSubComponent", () => {
     sourceUseCase.executeAsync.mockResolvedValue("test");
 
     CoreDIContainer.bind<IGetElementSourceUseCase>(
-      USECASE_TYPES.IGetElementSource
+      USECASE_TYPES.IGetElementSourceUseCase
     ).toConstantValue(sourceUseCase);
   });
 
