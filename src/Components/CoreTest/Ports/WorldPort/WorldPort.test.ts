@@ -1,10 +1,10 @@
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import WorldPort from "../../../Core/Ports/WorldPort/WorldPort";
-import ElementTO from "../../../Core/Application/DataTransferObjects/ElementTO";
 import SpaceTO from "../../../Core/Application/DataTransferObjects/SpaceTO";
 import WorldTO from "../../../Core/Application/DataTransferObjects/WorldTO";
 import { mock } from "jest-mock-extended";
 import IWorldAdapter from "../../../Core/Ports/WorldPort/IWorldAdapter";
+import SpaceScoreTO from "../../../Core/Application/DataTransferObjects/SpaceScoreTO";
 
 describe("WorldPort", () => {
   let systemUnderTest: WorldPort;
@@ -21,41 +21,35 @@ describe("WorldPort", () => {
     CoreDIContainer.restore();
   });
 
-  // this needs to be reworked, when more than one space is supported
-  test("presentWorld calls a registered adapter", () => {
-    // setup TOs
-    const elementTO: ElementTO = {
-      id: 1,
-      name: "test",
-      value: 0,
-      parentSpaceId: 0,
-      description: "test",
-      goals: "test",
-      type: "h5p",
-      parentCourseId: 0,
-    };
-    const spaceTO: SpaceTO = {
-      id: 1,
-      elements: [elementTO],
-      name: "test",
-      description: "test",
-      goals: "test",
-      requirements: [],
-      requiredPoints: 0,
-    };
-    const worldTO: WorldTO = {
-      description: "test",
-      goals: "test",
-      spaces: [spaceTO],
-      worldName: "test",
-      worldGoal: "test",
-    };
-
+  test("onWorldLoaded calls a registered adapter", () => {
     const worldAdapterMock = mock<IWorldAdapter>();
     systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockedWorldTO = mock<WorldTO>();
 
-    systemUnderTest.onWorldLoaded(worldTO);
+    systemUnderTest.onWorldLoaded(mockedWorldTO);
 
-    expect(worldAdapterMock.onWorldLoaded).toBeCalledWith(worldTO);
+    expect(worldAdapterMock.onWorldLoaded).toBeCalledWith(mockedWorldTO);
   });
+
+  test("onSpaceLoaded calls a registered adapter", () => {
+    const worldAdapterMock = mock<IWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockedSpaceTO = mock<SpaceTO>();
+
+    systemUnderTest.onSpaceLoaded(mockedSpaceTO);
+
+    expect(worldAdapterMock.onSpaceLoaded).toBeCalledWith(mockedSpaceTO);
+  });
+
+  test("onSpaceScored calls a registered adapter", () => {
+    const worldAdapterMock = mock<IWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockedSpaceScoreTO = mock<SpaceScoreTO>();
+
+    systemUnderTest.onSpaceScored(mockedSpaceScoreTO);
+
+    expect(worldAdapterMock.onSpaceScored).toBeCalledWith(mockedSpaceScoreTO);
+  });
+
+  test.todo("add tests for adapters that don't implement all methods");
 });

@@ -7,7 +7,6 @@ import WorldCompletionModalViewModel from "./WorldCompletionModalViewModel";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
-import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import IWorldAdapter from "src/Components/Core/Ports/WorldPort/IWorldAdapter";
 
@@ -30,9 +29,6 @@ export default class WorldCompletionModalBuilder extends PresentationBuilder<
   override buildPresenter(): void {
     super.buildPresenter();
 
-    CoreDIContainer.get<AbstractPort<ISpaceAdapter>>(
-      PORT_TYPES.ISpacePort
-    ).registerAdapter(this.presenter!);
     CoreDIContainer.get<AbstractPort<IWorldAdapter>>(
       PORT_TYPES.IWorldPort
     ).registerAdapter(this.presenter!);
