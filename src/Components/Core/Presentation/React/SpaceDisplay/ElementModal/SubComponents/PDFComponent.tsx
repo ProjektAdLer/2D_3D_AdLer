@@ -15,7 +15,7 @@ export default function PDFComponent({
 }) {
   return (
     <div className="w-[90vw] h-[90vh] text-black font-medium overflow-auto bg-adlerblue-100 p-3">
-      {PDFObject.supportsPDFs || debug_allwaysShowMobile ? (
+      {PDFObject.supportsPDFs || debug_alwaysShowMobile ? (
         <DesktopPDFComponent viewModel={viewModel} />
       ) : (
         <MobilePDFComponent viewModel={viewModel} />
