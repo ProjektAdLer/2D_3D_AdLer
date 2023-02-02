@@ -1,7 +1,9 @@
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import CheckBoxEntry from "./CheckBoxEntry";
-import SpaceDetailViewModel from "./SpaceDetailViewModel";
+import SpaceDetailViewModel, {
+  SpaceDetailSpaceData,
+} from "./SpaceDetailViewModel";
 import spaceIcon from "../../../../../../Assets/icons/13-space/space-icon-nobg.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import { ElementTypeStrings } from "../../../../Domain/Types/ElementTypes";
@@ -26,7 +28,7 @@ export default function SpaceDetail() {
   >(viewModel.elements);
   const [requiredPoints] = useObservable<number>(viewModel.requiredPoints);
   const [requirements] = useObservable<number[]>(viewModel.requirements);
-  const [spaces] = useObservable<[number, string, boolean][]>(viewModel.spaces);
+  const [spaces] = useObservable<SpaceDetailSpaceData[]>(viewModel.spaces);
 
   // return if any of the observables is undefined
   if (
@@ -136,13 +138,13 @@ export default function SpaceDetail() {
             {requirements.map((requirement) => {
               let name;
               let completed;
-              const lookup = spaces.find((space) => space[0] === requirement);
+              const lookup = spaces.find((space) => space.id === requirement);
               if (lookup === undefined) {
                 logger.warn("Requirement not found in spaces.");
                 return;
               }
-              name = lookup[1];
-              completed = lookup[2];
+              name = lookup.name;
+              completed = lookup.isCompleted;
 
               return (
                 <CheckBoxEntry key={name + requirement} checked={completed}>
@@ -155,8 +157,10 @@ export default function SpaceDetail() {
       )}
       {viewModel.requirements.Value.every((requirement) => {
         // check for each requirement if the space is completed
-        let requiredSpaces = spaces.find((space) => space[0] === requirement);
-        return requiredSpaces !== undefined ? requiredSpaces[2] : false;
+        let requiredSpaces = spaces.find((space) => space.id === requirement);
+        return requiredSpaces !== undefined
+          ? requiredSpaces.isCompleted
+          : false;
       }) && (
         <StyledButton
           shape="freefloatleft"
