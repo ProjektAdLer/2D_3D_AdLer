@@ -9,54 +9,38 @@ describe("SpaceDetailPresenter", () => {
     systemUnderTest = new SpaceDetailPresenter(new SpaceDetailViewModel());
   });
 
-  test("should set view Model on World loaded", () => {
-    systemUnderTest.onWorldLoaded({ spaces: [{ id: 1, name: "test" }] });
-    expect(systemUnderTest["viewModel"].spaces.Value).toEqual([
-      [1, "test", false],
-    ]);
+  test("onWorldLoaded should set viewModel data", () => {
+    systemUnderTest.onWorldLoaded({
+      spaces: [{ id: 1, name: "test" }],
+    });
+
+    expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
+      expect.arrayContaining([expect.objectContaining({ id: 1, name: "test" })])
+    );
   });
 
-  test("should set viewModel Data when score has changed", () => {
-    const spaceTO: SpaceTO = {
-      id: 42,
-      description: "description",
-      goals: "goals",
-      requiredPoints: 42,
-      requirements: [42, 20, 1],
-      name: "Test Space",
-      elements: [
-        {
-          id: 1,
-          name: "Test Element 1",
-          parentSpaceId: 42,
-          type: "h5p",
-          description: "Test Description 1",
-          goals: "TestGoal",
-          value: 1,
-          hasScored: false,
-          parentCourseId: 42,
-        },
-        {
-          id: 2,
-          name: "Test Element 2",
-          parentSpaceId: 42,
-          type: "text",
-          description: "Test Description 1",
-          goals: "TestGoal",
-          value: 1,
-          hasScored: false,
-          parentCourseId: 42,
-        },
-      ],
-    };
+  test("onWorldLoaded should set isCompleted of a space to false, if currentScore is lower than requiredScore", () => {
+    systemUnderTest.onWorldLoaded({
+      spaces: [{ id: 1, name: "test", currentScore: 0, requiredScore: 42 }],
+    });
 
-    systemUnderTest.onSpaceLoaded(spaceTO);
+    expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ id: 1, name: "test", isCompleted: false }),
+      ])
+    );
+  });
 
-    systemUnderTest.onScoreChanged(3, 3, 0, 1);
+  test("onWorldLoaded should set isCompleted of a space to true, if currentScore is higher/equal than requiredScore", () => {
+    systemUnderTest.onWorldLoaded({
+      spaces: [{ id: 1, name: "test", currentScore: 42, requiredScore: 42 }],
+    });
 
-    expect(systemUnderTest["viewModel"].spaces.Value).toEqual([
-      [1, "Placeholder", true],
-    ]);
+    expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ id: 1, name: "test", isCompleted: true }),
+      ])
+    );
   });
 
   test("onSpaceLoaded sets data in the view model", () => {
@@ -64,7 +48,9 @@ describe("SpaceDetailPresenter", () => {
       id: 42,
       description: "description",
       goals: "goals",
-      requiredPoints: 42,
+      requiredScore: 42,
+      currentScore: 0,
+      maxScore: 42,
       requirements: [42, 20, 1],
       name: "Test Space",
       elements: [
@@ -96,11 +82,17 @@ describe("SpaceDetailPresenter", () => {
     systemUnderTest.onSpaceLoaded(spaceTO);
 
     expect(systemUnderTest["viewModel"].name.Value).toEqual(spaceTO.name);
+    expect(systemUnderTest["viewModel"].description.Value).toEqual(
+      spaceTO.description
+    );
+    expect(systemUnderTest["viewModel"].goals.Value).toEqual(spaceTO.goals);
+    expect(systemUnderTest["viewModel"].requiredPoints.Value).toEqual(
+      spaceTO.requiredScore
+    );
     expect(systemUnderTest["viewModel"].elements.Value).toEqual([
       ["h5p", "Test Element 1", false, 1],
       ["text", "Test Element 2", false, 1],
     ]);
-
     expect(systemUnderTest["viewModel"].requirements.Value).toEqual([
       42, 20, 1,
     ]);

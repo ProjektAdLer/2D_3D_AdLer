@@ -2,12 +2,18 @@ import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
 import Observable from "src/Lib/Observable";
 import { ElementTypeStrings } from "../../../../Domain/Types/ElementTypes";
 
+export interface SpaceDetailSpaceData {
+  id: ElementID;
+  name: string;
+  isCompleted: boolean;
+}
+
 export default class SpaceDetailViewModel {
   // world data
   // spaces (id, name, isCompleted)
-  spaces: Observable<[number, string, boolean][]> = new Observable<
-    [number, string, boolean][]
-  >([[1, "Placeholder", false]]);
+  spaces: Observable<SpaceDetailSpaceData[]> = new Observable<
+    SpaceDetailSpaceData[]
+  >([]);
 
   // space data
   id: Observable<ElementID> = new Observable<ElementID>(undefined);
@@ -15,7 +21,7 @@ export default class SpaceDetailViewModel {
   description: Observable<string> = new Observable<string>("");
   goals: Observable<string> = new Observable<string>("");
   requiredPoints: Observable<number> = new Observable<number>(0);
-  requirements: Observable<number[]> = new Observable<number[]>([1]);
+  requirements: Observable<number[]> = new Observable<number[]>([]);
 
   // element data (type, name, hasScored, points)
   elements: Observable<[ElementTypeStrings, string, boolean, number][]> =
