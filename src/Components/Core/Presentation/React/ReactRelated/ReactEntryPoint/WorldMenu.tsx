@@ -2,7 +2,7 @@ import React from "react";
 import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBar";
 import MenuTutorial from "~ReactComponents/SpaceMenu/MenuTutorial/MenuTutorial";
 
-export default function SpaceMenu() {
+export default function WorldMenu() {
   return (
     <React.Fragment>
       <div className="flex flex-col min-h-screen">
