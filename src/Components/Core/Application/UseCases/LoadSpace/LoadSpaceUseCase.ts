@@ -5,7 +5,6 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import WorldEntity from "../../../Domain/Entities/WorldEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
-import type ISpacePort from "../../../Ports/SpacePort/ISpacePort";
 import type ILoadWorldUseCase from "../LoadWorld/ILoadWorldUseCase";
 import ILoadSpaceUseCase from "./ILoadSpaceUseCase";
 import SpaceTO from "../../DataTransferObjects/SpaceTO";
@@ -20,8 +19,6 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     private container: IEntityContainer,
     @inject(USECASE_TYPES.ILoadWorldUseCase)
     private loadWorldUseCase: ILoadWorldUseCase,
-    @inject(PORT_TYPES.ISpacePort)
-    private spacePort: ISpacePort,
     @inject(USECASE_TYPES.ICalculateSpaceScore)
     private calculateSpaceScore: ICalculateSpaceScoreUseCase,
     @inject(PORT_TYPES.IWorldPort)
@@ -53,8 +50,6 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     spaceTO.currentScore = spaceScoreTO.currentScore;
     spaceTO.maxScore = spaceScoreTO.maxScore;
 
-    // TODO: remove call to spacePort, when merger between ports is complete
-    this.spacePort.onSpaceLoaded(spaceTO);
     this.worldPort.onSpaceLoaded(spaceTO);
   }
 

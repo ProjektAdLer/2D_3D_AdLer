@@ -10,12 +10,11 @@ import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE
 import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import WorldEntity from "../../../../Core/Domain/Entities/WorldEntity";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
-import ISpacePort from "../../../../Core/Ports/SpacePort/ISpacePort";
-import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
+import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 
 const entityContainerMock = mock<IEntityContainer>();
 const loadWorldMock = mock<ILoadWorldUseCase>();
-const spacePortMock = mock<ISpacePort>();
+const worldPortMock = mock<IWorldPort>();
 const calculateSpaceScoreMock = mock<ICalculateSpaceScoreUseCase>();
 
 describe("LoadSpaceUseCase", () => {
@@ -30,8 +29,8 @@ describe("LoadSpaceUseCase", () => {
     CoreDIContainer.rebind<ILoadWorldUseCase>(
       USECASE_TYPES.ILoadWorldUseCase
     ).toConstantValue(loadWorldMock);
-    CoreDIContainer.rebind<ISpacePort>(PORT_TYPES.ISpacePort).toConstantValue(
-      spacePortMock
+    CoreDIContainer.rebind<IWorldPort>(PORT_TYPES.IWorldPort).toConstantValue(
+      worldPortMock
     );
     CoreDIContainer.rebind<ICalculateSpaceScoreUseCase>(
       USECASE_TYPES.ICalculateSpaceScore
@@ -64,7 +63,7 @@ describe("LoadSpaceUseCase", () => {
 
     await systemUnderTest.executeAsync(1);
 
-    expect(spacePortMock.onSpaceLoaded).toHaveBeenCalledWith(
+    expect(worldPortMock.onSpaceLoaded).toHaveBeenCalledWith(
       expect.objectContaining(worldEntity.spaces[0])
     );
   });
@@ -90,7 +89,7 @@ describe("LoadSpaceUseCase", () => {
 
     await systemUnderTest.executeAsync(1);
 
-    expect(spacePortMock.onSpaceLoaded).toHaveBeenCalledWith(
+    expect(worldPortMock.onSpaceLoaded).toHaveBeenCalledWith(
       expect.objectContaining(worldEntity.spaces[0])
     );
   });
