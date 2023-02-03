@@ -2,9 +2,11 @@ import ElementsDropdownViewModel from "../../../../../Core/Presentation/React/Sp
 import ElementsDropdownPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownPresenter";
 import SpaceTO from "../../../../../Core/Application/DataTransferObjects/SpaceTO";
 import ElementTO from "../../../../../Core/Application/DataTransferObjects/ElementTO";
+
 describe("ElementsDropDownPresenter", () => {
   let systemUnderTest: ElementsDropdownPresenter;
   let vm: ElementsDropdownViewModel;
+
   beforeEach(() => {
     vm = new ElementsDropdownViewModel();
     systemUnderTest = new ElementsDropdownPresenter(vm);
@@ -32,10 +34,13 @@ describe("ElementsDropDownPresenter", () => {
       description: "",
       goals: "",
       requirements: [],
-      requiredPoints: 0,
+      requiredScore: 0,
+      currentScore: 0,
+      maxScore: 0,
     };
 
     systemUnderTest.onSpaceLoaded(spaceTO);
+
     expect(vm.elements.Value).toBe(elements);
   });
 });

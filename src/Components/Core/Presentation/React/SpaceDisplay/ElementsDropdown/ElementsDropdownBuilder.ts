@@ -9,6 +9,7 @@ import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelCon
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
 import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
+import IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 
 /*
 This Template Provides the whole scaffolding for a React Component.
@@ -34,17 +35,10 @@ export default class ElementsDropdownBuilder extends PresentationBuilder<
     );
   }
 
-  override buildController(): void {
-    super.buildController();
-    CoreDIContainer.get<ViewModelControllerProvider>(
-      CORE_TYPES.IViewModelControllerProvider
-    ).registerTupel(this.viewModel, this.controller, ElementsDropdownViewModel);
-  }
-
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<AbstractPort<ISpaceAdapter>>(
-      PORT_TYPES.ISpacePort
-    ).registerAdapter(this.presenter!);
+    CoreDIContainer.get<IWorldPort>(PORT_TYPES.IWorldPort).registerAdapter(
+      this.presenter!
+    );
   }
 }

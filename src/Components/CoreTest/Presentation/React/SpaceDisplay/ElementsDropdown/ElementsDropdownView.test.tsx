@@ -5,6 +5,7 @@ import ElementsDropdownViewModel from "../../../../../Core/Presentation/React/Sp
 import mock from "jest-mock-extended/lib/Mock";
 import IElementsDropdownController from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/IElementsDropdownController";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import React from "react";
 
 const modelWithElements = new ElementsDropdownViewModel();
 modelWithElements.elementNames.Value = ["Element 1", "Element 2"];
