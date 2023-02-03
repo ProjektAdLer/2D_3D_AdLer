@@ -1,5 +1,6 @@
 import { inject, injectable } from "inversify";
 import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
+import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
@@ -16,7 +17,9 @@ export default class CalculateSpaceScoreUseCase
     @inject(CORE_TYPES.IEntityContainer)
     private entitiyContainer: IEntityContainer,
     @inject(PORT_TYPES.ISpacePort)
-    private spacePort: ISpacePort
+    private spacePort: ISpacePort,
+    @inject(PORT_TYPES.IWorldPort)
+    private worldPort: IWorldPort
   ) {}
 
   execute(spaceID: ElementID): SpaceScoreTO {
@@ -46,12 +49,19 @@ export default class CalculateSpaceScoreUseCase
       }
     }, 0);
 
+    // TODO: remove call to spacePort, when merger between ports is complete
     this.spacePort.onScoreChanged(
       currentScore,
       space.requiredScore,
       maxPoints,
       spaceID
     );
+    this.worldPort.onSpaceScored({
+      spaceID: spaceID,
+      currentScore: currentScore,
+      requiredScore: space.requiredScore,
+      maxScore: maxPoints,
+    });
 
     return {
       currentScore: currentScore,

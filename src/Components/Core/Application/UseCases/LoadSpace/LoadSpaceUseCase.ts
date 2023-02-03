@@ -6,13 +6,12 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import WorldEntity from "../../../Domain/Entities/WorldEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import type ISpacePort from "../../../Ports/SpacePort/ISpacePort";
-import type IUIPort from "../../../Ports/UIPort/IUIPort";
 import type ILoadWorldUseCase from "../LoadWorld/ILoadWorldUseCase";
 import ILoadSpaceUseCase from "./ILoadSpaceUseCase";
 import SpaceTO from "../../DataTransferObjects/SpaceTO";
 import { ElementID } from "../../../Domain/Types/EntityTypes";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
-import ElementTO from "../../DataTransferObjects/ElementTO";
+import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 
 @injectable()
 export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
@@ -24,7 +23,9 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     @inject(PORT_TYPES.ISpacePort)
     private spacePort: ISpacePort,
     @inject(USECASE_TYPES.ICalculateSpaceScore)
-    private calculateSpaceScore: ICalculateSpaceScoreUseCase
+    private calculateSpaceScore: ICalculateSpaceScoreUseCase,
+    @inject(PORT_TYPES.IWorldPort)
+    private worldPort: IWorldPort
   ) {}
 
   async executeAsync(id: ElementID): Promise<void> {
@@ -52,7 +53,9 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     spaceTO.currentScore = spaceScoreTO.currentScore;
     spaceTO.maxScore = spaceScoreTO.maxScore;
 
+    // TODO: remove call to spacePort, when merger between ports is complete
     this.spacePort.onSpaceLoaded(spaceTO);
+    this.worldPort.onSpaceLoaded(spaceTO);
   }
 
   private toTO(spaceEntity: SpaceEntity): SpaceTO {
