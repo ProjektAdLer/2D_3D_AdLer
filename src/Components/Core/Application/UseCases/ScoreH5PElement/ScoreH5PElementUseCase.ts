@@ -12,6 +12,7 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import IScoreH5PElementUseCase, { XAPiEvent } from "./IScoreH5PElementUseCase";
+import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 
 @injectable()
 export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
@@ -20,6 +21,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(PORT_TYPES.IElementPort) private elementPort: IElementPort,
+    @inject(PORT_TYPES.IWorldPort) private worldPort: IWorldPort,
     @inject(USECASE_TYPES.ICalculateSpaceScore)
     private calculateSpaceScoreUseCase: ICalculateSpaceScoreUseCase
   ) {}
@@ -83,6 +85,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
       this.calculateSpaceScoreUseCase.execute(space.id);
 
       this.elementPort.onElementScored(true, data.elementId);
+      this.worldPort.onElementScored(true, data.elementId);
     }
 
     return Promise.resolve(scoredSuccessful);

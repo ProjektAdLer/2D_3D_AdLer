@@ -1,11 +1,12 @@
 import { inject, injectable } from "inversify";
 import WorldEntity from "src/Components/Core/Domain/Entities/WorldEntity";
+import type IElementPort from "src/Components/Core/Ports/ElementPort/IElementPort";
+import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
-import type IElementPort from "../../../Ports/ElementPort/IElementPort";
 import ElementTO from "../../DataTransferObjects/ElementTO";
 import type IGetElementSourceUseCase from "../GetElementSource/IGetElementSourceUseCase";
 import IElementStartedUseCase from "./IElementStartedUseCase";
@@ -17,6 +18,8 @@ export default class ElementStartedUseCase implements IElementStartedUseCase {
     private entityContainer: IEntityContainer,
     @inject(PORT_TYPES.IElementPort)
     private elementPort: IElementPort,
+    @inject(PORT_TYPES.IWorldPort)
+    private worldPort: IWorldPort,
     @inject(USECASE_TYPES.IGetElementSourceUseCase)
     private getElementSourceUseCase: IGetElementSourceUseCase
   ) {}
@@ -47,6 +50,7 @@ export default class ElementStartedUseCase implements IElementStartedUseCase {
       courseId: course[0].worldID, // TODO: Use actual loaded course id
     });
 
+    this.worldPort.onElementLoaded(elementTO);
     this.elementPort.onElementLoaded(elementTO);
 
     return Promise.resolve();
