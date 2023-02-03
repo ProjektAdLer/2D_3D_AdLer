@@ -14,15 +14,21 @@ export default class WorldPort
 {
   // world
   public onWorldLoaded(worldTO: WorldTO): void {
-    this.adapters.forEach((adapter) => adapter.onWorldLoaded(worldTO));
+    this.adapters.forEach((adapter) => {
+      if (adapter.onWorldLoaded) adapter.onWorldLoaded(worldTO);
+    });
   }
 
   // space
   onSpaceLoaded(spaceTO: SpaceTO): void {
-    throw new Error("Method not implemented.");
+    this.adapters.forEach((adapter) => {
+      if (adapter.onSpaceLoaded) adapter.onSpaceLoaded(spaceTO);
+    });
   }
   onSpaceScored(spaceScoreTO: SpaceScoreTO): void {
-    throw new Error("Method not implemented.");
+    this.adapters.forEach((adapter) => {
+      if (adapter.onSpaceScored) adapter.onSpaceScored(spaceScoreTO);
+    });
   }
 
   // element

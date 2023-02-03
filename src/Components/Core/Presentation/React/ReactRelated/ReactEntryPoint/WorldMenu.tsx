@@ -3,7 +3,7 @@ import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/Menu
 import MenuTutorial from "~ReactComponents/SpaceMenu/MenuTutorial/MenuTutorial";
 import WorldSelection from "~ReactComponents/WorldMenu/WorldSelection/WorldSelection";
 
-export default function SpaceMenu() {
+export default function WorldMenu() {
   return (
     <React.Fragment>
       <div className="flex flex-col min-h-screen">
