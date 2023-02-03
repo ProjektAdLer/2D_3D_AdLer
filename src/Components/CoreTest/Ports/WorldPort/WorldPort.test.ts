@@ -5,6 +5,7 @@ import WorldTO from "../../../Core/Application/DataTransferObjects/WorldTO";
 import { mock } from "jest-mock-extended";
 import IWorldAdapter from "../../../Core/Ports/WorldPort/IWorldAdapter";
 import SpaceScoreTO from "../../../Core/Application/DataTransferObjects/SpaceScoreTO";
+import ElementTO from "../../../Core/Application/DataTransferObjects/ElementTO";
 
 describe("WorldPort", () => {
   let systemUnderTest: WorldPort;
@@ -51,5 +52,22 @@ describe("WorldPort", () => {
     expect(worldAdapterMock.onSpaceScored).toBeCalledWith(mockedSpaceScoreTO);
   });
 
-  test.todo("add tests for adapters that don't implement all methods");
+  test("onElementLoaded calls a registered adapter", () => {
+    const worldAdapterMock = mock<IWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockedElementTO = mock<ElementTO>();
+
+    systemUnderTest.onElementLoaded(mockedElementTO);
+
+    expect(worldAdapterMock.onElementLoaded).toBeCalledWith(mockedElementTO);
+  });
+
+  test("onElementScored calls a registered adapter", () => {
+    const worldAdapterMock = mock<IWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+
+    systemUnderTest.onElementScored(true, 1);
+
+    expect(worldAdapterMock.onElementScored).toBeCalledWith(true, 1);
+  });
 });

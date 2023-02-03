@@ -33,9 +33,14 @@ export default class WorldPort
 
   // element
   onElementLoaded(elementStartedTO: ElementTO): void {
-    throw new Error("Method not implemented.");
+    this.adapters.forEach((adapter) => {
+      if (adapter.onElementLoaded) adapter.onElementLoaded(elementStartedTO);
+    });
   }
   onElementScored(hasScored: boolean, elementID: number): void {
-    throw new Error("Method not implemented.");
+    this.adapters.forEach((adapter) => {
+      if (adapter.onElementScored)
+        adapter.onElementScored(hasScored, elementID);
+    });
   }
 }

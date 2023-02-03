@@ -1,3 +1,4 @@
+import ElementTO from "../../Application/DataTransferObjects/ElementTO";
 import SpaceScoreTO from "../../Application/DataTransferObjects/SpaceScoreTO";
 import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
 import WorldTO from "../../Application/DataTransferObjects/WorldTO";
@@ -12,4 +13,8 @@ export default interface IWorldAdapter {
   // space
   onSpaceLoaded?(spaceTO: SpaceTO): void;
   onSpaceScored?(spaceScoreTO: SpaceScoreTO): void;
+
+  // element
+  onElementLoaded?(elementTO: ElementTO): void;
+  onElementScored?(hasScored: boolean, elementID: number): void;
 }
