@@ -1,5 +1,5 @@
-import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
+import IWorldAdapter from "src/Components/Core/Ports/WorldPort/IWorldAdapter";
 
-export default interface ISpacePresenter extends ISpaceAdapter {
+export default interface ISpacePresenter extends IWorldAdapter {
   dispose(): void;
 }

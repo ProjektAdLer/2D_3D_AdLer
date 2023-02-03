@@ -1,8 +1,11 @@
 import { Vector3 } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
+import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/SpaceScoreTO";
 import SpaceTO from "../../../../Core/Application/DataTransferObjects/SpaceTO";
 import BUILDER_TYPES from "../../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
+import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import IDoorPresenter from "../../../../Core/Presentation/Babylon/Door/IDoorPresenter";
 import ElementView from "../../../../Core/Presentation/Babylon/Elements/ElementView";
 import IElementPresenter from "../../../../Core/Presentation/Babylon/Elements/IElementPresenter";
@@ -13,6 +16,7 @@ import IPresentationDirector from "../../../../Core/Presentation/PresentationBui
 
 const directorMock = mock<IPresentationDirector>();
 const builderMock = mock<IPresentationBuilder>();
+const worldPortMock = mock<IWorldPort>();
 
 const spaceTO: SpaceTO = {
   id: 1,
@@ -20,7 +24,9 @@ const spaceTO: SpaceTO = {
   goals: "TestGoals",
   requirements: [],
   name: "TestSpace",
-  requiredPoints: 1,
+  requiredScore: 1,
+  currentScore: 0,
+  maxScore: 0,
   elements: [
     {
       id: 2,
@@ -56,6 +62,9 @@ describe("SpacePresenter", () => {
     CoreDIContainer.rebind<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
     ).toConstantValue(directorMock);
+    CoreDIContainer.rebind<IWorldPort>(PORT_TYPES.IWorldPort).toConstantValue(
+      worldPortMock
+    );
   });
 
   beforeEach(() => {
@@ -71,6 +80,14 @@ describe("SpacePresenter", () => {
       // @ts-ignore
       new SpacePresenter(undefined);
     }).toThrowError("ViewModel");
+  });
+
+  test("dispose calls unregisterAdapter on the WorldPort", () => {
+    systemUnderTest.dispose();
+
+    expect(worldPortMock.unregisterAdapter).toHaveBeenCalledWith(
+      systemUnderTest
+    );
   });
 
   test("presentSpace calls private subroutines", () => {
@@ -192,20 +209,35 @@ describe("SpacePresenter", () => {
     systemUnderTest["doorPresenter"] = doorPresenterMock;
 
     systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
-    systemUnderTest.onScoreChanged(42, 42, 42, 1);
+    systemUnderTest.onSpaceScored({
+      currentScore: 42,
+      maxScore: 42,
+      requiredScore: 42,
+      spaceID: 1,
+    } as SpaceScoreTO);
     expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(1);
     expect(doorPresenterMock.openDoor).toHaveBeenCalledTimes(1);
   });
 
   test("should not open door, when winning score is presented but id is wrong", () => {
     systemUnderTest["openDoor"] = jest.fn();
-    systemUnderTest.onScoreChanged(42, 42, 42, 2);
+    systemUnderTest.onSpaceScored({
+      currentScore: 42,
+      maxScore: 42,
+      requiredScore: 42,
+      spaceID: 2,
+    } as SpaceScoreTO);
     expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(0);
   });
 
   test("should not open door, when winning score is presented but presenter is not registred", () => {
     systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
-    systemUnderTest.onScoreChanged(42, 42, 42, 1);
+    systemUnderTest.onSpaceScored({
+      currentScore: 42,
+      maxScore: 42,
+      requiredScore: 42,
+      spaceID: 1,
+    } as SpaceScoreTO);
     expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(1);
   });
 });

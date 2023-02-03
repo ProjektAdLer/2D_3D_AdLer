@@ -8,8 +8,8 @@ import SpaceViewModel from "./SpaceViewModel";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 import ISpaceView from "./ISpaceView";
 import ISpacePresenter from "./ISpacePresenter";
-import ISpacePort from "../../../Ports/SpacePort/ISpacePort";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
+import IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 
 @injectable()
 export default class SpaceBuilder extends PresentationBuilder<
@@ -24,7 +24,7 @@ export default class SpaceBuilder extends PresentationBuilder<
 
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<ISpacePort>(PORT_TYPES.ISpacePort).registerAdapter(
+    CoreDIContainer.get<IWorldPort>(PORT_TYPES.IWorldPort).registerAdapter(
       this.presenter!
     );
   }

@@ -10,13 +10,13 @@ import ISpacePresenter from "./ISpacePresenter";
 import IElementPresenter from "../Elements/IElementPresenter";
 import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
 import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
-import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
-import ISpacePort from "src/Components/Core/Ports/SpacePort/ISpacePort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import ElementView from "../Elements/ElementView";
+import SpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/SpaceScoreTO";
+import IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 
 @injectable()
-export default class SpacePresenter implements ISpaceAdapter, ISpacePresenter {
+export default class SpacePresenter implements ISpacePresenter {
   private doorPresenter: IDoorPresenter;
 
   constructor(private viewModel: SpaceViewModel) {
@@ -26,7 +26,7 @@ export default class SpacePresenter implements ISpaceAdapter, ISpacePresenter {
   }
 
   dispose(): void {
-    CoreDIContainer.get<ISpacePort>(PORT_TYPES.ISpacePort).unregisterAdapter(
+    CoreDIContainer.get<IWorldPort>(PORT_TYPES.IWorldPort).unregisterAdapter(
       this
     );
   }
@@ -37,14 +37,10 @@ export default class SpacePresenter implements ISpaceAdapter, ISpacePresenter {
     this.createDoor();
   }
 
-  onScoreChanged(
-    score: number,
-    requiredScore: number,
-    maxScore: number,
-    spaceID: number
-  ): void {
-    if (spaceID !== this.viewModel.id) return;
-    if (score >= requiredScore) this.openDoor();
+  onSpaceScored(spaceScoreTO: SpaceScoreTO): void {
+    if (spaceScoreTO.spaceID !== this.viewModel.id) return;
+    if (spaceScoreTO.currentScore >= spaceScoreTO.requiredScore)
+      this.openDoor();
   }
 
   private openDoor(): void {

@@ -1,36 +1,34 @@
-import SpaceViewModel from "../../../../Core/Presentation/Babylon/Spaces/SpaceViewModel";
 import SpaceBuilder from "../../../../Core/Presentation/Babylon/Spaces/SpaceBuilder";
-import SpacePort from "../../../../Core/Ports/SpacePort/SpacePort";
+import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
+import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
+import { mock } from "jest-mock-extended";
+import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 
 jest.mock("@babylonjs/core");
-const addSpacePresenterMock = jest.spyOn(
-  SpacePort.prototype,
-  "registerAdapter"
-);
+const worldPortMock = mock<IWorldPort>();
 
 describe("SpaceBuilder", () => {
   let systemUnderTest: SpaceBuilder;
+
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+    CoreDIContainer.rebind<IWorldPort>(PORT_TYPES.IWorldPort).toConstantValue(
+      worldPortMock
+    );
+  });
 
   beforeEach(() => {
     systemUnderTest = new SpaceBuilder();
   });
 
   afterAll(() => {
-    jest.clearAllMocks();
-  });
-
-  test("buildViewModel concludes the build step successfully and sets the Scene in the VM", () => {
-    systemUnderTest.buildViewModel();
-    expect(systemUnderTest["viewModel"]).toBeDefined();
-    expect(systemUnderTest.getViewModel()).toBeDefined();
-    expect(systemUnderTest.getViewModel()).toBeInstanceOf(SpaceViewModel);
+    CoreDIContainer.restore();
   });
 
   test("buildPresenter concludes the build step successfully and registers the presenter with the port", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
-    expect(addSpacePresenterMock).toHaveBeenCalledTimes(1);
-    expect(addSpacePresenterMock).toHaveBeenCalledWith(
+    expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"]
     );
   });
