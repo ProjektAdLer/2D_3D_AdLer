@@ -9,7 +9,12 @@ describe("ScorePanelPresenter", () => {
   });
 
   test("presentScore sets the score in the ViewModel", () => {
-    systemUnderTest.onScoreChanged(1, 2, 3);
+    systemUnderTest.onSpaceScored({
+      currentScore: 1,
+      requiredScore: 2,
+      maxScore: 3,
+      spaceID: 42,
+    });
 
     expect(systemUnderTest["viewModel"].score.Value).toBe(1);
     expect(systemUnderTest["viewModel"].requiredScore.Value).toBe(2);
