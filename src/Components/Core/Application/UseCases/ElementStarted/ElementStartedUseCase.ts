@@ -44,7 +44,7 @@ export default class ElementStartedUseCase implements IElementStartedUseCase {
 
     elementTO.filePath = await this.getElementSourceUseCase.executeAsync({
       elementId: elementID,
-      courseId: course[0].worldID,
+      courseId: course[0].worldID, // TODO: Use actual loaded course id
     });
 
     this.elementPort.onElementLoaded(elementTO);

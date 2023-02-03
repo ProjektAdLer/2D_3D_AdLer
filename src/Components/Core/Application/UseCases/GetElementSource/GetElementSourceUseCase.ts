@@ -27,7 +27,7 @@ export default class GetElementSourceUseCase
     const resp = await this.backend.getElementSource(
       token,
       data.elementId,
-      data.courseId // TODOPG: get CourrseID from somewhere
+      data.courseId
     );
 
     return resp;
