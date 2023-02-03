@@ -5,7 +5,6 @@ import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
-import type ISpacePort from "../../../Ports/SpacePort/ISpacePort";
 import SpaceScoreTO from "../../DataTransferObjects/SpaceScoreTO";
 import ICalculateSpaceScoreUseCase from "./ICalculateSpaceScoreUseCase";
 
@@ -16,8 +15,6 @@ export default class CalculateSpaceScoreUseCase
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
     private entitiyContainer: IEntityContainer,
-    @inject(PORT_TYPES.ISpacePort)
-    private spacePort: ISpacePort,
     @inject(PORT_TYPES.IWorldPort)
     private worldPort: IWorldPort
   ) {}
@@ -49,25 +46,14 @@ export default class CalculateSpaceScoreUseCase
       }
     }, 0);
 
-    // TODO: remove call to spacePort, when merger between ports is complete
-    this.spacePort.onScoreChanged(
-      currentScore,
-      space.requiredScore,
-      maxPoints,
-      spaceID
-    );
-    this.worldPort.onSpaceScored({
+    const result: SpaceScoreTO = {
       spaceID: spaceID,
       currentScore: currentScore,
       requiredScore: space.requiredScore,
       maxScore: maxPoints,
-    });
+    };
 
-    return {
-      currentScore: currentScore,
-      requiredScore: space.requiredScore,
-      maxScore: maxPoints,
-      spaceID: spaceID,
-    } as SpaceScoreTO;
+    this.worldPort.onSpaceScored(result);
+    return result;
   }
 }

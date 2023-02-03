@@ -6,9 +6,10 @@ import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import CalculateSpaceScoreUseCase from "../../../../Core/Application/UseCases/CalculateSpaceScore/CalculateSpaceScoreUseCase";
 import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import { filterEntitiesOfTypeMockImplUtil } from "../../../TestUtils";
-import ISpacePort from "../../../../Core/Ports/SpacePort/ISpacePort";
+import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
+import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/SpaceScoreTO";
 
-const spacePortMock = mock<ISpacePort>();
+const worldPortMock = mock<IWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 
 describe("Calculate Space Score UseCase", () => {
@@ -19,9 +20,8 @@ describe("Calculate Space Score UseCase", () => {
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
       entityContainerMock
     );
-
-    CoreDIContainer.rebind(PORT_TYPES.ISpacePort).toConstantValue(
-      spacePortMock
+    CoreDIContainer.rebind(PORT_TYPES.IWorldPort).toConstantValue(
+      worldPortMock
     );
   });
 
@@ -70,17 +70,48 @@ describe("Calculate Space Score UseCase", () => {
       } as SpaceEntity,
     ]);
 
-    systemUnderTest.execute(1);
+    const result = systemUnderTest.execute(1);
 
     expect(entityContainerMock.filterEntitiesOfType).toHaveBeenCalledWith(
       SpaceEntity,
       expect.any(Function)
     );
+    expect(result).toMatchObject({
+      currentScore: 20,
+      requiredScore: 20,
+      maxScore: 30,
+      spaceID: 1,
+    } as SpaceScoreTO);
 
-    expect(spacePortMock.onScoreChanged).toHaveBeenCalledWith(20, 20, 30, 1);
+    entityContainerMock.filterEntitiesOfType.mockReset();
   });
 
-  test("should return 0 and false when no Elements are present", () => {
+  test("should return 0 for each score when no Elements are present", () => {
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      {
+        id: 1,
+        elements: [],
+        description: "test",
+        requiredScore: 0,
+        name: "test",
+        goals: "test",
+        requirements: [],
+      } as SpaceEntity,
+    ]);
+
+    const result = systemUnderTest.execute(1);
+
+    expect(result).toMatchObject({
+      currentScore: 0,
+      requiredScore: 0,
+      maxScore: 0,
+      spaceID: 1,
+    } as SpaceScoreTO);
+
+    entityContainerMock.filterEntitiesOfType.mockReset();
+  });
+
+  test("should call WorldPort.onSpaceScored", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
         id: 1,
@@ -95,7 +126,9 @@ describe("Calculate Space Score UseCase", () => {
 
     systemUnderTest.execute(1);
 
-    expect(spacePortMock.onScoreChanged).toHaveBeenCalledWith(0, 0, 0, 1);
+    expect(worldPortMock.onSpaceScored).toHaveBeenCalledTimes(1);
+
+    entityContainerMock.filterEntitiesOfType.mockReset();
   });
 
   test("should throw an error if the space is not found", () => {
