@@ -1,6 +1,7 @@
 import SpaceGoalPanelViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanelViewModel";
 import SpaceGoalPanelPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanelPresenter";
 import SpaceTO from "../../../../../Core/Application/DataTransferObjects/SpaceTO";
+
 describe("WorldGoalPanel", () => {
   let systemUnderTest: SpaceGoalPanelPresenter;
   let vm: SpaceGoalPanelViewModel;
@@ -19,7 +20,9 @@ describe("WorldGoalPanel", () => {
       description: "",
       goals: goal,
       requirements: [],
-      requiredPoints: 0,
+      requiredScore: 0,
+      currentScore: 0,
+      maxScore: 0,
     };
 
     systemUnderTest.onSpaceLoaded(spaceTO);
