@@ -1,4 +1,4 @@
-import { ElementID } from "./../../../Domain/Types/EntityTypes";
+import { ElementID } from "../../../Domain/Types/EntityTypes";
 import { inject, injectable } from "inversify";
 import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
 import ElementEntity from "src/Components/Core/Domain/Entities/ElementEntity";
@@ -11,10 +11,10 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
-import IScoreH5PElement, { XAPiEvent } from "./IScoreH5PElement";
+import IScoreH5PElementUseCase, { XAPiEvent } from "./IScoreH5PElementUseCase";
 
 @injectable()
-export default class ScoreH5PElement implements IScoreH5PElement {
+export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
   constructor(
     @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendAdapter,
     @inject(CORE_TYPES.IEntityContainer)

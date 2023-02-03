@@ -2,8 +2,8 @@ import { mock } from "jest-mock-extended";
 import { logger } from "../../../../../Lib/Logger";
 import IBackendAdapter from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
 import ICalculateSpaceScoreUseCase from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
-import { XAPiEvent } from "../../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
-import ScoreH5PElement from "../../../../Core/Application/UseCases/ScoreH5PElement/ScoreH5PElement";
+import { XAPiEvent } from "../../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
+import ScoreH5PElementUseCase from "../../../../Core/Application/UseCases/ScoreH5PElement/ScoreH5PElementUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
@@ -74,7 +74,7 @@ const executeAsyncParams = {
 };
 
 describe("ScoreH5PElementUseCase", () => {
-  let systemUnderTest: ScoreH5PElement;
+  let systemUnderTest: ScoreH5PElementUseCase;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();

@@ -1,6 +1,6 @@
 import { ElementID } from "../../Domain/Types/EntityTypes";
 import UserCredentials from "./Types/UserCredentials";
-import { XAPiEvent } from "../../Application/UseCases/ScoreH5PElement/IScoreH5PElement";
+import { XAPiEvent } from "../../Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
 import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";

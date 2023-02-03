@@ -1,14 +1,14 @@
 import mock from "jest-mock-extended/lib/Mock";
 import ElementModalController from "../../../../../../../src/Components/Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalController";
 import IScoreElementUseCase from "../../../../../Core/Application/UseCases/ScoreElement/IScoreElementUseCase";
-import IScoreH5PElement from "../../../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
+import IScoreH5PElementUseCase from "../../../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import { ElementTypes } from "../../../../../Core/Domain/Types/ElementTypes";
 import ElementModalViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ElementModal/ElementModalViewModel";
 
 const scoreElementUseCaseMock = mock<IScoreElementUseCase>();
-const scoreH5PUseCaseMock = mock<IScoreH5PElement>();
+const scoreH5PUseCaseMock = mock<IScoreH5PElementUseCase>();
 
 describe("ElementModalController", () => {
   let systemUnderTest: ElementModalController;
@@ -19,7 +19,7 @@ describe("ElementModalController", () => {
     CoreDIContainer.rebind<IScoreElementUseCase>(
       USECASE_TYPES.IScoreElementUseCase
     ).toConstantValue(scoreElementUseCaseMock);
-    CoreDIContainer.rebind<IScoreH5PElement>(
+    CoreDIContainer.rebind<IScoreH5PElementUseCase>(
       USECASE_TYPES.IScoreH5PElementUseCase
     ).toConstantValue(scoreH5PUseCaseMock);
   });

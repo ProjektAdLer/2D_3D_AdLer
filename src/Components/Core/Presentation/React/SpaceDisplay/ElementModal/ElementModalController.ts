@@ -1,4 +1,4 @@
-import IScoreH5PElement from "src/Components/Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
+import IScoreH5PElementUseCase from "src/Components/Core/Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
 import { ElementTypes } from "src/Components/Core/Domain/Types/ElementTypes";
 import IScoreElementUseCase from "../../../../Application/UseCases/ScoreElement/IScoreElementUseCase";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
@@ -50,7 +50,7 @@ export default class ElementModalController implements IElementModalController {
 
       statement.result.success = statement?.result?.score?.scaled == 1 || false;
 
-      await CoreDIContainer.get<IScoreH5PElement>(
+      await CoreDIContainer.get<IScoreH5PElementUseCase>(
         USECASE_TYPES.IScoreH5PElementUseCase
       ).executeAsync({
         //@ts-ignore

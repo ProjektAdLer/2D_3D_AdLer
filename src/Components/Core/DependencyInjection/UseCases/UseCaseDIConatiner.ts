@@ -14,8 +14,8 @@ import LoginUseCase from "../../Application/UseCases/Login/LoginUseCase";
 import IScoreElementUseCase from "../../Application/UseCases/ScoreElement/IScoreElementUseCase";
 import ScoreElementUseCase from "../../Application/UseCases/ScoreElement/ScoreElementUseCase";
 import USECASE_TYPES from "./USECASE_TYPES";
-import IScoreH5PElement from "../../Application/UseCases/ScoreH5PElement/IScoreH5PElement";
-import ScoreH5PElement from "../../Application/UseCases/ScoreH5PElement/ScoreH5PElement";
+import IScoreH5PElementUseCase from "../../Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
+import ScoreH5PElementUseCase from "../../Application/UseCases/ScoreH5PElement/ScoreH5PElementUseCase";
 import IGetElementSourceUseCase from "../../Application/UseCases/GetElementSource/IGetElementSourceUseCase";
 import GetElementSourceUseCase from "../../Application/UseCases/GetElementSource/GetElementSourceUseCase";
 
@@ -50,8 +50,8 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(LoadSpaceUseCase)
     .inSingletonScope();
 
-  bind<IScoreH5PElement>(USECASE_TYPES.IScoreH5PElementUseCase)
-    .to(ScoreH5PElement)
+  bind<IScoreH5PElementUseCase>(USECASE_TYPES.IScoreH5PElementUseCase)
+    .to(ScoreH5PElementUseCase)
     .inSingletonScope();
 
   bind<IGetElementSourceUseCase>(USECASE_TYPES.IGetElementSourceUseCase)
