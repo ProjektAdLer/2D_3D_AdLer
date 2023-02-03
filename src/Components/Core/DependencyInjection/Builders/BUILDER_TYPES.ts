@@ -25,6 +25,7 @@ const BUILDER_TYPES = {
   IWorldMenuButtonBuilder: Symbol("IWorldMenuButtonBuilder"),
   IAvatarCameraBuilder: Symbol("IAvatarCameraBuilder"),
   IExitModalBuilder: Symbol("IExitModalBuilder"),
+  IWorldSelectionBuilder: Symbol("IWorldSelectionBuilder"),
 };
 
 export default BUILDER_TYPES;
