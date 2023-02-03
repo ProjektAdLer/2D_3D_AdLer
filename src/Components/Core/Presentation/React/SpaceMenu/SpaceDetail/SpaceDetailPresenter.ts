@@ -3,7 +3,6 @@ import ISpaceDetailPresenter from "./ISpaceDetailPresenter";
 import SpaceDetailViewModel, {
   SpaceDetailSpaceData,
 } from "./SpaceDetailViewModel";
-import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
 import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
 
 export default class SpaceDetailPresenter implements ISpaceDetailPresenter {
@@ -23,13 +22,6 @@ export default class SpaceDetailPresenter implements ISpaceDetailPresenter {
     // set all values at once to avoid multiple re-renders
     this.viewModel.spaces.Value = newSpaces;
   }
-
-  onScoreChanged(
-    score: number,
-    requiredScore: number,
-    maxScore: number,
-    spaceID: ElementID
-  ): void {}
 
   onSpaceLoaded(spaceTO: SpaceTO): void {
     this.viewModel.id.Value = spaceTO.id;

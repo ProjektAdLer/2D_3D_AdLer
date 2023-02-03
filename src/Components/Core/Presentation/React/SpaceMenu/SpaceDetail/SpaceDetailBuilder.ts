@@ -6,7 +6,6 @@ import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilde
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
-import ISpaceAdapter from "src/Components/Core/Ports/SpacePort/ISpaceAdapter";
 import SpaceDetailController from "./SpaceDetailController";
 import IWorldAdapter from "src/Components/Core/Ports/WorldPort/IWorldAdapter";
 
@@ -28,10 +27,6 @@ export default class SpaceDetailBuilder extends PresentationBuilder<
 
   override buildPresenter(): void {
     super.buildPresenter();
-
-    CoreDIContainer.get<AbstractPort<ISpaceAdapter>>(
-      PORT_TYPES.ISpacePort
-    ).registerAdapter(this.presenter as ISpaceAdapter);
 
     CoreDIContainer.get<AbstractPort<IWorldAdapter>>(
       PORT_TYPES.IWorldPort
