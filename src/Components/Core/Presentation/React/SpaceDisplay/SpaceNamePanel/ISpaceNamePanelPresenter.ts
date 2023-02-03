@@ -1,1 +1,3 @@
-export default interface ISpaceNamePanelPresenter {}
+import IWorldAdapter from "src/Components/Core/Ports/WorldPort/IWorldAdapter";
+
+export default interface ISpaceNamePanelPresenter extends IWorldAdapter {}

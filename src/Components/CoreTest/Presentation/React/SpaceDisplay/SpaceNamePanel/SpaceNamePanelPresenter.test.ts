@@ -20,7 +20,9 @@ describe("WorldNamePanel", () => {
       description: "",
       goals: "",
       requirements: [],
-      requiredPoints: 0,
+      requiredScore: 0,
+      currentScore: 0,
+      maxScore: 0,
     };
 
     systemUnderTest.onSpaceLoaded(spaceTO);
