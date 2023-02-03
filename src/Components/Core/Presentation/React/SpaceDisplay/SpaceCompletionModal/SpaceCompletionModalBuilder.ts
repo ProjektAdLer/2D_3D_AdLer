@@ -7,7 +7,7 @@ import SpaceCompletionModalViewModel from "./SpaceCompletionModalViewModel";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import ISpacePort from "../../../../Ports/SpacePort/ISpacePort";
+import IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 
 @injectable()
 export default class SpaceCompletionModalBuilder extends PresentationBuilder<
@@ -28,7 +28,7 @@ export default class SpaceCompletionModalBuilder extends PresentationBuilder<
   override buildPresenter(): void {
     super.buildPresenter();
 
-    CoreDIContainer.get<ISpacePort>(PORT_TYPES.ISpacePort).registerAdapter(
+    CoreDIContainer.get<IWorldPort>(PORT_TYPES.IWorldPort).registerAdapter(
       this.presenter!
     );
   }

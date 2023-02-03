@@ -1,19 +1,18 @@
 import { mock } from "jest-mock-extended";
 import SpaceCompletionModalBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/SpaceCompletionModal/SpaceCompletionModalBuilder";
-import ISpacePort from "../../../../../Core/Ports/SpacePort/ISpacePort";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import exp from "constants";
+import IWorldPort from "../../../../../Core/Ports/WorldPort/IWorldPort";
 
-const spacePortMock = mock<ISpacePort>();
+const worldPortMock = mock<IWorldPort>();
 
 describe("SpaceCompletionModalBuilder", () => {
   let systemUnderTest: SpaceCompletionModalBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
-    CoreDIContainer.rebind<ISpacePort>(PORT_TYPES.ISpacePort).toConstantValue(
-      spacePortMock
+    CoreDIContainer.rebind<IWorldPort>(PORT_TYPES.IWorldPort).toConstantValue(
+      worldPortMock
     );
   });
 
@@ -30,7 +29,7 @@ describe("SpaceCompletionModalBuilder", () => {
 
     systemUnderTest.buildPresenter();
 
-    expect(spacePortMock.registerAdapter).toHaveBeenCalledWith(
+    expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest.getPresenter()
     );
   });
