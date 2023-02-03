@@ -9,7 +9,6 @@ import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import AbstractPort from "../../../../../Core/Ports/AbstractPort/AbstractPort";
-import ISpaceAdapter from "../../../../../Core/Ports/SpacePort/ISpaceAdapter";
 import INavigation from "../../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import SpaceSceneDefinition from "../../../../../Core/Presentation/Babylon/SceneManagement/Scenes/SpaceSceneDefinition";
 import ISpacePresenter from "../../../../../Core/Presentation/Babylon/Spaces/ISpacePresenter";
@@ -21,7 +20,6 @@ import AvatarCameraViewModel from "../../../../../Core/Presentation/Babylon/Avat
 const presentationDirectorMock = mock<IPresentationDirector>();
 const presentationBuilderMock = mock<IPresentationBuilder>();
 const navigationMock = mock<INavigation>();
-const spacePortMock = mock<AbstractPort<ISpaceAdapter>>();
 const loadSpaceUseCaseMock = mock<ILoadSpaceUseCase>();
 const loadAvatarUseCaseMock = mock<ILoadAvatarUseCase>();
 
@@ -45,9 +43,6 @@ describe("SpaceScene", () => {
     );
     CoreDIContainer.rebind(CORE_TYPES.INavigation).toConstantValue(
       navigationMock
-    );
-    CoreDIContainer.rebind(PORT_TYPES.ISpacePort).toConstantValue(
-      spacePortMock
     );
     CoreDIContainer.rebind(USECASE_TYPES.ILoadSpaceUseCase).toConstantValue(
       loadSpaceUseCaseMock

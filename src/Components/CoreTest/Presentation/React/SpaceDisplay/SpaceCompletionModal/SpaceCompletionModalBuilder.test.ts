@@ -24,7 +24,7 @@ describe("SpaceCompletionModalBuilder", () => {
     CoreDIContainer.restore();
   });
 
-  test("buildPresenter should register the presenter with the SpacePort", () => {
+  test("buildPresenter should register the presenter with the WorldPort", () => {
     systemUnderTest.buildViewModel();
 
     systemUnderTest.buildPresenter();

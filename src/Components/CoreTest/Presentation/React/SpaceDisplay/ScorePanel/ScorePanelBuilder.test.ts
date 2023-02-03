@@ -1,10 +1,8 @@
 import mock from "jest-mock-extended/lib/Mock";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import ISpacePort from "../../../../../Core/Ports/SpacePort/ISpacePort";
 import IWorldPort from "../../../../../Core/Ports/WorldPort/IWorldPort";
 import ScorePanelBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanelBuilder";
-import ScorePanelViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanelViewModel";
 
 const worldPortMock = mock<IWorldPort>();
 
@@ -26,7 +24,7 @@ describe("ScorePanelBuilder", () => {
     CoreDIContainer.restore();
   });
 
-  test("buildPresenter builds the presenter, and registers it with the SpacePort", () => {
+  test("buildPresenter builds the presenter, and registers it with the WorldPort", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 
