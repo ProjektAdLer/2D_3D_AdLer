@@ -1,7 +1,7 @@
 import ISpacePort from "./ISpacePort";
 import { injectable } from "inversify";
-import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
-import AbstractPort from "../AbstractPort/AbstractPort";
+import SpaceTO from "../../src/Components/Core/Application/DataTransferObjects/SpaceTO";
+import AbstractPort from "../../src/Components/Core/Ports/AbstractPort/AbstractPort";
 import ISpaceAdapter from "./ISpaceAdapter";
 
 @injectable()

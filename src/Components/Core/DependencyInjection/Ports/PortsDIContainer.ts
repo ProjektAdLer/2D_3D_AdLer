@@ -1,10 +1,8 @@
 import { ContainerModule } from "inversify";
-import ISpacePort from "../../Ports/SpacePort/ISpacePort";
 import IElementPort from "../../Ports/ElementPort/IElementPort";
 import IAvatarPort from "../../Application/UseCases/LoadAvatar/IAvatarPort";
 import IWorldPort from "../../Ports/WorldPort/IWorldPort";
 import ElementPort from "../../Ports/ElementPort/ElementPort";
-import SpacePort from "../../Ports/SpacePort/SpacePort";
 import WorldPort from "../../Ports/WorldPort/WorldPort";
 import ILMSPort from "../../Ports/LMSPort/ILMSPort";
 import LMSPort from "../../Ports/LMSPort/LMSPort";
@@ -16,8 +14,6 @@ import PORT_TYPES from "./PORT_TYPES";
 const PortsDIContainer = new ContainerModule((bind) => {
   // Ports
   bind<IWorldPort>(PORT_TYPES.IWorldPort).to(WorldPort).inSingletonScope();
-
-  bind<ISpacePort>(PORT_TYPES.ISpacePort).to(SpacePort).inSingletonScope();
 
   bind<IElementPort>(PORT_TYPES.IElementPort)
     .to(ElementPort)
