@@ -10,4 +10,5 @@ describe("WorldSelectionPresenter", () => {
       new WorldSelectionViewModel()
     );
   });
+  test.skip("WorldSelectionPresenter Tests", () => {});
 });

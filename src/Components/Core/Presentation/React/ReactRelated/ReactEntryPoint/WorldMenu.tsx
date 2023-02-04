@@ -1,6 +1,7 @@
 import React from "react";
 import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBar";
 import MenuTutorial from "~ReactComponents/SpaceMenu/MenuTutorial/MenuTutorial";
+import WorldDetail from "~ReactComponents/WorldMenu/WorldDetail/WorldDetail";
 import WorldSelection from "~ReactComponents/WorldMenu/WorldSelection/WorldSelection";
 
 export default function WorldMenu() {
@@ -17,7 +18,7 @@ export default function WorldMenu() {
           </div>
 
           <div className="flex justify-center col-start-2 p-2 lg:p-8 bg-adlergold">
-            {/* <WorldDetailSection /> */}
+            <WorldDetail />
           </div>
           <MenuTutorial />
         </div>
