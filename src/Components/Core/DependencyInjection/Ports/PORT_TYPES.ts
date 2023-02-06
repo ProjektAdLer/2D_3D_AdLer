@@ -1,5 +1,4 @@
 const PORT_TYPES = {
-  IElementPort: Symbol("IElementPort"),
   IWorldPort: Symbol("IWorldPort"),
   ILMSPort: Symbol("ILMSPort"),
   IAvatarPort: Symbol("IAvatarPort"),
