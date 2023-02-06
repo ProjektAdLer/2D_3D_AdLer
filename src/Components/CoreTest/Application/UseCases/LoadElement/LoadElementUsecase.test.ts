@@ -2,20 +2,19 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import { ConstructorReference } from "../../../../Core/Types/EntityManagerTypes";
-
 import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import ElementStartedUseCase from "../../../../Core/Application/UseCases/ElementStarted/ElementStartedUseCase";
 import IElementPort from "../../../../Core/Ports/ElementPort/IElementPort";
 import GetElementSourceUseCase from "../../../../Core/Application/UseCases/GetElementSource/GetElementSourceUseCase";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import LoadElementUseCase from "../../../../Core/Application/UseCases/ElementStarted/LoadElementUseCase";
 
 const elementPortMock = mock<IElementPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const getElementSourceUseCaseMock = mock<GetElementSourceUseCase>();
 
-describe("Element Started Usecase", () => {
-  let systemUnderTest: ElementStartedUseCase;
+describe("LoadElementUseCase", () => {
+  let systemUnderTest: LoadElementUseCase;
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
@@ -31,7 +30,7 @@ describe("Element Started Usecase", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = CoreDIContainer.resolve(ElementStartedUseCase);
+    systemUnderTest = CoreDIContainer.resolve(LoadElementUseCase);
   });
 
   afterAll(() => {

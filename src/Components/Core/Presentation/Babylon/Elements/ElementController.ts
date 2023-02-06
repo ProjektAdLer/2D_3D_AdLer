@@ -1,5 +1,5 @@
 import bind from "bind-decorator";
-import IElementStartedUseCase from "../../../Application/UseCases/ElementStarted/IElementStartedUseCase";
+import IElementStartedUseCase from "../../../Application/UseCases/ElementStarted/ILoadElementUseCase";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
@@ -26,7 +26,7 @@ export default class ElementController implements IElementController {
     const pointerType = (event?.sourceEvent as PointerEvent).pointerType;
     if (pointerType === "mouse") {
       CoreDIContainer.get<IElementStartedUseCase>(
-        USECASE_TYPES.IElementStartedUseCase
+        USECASE_TYPES.ILoadElementUseCase
       ).executeAsync(this.viewModel.id);
     } else if (pointerType === "touch") {
       this.displayTooltip();

@@ -1,7 +1,7 @@
 const USECASE_TYPES = {
   ILoadWorldUseCase: Symbol("ILoadWorldUseCase"),
   ILoadAvatarUseCase: Symbol("ILoadAvatarUseCase"),
-  IElementStartedUseCase: Symbol("IElementStartedUseCase"),
+  ILoadElementUseCase: Symbol("ILoadElementUseCase"),
   IScoreElementUseCase: Symbol("IScoreElementUseCase"),
   ICalculateSpaceScore: Symbol("ICalculateSpaceScore"),
   ILoginUseCase: Symbol("ILoginUseCase"),

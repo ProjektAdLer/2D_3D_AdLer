@@ -17,6 +17,9 @@ describe("ElementModalPresenter", () => {
       goals: "Test",
       type: "h5p",
       value: 1,
+      parentSpaceId: 0,
+      parentCourseId: 0,
+      hasScored: false,
     };
 
     systemUnderTest.presentElementModal(elementTO);

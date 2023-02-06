@@ -1,10 +1,10 @@
 import { mock } from "jest-mock-extended";
-import IElementStartedUseCase from "../../../../../Core/Application/UseCases/ElementStarted/IElementStartedUseCase";
+import ILoadElementUseCase from "../../../../../Core/Application/UseCases/ElementStarted/ILoadElementUseCase";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import ElementsDropdownController from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownController";
 
-const useCaseMock = mock<IElementStartedUseCase>();
+const useCaseMock = mock<ILoadElementUseCase>();
 
 describe("ElementsDropdownController", () => {
   let systemUnderTest: ElementsDropdownController;
@@ -12,7 +12,7 @@ describe("ElementsDropdownController", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.unbindAll();
-    CoreDIContainer.bind(USECASE_TYPES.IElementStartedUseCase).toConstantValue(
+    CoreDIContainer.bind(USECASE_TYPES.ILoadElementUseCase).toConstantValue(
       useCaseMock
     );
   });

@@ -1,8 +1,8 @@
 import { ContainerModule } from "inversify";
 import CalculateSpaceScoreUseCase from "../../Application/UseCases/CalculateSpaceScore/CalculateSpaceScoreUseCase";
 import ICalculateSpaceScoreUseCase from "../../Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
-import IElementStartedUseCase from "../../Application/UseCases/ElementStarted/IElementStartedUseCase";
-import ElementStartedUseCase from "../../Application/UseCases/ElementStarted/ElementStartedUseCase";
+import IElementStartedUseCase from "../../Application/UseCases/ElementStarted/ILoadElementUseCase";
+import LoadElementUseCase from "../../Application/UseCases/ElementStarted/LoadElementUseCase";
 import ILoadAvatarUseCase from "../../Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
 import LoadAvatarUseCase from "../../Application/UseCases/LoadAvatar/LoadAvatarUseCase";
 import ILoadSpaceUseCase from "../../Application/UseCases/LoadSpace/ILoadSpaceUseCase";
@@ -34,8 +34,8 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(ScoreElementUseCase)
     .inSingletonScope();
 
-  bind<IElementStartedUseCase>(USECASE_TYPES.IElementStartedUseCase)
-    .to(ElementStartedUseCase)
+  bind<IElementStartedUseCase>(USECASE_TYPES.ILoadElementUseCase)
+    .to(LoadElementUseCase)
     .inSingletonScope();
 
   bind<ICalculateSpaceScoreUseCase>(USECASE_TYPES.ICalculateSpaceScore)

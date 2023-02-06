@@ -9,10 +9,10 @@ import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import ElementTO from "../../DataTransferObjects/ElementTO";
 import type IGetElementSourceUseCase from "../GetElementSource/IGetElementSourceUseCase";
-import IElementStartedUseCase from "./IElementStartedUseCase";
+import ILoadElementUseCase from "./ILoadElementUseCase";
 
 @injectable()
-export default class ElementStartedUseCase implements IElementStartedUseCase {
+export default class LoadElementUseCase implements ILoadElementUseCase {
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,

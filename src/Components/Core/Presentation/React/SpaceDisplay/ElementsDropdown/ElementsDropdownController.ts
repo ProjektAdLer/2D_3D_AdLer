@@ -1,4 +1,4 @@
-import IElementStartedUseCase from "../../../../Application/UseCases/ElementStarted/IElementStartedUseCase";
+import IElementStartedUseCase from "../../../../Application/UseCases/ElementStarted/ILoadElementUseCase";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPES";
 import { ElementID } from "../../../../Domain/Types/EntityTypes";
@@ -9,7 +9,7 @@ export default class ElementsDropdownController
 {
   startElement(elementId: ElementID): void {
     CoreDIContainer.get<IElementStartedUseCase>(
-      USECASE_TYPES.IElementStartedUseCase
+      USECASE_TYPES.ILoadElementUseCase
     ).executeAsync(elementId);
   }
 }

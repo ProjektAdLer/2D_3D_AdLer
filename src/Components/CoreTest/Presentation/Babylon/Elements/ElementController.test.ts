@@ -1,6 +1,6 @@
 import { ActionEvent } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
-import IElementStartedUseCase from "../../../../Core/Application/UseCases/ElementStarted/IElementStartedUseCase";
+import ILoadElementUseCase from "../../../../Core/Application/UseCases/ElementStarted/ILoadElementUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
@@ -8,7 +8,7 @@ import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
 import ElementController from "../../../../Core/Presentation/Babylon/Elements/ElementController";
 import ElementViewModel from "../../../../Core/Presentation/Babylon/Elements/ElementViewModel";
 
-const elementStartedUseCaseMock = mock<IElementStartedUseCase>();
+const elementStartedUseCaseMock = mock<ILoadElementUseCase>();
 const uiPortMock = mock<IUIPort>();
 
 describe("ElementController", () => {
@@ -17,9 +17,9 @@ describe("ElementController", () => {
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
-    CoreDIContainer.rebind(
-      USECASE_TYPES.IElementStartedUseCase
-    ).toConstantValue(elementStartedUseCaseMock);
+    CoreDIContainer.rebind(USECASE_TYPES.ILoadElementUseCase).toConstantValue(
+      elementStartedUseCaseMock
+    );
     CoreDIContainer.rebind(PORT_TYPES.IUIPort).toConstantValue(uiPortMock);
   });
 
