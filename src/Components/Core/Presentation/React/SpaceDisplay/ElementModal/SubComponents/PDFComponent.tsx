@@ -66,7 +66,7 @@ function MobilePDFComponent({
 
   return (
     <div className="flex-col h-full ">
-      <div className="flex flex-row justify-between w-full h-6">
+      <div className="flex flex-row justify-center mb-2 w-full h-6">
         <StyledButton
           shape="freefloatcenter"
           className=""
@@ -74,7 +74,7 @@ function MobilePDFComponent({
         >
           {"<"}
         </StyledButton>
-        <p className="">
+        <p className="mx-8">
           Page {pageNumber} of {numPages}
         </p>
         <StyledButton shape="freefloatcenter" className="" onClick={nextPage}>
@@ -82,12 +82,13 @@ function MobilePDFComponent({
         </StyledButton>
       </div>
 
-      <div className="overflow-auto">
+      <div className="">
         <Document
           file={viewModel.filePath.Value}
           onLoadSuccess={onDocumentLoadSuccess}
         >
           <Page
+            width={1000}
             data-testid="pdfPage"
             pageNumber={pageNumber}
             renderTextLayer={false}
