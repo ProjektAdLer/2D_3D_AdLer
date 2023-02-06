@@ -4,12 +4,12 @@ import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityCon
 import { ConstructorReference } from "../../../../Core/Types/EntityManagerTypes";
 import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import IElementPort from "../../../../Core/Ports/ElementPort/IElementPort";
 import GetElementSourceUseCase from "../../../../Core/Application/UseCases/GetElementSource/GetElementSourceUseCase";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import LoadElementUseCase from "../../../../Core/Application/UseCases/ElementStarted/LoadElementUseCase";
+import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 
-const elementPortMock = mock<IElementPort>();
+const worldPortMock = mock<IWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const getElementSourceUseCaseMock = mock<GetElementSourceUseCase>();
 
@@ -21,8 +21,8 @@ describe("LoadElementUseCase", () => {
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
       entityContainerMock
     );
-    CoreDIContainer.rebind(PORT_TYPES.IElementPort).toConstantValue(
-      elementPortMock
+    CoreDIContainer.rebind(PORT_TYPES.IWorldPort).toConstantValue(
+      worldPortMock
     );
     CoreDIContainer.rebind(
       USECASE_TYPES.IGetElementSourceUseCase
@@ -62,7 +62,7 @@ describe("LoadElementUseCase", () => {
 
     await systemUnderTest.executeAsync(1);
 
-    expect(elementPortMock.onElementLoaded).toHaveBeenCalledWith({
+    expect(worldPortMock.onElementLoaded).toHaveBeenCalledWith({
       id: 1,
       filePath: "path",
     });

@@ -12,7 +12,7 @@ import ElementEntity from "../../../../Core/Domain/Entities/ElementEntity";
 import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
-import IElementPort from "../../../../Core/Ports/ElementPort/IElementPort";
+import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 
 jest.mock("../../../../../Lib/Logger");
 
@@ -64,7 +64,7 @@ const setupEntityContainerMock = (
 const backendAdapterMock = mock<IBackendAdapter>();
 
 // create other mocks
-const elementPortMock = mock<IElementPort>();
+const worldPortMock = mock<IWorldPort>();
 const calculateSpaceScoreUseCaseMock = mock<ICalculateSpaceScoreUseCase>();
 
 const executeAsyncParams = {
@@ -85,8 +85,8 @@ describe("ScoreH5PElementUseCase", () => {
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
       entityContainerMock
     );
-    CoreDIContainer.rebind(PORT_TYPES.IElementPort).toConstantValue(
-      elementPortMock
+    CoreDIContainer.rebind(PORT_TYPES.IWorldPort).toConstantValue(
+      worldPortMock
     );
     CoreDIContainer.rebind(USECASE_TYPES.ICalculateSpaceScore).toConstantValue(
       calculateSpaceScoreUseCaseMock
@@ -191,7 +191,7 @@ describe("ScoreH5PElementUseCase", () => {
       console.log(e);
     }
 
-    expect(elementPortMock.onElementScored).toHaveBeenCalledWith(
+    expect(worldPortMock.onElementScored).toHaveBeenCalledWith(
       true,
       executeAsyncParams.elementId
     );

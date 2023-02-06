@@ -5,7 +5,6 @@ import ElementEntity from "src/Components/Core/Domain/Entities/ElementEntity";
 import SpaceEntity from "src/Components/Core/Domain/Entities/SpaceEntity";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
-import type IElementPort from "src/Components/Core/Ports/ElementPort/IElementPort";
 import { logger } from "src/Lib/Logger";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
@@ -20,7 +19,6 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
     @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendAdapter,
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
-    @inject(PORT_TYPES.IElementPort) private elementPort: IElementPort,
     @inject(PORT_TYPES.IWorldPort) private worldPort: IWorldPort,
     @inject(USECASE_TYPES.ICalculateSpaceScore)
     private calculateSpaceScoreUseCase: ICalculateSpaceScoreUseCase
@@ -84,7 +82,6 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
 
       this.calculateSpaceScoreUseCase.execute(space.id);
 
-      this.elementPort.onElementScored(true, data.elementId);
       this.worldPort.onElementScored(true, data.elementId);
     }
 

@@ -10,7 +10,6 @@ import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import type IElementPort from "../../../Ports/ElementPort/IElementPort";
 import { logger } from "../../../../../Lib/Logger";
 import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 
@@ -23,8 +22,6 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
     private backendAdapter: IBackendAdapter,
     @inject(USECASE_TYPES.ICalculateSpaceScore)
     private calculateSpaceScoreUseCase: ICalculateSpaceScoreUseCase,
-    @inject(PORT_TYPES.IElementPort)
-    private elementPort: IElementPort,
     @inject(PORT_TYPES.IWorldPort)
     private worldPort: IWorldPort
   ) {}
@@ -87,7 +84,6 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
 
     this.calculateSpaceScoreUseCase.execute(space.id);
 
-    this.elementPort.onElementScored(true, data.elementId);
     this.worldPort.onElementScored(true, data.elementId);
   }
 

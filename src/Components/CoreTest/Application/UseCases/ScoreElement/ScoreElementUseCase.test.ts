@@ -10,15 +10,15 @@ import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 import ElementEntity from "../../../../Core/Domain/Entities/ElementEntity";
 import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import { logger } from "../../../../../Lib/Logger";
-import IElementPort from "../../../../Core/Ports/ElementPort/IElementPort";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 
 jest.mock("../../../../../Lib/Logger");
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendAdapterMock = mock<IBackendAdapter>();
 const CalculateSpaceScoreMock = mock<ICalculateSpaceScoreUseCase>();
-const elementPortMock = mock<IElementPort>();
+const worldPortMock = mock<IWorldPort>();
 
 const userEntity: UserDataEntity = {
   isLoggedIn: true,
@@ -43,7 +43,7 @@ const spaceEntity: SpaceEntity = {
   description: "",
   goals: "",
   requirements: [],
-  requiredPoints: 0,
+  requiredScore: 0,
 };
 
 const setupEntityContainerMock = (
@@ -93,9 +93,9 @@ describe("ScoreElementUseCase", () => {
     CoreDIContainer.rebind<ICalculateSpaceScoreUseCase>(
       USECASE_TYPES.ICalculateSpaceScore
     ).toConstantValue(CalculateSpaceScoreMock);
-    CoreDIContainer.rebind<IElementPort>(
-      PORT_TYPES.IElementPort
-    ).toConstantValue(elementPortMock);
+    CoreDIContainer.rebind<IWorldPort>(PORT_TYPES.IWorldPort).toConstantValue(
+      worldPortMock
+    );
   });
 
   beforeEach(() => {
@@ -159,7 +159,7 @@ describe("ScoreElementUseCase", () => {
       console.log(e);
     }
 
-    expect(elementPortMock.onElementScored).toHaveBeenCalledWith(true, 1);
+    expect(worldPortMock.onElementScored).toHaveBeenCalledWith(true, 1);
   });
 
   test("executeAsync rejects if data parameter is undefined", async () => {

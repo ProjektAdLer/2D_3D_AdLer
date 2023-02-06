@@ -1,6 +1,5 @@
 import { inject, injectable } from "inversify";
 import WorldEntity from "src/Components/Core/Domain/Entities/WorldEntity";
-import type IElementPort from "src/Components/Core/Ports/ElementPort/IElementPort";
 import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
@@ -16,8 +15,6 @@ export default class LoadElementUseCase implements ILoadElementUseCase {
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
-    @inject(PORT_TYPES.IElementPort)
-    private elementPort: IElementPort,
     @inject(PORT_TYPES.IWorldPort)
     private worldPort: IWorldPort,
     @inject(USECASE_TYPES.IGetElementSourceUseCase)
@@ -51,7 +48,6 @@ export default class LoadElementUseCase implements ILoadElementUseCase {
     });
 
     this.worldPort.onElementLoaded(elementTO);
-    this.elementPort.onElementLoaded(elementTO);
 
     return Promise.resolve();
   }
