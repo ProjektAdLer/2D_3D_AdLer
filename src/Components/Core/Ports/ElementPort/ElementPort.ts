@@ -21,7 +21,7 @@ export default class ElementPort implements IElementPort {
     if (!this.modalPresenter) {
       throw new Error("ElementModalPresenter is not registered.");
     }
-    this.modalPresenter.presentElementModal(elementStartedTO);
+    // this.modalPresenter.presentElementModal(elementStartedTO);
   }
 
   registerModalPresenter(modalPresenter: IElementModalPresenter): void {

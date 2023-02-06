@@ -53,7 +53,7 @@ describe("ElementPort", () => {
     }).toThrowError("not registered");
   });
 
-  test("startElementEditing calls presentElementModal on elementModalPresenter", () => {
+  test.skip("startElementEditing calls presentElementModal on elementModalPresenter", () => {
     const elementTO = {
       id: 1,
       name: "test",

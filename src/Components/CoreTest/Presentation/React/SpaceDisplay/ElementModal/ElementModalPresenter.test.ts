@@ -22,7 +22,7 @@ describe("ElementModalPresenter", () => {
       hasScored: false,
     };
 
-    systemUnderTest.presentElementModal(elementTO);
+    systemUnderTest.onElementLoaded(elementTO);
 
     expect(systemUnderTest["viewModel"].type.Value).toBe(elementTO.type);
     expect(systemUnderTest["viewModel"].isOpen.Value).toBe(true);
