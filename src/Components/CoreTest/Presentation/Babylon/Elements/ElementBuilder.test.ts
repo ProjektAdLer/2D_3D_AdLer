@@ -1,19 +1,19 @@
 import mock from "jest-mock-extended/lib/Mock";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import IElementPort from "../../../../Core/Ports/ElementPort/IElementPort";
+import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import ElementBuilder from "../../../../Core/Presentation/Babylon/Elements/ElementBuilder";
 import ElementPresenter from "../../../../Core/Presentation/Babylon/Elements/ElementPresenter";
 
-const elementPortMock = mock<IElementPort>();
+const worldPortMock = mock<IWorldPort>();
 
 describe("ElementBuilder", () => {
   let systemUnderTest: ElementBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
-    CoreDIContainer.rebind(PORT_TYPES.IElementPort).toConstantValue(
-      elementPortMock
+    CoreDIContainer.rebind(PORT_TYPES.IWorldPort).toConstantValue(
+      worldPortMock
     );
   });
 
@@ -35,8 +35,8 @@ describe("ElementBuilder", () => {
     expect(systemUnderTest.getPresenter()).toBeInstanceOf(ElementPresenter);
 
     // call to the element port
-    expect(elementPortMock.addElementPresenter).toHaveBeenCalledTimes(1);
-    expect(elementPortMock.addElementPresenter).toHaveBeenCalledWith(
+    expect(worldPortMock.registerAdapter).toHaveBeenCalledTimes(1);
+    expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"]
     );
   });

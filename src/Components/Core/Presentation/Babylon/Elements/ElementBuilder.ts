@@ -1,5 +1,4 @@
 import { injectable } from "inversify";
-import IElementPort from "../../../Ports/ElementPort/IElementPort";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import IElementController from "./IElementController";
 import IElementPresenter from "./IElementPresenter";
@@ -9,6 +8,7 @@ import ElementView from "./ElementView";
 import ElementViewModel from "./ElementViewModel";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
+import IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 
 @injectable()
 export default class ElementBuilder extends PresentationBuilder<
@@ -24,8 +24,8 @@ export default class ElementBuilder extends PresentationBuilder<
   buildPresenter(): void {
     super.buildPresenter();
 
-    CoreDIContainer.get<IElementPort>(
-      PORT_TYPES.IElementPort
-    ).addElementPresenter(this.presenter!);
+    CoreDIContainer.get<IWorldPort>(PORT_TYPES.IWorldPort).registerAdapter(
+      this.presenter!
+    );
   }
 }
