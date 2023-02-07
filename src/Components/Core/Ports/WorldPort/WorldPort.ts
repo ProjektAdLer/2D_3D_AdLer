@@ -20,24 +20,24 @@ export default class WorldPort
   }
 
   // space
-  onSpaceLoaded(spaceTO: SpaceTO): void {
+  public onSpaceLoaded(spaceTO: SpaceTO): void {
     this.adapters.forEach((adapter) => {
       if (adapter.onSpaceLoaded) adapter.onSpaceLoaded(spaceTO);
     });
   }
-  onSpaceScored(spaceScoreTO: SpaceScoreTO): void {
+  public onSpaceScored(spaceScoreTO: SpaceScoreTO): void {
     this.adapters.forEach((adapter) => {
       if (adapter.onSpaceScored) adapter.onSpaceScored(spaceScoreTO);
     });
   }
 
   // element
-  onElementLoaded(elementStartedTO: ElementTO): void {
+  public onElementLoaded(elementStartedTO: ElementTO): void {
     this.adapters.forEach((adapter) => {
       if (adapter.onElementLoaded) adapter.onElementLoaded(elementStartedTO);
     });
   }
-  onElementScored(hasScored: boolean, elementID: number): void {
+  public onElementScored(hasScored: boolean, elementID: number): void {
     this.adapters.forEach((adapter) => {
       if (adapter.onElementScored)
         adapter.onElementScored(hasScored, elementID);
