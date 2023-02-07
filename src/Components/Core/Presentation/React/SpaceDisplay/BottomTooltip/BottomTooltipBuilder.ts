@@ -8,6 +8,7 @@ import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import IBottomTooltipPresenter from "./IBottomTooltipPresenter";
 import IBottomTooltipController from "./IBottomTooltipController";
 import BottomTooltipController from "./BottomTooltipController";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 @injectable()
 export default class BottomTooltipBuilder extends PresentationBuilder<
@@ -27,8 +28,12 @@ export default class BottomTooltipBuilder extends PresentationBuilder<
 
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<IUIPort>(
-      PORT_TYPES.IUIPort
-    ).registerBottomTooltipPresenter(this.presenter!);
+    // CoreDIContainer.get<IUIPort>(
+    //   PORT_TYPES.IUIPort
+    // ).registerBottomTooltipPresenter(this.presenter!);
+
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    ).toConstantValue(this.presenter!);
   }
 }
