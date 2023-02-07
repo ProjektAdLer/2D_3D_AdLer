@@ -15,7 +15,7 @@ export default function WorldMenuButton() {
       <StyledButton
         shape="freefloatleft"
         disabled={!loggedInMoodle}
-        onClick={() => history.push("/worldmenu")}
+        onClick={() => history.push("/spacemenu")}
       >
         Gehe zum Lernraum Menü
       </StyledButton>

@@ -64,6 +64,8 @@ function MobilePDFComponent({
     if (numPages) setPageNumber(Math.min(pageNumber + 1, numPages));
   }, [pageNumber, numPages]);
 
+  let renderWidth: number = window.innerWidth * 0.87;
+
   return (
     <div className="flex-col h-full ">
       <div className="flex flex-row justify-center mb-2 w-full h-6">
@@ -88,7 +90,7 @@ function MobilePDFComponent({
           onLoadSuccess={onDocumentLoadSuccess}
         >
           <Page
-            width={1000}
+            width={renderWidth}
             data-testid="pdfPage"
             pageNumber={pageNumber}
             renderTextLayer={false}
