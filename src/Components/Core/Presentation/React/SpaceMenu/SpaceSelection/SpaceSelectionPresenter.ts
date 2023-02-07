@@ -1,4 +1,3 @@
-import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
 import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
 import ISpaceSelectionPresenter from "./ISpaceSelectionPresenter";
 import SpaceSelectionViewModel, {

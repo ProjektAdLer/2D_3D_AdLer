@@ -1,5 +1,5 @@
 import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
 import { IAsyncUsecase } from "../../Abstract/IAsyncUsecase";
 
-export default interface IElementStartedUseCase
+export default interface ILoadElementUseCase
   extends IAsyncUsecase<ElementID, void> {}
