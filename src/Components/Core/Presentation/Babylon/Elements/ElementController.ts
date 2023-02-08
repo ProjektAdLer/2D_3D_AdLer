@@ -23,7 +23,6 @@ export default class ElementController implements IElementController {
     CoreDIContainer.get<IBottomTooltipPresenter>(
       PRESENTATION_TYPES.IBottomTooltipPresenter
     ).hide();
-    // CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort).hideBottomTooltip();
   }
 
   @bind
@@ -52,19 +51,5 @@ export default class ElementController implements IElementController {
       parentCourseId: 0,
       hasScored: false,
     });
-
-    // CoreDIContainer.get<IUIPort>(
-    //   PORT_TYPES.IUIPort
-    // ).displayElementSummaryTooltip({
-    //   name: this.viewModel.name.Value,
-    //   type: this.viewModel.type.Value,
-    //   id: this.viewModel.id,
-    //   description: this.viewModel.description.Value,
-    //   goals: this.viewModel.goals.Value,
-    //   value: this.viewModel.value.Value,
-    //   parentSpaceId: 0,
-    //   parentCourseId: 0,
-    //   hasScored: false,
-    // });
   }
 }

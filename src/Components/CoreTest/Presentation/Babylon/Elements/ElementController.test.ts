@@ -2,14 +2,14 @@ import { ActionEvent } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
 import ILoadElementUseCase from "../../../../Core/Application/UseCases/ElementStarted/ILoadElementUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
 import ElementController from "../../../../Core/Presentation/Babylon/Elements/ElementController";
 import ElementViewModel from "../../../../Core/Presentation/Babylon/Elements/ElementViewModel";
+import IBottomTooltipPresenter from "../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 
 const elementStartedUseCaseMock = mock<ILoadElementUseCase>();
-const uiPortMock = mock<IUIPort>();
+const bottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
 
 describe("ElementController", () => {
   let viewModel: ElementViewModel;
@@ -20,7 +20,9 @@ describe("ElementController", () => {
     CoreDIContainer.rebind(USECASE_TYPES.ILoadElementUseCase).toConstantValue(
       elementStartedUseCaseMock
     );
-    CoreDIContainer.rebind(PORT_TYPES.IUIPort).toConstantValue(uiPortMock);
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    ).toConstantValue(bottomTooltipPresenterMock);
   });
 
   beforeEach(() => {
@@ -35,13 +37,15 @@ describe("ElementController", () => {
   test("pointerOver calls IUIPort.displayElementSummaryTooltip", () => {
     systemUnderTest.pointerOver();
 
-    expect(uiPortMock.displayElementSummaryTooltip).toHaveBeenCalledTimes(1);
+    expect(
+      bottomTooltipPresenterMock.displayElementSummaryTooltip
+    ).toHaveBeenCalledTimes(1);
   });
 
   test("pointerOut calls IUIPort.hideBottomTooltip", () => {
     systemUnderTest.pointerOut();
 
-    expect(uiPortMock.hideBottomTooltip).toHaveBeenCalledTimes(1);
+    expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
   });
 
   test("clicked calls IElementStartedUseCase.executeAsync when pointerType is mouse", () => {
@@ -75,6 +79,8 @@ describe("ElementController", () => {
 
     systemUnderTest.clicked(mockedEvent);
 
-    expect(uiPortMock.displayElementSummaryTooltip).toHaveBeenCalledTimes(1);
+    expect(
+      bottomTooltipPresenterMock.displayElementSummaryTooltip
+    ).toHaveBeenCalledTimes(1);
   });
 });

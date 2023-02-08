@@ -1,6 +1,7 @@
 import IBottomTooltipPresenter from "../../../../../../../src/Components/Core/Presentation/React/SpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import BottomTooltipPresenter from "../../../../../../../src/Components/Core/Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipPresenter";
 import ScorePanelViewModel from "../../../../../../../src/Components/Core/Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipViewModel";
+
 describe("BottomTooltipPresenter", () => {
   let systemUnderTest: IBottomTooltipPresenter;
   const vm = new ScorePanelViewModel();

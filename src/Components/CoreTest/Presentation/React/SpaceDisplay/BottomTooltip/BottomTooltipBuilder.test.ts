@@ -1,42 +1,27 @@
-import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
-import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import IUIPort from "../../../../../Core/Ports/UIPort/IUIPort";
 import BottomTooltipBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipBuilder";
-import BottomTooltipPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipPresenter";
-import BottomTooltipViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipViewModel";
-import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
-
-const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
-const UIPortMock = mock<IUIPort>();
+import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 describe("BottomTooltipBuilder", () => {
   let systemUnderTest: BottomTooltipBuilder;
-  beforeAll(() => {
-    CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind(PORT_TYPES.IUIPort).toConstantValue(UIPortMock);
-    CoreDIContainer.rebind(
-      CORE_TYPES.IViewModelControllerProvider
-    ).toConstantValue(viewModelControllerProviderMock);
-  });
   beforeEach(() => {
     systemUnderTest = new BottomTooltipBuilder();
   });
-  afterAll(() => {
-    CoreDIContainer.restore();
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
-  test("buildPresenter builds the presenter", () => {
+  test("buildPresenter registers presenter with the CoreDIContainer", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 
-    expect(systemUnderTest["presenter"]).toBeDefined();
-    expect(systemUnderTest["presenter"]).toBeInstanceOf(BottomTooltipPresenter);
-    expect(UIPortMock.registerBottomTooltipPresenter).toHaveBeenCalledTimes(1);
-    expect(UIPortMock.registerBottomTooltipPresenter).toHaveBeenCalledWith(
-      systemUnderTest["presenter"]
-    );
+    expect(
+      CoreDIContainer.isBound(PRESENTATION_TYPES.IBottomTooltipPresenter)
+    ).toBe(true);
+    expect(
+      CoreDIContainer.get(PRESENTATION_TYPES.IBottomTooltipPresenter)
+    ).toBe(systemUnderTest.getPresenter()!);
   });
 });

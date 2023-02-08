@@ -8,7 +8,6 @@ export default interface IUIPort {
   registerNotificationManager(presenter: INotificationManagerPresenter): void;
   displayNotification(errorMessage: string, type: NotificationType): void;
   displayExitQueryTooltip(): void;
-  displayElementSummaryTooltip(element: ElementTO): void;
   hideBottomTooltip(): void;
   registerBottomTooltipPresenter(
     bottomTooltipPresenter: IBottomTooltipPresenter

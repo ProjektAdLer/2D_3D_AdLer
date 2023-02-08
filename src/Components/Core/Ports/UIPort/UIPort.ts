@@ -43,13 +43,6 @@ export default class UIPort implements IUIPort {
 
     this.exitModalPresenter.openExitModal();
   };
-  displayElementSummaryTooltip = (element: ElementTO) => {
-    if (!this.bottomTooltipPresenter) {
-      throw new Error("BottomTooltipPresenter not registered");
-    }
-
-    this.bottomTooltipPresenter.displayElementSummaryTooltip(element);
-  };
 
   // Setter for presenters
   registerBottomTooltipPresenter(
