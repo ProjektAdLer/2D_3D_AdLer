@@ -1,4 +1,4 @@
-import { ErrorMessage } from "./NotificationManagerPresenter";
+import { ErrorMessage } from "src/Components/Core/Ports/UIPort/IUIAdapter";
 import Observable from "../../../../../../Lib/Observable";
 
 export default class NotificationManagerViewModel {

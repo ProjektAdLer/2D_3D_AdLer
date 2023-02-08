@@ -1,9 +1,12 @@
+import {
+  ErrorMessage,
+  NotificationType,
+} from "src/Components/Core/Ports/UIPort/IUIAdapter";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledModal from "../../ReactRelated/ReactBaseComponents/StyledModal";
 import NotificationManagerController from "./NotificationManagerController";
-import { ErrorMessage, NotificationType } from "./NotificationManagerPresenter";
 import NotificationManagerViewModel from "./NotificationManagerViewModel";
 
 export default function NotificationManager({

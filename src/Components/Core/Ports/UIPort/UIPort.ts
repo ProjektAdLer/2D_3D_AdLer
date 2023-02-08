@@ -1,8 +1,8 @@
-import { NotificationType } from "../../Presentation/React/GeneralComponents/NotificationManager/NotificationManagerPresenter";
 import { injectable } from "inversify";
 import INotificationManagerPresenter from "../../Presentation/React/GeneralComponents/NotificationManager/INotificationManagerPresenter";
 import IUIPort from "./IUIPort";
 import { logger } from "src/Lib/Logger";
+import { NotificationType } from "./IUIAdapter";
 
 @injectable()
 export default class UIPort implements IUIPort {
