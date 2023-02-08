@@ -16,7 +16,7 @@ import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
 import DoorViewModel from "./DoorViewModel";
-import DoorController from "./DoorController";
+import IDoorController from "./IDoorController";
 
 const modelLink = require("../../../../../Assets/3DModel_Door.glb");
 
@@ -25,7 +25,7 @@ export default class DoorView extends Readyable {
 
   constructor(
     private viewModel: DoorViewModel,
-    private controller: DoorController
+    private controller: IDoorController
   ) {
     super();
 

@@ -6,7 +6,6 @@ import StyledButton from "../../../React/ReactRelated/ReactBaseComponents/Styled
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import IExitModalController from "./IExitModalController";
 import { useCallback } from "react";
-import React from "react";
 
 export default function ExitModal() {
   const [viewModel, controller] = useBuilder<

@@ -6,13 +6,13 @@ import {
   Tools,
   Vector3,
 } from "@babylonjs/core";
-import { mockDeep } from "jest-mock-extended";
+import { mock, mockDeep } from "jest-mock-extended";
 import { setTimeout } from "timers/promises";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
-import DoorController from "../../../../Core/Presentation/Babylon/Door/DoorController";
 import DoorView from "../../../../Core/Presentation/Babylon/Door/DoorView";
 import DoorViewModel from "../../../../Core/Presentation/Babylon/Door/DoorViewModel";
+import IDoorController from "../../../../Core/Presentation/Babylon/Door/IDoorController";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 
 // setup scene presenter mock
@@ -21,7 +21,7 @@ const scenePresenterFactoryMock = () => scenePresenterMock;
 
 function buildSystemUnderTest(): [DoorViewModel, DoorView] {
   const viewModel = new DoorViewModel();
-  const controller = new DoorController(viewModel);
+  const controller = mock<IDoorController>();
   const systemUnderTest = new DoorView(viewModel, controller);
   return [viewModel, systemUnderTest];
 }

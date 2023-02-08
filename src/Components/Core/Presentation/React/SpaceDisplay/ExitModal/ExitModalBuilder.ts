@@ -4,15 +4,16 @@ import ExitModalViewModel from "./ExitModalViewModel";
 import ExitModalController from "./ExitModalController";
 import ExitModalPresenter from "./ExitModalPresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import IUIPort from "src/Components/Core/Ports/UIPort/IUIPort";
-import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
+import IExitModalController from "./IExitModalController";
+import IExitModalPresenter from "./IExitModalPresenter";
 
 @injectable()
 export default class ExitModalBuilder extends PresentationBuilder<
   ExitModalViewModel,
-  ExitModalController,
+  IExitModalController,
   undefined,
-  ExitModalPresenter
+  IExitModalPresenter
 > {
   constructor() {
     super(
@@ -24,8 +25,14 @@ export default class ExitModalBuilder extends PresentationBuilder<
   }
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort).registerExitModalPresenter(
-      this.presenter!
-    );
+
+    // ensure that previous instances of the presenter are unbound, when changing between spaces
+    if (CoreDIContainer.isBound(PRESENTATION_TYPES.IExitModalPresenter)) {
+      CoreDIContainer.unbind(PRESENTATION_TYPES.IExitModalPresenter);
+    }
+
+    CoreDIContainer.bind<IExitModalPresenter>(
+      PRESENTATION_TYPES.IExitModalPresenter
+    ).toConstantValue(this.presenter!);
   }
 }

@@ -1,3 +1,3 @@
-export default interface IExitModalController {
-  openExitModal(): void;
+export default interface IExitModalPresenter {
+  open(): void;
 }

@@ -5,8 +5,10 @@ import DoorController from "../../../../Core/Presentation/Babylon/Door/DoorContr
 import DoorViewModel from "../../../../Core/Presentation/Babylon/Door/DoorViewModel";
 import IBottomTooltipPresenter from "../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
+import IExitModalPresenter from "../../../../Core/Presentation/React/SpaceDisplay/ExitModal/IExitModalPresenter";
 
 const bottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
+const exitModalPresenterMock = mock<IExitModalPresenter>();
 
 describe("DoorController", () => {
   let viewModel: DoorViewModel;
@@ -17,6 +19,9 @@ describe("DoorController", () => {
     CoreDIContainer.bind(
       PRESENTATION_TYPES.IBottomTooltipPresenter
     ).toConstantValue(bottomTooltipPresenterMock);
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IExitModalPresenter
+    ).toConstantValue(exitModalPresenterMock);
   });
 
   beforeEach(() => {
@@ -40,6 +45,22 @@ describe("DoorController", () => {
     systemUnderTest.pointerOut();
 
     expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
+  });
+
+  test("clicked calls IExitModalPresenter.displayExitModal when pointerType is mouse", () => {
+    const mockedEvent: ActionEvent = {
+      sourceEvent: {
+        pointerType: "mouse",
+      },
+      source: undefined,
+      pointerX: 0,
+      pointerY: 0,
+      meshUnderPointer: null,
+    };
+
+    systemUnderTest.clicked(mockedEvent);
+
+    expect(exitModalPresenterMock.open).toHaveBeenCalledTimes(1);
   });
 
   test("clicked calls BottomTooltipPresenter.displayExitQueryTooltip when pointerType is touch", () => {

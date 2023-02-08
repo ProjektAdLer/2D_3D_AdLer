@@ -13,7 +13,7 @@ describe("ExitModalPresenter", () => {
 
   test("openExitModal sets isOpen to true", () => {
     viewModel.isOpen.Value = false;
-    systemUnderTest.openExitModal();
+    systemUnderTest.open();
     expect(viewModel.isOpen.Value).toBe(true);
   });
 });
