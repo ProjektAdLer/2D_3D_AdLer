@@ -3,8 +3,8 @@ import CoreDIContainer from "../../../../Components/Core/DependencyInjection/Cor
 import { mock } from "jest-mock-extended";
 import INotificationManagerPresenter from "../../../Core/Presentation/React/GeneralComponents/NotificationManager/INotificationManagerPresenter";
 import IBottomTooltipPresenter from "../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
-import { ElementTO } from "../../../Core/Ports/WorldPort/IWorldPort";
 import { logger } from "../../../../Lib/Logger";
+import ElementTO from "../../../Core/Application/DataTransferObjects/ElementTO";
 
 jest.mock("src/Lib/Logger");
 
@@ -36,94 +36,6 @@ describe("UIPort", () => {
     expect(
       mockNotificationManagerPresenterMock.presentErrorMessage
     ).toHaveBeenCalledWith("error message", "error");
-  });
-
-  test("hideBottomTooltip throws error if BottomTooltipPresenter is not registered", () => {
-    expect(() => {
-      systemUnderTest.hideBottomTooltip();
-    }).toThrowError("BottomTooltipPresenter not registered");
-  });
-
-  test("hideBottomTooltip calls the BottomTooltipPresenter hide method", () => {
-    const mockBottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
-    systemUnderTest.registerBottomTooltipPresenter(
-      mockBottomTooltipPresenterMock
-    );
-
-    systemUnderTest.hideBottomTooltip();
-
-    expect(mockBottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
-  });
-
-  test("displayExitQueryTooltip throws error if BottomTooltipPresenter is not registered", () => {
-    expect(() => {
-      systemUnderTest.displayExitQueryTooltip();
-    }).toThrowError("BottomTooltipPresenter not registered");
-  });
-
-  test("displayElementSummaryTooltip throws error if BottomTooltipPresenter is not registered", () => {
-    expect(() => {
-      systemUnderTest.displayElementSummaryTooltip({} as ElementTO);
-    }).toThrowError("BottomTooltipPresenter not registered");
-  });
-  test("displayExitQueryTooltip calls the corresponding BottomTooltipPresenter method", () => {
-    const mockBottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
-    systemUnderTest.registerBottomTooltipPresenter(
-      mockBottomTooltipPresenterMock
-    );
-
-    systemUnderTest.displayExitQueryTooltip();
-
-    expect(
-      mockBottomTooltipPresenterMock.displayExitQueryTooltip
-    ).toHaveBeenCalledTimes(1);
-  });
-
-  test("displayElementSummaryTooltip calls the corresponding BottomTooltipPresenter method", () => {
-    const mockBottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
-    systemUnderTest.registerBottomTooltipPresenter(
-      mockBottomTooltipPresenterMock
-    );
-    const ElementTO: ElementTO = {
-      id: 42,
-      name: "name",
-      elementData: {
-        type: "h5p",
-      },
-    };
-
-    systemUnderTest.displayElementSummaryTooltip(ElementTO);
-
-    expect(
-      mockBottomTooltipPresenterMock.displayElementSummaryTooltip
-    ).toHaveBeenCalledTimes(1);
-    expect(
-      mockBottomTooltipPresenterMock.displayElementSummaryTooltip
-    ).toHaveBeenCalledWith(ElementTO);
-  });
-
-  test("registerBottomTooltipPresenter registeres the presenter if none is present", () => {
-    const mockBottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
-
-    systemUnderTest.registerBottomTooltipPresenter(
-      mockBottomTooltipPresenterMock
-    );
-
-    expect(systemUnderTest["bottomTooltipPresenter"]).toBe(
-      mockBottomTooltipPresenterMock
-    );
-  });
-
-  test("registerBottomTooltipPresenter warns if BottomTooltipPresenter is already registered", () => {
-    const mockBottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
-    systemUnderTest.registerBottomTooltipPresenter(
-      mockBottomTooltipPresenterMock
-    );
-    systemUnderTest.registerBottomTooltipPresenter(
-      mockBottomTooltipPresenterMock
-    );
-
-    expect(logger.warn).toHaveBeenCalledTimes(1);
   });
 
   test("registerNotificationManager registers the presenter if none is present", () => {

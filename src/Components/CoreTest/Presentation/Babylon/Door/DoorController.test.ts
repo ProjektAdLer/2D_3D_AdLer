@@ -1,11 +1,12 @@
 import { ActionEvent } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
 import DoorController from "../../../../Core/Presentation/Babylon/Door/DoorController";
 import DoorViewModel from "../../../../Core/Presentation/Babylon/Door/DoorViewModel";
-const uiPortMock = mock<IUIPort>();
+import IBottomTooltipPresenter from "../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
+
+const bottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
 
 describe("DoorController", () => {
   let viewModel: DoorViewModel;
@@ -13,7 +14,9 @@ describe("DoorController", () => {
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
-    CoreDIContainer.rebind(PORT_TYPES.IUIPort).toConstantValue(uiPortMock);
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    ).toConstantValue(bottomTooltipPresenterMock);
   });
 
   beforeEach(() => {
@@ -25,19 +28,21 @@ describe("DoorController", () => {
     CoreDIContainer.restore();
   });
 
-  test("pointerOver calls IUIPort.displayExitQueryTooltip", () => {
+  test("pointerOver calls BottomTooltipPresenter.displayExitQueryTooltip", () => {
     systemUnderTest.pointerOver();
 
-    expect(uiPortMock.displayExitQueryTooltip).toHaveBeenCalledTimes(1);
+    expect(
+      bottomTooltipPresenterMock.displayExitQueryTooltip
+    ).toHaveBeenCalledTimes(1);
   });
 
-  test("pointerOut calls IUIPort.hideBottomTooltip", () => {
+  test("pointerOut calls BottomTooltipPresenter.hide", () => {
     systemUnderTest.pointerOut();
 
-    expect(uiPortMock.hideBottomTooltip).toHaveBeenCalledTimes(1);
+    expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
   });
 
-  test("clicked calls IUIPort.displayExitQueryTooltip when pointerType is touch", () => {
+  test("clicked calls BottomTooltipPresenter.displayExitQueryTooltip when pointerType is touch", () => {
     const mockedEvent: ActionEvent = {
       sourceEvent: {
         pointerType: "touch",
@@ -50,6 +55,8 @@ describe("DoorController", () => {
 
     systemUnderTest.clicked(mockedEvent);
 
-    expect(uiPortMock.displayExitQueryTooltip).toHaveBeenCalledTimes(1);
+    expect(
+      bottomTooltipPresenterMock.displayExitQueryTooltip
+    ).toHaveBeenCalledTimes(1);
   });
 });
