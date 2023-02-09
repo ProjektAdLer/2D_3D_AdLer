@@ -8,10 +8,7 @@ export interface WorldSelectionWorldData {
 export default class WorldSelectionViewModel {
   userWorlds: Observable<WorldSelectionWorldData[]> = new Observable<
     WorldSelectionWorldData[]
-  >([
-    { id: 1, name: "World 1", isCompleted: false },
-    { id: 2, name: "World 2", isCompleted: true },
-  ]);
+  >([{ id: 0, name: "Adler flieg!", isCompleted: false }]);
 
   selectedRowID: Observable<number> = new Observable<number>(-1);
 }

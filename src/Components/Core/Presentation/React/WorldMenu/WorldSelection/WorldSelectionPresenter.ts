@@ -8,6 +8,7 @@ export default class WorldSelectionPresenter
   constructor(private viewModel: WorldSelectionViewModel) {}
 
   onUserWorldsLoaded(userWorlds: UserWorldsTO): void {
+    this.viewModel.userWorlds.Value = [];
     userWorlds.worldInfo.forEach((world) => {
       this.viewModel.userWorlds.Value.push({
         id: world[0],
