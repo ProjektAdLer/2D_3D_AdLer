@@ -4,8 +4,6 @@ import NotificationManagerController from "./NotificationManagerController";
 import NotificationManagerPresenter from "./NotificationManagerPresenter";
 import NotificationManagerViewModel from "./NotificationManagerViewModel";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
-import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import IUIPort from "../../../../Ports/UIPort/IUIPort";
 import INotificationManagerPresenter from "./INotificationManagerPresenter";
