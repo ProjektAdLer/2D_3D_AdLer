@@ -1,7 +1,6 @@
-import INotificationManagerPresenter from "../../Presentation/React/GeneralComponents/NotificationManager/INotificationManagerPresenter";
-import { NotificationType } from "./IUIAdapter";
+import { IAbstractPort } from "../AbstractPort/IAbstractPort";
+import IUIAdapter, { NotificationType } from "./IUIAdapter";
 
-export default interface IUIPort {
-  registerNotificationManager(presenter: INotificationManagerPresenter): void;
+export default interface IUIPort extends IAbstractPort<IUIAdapter> {
   displayNotification(errorMessage: string, type: NotificationType): void;
 }

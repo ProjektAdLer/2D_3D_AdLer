@@ -8,13 +8,15 @@ import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
 import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import IUIPort from "../../../../Ports/UIPort/IUIPort";
+import INotificationManagerPresenter from "./INotificationManagerPresenter";
+import INotificationManagerController from "./INotificationManagerController";
 
 @injectable()
 export default class NotificationManagerBuilder extends PresentationBuilder<
   NotificationManagerViewModel,
-  NotificationManagerController,
+  INotificationManagerController,
   undefined,
-  NotificationManagerPresenter
+  INotificationManagerPresenter
 > {
   constructor() {
     super(
@@ -25,21 +27,10 @@ export default class NotificationManagerBuilder extends PresentationBuilder<
     );
   }
 
-  override buildController(): void {
-    super.buildController();
-    CoreDIContainer.get<ViewModelControllerProvider>(
-      CORE_TYPES.IViewModelControllerProvider
-    ).registerTupel(
-      this.viewModel,
-      this.controller,
-      NotificationManagerViewModel
-    );
-  }
-
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<IUIPort>(
-      PORT_TYPES.IUIPort
-    ).registerNotificationManager(this.presenter!);
+    CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort).registerAdapter(
+      this.presenter!
+    );
   }
 }
