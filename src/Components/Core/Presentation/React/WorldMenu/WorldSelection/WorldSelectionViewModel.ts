@@ -2,15 +2,15 @@ import Observable from "src/Lib/Observable";
 
 export interface WorldSelectionWorldData {
   id: number;
+  name: string;
   isCompleted: boolean;
-  title: string;
 }
 export default class WorldSelectionViewModel {
-  worlds: Observable<WorldSelectionWorldData[]> = new Observable<
+  userWorlds: Observable<WorldSelectionWorldData[]> = new Observable<
     WorldSelectionWorldData[]
   >([
-    { id: 1, isCompleted: false, title: "World 1" },
-    { id: 2, isCompleted: false, title: "World 2" },
+    { id: 1, name: "World 1", isCompleted: false },
+    { id: 2, name: "World 2", isCompleted: true },
   ]);
 
   selectedRowID: Observable<number> = new Observable<number>(-1);

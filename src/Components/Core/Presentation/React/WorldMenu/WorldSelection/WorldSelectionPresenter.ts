@@ -1,4 +1,4 @@
-import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
+import UserWorldsTO from "src/Components/Core/Application/DataTransferObjects/UserWorldsTO";
 import IWorldSelectionPresenter from "./IWorldSelectionPresenter";
 import WorldSelectionViewModel from "./WorldSelectionViewModel";
 
@@ -7,18 +7,13 @@ export default class WorldSelectionPresenter
 {
   constructor(private viewModel: WorldSelectionViewModel) {}
 
-  onWorldLoaded(): void {
-    // this.viewModel.worlds.Value =
-    //   // universeTO.worlds;
-    //   [{ id: 1 }, { id: 2 }];
-  }
-
-  private worldDataLoaded(worldTO: WorldTO): void {
-    // this.viewModel.worlds.Value.forEach((world) => {
-    //   let worldData = { world.id, false};
-    //   //check with worldTO about completed status
-    //   this.viewModel.worldsCompleted.Value.push([{world.id, false}]);
-    //   }
-    // });
+  onUserWorldsLoaded(userWorlds: UserWorldsTO): void {
+    userWorlds.worldInfo.forEach((world) => {
+      this.viewModel.userWorlds.Value.push({
+        id: world[0],
+        name: world[1],
+        isCompleted: false,
+      });
+    });
   }
 }

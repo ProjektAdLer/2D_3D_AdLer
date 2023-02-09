@@ -6,12 +6,19 @@ import IWorldAdapter from "./IWorldAdapter";
 import ElementTO from "../../Application/DataTransferObjects/ElementTO";
 import SpaceScoreTO from "../../Application/DataTransferObjects/SpaceScoreTO";
 import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
+import UserWorldsTO from "../../Application/DataTransferObjects/UserWorldsTO";
 
 @injectable()
 export default class WorldPort
   extends AbstractPort<IWorldAdapter>
   implements IWorldPort
 {
+  // userWorlds
+  public onUserWorldsLoaded(userWorldsTO: UserWorldsTO): void {
+    this.adapters.forEach((adapter) => {
+      if (adapter.onUserWorldsLoaded) adapter.onUserWorldsLoaded(userWorldsTO);
+    });
+  }
   // world
   public onWorldLoaded(worldTO: WorldTO): void {
     this.adapters.forEach((adapter) => {

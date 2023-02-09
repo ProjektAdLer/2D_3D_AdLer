@@ -15,7 +15,9 @@ export default function WorldSelection() {
     WorldSelectionViewModel,
     IWorldSelectionController
   >(BUILDER_TYPES.IWorldSelectionBuilder);
-  const [worlds] = useObservable<WorldSelectionWorldData[]>(viewModel?.worlds);
+  const [worlds] = useObservable<WorldSelectionWorldData[]>(
+    viewModel?.userWorlds
+  );
   const [selectedRowID] = useObservable<number>(viewModel?.selectedRowID);
 
   if (!viewModel || !controller) return null;
@@ -31,7 +33,7 @@ export default function WorldSelection() {
           <li className="flex items-center" key={world.id}>
             <WorldSelectionRow
               icon={worldIcon}
-              title={world.title}
+              title={world.name}
               selected={selectedRowID === world.id}
               onClickCallback={() => controller.onWorldRowClicked(world.id)}
             />
