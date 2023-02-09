@@ -4,13 +4,13 @@ import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IE
 import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import ILoadWorldUseCase from "../LoadWorld/ILoadWorldUseCase";
 import { Semaphore } from "src/Lib/Semaphore";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import { logger } from "src/Lib/Logger";
 import UserWorldsEntity from "src/Components/Core/Domain/Entities/UserWorldsEntity";
+import ILoadUserWorldsUseCase from "./ILoadUserWorldsUseCase";
 
-export default class LoadUserWorldsUseCase implements ILoadWorldUseCase {
+export default class LoadUserWorldsUseCase implements ILoadUserWorldsUseCase {
   constructor(
     @inject(PORT_TYPES.IWorldPort)
     private worldPort: IWorldPort,
@@ -19,7 +19,9 @@ export default class LoadUserWorldsUseCase implements ILoadWorldUseCase {
     @inject(CORE_TYPES.IBackendAdapter)
     private backendAdapter: IBackendAdapter
   ) {}
+
   private semaphore = new Semaphore("LoadUserWorlds in Use", 1);
+
   async executeAsync(): Promise<void> {
     const lock = await this.semaphore.acquire();
 
@@ -40,6 +42,7 @@ export default class LoadUserWorldsUseCase implements ILoadWorldUseCase {
 
     lock.release();
   }
+
   private async load(userData: UserDataEntity): Promise<UserWorldsEntity> {
     const coursesList = await this.backendAdapter.getCoursesAvailableForUser(
       userData.userToken
