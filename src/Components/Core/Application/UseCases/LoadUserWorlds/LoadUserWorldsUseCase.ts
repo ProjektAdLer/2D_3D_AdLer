@@ -1,4 +1,4 @@
-import { inject } from "inversify";
+import { inject, injectable } from "inversify";
 import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
@@ -10,6 +10,7 @@ import { logger } from "src/Lib/Logger";
 import UserWorldsEntity from "src/Components/Core/Domain/Entities/UserWorldsEntity";
 import ILoadUserWorldsUseCase from "./ILoadUserWorldsUseCase";
 
+@injectable()
 export default class LoadUserWorldsUseCase implements ILoadUserWorldsUseCase {
   constructor(
     @inject(PORT_TYPES.IWorldPort)
@@ -51,6 +52,7 @@ export default class LoadUserWorldsUseCase implements ILoadUserWorldsUseCase {
 
     const userWorldsEntity = new UserWorldsEntity();
     userWorldsEntity.UserToken = userData.userToken;
+    userWorldsEntity.worldInfo = [];
     for (let i = 0; i < worldCount; i++) {
       userWorldsEntity.worldInfo.push([
         coursesList.courses[i].courseId,

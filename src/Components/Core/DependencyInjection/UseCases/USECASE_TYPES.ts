@@ -1,4 +1,5 @@
 const USECASE_TYPES = {
+  ILoadUserWorldsUseCase: Symbol("ILoadUserWorldsUseCase"),
   ILoadWorldUseCase: Symbol("ILoadWorldUseCase"),
   ILoadAvatarUseCase: Symbol("ILoadAvatarUseCase"),
   ILoadElementUseCase: Symbol("ILoadElementUseCase"),

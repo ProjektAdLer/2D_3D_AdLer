@@ -9,12 +9,28 @@ import WorldSelectionViewModel, {
 
 import worldSolved from "../../../../../../Assets/icons/14-1-world-completed/world-completed-icon-nobg.svg";
 import worldAvailable from "../../../../../../Assets/icons/14-world/world-icon-nobg.svg";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import { useInjection } from "inversify-react";
+import ILoadUserWorldsUseCase from "src/Components/Core/Application/UseCases/LoadUserWorlds/ILoadUserWorldsUseCase";
+import { useEffect } from "react";
 
 export default function WorldSelection() {
+  const loadUserWorldsUseCase = useInjection<ILoadUserWorldsUseCase>(
+    USECASE_TYPES.ILoadUserWorldsUseCase
+  );
   const [viewModel, controller] = useBuilder<
     WorldSelectionViewModel,
     IWorldSelectionController
   >(BUILDER_TYPES.IWorldSelectionBuilder);
+
+  useEffect(() => {
+    // call load world use case to get relevant data
+    const loadUserWorldsAsync = async (): Promise<void> => {
+      await loadUserWorldsUseCase.executeAsync();
+    };
+    if (viewModel) loadUserWorldsAsync();
+  }, [viewModel]);
+
   const [worlds] = useObservable<WorldSelectionWorldData[]>(
     viewModel?.userWorlds
   );

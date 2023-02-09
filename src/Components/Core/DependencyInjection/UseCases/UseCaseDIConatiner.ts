@@ -18,10 +18,16 @@ import IScoreH5PElementUseCase from "../../Application/UseCases/ScoreH5PElement/
 import ScoreH5PElementUseCase from "../../Application/UseCases/ScoreH5PElement/ScoreH5PElementUseCase";
 import IGetElementSourceUseCase from "../../Application/UseCases/GetElementSource/IGetElementSourceUseCase";
 import GetElementSourceUseCase from "../../Application/UseCases/GetElementSource/GetElementSourceUseCase";
+import ILoadUserWorldsUseCase from "../../Application/UseCases/LoadUserWorlds/ILoadUserWorldsUseCase";
+import LoadUserWorldsUseCase from "../../Application/UseCases/LoadUserWorlds/LoadUserWorldsUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
   // Use Cases always have to be Singleton
+  bind<ILoadUserWorldsUseCase>(USECASE_TYPES.ILoadUserWorldsUseCase)
+    .to(LoadUserWorldsUseCase)
+    .inSingletonScope();
+
   bind<ILoadWorldUseCase>(USECASE_TYPES.ILoadWorldUseCase)
     .to(LoadWorldUseCase)
     .inSingletonScope();
