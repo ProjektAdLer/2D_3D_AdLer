@@ -1,5 +1,5 @@
-import LoadUserWorldsUseCase from "../../../../../../src/Components/Core/Application/UseCases/LoadUserWorlds/LoadUserWorldsUseCase";
-import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import LoadUserWorldsUseCase from "../../../../Core/Application/UseCases/LoadUserWorlds/LoadUserWorldsUseCase";
+import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
