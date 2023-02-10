@@ -9,6 +9,7 @@ import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import { logger } from "src/Lib/Logger";
 import UserWorldsEntity from "src/Components/Core/Domain/Entities/UserWorldsEntity";
 import ILoadUserWorldsUseCase from "./ILoadUserWorldsUseCase";
+import type IUIPort from "src/Components/Core/Ports/UIPort/IUIPort";
 
 @injectable()
 export default class LoadUserWorldsUseCase implements ILoadUserWorldsUseCase {
@@ -18,7 +19,9 @@ export default class LoadUserWorldsUseCase implements ILoadUserWorldsUseCase {
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter)
-    private backendAdapter: IBackendAdapter
+    private backendAdapter: IBackendAdapter,
+    @inject(PORT_TYPES.IUIPort)
+    private uiPort: IUIPort
   ) {}
 
   private semaphore = new Semaphore("LoadUserWorlds in Use", 1);
@@ -29,6 +32,7 @@ export default class LoadUserWorldsUseCase implements ILoadUserWorldsUseCase {
     const userData = this.container.getEntitiesOfType(UserDataEntity);
 
     if (userData.length === 0 || userData[0]?.isLoggedIn === false) {
+      this.uiPort.displayNotification("User is not logged in!", "error");
       logger.error("User is not logged in!");
       return Promise.reject("User is not logged in");
     }

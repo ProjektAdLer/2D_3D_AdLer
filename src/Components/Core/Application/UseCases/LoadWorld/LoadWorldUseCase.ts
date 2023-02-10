@@ -17,6 +17,7 @@ import ElementTO from "../../DataTransferObjects/ElementTO";
 import { Semaphore } from "src/Lib/Semaphore";
 import WorldStatusTO from "../../DataTransferObjects/WorldStatusTO";
 import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
+import { logger } from "src/Lib/Logger";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -44,6 +45,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
     if (userData.length === 0 || userData[0]?.isLoggedIn === false) {
       this.uiPort.displayNotification("User is not logged in!", "error");
+      logger.error("User is not logged in!");
       return Promise.reject("User is not logged in");
     }
 
