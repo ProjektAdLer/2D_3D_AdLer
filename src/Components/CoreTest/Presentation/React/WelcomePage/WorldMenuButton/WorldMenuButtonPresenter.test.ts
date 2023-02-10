@@ -13,6 +13,6 @@ describe("WorldMenuButtonPresenter", () => {
 
   test("should set login successfull in VM", () => {
     systemUnderTest.onLoginSuccessful();
-    expect(vm.loggedInMoodle.Value).toBe(true);
+    expect(vm.userLoggedIn.Value).toBe(true);
   });
 });

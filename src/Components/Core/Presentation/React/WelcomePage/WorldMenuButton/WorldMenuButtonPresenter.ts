@@ -6,6 +6,6 @@ export default class WorldMenuButtonPresenter
 {
   constructor(private viewModel: WorldMenuButtonViewModel) {}
   onLoginSuccessful(): void {
-    this.viewModel.loggedInMoodle.Value = true;
+    this.viewModel.userLoggedIn.Value = true;
   }
 }

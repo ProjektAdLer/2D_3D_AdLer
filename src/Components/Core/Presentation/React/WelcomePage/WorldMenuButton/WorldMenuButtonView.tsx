@@ -4,17 +4,32 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import WorldMenuButtonViewModel from "./WorldMenuButtonViewModel";
 import history from "history/browser";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
+import { useInjection } from "inversify-react";
+import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import { useEffect } from "react";
 
 export default function WorldMenuButton() {
   const [viewModel] = useBuilder<WorldMenuButtonViewModel, undefined>(
     BUILDER_TYPES.IWorldMenuButtonBuilder
   );
-  const [loggedInMoodle] = useObservable<boolean>(viewModel?.loggedInMoodle);
+  const getLoginStatusUseCase = useInjection<IGetLoginStatusUseCase>(
+    USECASE_TYPES.IGetLoginStatusUseCase
+  );
+
+  const [userLoggedIn, setUserLoggedIn] = useObservable<boolean>(
+    viewModel?.userLoggedIn
+  );
+
+  useEffect(() => {
+    setUserLoggedIn(getLoginStatusUseCase.execute());
+  }, []);
+
   return (
     <div>
       <StyledButton
         shape="freefloatleft"
-        disabled={!loggedInMoodle}
+        disabled={!userLoggedIn}
         onClick={() => history.push("/worldmenu")}
       >
         Gehe zum Lernraum Menü
