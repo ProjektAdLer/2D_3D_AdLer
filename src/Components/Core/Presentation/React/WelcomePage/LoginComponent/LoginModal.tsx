@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
