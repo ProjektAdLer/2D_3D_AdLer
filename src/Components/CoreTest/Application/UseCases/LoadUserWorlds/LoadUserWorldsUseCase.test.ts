@@ -8,8 +8,11 @@ import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 import UserWorldsEntity from "../../../../Core/Domain/Entities/UserWorldsEntity";
 import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
+import IBackend from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
+import { minimalGetWorldDataResponse } from "../../../Adapters/BackendAdapter/BackendResponses";
+import WorldStatusTO from "../../../../Core/Application/DataTransferObjects/WorldStatusTO";
 
-// const backendMock = mock<IBackend>();
+const backendMock = mock<IBackend>();
 const worldPortMock = mock<IWorldPort>();
 const uiPortMock = mock<IUIPort>();
 const entityContainerMock = mock<IEntityContainer>();
@@ -100,5 +103,32 @@ describe("LoadUserWorldsUseCase", () => {
     await systemUnderTest.executeAsync();
 
     expect(entityContainerMock.createEntity).not.toHaveBeenCalled();
+  });
+
+  test.skip("loads the UserWorlds and notifies its presenters", async () => {
+    // mock user data response
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+      mockedGetEntitiesOfTypeUserDataReturnValue
+    );
+    // mock userWorlds response
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([]);
+
+    // mock backend response
+    backendMock.getCoursesAvailableForUser.mockResolvedValue({
+      courses: [
+        {
+          courseId: 1,
+          courseName: "Testkurs 1",
+        },
+        {
+          courseId: 2,
+          courseName: "Testkurs 2",
+        },
+      ],
+    });
+
+    await systemUnderTest.executeAsync();
+
+    expect(worldPortMock.onUserWorldsLoaded).toHaveBeenCalledTimes(1);
   });
 });
