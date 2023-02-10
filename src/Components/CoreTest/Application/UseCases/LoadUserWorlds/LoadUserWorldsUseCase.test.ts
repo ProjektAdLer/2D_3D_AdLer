@@ -9,8 +9,6 @@ import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 import UserWorldsEntity from "../../../../Core/Domain/Entities/UserWorldsEntity";
 import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
 import IBackend from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
-import { minimalGetWorldDataResponse } from "../../../Adapters/BackendAdapter/BackendResponses";
-import WorldStatusTO from "../../../../Core/Application/DataTransferObjects/WorldStatusTO";
 
 const backendMock = mock<IBackend>();
 const worldPortMock = mock<IWorldPort>();
@@ -22,8 +20,10 @@ const mockedGetEntitiesOfTypeUserDataReturnValue = [
     userToken: "token",
   } as UserDataEntity,
 ];
+
 describe("LoadUserWorldsUseCase", () => {
   let systemUnderTest: LoadUserWorldsUseCase;
+
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
@@ -31,7 +31,14 @@ describe("LoadUserWorldsUseCase", () => {
       CORE_TYPES.IEntityContainer
     ).toConstantValue(entityContainerMock);
     CoreDIContainer.rebind(PORT_TYPES.IUIPort).toConstantValue(uiPortMock);
+    CoreDIContainer.rebind(PORT_TYPES.IWorldPort).toConstantValue(
+      worldPortMock
+    );
+    CoreDIContainer.rebind(CORE_TYPES.IBackendAdapter).toConstantValue(
+      backendMock
+    );
   });
+
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(LoadUserWorldsUseCase);
   });
@@ -39,6 +46,7 @@ describe("LoadUserWorldsUseCase", () => {
   afterAll(() => {
     CoreDIContainer.restore();
   });
+
   test("Detects, if a User is not logged in", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       {
@@ -59,6 +67,7 @@ describe("LoadUserWorldsUseCase", () => {
       "error"
     );
   });
+
   test("Throws, if no User Entity is present", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([]);
 
@@ -70,6 +79,7 @@ describe("LoadUserWorldsUseCase", () => {
       UserDataEntity
     );
   });
+
   test("Displays error, if User is not logged in", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       {
@@ -88,6 +98,7 @@ describe("LoadUserWorldsUseCase", () => {
       "error"
     );
   });
+
   test("doesn't load UserWorlds, if an entity is available", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
       mockedGetEntitiesOfTypeUserDataReturnValue
@@ -105,7 +116,7 @@ describe("LoadUserWorldsUseCase", () => {
     expect(entityContainerMock.createEntity).not.toHaveBeenCalled();
   });
 
-  test.skip("loads the UserWorlds and notifies its presenters", async () => {
+  test("loads the UserWorlds and notifies its presenters", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
       mockedGetEntitiesOfTypeUserDataReturnValue
