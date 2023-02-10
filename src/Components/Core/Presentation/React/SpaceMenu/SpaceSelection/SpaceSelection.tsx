@@ -1,6 +1,5 @@
 import { useInjection } from "inversify-react";
 import { useEffect } from "react";
-import ICalculateSpaceScoreUseCase from "src/Components/Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import ILoadWorldUseCase from "src/Components/Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
@@ -12,6 +11,7 @@ import SpaceSelectionViewModel, {
   SpaceSelectionSpaceData,
 } from "./SpaceSelectionViewModel";
 
+// icons
 import spaceSolved from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import spaceAvailable from "../../../../../../Assets/icons/27-1-lock-open/lock-icon-open-nobg.svg";
 import spaceLocked from "../../../../../../Assets/icons/27-lock-closed/lock-icon-closed-nobg.svg";

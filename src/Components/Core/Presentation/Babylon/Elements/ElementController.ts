@@ -1,9 +1,7 @@
 import bind from "bind-decorator";
 import ILoadElementUseCase from "../../../Application/UseCases/ElementStarted/ILoadElementUseCase";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
-import IUIPort from "../../../Ports/UIPort/IUIPort";
 import IElementController from "./IElementController";
 import ElementViewModel from "./ElementViewModel";
 import { ActionEvent } from "@babylonjs/core/Actions/actionEvent";
