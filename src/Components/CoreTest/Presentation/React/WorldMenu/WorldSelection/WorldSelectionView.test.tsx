@@ -9,14 +9,24 @@ import WorldSelection from "../../../../../Core/Presentation/React/WorldMenu/Wor
 import IWorldSelectionController from "../../../../../Core/Presentation/React/WorldMenu/WorldSelection/IWorldSelectionController";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
+import ILoadUserWorldsUseCase from "../../../../../Core/Application/UseCases/LoadUserWorlds/ILoadUserWorldsUseCase";
+import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 
+const loadUserWorldsUseCase = mock<ILoadUserWorldsUseCase>();
 describe("WorldSelection", () => {
+  beforeAll(() => {
+    CoreDIContainer.unbindAll();
+
+    CoreDIContainer.bind<ILoadUserWorldsUseCase>(
+      USECASE_TYPES.ILoadUserWorldsUseCase
+    ).toConstantValue(loadUserWorldsUseCase);
+  });
   test("should render and call controller on click", () => {
     const vm = new WorldSelectionViewModel();
-    vm.worlds.Value = [
+    vm.userWorlds.Value = [
       {
         id: 1,
-        title: "test",
+        name: "test",
         isCompleted: true,
       } as WorldSelectionWorldData,
     ];
@@ -61,10 +71,10 @@ describe("WorldSelection", () => {
 
   test("should render uncompleted room buttons without issues", () => {
     const vm = new WorldSelectionViewModel();
-    vm.worlds.Value = [
+    vm.userWorlds.Value = [
       {
         id: 1,
-        title: "test",
+        name: "test",
         isCompleted: false,
       } as WorldSelectionWorldData,
     ];

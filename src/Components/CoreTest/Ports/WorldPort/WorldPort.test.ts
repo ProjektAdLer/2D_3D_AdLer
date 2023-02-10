@@ -6,6 +6,7 @@ import { mock } from "jest-mock-extended";
 import IWorldAdapter from "../../../Core/Ports/WorldPort/IWorldAdapter";
 import SpaceScoreTO from "../../../Core/Application/DataTransferObjects/SpaceScoreTO";
 import ElementTO from "../../../Core/Application/DataTransferObjects/ElementTO";
+import UserWorldsTO from "../../../Core/Application/DataTransferObjects/UserWorldsTO";
 
 describe("WorldPort", () => {
   let systemUnderTest: WorldPort;
@@ -20,6 +21,18 @@ describe("WorldPort", () => {
 
   afterEach(() => {
     CoreDIContainer.restore();
+  });
+
+  test("onUserWorldsLoaded calls a registered adapter", () => {
+    const worldAdapterMock = mock<IWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockedUserWorldsTO = mock<UserWorldsTO>();
+
+    systemUnderTest.onUserWorldsLoaded(mockedUserWorldsTO);
+
+    expect(worldAdapterMock.onUserWorldsLoaded).toBeCalledWith(
+      mockedUserWorldsTO
+    );
   });
 
   test("onWorldLoaded calls a registered adapter", () => {
