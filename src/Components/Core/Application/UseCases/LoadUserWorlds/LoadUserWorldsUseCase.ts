@@ -55,7 +55,7 @@ export default class LoadUserWorldsUseCase implements ILoadUserWorldsUseCase {
     let worldCount = coursesList.courses.length;
 
     const userWorldsEntity = new UserWorldsEntity();
-    userWorldsEntity.UserToken = userData.userToken;
+    userWorldsEntity.userToken = userData.userToken;
     userWorldsEntity.worldInfo = [];
     for (let i = 0; i < worldCount; i++) {
       userWorldsEntity.worldInfo.push([

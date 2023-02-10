@@ -13,7 +13,7 @@ describe("WorldSelectionPresenter", () => {
   });
   test("onUserWorldsLoaded should set the correct values in the vm", () => {
     const userWorlds: UserWorldsTO = {
-      UserToken: "TestUserToken",
+      userToken: "TestUserToken",
       worldInfo: [
         [1, "Test World 1"],
         [2, "Test World 2"],

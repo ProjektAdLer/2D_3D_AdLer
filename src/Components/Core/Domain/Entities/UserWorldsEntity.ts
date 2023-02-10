@@ -1,4 +1,4 @@
 export default class UserWorldsEntity {
-  UserToken: string;
+  userToken: string;
   worldInfo: [number, string][]; // [worldID, worldName]
 }
