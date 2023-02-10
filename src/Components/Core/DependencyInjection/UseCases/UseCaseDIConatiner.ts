@@ -20,6 +20,8 @@ import IGetElementSourceUseCase from "../../Application/UseCases/GetElementSourc
 import GetElementSourceUseCase from "../../Application/UseCases/GetElementSource/GetElementSourceUseCase";
 import ILoadUserWorldsUseCase from "../../Application/UseCases/LoadUserWorlds/ILoadUserWorldsUseCase";
 import LoadUserWorldsUseCase from "../../Application/UseCases/LoadUserWorlds/LoadUserWorldsUseCase";
+import IGetLoginStatusUseCase from "../../Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
+import GetLoginStatusUseCase from "../../Application/UseCases/GetLoginStatus/GetLoginStatusUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -62,6 +64,10 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<IGetElementSourceUseCase>(USECASE_TYPES.IGetElementSourceUseCase)
     .to(GetElementSourceUseCase)
+    .inSingletonScope();
+
+  bind<IGetLoginStatusUseCase>(USECASE_TYPES.IGetLoginStatusUseCase)
+    .to(GetLoginStatusUseCase)
     .inSingletonScope();
 });
 

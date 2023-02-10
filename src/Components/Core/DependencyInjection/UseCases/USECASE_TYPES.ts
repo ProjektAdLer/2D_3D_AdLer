@@ -9,6 +9,7 @@ const USECASE_TYPES = {
   ILoadSpaceUseCase: Symbol("ILoadSpaceUseCase"),
   IScoreH5PElementUseCase: Symbol("IScoreH5PElementUseCase"),
   IGetElementSourceUseCase: Symbol("IGetElementSourceUseCase"),
+  IGetLoginStatusUseCase: Symbol("IGetLoginStatusUseCase"),
 };
 
 export default USECASE_TYPES;
