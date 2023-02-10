@@ -43,7 +43,7 @@ export default function ElementsDropdown() {
       <StyledContainer className="flex flex-col gap-2">
         {elements?.map((element, index) => (
           <StyledButton
-            key={element.name + index}
+            key={element.name}
             shape="freefloatleft"
             onClick={() => controller?.startElement(element.id)}
           >
