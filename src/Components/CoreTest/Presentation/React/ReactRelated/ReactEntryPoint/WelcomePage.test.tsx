@@ -3,9 +3,16 @@ import { render } from "@testing-library/react";
 import useBuilderMock from "../CustomHooks/useBuilder/useBuilderMock";
 import "@testing-library/jest-dom";
 import React from "react";
+import { Provider } from "inversify-react";
+import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
+
 describe("Welcome Page", () => {
   test("should render", () => {
     useBuilderMock([undefined, undefined]);
-    render(<WelcomePage />);
+    render(
+      <Provider container={CoreDIContainer}>
+        <WelcomePage />
+      </Provider>
+    );
   });
 });

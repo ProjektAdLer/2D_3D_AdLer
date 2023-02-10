@@ -7,7 +7,10 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import { createPortal } from "react-dom";
 import LoginModal from "./LoginModal";
-import React from "react";
+import React, { useEffect } from "react";
+import { useInjection } from "inversify-react";
+import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 /**
  * React Component that displays a login button. When clicked, a modal will be overlayed.
@@ -17,16 +20,25 @@ export default function LoginComponent() {
     LoginComponentViewModel,
     LoginComponentController
   >(BUILDER_TYPES.ILoginButtonBuilder);
+  const getLoginStatusUseCase = useInjection<IGetLoginStatusUseCase>(
+    USECASE_TYPES.IGetLoginStatusUseCase
+  );
 
   const [, setModalVisible] = useObservable<boolean>(viewModel?.modalVisible);
-  const [loginSuccessful] = useObservable<boolean>(viewModel?.loginSuccessful);
+  const [userLoggedIn, setUserLoggedIn] = useObservable<boolean>(
+    viewModel?.userLoggedIn
+  );
+
+  useEffect(() => {
+    setUserLoggedIn(getLoginStatusUseCase.execute());
+  }, []);
 
   if (!controller || !viewModel) return null;
 
   return (
     <React.Fragment>
       <StyledButton
-        color={loginSuccessful ? "success" : "default"}
+        color={userLoggedIn ? "success" : "default"}
         onClick={() => setModalVisible(true)}
       >
         <img src={moodleIcon} alt="Moodle-Icon"></img>
