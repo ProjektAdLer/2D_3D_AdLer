@@ -81,6 +81,8 @@ describe("WorldMenuButton", () => {
   });
 
   test("on click calls history.push", () => {
+    mockViewModel.userLoggedIn.Value = true;
+    getLoginStatusUseCaseMock.execute.mockReturnValue(true);
     useBuilderMock([mockViewModel, undefined]);
 
     const componentUnderTest = render(
@@ -88,7 +90,9 @@ describe("WorldMenuButton", () => {
         <WorldMenuButton />
       </Provider>
     );
+
     let button: HTMLElement = componentUnderTest.getByRole("button");
+    console.log(button);
     fireEvent.click(button);
 
     expect(historyPushMock).toHaveBeenCalledTimes(1);
