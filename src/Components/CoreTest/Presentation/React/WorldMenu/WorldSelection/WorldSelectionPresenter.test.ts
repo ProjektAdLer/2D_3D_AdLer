@@ -15,8 +15,8 @@ describe("WorldSelectionPresenter", () => {
     const userWorlds: UserWorldsTO = {
       userToken: "TestUserToken",
       worldInfo: [
-        [1, "Test World 1"],
-        [2, "Test World 2"],
+        { worldID: 1, worldName: "Test World 1" },
+        { worldID: 2, worldName: "Test World 2" },
       ],
     };
     systemUnderTest.onUserWorldsLoaded(userWorlds);

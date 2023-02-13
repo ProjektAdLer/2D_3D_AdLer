@@ -11,8 +11,8 @@ export default class WorldSelectionPresenter
     this.viewModel.userWorlds.Value = [];
     userWorlds.worldInfo.forEach((world) => {
       this.viewModel.userWorlds.Value.push({
-        id: world[0],
-        name: world[1],
+        id: world.worldID,
+        name: world.worldName,
         isCompleted: false,
       });
     });

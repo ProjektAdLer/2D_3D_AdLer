@@ -43,7 +43,7 @@ export default class LoadUserWorldsUseCase implements ILoadUserWorldsUseCase {
       userWorldsEntity = await this.load(userData[0]);
     }
 
-    this.worldPort.onUserWorldsLoaded(userWorldsEntity);
+    this.worldPort.onUserWorldsLoaded({ ...userWorldsEntity });
 
     lock.release();
   }
@@ -52,17 +52,19 @@ export default class LoadUserWorldsUseCase implements ILoadUserWorldsUseCase {
     const coursesList = await this.backendAdapter.getCoursesAvailableForUser(
       userData.userToken
     );
-    let worldCount = coursesList.courses.length;
 
     const userWorldsEntity = new UserWorldsEntity();
     userWorldsEntity.userToken = userData.userToken;
-    userWorldsEntity.worldInfo = [];
-    for (let i = 0; i < worldCount; i++) {
-      userWorldsEntity.worldInfo.push([
-        coursesList.courses[i].courseId,
-        coursesList.courses[i].courseName,
-      ]);
-    }
+    userWorldsEntity.worldInfo = coursesList.courses.map((course) => {
+      return {
+        worldID: course.courseId,
+        worldName: course.courseName,
+      };
+    });
+    this.container.createEntity<UserDataEntity>(
+      userWorldsEntity,
+      UserDataEntity
+    );
 
     return userWorldsEntity;
   }
