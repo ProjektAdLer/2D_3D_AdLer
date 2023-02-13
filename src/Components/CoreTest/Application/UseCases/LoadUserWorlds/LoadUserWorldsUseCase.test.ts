@@ -6,7 +6,6 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import { mock } from "jest-mock-extended";
 import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
-import UserWorldsEntity from "../../../../Core/Domain/Entities/UserWorldsEntity";
 import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
 import IBackend from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
 
@@ -14,12 +13,6 @@ const backendMock = mock<IBackend>();
 const worldPortMock = mock<IWorldPort>();
 const uiPortMock = mock<IUIPort>();
 const entityContainerMock = mock<IEntityContainer>();
-const mockedGetEntitiesOfTypeUserDataReturnValue = [
-  {
-    isLoggedIn: true,
-    userToken: "token",
-  } as UserDataEntity,
-];
 
 describe("LoadUserWorldsUseCase", () => {
   let systemUnderTest: LoadUserWorldsUseCase;
@@ -100,15 +93,18 @@ describe("LoadUserWorldsUseCase", () => {
   });
 
   test("doesn't load UserWorlds, if an entity is available", async () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
-      mockedGetEntitiesOfTypeUserDataReturnValue
-    );
-
-    const mockedUserWorldsEntity = new UserWorldsEntity();
-    mockedUserWorldsEntity.userToken = "testUserToken";
-    mockedUserWorldsEntity.worldInfo = [];
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
-      mockedUserWorldsEntity,
+      {
+        isLoggedIn: true,
+        userToken: "token",
+        username: "username",
+        availableWorlds: [
+          {
+            worldID: 1,
+            worldName: "Testwelt 1",
+          },
+        ],
+      } as UserDataEntity,
     ]);
 
     await systemUnderTest.executeAsync();
@@ -118,11 +114,14 @@ describe("LoadUserWorldsUseCase", () => {
 
   test("loads the UserWorlds and notifies its presenters", async () => {
     // mock user data response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
-      mockedGetEntitiesOfTypeUserDataReturnValue
-    );
-    // mock userWorlds response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([]);
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
+      {
+        isLoggedIn: true,
+        userToken: "token",
+        username: "username",
+        availableWorlds: [],
+      } as UserDataEntity,
+    ]);
 
     // mock backend response
     backendMock.getCoursesAvailableForUser.mockResolvedValue({

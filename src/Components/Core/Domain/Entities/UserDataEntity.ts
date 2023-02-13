@@ -1,5 +1,6 @@
 export default class UserDataEntity {
-  isLoggedIn: boolean;
-  username: string;
   userToken: string;
+  username: string;
+  isLoggedIn: boolean;
+  availableWorlds: { worldID: number; worldName: string }[] = [];
 }

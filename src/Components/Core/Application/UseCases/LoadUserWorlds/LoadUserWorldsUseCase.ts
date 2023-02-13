@@ -7,9 +7,13 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { Semaphore } from "src/Lib/Semaphore";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import { logger } from "src/Lib/Logger";
-import UserWorldsEntity from "src/Components/Core/Domain/Entities/UserWorldsEntity";
 import ILoadUserWorldsUseCase from "./ILoadUserWorldsUseCase";
 import type IUIPort from "src/Components/Core/Ports/UIPort/IUIPort";
+
+type AvailableWorldsArray = {
+  worldID: number;
+  worldName: string;
+}[];
 
 @injectable()
 export default class LoadUserWorldsUseCase implements ILoadUserWorldsUseCase {
@@ -29,43 +33,48 @@ export default class LoadUserWorldsUseCase implements ILoadUserWorldsUseCase {
   async executeAsync(): Promise<void> {
     const lock = await this.semaphore.acquire();
 
-    const userData = this.container.getEntitiesOfType(UserDataEntity);
+    const userEntities =
+      this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity);
 
-    if (userData.length === 0 || userData[0]?.isLoggedIn === false) {
+    if (userEntities.length === 0 || userEntities[0]?.isLoggedIn === false) {
       this.uiPort.displayNotification("User is not logged in!", "error");
       logger.error("User is not logged in!");
       return Promise.reject("User is not logged in");
     }
 
-    let userWorldEntities = this.container.getEntitiesOfType(UserWorldsEntity);
-    let userWorldsEntity = userWorldEntities[0];
-    if (!userWorldsEntity) {
-      userWorldsEntity = await this.load(userData[0]);
-    }
+    let loadedAvailableWorlds: AvailableWorldsArray;
+    if (userEntities[0].availableWorlds.length === 0) {
+      loadedAvailableWorlds = await this.loadAvailableWorlds(
+        userEntities[0].userToken
+      );
+      userEntities[0].availableWorlds = loadedAvailableWorlds;
 
-    this.worldPort.onUserWorldsLoaded({ ...userWorldsEntity });
+      this.worldPort.onUserWorldsLoaded({ worldInfo: loadedAvailableWorlds });
+    } else {
+      this.worldPort.onUserWorldsLoaded({
+        worldInfo: userEntities[0].availableWorlds,
+      });
+    }
 
     lock.release();
   }
 
-  private async load(userData: UserDataEntity): Promise<UserWorldsEntity> {
+  private async loadAvailableWorlds(
+    userToken: string
+  ): Promise<AvailableWorldsArray> {
     const coursesList = await this.backendAdapter.getCoursesAvailableForUser(
-      userData.userToken
+      userToken
     );
 
-    const userWorldsEntity = new UserWorldsEntity();
-    userWorldsEntity.userToken = userData.userToken;
-    userWorldsEntity.worldInfo = coursesList.courses.map((course) => {
-      return {
-        worldID: course.courseId,
-        worldName: course.courseName,
-      };
-    });
-    this.container.createEntity<UserDataEntity>(
-      userWorldsEntity,
-      UserDataEntity
+    const availableWorlds: AvailableWorldsArray = coursesList.courses.map(
+      (course) => {
+        return {
+          worldID: course.courseId,
+          worldName: course.courseName,
+        };
+      }
     );
 
-    return userWorldsEntity;
+    return availableWorlds;
   }
 }
