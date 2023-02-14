@@ -8,7 +8,7 @@ import IBackendAdapter, {
 } from "./IBackendAdapter";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import { ElementID } from "../../Domain/Types/EntityTypes";
-import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
+import BackendWorldStatusTO from "../../Application/DataTransferObjects/BackendWorldStatusTO";
 import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
 import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 
@@ -88,8 +88,8 @@ export default class BackendAdapter implements IBackendAdapter {
   async getWorldStatus(
     userToken: string,
     worldId: number
-  ): Promise<WorldStatusTO> {
-    const resp = await axios.get<WorldStatusTO>(
+  ): Promise<BackendWorldStatusTO> {
+    const resp = await axios.get<BackendWorldStatusTO>(
       config.serverURL + "/Courses/" + worldId + "/status",
       {
         headers: {

@@ -3,7 +3,7 @@ import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
 import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
-import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
+import BackendWorldStatusTO from "../../Application/DataTransferObjects/BackendWorldStatusTO";
 import { ElementID } from "../../Domain/Types/EntityTypes";
 import BackendAdapterUtils from "./BackendAdapterUtils";
 import IBackendAdapter, {
@@ -45,7 +45,10 @@ export default class MockBackendAdapter implements IBackendAdapter {
     });
   }
 
-  getWorldStatus(userToken: string, worldId: number): Promise<WorldStatusTO> {
+  getWorldStatus(
+    userToken: string,
+    worldId: number
+  ): Promise<BackendWorldStatusTO> {
     return Promise.resolve({
       courseId: 1,
       learningElements: [

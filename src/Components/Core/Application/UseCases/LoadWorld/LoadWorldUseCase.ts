@@ -15,7 +15,7 @@ import type IUIPort from "../../../Ports/UIPort/IUIPort";
 import WorldTO from "../../DataTransferObjects/WorldTO";
 import ElementTO from "../../DataTransferObjects/ElementTO";
 import { Semaphore } from "src/Lib/Semaphore";
-import WorldStatusTO from "../../DataTransferObjects/WorldStatusTO";
+import BackendWorldStatusTO from "../../DataTransferObjects/BackendWorldStatusTO";
 import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import { logger } from "src/Lib/Logger";
 
@@ -129,7 +129,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
   private mapElement = (
     element: ElementTO,
-    worldStatus: WorldStatusTO
+    worldStatus: BackendWorldStatusTO
   ): ElementEntity => {
     const entityToStore: ElementEntity = {
       id: element.id,
@@ -142,7 +142,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       hasScored:
         worldStatus.learningElements.find((e) => e.elementId === element.id)
           ?.successss || false,
-      parentCourseId: this.usedWorldId,
+      parentCourseId: worldStatus.courseId,
     };
 
     return this.container.createEntity<ElementEntity>(
