@@ -1,7 +1,7 @@
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import WorldDetailViewModel, {
-  WorldDetailWorldData,
+  WorldDetailSpaceData,
 } from "./WorldDetailViewModel";
 import worldIcon from "../../../../../../Assets/icons/14-world/world-icon-nobg.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
@@ -18,10 +18,15 @@ export default function WorldDetail() {
   const [name] = useObservable<string>(viewModel.name);
   const [description] = useObservable<string>(viewModel.description);
   const [goals] = useObservable<string>(viewModel.goals);
-  const [spaceCount] = useObservable<number>(viewModel.spaceCount);
+  const [spaces] = useObservable<WorldDetailSpaceData[]>(viewModel.spaces);
 
   // return if any of the observables is undefined
-  if (name === undefined || description === undefined || goals === undefined)
+  if (
+    name === undefined ||
+    name === "" ||
+    description === undefined ||
+    goals === undefined
+  )
     return null;
 
   return (
@@ -55,10 +60,35 @@ export default function WorldDetail() {
       )}
       <div className="pb-2 border-b border-gray-500">
         <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+          Räume:
+        </div>
+        <div className="items-start ml-6 lg:text:lg roboto-regular">
+          {spaces?.map((space) => {
+            return (
+              <div key={space.id}>
+                <div className="flex flex-row items-center">
+                  {space.name}
+                  {space.isCompleted ? (
+                    <div className="ml-2 text-green-500 roboto-regular">
+                      {"(abgeschlossen)"}
+                    </div>
+                  ) : (
+                    <div className="ml-2 text-red-500 roboto-regular">
+                      {"(noch nicht abgeschlossen)"}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className="pb-2 border-b border-gray-500">
+        <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
           Anzahl Räume:
         </div>
         <div className="items-start ml-6 lg:text:lg roboto-regular">
-          {spaceCount} Räume
+          {spaces?.length}
         </div>
       </div>
 

@@ -1,7 +1,7 @@
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import Observable from "src/Lib/Observable";
 
-export interface WorldDetailWorldData {
+export interface WorldDetailSpaceData {
   id: ComponentID;
   name: string;
   isCompleted: boolean;
@@ -14,7 +14,8 @@ export default class WorldDetailViewModel {
     "Default Description \n Default Description Part 2"
   );
   goals: Observable<string> = new Observable<string>("");
-  spaceCount: Observable<number> = new Observable<number>(0);
 
-  //Likely needs spaces as well (name, description, isCompleted, id)
+  spaces: Observable<WorldDetailSpaceData[]> = new Observable<
+    WorldDetailSpaceData[]
+  >([]);
 }
