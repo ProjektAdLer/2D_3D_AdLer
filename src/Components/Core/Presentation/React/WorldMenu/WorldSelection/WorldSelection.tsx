@@ -24,7 +24,7 @@ export default function WorldSelection() {
   >(BUILDER_TYPES.IWorldSelectionBuilder);
 
   useEffect(() => {
-    // call load world use case to get relevant data
+    // call load user worlds use case to get relevant data
     const loadUserWorldsAsync = async (): Promise<void> => {
       await loadUserWorldsUseCase.executeAsync();
     };

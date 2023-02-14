@@ -13,6 +13,6 @@ export default class WorldSelectionController
 
   onWorldRowClicked(worldID: number): void {
     this.viewModel.selectedRowID.Value = worldID;
-    // this.loadWorldUseCase.executeAsync(worldId);
+    //  this.loadWorldUseCase.executeAsync(worldID);
   }
 }
