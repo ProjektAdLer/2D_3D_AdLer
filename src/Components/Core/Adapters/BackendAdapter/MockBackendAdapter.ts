@@ -4,7 +4,7 @@ import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
 import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 import BackendWorldStatusTO from "../../Application/DataTransferObjects/BackendWorldStatusTO";
-import { ElementID } from "../../Domain/Types/EntityTypes";
+import { ComponentID } from "../../Domain/Types/EntityTypes";
 import BackendAdapterUtils from "./BackendAdapterUtils";
 import IBackendAdapter, {
   getWorldDataParams,
@@ -37,7 +37,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
 
   getElementScore(
     userToken: string,
-    elementId: ElementID
+    elementId: ComponentID
   ): Promise<ElementScoreTO> {
     return Promise.resolve({
       elementId: elementId,
@@ -119,8 +119,8 @@ export default class MockBackendAdapter implements IBackendAdapter {
 
   scoreElement(
     userToken: string,
-    elementId: ElementID,
-    courseId: ElementID
+    elementId: ComponentID,
+    courseId: ComponentID
   ): Promise<boolean> {
     return Promise.resolve(true);
   }

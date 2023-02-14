@@ -1,4 +1,4 @@
-import { ElementID } from "../../Domain/Types/EntityTypes";
+import { ComponentID } from "../../Domain/Types/EntityTypes";
 
 /**
  * Data Transfer Object for the Score data of a Space
@@ -12,5 +12,5 @@ export default class SpaceScoreTO {
   currentScore: number;
   requiredScore: number;
   maxScore: number;
-  spaceID: ElementID;
+  spaceID: ComponentID;
 }

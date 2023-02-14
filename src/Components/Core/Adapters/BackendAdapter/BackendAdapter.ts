@@ -7,7 +7,7 @@ import IBackendAdapter, {
   getWorldDataParams,
 } from "./IBackendAdapter";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
-import { ElementID } from "../../Domain/Types/EntityTypes";
+import { ComponentID } from "../../Domain/Types/EntityTypes";
 import BackendWorldStatusTO from "../../Application/DataTransferObjects/BackendWorldStatusTO";
 import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
 import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
@@ -65,8 +65,8 @@ export default class BackendAdapter implements IBackendAdapter {
 
   async getElementScore(
     userToken: string,
-    elementId: ElementID,
-    courseId: ElementID
+    elementId: ComponentID,
+    courseId: ComponentID
   ): Promise<ElementScoreTO> {
     const resp = await axios.get<ElementScoreTO>(
       config.serverURL +
@@ -178,8 +178,8 @@ export default class BackendAdapter implements IBackendAdapter {
 
   async scoreElement(
     userToken: string,
-    elementId: ElementID,
-    courseId: ElementID
+    elementId: ComponentID,
+    courseId: ComponentID
   ): Promise<boolean> {
     const response = await axios.patch<{
       isSuceess: boolean;

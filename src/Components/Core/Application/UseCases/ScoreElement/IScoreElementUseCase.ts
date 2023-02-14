@@ -1,11 +1,11 @@
-import { ElementID } from "../../../Domain/Types/EntityTypes";
+import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { IAsyncUsecase } from "../../Abstract/IAsyncUsecase";
 
 export default interface IScoreElementUseCase
   extends IAsyncUsecase<
     {
-      elementId: ElementID;
-      courseId: ElementID;
+      elementId: ComponentID;
+      courseId: ComponentID;
     },
     void
   > {}

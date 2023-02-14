@@ -1,12 +1,12 @@
-import { ElementID } from "../Types/EntityTypes";
+import { ComponentID } from "../Types/EntityTypes";
 import ElementEntity from "./ElementEntity";
 
 export default class SpaceEntity {
-  public id: ElementID;
+  public id: ComponentID;
   public name: string;
   public elements: ElementEntity[];
   public description: string;
   public goals: string;
-  public requirements: ElementID[];
+  public requirements: ComponentID[];
   public requiredScore: number;
 }

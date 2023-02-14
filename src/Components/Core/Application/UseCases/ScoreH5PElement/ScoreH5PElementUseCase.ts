@@ -1,4 +1,4 @@
-import { ElementID } from "../../../Domain/Types/EntityTypes";
+import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { inject, injectable } from "inversify";
 import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
 import ElementEntity from "src/Components/Core/Domain/Entities/ElementEntity";
@@ -26,8 +26,8 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
 
   async executeAsync(data?: {
     xapiData: XAPiEvent;
-    elementId: ElementID;
-    courseId: ElementID;
+    elementId: ComponentID;
+    courseId: ComponentID;
   }): Promise<boolean> {
     if (!data || !data.elementId || !data.xapiData) {
       return this.rejectWithWarning("data is (atleast partly) undefined!");

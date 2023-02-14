@@ -1,4 +1,4 @@
-import { ElementID } from "../../../Domain/Types/EntityTypes";
+import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { injectable } from "inversify";
 import { Vector2, Color3, Mesh, StandardMaterial } from "@babylonjs/core";
 import Observable from "../../../../../Lib/Observable";
@@ -42,5 +42,5 @@ export default class SpaceViewModel extends AbstractViewModel {
   public wallMaterial: Observable<StandardMaterial> =
     new Observable<StandardMaterial>();
 
-  public id: ElementID;
+  public id: ComponentID;
 }

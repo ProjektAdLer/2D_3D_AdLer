@@ -3,14 +3,17 @@ import { ElementTypes } from "src/Components/Core/Domain/Types/ElementTypes";
 import IScoreElementUseCase from "../../../../Application/UseCases/ScoreElement/IScoreElementUseCase";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPES";
-import { ElementID } from "../../../../Domain/Types/EntityTypes";
+import { ComponentID } from "../../../../Domain/Types/EntityTypes";
 import ElementModalViewModel from "./ElementModalViewModel";
 import IElementModalController from "./IElementModalController";
 
 export default class ElementModalController implements IElementModalController {
   constructor(private viewModel: ElementModalViewModel) {}
 
-  async scoreElement(elementId: ElementID, courseId: ElementID): Promise<void> {
+  async scoreElement(
+    elementId: ComponentID,
+    courseId: ComponentID
+  ): Promise<void> {
     if (this.viewModel.type.Value !== ElementTypes.h5p) {
       await CoreDIContainer.get<IScoreElementUseCase>(
         USECASE_TYPES.IScoreElementUseCase

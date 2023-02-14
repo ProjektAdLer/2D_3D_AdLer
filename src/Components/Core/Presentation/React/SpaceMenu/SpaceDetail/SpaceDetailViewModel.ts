@@ -1,9 +1,9 @@
-import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
+import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import Observable from "src/Lib/Observable";
 import { ElementTypeStrings } from "../../../../Domain/Types/ElementTypes";
 
 export interface SpaceDetailSpaceData {
-  id: ElementID;
+  id: ComponentID;
   name: string;
   isCompleted: boolean;
 }
@@ -16,7 +16,7 @@ export default class SpaceDetailViewModel {
   >([]);
 
   // space data
-  id: Observable<ElementID> = new Observable<ElementID>(undefined);
+  id: Observable<ComponentID> = new Observable<ComponentID>(undefined);
   name: Observable<string> = new Observable<string>("");
   description: Observable<string> = new Observable<string>("");
   goals: Observable<string> = new Observable<string>("");

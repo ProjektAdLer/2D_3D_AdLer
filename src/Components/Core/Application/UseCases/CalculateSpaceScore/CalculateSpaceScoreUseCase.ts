@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import { ElementID } from "src/Components/Core/Domain/Types/EntityTypes";
+import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
@@ -19,7 +19,7 @@ export default class CalculateSpaceScoreUseCase
     private worldPort: IWorldPort
   ) {}
 
-  execute(spaceID: ElementID): SpaceScoreTO {
+  execute(spaceID: ComponentID): SpaceScoreTO {
     const spaces = this.entitiyContainer.filterEntitiesOfType<SpaceEntity>(
       SpaceEntity,
       (e) => e.id === spaceID

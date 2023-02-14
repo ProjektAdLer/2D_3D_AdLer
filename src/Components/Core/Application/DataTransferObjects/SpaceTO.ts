@@ -1,4 +1,4 @@
-import { ElementID } from "../../Domain/Types/EntityTypes";
+import { ComponentID } from "../../Domain/Types/EntityTypes";
 import ElementTO from "./ElementTO";
 
 /**
@@ -15,12 +15,12 @@ import ElementTO from "./ElementTO";
  * @property {number} maxScore - The maximum score of the space
  */
 export default class SpaceTO {
-  id: ElementID;
+  id: ComponentID;
   name: string;
   elements: ElementTO[];
   description: string;
   goals: string;
-  requirements: ElementID[];
+  requirements: ComponentID[];
   requiredScore: number;
   currentScore: number;
   maxScore: number;

@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import { ElementID } from "../../../Domain/Types/EntityTypes";
+import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
@@ -27,8 +27,8 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
   ) {}
 
   async executeAsync(data: {
-    elementId: ElementID;
-    courseId: ElementID;
+    elementId: ComponentID;
+    courseId: ComponentID;
   }): Promise<void> {
     if (!data || !data.elementId) {
       return this.rejectWithWarning("data is (atleast partly) undefined!");
@@ -87,7 +87,7 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
     this.worldPort.onElementScored(true, data.elementId);
   }
 
-  private rejectWithWarning(message: string, id?: ElementID): Promise<void> {
+  private rejectWithWarning(message: string, id?: ComponentID): Promise<void> {
     logger.warn(`Tried scoring H5P learning element with ID ${id}. ` + message);
     return Promise.reject(message);
   }

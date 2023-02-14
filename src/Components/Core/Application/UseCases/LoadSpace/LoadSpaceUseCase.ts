@@ -8,9 +8,9 @@ import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContai
 import type ILoadWorldUseCase from "../LoadWorld/ILoadWorldUseCase";
 import ILoadSpaceUseCase from "./ILoadSpaceUseCase";
 import SpaceTO from "../../DataTransferObjects/SpaceTO";
-import { ElementID } from "../../../Domain/Types/EntityTypes";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
 import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 
 @injectable()
 export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
@@ -25,7 +25,7 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     private worldPort: IWorldPort
   ) {}
 
-  async executeAsync(id: ElementID): Promise<void> {
+  async executeAsync(id: ComponentID): Promise<void> {
     // try to get the world entity from the container, there should always be only one at most
     let worldEntity = this.container.getEntitiesOfType(WorldEntity)[0];
 

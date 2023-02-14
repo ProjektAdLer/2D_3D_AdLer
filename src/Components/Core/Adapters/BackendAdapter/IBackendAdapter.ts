@@ -1,4 +1,4 @@
-import { ElementID } from "../../Domain/Types/EntityTypes";
+import { ComponentID } from "../../Domain/Types/EntityTypes";
 import UserCredentials from "./Types/UserCredentials";
 import { XAPiEvent } from "../../Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
@@ -32,8 +32,8 @@ export default interface IBackendAdapter {
 
   getElementScore(
     userToken: string,
-    elementId: ElementID,
-    courseId: ElementID
+    elementId: ComponentID,
+    courseId: ComponentID
   ): Promise<ElementScoreTO>;
 
   getWorldData({
@@ -43,8 +43,8 @@ export default interface IBackendAdapter {
 
   scoreElement(
     userToken: string,
-    elementId: ElementID,
-    courseId: ElementID
+    elementId: ComponentID,
+    courseId: ComponentID
   ): Promise<boolean>;
 
   getWorldStatus(

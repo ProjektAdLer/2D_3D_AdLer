@@ -1,11 +1,11 @@
-import { ElementID } from "../../Domain/Types/EntityTypes";
+import { ComponentID } from "../../Domain/Types/EntityTypes";
 import { ElementTypeStrings } from "../../Domain/Types/ElementTypes";
 
 export default class ElementTO {
-  id: ElementID;
+  id: ComponentID;
   value: number;
-  parentSpaceId: ElementID;
-  parentCourseId: ElementID;
+  parentSpaceId: ComponentID;
+  parentCourseId: ComponentID;
   name: string;
   description: string;
   goals: string;
