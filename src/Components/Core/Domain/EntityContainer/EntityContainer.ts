@@ -4,9 +4,12 @@ import IEntityContainer from "./IEntityContainer";
 
 @injectable()
 export default class EntityContainer implements IEntityContainer {
+  private entityMap = new Map<ConstructorReference<object>, object[]>();
+
   getAllEntities(): Map<ConstructorReference<object>, object[]> {
     return this.entityMap;
   }
+
   useSingletonEntity<T extends object>(
     entityData: Partial<T>,
     entityType: ConstructorReference<T>
@@ -26,7 +29,6 @@ export default class EntityContainer implements IEntityContainer {
     Object.assign(entities[0], entityData);
     return entities[0];
   }
-  private entityMap = new Map<ConstructorReference<object>, object[]>();
 
   createEntity<T extends object>(
     entityData: Partial<T>,
