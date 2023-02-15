@@ -11,6 +11,7 @@ import SpaceTO from "../../DataTransferObjects/SpaceTO";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
 import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
+import type ISetCurrentUserLocationUseCase from "../SetCurrentUserLocation/ISetCurrentUserLocationUseCase";
 
 @injectable()
 export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
@@ -22,7 +23,9 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     @inject(USECASE_TYPES.ICalculateSpaceScore)
     private calculateSpaceScore: ICalculateSpaceScoreUseCase,
     @inject(PORT_TYPES.IWorldPort)
-    private worldPort: IWorldPort
+    private worldPort: IWorldPort,
+    @inject(USECASE_TYPES.ISetCurrentUserLocationUseCase)
+    private setCurrentUserLocationUseCase: ISetCurrentUserLocationUseCase
   ) {}
 
   async executeAsync(data: {
@@ -58,6 +61,12 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     const spaceScoreTO = this.calculateSpaceScore.execute(spaceTO.id);
     spaceTO.currentScore = spaceScoreTO.currentScore;
     spaceTO.maxScore = spaceScoreTO.maxScore;
+
+    // set current location in user entity
+    this.setCurrentUserLocationUseCase.execute({
+      worldID: data.worldID,
+      spaceID: data.spaceID,
+    });
 
     this.worldPort.onSpaceLoaded(spaceTO);
   }
