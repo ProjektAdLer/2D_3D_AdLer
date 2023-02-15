@@ -1,14 +1,11 @@
 import { NullEngine, Scene } from "@babylonjs/core";
 import { mock, mockDeep } from "jest-mock-extended";
-import SpaceTO from "../../../../../Core/Application/DataTransferObjects/SpaceTO";
 import ILoadAvatarUseCase from "../../../../../Core/Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
 import ILoadSpaceUseCase from "../../../../../Core/Application/UseCases/LoadSpace/ILoadSpaceUseCase";
 import BUILDER_TYPES from "../../../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
-import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import AbstractPort from "../../../../../Core/Ports/AbstractPort/AbstractPort";
 import INavigation from "../../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import SpaceSceneDefinition from "../../../../../Core/Presentation/Babylon/SceneManagement/Scenes/SpaceSceneDefinition";
 import ISpacePresenter from "../../../../../Core/Presentation/Babylon/Spaces/ISpacePresenter";
@@ -16,12 +13,20 @@ import IPresentationBuilder from "../../../../../Core/Presentation/PresentationB
 import IPresentationDirector from "../../../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
 import history from "history/browser";
 import AvatarCameraViewModel from "../../../../../Core/Presentation/Babylon/AvatarCamera/AvatarCameraViewModel";
+import IGetCurrentUserLocationUseCase from "../../../../../Core/Application/UseCases/GetCurrentUserLocation/IGetCurrentUserLocationUseCase";
 
 const presentationDirectorMock = mock<IPresentationDirector>();
 const presentationBuilderMock = mock<IPresentationBuilder>();
 const navigationMock = mock<INavigation>();
 const loadSpaceUseCaseMock = mock<ILoadSpaceUseCase>();
 const loadAvatarUseCaseMock = mock<ILoadAvatarUseCase>();
+const getCurrentUserLocationUseCaseMock =
+  mock<IGetCurrentUserLocationUseCase>();
+
+const getCurrentUserLocationUseCaseReturnValue = {
+  spaceID: 1,
+  worldID: 1,
+};
 
 describe("SpaceScene", () => {
   let systemUnderTest: SpaceSceneDefinition;
@@ -50,6 +55,9 @@ describe("SpaceScene", () => {
     CoreDIContainer.rebind(USECASE_TYPES.ILoadAvatarUseCase).toConstantValue(
       loadAvatarUseCaseMock
     );
+    CoreDIContainer.rebind(
+      USECASE_TYPES.IGetCurrentUserLocationUseCase
+    ).toConstantValue(getCurrentUserLocationUseCaseMock);
   });
 
   beforeEach(() => {
@@ -69,6 +77,9 @@ describe("SpaceScene", () => {
     presentationBuilderMock.getViewModel.mockReturnValue(
       new AvatarCameraViewModel()
     );
+    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(
+      getCurrentUserLocationUseCaseReturnValue
+    );
 
     expect(
       async () => await systemUnderTest["initializeScene"]()
@@ -79,6 +90,9 @@ describe("SpaceScene", () => {
     systemUnderTest["scene"] = new Scene(new NullEngine());
     presentationBuilderMock.getViewModel.mockReturnValue(
       new AvatarCameraViewModel()
+    );
+    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(
+      getCurrentUserLocationUseCaseReturnValue
     );
 
     await systemUnderTest["initializeScene"]();
