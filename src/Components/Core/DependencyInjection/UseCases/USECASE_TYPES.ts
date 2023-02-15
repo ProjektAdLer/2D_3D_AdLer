@@ -11,6 +11,7 @@ const USECASE_TYPES = {
   IGetElementSourceUseCase: Symbol("IGetElementSourceUseCase"),
   IGetLoginStatusUseCase: Symbol("IGetLoginStatusUseCase"),
   ISetCurrentUserLocationUseCase: Symbol("ISetCurrentUserLocationUseCase"),
+  IGetCurrentUserLocationUseCase: Symbol("IGetCurrentUserLocationUseCase"),
 };
 
 export default USECASE_TYPES;
