@@ -17,6 +17,9 @@ export default class SpaceSelectionController
 
   onSpaceRowClicked(spaceId: number): void {
     this.viewModel.selectedRowSpaceID.Value = spaceId;
-    this.loadSpaceUseCase.executeAsync(spaceId);
+    this.loadSpaceUseCase.executeAsync({
+      spaceID: spaceId,
+      worldID: this.viewModel.worldID.Value,
+    });
   }
 }

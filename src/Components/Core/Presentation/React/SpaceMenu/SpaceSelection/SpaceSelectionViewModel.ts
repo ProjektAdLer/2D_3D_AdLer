@@ -1,3 +1,4 @@
+import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import Observable from "src/Lib/Observable";
 
 export interface SpaceSelectionSpaceData {
@@ -8,6 +9,8 @@ export interface SpaceSelectionSpaceData {
 }
 
 export default class SpaceSelectionViewModel {
+  worldID: Observable<ComponentID> = new Observable<ComponentID>(-1);
+
   spaces: Observable<SpaceSelectionSpaceData[]> = new Observable<
     SpaceSelectionSpaceData[]
   >([]);

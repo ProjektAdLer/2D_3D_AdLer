@@ -7,4 +7,4 @@ import { IAsyncUsecase } from "../../Abstract/IAsyncUsecase";
  * @returns {SpaceTO} Transfer Object of the room
  */
 export default interface ILoadSpaceUseCase
-  extends IAsyncUsecase<ComponentID, void> {}
+  extends IAsyncUsecase<{ spaceID: ComponentID; worldID: ComponentID }, void> {}

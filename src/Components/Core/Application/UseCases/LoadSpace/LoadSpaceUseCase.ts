@@ -25,24 +25,33 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     private worldPort: IWorldPort
   ) {}
 
-  async executeAsync(id: ComponentID): Promise<void> {
+  async executeAsync(data: {
+    spaceID: ComponentID;
+    worldID: ComponentID;
+  }): Promise<void> {
     // try to get the world entity from the container, there should always be only one at most
-    let worldEntity = this.container.getEntitiesOfType(WorldEntity)[0];
+    let worldEntity = this.container.filterEntitiesOfType<WorldEntity>(
+      WorldEntity,
+      (entity) => entity.worldID === data.worldID
+    )[0];
 
     // if the world is not loaded yet, load it via the LoadWorldUseCase
     if (!worldEntity) {
-      await this.loadWorldUseCase.executeAsync();
+      await this.loadWorldUseCase.executeAsync({ worldID: data.worldID });
 
-      worldEntity = this.container.getEntitiesOfType(WorldEntity)[0];
+      worldEntity = this.container.filterEntitiesOfType<WorldEntity>(
+        WorldEntity,
+        (entity) => entity.worldID === data.worldID
+      )[0];
     }
 
     // try to find the room with a matching id
     let spaceEntity = worldEntity.spaces.find(
-      (spaceEntity) => spaceEntity.id === id
+      (spaceEntity) => spaceEntity.id === data.spaceID
     );
 
     if (!spaceEntity)
-      return Promise.reject("SpaceEntity with " + id + " not found");
+      return Promise.reject("SpaceEntity with " + data.spaceID + " not found");
 
     // create SpaceTO and fill with scoring data
     let spaceTO = this.toTO(spaceEntity);

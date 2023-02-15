@@ -51,7 +51,8 @@ describe("LoadSpaceUseCase", () => {
         name: "Space 1",
       } as SpaceEntity,
     ];
-    entityContainerMock.getEntitiesOfType.mockReturnValue([worldEntity]);
+    worldEntity.worldID = 1;
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([worldEntity]);
 
     const spaceScoreTO: SpaceScoreTO = {
       currentScore: 0,
@@ -61,7 +62,7 @@ describe("LoadSpaceUseCase", () => {
     };
     calculateSpaceScoreMock.execute.mockReturnValue(spaceScoreTO);
 
-    await systemUnderTest.executeAsync(1);
+    await systemUnderTest.executeAsync({ spaceID: 1, worldID: 1 });
 
     expect(worldPortMock.onSpaceLoaded).toHaveBeenCalledWith(
       expect.objectContaining(worldEntity.spaces[0])
@@ -76,8 +77,9 @@ describe("LoadSpaceUseCase", () => {
         name: "Space 1",
       } as SpaceEntity,
     ];
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([]);
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([worldEntity]);
+    worldEntity.worldID = 2;
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([worldEntity]);
 
     const spaceScoreTO: SpaceScoreTO = {
       currentScore: 0,
@@ -87,7 +89,7 @@ describe("LoadSpaceUseCase", () => {
     };
     calculateSpaceScoreMock.execute.mockReturnValue(spaceScoreTO);
 
-    await systemUnderTest.executeAsync(1);
+    await systemUnderTest.executeAsync({ spaceID: 1, worldID: 2 });
 
     expect(worldPortMock.onSpaceLoaded).toHaveBeenCalledWith(
       expect.objectContaining(worldEntity.spaces[0])
@@ -102,10 +104,11 @@ describe("LoadSpaceUseCase", () => {
         name: "Space 1",
       } as SpaceEntity,
     ];
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([worldEntity]);
+    worldEntity.worldID = 1;
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([worldEntity]);
 
-    await expect(async () => systemUnderTest.executeAsync(2)).rejects.toBe(
-      "SpaceEntity with 2 not found"
-    );
+    await expect(async () =>
+      systemUnderTest.executeAsync({ spaceID: 2, worldID: 1 })
+    ).rejects.toBe("SpaceEntity with 2 not found");
   });
 });
