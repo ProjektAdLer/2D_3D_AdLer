@@ -17,13 +17,16 @@ import { minimalGetWorldDataResponse } from "../../../Adapters/BackendAdapter/Ba
 import ICalculateSpaceScoreUseCase from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/SpaceScoreTO";
 import BackendWorldStatusTO from "../../../../Core/Application/DataTransferObjects/BackendWorldStatusTO";
+import ISetCurrentUserLocationUseCase from "../../../../Core/Application/UseCases/SetCurrentUserLocation/ISetCurrentUserLocationUseCase";
 
 const backendMock = mock<IBackend>();
 const worldPortMock = mock<IWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const uiPortMock = mock<IUIPort>();
 const loadAvatarUsecaseMock = mock<ILoadAvatarUseCase>();
-const calculateSpaceScoreUseCase = mock<ICalculateSpaceScoreUseCase>();
+const calculateSpaceScoreUseCaseMock = mock<ICalculateSpaceScoreUseCase>();
+const setCurrentUserLocationUseCaseMock =
+  mock<ISetCurrentUserLocationUseCase>();
 
 const mockedGetEntitiesOfTypeUserDataReturnValue = [
   {
@@ -52,8 +55,11 @@ describe("LoadWorldUseCase", () => {
       loadAvatarUsecaseMock
     );
     CoreDIContainer.rebind(USECASE_TYPES.ICalculateSpaceScore).toConstantValue(
-      calculateSpaceScoreUseCase
+      calculateSpaceScoreUseCaseMock
     );
+    CoreDIContainer.rebind(
+      USECASE_TYPES.ISetCurrentUserLocationUseCase
+    ).toConstantValue(setCurrentUserLocationUseCaseMock);
   });
 
   beforeEach(() => {
@@ -137,7 +143,7 @@ describe("LoadWorldUseCase", () => {
     expect(entityContainerMock.createEntity).not.toHaveBeenCalled();
   });
 
-  test("loads the World and notifies its presenters", async () => {
+  test("loads the World and notifies port", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
       mockedGetEntitiesOfTypeUserDataReturnValue
@@ -198,7 +204,7 @@ describe("LoadWorldUseCase", () => {
     ]);
 
     // mock CalculateSpaceScoreUseCase return value
-    calculateSpaceScoreUseCase.execute.mockReturnValue({
+    calculateSpaceScoreUseCaseMock.execute.mockReturnValue({
       currentScore: 0,
       maxScore: 0,
       requiredScore: 0,
@@ -207,6 +213,39 @@ describe("LoadWorldUseCase", () => {
 
     await systemUnderTest.executeAsync({ worldID: 42 });
 
-    expect(calculateSpaceScoreUseCase.execute).toHaveBeenCalledTimes(2);
+    expect(calculateSpaceScoreUseCaseMock.execute).toHaveBeenCalledTimes(2);
+  });
+
+  test("calls SetCurrentUserLocationUseCase", async () => {
+    // mock user data response
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+      mockedGetEntitiesOfTypeUserDataReturnValue
+    );
+    // mock world response
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
+
+    // mock backend response
+    backendMock.getWorldData.mockResolvedValueOnce(minimalGetWorldDataResponse);
+
+    // mock entity creation
+    const mockedWorldEntity = new WorldEntity();
+    mockedWorldEntity.worldName = minimalGetWorldDataResponse.worldName;
+    mockedWorldEntity.worldGoal = minimalGetWorldDataResponse.worldGoal;
+    mockedWorldEntity.spaces = [];
+
+    entityContainerMock.createEntity.mockReturnValueOnce(mock<ElementEntity>());
+    entityContainerMock.createEntity.mockReturnValueOnce(mock<SpaceEntity>());
+    entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
+
+    backendMock.getWorldStatus.mockResolvedValue({
+      courseId: 1,
+      learningElements: [{}],
+    } as BackendWorldStatusTO);
+
+    await systemUnderTest.executeAsync({ worldID: 42 });
+
+    expect(setCurrentUserLocationUseCaseMock.execute).toHaveBeenCalledWith({
+      worldID: 42,
+    });
   });
 });
