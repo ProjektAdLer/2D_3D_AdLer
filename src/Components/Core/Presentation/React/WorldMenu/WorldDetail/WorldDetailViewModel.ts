@@ -9,11 +9,9 @@ export interface WorldDetailSpaceData {
 
 export default class WorldDetailViewModel {
   id: Observable<ComponentID> = new Observable<ComponentID>(undefined);
-  name: Observable<string> = new Observable<string>("Default Name");
-  description: Observable<string> = new Observable<string>(
-    "Default Description \n Default Description Part 2"
-  );
-  goals: Observable<string> = new Observable<string>("");
+  name: Observable<string> = new Observable<string>(undefined);
+  description: Observable<string> = new Observable<string>(undefined);
+  goals: Observable<string> = new Observable<string>(undefined);
 
   spaces: Observable<WorldDetailSpaceData[]> = new Observable<
     WorldDetailSpaceData[]
