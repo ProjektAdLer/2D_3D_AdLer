@@ -7,6 +7,7 @@ import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/S
 import MenuHeaderBarController from "./MenuHeaderBarController";
 import MenuHeaderBarViewModel from "./MenuHeaderBarViewModel";
 import homeIcon from "../../../../../../Assets/icons/22-home-icon/home-icon-nobg.svg";
+import MenuTutorial from "~ReactComponents/SpaceMenu/MenuTutorial/MenuTutorial";
 
 export default function MenuHeaderBar() {
   const [viewModel, controller] = useBuilder<
@@ -20,12 +21,13 @@ export default function MenuHeaderBar() {
 
   return (
     <React.Fragment>
-      <div className="flex items-center justify-between">
-        <StyledButton className="" onClick={controller.onMenuButtonClicked}>
-          <img className="w-10 xl:w-12" src={homeIcon} alt="Home Icon" />
-        </StyledButton>{" "}
-        <div></div> {/* Dieser leere <div> hält das Layout zusammen*/}
-        <div>
+      <div className="flex flex-row place-content-stretch">
+        <div className="flex items-center w-full place-content-stretch justify-self-start">
+          <StyledButton className="" onClick={controller.onMenuButtonClicked}>
+            <img className="w-10 xl:w-12" src={homeIcon} alt="Home Icon" />
+          </StyledButton>
+        </div>
+        <div className="flex W-full justify-self-start">
           <StyledContainer
             className="text-xl lg:text-4xl roboto-black text-shadow"
             textColor="white"
@@ -33,13 +35,8 @@ export default function MenuHeaderBar() {
             {title}
           </StyledContainer>
         </div>
-        <div>
-          {/* <StyledButton
-          className="col-span-1 col-start-8"
-          onClick={controller.onBackButtonClicked}
-        >
-          Back
-        </StyledButton> */}
+        <div className="flex items-end w-full ">
+          {/* <MenuTutorial /> WHEN TUTORIAL IS FIXED */}
         </div>
       </div>
     </React.Fragment>

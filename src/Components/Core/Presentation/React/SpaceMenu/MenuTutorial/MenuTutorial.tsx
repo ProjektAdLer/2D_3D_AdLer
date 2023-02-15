@@ -12,9 +12,9 @@ export default function MenuTutorial() {
         }}
       >
         {isOpen ? (
-          <div className="flex flex-col items-end text-shadow-none leading-loose">
-            <div className="w-full flex justify-between content-center">
-              <h1 className="pl-4 pt-1 lg:pt-2 font-bold text-xl lg:text-2xl text-shadow">
+          <div className="flex flex-col items-end leading-loose text-shadow-none">
+            <div className="flex content-center justify-between w-full">
+              <h1 className="pt-1 pl-4 text-xl font-bold lg:pt-2 lg:text-2xl text-shadow">
                 Steuerung Menü
               </h1>
               <img
