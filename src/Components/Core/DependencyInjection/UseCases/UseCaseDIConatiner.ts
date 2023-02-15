@@ -22,6 +22,8 @@ import ILoadUserWorldsUseCase from "../../Application/UseCases/LoadUserWorlds/IL
 import LoadUserWorldsUseCase from "../../Application/UseCases/LoadUserWorlds/LoadUserWorldsUseCase";
 import IGetLoginStatusUseCase from "../../Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
 import GetLoginStatusUseCase from "../../Application/UseCases/GetLoginStatus/GetLoginStatusUseCase";
+import SetCurrentUserLocationUseCase from "../../Application/UseCases/SetCurrentUserLocation/SetCurrentUserLocationUseCase";
+import ISetCurrentUserLocationUseCase from "../../Application/UseCases/SetCurrentUserLocation/ISetCurrentUserLocationUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -68,6 +70,12 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<IGetLoginStatusUseCase>(USECASE_TYPES.IGetLoginStatusUseCase)
     .to(GetLoginStatusUseCase)
+    .inSingletonScope();
+
+  bind<ISetCurrentUserLocationUseCase>(
+    USECASE_TYPES.ISetCurrentUserLocationUseCase
+  )
+    .to(SetCurrentUserLocationUseCase)
     .inSingletonScope();
 });
 

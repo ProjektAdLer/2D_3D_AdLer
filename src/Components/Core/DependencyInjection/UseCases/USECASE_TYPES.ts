@@ -10,6 +10,7 @@ const USECASE_TYPES = {
   IScoreH5PElementUseCase: Symbol("IScoreH5PElementUseCase"),
   IGetElementSourceUseCase: Symbol("IGetElementSourceUseCase"),
   IGetLoginStatusUseCase: Symbol("IGetLoginStatusUseCase"),
+  ISetCurrentUserLocationUseCase: Symbol("ISetCurrentUserLocationUseCase"),
 };
 
 export default USECASE_TYPES;
