@@ -14,7 +14,7 @@ export default class SetCurrentUserLocationUseCase
     private entityContainer: IEntityContainer
   ) {}
 
-  execute(data: { worldID: number; spaceID: number }): void {
+  execute(data: { worldID: number; spaceID?: number }): void {
     let userDataEntity =
       this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
 
@@ -24,6 +24,6 @@ export default class SetCurrentUserLocationUseCase
     }
 
     userDataEntity.currentWorldID = data.worldID;
-    userDataEntity.currentSpaceID = data.spaceID;
+    if (data.spaceID) userDataEntity.currentSpaceID = data.spaceID;
   }
 }

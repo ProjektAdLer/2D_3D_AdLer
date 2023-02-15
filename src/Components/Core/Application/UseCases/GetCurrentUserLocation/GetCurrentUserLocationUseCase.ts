@@ -25,9 +25,6 @@ export default class GetCurrentUserLocationUseCase
     if (userDataEntity.currentWorldID === undefined)
       throw new Error("User is not in a world, cannot get current location");
 
-    if (userDataEntity.currentSpaceID === undefined)
-      throw new Error("User is not in a space, cannot get current location");
-
     return {
       worldID: userDataEntity.currentWorldID,
       spaceID: userDataEntity.currentSpaceID,

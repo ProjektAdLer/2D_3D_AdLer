@@ -59,17 +59,6 @@ describe("SetCurrentUserLocationUseCase", () => {
     expect(() => systemUnderTest.execute()).toThrowError();
   });
 
-  test("throws error when space id is not set on the user entity", () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValue([
-      {
-        isLoggedIn: true,
-        currentWorldID: 1,
-      },
-    ]);
-
-    expect(() => systemUnderTest.execute()).toThrowError();
-  });
-
   test("returns current world and space id from the user entity", () => {
     let userDataEntity = {
       isLoggedIn: true,
