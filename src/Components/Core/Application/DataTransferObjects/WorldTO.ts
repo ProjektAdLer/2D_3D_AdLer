@@ -6,4 +6,6 @@ export default class WorldTO {
   worldGoal: string;
   description: string;
   goals: string;
+
+  //TODO: Remove doubled goals
 }

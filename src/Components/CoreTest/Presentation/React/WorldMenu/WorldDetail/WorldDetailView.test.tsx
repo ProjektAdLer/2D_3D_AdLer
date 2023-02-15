@@ -3,11 +3,17 @@ import React from "react";
 import Observable from "../../../../../../Lib/Observable";
 import WorldDetail from "../../../../../Core/Presentation/React/WorldMenu/WorldDetail/WorldDetail";
 import WorldDetailController from "../../../../../Core/Presentation/React/WorldMenu/WorldDetail/WorldDetailController";
-import WorldDetailViewModel from "../../../../../Core/Presentation/React/WorldMenu/WorldDetail/WorldDetailViewModel";
+import WorldDetailViewModel, {
+  WorldDetailSpaceData,
+} from "../../../../../Core/Presentation/React/WorldMenu/WorldDetail/WorldDetailViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 
 let mockViewModel = new WorldDetailViewModel();
-const mockSpaceCount: Observable<number> = new Observable(42);
+const mockSpaces: Observable<WorldDetailSpaceData[]> = new Observable([
+  { name: "Space1", id: "1", isCompleted: true },
+  { name: "Space2", id: "2", isCompleted: false },
+  { name: "Space3", id: "3", isCompleted: false },
+]);
 const mockName: Observable<string> = new Observable("nameTest");
 const mockDescription: Observable<string> = new Observable("descriptionTest");
 const mockGoals: Observable<string> = new Observable("GoalsTest");
@@ -18,7 +24,7 @@ describe("WorldDetail in World Menu", () => {
     mockViewModel.name = mockName;
     mockViewModel.description = mockDescription;
     mockViewModel.goals = mockGoals;
-    mockViewModel.spaceCount = mockSpaceCount;
+    mockViewModel.spaces = mockSpaces;
   });
   test("should render", () => {
     render(<WorldDetail />);
