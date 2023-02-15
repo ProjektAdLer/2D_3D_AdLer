@@ -17,7 +17,9 @@ const BUILDER_TYPES = {
   ISpaceGoalPanelBuilder: Symbol("ISpaceGoalPanelBuilder"),
   IHeaderBarBuilder: Symbol("IHeaderBarBuilder"),
   ISpaceSelectionBuilder: Symbol("ISpaceSelectionBuilder"),
-  IDetailSectionBuilder: Symbol("IDetailSectionBuilder"),
+
+  ISpaceDetailBuilder: Symbol("ISpaceDetailBuilder"),
+  IWorldDetailBuilder: Symbol("IWorldDetailBuilder"),
   ISpaceCompletionModalBuilder: Symbol("ISpaceCompletionModalBuilder"),
   IWorldCompletionModalBuilder: Symbol("IWorldCompletionModalBuilder"),
   IMenuBarBuilder: Symbol("IMenuBarBuilder"),

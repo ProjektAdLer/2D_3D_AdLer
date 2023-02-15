@@ -18,7 +18,7 @@ export default function SpaceDetail() {
   const [viewModel, controller] = useBuilder<
     SpaceDetailViewModel,
     SpaceDetailController
-  >(BUILDER_TYPES.IDetailSectionBuilder);
+  >(BUILDER_TYPES.ISpaceDetailBuilder);
 
   const [name] = useObservable<string>(viewModel.name);
   const [description] = useObservable<string>(viewModel.description);

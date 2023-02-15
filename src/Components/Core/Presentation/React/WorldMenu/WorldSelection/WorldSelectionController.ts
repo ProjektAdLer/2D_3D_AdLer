@@ -9,10 +9,14 @@ export default class WorldSelectionController
 {
   private loadWorldUseCase: ILoadWorldUseCase;
 
-  constructor(private viewModel: WorldSelectionViewModel) {}
+  constructor(private viewModel: WorldSelectionViewModel) {
+    this.loadWorldUseCase = CoreDIContainer.get<ILoadWorldUseCase>(
+      USECASE_TYPES.ILoadWorldUseCase
+    );
+  }
 
   onWorldRowClicked(worldID: number): void {
     this.viewModel.selectedRowID.Value = worldID;
-    //  this.loadWorldUseCase.executeAsync(worldID);
+    this.loadWorldUseCase.executeAsync({ worldID });
   }
 }

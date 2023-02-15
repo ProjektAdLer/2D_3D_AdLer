@@ -6,14 +6,14 @@ import WorldDetailViewModel, {
 import worldIcon from "../../../../../../Assets/icons/14-world/world-icon-nobg.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-import WorldDetailController from "./WorldDetailController";
 import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
+import IWorldDetailController from "./IWorldDetailController";
 
 export default function WorldDetail() {
   const [viewModel, controller] = useBuilder<
     WorldDetailViewModel,
-    WorldDetailController
-  >(BUILDER_TYPES.IDetailSectionBuilder);
+    IWorldDetailController
+  >(BUILDER_TYPES.IWorldDetailBuilder);
 
   const [name] = useObservable<string>(viewModel.name);
   const [description] = useObservable<string>(viewModel.description);
@@ -21,13 +21,7 @@ export default function WorldDetail() {
   const [spaces] = useObservable<WorldDetailSpaceData[]>(viewModel.spaces);
 
   // return if any of the observables is undefined
-  if (
-    name === undefined ||
-    name === "" ||
-    description === undefined ||
-    goals === undefined
-  )
-    return null;
+  if (name === undefined || name === "") return null;
 
   return (
     <div className="flex flex-col gap-2 w-[100%] overflow-auto">
@@ -38,26 +32,28 @@ export default function WorldDetail() {
         </div>
       </div>
 
-      {description !== "" && (
-        <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
-            Beschreibung:
+      {description === undefined ||
+        (description !== "" && (
+          <div className="pb-2 border-b border-gray-500">
+            <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+              Beschreibung:
+            </div>
+            <div className="items-start ml-6 roboto-regular">
+              <TextWithLineBreaks text={description} />
+            </div>
           </div>
-          <div className="items-start ml-6 roboto-regular">
-            <TextWithLineBreaks text={description} />
+        ))}
+      {goals === undefined ||
+        (goals !== "" && (
+          <div className="pb-2 border-b border-gray-500">
+            <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+              Lernziele:
+            </div>
+            <div className="items-start ml-6 lg:text:lg roboto-regular">
+              <TextWithLineBreaks text={goals} />
+            </div>
           </div>
-        </div>
-      )}
-      {goals !== "" && (
-        <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
-            Lernziele:
-          </div>
-          <div className="items-start ml-6 lg:text:lg roboto-regular">
-            <TextWithLineBreaks text={goals} />
-          </div>
-        </div>
-      )}
+        ))}
       <div className="pb-2 border-b border-gray-500">
         <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
           Räume:

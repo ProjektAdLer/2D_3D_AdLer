@@ -8,6 +8,6 @@ export default class WorldDetailController implements IWorldDetailController {
 
   @bind
   onEnterWorldButtonClicked(): void {
-    history.push("/space/" + this.viewModel.id.Value);
+    history.push("/spacemenu");
   }
 }
