@@ -30,9 +30,14 @@ describe("SpaceSelectionController", () => {
     CoreDIContainer.restore();
   });
 
-  test("onSpaceRowClicked warns", () => {
+  test("onSpaceRowClicked calls LoadSpaceUseCase", () => {
+    viewModel.worldID.Value = 1;
+
     systemUnderTest.onSpaceRowClicked(42);
 
-    expect(loadSpaceUseCaseMock.executeAsync).toBeCalledWith(42);
+    expect(loadSpaceUseCaseMock.executeAsync).toBeCalledWith({
+      spaceID: 42,
+      worldID: 1,
+    });
   });
 });
