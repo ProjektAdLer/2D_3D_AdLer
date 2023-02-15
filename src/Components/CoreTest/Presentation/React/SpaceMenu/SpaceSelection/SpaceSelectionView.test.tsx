@@ -12,21 +12,35 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import ILoadWorldUseCase from "../../../../../Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
 import ICalculateSpaceScoreUseCase from "../../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import IGetCurrentUserLocationUseCase from "../../../../../Core/Application/UseCases/GetCurrentUserLocation/IGetCurrentUserLocationUseCase";
 
-const loadWorldUseCase = mock<ILoadWorldUseCase>();
-const calculateSpaceScoreUseCase = mock<ICalculateSpaceScoreUseCase>();
+const loadWorldUseCaseMock = mock<ILoadWorldUseCase>();
+const calculateSpaceScoreUseCaseMock = mock<ICalculateSpaceScoreUseCase>();
+const getCurrentUserLocationUseCaseMock =
+  mock<IGetCurrentUserLocationUseCase>();
+
+const getCurrentUserLocationUseCaseReturnValue = {
+  worldID: 1,
+  spaceID: undefined,
+};
 
 describe("SpaceSelection", () => {
   beforeAll(() => {
-    CoreDIContainer.unbindAll();
+    CoreDIContainer.snapshot();
 
-    CoreDIContainer.bind<ILoadWorldUseCase>(
+    CoreDIContainer.rebind<ILoadWorldUseCase>(
       USECASE_TYPES.ILoadWorldUseCase
-    ).toConstantValue(loadWorldUseCase);
-
-    CoreDIContainer.bind<ICalculateSpaceScoreUseCase>(
+    ).toConstantValue(loadWorldUseCaseMock);
+    CoreDIContainer.rebind<ICalculateSpaceScoreUseCase>(
       USECASE_TYPES.ICalculateSpaceScore
-    ).toConstantValue(calculateSpaceScoreUseCase);
+    ).toConstantValue(calculateSpaceScoreUseCaseMock);
+    CoreDIContainer.rebind<IGetCurrentUserLocationUseCase>(
+      USECASE_TYPES.IGetCurrentUserLocationUseCase
+    ).toConstantValue(getCurrentUserLocationUseCaseMock);
+  });
+
+  afterAll(() => {
+    CoreDIContainer.restore();
   });
 
   test("should render and call controller on click", () => {
@@ -42,6 +56,11 @@ describe("SpaceSelection", () => {
 
     const controllerMock = mock<ISpaceSelectionController>();
     useBuilderMock([vm, controllerMock]);
+
+    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(
+      getCurrentUserLocationUseCaseReturnValue
+    );
+
     const container = render(
       <Provider container={CoreDIContainer}>
         <SpaceSelection />
@@ -57,6 +76,10 @@ describe("SpaceSelection", () => {
   test("doesn't render without controller", () => {
     useBuilderMock([mockDeep<SpaceSelectionViewModel>(), undefined]);
 
+    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(
+      getCurrentUserLocationUseCaseReturnValue
+    );
+
     const { container } = render(
       <Provider container={CoreDIContainer}>
         <SpaceSelection />
@@ -68,6 +91,10 @@ describe("SpaceSelection", () => {
 
   test("doesn't render without view model", () => {
     useBuilderMock([undefined, mock<ISpaceSelectionController>()]);
+
+    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(
+      getCurrentUserLocationUseCaseReturnValue
+    );
 
     const { container } = render(
       <Provider container={CoreDIContainer}>
@@ -91,6 +118,10 @@ describe("SpaceSelection", () => {
     const controllerMock = mock<ISpaceSelectionController>();
     useBuilderMock([vm, controllerMock]);
 
+    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(
+      getCurrentUserLocationUseCaseReturnValue
+    );
+
     render(
       <Provider container={CoreDIContainer}>
         <SpaceSelection />
@@ -110,6 +141,10 @@ describe("SpaceSelection", () => {
     ];
     const controllerMock = mock<ISpaceSelectionController>();
     useBuilderMock([vm, controllerMock]);
+
+    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(
+      getCurrentUserLocationUseCaseReturnValue
+    );
 
     render(
       <Provider container={CoreDIContainer}>
