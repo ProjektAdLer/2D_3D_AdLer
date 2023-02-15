@@ -22,20 +22,21 @@ export default function MenuHeaderBar() {
   return (
     <React.Fragment>
       <div className="flex flex-row place-content-stretch">
-        <div className="flex items-center w-full place-content-stretch justify-self-start">
+        <div className="flex items-center w-1/2 place-content-stretch justify-self-start">
           <StyledButton className="" onClick={controller.onMenuButtonClicked}>
             <img className="w-10 xl:w-12" src={homeIcon} alt="Home Icon" />
           </StyledButton>
         </div>
-        <div className="flex W-full justify-self-start">
+        <div className="flex justify-center w-full">
           <StyledContainer
-            className="text-xl lg:text-4xl roboto-black text-shadow"
+            className="text-xl truncate lg:text-4xl roboto-black text-shadow"
             textColor="white"
           >
             {title}
           </StyledContainer>
         </div>
-        <div className="flex items-end w-full ">
+        <div className="flex items-end w-1/2 ">
+          <div className="w-20 xl:w-12"></div>
           {/* <MenuTutorial /> WHEN TUTORIAL IS FIXED */}
         </div>
       </div>
