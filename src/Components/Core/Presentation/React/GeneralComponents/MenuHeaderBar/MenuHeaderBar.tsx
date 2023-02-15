@@ -21,11 +21,7 @@ export default function MenuHeaderBar() {
   return (
     <React.Fragment>
       <div className="flex items-center justify-between">
-        <StyledButton
-          disabled
-          className=""
-          onClick={controller.onMenuButtonClicked}
-        >
+        <StyledButton className="" onClick={controller.onMenuButtonClicked}>
           <img className="w-10 xl:w-12" src={homeIcon} alt="Home Icon" />
         </StyledButton>{" "}
         <div></div> {/* Dieser leere <div> hält das Layout zusammen*/}
