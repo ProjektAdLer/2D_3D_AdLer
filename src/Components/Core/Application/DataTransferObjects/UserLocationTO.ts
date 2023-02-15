@@ -1,4 +1,6 @@
+import { ComponentID } from "../../Domain/Types/EntityTypes";
+
 export default class UserLocationTO {
-  worldID: number;
-  spaceID: number;
+  worldID: ComponentID;
+  spaceID: ComponentID;
 }
