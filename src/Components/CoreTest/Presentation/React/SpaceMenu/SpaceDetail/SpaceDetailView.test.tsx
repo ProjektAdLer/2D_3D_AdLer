@@ -4,15 +4,17 @@ import { ElementTypeStrings } from "../../../../../Core/Domain/Types/ElementType
 import Observable from "../../../../../../Lib/Observable";
 import SpaceDetail from "../../../../../Core/Presentation/React/SpaceMenu/SpaceDetail/SpaceDetail";
 import SpaceDetailController from "../../../../../Core/Presentation/React/SpaceMenu/SpaceDetail/SpaceDetailController";
-import SpaceDetailViewModel from "../../../../../Core/Presentation/React/SpaceMenu/SpaceDetail/SpaceDetailViewModel";
+import SpaceDetailViewModel, {
+  SpaceDetailSpaceData,
+} from "../../../../../Core/Presentation/React/SpaceMenu/SpaceDetail/SpaceDetailViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import React from "react";
 
 let mockViewModel = new SpaceDetailViewModel();
 //world data
-const mockSpaces: Observable<[number, string, boolean][]> = new Observable([
-  [1, "spacesTest1", true],
-  [2, "spacesTest2", false],
+const mockSpaces: Observable<SpaceDetailSpaceData[]> = new Observable([
+  { id: 1, name: "spacesTest1", isCompleted: true },
+  { id: 2, name: "spacesTest2", isCompleted: false },
 ]);
 //space data
 const mockName: Observable<string> = new Observable("nameTest");
@@ -25,7 +27,7 @@ const mockElements: Observable<[ElementTypeStrings, string][]> = new Observable(
   ]
 );
 const mockRequiredPoints: Observable<number> = new Observable(1);
-const mockRequirements: Observable<number[]> = new Observable([1]);
+const mockRequirements: Observable<number[]> = new Observable([2]);
 
 describe("SpaceDetail in Space Menu", () => {
   beforeEach(() => {
