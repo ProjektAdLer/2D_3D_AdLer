@@ -1,3 +1,4 @@
 import { IAsyncUsecase } from "../../Abstract/IAsyncUsecase";
 
-export default interface ILoadWorldUseCase extends IAsyncUsecase<void, void> {}
+export default interface ILoadWorldUseCase
+  extends IAsyncUsecase<{ worldID: number }, void> {}

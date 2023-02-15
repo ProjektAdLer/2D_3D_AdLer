@@ -34,30 +34,36 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     private calculateSpaceScore: ICalculateSpaceScoreUseCase
   ) {}
 
-  private usedWorldId: number;
-
   private semaphore = new Semaphore("LoadWorld in Use", 1);
 
-  async executeAsync(): Promise<void> {
+  async executeAsync(data: { worldID: number }): Promise<void> {
     const lock = await this.semaphore.acquire();
 
+    // check if user is logged in
     const userData = this.container.getEntitiesOfType(UserDataEntity);
-
     if (userData.length === 0 || userData[0]?.isLoggedIn === false) {
       this.uiPort.displayNotification("User is not logged in!", "error");
       logger.error("User is not logged in!");
       return Promise.reject("User is not logged in");
     }
 
-    let worldEntitys = this.container.getEntitiesOfType(WorldEntity);
+    // search for world entity with given ID in all world entities
+    let worldEntity = this.container.filterEntitiesOfType(
+      WorldEntity,
+      (WorldEntity) => WorldEntity.worldID === data.worldID
+    )[0];
 
-    let worldEntity = worldEntitys[0];
-
+    // if world entity does not exist, load it from backend
     if (!worldEntity) {
-      worldEntity = await this.load(userData[0]);
+      worldEntity = await this.loadWorldToEntity(
+        userData[0].userToken,
+        data.worldID
+      );
     }
 
-    let worldTO = this.toTO(worldEntity);
+    let worldTO = this.createWorldTOFromWorldEntity(worldEntity);
+
+    // cumulate element scores for each space
     worldTO.spaces.forEach((space) => {
       let spaceScores = this.calculateSpaceScore.execute(space.id);
       space.currentScore = spaceScores.currentScore;
@@ -69,24 +75,17 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     lock.release();
   }
 
-  private async load(userData: UserDataEntity): Promise<WorldEntity> {
-    const coursesList = await this.backendAdapter.getCoursesAvailableForUser(
-      userData.userToken
-    );
-
-    this.usedWorldId = coursesList.courses[0].courseId;
-
-    let apiWorldData = {
-      userToken: userData.userToken,
-      worldId: this.usedWorldId, // TODO: This can be a random number for now
-    } as getWorldDataParams;
-
-    const apiWorldDataResponse = await this.backendAdapter.getWorldData(
-      apiWorldData
-    );
+  private async loadWorldToEntity(
+    userToken: string,
+    worldID: number
+  ): Promise<WorldEntity> {
+    const apiWorldDataResponse = await this.backendAdapter.getWorldData({
+      userToken: userToken,
+      worldId: worldID,
+    });
     const apiWorldScoreResponse = await this.backendAdapter.getWorldStatus(
-      userData.userToken,
-      this.usedWorldId
+      userToken,
+      worldID
     );
 
     // create learning room entities with learning element entities
@@ -94,7 +93,9 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     apiWorldDataResponse.spaces?.forEach((space) => {
       let elementEntities: ElementEntity[] = [];
       space.elements?.forEach((element) => {
-        elementEntities.push(this.mapElement(element, apiWorldScoreResponse));
+        elementEntities.push(
+          this.mapElementToEntity(element, apiWorldScoreResponse)
+        );
       });
 
       spaceEntities.push(
@@ -119,7 +120,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
         worldName: apiWorldDataResponse.worldName,
         spaces: spaceEntities,
         worldGoal: apiWorldDataResponse.worldGoal,
-        worldID: this.usedWorldId,
+        worldID: worldID,
       },
       WorldEntity
     );
@@ -127,7 +128,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     return worldEntity;
   }
 
-  private mapElement = (
+  private mapElementToEntity = (
     element: ElementTO,
     worldStatus: BackendWorldStatusTO
   ): ElementEntity => {
@@ -151,7 +152,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     );
   };
 
-  private toTO(entityToConvert: WorldEntity): WorldTO {
+  private createWorldTOFromWorldEntity(entityToConvert: WorldEntity): WorldTO {
     // this will need to be changed when entity and TO are not matching in structure anymore
     let worldTO = new WorldTO();
     worldTO = Object.assign(worldTO, structuredClone(entityToConvert));
