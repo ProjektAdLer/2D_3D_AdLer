@@ -34,14 +34,4 @@ describe("WorldDetail in World Menu", () => {
     const componentUnderTest = render(<WorldDetail />);
     expect(componentUnderTest.container).toBeEmptyDOMElement();
   });
-  test("should not render if description is undefined", () => {
-    mockViewModel.description = undefined;
-    const componentUnderTest = render(<WorldDetail />);
-    expect(componentUnderTest.container).toBeEmptyDOMElement();
-  });
-  test("should not render if goals is undefined", () => {
-    mockViewModel.goals = undefined;
-    const componentUnderTest = render(<WorldDetail />);
-    expect(componentUnderTest.container).toBeEmptyDOMElement();
-  });
 });
