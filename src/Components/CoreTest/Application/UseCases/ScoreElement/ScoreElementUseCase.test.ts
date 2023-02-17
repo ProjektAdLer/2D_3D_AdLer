@@ -33,8 +33,8 @@ const elementEntity: ElementEntity = {
   description: "",
   goals: "",
   type: "h5p",
-  parentSpaceId: 0,
-  parentCourseId: 0,
+  parentSpaceID: 0,
+  parentCourseID: 0,
 };
 const spaceEntity: SpaceEntity = {
   id: 1,
@@ -111,8 +111,8 @@ describe("ScoreElementUseCase", () => {
 
     await expect(
       systemUnderTest.executeAsync({
-        elementId: 1,
-        courseId: 0,
+        elementID: 1,
+        courseID: 0,
       })
     ).resolves.toBeUndefined();
   });
@@ -122,7 +122,7 @@ describe("ScoreElementUseCase", () => {
     backendAdapterMock.scoreElement.mockResolvedValue(true);
 
     try {
-      await systemUnderTest.executeAsync({ elementId: 1, courseId: 1 });
+      await systemUnderTest.executeAsync({ elementID: 1, courseID: 1 });
     } catch (e) {
       console.log(e);
     }
@@ -139,7 +139,7 @@ describe("ScoreElementUseCase", () => {
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     try {
-      await systemUnderTest.executeAsync({ elementId: 1, courseId: 1 });
+      await systemUnderTest.executeAsync({ elementID: 1, courseID: 1 });
     } catch (e) {
       console.log(e);
     }
@@ -154,7 +154,7 @@ describe("ScoreElementUseCase", () => {
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     try {
-      await systemUnderTest.executeAsync({ elementId: 1, courseId: 1 });
+      await systemUnderTest.executeAsync({ elementID: 1, courseID: 1 });
     } catch (e) {
       console.log(e);
     }
@@ -173,7 +173,7 @@ describe("ScoreElementUseCase", () => {
     setupEntityContainerMock([], [elementEntity], [spaceEntity]);
 
     await expect(
-      systemUnderTest.executeAsync({ elementId: 1, courseId: 1 })
+      systemUnderTest.executeAsync({ elementID: 1, courseID: 1 })
     ).rejects.toContain("User is not logged in");
   });
 
@@ -187,7 +187,7 @@ describe("ScoreElementUseCase", () => {
     );
 
     await expect(
-      systemUnderTest.executeAsync({ elementId: 1, courseId: 1 })
+      systemUnderTest.executeAsync({ elementID: 1, courseID: 1 })
     ).rejects.toContain("User is not logged in");
   });
 
@@ -196,7 +196,7 @@ describe("ScoreElementUseCase", () => {
     backendAdapterMock.scoreElement.mockRejectedValue("error");
 
     await expect(
-      systemUnderTest.executeAsync({ elementId: 1, courseId: 1 })
+      systemUnderTest.executeAsync({ elementID: 1, courseID: 1 })
     ).rejects.toContain("Backend call failed");
   });
 
@@ -205,7 +205,7 @@ describe("ScoreElementUseCase", () => {
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     await expect(
-      systemUnderTest.executeAsync({ elementId: 1, courseId: 1 })
+      systemUnderTest.executeAsync({ elementID: 1, courseID: 1 })
     ).rejects.toContain("No matching element found");
   });
 
@@ -218,7 +218,7 @@ describe("ScoreElementUseCase", () => {
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     await expect(
-      systemUnderTest.executeAsync({ elementId: 1, courseId: 1 })
+      systemUnderTest.executeAsync({ elementID: 1, courseID: 1 })
     ).rejects.toContain("More than one matching element found");
   });
 
@@ -227,7 +227,7 @@ describe("ScoreElementUseCase", () => {
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     await expect(
-      systemUnderTest.executeAsync({ elementId: 1, courseId: 1 })
+      systemUnderTest.executeAsync({ elementID: 1, courseID: 1 })
     ).rejects.toContain("No matching space found");
   });
 

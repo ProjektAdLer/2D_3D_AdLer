@@ -1,3 +1,3 @@
 export default class CourseListTO {
-  courses: { courseId: number; courseName: string }[];
+  courses: { courseID: number; courseName: string }[];
 }

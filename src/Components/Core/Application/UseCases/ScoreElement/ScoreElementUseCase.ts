@@ -27,10 +27,10 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
   ) {}
 
   async executeAsync(data: {
-    elementId: ComponentID;
-    courseId: ComponentID;
+    elementID: ComponentID;
+    courseID: ComponentID;
   }): Promise<void> {
-    if (!data || !data.elementId) {
+    if (!data || !data.elementID) {
       return this.rejectWithWarning("data is (atleast partly) undefined!");
     }
 
@@ -39,37 +39,37 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
       this.entityContainer.getEntitiesOfType(UserDataEntity)[0];
 
     if (!userEntity || !userEntity.isLoggedIn) {
-      return this.rejectWithWarning("User is not logged in!", data.elementId);
+      return this.rejectWithWarning("User is not logged in!", data.elementID);
     }
 
     // call backend
     try {
       await this.backendAdapter.scoreElement(
         userEntity.userToken,
-        data.elementId,
-        data.courseId
+        data.elementID,
+        data.courseID
       );
     } catch (e) {
       return this.rejectWithWarning(
         "Backend call failed with error: " + e,
-        data.elementId
+        data.elementID
       );
     }
 
     const elements = this.entityContainer.filterEntitiesOfType<ElementEntity>(
       ElementEntity,
-      (entity) => entity.id === data.elementId
+      (entity) => entity.id === data.elementID
     );
 
     if (elements.length === 0)
       return this.rejectWithWarning(
         "No matching element found!",
-        data.elementId
+        data.elementID
       );
     else if (elements.length > 1)
       return this.rejectWithWarning(
         "More than one matching element found!",
-        data.elementId
+        data.elementID
       );
 
     const space = this.entityContainer.filterEntitiesOfType<SpaceEntity>(
@@ -78,13 +78,13 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
     )[0];
 
     if (!space)
-      return this.rejectWithWarning("No matching space found!", data.elementId);
+      return this.rejectWithWarning("No matching space found!", data.elementID);
 
     elements[0].hasScored = true;
 
     this.calculateSpaceScoreUseCase.execute(space.id);
 
-    this.worldPort.onElementScored(true, data.elementId);
+    this.worldPort.onElementScored(true, data.elementID);
   }
 
   private rejectWithWarning(message: string, id?: ComponentID): Promise<void> {

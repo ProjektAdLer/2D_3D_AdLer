@@ -10,13 +10,13 @@ import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO
 // TODO: Restructure in meaningful types
 export type getWorldDataParams = {
   userToken: string;
-  worldId: number;
+  worldID: number;
 };
 
 export type ScoreH5PElementRequest = {
   userToken: string;
-  h5pId: number;
-  courseId: number;
+  h5pID: number;
+  courseID: number;
   rawH5PEvent: XAPiEvent;
 };
 
@@ -32,24 +32,24 @@ export default interface IBackendAdapter {
 
   getElementScore(
     userToken: string,
-    elementId: ComponentID,
-    courseId: ComponentID
+    elementID: ComponentID,
+    courseID: ComponentID
   ): Promise<ElementScoreTO>;
 
   getWorldData({
     userToken,
-    worldId,
+    worldID,
   }: getWorldDataParams): Promise<Partial<BackendWorldTO>>;
 
   scoreElement(
     userToken: string,
-    elementId: ComponentID,
-    courseId: ComponentID
+    elementID: ComponentID,
+    courseID: ComponentID
   ): Promise<boolean>;
 
   getWorldStatus(
     userToken: string,
-    worldId: number
+    worldID: number
   ): Promise<BackendWorldStatusTO>;
 
   scoreH5PElement(data: ScoreH5PElementRequest): Promise<boolean>;
@@ -60,7 +60,7 @@ export default interface IBackendAdapter {
 
   getElementSource(
     userToken: string,
-    elementId: number,
-    courseId: number
+    elementID: number,
+    courseID: number
   ): Promise<string>;
 }

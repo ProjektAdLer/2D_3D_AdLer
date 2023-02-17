@@ -1,8 +1,8 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 export default class BackendWorldStatusTO {
-  courseId: ComponentID;
+  courseID: ComponentID;
   learningElements: {
-    elementId: ComponentID;
+    elementID: ComponentID;
     successss: boolean;
   }[];
 }

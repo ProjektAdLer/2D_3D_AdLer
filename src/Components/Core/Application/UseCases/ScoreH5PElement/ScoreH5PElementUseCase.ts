@@ -26,10 +26,10 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
 
   async executeAsync(data?: {
     xapiData: XAPiEvent;
-    elementId: ComponentID;
-    courseId: ComponentID;
+    elementID: ComponentID;
+    courseID: ComponentID;
   }): Promise<boolean> {
-    if (!data || !data.elementId || !data.xapiData) {
+    if (!data || !data.elementID || !data.xapiData) {
       return this.rejectWithWarning("data is (atleast partly) undefined!");
     }
 
@@ -44,8 +44,8 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
     // call backend
     const scoredSuccessful = await this.backendAdapter.scoreH5PElement({
       userToken: userEntity.userToken,
-      h5pId: data.elementId,
-      courseId: data.courseId, // TODOPG: get course id
+      h5pID: data.elementID,
+      courseID: data.courseID,
       rawH5PEvent: data.xapiData,
     });
 
@@ -56,7 +56,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
         this.entityContainer.filterEntitiesOfType<ElementEntity>(
           ElementEntity,
           (entity) => {
-            return entity.id === data.elementId;
+            return entity.id === data.elementID;
           }
         );
 
@@ -71,7 +71,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
       const space: SpaceEntity =
         this.entityContainer.filterEntitiesOfType<SpaceEntity>(
           SpaceEntity,
-          (space) => space?.id === element.parentSpaceId
+          (space) => space?.id === element.parentSpaceID
         )[0];
 
       if (!space) {
@@ -82,7 +82,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
 
       this.calculateSpaceScoreUseCase.execute(space.id);
 
-      this.worldPort.onElementScored(true, data.elementId);
+      this.worldPort.onElementScored(true, data.elementID);
     }
 
     return Promise.resolve(scoredSuccessful);

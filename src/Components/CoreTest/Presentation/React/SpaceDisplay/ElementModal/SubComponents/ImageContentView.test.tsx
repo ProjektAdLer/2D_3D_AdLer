@@ -35,7 +35,7 @@ describe("ImageComponent", () => {
   it("should render", async () => {
     let component: RenderResult;
     const vm = new ElementModalViewModel();
-    vm.parentCourseId.Value = 1;
+    vm.parentCourseID.Value = 1;
     vm.id.Value = 1;
 
     await act(async () => {

@@ -26,7 +26,7 @@ const spaceEntityMock = new SpaceEntity();
 spaceEntityMock.id = 1;
 const elementEntityMock = new ElementEntity();
 elementEntityMock.id = 1;
-elementEntityMock.parentSpaceId = 1;
+elementEntityMock.parentSpaceID = 1;
 
 const setupEntityContainerMock = (
   userEntityMock: UserDataEntity[],
@@ -69,8 +69,8 @@ const calculateSpaceScoreUseCaseMock = mock<ICalculateSpaceScoreUseCase>();
 
 const executeAsyncParams = {
   xapiData: {} as XAPiEvent,
-  elementId: 42,
-  courseId: 1,
+  elementID: 42,
+  courseID: 1,
 };
 
 describe("ScoreH5PElementUseCase", () => {
@@ -132,8 +132,8 @@ describe("ScoreH5PElementUseCase", () => {
 
     expect(backendAdapterMock.scoreH5PElement).toHaveBeenCalledWith({
       userToken: userEntityMock.userToken,
-      h5pId: executeAsyncParams.elementId,
-      courseId: 1,
+      h5pID: executeAsyncParams.elementID,
+      courseID: 1,
       rawH5PEvent: executeAsyncParams.xapiData,
     });
   });
@@ -193,7 +193,7 @@ describe("ScoreH5PElementUseCase", () => {
 
     expect(worldPortMock.onElementScored).toHaveBeenCalledWith(
       true,
-      executeAsyncParams.elementId
+      executeAsyncParams.elementID
     );
   });
 

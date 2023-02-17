@@ -39,7 +39,7 @@ describe("BackendAdapter", () => {
 
     await systemUnderTest.getWorldData({
       userToken: userToken,
-      worldId: worldID,
+      worldID: worldID,
     });
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
@@ -58,7 +58,7 @@ describe("BackendAdapter", () => {
 
     const result = await systemUnderTest.getWorldData({
       userToken: "",
-      worldId: 1337,
+      worldID: 1337,
     });
 
     // check that the result matches the expected structure of LearningWorldTO
@@ -140,7 +140,7 @@ describe("BackendAdapter", () => {
     mockedAxios.get.mockResolvedValue({
       data: [
         {
-          courses: { courseId: 1, courseName: "string" },
+          courses: { courseID: 1, courseName: "string" },
         },
       ],
     });
@@ -161,7 +161,7 @@ describe("BackendAdapter", () => {
       }
     );
     expect(returnedVal).toEqual([
-      { courses: { courseId: 1, courseName: "string" } },
+      { courses: { courseID: 1, courseName: "string" } },
     ]);
   });
 
@@ -173,8 +173,8 @@ describe("BackendAdapter", () => {
     });
     const h5pMock = mock<XAPiEvent>();
     const returnedVal = await systemUnderTest.scoreH5PElement({
-      courseId: 1,
-      h5pId: 1,
+      courseID: 1,
+      h5pID: 1,
       userToken: "token",
       rawH5PEvent: h5pMock,
     });
@@ -217,10 +217,10 @@ describe("BackendAdapter", () => {
   test("should get World Status", async () => {
     mockedAxios.get.mockResolvedValue({
       data: {
-        courseId: 1,
+        courseID: 1,
         learningElements: [
           {
-            elementId: 1,
+            elementID: 1,
             successss: true,
           },
         ],
@@ -238,10 +238,10 @@ describe("BackendAdapter", () => {
       }
     );
     expect(returnedVal).toEqual({
-      courseId: 1,
+      courseID: 1,
       learningElements: [
         {
-          elementId: 1,
+          elementID: 1,
           successss: true,
         },
       ],
@@ -250,7 +250,7 @@ describe("BackendAdapter", () => {
   test("should get Element Score", async () => {
     mockedAxios.get.mockResolvedValue({
       data: {
-        elementId: 1,
+        elementID: 1,
         successss: true,
       },
     });
@@ -271,7 +271,7 @@ describe("BackendAdapter", () => {
       }
     );
     expect(returnedVal).toEqual({
-      elementId: 1,
+      elementID: 1,
       successss: true,
     });
   });

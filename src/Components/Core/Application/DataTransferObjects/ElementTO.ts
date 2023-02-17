@@ -4,8 +4,8 @@ import { ElementTypeStrings } from "../../Domain/Types/ElementTypes";
 export default class ElementTO {
   id: ComponentID;
   value: number;
-  parentSpaceId: ComponentID;
-  parentCourseId: ComponentID;
+  parentSpaceID: ComponentID;
+  parentCourseID: ComponentID;
   name: string;
   description: string;
   goals: string;

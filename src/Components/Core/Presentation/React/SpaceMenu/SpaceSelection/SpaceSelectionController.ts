@@ -15,10 +15,10 @@ export default class SpaceSelectionController
     );
   }
 
-  onSpaceRowClicked(spaceId: number): void {
-    this.viewModel.selectedRowSpaceID.Value = spaceId;
+  onSpaceRowClicked(spaceID: number): void {
+    this.viewModel.selectedRowSpaceID.Value = spaceID;
     this.loadSpaceUseCase.executeAsync({
-      spaceID: spaceId,
+      spaceID: spaceID,
       worldID: this.viewModel.worldID.Value,
     });
   }

@@ -61,7 +61,7 @@ export default class BackendAdapterUtils {
           type: element.elementCategory,
           value:
             Number.parseInt(element.learningElementValueList[0].value) || 0,
-          parentSpaceId: element.learningSpaceParentId,
+          parentSpaceID: element.learningSpaceParentID,
         } as ElementTO;
       } else return [];
     });

@@ -8,8 +8,8 @@ jest.mock("@babylonjs/core");
 const testElementTO: ElementTO = {
   id: 0,
   value: 0,
-  parentSpaceId: 0,
-  parentCourseId: 0,
+  parentSpaceID: 0,
+  parentCourseID: 0,
   name: "test",
   description: "",
   goals: "",

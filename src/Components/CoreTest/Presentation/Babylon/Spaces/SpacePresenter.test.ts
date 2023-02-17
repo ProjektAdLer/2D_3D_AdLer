@@ -35,9 +35,9 @@ const spaceTO: SpaceTO = {
       description: "test",
       goals: "test",
       value: 42,
-      parentSpaceId: 1,
+      parentSpaceID: 1,
       hasScored: false,
-      parentCourseId: 1,
+      parentCourseID: 1,
     },
   ],
 };
@@ -129,9 +129,9 @@ describe("SpacePresenter", () => {
       goals: "test",
       value: 42,
       type: "h5p",
-      parentSpaceId: 1,
+      parentSpaceID: 1,
       hasScored: false,
-      parentCourseId: 1,
+      parentCourseID: 1,
     });
 
     systemUnderTest["setSpaceDimensions"](spaceTO);

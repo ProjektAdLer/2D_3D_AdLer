@@ -17,8 +17,8 @@ describe("ElementModalPresenter", () => {
       goals: "Test",
       type: "h5p",
       value: 1,
-      parentSpaceId: 0,
-      parentCourseId: 0,
+      parentSpaceID: 0,
+      parentCourseID: 0,
       hasScored: false,
     };
 

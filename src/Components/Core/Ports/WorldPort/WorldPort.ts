@@ -7,6 +7,7 @@ import ElementTO from "../../Application/DataTransferObjects/ElementTO";
 import SpaceScoreTO from "../../Application/DataTransferObjects/SpaceScoreTO";
 import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
 import UserWorldsTO from "../../Application/DataTransferObjects/UserWorldsTO";
+import { ComponentID } from "../../Domain/Types/EntityTypes";
 
 @injectable()
 export default class WorldPort
@@ -44,7 +45,7 @@ export default class WorldPort
       if (adapter.onElementLoaded) adapter.onElementLoaded(elementStartedTO);
     });
   }
-  public onElementScored(hasScored: boolean, elementID: number): void {
+  public onElementScored(hasScored: boolean, elementID: ComponentID): void {
     this.adapters.forEach((adapter) => {
       if (adapter.onElementScored)
         adapter.onElementScored(hasScored, elementID);

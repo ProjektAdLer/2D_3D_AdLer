@@ -7,9 +7,9 @@ import IElementsDropdownController from "./IElementsDropdownController";
 export default class ElementsDropdownController
   implements IElementsDropdownController
 {
-  startElement(elementId: ComponentID): void {
+  startElement(elementID: ComponentID): void {
     CoreDIContainer.get<ILoadElementUseCase>(
       USECASE_TYPES.ILoadElementUseCase
-    ).executeAsync(elementId);
+    ).executeAsync(elementID);
   }
 }

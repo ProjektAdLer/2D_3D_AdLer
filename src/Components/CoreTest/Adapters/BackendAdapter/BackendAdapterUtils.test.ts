@@ -9,7 +9,7 @@ describe("BackendAdapterUtils", () => {
         description: "test",
         goals: "test",
         elementCategory: "test",
-        learningSpaceParentId: 1,
+        learningSpaceParentID: 1,
         learningElementValueList: [{ type: "test", value: "test" }],
       },
     ]);

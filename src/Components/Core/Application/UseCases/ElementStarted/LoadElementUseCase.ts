@@ -43,8 +43,8 @@ export default class LoadElementUseCase implements ILoadElementUseCase {
     let elementTO = this.toTO(entity[0]);
 
     elementTO.filePath = await this.getElementSourceUseCase.executeAsync({
-      elementId: elementID,
-      courseId: course[0].worldID, // TODO: Use actual loaded course id
+      elementID: elementID,
+      courseID: course[0].worldID, // TODO: Use actual loaded course id
     });
 
     this.worldPort.onElementLoaded(elementTO);

@@ -11,15 +11,15 @@ export default class ElementModalController implements IElementModalController {
   constructor(private viewModel: ElementModalViewModel) {}
 
   async scoreElement(
-    elementId: ComponentID,
-    courseId: ComponentID
+    elementID: ComponentID,
+    courseID: ComponentID
   ): Promise<void> {
     if (this.viewModel.type.Value !== ElementTypes.h5p) {
       await CoreDIContainer.get<IScoreElementUseCase>(
         USECASE_TYPES.IScoreElementUseCase
       ).executeAsync({
-        elementId: elementId,
-        courseId: courseId,
+        elementID: elementID,
+        courseID: courseID,
       });
     }
   }
@@ -58,8 +58,8 @@ export default class ElementModalController implements IElementModalController {
       ).executeAsync({
         //@ts-ignore
         xapiData: xapiData,
-        elementId: this.viewModel.id.Value,
-        courseId: this.viewModel.parentCourseId.Value,
+        elementID: this.viewModel.id.Value,
+        courseID: this.viewModel.parentCourseID.Value,
       });
     }
   }

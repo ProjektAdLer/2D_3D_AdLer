@@ -40,8 +40,8 @@ describe("GetElementSource", () => {
     );
 
     const result = await systemUnderTest.executeAsync({
-      elementId: 1,
-      courseId: 1,
+      elementID: 1,
+      courseID: 1,
     });
 
     expect(result).toBe(

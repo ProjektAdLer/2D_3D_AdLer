@@ -17,8 +17,8 @@ export default class GetElementSourceUseCase
   ) {}
 
   async executeAsync(data: {
-    elementId: number;
-    courseId: number;
+    elementID: number;
+    courseID: number;
   }): Promise<string> {
     const token =
       this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0]
@@ -26,8 +26,8 @@ export default class GetElementSourceUseCase
 
     const resp = await this.backend.getElementSource(
       token,
-      data.elementId,
-      data.courseId
+      data.elementID,
+      data.courseID
     );
 
     return resp;

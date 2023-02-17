@@ -87,7 +87,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   ): Promise<WorldEntity> {
     const apiWorldDataResponse = await this.backendAdapter.getWorldData({
       userToken: userToken,
-      worldId: worldID,
+      worldID: worldID,
     });
     const apiWorldScoreResponse = await this.backendAdapter.getWorldStatus(
       userToken,
@@ -145,11 +145,11 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       name: element.name,
       type: element.type,
       value: element.value || 0,
-      parentSpaceId: element.parentSpaceId,
+      parentSpaceID: element.parentSpaceID,
       hasScored:
-        worldStatus.learningElements.find((e) => e.elementId === element.id)
+        worldStatus.learningElements.find((e) => e.elementID === element.id)
           ?.successss || false,
-      parentCourseId: worldStatus.courseId,
+      parentCourseID: worldStatus.courseID,
     };
 
     return this.container.createEntity<ElementEntity>(

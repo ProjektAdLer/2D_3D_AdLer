@@ -69,7 +69,7 @@ export default class LoadUserWorldsUseCase implements ILoadUserWorldsUseCase {
     const availableWorlds: AvailableWorldsArray = coursesList.courses.map(
       (course) => {
         return {
-          worldID: course.courseId,
+          worldID: course.courseID,
           worldName: course.courseName,
         };
       }

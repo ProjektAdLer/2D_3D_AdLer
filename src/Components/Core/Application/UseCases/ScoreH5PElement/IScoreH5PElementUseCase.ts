@@ -5,8 +5,8 @@ export default interface IScoreH5PElement
   extends IAsyncUsecase<
     {
       xapiData: XAPiEvent;
-      elementId: ComponentID;
-      courseId: ComponentID;
+      elementID: ComponentID;
+      courseID: ComponentID;
     },
     boolean
   > {}

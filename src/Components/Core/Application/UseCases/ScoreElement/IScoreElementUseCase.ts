@@ -4,8 +4,8 @@ import { IAsyncUsecase } from "../../Abstract/IAsyncUsecase";
 export default interface IScoreElementUseCase
   extends IAsyncUsecase<
     {
-      elementId: ComponentID;
-      courseId: ComponentID;
+      elementID: ComponentID;
+      courseID: ComponentID;
     },
     void
   > {}

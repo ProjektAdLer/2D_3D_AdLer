@@ -8,8 +8,8 @@ export default class ElementsDropdownViewModel {
       {
         id: 1,
         value: 1,
-        parentSpaceId: 1,
-        parentCourseId: 1,
+        parentSpaceID: 1,
+        parentCourseID: 1,
         name: "element 1",
         description: "description 1",
         goals: "goals 1",
@@ -19,8 +19,8 @@ export default class ElementsDropdownViewModel {
       {
         id: 2,
         value: 2,
-        parentSpaceId: 2,
-        parentCourseId: 2,
+        parentSpaceID: 2,
+        parentCourseID: 2,
         name: "element 2",
         description: "description 2",
         goals: "goals 2",

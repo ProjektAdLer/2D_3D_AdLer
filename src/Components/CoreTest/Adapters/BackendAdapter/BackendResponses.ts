@@ -24,8 +24,8 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
           type: "text",
           description: "TestDescription",
           goals: "TestGoals",
-          parentSpaceId: 1,
-          parentCourseId: 1,
+          parentSpaceID: 1,
+          parentCourseID: 1,
           hasScored: false,
         },
       ],
@@ -60,7 +60,7 @@ export const expectedElementTO: Partial<ElementTO> = {
   description: expect.any(String),
   goals: expect.any(String),
   type: expect.any(String),
-  parentSpaceId: expect.any(Number),
+  parentSpaceID: expect.any(Number),
 };
 
 export const mockDSL: IDSL = {
@@ -105,7 +105,7 @@ export const mockDSL: IDSL = {
             value: "50",
           },
         ],
-        learningSpaceParentId: 1,
+        learningSpaceParentID: 1,
       },
       {
         id: 2,
@@ -122,7 +122,7 @@ export const mockDSL: IDSL = {
             value: "25",
           },
         ],
-        learningSpaceParentId: 1,
+        learningSpaceParentID: 1,
       },
       {
         id: 3,
@@ -139,7 +139,7 @@ export const mockDSL: IDSL = {
             value: "50",
           },
         ],
-        learningSpaceParentId: 1,
+        learningSpaceParentID: 1,
       },
       {
         id: 4,
@@ -156,7 +156,7 @@ export const mockDSL: IDSL = {
             value: "25",
           },
         ],
-        learningSpaceParentId: 1,
+        learningSpaceParentID: 1,
       },
     ],
   },

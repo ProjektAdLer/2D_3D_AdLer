@@ -92,7 +92,7 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
     await this.loadAvatarUseCase.executeAsync();
   }
 
-  private parseSpaceIdFromLocation(): number {
+  private parseSpaceIDFromLocation(): number {
     // TODO: make extraction of the space ID more reliable
     return Number.parseInt(history.location.pathname.split("/")[2]);
   }

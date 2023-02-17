@@ -29,7 +29,7 @@ describe("MockBackendAdapter", () => {
   test("getWorldData returns BackendWorldTO with correct structure", async () => {
     const result = await systemUnderTest.getWorldData({
       userToken: "",
-      worldId: 1,
+      worldID: 1,
     });
 
     // check that the result matches the expected structure of LearningWorldTO
@@ -78,7 +78,7 @@ describe("MockBackendAdapter", () => {
     ).resolves.toEqual({
       courses: [
         {
-          courseId: 1,
+          courseID: 1,
           courseName: "Testkurs",
         },
       ],
@@ -89,8 +89,8 @@ describe("MockBackendAdapter", () => {
     const h5pMock = mock<XAPiEvent>();
     await expect(
       systemUnderTest.scoreH5PElement({
-        courseId: 1,
-        h5pId: 1,
+        courseID: 1,
+        h5pID: 1,
         userToken: "token",
         rawH5PEvent: h5pMock,
       })
@@ -114,22 +114,22 @@ describe("MockBackendAdapter", () => {
 
   test("should get World Status", async () => {
     await expect(systemUnderTest.getWorldStatus("token", 1)).resolves.toEqual({
-      courseId: 1,
+      courseID: 1,
       learningElements: [
         {
-          elementId: 1,
+          elementID: 1,
           successss: true,
         },
         {
-          elementId: 2,
+          elementID: 2,
           successss: false,
         },
         {
-          elementId: 3,
+          elementID: 3,
           successss: false,
         },
         {
-          elementId: 4,
+          elementID: 4,
           successss: false,
         },
       ],
@@ -138,7 +138,7 @@ describe("MockBackendAdapter", () => {
 
   test("should get Element Score", async () => {
     await expect(systemUnderTest.getElementScore("token", 1)).resolves.toEqual({
-      elementId: 1,
+      elementID: 1,
       successss: true,
     });
   });

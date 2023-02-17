@@ -1,5 +1,5 @@
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 
 export default interface IWorldSelectionController {
-  onWorldRowClicked(spaceId: ComponentID): void;
+  onWorldRowClicked(spaceID: ComponentID): void;
 }

@@ -45,8 +45,8 @@ export default class ElementController implements IElementController {
       description: this.viewModel.description.Value,
       goals: this.viewModel.goals.Value,
       value: this.viewModel.value.Value,
-      parentSpaceId: 0,
-      parentCourseId: 0,
+      parentSpaceID: 0,
+      parentCourseID: 0,
       hasScored: false,
     });
   }

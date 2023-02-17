@@ -65,15 +65,15 @@ export default class BackendAdapter implements IBackendAdapter {
 
   async getElementScore(
     userToken: string,
-    elementId: ComponentID,
-    courseId: ComponentID
+    elementID: ComponentID,
+    courseID: ComponentID
   ): Promise<ElementScoreTO> {
     const resp = await axios.get<ElementScoreTO>(
       config.serverURL +
         "/LearningElements/Course/" +
-        courseId +
+        courseID +
         "/Element/" +
-        elementId +
+        elementID +
         "/Score",
       {
         headers: {
@@ -87,10 +87,10 @@ export default class BackendAdapter implements IBackendAdapter {
 
   async getWorldStatus(
     userToken: string,
-    worldId: number
+    worldID: number
   ): Promise<BackendWorldStatusTO> {
     const resp = await axios.get<BackendWorldStatusTO>(
-      config.serverURL + "/Courses/" + worldId + "/status",
+      config.serverURL + "/Courses/" + worldID + "/status",
       {
         headers: {
           token: userToken,
@@ -103,16 +103,16 @@ export default class BackendAdapter implements IBackendAdapter {
 
   getElementSource(
     userToken: string,
-    elementId: number,
-    courseId: number
+    elementID: ComponentID,
+    courseID: ComponentID
   ): Promise<string> {
     return axios
       .get<{ filePath: string }>(
         config.serverURL +
           "/LearningElements/FilePath/Course/" +
-          courseId +
+          courseID +
           "/Element/" +
-          elementId,
+          elementID,
         {
           headers: {
             token: userToken,
@@ -128,9 +128,9 @@ export default class BackendAdapter implements IBackendAdapter {
     }>(
       config.serverURL +
         "/LearningElements/Course/" +
-        data.courseId +
+        data.courseID +
         "/Element/" +
-        data.h5pId,
+        data.h5pID,
       {
         serializedXAPIEvent: JSON.stringify(data.rawH5PEvent),
       },
@@ -162,10 +162,10 @@ export default class BackendAdapter implements IBackendAdapter {
 
   async getWorldData({
     userToken,
-    worldId,
+    worldID,
   }: getWorldDataParams): Promise<BackendWorldTO> {
     const response = await axios.get<IDSL>(
-      config.serverURL + "/Courses/" + worldId,
+      config.serverURL + "/Courses/" + worldID,
       {
         headers: {
           token: userToken,
@@ -178,17 +178,17 @@ export default class BackendAdapter implements IBackendAdapter {
 
   async scoreElement(
     userToken: string,
-    elementId: ComponentID,
-    courseId: ComponentID
+    elementID: ComponentID,
+    courseID: ComponentID
   ): Promise<boolean> {
     const response = await axios.patch<{
       isSuceess: boolean;
     }>(
       config.serverURL +
         "/LearningElements/Course/" +
-        courseId +
+        courseID +
         "/Element/" +
-        elementId,
+        elementID,
       {},
       {
         headers: {

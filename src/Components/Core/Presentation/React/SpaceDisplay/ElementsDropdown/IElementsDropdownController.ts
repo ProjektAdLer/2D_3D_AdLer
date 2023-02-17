@@ -1,5 +1,5 @@
 import { ComponentID } from "../../../../Domain/Types/EntityTypes";
 
 export default interface IElementsDropdownController {
-  startElement(elementId: ComponentID): void;
+  startElement(elementID: ComponentID): void;
 }

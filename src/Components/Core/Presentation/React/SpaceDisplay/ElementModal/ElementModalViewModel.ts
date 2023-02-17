@@ -8,6 +8,6 @@ export default class ElementModalViewModel {
   type = new Observable<string>();
   filePath = new Observable<string>();
 
-  parentSpaceId = new Observable<ComponentID>();
-  parentCourseId = new Observable<ComponentID>();
+  parentSpaceID = new Observable<ComponentID>();
+  parentCourseID = new Observable<ComponentID>();
 }

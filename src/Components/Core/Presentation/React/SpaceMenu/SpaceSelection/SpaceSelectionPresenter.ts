@@ -17,9 +17,9 @@ export default class SpaceSelectionPresenter
     // create space data object for each space
     world.spaces.forEach((space) => {
       // check if all requirements are completed
-      const isAvailable = space.requirements.every((requiredSpaceId) => {
+      const isAvailable = space.requirements.every((requiredSpaceID) => {
         const requiredSpace = world.spaces.find(
-          (space) => space.id === requiredSpaceId
+          (space) => space.id === requiredSpaceID
         );
 
         if (requiredSpace === undefined) {

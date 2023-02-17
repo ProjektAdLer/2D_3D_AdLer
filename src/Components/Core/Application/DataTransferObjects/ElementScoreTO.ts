@@ -1,4 +1,4 @@
 export default class ElementScoreTO {
-  elementId: number;
+  elementID: number;
   successss: boolean;
 }

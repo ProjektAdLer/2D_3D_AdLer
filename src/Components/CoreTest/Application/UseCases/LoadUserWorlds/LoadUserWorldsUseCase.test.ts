@@ -127,11 +127,11 @@ describe("LoadUserWorldsUseCase", () => {
     backendMock.getCoursesAvailableForUser.mockResolvedValue({
       courses: [
         {
-          courseId: 1,
+          courseID: 1,
           courseName: "Testkurs 1",
         },
         {
-          courseId: 2,
+          courseID: 2,
           courseName: "Testkurs 2",
         },
       ],

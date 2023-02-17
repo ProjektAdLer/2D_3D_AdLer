@@ -157,7 +157,7 @@ describe("LoadWorldUseCase", () => {
     backendMock.getCoursesAvailableForUser.mockResolvedValue({
       courses: [
         {
-          courseId: 1,
+          courseID: 1,
           courseName: "Testkurs",
         },
       ],
@@ -174,7 +174,7 @@ describe("LoadWorldUseCase", () => {
     entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
 
     backendMock.getWorldStatus.mockResolvedValue({
-      courseId: 1,
+      courseID: 1,
       learningElements: [{}],
     } as BackendWorldStatusTO);
 
@@ -238,7 +238,7 @@ describe("LoadWorldUseCase", () => {
     entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
 
     backendMock.getWorldStatus.mockResolvedValue({
-      courseId: 1,
+      courseID: 1,
       learningElements: [{}],
     } as BackendWorldStatusTO);
 
