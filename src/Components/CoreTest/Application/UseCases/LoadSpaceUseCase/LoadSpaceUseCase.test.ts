@@ -12,6 +12,7 @@ import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import WorldEntity from "../../../../Core/Domain/Entities/WorldEntity";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
+import { ConstructorReference } from "../../../../Core/Types/EntityManagerTypes";
 
 const entityContainerMock = mock<IEntityContainer>();
 const loadWorldMock = mock<ILoadWorldUseCase>();
@@ -145,5 +146,27 @@ describe("LoadSpaceUseCase", () => {
       spaceID: 1,
       worldID: 1,
     });
+  });
+
+  test("getWorldEntity should return true for matching worldIDs", async () => {
+    let filterReturn: boolean;
+    entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
+      <T>(
+        entityType: ConstructorReference<T>,
+        filter: (entity: T) => boolean
+      ) => {
+        let entity = new entityType();
+        //@ts-ignore entityType is allways WorldEntity and has a worldID
+        entity.worldID = 1;
+
+        filterReturn = filter(entity);
+        return [{}];
+      }
+    );
+
+    systemUnderTest["getWorldEntity"](1);
+
+    // @ts-ignore TS does not know about the mock
+    expect(filterReturn).toBe(true);
   });
 });

@@ -33,19 +33,12 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     worldID: ComponentID;
   }): Promise<void> {
     // try to get the world entity from the container, there should always be only one at most
-    let worldEntity = this.container.filterEntitiesOfType<WorldEntity>(
-      WorldEntity,
-      (entity) => entity.worldID === data.worldID
-    )[0];
+    let worldEntity = this.getWorldEntity(data.worldID);
 
     // if the world is not loaded yet, load it via the LoadWorldUseCase
     if (!worldEntity) {
       await this.loadWorldUseCase.executeAsync({ worldID: data.worldID });
-
-      worldEntity = this.container.filterEntitiesOfType<WorldEntity>(
-        WorldEntity,
-        (entity) => entity.worldID === data.worldID
-      )[0];
+      worldEntity = this.getWorldEntity(data.worldID);
     }
 
     // try to find the room with a matching id
@@ -75,5 +68,12 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     let spaceTO = new SpaceTO();
     spaceTO = Object.assign(spaceTO, structuredClone(spaceEntity));
     return spaceTO;
+  }
+
+  private getWorldEntity(worldID: ComponentID): WorldEntity {
+    return this.container.filterEntitiesOfType<WorldEntity>(
+      WorldEntity,
+      (entity) => entity.worldID === worldID
+    )[0];
   }
 }
