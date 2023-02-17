@@ -22,29 +22,34 @@ export default class LoadElementUseCase implements ILoadElementUseCase {
   ) {}
 
   async executeAsync(elementID: number): Promise<void> {
-    const entity = this.entityContainer.filterEntitiesOfType<ElementEntity>(
-      ElementEntity,
-      (e) => e.id === elementID
-    );
+    const elementEntity =
+      this.entityContainer.filterEntitiesOfType<ElementEntity>(
+        ElementEntity,
+        (e) => e.id === elementID
+      );
 
-    if (entity.length === 0)
+    if (elementEntity.length === 0)
       throw new Error(`Could not find element with id ${elementID}`);
-    else if (entity.length > 1)
+    else if (elementEntity.length > 1)
       throw new Error(`Found more than one element with id ${elementID}`);
 
-    const course =
-      this.entityContainer.getEntitiesOfType<WorldEntity>(WorldEntity);
+    const worldEntity = this.entityContainer.filterEntitiesOfType<WorldEntity>(
+      WorldEntity,
+      (entity) => {
+        return entity.worldID === elementEntity[0].parentCourseId;
+      }
+    );
 
-    if (course.length === 0)
+    if (worldEntity.length === 0)
       throw new Error(`Could not find any world entities`);
-    else if (course.length > 1)
+    else if (worldEntity.length > 1)
       throw new Error(`Found more than one world entity`);
 
-    let elementTO = this.toTO(entity[0]);
+    let elementTO = this.toTO(elementEntity[0]);
 
     elementTO.filePath = await this.getElementSourceUseCase.executeAsync({
       elementId: elementID,
-      courseId: course[0].worldID, // TODO: Use actual loaded course id
+      courseId: elementTO.parentCourseId,
     });
 
     this.worldPort.onElementLoaded(elementTO);

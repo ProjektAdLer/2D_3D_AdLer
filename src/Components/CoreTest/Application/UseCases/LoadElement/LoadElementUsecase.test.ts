@@ -43,7 +43,7 @@ describe("LoadElementUseCase", () => {
         id: 1,
       },
     ]);
-    entityContainerMock.getEntitiesOfType.mockReturnValue([{}]);
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([{}]);
     getElementSourceUseCaseMock.executeAsync.mockResolvedValue("path");
 
     systemUnderTest.executeAsync(1);
@@ -52,12 +52,12 @@ describe("LoadElementUseCase", () => {
   });
 
   test("calls the port with the TO", async () => {
-    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
       {
         id: 1,
       },
     ]);
-    entityContainerMock.getEntitiesOfType.mockReturnValue([{}]);
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([{}]);
     getElementSourceUseCaseMock.executeAsync.mockResolvedValue("path");
 
     await systemUnderTest.executeAsync(1);
@@ -97,7 +97,7 @@ describe("LoadElementUseCase", () => {
         id: 1,
       },
     ]);
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([]);
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
 
     await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
       "Could not find any world"
@@ -110,7 +110,7 @@ describe("LoadElementUseCase", () => {
         id: 1,
       },
     ]);
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
       {
         id: 1,
       },
@@ -126,7 +126,7 @@ describe("LoadElementUseCase", () => {
 
   test("filter Callback should return a boolean", async () => {
     let filterReturn: boolean;
-    entityContainerMock.filterEntitiesOfType.mockImplementation(
+    entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
       <T>(
         entityType: ConstructorReference<T>,
         filter: (entity: T) => boolean
@@ -139,7 +139,7 @@ describe("LoadElementUseCase", () => {
         ];
       }
     );
-    entityContainerMock.getEntitiesOfType.mockReturnValue([
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
       {
         worldID: 1,
       },
