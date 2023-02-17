@@ -33,17 +33,15 @@ export default class LoadElementUseCase implements ILoadElementUseCase {
     else if (elementEntity.length > 1)
       throw new Error(`Found more than one element with id ${elementID}`);
 
-    const worldEntity = this.entityContainer.filterEntitiesOfType<WorldEntity>(
-      WorldEntity,
-      (entity) => {
-        return entity.worldID === elementEntity[0].parentCourseId;
-      }
-    );
+    // const worldEntity = this.entityContainer.filterEntitiesOfType<WorldEntity>(
+    //   WorldEntity,
+    //   (entity) => entity.worldID === elementEntity[0].parentCourseId
+    // );
 
-    if (worldEntity.length === 0)
-      throw new Error(`Could not find any world entities`);
-    else if (worldEntity.length > 1)
-      throw new Error(`Found more than one world entity`);
+    // if (worldEntity.length === 0)
+    //   throw new Error(`Could not find any world entities`);
+    // else if (worldEntity.length > 1)
+    //   throw new Error(`Found more than one world entity`);
 
     let elementTO = this.toTO(elementEntity[0]);
 
