@@ -32,7 +32,7 @@ export type APIElement = {
   goals: string;
   elementCategory: string;
   learningElementValueList: KeyValuePair[];
-  learningSpaceParentID: number;
+  learningSpaceParentId: number;
 };
 
 type IDSL = {

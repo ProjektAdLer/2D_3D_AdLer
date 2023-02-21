@@ -50,22 +50,22 @@ export default class MockBackendAdapter implements IBackendAdapter {
     worldID: ComponentID
   ): Promise<BackendWorldStatusTO> {
     return Promise.resolve({
-      courseID: 1,
+      courseId: 1,
       learningElements: [
         {
-          elementID: 1,
+          elementId: 1,
           successss: true,
         },
         {
-          elementID: 2,
+          elementId: 2,
           successss: false,
         },
         {
-          elementID: 3,
+          elementId: 3,
           successss: false,
         },
         {
-          elementID: 4,
+          elementId: 4,
           successss: false,
         },
       ],
@@ -214,7 +214,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "50",
             },
           ],
-          learningSpaceParentID: 1,
+          learningSpaceParentId: 1,
         },
         {
           id: 2,
@@ -231,7 +231,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "25",
             },
           ],
-          learningSpaceParentID: 1,
+          learningSpaceParentId: 1,
         },
         {
           id: 3,
@@ -248,7 +248,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "25",
             },
           ],
-          learningSpaceParentID: 1,
+          learningSpaceParentId: 1,
         },
         {
           id: 4,
@@ -265,7 +265,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "25",
             },
           ],
-          learningSpaceParentID: 1,
+          learningSpaceParentId: 1,
         },
         {
           id: 5,
@@ -282,7 +282,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "50",
             },
           ],
-          learningSpaceParentID: 2,
+          learningSpaceParentId: 2,
         },
         {
           id: 6,
@@ -299,7 +299,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "75",
             },
           ],
-          learningSpaceParentID: 2,
+          learningSpaceParentId: 2,
         },
         {
           id: 7,
@@ -316,7 +316,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "50",
             },
           ],
-          learningSpaceParentID: 2,
+          learningSpaceParentId: 2,
         },
         {
           id: 8,
@@ -333,7 +333,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "25",
             },
           ],
-          learningSpaceParentID: 2,
+          learningSpaceParentId: 2,
         },
         {
           id: 9,
@@ -350,7 +350,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "25",
             },
           ],
-          learningSpaceParentID: 3,
+          learningSpaceParentId: 3,
         },
         {
           id: 10,
@@ -367,7 +367,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "25",
             },
           ],
-          learningSpaceParentID: 3,
+          learningSpaceParentId: 3,
         },
         {
           id: 11,
@@ -384,7 +384,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "123",
             },
           ],
-          learningSpaceParentID: 3,
+          learningSpaceParentId: 3,
         },
         {
           id: 12,
@@ -401,7 +401,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "25",
             },
           ],
-          learningSpaceParentID: 3,
+          learningSpaceParentId: 3,
         },
         {
           id: 13,
@@ -418,7 +418,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "50",
             },
           ],
-          learningSpaceParentID: 4,
+          learningSpaceParentId: 4,
         },
         {
           id: 14,
@@ -435,7 +435,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "45",
             },
           ],
-          learningSpaceParentID: 4,
+          learningSpaceParentId: 4,
         },
         {
           id: 15,
@@ -452,7 +452,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "50",
             },
           ],
-          learningSpaceParentID: 4,
+          learningSpaceParentId: 4,
         },
         {
           id: 16,
@@ -469,7 +469,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "25",
             },
           ],
-          learningSpaceParentID: 4,
+          learningSpaceParentId: 4,
         },
         {
           id: 17,
@@ -486,7 +486,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
               value: "25",
             },
           ],
-          learningSpaceParentID: 1,
+          learningSpaceParentId: 1,
         },
       ],
     },

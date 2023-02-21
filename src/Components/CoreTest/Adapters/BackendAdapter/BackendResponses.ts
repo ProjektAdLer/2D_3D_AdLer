@@ -105,7 +105,7 @@ export const mockDSL: IDSL = {
             value: "50",
           },
         ],
-        learningSpaceParentID: 1,
+        learningSpaceParentId: 1,
       },
       {
         id: 2,
@@ -122,7 +122,7 @@ export const mockDSL: IDSL = {
             value: "25",
           },
         ],
-        learningSpaceParentID: 1,
+        learningSpaceParentId: 1,
       },
       {
         id: 3,
@@ -139,7 +139,7 @@ export const mockDSL: IDSL = {
             value: "50",
           },
         ],
-        learningSpaceParentID: 1,
+        learningSpaceParentId: 1,
       },
       {
         id: 4,
@@ -156,7 +156,7 @@ export const mockDSL: IDSL = {
             value: "25",
           },
         ],
-        learningSpaceParentID: 1,
+        learningSpaceParentId: 1,
       },
     ],
   },

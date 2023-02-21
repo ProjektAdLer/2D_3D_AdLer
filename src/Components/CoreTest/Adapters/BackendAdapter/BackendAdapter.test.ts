@@ -1,5 +1,6 @@
 import { mock } from "jest-mock-extended";
 import { XAPiEvent } from "./../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
+import { getCoursesAvailableForUserResponse } from "../../../Core/Adapters/BackendAdapter/Types/getCoursesAvailableForUserResponse";
 import {
   expectedElementTO,
   expectedSpaceTO,
@@ -136,7 +137,7 @@ describe("BackendAdapter", () => {
     expect(returnedVal).toBe(true);
   });
 
-  test("should Get All Avalaibale Courses for a User", async () => {
+  test("should get all available courses for a user", async () => {
     mockedAxios.get.mockResolvedValue({
       data: [
         {

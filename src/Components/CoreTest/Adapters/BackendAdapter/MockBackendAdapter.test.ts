@@ -114,22 +114,22 @@ describe("MockBackendAdapter", () => {
 
   test("should get World Status", async () => {
     await expect(systemUnderTest.getWorldStatus("token", 1)).resolves.toEqual({
-      courseID: 1,
+      courseId: 1,
       learningElements: [
         {
-          elementID: 1,
+          elementId: 1,
           successss: true,
         },
         {
-          elementID: 2,
+          elementId: 2,
           successss: false,
         },
         {
-          elementID: 3,
+          elementId: 3,
           successss: false,
         },
         {
-          elementID: 4,
+          elementId: 4,
           successss: false,
         },
       ],

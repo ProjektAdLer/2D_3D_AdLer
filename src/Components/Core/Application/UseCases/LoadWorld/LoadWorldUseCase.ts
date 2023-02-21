@@ -147,9 +147,9 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       value: element.value || 0,
       parentSpaceID: element.parentSpaceID,
       hasScored:
-        worldStatus.learningElements.find((e) => e.elementID === element.id)
+        worldStatus.learningElements.find((e) => e.elementId === element.id)
           ?.successss || false,
-      parentCourseID: worldStatus.courseID,
+      parentCourseID: worldStatus.courseId,
     };
 
     return this.container.createEntity<ElementEntity>(

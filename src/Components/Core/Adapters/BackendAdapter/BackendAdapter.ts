@@ -15,6 +15,7 @@ import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 import { createPatch } from "rfc6902";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
 import BackendAdapterUtils from "./BackendAdapterUtils";
+import { getCoursesAvailableForUserResponse } from "./Types/getCoursesAvailableForUserResponse";
 
 @injectable()
 export default class BackendAdapter implements IBackendAdapter {
@@ -144,8 +145,8 @@ export default class BackendAdapter implements IBackendAdapter {
     return response.data.isSuceess;
   }
 
-  async getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
-    const response = await axios.get<CourseListTO>(
+  async getCoursesAvailableForUser(userToken: string) {
+    const response = await axios.get<getCoursesAvailableForUserResponse>(
       config.serverURL + "/Courses",
       {
         params: {
@@ -157,7 +158,13 @@ export default class BackendAdapter implements IBackendAdapter {
       }
     );
 
-    return response.data;
+    const courseList = response.data.courses.map((course) => ({
+      courseID: course.courseId,
+      courseName: course.courseName,
+    }));
+    const courseListTO = new CourseListTO();
+    courseListTO.courses = courseList;
+    return courseListTO;
   }
 
   async getWorldData({
