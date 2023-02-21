@@ -28,6 +28,7 @@ import AvatarCameraBuilder from "../../Presentation/Babylon/AvatarCamera/AvatarC
 import ExitModalBuilder from "~ReactComponents/SpaceDisplay/ExitModal/ExitModalBuilder";
 import WorldSelectionBuilder from "~ReactComponents/WorldMenu/WorldSelection/WorldSelectionBuilder";
 import WorldDetailBuilder from "~ReactComponents/WorldMenu/WorldDetail/WorldDetailBuilder";
+import SpaceSelectionGraphBuilder from "~ReactComponents/SpaceMenu/SpaceSelectionGraph/SpaceSelectionGraphBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -98,6 +99,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IWorldSelectionBuilder).to(
     WorldSelectionBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceSelectionGraphBuilder).to(
+    SpaceSelectionGraphBuilder
   );
 });
 

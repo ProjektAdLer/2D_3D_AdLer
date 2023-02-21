@@ -68,5 +68,6 @@ function addJestMappings() {
       tsConfig.compilerOptions.paths[key][0].replace("/*", "/$1");
   }
   obj["^src/(.*)$"] = "<rootDir>/src/$1";
+  obj["\\.(css|less)$"] = "identity-obj-proxy"; // mock css imports (needed for ReactFlow stylesheet)
   return obj;
 }
