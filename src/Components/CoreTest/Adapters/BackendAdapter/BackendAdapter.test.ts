@@ -9,7 +9,7 @@ import {
 } from "./BackendResponses";
 import { config } from "../../../../config";
 import BackendAdapter from "../../../Core/Adapters/BackendAdapter/BackendAdapter";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import CourseListTO from "../../../Core/Application/DataTransferObjects/CourseListTO";
 
 jest.mock("axios");
@@ -139,12 +139,10 @@ describe("BackendAdapter", () => {
 
   test("should get all available courses for a user", async () => {
     mockedAxios.get.mockResolvedValue({
-      data: [
-        {
-          courses: { courseID: 1, courseName: "string" },
-        },
-      ],
-    });
+      data: {
+        courses: [{ courseId: 1, courseName: "string" }],
+      },
+    } as AxiosResponse<getCoursesAvailableForUserResponse>);
     const returnedVal = await systemUnderTest.getCoursesAvailableForUser(
       "token"
     );
@@ -161,9 +159,9 @@ describe("BackendAdapter", () => {
         },
       }
     );
-    expect(returnedVal).toEqual([
-      { courses: { courseID: 1, courseName: "string" } },
-    ]);
+    expect(returnedVal).toEqual({
+      courses: [{ courseID: 1, courseName: "string" }],
+    });
   });
 
   test("should score a H5P Element", async () => {
