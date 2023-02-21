@@ -13,7 +13,7 @@ jest.mock(
   () => "mocked"
 );
 jest.mock(
-  "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelectionList",
+  "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection",
   () => "mocked"
 );
 jest.mock("~ReactComponents/SpaceMenu/SpaceDetail/SpaceDetail", () => "mocked");

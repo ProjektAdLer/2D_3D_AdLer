@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
-import SpaceSelectionRow from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionRow";
+import SpaceSelectionRow from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/List/SpaceSelectionRow";
 import React from "react";
 
 describe("SpaceSelectionRow", () => {

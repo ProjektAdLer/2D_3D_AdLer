@@ -1,11 +1,10 @@
-import { mock, mockDeep } from "jest-mock-extended";
-import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import { mock } from "jest-mock-extended";
 import { render } from "@testing-library/react";
 import SpaceSelectionViewModel, {
   SpaceSelectionSpaceData,
 } from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionViewModel";
 import React from "react";
-import SpaceSelectionList from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionList";
+import SpaceSelectionList from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/List/SpaceSelectionList";
 import ISpaceSelectionController from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/ISpaceSelectionController";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
@@ -14,29 +13,15 @@ import ICalculateSpaceScoreUseCase from "../../../../../Core/Application/UseCase
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IGetCurrentUserLocationUseCase from "../../../../../Core/Application/UseCases/GetCurrentUserLocation/IGetCurrentUserLocationUseCase";
 
-const loadWorldUseCaseMock = mock<ILoadWorldUseCase>();
 const calculateSpaceScoreUseCaseMock = mock<ICalculateSpaceScoreUseCase>();
-const getCurrentUserLocationUseCaseMock =
-  mock<IGetCurrentUserLocationUseCase>();
-
-const getCurrentUserLocationUseCaseReturnValue = {
-  worldID: 1,
-  spaceID: undefined,
-};
 
 describe("SpaceSelectionList", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind<ILoadWorldUseCase>(
-      USECASE_TYPES.ILoadWorldUseCase
-    ).toConstantValue(loadWorldUseCaseMock);
     CoreDIContainer.rebind<ICalculateSpaceScoreUseCase>(
       USECASE_TYPES.ICalculateSpaceScore
     ).toConstantValue(calculateSpaceScoreUseCaseMock);
-    CoreDIContainer.rebind<IGetCurrentUserLocationUseCase>(
-      USECASE_TYPES.IGetCurrentUserLocationUseCase
-    ).toConstantValue(getCurrentUserLocationUseCaseMock);
   });
 
   afterAll(() => {
@@ -53,17 +38,11 @@ describe("SpaceSelectionList", () => {
         isCompleted: true,
       } as SpaceSelectionSpaceData,
     ];
-
     const controllerMock = mock<ISpaceSelectionController>();
-    useBuilderMock([vm, controllerMock]);
-
-    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(
-      getCurrentUserLocationUseCaseReturnValue
-    );
 
     const container = render(
       <Provider container={CoreDIContainer}>
-        <SpaceSelectionList />
+        <SpaceSelectionList controller={controllerMock} viewModel={vm} />
       </Provider>
     );
 
@@ -71,38 +50,6 @@ describe("SpaceSelectionList", () => {
     container.getByRole("button").click();
 
     expect(controllerMock.onSpaceRowClicked).toBeCalledWith(1);
-  });
-
-  test("doesn't render without controller", () => {
-    useBuilderMock([mockDeep<SpaceSelectionViewModel>(), undefined]);
-
-    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(
-      getCurrentUserLocationUseCaseReturnValue
-    );
-
-    const { container } = render(
-      <Provider container={CoreDIContainer}>
-        <SpaceSelectionList />
-      </Provider>
-    );
-
-    expect(container.firstChild).toBeNull();
-  });
-
-  test("doesn't render without view model", () => {
-    useBuilderMock([undefined, mock<ISpaceSelectionController>()]);
-
-    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(
-      getCurrentUserLocationUseCaseReturnValue
-    );
-
-    const { container } = render(
-      <Provider container={CoreDIContainer}>
-        <SpaceSelectionList />
-      </Provider>
-    );
-
-    expect(container.firstChild).toBeNull();
   });
 
   test("should render uncompleted room buttons without issues.", () => {
@@ -116,15 +63,10 @@ describe("SpaceSelectionList", () => {
       } as SpaceSelectionSpaceData,
     ];
     const controllerMock = mock<ISpaceSelectionController>();
-    useBuilderMock([vm, controllerMock]);
-
-    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(
-      getCurrentUserLocationUseCaseReturnValue
-    );
 
     render(
       <Provider container={CoreDIContainer}>
-        <SpaceSelectionList />
+        <SpaceSelectionList controller={controllerMock} viewModel={vm} />
       </Provider>
     );
   });
@@ -140,15 +82,10 @@ describe("SpaceSelectionList", () => {
       } as SpaceSelectionSpaceData,
     ];
     const controllerMock = mock<ISpaceSelectionController>();
-    useBuilderMock([vm, controllerMock]);
-
-    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(
-      getCurrentUserLocationUseCaseReturnValue
-    );
 
     render(
       <Provider container={CoreDIContainer}>
-        <SpaceSelectionList />
+        <SpaceSelectionList viewModel={vm} controller={controllerMock} />
       </Provider>
     );
   });

@@ -2,8 +2,9 @@ import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import Observable from "src/Lib/Observable";
 
 export interface SpaceSelectionSpaceData {
-  id: number;
+  id: ComponentID;
   name: string;
+  requiredSpaces: ComponentID[];
   isAvailable: boolean;
   isCompleted: boolean;
 }

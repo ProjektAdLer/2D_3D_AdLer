@@ -17,7 +17,6 @@ const BUILDER_TYPES = {
   ISpaceGoalPanelBuilder: Symbol("ISpaceGoalPanelBuilder"),
   IHeaderBarBuilder: Symbol("IHeaderBarBuilder"),
   ISpaceSelectionBuilder: Symbol("ISpaceSelectionBuilder"),
-
   ISpaceDetailBuilder: Symbol("ISpaceDetailBuilder"),
   IWorldDetailBuilder: Symbol("IWorldDetailBuilder"),
   ISpaceCompletionModalBuilder: Symbol("ISpaceCompletionModalBuilder"),
@@ -28,7 +27,6 @@ const BUILDER_TYPES = {
   IAvatarCameraBuilder: Symbol("IAvatarCameraBuilder"),
   IExitModalBuilder: Symbol("IExitModalBuilder"),
   IWorldSelectionBuilder: Symbol("IWorldSelectionBuilder"),
-  ISpaceSelectionGraphBuilder: Symbol("ISpaceSelectionGraphBuilder"),
 };
 
 export default BUILDER_TYPES;

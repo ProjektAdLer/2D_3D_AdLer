@@ -34,6 +34,7 @@ export default class SpaceSelectionPresenter
       newSpaces.push({
         id: space.id,
         name: space.name,
+        requiredSpaces: space.requirements,
         isAvailable: isAvailable,
         isCompleted: space.currentScore >= space.requiredScore,
       });
