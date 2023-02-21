@@ -5,7 +5,7 @@ import SpaceSelectionViewModel, {
   SpaceSelectionSpaceData,
 } from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionViewModel";
 import React from "react";
-import SpaceSelection from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelection";
+import SpaceSelectionList from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionList";
 import ISpaceSelectionController from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/ISpaceSelectionController";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
@@ -24,7 +24,7 @@ const getCurrentUserLocationUseCaseReturnValue = {
   spaceID: undefined,
 };
 
-describe("SpaceSelection", () => {
+describe("SpaceSelectionList", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
@@ -63,7 +63,7 @@ describe("SpaceSelection", () => {
 
     const container = render(
       <Provider container={CoreDIContainer}>
-        <SpaceSelection />
+        <SpaceSelectionList />
       </Provider>
     );
 
@@ -82,7 +82,7 @@ describe("SpaceSelection", () => {
 
     const { container } = render(
       <Provider container={CoreDIContainer}>
-        <SpaceSelection />
+        <SpaceSelectionList />
       </Provider>
     );
 
@@ -98,7 +98,7 @@ describe("SpaceSelection", () => {
 
     const { container } = render(
       <Provider container={CoreDIContainer}>
-        <SpaceSelection />
+        <SpaceSelectionList />
       </Provider>
     );
 
@@ -124,7 +124,7 @@ describe("SpaceSelection", () => {
 
     render(
       <Provider container={CoreDIContainer}>
-        <SpaceSelection />
+        <SpaceSelectionList />
       </Provider>
     );
   });
@@ -148,7 +148,7 @@ describe("SpaceSelection", () => {
 
     render(
       <Provider container={CoreDIContainer}>
-        <SpaceSelection />
+        <SpaceSelectionList />
       </Provider>
     );
   });

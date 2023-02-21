@@ -17,7 +17,7 @@ import spaceSolved from "../../../../../../Assets/icons/17-1-solution-check/chec
 import spaceAvailable from "../../../../../../Assets/icons/27-1-lock-open/lock-icon-open-nobg.svg";
 import spaceLocked from "../../../../../../Assets/icons/27-lock-closed/lock-icon-closed-nobg.svg";
 
-export default function SpaceSelection() {
+export default function SpaceSelectionList() {
   const loadWorldUseCase = useInjection<ILoadWorldUseCase>(
     USECASE_TYPES.ILoadWorldUseCase
   );

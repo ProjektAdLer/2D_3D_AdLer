@@ -1,9 +1,10 @@
 import React from "react";
 import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBar";
 import SpaceDetail from "~ReactComponents/SpaceMenu/SpaceDetail/SpaceDetail";
-import SpaceSelection from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection";
+import SpaceSelectionList from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelectionList";
 import WorldCompletionModal from "~ReactComponents/SpaceMenu/WorldCompletionModal/WorldCompletionModal";
 import MenuTutorial from "~ReactComponents/SpaceMenu/MenuTutorial/MenuTutorial";
+import SpaceSelectionGraph from "~ReactComponents/SpaceMenu/SpaceSelectionGraph/SpaceSelectionGraph";
 
 export default function SpaceMenu() {
   return (
@@ -19,7 +20,8 @@ export default function SpaceMenu() {
 
         <div className="grid h-0 min-h-full grid-cols-2 grid-rows-1 grow lg:rounded-lg">
           <div className="flex justify-center col-start-1 p-2 border-r-2 lg:p-8 border-adlerdarkblue bg-adlergold">
-            <SpaceSelection />
+            <SpaceSelectionList />
+            {/* <SpaceSelectionGraph /> */}
           </div>
 
           <div className="flex justify-center col-start-2 p-2 lg:p-8 bg-adlergold">
