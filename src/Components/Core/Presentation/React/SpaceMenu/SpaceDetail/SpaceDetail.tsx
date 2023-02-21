@@ -13,6 +13,7 @@ import { getElementIcon } from "../../../Utils/GetIcon";
 import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
 import { logger } from "src/Lib/Logger";
 import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
+import greenSwosh from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 
 export default function SpaceDetail() {
   const [viewModel, controller] = useBuilder<
@@ -82,9 +83,17 @@ export default function SpaceDetail() {
                 <div key={element[1]} className="w-full">
                   <div className="flex flex-row justify-between w-full xl:w-3/4">
                     <div className="flex flex-row items-center gap-x-2">
-                      <div className="w-6 ml-2 mr-2 lg:w-8">
+                      <div className="w-6 ml-2 mr-2 lg:w-8 relative">
                         {getElementIcon(element[0])}
+                        {element[2] && (
+                          <img
+                            src={greenSwosh}
+                            alt=""
+                            className="absolute h-3 lg:h-4 bottom-5 left-4 lg:bottom-8 lg:left-6 "
+                          />
+                        )}
                       </div>
+
                       <div className="flex flex-row items-center ml-1">
                         {" " + element[1]}
                       </div>
