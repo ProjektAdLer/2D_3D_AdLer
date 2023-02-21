@@ -80,29 +80,27 @@ export default function SpaceDetail() {
             {elements.map((element) => {
               return (
                 <div key={element[1]} className="w-full">
-                  <CheckBoxEntry className="w-full" checked={element[2]}>
-                    <div className="flex flex-row justify-between w-full lg:w-3/4">
-                      <div className="flex flex-row items-center gap-x-2">
-                        <div className="w-6 ml-2 mr-2 lg:w-8">
-                          {getElementIcon(element[0])}
-                        </div>
-                        <div className="flex flex-row items-center ml-1">
-                          {" " + element[1] + " (" + element[0] + ")"}
-                        </div>
+                  <div className="flex flex-row justify-between w-full xl:w-3/4">
+                    <div className="flex flex-row items-center gap-x-2">
+                      <div className="w-6 ml-2 mr-2 lg:w-8">
+                        {getElementIcon(element[0])}
                       </div>
-                      <div className="flex flex-row items-center ml-1 place-items-end">
-                        {/* //TODO: Add real current points  */}
-                        {element[2]
-                          ? element[3] + "/" + element[3]
-                          : "0/" + element[3]}
-                        <img
-                          src={coinIcon}
-                          className="self-center w-6 ml-1 lg:w-8"
-                          alt="Coin-Icon"
-                        ></img>
+                      <div className="flex flex-row items-center ml-1">
+                        {" " + element[1]}
                       </div>
                     </div>
-                  </CheckBoxEntry>
+                    <div className="flex flex-row items-center ml-1 place-items-end">
+                      {/* //TODO: Add real current points  */}
+                      {element[2]
+                        ? element[3] + "/" + element[3]
+                        : "0/" + element[3]}
+                      <img
+                        src={coinIcon}
+                        className="self-center w-6 ml-1 lg:w-8"
+                        alt="Coin-Icon"
+                      ></img>
+                    </div>
+                  </div>
                 </div>
               );
             })}
