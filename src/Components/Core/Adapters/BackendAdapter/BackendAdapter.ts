@@ -146,24 +146,24 @@ export default class BackendAdapter implements IBackendAdapter {
   }
 
   async getCoursesAvailableForUser(userToken: string) {
-    const response = await axios.get<getCoursesAvailableForUserResponse>(
-      config.serverURL + "/Courses",
-      {
+    const response = await axios
+      .get<getCoursesAvailableForUserResponse>(config.serverURL + "/Courses", {
         params: {
           limitToEnrolled: false,
         },
         headers: {
           token: userToken,
         },
-      }
-    );
+      })
+      .then((response) =>
+        response.data.courses.map((course) => ({
+          courseID: course.courseId,
+          courseName: course.courseName,
+        }))
+      );
 
-    const courseList = response.data.courses.map((course) => ({
-      courseID: course.courseId,
-      courseName: course.courseName,
-    }));
     const courseListTO = new CourseListTO();
-    courseListTO.courses = courseList;
+    courseListTO.courses = response;
     return courseListTO;
   }
 
