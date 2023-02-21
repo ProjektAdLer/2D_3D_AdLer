@@ -7,7 +7,6 @@ import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/S
 import MenuHeaderBarController from "./MenuHeaderBarController";
 import MenuHeaderBarViewModel from "./MenuHeaderBarViewModel";
 import homeIcon from "../../../../../../Assets/icons/22-home-icon/home-icon-nobg.svg";
-import MenuTutorial from "~ReactComponents/SpaceMenu/MenuTutorial/MenuTutorial";
 
 export default function MenuHeaderBar() {
   const [viewModel, controller] = useBuilder<
