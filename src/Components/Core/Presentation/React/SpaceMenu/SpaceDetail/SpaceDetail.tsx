@@ -154,9 +154,17 @@ export default function SpaceDetail() {
               completed = lookup.isCompleted;
 
               return (
-                <CheckBoxEntry key={name + requirement} checked={completed}>
+                <div className="relative flex ml-2 my-4">
+                  <img src={spaceIcon} alt="" className="w-6 xl:w-8 mr-4" />
+                  {completed && (
+                    <img
+                      src={greenSwosh}
+                      alt=""
+                      className="absolute h-3 lg:h-4 bottom-3 left-4 lg:bottom-3 lg:left-6 "
+                    />
+                  )}
                   {name}
-                </CheckBoxEntry>
+                </div>
               );
             })}
           </div>
