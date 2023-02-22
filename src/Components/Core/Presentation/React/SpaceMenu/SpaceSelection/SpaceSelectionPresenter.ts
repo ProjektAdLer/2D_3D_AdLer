@@ -39,6 +39,17 @@ export default class SpaceSelectionPresenter
         isCompleted: space.currentScore >= space.requiredScore,
       });
     });
+    function sortSpaces(
+      a: SpaceSelectionSpaceData,
+      b: SpaceSelectionSpaceData
+    ) {
+      if (a.isCompleted && !b.isCompleted) return -1;
+      else if (!a.isCompleted && b.isCompleted) return 1;
+      if (a.isAvailable && !b.isAvailable) return -1;
+      else if (!a.isAvailable && b.isAvailable) return 1;
+      return 0;
+    }
+    newSpaces.sort(sortSpaces);
 
     // set all values to ensure correct rendering
     this.viewModel.spaces.Value = newSpaces;

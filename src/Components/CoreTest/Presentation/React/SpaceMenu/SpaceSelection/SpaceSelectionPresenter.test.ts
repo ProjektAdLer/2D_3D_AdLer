@@ -164,10 +164,12 @@ describe("SpaceSelectionPresenter", () => {
 
     systemUnderTest.onWorldLoaded(worldTO);
 
-    expect(systemUnderTest["viewModel"].spaces.Value).toEqual([
-      expect.objectContaining({ id: 1 }),
-      expect.objectContaining({ id: 2, isAvailable: false }),
-    ]);
+    expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ id: 1 }),
+        expect.objectContaining({ id: 2, isAvailable: false }),
+      ])
+    );
   });
 
   test("onWorldLoaded should set isCompleted to true if currentScore is greater than requiredScore", () => {

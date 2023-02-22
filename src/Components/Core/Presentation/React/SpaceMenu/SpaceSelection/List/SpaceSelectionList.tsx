@@ -9,6 +9,8 @@ import SpaceSelectionViewModel, {
 import spaceSolved from "../../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import spaceAvailable from "../../../../../../../Assets/icons/27-1-lock-open/lock-icon-open-nobg.svg";
 import spaceLocked from "../../../../../../../Assets/icons/27-lock-closed/lock-icon-closed-nobg.svg";
+import { useCallback } from "react";
+import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 
 export default function SpaceSelectionList(props: {
   controller: ISpaceSelectionController;
@@ -20,14 +22,18 @@ export default function SpaceSelectionList(props: {
   const [selectedRowID] = useObservable<number>(
     props.viewModel.selectedRowSpaceID
   );
-
+  const onRowClicked = useCallback(
+    (id: ComponentID) => props.controller.onSpaceClicked(id),
+    [props.controller]
+  );
   let spaceIcon: string;
 
   return (
     <ul className="flex flex-col gap-4 w-[100%] overflow-auto">
       {spaces?.map((space) => {
         if (space.isCompleted) spaceIcon = spaceSolved;
-        else return null;
+        else if (space.isAvailable) spaceIcon = spaceAvailable;
+        else spaceIcon = spaceLocked;
 
         return (
           <li
@@ -39,45 +45,7 @@ export default function SpaceSelectionList(props: {
               locked={!space.isAvailable}
               spaceTitle={space.name}
               selected={selectedRowID === space.id}
-              onClickCallback={() => props.controller.onSpaceClicked(space.id)}
-            />
-          </li>
-        );
-      })}
-      {spaces?.map((space) => {
-        if (space.isAvailable && !space.isCompleted) spaceIcon = spaceAvailable;
-        else return null;
-
-        return (
-          <li
-            className="flex items-center"
-            key={space.id.toString() + space.name}
-          >
-            <SpaceSelectionRow
-              icon={spaceIcon}
-              locked={!space.isAvailable}
-              spaceTitle={space.name}
-              selected={selectedRowID === space.id}
-              onClickCallback={() => props.controller.onSpaceClicked(space.id)}
-            />
-          </li>
-        );
-      })}
-      {spaces?.map((space) => {
-        if (!space.isAvailable && !space.isCompleted) spaceIcon = spaceLocked;
-        else return null;
-
-        return (
-          <li
-            className="flex items-center"
-            key={space.id.toString() + space.name}
-          >
-            <SpaceSelectionRow
-              icon={spaceIcon}
-              locked={!space.isAvailable}
-              spaceTitle={space.name}
-              selected={selectedRowID === space.id}
-              onClickCallback={() => props.controller.onSpaceClicked(space.id)}
+              onClickCallback={() => onRowClicked(space.id)}
             />
           </li>
         );
