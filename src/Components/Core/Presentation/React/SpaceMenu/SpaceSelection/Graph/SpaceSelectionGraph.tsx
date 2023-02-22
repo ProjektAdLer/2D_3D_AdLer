@@ -14,6 +14,7 @@ import "reactflow/dist/style.css";
 import { useCallback, useEffect } from "react";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import SpaceSelectionNode, {
+  SpaceSelectionNodeInputType,
   SpaceSelectionNodeType,
 } from "./SpaceSelectionNode";
 
@@ -39,9 +40,26 @@ export default function SpaceSelectionGraph(props: {
       spaces.map((space) => {
         y += 100;
         x += 100;
+
+        let inputType: SpaceSelectionNodeInputType;
+        if (space.requiredSpaces.length === 1) {
+          inputType = "single";
+        } else if (space.requiredSpaces.length > 1) {
+          inputType = "and";
+        } else {
+          inputType = "none";
+        }
+        let hasOutput = spaces.some((inputSpace) =>
+          inputSpace.requiredSpaces.includes(space.id)
+        );
+
         const node: SpaceSelectionNodeType = {
           id: space.id.toString(),
-          data: { label: space.name },
+          data: {
+            label: space.name,
+            input: inputType,
+            output: hasOutput,
+          },
           type: "spaceNode",
           position: { x: x, y: y },
           connectable: false,
