@@ -21,13 +21,51 @@ export default function SpaceSelectionList(props: {
     props.viewModel.selectedRowSpaceID
   );
 
+  let spaceIcon: string;
+
   return (
     <ul className="flex flex-col gap-4 w-[100%] overflow-auto">
       {spaces?.map((space) => {
-        let spaceIcon: string;
         if (space.isCompleted) spaceIcon = spaceSolved;
-        else if (space.isAvailable) spaceIcon = spaceAvailable;
-        else spaceIcon = spaceLocked;
+        else return null;
+
+        return (
+          <li
+            className="flex items-center"
+            key={space.id.toString() + space.name}
+          >
+            <SpaceSelectionRow
+              icon={spaceIcon}
+              locked={!space.isAvailable}
+              spaceTitle={space.name}
+              selected={selectedRowID === space.id}
+              onClickCallback={() => props.controller.onSpaceClicked(space.id)}
+            />
+          </li>
+        );
+      })}
+      {spaces?.map((space) => {
+        if (space.isAvailable && !space.isCompleted) spaceIcon = spaceAvailable;
+        else return null;
+
+        return (
+          <li
+            className="flex items-center"
+            key={space.id.toString() + space.name}
+          >
+            <SpaceSelectionRow
+              icon={spaceIcon}
+              locked={!space.isAvailable}
+              spaceTitle={space.name}
+              selected={selectedRowID === space.id}
+              onClickCallback={() => props.controller.onSpaceClicked(space.id)}
+            />
+          </li>
+        );
+      })}
+      {spaces?.map((space) => {
+        if (!space.isAvailable && !space.isCompleted) spaceIcon = spaceLocked;
+        else return null;
 
         return (
           <li
