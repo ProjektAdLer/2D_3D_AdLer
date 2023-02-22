@@ -4,13 +4,22 @@ import ReactFlow, {
   Background,
   Controls,
   Edge,
+  MiniMap,
   Node,
   NodeMouseHandler,
+  NodeTypes,
   useReactFlow,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { useCallback, useEffect } from "react";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
+import SpaceSelectionNode, {
+  SpaceSelectionNodeType,
+} from "./SpaceSelectionNode";
+
+const nodeTypes: NodeTypes = {
+  spaceNode: SpaceSelectionNode,
+};
 
 export default function SpaceSelectionGraph(props: {
   controller: ISpaceSelectionController;
@@ -23,16 +32,19 @@ export default function SpaceSelectionGraph(props: {
     if (spaces === undefined) return;
 
     // create space nodes
+    // TODO: add better node positioning here
     let y = 0;
     let x = 0;
     reactFlowInstance.setNodes(
       spaces.map((space) => {
         y += 100;
         x += 100;
-        const node: Node = {
+        const node: SpaceSelectionNodeType = {
           id: space.id.toString(),
           data: { label: space.name },
+          type: "spaceNode",
           position: { x: x, y: y },
+          connectable: false,
         };
         return node;
       })
@@ -66,15 +78,17 @@ export default function SpaceSelectionGraph(props: {
     <div style={{ height: "100%", width: "100%" }}>
       <ReactFlow
         defaultNodes={[]}
-        defaultEdges={[]}
-        defaultEdgeOptions={{ style: { stroke: "white" } }}
+        nodeTypes={nodeTypes}
         nodesDraggable={true} // TODO: set to false when nodes are placed in the correct positions
         nodesConnectable={false}
+        onNodeClick={onNodeClickCallback}
+        defaultEdges={[]}
+        defaultEdgeOptions={{ style: { stroke: "white" } }}
         fitView={true}
         fitViewOptions={{ padding: 0.1 }}
-        onNodeClick={onNodeClickCallback}
       >
         <Background size={2} />
+        {/* <MiniMap /> */}
         <Controls showInteractive={false} />
       </ReactFlow>
     </div>
