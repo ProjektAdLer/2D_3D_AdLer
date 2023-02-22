@@ -39,9 +39,7 @@ export default function SpaceSelectionList(props: {
               locked={!space.isAvailable}
               spaceTitle={space.name}
               selected={selectedRowID === space.id}
-              onClickCallback={() =>
-                props.controller.onSpaceRowClicked(space.id)
-              }
+              onClickCallback={() => props.controller.onSpaceClicked(space.id)}
             />
           </li>
         );

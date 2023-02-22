@@ -33,7 +33,7 @@ describe("SpaceSelectionController", () => {
   test("onSpaceRowClicked calls LoadSpaceUseCase", () => {
     viewModel.worldID.Value = 1;
 
-    systemUnderTest.onSpaceRowClicked(42);
+    systemUnderTest.onSpaceClicked(42);
 
     expect(loadSpaceUseCaseMock.executeAsync).toBeCalledWith({
       spaceID: 42,

@@ -8,10 +8,8 @@ import SpaceSelectionList from "../../../../../Core/Presentation/React/SpaceMenu
 import ISpaceSelectionController from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/ISpaceSelectionController";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import ILoadWorldUseCase from "../../../../../Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
 import ICalculateSpaceScoreUseCase from "../../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import IGetCurrentUserLocationUseCase from "../../../../../Core/Application/UseCases/GetCurrentUserLocation/IGetCurrentUserLocationUseCase";
 
 const calculateSpaceScoreUseCaseMock = mock<ICalculateSpaceScoreUseCase>();
 
@@ -49,7 +47,7 @@ describe("SpaceSelectionList", () => {
     // click on the first row
     container.getByRole("button").click();
 
-    expect(controllerMock.onSpaceRowClicked).toBeCalledWith(1);
+    expect(controllerMock.onSpaceClicked).toBeCalledWith(1);
   });
 
   test("should render uncompleted room buttons without issues.", () => {

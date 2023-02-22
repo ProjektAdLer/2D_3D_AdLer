@@ -5,10 +5,11 @@ import ReactFlow, {
   Controls,
   Edge,
   Node,
+  NodeMouseHandler,
   useReactFlow,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 
 export default function SpaceSelectionGraph(props: {
@@ -54,14 +55,24 @@ export default function SpaceSelectionGraph(props: {
     );
   }, [spaces]);
 
+  const onNodeClickCallback = useCallback<NodeMouseHandler>(
+    (event: React.MouseEvent, node: Node) => {
+      props.controller.onSpaceClicked(parseInt(node.id));
+    },
+    [props.controller]
+  );
+
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <ReactFlow
         defaultNodes={[]}
         defaultEdges={[]}
         defaultEdgeOptions={{ style: { stroke: "white" } }}
-        nodesDraggable={true}
+        nodesDraggable={true} // TODO: set to false when nodes are placed in the correct positions
+        nodesConnectable={false}
         fitView={true}
+        fitViewOptions={{ padding: 10 }}
+        onNodeClick={onNodeClickCallback}
       >
         <Background size={2} />
         <Controls showInteractive={false} />

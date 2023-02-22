@@ -38,9 +38,9 @@ export default function SpaceSelection() {
 
   // TODO: add a toggle to switch between graph and list view here
   return (
-    // <ReactFlowProvider>
-    //   <SpaceSelectionGraph controller={controller} viewModel={viewModel} />
-    // </ReactFlowProvider>
-    <SpaceSelectionList controller={controller} viewModel={viewModel} />
+    <ReactFlowProvider>
+      <SpaceSelectionGraph controller={controller} viewModel={viewModel} />
+    </ReactFlowProvider>
+    // <SpaceSelectionList controller={controller} viewModel={viewModel} />
   );
 }
