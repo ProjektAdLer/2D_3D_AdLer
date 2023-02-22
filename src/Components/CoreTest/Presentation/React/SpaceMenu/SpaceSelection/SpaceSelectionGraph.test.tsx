@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import { Provider } from "inversify-react";
 import { mock } from "jest-mock-extended";
 import React from "react";
@@ -82,5 +82,31 @@ describe("SpaceSelectionGraph", () => {
     const edges = container.querySelectorAll(".react-flow__edge");
     expect(edges.length).toBe(1);
     expect(edges[0].getAttribute("data-testid")).toContain("edge-1-2");
+  });
+
+  test("calls controller with space id when a node is clicked", () => {
+    const vm = new SpaceSelectionViewModel();
+    const spaceID = 42;
+    vm.spaces.Value = [
+      {
+        id: spaceID,
+        name: "test",
+        isAvailable: true,
+        isCompleted: true,
+        requiredSpaces: [],
+      },
+    ];
+    const controllerMock = mock<ISpaceSelectionController>();
+
+    const { container } = render(
+      <ReactFlowProvider>
+        <SpaceSelectionGraph controller={controllerMock} viewModel={vm} />
+      </ReactFlowProvider>
+    );
+    const node = container.querySelector(".react-flow__node");
+    expect(node).not.toBeNull();
+
+    fireEvent.click(node!);
+    expect(controllerMock.onSpaceClicked).toBeCalledWith(spaceID);
   });
 });
