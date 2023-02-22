@@ -71,7 +71,7 @@ export default function SpaceSelectionGraph(props: {
         nodesDraggable={true} // TODO: set to false when nodes are placed in the correct positions
         nodesConnectable={false}
         fitView={true}
-        fitViewOptions={{ padding: 10 }}
+        fitViewOptions={{ padding: 0.1 }}
         onNodeClick={onNodeClickCallback}
       >
         <Background size={2} />
