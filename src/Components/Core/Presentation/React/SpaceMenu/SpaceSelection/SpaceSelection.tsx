@@ -6,7 +6,7 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import SpaceSelectionViewModel from "./SpaceSelectionViewModel";
 import ISpaceSelectionController from "./ISpaceSelectionController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SpaceSelectionGraph from "./Graph/SpaceSelectionGraph";
 import { ReactFlowProvider } from "reactflow";
 import SpaceSelectionList from "./List/SpaceSelectionList";
@@ -25,6 +25,8 @@ export default function SpaceSelection() {
     ISpaceSelectionController
   >(BUILDER_TYPES.ISpaceSelectionBuilder);
 
+  const [showGraph, setShowGraph] = useState(true);
+
   useEffect(() => {
     // call load world use case to get relevant data
     const loadWorldAsync = async (): Promise<void> => {
@@ -36,11 +38,25 @@ export default function SpaceSelection() {
 
   if (!viewModel || !controller) return null;
 
-  // TODO: add a toggle to switch between graph and list view here
   return (
-    <ReactFlowProvider>
-      <SpaceSelectionGraph controller={controller} viewModel={viewModel} />
-    </ReactFlowProvider>
-    // <SpaceSelectionList controller={controller} viewModel={viewModel} />
+    <div style={{ width: "100%" }}>
+      <div>
+        <input
+          type="checkbox"
+          id="toggle"
+          checked={showGraph}
+          onChange={(e) => setShowGraph(e.target.checked)}
+        />
+        <label>Ansicht wechseln</label>
+      </div>
+      {showGraph && (
+        <ReactFlowProvider>
+          <SpaceSelectionGraph controller={controller} viewModel={viewModel} />
+        </ReactFlowProvider>
+      )}
+      {!showGraph && (
+        <SpaceSelectionList controller={controller} viewModel={viewModel} />
+      )}
+    </div>
   );
 }
