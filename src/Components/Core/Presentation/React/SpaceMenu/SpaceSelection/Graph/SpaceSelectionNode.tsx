@@ -13,7 +13,12 @@ export type SpaceSelectionNodeType = Node<SpaceSelectionNodeData>;
 function SpaceSelectionNode(props: Partial<SpaceSelectionNodeType>) {
   return (
     <>
-      <StyledButton shape="freefloatcenter">{props.data!.label}</StyledButton>
+      <StyledButton
+        shape="freefloatcenter"
+        color={props.selected ? "pressed" : "default"}
+      >
+        {props.data!.label}
+      </StyledButton>
       {props.data?.input != "none" && (
         <Handle type="target" position={Position.Top}>
           Und
