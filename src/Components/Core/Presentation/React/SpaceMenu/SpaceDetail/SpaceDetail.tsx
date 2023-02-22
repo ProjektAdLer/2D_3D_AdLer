@@ -89,7 +89,7 @@ export default function SpaceDetail() {
                           <img
                             src={greenSwosh}
                             alt=""
-                            className="absolute h-3 lg:h-4 bottom-5 left-4 lg:bottom-8 lg:left-6 "
+                            className="absolute h-4 lg:h-6 bottom-3 left-4 lg:bottom-6 lg:left-6 "
                           />
                         )}
                       </div>
@@ -160,7 +160,7 @@ export default function SpaceDetail() {
                     <img
                       src={greenSwosh}
                       alt=""
-                      className="absolute h-3 lg:h-4 bottom-3 left-4 lg:bottom-3 lg:left-6 "
+                      className="absolute h-4 lg:h-6 bottom-3 left-4 lg:bottom-3 lg:left-6 "
                     />
                   )}
                   {name}
