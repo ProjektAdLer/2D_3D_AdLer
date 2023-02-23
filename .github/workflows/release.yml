@@ -5,11 +5,12 @@ on:
     types: [created]
   push:
     branches:
-      - 'main'
+      - "main"
 
 jobs:
   build:
     uses: ./.github/workflows/_shared_build_test.yml
+    secrets: inherit
 
   docker:
     needs: build
