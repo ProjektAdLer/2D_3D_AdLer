@@ -1,3 +1,4 @@
+import bind from "bind-decorator";
 import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
 import ISpaceSelectionPresenter from "./ISpaceSelectionPresenter";
 import SpaceSelectionViewModel, {
@@ -39,19 +40,19 @@ export default class SpaceSelectionPresenter
         isCompleted: space.currentScore >= space.requiredScore,
       });
     });
-    function sortSpaces(
-      a: SpaceSelectionSpaceData,
-      b: SpaceSelectionSpaceData
-    ) {
-      if (a.isCompleted && !b.isCompleted) return -1;
-      else if (!a.isCompleted && b.isCompleted) return 1;
-      if (a.isAvailable && !b.isAvailable) return -1;
-      else if (!a.isAvailable && b.isAvailable) return 1;
-      return 0;
-    }
-    newSpaces.sort(sortSpaces);
+
+    // sort spaces like this: completed, available, not available
+    newSpaces.sort(this.sortSpaces.bind(this));
 
     // set all values to ensure correct rendering
     this.viewModel.spaces.Value = newSpaces;
+  }
+
+  private sortSpaces(a: SpaceSelectionSpaceData, b: SpaceSelectionSpaceData) {
+    if (a.isCompleted && !b.isCompleted) return -1;
+    else if (!a.isCompleted && b.isCompleted) return 1;
+    else if (a.isAvailable && !b.isAvailable) return -1;
+    else if (!a.isAvailable && b.isAvailable) return 1;
+    return 0;
   }
 }
