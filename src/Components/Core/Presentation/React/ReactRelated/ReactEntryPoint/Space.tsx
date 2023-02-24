@@ -60,7 +60,7 @@ export default function Space() {
             </h1>
           </div>
         </StyledModal>
-        <UseGuide></UseGuide>
+        <UseGuide />
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
         <div className="z-50">
