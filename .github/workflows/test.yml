@@ -3,9 +3,10 @@ name: Node.js CI
 on:
   push:
     branches-ignore:
-      - 'main'
+      - "main"
   pull_request:
 
 jobs:
   build:
     uses: ./.github/workflows/_shared_build_test.yml
+    secrets: inherit
