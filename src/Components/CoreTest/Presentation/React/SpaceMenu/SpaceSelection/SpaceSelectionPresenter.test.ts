@@ -13,6 +13,7 @@ describe("SpaceSelectionPresenter", () => {
 
   test("onWorldLoaded sets a new data set in the VM for each space", () => {
     const worldTO: WorldTO = {
+      worldID: 1,
       worldName: "Test World",
       worldGoal: "Test World Goal",
       description: "Test World Description",
@@ -55,6 +56,7 @@ describe("SpaceSelectionPresenter", () => {
 
   test("onWorldLoaded should throw error if requiredSpace is undefined", () => {
     const worldTO: WorldTO = {
+      worldID: 1,
       worldName: "Test World",
       worldGoal: "Test World Goal",
       description: "Test World Description",
@@ -92,6 +94,7 @@ describe("SpaceSelectionPresenter", () => {
 
   test("onWorldLoaded should set isAvailable to true if currentScore is less than requiredScore for the required space", () => {
     const worldTO: WorldTO = {
+      worldID: 1,
       worldName: "Test World",
       worldGoal: "Test World Goal",
       description: "Test World Description",
@@ -132,6 +135,7 @@ describe("SpaceSelectionPresenter", () => {
 
   test("onWorldLoaded should set isAvailable to false if currentScore is smaller than requiredScore for the required space", () => {
     const worldTO: WorldTO = {
+      worldID: 1,
       worldName: "Test World",
       worldGoal: "Test World Goal",
       description: "Test World Description",
@@ -174,6 +178,7 @@ describe("SpaceSelectionPresenter", () => {
 
   test("onWorldLoaded should set isCompleted to true if currentScore is greater than requiredScore", () => {
     const worldTO: WorldTO = {
+      worldID: 1,
       worldName: "Test World",
       worldGoal: "Test World Goal",
       description: "Test World Description",
