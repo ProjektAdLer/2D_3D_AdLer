@@ -8,7 +8,7 @@ export const config = {
   password: process.env.REACT_APP_DEBUG_PASSWORD || "",
   logLevel: process.env.REACT_APP_LOGLEVEL || "log",
   serverURL:
-    process.env.REACT_APP_API_SERVER_URL || "https://api.cluuub.xyz/api",
+    process.env.REACT_APP_API_SERVER_URL || "https://api2.cluuub.xyz/api",
   useFakeBackend: parseBool(process.env.REACT_APP_USE_FAKEBACKEND || true),
   autoLoginWithoutShortcut: parseBool(
     process.env.REACT_APP_AUTO_LOGIN_WITHOUT_SHORTCUT || true
