@@ -199,4 +199,108 @@ describe("SpaceSelectionPresenter", () => {
       expect.objectContaining({ id: 1, isCompleted: true }),
     ]);
   });
+  test("sorting should sort completed spaces in front of incompleted ones", () => {
+    const worldTO: WorldTO = {
+      worldID: 1,
+      worldName: "Test World",
+      worldGoal: "Test World Goal",
+      description: "Test World Description",
+      goals: "Test World Goals",
+      spaces: [
+        {
+          id: 1,
+          name: "Test Space 1",
+          elements: [],
+          description: "Test Space 1 Description",
+          goals: "Test Space 1 Goals",
+          requiredScore: 1,
+          currentScore: 0,
+          maxScore: 1,
+          requirements: [2],
+        },
+        {
+          id: 2,
+          name: "Test Space 2",
+          elements: [],
+          description: "Test Space 1 Description",
+          goals: "Test Space 1 Goals",
+          requiredScore: 0,
+          currentScore: 0,
+          maxScore: 0,
+          requirements: [],
+        },
+        {
+          id: 3,
+          name: "Test Space 1",
+          elements: [],
+          description: "Test Space 1 Description",
+          goals: "Test Space 1 Goals",
+          requiredScore: 1,
+          currentScore: 0,
+          maxScore: 1,
+          requirements: [2],
+        },
+      ],
+    };
+
+    systemUnderTest.onWorldLoaded(worldTO);
+
+    expect(systemUnderTest["viewModel"].spaces.Value).toMatchObject([
+      { id: 2 },
+      { id: 1 },
+      { id: 3 },
+    ]);
+  });
+  test("sorting should sort available spaces in front of locked ones", () => {
+    const worldTO: WorldTO = {
+      worldID: 1,
+      worldName: "Test World",
+      worldGoal: "Test World Goal",
+      description: "Test World Description",
+      goals: "Test World Goals",
+      spaces: [
+        {
+          id: 1,
+          name: "Test Space 1",
+          elements: [],
+          description: "Test Space 1 Description",
+          goals: "Test Space 1 Goals",
+          requiredScore: 1,
+          currentScore: 0,
+          maxScore: 1,
+          requirements: [2],
+        },
+        {
+          id: 2,
+          name: "Test Space 2",
+          elements: [],
+          description: "Test Space 2 Description",
+          goals: "Test Space 2 Goals",
+          requiredScore: 1,
+          currentScore: 0,
+          maxScore: 1,
+          requirements: [],
+        },
+        {
+          id: 3,
+          name: "Test Space 3",
+          elements: [],
+          description: "Test Space 3 Description",
+          goals: "Test Space 3 Goals",
+          requiredScore: 1,
+          currentScore: 0,
+          maxScore: 1,
+          requirements: [2],
+        },
+      ],
+    };
+
+    systemUnderTest.onWorldLoaded(worldTO);
+
+    expect(systemUnderTest["viewModel"].spaces.Value).toMatchObject([
+      { id: 2 },
+      { id: 1 },
+      { id: 3 },
+    ]);
+  });
 });
