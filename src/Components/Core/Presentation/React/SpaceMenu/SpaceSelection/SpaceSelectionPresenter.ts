@@ -1,4 +1,3 @@
-import bind from "bind-decorator";
 import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
 import ISpaceSelectionPresenter from "./ISpaceSelectionPresenter";
 import SpaceSelectionViewModel, {
