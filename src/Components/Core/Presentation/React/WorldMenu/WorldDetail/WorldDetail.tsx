@@ -8,6 +8,8 @@ import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservab
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
 import IWorldDetailController from "./IWorldDetailController";
+import greenSwosh from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
+import spaceIcon from "../../../../../../Assets/icons/13-space/space-icon-nobg.svg";
 
 export default function WorldDetail() {
   const [viewModel, controller] = useBuilder<
@@ -62,17 +64,18 @@ export default function WorldDetail() {
           {spaces?.map((space) => {
             return (
               <div key={space.id}>
-                <div className="flex flex-row items-center">
-                  {space.name}
-                  {space.isCompleted ? (
-                    <div className="ml-2 text-green-500 roboto-regular">
-                      {"(abgeschlossen)"}
-                    </div>
-                  ) : (
-                    <div className="ml-2 text-red-500 roboto-regular">
-                      {"(noch nicht abgeschlossen)"}
-                    </div>
-                  )}
+                <div className="flex flex-row items-center lg:text-lg">
+                  <div className="relative flex ml-2 my-2">
+                    <img src={spaceIcon} alt="" className="w-8 xl:w-8 mr-4" />
+                    {space.isCompleted && (
+                      <img
+                        src={greenSwosh}
+                        alt=""
+                        className="absolute h-4 lg:h-6 bottom-3 left-4 lg:bottom-3 lg:left-6 "
+                      />
+                    )}
+                  </div>
+                  <div className="pl-2">{space.name}</div>
                 </div>
               </div>
             );

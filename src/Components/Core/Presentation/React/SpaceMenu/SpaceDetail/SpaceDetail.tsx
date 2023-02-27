@@ -155,7 +155,7 @@ export default function SpaceDetail() {
 
               return (
                 <div className="relative flex ml-2 my-4">
-                  <img src={spaceIcon} alt="" className="w-6 xl:w-8 mr-4" />
+                  <img src={spaceIcon} alt="" className="w-8 xl:w-8 mr-4" />
                   {completed && (
                     <img
                       src={greenSwosh}
