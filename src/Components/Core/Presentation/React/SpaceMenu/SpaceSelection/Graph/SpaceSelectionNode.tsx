@@ -19,9 +19,9 @@ function SpaceSelectionNode(props: Partial<SpaceSelectionNodeType>) {
       >
         {props.data!.label}
       </StyledButton>
-      {props.data?.input != "none" && (
+      {props.data?.input !== "none" && (
         <Handle type="target" position={Position.Top}>
-          Und
+          {props.data?.input === "and" && "Und"}
         </Handle>
       )}
       {props.data?.output && (
