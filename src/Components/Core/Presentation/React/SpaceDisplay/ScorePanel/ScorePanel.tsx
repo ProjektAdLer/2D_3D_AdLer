@@ -23,36 +23,29 @@ export default function ScorePanel() {
     <div style={{ width: 60 }}>
       <CircularProgressbarWithChildren
         value={percentage}
-        strokeWidth={15}
+        strokeWidth={10}
         styles={buildStyles({
           strokeLinecap: "butt",
           pathTransitionDuration: 1.5,
 
           // Colors
-          pathColor: `rgba(39, 117,84, ${percentage / 100})`,
-          trailColor: "#C45B01",
+          trailColor: "#E64B17",
+          pathColor: `#59B347`,
         })}
       >
-        <RadialSeparators
-          count={25}
-          style={{
-            background: "rgb(69,160,229)",
-            width: "1px",
-            // This needs to be equal to props.strokeWidth
-            height: `${15}%`,
-          }}
-        />
         <img
-          style={{ width: 40, opacity: 0.5 }}
+          style={{ width: 40, opacity: 0.4 }}
           src={coinIcon}
           alt="coin-icon"
         />
 
-        <div style={{ position: "absolute" }}>
-          {(score ?? "0") + "/" + (requiredScore ?? "0")}
+        <div
+          className="font-bold text-center"
+          style={{ position: "absolute", fontSize: 10, lineHeight: 1.2 }}
+        >
+          {score ?? "0"} <br /> von <br /> {requiredScore ?? "0"}
         </div>
       </CircularProgressbarWithChildren>
-      ;
     </div>
   );
 }
