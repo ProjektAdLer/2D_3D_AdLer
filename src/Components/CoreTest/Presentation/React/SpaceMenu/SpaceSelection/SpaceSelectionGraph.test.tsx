@@ -2,11 +2,9 @@ import { fireEvent, render } from "@testing-library/react";
 import { Provider } from "inversify-react";
 import { mock } from "jest-mock-extended";
 import React from "react";
-import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import ISpaceSelectionController from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/ISpaceSelectionController";
 import SpaceSelectionGraph from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/Graph/SpaceSelectionGraph";
 import SpaceSelectionViewModel from "../../../../../Core/Presentation/React/SpaceMenu/SpaceSelection/SpaceSelectionViewModel";
-import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import { ReactFlowProvider } from "reactflow";
 
 describe("SpaceSelectionGraph", () => {
@@ -35,7 +33,14 @@ describe("SpaceSelectionGraph", () => {
         id: 2,
         name: "test",
         isAvailable: true,
-        isCompleted: true,
+        isCompleted: false,
+        requiredSpaces: [],
+      },
+      {
+        id: 3,
+        name: "test",
+        isAvailable: false,
+        isCompleted: false,
         requiredSpaces: [],
       },
     ];
@@ -48,9 +53,10 @@ describe("SpaceSelectionGraph", () => {
     );
 
     const nodes = container.querySelectorAll(".react-flow__node");
-    expect(nodes.length).toBe(2);
+    expect(nodes.length).toBe(3);
     expect(nodes[0].getAttribute("data-id")).toBe("1");
     expect(nodes[1].getAttribute("data-id")).toBe("2");
+    expect(nodes[2].getAttribute("data-id")).toBe("3");
   });
 
   test("creates an edge for each required space", () => {
@@ -70,6 +76,13 @@ describe("SpaceSelectionGraph", () => {
         isCompleted: true,
         requiredSpaces: [1],
       },
+      {
+        id: 3,
+        name: "test",
+        isAvailable: true,
+        isCompleted: true,
+        requiredSpaces: [1, 2],
+      },
     ];
     const controllerMock = mock<ISpaceSelectionController>();
 
@@ -80,8 +93,10 @@ describe("SpaceSelectionGraph", () => {
     );
 
     const edges = container.querySelectorAll(".react-flow__edge");
-    expect(edges.length).toBe(1);
+    expect(edges.length).toBe(3);
     expect(edges[0].getAttribute("data-testid")).toContain("edge-1-2");
+    expect(edges[1].getAttribute("data-testid")).toContain("edge-1-3");
+    expect(edges[2].getAttribute("data-testid")).toContain("edge-2-3");
   });
 
   test("calls controller with space id when a node is clicked", () => {
