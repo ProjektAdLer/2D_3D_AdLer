@@ -29,7 +29,7 @@ export default function SpaceSelectionList(props: {
   let spaceIcon: string;
 
   return (
-    <ul className="flex flex-col gap-4 w-[100%] overflow-auto">
+    <ul className="flex flex-col pt-4 gap-4 w-[100%] overflow-auto">
       {spaces?.map((space) => {
         if (space.isCompleted) spaceIcon = spaceSolved;
         else if (space.isAvailable) spaceIcon = spaceAvailable;
