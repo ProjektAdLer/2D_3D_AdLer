@@ -1,12 +1,15 @@
-//@ts-ignore
-interface Array {
-  last(): any;
-  first(): any;
+declare global {
+  interface Array<T> {
+    last(): T;
+    first(): T;
+  }
 }
 
 /**
  * gets the last element of an array
  */
-Array.prototype.last = function () {
+Array.prototype.last = function <T>(this: T[]): T {
   return this[this.length - 1];
 };
+
+export {};
