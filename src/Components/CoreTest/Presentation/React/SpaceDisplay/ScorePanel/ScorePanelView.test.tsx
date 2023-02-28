@@ -24,6 +24,6 @@ describe("Score Panel View", () => {
     useBuilderMock([undefined, undefined]);
     const comp = render(<ScorePanel />);
 
-    expect(comp.container).toHaveTextContent("0/0");
+    expect(comp.container).toHaveTextContent("0 von 0");
   });
 });
