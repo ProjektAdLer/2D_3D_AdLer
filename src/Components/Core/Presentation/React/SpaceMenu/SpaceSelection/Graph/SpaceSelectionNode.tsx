@@ -21,17 +21,20 @@ function SpaceSelectionNode(props: Partial<SpaceSelectionNodeType>) {
       >
         {props.data!.label}
       </StyledButton>
-      {props.data?.input !== "none" && (
+
+      {props.data?.input === "single" && (
+        <Handle type="target" position={Position.Top} />
+      )}
+      {props.data?.input === "and" && (
         <Handle
           className="w-12 h-6 -top-5 rounded-md bg-white border-1 border-slate-500 bottom-4"
           type="target"
           position={Position.Top}
         >
-          <p className="text-center align-middle">
-            {props.data?.input === "and" && "und"}
-          </p>
+          <p className="text-center align-middle">und</p>
         </Handle>
       )}
+
       {props.data?.output && (
         <Handle type="source" position={Position.Bottom} />
       )}
