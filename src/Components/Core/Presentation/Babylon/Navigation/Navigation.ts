@@ -16,6 +16,7 @@ import SCENE_TYPES from "~DependencyInjection/Scenes/SCENE_TYPES";
 import type { ScenePresenterFactory } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
 import Readyable from "../../../../../Lib/Readyable";
+import { Semaphore } from "src/Lib/Semaphore";
 
 @injectable()
 export default class Navigation extends Readyable implements INavigation {
@@ -24,6 +25,8 @@ export default class Navigation extends Readyable implements INavigation {
   private navMeshDebug: Mesh;
   private matDebug: StandardMaterial;
   private scenePresenter: IScenePresenter;
+
+  private semaphore = new Semaphore("Navigation Setup running", 1);
 
   constructor(
     @inject(SCENE_TYPES.ScenePresenterFactory)
@@ -42,6 +45,8 @@ export default class Navigation extends Readyable implements INavigation {
   }
 
   async setupNavigation(): Promise<void> {
+    const lock = await this.semaphore.acquire();
+
     if (this.plugin) {
       console.warn(
         "Repeated call to setupNavigation. " +
@@ -86,5 +91,6 @@ export default class Navigation extends Readyable implements INavigation {
     );
 
     this.resolveIsReady();
+    lock.release();
   }
 }
