@@ -18,6 +18,10 @@ import SpaceSelectionNode, {
   SpaceSelectionNodeType,
 } from "./SpaceSelectionNode";
 
+import spaceSolved from "../../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
+import spaceAvailable from "../../../../../../../Assets/icons/27-1-lock-open/lock-icon-open-nobg.svg";
+import spaceLocked from "../../../../../../../Assets/icons/27-lock-closed/lock-icon-closed-nobg.svg";
+
 const nodeTypes: NodeTypes = {
   spaceNode: SpaceSelectionNode,
 };
@@ -53,9 +57,15 @@ export default function SpaceSelectionGraph(props: {
           inputSpace.requiredSpaces.includes(space.id)
         );
 
+        let spaceIcon: string;
+        if (space.isCompleted) spaceIcon = spaceSolved;
+        else if (space.isAvailable) spaceIcon = spaceAvailable;
+        else spaceIcon = spaceLocked;
+
         const node: SpaceSelectionNodeType = {
           id: space.id.toString(),
           data: {
+            icon: spaceIcon,
             label: space.name,
             input: inputType,
             output: hasOutput,
@@ -101,7 +111,7 @@ export default function SpaceSelectionGraph(props: {
         nodesConnectable={false}
         onNodeClick={onNodeClickCallback}
         defaultEdges={[]}
-        defaultEdgeOptions={{ style: { stroke: "white" } }}
+        defaultEdgeOptions={{ style: { stroke: "black" } }}
         fitView={true}
         fitViewOptions={{ padding: 0.1 }}
       >
