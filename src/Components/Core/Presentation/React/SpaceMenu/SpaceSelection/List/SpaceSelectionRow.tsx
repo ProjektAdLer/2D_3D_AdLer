@@ -1,10 +1,10 @@
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 export default function SpaceSelectionRow({
-  spaceTitle: spaceTitle,
-  selected: selected,
-  icon: icon,
-  locked: locked,
+  spaceTitle,
+  selected,
+  icon,
+  locked,
   onClickCallback,
 }: {
   icon: string;

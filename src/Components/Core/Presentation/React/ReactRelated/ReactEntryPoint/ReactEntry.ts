@@ -10,8 +10,6 @@ import { config } from "../../../../../../config";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 
-let isInDebug = false;
-
 @injectable()
 export default class ReactEntry implements IReactEntry {
   async setupReact(): Promise<void> {
@@ -24,11 +22,11 @@ export default class ReactEntry implements IReactEntry {
       appComponent
     );
 
-    const strictModeComponent = React.createElement(
-      React.StrictMode,
-      null,
-      providerComponent
-    );
+    // const strictModeComponent = React.createElement(
+    //   React.StrictMode,
+    //   null,
+    //   providerComponent
+    // );
 
     const rootComponent = ReactDOM.createRoot(
       document.getElementById("root") as HTMLElement
@@ -59,7 +57,7 @@ export default class ReactEntry implements IReactEntry {
         // }
 
         // clg all entities on ctrl + f2
-        if (e.ctrlKey && e.key == "F2") {
+        if (e.ctrlKey && e.key === "F2") {
           const entityMap = CoreDIContainer.get<IEntityContainer>(
             CORE_TYPES.IEntityContainer
           ).getAllEntities();

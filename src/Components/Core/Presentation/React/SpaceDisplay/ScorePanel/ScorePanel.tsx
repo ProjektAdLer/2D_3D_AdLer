@@ -1,5 +1,4 @@
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
-import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
 import ScorePanelViewModel from "./ScorePanelViewModel";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
@@ -9,7 +8,7 @@ import {
   buildStyles,
   CircularProgressbarWithChildren,
 } from "react-circular-progressbar";
-import RadialSeparators from "./RadialSeparators";
+import { useEffect, useState } from "react";
 
 export default function ScorePanel() {
   const [viewModel] = useBuilder<ScorePanelViewModel, undefined>(
@@ -17,7 +16,11 @@ export default function ScorePanel() {
   );
   const [score] = useObservable<number>(viewModel?.score);
   const [requiredScore] = useObservable<number>(viewModel?.requiredScore);
-  const percentage = (score / requiredScore) * 100;
+  const [percentage, setPercentage] = useState(0);
+
+  useEffect(() => {
+    setPercentage((score / requiredScore) * 100);
+  }, [score, requiredScore]);
 
   return (
     <div style={{ width: 60 }}>

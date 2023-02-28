@@ -1,9 +1,9 @@
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 export default function WorldSelectionRow({
-  icon: icon,
-  selected: selected,
-  title: title,
+  icon,
+  selected,
+  title,
   onClickCallback,
 }: {
   icon: string;

@@ -51,7 +51,8 @@ export default class ElementModalController implements IElementModalController {
     if (isCompleted && !isChild) {
       const xapiData = event.data.statement as XAPIData;
 
-      statement.result.success = statement?.result?.score?.scaled == 1 || false;
+      statement.result.success =
+        statement?.result?.score?.scaled === 1 || false;
 
       await CoreDIContainer.get<IScoreH5PElementUseCase>(
         USECASE_TYPES.IScoreH5PElementUseCase

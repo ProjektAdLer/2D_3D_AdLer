@@ -1,6 +1,5 @@
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import CheckBoxEntry from "./CheckBoxEntry";
 import SpaceDetailViewModel, {
   SpaceDetailSpaceData,
 } from "./SpaceDetailViewModel";
@@ -154,7 +153,7 @@ export default function SpaceDetail() {
               completed = lookup.isCompleted;
 
               return (
-                <div className="relative flex ml-2 my-4">
+                <div className="relative flex ml-2 my-4" key={name + completed}>
                   <img src={spaceIcon} alt="" className="w-8 xl:w-8 mr-4" />
                   {completed && (
                     <img

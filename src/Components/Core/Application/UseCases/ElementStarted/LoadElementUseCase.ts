@@ -1,5 +1,4 @@
 import { inject, injectable } from "inversify";
-import WorldEntity from "src/Components/Core/Domain/Entities/WorldEntity";
 import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
@@ -32,16 +31,6 @@ export default class LoadElementUseCase implements ILoadElementUseCase {
       throw new Error(`Could not find element with id ${elementID}`);
     else if (elementEntity.length > 1)
       throw new Error(`Found more than one element with id ${elementID}`);
-
-    // const worldEntity = this.entityContainer.filterEntitiesOfType<WorldEntity>(
-    //   WorldEntity,
-    //   (entity) => entity.worldID === elementEntity[0].parentCourseId
-    // );
-
-    // if (worldEntity.length === 0)
-    //   throw new Error(`Could not find any world entities`);
-    // else if (worldEntity.length > 1)
-    //   throw new Error(`Found more than one world entity`);
 
     let elementTO = this.toTO(elementEntity[0]);
 
