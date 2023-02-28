@@ -1,4 +1,3 @@
-import SimpleEvent from "../../../../../Lib/SimpleEvent";
 import Navigation from "../../../../Core/Presentation/Babylon/Navigation/Navigation";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
@@ -6,9 +5,9 @@ import { ICrowd, Mesh, RecastJSPlugin } from "@babylonjs/core";
 import { config } from "../../../../../config";
 import { mock, mockDeep } from "jest-mock-extended";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
+import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 
 jest.mock("@babylonjs/core");
-jest.mock("../../../../../Lib/SimpleEvent");
 
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
@@ -26,7 +25,7 @@ describe("Navigation", () => {
 
   beforeEach(() => {
     CoreDIContainer.snapshot();
-    systemUnderTest = CoreDIContainer.resolve(Navigation);
+    systemUnderTest = CoreDIContainer.get(CORE_TYPES.INavigation);
     CoreDIContainer.restore();
 
     jest.resetAllMocks();
