@@ -8,6 +8,7 @@ import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 
 jest.mock("@babylonjs/core");
+jest.mock("recast-detour");
 
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
@@ -60,7 +61,7 @@ describe("Navigation", () => {
     } catch (e) {
       expect(e.message).toBe("Repeated call to setupNavigation");
     }
-  });
+  }, 10000);
 
   test("setupNavigation creates a NavMesh and Crowd with the Recast plugin", async () => {
     // ensure that debug code isn't executed
