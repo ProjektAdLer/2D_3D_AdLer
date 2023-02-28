@@ -69,10 +69,12 @@ export default function SpaceSelectionGraph(props: {
             label: space.name,
             input: inputType,
             output: hasOutput,
+            lastSelected: false,
           },
           type: "spaceNode",
           position: { x: x, y: y },
           connectable: false,
+          deletable: false,
         };
         return node;
       })
@@ -96,10 +98,19 @@ export default function SpaceSelectionGraph(props: {
   }, [spaces, reactFlowInstance]);
 
   const onNodeClickCallback = useCallback<NodeMouseHandler>(
-    (event: React.MouseEvent, node: Node) => {
-      props.controller.onSpaceClicked(parseInt(node.id));
+    (event: React.MouseEvent, clickedNode: Node) => {
+      props.controller.onSpaceClicked(parseInt(clickedNode.id));
+
+      const nodes = reactFlowInstance.getNodes();
+      nodes.forEach((node) => {
+        (node as SpaceSelectionNodeType).data = {
+          ...node.data,
+          lastSelected: node.id === clickedNode.id,
+        };
+      });
+      reactFlowInstance.setNodes(nodes);
     },
-    [props.controller]
+    [props.controller, reactFlowInstance]
   );
 
   return (

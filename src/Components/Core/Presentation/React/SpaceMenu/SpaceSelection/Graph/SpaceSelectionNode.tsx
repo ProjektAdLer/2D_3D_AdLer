@@ -8,6 +8,7 @@ type SpaceSelectionNodeData = {
   input: SpaceSelectionNodeInputType;
   output: boolean;
   icon: string;
+  lastSelected: boolean;
 };
 export type SpaceSelectionNodeType = Node<SpaceSelectionNodeData>;
 
@@ -16,7 +17,7 @@ function SpaceSelectionNode(props: Partial<SpaceSelectionNodeType>) {
     <>
       <StyledButton
         shape="freefloatcenter"
-        color={props.selected ? "pressed" : "default"}
+        color={props.data?.lastSelected ? "pressed" : "default"}
         icon={props.data?.icon}
       >
         {props.data!.label}
