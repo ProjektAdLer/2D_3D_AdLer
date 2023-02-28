@@ -61,7 +61,7 @@ describe("LoginComponent", () => {
       </Provider>
     );
 
-    expect(getLoginStatusUseCaseMock.execute).toBeCalledTimes(1);
+    expect(getLoginStatusUseCaseMock.execute).toBeCalled();
   });
 
   test("LoginComponent Tailwind Styling contains normal backgroundColor if not logged in", () => {

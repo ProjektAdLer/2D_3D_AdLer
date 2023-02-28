@@ -13,9 +13,10 @@ export default function ExitModal() {
     IExitModalController
   >(BUILDER_TYPES.IExitModalBuilder);
   const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
+
   const closeModal = useCallback(() => {
     setOpen(false);
-  }, []);
+  }, [setOpen]);
 
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;

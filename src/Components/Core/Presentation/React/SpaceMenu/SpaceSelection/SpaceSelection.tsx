@@ -34,7 +34,7 @@ export default function SpaceSelection() {
       await loadWorldUseCase.executeAsync({ worldID });
     };
     if (viewModel) loadWorldAsync();
-  }, [viewModel]);
+  }, [viewModel, getCurrentUserLocationUseCase, loadWorldUseCase]);
 
   if (!viewModel || !controller) return null;
 

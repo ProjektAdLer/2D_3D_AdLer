@@ -20,7 +20,7 @@ export default function LoginModal(props: {
 
   const handleSubmit = React.useCallback(async () => {
     await props.controller.loginAsync(userName, password);
-  }, [userName, password]);
+  }, [props.controller, userName, password]);
 
   return (
     <StyledModal

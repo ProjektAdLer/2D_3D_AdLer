@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import ElementModalViewModel from "../ElementModalViewModel";
 
 export default function TextComponent({
@@ -7,12 +8,13 @@ export default function TextComponent({
   viewModel: ElementModalViewModel;
 }) {
   const [text, setText] = useState("");
+  const [filepath] = useObservable(viewModel.filePath);
 
   useEffect(() => {
-    fetch(viewModel.filePath.Value).then((response) =>
+    fetch(filepath).then((response) =>
       response.text().then((text) => setText(text))
     );
-  }, []);
+  }, [filepath]);
 
   return (
     <div className="flex justify-center max-h-[75vh] lg:max-h-[85vh] xl:max-h-[85vh] w-fit h-fit max-w-[99vw] font-medium text-black">

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { logger } from "src/Lib/Logger";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import ElementModalViewModel from "../ElementModalViewModel";
 
 export default function VideoComponent({
@@ -11,6 +12,7 @@ export default function VideoComponent({
   const regex = /src="([^"]*)"/;
   const [videoUrl, setVideoUrl] = useState("");
   const [videoTitle, setVideoTitle] = useState("VideoTitle");
+  const [filepath] = useObservable(viewModel.filePath);
 
   /*
   This is the not-hacky way to get the video url, but it requires a fetch request to youtube's oembed api.
@@ -22,7 +24,7 @@ export default function VideoComponent({
   useEffect(() => {
     async function getVideoUrl() {
       const response = await axios.get<{ html: string; title: string }>(
-        `https://www.youtube.com/oembed?url=${viewModel.filePath.Value}`
+        `https://www.youtube.com/oembed?url=${filepath}`
       );
 
       const srcArray = regex.exec(response.data.html);
@@ -39,7 +41,7 @@ export default function VideoComponent({
 
     // TODO: Run this only if the viewmodel has a value
     getVideoUrl();
-  }, []);
+  }, [regex, filepath]);
 
   return (
     <div className="flex justify-center items-top max-h-90pro sm:w-[300px] md:w-[315px] lg:w-[900px]">

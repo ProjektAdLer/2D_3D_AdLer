@@ -4,7 +4,7 @@ import ReactFlow, {
   Background,
   Controls,
   Edge,
-  MiniMap,
+  // MiniMap,
   Node,
   NodeMouseHandler,
   NodeTypes,
@@ -80,7 +80,7 @@ export default function SpaceSelectionGraph(props: {
 
     // create edges for requirements
     reactFlowInstance.setEdges(
-      props.viewModel.spaces.Value.reduce((accumulatedEdgeArray, space) => {
+      spaces.reduce((accumulatedEdgeArray, space) => {
         // create an edge for each required space and add it to the array
         space.requiredSpaces.forEach((requiredSpace) => {
           accumulatedEdgeArray.push({
@@ -93,7 +93,7 @@ export default function SpaceSelectionGraph(props: {
         return accumulatedEdgeArray;
       }, [] as Edge[])
     );
-  }, [spaces]);
+  }, [spaces, reactFlowInstance]);
 
   const onNodeClickCallback = useCallback<NodeMouseHandler>(
     (event: React.MouseEvent, node: Node) => {

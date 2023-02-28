@@ -3,6 +3,7 @@ import ElementModalViewModel from "../ElementModalViewModel";
 import PDFObject from "pdfobject";
 import { Document, Page, pdfjs } from "react-pdf";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 // set to true to always show the mobile version of the PDF component
@@ -48,23 +49,22 @@ function MobilePDFComponent({
 }) {
   const [numPages, setNumPages] = useState<number>();
   const [pageNumber, setPageNumber] = useState(1);
+  const [filepath] = useObservable(viewModel.filePath);
 
   const onDocumentLoadSuccess = useCallback(
     ({ numPages }: { numPages: number }) => {
       setNumPages(numPages);
     },
-    [numPages]
+    [setNumPages]
   );
 
   const previousPage = useCallback(() => {
     if (numPages) setPageNumber(Math.max(pageNumber - 1, 1));
-  }, [pageNumber, numPages]);
+  }, [pageNumber, numPages, setPageNumber]);
 
   const nextPage = useCallback(() => {
     if (numPages) setPageNumber(Math.min(pageNumber + 1, numPages));
-  }, [pageNumber, numPages]);
-
-  let renderWidth: number = window.innerWidth * 0.87;
+  }, [pageNumber, numPages, setPageNumber]);
 
   return (
     <div className="flex-col h-full ">
@@ -85,12 +85,9 @@ function MobilePDFComponent({
       </div>
 
       <div className="">
-        <Document
-          file={viewModel.filePath.Value}
-          onLoadSuccess={onDocumentLoadSuccess}
-        >
+        <Document file={filepath} onLoadSuccess={onDocumentLoadSuccess}>
           <Page
-            width={renderWidth}
+            width={window.innerWidth * 0.87}
             data-testid="pdfPage"
             pageNumber={pageNumber}
             renderTextLayer={false}

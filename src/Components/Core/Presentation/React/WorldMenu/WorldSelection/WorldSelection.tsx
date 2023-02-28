@@ -29,7 +29,7 @@ export default function WorldSelection() {
       await loadUserWorldsUseCase.executeAsync();
     };
     if (viewModel) loadUserWorldsAsync();
-  }, [viewModel]);
+  }, [viewModel, loadUserWorldsUseCase]);
 
   const [worlds] = useObservable<WorldSelectionWorldData[]>(
     viewModel?.userWorlds

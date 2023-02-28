@@ -23,7 +23,7 @@ export default function WorldMenuButton() {
 
   useEffect(() => {
     setUserLoggedIn(getLoginStatusUseCase.execute());
-  }, []);
+  }, [getLoginStatusUseCase, setUserLoggedIn]);
 
   return (
     <div>

@@ -33,7 +33,7 @@ export default function LoginComponent() {
     const loginStatus = getLoginStatusUseCase.execute();
     setUserLoggedIn(loginStatus);
     setModalVisible(!loginStatus);
-  }, []);
+  }, [getLoginStatusUseCase, setUserLoggedIn, setModalVisible]);
 
   if (!controller || !viewModel) return null;
 
