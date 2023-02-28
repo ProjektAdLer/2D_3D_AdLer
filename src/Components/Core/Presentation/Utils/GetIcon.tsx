@@ -20,6 +20,7 @@ export const getElementIcon = (type: ElementTypeStrings) => {
       );
     case "image":
       return (
+        // eslint-disable-next-line
         <img
           src={imageIcon}
           alt="image-icon"

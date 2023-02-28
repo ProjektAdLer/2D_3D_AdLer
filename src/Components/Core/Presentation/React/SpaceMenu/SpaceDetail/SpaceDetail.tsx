@@ -147,7 +147,7 @@ export default function SpaceDetail() {
               const lookup = spaces.find((space) => space.id === requirement);
               if (lookup === undefined) {
                 logger.warn("Requirement not found in spaces.");
-                return;
+                return undefined;
               }
               name = lookup.name;
               completed = lookup.isCompleted;
