@@ -1,14 +1,23 @@
+import SpaceTO from "../../../../../Core/Application/DataTransferObjects/SpaceTO";
 import ScorePanelPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanelPresenter";
 import ScorePanelViewModel from "../../../../../Core/Presentation/React/SpaceDisplay/ScorePanel/ScorePanelViewModel";
 
 describe("ScorePanelPresenter", () => {
+  let viewModel: ScorePanelViewModel;
   let systemUnderTest: ScorePanelPresenter;
 
   beforeEach(() => {
-    systemUnderTest = new ScorePanelPresenter(new ScorePanelViewModel());
+    viewModel = new ScorePanelViewModel();
+    systemUnderTest = new ScorePanelPresenter(viewModel);
+  });
+
+  test("onSpaceLoaded should set currentSpaceID", () => {
+    systemUnderTest.onSpaceLoaded({ id: 123 } as SpaceTO);
+    expect(viewModel.currentSpaceID.Value).toBe(123);
   });
 
   test("presentScore sets the score in the ViewModel", () => {
+    viewModel.currentSpaceID.Value = 42;
     systemUnderTest.onSpaceScored({
       currentScore: 1,
       requiredScore: 2,

@@ -9,4 +9,5 @@ export default class SpaceEntity {
   public goals: string;
   public requirements: ComponentID[];
   public requiredScore: number;
+  public worldID: ComponentID;
 }

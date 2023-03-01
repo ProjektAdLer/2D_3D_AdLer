@@ -26,6 +26,7 @@ export default class WorldPort
       if (adapter.onWorldLoaded) adapter.onWorldLoaded(worldTO);
     });
   }
+  //on world scored für display und world detail
 
   // space
   public onSpaceLoaded(spaceTO: SpaceTO): void {

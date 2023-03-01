@@ -5,13 +5,13 @@ import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import IScoreElementUseCase from "./IScoreElementUseCase";
 import type IBackendAdapter from "../../../Adapters/BackendAdapter/IBackendAdapter";
-import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { logger } from "../../../../../Lib/Logger";
 import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import type ICalculateWorldScoreUseCase from "../CalculateWorldScore/ICalculateWorldScoreUseCase";
 
 @injectable()
 export default class ScoreElementUseCase implements IScoreElementUseCase {
@@ -20,8 +20,8 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
     private entityContainer: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter)
     private backendAdapter: IBackendAdapter,
-    @inject(USECASE_TYPES.ICalculateSpaceScore)
-    private calculateSpaceScoreUseCase: ICalculateSpaceScoreUseCase,
+    @inject(USECASE_TYPES.ICalculateWorldScore)
+    private calculateWorldScoreUseCase: ICalculateWorldScoreUseCase,
     @inject(PORT_TYPES.IWorldPort)
     private worldPort: IWorldPort
   ) {}
@@ -82,7 +82,7 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
 
     elements[0].hasScored = true;
 
-    this.calculateSpaceScoreUseCase.execute(space.id);
+    this.calculateWorldScoreUseCase.execute(space.worldID);
 
     this.worldPort.onElementScored(true, data.elementID);
   }

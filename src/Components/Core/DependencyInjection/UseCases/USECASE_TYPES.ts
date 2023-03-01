@@ -5,6 +5,7 @@ const USECASE_TYPES = {
   ILoadElementUseCase: Symbol("ILoadElementUseCase"),
   IScoreElementUseCase: Symbol("IScoreElementUseCase"),
   ICalculateSpaceScore: Symbol("ICalculateSpaceScore"),
+  ICalculateWorldScore: Symbol("ICalculateWorldScore"),
   ILoginUseCase: Symbol("ILoginUseCase"),
   ILoadSpaceUseCase: Symbol("ILoadSpaceUseCase"),
   IScoreH5PElementUseCase: Symbol("IScoreH5PElementUseCase"),

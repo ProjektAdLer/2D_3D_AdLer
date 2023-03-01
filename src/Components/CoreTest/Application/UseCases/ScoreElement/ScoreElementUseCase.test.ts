@@ -1,7 +1,6 @@
 import ScoreElementUseCase from "../../../../Core/Application/UseCases/ScoreElement/ScoreElementUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
-import ICalculateSpaceScoreUseCase from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import { mock } from "jest-mock-extended";
@@ -12,12 +11,13 @@ import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import { logger } from "../../../../../Lib/Logger";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
+import ICalculateWorldScoreUseCase from "../../../../Core/Application/UseCases/CalculateWorldScore/ICalculateWorldScoreUseCase";
 
 jest.mock("../../../../../Lib/Logger");
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendAdapterMock = mock<IBackendAdapter>();
-const CalculateSpaceScoreMock = mock<ICalculateSpaceScoreUseCase>();
+const CalculateWorldScoreMock = mock<ICalculateWorldScoreUseCase>();
 const worldPortMock = mock<IWorldPort>();
 
 const userEntity: UserDataEntity = {
@@ -44,6 +44,7 @@ const spaceEntity: SpaceEntity = {
   goals: "",
   requirements: [],
   requiredScore: 0,
+  worldID: 200,
 };
 
 const setupEntityContainerMock = (
@@ -90,9 +91,9 @@ describe("ScoreElementUseCase", () => {
     CoreDIContainer.rebind<IBackendAdapter>(
       CORE_TYPES.IBackendAdapter
     ).toConstantValue(backendAdapterMock);
-    CoreDIContainer.rebind<ICalculateSpaceScoreUseCase>(
-      USECASE_TYPES.ICalculateSpaceScore
-    ).toConstantValue(CalculateSpaceScoreMock);
+    CoreDIContainer.rebind<ICalculateWorldScoreUseCase>(
+      USECASE_TYPES.ICalculateWorldScore
+    ).toConstantValue(CalculateWorldScoreMock);
     CoreDIContainer.rebind<IWorldPort>(PORT_TYPES.IWorldPort).toConstantValue(
       worldPortMock
     );
@@ -134,7 +135,7 @@ describe("ScoreElementUseCase", () => {
     );
   });
 
-  test("executeAsync should call calculateSpaceScoreUseCase", async () => {
+  test("executeAsync should call calculateWorldScoreUseCase", async () => {
     setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
@@ -144,8 +145,8 @@ describe("ScoreElementUseCase", () => {
       console.log(e);
     }
 
-    expect(CalculateSpaceScoreMock.execute).toHaveBeenCalledWith(
-      spaceEntity.id
+    expect(CalculateWorldScoreMock.execute).toHaveBeenCalledWith(
+      spaceEntity.worldID
     );
   });
 

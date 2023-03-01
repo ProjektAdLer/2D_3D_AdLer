@@ -52,7 +52,7 @@ export default class CalculateSpaceScoreUseCase
       requiredScore: space.requiredScore,
       maxScore: maxPoints,
     };
-
+    console.log(result);
     this.worldPort.onSpaceScored(result);
     return result;
   }

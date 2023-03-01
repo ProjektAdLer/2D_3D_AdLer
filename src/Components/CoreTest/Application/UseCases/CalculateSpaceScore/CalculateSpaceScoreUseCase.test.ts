@@ -96,6 +96,7 @@ describe("Calculate Space Score UseCase", () => {
         name: "test",
         goals: "test",
         requirements: [],
+        worldID: 200,
       } as SpaceEntity,
     ]);
 
@@ -121,6 +122,7 @@ describe("Calculate Space Score UseCase", () => {
         name: "test",
         goals: "test",
         requirements: [],
+        worldID: 200,
       } as SpaceEntity,
     ]);
 

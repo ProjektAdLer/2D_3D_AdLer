@@ -26,6 +26,8 @@ import SetCurrentUserLocationUseCase from "../../Application/UseCases/SetCurrent
 import ISetCurrentUserLocationUseCase from "../../Application/UseCases/SetCurrentUserLocation/ISetCurrentUserLocationUseCase";
 import IGetCurrentUserLocationUseCase from "../../Application/UseCases/GetCurrentUserLocation/IGetCurrentUserLocationUseCase";
 import GetCurrentUserLocationUseCase from "../../Application/UseCases/GetCurrentUserLocation/GetCurrentUserLocationUseCase";
+import CalculateWorldScoreUseCase from "../../Application/UseCases/CalculateWorldScore/CalculateWorldScoreUseCase";
+import ICalculateWorldScoreUseCase from "../../Application/UseCases/CalculateWorldScore/ICalculateWorldScoreUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -52,6 +54,10 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<ICalculateSpaceScoreUseCase>(USECASE_TYPES.ICalculateSpaceScore)
     .to(CalculateSpaceScoreUseCase)
+    .inSingletonScope();
+
+  bind<ICalculateWorldScoreUseCase>(USECASE_TYPES.ICalculateWorldScore)
+    .to(CalculateWorldScoreUseCase)
     .inSingletonScope();
 
   bind<ILoginUseCase>(USECASE_TYPES.ILoginUseCase)
