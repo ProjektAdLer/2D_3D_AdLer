@@ -37,7 +37,7 @@ export default function NotificationManager({
   return (
     <StyledModal
       showModal={notifications?.length > 0}
-      title={getTypeString(notifications.last().type)}
+      title={getTypeString(notifications[notifications.length - 1].type)}
       onClose={() => {
         const remainingNotifications = [...notifications];
         remainingNotifications.pop();
@@ -45,7 +45,7 @@ export default function NotificationManager({
       }}
       {...restProps}
     >
-      {notifications.last().message}
+      {notifications[notifications.length - 1].message}
     </StyledModal>
   );
 }
