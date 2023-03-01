@@ -2,12 +2,9 @@ import { ComponentID } from "../../Domain/Types/EntityTypes";
 import SpaceTO from "./SpaceTO";
 
 export default class WorldTO {
-  worldID: ComponentID;
-  worldName: string;
+  id: ComponentID;
+  name: string;
   spaces: SpaceTO[];
-  worldGoal: string;
+  goal: string;
   description: string;
-  goals: string;
-
-  //TODO: Remove doubled goals
 }

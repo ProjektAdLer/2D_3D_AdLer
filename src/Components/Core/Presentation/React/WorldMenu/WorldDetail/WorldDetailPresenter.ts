@@ -18,8 +18,8 @@ export default class WorldDetailPresenter implements IWorldDetailPresenter {
     });
 
     this.viewModel.spaces.Value = spaces;
-    this.viewModel.name.Value = world.worldName;
+    this.viewModel.name.Value = world.name;
     this.viewModel.description.Value = world.description;
-    this.viewModel.goals.Value = world.worldGoal;
+    this.viewModel.goals.Value = world.goal;
   }
 }

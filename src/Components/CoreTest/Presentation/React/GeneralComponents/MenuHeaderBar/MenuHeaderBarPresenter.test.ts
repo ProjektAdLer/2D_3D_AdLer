@@ -1,3 +1,4 @@
+import WorldTO from "../../../../../Core/Application/DataTransferObjects/WorldTO";
 import MenuHeaderBarPresenter from "../../../../../Core/Presentation/React/GeneralComponents/MenuHeaderBar/MenuHeaderBarPresenter";
 import MenuHeaderBarViewModel from "../../../../../Core/Presentation/React/GeneralComponents/MenuHeaderBar/MenuHeaderBarViewModel";
 
@@ -12,7 +13,7 @@ describe("MenuHeaderBarPresenter", () => {
   });
 
   test("displayWorldTitle sets viewModel variable", () => {
-    systemUnderTest.onWorldLoaded({ worldName: "test" });
+    systemUnderTest.onWorldLoaded({ name: "test" } as Partial<WorldTO>);
     expect(systemUnderTest["viewModel"].title.Value).toBe("test");
   });
 });

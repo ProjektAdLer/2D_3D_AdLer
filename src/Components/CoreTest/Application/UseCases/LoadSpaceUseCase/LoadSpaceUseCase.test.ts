@@ -60,7 +60,7 @@ describe("LoadSpaceUseCase", () => {
         name: "Space 1",
       } as SpaceEntity,
     ];
-    worldEntity.worldID = 1;
+    worldEntity.id = 1;
     entityContainerMock.filterEntitiesOfType.mockReturnValue([worldEntity]);
 
     const spaceScoreTO: SpaceScoreTO = {
@@ -86,7 +86,7 @@ describe("LoadSpaceUseCase", () => {
         name: "Space 1",
       } as SpaceEntity,
     ];
-    worldEntity.worldID = 2;
+    worldEntity.id = 2;
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([worldEntity]);
 
@@ -113,7 +113,7 @@ describe("LoadSpaceUseCase", () => {
         name: "Space 1",
       } as SpaceEntity,
     ];
-    worldEntity.worldID = 1;
+    worldEntity.id = 1;
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([worldEntity]);
 
     await expect(async () =>
@@ -129,7 +129,7 @@ describe("LoadSpaceUseCase", () => {
         name: "Space 1",
       } as SpaceEntity,
     ];
-    worldEntity.worldID = 1;
+    worldEntity.id = 1;
     entityContainerMock.filterEntitiesOfType.mockReturnValue([worldEntity]);
 
     const spaceScoreTO: SpaceScoreTO = {
@@ -157,7 +157,7 @@ describe("LoadSpaceUseCase", () => {
       ) => {
         let entity = new entityType();
         //@ts-ignore entityType is allways WorldEntity and has a worldID
-        entity.worldID = 1;
+        entity.id = 1;
 
         filterReturn = filter(entity);
         return [{}];

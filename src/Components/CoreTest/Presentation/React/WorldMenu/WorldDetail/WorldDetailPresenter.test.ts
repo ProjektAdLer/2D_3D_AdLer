@@ -11,11 +11,11 @@ describe("WorldDetailPresenter", () => {
 
   test("onWorldLoaded should set viewModel data", () => {
     systemUnderTest.onWorldLoaded({
-      worldName: "test",
-      spaces: [{ id: 1, name: "test", isCompleted: false }],
-      worldGoal: "test",
+      name: "test",
+      spaces: [{ id: 1, name: "test", currentScore: 0, requiredScore: 1 }],
+      goal: "test",
       description: "test",
-    });
+    } as Partial<WorldTO>);
 
     expect(systemUnderTest["viewModel"].spaces.Value).toEqual([
       { id: 1, name: "test", isCompleted: false },

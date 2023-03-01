@@ -73,7 +73,7 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
   private getWorldEntity(worldID: ComponentID): WorldEntity {
     return this.container.filterEntitiesOfType<WorldEntity>(
       WorldEntity,
-      (entity) => entity.worldID === worldID
+      (entity) => entity.id === worldID
     )[0];
   }
 }

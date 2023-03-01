@@ -52,7 +52,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     // search for world entity with given ID in all world entities
     let worldEntity = this.container.filterEntitiesOfType(
       WorldEntity,
-      (WorldEntity) => WorldEntity.worldID === data.worldID
+      (WorldEntity) => WorldEntity.id === data.worldID
     )[0];
 
     // if world entity does not exist, load it from backend
@@ -122,10 +122,11 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     // create learning world entity
     const worldEntity = this.container.createEntity<WorldEntity>(
       {
-        worldName: apiWorldDataResponse.worldName,
+        name: apiWorldDataResponse.worldName,
         spaces: spaceEntities,
-        worldGoal: apiWorldDataResponse.worldGoal,
-        worldID: worldID,
+        goal: apiWorldDataResponse.worldGoal,
+        id: worldID,
+        description: apiWorldDataResponse.description,
       },
       WorldEntity
     );

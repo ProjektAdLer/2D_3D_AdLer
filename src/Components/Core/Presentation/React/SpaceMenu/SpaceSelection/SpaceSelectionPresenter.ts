@@ -12,7 +12,7 @@ export default class SpaceSelectionPresenter
   onWorldLoaded(world: WorldTO): void {
     const newSpaces: SpaceSelectionSpaceData[] = [];
 
-    this.viewModel.worldID.Value = world.worldID;
+    this.viewModel.worldID.Value = world.id;
 
     // create space data object for each space
     world.spaces.forEach((space) => {
