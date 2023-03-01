@@ -11,7 +11,7 @@ import ReactFlow, {
   useReactFlow,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import { useCallback, useEffect } from "react";
+import { CSSProperties, useCallback, useEffect } from "react";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import SpaceSelectionNode, {
   SpaceSelectionNodeInputType,
@@ -54,7 +54,9 @@ export default function SpaceSelectionGraph(props: {
           inputType = "none";
         }
         let hasOutput = spaces.some((inputSpace) =>
-          inputSpace.requiredSpaces.includes(space.id)
+          inputSpace.requiredSpaces.some(
+            (requiredSpace) => requiredSpace.id === space.id
+          )
         );
 
         let spaceIcon: string;
@@ -86,9 +88,13 @@ export default function SpaceSelectionGraph(props: {
         // create an edge for each required space and add it to the array
         space.requiredSpaces.forEach((requiredSpace) => {
           accumulatedEdgeArray.push({
-            id: requiredSpace.toString() + "-" + space.id.toString(),
-            source: requiredSpace.toString(),
+            id: requiredSpace.id.toString() + "-" + space.id.toString(),
+            source: requiredSpace.id.toString(),
             target: space.id.toString(),
+            style: {
+              stroke: "black",
+              strokeDasharray: requiredSpace.isCompleted ? "" : "6 5",
+            } as CSSProperties,
           } as Edge);
         });
         // return the array to be used in the next iteration
@@ -101,6 +107,7 @@ export default function SpaceSelectionGraph(props: {
     (event: React.MouseEvent, clickedNode: Node) => {
       props.controller.onSpaceClicked(parseInt(clickedNode.id));
 
+      // update node data to reflect the last selected node
       const nodes = reactFlowInstance.getNodes();
       nodes.forEach((node) => {
         (node as SpaceSelectionNodeType).data = {
@@ -122,7 +129,6 @@ export default function SpaceSelectionGraph(props: {
         nodesConnectable={false}
         onNodeClick={onNodeClickCallback}
         defaultEdges={[]}
-        defaultEdgeOptions={{ style: { stroke: "black" } }}
         fitView={true}
         fitViewOptions={{ padding: 0.1 }}
       >

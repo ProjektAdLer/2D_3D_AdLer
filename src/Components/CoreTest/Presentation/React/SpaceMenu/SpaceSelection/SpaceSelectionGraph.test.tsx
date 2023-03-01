@@ -74,14 +74,17 @@ describe("SpaceSelectionGraph", () => {
         name: "test",
         isAvailable: true,
         isCompleted: true,
-        requiredSpaces: [1],
+        requiredSpaces: [{ id: 1, isCompleted: true }],
       },
       {
         id: 3,
         name: "test",
         isAvailable: true,
         isCompleted: true,
-        requiredSpaces: [1, 2],
+        requiredSpaces: [
+          { id: 1, isCompleted: true },
+          { id: 2, isCompleted: true },
+        ],
       },
     ];
     const controllerMock = mock<ISpaceSelectionController>();
