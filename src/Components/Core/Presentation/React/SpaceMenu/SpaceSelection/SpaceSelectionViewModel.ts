@@ -1,10 +1,15 @@
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import Observable from "src/Lib/Observable";
 
+export interface RequiredSpaceData {
+  id: ComponentID;
+  isCompleted: boolean;
+}
+
 export interface SpaceSelectionSpaceData {
   id: ComponentID;
   name: string;
-  requiredSpaces: ComponentID[];
+  requiredSpaces: RequiredSpaceData[];
   isAvailable: boolean;
   isCompleted: boolean;
 }

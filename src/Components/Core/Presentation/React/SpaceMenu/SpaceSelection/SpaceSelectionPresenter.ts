@@ -1,6 +1,7 @@
 import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
 import ISpaceSelectionPresenter from "./ISpaceSelectionPresenter";
 import SpaceSelectionViewModel, {
+  RequiredSpaceData,
   SpaceSelectionSpaceData,
 } from "./SpaceSelectionViewModel";
 
@@ -17,7 +18,9 @@ export default class SpaceSelectionPresenter
     // create space data object for each space
     world.spaces.forEach((space) => {
       // check if all requirements are completed
-      const isAvailable = space.requirements.every((requiredSpaceID) => {
+      let requiredSpaces: RequiredSpaceData[] = [];
+      let isAvailable = true;
+      space.requirements.forEach((requiredSpaceID) => {
         const requiredSpace = world.spaces.find(
           (space) => space.id === requiredSpaceID
         );
@@ -26,15 +29,19 @@ export default class SpaceSelectionPresenter
           throw new Error("Required space not found");
         }
 
-        if (requiredSpace.currentScore >= requiredSpace.requiredScore)
-          return true;
-        else return false;
+        const requiredSpaceCompleted =
+          requiredSpace.currentScore >= requiredSpace.requiredScore;
+        requiredSpaces.push({
+          id: requiredSpaceID,
+          isCompleted: requiredSpaceCompleted,
+        });
+        isAvailable = isAvailable && requiredSpaceCompleted;
       });
 
       newSpaces.push({
         id: space.id,
         name: space.name,
-        requiredSpaces: space.requirements,
+        requiredSpaces: requiredSpaces,
         isAvailable: isAvailable,
         isCompleted: space.currentScore >= space.requiredScore,
       });
