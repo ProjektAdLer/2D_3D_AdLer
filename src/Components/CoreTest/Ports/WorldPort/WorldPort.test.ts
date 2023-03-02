@@ -7,6 +7,7 @@ import IWorldAdapter from "../../../Core/Ports/WorldPort/IWorldAdapter";
 import SpaceScoreTO from "../../../Core/Application/DataTransferObjects/SpaceScoreTO";
 import ElementTO from "../../../Core/Application/DataTransferObjects/ElementTO";
 import UserWorldsTO from "../../../Core/Application/DataTransferObjects/UserWorldsTO";
+import WorldScoreTO from "../../../Core/Application/DataTransferObjects/WorldScoreTO";
 
 describe("WorldPort", () => {
   let systemUnderTest: WorldPort;
@@ -43,6 +44,16 @@ describe("WorldPort", () => {
     systemUnderTest.onWorldLoaded(mockedWorldTO);
 
     expect(worldAdapterMock.onWorldLoaded).toBeCalledWith(mockedWorldTO);
+  });
+
+  test("onWorldScored calls a registered adapter", () => {
+    const worldAdapterMock = mock<IWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockedWorldScoreTO = mock<WorldScoreTO>();
+
+    systemUnderTest.onWorldScored(mockedWorldScoreTO);
+
+    expect(worldAdapterMock.onWorldScored).toBeCalledWith(mockedWorldScoreTO);
   });
 
   test("onSpaceLoaded calls a registered adapter", () => {

@@ -8,6 +8,7 @@ import SpaceScoreTO from "../../Application/DataTransferObjects/SpaceScoreTO";
 import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
 import UserWorldsTO from "../../Application/DataTransferObjects/UserWorldsTO";
 import { ComponentID } from "../../Domain/Types/EntityTypes";
+import WorldScoreTO from "../../Application/DataTransferObjects/WorldScoreTO";
 
 @injectable()
 export default class WorldPort
@@ -26,7 +27,12 @@ export default class WorldPort
       if (adapter.onWorldLoaded) adapter.onWorldLoaded(worldTO);
     });
   }
-  //on world scored für display und world detail
+
+  public onWorldScored(worldScoreTO: WorldScoreTO): void {
+    this.adapters.forEach((adapter) => {
+      if (adapter.onWorldScored) adapter.onWorldScored(worldScoreTO);
+    });
+  }
 
   // space
   public onSpaceLoaded(spaceTO: SpaceTO): void {

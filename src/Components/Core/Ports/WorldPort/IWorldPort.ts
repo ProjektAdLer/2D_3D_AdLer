@@ -3,6 +3,7 @@ import SpaceScoreTO from "../../Application/DataTransferObjects/SpaceScoreTO";
 import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
 import UserWorldsTO from "../../Application/DataTransferObjects/UserWorldsTO";
 import WorldTO from "../../Application/DataTransferObjects/WorldTO";
+import WorldScoreTO from "../../Application/DataTransferObjects/WorldScoreTO";
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import { IAbstractPort } from "../AbstractPort/IAbstractPort";
 import IWorldAdapter from "./IWorldAdapter";
@@ -12,6 +13,8 @@ export default interface IWorldPort extends IAbstractPort<IWorldAdapter> {
   onUserWorldsLoaded(userWorldsTO: UserWorldsTO): void;
   // world
   onWorldLoaded(worldTO: WorldTO): void;
+
+  onWorldScored(worldScoreTO: WorldScoreTO): void;
 
   // space
   onSpaceLoaded(spaceTO: SpaceTO): void;
