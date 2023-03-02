@@ -11,9 +11,14 @@ export default class ScorePanelPresenter implements IScorePanelPresenter {
   }
   onSpaceScored(spaceScoreTO: SpaceScoreTO): void {
     if (spaceScoreTO.spaceID === this.viewModel.currentSpaceID.Value) {
-      this.viewModel.score.Value = spaceScoreTO.currentScore;
-      this.viewModel.requiredScore.Value = spaceScoreTO.requiredScore;
-      this.viewModel.maxScore.Value = spaceScoreTO.maxScore;
+      this.viewModel.spaceScore.Value = spaceScoreTO.currentScore;
+      this.viewModel.spaceRequiredScore.Value = spaceScoreTO.requiredScore;
+      this.viewModel.spaceMaxScore.Value = spaceScoreTO.maxScore;
     }
+  }
+  onWorldScored(worldScoreTO: SpaceScoreTO): void {
+    this.viewModel.worldScore.Value = worldScoreTO.currentScore;
+    this.viewModel.worldRequiredScore.Value = worldScoreTO.requiredScore;
+    this.viewModel.worldMaxScore.Value = worldScoreTO.maxScore;
   }
 }

@@ -10,17 +10,21 @@ import {
 } from "react-circular-progressbar";
 import { useEffect, useState } from "react";
 
+//0 von 0
+
 export default function ScorePanel() {
   const [viewModel] = useBuilder<ScorePanelViewModel, undefined>(
     BUILDER_TYPES.IScorePanelBuilder
   );
-  const [score] = useObservable<number>(viewModel?.score);
-  const [requiredScore] = useObservable<number>(viewModel?.requiredScore);
+  const [spaceScore] = useObservable<number>(viewModel?.spaceScore);
+  const [spaceRequiredScore] = useObservable<number>(
+    viewModel?.spaceRequiredScore
+  );
   const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
-    setPercentage((score / requiredScore) * 100);
-  }, [score, requiredScore]);
+    setPercentage((spaceScore / spaceRequiredScore) * 100);
+  }, [spaceScore, spaceRequiredScore]);
 
   return (
     <div style={{ width: 60 }}>
@@ -46,7 +50,7 @@ export default function ScorePanel() {
           className="font-bold text-center"
           style={{ position: "absolute", fontSize: 10, lineHeight: 1.2 }}
         >
-          {score ?? "0"} <br /> von <br /> {requiredScore ?? "0"}
+          {spaceScore ?? "0"} <br /> von <br /> {spaceRequiredScore ?? "0"}
         </div>
       </CircularProgressbarWithChildren>
     </div>

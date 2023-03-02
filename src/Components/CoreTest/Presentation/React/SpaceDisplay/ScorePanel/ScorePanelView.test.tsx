@@ -6,9 +6,9 @@ import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilder
 import React from "react";
 
 let fakeModel = new ScorePanelViewModel();
-fakeModel.score.Value = 1;
-fakeModel.requiredScore.Value = 2;
-fakeModel.maxScore.Value = 3;
+fakeModel.spaceScore.Value = 1;
+fakeModel.spaceRequiredScore.Value = 2;
+fakeModel.spaceMaxScore.Value = 3;
 
 describe("Score Panel View", () => {
   it("renders the correct score", () => {

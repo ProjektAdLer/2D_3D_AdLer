@@ -3,7 +3,10 @@ import Observable from "../../../../../../Lib/Observable";
 
 export default class ScorePanelViewModel {
   currentSpaceID: Observable<ComponentID> = new Observable();
-  score: Observable<number> = new Observable(0);
-  requiredScore: Observable<number> = new Observable();
-  maxScore: Observable<number> = new Observable();
+  spaceScore: Observable<number> = new Observable();
+  spaceRequiredScore: Observable<number> = new Observable();
+  spaceMaxScore: Observable<number> = new Observable();
+  worldScore: Observable<number> = new Observable();
+  worldRequiredScore: Observable<number> = new Observable();
+  worldMaxScore: Observable<number> = new Observable();
 }

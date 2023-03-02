@@ -25,8 +25,8 @@ describe("ScorePanelPresenter", () => {
       spaceID: 42,
     });
 
-    expect(systemUnderTest["viewModel"].score.Value).toBe(1);
-    expect(systemUnderTest["viewModel"].requiredScore.Value).toBe(2);
-    expect(systemUnderTest["viewModel"].maxScore.Value).toBe(3);
+    expect(systemUnderTest["viewModel"].spaceScore.Value).toBe(1);
+    expect(systemUnderTest["viewModel"].spaceRequiredScore.Value).toBe(2);
+    expect(systemUnderTest["viewModel"].spaceMaxScore.Value).toBe(3);
   });
 });
