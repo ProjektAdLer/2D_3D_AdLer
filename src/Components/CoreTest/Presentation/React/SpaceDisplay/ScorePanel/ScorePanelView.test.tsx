@@ -9,21 +9,30 @@ let fakeModel = new ScorePanelViewModel();
 fakeModel.spaceScore.Value = 1;
 fakeModel.spaceRequiredScore.Value = 2;
 fakeModel.spaceMaxScore.Value = 3;
+fakeModel.worldScore.Value = 4;
+fakeModel.worldRequiredScore.Value = 5;
+fakeModel.worldMaxScore.Value = 6;
 
 describe("Score Panel View", () => {
-  it("renders the correct score", () => {
+  it("Score Panel View in space config renders the correct score", () => {
     useBuilderMock([fakeModel, undefined]);
-    const comp = render(<ScorePanel />);
+    const comp = render(<ScorePanel scoreType="space" />);
 
     expect(comp.container).toHaveTextContent("1");
     expect(comp.container).toHaveTextContent("2");
-    //expect(comp.container).toHaveTextContent("3");
+  });
+  it("Score Panel View in world config renders the correct score", () => {
+    useBuilderMock([fakeModel, undefined]);
+    const comp = render(<ScorePanel scoreType="world" />);
+
+    expect(comp.container).toHaveTextContent("4");
+    expect(comp.container).toHaveTextContent("5");
   });
 
-  it("renders 0, when no score is provided", () => {
+  it("returns null when viewModel is not registered", () => {
     useBuilderMock([undefined, undefined]);
-    const comp = render(<ScorePanel />);
+    const comp = render(<ScorePanel scoreType="space" />);
 
-    expect(comp.container).toHaveTextContent("0 von 0");
+    expect(comp.container).toBeEmptyDOMElement();
   });
 });

@@ -2,29 +2,40 @@ import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import ScorePanelViewModel from "./ScorePanelViewModel";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-
-import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
 import {
   buildStyles,
   CircularProgressbarWithChildren,
 } from "react-circular-progressbar";
 import { useEffect, useState } from "react";
 
-//0 von 0
+import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
+import worldIcon from "../../../../../../Assets/icons/14-world/world-icon-nobg.svg";
 
-export default function ScorePanel() {
+interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
+  scoreType: "space" | "world";
+}
+
+export default function ScorePanel({
+  scoreType,
+  ...rest
+}: React.DetailedHTMLProps<PanelProps, HTMLDivElement>) {
   const [viewModel] = useBuilder<ScorePanelViewModel, undefined>(
     BUILDER_TYPES.IScorePanelBuilder
   );
-  const [spaceScore] = useObservable<number>(viewModel?.spaceScore);
-  const [spaceRequiredScore] = useObservable<number>(
-    viewModel?.spaceRequiredScore
+  const [score] = useObservable<number>(
+    scoreType === "space" ? viewModel?.spaceScore : viewModel?.worldScore
+  );
+  const [requiredScore] = useObservable<number>(
+    scoreType === "space"
+      ? viewModel?.spaceRequiredScore
+      : viewModel?.worldRequiredScore
   );
   const [percentage, setPercentage] = useState(0);
-
   useEffect(() => {
-    setPercentage((spaceScore / spaceRequiredScore) * 100);
-  }, [spaceScore, spaceRequiredScore]);
+    setPercentage((score / requiredScore) * 100);
+  }, [score, requiredScore]);
+
+  if (!viewModel) return null;
 
   return (
     <div style={{ width: 60 }}>
@@ -42,15 +53,17 @@ export default function ScorePanel() {
       >
         <img
           style={{ width: 40, opacity: 0.4 }}
-          src={coinIcon}
-          alt="coin-icon"
+          src={scoreType === "space" ? coinIcon : worldIcon}
+          alt="icon"
         />
 
         <div
           className="font-bold text-center"
           style={{ position: "absolute", fontSize: 10, lineHeight: 1.2 }}
         >
-          {spaceScore ?? "0"} <br /> von <br /> {spaceRequiredScore ?? "0"}
+          {score ?? "x"}
+          <br /> von <br />
+          {requiredScore ?? "y"}
         </div>
       </CircularProgressbarWithChildren>
     </div>

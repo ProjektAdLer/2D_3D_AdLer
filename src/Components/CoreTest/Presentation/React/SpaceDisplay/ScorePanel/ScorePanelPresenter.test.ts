@@ -24,9 +24,17 @@ describe("ScorePanelPresenter", () => {
       maxScore: 3,
       spaceID: 42,
     });
+    systemUnderTest.onWorldScored({
+      currentScore: 4,
+      requiredScore: 5,
+      maxScore: 6,
+    });
 
     expect(systemUnderTest["viewModel"].spaceScore.Value).toBe(1);
     expect(systemUnderTest["viewModel"].spaceRequiredScore.Value).toBe(2);
     expect(systemUnderTest["viewModel"].spaceMaxScore.Value).toBe(3);
+    expect(systemUnderTest["viewModel"].worldScore.Value).toBe(4);
+    expect(systemUnderTest["viewModel"].worldRequiredScore.Value).toBe(5);
+    expect(systemUnderTest["viewModel"].worldMaxScore.Value).toBe(6);
   });
 });

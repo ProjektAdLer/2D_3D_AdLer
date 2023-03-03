@@ -60,7 +60,7 @@ export default class CalculateWorldScoreUseCase
       maxScore: maxScore,
     };
 
-    // this.worldPort.onWorldScored(result);
+    this.worldPort.onWorldScored(result);
     return result;
   }
 }
