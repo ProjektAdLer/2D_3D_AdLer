@@ -1,6 +1,7 @@
 import SpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/SpaceScoreTO";
 import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
 import WorldScoreTO from "src/Components/Core/Application/DataTransferObjects/WorldScoreTO";
+import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
 import IScorePanelPresenter from "./IScorePanelPresenter";
 import ScorePanelViewModel from "./ScorePanelViewModel";
 
@@ -9,6 +10,9 @@ export default class ScorePanelPresenter implements IScorePanelPresenter {
 
   onSpaceLoaded(spaceTO: SpaceTO): void {
     this.viewModel.currentSpaceID.Value = spaceTO.id;
+    this.viewModel.spaceScore.Value = spaceTO.currentScore;
+    this.viewModel.spaceRequiredScore.Value = spaceTO.requiredScore;
+    this.viewModel.spaceMaxScore.Value = spaceTO.maxScore;
   }
   onSpaceScored(spaceScoreTO: SpaceScoreTO): void {
     if (spaceScoreTO.spaceID === this.viewModel.currentSpaceID.Value) {
