@@ -113,7 +113,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
             goals: space.goals,
             requirements: space.requirements,
             requiredScore: space.requiredScore,
-            worldID: worldID,
+            parentWorldID: worldID,
           },
           SpaceEntity
         )
@@ -150,7 +150,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       hasScored:
         worldStatus.learningElements.find((e) => e.elementId === element.id)
           ?.successss || false,
-      parentCourseID: worldStatus.courseId,
+      parentWorldID: worldStatus.courseId,
     };
 
     return this.container.createEntity<ElementEntity>(

@@ -36,7 +36,7 @@ export default class LoadElementUseCase implements ILoadElementUseCase {
 
     elementTO.filePath = await this.getElementSourceUseCase.executeAsync({
       elementID: elementID,
-      courseID: elementTO.parentCourseID,
+      courseID: elementTO.parentWorldID,
     });
 
     this.worldPort.onElementLoaded(elementTO);

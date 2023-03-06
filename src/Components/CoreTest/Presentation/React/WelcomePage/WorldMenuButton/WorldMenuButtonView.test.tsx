@@ -92,7 +92,7 @@ describe("WorldMenuButton", () => {
     );
 
     let button: HTMLElement = componentUnderTest.getByRole("button");
-    console.log(button);
+
     fireEvent.click(button);
 
     expect(historyPushMock).toHaveBeenCalledTimes(1);

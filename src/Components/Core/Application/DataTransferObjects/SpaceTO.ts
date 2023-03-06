@@ -13,6 +13,7 @@ import ElementTO from "./ElementTO";
  * @property {number} requiredScore - The required score to complete this space
  * @property {number} currentScore - The current score of the space
  * @property {number} maxScore - The maximum score of the space
+ * @property {WorldID} parentWorldID - The ID of the world this space belongs to
  */
 export default class SpaceTO {
   id: ComponentID;
@@ -24,4 +25,5 @@ export default class SpaceTO {
   requiredScore: number;
   currentScore: number;
   maxScore: number;
+  parentWorldID: ComponentID;
 }

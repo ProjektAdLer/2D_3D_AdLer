@@ -35,7 +35,7 @@ describe("TextElementSubComponent", () => {
   });
   test("should render its Text", async () => {
     const vm = new ElementModalViewModel();
-    vm.parentCourseID.Value = 1;
+    vm.parentWorldID.Value = 1;
     vm.id.Value = 1;
     let component: RenderResult;
     await act(async () => {

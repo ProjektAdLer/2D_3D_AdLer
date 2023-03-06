@@ -25,7 +25,7 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
           description: "TestDescription",
           goals: "TestGoals",
           parentSpaceID: 1,
-          parentCourseID: 1,
+          parentWorldID: 1,
           hasScored: false,
         },
       ],

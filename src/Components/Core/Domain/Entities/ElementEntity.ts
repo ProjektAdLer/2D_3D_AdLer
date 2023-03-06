@@ -10,5 +10,5 @@ export default class ElementEntity {
   public goals: string;
   public type: ElementTypeStrings;
   public parentSpaceID: ComponentID;
-  public parentCourseID: ComponentID;
+  public parentWorldID: ComponentID;
 }

@@ -19,7 +19,7 @@ describe("ElementsDropDownPresenter", () => {
         name: "Test",
         value: 0,
         parentSpaceID: 0,
-        parentCourseID: 0,
+        parentWorldID: 0,
         description: "",
         goals: "",
         type: "video",

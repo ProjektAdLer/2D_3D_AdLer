@@ -5,7 +5,7 @@ export default class ElementTO {
   id: ComponentID;
   value: number;
   parentSpaceID: ComponentID;
-  parentCourseID: ComponentID;
+  parentWorldID: ComponentID;
   name: string;
   description: string;
   goals: string;
