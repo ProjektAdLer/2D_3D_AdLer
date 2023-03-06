@@ -17,7 +17,6 @@ import SpaceSelectionNode, {
   SpaceSelectionNodeInputType,
   SpaceSelectionNodeType,
 } from "./SpaceSelectionNode";
-import dagre from "dagre";
 
 import spaceSolved from "../../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import spaceAvailable from "../../../../../../../Assets/icons/27-1-lock-open/lock-icon-open-nobg.svg";
@@ -41,89 +40,67 @@ export default function SpaceSelectionGraph(props: {
     // TODO: add better node positioning here
     let y = 0;
     let x = 0;
-    let nodes = spaces.map((space) => {
-      y += 100;
-      x += 100;
+    reactFlowInstance.setNodes(
+      spaces.map((space) => {
+        y += 100;
+        x += 100;
 
-      let inputType: SpaceSelectionNodeInputType;
-      if (space.requiredSpaces.length === 1) {
-        inputType = "single";
-      } else if (space.requiredSpaces.length > 1) {
-        inputType = "and";
-      } else {
-        inputType = "none";
-      }
-      let hasOutput = spaces.some((inputSpace) =>
-        inputSpace.requiredSpaces.some(
-          (requiredSpace) => requiredSpace.id === space.id
-        )
-      );
+        let inputType: SpaceSelectionNodeInputType;
+        if (space.requiredSpaces.length === 1) {
+          inputType = "single";
+        } else if (space.requiredSpaces.length > 1) {
+          inputType = "and";
+        } else {
+          inputType = "none";
+        }
+        let hasOutput = spaces.some((inputSpace) =>
+          inputSpace.requiredSpaces.some(
+            (requiredSpace) => requiredSpace.id === space.id
+          )
+        );
 
-      let spaceIcon: string;
-      if (space.isCompleted) spaceIcon = spaceSolved;
-      else if (space.isAvailable) spaceIcon = spaceAvailable;
-      else spaceIcon = spaceLocked;
+        let spaceIcon: string;
+        if (space.isCompleted) spaceIcon = spaceSolved;
+        else if (space.isAvailable) spaceIcon = spaceAvailable;
+        else spaceIcon = spaceLocked;
 
-      const node: SpaceSelectionNodeType = {
-        id: space.id.toString(),
-        data: {
-          icon: spaceIcon,
-          label: space.name,
-          input: inputType,
-          output: hasOutput,
-          lastSelected: false,
-        },
-        type: "spaceNode",
-        position: { x: x, y: y },
-        connectable: false,
-        deletable: false,
-      };
-      return node;
-    });
+        const node: SpaceSelectionNodeType = {
+          id: space.id.toString(),
+          data: {
+            icon: spaceIcon,
+            label: space.name,
+            input: inputType,
+            output: hasOutput,
+            lastSelected: false,
+          },
+          type: "spaceNode",
+          position: { x: x, y: y },
+          connectable: false,
+          deletable: false,
+        };
+        return node;
+      })
+    );
 
     // create edges for requirements
-    let edges = spaces.reduce((accumulatedEdgeArray, space) => {
-      // create an edge for each required space and add it to the array
-      space.requiredSpaces.forEach((requiredSpace) => {
-        accumulatedEdgeArray.push({
-          id: requiredSpace.id.toString() + "-" + space.id.toString(),
-          source: requiredSpace.id.toString(),
-          target: space.id.toString(),
-          style: {
-            stroke: "black",
-            strokeDasharray: requiredSpace.isCompleted ? "" : "6 5",
-          } as CSSProperties,
-        } as Edge);
-      });
-      // return the array to be used in the next iteration
-      return accumulatedEdgeArray;
-    }, [] as Edge[]);
-
-    // layout graph with dagre
-    const dagreGraph = new dagre.graphlib.Graph();
-    dagreGraph.setDefaultEdgeLabel(() => ({}));
-
-    const nodeWidth = 430;
-    const nodeHeight = 76;
-
-    dagreGraph.setGraph({ rankdir: "TB" });
-    nodes.forEach((node) => {
-      dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
-    });
-    edges.forEach((edge) => {
-      dagreGraph.setEdge(edge.source, edge.target);
-    });
-    dagre.layout(dagreGraph);
-
-    nodes.forEach((node) => {
-      const nodeWithPosition = dagreGraph.node(node.id);
-      node.position = {
-        x: nodeWithPosition.x - nodeWidth / 2,
-        y: nodeWithPosition.y - nodeHeight / 2,
-      };
-    });
-    reactFlowInstance.setNodes(nodes);
-    reactFlowInstance.setEdges(edges);
+    reactFlowInstance.setEdges(
+      spaces.reduce((accumulatedEdgeArray, space) => {
+        // create an edge for each required space and add it to the array
+        space.requiredSpaces.forEach((requiredSpace) => {
+          accumulatedEdgeArray.push({
+            id: requiredSpace.id.toString() + "-" + space.id.toString(),
+            source: requiredSpace.id.toString(),
+            target: space.id.toString(),
+            style: {
+              stroke: "black",
+              strokeDasharray: requiredSpace.isCompleted ? "" : "6 5",
+            } as CSSProperties,
+          } as Edge);
+        });
+        // return the array to be used in the next iteration
+        return accumulatedEdgeArray;
+      }, [] as Edge[])
+    );
   }, [spaces, reactFlowInstance]);
 
   const onNodeClickCallback = useCallback<NodeMouseHandler>(
@@ -148,7 +125,7 @@ export default function SpaceSelectionGraph(props: {
       <ReactFlow
         defaultNodes={[]}
         nodeTypes={nodeTypes}
-        nodesDraggable={false} // TODO: set to false when nodes are placed in the correct positions
+        nodesDraggable={true} // TODO: set to false when nodes are placed in the correct positions
         nodesConnectable={false}
         onNodeClick={onNodeClickCallback}
         defaultEdges={[]}
