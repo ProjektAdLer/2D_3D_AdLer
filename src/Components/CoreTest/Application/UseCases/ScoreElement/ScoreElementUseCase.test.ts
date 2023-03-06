@@ -44,7 +44,7 @@ const spaceEntity: SpaceEntity = {
   goals: "",
   requirements: [],
   requiredScore: 0,
-  worldID: 200,
+  parentWorldID: 200,
 };
 
 const setupEntityContainerMock = (
