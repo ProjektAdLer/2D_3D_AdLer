@@ -9,5 +9,5 @@ export default class ElementModalViewModel {
   filePath = new Observable<string>();
 
   parentSpaceID = new Observable<ComponentID>();
-  parentCourseID = new Observable<ComponentID>();
+  parentWorldID = new Observable<ComponentID>();
 }

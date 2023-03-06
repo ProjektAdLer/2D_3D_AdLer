@@ -10,7 +10,7 @@ export default class ElementModalPresenter implements IElementModalPresenter {
     this.viewModel.isOpen.Value = true;
     this.viewModel.id.Value = elementTO.id;
     this.viewModel.parentSpaceID.Value = elementTO.parentSpaceID;
-    this.viewModel.parentCourseID.Value = elementTO.parentCourseID;
+    this.viewModel.parentWorldID.Value = elementTO.parentWorldID;
     this.viewModel.name.Value = elementTO.name;
     this.viewModel.filePath.Value = elementTO.filePath ?? "";
   }

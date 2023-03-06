@@ -34,7 +34,7 @@ const elementEntity: ElementEntity = {
   goals: "",
   type: "h5p",
   parentSpaceID: 0,
-  parentCourseID: 0,
+  parentWorldID: 0,
 };
 const spaceEntity: SpaceEntity = {
   id: 1,

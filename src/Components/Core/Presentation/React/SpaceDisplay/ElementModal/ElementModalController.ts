@@ -60,7 +60,7 @@ export default class ElementModalController implements IElementModalController {
         //@ts-ignore
         xapiData: xapiData,
         elementID: this.viewModel.id.Value,
-        courseID: this.viewModel.parentCourseID.Value,
+        courseID: this.viewModel.parentWorldID.Value,
       });
     }
   }

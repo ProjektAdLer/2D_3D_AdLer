@@ -63,7 +63,7 @@ export default function ElementModal() {
         if (viewModel.type?.Value !== "h5p") {
           controller.scoreElement(
             viewModel.id.Value,
-            viewModel.parentCourseID.Value
+            viewModel.parentWorldID.Value
           );
         }
       }}

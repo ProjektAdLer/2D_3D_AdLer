@@ -12,7 +12,7 @@ import IElementModalController from "../../../../../../Core/Presentation/React/S
 
 const viewModel = new ElementModalViewModel();
 viewModel.id.Value = 1;
-viewModel.parentCourseID.Value = 1;
+viewModel.parentWorldID.Value = 1;
 viewModel.filePath.Value = "test";
 
 jest.mock("h5p-standalone");

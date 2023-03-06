@@ -63,7 +63,7 @@ describe("SpaceDetailPresenter", () => {
           goals: "TestGoal",
           value: 1,
           hasScored: false,
-          parentCourseID: 42,
+          parentWorldID: 42,
         },
         {
           id: 2,
@@ -74,7 +74,7 @@ describe("SpaceDetailPresenter", () => {
           goals: "TestGoal",
           value: 1,
           hasScored: false,
-          parentCourseID: 42,
+          parentWorldID: 42,
         },
       ],
     };

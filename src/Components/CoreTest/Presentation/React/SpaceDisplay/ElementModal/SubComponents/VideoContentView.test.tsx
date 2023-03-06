@@ -23,7 +23,7 @@ describe("VideoComponent", () => {
 
     let component: RenderResult;
     const vm = new ElementModalViewModel();
-    vm.parentCourseID.Value = 1;
+    vm.parentWorldID.Value = 1;
     vm.id.Value = 1;
     vm.filePath.Value =
       "https://www.youtube.com/watch?v=UEJpDrXuP98&ab_channel=AbroadinJapan&token=46dd4cbdafda7fc864c8ce73aae3a897";
@@ -48,7 +48,7 @@ describe("VideoComponent", () => {
 
     let component: RenderResult;
     const vm = new ElementModalViewModel();
-    vm.parentCourseID.Value = 1;
+    vm.parentWorldID.Value = 1;
     vm.id.Value = 1;
     vm.filePath.Value =
       "https://www.youtube.com/watch?v=UEJpDrXuP98&ab_channel=AbroadinJapan&token=46dd4cbdafda7fc864c8ce73aae3a897";
