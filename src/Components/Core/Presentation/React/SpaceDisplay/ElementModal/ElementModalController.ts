@@ -12,14 +12,14 @@ export default class ElementModalController implements IElementModalController {
 
   async scoreElement(
     elementID: ComponentID,
-    courseID: ComponentID
+    worldID: ComponentID
   ): Promise<void> {
     if (this.viewModel.type.Value !== ElementTypes.h5p) {
       await CoreDIContainer.get<IScoreElementUseCase>(
         USECASE_TYPES.IScoreElementUseCase
       ).executeAsync({
         elementID: elementID,
-        courseID: courseID,
+        worldID: worldID,
       });
     }
   }
