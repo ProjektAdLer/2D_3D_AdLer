@@ -30,7 +30,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     private backendAdapter: IBackendAdapter,
     @inject(PORT_TYPES.IUIPort)
     private uiPort: IUIPort,
-    @inject(USECASE_TYPES.ICalculateSpaceScore)
+    @inject(USECASE_TYPES.ICalculateSpaceScoreUseCase)
     private calculateSpaceScore: ICalculateSpaceScoreUseCase,
     @inject(USECASE_TYPES.ISetCurrentUserLocationUseCase)
     private setCurrentUserLocationUseCase: ISetCurrentUserLocationUseCase

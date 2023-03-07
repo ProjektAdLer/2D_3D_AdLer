@@ -26,9 +26,9 @@ describe("Calculate World Score UseCase", () => {
     CoreDIContainer.rebind(PORT_TYPES.IWorldPort).toConstantValue(
       worldPortMock
     );
-    CoreDIContainer.rebind(USECASE_TYPES.ICalculateSpaceScore).toConstantValue(
-      calculateSpaceScoreMock
-    );
+    CoreDIContainer.rebind(
+      USECASE_TYPES.ICalculateSpaceScoreUseCase
+    ).toConstantValue(calculateSpaceScoreMock);
   });
 
   afterAll(() => {

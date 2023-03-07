@@ -20,7 +20,7 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
     private entityContainer: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter)
     private backendAdapter: IBackendAdapter,
-    @inject(USECASE_TYPES.ICalculateWorldScore)
+    @inject(USECASE_TYPES.ICalculateWorldScoreUseCase)
     private calculateWorldScoreUseCase: ICalculateWorldScoreUseCase,
     @inject(PORT_TYPES.IWorldPort)
     private worldPort: IWorldPort

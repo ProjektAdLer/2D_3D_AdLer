@@ -52,11 +52,11 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(LoadElementUseCase)
     .inSingletonScope();
 
-  bind<ICalculateSpaceScoreUseCase>(USECASE_TYPES.ICalculateSpaceScore)
+  bind<ICalculateSpaceScoreUseCase>(USECASE_TYPES.ICalculateSpaceScoreUseCase)
     .to(CalculateSpaceScoreUseCase)
     .inSingletonScope();
 
-  bind<ICalculateWorldScoreUseCase>(USECASE_TYPES.ICalculateWorldScore)
+  bind<ICalculateWorldScoreUseCase>(USECASE_TYPES.ICalculateWorldScoreUseCase)
     .to(CalculateWorldScoreUseCase)
     .inSingletonScope();
 

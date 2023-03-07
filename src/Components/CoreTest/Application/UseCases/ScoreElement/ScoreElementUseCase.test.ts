@@ -92,7 +92,7 @@ describe("ScoreElementUseCase", () => {
       CORE_TYPES.IBackendAdapter
     ).toConstantValue(backendAdapterMock);
     CoreDIContainer.rebind<ICalculateWorldScoreUseCase>(
-      USECASE_TYPES.ICalculateWorldScore
+      USECASE_TYPES.ICalculateWorldScoreUseCase
     ).toConstantValue(CalculateWorldScoreMock);
     CoreDIContainer.rebind<IWorldPort>(PORT_TYPES.IWorldPort).toConstantValue(
       worldPortMock

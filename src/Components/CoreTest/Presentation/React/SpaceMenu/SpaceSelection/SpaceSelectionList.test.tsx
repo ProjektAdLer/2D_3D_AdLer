@@ -18,7 +18,7 @@ describe("SpaceSelectionList", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind<ICalculateSpaceScoreUseCase>(
-      USECASE_TYPES.ICalculateSpaceScore
+      USECASE_TYPES.ICalculateSpaceScoreUseCase
     ).toConstantValue(calculateSpaceScoreUseCaseMock);
   });
 
