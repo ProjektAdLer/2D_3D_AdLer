@@ -63,7 +63,7 @@ export default function SpaceDetail() {
             className="mt-2 mb-2"
             onClick={controller.onSpaceButtonClicked}
           >
-            {"Lernraum '" + name + "' betreten!"}
+            {"Lernraum betreten!"}
           </StyledButton>
         )}
       </div>

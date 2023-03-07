@@ -39,7 +39,7 @@ export default function WorldDetail() {
           className="self-center mt-2 mb-2 justify-self-center"
           onClick={controller.onEnterWorldButtonClicked}
         >
-          {"Lernwelt '" + name + "' öffnen!"}
+          {"Lernwelt öffnen!"}
         </StyledButton>
       </div>
 
@@ -75,12 +75,12 @@ export default function WorldDetail() {
               <div key={space.id}>
                 <div className="flex flex-row items-center lg:text-lg">
                   <div className="relative flex my-2 ml-2">
-                    <img src={spaceIcon} alt="" className="w-8 mr-4 xl:w-8" />
+                    <img src={spaceIcon} alt="" className="w-8 mr-4 xl:w-12" />
                     {space.isCompleted && (
                       <img
                         src={greenSwosh}
                         alt=""
-                        className="absolute h-4 lg:h-6 bottom-3 left-4 lg:bottom-3 lg:left-6 "
+                        className="absolute w-6 bottom-3 left-4 xl:w-8 xl:left-6 xl:bottom-4"
                       />
                     )}
                   </div>
