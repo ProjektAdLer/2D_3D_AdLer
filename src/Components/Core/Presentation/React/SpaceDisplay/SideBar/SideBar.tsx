@@ -17,6 +17,7 @@ export default function SideBar() {
   );
   return (
     <CustomDropdown
+      className="w-20"
       headerPart={
         <StyledButton>
           <img
