@@ -27,11 +27,20 @@ export default function WorldDetail() {
 
   return (
     <div className="flex flex-col gap-2 w-[100%] overflow-auto">
-      <div className="flex flex-row items-center p-1 pb-4 border-b border-gray-500">
-        <img src={worldIcon} className="w-6 xl:w-8" alt="Lernwelt-Icon"></img>
-        <div className="ml-2 text-lg text-white lg:text-2xl roboto-black text-shadow">
-          {name}
+      <div className="flex flex-row items-center justify-between p-1 pb-4 border-b border-gray-500">
+        <div className="flex flex-row">
+          <img src={worldIcon} className="w-6 xl:w-8" alt="Lernwelt-Icon"></img>
+          <div className="ml-2 text-lg text-white lg:text-2xl roboto-black text-shadow">
+            {name}
+          </div>
         </div>
+        <StyledButton
+          shape="freefloatleft"
+          className="self-center mt-2 mb-2 justify-self-center"
+          onClick={controller.onEnterWorldButtonClicked}
+        >
+          {"Lernwelt '" + name + "' öffnen!"}
+        </StyledButton>
       </div>
 
       {description === undefined ||
@@ -65,8 +74,8 @@ export default function WorldDetail() {
             return (
               <div key={space.id}>
                 <div className="flex flex-row items-center lg:text-lg">
-                  <div className="relative flex ml-2 my-2">
-                    <img src={spaceIcon} alt="" className="w-8 xl:w-8 mr-4" />
+                  <div className="relative flex my-2 ml-2">
+                    <img src={spaceIcon} alt="" className="w-8 mr-4 xl:w-8" />
                     {space.isCompleted && (
                       <img
                         src={greenSwosh}
@@ -90,14 +99,6 @@ export default function WorldDetail() {
           {spaces?.length}
         </div>
       </div>
-
-      <StyledButton
-        shape="freefloatleft"
-        className="self-center mt-2 mb-2 justify-self-center"
-        onClick={controller.onEnterWorldButtonClicked}
-      >
-        {"Lernwelt '" + name + "' öffnen!"}
-      </StyledButton>
     </div>
   );
 }
