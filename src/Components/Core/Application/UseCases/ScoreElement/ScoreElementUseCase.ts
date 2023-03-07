@@ -28,7 +28,7 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
 
   async executeAsync(data: {
     elementID: ComponentID;
-    courseID: ComponentID;
+    worldID: ComponentID;
   }): Promise<void> {
     if (!data || !data.elementID) {
       return this.rejectWithWarning("data is (atleast partly) undefined!");
@@ -47,7 +47,7 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
       await this.backendAdapter.scoreElement(
         userEntity.userToken,
         data.elementID,
-        data.courseID
+        data.worldID
       );
     } catch (e) {
       return this.rejectWithWarning(
@@ -58,7 +58,8 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
 
     const elements = this.entityContainer.filterEntitiesOfType<ElementEntity>(
       ElementEntity,
-      (entity) => entity.id === data.elementID
+      (entity) =>
+        entity.parentWorldID === data.worldID && entity.id === data.elementID
     );
 
     if (elements.length === 0)
