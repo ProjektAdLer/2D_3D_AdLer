@@ -88,9 +88,9 @@ describe("ScoreH5PElementUseCase", () => {
     CoreDIContainer.rebind(PORT_TYPES.IWorldPort).toConstantValue(
       worldPortMock
     );
-    CoreDIContainer.rebind(USECASE_TYPES.ICalculateSpaceScore).toConstantValue(
-      calculateSpaceScoreUseCaseMock
-    );
+    CoreDIContainer.rebind(
+      USECASE_TYPES.ICalculateSpaceScoreUseCase
+    ).toConstantValue(calculateSpaceScoreUseCaseMock);
   });
 
   beforeEach(() => {

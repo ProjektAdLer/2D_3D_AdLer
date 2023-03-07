@@ -54,9 +54,9 @@ describe("LoadWorldUseCase", () => {
     CoreDIContainer.rebind(USECASE_TYPES.ILoadAvatarUseCase).toConstantValue(
       loadAvatarUsecaseMock
     );
-    CoreDIContainer.rebind(USECASE_TYPES.ICalculateSpaceScore).toConstantValue(
-      calculateSpaceScoreUseCaseMock
-    );
+    CoreDIContainer.rebind(
+      USECASE_TYPES.ICalculateSpaceScoreUseCase
+    ).toConstantValue(calculateSpaceScoreUseCaseMock);
     CoreDIContainer.rebind(
       USECASE_TYPES.ISetCurrentUserLocationUseCase
     ).toConstantValue(setCurrentUserLocationUseCaseMock);

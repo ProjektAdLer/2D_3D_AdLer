@@ -20,7 +20,7 @@ export default class CalculateWorldScoreUseCase
     private entitiyContainer: IEntityContainer,
     @inject(PORT_TYPES.IWorldPort)
     private worldPort: IWorldPort,
-    @inject(USECASE_TYPES.ICalculateSpaceScore)
+    @inject(USECASE_TYPES.ICalculateSpaceScoreUseCase)
     private calculateSpaceScoreUseCase: ICalculateSpaceScoreUseCase
   ) {}
 

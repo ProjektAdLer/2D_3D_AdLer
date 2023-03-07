@@ -37,7 +37,7 @@ describe("LoadSpaceUseCase", () => {
       worldPortMock
     );
     CoreDIContainer.rebind<ICalculateSpaceScoreUseCase>(
-      USECASE_TYPES.ICalculateSpaceScore
+      USECASE_TYPES.ICalculateSpaceScoreUseCase
     ).toConstantValue(calculateSpaceScoreMock);
     CoreDIContainer.rebind<ISetCurrentUserLocationUseCase>(
       USECASE_TYPES.ISetCurrentUserLocationUseCase

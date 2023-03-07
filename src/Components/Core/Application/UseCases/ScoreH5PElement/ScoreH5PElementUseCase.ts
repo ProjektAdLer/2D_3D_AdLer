@@ -20,7 +20,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(PORT_TYPES.IWorldPort) private worldPort: IWorldPort,
-    @inject(USECASE_TYPES.ICalculateSpaceScore)
+    @inject(USECASE_TYPES.ICalculateSpaceScoreUseCase)
     private calculateSpaceScoreUseCase: ICalculateSpaceScoreUseCase
   ) {}
 

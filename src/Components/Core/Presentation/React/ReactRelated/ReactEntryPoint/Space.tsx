@@ -24,8 +24,8 @@ export default function Space() {
           <ElementsDropdown />
         </div>*/}
         <div className="fixed z-10 flex flex-row-reverse col-span-2 col-start-8 row-start-1 space-x-2 space-x-reverse right-2 top-2">
-          <ScorePanel scoreType="space" />
           <ScorePanel scoreType="world" />
+          <ScorePanel scoreType="space" />
         </div>
 
         <div className="z-10 col-span-5 col-start-3 row-start-1 pointer-events-none">

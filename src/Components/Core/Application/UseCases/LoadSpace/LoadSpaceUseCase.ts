@@ -20,7 +20,7 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     private container: IEntityContainer,
     @inject(USECASE_TYPES.ILoadWorldUseCase)
     private loadWorldUseCase: ILoadWorldUseCase,
-    @inject(USECASE_TYPES.ICalculateSpaceScore)
+    @inject(USECASE_TYPES.ICalculateSpaceScoreUseCase)
     private calculateSpaceScore: ICalculateSpaceScoreUseCase,
     @inject(PORT_TYPES.IWorldPort)
     private worldPort: IWorldPort,
