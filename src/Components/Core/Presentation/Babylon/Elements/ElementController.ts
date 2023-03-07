@@ -1,5 +1,5 @@
 import bind from "bind-decorator";
-import ILoadElementUseCase from "../../../Application/UseCases/ElementStarted/ILoadElementUseCase";
+import ILoadElementUseCase from "../../../Application/UseCases/LoadElement/ILoadElementUseCase";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import IElementController from "./IElementController";

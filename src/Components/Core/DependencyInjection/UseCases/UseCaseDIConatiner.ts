@@ -1,8 +1,8 @@
 import { ContainerModule } from "inversify";
 import CalculateSpaceScoreUseCase from "../../Application/UseCases/CalculateSpaceScore/CalculateSpaceScoreUseCase";
 import ICalculateSpaceScoreUseCase from "../../Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
-import ILoadElementUseCase from "../../Application/UseCases/ElementStarted/ILoadElementUseCase";
-import LoadElementUseCase from "../../Application/UseCases/ElementStarted/LoadElementUseCase";
+import ILoadElementUseCase from "../../Application/UseCases/LoadElement/ILoadElementUseCase";
+import LoadElementUseCase from "../../Application/UseCases/LoadElement/LoadElementUseCase";
 import ILoadAvatarUseCase from "../../Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
 import LoadAvatarUseCase from "../../Application/UseCases/LoadAvatar/LoadAvatarUseCase";
 import ILoadSpaceUseCase from "../../Application/UseCases/LoadSpace/ILoadSpaceUseCase";
