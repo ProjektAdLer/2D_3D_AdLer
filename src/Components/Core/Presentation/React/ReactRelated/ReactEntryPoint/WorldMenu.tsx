@@ -3,6 +3,8 @@ import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/Menu
 import MenuTutorial from "~ReactComponents/SpaceMenu/MenuTutorial/MenuTutorial";
 import WorldDetail from "~ReactComponents/WorldMenu/WorldDetail/WorldDetail";
 import WorldSelection from "~ReactComponents/WorldMenu/WorldSelection/WorldSelection";
+import useIsMobilePortrait from "../CustomHooks/useIsMobilePortrait";
+import StyledModal from "../ReactBaseComponents/StyledModal";
 
 export default function WorldMenu() {
   return (
@@ -22,6 +24,16 @@ export default function WorldMenu() {
           </div>
           <MenuTutorial />
         </div>
+        <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
+          <div className="text-lg font-bold text-white text-shadow-sm">
+            <h1>
+              Die AdLer Engine ist für den<br></br>
+              Landscape Modus konzipiert.<br></br>
+              Bitte nimm dein Smartphone quer.<br></br>
+              Danke!
+            </h1>
+          </div>
+        </StyledModal>
       </div>
     </React.Fragment>
   );

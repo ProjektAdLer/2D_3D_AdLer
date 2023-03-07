@@ -4,6 +4,8 @@ import SpaceDetail from "~ReactComponents/SpaceMenu/SpaceDetail/SpaceDetail";
 import WorldCompletionModal from "~ReactComponents/SpaceMenu/WorldCompletionModal/WorldCompletionModal";
 import MenuTutorial from "~ReactComponents/SpaceMenu/MenuTutorial/MenuTutorial";
 import SpaceSelection from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection";
+import StyledModal from "../ReactBaseComponents/StyledModal";
+import useIsMobilePortrait from "../CustomHooks/useIsMobilePortrait";
 
 export default function SpaceMenu() {
   return (
@@ -27,6 +29,16 @@ export default function SpaceMenu() {
           </div>
           <MenuTutorial />
         </div>
+        <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
+          <div className="text-lg font-bold text-white text-shadow-sm">
+            <h1>
+              Die AdLer Engine ist für den<br></br>
+              Landscape Modus konzipiert.<br></br>
+              Bitte nimm dein Smartphone quer.<br></br>
+              Danke!
+            </h1>
+          </div>
+        </StyledModal>
       </div>
     </React.Fragment>
   );
