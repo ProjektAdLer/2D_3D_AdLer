@@ -7,6 +7,7 @@ type Props = {
   children?: React.ReactNode;
   initialOpen?: boolean;
   useAsTriggerOnly?: boolean;
+  className?: string;
 };
 /**
  * @param managed controlls, if the dropdown is managed by the component or not
@@ -25,6 +26,8 @@ export default function CustomDropdown({
   children,
   initialOpen = false,
   useAsTriggerOnly = false,
+  className,
+  ...rest
 }: Props) {
   const [isOpenState, setIsOpenState] = useState(initialOpen);
 
@@ -42,8 +45,8 @@ export default function CustomDropdown({
   );
 
   return (
-    <div className="dropdown pointer-events-auto">
-      <div className="dropdown-header " onClick={handleClick}>
+    <div className={className + " " + "pointer-events-auto dropdown "}>
+      <div className="dropdown-header" onClick={handleClick}>
         {headerPart}
       </div>
       {shouldShowDropdown && content}

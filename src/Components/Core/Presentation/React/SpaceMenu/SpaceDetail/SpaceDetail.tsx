@@ -44,11 +44,28 @@ export default function SpaceDetail() {
 
   return (
     <div className="flex flex-col gap-2 w-[100%] overflow-auto">
-      <div className="flex flex-row items-center p-1 pb-4 border-b border-gray-500">
-        <img src={spaceIcon} className="w-6 xl:w-8" alt="Lernraum-Icon"></img>
-        <div className="ml-2 text-lg text-white lg:text-2xl roboto-black text-shadow">
-          {name}
+      <div className="flex flex-row items-center justify-between p-1 pb-4 border-b border-gray-500">
+        <div className="flex flex-row">
+          <img src={spaceIcon} className="w-6 xl:w-8" alt="Lernraum-Icon"></img>
+          <div className="ml-2 text-lg text-white lg:text-2xl roboto-black text-shadow">
+            {name}
+          </div>
         </div>
+        {viewModel.requirements.Value.every((requirement) => {
+          // check for each requirement if the space is completed
+          let requiredSpaces = spaces.find((space) => space.id === requirement);
+          return requiredSpaces !== undefined
+            ? requiredSpaces.isCompleted
+            : false;
+        }) && (
+          <StyledButton
+            shape="freefloatleft"
+            className="mt-2 mb-2"
+            onClick={controller.onSpaceButtonClicked}
+          >
+            {"Lernraum '" + name + "' betreten!"}
+          </StyledButton>
+        )}
       </div>
 
       {description !== "" && (
@@ -82,7 +99,7 @@ export default function SpaceDetail() {
                 <div key={element[1]} className="w-full">
                   <div className="flex flex-row justify-between w-full xl:w-3/4">
                     <div className="flex flex-row items-center gap-x-2">
-                      <div className="w-6 ml-2 mr-2 lg:w-8 relative">
+                      <div className="relative w-6 ml-2 mr-2 lg:w-8">
                         {getElementIcon(element[0])}
                         {element[2] && (
                           <img
@@ -153,8 +170,8 @@ export default function SpaceDetail() {
               completed = lookup.isCompleted;
 
               return (
-                <div className="relative flex ml-2 my-4" key={name + completed}>
-                  <img src={spaceIcon} alt="" className="w-8 xl:w-8 mr-4" />
+                <div className="relative flex my-4 ml-2" key={name + completed}>
+                  <img src={spaceIcon} alt="" className="w-8 mr-4 xl:w-8" />
                   {completed && (
                     <img
                       src={greenSwosh}
@@ -168,21 +185,6 @@ export default function SpaceDetail() {
             })}
           </div>
         </div>
-      )}
-      {viewModel.requirements.Value.every((requirement) => {
-        // check for each requirement if the space is completed
-        let requiredSpaces = spaces.find((space) => space.id === requirement);
-        return requiredSpaces !== undefined
-          ? requiredSpaces.isCompleted
-          : false;
-      }) && (
-        <StyledButton
-          shape="freefloatleft"
-          className="self-center mt-2 mb-2 justify-self-center"
-          onClick={controller.onSpaceButtonClicked}
-        >
-          {"Lernraum '" + name + "' betreten!"}
-        </StyledButton>
       )}
     </div>
   );
