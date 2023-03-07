@@ -6,7 +6,7 @@ import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import GetElementSourceUseCase from "../../../../Core/Application/UseCases/GetElementSource/GetElementSourceUseCase";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import LoadElementUseCase from "../../../../Core/Application/UseCases/ElementStarted/LoadElementUseCase";
+import LoadElementUseCase from "../../../../Core/Application/UseCases/LoadElement/LoadElementUseCase";
 import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 
 const worldPortMock = mock<IWorldPort>();

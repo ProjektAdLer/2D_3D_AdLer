@@ -1,6 +1,6 @@
 import { ActionEvent } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
-import ILoadElementUseCase from "../../../../Core/Application/UseCases/ElementStarted/ILoadElementUseCase";
+import ILoadElementUseCase from "../../../../Core/Application/UseCases/LoadElement/ILoadElementUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";

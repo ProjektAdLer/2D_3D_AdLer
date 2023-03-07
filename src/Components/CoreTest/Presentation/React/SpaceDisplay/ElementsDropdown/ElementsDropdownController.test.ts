@@ -1,5 +1,5 @@
 import { mock } from "jest-mock-extended";
-import ILoadElementUseCase from "../../../../../Core/Application/UseCases/ElementStarted/ILoadElementUseCase";
+import ILoadElementUseCase from "../../../../../Core/Application/UseCases/LoadElement/ILoadElementUseCase";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import ElementsDropdownController from "../../../../../Core/Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownController";
