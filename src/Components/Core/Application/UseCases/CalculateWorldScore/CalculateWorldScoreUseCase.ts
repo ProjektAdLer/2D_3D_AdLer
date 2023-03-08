@@ -10,6 +10,7 @@ import WorldEntity from "src/Components/Core/Domain/Entities/WorldEntity";
 import SpaceScoreTO from "../../DataTransferObjects/SpaceScoreTO";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
+import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 
 @injectable()
 export default class CalculateWorldScoreUseCase
@@ -21,13 +22,18 @@ export default class CalculateWorldScoreUseCase
     @inject(PORT_TYPES.IWorldPort)
     private worldPort: IWorldPort,
     @inject(USECASE_TYPES.ICalculateSpaceScoreUseCase)
-    private calculateSpaceScoreUseCase: ICalculateSpaceScoreUseCase
+    private calculateSpaceScoreUseCase: ICalculateSpaceScoreUseCase,
+    @inject(USECASE_TYPES.IGetUserLocationUseCase)
+    private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
 
-  execute(worldID: ComponentID): WorldScoreTO {
+  execute(): void {
+    // get the current user location
+    const userLocation = this.getUserLocationUseCase.execute();
+
     const worlds = this.entitiyContainer.filterEntitiesOfType<WorldEntity>(
       WorldEntity,
-      (e) => e.id === worldID
+      (e) => e.id === userLocation.worldID
     );
 
     if (worlds.length === 0) {
@@ -35,9 +41,9 @@ export default class CalculateWorldScoreUseCase
     }
 
     // get the requested space
-    const world = worlds.find((s) => s.id === worldID);
+    const world = worlds.find((s) => s.id === userLocation.worldID);
     if (!world) {
-      throw new Error(`Could not find world with id ${worldID}`);
+      throw new Error(`Could not find world with id ${userLocation.worldID}`);
     }
 
     // sum up score
@@ -54,13 +60,12 @@ export default class CalculateWorldScoreUseCase
     });
 
     const result: WorldScoreTO = {
-      worldID: worldID,
+      worldID: userLocation.worldID,
       currentScore: currentScore,
       requiredScore: requiredScore,
       maxScore: maxScore,
     };
 
     this.worldPort.onWorldScored(result);
-    return result;
   }
 }

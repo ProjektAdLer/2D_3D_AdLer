@@ -24,6 +24,9 @@ const userEntity: UserDataEntity = {
   isLoggedIn: true,
   username: "",
   userToken: "",
+  availableWorlds: [],
+  currentWorldID: undefined,
+  currentSpaceID: undefined,
 };
 const elementEntity: ElementEntity = {
   id: 1,
@@ -145,9 +148,7 @@ describe("ScoreElementUseCase", () => {
       console.log(e);
     }
 
-    expect(CalculateWorldScoreMock.execute).toHaveBeenCalledWith(
-      spaceEntity.parentWorldID
-    );
+    expect(CalculateWorldScoreMock.execute).toHaveBeenCalledTimes(1);
   });
 
   test("executeAsync should call elementPort.onElementScored", async () => {

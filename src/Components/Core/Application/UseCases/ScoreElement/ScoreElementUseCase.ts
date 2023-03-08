@@ -83,7 +83,7 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
 
     elements[0].hasScored = true;
 
-    this.calculateWorldScoreUseCase.execute(space.parentWorldID);
+    this.calculateWorldScoreUseCase.execute();
 
     this.worldPort.onElementScored(true, data.elementID);
   }
