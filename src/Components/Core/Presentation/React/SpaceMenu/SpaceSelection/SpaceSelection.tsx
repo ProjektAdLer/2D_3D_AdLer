@@ -30,7 +30,7 @@ export default function SpaceSelection() {
     // call load world use case to get relevant data
     const loadWorldAsync = async (): Promise<void> => {
       const worldID = getUserLocationUseCase.execute().worldID;
-      await loadWorldUseCase.executeAsync({ worldID });
+      if (worldID) await loadWorldUseCase.executeAsync({ worldID });
     };
     if (viewModel) loadWorldAsync();
   }, [viewModel, getUserLocationUseCase, loadWorldUseCase]);

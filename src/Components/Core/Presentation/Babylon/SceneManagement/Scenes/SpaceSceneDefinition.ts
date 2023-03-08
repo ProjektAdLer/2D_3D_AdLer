@@ -65,10 +65,11 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
 
     // execute loadSpace use case to fill space with data
     const userLocation = this.getUserLocationUseCase.execute();
-    await this.loadSpaceUseCase.executeAsync({
-      worldID: userLocation.worldID,
-      spaceID: userLocation.spaceID!,
-    });
+    if (userLocation.spaceID && userLocation.worldID)
+      await this.loadSpaceUseCase.executeAsync({
+        worldID: userLocation.worldID,
+        spaceID: userLocation.spaceID!,
+      });
 
     // create avatar
     this.avatarParentNode = new TransformNode("AvatarParentNode", this.scene);
