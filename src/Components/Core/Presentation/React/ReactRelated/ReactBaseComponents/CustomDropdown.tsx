@@ -45,7 +45,7 @@ export default function CustomDropdown({
   );
 
   return (
-    <div className={className + " " + "pointer-events-auto dropdown "}>
+    <div className={className + " pointer-events-auto dropdown"}>
       <div className="dropdown-header" onClick={handleClick}>
         {headerPart}
       </div>
