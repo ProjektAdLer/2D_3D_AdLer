@@ -1,7 +1,7 @@
 import { useInjection } from "inversify-react";
 import ILoadWorldUseCase from "../../../../Application/UseCases/LoadWorld/ILoadWorldUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import IGetCurrentUserLocationUseCase from "../../../../Application/UseCases/GetCurrentUserLocation/IGetCurrentUserLocationUseCase";
+import IGetUserLocationUseCase from "../../../../Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import SpaceSelectionViewModel from "./SpaceSelectionViewModel";
 import ISpaceSelectionController from "./ISpaceSelectionController";
@@ -15,10 +15,9 @@ export default function SpaceSelection() {
   const loadWorldUseCase = useInjection<ILoadWorldUseCase>(
     USECASE_TYPES.ILoadWorldUseCase
   );
-  const getCurrentUserLocationUseCase =
-    useInjection<IGetCurrentUserLocationUseCase>(
-      USECASE_TYPES.IGetCurrentUserLocationUseCase
-    );
+  const getUserLocationUseCase = useInjection<IGetUserLocationUseCase>(
+    USECASE_TYPES.IGetUserLocationUseCase
+  );
 
   const [viewModel, controller] = useBuilder<
     SpaceSelectionViewModel,
@@ -30,11 +29,11 @@ export default function SpaceSelection() {
   useEffect(() => {
     // call load world use case to get relevant data
     const loadWorldAsync = async (): Promise<void> => {
-      const worldID = getCurrentUserLocationUseCase.execute().worldID;
+      const worldID = getUserLocationUseCase.execute().worldID;
       await loadWorldUseCase.executeAsync({ worldID });
     };
     if (viewModel) loadWorldAsync();
-  }, [viewModel, getCurrentUserLocationUseCase, loadWorldUseCase]);
+  }, [viewModel, getUserLocationUseCase, loadWorldUseCase]);
 
   if (!viewModel || !controller) return null;
 

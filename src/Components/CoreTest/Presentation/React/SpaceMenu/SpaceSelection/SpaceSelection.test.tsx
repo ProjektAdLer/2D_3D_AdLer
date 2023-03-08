@@ -7,7 +7,7 @@ import SpaceSelection from "../../../../../Core/Presentation/React/SpaceMenu/Spa
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import IGetCurrentUserLocationUseCase from "../../../../../Core/Application/UseCases/GetCurrentUserLocation/IGetCurrentUserLocationUseCase";
+import IGetUserLocationUseCase from "../../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import ILoadWorldUseCase from "../../../../../Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 
@@ -20,8 +20,7 @@ jest.mock(
   () => "ListMock"
 );
 
-const getCurrentUserLocationUseCaseMock =
-  mock<IGetCurrentUserLocationUseCase>();
+const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 const loadWorldUseCaseMock = mock<ILoadWorldUseCase>();
 
 const userLocationTO = {
@@ -33,8 +32,8 @@ describe("SpaceSelection", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetCurrentUserLocationUseCase
-    ).toConstantValue(getCurrentUserLocationUseCaseMock);
+      USECASE_TYPES.IGetUserLocationUseCase
+    ).toConstantValue(getUserLocationUseCaseMock);
     CoreDIContainer.rebind(USECASE_TYPES.ILoadWorldUseCase).toConstantValue(
       loadWorldUseCaseMock
     );
@@ -49,7 +48,7 @@ describe("SpaceSelection", () => {
     const controllerMock = mock<ISpaceSelectionController>();
     useBuilderMock([vm, controllerMock]);
 
-    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(userLocationTO);
+    getUserLocationUseCaseMock.execute.mockReturnValue(userLocationTO);
 
     const { container } = render(
       <Provider container={CoreDIContainer}>
@@ -62,7 +61,7 @@ describe("SpaceSelection", () => {
     const vm = new SpaceSelectionViewModel();
     useBuilderMock([vm, undefined]);
 
-    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(userLocationTO);
+    getUserLocationUseCaseMock.execute.mockReturnValue(userLocationTO);
 
     const { container } = render(
       <Provider container={CoreDIContainer}>
@@ -77,7 +76,7 @@ describe("SpaceSelection", () => {
     const controllerMock = mock<ISpaceSelectionController>();
     useBuilderMock([undefined, controllerMock]);
 
-    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(userLocationTO);
+    getUserLocationUseCaseMock.execute.mockReturnValue(userLocationTO);
 
     const { container } = render(
       <Provider container={CoreDIContainer}>
@@ -88,12 +87,12 @@ describe("SpaceSelection", () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  test("calls GetCurrentUserLocationUseCase", () => {
+  test("calls GetUserLocationUseCase", () => {
     const vm = new SpaceSelectionViewModel();
     const controllerMock = mock<ISpaceSelectionController>();
     useBuilderMock([vm, controllerMock]);
 
-    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(userLocationTO);
+    getUserLocationUseCaseMock.execute.mockReturnValue(userLocationTO);
 
     render(
       <Provider container={CoreDIContainer}>
@@ -101,15 +100,15 @@ describe("SpaceSelection", () => {
       </Provider>
     );
 
-    expect(getCurrentUserLocationUseCaseMock.execute).toBeCalledTimes(1);
+    expect(getUserLocationUseCaseMock.execute).toBeCalledTimes(1);
   });
 
-  test("calls LoadWorldUseCase with worldID from GetCurrentUserLocationUseCase", () => {
+  test("calls LoadWorldUseCase with worldID from GetUserLocationUseCase", () => {
     const vm = new SpaceSelectionViewModel();
     const controllerMock = mock<ISpaceSelectionController>();
     useBuilderMock([vm, controllerMock]);
 
-    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(userLocationTO);
+    getUserLocationUseCaseMock.execute.mockReturnValue(userLocationTO);
 
     render(
       <Provider container={CoreDIContainer}>

@@ -22,10 +22,10 @@ import ILoadUserWorldsUseCase from "../../Application/UseCases/LoadUserWorlds/IL
 import LoadUserWorldsUseCase from "../../Application/UseCases/LoadUserWorlds/LoadUserWorldsUseCase";
 import IGetLoginStatusUseCase from "../../Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
 import GetLoginStatusUseCase from "../../Application/UseCases/GetLoginStatus/GetLoginStatusUseCase";
-import SetCurrentUserLocationUseCase from "../../Application/UseCases/SetCurrentUserLocation/SetCurrentUserLocationUseCase";
-import ISetCurrentUserLocationUseCase from "../../Application/UseCases/SetCurrentUserLocation/ISetCurrentUserLocationUseCase";
-import IGetCurrentUserLocationUseCase from "../../Application/UseCases/GetCurrentUserLocation/IGetCurrentUserLocationUseCase";
-import GetCurrentUserLocationUseCase from "../../Application/UseCases/GetCurrentUserLocation/GetCurrentUserLocationUseCase";
+import SetUserLocationUseCase from "../../Application/UseCases/SetUserLocation/SetUserLocationUseCase";
+import ISetUserLocationUseCase from "../../Application/UseCases/SetUserLocation/ISetUserLocationUseCase";
+import IGetUserLocationUseCase from "../../Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
+import GetUserLocationUseCase from "../../Application/UseCases/GetUserLocation/GetUserLocationUseCase";
 import CalculateWorldScoreUseCase from "../../Application/UseCases/CalculateWorldScore/CalculateWorldScoreUseCase";
 import ICalculateWorldScoreUseCase from "../../Application/UseCases/CalculateWorldScore/ICalculateWorldScoreUseCase";
 
@@ -80,16 +80,12 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(GetLoginStatusUseCase)
     .inSingletonScope();
 
-  bind<ISetCurrentUserLocationUseCase>(
-    USECASE_TYPES.ISetCurrentUserLocationUseCase
-  )
-    .to(SetCurrentUserLocationUseCase)
+  bind<ISetUserLocationUseCase>(USECASE_TYPES.ISetUserLocationUseCase)
+    .to(SetUserLocationUseCase)
     .inSingletonScope();
 
-  bind<IGetCurrentUserLocationUseCase>(
-    USECASE_TYPES.IGetCurrentUserLocationUseCase
-  )
-    .to(GetCurrentUserLocationUseCase)
+  bind<IGetUserLocationUseCase>(USECASE_TYPES.IGetUserLocationUseCase)
+    .to(GetUserLocationUseCase)
     .inSingletonScope();
 });
 

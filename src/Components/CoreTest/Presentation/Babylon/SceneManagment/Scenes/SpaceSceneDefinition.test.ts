@@ -13,17 +13,16 @@ import IPresentationBuilder from "../../../../../Core/Presentation/PresentationB
 import IPresentationDirector from "../../../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
 import history from "history/browser";
 import AvatarCameraViewModel from "../../../../../Core/Presentation/Babylon/AvatarCamera/AvatarCameraViewModel";
-import IGetCurrentUserLocationUseCase from "../../../../../Core/Application/UseCases/GetCurrentUserLocation/IGetCurrentUserLocationUseCase";
+import IGetUserLocationUseCase from "../../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 
 const presentationDirectorMock = mock<IPresentationDirector>();
 const presentationBuilderMock = mock<IPresentationBuilder>();
 const navigationMock = mock<INavigation>();
 const loadSpaceUseCaseMock = mock<ILoadSpaceUseCase>();
 const loadAvatarUseCaseMock = mock<ILoadAvatarUseCase>();
-const getCurrentUserLocationUseCaseMock =
-  mock<IGetCurrentUserLocationUseCase>();
+const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 
-const getCurrentUserLocationUseCaseReturnValue = {
+const getUserLocationUseCaseReturnValue = {
   spaceID: 1,
   worldID: 1,
 };
@@ -56,8 +55,8 @@ describe("SpaceScene", () => {
       loadAvatarUseCaseMock
     );
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetCurrentUserLocationUseCase
-    ).toConstantValue(getCurrentUserLocationUseCaseMock);
+      USECASE_TYPES.IGetUserLocationUseCase
+    ).toConstantValue(getUserLocationUseCaseMock);
   });
 
   beforeEach(() => {
@@ -77,8 +76,8 @@ describe("SpaceScene", () => {
     presentationBuilderMock.getViewModel.mockReturnValue(
       new AvatarCameraViewModel()
     );
-    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(
-      getCurrentUserLocationUseCaseReturnValue
+    getUserLocationUseCaseMock.execute.mockReturnValue(
+      getUserLocationUseCaseReturnValue
     );
 
     expect(
@@ -91,8 +90,8 @@ describe("SpaceScene", () => {
     presentationBuilderMock.getViewModel.mockReturnValue(
       new AvatarCameraViewModel()
     );
-    getCurrentUserLocationUseCaseMock.execute.mockReturnValue(
-      getCurrentUserLocationUseCaseReturnValue
+    getUserLocationUseCaseMock.execute.mockReturnValue(
+      getUserLocationUseCaseReturnValue
     );
 
     await systemUnderTest["initializeScene"]();

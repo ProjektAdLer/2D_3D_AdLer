@@ -1,17 +1,16 @@
-import GetCurrentUserLocationUseCase from "../../../../Core/Application/UseCases/GetCurrentUserLocation/GetCurrentUserLocationUseCase";
+import GetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/GetUserLocationUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import { mock } from "jest-mock-extended";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
-import { logger } from "../../../../../Lib/Logger";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
 
 const entityContainerMock = mock<IEntityContainer>();
 jest.mock("../../../../../Lib/Logger");
 
-describe("SetCurrentUserLocationUseCase", () => {
-  let systemUnderTest: GetCurrentUserLocationUseCase;
+describe("SetUserLocationUseCase", () => {
+  let systemUnderTest: GetUserLocationUseCase;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -22,7 +21,7 @@ describe("SetCurrentUserLocationUseCase", () => {
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.get(
-      USECASE_TYPES.IGetCurrentUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase
     );
   });
 

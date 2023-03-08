@@ -17,7 +17,7 @@ import { minimalGetWorldDataResponse } from "../../../Adapters/BackendAdapter/Ba
 import ICalculateSpaceScoreUseCase from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/SpaceScoreTO";
 import BackendWorldStatusTO from "../../../../Core/Application/DataTransferObjects/BackendWorldStatusTO";
-import ISetCurrentUserLocationUseCase from "../../../../Core/Application/UseCases/SetCurrentUserLocation/ISetCurrentUserLocationUseCase";
+import ISetUserLocationUseCase from "../../../../Core/Application/UseCases/SetUserLocation/ISetUserLocationUseCase";
 
 const backendMock = mock<IBackend>();
 const worldPortMock = mock<IWorldPort>();
@@ -25,8 +25,7 @@ const entityContainerMock = mock<IEntityContainer>();
 const uiPortMock = mock<IUIPort>();
 const loadAvatarUsecaseMock = mock<ILoadAvatarUseCase>();
 const calculateSpaceScoreUseCaseMock = mock<ICalculateSpaceScoreUseCase>();
-const setCurrentUserLocationUseCaseMock =
-  mock<ISetCurrentUserLocationUseCase>();
+const setUserLocationUseCaseMock = mock<ISetUserLocationUseCase>();
 
 const mockedGetEntitiesOfTypeUserDataReturnValue = [
   {
@@ -58,8 +57,8 @@ describe("LoadWorldUseCase", () => {
       USECASE_TYPES.ICalculateSpaceScoreUseCase
     ).toConstantValue(calculateSpaceScoreUseCaseMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.ISetCurrentUserLocationUseCase
-    ).toConstantValue(setCurrentUserLocationUseCaseMock);
+      USECASE_TYPES.ISetUserLocationUseCase
+    ).toConstantValue(setUserLocationUseCaseMock);
   });
 
   beforeEach(() => {
@@ -216,7 +215,7 @@ describe("LoadWorldUseCase", () => {
     expect(calculateSpaceScoreUseCaseMock.execute).toHaveBeenCalledTimes(2);
   });
 
-  test("calls SetCurrentUserLocationUseCase", async () => {
+  test("calls SetUserLocationUseCase", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
       mockedGetEntitiesOfTypeUserDataReturnValue
@@ -244,7 +243,7 @@ describe("LoadWorldUseCase", () => {
 
     await systemUnderTest.executeAsync({ worldID: 42 });
 
-    expect(setCurrentUserLocationUseCaseMock.execute).toHaveBeenCalledWith({
+    expect(setUserLocationUseCaseMock.execute).toHaveBeenCalledWith({
       worldID: 42,
     });
   });

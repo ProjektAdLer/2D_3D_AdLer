@@ -3,7 +3,7 @@ import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/Space
 import ICalculateSpaceScoreUseCase from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import LoadSpaceUseCase from "../../../../Core/Application/UseCases/LoadSpace/LoadSpaceUseCase";
 import ILoadWorldUseCase from "../../../../Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
-import ISetCurrentUserLocationUseCase from "../../../../Core/Application/UseCases/SetCurrentUserLocation/ISetCurrentUserLocationUseCase";
+import ISetUserLocationUseCase from "../../../../Core/Application/UseCases/SetUserLocation/ISetUserLocationUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
@@ -18,8 +18,7 @@ const entityContainerMock = mock<IEntityContainer>();
 const loadWorldMock = mock<ILoadWorldUseCase>();
 const worldPortMock = mock<IWorldPort>();
 const calculateSpaceScoreMock = mock<ICalculateSpaceScoreUseCase>();
-const setCurrentUserLocationUseCaseMock =
-  mock<ISetCurrentUserLocationUseCase>();
+const setUserLocationUseCaseMock = mock<ISetUserLocationUseCase>();
 
 describe("LoadSpaceUseCase", () => {
   let systemUnderTest: LoadSpaceUseCase;
@@ -39,9 +38,9 @@ describe("LoadSpaceUseCase", () => {
     CoreDIContainer.rebind<ICalculateSpaceScoreUseCase>(
       USECASE_TYPES.ICalculateSpaceScoreUseCase
     ).toConstantValue(calculateSpaceScoreMock);
-    CoreDIContainer.rebind<ISetCurrentUserLocationUseCase>(
-      USECASE_TYPES.ISetCurrentUserLocationUseCase
-    ).toConstantValue(setCurrentUserLocationUseCaseMock);
+    CoreDIContainer.rebind<ISetUserLocationUseCase>(
+      USECASE_TYPES.ISetUserLocationUseCase
+    ).toConstantValue(setUserLocationUseCaseMock);
   });
 
   beforeEach(() => {
@@ -121,7 +120,7 @@ describe("LoadSpaceUseCase", () => {
     ).rejects.toBe("SpaceEntity with 2 not found");
   });
 
-  test("sets user location via SetCurrentUserLocationUseCase", async () => {
+  test("sets user location via SetUserLocationUseCase", async () => {
     const worldEntity: WorldEntity = new WorldEntity();
     worldEntity.spaces = [
       {
@@ -142,7 +141,7 @@ describe("LoadSpaceUseCase", () => {
 
     await systemUnderTest.executeAsync({ spaceID: 1, worldID: 1 });
 
-    expect(setCurrentUserLocationUseCaseMock.execute).toHaveBeenCalledWith({
+    expect(setUserLocationUseCaseMock.execute).toHaveBeenCalledWith({
       spaceID: 1,
       worldID: 1,
     });

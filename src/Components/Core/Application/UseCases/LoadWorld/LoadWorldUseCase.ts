@@ -17,7 +17,7 @@ import { Semaphore } from "src/Lib/Semaphore";
 import BackendWorldStatusTO from "../../DataTransferObjects/BackendWorldStatusTO";
 import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import { logger } from "src/Lib/Logger";
-import type ISetCurrentUserLocationUseCase from "../SetCurrentUserLocation/ISetCurrentUserLocationUseCase";
+import type ISetUserLocationUseCase from "../SetUserLocation/ISetUserLocationUseCase";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -32,8 +32,8 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     private uiPort: IUIPort,
     @inject(USECASE_TYPES.ICalculateSpaceScoreUseCase)
     private calculateSpaceScore: ICalculateSpaceScoreUseCase,
-    @inject(USECASE_TYPES.ISetCurrentUserLocationUseCase)
-    private setCurrentUserLocationUseCase: ISetCurrentUserLocationUseCase
+    @inject(USECASE_TYPES.ISetUserLocationUseCase)
+    private setUserLocationUseCase: ISetUserLocationUseCase
   ) {}
 
   private semaphore = new Semaphore("LoadWorld in Use", 1);
@@ -73,7 +73,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     });
 
     // set user location
-    this.setCurrentUserLocationUseCase.execute({ worldID: data.worldID });
+    this.setUserLocationUseCase.execute({ worldID: data.worldID });
 
     this.worldPort.onWorldLoaded(worldTO);
 

@@ -1,29 +1,31 @@
 import { inject, injectable } from "inversify";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
-import { logger } from "src/Lib/Logger";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
-import ISetCurrentUserLocationUseCase from "./ISetCurrentUserLocationUseCase";
+import UserLocationTO from "../../DataTransferObjects/UserLocationTO";
+import IGetUserLocationUseCase from "./IGetUserLocationUseCase";
 
 @injectable()
-export default class SetCurrentUserLocationUseCase
-  implements ISetCurrentUserLocationUseCase
-{
+export default class GetUserLocationUseCase implements IGetUserLocationUseCase {
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer
   ) {}
 
-  execute(data: { worldID: number; spaceID?: number }): void {
+  execute(): UserLocationTO {
     let userDataEntity =
       this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
 
     if (!userDataEntity || !userDataEntity.isLoggedIn) {
-      logger.error("User is not logged in, cannot set current location");
-      return;
+      throw new Error("User is not logged in, cannot get current location");
     }
 
-    userDataEntity.currentWorldID = data.worldID;
-    if (data.spaceID) userDataEntity.currentSpaceID = data.spaceID;
+    if (userDataEntity.currentWorldID === undefined)
+      throw new Error("User is not in a world, cannot get current location");
+
+    return {
+      worldID: userDataEntity.currentWorldID,
+      spaceID: userDataEntity.currentSpaceID,
+    };
   }
 }

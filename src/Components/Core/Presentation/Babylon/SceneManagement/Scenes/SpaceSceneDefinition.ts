@@ -20,7 +20,7 @@ import type INavigation from "../../Navigation/INavigation";
 import ISpacePresenter from "../../Spaces/ISpacePresenter";
 import history from "history/browser";
 import AvatarCameraViewModel from "../../AvatarCamera/AvatarCameraViewModel";
-import type IGetCurrentUserLocationUseCase from "src/Components/Core/Application/UseCases/GetCurrentUserLocation/IGetCurrentUserLocationUseCase";
+import type IGetUserLocationUseCase from "src/Components/Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 
 @injectable()
 export default class SpaceSceneDefinition extends AbstractSceneDefinition {
@@ -42,8 +42,8 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
     private loadAvatarUseCase: ILoadAvatarUseCase,
     @inject(BUILDER_TYPES.IAvatarCameraBuilder)
     private avatarCameraBuilder: IPresentationBuilder,
-    @inject(USECASE_TYPES.IGetCurrentUserLocationUseCase)
-    private getCurrentUserLocationUseCase: IGetCurrentUserLocationUseCase
+    @inject(USECASE_TYPES.IGetUserLocationUseCase)
+    private getUserLocationUseCase: IGetUserLocationUseCase
   ) {
     super();
   }
@@ -64,7 +64,7 @@ export default class SpaceSceneDefinition extends AbstractSceneDefinition {
     this.spacePresenter = this.spaceBuilder.getPresenter() as ISpacePresenter;
 
     // execute loadSpace use case to fill space with data
-    const userLocation = this.getCurrentUserLocationUseCase.execute();
+    const userLocation = this.getUserLocationUseCase.execute();
     await this.loadSpaceUseCase.executeAsync({
       worldID: userLocation.worldID,
       spaceID: userLocation.spaceID!,

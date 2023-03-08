@@ -1,4 +1,4 @@
 import { ISynchronousUsecase } from "../../Abstract/ISynchronousUsecase";
 
-export default interface ISetCurrentUserLocationUseCase
+export default interface ISetUserLocationUseCase
   extends ISynchronousUsecase<{ worldID: number; spaceID?: number }, void> {}

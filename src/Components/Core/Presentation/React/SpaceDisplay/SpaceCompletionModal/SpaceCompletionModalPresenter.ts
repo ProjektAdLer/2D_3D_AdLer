@@ -11,6 +11,7 @@ export default class SpaceCompletionModalPresenter
   onSpaceLoaded(spaceTO: SpaceTO): void {
     this.viewModel.currentSpaceID.Value = spaceTO.id;
   }
+
   onSpaceScored(spaceScoreTO: SpaceScoreTO): void {
     if (spaceScoreTO.spaceID === this.viewModel.currentSpaceID.Value) {
       this.viewModel.score.Value = spaceScoreTO.currentScore;
