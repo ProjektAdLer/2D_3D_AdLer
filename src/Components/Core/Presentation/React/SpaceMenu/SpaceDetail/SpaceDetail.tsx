@@ -135,7 +135,7 @@ export default function SpaceDetail() {
         <div>
           {!!requiredPoints && (
             <div className="pb-2">
-              <div className="flex flex-row justify-between w-full pb-2 xl:w-3/4">
+              <div className="flex flex-row justify-between w-full xl:w-3/4">
                 <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
                   Benötigte Punkte:
                 </div>
