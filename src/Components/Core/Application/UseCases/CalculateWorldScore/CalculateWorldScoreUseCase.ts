@@ -30,6 +30,9 @@ export default class CalculateWorldScoreUseCase
   execute(): void {
     // get the current user location
     const userLocation = this.getUserLocationUseCase.execute();
+    if (!userLocation.worldID) {
+      throw new Error(`User is not in a world!`);
+    }
 
     const worlds = this.entitiyContainer.filterEntitiesOfType<WorldEntity>(
       WorldEntity,

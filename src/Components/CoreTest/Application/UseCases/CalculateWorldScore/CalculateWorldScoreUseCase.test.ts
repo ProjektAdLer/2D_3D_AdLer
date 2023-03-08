@@ -142,4 +142,14 @@ describe("Calculate World Score UseCase", () => {
       systemUnderTest.execute();
     }).toThrow();
   });
+
+  test("should throw an error if the user location doesn't contain a worldID", () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce(
+      {} as UserLocationTO
+    );
+
+    expect(() => {
+      systemUnderTest.execute();
+    }).toThrow();
+  });
 });
