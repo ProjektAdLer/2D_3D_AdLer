@@ -5,6 +5,6 @@ export default class UserDataEntity {
   username: string;
   isLoggedIn: boolean;
   availableWorlds: { worldID: ComponentID; worldName: string }[] = [];
-  currentWorldID: ComponentID;
-  currentSpaceID: ComponentID;
+  currentWorldID: ComponentID | undefined = undefined;
+  currentSpaceID: ComponentID | undefined = undefined;
 }

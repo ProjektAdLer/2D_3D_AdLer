@@ -67,4 +67,20 @@ describe("SetUserLocationUseCase", () => {
       currentSpaceID: 1,
     });
   });
+
+  test("sets current world and space id to undefined on user entity when none are given", () => {
+    let userDataEntity = {
+      isLoggedIn: true,
+      currentWorldID: 0,
+      currentSpaceID: 0,
+    };
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
+
+    systemUnderTest.execute({});
+
+    expect(userDataEntity).toMatchObject({
+      currentWorldID: undefined,
+      currentSpaceID: undefined,
+    });
+  });
 });
