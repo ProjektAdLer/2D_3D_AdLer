@@ -42,61 +42,66 @@ export default function WorldDetail() {
           {"Lernwelt öffnen!"}
         </StyledButton>
       </div>
-
-      {description === undefined ||
-        (description !== "" && (
-          <div className="pb-2 border-b border-gray-500">
-            <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
-              Beschreibung:
-            </div>
-            <div className="items-start ml-6 roboto-regular">
-              <TextWithLineBreaks text={description} />
-            </div>
-          </div>
-        ))}
-      {goals === undefined ||
-        (goals !== "" && (
-          <div className="pb-2 border-b border-gray-500">
-            <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
-              Lernziele:
-            </div>
-            <div className="items-start ml-6 lg:text:lg roboto-regular">
-              <TextWithLineBreaks text={goals} />
-            </div>
-          </div>
-        ))}
-      <div className="pb-2 border-b border-gray-500">
-        <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
-          Räume:
-        </div>
-        <div className="items-start ml-6 lg:text:lg roboto-regular">
-          {spaces?.map((space) => {
-            return (
-              <div key={space.id}>
-                <div className="flex flex-row items-center lg:text-lg">
-                  <div className="relative flex my-2 ml-2">
-                    <img src={spaceIcon} alt="" className="w-8 mr-4 xl:w-12" />
-                    {space.isCompleted && (
-                      <img
-                        src={greenSwosh}
-                        alt=""
-                        className="absolute w-6 bottom-3 left-4 xl:w-8 xl:left-6 xl:bottom-4"
-                      />
-                    )}
-                  </div>
-                  <div className="pl-2">{space.name}</div>
-                </div>
+      <div className="flex flex-col gap-2 w-[100%] overflow-auto">
+        {description === undefined ||
+          (description !== "" && (
+            <div className="pb-2 border-b border-gray-500">
+              <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+                Beschreibung:
               </div>
-            );
-          })}
+              <div className="items-start ml-6 roboto-regular">
+                <TextWithLineBreaks text={description} />
+              </div>
+            </div>
+          ))}
+        {goals === undefined ||
+          (goals !== "" && (
+            <div className="pb-2 border-b border-gray-500">
+              <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+                Lernziele:
+              </div>
+              <div className="items-start ml-6 lg:text:lg roboto-regular">
+                <TextWithLineBreaks text={goals} />
+              </div>
+            </div>
+          ))}
+        <div className="pb-2 border-b border-gray-500">
+          <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+            Räume:
+          </div>
+          <div className="items-start ml-6 lg:text:lg roboto-regular">
+            {spaces?.map((space) => {
+              return (
+                <div key={space.id}>
+                  <div className="flex flex-row items-center lg:text-lg">
+                    <div className="relative flex my-2 ml-2">
+                      <img
+                        src={spaceIcon}
+                        alt=""
+                        className="w-8 mr-4 xl:w-12"
+                      />
+                      {space.isCompleted && (
+                        <img
+                          src={greenSwosh}
+                          alt=""
+                          className="absolute w-6 bottom-3 left-4 xl:w-8 xl:left-6 xl:bottom-4"
+                        />
+                      )}
+                    </div>
+                    <div className="pl-2">{space.name}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
-      <div className="pb-2 border-b border-gray-500">
-        <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
-          Anzahl Räume:
-        </div>
-        <div className="items-start ml-6 lg:text:lg roboto-regular">
-          {spaces?.length}
+        <div className="pb-2 border-b border-gray-500">
+          <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+            Anzahl Räume:
+          </div>
+          <div className="items-start ml-6 lg:text:lg roboto-regular">
+            {spaces?.length}
+          </div>
         </div>
       </div>
     </div>

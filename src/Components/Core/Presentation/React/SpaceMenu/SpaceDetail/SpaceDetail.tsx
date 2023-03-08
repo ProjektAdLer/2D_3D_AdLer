@@ -67,138 +67,142 @@ export default function SpaceDetail() {
           </StyledButton>
         )}
       </div>
+      <div className="flex flex-col gap-2 w-[100%] overflow-auto">
+        {description !== "" && (
+          <div className="pb-2 border-b border-gray-500">
+            <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+              Beschreibung:
+            </div>
+            <div className="items-start ml-6 roboto-regular">
+              <TextWithLineBreaks text={description} />
+            </div>
+          </div>
+        )}
+        {goals !== "" && (
+          <div className="pb-2 border-b border-gray-500">
+            <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+              Lernziele:
+            </div>
+            <div className="items-start ml-6 lg:text:lg roboto-regular">
+              <TextWithLineBreaks text={goals} />
+            </div>
+          </div>
+        )}
+        {elements.length > 0 && (
+          <div className="pb-2 border-b border-gray-500">
+            <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+              Lernelemente:
+            </div>
+            <div className="flex flex-col items-start ml-6 lg:text-lg roboto-regular">
+              {elements.map((element) => {
+                return (
+                  <div key={element[1]} className="w-full">
+                    <div className="flex flex-row justify-between w-full xl:w-3/4">
+                      <div className="flex flex-row items-center gap-x-2">
+                        <div className="relative w-6 ml-2 mr-2 lg:w-8">
+                          {getElementIcon(element[0])}
+                          {element[2] && (
+                            <img
+                              src={greenSwosh}
+                              alt=""
+                              className="absolute h-4 lg:h-6 bottom-3 left-4 lg:bottom-6 lg:left-6 "
+                            />
+                          )}
+                        </div>
 
-      {description !== "" && (
-        <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
-            Beschreibung:
-          </div>
-          <div className="items-start ml-6 roboto-regular">
-            <TextWithLineBreaks text={description} />
-          </div>
-        </div>
-      )}
-      {goals !== "" && (
-        <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
-            Lernziele:
-          </div>
-          <div className="items-start ml-6 lg:text:lg roboto-regular">
-            <TextWithLineBreaks text={goals} />
-          </div>
-        </div>
-      )}
-      {elements.length > 0 && (
-        <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
-            Lernelemente:
-          </div>
-          <div className="flex flex-col items-start ml-6 lg:text-lg roboto-regular">
-            {elements.map((element) => {
-              return (
-                <div key={element[1]} className="w-full">
-                  <div className="flex flex-row justify-between w-full xl:w-3/4">
-                    <div className="flex flex-row items-center gap-x-2">
-                      <div className="relative w-6 ml-2 mr-2 lg:w-8">
-                        {getElementIcon(element[0])}
-                        {element[2] && (
-                          <img
-                            src={greenSwosh}
-                            alt=""
-                            className="absolute h-4 lg:h-6 bottom-3 left-4 lg:bottom-6 lg:left-6 "
-                          />
-                        )}
+                        <div className="flex flex-row items-center ml-1">
+                          {" " + element[1]}
+                        </div>
                       </div>
-
-                      <div className="flex flex-row items-center ml-1">
-                        {" " + element[1]}
+                      <div className="flex flex-row items-center ml-1 place-items-end">
+                        {/* //TODO: Add real current points  */}
+                        {element[2]
+                          ? element[3] + "/" + element[3]
+                          : "0/" + element[3]}
+                        <img
+                          src={coinIcon}
+                          className="self-center w-6 ml-1 lg:w-8"
+                          alt="Coin-Icon"
+                        ></img>
                       </div>
-                    </div>
-                    <div className="flex flex-row items-center ml-1 place-items-end">
-                      {/* //TODO: Add real current points  */}
-                      {element[2]
-                        ? element[3] + "/" + element[3]
-                        : "0/" + element[3]}
-                      <img
-                        src={coinIcon}
-                        className="self-center w-6 ml-1 lg:w-8"
-                        alt="Coin-Icon"
-                      ></img>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
-      )}
-      {!!requiredPoints && (
-        <div className="pb-2">
-          <div className="flex flex-row justify-between w-full pb-2 xl:w-3/4">
+        )}
+        {!!requiredPoints && (
+          <div className="pb-2">
+            <div className="flex flex-row justify-between w-full pb-2 xl:w-3/4">
+              <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+                Benötigte Punkte:
+              </div>
+              <div className="flex flex-row items-start pb-2 ml-6 text-lg roboto-regular">
+                {requiredPoints}
+                <img
+                  src={coinIcon}
+                  className="self-center w-6 ml-1 lg:w-8"
+                  alt="Coin-Icon"
+                ></img>
+              </div>
+            </div>
+            <div className="flex flex-row justify-between w-full xl:w-3/4">
+              <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+                Maximal erreichbare Punkte:
+              </div>
+              <div className="flex flex-row items-start ml-6 text-lg roboto-regular">
+                {elements.reduce((acc, element) => acc + element[3], 0)}
+                <img
+                  src={coinIcon}
+                  className="self-center w-6 ml-1 lg:w-8"
+                  alt="Coin-Icon"
+                ></img>
+              </div>
+            </div>
+          </div>
+        )}
+        {elements.length > 0 && (
+          <div className="pb-2 border-b border-gray-500"></div>
+        )}
+        {requirements.length > 0 && (
+          <div className="pb-2 border-b border-gray-500">
             <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
-              Benötigte Punkte:
+              Benötigte Räume zur Freischaltung:
             </div>
-            <div className="flex flex-row items-start pb-2 ml-6 text-lg roboto-regular">
-              {requiredPoints}
-              <img
-                src={coinIcon}
-                className="self-center w-6 ml-1 lg:w-8"
-                alt="Coin-Icon"
-              ></img>
-            </div>
-          </div>
-          <div className="flex flex-row justify-between w-full xl:w-3/4">
-            <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
-              Maximal erreichbare Punkte:
-            </div>
-            <div className="flex flex-row items-start ml-6 text-lg roboto-regular">
-              {elements.reduce((acc, element) => acc + element[3], 0)}
-              <img
-                src={coinIcon}
-                className="self-center w-6 ml-1 lg:w-8"
-                alt="Coin-Icon"
-              ></img>
-            </div>
-          </div>
-        </div>
-      )}
-      {elements.length > 0 && (
-        <div className="pb-2 border-b border-gray-500"></div>
-      )}
-      {requirements.length > 0 && (
-        <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
-            Benötigte Räume zur Freischaltung:
-          </div>
-          <div className="items-start ml-6 text-lg roboto-regular">
-            {requirements.map((requirement) => {
-              let name;
-              let completed;
-              const lookup = spaces.find((space) => space.id === requirement);
-              if (lookup === undefined) {
-                logger.warn("Requirement not found in spaces.");
-                return undefined;
-              }
-              name = lookup.name;
-              completed = lookup.isCompleted;
+            <div className="items-start ml-6 text-lg roboto-regular">
+              {requirements.map((requirement) => {
+                let name;
+                let completed;
+                const lookup = spaces.find((space) => space.id === requirement);
+                if (lookup === undefined) {
+                  logger.warn("Requirement not found in spaces.");
+                  return undefined;
+                }
+                name = lookup.name;
+                completed = lookup.isCompleted;
 
-              return (
-                <div className="relative flex my-4 ml-2" key={name + completed}>
-                  <img src={spaceIcon} alt="" className="w-8 mr-4 xl:w-8" />
-                  {completed && (
-                    <img
-                      src={greenSwosh}
-                      alt=""
-                      className="absolute h-4 lg:h-6 bottom-3 left-4 lg:bottom-3 lg:left-6 "
-                    />
-                  )}
-                  {name}
-                </div>
-              );
-            })}
+                return (
+                  <div
+                    className="relative flex my-4 ml-2"
+                    key={name + completed}
+                  >
+                    <img src={spaceIcon} alt="" className="w-8 mr-4 xl:w-8" />
+                    {completed && (
+                      <img
+                        src={greenSwosh}
+                        alt=""
+                        className="absolute h-4 lg:h-6 bottom-3 left-4 lg:bottom-3 lg:left-6 "
+                      />
+                    )}
+                    {name}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
