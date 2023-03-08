@@ -41,7 +41,7 @@ describe("ElementModalController", () => {
     expect(scoreElementUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
     expect(scoreElementUseCaseMock.executeAsync).toHaveBeenCalledWith({
       elementID: 1,
-      courseID: 1,
+      worldID: 1,
     });
   });
 

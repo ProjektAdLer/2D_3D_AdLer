@@ -130,9 +130,9 @@ describe("LoadWorldUseCase", () => {
     );
 
     const mockedWorldEntity = new WorldEntity();
-    mockedWorldEntity.worldName = minimalGetWorldDataResponse.worldName;
-    mockedWorldEntity.worldGoal = minimalGetWorldDataResponse.worldGoal;
-    mockedWorldEntity.worldID = 42;
+    mockedWorldEntity.name = minimalGetWorldDataResponse.worldName;
+    mockedWorldEntity.goal = minimalGetWorldDataResponse.worldGoal;
+    mockedWorldEntity.id = 42;
     mockedWorldEntity.spaces = [];
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
       mockedWorldEntity,
@@ -165,8 +165,8 @@ describe("LoadWorldUseCase", () => {
 
     // mock entity creation
     const mockedWorldEntity = new WorldEntity();
-    mockedWorldEntity.worldName = minimalGetWorldDataResponse.worldName;
-    mockedWorldEntity.worldGoal = minimalGetWorldDataResponse.worldGoal;
+    mockedWorldEntity.name = minimalGetWorldDataResponse.worldName;
+    mockedWorldEntity.goal = minimalGetWorldDataResponse.worldGoal;
     mockedWorldEntity.spaces = [];
 
     entityContainerMock.createEntity.mockReturnValueOnce(mock<ElementEntity>());
@@ -174,7 +174,7 @@ describe("LoadWorldUseCase", () => {
     entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
 
     backendMock.getWorldStatus.mockResolvedValue({
-      courseID: 1,
+      courseId: 1,
       learningElements: [{}],
     } as BackendWorldStatusTO);
 
@@ -193,9 +193,9 @@ describe("LoadWorldUseCase", () => {
 
     // mock world response
     const mockedWorldEntity = new WorldEntity();
-    mockedWorldEntity.worldName = minimalGetWorldDataResponse.worldName;
-    mockedWorldEntity.worldGoal = minimalGetWorldDataResponse.worldGoal;
-    mockedWorldEntity.worldID = 42;
+    mockedWorldEntity.name = minimalGetWorldDataResponse.worldName;
+    mockedWorldEntity.goal = minimalGetWorldDataResponse.worldGoal;
+    mockedWorldEntity.id = 42;
     const mockedSpaceEntity1 = new SpaceEntity();
     const mockedSpaceEntity2 = new SpaceEntity();
     mockedWorldEntity.spaces = [mockedSpaceEntity1, mockedSpaceEntity2];
@@ -229,8 +229,8 @@ describe("LoadWorldUseCase", () => {
 
     // mock entity creation
     const mockedWorldEntity = new WorldEntity();
-    mockedWorldEntity.worldName = minimalGetWorldDataResponse.worldName;
-    mockedWorldEntity.worldGoal = minimalGetWorldDataResponse.worldGoal;
+    mockedWorldEntity.name = minimalGetWorldDataResponse.worldName;
+    mockedWorldEntity.goal = minimalGetWorldDataResponse.worldGoal;
     mockedWorldEntity.spaces = [];
 
     entityContainerMock.createEntity.mockReturnValueOnce(mock<ElementEntity>());
@@ -238,7 +238,7 @@ describe("LoadWorldUseCase", () => {
     entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
 
     backendMock.getWorldStatus.mockResolvedValue({
-      courseID: 1,
+      courseId: 1,
       learningElements: [{}],
     } as BackendWorldStatusTO);
 

@@ -113,7 +113,7 @@ describe("ScoreElementUseCase", () => {
     await expect(
       systemUnderTest.executeAsync({
         elementID: 1,
-        courseID: 0,
+        worldID: 0,
       })
     ).resolves.toBeUndefined();
   });
@@ -123,7 +123,7 @@ describe("ScoreElementUseCase", () => {
     backendAdapterMock.scoreElement.mockResolvedValue(true);
 
     try {
-      await systemUnderTest.executeAsync({ elementID: 1, courseID: 1 });
+      await systemUnderTest.executeAsync({ elementID: 1, worldID: 1 });
     } catch (e) {
       console.log(e);
     }
@@ -140,13 +140,13 @@ describe("ScoreElementUseCase", () => {
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     try {
-      await systemUnderTest.executeAsync({ elementID: 1, courseID: 1 });
+      await systemUnderTest.executeAsync({ elementID: 1, worldID: 1 });
     } catch (e) {
       console.log(e);
     }
 
     expect(CalculateWorldScoreMock.execute).toHaveBeenCalledWith(
-      spaceEntity.worldID
+      spaceEntity.parentWorldID
     );
   });
 
@@ -155,7 +155,7 @@ describe("ScoreElementUseCase", () => {
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     try {
-      await systemUnderTest.executeAsync({ elementID: 1, courseID: 1 });
+      await systemUnderTest.executeAsync({ elementID: 1, worldID: 1 });
     } catch (e) {
       console.log(e);
     }
@@ -174,7 +174,7 @@ describe("ScoreElementUseCase", () => {
     setupEntityContainerMock([], [elementEntity], [spaceEntity]);
 
     await expect(
-      systemUnderTest.executeAsync({ elementID: 1, courseID: 1 })
+      systemUnderTest.executeAsync({ elementID: 1, worldID: 1 })
     ).rejects.toContain("User is not logged in");
   });
 
@@ -188,7 +188,7 @@ describe("ScoreElementUseCase", () => {
     );
 
     await expect(
-      systemUnderTest.executeAsync({ elementID: 1, courseID: 1 })
+      systemUnderTest.executeAsync({ elementID: 1, worldID: 1 })
     ).rejects.toContain("User is not logged in");
   });
 
@@ -197,7 +197,7 @@ describe("ScoreElementUseCase", () => {
     backendAdapterMock.scoreElement.mockRejectedValue("error");
 
     await expect(
-      systemUnderTest.executeAsync({ elementID: 1, courseID: 1 })
+      systemUnderTest.executeAsync({ elementID: 1, worldID: 1 })
     ).rejects.toContain("Backend call failed");
   });
 
@@ -206,7 +206,7 @@ describe("ScoreElementUseCase", () => {
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     await expect(
-      systemUnderTest.executeAsync({ elementID: 1, courseID: 1 })
+      systemUnderTest.executeAsync({ elementID: 1, worldID: 1 })
     ).rejects.toContain("No matching element found");
   });
 
@@ -219,7 +219,7 @@ describe("ScoreElementUseCase", () => {
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     await expect(
-      systemUnderTest.executeAsync({ elementID: 1, courseID: 1 })
+      systemUnderTest.executeAsync({ elementID: 1, worldID: 1 })
     ).rejects.toContain("More than one matching element found");
   });
 
@@ -228,7 +228,7 @@ describe("ScoreElementUseCase", () => {
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     await expect(
-      systemUnderTest.executeAsync({ elementID: 1, courseID: 1 })
+      systemUnderTest.executeAsync({ elementID: 1, worldID: 1 })
     ).rejects.toContain("No matching space found");
   });
 
