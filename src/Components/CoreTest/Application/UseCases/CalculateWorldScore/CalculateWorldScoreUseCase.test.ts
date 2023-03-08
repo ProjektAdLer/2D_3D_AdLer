@@ -7,15 +7,19 @@ import { filterEntitiesOfTypeMockImplUtil } from "../../../TestUtils";
 import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import CalculateWorldScoreUseCase from "../../../../Core/Application/UseCases/CalculateWorldScore/CalculateWorldScoreUseCase";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import ICalculateSpaceScoreUseCase from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
+import ICalculateSpaceScoreUseCase, {
+  IInternalCalculateSpaceScoreUseCase,
+} from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import WorldEntity from "../../../../Core/Domain/Entities/WorldEntity";
 import WorldScoreTO from "../../../../Core/Application/DataTransferObjects/WorldScoreTO";
 import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
+import { IInternalSynchronousUsecase } from "../../../../Core/Application/Abstract/IInternalSynchronousUsecase";
+import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/SpaceScoreTO";
 
 const worldPortMock = mock<IWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
-const calculateSpaceScoreMock = mock<ICalculateSpaceScoreUseCase>();
+const calculateSpaceScoreMock = mock<IInternalCalculateSpaceScoreUseCase>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 
 const userLocationTO: UserLocationTO = {
@@ -64,12 +68,12 @@ describe("Calculate World Score UseCase", () => {
         },
       ])
     );
-    calculateSpaceScoreMock.execute.mockReturnValueOnce({
+    calculateSpaceScoreMock.internalExecute.mockReturnValueOnce({
       currentScore: 10,
       maxScore: 30,
       requiredScore: 20,
       spaceID: 1,
-    });
+    } as SpaceScoreTO);
 
     systemUnderTest.execute();
 
@@ -95,18 +99,18 @@ describe("Calculate World Score UseCase", () => {
       } as WorldEntity,
     ]);
 
-    calculateSpaceScoreMock.execute.mockReturnValueOnce({
+    calculateSpaceScoreMock.internalExecute.mockReturnValueOnce({
       currentScore: 10,
       maxScore: 30,
       requiredScore: 20,
       spaceID: 1,
-    });
-    calculateSpaceScoreMock.execute.mockReturnValueOnce({
+    } as SpaceScoreTO);
+    calculateSpaceScoreMock.internalExecute.mockReturnValueOnce({
       currentScore: 20,
       maxScore: 90,
       requiredScore: 40,
       spaceID: 2,
-    });
+    } as SpaceScoreTO);
 
     const result = systemUnderTest.execute();
 

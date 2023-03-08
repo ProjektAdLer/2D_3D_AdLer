@@ -15,9 +15,9 @@ import WorldTO from "../../DataTransferObjects/WorldTO";
 import ElementTO from "../../DataTransferObjects/ElementTO";
 import { Semaphore } from "src/Lib/Semaphore";
 import BackendWorldStatusTO from "../../DataTransferObjects/BackendWorldStatusTO";
-import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import { logger } from "src/Lib/Logger";
 import type ISetUserLocationUseCase from "../SetUserLocation/ISetUserLocationUseCase";
+import type { IInternalCalculateSpaceScoreUseCase } from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -31,7 +31,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     @inject(PORT_TYPES.IUIPort)
     private uiPort: IUIPort,
     @inject(USECASE_TYPES.ICalculateSpaceScoreUseCase)
-    private calculateSpaceScore: ICalculateSpaceScoreUseCase,
+    private calculateSpaceScore: IInternalCalculateSpaceScoreUseCase,
     @inject(USECASE_TYPES.ISetUserLocationUseCase)
     private setUserLocationUseCase: ISetUserLocationUseCase
   ) {}
@@ -67,7 +67,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
     // cumulate element scores for each space
     worldTO.spaces.forEach((space) => {
-      let spaceScores = this.calculateSpaceScore.execute(space.id);
+      let spaceScores = this.calculateSpaceScore.internalExecute(space.id);
       space.currentScore = spaceScores.currentScore;
       space.maxScore = spaceScores.maxScore;
     });

@@ -1,7 +1,9 @@
 import { mock } from "jest-mock-extended";
 import { logger } from "../../../../../Lib/Logger";
 import IBackendAdapter from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
-import ICalculateSpaceScoreUseCase from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
+import ICalculateSpaceScoreUseCase, {
+  IInternalCalculateSpaceScoreUseCase,
+} from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import { XAPiEvent } from "../../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
 import ScoreH5PElementUseCase from "../../../../Core/Application/UseCases/ScoreH5PElement/ScoreH5PElementUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
@@ -65,7 +67,8 @@ const backendAdapterMock = mock<IBackendAdapter>();
 
 // create other mocks
 const worldPortMock = mock<IWorldPort>();
-const calculateSpaceScoreUseCaseMock = mock<ICalculateSpaceScoreUseCase>();
+const calculateSpaceScoreUseCaseMock =
+  mock<IInternalCalculateSpaceScoreUseCase>();
 
 const executeAsyncParams = {
   xapiData: {} as XAPiEvent,
@@ -172,7 +175,7 @@ describe("ScoreH5PElementUseCase", () => {
       console.log(e);
     }
 
-    expect(calculateSpaceScoreUseCaseMock.execute).toHaveBeenCalledWith(
+    expect(calculateSpaceScoreUseCaseMock.internalExecute).toHaveBeenCalledWith(
       spaceEntityMock.id
     );
   });

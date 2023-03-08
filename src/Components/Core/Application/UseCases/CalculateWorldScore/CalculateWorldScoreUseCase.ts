@@ -1,5 +1,4 @@
 import { inject, injectable } from "inversify";
-import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
@@ -9,8 +8,8 @@ import WorldScoreTO from "../../DataTransferObjects/WorldScoreTO";
 import WorldEntity from "src/Components/Core/Domain/Entities/WorldEntity";
 import SpaceScoreTO from "../../DataTransferObjects/SpaceScoreTO";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
+import type { IInternalCalculateSpaceScoreUseCase } from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 
 @injectable()
 export default class CalculateWorldScoreUseCase
@@ -22,7 +21,7 @@ export default class CalculateWorldScoreUseCase
     @inject(PORT_TYPES.IWorldPort)
     private worldPort: IWorldPort,
     @inject(USECASE_TYPES.ICalculateSpaceScoreUseCase)
-    private calculateSpaceScoreUseCase: ICalculateSpaceScoreUseCase,
+    private calculateSpaceScoreUseCase: IInternalCalculateSpaceScoreUseCase,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
@@ -54,9 +53,8 @@ export default class CalculateWorldScoreUseCase
     let maxScore: number = 0;
     let requiredScore: number = 0;
     world.spaces.forEach((space) => {
-      const spaceScore: SpaceScoreTO = this.calculateSpaceScoreUseCase.execute(
-        space.id
-      );
+      const spaceScore: SpaceScoreTO =
+        this.calculateSpaceScoreUseCase.internalExecute(space.id);
       currentScore += spaceScore.currentScore;
       maxScore += spaceScore.maxScore;
       requiredScore += spaceScore.requiredScore;

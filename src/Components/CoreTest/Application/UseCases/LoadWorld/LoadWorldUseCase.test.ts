@@ -14,7 +14,9 @@ import ILoadAvatarUseCase from "../../../../Core/Application/UseCases/LoadAvatar
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IBackend from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
 import { minimalGetWorldDataResponse } from "../../../Adapters/BackendAdapter/BackendResponses";
-import ICalculateSpaceScoreUseCase from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
+import ICalculateSpaceScoreUseCase, {
+  IInternalCalculateSpaceScoreUseCase,
+} from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/SpaceScoreTO";
 import BackendWorldStatusTO from "../../../../Core/Application/DataTransferObjects/BackendWorldStatusTO";
 import ISetUserLocationUseCase from "../../../../Core/Application/UseCases/SetUserLocation/ISetUserLocationUseCase";
@@ -24,7 +26,8 @@ const worldPortMock = mock<IWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const uiPortMock = mock<IUIPort>();
 const loadAvatarUsecaseMock = mock<ILoadAvatarUseCase>();
-const calculateSpaceScoreUseCaseMock = mock<ICalculateSpaceScoreUseCase>();
+const calculateSpaceScoreUseCaseMock =
+  mock<IInternalCalculateSpaceScoreUseCase>();
 const setUserLocationUseCaseMock = mock<ISetUserLocationUseCase>();
 
 const mockedGetEntitiesOfTypeUserDataReturnValue = [
@@ -203,7 +206,7 @@ describe("LoadWorldUseCase", () => {
     ]);
 
     // mock CalculateSpaceScoreUseCase return value
-    calculateSpaceScoreUseCaseMock.execute.mockReturnValue({
+    calculateSpaceScoreUseCaseMock.internalExecute.mockReturnValue({
       currentScore: 0,
       maxScore: 0,
       requiredScore: 0,
@@ -212,7 +215,9 @@ describe("LoadWorldUseCase", () => {
 
     await systemUnderTest.executeAsync({ worldID: 42 });
 
-    expect(calculateSpaceScoreUseCaseMock.execute).toHaveBeenCalledTimes(2);
+    expect(
+      calculateSpaceScoreUseCaseMock.internalExecute
+    ).toHaveBeenCalledTimes(2);
   });
 
   test("calls SetUserLocationUseCase", async () => {
