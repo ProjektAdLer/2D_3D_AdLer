@@ -132,39 +132,44 @@ export default function SpaceDetail() {
             </div>
           </div>
         )}
-        {!!requiredPoints && (
-          <div className="pb-2">
-            <div className="flex flex-row justify-between w-full pb-2 xl:w-3/4">
-              <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
-                Benötigte Punkte:
-              </div>
-              <div className="flex flex-row items-start pb-2 ml-6 text-lg roboto-regular">
-                {requiredPoints}
-                <img
-                  src={coinIcon}
-                  className="self-center w-6 ml-1 lg:w-8"
-                  alt="Coin-Icon"
-                ></img>
-              </div>
-            </div>
-            <div className="flex flex-row justify-between w-full xl:w-3/4">
-              <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
-                Maximal erreichbare Punkte:
-              </div>
-              <div className="flex flex-row items-start ml-6 text-lg roboto-regular">
-                {elements.reduce((acc, element) => acc + element[3], 0)}
-                <img
-                  src={coinIcon}
-                  className="self-center w-6 ml-1 lg:w-8"
-                  alt="Coin-Icon"
-                ></img>
+        <div>
+          {!!requiredPoints && (
+            <div className="pb-2">
+              <div className="flex flex-row justify-between w-full pb-2 xl:w-3/4">
+                <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+                  Benötigte Punkte:
+                </div>
+                <div className="flex flex-row items-start pb-2 ml-6 text-lg roboto-regular">
+                  {requiredPoints}
+                  <img
+                    src={coinIcon}
+                    className="self-center w-6 ml-1 lg:w-8"
+                    alt="Coin-Icon"
+                  ></img>
+                </div>
               </div>
             </div>
-          </div>
-        )}
-        {elements.length > 0 && (
-          <div className="pb-2 border-b border-gray-500"></div>
-        )}
+          )}
+          {elements.length > 0 && (
+            <div className="pb-2">
+              <div className="flex flex-row justify-between w-full xl:w-3/4">
+                <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+                  Maximal erreichbare Punkte:
+                </div>
+                <div className="flex flex-row items-start ml-6 text-lg roboto-regular">
+                  {elements.reduce((acc, element) => acc + element[3], 0)}
+                  <img
+                    src={coinIcon}
+                    className="self-center w-6 ml-1 lg:w-8"
+                    alt="Coin-Icon"
+                  ></img>
+                </div>
+              </div>
+              <div className="pb-2 border-b border-gray-500"></div>
+            </div>
+          )}
+        </div>
+
         {requirements.length > 0 && (
           <div className="pb-2 border-b border-gray-500">
             <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
