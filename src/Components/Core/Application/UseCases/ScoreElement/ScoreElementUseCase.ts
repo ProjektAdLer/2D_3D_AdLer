@@ -12,6 +12,7 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { logger } from "../../../../../Lib/Logger";
 import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 import type ICalculateWorldScoreUseCase from "../CalculateWorldScore/ICalculateWorldScoreUseCase";
+import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 
 @injectable()
 export default class ScoreElementUseCase implements IScoreElementUseCase {
@@ -23,54 +24,54 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
     @inject(USECASE_TYPES.ICalculateWorldScoreUseCase)
     private calculateWorldScoreUseCase: ICalculateWorldScoreUseCase,
     @inject(PORT_TYPES.IWorldPort)
-    private worldPort: IWorldPort
+    private worldPort: IWorldPort,
+    @inject(USECASE_TYPES.IGetUserLocationUseCase)
+    private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
 
-  async executeAsync(data: {
-    elementID: ComponentID;
-    worldID: ComponentID;
-  }): Promise<void> {
-    if (!data || !data.elementID) {
-      return this.rejectWithWarning("data is (atleast partly) undefined!");
-    }
-
+  async executeAsync(elementID: ComponentID): Promise<void> {
     // get user token
     const userEntity =
       this.entityContainer.getEntitiesOfType(UserDataEntity)[0];
 
     if (!userEntity || !userEntity.isLoggedIn) {
-      return this.rejectWithWarning("User is not logged in!", data.elementID);
+      return this.rejectWithWarning(
+        "User is not logged in! Trying to score elememt " + elementID
+      );
+    }
+
+    // get the current user location
+    const userLocation = this.getUserLocationUseCase.execute();
+    if (!userLocation.worldID || !userLocation.spaceID) {
+      throw new Error(`User is not in a space!`);
     }
 
     // call backend
     try {
       await this.backendAdapter.scoreElement(
         userEntity.userToken,
-        data.elementID,
-        data.worldID
+        elementID,
+        userLocation.worldID
       );
     } catch (e) {
       return this.rejectWithWarning(
         "Backend call failed with error: " + e,
-        data.elementID
+        elementID
       );
     }
 
     const elements = this.entityContainer.filterEntitiesOfType<ElementEntity>(
       ElementEntity,
       (entity) =>
-        entity.parentWorldID === data.worldID && entity.id === data.elementID
+        entity.parentWorldID === userLocation.worldID && entity.id === elementID
     );
 
     if (elements.length === 0)
-      return this.rejectWithWarning(
-        "No matching element found!",
-        data.elementID
-      );
+      return this.rejectWithWarning("No matching element found!", elementID);
     else if (elements.length > 1)
       return this.rejectWithWarning(
         "More than one matching element found!",
-        data.elementID
+        elementID
       );
 
     const space = this.entityContainer.filterEntitiesOfType<SpaceEntity>(
@@ -79,13 +80,13 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
     )[0];
 
     if (!space)
-      return this.rejectWithWarning("No matching space found!", data.elementID);
+      return this.rejectWithWarning("No matching space found!", elementID);
 
     elements[0].hasScored = true;
 
     this.calculateWorldScoreUseCase.execute();
 
-    this.worldPort.onElementScored(true, data.elementID);
+    this.worldPort.onElementScored(true, elementID);
   }
 
   private rejectWithWarning(message: string, id?: ComponentID): Promise<void> {

@@ -98,9 +98,6 @@ describe("ElementModal", () => {
     const componentUnderTest = render(<ElementModal />);
     fireEvent.click(componentUnderTest.getByRole("button"));
 
-    expect(fakeController.scoreElement).toHaveBeenCalledWith(
-      fakeModel.id.Value,
-      fakeModel.parentWorldID.Value
-    );
+    expect(fakeController.scoreElement).toHaveBeenCalledTimes(1);
   });
 });
