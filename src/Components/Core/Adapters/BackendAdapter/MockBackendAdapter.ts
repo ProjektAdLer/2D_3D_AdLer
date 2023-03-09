@@ -86,11 +86,11 @@ export default class MockBackendAdapter implements IBackendAdapter {
         return Promise.resolve("https://youtu.be/8X4cDoM3R7E?t=189");
       case "image":
         return Promise.resolve(
-          "https://testmoodle.cluuub.xyz/webservice/pluginfile.php/284/mod_resource/content/0/Cars%20is%20cool.jpg?forcedownload=1&token=46dd4cbdafda7fc864c8ce73aae3a897"
+          "https://filesamples.com/samples/image/jpeg/sample_640%C3%97426.jpeg"
         );
       case "text":
         return Promise.resolve(
-          "https://testmoodle.cluuub.xyz/webservice/pluginfile.php/282/mod_resource/content/0/Text-File-Example.txt?forcedownload=1&token=46dd4cbdafda7fc864c8ce73aae3a897"
+          "https://filesamples.com/samples/document/txt/sample3.txt"
         );
       case "pdf":
         return Promise.resolve(
