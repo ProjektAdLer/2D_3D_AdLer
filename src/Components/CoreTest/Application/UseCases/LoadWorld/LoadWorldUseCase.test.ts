@@ -174,8 +174,8 @@ describe("LoadWorldUseCase", () => {
     entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
 
     backendMock.getWorldStatus.mockResolvedValue({
-      courseId: 1,
-      learningElements: [{}],
+      worldId: 1,
+      elements: [{}],
     } as BackendWorldStatusTO);
 
     await systemUnderTest.executeAsync({ worldID: 42 });
@@ -240,8 +240,8 @@ describe("LoadWorldUseCase", () => {
     entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
 
     backendMock.getWorldStatus.mockResolvedValue({
-      courseId: 1,
-      learningElements: [{}],
+      worldId: 1,
+      elements: [{}],
     } as BackendWorldStatusTO);
 
     await systemUnderTest.executeAsync({ worldID: 42 });
