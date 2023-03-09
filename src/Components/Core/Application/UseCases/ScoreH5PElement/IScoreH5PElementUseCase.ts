@@ -6,7 +6,6 @@ export default interface IScoreH5PElement
     {
       xapiData: XAPiEvent;
       elementID: ComponentID;
-      courseID: ComponentID;
     },
     boolean
   > {}

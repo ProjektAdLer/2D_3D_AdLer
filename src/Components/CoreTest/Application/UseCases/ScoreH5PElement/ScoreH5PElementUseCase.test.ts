@@ -1,9 +1,11 @@
 import { mock } from "jest-mock-extended";
 import { logger } from "../../../../../Lib/Logger";
 import IBackendAdapter from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
+import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
 import ICalculateSpaceScoreUseCase, {
   IInternalCalculateSpaceScoreUseCase,
 } from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
+import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import { XAPiEvent } from "../../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
 import ScoreH5PElementUseCase from "../../../../Core/Application/UseCases/ScoreH5PElement/ScoreH5PElementUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
@@ -17,6 +19,8 @@ import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityCon
 import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 
 jest.mock("../../../../../Lib/Logger");
+
+const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 
 // create EntityContainer mock
 const entityContainerMock = mock<IEntityContainer>();
@@ -94,6 +98,9 @@ describe("ScoreH5PElementUseCase", () => {
     CoreDIContainer.rebind(
       USECASE_TYPES.ICalculateSpaceScoreUseCase
     ).toConstantValue(calculateSpaceScoreUseCaseMock);
+    CoreDIContainer.rebind(
+      USECASE_TYPES.IGetUserLocationUseCase
+    ).toConstantValue(getUserLocationUseCaseMock);
   });
 
   beforeEach(() => {
@@ -107,6 +114,10 @@ describe("ScoreH5PElementUseCase", () => {
   });
 
   test("executeAsync should resolves to true with correct params", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
     setupEntityContainerMock(
       [userEntityMock],
       [elementEntityMock],
@@ -120,6 +131,10 @@ describe("ScoreH5PElementUseCase", () => {
   });
 
   test("executeAsync should call backendAdapter.scoreH5PElement", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
     setupEntityContainerMock(
       [userEntityMock],
       [elementEntityMock],
@@ -142,6 +157,10 @@ describe("ScoreH5PElementUseCase", () => {
   });
 
   test("executeAsync tries to filter for a space that contains given element", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
     setupEntityContainerMock(
       [userEntityMock],
       [elementEntityMock],
@@ -162,6 +181,10 @@ describe("ScoreH5PElementUseCase", () => {
   });
 
   test("executeAsync should call calculateSpaceScoreUseCase", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
     setupEntityContainerMock(
       [userEntityMock],
       [elementEntityMock],
@@ -181,6 +204,10 @@ describe("ScoreH5PElementUseCase", () => {
   });
 
   test("executeAsync should call elementPort.onElementScored", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
     setupEntityContainerMock(
       [userEntityMock],
       [elementEntityMock],
@@ -197,12 +224,6 @@ describe("ScoreH5PElementUseCase", () => {
     expect(worldPortMock.onElementScored).toHaveBeenCalledWith(
       true,
       executeAsyncParams.elementID
-    );
-  });
-
-  test("executeAsync rejects if data parameter is undefined", async () => {
-    await expect(systemUnderTest.executeAsync(undefined)).rejects.toContain(
-      "data is (atleast partly) undefined"
     );
   });
 
@@ -229,6 +250,10 @@ describe("ScoreH5PElementUseCase", () => {
   });
 
   test("executeAsync rejects if EntityContainer returns no matching element entity", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
     setupEntityContainerMock([userEntityMock], [], [spaceEntityMock]);
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
@@ -238,6 +263,10 @@ describe("ScoreH5PElementUseCase", () => {
   });
 
   test("executeAsync rejects if EntityContainer returns more than one matching element entity", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
     setupEntityContainerMock(
       [userEntityMock],
       [elementEntityMock, elementEntityMock],
@@ -251,6 +280,10 @@ describe("ScoreH5PElementUseCase", () => {
   });
 
   test("executeAsync rejects if EntityContainer returns no matching space entity", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
     setupEntityContainerMock([userEntityMock], [elementEntityMock], []);
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
