@@ -1,3 +1,3 @@
 export type getCoursesAvailableForUserResponse = {
-  courses: { courseId: number; courseName: string }[];
+  worlds: { worldId: number; worldName: string }[];
 };

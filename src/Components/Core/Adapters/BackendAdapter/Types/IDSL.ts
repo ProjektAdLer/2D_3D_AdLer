@@ -1,42 +1,54 @@
 // these types define the JSON data structure of the DSL that is returned by the backend
 
-type KeyValuePair = {
+export interface IDSL {
+  fileVersion: string;
+  amgVersion: string;
+  author: string;
+  language: string;
+  world: APIWorld;
+}
+
+export interface APIWorld {
+  lmsElementIdentifier: APILmsElementIdentifier;
+  worldName: string;
+  worldDescription: string;
+  worldGoals: string[];
+  topics: APITopic[];
+  spaces: APISpace[];
+  elements: APIElement[];
+}
+
+export interface APILmsElementIdentifier {
   type: string;
   value: string;
-};
+}
 
-export type APIWorld = {
-  idNumber: string;
-  identifier: KeyValuePair;
-  learningWorldContent: number[];
-  goals: string;
-  learningSpaces: APISpace[];
-  learningElements: APIElement[];
-  description: string;
-};
+export interface APITopic {
+  topicId: number;
+  topicName: string;
+  topicContents: number[];
+}
 
-export type APISpace = {
+export interface APISpace {
   spaceId: number;
-  identifier: KeyValuePair;
-  description: string;
-  goals: string;
-  learningSpaceContent: number[];
-  requirements: number[];
-  requiredPoints: number;
-};
+  lmsElementIdentifier: APILmsElementIdentifier;
+  spaceName: string;
+  spaceDescription: string;
+  spaceGoals: string[];
+  spaceContents: number[];
+  requiredPointsToComplete: number;
+  requiredSpacesToEnter: string;
+}
 
-export type APIElement = {
-  id: number;
-  identifier: KeyValuePair;
-  description: string;
-  goals: string;
+export interface APIElement {
+  elementId: number;
+  lmsElementIdentifier: APILmsElementIdentifier;
+  elementName: string;
+  elementDescription: string;
+  elementGoals: string[];
   elementCategory: string;
-  learningElementValueList: KeyValuePair[];
-  learningSpaceParentId: number;
-};
-
-type IDSL = {
-  learningWorld: APIWorld;
-};
+  elementFileType: string;
+  elementMaxScore: number;
+}
 
 export default IDSL;

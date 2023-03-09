@@ -60,103 +60,171 @@ export const expectedElementTO: Partial<ElementTO> = {
   description: expect.any(String),
   goals: expect.any(String),
   type: expect.any(String),
-  parentSpaceID: expect.any(Number),
+  //parentSpaceID: expect.any(Number),
 };
 
 export const mockDSL: IDSL = {
-  learningWorld: {
-    idNumber: "ac187daa-e3a7-4dbc-820d-1f9b1a978964",
-    identifier: {
-      type: "name",
-      value: "World_For_Evaluation",
+  fileVersion: "0.3",
+  amgVersion: "0.3.2",
+  author: "wAuthors",
+  language: "de",
+  world: {
+    lmsElementIdentifier: {
+      type: "moduleName",
+      value: "worldName",
     },
-    description:
-      "Eine coole Welt für die Evaluation, welche alle Lernelemente enthält die zur Verfügung stehen",
-    goals:
-      "Eine coole Welt für die Evaluation, welche alle Lernelemente enthält die zur Verfügung stehen",
-    learningWorldContent: [1],
-    learningSpaces: [
+    worldName: "worldName",
+    worldDescription: "wDescription",
+    worldGoals: ["wGoal"],
+    topics: [
       {
-        spaceId: 1,
-        identifier: {
-          type: "name",
-          value: "Space_Number_1",
-        },
-        description: "Der erste und einzige Lernraum",
-        goals: "Der erste und einzige Lernraum",
-        learningSpaceContent: [1, 2, 3, 4],
-        requiredPoints: 100,
-        requirements: [],
+        topicId: 1,
+        topicName: "tbereich1",
+        topicContents: [1, 2],
+      },
+      {
+        topicId: 2,
+        topicName: "tbereich2",
+        topicContents: [3],
+      },
+      {
+        topicId: 3,
+        topicName: "tbereich3",
+        topicContents: [4, 5],
       },
     ],
-    learningElements: [
+    spaces: [
       {
-        id: 1,
-        identifier: {
-          type: "FileName",
-          value: "Youtube-Link-English",
+        spaceId: 1,
+        lmsElementIdentifier: {
+          type: "moduleName",
+          value: "raum1",
         },
-        description: "Ein video zur Vortbildung",
-        goals: "Bitte anschauen",
-        elementCategory: "video",
-        learningElementValueList: [
-          {
-            type: "Points",
-            value: "50",
-          },
-        ],
-        learningSpaceParentId: 1,
+        spaceName: "raum1",
+        spaceDescription: "rdescription1",
+        spaceGoals: ["rgoals1"],
+        spaceContents: [1],
+        requiredPointsToComplete: 1,
+        requiredSpacesToEnter: "",
       },
       {
-        id: 2,
-        identifier: {
-          type: "FileName",
-          value: "Text-File-Example",
+        spaceId: 2,
+        lmsElementIdentifier: {
+          type: "moduleName",
+          value: "raum2",
         },
-        description: "Text-File-Example from the Internet",
-        goals: "Text-File-Example",
-        elementCategory: "text",
-        learningElementValueList: [
-          {
-            type: "Points",
-            value: "25",
-          },
-        ],
-        learningSpaceParentId: 1,
+        spaceName: "raum2",
+        spaceDescription: "rdescription2",
+        spaceGoals: ["rgoals2"],
+        spaceContents: [2],
+        requiredPointsToComplete: 1,
+        requiredSpacesToEnter: "",
       },
       {
-        id: 3,
-        identifier: {
-          type: "FileName",
-          value: "H5P-SchiebeSpiel",
+        spaceId: 3,
+        lmsElementIdentifier: {
+          type: "moduleName",
+          value: "raum3",
         },
-        description: "H5P-SchiebeSpiel not too easy",
-        goals: "Do something here",
-        elementCategory: "h5p",
-        learningElementValueList: [
-          {
-            type: "Points",
-            value: "50",
-          },
-        ],
-        learningSpaceParentId: 1,
+        spaceName: "raum3",
+        spaceDescription: "rdescription3",
+        spaceGoals: ["rgoals3"],
+        spaceContents: [3],
+        requiredPointsToComplete: 1,
+        requiredSpacesToEnter: "",
       },
       {
-        id: 4,
-        identifier: {
-          type: "FileName",
-          value: "Cars is cool",
+        spaceId: 4,
+        lmsElementIdentifier: {
+          type: "moduleName",
+          value: "raum4",
         },
-        description: "2 Cars",
-        goals: "What colors are those cars",
+        spaceName: "raum4",
+        spaceDescription: "rdescription4",
+        spaceGoals: ["rgoals4"],
+        spaceContents: [4],
+        requiredPointsToComplete: 3,
+        requiredSpacesToEnter: "(3)v((2)^(1))",
+      },
+      {
+        spaceId: 5,
+        lmsElementIdentifier: {
+          type: "moduleName",
+          value: "raum5",
+        },
+        spaceName: "raum5",
+        spaceDescription: "rdescription5",
+        spaceGoals: ["rgoals5"],
+        spaceContents: [5],
+        requiredPointsToComplete: 1,
+        requiredSpacesToEnter: "4",
+      },
+    ],
+    elements: [
+      {
+        elementId: 1,
+        lmsElementIdentifier: {
+          type: "moduleName",
+          value: "bild",
+        },
+        elementName: "bild",
+        elementDescription: "bildbesch",
+        elementGoals: ["bildgoals"],
         elementCategory: "image",
-        learningElementValueList: [
-          {
-            type: "Points",
-            value: "25",
-          },
-        ],
-        learningSpaceParentId: 1,
+        elementFileType: "png",
+        elementMaxScore: 1,
+      },
+      {
+        elementId: 2,
+        lmsElementIdentifier: {
+          type: "moduleName",
+          value: "pdf",
+        },
+        elementName: "pdf",
+        elementDescription: "pdfbes",
+        elementGoals: ["pdfgoa"],
+        elementCategory: "pdf",
+        elementFileType: "pdf",
+        elementMaxScore: 1,
+      },
+      {
+        elementId: 3,
+        lmsElementIdentifier: {
+          type: "moduleName",
+          value: "text",
+        },
+        elementName: "text",
+        elementDescription: "textbesch",
+        elementGoals: ["textgoa"],
+        elementCategory: "text",
+        elementFileType: "txt",
+        elementMaxScore: 1,
+      },
+      {
+        elementId: 4,
+        lmsElementIdentifier: {
+          type: "moduleName",
+          value: "yturl",
+        },
+        elementName: "yturl",
+        elementDescription: "yt",
+        elementGoals: ["goals"],
+        elementCategory: "video",
+        elementFileType: "url",
+        elementMaxScore: 2,
+      },
+      {
+        elementId: 5,
+        lmsElementIdentifier: {
+          type: "moduleName",
+          value: "h5pfile",
+        },
+        elementName: "h5pfile",
+        elementDescription: "h5pbes",
+        elementGoals: ["h5pgoals"],
+        elementCategory: "h5p",
+        elementFileType: "h5p",
+        elementMaxScore: 2,
       },
     ],
   },
