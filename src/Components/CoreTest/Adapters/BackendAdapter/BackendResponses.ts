@@ -69,10 +69,6 @@ export const mockDSL: IDSL = {
   author: "wAuthors",
   language: "de",
   world: {
-    lmsElementIdentifier: {
-      type: "moduleName",
-      value: "worldName",
-    },
     worldName: "worldName",
     worldDescription: "wDescription",
     worldGoals: ["wGoal"],
@@ -96,10 +92,6 @@ export const mockDSL: IDSL = {
     spaces: [
       {
         spaceId: 1,
-        lmsElementIdentifier: {
-          type: "moduleName",
-          value: "raum1",
-        },
         spaceName: "raum1",
         spaceDescription: "rdescription1",
         spaceGoals: ["rgoals1"],
@@ -109,10 +101,7 @@ export const mockDSL: IDSL = {
       },
       {
         spaceId: 2,
-        lmsElementIdentifier: {
-          type: "moduleName",
-          value: "raum2",
-        },
+
         spaceName: "raum2",
         spaceDescription: "rdescription2",
         spaceGoals: ["rgoals2"],
@@ -122,10 +111,7 @@ export const mockDSL: IDSL = {
       },
       {
         spaceId: 3,
-        lmsElementIdentifier: {
-          type: "moduleName",
-          value: "raum3",
-        },
+
         spaceName: "raum3",
         spaceDescription: "rdescription3",
         spaceGoals: ["rgoals3"],
@@ -135,10 +121,7 @@ export const mockDSL: IDSL = {
       },
       {
         spaceId: 4,
-        lmsElementIdentifier: {
-          type: "moduleName",
-          value: "raum4",
-        },
+
         spaceName: "raum4",
         spaceDescription: "rdescription4",
         spaceGoals: ["rgoals4"],
@@ -148,10 +131,7 @@ export const mockDSL: IDSL = {
       },
       {
         spaceId: 5,
-        lmsElementIdentifier: {
-          type: "moduleName",
-          value: "raum5",
-        },
+
         spaceName: "raum5",
         spaceDescription: "rdescription5",
         spaceGoals: ["rgoals5"],
@@ -163,10 +143,7 @@ export const mockDSL: IDSL = {
     elements: [
       {
         elementId: 1,
-        lmsElementIdentifier: {
-          type: "moduleName",
-          value: "bild",
-        },
+
         elementName: "bild",
         elementDescription: "bildbesch",
         elementGoals: ["bildgoals"],
@@ -176,10 +153,7 @@ export const mockDSL: IDSL = {
       },
       {
         elementId: 2,
-        lmsElementIdentifier: {
-          type: "moduleName",
-          value: "pdf",
-        },
+
         elementName: "pdf",
         elementDescription: "pdfbes",
         elementGoals: ["pdfgoa"],
@@ -189,10 +163,7 @@ export const mockDSL: IDSL = {
       },
       {
         elementId: 3,
-        lmsElementIdentifier: {
-          type: "moduleName",
-          value: "text",
-        },
+
         elementName: "text",
         elementDescription: "textbesch",
         elementGoals: ["textgoa"],
@@ -202,10 +173,7 @@ export const mockDSL: IDSL = {
       },
       {
         elementId: 4,
-        lmsElementIdentifier: {
-          type: "moduleName",
-          value: "yturl",
-        },
+
         elementName: "yturl",
         elementDescription: "yt",
         elementGoals: ["goals"],
@@ -215,10 +183,7 @@ export const mockDSL: IDSL = {
       },
       {
         elementId: 5,
-        lmsElementIdentifier: {
-          type: "moduleName",
-          value: "h5pfile",
-        },
+
         elementName: "h5pfile",
         elementDescription: "h5pbes",
         elementGoals: ["h5pgoals"],

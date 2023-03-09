@@ -9,18 +9,12 @@ export interface IDSL {
 }
 
 export interface APIWorld {
-  lmsElementIdentifier: APILmsElementIdentifier;
   worldName: string;
   worldDescription: string;
   worldGoals: string[];
   topics: APITopic[];
   spaces: APISpace[];
   elements: APIElement[];
-}
-
-export interface APILmsElementIdentifier {
-  type: string;
-  value: string;
 }
 
 export interface APITopic {
@@ -31,7 +25,6 @@ export interface APITopic {
 
 export interface APISpace {
   spaceId: number;
-  lmsElementIdentifier: APILmsElementIdentifier;
   spaceName: string;
   spaceDescription: string;
   spaceGoals: string[];
@@ -42,7 +35,6 @@ export interface APISpace {
 
 export interface APIElement {
   elementId: number;
-  lmsElementIdentifier: APILmsElementIdentifier;
   elementName: string;
   elementDescription: string;
   elementGoals: string[];

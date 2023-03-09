@@ -14,7 +14,7 @@ export default class BackendAdapterUtils {
     const spaces: BackendSpaceTO[] = this.mapSpaces(dsl.world.spaces, elements);
 
     const response: BackendWorldTO = {
-      worldName: dsl.world.lmsElementIdentifier.value,
+      worldName: dsl.world.worldName,
       worldGoal: dsl.world.worldGoals[0] || "",
       spaces: spaces,
       description: dsl.world.worldDescription,
@@ -32,7 +32,7 @@ export default class BackendAdapterUtils {
     return spaces.map((space) => {
       return {
         id: space.spaceId,
-        name: space.lmsElementIdentifier.value,
+        name: space.spaceName,
         elements: elements.filter((element) =>
           space.spaceContents.includes(element.id)
         ),
@@ -52,7 +52,7 @@ export default class BackendAdapterUtils {
           id: element.elementId,
           description: element.elementDescription,
           goals: element.elementGoals[0] || "",
-          name: element.lmsElementIdentifier.value,
+          name: element.elementName,
           type: element.elementCategory,
           value: element.elementMaxScore || 0,
           //parentSpaceID: element.learningSpaceParentId,

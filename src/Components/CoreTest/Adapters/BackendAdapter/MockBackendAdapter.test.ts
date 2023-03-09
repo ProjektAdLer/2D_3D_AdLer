@@ -79,7 +79,11 @@ describe("MockBackendAdapter", () => {
       courses: [
         {
           courseID: 1,
-          courseName: "Testkurs",
+          courseName: "Testkurs 1",
+        },
+        {
+          courseID: 2,
+          courseName: "Testkurs 2",
         },
       ],
     });
