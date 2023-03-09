@@ -2,7 +2,7 @@ import { mock } from "jest-mock-extended";
 import { config } from "../../../../config";
 import MockBackendAdapter from "../../../Core/Adapters/BackendAdapter/MockBackendAdapter";
 import PlayerDataTO from "../../../Core/Application/DataTransferObjects/PlayerDataTO";
-import { XAPiEvent } from "../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
+import { XAPiEvent } from "../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
 import {
   expectedElementTO,
   expectedSpaceTO,
@@ -114,23 +114,23 @@ describe("MockBackendAdapter", () => {
 
   test("should get World Status", async () => {
     await expect(systemUnderTest.getWorldStatus("token", 1)).resolves.toEqual({
-      courseId: 1,
-      learningElements: [
+      worldId: 1,
+      elements: [
         {
           elementId: 1,
-          successss: true,
+          success: true,
         },
         {
           elementId: 2,
-          successss: false,
+          success: false,
         },
         {
           elementId: 3,
-          successss: false,
+          success: false,
         },
         {
           elementId: 4,
-          successss: false,
+          success: false,
         },
       ],
     });
@@ -139,7 +139,7 @@ describe("MockBackendAdapter", () => {
   test("should get Element Score", async () => {
     await expect(systemUnderTest.getElementScore("token", 1)).resolves.toEqual({
       elementID: 1,
-      successss: true,
+      success: true,
     });
   });
 

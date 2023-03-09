@@ -41,7 +41,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
   ): Promise<ElementScoreTO> {
     return Promise.resolve({
       elementID,
-      successss: true,
+      success: true,
     });
   }
 
@@ -50,23 +50,23 @@ export default class MockBackendAdapter implements IBackendAdapter {
     worldID: ComponentID
   ): Promise<BackendWorldStatusTO> {
     return Promise.resolve({
-      courseId: 1,
-      learningElements: [
+      worldId: 1,
+      elements: [
         {
           elementId: 1,
-          successss: true,
+          success: true,
         },
         {
           elementId: 2,
-          successss: false,
+          success: false,
         },
         {
           elementId: 3,
-          successss: false,
+          success: false,
         },
         {
           elementId: 4,
-          successss: false,
+          success: false,
         },
       ],
     });
