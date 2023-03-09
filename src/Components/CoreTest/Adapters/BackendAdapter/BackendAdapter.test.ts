@@ -1,5 +1,4 @@
 import { mock } from "jest-mock-extended";
-import { XAPiEvent } from "./../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
 import { getCoursesAvailableForUserResponse } from "../../../Core/Adapters/BackendAdapter/Types/getCoursesAvailableForUserResponse";
 import {
   expectedElementTO,
@@ -11,6 +10,7 @@ import { config } from "../../../../config";
 import BackendAdapter from "../../../Core/Adapters/BackendAdapter/BackendAdapter";
 import axios, { AxiosResponse } from "axios";
 import CourseListTO from "../../../Core/Application/DataTransferObjects/CourseListTO";
+import { XAPiEvent } from "../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -73,15 +73,13 @@ describe("BackendAdapter", () => {
     });
 
     // check that the result has the same amount of learning rooms as the DSL
-    expect(result.spaces).toHaveLength(
-      mockDSL.learningWorld.learningSpaces.length
-    );
+    expect(result.spaces).toHaveLength(mockDSL.world.spaces.length);
 
     result.spaces?.forEach((space, index) => {
       // check that the results learning rooms have
       // the same amount of learning elements as in the DSL
       // 4: Are the 4 Basic learning elements in the DSL
-      expect(space.elements).toHaveLength(4);
+      expect(space.elements).toHaveLength(1);
     });
 
     // TODO: add further comparisons between mockDSL and created TOs

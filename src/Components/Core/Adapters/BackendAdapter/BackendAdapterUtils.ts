@@ -9,21 +9,16 @@ import IDSL, { APIElement, APISpace } from "./Types/IDSL";
  */
 export default class BackendAdapterUtils {
   public static parseDSL(dsl: IDSL): BackendWorldTO {
-    const elements: ElementTO[] = this.mapElements(
-      dsl.learningWorld.learningElements
-    );
+    const elements: ElementTO[] = this.mapElements(dsl.world.elements);
 
-    const spaces: BackendSpaceTO[] = this.mapSpaces(
-      dsl.learningWorld.learningSpaces,
-      elements
-    );
+    const spaces: BackendSpaceTO[] = this.mapSpaces(dsl.world.spaces, elements);
 
     const response: BackendWorldTO = {
-      worldName: dsl.learningWorld.identifier.value,
-      worldGoal: dsl.learningWorld.goals,
+      worldName: dsl.world.lmsElementIdentifier.value,
+      worldGoal: dsl.world.worldGoals[0] || "",
       spaces: spaces,
-      description: dsl.learningWorld.description,
-      goals: dsl.learningWorld.goals,
+      description: dsl.world.worldDescription,
+      goals: dsl.world.worldGoals[0] || "",
     };
 
     return response;
@@ -37,14 +32,14 @@ export default class BackendAdapterUtils {
     return spaces.map((space) => {
       return {
         id: space.spaceId,
-        name: space.identifier.value,
+        name: space.lmsElementIdentifier.value,
         elements: elements.filter((element) =>
-          space.learningSpaceContent.includes(element.id)
+          space.spaceContents.includes(element.id)
         ),
-        description: space.description,
-        goals: space.goals,
-        requirements: space.requirements,
-        requiredScore: space.requiredPoints,
+        description: space.spaceDescription,
+        goals: space.spaceGoals[0] || "",
+        requirements: [], // TODO: implement requirements,
+        requiredScore: space.requiredPointsToComplete,
       } as BackendSpaceTO;
     });
   }
@@ -54,14 +49,13 @@ export default class BackendAdapterUtils {
     return elements.flatMap((element) => {
       if (element.elementCategory in ElementTypes) {
         return {
-          id: element.id,
-          description: element.description,
-          goals: element.goals,
-          name: element.identifier.value,
+          id: element.elementId,
+          description: element.elementDescription,
+          goals: element.elementGoals[0] || "",
+          name: element.lmsElementIdentifier.value,
           type: element.elementCategory,
-          value:
-            Number.parseInt(element.learningElementValueList[0].value) || 0,
-          parentSpaceID: element.learningSpaceParentId,
+          value: element.elementMaxScore || 0,
+          //parentSpaceID: element.learningSpaceParentId,
         } as ElementTO;
       } else return [];
     });

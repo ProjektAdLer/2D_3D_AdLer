@@ -73,8 +73,8 @@ export default class MockBackendAdapter implements IBackendAdapter {
   }
 
   getElementSource(userToken: string, elementID: number): Promise<string> {
-    const elementType = this.worldTO.learningWorld.learningElements.find(
-      (element) => element.id === elementID
+    const elementType = this.worldTO.world.elements.find(
+      (element) => element.elementId === elementID
     )!.elementCategory;
 
     switch (elementType) {
@@ -137,356 +137,167 @@ export default class MockBackendAdapter implements IBackendAdapter {
   }
 
   worldTO: IDSL = {
-    learningWorld: {
-      idNumber: "c841bcde-56f6-41b2-97b7-f0f82b0fb0c1",
-      identifier: {
-        type: "name",
-        value: "Lernwelt mit dem aktuellen Stand",
+    fileVersion: "0.3",
+    amgVersion: "0.3.2",
+    author: "wAuthors",
+    language: "de",
+    world: {
+      lmsElementIdentifier: {
+        type: "moduleName",
+        value: "worldName",
       },
-      description: "Hier wird der aktuelle Stand der Lernwelt beschrieben.",
-      goals:
-        "Studierenden benennen den englischen Begriff und die Abk\u00FCrzung.\nStudierende nennen die Bestandteile, Daten und Methoden, von abstrakten Datentypen.\nStudierende nennen zu den Bestandteilen auch die Eigenschaften, implementierbar in versch. Sprachen, versch. Anwendungsgebiete.\nStudierende beschreiben die zwei Datenkategorien Nutzerdaten und Verwaltungsdaten in Abstrakten Datentypen.\nStudierende beschreiben Gemeinsamkeiten und Unterschiede von Abstrakten Datentypen gg\u00FC.(klassischen) Datentypen.\nStudierende z\u00E4hlen verschiedene Abstrakte Datentypen auf.",
-      learningWorldContent: [],
-      learningSpaces: [
+      worldName: "worldName",
+      worldDescription: "wDescription",
+      worldGoals: ["wGoal"],
+      topics: [
+        {
+          topicId: 1,
+          topicName: "tbereich1",
+          topicContents: [1, 2],
+        },
+        {
+          topicId: 2,
+          topicName: "tbereich2",
+          topicContents: [3],
+        },
+        {
+          topicId: 3,
+          topicName: "tbereich3",
+          topicContents: [4, 5],
+        },
+      ],
+      spaces: [
         {
           spaceId: 1,
-          identifier: {
-            type: "name",
-            value: "Raum Nummer 1",
+          lmsElementIdentifier: {
+            type: "moduleName",
+            value: "raum1",
           },
-          description: "Beschreibung des Raumes 1",
-          goals:
-            "Studierenden benennen den englischen Begriff und die Abk\u00FCrzung.\nStudierende nennen die Bestandteile, Daten und Methoden, von abstrakten Datentypen.\nStudierende nennen zu den Bestandteilen auch die Eigenschaften, implementierbar in versch. Sprachen, versch. Anwendungsgebiete.\nStudierende beschreiben die zwei Datenkategorien Nutzerdaten und Verwaltungsdaten in Abstrakten Datentypen.\nStudierende beschreiben Gemeinsamkeiten und Unterschiede von Abstrakten Datentypen gg\u00FC.(klassischen) Datentypen.\nStudierende z\u00E4hlen verschiedene Abstrakte Datentypen auf.",
-          learningSpaceContent: [1, 2, 3, 4, 17],
-          requiredPoints: 0,
-          requirements: [],
+          spaceName: "raum1",
+          spaceDescription: "rdescription1",
+          spaceGoals: ["rgoals1"],
+          spaceContents: [1],
+          requiredPointsToComplete: 1,
+          requiredSpacesToEnter: "",
         },
         {
           spaceId: 2,
-          identifier: {
-            type: "name",
-            value: "Raum Nummer 2",
+          lmsElementIdentifier: {
+            type: "moduleName",
+            value: "raum2",
           },
-          description: "Beschreibung des Raumes 2",
-          goals: "Lernziel des Raumes 2",
-          learningSpaceContent: [5, 6, 7, 8],
-          requiredPoints: 50,
-          requirements: [1, 3],
+          spaceName: "raum2",
+          spaceDescription: "rdescription2",
+          spaceGoals: ["rgoals2"],
+          spaceContents: [2],
+          requiredPointsToComplete: 1,
+          requiredSpacesToEnter: "",
         },
         {
           spaceId: 3,
-          identifier: {
-            type: "name",
-            value: "Raum Nummer 3",
+          lmsElementIdentifier: {
+            type: "moduleName",
+            value: "raum3",
           },
-          description: "Beschreibung des Raumes 3",
-          goals: "Lernziel des Raumes 3",
-          learningSpaceContent: [9, 10, 11, 12],
-          requiredPoints: 50,
-          requirements: [1],
+          spaceName: "raum3",
+          spaceDescription: "rdescription3",
+          spaceGoals: ["rgoals3"],
+          spaceContents: [3],
+          requiredPointsToComplete: 1,
+          requiredSpacesToEnter: "",
         },
         {
           spaceId: 4,
-          identifier: {
-            type: "name",
-            value: "Raum Nummer 4",
+          lmsElementIdentifier: {
+            type: "moduleName",
+            value: "raum4",
           },
-          description: "Beschreibung des Raumes 4",
-          goals: "Lernziel des Raumes 4",
-          learningSpaceContent: [13, 14, 15, 16],
-          requiredPoints: 50,
-          requirements: [2, 3],
+          spaceName: "raum4",
+          spaceDescription: "rdescription4",
+          spaceGoals: ["rgoals4"],
+          spaceContents: [4],
+          requiredPointsToComplete: 3,
+          requiredSpacesToEnter: "(3)v((2)^(1))",
+        },
+        {
+          spaceId: 5,
+          lmsElementIdentifier: {
+            type: "moduleName",
+            value: "raum5",
+          },
+          spaceName: "raum5",
+          spaceDescription: "rdescription5",
+          spaceGoals: ["rgoals5"],
+          spaceContents: [5],
+          requiredPointsToComplete: 1,
+          requiredSpacesToEnter: "4",
         },
       ],
-      learningElements: [
+      elements: [
         {
-          id: 1,
-          identifier: {
-            type: "FileName",
-            value: "Ein H5P Element",
+          elementId: 1,
+          lmsElementIdentifier: {
+            type: "moduleName",
+            value: "bild",
           },
-          description: "H5p",
-          goals: "H5p",
-          elementCategory: "h5p",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "50",
-            },
-          ],
-          learningSpaceParentId: 1,
-        },
-        {
-          id: 2,
-          identifier: {
-            type: "FileName",
-            value: "Ein Textelement",
-          },
-          description: "Text datei",
-          goals: "Text datei",
-          elementCategory: "text",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "25",
-            },
-          ],
-          learningSpaceParentId: 1,
-        },
-        {
-          id: 3,
-          identifier: {
-            type: "FileName",
-            value: "Ein Bild als Lernelement",
-          },
-          description: "2 - Autos",
-          goals: "2 - Autos",
+          elementName: "bild",
+          elementDescription: "bildbesch",
+          elementGoals: ["bildgoals"],
           elementCategory: "image",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "25",
-            },
-          ],
-          learningSpaceParentId: 1,
+          elementFileType: "png",
+          elementMaxScore: 1,
         },
         {
-          id: 4,
-          identifier: {
-            type: "FileName",
-            value: "Ein Lernvideo auf Youtube",
+          elementId: 2,
+          lmsElementIdentifier: {
+            type: "moduleName",
+            value: "pdf",
           },
-          description: "Video-Url",
-          goals: "Video-Url",
-          elementCategory: "video",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "25",
-            },
-          ],
-          learningSpaceParentId: 1,
-        },
-        {
-          id: 5,
-          identifier: {
-            type: "FileName",
-            value: "Schiebespiel",
-          },
-          description: "Schiebespiel",
-          goals: "Schiebespiel",
-          elementCategory: "h5p",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "50",
-            },
-          ],
-          learningSpaceParentId: 2,
-        },
-        {
-          id: 6,
-          identifier: {
-            type: "FileName",
-            value: "Video-Link-Wichtig",
-          },
-          description: "Video-Link-Wichtig",
-          goals: "Video-Link-Wichtig",
-          elementCategory: "video",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "75",
-            },
-          ],
-          learningSpaceParentId: 2,
-        },
-        {
-          id: 7,
-          identifier: {
-            type: "FileName",
-            value: "Generisches Bild",
-          },
-          description: "Generisches Bild",
-          goals: "Generisches Bild",
-          elementCategory: "image",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "50",
-            },
-          ],
-          learningSpaceParentId: 2,
-        },
-        {
-          id: 8,
-          identifier: {
-            type: "FileName",
-            value: "Ich habe getrunken datei",
-          },
-          description: "Ich habe getrunken datei",
-          goals: "Ich habe getrunken datei",
-          elementCategory: "text",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "25",
-            },
-          ],
-          learningSpaceParentId: 2,
-        },
-        {
-          id: 9,
-          identifier: {
-            type: "FileName",
-            value: "H5P-Schieben",
-          },
-          description: "H5P-Schieben",
-          goals: "H5P-Schieben",
-          elementCategory: "h5p",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "25",
-            },
-          ],
-          learningSpaceParentId: 3,
-        },
-        {
-          id: 10,
-          identifier: {
-            type: "FileName",
-            value: "Text-Datei script",
-          },
-          description: "Text-Datei script",
-          goals: "Text-Datei script",
-          elementCategory: "text",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "25",
-            },
-          ],
-          learningSpaceParentId: 3,
-        },
-        {
-          id: 11,
-          identifier: {
-            type: "FileName",
-            value: "Laptop-Bild",
-          },
-          description: "Laptop-Bild",
-          goals: "Laptop-Bild",
-          elementCategory: "image",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "123",
-            },
-          ],
-          learningSpaceParentId: 3,
-        },
-        {
-          id: 12,
-          identifier: {
-            type: "FileName",
-            value: "Video-Url-Youtube",
-          },
-          description: "Video-Url-Youtube",
-          goals: "Video-Url-Youtube",
-          elementCategory: "video",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "25",
-            },
-          ],
-          learningSpaceParentId: 3,
-        },
-        {
-          id: 13,
-          identifier: {
-            type: "FileName",
-            value: "Das letzte H5p video",
-          },
-          description: "Das letzte H5p video",
-          goals: "Das letzte H5p video",
-          elementCategory: "h5p",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "50",
-            },
-          ],
-          learningSpaceParentId: 4,
-        },
-        {
-          id: 14,
-          identifier: {
-            type: "FileName",
-            value: "Drehbuch zum letzten treffen",
-          },
-          description: "Drehbuch zum letzten treffen",
-          goals: "Drehbuch zum letzten treffen",
-          elementCategory: "text",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "45",
-            },
-          ],
-          learningSpaceParentId: 4,
-        },
-        {
-          id: 15,
-          identifier: {
-            type: "FileName",
-            value: "youtube-link-zeug",
-          },
-          description: "youtube-link-zeug",
-          goals: "youtube-link-zeug",
-          elementCategory: "video",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "50",
-            },
-          ],
-          learningSpaceParentId: 4,
-        },
-        {
-          id: 16,
-          identifier: {
-            type: "FileName",
-            value: "trickfilm autos",
-          },
-          description: "trickfilm autos",
-          goals: "trickfilm autos",
-          elementCategory: "image",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "25",
-            },
-          ],
-          learningSpaceParentId: 4,
-        },
-        {
-          id: 17,
-          identifier: {
-            type: "FileName",
-            value: "Sample PDF",
-          },
-          description: "PDF datei",
-          goals: "PDF datei",
+          elementName: "pdf",
+          elementDescription: "pdfbes",
+          elementGoals: ["pdfgoa"],
           elementCategory: "pdf",
-          learningElementValueList: [
-            {
-              type: "Points",
-              value: "25",
-            },
-          ],
-          learningSpaceParentId: 1,
+          elementFileType: "pdf",
+          elementMaxScore: 1,
+        },
+        {
+          elementId: 3,
+          lmsElementIdentifier: {
+            type: "moduleName",
+            value: "text",
+          },
+          elementName: "text",
+          elementDescription: "textbesch",
+          elementGoals: ["textgoa"],
+          elementCategory: "text",
+          elementFileType: "txt",
+          elementMaxScore: 1,
+        },
+        {
+          elementId: 4,
+          lmsElementIdentifier: {
+            type: "moduleName",
+            value: "yturl",
+          },
+          elementName: "yturl",
+          elementDescription: "yt",
+          elementGoals: ["goals"],
+          elementCategory: "video",
+          elementFileType: "url",
+          elementMaxScore: 2,
+        },
+        {
+          elementId: 5,
+          lmsElementIdentifier: {
+            type: "moduleName",
+            value: "h5pfile",
+          },
+          elementName: "h5pfile",
+          elementDescription: "h5pbes",
+          elementGoals: ["h5pgoals"],
+          elementCategory: "h5p",
+          elementFileType: "h5p",
+          elementMaxScore: 2,
         },
       ],
     },
