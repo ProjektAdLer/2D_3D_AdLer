@@ -1,6 +1,7 @@
-import { IAsyncUsecase } from "../../Abstract/IAsyncUsecase";
+import { IInternalAsyncUsecase } from "../../Abstract/IInternalAsyncUsecase";
+
 export default interface IGetElementSourceUseCase
-  extends IAsyncUsecase<
+  extends IInternalAsyncUsecase<
     {
       elementID: number;
       courseID: number;

@@ -39,7 +39,7 @@ describe("GetElementSource", () => {
       "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel"
     );
 
-    const result = await systemUnderTest.executeAsync({
+    const result = await systemUnderTest.internalExecuteAsync({
       elementID: 1,
       courseID: 1,
     });

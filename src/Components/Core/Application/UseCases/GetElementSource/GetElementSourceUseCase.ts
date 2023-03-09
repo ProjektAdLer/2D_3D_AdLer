@@ -16,7 +16,7 @@ export default class GetElementSourceUseCase
     private backend: IBackendAdapter
   ) {}
 
-  async executeAsync(data: {
+  async internalExecuteAsync(data: {
     elementID: number;
     courseID: number;
   }): Promise<string> {
