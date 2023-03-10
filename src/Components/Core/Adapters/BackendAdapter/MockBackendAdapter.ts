@@ -58,7 +58,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
         },
         {
           elementId: 2,
-          success: false,
+          success: true,
         },
         {
           elementId: 3,
@@ -66,6 +66,10 @@ export default class MockBackendAdapter implements IBackendAdapter {
         },
         {
           elementId: 4,
+          success: false,
+        },
+        {
+          elementId: 5,
           success: false,
         },
       ],
@@ -256,26 +260,26 @@ export default class MockBackendAdapter implements IBackendAdapter {
   bigWorld: IDSL = {
     fileVersion: "0.3",
     amgVersion: "0.3.2",
-    author: "wAuthors",
+    author: "Au Thor",
     language: "de",
     world: {
-      worldName: "worldName",
-      worldDescription: "wDescription",
-      worldGoals: ["wGoal"],
+      worldName: "Big World",
+      worldDescription: "Beschr. der großen Welt",
+      worldGoals: ["Weltziel 1/3", "Weltziel 2/3", "Weltziel 3/3"],
       topics: [
         {
           topicId: 1,
-          topicName: "tbereich1",
+          topicName: "Topic 1",
           topicContents: [1, 2],
         },
         {
           topicId: 2,
-          topicName: "tbereich2",
+          topicName: "Topic 2",
           topicContents: [3],
         },
         {
           topicId: 3,
-          topicName: "tbereich3",
+          topicName: "Topic 3",
           topicContents: [4, 5],
         },
       ],
@@ -300,7 +304,6 @@ export default class MockBackendAdapter implements IBackendAdapter {
         },
         {
           spaceId: 3,
-
           spaceName: "raum3",
           spaceDescription: "rdescription3",
           spaceGoals: ["rgoals3"],
@@ -310,7 +313,6 @@ export default class MockBackendAdapter implements IBackendAdapter {
         },
         {
           spaceId: 4,
-
           spaceName: "raum4",
           spaceDescription: "rdescription4",
           spaceGoals: ["rgoals4"],
@@ -320,7 +322,6 @@ export default class MockBackendAdapter implements IBackendAdapter {
         },
         {
           spaceId: 5,
-
           spaceName: "raum5",
           spaceDescription: "rdescription5",
           spaceGoals: ["rgoals5"],
@@ -332,7 +333,6 @@ export default class MockBackendAdapter implements IBackendAdapter {
       elements: [
         {
           elementId: 1,
-
           elementName: "bild",
           elementDescription: "bildbesch",
           elementGoals: ["bildgoals"],
@@ -342,7 +342,6 @@ export default class MockBackendAdapter implements IBackendAdapter {
         },
         {
           elementId: 2,
-
           elementName: "pdf",
           elementDescription: "pdfbes",
           elementGoals: ["pdfgoa"],
@@ -352,7 +351,6 @@ export default class MockBackendAdapter implements IBackendAdapter {
         },
         {
           elementId: 3,
-
           elementName: "text",
           elementDescription: "textbesch",
           elementGoals: ["textgoa"],
@@ -362,7 +360,6 @@ export default class MockBackendAdapter implements IBackendAdapter {
         },
         {
           elementId: 4,
-
           elementName: "yturl",
           elementDescription: "yt",
           elementGoals: ["goals"],
@@ -372,7 +369,6 @@ export default class MockBackendAdapter implements IBackendAdapter {
         },
         {
           elementId: 5,
-
           elementName: "h5pfile",
           elementDescription: "h5pbes",
           elementGoals: ["h5pgoals"],
