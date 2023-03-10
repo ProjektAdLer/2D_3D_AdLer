@@ -126,7 +126,7 @@ describe("MockBackendAdapter", () => {
         },
         {
           elementId: 2,
-          success: false,
+          success: true,
         },
         {
           elementId: 3,
@@ -134,6 +134,10 @@ describe("MockBackendAdapter", () => {
         },
         {
           elementId: 4,
+          success: false,
+        },
+        {
+          elementId: 5,
           success: false,
         },
       ],
