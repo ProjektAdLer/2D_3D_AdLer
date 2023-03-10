@@ -7,6 +7,7 @@ import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import ElementTO from "../../DataTransferObjects/ElementTO";
 import type IGetElementSourceUseCase from "../GetElementSource/IGetElementSourceUseCase";
+import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 import ILoadElementUseCase from "./ILoadElementUseCase";
 
 @injectable()
@@ -17,10 +18,18 @@ export default class LoadElementUseCase implements ILoadElementUseCase {
     @inject(PORT_TYPES.IWorldPort)
     private worldPort: IWorldPort,
     @inject(USECASE_TYPES.IGetElementSourceUseCase)
-    private getElementSourceUseCase: IGetElementSourceUseCase
+    private getElementSourceUseCase: IGetElementSourceUseCase,
+    @inject(USECASE_TYPES.IGetUserLocationUseCase)
+    private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
 
   async executeAsync(elementID: number): Promise<void> {
+    // get the current user location
+    const userLocation = this.getUserLocationUseCase.execute();
+    if (!userLocation.worldID || !userLocation.spaceID) {
+      throw new Error(`User is not in a space!`);
+    }
+
     const elementEntity =
       this.entityContainer.filterEntitiesOfType<ElementEntity>(
         ElementEntity,

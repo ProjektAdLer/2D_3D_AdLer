@@ -8,10 +8,13 @@ import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE
 import LoadElementUseCase from "../../../../Core/Application/UseCases/LoadElement/LoadElementUseCase";
 import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import IGetElementSourceUseCase from "../../../../Core/Application/UseCases/GetElementSource/IGetElementSourceUseCase";
+import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
+import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
 
 const worldPortMock = mock<IWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const getElementSourceUseCaseMock = mock<IGetElementSourceUseCase>();
+const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 
 describe("LoadElementUseCase", () => {
   let systemUnderTest: LoadElementUseCase;
@@ -27,6 +30,9 @@ describe("LoadElementUseCase", () => {
     CoreDIContainer.rebind(
       USECASE_TYPES.IGetElementSourceUseCase
     ).toConstantValue(getElementSourceUseCaseMock);
+    CoreDIContainer.rebind(
+      USECASE_TYPES.IGetUserLocationUseCase
+    ).toConstantValue(getUserLocationUseCaseMock);
   });
 
   beforeEach(() => {
@@ -38,6 +44,10 @@ describe("LoadElementUseCase", () => {
   });
 
   test("calls executeAsync on the GetElementUseCase", () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
         id: 1,
@@ -52,6 +62,10 @@ describe("LoadElementUseCase", () => {
   });
 
   test("calls the port with the TO", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
       {
         id: 1,
@@ -69,6 +83,10 @@ describe("LoadElementUseCase", () => {
   });
 
   test("should throw, if the Element is not found", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 
     await expect(systemUnderTest.executeAsync(2)).rejects.toThrow(
@@ -77,6 +95,10 @@ describe("LoadElementUseCase", () => {
   });
 
   test("should throw, if more than one Element is found", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
         id: 1,
@@ -91,40 +113,11 @@ describe("LoadElementUseCase", () => {
     );
   });
 
-  test.skip("should throw, if the course is not found", async () => {
-    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
-      {
-        id: 1,
-      },
-    ]);
-    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
-
-    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
-      "Could not find any world"
-    );
-  });
-
-  test.skip("should throw, if more than one course is found", async () => {
-    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
-      {
-        id: 1,
-      },
-    ]);
-    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
-      {
-        id: 1,
-      },
-      {
-        id: 1,
-      },
-    ]);
-
-    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
-      "Found more than one world"
-    );
-  });
-
   test("element filter callback should return a boolean", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
     let filterReturn: boolean;
     entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
       <T>(
@@ -144,30 +137,6 @@ describe("LoadElementUseCase", () => {
         worldID: 1,
       },
     ]);
-
-    await systemUnderTest.executeAsync(1);
-
-    // @ts-ignore TS does not know about the mock
-    expect(filterReturn).toBe(false);
-  });
-
-  test.skip("world filter callback should return a boolean", async () => {
-    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
-      {
-        id: 1,
-      },
-    ]);
-
-    let filterReturn: boolean;
-    entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
-      <T>(
-        entityType: ConstructorReference<T>,
-        filter: (entity: T) => boolean
-      ) => {
-        filterReturn = filter(new entityType());
-        return [{}];
-      }
-    );
 
     await systemUnderTest.executeAsync(1);
 
