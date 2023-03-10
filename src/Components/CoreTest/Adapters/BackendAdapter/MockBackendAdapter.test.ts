@@ -79,11 +79,11 @@ describe("MockBackendAdapter", () => {
       courses: [
         {
           courseID: 1,
-          courseName: "Testkurs 1",
+          courseName: "Small World",
         },
         {
           courseID: 2,
-          courseName: "Testkurs 2",
+          courseName: "Big World",
         },
       ],
     });
@@ -105,14 +105,14 @@ describe("MockBackendAdapter", () => {
     "should get Element Source",
     async (element) => {
       await expect(
-        systemUnderTest.getElementSource("token", element)
+        systemUnderTest.getElementSource("token", element, 1)
       ).resolves.toEqual(expect.any(String));
     }
   );
 
   test("should throw when souce of invalid element is requested", () => {
     async (element) => {
-      await expect(systemUnderTest.getElementSource("token", 55)).toThrow();
+      await expect(systemUnderTest.getElementSource("token", 55, 1)).toThrow();
     };
   });
 

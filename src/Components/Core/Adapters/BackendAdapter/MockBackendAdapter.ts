@@ -72,29 +72,40 @@ export default class MockBackendAdapter implements IBackendAdapter {
     });
   }
 
-  getElementSource(userToken: string, elementID: number): Promise<string> {
-    const elementType = this.worldTO.world.elements.find(
+  getElementSource(
+    userToken: string,
+    elementID: ComponentID,
+    courseID: ComponentID
+  ): Promise<string> {
+    const worldToUse = courseID === 1 ? this.smallWorld : this.bigWorld;
+    const elementType = worldToUse.world.elements.find(
       (element) => element.elementId === elementID
     )!.elementCategory;
 
     switch (elementType) {
       case "h5p":
-        return Promise.resolve(
-          "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel"
+        return Promise.reject(
+          "H5P elements are not supported in the backend mock."
         );
       case "video":
         return Promise.resolve("https://youtu.be/8X4cDoM3R7E?t=189");
       case "image":
         return Promise.resolve(
-          "https://filesamples.com/samples/image/jpeg/sample_640%C3%97426.jpeg"
+          "http://" +
+            window.location.host +
+            "/SampleLearningElementData/testBild.png"
         );
       case "text":
         return Promise.resolve(
-          "https://filesamples.com/samples/document/txt/sample3.txt"
+          "http://" +
+            window.location.host +
+            "/SampleLearningElementData/testText.txt"
         );
       case "pdf":
         return Promise.resolve(
-          "https://www.africau.edu/images/default/sample.pdf"
+          "http://" +
+            window.location.host +
+            "/SampleLearningElementData/testPDF.pdf"
         );
       /* istanbul ignore next */
       default:
@@ -111,11 +122,11 @@ export default class MockBackendAdapter implements IBackendAdapter {
       courses: [
         {
           courseID: 1,
-          courseName: "Testkurs 1",
+          courseName: "Small World",
         },
         {
           courseID: 2,
-          courseName: "Testkurs 2",
+          courseName: "Big World",
         },
       ],
     });
@@ -137,10 +148,112 @@ export default class MockBackendAdapter implements IBackendAdapter {
     userToken,
     worldID,
   }: getWorldDataParams): Promise<Partial<BackendWorldTO>> {
-    return Promise.resolve(BackendAdapterUtils.parseDSL(this.worldTO));
+    return Promise.resolve(
+      BackendAdapterUtils.parseDSL(
+        worldID === 1 ? this.smallWorld : this.bigWorld
+      )
+    );
   }
 
-  worldTO: IDSL = {
+  smallWorld: IDSL = {
+    fileVersion: "0.3",
+    amgVersion: "0.3.2",
+    author: "Ricardo ",
+    language: "de",
+    world: {
+      worldName: "Small World",
+      worldDescription:
+        "Small World with only one topic and one space but with all elements",
+      worldGoals: ["Weltziel 1/3", "Weltziel 2/3", "Weltziel 3/3"],
+      topics: [
+        {
+          topicId: 7,
+          topicName: "Themenbereich der kleinen Welt",
+          topicContents: [6],
+        },
+      ],
+      spaces: [
+        {
+          spaceId: 6,
+          spaceName: "Raum der kleinen Welt",
+          spaceDescription: "Raumbeschreibung der kleinen Welt",
+          spaceContents: [1, 2, 3, 4, 5],
+          requiredPointsToComplete: 1,
+          requiredSpacesToEnter: "",
+          spaceGoals: ["Raumziel 1/3", "Raumziel 2/3", "Raumziel 3/3"],
+        },
+      ],
+      elements: [
+        {
+          elementId: 1,
+          elementName: "Ein Text-Lernelement",
+          elementCategory: "text",
+          elementDescription: "Beschreibung des Text-Lernelements",
+          elementGoals: [
+            "Elementziel 1/3",
+            "Elementziel 2/3",
+            "Elementziel 3/3",
+          ],
+          elementFileType: "text",
+          elementMaxScore: 1,
+        },
+        {
+          elementId: 2,
+          elementName: "Ein Video-Lernelement",
+          elementCategory: "video",
+          elementDescription: "Beschreibung des Video-Lernelements",
+          elementGoals: [
+            "Elementziel 1/3",
+            "Elementziel 2/3",
+            "Elementziel 3/3",
+          ],
+          elementFileType: "video",
+          elementMaxScore: 1,
+        },
+        {
+          elementId: 3,
+          elementName: "Ein Bild-Lernelement",
+          elementCategory: "image",
+          elementDescription: "Beschreibung des Bild-Lernelements",
+          elementGoals: [
+            "Elementziel 1/3",
+            "Elementziel 2/3",
+            "Elementziel 3/3",
+          ],
+          elementFileType: "image",
+          elementMaxScore: 1,
+        },
+        {
+          elementId: 4,
+          elementName: "Ein PDF-Lernelement",
+          elementCategory: "pdf",
+          elementDescription: "Beschreibung des PDF-Lernelements",
+          elementGoals: [
+            "Elementziel 1/3",
+            "Elementziel 2/3",
+            "Elementziel 3/3",
+          ],
+          elementFileType: "pdf",
+          elementMaxScore: 1,
+        },
+        {
+          elementId: 5,
+          elementName: "Ein H5P-Lernelement",
+          elementCategory: "h5p",
+          elementDescription: "Beschreibung des H5P-Lernelements",
+          elementGoals: [
+            "Elementziel 1/3",
+            "Elementziel 2/3",
+            "Elementziel 3/3",
+          ],
+          elementFileType: "h5p",
+          elementMaxScore: 1,
+        },
+      ],
+    },
+  };
+
+  bigWorld: IDSL = {
     fileVersion: "0.3",
     amgVersion: "0.3.2",
     author: "wAuthors",

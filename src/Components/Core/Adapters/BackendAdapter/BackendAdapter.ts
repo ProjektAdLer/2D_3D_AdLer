@@ -153,8 +153,6 @@ export default class BackendAdapter implements IBackendAdapter {
     return response.data.isSuceess;
   }
 
-  // DONE_______________________________________________
-
   async getWorldStatus(
     userToken: string,
     worldID: number
