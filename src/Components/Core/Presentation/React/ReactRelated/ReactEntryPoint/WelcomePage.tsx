@@ -29,7 +29,7 @@ export default function WelcomePage() {
           />
         </div>
 
-        <p className="self-end col-span-5 col-start-1 row-start-5 p-2 text-xs text-center text-adlerdarkblue rounded-lg lg:text-md lg:font-semibold font-regular justify-self-center bg-[#e9f2FA]">
+        <p className="self-end col-span-5 col-start-1 row-start-5 p-2 text-xs text-center rounded-lg text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center">
           © Projekt AdLer, Technische Hochschule Aschaffenburg, Hochschule für
           angewandte Wissenschaften Kempten, ZFH - Zentrum für Fernstudien im
           Hochschulverbund
