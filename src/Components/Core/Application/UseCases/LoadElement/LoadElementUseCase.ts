@@ -33,7 +33,7 @@ export default class LoadElementUseCase implements ILoadElementUseCase {
     const elementEntity =
       this.entityContainer.filterEntitiesOfType<ElementEntity>(
         ElementEntity,
-        (e) => e.id === elementID
+        (e) => e.id === elementID && e.parentWorldID === userLocation.worldID
       );
 
     if (elementEntity.length === 0)
