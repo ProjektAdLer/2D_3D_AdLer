@@ -8,12 +8,12 @@ import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-log
 export default function WelcomePage() {
   return (
     <React.Fragment>
-      <div className="grid h-0 min-h-screen grid-cols-5 grid-rows-5 p-6 bg-adlerblue-200">
+      <div className="grid h-0 min-h-screen grid-cols-5 grid-rows-5 p-6 bg-gradient-to-br from-[#a1c8e5] to-[#e2eaf2]">
         <div className="z-10 col-start-1 row-start-1">
           <LoginComponent />
         </div>
 
-        <p className="self-center col-span-2 col-start-4 row-start-1 p-2 text-lg font-extrabold text-white rounded-lg lg:col-span-3 lg:col-start-2 lg:row-start-1 lg:p-5 justify-self-center bg-adlergold text-shadow lg:text-4xl">
+        <p className="self-center col-span-2 col-start-4 row-start-1 p-2 text-lg font-extrabold font-[roboto] text-white rounded-lg lg:col-span-3 lg:col-start-2 xl:col-start-1 xl:col-span-5 lg:row-start-1 lg:p-5 justify-self-center text-shadow lg:text-4xl 2xl:text-8xl">
           Willkommen bei AdLer!
         </p>
 
@@ -21,7 +21,7 @@ export default function WelcomePage() {
           <WorldMenuButton />
         </div>
 
-        <div className="flex items-center justify-center col-span-3 col-start-1 row-span-4 row-start-1 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-3">
+        <div className="flex items-center justify-center col-span-3 col-start-1 row-span-4 row-start-1 transition duration-100 ease-in-out hover:scale-110 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-3">
           <img
             className="w-56 max-h-full m-4 lg:w-3/6"
             src={logo}
@@ -29,7 +29,7 @@ export default function WelcomePage() {
           />
         </div>
 
-        <p className="self-end col-span-5 col-start-1 row-start-5 p-2 text-xs text-center text-black rounded-lg lg:text-md lg:font-semibold font-regular justify-self-center bg-adlergold">
+        <p className="self-end col-span-5 col-start-1 row-start-5 p-2 text-xs text-center text-adlerdarkblue rounded-lg lg:text-md lg:font-semibold font-regular justify-self-center bg-[#e9f2FA]">
           © Projekt AdLer, Technische Hochschule Aschaffenburg, Hochschule für
           angewandte Wissenschaften Kempten, ZFH - Zentrum für Fernstudien im
           Hochschulverbund

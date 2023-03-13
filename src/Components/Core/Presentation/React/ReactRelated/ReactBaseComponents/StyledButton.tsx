@@ -17,9 +17,9 @@ export default function StyledButton({
 }: React.DetailedHTMLProps<ButtonProps, HTMLButtonElement>) {
   const buttonConfig = {
     // Background Colors
-    default: "bg-adlerblue",
-    success: "bg-adlergreen",
-    pressed: "bg-buttonpressedblue",
+    default: "bg-[#e9f2FA]",
+    success: "bg-gradient-to-br from-adlergreen",
+    pressed: "bg-gradient-to-br from-[#8f9399]",
     locked: "bg-adlergrey-200",
 
     // Shapes
@@ -34,12 +34,12 @@ export default function StyledButton({
       className={
         className +
         " " +
-        `flex items-center text-sm font-black  rounded-lg hover:cursor-pointer lg:text-xl active:border-transparent border-adlerdarkblue ${
+        `flex items-center text-sm rounded-lg hover:cursor-pointer visited:border-[#8f9399] lg:text-xl active:border-transparent border-[#cfd8e5] ${
           disabled
             ? "text-adlergrey-300 bg-adlerdeactivated hover:cursor-default"
             : buttonConfig[color] +
               " " +
-              "text-white text-shadow border-b-4 border-r-4"
+              "text-[#172d4d] active:border-transparent active:translate-x-[2px] active:translate-y-[2px] font-[roboto] border-b-4 border-r-4"
         } ${buttonConfig[shape]}`
       }
       {...rest}

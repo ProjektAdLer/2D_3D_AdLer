@@ -1,7 +1,7 @@
 import React from "react";
 
 interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-  textColor?: "white" | "black";
+  textColor?: "white" | "black" | "darkblue";
 }
 
 export default function StyledContainer({
@@ -14,6 +14,7 @@ export default function StyledContainer({
     // Text Colors
     black: "text-adlertextgrey",
     white: "text-white",
+    darkblue: "text-adlerdarkblue",
   };
 
   return (
