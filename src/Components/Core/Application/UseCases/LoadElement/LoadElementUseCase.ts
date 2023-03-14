@@ -37,9 +37,13 @@ export default class LoadElementUseCase implements ILoadElementUseCase {
       );
 
     if (elementEntity.length === 0)
-      throw new Error(`Could not find element with id ${elementID}`);
+      throw new Error(
+        `Could not find element with ID ${elementID} in world ${userLocation.worldID}`
+      );
     else if (elementEntity.length > 1)
-      throw new Error(`Found more than one element with id ${elementID}`);
+      throw new Error(
+        `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`
+      );
 
     let elementTO = this.toTO(elementEntity[0]);
 
