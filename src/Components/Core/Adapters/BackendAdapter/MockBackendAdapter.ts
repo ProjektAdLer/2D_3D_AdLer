@@ -264,7 +264,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
     language: "de",
     world: {
       worldName: "Big World",
-      worldDescription: "Beschr. der großen Welt",
+      worldDescription: "Beschreibung der großen Welt",
       worldGoals: ["Weltziel 1/3", "Weltziel 2/3", "Weltziel 3/3"],
       topics: [
         {
@@ -286,16 +286,20 @@ export default class MockBackendAdapter implements IBackendAdapter {
       spaces: [
         {
           spaceId: 1,
-          spaceName: "raum1",
-          spaceDescription: "rdescription1",
-          spaceGoals: ["rgoals1"],
+          spaceName: "Abgeschlossener Raum mit einem Lernelement",
+          spaceDescription: "Ja, der Name dieses Raumes ist extrea so lang",
+          spaceGoals: [
+            "Ziel des abgeschlossenen Raumes 1/3",
+            "Ziel des abgeschlossenen Raumes 2/3",
+            "Ziel des abgeschlossenen Raumes 3/3",
+          ],
           spaceContents: [1],
           requiredPointsToComplete: 1,
           requiredSpacesToEnter: "",
         },
         {
           spaceId: 2,
-          spaceName: "raum2",
+          spaceName: "Lernraum 2",
           spaceDescription: "rdescription2",
           spaceGoals: ["rgoals2"],
           spaceContents: [2],
@@ -304,7 +308,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
         },
         {
           spaceId: 3,
-          spaceName: "raum3",
+          spaceName: "Lernraum 3",
           spaceDescription: "rdescription3",
           spaceGoals: ["rgoals3"],
           spaceContents: [3],
@@ -313,7 +317,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
         },
         {
           spaceId: 4,
-          spaceName: "raum4",
+          spaceName: "  Lernraum 4",
           spaceDescription: "rdescription4",
           spaceGoals: ["rgoals4"],
           spaceContents: [4],
@@ -322,7 +326,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
         },
         {
           spaceId: 5,
-          spaceName: "raum5",
+          spaceName: "Der lernraum 5",
           spaceDescription: "rdescription5",
           spaceGoals: ["rgoals5"],
           spaceContents: [5],
@@ -333,45 +337,66 @@ export default class MockBackendAdapter implements IBackendAdapter {
       elements: [
         {
           elementId: 1,
-          elementName: "bild",
-          elementDescription: "bildbesch",
-          elementGoals: ["bildgoals"],
+          elementName: "Bild welches in Raum 1 abgeschlossen ist",
+          elementDescription:
+            "Beschreibung des in Raum 1 abgeschlossenen Bild-Lernelements",
+          elementGoals: [
+            "Ziel des Bild-Lernelements 1/3",
+            "Ziel des Bild-Lernelements 2/3",
+            "Ziel des Bild-Lernelements 3/3",
+          ],
           elementCategory: "image",
           elementFileType: "png",
           elementMaxScore: 1,
         },
         {
           elementId: 2,
-          elementName: "pdf",
-          elementDescription: "pdfbes",
-          elementGoals: ["pdfgoa"],
+          elementName: "Ein PDF-Lernelement",
+          elementDescription: "Beschreibung des PDF-Lernelements",
+          elementGoals: [
+            "Elementziel 1/3",
+            "Elementziel 2/3",
+            "Elementziel 3/3",
+          ],
           elementCategory: "pdf",
           elementFileType: "pdf",
           elementMaxScore: 1,
         },
         {
           elementId: 3,
-          elementName: "text",
-          elementDescription: "textbesch",
-          elementGoals: ["textgoa"],
+          elementName: "Ein Text-Lernelement",
+          elementDescription: "Beschreibung des Text-Lernelements",
+          elementGoals: [
+            "Elementziel 1/3",
+            "Elementziel 2/3",
+            "Elementziel 3/3",
+          ],
           elementCategory: "text",
           elementFileType: "txt",
           elementMaxScore: 1,
         },
         {
           elementId: 4,
-          elementName: "yturl",
-          elementDescription: "yt",
-          elementGoals: ["goals"],
+          elementName: "Ein Video-Lernelement",
+          elementDescription: " Beschreibung des Video-Lernelements",
+          elementGoals: [
+            "Elementziel 1/3",
+            "Elementziel 2/3",
+            "Elementziel 3/3",
+          ],
           elementCategory: "video",
           elementFileType: "url",
           elementMaxScore: 2,
         },
         {
           elementId: 5,
-          elementName: "h5pfile",
-          elementDescription: "h5pbes",
-          elementGoals: ["h5pgoals"],
+          elementName: "Ein H5P-Lernelement",
+          elementDescription: "Beschreibung des H5P-Lernelements",
+          elementGoals: [
+            "Elementziel 1/3",
+            "Elementziel 2/3",
+            "Elementziel 3/3",
+          ],
           elementCategory: "h5p",
           elementFileType: "h5p",
           elementMaxScore: 2,
