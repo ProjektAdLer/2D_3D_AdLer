@@ -28,11 +28,11 @@ function SpaceSelectionNode(props: Partial<SpaceSelectionNodeType>) {
       )}
       {props.data?.input === "and" && (
         <Handle
-          className="w-12 h-6 -top-5 rounded-md bg-white border-1 border-slate-500 bottom-4"
+          className="flex items-center justify-center w-12 h-6 border-b-2 border-r-2 rounded-md bg-adlergold -top-5 border-adlerdarkblue"
           type="target"
           position={Position.Top}
         >
-          <p className="text-center align-middle">und</p>
+          <p className="font-[roboto] uppercase text-adlerdarkblue">und</p>
         </Handle>
       )}
 
