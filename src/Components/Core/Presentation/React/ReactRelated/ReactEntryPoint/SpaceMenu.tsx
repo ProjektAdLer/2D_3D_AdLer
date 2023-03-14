@@ -20,7 +20,7 @@ export default function SpaceMenu() {
         </div>
 
         <div className="grid h-0 min-h-full grid-cols-2 grid-rows-1 grow lg:rounded-lg">
-          <div className="flex justify-center col-start-1 p-2 border-r-2 lg:p-8 border-adlerdarkblue">
+          <div className="flex justify-center col-start-1 p-2 border-r-2 border-dotted lg:pb-8 border-adlerdarkblue">
             <SpaceSelection />
           </div>
 
