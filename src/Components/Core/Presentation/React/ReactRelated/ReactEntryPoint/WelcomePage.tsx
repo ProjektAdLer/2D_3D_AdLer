@@ -21,7 +21,7 @@ export default function WelcomePage() {
           <WorldMenuButton />
         </div>
 
-        <div className="flex items-center justify-center col-span-3 col-start-1 row-span-4 row-start-1 transition duration-100 ease-in-out hover:scale-110 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-3">
+        <div className="flex items-center justify-center col-span-3 col-start-1 row-span-4 row-start-1 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-3">
           <img
             className="w-56 max-h-full m-4 lg:w-3/6"
             src={logo}

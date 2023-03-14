@@ -15,7 +15,7 @@ export default function SpaceMenu() {
           <WorldCompletionModal />
         </div>
 
-        <div className="self-center w-full p-2">
+        <div className="self-center w-full p-2 font-semibold border-b-2 border-dotted border-adlerdarkblue">
           <MenuHeaderBar />
         </div>
 

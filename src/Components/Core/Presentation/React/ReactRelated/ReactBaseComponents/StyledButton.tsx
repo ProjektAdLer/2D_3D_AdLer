@@ -34,12 +34,12 @@ export default function StyledButton({
       className={
         className +
         " " +
-        `flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl active:border-transparent ${
+        `flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl active:translate-x-2 active:translate-y-2 active:border-none ${
           disabled
             ? "text-adlergrey-300 bg-adlerdeactivated hover:cursor-default"
             : buttonConfig[color] +
               " " +
-              "text-[#172d4d] active:border-transparent active:translate-x-[2px] active:translate-y-[2px] font-[roboto] border-b-4 border-r-4"
+              "text-[#172d4d] active:border-transparent active:translate-x-[2px] active:translate-y-[2px] font-[roboto] border-t-1 border-l-1 border-b-4 border-r-4"
         } ${buttonConfig[shape]}`
       }
       {...rest}
