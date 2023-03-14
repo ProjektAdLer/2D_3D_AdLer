@@ -50,7 +50,7 @@ export default class MockBackendAdapter implements IBackendAdapter {
     worldID: ComponentID
   ): Promise<BackendWorldStatusTO> {
     return Promise.resolve({
-      worldId: 1,
+      worldId: worldID,
       elements: [
         {
           elementId: 1,
