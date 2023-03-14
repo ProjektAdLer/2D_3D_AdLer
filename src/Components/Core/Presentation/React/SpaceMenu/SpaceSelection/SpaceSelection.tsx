@@ -38,9 +38,9 @@ export default function SpaceSelection() {
   if (!viewModel || !controller) return null;
 
   return (
-    <div style={{ width: "100%" }}>
+    <div className="w-full">
       {
-        <div className="flex flex-row">
+        <div className="flex flex-row ml-4">
           <p className="mr-3 text-md font-[roboto] font-medium text-adlerdarkblue">
             Liste
           </p>
@@ -53,7 +53,7 @@ export default function SpaceSelection() {
               value=""
               className="sr-only peer"
             ></input>
-            <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:adlerdarkblue"></div>
+            <div className="w-11 h-6 bg-adlerdarkblue rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:adlerdarkblue"></div>
             <span className="ml-3 text-md font-[roboto] font-medium text-adlerdarkblue">
               Graph
             </span>
