@@ -1,6 +1,6 @@
 import { mock } from "jest-mock-extended";
-import { logger } from "../../../../Lib/Logger";
-import AbstractPort from "../../../Core/Ports/AbstractPort/AbstractPort";
+import { logger } from "../../../../../Lib/Logger";
+import AbstractPort from "../../../../Core/Application/Ports/AbstractPort/AbstractPort";
 
 jest.mock("src/Lib/Logger");
 

@@ -1,9 +1,9 @@
-import UIPort from "../../../Core/Ports/UIPort/UIPort";
-import CoreDIContainer from "../../../../Components/Core/DependencyInjection/CoreDIContainer";
+import UIPort from "../../../../Core/Application/Ports/UIPort/UIPort";
+import CoreDIContainer from "../../../../../Components/Core/DependencyInjection/CoreDIContainer";
 import { mock } from "jest-mock-extended";
 import IUIAdapter, {
   NotificationType,
-} from "../../../Core/Ports/UIPort/IUIAdapter";
+} from "../../../../Core/Application/Ports/UIPort/IUIAdapter";
 
 describe("UIPort", () => {
   let systemUnderTest: UIPort;
