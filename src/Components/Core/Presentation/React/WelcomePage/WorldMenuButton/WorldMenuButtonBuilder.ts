@@ -4,8 +4,8 @@ import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import WorldMenuButtonViewModel from "./WorldMenuButtonViewModel";
 import WorldMenuButtonPresenter from "./WorldMenuButtonPresenter";
-import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
-import ILMSAdapter from "src/Components/Core/Ports/LMSPort/ILMSAdapter";
+import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
+import ILMSAdapter from "src/Components/Core/Application/Ports/LMSPort/ILMSAdapter";
 
 @injectable()
 export default class WorldMenuButtonBuilder extends PresentationBuilder<

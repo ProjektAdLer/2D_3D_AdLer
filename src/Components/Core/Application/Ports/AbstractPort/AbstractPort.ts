@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { logger } from "src/Lib/Logger";
-import { IAbstractPort } from "../../Application/Ports/Interfaces/IAbstractPort";
+import { IAbstractPort } from "../Interfaces/IAbstractPort";
 
 @injectable()
 /**

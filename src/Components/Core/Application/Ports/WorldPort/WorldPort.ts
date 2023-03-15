@@ -1,14 +1,14 @@
 import { injectable } from "inversify";
-import IWorldPort from "../../Application/Ports/Interfaces/IWorldPort";
-import WorldTO from "../../Application/DataTransferObjects/WorldTO";
+import IWorldPort from "../Interfaces/IWorldPort";
+import WorldTO from "../../DataTransferObjects/WorldTO";
 import AbstractPort from "../AbstractPort/AbstractPort";
 import IWorldAdapter from "./IWorldAdapter";
-import ElementTO from "../../Application/DataTransferObjects/ElementTO";
-import SpaceScoreTO from "../../Application/DataTransferObjects/SpaceScoreTO";
-import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
-import UserWorldsTO from "../../Application/DataTransferObjects/UserWorldsTO";
-import { ComponentID } from "../../Domain/Types/EntityTypes";
-import WorldScoreTO from "../../Application/DataTransferObjects/WorldScoreTO";
+import ElementTO from "../../DataTransferObjects/ElementTO";
+import SpaceScoreTO from "../../DataTransferObjects/SpaceScoreTO";
+import SpaceTO from "../../DataTransferObjects/SpaceTO";
+import UserWorldsTO from "../../DataTransferObjects/UserWorldsTO";
+import { ComponentID } from "../../../Domain/Types/EntityTypes";
+import WorldScoreTO from "../../DataTransferObjects/WorldScoreTO";
 
 @injectable()
 export default class WorldPort

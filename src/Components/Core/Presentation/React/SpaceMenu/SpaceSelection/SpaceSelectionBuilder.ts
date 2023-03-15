@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
-import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
-import IWorldAdapter from "src/Components/Core/Ports/WorldPort/IWorldAdapter";
+import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
+import IWorldAdapter from "src/Components/Core/Application/Ports/WorldPort/IWorldAdapter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";

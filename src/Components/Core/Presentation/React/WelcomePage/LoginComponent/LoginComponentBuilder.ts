@@ -7,8 +7,8 @@ import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
 import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
-import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
-import ILMSAdapter from "src/Components/Core/Ports/LMSPort/ILMSAdapter";
+import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
+import ILMSAdapter from "src/Components/Core/Application/Ports/LMSPort/ILMSAdapter";
 
 @injectable()
 export default class LoginComponentBuilder extends PresentationBuilder<

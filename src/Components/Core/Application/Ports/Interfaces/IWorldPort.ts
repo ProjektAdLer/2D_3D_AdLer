@@ -6,7 +6,7 @@ import WorldTO from "../../DataTransferObjects/WorldTO";
 import WorldScoreTO from "../../DataTransferObjects/WorldScoreTO";
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { IAbstractPort } from "./IAbstractPort";
-import IWorldAdapter from "../../../Ports/WorldPort/IWorldAdapter";
+import IWorldAdapter from "../WorldPort/IWorldAdapter";
 
 export default interface IWorldPort extends IAbstractPort<IWorldAdapter> {
   //userWorlds
