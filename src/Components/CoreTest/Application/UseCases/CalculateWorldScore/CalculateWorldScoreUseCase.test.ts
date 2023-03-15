@@ -4,18 +4,15 @@ import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityCon
 import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import { filterEntitiesOfTypeMockImplUtil } from "../../../TestUtils";
-import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import CalculateWorldScoreUseCase from "../../../../Core/Application/UseCases/CalculateWorldScore/CalculateWorldScoreUseCase";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import ICalculateSpaceScoreUseCase, {
-  IInternalCalculateSpaceScoreUseCase,
-} from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
+import { IInternalCalculateSpaceScoreUseCase } from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import WorldEntity from "../../../../Core/Domain/Entities/WorldEntity";
 import WorldScoreTO from "../../../../Core/Application/DataTransferObjects/WorldScoreTO";
 import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
-import { IInternalSynchronousUsecase } from "../../../../Core/Application/Abstract/IInternalSynchronousUsecase";
 import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/SpaceScoreTO";
+import IWorldPort from "../../../../Core/Application/Ports/Interfaces/IWorldPort";
 
 const worldPortMock = mock<IWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();

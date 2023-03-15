@@ -1,7 +1,8 @@
 import { mock } from "jest-mock-extended";
 import { logger } from "../../../../../Lib/Logger";
-import IBackendAdapter from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
+import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
+import IWorldPort from "../../../../Core/Application/Ports/Interfaces/IWorldPort";
 import ICalculateSpaceScoreUseCase, {
   IInternalCalculateSpaceScoreUseCase,
 } from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
@@ -16,7 +17,6 @@ import ElementEntity from "../../../../Core/Domain/Entities/ElementEntity";
 import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
-import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 
 jest.mock("../../../../../Lib/Logger");
 
@@ -67,7 +67,7 @@ const setupEntityContainerMock = (
 };
 
 // create BackendAdapter mock
-const backendAdapterMock = mock<IBackendAdapter>();
+const backendAdapterMock = mock<IBackendPort>();
 
 // create other mocks
 const worldPortMock = mock<IWorldPort>();

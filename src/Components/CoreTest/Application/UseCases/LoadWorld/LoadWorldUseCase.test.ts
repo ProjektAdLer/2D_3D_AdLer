@@ -4,9 +4,7 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
-import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
-import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import ElementEntity from "../../../../Core/Domain/Entities/ElementEntity";
 import WorldEntity from "../../../../Core/Domain/Entities/WorldEntity";
@@ -17,7 +15,9 @@ import { IInternalCalculateSpaceScoreUseCase } from "../../../../Core/Applicatio
 import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/SpaceScoreTO";
 import BackendWorldStatusTO from "../../../../Core/Application/DataTransferObjects/BackendWorldStatusTO";
 import ISetUserLocationUseCase from "../../../../Core/Application/UseCases/SetUserLocation/ISetUserLocationUseCase";
-import IBackendPort from "../../../../Core/Adapters/BackendAdapter/IBackendPort";
+import IUIPort from "../../../../Core/Application/Ports/Interfaces/IUIPort";
+import IWorldPort from "../../../../Core/Application/Ports/Interfaces/IWorldPort";
+import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 
 const backendMock = mock<IBackendPort>();
 const worldPortMock = mock<IWorldPort>();

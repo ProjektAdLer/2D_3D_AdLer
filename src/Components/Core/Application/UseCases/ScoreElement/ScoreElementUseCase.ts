@@ -4,7 +4,7 @@ import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import IScoreElementUseCase from "./IScoreElementUseCase";
-import type IBackendAdapter from "../../Ports/Interfaces/IBackendPort";
+import type IBackendPort from "../../Ports/Interfaces/IBackendPort";
 import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
@@ -20,7 +20,7 @@ export default class ScoreElementUseCase implements IScoreElementUseCase {
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter)
-    private backendAdapter: IBackendAdapter,
+    private backendAdapter: IBackendPort,
     @inject(USECASE_TYPES.ICalculateWorldScoreUseCase)
     private calculateWorldScoreUseCase: ICalculateWorldScoreUseCase,
     @inject(PORT_TYPES.IWorldPort)

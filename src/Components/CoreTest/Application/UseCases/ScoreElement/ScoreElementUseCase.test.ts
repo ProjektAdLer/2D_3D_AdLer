@@ -4,21 +4,21 @@ import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityCon
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import { mock } from "jest-mock-extended";
-import IBackendAdapter from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 import ElementEntity from "../../../../Core/Domain/Entities/ElementEntity";
 import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import { logger } from "../../../../../Lib/Logger";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import ICalculateWorldScoreUseCase from "../../../../Core/Application/UseCases/CalculateWorldScore/ICalculateWorldScoreUseCase";
 import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
+import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
+import IWorldPort from "../../../../Core/Application/Ports/Interfaces/IWorldPort";
 
 jest.mock("../../../../../Lib/Logger");
 
 const entityContainerMock = mock<IEntityContainer>();
-const backendAdapterMock = mock<IBackendAdapter>();
+const backendAdapterMock = mock<IBackendPort>();
 const CalculateWorldScoreMock = mock<ICalculateWorldScoreUseCase>();
 const worldPortMock = mock<IWorldPort>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
@@ -94,7 +94,7 @@ describe("ScoreElementUseCase", () => {
     CoreDIContainer.rebind<IEntityContainer>(
       CORE_TYPES.IEntityContainer
     ).toConstantValue(entityContainerMock);
-    CoreDIContainer.rebind<IBackendAdapter>(
+    CoreDIContainer.rebind<IBackendPort>(
       CORE_TYPES.IBackendAdapter
     ).toConstantValue(backendAdapterMock);
     CoreDIContainer.rebind<ICalculateWorldScoreUseCase>(

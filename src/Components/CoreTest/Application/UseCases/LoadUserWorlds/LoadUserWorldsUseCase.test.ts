@@ -4,12 +4,12 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import { mock } from "jest-mock-extended";
-import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
-import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
-import IBackend from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
+import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
+import IWorldPort from "../../../../Core/Application/Ports/Interfaces/IWorldPort";
+import IUIPort from "../../../../Core/Application/Ports/Interfaces/IUIPort";
 
-const backendMock = mock<IBackend>();
+const backendMock = mock<IBackendPort>();
 const worldPortMock = mock<IWorldPort>();
 const uiPortMock = mock<IUIPort>();
 const entityContainerMock = mock<IEntityContainer>();
@@ -120,7 +120,7 @@ describe("LoadUserWorldsUseCase", () => {
         userToken: "token",
         username: "username",
         availableWorlds: [],
-      } as UserDataEntity,
+      } as Partial<UserDataEntity>,
     ]);
 
     // mock backend response

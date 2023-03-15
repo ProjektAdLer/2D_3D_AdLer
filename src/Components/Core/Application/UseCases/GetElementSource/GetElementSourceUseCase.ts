@@ -1,5 +1,5 @@
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
-import type IBackendAdapter from "src/Components/Core/Application/Ports/Interfaces/IBackendPort";
+import type IBackendPort from "src/Components/Core/Application/Ports/Interfaces/IBackendPort";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import IGetElementSourceUseCase from "./IGetElementSourceUseCase";
@@ -13,7 +13,7 @@ export default class GetElementSourceUseCase
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter)
-    private backend: IBackendAdapter
+    private backend: IBackendPort
   ) {}
 
   async internalExecuteAsync(data: {

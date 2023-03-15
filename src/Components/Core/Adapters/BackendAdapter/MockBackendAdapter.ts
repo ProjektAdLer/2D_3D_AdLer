@@ -6,7 +6,7 @@ import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 import BackendWorldStatusTO from "../../Application/DataTransferObjects/BackendWorldStatusTO";
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import BackendAdapterUtils from "./BackendAdapterUtils";
-import IBackendAdapter, {
+import IBackendPort, {
   getWorldDataParams,
   ScoreH5PElementRequest,
 } from "../../Application/Ports/Interfaces/IBackendPort";
@@ -14,7 +14,7 @@ import IDSL from "./Types/IDSL";
 import UserCredentials from "./Types/UserCredentials";
 
 @injectable()
-export default class MockBackendAdapter implements IBackendAdapter {
+export default class MockBackendAdapter implements IBackendPort {
   deletePlayerData(userToken: string): Promise<boolean> {
     throw new Error(
       "Method not implemented, since we are in the Fake Backend."

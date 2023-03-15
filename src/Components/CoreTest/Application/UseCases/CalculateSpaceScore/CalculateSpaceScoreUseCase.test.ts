@@ -6,11 +6,11 @@ import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import CalculateSpaceScoreUseCase from "../../../../Core/Application/UseCases/CalculateSpaceScore/CalculateSpaceScoreUseCase";
 import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import { filterEntitiesOfTypeMockImplUtil } from "../../../TestUtils";
-import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/SpaceScoreTO";
 import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
+import IWorldPort from "../../../../Core/Application/Ports/Interfaces/IWorldPort";
 
 const worldPortMock = mock<IWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();

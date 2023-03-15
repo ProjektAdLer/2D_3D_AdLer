@@ -1,5 +1,6 @@
 import { mock } from "jest-mock-extended";
 import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/SpaceScoreTO";
+import IWorldPort from "../../../../Core/Application/Ports/Interfaces/IWorldPort";
 import ICalculateSpaceScoreUseCase, {
   IInternalCalculateSpaceScoreUseCase,
 } from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
@@ -13,7 +14,6 @@ import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE
 import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import WorldEntity from "../../../../Core/Domain/Entities/WorldEntity";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
-import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import { ConstructorReference } from "../../../../Core/Types/EntityManagerTypes";
 
 const entityContainerMock = mock<IEntityContainer>();

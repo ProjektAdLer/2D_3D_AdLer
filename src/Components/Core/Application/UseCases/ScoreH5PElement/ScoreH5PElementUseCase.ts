@@ -1,6 +1,6 @@
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { inject, injectable } from "inversify";
-import type IBackendAdapter from "src/Components/Core/Application/Ports/Interfaces/IBackendPort";
+import type IBackendPort from "src/Components/Core/Application/Ports/Interfaces/IBackendPort";
 import ElementEntity from "src/Components/Core/Domain/Entities/ElementEntity";
 import SpaceEntity from "src/Components/Core/Domain/Entities/SpaceEntity";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
@@ -17,7 +17,7 @@ import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUse
 @injectable()
 export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
   constructor(
-    @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendAdapter,
+    @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendPort,
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(PORT_TYPES.IWorldPort) private worldPort: IWorldPort,

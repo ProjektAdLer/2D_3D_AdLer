@@ -6,7 +6,7 @@ import ReactEntry from "../Presentation/React/ReactRelated/ReactEntryPoint/React
 import IViewModelControllerProvider from "../Presentation/ViewModelProvider/IViewModelControllerProvider";
 import ViewModelControllerProvider from "../Presentation/ViewModelProvider/ViewModelControllerProvider";
 import CORE_TYPES from "./CoreTypes";
-import IBackendAdapter from "../Application/Ports/Interfaces/IBackendPort";
+import IBackendPort from "../Application/Ports/Interfaces/IBackendPort";
 import BackendAdapter from "../Adapters/BackendAdapter/BackendAdapter";
 import { config } from "src/config";
 import MockBackendAdapter from "../Adapters/BackendAdapter/MockBackendAdapter";
@@ -26,11 +26,11 @@ const infrastructureDIContainer = new ContainerModule((bind) => {
 
   // Backend Adapter
   if (config.useFakeBackend) {
-    bind<IBackendAdapter>(CORE_TYPES.IBackendAdapter)
+    bind<IBackendPort>(CORE_TYPES.IBackendAdapter)
       .to(MockBackendAdapter)
       .inSingletonScope();
   } else {
-    bind<IBackendAdapter>(CORE_TYPES.IBackendAdapter)
+    bind<IBackendPort>(CORE_TYPES.IBackendAdapter)
       .to(BackendAdapter)
       .inSingletonScope();
   }

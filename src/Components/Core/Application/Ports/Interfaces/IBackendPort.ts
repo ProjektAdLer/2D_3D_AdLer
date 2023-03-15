@@ -20,7 +20,7 @@ export type ScoreH5PElementRequest = {
   rawH5PEvent: XAPiEvent;
 };
 
-export default interface IBackendAdapter {
+export default interface IBackendPort {
   deletePlayerData(userToken: string): Promise<boolean>;
 
   updatePlayerData(

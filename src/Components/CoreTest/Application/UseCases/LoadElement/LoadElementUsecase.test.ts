@@ -6,10 +6,10 @@ import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import LoadElementUseCase from "../../../../Core/Application/UseCases/LoadElement/LoadElementUseCase";
-import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import IGetElementSourceUseCase from "../../../../Core/Application/UseCases/GetElementSource/IGetElementSourceUseCase";
 import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
+import IWorldPort from "../../../../Core/Application/Ports/Interfaces/IWorldPort";
 
 const worldPortMock = mock<IWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();

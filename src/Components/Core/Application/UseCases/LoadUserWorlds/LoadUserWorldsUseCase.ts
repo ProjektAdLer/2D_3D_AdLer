@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import type IBackendAdapter from "src/Components/Core/Application/Ports/Interfaces/IBackendPort";
+import type IBackendPort from "src/Components/Core/Application/Ports/Interfaces/IBackendPort";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import type IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
@@ -23,7 +23,7 @@ export default class LoadUserWorldsUseCase implements ILoadUserWorldsUseCase {
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter)
-    private backendAdapter: IBackendAdapter,
+    private backendAdapter: IBackendPort,
     @inject(PORT_TYPES.IUIPort)
     private uiPort: IUIPort
   ) {}

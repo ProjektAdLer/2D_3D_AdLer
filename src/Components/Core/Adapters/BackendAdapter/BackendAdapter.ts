@@ -2,7 +2,7 @@ import axios from "axios";
 import { injectable } from "inversify";
 import { config } from "../../../../config";
 import IDSL from "./Types/IDSL";
-import IBackendAdapter, {
+import IBackendPort, {
   ScoreH5PElementRequest,
   getWorldDataParams,
 } from "../../Application/Ports/Interfaces/IBackendPort";
@@ -18,7 +18,7 @@ import BackendAdapterUtils from "./BackendAdapterUtils";
 import { getCoursesAvailableForUserResponse } from "./Types/getCoursesAvailableForUserResponse";
 
 @injectable()
-export default class BackendAdapter implements IBackendAdapter {
+export default class BackendAdapter implements IBackendPort {
   async deletePlayerData(userToken: string): Promise<boolean> {
     const isSuceess = await axios.delete<boolean>(
       config.serverURL + "/PlayerData",
