@@ -13,7 +13,7 @@ export default function WelcomePage() {
           <LoginComponent />
         </div>
 
-        <p className="self-center col-span-2 col-start-4 row-start-1 p-2 text-lg font-extrabold font-[roboto] text-white rounded-lg lg:col-span-3 lg:col-start-2 xl:col-start-1 xl:col-span-5 lg:row-start-1 lg:p-5 justify-self-center text-shadow lg:text-4xl 2xl:text-8xl">
+        <p className="self-center col-span-2 col-start-4 row-start-1 p-2 text-lg font-extrabold font-[roboto] text-adlerdarkblue rounded-lg lg:col-span-3 lg:col-start-2 xl:col-start-1 xl:col-span-5 lg:row-start-1 lg:p-5 justify-self-center lg:text-4xl 2xl:text-8xl">
           Willkommen bei AdLer!
         </p>
 

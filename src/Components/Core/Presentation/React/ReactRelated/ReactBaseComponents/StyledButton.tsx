@@ -18,9 +18,9 @@ export default function StyledButton({
   const buttonConfig = {
     // Background Colors
     default: "bg-[#e9f2FA] border-adlerdarkblue",
-    success: "bg-gradient-to-br from-adlergreen",
+    success: "bg-gradient-to-br from-adlergreen border-adlerdarkblue",
     pressed: "bg-[#45a0e5] border-adlerdarkblue",
-    locked: "[#b9bfc6]",
+    locked: "bg-[#b9bfc6] border-adlerdarkblue",
 
     // Shapes
     square:
