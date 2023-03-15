@@ -1,4 +1,4 @@
-import { NotificationType } from "../../../../Ports/UIPort/IUIAdapter";
+import { NotificationType } from "../../../../Application/Ports/UIPort/IUIAdapter";
 import INotificationManagerPresenter from "./INotificationManagerPresenter";
 import NotificationManagerViewModel from "./NotificationManagerViewModel";
 

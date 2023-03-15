@@ -8,7 +8,7 @@ import ElementView from "./ElementView";
 import ElementViewModel from "./ElementViewModel";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 
 @injectable()
 export default class ElementBuilder extends PresentationBuilder<

@@ -13,7 +13,7 @@ import ElementTO from "src/Components/Core/Application/DataTransferObjects/Eleme
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import ElementView from "../Elements/ElementView";
 import SpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/SpaceScoreTO";
-import IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 
 @injectable()
 export default class SpacePresenter implements ISpacePresenter {

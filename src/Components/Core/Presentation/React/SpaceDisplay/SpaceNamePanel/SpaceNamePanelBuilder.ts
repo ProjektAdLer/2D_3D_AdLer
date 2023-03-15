@@ -5,7 +5,7 @@ import SpaceNamePanelPresenter from "./SpaceNamePanelPresenter";
 import SpaceNamePanelViewModel from "./SpaceNamePanelViewModel";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
-import IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 import ISpaceNamePanelController from "./ISpaceNamePanelController";
 import ISpaceNamePanelPresenter from "./ISpaceNamePanelPresenter";
 

@@ -5,7 +5,7 @@ import ElementsDropdownPresenter from "./ElementsDropdownPresenter";
 import ElementsDropdownViewModel from "./ElementsDropdownViewModel";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
-import IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 
 @injectable()
 export default class ElementsDropdownBuilder extends PresentationBuilder<

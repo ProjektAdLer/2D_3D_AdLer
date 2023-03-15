@@ -9,7 +9,7 @@ import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 import ISpaceView from "./ISpaceView";
 import ISpacePresenter from "./ISpacePresenter";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
-import IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 
 @injectable()
 export default class SpaceBuilder extends PresentationBuilder<

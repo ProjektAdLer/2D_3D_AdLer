@@ -1,5 +1,5 @@
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
-import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendPort";
+import type IBackendAdapter from "src/Components/Core/Application/Ports/Interfaces/IBackendPort";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import IGetElementSourceUseCase from "./IGetElementSourceUseCase";

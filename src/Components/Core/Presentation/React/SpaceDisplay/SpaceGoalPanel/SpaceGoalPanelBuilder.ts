@@ -5,7 +5,7 @@ import SpaceGoalPanelPresenter from "./SpaceGoalPanelPresenter";
 import SpaceGoalPanelViewModel from "./SpaceGoalPanelViewModel";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
-import IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 import ISpaceGoalPanelPresenter from "./ISpaceGoalPanelPresenter";
 import ISpaceGoalPanelController from "./ISpaceGoalPanelController";
 

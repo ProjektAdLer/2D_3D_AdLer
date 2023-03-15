@@ -1,11 +1,11 @@
-import { ComponentID } from "../../Domain/Types/EntityTypes";
-import UserCredentials from "./Types/UserCredentials";
-import { XAPiEvent } from "../../Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
-import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
-import BackendWorldStatusTO from "../../Application/DataTransferObjects/BackendWorldStatusTO";
-import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
-import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
-import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
+import { ComponentID } from "../../../Domain/Types/EntityTypes";
+import UserCredentials from "../../../Adapters/BackendAdapter/Types/UserCredentials";
+import { XAPiEvent } from "../../UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
+import CourseListTO from "../../DataTransferObjects/CourseListTO";
+import BackendWorldStatusTO from "../../DataTransferObjects/BackendWorldStatusTO";
+import ElementScoreTO from "../../DataTransferObjects/ElementScoreTO";
+import PlayerDataTO from "../../DataTransferObjects/PlayerDataTO";
+import BackendWorldTO from "../../DataTransferObjects/BackendWorldTO";
 
 // TODO: Restructure in meaningful types
 export type getWorldDataParams = {

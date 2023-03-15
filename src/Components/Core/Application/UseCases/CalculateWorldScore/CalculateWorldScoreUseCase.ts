@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import type IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";

@@ -1,13 +1,13 @@
-import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
-import WorldPort from "../../../Core/Ports/WorldPort/WorldPort";
-import SpaceTO from "../../../Core/Application/DataTransferObjects/SpaceTO";
-import WorldTO from "../../../Core/Application/DataTransferObjects/WorldTO";
+import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
+import WorldPort from "../../../../Core/Application/Ports/WorldPort/WorldPort";
+import SpaceTO from "../../../../Core/Application/DataTransferObjects/SpaceTO";
+import WorldTO from "../../../../Core/Application/DataTransferObjects/WorldTO";
 import { mock } from "jest-mock-extended";
-import IWorldAdapter from "../../../Core/Ports/WorldPort/IWorldAdapter";
-import SpaceScoreTO from "../../../Core/Application/DataTransferObjects/SpaceScoreTO";
-import ElementTO from "../../../Core/Application/DataTransferObjects/ElementTO";
-import UserWorldsTO from "../../../Core/Application/DataTransferObjects/UserWorldsTO";
-import WorldScoreTO from "../../../Core/Application/DataTransferObjects/WorldScoreTO";
+import IWorldAdapter from "../../../../Core/Application/Ports/WorldPort/IWorldAdapter";
+import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/SpaceScoreTO";
+import ElementTO from "../../../../Core/Application/DataTransferObjects/ElementTO";
+import UserWorldsTO from "../../../../Core/Application/DataTransferObjects/UserWorldsTO";
+import WorldScoreTO from "../../../../Core/Application/DataTransferObjects/WorldScoreTO";
 
 describe("WorldPort", () => {
   let systemUnderTest: WorldPort;
