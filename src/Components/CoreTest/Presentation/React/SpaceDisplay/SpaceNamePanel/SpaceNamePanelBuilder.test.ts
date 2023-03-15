@@ -1,13 +1,10 @@
 import { mock } from "jest-mock-extended";
+import IWorldPort from "../../../../../Core/Application/Ports/Interfaces/IWorldPort";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import IWorldPort from "../../../../../Core/Ports/WorldPort/IWorldPort";
 import SpaceNamePanelBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/SpaceNamePanel/SpaceNamePanelBuilder";
 import SpaceNamePanelPresenter from "../../../../../Core/Presentation/React/SpaceDisplay/SpaceNamePanel/SpaceNamePanelPresenter";
-import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
-const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
 const worldPortMock = mock<IWorldPort>();
 
 describe("SpaceNamePanelBuilder", () => {

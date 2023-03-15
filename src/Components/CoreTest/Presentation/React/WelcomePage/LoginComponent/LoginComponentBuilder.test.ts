@@ -1,15 +1,13 @@
 import { mock } from "jest-mock-extended";
+import ILMSPort from "../../../../../Core/Application/Ports/Interfaces/ILMSPort";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import ILMSPort from "../../../../../Core/Ports/LMSPort/ILMSPort";
 import LoginComponentBuilder from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentBuilder";
 import LoginComponentController from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentController";
 import LoginComponentPresenter from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentPresenter";
 import LoginComponentViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentViewModel";
-import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 
-const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
 const lmsPortMock = mock<ILMSPort>();
 
 describe("LoginComponentBuilder", () => {
@@ -19,9 +17,6 @@ describe("LoginComponentBuilder", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(PORT_TYPES.ILMSPort).toConstantValue(lmsPortMock);
-    CoreDIContainer.rebind(
-      CORE_TYPES.IViewModelControllerProvider
-    ).toConstantValue(viewModelControllerProviderMock);
   });
 
   beforeEach(() => {
@@ -39,14 +34,6 @@ describe("LoginComponentBuilder", () => {
     expect(systemUnderTest["controller"]).toBeDefined();
     expect(systemUnderTest["controller"]).toBeInstanceOf(
       LoginComponentController
-    );
-    expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledTimes(
-      1
-    );
-    expect(viewModelControllerProviderMock.registerTupel).toHaveBeenCalledWith(
-      systemUnderTest["viewModel"],
-      systemUnderTest["controller"],
-      LoginComponentViewModel
     );
   });
 

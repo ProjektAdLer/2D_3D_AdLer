@@ -2,7 +2,7 @@ import { mock } from "jest-mock-extended";
 import SpaceCompletionModalBuilder from "../../../../../Core/Presentation/React/SpaceDisplay/SpaceCompletionModal/SpaceCompletionModalBuilder";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import IWorldPort from "../../../../../Core/Ports/WorldPort/IWorldPort";
+import IWorldPort from "../../../../../Core/Application/Ports/Interfaces/IWorldPort";
 
 const worldPortMock = mock<IWorldPort>();
 

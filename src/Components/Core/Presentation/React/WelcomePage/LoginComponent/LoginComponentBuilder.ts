@@ -26,13 +26,6 @@ export default class LoginComponentBuilder extends PresentationBuilder<
     );
   }
 
-  override buildController(): void {
-    super.buildController();
-    CoreDIContainer.get<ViewModelControllerProvider>(
-      CORE_TYPES.IViewModelControllerProvider
-    ).registerTupel(this.viewModel, this.controller, LoginComponentViewModel);
-  }
-
   override buildPresenter(): void {
     super.buildPresenter();
     CoreDIContainer.get<AbstractPort<ILMSAdapter>>(
