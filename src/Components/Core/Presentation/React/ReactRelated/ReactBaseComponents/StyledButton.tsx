@@ -39,7 +39,7 @@ export default function StyledButton({
             ? "text-adlergrey-300 bg-adlerdeactivated hover:cursor-default"
             : buttonConfig[color] +
               " " +
-              "text-[#172d4d] active:border-transparent active:translate-x-[2px] active:translate-y-[2px] font-[roboto] border-t-1 border-l-1 border-b-4 border-r-4"
+              "text-[#172d4d] active:border-transparent active:translate-x-[2px] active:translate-y-[2px] font-[roboto] border-t-[1px] border-l-[1px] border-b-4 border-r-4"
         } ${buttonConfig[shape]}`
       }
       {...rest}
