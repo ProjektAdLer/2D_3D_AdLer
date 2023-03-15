@@ -4,7 +4,7 @@ import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import IScoreElementUseCase from "./IScoreElementUseCase";
-import type IBackendAdapter from "../../../Adapters/BackendAdapter/IBackendAdapter";
+import type IBackendAdapter from "../../../Adapters/BackendAdapter/IBackendPort";
 import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";

@@ -5,7 +5,7 @@ import IDSL from "./Types/IDSL";
 import IBackendAdapter, {
   ScoreH5PElementRequest,
   getWorldDataParams,
-} from "./IBackendAdapter";
+} from "./IBackendPort";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import BackendWorldStatusTO from "../../Application/DataTransferObjects/BackendWorldStatusTO";

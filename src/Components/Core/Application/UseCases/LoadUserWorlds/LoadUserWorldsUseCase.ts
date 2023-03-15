@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
+import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendPort";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";

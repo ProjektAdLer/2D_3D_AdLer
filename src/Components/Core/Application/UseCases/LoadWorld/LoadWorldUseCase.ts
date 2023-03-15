@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import type IBackendAdapter from "../../../Adapters/BackendAdapter/IBackendAdapter";
+import type IBackendAdapter from "../../../Adapters/BackendAdapter/IBackendPort";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";

@@ -1,6 +1,6 @@
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { inject, injectable } from "inversify";
-import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
+import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendPort";
 import ElementEntity from "src/Components/Core/Domain/Entities/ElementEntity";
 import SpaceEntity from "src/Components/Core/Domain/Entities/SpaceEntity";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";

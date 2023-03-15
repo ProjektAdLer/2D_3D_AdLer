@@ -6,7 +6,7 @@ import ReactEntry from "../Presentation/React/ReactRelated/ReactEntryPoint/React
 import IViewModelControllerProvider from "../Presentation/ViewModelProvider/IViewModelControllerProvider";
 import ViewModelControllerProvider from "../Presentation/ViewModelProvider/ViewModelControllerProvider";
 import CORE_TYPES from "./CoreTypes";
-import IBackendAdapter from "../Adapters/BackendAdapter/IBackendAdapter";
+import IBackendAdapter from "../Adapters/BackendAdapter/IBackendPort";
 import BackendAdapter from "../Adapters/BackendAdapter/BackendAdapter";
 import { config } from "src/config";
 import MockBackendAdapter from "../Adapters/BackendAdapter/MockBackendAdapter";
