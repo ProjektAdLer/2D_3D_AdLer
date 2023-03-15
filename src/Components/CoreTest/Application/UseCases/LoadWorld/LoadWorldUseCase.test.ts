@@ -32,6 +32,7 @@ const mockedGetEntitiesOfTypeUserDataReturnValue = [
   {
     isLoggedIn: true,
     userToken: "token",
+    availableWorlds: [{ worldID: 42, worldName: "world42" }],
   } as UserDataEntity,
 ];
 
@@ -120,6 +121,25 @@ describe("LoadWorldUseCase", () => {
 
     expect(uiPortMock.displayNotification).toHaveBeenCalledWith(
       "User is not logged in!",
+      "error"
+    );
+  });
+
+  test("Displays error, if World is not available", async () => {
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+      mockedGetEntitiesOfTypeUserDataReturnValue
+    );
+
+    await expect(
+      systemUnderTest.executeAsync({ worldID: 43 })
+    ).rejects.not.toBeUndefined();
+
+    expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
+      UserDataEntity
+    );
+
+    expect(uiPortMock.displayNotification).toHaveBeenCalledWith(
+      "World is not available!",
       "error"
     );
   });

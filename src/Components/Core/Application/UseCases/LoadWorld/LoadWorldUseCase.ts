@@ -49,6 +49,17 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       return Promise.reject("User is not logged in");
     }
 
+    // check if world is available to user
+    if (
+      userData[0].availableWorlds.find(
+        (world) => world.worldID === data.worldID
+      ) === undefined
+    ) {
+      this.uiPort.displayNotification("World is not available!", "error");
+      logger.error("World is not available!");
+      return Promise.reject("World is not available");
+    }
+
     // search for world entity with given ID in all world entities
     let worldEntity = this.container.filterEntitiesOfType(
       WorldEntity,
