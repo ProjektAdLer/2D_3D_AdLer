@@ -47,7 +47,7 @@ export default function SpaceDetail() {
       <div className="flex flex-row items-center justify-between p-1 pb-4 border-b border-gray-500">
         <div className="flex flex-row">
           <img src={spaceIcon} className="w-6 xl:w-8" alt="Lernraum-Icon"></img>
-          <div className="ml-2 text-lg text-white lg:text-2xl roboto-black text-shadow">
+          <div className="ml-2 text-lg text-adlerdarkblue lg:text-2xl roboto-black">
             {name}
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function SpaceDetail() {
       <div className="flex flex-col gap-2 w-[100%] overflow-auto">
         {description !== "" && (
           <div className="pb-2 border-b border-gray-500">
-            <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+            <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
               Beschreibung:
             </div>
             <div className="items-start ml-6 roboto-regular">
@@ -80,7 +80,7 @@ export default function SpaceDetail() {
         )}
         {goals !== "" && (
           <div className="pb-2 border-b border-gray-500">
-            <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+            <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
               Lernziele:
             </div>
             <div className="items-start ml-6 lg:text:lg roboto-regular">
@@ -90,7 +90,7 @@ export default function SpaceDetail() {
         )}
         {elements.length > 0 && (
           <div className="pb-2 border-b border-gray-500">
-            <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+            <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
               Lernelemente:
             </div>
             <div className="flex flex-col items-start ml-6 lg:text-lg roboto-regular">
@@ -135,7 +135,7 @@ export default function SpaceDetail() {
         {!!requiredPoints && (
           <div className="pb-2">
             <div className="flex flex-row justify-between w-full pb-2 xl:w-3/4">
-              <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+              <div className="self-center ml-2 text-lg text-adlerdarkblue roboto-black">
                 Benötigte Punkte:
               </div>
               <div className="flex flex-row items-start pb-2 ml-6 text-lg roboto-regular">
@@ -148,7 +148,7 @@ export default function SpaceDetail() {
               </div>
             </div>
             <div className="flex flex-row justify-between w-full xl:w-3/4">
-              <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+              <div className="self-center ml-2 text-lg text-adlerdarkblue roboto-black">
                 Maximal erreichbare Punkte:
               </div>
               <div className="flex flex-row items-start ml-6 text-lg roboto-regular">
@@ -167,7 +167,7 @@ export default function SpaceDetail() {
         )}
         {requirements.length > 0 && (
           <div className="pb-2 border-b border-gray-500">
-            <div className="self-center ml-2 text-lg text-white roboto-black text-shadow">
+            <div className="self-center ml-2 text-lg text-adlerdarkblue roboto-black">
               Benötigte Räume zur Freischaltung:
             </div>
             <div className="items-start ml-6 text-lg roboto-regular">
