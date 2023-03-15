@@ -1,11 +1,11 @@
 import { inject, injectable } from "inversify";
-import type IBackendAdapter from "../../../Adapters/BackendAdapter/IBackendPort";
+import type IBackendAdapter from "../../Ports/Interfaces/IBackendPort";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
-import type ILMSPort from "../../../Ports/LMSPort/ILMSPort";
-import type IUIPort from "../../../Ports/UIPort/IUIPort";
+import type ILMSPort from "../../Ports/Interfaces/ILMSPort";
+import type IUIPort from "../../Ports/Interfaces/IUIPort";
 import ILoginUseCase from "./ILoginUseCase";
 
 @injectable()

@@ -4,13 +4,13 @@ import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import IScoreElementUseCase from "./IScoreElementUseCase";
-import type IBackendAdapter from "../../../Adapters/BackendAdapter/IBackendPort";
+import type IBackendAdapter from "../../Ports/Interfaces/IBackendPort";
 import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { logger } from "../../../../../Lib/Logger";
-import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import type IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 import type ICalculateWorldScoreUseCase from "../CalculateWorldScore/ICalculateWorldScoreUseCase";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 

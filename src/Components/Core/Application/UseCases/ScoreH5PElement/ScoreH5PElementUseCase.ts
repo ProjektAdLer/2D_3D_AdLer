@@ -1,6 +1,6 @@
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { inject, injectable } from "inversify";
-import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendPort";
+import type IBackendAdapter from "src/Components/Core/Application/Ports/Interfaces/IBackendPort";
 import ElementEntity from "src/Components/Core/Domain/Entities/ElementEntity";
 import SpaceEntity from "src/Components/Core/Domain/Entities/SpaceEntity";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
@@ -10,7 +10,7 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import IScoreH5PElementUseCase, { XAPiEvent } from "./IScoreH5PElementUseCase";
-import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import type IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 import type { IInternalCalculateSpaceScoreUseCase } from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 

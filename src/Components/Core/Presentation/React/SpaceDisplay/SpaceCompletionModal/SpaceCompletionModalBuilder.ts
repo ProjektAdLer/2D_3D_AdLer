@@ -7,7 +7,7 @@ import SpaceCompletionModalViewModel from "./SpaceCompletionModalViewModel";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 
 @injectable()
 export default class SpaceCompletionModalBuilder extends PresentationBuilder<

@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import IUIPort from "./IUIPort";
+import IUIPort from "../../Application/Ports/Interfaces/IUIPort";
 import IUIAdapter, { NotificationType } from "./IUIAdapter";
 import AbstractPort from "../AbstractPort/AbstractPort";
 

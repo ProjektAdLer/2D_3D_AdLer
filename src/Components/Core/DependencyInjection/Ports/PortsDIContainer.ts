@@ -1,10 +1,10 @@
 import { ContainerModule } from "inversify";
 import IAvatarPort from "../../Application/UseCases/LoadAvatar/IAvatarPort";
-import IWorldPort from "../../Ports/WorldPort/IWorldPort";
+import IWorldPort from "../../Application/Ports/Interfaces/IWorldPort";
 import WorldPort from "../../Ports/WorldPort/WorldPort";
-import ILMSPort from "../../Ports/LMSPort/ILMSPort";
+import ILMSPort from "../../Application/Ports/Interfaces/ILMSPort";
 import LMSPort from "../../Ports/LMSPort/LMSPort";
-import IUIPort from "../../Ports/UIPort/IUIPort";
+import IUIPort from "../../Application/Ports/Interfaces/IUIPort";
 import UIPort from "../../Ports/UIPort/UIPort";
 import AvatarPresenter from "../../Presentation/Babylon/Avatar/AvatarPresenter";
 import PORT_TYPES from "./PORT_TYPES";

@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import IWorldPort from "./IWorldPort";
+import IWorldPort from "../../Application/Ports/Interfaces/IWorldPort";
 import WorldTO from "../../Application/DataTransferObjects/WorldTO";
 import AbstractPort from "../AbstractPort/AbstractPort";
 import IWorldAdapter from "./IWorldAdapter";

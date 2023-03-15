@@ -8,7 +8,7 @@ import type ILoadWorldUseCase from "../LoadWorld/ILoadWorldUseCase";
 import ILoadSpaceUseCase from "./ILoadSpaceUseCase";
 import SpaceTO from "../../DataTransferObjects/SpaceTO";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
-import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import type IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import type ISetUserLocationUseCase from "../SetUserLocation/ISetUserLocationUseCase";
 import type { IInternalCalculateSpaceScoreUseCase } from "src/Components/Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";

@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import ILMSPort from "./ILMSPort";
+import ILMSPort from "../../Application/Ports/Interfaces/ILMSPort";
 import ILMSAdapter from "./ILMSAdapter";
 import AbstractPort from "../AbstractPort/AbstractPort";
 

@@ -9,7 +9,7 @@ import BackendAdapterUtils from "./BackendAdapterUtils";
 import IBackendAdapter, {
   getWorldDataParams,
   ScoreH5PElementRequest,
-} from "./IBackendPort";
+} from "../../Application/Ports/Interfaces/IBackendPort";
 import IDSL from "./Types/IDSL";
 import UserCredentials from "./Types/UserCredentials";
 
