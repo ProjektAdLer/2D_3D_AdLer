@@ -1,1 +1,1 @@
-export type AdLerUIComponent<T> = T & { className?: string };
+export type AdLerUIComponent<T = {}> = T & { className?: string };
