@@ -1,8 +1,8 @@
 import SpaceBuilder from "../../../../Core/Presentation/Babylon/Spaces/SpaceBuilder";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import IWorldPort from "../../../../Core/Application/Ports/Interfaces/IWorldPort";
 
 jest.mock("@babylonjs/core");
 const worldPortMock = mock<IWorldPort>();

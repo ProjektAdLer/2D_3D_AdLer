@@ -4,33 +4,35 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import { mock } from "jest-mock-extended";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
-import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
-import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import ElementEntity from "../../../../Core/Domain/Entities/ElementEntity";
 import WorldEntity from "../../../../Core/Domain/Entities/WorldEntity";
 import ILoadAvatarUseCase from "../../../../Core/Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import IBackend from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
 import { minimalGetWorldDataResponse } from "../../../Adapters/BackendAdapter/BackendResponses";
-import ICalculateSpaceScoreUseCase from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
+import { IInternalCalculateSpaceScoreUseCase } from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/SpaceScoreTO";
 import BackendWorldStatusTO from "../../../../Core/Application/DataTransferObjects/BackendWorldStatusTO";
 import ISetUserLocationUseCase from "../../../../Core/Application/UseCases/SetUserLocation/ISetUserLocationUseCase";
+import IUIPort from "../../../../Core/Application/Ports/Interfaces/IUIPort";
+import IWorldPort from "../../../../Core/Application/Ports/Interfaces/IWorldPort";
+import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 
-const backendMock = mock<IBackend>();
+const backendMock = mock<IBackendPort>();
 const worldPortMock = mock<IWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const uiPortMock = mock<IUIPort>();
 const loadAvatarUsecaseMock = mock<ILoadAvatarUseCase>();
-const calculateSpaceScoreUseCaseMock = mock<ICalculateSpaceScoreUseCase>();
+const calculateSpaceScoreUseCaseMock =
+  mock<IInternalCalculateSpaceScoreUseCase>();
 const setUserLocationUseCaseMock = mock<ISetUserLocationUseCase>();
 
 const mockedGetEntitiesOfTypeUserDataReturnValue = [
   {
     isLoggedIn: true,
     userToken: "token",
+    availableWorlds: [{ worldID: 42, worldName: "world42" }],
   } as UserDataEntity,
 ];
 
@@ -123,6 +125,25 @@ describe("LoadWorldUseCase", () => {
     );
   });
 
+  test("Displays error, if World is not available", async () => {
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+      mockedGetEntitiesOfTypeUserDataReturnValue
+    );
+
+    await expect(
+      systemUnderTest.executeAsync({ worldID: 43 })
+    ).rejects.not.toBeUndefined();
+
+    expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
+      UserDataEntity
+    );
+
+    expect(uiPortMock.displayNotification).toHaveBeenCalledWith(
+      "World is not available!",
+      "error"
+    );
+  });
+
   test("doesn't load a World, if an entity is available", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
       mockedGetEntitiesOfTypeUserDataReturnValue
@@ -173,8 +194,8 @@ describe("LoadWorldUseCase", () => {
     entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
 
     backendMock.getWorldStatus.mockResolvedValue({
-      courseId: 1,
-      learningElements: [{}],
+      worldId: 1,
+      elements: [{}],
     } as BackendWorldStatusTO);
 
     await systemUnderTest.executeAsync({ worldID: 42 });
@@ -203,7 +224,7 @@ describe("LoadWorldUseCase", () => {
     ]);
 
     // mock CalculateSpaceScoreUseCase return value
-    calculateSpaceScoreUseCaseMock.execute.mockReturnValue({
+    calculateSpaceScoreUseCaseMock.internalExecute.mockReturnValue({
       currentScore: 0,
       maxScore: 0,
       requiredScore: 0,
@@ -212,7 +233,9 @@ describe("LoadWorldUseCase", () => {
 
     await systemUnderTest.executeAsync({ worldID: 42 });
 
-    expect(calculateSpaceScoreUseCaseMock.execute).toHaveBeenCalledTimes(2);
+    expect(
+      calculateSpaceScoreUseCaseMock.internalExecute
+    ).toHaveBeenCalledTimes(2);
   });
 
   test("calls SetUserLocationUseCase", async () => {
@@ -237,8 +260,8 @@ describe("LoadWorldUseCase", () => {
     entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
 
     backendMock.getWorldStatus.mockResolvedValue({
-      courseId: 1,
-      learningElements: [{}],
+      worldId: 1,
+      elements: [{}],
     } as BackendWorldStatusTO);
 
     await systemUnderTest.executeAsync({ worldID: 42 });

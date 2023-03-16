@@ -10,9 +10,6 @@ import { useEffect, useState } from "react";
 
 import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
 import worldIcon from "../../../../../../Assets/icons/14-world/world-icon-nobg.svg";
-import { useInjection } from "inversify-react";
-import ILoadWorldUseCase from "src/Components/Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
-import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
   scoreType: "space" | "world";

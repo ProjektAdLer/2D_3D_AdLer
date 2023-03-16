@@ -1,7 +1,6 @@
 import SpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/SpaceScoreTO";
 import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
 import WorldScoreTO from "src/Components/Core/Application/DataTransferObjects/WorldScoreTO";
-import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
 import IScorePanelPresenter from "./IScorePanelPresenter";
 import ScorePanelViewModel from "./ScorePanelViewModel";
 

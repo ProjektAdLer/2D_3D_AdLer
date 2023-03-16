@@ -1,25 +1,47 @@
 import { inject, injectable } from "inversify";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
-import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import type IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import SpaceScoreTO from "../../DataTransferObjects/SpaceScoreTO";
-import ICalculateSpaceScoreUseCase from "./ICalculateSpaceScoreUseCase";
+import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
+import ICalculateSpaceScoreUseCase, {
+  IInternalCalculateSpaceScoreUseCase,
+} from "./ICalculateSpaceScoreUseCase";
 
 @injectable()
 export default class CalculateSpaceScoreUseCase
-  implements ICalculateSpaceScoreUseCase
+  implements ICalculateSpaceScoreUseCase, IInternalCalculateSpaceScoreUseCase
 {
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
     private entitiyContainer: IEntityContainer,
     @inject(PORT_TYPES.IWorldPort)
-    private worldPort: IWorldPort
+    private worldPort: IWorldPort,
+    @inject(USECASE_TYPES.IGetUserLocationUseCase)
+    private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
 
-  execute(spaceID: ComponentID): SpaceScoreTO {
+  internalExecute(spaceID: ComponentID): SpaceScoreTO {
+    return this.calculateSpaceScore(spaceID);
+  }
+
+  execute(): void {
+    // get the current user location
+    const userLocation = this.getUserLocationUseCase.execute();
+    if (!userLocation.worldID || !userLocation.spaceID) {
+      throw new Error(`User is not in a space!`);
+    }
+
+    const result = this.calculateSpaceScore(userLocation.spaceID);
+
+    this.worldPort.onSpaceScored(result);
+  }
+
+  private calculateSpaceScore(spaceID: ComponentID): SpaceScoreTO {
     const spaces = this.entitiyContainer.filterEntitiesOfType<SpaceEntity>(
       SpaceEntity,
       (e) => e.id === spaceID
@@ -52,7 +74,6 @@ export default class CalculateSpaceScoreUseCase
       requiredScore: space.requiredScore,
       maxScore: maxPoints,
     };
-    this.worldPort.onSpaceScored(result);
     return result;
   }
 }

@@ -2,7 +2,7 @@ import { mock } from "jest-mock-extended";
 import { config } from "../../../../config";
 import MockBackendAdapter from "../../../Core/Adapters/BackendAdapter/MockBackendAdapter";
 import PlayerDataTO from "../../../Core/Application/DataTransferObjects/PlayerDataTO";
-import { XAPiEvent } from "../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElement";
+import { XAPiEvent } from "../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
 import {
   expectedElementTO,
   expectedSpaceTO,
@@ -79,7 +79,11 @@ describe("MockBackendAdapter", () => {
       courses: [
         {
           courseID: 1,
-          courseName: "Testkurs",
+          courseName: "Small World",
+        },
+        {
+          courseID: 2,
+          courseName: "Big World",
         },
       ],
     });
@@ -101,36 +105,40 @@ describe("MockBackendAdapter", () => {
     "should get Element Source",
     async (element) => {
       await expect(
-        systemUnderTest.getElementSource("token", element)
+        systemUnderTest.getElementSource("token", element, 1)
       ).resolves.toEqual(expect.any(String));
     }
   );
 
   test("should throw when souce of invalid element is requested", () => {
     async (element) => {
-      await expect(systemUnderTest.getElementSource("token", 55)).toThrow();
+      await expect(systemUnderTest.getElementSource("token", 55, 1)).toThrow();
     };
   });
 
   test("should get World Status", async () => {
     await expect(systemUnderTest.getWorldStatus("token", 1)).resolves.toEqual({
-      courseId: 1,
-      learningElements: [
+      worldId: 1,
+      elements: [
         {
           elementId: 1,
-          successss: true,
+          success: true,
         },
         {
           elementId: 2,
-          successss: false,
+          success: true,
         },
         {
           elementId: 3,
-          successss: false,
+          success: false,
         },
         {
           elementId: 4,
-          successss: false,
+          success: false,
+        },
+        {
+          elementId: 5,
+          success: false,
         },
       ],
     });
@@ -139,7 +147,7 @@ describe("MockBackendAdapter", () => {
   test("should get Element Score", async () => {
     await expect(systemUnderTest.getElementScore("token", 1)).resolves.toEqual({
       elementID: 1,
-      successss: true,
+      success: true,
     });
   });
 

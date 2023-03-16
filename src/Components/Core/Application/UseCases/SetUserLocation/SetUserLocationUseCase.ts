@@ -26,5 +26,7 @@ export default class SetUserLocationUseCase implements ISetUserLocationUseCase {
 
     if (data.spaceID) userDataEntity.currentSpaceID = data.spaceID;
     else userDataEntity.currentSpaceID = undefined;
+
+    logger.log("User location set to: ", data);
   }
 }

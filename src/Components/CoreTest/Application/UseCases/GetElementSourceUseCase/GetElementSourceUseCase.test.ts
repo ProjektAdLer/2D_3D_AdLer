@@ -1,12 +1,12 @@
 import { mock } from "jest-mock-extended";
-import IBackendAdapter from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
 import GetElementSourceUseCase from "../../../../Core/Application/UseCases/GetElementSource/GetElementSourceUseCase";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
+import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 
 const entityContainerMock = mock<IEntityContainer>();
-const backendMock = mock<IBackendAdapter>();
+const backendMock = mock<IBackendPort>();
 
 describe("GetElementSource", () => {
   let systemUnderTest: GetElementSourceUseCase;
@@ -17,7 +17,7 @@ describe("GetElementSource", () => {
     CoreDIContainer.bind<IEntityContainer>(
       CORE_TYPES.IEntityContainer
     ).toConstantValue(entityContainerMock);
-    CoreDIContainer.bind<IBackendAdapter>(
+    CoreDIContainer.bind<IBackendPort>(
       CORE_TYPES.IBackendAdapter
     ).toConstantValue(backendMock);
 
@@ -39,7 +39,7 @@ describe("GetElementSource", () => {
       "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel"
     );
 
-    const result = await systemUnderTest.executeAsync({
+    const result = await systemUnderTest.internalExecuteAsync({
       elementID: 1,
       courseID: 1,
     });

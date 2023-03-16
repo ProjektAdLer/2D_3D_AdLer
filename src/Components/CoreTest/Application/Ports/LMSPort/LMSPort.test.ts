@@ -1,7 +1,7 @@
 import { mock } from "jest-mock-extended";
-import LMSPort from "../../../Core/Ports/LMSPort/LMSPort";
-import LoginButtonPresenter from "../../../Core/Presentation/React/WelcomePage/LoginButton/LoginButtonPresenter";
-import WorldMenuButtonPresenter from "../../../Core/Presentation/React/WelcomePage/WorldMenuButton/WorldMenuButtonPresenter";
+import LMSPort from "../../../../Core/Application/Ports/LMSPort/LMSPort";
+import LoginButtonPresenter from "../../../../Core/Presentation/React/WelcomePage/LoginComponent/ILoginComponentPresenter";
+import WorldMenuButtonPresenter from "../../../../Core/Presentation/React/WelcomePage/WorldMenuButton/WorldMenuButtonPresenter";
 
 describe("LMSPort", () => {
   let systemUnderTest: LMSPort;

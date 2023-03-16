@@ -35,14 +35,12 @@ describe("ElementModalController", () => {
 
   test("scoreElement calls the ScoreElementUseCase", async () => {
     viewModel.type.Value = ElementTypes.image;
+    viewModel.id.Value = 1;
 
-    await systemUnderTest.scoreElement(1, 1);
+    await systemUnderTest.scoreElement();
 
     expect(scoreElementUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
-    expect(scoreElementUseCaseMock.executeAsync).toHaveBeenCalledWith({
-      elementID: 1,
-      worldID: 1,
-    });
+    expect(scoreElementUseCaseMock.executeAsync).toHaveBeenCalledWith(1);
   });
 
   test("should handle a XAPI call with a statement", async () => {

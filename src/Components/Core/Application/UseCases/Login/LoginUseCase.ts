@@ -1,11 +1,11 @@
 import { inject, injectable } from "inversify";
-import type IBackendAdapter from "../../../Adapters/BackendAdapter/IBackendAdapter";
+import type IBackendPort from "../../Ports/Interfaces/IBackendPort";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
-import type ILMSPort from "../../../Ports/LMSPort/ILMSPort";
-import type IUIPort from "../../../Ports/UIPort/IUIPort";
+import type ILMSPort from "../../Ports/Interfaces/ILMSPort";
+import type IUIPort from "../../Ports/Interfaces/IUIPort";
 import ILoginUseCase from "./ILoginUseCase";
 
 @injectable()
@@ -13,7 +13,7 @@ export default class LoginUseCase implements ILoginUseCase {
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
-    @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendAdapter,
+    @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendPort,
     @inject(PORT_TYPES.ILMSPort) private lmsPort: ILMSPort,
     @inject(PORT_TYPES.IUIPort) private uiPort: IUIPort
   ) {}

@@ -1,13 +1,10 @@
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import ILMSPort from "../../../../../Core/Ports/LMSPort/ILMSPort";
-import IViewModelControllerProvider from "../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 import WorldMenuButtonBuilder from "../../../../../Core/Presentation/React/WelcomePage/WorldMenuButton/WorldMenuButtonBuilder";
 import WorldMenuButtonPresenter from "../../../../../Core/Presentation/React/WelcomePage/WorldMenuButton/WorldMenuButtonPresenter";
+import ILMSPort from "../../../../../Core/Application/Ports/Interfaces/ILMSPort";
 
-const viewModelControllerProviderMock = mock<IViewModelControllerProvider>();
 const lmsPortMock = mock<ILMSPort>();
 
 describe("WorldMenuButtonBuilder", () => {
@@ -17,9 +14,6 @@ describe("WorldMenuButtonBuilder", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(PORT_TYPES.ILMSPort).toConstantValue(lmsPortMock);
-    CoreDIContainer.rebind(
-      CORE_TYPES.IViewModelControllerProvider
-    ).toConstantValue(viewModelControllerProviderMock);
   });
 
   beforeEach(() => {

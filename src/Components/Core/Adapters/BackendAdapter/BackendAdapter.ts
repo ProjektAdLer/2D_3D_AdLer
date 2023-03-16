@@ -2,10 +2,10 @@ import axios from "axios";
 import { injectable } from "inversify";
 import { config } from "../../../../config";
 import IDSL from "./Types/IDSL";
-import IBackendAdapter, {
+import IBackendPort, {
   ScoreH5PElementRequest,
   getWorldDataParams,
-} from "./IBackendAdapter";
+} from "../../Application/Ports/Interfaces/IBackendPort";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import BackendWorldStatusTO from "../../Application/DataTransferObjects/BackendWorldStatusTO";
@@ -18,7 +18,7 @@ import BackendAdapterUtils from "./BackendAdapterUtils";
 import { getCoursesAvailableForUserResponse } from "./Types/getCoursesAvailableForUserResponse";
 
 @injectable()
-export default class BackendAdapter implements IBackendAdapter {
+export default class BackendAdapter implements IBackendPort {
   async deletePlayerData(userToken: string): Promise<boolean> {
     const isSuceess = await axios.delete<boolean>(
       config.serverURL + "/PlayerData",
@@ -71,27 +71,11 @@ export default class BackendAdapter implements IBackendAdapter {
   ): Promise<ElementScoreTO> {
     const resp = await axios.get<ElementScoreTO>(
       config.serverURL +
-        "/LearningElements/Course/" +
+        "/Elements/World/" +
         courseID +
         "/Element/" +
         elementID +
         "/Score",
-      {
-        headers: {
-          token: userToken,
-        },
-      }
-    );
-
-    return resp.data;
-  }
-
-  async getWorldStatus(
-    userToken: string,
-    worldID: number
-  ): Promise<BackendWorldStatusTO> {
-    const resp = await axios.get<BackendWorldStatusTO>(
-      config.serverURL + "/Courses/" + worldID + "/status",
       {
         headers: {
           token: userToken,
@@ -110,7 +94,7 @@ export default class BackendAdapter implements IBackendAdapter {
     return axios
       .get<{ filePath: string }>(
         config.serverURL +
-          "/LearningElements/FilePath/Course/" +
+          "/Elements/FilePath/World/" +
           courseID +
           "/Element/" +
           elementID,
@@ -128,7 +112,7 @@ export default class BackendAdapter implements IBackendAdapter {
       isSuceess: true;
     }>(
       config.serverURL +
-        "/LearningElements/Course/" +
+        "/Elements/World/" +
         data.courseID +
         "/Element/" +
         data.h5pID,
@@ -145,44 +129,6 @@ export default class BackendAdapter implements IBackendAdapter {
     return response.data.isSuceess;
   }
 
-  async getCoursesAvailableForUser(userToken: string) {
-    const response = await axios
-      .get<getCoursesAvailableForUserResponse>(config.serverURL + "/Courses", {
-        params: {
-          limitToEnrolled: false,
-        },
-        headers: {
-          token: userToken,
-        },
-      })
-      .then((response) =>
-        response.data.courses.map((course) => ({
-          courseID: course.courseId,
-          courseName: course.courseName,
-        }))
-      );
-
-    const courseListTO = new CourseListTO();
-    courseListTO.courses = response;
-    return courseListTO;
-  }
-
-  async getWorldData({
-    userToken,
-    worldID,
-  }: getWorldDataParams): Promise<BackendWorldTO> {
-    const response = await axios.get<IDSL>(
-      config.serverURL + "/Courses/" + worldID,
-      {
-        headers: {
-          token: userToken,
-        },
-      }
-    );
-
-    return BackendAdapterUtils.parseDSL(response.data);
-  }
-
   async scoreElement(
     userToken: string,
     elementID: ComponentID,
@@ -192,7 +138,7 @@ export default class BackendAdapter implements IBackendAdapter {
       isSuceess: boolean;
     }>(
       config.serverURL +
-        "/LearningElements/Course/" +
+        "/Elements/World/" +
         courseID +
         "/Element/" +
         elementID,
@@ -207,12 +153,63 @@ export default class BackendAdapter implements IBackendAdapter {
     return response.data.isSuceess;
   }
 
+  async getWorldStatus(
+    userToken: string,
+    worldID: number
+  ): Promise<BackendWorldStatusTO> {
+    const resp = await axios.get<BackendWorldStatusTO>(
+      config.serverURL + "/Worlds/" + worldID + "/status",
+      {
+        headers: {
+          token: userToken,
+        },
+      }
+    );
+
+    return resp.data;
+  }
+
+  async getWorldData({
+    userToken,
+    worldID,
+  }: getWorldDataParams): Promise<BackendWorldTO> {
+    const response = await axios.get<IDSL>(
+      config.serverURL + "/Worlds/" + worldID,
+      {
+        headers: {
+          token: userToken,
+        },
+      }
+    );
+
+    return BackendAdapterUtils.parseDSL(response.data);
+  }
+
+  async getCoursesAvailableForUser(userToken: string) {
+    const response = await axios
+      .get<getCoursesAvailableForUserResponse>(config.serverURL + "/Worlds", {
+        headers: {
+          token: userToken,
+        },
+      })
+      .then((response) =>
+        response.data.worlds.map((world) => ({
+          courseID: world.worldId,
+          courseName: world.worldName,
+        }))
+      );
+
+    const courseListTO = new CourseListTO();
+    courseListTO.courses = response;
+    return courseListTO;
+  }
+
   async loginUser(userCredentials: {
     username: string;
     password: string;
   }): Promise<string> {
     const token = await axios.get<{
-      moodleToken: string;
+      lmsToken: string;
     }>(config.serverURL + "/Users/Login", {
       params: {
         UserName: userCredentials.username,
@@ -220,6 +217,6 @@ export default class BackendAdapter implements IBackendAdapter {
       },
     });
 
-    return token.data.moodleToken;
+    return token.data.lmsToken;
   }
 }

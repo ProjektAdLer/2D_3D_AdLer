@@ -1,10 +1,10 @@
-import ElementTO from "../../Application/DataTransferObjects/ElementTO";
-import SpaceScoreTO from "../../Application/DataTransferObjects/SpaceScoreTO";
-import SpaceTO from "../../Application/DataTransferObjects/SpaceTO";
-import WorldTO from "../../Application/DataTransferObjects/WorldTO";
-import WorldScoreTO from "../../Application/DataTransferObjects/WorldScoreTO";
-import UserWorldsTO from "../../Application/DataTransferObjects/UserWorldsTO";
-import { ComponentID } from "../../Domain/Types/EntityTypes";
+import ElementTO from "../../DataTransferObjects/ElementTO";
+import SpaceScoreTO from "../../DataTransferObjects/SpaceScoreTO";
+import SpaceTO from "../../DataTransferObjects/SpaceTO";
+import WorldTO from "../../DataTransferObjects/WorldTO";
+import WorldScoreTO from "../../DataTransferObjects/WorldScoreTO";
+import UserWorldsTO from "../../DataTransferObjects/UserWorldsTO";
+import { ComponentID } from "../../../Domain/Types/EntityTypes";
 
 /**
  * This interface is used to register with the WorldPort and defines all the methods that can be called by the WorldPort.

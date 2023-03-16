@@ -6,9 +6,9 @@ import IWorldCompletionModalPresenter from "./IWorldCompletionModalPresenter";
 import WorldCompletionModalViewModel from "./WorldCompletionModalViewModel";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import AbstractPort from "src/Components/Core/Ports/AbstractPort/AbstractPort";
+import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import IWorldAdapter from "src/Components/Core/Ports/WorldPort/IWorldAdapter";
+import IWorldAdapter from "src/Components/Core/Application/Ports/WorldPort/IWorldAdapter";
 
 @injectable()
 export default class WorldCompletionModalBuilder extends PresentationBuilder<

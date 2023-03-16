@@ -1,7 +1,7 @@
 import { Vector3 } from "@babylonjs/core";
 import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
-import IWorldAdapter from "src/Components/Core/Ports/WorldPort/IWorldAdapter";
+import IWorldAdapter from "src/Components/Core/Application/Ports/WorldPort/IWorldAdapter";
 
 export default interface IElementPresenter extends IWorldAdapter {
   presentElement(elementTO: ElementTO, positions: [Vector3, number]): void;

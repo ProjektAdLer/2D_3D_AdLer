@@ -3,14 +3,14 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
-import ILMSPort from "../../../../Core/Ports/LMSPort/ILMSPort";
 import { mock } from "jest-mock-extended";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
-import IUIPort from "../../../../Core/Ports/UIPort/IUIPort";
-import IBackendAdapter from "../../../../Core/Adapters/BackendAdapter/IBackendAdapter";
+import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
+import ILMSPort from "../../../../Core/Application/Ports/Interfaces/ILMSPort";
+import IUIPort from "../../../../Core/Application/Ports/Interfaces/IUIPort";
 
 const entityContainerMock = mock<IEntityContainer>();
-const backendMock = mock<IBackendAdapter>();
+const backendMock = mock<IBackendPort>();
 const lmsPortMock = mock<ILMSPort>();
 const uiPortMock = mock<IUIPort>();
 
@@ -23,7 +23,7 @@ describe("LoginUseCase", () => {
     CoreDIContainer.rebind<ILMSPort>(PORT_TYPES.ILMSPort).toConstantValue(
       lmsPortMock
     );
-    CoreDIContainer.rebind<IBackendAdapter>(
+    CoreDIContainer.rebind<IBackendPort>(
       CORE_TYPES.IBackendAdapter
     ).toConstantValue(backendMock);
     CoreDIContainer.rebind<IEntityContainer>(

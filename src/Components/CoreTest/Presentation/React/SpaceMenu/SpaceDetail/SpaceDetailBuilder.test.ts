@@ -1,8 +1,8 @@
 import { mock } from "jest-mock-extended";
+import IWorldPort from "../../../../../Core/Application/Ports/Interfaces/IWorldPort";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import SpaceDetailBuilder from "../../../../../Core/Presentation/React/SpaceMenu/SpaceDetail/SpaceDetailBuilder";
-import IWorldPort from "../../../../../Core/Ports/WorldPort/IWorldPort";
 
 const worldPortMock = mock<IWorldPort>();
 

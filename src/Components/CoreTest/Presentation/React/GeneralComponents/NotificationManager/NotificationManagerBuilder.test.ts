@@ -1,8 +1,7 @@
 import { mock } from "jest-mock-extended";
+import IUIPort from "../../../../../Core/Application/Ports/Interfaces/IUIPort";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import IUIPort from "../../../../../Core/Ports/UIPort/IUIPort";
 import NotificationManagerBuilder from "../../../../../Core/Presentation/React/GeneralComponents/NotificationManager/NotificationManagerBuilder";
 import NotificationManagerPresenter from "../../../../../Core/Presentation/React/GeneralComponents/NotificationManager/NotificationManagerPresenter";
 

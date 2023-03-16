@@ -1,6 +1,6 @@
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { inject, injectable } from "inversify";
-import type IBackendAdapter from "src/Components/Core/Adapters/BackendAdapter/IBackendAdapter";
+import type IBackendPort from "src/Components/Core/Application/Ports/Interfaces/IBackendPort";
 import ElementEntity from "src/Components/Core/Domain/Entities/ElementEntity";
 import SpaceEntity from "src/Components/Core/Domain/Entities/SpaceEntity";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
@@ -9,27 +9,29 @@ import { logger } from "src/Lib/Logger";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
-import IScoreH5PElementUseCase, { XAPiEvent } from "./IScoreH5PElementUseCase";
-import type IWorldPort from "src/Components/Core/Ports/WorldPort/IWorldPort";
+import IScoreH5PElementUseCase, { XAPIEvent } from "./IScoreH5PElementUseCase";
+import type IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
+import type { IInternalCalculateSpaceScoreUseCase } from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
+import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 
 @injectable()
 export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
   constructor(
-    @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendAdapter,
+    @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendPort,
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(PORT_TYPES.IWorldPort) private worldPort: IWorldPort,
     @inject(USECASE_TYPES.ICalculateSpaceScoreUseCase)
-    private calculateSpaceScoreUseCase: ICalculateSpaceScoreUseCase
+    private calculateSpaceScoreUseCase: IInternalCalculateSpaceScoreUseCase,
+    @inject(USECASE_TYPES.IGetUserLocationUseCase)
+    private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
 
-  async executeAsync(data?: {
-    xapiData: XAPiEvent;
+  async executeAsync(data: {
+    xapiData: XAPIEvent;
     elementID: ComponentID;
-    courseID: ComponentID;
   }): Promise<boolean> {
-    if (!data || !data.elementID || !data.xapiData) {
+    if (!data.elementID || !data.xapiData) {
       return this.rejectWithWarning("data is (atleast partly) undefined!");
     }
 
@@ -41,11 +43,17 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
       return this.rejectWithWarning("User is not logged in!");
     }
 
+    // get the current user location
+    const userLocation = this.getUserLocationUseCase.execute();
+    if (!userLocation.worldID || !userLocation.spaceID) {
+      throw new Error(`User is not in a space!`);
+    }
+
     // call backend
     const scoredSuccessful = await this.backendAdapter.scoreH5PElement({
       userToken: userEntity.userToken,
       h5pID: data.elementID,
-      courseID: data.courseID,
+      courseID: userLocation.worldID,
       rawH5PEvent: data.xapiData,
     });
 
@@ -71,16 +79,15 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
       const space: SpaceEntity =
         this.entityContainer.filterEntitiesOfType<SpaceEntity>(
           SpaceEntity,
-          (space) => space?.id === element.parentSpaceID
+          (space) => space?.id === userLocation.spaceID
         )[0];
-
       if (!space) {
         return this.rejectWithWarning("Space with given element not found!");
       }
 
       element.hasScored = true;
 
-      this.calculateSpaceScoreUseCase.execute(space.id);
+      this.calculateSpaceScoreUseCase.internalExecute(userLocation.spaceID);
 
       this.worldPort.onElementScored(true, data.elementID);
     }

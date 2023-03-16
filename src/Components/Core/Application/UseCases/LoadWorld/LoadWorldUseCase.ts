@@ -1,23 +1,25 @@
 import { inject, injectable } from "inversify";
-import type IBackendAdapter from "../../../Adapters/BackendAdapter/IBackendAdapter";
+import type IBackendPort from "../../Ports/Interfaces/IBackendPort";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
 import WorldEntity from "../../../Domain/Entities/WorldEntity";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
-import type IWorldPort from "../../../Ports/WorldPort/IWorldPort";
+import type IWorldPort from "../../Ports/Interfaces/IWorldPort";
 import ILoadWorldUseCase from "./ILoadWorldUseCase";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
-import type IUIPort from "../../../Ports/UIPort/IUIPort";
+import type IUIPort from "../../Ports/Interfaces/IUIPort";
 import WorldTO from "../../DataTransferObjects/WorldTO";
 import ElementTO from "../../DataTransferObjects/ElementTO";
 import { Semaphore } from "src/Lib/Semaphore";
 import BackendWorldStatusTO from "../../DataTransferObjects/BackendWorldStatusTO";
-import type ICalculateSpaceScoreUseCase from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import { logger } from "src/Lib/Logger";
 import type ISetUserLocationUseCase from "../SetUserLocation/ISetUserLocationUseCase";
+import type { IInternalCalculateSpaceScoreUseCase } from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
+import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
+import BackendWorldTO from "../../DataTransferObjects/BackendWorldTO";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -27,11 +29,11 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter)
-    private backendAdapter: IBackendAdapter,
+    private backendAdapter: IBackendPort,
     @inject(PORT_TYPES.IUIPort)
     private uiPort: IUIPort,
     @inject(USECASE_TYPES.ICalculateSpaceScoreUseCase)
-    private calculateSpaceScore: ICalculateSpaceScoreUseCase,
+    private calculateSpaceScore: IInternalCalculateSpaceScoreUseCase,
     @inject(USECASE_TYPES.ISetUserLocationUseCase)
     private setUserLocationUseCase: ISetUserLocationUseCase
   ) {}
@@ -49,6 +51,17 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       return Promise.reject("User is not logged in");
     }
 
+    // check if world is available to user
+    if (
+      userData[0].availableWorlds.find(
+        (world) => world.worldID === data.worldID
+      ) === undefined
+    ) {
+      this.uiPort.displayNotification("World is not available!", "error");
+      logger.error("World is not available!");
+      return Promise.reject("World is not available");
+    }
+
     // search for world entity with given ID in all world entities
     let worldEntity = this.container.filterEntitiesOfType(
       WorldEntity,
@@ -57,17 +70,14 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
     // if world entity does not exist, load it from backend
     if (!worldEntity) {
-      worldEntity = await this.loadWorldToEntity(
-        userData[0].userToken,
-        data.worldID
-      );
+      worldEntity = await this.loadWorld(userData[0].userToken, data.worldID);
     }
 
     let worldTO = this.createWorldTOFromWorldEntity(worldEntity);
 
     // cumulate element scores for each space
     worldTO.spaces.forEach((space) => {
-      let spaceScores = this.calculateSpaceScore.execute(space.id);
+      let spaceScores = this.calculateSpaceScore.internalExecute(space.id);
       space.currentScore = spaceScores.currentScore;
       space.maxScore = spaceScores.maxScore;
     });
@@ -80,28 +90,58 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     lock.release();
   }
 
-  private async loadWorldToEntity(
+  private async loadWorld(
     userToken: string,
     worldID: number
   ): Promise<WorldEntity> {
-    const apiWorldDataResponse = await this.backendAdapter.getWorldData({
-      userToken: userToken,
-      worldID: worldID,
-    });
-    const apiWorldScoreResponse = await this.backendAdapter.getWorldStatus(
-      userToken,
-      worldID
+    const [apiWorldDataResponse, apiWorldScoreResponse] =
+      await this.loadWorldDataFromBackend(userToken, worldID);
+
+    const spaceEntities: SpaceEntity[] = this.createSpaceEntities(
+      worldID,
+      apiWorldDataResponse,
+      apiWorldScoreResponse
     );
 
-    // create learning room entities with learning element entities
+    const worldEntity = this.createWorldEntity(
+      worldID,
+      spaceEntities,
+      apiWorldDataResponse
+    );
+
+    return worldEntity;
+  }
+
+  private async loadWorldDataFromBackend(
+    userToken: string,
+    worldID: ComponentID
+  ): Promise<[Partial<BackendWorldTO>, BackendWorldStatusTO]> {
+    const [apiWorldDataResponse, apiWorldScoreResponse] = await Promise.all([
+      this.backendAdapter.getWorldData({
+        userToken: userToken,
+        worldID: worldID,
+      }),
+      this.backendAdapter.getWorldStatus(userToken, worldID),
+    ]);
+
+    return [apiWorldDataResponse, apiWorldScoreResponse];
+  }
+
+  private createSpaceEntities(
+    worldID: number,
+    apiWorldDataResponse: Partial<BackendWorldTO>,
+    apiWorldScoreResponse: BackendWorldStatusTO
+  ): SpaceEntity[] {
     const spaceEntities: SpaceEntity[] = [];
+
     apiWorldDataResponse.spaces?.forEach((space) => {
-      let elementEntities: ElementEntity[] = [];
-      space.elements?.forEach((element) => {
-        elementEntities.push(
-          this.mapElementToEntity(element, apiWorldScoreResponse)
-        );
-      });
+      const elementEntities: ElementEntity[] = space.elements
+        ? this.createElementEntities(
+            worldID,
+            space.elements,
+            apiWorldScoreResponse
+          )
+        : [];
 
       spaceEntities.push(
         this.container.createEntity<SpaceEntity>(
@@ -120,7 +160,47 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       );
     });
 
-    // create learning world entity
+    return spaceEntities;
+  }
+
+  private createElementEntities = (
+    worldID: number,
+    elements: ElementTO[],
+    worldStatus: BackendWorldStatusTO
+  ): ElementEntity[] => {
+    const elementEntities: ElementEntity[] = [];
+
+    elements.forEach((element) => {
+      const newElementEntity: ElementEntity = {
+        id: element.id,
+        description: element.description,
+        goals: element.goals,
+        name: element.name,
+        type: element.type,
+        value: element.value || 0,
+        parentSpaceID: element.parentSpaceID,
+        hasScored:
+          worldStatus.elements.find((e) => e.elementId === element.id)
+            ?.success || false,
+        parentWorldID: worldID,
+      };
+
+      elementEntities.push(
+        this.container.createEntity<ElementEntity>(
+          newElementEntity,
+          ElementEntity
+        )
+      );
+    });
+
+    return elementEntities;
+  };
+
+  private createWorldEntity(
+    worldID: number,
+    spaceEntities: SpaceEntity[],
+    apiWorldDataResponse: Partial<BackendWorldTO>
+  ): WorldEntity {
     const worldEntity = this.container.createEntity<WorldEntity>(
       {
         name: apiWorldDataResponse.worldName,
@@ -135,34 +215,11 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     return worldEntity;
   }
 
-  private mapElementToEntity = (
-    element: ElementTO,
-    worldStatus: BackendWorldStatusTO
-  ): ElementEntity => {
-    const entityToStore: ElementEntity = {
-      id: element.id,
-      description: element.description,
-      goals: element.goals,
-      name: element.name,
-      type: element.type,
-      value: element.value || 0,
-      parentSpaceID: element.parentSpaceID,
-      hasScored:
-        worldStatus.learningElements.find((e) => e.elementId === element.id)
-          ?.successss || false,
-      parentWorldID: worldStatus.courseId,
-    };
-
-    return this.container.createEntity<ElementEntity>(
-      entityToStore,
-      ElementEntity
-    );
-  };
-
   private createWorldTOFromWorldEntity(entityToConvert: WorldEntity): WorldTO {
     // this will need to be changed when entity and TO are not matching in structure anymore
     let worldTO = new WorldTO();
     worldTO = Object.assign(worldTO, structuredClone(entityToConvert));
+
     return worldTO;
   }
 }

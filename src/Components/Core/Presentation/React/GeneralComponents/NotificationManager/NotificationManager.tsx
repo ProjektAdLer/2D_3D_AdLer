@@ -1,7 +1,7 @@
 import {
   ErrorMessage,
   NotificationType,
-} from "src/Components/Core/Ports/UIPort/IUIAdapter";
+} from "src/Components/Core/Application/Ports/UIPort/IUIAdapter";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";

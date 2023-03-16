@@ -1,6 +1,5 @@
-import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { ISynchronousUsecase } from "../../Abstract/ISynchronousUsecase";
 import WorldScoreTO from "../../DataTransferObjects/WorldScoreTO";
 
 export default interface ICalculateWorldScoreUseCase
-  extends ISynchronousUsecase<ComponentID, WorldScoreTO> {}
+  extends ISynchronousUsecase<void, void> {}

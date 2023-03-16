@@ -1,6 +1,9 @@
 import { mock } from "jest-mock-extended";
 import SpaceScoreTO from "../../../../Core/Application/DataTransferObjects/SpaceScoreTO";
-import ICalculateSpaceScoreUseCase from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
+import IWorldPort from "../../../../Core/Application/Ports/Interfaces/IWorldPort";
+import ICalculateSpaceScoreUseCase, {
+  IInternalCalculateSpaceScoreUseCase,
+} from "../../../../Core/Application/UseCases/CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import LoadSpaceUseCase from "../../../../Core/Application/UseCases/LoadSpace/LoadSpaceUseCase";
 import ILoadWorldUseCase from "../../../../Core/Application/UseCases/LoadWorld/ILoadWorldUseCase";
 import ISetUserLocationUseCase from "../../../../Core/Application/UseCases/SetUserLocation/ISetUserLocationUseCase";
@@ -11,13 +14,12 @@ import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE
 import SpaceEntity from "../../../../Core/Domain/Entities/SpaceEntity";
 import WorldEntity from "../../../../Core/Domain/Entities/WorldEntity";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
-import IWorldPort from "../../../../Core/Ports/WorldPort/IWorldPort";
 import { ConstructorReference } from "../../../../Core/Types/EntityManagerTypes";
 
 const entityContainerMock = mock<IEntityContainer>();
 const loadWorldMock = mock<ILoadWorldUseCase>();
 const worldPortMock = mock<IWorldPort>();
-const calculateSpaceScoreMock = mock<ICalculateSpaceScoreUseCase>();
+const calculateSpaceScoreMock = mock<IInternalCalculateSpaceScoreUseCase>();
 const setUserLocationUseCaseMock = mock<ISetUserLocationUseCase>();
 
 describe("LoadSpaceUseCase", () => {
@@ -35,7 +37,7 @@ describe("LoadSpaceUseCase", () => {
     CoreDIContainer.rebind<IWorldPort>(PORT_TYPES.IWorldPort).toConstantValue(
       worldPortMock
     );
-    CoreDIContainer.rebind<ICalculateSpaceScoreUseCase>(
+    CoreDIContainer.rebind<IInternalCalculateSpaceScoreUseCase>(
       USECASE_TYPES.ICalculateSpaceScoreUseCase
     ).toConstantValue(calculateSpaceScoreMock);
     CoreDIContainer.rebind<ISetUserLocationUseCase>(
@@ -68,7 +70,7 @@ describe("LoadSpaceUseCase", () => {
       maxScore: 0,
       spaceID: 1,
     };
-    calculateSpaceScoreMock.execute.mockReturnValue(spaceScoreTO);
+    calculateSpaceScoreMock.internalExecute.mockReturnValue(spaceScoreTO);
 
     await systemUnderTest.executeAsync({ spaceID: 1, worldID: 1 });
 
@@ -95,7 +97,7 @@ describe("LoadSpaceUseCase", () => {
       maxScore: 0,
       spaceID: 1,
     };
-    calculateSpaceScoreMock.execute.mockReturnValue(spaceScoreTO);
+    calculateSpaceScoreMock.internalExecute.mockReturnValue(spaceScoreTO);
 
     await systemUnderTest.executeAsync({ spaceID: 1, worldID: 2 });
 
@@ -137,7 +139,7 @@ describe("LoadSpaceUseCase", () => {
       maxScore: 0,
       spaceID: 1,
     };
-    calculateSpaceScoreMock.execute.mockReturnValue(spaceScoreTO);
+    calculateSpaceScoreMock.internalExecute.mockReturnValue(spaceScoreTO);
 
     await systemUnderTest.executeAsync({ spaceID: 1, worldID: 1 });
 
