@@ -1,7 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
+@layer base {
+  @font-face {
+    font-family: Roboto;
+    font-weight: 400;
+    src: url(/public/fonts/Roboto-Regular.ttf) format("ttf");
+  }
+  @font-face {
+    font-family: Roboto;
+    font-weight: 500;
+    src: url(/public/fonts/Roboto-Medium.ttf) format("ttf");
+  }
+  @font-face {
+    font-family: Roboto;
+    font-weight: 700;
+    src: url(/public/fonts/Roboto-Bold.ttf) format("ttf");
+  }
+  @font-face {
+    font-family: Roboto;
+    font-weight: 900;
+    src: url(/public/fonts/Roboto-Black.ttf) format("ttf");
+  }
+}
 
 @layer components {
   .roboto-black {
