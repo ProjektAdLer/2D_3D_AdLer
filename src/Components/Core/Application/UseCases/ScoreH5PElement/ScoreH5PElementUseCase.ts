@@ -9,7 +9,7 @@ import { logger } from "src/Lib/Logger";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import IScoreH5PElementUseCase, { XAPiEvent } from "./IScoreH5PElementUseCase";
+import IScoreH5PElementUseCase, { XAPIEvent } from "./IScoreH5PElementUseCase";
 import type IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 import type { IInternalCalculateSpaceScoreUseCase } from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
@@ -28,7 +28,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
   ) {}
 
   async executeAsync(data: {
-    xapiData: XAPiEvent;
+    xapiData: XAPIEvent;
     elementID: ComponentID;
   }): Promise<boolean> {
     if (!data.elementID || !data.xapiData) {

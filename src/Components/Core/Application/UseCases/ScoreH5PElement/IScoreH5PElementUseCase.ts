@@ -4,13 +4,13 @@ import { IAsyncUsecase } from "../../Abstract/IAsyncUsecase";
 export default interface IScoreH5PElement
   extends IAsyncUsecase<
     {
-      xapiData: XAPiEvent;
+      xapiData: XAPIEvent;
       elementID: ComponentID;
     },
     boolean
   > {}
 
-export type XAPiEvent = {
+export type XAPIEvent = {
   actor: {
     account?: {
       name: string;

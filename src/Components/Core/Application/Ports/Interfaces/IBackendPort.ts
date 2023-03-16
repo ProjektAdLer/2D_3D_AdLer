@@ -1,11 +1,11 @@
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import UserCredentials from "../../../Adapters/BackendAdapter/Types/UserCredentials";
-import { XAPiEvent } from "../../UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
 import CourseListTO from "../../DataTransferObjects/CourseListTO";
 import BackendWorldStatusTO from "../../DataTransferObjects/BackendWorldStatusTO";
 import ElementScoreTO from "../../DataTransferObjects/ElementScoreTO";
 import PlayerDataTO from "../../DataTransferObjects/PlayerDataTO";
 import BackendWorldTO from "../../DataTransferObjects/BackendWorldTO";
+import { XAPIEvent } from "../../UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
 
 // TODO: Restructure in meaningful types
 export type getWorldDataParams = {
@@ -17,7 +17,7 @@ export type ScoreH5PElementRequest = {
   userToken: string;
   h5pID: number;
   courseID: number;
-  rawH5PEvent: XAPiEvent;
+  rawH5PEvent: XAPIEvent;
 };
 
 export default interface IBackendPort {
