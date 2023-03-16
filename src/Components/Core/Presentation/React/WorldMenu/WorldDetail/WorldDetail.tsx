@@ -30,7 +30,7 @@ export default function WorldDetail() {
       <div className="flex flex-row items-center justify-between p-1 pb-4 border-b border-gray-500">
         <div className="flex flex-row">
           <img src={worldIcon} className="w-6 xl:w-8" alt="Lernwelt-Icon"></img>
-          <div className="ml-2 text-lg text-white lg:text-2xl roboto-black text-shadow">
+          <div className="ml-2 text-lg text-adlerdarkblue lg:text-2xl roboto-black">
             {name}
           </div>
         </div>
@@ -46,7 +46,7 @@ export default function WorldDetail() {
         {description === undefined ||
           (description !== "" && (
             <div className="pb-2 border-b border-gray-500">
-              <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+              <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
                 Beschreibung:
               </div>
               <div className="items-start ml-6 roboto-regular">
@@ -57,7 +57,7 @@ export default function WorldDetail() {
         {goals === undefined ||
           (goals !== "" && (
             <div className="pb-2 border-b border-gray-500">
-              <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+              <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
                 Lernziele:
               </div>
               <div className="items-start ml-6 lg:text:lg roboto-regular">
@@ -66,7 +66,7 @@ export default function WorldDetail() {
             </div>
           ))}
         <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+          <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
             Räume:
           </div>
           <div className="items-start ml-6 lg:text:lg roboto-regular">
@@ -96,7 +96,7 @@ export default function WorldDetail() {
           </div>
         </div>
         <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 text-white lg:mb-2 roboto-black text-shadow">
+          <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
             Anzahl Räume:
           </div>
           <div className="items-start ml-6 lg:text:lg roboto-regular">

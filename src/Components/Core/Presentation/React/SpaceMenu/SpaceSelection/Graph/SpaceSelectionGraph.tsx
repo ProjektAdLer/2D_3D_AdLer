@@ -121,7 +121,7 @@ export default function SpaceSelectionGraph(props: {
   );
 
   return (
-    <div style={{ height: "100%", width: "100%" }}>
+    <div className="w-full h-[95%] lg:w-full lg:h-full ">
       <ReactFlow
         defaultNodes={[]}
         nodeTypes={nodeTypes}

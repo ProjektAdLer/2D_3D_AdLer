@@ -6,10 +6,10 @@ export default function StyledInputField({
   ...rest
 }: InputHTMLAttributes<HTMLInputElement>) {
   return (
-    <div className={className + " control-group flex justify-center"}>
+    <div className={className + "control-group flex justify-center"}>
       <input
         type="text"
-        className="login-field rounded-lg p-2"
+        className="p-2 rounded-lg login-field"
         {...rest}
       ></input>
     </div>

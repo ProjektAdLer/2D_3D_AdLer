@@ -28,8 +28,8 @@ export default function MenuHeaderBar() {
         </div>
         <div className="flex justify-center w-full">
           <StyledContainer
-            className="text-xl truncate lg:text-4xl roboto-black text-shadow"
-            textColor="white"
+            className="text-xl truncate lg:text-4xl font-[roboto]"
+            textColor="darkblue"
           >
             {title}
           </StyledContainer>
