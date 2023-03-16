@@ -1,4 +1,7 @@
+import clsx from "clsx";
 import React from "react";
+import { twMerge } from "tailwind-merge";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   shape?: "square" | "freefloatleft" | "freefloatcenter";
@@ -6,6 +9,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   icon?: string;
 }
+
 export default function StyledButton({
   shape = "square",
   color = "default",
@@ -17,10 +21,10 @@ export default function StyledButton({
 }: React.DetailedHTMLProps<ButtonProps, HTMLButtonElement>) {
   const buttonConfig = {
     // Background Colors
-    default: "bg-adlerblue",
-    success: "bg-adlergreen",
-    pressed: "bg-buttonpressedblue",
-    locked: "bg-adlergrey-200",
+    default: "bg-[#e9f2FA] border-adlerdarkblue",
+    success: "bg-gradient-to-br from-adlergreen border-adlerdarkblue",
+    pressed: "bg-[#45a0e5] border-adlerdarkblue",
+    locked: "bg-[#b9bfc6] border-adlerdarkblue",
 
     // Shapes
     square:
@@ -31,17 +35,15 @@ export default function StyledButton({
   return (
     <button
       disabled={disabled}
-      className={
-        className +
-        " " +
-        `flex items-center text-sm font-black  rounded-lg hover:cursor-pointer lg:text-xl active:border-transparent border-adlerdarkblue ${
+      className={tailwindMerge(
+        className,
+        `flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl active:translate-x-2 active:translate-y-2 active:border-none ${
           disabled
             ? "text-adlergrey-300 bg-adlerdeactivated hover:cursor-default"
             : buttonConfig[color] +
-              " " +
-              "text-white text-shadow border-b-4 border-r-4"
+              "text-[#172d4d] active:border-transparent active:translate-x-[2px] active:translate-y-[2px] font-[roboto] border-t-[1px] border-l-[1px] border-b-4 border-r-4"
         } ${buttonConfig[shape]}`
-      }
+      )}
       {...rest}
     >
       {icon && <img alt="" className={"h-6 lg:h-8 "} src={icon}></img>}

@@ -2,6 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    font-family: Roboto, system-ui, sans-serif;
+  }
+
+  @font-face {
+    font-family: Roboto;
+    font-weight: 400;
+    src: url(/public/fonts/Roboto-Regular.ttf);
+  }
+
+  @font-face {
+    font-family: Roboto;
+    font-weight: 500;
+    src: url(/public/fonts/Roboto-Medium.ttf);
+  }
+
+  @font-face {
+    font-family: Roboto;
+    font-weight: 700;
+    src: url(/public/fonts/Roboto-Bold.ttf);
+  }
+
+  @font-face {
+    font-family: Roboto;
+    font-weight: 900;
+    src: url(/public/fonts/Roboto-Black.ttf);
+  }
+}
+
 @layer components {
   .roboto-black {
     font-family: "roboto", sans-serif;

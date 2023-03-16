@@ -1,3 +1,5 @@
+const tailwindcss = require("tailwindcss");
+
 module.exports = {
   important: true,
   content: ["./src/**/*.{html,js,jsx,tsx}"],
@@ -93,5 +95,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [tailwindcss("./tailwind.js"), require("autoprefixer")],
 };

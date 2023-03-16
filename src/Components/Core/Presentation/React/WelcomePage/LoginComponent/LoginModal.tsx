@@ -28,7 +28,7 @@ export default function LoginModal(props: {
       showModal={modalVisible}
       onClose={() => setModalVisible(false)}
     >
-      <StyledContainer className="bg-adlergold ">
+      <StyledContainer className="bg-gradient-to-br from-[#a1c8e5] to-[#e2eaf2]">
         <form
           className="flex flex-col justify-center gap-2 login-screen"
           onSubmit={(e) => {

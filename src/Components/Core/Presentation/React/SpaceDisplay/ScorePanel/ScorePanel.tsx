@@ -65,9 +65,15 @@ export default function ScorePanel({
           className="font-bold text-center"
           style={{ position: "absolute", fontSize: 10, lineHeight: 1.2 }}
         >
-          {score ?? "x"}
-          <br /> von <br />
-          {requiredScore ?? "y"}
+          {scoreType === "space" ? (
+            <>
+              {score ?? "x"}
+              <br /> von <br />
+              {requiredScore ?? "y"}
+            </>
+          ) : (
+            Math.round(percentage) + "%"
+          )}
         </div>
       </CircularProgressbarWithChildren>
     </div>

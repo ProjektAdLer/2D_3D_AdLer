@@ -24,7 +24,7 @@ export default function SpaceNamePanel() {
           src={worldIcon}
           alt="Learning-World-Icon"
         ></img>
-        <div className="text-xl roboto-black lg:text-4xl text-shadow">
+        <div className="text-xl roboto-black text-adlerdarkblue lg:text-4xl">
           {name}
         </div>
       </StyledContainer>
