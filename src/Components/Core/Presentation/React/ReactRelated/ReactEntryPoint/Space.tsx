@@ -18,41 +18,21 @@ export default function Space() {
   return (
     <React.Fragment>
       <div className="grid h-0 min-h-screen grid-cols-9 grid-rows-6 root">
-        <div className="z-10 col-span-3 col-start-1 row-start-1 m-2 pointer-events-none">
-          <SideBar />
-        </div>
-        {/*<div className="z-10 col-span-2 col-start-2 row-start-1 m-2">
-          <ElementsDropdown />
-        </div>*/}
-        <div className="fixed z-10 flex flex-row-reverse col-span-2 col-start-8 row-start-1 space-x-2 space-x-reverse right-2 top-2">
+        <SideBar className="z-10 col-span-3 col-start-1 row-start-1 m-2 pointer-events-none" />
+        <section className="fixed z-10 flex flex-row-reverse col-span-2 col-start-8 row-start-1 space-x-2 space-x-reverse right-2 top-2">
           <ScorePanel scoreType="world" />
           <ScorePanel scoreType="space" />
-        </div>
-
-        <div className="z-10 col-span-5 col-start-3 row-start-1 pointer-events-none">
-          <SpaceNamePanel />
-        </div>
-        {/*<div className="z-10 col-span-1 col-start-7 row-start-1 m-2">
-          <SpaceGoalPanel />
-        </div>*/}
-        <div className="col-span-9 col-start-1 row-span-6 row-start-1">
-          <BabylonCanvas
-            sceneDefinitionType={SpaceSceneDefinition}
-            className="w-screen h-screen"
-            engineOptions={{ stencil: true }}
-          />
-        </div>
+        </section>
+        <SpaceNamePanel className="z-10 col-span-5 col-start-3 row-start-1 pointer-events-none justify-self-center" />
+        <BabylonCanvas
+          sceneDefinitionType={SpaceSceneDefinition}
+          className="w-screen h-screen col-span-9 col-start-1 row-span-6 row-start-1"
+          engineOptions={{ stencil: true }}
+        />
         <BottomTooltip />
-
-        <div className="z-10">
-          <ElementModal />
-        </div>
-        <div className="z-10">
-          <ExitModal />
-        </div>
-        <div className="z-10">
-          <SpaceCompletionModal />
-        </div>
+        <ElementModal className="z-10" />
+        <ExitModal className="z-20" />
+        <SpaceCompletionModal className="z-10" />
         <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
           <div className="text-lg font-bold text-white text-shadow-sm">
             <h1>
@@ -69,9 +49,7 @@ export default function Space() {
         />
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
-        <div className="z-50">
-          <NotificationManager />
-        </div>
+        <NotificationManager className="z-50" />
       </div>
     </React.Fragment>
   );

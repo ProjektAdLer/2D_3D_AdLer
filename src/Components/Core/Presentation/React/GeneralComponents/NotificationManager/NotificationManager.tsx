@@ -2,18 +2,19 @@ import {
   ErrorMessage,
   NotificationType,
 } from "src/Components/Core/Application/Ports/UIPort/IUIAdapter";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledModal from "../../ReactRelated/ReactBaseComponents/StyledModal";
 import NotificationManagerController from "./NotificationManagerController";
 import NotificationManagerViewModel from "./NotificationManagerViewModel";
 
 export default function NotificationManager({
+  className,
   ...restProps
-}: {
-  [x: string]: any;
-}) {
+}: AdLerUIComponent<{ [x: string]: any }>) {
   const [viewModel] = useBuilder<
     NotificationManagerViewModel,
     NotificationManagerController
@@ -36,6 +37,7 @@ export default function NotificationManager({
 
   return (
     <StyledModal
+      className={tailwindMerge(className)}
       showModal={notifications?.length > 0}
       title={getTypeString(notifications[notifications.length - 1].type)}
       onClose={() => {

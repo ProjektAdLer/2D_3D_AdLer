@@ -5,8 +5,10 @@ import worldIcon from "../../../../../../Assets/icons/14-world/world-icon-nobg.s
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
-export default function SpaceNamePanel() {
+export default function SpaceNamePanel({ className }: AdLerUIComponent) {
   const [viewModel] = useBuilder<
     SpaceNamePanelViewModel,
     SpaceNamePanelController
@@ -17,17 +19,17 @@ export default function SpaceNamePanel() {
   if (!name) return null;
 
   return (
-    <div className="flex justify-center">
-      <StyledContainer textColor="white" className="flex items-center">
+    <StyledContainer className={tailwindMerge(className)}>
+      <div className="flex items-center justify-between">
         <img
-          className="w-8 lg:w-14"
+          className="w-8 mr-4 lg:w-14"
           src={worldIcon}
           alt="Learning-World-Icon"
         ></img>
-        <div className="text-xl roboto-black text-adlerdarkblue lg:text-4xl">
+        <h1 className="text-xl roboto-black text-adlerdarkblue lg:text-4xl">
           {name}
-        </div>
-      </StyledContainer>
-    </div>
+        </h1>
+      </div>
+    </StyledContainer>
   );
 }

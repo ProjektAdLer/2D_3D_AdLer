@@ -5,6 +5,8 @@ import AbstractSceneDefinition from "./Scenes/AbstractSceneDefinition";
 import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import tailwindMerge from "../../Utils/TailwindMerge";
 
 export type BabylonCanvasProps = {
   sceneDefinitionType: { new (...args: any[]): AbstractSceneDefinition };
@@ -18,7 +20,9 @@ export type BabylonCanvasProps = {
 };
 
 export default function BabylonCanvas(
-  props: BabylonCanvasProps & React.HTMLAttributes<HTMLCanvasElement>
+  props: AdLerUIComponent<
+    BabylonCanvasProps & React.HTMLAttributes<HTMLCanvasElement>
+  >
 ) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const {
@@ -29,6 +33,7 @@ export default function BabylonCanvas(
     sceneOptions,
     renderChildrenWhenReady,
     children,
+    className,
     ...rest
   } = props;
 
@@ -73,5 +78,11 @@ export default function BabylonCanvas(
     sceneDefinitionType,
   ]);
 
-  return <canvas ref={canvasRef} {...rest}></canvas>;
+  return (
+    <canvas
+      className={tailwindMerge(className)}
+      ref={canvasRef}
+      {...rest}
+    ></canvas>
+  );
 }

@@ -10,6 +10,8 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import IElementModalController from "./IElementModalController";
 import { ElementTypes } from "src/Components/Core/Domain/Types/ElementTypes";
 import PDFComponent from "./SubComponents/PDFComponent";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
 const createModalContent = (
   viewModel: ElementModalViewModel,
@@ -36,7 +38,7 @@ const createModalContent = (
   }
 };
 
-export default function ElementModal() {
+export default function ElementModal({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
     ElementModalViewModel,
     IElementModalController
@@ -65,7 +67,11 @@ export default function ElementModal() {
         }
       }}
       showModal={isOpen}
-      className={`flex flex-col justify-center gap-2 p-2 m-3 rounded-lg ${modalConfig[modalType]} `}
+      className={tailwindMerge(
+        className,
+        "flex flex-col justify-center gap-2 p-2 m-3 rounded-lg",
+        modalConfig[modalType]
+      )}
     >
       {createModalContent(viewModel, controller)}
     </StyledModal>

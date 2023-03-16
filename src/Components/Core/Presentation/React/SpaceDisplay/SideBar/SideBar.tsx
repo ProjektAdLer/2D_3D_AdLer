@@ -10,14 +10,16 @@ import SideBarViewModel from "./SideBarViewModel";
 import SideBarController from "./SideBarController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import menuIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
-export default function SideBar() {
+export default function SideBar({ className }: AdLerUIComponent) {
   const [, controller] = useBuilder<SideBarViewModel, SideBarController>(
     BUILDER_TYPES.IMenuBarBuilder
   );
   return (
     <CustomDropdown
-      className="w-20"
+      className={tailwindMerge(className, "w-20")}
       headerPart={
         <StyledButton>
           <img

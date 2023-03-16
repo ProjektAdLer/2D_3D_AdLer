@@ -6,8 +6,12 @@ import ISpaceCompletionModalController from "./ISpaceCompletionModalController";
 import SpaceCompletionModalViewModel from "./SpaceCompletionModalViewModel";
 import RubicsCube from "../../../../../../Assets/icons/17-solution-rubicscube/rubicscube-check-solution-icon-nobg.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
-export default function SpaceCompletionModal() {
+export default function SpaceCompletionModal({
+  className,
+}: AdLerUIComponent<{}>) {
   const [viewModel, controller] = useBuilder<
     SpaceCompletionModalViewModel,
     ISpaceCompletionModalController
@@ -20,7 +24,10 @@ export default function SpaceCompletionModal() {
 
   return (
     <StyledModal
-      className="flex flex-col items-center justify-center"
+      className={tailwindMerge(
+        className,
+        "flex flex-col items-center justify-center"
+      )}
       title="Raum abgeschlossen!"
       showModal={showModal && !viewModel.wasClosedOnce}
       onClose={() => {

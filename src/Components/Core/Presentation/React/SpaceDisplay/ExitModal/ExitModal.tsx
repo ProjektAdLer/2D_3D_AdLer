@@ -6,8 +6,10 @@ import StyledButton from "../../../React/ReactRelated/ReactBaseComponents/Styled
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import IExitModalController from "./IExitModalController";
 import { useCallback } from "react";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
-export default function ExitModal() {
+export default function ExitModal({ className }: AdLerUIComponent<{}>) {
   const [viewModel, controller] = useBuilder<
     ExitModalViewModel,
     IExitModalController
@@ -27,7 +29,10 @@ export default function ExitModal() {
         title={viewModel.modalTitle.Value}
         onClose={closeModal}
         showModal={isOpen}
-        className="flex flex-col justify-center gap-2 p-2 m-3 rounded-lg"
+        className={tailwindMerge(
+          className,
+          "flex flex-col justify-center gap-2 p-2 m-3 rounded-lg"
+        )}
       >
         <StyledButton
           disabled={false}
