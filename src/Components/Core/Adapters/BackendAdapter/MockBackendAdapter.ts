@@ -3,29 +3,32 @@ import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
 import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
-import BackendWorldStatusTO from "../../Application/DataTransferObjects/BackendWorldStatusTO";
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import BackendAdapterUtils from "./BackendAdapterUtils";
 import IBackendPort, {
-  getWorldDataParams,
-  ScoreH5PElementRequest,
+  ElementDataParams,
+  GetWorldDataParams,
+  ScoreH5PElementParams,
+  UserCredentialParams,
 } from "../../Application/Ports/Interfaces/IBackendPort";
 import IDSL from "./Types/IDSL";
-import UserCredentials from "./Types/UserCredentials";
+import { logger } from "src/Lib/Logger";
+import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendPort {
   deletePlayerData(userToken: string): Promise<boolean> {
-    throw new Error(
-      "Method not implemented, since we are in the Fake Backend."
-    );
+    logger.log("MockBackendAdapter.deletePlayerData");
+    return Promise.resolve(true);
   }
 
   updatePlayerData(
     userToken: string,
     playerData: Partial<PlayerDataTO>
   ): Promise<PlayerDataTO> {
-    return Promise.resolve(new PlayerDataTO());
+    return Promise.resolve(
+      Object.assign(new PlayerDataTO(), playerData) as PlayerDataTO
+    );
   }
 
   getPlayerData(userToken: string): Promise<PlayerDataTO> {
@@ -35,10 +38,11 @@ export default class MockBackendAdapter implements IBackendPort {
     });
   }
 
-  getElementScore(
-    userToken: string,
-    elementID: ComponentID
-  ): Promise<ElementScoreTO> {
+  getElementScore({
+    userToken,
+    elementID,
+    worldID,
+  }: ElementDataParams): Promise<ElementScoreTO> {
     return Promise.resolve({
       elementID,
       success: true,
@@ -48,40 +52,40 @@ export default class MockBackendAdapter implements IBackendPort {
   getWorldStatus(
     userToken: string,
     worldID: ComponentID
-  ): Promise<BackendWorldStatusTO> {
+  ): Promise<WorldStatusTO> {
     return Promise.resolve({
-      worldId: worldID,
+      worldID: worldID,
       elements: [
         {
-          elementId: 1,
-          success: true,
+          elementID: 1,
+          hasScored: true,
         },
         {
-          elementId: 2,
-          success: true,
+          elementID: 2,
+          hasScored: true,
         },
         {
-          elementId: 3,
-          success: false,
+          elementID: 3,
+          hasScored: false,
         },
         {
-          elementId: 4,
-          success: false,
+          elementID: 4,
+          hasScored: false,
         },
         {
-          elementId: 5,
-          success: false,
+          elementID: 5,
+          hasScored: false,
         },
       ],
     });
   }
 
-  getElementSource(
-    userToken: string,
-    elementID: ComponentID,
-    courseID: ComponentID
-  ): Promise<string> {
-    const worldToUse = courseID === 1 ? this.smallWorld : this.bigWorld;
+  getElementSource({
+    userToken,
+    elementID,
+    worldID,
+  }: ElementDataParams): Promise<string> {
+    const worldToUse = worldID === 1 ? this.smallWorld : this.bigWorld;
     const elementType = worldToUse.world.elements.find(
       (element) => element.elementId === elementID
     )!.elementCategory;
@@ -117,7 +121,7 @@ export default class MockBackendAdapter implements IBackendPort {
     }
   }
 
-  scoreH5PElement(data: ScoreH5PElementRequest): Promise<boolean> {
+  scoreH5PElement(data: ScoreH5PElementParams): Promise<boolean> {
     return Promise.resolve(true);
   }
 
@@ -144,14 +148,14 @@ export default class MockBackendAdapter implements IBackendPort {
     return Promise.resolve(true);
   }
 
-  loginUser(userCredentials: UserCredentials): Promise<string> {
+  loginUser(userCredentials: UserCredentialParams): Promise<string> {
     return Promise.resolve("fakeToken");
   }
 
   getWorldData({
     userToken,
     worldID,
-  }: getWorldDataParams): Promise<Partial<BackendWorldTO>> {
+  }: GetWorldDataParams): Promise<Partial<BackendWorldTO>> {
     return Promise.resolve(
       BackendAdapterUtils.parseDSL(
         worldID === 1 ? this.smallWorld : this.bigWorld

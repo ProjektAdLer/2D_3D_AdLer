@@ -4,7 +4,7 @@ export default interface IGetElementSourceUseCase
   extends IInternalAsyncUsecase<
     {
       elementID: number;
-      courseID: number;
+      worldID: number;
     },
     string
   > {}

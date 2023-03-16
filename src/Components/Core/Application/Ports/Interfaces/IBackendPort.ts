@@ -1,23 +1,32 @@
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
-import UserCredentials from "../../../Adapters/BackendAdapter/Types/UserCredentials";
 import CourseListTO from "../../DataTransferObjects/CourseListTO";
-import BackendWorldStatusTO from "../../DataTransferObjects/BackendWorldStatusTO";
+import WorldStatusTO from "../../DataTransferObjects/WorldStatusTO";
 import ElementScoreTO from "../../DataTransferObjects/ElementScoreTO";
 import PlayerDataTO from "../../DataTransferObjects/PlayerDataTO";
 import BackendWorldTO from "../../DataTransferObjects/BackendWorldTO";
 import { XAPIEvent } from "../../UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
 
-// TODO: Restructure in meaningful types
-export type getWorldDataParams = {
+export type GetWorldDataParams = {
   userToken: string;
   worldID: number;
 };
 
-export type ScoreH5PElementRequest = {
+export type ScoreH5PElementParams = {
   userToken: string;
   h5pID: number;
   courseID: number;
   rawH5PEvent: XAPIEvent;
+};
+
+export type UserCredentialParams = {
+  username: string;
+  password: string;
+};
+
+export type ElementDataParams = {
+  userToken: string;
+  elementID: ComponentID;
+  worldID: ComponentID;
 };
 
 export default interface IBackendPort {
@@ -30,16 +39,16 @@ export default interface IBackendPort {
 
   getPlayerData(userToken: string): Promise<PlayerDataTO>;
 
-  getElementScore(
-    userToken: string,
-    elementID: ComponentID,
-    courseID: ComponentID
-  ): Promise<ElementScoreTO>;
+  getElementScore({
+    userToken,
+    elementID,
+    worldID,
+  }: ElementDataParams): Promise<ElementScoreTO>;
 
   getWorldData({
     userToken,
     worldID,
-  }: getWorldDataParams): Promise<Partial<BackendWorldTO>>;
+  }: GetWorldDataParams): Promise<Partial<BackendWorldTO>>;
 
   scoreElement(
     userToken: string,
@@ -47,20 +56,17 @@ export default interface IBackendPort {
     courseID: ComponentID
   ): Promise<boolean>;
 
-  getWorldStatus(
-    userToken: string,
-    worldID: number
-  ): Promise<BackendWorldStatusTO>;
+  getWorldStatus(userToken: string, worldID: number): Promise<WorldStatusTO>;
 
-  scoreH5PElement(data: ScoreH5PElementRequest): Promise<boolean>;
+  scoreH5PElement(data: ScoreH5PElementParams): Promise<boolean>;
 
-  loginUser(userCredentials: UserCredentials): Promise<string>;
+  loginUser(userCredentials: UserCredentialParams): Promise<string>;
 
   getCoursesAvailableForUser(userToken: string): Promise<CourseListTO>;
 
-  getElementSource(
-    userToken: string,
-    elementID: number,
-    courseID: number
-  ): Promise<string>;
+  getElementSource({
+    userToken,
+    elementID,
+    worldID,
+  }: ElementDataParams): Promise<string>;
 }

@@ -1,5 +1,4 @@
 import { mock } from "jest-mock-extended";
-import { getCoursesAvailableForUserResponse } from "../../../Core/Adapters/BackendAdapter/Types/getCoursesAvailableForUserResponse";
 import {
   expectedElementTO,
   expectedSpaceTO,
@@ -9,8 +8,11 @@ import {
 import { config } from "../../../../config";
 import BackendAdapter from "../../../Core/Adapters/BackendAdapter/BackendAdapter";
 import axios, { AxiosResponse } from "axios";
-import CourseListTO from "../../../Core/Application/DataTransferObjects/CourseListTO";
-import { XAPiEvent } from "../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
+import { XAPIEvent } from "../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
+import WorldStatusResponse, {
+  CoursesAvailableForUserResponse,
+} from "../../../Core/Adapters/BackendAdapter/Types/BackendResponseTypes";
+import WorldStatusTO from "../../../Core/Application/DataTransferObjects/WorldStatusTO";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -140,7 +142,7 @@ describe("BackendAdapter", () => {
       data: {
         worlds: [{ worldId: 1, worldName: "string" }],
       },
-    } as AxiosResponse<getCoursesAvailableForUserResponse>);
+    } as AxiosResponse<CoursesAvailableForUserResponse>);
     const returnedVal = await systemUnderTest.getCoursesAvailableForUser(
       "token"
     );
@@ -162,7 +164,7 @@ describe("BackendAdapter", () => {
         isSuceess: true,
       },
     });
-    const h5pMock = mock<XAPiEvent>();
+    const h5pMock = mock<XAPIEvent>();
     const returnedVal = await systemUnderTest.scoreH5PElement({
       courseID: 1,
       h5pID: 1,
@@ -184,11 +186,16 @@ describe("BackendAdapter", () => {
     );
     expect(returnedVal).toEqual(true);
   });
+
   test("should get Element Source", async () => {
     mockedAxios.get.mockResolvedValue({
       data: { filePath: "string" },
     });
-    const returnedVal = await systemUnderTest.getElementSource("token", 1, 1);
+    const returnedVal = await systemUnderTest.getElementSource({
+      userToken: "token",
+      elementID: 1,
+      worldID: 1,
+    });
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
     expect(mockedAxios.get).toHaveBeenCalledWith(
@@ -201,17 +208,18 @@ describe("BackendAdapter", () => {
     );
     expect(returnedVal).toEqual("string");
   });
+
   test("should get World Status", async () => {
     mockedAxios.get.mockResolvedValue({
       data: {
-        courseID: 1,
-        Elements: [
+        worldId: 1,
+        elements: [
           {
-            elementID: 1,
-            successss: true,
+            elementId: 1,
+            success: true,
           },
         ],
-      },
+      } as WorldStatusResponse,
     });
     const returnedVal = await systemUnderTest.getWorldStatus("token", 1);
 
@@ -225,15 +233,16 @@ describe("BackendAdapter", () => {
       }
     );
     expect(returnedVal).toEqual({
-      courseID: 1,
-      Elements: [
+      worldID: 1,
+      elements: [
         {
           elementID: 1,
-          successss: true,
+          hasScored: true,
         },
       ],
-    });
+    } as WorldStatusTO);
   });
+
   test("should get Element Score", async () => {
     mockedAxios.get.mockResolvedValue({
       data: {
@@ -241,7 +250,11 @@ describe("BackendAdapter", () => {
         success: true,
       },
     });
-    const returnedVal = await systemUnderTest.getElementScore("token", 1, 1);
+    const returnedVal = await systemUnderTest.getElementScore({
+      userToken: "token",
+      elementID: 1,
+      worldID: 1,
+    });
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
     expect(mockedAxios.get).toHaveBeenCalledWith(
@@ -257,6 +270,7 @@ describe("BackendAdapter", () => {
       success: true,
     });
   });
+
   test("should get Player Data", async () => {
     mockedAxios.get.mockResolvedValue({
       data: {
@@ -280,6 +294,7 @@ describe("BackendAdapter", () => {
       playerWorldColor: "string",
     });
   });
+
   test("should update Player Data", async () => {
     mockedAxios.patch.mockResolvedValue({
       data: {
@@ -298,6 +313,7 @@ describe("BackendAdapter", () => {
       playerWorldColor: "string",
     });
   });
+
   test("should delete Player Data", async () => {
     mockedAxios.delete.mockResolvedValue({
       data: true,

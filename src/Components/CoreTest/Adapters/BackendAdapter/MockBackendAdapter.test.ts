@@ -2,7 +2,8 @@ import { mock } from "jest-mock-extended";
 import { config } from "../../../../config";
 import MockBackendAdapter from "../../../Core/Adapters/BackendAdapter/MockBackendAdapter";
 import PlayerDataTO from "../../../Core/Application/DataTransferObjects/PlayerDataTO";
-import { XAPiEvent } from "../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
+import WorldStatusTO from "../../../Core/Application/DataTransferObjects/WorldStatusTO";
+import { XAPIEvent } from "../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
 import {
   expectedElementTO,
   expectedSpaceTO,
@@ -90,7 +91,7 @@ describe("MockBackendAdapter", () => {
   });
 
   test("should score H5P Element", async () => {
-    const h5pMock = mock<XAPiEvent>();
+    const h5pMock = mock<XAPIEvent>();
     await expect(
       systemUnderTest.scoreH5PElement({
         courseID: 1,
@@ -103,49 +104,65 @@ describe("MockBackendAdapter", () => {
 
   test.each([[1], [2], [3], [4]])(
     "should get Element Source",
-    async (element) => {
+    async (elementID) => {
       await expect(
-        systemUnderTest.getElementSource("token", element, 1)
+        systemUnderTest.getElementSource({
+          userToken: "token",
+          worldID: 1,
+          elementID: elementID,
+        })
       ).resolves.toEqual(expect.any(String));
     }
   );
 
   test("should throw when souce of invalid element is requested", () => {
     async (element) => {
-      await expect(systemUnderTest.getElementSource("token", 55, 1)).toThrow();
+      await expect(
+        systemUnderTest.getElementSource({
+          userToken: "token",
+          elementID: 55,
+          worldID: 1,
+        })
+      ).toThrow();
     };
   });
 
   test("should get World Status", async () => {
     await expect(systemUnderTest.getWorldStatus("token", 1)).resolves.toEqual({
-      worldId: 1,
+      worldID: 1,
       elements: [
         {
-          elementId: 1,
-          success: true,
+          elementID: 1,
+          hasScored: true,
         },
         {
-          elementId: 2,
-          success: true,
+          elementID: 2,
+          hasScored: true,
         },
         {
-          elementId: 3,
-          success: false,
+          elementID: 3,
+          hasScored: false,
         },
         {
-          elementId: 4,
-          success: false,
+          elementID: 4,
+          hasScored: false,
         },
         {
-          elementId: 5,
-          success: false,
+          elementID: 5,
+          hasScored: false,
         },
       ],
-    });
+    } as WorldStatusTO);
   });
 
   test("should get Element Score", async () => {
-    await expect(systemUnderTest.getElementScore("token", 1)).resolves.toEqual({
+    await expect(
+      systemUnderTest.getElementScore({
+        userToken: "token",
+        elementID: 1,
+        worldID: 1,
+      })
+    ).resolves.toEqual({
       elementID: 1,
       success: true,
     });
@@ -164,9 +181,9 @@ describe("MockBackendAdapter", () => {
     ).resolves.toEqual(new PlayerDataTO());
   });
 
-  test("should throw when try to delete Player Data", async () => {
-    await expect(async () =>
-      systemUnderTest.deletePlayerData("token")
-    ).rejects.toThrow();
+  test("should resolve with true when trying to delete Player Data", async () => {
+    await expect(systemUnderTest.deletePlayerData("token")).resolves.toEqual(
+      true
+    );
   });
 });

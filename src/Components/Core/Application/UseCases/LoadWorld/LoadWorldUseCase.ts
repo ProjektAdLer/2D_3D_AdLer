@@ -14,7 +14,7 @@ import type IUIPort from "../../Ports/Interfaces/IUIPort";
 import WorldTO from "../../DataTransferObjects/WorldTO";
 import ElementTO from "../../DataTransferObjects/ElementTO";
 import { Semaphore } from "src/Lib/Semaphore";
-import BackendWorldStatusTO from "../../DataTransferObjects/BackendWorldStatusTO";
+import WorldStatusTO from "../../DataTransferObjects/WorldStatusTO";
 import { logger } from "src/Lib/Logger";
 import type ISetUserLocationUseCase from "../SetUserLocation/ISetUserLocationUseCase";
 import type { IInternalCalculateSpaceScoreUseCase } from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
@@ -115,7 +115,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   private async loadWorldDataFromBackend(
     userToken: string,
     worldID: ComponentID
-  ): Promise<[Partial<BackendWorldTO>, BackendWorldStatusTO]> {
+  ): Promise<[Partial<BackendWorldTO>, WorldStatusTO]> {
     const [apiWorldDataResponse, apiWorldScoreResponse] = await Promise.all([
       this.backendAdapter.getWorldData({
         userToken: userToken,
@@ -130,7 +130,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   private createSpaceEntities(
     worldID: number,
     apiWorldDataResponse: Partial<BackendWorldTO>,
-    apiWorldScoreResponse: BackendWorldStatusTO
+    apiWorldScoreResponse: WorldStatusTO
   ): SpaceEntity[] {
     const spaceEntities: SpaceEntity[] = [];
 
@@ -166,7 +166,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   private createElementEntities = (
     worldID: number,
     elements: ElementTO[],
-    worldStatus: BackendWorldStatusTO
+    worldStatus: WorldStatusTO
   ): ElementEntity[] => {
     const elementEntities: ElementEntity[] = [];
 
@@ -180,8 +180,8 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
         value: element.value || 0,
         parentSpaceID: element.parentSpaceID,
         hasScored:
-          worldStatus.elements.find((e) => e.elementId === element.id)
-            ?.success || false,
+          worldStatus.elements.find((e) => e.elementID === element.id)
+            ?.hasScored || false,
         parentWorldID: worldID,
       };
 

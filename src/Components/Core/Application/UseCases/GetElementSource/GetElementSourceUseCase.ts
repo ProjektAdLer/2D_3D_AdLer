@@ -18,17 +18,17 @@ export default class GetElementSourceUseCase
 
   async internalExecuteAsync(data: {
     elementID: number;
-    courseID: number;
+    worldID: number;
   }): Promise<string> {
     const token =
       this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0]
         .userToken;
 
-    const resp = await this.backend.getElementSource(
-      token,
-      data.elementID,
-      data.courseID
-    );
+    const resp = await this.backend.getElementSource({
+      userToken: token,
+      elementID: data.elementID,
+      worldID: data.worldID,
+    });
 
     return resp;
   }

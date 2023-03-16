@@ -3,19 +3,24 @@ import { injectable } from "inversify";
 import { config } from "../../../../config";
 import IDSL from "./Types/IDSL";
 import IBackendPort, {
-  ScoreH5PElementRequest,
-  getWorldDataParams,
+  ElementDataParams,
+  GetWorldDataParams,
+  ScoreH5PElementParams,
+  UserCredentialParams,
 } from "../../Application/Ports/Interfaces/IBackendPort";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import { ComponentID } from "../../Domain/Types/EntityTypes";
-import BackendWorldStatusTO from "../../Application/DataTransferObjects/BackendWorldStatusTO";
 import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
-import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
-
 import { createPatch } from "rfc6902";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
 import BackendAdapterUtils from "./BackendAdapterUtils";
-import { getCoursesAvailableForUserResponse } from "./Types/getCoursesAvailableForUserResponse";
+import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
+import WorldStatusResponse, {
+  CoursesAvailableForUserResponse,
+  ElementScoreResponse,
+  PlayerDataResponse,
+} from "./Types/BackendResponseTypes";
+import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
 
 @injectable()
 export default class BackendAdapter implements IBackendPort {
@@ -38,7 +43,7 @@ export default class BackendAdapter implements IBackendPort {
   ): Promise<PlayerDataTO> {
     const patchRequest = createPatch({}, playerData);
 
-    const resp = await axios.patch<PlayerDataTO>(
+    const resp = await axios.patch<PlayerDataResponse>(
       config.serverURL + "/PlayerData",
       patchRequest,
       {
@@ -52,7 +57,7 @@ export default class BackendAdapter implements IBackendPort {
   }
 
   async getPlayerData(userToken: string): Promise<PlayerDataTO> {
-    const resp = await axios.get<PlayerDataTO>(
+    const resp = await axios.get<PlayerDataResponse>(
       config.serverURL + "/PlayerData",
       {
         headers: {
@@ -61,18 +66,18 @@ export default class BackendAdapter implements IBackendPort {
       }
     );
 
-    return resp.data;
+    return resp.data as PlayerDataTO;
   }
 
-  async getElementScore(
-    userToken: string,
-    elementID: ComponentID,
-    courseID: ComponentID
-  ): Promise<ElementScoreTO> {
-    const resp = await axios.get<ElementScoreTO>(
+  async getElementScore({
+    userToken,
+    elementID,
+    worldID,
+  }: ElementDataParams): Promise<ElementScoreTO> {
+    const resp = await axios.get<ElementScoreResponse>(
       config.serverURL +
         "/Elements/World/" +
-        courseID +
+        worldID +
         "/Element/" +
         elementID +
         "/Score",
@@ -83,19 +88,19 @@ export default class BackendAdapter implements IBackendPort {
       }
     );
 
-    return resp.data;
+    return resp.data as ElementScoreTO;
   }
 
-  getElementSource(
-    userToken: string,
-    elementID: ComponentID,
-    courseID: ComponentID
-  ): Promise<string> {
+  getElementSource({
+    userToken,
+    elementID,
+    worldID,
+  }: ElementDataParams): Promise<string> {
     return axios
       .get<{ filePath: string }>(
         config.serverURL +
           "/Elements/FilePath/World/" +
-          courseID +
+          worldID +
           "/Element/" +
           elementID,
         {
@@ -107,7 +112,7 @@ export default class BackendAdapter implements IBackendPort {
       .then((response) => response.data.filePath);
   }
 
-  async scoreH5PElement(data: ScoreH5PElementRequest): Promise<boolean> {
+  async scoreH5PElement(data: ScoreH5PElementParams): Promise<boolean> {
     const response = await axios.patch<{
       isSuceess: true;
     }>(
@@ -156,8 +161,8 @@ export default class BackendAdapter implements IBackendPort {
   async getWorldStatus(
     userToken: string,
     worldID: number
-  ): Promise<BackendWorldStatusTO> {
-    const resp = await axios.get<BackendWorldStatusTO>(
+  ): Promise<WorldStatusTO> {
+    const resp = await axios.get<WorldStatusResponse>(
       config.serverURL + "/Worlds/" + worldID + "/status",
       {
         headers: {
@@ -166,13 +171,20 @@ export default class BackendAdapter implements IBackendPort {
       }
     );
 
-    return resp.data;
+    const worldStatusTO = new WorldStatusTO();
+    worldStatusTO.worldID = worldID;
+    worldStatusTO.elements = resp.data.elements.map((element) => ({
+      elementID: element.elementId,
+      hasScored: element.success,
+    }));
+
+    return worldStatusTO;
   }
 
   async getWorldData({
     userToken,
     worldID,
-  }: getWorldDataParams): Promise<BackendWorldTO> {
+  }: GetWorldDataParams): Promise<BackendWorldTO> {
     const response = await axios.get<IDSL>(
       config.serverURL + "/Worlds/" + worldID,
       {
@@ -187,7 +199,7 @@ export default class BackendAdapter implements IBackendPort {
 
   async getCoursesAvailableForUser(userToken: string) {
     const response = await axios
-      .get<getCoursesAvailableForUserResponse>(config.serverURL + "/Worlds", {
+      .get<CoursesAvailableForUserResponse>(config.serverURL + "/Worlds", {
         headers: {
           token: userToken,
         },
@@ -204,10 +216,7 @@ export default class BackendAdapter implements IBackendPort {
     return courseListTO;
   }
 
-  async loginUser(userCredentials: {
-    username: string;
-    password: string;
-  }): Promise<string> {
+  async loginUser(userCredentials: UserCredentialParams): Promise<string> {
     const token = await axios.get<{
       lmsToken: string;
     }>(config.serverURL + "/Users/Login", {
