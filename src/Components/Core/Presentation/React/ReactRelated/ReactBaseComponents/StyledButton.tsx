@@ -1,5 +1,6 @@
 import React from "react";
 import tailwindMerge from "../../../Utils/TailwindMerge";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   shape?: "square" | "freefloatleft" | "freefloatcenter";
@@ -15,7 +16,7 @@ export default function StyledButton({
   children,
   className,
   ...rest
-}: React.DetailedHTMLProps<ButtonProps, HTMLButtonElement>) {
+}: AdLerUIComponent<React.DetailedHTMLProps<ButtonProps, HTMLButtonElement>>) {
   const buttonConfig = {
     // Background Colors
     default: "bg-[#e9f2FA] border-adlerdarkblue",

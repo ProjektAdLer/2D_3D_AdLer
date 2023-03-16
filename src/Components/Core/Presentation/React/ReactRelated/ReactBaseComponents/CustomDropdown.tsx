@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import StyledContainer from "./StyledContainer";
 import tailwindMerge from "../../../Utils/TailwindMerge";
+import { type } from "os";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+
+// Type to add classname
+
 type Props = {
   managed?: boolean;
   isOpen?: boolean;
@@ -8,7 +13,6 @@ type Props = {
   children?: React.ReactNode;
   initialOpen?: boolean;
   useAsTriggerOnly?: boolean;
-  className?: string;
 };
 /**
  * @param managed controlls, if the dropdown is managed by the component or not
@@ -29,7 +33,7 @@ export default function CustomDropdown({
   useAsTriggerOnly = false,
   className,
   ...rest
-}: Props) {
+}: AdLerUIComponent<Props>) {
   const [isOpenState, setIsOpenState] = useState(initialOpen);
 
   const handleClick = () => {
