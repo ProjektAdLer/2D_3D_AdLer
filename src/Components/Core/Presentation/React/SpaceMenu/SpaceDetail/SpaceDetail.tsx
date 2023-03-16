@@ -132,7 +132,6 @@ export default function SpaceDetail() {
             </div>
           </div>
         )}
-        
         {!!requiredPoints && (
           <div className="pb-2">
             <div className="flex flex-row justify-between w-full pb-2 xl:w-3/4">
@@ -160,11 +159,12 @@ export default function SpaceDetail() {
                   alt="Coin-Icon"
                 ></img>
               </div>
-              <div className="pb-2 border-b border-gray-500"></div>
             </div>
-          )}
-        </div>
-
+          </div>
+        )}
+        {elements.length > 0 && (
+          <div className="pb-2 border-b border-gray-500"></div>
+        )}
         {requirements.length > 0 && (
           <div className="pb-2 border-b border-gray-500">
             <div className="self-center ml-2 text-lg text-adlerdarkblue roboto-black">
