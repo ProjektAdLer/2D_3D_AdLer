@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import StyledContainer from "./StyledContainer";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 type Props = {
   managed?: boolean;
   isOpen?: boolean;
@@ -45,7 +46,7 @@ export default function CustomDropdown({
   );
 
   return (
-    <div className={className + " pointer-events-auto dropdown"}>
+    <div className={tailwindMerge(className, "pointer-events-auto dropdown")}>
       <div className="dropdown-header" onClick={handleClick}>
         {headerPart}
       </div>

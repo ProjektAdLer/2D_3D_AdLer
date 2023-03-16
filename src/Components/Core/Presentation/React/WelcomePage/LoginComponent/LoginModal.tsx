@@ -57,6 +57,7 @@ export default function LoginModal(props: {
           </StyledButton>
 
           <StyledButton
+            disabled={true}
             shape="freefloatcenter"
             onClick={() => {
               alert("Hier kannst du bald dein neues Passwort bekommen!");

@@ -1,6 +1,4 @@
-import clsx from "clsx";
 import React from "react";
-import { twMerge } from "tailwind-merge";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -9,7 +7,6 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   icon?: string;
 }
-
 export default function StyledButton({
   shape = "square",
   color = "default",
@@ -32,17 +29,19 @@ export default function StyledButton({
     freefloatleft: "px-2 py-1",
     freefloatcenter: "px-2 py-1 justify-center",
   };
+
   return (
     <button
       disabled={disabled}
       className={tailwindMerge(
         className,
-        `flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl active:translate-x-2 active:translate-y-2 active:border-none ${
-          disabled
-            ? "text-adlergrey-300 bg-adlerdeactivated hover:cursor-default"
-            : buttonConfig[color] +
-              "text-[#172d4d] active:border-transparent active:translate-x-[2px] active:translate-y-[2px] font-[roboto] border-t-[1px] border-l-[1px] border-b-4 border-r-4"
-        } ${buttonConfig[shape]}`
+        disabled
+          ? "text-adlergrey-300 bg-adlerdeactivated hover:cursor-default"
+          : tailwindMerge(
+              "flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl active:translate-x-2 active:translate-y-2 active:border-none text-[#1f3d6a] active:border-transparent font-[roboto] border-t-[1px] border-l-[1px] border-b-4 border-r-4",
+              buttonConfig[color],
+              buttonConfig[shape]
+            )
       )}
       {...rest}
     >
