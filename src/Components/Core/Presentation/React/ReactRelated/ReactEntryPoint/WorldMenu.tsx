@@ -5,6 +5,7 @@ import WorldDetail from "~ReactComponents/WorldMenu/WorldDetail/WorldDetail";
 import WorldSelection from "~ReactComponents/WorldMenu/WorldSelection/WorldSelection";
 import useIsMobilePortrait from "../CustomHooks/useIsMobilePortrait";
 import StyledModal from "../ReactBaseComponents/StyledModal";
+import TutorialPdfButton from "~ReactComponents/GeneralComponents/SpaceTutorial/TutorialPdfButton";
 
 export default function WorldMenu() {
   return (
@@ -22,7 +23,10 @@ export default function WorldMenu() {
           <div className="flex justify-center col-start-2 p-2 lg:p-8">
             <WorldDetail />
           </div>
-          <MenuTutorial />
+          <TutorialPdfButton
+            className="fixed z-20 left-2 bottom-2 max-h-3/4"
+            pdfFileUrl={"/SampleLearningElementData/testPDF.pdf"}
+          />
         </div>
         <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
           <div className="text-lg font-bold text-white text-shadow-sm">

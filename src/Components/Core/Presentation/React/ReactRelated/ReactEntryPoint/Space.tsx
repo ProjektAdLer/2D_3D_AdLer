@@ -12,6 +12,7 @@ import SpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/SpaceS
 import SpaceCompletionModal from "~ReactComponents/SpaceDisplay/SpaceCompletionModal/SpaceCompletionModal";
 import UseGuide from "~ReactComponents/SpaceDisplay/UseGuide/UseGuide";
 import ExitModal from "~ReactComponents/SpaceDisplay/ExitModal/ExitModal";
+import TutorialPdfButton from "~ReactComponents/GeneralComponents/SpaceTutorial/TutorialPdfButton";
 
 export default function Space() {
   return (
@@ -62,7 +63,10 @@ export default function Space() {
             </h1>
           </div>
         </StyledModal>
-        <UseGuide />
+        <TutorialPdfButton
+          className="fixed z-20 left-2 bottom-2 max-h-3/4"
+          pdfFileUrl={"/SampleLearningElementData/testPDF.pdf"}
+        />
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
         <div className="z-50">

@@ -6,6 +6,7 @@ import MenuTutorial from "~ReactComponents/SpaceMenu/MenuTutorial/MenuTutorial";
 import SpaceSelection from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelection";
 import StyledModal from "../ReactBaseComponents/StyledModal";
 import useIsMobilePortrait from "../CustomHooks/useIsMobilePortrait";
+import TutorialPdfButton from "~ReactComponents/GeneralComponents/SpaceTutorial/TutorialPdfButton";
 
 export default function SpaceMenu() {
   return (
@@ -27,7 +28,10 @@ export default function SpaceMenu() {
           <div className="flex justify-center col-start-2 p-2 lg:p-8">
             <SpaceDetail />
           </div>
-          <MenuTutorial />
+          <TutorialPdfButton
+            className="fixed z-20 left-2 bottom-2 max-h-3/4"
+            pdfFileUrl={"/SampleLearningElementData/testPDF.pdf"}
+          />
         </div>
         <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
           <div className="text-lg font-bold text-white text-shadow-sm">
