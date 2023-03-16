@@ -19,10 +19,10 @@ export default function StyledButton({
 }: AdLerUIComponent<React.DetailedHTMLProps<ButtonProps, HTMLButtonElement>>) {
   const buttonConfig = {
     // Background Colors
-    default: "bg-[#e9f2FA] border-adlerdarkblue",
-    success: "bg-gradient-to-br from-adlergreen border-adlerdarkblue",
-    pressed: "bg-[#45a0e5] border-adlerdarkblue",
-    locked: "bg-[#b9bfc6] border-adlerdarkblue",
+    default: "bg-[#e9f2FA]",
+    success: "bg-adlergreen",
+    pressed: "bg-[#45a0e5]",
+    locked: "bg-[#b9bfc6]",
 
     // Shapes
     square:
@@ -39,7 +39,7 @@ export default function StyledButton({
         disabled
           ? "text-adlergrey-300 bg-adlerdeactivated hover:cursor-default"
           : tailwindMerge(
-              "flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl active:translate-x-2 active:translate-y-2 active:border-none text-[#1f3d6a] active:border-transparent font-[roboto] border-t-[1px] border-l-[1px] border-b-4 border-r-4",
+              "flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl active:translate-x-2 active:translate-y-2 active:border-none text-[#1f3d6a] active:border-transparent font-[roboto] border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue",
               buttonConfig[color],
               buttonConfig[shape]
             )

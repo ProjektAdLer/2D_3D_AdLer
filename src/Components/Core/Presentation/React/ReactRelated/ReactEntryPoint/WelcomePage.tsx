@@ -9,13 +9,10 @@ export default function WelcomePage() {
   return (
     <React.Fragment>
       <div className="grid h-0 min-h-screen grid-cols-5 grid-rows-5 p-6 bg-gradient-to-br from-[#a1c8e5] to-[#e2eaf2]">
-        <div className="z-10 col-start-1 row-start-1">
-          <LoginComponent />
-        </div>
-
-        <p className="self-center col-span-2 col-start-4 row-start-1 p-2 text-lg font-extrabold font-[roboto] text-adlerdarkblue rounded-lg lg:col-span-3 lg:col-start-2 xl:col-start-1 xl:col-span-5 lg:row-start-1 lg:p-5 justify-self-center lg:text-4xl 2xl:text-8xl">
+        <LoginComponent className="z-10 col-start-1 row-start-1" />
+        <h1 className="self-center col-span-2 col-start-4 row-start-1 p-2 text-lg font-extrabold font-[roboto] text-adlerdarkblue rounded-lg lg:col-span-3 lg:col-start-2 xl:col-start-1 xl:col-span-5 lg:row-start-1 lg:p-5 justify-self-center lg:text-4xl 2xl:text-8xl">
           Willkommen bei AdLer!
-        </p>
+        </h1>
 
         <div className="flex flex-col items-center justify-center col-span-2 col-start-4 row-span-3 row-start-2 gap-4 m-1 lg:col-span-3 lg:col-start-2 lg:row-start-5">
           <WorldMenuButton />

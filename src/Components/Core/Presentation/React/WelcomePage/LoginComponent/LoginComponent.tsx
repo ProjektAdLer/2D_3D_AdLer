@@ -11,11 +11,13 @@ import React, { useEffect } from "react";
 import { useInjection } from "inversify-react";
 import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
 /**
  * React Component that displays a login button. When clicked, a modal will be overlayed.
  */
-export default function LoginComponent() {
+export default function LoginComponent({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
     LoginComponentViewModel,
     LoginComponentController
@@ -40,6 +42,7 @@ export default function LoginComponent() {
   return (
     <React.Fragment>
       <StyledButton
+        className={tailwindMerge(className)}
         color={userLoggedIn ? "success" : "default"}
         onClick={() => setModalVisible(true)}
       >

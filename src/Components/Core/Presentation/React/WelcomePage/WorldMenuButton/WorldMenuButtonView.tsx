@@ -8,8 +8,10 @@ import { useInjection } from "inversify-react";
 import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import { useEffect } from "react";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
-export default function WorldMenuButton() {
+export default function WorldMenuButton({ className }: AdLerUIComponent) {
   const [viewModel] = useBuilder<WorldMenuButtonViewModel, undefined>(
     BUILDER_TYPES.IWorldMenuButtonBuilder
   );
@@ -28,6 +30,7 @@ export default function WorldMenuButton() {
   return (
     <div>
       <StyledButton
+        className={tailwindMerge(className)}
         shape="freefloatleft"
         disabled={!userLoggedIn}
         onClick={() => history.push("/worldmenu")}
