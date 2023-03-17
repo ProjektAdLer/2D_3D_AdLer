@@ -14,10 +14,11 @@ export default function TutorialPdfButton({
   return (
     <React.Fragment>
       <StyledButton
-        icon={helpIcon}
         onClick={() => setIsOpen(true)}
         className={tailwindMerge(className)}
-      />
+      >
+        <img className="w-10 xl:w-12" src={helpIcon} alt="Help Icon" />
+      </StyledButton>
       <StyledModal showModal={isOpen} onClose={() => setIsOpen(false)}>
         <div className="w-[90vw] h-[90vh] text-adlerdarkblue font-medium overflow-auto p-3">
           {PDFObject.supportsPDFs ? (
@@ -76,7 +77,7 @@ function MobilePDFComponent({ pdfFileUrl }: { pdfFileUrl: string }) {
         </StyledButton>
       </div>
 
-      <div className="">
+      <div>
         <Document file={filepath} onLoadSuccess={onDocumentLoadSuccess}>
           <Page
             width={window.innerWidth * 0.87}

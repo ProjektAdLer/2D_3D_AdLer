@@ -6,8 +6,10 @@ import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/Style
 import IWorldCompletionModalController from "./IWorldCompletionModalController";
 import WorldCompletionModalViewModel from "./WorldCompletionModalViewModel";
 import SolutionIcon from "../../../../../../Assets/icons/14-1-world-completed/world-completed-icon-nobg.svg";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
-export default function WorldCompletionModal() {
+export default function WorldCompletionModal({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
     WorldCompletionModalViewModel,
     IWorldCompletionModalController
@@ -19,7 +21,10 @@ export default function WorldCompletionModal() {
 
   return (
     <StyledModal
-      className="flex flex-col items-center justify-center"
+      className={tailwindMerge(
+        className,
+        "flex flex-col items-center justify-center"
+      )}
       title="Lernwelt abgeschlossen!"
       showModal={showModal && !viewModel.wasClosedOnce}
       onClose={() => {
