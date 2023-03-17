@@ -20,7 +20,7 @@ export default function TutorialPdfButton({
         className={className}
       />
       <StyledModal showModal={isOpen} onClose={() => setIsOpen(false)}>
-        <div className="w-[90vw] h-[90vh] text-black font-medium overflow-auto bg-adlerblue-100 p-3">
+        <div className="w-[90vw] h-[90vh] text-adlerdarkblue font-medium overflow-auto p-3">
           {PDFObject.supportsPDFs ? (
             <DesktopPDFComponent pdfFileUrl={pdfFileUrl} />
           ) : (
@@ -64,7 +64,7 @@ function MobilePDFComponent({ pdfFileUrl }: { pdfFileUrl: string }) {
 
   return (
     <div className="flex-col h-full ">
-      <div className="flex flex-row justify-center mb-2 w-full h-6">
+      <div className="flex flex-row justify-center w-full h-6 mb-2">
         <StyledButton
           shape="freefloatcenter"
           className=""

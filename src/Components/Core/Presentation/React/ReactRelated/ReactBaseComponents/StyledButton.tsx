@@ -21,7 +21,7 @@ export default function StyledButton({
     // Background Colors
     default: "bg-[#e9f2FA]",
     success: "bg-adlergreen",
-    pressed: "bg-[#45a0e5]",
+    pressed: "bg-[#ACE8FC]",
     locked: "bg-[#b9bfc6]",
 
     // Shapes
@@ -36,12 +36,12 @@ export default function StyledButton({
       disabled={disabled}
       className={tailwindMerge(
         className,
+        buttonConfig[shape],
         disabled
-          ? "text-adlergrey-300 bg-adlerdeactivated hover:cursor-default"
+          ? "text-adlergrey-300 bg-adlerdeactivated hover:cursor-default rounded-lg"
           : tailwindMerge(
-              "flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl active:translate-x-2 active:translate-y-2 active:border-none text-[#1f3d6a] active:border-transparent font-[roboto] border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue",
-              buttonConfig[color],
-              buttonConfig[shape]
+              "flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl active:translate-x-1 active:translate-y-1 active:border-transparent text-[#1f3d6a] font-[roboto] border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue",
+              buttonConfig[color]
             )
       )}
       {...rest}

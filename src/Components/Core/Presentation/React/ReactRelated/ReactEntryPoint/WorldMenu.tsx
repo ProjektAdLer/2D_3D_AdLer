@@ -24,7 +24,7 @@ export default function WorldMenu() {
             <WorldDetail />
           </div>
           <TutorialPdfButton
-            className="fixed z-20 left-2 bottom-2 max-h-3/4"
+            className="fixed z-20 left-2 bottom-2"
             pdfFileUrl={"/SampleLearningElementData/testPDF.pdf"}
           />
         </div>
