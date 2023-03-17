@@ -9,6 +9,7 @@ import MenuHeaderBarViewModel from "./MenuHeaderBarViewModel";
 import homeIcon from "../../../../../../Assets/icons/22-home-icon/home-icon-nobg.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
+import TutorialPdfButton from "../SpaceTutorial/TutorialPdfButton";
 
 export default function MenuHeaderBar({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
@@ -37,8 +38,10 @@ export default function MenuHeaderBar({ className }: AdLerUIComponent) {
           </StyledContainer>
         </div>
         <div className="flex items-end w-1/2 ">
-          <div className="w-20 xl:w-12"></div>
-          {/* <MenuTutorial /> WHEN TUTORIAL IS FIXED */}
+          <TutorialPdfButton
+            className="fixed right-2 top-2"
+            pdfFileUrl={"/SampleLearningElementData/testPDF.pdf"}
+          />
         </div>
       </div>
     </React.Fragment>

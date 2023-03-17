@@ -13,8 +13,10 @@ import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg"
 import { logger } from "src/Lib/Logger";
 import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
 import greenSwosh from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
-export default function SpaceDetail() {
+export default function SpaceDetail({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
     SpaceDetailViewModel,
     SpaceDetailController
@@ -43,7 +45,12 @@ export default function SpaceDetail() {
     return null;
 
   return (
-    <div className="flex flex-col gap-2 w-[100%] overflow-auto">
+    <div
+      className={tailwindMerge(
+        className,
+        "flex flex-col gap-2 w-full overflow-auto self-start"
+      )}
+    >
       <div className="flex flex-row items-center justify-between p-1 pb-4 border-b border-gray-500">
         <div className="flex flex-row">
           <img src={spaceIcon} className="w-6 xl:w-8" alt="Lernraum-Icon"></img>

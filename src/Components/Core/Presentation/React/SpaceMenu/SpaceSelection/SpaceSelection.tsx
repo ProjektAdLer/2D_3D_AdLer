@@ -10,8 +10,10 @@ import { useEffect, useState } from "react";
 import SpaceSelectionGraph from "./Graph/SpaceSelectionGraph";
 import { ReactFlowProvider } from "reactflow";
 import SpaceSelectionList from "./List/SpaceSelectionList";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
-export default function SpaceSelection() {
+export default function SpaceSelection({ className }: AdLerUIComponent) {
   const loadWorldUseCase = useInjection<ILoadWorldUseCase>(
     USECASE_TYPES.ILoadWorldUseCase
   );
@@ -38,7 +40,12 @@ export default function SpaceSelection() {
   if (!viewModel || !controller) return null;
 
   return (
-    <div className="w-full">
+    <div
+      className={tailwindMerge(
+        className,
+        "w-full flex-col flex justify-center"
+      )}
+    >
       {
         <div className="flex flex-row ml-4">
           <p className="mr-3 text-md font-[roboto] font-medium text-adlerdarkblue">
