@@ -10,13 +10,12 @@ export default function WelcomePage() {
     <React.Fragment>
       <div className="grid h-0 min-h-screen grid-cols-5 grid-rows-5 p-6 bg-gradient-to-br from-[#a1c8e5] to-[#e2eaf2]">
         <LoginComponent className="z-10 col-start-1 row-start-1" />
+
         <h1 className="self-center col-span-2 col-start-4 row-start-1 p-2 text-lg font-extrabold font-[roboto] text-adlerdarkblue rounded-lg lg:col-span-3 lg:col-start-2 xl:col-start-1 xl:col-span-5 lg:row-start-1 lg:p-5 justify-self-center lg:text-4xl 2xl:text-8xl">
           Willkommen bei AdLer!
         </h1>
 
-        <div className="flex flex-col items-center justify-center col-span-2 col-start-4 row-span-3 row-start-2 gap-4 m-1 lg:col-span-3 lg:col-start-2 lg:row-start-5">
-          <WorldMenuButton />
-        </div>
+        <WorldMenuButton className="self-center col-span-2 col-start-4 row-span-3 row-start-2 gap-4 m-1 justify-self-center w-fit h-fit lg:col-span-3 lg:col-start-2 lg:row-start-5" />
 
         <div className="flex items-center justify-center col-span-3 col-start-1 row-span-4 row-start-1 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-3">
           <img
@@ -34,7 +33,7 @@ export default function WelcomePage() {
       </div>
 
       <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
-        <div className="text-lg font-bold text-white text-shadow-sm">
+        <div className="text-lg font-bold text-adlerdarkblue">
           <h1>
             Die AdLer Engine ist für den<br></br>
             Landscape Modus konzipiert.<br></br>

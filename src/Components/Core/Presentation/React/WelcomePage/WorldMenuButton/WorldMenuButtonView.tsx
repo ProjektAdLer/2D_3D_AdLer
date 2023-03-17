@@ -28,15 +28,13 @@ export default function WorldMenuButton({ className }: AdLerUIComponent) {
   }, [getLoginStatusUseCase, setUserLoggedIn]);
 
   return (
-    <div>
-      <StyledButton
-        className={tailwindMerge(className)}
-        shape="freefloatleft"
-        disabled={!userLoggedIn}
-        onClick={() => history.push("/worldmenu")}
-      >
-        Gehe zum Lernraum Menü
-      </StyledButton>
-    </div>
+    <StyledButton
+      className={tailwindMerge(className)}
+      shape="freefloatleft"
+      disabled={!userLoggedIn}
+      onClick={() => history.push("/worldmenu")}
+    >
+      Gehe zum Lernraum Menü
+    </StyledButton>
   );
 }
