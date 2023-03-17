@@ -24,12 +24,12 @@ export default function WorldMenu() {
 
         <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
           <div className="text-lg font-bold text-white text-shadow-sm">
-            <h1>
+            <p>
               Die AdLer Engine ist für den<br></br>
               Landscape Modus konzipiert.<br></br>
               Bitte nimm dein Smartphone quer.<br></br>
               Danke!
-            </h1>
+            </p>
           </div>
         </StyledModal>
       </main>
