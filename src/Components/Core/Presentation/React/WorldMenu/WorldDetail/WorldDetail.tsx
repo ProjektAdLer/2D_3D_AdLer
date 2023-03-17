@@ -31,15 +31,15 @@ export default function WorldDetail({ className }: AdLerUIComponent) {
     <div
       className={tailwindMerge(
         className,
-        "flex flex-col gap-2 w-[100%] overflow-auto"
+        "flex flex-col self-start gap-2 w-[100%] overflow-auto"
       )}
     >
-      <div className="flex flex-row items-center justify-between p-1 pb-4 border-b border-gray-500">
-        <div className="flex flex-row">
+      <div className="flex flex-row items-center justify-between p-1 border-b border-gray-500">
+        <div className="flex">
           <img src={worldIcon} className="w-6 xl:w-8" alt="Lernwelt-Icon"></img>
-          <div className="ml-2 text-lg text-adlerdarkblue lg:text-2xl roboto-black">
+          <h2 className="ml-2 text-lg text-adlerdarkblue lg:text-2xl roboto-black">
             {name}
-          </div>
+          </h2>
         </div>
         <StyledButton
           shape="freefloatleft"

@@ -14,8 +14,8 @@ export default function WorldMenu() {
         <MenuHeaderBar className="self-center w-full p-2 font-semibold border-b-2 border-dotted border-adlerdarkblue" />
 
         <section className="grid h-0 min-h-full grid-cols-2 grid-rows-1 grow lg:rounded-lg">
-          <WorldSelection className="flex justify-center col-start-1 p-2 border-r-2 border-dotted lg:p-8 border-adlerdarkblue" />
-          <WorldDetail className="flex justify-center col-start-2 p-2 lg:p-8" />
+          <WorldSelection className="col-start-1 p-2 border-r-2 border-dotted lg:p-8 border-adlerdarkblue" />
+          <WorldDetail className="col-start-2 p-2 lg:p-8" />
           <TutorialPdfButton
             className="fixed z-20 left-2 bottom-2"
             pdfFileUrl={"/SampleLearningElementData/testPDF.pdf"}
