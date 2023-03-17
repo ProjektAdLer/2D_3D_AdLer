@@ -1,23 +1,22 @@
 import React, { useCallback, useEffect, useState } from "react";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import helpIcon from "../../../../../../Assets/icons/26-help/help-icon.svg";
-import { Document, Page, pdfjs } from "react-pdf";
+import { Document, Page } from "react-pdf";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import PDFObject from "pdfobject";
+import tailwindMerge from "../../../Utils/TailwindMerge";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 export default function TutorialPdfButton({
   className,
   pdfFileUrl,
-}: {
-  className?: string;
-  pdfFileUrl: string;
-}) {
+}: AdLerUIComponent<{ pdfFileUrl: string }>) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <React.Fragment>
       <StyledButton
         icon={helpIcon}
         onClick={() => setIsOpen(true)}
-        className={className}
+        className={tailwindMerge(className)}
       />
       <StyledModal showModal={isOpen} onClose={() => setIsOpen(false)}>
         <div className="w-[90vw] h-[90vh] text-adlerdarkblue font-medium overflow-auto p-3">
@@ -31,9 +30,6 @@ export default function TutorialPdfButton({
     </React.Fragment>
   );
 }
-
-// Desktop component uses PDFObject to embed the PDF in an inlined version of the browsers PDF viewer
-// See https://pdfobject.com for reference
 function DesktopPDFComponent({ pdfFileUrl }: { pdfFileUrl: string }) {
   useEffect(() => {
     PDFObject.embed(pdfFileUrl, "#pdf");
