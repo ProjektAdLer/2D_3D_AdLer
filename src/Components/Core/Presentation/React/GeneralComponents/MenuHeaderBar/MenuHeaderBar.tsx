@@ -7,8 +7,10 @@ import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/S
 import MenuHeaderBarController from "./MenuHeaderBarController";
 import MenuHeaderBarViewModel from "./MenuHeaderBarViewModel";
 import homeIcon from "../../../../../../Assets/icons/22-home-icon/home-icon-nobg.svg";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
-export default function MenuHeaderBar() {
+export default function MenuHeaderBar({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
     MenuHeaderBarViewModel,
     MenuHeaderBarController
@@ -20,9 +22,9 @@ export default function MenuHeaderBar() {
 
   return (
     <React.Fragment>
-      <div className="flex flex-row place-content-stretch">
+      <div className={tailwindMerge(className, "flex place-content-stretch")}>
         <div className="flex items-center w-1/2 place-content-stretch justify-self-start">
-          <StyledButton className="" onClick={controller.onMenuButtonClicked}>
+          <StyledButton onClick={controller.onMenuButtonClicked}>
             <img className="w-10 xl:w-12" src={homeIcon} alt="Home Icon" />
           </StyledButton>
         </div>

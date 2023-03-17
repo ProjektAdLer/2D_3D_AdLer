@@ -13,8 +13,10 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import { useInjection } from "inversify-react";
 import ILoadUserWorldsUseCase from "src/Components/Core/Application/UseCases/LoadUserWorlds/ILoadUserWorldsUseCase";
 import { useEffect } from "react";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
-export default function WorldSelection() {
+export default function WorldSelection({ className }: AdLerUIComponent) {
   const loadUserWorldsUseCase = useInjection<ILoadUserWorldsUseCase>(
     USECASE_TYPES.ILoadUserWorldsUseCase
   );
@@ -39,23 +41,25 @@ export default function WorldSelection() {
   if (!viewModel || !controller) return null;
 
   return (
-    <ul className="flex flex-col gap-4 w-[100%] overflow-auto">
-      {worlds?.map((world) => {
-        let worldIcon: string;
-        if (world.isCompleted) worldIcon = worldSolved;
-        else worldIcon = worldAvailable;
+    <div className={tailwindMerge(className)}>
+      <ul className="flex flex-col gap-4 w-[100%] overflow-auto">
+        {worlds?.map((world) => {
+          let worldIcon: string;
+          if (world.isCompleted) worldIcon = worldSolved;
+          else worldIcon = worldAvailable;
 
-        return (
-          <li className="flex items-center" key={world.id}>
-            <WorldSelectionRow
-              icon={worldIcon}
-              title={world.name}
-              selected={selectedRowID === world.id}
-              onClickCallback={() => controller.onWorldRowClicked(world.id)}
-            />
-          </li>
-        );
-      })}
-    </ul>
+          return (
+            <li className="flex items-center" key={world.id}>
+              <WorldSelectionRow
+                icon={worldIcon}
+                title={world.name}
+                selected={selectedRowID === world.id}
+                onClickCallback={() => controller.onWorldRowClicked(world.id)}
+              />
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }

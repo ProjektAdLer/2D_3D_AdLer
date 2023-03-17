@@ -10,8 +10,10 @@ import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponent
 import IWorldDetailController from "./IWorldDetailController";
 import greenSwosh from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import spaceIcon from "../../../../../../Assets/icons/13-space/space-icon-nobg.svg";
+import tailwindMerge from "../../../Utils/TailwindMerge";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 
-export default function WorldDetail() {
+export default function WorldDetail({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
     WorldDetailViewModel,
     IWorldDetailController
@@ -26,7 +28,12 @@ export default function WorldDetail() {
   if (name === undefined || name === "") return null;
 
   return (
-    <div className="flex flex-col gap-2 w-[100%] overflow-auto">
+    <div
+      className={tailwindMerge(
+        className,
+        "flex flex-col gap-2 w-[100%] overflow-auto"
+      )}
+    >
       <div className="flex flex-row items-center justify-between p-1 pb-4 border-b border-gray-500">
         <div className="flex flex-row">
           <img src={worldIcon} className="w-6 xl:w-8" alt="Lernwelt-Icon"></img>
