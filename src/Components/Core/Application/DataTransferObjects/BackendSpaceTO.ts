@@ -1,5 +1,5 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
-import ElementTO from "./ElementTO";
+import BackendElementTO from "./BackendElementTO";
 
 /**
  * Data Transfer Object for a Space
@@ -17,7 +17,7 @@ import ElementTO from "./ElementTO";
 export default class BackendSpaceTO {
   id: ComponentID;
   name: string;
-  elements: ElementTO[];
+  elements: BackendElementTO[];
   description: string;
   goals: string;
   requirements: ComponentID[];

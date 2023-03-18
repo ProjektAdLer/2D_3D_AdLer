@@ -155,7 +155,7 @@ export default class MockBackendAdapter implements IBackendPort {
   getWorldData({
     userToken,
     worldID,
-  }: GetWorldDataParams): Promise<Partial<BackendWorldTO>> {
+  }: GetWorldDataParams): Promise<BackendWorldTO> {
     return Promise.resolve(
       BackendAdapterUtils.parseDSL(
         worldID === 1 ? this.smallWorld : this.bigWorld

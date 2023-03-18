@@ -1,6 +1,6 @@
+import BackendElementTO from "../../Application/DataTransferObjects/BackendElementTO";
 import BackendSpaceTO from "../../Application/DataTransferObjects/BackendSpaceTO";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
-import ElementTO from "../../Application/DataTransferObjects/ElementTO";
 import { ElementTypes } from "../../Domain/Types/ElementTypes";
 import IDSL, { APIElement, APISpace } from "./Types/IDSL";
 
@@ -9,7 +9,7 @@ import IDSL, { APIElement, APISpace } from "./Types/IDSL";
  */
 export default class BackendAdapterUtils {
   public static parseDSL(dsl: IDSL): BackendWorldTO {
-    const elements: ElementTO[] = this.mapElements(dsl.world.elements);
+    const elements: BackendElementTO[] = this.mapElements(dsl.world.elements);
 
     const spaces: BackendSpaceTO[] = this.mapSpaces(dsl.world.spaces, elements);
 
@@ -27,7 +27,7 @@ export default class BackendAdapterUtils {
   // maps the spaces from the DSL to SpaceTOs and connects them with their elements
   private static mapSpaces(
     spaces: APISpace[],
-    elements: ElementTO[]
+    elements: BackendElementTO[]
   ): BackendSpaceTO[] {
     return spaces.map((space) => {
       return {
@@ -45,7 +45,7 @@ export default class BackendAdapterUtils {
   }
 
   // creates ElementTOs from the DSL if the element type is supported
-  private static mapElements(elements: APIElement[]): ElementTO[] {
+  private static mapElements(elements: APIElement[]): BackendElementTO[] {
     return elements.flatMap((element) => {
       if (element.elementCategory in ElementTypes) {
         return {
@@ -55,8 +55,7 @@ export default class BackendAdapterUtils {
           name: element.elementName,
           type: element.elementCategory,
           value: element.elementMaxScore || 0,
-          //parentSpaceID: element.learningSpaceParentId,
-        } as ElementTO;
+        } as BackendElementTO;
       } else return [];
     });
   }

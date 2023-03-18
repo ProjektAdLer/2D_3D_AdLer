@@ -20,6 +20,7 @@ import type ISetUserLocationUseCase from "../SetUserLocation/ISetUserLocationUse
 import type { IInternalCalculateSpaceScoreUseCase } from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import BackendWorldTO from "../../DataTransferObjects/BackendWorldTO";
+import BackendElementTO from "../../DataTransferObjects/BackendElementTO";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -165,7 +166,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
   private createElementEntities = (
     worldID: number,
-    elements: ElementTO[],
+    elements: BackendElementTO[],
     worldStatus: WorldStatusTO
   ): ElementEntity[] => {
     const elementEntities: ElementEntity[] = [];
