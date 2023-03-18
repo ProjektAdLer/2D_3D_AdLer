@@ -59,9 +59,8 @@ describe("WorldMenuButton", () => {
       </Provider>
     );
 
-    const style =
-      componentUnderTest.container.children[0].children[0].className;
-    expect(style).toContain("bg-adlerdeactivated");
+    const buttonStyle = componentUnderTest.getByRole("button").className;
+    expect(buttonStyle).toMatchSnapshot();
   });
 
   test("WorldMenuButton Tailwind Styling contains normal backgroundColor if logged in", () => {
@@ -75,9 +74,8 @@ describe("WorldMenuButton", () => {
       </Provider>
     );
 
-    const style =
-      componentUnderTest.container.children[0].children[0].className;
-    expect(style).toContain("bg-adlerblue");
+    const buttonStyle = componentUnderTest.getByRole("button").className;
+    expect(buttonStyle).toMatchSnapshot();
   });
 
   test("on click calls history.push", () => {

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WorldMenuButton WorldMenuButton Tailwind Styling contains grey backgroundColor if not logged in 1`] = `"px-2 py-1 text-adlergrey-300 bg-adlerdeactivated hover:cursor-default rounded-lg"`;
+
+exports[`WorldMenuButton WorldMenuButton Tailwind Styling contains normal backgroundColor if logged in 1`] = `"px-2 py-1 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl active:translate-x-1 active:translate-y-1 active:border-transparent text-[#1f3d6a] font-[roboto] border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue bg-[#e9f2FA]"`;
