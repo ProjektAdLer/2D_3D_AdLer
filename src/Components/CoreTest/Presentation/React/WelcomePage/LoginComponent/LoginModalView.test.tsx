@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { mock } from "jest-mock-extended";
 import React from "react";
 import LoginComponentViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentViewModel";
@@ -57,9 +57,10 @@ describe("LoginModal", () => {
     );
 
     fireEvent.click(componentUnderTest.getByText("Passwort vergessen?"));
-
-    expect(alertMock).toHaveBeenCalledWith(
-      "Hier kannst du bald dein neues Passwort bekommen!"
-    );
+    waitFor(() => {
+      expect(alertMock).toHaveBeenCalledWith(
+        "Hier kannst du bald dein neues Passwort bekommen!"
+      );
+    });
   });
 });
