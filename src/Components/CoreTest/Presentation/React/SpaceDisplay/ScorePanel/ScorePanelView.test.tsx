@@ -21,12 +21,12 @@ describe("Score Panel View", () => {
     expect(comp.container).toHaveTextContent("1");
     expect(comp.container).toHaveTextContent("2");
   });
+
   it("Score Panel View in world config renders the correct score", () => {
     useBuilderMock([fakeModel, undefined]);
     const comp = render(<ScorePanel scoreType="world" />);
 
-    expect(comp.container).toHaveTextContent("4");
-    expect(comp.container).toHaveTextContent("5");
+    expect(comp.container).toHaveTextContent("80%");
   });
 
   it("returns null when viewModel is not registered", () => {
