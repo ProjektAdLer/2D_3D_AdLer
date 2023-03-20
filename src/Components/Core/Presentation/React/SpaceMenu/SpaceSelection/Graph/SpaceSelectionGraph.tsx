@@ -1,3 +1,7 @@
+import spaceSolved from "../../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
+import spaceAvailable from "../../../../../../../Assets/icons/27-1-lock-open/lock-icon-open-nobg.svg";
+import spaceLocked from "../../../../../../../Assets/icons/27-lock-closed/lock-icon-closed-nobg.svg";
+
 import ISpaceSelectionController from "../ISpaceSelectionController";
 import SpaceSelectionViewModel from "../SpaceSelectionViewModel";
 import ReactFlow, {
@@ -18,10 +22,10 @@ import SpaceSelectionNode, {
   SpaceSelectionNodeType,
 } from "./SpaceSelectionNode";
 import dagre from "dagre";
+import ELK, { ElkNode } from "elkjs/lib/elk.bundled.js";
+import { ElkExtendedEdge } from "elkjs";
 
-import spaceSolved from "../../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
-import spaceAvailable from "../../../../../../../Assets/icons/27-1-lock-open/lock-icon-open-nobg.svg";
-import spaceLocked from "../../../../../../../Assets/icons/27-lock-closed/lock-icon-closed-nobg.svg";
+const elk = new ELK();
 
 const nodeTypes: NodeTypes = {
   spaceNode: SpaceSelectionNode,
@@ -99,31 +103,75 @@ export default function SpaceSelectionGraph(props: {
       return accumulatedEdgeArray;
     }, [] as Edge[]);
 
+    const nodeWidth = 600;
+    const nodeHeight = 90;
+
     // layout graph with dagre
-    const dagreGraph = new dagre.graphlib.Graph();
-    dagreGraph.setDefaultEdgeLabel(() => ({}));
+    // const dagreGraph = new dagre.graphlib.Graph();
+    // dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-    const nodeWidth = 430;
-    const nodeHeight = 76;
+    // dagreGraph.setGraph({ rankdir: "TB" });
+    // nodes.forEach((node) => {
+    //   dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
+    // });
+    // edges.forEach((edge) => {
+    //   dagreGraph.setEdge(edge.source, edge.target);
+    // });
+    // dagre.layout(dagreGraph);
 
-    dagreGraph.setGraph({ rankdir: "TB" });
-    nodes.forEach((node) => {
-      dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
-    });
-    edges.forEach((edge) => {
-      dagreGraph.setEdge(edge.source, edge.target);
-    });
-    dagre.layout(dagreGraph);
+    // nodes.forEach((node) => {
+    //   const nodeWithPosition = dagreGraph.node(node.id);
+    //   node.position = {
+    //     x: nodeWithPosition.x - nodeWidth / 2,
+    //     y: nodeWithPosition.y - nodeHeight / 2,
+    //   };
+    // });
 
-    nodes.forEach((node) => {
-      const nodeWithPosition = dagreGraph.node(node.id);
-      node.position = {
-        x: nodeWithPosition.x - nodeWidth / 2,
-        y: nodeWithPosition.y - nodeHeight / 2,
-      };
+    // layout graph with elk
+    const elkGraph: ElkNode = {
+      id: "root",
+      layoutOptions: {
+        "elk.algorithm": "layered",
+        "elk.direction": "DOWN",
+        "elk.alignment": "V_CENTER",
+        "elk.edgeRouting": "SPLINES",
+      },
+      children: nodes.map((node) => {
+        return {
+          id: node.id,
+          width: nodeWidth,
+          height: nodeHeight,
+        } as ElkNode;
+      }),
+      edges: edges.map((edge) => {
+        return {
+          id: edge.id,
+          sources: [edge.source],
+          targets: [edge.target],
+        } as ElkExtendedEdge;
+      }),
+    };
+
+    elk.layout(elkGraph).then((graph) => {
+      console.log(graph);
+      nodes.forEach((node) => {
+        const nodeWithPosition = graph.children!.find(
+          (child) => child.id === node.id
+        );
+        if (nodeWithPosition) {
+          console.log("position set");
+          node.position = {
+            x: nodeWithPosition.x! - nodeWidth / 2,
+            y: nodeWithPosition.y! - nodeHeight / 2,
+          };
+        }
+      });
+
+      console.log(nodes);
+
+      reactFlowInstance.setNodes(nodes);
+      reactFlowInstance.setEdges(edges);
     });
-    reactFlowInstance.setNodes(nodes);
-    reactFlowInstance.setEdges(edges);
   }, [spaces, reactFlowInstance]);
 
   const onNodeClickCallback = useCallback<NodeMouseHandler>(
