@@ -4,8 +4,8 @@ import { ElementTypeStrings } from "../../Domain/Types/ElementTypes";
 export default class BackendElementTO {
   id: ComponentID;
   value: number;
-  parentSpaceID: ComponentID;
-  parentWorldID: ComponentID;
+  deleteme__parentSpaceID: ComponentID;
+  deleteme__parentWorldID: ComponentID;
   name: string;
   description: string;
   goals: string;
