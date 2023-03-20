@@ -9,6 +9,5 @@ export default class ElementEntity {
   public description: string;
   public goals: string;
   public type: ElementTypeStrings;
-  public parentSpaceID: ComponentID;
   public parentWorldID: ComponentID;
 }

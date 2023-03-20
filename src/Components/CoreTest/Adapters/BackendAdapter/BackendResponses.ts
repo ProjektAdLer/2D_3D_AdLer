@@ -23,7 +23,6 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
           type: "text",
           description: "TestDescription",
           goals: "TestGoals",
-          deleteme__parentSpaceID: 1,
         },
       ],
     },
