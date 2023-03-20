@@ -8,6 +8,6 @@ export default class SpaceGoalPanelPresenter
   constructor(private viewModel: SpaceGoalPanelViewModel) {}
 
   onSpaceLoaded(spaceTO: SpaceTO): void {
-    this.viewModel.goal.Value = spaceTO.goals;
+    this.viewModel.goals.Value = spaceTO.goals;
   }
 }

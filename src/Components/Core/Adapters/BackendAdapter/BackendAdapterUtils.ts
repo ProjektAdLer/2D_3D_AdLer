@@ -36,7 +36,7 @@ export default class BackendAdapterUtils {
           space.spaceContents.includes(element.id)
         ),
         description: space.spaceDescription,
-        goals: space.spaceGoals[0] || "",
+        goals: space.spaceGoals || [""],
         requirements: [], // TODO: implement requirements,
         requiredScore: space.requiredPointsToComplete,
       } as BackendSpaceTO;

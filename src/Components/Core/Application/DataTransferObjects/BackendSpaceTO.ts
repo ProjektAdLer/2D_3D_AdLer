@@ -19,7 +19,7 @@ export default class BackendSpaceTO {
   name: string;
   elements: BackendElementTO[];
   description: string;
-  goals: string;
+  goals: string[];
   requirements: ComponentID[];
   requiredScore: number;
 }

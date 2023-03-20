@@ -9,7 +9,7 @@ const viewModelMock = new SpaceGoalPanelViewModel();
 
 describe("SpaceGoalPanel", () => {
   test("should render", () => {
-    viewModelMock.goal.Value = "Lernziel";
+    viewModelMock.goals.Value = ["Lernziel"];
     useBuilderMock([viewModelMock, undefined]);
 
     const componentUnderTest = render(<SpaceGoalPanel />);
@@ -21,7 +21,7 @@ describe("SpaceGoalPanel", () => {
 
   test("should not render, if no  World Goal is provided", () => {
     //@ts-ignore
-    viewModelMock.goal.Value = undefined;
+    viewModelMock.goals.Value = undefined;
     useBuilderMock([viewModelMock, undefined]);
 
     const componentUnderTest = render(<SpaceGoalPanel />);
@@ -30,7 +30,7 @@ describe("SpaceGoalPanel", () => {
   });
 
   test("onClick sets isOpen state correctly", () => {
-    viewModelMock.goal.Value = "Test World";
+    viewModelMock.goals.Value = ["Test World"];
     useBuilderMock([viewModelMock, undefined]);
 
     const componentUnderTest = render(<SpaceGoalPanel key="WorldGoalPanel" />);

@@ -10,7 +10,7 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
   spaces: [
     {
       description: "TestDescription",
-      goals: "TestGoals",
+      goals: ["TestGoals"],
       requirements: [],
       id: 1,
       name: "TestSpace",
@@ -43,7 +43,7 @@ export const expectedSpaceTO: BackendSpaceTO = {
   name: expect.any(String),
   elements: expect.any(Array),
   description: expect.any(String),
-  goals: expect.any(String),
+  goals: expect.arrayContaining([expect.any(String)]),
   requirements: expect.any(Array),
   requiredScore: expect.any(Number),
 };
@@ -55,7 +55,6 @@ export const expectedElementTO: Partial<ElementTO> = {
   description: expect.any(String),
   goals: expect.any(String),
   type: expect.any(String),
-  //parentSpaceID: expect.any(Number),
 };
 
 export const mockDSL: IDSL = {

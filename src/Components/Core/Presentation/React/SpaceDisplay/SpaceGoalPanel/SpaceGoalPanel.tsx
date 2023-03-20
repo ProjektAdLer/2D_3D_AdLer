@@ -15,12 +15,12 @@ export default function SpaceGoalPanel() {
   >(BUILDER_TYPES.ISpaceGoalPanelBuilder);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [goal] = useObservable<string>(viewModel?.goal);
+  const [goals] = useObservable<string[]>(viewModel?.goals);
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
 
-  if (!goal) return null;
+  if (!goals) return null;
   if (!isOpen)
     // wenn nicht geklickt
     return (
@@ -55,7 +55,9 @@ export default function SpaceGoalPanel() {
             src={goalIcon}
             alt="Learning-Goal-Icon"
           ></img>
-          <TextWithLineBreaks text={goal} />
+          {goals.map((goal) => {
+            return <TextWithLineBreaks text={goal} key={Math.random()} />;
+          })}
         </StyledButton>
       </div>
     );

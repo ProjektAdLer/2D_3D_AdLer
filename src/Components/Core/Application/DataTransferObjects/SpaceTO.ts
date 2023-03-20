@@ -20,10 +20,9 @@ export default class SpaceTO {
   name: string;
   elements: ElementTO[];
   description: string;
-  goals: string;
+  goals: string[];
   requirements: ComponentID[];
   requiredScore: number;
   currentScore: number;
   maxScore: number;
-  parentWorldID: ComponentID;
 }

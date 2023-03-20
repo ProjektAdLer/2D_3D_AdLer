@@ -12,7 +12,7 @@ describe("WorldGoalPanel", () => {
   });
 
   test("should set the Goal of the world in the vm ", () => {
-    const goal = "Test";
+    const goal = ["Test"];
     const spaceTO: SpaceTO = {
       id: 0,
       name: "",
@@ -27,6 +27,6 @@ describe("WorldGoalPanel", () => {
 
     systemUnderTest.onSpaceLoaded(spaceTO);
 
-    expect(vm.goal.Value).toEqual(goal);
+    expect(vm.goals.Value).toEqual(goal);
   });
 });
