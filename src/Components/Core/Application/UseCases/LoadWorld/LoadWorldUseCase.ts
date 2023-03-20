@@ -179,7 +179,6 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
         name: element.name,
         type: element.type,
         value: element.value || 0,
-        parentSpaceID: element.deleteme__parentSpaceID,
         hasScored:
           worldStatus.elements.find((e) => e.elementID === element.id)
             ?.hasScored || false,
