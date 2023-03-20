@@ -5,6 +5,6 @@ export default class WorldTO {
   id: ComponentID;
   name: string;
   spaces: SpaceTO[];
-  goal: string;
+  goals: string[];
   description: string;
 }

@@ -15,7 +15,7 @@ export default class BackendAdapterUtils {
 
     const response: BackendWorldTO = {
       worldName: dsl.world.worldName,
-      goals: dsl.world.worldGoals[0] || "",
+      goals: dsl.world.worldGoals || [""],
       spaces: spaces,
       description: dsl.world.worldDescription,
     };

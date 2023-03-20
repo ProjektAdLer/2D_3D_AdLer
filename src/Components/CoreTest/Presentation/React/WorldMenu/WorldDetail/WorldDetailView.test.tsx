@@ -16,7 +16,7 @@ const mockSpaces: Observable<WorldDetailSpaceData[]> = new Observable([
 ]);
 const mockName: Observable<string> = new Observable("nameTest");
 const mockDescription: Observable<string> = new Observable("descriptionTest");
-const mockGoals: Observable<string> = new Observable("GoalsTest");
+const mockGoals: Observable<string[]> = new Observable(["GoalsTest"]);
 
 describe("WorldDetail in World Menu", () => {
   beforeEach(() => {

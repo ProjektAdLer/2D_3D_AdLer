@@ -13,7 +13,7 @@ describe("WorldDetailPresenter", () => {
     systemUnderTest.onWorldLoaded({
       name: "test",
       spaces: [{ id: 1, name: "test", currentScore: 0, requiredScore: 1 }],
-      goal: "test",
+      goals: ["test"],
       description: "test",
     } as Partial<WorldTO>);
 
@@ -21,7 +21,7 @@ describe("WorldDetailPresenter", () => {
       { id: 1, name: "test", isCompleted: false },
     ]);
     expect(systemUnderTest["viewModel"].name.Value).toEqual("test");
-    expect(systemUnderTest["viewModel"].goals.Value).toEqual("test");
+    expect(systemUnderTest["viewModel"].goals.Value).toEqual(["test"]);
     expect(systemUnderTest["viewModel"].description.Value).toEqual("test");
   });
 });

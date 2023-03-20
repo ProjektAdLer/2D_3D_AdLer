@@ -205,7 +205,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       {
         name: apiWorldDataResponse.worldName,
         spaces: spaceEntities,
-        goal: apiWorldDataResponse.goals,
+        goals: apiWorldDataResponse.goals,
         id: worldID,
         description: apiWorldDataResponse.description,
       },

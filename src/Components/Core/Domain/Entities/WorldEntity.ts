@@ -4,7 +4,7 @@ import SpaceEntity from "./SpaceEntity";
 export default class WorldEntity {
   name: string;
   spaces: SpaceEntity[];
-  goal: string;
+  goals: string[];
   id: ComponentID;
   description: string;
 }

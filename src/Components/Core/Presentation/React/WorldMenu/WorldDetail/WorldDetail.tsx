@@ -21,7 +21,7 @@ export default function WorldDetail({ className }: AdLerUIComponent) {
 
   const [name] = useObservable<string>(viewModel.name);
   const [description] = useObservable<string>(viewModel.description);
-  const [goals] = useObservable<string>(viewModel.goals);
+  const [goals] = useObservable<string[]>(viewModel.goals);
   const [spaces] = useObservable<WorldDetailSpaceData[]>(viewModel.spaces);
 
   // return if any of the observables is undefined
@@ -62,13 +62,15 @@ export default function WorldDetail({ className }: AdLerUIComponent) {
             </div>
           ))}
         {goals === undefined ||
-          (goals !== "" && (
+          (goals && (
             <div className="pb-2 border-b border-gray-500">
               <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
                 Lernziele:
               </div>
               <div className="items-start ml-6 lg:text:lg roboto-regular">
-                <TextWithLineBreaks text={goals} />
+                {goals.map((goal) => {
+                  return <TextWithLineBreaks text={goal} key={goal} />;
+                })}
               </div>
             </div>
           ))}

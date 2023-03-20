@@ -92,7 +92,7 @@ describe("Calculate World Score UseCase", () => {
         ],
         name: "TestWorld",
         description: "TestWorldDescription",
-        goal: "Testgoal",
+        goals: "Testgoal",
       } as WorldEntity,
     ]);
 
