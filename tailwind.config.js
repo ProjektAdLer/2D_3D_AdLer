@@ -19,6 +19,7 @@ module.exports = {
           800: "rgba(0,0,0,0.8)",
           900: "rgba(0,0,0,0.9)",
         },
+
         adlerblue: {
           DEFAULT: "rgb(69,160,229)", // DEFAULT = 700
           100: "rgb(207,220,229)", // hell
@@ -82,9 +83,11 @@ module.exports = {
           800: "rgb(51,51,51)",
           900: "rgb(26,26,26)", // dunkel
         },
-        buttonpressedblue: "rgb(0,120,229)",
+        buttonbackgroundblue: "#e9f2fa",
+        buttonpressedblue: "#ace8fc",
         adlertextgrey: "#111111",
-        adlerdeactivated: "#e9e9e9",
+        adlerdeactivated: "#b9bfc6",
+        adlerdeactivatedtext: "#e9e9e9",
       },
       gridTemplateRows: {
         12: "repeat(12, minmax(0, 1fr))",

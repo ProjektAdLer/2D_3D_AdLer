@@ -43,14 +43,14 @@ export default function StyledModal({
             {canClose && (
               <button
                 onClick={onClose}
-                className="px-2 py-1 text-xs text-white border-b-4 border-r-4 rounded-lg roboto-black lg:text-xl border-adlerdarkblue active:border-0 hover:cursor-pointer bg-adlerblue"
+                className="px-2 py-1 text-xs text-adlerdarkblue border-b-4 border-r-4 rounded-lg roboto-black lg:text-xl border-adlerdarkblue border-l-[1px] border-t-[1px] active:border-0 hover:cursor-pointer bg-buttonbackgroundblue"
               >
                 X
               </button>
             )}
           </div>
           {/*Content*/}
-          <div className="overflow-auto rounded-lg roboto-regular h-fit">
+          <div className="overflow-auto rounded-lg font-regular h-fit">
             {children}
           </div>
           {/*Optional Footer*/}
