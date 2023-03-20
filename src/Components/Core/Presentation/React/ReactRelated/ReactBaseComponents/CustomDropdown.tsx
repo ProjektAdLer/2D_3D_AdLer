@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import StyledContainer from "./StyledContainer";
 import tailwindMerge from "../../../Utils/TailwindMerge";
-import { type } from "os";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 
 // Type to add classname

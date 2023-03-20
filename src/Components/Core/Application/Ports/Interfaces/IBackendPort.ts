@@ -48,7 +48,7 @@ export default interface IBackendPort {
   getWorldData({
     userToken,
     worldID,
-  }: GetWorldDataParams): Promise<Partial<BackendWorldTO>>;
+  }: GetWorldDataParams): Promise<BackendWorldTO>;
 
   scoreElement(
     userToken: string,

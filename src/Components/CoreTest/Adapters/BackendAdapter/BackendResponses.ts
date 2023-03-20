@@ -5,9 +5,8 @@ import BackendWorldTO from "src/Components/Core/Application/DataTransferObjects/
 
 export const minimalGetWorldDataResponse: BackendWorldTO = {
   worldName: "TestWorld",
-  worldGoal: "TestGoal",
+  goals: "TestGoal",
   description: "TestDescription",
-  goals: "TestGoals",
   spaces: [
     {
       description: "TestDescription",
@@ -24,8 +23,8 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
           type: "text",
           description: "TestDescription",
           goals: "TestGoals",
-          parentSpaceID: 1,
-          parentWorldID: 1,
+          deleteme__parentSpaceID: 1,
+          deleteme__parentWorldID: 1,
           hasScored: false,
         },
       ],
@@ -37,10 +36,9 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
 // this needs to be updated if the TOs changes
 export const expectedWorldTO: BackendWorldTO = {
   worldName: expect.any(String),
-  worldGoal: expect.any(String),
+  goals: expect.any(String),
   spaces: expect.any(Array),
   description: expect.any(String),
-  goals: expect.any(String),
 };
 
 export const expectedSpaceTO: BackendSpaceTO = {

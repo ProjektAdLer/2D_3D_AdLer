@@ -45,6 +45,7 @@ export default function LoginComponent({ className }: AdLerUIComponent) {
         className={tailwindMerge(className)}
         color={userLoggedIn ? "success" : "default"}
         onClick={() => setModalVisible(true)}
+        data-testid="login-button"
       >
         <img src={moodleIcon} alt="Moodle-Icon"></img>
       </StyledButton>

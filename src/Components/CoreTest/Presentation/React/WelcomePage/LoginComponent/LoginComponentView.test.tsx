@@ -1,5 +1,6 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
+import { getByTitle, waitFor } from "@testing-library/dom";
 import { Provider } from "inversify-react";
 import { mock } from "jest-mock-extended";
 import React from "react";
@@ -76,8 +77,9 @@ describe("LoginComponent", () => {
       </Provider>
     );
 
-    const style = componentUnderTest.container.children[0].className;
-    expect(style).toContain("bg-adlerblue");
+    const buttonStyle =
+      componentUnderTest.getByTestId("login-button").className;
+    expect(buttonStyle).toMatchSnapshot();
   });
 
   test("LoginComponent Tailwind Styling contains green backgroundColor if logged in", () => {
@@ -92,8 +94,9 @@ describe("LoginComponent", () => {
       </Provider>
     );
 
-    const style = componentUnderTest.container.children[0].className;
-    expect(style).toContain("bg-adlergreen");
+    const buttonStyle =
+      componentUnderTest.getByTestId("login-button").className;
+    expect(buttonStyle).toMatchSnapshot();
   });
 
   test("should render modal when clicked", () => {
@@ -107,8 +110,10 @@ describe("LoginComponent", () => {
         <LoginComponent />
       </Provider>
     );
-    fireEvent.click(componentUnderTest.container.children[0].children[0]);
+    fireEvent.click(componentUnderTest.getByTestId("login-button"));
 
-    expect(componentUnderTest.findByTitle("Moodle Login")).toBeTruthy();
+    expect(
+      componentUnderTest.findByTitle("Moodle Login")
+    ).resolves.toBeInTheDocument();
   });
 });

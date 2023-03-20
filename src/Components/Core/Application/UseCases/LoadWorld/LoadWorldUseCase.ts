@@ -20,6 +20,7 @@ import type ISetUserLocationUseCase from "../SetUserLocation/ISetUserLocationUse
 import type { IInternalCalculateSpaceScoreUseCase } from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import BackendWorldTO from "../../DataTransferObjects/BackendWorldTO";
+import BackendElementTO from "../../DataTransferObjects/BackendElementTO";
 
 @injectable()
 export default class LoadWorldUseCase implements ILoadWorldUseCase {
@@ -165,7 +166,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
 
   private createElementEntities = (
     worldID: number,
-    elements: ElementTO[],
+    elements: BackendElementTO[],
     worldStatus: WorldStatusTO
   ): ElementEntity[] => {
     const elementEntities: ElementEntity[] = [];
@@ -178,7 +179,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
         name: element.name,
         type: element.type,
         value: element.value || 0,
-        parentSpaceID: element.parentSpaceID,
+        parentSpaceID: element.deleteme__parentSpaceID,
         hasScored:
           worldStatus.elements.find((e) => e.elementID === element.id)
             ?.hasScored || false,
@@ -205,7 +206,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
       {
         name: apiWorldDataResponse.worldName,
         spaces: spaceEntities,
-        goal: apiWorldDataResponse.worldGoal,
+        goal: apiWorldDataResponse.goals,
         id: worldID,
         description: apiWorldDataResponse.description,
       },
