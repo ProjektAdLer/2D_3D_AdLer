@@ -8,7 +8,7 @@ export default class ElementTO {
   parentWorldID: ComponentID;
   name: string;
   description: string;
-  goals: string;
+  goals: string[];
   type: ElementTypeStrings;
   hasScored: boolean;
   filePath?: string;

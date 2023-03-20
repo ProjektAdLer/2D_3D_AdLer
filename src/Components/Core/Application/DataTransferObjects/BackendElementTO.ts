@@ -6,6 +6,6 @@ export default class BackendElementTO {
   value: number;
   name: string;
   description: string;
-  goals: string;
+  goals: string[];
   type: ElementTypeStrings;
 }

@@ -22,7 +22,7 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
           value: 42,
           type: "text",
           description: "TestDescription",
-          goals: "TestGoals",
+          goals: ["TestGoals"],
         },
       ],
     },
@@ -53,7 +53,7 @@ export const expectedElementTO: Partial<ElementTO> = {
   name: expect.any(String),
   value: expect.any(Number),
   description: expect.any(String),
-  goals: expect.any(String),
+  goals: expect.arrayContaining([expect.any(String)]),
   type: expect.any(String),
 };
 

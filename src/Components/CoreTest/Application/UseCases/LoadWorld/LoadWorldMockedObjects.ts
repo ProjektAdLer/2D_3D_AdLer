@@ -6,7 +6,7 @@ const baseElement = {
   name: "Test",
   value: 10,
   description: "Test",
-  goals: "Test",
+  goals: ["Test"],
   type: "video",
 };
 

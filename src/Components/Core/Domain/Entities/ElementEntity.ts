@@ -7,7 +7,7 @@ export default class ElementEntity {
   public hasScored: boolean;
   public name: string;
   public description: string;
-  public goals: string;
+  public goals: string[];
   public type: ElementTypeStrings;
   public parentWorldID: ComponentID;
 }

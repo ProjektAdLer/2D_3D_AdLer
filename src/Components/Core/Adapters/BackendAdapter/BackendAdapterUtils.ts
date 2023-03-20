@@ -50,7 +50,7 @@ export default class BackendAdapterUtils {
         return {
           id: element.elementId,
           description: element.elementDescription,
-          goals: element.elementGoals[0] || "",
+          goals: element.elementGoals || [""],
           name: element.elementName,
           type: element.elementCategory,
           value: element.elementMaxScore || 0,
