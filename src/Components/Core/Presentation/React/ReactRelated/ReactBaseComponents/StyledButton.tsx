@@ -38,9 +38,9 @@ export default function StyledButton({
         className,
         buttonConfig[shape],
         disabled
-          ? "text-adlerdeactivatedtext bg-adlerdeactivated hover:cursor-default rounded-lg"
+          ? "text-adlerdeactivatedtext bg-adlerbuttonlocked hover:cursor-default rounded-lg p-2"
           : tailwindMerge(
-              "flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl active:translate-x-1 active:translate-y-1 active:border-transparent text-[#1f3d6a] font-[roboto] border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue",
+              "flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue",
               buttonConfig[color]
             )
       )}
