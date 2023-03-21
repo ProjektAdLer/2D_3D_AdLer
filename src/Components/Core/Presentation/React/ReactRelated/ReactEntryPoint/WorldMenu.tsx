@@ -10,7 +10,7 @@ import TutorialPdfButton from "~ReactComponents/GeneralComponents/SpaceTutorial/
 export default function WorldMenu() {
   return (
     <React.Fragment>
-      <main className="flex flex-col min-h-screen bg-gradient-to-br from-[#a1c8e5] to-[#e2eaf2]">
+      <main className="flex flex-col min-h-screen bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
         <MenuHeaderBar className="self-center w-full p-2 font-semibold border-b-2 border-dotted border-adlerdarkblue" />
 
         <section className="grid h-0 min-h-full grid-cols-2 grid-rows-1 grow lg:rounded-lg">

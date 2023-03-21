@@ -9,6 +9,7 @@ module.exports = {
         //Bei Custom Farben geben die Zahlenwerte die Saturation Prozentwerte wieder (700 = 70%)
         babylonbg: "#33334d", //Babylon Default Hintergrundfarbe
         blacktrans: {
+          DEFAULT: "rgba(0,0,0,0.5)",
           100: "rgba(0,0,0,0.1)",
           200: "rgba(0,0,0,0.2)",
           300: "rgba(0,0,0,0.3)",
@@ -88,6 +89,8 @@ module.exports = {
         adlertextgrey: "#111111",
         adlerdeactivated: "#b9bfc6",
         adlerdeactivatedtext: "#e9e9e9",
+        adlerbggradientfrom: "#a1c8e5",
+        adlerbggradientto: "#e2eaf2",
       },
       gridTemplateRows: {
         12: "repeat(12, minmax(0, 1fr))",
