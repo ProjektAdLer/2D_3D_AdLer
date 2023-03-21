@@ -6,7 +6,7 @@ export default function MenuTutorial() {
   return (
     <div className="fixed right-2 top-2">
       <div
-        className="flex flex-col p-1 text-white border-b-4 border-r-4 rounded-lg text-shadow bg-[#e9f2FA] active:border-transparent border-adlerdarkblue"
+        className="flex flex-col p-1 text-white border-b-4 border-r-4 rounded-lg text-shadow bg-buttonbgblue active:border-transparent border-adlerdarkblue"
         onClick={() => {
           setIsOpen(!isOpen);
         }}

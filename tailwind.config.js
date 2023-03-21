@@ -84,13 +84,14 @@ module.exports = {
           800: "rgb(51,51,51)",
           900: "rgb(26,26,26)", // dunkel
         },
-        buttonbackgroundblue: "#e9f2fa",
+        buttonbgblue: "#e9f2fa",
         buttonpressedblue: "#ace8fc",
         adlertextgrey: "#111111",
-        adlerdeactivated: "#b9bfc6",
+        adlerbuttonlocked: "#b9bfc6",
         adlerdeactivatedtext: "#e9e9e9",
         adlerbggradientfrom: "#a1c8e5",
         adlerbggradientto: "#e2eaf2",
+        nodehandlecolor: "#e9d6b3",
       },
       gridTemplateRows: {
         12: "repeat(12, minmax(0, 1fr))",

@@ -19,10 +19,10 @@ export default function StyledButton({
 }: AdLerUIComponent<React.DetailedHTMLProps<ButtonProps, HTMLButtonElement>>) {
   const buttonConfig = {
     // Background Colors
-    default: "bg-[#e9f2FA]",
+    default: "bg-buttonbackgroundblue",
     success: "bg-adlergreen",
-    pressed: "bg-[#ACE8FC]",
-    locked: "bg-[#b9bfc6]",
+    pressed: "bg-buttonpressedblue",
+    locked: "bg-adlerbuttonlocked",
 
     // Shapes
     square:
