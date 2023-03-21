@@ -24,7 +24,7 @@ export default function BottomTooltip() {
   return (
     <div className="absolute bottom-0 flex justify-center w-screen pointer-events-none md:bottom-10 ">
       <StyledContainer>
-        <div className="flex items-center gap-1 p-2 rounded-lg  text-adlerdarkblue text-md lg:text-2xl roboto-bold bg-buttonbackgroundblue">
+        <div className="flex items-center gap-1 p-2 rounded-lg lg:p-4 text-adlerdarkblue text-md lg:text-2xl roboto-bold bg-buttonbgblue">
           {type !== ElementTypes.notAnElement && getElementIcon(type)}
           {text}
           {!points ?? (
