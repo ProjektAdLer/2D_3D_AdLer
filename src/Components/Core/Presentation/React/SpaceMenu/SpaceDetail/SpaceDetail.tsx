@@ -88,7 +88,7 @@ export default function SpaceDetail({ className }: AdLerUIComponent) {
         {goals && (
           <div className="pb-2 border-b border-gray-500">
             <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
-              Lernziele:
+              {goals.length > 1 ? "Lernziele:" : "Lernziel:"}
             </div>
             <div className="items-start ml-6 lg:text:lg roboto-regular">
               {goals.map((goal) => {
@@ -100,7 +100,7 @@ export default function SpaceDetail({ className }: AdLerUIComponent) {
         {elements.length > 0 && (
           <div className="pb-2 border-b border-gray-500">
             <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
-              Lernelemente:
+              {elements.length > 1 ? "Lernelemente:" : "Lernelement:"}
             </div>
             <div className="flex flex-col items-start ml-6 lg:text-lg roboto-regular">
               {elements.map((element) => {
@@ -177,7 +177,9 @@ export default function SpaceDetail({ className }: AdLerUIComponent) {
         {requirements.length > 0 && (
           <div className="pb-2 border-b border-gray-500">
             <div className="self-center ml-2 text-lg text-adlerdarkblue roboto-black">
-              Benötigte Räume zur Freischaltung:
+              {requirements.length > 1
+                ? "Benötigte Räume zur Freischaltung:"
+                : "Benötigter Raum zur Freischaltung:"}
             </div>
             <div className="items-start ml-6 text-lg roboto-regular">
               {requirements.map((requirement) => {

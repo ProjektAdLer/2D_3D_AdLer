@@ -65,7 +65,7 @@ export default function WorldDetail({ className }: AdLerUIComponent) {
           (goals && (
             <div className="pb-2 border-b border-gray-500">
               <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
-                Lernziele:
+                {goals.length > 1 ? "Lernziele:" : "Lernziel:"}
               </div>
               <div className="items-start ml-6 lg:text:lg roboto-regular">
                 {goals.map((goal) => {
@@ -76,7 +76,7 @@ export default function WorldDetail({ className }: AdLerUIComponent) {
           ))}
         <div className="pb-2 border-b border-gray-500">
           <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
-            Räume:
+            {spaces?.length > 1 ? "Räume:" : "Raum:"}
           </div>
           <div className="items-start ml-6 lg:text:lg roboto-regular">
             {spaces?.map((space) => {
