@@ -16,10 +16,6 @@ export default function WorldMenu() {
         <section className="grid h-0 min-h-full grid-cols-2 grid-rows-1 grow lg:rounded-lg">
           <WorldSelection className="col-start-1 p-2 border-r-2 border-dotted lg:p-8 border-adlerdarkblue" />
           <WorldDetail className="col-start-2 p-2 lg:p-8" />
-          <TutorialPdfButton
-            className="fixed z-20 left-2 bottom-2"
-            pdfFileUrl={"/SampleLearningElementData/testPDF.pdf"}
-          />
         </section>
 
         <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
