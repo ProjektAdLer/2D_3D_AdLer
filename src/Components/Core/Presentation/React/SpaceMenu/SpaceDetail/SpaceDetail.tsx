@@ -48,7 +48,7 @@ export default function SpaceDetail({ className }: AdLerUIComponent) {
     <div
       className={tailwindMerge(
         className,
-        "flex flex-col gap-2 w-full overflow-auto self-start h-full"
+        "flex flex-col gap-2 w-full self-start h-full"
       )}
     >
       <div className="flex flex-row items-center justify-between p-1 pb-4 border-b border-gray-500">
@@ -74,7 +74,7 @@ export default function SpaceDetail({ className }: AdLerUIComponent) {
           </StyledButton>
         )}
       </div>
-      <div className="flex flex-col w-full gap-2">
+      <div className="flex flex-col w-full gap-2 overflow-auto">
         {description !== "" && (
           <div className="pb-2 border-b border-gray-500">
             <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
