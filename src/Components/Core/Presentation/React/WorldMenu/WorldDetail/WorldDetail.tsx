@@ -31,7 +31,7 @@ export default function WorldDetail({ className }: AdLerUIComponent) {
     <div
       className={tailwindMerge(
         className,
-        "flex flex-col self-start gap-2 w-[100%] overflow-auto"
+        "flex flex-col self-start gap-2 w-full h-full"
       )}
     >
       <div className="flex flex-row items-center justify-between p-1 border-b border-gray-500">
@@ -49,7 +49,7 @@ export default function WorldDetail({ className }: AdLerUIComponent) {
           {"Lernwelt öffnen!"}
         </StyledButton>
       </div>
-      <div className="flex flex-col gap-2 w-[100%] overflow-auto">
+      <div className="flex flex-col w-full gap-2 overflow-auto">
         {description === undefined ||
           (description !== "" && (
             <div className="pb-2 border-b border-gray-500">
