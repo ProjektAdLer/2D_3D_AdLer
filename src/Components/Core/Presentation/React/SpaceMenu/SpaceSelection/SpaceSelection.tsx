@@ -40,17 +40,10 @@ export default function SpaceSelection({ className }: AdLerUIComponent) {
   if (!viewModel || !controller) return null;
 
   return (
-    <div
-      className={tailwindMerge(
-        className,
-        "w-full flex-col flex justify-center"
-      )}
-    >
+    <div className={tailwindMerge(className, "w-full flex-col flex h-full")}>
       {
         <div className="flex flex-row ml-4">
-          <p className="mr-3 text-md font-[roboto] font-medium text-adlerdarkblue">
-            Liste
-          </p>
+          <p className="mr-3 font-medium text-md text-adlerdarkblue">Liste</p>
           <label className="relative inline-flex cursor-pointer">
             <input
               type="checkbox"
@@ -61,7 +54,7 @@ export default function SpaceSelection({ className }: AdLerUIComponent) {
               className="sr-only peer"
             ></input>
             <div className="w-11 h-6 bg-adlerdarkblue rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:adlerdarkblue"></div>
-            <span className="ml-3 text-md font-[roboto] font-medium text-adlerdarkblue">
+            <span className="ml-3 font-medium text-md text-adlerdarkblue">
               Graph
             </span>
           </label>
