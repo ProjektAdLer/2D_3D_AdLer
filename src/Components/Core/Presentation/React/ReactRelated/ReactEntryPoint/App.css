@@ -33,21 +33,6 @@
 }
 
 @layer components {
-  .roboto-black {
-    font-family: "roboto", sans-serif;
-    font-weight: 900;
-  }
-
-  .roboto-bold {
-    font-family: "roboto", sans-serif;
-    font-weight: 700;
-  }
-
-  .roboto-regular {
-    font-family: "roboto", sans-serif;
-    font-weight: 500;
-  }
-
   .h90vh {
     height: 90vh;
   }

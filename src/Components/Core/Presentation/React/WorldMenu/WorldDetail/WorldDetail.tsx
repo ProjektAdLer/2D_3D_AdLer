@@ -37,7 +37,7 @@ export default function WorldDetail({ className }: AdLerUIComponent) {
       <div className="flex flex-row items-center justify-between p-1 border-b border-gray-500">
         <div className="flex">
           <img src={worldIcon} className="w-6 xl:w-8" alt="Lernwelt-Icon"></img>
-          <h2 className="ml-2 text-lg text-adlerdarkblue lg:text-2xl roboto-black">
+          <h2 className="ml-2 text-lg font-black text-adlerdarkblue lg:text-2xl">
             {name}
           </h2>
         </div>
@@ -53,10 +53,10 @@ export default function WorldDetail({ className }: AdLerUIComponent) {
         {description === undefined ||
           (description !== "" && (
             <div className="pb-2 border-b border-gray-500">
-              <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
+              <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
                 Beschreibung:
               </div>
-              <div className="items-start ml-6 roboto-regular">
+              <div className="items-start ml-6 font-medium">
                 <TextWithLineBreaks text={description} />
               </div>
             </div>
@@ -64,10 +64,10 @@ export default function WorldDetail({ className }: AdLerUIComponent) {
         {goals === undefined ||
           (goals && (
             <div className="pb-2 border-b border-gray-500">
-              <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
+              <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
                 {goals.length > 1 ? "Lernziele:" : "Lernziel:"}
               </div>
-              <div className="items-start ml-6 lg:text:lg roboto-regular">
+              <div className="items-start ml-6 font-medium lg:text:lg">
                 {goals.map((goal) => {
                   return <TextWithLineBreaks text={goal} key={goal} />;
                 })}
@@ -75,10 +75,10 @@ export default function WorldDetail({ className }: AdLerUIComponent) {
             </div>
           ))}
         <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
+          <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
             {spaces?.length > 1 ? "Räume:" : "Raum:"}
           </div>
-          <div className="items-start ml-6 lg:text:lg roboto-regular">
+          <div className="items-start ml-6 font-medium lg:text:lg">
             {spaces?.map((space) => {
               return (
                 <div key={space.id}>
@@ -105,10 +105,10 @@ export default function WorldDetail({ className }: AdLerUIComponent) {
           </div>
         </div>
         <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
+          <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
             Anzahl Räume:
           </div>
-          <div className="items-start ml-6 lg:text:lg roboto-regular">
+          <div className="items-start ml-6 font-medium lg:text:lg">
             {spaces?.length}
           </div>
         </div>

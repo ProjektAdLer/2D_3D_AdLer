@@ -54,7 +54,7 @@ export default function SpaceDetail({ className }: AdLerUIComponent) {
       <div className="flex flex-row items-center justify-between p-1 pb-4 border-b border-gray-500">
         <div className="flex flex-row">
           <img src={spaceIcon} className="w-6 xl:w-8" alt="Lernraum-Icon"></img>
-          <div className="ml-2 text-lg text-adlerdarkblue lg:text-2xl roboto-black">
+          <div className="ml-2 text-lg font-black text-adlerdarkblue lg:text-2xl">
             {name}
           </div>
         </div>
@@ -77,20 +77,20 @@ export default function SpaceDetail({ className }: AdLerUIComponent) {
       <div className="flex flex-col w-full gap-2 overflow-auto">
         {description !== "" && (
           <div className="pb-2 border-b border-gray-500">
-            <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
+            <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
               Beschreibung:
             </div>
-            <div className="items-start ml-6 roboto-regular">
+            <div className="items-start ml-6 font-medium">
               <TextWithLineBreaks text={description} />
             </div>
           </div>
         )}
         {goals && (
           <div className="pb-2 border-b border-gray-500">
-            <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
+            <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
               {goals.length > 1 ? "Lernziele:" : "Lernziel:"}
             </div>
-            <div className="items-start ml-6 lg:text:lg roboto-regular">
+            <div className="items-start ml-6 font-medium lg:text:lg">
               {goals.map((goal) => {
                 return <TextWithLineBreaks text={goal} key={goal} />;
               })}
@@ -99,10 +99,10 @@ export default function SpaceDetail({ className }: AdLerUIComponent) {
         )}
         {elements.length > 0 && (
           <div className="pb-2 border-b border-gray-500">
-            <div className="self-center ml-2 text-adlerdarkblue lg:mb-2 roboto-black">
+            <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
               {elements.length > 1 ? "Lernelemente:" : "Lernelement:"}
             </div>
-            <div className="flex flex-col items-start ml-6 lg:text-lg roboto-regular">
+            <div className="flex flex-col items-start ml-6 font-medium lg:text-lg">
               {elements.map((element) => {
                 return (
                   <div key={element[1]} className="w-full">
@@ -144,10 +144,10 @@ export default function SpaceDetail({ className }: AdLerUIComponent) {
         {!!requiredPoints && (
           <div className="pb-2">
             <div className="flex flex-row justify-between w-full pb-2 xl:w-3/4">
-              <div className="self-center ml-2 text-lg text-adlerdarkblue roboto-black">
+              <div className="self-center ml-2 text-lg font-black text-adlerdarkblue">
                 Benötigte Punkte:
               </div>
-              <div className="flex flex-row items-start pb-2 ml-6 text-lg roboto-regular">
+              <div className="flex flex-row items-start pb-2 ml-6 text-lg font-medium">
                 {requiredPoints}
                 <img
                   src={coinIcon}
@@ -157,10 +157,10 @@ export default function SpaceDetail({ className }: AdLerUIComponent) {
               </div>
             </div>
             <div className="flex flex-row justify-between w-full xl:w-3/4">
-              <div className="self-center ml-2 text-lg text-adlerdarkblue roboto-black">
+              <div className="self-center ml-2 text-lg font-black text-adlerdarkblue">
                 Maximal erreichbare Punkte:
               </div>
-              <div className="flex flex-row items-start ml-6 text-lg roboto-regular">
+              <div className="flex flex-row items-start ml-6 text-lg font-medium">
                 {elements.reduce((acc, element) => acc + element[3], 0)}
                 <img
                   src={coinIcon}
@@ -176,12 +176,12 @@ export default function SpaceDetail({ className }: AdLerUIComponent) {
         )}
         {requirements.length > 0 && (
           <div className="pb-2 border-b border-gray-500">
-            <div className="self-center ml-2 text-lg text-adlerdarkblue roboto-black">
+            <div className="self-center ml-2 text-lg font-black text-adlerdarkblue">
               {requirements.length > 1
                 ? "Benötigte Räume zur Freischaltung:"
                 : "Benötigter Raum zur Freischaltung:"}
             </div>
-            <div className="items-start ml-6 text-lg roboto-regular">
+            <div className="items-start ml-6 text-lg font-medium">
               {requirements.map((requirement) => {
                 let name;
                 let completed;

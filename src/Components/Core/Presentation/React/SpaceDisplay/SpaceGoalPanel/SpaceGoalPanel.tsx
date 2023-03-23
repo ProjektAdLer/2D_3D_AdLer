@@ -24,7 +24,7 @@ export default function SpaceGoalPanel() {
   if (!isOpen)
     // wenn nicht geklickt
     return (
-      <div className=" text-md lg:text-2xl roboto-black text-shadow">
+      <div className="font-black text-md lg:text-2xl text-shadow">
         <StyledButton
           shape="square"
           onClick={() => {
