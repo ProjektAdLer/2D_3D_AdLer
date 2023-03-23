@@ -41,8 +41,8 @@ export default function WorldSelection({ className }: AdLerUIComponent) {
   if (!viewModel || !controller) return null;
 
   return (
-    <div className={tailwindMerge(className)}>
-      <ul className="flex flex-col gap-4 w-[100%] overflow-auto">
+    <div className={tailwindMerge(className, "overflow-auto")}>
+      <ul className="flex flex-col w-full gap-4">
         {worlds?.map((world) => {
           let worldIcon: string;
           if (world.isCompleted) worldIcon = worldSolved;
