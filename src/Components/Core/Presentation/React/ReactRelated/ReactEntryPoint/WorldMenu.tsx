@@ -11,13 +11,11 @@ export default function WorldMenu() {
   return (
     <React.Fragment>
       <main className="flex flex-col min-h-screen bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
-        <MenuHeaderBar className="self-center w-full p-2 font-semibold border-b-2 border-dotted border-adlerdarkblue" />
-
-        <section className="grid h-0 min-h-full grid-cols-2 grid-rows-1 grow lg:rounded-lg">
+        <section className="grid order-2 h-0 min-h-full grid-cols-2 grid-rows-1 grow lg:rounded-lg">
           <WorldSelection className="col-start-1 p-2 border-r-2 border-dotted lg:p-8 border-adlerdarkblue" />
           <WorldDetail className="col-start-2 p-2 lg:p-8" />
         </section>
-
+        <MenuHeaderBar className="self-center order-1 w-full p-2 font-semibold border-b-2 border-dotted border-adlerdarkblue" />
         <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
           <div className="text-lg font-bold text-white text-shadow-sm">
             <p>
