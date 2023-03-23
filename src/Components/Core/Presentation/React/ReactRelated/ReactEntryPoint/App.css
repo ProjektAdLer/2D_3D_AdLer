@@ -32,48 +32,19 @@
   }
 }
 
-@layer components {
-  .h90vh {
-    height: 90vh;
-  }
-
-  .w95vw {
-    width: 95vw;
-  }
-
-  .w80vw {
-    width: 80vw;
-  }
-  .max-h-90pro {
-    max-height: 90%;
-  }
-  .h-90pro {
-    height: 90%;
-  }
-  .text-shadow {
-    text-shadow: 2px 2px 0.5px rgb(23, 45, 77);
-  }
-  .text-shadow-sm {
-    text-shadow: 1px 1px 0.5px rgb(23, 45, 77);
-  }
-  .text-shadow-none {
-    text-shadow: 0px 0px 0px;
-  }
-}
-
 /*Styles für die Anzeige des Inspectors*/
 
 #inspector-host,
 #scene-explorer-host {
-  z-index: 999;
-  /* position: fixed !important;
+  z-index: 999 !important;
+  position: fixed !important;
   top: 5rem !important;
   right: 19rem !important;
   width: 1vw !important;
-  height: 80%; */
+  height: 80%;
 }
-/* 
+
 #scene-explorer-host {
   top: 5rem !important;
   left: 1rem !important;
-} */
+}

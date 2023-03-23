@@ -17,7 +17,7 @@ export default function WorldMenu() {
         </section>
         <MenuHeaderBar className="self-center order-1 w-full p-2 font-semibold border-b-2 border-dotted border-adlerdarkblue" />
         <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
-          <div className="text-lg font-bold text-white text-shadow-sm">
+          <div className="text-lg font-bold text-adlerdarkblue">
             <p>
               Die AdLer Engine ist für den<br></br>
               Landscape Modus konzipiert.<br></br>

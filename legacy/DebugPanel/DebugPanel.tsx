@@ -19,7 +19,7 @@ export default function DebugPanel() {
 
     kann auch gerne in dem debug menü unter dem adler logo versteckt sein. Sollte aber fix an der links unteren ecke sein, da die informationen teilweise recht lang sind.
     */
-    <div className="fixed bottom-0 left-0 p-2 m-2 text-xs font-light text-white rounded-lg lg:text-md text-shadow-sm bg-slate-400">
+    <div className="fixed bottom-0 left-0 p-2 m-2 text-xs font-light rounded-lg text-adlerdarkblue lg:text-md bg-slate-400">
       <ul>
         <li>Moodle Token: {moodleToken}</li>
         <div className="trennungsstrich h-[1px] m-2 bg-white"></div>

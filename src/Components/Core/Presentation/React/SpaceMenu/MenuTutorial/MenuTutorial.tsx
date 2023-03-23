@@ -6,15 +6,15 @@ export default function MenuTutorial() {
   return (
     <div className="fixed right-2 top-2">
       <div
-        className="flex flex-col p-1 text-white border-b-4 border-r-4 rounded-lg text-shadow bg-buttonbgblue active:border-transparent border-adlerdarkblue"
+        className="flex flex-col p-1 border-b-4 border-r-4 rounded-lg text-adlerdarkblue bg-buttonbgblue active:border-transparent border-adlerdarkblue"
         onClick={() => {
           setIsOpen(!isOpen);
         }}
       >
         {isOpen ? (
-          <div className="flex flex-col items-end leading-loose text-shadow-none">
+          <div className="flex flex-col items-end leading-loose">
             <div className="flex content-center justify-between w-full">
-              <h1 className="pt-1 pl-4 text-xl font-bold lg:pt-2 lg:text-2xl text-shadow">
+              <h1 className="pt-1 pl-4 text-xl font-bold lg:pt-2 lg:text-2xl">
                 Steuerung Menü
               </h1>
               <img

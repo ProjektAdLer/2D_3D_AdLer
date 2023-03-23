@@ -17,15 +17,15 @@ export default function UseGuide() {
   return (
     <div className="fixed z-20 left-2 bottom-2 max-h-3/4">
       <div
-        className="flex flex-col p-1 text-white border-b-4 border-r-4 rounded-lg text-shadow bg-adlerblue-700 active:border-transparent border-adlerdarkblue "
+        className="flex flex-col p-1 text-white border-b-4 border-r-4 rounded-lg bg-adlerblue-700 active:border-transparent border-adlerdarkblue "
         onClick={() => {
           setIsOpen(!isOpen);
         }}
       >
         {isOpen ? (
-          <div className="flex flex-col items-end overflow-auto text-shadow-none h-72 lg:h-full">
+          <div className="flex flex-col items-end overflow-auto h-72 lg:h-full">
             <div className="flex content-center justify-between w-full">
-              <h1 className="pt-1 pl-4 text-xl font-bold lg:pt-2 lg:text-2xl text-shadow">
+              <h1 className="pt-1 pl-4 text-xl font-bold lg:pt-2 lg:text-2xl">
                 Steuerung 3D-Lernraum
               </h1>
               <img

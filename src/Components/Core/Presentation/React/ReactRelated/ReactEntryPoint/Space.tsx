@@ -19,7 +19,7 @@ export default function Space() {
     <React.Fragment>
       <div className="grid h-0 min-h-screen grid-cols-9 grid-rows-6 root">
         <SideBar className="z-10 col-span-3 col-start-1 row-start-1 m-2 pointer-events-none" />
-        <section className="fixed z-10 flex flex-row-reverse col-span-2 col-start-8 row-start-1 space-x-2 space-x-reverse right-2 top-2">
+        <section className="z-10 flex flex-row-reverse col-span-2 col-start-8 row-start-1 space-x-2 space-x-reverse right-2 top-2">
           <ScorePanel scoreType="world" />
           <ScorePanel scoreType="space" />
         </section>
@@ -34,7 +34,7 @@ export default function Space() {
         <ExitModal className="z-20" />
         <SpaceCompletionModal className="z-10" />
         <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
-          <div className="text-lg font-bold text-white text-shadow-sm">
+          <div className="text-lg font-bold text-adlerdarkblue">
             <h1>
               Die AdLer Engine ist für den<br></br>
               Landscape Modus konzipiert.<br></br>

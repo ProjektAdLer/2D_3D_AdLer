@@ -19,7 +19,7 @@ export default function SpaceMenu() {
       </div>
       <WorldCompletionModal className="transition-opacity duration-100 ease-in delay-75" />
       <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
-        <div className="text-lg font-bold text-white text-shadow-sm">
+        <div className="text-lg font-bold text-adlerdarkblue">
           <h1>
             Die AdLer Engine ist für den<br></br>
             Landscape Modus konzipiert.<br></br>
