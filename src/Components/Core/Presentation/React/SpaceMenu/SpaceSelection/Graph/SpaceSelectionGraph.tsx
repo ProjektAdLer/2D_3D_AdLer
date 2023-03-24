@@ -24,13 +24,20 @@ import SpaceSelectionNode, {
   SpaceSelectionNodeInputType,
   SpaceSelectionNodeType,
 } from "./SpaceSelectionNode";
-import ELK, { ElkNode } from "elkjs/lib/elk.bundled.js";
+import ELK, { ElkNode, LayoutOptions } from "elkjs/lib/elk.bundled.js";
 import { ElkExtendedEdge } from "elkjs";
 
 const elk = new ELK();
 
 const NODE_WIDTH = 600;
 const NODE_HEIGHT = 100;
+// see more options for layered algorithm: https://www.eclipse.org/elk/reference/algorithms/org-eclipse-elk-layered.html
+const ELK_LAYOUT_OPTIONS: LayoutOptions = {
+  "elk.algorithm": "layered",
+  "elk.direction": "DOWN",
+  "elk.alignment": "V_CENTER",
+  "elk.edgeRouting": "SPLINES",
+};
 
 const nodeTypes: NodeTypes = {
   spaceNode: SpaceSelectionNode,
@@ -44,13 +51,13 @@ export default function SpaceSelectionGraph(props: {
   const [spaces] = useObservable(props.viewModel.spaces);
 
   useEffect(() => {
-    if (spaces === undefined) return;
+    if (spaces === undefined || spaces.length === 0) return;
 
     const setupGraph = async () => {
       const edges = createReactFlowEdges(spaces);
 
       const elkGraph: ElkNode = createElkGraph(spaces, edges);
-      await elk.layout(elkGraph);
+      await elk.layout(elkGraph, ELK_LAYOUT_OPTIONS);
 
       const nodes = createReactFlowNodes(spaces, elkGraph);
 
@@ -67,10 +74,8 @@ export default function SpaceSelectionGraph(props: {
       // update node data to reflect the last selected node
       const nodes = reactFlowInstance.getNodes();
       nodes.forEach((node) => {
-        (node as SpaceSelectionNodeType).data = {
-          ...node.data,
-          lastSelected: node.id === clickedNode.id,
-        };
+        (node as SpaceSelectionNodeType).data.lastSelected =
+          node.id === clickedNode.id;
       });
       reactFlowInstance.setNodes(nodes);
     },
@@ -82,7 +87,7 @@ export default function SpaceSelectionGraph(props: {
       <ReactFlow
         defaultNodes={[]}
         nodeTypes={nodeTypes}
-        nodesDraggable={true} // TODO: set to false when nodes are placed in the correct positions
+        nodesDraggable={false}
         nodesConnectable={false}
         onNodeClick={onNodeClickCallback}
         defaultEdges={[]}
@@ -125,13 +130,6 @@ function createElkGraph(
 ): ElkNode {
   return {
     id: "root",
-    // see more options for layered algorithm: https://www.eclipse.org/elk/reference/algorithms/org-eclipse-elk-layered.html
-    layoutOptions: {
-      "elk.algorithm": "layered",
-      "elk.direction": "DOWN",
-      "elk.alignment": "V_CENTER",
-      "elk.edgeRouting": "SPLINES",
-    },
     children: spaces.map((space) => {
       return {
         id: space.id.toString(),
