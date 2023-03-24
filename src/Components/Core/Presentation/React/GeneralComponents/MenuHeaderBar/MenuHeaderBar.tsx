@@ -11,13 +11,21 @@ import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import TutorialPdfButton from "../SpaceTutorial/TutorialPdfButton";
 
-export default function MenuHeaderBar({ className }: AdLerUIComponent) {
+interface MenuHeaderBarProps extends React.HTMLAttributes<HTMLDivElement> {
+  location: "world" | "space";
+}
+
+export default function MenuHeaderBar({
+  className,
+  location,
+  ...rest
+}: React.DetailedHTMLProps<MenuHeaderBarProps, HTMLDivElement>) {
   const [viewModel, controller] = useBuilder<
     MenuHeaderBarViewModel,
     MenuHeaderBarController
   >(BUILDER_TYPES.IHeaderBarBuilder);
 
-  const [title] = useObservable<string>(viewModel?.title);
+  const [currentWorldName] = useObservable<string>(viewModel?.currentWorldName);
 
   if (!viewModel || !controller) return null;
 
@@ -34,7 +42,8 @@ export default function MenuHeaderBar({ className }: AdLerUIComponent) {
             className="text-xl truncate lg:text-4xl font-[roboto]"
             textColor="darkblue"
           >
-            {title}
+            {location === "space" ? currentWorldName : null}
+            {location === "world" ? "Lernwelt Menu" : null}
           </StyledContainer>
         </div>
         <div className="flex items-end w-1/2 ">

@@ -8,12 +8,12 @@ describe("MenuHeaderBarPresenter", () => {
   beforeEach(() => {
     const vm = new MenuHeaderBarViewModel();
 
-    vm.title.Value = "Lernwelt12354";
+    vm.currentWorldName.Value = "Lernwelt12354";
     systemUnderTest = new MenuHeaderBarPresenter(vm);
   });
 
   test("displayWorldTitle sets viewModel variable", () => {
     systemUnderTest.onWorldLoaded({ name: "test" } as Partial<WorldTO>);
-    expect(systemUnderTest["viewModel"].title.Value).toBe("test");
+    expect(systemUnderTest["viewModel"].currentWorldName.Value).toBe("test");
   });
 });

@@ -15,7 +15,10 @@ export default function WorldMenu() {
           <WorldSelection className="col-start-1 p-2 border-r-2 border-dotted lg:p-8 border-adlerdarkblue" />
           <WorldDetail className="col-start-2 p-2 lg:p-8" />
         </section>
-        <MenuHeaderBar className="self-center order-1 w-full p-2 font-semibold border-b-2 border-dotted border-adlerdarkblue" />
+        <MenuHeaderBar
+          location="world"
+          className="self-center order-1 w-full p-2 font-semibold border-b-2 border-dotted border-adlerdarkblue"
+        />
         <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
           <div className="text-lg font-bold text-adlerdarkblue">
             <p>

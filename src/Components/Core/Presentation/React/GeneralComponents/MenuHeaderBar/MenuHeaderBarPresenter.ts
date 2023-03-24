@@ -6,6 +6,6 @@ export default class MenuHeaderBarPresenter implements IMenuHeaderBarPresenter {
   constructor(private viewModel: MenuHeaderBarViewModel) {}
 
   onWorldLoaded(world: WorldTO): void {
-    this.viewModel.title.Value = world.name;
+    this.viewModel.currentWorldName.Value = world.name;
   }
 }

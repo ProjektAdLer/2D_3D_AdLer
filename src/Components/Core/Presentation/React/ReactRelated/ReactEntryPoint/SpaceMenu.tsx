@@ -15,7 +15,10 @@ export default function SpaceMenu() {
           <SpaceSelection className="col-start-1 p-2 border-r-2 border-dotted lg:pb-8 border-adlerdarkblue" />
           <SpaceDetail className="flex col-start-2 p-2 lg:p-8" />
         </div>
-        <MenuHeaderBar className="self-center order-1 w-full p-2 font-semibold border-b-2 border-dotted border-adlerdarkblue" />
+        <MenuHeaderBar
+          location="space"
+          className="self-center order-1 w-full p-2 font-semibold border-b-2 border-dotted border-adlerdarkblue"
+        />
       </div>
       <WorldCompletionModal className="transition-opacity duration-100 ease-in delay-75" />
       <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
