@@ -1,5 +1,7 @@
 # 2D_3D_AdLer
 
+[![Coverage Status](https://coveralls.io/repos/github/ProjektAdLer/2D_3D_AdLer/badge.svg?branch=main)](https://coveralls.io/github/ProjektAdLer/2D_3D_AdLer?branch=main)
+
 ## Vorbedingungen
 
 - Node Laufzeitumgebung
