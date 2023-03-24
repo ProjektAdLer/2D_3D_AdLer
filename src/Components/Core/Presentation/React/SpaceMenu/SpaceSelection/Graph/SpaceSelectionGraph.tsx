@@ -24,13 +24,20 @@ import SpaceSelectionNode, {
   SpaceSelectionNodeInputType,
   SpaceSelectionNodeType,
 } from "./SpaceSelectionNode";
-import ELK, { ElkNode } from "elkjs/lib/elk.bundled.js";
+import ELK, { ElkNode, LayoutOptions } from "elkjs/lib/elk.bundled.js";
 import { ElkExtendedEdge } from "elkjs";
 
 const elk = new ELK();
 
 const NODE_WIDTH = 600;
 const NODE_HEIGHT = 100;
+// see more options for layered algorithm: https://www.eclipse.org/elk/reference/algorithms/org-eclipse-elk-layered.html
+const ELK_LAYOUT_OPTIONS: LayoutOptions = {
+  "elk.algorithm": "layered",
+  "elk.direction": "DOWN",
+  "elk.alignment": "V_CENTER",
+  "elk.edgeRouting": "SPLINES",
+};
 
 const nodeTypes: NodeTypes = {
   spaceNode: SpaceSelectionNode,
@@ -50,7 +57,7 @@ export default function SpaceSelectionGraph(props: {
       const edges = createReactFlowEdges(spaces);
 
       const elkGraph: ElkNode = createElkGraph(spaces, edges);
-      await elk.layout(elkGraph);
+      await elk.layout(elkGraph, ELK_LAYOUT_OPTIONS);
 
       const nodes = createReactFlowNodes(spaces, elkGraph);
 
@@ -125,13 +132,6 @@ function createElkGraph(
 ): ElkNode {
   return {
     id: "root",
-    // see more options for layered algorithm: https://www.eclipse.org/elk/reference/algorithms/org-eclipse-elk-layered.html
-    layoutOptions: {
-      "elk.algorithm": "layered",
-      "elk.direction": "DOWN",
-      "elk.alignment": "V_CENTER",
-      "elk.edgeRouting": "SPLINES",
-    },
     children: spaces.map((space) => {
       return {
         id: space.id.toString(),
