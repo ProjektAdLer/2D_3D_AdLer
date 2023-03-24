@@ -77,6 +77,6 @@ export default abstract class AbstractSceneDefinition {
    * Can be overridden to apply custom debug elements or with a empty function to prevent the debug layer from beeing applied.
    */
   protected applyDebugLayer(): void {
-    if (config.isDebug) this.scene.debugLayer.show();
+    if (config.isDebug) this.scene.debugLayer.show({ overlay: true });
   }
 }
