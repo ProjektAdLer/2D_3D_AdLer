@@ -82,7 +82,7 @@ export default function SpaceSelectionGraph(props: {
       <ReactFlow
         defaultNodes={[]}
         nodeTypes={nodeTypes}
-        nodesDraggable={true} // TODO: set to false when nodes are placed in the correct positions
+        nodesDraggable={false}
         nodesConnectable={false}
         onNodeClick={onNodeClickCallback}
         defaultEdges={[]}
