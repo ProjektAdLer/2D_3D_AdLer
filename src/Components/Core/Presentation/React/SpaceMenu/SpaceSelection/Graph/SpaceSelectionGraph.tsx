@@ -51,7 +51,7 @@ export default function SpaceSelectionGraph(props: {
   const [spaces] = useObservable(props.viewModel.spaces);
 
   useEffect(() => {
-    if (spaces === undefined) return;
+    if (spaces === undefined || spaces.length === 0) return;
 
     const setupGraph = async () => {
       const edges = createReactFlowEdges(spaces);
@@ -74,10 +74,8 @@ export default function SpaceSelectionGraph(props: {
       // update node data to reflect the last selected node
       const nodes = reactFlowInstance.getNodes();
       nodes.forEach((node) => {
-        (node as SpaceSelectionNodeType).data = {
-          ...node.data,
-          lastSelected: node.id === clickedNode.id,
-        };
+        (node as SpaceSelectionNodeType).data.lastSelected =
+          node.id === clickedNode.id;
       });
       reactFlowInstance.setNodes(nodes);
     },
