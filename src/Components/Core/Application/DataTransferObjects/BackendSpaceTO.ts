@@ -20,6 +20,6 @@ export default class BackendSpaceTO {
   elements: BackendElementTO[];
   description: string;
   goals: string[];
-  requirements: ComponentID[];
+  requirements: string;
   requiredScore: number;
 }

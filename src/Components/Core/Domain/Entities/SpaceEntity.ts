@@ -7,7 +7,7 @@ export default class SpaceEntity {
   public elements: ElementEntity[];
   public description: string;
   public goals: string[];
-  public requirements: ComponentID[];
+  public requirements: string;
   public requiredScore: number;
   public parentWorldID: ComponentID;
 }
