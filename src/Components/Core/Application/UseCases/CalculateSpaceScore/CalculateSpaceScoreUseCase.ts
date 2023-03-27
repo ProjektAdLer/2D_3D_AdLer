@@ -26,7 +26,9 @@ export default class CalculateSpaceScoreUseCase
   ) {}
 
   internalExecute(spaceID: ComponentID): SpaceScoreTO {
-    return this.calculateSpaceScore(spaceID);
+    const result = this.calculateSpaceScore(spaceID);
+    this.worldPort.onSpaceScored(result);
+    return result;
   }
 
   execute(): void {
