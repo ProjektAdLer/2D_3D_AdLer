@@ -20,23 +20,23 @@ export default class SpaceSelectionPresenter
       // check if all requirements are completed
       let requiredSpaces: RequiredSpaceData[] = [];
       let isAvailable = true;
-      space.requirements.forEach((requiredSpaceID) => {
-        const requiredSpace = world.spaces.find(
-          (space) => space.id === requiredSpaceID
-        );
+      // space.requirements.forEach((requiredSpaceID) => {
+      //   const requiredSpace = world.spaces.find(
+      //     (space) => space.id === requiredSpaceID
+      //   );
 
-        if (requiredSpace === undefined) {
-          throw new Error("Required space not found");
-        }
+      //   if (requiredSpace === undefined) {
+      //     throw new Error("Required space not found");
+      //   }
 
-        const requiredSpaceCompleted =
-          requiredSpace.currentScore >= requiredSpace.requiredScore;
-        requiredSpaces.push({
-          id: requiredSpaceID,
-          isCompleted: requiredSpaceCompleted,
-        });
-        isAvailable = isAvailable && requiredSpaceCompleted;
-      });
+      //   const requiredSpaceCompleted =
+      //     requiredSpace.currentScore >= requiredSpace.requiredScore;
+      //   requiredSpaces.push({
+      //     id: requiredSpaceID,
+      //     isCompleted: requiredSpaceCompleted,
+      //   });
+      //   isAvailable = isAvailable && requiredSpaceCompleted;
+      // });
 
       newSpaces.push({
         id: space.id,
