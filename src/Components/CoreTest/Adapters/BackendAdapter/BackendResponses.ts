@@ -11,7 +11,7 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
     {
       description: "TestDescription",
       goals: ["TestGoals"],
-      requirements: [],
+      requirements: "",
       id: 1,
       name: "TestSpace",
       requiredScore: 0,
@@ -44,7 +44,7 @@ export const expectedSpaceTO: BackendSpaceTO = {
   elements: expect.any(Array),
   description: expect.any(String),
   goals: expect.arrayContaining([expect.any(String)]),
-  requirements: expect.any(Array),
+  requirements: expect.any(String),
   requiredScore: expect.any(Number),
 };
 

@@ -21,7 +21,7 @@ export default class SpaceTO {
   elements: ElementTO[];
   description: string;
   goals: string[];
-  requirements: ComponentID[];
+  requirements: string;
   requiredScore: number;
   currentScore: number;
   maxScore: number;

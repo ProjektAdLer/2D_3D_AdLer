@@ -17,6 +17,11 @@ describe("MenuHeaderBarController", () => {
     expect(logger.warn).toBeCalled();
   });
 
+  test("onWorldButtonClicked calls logger.warn", () => {
+    systemUnderTest.onWorldButtonClicked();
+    expect(logger.warn).toBeCalled();
+  });
+
   test("onBackButtonClicked calls history.back", () => {
     systemUnderTest.onBackButtonClicked();
     expect(mockHistoryBack).toBeCalled();

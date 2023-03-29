@@ -41,6 +41,6 @@ export default class SpaceDetailPresenter implements ISpaceDetailPresenter {
 
     this.viewModel.requiredPoints.Value = spaceTO.requiredScore;
 
-    this.viewModel.requirements.Value = spaceTO.requirements;
+    // this.viewModel.requirements.Value = spaceTO.requirements;
   }
 }

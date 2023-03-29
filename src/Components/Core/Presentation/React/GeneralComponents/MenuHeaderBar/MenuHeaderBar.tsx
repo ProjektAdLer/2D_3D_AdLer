@@ -7,6 +7,7 @@ import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/S
 import MenuHeaderBarController from "./MenuHeaderBarController";
 import MenuHeaderBarViewModel from "./MenuHeaderBarViewModel";
 import homeIcon from "../../../../../../Assets/icons/22-home-icon/home-icon-nobg.svg";
+import worldIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import TutorialPdfButton from "../SpaceTutorial/TutorialPdfButton";
@@ -32,10 +33,18 @@ export default function MenuHeaderBar({
   return (
     <React.Fragment>
       <div className={tailwindMerge(className, "flex place-content-stretch")}>
-        <div className="flex items-center w-1/2 place-content-stretch justify-self-start">
-          <StyledButton onClick={controller.onMenuButtonClicked}>
-            <img className="w-10 xl:w-12" src={homeIcon} alt="Home Icon" />
+        <div className="flex items-center w-1/2 place-content-stretch justify-self-start ">
+          <StyledButton
+            onClick={controller.onMenuButtonClicked}
+            className="mr-4"
+          >
+            <img className="w-10 xl:w-12 " src={homeIcon} alt="Home Icon" />
           </StyledButton>
+          {location === "space" && (
+            <StyledButton onClick={controller.onWorldButtonClicked}>
+              <img className="w-10 xl:w-12" src={worldIcon} alt="World Icon" />
+            </StyledButton>
+          )}
         </div>
         <div className="flex justify-center w-full">
           <StyledContainer
