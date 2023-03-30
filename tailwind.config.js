@@ -19,6 +19,7 @@ module.exports = {
         adlerbggradientfrom: "#a1c8e5",
         adlerbggradientto: "#e2eaf2",
         nodehandlecolor: "#e9d6b3",
+        // Neue Farben, die noch nicht im Wiki dokumentiert sind, bitte unter diesem Kommentar einfügen
       },
       gridTemplateRows: {
         12: "repeat(12, minmax(0, 1fr))",
