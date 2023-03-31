@@ -8,7 +8,7 @@ import ElementsDropdownViewModel from "./ElementsDropdownViewModel";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
+import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
 import elementsIcon from "../../../../../../Assets/icons/25-elements/elements-icon.svg";
 
 export default function ElementsDropdown() {
@@ -17,7 +17,7 @@ export default function ElementsDropdown() {
     ElementsDropdownController
   >(BUILDER_TYPES.IElementsDropdownBuilder);
 
-  const [elements] = useObservable<ElementTO[]>(viewModel?.elements);
+  const [elements] = useObservable<LearningElementTO[]>(viewModel?.elements);
 
   const [dropDownOpen, setDropDownOpen] = useState(false);
 

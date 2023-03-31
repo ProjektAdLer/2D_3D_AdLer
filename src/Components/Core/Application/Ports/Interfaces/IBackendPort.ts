@@ -1,7 +1,7 @@
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import CourseListTO from "../../DataTransferObjects/CourseListTO";
-import WorldStatusTO from "../../DataTransferObjects/WorldStatusTO";
-import ElementScoreTO from "../../DataTransferObjects/ElementScoreTO";
+import LearningWorldStatusTO from "../../DataTransferObjects/LearningWorldStatusTO";
+import LearningElementScoreTO from "../../DataTransferObjects/LearningElementScoreTO";
 import PlayerDataTO from "../../DataTransferObjects/PlayerDataTO";
 import BackendWorldTO from "../../DataTransferObjects/BackendWorldTO";
 import { XAPIEvent } from "../../UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
@@ -43,7 +43,7 @@ export default interface IBackendPort {
     userToken,
     elementID,
     worldID,
-  }: ElementDataParams): Promise<ElementScoreTO>;
+  }: ElementDataParams): Promise<LearningElementScoreTO>;
 
   getWorldData({
     userToken,
@@ -56,7 +56,10 @@ export default interface IBackendPort {
     courseID: ComponentID
   ): Promise<boolean>;
 
-  getWorldStatus(userToken: string, worldID: number): Promise<WorldStatusTO>;
+  getWorldStatus(
+    userToken: string,
+    worldID: number
+  ): Promise<LearningWorldStatusTO>;
 
   scoreH5PElement(data: ScoreH5PElementParams): Promise<boolean>;
 

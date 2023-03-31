@@ -10,7 +10,7 @@ import IBackendPort, {
 } from "../../Application/Ports/Interfaces/IBackendPort";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import { ComponentID } from "../../Domain/Types/EntityTypes";
-import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
+import LearningElementScoreTO from "../../Application/DataTransferObjects/LearningElementScoreTO";
 import { createPatch } from "rfc6902";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
 import BackendAdapterUtils from "./BackendAdapterUtils";
@@ -20,7 +20,7 @@ import WorldStatusResponse, {
   ElementScoreResponse,
   PlayerDataResponse,
 } from "./Types/BackendResponseTypes";
-import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
+import LearningWorldStatusTO from "../../Application/DataTransferObjects/LearningWorldStatusTO";
 
 @injectable()
 export default class BackendAdapter implements IBackendPort {
@@ -73,7 +73,7 @@ export default class BackendAdapter implements IBackendPort {
     userToken,
     elementID,
     worldID,
-  }: ElementDataParams): Promise<ElementScoreTO> {
+  }: ElementDataParams): Promise<LearningElementScoreTO> {
     const resp = await axios.get<ElementScoreResponse>(
       config.serverURL +
         "/Elements/World/" +
@@ -88,7 +88,7 @@ export default class BackendAdapter implements IBackendPort {
       }
     );
 
-    return resp.data as ElementScoreTO;
+    return resp.data as LearningElementScoreTO;
   }
 
   getElementSource({
@@ -161,7 +161,7 @@ export default class BackendAdapter implements IBackendPort {
   async getWorldStatus(
     userToken: string,
     worldID: number
-  ): Promise<WorldStatusTO> {
+  ): Promise<LearningWorldStatusTO> {
     const resp = await axios.get<WorldStatusResponse>(
       config.serverURL + "/Worlds/" + worldID + "/status",
       {
@@ -171,7 +171,7 @@ export default class BackendAdapter implements IBackendPort {
       }
     );
 
-    const worldStatusTO = new WorldStatusTO();
+    const worldStatusTO = new LearningWorldStatusTO();
     worldStatusTO.worldID = worldID;
     worldStatusTO.elements = resp.data.elements.map((element) => ({
       elementID: element.elementId,

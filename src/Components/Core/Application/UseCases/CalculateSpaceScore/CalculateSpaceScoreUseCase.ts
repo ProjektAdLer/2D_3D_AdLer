@@ -6,7 +6,7 @@ import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
-import SpaceScoreTO from "../../DataTransferObjects/SpaceScoreTO";
+import LearningSpaceScoreTO from "../../DataTransferObjects/LearningSpaceScoreTO";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 import ICalculateSpaceScoreUseCase, {
   IInternalCalculateSpaceScoreUseCase,
@@ -25,7 +25,7 @@ export default class CalculateSpaceScoreUseCase
     private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
 
-  internalExecute(spaceID: ComponentID): SpaceScoreTO {
+  internalExecute(spaceID: ComponentID): LearningSpaceScoreTO {
     const result = this.calculateSpaceScore(spaceID);
     this.worldPort.onSpaceScored(result);
     return result;
@@ -43,7 +43,7 @@ export default class CalculateSpaceScoreUseCase
     this.worldPort.onSpaceScored(result);
   }
 
-  private calculateSpaceScore(spaceID: ComponentID): SpaceScoreTO {
+  private calculateSpaceScore(spaceID: ComponentID): LearningSpaceScoreTO {
     const spaces = this.entitiyContainer.filterEntitiesOfType<SpaceEntity>(
       SpaceEntity,
       (e) => e.id === spaceID
@@ -70,7 +70,7 @@ export default class CalculateSpaceScoreUseCase
       }
     }, 0);
 
-    const result: SpaceScoreTO = {
+    const result: LearningSpaceScoreTO = {
       spaceID: spaceID,
       currentScore: currentScore,
       requiredScore: space.requiredScore,

@@ -1,4 +1,4 @@
-import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
+import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldTO";
 import IWorldCompletionModalPresenter from "./IWorldCompletionModalPresenter";
 import WorldCompletionModalViewModel from "./WorldCompletionModalViewModel";
 
@@ -7,7 +7,7 @@ export default class WorldCompletionModalPresenter
 {
   constructor(private viewModel: WorldCompletionModalViewModel) {}
 
-  onWorldLoaded(world: WorldTO): void {
+  onWorldLoaded(world: LearningWorldTO): void {
     this.viewModel.showModal.Value = world.spaces.every(
       (space) => space.currentScore >= space.requiredScore
     );

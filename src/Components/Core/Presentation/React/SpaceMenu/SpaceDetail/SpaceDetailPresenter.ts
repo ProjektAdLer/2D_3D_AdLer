@@ -1,14 +1,14 @@
-import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
+import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import ISpaceDetailPresenter from "./ISpaceDetailPresenter";
 import SpaceDetailViewModel, {
   SpaceDetailSpaceData,
 } from "./SpaceDetailViewModel";
-import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
+import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldTO";
 
 export default class SpaceDetailPresenter implements ISpaceDetailPresenter {
   constructor(private viewModel: SpaceDetailViewModel) {}
 
-  onWorldLoaded(world: WorldTO): void {
+  onWorldLoaded(world: LearningWorldTO): void {
     let newSpaces: SpaceDetailSpaceData[] = [];
 
     world.spaces.forEach((space) => {
@@ -23,7 +23,7 @@ export default class SpaceDetailPresenter implements ISpaceDetailPresenter {
     this.viewModel.spaces.Value = newSpaces;
   }
 
-  onSpaceLoaded(spaceTO: SpaceTO): void {
+  onSpaceLoaded(spaceTO: LearningSpaceTO): void {
     this.viewModel.id.Value = spaceTO.id;
 
     this.viewModel.name.Value = spaceTO.name;

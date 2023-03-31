@@ -1,5 +1,5 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
-export default class WorldStatusTO {
+export default class LearningWorldStatusTO {
   worldID: ComponentID;
   elements: {
     elementID: ComponentID;

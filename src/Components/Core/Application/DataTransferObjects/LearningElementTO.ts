@@ -1,7 +1,7 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import { ElementTypeStrings } from "../../Domain/Types/ElementTypes";
 
-export default class ElementTO {
+export default class LearningElementTO {
   id: ComponentID;
   value: number;
   parentSpaceID: ComponentID;

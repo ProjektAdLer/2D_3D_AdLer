@@ -1,4 +1,4 @@
-import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
+import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import ISpaceGoalPanelPresenter from "./ISpaceGoalPanelPresenter";
 import SpaceGoalPanelViewModel from "./SpaceGoalPanelViewModel";
 
@@ -7,7 +7,7 @@ export default class SpaceGoalPanelPresenter
 {
   constructor(private viewModel: SpaceGoalPanelViewModel) {}
 
-  onSpaceLoaded(spaceTO: SpaceTO): void {
+  onSpaceLoaded(spaceTO: LearningSpaceTO): void {
     this.viewModel.goals.Value = spaceTO.goals;
   }
 }

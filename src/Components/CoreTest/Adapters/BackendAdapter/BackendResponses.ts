@@ -1,4 +1,4 @@
-import ElementTO from "../../../Core/Application/DataTransferObjects/ElementTO";
+import LearningElementTO from "../../../Core/Application/DataTransferObjects/LearningElementTO";
 import IDSL from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
 import BackendSpaceTO from "src/Components/Core/Application/DataTransferObjects/BackendSpaceTO";
 import BackendWorldTO from "src/Components/Core/Application/DataTransferObjects/BackendWorldTO";
@@ -48,7 +48,7 @@ export const expectedSpaceTO: BackendSpaceTO = {
   requiredScore: expect.any(Number),
 };
 
-export const expectedElementTO: Partial<ElementTO> = {
+export const expectedElementTO: Partial<LearningElementTO> = {
   id: expect.any(Number),
   name: expect.any(String),
   value: expect.any(Number),

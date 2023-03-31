@@ -1,6 +1,6 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 
-export default class WorldScoreTO {
+export default class LearningWorldScoreTO {
   currentScore: number;
   requiredScore: number;
   maxScore: number;

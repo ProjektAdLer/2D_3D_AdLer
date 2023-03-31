@@ -1,10 +1,10 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
-import SpaceTO from "./SpaceTO";
+import LearningSpaceTO from "./LearningSpaceTO";
 
-export default class WorldTO {
+export default class LearningWorldTO {
   id: ComponentID;
   name: string;
-  spaces: SpaceTO[];
+  spaces: LearningSpaceTO[];
   goals: string[];
   description: string;
 }

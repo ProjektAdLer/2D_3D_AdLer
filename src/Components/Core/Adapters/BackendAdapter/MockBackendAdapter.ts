@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
-import ElementScoreTO from "../../Application/DataTransferObjects/ElementScoreTO";
+import LearningElementScoreTO from "../../Application/DataTransferObjects/LearningElementScoreTO";
 import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import BackendAdapterUtils from "./BackendAdapterUtils";
@@ -13,7 +13,7 @@ import IBackendPort, {
 } from "../../Application/Ports/Interfaces/IBackendPort";
 import IDSL from "./Types/IDSL";
 import { logger } from "src/Lib/Logger";
-import WorldStatusTO from "../../Application/DataTransferObjects/WorldStatusTO";
+import LearningWorldStatusTO from "../../Application/DataTransferObjects/LearningWorldStatusTO";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendPort {
@@ -42,7 +42,7 @@ export default class MockBackendAdapter implements IBackendPort {
     userToken,
     elementID,
     worldID,
-  }: ElementDataParams): Promise<ElementScoreTO> {
+  }: ElementDataParams): Promise<LearningElementScoreTO> {
     return Promise.resolve({
       elementID,
       success: true,
@@ -52,7 +52,7 @@ export default class MockBackendAdapter implements IBackendPort {
   getWorldStatus(
     userToken: string,
     worldID: ComponentID
-  ): Promise<WorldStatusTO> {
+  ): Promise<LearningWorldStatusTO> {
     return Promise.resolve({
       worldID: worldID,
       elements: [

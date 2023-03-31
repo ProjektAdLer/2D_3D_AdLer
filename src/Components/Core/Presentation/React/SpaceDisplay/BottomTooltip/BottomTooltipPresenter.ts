@@ -1,6 +1,6 @@
 import IBottomTooltipPresenter from "./IBottomTooltipPresenter";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
-import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
+import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
 import { ElementTypes } from "src/Components/Core/Domain/Types/ElementTypes";
 import { injectable } from "inversify";
 
@@ -15,7 +15,7 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
     this.viewModel.points.Value = undefined;
   }
 
-  displayElementSummaryTooltip(element: ElementTO): void {
+  displayElementSummaryTooltip(element: LearningElementTO): void {
     this.viewModel.show.Value = true;
     this.viewModel.text.Value = element.name;
     this.viewModel.iconType.Value = element.type;

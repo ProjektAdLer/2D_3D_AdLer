@@ -1,6 +1,6 @@
-import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
+import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
 import IWorldAdapter from "src/Components/Core/Application/Ports/WorldPort/IWorldAdapter";
 
 export default interface IElementModalPresenter extends IWorldAdapter {
-  onElementLoaded(elementTO: ElementTO): void;
+  onElementLoaded(elementTO: LearningElementTO): void;
 }

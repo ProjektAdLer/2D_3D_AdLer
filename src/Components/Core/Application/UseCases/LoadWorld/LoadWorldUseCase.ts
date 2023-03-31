@@ -11,10 +11,10 @@ import ILoadWorldUseCase from "./ILoadWorldUseCase";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IUIPort from "../../Ports/Interfaces/IUIPort";
-import WorldTO from "../../DataTransferObjects/WorldTO";
-import ElementTO from "../../DataTransferObjects/ElementTO";
+import LearningWorldTO from "../../DataTransferObjects/LearningWorldTO";
+import LearningElementTO from "../../DataTransferObjects/LearningElementTO";
 import { Semaphore } from "src/Lib/Semaphore";
-import WorldStatusTO from "../../DataTransferObjects/WorldStatusTO";
+import LearningWorldStatusTO from "../../DataTransferObjects/LearningWorldStatusTO";
 import { logger } from "src/Lib/Logger";
 import type ISetUserLocationUseCase from "../SetUserLocation/ISetUserLocationUseCase";
 import type { IInternalCalculateSpaceScoreUseCase } from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
@@ -116,7 +116,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   private async loadWorldDataFromBackend(
     userToken: string,
     worldID: ComponentID
-  ): Promise<[Partial<BackendWorldTO>, WorldStatusTO]> {
+  ): Promise<[Partial<BackendWorldTO>, LearningWorldStatusTO]> {
     const [apiWorldDataResponse, apiWorldScoreResponse] = await Promise.all([
       this.backendAdapter.getWorldData({
         userToken: userToken,
@@ -131,7 +131,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   private createSpaceEntities(
     worldID: number,
     apiWorldDataResponse: Partial<BackendWorldTO>,
-    apiWorldScoreResponse: WorldStatusTO
+    apiWorldScoreResponse: LearningWorldStatusTO
   ): SpaceEntity[] {
     const spaceEntities: SpaceEntity[] = [];
 
@@ -167,7 +167,7 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
   private createElementEntities = (
     worldID: number,
     elements: BackendElementTO[],
-    worldStatus: WorldStatusTO
+    worldStatus: LearningWorldStatusTO
   ): ElementEntity[] => {
     const elementEntities: ElementEntity[] = [];
 
@@ -215,9 +215,11 @@ export default class LoadWorldUseCase implements ILoadWorldUseCase {
     return worldEntity;
   }
 
-  private createWorldTOFromWorldEntity(entityToConvert: WorldEntity): WorldTO {
+  private createWorldTOFromWorldEntity(
+    entityToConvert: WorldEntity
+  ): LearningWorldTO {
     // this will need to be changed when entity and TO are not matching in structure anymore
-    let worldTO = new WorldTO();
+    let worldTO = new LearningWorldTO();
     worldTO = Object.assign(worldTO, structuredClone(entityToConvert));
 
     return worldTO;

@@ -1,4 +1,4 @@
-import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
+import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import ISpaceNamePanelPresenter from "./ISpaceNamePanelPresenter";
 import SpaceNamePanelViewModel from "./SpaceNamePanelViewModel";
 
@@ -7,7 +7,7 @@ export default class SpaceNamePanelPresenter
 {
   constructor(private viewModel: SpaceNamePanelViewModel) {}
 
-  onSpaceLoaded(spaceTO: SpaceTO): void {
+  onSpaceLoaded(spaceTO: LearningSpaceTO): void {
     this.viewModel.name.Value = spaceTO.name;
   }
 }

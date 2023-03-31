@@ -1,9 +1,9 @@
-import ElementTO from "../../DataTransferObjects/ElementTO";
-import SpaceScoreTO from "../../DataTransferObjects/SpaceScoreTO";
-import SpaceTO from "../../DataTransferObjects/SpaceTO";
-import WorldTO from "../../DataTransferObjects/WorldTO";
-import WorldScoreTO from "../../DataTransferObjects/WorldScoreTO";
-import UserWorldsTO from "../../DataTransferObjects/UserWorldsTO";
+import LearningElementTO from "../../DataTransferObjects/LearningElementTO";
+import LearningSpaceScoreTO from "../../DataTransferObjects/LearningSpaceScoreTO";
+import LearningSpaceTO from "../../DataTransferObjects/LearningSpaceTO";
+import LearningWorldTO from "../../DataTransferObjects/LearningWorldTO";
+import LearningWorldScoreTO from "../../DataTransferObjects/LearningWorldScoreTO";
+import UserLearningWorldsTO from "../../DataTransferObjects/UserLearningWorldsTO";
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 
 /**
@@ -11,17 +11,17 @@ import { ComponentID } from "../../../Domain/Types/EntityTypes";
  */
 export default interface IWorldAdapter {
   // userWorlds
-  onUserWorldsLoaded?(userWorldsTO: UserWorldsTO): void;
+  onUserWorldsLoaded?(userWorldsTO: UserLearningWorldsTO): void;
 
   // world
-  onWorldLoaded?(world: WorldTO): void;
-  onWorldScored?(worldScoreTO: WorldScoreTO): void;
+  onWorldLoaded?(world: LearningWorldTO): void;
+  onWorldScored?(worldScoreTO: LearningWorldScoreTO): void;
 
   // space
-  onSpaceLoaded?(spaceTO: SpaceTO): void;
-  onSpaceScored?(spaceScoreTO: SpaceScoreTO): void;
+  onSpaceLoaded?(spaceTO: LearningSpaceTO): void;
+  onSpaceScored?(spaceScoreTO: LearningSpaceScoreTO): void;
 
   // element
-  onElementLoaded?(elementTO: ElementTO): void;
+  onElementLoaded?(elementTO: LearningElementTO): void;
   onElementScored?(hasScored: boolean, elementID: ComponentID): void;
 }

@@ -8,7 +8,7 @@ import { ComponentID } from "../../Domain/Types/EntityTypes";
  * @property {number} maxScore - The maximum score of the space
  * @property {ElementID} spaceID - The ID of the space
  */
-export default class SpaceScoreTO {
+export default class LearningSpaceScoreTO {
   currentScore: number;
   requiredScore: number;
   maxScore: number;

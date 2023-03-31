@@ -1,5 +1,5 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
-import ElementTO from "./ElementTO";
+import LearningElementTO from "./LearningElementTO";
 
 /**
  * Data Transfer Object for a Space
@@ -15,10 +15,10 @@ import ElementTO from "./ElementTO";
  * @property {number} maxScore - The maximum score of the space
  * @property {WorldID} parentWorldID - The ID of the world this space belongs to
  */
-export default class SpaceTO {
+export default class LearningSpaceTO {
   id: ComponentID;
   name: string;
-  elements: ElementTO[];
+  elements: LearningElementTO[];
   description: string;
   goals: string[];
   requirements: string;

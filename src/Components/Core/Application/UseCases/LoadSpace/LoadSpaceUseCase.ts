@@ -6,7 +6,7 @@ import WorldEntity from "../../../Domain/Entities/WorldEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import type ILoadWorldUseCase from "../LoadWorld/ILoadWorldUseCase";
 import ILoadSpaceUseCase from "./ILoadSpaceUseCase";
-import SpaceTO from "../../DataTransferObjects/SpaceTO";
+import LearningSpaceTO from "../../DataTransferObjects/LearningSpaceTO";
 import SpaceEntity from "../../../Domain/Entities/SpaceEntity";
 import type IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
@@ -64,8 +64,8 @@ export default class LoadSpaceUseCase implements ILoadSpaceUseCase {
     this.worldPort.onSpaceLoaded(spaceTO);
   }
 
-  private toTO(spaceEntity: SpaceEntity): SpaceTO {
-    let spaceTO = new SpaceTO();
+  private toTO(spaceEntity: SpaceEntity): LearningSpaceTO {
+    let spaceTO = new LearningSpaceTO();
     spaceTO = Object.assign(spaceTO, structuredClone(spaceEntity));
     return spaceTO;
   }

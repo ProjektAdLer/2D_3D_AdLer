@@ -4,9 +4,9 @@ import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import ICalculateWorldScoreUseCase from "./ICalculateWorldScoreUseCase";
-import WorldScoreTO from "../../DataTransferObjects/WorldScoreTO";
+import LearningWorldScoreTO from "../../DataTransferObjects/LearningWorldScoreTO";
 import WorldEntity from "src/Components/Core/Domain/Entities/WorldEntity";
-import SpaceScoreTO from "../../DataTransferObjects/SpaceScoreTO";
+import LearningSpaceScoreTO from "../../DataTransferObjects/LearningSpaceScoreTO";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 import type { IInternalCalculateSpaceScoreUseCase } from "../CalculateSpaceScore/ICalculateSpaceScoreUseCase";
@@ -53,14 +53,14 @@ export default class CalculateWorldScoreUseCase
     let maxScore: number = 0;
     let requiredScore: number = 0;
     world.spaces.forEach((space) => {
-      const spaceScore: SpaceScoreTO =
+      const spaceScore: LearningSpaceScoreTO =
         this.calculateSpaceScoreUseCase.internalExecute(space.id);
       currentScore += spaceScore.currentScore;
       maxScore += spaceScore.maxScore;
       requiredScore += spaceScore.requiredScore;
     });
 
-    const result: WorldScoreTO = {
+    const result: LearningWorldScoreTO = {
       worldID: userLocation.worldID,
       currentScore: currentScore,
       requiredScore: requiredScore,

@@ -1,9 +1,9 @@
-import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
+import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
 import Observable from "../../../../../../Lib/Observable";
 
 export default class ElementsDropdownViewModel {
   elementNames = new Observable<string[]>(["element 1", "element 2"], true);
-  elements = new Observable<ElementTO[]>(
+  elements = new Observable<LearningElementTO[]>(
     [
       {
         id: 1,
@@ -15,7 +15,7 @@ export default class ElementsDropdownViewModel {
         goals: ["goals 1"],
         type: "h5p",
         hasScored: false,
-      } as ElementTO,
+      } as LearningElementTO,
       {
         id: 2,
         value: 2,
@@ -26,7 +26,7 @@ export default class ElementsDropdownViewModel {
         goals: ["goals 2"],
         type: "text",
         hasScored: false,
-      } as ElementTO,
+      } as LearningElementTO,
     ],
     true
   );

@@ -1,5 +1,5 @@
 import { Vector3 } from "@babylonjs/core";
-import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
+import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
 import IElementPresenter from "./IElementPresenter";
 import ElementViewModel from "./ElementViewModel";
 
@@ -12,7 +12,10 @@ export default class ElementPresenter implements IElementPresenter {
     }
   }
 
-  presentElement(elementTO: ElementTO, position: [Vector3, number]): void {
+  presentElement(
+    elementTO: LearningElementTO,
+    position: [Vector3, number]
+  ): void {
     this.viewModel.id = elementTO.id;
     this.viewModel.position.Value = position[0];
     this.viewModel.rotation.Value = position[1];

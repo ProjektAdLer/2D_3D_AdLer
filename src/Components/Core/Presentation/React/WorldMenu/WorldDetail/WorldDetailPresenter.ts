@@ -1,4 +1,4 @@
-import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
+import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldTO";
 import IWorldDetailPresenter from "./IWorldDetailPresenter";
 import WorldDetailViewModel, {
   WorldDetailSpaceData,
@@ -6,7 +6,7 @@ import WorldDetailViewModel, {
 
 export default class WorldDetailPresenter implements IWorldDetailPresenter {
   constructor(private viewModel: WorldDetailViewModel) {}
-  onWorldLoaded(world: WorldTO): void {
+  onWorldLoaded(world: LearningWorldTO): void {
     let spaces: WorldDetailSpaceData[] = [];
 
     world.spaces.forEach((space) => {

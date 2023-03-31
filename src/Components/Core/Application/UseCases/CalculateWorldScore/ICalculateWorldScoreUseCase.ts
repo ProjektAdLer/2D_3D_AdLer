@@ -1,5 +1,5 @@
 import { ISynchronousUsecase } from "../../Abstract/ISynchronousUsecase";
-import WorldScoreTO from "../../DataTransferObjects/WorldScoreTO";
+import LearningWorldScoreTO from "../../DataTransferObjects/LearningWorldScoreTO";
 
 export default interface ICalculateWorldScoreUseCase
   extends ISynchronousUsecase<void, void> {}

@@ -5,7 +5,7 @@ import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import ElementEntity from "../../../Domain/Entities/ElementEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
-import ElementTO from "../../DataTransferObjects/ElementTO";
+import LearningElementTO from "../../DataTransferObjects/LearningElementTO";
 import type IGetElementSourceUseCase from "../GetElementSource/IGetElementSourceUseCase";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 import ILoadElementUseCase from "./ILoadElementUseCase";
@@ -58,7 +58,7 @@ export default class LoadElementUseCase implements ILoadElementUseCase {
     return Promise.resolve();
   }
 
-  private toTO(elementEntity: ElementEntity): ElementTO {
-    return structuredClone(elementEntity) as ElementTO;
+  private toTO(elementEntity: ElementEntity): LearningElementTO {
+    return structuredClone(elementEntity) as LearningElementTO;
   }
 }

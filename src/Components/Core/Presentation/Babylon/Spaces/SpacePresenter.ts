@@ -8,11 +8,11 @@ import IDoorPresenter from "../Door/IDoorPresenter";
 import SpaceViewModel from "./SpaceViewModel";
 import ISpacePresenter from "./ISpacePresenter";
 import IElementPresenter from "../Elements/IElementPresenter";
-import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
-import ElementTO from "src/Components/Core/Application/DataTransferObjects/ElementTO";
+import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
+import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import ElementView from "../Elements/ElementView";
-import SpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/SpaceScoreTO";
+import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
 import IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
 
 @injectable()
@@ -31,13 +31,13 @@ export default class SpacePresenter implements ISpacePresenter {
     );
   }
 
-  onSpaceLoaded(spaceTO: SpaceTO): void {
+  onSpaceLoaded(spaceTO: LearningSpaceTO): void {
     this.setViewModelData(spaceTO);
     this.createElements(spaceTO.elements);
     this.createDoor();
   }
 
-  onSpaceScored(spaceScoreTO: SpaceScoreTO): void {
+  onSpaceScored(spaceScoreTO: LearningSpaceScoreTO): void {
     if (spaceScoreTO.spaceID !== this.viewModel.id) return;
     if (spaceScoreTO.currentScore >= spaceScoreTO.requiredScore)
       this.openDoor();
@@ -48,13 +48,13 @@ export default class SpacePresenter implements ISpacePresenter {
     this.doorPresenter.openDoor();
   }
 
-  private setViewModelData(spaceTO: SpaceTO): void {
+  private setViewModelData(spaceTO: LearningSpaceTO): void {
     this.viewModel.id = spaceTO.id;
     this.setSpaceDimensions(spaceTO);
     this.setSpaceCornersSquare();
   }
 
-  private setSpaceDimensions(spaceTO: SpaceTO): void {
+  private setSpaceDimensions(spaceTO: LearningSpaceTO): void {
     this.viewModel.spaceLength.Value = (spaceTO.elements.length / 2) * 4;
     this.viewModel.spaceWidth.Value = spaceTO.elements.length > 1 ? 8 : 6;
   }
@@ -71,7 +71,7 @@ export default class SpacePresenter implements ISpacePresenter {
     ];
   }
 
-  private createElements(elementTOs: ElementTO[]): void {
+  private createElements(elementTOs: LearningElementTO[]): void {
     const director = CoreDIContainer.get<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
     );

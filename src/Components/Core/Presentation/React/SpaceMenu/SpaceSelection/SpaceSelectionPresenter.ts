@@ -1,4 +1,4 @@
-import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
+import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldTO";
 import ISpaceSelectionPresenter from "./ISpaceSelectionPresenter";
 import SpaceSelectionViewModel, {
   RequiredSpaceData,
@@ -10,7 +10,7 @@ export default class SpaceSelectionPresenter
 {
   constructor(private viewModel: SpaceSelectionViewModel) {}
 
-  onWorldLoaded(world: WorldTO): void {
+  onWorldLoaded(world: LearningWorldTO): void {
     const newSpaces: SpaceSelectionSpaceData[] = [];
 
     this.viewModel.worldID.Value = world.id;

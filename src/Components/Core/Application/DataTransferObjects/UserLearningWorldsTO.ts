@@ -1,3 +1,3 @@
-export default class UserWorldsTO {
+export default class UserLearningWorldsTO {
   worldInfo: { worldID: number; worldName: string }[];
 }

@@ -1,4 +1,4 @@
-import ElementTO from "../../../../Core/Application/DataTransferObjects/ElementTO";
+import LearningElementTO from "../../../../Core/Application/DataTransferObjects/LearningElementTO";
 import ElementEntity from "../../../../Core/Domain/Entities/ElementEntity";
 
 const baseElement = {
@@ -10,48 +10,48 @@ const baseElement = {
   type: "video",
 };
 
-export const h5pInput: ElementTO = (() => {
+export const h5pInput: LearningElementTO = (() => {
   baseElement.type = "h5p";
-  return baseElement as ElementTO;
+  return baseElement as LearningElementTO;
 })();
 
-export const h5pExpected: ElementTO = (() => {
+export const h5pExpected: LearningElementTO = (() => {
   baseElement.type = "h5p";
-  return baseElement as ElementTO;
+  return baseElement as LearningElementTO;
 })();
 
-export const textInput: ElementTO = (() => {
+export const textInput: LearningElementTO = (() => {
   baseElement.type = "text";
-  return baseElement as ElementTO;
+  return baseElement as LearningElementTO;
 })();
 
-export const textExpected: ElementTO = (() => {
+export const textExpected: LearningElementTO = (() => {
   baseElement.type = "text";
-  return baseElement as ElementTO;
+  return baseElement as LearningElementTO;
 })();
 
-export const imageInput: ElementTO = (() => {
+export const imageInput: LearningElementTO = (() => {
   baseElement.type = "image";
-  return baseElement as ElementTO;
+  return baseElement as LearningElementTO;
 })();
 
-export const imageExpected: ElementTO = (() => {
+export const imageExpected: LearningElementTO = (() => {
   baseElement.type = "image";
-  return baseElement as ElementTO;
+  return baseElement as LearningElementTO;
 })();
-export const videoInput: ElementTO = (() => {
+export const videoInput: LearningElementTO = (() => {
   baseElement.type = "video";
-  return baseElement as ElementTO;
+  return baseElement as LearningElementTO;
 })();
 
-export const videoExpected: ElementTO = (() => {
+export const videoExpected: LearningElementTO = (() => {
   baseElement.type = "h5p";
-  return baseElement as ElementTO;
+  return baseElement as LearningElementTO;
 })();
 
 export const mapElementInputAndExpected: [
   string,
-  ElementTO,
+  LearningElementTO,
   Partial<ElementEntity>
 ][] = [
   ["h5p", h5pInput, h5pExpected],

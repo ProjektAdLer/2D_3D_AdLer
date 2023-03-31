@@ -1,11 +1,11 @@
 import IMenuHeaderBarPresenter from "./IMenuHeaderBarPresenter";
 import MenuHeaderBarViewModel from "./MenuHeaderBarViewModel";
-import WorldTO from "src/Components/Core/Application/DataTransferObjects/WorldTO";
+import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldTO";
 
 export default class MenuHeaderBarPresenter implements IMenuHeaderBarPresenter {
   constructor(private viewModel: MenuHeaderBarViewModel) {}
 
-  onWorldLoaded(world: WorldTO): void {
+  onWorldLoaded(world: LearningWorldTO): void {
     this.viewModel.currentWorldName.Value = world.name;
   }
 }

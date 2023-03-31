@@ -1,5 +1,5 @@
-import SpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/SpaceScoreTO";
-import SpaceTO from "src/Components/Core/Application/DataTransferObjects/SpaceTO";
+import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
+import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import ISpaceCompletionModalPresenter from "./ISpaceCompletionModalPresenter";
 import SpaceCompletionModalViewModel from "./SpaceCompletionModalViewModel";
 
@@ -8,11 +8,11 @@ export default class SpaceCompletionModalPresenter
 {
   constructor(private viewModel: SpaceCompletionModalViewModel) {}
 
-  onSpaceLoaded(spaceTO: SpaceTO): void {
+  onSpaceLoaded(spaceTO: LearningSpaceTO): void {
     this.viewModel.currentSpaceID.Value = spaceTO.id;
   }
 
-  onSpaceScored(spaceScoreTO: SpaceScoreTO): void {
+  onSpaceScored(spaceScoreTO: LearningSpaceScoreTO): void {
     if (spaceScoreTO.spaceID === this.viewModel.currentSpaceID.Value) {
       this.viewModel.score.Value = spaceScoreTO.currentScore;
       this.viewModel.maxScore.Value = spaceScoreTO.maxScore;
