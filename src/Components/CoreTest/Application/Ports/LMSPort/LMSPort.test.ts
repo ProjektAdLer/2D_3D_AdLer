@@ -1,7 +1,7 @@
 import { mock } from "jest-mock-extended";
 import LMSPort from "../../../../Core/Application/Ports/LMSPort/LMSPort";
 import LoginButtonPresenter from "../../../../Core/Presentation/React/WelcomePage/LoginComponent/ILoginComponentPresenter";
-import WorldMenuButtonPresenter from "../../../../Core/Presentation/React/WelcomePage/WorldMenuButton/WorldMenuButtonPresenter";
+import LearningWorldMenuButtonPresenter from "../../../../Core/Presentation/React/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonPresenter";
 
 describe("LMSPort", () => {
   let systemUnderTest: LMSPort;
@@ -12,7 +12,8 @@ describe("LMSPort", () => {
 
   test("onLoginSuccessful is being called on scorePanelPresenter", () => {
     const mockedLoginButtonPresenter = mock<LoginButtonPresenter>();
-    const mockedWorldMenuButtonPresenter = mock<WorldMenuButtonPresenter>();
+    const mockedWorldMenuButtonPresenter =
+      mock<LearningWorldMenuButtonPresenter>();
     systemUnderTest.registerAdapter(mockedWorldMenuButtonPresenter);
     systemUnderTest.registerAdapter(mockedLoginButtonPresenter);
 

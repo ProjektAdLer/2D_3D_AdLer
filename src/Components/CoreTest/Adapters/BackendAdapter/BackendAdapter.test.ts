@@ -8,11 +8,11 @@ import {
 import { config } from "../../../../config";
 import BackendAdapter from "../../../Core/Adapters/BackendAdapter/BackendAdapter";
 import axios, { AxiosResponse } from "axios";
-import { XAPIEvent } from "../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
+import { XAPIEvent } from "../../../Core/Application/UseCases/ScoreH5PLearningElement/IScoreH5PLearningElementUseCase";
 import WorldStatusResponse, {
   CoursesAvailableForUserResponse,
 } from "../../../Core/Adapters/BackendAdapter/Types/BackendResponseTypes";
-import WorldStatusTO from "../../../Core/Application/DataTransferObjects/WorldStatusTO";
+import LearningWorldStatusTO from "../../../Core/Application/DataTransferObjects/LearningWorldStatusTO";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -240,7 +240,7 @@ describe("BackendAdapter", () => {
           hasScored: true,
         },
       ],
-    } as WorldStatusTO);
+    } as LearningWorldStatusTO);
   });
 
   test("should get Element Score", async () => {

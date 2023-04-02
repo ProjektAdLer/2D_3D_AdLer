@@ -1,12 +1,10 @@
 import { mock } from "jest-mock-extended";
 import ILMSPort from "../../../../../Core/Application/Ports/Interfaces/ILMSPort";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import LoginComponentBuilder from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentBuilder";
 import LoginComponentController from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentController";
 import LoginComponentPresenter from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentPresenter";
-import LoginComponentViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentViewModel";
 
 const lmsPortMock = mock<ILMSPort>();
 

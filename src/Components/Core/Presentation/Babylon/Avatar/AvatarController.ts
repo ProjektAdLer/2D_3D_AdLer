@@ -18,7 +18,7 @@ import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import INavigation from "../Navigation/INavigation";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
-import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
+import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
 
@@ -34,7 +34,7 @@ export default class AvatarController implements IAvatarController {
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
       SCENE_TYPES.ScenePresenterFactory
     );
-    this.scenePresenter = scenePresenterFactory(SpaceSceneDefinition);
+    this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
 
     this.scenePresenter.Scene.onPointerObservable.add(this.processPointerEvent);
     this.scenePresenter.Scene.onKeyboardObservable.add(

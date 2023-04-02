@@ -1,11 +1,11 @@
 import "./App.css";
-import Space from "./Space";
-import SpaceMenu from "./SpaceMenu";
+import LearningSpace from "./LearningSpace";
+import LearningSpaceMenu from "./LearningSpaceMenu";
 import React, { useEffect, useState } from "react";
 import WelcomePage from "./WelcomePage";
 import history from "history/browser";
 import { Location, Update } from "history";
-import WorldMenu from "./WorldMenu";
+import LearningWorldMenu from "./LearningWorldMenu";
 
 export interface IAppProps {}
 
@@ -23,11 +23,11 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
   }, []);
 
   if (location?.pathname.includes("/spacedisplay")) {
-    return <Space />;
+    return <LearningSpace />;
   } else if (location?.pathname.includes("/worldmenu")) {
-    return <WorldMenu />;
+    return <LearningWorldMenu />;
   } else if (location?.pathname.includes("/spacemenu")) {
-    return <SpaceMenu />;
+    return <LearningSpaceMenu />;
   } else {
     return <WelcomePage />;
   }

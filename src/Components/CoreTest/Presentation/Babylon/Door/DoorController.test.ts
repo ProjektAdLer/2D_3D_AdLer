@@ -3,9 +3,9 @@ import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import DoorController from "../../../../Core/Presentation/Babylon/Door/DoorController";
 import DoorViewModel from "../../../../Core/Presentation/Babylon/Door/DoorViewModel";
-import IBottomTooltipPresenter from "../../../../Core/Presentation/React/SpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
+import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
-import IExitModalPresenter from "../../../../Core/Presentation/React/SpaceDisplay/ExitModal/IExitModalPresenter";
+import IExitModalPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/ExitModal/IExitModalPresenter";
 
 const bottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
 const exitModalPresenterMock = mock<IExitModalPresenter>();

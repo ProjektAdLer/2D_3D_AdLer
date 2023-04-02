@@ -3,9 +3,9 @@ import IDoorController from "./IDoorController";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import { ActionEvent } from "@babylonjs/core/Actions/actionEvent";
 import bind from "bind-decorator";
-import IBottomTooltipPresenter from "~ReactComponents/SpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
+import IBottomTooltipPresenter from "~ReactComponents/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
-import IExitModalPresenter from "~ReactComponents/SpaceDisplay/ExitModal/IExitModalPresenter";
+import IExitModalPresenter from "~ReactComponents/LearningSpaceDisplay/ExitModal/IExitModalPresenter";
 
 export default class DoorController implements IDoorController {
   private bottomTooltipPresenter: IBottomTooltipPresenter;

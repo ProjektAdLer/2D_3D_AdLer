@@ -7,7 +7,7 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
-import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
+import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 
 export default class AvatarCameraView {
   private scenePresenter: IScenePresenter;
@@ -19,7 +19,7 @@ export default class AvatarCameraView {
     let factory = CoreDIContainer.get<ScenePresenterFactory>(
       SCENE_TYPES.ScenePresenterFactory
     );
-    this.scenePresenter = factory(SpaceSceneDefinition);
+    this.scenePresenter = factory(LearningSpaceSceneDefinition);
 
     this.viewModel.parentNode.subscribe(this.createCamera);
   }

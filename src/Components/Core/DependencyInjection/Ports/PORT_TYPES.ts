@@ -1,5 +1,5 @@
 const PORT_TYPES = {
-  IWorldPort: Symbol("IWorldPort"),
+  ILearningWorldPort: Symbol("ILearningWorldPort"),
   ILMSPort: Symbol("ILMSPort"),
   IAvatarPort: Symbol("IAvatarPort"),
   IUIPort: Symbol("IUIPort"),

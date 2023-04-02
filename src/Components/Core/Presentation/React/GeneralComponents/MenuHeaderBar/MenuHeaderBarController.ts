@@ -13,7 +13,7 @@ export default class MenuHeaderBarController
 
     history.push("/");
   }
-  onWorldButtonClicked(): void {
+  onLearningWorldButtonClicked(): void {
     logger.warn(
       "Menu button functionality not implemented. Current functionality is mock only."
     );

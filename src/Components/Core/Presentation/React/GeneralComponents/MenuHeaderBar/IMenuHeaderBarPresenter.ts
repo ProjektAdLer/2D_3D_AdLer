@@ -1,3 +1,4 @@
-import IWorldAdapter from "src/Components/Core/Application/Ports/WorldPort/IWorldAdapter";
+import ILearningWorldAdapter from "src/Components/Core/Application/Ports/LearningWorldPort/ILearningWorldAdapter";
 
-export default interface IMenuHeaderBarPresenter extends IWorldAdapter {}
+export default interface IMenuHeaderBarPresenter
+  extends ILearningWorldAdapter {}

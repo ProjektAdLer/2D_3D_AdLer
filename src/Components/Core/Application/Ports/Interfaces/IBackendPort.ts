@@ -4,7 +4,7 @@ import LearningWorldStatusTO from "../../DataTransferObjects/LearningWorldStatus
 import LearningElementScoreTO from "../../DataTransferObjects/LearningElementScoreTO";
 import PlayerDataTO from "../../DataTransferObjects/PlayerDataTO";
 import BackendWorldTO from "../../DataTransferObjects/BackendWorldTO";
-import { XAPIEvent } from "../../UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
+import { XAPIEvent } from "../../UseCases/ScoreH5PLearningElement/IScoreH5PLearningElementUseCase";
 
 export type GetWorldDataParams = {
   userToken: string;

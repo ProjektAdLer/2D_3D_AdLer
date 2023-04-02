@@ -2,7 +2,7 @@ import { ContainerModule, interfaces } from "inversify";
 import IScenePresenter from "../../Presentation/Babylon/SceneManagement/IScenePresenter";
 import ScenePresenter from "../../Presentation/Babylon/SceneManagement/ScenePresenter";
 import AbstractSceneDefinition from "../../Presentation/Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
-import SpaceSceneDefinition from "../../Presentation/Babylon/SceneManagement/Scenes/SpaceSceneDefinition";
+import LearningSpaceSceneDefinition from "../../Presentation/Babylon/SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import SCENE_TYPES from "./SCENE_TYPES";
 
 const ScenesDIContainer = new ContainerModule((bind) => {
@@ -44,7 +44,9 @@ const ScenesDIContainer = new ContainerModule((bind) => {
   });
 
   // Scenes
-  bind<AbstractSceneDefinition>(SpaceSceneDefinition).to(SpaceSceneDefinition);
+  bind<AbstractSceneDefinition>(LearningSpaceSceneDefinition).to(
+    LearningSpaceSceneDefinition
+  );
 });
 
 export default ScenesDIContainer;

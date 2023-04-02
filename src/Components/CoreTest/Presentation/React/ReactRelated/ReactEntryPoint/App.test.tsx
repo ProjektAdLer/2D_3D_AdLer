@@ -5,11 +5,11 @@ import history from "history/browser";
 import React from "react";
 
 jest.mock(
-  "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/Space.tsx",
+  "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/LearningSpace.tsx",
   () => "mocked"
 );
 jest.mock(
-  "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/SpaceMenu.tsx",
+  "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/LearningSpaceMenu.tsx",
   () => "mocked"
 );
 jest.mock(

@@ -1,5 +1,5 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
-import { ElementTypeStrings } from "../../Domain/Types/ElementTypes";
+import { LearningElementTypeStrings } from "../../Domain/Types/LearningElementTypes";
 
 export default class BackendElementTO {
   id: ComponentID;
@@ -7,5 +7,5 @@ export default class BackendElementTO {
   name: string;
   description: string;
   goals: string[];
-  type: ElementTypeStrings;
+  type: LearningElementTypeStrings;
 }

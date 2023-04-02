@@ -4,7 +4,7 @@ import LoginComponentViewModel from "../../../../../Core/Presentation/React/Welc
 
 const executeAsyncMock = jest.spyOn(LoginUseCase.prototype, "executeAsync");
 
-describe("ElementDropdownController", () => {
+describe("LoginComponentController", () => {
   let systemUnderTest: LoginComponentController;
 
   beforeEach(() => {

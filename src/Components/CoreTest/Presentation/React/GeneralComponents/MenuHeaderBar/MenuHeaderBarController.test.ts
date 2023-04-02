@@ -17,8 +17,8 @@ describe("MenuHeaderBarController", () => {
     expect(logger.warn).toBeCalled();
   });
 
-  test("onWorldButtonClicked calls logger.warn", () => {
-    systemUnderTest.onWorldButtonClicked();
+  test("onLearningWorldButtonClicked calls logger.warn", () => {
+    systemUnderTest.onLearningWorldButtonClicked();
     expect(logger.warn).toBeCalled();
   });
 

@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import IWorldPort from "src/Components/Core/Application/Ports/Interfaces/IWorldPort";
+import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
@@ -28,8 +28,8 @@ export default class MenuHeaderBarBuilder extends PresentationBuilder<
   override buildPresenter(): void {
     super.buildPresenter();
 
-    CoreDIContainer.get<IWorldPort>(PORT_TYPES.IWorldPort).registerAdapter(
-      this.presenter!
-    );
+    CoreDIContainer.get<ILearningWorldPort>(
+      PORT_TYPES.ILearningWorldPort
+    ).registerAdapter(this.presenter!);
   }
 }

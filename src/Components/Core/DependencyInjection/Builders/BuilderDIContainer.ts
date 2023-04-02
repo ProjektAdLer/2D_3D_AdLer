@@ -1,33 +1,32 @@
 import { ContainerModule } from "inversify";
 import AvatarBuilder from "../../Presentation/Babylon/Avatar/AvatarBuilder";
 import DoorBuilder from "../../Presentation/Babylon/Door/DoorBuilder";
-import ElementBuilder from "../../Presentation/Babylon/Elements/ElementBuilder";
-import SpaceBuilder from "../../Presentation/Babylon/Spaces/SpaceBuilder";
+import LearningElementBuilder from "../../Presentation/Babylon/LearningElements/LearningElementBuilder";
+import LearningSpaceBuilder from "../../Presentation/Babylon/LearningSpaces/LearningSpaceBuilder";
 import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
 import PresentationDirector from "../../Presentation/PresentationBuilder/PresentationDirector";
-import ElementModalBuilder from "../../Presentation/React/SpaceDisplay/ElementModal/ElementModalBuilder";
-import ElementsDropdownBuilder from "../../Presentation/React/SpaceDisplay/ElementsDropdown/ElementsDropdownBuilder";
-import ScorePanelBuilder from "../../Presentation/React/SpaceDisplay/ScorePanel/ScorePanelBuilder";
+import ElementModalBuilder from "../../Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalBuilder";
+import LearningElementsDropdownBuilder from "../../Presentation/React/LearningSpaceDisplay/LearningElementsDropdown/LearningElementsDropdownBuilder";
+import ScorePanelBuilder from "../../Presentation/React/LearningSpaceDisplay/ScorePanel/ScorePanelBuilder";
 import NotificationManagerBuilder from "../../Presentation/React/GeneralComponents/NotificationManager/NotificationManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
 import LoginComponentBuilder from "../../Presentation/React/WelcomePage/LoginComponent/LoginComponentBuilder";
-import BottomTooltipBuilder from "../../Presentation/React/SpaceDisplay/BottomTooltip/BottomTooltipBuilder";
-import SpaceNamePanelBuilder from "../../Presentation/React/SpaceDisplay/SpaceNamePanel/SpaceNamePanelBuilder";
-import FullscreenSwitchBuilder from "../../Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
-import SpaceGoalPanelBuilder from "~ReactComponents/SpaceDisplay/SpaceGoalPanel/SpaceGoalPanelBuilder";
+import BottomTooltipBuilder from "../../Presentation/React/LearningSpaceDisplay/BottomTooltip/BottomTooltipBuilder";
+import SpaceNamePanelBuilder from "../../Presentation/React/LearningSpaceDisplay/LearningSpaceNamePanel/LearningSpaceNamePanelBuilder";
+import FullscreenSwitchBuilder from "../../Presentation/React/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
+import LearningSpaceGoalPanelBuilder from "~ReactComponents/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanelBuilder";
 import MenuHeaderBarBuilder from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBarBuilder";
-import SpaceSelectionBuilder from "~ReactComponents/SpaceMenu/SpaceSelection/SpaceSelectionBuilder";
-import SpaceDetailBuilder from "~ReactComponents/SpaceMenu/SpaceDetail/SpaceDetailBuilder";
-import SpaceCompletionModalBuilder from "~ReactComponents/SpaceDisplay/SpaceCompletionModal/SpaceCompletionModalBuilder";
-import WorldCompletionModalBuilder from "~ReactComponents/SpaceMenu/WorldCompletionModal/WorldCompletionModalBuilder";
-import SideBarBuilder from "~ReactComponents/SpaceDisplay/SideBar/SideBarBuilder";
-import UseGuideBuilder from "~ReactComponents/SpaceDisplay/UseGuide/UseGuideBuilder";
-import WorldMenuButtonBuilder from "~ReactComponents/WelcomePage/WorldMenuButton/WorldMenuButtonBuilder";
+import SpaceSelectionBuilder from "~ReactComponents/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelectionBuilder";
+import LearningSpaceDetailBuilder from "~ReactComponents/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetailBuilder";
+import LearningSpaceCompletionModalBuilder from "~ReactComponents/LearningSpaceDisplay/LearningSpaceCompletionModal/LearningSpaceCompletionModalBuilder";
+import LearningWorldCompletionModalBuilder from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModalBuilder";
+import SideBarBuilder from "~ReactComponents/LearningSpaceDisplay/SideBar/SideBarBuilder";
+import LearningWorldMenuButtonBuilder from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonBuilder";
 import AvatarCameraBuilder from "../../Presentation/Babylon/AvatarCamera/AvatarCameraBuilder";
-import ExitModalBuilder from "~ReactComponents/SpaceDisplay/ExitModal/ExitModalBuilder";
-import WorldSelectionBuilder from "~ReactComponents/WorldMenu/WorldSelection/WorldSelectionBuilder";
-import WorldDetailBuilder from "~ReactComponents/WorldMenu/WorldDetail/WorldDetailBuilder";
+import ExitModalBuilder from "~ReactComponents/LearningSpaceDisplay/ExitModal/ExitModalBuilder";
+import LearningWorldSelectionBuilder from "~ReactComponents/LearningWorldMenu/LearningWorldSelection/LearningWorldSelectionBuilder";
+import LearningWorldDetailBuilder from "~ReactComponents/LearningWorldMenu/LearningWorldDetail/LearningWorldDetailBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -38,14 +37,18 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IScorePanelBuilder).to(
     ScorePanelBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IElementModalBuilder).to(
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementModalBuilder).to(
     ElementModalBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceBuilder).to(SpaceBuilder);
-  bind<IPresentationBuilder>(BUILDER_TYPES.IElementBuilder).to(ElementBuilder);
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningSpaceBuilder).to(
+    LearningSpaceBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementBuilder).to(
+    LearningElementBuilder
+  );
   bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarBuilder).to(AvatarBuilder);
-  bind<IPresentationBuilder>(BUILDER_TYPES.IElementsDropdownBuilder).to(
-    ElementsDropdownBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementsDropdownBuilder).to(
+    LearningElementsDropdownBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IModalManagerBuilder).to(
     NotificationManagerBuilder
@@ -56,39 +59,36 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IBottomTooltipBuilder).to(
     BottomTooltipBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IWorldNamePanelBuilder).to(
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldNamePanelBuilder).to(
     SpaceNamePanelBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IFullscreenSwitchBuilder).to(
     FullscreenSwitchBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceGoalPanelBuilder).to(
-    SpaceGoalPanelBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningSpaceGoalPanelBuilder).to(
+    LearningSpaceGoalPanelBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IHeaderBarBuilder).to(
     MenuHeaderBarBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceSelectionBuilder).to(
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningSpaceSelectionBuilder).to(
     SpaceSelectionBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceDetailBuilder).to(
-    SpaceDetailBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningSpaceDetailBuilder).to(
+    LearningSpaceDetailBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IWorldDetailBuilder).to(
-    WorldDetailBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldDetailBuilder).to(
+    LearningWorldDetailBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ISpaceCompletionModalBuilder).to(
-    SpaceCompletionModalBuilder
-  );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IWorldCompletionModalBuilder).to(
-    WorldCompletionModalBuilder
-  );
+  bind<IPresentationBuilder>(
+    BUILDER_TYPES.ILearningSpaceCompletionModalBuilder
+  ).to(LearningSpaceCompletionModalBuilder);
+  bind<IPresentationBuilder>(
+    BUILDER_TYPES.ILearningWorldCompletionModalBuilder
+  ).to(LearningWorldCompletionModalBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IMenuBarBuilder).to(SideBarBuilder);
-  bind<IPresentationBuilder>(BUILDER_TYPES.IUseGuideBuilder).to(
-    UseGuideBuilder
-  );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IWorldMenuButtonBuilder).to(
-    WorldMenuButtonBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldMenuButtonBuilder).to(
+    LearningWorldMenuButtonBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarCameraBuilder).to(
     AvatarCameraBuilder
@@ -96,8 +96,8 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IExitModalBuilder).to(
     ExitModalBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IWorldSelectionBuilder).to(
-    WorldSelectionBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldSelectionBuilder).to(
+    LearningWorldSelectionBuilder
   );
 });
 

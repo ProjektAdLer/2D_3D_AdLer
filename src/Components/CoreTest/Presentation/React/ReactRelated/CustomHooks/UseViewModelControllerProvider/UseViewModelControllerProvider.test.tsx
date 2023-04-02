@@ -6,6 +6,7 @@ import { mock } from "jest-mock-extended";
 import IViewModelControllerProvider from "../../../../../../Core/Presentation/ViewModelProvider/IViewModelControllerProvider";
 import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../../../Core/DependencyInjection/CoreTypes";
+import React from "react";
 
 class TestVM {
   public worldName = new Observable<string>();

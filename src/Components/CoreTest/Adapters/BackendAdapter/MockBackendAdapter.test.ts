@@ -2,8 +2,8 @@ import { mock } from "jest-mock-extended";
 import { config } from "../../../../config";
 import MockBackendAdapter from "../../../Core/Adapters/BackendAdapter/MockBackendAdapter";
 import PlayerDataTO from "../../../Core/Application/DataTransferObjects/PlayerDataTO";
-import WorldStatusTO from "../../../Core/Application/DataTransferObjects/WorldStatusTO";
-import { XAPIEvent } from "../../../Core/Application/UseCases/ScoreH5PElement/IScoreH5PElementUseCase";
+import LearningWorldStatusTO from "../../../Core/Application/DataTransferObjects/LearningWorldStatusTO";
+import { XAPIEvent } from "../../../Core/Application/UseCases/ScoreH5PLearningElement/IScoreH5PLearningElementUseCase";
 import {
   expectedElementTO,
   expectedSpaceTO,
@@ -152,7 +152,7 @@ describe("MockBackendAdapter", () => {
           hasScored: false,
         },
       ],
-    } as WorldStatusTO);
+    } as LearningWorldStatusTO);
   });
 
   test("should get Element Score", async () => {

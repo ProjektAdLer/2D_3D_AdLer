@@ -3,9 +3,9 @@ import BUILDER_TYPES from "../../../../../../Core/DependencyInjection/Builders/B
 import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../../../Core/DependencyInjection/CoreTypes";
 import useBuilder from "../../../../../../Core/Presentation/React/ReactRelated/CustomHooks/useBuilder";
-import FullscreenSwitchController from "../../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchController";
-import FullscreenSwitchViewModel from "../../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchViewModel";
-import FullscreenSwitchBuilder from "../../../../../../Core/Presentation/React/SpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
+import FullscreenSwitchController from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitchController";
+import FullscreenSwitchViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitchViewModel";
+import FullscreenSwitchBuilder from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
 import PresentationDirector from "../../../../../../Core/Presentation/PresentationBuilder/PresentationDirector";
 import ViewModelControllerProvider from "../../../../../../Core/Presentation/ViewModelProvider/ViewModelControllerProvider";
 import * as useInjection from "inversify-react";

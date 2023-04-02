@@ -14,7 +14,7 @@ import SCENE_TYPES, {
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
-import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
+import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import DoorViewModel from "./DoorViewModel";
 import IDoorController from "./IDoorController";
 
@@ -33,7 +33,7 @@ export default class DoorView extends Readyable {
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
       SCENE_TYPES.ScenePresenterFactory
     );
-    this.scenePresenter = scenePresenterFactory(SpaceSceneDefinition);
+    this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
 
     // setup callbacks for rerendering when the view model changes
     viewModel.position.subscribe(this.positionMesh);

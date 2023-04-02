@@ -10,7 +10,7 @@ import homeIcon from "../../../../../../Assets/icons/22-home-icon/home-icon-nobg
 import worldIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
-import TutorialPdfButton from "../SpaceTutorial/TutorialPdfButton";
+import TutorialPdfButton from "../LearningSpaceTutorial/TutorialPdfButton";
 
 interface MenuHeaderBarProps extends React.HTMLAttributes<HTMLDivElement> {
   location: "world" | "space";
@@ -41,7 +41,7 @@ export default function MenuHeaderBar({
             <img className="w-10 xl:w-12 " src={homeIcon} alt="Home Icon" />
           </StyledButton>
           {location === "space" && (
-            <StyledButton onClick={controller.onWorldButtonClicked}>
+            <StyledButton onClick={controller.onLearningWorldButtonClicked}>
               <img className="w-10 xl:w-12" src={worldIcon} alt="World Icon" />
             </StyledButton>
           )}

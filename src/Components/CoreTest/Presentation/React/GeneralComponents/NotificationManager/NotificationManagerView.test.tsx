@@ -5,6 +5,7 @@ import INotificationManagerController from "../../../../../Core/Presentation/Rea
 import NotificationManager from "../../../../../Core/Presentation/React/GeneralComponents/NotificationManager/NotificationManager";
 import NotificationManagerViewModel from "../../../../../Core/Presentation/React/GeneralComponents/NotificationManager/NotificationManagerViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import React from "react";
 
 let fakeModel = new NotificationManagerViewModel();
 const fakeController = mock<INotificationManagerController>();

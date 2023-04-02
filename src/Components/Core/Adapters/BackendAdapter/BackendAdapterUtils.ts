@@ -1,7 +1,7 @@
 import BackendElementTO from "../../Application/DataTransferObjects/BackendElementTO";
 import BackendSpaceTO from "../../Application/DataTransferObjects/BackendSpaceTO";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
-import { ElementTypes } from "../../Domain/Types/ElementTypes";
+import { LearningElementTypes } from "../../Domain/Types/LearningElementTypes";
 import IDSL, { APIElement, APISpace } from "./Types/IDSL";
 
 /**
@@ -46,7 +46,7 @@ export default class BackendAdapterUtils {
   // creates ElementTOs from the DSL if the element type is supported
   private static mapElements(elements: APIElement[]): BackendElementTO[] {
     return elements.flatMap((element) => {
-      if (element.elementCategory in ElementTypes) {
+      if (element.elementCategory in LearningElementTypes) {
         return {
           id: element.elementId,
           description: element.elementDescription,

@@ -1,15 +1,19 @@
 const USECASE_TYPES = {
-  ILoadUserWorldsUseCase: Symbol("ILoadUserWorldsUseCase"),
-  ILoadWorldUseCase: Symbol("ILoadWorldUseCase"),
+  ILoadUserLearningWorldsUseCase: Symbol("ILoadUserLearningWorldsUseCase"),
+  ILoadLearningWorldUseCase: Symbol("ILoadLearningWorldUseCase"),
   ILoadAvatarUseCase: Symbol("ILoadAvatarUseCase"),
-  ILoadElementUseCase: Symbol("ILoadElementUseCase"),
-  IScoreElementUseCase: Symbol("IScoreElementUseCase"),
-  ICalculateSpaceScoreUseCase: Symbol("ICalculateSpaceScoreUseCase"),
-  ICalculateWorldScoreUseCase: Symbol("ICalculateWorldScoreUseCase"),
+  ILoadLearningElementUseCase: Symbol("ILoadLearningElementUseCase"),
+  IScoreLearningElementUseCase: Symbol("IScoreLearningElementUseCase"),
+  ICalculateLearningSpaceScoreUseCase: Symbol(
+    "ICalculateLearningSpaceScoreUseCase"
+  ),
+  ICalculateLearningWorldScoreUseCase: Symbol(
+    "ICalculateLearningWorldScoreUseCase"
+  ),
   ILoginUseCase: Symbol("ILoginUseCase"),
-  ILoadSpaceUseCase: Symbol("ILoadSpaceUseCase"),
-  IScoreH5PElementUseCase: Symbol("IScoreH5PElementUseCase"),
-  IGetElementSourceUseCase: Symbol("IGetElementSourceUseCase"),
+  ILoadLearningSpaceUseCase: Symbol("ILoadLearningSpaceUseCase"),
+  IScoreH5PLearningElementUseCase: Symbol("IScoreH5PLearningElementUseCase"),
+  IGetLearningElementSourceUseCase: Symbol("IGetLearningElementSourceUseCase"),
   IGetLoginStatusUseCase: Symbol("IGetLoginStatusUseCase"),
   ISetUserLocationUseCase: Symbol("ISetUserLocationUseCase"),
   IGetUserLocationUseCase: Symbol("IGetUserLocationUseCase"),

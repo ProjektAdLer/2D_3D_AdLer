@@ -12,18 +12,18 @@ describe("MenuHeaderBar", () => {
       new MenuHeaderBarViewModel(),
       mock<IMenuHeaderBarController>(),
     ]);
-    render(<MenuHeaderBar />);
+    render(<MenuHeaderBar location="space" />);
   });
 
   test("doesn't render without controller", () => {
     useBuilderMock([new MenuHeaderBarViewModel(), undefined]);
-    const { container } = render(<MenuHeaderBar />);
+    const { container } = render(<MenuHeaderBar location="space" />);
     expect(container.firstChild).toBeNull();
   });
 
   test("doesn't render without view model", () => {
     useBuilderMock([undefined, mock<IMenuHeaderBarController>()]);
-    const { container } = render(<MenuHeaderBar />);
+    const { container } = render(<MenuHeaderBar location="space" />);
     expect(container.firstChild).toBeNull();
   });
 });

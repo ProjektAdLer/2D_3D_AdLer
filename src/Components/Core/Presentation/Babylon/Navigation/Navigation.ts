@@ -14,7 +14,7 @@ import NavigationConfiguration from "./NavigationConfiguration";
 import { config } from "../../../../../config";
 import SCENE_TYPES from "~DependencyInjection/Scenes/SCENE_TYPES";
 import type { ScenePresenterFactory } from "~DependencyInjection/Scenes/SCENE_TYPES";
-import SpaceSceneDefinition from "../SceneManagement/Scenes/SpaceSceneDefinition";
+import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import Readyable from "../../../../../Lib/Readyable";
 import { Semaphore } from "src/Lib/Semaphore";
 
@@ -55,7 +55,9 @@ export default class Navigation extends Readyable implements INavigation {
     }
 
     // create scenePresenter via factory (delayed creation to ensure that the scene is created)
-    this.scenePresenter = this.scenePresenterFactory(SpaceSceneDefinition);
+    this.scenePresenter = this.scenePresenterFactory(
+      LearningSpaceSceneDefinition
+    );
 
     // -- Navigation Plugin --
     // call to Recast.default for compatibility in production and tests

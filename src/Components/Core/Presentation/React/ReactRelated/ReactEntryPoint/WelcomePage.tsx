@@ -2,7 +2,7 @@ import React from "react";
 import LoginComponent from "~ReactComponents/WelcomePage/LoginComponent/LoginComponent";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
-import WorldMenuButton from "~ReactComponents/WelcomePage/WorldMenuButton/WorldMenuButtonView";
+import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
 import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
 
 export default function WelcomePage() {
@@ -15,7 +15,7 @@ export default function WelcomePage() {
           Willkommen bei AdLer!
         </h1>
 
-        <WorldMenuButton className="self-center col-span-2 col-start-4 row-span-3 row-start-2 gap-4 m-1 justify-self-center w-fit h-fit lg:col-span-3 lg:col-start-2 lg:row-start-5" />
+        <LearningWorldMenuButton className="self-center col-span-2 col-start-4 row-span-3 row-start-2 gap-4 m-1 justify-self-center w-fit h-fit lg:col-span-3 lg:col-start-2 lg:row-start-5" />
 
         <div className="flex items-center justify-center col-span-3 col-start-1 row-span-4 row-start-1 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-3">
           <img
