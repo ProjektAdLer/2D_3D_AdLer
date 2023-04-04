@@ -18,3 +18,7 @@ declare module "recast-detour";
 
 // h5p standalone plugin
 declare module "h5p-standalone";
+
+interface Window {
+  _env_: { API_URL: string? }?;
+}

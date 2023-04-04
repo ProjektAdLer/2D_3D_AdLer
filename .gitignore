@@ -10,6 +10,7 @@ build
 scripts/*/*.js
 .vscode/settings.json
 /.idea
+/src/Components/CoreTest/*
 
 # Environment variables for configuration at container runtime
 /public/env-config.js
