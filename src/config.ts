@@ -4,14 +4,13 @@ import { parseBool } from "./Lib/ParseBool";
 const getServerURL = () => {
   if (process.env.NODE_ENV === "production") {
     console.log("We are in Production");
-    console.log(window?._env_?.API_URL);
 
     if (window?._env_?.API_URL && typeof window?._env_?.API_URL === "string") {
       return window._env_.API_URL;
     }
   }
   if (!process.env.REACT_APP_API_SERVER_URL) {
-    logger.error("No API Server URL set!");
+    console.error("No API Server URL set!");
     throw new Error("No API Server URL set!");
   }
   return process.env.REACT_APP_API_SERVER_URL;
