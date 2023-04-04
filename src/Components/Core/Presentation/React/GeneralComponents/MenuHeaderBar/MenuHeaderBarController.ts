@@ -1,7 +1,6 @@
 import { logger } from "src/Lib/Logger";
 import IMenuHeaderBarController from "./IMenuHeaderBarController";
 import history from "history/browser";
-import { debug } from "console";
 
 export default class MenuHeaderBarController
   implements IMenuHeaderBarController

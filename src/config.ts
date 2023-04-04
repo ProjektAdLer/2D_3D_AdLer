@@ -1,4 +1,4 @@
-import { LogLevel, logger } from "./Lib/Logger";
+import { LogLevel } from "./Lib/Logger";
 import { parseBool } from "./Lib/ParseBool";
 
 const getServerURL = () => {

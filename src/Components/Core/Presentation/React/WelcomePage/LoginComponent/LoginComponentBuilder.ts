@@ -4,8 +4,6 @@ import LoginComponentController from "./LoginComponentController";
 import LoginComponentPresenter from "./LoginComponentPresenter";
 import LoginComponentViewModel from "./LoginComponentViewModel";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
-import ViewModelControllerProvider from "../../../ViewModelProvider/ViewModelControllerProvider";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
 import ILMSAdapter from "src/Components/Core/Application/Ports/LMSPort/ILMSAdapter";

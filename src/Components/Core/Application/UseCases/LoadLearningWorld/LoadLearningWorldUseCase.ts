@@ -12,7 +12,6 @@ import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type IUIPort from "../../Ports/Interfaces/IUIPort";
 import LearningWorldTO from "../../DataTransferObjects/LearningWorldTO";
-import LearningElementTO from "../../DataTransferObjects/LearningElementTO";
 import { Semaphore } from "src/Lib/Semaphore";
 import LearningWorldStatusTO from "../../DataTransferObjects/LearningWorldStatusTO";
 import { logger } from "src/Lib/Logger";

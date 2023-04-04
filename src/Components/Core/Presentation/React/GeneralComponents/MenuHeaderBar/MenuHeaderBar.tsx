@@ -8,7 +8,6 @@ import MenuHeaderBarController from "./MenuHeaderBarController";
 import MenuHeaderBarViewModel from "./MenuHeaderBarViewModel";
 import homeIcon from "../../../../../../Assets/icons/22-home-icon/home-icon-nobg.svg";
 import worldIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
-import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import TutorialPdfButton from "../LearningSpaceTutorial/TutorialPdfButton";
 
