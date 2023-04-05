@@ -4,7 +4,11 @@ import CORE_TYPES from "./Components/Core/DependencyInjection/CoreTypes";
 import IReactEntry from "./Components/Core/Presentation/React/ReactRelated/ReactEntryPoint/IReactEntry";
 import { config } from "./config";
 
-console.log("Current Config:" + config);
+console.log("Current Config:", config);
+
+// Setup the Backend Adapter to validate the Server URL and trigger
+// the BackendAdapter to be constructed.
+CoreDIContainer.get(CORE_TYPES.IBackendAdapter);
 
 const reactEntry = CoreDIContainer.get<IReactEntry>(CORE_TYPES.ICoreRenderer);
 

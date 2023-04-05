@@ -3,6 +3,11 @@ import "reflect-metadata";
 import "jest-webgl-canvas-mock";
 
 import "@testing-library/jest-dom";
+import { config } from "./src/config";
+
+// The Backend gets constructed at some points in the tests, so we need to set
+// the config values before the tests are run.
+config.serverURL = "http://localhost:1337";
 
 global.structuredClone = (val) => JSON.parse(JSON.stringify(val));
 

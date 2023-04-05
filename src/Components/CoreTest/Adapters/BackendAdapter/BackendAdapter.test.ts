@@ -17,13 +17,15 @@ import LearningWorldStatusTO from "../../../Core/Application/DataTransferObjects
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-const oldConfigValue = config.useFakeBackend;
+const oldConfigBackendValue = config.useFakeBackend;
+const oldConfigServerURL = config.serverURL;
 
 describe("BackendAdapter", () => {
   let systemUnderTest: BackendAdapter;
 
   beforeAll(() => {
     config.useFakeBackend = false;
+    config.serverURL = "http://localhost:1337";
   });
 
   beforeEach(() => {
@@ -31,7 +33,8 @@ describe("BackendAdapter", () => {
   });
 
   afterAll(() => {
-    config.useFakeBackend = oldConfigValue;
+    config.useFakeBackend = oldConfigBackendValue;
+    config.serverURL = oldConfigServerURL;
   });
 
   test("getWorldData calls backend to get DSL file", async () => {
@@ -46,14 +49,11 @@ describe("BackendAdapter", () => {
     });
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
-    expect(mockedAxios.get).toHaveBeenCalledWith(
-      config.serverURL + "/Worlds/" + worldID,
-      {
-        headers: {
-          token: userToken,
-        },
-      }
-    );
+    expect(mockedAxios.get).toHaveBeenCalledWith("/Worlds/" + worldID, {
+      headers: {
+        token: userToken,
+      },
+    });
   });
 
   test("getWorldData converts DSL to TOs", async () => {
@@ -104,15 +104,12 @@ describe("BackendAdapter", () => {
     });
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
-    expect(mockedAxios.get).toHaveBeenCalledWith(
-      config.serverURL + "/Users/Login",
-      {
-        params: {
-          UserName: userName,
-          Password: password,
-        },
-      }
-    );
+    expect(mockedAxios.get).toHaveBeenCalledWith("/Users/Login", {
+      params: {
+        UserName: userName,
+        Password: password,
+      },
+    });
     expect(returnedVal).toBe(token);
   });
 
@@ -126,7 +123,7 @@ describe("BackendAdapter", () => {
 
     expect(mockedAxios.patch).toHaveBeenCalledTimes(1);
     expect(mockedAxios.patch).toHaveBeenCalledWith(
-      config.serverURL + "/Elements/World/" + 1 + "/Element/" + 1,
+      "/Elements/World/" + 1 + "/Element/" + 1,
       {},
       {
         headers: {
@@ -148,7 +145,7 @@ describe("BackendAdapter", () => {
     );
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
-    expect(mockedAxios.get).toHaveBeenCalledWith(config.serverURL + "/Worlds", {
+    expect(mockedAxios.get).toHaveBeenCalledWith("/Worlds", {
       headers: {
         token: "token",
       },
@@ -174,7 +171,7 @@ describe("BackendAdapter", () => {
 
     expect(mockedAxios.patch).toHaveBeenCalledTimes(1);
     expect(mockedAxios.patch).toHaveBeenCalledWith(
-      config.serverURL + "/Elements/World/" + 1 + "/Element/" + 1,
+      "/Elements/World/" + 1 + "/Element/" + 1,
       {
         serializedXAPIEvent: JSON.stringify(h5pMock),
       },
@@ -199,7 +196,7 @@ describe("BackendAdapter", () => {
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      config.serverURL + "/Elements/FilePath/World/" + 1 + "/Element/" + 1,
+      "/Elements/FilePath/World/" + 1 + "/Element/" + 1,
       {
         headers: {
           token: "token",
@@ -224,14 +221,11 @@ describe("BackendAdapter", () => {
     const returnedVal = await systemUnderTest.getWorldStatus("token", 1);
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
-    expect(mockedAxios.get).toHaveBeenCalledWith(
-      config.serverURL + "/Worlds/" + 1 + "/status",
-      {
-        headers: {
-          token: "token",
-        },
-      }
-    );
+    expect(mockedAxios.get).toHaveBeenCalledWith("/Worlds/" + 1 + "/status", {
+      headers: {
+        token: "token",
+      },
+    });
     expect(returnedVal).toEqual({
       worldID: 1,
       elements: [
@@ -258,7 +252,7 @@ describe("BackendAdapter", () => {
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      config.serverURL + "/Elements/World/" + 1 + "/Element/" + 1 + "/Score",
+      "/Elements/World/" + 1 + "/Element/" + 1 + "/Score",
       {
         headers: {
           token: "token",
@@ -281,14 +275,11 @@ describe("BackendAdapter", () => {
     const returnedVal = await systemUnderTest.getPlayerData("token");
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
-    expect(mockedAxios.get).toHaveBeenCalledWith(
-      config.serverURL + "/PlayerData",
-      {
-        headers: {
-          token: "token",
-        },
-      }
-    );
+    expect(mockedAxios.get).toHaveBeenCalledWith("/PlayerData", {
+      headers: {
+        token: "token",
+      },
+    });
     expect(returnedVal).toEqual({
       playerGender: "string",
       playerWorldColor: "string",
