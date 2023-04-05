@@ -32,6 +32,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
   }
 
   onLearningSpaceLoaded(spaceTO: LearningSpaceTO): void {
+    this.createAmbience();
     this.setViewModelData(spaceTO);
     this.createLearningElements(spaceTO.elements);
     this.createDoor();
@@ -135,5 +136,16 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
       ),
       -90,
     ];
+  }
+
+  private createAmbience(): void {
+    const director = CoreDIContainer.get<IPresentationDirector>(
+      BUILDER_TYPES.IPresentationDirector
+    );
+    const ambienceBuilder = CoreDIContainer.get<IPresentationBuilder>(
+      BUILDER_TYPES.IAmbienceBuilder
+    );
+
+    director.build(ambienceBuilder);
   }
 }

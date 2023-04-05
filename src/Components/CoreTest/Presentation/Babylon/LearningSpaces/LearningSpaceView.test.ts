@@ -382,6 +382,7 @@ describe("LearningSpaceView", () => {
     test("createPole sets position correctly", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.baseHeight.Value = 2;
+      viewModel.wallGroundworkDepth.Value = 0;
 
       let result = systemUnderTest["createPole"](new Vector2(1, 3));
 

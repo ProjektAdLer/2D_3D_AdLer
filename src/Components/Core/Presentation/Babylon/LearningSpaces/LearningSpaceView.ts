@@ -152,7 +152,9 @@ export default class LearningSpaceView implements ILearningSpaceView {
         Math.pow(endPoint.y - startPoint.y, 2)
     );
     const wallSegmentOptions = {
-      height: this.viewModel.spaceHeight.Value,
+      height:
+        this.viewModel.wallHeight.Value +
+        this.viewModel.wallGroundworkDepth.Value,
       width: wallLength,
       depth: this.viewModel.wallThickness.Value,
     };
@@ -165,7 +167,9 @@ export default class LearningSpaceView implements ILearningSpaceView {
 
     // set position
     wallSegment.position.x = (startPoint.x + endPoint.x) / 2;
-    wallSegment.position.y = this.viewModel.baseHeight.Value || 0;
+    wallSegment.position.y =
+      this.viewModel.baseHeight.Value -
+      this.viewModel.wallGroundworkDepth.Value;
     wallSegment.position.z = (startPoint.y + endPoint.y) / 2;
     wallSegment.rotation.y = Math.atan2(
       endPoint.y - startPoint.y,
@@ -193,7 +197,9 @@ export default class LearningSpaceView implements ILearningSpaceView {
   private createPole(corner: Vector2): Mesh {
     // create pole mesh
     const poleOptions = {
-      height: this.viewModel.spaceHeight.Value,
+      height:
+        this.viewModel.wallHeight.Value +
+        this.viewModel.wallGroundworkDepth.Value,
       diameter: this.viewModel.wallThickness.Value * 1.5,
     };
     const pole = MeshBuilder.CreateCylinder(
@@ -204,7 +210,9 @@ export default class LearningSpaceView implements ILearningSpaceView {
 
     // position pole
     pole.position.x = corner.x;
-    pole.position.y = this.viewModel.baseHeight.Value || 0;
+    pole.position.y =
+      this.viewModel.baseHeight.Value -
+      this.viewModel.wallGroundworkDepth.Value;
     pole.position.z = corner.y;
 
     // apply wall material

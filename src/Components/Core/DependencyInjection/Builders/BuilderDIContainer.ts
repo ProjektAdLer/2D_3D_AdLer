@@ -27,6 +27,7 @@ import AvatarCameraBuilder from "../../Presentation/Babylon/AvatarCamera/AvatarC
 import ExitModalBuilder from "~ReactComponents/LearningSpaceDisplay/ExitModal/ExitModalBuilder";
 import LearningWorldSelectionBuilder from "~ReactComponents/LearningWorldMenu/LearningWorldSelection/LearningWorldSelectionBuilder";
 import LearningWorldDetailBuilder from "~ReactComponents/LearningWorldMenu/LearningWorldDetail/LearningWorldDetailBuilder";
+import AmbienceBuilder from "../../Presentation/Babylon/Ambience/AmbienceBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -98,6 +99,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldSelectionBuilder).to(
     LearningWorldSelectionBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IAmbienceBuilder).to(
+    AmbienceBuilder
   );
 });
 

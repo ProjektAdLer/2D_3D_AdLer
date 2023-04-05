@@ -31,6 +31,7 @@ const BUILDER_TYPES = {
   IAvatarCameraBuilder: Symbol("IAvatarCameraBuilder"),
   IExitModalBuilder: Symbol("IExitModalBuilder"),
   ILearningWorldSelectionBuilder: Symbol("ILearningWorldSelectionBuilder"),
+  IAmbienceBuilder: Symbol("IAmbienceBuilder"),
 };
 
 export default BUILDER_TYPES;

@@ -1,11 +1,11 @@
-import DoorBuilder from "../../../../Core/Presentation/Babylon/Door/DoorBuilder";
+import AmbienceBuilder from "../../../../Core/Presentation/Babylon/Ambience/AmbienceBuilder";
 import PresentationBuilder from "../../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
 
-describe("DoorBuilder", () => {
-  let systemUnderTest: DoorBuilder;
+describe("AmbienceBuilder", () => {
+  let systemUnderTest: AmbienceBuilder;
 
   beforeEach(() => {
-    systemUnderTest = new DoorBuilder();
+    systemUnderTest = new AmbienceBuilder();
   });
 
   test("constructor", () => {
