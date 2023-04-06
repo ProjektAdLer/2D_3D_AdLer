@@ -1,3 +1,5 @@
 export default interface ISideBarController {
-  onExitButtonClicked(): void;
+  onMainMenuButtonClicked(): void;
+  onWorldMenuButtonClicked(): void;
+  onSpaceMenuButtonClicked(): void;
 }
