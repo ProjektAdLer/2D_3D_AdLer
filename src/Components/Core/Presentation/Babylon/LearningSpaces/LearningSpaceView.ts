@@ -166,9 +166,10 @@ export default class LearningSpaceView implements ILearningSpaceView {
     this.scenePresenter.registerNavigationMesh(wallSegment);
 
     // set position
+    console.log(this.viewModel.baseHeight.Value);
     wallSegment.position.x = (startPoint.x + endPoint.x) / 2;
     wallSegment.position.y =
-      this.viewModel.baseHeight.Value -
+      (this.viewModel.baseHeight.Value || 0) -
       this.viewModel.wallGroundworkDepth.Value;
     wallSegment.position.z = (startPoint.y + endPoint.y) / 2;
     wallSegment.rotation.y = Math.atan2(
@@ -211,7 +212,7 @@ export default class LearningSpaceView implements ILearningSpaceView {
     // position pole
     pole.position.x = corner.x;
     pole.position.y =
-      this.viewModel.baseHeight.Value -
+      (this.viewModel.baseHeight.Value || 0) -
       this.viewModel.wallGroundworkDepth.Value;
     pole.position.z = corner.y;
 
