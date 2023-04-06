@@ -12,13 +12,14 @@ import LearningSpaceSceneDefinition from "../../../Babylon/SceneManagement/Scene
 import LearningSpaceCompletionModal from "~ReactComponents/LearningSpaceDisplay/LearningSpaceCompletionModal/LearningSpaceCompletionModal";
 import ExitModal from "~ReactComponents/LearningSpaceDisplay/ExitModal/ExitModal";
 import TutorialPdfButton from "~ReactComponents/GeneralComponents/LearningSpaceTutorial/TutorialPdfButton";
+import FullscreenSwitch from "~ReactComponents/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitch";
 
 export default function LearningSpace() {
   return (
     <React.Fragment>
       <div className="grid h-0 min-h-screen grid-cols-9 grid-rows-6 root">
         <SideBar className="z-10 col-span-3 col-start-1 row-start-1 m-2 pointer-events-none" />
-        <section className="z-10 flex flex-row-reverse col-span-2 col-start-8 row-start-1 space-x-2 space-x-reverse right-2 top-2">
+        <section className="fixed z-10 flex flex-row-reverse col-span-2 col-start-8 row-start-1 space-x-2 space-x-reverse right-2 top-2">
           <ScorePanel scoreType="world" />
           <ScorePanel scoreType="space" />
         </section>
