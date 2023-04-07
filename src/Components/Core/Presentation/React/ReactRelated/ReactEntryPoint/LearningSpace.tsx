@@ -11,7 +11,7 @@ import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
 import LearningSpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import LearningSpaceCompletionModal from "~ReactComponents/LearningSpaceDisplay/LearningSpaceCompletionModal/LearningSpaceCompletionModal";
 import ExitModal from "~ReactComponents/LearningSpaceDisplay/ExitModal/ExitModal";
-import TutorialPdfButton from "~ReactComponents/GeneralComponents/LearningSpaceTutorial/TutorialPdfButton";
+import TutorialPdfButton from "~ReactComponents/GeneralComponents/Tutorial/TutorialPdfButton";
 import FullscreenSwitch from "~ReactComponents/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitch";
 
 export default function LearningSpace() {

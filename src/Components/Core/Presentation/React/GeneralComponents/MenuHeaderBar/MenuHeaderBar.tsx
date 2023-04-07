@@ -9,7 +9,7 @@ import MenuHeaderBarViewModel from "./MenuHeaderBarViewModel";
 import homeIcon from "../../../../../../Assets/icons/22-home-icon/home-icon-nobg.svg";
 import worldIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
 import tailwindMerge from "../../../Utils/TailwindMerge";
-import TutorialPdfButton from "../LearningSpaceTutorial/TutorialPdfButton";
+import TutorialPdfButton from "../Tutorial/TutorialPdfButton";
 
 interface MenuHeaderBarProps extends React.HTMLAttributes<HTMLDivElement> {
   location: "world" | "space";
