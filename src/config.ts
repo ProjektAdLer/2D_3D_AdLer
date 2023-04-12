@@ -2,7 +2,7 @@ import { LogLevel } from "./Lib/Logger";
 import { parseBool } from "./Lib/ParseBool";
 
 // We can not use the logger in here, its loglevel gets defined here.
-// So we have to use console.log and console.error
+// So we have to use console.log and console.error here.
 
 const getServerURL = () => {
   if (process.env.NODE_ENV === "production") {
