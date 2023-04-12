@@ -4,8 +4,6 @@ import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/S
 import FullscreenSwitch from "~ReactComponents/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitch";
 import engineLogo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import LearningSpaceGoalPanel from "~ReactComponents/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanel";
-import LearningElementsDropdown from "~ReactComponents/LearningSpaceDisplay/LearningElementsDropdown/LearningElementsDropdown";
 import SideBarViewModel from "./SideBarViewModel";
 import SideBarController from "./SideBarController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
