@@ -1,6 +1,12 @@
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { injectable } from "inversify";
-import { Vector2, Color3, Mesh, StandardMaterial } from "@babylonjs/core";
+import {
+  Vector2,
+  Color3,
+  Mesh,
+  StandardMaterial,
+  Vector3,
+} from "@babylonjs/core";
 import Observable from "../../../../../Lib/Observable";
 import AbstractViewModel from "../Abstract/AbstractViewModel";
 
@@ -25,7 +31,7 @@ export default class LearningSpaceViewModel extends AbstractViewModel {
   public baseHeight: Observable<number> = new Observable(0);
   public doorWidth: Observable<number> = new Observable(1.0);
   public doorHeight: Observable<number> = new Observable(2.19);
-  public wallHeight: Observable<number> = new Observable(1.5);
+  public wallHeight: Observable<number> = new Observable(2.5);
   public wallThickness: Observable<number> = new Observable(0.3);
   public wallGroundworkDepth: Observable<number> = new Observable(0.1);
   public spaceCornerPoints: Observable<Array<Vector2>> = new Observable([
@@ -44,4 +50,8 @@ export default class LearningSpaceViewModel extends AbstractViewModel {
     new Observable<StandardMaterial>();
 
   public id: ComponentID;
+
+  public doorPosition: Observable<[Vector3, number]> = new Observable<
+    [Vector3, number]
+  >([new Vector3(0, 0, 0), 0]);
 }

@@ -9,6 +9,9 @@ import {
   MeshBuilder,
   Mesh,
   Vector2,
+  Tools,
+  Vector3,
+  CSG,
 } from "@babylonjs/core";
 import LearningSpaceViewModel from "./LearningSpaceViewModel";
 import floorTexture from "../../../../../Assets/Texture_Floor_Parquet3.png";
@@ -158,24 +161,59 @@ export default class LearningSpaceView implements ILearningSpaceView {
       width: wallLength,
       depth: this.viewModel.wallThickness.Value,
     };
-    const wallSegment = MeshBuilder.CreateBox(
+    const wallSegmentDraft = MeshBuilder.CreateBox(
       "WallSegment",
       wallSegmentOptions,
       this.scenePresenter.Scene
     );
-    this.scenePresenter.registerNavigationMesh(wallSegment);
+    this.scenePresenter.registerNavigationMesh(wallSegmentDraft);
 
     // set position
     console.log(this.viewModel.baseHeight.Value);
-    wallSegment.position.x = (startPoint.x + endPoint.x) / 2;
-    wallSegment.position.y =
+    wallSegmentDraft.position.x = (startPoint.x + endPoint.x) / 2;
+    wallSegmentDraft.position.y =
       (this.viewModel.baseHeight.Value || 0) -
-      this.viewModel.wallGroundworkDepth.Value;
-    wallSegment.position.z = (startPoint.y + endPoint.y) / 2;
-    wallSegment.rotation.y = Math.atan2(
+      this.viewModel.wallGroundworkDepth.Value +
+      this.viewModel.wallHeight.Value / 2;
+    wallSegmentDraft.position.z = (startPoint.y + endPoint.y) / 2;
+    wallSegmentDraft.rotation.y = Math.atan2(
       endPoint.y - startPoint.y,
       endPoint.x - startPoint.x
     );
+    // subtract door outline. Done by creating a new mesh and subtracting it from the wall mesh
+    const doorOutline = MeshBuilder.CreateBox(
+      "DoorOutline",
+      {
+        height: this.viewModel.doorHeight.Value + 0.2,
+        width: this.viewModel.doorWidth.Value,
+        depth: this.viewModel.wallThickness.Value,
+      },
+      this.scenePresenter.Scene
+    );
+    // door outline x, y, z needs to be adjusted, cause door origin is not centered
+    doorOutline.position = new Vector3(
+      this.viewModel.doorPosition.Value[0].x -
+        0.5 * this.viewModel.doorWidth.Value,
+      this.viewModel.doorPosition.Value[0].y +
+        0.5 * this.viewModel.doorHeight.Value -
+        0.2,
+      this.viewModel.doorPosition.Value[0].z
+    );
+    doorOutline.rotation = new Vector3(
+      0.0,
+      Tools.ToRadians(this.viewModel.doorPosition.Value[1] + 90),
+      0.0
+    );
+    const wallSegmentDraftCSG = CSG.FromMesh(wallSegmentDraft);
+    const doorOutlineCSG = CSG.FromMesh(doorOutline);
+    const booleanCSG = wallSegmentDraftCSG.subtract(doorOutlineCSG);
+    const wallSegment = booleanCSG.toMesh(
+      "WallSegment",
+      null,
+      this.scenePresenter.Scene
+    );
+    wallSegmentDraft.dispose();
+    doorOutline.dispose();
 
     // apply material
     wallSegment.material = this.viewModel.wallMaterial.Value;
@@ -213,7 +251,8 @@ export default class LearningSpaceView implements ILearningSpaceView {
     pole.position.x = corner.x;
     pole.position.y =
       (this.viewModel.baseHeight.Value || 0) -
-      this.viewModel.wallGroundworkDepth.Value;
+      this.viewModel.wallGroundworkDepth.Value +
+      this.viewModel.wallHeight.Value / 2;
     pole.position.z = corner.y;
 
     // apply wall material

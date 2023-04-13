@@ -128,7 +128,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
   }
 
   private getDoorPosition(): [Vector3, number] {
-    return [
+    const doorPosition = [
       new Vector3(
         this.viewModel.doorWidth.Value / 2,
         this.viewModel.baseHeight.Value,
@@ -136,6 +136,8 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
       ),
       -90,
     ];
+    this.viewModel.doorPosition.Value = doorPosition as [Vector3, number];
+    return doorPosition as [Vector3, number];
   }
 
   private createAmbience(): void {
