@@ -29,8 +29,8 @@ export default class LearningSpaceViewModel extends AbstractViewModel {
   public spaceWidth: Observable<number> = new Observable(10);
   public spaceLength: Observable<number> = new Observable(8);
   public baseHeight: Observable<number> = new Observable(0);
-  public doorWidth: Observable<number> = new Observable(1.0);
-  public doorHeight: Observable<number> = new Observable(2.19);
+  public doorWidth: Observable<number> = new Observable(0.95);
+  public doorHeight: Observable<number> = new Observable(2.07);
   public wallHeight: Observable<number> = new Observable(2.5);
   public wallThickness: Observable<number> = new Observable(0.3);
   public wallGroundworkDepth: Observable<number> = new Observable(0.1);
