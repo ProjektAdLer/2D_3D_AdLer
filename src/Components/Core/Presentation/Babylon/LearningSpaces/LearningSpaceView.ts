@@ -169,7 +169,6 @@ export default class LearningSpaceView implements ILearningSpaceView {
     this.scenePresenter.registerNavigationMesh(wallSegmentDraft);
 
     // set position
-    console.log(this.viewModel.baseHeight.Value);
     wallSegmentDraft.position.x = (startPoint.x + endPoint.x) / 2;
     wallSegmentDraft.position.y =
       (this.viewModel.baseHeight.Value || 0) -

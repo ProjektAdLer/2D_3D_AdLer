@@ -38,6 +38,16 @@ function createSystemUnderTest(): [
   return [systemUnderTest, spaceControllerMock, viewModel];
 }
 
+function applyWallSegmentCreationMocks(): [CSG, Mesh] {
+  const mockCSG = mock<CSG>();
+  const mockMesh = mock<Mesh>();
+  mockCSG.subtract.mockReturnValue(mockCSG);
+  mockCSG.toMesh.mockReturnValue(mockMesh);
+  jest.spyOn(CSG, "FromMesh").mockReturnValue(mockCSG);
+
+  return [mockCSG, mockMesh];
+}
+
 describe("LearningSpaceView", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -120,7 +130,14 @@ describe("LearningSpaceView", () => {
       );
     });
 
-    test.skip("displayLearningSpace resets viewModel.isDirty to false", () => {
+    test("displayLearningSpace resets viewModel.isDirty to false", () => {
+      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
+      jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
+      jest
+        .spyOn(PolygonMeshBuilder.prototype, "build")
+        .mockReturnValue(mock<Mesh>());
+      applyWallSegmentCreationMocks();
+
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.spaceCornerPoints.Value = [
         new Vector2(5.3, 4.3),
@@ -128,15 +145,6 @@ describe("LearningSpaceView", () => {
         new Vector2(-5.3, -4.3),
       ];
       viewModel.isDirty = true;
-      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
-      jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
-      jest
-        .spyOn(PolygonMeshBuilder.prototype, "build")
-        .mockReturnValue(mock<Mesh>());
-      jest.spyOn(CSG, "FromMesh").mockReturnValue(mock<CSG>());
-      //TODO: fix this
-      jest.spyOn(CSG.prototype, "subtract").mockReturnValue(mock<CSG>());
-      jest.spyOn(CSG.prototype, "toMesh").mockReturnValue(mock<Mesh>());
 
       systemUnderTest.displayLearningSpace();
 
@@ -259,17 +267,19 @@ describe("LearningSpaceView", () => {
       );
     });
 
-    test.skip("createWalls creates 3 wall meshes when there are 3 corners", () => {
+    test("createWalls creates 3 wall meshes when there are 3 corners", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.spaceCornerPoints.Value = [
         new Vector2(5.3, 4.3),
         new Vector2(-5.3, 4.3),
         new Vector2(-5.3, -4.3),
       ];
+
+      applyWallSegmentCreationMocks();
       jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
       jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
-      systemUnderTest["cleanupOldWalls"]();
 
+      systemUnderTest["cleanupOldWalls"]();
       systemUnderTest["createWalls"]();
 
       expect(viewModel.wallMeshes.Value).toHaveLength(3);
@@ -288,8 +298,10 @@ describe("LearningSpaceView", () => {
       expect(result).toBeInstanceOf(Mesh);
     });
 
-    test.skip("createWallSegment calls MeshBuilder.CreateBox", () => {
+    test("createWallSegment calls MeshBuilder.CreateBox two times (wall draft, door box)", () => {
       const [systemUnderTest, ,] = createSystemUnderTest();
+
+      applyWallSegmentCreationMocks();
       jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
 
       systemUnderTest["createWallSegment"](
@@ -297,11 +309,13 @@ describe("LearningSpaceView", () => {
         new Vector2(1, 1)
       );
 
-      expect(MeshBuilder.CreateBox).toBeCalledTimes(1);
+      expect(MeshBuilder.CreateBox).toBeCalledTimes(2);
     });
 
-    test.skip("createWallSegment calls scenePresenter.registerNavigationMesh with the new mesh", () => {
+    test("createWallSegment calls scenePresenter.registerNavigationMesh with the new mesh", () => {
       const [systemUnderTest, ,] = createSystemUnderTest();
+
+      applyWallSegmentCreationMocks();
       const mockedMesh = mock<Mesh>();
       jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mockedMesh);
 
@@ -316,9 +330,9 @@ describe("LearningSpaceView", () => {
       );
     });
 
-    test.skip("createWallSegment applies the wall material to the new mesh", () => {
+    test("createWallSegment applies the wall material to the new mesh", () => {
+      const [, mockedMesh] = applyWallSegmentCreationMocks();
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      const mockedMesh = mock<Mesh>();
       jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mockedMesh);
 
       systemUnderTest["createWallSegment"](
