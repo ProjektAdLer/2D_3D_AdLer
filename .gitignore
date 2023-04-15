@@ -6,6 +6,7 @@
 node_modules
 coverage
 build
+dist
 .DS_Store
 scripts/*/*.js
 .vscode/settings.json

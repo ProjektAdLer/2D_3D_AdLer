@@ -61,7 +61,7 @@ export default class Navigation extends Readyable implements INavigation {
 
     // -- Navigation Plugin --
     // call to Recast.default for compatibility in production and tests
-    this.plugin = new RecastJSPlugin(await Recast.default());
+    this.plugin = new RecastJSPlugin(await Recast.call({}));
 
     // -- NavMesh --
     this.plugin.createNavMesh(

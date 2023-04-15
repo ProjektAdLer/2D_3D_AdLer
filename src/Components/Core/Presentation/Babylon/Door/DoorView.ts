@@ -18,7 +18,7 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import DoorViewModel from "./DoorViewModel";
 import IDoorController from "./IDoorController";
 
-const modelLink = require("../../../../../Assets/3DModel_Door.glb");
+import modelLink from "../../../../../Assets/3DModel_Door.glb";
 
 export default class DoorView extends Readyable {
   private scenePresenter: IScenePresenter;

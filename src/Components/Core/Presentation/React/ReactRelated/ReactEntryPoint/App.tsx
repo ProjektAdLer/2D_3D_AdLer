@@ -1,4 +1,3 @@
-import "./App.css";
 import LearningSpace from "./LearningSpace";
 import LearningSpaceMenu from "./LearningSpaceMenu";
 import React, { useEffect, useState } from "react";

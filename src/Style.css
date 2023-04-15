@@ -10,25 +10,25 @@
   @font-face {
     font-family: Roboto;
     font-weight: 400;
-    src: url(/public/fonts/Roboto-Regular.ttf);
+    src: url(fonts/Roboto-Regular.ttf);
   }
 
   @font-face {
     font-family: Roboto;
     font-weight: 500;
-    src: url(/public/fonts/Roboto-Medium.ttf);
+    src: url(fonts/Roboto-Medium.ttf);
   }
 
   @font-face {
     font-family: Roboto;
     font-weight: 700;
-    src: url(/public/fonts/Roboto-Bold.ttf);
+    src: url(fonts/Roboto-Bold.ttf);
   }
 
   @font-face {
     font-family: Roboto;
     font-weight: 900;
-    src: url(/public/fonts/Roboto-Black.ttf);
+    src: url(fonts/Roboto-Black.ttf);
   }
 }
 

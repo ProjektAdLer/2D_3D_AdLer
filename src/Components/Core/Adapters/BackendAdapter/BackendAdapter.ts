@@ -35,7 +35,7 @@ export default class BackendAdapter implements IBackendPort {
       console.error("Could not set Axios Base URL to: " + config.serverURL);
       if (config.isDebug)
         logger.log(
-          "If you want to use the Fake Backend, set the environment variable REACT_APP_USE_FAKEBACKEND to true."
+          "If you want to use the Fake Backend, set the environment variable VITE_USE_FAKEBACKEND to true."
         );
       throw error;
     }

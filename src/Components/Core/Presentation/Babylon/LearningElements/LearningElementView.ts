@@ -18,12 +18,18 @@ import SCENE_TYPES, {
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import bind from "bind-decorator";
 
+import h5p from "../../../../../Assets/3DModel_LElement_H5P.glb";
+import text from "../../../../../Assets/3DModel_LElement_Text.glb";
+import pdf from "../../../../../Assets/3DModel_LElement_H5P.glb";
+import image from "../../../../../Assets/3DModel_LElement_Image.glb";
+import video from "../../../../../Assets/3DModel_LElement_Video.glb";
+
 const modelLinks: { [key in LearningElementTypes]?: any } = {
-  [LearningElementTypes.h5p]: require("../../../../../Assets/3DModel_LElement_H5P.glb"),
-  [LearningElementTypes.text]: require("../../../../../Assets/3DModel_LElement_Text.glb"),
-  [LearningElementTypes.pdf]: require("../../../../../Assets/3DModel_LElement_Text.glb"),
-  [LearningElementTypes.image]: require("../../../../../Assets/3DModel_LElement_Image.glb"),
-  [LearningElementTypes.video]: require("../../../../../Assets/3DModel_LElement_Video.glb"),
+  [LearningElementTypes.h5p]: h5p,
+  [LearningElementTypes.text]: text,
+  [LearningElementTypes.pdf]: pdf,
+  [LearningElementTypes.image]: image,
+  [LearningElementTypes.video]: video,
 };
 
 export default class LearningElementView {

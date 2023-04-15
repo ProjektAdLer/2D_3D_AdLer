@@ -3,6 +3,9 @@ import CoreDIContainer from "./Components/Core/DependencyInjection/CoreDIContain
 import CORE_TYPES from "./Components/Core/DependencyInjection/CoreTypes";
 import IReactEntry from "./Components/Core/Presentation/React/ReactRelated/ReactEntryPoint/IReactEntry";
 import { config } from "./config";
+import "./Style.css";
+
+export {} from "@babylonjs/loaders/glTF"; // enable gltf/glb file support
 
 console.log("Current Config:", config);
 

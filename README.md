@@ -8,14 +8,14 @@
 - `$ npm i` muss ausgeführt werden, um die benötigten Bibliotheken zu installieren
 - Für debugging sind einige Umgebungsvraiablen verfügbar. Diese sind in der `.env.development`-File auf dem root level konfiguriert.
   Eigene Einstellungen, wie die Zugangsdaten für den automatischen Login können in einer `.env.local`-File (bzw `.env.development.local`/`.env.production.local`) eingestellt werden.
-  - `REACT_APP_IS_DEBUG`=`true` oder `false` (Wenn false, werden alle DEBUG variablem ignoriert)
-  - `REACT_APP_DEBUG_USERNAME`=`"Der Moodle Nutzername für einen Amtomatischen Login"`
-  - `REACT_APP_DEBUG_PASSWORD`= `"Das Passwort für den Automatischen Login"`
-  - `REACT_APP_LOGLEVEL`=`"log"|"warn"|"error"`
-  - `REACT_APP_API_SERVER_URL`=`URL zum server` meistens `https://api.cluuub.xyz/`
-  - `REACT_APP_USE_AUTOLOGIN`=`true | false`
-  - `REACT_APP_USE_FAKEBACKEND`=`true | false`
-  - `REACT_APP_AUTO_LOGIN_WITHOUT_SHORTCUT=true`
+  - `VITE_IS_DEBUG`=`true` oder `false` (Wenn false, werden alle DEBUG variablem ignoriert)
+  - `VITE_DEBUG_USERNAME`=`"Der Moodle Nutzername für einen Amtomatischen Login"`
+  - `VITE_DEBUG_PASSWORD`= `"Das Passwort für den Automatischen Login"`
+  - `VITE_LOGLEVEL`=`"log"|"warn"|"error"`
+  - `VITE_API_SERVER_URL`=`URL zum server` meistens `https://api.cluuub.xyz/`
+  - `VITE_USE_AUTOLOGIN`=`true | false`
+  - `VITE_USE_FAKEBACKEND`=`true | false`
+  - `VITE_AUTO_LOGIN_WITHOUT_SHORTCUT=true`
 
 ## Verfügbare Commands
 
