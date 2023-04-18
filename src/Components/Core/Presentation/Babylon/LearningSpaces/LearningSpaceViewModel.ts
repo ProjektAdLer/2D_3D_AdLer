@@ -54,4 +54,11 @@ export default class LearningSpaceViewModel extends AbstractViewModel {
   public doorPosition: Observable<[Vector3, number]> = new Observable<
     [Vector3, number]
   >([new Vector3(0, 0, 0), 0]);
+
+  public windowPosition: Observable<[Vector3, number]> = new Observable<
+    [Vector3, number]
+  >([new Vector3(0, 0, 0), 0]);
+
+  public windowWidth: Observable<number> = new Observable(1.4);
+  public windowHeight: Observable<number> = new Observable(1.6);
 }
