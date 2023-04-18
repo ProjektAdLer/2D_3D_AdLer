@@ -1,30 +1,29 @@
 import { injectable } from "inversify";
 import {
   BooleanAndNode,
+  BooleanBinaryNode,
   BooleanNode,
   BooleanOrNode,
   BooleanValueNode,
 } from "./BooleanSyntaxTree";
 
-/**
- * WORK IN PROGRESS - DEFINITLY CONTAINS BUGS
- * LL(1)-Parser for boolean algebra expressions.
- * Supports the following alphabet:
- * '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '^', 'v', '(', ')', ' '
- * Supports the following grammar:
- * E -> (S) | (S^E) | (SvE)
- * S -> E | [0-9]
- */
+// Grammar:
+// E →	T E'
+// E' →	or T E' | e
+// T →	F T'
+// T' →	and F T' | e
+// F → ( E ) | (id)
+// (with e for epsilon)
 
 @injectable()
 export default class BooleanAlgebraParser {
   private static parserIndex = 0;
 
-  static parseToSyntaxTree(expression: string): BooleanNode {
+  static parseToSyntaxTree(expression: string): boolean {
     const tokens = this.convertExpressionToTokenArray(expression);
 
     this.parserIndex = 0;
-    return this.parseExpression(tokens);
+    return this.E(tokens);
   }
 
   private static convertExpressionToTokenArray(expression: string): string[] {
@@ -77,43 +76,90 @@ export default class BooleanAlgebraParser {
     return tokens;
   }
 
-  private static parseExpression(expression: string[]): BooleanNode {
-    if (expression[this.parserIndex] === "(") {
-      this.parserIndex++;
-      let leftExpression = this.parseSubExpression(expression);
-
-      if (expression[this.parserIndex] === "^") {
-        this.parserIndex++;
-        let rightExpression = this.parseExpression(expression);
-        return new BooleanAndNode(leftExpression, rightExpression);
-      } else if (expression[this.parserIndex] === "v") {
-        this.parserIndex++;
-        let rightExpression = this.parseExpression(expression);
-        return new BooleanOrNode(leftExpression, rightExpression);
-      } else if (expression[this.parserIndex] === ")") {
-        this.parserIndex++;
-        return leftExpression;
-      } else {
-        throw new Error("Invalid expression. Expected '^', 'v' or ')'.");
+  // E →	T E'
+  private static E(expression: string[]): boolean {
+    if (this.T(expression)) {
+      if (this.E_(expression)) {
+        return true;
       }
+    }
+    console.log("E failed");
+    return false;
+  }
+
+  // E' →	or T E' | e
+  private static E_(expression: string[]): boolean {
+    if (expression[this.parserIndex] === "v") {
+      this.parserIndex++;
+      if (this.T(expression)) {
+        if (this.E_(expression)) {
+          return true;
+        }
+      }
+      console.log("E_ failed");
+      return false;
     } else {
-      throw new Error("Invalid expression. Expected (.");
+      return true;
     }
   }
 
-  private static parseSubExpression(expression: string[]): BooleanNode {
+  // T →	F T'
+  private static T(expression: string[]): boolean {
+    if (this.F(expression)) {
+      if (this.T_(expression)) {
+        return true;
+      }
+    }
+    console.log("T failed");
+    return false;
+  }
+
+  // T' →	and F T' | e
+  private static T_(expression: string[]): boolean {
+    if (expression[this.parserIndex] === "^") {
+      this.parserIndex++;
+      if (this.F(expression)) {
+        if (this.T_(expression)) {
+          return true;
+        }
+      }
+      console.log("T_ failed");
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  // F → ( E ) | (id)
+  private static F(expression: string[]): boolean {
     if (expression[this.parserIndex] === "(") {
       this.parserIndex++;
-      let subExpression = this.parseExpression(expression);
-      if (expression[this.parserIndex] !== ")") {
-        throw new Error("Invalid expression. Expected ).");
+      if (this.E(expression)) {
+        if (expression[this.parserIndex] === ")") {
+          this.parserIndex++;
+          return true;
+        }
       }
+      console.log("F failed");
+      return false;
+    } else if (
+      // starts with a digit
+      expression[this.parserIndex][0] === "0" ||
+      expression[this.parserIndex][0] === "1" ||
+      expression[this.parserIndex][0] === "2" ||
+      expression[this.parserIndex][0] === "3" ||
+      expression[this.parserIndex][0] === "4" ||
+      expression[this.parserIndex][0] === "5" ||
+      expression[this.parserIndex][0] === "6" ||
+      expression[this.parserIndex][0] === "7" ||
+      expression[this.parserIndex][0] === "8" ||
+      expression[this.parserIndex][0] === "9"
+    ) {
       this.parserIndex++;
-      return subExpression;
+      return true;
     } else {
-      const value = expression[this.parserIndex];
-      this.parserIndex++;
-      return new BooleanValueNode(value);
+      console.log("F failed");
+      return false;
     }
   }
 }
