@@ -4,16 +4,6 @@ export abstract class BooleanNode {
   abstract evaluate(evaluationMap: EvaluationMap): boolean;
 }
 
-export abstract class BooleanUnaryNode extends BooleanNode {
-  get Expression(): BooleanNode {
-    return this.expression;
-  }
-
-  constructor(private readonly expression: BooleanNode) {
-    super();
-  }
-}
-
 export abstract class BooleanBinaryNode extends BooleanNode {
   get LeftExpression(): BooleanNode {
     return this.leftExpression;
@@ -26,6 +16,16 @@ export abstract class BooleanBinaryNode extends BooleanNode {
     private readonly leftExpression: BooleanNode,
     private readonly rightExpression: BooleanNode
   ) {
+    super();
+  }
+}
+
+export abstract class BooleanNaryNode extends BooleanNode {
+  get Expressions(): BooleanNode[] {
+    return this.expressions;
+  }
+
+  constructor(private readonly expressions: BooleanNode[]) {
     super();
   }
 }
@@ -45,20 +45,18 @@ export class BooleanValueNode extends BooleanNode {
   }
 }
 
-export class BooleanAndNode extends BooleanBinaryNode {
+export class BooleanAndNode extends BooleanNaryNode {
   evaluate(evaluationMap: EvaluationMap): boolean {
-    return (
-      this.LeftExpression.evaluate(evaluationMap) &&
-      this.RightExpression.evaluate(evaluationMap)
-    );
+    return !this.Expressions.some((expression) => {
+      return expression.evaluate(evaluationMap) === false;
+    });
   }
 }
 
-export class BooleanOrNode extends BooleanBinaryNode {
+export class BooleanOrNode extends BooleanNaryNode {
   evaluate(evaluationMap: EvaluationMap): boolean {
-    return (
-      this.LeftExpression.evaluate(evaluationMap) ||
-      this.RightExpression.evaluate(evaluationMap)
-    );
+    return this.Expressions.some((expression) => {
+      return expression.evaluate(evaluationMap) === true;
+    });
   }
 }
