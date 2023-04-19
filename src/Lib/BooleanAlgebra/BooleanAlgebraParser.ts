@@ -57,13 +57,7 @@ export default class LearningRoomAvailabilityStringParser {
         case "8":
         case "9":
           let value = "";
-          while (
-            index < expression.length &&
-            expression[index] !== "^" &&
-            expression[index] !== "v" &&
-            expression[index] !== ")" &&
-            expression[index] !== "("
-          ) {
+          while (index < expression.length && !isNaN(+expression[index])) {
             value += expression[index];
             index++;
           }
