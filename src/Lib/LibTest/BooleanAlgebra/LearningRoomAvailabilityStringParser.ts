@@ -1,4 +1,4 @@
-import LearningRoomAvailabilityStringParser from "../../BooleanAlgebra/BooleanAlgebraParser";
+import LearningRoomAvailabilityStringParser from "../../BooleanAlgebra/LearningRoomAvailabilityStringParser";
 import {
   BooleanAndNode,
   BooleanOrNode,
