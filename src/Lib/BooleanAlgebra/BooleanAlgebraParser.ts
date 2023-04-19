@@ -7,22 +7,22 @@ import {
 } from "./BooleanSyntaxTree";
 
 // Recursive descent parser for following grammar:
-// +------------------+------------------------+
-// | Original Grammar | Left recursion removed |
-// +------------------+------------------------+
-// | E → E v T | T    | E → T E'               |
-// | -                | E' → v T E' | e        |
-// | T → T ^ F | F    | T → F T'               |
-// | -                | T' → ^ F T' | e        |
-// | F → ( E ) | id   | F → ( E ) | id         |
-// +------------------+------------------------+
-// (with e for epsilon)
+// +------------------+-------------------------+
+// | Original Grammar | Left recursions removed |
+// +------------------+-------------------------+
+// | E → E v T | T    | E → T E'                |
+// |                  | E' → v T E' | e         |
+// | T → T ^ F | F    | T → F T'                |
+// |                  | T' → ^ F T' | e         |
+// | F → ( E ) | id   | F → ( E ) | id          |
+// +------------------+-------------------------+
+// (with e for epsilon i.e. an empty production)
 
 @injectable()
 export default class LearningRoomAvailabilityStringParser {
   private static parserIndex = 0;
 
-  static parseToSyntaxTree(expression: string): BooleanNode | undefined {
+  static parseToSyntaxTree(expression: string): BooleanNode {
     const tokens = this.convertExpressionToTokenArray(expression);
 
     this.parserIndex = 0;
@@ -81,29 +81,17 @@ export default class LearningRoomAvailabilityStringParser {
 
   // E →	T E'
   private static E(expression: string[]): BooleanNode {
-    const child1 = this.T(expression);
-    const child2 = this.E_(expression);
-    if (child1) {
-      if (child2) {
-        if (child2.length === 0) return child1;
-        else return new BooleanOrNode([child1, ...child2]);
-      }
-    }
-    this.throwParsingError("E");
+    const TSubExpression = this.T(expression);
+    const E_SubExpression = this.E_(expression);
+    if (E_SubExpression.length === 0) return TSubExpression;
+    else return new BooleanOrNode([TSubExpression, ...E_SubExpression]);
   }
 
   // E' →	v T E' | e
   private static E_(expression: string[]): BooleanNode[] {
     if (expression[this.parserIndex] === "v") {
       this.parserIndex++;
-      const child1 = this.T(expression);
-      const child2 = this.E_(expression);
-      if (child1) {
-        if (child2) {
-          return [child1, ...child2];
-        }
-      }
-      this.throwParsingError("E'");
+      return [this.T(expression), ...this.E_(expression)];
     } else {
       return [];
     }
@@ -111,42 +99,30 @@ export default class LearningRoomAvailabilityStringParser {
 
   // T →	F T'
   private static T(expression: string[]): BooleanNode {
-    const child1 = this.F(expression);
-    const child2 = this.T_(expression);
-    if (child1) {
-      if (child2) {
-        if (child2.length === 0) return child1;
-        return new BooleanAndNode([child1, ...child2]);
-      }
-    }
-    this.throwParsingError("T");
+    const FSubExpression = this.F(expression);
+    const T_SubExpression = this.T_(expression);
+    if (T_SubExpression.length === 0) return FSubExpression;
+    return new BooleanAndNode([FSubExpression, ...T_SubExpression]);
   }
 
   // T' →	^ F T' | e
-  private static T_(expression: string[]): BooleanNode[] | undefined {
+  private static T_(expression: string[]): BooleanNode[] {
     if (expression[this.parserIndex] === "^") {
       this.parserIndex++;
-      const child1 = this.F(expression);
-      const child2 = this.T_(expression);
-      if (child1) {
-        if (child2) {
-          return [child1, ...child2];
-        }
-      }
-      this.throwParsingError("T'");
+      return [this.F(expression), ...this.T_(expression)];
     } else {
       return [];
     }
   }
 
   // F → ( E ) | id
-  private static F(expression: string[]): BooleanNode | undefined {
+  private static F(expression: string[]): BooleanNode {
     if (expression[this.parserIndex] === "(") {
       this.parserIndex++;
-      const childExpression = this.E(expression);
+      const ESubExpression = this.E(expression);
       if (expression[this.parserIndex] === ")") {
         this.parserIndex++;
-        return childExpression;
+        return ESubExpression;
       }
       this.throwParsingError("F");
     } else if (
