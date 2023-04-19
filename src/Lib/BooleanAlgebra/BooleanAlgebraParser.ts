@@ -6,14 +6,17 @@ import {
   BooleanValueNode,
 } from "./BooleanSyntaxTree";
 
-// Grammar:
-// E →	T E'
-// E' →	v T E' | e
-// T →	F T'
-// T' →	^ F T' | e
-// F → ( E ) | id
+// Recursive descent parser for following grammar:
+// +------------------+------------------------+
+// | Original Grammar | Left recursion removed |
+// +------------------+------------------------+
+// | E → E v T | T    | E → T E'               |
+// | -                | E' → v T E' | e        |
+// | T → T ^ F | F    | T → F T'               |
+// | -                | T' → ^ F T' | e        |
+// | F → ( E ) | id   | F → ( E ) | id         |
+// +------------------+------------------------+
 // (with e for epsilon)
-// recursive descent parser
 
 @injectable()
 export default class LearningRoomAvailabilityStringParser {
