@@ -1,9 +1,9 @@
-import LearningRoomAvailabilityStringParser from "../../BooleanAlgebra/LearningRoomAvailabilityStringParser";
+import LearningRoomAvailabilityStringParser from "../../../../../Core/Application/UseCases/CalculateSpaceAvailability/Parser/LearningRoomAvailabilityStringParser";
 import {
   BooleanAndNode,
   BooleanOrNode,
   BooleanValueNode,
-} from "../../BooleanAlgebra/BooleanSyntaxTree";
+} from "../../../../../Core/Application/UseCases/CalculateSpaceAvailability/Parser/BooleanSyntaxTree";
 
 describe("BooleanAlgebraParser", () => {
   test("parses a simple expression into matching syntax tree", () => {
