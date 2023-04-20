@@ -26,7 +26,11 @@ export default class LearningRoomAvailabilityStringParser {
     const tokens = this.convertExpressionToTokenArray(expression);
 
     this.parserIndex = 0;
-    return this.E(tokens);
+    const result = this.E(tokens);
+    if (this.parserIndex !== tokens.length)
+      throw new Error("Parsing error. Unexpected end of expression");
+
+    return result;
   }
 
   private static convertExpressionToTokenArray(expression: string): string[] {
@@ -57,7 +61,11 @@ export default class LearningRoomAvailabilityStringParser {
         case "8":
         case "9":
           let value = "";
-          while (index < expression.length && !isNaN(+expression[index])) {
+          while (
+            index < expression.length &&
+            expression[index] !== " " &&
+            !isNaN(+expression[index])
+          ) {
             value += expression[index];
             index++;
           }
@@ -66,7 +74,7 @@ export default class LearningRoomAvailabilityStringParser {
 
         default:
           throw new Error(
-            "Invalid expression. Expected a number, ^, v, ( or )"
+            "Invalid expression. Expected only numbers, ^, v, ( or )"
           );
       }
     }
@@ -83,7 +91,7 @@ export default class LearningRoomAvailabilityStringParser {
 
   // E' →	v T E' | e
   private static E_(expression: string[]): BooleanNode[] {
-    if (expression[this.parserIndex] === "v") {
+    if (expression[this.parserIndex] && expression[this.parserIndex] === "v") {
       this.parserIndex++;
       return [this.T(expression), ...this.E_(expression)];
     } else {
@@ -101,7 +109,7 @@ export default class LearningRoomAvailabilityStringParser {
 
   // T' →	^ F T' | e
   private static T_(expression: string[]): BooleanNode[] {
-    if (expression[this.parserIndex] === "^") {
+    if (expression[this.parserIndex] && expression[this.parserIndex] === "^") {
       this.parserIndex++;
       return [this.F(expression), ...this.T_(expression)];
     } else {
@@ -120,17 +128,18 @@ export default class LearningRoomAvailabilityStringParser {
       }
       this.throwParsingError("F");
     } else if (
+      expression[this.parserIndex] &&
       // starts with a digit
-      expression[this.parserIndex][0] === "0" ||
-      expression[this.parserIndex][0] === "1" ||
-      expression[this.parserIndex][0] === "2" ||
-      expression[this.parserIndex][0] === "3" ||
-      expression[this.parserIndex][0] === "4" ||
-      expression[this.parserIndex][0] === "5" ||
-      expression[this.parserIndex][0] === "6" ||
-      expression[this.parserIndex][0] === "7" ||
-      expression[this.parserIndex][0] === "8" ||
-      expression[this.parserIndex][0] === "9"
+      (expression[this.parserIndex][0] === "0" ||
+        expression[this.parserIndex][0] === "1" ||
+        expression[this.parserIndex][0] === "2" ||
+        expression[this.parserIndex][0] === "3" ||
+        expression[this.parserIndex][0] === "4" ||
+        expression[this.parserIndex][0] === "5" ||
+        expression[this.parserIndex][0] === "6" ||
+        expression[this.parserIndex][0] === "7" ||
+        expression[this.parserIndex][0] === "8" ||
+        expression[this.parserIndex][0] === "9")
     ) {
       const valueNode = new BooleanValueNode(expression[this.parserIndex]);
       this.parserIndex++;

@@ -68,9 +68,67 @@ describe("BooleanAlgebraParser", () => {
     );
   });
 
+  test("accepts a string with spaces", () => {
+    const result =
+      LearningRoomAvailabilityStringParser.parseToSyntaxTree(
+        "5 v 6 v 7 v 8 v 9"
+      );
+    expect(result).toStrictEqual(
+      new BooleanOrNode([
+        new BooleanValueNode("5"),
+        new BooleanValueNode("6"),
+        new BooleanValueNode("7"),
+        new BooleanValueNode("8"),
+        new BooleanValueNode("9"),
+      ])
+    );
+  });
+
+  test("accepts a string with multi-digit ids", () => {
+    const result =
+      LearningRoomAvailabilityStringParser.parseToSyntaxTree("1v20v30");
+    expect(result).toStrictEqual(
+      new BooleanOrNode([
+        new BooleanValueNode("1"),
+        new BooleanValueNode("20"),
+        new BooleanValueNode("30"),
+      ])
+    );
+  });
+
+  test("accepts ids with leading zeros", () => {
+    const result =
+      LearningRoomAvailabilityStringParser.parseToSyntaxTree("01v02v03");
+    expect(result).toStrictEqual(
+      new BooleanOrNode([
+        new BooleanValueNode("01"),
+        new BooleanValueNode("02"),
+        new BooleanValueNode("03"),
+      ])
+    );
+  });
+
   test("throws an error when the expression contains a invalid symbol", () => {
     expect(() =>
-      LearningRoomAvailabilityStringParser.parseToSyntaxTree("1v2v3v4v5:")
+      LearningRoomAvailabilityStringParser.parseToSyntaxTree("6v7v8v9v10:")
     ).toThrowError("Invalid expression");
+  });
+
+  test("throws an error when the expression has trailing valid symbols", () => {
+    expect(() =>
+      LearningRoomAvailabilityStringParser.parseToSyntaxTree("1v2v3v4v5^")
+    ).toThrowError("Parsing error");
+  });
+
+  test("throws an error when the expression contains extra brackets", () => {
+    expect(() =>
+      LearningRoomAvailabilityStringParser.parseToSyntaxTree("1v2v(3))v4v5")
+    ).toThrowError("Parsing error");
+  });
+
+  test("throws an error when closing brackets are missing", () => {
+    expect(() =>
+      LearningRoomAvailabilityStringParser.parseToSyntaxTree("1v2v(3v4v5")
+    ).toThrowError("Parsing error");
   });
 });
