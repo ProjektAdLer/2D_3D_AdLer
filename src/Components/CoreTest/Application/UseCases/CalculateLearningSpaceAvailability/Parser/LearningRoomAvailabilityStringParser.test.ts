@@ -125,4 +125,10 @@ describe("BooleanAlgebraParser", () => {
       LearningRoomAvailabilityStringParser.parseToSyntaxTree("1v2v(3v4v5")
     ).toThrowError("Parsing error");
   });
+
+  test("parses a simple expression into an ID array", () => {
+    const result =
+      LearningRoomAvailabilityStringParser.parseToIdArray("(1)^(2)v(3)");
+    expect(result).toStrictEqual([1, 2, 3]);
+  });
 });
