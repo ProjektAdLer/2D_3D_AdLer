@@ -1,4 +1,6 @@
-export class EvaluationMap extends Map<string, boolean> {}
+import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
+
+export class EvaluationMap extends Map<ComponentID, boolean> {}
 
 export abstract class BooleanNode {
   abstract evaluate(evaluationMap: EvaluationMap): boolean;
@@ -14,12 +16,12 @@ export abstract class BooleanNaryNode extends BooleanNode {
   }
 }
 
-export class BooleanValueNode extends BooleanNode {
-  get Value(): string {
+export class BooleanIDNode extends BooleanNode {
+  get Value(): ComponentID {
     return this.value;
   }
 
-  constructor(private readonly value: string) {
+  constructor(private readonly value: ComponentID) {
     super();
   }
 

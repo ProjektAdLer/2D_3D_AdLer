@@ -3,8 +3,9 @@ import {
   BooleanAndNode,
   BooleanNode,
   BooleanOrNode,
-  BooleanValueNode,
+  BooleanIDNode,
 } from "./BooleanSyntaxTree";
+import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 
 // Recursive descent parser for following grammar:
 // +------------------+-------------------------+
@@ -31,6 +32,20 @@ export default class LearningRoomAvailabilityStringParser {
       throw new Error("Parsing error. Unexpected end of expression");
 
     return result;
+  }
+
+  static parseToIdArray(expression: string): ComponentID[] {
+    const tokens = this.convertExpressionToTokenArray(expression);
+
+    let ids: ComponentID[] = [];
+    tokens.forEach((tokens) => {
+      const convertedToken = +tokens;
+      if (!isNaN(convertedToken)) {
+        ids.push(convertedToken);
+      }
+    });
+
+    return ids;
   }
 
   private static convertExpressionToTokenArray(expression: string): string[] {
@@ -141,7 +156,7 @@ export default class LearningRoomAvailabilityStringParser {
         expression[this.parserIndex][0] === "8" ||
         expression[this.parserIndex][0] === "9")
     ) {
-      const valueNode = new BooleanValueNode(expression[this.parserIndex]);
+      const valueNode = new BooleanIDNode(+expression[this.parserIndex]);
       this.parserIndex++;
       return valueNode;
     } else {

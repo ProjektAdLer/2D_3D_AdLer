@@ -2,7 +2,7 @@ import LearningRoomAvailabilityStringParser from "../../../../../Core/Applicatio
 import {
   BooleanAndNode,
   BooleanOrNode,
-  BooleanValueNode,
+  BooleanIDNode,
 } from "../../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
 
 describe("BooleanAlgebraParser", () => {
@@ -11,11 +11,8 @@ describe("BooleanAlgebraParser", () => {
       LearningRoomAvailabilityStringParser.parseToSyntaxTree("(1)^(2)v(3)");
     expect(result).toStrictEqual(
       new BooleanOrNode([
-        new BooleanAndNode([
-          new BooleanValueNode("1"),
-          new BooleanValueNode("2"),
-        ]),
-        new BooleanValueNode("3"),
+        new BooleanAndNode([new BooleanIDNode(1), new BooleanIDNode(2)]),
+        new BooleanIDNode(3),
       ])
     );
   });
@@ -29,13 +26,10 @@ describe("BooleanAlgebraParser", () => {
     expect(result).toStrictEqual(
       new BooleanAndNode([
         new BooleanOrNode([
-          new BooleanAndNode([
-            new BooleanValueNode("1"),
-            new BooleanValueNode("2"),
-          ]),
-          new BooleanValueNode("3"),
+          new BooleanAndNode([new BooleanIDNode(1), new BooleanIDNode(2)]),
+          new BooleanIDNode(3),
         ]),
-        new BooleanValueNode("4"),
+        new BooleanIDNode(4),
       ])
     );
   });
@@ -45,11 +39,11 @@ describe("BooleanAlgebraParser", () => {
       LearningRoomAvailabilityStringParser.parseToSyntaxTree("1^2^3^4^5");
     expect(result).toStrictEqual(
       new BooleanAndNode([
-        new BooleanValueNode("1"),
-        new BooleanValueNode("2"),
-        new BooleanValueNode("3"),
-        new BooleanValueNode("4"),
-        new BooleanValueNode("5"),
+        new BooleanIDNode(1),
+        new BooleanIDNode(2),
+        new BooleanIDNode(3),
+        new BooleanIDNode(4),
+        new BooleanIDNode(5),
       ])
     );
   });
@@ -59,11 +53,11 @@ describe("BooleanAlgebraParser", () => {
       LearningRoomAvailabilityStringParser.parseToSyntaxTree("1v2v3v4v5");
     expect(result).toStrictEqual(
       new BooleanOrNode([
-        new BooleanValueNode("1"),
-        new BooleanValueNode("2"),
-        new BooleanValueNode("3"),
-        new BooleanValueNode("4"),
-        new BooleanValueNode("5"),
+        new BooleanIDNode(1),
+        new BooleanIDNode(2),
+        new BooleanIDNode(3),
+        new BooleanIDNode(4),
+        new BooleanIDNode(5),
       ])
     );
   });
@@ -75,11 +69,11 @@ describe("BooleanAlgebraParser", () => {
       );
     expect(result).toStrictEqual(
       new BooleanOrNode([
-        new BooleanValueNode("5"),
-        new BooleanValueNode("6"),
-        new BooleanValueNode("7"),
-        new BooleanValueNode("8"),
-        new BooleanValueNode("9"),
+        new BooleanIDNode(5),
+        new BooleanIDNode(6),
+        new BooleanIDNode(7),
+        new BooleanIDNode(8),
+        new BooleanIDNode(9),
       ])
     );
   });
@@ -89,9 +83,9 @@ describe("BooleanAlgebraParser", () => {
       LearningRoomAvailabilityStringParser.parseToSyntaxTree("1v20v30");
     expect(result).toStrictEqual(
       new BooleanOrNode([
-        new BooleanValueNode("1"),
-        new BooleanValueNode("20"),
-        new BooleanValueNode("30"),
+        new BooleanIDNode(1),
+        new BooleanIDNode(20),
+        new BooleanIDNode(30),
       ])
     );
   });
@@ -101,9 +95,9 @@ describe("BooleanAlgebraParser", () => {
       LearningRoomAvailabilityStringParser.parseToSyntaxTree("01v02v03");
     expect(result).toStrictEqual(
       new BooleanOrNode([
-        new BooleanValueNode("01"),
-        new BooleanValueNode("02"),
-        new BooleanValueNode("03"),
+        new BooleanIDNode(1),
+        new BooleanIDNode(2),
+        new BooleanIDNode(3),
       ])
     );
   });
