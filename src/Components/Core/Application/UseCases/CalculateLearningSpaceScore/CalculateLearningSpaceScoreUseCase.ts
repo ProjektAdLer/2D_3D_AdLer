@@ -52,13 +52,10 @@ export default class CalculateLearningSpaceScoreUseCase
         LearningSpaceEntity,
         (e) => e.id === spaceID
       );
-    if (spaces.length === 0) {
-      throw new Error(`Could not find any spaces`);
+    if (spaces.length === 0 || spaces.length > 1) {
+      throw new Error(`Could not find matching space`);
     }
-    const space = spaces.find((s) => s.id === spaceID);
-    if (!space) {
-      throw new Error(`Could not find space with id ${spaceID}`);
-    }
+    const space = spaces[0];
 
     let maxPoints = 0;
     const currentScore = space.elements.reduce((acumulator, current) => {

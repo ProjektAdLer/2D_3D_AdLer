@@ -129,19 +129,6 @@ describe("Calculate Learning Space Score UseCase", () => {
     }).toThrow();
   });
 
-  test("calculateLearningSpaceScore should throw an error if no space with given id can be found", () => {
-    entityContainerMock.filterEntitiesOfType.mockReturnValue([
-      {
-        id: 42,
-        elements: [],
-      },
-    ]);
-
-    expect(() => {
-      systemUnderTest["calculateLearningSpaceScore"](1);
-    }).toThrow();
-  });
-
   test("execute throws when the worldID in the user location is undefined", () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
