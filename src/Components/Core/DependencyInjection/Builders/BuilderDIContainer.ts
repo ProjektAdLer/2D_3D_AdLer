@@ -28,6 +28,7 @@ import ExitModalBuilder from "~ReactComponents/LearningSpaceDisplay/ExitModal/Ex
 import LearningWorldSelectionBuilder from "~ReactComponents/LearningWorldMenu/LearningWorldSelection/LearningWorldSelectionBuilder";
 import LearningWorldDetailBuilder from "~ReactComponents/LearningWorldMenu/LearningWorldDetail/LearningWorldDetailBuilder";
 import AmbienceBuilder from "../../Presentation/Babylon/Ambience/AmbienceBuilder";
+import WindowBuilder from "../../Presentation/Babylon/Window/WindowBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -35,6 +36,7 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
 
   bind<IPresentationBuilder>(BUILDER_TYPES.IDoorBuilder).to(DoorBuilder);
+  bind<IPresentationBuilder>(BUILDER_TYPES.IWindowBuilder).to(WindowBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IScorePanelBuilder).to(
     ScorePanelBuilder
   );

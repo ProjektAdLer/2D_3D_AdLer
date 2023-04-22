@@ -14,10 +14,12 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import LearningElementView from "../LearningElements/LearningElementView";
 import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
 import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
+import IWindowPresenter from "../Window/IWindowPresenter";
 
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
   private doorPresenter: IDoorPresenter;
+  private windowPresenter: IWindowPresenter;
 
   constructor(private viewModel: LearningSpaceViewModel) {
     if (!this.viewModel) {
@@ -35,6 +37,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     this.createAmbience();
     this.setViewModelData(spaceTO);
     this.createLearningElements(spaceTO.elements);
+    this.createWindow();
     this.createDoor();
   }
 
@@ -149,5 +152,29 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     );
 
     director.build(ambienceBuilder);
+  }
+  private createWindow(): void {
+    const director = CoreDIContainer.get<IPresentationDirector>(
+      BUILDER_TYPES.IPresentationDirector
+    );
+    const windowBuilder = CoreDIContainer.get<IPresentationBuilder>(
+      BUILDER_TYPES.IWindowBuilder
+    );
+
+    director.build(windowBuilder);
+    this.windowPresenter = windowBuilder.getPresenter() as IWindowPresenter;
+    this.windowPresenter.presentWindow(this.getWindowPosition());
+  }
+  private getWindowPosition(): [Vector3, number] {
+    const windowPosition = [
+      new Vector3(
+        this.viewModel.windowWidth.Value + 5,
+        this.viewModel.baseHeight.Value,
+        -this.viewModel.spaceLength.Value - this.viewModel.wallThickness.Value
+      ),
+      -90,
+    ];
+    this.viewModel.windowPosition.Value = windowPosition as [Vector3, number];
+    return windowPosition as [Vector3, number];
   }
 }

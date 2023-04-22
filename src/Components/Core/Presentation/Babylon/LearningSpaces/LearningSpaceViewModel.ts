@@ -61,4 +61,5 @@ export default class LearningSpaceViewModel extends AbstractViewModel {
 
   public windowWidth: Observable<number> = new Observable(1.4);
   public windowHeight: Observable<number> = new Observable(1.6);
+  public windowMeshes: Observable<Mesh[]> = new Observable<Mesh[]>();
 }

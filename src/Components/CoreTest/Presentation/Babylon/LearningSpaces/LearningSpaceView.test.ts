@@ -298,7 +298,7 @@ describe("LearningSpaceView", () => {
       expect(result).toBeInstanceOf(Mesh);
     });
 
-    test("createWallSegment calls MeshBuilder.CreateBox two times (wall draft, door box)", () => {
+    test("createWallSegment calls MeshBuilder.CreateBox three times (wall draft, door box, window box)", () => {
       const [systemUnderTest, ,] = createSystemUnderTest();
 
       applyWallSegmentCreationMocks();
@@ -309,7 +309,7 @@ describe("LearningSpaceView", () => {
         new Vector2(1, 1)
       );
 
-      expect(MeshBuilder.CreateBox).toBeCalledTimes(2);
+      expect(MeshBuilder.CreateBox).toBeCalledTimes(3);
     });
 
     test("createWallSegment calls scenePresenter.registerNavigationMesh with the new mesh", () => {

@@ -98,12 +98,15 @@ describe("LearningSpacePresenter", () => {
     systemUnderTest["createLearningElements"] = createElementsMock;
     const createDoorMock = jest.fn();
     systemUnderTest["createDoor"] = createDoorMock;
+    const createWindowMock = jest.fn();
+    systemUnderTest["createWindow"] = createWindowMock;
 
     systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
     expect(setViewModelDataMock).toHaveBeenCalledTimes(1);
     expect(createElementsMock).toHaveBeenCalledTimes(1);
     expect(createDoorMock).toHaveBeenCalledTimes(1);
+    expect(createWindowMock).toHaveBeenCalledTimes(1);
   });
 
   test("setViewModelData sets the space id in the ViewModel", () => {

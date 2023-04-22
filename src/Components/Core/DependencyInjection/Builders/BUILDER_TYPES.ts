@@ -3,6 +3,7 @@ const BUILDER_TYPES = {
   ILearningSpaceBuilder: Symbol("ILearningSpaceBuilder"),
   ILearningElementBuilder: Symbol("ILearningElementBuilder"),
   IDoorBuilder: Symbol("IDoorBuilder"),
+  IWindowBuilder: Symbol("IWindowBuilder"),
   IScorePanelBuilder: Symbol("IScorePanelBuilder"),
   ILoginModalBuilder: Symbol("ILoginModalBuilder"),
   ILearningElementModalBuilder: Symbol("ILearningElementModalBuilder"),
