@@ -17,6 +17,9 @@ const USECASE_TYPES = {
   IGetLoginStatusUseCase: Symbol("IGetLoginStatusUseCase"),
   ISetUserLocationUseCase: Symbol("ISetUserLocationUseCase"),
   IGetUserLocationUseCase: Symbol("IGetUserLocationUseCase"),
+  ICalculateLearningSpaceAvailabilityUseCase: Symbol(
+    "ICalculateLearningSpaceAvailabilityUseCase"
+  ),
 };
 
 export default USECASE_TYPES;

@@ -28,6 +28,8 @@ import IGetUserLocationUseCase from "../../Application/UseCases/GetUserLocation/
 import GetUserLocationUseCase from "../../Application/UseCases/GetUserLocation/GetUserLocationUseCase";
 import CalculateLearningWorldScoreUseCase from "../../Application/UseCases/CalculateLearningWorldScore/CalculateLearningWorldScoreUseCase";
 import ICalculateLearningWorldScoreUseCase from "../../Application/UseCases/CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
+import ICalculateLearningSpaceAvailabilityUseCase from "../../Application/UseCases/CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
+import CalculateLearningSpaceAvailabilityUseCase from "../../Application/UseCases/CalculateLearningSpaceAvailability/CalculateLearningSpaceAvailabilityUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -94,6 +96,12 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<IGetUserLocationUseCase>(USECASE_TYPES.IGetUserLocationUseCase)
     .to(GetUserLocationUseCase)
+    .inSingletonScope();
+
+  bind<ICalculateLearningSpaceAvailabilityUseCase>(
+    USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase
+  )
+    .to(CalculateLearningSpaceAvailabilityUseCase)
     .inSingletonScope();
 });
 
