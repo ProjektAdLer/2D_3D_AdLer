@@ -20,7 +20,7 @@ import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 // (with e for epsilon i.e. an empty production)
 
 @injectable()
-export default class LearningRoomAvailabilityStringParser {
+export default class LearningSpaceAvailabilityStringParser {
   private static parserIndex = 0;
 
   static parseToSyntaxTree(expression: string): BooleanNode {
