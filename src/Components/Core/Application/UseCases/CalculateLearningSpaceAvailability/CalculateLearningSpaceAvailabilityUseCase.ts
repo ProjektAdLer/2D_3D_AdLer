@@ -4,7 +4,6 @@ import ICalculateLearningSpaceAvailabilityUseCase from "./ICalculateLearningSpac
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import LearningSpaceEntity from "src/Components/Core/Domain/Entities/LearningSpaceEntity";
 import LearningRoomAvailabilityStringParser from "./Parser/LearningRoomAvailabilityStringParser";
-import { logger } from "src/Lib/Logger";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
@@ -33,15 +32,11 @@ export default class CalculateLearningSpaceAvailabilityUseCase
     const space = spaces[0];
 
     let requirementsSyntaxTree: BooleanNode;
-    try {
-      requirementsSyntaxTree =
-        LearningRoomAvailabilityStringParser.parseToSyntaxTree(
-          space.requirements
-        );
-    } catch (e) {
-      logger.error(e);
-      return false;
-    }
+
+    requirementsSyntaxTree =
+      LearningRoomAvailabilityStringParser.parseToSyntaxTree(
+        space.requirements
+      );
 
     const requirementsIdArray =
       LearningRoomAvailabilityStringParser.parseToIdArray(space.requirements);
