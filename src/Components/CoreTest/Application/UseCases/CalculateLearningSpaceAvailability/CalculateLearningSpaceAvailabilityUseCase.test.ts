@@ -5,7 +5,10 @@ import CalculateLearningSpaceAvailabilityUseCase from "../../../../Core/Applicat
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import { logger } from "../../../../../Lib/Logger";
+import {
+  BooleanAndNode,
+  BooleanIDNode,
+} from "../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
 
 jest.mock("src/Lib/Logger.ts");
 
@@ -61,7 +64,14 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
 
     const result = systemUnderTest.internalExecute(1);
 
-    expect(result).toBe(true);
+    expect(result).toStrictEqual({
+      requirementsString: "(2)^(3)",
+      requirementsSyntaxTree: new BooleanAndNode([
+        new BooleanIDNode(2),
+        new BooleanIDNode(3),
+      ]),
+      isAvailable: true,
+    });
   });
 
   test("internalExecute throws an error if the space is not found", () => {
@@ -91,9 +101,6 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
       },
     ]);
 
-    const result = systemUnderTest.internalExecute(1);
-
-    expect(logger.error).toBeCalledTimes(1);
-    expect(result).toBe(false);
+    expect(() => systemUnderTest.internalExecute(1)).toThrowError();
   });
 });

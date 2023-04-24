@@ -3,12 +3,13 @@ import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import ICalculateLearningSpaceAvailabilityUseCase from "./ICalculateLearningSpaceAvailabilityUseCase";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import LearningSpaceEntity from "src/Components/Core/Domain/Entities/LearningSpaceEntity";
-import LearningRoomAvailabilityStringParser from "./Parser/LearningRoomAvailabilityStringParser";
+import LearningSpaceAvailabilityStringParser from "./Parser/LearningSpaceAvailabilityStringParser";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import LearningSpaceScoreTO from "../../DataTransferObjects/LearningSpaceScoreTO";
 import { BooleanNode } from "./Parser/BooleanSyntaxTree";
+import LearningSpaceAvailabilityTO from "../../DataTransferObjects/LearningSpaceAvailabilityTO";
 
 @injectable()
 export default class CalculateLearningSpaceAvailabilityUseCase
@@ -21,7 +22,7 @@ export default class CalculateLearningSpaceAvailabilityUseCase
     private calculateLearningSpaceScoreUseCase: IInternalCalculateLearningSpaceScoreUseCase
   ) {}
 
-  internalExecute(spaceID: ComponentID): boolean {
+  internalExecute(spaceID: ComponentID): LearningSpaceAvailabilityTO {
     const spaces = this.entityContainer.filterEntitiesOfType(
       LearningSpaceEntity,
       (s) => s.id === spaceID
@@ -34,12 +35,12 @@ export default class CalculateLearningSpaceAvailabilityUseCase
     let requirementsSyntaxTree: BooleanNode;
 
     requirementsSyntaxTree =
-      LearningRoomAvailabilityStringParser.parseToSyntaxTree(
+      LearningSpaceAvailabilityStringParser.parseToSyntaxTree(
         space.requirements
       );
 
     const requirementsIdArray =
-      LearningRoomAvailabilityStringParser.parseToIdArray(space.requirements);
+      LearningSpaceAvailabilityStringParser.parseToIdArray(space.requirements);
 
     const evaluationMap = new Map<ComponentID, boolean>();
     requirementsIdArray.forEach((id) => {
@@ -52,6 +53,10 @@ export default class CalculateLearningSpaceAvailabilityUseCase
       );
     });
 
-    return requirementsSyntaxTree!.evaluate(evaluationMap);
+    return {
+      requirementsString: space.requirements,
+      requirementsSyntaxTree: requirementsSyntaxTree,
+      isAvailable: requirementsSyntaxTree!.evaluate(evaluationMap),
+    };
   }
 }
