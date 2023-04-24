@@ -15,6 +15,9 @@ import LearningSpaceEntity from "../../../../Core/Domain/Entities/LearningSpaceE
 import LearningWorldEntity from "../../../../Core/Domain/Entities/LearningWorldEntity";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import { ConstructorReference } from "../../../../Core/Types/EntityManagerTypes";
+import ICalculateLearningSpaceAvailabilityUseCase from "../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
+import LearningSpaceAvailabilityTO from "../../../../Core/Application/DataTransferObjects/LearningSpaceAvailabilityTO";
+import { BooleanIDNode } from "../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
 
 const entityContainerMock = mock<IEntityContainer>();
 const loadWorldMock = mock<ILoadLearningWorldUseCase>();
@@ -22,6 +25,8 @@ const worldPortMock = mock<ILearningWorldPort>();
 const calculateSpaceScoreMock =
   mock<IInternalCalculateLearningSpaceScoreUseCase>();
 const setUserLocationUseCaseMock = mock<ISetUserLocationUseCase>();
+const calculateLearningSpaceAvailabilityUseCaseMock =
+  mock<ICalculateLearningSpaceAvailabilityUseCase>();
 
 describe("LoadSpaceUseCase", () => {
   let systemUnderTest: LoadLearningSpaceUseCase;
@@ -44,6 +49,9 @@ describe("LoadSpaceUseCase", () => {
     CoreDIContainer.rebind<ISetUserLocationUseCase>(
       USECASE_TYPES.ISetUserLocationUseCase
     ).toConstantValue(setUserLocationUseCaseMock);
+    CoreDIContainer.rebind<ICalculateLearningSpaceAvailabilityUseCase>(
+      USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase
+    ).toConstantValue(calculateLearningSpaceAvailabilityUseCaseMock);
   });
 
   beforeEach(() => {
@@ -73,6 +81,15 @@ describe("LoadSpaceUseCase", () => {
     };
     calculateSpaceScoreMock.internalExecute.mockReturnValue(spaceScoreTO);
 
+    const spaceAvailabilityTO: LearningSpaceAvailabilityTO = {
+      isAvailable: true,
+      requirementsString: "1",
+      requirementsSyntaxTree: new BooleanIDNode(1),
+    };
+    calculateLearningSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
+      spaceAvailabilityTO
+    );
+
     await systemUnderTest.executeAsync({ spaceID: 1, worldID: 1 });
 
     expect(worldPortMock.onLearningSpaceLoaded).toHaveBeenCalledWith(
@@ -99,6 +116,15 @@ describe("LoadSpaceUseCase", () => {
       spaceID: 1,
     };
     calculateSpaceScoreMock.internalExecute.mockReturnValue(spaceScoreTO);
+
+    const spaceAvailabilityTO: LearningSpaceAvailabilityTO = {
+      isAvailable: true,
+      requirementsString: "1",
+      requirementsSyntaxTree: new BooleanIDNode(1),
+    };
+    calculateLearningSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
+      spaceAvailabilityTO
+    );
 
     await systemUnderTest.executeAsync({ spaceID: 1, worldID: 2 });
 
@@ -141,6 +167,15 @@ describe("LoadSpaceUseCase", () => {
       spaceID: 1,
     };
     calculateSpaceScoreMock.internalExecute.mockReturnValue(spaceScoreTO);
+
+    const spaceAvailabilityTO: LearningSpaceAvailabilityTO = {
+      isAvailable: true,
+      requirementsString: "1",
+      requirementsSyntaxTree: new BooleanIDNode(1),
+    };
+    calculateLearningSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
+      spaceAvailabilityTO
+    );
 
     await systemUnderTest.executeAsync({ spaceID: 1, worldID: 1 });
 

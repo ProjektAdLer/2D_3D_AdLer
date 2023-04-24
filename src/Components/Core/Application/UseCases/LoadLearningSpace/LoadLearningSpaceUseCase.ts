@@ -12,6 +12,7 @@ import type ILearningWorldPort from "src/Components/Core/Application/Ports/Inter
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import type ISetUserLocationUseCase from "../SetUserLocation/ISetUserLocationUseCase";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "src/Components/Core/Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
+import type ICalculateLearningSpaceAvailabilityUseCase from "../CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
 
 @injectable()
 export default class LoadLearningSpaceUseCase
@@ -27,7 +28,9 @@ export default class LoadLearningSpaceUseCase
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
     @inject(USECASE_TYPES.ISetUserLocationUseCase)
-    private setUserLocationUseCase: ISetUserLocationUseCase
+    private setUserLocationUseCase: ISetUserLocationUseCase,
+    @inject(USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase)
+    private calculateSpaceAvailability: ICalculateLearningSpaceAvailabilityUseCase
   ) {}
 
   async executeAsync(data: {
@@ -56,6 +59,14 @@ export default class LoadLearningSpaceUseCase
     const spaceScoreTO = this.calculateSpaceScore.internalExecute(spaceTO.id);
     spaceTO.currentScore = spaceScoreTO.currentScore;
     spaceTO.maxScore = spaceScoreTO.maxScore;
+
+    // fill with availability data
+    const availabilityData = this.calculateSpaceAvailability.internalExecute(
+      spaceTO.id
+    );
+    spaceTO.requirementsString = availabilityData.requirementsString;
+    spaceTO.requirementsSyntaxTree = availabilityData.requirementsSyntaxTree;
+    spaceTO.isAvailable = availabilityData.isAvailable;
 
     // set current location in user entity
     this.setUserLocationUseCase.execute({
