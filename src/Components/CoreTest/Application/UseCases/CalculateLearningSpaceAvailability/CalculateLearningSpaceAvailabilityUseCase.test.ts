@@ -74,6 +74,23 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
     });
   });
 
+  test("internalExecute returns the correct availability for a space with no requirements", () => {
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      {
+        id: 1,
+        requirements: "",
+      },
+    ]);
+
+    const result = systemUnderTest.internalExecute(1);
+
+    expect(result).toStrictEqual({
+      requirementsString: "",
+      requirementsSyntaxTree: null,
+      isAvailable: true,
+    });
+  });
+
   test("internalExecute throws an error if the space is not found", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 

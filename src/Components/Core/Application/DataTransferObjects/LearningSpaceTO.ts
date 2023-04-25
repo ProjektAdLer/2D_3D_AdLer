@@ -24,8 +24,8 @@ export default class LearningSpaceTO {
   elements: LearningElementTO[];
   description: string;
   goals: string[];
-  requirementsString: string;
-  requirementsSyntaxTree: BooleanNode;
+  requirementsString: string | "";
+  requirementsSyntaxTree: BooleanNode | null;
   isAvailable: boolean;
   requiredScore: number;
   currentScore: number;

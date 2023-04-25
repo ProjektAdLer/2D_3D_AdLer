@@ -30,7 +30,7 @@ export default class LoadLearningSpaceUseCase
     @inject(USECASE_TYPES.ISetUserLocationUseCase)
     private setUserLocationUseCase: ISetUserLocationUseCase,
     @inject(USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase)
-    private calculateSpaceAvailability: ICalculateLearningSpaceAvailabilityUseCase
+    private calculateSpaceAvailabilityUseCase: ICalculateLearningSpaceAvailabilityUseCase
   ) {}
 
   async executeAsync(data: {
@@ -61,9 +61,8 @@ export default class LoadLearningSpaceUseCase
     spaceTO.maxScore = spaceScoreTO.maxScore;
 
     // fill with availability data
-    const availabilityData = this.calculateSpaceAvailability.internalExecute(
-      spaceTO.id
-    );
+    const availabilityData =
+      this.calculateSpaceAvailabilityUseCase.internalExecute(spaceTO.id);
     spaceTO.requirementsString = availabilityData.requirementsString;
     spaceTO.requirementsSyntaxTree = availabilityData.requirementsSyntaxTree;
     spaceTO.isAvailable = availabilityData.isAvailable;

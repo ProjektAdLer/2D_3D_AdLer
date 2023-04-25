@@ -20,6 +20,7 @@ import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLe
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import BackendWorldTO from "../../DataTransferObjects/BackendWorldTO";
 import BackendElementTO from "../../DataTransferObjects/BackendElementTO";
+import type ICalculateLearningSpaceAvailabilityUseCase from "../CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
 
 @injectable()
 export default class LoadLearningWorldUseCase
@@ -37,7 +38,9 @@ export default class LoadLearningWorldUseCase
     @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
     private calculateSpaceScore: IInternalCalculateLearningSpaceScoreUseCase,
     @inject(USECASE_TYPES.ISetUserLocationUseCase)
-    private setUserLocationUseCase: ISetUserLocationUseCase
+    private setUserLocationUseCase: ISetUserLocationUseCase,
+    @inject(USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase)
+    private calculateSpaceAvailabilityUseCase: ICalculateLearningSpaceAvailabilityUseCase
   ) {}
 
   private semaphore = new Semaphore("LoadWorld in Use", 1);
@@ -86,6 +89,12 @@ export default class LoadLearningWorldUseCase
       let spaceScores = this.calculateSpaceScore.internalExecute(space.id);
       space.currentScore = spaceScores.currentScore;
       space.maxScore = spaceScores.maxScore;
+
+      let spaceAvailability =
+        this.calculateSpaceAvailabilityUseCase.internalExecute(space.id);
+      space.isAvailable = spaceAvailability.isAvailable;
+      space.requirementsString = spaceAvailability.requirementsString;
+      space.requirementsSyntaxTree = spaceAvailability.requirementsSyntaxTree;
     });
 
     // set user location
