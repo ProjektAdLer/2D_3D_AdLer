@@ -35,7 +35,7 @@ export default class CalculateLearningSpaceAvailabilityUseCase
     // if the space has no requirements, it is always available
     if (space.requirements === "")
       return {
-        requirementsString: "space.requirements",
+        requirementsString: "",
         requirementsSyntaxTree: null,
         isAvailable: true,
       };
