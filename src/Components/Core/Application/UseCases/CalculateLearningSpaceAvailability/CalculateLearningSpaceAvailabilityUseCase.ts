@@ -32,9 +32,15 @@ export default class CalculateLearningSpaceAvailabilityUseCase
     }
     const space = spaces[0];
 
-    let requirementsSyntaxTree: BooleanNode;
+    // if the space has no requirements, it is always available
+    if (space.requirements === "")
+      return {
+        requirementsString: "space.requirements",
+        requirementsSyntaxTree: null,
+        isAvailable: true,
+      };
 
-    requirementsSyntaxTree =
+    const requirementsSyntaxTree =
       LearningSpaceAvailabilityStringParser.parseToSyntaxTree(
         space.requirements
       );
