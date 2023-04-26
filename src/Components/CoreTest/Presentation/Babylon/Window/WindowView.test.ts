@@ -71,36 +71,4 @@ describe("WindowView", () => {
       expect(mesh2.rotationQuaternion).toBeNull();
     });
   });
-
-  test.skip("positionWindowMesh sets position of the first mesh to viewModel.position", async () => {
-    //these two tests are currently skipped, as positionWindowMesh is not called after adjusting the position or rotation of the window
-    //(Compare with the door tests, where the same is not the case) ~FK
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-
-    await systemUnderTest.isReady.then(() => {
-      const newPosition = new Vector3(1, 2, 3);
-      viewModel.position.Value = newPosition;
-
-      expect(viewModel.meshes.Value[0].position).toStrictEqual(newPosition);
-    });
-  });
-
-  test.skip("positionWindowMesh sets rotation of the first mesh to viewModel.rotation", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-
-    await systemUnderTest.isReady.then(() => {
-      const newRotation = 42;
-      viewModel.rotation.Value = newRotation;
-
-      expect(viewModel.meshes.Value[0].rotation.y).toStrictEqual(
-        Tools.ToRadians(newRotation)
-      );
-    });
-  });
 });
