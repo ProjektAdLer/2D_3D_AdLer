@@ -14,13 +14,16 @@ describe("LearningWorldDetailPresenter", () => {
   test("onLearningWorldLoaded should set viewModel data", () => {
     systemUnderTest.onLearningWorldLoaded({
       name: "test",
-      spaces: [{ id: 1, name: "test", currentScore: 0, requiredScore: 1 }],
+      spaces: [{ id: 1, name: "test" }],
       goals: ["test"],
       description: "test",
     } as Partial<LearningWorldTO>);
 
     expect(systemUnderTest["viewModel"].spaces.Value).toEqual([
-      { id: 1, name: "test", isCompleted: false },
+      {
+        id: 1,
+        name: "test",
+      },
     ]);
     expect(systemUnderTest["viewModel"].name.Value).toEqual("test");
     expect(systemUnderTest["viewModel"].goals.Value).toEqual(["test"]);

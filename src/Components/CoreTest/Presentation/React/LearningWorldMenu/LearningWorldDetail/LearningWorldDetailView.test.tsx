@@ -3,18 +3,16 @@ import React from "react";
 import Observable from "../../../../../../Lib/Observable";
 import LearningWorldDetail from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldDetail/LearningWorldDetail";
 import LearningWorldDetailController from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldDetail/LearningWorldDetailController";
-import LearningWorldDetailViewModel, {
-  LearningWorldDetailLearningSpaceData,
-} from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldDetail/LearningWorldDetailViewModel";
+import LearningWorldDetailViewModel from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldDetail/LearningWorldDetailViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import LearningSpaceTO from "../../../../../Core/Application/DataTransferObjects/LearningSpaceTO";
 
 let mockViewModel = new LearningWorldDetailViewModel();
-const mockSpaces: Observable<LearningWorldDetailLearningSpaceData[]> =
-  new Observable([
-    { name: "Space1", id: "1", isCompleted: true },
-    { name: "Space2", id: "2", isCompleted: false },
-    { name: "Space3", id: "3", isCompleted: false },
-  ]);
+const mockSpaces: Observable<LearningSpaceTO[]> = new Observable([
+  { name: "Space1", id: "1", currentScore: 0, requiredScore: 0 },
+  { name: "Space2", id: "2", currentScore: 0, requiredScore: 10 },
+  { name: "Space3", id: "3", currentScore: 0, requiredScore: 0 },
+]) as unknown as Observable<LearningSpaceTO[]>;
 const mockName: Observable<string> = new Observable("nameTest");
 const mockDescription: Observable<string> = new Observable("descriptionTest");
 const mockGoals: Observable<string[]> = new Observable(["GoalsTest"]);

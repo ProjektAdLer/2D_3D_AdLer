@@ -1,8 +1,6 @@
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import LearningWorldDetailViewModel, {
-  LearningWorldDetailLearningSpaceData,
-} from "./LearningWorldDetailViewModel";
+import LearningWorldDetailViewModel from "./LearningWorldDetailViewModel";
 import worldIcon from "../../../../../../Assets/icons/14-world/world-icon-nobg.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
@@ -12,6 +10,7 @@ import greenSwosh from "../../../../../../Assets/icons/17-1-solution-check/check
 import spaceIcon from "../../../../../../Assets/icons/13-space/space-icon-nobg.svg";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 
 export default function LearningWorldDetail({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
@@ -22,9 +21,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
   const [name] = useObservable<string>(viewModel.name);
   const [description] = useObservable<string>(viewModel.description);
   const [goals] = useObservable<string[]>(viewModel.goals);
-  const [spaces] = useObservable<LearningWorldDetailLearningSpaceData[]>(
-    viewModel.spaces
-  );
+  const [spaces] = useObservable<LearningSpaceTO[]>(viewModel.spaces);
 
   // return if any of the observables is undefined
   if (name === undefined || name === "") return null;
@@ -91,7 +88,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
                         alt=""
                         className="w-8 mr-4 xl:w-12"
                       />
-                      {space.isCompleted && (
+                      {space.currentScore >= space.requiredScore && (
                         <img
                           src={greenSwosh}
                           alt=""
