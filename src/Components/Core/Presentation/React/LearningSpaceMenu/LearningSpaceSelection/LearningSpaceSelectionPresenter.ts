@@ -1,7 +1,6 @@
 import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldTO";
 import ILearningSpaceSelectionPresenter from "./ILearningSpaceSelectionPresenter";
 import LearningSpaceSelectionViewModel, {
-  RequiredLearningSpaceData,
   LearningSpaceSelectionLearningSpaceData,
 } from "./LearningSpaceSelectionViewModel";
 
@@ -17,32 +16,11 @@ export default class LearningSpaceSelectionPresenter
 
     // create space data object for each space
     world.spaces.forEach((space) => {
-      // check if all requirements are completed
-      let requiredSpaces: RequiredLearningSpaceData[] = [];
-      let isAvailable = true;
-      // space.requirements.forEach((requiredSpaceID) => {
-      //   const requiredSpace = world.spaces.find(
-      //     (space) => space.id === requiredSpaceID
-      //   );
-
-      //   if (requiredSpace === undefined) {
-      //     throw new Error("Required space not found");
-      //   }
-
-      //   const requiredSpaceCompleted =
-      //     requiredSpace.currentScore >= requiredSpace.requiredScore;
-      //   requiredSpaces.push({
-      //     id: requiredSpaceID,
-      //     isCompleted: requiredSpaceCompleted,
-      //   });
-      //   isAvailable = isAvailable && requiredSpaceCompleted;
-      // });
-
       newSpaces.push({
         id: space.id,
         name: space.name,
-        requiredSpaces: requiredSpaces,
-        isAvailable: isAvailable,
+        requirementsSyntaxTree: space.requirementsSyntaxTree,
+        isAvailable: space.isAvailable,
         isCompleted: space.currentScore >= space.requiredScore,
       });
     });

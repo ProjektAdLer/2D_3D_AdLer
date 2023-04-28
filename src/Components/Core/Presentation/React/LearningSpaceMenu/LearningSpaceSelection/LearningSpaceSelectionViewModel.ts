@@ -1,3 +1,4 @@
+import { BooleanNode } from "src/Components/Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import Observable from "src/Lib/Observable";
 
@@ -9,7 +10,7 @@ export interface RequiredLearningSpaceData {
 export interface LearningSpaceSelectionLearningSpaceData {
   id: ComponentID;
   name: string;
-  requiredSpaces: RequiredLearningSpaceData[];
+  requirementsSyntaxTree: BooleanNode | null;
   isAvailable: boolean;
   isCompleted: boolean;
 }
