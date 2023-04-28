@@ -27,12 +27,10 @@ export default class LearningSpaceDetailPresenter
 
   onLearningSpaceLoaded(spaceTO: LearningSpaceTO): void {
     this.viewModel.id.Value = spaceTO.id;
-
     this.viewModel.name.Value = spaceTO.name;
-
     this.viewModel.description.Value = spaceTO.description;
-
     this.viewModel.goals.Value = spaceTO.goals;
+    this.viewModel.isAvailable.Value = spaceTO.isAvailable;
 
     this.viewModel.elements.Value = spaceTO.elements.map((elementTO) => [
       elementTO.type,

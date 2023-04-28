@@ -22,6 +22,7 @@ export default class LearningSpaceDetailViewModel {
   goals: Observable<string[]> = new Observable<string[]>([""]);
   requiredPoints: Observable<number> = new Observable<number>(0);
   requirements: Observable<number[]> = new Observable<number[]>([]);
+  isAvailable: Observable<boolean> = new Observable<boolean>(false);
 
   // element data (type, name, hasScored, points)
   elements: Observable<

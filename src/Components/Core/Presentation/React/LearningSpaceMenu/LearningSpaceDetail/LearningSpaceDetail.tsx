@@ -33,6 +33,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
   const [spaces] = useObservable<LearningSpaceDetailLearningSpaceData[]>(
     viewModel.spaces
   );
+  const [isAvailable] = useObservable<boolean>(viewModel.isAvailable);
 
   // return if any of the observables is undefined
   if (
@@ -60,13 +61,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
             {name}
           </div>
         </div>
-        {viewModel.requirements.Value.every((requirement) => {
-          // check for each requirement if the space is completed
-          let requiredSpaces = spaces.find((space) => space.id === requirement);
-          return requiredSpaces !== undefined
-            ? requiredSpaces.isCompleted
-            : false;
-        }) && (
+        {isAvailable && (
           <StyledButton
             shape="freefloatleft"
             className="mt-2 mb-2"
