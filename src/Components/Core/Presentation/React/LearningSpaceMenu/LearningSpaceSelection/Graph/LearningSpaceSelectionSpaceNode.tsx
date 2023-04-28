@@ -2,23 +2,23 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import { Handle, Node, Position } from "reactflow";
 import { memo } from "react";
 
-export type LearningSpaceSelectionNodeInputType =
+export type LearningSpaceSelectionSpaceNodeInputType =
   | "none"
   | "single"
   | "and"
   | "or";
-type LearningSpaceSelectionNodeData = {
+type LearningSpaceSelectionSpaceNodeData = {
   label: string;
-  input: LearningSpaceSelectionNodeInputType;
+  input: LearningSpaceSelectionSpaceNodeInputType;
   output: boolean;
   icon: string;
   lastSelected: boolean;
 };
-export type LearningSpaceSelectionNodeType =
-  Node<LearningSpaceSelectionNodeData>;
+export type LearningSpaceSelectionSpaceNodeType =
+  Node<LearningSpaceSelectionSpaceNodeData>;
 
-function LearningSpaceSelectionNode(
-  props: Partial<LearningSpaceSelectionNodeType>
+function LearningSpaceSelectionSpaceNode(
+  props: Partial<LearningSpaceSelectionSpaceNodeType>
 ) {
   return (
     <>
@@ -50,4 +50,4 @@ function LearningSpaceSelectionNode(
   );
 }
 
-export default memo(LearningSpaceSelectionNode);
+export default memo(LearningSpaceSelectionSpaceNode);
