@@ -20,10 +20,10 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 import { CSSProperties, useCallback, useEffect } from "react";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
-import LearningSpaceSelectionNode, {
-  LearningSpaceSelectionNodeInputType,
-  LearningSpaceSelectionNodeType,
-} from "./LearningSpaceSelectionNode";
+import LearningSpaceSelectionSpaceNode, {
+  LearningSpaceSelectionSpaceNodeInputType,
+  LearningSpaceSelectionSpaceNodeType,
+} from "./LearningSpaceSelectionSpaceNode";
 import ELK, { ElkNode, LayoutOptions } from "elkjs/lib/elk.bundled.js";
 import { ElkExtendedEdge } from "elkjs";
 
@@ -40,7 +40,7 @@ const ELK_LAYOUT_OPTIONS: LayoutOptions = {
 };
 
 const nodeTypes: NodeTypes = {
-  spaceNode: LearningSpaceSelectionNode,
+  spaceNode: LearningSpaceSelectionSpaceNode,
 };
 
 export default function LearningSpaceSelectionGraph(props: {
@@ -74,7 +74,7 @@ export default function LearningSpaceSelectionGraph(props: {
       // update node data to reflect the last selected node
       const nodes = reactFlowInstance.getNodes();
       nodes.forEach((node) => {
-        (node as LearningSpaceSelectionNodeType).data.lastSelected =
+        (node as LearningSpaceSelectionSpaceNodeType).data.lastSelected =
           node.id === clickedNode.id;
       });
       reactFlowInstance.setNodes(nodes);
@@ -154,7 +154,7 @@ function createReactFlowNodes(
   elkGraph: ElkNode
 ): Node[] {
   const nodes = spaces.map((space) => {
-    let inputType: LearningSpaceSelectionNodeInputType;
+    let inputType: LearningSpaceSelectionSpaceNodeInputType;
     if (space.requiredSpaces.length === 1) {
       inputType = "single";
     } else if (space.requiredSpaces.length > 1) {
@@ -176,7 +176,7 @@ function createReactFlowNodes(
 
     const nodePosition: XYPosition = calculateNodePosition(space, elkGraph);
 
-    const node: LearningSpaceSelectionNodeType = {
+    const node: LearningSpaceSelectionSpaceNodeType = {
       id: space.id.toString(),
       data: {
         icon: spaceIcon,
