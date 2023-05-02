@@ -54,7 +54,7 @@ export default class CalculateLearningSpaceAvailabilityUseCase
 
       evaluationMap.set(
         id,
-        requiredSpaceScore.currentScore > requiredSpaceScore.requiredScore
+        requiredSpaceScore.currentScore >= requiredSpaceScore.requiredScore
       );
     });
 
