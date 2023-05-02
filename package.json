@@ -83,7 +83,6 @@
     "jest": "^28.1.2",
     "jest-environment-jsdom": "^28.1.2",
     "jest-mock-extended": "^2.0.6",
-    "jest-webgl-canvas-mock": "^0.2.3",
     "lint-staged": "^13.0.3",
     "mini-css-extract-plugin": "2.6.1",
     "prettier": "2.7.1",

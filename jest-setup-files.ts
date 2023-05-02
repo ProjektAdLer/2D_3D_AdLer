@@ -1,7 +1,5 @@
 import "reflect-metadata";
 
-import "jest-webgl-canvas-mock";
-
 import "@testing-library/jest-dom";
 import { config } from "./src/config";
 
