@@ -1,7 +1,7 @@
-import { ArcRotateCamera, ArcRotateCameraPointersInput } from "@babylonjs/core";
 import bind from "bind-decorator";
 import AvatarCameraViewModel from "./AvatarCameraViewModel";
 import IAvatarCameraController from "./IAvatarCameraController";
+import { ArcRotateCamera } from "@babylonjs/core";
 
 export default class AvatarCameraController implements IAvatarCameraController {
   constructor(private viewModel: AvatarCameraViewModel) {
