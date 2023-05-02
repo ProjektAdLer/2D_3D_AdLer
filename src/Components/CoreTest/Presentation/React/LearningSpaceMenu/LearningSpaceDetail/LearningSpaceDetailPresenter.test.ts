@@ -45,7 +45,7 @@ describe("LearningSpaceDetailPresenter", () => {
     );
   });
 
-  test.skip("onLearningSpaceLoaded sets data in the view model", () => {
+  test("onLearningSpaceLoaded sets data in the view model", () => {
     const spaceTO: LearningSpaceTO = {
       id: 42,
       description: "description",
@@ -53,7 +53,9 @@ describe("LearningSpaceDetailPresenter", () => {
       requiredScore: 42,
       currentScore: 0,
       maxScore: 42,
-      requirements: "42, 20, 1",
+      isAvailable: true,
+      requirementsString: "",
+      requirementsSyntaxTree: null,
       name: "Test Space",
       elements: [
         {
@@ -95,8 +97,5 @@ describe("LearningSpaceDetailPresenter", () => {
       ["h5p", "Test Element 1", false, 1],
       ["text", "Test Element 2", false, 1],
     ]);
-    expect(systemUnderTest["viewModel"].requirements.Value).toEqual(
-      "42, 20, 1"
-    );
   });
 });
