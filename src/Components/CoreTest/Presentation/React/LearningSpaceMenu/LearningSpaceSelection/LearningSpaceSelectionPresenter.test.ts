@@ -1,8 +1,9 @@
 import LearningSpaceSelectionPresenter from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelectionPresenter";
 import LearningSpaceSelectionViewModel from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelectionViewModel";
 import LearningWorldTO from "../../../../../Core/Application/DataTransferObjects/LearningWorldTO";
+import { BooleanIDNode } from "../../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
 
-describe.skip("SpaceSelectionPresenter", () => {
+describe("LearningSpaceSelectionPresenter", () => {
   let systemUnderTest: LearningSpaceSelectionPresenter;
 
   beforeEach(() => {
@@ -27,7 +28,9 @@ describe.skip("SpaceSelectionPresenter", () => {
           requiredScore: 0,
           currentScore: 0,
           maxScore: 0,
-          requirements: "",
+          requirementsString: "",
+          requirementsSyntaxTree: null,
+          isAvailable: true,
         },
         {
           id: 2,
@@ -38,7 +41,9 @@ describe.skip("SpaceSelectionPresenter", () => {
           requiredScore: 0,
           currentScore: 0,
           maxScore: 0,
-          requirements: "",
+          requirementsString: "",
+          requirementsSyntaxTree: null,
+          isAvailable: true,
         },
       ],
     };
@@ -50,43 +55,6 @@ describe.skip("SpaceSelectionPresenter", () => {
         expect.objectContaining({ id: 1, name: "Test Space 1" }),
         expect.objectContaining({ id: 2, name: "Test Space 2" }),
       ])
-    );
-  });
-
-  test("onLearningWorldLoaded should throw error if requiredSpace is undefined", () => {
-    const worldTO: LearningWorldTO = {
-      id: 1,
-      name: "Test World",
-      description: "Test World Description",
-      goals: ["Test World Goals"],
-      spaces: [
-        {
-          id: 1,
-          name: "Test Space 1",
-          elements: [],
-          description: "Test Space 1 Description",
-          goals: ["Test Space 1 Goals"],
-          requiredScore: 0,
-          currentScore: 0,
-          maxScore: 0,
-          requirements: "",
-        },
-        {
-          id: 2,
-          name: "Test Space 2",
-          elements: [],
-          description: "Test Space 1 Description",
-          goals: ["Test Space 1 Goals"],
-          requiredScore: 0,
-          currentScore: 0,
-          maxScore: 0,
-          requirements: "42",
-        },
-      ],
-    };
-
-    expect(() => systemUnderTest.onLearningWorldLoaded(worldTO)).toThrowError(
-      "Required space not found"
     );
   });
 
@@ -106,7 +74,9 @@ describe.skip("SpaceSelectionPresenter", () => {
           requiredScore: 1,
           currentScore: 1,
           maxScore: 1,
-          requirements: "",
+          requirementsString: "",
+          requirementsSyntaxTree: null,
+          isAvailable: true,
         },
         {
           id: 2,
@@ -117,7 +87,9 @@ describe.skip("SpaceSelectionPresenter", () => {
           requiredScore: 0,
           currentScore: 0,
           maxScore: 0,
-          requirements: "1",
+          requirementsString: "(1)",
+          requirementsSyntaxTree: new BooleanIDNode(1),
+          isAvailable: true,
         },
       ],
     };
@@ -146,7 +118,9 @@ describe.skip("SpaceSelectionPresenter", () => {
           requiredScore: 1,
           currentScore: 0,
           maxScore: 1,
-          requirements: "",
+          requirementsString: "",
+          requirementsSyntaxTree: null,
+          isAvailable: true,
         },
         {
           id: 2,
@@ -157,7 +131,9 @@ describe.skip("SpaceSelectionPresenter", () => {
           requiredScore: 0,
           currentScore: 0,
           maxScore: 0,
-          requirements: "1",
+          requirementsString: "(1)",
+          requirementsSyntaxTree: new BooleanIDNode(1),
+          isAvailable: false,
         },
       ],
     };
@@ -188,7 +164,9 @@ describe.skip("SpaceSelectionPresenter", () => {
           requiredScore: 1,
           currentScore: 2,
           maxScore: 3,
-          requirements: "",
+          requirementsString: "",
+          requirementsSyntaxTree: null,
+          isAvailable: true,
         },
       ],
     };
@@ -199,6 +177,7 @@ describe.skip("SpaceSelectionPresenter", () => {
       expect.objectContaining({ id: 1, isCompleted: true }),
     ]);
   });
+
   test("sorting should sort completed spaces in front of incompleted ones", () => {
     const worldTO: LearningWorldTO = {
       id: 1,
@@ -215,7 +194,9 @@ describe.skip("SpaceSelectionPresenter", () => {
           requiredScore: 1,
           currentScore: 0,
           maxScore: 1,
-          requirements: "2",
+          requirementsString: "(2)",
+          requirementsSyntaxTree: new BooleanIDNode(2),
+          isAvailable: true,
         },
         {
           id: 2,
@@ -226,7 +207,9 @@ describe.skip("SpaceSelectionPresenter", () => {
           requiredScore: 0,
           currentScore: 0,
           maxScore: 0,
-          requirements: "",
+          requirementsString: "",
+          requirementsSyntaxTree: null,
+          isAvailable: true,
         },
         {
           id: 3,
@@ -237,7 +220,9 @@ describe.skip("SpaceSelectionPresenter", () => {
           requiredScore: 1,
           currentScore: 0,
           maxScore: 1,
-          requirements: "2",
+          requirementsString: "(2)",
+          requirementsSyntaxTree: new BooleanIDNode(2),
+          isAvailable: true,
         },
       ],
     };
@@ -250,6 +235,7 @@ describe.skip("SpaceSelectionPresenter", () => {
       { id: 3 },
     ]);
   });
+
   test("sorting should sort available spaces in front of locked ones", () => {
     const worldTO: LearningWorldTO = {
       id: 1,
@@ -266,7 +252,9 @@ describe.skip("SpaceSelectionPresenter", () => {
           requiredScore: 1,
           currentScore: 0,
           maxScore: 1,
-          requirements: "2",
+          requirementsString: "(2)",
+          requirementsSyntaxTree: new BooleanIDNode(2),
+          isAvailable: false,
         },
         {
           id: 2,
@@ -277,7 +265,9 @@ describe.skip("SpaceSelectionPresenter", () => {
           requiredScore: 1,
           currentScore: 0,
           maxScore: 1,
-          requirements: "",
+          requirementsString: "",
+          requirementsSyntaxTree: null,
+          isAvailable: true,
         },
         {
           id: 3,
@@ -288,7 +278,9 @@ describe.skip("SpaceSelectionPresenter", () => {
           requiredScore: 1,
           currentScore: 0,
           maxScore: 1,
-          requirements: "2",
+          requirementsString: "(2)",
+          requirementsSyntaxTree: new BooleanIDNode(2),
+          isAvailable: false,
         },
       ],
     };
