@@ -21,7 +21,6 @@ import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
 
 const modelLink = require("../../../../../Assets/3DModel_Avatar_Character2.0_male.glb");
-
 export default class AvatarView {
   isReady: Promise<void>;
 
