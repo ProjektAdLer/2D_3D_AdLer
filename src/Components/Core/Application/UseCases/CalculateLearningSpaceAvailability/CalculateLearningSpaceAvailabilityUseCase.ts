@@ -8,7 +8,6 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import LearningSpaceScoreTO from "../../DataTransferObjects/LearningSpaceScoreTO";
-import { BooleanNode } from "./Parser/BooleanSyntaxTree";
 import LearningSpaceAvailabilityTO from "../../DataTransferObjects/LearningSpaceAvailabilityTO";
 
 @injectable()
@@ -62,7 +61,7 @@ export default class CalculateLearningSpaceAvailabilityUseCase
     return {
       requirementsString: space.requirements,
       requirementsSyntaxTree: requirementsSyntaxTree,
-      isAvailable: requirementsSyntaxTree!.evaluate(evaluationMap),
+      isAvailable: requirementsSyntaxTree.evaluate(evaluationMap),
     };
   }
 }
