@@ -18,12 +18,12 @@ function LearningSpaceSelectionSpaceNode(
   return (
     <>
       <StyledButton
-        className="justify-between truncate w-44"
+        className="justify-between w-44"
         shape="freefloatleft"
         color={props.data?.lastSelected ? "pressed" : "default"}
         icon={props.data?.icon}
       >
-        {props.data!.label}
+        <p className="truncate">{props.data!.label}</p>
       </StyledButton>
 
       {props.data?.input && <Handle type="target" position={Position.Top} />}
