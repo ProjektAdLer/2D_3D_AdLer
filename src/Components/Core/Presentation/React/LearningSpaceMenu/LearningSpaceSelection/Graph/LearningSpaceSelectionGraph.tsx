@@ -21,16 +21,23 @@ import "reactflow/dist/style.css";
 import { CSSProperties, useCallback, useEffect } from "react";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import LearningSpaceSelectionSpaceNode, {
-  LearningSpaceSelectionSpaceNodeInputType,
   LearningSpaceSelectionSpaceNodeType,
 } from "./LearningSpaceSelectionSpaceNode";
 import ELK, { ElkNode, LayoutOptions } from "elkjs/lib/elk.bundled.js";
 import { ElkExtendedEdge } from "elkjs";
+import {
+  BooleanAndNode,
+  BooleanIDNode,
+  BooleanOrNode,
+} from "src/Components/Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
+import LearningSpaceSelectionRequirementNode, {
+  BooleanOperatorType,
+} from "./LearningSpaceSelectionRequirementNode";
 
 const elk = new ELK();
 
-const NODE_WIDTH = 600;
-const NODE_HEIGHT = 100;
+const NODE_WIDTH = 500;
+const NODE_HEIGHT = 60;
 // see more options for layered algorithm: https://www.eclipse.org/elk/reference/algorithms/org-eclipse-elk-layered.html
 const ELK_LAYOUT_OPTIONS: LayoutOptions = {
   "elk.algorithm": "layered",
@@ -41,6 +48,7 @@ const ELK_LAYOUT_OPTIONS: LayoutOptions = {
 
 const nodeTypes: NodeTypes = {
   spaceNode: LearningSpaceSelectionSpaceNode,
+  requirementNode: LearningSpaceSelectionRequirementNode,
 };
 
 export default function LearningSpaceSelectionGraph(props: {
@@ -54,16 +62,32 @@ export default function LearningSpaceSelectionGraph(props: {
     if (spaces === undefined || spaces.length === 0) return;
 
     const setupGraph = async () => {
-      const edges = createReactFlowEdges(spaces);
+      const requirementsTrees = createRequirementTrees(spaces);
+      const spaceNodes = createSpaceNodes(spaces);
 
-      const elkGraph: ElkNode = createElkGraph(spaces, edges);
-      await elk.layout(elkGraph, ELK_LAYOUT_OPTIONS);
+      // extract node ids from spaces and requirements for layouting
+      const spaceIDs = spaceNodes.map((node) => node.id);
+      const requirementsNodeIDs = requirementsTrees.nodes.map(
+        (node) => node.id
+      );
 
-      const nodes = createReactFlowNodes(spaces, elkGraph);
+      // graph layout with elk
+      const elkGraph: ElkNode = createElkGraph(
+        [...spaceIDs, ...requirementsNodeIDs],
+        requirementsTrees.edges
+      );
+      await elk.layout(elkGraph);
+
+      // apply node positions from elk graph to react flow nodes
+      const nodes = applyNodePositions(
+        [...spaceNodes, ...requirementsTrees.nodes],
+        elkGraph
+      );
 
       reactFlowInstance.setNodes(nodes);
-      reactFlowInstance.setEdges(edges);
+      reactFlowInstance.setEdges(requirementsTrees.edges);
     };
+
     setupGraph();
   }, [spaces, reactFlowInstance]);
 
@@ -87,7 +111,7 @@ export default function LearningSpaceSelectionGraph(props: {
       <ReactFlow
         defaultNodes={[]}
         nodeTypes={nodeTypes}
-        nodesDraggable={false}
+        nodesDraggable={true}
         nodesConnectable={false}
         onNodeClick={onNodeClickCallback}
         defaultEdges={[]}
@@ -102,39 +126,67 @@ export default function LearningSpaceSelectionGraph(props: {
   );
 }
 
-function createReactFlowEdges(
+function createRequirementTrees(
   spaces: LearningSpaceSelectionLearningSpaceData[]
-): Edge[] {
-  const edges = spaces.reduce((accumulatedEdgeArray, space) => {
-    // create an edge for each required space and add it to the array
-    space.requiredSpaces.forEach((requiredSpace) => {
-      accumulatedEdgeArray.push({
-        id: requiredSpace.id.toString() + "-" + space.id.toString(),
-        source: requiredSpace.id.toString(),
-        target: space.id.toString(),
-        style: {
-          stroke: "black",
-          strokeDasharray: requiredSpace.isCompleted ? "" : "6 5",
-        } as CSSProperties,
-      } as Edge);
-    });
+): { nodes: Node[]; edges: Edge[] } {
+  const resultArrays = spaces.reduce(
+    (accumulatedArrays, space) => {
+      // skip spaces that have no requirements
+      if (space.requirementsSyntaxTree === null) return accumulatedArrays;
 
-    // return the array to be used in the next iteration
-    return accumulatedEdgeArray;
-  }, [] as Edge[]);
+      for (let currentNode of space.requirementsSyntaxTree) {
+        // create a new graph edge for each node in the syntax tree
+        const targetString =
+          currentNode.parentNodeID === "root"
+            ? space.id.toString()
+            : currentNode.parentNodeID;
 
-  return edges;
+        accumulatedArrays.edges.push({
+          id: currentNode.node.ID + "-" + targetString,
+          source: currentNode.node.ID,
+          target: targetString,
+          style: {
+            stroke: "black",
+            // strokeDasharray: requiredSpace.isCompleted ? "" : "6 5",
+          } as CSSProperties,
+        } as Edge);
+
+        // create a new graph node if the node is a boolean operator
+        if (!(currentNode.node instanceof BooleanIDNode)) {
+          let operatorTypeString: BooleanOperatorType;
+          if (currentNode.node instanceof BooleanAndNode)
+            operatorTypeString = "and";
+          else if (currentNode.node instanceof BooleanOrNode)
+            operatorTypeString = "or";
+          else throw new Error("Unknown node type");
+
+          accumulatedArrays.nodes.push({
+            id: currentNode.node.ID,
+            data: {
+              operatorType: operatorTypeString,
+            },
+            position: { x: 0, y: 0 },
+            type: "requirementNode",
+          } as Node);
+        }
+      }
+
+      // return the arrays to be used in the next iteration
+      return accumulatedArrays;
+    },
+    { nodes: [], edges: [] } as { nodes: Node[]; edges: Edge[] }
+  );
+
+  return resultArrays;
 }
 
-function createElkGraph(
-  spaces: LearningSpaceSelectionLearningSpaceData[],
-  edges: Edge[]
-): ElkNode {
+function createElkGraph(nodes: string[], edges: Edge[]): ElkNode {
   return {
     id: "root",
-    children: spaces.map((space) => {
+    layoutOptions: ELK_LAYOUT_OPTIONS,
+    children: nodes.map((node) => {
       return {
-        id: space.id.toString(),
+        id: node,
         width: NODE_WIDTH,
         height: NODE_HEIGHT,
       } as ElkNode;
@@ -149,24 +201,14 @@ function createElkGraph(
   };
 }
 
-function createReactFlowNodes(
-  spaces: LearningSpaceSelectionLearningSpaceData[],
-  elkGraph: ElkNode
+function createSpaceNodes(
+  spaces: LearningSpaceSelectionLearningSpaceData[]
 ): Node[] {
   const nodes = spaces.map((space) => {
-    let inputType: LearningSpaceSelectionSpaceNodeInputType;
-    if (space.requiredSpaces.length === 1) {
-      inputType = "single";
-    } else if (space.requiredSpaces.length > 1) {
-      inputType = "and";
-    } else {
-      inputType = "none";
-    }
+    const hasInput = space.requirementsSyntaxTree !== null;
 
     const hasOutput = spaces.some((inputSpace) =>
-      inputSpace.requiredSpaces.some(
-        (requiredSpace) => requiredSpace.id === space.id
-      )
+      inputSpace.requirementsSyntaxTree?.containsID(space.id)
     );
 
     let spaceIcon: string;
@@ -174,19 +216,17 @@ function createReactFlowNodes(
     else if (space.isAvailable) spaceIcon = spaceAvailable;
     else spaceIcon = spaceLocked;
 
-    const nodePosition: XYPosition = calculateNodePosition(space, elkGraph);
-
     const node: LearningSpaceSelectionSpaceNodeType = {
       id: space.id.toString(),
       data: {
         icon: spaceIcon,
         label: space.name,
-        input: inputType,
+        input: hasInput,
         output: hasOutput,
         lastSelected: false,
       },
       type: "spaceNode",
-      position: nodePosition,
+      position: { x: 0, y: 0 },
       connectable: false,
       deletable: false,
       height: NODE_HEIGHT,
@@ -198,13 +238,19 @@ function createReactFlowNodes(
   return nodes;
 }
 
-function calculateNodePosition(
-  space: LearningSpaceSelectionLearningSpaceData,
-  elkGraph: ElkNode
-): XYPosition {
-  const elkNode = elkGraph.children!.find(
-    (child) => child.id === space.id.toString()
-  );
+function applyNodePositions(nodes: Node[], elkGraph: ElkNode): Node[] {
+  const nodesWithPositions = nodes.map((node) => {
+    const nodePosition: XYPosition = calculateNodePosition(node.id, elkGraph);
+    return {
+      ...node,
+      position: nodePosition,
+    };
+  });
+  return nodesWithPositions;
+}
+
+function calculateNodePosition(id: string, elkGraph: ElkNode): XYPosition {
+  const elkNode = elkGraph.children!.find((child) => child.id === id);
   return {
     x: elkNode!.x! - NODE_WIDTH / 2,
     y: elkNode!.y! - NODE_HEIGHT / 2,
