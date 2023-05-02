@@ -9,12 +9,29 @@ describe("BooleanAlgebraParser", () => {
   test("parses a simple expression into matching syntax tree", () => {
     const result =
       LearningSpaceAvailabilityStringParser.parseToSyntaxTree("(1)^(2)v(3)");
-    expect(result).toStrictEqual(
-      new BooleanOrNode([
-        new BooleanAndNode([new BooleanIDNode(1), new BooleanIDNode(2)]),
-        new BooleanIDNode(3),
-      ])
-    );
+    console.log(result);
+    expect(result).toMatchObject({
+      type: "OR",
+      expressions: [
+        {
+          type: "AND",
+          expressions: [
+            {
+              type: "ID",
+              value: 1,
+            },
+            {
+              type: "ID",
+              value: 2,
+            },
+          ],
+        },
+        {
+          type: "ID",
+          value: 3,
+        },
+      ],
+    });
   });
 
   test("parses a complex expression with brackets into matching syntax tree", () => {
@@ -22,44 +39,98 @@ describe("BooleanAlgebraParser", () => {
       LearningSpaceAvailabilityStringParser.parseToSyntaxTree(
         "((1)^(2)v(3))^(4)"
       );
-    console.log(result);
-    expect(result).toStrictEqual(
-      new BooleanAndNode([
-        new BooleanOrNode([
-          new BooleanAndNode([new BooleanIDNode(1), new BooleanIDNode(2)]),
-          new BooleanIDNode(3),
-        ]),
-        new BooleanIDNode(4),
-      ])
-    );
+    expect(result).toMatchObject({
+      type: "AND",
+      expressions: [
+        {
+          type: "OR",
+          expressions: [
+            {
+              type: "AND",
+              expressions: [
+                {
+                  type: "ID",
+                  value: 1,
+                },
+                {
+                  type: "ID",
+                  value: 2,
+                },
+              ],
+            },
+            {
+              type: "ID",
+              value: 3,
+            },
+          ],
+        },
+        {
+          type: "ID",
+
+          value: 4,
+        },
+      ],
+    });
   });
 
   test("parses a longer concatenation of ANDs into a single node", () => {
     const result =
       LearningSpaceAvailabilityStringParser.parseToSyntaxTree("1^2^3^4^5");
-    expect(result).toStrictEqual(
-      new BooleanAndNode([
-        new BooleanIDNode(1),
-        new BooleanIDNode(2),
-        new BooleanIDNode(3),
-        new BooleanIDNode(4),
-        new BooleanIDNode(5),
-      ])
-    );
+    expect(result).toMatchObject({
+      type: "AND",
+      expressions: [
+        {
+          type: "ID",
+          value: 1,
+        },
+        {
+          type: "ID",
+          value: 2,
+        },
+        {
+          type: "ID",
+          value: 3,
+        },
+        {
+          type: "ID",
+          value: 4,
+        },
+        {
+          type: "ID",
+          value: 5,
+        },
+      ],
+    });
   });
 
   test("parses a longer concatenation of ORs into a single node", () => {
     const result =
       LearningSpaceAvailabilityStringParser.parseToSyntaxTree("1v2v3v4v5");
-    expect(result).toStrictEqual(
-      new BooleanOrNode([
-        new BooleanIDNode(1),
-        new BooleanIDNode(2),
-        new BooleanIDNode(3),
-        new BooleanIDNode(4),
-        new BooleanIDNode(5),
-      ])
-    );
+    expect(result).toMatchObject({
+      type: "OR",
+      expressions: [
+        {
+          type: "ID",
+          value: 1,
+        },
+        {
+          type: "ID",
+          value: 2,
+        },
+        {
+          type: "ID",
+          value: 3,
+        },
+        {
+          type: "ID",
+          value: 4,
+        },
+        {
+          type: "ID",
+          value: 5,
+        },
+      ],
+    });
   });
 
   test("accepts a string with spaces", () => {
@@ -67,39 +138,75 @@ describe("BooleanAlgebraParser", () => {
       LearningSpaceAvailabilityStringParser.parseToSyntaxTree(
         "5 v 6 v 7 v 8 v 9"
       );
-    expect(result).toStrictEqual(
-      new BooleanOrNode([
-        new BooleanIDNode(5),
-        new BooleanIDNode(6),
-        new BooleanIDNode(7),
-        new BooleanIDNode(8),
-        new BooleanIDNode(9),
-      ])
-    );
+    expect(result).toMatchObject({
+      type: "OR",
+      expressions: [
+        {
+          type: "ID",
+          value: 5,
+        },
+        {
+          type: "ID",
+          value: 6,
+        },
+        {
+          type: "ID",
+          value: 7,
+        },
+        {
+          type: "ID",
+          value: 8,
+        },
+        {
+          type: "ID",
+          value: 9,
+        },
+      ],
+    });
   });
 
   test("accepts a string with multi-digit ids", () => {
     const result =
       LearningSpaceAvailabilityStringParser.parseToSyntaxTree("1v20v30");
-    expect(result).toStrictEqual(
-      new BooleanOrNode([
-        new BooleanIDNode(1),
-        new BooleanIDNode(20),
-        new BooleanIDNode(30),
-      ])
-    );
+    expect(result).toMatchObject({
+      type: "OR",
+      expressions: [
+        {
+          type: "ID",
+          value: 1,
+        },
+        {
+          type: "ID",
+          value: 20,
+        },
+        {
+          type: "ID",
+          value: 30,
+        },
+      ],
+    });
   });
 
   test("accepts ids with leading zeros", () => {
     const result =
       LearningSpaceAvailabilityStringParser.parseToSyntaxTree("01v02v03");
-    expect(result).toStrictEqual(
-      new BooleanOrNode([
-        new BooleanIDNode(1),
-        new BooleanIDNode(2),
-        new BooleanIDNode(3),
-      ])
-    );
+    expect(result).toMatchObject({
+      type: "OR",
+      expressions: [
+        {
+          type: "ID",
+          value: 1,
+        },
+        {
+          type: "ID",
+          value: 2,
+        },
+        {
+          type: "ID",
+          value: 3,
+        },
+      ],
+    });
   });
 
   test("throws an error when the expression contains a invalid symbol", () => {
