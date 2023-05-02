@@ -15,7 +15,7 @@ function LearningSpaceSelectionRequirementNode(
   return (
     <>
       <Handle type={"target"} position={Position.Top}></Handle>
-      <div className="flex items-center justify-center w-12 h-6 border-b-2 border-r-2 rounded-md border-1 bg-nodehandlecolor -top-5 border-adlerdarkblue">
+      <div className="flex items-center justify-center w-16 h-10 text-lg font-bold border-b-2 border-r-2 rounded-md border-1 bg-nodehandlecolor border-adlerdarkblue">
         <p className="font-[roboto] uppercase text-adlerdarkblue">
           {props.data?.operatorType === "and" && "und"}
           {props.data?.operatorType === "or" && "oder"}
