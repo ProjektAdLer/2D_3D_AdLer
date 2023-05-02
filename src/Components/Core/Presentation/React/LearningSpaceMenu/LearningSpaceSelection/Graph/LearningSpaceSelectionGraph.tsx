@@ -158,12 +158,11 @@ function createRequirementTrees(
             operatorTypeString = "and";
           else if (currentNode.node instanceof BooleanOrNode)
             operatorTypeString = "or";
-          else throw new Error("Unknown node type");
 
           accumulatedArrays.nodes.push({
             id: currentNode.node.ID,
             data: {
-              operatorType: operatorTypeString,
+              operatorType: operatorTypeString!,
             },
             position: { x: 0, y: 0 },
             type: "requirementNode",

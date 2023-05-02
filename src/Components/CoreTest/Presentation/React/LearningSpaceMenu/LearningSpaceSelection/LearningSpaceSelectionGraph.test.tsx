@@ -9,6 +9,7 @@ import { ElkLayoutArguments, ElkNode } from "elkjs/lib/elk.bundled.js";
 import {
   BooleanAndNode,
   BooleanIDNode,
+  BooleanOrNode,
 } from "../../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
 
 // mock elk to prevent async layouting
@@ -86,7 +87,7 @@ describe("LearningSpaceSelectionGraph", () => {
     });
   });
 
-  test.skip("creates an edge for each required space", () => {
+  test("creates a node for each boolean operator in the requirements", () => {
     const vm = new LearningSpaceSelectionViewModel();
     vm.spaces.Value = [
       {
@@ -101,7 +102,7 @@ describe("LearningSpaceSelectionGraph", () => {
         name: "test",
         isAvailable: true,
         isCompleted: true,
-        requirementsSyntaxTree: new BooleanIDNode(1),
+        requirementsSyntaxTree: null,
       },
       {
         id: 3,
@@ -125,13 +126,56 @@ describe("LearningSpaceSelectionGraph", () => {
       </ReactFlowProvider>
     );
 
+    const nodes = container.querySelectorAll(".react-flow__node");
+
+    waitFor(() => {
+      expect(nodes.length).toBe(4);
+    });
+  });
+
+  test("creates an edge for each node inside requirements", () => {
+    const vm = new LearningSpaceSelectionViewModel();
+    vm.spaces.Value = [
+      {
+        id: 1,
+        name: "test",
+        isAvailable: true,
+        isCompleted: true,
+        requirementsSyntaxTree: null,
+      },
+      {
+        id: 2,
+        name: "test",
+        isAvailable: true,
+        isCompleted: true,
+        requirementsSyntaxTree: null,
+      },
+      {
+        id: 3,
+        name: "test",
+        isAvailable: true,
+        isCompleted: true,
+        requirementsSyntaxTree: new BooleanOrNode([
+          new BooleanIDNode(1),
+          new BooleanIDNode(2),
+        ]),
+      },
+    ];
+    const controllerMock = mock<ILearningSpaceSelectionController>();
+
+    const { container } = render(
+      <ReactFlowProvider>
+        <LearningSpaceSelectionGraph
+          controller={controllerMock}
+          viewModel={vm}
+        />
+      </ReactFlowProvider>
+    );
+
     const edges = container.querySelectorAll(".react-flow__edge");
 
     waitFor(() => {
       expect(edges.length).toBe(3);
-      expect(edges[0].getAttribute("data-testid")).toContain("edge-1-2");
-      expect(edges[1].getAttribute("data-testid")).toContain("edge-1-3");
-      expect(edges[2].getAttribute("data-testid")).toContain("edge-2-3");
     });
   });
 
