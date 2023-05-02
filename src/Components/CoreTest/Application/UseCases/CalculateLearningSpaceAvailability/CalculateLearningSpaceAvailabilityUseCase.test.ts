@@ -64,12 +64,21 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
 
     const result = systemUnderTest.internalExecute(1);
 
-    expect(result).toStrictEqual({
+    expect(result).toMatchObject({
       requirementsString: "(2)^(3)",
-      requirementsSyntaxTree: new BooleanAndNode([
-        new BooleanIDNode(2),
-        new BooleanIDNode(3),
-      ]),
+      requirementsSyntaxTree: {
+        type: "AND",
+        expressions: [
+          {
+            type: "ID",
+            id: 2,
+          },
+          {
+            type: "ID",
+            id: 2,
+          },
+        ],
+      },
       isAvailable: true,
     });
   });
