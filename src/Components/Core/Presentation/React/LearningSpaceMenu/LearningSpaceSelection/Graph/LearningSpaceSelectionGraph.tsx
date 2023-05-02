@@ -36,7 +36,7 @@ import LearningSpaceSelectionRequirementNode, {
 
 const elk = new ELK();
 
-const NODE_WIDTH = 500;
+const NODE_WIDTH = 176;
 const NODE_HEIGHT = 60;
 // see more options for layered algorithm: https://www.eclipse.org/elk/reference/algorithms/org-eclipse-elk-layered.html
 const ELK_LAYOUT_OPTIONS: LayoutOptions = {
