@@ -158,7 +158,7 @@ describe("BackendAdapter", () => {
   test("should score a H5P Element", async () => {
     mockedAxios.patch.mockResolvedValue({
       data: {
-        isSuceess: true,
+        isSuccess: true,
       },
     });
     const h5pMock = mock<XAPIEvent>();

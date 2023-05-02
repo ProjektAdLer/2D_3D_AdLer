@@ -59,7 +59,7 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
         requiredScore: 2,
         currentScore: 3,
         maxScore: 4,
-        spaceID: 2,
+        spaceID: 3,
       });
 
     const result = systemUnderTest.internalExecute(1);
@@ -71,11 +71,11 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
         expressions: [
           {
             type: "ID",
-            id: 2,
+            value: 2,
           },
           {
             type: "ID",
-            id: 2,
+            value: 3,
           },
         ],
       },
