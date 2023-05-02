@@ -118,7 +118,7 @@ export default class BackendAdapter implements IBackendPort {
 
   async scoreH5PElement(data: ScoreH5PElementParams): Promise<boolean> {
     const response = await axios.patch<{
-      isSuceess: true;
+      isSuccess: true;
     }>(
       "/Elements/World/" + data.courseID + "/Element/" + data.h5pID,
       {
@@ -131,7 +131,7 @@ export default class BackendAdapter implements IBackendPort {
       }
     );
 
-    return response.data.isSuceess;
+    return response.data.isSuccess;
   }
 
   async scoreElement(
