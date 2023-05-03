@@ -40,7 +40,5 @@ export default class LearningSpaceDetailPresenter
     ]);
 
     this.viewModel.requiredPoints.Value = spaceTO.requiredScore;
-
-    // this.viewModel.requirements.Value = spaceTO.requirements;
   }
 }

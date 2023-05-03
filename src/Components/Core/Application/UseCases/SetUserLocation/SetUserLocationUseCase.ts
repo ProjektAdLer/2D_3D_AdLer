@@ -16,7 +16,7 @@ export default class SetUserLocationUseCase implements ISetUserLocationUseCase {
     let userDataEntity =
       this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
 
-    if (!userDataEntity || !userDataEntity.isLoggedIn) {
+    if (!userDataEntity?.isLoggedIn) {
       logger.error("User is not logged in, cannot set current location");
       return;
     }
