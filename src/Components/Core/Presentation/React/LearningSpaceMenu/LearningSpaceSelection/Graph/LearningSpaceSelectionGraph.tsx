@@ -95,7 +95,7 @@ export default function LearningSpaceSelectionGraph(props: {
     };
 
     setupGraph();
-  }, [spaces, reactFlowInstance]);
+  }, [reactFlowInstance, spaces, lastSelectedSpaceID]);
 
   const onNodeClickCallback = useCallback<NodeMouseHandler>(
     (event: React.MouseEvent, clickedNode: Node) => {
@@ -142,21 +142,21 @@ export default function LearningSpaceSelectionGraph(props: {
 function createRequirementTrees(
   spaces: LearningSpaceSelectionLearningSpaceData[]
 ): { nodes: Node[]; edges: Edge[] } {
-  const resultArrays = spaces.reduce(
+  return spaces.reduce(
     (accumulatedArrays, space) => {
       // skip spaces that have no requirements
       if (space.requirementsSyntaxTree === null) return accumulatedArrays;
 
-      for (let currentNode of space.requirementsSyntaxTree) {
+      for (let requirementsTreeNode of space.requirementsSyntaxTree) {
         // create a new graph edge for each node in the syntax tree
         const targetString =
-          currentNode.parentNodeID === "root"
+          requirementsTreeNode.parentNodeID === "root"
             ? space.id.toString()
-            : currentNode.parentNodeID;
+            : requirementsTreeNode.parentNodeID;
 
         accumulatedArrays.edges.push({
-          id: currentNode.node.ID + "-" + targetString,
-          source: currentNode.node.ID,
+          id: requirementsTreeNode.node.ID + "-" + targetString,
+          source: requirementsTreeNode.node.ID,
           target: targetString,
           style: {
             stroke: "black",
@@ -165,15 +165,15 @@ function createRequirementTrees(
         } as Edge);
 
         // create a new graph node if the node is a boolean operator
-        if (!(currentNode.node instanceof BooleanIDNode)) {
+        if (!(requirementsTreeNode.node instanceof BooleanIDNode)) {
           let operatorTypeString: BooleanOperatorType;
-          if (currentNode.node instanceof BooleanAndNode)
+          if (requirementsTreeNode.node instanceof BooleanAndNode)
             operatorTypeString = "and";
-          else if (currentNode.node instanceof BooleanOrNode)
+          else if (requirementsTreeNode.node instanceof BooleanOrNode)
             operatorTypeString = "or";
 
           accumulatedArrays.nodes.push({
-            id: currentNode.node.ID,
+            id: requirementsTreeNode.node.ID,
             data: {
               operatorType: operatorTypeString!,
             },
@@ -186,10 +186,9 @@ function createRequirementTrees(
       // return the arrays to be used in the next iteration
       return accumulatedArrays;
     },
+    // empty starting arrays
     { nodes: [], edges: [] } as { nodes: Node[]; edges: Edge[] }
   );
-
-  return resultArrays;
 }
 
 function createElkGraph(nodes: string[], edges: Edge[]): ElkNode {
@@ -229,6 +228,8 @@ function createSpaceNodes(
     else if (space.isAvailable) spaceIcon = spaceAvailable;
     else spaceIcon = spaceLocked;
 
+    const lastSelected = space.id === lastSelectedSpaceID;
+
     const node: LearningSpaceSelectionSpaceNodeType = {
       id: space.id.toString(),
       data: {
@@ -236,7 +237,7 @@ function createSpaceNodes(
         label: space.name,
         input: hasInput,
         output: hasOutput,
-        lastSelected: space.id === lastSelectedSpaceID,
+        lastSelected: lastSelected,
       },
       type: "spaceNode",
       position: { x: 0, y: 0 },
