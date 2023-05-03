@@ -93,15 +93,19 @@ export default function LearningSpaceSelectionGraph(props: {
 
   const onNodeClickCallback = useCallback<NodeMouseHandler>(
     (event: React.MouseEvent, clickedNode: Node) => {
-      props.controller.onLearningSpaceClicked(parseInt(clickedNode.id));
+      // only register clicks on space nodes
+      if (clickedNode.type === "spaceNode") {
+        props.controller.onLearningSpaceClicked(parseInt(clickedNode.id));
 
-      // update node data to reflect the last selected node
-      const nodes = reactFlowInstance.getNodes();
-      nodes.forEach((node) => {
-        (node as LearningSpaceSelectionSpaceNodeType).data.lastSelected =
-          node.id === clickedNode.id;
-      });
-      reactFlowInstance.setNodes(nodes);
+        // update node data to reflect the last selected node
+        const nodes = reactFlowInstance.getNodes();
+        nodes.forEach((node) => {
+          if (node.type === "spaceNode")
+            (node as LearningSpaceSelectionSpaceNodeType).data.lastSelected =
+              node.id === clickedNode.id;
+        });
+        reactFlowInstance.setNodes(nodes);
+      }
     },
     [props.controller, reactFlowInstance]
   );
@@ -111,7 +115,7 @@ export default function LearningSpaceSelectionGraph(props: {
       <ReactFlow
         defaultNodes={[]}
         nodeTypes={nodeTypes}
-        nodesDraggable={true}
+        nodesDraggable={false}
         nodesConnectable={false}
         onNodeClick={onNodeClickCallback}
         defaultEdges={[]}
