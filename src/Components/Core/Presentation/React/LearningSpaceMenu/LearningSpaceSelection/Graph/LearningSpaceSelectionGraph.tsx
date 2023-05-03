@@ -33,6 +33,7 @@ import {
 import LearningSpaceSelectionRequirementNode, {
   BooleanOperatorType,
 } from "./LearningSpaceSelectionRequirementNode";
+import { logger } from "src/Lib/Logger";
 
 const elk = new ELK();
 
@@ -57,13 +58,18 @@ export default function LearningSpaceSelectionGraph(props: {
 }) {
   const reactFlowInstance = useReactFlow();
   const [spaces] = useObservable(props.viewModel.spaces);
+  const [lastSelectedSpaceID] = useObservable(
+    props.viewModel.lastSelectedSpaceID
+  );
 
   useEffect(() => {
     if (spaces === undefined || spaces.length === 0) return;
 
     const setupGraph = async () => {
+      logger.log("LearningSpaceSelectionGraph", "Graph Setup");
+
       const requirementsTrees = createRequirementTrees(spaces);
-      const spaceNodes = createSpaceNodes(spaces);
+      const spaceNodes = createSpaceNodes(spaces, lastSelectedSpaceID);
 
       // extract node ids from spaces and requirements for layouting
       const spaceIDs = spaceNodes.map((node) => node.id);
@@ -100,9 +106,12 @@ export default function LearningSpaceSelectionGraph(props: {
         // update node data to reflect the last selected node
         const nodes = reactFlowInstance.getNodes();
         nodes.forEach((node) => {
-          if (node.type === "spaceNode")
-            (node as LearningSpaceSelectionSpaceNodeType).data.lastSelected =
-              node.id === clickedNode.id;
+          if (node.type === "spaceNode") {
+            (node as LearningSpaceSelectionSpaceNodeType).data = {
+              ...(node as LearningSpaceSelectionSpaceNodeType).data,
+              lastSelected: node.id === clickedNode.id,
+            };
+          }
         });
         reactFlowInstance.setNodes(nodes);
       }
@@ -205,7 +214,8 @@ function createElkGraph(nodes: string[], edges: Edge[]): ElkNode {
 }
 
 function createSpaceNodes(
-  spaces: LearningSpaceSelectionLearningSpaceData[]
+  spaces: LearningSpaceSelectionLearningSpaceData[],
+  lastSelectedSpaceID: number
 ): Node[] {
   const nodes = spaces.map((space) => {
     const hasInput = space.requirementsSyntaxTree !== null;
@@ -226,7 +236,7 @@ function createSpaceNodes(
         label: space.name,
         input: hasInput,
         output: hasOutput,
-        lastSelected: false,
+        lastSelected: space.id === lastSelectedSpaceID,
       },
       type: "spaceNode",
       position: { x: 0, y: 0 },
