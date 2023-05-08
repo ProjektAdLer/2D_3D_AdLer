@@ -6,12 +6,13 @@ import LearningSpaceNamePanel from "~ReactComponents/LearningSpaceDisplay/Learni
 import NotificationManager from "~ReactComponents/GeneralComponents/NotificationManager/NotificationManager";
 import SideBar from "~ReactComponents/LearningSpaceDisplay/SideBar/SideBar";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
-import ScorePanel from "~ReactComponents/LearningSpaceDisplay/ScorePanel/ScorePanel";
 import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
 import LearningSpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import LearningSpaceCompletionModal from "~ReactComponents/LearningSpaceDisplay/LearningSpaceCompletionModal/LearningSpaceCompletionModal";
 import ExitModal from "~ReactComponents/LearningSpaceDisplay/ExitModal/ExitModal";
 import TutorialPdfButton from "~ReactComponents/GeneralComponents/Tutorial/TutorialPdfButton";
+import LearningSpaceScorePanel from "~ReactComponents/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanel";
+import LearningWorldScorePanel from "~ReactComponents/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanel";
 
 export default function LearningSpace() {
   return (
@@ -19,8 +20,8 @@ export default function LearningSpace() {
       <div className="grid h-0 min-h-screen grid-cols-9 grid-rows-6 root">
         <SideBar className="z-10 col-span-3 col-start-1 row-start-1 m-2 pointer-events-none" />
         <section className="fixed z-10 flex flex-row-reverse col-span-2 col-start-8 row-start-1 space-x-2 space-x-reverse right-2 top-2">
-          <ScorePanel scoreType="world" />
-          <ScorePanel scoreType="space" />
+          <LearningWorldScorePanel />
+          <LearningSpaceScorePanel />
         </section>
         <LearningSpaceNamePanel className="z-10 col-span-5 col-start-3 row-start-1 pointer-events-none justify-self-center" />
         <BabylonCanvas

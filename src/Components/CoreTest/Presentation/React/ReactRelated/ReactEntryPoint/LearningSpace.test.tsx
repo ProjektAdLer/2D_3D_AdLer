@@ -29,7 +29,11 @@ jest.mock(
   () => "mocked"
 );
 jest.mock(
-  "../../../../../Core/Presentation/React/LearningSpaceDisplay/ScorePanel/ScorePanel",
+  "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanel",
+  () => "mocked"
+);
+jest.mock(
+  "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanel",
   () => "mocked"
 );
 jest.mock(

@@ -1,5 +1,5 @@
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
-import ScorePanelViewModel from "./ScorePanelViewModel";
+import LearningWorldScorePanelViewModel from "./LearningWorldScorePanelViewModel";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import {
@@ -7,33 +7,22 @@ import {
   CircularProgressbarWithChildren,
 } from "react-circular-progressbar";
 import { useEffect, useState } from "react";
-
-import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
 import worldIcon from "../../../../../../Assets/icons/14-world/world-icon-nobg.svg";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import ICalculateLearningWorldScoreUseCase from "src/Components/Core/Application/UseCases/CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
 import CoreDIContainer from "src/Components/Core/DependencyInjection/CoreDIContainer";
 
-interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
-  scoreType: "space" | "world";
-}
+interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export default function ScorePanel({
-  scoreType,
+export default function LearningWorldScorePanel({
   ...rest
 }: React.DetailedHTMLProps<PanelProps, HTMLDivElement>) {
-  const [viewModel] = useBuilder<ScorePanelViewModel, undefined>(
-    BUILDER_TYPES.IScorePanelBuilder
+  const [viewModel] = useBuilder<LearningWorldScorePanelViewModel, undefined>(
+    BUILDER_TYPES.ILearningWorldScorePanelBuilder
   );
 
-  const [score] = useObservable<number>(
-    scoreType === "space" ? viewModel?.spaceScore : viewModel?.worldScore
-  );
-  const [requiredScore] = useObservable<number>(
-    scoreType === "space"
-      ? viewModel?.spaceRequiredScore
-      : viewModel?.worldRequiredScore
-  );
+  const [score] = useObservable<number>(viewModel?.worldScore);
+  const [requiredScore] = useObservable<number>(viewModel?.worldRequiredScore);
   const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
@@ -64,25 +53,13 @@ export default function ScorePanel({
           pathColor: `#59B347`,
         })}
       >
-        <img
-          style={{ width: 40, opacity: 0.4 }}
-          src={scoreType === "space" ? coinIcon : worldIcon}
-          alt="icon"
-        />
+        <img style={{ width: 40, opacity: 0.4 }} src={worldIcon} alt="icon" />
 
         <div
           className="font-bold text-center"
           style={{ position: "absolute", fontSize: 10, lineHeight: 1.2 }}
         >
-          {scoreType === "space" ? (
-            <>
-              {score ?? "x"}
-              <br /> von <br />
-              {requiredScore ?? "y"}
-            </>
-          ) : (
-            Math.round(percentage) + "%"
-          )}
+          {Math.round(percentage) + "%"}
         </div>
       </CircularProgressbarWithChildren>
     </div>

@@ -2,12 +2,12 @@ import mock from "jest-mock-extended/lib/Mock";
 import ILearningWorldPort from "../../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import LearningScorePanelBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ScorePanel/ScorePanelBuilder";
+import LearningSpaceScorePanelBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanelBuilder";
 
 const worldPortMock = mock<ILearningWorldPort>();
 
-describe("ScorePanelBuilder", () => {
-  let systemUnderTest: LearningScorePanelBuilder;
+describe("LearningSpaceScorePanelBuilder", () => {
+  let systemUnderTest: LearningSpaceScorePanelBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -17,7 +17,7 @@ describe("ScorePanelBuilder", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new LearningScorePanelBuilder();
+    systemUnderTest = new LearningSpaceScorePanelBuilder();
   });
 
   afterAll(() => {

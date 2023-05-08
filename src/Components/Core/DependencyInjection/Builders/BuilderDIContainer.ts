@@ -8,7 +8,7 @@ import IPresentationDirector from "../../Presentation/PresentationBuilder/IPrese
 import PresentationDirector from "../../Presentation/PresentationBuilder/PresentationDirector";
 import ElementModalBuilder from "../../Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalBuilder";
 import LearningElementsDropdownBuilder from "../../Presentation/React/LearningSpaceDisplay/LearningElementsDropdown/LearningElementsDropdownBuilder";
-import ScorePanelBuilder from "../../Presentation/React/LearningSpaceDisplay/ScorePanel/ScorePanelBuilder";
+import LearningWorldScorePanelBuilder from "../../Presentation/React/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanelBuilder";
 import NotificationManagerBuilder from "../../Presentation/React/GeneralComponents/NotificationManager/NotificationManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
 import LoginComponentBuilder from "../../Presentation/React/WelcomePage/LoginComponent/LoginComponentBuilder";
@@ -29,6 +29,7 @@ import LearningWorldSelectionBuilder from "~ReactComponents/LearningWorldMenu/Le
 import LearningWorldDetailBuilder from "~ReactComponents/LearningWorldMenu/LearningWorldDetail/LearningWorldDetailBuilder";
 import AmbienceBuilder from "../../Presentation/Babylon/Ambience/AmbienceBuilder";
 import WindowBuilder from "../../Presentation/Babylon/Window/WindowBuilder";
+import LearningSpaceScorePanelBuilder from "~ReactComponents/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanelBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -37,8 +38,11 @@ const BuilderDIContainer = new ContainerModule((bind) => {
 
   bind<IPresentationBuilder>(BUILDER_TYPES.IDoorBuilder).to(DoorBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IWindowBuilder).to(WindowBuilder);
-  bind<IPresentationBuilder>(BUILDER_TYPES.IScorePanelBuilder).to(
-    ScorePanelBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningSpaceScorePanelBuilder).to(
+    LearningSpaceScorePanelBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldScorePanelBuilder).to(
+    LearningWorldScorePanelBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementModalBuilder).to(
     ElementModalBuilder

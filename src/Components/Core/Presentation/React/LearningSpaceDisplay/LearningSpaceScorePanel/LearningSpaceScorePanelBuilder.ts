@@ -3,18 +3,23 @@ import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
-import ScorePanelPresenter from "./ScorePanelPresenter";
-import ScorePanelViewModel from "./ScorePanelViewModel";
+import LearningSpaceScorePanelPresenter from "./LearningSpaceScorePanelPresenter";
+import LearningSpaceScorePanelViewModel from "./LearningSpaceScorePanelViewModel";
 
 @injectable()
-export default class ScorePanelBuilder extends PresentationBuilder<
-  ScorePanelViewModel,
+export default class LearningSpaceScorePanelBuilder extends PresentationBuilder<
+  LearningSpaceScorePanelViewModel,
   undefined,
   undefined,
-  ScorePanelPresenter
+  LearningSpaceScorePanelPresenter
 > {
   constructor() {
-    super(ScorePanelViewModel, undefined, undefined, ScorePanelPresenter);
+    super(
+      LearningSpaceScorePanelViewModel,
+      undefined,
+      undefined,
+      LearningSpaceScorePanelPresenter
+    );
   }
 
   override buildPresenter(): void {
