@@ -14,6 +14,6 @@ export default class AvatarCameraViewModel {
   lowerRadiusLimit: number = 5;
   upperRadiusLimit: number = 25;
   wheelDeltaPercentage: number = 0.01;
-  upperBetaLimit: number = Math.PI / 2;
+  upperBetaLimit: number = Math.PI / 3;
   rotationButtons: number[] = [0];
 }
