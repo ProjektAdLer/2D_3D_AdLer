@@ -168,7 +168,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
   private getWindowPosition(): [Vector3, number] {
     const windowPosition = [
       new Vector3(
-        this.viewModel.windowWidth.Value + 5,
+        this.viewModel.windowWidth.Value + 3,
         this.viewModel.baseHeight.Value,
         -this.viewModel.spaceLength.Value - this.viewModel.wallThickness.Value
       ),
