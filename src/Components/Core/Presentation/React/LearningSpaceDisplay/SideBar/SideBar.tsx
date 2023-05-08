@@ -38,7 +38,7 @@ export default function SideBar({ className }: AdLerUIComponent) {
           <StyledButton onClick={controller.onSpaceMenuButtonClicked}>
             <img src={spaceIcon} alt="" />
           </StyledButton>
-          <p className="pl-2 text-adlerdarkblue text-xl font-bold">
+          <p className="pl-2 text-xl font-bold text-adlerdarkblue text-outline">
             Lernraum-Menü
           </p>
         </div>
@@ -47,7 +47,7 @@ export default function SideBar({ className }: AdLerUIComponent) {
           <StyledButton onClick={controller.onWorldMenuButtonClicked}>
             <img src={worldIcon} alt="" />
           </StyledButton>
-          <p className="pl-2 text-adlerdarkblue text-xl font-bold">
+          <p className="pl-2 text-xl font-bold text-adlerdarkblue text-outline">
             Lernwelt-Menü
           </p>
         </div>
@@ -56,7 +56,9 @@ export default function SideBar({ className }: AdLerUIComponent) {
           <StyledButton onClick={controller.onMainMenuButtonClicked}>
             <img src={engineLogo} alt="" />
           </StyledButton>
-          <p className="pl-2 text-adlerdarkblue text-xl font-bold">Hauptmenü</p>
+          <p className="pl-2 text-xl font-bold text-adlerdarkblue text-outline">
+            Hauptmenü
+          </p>
         </div>
 
         <FullscreenSwitch />

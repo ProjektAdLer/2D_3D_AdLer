@@ -32,6 +32,12 @@
   }
 }
 
+@layer components {
+  .text-outline {
+    text-shadow: 0px 0px 8px white;
+  }
+}
+
 /*Styles für die Anzeige des Inspectors*/
 
 #inspector-host,

@@ -28,7 +28,7 @@ export default function LearningSpaceNamePanel({
           src={worldIcon}
           alt="Learning-World-Icon"
         ></img>
-        <h1 className="text-xl font-black text-adlerdarkblue lg:text-4xl">
+        <h1 className="text-xl font-black text-adlerdarkblue text-outline lg:text-4xl">
           {name}
         </h1>
       </div>
