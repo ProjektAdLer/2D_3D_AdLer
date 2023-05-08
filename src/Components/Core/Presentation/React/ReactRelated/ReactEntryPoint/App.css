@@ -34,9 +34,11 @@
 
 @layer components {
   .text-outline {
-    /*  -webkit-text-stroke: 1.5px white; */
-    text-shadow: -1px -1px 0 #e9f2fa, 1px -1px 0 #e9f2fa, -1px 1px 0 #e9f2fa,
-      1px 1px 0 #e9f2fa;
+    text-shadow: -1px -1px 0 rgb(233, 242, 250, 0.4),
+      0 -1px 0 rgb(233, 242, 250, 0.4), 1px -1px 0 rgb(233, 242, 250, 0.4),
+      1px 0 0 rgb(233, 242, 250, 0.4), 1px 1px 0 rgb(233, 242, 250, 0.4),
+      0 1px 0 rgb(233, 242, 250, 0.4), -1px 1px 0 rgb(233, 242, 250, 0.4),
+      -1px 0 0 rgb(233, 242, 250, 0.4);
   }
 }
 
