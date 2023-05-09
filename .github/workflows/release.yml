@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - "main"
+      - "rel_0.3.1_thab-workshop"
 
 jobs:
   build:
