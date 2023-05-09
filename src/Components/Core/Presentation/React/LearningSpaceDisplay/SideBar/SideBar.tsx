@@ -3,6 +3,7 @@ import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import FullscreenSwitch from "~ReactComponents/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitch";
 import engineLogo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
+import hamburgerButton from "../../../../../../Assets/icons/31-hamburger-icon/hamburger-icon-nobg.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import SideBarViewModel from "./SideBarViewModel";
 import SideBarController from "./SideBarController";
@@ -22,7 +23,7 @@ export default function SideBar({ className }: AdLerUIComponent) {
       headerPart={
         <StyledButton>
           <img
-            src={engineLogo}
+            src={hamburgerButton}
             className="lg:w-20 md:w-16 sm:w-14"
             alt="EngineLogo"
           ></img>
@@ -30,7 +31,7 @@ export default function SideBar({ className }: AdLerUIComponent) {
       }
       // initialOpen has to be true for it to render properly on intialization
       // Depends on LoadSpace useCase within SpaceSceneDefinition
-      initialOpen={true}
+      initialOpen={false}
       useAsTriggerOnly={true}
     >
       <StyledContainer className="flex flex-col bg-transparent">
