@@ -26,4 +26,6 @@ describe("MenuHeaderBarController", () => {
     systemUnderTest.onBackButtonClicked();
     expect(mockHistoryBack).toBeCalled();
   });
+
+  test.todo("create tests that check on correct history object");
 });
