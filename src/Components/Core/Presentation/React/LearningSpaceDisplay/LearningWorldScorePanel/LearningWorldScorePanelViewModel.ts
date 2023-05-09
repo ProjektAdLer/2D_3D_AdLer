@@ -1,4 +1,3 @@
-import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import Observable from "../../../../../../Lib/Observable";
 
 export default class ScorePanelViewModel {

@@ -1,5 +1,3 @@
-import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
-import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import LearningWorldScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldScoreTO";
 import ILearningWorldScorePanelPresenter from "./ILearningWorldScorePanelPresenter";
 import LearningWorldScorePanelViewModel from "./LearningWorldScorePanelViewModel";
