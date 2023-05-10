@@ -44,13 +44,13 @@ export default class BackendAdapter implements IBackendPort {
     axios.defaults.timeout = 3000;
   }
   async deletePlayerData(userToken: string): Promise<boolean> {
-    const isSuceess = await axios.delete<boolean>("/PlayerData", {
+    const isSuccess = await axios.delete<boolean>("/PlayerData", {
       headers: {
         token: userToken,
       },
     });
 
-    return isSuceess.data;
+    return isSuccess.data;
   }
 
   async updatePlayerData(
@@ -140,7 +140,7 @@ export default class BackendAdapter implements IBackendPort {
     courseID: ComponentID
   ): Promise<boolean> {
     const response = await axios.patch<{
-      isSuceess: boolean;
+      isSuccess: boolean;
     }>(
       "/Elements/World/" + courseID + "/Element/" + elementID,
       {},
@@ -151,7 +151,7 @@ export default class BackendAdapter implements IBackendPort {
       }
     );
 
-    return response.data.isSuceess;
+    return response.data.isSuccess;
   }
 
   async getWorldStatus(

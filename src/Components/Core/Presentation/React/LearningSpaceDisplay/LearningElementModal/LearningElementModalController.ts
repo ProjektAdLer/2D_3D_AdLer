@@ -30,7 +30,9 @@ export default class LearningElementModalController
       statement.verb.id === "http://adlnet.gov/expapi/verbs/answered" ||
       statement.verb.id === "http://adlnet.gov/expapi/verbs/completed";
 
-    const isChild = statement.context?.contextActivities?.parent[0]?.id;
+    const parentArray = statement.context?.contextActivities?.parent;
+    const isChild =
+      parentArray && parentArray.length > 0 ? parentArray[0].id : undefined;
 
     if (isCompleted && !isChild) {
       const xapiData = event.data.statement as XAPIData;
