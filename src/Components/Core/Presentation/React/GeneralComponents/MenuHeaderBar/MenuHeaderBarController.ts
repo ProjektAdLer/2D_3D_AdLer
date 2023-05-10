@@ -6,17 +6,10 @@ export default class MenuHeaderBarController
   implements IMenuHeaderBarController
 {
   onMenuButtonClicked(): void {
-    logger.warn(
-      "Menu button functionality not implemented. Current functionality is mock only."
-    );
-
     history.push("/");
   }
-  onLearningWorldButtonClicked(): void {
-    logger.warn(
-      "Menu button functionality not implemented. Current functionality is mock only."
-    );
 
+  onLearningWorldButtonClicked(): void {
     history.push("/worldmenu");
   }
 
