@@ -55,7 +55,10 @@ export default class CalculateLearningWorldScoreUseCase
     let requiredScore: number = 0;
     world.spaces.forEach((space) => {
       const spaceScore: LearningSpaceScoreTO =
-        this.calculateSpaceScoreUseCase.internalExecute(space.id);
+        this.calculateSpaceScoreUseCase.internalExecute({
+          spaceID: space.id,
+          worldID: world.id,
+        });
       currentScore += spaceScore.currentScore;
       maxScore += spaceScore.maxScore;
       requiredScore += spaceScore.requiredScore;

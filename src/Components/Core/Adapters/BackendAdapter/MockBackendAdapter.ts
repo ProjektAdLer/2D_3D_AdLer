@@ -177,12 +177,12 @@ export default class MockBackendAdapter implements IBackendPort {
         {
           topicId: 7,
           topicName: "Themenbereich der kleinen Welt",
-          topicContents: [6],
+          topicContents: [1],
         },
       ],
       spaces: [
         {
-          spaceId: 6,
+          spaceId: 1,
           spaceName: "Raum der kleinen Welt",
           spaceDescription: "Raumbeschreibung der kleinen Welt",
           spaceContents: [1, 2, 3, 4, 5],

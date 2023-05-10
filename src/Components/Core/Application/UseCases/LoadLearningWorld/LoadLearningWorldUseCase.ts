@@ -86,12 +86,18 @@ export default class LoadLearningWorldUseCase
 
     // cumulate element scores for each space
     worldTO.spaces.forEach((space) => {
-      let spaceScores = this.calculateSpaceScore.internalExecute(space.id);
+      let spaceScores = this.calculateSpaceScore.internalExecute({
+        spaceID: space.id,
+        worldID: worldEntity.id,
+      });
       space.currentScore = spaceScores.currentScore;
       space.maxScore = spaceScores.maxScore;
 
       let spaceAvailability =
-        this.calculateSpaceAvailabilityUseCase.internalExecute(space.id);
+        this.calculateSpaceAvailabilityUseCase.internalExecute({
+          spaceID: space.id,
+          worldID: worldEntity.id,
+        });
       space.isAvailable = spaceAvailability.isAvailable;
       space.requirementsString = spaceAvailability.requirementsString;
       space.requirementsSyntaxTree = spaceAvailability.requirementsSyntaxTree;

@@ -90,7 +90,10 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
 
       element.hasScored = true;
 
-      this.calculateSpaceScoreUseCase.internalExecute(userLocation.spaceID);
+      this.calculateSpaceScoreUseCase.internalExecute({
+        spaceID: userLocation.spaceID,
+        worldID: userLocation.worldID,
+      });
 
       this.worldPort.onLearningElementScored(true, data.elementID);
     }
