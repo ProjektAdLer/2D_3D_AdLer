@@ -34,7 +34,7 @@ export default function MenuHeaderBar({
       <div className={tailwindMerge(className, "flex place-content-stretch")}>
         <div className="flex items-center w-1/2 place-content-stretch justify-self-start ">
           <StyledButton
-            onClick={controller.onMenuButtonClicked}
+            onClick={controller.onHomeButtonClicked}
             className="mr-4"
           >
             <img className="w-10 xl:w-12 " src={homeIcon} alt="Home Icon" />

@@ -1,11 +1,10 @@
-import { logger } from "src/Lib/Logger";
 import IMenuHeaderBarController from "./IMenuHeaderBarController";
 import history from "history/browser";
 
 export default class MenuHeaderBarController
   implements IMenuHeaderBarController
 {
-  onMenuButtonClicked(): void {
+  onHomeButtonClicked(): void {
     history.push("/");
   }
 

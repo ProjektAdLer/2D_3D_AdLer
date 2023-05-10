@@ -4,6 +4,7 @@ import history from "history/browser";
 
 jest.mock("../../../../../../Lib/Logger.ts");
 const mockHistoryBack = jest.spyOn(history, "back");
+const mockHistoryPush = jest.spyOn(history, "push");
 
 describe("MenuHeaderBarController", () => {
   let systemUnderTest: MenuHeaderBarController;
@@ -12,20 +13,18 @@ describe("MenuHeaderBarController", () => {
     systemUnderTest = new MenuHeaderBarController();
   });
 
-  test("onMenuButtonClicked calls logger.warn", () => {
-    systemUnderTest.onMenuButtonClicked();
-    expect(logger.warn).toBeCalled();
+  test("onHomeButtonClicked calls history.push with /", () => {
+    systemUnderTest.onHomeButtonClicked();
+    expect(mockHistoryPush).toHaveBeenCalledWith("/");
   });
 
-  test("onLearningWorldButtonClicked calls logger.warn", () => {
+  test("onLearningWorldButtonClicked calls history.push with '/worldmenu'", () => {
     systemUnderTest.onLearningWorldButtonClicked();
-    expect(logger.warn).toBeCalled();
+    expect(mockHistoryPush).toHaveBeenCalledWith("/worldmenu");
   });
 
   test("onBackButtonClicked calls history.back", () => {
     systemUnderTest.onBackButtonClicked();
     expect(mockHistoryBack).toBeCalled();
   });
-
-  test.todo("create tests that check on correct history object");
 });
