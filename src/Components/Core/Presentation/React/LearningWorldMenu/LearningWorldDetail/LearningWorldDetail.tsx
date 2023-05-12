@@ -42,7 +42,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
         </div>
         <StyledButton
           shape="freefloatleft"
-          className="self-center mt-2 mb-2 justify-self-center"
+          className="self-center mt-2 mb-2 justify-self-center animate-bounce"
           onClick={controller.onEnterLearningWorldButtonClicked}
         >
           {"Lernwelt öffnen!"}

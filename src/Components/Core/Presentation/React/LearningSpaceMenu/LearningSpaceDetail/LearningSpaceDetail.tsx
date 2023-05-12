@@ -64,7 +64,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
         {isAvailable && (
           <StyledButton
             shape="freefloatleft"
-            className="mt-2 mb-2"
+            className="mt-2 mb-2 animate-bounce"
             onClick={controller.onLearningSpaceButtonClicked}
           >
             {"Lernraum betreten!"}

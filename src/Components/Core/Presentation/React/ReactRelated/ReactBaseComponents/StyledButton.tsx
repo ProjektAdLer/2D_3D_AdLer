@@ -40,7 +40,7 @@ export default function StyledButton({
         disabled
           ? "text-adlerdeactivatedtext bg-adlerbuttonlocked hover:cursor-default rounded-lg p-2"
           : tailwindMerge(
-              "flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden",
+              "flex items-center text-sm rounded-lg hover:cursor-pointer hover:text-buttonbgblue hover:border-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden",
               buttonConfig[color]
             )
       )}
