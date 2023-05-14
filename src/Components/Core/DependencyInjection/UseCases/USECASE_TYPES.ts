@@ -20,6 +20,9 @@ const USECASE_TYPES = {
   ICalculateLearningSpaceAvailabilityUseCase: Symbol(
     "ICalculateLearningSpaceAvailabilityUseCase"
   ),
+  IGetLearningSpacePrecursorAndSuccessorUseCase: Symbol(
+    "IGetLearningSpacePrecursorAndSuccessorUseCase"
+  ),
 };
 
 export default USECASE_TYPES;

@@ -30,6 +30,8 @@ import CalculateLearningWorldScoreUseCase from "../../Application/UseCases/Calcu
 import ICalculateLearningWorldScoreUseCase from "../../Application/UseCases/CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
 import ICalculateLearningSpaceAvailabilityUseCase from "../../Application/UseCases/CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
 import CalculateLearningSpaceAvailabilityUseCase from "../../Application/UseCases/CalculateLearningSpaceAvailability/CalculateLearningSpaceAvailabilityUseCase";
+import IGetLearningSpacePrecursorAndSuccessorUseCase from "../../Application/UseCases/GetLearningSpacePrecursorAndSuccessor/IGetLearningSpacePrecursorAndSuccessorUseCase";
+import GetLearningSpacePrecursorAndSuccessorUseCase from "../../Application/UseCases/GetLearningSpacePrecursorAndSuccessor/GetLearningSpacePrecursorAndSuccessorUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -102,6 +104,11 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase
   )
     .to(CalculateLearningSpaceAvailabilityUseCase)
+    .inSingletonScope();
+  bind<IGetLearningSpacePrecursorAndSuccessorUseCase>(
+    USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
+  )
+    .to(GetLearningSpacePrecursorAndSuccessorUseCase)
     .inSingletonScope();
 });
 
