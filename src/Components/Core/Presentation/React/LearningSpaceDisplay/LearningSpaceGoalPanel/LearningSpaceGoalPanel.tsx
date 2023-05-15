@@ -56,7 +56,12 @@ export default function LearningSpaceGoalPanel() {
             alt="Learning-Goal-Icon"
           ></img>
           {goals.map((goal) => {
-            return <TextWithLineBreaks text={goal} key={Math.random()} />;
+            return (
+              <TextWithLineBreaks
+                text={goal}
+                key={"goal_" + goal.substring(0, 8)}
+              />
+            );
           })}
         </StyledButton>
       </div>
