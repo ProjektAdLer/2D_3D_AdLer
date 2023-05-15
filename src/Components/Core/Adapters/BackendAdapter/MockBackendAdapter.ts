@@ -96,7 +96,10 @@ export default class MockBackendAdapter implements IBackendPort {
           "H5P elements are not supported in the backend mock."
         );
       case "video":
-        return Promise.resolve("https://youtu.be/8X4cDoM3R7E?t=189");
+        //return Promise.resolve("https://youtu.be/8X4cDoM3R7E?t=189");
+        return Promise.resolve(
+          "https://video.th-ab.de/paella/ui/watch.html?id=ed6695a8-f7ac-47dc-bf6d-62460b94383f"
+        );
       case "image":
         return Promise.resolve(
           "http://" +

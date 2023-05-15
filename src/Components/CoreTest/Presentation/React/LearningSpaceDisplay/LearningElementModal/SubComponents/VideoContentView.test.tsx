@@ -50,8 +50,7 @@ describe("VideoComponent", () => {
     const vm = new LearningElementModalViewModel();
     vm.parentWorldID.Value = 1;
     vm.id.Value = 1;
-    vm.filePath.Value =
-      "https://www.youtube.com/watch?v=UEJpDrXuP98&ab_channel=AbroadinJapan&token=46dd4cbdafda7fc864c8ce73aae3a897";
+    vm.filePath.Value = "XXXX";
 
     await act(async () => {
       component = render(
@@ -63,9 +62,7 @@ describe("VideoComponent", () => {
 
     expect(component!).toBeDefined();
     expect(
-      component!.getByTitle(
-        "Could not extract video url from youtube oembed api"
-      )
+      component!.getByText("No Video Component found for given URLXXXX")
     ).toBeDefined();
   });
 });
