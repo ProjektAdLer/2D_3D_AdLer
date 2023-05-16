@@ -3,15 +3,11 @@ import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IE
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
-import LearningSpaceEntity from "src/Components/Core/Domain/Entities/LearningSpaceEntity";
 import IGetLearningSpacePrecursorAndSuccessorUseCase from "./IGetLearningSpacePrecursorAndSuccessorUseCase";
-import type ILoadLearningSpaceUseCase from "../LoadLearningSpace/ILoadLearningSpaceUseCase";
-import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import type ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import LearningWorldEntity from "src/Components/Core/Domain/Entities/LearningWorldEntity";
 import LearningSpaceAvailabilityStringParser from "src/Components/Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/LearningSpaceAvailabilityStringParser";
 import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
-import LearningSpaceTO from "../../DataTransferObjects/LearningSpaceTO";
+import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 
 @injectable()
 export default class GetLearningSpacePrecursorAndSuccessorUseCase
@@ -21,11 +17,7 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
-    private getUserLocationUseCase: IGetUserLocationUseCase,
-    @inject(USECASE_TYPES.ILoadLearningSpaceUseCase)
-    private loadLearningSpace: ILoadLearningSpaceUseCase,
-    @inject(PORT_TYPES.ILearningWorldPort)
-    private worldPort: ILearningWorldPort
+    private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
 
   execute(): LearningSpacePrecursorAndSuccessorTO {
@@ -51,38 +43,19 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
       LearningSpaceAvailabilityStringParser.parseToIdArray(
         currentSpace.requirements
       );
-    //Load precursor rooms and push them into the precursorSpaces array
-    const precursorSpaces: LearningSpaceTO[] = [];
-    precursorSpaceIDs.forEach((id) => {
-      const matchingSpaceEntity = worldEntity.spaces.find(
-        (space) => space.id === id
-      );
-      if (matchingSpaceEntity) {
-        let spaceTO = this.toTO(matchingSpaceEntity);
-        precursorSpaces.push(spaceTO);
-      }
-    });
-    //Determine successorSpaces and push them into the successorSpaces array
     const successorSpaceEntities = worldEntity.spaces.filter((space) =>
       LearningSpaceAvailabilityStringParser.parseToIdArray(
         space.requirements
       ).includes(userLocation.spaceID!)
     );
-    const successorSpaces: LearningSpaceTO[] = [];
+    const successorSpaceIDs: ComponentID[] = [];
     successorSpaceEntities.forEach((spaceEntity) => {
-      let spaceTO = this.toTO(spaceEntity);
-      successorSpaces.push(spaceTO);
+      successorSpaceIDs.push(spaceEntity.id);
     });
     return {
       id: userLocation.spaceID,
-      precursorSpaces: precursorSpaces,
-      successorSpaces: successorSpaces,
+      precursorSpaces: precursorSpaceIDs,
+      successorSpaces: successorSpaceIDs,
     } as LearningSpacePrecursorAndSuccessorTO;
-  }
-
-  private toTO(spaceEntity: LearningSpaceEntity): LearningSpaceTO {
-    let spaceTO = new LearningSpaceTO();
-    spaceTO = Object.assign(spaceTO, structuredClone(spaceEntity));
-    return spaceTO;
   }
 }
