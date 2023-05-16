@@ -115,8 +115,16 @@ describe("GetLearningSpacePrecursorAndSuccessorUseCase", () => {
     ]);
     let expected = {
       id: 2,
-      precursorSpaces: [1],
-      successorSpaces: [3],
+      precursorSpaces: [
+        {
+          id: 1,
+        },
+      ],
+      successorSpaces: [
+        {
+          id: 3,
+        },
+      ],
     };
 
     expect(systemUnderTest.execute()).toMatchObject(expected);
