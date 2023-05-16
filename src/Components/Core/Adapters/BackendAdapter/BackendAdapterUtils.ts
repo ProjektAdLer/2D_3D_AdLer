@@ -33,7 +33,8 @@ export default class BackendAdapterUtils {
         id: space.spaceId,
         name: space.spaceName,
         elements: elements.filter((element) =>
-          space.spaceContents.includes(element.id)
+          // TODO: change to reflect actual slot position
+          space.spaceSlotContents.includes(element.id)
         ),
         description: space.spaceDescription,
         goals: space.spaceGoals || [""],

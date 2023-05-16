@@ -36,6 +36,6 @@
     "public/ThirdParty/H5PResizer.js",
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
-    "/CoreTest/"
+    "**/CoreTest/**"
   ]
 }
