@@ -3,6 +3,6 @@ import LearningSpaceTO from "./LearningSpaceTO";
 
 export default class LearningSpacePrecursorAndSuccessorTO {
   id: ComponentID;
-  precursorSpaces: ComponentID[];
-  successorSpaces: ComponentID[];
+  precursorSpaces: LearningSpaceTO[];
+  successorSpaces: LearningSpaceTO[];
 }
