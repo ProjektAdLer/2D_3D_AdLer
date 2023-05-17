@@ -33,8 +33,8 @@ export interface APISpace {
   spaceSlotContents: SpaceSlotItem[];
   requiredPointsToComplete: number;
   requiredSpacesToEnter: string;
-  roomTemplate: string;
-  roomTemplateStyle: string;
+  spaceTemplate: string;
+  spaceTemplateStyle: string;
 }
 
 export interface APIElement {
