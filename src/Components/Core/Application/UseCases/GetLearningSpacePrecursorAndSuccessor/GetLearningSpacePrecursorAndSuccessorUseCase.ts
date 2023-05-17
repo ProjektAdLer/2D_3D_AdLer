@@ -5,13 +5,15 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 import LearningSpaceEntity from "src/Components/Core/Domain/Entities/LearningSpaceEntity";
 import IGetLearningSpacePrecursorAndSuccessorUseCase from "./IGetLearningSpacePrecursorAndSuccessorUseCase";
-import type ILoadLearningSpaceUseCase from "../LoadLearningSpace/ILoadLearningSpaceUseCase";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import LearningWorldEntity from "src/Components/Core/Domain/Entities/LearningWorldEntity";
 import LearningSpaceAvailabilityStringParser from "src/Components/Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/LearningSpaceAvailabilityStringParser";
 import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
 import LearningSpaceTO from "../../DataTransferObjects/LearningSpaceTO";
+import type { IInternalCalculateLearningSpaceScoreUseCase } from "src/Components/Core/Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
+import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
+import type ICalculateLearningSpaceAvailabilityUseCase from "../CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
 
 @injectable()
 export default class GetLearningSpacePrecursorAndSuccessorUseCase
@@ -22,10 +24,12 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
     private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
-    @inject(USECASE_TYPES.ILoadLearningSpaceUseCase)
-    private loadLearningSpace: ILoadLearningSpaceUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
-    private worldPort: ILearningWorldPort
+    private worldPort: ILearningWorldPort,
+    @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
+    private calculateSpaceScore: IInternalCalculateLearningSpaceScoreUseCase,
+    @inject(USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase)
+    private calculateSpaceAvailabilityUseCase: ICalculateLearningSpaceAvailabilityUseCase
   ) {}
 
   execute(): LearningSpacePrecursorAndSuccessorTO {
@@ -52,7 +56,7 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
         currentSpace.requirements
       );
     //Load precursor rooms and push them into the precursorSpaces array
-    const precursorSpaces: LearningSpaceTO[] = [];
+    let precursorSpaces: LearningSpaceTO[] = [];
     precursorSpaceIDs.forEach((id) => {
       const matchingSpaceEntity = worldEntity.spaces.find(
         (space) => space.id === id
@@ -62,27 +66,62 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
         precursorSpaces.push(spaceTO);
       }
     });
+    precursorSpaces = this.fillSpaceWithScoringAndAvailabilityData(
+      precursorSpaces,
+      worldEntity.id
+    );
     //Determine successorSpaces and push them into the successorSpaces array
     const successorSpaceEntities = worldEntity.spaces.filter((space) =>
       LearningSpaceAvailabilityStringParser.parseToIdArray(
         space.requirements
       ).includes(userLocation.spaceID!)
     );
-    const successorSpaces: LearningSpaceTO[] = [];
+    let successorSpaces: LearningSpaceTO[] = [];
     successorSpaceEntities.forEach((spaceEntity) => {
       let spaceTO = this.toTO(spaceEntity);
       successorSpaces.push(spaceTO);
     });
-    return {
+    successorSpaces = this.fillSpaceWithScoringAndAvailabilityData(
+      successorSpaces,
+      worldEntity.id
+    );
+    const returnValue = {
       id: userLocation.spaceID,
       precursorSpaces: precursorSpaces,
       successorSpaces: successorSpaces,
     } as LearningSpacePrecursorAndSuccessorTO;
+    this.worldPort.onLearningSpacePrecursorAndSuccessorLoaded(returnValue);
+    return returnValue;
   }
 
   private toTO(spaceEntity: LearningSpaceEntity): LearningSpaceTO {
     let spaceTO = new LearningSpaceTO();
     spaceTO = Object.assign(spaceTO, structuredClone(spaceEntity));
     return spaceTO;
+  }
+  private fillSpaceWithScoringAndAvailabilityData(
+    spaces: LearningSpaceTO[],
+    worldID: ComponentID
+  ): LearningSpaceTO[] {
+    spaces.forEach((spaceTO) => {
+      console.log(spaceTO, "spaceTOoben");
+      const spaceScoreTO = this.calculateSpaceScore.internalExecute({
+        spaceID: spaceTO.id,
+        worldID: worldID,
+      });
+      spaceTO.currentScore = spaceScoreTO.currentScore;
+      spaceTO.maxScore = spaceScoreTO.maxScore;
+      console.log(spaceTO, "spaceTO");
+      // fill with availability data
+      const availabilityData =
+        this.calculateSpaceAvailabilityUseCase.internalExecute({
+          spaceID: spaceTO.id,
+          worldID: worldID,
+        });
+      spaceTO.requirementsString = availabilityData.requirementsString;
+      spaceTO.requirementsSyntaxTree = availabilityData.requirementsSyntaxTree;
+      spaceTO.isAvailable = availabilityData.isAvailable;
+    });
+    return spaces;
   }
 }

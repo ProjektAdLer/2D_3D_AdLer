@@ -7,6 +7,8 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IExitModalController from "./IExitModalController";
 import IExitModalPresenter from "./IExitModalPresenter";
+import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 
 @injectable()
 export default class ExitModalBuilder extends PresentationBuilder<
@@ -34,5 +36,8 @@ export default class ExitModalBuilder extends PresentationBuilder<
     CoreDIContainer.bind<IExitModalPresenter>(
       PRESENTATION_TYPES.IExitModalPresenter
     ).toConstantValue(this.presenter!);
+    CoreDIContainer.get<ILearningWorldPort>(
+      PORT_TYPES.ILearningWorldPort
+    ).registerAdapter(this.presenter!);
   }
 }

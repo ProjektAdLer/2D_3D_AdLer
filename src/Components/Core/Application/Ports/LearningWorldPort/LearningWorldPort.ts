@@ -9,6 +9,7 @@ import LearningSpaceTO from "../../DataTransferObjects/LearningSpaceTO";
 import UserLearningWorldsTO from "../../DataTransferObjects/UserLearningWorldsTO";
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import LearningWorldScoreTO from "../../DataTransferObjects/LearningWorldScoreTO";
+import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
 
 @injectable()
 export default class LearningWorldPort
@@ -54,6 +55,17 @@ export default class LearningWorldPort
     this.adapters.forEach((adapter) => {
       if (adapter.onLearningSpaceScored)
         adapter.onLearningSpaceScored(learningSpaceScoreTO);
+    });
+  }
+
+  public onLearningSpacePrecursorAndSuccessorLoaded(
+    LearningSpacePrecursorAndSuccessorTO: LearningSpacePrecursorAndSuccessorTO
+  ): void {
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLearningSpacePrecursorAndSuccessorLoaded)
+        adapter.onLearningSpacePrecursorAndSuccessorLoaded(
+          LearningSpacePrecursorAndSuccessorTO
+        );
     });
   }
 

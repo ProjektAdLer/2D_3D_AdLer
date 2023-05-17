@@ -7,6 +7,7 @@ import LearningWorldScoreTO from "../../DataTransferObjects/LearningWorldScoreTO
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { IAbstractPort } from "./IAbstractPort";
 import ILearningWorldAdapter from "../LearningWorldPort/ILearningWorldAdapter";
+import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
 
 export default interface ILearningWorldPort
   extends IAbstractPort<ILearningWorldAdapter> {
@@ -20,6 +21,9 @@ export default interface ILearningWorldPort
   // space
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void;
   onLearningSpaceScored(learningSpaceScoreTO: LearningSpaceScoreTO): void;
+  onLearningSpacePrecursorAndSuccessorLoaded(
+    LearningSpacePrecursorAndSuccessorTO: LearningSpacePrecursorAndSuccessorTO
+  ): void;
 
   // element
   onLearningElementLoaded(learningElementStartedTO: LearningElementTO): void;

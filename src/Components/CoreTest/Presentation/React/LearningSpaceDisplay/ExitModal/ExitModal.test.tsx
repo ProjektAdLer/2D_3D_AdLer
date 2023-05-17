@@ -8,6 +8,8 @@ import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilder
 
 let fakeModel = new ExitModalViewModel();
 fakeModel.isOpen.Value = true;
+fakeModel.successorSpaces.Value = [];
+fakeModel.precursorSpaces.Value = [];
 const fakeController = mock<ExitModalController>();
 
 describe("ExitModal", () => {
@@ -39,7 +41,7 @@ describe("ExitModal", () => {
     const componentUnderTest = render(<ExitModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
-  test("should close when clicked on close Button", () => {
+  test("should close when close button is clicked", () => {
     fakeModel.isOpen.Value = true;
     useBuilderMock([fakeModel, fakeController]);
     const componentUnderTest = render(<ExitModal />);
