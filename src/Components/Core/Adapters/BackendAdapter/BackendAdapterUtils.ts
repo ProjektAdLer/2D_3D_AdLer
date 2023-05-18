@@ -2,6 +2,7 @@ import BackendElementTO from "../../Application/DataTransferObjects/BackendEleme
 import BackendSpaceTO from "../../Application/DataTransferObjects/BackendSpaceTO";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
 import { LearningElementTypes } from "../../Domain/Types/LearningElementTypes";
+import { LearningSpaceTemplateTypes } from "../../Domain/Types/LearningSpaceTemplateTypes";
 import IDSL, { APIElement, APISpace } from "./Types/IDSL";
 
 /**
@@ -23,28 +24,37 @@ export default class BackendAdapterUtils {
     return response;
   }
 
-  // maps the spaces from the DSL to SpaceTOs and connects them with their elements
+  // maps the spaces from the DSL to BackendSpaceTOs and connects them with their elements
   private static mapSpaces(
     spaces: APISpace[],
     elements: BackendElementTO[]
   ): BackendSpaceTO[] {
     return spaces.map((space) => {
+      // compare template type to supported templates
+      let template: string;
+      if (!(space.spaceTemplate in LearningSpaceTemplateTypes)) {
+        template = LearningSpaceTemplateTypes.None;
+      } else {
+        template = space.spaceTemplate;
+      }
+
       return {
         id: space.spaceId,
         name: space.spaceName,
-        elements: elements.filter((element) =>
-          // TODO: change to reflect actual slot position
-          space.spaceSlotContents.includes(element.id)
-        ),
+        elements: space.spaceSlotContents.map((elementId) => {
+          if (elementId === null) return null;
+          else return elements.find((element) => element.id === elementId);
+        }),
         description: space.spaceDescription,
         goals: space.spaceGoals || [""],
         requirements: space.requiredSpacesToEnter,
         requiredScore: space.requiredPointsToComplete,
+        template: template,
       } as BackendSpaceTO;
     });
   }
 
-  // creates ElementTOs from the DSL if the element type is supported
+  // creates BackendElementTOs from the DSL if the element type is supported
   private static mapElements(elements: APIElement[]): BackendElementTO[] {
     return elements.flatMap((element) => {
       if (element.elementCategory in LearningElementTypes) {

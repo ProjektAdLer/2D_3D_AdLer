@@ -187,12 +187,14 @@ export default class LoadLearningWorldUseCase
 
   private createLearningElementEntities = (
     worldID: number,
-    elements: BackendElementTO[],
+    elements: (BackendElementTO | null)[],
     worldStatus: LearningWorldStatusTO
   ): LearningElementEntity[] => {
     const elementEntities: LearningElementEntity[] = [];
 
     elements.forEach((element) => {
+      if (!element) return;
+
       const newElementEntity: LearningElementEntity = {
         id: element.id,
         description: element.description,

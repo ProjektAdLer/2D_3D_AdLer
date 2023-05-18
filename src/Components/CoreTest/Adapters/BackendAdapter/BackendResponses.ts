@@ -2,6 +2,8 @@ import LearningElementTO from "../../../Core/Application/DataTransferObjects/Lea
 import IDSL from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
 import BackendWorldTO from "../../../Core/Application/DataTransferObjects/BackendWorldTO";
 import BackendSpaceTO from "../../../Core/Application/DataTransferObjects/BackendSpaceTO";
+import BackendAdapterUtils from "../../../Core/Adapters/BackendAdapter/BackendAdapterUtils";
+import BackendElementTO from "../../../Core/Application/DataTransferObjects/BackendElementTO";
 
 export const minimalGetWorldDataResponse: BackendWorldTO = {
   worldName: "TestWorld",
@@ -25,6 +27,7 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
           goals: ["TestGoals"],
         },
       ],
+      template: "L",
     },
   ],
 };
@@ -41,11 +44,12 @@ export const expectedWorldTO: BackendWorldTO = {
 export const expectedSpaceTO: BackendSpaceTO = {
   id: expect.any(Number),
   name: expect.any(String),
-  elements: expect.any(Array),
+  elements: expect.any(Array<BackendElementTO | null>),
   description: expect.any(String),
   goals: expect.arrayContaining([expect.any(String)]),
   requirements: expect.any(String),
   requiredScore: expect.any(Number),
+  template: expect.any(String),
 };
 
 export const expectedElementTO: Partial<LearningElementTO> = {

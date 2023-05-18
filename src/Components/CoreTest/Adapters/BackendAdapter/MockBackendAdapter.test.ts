@@ -39,7 +39,7 @@ describe("MockBackendAdapter", () => {
       expect(space).toEqual(expectedSpaceTO);
 
       space.elements?.forEach((element) => {
-        expect(element).toEqual(expectedElementTO);
+        expect(element).toBeNullOrEqual(expectedElementTO);
       });
     });
   });
