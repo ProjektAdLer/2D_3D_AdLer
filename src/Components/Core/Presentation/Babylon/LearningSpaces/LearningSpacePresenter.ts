@@ -75,7 +75,9 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     ];
   }
 
-  private createLearningElements(elementTOs: LearningElementTO[]): void {
+  private createLearningElements(
+    elementTOs: (LearningElementTO | null)[]
+  ): void {
     const director = CoreDIContainer.get<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
     );
@@ -86,6 +88,9 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     let elementPositions = this.getLearningElementPositions(elementTOs.length);
 
     elementTOs.forEach((elementTO) => {
+      // skip empty element slots
+      if (!elementTO) return;
+
       director.build(elementBuilder);
       (
         elementBuilder.getPresenter() as ILearningElementPresenter
