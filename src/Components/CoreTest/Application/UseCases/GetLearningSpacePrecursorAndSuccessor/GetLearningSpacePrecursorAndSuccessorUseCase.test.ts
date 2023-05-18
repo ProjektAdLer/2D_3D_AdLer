@@ -5,9 +5,16 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import GetLearningSpacePrecursorAndSuccessorUseCase from "../../../../Core/Application/UseCases/GetLearningSpacePrecursorAndSuccessor/GetLearningSpacePrecursorAndSuccessorUseCase";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
+import { IInternalCalculateLearningSpaceScoreUseCase } from "../../../../Core/Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
+import LearningSpaceScoreTO from "../../../../Core/Application/DataTransferObjects/LearningSpaceScoreTO";
+import ICalculateLearningSpaceAvailabilityUseCase from "../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
 
 const entityContainerMock = mock<IEntityContainer>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
+const internalCalculateLearningSpaceScoreUseCaseMock =
+  mock<IInternalCalculateLearningSpaceScoreUseCase>();
+const calculateLearningSpaceAvailabilityUseCaseMock =
+  mock<ICalculateLearningSpaceAvailabilityUseCase>();
 
 describe("GetLearningSpacePrecursorAndSuccessorUseCase", () => {
   let systemUnderTest: GetLearningSpacePrecursorAndSuccessorUseCase;
@@ -20,7 +27,14 @@ describe("GetLearningSpacePrecursorAndSuccessorUseCase", () => {
     CoreDIContainer.rebind<IGetUserLocationUseCase>(
       USECASE_TYPES.IGetUserLocationUseCase
     ).toConstantValue(getUserLocationUseCaseMock);
+    CoreDIContainer.rebind<IInternalCalculateLearningSpaceScoreUseCase>(
+      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase
+    ).toConstantValue(internalCalculateLearningSpaceScoreUseCaseMock);
+    CoreDIContainer.rebind<ICalculateLearningSpaceAvailabilityUseCase>(
+      USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase
+    ).toConstantValue(calculateLearningSpaceAvailabilityUseCaseMock);
   });
+
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.get(
       USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
@@ -113,6 +127,22 @@ describe("GetLearningSpacePrecursorAndSuccessorUseCase", () => {
         description: "testworld",
       },
     ]);
+    internalCalculateLearningSpaceScoreUseCaseMock.internalExecute.mockReturnValue(
+      {
+        spaceID: 1,
+        requiredScore: 1,
+        currentScore: 1,
+        maxScore: 1,
+      }
+    );
+    calculateLearningSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
+      {
+        requirementsString: "1",
+        requirementsSyntaxTree: null,
+        isAvailable: true,
+      }
+    );
+
     let expected = {
       id: 2,
       precursorSpaces: [

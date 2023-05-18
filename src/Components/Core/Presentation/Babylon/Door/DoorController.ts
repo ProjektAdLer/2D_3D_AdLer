@@ -6,6 +6,8 @@ import bind from "bind-decorator";
 import IBottomTooltipPresenter from "~ReactComponents/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IExitModalPresenter from "~ReactComponents/LearningSpaceDisplay/ExitModal/IExitModalPresenter";
+import IGetLearningSpacePrecursorAndSuccessorUseCase from "src/Components/Core/Application/UseCases/GetLearningSpacePrecursorAndSuccessor/IGetLearningSpacePrecursorAndSuccessorUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 export default class DoorController implements IDoorController {
   private bottomTooltipPresenter: IBottomTooltipPresenter;
@@ -35,7 +37,9 @@ export default class DoorController implements IDoorController {
     const pointerType = (event?.sourceEvent as PointerEvent).pointerType;
 
     if (pointerType === "mouse") {
-      this.exitModalPresenter.open();
+      CoreDIContainer.get<IGetLearningSpacePrecursorAndSuccessorUseCase>(
+        USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
+      ).execute();
     } else if (pointerType === "touch") {
       this.bottomTooltipPresenter.displayExitQueryTooltip();
     }
