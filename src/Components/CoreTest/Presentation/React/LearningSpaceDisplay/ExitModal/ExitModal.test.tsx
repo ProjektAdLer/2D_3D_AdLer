@@ -5,6 +5,7 @@ import ExitModal from "../../../../../Core/Presentation/React/LearningSpaceDispl
 import ExitModalController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ExitModal/ExitModalController";
 import ExitModalViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ExitModal/ExitModalViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import { LearningSpaceTemplateTypes } from "../../../../../Core/Domain/Types/LearningSpaceTemplateTypes";
 
 let fakeModel = new ExitModalViewModel();
 fakeModel.isOpen.Value = true;
@@ -44,6 +45,7 @@ describe("ExitModal", () => {
     const componentUnderTest = render(<ExitModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
+
   test("should close when close button is clicked", () => {
     fakeModel.isOpen.Value = true;
     useBuilderMock([fakeModel, fakeController]);
@@ -52,6 +54,7 @@ describe("ExitModal", () => {
     fireEvent.click(closeButton);
     expect(fakeModel.isOpen.Value).toBe(false);
   });
+
   test("should render if solved successor space is in the viewmodel", () => {
     fakeModel.isOpen.Value = true;
     fakeModel.successorSpaces.Value = [
@@ -67,13 +70,14 @@ describe("ExitModal", () => {
         requiredScore: 10,
         currentScore: 10,
         maxScore: 0,
-        template: "None",
+        template: LearningSpaceTemplateTypes.None,
       },
     ];
     useBuilderMock([fakeModel, fakeController]);
     const componentUnderTest = render(<ExitModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
+
   test("should render if available unsolved successor space is in the viewmodel", () => {
     fakeModel.isOpen.Value = true;
     fakeModel.successorSpaces.Value = [
@@ -89,13 +93,14 @@ describe("ExitModal", () => {
         requiredScore: 10,
         currentScore: 0,
         maxScore: 0,
-        template: "None",
+        template: LearningSpaceTemplateTypes.None,
       },
     ];
     useBuilderMock([fakeModel, fakeController]);
     const componentUnderTest = render(<ExitModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
+
   test("should render if unavailable successor space is in the viewmodel", () => {
     fakeModel.isOpen.Value = true;
     fakeModel.successorSpaces.Value = [
@@ -111,7 +116,7 @@ describe("ExitModal", () => {
         requiredScore: 10,
         currentScore: 0,
         maxScore: 0,
-        template: "None",
+        template: LearningSpaceTemplateTypes.None,
       },
     ];
     useBuilderMock([fakeModel, fakeController]);

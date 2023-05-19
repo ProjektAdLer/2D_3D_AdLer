@@ -1,5 +1,5 @@
 import { ComponentID } from "../Types/EntityTypes";
-import { LearningSpaceTemplateStrings } from "../Types/LearningSpaceTemplateTypes";
+import { LearningSpaceTemplateTypes } from "../Types/LearningSpaceTemplateTypes";
 import LearningElementEntity from "./LearningElementEntity";
 
 export default class LearningSpaceEntity {
@@ -10,6 +10,6 @@ export default class LearningSpaceEntity {
   public goals: string[];
   public requirements: string;
   public requiredScore: number;
-  public template: LearningSpaceTemplateStrings;
+  public template: LearningSpaceTemplateTypes;
   public parentWorldID: ComponentID;
 }
