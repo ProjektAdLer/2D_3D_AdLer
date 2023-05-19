@@ -8,11 +8,14 @@ import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilder
 
 let fakeModel = new ExitModalViewModel();
 fakeModel.isOpen.Value = true;
-fakeModel.successorSpaces.Value = [];
-fakeModel.precursorSpaces.Value = [];
 const fakeController = mock<ExitModalController>();
 
 describe("ExitModal", () => {
+  beforeEach(() => {
+    fakeModel.successorSpaces.Value = [];
+    fakeModel.precursorSpaces.Value = [];
+  });
+
   test("doesn't render without controller", () => {
     useBuilderMock([fakeModel, undefined]);
     const { container } = render(<ExitModal />);
@@ -48,5 +51,71 @@ describe("ExitModal", () => {
     const closeButton = componentUnderTest.getByRole("button", { name: "X" });
     fireEvent.click(closeButton);
     expect(fakeModel.isOpen.Value).toBe(false);
+  });
+  test("should render if solved successor space is in the viewmodel", () => {
+    fakeModel.isOpen.Value = true;
+    fakeModel.successorSpaces.Value = [
+      {
+        id: 1,
+        name: "testSpace",
+        elements: [],
+        description: "test",
+        goals: [],
+        requirementsString: "",
+        requirementsSyntaxTree: null,
+        isAvailable: true,
+        requiredScore: 10,
+        currentScore: 10,
+        maxScore: 0,
+        template: "None",
+      },
+    ];
+    useBuilderMock([fakeModel, fakeController]);
+    const componentUnderTest = render(<ExitModal />);
+    expect(componentUnderTest.container.childElementCount).toBe(1);
+  });
+  test("should render if available unsolved successor space is in the viewmodel", () => {
+    fakeModel.isOpen.Value = true;
+    fakeModel.successorSpaces.Value = [
+      {
+        id: 1,
+        name: "testSpace",
+        elements: [],
+        description: "test",
+        goals: [],
+        requirementsString: "",
+        requirementsSyntaxTree: null,
+        isAvailable: true,
+        requiredScore: 10,
+        currentScore: 0,
+        maxScore: 0,
+        template: "None",
+      },
+    ];
+    useBuilderMock([fakeModel, fakeController]);
+    const componentUnderTest = render(<ExitModal />);
+    expect(componentUnderTest.container.childElementCount).toBe(1);
+  });
+  test("should render if unavailable successor space is in the viewmodel", () => {
+    fakeModel.isOpen.Value = true;
+    fakeModel.successorSpaces.Value = [
+      {
+        id: 1,
+        name: "testSpace",
+        elements: [],
+        description: "test",
+        goals: [],
+        requirementsString: "",
+        requirementsSyntaxTree: null,
+        isAvailable: false,
+        requiredScore: 10,
+        currentScore: 0,
+        maxScore: 0,
+        template: "None",
+      },
+    ];
+    useBuilderMock([fakeModel, fakeController]);
+    const componentUnderTest = render(<ExitModal />);
+    expect(componentUnderTest.container.childElementCount).toBe(1);
   });
 });

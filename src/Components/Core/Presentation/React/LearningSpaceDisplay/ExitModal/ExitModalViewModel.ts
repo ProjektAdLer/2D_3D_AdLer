@@ -8,13 +8,4 @@ export default class ExitModalViewModel {
   precursorSpaces = new Observable<LearningSpaceTO[]>();
 
   isOpen: Observable<boolean> = new Observable<boolean>(false);
-  subsequentSpaces = new Observable<LearningSpaceTO[]>(
-    [
-      {
-        id: 1,
-        name: "element 1",
-      } as LearningSpaceTO,
-    ],
-    true
-  );
 }
