@@ -15,7 +15,7 @@ export default function VideoComponent({
   if (!videoComponent) return null;
 
   return (
-    <div className="flex justify-center items-top w-[90vw] w-max-[90vw] h-[80vh] ">
+    <div className="flex justify-center items-top w-[90vw] w-max-[90vw] h-[90vh] ">
       {videoComponent}
     </div>
   );
