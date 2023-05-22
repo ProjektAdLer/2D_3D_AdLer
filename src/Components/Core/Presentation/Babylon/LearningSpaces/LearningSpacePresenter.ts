@@ -34,7 +34,6 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
   }
 
   onLearningSpaceLoaded(spaceTO: LearningSpaceTO): void {
-    this.createAmbience();
     this.setViewModelData(spaceTO);
     this.createLearningElements(spaceTO.elements);
     this.createWindow();
@@ -148,16 +147,6 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     return doorPosition as [Vector3, number];
   }
 
-  private createAmbience(): void {
-    const director = CoreDIContainer.get<IPresentationDirector>(
-      BUILDER_TYPES.IPresentationDirector
-    );
-    const ambienceBuilder = CoreDIContainer.get<IPresentationBuilder>(
-      BUILDER_TYPES.IAmbienceBuilder
-    );
-
-    director.build(ambienceBuilder);
-  }
   private createWindow(): void {
     const director = CoreDIContainer.get<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
@@ -170,6 +159,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     this.windowPresenter = windowBuilder.getPresenter() as IWindowPresenter;
     this.windowPresenter.presentWindow(this.getWindowPosition());
   }
+
   private getWindowPosition(): [Vector3, number] {
     const windowPosition = [
       new Vector3(

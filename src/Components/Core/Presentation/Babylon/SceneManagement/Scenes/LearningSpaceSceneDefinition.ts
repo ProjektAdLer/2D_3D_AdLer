@@ -18,7 +18,6 @@ import type IPresentationDirector from "../../../PresentationBuilder/IPresentati
 import type IPresentationBuilder from "../../../PresentationBuilder/IPresentationBuilder";
 import type INavigation from "../../Navigation/INavigation";
 import ILearningSpacePresenter from "../../LearningSpaces/ILearningSpacePresenter";
-import history from "history/browser";
 import AvatarCameraViewModel from "../../AvatarCamera/AvatarCameraViewModel";
 import type IGetUserLocationUseCase from "src/Components/Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 
@@ -43,7 +42,9 @@ export default class LearningSpaceSceneDefinition extends AbstractSceneDefinitio
     @inject(BUILDER_TYPES.IAvatarCameraBuilder)
     private avatarCameraBuilder: IPresentationBuilder,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
-    private getUserLocationUseCase: IGetUserLocationUseCase
+    private getUserLocationUseCase: IGetUserLocationUseCase,
+    @inject(BUILDER_TYPES.IAmbienceBuilder)
+    private ambienceBuilder: IPresentationBuilder
   ) {
     super();
   }
@@ -59,6 +60,9 @@ export default class LearningSpaceSceneDefinition extends AbstractSceneDefinitio
     this.highlightLayer.blurHorizontalSize = 1;
     this.highlightLayer.blurVerticalSize = 1;
 
+    // create space ambience
+    this.director.build(this.ambienceBuilder);
+
     // create space
     this.director.build(this.spaceBuilder);
     this.spacePresenter =
@@ -69,7 +73,7 @@ export default class LearningSpaceSceneDefinition extends AbstractSceneDefinitio
     if (userLocation.spaceID && userLocation.worldID)
       await this.loadSpaceUseCase.executeAsync({
         worldID: userLocation.worldID,
-        spaceID: userLocation.spaceID!,
+        spaceID: userLocation.spaceID,
       });
 
     // create avatar
@@ -92,10 +96,5 @@ export default class LearningSpaceSceneDefinition extends AbstractSceneDefinitio
   @bind
   private async loadAvatarPreTask(): Promise<void> {
     await this.loadAvatarUseCase.executeAsync();
-  }
-
-  private parseSpaceIDFromLocation(): number {
-    // TODO: make extraction of the space ID more reliable
-    return Number.parseInt(history.location.pathname.split("/")[2]);
   }
 }
