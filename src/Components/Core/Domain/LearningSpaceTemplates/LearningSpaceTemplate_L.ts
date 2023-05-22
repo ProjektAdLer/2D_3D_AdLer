@@ -1,8 +1,8 @@
-import { LearningSpaceTemplateTypes } from "../Types/LearningSpaceTemplateTypes";
+import { LearningSpaceTemplateType } from "../Types/LearningSpaceTemplateType";
 import ILearningSpaceTemplate from "./ILearningSpaceTemplate";
 
 export const LearningSpaceTemplate_L: ILearningSpaceTemplate = {
-  name: LearningSpaceTemplateTypes.L,
+  name: LearningSpaceTemplateType.L,
   cornerPoints: [
     { x: 0, y: -7.6 }, // A
     { x: -6.8, y: -7.6 }, // B
@@ -28,7 +28,6 @@ export const LearningSpaceTemplate_L: ILearningSpaceTemplate = {
       position: { x: -6, y: -2 },
       orientation: { rotation: Math.PI / 2 },
     },
-
     {
       // 3
       position: { x: -6, y: 1.2 },

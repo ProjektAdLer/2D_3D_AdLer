@@ -1,13 +1,13 @@
-import { LearningSpaceTemplateTypes } from "../Types/LearningSpaceTemplateTypes";
+import { LearningSpaceTemplateType } from "../Types/LearningSpaceTemplateType";
 import ILearningSpaceTemplate from "./ILearningSpaceTemplate";
 import { LearningSpaceTemplate_L as LearningSpaceTemplate_L } from "./LearningSpaceTemplate_L";
 
 export default class LearningSpaceTemplateLookup {
   static getLearningSpaceTemplate(
-    type: LearningSpaceTemplateTypes
+    type: LearningSpaceTemplateType
   ): ILearningSpaceTemplate {
     switch (type) {
-      case LearningSpaceTemplateTypes.L:
+      case LearningSpaceTemplateType.L:
         return LearningSpaceTemplate_L;
       //TODO: Add other templates here
     }
