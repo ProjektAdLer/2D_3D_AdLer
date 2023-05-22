@@ -6,7 +6,6 @@ import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IGetUserLocationUseCase from "../../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
-import { get } from "http";
 
 const mockHistoryBack = jest.spyOn(history, "back");
 const mockHistoryPush = jest.spyOn(history, "push");
