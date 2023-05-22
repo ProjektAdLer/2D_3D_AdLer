@@ -13,25 +13,25 @@ export default function YoutubeVideoHost({ url }: { url: string }) {
   const [videoUrl, setVideoUrl] = useState("");
   const [videoTitle, setVideoTitle] = useState("VideoTitle");
 
-  async function getYoutubeVideoUrl() {
-    const response = await axios.get<{ html: string; title: string }>(
-      `https://www.youtube.com/oembed?url=${url}`
-    );
-
-    const regex = /src="([^"]*)"/;
-    const srcArray = regex.exec(response.data.html);
-
-    if (srcArray?.length === 2) {
-      setVideoUrl(srcArray[1]);
-      setVideoTitle(response.data.title);
-    } else {
-      logger.error("Could not extract video url from youtube oembed api");
-      setVideoTitle("Could not extract video url from youtube oembed api");
-      setVideoUrl("");
-    }
-  }
-
   useEffect(() => {
+    async function getYoutubeVideoUrl() {
+      const response = await axios.get<{ html: string; title: string }>(
+        `https://www.youtube.com/oembed?url=${url}`
+      );
+
+      const regex = /src="([^"]*)"/;
+      const srcArray = regex.exec(response.data.html);
+
+      if (srcArray?.length === 2) {
+        setVideoUrl(srcArray[1]);
+        setVideoTitle(response.data.title);
+      } else {
+        logger.error("Could not extract video url from youtube oembed api");
+        setVideoTitle("Could not extract video url from youtube oembed api");
+        setVideoUrl("");
+      }
+    }
+
     getYoutubeVideoUrl();
   }, [url]);
 

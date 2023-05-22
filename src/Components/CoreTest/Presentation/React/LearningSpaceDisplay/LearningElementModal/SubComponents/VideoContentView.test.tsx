@@ -7,23 +7,22 @@ import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDICo
 import VideoComponent from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoComponent";
 import LearningElementModalViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 
-import * as axios from "axios";
+jest.mock(
+  "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/YouTubeVideoHost.tsx"
+);
+jest.mock(
+  "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/VimeoVideoHost.tsx"
+);
+jest.mock(
+  "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/OpencastVideoHost.tsx"
+);
 
 jest.mock("axios");
 
 describe("VideoComponent", () => {
-  test("should render when a valid Link is Provided", async () => {
-    // @ts-ignore
-    axios.get.mockResolvedValue({
-      data: {
-        html: '<iframe width="480" height="270" src="https://www.youtube.com/embed/UEJpDrXuP98?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-        title: "Abroad in Japan - YouTube",
-      },
-    });
-
+  test("should render when a valid Link Youtube is Provided", async () => {
     let component: RenderResult;
     const vm = new LearningElementModalViewModel();
-    vm.parentWorldID.Value = 1;
     vm.id.Value = 1;
     vm.filePath.Value =
       "https://www.youtube.com/watch?v=UEJpDrXuP98&ab_channel=AbroadinJapan&token=46dd4cbdafda7fc864c8ce73aae3a897";
@@ -37,15 +36,43 @@ describe("VideoComponent", () => {
     });
 
     expect(component!).toBeDefined();
-    expect(component!.getByTitle("Abroad in Japan - YouTube")).toBeDefined();
+  });
+
+  test("should render when a valid Link Vimeo is Provided", async () => {
+    let component: RenderResult;
+    const vm = new LearningElementModalViewModel();
+    vm.id.Value = 1;
+    vm.filePath.Value = "https://vimeo.com/123456789";
+
+    await act(async () => {
+      component = render(
+        <Provider container={CoreDIContainer}>
+          <VideoComponent viewModel={vm} />
+        </Provider>
+      );
+    });
+
+    expect(component!).toBeDefined();
+  });
+
+  test("should render when a valid Link Opencast is Provided", async () => {
+    let component: RenderResult;
+    const vm = new LearningElementModalViewModel();
+    vm.id.Value = 1;
+    vm.filePath.Value = "paella";
+
+    await act(async () => {
+      component = render(
+        <Provider container={CoreDIContainer}>
+          <VideoComponent viewModel={vm} />
+        </Provider>
+      );
+    });
+
+    expect(component!).toBeDefined();
   });
 
   test("should throw an error, if no valid link is provided", async () => {
-    // @ts-ignore
-    axios.get.mockResolvedValue({
-      data: "Bad response",
-    });
-
     let component: RenderResult;
     const vm = new LearningElementModalViewModel();
     vm.parentWorldID.Value = 1;
@@ -64,5 +91,25 @@ describe("VideoComponent", () => {
     expect(
       component!.getByText("No Video Component found for given URLXXXX")
     ).toBeDefined();
+  });
+
+  test("should return null, if no link is provided", async () => {
+    let component: RenderResult;
+    const vm = new LearningElementModalViewModel();
+    vm.parentWorldID.Value = 1;
+    vm.id.Value = 1;
+    // @ts-ignore
+    vm.filePath.Value = undefined;
+
+    await act(async () => {
+      component = render(
+        <Provider container={CoreDIContainer}>
+          <VideoComponent viewModel={vm} />
+        </Provider>
+      );
+    });
+
+    expect(component!).toBeDefined();
+    expect(component!.container).toBeEmptyDOMElement();
   });
 });
