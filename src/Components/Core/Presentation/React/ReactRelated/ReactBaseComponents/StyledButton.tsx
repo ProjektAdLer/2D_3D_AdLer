@@ -4,7 +4,7 @@ import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   shape?: "square" | "freefloatleft" | "freefloatcenter";
-  color?: "default" | "success" | "pressed" | "locked";
+  color?: "default" | "success" | "pressed" | "locked" | "highlight";
   disabled?: boolean;
   icon?: string;
 }
@@ -23,6 +23,7 @@ export default function StyledButton({
     success: "bg-adlergreen",
     pressed: "bg-buttonpressedblue",
     locked: "bg-adlerbuttonlocked",
+    highlight: "bg-nodehandlecolor",
 
     // Shapes
     square:
@@ -38,7 +39,7 @@ export default function StyledButton({
         className,
         buttonConfig[shape],
         disabled
-          ? "text-adlerdeactivatedtext bg-adlerbuttonlocked hover:cursor-default rounded-lg p-2"
+          ? "text-adlerdeactivatedtext bg-adlerbuttonlocked hover:cursor-default flex items-center rounded-lg font-regular overflow-hidden"
           : tailwindMerge(
               "flex items-center text-sm rounded-lg hover:cursor-pointer hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden",
               buttonConfig[color]

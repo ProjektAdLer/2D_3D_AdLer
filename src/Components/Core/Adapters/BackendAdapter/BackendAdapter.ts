@@ -25,9 +25,6 @@ import { logger } from "src/Lib/Logger";
 
 @injectable()
 export default class BackendAdapter implements IBackendPort {
-  /**
-   *
-   */
   constructor() {
     try {
       axios.defaults.baseURL = new URL(config.serverURL).toString();

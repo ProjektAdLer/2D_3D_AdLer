@@ -8,6 +8,7 @@ import LearningSpaceScoreTO from "../../../../Core/Application/DataTransferObjec
 import LearningElementTO from "../../../../Core/Application/DataTransferObjects/LearningElementTO";
 import UserLearningWorldsTO from "../../../../Core/Application/DataTransferObjects/UserLearningWorldsTO";
 import LearningWorldScoreTO from "../../../../Core/Application/DataTransferObjects/LearningWorldScoreTO";
+import LearningSpacePrecursorAndSuccessorTO from "../../../../Core/Application/DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
 
 describe("LearningWorldPort", () => {
   let systemUnderTest: LearningWorldPort;
@@ -82,6 +83,19 @@ describe("LearningWorldPort", () => {
     expect(worldAdapterMock.onLearningSpaceScored).toBeCalledWith(
       mockedSpaceScoreTO
     );
+  });
+  test("onLearningSpacePrecursorandSuccessorLoaded calls a registered adapter", () => {
+    const worldAdapterMock = mock<ILearningWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockedSpacePuSTO = mock<LearningSpacePrecursorAndSuccessorTO>();
+
+    systemUnderTest.onLearningSpacePrecursorAndSuccessorLoaded(
+      mockedSpacePuSTO
+    );
+
+    expect(
+      worldAdapterMock.onLearningSpacePrecursorAndSuccessorLoaded
+    ).toBeCalledWith(mockedSpacePuSTO);
   });
 
   test("onLearningElementLoaded calls a registered adapter", () => {

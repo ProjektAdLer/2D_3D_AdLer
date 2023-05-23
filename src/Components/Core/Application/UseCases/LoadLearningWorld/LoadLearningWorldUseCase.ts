@@ -157,7 +157,7 @@ export default class LoadLearningWorldUseCase
     const spaceEntities: LearningSpaceEntity[] = [];
 
     apiWorldDataResponse.spaces?.forEach((space) => {
-      const elementEntities: LearningElementEntity[] = space.elements
+      const elementEntities: (LearningElementEntity | null)[] = space.elements
         ? this.createLearningElementEntities(
             worldID,
             space.elements,
@@ -175,6 +175,7 @@ export default class LoadLearningWorldUseCase
             goals: space.goals,
             requirements: space.requirements,
             requiredScore: space.requiredScore,
+            template: space.template,
             parentWorldID: worldID,
           },
           LearningSpaceEntity
@@ -187,13 +188,13 @@ export default class LoadLearningWorldUseCase
 
   private createLearningElementEntities = (
     worldID: number,
-    elements: BackendElementTO[],
+    elements: (BackendElementTO | null)[],
     worldStatus: LearningWorldStatusTO
-  ): LearningElementEntity[] => {
-    const elementEntities: LearningElementEntity[] = [];
+  ): (LearningElementEntity | null)[] => {
+    return elements.map((element) => {
+      if (element === null) return null;
 
-    elements.forEach((element) => {
-      const newElementEntity: LearningElementEntity = {
+      let newElementEntity: LearningElementEntity = {
         id: element.id,
         description: element.description,
         goals: element.goals,
@@ -206,15 +207,13 @@ export default class LoadLearningWorldUseCase
         parentWorldID: worldID,
       };
 
-      elementEntities.push(
-        this.container.createEntity<LearningElementEntity>(
-          newElementEntity,
-          LearningElementEntity
-        )
+      newElementEntity = this.container.createEntity<LearningElementEntity>(
+        newElementEntity,
+        LearningElementEntity
       );
-    });
 
-    return elementEntities;
+      return newElementEntity;
+    });
   };
 
   private createLearningWorldEntity(

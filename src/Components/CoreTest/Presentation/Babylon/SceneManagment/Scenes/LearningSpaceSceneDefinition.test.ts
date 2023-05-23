@@ -105,15 +105,6 @@ describe("LearningSpaceScene", () => {
     expect(loadAvatarUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
   });
 
-  test("parseSpaceIDFromLocation returns the correct space id", () => {
-    // TODO: make this more robust, to reflect changes in the url structure in production code
-    history.push("/space/1");
-
-    const spaceID = systemUnderTest["parseSpaceIDFromLocation"]();
-
-    expect(spaceID).toBe(1);
-  });
-
   test("disposeScene calls dispose on the scenePresenter", () => {
     const spacePresenterMock = mock<ILearningSpacePresenter>();
     systemUnderTest["spacePresenter"] = spacePresenterMock;

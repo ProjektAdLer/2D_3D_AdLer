@@ -67,6 +67,9 @@ export default class CalculateLearningSpaceScoreUseCase
 
     let maxPoints = 0;
     const currentScore = space.elements.reduce((acumulator, current) => {
+      // skip empty element slots
+      if (!current) return acumulator;
+
       maxPoints += current.value;
       if (current.hasScored) {
         return acumulator + current.value;

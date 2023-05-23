@@ -1,3 +1,4 @@
+import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
 import ILearningElementsDropdownPresenter from "./ILearningElementsDropdownPresenter";
 import LearningElementsDropdownViewModel from "./LearningElementsDropdownViewModel";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
@@ -8,10 +9,23 @@ export default class LearningElementsDropdownPresenter
   constructor(private viewModel: LearningElementsDropdownViewModel) {}
 
   onLearningSpaceLoaded(spaceTO: LearningSpaceTO): void {
-    this.viewModel.elementNames.Value = spaceTO.elements.map(
-      (element) => element.name
+    // filter out null elements because of empty slots
+    const { filteredElements, elementNames } = spaceTO.elements.reduce(
+      (results, element) => {
+        if (!element) return results;
+
+        results.filteredElements.push(element);
+        results.elementNames.push(element.name);
+
+        return results;
+      },
+      { filteredElements: [], elementNames: [] } as {
+        filteredElements: LearningElementTO[];
+        elementNames: string[];
+      }
     );
 
-    this.viewModel.elements.Value = spaceTO.elements;
+    this.viewModel.elementNames.Value = elementNames;
+    this.viewModel.elements.Value = filteredElements;
   }
 }

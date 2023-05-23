@@ -16,4 +16,17 @@ describe("ExitModalPresenter", () => {
     systemUnderTest.open();
     expect(viewModel.isOpen.Value).toBe(true);
   });
+
+  test("onLearningSpacePrecursorAndSuccessorLoaded sets precursor Spaces and successor Spaces", () => {
+    let spaceID = 1;
+    let precursorSpaces = [1, 2, 3];
+    let successorSpaces = [4, 5, 6];
+    systemUnderTest.onLearningSpacePrecursorAndSuccessorLoaded({
+      spaceID,
+      precursorSpaces,
+      successorSpaces,
+    });
+    expect(viewModel.precursorSpaces.Value).toMatchObject(precursorSpaces);
+    expect(viewModel.successorSpaces.Value).toMatchObject(successorSpaces);
+  });
 });

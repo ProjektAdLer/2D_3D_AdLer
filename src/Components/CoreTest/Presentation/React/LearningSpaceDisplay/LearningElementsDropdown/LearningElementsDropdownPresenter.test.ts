@@ -13,34 +13,34 @@ describe("LearningElementsDropDownPresenter", () => {
   });
 
   test("should set the Learning Elements in the ViewModel", () => {
-    const elements: LearningElementTO[] = [
-      {
-        id: 1,
-        name: "Test",
-        value: 0,
-        parentSpaceID: 0,
-        parentWorldID: 0,
-        description: "",
-        goals: [""],
-        type: "video",
-        hasScored: false,
-      },
-    ];
-
+    const mockElement: LearningElementTO = {
+      id: 1,
+      name: "Test",
+      value: 0,
+      parentSpaceID: 0,
+      parentWorldID: 0,
+      description: "",
+      goals: [""],
+      type: "video",
+      hasScored: false,
+    };
     const spaceTO: LearningSpaceTO = {
       id: 0,
       name: "",
-      elements: elements,
+      elements: [mockElement, null],
       description: "",
       goals: [""],
-      requirements: "",
+      requirementsString: "",
       requiredScore: 0,
       currentScore: 0,
       maxScore: 0,
+      requirementsSyntaxTree: null,
+      isAvailable: true,
+      template: "None",
     };
 
     systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
-    expect(vm.elements.Value).toBe(elements);
+    expect(vm.elements.Value).toStrictEqual([mockElement]);
   });
 });

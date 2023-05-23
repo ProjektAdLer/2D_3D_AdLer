@@ -23,14 +23,18 @@ export interface APITopic {
   topicContents: number[];
 }
 
+type SpaceSlotItem = number | null;
+
 export interface APISpace {
   spaceId: number;
   spaceName: string;
   spaceDescription: string;
   spaceGoals: string[];
-  spaceContents: number[];
+  spaceSlotContents: SpaceSlotItem[];
   requiredPointsToComplete: number;
   requiredSpacesToEnter: string;
+  spaceTemplate: string;
+  spaceTemplateStyle: string;
 }
 
 export interface APIElement {
@@ -41,6 +45,7 @@ export interface APIElement {
   elementCategory: string;
   elementFileType: string;
   elementMaxScore: number;
+  elementModel: string;
 }
 
 export default IDSL;

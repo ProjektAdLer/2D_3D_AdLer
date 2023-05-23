@@ -4,6 +4,7 @@ import LearningSpaceTO from "../../DataTransferObjects/LearningSpaceTO";
 import LearningWorldTO from "../../DataTransferObjects/LearningWorldTO";
 import LearningWorldScoreTO from "../../DataTransferObjects/LearningWorldScoreTO";
 import UserLearningWorldsTO from "../../DataTransferObjects/UserLearningWorldsTO";
+import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 
 /**
@@ -20,6 +21,9 @@ export default interface ILearningWorldAdapter {
   // space
   onLearningSpaceLoaded?(learningSpaceTO: LearningSpaceTO): void;
   onLearningSpaceScored?(learningSpaceScoreTO: LearningSpaceScoreTO): void;
+  onLearningSpacePrecursorAndSuccessorLoaded?(
+    LearningSpacePrecursorAndSuccessorTO: LearningSpacePrecursorAndSuccessorTO
+  ): void;
 
   // element
   onLearningElementLoaded?(learningElementTO: LearningElementTO): void;
