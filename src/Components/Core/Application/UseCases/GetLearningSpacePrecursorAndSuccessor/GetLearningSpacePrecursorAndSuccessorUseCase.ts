@@ -104,14 +104,12 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
     worldID: ComponentID
   ): LearningSpaceTO[] {
     spaces.forEach((spaceTO) => {
-      console.log(spaceTO, "spaceTOoben");
       const spaceScoreTO = this.calculateSpaceScore.internalExecute({
         spaceID: spaceTO.id,
         worldID: worldID,
       });
       spaceTO.currentScore = spaceScoreTO.currentScore;
       spaceTO.maxScore = spaceScoreTO.maxScore;
-      console.log(spaceTO, "spaceTO");
       // fill with availability data
       const availabilityData =
         this.calculateSpaceAvailabilityUseCase.internalExecute({
