@@ -5,6 +5,7 @@ export default function OpencastVideoHost({ url }: { url: string }) {
       className="w-full rounded-lg aspect-video"
       src={url}
       allowFullScreen
+      title="Opencast Video Player"
     ></iframe>
   );
 }
