@@ -94,10 +94,8 @@ describe("LearningSpacePresenter", () => {
     );
   });
 
-  test("presentSpace calls private subroutines", () => {
+  test("onLearningSpaceLoaded calls private subroutines", () => {
     // mock sub routines here, they are tested separately later
-    const setViewModelDataMock = jest.fn();
-    systemUnderTest["setViewModelData"] = setViewModelDataMock;
     const createElementsMock = jest.fn();
     systemUnderTest["createLearningElements"] = createElementsMock;
     const createDoorMock = jest.fn();
@@ -107,53 +105,35 @@ describe("LearningSpacePresenter", () => {
 
     systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
-    expect(setViewModelDataMock).toHaveBeenCalledTimes(1);
     expect(createElementsMock).toHaveBeenCalledTimes(1);
     expect(createDoorMock).toHaveBeenCalledTimes(1);
     expect(createWindowMock).toHaveBeenCalledTimes(1);
   });
 
-  test("setViewModelData sets the space id in the ViewModel", () => {
-    systemUnderTest["setViewModelData"](spaceTO);
+  test("onLearningSpaceLoaded sets the space id in the ViewModel", () => {
+    // mock sub routines here, they are tested separately later
+    const createElementsMock = jest.fn();
+    systemUnderTest["createLearningElements"] = createElementsMock;
+    const createDoorMock = jest.fn();
+    systemUnderTest["createDoor"] = createDoorMock;
+    const createWindowMock = jest.fn();
+    systemUnderTest["createWindow"] = createWindowMock;
+
+    systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
     expect(systemUnderTest["viewModel"].id).toEqual(spaceTO.id);
   });
 
-  test("setSpaceDimensions sets the space dimensions to array_length/2*4 length and 6 width for 1 Element", () => {
-    systemUnderTest["setLearningSpaceDimensions"](spaceTO);
-
-    expect(systemUnderTest["viewModel"].spaceLength.Value).toEqual(
-      (spaceTO.elements.length / 2) * 4
-    );
-    expect(systemUnderTest["viewModel"].spaceWidth.Value).toEqual(6);
-  });
-
-  test("setSpaceDimensions sets the space dimensions to array_length/2*4 length and 8 width for 2 or more Elements", () => {
-    spaceTO.elements.push({
-      id: 3,
-      name: "test",
-      description: "test",
-      goals: ["test"],
-      value: 42,
-      type: "h5p",
-      parentSpaceID: 1,
-      hasScored: false,
-      parentWorldID: 1,
-    });
-
-    systemUnderTest["setLearningSpaceDimensions"](spaceTO);
-
-    expect(systemUnderTest["viewModel"].spaceLength.Value).toEqual(
-      (spaceTO.elements.length / 2) * 4
-    );
-    expect(systemUnderTest["viewModel"].spaceWidth.Value).toEqual(8);
-  });
-
   test("createLearningElements calls the builder for each Element", () => {
+    const createDoorMock = jest.fn();
+    systemUnderTest["createDoor"] = createDoorMock;
+    const createWindowMock = jest.fn();
+    systemUnderTest["createWindow"] = createWindowMock;
+
     builderMock.getPresenter.mockReturnValue(mock<ILearningElementPresenter>());
     builderMock.getView.mockReturnValue(mock<LearningElementView>());
 
-    systemUnderTest["createLearningElements"](spaceTO.elements);
+    systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
     expect(directorMock.build).toHaveBeenCalledTimes(spaceTO.elements.length);
     expect(directorMock.build).toHaveBeenCalledWith(builderMock);
@@ -161,11 +141,16 @@ describe("LearningSpacePresenter", () => {
   });
 
   test("createLearningElements calls the elementPresenter for each Element", () => {
+    const createDoorMock = jest.fn();
+    systemUnderTest["createDoor"] = createDoorMock;
+    const createWindowMock = jest.fn();
+    systemUnderTest["createWindow"] = createWindowMock;
+
     const elementPresenterMock = mock<ILearningElementPresenter>();
     builderMock.getPresenter.mockReturnValue(elementPresenterMock);
     builderMock.getView.mockReturnValue(mock<LearningElementView>());
 
-    systemUnderTest["createLearningElements"](spaceTO.elements);
+    systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
     expect(elementPresenterMock.presentLearningElement).toHaveBeenCalledTimes(
       spaceTO.elements.length
@@ -183,20 +168,21 @@ describe("LearningSpacePresenter", () => {
   });
 
   test("createLearningElements calls the elementView for each Element", () => {
+    const createDoorMock = jest.fn();
+    systemUnderTest["createDoor"] = createDoorMock;
+    const createWindowMock = jest.fn();
+    systemUnderTest["createWindow"] = createWindowMock;
+
     builderMock.getPresenter.mockReturnValue(mock<ILearningElementPresenter>());
     const elementViewMock = mock<LearningElementView>();
     builderMock.getView.mockReturnValue(elementViewMock);
 
-    systemUnderTest["createLearningElements"](spaceTO.elements);
+    systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
     expect(elementViewMock.setupLearningElement).toHaveBeenCalledTimes(
       spaceTO.elements.length
     );
   });
-
-  test.todo(
-    "test element position/rotation calculation, when its well defined"
-  );
 
   test("createDoor creates a door with its builder and calls the new presenter", () => {
     const doorPresenterMock = mock<IDoorPresenter>();
@@ -208,8 +194,6 @@ describe("LearningSpacePresenter", () => {
     expect(directorMock.build).toHaveBeenCalledWith(builderMock);
     expect(doorPresenterMock.presentDoor).toHaveBeenCalledTimes(1);
   });
-
-  test.todo("test door position/rotation calculation, when its well defined");
 
   test("should open door, when winning score is presented", () => {
     const doorPresenterMock = mock<IDoorPresenter>();
