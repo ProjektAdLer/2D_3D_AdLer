@@ -1,11 +1,11 @@
 import { LearningSpaceTemplate_L } from "../../../Core/Domain/LearningSpaceTemplates/LearningSpaceTemplate_L";
 import LearningSpaceLookup from "../../../Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
-import { LearningSpaceTemplateTypes } from "../../../Core/Domain/Types/LearningSpaceTemplateTypes";
+import { LearningSpaceTemplateType } from "../../../Core/Domain/Types/LearningSpaceTemplateType";
 
 describe("LearningSpaceTemplateLookup", () => {
   test("getLearningSpaceTemplate return correct template for L", () => {
     const result = LearningSpaceLookup.getLearningSpaceTemplate(
-      LearningSpaceTemplateTypes.L
+      LearningSpaceTemplateType.L
     );
     expect(result).toMatchObject(LearningSpaceTemplate_L);
   });
@@ -14,7 +14,7 @@ describe("LearningSpaceTemplateLookup", () => {
     // only throws error if the param is forcibly cast to the enum type
     expect(() => {
       LearningSpaceLookup.getLearningSpaceTemplate(
-        "UnknownTemplate" as LearningSpaceTemplateTypes
+        "UnknownTemplate" as LearningSpaceTemplateType
       );
     }).toThrowError(
       "LearningSpaceTemplatesLookup.getLearningSpaceTemplate: Learning space template for UnknownTemplate not found."

@@ -1,4 +1,4 @@
-export enum LearningSpaceTemplateTypes {
+export enum LearningSpaceTemplateType {
   L = "L_32x31_10L",
   R6 = "R_20x20_6L",
   R8 = "R_20x30_8L",
@@ -6,4 +6,4 @@ export enum LearningSpaceTemplateTypes {
 }
 
 export type LearningSpaceTemplateStrings =
-  keyof typeof LearningSpaceTemplateTypes;
+  keyof typeof LearningSpaceTemplateType;

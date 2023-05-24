@@ -2,7 +2,7 @@ import BackendElementTO from "../../Application/DataTransferObjects/BackendEleme
 import BackendSpaceTO from "../../Application/DataTransferObjects/BackendSpaceTO";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
 import { LearningElementTypes } from "../../Domain/Types/LearningElementTypes";
-import { LearningSpaceTemplateTypes } from "../../Domain/Types/LearningSpaceTemplateTypes";
+import { LearningSpaceTemplateType } from "../../Domain/Types/LearningSpaceTemplateType";
 import IDSL, { APIElement, APISpace } from "./Types/IDSL";
 
 /**
@@ -32,8 +32,8 @@ export default class BackendAdapterUtils {
     return spaces.map((space) => {
       // compare template type to supported templates
       let template: string;
-      if (!(space.spaceTemplate in LearningSpaceTemplateTypes)) {
-        template = LearningSpaceTemplateTypes.None;
+      if (!(space.spaceTemplate in LearningSpaceTemplateType)) {
+        template = LearningSpaceTemplateType.None;
       } else {
         template = space.spaceTemplate;
       }

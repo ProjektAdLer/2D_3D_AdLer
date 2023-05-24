@@ -1,4 +1,4 @@
-import { LearningSpaceTemplateTypes } from "../Types/LearningSpaceTemplateTypes";
+import { LearningSpaceTemplateType } from "../Types/LearningSpaceTemplateType";
 
 export interface Point {
   x: number;
@@ -21,7 +21,7 @@ export interface WallSegment {
 }
 
 export default interface ILearningSpaceTemplate {
-  name: LearningSpaceTemplateTypes;
+  name: LearningSpaceTemplateType;
   cornerPoints: Point[];
   walls: WallSegment[];
   elementSlots: Transform[];

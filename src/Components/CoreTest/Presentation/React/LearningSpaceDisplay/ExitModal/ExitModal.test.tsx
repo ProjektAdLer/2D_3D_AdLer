@@ -5,7 +5,7 @@ import ExitModal from "../../../../../Core/Presentation/React/LearningSpaceDispl
 import ExitModalController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ExitModal/ExitModalController";
 import ExitModalViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ExitModal/ExitModalViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
-import { LearningSpaceTemplateTypes } from "../../../../../Core/Domain/Types/LearningSpaceTemplateTypes";
+import { LearningSpaceTemplateType } from "../../../../../Core/Domain/Types/LearningSpaceTemplateType";
 
 let fakeModel = new ExitModalViewModel();
 fakeModel.isOpen.Value = true;
@@ -70,7 +70,7 @@ describe("ExitModal", () => {
         requiredScore: 10,
         currentScore: 10,
         maxScore: 0,
-        template: LearningSpaceTemplateTypes.None,
+        template: LearningSpaceTemplateType.None,
       },
     ];
     useBuilderMock([fakeModel, fakeController]);
@@ -93,7 +93,7 @@ describe("ExitModal", () => {
         requiredScore: 10,
         currentScore: 0,
         maxScore: 0,
-        template: LearningSpaceTemplateTypes.None,
+        template: LearningSpaceTemplateType.None,
       },
     ];
     useBuilderMock([fakeModel, fakeController]);
@@ -116,7 +116,7 @@ describe("ExitModal", () => {
         requiredScore: 10,
         currentScore: 0,
         maxScore: 0,
-        template: LearningSpaceTemplateTypes.None,
+        template: LearningSpaceTemplateType.None,
       },
     ];
     useBuilderMock([fakeModel, fakeController]);
