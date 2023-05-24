@@ -32,7 +32,11 @@ export default class BackendAdapterUtils {
     return spaces.map((space) => {
       // compare template type to supported templates
       let template: string;
-      if (!(space.spaceTemplate in LearningSpaceTemplateType)) {
+      if (
+        !Object.values<string>(LearningSpaceTemplateType).includes(
+          space.spaceTemplate
+        )
+      ) {
         template = LearningSpaceTemplateType.None;
       } else {
         template = space.spaceTemplate;
