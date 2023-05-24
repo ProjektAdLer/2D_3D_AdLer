@@ -10,9 +10,10 @@ export default function VideoComponent({
   viewModel: LearningElementModalViewModel;
 }) {
   const [filepath] = useObservable(viewModel.filePath);
-  const videoComponent = getVideoComponent(filepath); // Set the video component using regex
 
-  if (!videoComponent) return null;
+  if (!filepath) return null;
+
+  const videoComponent = getVideoComponent(filepath); // Set the video component using regex
 
   return (
     <div className="flex justify-center items-top w-[90vw] w-max-[90vw] h-[90vh] ">

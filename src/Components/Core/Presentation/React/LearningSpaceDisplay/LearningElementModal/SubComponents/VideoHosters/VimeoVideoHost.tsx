@@ -6,25 +6,25 @@ export default function YoutubeVideoHost({ url }: { url: string }) {
   const [videoUrl, setVideoUrl] = useState("");
   const [videoTitle, setVideoTitle] = useState("VideoTitle");
 
-  async function getVimeoVideoUrl() {
-    const response = await axios.get<{ html: string; title: string }>(
-      `https://vimeo.com/api/oembed.json?url=${url}`
-    );
-
-    const regex = /src="([^"]*)"/;
-    const srcArray = regex.exec(response.data.html);
-
-    if (srcArray?.length === 2) {
-      setVideoUrl(srcArray[1]);
-      setVideoTitle(response.data.title);
-    } else {
-      logger.error("Could not extract video url from vimeo oembed api");
-      setVideoTitle("Could not extract video url from vimeo oembed api");
-      setVideoUrl("");
-    }
-  }
-
   useEffect(() => {
+    async function getVimeoVideoUrl() {
+      const response = await axios.get<{ html: string; title: string }>(
+        `https://vimeo.com/api/oembed.json?url=${url}`
+      );
+
+      const regex = /src="([^"]*)"/;
+      const srcArray = regex.exec(response.data.html);
+
+      if (srcArray?.length === 2) {
+        setVideoUrl(srcArray[1]);
+        setVideoTitle(response.data.title);
+      } else {
+        logger.error("Could not extract video url from vimeo oembed api");
+        setVideoTitle("Could not extract video url from vimeo oembed api");
+        setVideoUrl("");
+      }
+    }
+
     getVimeoVideoUrl();
   }, [url]);
 
