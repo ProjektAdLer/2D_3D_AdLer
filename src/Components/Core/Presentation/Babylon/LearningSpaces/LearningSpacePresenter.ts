@@ -1,4 +1,3 @@
-import { Vector2, Vector3 } from "@babylonjs/core";
 import { injectable } from "inversify";
 import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
