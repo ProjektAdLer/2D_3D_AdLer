@@ -13,6 +13,7 @@ import LearningSpacePresenter from "../../../../Core/Presentation/Babylon/Learni
 import LearningSpaceViewModel from "../../../../Core/Presentation/Babylon/LearningSpaces/LearningSpaceViewModel";
 import IPresentationBuilder from "../../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
+import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 
 const directorMock = mock<IPresentationDirector>();
 const builderMock = mock<IPresentationBuilder>();
@@ -22,7 +23,7 @@ const spaceTO: LearningSpaceTO = {
   id: 1,
   description: "TestDescription",
   goals: ["TestGoals"],
-  requirements: "",
+  requirementsString: "",
   name: "TestSpace",
   requiredScore: 1,
   currentScore: 0,
@@ -40,6 +41,9 @@ const spaceTO: LearningSpaceTO = {
       parentWorldID: 1,
     },
   ],
+  requirementsSyntaxTree: null,
+  isAvailable: true,
+  template: LearningSpaceTemplateType.None,
 };
 
 const spaceViewModel: LearningSpaceViewModel = new LearningSpaceViewModel();
