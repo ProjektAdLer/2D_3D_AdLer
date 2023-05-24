@@ -24,8 +24,8 @@ export default class LearningSpaceViewModel extends AbstractViewModel {
   public wallHeight: Observable<number> = new Observable(2.5);
   public wallThickness: Observable<number> = new Observable(0.3);
   public wallGroundworkDepth: Observable<number> = new Observable(0.1);
-  public spaceCornerPoints: Observable<Array<Vector3>> = new Observable();
 
+  public spaceCornerPoints: Observable<Array<Vector3>> = new Observable();
   public floorMesh: Observable<Mesh> = new Observable<Mesh>();
   public wallMeshes: Observable<Mesh[]> = new Observable<Mesh[]>();
   public cornerPoleMeshes: Observable<Mesh[]> = new Observable<Mesh[]>();

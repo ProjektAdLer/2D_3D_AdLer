@@ -163,11 +163,12 @@ export default class LearningSpaceView implements ILearningSpaceView {
       width: wallLength,
       depth: this.viewModel.wallThickness.Value,
     };
-    const wallSegmentDraft = MeshBuilder.CreateBox(
-      "WallSegment",
+    let wallSegmentDraft = MeshBuilder.CreateBox(
+      "BaseWallSegment",
       wallSegmentOptions,
       this.scenePresenter.Scene
     );
+    this.scenePresenter.Scene.removeMesh(wallSegmentDraft);
     this.scenePresenter.registerNavigationMesh(wallSegmentDraft);
 
     // set position
@@ -182,8 +183,32 @@ export default class LearningSpaceView implements ILearningSpaceView {
       endPoint.x - startPoint.x
     );
 
-    // -- Door --
-    // subtract door outline. Done by creating a new mesh and subtracting it from the wall mesh
+    // TODO: add calls for entrance and exit
+    if (this.viewModel.doorPosition.Value)
+      wallSegmentDraft = this.createDoorCutout(
+        this.viewModel.doorPosition.Value,
+        wallSegmentDraft
+      );
+
+    for (const windowPosition of this.viewModel.windowPositions.Value)
+      wallSegmentDraft = this.createWindowCutout(
+        windowPosition,
+        wallSegmentDraft
+      );
+
+    this.scenePresenter.Scene.addMesh(wallSegmentDraft, true);
+
+    // apply material
+    wallSegmentDraft.material = this.viewModel.wallMaterial.Value;
+
+    return wallSegmentDraft;
+  }
+
+  private createDoorCutout(
+    doorPosition: [Vector3, number],
+    wallSegment: Mesh
+  ): Mesh {
+    // done by creating a new mesh and subtracting it from the wall mesh
     const doorCutout = MeshBuilder.CreateBox(
       "DoorCutout",
       {
@@ -196,31 +221,37 @@ export default class LearningSpaceView implements ILearningSpaceView {
 
     // door outline x, y, z needs to be adjusted, cause door origin is not centered
     doorCutout.position = new Vector3(
-      this.viewModel.doorPosition.Value[0].x -
-        0.5 * this.viewModel.doorWidth.Value,
-      this.viewModel.doorPosition.Value[0].y +
-        0.5 * this.viewModel.doorHeight.Value -
-        0.2,
-      this.viewModel.doorPosition.Value[0].z
+      doorPosition[0].x - 0.5 * this.viewModel.doorWidth.Value,
+      doorPosition[0].y + 0.5 * this.viewModel.doorHeight.Value - 0.2,
+      doorPosition[0].z
     );
     doorCutout.rotation = new Vector3(
       0.0,
-      Tools.ToRadians(this.viewModel.doorPosition.Value[1] + 90),
+      Tools.ToRadians(doorPosition[1] + 90),
       0.0
     );
-    const wallSegmentDraftCSG = CSG.FromMesh(wallSegmentDraft);
-    const doorOutlineCSG = CSG.FromMesh(doorCutout);
-    let booleanCSG = wallSegmentDraftCSG.subtract(doorOutlineCSG);
 
+    const doorCutoutCSG = CSG.FromMesh(doorCutout);
+    const wallSegmentDraftCSG = CSG.FromMesh(wallSegment);
+    const booleanCSG = wallSegmentDraftCSG.subtract(doorCutoutCSG);
+    const wallSegmentWithCutout = booleanCSG.toMesh(
+      "DoorCutoutWallSegment",
+      null,
+      this.scenePresenter.Scene
+    );
+
+    this.scenePresenter.Scene.removeMesh(wallSegmentWithCutout, true);
     doorCutout.dispose();
 
-    // -- Window -- (Same as above for the door)
+    return wallSegmentWithCutout;
+  }
+
+  private createWindowCutout(
+    windowPosition: [Vector3, number],
+    wallSegment: Mesh
+  ): Mesh {
     //subtract window outline. Done by creating a new mesh and subtracting it from the wall mesh
-
-    // TODO: implement multiple windows
-    const windowPosition = this.viewModel.windowPositions.Value[0];
-
-    const windowOutline = MeshBuilder.CreateBox(
+    const windowCutout = MeshBuilder.CreateBox(
       "WindowOutline",
       {
         height: this.viewModel.windowHeight.Value,
@@ -230,30 +261,30 @@ export default class LearningSpaceView implements ILearningSpaceView {
       this.scenePresenter.Scene
     );
     // window outline x, y, z needs to be adjusted, cause window origin is not centered
-    windowOutline.position = new Vector3(
+    windowCutout.position = new Vector3(
       windowPosition[0].x,
       windowPosition[0].y + this.viewModel.windowHeight.Value - 0.1,
       windowPosition[0].z
     );
-    windowOutline.rotation = new Vector3(
+    windowCutout.rotation = new Vector3(
       0.0,
       Tools.ToRadians(windowPosition[1]) + Math.PI / 2,
       0.0
     );
-    const windowOutlineCSG = CSG.FromMesh(windowOutline);
-    booleanCSG = booleanCSG.subtract(windowOutlineCSG);
-    const wallSegment = booleanCSG.toMesh(
-      "WallSegment",
+
+    const windowCutoutCSG = CSG.FromMesh(windowCutout);
+    const wallSegmentDraftCSG = CSG.FromMesh(wallSegment);
+    const booleanCSG = wallSegmentDraftCSG.subtract(windowCutoutCSG);
+    const wallSegmentWithCutout = booleanCSG.toMesh(
+      "WindowCutoutWallSegment",
       null,
       this.scenePresenter.Scene
     );
-    wallSegmentDraft.dispose();
-    windowOutline.dispose();
 
-    // apply material
-    wallSegment.material = this.viewModel.wallMaterial.Value;
+    this.scenePresenter.Scene.removeMesh(wallSegmentWithCutout, true);
+    windowCutout.dispose();
 
-    return wallSegment;
+    return wallSegmentWithCutout;
   }
 
   private applyWallColor(): void {
