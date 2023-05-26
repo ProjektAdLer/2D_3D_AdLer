@@ -4,9 +4,6 @@ import AbstractLearningSpaceDimensionStrategy from "./AbstractLearningSpaceDimen
 import { WallSegment } from "src/Components/Core/Domain/LearningSpaceTemplates/ILearningSpaceTemplate";
 
 export default class GenericLearningSpaceDimensionStrategy extends AbstractLearningSpaceDimensionStrategy {
-  private length: number = 0;
-  private width: number = 0;
-
   getCornerPoints(spaceTO: LearningSpaceTO): Vector3[] {
     const { spaceLength, spaceWidth } = this.calculateLengthWidth(spaceTO);
 
@@ -102,10 +99,6 @@ export default class GenericLearningSpaceDimensionStrategy extends AbstractLearn
     spaceLength: number;
     spaceWidth: number;
   } {
-    if (this.width !== 0 && this.length !== 0) {
-      return { spaceWidth: this.width, spaceLength: this.length };
-    }
-
     const calculatedLength = (spaceTO.elements.length / 2) * 4;
     const calculatedWidth = spaceTO.elements.length > 1 ? 8 : 6;
     return { spaceWidth: calculatedWidth, spaceLength: calculatedLength };
