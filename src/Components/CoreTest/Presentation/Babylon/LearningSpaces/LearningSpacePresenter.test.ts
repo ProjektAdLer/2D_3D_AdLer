@@ -14,6 +14,9 @@ import LearningSpaceViewModel from "../../../../Core/Presentation/Babylon/Learni
 import IPresentationBuilder from "../../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
+import IWindowPresenter from "../../../../Core/Presentation/Babylon/Window/IWindowPresenter";
+import GenericLearningSpaceDimensionStrategy from "../../../../Core/Presentation/Babylon/LearningSpaces/LearningSpaceDimensionStrategies/GenericLearningSpaceDimensionStrategy";
+import TemplateLearningSpaceDimensionStrategy from "../../../../Core/Presentation/Babylon/LearningSpaces/LearningSpaceDimensionStrategies/TemplateLearningSpaceDimensionStrategy";
 
 const directorMock = mock<IPresentationDirector>();
 const builderMock = mock<IPresentationBuilder>();
@@ -29,6 +32,7 @@ const spaceTO: LearningSpaceTO = {
   currentScore: 0,
   maxScore: 0,
   elements: [
+    null,
     {
       id: 2,
       name: "test",
@@ -58,11 +62,12 @@ describe("LearningSpacePresenter", () => {
     CoreDIContainer.rebind<IPresentationBuilder>(
       BUILDER_TYPES.ILearningElementBuilder
     ).toConstantValue(builderMock);
-
     CoreDIContainer.rebind<IPresentationBuilder>(
       BUILDER_TYPES.IDoorBuilder
     ).toConstantValue(builderMock);
-
+    CoreDIContainer.rebind<IPresentationBuilder>(
+      BUILDER_TYPES.IWindowBuilder
+    ).toConstantValue(builderMock);
     CoreDIContainer.rebind<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
     ).toConstantValue(directorMock);
@@ -124,6 +129,22 @@ describe("LearningSpacePresenter", () => {
     expect(systemUnderTest["viewModel"].id).toEqual(spaceTO.id);
   });
 
+  test("setDimensionsStrategy sets the strategy to GenericLearningSpaceDimensionStrategy when the template type is None", () => {
+    systemUnderTest["setDimensionsStrategy"](LearningSpaceTemplateType.None);
+
+    expect(systemUnderTest["dimensionStrategy"]).toBeInstanceOf(
+      GenericLearningSpaceDimensionStrategy
+    );
+  });
+
+  test("setDimensionsStrategy sets the strategy to TemplateLearningSpaceDimensionStrategy when the template type is not None", () => {
+    systemUnderTest["setDimensionsStrategy"](LearningSpaceTemplateType.L);
+
+    expect(systemUnderTest["dimensionStrategy"]).toBeInstanceOf(
+      TemplateLearningSpaceDimensionStrategy
+    );
+  });
+
   test("createLearningElements calls the builder for each Element", () => {
     const createDoorMock = jest.fn();
     systemUnderTest["createDoor"] = createDoorMock;
@@ -135,9 +156,9 @@ describe("LearningSpacePresenter", () => {
 
     systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
-    expect(directorMock.build).toHaveBeenCalledTimes(spaceTO.elements.length);
+    expect(directorMock.build).toHaveBeenCalledTimes(1);
     expect(directorMock.build).toHaveBeenCalledWith(builderMock);
-    expect(builderMock.reset).toHaveBeenCalledTimes(spaceTO.elements.length);
+    expect(builderMock.reset).toHaveBeenCalledTimes(1);
   });
 
   test("createLearningElements calls the elementPresenter for each Element", () => {
@@ -153,13 +174,15 @@ describe("LearningSpacePresenter", () => {
     systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
     expect(elementPresenterMock.presentLearningElement).toHaveBeenCalledTimes(
-      spaceTO.elements.length
+      1
     );
 
     // Expect the corresponding TO for each call
     // and any tuple of Vector3 and a number for the element position and rotation.
     // Method that creates positions/rotations is tested separately.
     for (let i = 0; i < spaceTO.elements.length; i++) {
+      if (spaceTO.elements[i] === null) continue;
+
       expect(elementPresenterMock.presentLearningElement).toHaveBeenCalledWith(
         spaceTO.elements[i],
         [expect.any(Vector3), expect.any(Number)]
@@ -179,20 +202,29 @@ describe("LearningSpacePresenter", () => {
 
     systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
-    expect(elementViewMock.setupLearningElement).toHaveBeenCalledTimes(
-      spaceTO.elements.length
-    );
+    expect(elementViewMock.setupLearningElement).toHaveBeenCalledTimes(1);
   });
 
   test("createDoor creates a door with its builder and calls the new presenter", () => {
     const doorPresenterMock = mock<IDoorPresenter>();
-    builderMock.getPresenter.mockReturnValue(doorPresenterMock);
+    builderMock.getPresenter.mockReturnValueOnce(doorPresenterMock);
 
     systemUnderTest["createDoor"]();
 
     expect(directorMock.build).toHaveBeenCalledTimes(1);
     expect(directorMock.build).toHaveBeenCalledWith(builderMock);
     expect(doorPresenterMock.presentDoor).toHaveBeenCalledTimes(1);
+  });
+
+  test("createWindow creates a window with its builder and calls the new presenter", () => {
+    const windowPresenterMock = mock<IWindowPresenter>();
+    builderMock.getPresenter.mockReturnValueOnce(windowPresenterMock);
+
+    systemUnderTest["createWindow"]();
+
+    expect(directorMock.build).toHaveBeenCalledTimes(1);
+    expect(directorMock.build).toHaveBeenCalledWith(builderMock);
+    expect(windowPresenterMock.presentWindow).toHaveBeenCalledTimes(1);
   });
 
   test("should open door, when winning score is presented", () => {
