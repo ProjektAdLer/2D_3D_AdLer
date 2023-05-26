@@ -21,7 +21,7 @@
 
 - `$ npm start` startet den Dev-Server
 - `$ npm run build` erstellt die HTML-Dateien
-- `$ npm run test` startet die Tests
+- `$ npm run test` startet die Testsv
 
 ## Debugging
 
