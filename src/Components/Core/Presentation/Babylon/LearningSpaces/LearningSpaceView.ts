@@ -256,7 +256,7 @@ export default class LearningSpaceView implements ILearningSpaceView {
       {
         height: this.viewModel.windowHeight.Value,
         width: this.viewModel.windowWidth.Value,
-        depth: this.viewModel.wallThickness.Value,
+        depth: this.viewModel.wallThickness.Value * 1.5,
       },
       this.scenePresenter.Scene
     );
