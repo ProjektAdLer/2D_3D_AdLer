@@ -19,52 +19,52 @@ export const LearningSpaceTemplate_L: ILearningSpaceTemplate = {
     {
       // 1
       position: { x: -6, y: -5.2 },
-      orientation: { rotation: 180 },
+      orientation: { rotation: 90 },
     },
     {
       // 2
       position: { x: -6, y: -2 },
-      orientation: { rotation: 180 },
+      orientation: { rotation: 90 },
     },
     {
       // 3
       position: { x: -6, y: 1.2 },
-      orientation: { rotation: 180 },
+      orientation: { rotation: 90 },
     },
     {
       // 4
       position: { x: -2.4, y: 4.4 },
-      orientation: { rotation: 90 },
+      orientation: { rotation: 0 },
     },
     {
       // 5
       position: { x: 0.8, y: 4.4 },
-      orientation: { rotation: 90 },
+      orientation: { rotation: 180 },
     },
     {
       // 6
       position: { x: 4, y: 4.4 },
-      orientation: { rotation: 90 },
+      orientation: { rotation: 180 },
     },
     {
       // 7
       position: { x: 4, y: 0.8 },
-      orientation: { rotation: -90 },
+      orientation: { rotation: 0 },
     },
     {
       // 8
       position: { x: 0.8, y: 0.8 },
-      orientation: { rotation: -90 },
+      orientation: { rotation: 0 },
     },
     {
       // 9
       position: { x: -0.8, y: -2 },
-      orientation: { rotation: 0 },
+      orientation: { rotation: -90 },
     },
     {
       // 10
       position: { x: -0.8, y: -5.2 },
-      orientation: { rotation: 0 },
+      orientation: { rotation: -90 },
     },
   ],
   entranceDoor: {
