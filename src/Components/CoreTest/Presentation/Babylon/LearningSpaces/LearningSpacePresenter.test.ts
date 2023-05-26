@@ -105,14 +105,14 @@ describe("LearningSpacePresenter", () => {
     systemUnderTest["createLearningElements"] = createElementsMock;
     const createDoorMock = jest.fn();
     systemUnderTest["createDoor"] = createDoorMock;
-    const createWindowMock = jest.fn();
-    systemUnderTest["createWindow"] = createWindowMock;
+    const createWindowsMock = jest.fn();
+    systemUnderTest["createWindows"] = createWindowsMock;
 
     systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
     expect(createElementsMock).toHaveBeenCalledTimes(1);
     expect(createDoorMock).toHaveBeenCalledTimes(1);
-    expect(createWindowMock).toHaveBeenCalledTimes(1);
+    expect(createWindowsMock).toHaveBeenCalledTimes(1);
   });
 
   test("onLearningSpaceLoaded sets the space id in the ViewModel", () => {
@@ -121,8 +121,8 @@ describe("LearningSpacePresenter", () => {
     systemUnderTest["createLearningElements"] = createElementsMock;
     const createDoorMock = jest.fn();
     systemUnderTest["createDoor"] = createDoorMock;
-    const createWindowMock = jest.fn();
-    systemUnderTest["createWindow"] = createWindowMock;
+    const createWindowsMock = jest.fn();
+    systemUnderTest["createWindows"] = createWindowsMock;
 
     systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
@@ -148,8 +148,8 @@ describe("LearningSpacePresenter", () => {
   test("createLearningElements calls the builder for each Element", () => {
     const createDoorMock = jest.fn();
     systemUnderTest["createDoor"] = createDoorMock;
-    const createWindowMock = jest.fn();
-    systemUnderTest["createWindow"] = createWindowMock;
+    const createWindowsMock = jest.fn();
+    systemUnderTest["createWindows"] = createWindowsMock;
 
     builderMock.getPresenter.mockReturnValue(mock<ILearningElementPresenter>());
     builderMock.getView.mockReturnValue(mock<LearningElementView>());
@@ -164,8 +164,8 @@ describe("LearningSpacePresenter", () => {
   test("createLearningElements calls the elementPresenter for each Element", () => {
     const createDoorMock = jest.fn();
     systemUnderTest["createDoor"] = createDoorMock;
-    const createWindowMock = jest.fn();
-    systemUnderTest["createWindow"] = createWindowMock;
+    const createWindowsMock = jest.fn();
+    systemUnderTest["createWindows"] = createWindowsMock;
 
     const elementPresenterMock = mock<ILearningElementPresenter>();
     builderMock.getPresenter.mockReturnValue(elementPresenterMock);
@@ -193,8 +193,8 @@ describe("LearningSpacePresenter", () => {
   test("createLearningElements calls the elementView for each Element", () => {
     const createDoorMock = jest.fn();
     systemUnderTest["createDoor"] = createDoorMock;
-    const createWindowMock = jest.fn();
-    systemUnderTest["createWindow"] = createWindowMock;
+    const createWindowsMock = jest.fn();
+    systemUnderTest["createWindows"] = createWindowsMock;
 
     builderMock.getPresenter.mockReturnValue(mock<ILearningElementPresenter>());
     const elementViewMock = mock<LearningElementView>();
@@ -216,11 +216,11 @@ describe("LearningSpacePresenter", () => {
     expect(doorPresenterMock.presentDoor).toHaveBeenCalledTimes(1);
   });
 
-  test("createWindow creates a window with its builder and calls the new presenter", () => {
+  test("createWindows creates windows with its builder and calls the new presenter", () => {
     const windowPresenterMock = mock<IWindowPresenter>();
     builderMock.getPresenter.mockReturnValueOnce(windowPresenterMock);
 
-    systemUnderTest["createWindow"]();
+    systemUnderTest["createWindows"]();
 
     expect(directorMock.build).toHaveBeenCalledTimes(1);
     expect(directorMock.build).toHaveBeenCalledWith(builderMock);

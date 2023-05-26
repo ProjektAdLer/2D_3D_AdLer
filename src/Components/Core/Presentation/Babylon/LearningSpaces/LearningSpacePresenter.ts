@@ -52,7 +52,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
       this.dimensionStrategy.getWindowPositions(spaceTO);
 
     this.createLearningElements(spaceTO);
-    this.createWindow();
+    this.createWindows();
     this.createDoor();
   }
 
@@ -115,14 +115,16 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     this.doorPresenter.presentDoor(this.viewModel.doorPosition.Value);
   }
 
-  private createWindow(): void {
-    const windowBuilder = CoreDIContainer.get<IPresentationBuilder>(
-      BUILDER_TYPES.IWindowBuilder
-    );
+  private createWindows(): void {
+    for (const windowPosition of this.viewModel.windowPositions.Value) {
+      const windowBuilder = CoreDIContainer.get<IPresentationBuilder>(
+        BUILDER_TYPES.IWindowBuilder
+      );
 
-    this.director.build(windowBuilder);
-    (windowBuilder.getPresenter() as IWindowPresenter).presentWindow(
-      this.viewModel.windowPositions.Value[0]
-    );
+      this.director.build(windowBuilder);
+      (windowBuilder.getPresenter() as IWindowPresenter).presentWindow(
+        windowPosition
+      );
+    }
   }
 }

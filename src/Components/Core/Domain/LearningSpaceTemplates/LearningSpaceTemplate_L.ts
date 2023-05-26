@@ -82,11 +82,11 @@ export const LearningSpaceTemplate_L: ILearningSpaceTemplate = {
     },
     {
       position: { x: -0.8, y: 5.4 },
-      orientation: { rotation: 90 },
+      orientation: { rotation: 270 },
     },
     {
       position: { x: 2.4, y: 5.4 },
-      orientation: { rotation: 90 },
+      orientation: { rotation: 270 },
     },
   ],
 };
