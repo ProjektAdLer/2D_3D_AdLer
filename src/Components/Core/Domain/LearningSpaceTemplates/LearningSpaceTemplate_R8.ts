@@ -55,7 +55,7 @@ export const LearningSpaceTemplate_R8: ILearningSpaceTemplate = {
       orientation: { rotation: 0 },
     },
   ],
-  entranceDoor: {
+  entryDoor: {
     position: { x: 0, y: -6 },
     orientation: { rotation: -90 },
   },

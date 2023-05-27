@@ -44,9 +44,9 @@ describe("DoorController", () => {
   test("pointerOver calls BottomTooltipPresenter.displayExitQueryTooltip", () => {
     systemUnderTest.pointerOver();
 
-    expect(
-      bottomTooltipPresenterMock.displayExitQueryTooltip
-    ).toHaveBeenCalledTimes(1);
+    expect(bottomTooltipPresenterMock.displayDoorTooltip).toHaveBeenCalledTimes(
+      1
+    );
   });
 
   test("pointerOut calls BottomTooltipPresenter.hide", () => {
@@ -86,8 +86,8 @@ describe("DoorController", () => {
 
     systemUnderTest.clicked(mockedEvent);
 
-    expect(
-      bottomTooltipPresenterMock.displayExitQueryTooltip
-    ).toHaveBeenCalledTimes(1);
+    expect(bottomTooltipPresenterMock.displayDoorTooltip).toHaveBeenCalledTimes(
+      1
+    );
   });
 });

@@ -38,7 +38,7 @@ describe("ExitModalController", () => {
 
   test("onSuccessorSpaceClicked calls SetUserLocationUseCase", () => {
     getUserLocationMock.execute.mockReturnValue({ spaceID: 2, worldID: 1 });
-    systemUnderTest.onSuccessorSpaceClicked(42);
+    systemUnderTest.onPrecursorOrSuccessorSpaceClicked(42);
 
     expect(setUserLocationMock.execute).toBeCalledWith({
       spaceID: 42,

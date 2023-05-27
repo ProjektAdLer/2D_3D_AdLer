@@ -26,7 +26,7 @@ export default class ExitModalController implements IExitModalController {
   }
 
   @bind
-  onSuccessorSpaceClicked(id: ComponentID): void {
+  onPrecursorOrSuccessorSpaceClicked(id: ComponentID): void {
     const userLocation = this.getUserLocation.execute();
     this.setUserLocation.execute({
       spaceID: id,

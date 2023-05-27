@@ -40,16 +40,16 @@ export default class TemplateLearningSpaceDimensionStrategy extends AbstractLear
     return positions;
   }
 
-  getEntranceDoorPosition(spaceTO: LearningSpaceTO): [Vector3, number] {
+  getEntryDoorPosition(spaceTO: LearningSpaceTO): [Vector3, number] {
     const template = this.getTemplateByType(spaceTO.template);
 
     const doorPosition = [
       new Vector3(
-        template.entranceDoor.position.x,
+        template.entryDoor.position.x,
         this.baseHeight,
-        template.entranceDoor.position.y
+        template.entryDoor.position.y
       ),
-      template.entranceDoor.orientation.rotation,
+      template.entryDoor.orientation.rotation,
     ];
     return doorPosition as [Vector3, number];
   }

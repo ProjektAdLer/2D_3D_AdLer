@@ -183,10 +183,14 @@ export default class LearningSpaceView implements ILearningSpaceView {
       endPoint.x - startPoint.x
     );
 
-    // TODO: add calls for entrance and exit
-    if (this.viewModel.doorPosition.Value)
+    if (this.viewModel.exitDoorPosition.Value)
       wallSegmentDraft = this.createDoorCutout(
-        this.viewModel.doorPosition.Value,
+        this.viewModel.exitDoorPosition.Value,
+        wallSegmentDraft
+      );
+    if (this.viewModel.entryDoorPosition.Value)
+      wallSegmentDraft = this.createDoorCutout(
+        this.viewModel.entryDoorPosition.Value,
         wallSegmentDraft
       );
 
@@ -214,16 +218,17 @@ export default class LearningSpaceView implements ILearningSpaceView {
       {
         height: this.viewModel.doorHeight.Value + 0.2,
         width: this.viewModel.doorWidth.Value,
-        depth: this.viewModel.wallThickness.Value * 2,
+        depth: this.viewModel.wallThickness.Value * 10,
       },
       this.scenePresenter.Scene
     );
 
     // door outline x, y, z needs to be adjusted, cause door origin is not centered
+    // The Adjustments with doorWidth has to be discarded when door origin is fixed
     doorCutout.position = new Vector3(
       doorPosition[0].x - 0.5 * this.viewModel.doorWidth.Value,
       doorPosition[0].y + 0.5 * this.viewModel.doorHeight.Value - 0.2,
-      doorPosition[0].z
+      doorPosition[0].z - 0.5 * this.viewModel.doorWidth.Value
     );
     doorCutout.rotation = new Vector3(
       0.0,
@@ -260,7 +265,7 @@ export default class LearningSpaceView implements ILearningSpaceView {
       },
       this.scenePresenter.Scene
     );
-    // window outline x, y, z needs to be adjusted, cause window origin is not centered
+    // window outline
     windowCutout.position = new Vector3(
       windowPosition[0].x,
       windowPosition[0].y + this.viewModel.windowHeight.Value - 0.1,

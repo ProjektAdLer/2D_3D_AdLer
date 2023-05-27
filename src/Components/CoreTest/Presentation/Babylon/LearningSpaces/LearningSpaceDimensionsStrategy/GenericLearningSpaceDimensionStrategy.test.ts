@@ -89,15 +89,16 @@ describe("GenericLearningSpaceDimensionStrategy", () => {
     );
   });
 
-  test("getEntranceDoorPosition returns the position and rotation in correct structure", () => {
-    const entranceDoorPosition =
-      systemUnderTest["getEntranceDoorPosition"](mockSpaceTO);
+  test("getEntryDoorPosition returns the position and rotation in correct structure", () => {
+    const entryDoorPosition =
+      systemUnderTest["getEntryDoorPosition"](mockSpaceTO);
 
-    expect(entranceDoorPosition).toEqual(anyExpectedVector3AndRotation);
+    expect(entryDoorPosition).toEqual(anyExpectedVector3AndRotation);
   });
 
   test("getExitDoorPosition returns the position and rotation in correct structure", () => {
-    const exitDoorPosition = systemUnderTest["getExitDoorPosition"]();
+    const exitDoorPosition =
+      systemUnderTest["getExitDoorPosition"](mockSpaceTO);
 
     expect(exitDoorPosition).toEqual(anyExpectedVector3AndRotation);
   });

@@ -59,7 +59,7 @@ export default class GenericLearningSpaceDimensionStrategy extends AbstractLearn
     return positions;
   }
 
-  getEntranceDoorPosition(spaceTO: LearningSpaceTO): [Vector3, number] {
+  getEntryDoorPosition(spaceTO: LearningSpaceTO): [Vector3, number] {
     const { spaceLength } = this.calculateLengthWidth(spaceTO);
 
     const doorPosition = [
@@ -73,9 +73,14 @@ export default class GenericLearningSpaceDimensionStrategy extends AbstractLearn
     return doorPosition as [Vector3, number];
   }
 
-  getExitDoorPosition(): [Vector3, number] {
+  getExitDoorPosition(spaceTO: LearningSpaceTO): [Vector3, number] {
+    const { spaceLength } = this.calculateLengthWidth(spaceTO);
     const doorPosition = [
-      new Vector3(this.doorWidth / 2, this.baseHeight, -this.wallThickness),
+      new Vector3(
+        this.doorWidth / 2,
+        this.baseHeight,
+        spaceLength + this.wallThickness
+      ),
       -90,
     ];
     return doorPosition as [Vector3, number];

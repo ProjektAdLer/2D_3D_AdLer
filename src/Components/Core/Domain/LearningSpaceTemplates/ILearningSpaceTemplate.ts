@@ -25,7 +25,7 @@ export default interface ILearningSpaceTemplate {
   cornerPoints: Point[];
   walls: WallSegment[];
   elementSlots: Transform[];
-  entranceDoor: Transform;
+  entryDoor: Transform;
   exitDoor: Transform;
   windows: Transform[];
 }

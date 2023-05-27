@@ -46,14 +46,17 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     this.viewModel.id = spaceTO.id;
     this.viewModel.spaceCornerPoints.Value =
       this.dimensionStrategy.getCornerPoints(spaceTO);
-    this.viewModel.doorPosition.Value =
-      this.dimensionStrategy.getEntranceDoorPosition(spaceTO);
+    this.viewModel.exitDoorPosition.Value =
+      this.dimensionStrategy.getExitDoorPosition(spaceTO);
+    this.viewModel.entryDoorPosition.Value =
+      this.dimensionStrategy.getEntryDoorPosition(spaceTO);
     this.viewModel.windowPositions.Value =
       this.dimensionStrategy.getWindowPositions(spaceTO);
 
     this.createLearningElements(spaceTO);
     this.createWindows();
-    this.createDoor();
+    if (this.viewModel.exitDoorPosition.Value[0]) this.createExitDoor();
+    if (this.viewModel.entryDoorPosition.Value[0]) this.createEntryDoor();
   }
 
   onLearningSpaceScored(spaceScoreTO: LearningSpaceScoreTO): void {
@@ -105,14 +108,29 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     });
   }
 
-  private createDoor(): void {
+  private createExitDoor(): void {
     const doorBuilder = CoreDIContainer.get<IPresentationBuilder>(
       BUILDER_TYPES.IDoorBuilder
     );
 
     this.director.build(doorBuilder);
     this.doorPresenter = doorBuilder.getPresenter() as IDoorPresenter;
-    this.doorPresenter.presentDoor(this.viewModel.doorPosition.Value);
+    this.doorPresenter.presentDoor(
+      this.viewModel.exitDoorPosition.Value,
+      "Exit"
+    );
+  }
+  private createEntryDoor(): void {
+    const doorBuilder = CoreDIContainer.get<IPresentationBuilder>(
+      BUILDER_TYPES.IDoorBuilder
+    );
+
+    this.director.build(doorBuilder);
+    this.doorPresenter = doorBuilder.getPresenter() as IDoorPresenter;
+    this.doorPresenter.presentDoor(
+      this.viewModel.entryDoorPosition.Value,
+      "Entry"
+    );
   }
 
   private createWindows(): void {

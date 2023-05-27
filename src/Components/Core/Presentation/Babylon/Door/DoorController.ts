@@ -24,7 +24,9 @@ export default class DoorController implements IDoorController {
 
   @bind
   pointerOver(): void {
-    this.bottomTooltipPresenter.displayExitQueryTooltip();
+    this.bottomTooltipPresenter.displayDoorTooltip(
+      this.viewModel.doorType.Value
+    );
   }
 
   @bind
@@ -40,8 +42,11 @@ export default class DoorController implements IDoorController {
       CoreDIContainer.get<IGetLearningSpacePrecursorAndSuccessorUseCase>(
         USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
       ).execute();
+      this.exitModalPresenter.open(this.viewModel.doorType.Value);
     } else if (pointerType === "touch") {
-      this.bottomTooltipPresenter.displayExitQueryTooltip();
+      this.bottomTooltipPresenter.displayDoorTooltip(
+        this.viewModel.doorType.Value
+      );
     }
   }
 }

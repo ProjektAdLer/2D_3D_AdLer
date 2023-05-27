@@ -36,7 +36,10 @@ export default class LearningSpaceViewModel extends AbstractViewModel {
 
   public id: ComponentID;
 
-  public doorPosition: Observable<[Vector3, number]> = new Observable<
+  public exitDoorPosition: Observable<[Vector3, number]> = new Observable<
+    [Vector3, number]
+  >();
+  public entryDoorPosition: Observable<[Vector3, number]> = new Observable<
     [Vector3, number]
   >();
 

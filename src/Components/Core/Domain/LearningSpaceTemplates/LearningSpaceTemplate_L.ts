@@ -67,13 +67,13 @@ export const LearningSpaceTemplate_L: ILearningSpaceTemplate = {
       orientation: { rotation: -90 },
     },
   ],
-  entranceDoor: {
+  entryDoor: {
     position: { x: -3.2, y: -7.6 },
     orientation: { rotation: -90 },
   },
   exitDoor: {
     position: { x: 5.6, y: 2.4 },
-    orientation: { rotation: 0 },
+    orientation: { rotation: 180 },
   },
   windows: [
     {

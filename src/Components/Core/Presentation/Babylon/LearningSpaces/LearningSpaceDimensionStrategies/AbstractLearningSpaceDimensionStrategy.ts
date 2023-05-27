@@ -15,7 +15,7 @@ export default abstract class LearningSpaceDimensionStrategy {
   abstract getLearningElementPositions(
     spaceTO: LearningSpaceTO
   ): [Vector3, number][];
-  abstract getEntranceDoorPosition(spaceTO: LearningSpaceTO): [Vector3, number];
+  abstract getEntryDoorPosition(spaceTO: LearningSpaceTO): [Vector3, number];
   abstract getExitDoorPosition(spaceTO: LearningSpaceTO): [Vector3, number];
   abstract getWindowPositions(spaceTO: LearningSpaceTO): [Vector3, number][];
 }

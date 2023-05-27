@@ -8,4 +8,6 @@ export default class ExitModalViewModel {
   precursorSpaces = new Observable<LearningSpaceTO[]>();
 
   isOpen: Observable<boolean> = new Observable<boolean>(false);
+
+  doorType: Observable<string> = new Observable<string>();
 }

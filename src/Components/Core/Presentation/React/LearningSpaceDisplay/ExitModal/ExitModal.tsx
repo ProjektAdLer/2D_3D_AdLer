@@ -47,7 +47,9 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
         >
           {viewModel.exitButtonTitle.Value}
         </StyledButton>
-        {viewModel.successorSpaces.Value.length > 0 &&
+
+        {viewModel.doorType.Value === "Exit" &&
+          viewModel.successorSpaces.Value.length > 0 &&
           viewModel.successorSpaces.Value.map(
             (successorSpace: LearningSpaceTO) => (
               <>
@@ -66,10 +68,42 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
                   shape="freefloatcenter"
                   className="flex w-[100%] mb-2"
                   onClick={() =>
-                    controller.onSuccessorSpaceClicked(successorSpace.id)
+                    controller.onPrecursorOrSuccessorSpaceClicked(
+                      successorSpace.id
+                    )
                   }
                 >
                   {successorSpace.name + " betreten"}
+                </StyledButton>
+              </>
+            )
+          )}
+        {viewModel.doorType.Value === "Entry" &&
+          viewModel.precursorSpaces.Value.length > 0 &&
+          viewModel.precursorSpaces.Value.map(
+            (precursorSpace: LearningSpaceTO) => (
+              <>
+                {(() => {
+                  if (
+                    precursorSpace.currentScore >= precursorSpace.requiredScore
+                  )
+                    icon = spaceSolved;
+                  else if (precursorSpace.isAvailable) icon = spaceAvailable;
+                  else icon = spaceLocked;
+                })()}
+                <StyledButton
+                  icon={icon}
+                  key={precursorSpace.id}
+                  disabled={!precursorSpace.isAvailable}
+                  shape="freefloatcenter"
+                  className="flex w-[100%] mb-2"
+                  onClick={() =>
+                    controller.onPrecursorOrSuccessorSpaceClicked(
+                      precursorSpace.id
+                    )
+                  }
+                >
+                  {precursorSpace.name + " betreten"}
                 </StyledButton>
               </>
             )

@@ -5,8 +5,9 @@ import IExitModalPresenter from "./IExitModalPresenter";
 export default class ExitModalPresenter implements IExitModalPresenter {
   constructor(private viewModel: ExitModalViewModel) {}
 
-  open(): void {
+  open(doorType: string): void {
     this.viewModel.isOpen.Value = true;
+    this.viewModel.doorType.Value = doorType;
   }
 
   onLearningSpacePrecursorAndSuccessorLoaded(
@@ -16,6 +17,5 @@ export default class ExitModalPresenter implements IExitModalPresenter {
       LearningSpacePrecursorAndSuccessorTO.precursorSpaces;
     this.viewModel.successorSpaces.Value =
       LearningSpacePrecursorAndSuccessorTO.successorSpaces;
-    this.open();
   }
 }

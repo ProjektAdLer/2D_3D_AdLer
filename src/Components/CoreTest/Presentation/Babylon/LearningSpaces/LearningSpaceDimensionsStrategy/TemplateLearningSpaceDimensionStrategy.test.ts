@@ -56,7 +56,7 @@ const mockSpaceTemplate: ILearningSpaceTemplate = {
     { position: { x: 43, y: 43 }, orientation: { rotation: 43 } },
     { position: { x: 44, y: 44 }, orientation: { rotation: 44 } },
   ],
-  entranceDoor: { position: { x: 42, y: 42 }, orientation: { rotation: 42 } },
+  entryDoor: { position: { x: 42, y: 42 }, orientation: { rotation: 42 } },
   exitDoor: { position: { x: 42, y: 42 }, orientation: { rotation: 42 } },
   windows: [{ position: { x: 42, y: 42 }, orientation: { rotation: 42 } }],
 };
@@ -128,15 +128,15 @@ describe("TemplateLearningSpaceDimensionStrategy", () => {
     );
   });
 
-  test("getEntranceDoorPosition returns the correct entrance door position from the template", () => {
+  test("getEntryDoorPosition returns the correct entry door position from the template", () => {
     jest
       .spyOn(LearningSpaceTemplateLookup, "getLearningSpaceTemplate")
       .mockReturnValue(mockSpaceTemplate);
 
-    const entranceDoorPosition =
-      systemUnderTest["getEntranceDoorPosition"](mockSpaceTO);
+    const entryDoorPosition =
+      systemUnderTest["getEntryDoorPosition"](mockSpaceTO);
 
-    expect(entranceDoorPosition).toEqual([
+    expect(entryDoorPosition).toEqual([
       expect.objectContaining({ _x: 42, _y: 1, _z: 42 }),
       42,
     ]);
