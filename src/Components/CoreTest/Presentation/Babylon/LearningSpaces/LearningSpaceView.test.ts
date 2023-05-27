@@ -10,7 +10,6 @@ import {
   Scene,
   StandardMaterial,
   Texture,
-  Vector2,
   Vector3,
 } from "@babylonjs/core";
 import { mock, mockDeep } from "jest-mock-extended";

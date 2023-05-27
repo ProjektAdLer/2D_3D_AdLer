@@ -7,18 +7,18 @@ import ExitModalViewModel from "../../../../../Core/Presentation/React/LearningS
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import { LearningSpaceTemplateType } from "../../../../../Core/Domain/Types/LearningSpaceTemplateType";
 
-let fakeModel = new ExitModalViewModel();
-fakeModel.isOpen.Value = true;
+let viewModel = new ExitModalViewModel();
+viewModel.isOpen.Value = true;
 const fakeController = mock<ExitModalController>();
 
 describe("ExitModal", () => {
   beforeEach(() => {
-    fakeModel.successorSpaces.Value = [];
-    fakeModel.precursorSpaces.Value = [];
+    viewModel.successorSpaces.Value = [];
+    viewModel.precursorSpaces.Value = [];
   });
 
   test("doesn't render without controller", () => {
-    useBuilderMock([fakeModel, undefined]);
+    useBuilderMock([viewModel, undefined]);
     const { container } = render(<ExitModal />);
     expect(container.firstChild).toBeNull();
   });
@@ -30,34 +30,35 @@ describe("ExitModal", () => {
   });
 
   test("should not render when closed", () => {
-    fakeModel.isOpen.Value = false;
+    viewModel.isOpen.Value = false;
 
-    useBuilderMock([fakeModel, fakeController]);
+    useBuilderMock([viewModel, fakeController]);
 
     const componentUnderTest = render(<ExitModal />);
     expect(componentUnderTest.container.childElementCount).toBe(0);
   });
 
   test("should render its content", () => {
-    fakeModel.isOpen.Value = true;
-    useBuilderMock([fakeModel, fakeController]);
+    viewModel.isOpen.Value = true;
+    useBuilderMock([viewModel, fakeController]);
 
     const componentUnderTest = render(<ExitModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
 
   test("should close when close button is clicked", () => {
-    fakeModel.isOpen.Value = true;
-    useBuilderMock([fakeModel, fakeController]);
+    viewModel.isOpen.Value = true;
+    useBuilderMock([viewModel, fakeController]);
     const componentUnderTest = render(<ExitModal />);
     const closeButton = componentUnderTest.getByRole("button", { name: "X" });
     fireEvent.click(closeButton);
-    expect(fakeModel.isOpen.Value).toBe(false);
+    expect(viewModel.isOpen.Value).toBe(false);
   });
 
-  test("should render if solved successor space is in the viewmodel", () => {
-    fakeModel.isOpen.Value = true;
-    fakeModel.successorSpaces.Value = [
+  test("should render if solved successor space is in the viewmodel and doorType is Exit", () => {
+    viewModel.isOpen.Value = true;
+    viewModel.doorType.Value = "Exit";
+    viewModel.successorSpaces.Value = [
       {
         id: 1,
         name: "testSpace",
@@ -73,14 +74,15 @@ describe("ExitModal", () => {
         template: LearningSpaceTemplateType.None,
       },
     ];
-    useBuilderMock([fakeModel, fakeController]);
+    useBuilderMock([viewModel, fakeController]);
     const componentUnderTest = render(<ExitModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
 
-  test("should render if available unsolved successor space is in the viewmodel", () => {
-    fakeModel.isOpen.Value = true;
-    fakeModel.successorSpaces.Value = [
+  test("should render if available unsolved successor space is in the viewmodel and doorType is Exit", () => {
+    viewModel.isOpen.Value = true;
+    viewModel.doorType.Value = "Exit";
+    viewModel.successorSpaces.Value = [
       {
         id: 1,
         name: "testSpace",
@@ -96,14 +98,15 @@ describe("ExitModal", () => {
         template: LearningSpaceTemplateType.None,
       },
     ];
-    useBuilderMock([fakeModel, fakeController]);
+    useBuilderMock([viewModel, fakeController]);
     const componentUnderTest = render(<ExitModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
 
-  test("should render if unavailable successor space is in the viewmodel", () => {
-    fakeModel.isOpen.Value = true;
-    fakeModel.successorSpaces.Value = [
+  test("should render if unavailable successor space is in the viewmodel and doorType is Exit", () => {
+    viewModel.isOpen.Value = true;
+    viewModel.doorType.Value = "Exit";
+    viewModel.successorSpaces.Value = [
       {
         id: 1,
         name: "testSpace",
@@ -119,7 +122,78 @@ describe("ExitModal", () => {
         template: LearningSpaceTemplateType.None,
       },
     ];
-    useBuilderMock([fakeModel, fakeController]);
+    useBuilderMock([viewModel, fakeController]);
+    const componentUnderTest = render(<ExitModal />);
+    expect(componentUnderTest.container.childElementCount).toBe(1);
+  });
+  test("should render if solved precursor space is in the viewmodel and doorType is Entry", () => {
+    viewModel.isOpen.Value = true;
+    viewModel.doorType.Value = "Entry";
+    viewModel.precursorSpaces.Value = [
+      {
+        id: 1,
+        name: "testSpace",
+        elements: [],
+        description: "test",
+        goals: [],
+        requirementsString: "",
+        requirementsSyntaxTree: null,
+        isAvailable: true,
+        requiredScore: 10,
+        currentScore: 10,
+        maxScore: 0,
+        template: LearningSpaceTemplateType.None,
+      },
+    ];
+    useBuilderMock([viewModel, fakeController]);
+    const componentUnderTest = render(<ExitModal />);
+    expect(componentUnderTest.container.childElementCount).toBe(1);
+  });
+
+  test("should render if available unsolved precursor space is in the viewmodel and doorType is Entry", () => {
+    viewModel.isOpen.Value = true;
+    viewModel.doorType.Value = "Entry";
+    viewModel.precursorSpaces.Value = [
+      {
+        id: 1,
+        name: "testSpace",
+        elements: [],
+        description: "test",
+        goals: [],
+        requirementsString: "",
+        requirementsSyntaxTree: null,
+        isAvailable: true,
+        requiredScore: 10,
+        currentScore: 0,
+        maxScore: 0,
+        template: LearningSpaceTemplateType.None,
+      },
+    ];
+    useBuilderMock([viewModel, fakeController]);
+    const componentUnderTest = render(<ExitModal />);
+    expect(componentUnderTest.container.childElementCount).toBe(1);
+  });
+
+  test("should render if unavailable precursor space is in the viewmodel and doorType is Entry", () => {
+    viewModel.isOpen.Value = true;
+    viewModel.doorType.Value = "Entry";
+    viewModel.precursorSpaces.Value = [
+      {
+        id: 1,
+        name: "testSpace",
+        elements: [],
+        description: "test",
+        goals: [],
+        requirementsString: "",
+        requirementsSyntaxTree: null,
+        isAvailable: false,
+        requiredScore: 10,
+        currentScore: 0,
+        maxScore: 0,
+        template: LearningSpaceTemplateType.None,
+      },
+    ];
+    useBuilderMock([viewModel, fakeController]);
     const componentUnderTest = render(<ExitModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
