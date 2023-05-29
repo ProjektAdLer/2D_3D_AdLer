@@ -34,7 +34,7 @@ export const LearningSpaceTemplate_L: ILearningSpaceTemplate = {
     {
       // 4
       position: { x: -2.4, y: 4.4 },
-      orientation: { rotation: 0 },
+      orientation: { rotation: 180 },
     },
     {
       // 5

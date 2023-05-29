@@ -27,12 +27,12 @@ export const LearningSpaceTemplate_R6: ILearningSpaceTemplate = {
     {
       // 3
       position: { x: -2.8, y: 2.8 },
-      orientation: { rotation: 90 },
+      orientation: { rotation: 135 },
     },
     {
       // 4
       position: { x: 0, y: 2.8 },
-      orientation: { rotation: 0 },
+      orientation: { rotation: 180 },
     },
     {
       // 5
@@ -42,7 +42,7 @@ export const LearningSpaceTemplate_R6: ILearningSpaceTemplate = {
     {
       // 6
       position: { x: 2.8, y: -2.8 },
-      orientation: { rotation: 180 },
+      orientation: { rotation: 315 },
     },
   ],
   entryDoor: {
