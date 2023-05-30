@@ -9,7 +9,7 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import bind from "bind-decorator";
 import { Mesh, Tools, Vector3 } from "@babylonjs/core";
 
-const windowModelLink = require("../../../../../Assets/3DModel_Window.glb");
+const windowModelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Window.glb");
 
 export default class WindowView extends Readyable {
   private scenePresenter: IScenePresenter;

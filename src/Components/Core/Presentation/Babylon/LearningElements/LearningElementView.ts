@@ -19,11 +19,11 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import bind from "bind-decorator";
 
 const modelLinks: { [key in LearningElementTypes]?: any } = {
-  [LearningElementTypes.h5p]: require("../../../../../Assets/l-h5p-Spielautomat-1.glb"),
-  [LearningElementTypes.text]: require("../../../../../Assets/l-text-Bücherregal-1.glb"),
-  [LearningElementTypes.pdf]: require("../../../../../Assets/l-text-Bücherregal-2.glb"),
-  [LearningElementTypes.image]: require("../../../../../Assets/l-bild-Wandbild-1.glb"),
-  [LearningElementTypes.video]: require("../../../../../Assets/l-video-Fernseher-1.glb"),
+  [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/defaultTheme/l-h5p-Spielautomat-1.glb"),
+  [LearningElementTypes.text]: require("../../../../../Assets/3dModels/defaultTheme/l-text-Bücherregal-1.glb"),
+  [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/defaultTheme/l-text-Bücherregal-2.glb"),
+  [LearningElementTypes.image]: require("../../../../../Assets/3dModels/defaultTheme/l-bild-Wandbild-1.glb"),
+  [LearningElementTypes.video]: require("../../../../../Assets/3dModels/defaultTheme/l-video-Fernseher-1.glb"),
 };
 
 export default class LearningElementView {
