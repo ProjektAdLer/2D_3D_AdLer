@@ -63,6 +63,8 @@ export const LearningSpaceTemplate_R6: ILearningSpaceTemplate = {
       orientation: { rotation: 90 },
     },
   ],
+  playerSpawnPoint: {
+    position: { x: 0, y: -3.2 },
+    orientation: { rotation: 0 },
+  },
 };
-
-//Spawnpoint position: { x: 0, y: -3.2 },
