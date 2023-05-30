@@ -10,7 +10,7 @@ export default class ArrayItemRandomizer<T> implements IArrayItemRandomizer<T> {
   }
 
   private getRandomIndex(seed?: string): number {
-    if (seed) {
+    if (seed !== undefined) {
       const hash = this.createSeedHash(seed);
       // pad seed with Phi, Pi and E
       const seededRandom = this.sfc32(0x9e3779b9, 0x243f6a88, 0xb7e15162, hash);

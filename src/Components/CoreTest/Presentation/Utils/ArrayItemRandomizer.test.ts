@@ -16,6 +16,10 @@ describe("ArrayItemRandomizer", () => {
     expect(mockItems).toContain(systemUnderTest.getImport());
   });
 
+  test("getImport should return an import from the given list with a empty string as seed", () => {
+    expect(mockItems).toContain(systemUnderTest.getImport(""));
+  });
+
   test("getImport should return the same import with the same seed", () => {
     const result1 = systemUnderTest.getImport("mockSeed");
     const result2 = systemUnderTest.getImport("mockSeed");
