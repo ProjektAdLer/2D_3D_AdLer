@@ -51,16 +51,16 @@ export const LearningSpaceTemplate_R6: ILearningSpaceTemplate = {
   },
   exitDoor: {
     position: { x: 4, y: 0 },
-    orientation: { rotation: 0 },
+    orientation: { rotation: 180 },
   },
   windows: [
     {
-      position: { x: -2.8, y: 4 },
-      orientation: { rotation: 180 },
+      position: { x: -2, y: 4.15 },
+      orientation: { rotation: 270 },
     },
     {
-      position: { x: 2.8, y: 4 },
-      orientation: { rotation: 90 },
+      position: { x: 2, y: 4.15 },
+      orientation: { rotation: 270 },
     },
   ],
   playerSpawnPoint: {
