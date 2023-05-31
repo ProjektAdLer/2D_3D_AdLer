@@ -34,6 +34,12 @@ export const getLearningElementIcon = (type: LearningElementTypeStrings) => {
         <img src={h5pIcon} alt="h5p-icon" className="h-8 mr-2 lg:h-12"></img>
       );
     default:
-      return <img src={taskIcon} alt="" className="h-8 mr-2 lg:h-12"></img>;
+      return (
+        <img
+          src={taskIcon}
+          alt="default-element-icon"
+          className="h-8 mr-2 lg:h-12"
+        ></img>
+      );
   }
 };
