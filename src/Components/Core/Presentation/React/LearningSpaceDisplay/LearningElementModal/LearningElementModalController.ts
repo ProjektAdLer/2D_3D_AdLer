@@ -30,11 +30,14 @@ export default class LearningElementModalController
       statement.verb.id === "http://adlnet.gov/expapi/verbs/answered" ||
       statement.verb.id === "http://adlnet.gov/expapi/verbs/completed";
 
-    const parentArray = statement.context?.contextActivities?.parent;
-    const isChild =
-      parentArray && parentArray.length > 0 ? parentArray[0]?.id : undefined;
+    // const parentArray = statement.context?.contextActivities?.parent;
+    // const isChild =
+    //   parentArray && parentArray.length > 0 ? parentArray[0]?.id : undefined;
 
-    if (isCompleted && !isChild) {
+    //if (isCompleted && !isChild) {
+
+    // Why is the isChild check here? - PG
+    if (isCompleted) {
       const xapiData = event.data.statement as XAPIData;
 
       statement.result.success =
