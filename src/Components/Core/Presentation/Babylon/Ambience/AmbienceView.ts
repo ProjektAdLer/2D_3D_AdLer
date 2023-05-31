@@ -6,7 +6,7 @@ import SCENE_TYPES, {
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import { Mesh, Vector3 } from "@babylonjs/core";
-const modelLink = require("../../../../../Assets/prototype/Lernraumumgebung_Prototype.glb");
+const modelLink = require("../../../../../Assets/brototype/Lernraumumgebung_Prototype.glb");
 
 export default class AmbienceView {
   private scenePresenter: IScenePresenter;
