@@ -32,8 +32,25 @@ export default class GenericLearningSpaceDimensionStrategy extends AbstractLearn
     ];
   }
 
-  getWallSegmentIndices(spaceTO: LearningSpaceTO): WallSegment[] {
-    throw new Error("Method not implemented.");
+  getWallSegmentIndices(): WallSegment[] {
+    return [
+      {
+        start: 0,
+        end: 1,
+      },
+      {
+        start: 1,
+        end: 2,
+      },
+      {
+        start: 2,
+        end: 3,
+      },
+      {
+        start: 3,
+        end: 0,
+      },
+    ];
   }
 
   getLearningElementPositions(spaceTO: LearningSpaceTO): [Vector3, number][] {

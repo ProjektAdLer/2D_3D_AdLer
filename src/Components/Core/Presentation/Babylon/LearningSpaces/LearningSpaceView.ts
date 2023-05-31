@@ -121,9 +121,9 @@ export default class LearningSpaceView implements ILearningSpaceView {
       "FloorPolyMesh",
       this.viewModel.spaceCornerPoints.Value.map(
         (cornerPoint) => new Vector2(cornerPoint.x, cornerPoint.z)
-      )
+      ).reverse()
     );
-    this.viewModel.floorMesh.Value = polyMesh.build();
+    this.viewModel.floorMesh.Value = polyMesh.build(false, 0.5);
     this.scenePresenter.registerNavigationMesh(this.viewModel.floorMesh.Value);
 
     // apply material
@@ -140,22 +140,23 @@ export default class LearningSpaceView implements ILearningSpaceView {
   }
 
   private createWalls(): void {
-    const cornerCount = this.viewModel.spaceCornerPoints.Value.length;
-
-    for (let i = 0; i < cornerCount; i++) {
-      this.viewModel.wallMeshes.Value[i] = this.createWallSegment(
-        this.viewModel.spaceCornerPoints.Value[i],
-        this.viewModel.spaceCornerPoints.Value[(i + 1) % cornerCount]
+    this.viewModel.wallSegments.Value.forEach((wallSegment) => {
+      this.viewModel.wallMeshes.Value.push(
+        this.createWallSegment(
+          this.viewModel.spaceCornerPoints.Value[wallSegment.start],
+          this.viewModel.spaceCornerPoints.Value[wallSegment.end]
+        )
       );
-    }
+    });
   }
 
   private createWallSegment(startPoint: Vector3, endPoint: Vector3): Mesh {
     // create mesh
-    const wallLength = Math.sqrt(
-      Math.pow(endPoint.x - startPoint.x, 2) +
-        Math.pow(endPoint.z - startPoint.z, 2)
-    );
+    const wallLength =
+      Math.sqrt(
+        Math.pow(endPoint.x - startPoint.x, 2) +
+          Math.pow(endPoint.z - startPoint.z, 2)
+      ) + 0.01; // extend wall to avoid z-fighting at the edges
     const wallSegmentOptions = {
       height:
         this.viewModel.wallHeight.Value +
@@ -174,14 +175,14 @@ export default class LearningSpaceView implements ILearningSpaceView {
     // set position
     wallSegmentDraft.position.x = (startPoint.x + endPoint.x) / 2;
     wallSegmentDraft.position.y =
-      (this.viewModel.baseHeight.Value || 0) -
-      this.viewModel.wallGroundworkDepth.Value +
-      this.viewModel.wallHeight.Value / 2;
+      (this.viewModel.baseHeight.Value || 0) +
+      (this.viewModel.wallHeight.Value -
+        this.viewModel.wallGroundworkDepth.Value) /
+        2;
     wallSegmentDraft.position.z = (startPoint.z + endPoint.z) / 2;
-    wallSegmentDraft.rotation.y = Math.atan2(
-      endPoint.z - startPoint.z,
-      endPoint.x - startPoint.x
-    );
+    wallSegmentDraft.rotation.y =
+      Math.PI -
+      Math.atan2(endPoint.z - startPoint.z, endPoint.x - startPoint.x);
 
     if (this.viewModel.exitDoorPosition.Value)
       wallSegmentDraft = this.createDoorCutout(
@@ -299,8 +300,23 @@ export default class LearningSpaceView implements ILearningSpaceView {
   }
 
   private createCornerPoles(): void {
-    this.viewModel.spaceCornerPoints.Value.forEach((cornerPoint) => {
-      this.viewModel.cornerPoleMeshes.Value.push(this.createPole(cornerPoint));
+    let wallSegmentIntersections: Set<number> = new Set<number>();
+    let visitedCornerPoints: Set<number> = new Set<number>();
+    this.viewModel.wallSegments.Value.forEach((wallSegment) => {
+      if (visitedCornerPoints.has(wallSegment.start))
+        wallSegmentIntersections.add(wallSegment.start);
+      else visitedCornerPoints.add(wallSegment.start);
+
+      if (visitedCornerPoints.has(wallSegment.end))
+        wallSegmentIntersections.add(wallSegment.end);
+      else visitedCornerPoints.add(wallSegment.end);
+    });
+
+    wallSegmentIntersections.forEach((intersectionPoint) => {
+      const poleMesh = this.createPole(
+        this.viewModel.spaceCornerPoints.Value[intersectionPoint]
+      );
+      this.viewModel.cornerPoleMeshes.Value.push(poleMesh);
     });
   }
 
@@ -310,7 +326,7 @@ export default class LearningSpaceView implements ILearningSpaceView {
       height:
         this.viewModel.wallHeight.Value +
         this.viewModel.wallGroundworkDepth.Value,
-      diameter: this.viewModel.wallThickness.Value * 1.5,
+      diameter: this.viewModel.wallThickness.Value,
     };
     const pole = MeshBuilder.CreateCylinder(
       "Pole",
@@ -321,9 +337,10 @@ export default class LearningSpaceView implements ILearningSpaceView {
     // position pole
     pole.position.x = corner.x;
     pole.position.y =
-      (this.viewModel.baseHeight.Value || 0) -
-      this.viewModel.wallGroundworkDepth.Value +
-      this.viewModel.wallHeight.Value / 2;
+      (this.viewModel.baseHeight.Value || 0) +
+      (this.viewModel.wallHeight.Value -
+        this.viewModel.wallGroundworkDepth.Value) /
+        2;
     pole.position.z = corner.z;
 
     // apply wall material

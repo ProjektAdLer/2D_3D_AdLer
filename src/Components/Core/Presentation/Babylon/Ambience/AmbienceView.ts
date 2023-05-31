@@ -26,7 +26,7 @@ export default class AmbienceView {
 
     this.viewModel.meshes.Value = results as Mesh[];
     this.viewModel.meshes.Value.forEach((mesh) => {
-      mesh.translate(new Vector3(0, -0.05, 0), 1);
+      mesh.translate(new Vector3(0, -0.1, 0), 1);
     });
   }
 }

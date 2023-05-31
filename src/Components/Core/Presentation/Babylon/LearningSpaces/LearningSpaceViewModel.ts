@@ -13,6 +13,7 @@ export default class LearningSpaceViewModel extends AbstractViewModel {
     this.wallThickness.subscribe(this.setIsDirtyTrue);
     this.baseHeight.subscribe(this.setIsDirtyTrue);
     this.spaceCornerPoints.subscribe(this.setIsDirtyTrue);
+    this.wallSegments.subscribe(this.setIsDirtyTrue);
   }
 
   public wallColor: Observable<Color3> = new Observable(
@@ -21,11 +22,13 @@ export default class LearningSpaceViewModel extends AbstractViewModel {
   public baseHeight: Observable<number> = new Observable(0);
   public doorWidth: Observable<number> = new Observable(0.95);
   public doorHeight: Observable<number> = new Observable(2.07);
-  public wallHeight: Observable<number> = new Observable(2.5);
+  public wallHeight: Observable<number> = new Observable(2.85);
   public wallThickness: Observable<number> = new Observable(0.3);
-  public wallGroundworkDepth: Observable<number> = new Observable(0.1);
+  public wallGroundworkDepth: Observable<number> = new Observable(0.5);
 
   public spaceCornerPoints: Observable<Array<Vector3>> = new Observable();
+  public wallSegments: Observable<Array<{ start: number; end: number }>> =
+    new Observable();
   public floorMesh: Observable<Mesh> = new Observable<Mesh>();
   public wallMeshes: Observable<Mesh[]> = new Observable<Mesh[]>();
   public cornerPoleMeshes: Observable<Mesh[]> = new Observable<Mesh[]>();

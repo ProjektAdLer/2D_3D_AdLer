@@ -143,6 +143,12 @@ describe("LearningSpaceView", () => {
         new Vector3(-5.3, 0, 4.3),
         new Vector3(-5.3, 0, -4.3),
       ];
+      viewModel.wallSegments.Value = [
+        {
+          start: 0,
+          end: 1,
+        },
+      ];
       viewModel.isDirty = true;
 
       systemUnderTest.displayLearningSpace();
@@ -281,12 +287,26 @@ describe("LearningSpaceView", () => {
       );
     });
 
-    test("createWalls creates 3 wall meshes when there are 3 corners", () => {
+    test("createWalls creates 3 wall meshes when there are 3 corners with corresponding wallSegments", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.spaceCornerPoints.Value = [
         new Vector3(5.3, 0, 4.3),
         new Vector3(-5.3, 0, 4.3),
         new Vector3(-5.3, 0, -4.3),
+      ];
+      viewModel.wallSegments.Value = [
+        {
+          start: 0,
+          end: 1,
+        },
+        {
+          start: 1,
+          end: 2,
+        },
+        {
+          start: 2,
+          end: 0,
+        },
       ];
 
       applyWallSegmentCreationMocks();
@@ -354,12 +374,26 @@ describe("LearningSpaceView", () => {
       );
     });
 
-    test("createCornerPoles creates 3 corner pole meshes when there are 3 corners", () => {
+    test("createCornerPoles creates 3 corner pole meshes when there are 3 corners with coresponding wallSegements", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.spaceCornerPoints.Value = [
         new Vector3(5.3, 0, 4.3),
         new Vector3(-5.3, 0, 4.3),
         new Vector3(-5.3, 0, -4.3),
+      ];
+      viewModel.wallSegments.Value = [
+        {
+          start: 0,
+          end: 1,
+        },
+        {
+          start: 1,
+          end: 2,
+        },
+        {
+          start: 2,
+          end: 0,
+        },
       ];
       jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
       systemUnderTest["cleanupOldPoles"]();
@@ -403,7 +437,7 @@ describe("LearningSpaceView", () => {
 
       let result = systemUnderTest["createPole"](new Vector3(1, 0, 3));
 
-      expect(result.position).toStrictEqual(new Vector3(1, 3.25, 3));
+      expect(result.position).toStrictEqual(new Vector3(1, 3.425, 3));
     });
   });
 });
