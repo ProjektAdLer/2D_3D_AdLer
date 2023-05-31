@@ -17,13 +17,31 @@ import SCENE_TYPES, {
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import bind from "bind-decorator";
+import ArrayItemRandomizer from "../../Utils/ArrayItemRandomizer/ArrayItemRandomizer";
 
-const modelLinks: { [key in LearningElementTypes]?: any } = {
-  [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/defaultTheme/l-h5p-Spielautomat-1.glb"),
-  [LearningElementTypes.text]: require("../../../../../Assets/3dModels/defaultTheme/l-text-Bücherregal-1.glb"),
-  [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/defaultTheme/l-text-Bücherregal-2.glb"),
-  [LearningElementTypes.image]: require("../../../../../Assets/3dModels/defaultTheme/l-bild-Wandbild-1.glb"),
-  [LearningElementTypes.video]: require("../../../../../Assets/3dModels/defaultTheme/l-video-Fernseher-1.glb"),
+const modelLinks: { [key in LearningElementTypes]?: any[] } = {
+  [LearningElementTypes.h5p]: [
+    require("../../../../../Assets/3dModels/defaultTheme/l-h5p-Schreibtisch-1.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l-h5p-Spielautomat-1.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l-h5p-Tafel-1.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l-h5p-Zeichenpult-1.glb"),
+  ],
+  [LearningElementTypes.text]: [
+    require("../../../../../Assets/3dModels/defaultTheme/l-text-Bücherregal-1.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l-text-Bücherregal-2.glb"),
+  ],
+  [LearningElementTypes.pdf]: [
+    require("../../../../../Assets/3dModels/defaultTheme/l-text-Bücherregal-1.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l-text-Bücherregal-2.glb"),
+  ],
+  [LearningElementTypes.image]: [
+    require("../../../../../Assets/3dModels/defaultTheme/l-bild-Wandbild-1.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l-bild-Wandbild-2.glb"),
+  ],
+  [LearningElementTypes.video]: [
+    require("../../../../../Assets/3dModels/defaultTheme/l-video-Fernseher-1.glb"),
+  ],
+  [LearningElementTypes.notAnElement]: [],
 };
 
 export default class LearningElementView {
@@ -49,9 +67,13 @@ export default class LearningElementView {
   }
 
   public async setupLearningElement(): Promise<void> {
+    const arrayItemRandomizer = new ArrayItemRandomizer(
+      modelLinks[this.viewModel.type.Value as LearningElementTypes]!
+    );
+
     // load meshes
     this.viewModel.meshes.Value = (await this.scenePresenter.loadModel(
-      modelLinks[this.viewModel.type.Value as LearningElementTypes],
+      arrayItemRandomizer.getItem(this.viewModel.name.Value),
       true
     )) as Mesh[];
 
