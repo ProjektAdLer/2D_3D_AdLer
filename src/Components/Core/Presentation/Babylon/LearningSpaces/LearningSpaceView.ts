@@ -12,6 +12,7 @@ import {
   Vector3,
   CSG,
   Vector2,
+  Color3,
 } from "@babylonjs/core";
 import LearningSpaceViewModel from "./LearningSpaceViewModel";
 import floorTexture from "../../../../../Assets/textures/WoodFloor054_1K_Color.jpg";
@@ -113,6 +114,7 @@ export default class LearningSpaceView implements ILearningSpaceView {
     );
     (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).uScale = 2;
     (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 2;
+    this.viewModel.floorMaterial.Value.specularColor = new Color3(0, 0, 0);
   }
 
   private createFloor(): void {
