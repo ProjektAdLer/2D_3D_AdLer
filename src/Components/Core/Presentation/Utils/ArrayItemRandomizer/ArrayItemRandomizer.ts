@@ -5,7 +5,7 @@ import IArrayItemRandomizer from "./IArrayItemRandomizer";
 export default class ArrayItemRandomizer<T> implements IArrayItemRandomizer<T> {
   constructor(private array: T[]) {}
 
-  getImport(seed?: string): T {
+  getItem(seed?: string): T {
     return this.array[this.getRandomIndex(seed)];
   }
 
