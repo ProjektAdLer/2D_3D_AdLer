@@ -1,3 +1,3 @@
 export default interface IArrayItemRandomizer<T> {
-  getImport(): T;
+  getItem(seed?: string): T;
 }

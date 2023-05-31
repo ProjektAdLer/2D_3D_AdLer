@@ -25,6 +25,7 @@ function buildSystemUnderTest(): [
   LearningElementView
 ] {
   const viewModel = new LearningElementViewModel();
+  viewModel.type.Value = "h5p";
   const controller = mock<ILearningElementController>();
   const view = new LearningElementView(viewModel, controller);
   return [viewModel, controller, view];

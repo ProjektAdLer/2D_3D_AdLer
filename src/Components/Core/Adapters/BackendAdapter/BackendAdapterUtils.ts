@@ -34,7 +34,7 @@ export default class BackendAdapterUtils {
       let template: string;
       if (
         !Object.values<string>(LearningSpaceTemplateType).includes(
-          space.spaceTemplate
+          space.spaceTemplate.toUpperCase()
         )
       ) {
         template = LearningSpaceTemplateType.None;
