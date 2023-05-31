@@ -115,6 +115,7 @@ describe("DoorView", () => {
     ]);
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.doorType.Value = "Exit";
 
     await systemUnderTest.isReady.then(() => {
       expect(viewModel.meshes.Value[0].animations.length).toBe(1);

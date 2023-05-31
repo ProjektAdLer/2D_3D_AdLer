@@ -1,9 +1,11 @@
 import { Vector3 } from "@babylonjs/core";
 import DoorPresenter from "../../../../Core/Presentation/Babylon/Door/DoorPresenter";
 import DoorViewModel from "../../../../Core/Presentation/Babylon/Door/DoorViewModel";
+import LearningSpaceScoreTO from "../../../../Core/Application/DataTransferObjects/LearningSpaceScoreTO";
 
 describe("DoorPresenter", () => {
   let systemUnderTest: DoorPresenter;
+  let viewModel: DoorViewModel;
 
   beforeEach(() => {
     systemUnderTest = new DoorPresenter(new DoorViewModel());
@@ -25,8 +27,58 @@ describe("DoorPresenter", () => {
   test("presentDoor sets position and rotation in view model", () => {
     let positionVector: Vector3 = new Vector3(1, 2, 3);
     let rotation: number = 0;
-    systemUnderTest.presentDoor([positionVector, rotation]);
+    systemUnderTest.presentDoor([positionVector, rotation], "Exit", 10);
     expect(systemUnderTest["viewModel"].position.Value).toEqual(positionVector);
     expect(systemUnderTest["viewModel"].rotation.Value).toBe(rotation);
+  });
+
+  test("should open door, when winning score is presented", () => {
+    systemUnderTest["viewModel"].doorType.Value = "Exit";
+    systemUnderTest["viewModel"].spaceID = 1;
+    systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
+    systemUnderTest.onLearningSpaceScored({
+      currentScore: 42,
+      maxScore: 42,
+      requiredScore: 42,
+      spaceID: 1,
+    } as LearningSpaceScoreTO);
+    expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(1);
+  });
+
+  test("should not open door, when winning score is presented but id is wrong", () => {
+    systemUnderTest["viewModel"].doorType.Value = "Exit";
+    systemUnderTest["viewModel"].spaceID = 1;
+    systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
+    systemUnderTest.onLearningSpaceScored({
+      currentScore: 42,
+      maxScore: 42,
+      requiredScore: 42,
+      spaceID: 2,
+    } as LearningSpaceScoreTO);
+    expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(0);
+  });
+  test("should not open door, when door type is not exit", () => {
+    systemUnderTest["viewModel"].doorType.Value = "Entry";
+    systemUnderTest["viewModel"].spaceID = 1;
+    systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
+    systemUnderTest.onLearningSpaceScored({
+      currentScore: 42,
+      maxScore: 42,
+      requiredScore: 42,
+      spaceID: 1,
+    } as LearningSpaceScoreTO);
+    expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(0);
+  });
+  test("should not open door, when currentScore smaller than requiredScore", () => {
+    systemUnderTest["viewModel"].doorType.Value = "Exit";
+    systemUnderTest["viewModel"].spaceID = 1;
+    systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
+    systemUnderTest.onLearningSpaceScored({
+      currentScore: 41,
+      maxScore: 42,
+      requiredScore: 42,
+      spaceID: 1,
+    } as LearningSpaceScoreTO);
+    expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(0);
   });
 });

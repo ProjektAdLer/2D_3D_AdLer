@@ -244,41 +244,4 @@ describe("LearningSpacePresenter", () => {
     expect(directorMock.build).toHaveBeenCalledWith(builderMock);
     expect(windowPresenterMock.presentWindow).toHaveBeenCalledTimes(1);
   });
-
-  test("should open door, when winning score is presented", () => {
-    const doorPresenterMock = mock<IDoorPresenter>();
-    systemUnderTest["doorPresenter"] = doorPresenterMock;
-
-    systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
-    systemUnderTest.onLearningSpaceScored({
-      currentScore: 42,
-      maxScore: 42,
-      requiredScore: 42,
-      spaceID: 1,
-    } as LearningSpaceScoreTO);
-    expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(1);
-    expect(doorPresenterMock.openDoor).toHaveBeenCalledTimes(1);
-  });
-
-  test("should not open door, when winning score is presented but id is wrong", () => {
-    systemUnderTest["openDoor"] = jest.fn();
-    systemUnderTest.onLearningSpaceScored({
-      currentScore: 42,
-      maxScore: 42,
-      requiredScore: 42,
-      spaceID: 2,
-    } as LearningSpaceScoreTO);
-    expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(0);
-  });
-
-  test("should not open door, when winning score is presented but presenter is not registred", () => {
-    systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
-    systemUnderTest.onLearningSpaceScored({
-      currentScore: 42,
-      maxScore: 42,
-      requiredScore: 42,
-      spaceID: 1,
-    } as LearningSpaceScoreTO);
-    expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(1);
-  });
 });

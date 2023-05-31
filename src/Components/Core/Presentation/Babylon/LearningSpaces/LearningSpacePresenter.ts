@@ -20,7 +20,6 @@ import TemplateLearningSpaceDimensionStrategy from "./LearningSpaceDimensionStra
 
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
-  private doorPresenter: IDoorPresenter;
   private director: IPresentationDirector;
   private dimensionStrategy: AbstractLearningSpaceDimensionStrategy;
 
@@ -59,12 +58,6 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     if (this.viewModel.entryDoorPosition.Value[0]) this.createEntryDoor();
   }
 
-  onLearningSpaceScored(spaceScoreTO: LearningSpaceScoreTO): void {
-    if (spaceScoreTO.spaceID !== this.viewModel.id) return;
-    if (spaceScoreTO.currentScore >= spaceScoreTO.requiredScore)
-      this.openDoor();
-  }
-
   private setDimensionsStrategy(templateType: LearningSpaceTemplateType): void {
     if (templateType === LearningSpaceTemplateType.None)
       this.dimensionStrategy = new GenericLearningSpaceDimensionStrategy(
@@ -80,11 +73,6 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         this.viewModel.doorWidth.Value,
         this.viewModel.windowWidth.Value
       );
-  }
-
-  private openDoor(): void {
-    if (!this.doorPresenter) return;
-    this.doorPresenter.openDoor();
   }
 
   private createLearningElements(spaceTO: LearningSpaceTO): void {
@@ -114,10 +102,10 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     );
 
     this.director.build(doorBuilder);
-    this.doorPresenter = doorBuilder.getPresenter() as IDoorPresenter;
-    this.doorPresenter.presentDoor(
+    (doorBuilder.getPresenter() as IDoorPresenter).presentDoor(
       this.viewModel.exitDoorPosition.Value,
-      "Exit"
+      "Exit",
+      this.viewModel.id
     );
   }
   private createEntryDoor(): void {
@@ -126,10 +114,10 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     );
 
     this.director.build(doorBuilder);
-    this.doorPresenter = doorBuilder.getPresenter() as IDoorPresenter;
-    this.doorPresenter.presentDoor(
+    (doorBuilder.getPresenter() as IDoorPresenter).presentDoor(
       this.viewModel.entryDoorPosition.Value,
-      "Entry"
+      "Entry",
+      this.viewModel.id
     );
   }
 
