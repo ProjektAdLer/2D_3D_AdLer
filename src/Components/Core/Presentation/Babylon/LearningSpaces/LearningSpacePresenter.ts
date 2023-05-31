@@ -51,6 +51,8 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
       this.dimensionStrategy.getEntryDoorPosition(spaceTO);
     this.viewModel.windowPositions.Value =
       this.dimensionStrategy.getWindowPositions(spaceTO);
+    this.viewModel.wallSegments.Value =
+      this.dimensionStrategy.getWallSegmentIndices(spaceTO);
 
     this.createLearningElements(spaceTO);
     this.createWindows();
