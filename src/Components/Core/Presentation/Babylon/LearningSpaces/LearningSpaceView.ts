@@ -14,7 +14,7 @@ import {
   Vector2,
 } from "@babylonjs/core";
 import LearningSpaceViewModel from "./LearningSpaceViewModel";
-import floorTexture from "../../../../../Assets/Texture_Floor_Parquet3.png";
+import floorTexture from "../../../../../Assets/textures/Tiles002_1K_Color.jpg";
 import ILearningSpaceController from "./ILearningSpaceController";
 import ILearningSpaceView from "./ILearningSpaceView";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
