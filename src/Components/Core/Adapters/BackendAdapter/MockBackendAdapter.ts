@@ -111,7 +111,7 @@ export default class MockBackendAdapter implements IBackendPort {
         return Promise.resolve(
           "http://" +
             window.location.host +
-            "/SampleLearningElementData/testText.txt"
+            "/SampleLearningElementData/fktohneParamohneRueckgabeohneDeklaration.c"
         );
       case "pdf":
         return Promise.resolve(
