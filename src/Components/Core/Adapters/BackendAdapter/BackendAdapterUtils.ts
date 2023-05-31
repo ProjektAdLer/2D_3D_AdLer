@@ -39,7 +39,7 @@ export default class BackendAdapterUtils {
       ) {
         template = LearningSpaceTemplateType.None;
       } else {
-        template = space.spaceTemplate;
+        template = space.spaceTemplate.toUpperCase();
       }
 
       return {
