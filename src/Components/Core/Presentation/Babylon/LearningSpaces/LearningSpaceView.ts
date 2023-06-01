@@ -15,8 +15,8 @@ import {
   Color3,
 } from "@babylonjs/core";
 import LearningSpaceViewModel from "./LearningSpaceViewModel";
-import floorTexture from "../../../../../Assets/textures/WoodFloor054_1K_Color.jpg";
-import wallTexture from "../../../../../Assets/textures/Tiles002_1K_Color.jpg";
+import floorTexture from "../../../../../Assets/textures/WoodFloor051_1K_Color.jpg";
+import wallTexture from "../../../../../Assets/textures/Bricks050_1K_Color.jpg";
 import ILearningSpaceController from "./ILearningSpaceController";
 import ILearningSpaceView from "./ILearningSpaceView";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
@@ -112,8 +112,8 @@ export default class LearningSpaceView implements ILearningSpaceView {
       floorTexture,
       this.scenePresenter.Scene
     );
-    (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).uScale = 2;
-    (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 2;
+    (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).uScale = 3;
+    (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 3;
     this.viewModel.floorMaterial.Value.specularColor = new Color3(0, 0, 0);
   }
   private createWallMaterial(): void {
@@ -125,8 +125,8 @@ export default class LearningSpaceView implements ILearningSpaceView {
       wallTexture,
       this.scenePresenter.Scene
     );
-    (this.viewModel.wallMaterial.Value.diffuseTexture as Texture).vScale = 2;
-    (this.viewModel.wallMaterial.Value.diffuseTexture as Texture).uScale = 8;
+    (this.viewModel.wallMaterial.Value.diffuseTexture as Texture).vScale = 1.5;
+    (this.viewModel.wallMaterial.Value.diffuseTexture as Texture).uScale = 6;
     this.viewModel.wallMaterial.Value.specularColor = new Color3(0, 0, 0);
   }
 
