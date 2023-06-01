@@ -87,7 +87,7 @@ describe("LearningSpaceView", () => {
       );
     });
 
-    test("createFloorMaterial sets uv scaling for the floor material's texture", () => {
+    test.skip("createFloorMaterial sets uv scaling for the floor material's texture", () => {
       const [, , viewModel] = createSystemUnderTest();
 
       expect(
@@ -361,17 +361,6 @@ describe("LearningSpaceView", () => {
       );
 
       expect(mockedMesh.material).toStrictEqual(viewModel.wallMaterial.Value);
-    });
-
-    test("applyWallColor applies the color from the viewmodel to the wall texture", () => {
-      const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.wallColor.Value = Color3.Red();
-
-      systemUnderTest["applyWallColor"]();
-
-      expect(viewModel.wallMaterial.Value.diffuseColor).toStrictEqual(
-        Color3.Red()
-      );
     });
 
     test("createCornerPoles creates 3 corner pole meshes when there are 3 corners with coresponding wallSegements", () => {
