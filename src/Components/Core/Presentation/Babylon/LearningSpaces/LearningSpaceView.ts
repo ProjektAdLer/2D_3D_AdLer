@@ -16,6 +16,7 @@ import {
 } from "@babylonjs/core";
 import LearningSpaceViewModel from "./LearningSpaceViewModel";
 import floorTexture from "../../../../../Assets/textures/WoodFloor054_1K_Color.jpg";
+import wallTexture from "../../../../../Assets/textures/Tiles002_1K_Color.jpg";
 import ILearningSpaceController from "./ILearningSpaceController";
 import ILearningSpaceView from "./ILearningSpaceView";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
@@ -66,7 +67,6 @@ export default class LearningSpaceView implements ILearningSpaceView {
     this.createWalls();
     this.createCornerPoles();
     this.createFloor();
-    this.applyWallColor();
 
     this.viewModel.isDirty = false;
   }
@@ -116,6 +116,19 @@ export default class LearningSpaceView implements ILearningSpaceView {
     (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 2;
     this.viewModel.floorMaterial.Value.specularColor = new Color3(0, 0, 0);
   }
+  private createWallMaterial(): void {
+    this.viewModel.wallMaterial.Value = new StandardMaterial(
+      "wallMaterial",
+      this.scenePresenter.Scene
+    );
+    this.viewModel.wallMaterial.Value.diffuseTexture = new Texture(
+      wallTexture,
+      this.scenePresenter.Scene
+    );
+    (this.viewModel.wallMaterial.Value.diffuseTexture as Texture).vScale = 2;
+    (this.viewModel.wallMaterial.Value.diffuseTexture as Texture).uScale = 8;
+    this.viewModel.wallMaterial.Value.specularColor = new Color3(0, 0, 0);
+  }
 
   private createFloor(): void {
     // create floor mesh
@@ -131,14 +144,6 @@ export default class LearningSpaceView implements ILearningSpaceView {
     // apply material
     this.viewModel.floorMesh.Value.material =
       this.viewModel.floorMaterial.Value;
-  }
-
-  private createWallMaterial(): void {
-    this.viewModel.wallMaterial.Value = new StandardMaterial(
-      "wallMaterial",
-      this.scenePresenter.Scene
-    );
-    this.applyWallColor();
   }
 
   private createWalls(): void {
@@ -293,12 +298,6 @@ export default class LearningSpaceView implements ILearningSpaceView {
     windowCutout.dispose();
 
     return wallSegmentWithCutout;
-  }
-
-  private applyWallColor(): void {
-    this.viewModel.wallMaterial.Value &&
-      (this.viewModel.wallMaterial.Value.diffuseColor =
-        this.viewModel.wallColor.Value);
   }
 
   private createCornerPoles(): void {
