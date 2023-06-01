@@ -81,7 +81,7 @@ describe("LearningElementView", () => {
     expect(viewModel.hasScored["subscribers"].length).toBe(1);
   });
 
-  test("async setup calls scene presenter to load model", async () => {
+  test("async setup calls scene presenter to load model and icon", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
@@ -89,10 +89,10 @@ describe("LearningElementView", () => {
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
     await systemUnderTest.setupLearningElement();
 
-    expect(scenePresenterMock.loadModel).toBeCalledTimes(1);
+    expect(scenePresenterMock.loadModel).toBeCalledTimes(2);
   });
 
-  test("async setup creates a new action manager for each mesh", async () => {
+  test("async setup sets an action manager for each model mesh", async () => {
     const scene = new Scene(new NullEngine());
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh1", scene),
@@ -102,7 +102,23 @@ describe("LearningElementView", () => {
     const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
     await systemUnderTest.setupLearningElement();
 
-    viewModel.meshes.Value.forEach((mesh) => {
+    viewModel.modelMeshes.Value.forEach((mesh) => {
+      expect(mesh.actionManager).toBeDefined();
+    });
+  });
+
+  test("async setup sets an action manager for each icon mesh", async () => {
+    const scene = new Scene(new NullEngine());
+    scenePresenterMock.loadModel.mockResolvedValue([
+      new AbstractMesh("TestMesh1", scene),
+      new AbstractMesh("TestMesh2", scene),
+    ]);
+
+    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+
+    await systemUnderTest.setupLearningElement();
+
+    viewModel.iconMeshes.Value.forEach((mesh) => {
       expect(mesh.actionManager).toBeDefined();
     });
   });
@@ -204,7 +220,12 @@ describe("LearningElementView", () => {
     await systemUnderTest.setupLearningElement();
 
     viewModel.position.Value = new Vector3(42, 42, 42);
-    expect(viewModel.meshes.Value[0].position).toEqual(new Vector3(42, 42, 42));
+    expect(viewModel.modelMeshes.Value[0].position).toEqual(
+      new Vector3(42, 42, 42)
+    );
+    expect(viewModel.iconMeshes.Value[0].position).toEqual(
+      new Vector3(42, 42, 42)
+    );
   });
 
   test("positionModel changes the model rotation when the rotation value in the viewModel is changed", async () => {
@@ -228,10 +249,10 @@ describe("LearningElementView", () => {
 
     viewModel.hasScored.Value = true;
     expect(scenePresenterMock.HighlightLayer.removeMesh).toHaveBeenCalledWith(
-      viewModel.meshes.Value[0]
+      viewModel.modelMeshes.Value[0]
     );
     expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
-      viewModel.meshes.Value[0],
+      viewModel.modelMeshes.Value[0],
       expect.any(Color3)
     );
   });
