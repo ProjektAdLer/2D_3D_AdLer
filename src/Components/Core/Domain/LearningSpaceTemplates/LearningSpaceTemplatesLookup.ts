@@ -1,8 +1,8 @@
 import { LearningSpaceTemplateType } from "../Types/LearningSpaceTemplateType";
 import ILearningSpaceTemplate from "./ILearningSpaceTemplate";
-import { LearningSpaceTemplate_L as LearningSpaceTemplate_L } from "./LearningSpaceTemplate_L";
-import { LearningSpaceTemplate_R8 as LearningSpaceTemplate_R8 } from "./LearningSpaceTemplate_R8";
-import { LearningSpaceTemplate_R6 as LearningSpaceTemplate_R6 } from "./LearningSpaceTemplate_R6";
+import { LearningSpaceTemplate_L } from "./LearningSpaceTemplate_L";
+import { LearningSpaceTemplate_R8 } from "./LearningSpaceTemplate_R8";
+import { LearningSpaceTemplate_R6 } from "./LearningSpaceTemplate_R6";
 
 export default class LearningSpaceTemplateLookup {
   static getLearningSpaceTemplate(

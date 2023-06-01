@@ -10,7 +10,6 @@ import ILearningElementPresenter from "../LearningElements/ILearningElementPrese
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import LearningElementView from "../LearningElements/LearningElementView";
-import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
 import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import IWindowPresenter from "../Window/IWindowPresenter";
 import AbstractLearningSpaceDimensionStrategy from "./LearningSpaceDimensionStrategies/AbstractLearningSpaceDimensionStrategy";
@@ -110,6 +109,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
       this.viewModel.id
     );
   }
+
   private createEntryDoor(): void {
     const doorBuilder = CoreDIContainer.get<IPresentationBuilder>(
       BUILDER_TYPES.IDoorBuilder

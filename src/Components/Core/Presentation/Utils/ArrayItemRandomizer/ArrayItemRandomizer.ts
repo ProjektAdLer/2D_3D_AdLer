@@ -28,7 +28,7 @@ export default class ArrayItemRandomizer<T> implements IArrayItemRandomizer<T> {
   private createSeedHash(seed: string) {
     let hash = 0;
 
-    if (seed.length == 0) return hash;
+    if (seed.length === 0) return hash;
 
     for (let i = 0; i < seed.length; i++) {
       const char = seed.charCodeAt(i);
