@@ -9,7 +9,6 @@ export default class DecorationPresenter implements IDecorationPresenter {
     }
   }
   presentDecoration(learningSpaceTemplateType: LearningSpaceTemplateType) {
-    console.log("presentDeco", learningSpaceTemplateType);
     this.viewModel.learningSpaceTemplateType.Value = learningSpaceTemplateType;
   }
 }
