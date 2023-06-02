@@ -3,9 +3,9 @@
   "version": "0.2.0",
   "private": true,
   "dependencies": {
-    "@babylonjs/core": "^5.14.1",
-    "@babylonjs/gui": "^5.14.1",
-    "@babylonjs/loaders": "^5.14.1",
+    "@babylonjs/core": "^5.57.1",
+    "@babylonjs/gui": "^5.57.1",
+    "@babylonjs/loaders": "^5.57.1",
     "@types/node": "^18.0.3",
     "@xapi/xapi": "^2.0.2",
     "axios": "^0.27.2",
@@ -59,7 +59,7 @@
     ]
   },
   "devDependencies": {
-    "@babylonjs/inspector": "^5.14.1",
+    "@babylonjs/inspector": "^5.57.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "13.1",
     "@testing-library/user-event": "^14.2.1",
