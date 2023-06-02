@@ -10,6 +10,8 @@ export default class AvatarViewModel {
   public meshes = new Observable<Mesh[]>([]);
   public parentNode = new Observable<TransformNode>();
 
+  public spawnPoint = new Observable<Vector3>(Vector3.Zero());
+
   public agentIndex: number;
   public agentParams: IAgentParameters = {
     radius: 0.5,

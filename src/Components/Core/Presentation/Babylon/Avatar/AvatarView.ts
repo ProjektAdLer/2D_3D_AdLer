@@ -21,6 +21,7 @@ import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
 
 const modelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Avatar_male.glb");
+
 export default class AvatarView {
   isReady: Promise<void>;
 
@@ -36,6 +37,8 @@ export default class AvatarView {
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
+
+    // viewModel.spawnPoint.subscribe(this.applySpawnPosition);
 
     // start async setup
     this.isReady = this.asyncSetup();
@@ -70,6 +73,11 @@ export default class AvatarView {
       0,
       1
     );
+  }
+
+  @bind
+  private applySpawnPosition(): void {
+    this.viewModel.parentNode.Value.position = this.viewModel.spawnPoint.Value;
   }
 
   @bind

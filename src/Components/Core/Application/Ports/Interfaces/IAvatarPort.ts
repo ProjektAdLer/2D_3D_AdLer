@@ -1,6 +1,4 @@
-export class AvatarTO {
-  avatarName: string;
-}
+import AvatarTO from "../../DataTransferObjects/AvatarTO";
 
 export default interface IAvatarPort {
   presentAvatar(avatarTO: AvatarTO): void;
