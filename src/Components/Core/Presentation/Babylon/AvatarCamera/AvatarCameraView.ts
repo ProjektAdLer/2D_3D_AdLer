@@ -33,7 +33,7 @@ export default class AvatarCameraView {
       this.viewModel.defaultAlphaRotation,
       this.viewModel.defaultBetaRotation,
       this.viewModel.defaultRadius,
-      parentNode.position,
+      parentNode.position.add(this.viewModel.defaultTargetOffset),
       this.scenePresenter.Scene
     );
 

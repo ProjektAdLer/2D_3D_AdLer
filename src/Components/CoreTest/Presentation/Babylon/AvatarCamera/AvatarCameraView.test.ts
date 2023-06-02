@@ -3,6 +3,7 @@ import {
   NullEngine,
   Scene,
   TransformNode,
+  Vector3,
 } from "@babylonjs/core";
 import { mock, mockDeep } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
@@ -50,7 +51,9 @@ describe("AvatarCameraView", () => {
   test("createCamera creates a camera", () => {
     const viewModel = new AvatarCameraViewModel();
     const scene = new Scene(new NullEngine());
-    viewModel.parentNode.Value = mockDeep<TransformNode>();
+    const mockedParentNode = mockDeep<TransformNode>();
+    mockedParentNode.position = mockDeep<Vector3>();
+    viewModel.parentNode.Value = mockedParentNode;
     //@ts-ignore
     scenePresenterMock.Scene = scene;
     systemUnderTest = new AvatarCameraView(
@@ -58,7 +61,7 @@ describe("AvatarCameraView", () => {
       mock<AvatarCameraController>
     );
 
-    systemUnderTest["createCamera"](mock<TransformNode>());
+    systemUnderTest["createCamera"](mockedParentNode);
 
     expect(viewModel.camera.Value).toBeDefined();
   });
