@@ -17,6 +17,7 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import ILearningSpaceController from "../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpaceController";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
+import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 
 // mock necessary Babylon objects
 jest.mock("@babylonjs/core/Materials");
@@ -75,12 +76,14 @@ describe("LearningSpaceView", () => {
   describe("Material Creation Methods", () => {
     test("createFloorMaterial creates a material", () => {
       const [, , viewModel] = createSystemUnderTest();
+      viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.L;
 
       expect(viewModel.floorMaterial.Value).toBeInstanceOf(StandardMaterial);
     });
 
     test("createFloorMaterial sets a texture for the floor material", () => {
       const [, , viewModel] = createSystemUnderTest();
+      viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.L;
 
       expect(viewModel.floorMaterial.Value.diffuseTexture).toBeInstanceOf(
         Texture
@@ -100,6 +103,7 @@ describe("LearningSpaceView", () => {
 
     test("createWallMaterial creates a material", () => {
       const [, , viewModel] = createSystemUnderTest();
+      viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.L;
 
       expect(viewModel.wallMaterial.Value).toBeInstanceOf(StandardMaterial);
     });

@@ -15,8 +15,6 @@ import {
   Color3,
 } from "@babylonjs/core";
 import LearningSpaceViewModel from "./LearningSpaceViewModel";
-import floorTexture from "../../../../../Assets/textures/WoodFloor051_1K_Color.jpg";
-import wallTexture from "../../../../../Assets/textures/Bricks050_1K_Color.jpg";
 import ILearningSpaceController from "./ILearningSpaceController";
 import ILearningSpaceView from "./ILearningSpaceView";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
@@ -26,9 +24,23 @@ import SCENE_TYPES, {
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import bind from "bind-decorator";
+import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 
 // apply earcut (see also top of the page)
 (window as any).earcut = earcut;
+
+const floorTextureLinks: { [key in LearningSpaceTemplateType]: string } = {
+  [LearningSpaceTemplateType.L]: require("../../../../../Assets/textures/WoodFloor051_1K_Color.jpg"),
+  [LearningSpaceTemplateType.R6]: require("../../../../../Assets/textures/WoodFloor054_1K_Color.jpg"),
+  [LearningSpaceTemplateType.R8]: require("../../../../../Assets/textures/Tiles078_1K_Color.jpg"),
+  [LearningSpaceTemplateType.None]: require("../../../../../Assets/textures/Tiles078_1K_Color.jpg"),
+};
+const wallTextureLinks: { [key in LearningSpaceTemplateType]: any } = {
+  [LearningSpaceTemplateType.L]: require("../../../../../Assets/textures/Bricks050_1K_Color.jpg"),
+  [LearningSpaceTemplateType.R6]: require("../../../../../Assets/textures/Plaster001_1K_Color.jpg"),
+  [LearningSpaceTemplateType.R8]: require("../../../../../Assets/textures/Bricks058_1K_Color.jpg"),
+  [LearningSpaceTemplateType.None]: require("../../../../../Assets/textures/Bricks050_1K_Color.jpg"),
+};
 
 export default class LearningSpaceView implements ILearningSpaceView {
   private scenePresenter: IScenePresenter;
@@ -47,8 +59,10 @@ export default class LearningSpaceView implements ILearningSpaceView {
     );
 
     // create materials
-    this.createFloorMaterial();
-    this.createWallMaterial();
+    this.viewModel.learningSpaceTemplateType.subscribe(() => {
+      this.createFloorMaterial();
+      this.createWallMaterial();
+    });
   }
 
   @bind
@@ -102,27 +116,28 @@ export default class LearningSpaceView implements ILearningSpaceView {
     this.viewModel.wallMeshes.Value = [];
   }
 
-  private createFloorMaterial(): void {
+  public createFloorMaterial(): void {
     this.viewModel.floorMaterial.Value = new StandardMaterial(
       "floorMaterial",
       this.scenePresenter.Scene
     );
 
     this.viewModel.floorMaterial.Value.diffuseTexture = new Texture(
-      floorTexture,
+      floorTextureLinks[this.viewModel.learningSpaceTemplateType.Value],
       this.scenePresenter.Scene
     );
+
     (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).uScale = 3;
     (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 3;
     this.viewModel.floorMaterial.Value.specularColor = new Color3(0, 0, 0);
   }
-  private createWallMaterial(): void {
+  public createWallMaterial(): void {
     this.viewModel.wallMaterial.Value = new StandardMaterial(
       "wallMaterial",
       this.scenePresenter.Scene
     );
     this.viewModel.wallMaterial.Value.diffuseTexture = new Texture(
-      wallTexture,
+      wallTextureLinks[this.viewModel.learningSpaceTemplateType.Value],
       this.scenePresenter.Scene
     );
     (this.viewModel.wallMaterial.Value.diffuseTexture as Texture).vScale = 1.5;
