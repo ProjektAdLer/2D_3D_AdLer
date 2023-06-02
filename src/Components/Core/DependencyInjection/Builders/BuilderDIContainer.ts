@@ -30,6 +30,7 @@ import LearningWorldDetailBuilder from "~ReactComponents/LearningWorldMenu/Learn
 import AmbienceBuilder from "../../Presentation/Babylon/Ambience/AmbienceBuilder";
 import WindowBuilder from "../../Presentation/Babylon/Window/WindowBuilder";
 import LearningSpaceScorePanelBuilder from "~ReactComponents/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanelBuilder";
+import DecorationBuilder from "../../Presentation/Babylon/Decoration/DecorationBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -108,6 +109,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IAmbienceBuilder).to(
     AmbienceBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IDecorationBuilder).to(
+    DecorationBuilder
   );
 });
 

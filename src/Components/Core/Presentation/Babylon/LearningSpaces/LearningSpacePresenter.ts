@@ -16,6 +16,7 @@ import AbstractLearningSpaceDimensionStrategy from "./LearningSpaceDimensionStra
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import GenericLearningSpaceDimensionStrategy from "./LearningSpaceDimensionStrategies/GenericLearningSpaceDimensionStrategy";
 import TemplateLearningSpaceDimensionStrategy from "./LearningSpaceDimensionStrategies/TemplateLearningSpaceDimensionStrategy";
+import IDecorationPresenter from "../Decoration/IDecorationPresenter";
 
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
@@ -42,6 +43,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     this.setDimensionsStrategy(spaceTO.template);
 
     this.viewModel.id = spaceTO.id;
+    this.viewModel.learningSpaceTemplateType.Value = spaceTO.template;
     this.viewModel.spaceCornerPoints.Value =
       this.dimensionStrategy.getCornerPoints(spaceTO);
     this.viewModel.exitDoorPosition.Value =
@@ -57,6 +59,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     this.createWindows();
     if (this.viewModel.exitDoorPosition.Value[0]) this.createExitDoor();
     if (this.viewModel.entryDoorPosition.Value[0]) this.createEntryDoor();
+    this.createDecoration();
   }
 
   private setDimensionsStrategy(templateType: LearningSpaceTemplateType): void {
@@ -134,5 +137,16 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         windowPosition
       );
     }
+  }
+
+  private createDecoration(): void {
+    const decorationBuilder = CoreDIContainer.get<IPresentationBuilder>(
+      BUILDER_TYPES.IDecorationBuilder
+    );
+
+    this.director.build(decorationBuilder);
+    (
+      decorationBuilder.getPresenter() as IDecorationPresenter
+    ).presentDecoration(this.viewModel.learningSpaceTemplateType.Value);
   }
 }

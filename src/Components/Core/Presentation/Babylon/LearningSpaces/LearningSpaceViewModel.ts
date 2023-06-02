@@ -3,6 +3,7 @@ import { injectable } from "inversify";
 import { Color3, Mesh, StandardMaterial, Vector3 } from "@babylonjs/core";
 import Observable from "../../../../../Lib/Observable";
 import AbstractViewModel from "../Abstract/AbstractViewModel";
+import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 
 @injectable()
 export default class LearningSpaceViewModel extends AbstractViewModel {
@@ -53,4 +54,6 @@ export default class LearningSpaceViewModel extends AbstractViewModel {
   public windowWidth: Observable<number> = new Observable(1.4);
   public windowHeight: Observable<number> = new Observable(1.6);
   public windowMeshes: Observable<Mesh[]> = new Observable<Mesh[]>();
+  public learningSpaceTemplateType: Observable<LearningSpaceTemplateType> =
+    new Observable<LearningSpaceTemplateType>();
 }

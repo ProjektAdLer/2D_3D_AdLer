@@ -1,6 +1,5 @@
 import { Vector3 } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
-import LearningSpaceScoreTO from "../../../../Core/Application/DataTransferObjects/LearningSpaceScoreTO";
 import LearningSpaceTO from "../../../../Core/Application/DataTransferObjects/LearningSpaceTO";
 import BUILDER_TYPES from "../../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
@@ -17,6 +16,7 @@ import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/Learnin
 import IWindowPresenter from "../../../../Core/Presentation/Babylon/Window/IWindowPresenter";
 import GenericLearningSpaceDimensionStrategy from "../../../../Core/Presentation/Babylon/LearningSpaces/LearningSpaceDimensionStrategies/GenericLearningSpaceDimensionStrategy";
 import TemplateLearningSpaceDimensionStrategy from "../../../../Core/Presentation/Babylon/LearningSpaces/LearningSpaceDimensionStrategies/TemplateLearningSpaceDimensionStrategy";
+import IDecorationPresenter from "../../../../Core/Presentation/Babylon/Decoration/IDecorationPresenter";
 
 const directorMock = mock<IPresentationDirector>();
 const builderMock = mock<IPresentationBuilder>();
@@ -68,6 +68,9 @@ describe("LearningSpacePresenter", () => {
     CoreDIContainer.rebind<IPresentationBuilder>(
       BUILDER_TYPES.IWindowBuilder
     ).toConstantValue(builderMock);
+    CoreDIContainer.rebind<IPresentationBuilder>(
+      BUILDER_TYPES.IDecorationBuilder
+    ).toConstantValue(builderMock);
     CoreDIContainer.rebind<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
     ).toConstantValue(directorMock);
@@ -109,12 +112,15 @@ describe("LearningSpacePresenter", () => {
     systemUnderTest["createEntryDoor"] = createEntryDoorMock;
     const createWindowsMock = jest.fn();
     systemUnderTest["createWindows"] = createWindowsMock;
+    const createDecorationMock = jest.fn();
+    systemUnderTest["createDecoration"] = createDecorationMock;
 
     systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
     expect(createElementsMock).toHaveBeenCalledTimes(1);
     expect(createExitDoorMock).toHaveBeenCalledTimes(1);
     expect(createWindowsMock).toHaveBeenCalledTimes(1);
+    expect(createDecorationMock).toHaveBeenCalledTimes(1);
 
     expect(createEntryDoorMock).toHaveBeenCalledTimes(1);
   });
@@ -129,6 +135,8 @@ describe("LearningSpacePresenter", () => {
     systemUnderTest["createExitDoor"] = createExitDoorMock;
     const createWindowsMock = jest.fn();
     systemUnderTest["createWindows"] = createWindowsMock;
+    const createDecorationMock = jest.fn();
+    systemUnderTest["createDecoration"] = createDecorationMock;
 
     systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
@@ -158,6 +166,8 @@ describe("LearningSpacePresenter", () => {
     systemUnderTest["createExitEntryDoor"] = createExitDoorMock;
     const createWindowsMock = jest.fn();
     systemUnderTest["createWindows"] = createWindowsMock;
+    const createDecorationMock = jest.fn();
+    systemUnderTest["createDecoration"] = createDecorationMock;
 
     builderMock.getPresenter.mockReturnValue(mock<ILearningElementPresenter>());
     builderMock.getView.mockReturnValue(mock<LearningElementView>());
@@ -174,6 +184,8 @@ describe("LearningSpacePresenter", () => {
     systemUnderTest["createDoor"] = createDoorMock;
     const createWindowsMock = jest.fn();
     systemUnderTest["createWindows"] = createWindowsMock;
+    const createDecorationMock = jest.fn();
+    systemUnderTest["createDecoration"] = createDecorationMock;
 
     const elementPresenterMock = mock<ILearningElementPresenter>();
     builderMock.getPresenter.mockReturnValue(elementPresenterMock);
@@ -203,6 +215,8 @@ describe("LearningSpacePresenter", () => {
     systemUnderTest["createDoor"] = createDoorMock;
     const createWindowsMock = jest.fn();
     systemUnderTest["createWindows"] = createWindowsMock;
+    const createDecorationMock = jest.fn();
+    systemUnderTest["createDecoration"] = createDecorationMock;
 
     builderMock.getPresenter.mockReturnValue(mock<ILearningElementPresenter>());
     const elementViewMock = mock<LearningElementView>();
@@ -243,5 +257,21 @@ describe("LearningSpacePresenter", () => {
     expect(directorMock.build).toHaveBeenCalledTimes(1);
     expect(directorMock.build).toHaveBeenCalledWith(builderMock);
     expect(windowPresenterMock.presentWindow).toHaveBeenCalledTimes(1);
+  });
+  test("createDecoration creates Decoration with its builder and calls the new presenter", () => {
+    spaceViewModel.learningSpaceTemplateType.Value =
+      LearningSpaceTemplateType.L;
+
+    const decorationPresenterMock = mock<IDecorationPresenter>();
+    builderMock.getPresenter.mockReturnValueOnce(decorationPresenterMock);
+
+    systemUnderTest["createDecoration"]();
+
+    expect(directorMock.build).toHaveBeenCalledTimes(1);
+    expect(directorMock.build).toHaveBeenCalledWith(builderMock);
+    expect(decorationPresenterMock.presentDecoration).toHaveBeenCalledTimes(1);
+    expect(decorationPresenterMock.presentDecoration).toHaveBeenCalledWith(
+      LearningSpaceTemplateType.L
+    );
   });
 });
