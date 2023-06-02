@@ -41,7 +41,8 @@
       -1px 0 0 rgb(233, 242, 250, 0.4);
   }
 
-  .animate-bounce-once {
+  /* TODO: Remove this when setup for Nested CSS is done*/
+  /* .animate-bounce-once {
     animation: bounce 1.5s 1;
 
     @keyframes bounce {
@@ -55,7 +56,7 @@
         animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
       }
     }
-  }
+  } */
 }
 
 /*Styles für die Anzeige des Inspectors*/
