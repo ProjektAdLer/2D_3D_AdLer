@@ -8,7 +8,7 @@ import VideoComponent from "../../../../../../Core/Presentation/React/LearningSp
 import LearningElementModalViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 
 jest.mock(
-  "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/YouTubeVideoHost.tsx",
+  "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/YoutubeVideoHost.tsx",
   () => "mocked"
 );
 jest.mock(
