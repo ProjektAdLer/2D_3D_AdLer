@@ -8,13 +8,16 @@ import VideoComponent from "../../../../../../Core/Presentation/React/LearningSp
 import LearningElementModalViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 
 jest.mock(
-  "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/YouTubeVideoHost"
+  "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/YouTubeVideoHost.tsx",
+  () => "mocked"
 );
 jest.mock(
-  "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/VimeoVideoHost"
+  "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/VimeoVideoHost.tsx",
+  () => "mocked"
 );
 jest.mock(
-  "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/OpencastVideoHost"
+  "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/OpencastVideoHost.tsx",
+  () => "mocked"
 );
 
 jest.mock("axios");
