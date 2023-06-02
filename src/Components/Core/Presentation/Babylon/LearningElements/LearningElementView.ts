@@ -21,25 +21,26 @@ import ArrayItemRandomizer from "../../Utils/ArrayItemRandomizer/ArrayItemRandom
 
 const modelLinks: { [key in LearningElementTypes]?: any[] } = {
   [LearningElementTypes.h5p]: [
-    require("../../../../../Assets/3dModels/defaultTheme/l-h5p-Schreibtisch-1.glb"),
-    require("../../../../../Assets/3dModels/defaultTheme/l-h5p-Spielautomat-1.glb"),
-    require("../../../../../Assets/3dModels/defaultTheme/l-h5p-Tafel-1.glb"),
-    require("../../../../../Assets/3dModels/defaultTheme/l-h5p-Zeichenpult-1.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l_h5p_deskpc_1.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l_h5p_slotmachine_1.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l_h5p_blackboard_1.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l_h5p_drawingtable_1.glb"),
   ],
   [LearningElementTypes.text]: [
-    require("../../../../../Assets/3dModels/defaultTheme/l-text-Bücherregal-1.glb"),
-    require("../../../../../Assets/3dModels/defaultTheme/l-text-Bücherregal-2.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l_text_bookshelf_1.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l_text_bookshelf_2.glb"),
   ],
   [LearningElementTypes.pdf]: [
-    require("../../../../../Assets/3dModels/defaultTheme/l-text-Bücherregal-1.glb"),
-    require("../../../../../Assets/3dModels/defaultTheme/l-text-Bücherregal-2.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l_text_bookshelf_1.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l_text_bookshelf_2.glb"),
   ],
   [LearningElementTypes.image]: [
-    require("../../../../../Assets/3dModels/defaultTheme/l-bild-Wandbild-1.glb"),
-    require("../../../../../Assets/3dModels/defaultTheme/l-bild-Wandbild-2.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l_picture_painting_1.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l_picture_painting_2.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l_picture_paintingeasel_1.glb"),
   ],
   [LearningElementTypes.video]: [
-    require("../../../../../Assets/3dModels/defaultTheme/l-video-Fernseher-1.glb"),
+    require("../../../../../Assets/3dModels/defaultTheme/l_video_television_1.glb"),
   ],
   [LearningElementTypes.notAnElement]: [],
 };

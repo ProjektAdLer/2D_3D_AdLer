@@ -50,7 +50,7 @@ export const LearningSpaceTemplate_R6: ILearningSpaceTemplate = {
     orientation: { rotation: -90 },
   },
   exitDoor: {
-    position: { x: 4, y: 0 },
+    position: { x: 4, y: 0.4 },
     orientation: { rotation: 180 },
   },
   windows: [

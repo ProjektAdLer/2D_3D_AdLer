@@ -56,11 +56,11 @@ export const LearningSpaceTemplate_R8: ILearningSpaceTemplate = {
     },
   ],
   entryDoor: {
-    position: { x: 0, y: -6 },
+    position: { x: -0.4, y: -6 },
     orientation: { rotation: -90 },
   },
   exitDoor: {
-    position: { x: 4, y: 4.4 },
+    position: { x: 4, y: 4.8 },
     orientation: { rotation: 180 },
   },
   windows: [
