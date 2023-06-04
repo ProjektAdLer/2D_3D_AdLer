@@ -40,7 +40,7 @@ export default function LearningWorldScorePanel({
   if (!viewModel) return null;
 
   return (
-    <div style={{ width: 60 }}>
+    <div style={{ width: 70 }}>
       <CircularProgressbarWithChildren
         value={percentage}
         strokeWidth={10}
@@ -53,11 +53,11 @@ export default function LearningWorldScorePanel({
           pathColor: `#59B347`,
         })}
       >
-        <img style={{ width: 40, opacity: 0.4 }} src={worldIcon} alt="icon" />
+        <img style={{ width: 50, opacity: 0.4 }} src={worldIcon} alt="icon" />
 
         <div
           className="font-bold text-center"
-          style={{ position: "absolute", fontSize: 10, lineHeight: 1.2 }}
+          style={{ position: "absolute", fontSize: 12, lineHeight: 1.2 }}
         >
           {Math.round(percentage) + "%"}
         </div>
