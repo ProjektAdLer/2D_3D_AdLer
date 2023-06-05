@@ -1,7 +1,7 @@
 import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
 import LearningSpaceNamePanelController from "./LearningSpaceNamePanelController";
 import LearningSpaceNamePanelViewModel from "./LearningSpaceNamePanelViewModel";
-import worldIcon from "../../../../../../Assets/icons/14-world/world-icon-nobg.svg";
+import spaceIcon from "../../../../../../Assets/icons/13-space/space-icon-nobg.svg";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
@@ -25,8 +25,8 @@ export default function LearningSpaceNamePanel({
       <div className="flex items-center justify-between">
         <img
           className="w-8 mr-4 lg:w-14"
-          src={worldIcon}
-          alt="Learning-World-Icon"
+          src={spaceIcon}
+          alt="Learning-Space-Icon"
         ></img>
         <h1 className="text-xl font-black text-adlerdarkblue text-outline lg:text-4xl">
           {name}
