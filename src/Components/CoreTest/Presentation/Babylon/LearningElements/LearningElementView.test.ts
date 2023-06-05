@@ -26,6 +26,7 @@ function buildSystemUnderTest(): [
 ] {
   const viewModel = new LearningElementViewModel();
   viewModel.type.Value = "h5p";
+  viewModel.position.Value = new Vector3(1, 2, 3);
   const controller = mock<ILearningElementController>();
   const view = new LearningElementView(viewModel, controller);
   return [viewModel, controller, view];
@@ -212,19 +213,25 @@ describe("LearningElementView", () => {
   });
 
   test("positionModel changes the model position when the position value in the viewModel is changed", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
+    // mock resolve value twice to circumvent returning the same mesh twice
+    scenePresenterMock.loadModel
+      .mockResolvedValueOnce([
+        new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+      ])
+      .mockResolvedValueOnce([
+        new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+      ]);
 
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, , systemUnderTest] = buildSystemUnderTest();
+    viewModel.position.Value = new Vector3(42, 42, 42);
+
     await systemUnderTest.setupLearningElement();
 
-    viewModel.position.Value = new Vector3(42, 42, 42);
     expect(viewModel.modelMeshes.Value[0].position).toEqual(
       new Vector3(42, 42, 42)
     );
     expect(viewModel.iconMeshes.Value[0].position).toEqual(
-      new Vector3(42, 42, 42)
+      new Vector3(42, 42 + viewModel.iconYOffset, 42)
     );
   });
 
@@ -232,7 +239,7 @@ describe("LearningElementView", () => {
     const mockedMesh = mockDeep<AbstractMesh>();
     scenePresenterMock.loadModel.mockResolvedValue([mockedMesh]);
 
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, , systemUnderTest] = buildSystemUnderTest();
     await systemUnderTest.setupLearningElement();
 
     viewModel.rotation.Value = 42;
