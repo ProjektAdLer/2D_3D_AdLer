@@ -6,7 +6,6 @@ export interface Point {
 }
 
 export interface Orientation {
-  /** in radians */
   rotation: number;
 }
 
