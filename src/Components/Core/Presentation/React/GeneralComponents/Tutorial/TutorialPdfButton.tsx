@@ -6,6 +6,7 @@ import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/Style
 import PDFObject from "pdfobject";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+
 export default function TutorialPdfButton({
   className,
   pdfFileUrl,
@@ -31,6 +32,7 @@ export default function TutorialPdfButton({
     </React.Fragment>
   );
 }
+
 function DesktopPDFComponent({ pdfFileUrl }: { pdfFileUrl: string }) {
   useEffect(() => {
     PDFObject.embed(pdfFileUrl, "#pdf");
