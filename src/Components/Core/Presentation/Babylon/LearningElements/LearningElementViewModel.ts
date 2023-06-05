@@ -5,7 +5,8 @@ import { LearningElementTypeStrings } from "src/Components/Core/Domain/Types/Lea
 
 export default class LearningElementViewModel {
   public id: ComponentID;
-  public iconScaleUpOnHover: number = 1.002;
+  public iconScaleUpOnHover: number = 1.007;
+  public iconYOffset: number = 2.3;
   public modelMeshes: Observable<Mesh[]> = new Observable<Mesh[]>();
   public iconMeshes: Observable<Mesh[]> = new Observable<Mesh[]>();
   public position: Observable<Vector3> = new Observable<Vector3>();

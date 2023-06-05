@@ -151,8 +151,11 @@ export default class LearningElementView {
     if (this.viewModel.modelMeshes.Value && this.viewModel.iconMeshes.Value) {
       this.viewModel.modelMeshes.Value[0].position =
         this.viewModel.position.Value;
-      this.viewModel.iconMeshes.Value[0].position =
-        this.viewModel.position.Value;
+      this.viewModel.iconMeshes.Value[0].position = new Vector3(
+        this.viewModel.position.Value.x,
+        this.viewModel.position.Value.y + this.viewModel.iconYOffset,
+        this.viewModel.position.Value.z
+      );
 
       this.viewModel.modelMeshes.Value[0].rotate(
         Vector3.Up(),
