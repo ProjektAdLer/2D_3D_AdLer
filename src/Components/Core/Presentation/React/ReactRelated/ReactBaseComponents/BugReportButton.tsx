@@ -1,9 +1,11 @@
+import { useCallback } from "react";
 import debugIcon from "../../../../../../Assets/icons/09-debug/debug-icon-nobg.svg";
 
 export default function BugReportButton() {
-  const openInNewTab = (url: string) => {
+  const openInNewTab = useCallback((url: string) => {
     window.open(url, "_blank", "noreferrer");
-  };
+  }, []);
+
   return (
     <button
       title="Bug Report"
