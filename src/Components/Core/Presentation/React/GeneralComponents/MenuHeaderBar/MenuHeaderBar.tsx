@@ -57,7 +57,7 @@ export default function MenuHeaderBar({
         <div className="flex items-end w-1/2 ">
           <TutorialPdfButton
             className="fixed right-2 top-2"
-            pdfFileUrl={"/SampleLearningElementData/testPDF.pdf"}
+            pdfFileUrl={"/manual/adler_user_manual-min.pdf"}
           />
         </div>
       </div>

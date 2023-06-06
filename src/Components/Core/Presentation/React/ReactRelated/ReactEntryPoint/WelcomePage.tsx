@@ -35,7 +35,7 @@ export default function WelcomePage() {
 
       <TutorialPdfButton
         className="fixed z-20 right-2 top-2 max-h-3/4"
-        pdfFileUrl={"/SampleLearningElementData/testPDF.pdf"}
+        pdfFileUrl={"/manual/adler_user_manual-min.pdf"}
       />
 
       <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
