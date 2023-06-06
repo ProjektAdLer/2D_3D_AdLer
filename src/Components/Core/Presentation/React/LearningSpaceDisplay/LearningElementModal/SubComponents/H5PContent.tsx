@@ -86,7 +86,7 @@ export default function H5PContent({
   return (
     <div className="App">
       <div
-        className="object-scale-down w-[375px] md:w-[500px] lg:w-[600px] xl:w-[700px] 2xl:[1200px] max-h-[93vh] max-w-[90vw] lg:max-w-[99vw]"
+        className="object-scale-down w-[375px] md:w-[500px] lg:w-[600px] xl:w-[900px] 2xl:[1200px] max-h-[93vh] max-w-[90vw] lg:max-w-[99vw]"
         id="h5p-container"
         ref={h5pContainerRef}
       ></div>
