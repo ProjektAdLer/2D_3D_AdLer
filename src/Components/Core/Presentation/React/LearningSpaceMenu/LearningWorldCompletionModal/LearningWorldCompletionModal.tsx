@@ -38,7 +38,15 @@ export default function LearningWorldCompletionModal({
         <div className="w-96">
           <p className="mb-4">
             Du hast alle Lernräume erfolgreich abgeschlossen und somit die
-            Lernwelt bestanden, herzlichen Glückwunsch!
+            Lernwelt bestanden, herzlichen Glückwunsch! <br />
+            Bitte nehmen Sie sich einen Moment Zeit, um unseren
+            Online-Fragebogen zur Evaluation der digitalen Lernumgebung
+            auszufüllen. Hier geht's zum
+            <a href="https://www.soscisurvey.de/softwareengineeringkempten/">
+              Fragebogen
+            </a>
+            .<br />
+            Vielen Dank für Ihre Unterstützung!
           </p>
         </div>
       </div>
