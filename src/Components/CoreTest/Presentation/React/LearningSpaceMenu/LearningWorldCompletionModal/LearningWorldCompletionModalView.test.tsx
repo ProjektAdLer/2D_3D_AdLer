@@ -19,7 +19,7 @@ describe("LearningWorldCompletionModalView", () => {
 
     expect(
       container.getByText(
-        "Du hast alle Lernräume erfolgreich abgeschlossen und somit die Lernwelt bestanden, herzlichen Glückwunsch!"
+        /Du hast alle Lernräume erfolgreich abgeschlossen und somit die Lernwelt bestanden, herzlichen Glückwunsch!/
       )
     ).toBeInTheDocument();
   });
