@@ -36,18 +36,24 @@ export default function LearningWorldCompletionModal({
       <div className="flex flex-col items-center justify-center">
         {<img className="w-32 mb-4" src={SolutionIcon} alt=""></img>}
         <div className="w-96">
-          <p className="mb-4">
+          <p className="m-4">
             Du hast alle Lernräume erfolgreich abgeschlossen und somit die
             Lernwelt bestanden, herzlichen Glückwunsch! <br />
             Bitte nehmen Sie sich einen Moment Zeit, um unseren
             Online-Fragebogen zur Evaluation der digitalen Lernumgebung
             auszufüllen. Hier geht's zum
-            <a href="https://www.soscisurvey.de/softwareengineeringkempten/">
-              Fragebogen
-            </a>
-            .<br />
-            Vielen Dank für Ihre Unterstützung!
           </p>
+          <div className="flex justify-center">
+            <a
+              className="m-8 text-2xl font-bold underline"
+              href="https://www.soscisurvey.de/softwareengineeringkempten/"
+            >
+              Fragebogen.
+            </a>
+          </div>
+          <div className="flex justify-center m-2 font-bold">
+            <p>Vielen Dank für Ihre Unterstützung!</p>
+          </div>
         </div>
       </div>
     </StyledModal>
