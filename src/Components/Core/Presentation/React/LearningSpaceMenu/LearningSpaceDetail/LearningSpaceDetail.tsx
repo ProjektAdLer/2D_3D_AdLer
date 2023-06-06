@@ -83,7 +83,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
             </div>
           </div>
         )}
-        {goals && (
+        {goals.length > 0 && (
           <div className="pb-2 border-b border-gray-500">
             <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
               {goals.length > 1 ? "Lernziele:" : "Lernziel:"}
