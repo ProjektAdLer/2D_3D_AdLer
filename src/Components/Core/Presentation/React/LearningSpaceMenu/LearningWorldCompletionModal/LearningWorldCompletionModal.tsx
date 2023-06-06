@@ -45,7 +45,7 @@ export default function LearningWorldCompletionModal({
           </p>
           <div className="flex justify-center">
             <a
-              className="m-8 text-2xl font-bold underline text-adlergreen"
+              className="m-8 mt-4 text-2xl font-bold underline text-adlergreen"
               href="https://www.soscisurvey.de/softwareengineeringkempten/"
             >
               Fragebogen.
