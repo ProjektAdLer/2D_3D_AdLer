@@ -33,7 +33,6 @@ export default class CalculateLearningSpaceScoreUseCase
     worldID,
   }: InternalCalculateLearningSpaceScoreUseCaseParams): LearningSpaceScoreTO {
     const result = this.calculateLearningSpaceScore(spaceID, worldID);
-    this.worldPort.onLearningSpaceScored(result);
     return result;
   }
 

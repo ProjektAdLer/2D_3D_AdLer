@@ -1,5 +1,7 @@
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
-import LearningSpaceScorePanelViewModel from "./LearningSpaceScorePanelViewModel";
+import LearningSpaceScorePanelViewModel, {
+  ScoreInfo,
+} from "./LearningSpaceScorePanelViewModel";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import {
@@ -19,13 +21,13 @@ export default function LearningSpaceScorePanel({
     BUILDER_TYPES.ILearningSpaceScorePanelBuilder
   );
 
-  const [score] = useObservable<number>(viewModel?.spaceScore);
-  const [requiredScore] = useObservable<number>(viewModel?.spaceRequiredScore);
+  const [scoreInfo] = useObservable<ScoreInfo>(viewModel?.scoreInfo);
   const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
-    setPercentage((score / requiredScore) * 100);
-  }, [score, requiredScore]);
+    if (!scoreInfo) return;
+    setPercentage((scoreInfo.currentScore / scoreInfo.requiredScore) * 100);
+  }, [scoreInfo?.currentScore, scoreInfo?.requiredScore]);
 
   if (!viewModel) return null;
 
@@ -49,9 +51,13 @@ export default function LearningSpaceScorePanel({
           className="font-bold text-center"
           style={{ position: "absolute", fontSize: 12, lineHeight: 1.2 }}
         >
-          {score ?? "x"}
-          <br /> von <br />
-          {requiredScore ?? "y"}
+          {scoreInfo && (
+            <div>
+              {scoreInfo.currentScore}
+              <br /> von <br />
+              {scoreInfo.requiredScore}
+            </div>
+          )}
         </div>
       </CircularProgressbarWithChildren>
     </div>
