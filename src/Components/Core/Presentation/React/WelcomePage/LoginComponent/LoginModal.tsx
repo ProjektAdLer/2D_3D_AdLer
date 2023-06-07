@@ -19,9 +19,7 @@ export default function LoginModal(props: {
   );
 
   const handleSubmit = React.useCallback(() => {
-    props.controller.loginAsync(userName, password).catch((e) => {
-      console.log(e);
-    });
+    props.controller.loginAsync(userName, password);
   }, [props.controller, userName, password]);
 
   return (
