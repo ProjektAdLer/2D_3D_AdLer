@@ -18,8 +18,15 @@ import SCENE_TYPES, {
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import bind from "bind-decorator";
 import ArrayItemRandomizer from "../../Utils/ArrayItemRandomizer/ArrayItemRandomizer";
+import {
+  LearningElementModel,
+  LearningElementModelTypeEnums,
+  isValidLearningElementModelType,
+} from "src/Components/Core/Domain/Types/LearningElementModelTypes";
 
-const modelLinks: { [key in LearningElementTypes]?: any[] } = {
+const modelLinksByType: {
+  [key in LearningElementTypes]?: any[];
+} = {
   [LearningElementTypes.h5p]: [
     require("../../../../../Assets/3dModels/defaultTheme/l_h5p_deskpc_1.glb"),
     require("../../../../../Assets/3dModels/defaultTheme/l_h5p_slotmachine_1.glb"),
@@ -43,6 +50,31 @@ const modelLinks: { [key in LearningElementTypes]?: any[] } = {
     require("../../../../../Assets/3dModels/defaultTheme/l_video_television_1.glb"),
   ],
   [LearningElementTypes.notAnElement]: [],
+};
+
+const modelLinksByModel: {
+  [key in LearningElementModel]?: any;
+} = {
+  [LearningElementModelTypeEnums.H5pElementModelTypes
+    .Backboard]: require("../../../../../Assets/3dModels/defaultTheme/l_h5p_blackboard_1.glb"),
+  [LearningElementModelTypeEnums.H5pElementModelTypes
+    .DeskPC]: require("../../../../../Assets/3dModels/defaultTheme/l_h5p_deskpc_1.glb"),
+  [LearningElementModelTypeEnums.H5pElementModelTypes
+    .DrawingTable]: require("../../../../../Assets/3dModels/defaultTheme/l_h5p_drawingtable_1.glb"),
+  [LearningElementModelTypeEnums.H5pElementModelTypes
+    .SlotMachine]: require("../../../../../Assets/3dModels/defaultTheme/l_h5p_slotmachine_1.glb"),
+  [LearningElementModelTypeEnums.TextElementModelTypes
+    .Bookshelf1]: require("../../../../../Assets/3dModels/defaultTheme/l_text_bookshelf_1.glb"),
+  [LearningElementModelTypeEnums.TextElementModelTypes
+    .Bookshelf2]: require("../../../../../Assets/3dModels/defaultTheme/l_text_bookshelf_2.glb"),
+  [LearningElementModelTypeEnums.ImageElementModelTypes
+    .Painting1]: require("../../../../../Assets/3dModels/defaultTheme/l_picture_painting_1.glb"),
+  [LearningElementModelTypeEnums.ImageElementModelTypes
+    .Painting2]: require("../../../../../Assets/3dModels/defaultTheme/l_picture_painting_2.glb"),
+  [LearningElementModelTypeEnums.ImageElementModelTypes
+    .PaintingEasel]: require("../../../../../Assets/3dModels/defaultTheme/l_picture_paintingeasel_1.glb"),
+  [LearningElementModelTypeEnums.VideoElementModelTypes
+    .Television]: require("../../../../../Assets/3dModels/defaultTheme/l_video_television_1.glb"),
 };
 
 const iconLinks: { [key in LearningElementTypes]?: any } = {
@@ -77,15 +109,27 @@ export default class LearningElementView {
   }
 
   public async setupLearningElement(): Promise<void> {
-    const modelRandomizer = new ArrayItemRandomizer(
-      modelLinks[this.viewModel.type.Value as LearningElementTypes]!
-    );
+    // load model
+    let modelLink;
+    if (
+      isValidLearningElementModelType(this.viewModel.model.Value) &&
+      this.viewModel.model.Value !==
+        LearningElementModelTypeEnums.NoElementModelTypes.None
+    ) {
+      modelLink = modelLinksByModel[this.viewModel.model.Value];
+    } else {
+      const modelRandomizer = new ArrayItemRandomizer(
+        modelLinksByType[this.viewModel.type.Value as LearningElementTypes]!
+      );
+      modelLink = modelRandomizer.getItem(this.viewModel.name.Value);
+    }
 
-    // load meshes
     this.viewModel.modelMeshes.Value = (await this.scenePresenter.loadModel(
-      modelRandomizer.getItem(this.viewModel.name.Value),
+      modelLink,
       true
     )) as Mesh[];
+
+    // load icon
     this.viewModel.iconMeshes.Value = (await this.scenePresenter.loadModel(
       iconLinks[this.viewModel.type.Value as LearningElementTypes]!
     )) as Mesh[];

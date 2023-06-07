@@ -14,7 +14,7 @@ enum VideoElementModelTypes {
   Television = "l_video_television_1",
 }
 
-enum PdfElementModelTypes {}
+// enum PdfElementModelTypes {}
 
 enum H5pElementModelTypes {
   Backboard = "l_h5p_backboard_1",
@@ -34,10 +34,16 @@ export const LearningElementModelTypeEnums = {
   TextElementModelTypes: TextElementModelTypes,
   ImageElementModelTypes: ImageElementModelTypes,
   VideoElementModelTypes: VideoElementModelTypes,
-  PdfElementModelTypes: PdfElementModelTypes,
+  // PdfElementModelTypes: PdfElementModelTypes,
   H5pElementModelTypes: H5pElementModelTypes,
   NoElementModelTypes: NoElementModelTypes,
 };
+
+export function isValidLearningElementModelType(type: string): boolean {
+  return Object.values(LearningElementModelTypeEnums).some((enumType) =>
+    Object.values(enumType).includes(type)
+  );
+}
 
 /**
  Type of a learning element model.
@@ -46,6 +52,6 @@ export type LearningElementModel =
   | TextElementModelTypes
   | ImageElementModelTypes
   | VideoElementModelTypes
-  | PdfElementModelTypes
+  // | PdfElementModelTypes
   | H5pElementModelTypes
   | NoElementModelTypes;

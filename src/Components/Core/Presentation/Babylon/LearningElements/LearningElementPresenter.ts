@@ -27,5 +27,6 @@ export default class LearningElementPresenter
     this.viewModel.goals.Value = elementTO.goals;
     this.viewModel.value.Value = elementTO.value;
     this.viewModel.hasScored.Value = elementTO.hasScored;
+    this.viewModel.model.Value = elementTO.model;
   }
 }

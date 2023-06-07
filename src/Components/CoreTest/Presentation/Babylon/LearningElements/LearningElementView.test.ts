@@ -99,8 +99,9 @@ describe("LearningElementView", () => {
       new AbstractMesh("TestMesh1", scene),
       new AbstractMesh("TestMesh2", scene),
     ]);
+    const [viewModel, , systemUnderTest] = buildSystemUnderTest();
+    viewModel.model.Value = "";
 
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
     await systemUnderTest.setupLearningElement();
 
     viewModel.modelMeshes.Value.forEach((mesh) => {
