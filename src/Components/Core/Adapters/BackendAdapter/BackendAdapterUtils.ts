@@ -69,6 +69,7 @@ export default class BackendAdapterUtils {
           name: element.elementName,
           type: element.elementCategory,
           value: element.elementMaxScore || 0,
+          model: element.elementModel,
         } as BackendElementTO;
       } else return [];
     });

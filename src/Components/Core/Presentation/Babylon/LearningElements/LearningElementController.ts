@@ -49,13 +49,7 @@ export default class LearningElementController
     ).displayLearningElementSummaryTooltip({
       name: this.viewModel.name.Value,
       type: this.viewModel.type.Value,
-      id: this.viewModel.id,
-      description: this.viewModel.description.Value,
-      goals: this.viewModel.goals.Value,
-      value: this.viewModel.value.Value,
-      parentSpaceID: 0,
-      parentWorldID: 0,
-      hasScored: false,
+      points: this.viewModel.value.Value,
     });
   }
 }

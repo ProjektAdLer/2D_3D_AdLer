@@ -1,4 +1,5 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
+import { LearningElementModel } from "../../Domain/Types/LearningElementModelTypes";
 import { LearningElementTypeStrings } from "../../Domain/Types/LearningElementTypes";
 
 export default class LearningElementTO {
@@ -12,4 +13,5 @@ export default class LearningElementTO {
   type: LearningElementTypeStrings;
   hasScored: boolean;
   filePath?: string;
+  model: LearningElementModel;
 }

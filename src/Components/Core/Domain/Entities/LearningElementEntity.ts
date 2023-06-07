@@ -1,5 +1,6 @@
 import { LearningElementTypeStrings } from "../Types/LearningElementTypes";
 import { ComponentID } from "../Types/EntityTypes";
+import { LearningElementModel } from "../Types/LearningElementModelTypes";
 
 export default class LearningElementEntity {
   public id: ComponentID;
@@ -9,5 +10,6 @@ export default class LearningElementEntity {
   public description: string;
   public goals: string[];
   public type: LearningElementTypeStrings;
+  public model: LearningElementModel;
   public parentWorldID: ComponentID;
 }

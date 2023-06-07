@@ -1,7 +1,10 @@
 import IBottomTooltipPresenter from "./IBottomTooltipPresenter";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
 import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
-import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
+import {
+  LearningElementTypeStrings,
+  LearningElementTypes,
+} from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { injectable } from "inversify";
 
 @injectable()
@@ -20,11 +23,15 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
     }
   }
 
-  displayLearningElementSummaryTooltip(element: LearningElementTO): void {
+  displayLearningElementSummaryTooltip(elementData: {
+    name: string;
+    type: LearningElementTypeStrings;
+    points: number | undefined;
+  }): void {
     this.viewModel.show.Value = true;
-    this.viewModel.text.Value = element.name;
-    this.viewModel.iconType.Value = element.type;
-    this.viewModel.points.Value = element.value;
+    this.viewModel.text.Value = elementData.name;
+    this.viewModel.iconType.Value = elementData.type;
+    this.viewModel.points.Value = elementData.points;
   }
 
   hide(): void {

@@ -201,6 +201,7 @@ export default class LoadLearningWorldUseCase
         name: element.name,
         type: element.type,
         value: element.value || 0,
+        model: element.model,
         hasScored:
           worldStatus.elements.find((e) => e.elementID === element.id)
             ?.hasScored || false,

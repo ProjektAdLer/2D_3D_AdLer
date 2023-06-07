@@ -4,6 +4,11 @@ import BackendWorldTO from "../../../Core/Application/DataTransferObjects/Backen
 import BackendSpaceTO from "../../../Core/Application/DataTransferObjects/BackendSpaceTO";
 import BackendAdapterUtils from "../../../Core/Adapters/BackendAdapter/BackendAdapterUtils";
 import BackendElementTO from "../../../Core/Application/DataTransferObjects/BackendElementTO";
+import {
+  LearningElementModel,
+  LearningElementModelTypeEnums,
+} from "../../../Core/Domain/Types/LearningElementModelTypes";
+import { LearningSpaceTemplateType } from "../../../Core/Domain/Types/LearningSpaceTemplateType";
 
 export const minimalGetWorldDataResponse: BackendWorldTO = {
   worldName: "TestWorld",
@@ -25,9 +30,10 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
           type: "text",
           description: "TestDescription",
           goals: ["TestGoals"],
+          model: LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
         },
       ],
-      template: "L",
+      template: LearningSpaceTemplateType.L,
     },
   ],
 };
@@ -59,6 +65,7 @@ export const expectedElementTO: Partial<LearningElementTO> = {
   description: expect.any(String),
   goals: expect.arrayContaining([expect.any(String)]),
   type: expect.any(String),
+  model: expect.any(String),
 };
 
 export const mockDSL: IDSL = {
