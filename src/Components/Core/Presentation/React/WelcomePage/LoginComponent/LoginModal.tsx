@@ -18,8 +18,10 @@ export default function LoginModal(props: {
     props.viewModel.modalVisible
   );
 
-  const handleSubmit = React.useCallback(async () => {
-    await props.controller.loginAsync(userName, password);
+  const handleSubmit = React.useCallback(() => {
+    props.controller.loginAsync(userName, password).catch((e) => {
+      console.log(e);
+    });
   }, [props.controller, userName, password]);
 
   return (
