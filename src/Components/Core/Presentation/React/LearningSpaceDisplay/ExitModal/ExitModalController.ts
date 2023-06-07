@@ -22,7 +22,7 @@ export default class ExitModalController implements IExitModalController {
   }
 
   onExitButtonClicked(): void {
-    history.back();
+    history.push("/spacemenu");
   }
 
   @bind

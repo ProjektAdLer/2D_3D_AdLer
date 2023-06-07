@@ -7,7 +7,6 @@ import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USEC
 import ISetUserLocationUseCase from "../../../../../Core/Application/UseCases/SetUserLocation/ISetUserLocationUseCase";
 import IGetUserLocationUseCase from "../../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 
-const mockHistoryBack = jest.spyOn(history, "back");
 const mockHistoryPush = jest.spyOn(history, "push");
 const viewModel = new ExitModalViewModel();
 const setUserLocationMock = mock<ISetUserLocationUseCase>();
@@ -31,9 +30,9 @@ describe("ExitModalController", () => {
     CoreDIContainer.restore();
   });
 
-  test("onExitButtonClicked calls history.back", () => {
+  test("onExitButtonClicked calls history.push", () => {
     systemUnderTest.onExitButtonClicked();
-    expect(mockHistoryBack).toBeCalled();
+    expect(mockHistoryPush).toBeCalledWith("/spacemenu");
   });
 
   test("onSuccessorSpaceClicked calls SetUserLocationUseCase", () => {
