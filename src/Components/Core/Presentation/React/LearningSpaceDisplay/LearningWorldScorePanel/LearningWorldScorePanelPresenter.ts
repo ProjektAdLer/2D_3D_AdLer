@@ -8,8 +8,10 @@ export default class LearningWorldScorePanelPresenter
   constructor(private viewModel: LearningWorldScorePanelViewModel) {}
 
   onLearningWorldScored(worldScoreTO: LearningWorldScoreTO): void {
-    this.viewModel.worldScore.Value = worldScoreTO.currentScore;
-    this.viewModel.worldRequiredScore.Value = worldScoreTO.requiredScore;
-    this.viewModel.worldMaxScore.Value = worldScoreTO.maxScore;
+    this.viewModel.scoreInfo.Value = {
+      currentScore: worldScoreTO.currentScore,
+      requiredScore: worldScoreTO.requiredScore,
+      maxScore: worldScoreTO.maxScore,
+    };
   }
 }

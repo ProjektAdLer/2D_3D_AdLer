@@ -10,9 +10,11 @@ import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USEC
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 
 let fakeModel = new LearningWorldScorePanelViewModel();
-fakeModel.worldScore.Value = 4;
-fakeModel.worldRequiredScore.Value = 5;
-fakeModel.worldMaxScore.Value = 6;
+fakeModel.scoreInfo.Value = {
+  currentScore: 4,
+  requiredScore: 5,
+  maxScore: 6,
+};
 const calculateWorldScoreMock = mock<ICalculateLearningWorldScoreUseCase>();
 
 describe("Learning World Score Panel View", () => {
