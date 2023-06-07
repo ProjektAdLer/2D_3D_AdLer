@@ -25,8 +25,10 @@ describe("LearningSpaceScorePanelPresenter", () => {
       spaceID: 42,
     });
 
-    expect(systemUnderTest["viewModel"].spaceScore.Value).toBe(1);
-    expect(systemUnderTest["viewModel"].spaceRequiredScore.Value).toBe(2);
-    expect(systemUnderTest["viewModel"].spaceMaxScore.Value).toBe(3);
+    expect(systemUnderTest["viewModel"].scoreInfo.Value).toStrictEqual({
+      currentScore: 1,
+      maxScore: 3,
+      requiredScore: 2,
+    });
   });
 });

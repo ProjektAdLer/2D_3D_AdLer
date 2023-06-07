@@ -1,7 +1,15 @@
 import Observable from "../../../../../../Lib/Observable";
 
+export interface ScoreInfo {
+  currentScore: number;
+  requiredScore: number;
+  maxScore: number;
+}
+
 export default class ScorePanelViewModel {
-  worldScore: Observable<number> = new Observable();
-  worldRequiredScore: Observable<number> = new Observable();
-  worldMaxScore: Observable<number> = new Observable();
+  scoreInfo: Observable<ScoreInfo> = new Observable({
+    currentScore: 0,
+    requiredScore: 0,
+    maxScore: 0,
+  });
 }

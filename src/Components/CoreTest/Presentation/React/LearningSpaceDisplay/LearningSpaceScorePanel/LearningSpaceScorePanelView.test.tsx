@@ -10,9 +10,11 @@ import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USEC
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 
 let fakeModel = new LearningSpaceScorePanelViewModel();
-fakeModel.spaceScore.Value = 1;
-fakeModel.spaceRequiredScore.Value = 2;
-fakeModel.spaceMaxScore.Value = 3;
+fakeModel.scoreInfo.Value = {
+  currentScore: 1,
+  requiredScore: 2,
+  maxScore: 3,
+};
 const calculateWorldScoreMock = mock<ICalculateLearningWorldScoreUseCase>();
 
 describe("Learning Space Score Panel View", () => {

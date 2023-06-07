@@ -17,8 +17,10 @@ describe("LearningWorldScorePanelPresenter", () => {
       maxScore: 6,
     });
 
-    expect(systemUnderTest["viewModel"].worldScore.Value).toBe(4);
-    expect(systemUnderTest["viewModel"].worldRequiredScore.Value).toBe(5);
-    expect(systemUnderTest["viewModel"].worldMaxScore.Value).toBe(6);
+    expect(systemUnderTest["viewModel"].scoreInfo.Value).toStrictEqual({
+      currentScore: 4,
+      requiredScore: 5,
+      maxScore: 6,
+    });
   });
 });

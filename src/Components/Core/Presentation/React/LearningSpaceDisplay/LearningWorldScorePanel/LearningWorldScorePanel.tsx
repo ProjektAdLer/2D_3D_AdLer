@@ -1,5 +1,7 @@
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
-import LearningWorldScorePanelViewModel from "./LearningWorldScorePanelViewModel";
+import LearningWorldScorePanelViewModel, {
+  ScoreInfo,
+} from "./LearningWorldScorePanelViewModel";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import {
@@ -21,21 +23,21 @@ export default function LearningWorldScorePanel({
     BUILDER_TYPES.ILearningWorldScorePanelBuilder
   );
 
-  const [score] = useObservable<number>(viewModel?.worldScore);
-  const [requiredScore] = useObservable<number>(viewModel?.worldRequiredScore);
+  const [scoreInfo] = useObservable<ScoreInfo>(viewModel?.scoreInfo);
   const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
-    setPercentage((score / requiredScore) * 100);
-  }, [score, requiredScore]);
-
-  const calculateWorldScore =
-    CoreDIContainer.get<ICalculateLearningWorldScoreUseCase>(
-      USECASE_TYPES.ICalculateLearningWorldScoreUseCase
-    );
+    if (!scoreInfo) return;
+    setPercentage((scoreInfo.currentScore / scoreInfo.requiredScore) * 100);
+  }, [scoreInfo?.currentScore, scoreInfo?.requiredScore]);
   useEffect(() => {
+    const calculateWorldScore =
+      CoreDIContainer.get<ICalculateLearningWorldScoreUseCase>(
+        USECASE_TYPES.ICalculateLearningWorldScoreUseCase
+      );
+
     calculateWorldScore.execute();
-  }, [calculateWorldScore]);
+  }, []);
 
   if (!viewModel) return null;
 

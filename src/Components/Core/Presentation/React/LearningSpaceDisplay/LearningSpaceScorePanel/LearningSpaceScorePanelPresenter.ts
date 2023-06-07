@@ -10,13 +10,29 @@ export default class LearningSpaceScorePanelPresenter
 
   onLearningSpaceLoaded(spaceTO: LearningSpaceTO): void {
     this.viewModel.currentSpaceID.Value = spaceTO.id;
-    this.viewModel.spaceScore.Value = spaceTO.currentScore;
-    this.viewModel.spaceRequiredScore.Value = spaceTO.requiredScore;
-    this.viewModel.spaceMaxScore.Value = spaceTO.maxScore;
+    this.updateSpaceScoreInfo(
+      spaceTO.currentScore,
+      spaceTO.requiredScore,
+      spaceTO.maxScore
+    );
   }
   onLearningSpaceScored(spaceScoreTO: LearningSpaceScoreTO): void {
-    this.viewModel.spaceScore.Value = spaceScoreTO.currentScore;
-    this.viewModel.spaceRequiredScore.Value = spaceScoreTO.requiredScore;
-    this.viewModel.spaceMaxScore.Value = spaceScoreTO.maxScore;
+    this.updateSpaceScoreInfo(
+      spaceScoreTO.currentScore,
+      spaceScoreTO.requiredScore,
+      spaceScoreTO.maxScore
+    );
+  }
+
+  private updateSpaceScoreInfo(
+    currentScore: number,
+    requiredScore: number,
+    maxScore: number
+  ) {
+    this.viewModel.scoreInfo.Value = {
+      currentScore: currentScore,
+      requiredScore: requiredScore,
+      maxScore: maxScore,
+    };
   }
 }

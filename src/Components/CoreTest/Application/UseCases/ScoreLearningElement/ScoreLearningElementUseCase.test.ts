@@ -9,17 +9,19 @@ import LearningElementEntity from "../../../../Core/Domain/Entities/LearningElem
 import LearningSpaceEntity from "../../../../Core/Domain/Entities/LearningSpaceEntity";
 import { logger } from "../../../../../Lib/Logger";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import ICalculateLearningWorldScoreUseCase from "../../../../Core/Application/UseCases/CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
+import { IInternalCalculateLearningWorldScoreUseCase } from "../../../../Core/Application/UseCases/CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
 import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
 import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
+import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 
 jest.mock("../../../../../Lib/Logger");
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendAdapterMock = mock<IBackendPort>();
-const CalculateWorldScoreMock = mock<ICalculateLearningWorldScoreUseCase>();
+const InternalCalculateWorldScoreMock =
+  mock<IInternalCalculateLearningWorldScoreUseCase>();
 const worldPortMock = mock<ILearningWorldPort>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 
@@ -50,6 +52,7 @@ const spaceEntity: LearningSpaceEntity = {
   requirements: "",
   requiredScore: 0,
   parentWorldID: 200,
+  template: LearningSpaceTemplateType.None,
 };
 
 const setupEntityContainerMock = (
@@ -96,9 +99,9 @@ describe("ScoreLearningElementUseCase", () => {
     CoreDIContainer.rebind<IBackendPort>(
       CORE_TYPES.IBackendAdapter
     ).toConstantValue(backendAdapterMock);
-    CoreDIContainer.rebind<ICalculateLearningWorldScoreUseCase>(
+    CoreDIContainer.rebind<IInternalCalculateLearningWorldScoreUseCase>(
       USECASE_TYPES.ICalculateLearningWorldScoreUseCase
-    ).toConstantValue(CalculateWorldScoreMock);
+    ).toConstantValue(InternalCalculateWorldScoreMock);
     CoreDIContainer.rebind<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
     ).toConstantValue(worldPortMock);
@@ -162,10 +165,12 @@ describe("ScoreLearningElementUseCase", () => {
       console.log(e);
     }
 
-    expect(CalculateWorldScoreMock.execute).toHaveBeenCalledTimes(1);
+    expect(
+      InternalCalculateWorldScoreMock.internalExecute
+    ).toHaveBeenCalledTimes(1);
   });
 
-  test("executeAsync should call elementPort.onElementScored", async () => {
+  test("executeAsync should call worldPort.onElementScored", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
       worldID: 1,
@@ -180,6 +185,8 @@ describe("ScoreLearningElementUseCase", () => {
     }
 
     expect(worldPortMock.onLearningElementScored).toHaveBeenCalledWith(true, 1);
+    expect(worldPortMock.onLearningSpaceScored).toHaveBeenCalled();
+    expect(worldPortMock.onLearningWorldScored).toHaveBeenCalled();
   });
 
   test("executeAsync rejects if EntityContainer returns no user entity", async () => {
