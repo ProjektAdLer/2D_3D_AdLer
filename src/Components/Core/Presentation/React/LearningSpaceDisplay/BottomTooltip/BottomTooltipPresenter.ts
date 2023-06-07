@@ -1,6 +1,5 @@
 import IBottomTooltipPresenter from "./IBottomTooltipPresenter";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
-import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
 import {
   LearningElementTypeStrings,
   LearningElementTypes,
