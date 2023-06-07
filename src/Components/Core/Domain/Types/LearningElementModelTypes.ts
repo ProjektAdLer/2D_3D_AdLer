@@ -23,17 +23,29 @@ enum H5pElementModelTypes {
   SlotMachine = "l_h5p_slotmachine_1",
 }
 
-export const LearningElementModelTypes = {
-  TextElementModelTypes,
-  ImageElementModelTypes,
-  VideoElementModelTypes,
-  PdfElementModelTypes,
-  H5pElementModelTypes,
+enum NoElementModelTypes {
+  None = "",
+}
+
+/** 
+ Pseudo-nested enum to reference all possible members of the element model enums.
+ */
+export const LearningElementModelTypeEnums = {
+  TextElementModelTypes: TextElementModelTypes,
+  ImageElementModelTypes: ImageElementModelTypes,
+  VideoElementModelTypes: VideoElementModelTypes,
+  PdfElementModelTypes: PdfElementModelTypes,
+  H5pElementModelTypes: H5pElementModelTypes,
+  NoElementModelTypes: NoElementModelTypes,
 };
 
-export type LearningElementModelTypeStrings =
-  | keyof typeof TextElementModelTypes
-  | keyof typeof ImageElementModelTypes
-  | keyof typeof VideoElementModelTypes
-  | keyof typeof PdfElementModelTypes
-  | keyof typeof H5pElementModelTypes;
+/**
+ Type of a learning element model.
+  */
+export type LearningElementModel =
+  | TextElementModelTypes
+  | ImageElementModelTypes
+  | VideoElementModelTypes
+  | PdfElementModelTypes
+  | H5pElementModelTypes
+  | NoElementModelTypes;
