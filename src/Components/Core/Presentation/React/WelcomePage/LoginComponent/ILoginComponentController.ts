@@ -1,3 +1,3 @@
 export default interface ILoginComponentController {
-  loginAsync(username: string, password: string): Promise<void>;
+  login(username: string, password: string): void;
 }

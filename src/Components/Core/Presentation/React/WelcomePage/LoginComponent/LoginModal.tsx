@@ -17,9 +17,10 @@ export default function LoginModal(props: {
   const [modalVisible, setModalVisible] = useObservable<boolean>(
     props.viewModel.modalVisible
   );
+  const [loginFailed] = useObservable<boolean>(props.viewModel.loginFailed);
 
   const handleSubmit = React.useCallback(() => {
-    props.controller.loginAsync(userName, password);
+    props.controller.login(userName, password);
   }, [props.controller, userName, password]);
 
   return (
@@ -52,11 +53,17 @@ export default function LoginModal(props: {
             }}
           />
 
+          {loginFailed && (
+            <p className="text-red-500 text-xs">
+              Login fehlgeschlagen. Bitte überprüfe deine Eingaben.
+            </p>
+          )}
+
           <StyledButton shape="freefloatcenter" onClick={handleSubmit}>
             <p>Login</p>
           </StyledButton>
 
-          <StyledButton
+          {/* <StyledButton
             disabled={true}
             shape="freefloatcenter"
             onClick={() => {
@@ -64,7 +71,7 @@ export default function LoginModal(props: {
             }}
           >
             <p className="text-xs">Passwort vergessen?</p>
-          </StyledButton>
+          </StyledButton> */}
         </form>
       </StyledContainer>
     </StyledModal>
