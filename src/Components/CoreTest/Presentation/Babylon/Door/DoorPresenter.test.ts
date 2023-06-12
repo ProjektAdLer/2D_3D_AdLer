@@ -27,13 +27,13 @@ describe("DoorPresenter", () => {
   test("presentDoor sets position and rotation in view model", () => {
     let positionVector: Vector3 = new Vector3(1, 2, 3);
     let rotation: number = 0;
-    systemUnderTest.presentDoor([positionVector, rotation], "Exit", 10);
+    systemUnderTest.presentDoor([positionVector, rotation], true, 10);
     expect(systemUnderTest["viewModel"].position.Value).toEqual(positionVector);
     expect(systemUnderTest["viewModel"].rotation.Value).toBe(rotation);
   });
 
   test("should open door, when winning score is presented", () => {
-    systemUnderTest["viewModel"].doorType.Value = "Exit";
+    systemUnderTest["viewModel"].isExit.Value = true;
     systemUnderTest["viewModel"].spaceID = 1;
     systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
     systemUnderTest.onLearningSpaceScored({
@@ -46,7 +46,7 @@ describe("DoorPresenter", () => {
   });
 
   test("should not open door, when winning score is presented but id is wrong", () => {
-    systemUnderTest["viewModel"].doorType.Value = "Exit";
+    systemUnderTest["viewModel"].isExit.Value = true;
     systemUnderTest["viewModel"].spaceID = 1;
     systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
     systemUnderTest.onLearningSpaceScored({
@@ -57,8 +57,9 @@ describe("DoorPresenter", () => {
     } as LearningSpaceScoreTO);
     expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(0);
   });
+
   test("should not open door, when door type is not exit", () => {
-    systemUnderTest["viewModel"].doorType.Value = "Entry";
+    systemUnderTest["viewModel"].isExit.Value = false;
     systemUnderTest["viewModel"].spaceID = 1;
     systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
     systemUnderTest.onLearningSpaceScored({
@@ -69,8 +70,9 @@ describe("DoorPresenter", () => {
     } as LearningSpaceScoreTO);
     expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(0);
   });
+
   test("should not open door, when currentScore smaller than requiredScore", () => {
-    systemUnderTest["viewModel"].doorType.Value = "Exit";
+    systemUnderTest["viewModel"].isExit.Value = true;
     systemUnderTest["viewModel"].spaceID = 1;
     systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
     systemUnderTest.onLearningSpaceScored({

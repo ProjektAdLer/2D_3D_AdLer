@@ -5,7 +5,7 @@ import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 export default interface IDoorPresenter {
   presentDoor(
     position: [Vector3, number],
-    type: string,
+    isExit: boolean,
     spaceID: ComponentID
   ): void;
   openDoor(): void;

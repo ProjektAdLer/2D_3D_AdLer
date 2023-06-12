@@ -27,7 +27,7 @@ describe("BottomTooltipPresenter", () => {
     expect(vm.show.Value).toBe(true);
   });
   test("displayExitQueryTooltip should set text and type correctly ", () => {
-    systemUnderTest.displayDoorTooltip("Entry");
+    systemUnderTest.displayDoorTooltip(false);
     expect(vm.text.Value).toBe("Eingangstüre");
     expect(vm.iconType.Value).toBe("notAnElement");
     expect(vm.show.Value).toBe(true);

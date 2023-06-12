@@ -108,7 +108,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     this.director.build(doorBuilder);
     (doorBuilder.getPresenter() as IDoorPresenter).presentDoor(
       this.viewModel.exitDoorPosition.Value,
-      "Exit",
+      true,
       this.viewModel.id
     );
   }
@@ -121,7 +121,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     this.director.build(doorBuilder);
     (doorBuilder.getPresenter() as IDoorPresenter).presentDoor(
       this.viewModel.entryDoorPosition.Value,
-      "Entry",
+      false,
       this.viewModel.id
     );
   }

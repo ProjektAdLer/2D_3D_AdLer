@@ -47,7 +47,7 @@ export default class DoorView extends Readyable {
   private async asyncSetup(): Promise<void> {
     await this.loadMeshAsync();
     this.positionMesh();
-    if (this.viewModel.doorType.Value === "Exit") this.setupAnimation();
+    if (this.viewModel.isExit.Value) this.setupAnimation();
     this.registerActions();
     this.addToHighlightLayer();
 

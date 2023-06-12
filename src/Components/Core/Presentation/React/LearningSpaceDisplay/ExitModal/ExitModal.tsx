@@ -26,7 +26,6 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
 
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;
-  let icon: string;
 
   return (
     <div>
@@ -48,67 +47,45 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
           {viewModel.exitButtonTitle.Value}
         </StyledButton>
 
-        {viewModel.doorType.Value === "Exit" &&
+        {viewModel.isExit.Value &&
           viewModel.successorSpaces.Value.length > 0 &&
-          viewModel.successorSpaces.Value.map(
-            (successorSpace: LearningSpaceTO) => (
-              <>
-                {(() => {
-                  if (
-                    successorSpace.currentScore >= successorSpace.requiredScore
-                  )
-                    icon = spaceSolved;
-                  else if (successorSpace.isAvailable) icon = spaceAvailable;
-                  else icon = spaceLocked;
-                })()}
-                <StyledButton
-                  icon={icon}
-                  key={successorSpace.id}
-                  disabled={!successorSpace.isAvailable}
-                  shape="freefloatcenter"
-                  className="flex w-[100%] mb-2"
-                  onClick={() =>
-                    controller.onPrecursorOrSuccessorSpaceClicked(
-                      successorSpace.id
-                    )
-                  }
-                >
-                  {successorSpace.name + " betreten"}
-                </StyledButton>
-              </>
-            )
-          )}
-        {viewModel.doorType.Value === "Entry" &&
+          viewModel.successorSpaces.Value.map((successorSpace) => {
+            return createSpaceButton(successorSpace, controller);
+          })}
+        {!viewModel.isExit.Value &&
           viewModel.precursorSpaces.Value.length > 0 &&
           viewModel.precursorSpaces.Value.map(
-            (precursorSpace: LearningSpaceTO) => (
-              <>
-                {(() => {
-                  if (
-                    precursorSpace.currentScore >= precursorSpace.requiredScore
-                  )
-                    icon = spaceSolved;
-                  else if (precursorSpace.isAvailable) icon = spaceAvailable;
-                  else icon = spaceLocked;
-                })()}
-                <StyledButton
-                  icon={icon}
-                  key={precursorSpace.id}
-                  disabled={!precursorSpace.isAvailable}
-                  shape="freefloatcenter"
-                  className="flex w-[100%] mb-2"
-                  onClick={() =>
-                    controller.onPrecursorOrSuccessorSpaceClicked(
-                      precursorSpace.id
-                    )
-                  }
-                >
-                  {precursorSpace.name + " betreten"}
-                </StyledButton>
-              </>
-            )
+            (precursorSpace: LearningSpaceTO) => {
+              return createSpaceButton(precursorSpace, controller);
+            }
           )}
       </StyledModal>
     </div>
+  );
+}
+
+function createSpaceButton(
+  learningSpaceTO: LearningSpaceTO,
+  controller: IExitModalController
+) {
+  let icon: string;
+  if (learningSpaceTO.currentScore >= learningSpaceTO.requiredScore)
+    icon = spaceSolved;
+  else if (learningSpaceTO.isAvailable) icon = spaceAvailable;
+  else icon = spaceLocked;
+
+  return (
+    <StyledButton
+      icon={icon}
+      key={learningSpaceTO.id}
+      disabled={!learningSpaceTO.isAvailable}
+      shape="freefloatcenter"
+      className="flex w-[100%] mb-2"
+      onClick={() =>
+        controller.onPrecursorOrSuccessorSpaceClicked(learningSpaceTO.id)
+      }
+    >
+      {learningSpaceTO.name + " betreten"}
+    </StyledButton>
   );
 }

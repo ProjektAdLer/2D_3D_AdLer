@@ -10,16 +10,12 @@ import { injectable } from "inversify";
 export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
   constructor(private viewModel: BottomTooltipViewModel) {}
 
-  displayDoorTooltip(doorType: string): void {
+  displayDoorTooltip(isExit: boolean): void {
     this.viewModel.show.Value = true;
     this.viewModel.iconType.Value = LearningElementTypes.notAnElement;
     this.viewModel.points.Value = undefined;
-    if (doorType === "Exit") {
-      this.viewModel.text.Value = "Ausgangstüre";
-    }
-    if (doorType === "Entry") {
-      this.viewModel.text.Value = "Eingangstüre";
-    }
+    if (isExit) this.viewModel.text.Value = "Ausgangstüre";
+    else this.viewModel.text.Value = "Eingangstüre";
   }
 
   displayLearningElementSummaryTooltip(elementData: {

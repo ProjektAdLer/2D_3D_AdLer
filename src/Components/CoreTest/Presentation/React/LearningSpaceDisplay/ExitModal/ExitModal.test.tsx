@@ -57,7 +57,7 @@ describe("ExitModal", () => {
 
   test("should render if solved successor space is in the viewmodel and doorType is Exit", () => {
     viewModel.isOpen.Value = true;
-    viewModel.doorType.Value = "Exit";
+    viewModel.isExit.Value = true;
     viewModel.successorSpaces.Value = [
       {
         id: 1,
@@ -81,7 +81,7 @@ describe("ExitModal", () => {
 
   test("should render if available unsolved successor space is in the viewmodel and doorType is Exit", () => {
     viewModel.isOpen.Value = true;
-    viewModel.doorType.Value = "Exit";
+    viewModel.isExit.Value = true;
     viewModel.successorSpaces.Value = [
       {
         id: 1,
@@ -105,7 +105,7 @@ describe("ExitModal", () => {
 
   test("should render if unavailable successor space is in the viewmodel and doorType is Exit", () => {
     viewModel.isOpen.Value = true;
-    viewModel.doorType.Value = "Exit";
+    viewModel.isExit.Value = true;
     viewModel.successorSpaces.Value = [
       {
         id: 1,
@@ -126,9 +126,10 @@ describe("ExitModal", () => {
     const componentUnderTest = render(<ExitModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
+
   test("should render if solved precursor space is in the viewmodel and doorType is Entry", () => {
     viewModel.isOpen.Value = true;
-    viewModel.doorType.Value = "Entry";
+    viewModel.isExit.Value = false;
     viewModel.precursorSpaces.Value = [
       {
         id: 1,
@@ -152,7 +153,7 @@ describe("ExitModal", () => {
 
   test("should render if available unsolved precursor space is in the viewmodel and doorType is Entry", () => {
     viewModel.isOpen.Value = true;
-    viewModel.doorType.Value = "Entry";
+    viewModel.isExit.Value = false;
     viewModel.precursorSpaces.Value = [
       {
         id: 1,
@@ -176,7 +177,7 @@ describe("ExitModal", () => {
 
   test("should render if unavailable precursor space is in the viewmodel and doorType is Entry", () => {
     viewModel.isOpen.Value = true;
-    viewModel.doorType.Value = "Entry";
+    viewModel.isExit.Value = false;
     viewModel.precursorSpaces.Value = [
       {
         id: 1,

@@ -1,7 +1,7 @@
 import { LearningElementTypeStrings } from "src/Components/Core/Domain/Types/LearningElementTypes";
 
 export default interface IBottomTooltipPresenter {
-  displayDoorTooltip(doorType: string): void;
+  displayDoorTooltip(isExit: boolean): void;
   displayLearningElementSummaryTooltip(elementData: {
     name: string;
     type: LearningElementTypeStrings;

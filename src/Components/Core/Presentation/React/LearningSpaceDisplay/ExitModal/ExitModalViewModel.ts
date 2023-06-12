@@ -9,5 +9,5 @@ export default class ExitModalViewModel {
 
   isOpen: Observable<boolean> = new Observable<boolean>(false);
 
-  doorType: Observable<string> = new Observable<string>();
+  isExit: Observable<boolean> = new Observable<boolean>();
 }
