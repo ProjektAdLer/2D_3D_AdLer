@@ -104,14 +104,14 @@ export default class DoorView extends Readyable {
       });
     }
   }
-  @bind
+
   private addToHighlightLayer(): void {
     this.viewModel.meshes.Value.forEach((mesh) => {
       this.scenePresenter.HighlightLayer.addMesh(mesh, Color3.Blue());
     });
   }
-  @bind
-  public registerActions(): void {
+
+  private registerActions(): void {
     this.viewModel.meshes.Value.forEach((mesh) => {
       mesh.actionManager = new ActionManager(this.scenePresenter.Scene);
       mesh.actionManager.registerAction(
