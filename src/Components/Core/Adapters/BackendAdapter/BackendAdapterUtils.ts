@@ -1,6 +1,10 @@
 import BackendElementTO from "../../Application/DataTransferObjects/BackendElementTO";
 import BackendSpaceTO from "../../Application/DataTransferObjects/BackendSpaceTO";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
+import {
+  LearningElementModelTypeEnums,
+  isValidLearningElementModelType,
+} from "../../Domain/Types/LearningElementModelTypes";
 import { LearningElementTypes } from "../../Domain/Types/LearningElementTypes";
 import { LearningSpaceTemplateType } from "../../Domain/Types/LearningSpaceTemplateType";
 import IDSL, { APIElement, APISpace } from "./Types/IDSL";
@@ -62,6 +66,13 @@ export default class BackendAdapterUtils {
   private static mapElements(elements: APIElement[]): BackendElementTO[] {
     return elements.flatMap((element) => {
       if (element.elementCategory in LearningElementTypes) {
+        let model: string;
+        if (isValidLearningElementModelType(element.elementModel)) {
+          model = element.elementModel;
+        } else {
+          model = LearningElementModelTypeEnums.NoElementModelTypes.None;
+        }
+
         return {
           id: element.elementId,
           description: element.elementDescription,
@@ -69,7 +80,7 @@ export default class BackendAdapterUtils {
           name: element.elementName,
           type: element.elementCategory,
           value: element.elementMaxScore || 0,
-          model: element.elementModel,
+          model: model,
         } as BackendElementTO;
       } else return [];
     });
