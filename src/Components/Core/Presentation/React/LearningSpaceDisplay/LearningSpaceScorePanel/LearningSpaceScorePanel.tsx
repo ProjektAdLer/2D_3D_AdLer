@@ -27,7 +27,7 @@ export default function LearningSpaceScorePanel({
   useEffect(() => {
     if (!scoreInfo) return;
     setPercentage((scoreInfo.currentScore / scoreInfo.requiredScore) * 100);
-  }, [scoreInfo?.currentScore, scoreInfo?.requiredScore]);
+  }, [scoreInfo?.currentScore, scoreInfo?.requiredScore, scoreInfo]);
 
   if (!viewModel) return null;
 
