@@ -430,7 +430,7 @@ describe("LearningSpaceView", () => {
 
       let result = systemUnderTest["createPole"](new Vector3(1, 0, 3));
 
-      expect(result.position).toStrictEqual(new Vector3(1, 3.425, 3));
+      expect(result.position).toStrictEqual(new Vector3(1.15, 3.425, 3.15));
     });
   });
 });
