@@ -20,6 +20,8 @@ import type INavigation from "../../Navigation/INavigation";
 import ILearningSpacePresenter from "../../LearningSpaces/ILearningSpacePresenter";
 import AvatarCameraViewModel from "../../AvatarCamera/AvatarCameraViewModel";
 import type IGetUserLocationUseCase from "src/Components/Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
+import * as AmbienceBuilder from "../../Ambience/AmbienceBuilder";
+import type { IAmbienceBuilder } from "../../Ambience/AmbienceBuilder";
 
 @injectable()
 export default class LearningSpaceSceneDefinition extends AbstractSceneDefinition {
@@ -44,7 +46,7 @@ export default class LearningSpaceSceneDefinition extends AbstractSceneDefinitio
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
     @inject(BUILDER_TYPES.IAmbienceBuilder)
-    private ambienceBuilder: IPresentationBuilder
+    private ambienceBuilder: IAmbienceBuilder
   ) {
     super();
   }
@@ -62,6 +64,7 @@ export default class LearningSpaceSceneDefinition extends AbstractSceneDefinitio
 
     // create space ambience
     this.director.build(this.ambienceBuilder);
+    const ambienceCompleted = this.ambienceBuilder.isCompleted;
 
     // create space
     this.director.build(this.spaceBuilder);
@@ -83,6 +86,8 @@ export default class LearningSpaceSceneDefinition extends AbstractSceneDefinitio
     (
       this.avatarCameraBuilder.getViewModel() as AvatarCameraViewModel
     ).parentNode.Value = this.avatarParentNode;
+
+    await Promise.all([ambienceCompleted]);
 
     // initialize navigation for the room
     this.navigation.setupNavigation();

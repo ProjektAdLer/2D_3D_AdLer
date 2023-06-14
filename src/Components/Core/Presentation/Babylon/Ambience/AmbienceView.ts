@@ -10,18 +10,15 @@ const modelLink = require("../../../../../Assets/prototype/Lernraumumgebung_Prot
 
 export default class AmbienceView {
   private scenePresenter: IScenePresenter;
+
   constructor(private viewModel: AmbienceViewModel) {
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
       SCENE_TYPES.ScenePresenterFactory
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
+  }
 
-    this.asyncSetup();
-  }
-  private async asyncSetup(): Promise<void> {
-    await this.loadMeshAsync();
-  }
-  private async loadMeshAsync(): Promise<void> {
+  public async asyncSetup(): Promise<void> {
     const results = await this.scenePresenter.loadModel(modelLink);
 
     this.viewModel.meshes.Value = results as Mesh[];

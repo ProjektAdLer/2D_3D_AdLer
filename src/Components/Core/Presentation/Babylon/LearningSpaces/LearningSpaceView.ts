@@ -131,6 +131,7 @@ export default class LearningSpaceView implements ILearningSpaceView {
     (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 3;
     this.viewModel.floorMaterial.Value.specularColor = new Color3(0, 0, 0);
   }
+
   public createWallMaterial(): void {
     this.viewModel.wallMaterial.Value = new StandardMaterial(
       "wallMaterial",
