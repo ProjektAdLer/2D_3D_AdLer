@@ -1,4 +1,5 @@
 import { Engine, HighlightLayer, Scene, SceneOptions } from "@babylonjs/core";
+import { Inspector } from "@babylonjs/inspector";
 import { injectable } from "inversify";
 import { config } from "src/config";
 import { Semaphore } from "src/Lib/Semaphore";
@@ -77,6 +78,6 @@ export default abstract class AbstractSceneDefinition {
    * Can be overridden to apply custom debug elements or with a empty function to prevent the debug layer from beeing applied.
    */
   protected applyDebugLayer(): void {
-    if (config.isDebug) this.scene.debugLayer.show({ overlay: true });
+    if (config.isDebug) Inspector.Show(this.scene, { overlay: true });
   }
 }
