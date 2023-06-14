@@ -1,7 +1,7 @@
-import { DebugLayer, HighlightLayer, NullEngine, Scene } from "@babylonjs/core";
-import { mock } from "jest-mock-extended";
+import { HighlightLayer, NullEngine, Scene } from "@babylonjs/core";
 import { config } from "../../../../../../config";
 import AbstractSceneDefinition from "../../../../../Core/Presentation/Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
+import { Inspector } from "@babylonjs/inspector";
 
 const mockAsyncPreTask = jest.fn(async () => Promise.resolve());
 const mockPreTask = jest.fn(() => {});
@@ -63,13 +63,10 @@ describe("AbstractSceneDefinition", () => {
 
   test("createScene calls show() on the scenes debugLayer if config.isDebug is set true", async () => {
     config.isDebug = true;
-    const debugLayerMock = mock<DebugLayer>();
-    jest
-      .spyOn(Scene.prototype, "debugLayer", "get")
-      .mockReturnValue(debugLayerMock);
+    const showMock = jest.fn(Inspector.Show);
 
     await systemUnderTest.createScene(new NullEngine());
 
-    expect(debugLayerMock.show).toHaveBeenCalledTimes(1);
+    expect(showMock).toHaveBeenCalledTimes(1);
   });
 });
