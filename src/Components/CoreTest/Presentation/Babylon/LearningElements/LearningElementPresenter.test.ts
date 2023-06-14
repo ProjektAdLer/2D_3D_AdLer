@@ -2,6 +2,7 @@ import { Vector3 } from "@babylonjs/core";
 import LearningElementTO from "../../../../Core/Application/DataTransferObjects/LearningElementTO";
 import LearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementPresenter";
 import LearningElementViewModel from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementViewModel";
+import { LearningElementModelTypeEnums } from "../../../../Core/Domain/Types/LearningElementModelTypes";
 
 jest.mock("@babylonjs/core");
 
@@ -15,6 +16,7 @@ const testElementTO: LearningElementTO = {
   goals: [""],
   type: "h5p",
   hasScored: false,
+  model: LearningElementModelTypeEnums.NoElementModelTypes.None,
 };
 const testVector = new Vector3(1, 2, 3);
 
