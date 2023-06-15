@@ -8,16 +8,12 @@ import LearningSpaceViewModel from "./LearningSpaceViewModel";
 import ILearningSpacePresenter from "./ILearningSpacePresenter";
 import ILearningElementPresenter from "../LearningElements/ILearningElementPresenter";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
-import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import LearningElementView from "../LearningElements/LearningElementView";
-import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import IWindowPresenter from "../Window/IWindowPresenter";
 import AbstractLearningSpaceDimensionStrategy from "./LearningSpaceDimensionStrategies/AbstractLearningSpaceDimensionStrategy";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import GenericLearningSpaceDimensionStrategy from "./LearningSpaceDimensionStrategies/GenericLearningSpaceDimensionStrategy";
 import TemplateLearningSpaceDimensionStrategy from "./LearningSpaceDimensionStrategies/TemplateLearningSpaceDimensionStrategy";
-import IStandInDecorationPresenter from "../StandInDecoration/IStandInDecorationPresenter";
-import StandInDecorationView from "../StandInDecoration/StandInDecorationView";
 import IDecorationPresenter from "../Decoration/IDecorationPresenter";
 
 @injectable()
@@ -35,17 +31,11 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     );
   }
 
-  dispose(): void {
-    CoreDIContainer.get<ILearningWorldPort>(
-      PORT_TYPES.ILearningWorldPort
-    ).unregisterAdapter(this);
-  }
+  dispose(): void {}
 
-  onLearningSpaceLoaded(spaceTO: LearningSpaceTO): void {
+  async asyncSetupSpace(spaceTO: LearningSpaceTO): Promise<void> {
     this.setDimensionsStrategy(spaceTO.template);
 
-    this.viewModel.id = spaceTO.id;
-    this.viewModel.learningSpaceTemplateType.Value = spaceTO.template;
     this.viewModel.spaceCornerPoints.Value =
       this.dimensionStrategy.getCornerPoints(spaceTO);
     this.viewModel.exitDoorPosition.Value =
@@ -85,41 +75,21 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     const elementBuilder = CoreDIContainer.get<IPresentationBuilder>(
       BUILDER_TYPES.ILearningElementBuilder
     );
-    const standInDecorationBuilder = CoreDIContainer.get<IPresentationBuilder>(
-      BUILDER_TYPES.IStandInDecorationBuilder
-    );
 
     let elementPositions =
       this.dimensionStrategy.getLearningElementPositions(spaceTO);
 
-    for (let i = 0; i < spaceTO.elements.length; i++) {
-      if (!spaceTO.elements[i]) {
-        this.director.build(standInDecorationBuilder);
-        (
-          standInDecorationBuilder.getPresenter() as IStandInDecorationPresenter
-        ).presentStandInDecoration(
-          elementPositions.shift()!,
-          spaceTO.name,
-          i + 1
-        );
-        (
-          standInDecorationBuilder.getView() as StandInDecorationView
-        ).setupStandInDecoration();
-        standInDecorationBuilder.reset();
-      } else {
-        this.director.build(elementBuilder);
-        (
-          elementBuilder.getPresenter() as ILearningElementPresenter
-        ).presentLearningElement(
-          spaceTO.elements[i]!,
-          elementPositions.shift()!
-        );
-        (
-          elementBuilder.getView() as LearningElementView
-        ).setupLearningElement();
-        elementBuilder.reset();
-      }
-    }
+    spaceTO.elements.forEach((elementTO) => {
+      // skip empty element slots
+      if (!elementTO) return;
+
+      this.director.build(elementBuilder);
+      (
+        elementBuilder.getPresenter() as ILearningElementPresenter
+      ).presentLearningElement(elementTO, elementPositions.shift()!);
+      (elementBuilder.getView() as LearningElementView).setupLearningElement();
+      elementBuilder.reset();
+    });
   }
 
   private createExitDoor(): void {
