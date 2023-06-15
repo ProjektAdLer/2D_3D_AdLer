@@ -4,12 +4,12 @@ import ILearningSpaceTemplate from "./ILearningSpaceTemplate";
 export const LearningSpaceTemplate_L: ILearningSpaceTemplate = {
   name: LearningSpaceTemplateType.L,
   cornerPoints: [
-    { x: 0.15, y: -7.75 }, // A
-    { x: -6.95, y: -7.75 }, // B
-    { x: -6.95, y: 5.35 }, // C
-    { x: 5.75, y: 5.35 }, // E
-    { x: 5.75, y: -0.15 }, // F
-    { x: 0.15, y: -0.15 }, // G
+    { x: 0, y: -7.6 }, // A
+    { x: -6.8, y: -7.6 }, // B
+    { x: -6.8, y: 5.2 }, // C
+    { x: 5.6, y: 5.2 }, // E
+    { x: 5.6, y: 0 }, // F
+    { x: 0, y: 0 }, // G
   ],
   walls: [
     { start: 1, end: 2 },
@@ -68,7 +68,7 @@ export const LearningSpaceTemplate_L: ILearningSpaceTemplate = {
     },
   ],
   entryDoor: {
-    position: { x: -3.6, y: -7.6 },
+    position: { x: -3.2, y: -7.6 },
     orientation: { rotation: -90 },
   },
   exitDoor: {
