@@ -5,7 +5,11 @@ import IStandInDecorationPresenter from "./IStandInDecorationPresenter";
 export default class StandInDecorationPresenter
   implements IStandInDecorationPresenter
 {
-  constructor(private viewModel: StandInDecorationViewModel) {}
+  constructor(private viewModel: StandInDecorationViewModel) {
+    if (!this.viewModel) {
+      throw new Error("ViewModel was passed as undefined");
+    }
+  }
 
   presentStandInDecoration(
     position: [Vector3, number],
