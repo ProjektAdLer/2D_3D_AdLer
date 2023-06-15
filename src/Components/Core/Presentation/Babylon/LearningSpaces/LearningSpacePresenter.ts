@@ -16,6 +16,8 @@ import AbstractLearningSpaceDimensionStrategy from "./LearningSpaceDimensionStra
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import GenericLearningSpaceDimensionStrategy from "./LearningSpaceDimensionStrategies/GenericLearningSpaceDimensionStrategy";
 import TemplateLearningSpaceDimensionStrategy from "./LearningSpaceDimensionStrategies/TemplateLearningSpaceDimensionStrategy";
+import IStandInDecorationPresenter from "../StandInDecoration/IStandInDecorationPresenter";
+import StandInDecorationView from "../StandInDecoration/StandInDecorationView";
 import IDecorationPresenter from "../Decoration/IDecorationPresenter";
 
 @injectable()
@@ -83,21 +85,41 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     const elementBuilder = CoreDIContainer.get<IPresentationBuilder>(
       BUILDER_TYPES.ILearningElementBuilder
     );
+    const standInDecorationBuilder = CoreDIContainer.get<IPresentationBuilder>(
+      BUILDER_TYPES.IStandInDecorationBuilder
+    );
 
     let elementPositions =
       this.dimensionStrategy.getLearningElementPositions(spaceTO);
 
-    spaceTO.elements.forEach((elementTO) => {
-      // skip empty element slots
-      if (!elementTO) return;
-
-      this.director.build(elementBuilder);
-      (
-        elementBuilder.getPresenter() as ILearningElementPresenter
-      ).presentLearningElement(elementTO, elementPositions.shift()!);
-      (elementBuilder.getView() as LearningElementView).setupLearningElement();
-      elementBuilder.reset();
-    });
+    for (let i = 0; i < spaceTO.elements.length; i++) {
+      if (!spaceTO.elements[i]) {
+        this.director.build(standInDecorationBuilder);
+        (
+          standInDecorationBuilder.getPresenter() as IStandInDecorationPresenter
+        ).presentStandInDecoration(
+          elementPositions.shift()!,
+          spaceTO.name,
+          i + 1
+        );
+        (
+          standInDecorationBuilder.getView() as StandInDecorationView
+        ).setupStandInDecoration();
+        standInDecorationBuilder.reset();
+      } else {
+        this.director.build(elementBuilder);
+        (
+          elementBuilder.getPresenter() as ILearningElementPresenter
+        ).presentLearningElement(
+          spaceTO.elements[i]!,
+          elementPositions.shift()!
+        );
+        (
+          elementBuilder.getView() as LearningElementView
+        ).setupLearningElement();
+        elementBuilder.reset();
+      }
+    }
   }
 
   private createExitDoor(): void {

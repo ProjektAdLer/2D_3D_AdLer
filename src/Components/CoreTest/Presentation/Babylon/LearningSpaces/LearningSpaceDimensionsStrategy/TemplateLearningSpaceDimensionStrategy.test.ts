@@ -109,7 +109,7 @@ describe("TemplateLearningSpaceDimensionStrategy", () => {
     expect(wallPoints).toEqual(mockSpaceTemplate.walls);
   });
 
-  test("getLearningElementPositions returns the correct element slots from the template, skipping empty slots", () => {
+  test("getLearningElementPositions returns the correct element slots from the template", () => {
     jest
       .spyOn(LearningSpaceTemplateLookup, "getLearningSpaceTemplate")
       .mockReturnValue(mockSpaceTemplate);
@@ -119,10 +119,11 @@ describe("TemplateLearningSpaceDimensionStrategy", () => {
     const elementPositions =
       systemUnderTest["getLearningElementPositions"](spaceTO);
 
-    expect(elementPositions).toHaveLength(2);
+    expect(elementPositions).toHaveLength(3);
     expect(elementPositions).toEqual(
       expect.arrayContaining([
         [expect.objectContaining({ _x: 42, _y: 1, _z: 42 }), 42],
+        [expect.objectContaining({ _x: 43, _y: 1, _z: 43 }), 43],
         [expect.objectContaining({ _x: 44, _y: 1, _z: 44 }), 44],
       ])
     );

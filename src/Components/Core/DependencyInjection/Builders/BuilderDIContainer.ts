@@ -31,6 +31,7 @@ import AmbienceBuilder from "../../Presentation/Babylon/Ambience/AmbienceBuilder
 import WindowBuilder from "../../Presentation/Babylon/Window/WindowBuilder";
 import LearningSpaceScorePanelBuilder from "~ReactComponents/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanelBuilder";
 import DecorationBuilder from "../../Presentation/Babylon/Decoration/DecorationBuilder";
+import StandInDecorationBuilder from "../../Presentation/Babylon/StandInDecoration/StandInDecorationBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -112,6 +113,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IDecorationBuilder).to(
     DecorationBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IStandInDecorationBuilder).to(
+    StandInDecorationBuilder
   );
 });
 

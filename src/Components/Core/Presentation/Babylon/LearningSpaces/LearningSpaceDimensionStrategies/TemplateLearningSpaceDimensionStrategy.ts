@@ -28,9 +28,6 @@ export default class TemplateLearningSpaceDimensionStrategy extends AbstractLear
 
     const positions: [Vector3, number][] = [];
     for (let i = 0; i < template.elementSlots.length; i++) {
-      //skip empty slots
-      if (spaceTO.elements[i] === null) continue;
-
       const slot = template.elementSlots[i];
       positions.push([
         new Vector3(slot.position.x, this.baseHeight, slot.position.y),

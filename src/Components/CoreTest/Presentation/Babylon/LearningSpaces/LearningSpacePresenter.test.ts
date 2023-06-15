@@ -63,6 +63,9 @@ describe("LearningSpacePresenter", () => {
       BUILDER_TYPES.ILearningElementBuilder
     ).toConstantValue(builderMock);
     CoreDIContainer.rebind<IPresentationBuilder>(
+      BUILDER_TYPES.IStandInDecorationBuilder
+    ).toConstantValue(builderMock);
+    CoreDIContainer.rebind<IPresentationBuilder>(
       BUILDER_TYPES.IDoorBuilder
     ).toConstantValue(builderMock);
     CoreDIContainer.rebind<IPresentationBuilder>(
@@ -174,9 +177,9 @@ describe("LearningSpacePresenter", () => {
 
     systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
-    expect(directorMock.build).toHaveBeenCalledTimes(2);
+    expect(directorMock.build).toHaveBeenCalledTimes(3);
     expect(directorMock.build).toHaveBeenCalledWith(builderMock);
-    expect(builderMock.reset).toHaveBeenCalledTimes(1);
+    expect(builderMock.reset).toHaveBeenCalledTimes(2);
   });
 
   test("createLearningElements calls the elementPresenter for each Element", () => {

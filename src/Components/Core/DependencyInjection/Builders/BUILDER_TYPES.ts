@@ -35,6 +35,7 @@ const BUILDER_TYPES = {
   ILearningSpaceScorePanelBuilder: Symbol("ILearningSpaceScorePanelBuilder"),
   ILearningWorldScorePanelBuilder: Symbol("ILearningWorldScorePanelBuilder"),
   IDecorationBuilder: Symbol("IDecorationBuilder"),
+  IStandInDecorationBuilder: Symbol("IStandInDecorationBuilder"),
 };
 
 export default BUILDER_TYPES;
