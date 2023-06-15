@@ -4,10 +4,10 @@ import ILearningSpaceTemplate from "./ILearningSpaceTemplate";
 export const LearningSpaceTemplate_R8: ILearningSpaceTemplate = {
   name: LearningSpaceTemplateType.R8,
   cornerPoints: [
-    { x: 4.15, y: -6.15 }, // A
-    { x: -4.15, y: -6.15 }, // B
-    { x: -4.15, y: 6.95 }, // C
-    { x: 4.15, y: 6.95 }, // D
+    { x: 4, y: -6 }, // A
+    { x: -4, y: -6 }, // B
+    { x: -4, y: 6.8 }, // C
+    { x: 4, y: 6.8 }, // D
   ],
   walls: [
     { start: 1, end: 2 },
