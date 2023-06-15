@@ -20,7 +20,7 @@ import type INavigation from "../../Navigation/INavigation";
 import ILearningSpacePresenter from "../../LearningSpaces/ILearningSpacePresenter";
 import AvatarCameraViewModel from "../../AvatarCamera/AvatarCameraViewModel";
 import type IGetUserLocationUseCase from "src/Components/Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
-import type { IAmbienceBuilder } from "../../Ambience/AmbienceBuilder";
+import type IAsyncPresentationBuilder from "../../../PresentationBuilder/IAsyncPresentationBuilder";
 
 @injectable()
 export default class LearningSpaceSceneDefinition extends AbstractSceneDefinition {
@@ -45,7 +45,7 @@ export default class LearningSpaceSceneDefinition extends AbstractSceneDefinitio
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
     @inject(BUILDER_TYPES.IAmbienceBuilder)
-    private ambienceBuilder: IAmbienceBuilder
+    private ambienceBuilder: IAsyncPresentationBuilder
   ) {
     super();
   }

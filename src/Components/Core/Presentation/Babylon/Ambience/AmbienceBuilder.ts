@@ -2,23 +2,16 @@ import { injectable } from "inversify";
 import AmbiencePresenter from "./AmbiencePresenter";
 import AmbienceView from "./AmbienceView";
 import AmbienceViewModel from "./AmbienceViewModel";
-import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 import IAmbiencePresenter from "./IAmbiencePresenter";
-import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
-
-export interface IAmbienceBuilder extends IPresentationBuilder {
-  isCompleted: Promise<void>;
-}
+import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
 
 @injectable()
-export default class AmbienceBuilder extends PresentationBuilder<
+export default class AmbienceBuilder extends AsyncPresentationBuilder<
   AmbienceViewModel,
   undefined,
   AmbienceView,
   IAmbiencePresenter
 > {
-  public readonly isCompleted: Promise<void>;
-
   constructor() {
     super(AmbienceViewModel, undefined, AmbienceView, AmbiencePresenter);
 
@@ -39,6 +32,4 @@ export default class AmbienceBuilder extends PresentationBuilder<
       }
     );
   }
-
-  private resolveIsCompleted: (value: void | PromiseLike<void>) => void;
 }
