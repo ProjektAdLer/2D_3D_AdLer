@@ -63,7 +63,8 @@ describe("AbstractSceneDefinition", () => {
 
   test("createScene calls show() on the scenes debugLayer if config.isDebug is set true", async () => {
     config.isDebug = true;
-    const showMock = jest.fn(Inspector.Show);
+    const showMock = jest.fn();
+    Inspector.Show = showMock;
 
     await systemUnderTest.createScene(new NullEngine());
 
