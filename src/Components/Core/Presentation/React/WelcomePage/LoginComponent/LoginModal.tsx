@@ -54,9 +54,14 @@ export default function LoginModal(props: {
           />
 
           {loginFailed && (
-            <p className="text-red-500 text-xs">
-              Login fehlgeschlagen. Bitte überprüfe deine Eingaben.
-            </p>
+            <div>
+              <p className="m-1 text-xs font-bold text-red-500">
+                Login fehlgeschlagen.
+              </p>
+              <p className="m-1 text-xs font-bold text-red-500">
+                Bitte überprüfe deine Eingaben.
+              </p>
+            </div>
           )}
 
           <StyledButton shape="freefloatcenter" onClick={handleSubmit}>
