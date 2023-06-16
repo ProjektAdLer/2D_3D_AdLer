@@ -11,6 +11,8 @@ import ArrayItemRandomizer from "../../Utils/ArrayItemRandomizer/ArrayItemRandom
 
 const modelLinks = [
   require("../../../../../Assets/3dModels/defaultTheme/d-moebel-komp-1.glb"),
+  require("../../../../../Assets/3dModels/defaultTheme/d-moebel-komp-2.glb"),
+  require("../../../../../Assets/3dModels/defaultTheme/d-moebel-komp-3.glb"),
   null,
   null,
   null,
