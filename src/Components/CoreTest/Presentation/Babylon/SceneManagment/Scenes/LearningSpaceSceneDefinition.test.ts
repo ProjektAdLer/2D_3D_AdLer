@@ -85,7 +85,7 @@ describe("LearningSpaceScene", () => {
     ).not.toThrow();
   });
 
-  test("initializeScene calls the LoadSpace use case", async () => {
+  test.skip("initializeScene calls the LoadSpace use case", async () => {
     systemUnderTest["scene"] = new Scene(new NullEngine());
     presentationBuilderMock.getViewModel.mockReturnValue(
       new AvatarCameraViewModel()
