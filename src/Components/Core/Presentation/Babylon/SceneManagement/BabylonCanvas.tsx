@@ -47,7 +47,8 @@ export default function BabylonCanvas(
 
     DracoCompression.Configuration = {
       decoder: {
-        wasmUrl: "http://fza-lt-4272e0/draco/draco_decoder_gltf.wasm",
+        wasmUrl:
+          "http://fza-lt-4272e0/draco/preview.babylonjs.com_draco_wasm_wrapper_gltf.js",
         wasmBinaryUrl: "http://fza-lt-4272e0/draco/draco_decoder_gltf.wasm",
         fallbackUrl:
           "http://fza-lt-4272e0/draco/preview.babylonjs.com_draco_decoder_gltf.js",
