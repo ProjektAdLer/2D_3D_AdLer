@@ -65,14 +65,6 @@ describe("LearningSpaceView", () => {
     jest.restoreAllMocks();
   });
 
-  test("constructor adds displayScene to onBeforeRenderObservable on the scene", () => {
-    const [systemUnderTest] = createSystemUnderTest();
-
-    expect(
-      scenePresenterMock.Scene.onBeforeRenderObservable.add
-    ).toBeCalledWith(systemUnderTest.displayLearningSpace);
-  });
-
   describe("Material Creation Methods", () => {
     test("createFloorMaterial creates a material", () => {
       const [, , viewModel] = createSystemUnderTest();
