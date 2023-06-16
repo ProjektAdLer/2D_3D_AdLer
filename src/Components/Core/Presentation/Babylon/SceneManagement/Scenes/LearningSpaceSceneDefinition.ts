@@ -17,7 +17,6 @@ import type ILoadAvatarUseCase from "src/Components/Core/Application/UseCases/Lo
 import type IPresentationDirector from "../../../PresentationBuilder/IPresentationDirector";
 import type IPresentationBuilder from "../../../PresentationBuilder/IPresentationBuilder";
 import type INavigation from "../../Navigation/INavigation";
-import ILearningSpacePresenter from "../../LearningSpaces/ILearningSpacePresenter";
 import AvatarCameraViewModel from "../../AvatarCamera/AvatarCameraViewModel";
 import type IGetUserLocationUseCase from "src/Components/Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import type IAsyncPresentationBuilder from "../../../PresentationBuilder/IAsyncPresentationBuilder";
