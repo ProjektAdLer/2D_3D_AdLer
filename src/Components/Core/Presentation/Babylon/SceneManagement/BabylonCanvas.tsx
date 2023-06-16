@@ -1,4 +1,9 @@
-import { Engine, EngineOptions, SceneOptions } from "@babylonjs/core";
+import {
+  DracoCompression,
+  Engine,
+  EngineOptions,
+  SceneOptions,
+} from "@babylonjs/core";
 import { useEffect, useRef } from "react";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import AbstractSceneDefinition from "./Scenes/AbstractSceneDefinition";
@@ -39,6 +44,15 @@ export default function BabylonCanvas(
 
   useEffect(() => {
     if (!canvasRef.current) return;
+
+    DracoCompression.Configuration = {
+      decoder: {
+        wasmUrl: "http://fza-lt-4272e0/draco/draco_decoder_gltf.wasm",
+        wasmBinaryUrl: "http://fza-lt-4272e0/draco/draco_decoder_gltf.wasm",
+        fallbackUrl:
+          "http://fza-lt-4272e0/draco/preview.babylonjs.com_draco_decoder_gltf.js",
+      },
+    };
 
     // create engine
     const engine = new Engine(
