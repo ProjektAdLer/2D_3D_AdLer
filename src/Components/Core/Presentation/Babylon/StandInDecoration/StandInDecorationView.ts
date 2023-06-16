@@ -16,6 +16,10 @@ const modelLinks = [
   null,
   null,
   null,
+  null,
+  null,
+  null,
+  null,
 ];
 
 export default class StandInDecorationView {
@@ -37,7 +41,7 @@ export default class StandInDecorationView {
 
     const modelRandomizer = new ArrayItemRandomizer(modelLinks);
     modelLink = modelRandomizer.getItem(
-      `${this.viewModel.spaceName.Value} + ${this.viewModel.slotNumber.Value}`
+      `${this.viewModel.slotNumber.Value} ${this.viewModel.spaceName.Value}`
     );
     if (modelLink == null) {
       return;
