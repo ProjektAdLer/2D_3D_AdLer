@@ -7,6 +7,7 @@ on:
     branches:
       - "main"
       - "georg202306"
+      - "rel_ECSEE"
 
 jobs:
   build:
