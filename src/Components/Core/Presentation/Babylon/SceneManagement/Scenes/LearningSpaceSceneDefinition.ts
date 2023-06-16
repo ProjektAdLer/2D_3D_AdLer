@@ -33,7 +33,6 @@ export default class LearningSpaceSceneDefinition
   implements ILearningWorldAdapter
 {
   private avatarParentNode: TransformNode;
-  private spacePresenter: ILearningSpacePresenter;
   private spaceData: LearningSpaceTO;
 
   constructor(
@@ -82,8 +81,6 @@ export default class LearningSpaceSceneDefinition
     const spaceCompleted = this.spaceBuilder.isCompleted;
     this.spaceBuilder.spaceData = this.spaceData;
     this.director.build(this.spaceBuilder);
-    this.spacePresenter =
-      this.spaceBuilder.getPresenter() as ILearningSpacePresenter;
 
     // create avatar
     this.avatarParentNode = new TransformNode("AvatarParentNode", this.scene);
@@ -99,10 +96,9 @@ export default class LearningSpaceSceneDefinition
     this.navigation.setupNavigation();
   }
 
-  override disposeScene(): void {
-    this.spacePresenter.dispose();
-    super.disposeScene();
-  }
+  // override disposeScene(): void {
+  //   super.disposeScene();
+  // }
 
   @bind
   private async loadAvatarPreTask(): Promise<void> {

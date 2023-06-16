@@ -54,13 +54,10 @@ export default class LearningSpaceView implements ILearningSpaceView {
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
 
-    // this.scenePresenter.Scene.onBeforeRenderObservable.add(
-    //   this.displayLearningSpace
-    // );
-
     // create materials
     this.createFloorMaterial();
     this.createWallMaterial();
+
     this.displayLearningSpace();
   }
 
