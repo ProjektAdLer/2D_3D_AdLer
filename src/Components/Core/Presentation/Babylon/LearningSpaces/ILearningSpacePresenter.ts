@@ -1,5 +1,5 @@
-import ILearningWorldAdapter from "src/Components/Core/Application/Ports/LearningWorldPort/ILearningWorldAdapter";
+import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 
-export default interface ILearningSpacePresenter extends ILearningWorldAdapter {
-  dispose(): void;
+export default interface ILearningSpacePresenter {
+  asyncSetupSpace(spaceData: LearningSpaceTO): Promise<void>;
 }

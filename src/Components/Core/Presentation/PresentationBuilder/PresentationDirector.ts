@@ -11,7 +11,7 @@ export default class PresentationDirector implements IPresentationDirector {
     // execute build steps
     builder.buildViewModel();
     builder.buildController();
-    builder.buildView();
     builder.buildPresenter();
+    builder.buildView();
   }
 }

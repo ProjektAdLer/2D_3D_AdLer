@@ -1,23 +1,28 @@
 import { injectable } from "inversify";
-import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import ILearningSpaceController from "./ILearningSpaceController";
 import LearningSpaceController from "./LearningSpaceController";
 import LearningSpacePresenter from "./LearningSpacePresenter";
 import LearningSpaceView from "./LearningSpaceView";
 import LearningSpaceViewModel from "./LearningSpaceViewModel";
-import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 import ILearningSpaceView from "./ILearningSpaceView";
 import ILearningSpacePresenter from "./ILearningSpacePresenter";
-import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
-import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
+import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
+import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
+import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
+import AbstractLearningSpaceDimensionStrategy from "./LearningSpaceDimensionStrategies/AbstractLearningSpaceDimensionStrategy";
+import GenericLearningSpaceDimensionStrategy from "./LearningSpaceDimensionStrategies/GenericLearningSpaceDimensionStrategy";
+import TemplateLearningSpaceDimensionStrategy from "./LearningSpaceDimensionStrategies/TemplateLearningSpaceDimensionStrategy";
 
 @injectable()
-export default class LearningSpaceBuilder extends PresentationBuilder<
+export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
   LearningSpaceViewModel,
   ILearningSpaceController,
   ILearningSpaceView,
   ILearningSpacePresenter
 > {
+  spaceData: LearningSpaceTO;
+  private dimensionStrategy: AbstractLearningSpaceDimensionStrategy;
+
   constructor() {
     super(
       LearningSpaceViewModel,
@@ -25,12 +30,63 @@ export default class LearningSpaceBuilder extends PresentationBuilder<
       LearningSpaceView,
       LearningSpacePresenter
     );
+
+    this.isCompleted = new Promise((resolve) => {
+      this.resolveIsCompleted = resolve;
+    });
+  }
+
+  override buildViewModel(): void {
+    if (!this.spaceData)
+      throw new Error(
+        "Space data is not defined. Set before using the builder."
+      );
+
+    super.buildViewModel();
+    this.viewModel!.id = this.spaceData.id;
+    this.viewModel!.learningSpaceTemplateType.Value = this.spaceData.template;
+
+    this.setDimensionsStrategy(this.spaceData.template);
+    this.viewModel!.spaceCornerPoints.Value =
+      this.dimensionStrategy.getCornerPoints(this.spaceData);
+    this.viewModel!.exitDoorPosition.Value =
+      this.dimensionStrategy.getExitDoorPosition(this.spaceData);
+    this.viewModel!.entryDoorPosition.Value =
+      this.dimensionStrategy.getEntryDoorPosition(this.spaceData);
+    this.viewModel!.windowPositions.Value =
+      this.dimensionStrategy.getWindowPositions(this.spaceData);
+    this.viewModel!.wallSegments.Value =
+      this.dimensionStrategy.getWallSegmentIndices(this.spaceData);
+    this.viewModel!.elementPositions.Value =
+      this.dimensionStrategy.getLearningElementPositions(this.spaceData);
   }
 
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<ILearningWorldPort>(
-      PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!);
+
+    this.presenter!.asyncSetupSpace(this.spaceData)
+      .then(() => {
+        this.resolveIsCompleted();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  private setDimensionsStrategy(templateType: LearningSpaceTemplateType): void {
+    if (templateType === LearningSpaceTemplateType.None)
+      this.dimensionStrategy = new GenericLearningSpaceDimensionStrategy(
+        this.viewModel!.wallThickness.Value,
+        this.viewModel!.baseHeight.Value,
+        this.viewModel!.doorWidth.Value,
+        this.viewModel!.windowWidth.Value
+      );
+    else
+      this.dimensionStrategy = new TemplateLearningSpaceDimensionStrategy(
+        this.viewModel!.wallThickness.Value,
+        this.viewModel!.baseHeight.Value,
+        this.viewModel!.doorWidth.Value,
+        this.viewModel!.windowWidth.Value
+      );
   }
 }

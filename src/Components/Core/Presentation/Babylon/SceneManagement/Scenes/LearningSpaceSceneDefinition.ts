@@ -17,21 +17,28 @@ import type ILoadAvatarUseCase from "src/Components/Core/Application/UseCases/Lo
 import type IPresentationDirector from "../../../PresentationBuilder/IPresentationDirector";
 import type IPresentationBuilder from "../../../PresentationBuilder/IPresentationBuilder";
 import type INavigation from "../../Navigation/INavigation";
-import ILearningSpacePresenter from "../../LearningSpaces/ILearningSpacePresenter";
 import AvatarCameraViewModel from "../../AvatarCamera/AvatarCameraViewModel";
 import type IGetUserLocationUseCase from "src/Components/Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import type IAsyncPresentationBuilder from "../../../PresentationBuilder/IAsyncPresentationBuilder";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import type ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
+import ILearningWorldAdapter from "src/Components/Core/Application/Ports/LearningWorldPort/ILearningWorldAdapter";
+import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
+import type ILearningSpaceBuilder from "../../LearningSpaces/ILearningSpaceBuilder";
 
 @injectable()
-export default class LearningSpaceSceneDefinition extends AbstractSceneDefinition {
+export default class LearningSpaceSceneDefinition
+  extends AbstractSceneDefinition
+  implements ILearningWorldAdapter
+{
   private avatarParentNode: TransformNode;
-  private spacePresenter: ILearningSpacePresenter;
+  private spaceData: LearningSpaceTO;
 
   constructor(
     @inject(BUILDER_TYPES.IPresentationDirector)
     private director: IPresentationDirector,
     @inject(BUILDER_TYPES.ILearningSpaceBuilder)
-    private spaceBuilder: IPresentationBuilder,
+    private spaceBuilder: ILearningSpaceBuilder,
     @inject(BUILDER_TYPES.IAvatarBuilder)
     private avatarBuilder: IPresentationBuilder,
     @inject(CORE_TYPES.INavigation)
@@ -45,38 +52,34 @@ export default class LearningSpaceSceneDefinition extends AbstractSceneDefinitio
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
     @inject(BUILDER_TYPES.IAmbienceBuilder)
-    private ambienceBuilder: IAsyncPresentationBuilder
+    private ambienceBuilder: IAsyncPresentationBuilder,
+    @inject(PORT_TYPES.ILearningWorldPort)
+    private learningWorldPort: ILearningWorldPort
   ) {
     super();
+    this.learningWorldPort.registerAdapter(this);
   }
 
-  protected override preTasks = [this.loadAvatarPreTask];
+  protected override preTasks = [this.loadAvatarPreTask, this.loadSpacePreTask];
 
   protected override async initializeScene(): Promise<void> {
     this.scene.clearColor = new Color4(0.66, 0.83, 0.98, 1);
     new HemisphericLight("light", new Vector3(0, 1, 0), this.scene);
 
+    // setup highlight layer
     this.highlightLayer = new HighlightLayer("highlightLayer", this.scene);
     this.highlightLayer.innerGlow = false;
     this.highlightLayer.blurHorizontalSize = 1;
     this.highlightLayer.blurVerticalSize = 1;
 
     // create space ambience
-    this.director.build(this.ambienceBuilder);
     const ambienceCompleted = this.ambienceBuilder.isCompleted;
+    this.director.build(this.ambienceBuilder);
 
     // create space
+    const spaceCompleted = this.spaceBuilder.isCompleted;
+    this.spaceBuilder.spaceData = this.spaceData;
     this.director.build(this.spaceBuilder);
-    this.spacePresenter =
-      this.spaceBuilder.getPresenter() as ILearningSpacePresenter;
-
-    // execute loadSpace use case to fill space with data
-    const userLocation = this.getUserLocationUseCase.execute();
-    if (userLocation.spaceID && userLocation.worldID)
-      await this.loadSpaceUseCase.executeAsync({
-        worldID: userLocation.worldID,
-        spaceID: userLocation.spaceID,
-      });
 
     // create avatar
     this.avatarParentNode = new TransformNode("AvatarParentNode", this.scene);
@@ -86,19 +89,32 @@ export default class LearningSpaceSceneDefinition extends AbstractSceneDefinitio
       this.avatarCameraBuilder.getViewModel() as AvatarCameraViewModel
     ).parentNode.Value = this.avatarParentNode;
 
-    await Promise.all([ambienceCompleted]);
+    await Promise.all([ambienceCompleted, spaceCompleted]);
 
     // initialize navigation for the room
     this.navigation.setupNavigation();
   }
 
-  override disposeScene(): void {
-    this.spacePresenter.dispose();
-    super.disposeScene();
-  }
+  // override disposeScene(): void {
+  //   super.disposeScene();
+  // }
 
   @bind
   private async loadAvatarPreTask(): Promise<void> {
     await this.loadAvatarUseCase.executeAsync();
+  }
+
+  @bind
+  private async loadSpacePreTask(): Promise<void> {
+    const userLocation = this.getUserLocationUseCase.execute();
+    if (userLocation.spaceID && userLocation.worldID)
+      await this.loadSpaceUseCase.executeAsync({
+        worldID: userLocation.worldID,
+        spaceID: userLocation.spaceID,
+      });
+  }
+
+  onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
+    this.spaceData = learningSpaceTO;
   }
 }
