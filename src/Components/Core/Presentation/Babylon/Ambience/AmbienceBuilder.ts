@@ -14,10 +14,6 @@ export default class AmbienceBuilder extends AsyncPresentationBuilder<
 > {
   constructor() {
     super(AmbienceViewModel, undefined, AmbienceView, AmbiencePresenter);
-
-    this.isCompleted = new Promise((resolve) => {
-      this.resolveIsCompleted = resolve;
-    });
   }
 
   buildView(): void {
