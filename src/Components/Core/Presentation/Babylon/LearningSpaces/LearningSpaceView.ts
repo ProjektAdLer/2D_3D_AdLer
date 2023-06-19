@@ -23,7 +23,6 @@ import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
-import bind from "bind-decorator";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 
 // apply earcut (see also top of the page)
@@ -53,63 +52,21 @@ export default class LearningSpaceView implements ILearningSpaceView {
       SCENE_TYPES.ScenePresenterFactory
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
-
-    // create materials
-    this.createFloorMaterial();
-    this.createWallMaterial();
-
-    this.displayLearningSpace();
   }
 
-  @bind
-  public displayLearningSpace(): void {
-    if (!this.viewModel.isDirty) return;
-
+  public async asyncSetup(): Promise<void> {
     // Errorhandling: Check if cornerCount is higher than 2
     if (this.viewModel.spaceCornerPoints.Value.length < 3)
       throw new Error(
         "Not enough corners found to generate space. Please review the Spacedata."
       );
 
-    this.cleanupOldWalls();
-    this.cleanupOldPoles();
-    this.cleanupOldFloor();
-    this.createWalls();
-    this.createCornerPoles();
-    this.createFloor();
+    // create materials
+    this.createFloorMaterial();
+    this.createWallMaterial();
 
-    this.viewModel.isDirty = false;
-  }
-
-  private cleanupOldFloor(): void {
-    if (!this.viewModel.floorMesh.Value) {
-      return;
-    }
-    this.viewModel.floorMesh.Value.dispose();
-  }
-
-  private cleanupOldPoles(): void {
-    if (!this.viewModel.cornerPoleMeshes.Value) {
-      this.viewModel.cornerPoleMeshes.Value = [];
-      return;
-    }
-
-    this.viewModel.cornerPoleMeshes.Value.forEach((poleMesh) => {
-      poleMesh.dispose();
-    });
-    this.viewModel.cornerPoleMeshes.Value = [];
-  }
-
-  private cleanupOldWalls(): void {
-    if (!this.viewModel.wallMeshes.Value) {
-      this.viewModel.wallMeshes.Value = [];
-      return;
-    }
-
-    this.viewModel.wallMeshes.Value.forEach((wallMesh) => {
-      wallMesh.dispose();
-    });
-    this.viewModel.wallMeshes.Value = [];
+    // create walls and floor meshes
+    await Promise.all([this.createWalls(), this.createFloor()]);
   }
 
   public createFloorMaterial(): void {
@@ -140,9 +97,10 @@ export default class LearningSpaceView implements ILearningSpaceView {
     (this.viewModel.wallMaterial.Value.diffuseTexture as Texture).vScale = 1.5;
     (this.viewModel.wallMaterial.Value.diffuseTexture as Texture).uScale = 6;
     this.viewModel.wallMaterial.Value.specularColor = new Color3(0, 0, 0);
+    // this.viewModel.wallMaterial.Value.wireframe = true;
   }
 
-  private createFloor(): void {
+  private async createFloor(): Promise<void> {
     // create floor mesh
     const polyMesh = new PolygonMeshBuilder(
       "FloorPolyMesh",
@@ -158,15 +116,50 @@ export default class LearningSpaceView implements ILearningSpaceView {
       this.viewModel.floorMaterial.Value;
   }
 
-  private createWalls(): void {
+  private async createWalls(): Promise<void> {
+    let wallMeshes: Mesh[] = this.createCornerPoles();
+    wallMeshes = wallMeshes.concat(this.createWallSegments());
+
+    let mergedWallMeshes = Mesh.MergeMeshes(wallMeshes, true) as Mesh;
+    this.scenePresenter.Scene.removeMesh(mergedWallMeshes);
+
+    this.scenePresenter.registerNavigationMesh(mergedWallMeshes);
+
+    // apply cutouts
+    if (this.viewModel.exitDoorPosition.Value)
+      mergedWallMeshes = this.createDoorCutout(
+        this.viewModel.exitDoorPosition.Value,
+        mergedWallMeshes
+      );
+    if (this.viewModel.entryDoorPosition.Value)
+      mergedWallMeshes = this.createDoorCutout(
+        this.viewModel.entryDoorPosition.Value,
+        mergedWallMeshes
+      );
+    for (const windowPosition of this.viewModel.windowPositions.Value)
+      mergedWallMeshes = this.createWindowCutout(
+        windowPosition,
+        mergedWallMeshes
+      );
+
+    this.scenePresenter.Scene.addMesh(mergedWallMeshes, true);
+
+    // apply material
+    mergedWallMeshes.material = this.viewModel.wallMaterial.Value;
+  }
+
+  private createWallSegments(): Mesh[] {
+    const wallSegments: Mesh[] = [];
     this.viewModel.wallSegments.Value.forEach((wallSegment) => {
-      this.viewModel.wallMeshes.Value.push(
+      wallSegments.push(
         this.createWallSegment(
           this.viewModel.spaceCornerPoints.Value[wallSegment.start],
           this.viewModel.spaceCornerPoints.Value[wallSegment.end]
         )
       );
     });
+
+    return wallSegments;
   }
 
   private createWallSegment(startPoint: Vector3, endPoint: Vector3): Mesh {
@@ -199,53 +192,30 @@ export default class LearningSpaceView implements ILearningSpaceView {
       width: wallLength,
       depth: this.viewModel.wallThickness.Value,
     };
-    let wallSegmentDraft = MeshBuilder.CreateBox(
+    let wallSegment = MeshBuilder.CreateBox(
       "BaseWallSegment",
       wallSegmentOptions,
       this.scenePresenter.Scene
     );
-    this.scenePresenter.Scene.removeMesh(wallSegmentDraft);
-    this.scenePresenter.registerNavigationMesh(wallSegmentDraft);
+    this.scenePresenter.Scene.removeMesh(wallSegment);
 
     // set position
-    wallSegmentDraft.position.x = (offsetStartPoint.x + offsetEndPoint.x) / 2;
-    wallSegmentDraft.position.y =
+    wallSegment.position.x = (offsetStartPoint.x + offsetEndPoint.x) / 2;
+    wallSegment.position.y =
       (this.viewModel.baseHeight.Value || 0) +
       (this.viewModel.wallHeight.Value -
         this.viewModel.wallGroundworkDepth.Value) /
         2;
-    wallSegmentDraft.position.z = (offsetStartPoint.z + offsetEndPoint.z) / 2;
+    wallSegment.position.z = (offsetStartPoint.z + offsetEndPoint.z) / 2;
 
-    wallSegmentDraft.rotation.y =
+    wallSegment.rotation.y =
       Math.PI -
       Math.atan2(
         offsetEndPoint.z - offsetStartPoint.z,
         offsetEndPoint.x - offsetStartPoint.x
       );
 
-    if (this.viewModel.exitDoorPosition.Value)
-      wallSegmentDraft = this.createDoorCutout(
-        this.viewModel.exitDoorPosition.Value,
-        wallSegmentDraft
-      );
-    if (this.viewModel.entryDoorPosition.Value)
-      wallSegmentDraft = this.createDoorCutout(
-        this.viewModel.entryDoorPosition.Value,
-        wallSegmentDraft
-      );
-
-    for (const windowPosition of this.viewModel.windowPositions.Value)
-      wallSegmentDraft = this.createWindowCutout(
-        windowPosition,
-        wallSegmentDraft
-      );
-
-    this.scenePresenter.Scene.addMesh(wallSegmentDraft, true);
-
-    // apply material
-    wallSegmentDraft.material = this.viewModel.wallMaterial.Value;
-
-    return wallSegmentDraft;
+    return wallSegment;
   }
 
   private createDoorCutout(
@@ -332,7 +302,7 @@ export default class LearningSpaceView implements ILearningSpaceView {
     return wallSegmentWithCutout;
   }
 
-  private createCornerPoles(): void {
+  private createCornerPoles(): Mesh[] {
     let wallSegmentIntersections: Set<number> = new Set<number>();
     let visitedCornerPoints: Set<number> = new Set<number>();
     this.viewModel.wallSegments.Value.forEach((wallSegment) => {
@@ -345,12 +315,15 @@ export default class LearningSpaceView implements ILearningSpaceView {
       else visitedCornerPoints.add(wallSegment.end);
     });
 
+    const cornerPoles: Mesh[] = [];
     wallSegmentIntersections.forEach((intersectionPoint) => {
       const poleMesh = this.createPole(
         this.viewModel.spaceCornerPoints.Value[intersectionPoint]
       );
-      this.viewModel.cornerPoleMeshes.Value.push(poleMesh);
+      cornerPoles.push(poleMesh);
     });
+
+    return cornerPoles;
   }
 
   private createPole(corner: Vector3): Mesh {
@@ -367,6 +340,7 @@ export default class LearningSpaceView implements ILearningSpaceView {
         this.viewModel.wallHeight.Value +
         this.viewModel.wallGroundworkDepth.Value,
       diameter: this.viewModel.wallThickness.Value,
+      tessellation: 12,
     };
     const pole = MeshBuilder.CreateCylinder(
       "Pole",

@@ -11,12 +11,18 @@ import { LearningElementModelTypeEnums } from "../../../../Core/Domain/Types/Lea
 import ILearningSpacePresenter from "../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpacePresenter";
 import PresentationBuilder from "../../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
 import { addAbortSignal } from "stream";
+import ILearningSpaceView from "../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpaceView";
+import ILearningSpaceController from "../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpaceController";
 
 jest.mock("@babylonjs/core");
 jest.mock(
   "../../../../Core/Presentation/Babylon/LearningSpaces/LearningSpacePresenter"
 );
+jest.mock(
+  "../../../../Core/Presentation/Babylon/LearningSpaces/LearningSpaceView"
+);
 jest.spyOn(PresentationBuilder.prototype, "buildPresenter");
+jest.spyOn(PresentationBuilder.prototype, "buildView");
 
 const spaceTO: LearningSpaceTO = {
   id: 1,
@@ -106,26 +112,28 @@ describe("LearningSpaceBuilder", () => {
     expect(dimensionStrategy.getWindowPositions).toHaveBeenCalledTimes(1);
   });
 
-  test("buildPresenter resolves isCompleted promise when the asyncSetup of the view resolves", async () => {
+  test("buildPresenter resolves private isPresenterCompleted promise when the asyncSetup of the view resolves", async () => {
     systemUnderTest.spaceData = spaceTO;
     systemUnderTest["viewModel"] = new LearningSpaceViewModel();
 
-    const spacePresenter = mock<ILearningSpacePresenter>();
-    spacePresenter.asyncSetupSpace.mockResolvedValue();
-    systemUnderTest["presenter"] = spacePresenter;
+    const presenterMock = mock<ILearningSpacePresenter>();
+    presenterMock.asyncSetupSpace.mockResolvedValue();
+    systemUnderTest["presenter"] = presenterMock;
 
     systemUnderTest.buildPresenter();
 
-    await expect(systemUnderTest.isCompleted).resolves.toBeUndefined();
+    await expect(
+      systemUnderTest["isPresenterCompleted"]
+    ).resolves.toBeUndefined();
   });
 
   test("buildPresenter logs error the asyncSetup of the view rejects", async () => {
     systemUnderTest.spaceData = spaceTO;
     systemUnderTest["viewModel"] = new LearningSpaceViewModel();
 
-    const spacePresenter = mock<ILearningSpacePresenter>();
-    spacePresenter.asyncSetupSpace.mockRejectedValue("Test Error");
-    systemUnderTest["presenter"] = spacePresenter;
+    const presenterMock = mock<ILearningSpacePresenter>();
+    presenterMock.asyncSetupSpace.mockRejectedValue("Test Error");
+    systemUnderTest["presenter"] = presenterMock;
 
     const consoleErrorMock = jest.spyOn(console, "error");
 
@@ -134,6 +142,60 @@ describe("LearningSpaceBuilder", () => {
     waitFor(() => {
       expect(consoleErrorMock).toHaveBeenCalledTimes(1);
       expect(consoleErrorMock).toHaveBeenCalledWith("Test Error");
+    });
+  });
+
+  test("buildView resolves private isViewCompleted promise when the asyncSetup of the view resolves", async () => {
+    systemUnderTest.spaceData = spaceTO;
+    systemUnderTest["viewModel"] = new LearningSpaceViewModel();
+    systemUnderTest["controller"] = mock<ILearningSpaceController>();
+
+    const viewMock = mock<ILearningSpaceView>();
+    viewMock.asyncSetup.mockResolvedValue();
+    systemUnderTest["view"] = viewMock;
+
+    systemUnderTest.buildView();
+
+    await expect(systemUnderTest["isViewCompleted"]).resolves.toBeUndefined();
+  });
+
+  test("buildView logs error the asyncSetup of the view rejects", async () => {
+    systemUnderTest.spaceData = spaceTO;
+    systemUnderTest["viewModel"] = new LearningSpaceViewModel();
+    systemUnderTest["controller"] = mock<ILearningSpaceController>();
+
+    const viewMock = mock<ILearningSpaceView>();
+    viewMock.asyncSetup.mockRejectedValue("Test Error");
+    systemUnderTest["view"] = viewMock;
+
+    const consoleErrorMock = jest.spyOn(console, "error");
+
+    systemUnderTest.buildView();
+
+    waitFor(() => {
+      expect(consoleErrorMock).toHaveBeenCalledTimes(1);
+      expect(consoleErrorMock).toHaveBeenCalledWith("Test Error");
+    });
+  });
+
+  test("isCompleted resolves when both presenter and view are completly built", async () => {
+    systemUnderTest.spaceData = spaceTO;
+    systemUnderTest["viewModel"] = new LearningSpaceViewModel();
+    systemUnderTest["controller"] = mock<ILearningSpaceController>();
+
+    const viewMock = mock<ILearningSpaceView>();
+    viewMock.asyncSetup.mockResolvedValue();
+    systemUnderTest["view"] = viewMock;
+
+    const presenterMock = mock<ILearningSpacePresenter>();
+    presenterMock.asyncSetupSpace.mockResolvedValue();
+    systemUnderTest["presenter"] = presenterMock;
+
+    systemUnderTest.buildPresenter();
+    systemUnderTest.buildView();
+
+    waitFor(() => {
+      expect(systemUnderTest.isCompleted).resolves.toBeUndefined();
     });
   });
 

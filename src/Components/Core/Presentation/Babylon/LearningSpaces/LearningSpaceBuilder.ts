@@ -23,6 +23,13 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
   spaceData: LearningSpaceTO;
   private dimensionStrategy: AbstractLearningSpaceDimensionStrategy;
 
+  private isPresenterCompleted: Promise<void>;
+  private resolveIsPresenterCompleted: (
+    value: void | PromiseLike<void>
+  ) => void;
+  private isViewCompleted: Promise<void>;
+  private resolveIsViewCompleted: (value: void | PromiseLike<void>) => void;
+
   constructor() {
     super(
       LearningSpaceViewModel,
@@ -31,9 +38,16 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
       LearningSpacePresenter
     );
 
-    this.isCompleted = new Promise((resolve) => {
-      this.resolveIsCompleted = resolve;
+    this.isPresenterCompleted = new Promise((resolve) => {
+      this.resolveIsPresenterCompleted = resolve;
     });
+    this.isViewCompleted = new Promise((resolve) => {
+      this.resolveIsViewCompleted = resolve;
+    });
+    this.isCompleted = Promise.all([
+      this.isPresenterCompleted,
+      this.isViewCompleted,
+    ]).then(() => Promise.resolve());
   }
 
   override buildViewModel(): void {
@@ -64,13 +78,27 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
   override buildPresenter(): void {
     super.buildPresenter();
 
-    this.presenter!.asyncSetupSpace(this.spaceData)
-      .then(() => {
-        this.resolveIsCompleted();
-      })
-      .catch((error) => {
+    this.presenter!.asyncSetupSpace(this.spaceData).then(
+      () => {
+        this.resolveIsPresenterCompleted();
+      },
+      (error) => {
         console.log(error);
-      });
+      }
+    );
+  }
+
+  override buildView(): void {
+    super.buildView();
+
+    this.view!.asyncSetup().then(
+      () => {
+        this.resolveIsViewCompleted();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   private setDimensionsStrategy(templateType: LearningSpaceTemplateType): void {

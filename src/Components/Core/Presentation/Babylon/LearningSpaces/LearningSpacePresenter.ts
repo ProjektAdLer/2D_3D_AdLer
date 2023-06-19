@@ -57,7 +57,6 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         (
           standInDecorationBuilder.getView() as StandInDecorationView
         ).setupStandInDecoration();
-        standInDecorationBuilder.reset();
       } else {
         this.director.build(elementBuilder);
         (
@@ -69,7 +68,6 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         (
           elementBuilder.getView() as LearningElementView
         ).setupLearningElement();
-        elementBuilder.reset();
       }
     }
   }
