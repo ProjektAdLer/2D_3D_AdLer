@@ -11,6 +11,8 @@ import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects
 import LearningElementView from "../LearningElements/LearningElementView";
 import IWindowPresenter from "../Window/IWindowPresenter";
 import IDecorationPresenter from "../Decoration/IDecorationPresenter";
+import IStandInDecorationPresenter from "../StandInDecoration/IStandInDecorationPresenter";
+import StandInDecorationView from "../StandInDecoration/StandInDecorationView";
 
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
@@ -38,21 +40,38 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     const elementBuilder = CoreDIContainer.get<IPresentationBuilder>(
       BUILDER_TYPES.ILearningElementBuilder
     );
+    const standInDecorationBuilder = CoreDIContainer.get<IPresentationBuilder>(
+      BUILDER_TYPES.IStandInDecorationBuilder
+    );
 
-    spaceTO.elements.forEach((elementTO) => {
-      // skip empty element slots
-      if (!elementTO) return;
-
-      this.director.build(elementBuilder);
-      (
-        elementBuilder.getPresenter() as ILearningElementPresenter
-      ).presentLearningElement(
-        elementTO,
-        this.viewModel.elementPositions.Value.shift()!
-      );
-      (elementBuilder.getView() as LearningElementView).setupLearningElement();
-      elementBuilder.reset();
-    });
+    for (let i = 0; i < spaceTO.elements.length; i++) {
+      if (!spaceTO.elements[i]) {
+        this.director.build(standInDecorationBuilder);
+        (
+          standInDecorationBuilder.getPresenter() as IStandInDecorationPresenter
+        ).presentStandInDecoration(
+          this.viewModel.elementPositions.Value.shift()!,
+          spaceTO.name,
+          i + 1
+        );
+        (
+          standInDecorationBuilder.getView() as StandInDecorationView
+        ).setupStandInDecoration();
+        standInDecorationBuilder.reset();
+      } else {
+        this.director.build(elementBuilder);
+        (
+          elementBuilder.getPresenter() as ILearningElementPresenter
+        ).presentLearningElement(
+          spaceTO.elements[i]!,
+          this.viewModel.elementPositions.Value.shift()!
+        );
+        (
+          elementBuilder.getView() as LearningElementView
+        ).setupLearningElement();
+        elementBuilder.reset();
+      }
+    }
   }
 
   private createExitDoor(): void {
