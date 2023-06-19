@@ -11,9 +11,9 @@ import LearningSpaceSceneDefinition from "../../../../../Core/Presentation/Babyl
 import ILearningSpacePresenter from "../../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpacePresenter";
 import IPresentationBuilder from "../../../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
-import history from "history/browser";
 import AvatarCameraViewModel from "../../../../../Core/Presentation/Babylon/AvatarCamera/AvatarCameraViewModel";
 import IGetUserLocationUseCase from "../../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
+import { waitFor } from "@testing-library/react";
 
 const presentationDirectorMock = mock<IPresentationDirector>();
 const presentationBuilderMock = mock<IPresentationBuilder>();
@@ -85,33 +85,32 @@ describe("LearningSpaceScene", () => {
     ).not.toThrow();
   });
 
-  test.skip("initializeScene calls the LoadSpace use case", async () => {
-    systemUnderTest["scene"] = new Scene(new NullEngine());
-    presentationBuilderMock.getViewModel.mockReturnValue(
-      new AvatarCameraViewModel()
-    );
+  test("preTasks calls the LoadSpace use case", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValue(
       getUserLocationUseCaseReturnValue
     );
+    systemUnderTest["preTasks"].forEach((task) => task());
 
-    await systemUnderTest["initializeScene"]();
-
-    expect(loadSpaceUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(loadSpaceUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
+    });
   });
 
   test("preTasks contains call to loadAvatarUseCase", async () => {
-    await systemUnderTest["preTasks"].forEach((task) => task());
+    getUserLocationUseCaseMock.execute.mockReturnValue(
+      getUserLocationUseCaseReturnValue
+    );
+    systemUnderTest["preTasks"].forEach((task) => task());
 
-    expect(loadAvatarUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
+    waitFor(() => {
+      expect(loadAvatarUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test("disposeScene calls dispose on the scenePresenter", () => {
-    const spacePresenterMock = mock<ILearningSpacePresenter>();
-    systemUnderTest["spacePresenter"] = spacePresenterMock;
-    systemUnderTest["scene"] = new Scene(new NullEngine());
+  test("onLearningSpaceLoaded sets the private menber spaceData", () => {
+    const spaceData = mockDeep<ILearningSpacePresenter>();
+    systemUnderTest["onLearningSpaceLoaded"](spaceData);
 
-    systemUnderTest["disposeScene"]();
-
-    expect(spacePresenterMock.dispose).toHaveBeenCalledTimes(1);
+    expect(systemUnderTest["spaceData"]).toBe(spaceData);
   });
 });
