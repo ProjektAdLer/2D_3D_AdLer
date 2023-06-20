@@ -19,20 +19,20 @@ describe("AmbienceBuilder", () => {
 
   test("buildView resolves isCompleted promise when the asyncSetup of the view resolves", async () => {
     systemUnderTest.buildViewModel();
-    const ambienceViewMock = mock<AmbienceView>();
-    ambienceViewMock.asyncSetup.mockResolvedValue(undefined);
-    systemUnderTest["view"] = ambienceViewMock;
+    const viewMock = mock<AmbienceView>();
+    viewMock.asyncSetup.mockResolvedValue(undefined);
+    systemUnderTest["view"] = viewMock;
 
     systemUnderTest.buildView();
 
     await expect(systemUnderTest.isCompleted).resolves.toBeUndefined();
   });
 
-  test("buildView logs error the asyncSetup of the view rejects", async () => {
+  test("buildView logs the error which the asyncSetup of the view rejects", async () => {
     systemUnderTest.buildViewModel();
-    const ambienceViewMock = mock<AmbienceView>();
-    ambienceViewMock.asyncSetup.mockRejectedValue("Test Error");
-    systemUnderTest["view"] = ambienceViewMock;
+    const viewMock = mock<AmbienceView>();
+    viewMock.asyncSetup.mockRejectedValue("Test Error");
+    systemUnderTest["view"] = viewMock;
 
     const consoleErrorMock = jest.spyOn(console, "error");
 
