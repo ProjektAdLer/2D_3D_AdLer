@@ -73,13 +73,11 @@ export default class LearningSpaceSceneDefinition
     this.highlightLayer.blurVerticalSize = 1;
 
     // create space ambience
-    const ambienceCompleted = this.ambienceBuilder.isCompleted;
-    this.director.build(this.ambienceBuilder);
+    const ambienceCompleted = this.director.buildAsync(this.ambienceBuilder);
 
     // create space
-    const spaceCompleted = this.spaceBuilder.isCompleted;
     this.spaceBuilder.spaceData = this.spaceData;
-    this.director.build(this.spaceBuilder);
+    const spaceCompleted = this.director.buildAsync(this.spaceBuilder);
 
     // create avatar
     this.avatarParentNode = new TransformNode("AvatarParentNode", this.scene);
