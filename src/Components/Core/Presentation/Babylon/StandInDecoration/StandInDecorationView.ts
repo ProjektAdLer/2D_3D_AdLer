@@ -6,7 +6,6 @@ import StandInDecorationViewModel from "./StandInDecorationViewModel";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import { Mesh, Tools, Vector3 } from "@babylonjs/core";
-import bind from "bind-decorator";
 import ArrayItemRandomizer from "../../Utils/ArrayItemRandomizer/ArrayItemRandomizer";
 
 const modelLinks = [
@@ -30,40 +29,28 @@ export default class StandInDecorationView {
       SCENE_TYPES.ScenePresenterFactory
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
-
-    // setup callbacks for rerendering when the view model changes
-    viewModel.position.subscribe(this.positionModel);
-    viewModel.rotation.subscribe(this.positionModel);
   }
 
-  public async setupStandInDecoration(): Promise<void> {
+  public async asyncSetup(): Promise<void> {
     let modelLink;
 
     const modelRandomizer = new ArrayItemRandomizer(modelLinks);
     modelLink = modelRandomizer.getItem(
-      `${this.viewModel.slotNumber.Value} ${this.viewModel.spaceName.Value}`
+      `${this.viewModel.slotNumber} ${this.viewModel.spaceName}`
     );
     if (modelLink == null) {
       return;
     }
-    this.viewModel.modelMeshes.Value = (await this.scenePresenter.loadModel(
+    this.viewModel.modelMeshes = (await this.scenePresenter.loadModel(
       modelLink,
       true
     )) as Mesh[];
 
-    this.positionModel();
-  }
+    this.viewModel.modelMeshes[0].position = this.viewModel.position;
 
-  @bind
-  private positionModel(): void {
-    if (this.viewModel.modelMeshes.Value) {
-      this.viewModel.modelMeshes.Value[0].position =
-        this.viewModel.position.Value;
-
-      this.viewModel.modelMeshes.Value[0].rotate(
-        Vector3.Up(),
-        Tools.ToRadians(this.viewModel.rotation.Value)
-      );
-    }
+    this.viewModel.modelMeshes[0].rotate(
+      Vector3.Up(),
+      Tools.ToRadians(this.viewModel.rotation)
+    );
   }
 }
