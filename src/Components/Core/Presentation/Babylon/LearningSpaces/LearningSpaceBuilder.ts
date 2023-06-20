@@ -58,20 +58,23 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
 
     super.buildViewModel();
     this.viewModel!.id = this.spaceData.id;
-    this.viewModel!.learningSpaceTemplateType.Value = this.spaceData.template;
+    this.viewModel!.learningSpaceTemplateType = this.spaceData.template;
 
     this.setDimensionsStrategy(this.spaceData.template);
-    this.viewModel!.spaceCornerPoints.Value =
-      this.dimensionStrategy.getCornerPoints(this.spaceData);
-    this.viewModel!.exitDoorPosition.Value =
+    this.viewModel!.spaceCornerPoints = this.dimensionStrategy.getCornerPoints(
+      this.spaceData
+    );
+    this.viewModel!.exitDoorPosition =
       this.dimensionStrategy.getExitDoorPosition(this.spaceData);
-    this.viewModel!.entryDoorPosition.Value =
+    this.viewModel!.entryDoorPosition =
       this.dimensionStrategy.getEntryDoorPosition(this.spaceData);
-    this.viewModel!.windowPositions.Value =
-      this.dimensionStrategy.getWindowPositions(this.spaceData);
-    this.viewModel!.wallSegments.Value =
-      this.dimensionStrategy.getWallSegmentIndices(this.spaceData);
-    this.viewModel!.elementPositions.Value =
+    this.viewModel!.windowPositions = this.dimensionStrategy.getWindowPositions(
+      this.spaceData
+    );
+    this.viewModel!.wallSegments = this.dimensionStrategy.getWallSegmentIndices(
+      this.spaceData
+    );
+    this.viewModel!.elementPositions =
       this.dimensionStrategy.getLearningElementPositions(this.spaceData);
   }
 
@@ -104,17 +107,17 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
   private setDimensionsStrategy(templateType: LearningSpaceTemplateType): void {
     if (templateType === LearningSpaceTemplateType.None)
       this.dimensionStrategy = new GenericLearningSpaceDimensionStrategy(
-        this.viewModel!.wallThickness.Value,
-        this.viewModel!.baseHeight.Value,
-        this.viewModel!.doorWidth.Value,
-        this.viewModel!.windowWidth.Value
+        this.viewModel!.wallThickness,
+        this.viewModel!.baseHeight,
+        this.viewModel!.doorWidth,
+        this.viewModel!.windowWidth
       );
     else
       this.dimensionStrategy = new TemplateLearningSpaceDimensionStrategy(
-        this.viewModel!.wallThickness.Value,
-        this.viewModel!.baseHeight.Value,
-        this.viewModel!.doorWidth.Value,
-        this.viewModel!.windowWidth.Value
+        this.viewModel!.wallThickness,
+        this.viewModel!.baseHeight,
+        this.viewModel!.doorWidth,
+        this.viewModel!.windowWidth
       );
   }
 }
