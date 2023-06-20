@@ -44,7 +44,7 @@ describe("LearningElementController", () => {
 
   test("pointerOver scales up iconMeshes", () => {
     const mockedMesh = mockDeep<Mesh>();
-    viewModel.iconMeshes.Value = [mockedMesh];
+    viewModel.iconMeshes = [mockedMesh];
 
     systemUnderTest.pointerOver();
 
@@ -62,7 +62,7 @@ describe("LearningElementController", () => {
 
   test("pointerOut scales down iconMeshes", () => {
     const mockedMesh = mockDeep<Mesh>();
-    viewModel.iconMeshes.Value = [mockedMesh];
+    viewModel.iconMeshes = [mockedMesh];
 
     systemUnderTest.pointerOut();
 

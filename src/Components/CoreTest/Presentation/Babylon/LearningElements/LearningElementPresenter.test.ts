@@ -48,12 +48,4 @@ describe("LearningElementPresenter", () => {
 
     expect(systemUnderTest["viewModel"].hasScored.Value).toBe(false);
   });
-
-  test("presentElement calls the babylon engine", () => {
-    systemUnderTest.presentLearningElement(testElementTO, [testVector, 0]);
-
-    expect(systemUnderTest["viewModel"].id).toBe(testElementTO.id);
-    expect(systemUnderTest["viewModel"].position.Value).toBe(testVector);
-    expect(systemUnderTest["viewModel"].rotation.Value).toBe(0);
-  });
 });

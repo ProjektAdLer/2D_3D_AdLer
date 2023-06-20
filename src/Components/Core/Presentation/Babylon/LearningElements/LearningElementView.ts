@@ -98,9 +98,6 @@ export default class LearningElementView {
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
 
-    // setup callbacks for rerendering when the view model changes
-    viewModel.position.subscribe(this.positionModel);
-    viewModel.rotation.subscribe(this.positionModel);
     viewModel.hasScored.subscribe(() => {
       this.changeHighlightColor(
         this.viewModel.hasScored.Value ? Color3.Green() : Color3.Red()
@@ -112,34 +109,34 @@ export default class LearningElementView {
     // load model
     let modelLink;
     if (
-      isValidLearningElementModelType(this.viewModel.model.Value) &&
-      this.viewModel.model.Value !==
+      isValidLearningElementModelType(this.viewModel.modelType) &&
+      this.viewModel.modelType !==
         LearningElementModelTypeEnums.NoElementModelTypes.None
     ) {
-      modelLink = modelLinksByModel[this.viewModel.model.Value];
+      modelLink = modelLinksByModel[this.viewModel.modelType];
     } else {
       const modelRandomizer = new ArrayItemRandomizer(
-        modelLinksByType[this.viewModel.type.Value as LearningElementTypes]!
+        modelLinksByType[this.viewModel.type as LearningElementTypes]!
       );
-      modelLink = modelRandomizer.getItem(this.viewModel.name.Value);
+      modelLink = modelRandomizer.getItem(this.viewModel.name);
     }
 
-    this.viewModel.modelMeshes.Value = (await this.scenePresenter.loadModel(
+    this.viewModel.modelMeshes = (await this.scenePresenter.loadModel(
       modelLink,
       true
     )) as Mesh[];
 
     // load icon
-    this.viewModel.iconMeshes.Value = (await this.scenePresenter.loadModel(
-      iconLinks[this.viewModel.type.Value as LearningElementTypes]!
+    this.viewModel.iconMeshes = (await this.scenePresenter.loadModel(
+      iconLinks[this.viewModel.type as LearningElementTypes]!
     )) as Mesh[];
 
     // create action manager for each mesh
     const actionManager = new ActionManager(this.scenePresenter.Scene);
-    this.viewModel.modelMeshes.Value.forEach((mesh) => {
+    this.viewModel.modelMeshes.forEach((mesh) => {
       mesh.actionManager = actionManager;
     });
-    this.viewModel.iconMeshes.Value.forEach((mesh) => {
+    this.viewModel.iconMeshes.forEach((mesh) => {
       mesh.actionManager = actionManager;
     });
 
@@ -158,13 +155,13 @@ export default class LearningElementView {
     );
 
     // add model meshes to highlight layer
-    this.viewModel.modelMeshes.Value.forEach((mesh) => {
+    this.viewModel.modelMeshes.forEach((mesh) => {
       this.scenePresenter.HighlightLayer.addMesh(
         mesh,
         this.viewModel.hasScored.Value ? Color3.Green() : Color3.Red()
       );
     });
-    this.viewModel.iconMeshes.Value.forEach((mesh) => {
+    this.viewModel.iconMeshes.forEach((mesh) => {
       this.scenePresenter.HighlightLayer.addMesh(
         mesh,
         this.viewModel.hasScored.Value ? Color3.Green() : Color3.Red()
@@ -178,12 +175,12 @@ export default class LearningElementView {
     triggerOptions: any,
     callback: (event?: ActionEvent) => void
   ): void {
-    this.viewModel.modelMeshes.Value.forEach((mesh) => {
+    this.viewModel.modelMeshes.forEach((mesh) => {
       mesh.actionManager?.registerAction(
         new ExecuteCodeAction(triggerOptions, callback)
       );
     });
-    this.viewModel.iconMeshes.Value.forEach((mesh) => {
+    this.viewModel.iconMeshes.forEach((mesh) => {
       mesh.actionManager?.registerAction(
         new ExecuteCodeAction(triggerOptions, callback)
       );
@@ -192,32 +189,30 @@ export default class LearningElementView {
 
   @bind
   private positionModel(): void {
-    if (this.viewModel.modelMeshes.Value && this.viewModel.iconMeshes.Value) {
-      this.viewModel.modelMeshes.Value[0].position =
-        this.viewModel.position.Value;
-      this.viewModel.iconMeshes.Value[0].position =
-        this.viewModel.position.Value.add(
-          new Vector3(0, this.viewModel.iconYOffset, 0)
-        );
-
-      this.viewModel.modelMeshes.Value[0].rotate(
-        Vector3.Up(),
-        Tools.ToRadians(this.viewModel.rotation.Value)
+    if (this.viewModel.modelMeshes && this.viewModel.iconMeshes) {
+      this.viewModel.modelMeshes[0].position = this.viewModel.position;
+      this.viewModel.iconMeshes[0].position = this.viewModel.position.add(
+        new Vector3(0, this.viewModel.iconYOffset, 0)
       );
-      this.viewModel.iconMeshes.Value[0].rotate(
+
+      this.viewModel.modelMeshes[0].rotate(
         Vector3.Up(),
-        Tools.ToRadians(this.viewModel.rotation.Value)
+        Tools.ToRadians(this.viewModel.rotation)
+      );
+      this.viewModel.iconMeshes[0].rotate(
+        Vector3.Up(),
+        Tools.ToRadians(this.viewModel.rotation)
       );
     }
   }
 
   @bind
   private changeHighlightColor(color: Color3): void {
-    this.viewModel.modelMeshes.Value?.forEach((mesh) => {
+    this.viewModel.modelMeshes?.forEach((mesh) => {
       this.scenePresenter.HighlightLayer.removeMesh(mesh);
       this.scenePresenter.HighlightLayer.addMesh(mesh, color);
     });
-    this.viewModel.iconMeshes.Value?.forEach((mesh) => {
+    this.viewModel.iconMeshes?.forEach((mesh) => {
       this.scenePresenter.HighlightLayer.removeMesh(mesh);
       this.scenePresenter.HighlightLayer.addMesh(mesh, color);
     });

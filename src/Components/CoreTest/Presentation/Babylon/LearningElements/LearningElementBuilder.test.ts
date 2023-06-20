@@ -4,8 +4,31 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import LearningElementBuilder from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementBuilder";
 import LearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementPresenter";
+import LearningElementTO from "../../../../Core/Application/DataTransferObjects/LearningElementTO";
+import { LearningElementModelTypeEnums } from "../../../../Core/Domain/Types/LearningElementModelTypes";
+import { Vector3 } from "@babylonjs/core";
+import LearningElementView from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementView";
+import { waitFor } from "@testing-library/react";
+
+jest.mock(
+  "../../../../Core/Presentation/Babylon/LearningElements/LearningElementView"
+);
 
 const worldPortMock = mock<ILearningWorldPort>();
+
+const mockElementData: LearningElementTO = {
+  id: 0,
+  value: 0,
+  parentSpaceID: 0,
+  parentWorldID: 0,
+  name: "TestName",
+  description: "TestDescription",
+  goals: ["TestGoal"],
+  type: "h5p",
+  hasScored: false,
+  model: LearningElementModelTypeEnums.NoElementModelTypes.None,
+};
+const mockElementPosition: [Vector3, number] = [new Vector3(1, 2, 3), 0];
 
 describe("LearningElementBuilder", () => {
   let systemUnderTest: LearningElementBuilder;
@@ -25,7 +48,47 @@ describe("LearningElementBuilder", () => {
     CoreDIContainer.restore();
   });
 
+  test("buildViewModel throws if elementData is not set", () => {
+    systemUnderTest.elementPosition = mockElementPosition;
+    expect(() => {
+      systemUnderTest.buildViewModel();
+    }).toThrowError("elementData is undefined");
+  });
+
+  test("buildViewModel throws if elementPosition is not set", () => {
+    systemUnderTest.elementData = mockElementData;
+    expect(() => {
+      systemUnderTest.buildViewModel();
+    }).toThrowError("elementPosition is undefined");
+  });
+
+  test("buildViewModel concludes the build step successfully and sets the given data in the viewModel", () => {
+    systemUnderTest.elementData = mockElementData;
+    systemUnderTest.elementPosition = mockElementPosition;
+
+    systemUnderTest.buildViewModel();
+
+    expect(systemUnderTest["viewModel"]).toBeDefined();
+    expect(systemUnderTest["viewModel"]!.id).toBe(mockElementData.id);
+    expect(systemUnderTest["viewModel"]!.name).toBe(mockElementData.name);
+    expect(systemUnderTest["viewModel"]!.description).toBe(
+      mockElementData.description
+    );
+    expect(systemUnderTest["viewModel"]!.goals).toBe(mockElementData.goals);
+    expect(systemUnderTest["viewModel"]!.type).toBe(mockElementData.type);
+    expect(systemUnderTest["viewModel"]!.hasScored.Value).toBe(
+      mockElementData.hasScored
+    );
+    expect(systemUnderTest["viewModel"]!.modelType).toBe(mockElementData.model);
+    expect(systemUnderTest["viewModel"]!.value).toBe(mockElementData.value);
+    expect(systemUnderTest["viewModel"]!.position).toBe(mockElementPosition[0]);
+    expect(systemUnderTest["viewModel"]!.rotation).toBe(mockElementPosition[1]);
+  });
+
   test("buildPresenter concludes the build step successfully and registers the presenter with the port", () => {
+    systemUnderTest.elementData = mockElementData;
+    systemUnderTest.elementPosition = mockElementPosition;
+
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 
@@ -41,5 +104,43 @@ describe("LearningElementBuilder", () => {
     expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"]
     );
+  });
+
+  test("buildView calls setupLearningElement on the created view and resolves", async () => {
+    systemUnderTest.elementData = mockElementData;
+    systemUnderTest.elementPosition = mockElementPosition;
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildController();
+
+    const viewMock = mock<LearningElementView>();
+    viewMock.setupLearningElement.mockResolvedValue(undefined);
+    systemUnderTest["view"] = viewMock;
+
+    systemUnderTest.buildView();
+
+    expect(systemUnderTest["view"]).toBeDefined();
+    expect(systemUnderTest["view"]!.setupLearningElement).toHaveBeenCalledTimes(
+      1
+    );
+    await expect(systemUnderTest.isCompleted).resolves.toBeUndefined();
+  });
+
+  test("buildView logs the error which setupLearningElement of the view rejects", async () => {
+    systemUnderTest.elementData = mockElementData;
+    systemUnderTest.elementPosition = mockElementPosition;
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildController();
+    const viewMock = mock<LearningElementView>();
+    viewMock.setupLearningElement.mockRejectedValue("Test Error");
+    systemUnderTest["view"] = viewMock;
+
+    const consoleErrorMock = jest.spyOn(console, "error");
+
+    systemUnderTest.buildView();
+
+    waitFor(() => {
+      expect(consoleErrorMock).toHaveBeenCalledTimes(1);
+      expect(consoleErrorMock).toHaveBeenCalledWith("Test Error");
+    });
   });
 });

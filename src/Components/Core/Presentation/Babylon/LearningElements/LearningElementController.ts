@@ -16,7 +16,7 @@ export default class LearningElementController
   @bind
   pointerOver(): void {
     this.displayTooltip();
-    this.viewModel.iconMeshes.Value?.forEach((mesh) => {
+    this.viewModel.iconMeshes?.forEach((mesh) => {
       mesh.scaling.scaleInPlace(this.viewModel.iconScaleUpOnHover);
     });
   }
@@ -26,7 +26,7 @@ export default class LearningElementController
     CoreDIContainer.get<IBottomTooltipPresenter>(
       PRESENTATION_TYPES.IBottomTooltipPresenter
     ).hide();
-    this.viewModel.iconMeshes.Value?.forEach((mesh) => {
+    this.viewModel.iconMeshes?.forEach((mesh) => {
       mesh.scaling.scaleInPlace(1 / this.viewModel.iconScaleUpOnHover);
     });
   }
@@ -47,9 +47,9 @@ export default class LearningElementController
     CoreDIContainer.get<IBottomTooltipPresenter>(
       PRESENTATION_TYPES.IBottomTooltipPresenter
     ).displayLearningElementSummaryTooltip({
-      name: this.viewModel.name.Value,
-      type: this.viewModel.type.Value,
-      points: this.viewModel.value.Value,
+      name: this.viewModel.name,
+      type: this.viewModel.type,
+      points: this.viewModel.value,
     });
   }
 }

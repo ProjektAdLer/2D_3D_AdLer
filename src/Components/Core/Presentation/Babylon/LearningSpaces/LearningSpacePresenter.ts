@@ -6,13 +6,13 @@ import IPresentationDirector from "../../PresentationBuilder/IPresentationDirect
 import IDoorPresenter from "../Door/IDoorPresenter";
 import LearningSpaceViewModel from "./LearningSpaceViewModel";
 import ILearningSpacePresenter from "./ILearningSpacePresenter";
-import ILearningElementPresenter from "../LearningElements/ILearningElementPresenter";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
-import LearningElementView from "../LearningElements/LearningElementView";
 import IWindowPresenter from "../Window/IWindowPresenter";
 import IStandInDecorationPresenter from "../StandInDecoration/IStandInDecorationPresenter";
 import StandInDecorationView from "../StandInDecoration/StandInDecorationView";
 import type IDecorationBuilder from "../Decoration/IDecorationBuilder";
+import ILearningElementBuilder from "../LearningElements/ILearningElementBuilder";
+
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
   private director: IPresentationDirector;
@@ -44,16 +44,21 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     await Promise.all([decorationCompleted]);
   }
 
-  private createLearningElements(spaceTO: LearningSpaceTO): void {
-    const elementBuilder = CoreDIContainer.get<IPresentationBuilder>(
+  private async createLearningElements(
+    spaceTO: LearningSpaceTO
+  ): Promise<void> {
+    const elementBuilder = CoreDIContainer.get<ILearningElementBuilder>(
       BUILDER_TYPES.ILearningElementBuilder
     );
     const standInDecorationBuilder = CoreDIContainer.get<IPresentationBuilder>(
       BUILDER_TYPES.IStandInDecorationBuilder
     );
 
+    const loadingCompletePromises: Promise<void>[] = [];
+
     for (let i = 0; i < spaceTO.elements.length; i++) {
       if (!spaceTO.elements[i]) {
+        // create stand in decoration for empty slots
         this.director.build(standInDecorationBuilder);
         (
           standInDecorationBuilder.getPresenter() as IStandInDecorationPresenter
@@ -66,18 +71,15 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
           standInDecorationBuilder.getView() as StandInDecorationView
         ).setupStandInDecoration();
       } else {
-        this.director.build(elementBuilder);
-        (
-          elementBuilder.getPresenter() as ILearningElementPresenter
-        ).presentLearningElement(
-          spaceTO.elements[i]!,
-          this.viewModel.elementPositions.shift()!
-        );
-        (
-          elementBuilder.getView() as LearningElementView
-        ).setupLearningElement();
+        // create learning element for non-empty slots
+        elementBuilder.elementData = spaceTO.elements[i]!;
+        elementBuilder.elementPosition =
+          this.viewModel.elementPositions.shift()!;
+        loadingCompletePromises.push(this.director.buildAsync(elementBuilder));
       }
     }
+
+    await Promise.all(loadingCompletePromises);
   }
 
   private createExitDoor(): void {
