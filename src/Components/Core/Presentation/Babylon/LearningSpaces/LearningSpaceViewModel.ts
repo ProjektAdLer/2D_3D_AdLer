@@ -1,7 +1,6 @@
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { injectable } from "inversify";
 import { Mesh, StandardMaterial, Vector3 } from "@babylonjs/core";
-import Observable from "../../../../../Lib/Observable";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 
 @injectable()
