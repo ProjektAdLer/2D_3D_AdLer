@@ -49,7 +49,7 @@ export default class AvatarController implements IAvatarController {
       this.navigation.Crowd.agentGoto(
         this.viewModel.agentIndex,
         this.navigation.Plugin.getClosestPoint(
-          this.viewModel.parentNode.Value.position.add(
+          this.viewModel.parentNode.position.add(
             this.viewModel.keyMovementTarget
           )
         )
@@ -85,7 +85,8 @@ export default class AvatarController implements IAvatarController {
 
     this.viewModel.keyMovementTarget = this.viewModel.keyMovementTarget
       .add(
-        this.viewModel.parentNode.Value.getChildren<ArcRotateCamera>()![0]
+        this.viewModel.parentNode
+          .getChildren<ArcRotateCamera>()![0]
           .getDirection(this.getReferenceAxisByKey(eventData.event.key))
           .normalize()
       )

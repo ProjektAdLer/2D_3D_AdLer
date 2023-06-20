@@ -22,6 +22,9 @@ jest.mock("../../../../../Lib/Logger");
 
 // setup navigation mock
 const navigationMock = mock<INavigation>();
+navigationMock.Plugin.getClosestPoint = jest
+  .fn()
+  .mockReturnValue(Vector3.Zero());
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -49,6 +52,10 @@ describe("AvatarView", () => {
     );
   });
 
+  beforeEach(() => {
+    systemUnderTest = createAvatarView();
+  });
+
   afterAll(() => {
     jest.restoreAllMocks();
     CoreDIContainer.restore();
@@ -66,11 +73,9 @@ describe("AvatarView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    systemUnderTest = createAvatarView();
+    await systemUnderTest.asyncSetup();
 
-    await systemUnderTest.isReady.then(() => {
-      expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
-    });
+    expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
   });
 
   test("async setup gets the parent node for the avatar", async () => {
@@ -85,13 +90,11 @@ describe("AvatarView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    systemUnderTest = createAvatarView();
+    await systemUnderTest.asyncSetup();
 
-    await systemUnderTest.isReady.then(() => {
-      expect(
-        scenePresenterMock.Scene.getTransformNodeByName
-      ).toHaveBeenCalledWith("AvatarParentNode");
-    });
+    expect(
+      scenePresenterMock.Scene.getTransformNodeByName
+    ).toHaveBeenCalledWith("AvatarParentNode");
   });
 
   test("async setup sets the parent node as parent of the first loaded mesh", async () => {
@@ -106,13 +109,11 @@ describe("AvatarView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    systemUnderTest = createAvatarView();
+    await systemUnderTest.asyncSetup();
 
-    await systemUnderTest.isReady.then(() => {
-      expect(
-        systemUnderTest["viewModel"].meshes.Value[0].parent as TransformNode
-      ).toBe(systemUnderTest["viewModel"].parentNode.Value);
-    });
+    expect(systemUnderTest["viewModel"].meshes[0].parent as TransformNode).toBe(
+      systemUnderTest["viewModel"].parentNode
+    );
   });
 
   test("async setup calls addAgent with the navigation crowd", async () => {
@@ -127,11 +128,9 @@ describe("AvatarView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    systemUnderTest = createAvatarView();
+    await systemUnderTest.asyncSetup();
 
-    await systemUnderTest.isReady.then(() => {
-      expect(systemUnderTest["viewModel"].agentIndex).toBe(42);
-    });
+    expect(systemUnderTest["viewModel"].agentIndex).toBe(42);
   });
 
   test("async setup doesn't calls addAgent with the navigation crowd until navigation is ready", async () => {
@@ -143,16 +142,14 @@ describe("AvatarView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    systemUnderTest = createAvatarView();
-
     expect(systemUnderTest["viewModel"].agentIndex).toBeUndefined();
 
     //@ts-ignore
     navigationMock.isReady = Promise.resolve();
 
-    await systemUnderTest.isReady.then(() => {
-      expect(systemUnderTest["viewModel"].agentIndex).toBe(42);
-    });
+    await systemUnderTest.asyncSetup();
+
+    expect(systemUnderTest["viewModel"].agentIndex).toBe(42);
   });
 
   test("moveAvatar gets new position and velocity from navigation crowd", async () => {
@@ -176,14 +173,11 @@ describe("AvatarView", () => {
       .fn()
       .mockReturnValue(new Vector3(0, 0, 0));
 
-    systemUnderTest = createAvatarView();
+    await systemUnderTest.asyncSetup();
 
-    await systemUnderTest.isReady.then(() => {
-      systemUnderTest["moveAvatar"]();
+    systemUnderTest["moveAvatar"]();
 
-      expect(navigationMock.Crowd.getAgentPosition).toBeCalledWith(42);
-      expect(navigationMock.Crowd.getAgentVelocity).toBeCalledWith(42);
-    });
+    expect(navigationMock.Crowd.getAgentVelocity).toBeCalledWith(42);
   });
 
   test("async setup doesn't calls addAgent with the navigation crowd until navigation is ready", async () => {
@@ -195,16 +189,14 @@ describe("AvatarView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    systemUnderTest = createAvatarView();
-
     expect(systemUnderTest["viewModel"].agentIndex).toBeUndefined();
 
     //@ts-ignore
     navigationMock.isReady = Promise.resolve();
 
-    await systemUnderTest.isReady.then(() => {
-      expect(systemUnderTest["viewModel"].agentIndex).toBe(42);
-    });
+    await systemUnderTest.asyncSetup();
+
+    expect(systemUnderTest["viewModel"].agentIndex).toBe(42);
   });
 
   test("moveAvatar sets new avatar rotation", async () => {
@@ -228,18 +220,16 @@ describe("AvatarView", () => {
       .fn()
       .mockReturnValue(new Vector3(1, 2, 3));
 
-    systemUnderTest = createAvatarView();
+    await systemUnderTest.asyncSetup();
 
-    await systemUnderTest.isReady.then(() => {
-      const oldRotation =
-        systemUnderTest["viewModel"].meshes.Value[0].rotationQuaternion;
+    const oldRotation =
+      systemUnderTest["viewModel"].meshes[0].rotationQuaternion;
 
-      systemUnderTest["moveAvatar"]();
+    systemUnderTest["moveAvatar"]();
 
-      expect(
-        systemUnderTest["viewModel"].meshes.Value[0].rotationQuaternion
-      ).not.toBe(oldRotation);
-    });
+    expect(systemUnderTest["viewModel"].meshes[0].rotationQuaternion).not.toBe(
+      oldRotation
+    );
   });
 
   test("debug_displayVelocity calls MeshBuilder.CreateDashedLines", async () => {
@@ -263,18 +253,16 @@ describe("AvatarView", () => {
 
     MeshBuilder.CreateDashedLines = jest.fn();
 
-    systemUnderTest = createAvatarView();
+    await systemUnderTest.asyncSetup();
 
-    await systemUnderTest.isReady.then(() => {
-      systemUnderTest["debug_displayVelocity"](
-        systemUnderTest["viewModel"],
-        systemUnderTest["scenePresenter"],
-        new Vector3(1, 2, 3),
-        0
-      );
+    systemUnderTest["debug_displayVelocity"](
+      systemUnderTest["viewModel"],
+      systemUnderTest["scenePresenter"],
+      new Vector3(1, 2, 3),
+      0
+    );
 
-      expect(MeshBuilder.CreateDashedLines).toHaveBeenCalledTimes(1);
-    });
+    expect(MeshBuilder.CreateDashedLines).toHaveBeenCalledTimes(1);
   });
 
   test("debug_displayVelocity calls logger.log", async () => {
@@ -298,17 +286,15 @@ describe("AvatarView", () => {
 
     MeshBuilder.CreateDashedLines = jest.fn();
 
-    systemUnderTest = createAvatarView();
+    await systemUnderTest.asyncSetup();
 
-    await systemUnderTest.isReady.then(() => {
-      systemUnderTest["debug_displayVelocity"](
-        systemUnderTest["viewModel"],
-        systemUnderTest["scenePresenter"],
-        new Vector3(1, 2, 3),
-        0
-      );
+    systemUnderTest["debug_displayVelocity"](
+      systemUnderTest["viewModel"],
+      systemUnderTest["scenePresenter"],
+      new Vector3(1, 2, 3),
+      0
+    );
 
-      expect(logger.log).toHaveBeenCalledTimes(1);
-    });
+    expect(logger.log).toHaveBeenCalledTimes(1);
   });
 });

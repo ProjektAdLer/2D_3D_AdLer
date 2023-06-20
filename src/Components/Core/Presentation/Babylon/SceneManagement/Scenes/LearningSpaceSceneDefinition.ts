@@ -40,7 +40,7 @@ export default class LearningSpaceSceneDefinition
     @inject(BUILDER_TYPES.ILearningSpaceBuilder)
     private spaceBuilder: ILearningSpaceBuilder,
     @inject(BUILDER_TYPES.IAvatarBuilder)
-    private avatarBuilder: IPresentationBuilder,
+    private avatarBuilder: IAsyncPresentationBuilder,
     @inject(CORE_TYPES.INavigation)
     private navigation: INavigation,
     @inject(USECASE_TYPES.ILoadLearningSpaceUseCase)
@@ -81,7 +81,6 @@ export default class LearningSpaceSceneDefinition
 
     // create avatar
     this.avatarParentNode = new TransformNode("AvatarParentNode", this.scene);
-    this.director.build(this.avatarBuilder);
     this.director.build(this.avatarCameraBuilder);
     (
       this.avatarCameraBuilder.getViewModel() as AvatarCameraViewModel
@@ -91,6 +90,8 @@ export default class LearningSpaceSceneDefinition
 
     // initialize navigation for the room
     this.navigation.setupNavigation();
+
+    await this.director.buildAsync(this.avatarBuilder);
   }
 
   // override disposeScene(): void {

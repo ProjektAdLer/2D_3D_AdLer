@@ -126,8 +126,8 @@ describe("AvatarController", () => {
     () => {
       viewModel.pointerMovementTarget = Vector3.Zero();
       viewModel.keyMovementTarget = new Vector3(41, 41, 41);
-      viewModel.parentNode.Value = new TransformNode("parentNode");
-      viewModel.parentNode.Value.position = new Vector3(1, 1, 1);
+      viewModel.parentNode = new TransformNode("parentNode");
+      viewModel.parentNode.position = new Vector3(1, 1, 1);
 
       systemUnderTest["applyInputs"]();
 
@@ -142,8 +142,8 @@ describe("AvatarController", () => {
   test("applyInputs resets keyMovementTarget and pointerMovementTarget to zero", () => {
     viewModel.keyMovementTarget = new Vector3(41, 41, 41);
     viewModel.pointerMovementTarget = new Vector3(42, 42, 42);
-    viewModel.parentNode.Value = new TransformNode("parentNode");
-    viewModel.parentNode.Value.position = new Vector3(1, 1, 1);
+    viewModel.parentNode = new TransformNode("parentNode");
+    viewModel.parentNode.position = new Vector3(1, 1, 1);
 
     systemUnderTest["applyInputs"]();
 
@@ -189,7 +189,7 @@ describe("AvatarController", () => {
     keyboardInfoMock.event.key = "w";
     const eventStateMock = mock<EventState>();
     viewModel.keyMovementTarget = Vector3.Zero();
-    viewModel.parentNode.Value = new TransformNode("mockParentNode");
+    viewModel.parentNode = new TransformNode("mockParentNode");
     // viewModel.parentNode.Value
     const camera = mockDeep<ArcRotateCamera>();
 

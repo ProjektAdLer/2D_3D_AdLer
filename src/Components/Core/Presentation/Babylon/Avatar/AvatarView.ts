@@ -23,8 +23,6 @@ import IAvatarController from "./IAvatarController";
 const modelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Avatar_male.glb");
 
 export default class AvatarView {
-  isReady: Promise<void>;
-
   private scenePresenter: IScenePresenter;
   private navigation: INavigation;
 
@@ -37,65 +35,51 @@ export default class AvatarView {
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
-
-    // viewModel.spawnPoint.subscribe(this.applySpawnPosition);
-
-    // start async setup
-    this.isReady = this.asyncSetup();
   }
 
-  private async asyncSetup(): Promise<void> {
+  public async asyncSetup(): Promise<void> {
     await this.loadAvatarAsync();
     await this.navigation.isReady.then(this.setupAvatarNavigation);
-
-    return Promise.resolve();
   }
 
   private async loadAvatarAsync(): Promise<void> {
-    this.viewModel.parentNode.Value =
+    this.viewModel.parentNode =
       this.scenePresenter.Scene.getTransformNodeByName("AvatarParentNode")!;
 
-    this.viewModel.meshes.Value = (await this.scenePresenter.loadModel(
+    this.viewModel.meshes = (await this.scenePresenter.loadModel(
       modelLink
     )) as Mesh[];
 
-    this.viewModel.meshes.Value[0].setParent(this.viewModel.parentNode.Value);
+    this.viewModel.meshes[0].setParent(this.viewModel.parentNode);
 
     // place model 0.05 above the ground ~ FK
-    this.viewModel.meshes.Value[0].position = new Vector3(0, 0.05, 0);
-    this.viewModel.meshes.Value[0].scaling = new Vector3(1, 1, -1);
-    this.viewModel.meshes.Value.forEach(
-      (mesh) => (mesh.rotationQuaternion = null)
-    );
-    this.viewModel.meshes.Value[0].rotationQuaternion = new Quaternion(
-      0,
-      0,
-      0,
-      1
-    );
+    this.viewModel.parentNode.position = this.viewModel.spawnPoint;
+    this.viewModel.meshes[0].position = new Vector3(0, 0.05, 0);
+    this.viewModel.meshes[0].scaling = new Vector3(1, 1, -1);
+    this.viewModel.meshes.forEach((mesh) => (mesh.rotationQuaternion = null));
+    this.viewModel.meshes[0].rotationQuaternion = new Quaternion(0, 0, 0, 1);
   }
 
   @bind
-  private applySpawnPosition(): void {
-    this.viewModel.parentNode.Value.position = this.viewModel.spawnPoint.Value;
-  }
+  private setupAvatarNavigation(): void {
+    // snap to navmesh
+    this.viewModel.parentNode.position = this.navigation.Plugin.getClosestPoint(
+      this.viewModel.parentNode.position
+    );
 
-  @bind
-  private async setupAvatarNavigation(): Promise<void> {
     this.viewModel.agentIndex = this.navigation.Crowd.addAgent(
-      this.viewModel.meshes.Value[0].position,
+      this.viewModel.parentNode.position,
       this.viewModel.agentParams,
-      this.viewModel.parentNode.Value
+      this.viewModel.parentNode
     );
+
     this.scenePresenter.Scene.onBeforeRenderObservable.add(this.moveAvatar);
   }
 
   @bind
   private moveAvatar(): void {
-    if (this.viewModel.meshes.Value.length > 0) {
-      this.viewModel.parentNode.Value.position =
-        this.navigation.Crowd.getAgentPosition(this.viewModel.agentIndex);
-      let velocity = this.navigation.Crowd.getAgentVelocity(
+    if (this.viewModel.meshes.length > 0) {
+      const velocity = this.navigation.Crowd.getAgentVelocity(
         this.viewModel.agentIndex
       );
 
@@ -103,8 +87,10 @@ export default class AvatarView {
         velocity.normalize();
         let desiredRotation = Math.atan2(velocity.x, velocity.z);
 
-        this.viewModel.meshes.Value[0].rotationQuaternion =
-          Quaternion.RotationAxis(Axis.Y, desiredRotation);
+        this.viewModel.meshes[0].rotationQuaternion = Quaternion.RotationAxis(
+          Axis.Y,
+          desiredRotation
+        );
 
         /* istanbul ignore next */
         if (config.isDebug) {
@@ -131,8 +117,8 @@ export default class AvatarView {
   ): void => {
     if (this.counter % 10 === 0) {
       let points: Vector3[] = [
-        viewModel.parentNode.Value.position,
-        viewModel.parentNode.Value.position.add(velocity),
+        viewModel.parentNode.position,
+        viewModel.parentNode.position.add(velocity),
       ];
       this.velocityLine = MeshBuilder.CreateDashedLines(
         "avatar velocity",
@@ -149,7 +135,7 @@ export default class AvatarView {
           " " +
           rotation +
           " " +
-          viewModel.meshes.Value[0].rotationQuaternion?.y
+          viewModel.meshes[0].rotationQuaternion?.y
       );
     }
     this.counter++;

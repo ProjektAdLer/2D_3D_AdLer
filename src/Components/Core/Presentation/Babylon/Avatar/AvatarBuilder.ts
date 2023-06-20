@@ -1,13 +1,13 @@
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
-import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
+import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
 import AvatarController from "./AvatarController";
 import AvatarView from "./AvatarView";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
 import IAvatarPresenter from "./IAvatarPresenter";
 
-export default class AvatarBuilder extends PresentationBuilder<
+export default class AvatarBuilder extends AsyncPresentationBuilder<
   AvatarViewModel,
   IAvatarController,
   AvatarView,
@@ -23,5 +23,14 @@ export default class AvatarBuilder extends PresentationBuilder<
       PORT_TYPES.IAvatarPort
     );
     this.presenter.ViewModel = this.viewModel!;
+  }
+
+  override buildView(): void {
+    super.buildView();
+
+    this.view!.asyncSetup().then(
+      () => this.resolveIsCompleted(),
+      (e) => console.log(e)
+    );
   }
 }
