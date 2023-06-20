@@ -10,13 +10,13 @@ import ILearningElementPresenter from "../LearningElements/ILearningElementPrese
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import LearningElementView from "../LearningElements/LearningElementView";
 import IWindowPresenter from "../Window/IWindowPresenter";
-import IDecorationPresenter from "../Decoration/IDecorationPresenter";
 import IStandInDecorationPresenter from "../StandInDecoration/IStandInDecorationPresenter";
 import StandInDecorationView from "../StandInDecoration/StandInDecorationView";
-
+import type IDecorationBuilder from "../Decoration/IDecorationBuilder";
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
   private director: IPresentationDirector;
+  private decorationBuilder: IDecorationBuilder;
 
   constructor(private viewModel: LearningSpaceViewModel) {
     if (!this.viewModel) {
@@ -26,6 +26,9 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     this.director = CoreDIContainer.get<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
     );
+    this.decorationBuilder = CoreDIContainer.get<IDecorationBuilder>(
+      BUILDER_TYPES.IDecorationBuilder
+    );
   }
 
   async asyncSetupSpace(spaceTO: LearningSpaceTO): Promise<void> {
@@ -33,7 +36,12 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     this.createWindows();
     if (this.viewModel.exitDoorPosition.Value) this.createExitDoor();
     if (this.viewModel.entryDoorPosition.Value) this.createEntryDoor();
-    this.createDecoration();
+    this.decorationBuilder.spaceTemplate = spaceTO.template;
+    const decorationCompleted = this.director.buildAsync(
+      this.decorationBuilder
+    );
+
+    console.log("LearningSpacePresenter", decorationCompleted);
   }
 
   private createLearningElements(spaceTO: LearningSpaceTO): void {
@@ -109,16 +117,5 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         windowPosition
       );
     }
-  }
-
-  private createDecoration(): void {
-    const decorationBuilder = CoreDIContainer.get<IPresentationBuilder>(
-      BUILDER_TYPES.IDecorationBuilder
-    );
-
-    this.director.build(decorationBuilder);
-    (
-      decorationBuilder.getPresenter() as IDecorationPresenter
-    ).presentDecoration(this.viewModel.learningSpaceTemplateType.Value);
   }
 }
