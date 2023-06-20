@@ -43,19 +43,8 @@ describe("DecorationView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    const [, systemUnderTest] = buildSystemUnderTest();
     expect(systemUnderTest["scenePresenter"]).toBeDefined();
-  });
-
-  test("constructor subscribes to viewModel.learningSpaceTemplateType", () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    expect(viewModel.learningSpaceTemplateType["subscribers"]).toStrictEqual([
-      systemUnderTest["asyncDecorationSetup"],
-    ]);
   });
 
   test("asyncSetup/loadMeshAsync calls scenePresenter.loadModel with L room", async () => {
@@ -65,6 +54,7 @@ describe("DecorationView", () => {
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.L;
+    await systemUnderTest.asyncSetup();
 
     expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
   });
@@ -76,6 +66,7 @@ describe("DecorationView", () => {
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.R6;
+    await systemUnderTest.asyncSetup();
 
     expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
   });
@@ -87,6 +78,7 @@ describe("DecorationView", () => {
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.R8;
+    await systemUnderTest.asyncSetup();
 
     expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
   });
