@@ -34,8 +34,8 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
   async asyncSetupSpace(spaceTO: LearningSpaceTO): Promise<void> {
     this.createLearningElements(spaceTO);
     this.createWindows();
-    if (this.viewModel.exitDoorPosition.Value) this.createExitDoor();
-    if (this.viewModel.entryDoorPosition.Value) this.createEntryDoor();
+    if (this.viewModel.exitDoorPosition) this.createExitDoor();
+    if (this.viewModel.entryDoorPosition) this.createEntryDoor();
     this.decorationBuilder.spaceTemplate = spaceTO.template;
     const decorationCompleted = this.director.buildAsync(
       this.decorationBuilder
@@ -58,7 +58,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         (
           standInDecorationBuilder.getPresenter() as IStandInDecorationPresenter
         ).presentStandInDecoration(
-          this.viewModel.elementPositions.Value.shift()!,
+          this.viewModel.elementPositions.shift()!,
           spaceTO.name,
           i + 1
         );
@@ -71,7 +71,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
           elementBuilder.getPresenter() as ILearningElementPresenter
         ).presentLearningElement(
           spaceTO.elements[i]!,
-          this.viewModel.elementPositions.Value.shift()!
+          this.viewModel.elementPositions.shift()!
         );
         (
           elementBuilder.getView() as LearningElementView
@@ -87,7 +87,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
 
     this.director.build(doorBuilder);
     (doorBuilder.getPresenter() as IDoorPresenter).presentDoor(
-      this.viewModel.exitDoorPosition.Value,
+      this.viewModel.exitDoorPosition,
       true,
       this.viewModel.id
     );
@@ -100,14 +100,14 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
 
     this.director.build(doorBuilder);
     (doorBuilder.getPresenter() as IDoorPresenter).presentDoor(
-      this.viewModel.entryDoorPosition.Value,
+      this.viewModel.entryDoorPosition,
       false,
       this.viewModel.id
     );
   }
 
   private createWindows(): void {
-    for (const windowPosition of this.viewModel.windowPositions.Value) {
+    for (const windowPosition of this.viewModel.windowPositions) {
       const windowBuilder = CoreDIContainer.get<IPresentationBuilder>(
         BUILDER_TYPES.IWindowBuilder
       );

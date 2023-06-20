@@ -2,7 +2,6 @@ import LearningSpaceView from "../../../../Core/Presentation/Babylon/LearningSpa
 import LearningSpaceViewModel from "../../../../Core/Presentation/Babylon/LearningSpaces/LearningSpaceViewModel";
 import {
   CSG,
-  Color3,
   Mesh,
   MeshBuilder,
   NullEngine,
@@ -59,6 +58,7 @@ describe("LearningSpaceView", () => {
 
   afterEach(() => {
     jest.restoreAllMocks();
+    jest.resetAllMocks();
   });
 
   afterAll(() => {
@@ -69,49 +69,45 @@ describe("LearningSpaceView", () => {
   describe("Material Creation Methods", () => {
     test("createFloorMaterial creates a material", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.L;
+      viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.L;
 
       systemUnderTest["createFloorMaterial"]();
 
-      expect(viewModel.floorMaterial.Value).toBeInstanceOf(StandardMaterial);
+      expect(viewModel.floorMaterial).toBeInstanceOf(StandardMaterial);
     });
 
     test("createFloorMaterial sets a texture for the floor material", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.L;
+      viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.L;
 
       systemUnderTest["createFloorMaterial"]();
 
-      expect(viewModel.floorMaterial.Value.diffuseTexture).toBeInstanceOf(
-        Texture
-      );
+      expect(viewModel.floorMaterial.diffuseTexture).toBeInstanceOf(Texture);
     });
 
     test("createWallMaterial creates a material", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.L;
+      viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.L;
 
       systemUnderTest["createWallMaterial"]();
 
-      expect(viewModel.wallMaterial.Value).toBeInstanceOf(StandardMaterial);
+      expect(viewModel.wallMaterial).toBeInstanceOf(StandardMaterial);
     });
 
     test("createWallMaterial sets a texture for the wall material", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.L;
+      viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.L;
 
       systemUnderTest["createWallMaterial"]();
 
-      expect(viewModel.wallMaterial.Value.diffuseTexture).toBeInstanceOf(
-        Texture
-      );
+      expect(viewModel.wallMaterial.diffuseTexture).toBeInstanceOf(Texture);
     });
   });
 
   describe("asyncSetup Method", () => {
     test("asyncSetup throws error if cornerCount is smaller than 3", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.spaceCornerPoints.Value = [
+      viewModel.spaceCornerPoints = [
         new Vector3(5.3, 0, 4.3),
         new Vector3(-5.3, 0, 4.3),
       ];
@@ -127,59 +123,79 @@ describe("LearningSpaceView", () => {
       }
     });
 
-    test.skip("asyncSetup calls createFloorMaterial", async () => {
+    test("asyncSetup calls createFloorMaterial", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.spaceCornerPoints.Value = [
+      viewModel.spaceCornerPoints = [
         new Vector3(5.3, 0, 4.3),
         new Vector3(-5.3, 0, 4.3),
         new Vector3(-5.3, 0, -4.3),
       ];
-      const createFloorMaterialMockSpy = jest.spyOn(
-        systemUnderTest,
-        "createFloorMaterial"
-      );
+      systemUnderTest["createFloorMaterial"] = jest.fn();
+      systemUnderTest["createFloor"] = jest.fn();
+      systemUnderTest["createWallMaterial"] = jest.fn();
+      systemUnderTest["createWalls"] = jest.fn();
 
       await systemUnderTest.asyncSetup();
 
-      expect(createFloorMaterialMockSpy).toBeCalledTimes(1);
+      expect(systemUnderTest["createFloorMaterial"]).toBeCalledTimes(1);
     });
 
-    test.skip("asyncSetup calls createWallMaterial", async () => {
+    test("asyncSetup calls createWallMaterial", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.spaceCornerPoints.Value = [
+      viewModel.spaceCornerPoints = [
         new Vector3(5.3, 0, 4.3),
         new Vector3(-5.3, 0, 4.3),
         new Vector3(-5.3, 0, -4.3),
       ];
-      const createWallMaterialMockSpy = jest.spyOn(
-        systemUnderTest,
-        "createWallMaterial"
-      );
+      systemUnderTest["createFloorMaterial"] = jest.fn();
+      systemUnderTest["createFloor"] = jest.fn();
+      systemUnderTest["createWallMaterial"] = jest.fn();
+      systemUnderTest["createWalls"] = jest.fn();
 
       await systemUnderTest.asyncSetup();
 
-      expect(createWallMaterialMockSpy).toBeCalledTimes(1);
+      expect(systemUnderTest["createWallMaterial"]).toBeCalledTimes(1);
     });
 
-    test.skip("asyncSetup calls createFloor", async () => {
+    test("asyncSetup calls createFloor", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.spaceCornerPoints.Value = [
+      viewModel.spaceCornerPoints = [
         new Vector3(5.3, 0, 4.3),
         new Vector3(-5.3, 0, 4.3),
         new Vector3(-5.3, 0, -4.3),
       ];
-      const createFloorMockSpy = jest.spyOn(systemUnderTest, "createFloor");
+      systemUnderTest["createFloorMaterial"] = jest.fn();
+      systemUnderTest["createFloor"] = jest.fn();
+      systemUnderTest["createWallMaterial"] = jest.fn();
+      systemUnderTest["createWalls"] = jest.fn();
 
       await systemUnderTest.asyncSetup();
 
-      expect(createFloorMockSpy).toBeCalledTimes(1);
+      expect(systemUnderTest["createFloor"]).toBeCalledTimes(1);
+    });
+
+    test("asyncSetup calls createWalls", async () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      viewModel.spaceCornerPoints = [
+        new Vector3(5.3, 0, 4.3),
+        new Vector3(-5.3, 0, 4.3),
+        new Vector3(-5.3, 0, -4.3),
+      ];
+      systemUnderTest["createFloorMaterial"] = jest.fn();
+      systemUnderTest["createFloor"] = jest.fn();
+      systemUnderTest["createWallMaterial"] = jest.fn();
+      systemUnderTest["createWalls"] = jest.fn();
+
+      await systemUnderTest.asyncSetup();
+
+      expect(systemUnderTest["createWalls"]).toBeCalledTimes(1);
     });
   });
 
-  describe("Creation Methods", () => {
+  describe("createFloor method", () => {
     test("createFloor creates builds a mesh with the PolyMeshBuilder", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.spaceCornerPoints.Value = [
+      viewModel.spaceCornerPoints = [
         new Vector3(5.3, 0, 4.3),
         new Vector3(-5.3, 0, 4.3),
         new Vector3(-5.3, 0, -4.3),
@@ -195,7 +211,7 @@ describe("LearningSpaceView", () => {
 
     test("createFloor calls scenePresenter.registerNavigationMesh with the new mesh", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.spaceCornerPoints.Value = [
+      viewModel.spaceCornerPoints = [
         new Vector3(5.3, 0, 4.3),
         new Vector3(-5.3, 0, 4.3),
         new Vector3(-5.3, 0, -4.3),
@@ -215,7 +231,7 @@ describe("LearningSpaceView", () => {
 
     test("createFloor applies the floorMaterial to the new mesh", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.spaceCornerPoints.Value = [
+      viewModel.spaceCornerPoints = [
         new Vector3(5.3, 0, 4.3),
         new Vector3(-5.3, 0, 4.3),
         new Vector3(-5.3, 0, -4.3),
@@ -227,19 +243,21 @@ describe("LearningSpaceView", () => {
 
       await systemUnderTest["createFloor"]();
 
-      expect(viewModel.floorMesh.Value.material).toStrictEqual(
-        viewModel.floorMaterial.Value
+      expect(viewModel.floorMesh.material).toStrictEqual(
+        viewModel.floorMaterial
       );
     });
+  });
 
-    test.skip("createWalls creates 3 wall meshes when there are 3 corners with corresponding wallSegments", async () => {
+  describe("createWalls method", () => {
+    test("createWalls creates a merged wall mesh", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.spaceCornerPoints.Value = [
+      viewModel.spaceCornerPoints = [
         new Vector3(5.3, 0, 4.3),
         new Vector3(-5.3, 0, 4.3),
         new Vector3(-5.3, 0, -4.3),
       ];
-      viewModel.wallSegments.Value = [
+      viewModel.wallSegments = [
         {
           start: 0,
           end: 1,
@@ -253,21 +271,206 @@ describe("LearningSpaceView", () => {
           end: 0,
         },
       ];
+      viewModel.windowPositions = [];
 
       applyWallSegmentCreationMocks();
       jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
       jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
+      jest.spyOn(Mesh, "MergeMeshes").mockReturnValue(mock<Mesh>());
 
       await systemUnderTest["createWalls"]();
 
-      expect(viewModel.wallMeshes.Value).toHaveLength(3);
+      expect(viewModel.wallMesh).toBeDefined();
+    });
+
+    test("createWalls calls internal createDoorCutout when exitDoorPosition is set", async () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+
+      viewModel.spaceCornerPoints = viewModel.spaceCornerPoints = [
+        new Vector3(5.3, 0, 4.3),
+        new Vector3(-5.3, 0, 4.3),
+        new Vector3(-5.3, 0, -4.3),
+      ];
+      viewModel.wallSegments = [
+        {
+          start: 0,
+          end: 1,
+        },
+        {
+          start: 1,
+          end: 2,
+        },
+        {
+          start: 2,
+          end: 0,
+        },
+      ];
+      viewModel.exitDoorPosition = [new Vector3(0, 0, 0), 0];
+
+      const [, mockedMesh] = applyWallSegmentCreationMocks();
+      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
+      jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
+      jest.spyOn(Mesh, "MergeMeshes").mockReturnValue(mockedMesh);
+      systemUnderTest["createDoorCutout"] = jest
+        .fn()
+        .mockReturnValue(mockedMesh);
+
+      await systemUnderTest["createWalls"]();
+
+      expect(systemUnderTest["createDoorCutout"]).toBeCalledTimes(1);
+    });
+
+    test("createWalls calls the internal createDoorCutout method when entryDoorPosition is set", async () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+
+      viewModel.spaceCornerPoints = viewModel.spaceCornerPoints = [
+        new Vector3(5.3, 0, 4.3),
+        new Vector3(-5.3, 0, 4.3),
+        new Vector3(-5.3, 0, -4.3),
+      ];
+      viewModel.wallSegments = [
+        {
+          start: 0,
+          end: 1,
+        },
+        {
+          start: 1,
+          end: 2,
+        },
+        {
+          start: 2,
+          end: 0,
+        },
+      ];
+      viewModel.entryDoorPosition = [new Vector3(0, 0, 0), 0];
+
+      const [, mockedMesh] = applyWallSegmentCreationMocks();
+      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
+      jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
+      jest.spyOn(Mesh, "MergeMeshes").mockReturnValue(mockedMesh);
+      systemUnderTest["createDoorCutout"] = jest
+        .fn()
+        .mockReturnValue(mockedMesh);
+
+      await systemUnderTest["createWalls"]();
+
+      expect(systemUnderTest["createDoorCutout"]).toBeCalledTimes(1);
+    });
+
+    test("createWalls calls the internal createWindowCutout method for each windowPosition", async () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+
+      viewModel.spaceCornerPoints = viewModel.spaceCornerPoints = [
+        new Vector3(5.3, 0, 4.3),
+        new Vector3(-5.3, 0, 4.3),
+        new Vector3(-5.3, 0, -4.3),
+      ];
+      viewModel.wallSegments = [
+        {
+          start: 0,
+          end: 1,
+        },
+        {
+          start: 1,
+          end: 2,
+        },
+        {
+          start: 2,
+          end: 0,
+        },
+      ];
+      viewModel.windowPositions = [
+        [new Vector3(0, 0, 0), 0],
+        [new Vector3(0, 0, 0), 0],
+      ];
+
+      const [, mockedMesh] = applyWallSegmentCreationMocks();
+      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
+      jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
+      jest.spyOn(Mesh, "MergeMeshes").mockReturnValue(mockedMesh);
+      systemUnderTest["createWindowCutout"] = jest
+        .fn()
+        .mockReturnValue(mockedMesh);
+
+      await systemUnderTest["createWalls"]();
+
+      expect(systemUnderTest["createWindowCutout"]).toBeCalledTimes(2);
+    });
+
+    test("createWalls applies the wall material to the new mesh", async () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      viewModel.spaceCornerPoints = [
+        new Vector3(5.3, 0, 4.3),
+        new Vector3(-5.3, 0, 4.3),
+        new Vector3(-5.3, 0, -4.3),
+      ];
+      viewModel.wallSegments = [
+        {
+          start: 0,
+          end: 1,
+        },
+        {
+          start: 1,
+          end: 2,
+        },
+        {
+          start: 2,
+          end: 0,
+        },
+      ];
+      viewModel.windowPositions = [];
+
+      const [, mockedMesh] = applyWallSegmentCreationMocks();
+      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
+      jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
+      jest.spyOn(Mesh, "MergeMeshes").mockReturnValue(mockedMesh);
+
+      await systemUnderTest["createWalls"]();
+
+      expect(mockedMesh.material).toStrictEqual(viewModel.wallMaterial);
+    });
+
+    test("createWalls calls scenePresenter.registerNavigationMesh with the new mesh", async () => {
+      const [systemUnderTest, , viewModel] = createSystemUnderTest();
+      viewModel.spaceCornerPoints = [
+        new Vector3(5.3, 0, 4.3),
+        new Vector3(-5.3, 0, 4.3),
+        new Vector3(-5.3, 0, -4.3),
+      ];
+      viewModel.wallSegments = [
+        {
+          start: 0,
+          end: 1,
+        },
+        {
+          start: 1,
+          end: 2,
+        },
+        {
+          start: 2,
+          end: 0,
+        },
+      ];
+      viewModel.windowPositions = [];
+
+      const [, mockedMesh] = applyWallSegmentCreationMocks();
+      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
+      jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
+      jest.spyOn(Mesh, "MergeMeshes").mockReturnValue(mockedMesh);
+
+      await systemUnderTest["createWalls"]();
+
+      expect(scenePresenterMock.registerNavigationMesh).toBeCalledTimes(1);
+      expect(scenePresenterMock.registerNavigationMesh).toBeCalledWith(
+        mockedMesh
+      );
     });
 
     test("createWallSegment returns a mesh", () => {
-      //@ts-ignore
-      scenePresenterMock.Scene = new Scene(new NullEngine());
       const [systemUnderTest, ,] = createSystemUnderTest();
 
+      //@ts-ignore
+      scenePresenterMock.Scene = new Scene(new NullEngine());
       const result = systemUnderTest["createWallSegment"](
         new Vector3(0, 0, 0),
         new Vector3(1, 1, 1)
@@ -276,45 +479,14 @@ describe("LearningSpaceView", () => {
       expect(result).toBeInstanceOf(Mesh);
     });
 
-    test.skip("createWallSegment calls scenePresenter.registerNavigationMesh with the new mesh", () => {
-      const [systemUnderTest, ,] = createSystemUnderTest();
-
-      applyWallSegmentCreationMocks();
-      const mockedMesh = mock<Mesh>();
-      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mockedMesh);
-
-      systemUnderTest["createWallSegment"](
-        new Vector3(0, 0, 0),
-        new Vector3(1, 1, 1)
-      );
-
-      expect(scenePresenterMock.registerNavigationMesh).toBeCalledTimes(1);
-      expect(scenePresenterMock.registerNavigationMesh).toBeCalledWith(
-        mockedMesh
-      );
-    });
-
-    test.skip("createWallSegment applies the wall material to the new mesh", () => {
-      const [, mockedMesh] = applyWallSegmentCreationMocks();
+    test("createCornerPoles creates 1 corner pole when there are 2 walls segments with one shared endpoint", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mockedMesh);
-
-      systemUnderTest["createWallSegment"](
-        new Vector3(0, 0, 0),
-        new Vector3(1, 1, 1)
-      );
-
-      expect(mockedMesh.material).toStrictEqual(viewModel.wallMaterial.Value);
-    });
-
-    test.skip("createCornerPoles creates 3 corner pole meshes when there are 3 corners with coresponding wallSegements", () => {
-      const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.spaceCornerPoints.Value = [
+      viewModel.spaceCornerPoints = [
         new Vector3(5.3, 0, 4.3),
         new Vector3(-5.3, 0, 4.3),
         new Vector3(-5.3, 0, -4.3),
       ];
-      viewModel.wallSegments.Value = [
+      viewModel.wallSegments = [
         {
           start: 0,
           end: 1,
@@ -323,20 +495,18 @@ describe("LearningSpaceView", () => {
           start: 1,
           end: 2,
         },
-        {
-          start: 2,
-          end: 0,
-        },
       ];
       jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
 
-      systemUnderTest["createCornerPoles"]();
+      const result = systemUnderTest["createCornerPoles"]();
 
-      expect(viewModel.cornerPoleMeshes.Value).toHaveLength(3);
+      expect(result).toHaveLength(1);
     });
 
     test("createPole returns a mesh", () => {
       const [systemUnderTest, ,] = createSystemUnderTest();
+      //@ts-ignore
+      scenePresenterMock.Scene = new Scene(new NullEngine());
 
       const result = systemUnderTest["createPole"](new Vector3(0, 0, 0));
 
@@ -352,24 +522,46 @@ describe("LearningSpaceView", () => {
       expect(MeshBuilder.CreateCylinder).toBeCalledTimes(1);
     });
 
-    test("createPole applies the wall material to the new mesh", () => {
-      const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      const mockedMesh = mock<Mesh>();
-      jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mockedMesh);
+    test("createDoorCutour returns a mesh", () => {
+      const [systemUnderTest, ,] = createSystemUnderTest();
 
-      systemUnderTest["createPole"](new Vector3(0, 0, 0));
+      //@ts-ignore
+      scenePresenterMock.Scene = new Scene(new NullEngine());
+      const mockCSG = mock<CSG>();
+      const mockMesh = new Mesh("mockMesh", scenePresenterMock.Scene);
+      mockCSG.subtract.mockReturnValue(mockCSG);
+      mockCSG.toMesh.mockReturnValue(mockMesh);
+      jest.spyOn(CSG, "FromMesh").mockReturnValue(mockCSG);
+      jest.spyOn(Mesh, "MergeMeshes").mockReturnValue(mockMesh);
+      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
 
-      expect(mockedMesh.material).toStrictEqual(viewModel.wallMaterial.Value);
+      const result = systemUnderTest["createDoorCutout"](
+        [new Vector3(1, 1, 1), 0],
+        mockMesh
+      );
+
+      expect(result).toBeInstanceOf(Mesh);
     });
 
-    test("createPole sets position correctly", () => {
-      const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.baseHeight.Value = 2;
-      viewModel.wallGroundworkDepth.Value = 0;
+    test("createWindowCutout returns a mesh", () => {
+      const [systemUnderTest, ,] = createSystemUnderTest();
 
-      let result = systemUnderTest["createPole"](new Vector3(1, 0, 3));
+      //@ts-ignore
+      scenePresenterMock.Scene = new Scene(new NullEngine());
+      const mockCSG = mock<CSG>();
+      const mockMesh = new Mesh("mockMesh", scenePresenterMock.Scene);
+      mockCSG.subtract.mockReturnValue(mockCSG);
+      mockCSG.toMesh.mockReturnValue(mockMesh);
+      jest.spyOn(CSG, "FromMesh").mockReturnValue(mockCSG);
+      jest.spyOn(Mesh, "MergeMeshes").mockReturnValue(mockMesh);
+      jest.spyOn(MeshBuilder, "CreateBox").mockReturnValue(mock<Mesh>());
 
-      expect(result.position).toStrictEqual(new Vector3(1.15, 3.425, 3.15));
+      const result = systemUnderTest["createWindowCutout"](
+        [new Vector3(1, 1, 1), 0],
+        mockMesh
+      );
+
+      expect(result).toBeInstanceOf(Mesh);
     });
   });
 });

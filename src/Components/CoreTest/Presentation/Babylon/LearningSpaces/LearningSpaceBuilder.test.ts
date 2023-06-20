@@ -78,7 +78,7 @@ describe("LearningSpaceBuilder", () => {
     systemUnderTest.buildViewModel();
 
     expect(systemUnderTest["viewModel"]!.id).toBe(spaceTO.id);
-    expect(systemUnderTest["viewModel"]!.learningSpaceTemplateType.Value).toBe(
+    expect(systemUnderTest["viewModel"]!.learningSpaceTemplateType).toBe(
       spaceTO.template
     );
   });

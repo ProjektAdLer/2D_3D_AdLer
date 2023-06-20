@@ -56,7 +56,7 @@ export default class LearningSpaceView implements ILearningSpaceView {
 
   public async asyncSetup(): Promise<void> {
     // Errorhandling: Check if cornerCount is higher than 2
-    if (this.viewModel.spaceCornerPoints.Value.length < 3)
+    if (this.viewModel.spaceCornerPoints.length < 3)
       throw new Error(
         "Not enough corners found to generate space. Please review the Spacedata."
       );
@@ -70,33 +70,33 @@ export default class LearningSpaceView implements ILearningSpaceView {
   }
 
   public createFloorMaterial(): void {
-    this.viewModel.floorMaterial.Value = new StandardMaterial(
+    this.viewModel.floorMaterial = new StandardMaterial(
       "floorMaterial",
       this.scenePresenter.Scene
     );
 
-    this.viewModel.floorMaterial.Value.diffuseTexture = new Texture(
-      floorTextureLinks[this.viewModel.learningSpaceTemplateType.Value],
+    this.viewModel.floorMaterial.diffuseTexture = new Texture(
+      floorTextureLinks[this.viewModel.learningSpaceTemplateType],
       this.scenePresenter.Scene
     );
 
-    (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).uScale = 3;
-    (this.viewModel.floorMaterial.Value.diffuseTexture as Texture).vScale = 3;
-    this.viewModel.floorMaterial.Value.specularColor = new Color3(0, 0, 0);
+    (this.viewModel.floorMaterial.diffuseTexture as Texture).uScale = 3;
+    (this.viewModel.floorMaterial.diffuseTexture as Texture).vScale = 3;
+    this.viewModel.floorMaterial.specularColor = new Color3(0, 0, 0);
   }
 
   public createWallMaterial(): void {
-    this.viewModel.wallMaterial.Value = new StandardMaterial(
+    this.viewModel.wallMaterial = new StandardMaterial(
       "wallMaterial",
       this.scenePresenter.Scene
     );
-    this.viewModel.wallMaterial.Value.diffuseTexture = new Texture(
-      wallTextureLinks[this.viewModel.learningSpaceTemplateType.Value],
+    this.viewModel.wallMaterial.diffuseTexture = new Texture(
+      wallTextureLinks[this.viewModel.learningSpaceTemplateType],
       this.scenePresenter.Scene
     );
-    (this.viewModel.wallMaterial.Value.diffuseTexture as Texture).vScale = 1.5;
-    (this.viewModel.wallMaterial.Value.diffuseTexture as Texture).uScale = 6;
-    this.viewModel.wallMaterial.Value.specularColor = new Color3(0, 0, 0);
+    (this.viewModel.wallMaterial.diffuseTexture as Texture).vScale = 1.5;
+    (this.viewModel.wallMaterial.diffuseTexture as Texture).uScale = 6;
+    this.viewModel.wallMaterial.specularColor = new Color3(0, 0, 0);
     // this.viewModel.wallMaterial.Value.wireframe = true;
   }
 
@@ -104,16 +104,15 @@ export default class LearningSpaceView implements ILearningSpaceView {
     // create floor mesh
     const polyMesh = new PolygonMeshBuilder(
       "FloorPolyMesh",
-      this.viewModel.spaceCornerPoints.Value.map(
-        (cornerPoint) => new Vector2(cornerPoint.x, cornerPoint.z)
-      ).reverse()
+      this.viewModel.spaceCornerPoints
+        .map((cornerPoint) => new Vector2(cornerPoint.x, cornerPoint.z))
+        .reverse()
     );
-    this.viewModel.floorMesh.Value = polyMesh.build(false, 0.5);
-    this.scenePresenter.registerNavigationMesh(this.viewModel.floorMesh.Value);
+    this.viewModel.floorMesh = polyMesh.build(false, 0.5);
+    this.scenePresenter.registerNavigationMesh(this.viewModel.floorMesh);
 
     // apply material
-    this.viewModel.floorMesh.Value.material =
-      this.viewModel.floorMaterial.Value;
+    this.viewModel.floorMesh.material = this.viewModel.floorMaterial;
   }
 
   private async createWalls(): Promise<void> {
@@ -126,35 +125,36 @@ export default class LearningSpaceView implements ILearningSpaceView {
     this.scenePresenter.registerNavigationMesh(mergedWallMeshes);
 
     // apply cutouts
-    if (this.viewModel.exitDoorPosition.Value)
+    if (this.viewModel.exitDoorPosition)
       mergedWallMeshes = this.createDoorCutout(
-        this.viewModel.exitDoorPosition.Value,
+        this.viewModel.exitDoorPosition,
         mergedWallMeshes
       );
-    if (this.viewModel.entryDoorPosition.Value)
+    if (this.viewModel.entryDoorPosition)
       mergedWallMeshes = this.createDoorCutout(
-        this.viewModel.entryDoorPosition.Value,
+        this.viewModel.entryDoorPosition,
         mergedWallMeshes
       );
-    for (const windowPosition of this.viewModel.windowPositions.Value)
+    for (const windowPosition of this.viewModel.windowPositions)
       mergedWallMeshes = this.createWindowCutout(
         windowPosition,
         mergedWallMeshes
       );
 
+    this.viewModel.wallMesh = mergedWallMeshes;
     this.scenePresenter.Scene.addMesh(mergedWallMeshes, true);
 
     // apply material
-    mergedWallMeshes.material = this.viewModel.wallMaterial.Value;
+    mergedWallMeshes.material = this.viewModel.wallMaterial;
   }
 
   private createWallSegments(): Mesh[] {
     const wallSegments: Mesh[] = [];
-    this.viewModel.wallSegments.Value.forEach((wallSegment) => {
+    this.viewModel.wallSegments.forEach((wallSegment) => {
       wallSegments.push(
         this.createWallSegment(
-          this.viewModel.spaceCornerPoints.Value[wallSegment.start],
-          this.viewModel.spaceCornerPoints.Value[wallSegment.end]
+          this.viewModel.spaceCornerPoints[wallSegment.start],
+          this.viewModel.spaceCornerPoints[wallSegment.end]
         )
       );
     });
@@ -166,17 +166,15 @@ export default class LearningSpaceView implements ILearningSpaceView {
     // offset with wall thickness to create outside alligned walls
     const offsetStartPoint = new Vector3(
       startPoint.x +
-        Math.sign(startPoint.x) * (this.viewModel.wallThickness.Value / 2),
+        Math.sign(startPoint.x) * (this.viewModel.wallThickness / 2),
       startPoint.y,
       startPoint.z +
-        Math.sign(startPoint.z) * (this.viewModel.wallThickness.Value / 2)
+        Math.sign(startPoint.z) * (this.viewModel.wallThickness / 2)
     );
     const offsetEndPoint = new Vector3(
-      endPoint.x +
-        Math.sign(endPoint.x) * (this.viewModel.wallThickness.Value / 2),
+      endPoint.x + Math.sign(endPoint.x) * (this.viewModel.wallThickness / 2),
       endPoint.y,
-      endPoint.z +
-        Math.sign(endPoint.z) * (this.viewModel.wallThickness.Value / 2)
+      endPoint.z + Math.sign(endPoint.z) * (this.viewModel.wallThickness / 2)
     );
 
     // create mesh
@@ -186,11 +184,9 @@ export default class LearningSpaceView implements ILearningSpaceView {
           Math.pow(offsetEndPoint.z - offsetStartPoint.z, 2)
       ) + 0.01; // extend wall to avoid z-fighting at the edges
     const wallSegmentOptions = {
-      height:
-        this.viewModel.wallHeight.Value +
-        this.viewModel.wallGroundworkDepth.Value,
+      height: this.viewModel.wallHeight + this.viewModel.wallGroundworkDepth,
       width: wallLength,
-      depth: this.viewModel.wallThickness.Value,
+      depth: this.viewModel.wallThickness,
     };
     let wallSegment = MeshBuilder.CreateBox(
       "BaseWallSegment",
@@ -202,10 +198,8 @@ export default class LearningSpaceView implements ILearningSpaceView {
     // set position
     wallSegment.position.x = (offsetStartPoint.x + offsetEndPoint.x) / 2;
     wallSegment.position.y =
-      (this.viewModel.baseHeight.Value || 0) +
-      (this.viewModel.wallHeight.Value -
-        this.viewModel.wallGroundworkDepth.Value) /
-        2;
+      (this.viewModel.baseHeight || 0) +
+      (this.viewModel.wallHeight - this.viewModel.wallGroundworkDepth) / 2;
     wallSegment.position.z = (offsetStartPoint.z + offsetEndPoint.z) / 2;
 
     wallSegment.rotation.y =
@@ -226,9 +220,9 @@ export default class LearningSpaceView implements ILearningSpaceView {
     const doorCutout = MeshBuilder.CreateBox(
       "DoorCutout",
       {
-        height: this.viewModel.doorHeight.Value + 0.2,
-        width: this.viewModel.doorWidth.Value,
-        depth: this.viewModel.wallThickness.Value * 10,
+        height: this.viewModel.doorHeight + 0.2,
+        width: this.viewModel.doorWidth,
+        depth: this.viewModel.wallThickness * 10,
       },
       this.scenePresenter.Scene
     );
@@ -236,9 +230,9 @@ export default class LearningSpaceView implements ILearningSpaceView {
     // door outline x, y, z needs to be adjusted, cause door origin is not centered
     // The Adjustments with doorWidth has to be discarded when door origin is fixed
     doorCutout.position = new Vector3(
-      doorPosition[0].x - 0.5 * this.viewModel.doorWidth.Value,
-      doorPosition[0].y + 0.5 * this.viewModel.doorHeight.Value - 0.2,
-      doorPosition[0].z - 0.5 * this.viewModel.doorWidth.Value
+      doorPosition[0].x - 0.5 * this.viewModel.doorWidth,
+      doorPosition[0].y + 0.5 * this.viewModel.doorHeight - 0.2,
+      doorPosition[0].z - 0.5 * this.viewModel.doorWidth
     );
     doorCutout.rotation = new Vector3(
       0.0,
@@ -269,16 +263,16 @@ export default class LearningSpaceView implements ILearningSpaceView {
     const windowCutout = MeshBuilder.CreateBox(
       "WindowOutline",
       {
-        height: this.viewModel.windowHeight.Value,
-        width: this.viewModel.windowWidth.Value,
-        depth: this.viewModel.wallThickness.Value * 1.5,
+        height: this.viewModel.windowHeight,
+        width: this.viewModel.windowWidth,
+        depth: this.viewModel.wallThickness * 1.5,
       },
       this.scenePresenter.Scene
     );
     // window outline
     windowCutout.position = new Vector3(
       windowPosition[0].x,
-      windowPosition[0].y + this.viewModel.windowHeight.Value - 0.1,
+      windowPosition[0].y + this.viewModel.windowHeight - 0.1,
       windowPosition[0].z
     );
     windowCutout.rotation = new Vector3(
@@ -305,7 +299,7 @@ export default class LearningSpaceView implements ILearningSpaceView {
   private createCornerPoles(): Mesh[] {
     let wallSegmentIntersections: Set<number> = new Set<number>();
     let visitedCornerPoints: Set<number> = new Set<number>();
-    this.viewModel.wallSegments.Value.forEach((wallSegment) => {
+    this.viewModel.wallSegments.forEach((wallSegment) => {
       if (visitedCornerPoints.has(wallSegment.start))
         wallSegmentIntersections.add(wallSegment.start);
       else visitedCornerPoints.add(wallSegment.start);
@@ -318,7 +312,7 @@ export default class LearningSpaceView implements ILearningSpaceView {
     const cornerPoles: Mesh[] = [];
     wallSegmentIntersections.forEach((intersectionPoint) => {
       const poleMesh = this.createPole(
-        this.viewModel.spaceCornerPoints.Value[intersectionPoint]
+        this.viewModel.spaceCornerPoints[intersectionPoint]
       );
       cornerPoles.push(poleMesh);
     });
@@ -329,17 +323,15 @@ export default class LearningSpaceView implements ILearningSpaceView {
   private createPole(corner: Vector3): Mesh {
     // offset with wall thickness to create outside alligned walls
     const offsetCorner = new Vector3(
-      corner.x + Math.sign(corner.x) * (this.viewModel.wallThickness.Value / 2),
+      corner.x + Math.sign(corner.x) * (this.viewModel.wallThickness / 2),
       corner.y,
-      corner.z + Math.sign(corner.z) * (this.viewModel.wallThickness.Value / 2)
+      corner.z + Math.sign(corner.z) * (this.viewModel.wallThickness / 2)
     );
 
     // create pole mesh
     const poleOptions = {
-      height:
-        this.viewModel.wallHeight.Value +
-        this.viewModel.wallGroundworkDepth.Value,
-      diameter: this.viewModel.wallThickness.Value,
+      height: this.viewModel.wallHeight + this.viewModel.wallGroundworkDepth,
+      diameter: this.viewModel.wallThickness,
       tessellation: 12,
     };
     const pole = MeshBuilder.CreateCylinder(
@@ -351,14 +343,9 @@ export default class LearningSpaceView implements ILearningSpaceView {
     // position pole
     pole.position.x = offsetCorner.x;
     pole.position.y =
-      (this.viewModel.baseHeight.Value || 0) +
-      (this.viewModel.wallHeight.Value -
-        this.viewModel.wallGroundworkDepth.Value) /
-        2;
+      (this.viewModel.baseHeight || 0) +
+      (this.viewModel.wallHeight - this.viewModel.wallGroundworkDepth) / 2;
     pole.position.z = offsetCorner.z;
-
-    // apply wall material
-    pole.material = this.viewModel.wallMaterial.Value;
 
     return pole;
   }
