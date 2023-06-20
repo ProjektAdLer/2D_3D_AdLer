@@ -25,13 +25,13 @@ export default class DecorationView {
     let results;
     switch (this.viewModel.learningSpaceTemplateType.Value) {
       case LearningSpaceTemplateType.L:
-        results = await this.scenePresenter.loadModel(modelLinkLShape);
+        results = await this.scenePresenter.loadModel(modelLinkLShape, true);
         break;
       case LearningSpaceTemplateType.R6:
-        results = await this.scenePresenter.loadModel(modelLink2x2);
+        results = await this.scenePresenter.loadModel(modelLink2x2, true);
         break;
       case LearningSpaceTemplateType.R8:
-        results = await this.scenePresenter.loadModel(modelLink2x3);
+        results = await this.scenePresenter.loadModel(modelLink2x3, true);
         break;
     }
     this.viewModel.meshes.Value = results as Mesh[];

@@ -41,7 +41,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
       this.decorationBuilder
     );
 
-    console.log("LearningSpacePresenter", decorationCompleted);
+    await Promise.all([decorationCompleted]);
   }
 
   private createLearningElements(spaceTO: LearningSpaceTO): void {
