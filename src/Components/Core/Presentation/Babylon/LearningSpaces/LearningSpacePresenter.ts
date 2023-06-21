@@ -11,6 +11,7 @@ import type IDecorationBuilder from "../Decoration/IDecorationBuilder";
 import ILearningElementBuilder from "../LearningElements/ILearningElementBuilder";
 import IStandInDecorationBuilder from "../StandInDecoration/IStandInDecorationBuilder";
 import IDoorBuilder from "../Door/IDoorBuilder";
+import IWindowBuilder from "../Window/IWindowBuilder";
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
   private director: IPresentationDirector;
@@ -97,16 +98,16 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     await this.director.buildAsync(entryDoorBuilder);
   }
 
-  private createWindows(): void {
+  private async createWindows(): Promise<void> {
+    const loadingWindowPromises: Promise<void>[] = [];
     for (const windowPosition of this.viewModel.windowPositions) {
-      const windowBuilder = CoreDIContainer.get<IPresentationBuilder>(
+      const windowBuilder = CoreDIContainer.get<IWindowBuilder>(
         BUILDER_TYPES.IWindowBuilder
       );
-
-      this.director.build(windowBuilder);
-      (windowBuilder.getPresenter() as IWindowPresenter).presentWindow(
-        windowPosition
-      );
+      windowBuilder.position = windowPosition[0];
+      windowBuilder.rotation = windowPosition[1];
+      loadingWindowPromises.push(this.director.buildAsync(windowBuilder));
     }
+    await Promise.all(loadingWindowPromises);
   }
 }
