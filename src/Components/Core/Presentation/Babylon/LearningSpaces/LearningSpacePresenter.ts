@@ -30,7 +30,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
   }
 
   async asyncSetupSpace(spaceTO: LearningSpaceTO): Promise<void> {
-    await this.createLearningElements(spaceTO);
+    await this.fillLearningElementSlots(spaceTO);
     this.createWindows();
     if (this.viewModel.exitDoorPosition) await this.createExitDoor();
     if (this.viewModel.entryDoorPosition) await this.createEntryDoor();
@@ -38,18 +38,18 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     await this.director.buildAsync(this.decorationBuilder);
   }
 
-  private async createLearningElements(
+  private async fillLearningElementSlots(
     spaceTO: LearningSpaceTO
   ): Promise<void> {
     const loadingCompletePromises: Promise<void>[] = [];
 
     for (let i = 0; i < spaceTO.elements.length; i++) {
       if (!spaceTO.elements[i]) {
+        // create stand in decoration for empty slots
         const standInDecorationBuilder =
           CoreDIContainer.get<IStandInDecorationBuilder>(
             BUILDER_TYPES.IStandInDecorationBuilder
           );
-        // create stand in decoration for empty slots
         let elementPosition = this.viewModel.elementPositions.shift()!;
         standInDecorationBuilder.position = elementPosition[0];
         standInDecorationBuilder.rotation = elementPosition[1];
@@ -59,10 +59,10 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
           this.director.buildAsync(standInDecorationBuilder)
         );
       } else {
+        // create learning element for non-empty slots
         const elementBuilder = CoreDIContainer.get<ILearningElementBuilder>(
           BUILDER_TYPES.ILearningElementBuilder
         );
-        // create learning element for non-empty slots
         elementBuilder.elementData = spaceTO.elements[i]!;
         elementBuilder.elementPosition =
           this.viewModel.elementPositions.shift()!;
