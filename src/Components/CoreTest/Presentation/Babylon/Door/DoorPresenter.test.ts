@@ -1,4 +1,3 @@
-import { Vector3 } from "@babylonjs/core";
 import DoorPresenter from "../../../../Core/Presentation/Babylon/Door/DoorPresenter";
 import DoorViewModel from "../../../../Core/Presentation/Babylon/Door/DoorViewModel";
 import LearningSpaceScoreTO from "../../../../Core/Application/DataTransferObjects/LearningSpaceScoreTO";

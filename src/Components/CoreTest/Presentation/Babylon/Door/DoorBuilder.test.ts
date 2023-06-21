@@ -4,11 +4,9 @@ import PresentationBuilder from "../../../../Core/Presentation/PresentationBuild
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import { Vector3 } from "@babylonjs/core";
 import DoorView from "../../../../Core/Presentation/Babylon/Door/DoorView";
 import { waitFor } from "@testing-library/react";
-import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 
 jest.mock("@babylonjs/core");
 jest.mock("../../../../Core/Presentation/Babylon/Door/DoorView");
@@ -23,9 +21,6 @@ describe("DoorBuilder", () => {
     CoreDIContainer.rebind<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
     ).toConstantValue(worldPortMock);
-    // CoreDIContainer.rebind<IBottomTooltipPresenter>(
-    //   PRESENTATION_TYPES.IBottomTooltipPresenter
-    // ).toConstantValue(bottomTooltipPresenterMock);
   });
 
   beforeEach(() => {
