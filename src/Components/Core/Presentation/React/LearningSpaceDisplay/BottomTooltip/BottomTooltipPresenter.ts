@@ -13,7 +13,8 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
   displayDoorTooltip(isExit: boolean): void {
     this.viewModel.show.Value = true;
     this.viewModel.iconType.Value = LearningElementTypes.notAnElement;
-    this.viewModel.points.Value = undefined;
+    this.viewModel.points.Value = 0;
+    this.viewModel.showPoints.Value = false;
     if (isExit) this.viewModel.text.Value = "Ausgangstüre";
     else this.viewModel.text.Value = "Eingangstüre";
   }
@@ -21,12 +22,13 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
   displayLearningElementSummaryTooltip(elementData: {
     name: string;
     type: LearningElementTypeStrings;
-    points: number | undefined;
+    points: number;
   }): void {
     this.viewModel.show.Value = true;
     this.viewModel.text.Value = elementData.name;
     this.viewModel.iconType.Value = elementData.type;
     this.viewModel.points.Value = elementData.points;
+    this.viewModel.showPoints.Value = true;
   }
 
   hide(): void {
