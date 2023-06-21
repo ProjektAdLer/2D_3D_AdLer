@@ -254,6 +254,7 @@ describe("AvatarView", () => {
     MeshBuilder.CreateDashedLines = jest.fn();
 
     await systemUnderTest.asyncSetup();
+    systemUnderTest["viewModel"].parentNode.position = new Vector3(0, 0, 0); // reset position to unsnapped position
 
     systemUnderTest["debug_displayVelocity"](
       systemUnderTest["viewModel"],
@@ -270,9 +271,11 @@ describe("AvatarView", () => {
     //@ts-ignore
     navigationMock.isReady = Promise.resolve();
 
-    scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
-      new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
+    const parentNode = new TransformNode(
+      "AvatarParentNode",
+      new Scene(new NullEngine())
     );
+    scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(parentNode);
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
@@ -287,6 +290,7 @@ describe("AvatarView", () => {
     MeshBuilder.CreateDashedLines = jest.fn();
 
     await systemUnderTest.asyncSetup();
+    systemUnderTest["viewModel"].parentNode.position = new Vector3(0, 0, 0); // reset position to unsnapped position
 
     systemUnderTest["debug_displayVelocity"](
       systemUnderTest["viewModel"],
