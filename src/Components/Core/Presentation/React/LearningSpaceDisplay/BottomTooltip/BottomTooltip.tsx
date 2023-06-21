@@ -14,10 +14,12 @@ export default function BottomTooltip() {
   const [viewModel] = useBuilder<BottomTooltipViewModel, undefined>(
     BUILDER_TYPES.IBottomTooltipBuilder
   );
-  const [show] = useObservable<boolean>(viewModel?.show);
-  const [type] = useObservable<LearningElementTypeStrings>(viewModel?.iconType);
-  const [text] = useObservable<string>(viewModel?.text);
-  const [points] = useObservable<number | undefined>(viewModel?.points);
+
+  const [show] = useObservable<boolean>(viewModel.show);
+  const [type] = useObservable<LearningElementTypeStrings>(viewModel.iconType);
+  const [text] = useObservable<string>(viewModel.text);
+  const [points] = useObservable<number>(viewModel.points);
+  const [showPoints] = useObservable<boolean>(viewModel.showPoints);
 
   if (!show || !type) return null;
 
@@ -28,10 +30,9 @@ export default function BottomTooltip() {
           {type !== LearningElementTypes.notAnElement &&
             getLearningElementIcon(type)}
           {text}
-          {!points ?? (
+          {showPoints && (
             <div className="flex items-center ml-2">
               {points}
-              <div className="ml-2"></div>
               <img src={coinIcon} alt="" className="w-8"></img>
             </div>
           )}

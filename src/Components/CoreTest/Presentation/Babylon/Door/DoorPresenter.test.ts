@@ -19,7 +19,7 @@ describe("DoorPresenter", () => {
   });
 
   test("openDoor sets state in view model", () => {
-    expect(systemUnderTest["viewModel"].isOpen.Value).toBe(false || undefined);
+    expect(systemUnderTest["viewModel"].isOpen.Value).toBe(false);
     systemUnderTest.openDoor();
     expect(systemUnderTest["viewModel"].isOpen.Value).toBe(true);
   });
