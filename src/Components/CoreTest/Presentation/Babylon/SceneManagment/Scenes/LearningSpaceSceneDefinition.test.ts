@@ -89,22 +89,22 @@ describe("LearningSpaceScene", () => {
     getUserLocationUseCaseMock.execute.mockReturnValue(
       getUserLocationUseCaseReturnValue
     );
-    systemUnderTest["preTasks"].forEach((task) => task());
-
-    waitFor(() => {
-      expect(loadSpaceUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
+    systemUnderTest["preTasks"].forEach(async (task) => {
+      await task();
     });
+
+    expect(loadSpaceUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
   });
 
   test("preTasks contains call to loadAvatarUseCase", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValue(
       getUserLocationUseCaseReturnValue
     );
-    systemUnderTest["preTasks"].forEach((task) => task());
-
-    waitFor(() => {
-      expect(loadAvatarUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
+    systemUnderTest["preTasks"].forEach(async (task) => {
+      await task();
     });
+
+    expect(loadAvatarUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
   });
 
   test("onLearningSpaceLoaded sets the private menber spaceData", () => {
