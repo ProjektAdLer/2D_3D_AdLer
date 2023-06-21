@@ -33,7 +33,7 @@ export default class DoorBuilder extends AsyncPresentationBuilder<
       this.isExit === undefined ||
       this.spaceID === undefined
     )
-      throw new Error("DoorBuilder: one or more properties are undefined");
+      throw new Error("DoorBuilder: one or more properties are undefined.");
 
     super.buildViewModel();
 
@@ -42,8 +42,7 @@ export default class DoorBuilder extends AsyncPresentationBuilder<
     this.viewModel!.isExit = this.isExit;
     this.viewModel!.spaceID = this.spaceID;
   }
-
-  buildView(): void {
+  override buildView(): void {
     super.buildView();
 
     this.view!.asyncSetup().then(
