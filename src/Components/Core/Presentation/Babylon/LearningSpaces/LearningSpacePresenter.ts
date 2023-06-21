@@ -3,7 +3,6 @@ import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
-import IDoorPresenter from "../Door/IDoorPresenter";
 import LearningSpaceViewModel from "./LearningSpaceViewModel";
 import ILearningSpacePresenter from "./ILearningSpacePresenter";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
@@ -11,6 +10,7 @@ import IWindowPresenter from "../Window/IWindowPresenter";
 import type IDecorationBuilder from "../Decoration/IDecorationBuilder";
 import ILearningElementBuilder from "../LearningElements/ILearningElementBuilder";
 import IStandInDecorationBuilder from "../StandInDecoration/IStandInDecorationBuilder";
+import IDoorBuilder from "../Door/IDoorBuilder";
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
   private director: IPresentationDirector;
@@ -30,16 +30,12 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
   }
 
   async asyncSetupSpace(spaceTO: LearningSpaceTO): Promise<void> {
-    this.createLearningElements(spaceTO);
+    await this.createLearningElements(spaceTO);
     this.createWindows();
-    if (this.viewModel.exitDoorPosition) this.createExitDoor();
-    if (this.viewModel.entryDoorPosition) this.createEntryDoor();
+    if (this.viewModel.exitDoorPosition) await this.createExitDoor();
+    if (this.viewModel.entryDoorPosition) await this.createEntryDoor();
     this.decorationBuilder.spaceTemplate = spaceTO.template;
-    const decorationCompleted = this.director.buildAsync(
-      this.decorationBuilder
-    );
-
-    await Promise.all([decorationCompleted]);
+    await this.director.buildAsync(this.decorationBuilder);
   }
 
   private async createLearningElements(
@@ -77,30 +73,28 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     await Promise.all(loadingCompletePromises);
   }
 
-  private createExitDoor(): void {
-    const doorBuilder = CoreDIContainer.get<IPresentationBuilder>(
+  private async createExitDoor(): Promise<void> {
+    const exitDoorBuilder = CoreDIContainer.get<IDoorBuilder>(
       BUILDER_TYPES.IDoorBuilder
     );
-
-    this.director.build(doorBuilder);
-    (doorBuilder.getPresenter() as IDoorPresenter).presentDoor(
-      this.viewModel.exitDoorPosition,
-      true,
-      this.viewModel.id
-    );
+    let exitDoorPosition = this.viewModel.exitDoorPosition;
+    exitDoorBuilder.position = exitDoorPosition[0];
+    exitDoorBuilder.rotation = exitDoorPosition[1];
+    exitDoorBuilder.spaceID = this.viewModel.id;
+    exitDoorBuilder.isExit = true;
+    await this.director.buildAsync(exitDoorBuilder);
   }
 
-  private createEntryDoor(): void {
-    const doorBuilder = CoreDIContainer.get<IPresentationBuilder>(
+  private async createEntryDoor(): Promise<void> {
+    const entryDoorBuilder = CoreDIContainer.get<IDoorBuilder>(
       BUILDER_TYPES.IDoorBuilder
     );
-
-    this.director.build(doorBuilder);
-    (doorBuilder.getPresenter() as IDoorPresenter).presentDoor(
-      this.viewModel.entryDoorPosition,
-      false,
-      this.viewModel.id
-    );
+    let entryDoorPosition = this.viewModel.entryDoorPosition;
+    entryDoorBuilder.position = entryDoorPosition[0];
+    entryDoorBuilder.rotation = entryDoorPosition[1];
+    entryDoorBuilder.spaceID = this.viewModel.id;
+    entryDoorBuilder.isExit = false;
+    await this.director.buildAsync(entryDoorBuilder);
   }
 
   private createWindows(): void {

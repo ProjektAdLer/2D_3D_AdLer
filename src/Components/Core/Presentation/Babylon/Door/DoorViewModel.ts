@@ -3,10 +3,10 @@ import Observable from "../../../../../Lib/Observable";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 
 export default class DoorViewModel {
-  public meshes: Observable<Mesh[]> = new Observable<Mesh[]>([]);
-  public position: Observable<Vector3> = new Observable(new Vector3(0, 0, 0));
-  public rotation: Observable<number> = new Observable(0);
+  public meshes: Mesh[];
+  public position: Vector3;
+  public rotation: number;
   public isOpen: Observable<boolean> = new Observable<boolean>(false);
-  public isExit: Observable<boolean> = new Observable<boolean>();
+  public isExit: boolean;
   public spaceID: ComponentID;
 }
