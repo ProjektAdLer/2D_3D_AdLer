@@ -29,9 +29,9 @@ export default class StandInDecorationBuilder extends AsyncPresentationBuilder<
 
   buildViewModel(): void {
     if (
-      !this.position ||
+      this.position === undefined ||
       this.rotation === undefined ||
-      !this.spaceName ||
+      this.spaceName === undefined ||
       this.slotNumber === undefined
     )
       throw new Error(
