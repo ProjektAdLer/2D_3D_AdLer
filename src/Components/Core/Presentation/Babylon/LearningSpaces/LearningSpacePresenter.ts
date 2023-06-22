@@ -1,12 +1,10 @@
 import { injectable } from "inversify";
 import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
-import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
 import LearningSpaceViewModel from "./LearningSpaceViewModel";
 import ILearningSpacePresenter from "./ILearningSpacePresenter";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
-import IWindowPresenter from "../Window/IWindowPresenter";
 import type IDecorationBuilder from "../Decoration/IDecorationBuilder";
 import ILearningElementBuilder from "../LearningElements/ILearningElementBuilder";
 import IStandInDecorationBuilder from "../StandInDecoration/IStandInDecorationBuilder";
