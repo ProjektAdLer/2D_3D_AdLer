@@ -41,7 +41,7 @@ describe("WindowView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    const [, systemUnderTest] = buildSystemUnderTest();
     expect(systemUnderTest["scenePresenter"]).toBeDefined();
   });
 
@@ -50,11 +50,10 @@ describe("WindowView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    const [, systemUnderTest] = buildSystemUnderTest();
 
-    await systemUnderTest.isReady.then(() => {
-      expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
-    });
+    await systemUnderTest.asyncSetup();
+    expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
   });
 
   test("asyncSetup/loadMeshAsync sets rotationQuaternion of each loaded mesh to null", async () => {
@@ -64,11 +63,10 @@ describe("WindowView", () => {
     mesh2.rotationQuaternion = new Quaternion();
     scenePresenterMock.loadModel.mockResolvedValue([mesh1, mesh2]);
 
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    const [, systemUnderTest] = buildSystemUnderTest();
 
-    await systemUnderTest.isReady.then(() => {
-      expect(mesh1.rotationQuaternion).toBeNull();
-      expect(mesh2.rotationQuaternion).toBeNull();
-    });
+    await systemUnderTest.asyncSetup();
+    expect(mesh1.rotationQuaternion).toBeNull();
+    expect(mesh2.rotationQuaternion).toBeNull();
   });
 });

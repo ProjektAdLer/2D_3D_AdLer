@@ -65,7 +65,7 @@ describe("DoorView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    const [, systemUnderTest] = buildSystemUnderTest();
     await systemUnderTest.asyncSetup();
     expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
   });
