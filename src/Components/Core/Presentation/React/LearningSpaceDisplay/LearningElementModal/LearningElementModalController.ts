@@ -21,22 +21,22 @@ export default class LearningElementModalController
 
   async h5pEventCalled(event: any): Promise<void> {
     // Skip malformed events.
-    var hasStatement = event && event.data && event.data.statement;
+    const hasStatement = event && event.data && event.data.statement;
     if (!hasStatement) {
       return;
     }
 
-    var statement = event.data.statement;
-    var validVerb = statement.verb && statement.verb.id;
+    const statement = event.data.statement;
+    const validVerb = statement.verb && statement.verb.id;
     if (!validVerb) {
       return;
     }
 
-    var isCompleted =
+    const isCompleted =
       statement.verb.id === "http://adlnet.gov/expapi/verbs/answered" ||
       statement.verb.id === "http://adlnet.gov/expapi/verbs/completed";
 
-    var isChild =
+    const isChild =
       statement.context &&
       statement.context.contextActivities &&
       statement.context.contextActivities.parent &&
