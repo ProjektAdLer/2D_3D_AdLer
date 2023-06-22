@@ -5,20 +5,24 @@ import BUILDER_TYPES from "../../../../Core/DependencyInjection/Builders/BUILDER
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
-import IDoorPresenter from "../../../../Core/Presentation/Babylon/Door/IDoorPresenter";
-import LearningElementView from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementView";
-import ILearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElements/ILearningElementPresenter";
 import LearningSpacePresenter from "../../../../Core/Presentation/Babylon/LearningSpaces/LearningSpacePresenter";
 import LearningSpaceViewModel from "../../../../Core/Presentation/Babylon/LearningSpaces/LearningSpaceViewModel";
 import IPresentationDirector from "../../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
-import IWindowPresenter from "../../../../Core/Presentation/Babylon/Window/IWindowPresenter";
 import IDecorationPresenter from "../../../../Core/Presentation/Babylon/Decoration/IDecorationPresenter";
 import { LearningElementModelTypeEnums } from "../../../../Core/Domain/Types/LearningElementModelTypes";
-import IAsyncPresentationBuilder from "../../../../Core/Presentation/PresentationBuilder/IAsyncPresentationBuilder";
+import DecorationBuilder from "../../../../Core/Presentation/Babylon/Decoration/DecorationBuilder";
+import DoorBuilder from "../../../../Core/Presentation/Babylon/Door/DoorBuilder";
+import WindowBuilder from "../../../../Core/Presentation/Babylon/Window/WindowBuilder";
+import LearningElementBuilder from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementBuilder";
+import StandInDecorationBuilder from "../../../../Core/Presentation/Babylon/StandInDecoration/StandInDecorationBuilder";
 
 const directorMock = mock<IPresentationDirector>();
-const builderMock = mock<IAsyncPresentationBuilder>();
+const decorationBuilderMock = mock<DecorationBuilder>();
+const doorBuilderMock = mock<DoorBuilder>();
+const windowBuilderMock = mock<WindowBuilder>();
+const elementBuilderMock = mock<LearningElementBuilder>();
+const standinBuilderMock = mock<StandInDecorationBuilder>();
 const worldPortMock = mock<ILearningWorldPort>();
 
 const spaceTO: LearningSpaceTO = {
@@ -47,36 +51,31 @@ const spaceTO: LearningSpaceTO = {
   ],
   requirementsSyntaxTree: null,
   isAvailable: true,
-  template: LearningSpaceTemplateType.None,
+  template: LearningSpaceTemplateType.L,
 };
-
-const spaceViewModel: LearningSpaceViewModel = new LearningSpaceViewModel();
-spaceViewModel.id = 1;
 
 describe("LearningSpacePresenter", () => {
   let systemUnderTest: LearningSpacePresenter;
+  let viewModel: LearningSpaceViewModel;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(
       BUILDER_TYPES.ILearningElementBuilder
-    ).toConstantValue(builderMock);
+    ).toConstantValue(elementBuilderMock);
     CoreDIContainer.rebind(
       BUILDER_TYPES.IStandInDecorationBuilder
-    ).toConstantValue(builderMock);
+    ).toConstantValue(standinBuilderMock);
     CoreDIContainer.rebind(BUILDER_TYPES.IDoorBuilder).toConstantValue(
-      builderMock
+      doorBuilderMock
     );
     CoreDIContainer.rebind(BUILDER_TYPES.IWindowBuilder).toConstantValue(
-      builderMock
+      windowBuilderMock
     );
     CoreDIContainer.rebind(BUILDER_TYPES.IDecorationBuilder).toConstantValue(
-      builderMock
+      decorationBuilderMock
     );
-    CoreDIContainer.rebind(
-      BUILDER_TYPES.IStandInDecorationBuilder
-    ).toConstantValue(builderMock);
     CoreDIContainer.rebind<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
     ).toConstantValue(directorMock);
@@ -86,7 +85,9 @@ describe("LearningSpacePresenter", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new LearningSpacePresenter(spaceViewModel);
+    viewModel = new LearningSpaceViewModel();
+    viewModel.id = 1;
+    systemUnderTest = new LearningSpacePresenter(viewModel);
   });
 
   afterAll(() => {
@@ -100,7 +101,7 @@ describe("LearningSpacePresenter", () => {
     }).toThrowError("ViewModel");
   });
 
-  test("onLearningSpaceLoaded calls private subroutines", async () => {
+  test("asyncSetupSpace calls private subroutines", async () => {
     // mock sub routines here, they are tested separately later
     const fillLearningElementSlotsMock = jest.fn();
     systemUnderTest["fillLearningElementSlots"] = fillLearningElementSlotsMock;
@@ -122,47 +123,24 @@ describe("LearningSpacePresenter", () => {
     expect(createWindowsMock).toHaveBeenCalledTimes(1);
   });
 
-  test("createLearningElements calls the director for one element and one standin decor", async () => {
-    systemUnderTest["viewModel"].elementPositions = [
-      [new Vector3(1, 1, 1), 0],
-      [new Vector3(1, 1, 1), 0],
-    ];
+  test("asyncSetupSpace doens't create doors when no exit and entry door position is set", async () => {
+    // mock sub routines here, they are tested separately later
+    const fillLearningElementSlotsMock = jest.fn();
+    systemUnderTest["fillLearningElementSlots"] = fillLearningElementSlotsMock;
+    const createExitDoorMock = jest.fn();
+    systemUnderTest["createExitDoor"] = createExitDoorMock;
+    const createEntryDoorMock = jest.fn();
+    systemUnderTest["createEntryDoor"] = createEntryDoorMock;
+    const createWindowsMock = jest.fn();
+    systemUnderTest["createWindows"] = createWindowsMock;
 
-    await systemUnderTest["fillLearningElementSlots"](spaceTO);
+    await systemUnderTest.asyncSetupSpace(spaceTO);
 
-    expect(directorMock.buildAsync).toHaveBeenCalledTimes(2);
-    expect(directorMock.buildAsync).toHaveBeenCalledWith(builderMock);
-  });
-
-  test("createExitDoor creates a door with its builder and calls the new presenter", async () => {
-    await systemUnderTest["createExitDoor"]();
-
-    expect(directorMock.buildAsync).toHaveBeenCalledTimes(1);
-    expect(directorMock.buildAsync).toHaveBeenCalledWith(builderMock);
-  });
-
-  test("createEntryDoor creates a door with its builder and calls the new presenter", async () => {
-    await systemUnderTest["createEntryDoor"]();
-
-    expect(directorMock.buildAsync).toHaveBeenCalledTimes(1);
-    expect(directorMock.buildAsync).toHaveBeenCalledWith(builderMock);
-  });
-
-  test("createWindows creates windows with its builder and calls the new presenter", async () => {
-    systemUnderTest["viewModel"].windowPositions = [
-      [new Vector3(1, 1, 1), 0],
-      [new Vector3(1, 1, 1), 0],
-    ];
-
-    await systemUnderTest["createWindows"]();
-
-    expect(directorMock.buildAsync).toHaveBeenCalledTimes(2);
-    expect(directorMock.buildAsync).toHaveBeenCalledWith(builderMock);
+    expect(createExitDoorMock).toHaveBeenCalledTimes(0);
+    expect(createEntryDoorMock).toHaveBeenCalledTimes(0);
   });
 
   test("createDecoration creates Decoration with its builder and calls the new presenter", async () => {
-    spaceViewModel.learningSpaceTemplateType = LearningSpaceTemplateType.L;
-
     // mock sub routines here, they are tested separately later
     const fillLearningElementSlotsMock = jest.fn();
     systemUnderTest["fillLearningElementSlots"] = fillLearningElementSlotsMock;
@@ -174,11 +152,100 @@ describe("LearningSpacePresenter", () => {
     systemUnderTest["createWindows"] = createWindowsMock;
 
     const decorationPresenterMock = mock<IDecorationPresenter>();
-    builderMock.getPresenter.mockReturnValueOnce(decorationPresenterMock);
+    decorationBuilderMock.getPresenter.mockReturnValueOnce(
+      decorationPresenterMock
+    );
 
     await systemUnderTest["asyncSetupSpace"](spaceTO);
 
+    expect(decorationBuilderMock.spaceTemplate).toEqual(
+      LearningSpaceTemplateType.L
+    );
     expect(directorMock.buildAsync).toHaveBeenCalledTimes(1);
-    expect(directorMock.buildAsync).toHaveBeenCalledWith(builderMock);
+    expect(directorMock.buildAsync).toHaveBeenCalledWith(decorationBuilderMock);
+  });
+
+  test("createLearningElements creates one element and sets the correct data in its builder", async () => {
+    systemUnderTest["viewModel"].elementPositions = [
+      [new Vector3(1, 1, 1), 0],
+      [new Vector3(1, 1, 1), 0],
+    ];
+
+    await systemUnderTest["fillLearningElementSlots"](spaceTO);
+
+    expect(elementBuilderMock.elementData).toEqual(spaceTO.elements[1]);
+    expect(elementBuilderMock.elementPosition).toEqual([
+      new Vector3(1, 1, 1),
+      0,
+    ]);
+
+    expect(directorMock.buildAsync).toHaveBeenCalledTimes(2);
+    expect(directorMock.buildAsync).toHaveBeenNthCalledWith(
+      2,
+      elementBuilderMock
+    );
+  });
+
+  test("createLearningElements creates one standin deco and sets the correct data in its builder", async () => {
+    systemUnderTest["viewModel"].elementPositions = [
+      [new Vector3(1, 1, 1), 0],
+      [new Vector3(1, 1, 1), 0],
+    ];
+
+    await systemUnderTest["fillLearningElementSlots"](spaceTO);
+
+    expect(standinBuilderMock.position).toEqual(new Vector3(1, 1, 1));
+    expect(standinBuilderMock.rotation).toEqual(0);
+    expect(standinBuilderMock.spaceName).toBe("TestSpace");
+    expect(standinBuilderMock.slotNumber).toBe(0);
+
+    expect(directorMock.buildAsync).toHaveBeenCalledTimes(2);
+    expect(directorMock.buildAsync).toHaveBeenNthCalledWith(
+      1,
+      standinBuilderMock
+    );
+  });
+
+  test("createExitDoor creates a door with its builder and calls the new presenter", async () => {
+    systemUnderTest["viewModel"].exitDoorPosition = [new Vector3(1, 1, 1), 0];
+
+    await systemUnderTest["createExitDoor"]();
+
+    expect(doorBuilderMock.position).toEqual(new Vector3(1, 1, 1));
+    expect(doorBuilderMock.rotation).toEqual(0);
+    expect(doorBuilderMock.spaceID).toBe(1);
+    expect(doorBuilderMock.isExit).toBe(true);
+
+    expect(directorMock.buildAsync).toHaveBeenCalledTimes(1);
+    expect(directorMock.buildAsync).toHaveBeenCalledWith(doorBuilderMock);
+  });
+
+  test("createEntryDoor creates a door with its builder and calls the new presenter", async () => {
+    systemUnderTest["viewModel"].entryDoorPosition = [new Vector3(2, 2, 2), 1];
+
+    await systemUnderTest["createEntryDoor"]();
+
+    expect(doorBuilderMock.position).toEqual(new Vector3(2, 2, 2));
+    expect(doorBuilderMock.rotation).toEqual(1);
+    expect(doorBuilderMock.spaceID).toBe(1);
+    expect(doorBuilderMock.isExit).toBe(false);
+
+    expect(directorMock.buildAsync).toHaveBeenCalledTimes(1);
+    expect(directorMock.buildAsync).toHaveBeenCalledWith(doorBuilderMock);
+  });
+
+  test("createWindows creates windows with its builder and calls the new presenter", async () => {
+    systemUnderTest["viewModel"].windowPositions = [
+      [new Vector3(1, 1, 1), 0],
+      [new Vector3(1, 1, 1), 0],
+    ];
+
+    await systemUnderTest["createWindows"]();
+
+    expect(windowBuilderMock.position).toEqual(new Vector3(1, 1, 1));
+    expect(windowBuilderMock.rotation).toEqual(0);
+
+    expect(directorMock.buildAsync).toHaveBeenCalledTimes(2);
+    expect(directorMock.buildAsync).toHaveBeenCalledWith(windowBuilderMock);
   });
 });
