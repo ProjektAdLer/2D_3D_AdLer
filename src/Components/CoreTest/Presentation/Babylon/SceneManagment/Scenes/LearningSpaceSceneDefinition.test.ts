@@ -89,9 +89,10 @@ describe("LearningSpaceScene", () => {
     getUserLocationUseCaseMock.execute.mockReturnValue(
       getUserLocationUseCaseReturnValue
     );
-    systemUnderTest["preTasks"].forEach(async (task) => {
+
+    for (const task of systemUnderTest["preTasks"]) {
       await task();
-    });
+    }
 
     expect(loadSpaceUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
   });
@@ -100,9 +101,10 @@ describe("LearningSpaceScene", () => {
     getUserLocationUseCaseMock.execute.mockReturnValue(
       getUserLocationUseCaseReturnValue
     );
-    systemUnderTest["preTasks"].forEach(async (task) => {
+
+    for (const task of systemUnderTest["preTasks"]) {
       await task();
-    });
+    }
 
     expect(loadAvatarUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
   });
