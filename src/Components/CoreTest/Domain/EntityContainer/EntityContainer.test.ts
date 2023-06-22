@@ -61,7 +61,7 @@ describe("EntityManager", () => {
       },
       TestEntity
     );
-    const entity2 = systemUnderTest.createEntity<TestEntity>(
+    systemUnderTest.createEntity<TestEntity>(
       {
         test1: "entity2",
       },
