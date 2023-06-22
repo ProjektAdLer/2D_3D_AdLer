@@ -51,6 +51,7 @@ function setupMockedPointerInfo(
     pickInfoMock.pickedPoint = pickedPoint;
   } else pickInfoMock = null;
 
+  //@ts-ignore
   const pointerInfo: PointerInfo = {
     type: type,
     event: mouseEventMock,
@@ -191,7 +192,6 @@ describe("AvatarController", () => {
     viewModel.keyMovementTarget = Vector3.Zero();
     viewModel.parentNode = new TransformNode("mockParentNode");
     // viewModel.parentNode.Value
-    const camera = mockDeep<ArcRotateCamera>();
 
     systemUnderTest["processKeyboardEvent"](keyboardInfoMock, eventStateMock);
 
@@ -291,7 +291,6 @@ describe("AvatarController", () => {
   });
 
   test("debug_drawPath computes a path and draws it when config.isDebug is set true", () => {
-    // const createDashedLinesMock = jest.spyOn(MeshBuilder, "CreateDashedLines");
     config.isDebug = true;
 
     systemUnderTest["debug_drawPath"](new Vector3(1, 2, 3));
