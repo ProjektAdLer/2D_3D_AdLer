@@ -7,7 +7,7 @@ export default function LoadingScreen() {
       <main className="grid w-screen h-screen grid-cols-6 grid-rows-5 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
         <section className="flex items-center justify-center col-span-4 col-start-2 row-span-3 row-start-1 mt-24">
           <img
-            className="w-56 m-4 mt-24 lg:w-3/6 animate-wiggle"
+            className="w-32 m-4 mt-24 xs:w-36 md:w-64 lg:w-72 xl:w-96 animate-wiggle"
             src={logo}
             alt="AdlerEngine Logo"
           />
