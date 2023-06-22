@@ -71,9 +71,6 @@ describe("LearningElementModal", () => {
     (type) => {
       fakeModel.type.Value = type;
 
-      if (type === "h5p") {
-      }
-
       useBuilderMock([fakeModel, fakeController]);
 
       const componentUnderTest = render(<LearningElementModal />);

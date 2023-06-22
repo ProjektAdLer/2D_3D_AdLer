@@ -55,6 +55,8 @@ describe("LearningSpaceSelection", () => {
         <LearningSpaceSelection />
       </Provider>
     );
+
+    expect(container).not.toBeEmptyDOMElement();
   });
 
   test("shouldn't render without controller", () => {

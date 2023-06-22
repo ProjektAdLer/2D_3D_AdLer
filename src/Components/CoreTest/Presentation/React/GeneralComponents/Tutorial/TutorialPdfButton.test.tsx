@@ -5,6 +5,8 @@ import TutorialPdfButton from "../../../../../Core/Presentation/React/GeneralCom
 describe("TutorialPdfButton", () => {
   test("should render", () => {
     const renderResult = render(<TutorialPdfButton />);
+
+    expect(renderResult.container).not.toBeEmptyDOMElement();
   });
 
   test("click on button calls window.open", () => {

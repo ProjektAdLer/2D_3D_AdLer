@@ -40,6 +40,8 @@ describe("LearningSpaceSelectionGraph", () => {
         />
       </ReactFlowProvider>
     );
+
+    expect(container).not.toBeEmptyDOMElement();
   });
 
   test("creates a node for each space with correct data_id's", () => {

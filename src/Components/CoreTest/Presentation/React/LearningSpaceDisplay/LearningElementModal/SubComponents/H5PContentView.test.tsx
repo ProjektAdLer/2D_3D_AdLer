@@ -61,5 +61,7 @@ describe("H5PContentView", () => {
     );
 
     console.error = oldError;
+
+    expect(container).not.toBeEmptyDOMElement();
   });
 });
