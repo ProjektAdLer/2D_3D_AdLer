@@ -9,7 +9,7 @@ export default function LoadingScreen() {
           <img
             className="w-56 m-4 mt-24 lg:w-3/6 animate-wiggle"
             src={logo}
-            alt="Adler Logo"
+            alt="AdlerEngine Logo"
           />
         </div>
         <div className="self-start col-span-2 col-start-3 row-start-5 justify-self-center">
