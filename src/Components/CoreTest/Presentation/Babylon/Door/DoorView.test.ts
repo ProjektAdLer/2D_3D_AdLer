@@ -44,30 +44,8 @@ describe("DoorView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    const [, systemUnderTest] = buildSystemUnderTest();
     expect(systemUnderTest["scenePresenter"]).toBeDefined();
-  });
-
-  test("constructor subscribes to viewModel.position", () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    expect(viewModel.position["subscribers"]).toStrictEqual([
-      systemUnderTest["positionMesh"],
-    ]);
-  });
-
-  test("constructor subscribes to viewModel.rotation", () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    expect(viewModel.rotation["subscribers"]).toStrictEqual([
-      systemUnderTest["positionMesh"],
-    ]);
   });
 
   test("constructor subscribes to viewModel.isOpen", () => {
@@ -88,10 +66,8 @@ describe("DoorView", () => {
     ]);
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
-
-    await systemUnderTest.isReady.then(() => {
-      expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
-    });
+    await systemUnderTest.asyncSetup();
+    expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
   });
 
   test("asyncSetup/loadMeshAsync sets rotationQuaternion of each loaded mesh to null", async () => {
@@ -101,12 +77,11 @@ describe("DoorView", () => {
     mesh2.rotationQuaternion = new Quaternion();
     scenePresenterMock.loadModel.mockResolvedValue([mesh1, mesh2]);
 
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    const [, systemUnderTest] = buildSystemUnderTest();
 
-    await systemUnderTest.isReady.then(() => {
-      expect(mesh1.rotationQuaternion).toBeNull();
-      expect(mesh2.rotationQuaternion).toBeNull();
-    });
+    await systemUnderTest.asyncSetup();
+    expect(mesh1.rotationQuaternion).toBeNull();
+    expect(mesh2.rotationQuaternion).toBeNull();
   });
 
   test("asyncSetup/setupAnimation creates a new animation and applies it to the first mesh", async () => {
@@ -115,10 +90,9 @@ describe("DoorView", () => {
     ]);
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
-
-    await systemUnderTest.isReady.then(() => {
-      expect(viewModel.meshes.Value[0].animations.length).toBe(1);
-    });
+    viewModel.isExit = true;
+    await systemUnderTest.asyncSetup();
+    expect(viewModel.meshes[0].animations.length).toBe(1);
   });
 
   test("positionMesh sets position of the first mesh to viewModel.position", async () => {
@@ -127,12 +101,10 @@ describe("DoorView", () => {
     ]);
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
 
-    await systemUnderTest.isReady.then(() => {
-      const newPosition = new Vector3(1, 2, 3);
-      viewModel.position.Value = newPosition;
-
-      expect(viewModel.meshes.Value[0].position).toStrictEqual(newPosition);
-    });
+    const position = new Vector3(1, 2, 3);
+    viewModel.position = position;
+    await systemUnderTest.asyncSetup();
+    expect(viewModel.meshes[0].position).toStrictEqual(position);
   });
 
   test("positionMesh sets rotation of the first mesh to viewModel.rotation", async () => {
@@ -141,14 +113,13 @@ describe("DoorView", () => {
     ]);
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
 
-    await systemUnderTest.isReady.then(() => {
-      const newRotation = 42;
-      viewModel.rotation.Value = newRotation;
+    const newRotation = 42;
+    viewModel.rotation = newRotation;
+    await systemUnderTest.asyncSetup();
 
-      expect(viewModel.meshes.Value[0].rotation.y).toStrictEqual(
-        Tools.ToRadians(newRotation)
-      );
-    });
+    expect(viewModel.meshes[0].rotation.y).toStrictEqual(
+      Tools.ToRadians(newRotation)
+    );
   });
 
   test("onIsOpenChanged calls beginAnimation on the scene if viewModel.isOpen is true", async () => {
@@ -157,16 +128,15 @@ describe("DoorView", () => {
     ]);
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
 
-    await systemUnderTest.isReady.then(async () => {
-      viewModel.isOpen.Value = true;
-      await setTimeout(100);
+    await systemUnderTest.asyncSetup();
+    viewModel.isOpen.Value = true;
+    await setTimeout(100);
 
-      expect(scenePresenterMock.Scene.beginAnimation).toHaveBeenCalledTimes(1);
-      expect(scenePresenterMock.Scene.beginAnimation).toHaveBeenCalledWith(
-        viewModel.meshes.Value[0],
-        expect.any(Number),
-        expect.any(Number)
-      );
-    });
+    expect(scenePresenterMock.Scene.beginAnimation).toHaveBeenCalledTimes(1);
+    expect(scenePresenterMock.Scene.beginAnimation).toHaveBeenCalledWith(
+      viewModel.meshes[0],
+      expect.any(Number),
+      expect.any(Number)
+    );
   });
 });

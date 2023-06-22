@@ -1,6 +1,6 @@
-import { Vector3 } from "@babylonjs/core";
+import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
 
 export default interface IDoorPresenter {
-  presentDoor(position: [Vector3, number]): void;
   openDoor(): void;
+  onLearningSpaceScored(spaceScoreTO: LearningSpaceScoreTO): void;
 }

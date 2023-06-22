@@ -56,13 +56,19 @@ export default class LoadLearningSpaceUseCase
 
     // create SpaceTO and fill with scoring data
     let spaceTO = this.toTO(spaceEntity);
-    const spaceScoreTO = this.calculateSpaceScore.internalExecute(spaceTO.id);
+    const spaceScoreTO = this.calculateSpaceScore.internalExecute({
+      spaceID: spaceTO.id,
+      worldID: worldEntity.id,
+    });
     spaceTO.currentScore = spaceScoreTO.currentScore;
     spaceTO.maxScore = spaceScoreTO.maxScore;
 
     // fill with availability data
     const availabilityData =
-      this.calculateSpaceAvailabilityUseCase.internalExecute(spaceTO.id);
+      this.calculateSpaceAvailabilityUseCase.internalExecute({
+        spaceID: spaceTO.id,
+        worldID: worldEntity.id,
+      });
     spaceTO.requirementsString = availabilityData.requirementsString;
     spaceTO.requirementsSyntaxTree = availabilityData.requirementsSyntaxTree;
     spaceTO.isAvailable = availabilityData.isAvailable;

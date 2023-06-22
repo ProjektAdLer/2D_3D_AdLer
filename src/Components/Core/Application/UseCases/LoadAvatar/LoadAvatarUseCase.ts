@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
-import type IAvatarPort from "./IAvatarPort";
+import type IAvatarPort from "../../Ports/Interfaces/IAvatarPort";
 import ILoadAvatarUseCase from "./ILoadAvatarUseCase";
 
 @injectable()

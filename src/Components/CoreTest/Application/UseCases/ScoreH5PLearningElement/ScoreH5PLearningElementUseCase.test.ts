@@ -198,7 +198,10 @@ describe("ScoreH5PLearningElementUseCase", () => {
     }
 
     expect(calculateSpaceScoreUseCaseMock.internalExecute).toHaveBeenCalledWith(
-      spaceEntityMock.id
+      {
+        spaceID: 1,
+        worldID: 1,
+      }
     );
   });
 

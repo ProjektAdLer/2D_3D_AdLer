@@ -42,7 +42,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
     const userEntity =
       this.entityContainer.getEntitiesOfType(UserDataEntity)[0];
 
-    if (!userEntity || !userEntity.isLoggedIn) {
+    if (!userEntity?.isLoggedIn) {
       return this.rejectWithWarning("User is not logged in!");
     }
 
@@ -90,7 +90,10 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
 
       element.hasScored = true;
 
-      this.calculateSpaceScoreUseCase.internalExecute(userLocation.spaceID);
+      this.calculateSpaceScoreUseCase.internalExecute({
+        spaceID: userLocation.spaceID,
+        worldID: userLocation.worldID,
+      });
 
       this.worldPort.onLearningElementScored(true, data.elementID);
     }

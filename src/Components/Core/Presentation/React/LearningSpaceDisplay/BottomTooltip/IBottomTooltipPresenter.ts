@@ -1,7 +1,11 @@
-import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
+import { LearningElementTypeStrings } from "src/Components/Core/Domain/Types/LearningElementTypes";
 
 export default interface IBottomTooltipPresenter {
-  displayExitQueryTooltip(): void;
-  displayLearningElementSummaryTooltip(element: LearningElementTO): void;
+  displayDoorTooltip(isExit: boolean): void;
+  displayLearningElementSummaryTooltip(elementData: {
+    name: string;
+    type: LearningElementTypeStrings;
+    points: number | undefined;
+  }): void;
   hide(): void;
 }

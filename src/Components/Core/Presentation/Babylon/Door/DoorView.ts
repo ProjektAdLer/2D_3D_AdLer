@@ -18,7 +18,7 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import DoorViewModel from "./DoorViewModel";
 import IDoorController from "./IDoorController";
 
-const modelLink = require("../../../../../Assets/3DModel_Door.glb");
+const modelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Door.glb");
 
 export default class DoorView extends Readyable {
   private scenePresenter: IScenePresenter;
@@ -29,25 +29,18 @@ export default class DoorView extends Readyable {
   ) {
     super();
 
-    // inject scenePresenter via factory
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
       SCENE_TYPES.ScenePresenterFactory
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
 
-    // setup callbacks for rerendering when the view model changes
-    viewModel.position.subscribe(this.positionMesh);
-    viewModel.rotation.subscribe(this.positionMesh);
     viewModel.isOpen.subscribe(this.onIsOpenChanged);
-
-    // initial setup
-    this.asyncSetup();
   }
 
-  private async asyncSetup(): Promise<void> {
+  public async asyncSetup(): Promise<void> {
     await this.loadMeshAsync();
     this.positionMesh();
-    this.setupAnimation();
+    if (this.viewModel.isExit) this.setupAnimation();
     this.registerActions();
     this.addToHighlightLayer();
 
@@ -60,7 +53,7 @@ export default class DoorView extends Readyable {
     // reset quaternion rotation because it can prevent mesh.rotate to have any effect
     results.forEach((mesh) => (mesh.rotationQuaternion = null));
 
-    this.viewModel.meshes.Value = results as Mesh[];
+    this.viewModel.meshes = results as Mesh[];
   }
 
   private setupAnimation(): void {
@@ -71,22 +64,22 @@ export default class DoorView extends Readyable {
       Animation.ANIMATIONTYPE_FLOAT
     );
     animation.setKeys([
-      { frame: 0, value: Tools.ToRadians(this.viewModel.rotation.Value) },
+      { frame: 0, value: Tools.ToRadians(this.viewModel.rotation) },
       {
         frame: 45,
-        value: Tools.ToRadians(this.viewModel.rotation.Value - 80),
+        value: Tools.ToRadians(this.viewModel.rotation - 80),
       },
     ]);
-    this.viewModel.meshes.Value[0].animations.push(animation);
+    this.viewModel.meshes[0].animations.push(animation);
   }
 
   @bind
   private positionMesh(): void {
-    if (this.viewModel.meshes.Value && this.viewModel.meshes.Value.length > 0) {
-      this.viewModel.meshes.Value[0].position = this.viewModel.position.Value;
-      this.viewModel.meshes.Value[0].rotation = new Vector3(
+    if (this.viewModel.meshes && this.viewModel.meshes.length > 0) {
+      this.viewModel.meshes[0].position = this.viewModel.position;
+      this.viewModel.meshes[0].rotation = new Vector3(
         0.0,
-        Tools.ToRadians(this.viewModel.rotation.Value),
+        Tools.ToRadians(this.viewModel.rotation),
         0.0
       );
     }
@@ -97,22 +90,22 @@ export default class DoorView extends Readyable {
     if (newIsOpen) {
       this.isReady.then(() => {
         this.scenePresenter.Scene.beginAnimation(
-          this.viewModel.meshes.Value[0],
+          this.viewModel.meshes[0],
           0,
           45
         );
       });
     }
   }
-  @bind
+
   private addToHighlightLayer(): void {
-    this.viewModel.meshes.Value.forEach((mesh) => {
+    this.viewModel.meshes.forEach((mesh) => {
       this.scenePresenter.HighlightLayer.addMesh(mesh, Color3.Blue());
     });
   }
-  @bind
-  public registerActions(): void {
-    this.viewModel.meshes.Value.forEach((mesh) => {
+
+  private registerActions(): void {
+    this.viewModel.meshes.forEach((mesh) => {
       mesh.actionManager = new ActionManager(this.scenePresenter.Scene);
       mesh.actionManager.registerAction(
         new ExecuteCodeAction(

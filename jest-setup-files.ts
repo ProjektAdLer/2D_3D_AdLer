@@ -1,13 +1,28 @@
 import "reflect-metadata";
-
-import "jest-webgl-canvas-mock";
-
 import "@testing-library/jest-dom";
+
 import { config } from "./src/config";
+import { toBeNullOrEqual } from "./src/Components/CoreTest/JestExtensions/toBeNullOrAny";
+import { expect } from "@jest/globals";
 
 // The Backend gets constructed at some points in the tests, so we need to set
 // the config values before the tests are run.
 config.serverURL = "http://localhost:1337";
+
+// matcher extensions
+expect.extend({
+  toBeNullOrEqual: toBeNullOrEqual,
+});
+declare global {
+  namespace jest {
+    interface Matchers<R> {
+      /**
+       * Same as toEqual matcher but also allows null.
+       */
+      toBeNullOrEqual<T = any>(expected: T): R;
+    }
+  }
+}
 
 global.structuredClone = (val) => JSON.parse(JSON.stringify(val));
 

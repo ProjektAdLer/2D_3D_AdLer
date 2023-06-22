@@ -16,7 +16,7 @@ export default class GetUserLocationUseCase implements IGetUserLocationUseCase {
     let userDataEntity =
       this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
 
-    if (!userDataEntity || !userDataEntity.isLoggedIn) {
+    if (!userDataEntity?.isLoggedIn) {
       throw new Error("User is not logged in, cannot get current location");
     }
 

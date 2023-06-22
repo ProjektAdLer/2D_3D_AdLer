@@ -19,7 +19,7 @@ export default class LearningSpaceDetailViewModel {
   id: Observable<ComponentID> = new Observable<ComponentID>(undefined);
   name: Observable<string> = new Observable<string>("");
   description: Observable<string> = new Observable<string>("");
-  goals: Observable<string[]> = new Observable<string[]>([""]);
+  goals: Observable<string[]> = new Observable<string[]>([]);
   requiredPoints: Observable<number> = new Observable<number>(0);
   requirements: Observable<number[]> = new Observable<number[]>([]);
   isAvailable: Observable<boolean> = new Observable<boolean>(false);

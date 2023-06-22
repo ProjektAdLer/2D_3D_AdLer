@@ -116,7 +116,7 @@ describe("BackendAdapter", () => {
   test("should score a Learning Element", async () => {
     mockedAxios.patch.mockResolvedValue({
       data: {
-        isSuceess: true,
+        isSuccess: true,
       },
     });
     const returnedVal = await systemUnderTest.scoreElement("token", 1, 1);

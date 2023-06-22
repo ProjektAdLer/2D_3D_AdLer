@@ -5,5 +5,6 @@ export default class BottomTooltipViewModel {
   show = new Observable<boolean>(false, true);
   text = new Observable<string>("", true);
   iconType = new Observable<LearningElementTypeStrings>(undefined, true);
-  points = new Observable<number | undefined>();
+  points = new Observable<number>();
+  showPoints = new Observable<boolean>(true, true);
 }

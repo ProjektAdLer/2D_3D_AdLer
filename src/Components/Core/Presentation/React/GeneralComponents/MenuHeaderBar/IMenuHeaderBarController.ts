@@ -1,4 +1,4 @@
 export default interface IMenuHeaderBarController {
-  onMenuButtonClicked(): void;
+  onHomeButtonClicked(): void;
   onBackButtonClicked(): void;
 }

@@ -25,6 +25,8 @@ function buildSystemUnderTest(): [
   LearningElementView
 ] {
   const viewModel = new LearningElementViewModel();
+  viewModel.type = "h5p";
+  viewModel.position = new Vector3(1, 2, 3);
   const controller = mock<ILearningElementController>();
   const view = new LearningElementView(viewModel, controller);
   return [viewModel, controller, view];
@@ -45,63 +47,56 @@ describe("LearningElementView", () => {
     jest.restoreAllMocks();
   });
 
-  test("constructor sets up position observable callbacks", () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
-
-    expect(viewModel.position["subscribers"]).toStrictEqual([
-      systemUnderTest["positionModel"],
-    ]);
-  });
-
-  test("constructor sets up rotation observable callbacks", () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
-
-    expect(viewModel.rotation["subscribers"]).toStrictEqual([
-      systemUnderTest["positionModel"],
-    ]);
-  });
-
   test("constructor sets up hasScored observable callbacks", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, ,] = buildSystemUnderTest();
 
     // only check for length, because the callback is anonymous
     expect(viewModel.hasScored["subscribers"].length).toBe(1);
   });
 
-  test("async setup calls scene presenter to load model", async () => {
+  test("async setup calls scene presenter to load model and icon", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    const [, , systemUnderTest] = buildSystemUnderTest();
     await systemUnderTest.setupLearningElement();
 
-    expect(scenePresenterMock.loadModel).toBeCalledTimes(1);
+    expect(scenePresenterMock.loadModel).toBeCalledTimes(2);
   });
 
-  test("async setup creates a new action manager for each mesh", async () => {
+  test("async setup sets an action manager for each model mesh", async () => {
+    const scene = new Scene(new NullEngine());
+    scenePresenterMock.loadModel.mockResolvedValue([
+      new AbstractMesh("TestMesh1", scene),
+      new AbstractMesh("TestMesh2", scene),
+    ]);
+    const [viewModel, , systemUnderTest] = buildSystemUnderTest();
+    viewModel.modelType = "";
+
+    await systemUnderTest.setupLearningElement();
+
+    viewModel.modelMeshes.forEach((mesh) => {
+      expect(mesh.actionManager).toBeDefined();
+    });
+  });
+
+  test("async setup sets an action manager for each icon mesh", async () => {
     const scene = new Scene(new NullEngine());
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh1", scene),
       new AbstractMesh("TestMesh2", scene),
     ]);
 
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, , systemUnderTest] = buildSystemUnderTest();
+
     await systemUnderTest.setupLearningElement();
 
-    viewModel.meshes.Value.forEach((mesh) => {
+    viewModel.iconMeshes.forEach((mesh) => {
       expect(mesh.actionManager).toBeDefined();
     });
   });
@@ -115,7 +110,7 @@ describe("LearningElementView", () => {
       new AbstractMesh("TestMesh1", new Scene(new NullEngine())),
     ]);
 
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    const [, controller, systemUnderTest] = buildSystemUnderTest();
     await systemUnderTest.setupLearningElement();
 
     // check to see if registerAction was called with the onPickTrigger callback
@@ -140,7 +135,7 @@ describe("LearningElementView", () => {
       new AbstractMesh("TestMesh1", new Scene(new NullEngine())),
     ]);
 
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    const [, controller, systemUnderTest] = buildSystemUnderTest();
     await systemUnderTest.setupLearningElement();
 
     // check to see if registerAction was called with the onPointerOverTrigger callback
@@ -165,7 +160,7 @@ describe("LearningElementView", () => {
       new AbstractMesh("TestMesh1", new Scene(new NullEngine())),
     ]);
 
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    const [, controller, systemUnderTest] = buildSystemUnderTest();
     await systemUnderTest.setupLearningElement();
 
     // check to see if registerAction was called with the onPointerOutTrigger callback
@@ -185,7 +180,7 @@ describe("LearningElementView", () => {
     const mesh = new AbstractMesh("TestMesh1", new Scene(new NullEngine()));
     scenePresenterMock.loadModel.mockResolvedValue([mesh]);
 
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    const [, , systemUnderTest] = buildSystemUnderTest();
     await systemUnderTest.setupLearningElement();
 
     expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
@@ -195,25 +190,35 @@ describe("LearningElementView", () => {
   });
 
   test("positionModel changes the model position when the position value in the viewModel is changed", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
+    // mock resolve value twice to circumvent returning the same mesh twice
+    scenePresenterMock.loadModel
+      .mockResolvedValueOnce([
+        new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+      ])
+      .mockResolvedValueOnce([
+        new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+      ]);
 
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, , systemUnderTest] = buildSystemUnderTest();
+    viewModel.position = new Vector3(42, 42, 42);
+
     await systemUnderTest.setupLearningElement();
 
-    viewModel.position.Value = new Vector3(42, 42, 42);
-    expect(viewModel.meshes.Value[0].position).toEqual(new Vector3(42, 42, 42));
+    expect(viewModel.modelMeshes[0].position).toEqual(new Vector3(42, 42, 42));
+    expect(viewModel.iconMeshes[0].position).toEqual(
+      new Vector3(42, 42 + viewModel.iconYOffset, 42)
+    );
   });
 
   test("positionModel changes the model rotation when the rotation value in the viewModel is changed", async () => {
     const mockedMesh = mockDeep<AbstractMesh>();
     scenePresenterMock.loadModel.mockResolvedValue([mockedMesh]);
 
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, , systemUnderTest] = buildSystemUnderTest();
+    viewModel.rotation = 42;
+
     await systemUnderTest.setupLearningElement();
 
-    viewModel.rotation.Value = 42;
     expect(mockedMesh.rotate).toBeCalledWith(Vector3.Up(), Tools.ToRadians(42));
   });
 
@@ -222,15 +227,15 @@ describe("LearningElementView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, , systemUnderTest] = buildSystemUnderTest();
     await systemUnderTest.setupLearningElement();
 
     viewModel.hasScored.Value = true;
     expect(scenePresenterMock.HighlightLayer.removeMesh).toHaveBeenCalledWith(
-      viewModel.meshes.Value[0]
+      viewModel.modelMeshes[0]
     );
     expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
-      viewModel.meshes.Value[0],
+      viewModel.modelMeshes[0],
       expect.any(Color3)
     );
   });

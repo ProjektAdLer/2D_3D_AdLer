@@ -1,5 +1,5 @@
 import { ContainerModule } from "inversify";
-import IAvatarPort from "../../Application/UseCases/LoadAvatar/IAvatarPort";
+import IAvatarPort from "../../Application/Ports/Interfaces/IAvatarPort";
 import ILearningWorldPort from "../../Application/Ports/Interfaces/ILearningWorldPort";
 import LearningWorldPort from "../../Application/Ports/LearningWorldPort/LearningWorldPort";
 import ILMSPort from "../../Application/Ports/Interfaces/ILMSPort";

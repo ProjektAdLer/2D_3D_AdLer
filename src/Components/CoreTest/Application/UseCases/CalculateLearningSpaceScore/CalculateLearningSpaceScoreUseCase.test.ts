@@ -52,7 +52,7 @@ describe("Calculate Learning Space Score UseCase", () => {
       ])
     );
 
-    systemUnderTest["calculateLearningSpaceScore"](1);
+    systemUnderTest["calculateLearningSpaceScore"](1, 1);
 
     entityContainerMock.filterEntitiesOfType.mockReset();
   });
@@ -79,7 +79,7 @@ describe("Calculate Learning Space Score UseCase", () => {
       } as LearningSpaceEntity,
     ]);
 
-    const result = systemUnderTest["calculateLearningSpaceScore"](1);
+    const result = systemUnderTest["calculateLearningSpaceScore"](1, 1);
 
     expect(entityContainerMock.filterEntitiesOfType).toHaveBeenCalledWith(
       LearningSpaceEntity,
@@ -103,13 +103,13 @@ describe("Calculate Learning Space Score UseCase", () => {
         description: "test",
         requiredScore: 0,
         name: "test",
-        goals: "test",
-        requirements: [],
+        goals: ["test"],
         parentWorldID: 200,
+        requirements: "",
       } as LearningSpaceEntity,
     ]);
 
-    const result = systemUnderTest["calculateLearningSpaceScore"](1);
+    const result = systemUnderTest["calculateLearningSpaceScore"](1, 1);
 
     expect(result).toMatchObject({
       currentScore: 0,
@@ -125,7 +125,7 @@ describe("Calculate Learning Space Score UseCase", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 
     expect(() => {
-      systemUnderTest["calculateLearningSpaceScore"](1);
+      systemUnderTest["calculateLearningSpaceScore"](1, 1);
     }).toThrow();
   });
 
@@ -163,8 +163,8 @@ describe("Calculate Learning Space Score UseCase", () => {
         description: "test",
         requiredScore: 0,
         name: "test",
-        goals: "test",
-        requirements: [],
+        goals: ["test"],
+        requirements: "",
         parentWorldID: 200,
       } as LearningSpaceEntity,
     ]);
@@ -198,7 +198,7 @@ describe("Calculate Learning Space Score UseCase", () => {
       } as LearningSpaceEntity,
     ]);
 
-    const result = systemUnderTest.internalExecute(1);
+    const result = systemUnderTest.internalExecute({ spaceID: 1, worldID: 1 });
 
     expect(result).toMatchObject({
       currentScore: 20,

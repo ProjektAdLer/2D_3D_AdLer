@@ -1,5 +1,5 @@
-import { ActionEvent } from "@babylonjs/core";
-import { mock } from "jest-mock-extended";
+import { AbstractMesh, ActionEvent, Mesh } from "@babylonjs/core";
+import { mock, mockDeep } from "jest-mock-extended";
 import ILoadLearningElementUseCase from "../../../../Core/Application/UseCases/LoadLearningElement/ILoadLearningElementUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
@@ -42,10 +42,34 @@ describe("LearningElementController", () => {
     ).toHaveBeenCalledTimes(1);
   });
 
+  test("pointerOver scales up iconMeshes", () => {
+    const mockedMesh = mockDeep<Mesh>();
+    viewModel.iconMeshes = [mockedMesh];
+
+    systemUnderTest.pointerOver();
+
+    expect(mockedMesh.scaling.scaleInPlace).toHaveBeenCalledTimes(1);
+    expect(mockedMesh.scaling.scaleInPlace).toHaveBeenCalledWith(
+      viewModel.iconScaleUpOnHover
+    );
+  });
+
   test("pointerOut calls IUIPort.hideBottomTooltip", () => {
     systemUnderTest.pointerOut();
 
     expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
+  });
+
+  test("pointerOut scales down iconMeshes", () => {
+    const mockedMesh = mockDeep<Mesh>();
+    viewModel.iconMeshes = [mockedMesh];
+
+    systemUnderTest.pointerOut();
+
+    expect(mockedMesh.scaling.scaleInPlace).toHaveBeenCalledTimes(1);
+    expect(mockedMesh.scaling.scaleInPlace).toHaveBeenCalledWith(
+      1 / viewModel.iconScaleUpOnHover
+    );
   });
 
   test("clicked calls IElementStartedUseCase.executeAsync when pointerType is mouse", () => {

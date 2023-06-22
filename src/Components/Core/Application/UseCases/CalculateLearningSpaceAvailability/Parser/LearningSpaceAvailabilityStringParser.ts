@@ -145,16 +145,16 @@ export default class LearningSpaceAvailabilityStringParser {
     } else if (
       expression[this.parserIndex] &&
       // starts with a digit
-      (expression[this.parserIndex][0] === "0" ||
-        expression[this.parserIndex][0] === "1" ||
-        expression[this.parserIndex][0] === "2" ||
-        expression[this.parserIndex][0] === "3" ||
-        expression[this.parserIndex][0] === "4" ||
-        expression[this.parserIndex][0] === "5" ||
-        expression[this.parserIndex][0] === "6" ||
-        expression[this.parserIndex][0] === "7" ||
-        expression[this.parserIndex][0] === "8" ||
-        expression[this.parserIndex][0] === "9")
+      (expression[this.parserIndex].startsWith("0") ||
+        expression[this.parserIndex].startsWith("1") ||
+        expression[this.parserIndex].startsWith("2") ||
+        expression[this.parserIndex].startsWith("3") ||
+        expression[this.parserIndex].startsWith("4") ||
+        expression[this.parserIndex].startsWith("5") ||
+        expression[this.parserIndex].startsWith("6") ||
+        expression[this.parserIndex].startsWith("7") ||
+        expression[this.parserIndex].startsWith("8") ||
+        expression[this.parserIndex].startsWith("9"))
     ) {
       const valueNode = new BooleanIDNode(+expression[this.parserIndex]);
       this.parserIndex++;

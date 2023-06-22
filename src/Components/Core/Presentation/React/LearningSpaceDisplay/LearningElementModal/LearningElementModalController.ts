@@ -20,23 +20,23 @@ export default class LearningElementModalController
   }
 
   async h5pEventCalled(event: any): Promise<void> {
-    // Skip malformed events
-    let hasStatement = event && event.data && event.data.statement;
+    // Skip malformed events.
+    var hasStatement = event && event.data && event.data.statement;
     if (!hasStatement) {
       return;
     }
 
-    let statement = event.data.statement;
-    let validVerb = statement.verb && statement.verb.id;
+    var statement = event.data.statement;
+    var validVerb = statement.verb && statement.verb.id;
     if (!validVerb) {
       return;
     }
 
-    let isCompleted =
+    var isCompleted =
       statement.verb.id === "http://adlnet.gov/expapi/verbs/answered" ||
       statement.verb.id === "http://adlnet.gov/expapi/verbs/completed";
 
-    let isChild =
+    var isChild =
       statement.context &&
       statement.context.contextActivities &&
       statement.context.contextActivities.parent &&

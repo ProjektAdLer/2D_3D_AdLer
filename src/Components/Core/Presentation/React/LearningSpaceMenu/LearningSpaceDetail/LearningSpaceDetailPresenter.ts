@@ -4,6 +4,7 @@ import LearningSpaceDetailViewModel, {
   LearningSpaceDetailLearningSpaceData,
 } from "./LearningSpaceDetailViewModel";
 import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldTO";
+import { LearningElementTypeStrings } from "src/Components/Core/Domain/Types/LearningElementTypes";
 
 export default class LearningSpaceDetailPresenter
   implements ILearningSpaceDetailPresenter
@@ -32,15 +33,21 @@ export default class LearningSpaceDetailPresenter
     this.viewModel.goals.Value = spaceTO.goals;
     this.viewModel.isAvailable.Value = spaceTO.isAvailable;
 
-    this.viewModel.elements.Value = spaceTO.elements.map((elementTO) => [
-      elementTO.type,
-      elementTO.name,
-      elementTO.hasScored,
-      elementTO.value,
-    ]);
+    this.viewModel.elements.Value = spaceTO.elements.reduce(
+      (result, elementTO) => {
+        if (!elementTO) return result;
+
+        result.push([
+          elementTO.type,
+          elementTO.name,
+          elementTO.hasScored,
+          elementTO.value,
+        ]);
+        return result;
+      },
+      [] as [LearningElementTypeStrings, string, boolean, number][]
+    );
 
     this.viewModel.requiredPoints.Value = spaceTO.requiredScore;
-
-    // this.viewModel.requirements.Value = spaceTO.requirements;
   }
 }

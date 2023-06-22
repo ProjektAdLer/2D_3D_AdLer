@@ -16,7 +16,7 @@ export default class LearningSpaceSelectionController
   }
 
   onLearningSpaceClicked(spaceID: number): void {
-    this.viewModel.selectedRowSpaceID.Value = spaceID;
+    this.viewModel.lastSelectedSpaceID.Value = spaceID;
     this.loadLearningSpaceUseCase.executeAsync({
       spaceID: spaceID,
       worldID: this.viewModel.worldID.Value,

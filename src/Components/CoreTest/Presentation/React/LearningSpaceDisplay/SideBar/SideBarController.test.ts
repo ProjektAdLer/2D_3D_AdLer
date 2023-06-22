@@ -1,7 +1,7 @@
 import SideBarController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/SideBar/SideBarController";
 import history from "history/browser";
 
-const mockHistoryBack = jest.spyOn(history, "back");
+const historyPushMock = jest.spyOn(history, "push");
 
 describe("SideBarController", () => {
   let systemUnderTest: SideBarController;
@@ -10,8 +10,18 @@ describe("SideBarController", () => {
     systemUnderTest = new SideBarController();
   });
 
-  test.skip("onExitButtonClicked calls history.back", () => {
-    // systemUnderTest.onExitButtonClicked();
-    expect(mockHistoryBack).toBeCalled();
+  test("onMainMenuButtonClicked calls history.push with '/'", () => {
+    systemUnderTest.onMainMenuButtonClicked();
+    expect(historyPushMock).toBeCalledWith("/");
+  });
+
+  test("onWorldMenuButtonClicked calls history.push with '/worldmenu'", () => {
+    systemUnderTest.onWorldMenuButtonClicked();
+    expect(historyPushMock).toBeCalledWith("/worldmenu");
+  });
+
+  test("onSpaceMenuButtonClicked calls history.push with '/spacemenu'", () => {
+    systemUnderTest.onSpaceMenuButtonClicked();
+    expect(historyPushMock).toBeCalledWith("/spacemenu");
   });
 });

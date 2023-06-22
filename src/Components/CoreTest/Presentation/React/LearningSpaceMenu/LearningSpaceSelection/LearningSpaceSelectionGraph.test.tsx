@@ -6,6 +6,11 @@ import LearningSpaceSelectionGraph from "../../../../../Core/Presentation/React/
 import LearningSpaceSelectionViewModel from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelectionViewModel";
 import { ReactFlowProvider } from "reactflow";
 import { ElkLayoutArguments, ElkNode } from "elkjs/lib/elk.bundled.js";
+import {
+  BooleanAndNode,
+  BooleanIDNode,
+  BooleanOrNode,
+} from "../../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
 
 // mock elk to prevent async layouting
 jest.mock("elkjs/lib/elk.bundled.js", () => {
@@ -45,21 +50,21 @@ describe("LearningSpaceSelectionGraph", () => {
         name: "test",
         isAvailable: true,
         isCompleted: true,
-        requiredSpaces: [],
+        requirementsSyntaxTree: null,
       },
       {
         id: 2,
         name: "test",
         isAvailable: true,
         isCompleted: false,
-        requiredSpaces: [],
+        requirementsSyntaxTree: null,
       },
       {
         id: 3,
         name: "test",
         isAvailable: false,
         isCompleted: false,
-        requiredSpaces: [],
+        requirementsSyntaxTree: null,
       },
     ];
     const controllerMock = mock<ILearningSpaceSelectionController>();
@@ -82,7 +87,7 @@ describe("LearningSpaceSelectionGraph", () => {
     });
   });
 
-  test("creates an edge for each required space", () => {
+  test("creates a node for each boolean operator in the requirements", () => {
     const vm = new LearningSpaceSelectionViewModel();
     vm.spaces.Value = [
       {
@@ -90,24 +95,70 @@ describe("LearningSpaceSelectionGraph", () => {
         name: "test",
         isAvailable: true,
         isCompleted: true,
-        requiredSpaces: [],
+        requirementsSyntaxTree: null,
       },
       {
         id: 2,
         name: "test",
         isAvailable: true,
         isCompleted: true,
-        requiredSpaces: [{ id: 1, isCompleted: true }],
+        requirementsSyntaxTree: null,
       },
       {
         id: 3,
         name: "test",
         isAvailable: true,
         isCompleted: true,
-        requiredSpaces: [
-          { id: 1, isCompleted: true },
-          { id: 2, isCompleted: true },
-        ],
+        requirementsSyntaxTree: new BooleanAndNode([
+          new BooleanIDNode(1),
+          new BooleanIDNode(2),
+        ]),
+      },
+    ];
+    const controllerMock = mock<ILearningSpaceSelectionController>();
+
+    const { container } = render(
+      <ReactFlowProvider>
+        <LearningSpaceSelectionGraph
+          controller={controllerMock}
+          viewModel={vm}
+        />
+      </ReactFlowProvider>
+    );
+
+    const nodes = container.querySelectorAll(".react-flow__node");
+
+    waitFor(() => {
+      expect(nodes.length).toBe(4);
+    });
+  });
+
+  test("creates an edge for each node inside requirements", () => {
+    const vm = new LearningSpaceSelectionViewModel();
+    vm.spaces.Value = [
+      {
+        id: 1,
+        name: "test",
+        isAvailable: true,
+        isCompleted: true,
+        requirementsSyntaxTree: null,
+      },
+      {
+        id: 2,
+        name: "test",
+        isAvailable: true,
+        isCompleted: true,
+        requirementsSyntaxTree: null,
+      },
+      {
+        id: 3,
+        name: "test",
+        isAvailable: true,
+        isCompleted: true,
+        requirementsSyntaxTree: new BooleanOrNode([
+          new BooleanIDNode(1),
+          new BooleanIDNode(2),
+        ]),
       },
     ];
     const controllerMock = mock<ILearningSpaceSelectionController>();
@@ -125,9 +176,6 @@ describe("LearningSpaceSelectionGraph", () => {
 
     waitFor(() => {
       expect(edges.length).toBe(3);
-      expect(edges[0].getAttribute("data-testid")).toContain("edge-1-2");
-      expect(edges[1].getAttribute("data-testid")).toContain("edge-1-3");
-      expect(edges[2].getAttribute("data-testid")).toContain("edge-2-3");
     });
   });
 
@@ -142,7 +190,7 @@ describe("LearningSpaceSelectionGraph", () => {
         name: "test",
         isAvailable: true,
         isCompleted: true,
-        requiredSpaces: [],
+        requirementsSyntaxTree: null,
       },
     ];
     const controllerMock = mock<ILearningSpaceSelectionController>();

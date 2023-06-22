@@ -96,7 +96,11 @@ export default class MockBackendAdapter implements IBackendPort {
           "H5P elements are not supported in the backend mock."
         );
       case "video":
-        return Promise.resolve("https://youtu.be/8X4cDoM3R7E?t=189");
+        //return Promise.resolve("https://youtu.be/8X4cDoM3R7E?t=189");
+        return Promise.resolve("https://vimeo.com/782061723");
+      // return Promise.resolve(
+      //   "https://video.th-ab.de/paella/ui/watch.html?id=ed6695a8-f7ac-47dc-bf6d-62460b94383f"
+      // );
       case "image":
         return Promise.resolve(
           "http://" +
@@ -107,7 +111,7 @@ export default class MockBackendAdapter implements IBackendPort {
         return Promise.resolve(
           "http://" +
             window.location.host +
-            "/SampleLearningElementData/testText.txt"
+            "/SampleLearningElementData/fktohneParamohneRueckgabeohneDeklaration.c"
         );
       case "pdf":
         return Promise.resolve(
@@ -164,9 +168,9 @@ export default class MockBackendAdapter implements IBackendPort {
   }
 
   smallWorld: IDSL = {
-    fileVersion: "0.3",
-    amgVersion: "0.3.2",
-    author: "Ricardo ",
+    fileVersion: "0.4",
+    amgVersion: "1.0",
+    author: "Ricardo",
     language: "de",
     world: {
       worldName: "Small World",
@@ -177,18 +181,20 @@ export default class MockBackendAdapter implements IBackendPort {
         {
           topicId: 7,
           topicName: "Themenbereich der kleinen Welt",
-          topicContents: [6],
+          topicContents: [1],
         },
       ],
       spaces: [
         {
-          spaceId: 6,
+          spaceId: 1,
           spaceName: "Raum der kleinen Welt",
           spaceDescription: "Raumbeschreibung der kleinen Welt",
-          spaceContents: [1, 2, 3, 4, 5],
+          spaceSlotContents: [1, 2, 3, null, 4, null, null, 5, null, null],
           requiredPointsToComplete: 1,
           requiredSpacesToEnter: "",
           spaceGoals: ["Raumziel 1/3", "Raumziel 2/3", "Raumziel 3/3"],
+          spaceTemplate: "L_32x31_10L",
+          spaceTemplateStyle: "",
         },
       ],
       elements: [
@@ -204,6 +210,7 @@ export default class MockBackendAdapter implements IBackendPort {
           ],
           elementFileType: "text",
           elementMaxScore: 1,
+          elementModel: "l_text_bookshelf_2",
         },
         {
           elementId: 2,
@@ -217,6 +224,7 @@ export default class MockBackendAdapter implements IBackendPort {
           ],
           elementFileType: "video",
           elementMaxScore: 1,
+          elementModel: "",
         },
         {
           elementId: 3,
@@ -230,6 +238,7 @@ export default class MockBackendAdapter implements IBackendPort {
           ],
           elementFileType: "image",
           elementMaxScore: 1,
+          elementModel: "",
         },
         {
           elementId: 4,
@@ -243,6 +252,7 @@ export default class MockBackendAdapter implements IBackendPort {
           ],
           elementFileType: "pdf",
           elementMaxScore: 1,
+          elementModel: "l_h5p_backboard_1",
         },
         {
           elementId: 5,
@@ -256,6 +266,7 @@ export default class MockBackendAdapter implements IBackendPort {
           ],
           elementFileType: "h5p",
           elementMaxScore: 1,
+          elementModel: "l_h5p_backboard_1",
         },
       ],
     },
@@ -297,45 +308,55 @@ export default class MockBackendAdapter implements IBackendPort {
             "Ziel des abgeschlossenen Raumes 2/3",
             "Ziel des abgeschlossenen Raumes 3/3",
           ],
-          spaceContents: [1],
+          spaceSlotContents: [1],
           requiredPointsToComplete: 1,
           requiredSpacesToEnter: "",
+          spaceTemplate: "",
+          spaceTemplateStyle: "",
         },
         {
           spaceId: 2,
           spaceName: "Lernraum 2",
           spaceDescription: "rdescription2",
           spaceGoals: ["rgoals2"],
-          spaceContents: [2],
+          spaceSlotContents: [2],
           requiredPointsToComplete: 1,
           requiredSpacesToEnter: "",
+          spaceTemplate: "",
+          spaceTemplateStyle: "",
         },
         {
           spaceId: 3,
           spaceName: "Lernraum 3",
           spaceDescription: "rdescription3",
           spaceGoals: ["rgoals3"],
-          spaceContents: [3],
+          spaceSlotContents: [3],
           requiredPointsToComplete: 1,
           requiredSpacesToEnter: "",
+          spaceTemplate: "",
+          spaceTemplateStyle: "",
         },
         {
           spaceId: 4,
           spaceName: "  Lernraum 4",
           spaceDescription: "rdescription4",
           spaceGoals: ["rgoals4"],
-          spaceContents: [4],
+          spaceSlotContents: [4],
           requiredPointsToComplete: 3,
           requiredSpacesToEnter: "(3)v((2)^(1))",
+          spaceTemplate: "",
+          spaceTemplateStyle: "",
         },
         {
           spaceId: 5,
           spaceName: "Der lernraum 5",
           spaceDescription: "rdescription5",
           spaceGoals: ["rgoals5"],
-          spaceContents: [5],
+          spaceSlotContents: [5],
           requiredPointsToComplete: 1,
           requiredSpacesToEnter: "4",
+          spaceTemplate: "",
+          spaceTemplateStyle: "",
         },
       ],
       elements: [
@@ -352,6 +373,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "image",
           elementFileType: "png",
           elementMaxScore: 1,
+          elementModel: "",
         },
         {
           elementId: 2,
@@ -365,6 +387,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "pdf",
           elementFileType: "pdf",
           elementMaxScore: 1,
+          elementModel: "",
         },
         {
           elementId: 3,
@@ -378,6 +401,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "text",
           elementFileType: "txt",
           elementMaxScore: 1,
+          elementModel: "",
         },
         {
           elementId: 4,
@@ -391,6 +415,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "video",
           elementFileType: "url",
           elementMaxScore: 2,
+          elementModel: "",
         },
         {
           elementId: 5,
@@ -404,6 +429,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "h5p",
           elementFileType: "h5p",
           elementMaxScore: 2,
+          elementModel: "",
         },
       ],
     },

@@ -42,16 +42,18 @@ describe("AmbienceView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    const [, systemUnderTest] = buildSystemUnderTest();
+
     expect(systemUnderTest["scenePresenter"]).toBeDefined();
   });
 
-  test("asyncSetup/loadMeshAsync calls scenePresenter.loadModel", async () => {
+  test("asyncSetup calls scenePresenter.loadModel", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    const [, systemUnderTest] = buildSystemUnderTest();
+    await systemUnderTest.asyncSetup();
 
     expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
   });

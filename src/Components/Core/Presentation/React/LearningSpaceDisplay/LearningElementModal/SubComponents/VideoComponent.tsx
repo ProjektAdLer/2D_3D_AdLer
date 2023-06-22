@@ -1,57 +1,39 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { logger } from "src/Lib/Logger";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import LearningElementModalViewModel from "../LearningElementModalViewModel";
+import YoutubeVideoHost from "./VideoHosters/YoutubeVideoHost";
+import OpencastVideoHost from "./VideoHosters/OpencastVideoHost";
+import VimeoVideoHost from "./VideoHosters/VimeoVideoHost";
 
 export default function VideoComponent({
   viewModel,
 }: {
   viewModel: LearningElementModalViewModel;
 }) {
-  const [videoUrl, setVideoUrl] = useState("");
-  const [videoTitle, setVideoTitle] = useState("VideoTitle");
   const [filepath] = useObservable(viewModel.filePath);
 
-  /*
-  This is the not-hacky way to get the video url, but it requires a fetch request to youtube's oembed api.
-  This ensures that for all possible youtube urls, the embed link and a timestamp can be extracted.
-  
-  Additionally, the title of the video is also extracted from the oembed api.
-  */
+  if (!filepath) return null;
 
-  useEffect(() => {
-    async function getVideoUrl() {
-      const response = await axios.get<{ html: string; title: string }>(
-        `https://www.youtube.com/oembed?url=${filepath}`
-      );
-
-      const regex = /src="([^"]*)"/;
-      const srcArray = regex.exec(response.data.html);
-
-      if (srcArray?.length === 2) {
-        setVideoUrl(srcArray[1]);
-        setVideoTitle(response.data.title);
-      } else {
-        logger.error("Could not extract video url from youtube oembed api");
-        setVideoTitle("Could not extract video url from youtube oembed api");
-        setVideoUrl("");
-      }
-    }
-
-    // TODO: Run this only if the viewmodel has a value
-    getVideoUrl();
-  }, [filepath]);
+  const videoComponent = getVideoComponent(filepath); // Set the video component using regex
 
   return (
-    <div className="flex justify-center items-top max-h-[90%] sm:w-[300px] md:w-[315px] lg:w-[900px]">
-      <iframe
-        className="w-full rounded-lg aspect-video"
-        src={videoUrl}
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        title={videoTitle}
-      />
+    <div className="flex justify-center items-top w-[90vw] w-max-[90vw] h-[90vh] ">
+      {videoComponent}
     </div>
   );
+}
+
+function getVideoComponent(filepath: string) {
+  const youtubeRegex = /youtu/;
+  const opencastRegex = /paella/;
+  const vimeoRegex = /vimeo/;
+
+  if (youtubeRegex.test(filepath)) {
+    return <YoutubeVideoHost url={filepath} />;
+  } else if (opencastRegex.test(filepath)) {
+    return <OpencastVideoHost url={filepath} />;
+  } else if (vimeoRegex.test(filepath)) {
+    return <VimeoVideoHost url={filepath} />;
+  } else {
+    return "No Video Component found for given URL" + filepath;
+  }
 }

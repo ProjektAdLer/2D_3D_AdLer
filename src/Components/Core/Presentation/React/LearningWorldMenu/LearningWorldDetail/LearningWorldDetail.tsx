@@ -41,8 +41,9 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
           </h2>
         </div>
         <StyledButton
+          color="highlight"
           shape="freefloatleft"
-          className="self-center mt-2 mb-2 justify-self-center"
+          className="self-center mt-2 mb-2 justify-self-center animate-bounce-once bg-nodehandlecolor"
           onClick={controller.onEnterLearningWorldButtonClicked}
         >
           {"Lernwelt öffnen!"}
@@ -61,7 +62,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
             </div>
           ))}
         {goals === undefined ||
-          (goals && (
+          (goals.length > 0 && (
             <div className="pb-2 border-b border-gray-500">
               <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
                 {goals.length > 1 ? "Lernziele:" : "Lernziel:"}

@@ -9,12 +9,16 @@ export default class LoginComponentController
 {
   constructor(private viewModel: LoginComponentViewModel) {}
 
-  async loginAsync(username: string, password: string): Promise<void> {
-    CoreDIContainer.get<ILoginUseCase>(
-      USECASE_TYPES.ILoginUseCase
-    ).executeAsync({
-      username: username,
-      password: password,
-    });
+  login(username: string, password: string): void {
+    this.viewModel.loginFailed.Value = false;
+
+    CoreDIContainer.get<ILoginUseCase>(USECASE_TYPES.ILoginUseCase)
+      .executeAsync({
+        username: username,
+        password: password,
+      })
+      .catch(() => {
+        this.viewModel.loginFailed.Value = true;
+      });
   }
 }

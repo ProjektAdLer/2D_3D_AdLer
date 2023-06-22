@@ -1,180 +1,113 @@
-import { Vector2, Vector3 } from "@babylonjs/core";
 import { injectable } from "inversify";
 import BUILDER_TYPES from "../../../DependencyInjection/Builders/BUILDER_TYPES";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import IPresentationBuilder from "../../PresentationBuilder/IPresentationBuilder";
 import IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
-import IDoorPresenter from "../Door/IDoorPresenter";
 import LearningSpaceViewModel from "./LearningSpaceViewModel";
 import ILearningSpacePresenter from "./ILearningSpacePresenter";
-import ILearningElementPresenter from "../LearningElements/ILearningElementPresenter";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
-import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
-import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import LearningElementView from "../LearningElements/LearningElementView";
-import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
-import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import IWindowPresenter from "../Window/IWindowPresenter";
-
+import type IDecorationBuilder from "../Decoration/IDecorationBuilder";
+import ILearningElementBuilder from "../LearningElements/ILearningElementBuilder";
+import IStandInDecorationBuilder from "../StandInDecoration/IStandInDecorationBuilder";
+import IDoorBuilder from "../Door/IDoorBuilder";
+import IWindowBuilder from "../Window/IWindowBuilder";
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
-  private doorPresenter: IDoorPresenter;
-  private windowPresenter: IWindowPresenter;
+  private director: IPresentationDirector;
+  private decorationBuilder: IDecorationBuilder;
 
   constructor(private viewModel: LearningSpaceViewModel) {
     if (!this.viewModel) {
       throw new Error("ViewModel is not defined");
     }
-  }
 
-  dispose(): void {
-    CoreDIContainer.get<ILearningWorldPort>(
-      PORT_TYPES.ILearningWorldPort
-    ).unregisterAdapter(this);
-  }
-
-  onLearningSpaceLoaded(spaceTO: LearningSpaceTO): void {
-    this.createAmbience();
-    this.setViewModelData(spaceTO);
-    this.createLearningElements(spaceTO.elements);
-    this.createWindow();
-    this.createDoor();
-  }
-
-  onLearningSpaceScored(spaceScoreTO: LearningSpaceScoreTO): void {
-    if (spaceScoreTO.spaceID !== this.viewModel.id) return;
-    if (spaceScoreTO.currentScore >= spaceScoreTO.requiredScore)
-      this.openDoor();
-  }
-
-  private openDoor(): void {
-    if (!this.doorPresenter) return;
-    this.doorPresenter.openDoor();
-  }
-
-  private setViewModelData(spaceTO: LearningSpaceTO): void {
-    this.viewModel.id = spaceTO.id;
-    this.setLearningSpaceDimensions(spaceTO);
-    this.setLearningSpaceCornersSquare();
-  }
-
-  private setLearningSpaceDimensions(spaceTO: LearningSpaceTO): void {
-    this.viewModel.spaceLength.Value = (spaceTO.elements.length / 2) * 4;
-    this.viewModel.spaceWidth.Value = spaceTO.elements.length > 1 ? 8 : 6;
-  }
-
-  private setLearningSpaceCornersSquare(): void {
-    const spaceLength = this.viewModel.spaceLength.Value;
-    const spaceWidth = this.viewModel.spaceWidth.Value;
-    const wallThickness = this.viewModel.wallThickness.Value;
-    this.viewModel.spaceCornerPoints.Value = [
-      new Vector2(spaceWidth + wallThickness, spaceLength + wallThickness),
-      new Vector2(-spaceWidth - wallThickness, spaceLength + wallThickness),
-      new Vector2(-spaceWidth - wallThickness, -spaceLength - wallThickness),
-      new Vector2(spaceWidth + wallThickness, -spaceLength - wallThickness),
-    ];
-  }
-
-  private createLearningElements(elementTOs: LearningElementTO[]): void {
-    const director = CoreDIContainer.get<IPresentationDirector>(
+    this.director = CoreDIContainer.get<IPresentationDirector>(
       BUILDER_TYPES.IPresentationDirector
     );
-    const elementBuilder = CoreDIContainer.get<IPresentationBuilder>(
-      BUILDER_TYPES.ILearningElementBuilder
+    this.decorationBuilder = CoreDIContainer.get<IDecorationBuilder>(
+      BUILDER_TYPES.IDecorationBuilder
     );
-
-    let elementPositions = this.getLearningElementPositions(elementTOs.length);
-
-    elementTOs.forEach((elementTO) => {
-      director.build(elementBuilder);
-      (
-        elementBuilder.getPresenter() as ILearningElementPresenter
-      ).presentLearningElement(elementTO, elementPositions.shift()!);
-      (elementBuilder.getView() as LearningElementView).setupLearningElement();
-      elementBuilder.reset();
-    });
   }
 
-  private getLearningElementPositions(
-    elementCount: number
-  ): [Vector3, number][] {
-    let positions: [Vector3, number][] = [];
-    let sideAlternation = -1;
-    const sideOffset = 1;
+  async asyncSetupSpace(spaceTO: LearningSpaceTO): Promise<void> {
+    await this.fillLearningElementSlots(spaceTO);
+    this.createWindows();
+    if (this.viewModel.exitDoorPosition) await this.createExitDoor();
+    if (this.viewModel.entryDoorPosition) await this.createEntryDoor();
+    this.decorationBuilder.spaceTemplate = spaceTO.template;
+    await this.director.buildAsync(this.decorationBuilder);
+  }
 
-    for (let i = 0; i < elementCount; i++) {
-      positions.push([
-        new Vector3(
-          this.viewModel.spaceWidth.Value * sideOffset * sideAlternation,
-          this.viewModel.baseHeight.Value,
-          (this.viewModel.spaceLength.Value / (elementCount + 1)) * (i + 1) -
-            this.viewModel.spaceLength.Value / 2
-        ),
-        sideAlternation >= 0 ? 0 : 180,
-      ]);
-      sideAlternation *= -1;
+  private async fillLearningElementSlots(
+    spaceTO: LearningSpaceTO
+  ): Promise<void> {
+    const loadingCompletePromises: Promise<void>[] = [];
+
+    for (let i = 0; i < spaceTO.elements.length; i++) {
+      if (!spaceTO.elements[i]) {
+        // create stand in decoration for empty slots
+        const standInDecorationBuilder =
+          CoreDIContainer.get<IStandInDecorationBuilder>(
+            BUILDER_TYPES.IStandInDecorationBuilder
+          );
+        let elementPosition = this.viewModel.elementPositions.shift()!;
+        standInDecorationBuilder.position = elementPosition[0];
+        standInDecorationBuilder.rotation = elementPosition[1];
+        standInDecorationBuilder.spaceName = spaceTO.name;
+        standInDecorationBuilder.slotNumber = i;
+        loadingCompletePromises.push(
+          this.director.buildAsync(standInDecorationBuilder)
+        );
+      } else {
+        // create learning element for non-empty slots
+        const elementBuilder = CoreDIContainer.get<ILearningElementBuilder>(
+          BUILDER_TYPES.ILearningElementBuilder
+        );
+        elementBuilder.elementData = spaceTO.elements[i]!;
+        elementBuilder.elementPosition =
+          this.viewModel.elementPositions.shift()!;
+        loadingCompletePromises.push(this.director.buildAsync(elementBuilder));
+      }
     }
-    return positions;
+
+    await Promise.all(loadingCompletePromises);
   }
 
-  private createDoor(): void {
-    const director = CoreDIContainer.get<IPresentationDirector>(
-      BUILDER_TYPES.IPresentationDirector
-    );
-    const doorBuilder = CoreDIContainer.get<IPresentationBuilder>(
+  private async createExitDoor(): Promise<void> {
+    const exitDoorBuilder = CoreDIContainer.get<IDoorBuilder>(
       BUILDER_TYPES.IDoorBuilder
     );
-
-    director.build(doorBuilder);
-    this.doorPresenter = doorBuilder.getPresenter() as IDoorPresenter;
-    this.doorPresenter.presentDoor(this.getDoorPosition());
+    let exitDoorPosition = this.viewModel.exitDoorPosition;
+    exitDoorBuilder.position = exitDoorPosition[0];
+    exitDoorBuilder.rotation = exitDoorPosition[1];
+    exitDoorBuilder.spaceID = this.viewModel.id;
+    exitDoorBuilder.isExit = true;
+    await this.director.buildAsync(exitDoorBuilder);
   }
 
-  private getDoorPosition(): [Vector3, number] {
-    const doorPosition = [
-      new Vector3(
-        this.viewModel.doorWidth.Value / 2,
-        this.viewModel.baseHeight.Value,
-        -this.viewModel.spaceLength.Value - this.viewModel.wallThickness.Value
-      ),
-      -90,
-    ];
-    this.viewModel.doorPosition.Value = doorPosition as [Vector3, number];
-    return doorPosition as [Vector3, number];
+  private async createEntryDoor(): Promise<void> {
+    const entryDoorBuilder = CoreDIContainer.get<IDoorBuilder>(
+      BUILDER_TYPES.IDoorBuilder
+    );
+    let entryDoorPosition = this.viewModel.entryDoorPosition;
+    entryDoorBuilder.position = entryDoorPosition[0];
+    entryDoorBuilder.rotation = entryDoorPosition[1];
+    entryDoorBuilder.spaceID = this.viewModel.id;
+    entryDoorBuilder.isExit = false;
+    await this.director.buildAsync(entryDoorBuilder);
   }
 
-  private createAmbience(): void {
-    const director = CoreDIContainer.get<IPresentationDirector>(
-      BUILDER_TYPES.IPresentationDirector
-    );
-    const ambienceBuilder = CoreDIContainer.get<IPresentationBuilder>(
-      BUILDER_TYPES.IAmbienceBuilder
-    );
-
-    director.build(ambienceBuilder);
-  }
-  private createWindow(): void {
-    const director = CoreDIContainer.get<IPresentationDirector>(
-      BUILDER_TYPES.IPresentationDirector
-    );
-    const windowBuilder = CoreDIContainer.get<IPresentationBuilder>(
-      BUILDER_TYPES.IWindowBuilder
-    );
-
-    director.build(windowBuilder);
-    this.windowPresenter = windowBuilder.getPresenter() as IWindowPresenter;
-    this.windowPresenter.presentWindow(this.getWindowPosition());
-  }
-  private getWindowPosition(): [Vector3, number] {
-    const windowPosition = [
-      new Vector3(
-        this.viewModel.windowWidth.Value + 5,
-        this.viewModel.baseHeight.Value,
-        -this.viewModel.spaceLength.Value - this.viewModel.wallThickness.Value
-      ),
-      -90,
-    ];
-    this.viewModel.windowPosition.Value = windowPosition as [Vector3, number];
-    return windowPosition as [Vector3, number];
+  private async createWindows(): Promise<void> {
+    const loadingWindowPromises: Promise<void>[] = [];
+    for (const windowPosition of this.viewModel.windowPositions) {
+      const windowBuilder = CoreDIContainer.get<IWindowBuilder>(
+        BUILDER_TYPES.IWindowBuilder
+      );
+      windowBuilder.position = windowPosition[0];
+      windowBuilder.rotation = windowPosition[1];
+      loadingWindowPromises.push(this.director.buildAsync(windowBuilder));
+    }
+    await Promise.all(loadingWindowPromises);
   }
 }

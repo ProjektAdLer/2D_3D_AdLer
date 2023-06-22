@@ -86,12 +86,18 @@ export default class LoadLearningWorldUseCase
 
     // cumulate element scores for each space
     worldTO.spaces.forEach((space) => {
-      let spaceScores = this.calculateSpaceScore.internalExecute(space.id);
+      let spaceScores = this.calculateSpaceScore.internalExecute({
+        spaceID: space.id,
+        worldID: worldEntity.id,
+      });
       space.currentScore = spaceScores.currentScore;
       space.maxScore = spaceScores.maxScore;
 
       let spaceAvailability =
-        this.calculateSpaceAvailabilityUseCase.internalExecute(space.id);
+        this.calculateSpaceAvailabilityUseCase.internalExecute({
+          spaceID: space.id,
+          worldID: worldEntity.id,
+        });
       space.isAvailable = spaceAvailability.isAvailable;
       space.requirementsString = spaceAvailability.requirementsString;
       space.requirementsSyntaxTree = spaceAvailability.requirementsSyntaxTree;
@@ -151,7 +157,7 @@ export default class LoadLearningWorldUseCase
     const spaceEntities: LearningSpaceEntity[] = [];
 
     apiWorldDataResponse.spaces?.forEach((space) => {
-      const elementEntities: LearningElementEntity[] = space.elements
+      const elementEntities: (LearningElementEntity | null)[] = space.elements
         ? this.createLearningElementEntities(
             worldID,
             space.elements,
@@ -169,6 +175,7 @@ export default class LoadLearningWorldUseCase
             goals: space.goals,
             requirements: space.requirements,
             requiredScore: space.requiredScore,
+            template: space.template,
             parentWorldID: worldID,
           },
           LearningSpaceEntity
@@ -181,34 +188,33 @@ export default class LoadLearningWorldUseCase
 
   private createLearningElementEntities = (
     worldID: number,
-    elements: BackendElementTO[],
+    elements: (BackendElementTO | null)[],
     worldStatus: LearningWorldStatusTO
-  ): LearningElementEntity[] => {
-    const elementEntities: LearningElementEntity[] = [];
+  ): (LearningElementEntity | null)[] => {
+    return elements.map((element) => {
+      if (element === null) return null;
 
-    elements.forEach((element) => {
-      const newElementEntity: LearningElementEntity = {
+      let newElementEntity: LearningElementEntity = {
         id: element.id,
         description: element.description,
         goals: element.goals,
         name: element.name,
         type: element.type,
         value: element.value || 0,
+        model: element.model,
         hasScored:
           worldStatus.elements.find((e) => e.elementID === element.id)
             ?.hasScored || false,
         parentWorldID: worldID,
       };
 
-      elementEntities.push(
-        this.container.createEntity<LearningElementEntity>(
-          newElementEntity,
-          LearningElementEntity
-        )
+      newElementEntity = this.container.createEntity<LearningElementEntity>(
+        newElementEntity,
+        LearningElementEntity
       );
-    });
 
-    return elementEntities;
+      return newElementEntity;
+    });
   };
 
   private createLearningWorldEntity(

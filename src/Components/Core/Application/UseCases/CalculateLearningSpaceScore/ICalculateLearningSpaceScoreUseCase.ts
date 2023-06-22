@@ -6,5 +6,13 @@ import LearningSpaceScoreTO from "../../DataTransferObjects/LearningSpaceScoreTO
 export default interface ICalculateLearningSpaceScoreUseCase
   extends ISynchronousUsecase<void, void> {}
 
+export interface InternalCalculateLearningSpaceScoreUseCaseParams {
+  spaceID: ComponentID;
+  worldID: ComponentID;
+}
+
 export interface IInternalCalculateLearningSpaceScoreUseCase
-  extends IInternalSynchronousUsecase<ComponentID, LearningSpaceScoreTO> {}
+  extends IInternalSynchronousUsecase<
+    InternalCalculateLearningSpaceScoreUseCaseParams,
+    LearningSpaceScoreTO
+  > {}

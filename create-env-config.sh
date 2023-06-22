@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # IMPORTANT: when modifying this file with windows (even with wsl) expect problems with file permissions and line endings
 

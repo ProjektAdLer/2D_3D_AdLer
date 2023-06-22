@@ -1,6 +1,8 @@
 import { inject, injectable } from "inversify";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
-import ICalculateLearningSpaceAvailabilityUseCase from "./ICalculateLearningSpaceAvailabilityUseCase";
+import ICalculateLearningSpaceAvailabilityUseCase, {
+  InternalCalculateLearningSpaceAvailabilityUseCaseParams,
+} from "./ICalculateLearningSpaceAvailabilityUseCase";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import LearningSpaceEntity from "src/Components/Core/Domain/Entities/LearningSpaceEntity";
 import LearningSpaceAvailabilityStringParser from "./Parser/LearningSpaceAvailabilityStringParser";
@@ -21,10 +23,13 @@ export default class CalculateLearningSpaceAvailabilityUseCase
     private calculateLearningSpaceScoreUseCase: IInternalCalculateLearningSpaceScoreUseCase
   ) {}
 
-  internalExecute(spaceID: ComponentID): LearningSpaceAvailabilityTO {
+  internalExecute({
+    spaceID,
+    worldID,
+  }: InternalCalculateLearningSpaceAvailabilityUseCaseParams): LearningSpaceAvailabilityTO {
     const spaces = this.entityContainer.filterEntitiesOfType(
       LearningSpaceEntity,
-      (s) => s.id === spaceID
+      (s) => s.id === spaceID && s.parentWorldID === worldID
     );
     if (spaces.length === 0 || spaces.length > 1) {
       throw new Error(`Could not find space with id ${spaceID}`);
@@ -50,7 +55,10 @@ export default class CalculateLearningSpaceAvailabilityUseCase
     const evaluationMap = new Map<ComponentID, boolean>();
     requirementsIdArray.forEach((id) => {
       const requiredSpaceScore: LearningSpaceScoreTO =
-        this.calculateLearningSpaceScoreUseCase.internalExecute(id);
+        this.calculateLearningSpaceScoreUseCase.internalExecute({
+          spaceID: id,
+          worldID: worldID,
+        });
 
       evaluationMap.set(
         id,

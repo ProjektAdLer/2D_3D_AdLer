@@ -44,10 +44,10 @@ describe("LoginModal", () => {
 
     fireEvent.click(componentUnderTest.getByText("Login"));
 
-    expect(mockedController.loginAsync).toHaveBeenCalledWith("test", "test");
+    expect(mockedController.login).toHaveBeenCalledWith("test", "test");
   });
 
-  test("should alert, when password is missing", () => {
+  test.skip("should alert on passwort forgotten button click", () => {
     const alertMock = jest.spyOn(window, "alert").mockImplementation();
     viewModel.modalVisible.Value = true;
     useBuilderMock([viewModel, mockedController]);

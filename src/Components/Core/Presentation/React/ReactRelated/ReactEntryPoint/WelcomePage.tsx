@@ -4,6 +4,7 @@ import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/Style
 import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
 import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
+import TutorialPdfButton from "~ReactComponents/GeneralComponents/Tutorial/TutorialPdfButton";
 
 export default function WelcomePage() {
   return (
@@ -31,6 +32,11 @@ export default function WelcomePage() {
           Hochschulverbund
         </p>
       </div>
+
+      <TutorialPdfButton
+        className="fixed z-20 right-2 top-2 max-h-3/4"
+        pdfFileUrl={"/manual/adler_user_manual-min.pdf"}
+      />
 
       <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
         <div className="text-lg font-bold text-adlerdarkblue">

@@ -1,1 +1,3 @@
-export default interface ILearningSpaceView {}
+export default interface ILearningSpaceView {
+  asyncSetup(): Promise<void>;
+}

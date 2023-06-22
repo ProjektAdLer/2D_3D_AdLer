@@ -1,5 +1,13 @@
-import { injectable, unmanaged } from "inversify";
+import { injectable, unmanaged as _unmanaged } from "inversify";
 import IPresentationBuilder from "./IPresentationBuilder";
+import { DecoratorTarget } from "inversify/lib/annotation/decorator_utils";
+
+// TODO: Remove after https://github.com/inversify/InversifyJS/issues/1505 is resolved
+export const unmanaged = _unmanaged as () => (
+  target: DecoratorTarget,
+  targetKey: string | undefined,
+  index: number
+) => void;
 
 /**
  * @description Generic class for building ViewModel, Controller, View and Presenter.

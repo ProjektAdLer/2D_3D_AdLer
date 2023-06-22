@@ -9,7 +9,7 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import bind from "bind-decorator";
 import { Mesh, Tools, Vector3 } from "@babylonjs/core";
 
-const windowModelLink = require("../../../../../Assets/3DModel_Window.glb");
+const windowModelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Window.glb");
 
 export default class WindowView extends Readyable {
   private scenePresenter: IScenePresenter;
@@ -21,12 +21,9 @@ export default class WindowView extends Readyable {
       SCENE_TYPES.ScenePresenterFactory
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
-
-    // initial setup
-    this.asyncSetup();
   }
 
-  private async asyncSetup(): Promise<void> {
+  public async asyncSetup(): Promise<void> {
     await this.loadMeshAsync();
     this.positionWindowMesh();
 
@@ -38,17 +35,15 @@ export default class WindowView extends Readyable {
     // reset quaternion rotation because it can prevent mesh.rotate to have any effect
     results.forEach((mesh) => (mesh.rotationQuaternion = null));
 
-    this.viewModel.meshes.Value = results as Mesh[];
+    this.viewModel.meshes = results as Mesh[];
   }
   @bind
   private positionWindowMesh(): void {
-    if (this.viewModel.meshes.Value && this.viewModel.meshes.Value.length > 0) {
-      this.viewModel.meshes.Value[0].position = this.viewModel.position.Value;
-      this.viewModel.meshes.Value[0].rotation = new Vector3(
-        0.0,
-        Tools.ToRadians(this.viewModel.rotation.Value) + Math.PI / 2,
-        0.0
-      );
-    }
+    this.viewModel.meshes[0].position = this.viewModel.position;
+    this.viewModel.meshes[0].rotation = new Vector3(
+      0.0,
+      Tools.ToRadians(this.viewModel.rotation) + Math.PI / 2,
+      0.0
+    );
   }
 }

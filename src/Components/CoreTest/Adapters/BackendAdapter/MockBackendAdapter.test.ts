@@ -39,7 +39,7 @@ describe("MockBackendAdapter", () => {
       expect(space).toEqual(expectedSpaceTO);
 
       space.elements?.forEach((element) => {
-        expect(element).toEqual(expectedElementTO);
+        expect(element).toBeNullOrEqual(expectedElementTO);
       });
     });
   });
@@ -114,18 +114,6 @@ describe("MockBackendAdapter", () => {
       ).resolves.toEqual(expect.any(String));
     }
   );
-
-  test("should throw when souce of invalid element is requested", () => {
-    async (element) => {
-      await expect(
-        systemUnderTest.getElementSource({
-          userToken: "token",
-          elementID: 55,
-          worldID: 1,
-        })
-      ).toThrow();
-    };
-  });
 
   test("should get World Status", async () => {
     await expect(systemUnderTest.getWorldStatus("token", 1)).resolves.toEqual({

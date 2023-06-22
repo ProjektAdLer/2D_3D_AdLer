@@ -11,8 +11,9 @@ import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { logger } from "../../../../../Lib/Logger";
 import type ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
-import type ICalculateLearningWorldScoreUseCase from "../CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
+import type { IInternalCalculateLearningWorldScoreUseCase } from "../CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
+import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 
 @injectable()
 export default class ScoreLearningElementUseCase
@@ -24,7 +25,9 @@ export default class ScoreLearningElementUseCase
     @inject(CORE_TYPES.IBackendAdapter)
     private backendAdapter: IBackendPort,
     @inject(USECASE_TYPES.ICalculateLearningWorldScoreUseCase)
-    private calculateWorldScoreUseCase: ICalculateLearningWorldScoreUseCase,
+    private calculateWorldScoreUseCase: IInternalCalculateLearningWorldScoreUseCase,
+    @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
+    private calculateSpaceScoreUseCase: IInternalCalculateLearningSpaceScoreUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
@@ -36,7 +39,7 @@ export default class ScoreLearningElementUseCase
     const userEntity =
       this.entityContainer.getEntitiesOfType(UserDataEntity)[0];
 
-    if (!userEntity || !userEntity.isLoggedIn) {
+    if (!userEntity?.isLoggedIn) {
       return this.rejectWithWarning(
         "User is not logged in! Trying to score elememt " + elementID
       );
@@ -89,9 +92,18 @@ export default class ScoreLearningElementUseCase
 
     elements[0].hasScored = true;
 
-    this.calculateWorldScoreUseCase.execute();
+    const newWorldScore = this.calculateWorldScoreUseCase.internalExecute({
+      worldID: userLocation.worldID,
+    });
+
+    const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
+      worldID: userLocation.worldID,
+      spaceID: userLocation.spaceID,
+    });
 
     this.worldPort.onLearningElementScored(true, elementID);
+    this.worldPort.onLearningSpaceScored(newSpaceScore);
+    this.worldPort.onLearningWorldScored(newWorldScore);
   }
 
   private rejectWithWarning(message: string, id?: ComponentID): Promise<void> {

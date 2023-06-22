@@ -10,6 +10,7 @@ import LearningSpaceScoreTO from "../../DataTransferObjects/LearningSpaceScoreTO
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 import ICalculateLearningSpaceScoreUseCase, {
   IInternalCalculateLearningSpaceScoreUseCase,
+  InternalCalculateLearningSpaceScoreUseCaseParams,
 } from "./ICalculateLearningSpaceScoreUseCase";
 
 @injectable()
@@ -27,9 +28,11 @@ export default class CalculateLearningSpaceScoreUseCase
     private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
 
-  internalExecute(spaceID: ComponentID): LearningSpaceScoreTO {
-    const result = this.calculateLearningSpaceScore(spaceID);
-    this.worldPort.onLearningSpaceScored(result);
+  internalExecute({
+    spaceID,
+    worldID,
+  }: InternalCalculateLearningSpaceScoreUseCaseParams): LearningSpaceScoreTO {
+    const result = this.calculateLearningSpaceScore(spaceID, worldID);
     return result;
   }
 
@@ -39,18 +42,22 @@ export default class CalculateLearningSpaceScoreUseCase
       throw new Error(`User is not in a space!`);
     }
 
-    const result = this.calculateLearningSpaceScore(userLocation.spaceID);
+    const result = this.calculateLearningSpaceScore(
+      userLocation.spaceID,
+      userLocation.worldID
+    );
 
     this.worldPort.onLearningSpaceScored(result);
   }
 
   private calculateLearningSpaceScore(
-    spaceID: ComponentID
+    spaceID: ComponentID,
+    worldID: ComponentID
   ): LearningSpaceScoreTO {
     const spaces =
       this.entitiyContainer.filterEntitiesOfType<LearningSpaceEntity>(
         LearningSpaceEntity,
-        (e) => e.id === spaceID
+        (e) => e.id === spaceID && e.parentWorldID === worldID
       );
     if (spaces.length === 0 || spaces.length > 1) {
       throw new Error(`Could not find matching space`);
@@ -59,6 +66,9 @@ export default class CalculateLearningSpaceScoreUseCase
 
     let maxPoints = 0;
     const currentScore = space.elements.reduce((acumulator, current) => {
+      // skip empty element slots
+      if (!current) return acumulator;
+
       maxPoints += current.value;
       if (current.hasScored) {
         return acumulator + current.value;

@@ -4,7 +4,6 @@ const BUILDER_TYPES = {
   ILearningElementBuilder: Symbol("ILearningElementBuilder"),
   IDoorBuilder: Symbol("IDoorBuilder"),
   IWindowBuilder: Symbol("IWindowBuilder"),
-  IScorePanelBuilder: Symbol("IScorePanelBuilder"),
   ILoginModalBuilder: Symbol("ILoginModalBuilder"),
   ILearningElementModalBuilder: Symbol("ILearningElementModalBuilder"),
   IAvatarBuilder: Symbol("IAvatarBuilder"),
@@ -33,6 +32,10 @@ const BUILDER_TYPES = {
   IExitModalBuilder: Symbol("IExitModalBuilder"),
   ILearningWorldSelectionBuilder: Symbol("ILearningWorldSelectionBuilder"),
   IAmbienceBuilder: Symbol("IAmbienceBuilder"),
+  ILearningSpaceScorePanelBuilder: Symbol("ILearningSpaceScorePanelBuilder"),
+  ILearningWorldScorePanelBuilder: Symbol("ILearningWorldScorePanelBuilder"),
+  IDecorationBuilder: Symbol("IDecorationBuilder"),
+  IStandInDecorationBuilder: Symbol("IStandInDecorationBuilder"),
 };
 
 export default BUILDER_TYPES;

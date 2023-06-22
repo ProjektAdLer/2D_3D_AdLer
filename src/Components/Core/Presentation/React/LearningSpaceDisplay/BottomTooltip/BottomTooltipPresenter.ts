@@ -1,25 +1,34 @@
 import IBottomTooltipPresenter from "./IBottomTooltipPresenter";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
-import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
-import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
+import {
+  LearningElementTypeStrings,
+  LearningElementTypes,
+} from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { injectable } from "inversify";
 
 @injectable()
 export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
   constructor(private viewModel: BottomTooltipViewModel) {}
 
-  displayExitQueryTooltip(): void {
+  displayDoorTooltip(isExit: boolean): void {
     this.viewModel.show.Value = true;
-    this.viewModel.text.Value = "Raum verlassen?";
     this.viewModel.iconType.Value = LearningElementTypes.notAnElement;
-    this.viewModel.points.Value = undefined;
+    this.viewModel.points.Value = 0;
+    this.viewModel.showPoints.Value = false;
+    if (isExit) this.viewModel.text.Value = "Ausgangstüre";
+    else this.viewModel.text.Value = "Eingangstüre";
   }
 
-  displayLearningElementSummaryTooltip(element: LearningElementTO): void {
+  displayLearningElementSummaryTooltip(elementData: {
+    name: string;
+    type: LearningElementTypeStrings;
+    points: number;
+  }): void {
     this.viewModel.show.Value = true;
-    this.viewModel.text.Value = element.name;
-    this.viewModel.iconType.Value = element.type;
-    this.viewModel.points.Value = element.value;
+    this.viewModel.text.Value = elementData.name;
+    this.viewModel.iconType.Value = elementData.type;
+    this.viewModel.points.Value = elementData.points;
+    this.viewModel.showPoints.Value = true;
   }
 
   hide(): void {

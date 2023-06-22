@@ -1,7 +1,14 @@
 import LearningElementTO from "../../../Core/Application/DataTransferObjects/LearningElementTO";
 import IDSL from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
-import BackendSpaceTO from "src/Components/Core/Application/DataTransferObjects/BackendSpaceTO";
-import BackendWorldTO from "src/Components/Core/Application/DataTransferObjects/BackendWorldTO";
+import BackendWorldTO from "../../../Core/Application/DataTransferObjects/BackendWorldTO";
+import BackendSpaceTO from "../../../Core/Application/DataTransferObjects/BackendSpaceTO";
+import BackendAdapterUtils from "../../../Core/Adapters/BackendAdapter/BackendAdapterUtils";
+import BackendElementTO from "../../../Core/Application/DataTransferObjects/BackendElementTO";
+import {
+  LearningElementModel,
+  LearningElementModelTypeEnums,
+} from "../../../Core/Domain/Types/LearningElementModelTypes";
+import { LearningSpaceTemplateType } from "../../../Core/Domain/Types/LearningSpaceTemplateType";
 
 export const minimalGetWorldDataResponse: BackendWorldTO = {
   worldName: "TestWorld",
@@ -23,8 +30,10 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
           type: "text",
           description: "TestDescription",
           goals: ["TestGoals"],
+          model: LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
         },
       ],
+      template: LearningSpaceTemplateType.L,
     },
   ],
 };
@@ -41,11 +50,12 @@ export const expectedWorldTO: BackendWorldTO = {
 export const expectedSpaceTO: BackendSpaceTO = {
   id: expect.any(Number),
   name: expect.any(String),
-  elements: expect.any(Array),
+  elements: expect.any(Array<BackendElementTO | null>),
   description: expect.any(String),
   goals: expect.arrayContaining([expect.any(String)]),
   requirements: expect.any(String),
   requiredScore: expect.any(Number),
+  template: expect.any(String),
 };
 
 export const expectedElementTO: Partial<LearningElementTO> = {
@@ -55,6 +65,7 @@ export const expectedElementTO: Partial<LearningElementTO> = {
   description: expect.any(String),
   goals: expect.arrayContaining([expect.any(String)]),
   type: expect.any(String),
+  model: expect.any(String),
 };
 
 export const mockDSL: IDSL = {
@@ -89,101 +100,107 @@ export const mockDSL: IDSL = {
         spaceName: "raum1",
         spaceDescription: "rdescription1",
         spaceGoals: ["rgoals1"],
-        spaceContents: [1],
+        spaceSlotContents: [1],
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "",
+        spaceTemplate: "",
+        spaceTemplateStyle: "",
       },
       {
         spaceId: 2,
-
         spaceName: "raum2",
         spaceDescription: "rdescription2",
         spaceGoals: ["rgoals2"],
-        spaceContents: [2],
+        spaceSlotContents: [2],
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "",
+        spaceTemplate: "",
+        spaceTemplateStyle: "",
       },
       {
         spaceId: 3,
-
         spaceName: "raum3",
         spaceDescription: "rdescription3",
         spaceGoals: ["rgoals3"],
-        spaceContents: [3],
+        spaceSlotContents: [3],
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "",
+        spaceTemplate: "",
+        spaceTemplateStyle: "",
       },
       {
         spaceId: 4,
-
         spaceName: "raum4",
         spaceDescription: "rdescription4",
         spaceGoals: ["rgoals4"],
-        spaceContents: [4],
+        spaceSlotContents: [4],
         requiredPointsToComplete: 3,
         requiredSpacesToEnter: "(3)v((2)^(1))",
+        spaceTemplate: "",
+        spaceTemplateStyle: "",
       },
       {
         spaceId: 5,
-
         spaceName: "raum5",
         spaceDescription: "rdescription5",
         spaceGoals: ["rgoals5"],
-        spaceContents: [5],
+        spaceSlotContents: [5],
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "4",
+        spaceTemplate: "",
+        spaceTemplateStyle: "",
       },
     ],
     elements: [
       {
         elementId: 1,
-
         elementName: "bild",
         elementDescription: "bildbesch",
         elementGoals: ["bildgoals"],
         elementCategory: "image",
         elementFileType: "png",
         elementMaxScore: 1,
+        elementModel: "",
       },
       {
         elementId: 2,
-
         elementName: "pdf",
         elementDescription: "pdfbes",
         elementGoals: ["pdfgoa"],
         elementCategory: "pdf",
         elementFileType: "pdf",
         elementMaxScore: 1,
+        elementModel: "",
       },
       {
         elementId: 3,
-
         elementName: "text",
         elementDescription: "textbesch",
         elementGoals: ["textgoa"],
         elementCategory: "text",
         elementFileType: "txt",
         elementMaxScore: 1,
+        elementModel: "",
       },
       {
         elementId: 4,
-
         elementName: "yturl",
         elementDescription: "yt",
         elementGoals: ["goals"],
         elementCategory: "video",
         elementFileType: "url",
         elementMaxScore: 2,
+        elementModel: "",
       },
       {
         elementId: 5,
-
         elementName: "h5pfile",
         elementDescription: "h5pbes",
         elementGoals: ["h5pgoals"],
         elementCategory: "h5p",
         elementFileType: "h5p",
         elementMaxScore: 2,
+        elementModel: "",
       },
     ],
   },
