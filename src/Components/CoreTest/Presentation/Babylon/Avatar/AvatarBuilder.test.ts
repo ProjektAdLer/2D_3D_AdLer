@@ -5,7 +5,7 @@ import AvatarBuilder from "../../../../Core/Presentation/Babylon/Avatar/AvatarBu
 import AvatarPresenter from "../../../../Core/Presentation/Babylon/Avatar/AvatarPresenter";
 import AvatarView from "../../../../Core/Presentation/Babylon/Avatar/AvatarView";
 import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
-import { mock, mockDeep } from "jest-mock-extended";
+import { mock } from "jest-mock-extended";
 import IAvatarController from "../../../../Core/Presentation/Babylon/Avatar/IAvatarController";
 import { waitFor } from "@testing-library/react";
 

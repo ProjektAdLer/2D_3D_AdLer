@@ -1,13 +1,5 @@
-import {
-  AbstractMesh,
-  NullEngine,
-  Quaternion,
-  Scene,
-  Tools,
-  Vector3,
-} from "@babylonjs/core";
-import { mock, mockDeep } from "jest-mock-extended";
-import { setTimeout } from "timers/promises";
+import { AbstractMesh, NullEngine, Scene } from "@babylonjs/core";
+import { mockDeep } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 import AmbienceView from "../../../../Core/Presentation/Babylon/Ambience/AmbienceView";

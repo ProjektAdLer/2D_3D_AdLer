@@ -1,10 +1,7 @@
 import {
-  ArcRotateCamera,
   EventState,
   ICrowd,
-  IKeyboardEvent,
   IMouseEvent,
-  IPointerEvent,
   KeyboardEventTypes,
   KeyboardInfo,
   MeshBuilder,
