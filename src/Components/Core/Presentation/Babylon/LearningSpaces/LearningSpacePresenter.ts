@@ -30,7 +30,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
 
   async asyncSetupSpace(spaceTO: LearningSpaceTO): Promise<void> {
     await this.fillLearningElementSlots(spaceTO);
-    this.createWindows();
+    await this.createWindows();
     if (this.viewModel.exitDoorPosition) await this.createExitDoor();
     if (this.viewModel.entryDoorPosition) await this.createEntryDoor();
     this.decorationBuilder.spaceTemplate = spaceTO.template;
