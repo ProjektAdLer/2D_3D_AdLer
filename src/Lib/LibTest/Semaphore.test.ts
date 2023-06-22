@@ -1,24 +1,20 @@
 import { Semaphore } from "../Semaphore";
 
 describe("Semaphore", () => {
-  beforeEach(() => {
-    var systemUnterTest = new Semaphore("label", 2);
-  });
-
   it("should be able to acquire a lock", async () => {
-    var systemUnterTest = new Semaphore("label", 2);
+    const systemUnterTest = new Semaphore("label", 2);
     const lock = await systemUnterTest.acquire();
     expect(lock).toBeDefined();
   });
 
   it("should be able to release a lock", async () => {
-    var systemUnterTest = new Semaphore("label", 2);
+    const systemUnterTest = new Semaphore("label", 2);
     const lock = await systemUnterTest.acquire();
     lock.release();
   });
 
   it("should be able to acquire a lock twice", async () => {
-    var systemUnterTest = new Semaphore("label", 2);
+    const systemUnterTest = new Semaphore("label", 2);
     const lock = await systemUnterTest.acquire();
     const lock2 = await systemUnterTest.acquire();
     expect(lock).toBeDefined();
@@ -30,7 +26,7 @@ describe("Semaphore", () => {
   });
 
   test("should lock a task until it can be completed", async () => {
-    var systemUnterTest = new Semaphore("label", 1);
+    const systemUnterTest = new Semaphore("label", 1);
     const func1 = async () => {
       const lock = await systemUnterTest.acquire();
       const randomTime = Math.floor(Math.random() * 100);
