@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { logger } from "src/Lib/Logger";
 
-export default function YoutubeVideoHost({ url }: { url: string }) {
+export default function VimeoVideoHost({ url }: { url: string }) {
   const [videoUrl, setVideoUrl] = useState("");
   const [videoTitle, setVideoTitle] = useState("VideoTitle");
 
