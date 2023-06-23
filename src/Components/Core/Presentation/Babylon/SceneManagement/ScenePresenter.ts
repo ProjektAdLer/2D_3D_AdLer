@@ -84,6 +84,7 @@ export default class ScenePresenter implements IScenePresenter {
   }
 
   disposeScene(): void {
+    this.navigationMeshes = [];
     this.sceneDefinition.disposeScene();
   }
 

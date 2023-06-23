@@ -37,6 +37,10 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
       LearningSpaceView,
       LearningSpacePresenter
     );
+  }
+
+  override reset(): void {
+    super.reset();
 
     this.isPresenterCompleted = new Promise((resolve) => {
       this.resolveIsPresenterCompleted = resolve;

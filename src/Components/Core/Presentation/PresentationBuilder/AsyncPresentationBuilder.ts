@@ -54,6 +54,13 @@ export default abstract class AsyncPresentationBuilder<VM, C, V, P>
     });
   }
 
+  override reset(): void {
+    super.reset();
+    this.isCompleted = new Promise<void>((resolve) => {
+      this.resolveIsCompleted = resolve;
+    });
+  }
+
   isCompleted: Promise<void>;
 
   protected resolveIsCompleted: (value: void | PromiseLike<void>) => void;

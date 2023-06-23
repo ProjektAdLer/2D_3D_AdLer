@@ -2,6 +2,7 @@ import { injectable } from "inversify";
 import IPresentationBuilder from "./IPresentationBuilder";
 import IPresentationDirector from "./IPresentationDirector";
 import IAsyncPresentationBuilder from "./IAsyncPresentationBuilder";
+import { logger } from "../../../../Lib/Logger";
 
 @injectable()
 export default class PresentationDirector implements IPresentationDirector {
@@ -14,6 +15,8 @@ export default class PresentationDirector implements IPresentationDirector {
     builder.buildController();
     builder.buildPresenter();
     builder.buildView();
+
+    logger.log("Concluded build process of " + builder.constructor.name);
   }
 
   public buildAsync(builder: IAsyncPresentationBuilder): Promise<void> {
@@ -25,6 +28,10 @@ export default class PresentationDirector implements IPresentationDirector {
     builder.buildController();
     builder.buildPresenter();
     builder.buildView();
+
+    builder.isCompleted.then(() =>
+      logger.log("Concluded async build process of " + builder.constructor.name)
+    );
 
     return builder.isCompleted;
   }
