@@ -54,11 +54,11 @@ export default function LoginModal(props: {
           />
 
           {loginFailed && (
-            <div>
-              <p className="m-1 text-xs font-bold text-red-500">
+            <div className="bg-red-100 rounded-lg">
+              <p className="m-1 text-xs font-bold text-center text-red-500">
                 Login fehlgeschlagen.
               </p>
-              <p className="m-1 text-xs font-bold text-red-500">
+              <p className="m-1 text-xs font-bold text-center text-red-500">
                 Bitte überprüfe deine Eingaben.
               </p>
             </div>

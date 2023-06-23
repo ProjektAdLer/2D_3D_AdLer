@@ -1,5 +1,6 @@
 import React from "react";
 import StyledContainer from "./StyledContainer";
+import StyledButton from "./StyledButton";
 
 type Props = Partial<{
   hasFooter?: boolean;
@@ -41,16 +42,16 @@ export default function StyledModal({
           <div className="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit">
             <div className="w-full">{title}</div>
             {canClose && (
-              <button
+              <StyledButton
                 onClick={onClose}
-                className="px-2 py-1 text-xs text-adlerdarkblue border-b-4 border-r-4 rounded-lg roboto-black lg:text-xl border-adlerdarkblue border-l-[1px] border-t-[1px] active:border-0 hover:cursor-pointer bg-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue"
+                className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
               >
                 X
-              </button>
+              </StyledButton>
             )}
           </div>
           {/*Content*/}
-          <div className="overflow-auto rounded-lg font-regular h-fit px-1">
+          <div className="px-1 overflow-auto rounded-lg font-regular h-fit">
             {children}
           </div>
           {/*Optional Footer*/}
