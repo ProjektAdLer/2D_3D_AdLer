@@ -25,6 +25,7 @@ export default class AmbienceView {
     this.viewModel.meshes.Value.forEach((mesh) => {
       mesh.translate(new Vector3(0, -0.05, 0), 1);
       mesh.alwaysSelectAsActiveMesh = true; //Fixes Background Animations being Culled, but may cause Performance Issues, Fix with Changing Camera Rotation Frustum
+      mesh.isPickable = false;
     });
   }
 }
