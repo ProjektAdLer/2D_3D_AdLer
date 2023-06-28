@@ -2,32 +2,27 @@ import IAsyncPresentationBuilder from "../../../Core/Presentation/PresentationBu
 import IPresentationBuilder from "../../../Core/Presentation/PresentationBuilder/IPresentationBuilder";
 
 export default class TestBuilder implements IPresentationBuilder {
-  reset(): void {}
-  buildViewModel(): void {}
-  buildController(): void {}
-  buildView(): void {}
-  buildPresenter(): void {}
-  getPresenter() {}
-  getController() {}
-  getViewModel() {}
-  getView() {}
+  reset = jest.fn();
+  buildViewModel = jest.fn();
+  buildController = jest.fn();
+  buildView = jest.fn();
+  buildPresenter = jest.fn();
+  getPresenter = jest.fn();
+  getController = jest.fn();
+  getViewModel = jest.fn();
+  getView = jest.fn();
 }
 
 export class AsyncTestBuilder implements IAsyncPresentationBuilder {
-  constructor() {
-    this.isCompleted = new Promise<void>((resolve) => {
-      this.resolvePromise = resolve;
-    });
-  }
-  isCompleted: Promise<void>;
-  resolvePromise: (value: void | PromiseLike<void>) => void;
-  reset(): void {}
-  buildViewModel(): void {}
-  buildController(): void {}
-  buildView(): void {}
-  buildPresenter(): void {}
-  getPresenter() {}
-  getController() {}
-  getViewModel() {}
-  getView() {}
+  isCompleted: Promise<void> = Promise.resolve();
+  resolvePromise = jest.fn();
+  reset = jest.fn();
+  buildViewModel = jest.fn();
+  buildController = jest.fn();
+  buildView = jest.fn();
+  buildPresenter = jest.fn();
+  getPresenter = jest.fn();
+  getController = jest.fn();
+  getViewModel = jest.fn();
+  getView = jest.fn();
 }

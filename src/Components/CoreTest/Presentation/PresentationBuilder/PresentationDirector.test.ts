@@ -1,8 +1,6 @@
 import PresentationDirector from "../../../Core/Presentation/PresentationBuilder/PresentationDirector";
 import TestBuilder, { AsyncTestBuilder } from "./TestBuilder";
 
-jest.mock("./TestBuilder");
-
 describe("PresentationDirector", () => {
   let systemUnderTest: PresentationDirector;
 
