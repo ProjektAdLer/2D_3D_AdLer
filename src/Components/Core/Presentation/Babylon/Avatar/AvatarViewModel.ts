@@ -23,6 +23,7 @@ export default class AvatarViewModel {
     pathOptimizationRange: 0.0,
     separationWeight: 1.0,
   };
+  public readonly pointerMovementThreshold: number = 0.3;
   public keyMovementTarget: Vector3 = Vector3.Zero();
   public pointerMovementTarget: Vector3 = Vector3.Zero();
 }

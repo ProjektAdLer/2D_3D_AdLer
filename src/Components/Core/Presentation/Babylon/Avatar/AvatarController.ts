@@ -46,25 +46,32 @@ export default class AvatarController implements IAvatarController {
   @bind
   private applyInputs(): void {
     if (!this.viewModel.keyMovementTarget.equals(Vector3.Zero())) {
-      this.navigation.Crowd.agentGoto(
-        this.viewModel.agentIndex,
-        this.navigation.Plugin.getClosestPoint(
-          this.viewModel.parentNode.position.add(
-            this.viewModel.keyMovementTarget
+      if (this.viewModel.pointerMovementThreshold)
+        this.navigation.Crowd.agentGoto(
+          this.viewModel.agentIndex,
+          this.navigation.Plugin.getClosestPoint(
+            this.viewModel.parentNode.position.add(
+              this.viewModel.keyMovementTarget
+            )
           )
-        )
-      );
+        );
 
       this.debug_drawPath(this.viewModel.keyMovementTarget);
 
       this.viewModel.keyMovementTarget = Vector3.Zero();
     } else if (!this.viewModel.pointerMovementTarget.equals(Vector3.Zero())) {
-      this.navigation.Crowd.agentGoto(
-        this.viewModel.agentIndex,
-        this.navigation.Plugin.getClosestPoint(
-          this.viewModel.pointerMovementTarget
-        )
+      const targetOnNavMesh = this.navigation.Plugin.getClosestPoint(
+        this.viewModel.pointerMovementTarget
       );
+      const movementDistance = targetOnNavMesh
+        .subtract(this.viewModel.parentNode.position)
+        .length();
+
+      if (movementDistance > this.viewModel.pointerMovementThreshold)
+        this.navigation.Crowd.agentGoto(
+          this.viewModel.agentIndex,
+          targetOnNavMesh
+        );
 
       this.debug_drawPath(this.viewModel.pointerMovementTarget);
     }
@@ -109,7 +116,6 @@ export default class AvatarController implements IAvatarController {
 
   @bind
   private processPointerEvent(pointerInfo: PointerInfo) {
-    // quit if not right mouse button down or if no mesh was hit
     if (
       pointerInfo.type !== PointerEventTypes.POINTERTAP ||
       pointerInfo.pickInfo === null ||
