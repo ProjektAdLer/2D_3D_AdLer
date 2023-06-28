@@ -32,15 +32,19 @@ export default class LearningElementController
   }
 
   @bind
-  clicked(event?: ActionEvent | undefined): void {
-    const pointerType = (event?.sourceEvent as PointerEvent).pointerType;
-    if (pointerType === "mouse") {
-      CoreDIContainer.get<ILoadLearningElementUseCase>(
-        USECASE_TYPES.ILoadLearningElementUseCase
-      ).executeAsync(this.viewModel.id);
-    } else if (pointerType === "touch") {
-      this.displayTooltip();
-    }
+  picked(event?: ActionEvent | undefined): void {
+    this.displayTooltip();
+    // const pointerType = (event?.sourceEvent as PointerEvent).pointerType;
+    // if (pointerType === "mouse") {
+    //   this.startLoadElementUseCase();
+    // } else if (pointerType === "touch") {
+    //   this.displayTooltip();
+    // }
+  }
+
+  @bind
+  doublePicked(): void {
+    this.startLoadElementUseCase();
   }
 
   private displayTooltip(): void {
@@ -51,5 +55,11 @@ export default class LearningElementController
       type: this.viewModel.type,
       points: this.viewModel.value,
     });
+  }
+
+  private startLoadElementUseCase() {
+    CoreDIContainer.get<ILoadLearningElementUseCase>(
+      USECASE_TYPES.ILoadLearningElementUseCase
+    ).executeAsync(this.viewModel.id);
   }
 }

@@ -143,7 +143,7 @@ export default class LearningElementView {
     // register interaction callbacks
     this.registerActionWithAllMeshes(
       ActionManager.OnPickTrigger,
-      this.controller.clicked
+      this.controller.picked
     );
     this.registerActionWithAllMeshes(
       ActionManager.OnPointerOverTrigger,
@@ -152,6 +152,10 @@ export default class LearningElementView {
     this.registerActionWithAllMeshes(
       ActionManager.OnPointerOutTrigger,
       this.controller.pointerOut
+    );
+    this.registerActionWithAllMeshes(
+      ActionManager.OnDoublePickTrigger,
+      this.controller.doublePicked
     );
 
     // add model meshes to highlight layer
