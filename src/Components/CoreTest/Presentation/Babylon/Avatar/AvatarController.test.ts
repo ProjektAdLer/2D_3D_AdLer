@@ -107,6 +107,12 @@ describe("AvatarController", () => {
     () => {
       viewModel.keyMovementTarget = Vector3.Zero();
       viewModel.pointerMovementTarget = new Vector3(42, 42, 42);
+      viewModel.parentNode = new TransformNode("parentNode");
+      viewModel.parentNode.position = new Vector3(1, 1, 1);
+
+      recastJSPluginMock.getClosestPoint.mockReturnValue(
+        new Vector3(42, 42, 42)
+      );
 
       systemUnderTest["applyInputs"]();
 
@@ -117,6 +123,19 @@ describe("AvatarController", () => {
       );
     }
   );
+
+  test("applyInputs does not apply the pointerMovementTarget to the avatar when the movement distance is below the movementThreshold", () => {
+    viewModel.keyMovementTarget = Vector3.Zero();
+    viewModel.pointerMovementTarget = new Vector3(42, 42, 42);
+    viewModel.parentNode = new TransformNode("parentNode");
+    viewModel.parentNode.position = new Vector3(42, 42, 42);
+
+    recastJSPluginMock.getClosestPoint.mockReturnValue(new Vector3(42, 42, 42));
+
+    systemUnderTest["applyInputs"]();
+
+    expect(crowdMock.agentGoto).toHaveBeenCalledTimes(0);
+  });
 
   test(
     "applyInputs applies the keyMovementTarget to the avatar " +
