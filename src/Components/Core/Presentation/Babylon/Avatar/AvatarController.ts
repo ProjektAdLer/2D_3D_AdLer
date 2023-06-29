@@ -186,8 +186,7 @@ export default class AvatarController implements IAvatarController {
       1,
       () => (
         (this.movementIndicator.isVisible = false),
-        this.scenePresenter.Scene.stopAnimation(this.movementIndicator),
-        console.log("done", this.movementIndicatorAnimationX)
+        this.scenePresenter.Scene.stopAnimation(this.movementIndicator)
       )
     );
   }

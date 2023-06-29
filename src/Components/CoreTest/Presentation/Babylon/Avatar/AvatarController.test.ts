@@ -1,14 +1,18 @@
 import {
+  AbstractMesh,
   EventState,
   ICrowd,
   IMouseEvent,
   KeyboardEventTypes,
   KeyboardInfo,
+  Mesh,
   MeshBuilder,
+  NullEngine,
   PickingInfo,
   PointerEventTypes,
   PointerInfo,
   RecastJSPlugin,
+  Scene,
   TransformNode,
   Vector3,
 } from "@babylonjs/core";
@@ -23,6 +27,7 @@ import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavig
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 
 jest.mock("@babylonjs/core/Meshes");
+jest.mock("@babylonjs/core/Materials");
 
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
@@ -76,6 +81,9 @@ describe("AvatarController", () => {
     viewModel = new AvatarViewModel();
     viewModel.agentIndex = 0;
 
+    const mockMesh = mock<Mesh>();
+    mockMesh.isVisible = false;
+    jest.spyOn(MeshBuilder, "CreateTorus").mockReturnValue(mockMesh);
     systemUnderTest = new AvatarController(viewModel);
   });
 
