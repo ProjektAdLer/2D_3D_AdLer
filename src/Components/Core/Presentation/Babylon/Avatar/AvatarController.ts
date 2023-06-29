@@ -55,7 +55,7 @@ export default class AvatarController implements IAvatarController {
     // create a movement indicator
     this.movementIndicator = MeshBuilder.CreateTorus(
       "movementIndicator",
-      { diameter: 0.5, thickness: 0.1 },
+      { diameter: 0.2, thickness: 0.03 },
       this.scenePresenter.Scene
     );
     this.movementIndicatorMaterial = new StandardMaterial(
