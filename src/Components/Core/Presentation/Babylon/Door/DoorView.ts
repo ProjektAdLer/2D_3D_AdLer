@@ -4,6 +4,7 @@ import {
   Color3,
   ExecuteCodeAction,
   Mesh,
+  Sound,
   Tools,
   Vector3,
 } from "@babylonjs/core";
@@ -19,9 +20,12 @@ import DoorViewModel from "./DoorViewModel";
 import IDoorController from "./IDoorController";
 
 const modelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Door.glb");
+const soundLink = require("../../../../../Assets/Sounds/fanfare_troll.mp3");
 
 export default class DoorView extends Readyable {
   private scenePresenter: IScenePresenter;
+
+  private openTheDoorSound: Sound;
 
   constructor(
     private viewModel: DoorViewModel,
@@ -33,6 +37,12 @@ export default class DoorView extends Readyable {
       SCENE_TYPES.ScenePresenterFactory
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
+
+    this.openTheDoorSound = new Sound(
+      "openTheDoor",
+      soundLink,
+      this.scenePresenter.Scene
+    );
 
     viewModel.isOpen.subscribe(this.onIsOpenChanged);
   }
@@ -94,6 +104,7 @@ export default class DoorView extends Readyable {
           0,
           45
         );
+        this.openTheDoorSound.play();
       });
     }
   }
