@@ -8,7 +8,6 @@ import SideBar from "~ReactComponents/LearningSpaceDisplay/SideBar/SideBar";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
 import LearningSpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/LearningSpaceSceneDefinition";
-import LearningSpaceCompletionModal from "~ReactComponents/LearningSpaceDisplay/LearningSpaceCompletionModal/LearningSpaceCompletionModal";
 import ExitModal from "~ReactComponents/LearningSpaceDisplay/ExitModal/ExitModal";
 import TutorialPdfButton from "~ReactComponents/GeneralComponents/Tutorial/TutorialPdfButton";
 import LearningSpaceScorePanel from "~ReactComponents/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanel";
@@ -32,7 +31,6 @@ export default function LearningSpace() {
         <BottomTooltip />
         <LearningElementModal className="z-10" />
         <ExitModal className="z-20" />
-        <LearningSpaceCompletionModal className="z-10" />
         <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
           <div className="text-lg font-bold text-adlerdarkblue">
             <h1>

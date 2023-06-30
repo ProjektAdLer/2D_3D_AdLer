@@ -19,9 +19,6 @@ const BUILDER_TYPES = {
   ILearningSpaceSelectionBuilder: Symbol("ILearningSpaceSelectionBuilder"),
   ILearningSpaceDetailBuilder: Symbol("ILearningSpaceDetailBuilder"),
   ILearningWorldDetailBuilder: Symbol("ILearningWorldDetailBuilder"),
-  ILearningSpaceCompletionModalBuilder: Symbol(
-    "ILearningSpaceCompletionModalBuilder"
-  ),
   ILearningWorldCompletionModalBuilder: Symbol(
     "ILearningWorldCompletionModalBuilder"
   ),

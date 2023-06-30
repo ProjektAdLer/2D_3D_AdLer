@@ -44,10 +44,6 @@ jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceNamePanel/LearningSpaceNamePanel",
   () => "mocked"
 );
-jest.mock(
-  "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceCompletionModal/LearningSpaceCompletionModal",
-  () => "mocked"
-);
 
 describe("LearningSpace.tsx", () => {
   test("should render", () => {

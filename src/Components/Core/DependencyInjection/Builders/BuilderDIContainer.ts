@@ -19,7 +19,6 @@ import LearningSpaceGoalPanelBuilder from "~ReactComponents/LearningSpaceDisplay
 import MenuHeaderBarBuilder from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBarBuilder";
 import SpaceSelectionBuilder from "~ReactComponents/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelectionBuilder";
 import LearningSpaceDetailBuilder from "~ReactComponents/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetailBuilder";
-import LearningSpaceCompletionModalBuilder from "~ReactComponents/LearningSpaceDisplay/LearningSpaceCompletionModal/LearningSpaceCompletionModalBuilder";
 import LearningWorldCompletionModalBuilder from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModalBuilder";
 import SideBarBuilder from "~ReactComponents/LearningSpaceDisplay/SideBar/SideBarBuilder";
 import LearningWorldMenuButtonBuilder from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonBuilder";
@@ -89,9 +88,6 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldDetailBuilder).to(
     LearningWorldDetailBuilder
   );
-  bind<IPresentationBuilder>(
-    BUILDER_TYPES.ILearningSpaceCompletionModalBuilder
-  ).to(LearningSpaceCompletionModalBuilder);
   bind<IPresentationBuilder>(
     BUILDER_TYPES.ILearningWorldCompletionModalBuilder
   ).to(LearningWorldCompletionModalBuilder);
