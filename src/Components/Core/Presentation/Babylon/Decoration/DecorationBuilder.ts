@@ -19,7 +19,7 @@ export default class DecorationBuilder extends AsyncPresentationBuilder<
   }
 
   buildViewModel(): void {
-    if (!this.spaceTemplate)
+    if (this.spaceTemplate === undefined)
       throw new Error(
         "SpaceTemplate is not defined. Set before using the builder."
       );

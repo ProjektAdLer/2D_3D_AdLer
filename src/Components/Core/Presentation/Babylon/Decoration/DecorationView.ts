@@ -33,6 +33,8 @@ export default class DecorationView {
       case LearningSpaceTemplateType.R8:
         results = await this.scenePresenter.loadModel(modelLink2x3, true);
         break;
+      default:
+        return;
     }
     this.viewModel.meshes.Value = results as Mesh[];
     this.viewModel.meshes.Value.forEach((mesh) => {
