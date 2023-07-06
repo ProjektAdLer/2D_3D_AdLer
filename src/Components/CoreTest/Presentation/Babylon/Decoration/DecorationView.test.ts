@@ -74,4 +74,16 @@ describe("DecorationView", () => {
 
     expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
   });
+
+  test("asyncSetup/loadMeshAsync returns without calling loadModel when templateType is None", async () => {
+    scenePresenterMock.loadModel.mockResolvedValue([
+      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+    ]);
+
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.None;
+    await systemUnderTest.asyncSetup();
+
+    expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(0);
+  });
 });
