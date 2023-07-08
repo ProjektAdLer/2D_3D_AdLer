@@ -5,7 +5,7 @@ import axios from "axios";
 import { logger } from "../../../../../../../../Lib/Logger";
 
 const url = "https://vimeo.com/236357509";
-jest.mock("src/Lib/Logger");
+jest.mock("../../../../../../../../Lib/Logger");
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
@@ -13,7 +13,7 @@ describe("VimeoVideoHost", () => {
   test.skip("renders an iframe with the provided URL", () => {
     mockedAxios.get.mockResolvedValue({
       data: {
-        html: "https://vimeo.com/236357509",
+        html: "src=https://player.vimeo.com/video/782061723?app_id=122963",
         title: "title",
       },
     });
@@ -39,7 +39,6 @@ describe("VimeoVideoHost", () => {
       data: {
         html: "url",
         title: "title",
-        test: "test",
       },
     });
 
