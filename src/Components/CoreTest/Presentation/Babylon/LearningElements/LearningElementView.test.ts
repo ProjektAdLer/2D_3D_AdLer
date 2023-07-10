@@ -119,7 +119,7 @@ describe("LearningElementView", () => {
         [
           expect.objectContaining({
             trigger: ActionManager.OnPickTrigger,
-            func: controller.clicked,
+            func: controller.picked,
           }),
         ],
       ])
