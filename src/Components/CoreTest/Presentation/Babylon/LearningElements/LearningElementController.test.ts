@@ -93,15 +93,6 @@ describe("LearningElementController", () => {
 
   test("doublePicked calls IUIPort.startLoadElementUseCase", () => {
     viewModel.id = 42;
-    const mockedEvent: ActionEvent = {
-      sourceEvent: {
-        pointerType: "mouse",
-      },
-      source: undefined,
-      pointerX: 0,
-      pointerY: 0,
-      meshUnderPointer: null,
-    };
 
     systemUnderTest.doublePicked();
 
