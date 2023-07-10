@@ -34,12 +34,6 @@ export default class LearningElementController
   @bind
   picked(event?: ActionEvent | undefined): void {
     this.displayTooltip();
-    // const pointerType = (event?.sourceEvent as PointerEvent).pointerType;
-    // if (pointerType === "mouse") {
-    //   this.startLoadElementUseCase();
-    // } else if (pointerType === "touch") {
-    //   this.displayTooltip();
-    // }
   }
 
   @bind

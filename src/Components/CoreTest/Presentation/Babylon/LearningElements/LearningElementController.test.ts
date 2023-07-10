@@ -72,7 +72,7 @@ describe("LearningElementController", () => {
     );
   });
 
-  test("clicked calls IElementStartedUseCase.executeAsync when pointerType is mouse", () => {
+  test("picked displays the bottom tooltip", () => {
     viewModel.id = 42;
     const mockedEvent: ActionEvent = {
       sourceEvent: {
@@ -84,16 +84,18 @@ describe("LearningElementController", () => {
       meshUnderPointer: null,
     };
 
-    systemUnderTest.clicked(mockedEvent);
+    systemUnderTest.picked(mockedEvent);
 
-    expect(elementStartedUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
-    expect(elementStartedUseCaseMock.executeAsync).toHaveBeenCalledWith(42);
+    expect(
+      bottomTooltipPresenterMock.displayLearningElementSummaryTooltip
+    ).toHaveBeenCalledTimes(1);
   });
 
-  test("clicked calls IUIPort.displayElementSummaryTooltip when pointerType is touch", () => {
+  test("doublePicked calls IUIPort.startLoadElementUseCase", () => {
+    viewModel.id = 42;
     const mockedEvent: ActionEvent = {
       sourceEvent: {
-        pointerType: "touch",
+        pointerType: "mouse",
       },
       source: undefined,
       pointerX: 0,
@@ -101,10 +103,8 @@ describe("LearningElementController", () => {
       meshUnderPointer: null,
     };
 
-    systemUnderTest.clicked(mockedEvent);
+    systemUnderTest.doublePicked();
 
-    expect(
-      bottomTooltipPresenterMock.displayLearningElementSummaryTooltip
-    ).toHaveBeenCalledTimes(1);
+    expect(elementStartedUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
   });
 });
