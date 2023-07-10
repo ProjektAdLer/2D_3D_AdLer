@@ -37,21 +37,13 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
       LearningSpaceView,
       LearningSpacePresenter
     );
+
+    this.setupPromises();
   }
 
   override reset(): void {
     super.reset();
-
-    this.isPresenterCompleted = new Promise((resolve) => {
-      this.resolveIsPresenterCompleted = resolve;
-    });
-    this.isViewCompleted = new Promise((resolve) => {
-      this.resolveIsViewCompleted = resolve;
-    });
-    this.isCompleted = Promise.all([
-      this.isPresenterCompleted,
-      this.isViewCompleted,
-    ]).then(() => Promise.resolve());
+    this.setupPromises();
   }
 
   override buildViewModel(): void {
@@ -106,6 +98,19 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
         console.log(error);
       }
     );
+  }
+
+  private setupPromises(): void {
+    this.isPresenterCompleted = new Promise((resolve) => {
+      this.resolveIsPresenterCompleted = resolve;
+    });
+    this.isViewCompleted = new Promise((resolve) => {
+      this.resolveIsViewCompleted = resolve;
+    });
+    this.isCompleted = Promise.all([
+      this.isPresenterCompleted,
+      this.isViewCompleted,
+    ]).then(() => Promise.resolve());
   }
 
   private setDimensionsStrategy(templateType: LearningSpaceTemplateType): void {
