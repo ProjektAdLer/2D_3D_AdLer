@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { RenderResult, act, render, waitFor } from "@testing-library/react";
 import React from "react";
 import VimeoVideoHost from "./../../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/VimeoVideoHost";
 import axios from "axios";
@@ -10,19 +10,25 @@ jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("VimeoVideoHost", () => {
-  test.skip("renders an iframe with the provided URL", () => {
+  test("renders an iframe with the provided URL", () => {
     mockedAxios.get.mockResolvedValue({
       data: {
-        html: "src=https://player.vimeo.com/video/782061723?app_id=122963",
-        title: "title",
+        html: '<iframe src="https://player.vimeo.com/video/782061723?app_id=122963" width="426" height="240" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="title.mp4"></iframe>',
+        title: "TestTitle",
       },
     });
-    const { container } = render(<VimeoVideoHost url={url} />);
-    const iframe = container.getElementsByClassName(
-      "w-full rounded-lg aspect-video"
-    )[0];
-    expect(iframe).toHaveAttribute("src", url);
+
+    let container: RenderResult;
+    act(() => {
+      container = render(<VimeoVideoHost url={url} />);
+    });
+
+    waitFor(() => {
+      const iframe = container!.getByTitle("TestTitle");
+      expect(iframe).toHaveAttribute("src", url);
+    });
   });
+
   test("returns null if no URL is provided", () => {
     mockedAxios.get.mockResolvedValue({
       data: {
@@ -30,11 +36,16 @@ describe("VimeoVideoHost", () => {
         title: "Title",
       },
     });
-    // @ts-ignore
-    const { container } = render(<VimeoVideoHost />);
-    expect(container.firstChild).toBeNull();
+
+    let container: HTMLElement;
+    act(() => {
+      container = render(<VimeoVideoHost url="" />).container;
+    });
+
+    expect(container!.firstChild).toBeNull();
   });
-  test.skip("logs error if srcArray is not of length 2", async () => {
+
+  test("logs error if srcArray is not of length 2", async () => {
     mockedAxios.get.mockResolvedValue({
       data: {
         html: "url",
@@ -42,10 +53,12 @@ describe("VimeoVideoHost", () => {
       },
     });
 
-    render(<VimeoVideoHost url={url} />);
+    act(() => {
+      render(<VimeoVideoHost url={url} />);
+    });
 
-    //test should work as is, coverage shows it goes through error messages, yet nothing gets logged ~fk
-
-    expect(logger.error).toBeCalledTimes(1);
+    waitFor(() => {
+      expect(logger.error).toBeCalledTimes(1);
+    });
   });
 });
