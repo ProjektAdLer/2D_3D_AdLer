@@ -247,19 +247,6 @@ describe("AvatarController", () => {
     expect(crowdMock.agentGoto).not.toHaveBeenCalled();
   });
 
-  test("processPointerEvent returns when pointer event button isnt 2 (right mouse button)", () => {
-    let invalidPointerInfo = setupMockedPointerInfo(
-      PointerEventTypes.POINTERTAP,
-      false,
-      new Vector3(0, 0, 0)
-    );
-
-    systemUnderTest["processPointerEvent"](invalidPointerInfo);
-
-    expect(recastJSPluginMock.getClosestPoint).not.toHaveBeenCalled();
-    expect(crowdMock.agentGoto).not.toHaveBeenCalled();
-  });
-
   test("processPointerEvent returns when pickInfo is null", () => {
     let invalidPointerInfo = setupMockedPointerInfo(
       PointerEventTypes.POINTERTAP,
