@@ -7,11 +7,7 @@ import {
   MeshBuilder,
   PointerEventTypes,
   PointerInfo,
-  StandardMaterial,
   Vector3,
-  Animation,
-  Color3,
-  Mesh,
 } from "@babylonjs/core";
 import bind from "bind-decorator";
 import SCENE_TYPES, {
@@ -25,6 +21,8 @@ import IScenePresenter from "../SceneManagement/IScenePresenter";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
+import IMovementIndicator from "../MovementIndicator/IMovementIndicator";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 const validKeys = ["w", "a", "s", "d"];
 
@@ -32,12 +30,7 @@ export default class AvatarController implements IAvatarController {
   private scenePresenter: IScenePresenter;
   private navigation: INavigation;
   private pathLine: LinesMesh;
-
-  //movement indicator
-  private movementIndicator: Mesh;
-  private movementIndicatorMaterial: StandardMaterial;
-  private movementIndicatorAnimationX: Animation;
-  private movementIndicatorAnimationZ: Animation;
+  private movementIndicator: IMovementIndicator;
 
   constructor(private viewModel: AvatarViewModel) {
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
@@ -46,82 +39,46 @@ export default class AvatarController implements IAvatarController {
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
 
+    this.movementIndicator = CoreDIContainer.get<IMovementIndicator>(
+      PRESENTATION_TYPES.IMovementIndicator
+    );
+
     this.scenePresenter.Scene.onPointerObservable.add(this.processPointerEvent);
     this.scenePresenter.Scene.onKeyboardObservable.add(
       this.processKeyboardEvent
     );
     this.scenePresenter.Scene.onBeforeRenderObservable.add(this.applyInputs);
-
-    // create a movement indicator
-    this.movementIndicator = MeshBuilder.CreateTorus(
-      "movementIndicator",
-      { diameter: 0.2, thickness: 0.03 },
-      this.scenePresenter.Scene
-    );
-    this.movementIndicatorMaterial = new StandardMaterial(
-      "movementIndicatorMaterial",
-      this.scenePresenter.Scene
-    );
-    this.movementIndicatorAnimationX = new Animation(
-      "movementIndicatorAnimation",
-      "scaling.x",
-      100,
-      Animation.ANIMATIONTYPE_FLOAT
-    );
-    this.movementIndicatorAnimationZ = new Animation(
-      "movementIndicatorAnimation",
-      "scaling.z",
-      100,
-      Animation.ANIMATIONTYPE_FLOAT
-    );
-    this.movementIndicator.isVisible = false;
-
-    this.movementIndicatorAnimationX.setKeys([
-      { frame: 0, value: 1 },
-      { frame: 50, value: 2 },
-      { frame: 100, value: 1 },
-    ]);
-    this.movementIndicatorAnimationZ.setKeys([
-      { frame: 0, value: 1 },
-      { frame: 50, value: 2 },
-      { frame: 100, value: 1 },
-    ]);
-    this.movementIndicator.animations = [
-      this.movementIndicatorAnimationX,
-      this.movementIndicatorAnimationZ,
-    ];
-    this.movementIndicatorMaterial.diffuseColor = new Color3(0.66, 0.83, 0.98);
   }
 
   @bind
   private applyInputs(): void {
     if (!this.viewModel.keyMovementTarget.equals(Vector3.Zero())) {
-      if (this.viewModel.pointerMovementThreshold)
-        this.navigation.Crowd.agentGoto(
-          this.viewModel.agentIndex,
-          this.viewModel.keyMovementTarget
-        );
+      this.navigation.Crowd.agentGoto(
+        this.viewModel.agentIndex,
+        this.viewModel.keyMovementTarget
+      );
 
       this.debug_drawPath(this.viewModel.keyMovementTarget);
 
       this.viewModel.keyMovementTarget = Vector3.Zero();
     } else if (!this.viewModel.pointerMovementTarget.equals(Vector3.Zero())) {
-      const targetOnNavMesh = this.viewModel.pointerMovementTarget;
-
-      const movementDistance = targetOnNavMesh
+      const movementDistance = this.viewModel.pointerMovementTarget
         .subtract(this.viewModel.parentNode.position)
         .length();
 
-      if (movementDistance > this.viewModel.pointerMovementThreshold)
+      if (movementDistance > this.viewModel.pointerMovementThreshold) {
         this.navigation.Crowd.agentGoto(
           this.viewModel.agentIndex,
-          targetOnNavMesh
+          this.viewModel.pointerMovementTarget
         );
 
-      this.debug_drawPath(this.viewModel.pointerMovementTarget);
+        this.movementIndicator.display(this.viewModel.pointerMovementTarget);
+
+        this.debug_drawPath(this.viewModel.pointerMovementTarget);
+      }
+
+      this.viewModel.pointerMovementTarget = Vector3.Zero();
     }
-    this.viewModel.pointerMovementTarget = Vector3.Zero();
-    this.viewModel.keyMovementTarget = Vector3.Zero();
   }
 
   @bind
@@ -171,24 +128,8 @@ export default class AvatarController implements IAvatarController {
     )
       return;
 
-    this.viewModel.pointerMovementTarget = pointerInfo.pickInfo.pickedPoint;
     this.viewModel.pointerMovementTarget =
-      this.navigation.Plugin.getClosestPoint(
-        this.viewModel.pointerMovementTarget
-      );
-    this.movementIndicator.position = this.viewModel.pointerMovementTarget;
-    this.movementIndicator.isVisible = true;
-    this.scenePresenter.Scene.beginAnimation(
-      this.movementIndicator,
-      0,
-      100,
-      false,
-      1,
-      () => {
-        this.movementIndicator.isVisible = false;
-        this.scenePresenter.Scene.stopAnimation(this.movementIndicator);
-      }
-    );
+      this.navigation.Plugin.getClosestPoint(pointerInfo.pickInfo.pickedPoint);
   }
 
   private debug_drawPath(target: Vector3): void {
@@ -196,7 +137,7 @@ export default class AvatarController implements IAvatarController {
 
     let pathPoints = this.navigation.Plugin.computePath(
       this.navigation.Crowd.getAgentPosition(this.viewModel.agentIndex),
-      this.navigation.Plugin.getClosestPoint(target)
+      target
     );
     this.pathLine = MeshBuilder.CreateDashedLines(
       "navigation path",

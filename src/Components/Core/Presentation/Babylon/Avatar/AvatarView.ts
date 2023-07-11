@@ -105,7 +105,7 @@ export default class AvatarView {
     }
   }
 
-  // TODO: this debug function needs to be excluded from the build
+  // TODO: this debug function should be excluded from the build
   private velocityLine: LinesMesh;
   private counter: number = 0;
 

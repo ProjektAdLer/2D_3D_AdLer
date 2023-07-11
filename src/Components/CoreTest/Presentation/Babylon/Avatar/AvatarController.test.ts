@@ -1,18 +1,14 @@
 import {
-  AbstractMesh,
   EventState,
   ICrowd,
   IMouseEvent,
   KeyboardEventTypes,
   KeyboardInfo,
-  Mesh,
   MeshBuilder,
-  NullEngine,
   PickingInfo,
   PointerEventTypes,
   PointerInfo,
   RecastJSPlugin,
-  Scene,
   TransformNode,
   Vector3,
 } from "@babylonjs/core";
@@ -81,9 +77,6 @@ describe("AvatarController", () => {
     viewModel = new AvatarViewModel();
     viewModel.agentIndex = 0;
 
-    const mockMesh = mock<Mesh>();
-    mockMesh.isVisible = false;
-    jest.spyOn(MeshBuilder, "CreateTorus").mockReturnValue(mockMesh);
     systemUnderTest = new AvatarController(viewModel);
   });
 

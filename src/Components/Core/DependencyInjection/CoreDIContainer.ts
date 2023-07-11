@@ -8,6 +8,7 @@ import INavigation from "../Presentation/Babylon/Navigation/INavigation";
 import Navigation from "../Presentation/Babylon/Navigation/Navigation";
 import NavigationConfiguration from "../Presentation/Babylon/Navigation/NavigationConfiguration";
 import ScenesDIContainer from "./Scenes/ScenesDIContainer";
+import PresentationDIContainer from "./Presentation/PresentationDIContainer";
 
 const CoreDIContainer = new Container();
 
@@ -23,5 +24,6 @@ CoreDIContainer.load(UseCaseDIContainer);
 CoreDIContainer.load(PortsDIContainer);
 CoreDIContainer.load(BuilderDIContainer);
 CoreDIContainer.load(ScenesDIContainer);
+CoreDIContainer.load(PresentationDIContainer);
 
 export default CoreDIContainer;
