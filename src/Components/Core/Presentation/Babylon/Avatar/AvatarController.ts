@@ -47,16 +47,24 @@ export default class AvatarController implements IAvatarController {
     this.scenePresenter.Scene.onKeyboardObservable.add(
       this.processKeyboardEvent
     );
-    this.scenePresenter.Scene.onBeforeRenderObservable.add(this.applyInputs);
+    this.scenePresenter.Scene.onBeforeRenderObservable.add(
+      this.onPreSceneRender
+    );
   }
 
   @bind
+  private onPreSceneRender() {
+    this.resetMovementIndicator();
+    this.applyInputs();
+  }
+
   private applyInputs(): void {
     if (!this.viewModel.keyMovementTarget.equals(Vector3.Zero())) {
       this.navigation.Crowd.agentGoto(
         this.viewModel.agentIndex,
         this.viewModel.keyMovementTarget
       );
+      this.viewModel.finalMovementTarget = this.viewModel.keyMovementTarget;
 
       this.debug_drawPath(this.viewModel.keyMovementTarget);
     } else if (!this.viewModel.pointerMovementTarget.equals(Vector3.Zero())) {
@@ -69,6 +77,8 @@ export default class AvatarController implements IAvatarController {
           this.viewModel.agentIndex,
           this.viewModel.pointerMovementTarget
         );
+        this.viewModel.finalMovementTarget =
+          this.viewModel.pointerMovementTarget;
 
         this.movementIndicator.display(this.viewModel.pointerMovementTarget);
 
@@ -77,6 +87,17 @@ export default class AvatarController implements IAvatarController {
     }
     this.viewModel.pointerMovementTarget = Vector3.Zero();
     this.viewModel.keyMovementTarget = Vector3.Zero();
+  }
+
+  private resetMovementIndicator(): void {
+    if (
+      this.viewModel.parentNode.position.equalsWithEpsilon(
+        this.viewModel.finalMovementTarget,
+        0.5
+      )
+    ) {
+      this.movementIndicator.hide();
+    }
   }
 
   @bind

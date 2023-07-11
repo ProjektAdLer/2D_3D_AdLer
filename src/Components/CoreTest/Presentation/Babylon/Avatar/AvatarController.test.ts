@@ -107,7 +107,7 @@ describe("AvatarController", () => {
   test("observer callback is added to onBeforeRenderObservable in the constructor", () => {
     expect(
       scenePresenterMock.Scene.onBeforeRenderObservable.add
-    ).toHaveBeenCalledWith(systemUnderTest["applyInputs"]);
+    ).toHaveBeenCalledWith(systemUnderTest["onPreSceneRender"]);
   });
 
   test(
