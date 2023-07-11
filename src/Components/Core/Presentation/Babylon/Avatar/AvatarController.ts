@@ -59,7 +59,7 @@ export default class AvatarController implements IAvatarController {
   }
 
   private applyInputs(): void {
-    if (!this.viewModel.keyMovementTarget.equals(Vector3.Zero())) {
+    if (this.viewModel.keyMovementTarget !== null) {
       this.navigation.Crowd.agentGoto(
         this.viewModel.agentIndex,
         this.viewModel.keyMovementTarget
@@ -67,7 +67,7 @@ export default class AvatarController implements IAvatarController {
       this.viewModel.finalMovementTarget = this.viewModel.keyMovementTarget;
 
       this.debug_drawPath(this.viewModel.keyMovementTarget);
-    } else if (!this.viewModel.pointerMovementTarget.equals(Vector3.Zero())) {
+    } else if (this.viewModel.pointerMovementTarget !== null) {
       const movementDistance = this.viewModel.pointerMovementTarget
         .subtract(this.viewModel.parentNode.position)
         .length();
@@ -85,18 +85,20 @@ export default class AvatarController implements IAvatarController {
         this.debug_drawPath(this.viewModel.pointerMovementTarget);
       }
     }
-    this.viewModel.pointerMovementTarget = Vector3.Zero();
-    this.viewModel.keyMovementTarget = Vector3.Zero();
+    this.viewModel.pointerMovementTarget = null;
+    this.viewModel.keyMovementTarget = null;
   }
 
   private resetMovementIndicator(): void {
     if (
+      this.viewModel.finalMovementTarget !== null &&
       this.viewModel.parentNode.position.equalsWithEpsilon(
         this.viewModel.finalMovementTarget,
         0.5
       )
     ) {
       this.movementIndicator.hide();
+      this.viewModel.finalMovementTarget = null;
     }
   }
 
@@ -111,7 +113,11 @@ export default class AvatarController implements IAvatarController {
     )
       return;
 
-    this.viewModel.keyMovementTarget = this.viewModel.keyMovementTarget
+    const baseTarget =
+      this.viewModel.keyMovementTarget !== null
+        ? this.viewModel.keyMovementTarget
+        : Vector3.Zero();
+    this.viewModel.keyMovementTarget = baseTarget
       .add(
         this.viewModel.parentNode
           .getChildren<ArcRotateCamera>()![0]

@@ -1,6 +1,7 @@
 import {
   IAgentParameters,
   Mesh,
+  Nullable,
   TransformNode,
   Vector3,
 } from "@babylonjs/core";
@@ -24,7 +25,7 @@ export default class AvatarViewModel {
     separationWeight: 1.0,
   };
   public readonly pointerMovementThreshold: number = 0.3;
-  public keyMovementTarget: Vector3 = Vector3.Zero();
-  public pointerMovementTarget: Vector3 = Vector3.Zero();
-  public finalMovementTarget: Vector3 = Vector3.Zero();
+  public keyMovementTarget: Nullable<Vector3> = null;
+  public pointerMovementTarget: Nullable<Vector3> = null;
+  public finalMovementTarget: Nullable<Vector3> = null;
 }

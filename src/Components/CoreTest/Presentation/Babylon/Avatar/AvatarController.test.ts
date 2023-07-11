@@ -110,12 +110,17 @@ describe("AvatarController", () => {
     ).toHaveBeenCalledWith(systemUnderTest["onPreSceneRender"]);
   });
 
+  test("onPreSceneRender", () => {
+    systemUnderTest["onPreSceneRender"]();
+  });
+
   test(
     "applyInputs applies the pointerMovementTarget to the avatar " +
       "when keyMovementTarget is zero and pointerMovementTarget is non-zero",
     () => {
-      viewModel.keyMovementTarget = Vector3.Zero();
-      viewModel.pointerMovementTarget = new Vector3(42, 42, 42);
+      const target = new Vector3(42, 42, 42);
+      viewModel.keyMovementTarget = null;
+      viewModel.pointerMovementTarget = target;
       viewModel.parentNode = new TransformNode("parentNode");
       viewModel.parentNode.position = new Vector3(1, 1, 1);
 
@@ -126,11 +131,14 @@ describe("AvatarController", () => {
       systemUnderTest["applyInputs"]();
 
       expect(crowdMock.agentGoto).toHaveBeenCalledTimes(1);
+      expect(crowdMock.agentGoto).toHaveBeenCalledWith(
+        viewModel.agentIndex,
+        target
+      );
     }
   );
 
   test("applyInputs does not apply the pointerMovementTarget to the avatar when the movement distance is below the movementThreshold", () => {
-    viewModel.keyMovementTarget = Vector3.Zero();
     viewModel.pointerMovementTarget = new Vector3(42, 42, 42);
     viewModel.parentNode = new TransformNode("parentNode");
     viewModel.parentNode.position = new Vector3(42, 42, 42);
@@ -146,18 +154,23 @@ describe("AvatarController", () => {
     "applyInputs applies the keyMovementTarget to the avatar " +
       "when keyMovementTarget is non-zero",
     () => {
-      viewModel.pointerMovementTarget = Vector3.Zero();
-      viewModel.keyMovementTarget = new Vector3(41, 41, 41);
+      const target = new Vector3(41, 41, 41);
+      viewModel.pointerMovementTarget = null;
+      viewModel.keyMovementTarget = target;
       viewModel.parentNode = new TransformNode("parentNode");
       viewModel.parentNode.position = new Vector3(1, 1, 1);
 
       systemUnderTest["applyInputs"]();
 
       expect(crowdMock.agentGoto).toHaveBeenCalledTimes(1);
+      expect(crowdMock.agentGoto).toHaveBeenCalledWith(
+        viewModel.agentIndex,
+        target
+      );
     }
   );
 
-  test("applyInputs resets keyMovementTarget and pointerMovementTarget to zero", () => {
+  test("applyInputs resets keyMovementTarget and pointerMovementTarget to null", () => {
     viewModel.keyMovementTarget = new Vector3(41, 41, 41);
     viewModel.pointerMovementTarget = new Vector3(42, 42, 42);
     viewModel.parentNode = new TransformNode("parentNode");
@@ -165,12 +178,18 @@ describe("AvatarController", () => {
 
     systemUnderTest["applyInputs"]();
 
-    expect(viewModel.keyMovementTarget.x).toBe(0);
-    expect(viewModel.keyMovementTarget.y).toBe(0);
-    expect(viewModel.keyMovementTarget.z).toBe(0);
-    expect(viewModel.pointerMovementTarget.x).toBe(0);
-    expect(viewModel.pointerMovementTarget.y).toBe(0);
-    expect(viewModel.pointerMovementTarget.z).toBe(0);
+    expect(viewModel.keyMovementTarget).toBeNull();
+    expect(viewModel.pointerMovementTarget).toBeNull();
+  });
+
+  test("resetMovementIndicator calls hide on the indicator when the parentNode position and the finalMovementTarget are close enough", () => {
+    viewModel.finalMovementTarget = new Vector3(1, 1, 1.2);
+    viewModel.parentNode = new TransformNode("parentNode");
+    viewModel.parentNode.position = new Vector3(1, 1, 1);
+
+    systemUnderTest["resetMovementIndicator"]();
+
+    expect(movementIndicatorMock.hide).toHaveBeenCalledTimes(1);
   });
 
   test("processKeyboardEvent returns if the keyboard event type isn't KEYDOWN", () => {
@@ -215,6 +234,10 @@ describe("AvatarController", () => {
     expect(viewModel.keyMovementTarget.x).toBe(0);
     expect(viewModel.keyMovementTarget.y).toBe(0);
     expect(viewModel.keyMovementTarget.z).toBe(1);
+    expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledTimes(1);
+    expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledWith(
+      new Vector3(42, 42, 42)
+    );
   });
 
   test.each([
@@ -234,7 +257,7 @@ describe("AvatarController", () => {
     }
   );
 
-  test("processPointerEvent returns when pointer event type isn't POINTERDOWN", () => {
+  test("processPointerEvent returns when pointer event type isn't POINTERTAP", () => {
     let invalidPointerInfo = setupMockedPointerInfo(
       PointerEventTypes.POINTERMOVE,
       false,
@@ -273,17 +296,25 @@ describe("AvatarController", () => {
     expect(crowdMock.agentGoto).not.toHaveBeenCalled();
   });
 
-  test.skip("processPointerEvent sets the pointerMovementTarget in the viewModel", () => {
+  test("processPointerEvent sets the pointerMovementTarget in the viewModel", () => {
     // prevent execution of debug code
     config.isDebug = false;
 
-    const pointerInfo = setupMockedPointerInfo();
-    systemUnderTest["processPointerEvent"](pointerInfo);
-    //should set the pointerMovementTarget to 42,42,42
+    const pointerInfo = setupMockedPointerInfo(
+      PointerEventTypes.POINTERTAP,
+      false,
+      new Vector3(42, 42, 42)
+    );
+    recastJSPluginMock.getClosestPoint.mockReturnValueOnce(
+      new Vector3(42, 42, 42)
+    );
 
-    expect(viewModel.pointerMovementTarget.x).toBe(42);
-    expect(viewModel.pointerMovementTarget.y).toBe(42);
-    expect(viewModel.pointerMovementTarget.z).toBe(42);
+    systemUnderTest["processPointerEvent"](pointerInfo);
+
+    expect(viewModel.pointerMovementTarget).not.toBeNull();
+    expect(viewModel.pointerMovementTarget!.x).toBe(42);
+    expect(viewModel.pointerMovementTarget!.y).toBe(42);
+    expect(viewModel.pointerMovementTarget!.z).toBe(42);
     expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledTimes(1);
     expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledWith(
       new Vector3(42, 42, 42)
