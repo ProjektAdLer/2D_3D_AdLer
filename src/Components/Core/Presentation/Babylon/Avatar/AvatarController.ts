@@ -59,8 +59,6 @@ export default class AvatarController implements IAvatarController {
       );
 
       this.debug_drawPath(this.viewModel.keyMovementTarget);
-
-      this.viewModel.keyMovementTarget = Vector3.Zero();
     } else if (!this.viewModel.pointerMovementTarget.equals(Vector3.Zero())) {
       const movementDistance = this.viewModel.pointerMovementTarget
         .subtract(this.viewModel.parentNode.position)
@@ -76,9 +74,9 @@ export default class AvatarController implements IAvatarController {
 
         this.debug_drawPath(this.viewModel.pointerMovementTarget);
       }
-
-      this.viewModel.pointerMovementTarget = Vector3.Zero();
     }
+    this.viewModel.pointerMovementTarget = Vector3.Zero();
+    this.viewModel.keyMovementTarget = Vector3.Zero();
   }
 
   @bind

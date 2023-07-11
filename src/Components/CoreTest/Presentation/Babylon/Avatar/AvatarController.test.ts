@@ -21,9 +21,14 @@ import AvatarController from "../../../../Core/Presentation/Babylon/Avatar/Avata
 import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
+import MovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/MovementIndicator";
+import IMovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/IMovementIndicator";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 jest.mock("@babylonjs/core/Meshes");
 jest.mock("@babylonjs/core/Materials");
+
+const movementIndicatorMock = mock<MovementIndicator>();
 
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
@@ -71,6 +76,9 @@ describe("AvatarController", () => {
     CoreDIContainer.rebind<INavigation>(CORE_TYPES.INavigation).toConstantValue(
       navigationMock
     );
+    CoreDIContainer.rebind<IMovementIndicator>(
+      PRESENTATION_TYPES.IMovementIndicator
+    ).toConstantValue(movementIndicatorMock);
   });
 
   beforeEach(() => {
@@ -241,7 +249,7 @@ describe("AvatarController", () => {
 
   test("processPointerEvent returns when pointer event button isnt 2 (right mouse button)", () => {
     let invalidPointerInfo = setupMockedPointerInfo(
-      PointerEventTypes.POINTERDOWN,
+      PointerEventTypes.POINTERTAP,
       false,
       new Vector3(0, 0, 0)
     );
@@ -254,7 +262,7 @@ describe("AvatarController", () => {
 
   test("processPointerEvent returns when pickInfo is null", () => {
     let invalidPointerInfo = setupMockedPointerInfo(
-      PointerEventTypes.POINTERDOWN,
+      PointerEventTypes.POINTERTAP,
       true,
       new Vector3(0, 0, 0)
     );
@@ -267,7 +275,7 @@ describe("AvatarController", () => {
 
   test("processPointerEvent returns when pickInfo.pickedPoint is null", () => {
     let invalidPointerInfo = setupMockedPointerInfo(
-      PointerEventTypes.POINTERDOWN,
+      PointerEventTypes.POINTERTAP,
       false,
       null
     );
