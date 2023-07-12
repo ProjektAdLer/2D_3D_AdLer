@@ -94,9 +94,10 @@ export default class LearningSpaceSceneDefinition
     await this.director.buildAsync(this.avatarBuilder);
   }
 
-  // override disposeScene(): void {
-  //   super.disposeScene();
-  // }
+  override disposeScene(): void {
+    super.disposeScene();
+    this.navigation.reset();
+  }
 
   @bind
   private async loadAvatarPreTask(): Promise<void> {

@@ -10,4 +10,5 @@ export default interface INavigation extends IReadyable {
    * Should be initially called after all meshes have been loaded into the scene. Calling this method multiple times will break the agents registered to the crowd.
    */
   setupNavigation(): Promise<void>;
+  reset(): void;
 }

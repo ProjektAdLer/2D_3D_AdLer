@@ -95,4 +95,8 @@ export default class Navigation extends Readyable implements INavigation {
     this.resolveIsReady();
     lock.release();
   }
+
+  reset(): void {
+    this.resetIsReady();
+  }
 }
