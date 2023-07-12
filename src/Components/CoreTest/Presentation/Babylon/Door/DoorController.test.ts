@@ -1,4 +1,3 @@
-import { ActionEvent } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import DoorController from "../../../../Core/Presentation/Babylon/Door/DoorController";
@@ -55,37 +54,16 @@ describe("DoorController", () => {
     expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
   });
 
-  test("clicked calls getLearningSpacePrecursorAndSuccessorUseCase.execute when pointerType is mouse", () => {
-    const mockedEvent: ActionEvent = {
-      sourceEvent: {
-        pointerType: "mouse",
-      },
-      source: undefined,
-      pointerX: 0,
-      pointerY: 0,
-      meshUnderPointer: null,
-    };
-
-    systemUnderTest.clicked(mockedEvent);
+  test("double picked calls getLearningSpacePrecursorAndSuccessorUseCase.execute when pointerType is mouse", () => {
+    systemUnderTest.doublePicked();
 
     expect(
       getLearningSpacePrecursorAndSuccessorUseCaseMock.execute
     ).toHaveBeenCalledTimes(1);
   });
 
-  test("clicked calls BottomTooltipPresenter.displayExitQueryTooltip when pointerType is touch", () => {
-    const mockedEvent: ActionEvent = {
-      sourceEvent: {
-        pointerType: "touch",
-      },
-      source: undefined,
-      pointerX: 0,
-      pointerY: 0,
-      meshUnderPointer: null,
-    };
-
-    systemUnderTest.clicked(mockedEvent);
-
+  test("picked displays the bottom tooltip", () => {
+    systemUnderTest.picked();
     expect(bottomTooltipPresenterMock.displayDoorTooltip).toHaveBeenCalledTimes(
       1
     );
