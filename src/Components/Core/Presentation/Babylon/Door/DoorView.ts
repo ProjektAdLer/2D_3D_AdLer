@@ -121,7 +121,7 @@ export default class DoorView extends Readyable {
       mesh.actionManager.registerAction(
         new ExecuteCodeAction(
           ActionManager.OnPickTrigger,
-          this.controller.clicked
+          this.controller.picked
         )
       );
       mesh.actionManager.registerAction(
@@ -134,6 +134,12 @@ export default class DoorView extends Readyable {
         new ExecuteCodeAction(
           ActionManager.OnPointerOutTrigger,
           this.controller.pointerOut
+        )
+      );
+      mesh.actionManager.registerAction(
+        new ExecuteCodeAction(
+          ActionManager.OnDoublePickTrigger,
+          this.controller.doublePicked
         )
       );
     });

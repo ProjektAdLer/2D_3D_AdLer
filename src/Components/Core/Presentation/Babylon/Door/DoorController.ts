@@ -33,16 +33,26 @@ export default class DoorController implements IDoorController {
   }
 
   @bind
-  clicked(event?: ActionEvent | undefined): void {
-    const pointerType = (event?.sourceEvent as PointerEvent).pointerType;
-
-    if (pointerType === "mouse") {
-      CoreDIContainer.get<IGetLearningSpacePrecursorAndSuccessorUseCase>(
-        USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
-      ).execute();
-      this.exitModalPresenter.open(this.viewModel.isExit);
-    } else if (pointerType === "touch") {
-      this.bottomTooltipPresenter.displayDoorTooltip(this.viewModel.isExit);
-    }
+  picked(): void {
+    this.bottomTooltipPresenter.displayDoorTooltip(this.viewModel.isExit);
   }
+
+  @bind
+  doublePicked(): void {
+    CoreDIContainer.get<IGetLearningSpacePrecursorAndSuccessorUseCase>(
+      USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
+    ).execute();
+    this.exitModalPresenter.open(this.viewModel.isExit);
+  }
+
+  // @bind
+  // clicked(event?: ActionEvent | undefined): void {
+  //   const pointerType = (event?.sourceEvent as PointerEvent).pointerType;
+
+  //   if (pointerType === "mouse") {
+
+  //   } else if (pointerType === "touch") {
+  //     this.bottomTooltipPresenter.displayDoorTooltip(this.viewModel.isExit);
+  //   }
+  // }
 }
