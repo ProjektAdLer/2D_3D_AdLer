@@ -113,10 +113,7 @@ export default class AvatarController implements IAvatarController {
     )
       return;
 
-    const baseTarget =
-      this.viewModel.keyMovementTarget !== null
-        ? this.viewModel.keyMovementTarget
-        : Vector3.Zero();
+    const baseTarget = this.viewModel.keyMovementTarget ?? Vector3.Zero();
     this.viewModel.keyMovementTarget = baseTarget
       .add(
         this.viewModel.parentNode
