@@ -10,17 +10,24 @@ export default abstract class Readyable {
   /**
    * Promise that resolves when the class is ready. Use isReady.then() to wait for the class to be ready.
    */
-  public readonly isReady: Promise<void>;
+  public get IsReady(): Promise<void> {
+    return this.isReady;
+  }
+  private isReady: Promise<void>;
 
   /**
    * Call this method when the initialization is done.
    */
   protected resolveIsReady: (value: void | PromiseLike<void>) => void;
 
-  constructor() {
+  protected resetIsReady(): void {
     this.isReady = new Promise((resolve) => {
       this.resolveIsReady = resolve;
     });
+  }
+
+  constructor() {
+    this.resetIsReady();
   }
 }
 
@@ -28,5 +35,5 @@ export default abstract class Readyable {
  * Use this interface to expose isReady to other classes that need to wait for the class extending Readyable to be ready.
  */
 export interface IReadyable {
-  readonly isReady: Promise<void>;
+  readonly IsReady: Promise<void>;
 }

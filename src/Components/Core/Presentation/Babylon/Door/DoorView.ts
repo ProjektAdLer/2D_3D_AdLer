@@ -98,7 +98,7 @@ export default class DoorView extends Readyable {
   @bind
   private onIsOpenChanged(newIsOpen: boolean): void {
     if (newIsOpen) {
-      this.isReady.then(() => {
+      this.IsReady.then(() => {
         this.scenePresenter.Scene.beginAnimation(
           this.viewModel.meshes[0],
           0,

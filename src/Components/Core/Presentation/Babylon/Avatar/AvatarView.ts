@@ -39,7 +39,7 @@ export default class AvatarView {
 
   public async asyncSetup(): Promise<void> {
     await this.loadAvatarAsync();
-    await this.navigation.isReady.then(this.setupAvatarNavigation);
+    await this.navigation.IsReady.then(this.setupAvatarNavigation);
   }
 
   private async loadAvatarAsync(): Promise<void> {
