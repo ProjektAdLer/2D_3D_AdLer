@@ -42,12 +42,21 @@ export default function LearningWorldCompletionModal({
             Lernwelt bestanden, herzlichen Glückwunsch!
           </p>
           {evaluationLink && (
-            <a
-              className="text-blue-500 hover:text-blue-700"
-              href={evaluationLink}
-            >
-              Hier geht es zur Evaluation
-            </a>
+            <div>
+              <div className="flex justify-center">
+                <a
+                  className="m-8 mt-2 text-2xl font-bold underline text-adlergreen"
+                  href={evaluationLink}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Fragebogen.
+                </a>
+              </div>
+              <div className="flex justify-center m-2 font-bold">
+                <p>Vielen Dank für Ihre Unterstützung!</p>
+              </div>
+            </div>
           )}
         </div>
       </div>
