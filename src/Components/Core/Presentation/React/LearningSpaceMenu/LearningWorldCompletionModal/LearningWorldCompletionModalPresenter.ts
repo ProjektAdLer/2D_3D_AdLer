@@ -11,5 +11,6 @@ export default class LearningWorldCompletionModalPresenter
     this.viewModel.showModal.Value = world.spaces.every(
       (space) => space.currentScore >= space.requiredScore
     );
+    this.viewModel.evaluationLink.Value = world.evaluationLink;
   }
 }
