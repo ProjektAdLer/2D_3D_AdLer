@@ -177,6 +177,7 @@ export default class MockBackendAdapter implements IBackendPort {
       worldDescription:
         "Small World with only one topic and one space but with all elements",
       worldGoals: ["Weltziel 1/3", "Weltziel 2/3", "Weltziel 3/3"],
+      evaluationLink: "https://www.th-ab.de",
       topics: [
         {
           topicId: 7,

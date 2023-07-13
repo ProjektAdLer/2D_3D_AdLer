@@ -20,9 +20,10 @@ export default class BackendAdapterUtils {
 
     const response: BackendWorldTO = {
       worldName: dsl.world.worldName,
-      goals: dsl.world.worldGoals || [""],
+      goals: dsl.world.worldGoals ?? [""],
       spaces: spaces,
-      description: dsl.world.worldDescription,
+      description: dsl.world.worldDescription ?? "",
+      evaluationLink: dsl.world.evaluationLink ?? "",
     };
 
     return response;
@@ -53,8 +54,8 @@ export default class BackendAdapterUtils {
           if (elementId === null) return null;
           else return elements.find((element) => element.id === elementId);
         }),
-        description: space.spaceDescription,
-        goals: space.spaceGoals || [""],
+        description: space.spaceDescription ?? "",
+        goals: space.spaceGoals ?? [""],
         requirements: space.requiredSpacesToEnter,
         requiredScore: space.requiredPointsToComplete,
         template: template,
@@ -76,9 +77,9 @@ export default class BackendAdapterUtils {
         return {
           id: element.elementId,
           description: element.elementDescription,
-          goals: element.elementGoals || [""],
+          goals: element.elementGoals ?? [""],
           name: element.elementName,
-          type: element.elementCategory,
+          type: element.elementCategory ?? "",
           value: element.elementMaxScore || 0,
           model: model,
         } as BackendElementTO;

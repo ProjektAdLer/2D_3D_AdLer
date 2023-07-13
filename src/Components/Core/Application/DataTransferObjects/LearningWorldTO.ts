@@ -7,4 +7,5 @@ export default class LearningWorldTO {
   spaces: LearningSpaceTO[];
   goals: string[];
   description: string;
+  evaluationLink: string;
 }

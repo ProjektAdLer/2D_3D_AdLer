@@ -229,6 +229,7 @@ export default class LoadLearningWorldUseCase
         goals: apiWorldDataResponse.goals,
         id: worldID,
         description: apiWorldDataResponse.description,
+        evaluationLink: apiWorldDataResponse.evaluationLink,
       },
       LearningWorldEntity
     );

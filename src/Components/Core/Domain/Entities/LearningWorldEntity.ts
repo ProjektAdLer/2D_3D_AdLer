@@ -7,4 +7,5 @@ export default class LearningWorldEntity {
   goals: string[];
   id: ComponentID;
   description: string;
+  evaluationLink: string;
 }
