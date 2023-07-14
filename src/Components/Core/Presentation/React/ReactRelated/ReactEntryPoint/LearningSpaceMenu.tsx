@@ -9,8 +9,8 @@ import useIsMobilePortrait from "../CustomHooks/useIsMobilePortrait";
 export default function LearningSpaceMenu() {
   return (
     <React.Fragment>
-      <div className="flex flex-col min-h-screen bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
-        <div className="grid order-2 min-h-full grid-cols-2 grid-rows-1 grow lg:rounded-lg">
+      <div className="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
+        <div className="grid order-2 grid-cols-2 grid-rows-1 grow lg:rounded-lg">
           <SpaceSelection className="col-start-1 p-2 border-r-2 border-dotted lg:pb-8 border-adlerdarkblue" />
           <LearningSpaceDetail className="flex col-start-2 p-2 lg:p-8" />
         </div>

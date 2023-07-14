@@ -59,6 +59,10 @@
   } */
 }
 
+body {
+  background-color: #a1c8e5;
+}
+
 /*Styles für die Anzeige des Inspectors*/
 
 #inspector-host,

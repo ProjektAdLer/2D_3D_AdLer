@@ -9,7 +9,7 @@ import TutorialPdfButton from "~ReactComponents/GeneralComponents/Tutorial/Tutor
 export default function WelcomePage() {
   return (
     <React.Fragment>
-      <div className="grid h-0 min-h-screen grid-cols-5 grid-rows-5 p-6 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
+      <div className="grid h-[100svh] grid-cols-5 grid-rows-5 p-6 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
         <LoginComponent className="z-10 col-start-1 row-start-1" />
 
         <h1 className="self-center col-span-2 col-start-4 row-start-1 p-2 text-lg font-extrabold font-[roboto] text-adlerdarkblue rounded-lg lg:col-span-3 lg:col-start-2 xl:col-start-1 xl:col-span-5 lg:row-start-1 lg:p-5 justify-self-center lg:text-4xl 2xl:text-8xl">
