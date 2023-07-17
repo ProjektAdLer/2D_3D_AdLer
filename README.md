@@ -2,6 +2,11 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/ProjektAdLer/2D_3D_AdLer/badge.svg?branch=main)](https://coveralls.io/github/ProjektAdLer/2D_3D_AdLer?branch=main)
 
+## Unterstützte AdLer-Versionen
+
+- Autorentool v1.0.2
+- AdLer Backend v1.0.0
+
 ## Vorbedingungen
 
 - Node Laufzeitumgebung
@@ -36,6 +41,7 @@ Die folgenden Befehle bauen und starten einen Container:
 docker build -f Dockerfile-twostage -t 2d3d .
 docker run 2d3d
 ```
+
 Einzeiler mit API_URL und Port: ` docker run -e API_URL=https://demo.api.projekt-adler.eu/api -p 8043:80 --rm $(docker build -q -f Dockerfile-twostage .)`
 
 Unter Windows (und wsl) muss die Datei `Dockerfile-twostage` genutzt werden, da Windows falsche Lineendings setzt, wodurch der Container nicht startet. Die twostage variante enthält einen Fix hierfür.
