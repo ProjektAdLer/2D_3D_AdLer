@@ -2,19 +2,20 @@
 
 export interface IDSL {
   fileVersion: string;
-  amgVersion: string;
-  author: string;
-  language: string;
+  amgVersion?: string;
+  author?: string;
+  language?: string;
   world: APIWorld;
 }
 
 export interface APIWorld {
   worldName: string;
-  worldDescription: string;
-  worldGoals: string[];
+  worldDescription?: string;
+  worldGoals?: string[];
   topics: APITopic[];
   spaces: APISpace[];
   elements: APIElement[];
+  evaluationLink?: string;
 }
 
 export interface APITopic {
@@ -28,8 +29,8 @@ type SpaceSlotItem = number | null;
 export interface APISpace {
   spaceId: number;
   spaceName: string;
-  spaceDescription: string;
-  spaceGoals: string[];
+  spaceDescription?: string;
+  spaceGoals?: string[];
   spaceSlotContents: SpaceSlotItem[];
   requiredPointsToComplete: number;
   requiredSpacesToEnter: string;
@@ -40,8 +41,8 @@ export interface APISpace {
 export interface APIElement {
   elementId: number;
   elementName: string;
-  elementDescription: string;
-  elementGoals: string[];
+  elementDescription?: string;
+  elementGoals?: string[];
   elementCategory: string;
   elementFileType: string;
   elementMaxScore: number;

@@ -31,7 +31,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
   async asyncSetupSpace(spaceTO: LearningSpaceTO): Promise<void> {
     await this.fillLearningElementSlots(spaceTO);
     await this.createWindows();
-    if (this.viewModel.exitDoorPosition) await this.createExitDoor();
+    if (this.viewModel.exitDoorPosition) await this.createExitDoor(spaceTO);
     if (this.viewModel.entryDoorPosition) await this.createEntryDoor();
     this.decorationBuilder.spaceTemplate = spaceTO.template;
     await this.director.buildAsync(this.decorationBuilder);
@@ -72,7 +72,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     await Promise.all(loadingCompletePromises);
   }
 
-  private async createExitDoor(): Promise<void> {
+  private async createExitDoor(spaceTO: LearningSpaceTO): Promise<void> {
     const exitDoorBuilder = CoreDIContainer.get<IDoorBuilder>(
       BUILDER_TYPES.IDoorBuilder
     );
@@ -81,6 +81,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     exitDoorBuilder.rotation = exitDoorPosition[1];
     exitDoorBuilder.spaceID = this.viewModel.id;
     exitDoorBuilder.isExit = true;
+    exitDoorBuilder.isOpen = spaceTO.currentScore >= spaceTO.requiredScore;
     await this.director.buildAsync(exitDoorBuilder);
   }
 
@@ -93,6 +94,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     entryDoorBuilder.rotation = entryDoorPosition[1];
     entryDoorBuilder.spaceID = this.viewModel.id;
     entryDoorBuilder.isExit = false;
+    entryDoorBuilder.isOpen = false;
     await this.director.buildAsync(entryDoorBuilder);
   }
 

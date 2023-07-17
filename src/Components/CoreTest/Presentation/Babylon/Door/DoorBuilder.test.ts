@@ -43,6 +43,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.rotation = 0;
     systemUnderTest.isExit = false;
     systemUnderTest.spaceID = 0;
+    systemUnderTest.isOpen = false;
 
     systemUnderTest.buildViewModel();
     systemUnderTest.buildController();
@@ -59,6 +60,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.rotation = 0;
     systemUnderTest.isExit = false;
     systemUnderTest.spaceID = 0;
+    systemUnderTest.isOpen = false;
 
     systemUnderTest.buildViewModel();
     systemUnderTest.buildController();
@@ -81,6 +83,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.rotation = 0;
     systemUnderTest.isExit = false;
     systemUnderTest.spaceID = 0;
+    systemUnderTest.isOpen = false;
 
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();

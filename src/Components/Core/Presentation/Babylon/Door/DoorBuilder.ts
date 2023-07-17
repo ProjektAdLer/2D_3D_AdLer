@@ -22,6 +22,7 @@ export default class DoorBuilder extends AsyncPresentationBuilder<
   rotation: number;
   isExit: boolean;
   spaceID: ComponentID;
+  isOpen: boolean;
 
   constructor() {
     super(DoorViewModel, DoorController, DoorView, DoorPresenter);
@@ -31,7 +32,8 @@ export default class DoorBuilder extends AsyncPresentationBuilder<
       this.position === undefined ||
       this.rotation === undefined ||
       this.isExit === undefined ||
-      this.spaceID === undefined
+      this.spaceID === undefined ||
+      this.isOpen === undefined
     )
       throw new Error("DoorBuilder: one or more properties are undefined.");
 
@@ -41,6 +43,7 @@ export default class DoorBuilder extends AsyncPresentationBuilder<
     this.viewModel!.rotation = this.rotation;
     this.viewModel!.isExit = this.isExit;
     this.viewModel!.spaceID = this.spaceID;
+    this.viewModel!.isOpen.Value = this.isOpen;
   }
   override buildView(): void {
     super.buildView();

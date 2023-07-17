@@ -18,6 +18,7 @@ export default function LearningWorldCompletionModal({
   >(BUILDER_TYPES.ILearningWorldCompletionModalBuilder);
 
   const [showModal] = useObservable(viewModel.showModal);
+  const [evaluationLink] = useObservable(viewModel.evaluationLink);
 
   if (!viewModel || !controller) return null;
 
@@ -40,6 +41,23 @@ export default function LearningWorldCompletionModal({
             Du hast alle Lernräume erfolgreich abgeschlossen und somit die
             Lernwelt bestanden, herzlichen Glückwunsch!
           </p>
+          {evaluationLink && (
+            <div>
+              <div className="flex justify-center">
+                <a
+                  className="m-8 mt-2 text-2xl font-bold underline text-adlergreen"
+                  href={evaluationLink}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Fragebogen.
+                </a>
+              </div>
+              <div className="flex justify-center m-2 font-bold">
+                <p>Vielen Dank für Ihre Unterstützung!</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </StyledModal>

@@ -7,4 +7,5 @@ export default interface IDoorBuilder extends IAsyncPresentationBuilder {
   rotation: number;
   spaceID: ComponentID;
   isExit: boolean;
+  isOpen: boolean;
 }

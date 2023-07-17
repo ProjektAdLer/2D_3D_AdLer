@@ -60,6 +60,26 @@ describe("DoorView", () => {
     ]);
   });
 
+  test("constructor does not subscribe to viewModel.isOpen when isOpen is true, calls animation instead", async () => {
+    scenePresenterMock.loadModel.mockResolvedValue([
+      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+    ]);
+    const viewModel = new DoorViewModel();
+    viewModel.isOpen.Value = true;
+    const controller = mock<IDoorController>();
+    const systemUnderTest = new DoorView(viewModel, controller);
+
+    await systemUnderTest.asyncSetup();
+
+    expect(viewModel.isOpen["subscribers"]).toStrictEqual([]);
+    expect(scenePresenterMock.Scene.beginAnimation).toHaveBeenCalledTimes(1);
+    expect(scenePresenterMock.Scene.beginAnimation).toHaveBeenCalledWith(
+      viewModel.meshes[0],
+      expect.any(Number),
+      expect.any(Number)
+    );
+  });
+
   test("asyncSetup/loadMeshAsync calls scenePresenter.loadModel", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),

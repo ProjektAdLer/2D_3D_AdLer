@@ -5,4 +5,5 @@ export default class BackendWorldTO {
   spaces: BackendSpaceTO[];
   goals: string[];
   description: string;
+  evaluationLink: string;
 }
