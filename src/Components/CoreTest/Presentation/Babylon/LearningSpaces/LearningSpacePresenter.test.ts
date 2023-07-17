@@ -208,13 +208,14 @@ describe("LearningSpacePresenter", () => {
 
   test("createExitDoor creates a door with its builder and calls the new presenter", async () => {
     systemUnderTest["viewModel"].exitDoorPosition = [new Vector3(1, 1, 1), 0];
-
-    await systemUnderTest["createExitDoor"]();
+    spaceTO.currentScore = 1;
+    await systemUnderTest["createExitDoor"](spaceTO);
 
     expect(doorBuilderMock.position).toEqual(new Vector3(1, 1, 1));
     expect(doorBuilderMock.rotation).toEqual(0);
     expect(doorBuilderMock.spaceID).toBe(1);
     expect(doorBuilderMock.isExit).toBe(true);
+    expect(doorBuilderMock.isOpen).toBe(true);
 
     expect(directorMock.buildAsync).toHaveBeenCalledTimes(1);
     expect(directorMock.buildAsync).toHaveBeenCalledWith(doorBuilderMock);
@@ -229,6 +230,7 @@ describe("LearningSpacePresenter", () => {
     expect(doorBuilderMock.rotation).toEqual(1);
     expect(doorBuilderMock.spaceID).toBe(1);
     expect(doorBuilderMock.isExit).toBe(false);
+    expect(doorBuilderMock.isOpen).toBe(false);
 
     expect(directorMock.buildAsync).toHaveBeenCalledTimes(1);
     expect(directorMock.buildAsync).toHaveBeenCalledWith(doorBuilderMock);

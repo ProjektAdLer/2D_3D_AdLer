@@ -43,8 +43,15 @@ export default class DoorView extends Readyable {
       soundLink,
       this.scenePresenter.Scene
     );
-
-    viewModel.isOpen.subscribe(this.onIsOpenChanged);
+    if (this.viewModel.isOpen.Value) {
+      this.IsReady.then(() => {
+        this.scenePresenter.Scene.beginAnimation(
+          this.viewModel.meshes[0],
+          0,
+          45
+        );
+      });
+    } else viewModel.isOpen.subscribe(this.onIsOpenChanged);
   }
 
   public async asyncSetup(): Promise<void> {
