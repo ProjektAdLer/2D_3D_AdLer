@@ -44,7 +44,7 @@ const spaceTO: LearningSpaceTO = {
       parentSpaceID: 1,
       hasScored: false,
       parentWorldID: 1,
-      model: LearningElementModelTypeEnums.H5pElementModelTypes.Backboard,
+      model: LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard,
     },
   ],
   requirementsSyntaxTree: null,

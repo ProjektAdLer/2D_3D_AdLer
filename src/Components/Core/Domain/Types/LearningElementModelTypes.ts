@@ -17,7 +17,7 @@ enum VideoElementModelTypes {
 // enum PdfElementModelTypes {}
 
 enum H5pElementModelTypes {
-  Backboard = "l_h5p_backboard_1",
+  Blackboard = "l_h5p_blackboard_1",
   DeskPC = "l_h5p_deskpc_1",
   DrawingTable = "l_h5p_drawingtable_1",
   SlotMachine = "l_h5p_slotmachine_1",
