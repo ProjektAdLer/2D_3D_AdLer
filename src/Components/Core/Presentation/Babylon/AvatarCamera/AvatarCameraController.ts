@@ -1,7 +1,7 @@
 import bind from "bind-decorator";
 import AvatarCameraViewModel from "./AvatarCameraViewModel";
 import IAvatarCameraController from "./IAvatarCameraController";
-import { ArcRotateCamera } from "@babylonjs/core";
+import { ArcRotateCamera, ArcRotateCameraPointersInput } from "@babylonjs/core";
 // import {} ArcRotateCameraPointersInput } from "@babylonjs/core";
 
 export default class AvatarCameraController implements IAvatarCameraController {
@@ -11,11 +11,24 @@ export default class AvatarCameraController implements IAvatarCameraController {
 
   @bind
   private applyCameraControls(camera: ArcRotateCamera): void {
-    // add camera zoom
+    // add mouse wheel controls for zooming on desktop
+    camera.inputs.attached.mousewheel.attachControl();
     camera.lowerRadiusLimit = this.viewModel.lowerRadiusLimit;
     camera.upperRadiusLimit = this.viewModel.upperRadiusLimit;
-    camera.inputs.attached.mousewheel.attachControl();
     camera.wheelDeltaPercentage = this.viewModel.wheelDeltaPercentage;
+
+    // add pointer controls for pinch zoom
+    camera.inputs.attached.pointers.attachControl();
+    const pointersInput = camera.inputs.attached
+      .pointers as ArcRotateCameraPointersInput;
+    pointersInput.multiTouchPanAndZoom = true;
+    pointersInput.pinchZoom = true;
+
+    // clamp camera rotation to the default values to prevent panning
+    camera.upperAlphaLimit = this.viewModel.defaultAlphaRotation;
+    camera.lowerAlphaLimit = this.viewModel.defaultAlphaRotation;
+    camera.upperBetaLimit = this.viewModel.defaultBetaRotation;
+    camera.lowerBetaLimit = this.viewModel.defaultBetaRotation;
 
     // old (currently unneeded) camera rotation
     // camera.upperBetaLimit = this.viewModel.upperBetaLimit;
