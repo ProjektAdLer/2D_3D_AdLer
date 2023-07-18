@@ -4,9 +4,13 @@ Das Format diese Changelogs folgt ab Version 1.0.0 den Richtlinien von [Keep a C
 
 Die AdLer Engine verwendet [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## Unveröffentlicht
 
 Hier werden Änderungen geführt die noch nicht in einem Release enthalten sind.
+
+## Version 1.1.0 - 17.07.2023
+
+-
 
 ## Version 1.0.0 - 17.06.2023
 
