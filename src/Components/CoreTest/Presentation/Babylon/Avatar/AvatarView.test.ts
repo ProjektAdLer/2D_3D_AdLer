@@ -1,5 +1,6 @@
 import {
   AbstractMesh,
+  AnimationGroup,
   MeshBuilder,
   NullEngine,
   Scene,
@@ -61,6 +62,27 @@ describe("AvatarView", () => {
     CoreDIContainer.restore();
   });
 
+  test("async setup gets the animations from the scene", async () => {
+    navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
+    //@ts-ignore
+    navigationMock.IsReady = Promise.resolve();
+
+    scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
+      new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
+    );
+    scenePresenterMock.loadModel.mockResolvedValue([
+      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+    ]);
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
+
+    await systemUnderTest.asyncSetup();
+
+    expect(systemUnderTest["viewModel"].idleAnimation).toBeDefined();
+    expect(systemUnderTest["viewModel"].walkAnimation).toBeDefined();
+  });
+
   test("async setup calls the scenePresenter to load avatar models", async () => {
     navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
     //@ts-ignore
@@ -72,6 +94,9 @@ describe("AvatarView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
 
     await systemUnderTest.asyncSetup();
 
@@ -89,6 +114,9 @@ describe("AvatarView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
 
     await systemUnderTest.asyncSetup();
 
@@ -108,6 +136,9 @@ describe("AvatarView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
 
     await systemUnderTest.asyncSetup();
 
@@ -127,6 +158,9 @@ describe("AvatarView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
 
     await systemUnderTest.asyncSetup();
 
@@ -141,6 +175,9 @@ describe("AvatarView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
 
     expect(systemUnderTest["viewModel"].agentIndex).toBeUndefined();
 
@@ -165,6 +202,9 @@ describe("AvatarView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
 
     navigationMock.Crowd.getAgentPosition = jest
       .fn()
@@ -188,6 +228,9 @@ describe("AvatarView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
 
     expect(systemUnderTest["viewModel"].agentIndex).toBeUndefined();
 
@@ -212,6 +255,9 @@ describe("AvatarView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
 
     navigationMock.Crowd.getAgentPosition = jest
       .fn()
@@ -243,6 +289,9 @@ describe("AvatarView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
 
     navigationMock.Crowd.getAgentPosition = jest
       .fn()
@@ -279,6 +328,9 @@ describe("AvatarView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
 
     navigationMock.Crowd.getAgentPosition = jest
       .fn()

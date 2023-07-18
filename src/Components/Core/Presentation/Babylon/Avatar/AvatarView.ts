@@ -39,6 +39,7 @@ export default class AvatarView {
 
   public async asyncSetup(): Promise<void> {
     await this.loadAvatarAsync();
+    this.setupAvatarAnimations();
     await this.navigation.IsReady.then(this.setupAvatarNavigation);
   }
 
@@ -58,6 +59,19 @@ export default class AvatarView {
     this.viewModel.meshes[0].scaling = new Vector3(1, 1, -1);
     this.viewModel.meshes.forEach((mesh) => (mesh.rotationQuaternion = null));
     this.viewModel.meshes[0].rotationQuaternion = new Quaternion(0, 0, 0, 1);
+  }
+
+  private setupAvatarAnimations(): void {
+    this.viewModel.idleAnimation =
+      this.scenePresenter.Scene.getAnimationGroupByName("IdleAnimation")!;
+    this.viewModel.walkAnimation =
+      this.scenePresenter.Scene.getAnimationGroupByName("WalkCycle")!;
+
+    this.viewModel.idleAnimation.play(true);
+    this.viewModel.walkAnimation.play(true);
+
+    this.viewModel.idleAnimation.setWeightForAllAnimatables(1.0);
+    this.viewModel.walkAnimation.setWeightForAllAnimatables(0.0);
   }
 
   @bind

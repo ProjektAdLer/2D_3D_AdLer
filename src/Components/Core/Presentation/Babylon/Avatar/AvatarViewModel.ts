@@ -1,4 +1,5 @@
 import {
+  AnimationGroup,
   IAgentParameters,
   Mesh,
   Nullable,
@@ -12,6 +13,10 @@ export default class AvatarViewModel {
   // transform
   public parentNode: TransformNode;
   public spawnPoint: Vector3 = Vector3.Zero();
+
+  // animations
+  public idleAnimation: AnimationGroup;
+  public walkAnimation: AnimationGroup;
 
   // navigation
   public agentIndex: number;
