@@ -56,7 +56,7 @@ const modelLinksByModel: {
   [key in LearningElementModel]?: any;
 } = {
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .Backboard]: require("../../../../../Assets/3dModels/defaultTheme/l_h5p_blackboard_1.glb"),
+    .Blackboard]: require("../../../../../Assets/3dModels/defaultTheme/l_h5p_blackboard_1.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
     .DeskPC]: require("../../../../../Assets/3dModels/defaultTheme/l_h5p_deskpc_1.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
