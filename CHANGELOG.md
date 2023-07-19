@@ -1,16 +1,60 @@
 # Changelog
 
-Das Format diese Changelogs folgt ab Version 1.0.0 den Richtlinien von [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+This changelog follows the guidelines of [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) from version 1.1.0 onward.
+The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
-Die AdLer Engine verwendet [Semantic Versioning](http://semver.org/).
+## Unreleased
 
-## Unveröffentlicht
+<details>
+<summary> Hier werden Änderungen geführt die noch nicht in einem Release enthalten sind. Klick zum ausklappen! </summary>
 
-Hier werden Änderungen geführt die noch nicht in einem Release enthalten sind.
+### Added
+
+-
+
+### Changed
+
+-
+
+### Deprecated
+
+-
+
+### Removed
+
+-
+
+### Fixed
+
+-
+
+### Security
+
+-
+
+</details>
 
 ## Version 1.1.0 - 17.07.2023
 
--
+### Added
+
+- movement target indicator
+- space completion sound feedback (with temporary effect)
+
+### Changed
+
+- H5P Modal Contents are displayed at full width and scrollable
+- touch controls to be more usable
+
+### Removed
+
+- space completion modal to make room for better systems to indicate room completion
+
+### Fixed
+
+- unneccessary scrollbars in menus
+- missing standin decorations
+- broken avatar navigation due to improper scene loading
 
 ## Version 1.0.0 - 17.06.2023
 
