@@ -1,9 +1,9 @@
-import { ICrowd, RecastJSPlugin } from "@babylonjs/core";
+import { RecastJSCrowd, RecastJSPlugin } from "@babylonjs/core";
 import { IReadyable } from "../../../../../Lib/Readyable";
 
 export default interface INavigation extends IReadyable {
   get Plugin(): RecastJSPlugin;
-  get Crowd(): ICrowd;
+  get Crowd(): RecastJSCrowd;
 
   /**
    * Creates the navmesh and navigation crowd, accessible via the NavigationPlugin and NavigationCrowd properties.

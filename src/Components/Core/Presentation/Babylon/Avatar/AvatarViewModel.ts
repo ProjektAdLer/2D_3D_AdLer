@@ -6,6 +6,7 @@ import {
   TransformNode,
   Vector3,
 } from "@babylonjs/core";
+import Observable from "src/Lib/Observable";
 
 export default class AvatarViewModel {
   public meshes: Mesh[];
@@ -28,9 +29,10 @@ export default class AvatarViewModel {
     collisionQueryRange: 0.5,
     pathOptimizationRange: 0.0,
     separationWeight: 1.0,
+    reachRadius: 0.1,
   };
   public readonly pointerMovementThreshold: number = 0.3;
-  public keyMovementTarget: Nullable<Vector3> = null;
-  public pointerMovementTarget: Nullable<Vector3> = null;
-  public finalMovementTarget: Nullable<Vector3> = null;
+  public movementTarget: Observable<Nullable<Vector3>> = new Observable<
+    Nullable<Vector3>
+  >(null);
 }
