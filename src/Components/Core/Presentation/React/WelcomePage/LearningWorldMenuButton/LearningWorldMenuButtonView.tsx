@@ -36,7 +36,7 @@ export default function LearningWorldMenuButton({
       disabled={!userLoggedIn}
       onClick={() => history.push("/worldmenu")}
     >
-      Gehe zum Lernraum Menü
+      Gehe zum Lernwelt Menü
     </StyledButton>
   );
 }
