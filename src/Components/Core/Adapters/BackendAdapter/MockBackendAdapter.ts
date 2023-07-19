@@ -85,7 +85,12 @@ export default class MockBackendAdapter implements IBackendPort {
     elementID,
     worldID,
   }: ElementDataParams): Promise<string> {
-    const worldToUse = worldID === 1 ? this.smallWorld : this.bigWorld;
+    const worldToUse =
+      worldID === 1
+        ? this.smallWorld
+        : worldID === 2
+        ? this.bigWorld
+        : this.newWorld;
     const elementType = worldToUse.world.elements.find(
       (element) => element.elementId === elementID
     )!.elementCategory;
