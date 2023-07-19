@@ -86,6 +86,10 @@ describe("MockBackendAdapter", () => {
           courseID: 2,
           courseName: "Big World",
         },
+        {
+          courseID: 3,
+          courseName: "New World",
+        },
       ],
     });
   });
