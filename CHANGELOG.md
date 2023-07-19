@@ -6,7 +6,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 <details>
-<summary> Hier werden Änderungen geführt die noch nicht in einem Release enthalten sind. Klick zum ausklappen! </summary>
+<summary> Changes that are not yet included in a release are listed here. Click to expand! </summary>
 
 ### Added
 
