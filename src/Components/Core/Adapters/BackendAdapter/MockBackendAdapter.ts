@@ -261,7 +261,7 @@ export default class MockBackendAdapter implements IBackendPort {
           ],
           elementFileType: "pdf",
           elementMaxScore: 1,
-          elementModel: "l_h5p_blackboard_1",
+          elementModel: "l_h5p_drawingtable_1",
         },
         {
           elementId: 5,
