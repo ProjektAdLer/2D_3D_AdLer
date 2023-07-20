@@ -32,10 +32,10 @@ export default class StateMachine<STATE, ACTION>
     );
 
     if (transition) {
-      this.currentState = transition.to;
       if (transition.onTransitionCallback) {
         transition.onTransitionCallback();
       }
+      this.currentState = transition.to;
       return true;
     }
 

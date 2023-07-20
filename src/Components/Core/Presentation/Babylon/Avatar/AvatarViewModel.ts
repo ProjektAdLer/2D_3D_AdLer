@@ -24,12 +24,12 @@ export default class AvatarViewModel {
   public readonly agentParams: IAgentParameters = {
     radius: 1,
     height: 1,
-    maxAcceleration: 10.0,
+    maxAcceleration: 5000.0,
     maxSpeed: 3.0,
     collisionQueryRange: 0.5,
     pathOptimizationRange: 0.0,
     separationWeight: 1.0,
-    reachRadius: 0.1,
+    reachRadius: 0.2, // acts as stopping distance stopping distance
   };
   public readonly pointerMovementThreshold: number = 0.3;
   public movementTarget: Observable<Nullable<Vector3>> = new Observable<

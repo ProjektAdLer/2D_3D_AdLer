@@ -106,9 +106,10 @@ export default class AvatarView {
           let blendValue = 0;
           const callback =
             this.scenePresenter.Scene.onBeforeAnimationsObservable.add(() => {
-              blendValue += this.navigation.Crowd.getAgentVelocity(
-                this.viewModel.agentIndex
-              ).length();
+              blendValue +=
+                this.navigation.Crowd.getAgentVelocity(
+                  this.viewModel.agentIndex
+                ).length() / this.scenePresenter.Scene.deltaTime;
 
               if (blendValue >= 1) {
                 this.scenePresenter.Scene.onBeforeAnimationsObservable.remove(
@@ -135,13 +136,7 @@ export default class AvatarView {
           let blendValue = 0;
           const callback =
             this.scenePresenter.Scene.onBeforeAnimationsObservable.add(() => {
-              blendValue += Math.max(
-                1 -
-                  this.navigation.Crowd.getAgentVelocity(
-                    this.viewModel.agentIndex
-                  ).length(),
-                0.01
-              );
+              blendValue += this.scenePresenter.Scene.deltaTime / 100;
 
               if (blendValue >= 1) {
                 this.scenePresenter.Scene.onBeforeAnimationsObservable.remove(
@@ -195,6 +190,10 @@ export default class AvatarView {
   private onReachMovementTarget(): void {
     this.movementIndicator.hide();
     this.animationStateMachine.applyAction(AnimationAction.TargetReached);
+    this.navigation.Crowd.agentTeleport(
+      this.viewModel.agentIndex,
+      this.viewModel.parentNode.position
+    );
     this.viewModel.movementTarget.Value = null;
   }
 
@@ -205,6 +204,7 @@ export default class AvatarView {
         this.viewModel.agentIndex
       );
 
+      // match walk animation speed to velocity
       this.viewModel.walkAnimation.speedRatio = Math.max(velocity.length(), 1);
 
       /* istanbul ignore next */
@@ -216,6 +216,8 @@ export default class AvatarView {
         );
       }
 
+      // rotate avatar to face movement direction
+      // for velocities below a threshold the avatar will not rotate to prevent jittering
       if (velocity.length() > 0.5) {
         velocity.normalize();
         let desiredRotation = Math.atan2(velocity.x, velocity.z);
@@ -224,6 +226,14 @@ export default class AvatarView {
           Axis.Y,
           desiredRotation
         );
+        // TODO: fix rotation overflow bug
+        // this.viewModel.meshes[0].rotationQuaternion = Quaternion.RotationAxis(
+        //   Axis.Y,
+        //   this.viewModel.meshes[0].rotationQuaternion!.toEulerAngles().y +
+        //     (desiredRotation -
+        //       this.viewModel.meshes[0].rotationQuaternion!.toEulerAngles().y) *
+        //       0.1
+        // );
       }
     }
   }
