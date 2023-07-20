@@ -30,8 +30,8 @@ export default class AvatarController implements IAvatarController {
   private navigation: INavigation;
   private pathLine: LinesMesh;
 
-  public keyMovementTarget: Nullable<Vector3> = null;
-  public pointerMovementTarget: Nullable<Vector3> = null;
+  private keyMovementTarget: Nullable<Vector3> = null;
+  private pointerMovementTarget: Nullable<Vector3> = null;
 
   constructor(private viewModel: AvatarViewModel) {
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
