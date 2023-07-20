@@ -3,6 +3,7 @@ import {
   AnimationGroup,
   MeshBuilder,
   NullEngine,
+  Observable,
   Scene,
   TransformNode,
   Vector3,
@@ -18,29 +19,41 @@ import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/Avatar
 import IAvatarController from "../../../../Core/Presentation/Babylon/Avatar/IAvatarController";
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
+import IMovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/IMovementIndicator";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
+import MovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/MovementIndicator";
 
+jest.mock("@babylonjs/core/Materials");
 jest.mock("../../../../../Lib/Logger");
+
+const movementIndicatorMock = mock<MovementIndicator>();
 
 // setup navigation mock
 const navigationMock = mock<INavigation>();
 navigationMock.Plugin.getClosestPoint = jest
   .fn()
   .mockReturnValue(Vector3.Zero());
+navigationMock.Crowd.onReachTargetObservable = new Observable();
+navigationMock.Crowd.onReachTargetObservable.add = jest.fn();
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
+scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+  mock<AnimationGroup>()
+);
 
 // util function to create system under test
-function createAvatarView(): AvatarView {
+function createAvatarView(): [AvatarView, AvatarViewModel] {
   const viewModel = new AvatarViewModel();
   const controller = mock<IAvatarController>();
   const avatarView = new AvatarView(viewModel, controller);
-  return avatarView;
+  return [avatarView, viewModel];
 }
 
 describe("AvatarView", () => {
   let systemUnderTest: AvatarView;
+  let viewModel: AvatarViewModel;
 
   beforeAll(() => {
     // setup dependency injection
@@ -51,10 +64,13 @@ describe("AvatarView", () => {
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
       scenePresenterFactoryMock
     );
+    CoreDIContainer.rebind<IMovementIndicator>(
+      PRESENTATION_TYPES.IMovementIndicator
+    ).toConstantValue(movementIndicatorMock);
   });
 
   beforeEach(() => {
-    systemUnderTest = createAvatarView();
+    [systemUnderTest, viewModel] = createAvatarView();
   });
 
   afterAll(() => {
@@ -308,8 +324,7 @@ describe("AvatarView", () => {
     systemUnderTest["debug_displayVelocity"](
       systemUnderTest["viewModel"],
       systemUnderTest["scenePresenter"],
-      new Vector3(1, 2, 3),
-      0
+      new Vector3(1, 2, 3)
     );
 
     expect(MeshBuilder.CreateDashedLines).toHaveBeenCalledTimes(1);
@@ -347,10 +362,20 @@ describe("AvatarView", () => {
     systemUnderTest["debug_displayVelocity"](
       systemUnderTest["viewModel"],
       systemUnderTest["scenePresenter"],
-      new Vector3(1, 2, 3),
-      0
+      new Vector3(1, 2, 3)
     );
 
     expect(logger.log).toHaveBeenCalledTimes(1);
+  });
+
+  test("onReachMovementTarget calls hide on the indicator when the parentNode position and the finalMovementTarget are close enough", () => {
+    viewModel.movementTarget = new Vector3(1, 1, 1.2);
+    viewModel.parentNode = new TransformNode("parentNode");
+    viewModel.parentNode.position = new Vector3(1, 1, 1);
+    systemUnderTest["setupAvatarAnimations"]();
+
+    systemUnderTest["onReachMovementTarget"]();
+
+    expect(movementIndicatorMock.hide).toHaveBeenCalledTimes(1);
   });
 });
