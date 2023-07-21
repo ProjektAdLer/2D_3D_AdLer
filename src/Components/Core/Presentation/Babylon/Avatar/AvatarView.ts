@@ -6,7 +6,12 @@ import {
   Quaternion,
   Vector3,
 } from "@babylonjs/core";
-import type { Nullable } from "@babylonjs/core";
+import type {
+  AnimationGroup,
+  Nullable,
+  Observer,
+  Scene,
+} from "@babylonjs/core";
 import bind from "bind-decorator";
 import SCENE_TYPES, {
   ScenePresenterFactory,
@@ -23,14 +28,15 @@ import IAvatarController from "./IAvatarController";
 import StateMachine, { IStateMachine } from "./StateMachine";
 import IMovementIndicator from "../MovementIndicator/IMovementIndicator";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
+import { on } from "events";
 
 const modelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Avatar_male.glb");
 
-enum AnimationState {
+export enum AnimationState {
   Idle,
   Walking,
 }
-enum AnimationAction {
+export enum AnimationAction {
   MovementStarted,
   TargetReached,
 }
@@ -40,6 +46,7 @@ export default class AvatarView {
   private navigation: INavigation;
   private animationStateMachine: IStateMachine<AnimationState, AnimationAction>;
   private movementIndicator: IMovementIndicator;
+  private animationBlendValue = 0;
 
   constructor(
     private viewModel: AvatarViewModel,
@@ -102,60 +109,70 @@ export default class AvatarView {
         action: AnimationAction.MovementStarted,
         from: AnimationState.Idle,
         to: AnimationState.Walking,
-        onTransitionCallback: () => {
-          let blendValue = 0;
-          const callback =
-            this.scenePresenter.Scene.onBeforeAnimationsObservable.add(() => {
-              blendValue +=
-                this.navigation.Crowd.getAgentVelocity(
-                  this.viewModel.agentIndex
-                ).length() / this.scenePresenter.Scene.deltaTime;
-
-              if (blendValue >= 1) {
-                this.scenePresenter.Scene.onBeforeAnimationsObservable.remove(
-                  callback
-                );
-                this.viewModel.idleAnimation.setWeightForAllAnimatables(0.0);
-                this.viewModel.walkAnimation.setWeightForAllAnimatables(1.0);
-              } else {
-                this.viewModel.idleAnimation.setWeightForAllAnimatables(
-                  1.0 - blendValue
-                );
-                this.viewModel.walkAnimation.setWeightForAllAnimatables(
-                  blendValue
-                );
-              }
-            });
-        },
+        onTransitionCallback: this.transitionFromIdleToWalk,
       },
       {
         action: AnimationAction.TargetReached,
         from: AnimationState.Walking,
         to: AnimationState.Idle,
-        onTransitionCallback: () => {
-          let blendValue = 0;
-          const callback =
-            this.scenePresenter.Scene.onBeforeAnimationsObservable.add(() => {
-              blendValue += this.scenePresenter.Scene.deltaTime / 100;
-
-              if (blendValue >= 1) {
-                this.scenePresenter.Scene.onBeforeAnimationsObservable.remove(
-                  callback
-                );
-                this.viewModel.idleAnimation.setWeightForAllAnimatables(1.0);
-                this.viewModel.walkAnimation.setWeightForAllAnimatables(0.0);
-              } else {
-                this.viewModel.idleAnimation.setWeightForAllAnimatables(
-                  blendValue
-                );
-                this.viewModel.walkAnimation.setWeightForAllAnimatables(
-                  1.0 - blendValue
-                );
-              }
-            });
-        },
+        onTransitionCallback: this.transitionFromWalkToIdle,
       },
     ]);
+  }
+
+  @bind
+  private onBeforeAnimationTransitionObserver(
+    from: AnimationGroup,
+    to: AnimationGroup,
+    observerToRemove: Nullable<Observer<Scene>>,
+    blendValueIncrementFunction: () => number
+  ): void {
+    this.animationBlendValue += blendValueIncrementFunction();
+
+    if (this.animationBlendValue >= 1) {
+      from.setWeightForAllAnimatables(0.0);
+      to.setWeightForAllAnimatables(1.0);
+
+      this.scenePresenter.Scene.onBeforeAnimationsObservable.remove(
+        observerToRemove
+      );
+    } else {
+      from.setWeightForAllAnimatables(1.0 - this.animationBlendValue);
+      to.setWeightForAllAnimatables(this.animationBlendValue);
+    }
+  }
+
+  @bind
+  private transitionFromIdleToWalk(): void {
+    this.animationBlendValue = 0;
+    const observer = this.scenePresenter.Scene.onBeforeAnimationsObservable.add(
+      () => {
+        this.onBeforeAnimationTransitionObserver(
+          this.viewModel.idleAnimation,
+          this.viewModel.walkAnimation,
+          observer,
+          () =>
+            this.navigation.Crowd.getAgentVelocity(
+              this.viewModel.agentIndex
+            ).length() / this.scenePresenter.Scene.deltaTime
+        );
+      }
+    );
+  }
+
+  @bind
+  private transitionFromWalkToIdle(): void {
+    this.animationBlendValue = 0;
+    const observer = this.scenePresenter.Scene.onBeforeAnimationsObservable.add(
+      () => {
+        this.onBeforeAnimationTransitionObserver(
+          this.viewModel.walkAnimation,
+          this.viewModel.idleAnimation,
+          observer,
+          () => this.scenePresenter.Scene.deltaTime / 100
+        );
+      }
+    );
   }
 
   @bind
