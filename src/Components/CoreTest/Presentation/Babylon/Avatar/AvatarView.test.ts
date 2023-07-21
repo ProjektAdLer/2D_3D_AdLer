@@ -14,7 +14,9 @@ import { logger } from "../../../../../Lib/Logger";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
-import AvatarView from "../../../../Core/Presentation/Babylon/Avatar/AvatarView";
+import AvatarView, {
+  AnimationAction,
+} from "../../../../Core/Presentation/Babylon/Avatar/AvatarView";
 import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
 import IAvatarController from "../../../../Core/Presentation/Babylon/Avatar/IAvatarController";
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
@@ -22,6 +24,7 @@ import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManageme
 import IMovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/IMovementIndicator";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import MovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/MovementIndicator";
+import StateMachine from "../../../../Core/Presentation/Babylon/Avatar/StateMachine";
 
 jest.mock("@babylonjs/core/Materials");
 jest.mock("../../../../../Lib/Logger");
@@ -35,13 +38,11 @@ navigationMock.Plugin.getClosestPoint = jest
   .mockReturnValue(Vector3.Zero());
 navigationMock.Crowd.onReachTargetObservable = new Observable();
 navigationMock.Crowd.onReachTargetObservable.add = jest.fn();
+navigationMock.Crowd.agentTeleport = jest.fn();
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
-scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
-  mock<AnimationGroup>()
-);
 
 // util function to create system under test
 function createAvatarView(): [AvatarView, AvatarViewModel] {
@@ -78,25 +79,53 @@ describe("AvatarView", () => {
     CoreDIContainer.restore();
   });
 
-  test("async setup gets the animations from the scene", async () => {
-    navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
-    //@ts-ignore
-    navigationMock.IsReady = Promise.resolve();
+  describe("animations", () => {
+    test("async setup gets the animations from the scene", async () => {
+      navigationMock.Crowd.addAgent = jest.fn().mockReturnValue(42);
+      //@ts-ignore
+      navigationMock.IsReady = Promise.resolve();
 
-    scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
-      new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
-    );
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
-      mock<AnimationGroup>()
-    );
+      scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
+        new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
+      );
+      scenePresenterMock.loadModel.mockResolvedValue([
+        new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+      ]);
+      scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+        mock<AnimationGroup>()
+      );
 
-    await systemUnderTest.asyncSetup();
+      await systemUnderTest.asyncSetup();
 
-    expect(systemUnderTest["viewModel"].idleAnimation).toBeDefined();
-    expect(systemUnderTest["viewModel"].walkAnimation).toBeDefined();
+      expect(systemUnderTest["viewModel"].idleAnimation).toBeDefined();
+      expect(systemUnderTest["viewModel"].walkAnimation).toBeDefined();
+    });
+
+    test("setupAvatarAnimations starts idle and walking animation and sets weights", () => {
+      scenePresenterMock.Scene.getAnimationGroupByName
+        .mockReturnValue(mock<AnimationGroup>())
+        .mockReturnValueOnce(mock<AnimationGroup>());
+
+      systemUnderTest["setupAvatarAnimations"]();
+
+      expect(
+        systemUnderTest["viewModel"].idleAnimation.play
+      ).toHaveBeenCalledTimes(1);
+      expect(
+        systemUnderTest["viewModel"].walkAnimation.play
+      ).toHaveBeenCalledTimes(1);
+      expect(
+        systemUnderTest["viewModel"].idleAnimation.setWeightForAllAnimatables
+      ).toHaveBeenCalledTimes(1);
+      expect(
+        systemUnderTest["viewModel"].walkAnimation.setWeightForAllAnimatables
+      ).toHaveBeenCalledTimes(1);
+    });
+
+    test.todo("onBeforeAnimationTransitionObserver", () => {
+      const fromAnimation = mock<AnimationGroup>();
+      const toAnimation = mock<AnimationGroup>();
+    });
   });
 
   test("async setup calls the scenePresenter to load avatar models", async () => {
@@ -368,14 +397,103 @@ describe("AvatarView", () => {
     expect(logger.log).toHaveBeenCalledTimes(1);
   });
 
+  test("onMovementTargetChanged does nothing when the target is changed to null", () => {
+    jest.spyOn(StateMachine.prototype, "applyAction");
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
+    systemUnderTest["setupAvatarAnimations"]();
+
+    systemUnderTest["onMovementTargetChanged"](null);
+
+    expect(movementIndicatorMock.display).not.toHaveBeenCalled();
+    expect(
+      systemUnderTest["animationStateMachine"].applyAction
+    ).not.toHaveBeenCalled();
+  });
+
+  test("onMovementTargetChanged calls display on the movement indicator when the target is changed to a vector", () => {
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
+    systemUnderTest["setupAvatarAnimations"]();
+    const target = new Vector3(1, 1, 1);
+
+    systemUnderTest["onMovementTargetChanged"](target);
+
+    expect(movementIndicatorMock.display).toHaveBeenCalledTimes(1);
+    expect(movementIndicatorMock.display).toHaveBeenCalledWith(target);
+  });
+
+  test("onMovementTargetChanged calls applyAction with the MovementStarted action on the animation state machine when the target is changed to a vector", () => {
+    jest.spyOn(StateMachine.prototype, "applyAction");
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
+    systemUnderTest["setupAvatarAnimations"]();
+
+    systemUnderTest["onMovementTargetChanged"](new Vector3(1, 1, 1));
+
+    expect(
+      systemUnderTest["animationStateMachine"].applyAction
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      systemUnderTest["animationStateMachine"].applyAction
+    ).toHaveBeenCalledWith(AnimationAction.MovementStarted);
+  });
+
   test("onReachMovementTarget calls hide on the indicator when the parentNode position and the finalMovementTarget are close enough", () => {
     viewModel.movementTarget = new Vector3(1, 1, 1.2);
-    viewModel.parentNode = new TransformNode("parentNode");
+    viewModel.parentNode = new TransformNode(
+      "parentNode",
+      new Scene(new NullEngine())
+    );
     viewModel.parentNode.position = new Vector3(1, 1, 1);
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
     systemUnderTest["setupAvatarAnimations"]();
 
     systemUnderTest["onReachMovementTarget"]();
 
     expect(movementIndicatorMock.hide).toHaveBeenCalledTimes(1);
+  });
+
+  test("onReachMovementTarget resets the movementTarget to null", () => {
+    viewModel.movementTarget = new Vector3(1, 1, 1.2);
+    viewModel.parentNode = new TransformNode(
+      "parentNode",
+      new Scene(new NullEngine())
+    );
+    viewModel.parentNode.position = new Vector3(1, 1, 1);
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
+    systemUnderTest["setupAvatarAnimations"]();
+
+    systemUnderTest["onReachMovementTarget"]();
+
+    expect(viewModel.movementTarget.Value).toBeNull();
+  });
+
+  test("onReachMovementTarget calls navigation.Crowd.agentTeleport with the parentNode position", () => {
+    viewModel.movementTarget = new Vector3(1, 1, 1.2);
+    viewModel.parentNode = new TransformNode(
+      "parentNode",
+      new Scene(new NullEngine())
+    );
+    viewModel.parentNode.position = new Vector3(42, 43, 44);
+    scenePresenterMock.Scene.getAnimationGroupByName.mockReturnValue(
+      mock<AnimationGroup>()
+    );
+    systemUnderTest["setupAvatarAnimations"]();
+
+    systemUnderTest["onReachMovementTarget"]();
+
+    expect(navigationMock.Crowd.agentTeleport).toHaveBeenCalledTimes(1);
+    expect(navigationMock.Crowd.agentTeleport).toHaveBeenCalledWith(
+      viewModel.agentIndex,
+      viewModel.parentNode.position
+    );
   });
 });
