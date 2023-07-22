@@ -1,10 +1,10 @@
 import {
   RecastJSPlugin,
-  ICrowd,
   Mesh,
   StandardMaterial,
   Vector3,
   Color3,
+  RecastJSCrowd,
 } from "@babylonjs/core";
 import INavigation from "./INavigation";
 import * as Recast from "recast-detour";
@@ -21,7 +21,7 @@ import { Semaphore } from "src/Lib/Semaphore";
 @injectable()
 export default class Navigation extends Readyable implements INavigation {
   private plugin: RecastJSPlugin;
-  private crowd: ICrowd;
+  private crowd: RecastJSCrowd;
   private navMeshDebug: Mesh;
   private matDebug: StandardMaterial;
   private scenePresenter: IScenePresenter;
@@ -40,7 +40,7 @@ export default class Navigation extends Readyable implements INavigation {
   get Plugin(): RecastJSPlugin {
     return this.plugin;
   }
-  get Crowd(): ICrowd {
+  get Crowd(): RecastJSCrowd {
     return this.crowd;
   }
 
@@ -90,7 +90,7 @@ export default class Navigation extends Readyable implements INavigation {
       this.navigationConfiguration.maxAgentCount,
       this.navigationConfiguration.maxAgentRadius,
       this.scenePresenter.Scene
-    );
+    ) as RecastJSCrowd;
 
     this.resolveIsReady();
     lock.release();

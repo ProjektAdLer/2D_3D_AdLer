@@ -5,6 +5,7 @@ import {
   KeyboardInfo,
   LinesMesh,
   MeshBuilder,
+  Nullable,
   PointerEventTypes,
   PointerInfo,
   Vector3,
@@ -21,8 +22,6 @@ import IScenePresenter from "../SceneManagement/IScenePresenter";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
-import IMovementIndicator from "../MovementIndicator/IMovementIndicator";
-import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 const validKeys = ["w", "a", "s", "d"];
 
@@ -30,7 +29,9 @@ export default class AvatarController implements IAvatarController {
   private scenePresenter: IScenePresenter;
   private navigation: INavigation;
   private pathLine: LinesMesh;
-  private movementIndicator: IMovementIndicator;
+
+  private keyMovementTarget: Nullable<Vector3> = null;
+  private pointerMovementTarget: Nullable<Vector3> = null;
 
   constructor(private viewModel: AvatarViewModel) {
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
@@ -39,67 +40,40 @@ export default class AvatarController implements IAvatarController {
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
 
-    this.movementIndicator = CoreDIContainer.get<IMovementIndicator>(
-      PRESENTATION_TYPES.IMovementIndicator
-    );
-
     this.scenePresenter.Scene.onPointerObservable.add(this.processPointerEvent);
     this.scenePresenter.Scene.onKeyboardObservable.add(
       this.processKeyboardEvent
     );
-    this.scenePresenter.Scene.onBeforeRenderObservable.add(
-      this.onPreSceneRender
-    );
+    this.scenePresenter.Scene.onBeforeRenderObservable.add(this.applyInputs);
   }
 
   @bind
-  private onPreSceneRender() {
-    this.resetMovementIndicator();
-    this.applyInputs();
-  }
-
   private applyInputs(): void {
-    if (this.viewModel.keyMovementTarget !== null) {
+    if (this.keyMovementTarget !== null) {
       this.navigation.Crowd.agentGoto(
         this.viewModel.agentIndex,
-        this.viewModel.keyMovementTarget
+        this.keyMovementTarget
       );
-      this.viewModel.finalMovementTarget = this.viewModel.keyMovementTarget;
+      this.viewModel.movementTarget.Value = this.keyMovementTarget;
 
-      this.debug_drawPath(this.viewModel.keyMovementTarget);
-    } else if (this.viewModel.pointerMovementTarget !== null) {
-      const movementDistance = this.viewModel.pointerMovementTarget
+      this.debug_drawPath(this.keyMovementTarget);
+    } else if (this.pointerMovementTarget !== null) {
+      const movementDistance = this.pointerMovementTarget
         .subtract(this.viewModel.parentNode.position)
         .length();
 
       if (movementDistance > this.viewModel.pointerMovementThreshold) {
         this.navigation.Crowd.agentGoto(
           this.viewModel.agentIndex,
-          this.viewModel.pointerMovementTarget
+          this.pointerMovementTarget
         );
-        this.viewModel.finalMovementTarget =
-          this.viewModel.pointerMovementTarget;
+        this.viewModel.movementTarget.Value = this.pointerMovementTarget;
 
-        this.movementIndicator.display(this.viewModel.pointerMovementTarget);
-
-        this.debug_drawPath(this.viewModel.pointerMovementTarget);
+        this.debug_drawPath(this.pointerMovementTarget);
       }
     }
-    this.viewModel.pointerMovementTarget = null;
-    this.viewModel.keyMovementTarget = null;
-  }
-
-  private resetMovementIndicator(): void {
-    if (
-      this.viewModel.finalMovementTarget !== null &&
-      this.viewModel.parentNode.position.equalsWithEpsilon(
-        this.viewModel.finalMovementTarget,
-        0.5
-      )
-    ) {
-      this.movementIndicator.hide();
-      this.viewModel.finalMovementTarget = null;
-    }
+    this.pointerMovementTarget = null;
+    this.keyMovementTarget = null;
   }
 
   @bind
@@ -113,8 +87,8 @@ export default class AvatarController implements IAvatarController {
     )
       return;
 
-    const baseTarget = this.viewModel.keyMovementTarget ?? Vector3.Zero();
-    this.viewModel.keyMovementTarget = baseTarget
+    const baseTarget = this.keyMovementTarget ?? Vector3.Zero();
+    this.keyMovementTarget = baseTarget
       .add(
         this.viewModel.parentNode
           .getChildren<ArcRotateCamera>()![0]
@@ -122,8 +96,8 @@ export default class AvatarController implements IAvatarController {
           .normalize()
       )
       .normalize();
-    this.viewModel.keyMovementTarget = this.navigation.Plugin.getClosestPoint(
-      this.viewModel.keyMovementTarget
+    this.keyMovementTarget = this.navigation.Plugin.getClosestPoint(
+      this.keyMovementTarget
     );
   }
 
@@ -150,8 +124,9 @@ export default class AvatarController implements IAvatarController {
     )
       return;
 
-    this.viewModel.pointerMovementTarget =
-      this.navigation.Plugin.getClosestPoint(pointerInfo.pickInfo.pickedPoint);
+    this.pointerMovementTarget = this.navigation.Plugin.getClosestPoint(
+      pointerInfo.pickInfo.pickedPoint
+    );
   }
 
   private debug_drawPath(target: Vector3): void {
