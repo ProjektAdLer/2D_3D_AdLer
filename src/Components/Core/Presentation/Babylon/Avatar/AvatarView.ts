@@ -151,12 +151,18 @@ export default class AvatarView {
           this.viewModel.idleAnimation,
           this.viewModel.walkAnimation,
           observer,
-          () =>
-            this.navigation.Crowd.getAgentVelocity(
-              this.viewModel.agentIndex
-            ).length() / this.scenePresenter.Scene.deltaTime
+          this.getIdleToWalkInterpolationIncrement
         );
       }
+    );
+  }
+
+  @bind
+  private getIdleToWalkInterpolationIncrement(): number {
+    return (
+      this.navigation.Crowd.getAgentVelocity(
+        this.viewModel.agentIndex
+      ).length() / this.scenePresenter.Scene.deltaTime
     );
   }
 
@@ -169,10 +175,15 @@ export default class AvatarView {
           this.viewModel.walkAnimation,
           this.viewModel.idleAnimation,
           observer,
-          () => this.scenePresenter.Scene.deltaTime / 100
+          this.getWalkToIdleInterpolationIncrement
         );
       }
     );
+  }
+
+  @bind
+  private getWalkToIdleInterpolationIncrement(): number {
+    return this.scenePresenter.Scene.deltaTime / 100;
   }
 
   @bind
