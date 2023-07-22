@@ -5,10 +5,12 @@ import AvatarBuilder from "../../../../Core/Presentation/Babylon/Avatar/AvatarBu
 import AvatarPresenter from "../../../../Core/Presentation/Babylon/Avatar/AvatarPresenter";
 import AvatarView from "../../../../Core/Presentation/Babylon/Avatar/AvatarView";
 import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
-import { mock, mockDeep } from "jest-mock-extended";
+import { mock } from "jest-mock-extended";
 import IAvatarController from "../../../../Core/Presentation/Babylon/Avatar/IAvatarController";
 import { waitFor } from "@testing-library/react";
-import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
+import MovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/MovementIndicator";
+import IMovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/IMovementIndicator";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 jest.mock("../../../../Core/Presentation/Babylon/Avatar/AvatarController");
 const setViewModelMock = jest.spyOn(
@@ -17,14 +19,25 @@ const setViewModelMock = jest.spyOn(
   "set"
 );
 
-const scenePresenterMock = mockDeep<IScenePresenter>();
-const scenePresenterFactoryMock = () => scenePresenterMock;
+const movementIndicatorMock = mock<MovementIndicator>();
 
 describe("AvatarBuilder", () => {
   let systemUnderTest: AvatarBuilder;
 
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+    CoreDIContainer.rebind<IMovementIndicator>(
+      PRESENTATION_TYPES.IMovementIndicator
+    ).toConstantValue(movementIndicatorMock);
+  });
+
   beforeEach(() => {
     systemUnderTest = new AvatarBuilder();
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+    CoreDIContainer.restore();
   });
 
   test("buildPresenter builds the AvatarPresenter and sets the ViewModel with its setter", () => {
@@ -39,7 +52,7 @@ describe("AvatarBuilder", () => {
 
   test("buildView calls asyncSetup on the view", () => {
     const asyncSetupMock = jest.spyOn(AvatarView.prototype, "asyncSetup");
-    systemUnderTest["viewModel"] = mock<AvatarViewModel>();
+    systemUnderTest["viewModel"] = new AvatarViewModel();
     systemUnderTest["controller"] = mock<IAvatarController>();
 
     systemUnderTest.buildView();
@@ -48,7 +61,7 @@ describe("AvatarBuilder", () => {
   });
 
   test("isCompleted resolves when asyncSetup of the view resolves", async () => {
-    systemUnderTest["viewModel"] = mock<AvatarViewModel>();
+    systemUnderTest["viewModel"] = new AvatarViewModel();
     systemUnderTest["controller"] = mock<IAvatarController>();
 
     jest.spyOn(AvatarView.prototype, "asyncSetup").mockResolvedValue(undefined);
@@ -59,7 +72,7 @@ describe("AvatarBuilder", () => {
   });
 
   test("buildView logs the error when asyncSetup of the view rejects", async () => {
-    systemUnderTest["viewModel"] = mock<AvatarViewModel>();
+    systemUnderTest["viewModel"] = new AvatarViewModel();
     systemUnderTest["controller"] = mock<IAvatarController>();
 
     const consoleErrorMock = jest.spyOn(console, "error");
