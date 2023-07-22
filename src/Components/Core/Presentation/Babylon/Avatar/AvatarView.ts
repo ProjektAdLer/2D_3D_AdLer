@@ -28,7 +28,6 @@ import IAvatarController from "./IAvatarController";
 import StateMachine, { IStateMachine } from "./StateMachine";
 import IMovementIndicator from "../MovementIndicator/IMovementIndicator";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
-import { on } from "events";
 
 const modelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Avatar_male.glb");
 
