@@ -125,7 +125,7 @@ export default class AvatarController implements IAvatarController {
       return;
 
     this.pointerMovementTarget = this.navigation.Plugin.getClosestPoint(
-      pointerInfo.pickInfo.pickedPoint
+      pointerInfo.pickInfo.pickedPoint.multiplyByFloats(1, 0, 1)
     );
   }
 

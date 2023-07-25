@@ -293,7 +293,7 @@ describe("AvatarController", () => {
       expect(systemUnderTest["pointerMovementTarget"]!.z).toBe(42);
       expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledTimes(1);
       expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledWith(
-        new Vector3(42, 42, 42)
+        new Vector3(42, 0, 42)
       );
       //might need to add the last 2 expects to process keyboard event too.
     });
