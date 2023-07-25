@@ -3,7 +3,7 @@ export default class Observable<T> {
   protected subscribers: ((value: T) => void)[] = [];
 
   constructor(defaultValue?: T, protected notifyOnSameValue: boolean = false) {
-    if (defaultValue) this.value = defaultValue;
+    if (defaultValue !== undefined) this.value = defaultValue;
   }
 
   public subscribe(fn: (value: T) => void): void {
