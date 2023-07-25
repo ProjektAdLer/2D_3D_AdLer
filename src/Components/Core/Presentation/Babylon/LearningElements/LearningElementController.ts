@@ -37,7 +37,7 @@ export default class LearningElementController
   }
 
   @bind
-  doublePicked(): void {
+  doublePicked(event?: ActionEvent): void {
     this.startLoadElementUseCase();
   }
 

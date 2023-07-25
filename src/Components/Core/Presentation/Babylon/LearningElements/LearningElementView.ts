@@ -141,21 +141,26 @@ export default class LearningElementView {
     });
 
     // register interaction callbacks
-    this.registerActionWithAllMeshes(
-      ActionManager.OnPickTrigger,
-      this.controller.picked
+    actionManager.registerAction(
+      new ExecuteCodeAction(ActionManager.OnPickTrigger, this.controller.picked)
     );
-    this.registerActionWithAllMeshes(
-      ActionManager.OnPointerOverTrigger,
-      this.controller.pointerOver
+    actionManager.registerAction(
+      new ExecuteCodeAction(
+        ActionManager.OnPointerOverTrigger,
+        this.controller.pointerOver
+      )
     );
-    this.registerActionWithAllMeshes(
-      ActionManager.OnPointerOutTrigger,
-      this.controller.pointerOut
+    actionManager.registerAction(
+      new ExecuteCodeAction(
+        ActionManager.OnPointerOutTrigger,
+        this.controller.pointerOut
+      )
     );
-    this.registerActionWithAllMeshes(
-      ActionManager.OnDoublePickTrigger,
-      this.controller.doublePicked
+    actionManager.registerAction(
+      new ExecuteCodeAction(
+        ActionManager.OnDoublePickTrigger,
+        this.controller.doublePicked
+      )
     );
 
     // add model meshes to highlight layer
@@ -173,22 +178,6 @@ export default class LearningElementView {
     });
 
     this.positionModel();
-  }
-
-  private registerActionWithAllMeshes(
-    triggerOptions: any,
-    callback: (event?: ActionEvent) => void
-  ): void {
-    this.viewModel.modelMeshes.forEach((mesh) => {
-      mesh.actionManager?.registerAction(
-        new ExecuteCodeAction(triggerOptions, callback)
-      );
-    });
-    this.viewModel.iconMeshes.forEach((mesh) => {
-      mesh.actionManager?.registerAction(
-        new ExecuteCodeAction(triggerOptions, callback)
-      );
-    });
   }
 
   @bind

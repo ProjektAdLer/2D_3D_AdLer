@@ -6,7 +6,7 @@ import { LearningElementModel } from "src/Components/Core/Domain/Types/LearningE
 
 export default class LearningElementViewModel {
   // constants
-  public readonly iconScaleUpOnHover: number = 1.007;
+  public readonly iconScaleUpOnHover: number = 1.02;
   public readonly iconYOffset: number = 2.3;
 
   // meshes
