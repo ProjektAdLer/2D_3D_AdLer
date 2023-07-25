@@ -1,6 +1,7 @@
 import LearningElementModalPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalPresenter";
 import LearningElementModalViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 import LearningElementTO from "../../../../../Core/Application/DataTransferObjects/LearningElementTO";
+import { LearningElementModelTypeEnums } from "../../../../../Core/Domain/Types/LearningElementModelTypes";
 
 describe("LearningElementModalPresenter", () => {
   let systemUnderTest: LearningElementModalPresenter;
@@ -22,12 +23,42 @@ describe("LearningElementModalPresenter", () => {
       parentSpaceID: 0,
       parentWorldID: 0,
       hasScored: false,
+      model: LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
     };
 
     systemUnderTest.onLearningElementLoaded(elementTO);
 
     expect(systemUnderTest["viewModel"].type.Value).toBe(elementTO.type);
-    expect(systemUnderTest["viewModel"].isOpen.Value).toBe(true);
     expect(systemUnderTest["viewModel"].id.Value).toBe(elementTO.id);
+    expect(systemUnderTest["viewModel"].name.Value).toBe(elementTO.name);
+    expect(systemUnderTest["viewModel"].filePath.Value).toBe(
+      elementTO.filePath ?? ""
+    );
+  });
+
+  test("presentLearningElementModal sets the isOpen value to true after the openDelay", () => {
+    jest.useFakeTimers();
+    const elementTO: LearningElementTO = {
+      id: 1,
+      name: "Test",
+      description: "Test",
+      goals: ["Test"],
+      type: "h5p",
+      value: 1,
+      parentSpaceID: 0,
+      parentWorldID: 0,
+      hasScored: false,
+      model: LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
+    };
+
+    systemUnderTest.onLearningElementLoaded(elementTO);
+
+    expect(systemUnderTest["viewModel"].isOpen.Value).toBe(false);
+
+    jest.advanceTimersByTime(systemUnderTest["viewModel"].openDelay + 1);
+
+    expect(systemUnderTest["viewModel"].isOpen.Value).toBe(true);
+
+    jest.useRealTimers();
   });
 });

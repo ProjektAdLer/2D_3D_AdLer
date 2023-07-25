@@ -8,10 +8,13 @@ export default class LearningElementModalPresenter
   constructor(private viewModel: LearningElementModalViewModel) {}
 
   onLearningElementLoaded(elementTO: LearningElementTO): void {
-    this.viewModel.isOpen.Value = true;
     this.viewModel.type.Value = elementTO.type;
     this.viewModel.id.Value = elementTO.id;
     this.viewModel.name.Value = elementTO.name;
     this.viewModel.filePath.Value = elementTO.filePath ?? "";
+
+    setTimeout(() => {
+      this.viewModel.isOpen.Value = true;
+    }, this.viewModel.openDelay);
   }
 }

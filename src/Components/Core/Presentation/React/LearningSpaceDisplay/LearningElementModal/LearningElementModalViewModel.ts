@@ -8,6 +8,8 @@ export default class LearningElementModalViewModel {
   type = new Observable<string>();
   filePath = new Observable<string>();
 
+  readonly openDelay: number = 1000;
+
   parentSpaceID = new Observable<ComponentID>();
   parentWorldID = new Observable<ComponentID>();
 }
