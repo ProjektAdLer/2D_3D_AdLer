@@ -1,3 +1,4 @@
+import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
@@ -23,6 +24,10 @@ export default class AvatarBuilder extends AsyncPresentationBuilder<
       PORT_TYPES.IAvatarPort
     );
     this.presenter.ViewModel = this.viewModel!;
+
+    CoreDIContainer.get<ILearningWorldPort>(
+      PORT_TYPES.ILearningWorldPort
+    ).registerAdapter(this.presenter);
   }
 
   override buildView(): void {

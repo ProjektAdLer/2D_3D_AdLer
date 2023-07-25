@@ -23,27 +23,20 @@ import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import INavigation from "../Navigation/INavigation";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
-import AvatarViewModel from "./AvatarViewModel";
+import AvatarViewModel, {
+  AvatarAnimationAction,
+  AvatarAnimationState,
+} from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
-import StateMachine, { IStateMachine } from "./StateMachine";
+import StateMachine from "./StateMachine";
 import IMovementIndicator from "../MovementIndicator/IMovementIndicator";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 const modelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Avatar_male.glb");
 
-export enum AnimationState {
-  Idle,
-  Walking,
-}
-export enum AnimationAction {
-  MovementStarted,
-  TargetReached,
-}
-
 export default class AvatarView {
   private scenePresenter: IScenePresenter;
   private navigation: INavigation;
-  private animationStateMachine: IStateMachine<AnimationState, AnimationAction>;
   private movementIndicator: IMovementIndicator;
   private animationBlendValue = 0;
 
@@ -92,29 +85,52 @@ export default class AvatarView {
       this.scenePresenter.Scene.getAnimationGroupByName("IdleAnimation")!;
     this.viewModel.walkAnimation =
       this.scenePresenter.Scene.getAnimationGroupByName("WalkCycle")!;
+    this.viewModel.interactionAnimation =
+      this.scenePresenter.Scene.getAnimationGroupByName("Interact")!;
 
-    // animations need to be playing for the weights to have an effect
+    this.viewModel.interactionAnimation.onAnimationGroupEndObservable.add(
+      () => {
+        this.viewModel.animationStateMachine.applyAction(
+          AvatarAnimationAction.InteractionFinished
+        );
+      }
+    );
+
+    // looping animations need to be started for the weights to have an effect
     this.viewModel.idleAnimation.play(true);
     this.viewModel.walkAnimation.play(true);
 
     this.viewModel.idleAnimation.setWeightForAllAnimatables(1.0);
     this.viewModel.walkAnimation.setWeightForAllAnimatables(0.0);
+    this.viewModel.interactionAnimation.setWeightForAllAnimatables(0.0);
 
-    this.animationStateMachine = new StateMachine<
-      AnimationState,
-      AnimationAction
-    >(AnimationState.Idle, [
+    this.viewModel.animationStateMachine = new StateMachine<
+      AvatarAnimationState,
+      AvatarAnimationAction
+    >(AvatarAnimationState.Idle, [
       {
-        action: AnimationAction.MovementStarted,
-        from: AnimationState.Idle,
-        to: AnimationState.Walking,
+        action: AvatarAnimationAction.MovementStarted,
+        from: AvatarAnimationState.Idle,
+        to: AvatarAnimationState.Walking,
         onTransitionCallback: this.transitionFromIdleToWalk,
       },
       {
-        action: AnimationAction.TargetReached,
-        from: AnimationState.Walking,
-        to: AnimationState.Idle,
+        action: AvatarAnimationAction.TargetReached,
+        from: AvatarAnimationState.Walking,
+        to: AvatarAnimationState.Idle,
         onTransitionCallback: this.transitionFromWalkToIdle,
+      },
+      {
+        action: AvatarAnimationAction.InteractionStarted,
+        from: AvatarAnimationState.Idle,
+        to: AvatarAnimationState.Interaction,
+        onTransitionCallback: this.transitionFromIdleOrWalkToInteract,
+      },
+      {
+        action: AvatarAnimationAction.InteractionFinished,
+        from: AvatarAnimationState.Interaction,
+        to: AvatarAnimationState.Idle,
+        onTransitionCallback: this.transitionFromInteractToIdle,
       },
     ]);
   }
@@ -150,18 +166,9 @@ export default class AvatarView {
           this.viewModel.idleAnimation,
           this.viewModel.walkAnimation,
           observer,
-          this.getIdleToWalkInterpolationIncrement
+          this.getVelocityAnimationInterpolationIncrement
         );
       }
-    );
-  }
-
-  @bind
-  private getIdleToWalkInterpolationIncrement(): number {
-    return (
-      this.navigation.Crowd.getAgentVelocity(
-        this.viewModel.agentIndex
-      ).length() / this.scenePresenter.Scene.deltaTime
     );
   }
 
@@ -174,15 +181,68 @@ export default class AvatarView {
           this.viewModel.walkAnimation,
           this.viewModel.idleAnimation,
           observer,
-          this.getWalkToIdleInterpolationIncrement
+          () => this.getTimedAnimationInterpolationIncrement(100)
         );
       }
     );
   }
 
   @bind
-  private getWalkToIdleInterpolationIncrement(): number {
-    return this.scenePresenter.Scene.deltaTime / 100;
+  private transitionFromIdleOrWalkToInteract(): void {
+    this.animationBlendValue = 0;
+    let fromAnimation: AnimationGroup;
+    switch (this.viewModel.animationStateMachine.CurrentState) {
+      case AvatarAnimationState.Idle:
+        fromAnimation = this.viewModel.idleAnimation;
+        break;
+      case AvatarAnimationState.Walking:
+        fromAnimation = this.viewModel.walkAnimation;
+        break;
+    }
+
+    this.viewModel.interactionAnimation.play(false);
+
+    const observer = this.scenePresenter.Scene.onBeforeAnimationsObservable.add(
+      () => {
+        this.onBeforeAnimationTransitionObserver(
+          fromAnimation,
+          this.viewModel.interactionAnimation,
+          observer,
+          () => this.getTimedAnimationInterpolationIncrement(100)
+        );
+      }
+    );
+  }
+
+  @bind
+  private transitionFromInteractToIdle(): void {
+    this.animationBlendValue = 0;
+    const observer = this.scenePresenter.Scene.onBeforeAnimationsObservable.add(
+      () => {
+        this.onBeforeAnimationTransitionObserver(
+          this.viewModel.interactionAnimation,
+          this.viewModel.idleAnimation,
+          observer,
+          () => this.getTimedAnimationInterpolationIncrement(50)
+        );
+      }
+    );
+  }
+
+  @bind
+  private getVelocityAnimationInterpolationIncrement(): number {
+    return (
+      this.navigation.Crowd.getAgentVelocity(
+        this.viewModel.agentIndex
+      ).length() / this.scenePresenter.Scene.deltaTime
+    );
+  }
+
+  @bind
+  private getTimedAnimationInterpolationIncrement(
+    transitionTimeInMs: number
+  ): number {
+    return this.scenePresenter.Scene.deltaTime / transitionTimeInMs;
   }
 
   @bind
@@ -210,13 +270,17 @@ export default class AvatarView {
     if (newTarget === null) return;
 
     this.movementIndicator.display(newTarget);
-    this.animationStateMachine.applyAction(AnimationAction.MovementStarted);
+    this.viewModel.animationStateMachine.applyAction(
+      AvatarAnimationAction.MovementStarted
+    );
   }
 
   @bind
   private onReachMovementTarget(): void {
     this.movementIndicator.hide();
-    this.animationStateMachine.applyAction(AnimationAction.TargetReached);
+    this.viewModel.animationStateMachine.applyAction(
+      AvatarAnimationAction.TargetReached
+    );
     this.navigation.Crowd.agentTeleport(
       this.viewModel.agentIndex,
       this.viewModel.parentNode.position
