@@ -1,6 +1,7 @@
 import {
   ActionManager,
   Animation,
+  AnimationGroup,
   Color3,
   ExecuteCodeAction,
   Mesh,
@@ -19,13 +20,15 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import DoorViewModel from "./DoorViewModel";
 import IDoorController from "./IDoorController";
 
-const modelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Door.glb");
+const entryDoorModelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Door.glb");
+const exitDoorModelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_ExitDoor.glb");
 const soundLink = require("../../../../../Assets/Sounds/fanfare_troll.mp3");
 
 export default class DoorView extends Readyable {
   private scenePresenter: IScenePresenter;
 
   private openTheDoorSound: Sound;
+  private doorAnimation: Animation;
 
   constructor(
     private viewModel: DoorViewModel,
@@ -65,7 +68,10 @@ export default class DoorView extends Readyable {
   }
 
   private async loadMeshAsync(): Promise<void> {
-    const results = await this.scenePresenter.loadModel(modelLink);
+    let results;
+    if (this.viewModel.isExit)
+      results = await this.scenePresenter.loadModel(exitDoorModelLink);
+    else results = await this.scenePresenter.loadModel(entryDoorModelLink);
 
     // reset quaternion rotation because it can prevent mesh.rotate to have any effect
     results.forEach((mesh) => (mesh.rotationQuaternion = null));
@@ -74,20 +80,28 @@ export default class DoorView extends Readyable {
   }
 
   private setupAnimation(): void {
-    let animation = new Animation(
+    const meshToRotate = this.viewModel.meshes.find(
+      (mesh) => mesh.id === "Door"
+    );
+    if (meshToRotate === undefined) throw new Error("Door mesh not found");
+
+    this.doorAnimation = new Animation(
       "doorAnimation",
       "rotation.y",
       30,
       Animation.ANIMATIONTYPE_FLOAT
     );
-    animation.setKeys([
-      { frame: 0, value: Tools.ToRadians(this.viewModel.rotation) },
+
+    const initialRotation = Tools.ToRadians(meshToRotate.rotation.y);
+    this.doorAnimation.setKeys([
+      { frame: 0, value: initialRotation },
       {
         frame: 45,
-        value: Tools.ToRadians(this.viewModel.rotation - 80),
+        value: initialRotation + Tools.ToRadians(80),
       },
     ]);
-    this.viewModel.meshes[0].animations.push(animation);
+
+    meshToRotate.animations.push(this.doorAnimation);
   }
 
   @bind
@@ -107,7 +121,7 @@ export default class DoorView extends Readyable {
     if (newIsOpen) {
       this.IsReady.then(() => {
         this.scenePresenter.Scene.beginAnimation(
-          this.viewModel.meshes[0],
+          this.viewModel.meshes.find((mesh) => mesh.id === "Door"),
           0,
           45
         );

@@ -1,5 +1,6 @@
 import {
   AbstractMesh,
+  Mesh,
   NullEngine,
   Quaternion,
   Scene,
@@ -104,15 +105,25 @@ describe("DoorView", () => {
     expect(mesh2.rotationQuaternion).toBeNull();
   });
 
+  test("setupAnimation throws error if no mesh with id Door are loaded", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.meshes = [
+      new AbstractMesh("TestMesh", new Scene(new NullEngine())) as Mesh,
+    ];
+
+    expect(() => systemUnderTest["setupAnimation"]()).toThrowError(
+      "Door mesh not found"
+    );
+  });
+
   test("asyncSetup/setupAnimation creates a new animation and applies it to the first mesh", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
+    const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
+    scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     viewModel.isExit = true;
     await systemUnderTest.asyncSetup();
-    expect(viewModel.meshes[0].animations.length).toBe(1);
+    expect(mockMesh.animations.length).toBe(1);
   });
 
   test("positionMesh sets position of the first mesh to viewModel.position", async () => {
@@ -143,9 +154,8 @@ describe("DoorView", () => {
   });
 
   test("onIsOpenChanged calls beginAnimation on the scene if viewModel.isOpen is true", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
+    const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
+    scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
 
     await systemUnderTest.asyncSetup();
@@ -154,7 +164,7 @@ describe("DoorView", () => {
 
     expect(scenePresenterMock.Scene.beginAnimation).toHaveBeenCalledTimes(1);
     expect(scenePresenterMock.Scene.beginAnimation).toHaveBeenCalledWith(
-      viewModel.meshes[0],
+      mockMesh,
       expect.any(Number),
       expect.any(Number)
     );
