@@ -22,7 +22,7 @@ import IDoorController from "./IDoorController";
 
 const entryDoorModelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Door.glb");
 const exitDoorModelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_ExitDoor.glb");
-const soundLink = require("../../../../../Assets/Sounds/fanfare_troll.mp3");
+const soundLink = require("../../../../../Assets/Sounds/door_opening.mp3");
 
 export default class DoorView extends Readyable {
   private scenePresenter: IScenePresenter;
