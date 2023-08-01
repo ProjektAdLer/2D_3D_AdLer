@@ -2,9 +2,17 @@ import React from "react";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 
+export type StyledButtonColor =
+  | "default"
+  | "success"
+  | "pressed"
+  | "locked"
+  | "highlight";
+export type StyledButtonShape = "square" | "freefloatleft" | "freefloatcenter";
+
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  shape?: "square" | "freefloatleft" | "freefloatcenter";
-  color?: "default" | "success" | "pressed" | "locked" | "highlight";
+  shape?: StyledButtonShape;
+  color?: StyledButtonColor;
   disabled?: boolean;
   icon?: string;
 }
