@@ -76,6 +76,10 @@ export default class MockBackendAdapter implements IBackendPort {
           elementID: 5,
           hasScored: false,
         },
+        {
+          elementID: 6,
+          hasScored: false,
+        },
       ],
     });
   }
@@ -123,6 +127,12 @@ export default class MockBackendAdapter implements IBackendPort {
           "http://" +
             window.location.host +
             "/SampleLearningElementData/testPDF.pdf"
+        );
+      case "quiz":
+        return Promise.resolve(
+          "http://" +
+            window.location.host +
+            "/SampleLearningElementData/testQuiz.txt"
         );
       /* istanbul ignore next */
       default:
@@ -203,7 +213,7 @@ export default class MockBackendAdapter implements IBackendPort {
           spaceId: 1,
           spaceName: "Raum der kleinen Welt",
           spaceDescription: "Raumbeschreibung der kleinen Welt",
-          spaceSlotContents: [1, 2, 3, null, 4, null, null, 5, null, null],
+          spaceSlotContents: [1, 2, 3, null, 4, null, null, 5, null, 6],
           requiredPointsToComplete: 1,
           requiredSpacesToEnter: "",
           spaceGoals: ["Raumziel 1/3", "Raumziel 2/3", "Raumziel 3/3"],
@@ -279,6 +289,20 @@ export default class MockBackendAdapter implements IBackendPort {
             "Elementziel 3/3",
           ],
           elementFileType: "h5p",
+          elementMaxScore: 1,
+          elementModel: "l_h5p_blackboard_1",
+        },
+        {
+          elementId: 6,
+          elementName: "Ein Quiz-Lernelement",
+          elementCategory: "quiz",
+          elementDescription: "Beschreibung des Quiz-Lernelements",
+          elementGoals: [
+            "Elementziel 1/3",
+            "Elementziel 2/3",
+            "Elementziel 3/3",
+          ],
+          elementFileType: "text",
           elementMaxScore: 1,
           elementModel: "l_h5p_blackboard_1",
         },

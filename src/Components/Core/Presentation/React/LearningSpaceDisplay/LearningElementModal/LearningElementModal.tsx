@@ -12,6 +12,7 @@ import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningE
 import PDFComponent from "./SubComponents/PDFComponent";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
+import QuizComponent from "./SubComponents/QuizComponent";
 
 const createModalContent = (
   viewModel: LearningElementModalViewModel,
@@ -33,6 +34,8 @@ const createModalContent = (
       );
     case LearningElementTypes.pdf:
       return <PDFComponent viewModel={viewModel} />;
+    case LearningElementTypes.quiz:
+      return <QuizComponent viewModel={viewModel} />;
     default:
       return <div>No Element selected</div>;
   }
@@ -53,9 +56,15 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
     image: "max-h-[90vh]",
     video: "",
     h5p: "",
+    quiz: "", // TODO ?
   };
 
-  const modalType = viewModel.type.Value as "text" | "image" | "video" | "h5p";
+  const modalType = viewModel.type.Value as
+    | "text"
+    | "image"
+    | "video"
+    | "h5p"
+    | "quiz";
 
   return (
     <StyledModal
