@@ -143,6 +143,10 @@ describe("MockBackendAdapter", () => {
           elementID: 5,
           hasScored: false,
         },
+        {
+          elementID: 6,
+          hasScored: false,
+        },
       ],
     } as LearningWorldStatusTO);
   });
