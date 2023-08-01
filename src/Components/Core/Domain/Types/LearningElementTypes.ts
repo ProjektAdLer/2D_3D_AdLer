@@ -4,6 +4,7 @@ export enum LearningElementTypes {
   image = "image",
   video = "video",
   pdf = "pdf",
+  quiz = "quiz",
   notAnElement = "notAnElement",
 }
 

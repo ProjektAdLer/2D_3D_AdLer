@@ -23,6 +23,10 @@ enum H5pElementModelTypes {
   SlotMachine = "l_h5p_slotmachine_1",
 }
 
+enum QuizElementModelTypes {
+  QuizNPC = "l_h5p_slotmachine_1",
+}
+
 enum NoElementModelTypes {
   None = "",
 }
@@ -36,6 +40,7 @@ export const LearningElementModelTypeEnums = {
   VideoElementModelTypes: VideoElementModelTypes,
   // PdfElementModelTypes: PdfElementModelTypes,
   H5pElementModelTypes: H5pElementModelTypes,
+  QuizElementModelTypes: QuizElementModelTypes,
   NoElementModelTypes: NoElementModelTypes,
 };
 
@@ -54,4 +59,5 @@ export type LearningElementModel =
   | VideoElementModelTypes
   // | PdfElementModelTypes
   | H5pElementModelTypes
+  | QuizElementModelTypes
   | NoElementModelTypes;

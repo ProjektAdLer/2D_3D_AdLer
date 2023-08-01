@@ -48,6 +48,9 @@ const modelLinksByType: {
   [LearningElementTypes.video]: [
     require("../../../../../Assets/3dModels/defaultTheme/l_video_television_1.glb"),
   ],
+  [LearningElementTypes.quiz]: [
+    require("../../../../../Assets/3dModels/defaultTheme/l_h5p_slotmachine_1.glb"),
+  ],
   [LearningElementTypes.notAnElement]: [],
 };
 
@@ -74,6 +77,8 @@ const modelLinksByModel: {
     .PaintingEasel]: require("../../../../../Assets/3dModels/defaultTheme/l_picture_paintingeasel_1.glb"),
   [LearningElementModelTypeEnums.VideoElementModelTypes
     .Television]: require("../../../../../Assets/3dModels/defaultTheme/l_video_television_1.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .QuizNPC]: require("../../../../../Assets/3dModels/defaultTheme/l_h5p_slotmachine_1.glb"),
 };
 
 const iconLinks: { [key in LearningElementTypes]?: any } = {
@@ -82,6 +87,7 @@ const iconLinks: { [key in LearningElementTypes]?: any } = {
   [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/defaultTheme/l-icons-text-1.glb"),
   [LearningElementTypes.image]: require("../../../../../Assets/3dModels/defaultTheme/l-icons-image-1.glb"),
   [LearningElementTypes.video]: require("../../../../../Assets/3dModels/defaultTheme/l-icons-video-1.glb"),
+  [LearningElementTypes.quiz]: require("../../../../../Assets/3dModels/defaultTheme/l-icons-video-1.glb"),
   [LearningElementTypes.notAnElement]: [],
 };
 

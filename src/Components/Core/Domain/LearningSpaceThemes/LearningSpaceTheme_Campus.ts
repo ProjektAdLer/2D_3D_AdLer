@@ -29,6 +29,7 @@ const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
       require("../../../../../Assets/3dModels/defaultTheme/l_text_bookshelf_1.glb"),
       require("../../../../../Assets/3dModels/defaultTheme/l_text_bookshelf_2.glb"),
     ],
+    [LearningElementTypes.quiz]: [],
     [LearningElementTypes.notAnElement]: [],
   },
   standinDecorationModels: [
