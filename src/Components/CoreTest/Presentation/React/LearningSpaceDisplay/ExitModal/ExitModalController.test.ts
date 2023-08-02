@@ -11,6 +11,7 @@ const mockHistoryPush = jest.spyOn(history, "push");
 const viewModel = new ExitModalViewModel();
 const setUserLocationMock = mock<ISetUserLocationUseCase>();
 const getUserLocationMock = mock<IGetUserLocationUseCase>();
+
 describe("ExitModalController", () => {
   let systemUnderTest: ExitModalController;
   beforeAll(() => {

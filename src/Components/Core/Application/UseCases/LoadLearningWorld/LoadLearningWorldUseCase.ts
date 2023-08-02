@@ -176,6 +176,7 @@ export default class LoadLearningWorldUseCase
             requirements: space.requirements,
             requiredScore: space.requiredScore,
             template: space.template,
+            theme: space.templateStyle,
             parentWorldID: worldID,
           },
           LearningSpaceEntity

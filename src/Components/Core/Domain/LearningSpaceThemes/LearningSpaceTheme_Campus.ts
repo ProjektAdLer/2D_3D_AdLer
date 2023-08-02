@@ -1,9 +1,9 @@
 import { LearningElementTypes } from "../Types/LearningElementTypes";
-import { LearningSpaceThemeTypes } from "../Types/LearningSpaceThemeTypes";
+import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
 import ILearningSpaceTheme from "./ILearningSpaceTheme";
 
 const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
-  name: LearningSpaceThemeTypes.Campus,
+  name: LearningSpaceThemeType.Campus,
   wallTexture: require("../../../../../Assets/textures/Plaster001_1K_Color.jpg"),
   floorTexture: require("../../../../../Assets/textures/WoodFloor051_1K_Color.jpg"),
   learningElementModels: {
@@ -29,7 +29,9 @@ const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
       require("../../../../../Assets/3dModels/defaultTheme/l_text_bookshelf_1.glb"),
       require("../../../../../Assets/3dModels/defaultTheme/l_text_bookshelf_2.glb"),
     ],
-    [LearningElementTypes.quiz]: [],
+    [LearningElementTypes.quiz]: [
+      require("../../../../../Assets/3dModels/defaultTheme/Sheriff_Justice_NPC.glb"),
+    ],
     [LearningElementTypes.notAnElement]: [],
   },
   standinDecorationModels: [

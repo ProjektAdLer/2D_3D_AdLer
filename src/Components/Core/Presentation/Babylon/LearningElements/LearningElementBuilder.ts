@@ -48,6 +48,7 @@ export default class LearningElementBuilder extends AsyncPresentationBuilder<
     this.viewModel!.goals = this.elementData.goals;
     this.viewModel!.value = this.elementData.value;
     this.viewModel!.modelType = this.elementData.model;
+    this.viewModel!.theme = this.elementData.theme;
 
     this.viewModel!.hasScored.Value = this.elementData.hasScored;
   }

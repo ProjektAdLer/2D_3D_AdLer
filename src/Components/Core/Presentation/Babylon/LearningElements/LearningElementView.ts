@@ -22,6 +22,7 @@ import {
   LearningElementModelTypeEnums,
   isValidLearningElementModelType,
 } from "src/Components/Core/Domain/Types/LearningElementModelTypes";
+import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
 
 const modelLinksByType: {
   [key in LearningElementTypes]?: any[];
@@ -111,7 +112,7 @@ export default class LearningElementView {
   }
 
   public async setupLearningElement(): Promise<void> {
-    // load model
+    // load model by name if given
     let modelLink;
     if (
       isValidLearningElementModelType(this.viewModel.modelType) &&
@@ -120,6 +121,7 @@ export default class LearningElementView {
     ) {
       modelLink = modelLinksByModel[this.viewModel.modelType];
     } else {
+      // const themeConfig = LearningSpaceThemeLookup.getLearningSpaceTheme(this.viewModel.theme);
       const modelRandomizer = new ArrayItemRandomizer(
         modelLinksByType[this.viewModel.type as LearningElementTypes]!
       );
@@ -168,7 +170,7 @@ export default class LearningElementView {
       )
     );
 
-    // add model meshes to highlight layer
+    // add meshes to highlight layer
     this.viewModel.modelMeshes.forEach((mesh) => {
       this.scenePresenter.HighlightLayer.addMesh(
         mesh,
@@ -185,7 +187,6 @@ export default class LearningElementView {
     this.positionModel();
   }
 
-  @bind
   private positionModel(): void {
     if (this.viewModel.modelMeshes && this.viewModel.iconMeshes) {
       this.viewModel.modelMeshes[0].position = this.viewModel.position;

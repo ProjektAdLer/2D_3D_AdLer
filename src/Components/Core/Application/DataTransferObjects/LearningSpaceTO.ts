@@ -1,5 +1,6 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import { LearningSpaceTemplateType } from "../../Domain/Types/LearningSpaceTemplateType";
+import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
 import { BooleanNode } from "../UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
 import LearningElementTO from "./LearningElementTO";
 
@@ -16,4 +17,5 @@ export default class LearningSpaceTO {
   currentScore: number;
   maxScore: number;
   template: LearningSpaceTemplateType;
+  theme: LearningSpaceThemeType;
 }

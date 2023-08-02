@@ -1,4 +1,4 @@
-export enum LearningSpaceThemeTypes {
+export enum LearningSpaceThemeType {
   Campus = "Campus",
   Arcade = "Arcade",
 }

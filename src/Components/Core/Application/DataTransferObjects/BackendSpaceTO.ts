@@ -1,5 +1,6 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import { LearningSpaceTemplateType } from "../../Domain/Types/LearningSpaceTemplateType";
+import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
 import BackendElementTO from "./BackendElementTO";
 
 /**
@@ -24,6 +25,5 @@ export default class BackendSpaceTO {
   requirements: string;
   requiredScore: number;
   template: LearningSpaceTemplateType;
-  // TODO: comment in when templateStyle is implemented
-  // templateStyle: string;
+  templateStyle: LearningSpaceThemeType;
 }

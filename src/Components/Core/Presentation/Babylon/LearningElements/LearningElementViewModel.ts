@@ -3,6 +3,7 @@ import { Mesh, Vector3 } from "@babylonjs/core";
 import Observable from "../../../../../Lib/Observable";
 import { LearningElementTypeStrings } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { LearningElementModel } from "src/Components/Core/Domain/Types/LearningElementModelTypes";
+import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 
 export default class LearningElementViewModel {
   // constants
@@ -23,6 +24,7 @@ export default class LearningElementViewModel {
   public goals: string[];
   public value: number;
   public modelType: LearningElementModel;
+  public theme: LearningSpaceThemeType;
 
   // runtime properties
   public hasScored = new Observable<boolean>();

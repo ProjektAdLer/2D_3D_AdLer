@@ -1,6 +1,7 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import { LearningElementModel } from "../../Domain/Types/LearningElementModelTypes";
 import { LearningElementTypeStrings } from "../../Domain/Types/LearningElementTypes";
+import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
 
 export default class LearningElementTO {
   id: ComponentID;
@@ -14,4 +15,5 @@ export default class LearningElementTO {
   hasScored: boolean;
   filePath?: string;
   model: LearningElementModel;
+  theme: LearningSpaceThemeType;
 }

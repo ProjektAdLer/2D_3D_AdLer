@@ -59,6 +59,7 @@ export default class BackendAdapterUtils {
         requirements: space.requiredSpacesToEnter,
         requiredScore: space.requiredPointsToComplete,
         template: template,
+        templateStyle: space.spaceTemplateStyle,
       } as BackendSpaceTO;
     });
   }
