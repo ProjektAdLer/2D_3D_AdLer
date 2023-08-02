@@ -83,7 +83,6 @@ export default function QuizComponent({
       </div>
       <div>{generateAnswers()}</div>
       <div>{nextButton()}</div>
-      <div>Answer selected: {selectedAnswersCount}</div>
     </div>
   );
 }
