@@ -68,6 +68,7 @@ export default function QuizComponent({
   const nextButton = useCallback(() => {
     return (
       <StyledButton
+        className="box-border"
         shape="freefloatcenter"
         disabled={selectedAnswersCount != 1}
       >
@@ -77,12 +78,12 @@ export default function QuizComponent({
   }, [selectedAnswersCount]);
 
   return (
-    <div>
-      <div>
-        <b>{question}</b>
-      </div>
-      <div>{generateAnswers()}</div>
-      <div>{nextButton()}</div>
-    </div>
+    <main className="box-border flex flex-col items-start">
+      <b>{question}</b>
+      <section className="flex p-4 pl-0">
+        <div className="flex justify-start gap-3 p-4">{generateAnswers()}</div>
+        <div className="flex items-end">{nextButton()}</div>
+      </section>
+    </main>
   );
 }

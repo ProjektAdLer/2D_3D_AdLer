@@ -2,8 +2,8 @@ import React from "react";
 import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBar";
 import LearningWorldDetail from "~ReactComponents/LearningWorldMenu/LearningWorldDetail/LearningWorldDetail";
 import LearningWorldSelection from "~ReactComponents/LearningWorldMenu/LearningWorldSelection/LearningWorldSelection";
-import useIsMobilePortrait from "../CustomHooks/useIsMobilePortrait";
-import StyledModal from "../ReactBaseComponents/StyledModal";
+// import useIsMobilePortrait from "../CustomHooks/useIsMobilePortrait";
+// import StyledModal from "../ReactBaseComponents/StyledModal";
 
 export default function LearningWorldMenu() {
   return (

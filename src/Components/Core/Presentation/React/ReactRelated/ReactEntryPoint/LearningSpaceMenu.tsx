@@ -3,8 +3,8 @@ import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/Menu
 import LearningSpaceDetail from "~ReactComponents/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetail";
 import LearningWorldCompletionModal from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal";
 import SpaceSelection from "~ReactComponents/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelection";
-import StyledModal from "../ReactBaseComponents/StyledModal";
-import useIsMobilePortrait from "../CustomHooks/useIsMobilePortrait";
+// import StyledModal from "../ReactBaseComponents/StyledModal";
+// import useIsMobilePortrait from "../CustomHooks/useIsMobilePortrait";
 
 export default function LearningSpaceMenu() {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import LoginComponent from "~ReactComponents/WelcomePage/LoginComponent/LoginComponent";
-import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
-import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
+// import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
+// import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
 import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
 import TutorialPdfButton from "~ReactComponents/GeneralComponents/Tutorial/TutorialPdfButton";
