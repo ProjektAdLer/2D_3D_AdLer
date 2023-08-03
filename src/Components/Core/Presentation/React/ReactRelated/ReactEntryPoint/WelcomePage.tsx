@@ -38,7 +38,7 @@ export default function WelcomePage() {
         pdfFileUrl={"/manual/adler_user_manual-min.pdf"}
       />
 
-      <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
+      {/* <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
         <div className="text-lg font-bold text-adlerdarkblue">
           <h1>
             Die AdLer Engine ist für den<br></br>
@@ -47,7 +47,7 @@ export default function WelcomePage() {
             Danke!
           </h1>
         </div>
-      </StyledModal>
+      </StyledModal> */}
     </React.Fragment>
   );
 }

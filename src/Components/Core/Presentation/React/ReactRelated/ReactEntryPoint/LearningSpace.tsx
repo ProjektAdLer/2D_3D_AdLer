@@ -31,7 +31,7 @@ export default function LearningSpace() {
         <BottomTooltip />
         <LearningElementModal className="z-10" />
         <ExitModal className="z-20" />
-        <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
+        {/* <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
           <div className="text-lg font-bold text-adlerdarkblue">
             <h1>
               Die AdLer Engine ist für den<br></br>
@@ -40,7 +40,7 @@ export default function LearningSpace() {
               Danke!
             </h1>
           </div>
-        </StyledModal>
+        </StyledModal> */}
         <TutorialPdfButton
           className="fixed z-20 left-2 bottom-2 max-h-3/4"
           pdfFileUrl={"/manual/adler_user_manual-min.pdf"}

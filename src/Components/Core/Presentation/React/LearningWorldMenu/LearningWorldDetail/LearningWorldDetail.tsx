@@ -30,10 +30,10 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
     <div
       className={tailwindMerge(
         className,
-        "flex flex-col self-start gap-2 w-full h-full"
+        "flex flex-col self-start gap-2 w-full h-full overflow-hidden"
       )}
     >
-      <div className="flex flex-row items-center justify-between p-1 border-b border-gray-500">
+      <div className="flex flex-row items-center h-[10%] justify-between p-1 border-b border-gray-500">
         <div className="flex">
           <img src={worldIcon} className="w-6 xl:w-8" alt="Lernwelt-Icon"></img>
           <h2 className="ml-2 text-lg font-black text-adlerdarkblue lg:text-2xl">
@@ -49,7 +49,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
           {"Lernwelt öffnen!"}
         </StyledButton>
       </div>
-      <div className="flex flex-col w-full gap-2 overflow-auto">
+      <div className="flex flex-col w-full gap-2 h-[70%] overflow-y-auto">
         {description === undefined ||
           (description !== "" && (
             <div className="pb-2 border-b border-gray-500">

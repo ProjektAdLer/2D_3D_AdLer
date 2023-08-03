@@ -42,7 +42,12 @@ export default function LearningSpaceSelection({
   if (!viewModel || !controller) return null;
 
   return (
-    <div className={tailwindMerge(className, "w-full flex-col flex h-full")}>
+    <div
+      className={tailwindMerge(
+        className,
+        "w-full flex-col flex h-[83svh] lg:h-[93svh] overflow-auto"
+      )}
+    >
       {
         <div className="flex flex-row ml-4">
           <p className="mr-3 font-medium text-md text-adlerdarkblue">Liste</p>

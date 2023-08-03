@@ -51,10 +51,10 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
     <div
       className={tailwindMerge(
         className,
-        "flex flex-col gap-2 w-full self-start h-full"
+        "flex flex-col gap-2 w-full self-start h-[100svh]"
       )}
     >
-      <div className="flex flex-row items-center justify-between p-1 pb-4 border-b border-gray-500">
+      <div className="flex flex-row items-center justify-between h-[10%] p-1 pb-4 border-b border-gray-500">
         <div className="flex flex-row">
           <img src={spaceIcon} className="w-6 xl:w-8" alt="Lernraum-Icon"></img>
           <div className="ml-2 text-lg font-black text-adlerdarkblue lg:text-2xl">
@@ -72,7 +72,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
           </StyledButton>
         )}
       </div>
-      <div className="flex flex-col w-full gap-2 overflow-auto">
+      <div className="flex flex-col w-full gap-2 h-[75%] overflow-auto">
         {description !== "" && (
           <div className="pb-2 border-b border-gray-500">
             <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
