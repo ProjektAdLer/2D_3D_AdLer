@@ -10,11 +10,12 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
--
+- Vertical support for mobile
+- Added new avatar animations
 
 ### Changed
 
--
+- Door sound improved.
 
 ### Deprecated
 
@@ -26,7 +27,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
--
+- Space now opens when entering a
 
 ### Security
 
