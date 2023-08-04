@@ -81,7 +81,9 @@ export default function QuizComponent({
     <main className="box-border flex flex-col items-start">
       <b>{question}</b>
       <section className="flex p-4 pl-0">
-        <div className="flex justify-start gap-3 p-4">{generateAnswers()}</div>
+        <div className="flex flex-wrap justify-start gap-3 p-4">
+          {generateAnswers()}
+        </div>
         <div className="flex items-end">{nextButton()}</div>
       </section>
     </main>

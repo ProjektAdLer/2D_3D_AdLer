@@ -1,11 +1,11 @@
 import React from "react";
 import BottomTooltip from "~ReactComponents/LearningSpaceDisplay/BottomTooltip/BottomTooltip";
-import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
+// import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 import LearningElementModal from "~ReactComponents/LearningSpaceDisplay/LearningElementModal/LearningElementModal";
 import LearningSpaceNamePanel from "~ReactComponents/LearningSpaceDisplay/LearningSpaceNamePanel/LearningSpaceNamePanel";
 import NotificationManager from "~ReactComponents/GeneralComponents/NotificationManager/NotificationManager";
 import SideBar from "~ReactComponents/LearningSpaceDisplay/SideBar/SideBar";
-import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
+// import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
 import LearningSpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import ExitModal from "~ReactComponents/LearningSpaceDisplay/ExitModal/ExitModal";
