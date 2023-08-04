@@ -2,18 +2,16 @@ import LearningElementTO from "../../../Core/Application/DataTransferObjects/Lea
 import IDSL from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
 import BackendWorldTO from "../../../Core/Application/DataTransferObjects/BackendWorldTO";
 import BackendSpaceTO from "../../../Core/Application/DataTransferObjects/BackendSpaceTO";
-import BackendAdapterUtils from "../../../Core/Adapters/BackendAdapter/BackendAdapterUtils";
 import BackendElementTO from "../../../Core/Application/DataTransferObjects/BackendElementTO";
-import {
-  LearningElementModel,
-  LearningElementModelTypeEnums,
-} from "../../../Core/Domain/Types/LearningElementModelTypes";
+import { LearningElementModelTypeEnums } from "../../../Core/Domain/Types/LearningElementModelTypes";
 import { LearningSpaceTemplateType } from "../../../Core/Domain/Types/LearningSpaceTemplateType";
+import { LearningSpaceThemeType } from "../../../Core/Domain/Types/LearningSpaceThemeTypes";
 
 export const minimalGetWorldDataResponse: BackendWorldTO = {
   worldName: "TestWorld",
   goals: ["TestGoal"],
   description: "TestDescription",
+  evaluationLink: "TestLink",
   spaces: [
     {
       description: "TestDescription",
@@ -34,6 +32,7 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
         },
       ],
       template: LearningSpaceTemplateType.L,
+      templateStyle: LearningSpaceThemeType.Campus,
     },
   ],
 };
@@ -45,6 +44,7 @@ export const expectedWorldTO: BackendWorldTO = {
   goals: expect.arrayContaining([expect.any(String)]),
   spaces: expect.any(Array),
   description: expect.any(String),
+  evaluationLink: expect.any(String),
 };
 
 export const expectedSpaceTO: BackendSpaceTO = {
@@ -56,6 +56,7 @@ export const expectedSpaceTO: BackendSpaceTO = {
   requirements: expect.any(String),
   requiredScore: expect.any(Number),
   template: expect.any(String),
+  templateStyle: expect.any(String),
 };
 
 export const expectedElementTO: Partial<LearningElementTO> = {
