@@ -218,7 +218,7 @@ export default class MockBackendAdapter implements IBackendPort {
           requiredSpacesToEnter: "",
           spaceGoals: ["Raumziel 1/3", "Raumziel 2/3", "Raumziel 3/3"],
           spaceTemplate: "L_32x31_10L",
-          spaceTemplateStyle: "",
+          spaceTemplateStyle: "Campus",
         },
       ],
       elements: [
