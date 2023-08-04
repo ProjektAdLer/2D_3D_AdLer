@@ -14,7 +14,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
--
+- changed the mobile view of the score panel from next to, to on-top of each other
 
 ### Deprecated
 
@@ -22,11 +22,11 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
--
+- removed the modal which forces the user to turn their mnobile devices to landscape mode
 
 ### Fixed
 
--
+- fixed container overflow issues in LearningWorldMenu and LearningSpaceMenu
 
 ### Security
 
