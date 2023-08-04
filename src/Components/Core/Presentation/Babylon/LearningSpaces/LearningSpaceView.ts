@@ -23,23 +23,10 @@ import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
-import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
+import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
 
 // apply earcut (see also top of the page)
 (window as any).earcut = earcut;
-
-const floorTextureLinks: { [key in LearningSpaceTemplateType]: string } = {
-  [LearningSpaceTemplateType.L]: require("../../../../../Assets/textures/WoodFloor051_1K_Color.jpg"),
-  [LearningSpaceTemplateType.R6]: require("../../../../../Assets/textures/WoodFloor054_1K_Color.jpg"),
-  [LearningSpaceTemplateType.R8]: require("../../../../../Assets/textures/Tiles078_1K_Color.jpg"),
-  [LearningSpaceTemplateType.None]: require("../../../../../Assets/textures/Tiles078_1K_Color.jpg"),
-};
-const wallTextureLinks: { [key in LearningSpaceTemplateType]: any } = {
-  [LearningSpaceTemplateType.L]: require("../../../../../Assets/textures/Bricks050_1K_Color.jpg"),
-  [LearningSpaceTemplateType.R6]: require("../../../../../Assets/textures/Plaster001_1K_Color.jpg"),
-  [LearningSpaceTemplateType.R8]: require("../../../../../Assets/textures/Bricks058_1K_Color.jpg"),
-  [LearningSpaceTemplateType.None]: require("../../../../../Assets/textures/Bricks050_1K_Color.jpg"),
-};
 
 export default class LearningSpaceView implements ILearningSpaceView {
   private scenePresenter: IScenePresenter;
@@ -76,7 +63,9 @@ export default class LearningSpaceView implements ILearningSpaceView {
     );
 
     this.viewModel.floorMaterial.diffuseTexture = new Texture(
-      floorTextureLinks[this.viewModel.learningSpaceTemplateType],
+      LearningSpaceThemeLookup.getLearningSpaceTheme(
+        this.viewModel.theme
+      ).floorTexture,
       this.scenePresenter.Scene
     );
 
@@ -91,7 +80,9 @@ export default class LearningSpaceView implements ILearningSpaceView {
       this.scenePresenter.Scene
     );
     this.viewModel.wallMaterial.diffuseTexture = new Texture(
-      wallTextureLinks[this.viewModel.learningSpaceTemplateType],
+      LearningSpaceThemeLookup.getLearningSpaceTheme(
+        this.viewModel.theme
+      ).wallTexture,
       this.scenePresenter.Scene
     );
     (this.viewModel.wallMaterial.diffuseTexture as Texture).vScale = 1.5;
