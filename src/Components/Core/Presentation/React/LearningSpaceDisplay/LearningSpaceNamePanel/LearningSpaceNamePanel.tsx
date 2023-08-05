@@ -28,7 +28,7 @@ export default function LearningSpaceNamePanel({
           src={spaceIcon}
           alt="Learning-Space-Icon"
         ></img>
-        <h1 className="text-xl font-black text-adlerdarkblue text-outline lg:text-4xl">
+        <h1 className="font-black text-md text-adlerdarkblue text-outline lg:text-4xl">
           {name}
         </h1>
       </div>
