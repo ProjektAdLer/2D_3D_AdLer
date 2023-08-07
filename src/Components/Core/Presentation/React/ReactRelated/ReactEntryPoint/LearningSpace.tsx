@@ -14,7 +14,6 @@ import LearningWorldScorePanel from "~ReactComponents/LearningSpaceDisplay/Learn
 export default function LearningSpace() {
   return (
     <React.Fragment>
-      {/* Ich bin ein Testkommentar */}
       <div className="grid h-0 min-h-screen grid-cols-9 grid-rows-6 root">
         <SideBar className="z-10 col-span-3 col-start-1 row-start-1 m-2 pointer-events-none" />
         <section className="fixed z-10 flex flex-col-reverse col-span-2 col-start-8 row-start-1 gap-1 space-x-2 space-x-reverse lg:flex-row-reverse right-2 top-2">
