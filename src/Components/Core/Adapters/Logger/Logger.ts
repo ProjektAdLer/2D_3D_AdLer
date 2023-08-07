@@ -1,8 +1,10 @@
+import { injectable } from "inversify";
 import ILoggerPort from "../../Application/Ports/Interfaces/ILoggerPort";
 import { LogLevelTypesStrings } from "../../Domain/Types/LogLevelTypes";
 import CircularLogBuffer from "./CircularLogBuffer";
 import FileExporter from "./FileExporter";
 
+@injectable()
 export default class Logger implements ILoggerPort {
   private fileExporter: FileExporter;
   private circularLogBuffer: CircularLogBuffer;

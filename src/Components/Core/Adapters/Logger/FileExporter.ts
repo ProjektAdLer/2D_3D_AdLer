@@ -1,11 +1,6 @@
-import { log } from "console";
-import CircularLogBuffer from "./CircularLogBuffer";
-
 class FileExporter {
-  private fileContent: string = "";
   private fileName: string = "AdLerLog.txt";
   private fileType: string = "text/plain";
-  private rawContent: string[] = [];
 
   exportLog(logString: string): void {
     this.generateFile(logString);
