@@ -1,7 +1,5 @@
 import React from "react";
 import LoginComponent from "~ReactComponents/WelcomePage/LoginComponent/LoginComponent";
-// import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
-// import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
 import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
 import TutorialPdfButton from "~ReactComponents/GeneralComponents/Tutorial/TutorialPdfButton";
@@ -37,17 +35,6 @@ export default function WelcomePage() {
         className="fixed z-20 right-2 top-2 max-h-3/4"
         pdfFileUrl={"/manual/adler_user_manual-min.pdf"}
       />
-
-      {/* <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
-        <div className="text-lg font-bold text-adlerdarkblue">
-          <h1>
-            Die AdLer Engine ist für den<br></br>
-            Landscape Modus konzipiert.<br></br>
-            Bitte nimm dein Smartphone quer.<br></br>
-            Danke!
-          </h1>
-        </div>
-      </StyledModal> */}
     </React.Fragment>
   );
 }
