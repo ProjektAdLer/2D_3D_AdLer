@@ -1,8 +1,6 @@
-import { logger } from "../../../../../../Lib/Logger";
 import MenuHeaderBarController from "../../../../../Core/Presentation/React/GeneralComponents/MenuHeaderBar/MenuHeaderBarController";
 import history from "history/browser";
 
-jest.mock("../../../../../../Lib/Logger.ts");
 const mockHistoryBack = jest.spyOn(history, "back");
 const mockHistoryPush = jest.spyOn(history, "push");
 

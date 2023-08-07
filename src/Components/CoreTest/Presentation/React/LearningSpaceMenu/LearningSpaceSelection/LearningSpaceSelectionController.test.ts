@@ -6,8 +6,6 @@ import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USEC
 import ILoadLearningSpaceUseCase from "../../../../../Core/Application/UseCases/LoadLearningSpace/ILoadLearningSpaceUseCase";
 import LearningSpaceSelectionViewModel from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelectionViewModel";
 
-jest.mock("src/Lib/Logger");
-
 const loadSpaceUseCaseMock = mock<ILoadLearningSpaceUseCase>();
 
 const viewModel = new LearningSpaceSelectionViewModel();

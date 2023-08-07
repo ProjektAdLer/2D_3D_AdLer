@@ -6,7 +6,6 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { Semaphore } from "src/Lib/Semaphore";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
-import { logger } from "src/Lib/Logger";
 import ILoadUserLearningWorldsUseCase from "./ILoadUserLearningWorldsUseCase";
 import type IUIPort from "src/Components/Core/Application/Ports/Interfaces/IUIPort";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
