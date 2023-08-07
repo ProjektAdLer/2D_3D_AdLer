@@ -17,7 +17,6 @@ import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import { config } from "../../../../../config";
-import { logger } from "../../../../../Lib/Logger";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import INavigation from "../Navigation/INavigation";
@@ -31,6 +30,8 @@ import IAvatarController from "./IAvatarController";
 import StateMachine from "./StateMachine";
 import IMovementIndicator from "../MovementIndicator/IMovementIndicator";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 const modelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Avatar_male.glb");
 
@@ -39,6 +40,7 @@ export default class AvatarView {
   private navigation: INavigation;
   private movementIndicator: IMovementIndicator;
   private animationBlendValue = 0;
+  private logger: ILoggerPort;
 
   constructor(
     private viewModel: AvatarViewModel,
@@ -52,6 +54,7 @@ export default class AvatarView {
     this.movementIndicator = CoreDIContainer.get<IMovementIndicator>(
       PRESENTATION_TYPES.IMovementIndicator
     );
+    this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
     viewModel.movementTarget.subscribe(this.onMovementTargetChanged);
   }
@@ -353,7 +356,8 @@ export default class AvatarView {
         scenePresenter.Scene
       );
 
-      logger.log(
+      this.logger.log(
+        LogLevelTypes.TRACE,
         velocity.toString() +
           " " +
           velocity.length() +

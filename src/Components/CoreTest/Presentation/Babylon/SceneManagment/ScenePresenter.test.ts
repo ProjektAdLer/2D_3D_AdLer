@@ -9,15 +9,14 @@ import {
 } from "@babylonjs/core";
 import { mock } from "jest-mock-extended";
 import { config } from "../../../../../config";
-import { logger } from "../../../../../Lib/Logger";
 import ScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/ScenePresenter";
 import TestSceneDefinition, {
   fillTestSceneDefinitionHighlightLayerGetter,
   fillTestSceneDefinitionSceneGetter,
 } from "./TestSceneDefinition";
+import Logger from "../../../../Core/Adapters/Logger/Logger";
 
 jest.mock("@babylonjs/core");
-jest.mock("src/Lib/Logger");
 
 describe("scenePresenter", () => {
   let systemUnderTest: ScenePresenter;
@@ -172,9 +171,10 @@ describe("scenePresenter", () => {
     const sceneMock = mock<Scene>();
     testSceneDefinition["scene"] = sceneMock;
     sceneMock.activeCamera = null;
+    const loggerMock = jest.spyOn(Logger.prototype, "log");
 
     systemUnderTest["renderFunction"]();
 
-    expect(logger.warn).toHaveBeenCalledWith("no active camera..");
+    expect(loggerMock).toHaveBeenCalledWith("WARN", "no active camera..");
   });
 });

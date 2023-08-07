@@ -4,6 +4,9 @@ import { LogLevelTypesStrings } from "../../Domain/Types/LogLevelTypes";
 import CircularLogBuffer from "./CircularLogBuffer";
 import FileExporter from "./FileExporter";
 
+//Needed for config.ts
+export type LogLevel = "log" | "warn" | "error";
+
 @injectable()
 export default class Logger implements ILoggerPort {
   private fileExporter: FileExporter;

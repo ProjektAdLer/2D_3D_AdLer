@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { logger } from "src/Lib/Logger";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
 
 /*
   This is the not-hacky way to get the video url, but it requires a fetch request to youtube's oembed api.
@@ -12,6 +15,7 @@ import { logger } from "src/Lib/Logger";
 export default function YoutubeVideoHost({ url }: { url: string }) {
   const [videoUrl, setVideoUrl] = useState("");
   const [videoTitle, setVideoTitle] = useState("VideoTitle");
+  const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
   useEffect(() => {
     async function getYoutubeVideoUrl() {
@@ -26,7 +30,10 @@ export default function YoutubeVideoHost({ url }: { url: string }) {
         setVideoUrl(srcArray[1]);
         setVideoTitle(response.data.title);
       } else {
-        logger.error("Could not extract video url from youtube oembed api");
+        logger.log(
+          LogLevelTypes.ERROR,
+          "Could not extract video url from youtube oembed api"
+        );
         setVideoTitle("Could not extract video url from youtube oembed api");
         setVideoUrl("");
       }

@@ -7,7 +7,6 @@ import { mock } from "jest-mock-extended";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 import LearningElementEntity from "../../../../Core/Domain/Entities/LearningElementEntity";
 import LearningSpaceEntity from "../../../../Core/Domain/Entities/LearningSpaceEntity";
-import { logger } from "../../../../../Lib/Logger";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import { IInternalCalculateLearningWorldScoreUseCase } from "../../../../Core/Application/UseCases/CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
 import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
@@ -15,8 +14,8 @@ import UserLocationTO from "../../../../Core/Application/DataTransferObjects/Use
 import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
-
-jest.mock("../../../../../Lib/Logger");
+import Logger from "../../../../Core/Adapters/Logger/Logger";
+import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendAdapterMock = mock<IBackendPort>();
@@ -273,6 +272,7 @@ describe("ScoreLearningElementUseCase", () => {
 
   test("rejectWithWarning calls logger.warn", async () => {
     const warningMessage = "warning message";
+    const loggerMock = jest.spyOn(Logger.prototype, "log");
 
     try {
       await systemUnderTest["rejectWithWarning"](warningMessage);
@@ -280,7 +280,8 @@ describe("ScoreLearningElementUseCase", () => {
       console.log(e);
     }
 
-    expect(logger.warn).toHaveBeenCalledWith(
+    expect(loggerMock).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
       expect.stringContaining(warningMessage)
     );
   });

@@ -9,17 +9,20 @@ import LearningElementEntity from "../../../Domain/Entities/LearningElementEntit
 import LearningSpaceEntity from "../../../Domain/Entities/LearningSpaceEntity";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import { logger } from "../../../../../Lib/Logger";
 import type ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 import type { IInternalCalculateLearningWorldScoreUseCase } from "../CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
+import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 @injectable()
 export default class ScoreLearningElementUseCase
   implements IScoreLearningElementUseCase
 {
   constructor(
+    @inject(CORE_TYPES.ILogger)
+    private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter)
@@ -107,7 +110,10 @@ export default class ScoreLearningElementUseCase
   }
 
   private rejectWithWarning(message: string, id?: ComponentID): Promise<void> {
-    logger.warn(`Tried scoring H5P learning element with ID ${id}. ` + message);
+    this.logger.log(
+      LogLevelTypes.WARN,
+      `Tried scoring H5P learning element with ID ${id}. ` + message
+    );
     return Promise.reject(message);
   }
 }

@@ -12,13 +12,17 @@ import IBackendPort, {
   UserCredentialParams,
 } from "../../Application/Ports/Interfaces/IBackendPort";
 import IDSL from "./Types/IDSL";
-import { logger } from "src/Lib/Logger";
 import LearningWorldStatusTO from "../../Application/DataTransferObjects/LearningWorldStatusTO";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import ILoggerPort from "../../Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { LogLevelTypes } from "../../Domain/Types/LogLevelTypes";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendPort {
   deletePlayerData(userToken: string): Promise<boolean> {
-    logger.log("MockBackendAdapter.deletePlayerData");
+    const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
+    logger.log(LogLevelTypes.DEBUG, "MockBackendAdapter.deletePlayerData");
     return Promise.resolve(true);
   }
 

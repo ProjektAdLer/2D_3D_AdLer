@@ -10,17 +10,21 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import LearningSpaceDetailController from "./LearningSpaceDetailController";
 import { getLearningElementIcon } from "../../../Utils/GetLearningElementIcon";
 import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
-import { logger } from "src/Lib/Logger";
 import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
 import greenSwosh from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
     LearningSpaceDetailViewModel,
     LearningSpaceDetailController
   >(BUILDER_TYPES.ILearningSpaceDetailBuilder);
+  const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
   const [name] = useObservable<string>(viewModel.name);
   const [description] = useObservable<string>(viewModel.description);
@@ -185,7 +189,10 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                 let completed;
                 const lookup = spaces.find((space) => space.id === requirement);
                 if (lookup === undefined) {
-                  logger.warn("Requirement not found in spaces.");
+                  logger.log(
+                    LogLevelTypes.WARN,
+                    "Requirement not found in spaces."
+                  );
                   return undefined;
                 }
                 name = lookup.name;

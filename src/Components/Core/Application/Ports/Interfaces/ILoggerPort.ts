@@ -1,4 +1,6 @@
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+
 export default interface ILoggerPort {
-  log(loglevel: string, message: string): void;
+  log(loglevel: LogLevelTypes, message: string): void;
   exportLog(): void;
 }

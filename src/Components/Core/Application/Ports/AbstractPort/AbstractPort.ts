@@ -1,6 +1,9 @@
 import { injectable } from "inversify";
-import { logger } from "src/Lib/Logger";
 import { IAbstractPort } from "../Interfaces/IAbstractPort";
+// import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+// import ILoggerPort from "../Interfaces/ILoggerPort";
+// import CORE_TYPES from "~DependencyInjection/CoreTypes";
+// import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 @injectable()
 /**
@@ -9,9 +12,15 @@ import { IAbstractPort } from "../Interfaces/IAbstractPort";
 export default abstract class AbstractPort<T> implements IAbstractPort<T> {
   protected adapters: T[] = [];
 
+  // private logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
+
   public registerAdapter(adapter: T): void {
     if (this.adapters.includes(adapter)) {
-      logger.warn(
+      // this.logger.log(
+      //   LogLevelTypes.WARN,
+      //   'Adapter "' + adapter + '" is already registered with: ' + this
+      // );
+      console.warn(
         'Adapter "' + adapter + '" is already registered with: ' + this
       );
       return;

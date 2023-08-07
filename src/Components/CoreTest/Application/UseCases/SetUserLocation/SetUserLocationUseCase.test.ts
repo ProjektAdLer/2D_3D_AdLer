@@ -4,10 +4,11 @@ import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import { mock } from "jest-mock-extended";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
-import { logger } from "../../../../../Lib/Logger";
+import Logger from "../../../../Core/Adapters/Logger/Logger";
+import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 
 const entityContainerMock = mock<IEntityContainer>();
-jest.mock("../../../../../Lib/Logger");
+const loggerMock = jest.spyOn(Logger.prototype, "log");
 
 describe("SetUserLocationUseCase", () => {
   let systemUnderTest: SetUserLocationUseCase;
@@ -32,8 +33,8 @@ describe("SetUserLocationUseCase", () => {
   test("throws error when no user entity is present on the container", () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([]);
     systemUnderTest.execute({ worldID: 1, spaceID: 1 });
-
-    expect(logger.error).toHaveBeenCalledWith(
+    expect(loggerMock).toHaveBeenCalledWith(
+      LogLevelTypes.ERROR,
       "User is not logged in, cannot set current location"
     );
   });
@@ -47,7 +48,8 @@ describe("SetUserLocationUseCase", () => {
 
     systemUnderTest.execute({ worldID: 1, spaceID: 1 });
 
-    expect(logger.error).toHaveBeenCalledWith(
+    expect(loggerMock).toHaveBeenCalledWith(
+      LogLevelTypes.ERROR,
       "User is not logged in, cannot set current location"
     );
   });

@@ -3,6 +3,7 @@ import LMSPort from "../../../../Core/Application/Ports/LMSPort/LMSPort";
 import LoginButtonPresenter from "../../../../Core/Presentation/React/WelcomePage/LoginComponent/ILoginComponentPresenter";
 import LearningWorldMenuButtonPresenter from "../../../../Core/Presentation/React/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonPresenter";
 
+jest.mock("../../../../Core/Adapters/Logger/Logger");
 describe("LMSPort", () => {
   let systemUnderTest: LMSPort;
 
