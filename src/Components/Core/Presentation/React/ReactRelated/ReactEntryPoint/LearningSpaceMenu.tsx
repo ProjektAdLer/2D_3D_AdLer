@@ -3,8 +3,6 @@ import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/Menu
 import LearningSpaceDetail from "~ReactComponents/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetail";
 import LearningWorldCompletionModal from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal";
 import SpaceSelection from "~ReactComponents/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelection";
-// import StyledModal from "../ReactBaseComponents/StyledModal";
-// import useIsMobilePortrait from "../CustomHooks/useIsMobilePortrait";
 
 export default function LearningSpaceMenu() {
   return (
@@ -20,16 +18,6 @@ export default function LearningSpaceMenu() {
         />
       </div>
       <LearningWorldCompletionModal className="transition-opacity duration-100 ease-in delay-75" />
-      {/* <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
-        <div className="text-lg font-bold text-adlerdarkblue">
-          <h1>
-            Die AdLer Engine ist für den<br></br>
-            Landscape Modus konzipiert.<br></br>
-            Bitte nimm dein Smartphone quer.<br></br>
-            Danke!
-          </h1>
-        </div>
-      </StyledModal> */}
     </React.Fragment>
   );
 }
