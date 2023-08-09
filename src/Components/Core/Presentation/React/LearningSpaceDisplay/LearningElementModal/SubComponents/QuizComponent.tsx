@@ -48,7 +48,7 @@ export default function QuizComponent({
 
   const toggleAnswerSingleChoice = (index: number) => {
     setAnswerColors(
-      answerColors.map((color, i) => (i == index ? "highlight" : "default"))
+      answerColors.map((color, i) => (i === index ? "highlight" : "default"))
     );
   };
 
@@ -70,7 +70,7 @@ export default function QuizComponent({
       <StyledButton
         className="box-border"
         shape="freefloatcenter"
-        disabled={selectedAnswersCount != 1}
+        disabled={selectedAnswersCount !== 1}
       >
         Weiter
       </StyledButton>

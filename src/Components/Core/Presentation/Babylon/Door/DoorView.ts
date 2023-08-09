@@ -1,7 +1,6 @@
 import {
   ActionManager,
   Animation,
-  AnimationGroup,
   Color3,
   ExecuteCodeAction,
   Mesh,
