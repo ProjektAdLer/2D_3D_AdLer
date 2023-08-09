@@ -1,7 +1,8 @@
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import LearningElementModalViewModel from "../LearningElementModalViewModel";
-import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-import { StyledButtonColor } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import StyledButton, {
+  StyledButtonColor,
+} from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { useState, useEffect, useCallback } from "react";
 
 function parseTextToQuiz(text: string): [string, string[]] {
@@ -46,13 +47,12 @@ export default function QuizComponent({
     );
   }, [answerColors]);
 
-  const toggleAnswerSingleChoice = (index: number) => {
-    setAnswerColors(
-      answerColors.map((color, i) => (i == index ? "highlight" : "default"))
-    );
-  };
-
   const generateAnswers = useCallback(() => {
+    const toggleAnswerSingleChoice = (index: number) => {
+      setAnswerColors(
+        answerColors.map((color, i) => (i === index ? "highlight" : "default"))
+      );
+    };
     return answers.map((answer, index) => (
       <StyledButton
         shape="freefloatcenter"
@@ -70,7 +70,7 @@ export default function QuizComponent({
       <StyledButton
         className="box-border"
         shape="freefloatcenter"
-        disabled={selectedAnswersCount != 1}
+        disabled={selectedAnswersCount !== 1}
       >
         Weiter
       </StyledButton>
