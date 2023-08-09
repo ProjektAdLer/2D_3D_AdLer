@@ -63,7 +63,7 @@ export default function QuizComponent({
         {answer}
       </StyledButton>
     ));
-  }, [answers, answerColors]);
+  }, [answers, answerColors, toggleAnswerSingleChoice]);
 
   const nextButton = useCallback(() => {
     return (
