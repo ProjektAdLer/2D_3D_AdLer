@@ -52,13 +52,13 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
     return null;
 
   return (
-    <div
+    <main
       className={tailwindMerge(
         className,
         "flex flex-col gap-2 w-full self-start h-[100svh]"
       )}
     >
-      <div className="flex flex-row items-center justify-between h-[10%] p-1 pb-4 border-b border-gray-500">
+      <article className="flex flex-row portrait:flex-col portrait:items-between portrait:justify-center portrait:h-[20%] portrait:gap-2 items-center justify-between h-[10%] p-1 pb-4 border-b border-gray-500">
         <div className="flex flex-row">
           <img src={spaceIcon} className="w-6 xl:w-8" alt="Lernraum-Icon"></img>
           <div className="ml-2 text-lg font-black text-adlerdarkblue lg:text-2xl">
@@ -75,48 +75,48 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
             {"Lernraum betreten!"}
           </StyledButton>
         )}
-      </div>
-      <div className="flex flex-col w-full gap-2 h-[75%] overflow-auto">
+      </article>
+      <article className="flex flex-col w-full gap-2 h-[75%] overflow-auto">
         {description !== "" && (
-          <div className="pb-2 border-b border-gray-500">
-            <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
+          <section className="pb-2 border-b border-gray-500">
+            <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
               Beschreibung:
-            </div>
-            <div className="items-start ml-6 font-medium">
+            </h3>
+            <p className="items-start ml-6 font-medium portrait:ml-3 portrait:text-xs">
               <TextWithLineBreaks text={description} />
-            </div>
-          </div>
+            </p>
+          </section>
         )}
         {goals.length > 0 && (
-          <div className="pb-2 border-b border-gray-500">
-            <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
+          <section className="pb-2 border-b border-gray-500">
+            <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
               {goals.length > 1 ? "Lernziele:" : "Lernziel:"}
-            </div>
-            <div className="items-start ml-6 font-medium lg:text:lg">
+            </h3>
+            <p className="items-start ml-6 font-medium portrait:text-xs portrait:ml-3 lg:text:lg">
               {goals.map((goal) => {
                 return <TextWithLineBreaks text={goal} key={goal} />;
               })}
-            </div>
-          </div>
+            </p>
+          </section>
         )}
         {elements.length > 0 && (
-          <div className="pb-2 border-b border-gray-500">
-            <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
+          <section className="pb-2 border-b border-gray-500">
+            <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
               {elements.length > 1 ? "Lernelemente:" : "Lernelement:"}
-            </div>
-            <div className="flex flex-col items-start ml-6 font-medium lg:text-lg">
+            </h3>
+            <div className="flex flex-col items-start ml-6 font-medium portrait:ml-3 portrait:text-xs lg:text-lg">
               {elements.map((element) => {
                 return (
                   <div key={element[1]} className="w-full">
                     <div className="flex flex-row justify-between w-full xl:w-3/4">
-                      <div className="flex flex-row items-center gap-x-2">
-                        <div className="relative w-6 ml-2 mr-2 lg:w-8">
+                      <div className="flex flex-row items-center portrait:gap-x-0.5 gap-x-2 max-w-[72%]">
+                        <div className="relative w-6 portrait:w-4 mx-2 portrait:mx-0.5 lg:w-8">
                           {getLearningElementIcon(element[0])}
                           {element[2] && (
                             <img
                               src={greenSwosh}
                               alt=""
-                              className="absolute h-4 lg:h-6 bottom-3 left-4 lg:bottom-6 lg:left-6 "
+                              className="absolute h-4 portrait:h-2 lg:h-6 bottom-3 left-4 lg:bottom-6 lg:left-6 "
                             />
                           )}
                         </div>
@@ -132,7 +132,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                           : "0/" + element[3]}
                         <img
                           src={coinIcon}
-                          className="self-center w-6 ml-1 lg:w-8"
+                          className="self-center w-6 ml-1 portrait:w-4 lg:w-8"
                           alt="Coin-Icon"
                         ></img>
                       </div>
@@ -141,37 +141,37 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                 );
               })}
             </div>
-          </div>
+          </section>
         )}
         {!!requiredPoints && (
-          <div className="pb-2">
-            <div className="flex flex-row justify-between w-full pb-2 xl:w-3/4">
-              <div className="self-center ml-2 text-lg font-black text-adlerdarkblue">
+          <section className="pb-2">
+            <div className="flex flex-row items-center justify-between w-full xl:w-3/4">
+              <h3 className="self-center max-w-[75%] ml-2 text-lg font-black portrait:text-sm text-adlerdarkblue">
                 Benötigte Punkte:
-              </div>
-              <div className="flex flex-row items-start pb-2 ml-6 text-lg font-medium">
+              </h3>
+              <div className="flex flex-row ml-6 text-lg font-medium portrait:text-xs portrait:ml-2">
                 {requiredPoints}
                 <img
                   src={coinIcon}
-                  className="self-center w-6 ml-1 lg:w-8"
+                  className="self-center w-6 ml-1 portrait:w-4 lg:w-8"
                   alt="Coin-Icon"
                 ></img>
               </div>
             </div>
-            <div className="flex flex-row justify-between w-full xl:w-3/4">
-              <div className="self-center ml-2 text-lg font-black text-adlerdarkblue">
+            <div className="flex flex-row items-center justify-between w-full xl:w-3/4">
+              <h3 className="max-w-[75%] self-center ml-2 text-lg font-black portrait:text-sm text-adlerdarkblue">
                 Maximal erreichbare Punkte:
-              </div>
-              <div className="flex flex-row items-start ml-6 text-lg font-medium">
+              </h3>
+              <div className="flex flex-row items-start ml-6 text-lg font-medium portrait:text-xs portrait:ml-2">
                 {elements.reduce((acc, element) => acc + element[3], 0)}
                 <img
                   src={coinIcon}
-                  className="self-center w-6 ml-1 lg:w-8"
+                  className="self-center w-6 ml-1 portrait:w-4 lg:w-8"
                   alt="Coin-Icon"
                 ></img>
               </div>
             </div>
-          </div>
+          </section>
         )}
         {elements.length > 0 && (
           <div className="pb-2 border-b border-gray-500"></div>
@@ -218,7 +218,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
             </div>
           </div>
         )}
-      </div>
-    </div>
+      </article>
+    </main>
   );
 }
