@@ -2,7 +2,8 @@ import React from "react";
 import LoginComponent from "~ReactComponents/WelcomePage/LoginComponent/LoginComponent";
 import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
 import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
-import TutorialPdfButton from "~ReactComponents/GeneralComponents/Tutorial/TutorialPdfButton";
+import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
+import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
 
 export default function WelcomePage() {
   return (
@@ -26,11 +27,8 @@ export default function WelcomePage() {
           Hochschulverbund
         </p>
       </div>
-
-      <TutorialPdfButton
-        className="fixed z-20 right-2 top-2 max-h-3/4"
-        pdfFileUrl={"/manual/adler_user_manual-min.pdf"}
-      />
+      <HelpDeskButton />
+      <HelpDeskModal />
     </React.Fragment>
   );
 }

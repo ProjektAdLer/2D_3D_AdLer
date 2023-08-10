@@ -7,7 +7,6 @@ import history from "history/browser";
 import { Location, Update } from "history";
 import LearningWorldMenu from "./LearningWorldMenu";
 import BugReportButton from "../ReactBaseComponents/BugReportButton";
-import LogExportButton from "../ReactBaseComponents/LogExportButton";
 
 export interface IAppProps {}
 
@@ -48,8 +47,6 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
   } else {
     return (
       <>
-        <LogExportButton />
-        <BugReportButton />
         <WelcomePage />
       </>
     );

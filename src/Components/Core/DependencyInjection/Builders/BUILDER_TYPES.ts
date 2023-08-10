@@ -33,6 +33,8 @@ const BUILDER_TYPES = {
   ILearningWorldScorePanelBuilder: Symbol("ILearningWorldScorePanelBuilder"),
   IDecorationBuilder: Symbol("IDecorationBuilder"),
   IStandInDecorationBuilder: Symbol("IStandInDecorationBuilder"),
+  IHelpDeskModalBuilder: Symbol("IHelpDeskModalBuilder"),
+  IHelpDeskButtonBuilder: Symbol("IHelpDeskButtonBuilder"),
 };
 
 export default BUILDER_TYPES;
