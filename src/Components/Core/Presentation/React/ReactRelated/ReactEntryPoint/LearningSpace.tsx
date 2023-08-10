@@ -7,7 +7,6 @@ import SideBar from "~ReactComponents/LearningSpaceDisplay/SideBar/SideBar";
 import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
 import LearningSpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import ExitModal from "~ReactComponents/LearningSpaceDisplay/ExitModal/ExitModal";
-import TutorialPdfButton from "~ReactComponents/GeneralComponents/Tutorial/TutorialPdfButton";
 import LearningSpaceScorePanel from "~ReactComponents/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanel";
 import LearningWorldScorePanel from "~ReactComponents/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanel";
 
@@ -29,10 +28,6 @@ export default function LearningSpace() {
         <BottomTooltip />
         <LearningElementModal className="z-10" />
         <ExitModal className="z-20" />
-        <TutorialPdfButton
-          className="fixed z-20 left-2 bottom-2 max-h-3/4"
-          pdfFileUrl={"/manual/adler_user_manual-min.pdf"}
-        />
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
         <NotificationManager className="z-50" />

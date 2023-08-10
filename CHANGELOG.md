@@ -15,6 +15,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - improved portrait mobile display of menus and LearningSpace
+- the place where the help button is showed
 
 ### Deprecated
 

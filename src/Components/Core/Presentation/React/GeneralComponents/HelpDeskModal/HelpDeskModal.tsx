@@ -23,7 +23,7 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
   if (!isOpen) return null;
 
   return (
-    <div>
+    <div className="z-50">
       <StyledModal
         title={viewModel.modalTitle}
         onClose={closeModal}
@@ -31,9 +31,14 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
         className={tailwindMerge(className, "p-5 rounded-lg")}
       >
         <p className="m-2 my-4">
-          Hier findest du die AdLer Engine Bedienungsanleitung, den LogExport
-          Button und den BugReport Button.
+          Falls Probleme mit der AdLer Engine auftreten sollten oder du etwas
+          nicht verstehst, kannst du hier:
         </p>
+        <ul className="flex flex-col items-start mx-10">
+          <li>die AdLer Engine Bedienungsanleitung aufrufen</li>
+          <li>Bugs melden...</li>
+          <li>...die dazugehörige Log Datei herunterladen</li>
+        </ul>
         <section className="flex flex-row justify-around gap-2 my-6">
           <div className="flex flex-col items-center">
             <TutorialPdfButton

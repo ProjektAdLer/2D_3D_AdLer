@@ -12,6 +12,8 @@ import worldIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-ic
 import spaceIcon from "../../../../../../Assets/icons/13-space/space-icon-nobg.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
+import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
+import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
 
 export default function SideBar({ className }: AdLerUIComponent) {
   const [, controller] = useBuilder<SideBarViewModel, SideBarController>(
@@ -62,7 +64,19 @@ export default function SideBar({ className }: AdLerUIComponent) {
           </p>
         </div>
 
-        <FullscreenSwitch />
+        <div className="flex flex-row items-center w-64">
+          <FullscreenSwitch />
+          <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
+            Vollbild
+          </p>
+        </div>
+        <div className="flex flex-row items-center w-64">
+          <HelpDeskButton />
+          <HelpDeskModal />
+          <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
+            Hilfe-Fenster
+          </p>
+        </div>
       </StyledContainer>
     </CustomDropdown>
   );
