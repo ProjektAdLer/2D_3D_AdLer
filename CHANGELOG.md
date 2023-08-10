@@ -14,7 +14,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
--
+- improved portrait mobile display of menus and LearningSpace
 
 ### Deprecated
 
@@ -22,7 +22,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
--
+- FullscreenButton in SideBar (mobile)
+- Dotted borders in menus
 
 ### Fixed
 
