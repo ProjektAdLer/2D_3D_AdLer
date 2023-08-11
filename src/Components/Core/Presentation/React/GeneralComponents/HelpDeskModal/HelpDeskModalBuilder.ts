@@ -15,7 +15,6 @@ export default class HelpDeskModalBuilder extends PresentationBuilder<
 > {
   constructor() {
     super(HelpDeskModalViewModel, undefined, undefined, HelpDeskModalPresenter);
-    console.log("HelpDeskModalBuilder constructor");
   }
 
   override buildPresenter(): void {
@@ -28,10 +27,8 @@ export default class HelpDeskModalBuilder extends PresentationBuilder<
     CoreDIContainer.bind<IHelpDeskModalPresenter>(
       PRESENTATION_TYPES.IHelpDeskModalPresenter
     ).toConstantValue(this.presenter!);
-    console.log("HelpDeskModalBuilder buildPresenter");
   }
   override buildViewModel(): void {
     super.buildViewModel();
-    console.log("HelpDeskModalBuilder buildViewModel");
   }
 }
