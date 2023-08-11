@@ -8,5 +8,8 @@ describe("HelpDeskButtonBuilder", () => {
   test("builder does its job of building the mvc construct", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildController();
+
+    expect(systemUnderTest["viewModel"]).toBeDefined();
+    expect(systemUnderTest["controller"]).toBeDefined();
   });
 });
