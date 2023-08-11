@@ -24,7 +24,7 @@ export default function LearningSpaceNamePanel({
     <StyledContainer className={tailwindMerge(className)}>
       <div className="flex items-center justify-between">
         <img
-          className="w-8 mr-4 lg:w-14"
+          className="w-8 mr-4 portrait:mr-1.5 lg:w-14"
           src={spaceIcon}
           alt="Learning-Space-Icon"
         ></img>

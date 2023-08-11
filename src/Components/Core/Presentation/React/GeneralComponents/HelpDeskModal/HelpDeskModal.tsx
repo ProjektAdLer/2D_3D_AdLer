@@ -23,19 +23,40 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
   if (!isOpen) return null;
 
   return (
-    <div>
+    <div className="z-50">
       <StyledModal
         title={viewModel.modalTitle}
         onClose={closeModal}
         showModal={isOpen}
-        className={tailwindMerge(
-          className,
-          "flex flex-col justify-center gap-2 p-5 rounded-lg"
-        )}
+        className={tailwindMerge(className, "p-5 rounded-lg")}
       >
-        <TutorialPdfButton pdfFileUrl={"/manual/adler_user_manual-min.pdf"} />
-        <LogExportButton />
-        <BugReportButton />
+        <p className="m-2 my-4">
+          Falls Probleme mit der AdLer Engine auftreten sollten oder du etwas
+          nicht verstehst, kannst du hier:
+        </p>
+        <ul className="flex flex-col items-start mx-10">
+          <li>die AdLer Engine Bedienungsanleitung aufrufen</li>
+          <li>Bugs melden...</li>
+          <li>...die dazugehörige Log Datei herunterladen</li>
+        </ul>
+        <section className="flex flex-row justify-around gap-2 my-6">
+          <div className="flex flex-col items-center">
+            <TutorialPdfButton
+              pdfFileUrl={"/manual/adler_user_manual-min.pdf"}
+            />
+            <p className="p-1 font-bold text-center">
+              AdLer Engine <br></br>Bedienungsanleitung
+            </p>
+          </div>
+          <div className="flex flex-col items-center">
+            <LogExportButton />
+            <p className="p-1 font-bold text-center">Log Export</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <BugReportButton />
+            <p className="p-1 font-bold text-center">Bug Report</p>
+          </div>
+        </section>
       </StyledModal>
     </div>
   );

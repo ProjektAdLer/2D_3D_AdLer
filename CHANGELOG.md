@@ -14,7 +14,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
--
+- improved portrait mobile display of menus and LearningSpace
+- the place where the help button is showed
 
 ### Deprecated
 
@@ -22,7 +23,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
--
+- FullscreenButton in SideBar (mobile)
+- Dotted borders in menus
 
 ### Fixed
 
