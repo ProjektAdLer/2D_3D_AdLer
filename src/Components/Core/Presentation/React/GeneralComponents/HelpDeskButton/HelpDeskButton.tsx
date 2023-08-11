@@ -13,14 +13,14 @@ export default function HelpDeskButton({ className }: AdLerUIComponent<{}>) {
     IHelpDeskButtonController
   >(BUILDER_TYPES.IHelpDeskButtonBuilder);
   return (
-    <>
+    <div className={tailwindMerge(className, "")}>
       <StyledButton
         onClick={() => controller.onHelpDeskButtonClicked()}
-        className={tailwindMerge(className, "max-h-3/4")}
+        className="max-h-3/4"
       >
         {viewModel.buttonTitle}
         <img className="w-10 xl:w-12" src={helpIcon} alt="Help Icon" />
       </StyledButton>
-    </>
+    </div>
   );
 }

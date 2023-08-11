@@ -11,7 +11,7 @@ export default function WelcomePage() {
       <div className="grid h-[100svh] grid-cols-5 grid-rows-6 p-6 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
         <LoginComponent className="z-10 col-start-1 row-start-1 portrait:self-start portrait:justify-self-start" />
 
-        <HelpDeskButton className="col-start-5 row-start-1 portrait:justify-self-start" />
+        <HelpDeskButton className="col-start-5 row-start-1 justify-self-end" />
         <HelpDeskModal />
 
         <h1 className="self-end p-2 text-lg font-extrabold rounded-lg portrait:text-2xl portrait:row-start-1 portrait:row-span-1 portrait:col-start-1 portrait:col-span-5 landscape:col-span-2 landscape:col-start-4 landscape:row-start-1 text-adlerdarkblue lg:landscape:col-span-3 lg:landscape:col-start-2 xl:landscape:col-start-1 xl:landscape:col-span-5 lg:landscape:row-start-1 lg:p-5 justify-self-center lg:text-4xl 2xl:text-8xl">
