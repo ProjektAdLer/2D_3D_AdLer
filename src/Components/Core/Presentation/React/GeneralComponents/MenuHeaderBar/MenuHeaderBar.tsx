@@ -55,7 +55,7 @@ export default function MenuHeaderBar({
             {location === "world" ? "Lernwelt Menu" : null}
           </StyledContainer>
         </div>
-        <div className="flex items-end w-1/2 ">
+        <div className="flex justify-end w-1/2 ">
           <HelpDeskButton />
           <HelpDeskModal />
         </div>
