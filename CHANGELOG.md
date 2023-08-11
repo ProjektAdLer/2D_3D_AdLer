@@ -10,7 +10,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
--
+- new icon for manual
 
 ### Changed
 

@@ -30,14 +30,17 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
         showModal={isOpen}
         className={tailwindMerge(className, "p-5 rounded-lg")}
       >
-        <p className="m-2 my-4 text-adlerdarkblue">
+        <p className="m-2 my-4 font-bold text-adlerdarkblue">
           Falls Probleme mit der AdLer Engine auftreten sollten oder du etwas
           nicht verstehst, kannst du hier:
         </p>
         <ul className="flex flex-col items-start ml-10 list-disc text-adlerdarkblue">
           <li>die AdLer Engine Bedienungsanleitung aufrufen</li>
           <li>Bugs melden...</li>
-          <li>...die dazugehörige Log Datei herunterladen</li>
+          <li>
+            ...die dazugehörige Log Datei herunterladen, um sie an den Bug
+            Report anzuhängen.
+          </li>
         </ul>
         <section className="flex flex-row justify-around gap-2 my-6">
           <div className="flex flex-col items-center">
@@ -57,7 +60,7 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
           <div className="flex flex-col items-center">
             <LogExportButton />
             <p className="p-1 font-bold text-center text-adlerdarkblue">
-              Log Export für Bug Report
+              Log Export für <br></br>Bug Report
             </p>
           </div>
         </section>
