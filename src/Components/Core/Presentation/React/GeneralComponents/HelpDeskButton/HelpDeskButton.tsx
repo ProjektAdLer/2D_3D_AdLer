@@ -15,7 +15,7 @@ export default function HelpDeskButton({ className }: AdLerUIComponent<{}>) {
   return (
     <div className={tailwindMerge(className, "")}>
       <StyledButton onClick={() => controller.onHelpDeskButtonClicked()}>
-        {viewModel.buttonTitle}
+        {viewModel?.buttonTitle}
         <img className="w-10 xl:w-12" src={helpIcon} alt="Help Icon" />
       </StyledButton>
     </div>
