@@ -35,6 +35,7 @@ const BUILDER_TYPES = {
   IStandInDecorationBuilder: Symbol("IStandInDecorationBuilder"),
   IHelpDeskModalBuilder: Symbol("IHelpDeskModalBuilder"),
   IHelpDeskButtonBuilder: Symbol("IHelpDeskButtonBuilder"),
+  IAdaptabilityElementBuilder: Symbol("IAdaptabilityElementBuilder"),
 };
 
 export default BUILDER_TYPES;

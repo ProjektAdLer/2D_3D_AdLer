@@ -136,7 +136,7 @@ export default class MockBackendAdapter implements IBackendPort {
         return Promise.resolve(
           "http://" +
             window.location.host +
-            "/SampleLearningElementData/testQuiz.txt"
+            "/SampleLearningElementData/testQuiz.json"
         );
       /* istanbul ignore next */
       default:

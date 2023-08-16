@@ -10,6 +10,7 @@ import UserLearningWorldsTO from "../../DataTransferObjects/UserLearningWorldsTO
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import LearningWorldScoreTO from "../../DataTransferObjects/LearningWorldScoreTO";
 import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
+import QuizElementTO from "../../DataTransferObjects/QuizElementTO";
 
 @injectable()
 export default class LearningWorldPort
@@ -85,6 +86,14 @@ export default class LearningWorldPort
     this.adapters.forEach((adapter) => {
       if (adapter.onLearningElementScored)
         adapter.onLearningElementScored(hasScored, learningElementID);
+    });
+  }
+
+  // adaptability
+  public onAdaptabilityElementLoaded(quizelementTO: QuizElementTO): void {
+    this.adapters.forEach((adapter) => {
+      if (adapter.onAdaptabilityElementLoaded)
+        adapter.onAdaptabilityElementLoaded(quizelementTO);
     });
   }
 }
