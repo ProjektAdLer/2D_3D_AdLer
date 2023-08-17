@@ -39,16 +39,6 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
   );
   const [isAvailable] = useObservable<boolean>(viewModel.isAvailable);
 
-  console.log(
-    "LearningSpaceDetail: ",
-    name,
-    description,
-    goals,
-    elements,
-    requiredPoints,
-    requirements,
-    spaces
-  );
   // return if any of the observables is undefined
   if (
     name === undefined ||
