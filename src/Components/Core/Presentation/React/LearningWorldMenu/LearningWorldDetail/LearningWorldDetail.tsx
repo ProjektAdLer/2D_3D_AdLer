@@ -56,9 +56,9 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
               <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
                 Beschreibung:
               </h3>
-              <p className="items-start ml-6 font-medium portrait:text-xs">
+              <div className="items-start ml-6 font-medium portrait:text-xs">
                 <TextWithLineBreaks text={description} />
-              </p>
+              </div>
             </div>
           ))}
         {goals === undefined ||
@@ -67,11 +67,11 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
               <h3 className="self-center ml-2 font-black text-adlerdarkblue portrait:text-sm lg:mb-2">
                 {goals.length > 1 ? "Lernziele:" : "Lernziel:"}
               </h3>
-              <p className="items-start ml-6 font-medium portrait:text-xs lg:text:lg">
+              <div className="items-start ml-6 font-medium portrait:text-xs lg:text:lg">
                 {goals.map((goal) => {
                   return <TextWithLineBreaks text={goal} key={goal} />;
                 })}
-              </p>
+              </div>
             </div>
           ))}
         <section className="pb-2 border-b border-gray-500">
@@ -108,9 +108,9 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
           <h3 className="self-center ml-2 font-black text-adlerdarkblue portrait:text-sm lg:mb-2">
             Anzahl Räume:
           </h3>
-          <p className="items-start ml-6 font-medium portrait:text-xs lg:text:lg">
+          <div className="items-start ml-6 font-medium portrait:text-xs lg:text:lg">
             {spaces?.length}
-          </p>
+          </div>
         </section>
       </article>
     </main>
