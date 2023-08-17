@@ -33,7 +33,7 @@ import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_T
 import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
-const modelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Avatar_male.glb");
+const modelLink = require("../../../../../Assets/3dModels/campusTheme/3DModel_Avatar_male.glb");
 
 export default class AvatarView {
   private scenePresenter: IScenePresenter;

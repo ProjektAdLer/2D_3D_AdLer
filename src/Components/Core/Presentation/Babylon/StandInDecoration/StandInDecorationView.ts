@@ -9,9 +9,9 @@ import { Mesh, Tools, Vector3 } from "@babylonjs/core";
 import ArrayItemRandomizer from "../../Utils/ArrayItemRandomizer/ArrayItemRandomizer";
 
 const modelLinks = [
-  require("../../../../../Assets/3dModels/defaultTheme/d-moebel-komp-1.glb"),
-  require("../../../../../Assets/3dModels/defaultTheme/d-moebel-komp-2.glb"),
-  require("../../../../../Assets/3dModels/defaultTheme/d-moebel-komp-3.glb"),
+  require("../../../../../Assets/3dModels/campusTheme/d-moebel-komp-1.glb"),
+  require("../../../../../Assets/3dModels/campusTheme/d-moebel-komp-2.glb"),
+  require("../../../../../Assets/3dModels/campusTheme/d-moebel-komp-3.glb"),
   null,
   null,
   null,

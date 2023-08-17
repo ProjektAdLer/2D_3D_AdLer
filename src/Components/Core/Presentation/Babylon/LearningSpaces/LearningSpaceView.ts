@@ -29,16 +29,16 @@ import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/Lear
 (window as any).earcut = earcut;
 
 const floorTextureLinks: { [key in LearningSpaceTemplateType]: string } = {
-  [LearningSpaceTemplateType.L]: require("../../../../../Assets/textures/WoodFloor051_1K_Color.jpg"),
-  [LearningSpaceTemplateType.R6]: require("../../../../../Assets/textures/WoodFloor054_1K_Color.jpg"),
-  [LearningSpaceTemplateType.R8]: require("../../../../../Assets/textures/Tiles078_1K_Color.jpg"),
-  [LearningSpaceTemplateType.None]: require("../../../../../Assets/textures/Tiles078_1K_Color.jpg"),
+  [LearningSpaceTemplateType.L]: require("../../../../../Assets/textures/campusTheme/1Floor.jpg"),
+  [LearningSpaceTemplateType.R6]: require("../../../../../Assets/textures/campusTheme/2Floor.jpg"),
+  [LearningSpaceTemplateType.R8]: require("../../../../../Assets/textures/campusTheme/3Floor.jpg"),
+  [LearningSpaceTemplateType.None]: require("../../../../../Assets/textures/campusTheme/4Floor.jpg"),
 };
 const wallTextureLinks: { [key in LearningSpaceTemplateType]: any } = {
-  [LearningSpaceTemplateType.L]: require("../../../../../Assets/textures/Bricks050_1K_Color.jpg"),
-  [LearningSpaceTemplateType.R6]: require("../../../../../Assets/textures/Plaster001_1K_Color.jpg"),
-  [LearningSpaceTemplateType.R8]: require("../../../../../Assets/textures/Bricks058_1K_Color.jpg"),
-  [LearningSpaceTemplateType.None]: require("../../../../../Assets/textures/Bricks050_1K_Color.jpg"),
+  [LearningSpaceTemplateType.L]: require("../../../../../Assets/textures/campusTheme/1Wall.jpg"),
+  [LearningSpaceTemplateType.R6]: require("../../../../../Assets/textures/campusTheme/2Wall.jpg"),
+  [LearningSpaceTemplateType.R8]: require("../../../../../Assets/textures/campusTheme/3Wall.jpg"),
+  [LearningSpaceTemplateType.None]: require("../../../../../Assets/textures/campusTheme/4Wall.jpg"),
 };
 
 export default class LearningSpaceView implements ILearningSpaceView {
