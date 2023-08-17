@@ -39,9 +39,20 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
   );
   const [isAvailable] = useObservable<boolean>(viewModel.isAvailable);
 
+  console.log(
+    "LearningSpaceDetail: ",
+    name,
+    description,
+    goals,
+    elements,
+    requiredPoints,
+    requirements,
+    spaces
+  );
   // return if any of the observables is undefined
   if (
     name === undefined ||
+    name === "" ||
     description === undefined ||
     goals === undefined ||
     elements === undefined ||
@@ -82,9 +93,9 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
             <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
               Beschreibung:
             </h3>
-            <p className="items-start ml-6 font-medium portrait:ml-3 portrait:text-xs">
+            <div className="items-start ml-6 font-medium portrait:ml-3 portrait:text-xs">
               <TextWithLineBreaks text={description} />
-            </p>
+            </div>
           </section>
         )}
         {goals.length > 0 && (
@@ -92,11 +103,11 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
             <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
               {goals.length > 1 ? "Lernziele:" : "Lernziel:"}
             </h3>
-            <p className="items-start ml-6 font-medium portrait:text-xs portrait:ml-3 lg:text:lg">
+            <div className="items-start ml-6 font-medium portrait:text-xs portrait:ml-3 lg:text:lg">
               {goals.map((goal) => {
                 return <TextWithLineBreaks text={goal} key={goal} />;
               })}
-            </p>
+            </div>
           </section>
         )}
         {elements.length > 0 && (
