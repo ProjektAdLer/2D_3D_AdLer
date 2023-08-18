@@ -56,13 +56,13 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
     <main
       className={tailwindMerge(
         className,
-        "flex flex-col gap-2 w-full self-start h-[100svh]"
+        "flex flex-col gap-2 w-full self-start h-[100svh] portrait:h-[45svh]"
       )}
     >
-      <article className="flex flex-row portrait:flex-col portrait:items-between portrait:justify-center portrait:h-[20%] portrait:gap-2 items-center justify-between h-[10%] p-1 pb-4 border-b border-gray-500">
+      <article className="flex flex-row portrait:flex-col portrait:items-between portrait:justify-center portrait:h-[25%] portrait:gap-2 items-center justify-between h-[10%] p-1 pb-4 border-b border-gray-500">
         <div className="flex flex-row">
           <img src={spaceIcon} className="w-6 xl:w-8" alt="Lernraum-Icon"></img>
-          <div className="ml-2 text-lg font-black text-adlerdarkblue lg:text-2xl">
+          <div className="flex-wrap ml-2 overflow-x-auto font-black break-words text-md text-adlerdarkblue lg:text-2xl">
             {name}
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
           <StyledButton
             color="highlight"
             shape="freefloatleft"
-            className="mt-2 mb-2 animate-bounce-once"
+            className="self-center block m-2 portrait:p-4 justify-self-center animate-bounce-once bg-nodehandlecolor"
             onClick={controller.onLearningSpaceButtonClicked}
           >
             {"Lernraum betreten!"}
@@ -117,7 +117,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                             <img
                               src={greenSwosh}
                               alt=""
-                              className="absolute h-4 portrait:h-2 lg:h-6 bottom-3 left-4 lg:bottom-6 lg:left-6 "
+                              className="absolute h-4 portrait:h-2 lg:h-6 portrait:bottom-5 portrait:left-3 bottom-3 left-4 lg:bottom-6 lg:left-6 "
                             />
                           )}
                         </div>
@@ -145,7 +145,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
           </section>
         )}
         {!!requiredPoints && (
-          <section className="pb-2">
+          <section className="flex flex-col gap-2">
             <div className="flex flex-row items-center justify-between w-full xl:w-3/4">
               <h3 className="self-center max-w-[75%] ml-2 text-lg font-black portrait:text-sm text-adlerdarkblue">
                 Benötigte Punkte:
