@@ -30,10 +30,10 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
     <main
       className={tailwindMerge(
         className,
-        "flex flex-col self-start gap-2 w-full h-full overflow-hidden"
+        "flex flex-col self-start gap-2 m-1 w-full h-full overflow-hidden"
       )}
     >
-      <article className="flex overflow-x-auto w-full flex-row portrait:flex-col portrait:items-between portrait:justify-center items-center h-[12%] portrait:h-[20%] portrait:gap-2 justify-between p-1 border-b border-gray-500">
+      <article className="flex w-full flex-row portrait:flex-col portrait:items-between portrait:justify-center items-center h-[12%] portrait:h-[20%] portrait:gap-2 justify-between p-1 border-b border-gray-500">
         <div className="flex">
           <img src={worldIcon} className="w-6 xl:w-8" alt="Lernwelt-Icon"></img>
           <h2 className="flex-wrap ml-2 overflow-x-auto font-black break-words text-md text-adlerdarkblue lg:text-2xl">
@@ -43,7 +43,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
         <StyledButton
           color="highlight"
           shape="freefloatleft"
-          className="self-center block m-4 justify-self-center animate-bounce-once bg-nodehandlecolor"
+          className="self-center block m-2 portrait:p-2 justify-self-center animate-bounce-once bg-nodehandlecolor"
           onClick={controller.onEnterLearningWorldButtonClicked}
         >
           {"Lernwelt öffnen!"}

@@ -45,7 +45,7 @@ export default function LearningSpaceSelection({
     <main
       className={tailwindMerge(
         className,
-        "w-full flex-col flex portrait:h-[91svh] h-[83svh] lg:h-[93svh] overflow-auto"
+        "w-full flex-col flex portrait:h-[45svh] h-[83svh] lg:h-[93svh] overflow-auto"
       )}
     >
       {

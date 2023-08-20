@@ -24,7 +24,7 @@ export default function WelcomePage() {
           <img className="w-56 m-4 lg:w-3/6" src={logo} alt="Adler Logo" />
         </div>
 
-        <p className="self-end p-2 text-xs text-center rounded-lg portrait:text-left portrait:row-start-6 portrait:col-start-1 portrait:col-span-5 portrait:text-xs landscape:col-span-5 landscape:col-start-1 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6">
+        <p className="self-end p-2 text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1 portrait:col-span-5 portrait:text-xs landscape:col-span-5 landscape:col-start-1 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6">
           © Projekt AdLer, Technische Hochschule Aschaffenburg, Hochschule für
           angewandte Wissenschaften Kempten, ZFH - Zentrum für Fernstudien im
           Hochschulverbund

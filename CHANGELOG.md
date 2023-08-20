@@ -14,7 +14,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- improved portrait mobile display of menus and LearningSpace
+- improved portrait mobile display of LearningSpace
+- changed the direction of menus in portrait mode from side-by-side horizontal view to vertical view
 - the place where the help button is showed
 
 ### Deprecated
