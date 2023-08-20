@@ -13,12 +13,15 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
-
+import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 @injectable()
 export default class CalculateLearningWorldScoreUseCase
   implements ICalculateLearningWorldScoreUseCase
 {
   constructor(
+    @inject(CORE_TYPES.ILogger)
+    private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private entitiyContainer: IEntityContainer,
     @inject(PORT_TYPES.ILearningWorldPort)
@@ -33,6 +36,10 @@ export default class CalculateLearningWorldScoreUseCase
     worldID,
   }: InternalCalculateLearningWorldScoreUseCaseParams): LearningWorldScoreTO {
     const result = this.calculateLearningWorldScore(worldID);
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      `CalculateLearningWorldScoreUseCase: InternalExecute, WorldID: ${worldID}."`
+    );
     return result;
   }
   execute(): void {
@@ -43,6 +50,10 @@ export default class CalculateLearningWorldScoreUseCase
 
     const result = this.calculateLearningWorldScore(userLocation.worldID);
 
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      `CalculateLearningWorldScoreUseCase: Execute, WorldID: ${userLocation.worldID}."`
+    );
     this.worldPort.onLearningWorldScored(result);
   }
 
@@ -56,12 +67,20 @@ export default class CalculateLearningWorldScoreUseCase
       );
 
     if (worlds.length === 0) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `CalculateLearningWorldScoreUseCase: Could not find any worlds!`
+      );
       throw new Error(`Could not find any worlds!`);
     }
 
     // get the requested space
     const world = worlds.find((s) => s.id === worldID);
     if (!world) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `CalculateLearningWorldScoreUseCase: Could not find world with id ${worldID}`
+      );
       throw new Error(`Could not find world with id ${worldID}`);
     }
 
