@@ -112,7 +112,9 @@ export default class ScoreLearningElementUseCase
   private rejectWithWarning(message: string, id?: ComponentID): Promise<void> {
     this.logger.log(
       LogLevelTypes.WARN,
-      `Tried scoring H5P learning element with ID ${id}. ` + message
+      `ScoreLearningElementUseCase: ` +
+        message +
+        `${id ? " ElementID: " + id : ""}`
     );
     return Promise.reject(message);
   }
