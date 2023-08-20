@@ -9,12 +9,16 @@ import LearningElementTO from "../../DataTransferObjects/LearningElementTO";
 import type IGetLearningElementSourceUseCase from "../GetLearningElementSource/IGetLearningElementSourceUseCase";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 import ILoadLearningElementUseCase from "./ILoadLearningElementUseCase";
+import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 @injectable()
 export default class LoadLearningElementUseCase
   implements ILoadLearningElementUseCase
 {
   constructor(
+    @inject(CORE_TYPES.ILogger)
+    private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(PORT_TYPES.ILearningWorldPort)
@@ -38,15 +42,23 @@ export default class LoadLearningElementUseCase
         (e) => e.id === elementID && e.parentWorldID === userLocation.worldID
       );
 
-    if (elementEntity.length === 0)
+    if (elementEntity.length === 0) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `Could not find element with ID ${elementID} in world ${userLocation.worldID}`
+      );
       throw new Error(
         `Could not find element with ID ${elementID} in world ${userLocation.worldID}`
       );
-    else if (elementEntity.length > 1)
+    } else if (elementEntity.length > 1) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`
+      );
       throw new Error(
         `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`
       );
-
+    }
     let elementTO = this.toTO(elementEntity[0]);
 
     elementTO.filePath =
@@ -55,6 +67,10 @@ export default class LoadLearningElementUseCase
         worldID: elementTO.parentWorldID,
       });
 
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      `Loaded element ${elementID} in world ${userLocation.worldID}.`
+    );
     this.worldPort.onLearningElementLoaded(elementTO);
 
     return Promise.resolve();
