@@ -107,7 +107,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
   private rejectWithWarning(message: string): Promise<boolean> {
     this.logger.log(
       LogLevelTypes.WARN,
-      "Tried scoring H5P learning element. " + message
+      "ScoreH5PLearningElementUseCase: " + message
     );
     return Promise.reject(message);
   }
