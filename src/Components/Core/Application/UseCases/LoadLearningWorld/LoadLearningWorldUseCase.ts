@@ -55,7 +55,10 @@ export default class LoadLearningWorldUseCase
     const userData = this.container.getEntitiesOfType(UserDataEntity);
     if (userData.length === 0 || userData[0]?.isLoggedIn === false) {
       this.uiPort.displayNotification("User is not logged in!", "error");
-      this.logger.log(LogLevelTypes.ERROR, "User is not logged in!");
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        "LoadLearningWorldUseCase: User is not logged in!"
+      );
       return Promise.reject("User is not logged in");
     }
 
@@ -66,7 +69,10 @@ export default class LoadLearningWorldUseCase
       ) === undefined
     ) {
       this.uiPort.displayNotification("World is not available!", "error");
-      this.logger.log(LogLevelTypes.ERROR, "World is not available!");
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        "LoadLearningWorldUseCase: World is not available!"
+      );
       return Promise.reject("World is not available");
     }
 
@@ -105,7 +111,10 @@ export default class LoadLearningWorldUseCase
       space.requirementsString = spaceAvailability.requirementsString;
       space.requirementsSyntaxTree = spaceAvailability.requirementsSyntaxTree;
     });
-
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      "LoadLearningWorldUseCase: Loaded world and cumulated space scores."
+    );
     // set user location
     this.setUserLocationUseCase.execute({ worldID: data.worldID });
 
