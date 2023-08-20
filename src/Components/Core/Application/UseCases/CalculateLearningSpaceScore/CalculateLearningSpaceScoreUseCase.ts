@@ -12,6 +12,8 @@ import ICalculateLearningSpaceScoreUseCase, {
   IInternalCalculateLearningSpaceScoreUseCase,
   InternalCalculateLearningSpaceScoreUseCaseParams,
 } from "./ICalculateLearningSpaceScoreUseCase";
+import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 @injectable()
 export default class CalculateLearningSpaceScoreUseCase
@@ -20,6 +22,8 @@ export default class CalculateLearningSpaceScoreUseCase
     IInternalCalculateLearningSpaceScoreUseCase
 {
   constructor(
+    @inject(CORE_TYPES.ILogger)
+    private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private entitiyContainer: IEntityContainer,
     @inject(PORT_TYPES.ILearningWorldPort)
@@ -33,6 +37,10 @@ export default class CalculateLearningSpaceScoreUseCase
     worldID,
   }: InternalCalculateLearningSpaceScoreUseCaseParams): LearningSpaceScoreTO {
     const result = this.calculateLearningSpaceScore(spaceID, worldID);
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      `CalculateLearningSpaceScoreUseCase: InternalExecute, SpaceID: ${spaceID}, WorldID: ${worldID}."`
+    );
     return result;
   }
 
@@ -46,7 +54,10 @@ export default class CalculateLearningSpaceScoreUseCase
       userLocation.spaceID,
       userLocation.worldID
     );
-
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      `CalculateLearningSpaceScoreUseCase: Execute, SpaceID: ${userLocation.spaceID}, WorldID: ${userLocation.worldID}."`
+    );
     this.worldPort.onLearningSpaceScored(result);
   }
 
@@ -60,6 +71,10 @@ export default class CalculateLearningSpaceScoreUseCase
         (e) => e.id === spaceID && e.parentWorldID === worldID
       );
     if (spaces.length === 0 || spaces.length > 1) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `CalculateLearningSpaceScoreUseCase: Could not find matching space.`
+      );
       throw new Error(`Could not find matching space`);
     }
     const space = spaces[0];
