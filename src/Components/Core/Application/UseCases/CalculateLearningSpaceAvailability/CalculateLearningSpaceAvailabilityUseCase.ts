@@ -11,12 +11,15 @@ import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IE
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import LearningSpaceScoreTO from "../../DataTransferObjects/LearningSpaceScoreTO";
 import LearningSpaceAvailabilityTO from "../../DataTransferObjects/LearningSpaceAvailabilityTO";
-
+import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 @injectable()
 export default class CalculateLearningSpaceAvailabilityUseCase
   implements ICalculateLearningSpaceAvailabilityUseCase
 {
   constructor(
+    @inject(CORE_TYPES.ILogger)
+    private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
@@ -32,6 +35,10 @@ export default class CalculateLearningSpaceAvailabilityUseCase
       (s) => s.id === spaceID && s.parentWorldID === worldID
     );
     if (spaces.length === 0 || spaces.length > 1) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `CalculateLearningSpaceAvailabilityUseCase: Space ${spaceID} not found!`
+      );
       throw new Error(`Could not find space with id ${spaceID}`);
     }
     const space = spaces[0];
@@ -65,6 +72,11 @@ export default class CalculateLearningSpaceAvailabilityUseCase
         requiredSpaceScore.currentScore >= requiredSpaceScore.requiredScore
       );
     });
+
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      `CalculateLearningSpaceAvailabilityUseCase: InternalExecute, SpaceID: ${spaceID}, WorldID: ${worldID}."`
+    );
 
     return {
       requirementsString: space.requirements,
