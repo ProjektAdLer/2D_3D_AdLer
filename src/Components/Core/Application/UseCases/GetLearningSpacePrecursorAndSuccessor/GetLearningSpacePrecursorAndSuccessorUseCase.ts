@@ -102,6 +102,10 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
       successorSpaces: successorSpaces,
     } as LearningSpacePrecursorAndSuccessorTO;
     this.worldPort.onLearningSpacePrecursorAndSuccessorLoaded(returnValue);
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      `GetLearningSpacePrecursorAndSuccessorUseCase: Loaded precursor and successor spaces.`
+    );
     return returnValue;
   }
 
