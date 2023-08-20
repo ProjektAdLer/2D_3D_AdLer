@@ -43,7 +43,10 @@ export default class LoadUserLearningWorldsUseCase
 
     if (userEntities.length === 0 || userEntities[0]?.isLoggedIn === false) {
       this.uiPort.displayNotification("User is not logged in!", "error");
-      this.logger.log(LogLevelTypes.ERROR, "User is not logged in!");
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        "LoadUserLearningWorldsUseCase: User is not logged in!"
+      );
       return Promise.reject("User is not logged in");
     }
 
@@ -53,7 +56,10 @@ export default class LoadUserLearningWorldsUseCase
         userEntities[0].userToken
       );
       userEntities[0].availableWorlds = loadedAvailableWorlds;
-
+      this.logger.log(
+        LogLevelTypes.TRACE,
+        "LoadUserLearningWorldsUseCase: Loaded available worlds from backend."
+      );
       this.worldPort.onUserLearningWorldsLoaded({
         worldInfo: loadedAvailableWorlds,
       });
@@ -61,6 +67,10 @@ export default class LoadUserLearningWorldsUseCase
       this.worldPort.onUserLearningWorldsLoaded({
         worldInfo: userEntities[0].availableWorlds,
       });
+      this.logger.log(
+        LogLevelTypes.TRACE,
+        "LoadUserLearningWorldsUseCase: Loaded available worlds from cache."
+      );
     }
 
     lock.release();
