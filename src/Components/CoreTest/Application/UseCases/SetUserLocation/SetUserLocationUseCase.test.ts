@@ -35,7 +35,7 @@ describe("SetUserLocationUseCase", () => {
     systemUnderTest.execute({ worldID: 1, spaceID: 1 });
     expect(loggerMock).toHaveBeenCalledWith(
       LogLevelTypes.ERROR,
-      "User is not logged in, cannot set current location"
+      "SetUserLocationUseCase: User is not logged in, cannot set current location"
     );
   });
 
@@ -50,7 +50,7 @@ describe("SetUserLocationUseCase", () => {
 
     expect(loggerMock).toHaveBeenCalledWith(
       LogLevelTypes.ERROR,
-      "User is not logged in, cannot set current location"
+      "SetUserLocationUseCase: User is not logged in, cannot set current location"
     );
   });
 

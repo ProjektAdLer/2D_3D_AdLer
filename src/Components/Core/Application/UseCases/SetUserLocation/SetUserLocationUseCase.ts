@@ -22,7 +22,7 @@ export default class SetUserLocationUseCase implements ISetUserLocationUseCase {
     if (!userDataEntity?.isLoggedIn) {
       this.logger.log(
         LogLevelTypes.ERROR,
-        "User is not logged in, cannot set current location"
+        "SetUserLocationUseCase: User is not logged in, cannot set current location"
       );
       return;
     }
