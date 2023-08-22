@@ -47,6 +47,10 @@ export default class CalculateLearningSpaceScoreUseCase
   execute(): void {
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `CalculateLearningSpaceScoreUseCase: User is not in a space!`
+      );
       throw new Error(`User is not in a space!`);
     }
 

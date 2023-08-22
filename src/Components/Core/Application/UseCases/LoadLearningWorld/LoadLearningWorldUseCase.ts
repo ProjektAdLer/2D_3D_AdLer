@@ -111,13 +111,13 @@ export default class LoadLearningWorldUseCase
       space.requirementsString = spaceAvailability.requirementsString;
       space.requirementsSyntaxTree = spaceAvailability.requirementsSyntaxTree;
     });
+    // set user location
+    this.setUserLocationUseCase.execute({ worldID: data.worldID });
+
     this.logger.log(
       LogLevelTypes.TRACE,
       "LoadLearningWorldUseCase: Loaded world and cumulated space scores."
     );
-    // set user location
-    this.setUserLocationUseCase.execute({ worldID: data.worldID });
-
     this.worldPort.onLearningWorldLoaded(worldTO);
 
     lock.release();

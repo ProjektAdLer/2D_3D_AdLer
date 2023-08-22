@@ -52,6 +52,10 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
     // get the current user location
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `ScoreH5PLearningElementUseCase: User is not in a space!`
+      );
       throw new Error(`User is not in a space!`);
     }
 

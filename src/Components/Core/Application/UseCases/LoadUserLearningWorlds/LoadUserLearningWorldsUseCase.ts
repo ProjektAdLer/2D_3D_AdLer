@@ -64,13 +64,13 @@ export default class LoadUserLearningWorldsUseCase
         worldInfo: loadedAvailableWorlds,
       });
     } else {
-      this.worldPort.onUserLearningWorldsLoaded({
-        worldInfo: userEntities[0].availableWorlds,
-      });
       this.logger.log(
         LogLevelTypes.TRACE,
         "LoadUserLearningWorldsUseCase: Loaded available worlds from cache."
       );
+      this.worldPort.onUserLearningWorldsLoaded({
+        worldInfo: userEntities[0].availableWorlds,
+      });
     }
 
     lock.release();

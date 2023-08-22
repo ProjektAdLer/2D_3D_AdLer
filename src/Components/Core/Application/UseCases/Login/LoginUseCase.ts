@@ -29,7 +29,7 @@ export default class LoginUseCase implements ILoginUseCase {
         ?.isLoggedIn
     ) {
       this.logger.log(
-        LogLevelTypes.WARN,
+        LogLevelTypes.ERROR,
         "LoginUseCase: User tried logging into Moodle while already logged in"
       );
       this.uiPort.displayNotification(
@@ -64,7 +64,7 @@ export default class LoginUseCase implements ILoginUseCase {
     );
 
     this.logger.log(
-      LogLevelTypes.TRACE,
+      LogLevelTypes.INFO,
       "LoginUseCase: User logged in successfully"
     );
     this.lmsPort.onLoginSuccessful();
