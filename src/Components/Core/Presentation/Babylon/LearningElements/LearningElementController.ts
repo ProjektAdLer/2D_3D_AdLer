@@ -33,12 +33,12 @@ export default class LearningElementController
 
   @bind
   picked(event?: ActionEvent | undefined): void {
-    this.displayTooltip();
+    this.startLoadElementUseCase();
   }
 
   @bind
   doublePicked(event?: ActionEvent): void {
-    this.startLoadElementUseCase();
+    this.displayTooltip();
   }
 
   private displayTooltip(): void {

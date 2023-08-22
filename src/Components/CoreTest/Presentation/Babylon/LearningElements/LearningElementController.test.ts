@@ -72,7 +72,7 @@ describe("LearningElementController", () => {
     );
   });
 
-  test("picked displays the bottom tooltip", () => {
+  test("picked calls IUIPort.startLoadElementUseCase", () => {
     viewModel.id = 42;
     const mockedEvent: ActionEvent = {
       sourceEvent: {
@@ -86,16 +86,16 @@ describe("LearningElementController", () => {
 
     systemUnderTest.picked(mockedEvent);
 
-    expect(
-      bottomTooltipPresenterMock.displayLearningElementSummaryTooltip
-    ).toHaveBeenCalledTimes(1);
+    expect(elementStartedUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
   });
 
-  test("doublePicked calls IUIPort.startLoadElementUseCase", () => {
+  test("doublePicked displays the bottom tooltip", () => {
     viewModel.id = 42;
 
     systemUnderTest.doublePicked();
 
-    expect(elementStartedUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
+    expect(
+      bottomTooltipPresenterMock.displayLearningElementSummaryTooltip
+    ).toHaveBeenCalledTimes(1);
   });
 });
