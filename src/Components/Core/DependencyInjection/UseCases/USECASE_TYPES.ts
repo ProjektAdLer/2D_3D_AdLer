@@ -25,6 +25,7 @@ const USECASE_TYPES = {
   ),
   ILoadQuizElementUseCase: Symbol("ILoadQuizElementUseCase"),
   IUpdateQuizElementUseCase: Symbol("IUpdateQuizElementUseCase"),
+  ISubmitSelectionUseCase: Symbol("ISubmitSelectionUseCase"),
 };
 
 export default USECASE_TYPES;

@@ -1,12 +1,32 @@
-import LearningElementModalViewModel from "~ReactComponents/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 import Observable from "src/Lib/Observable";
-import QuizElementTO from "../../Application/DataTransferObjects/QuizElementTO";
+import { StyledButtonColor } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
-// maybe inherit from LearningElementModalViewModel?
+export class QuizAnswer {
+  answerIndex: number;
+  answerText: string;
+  answerImage?: string;
+  isSelected: boolean;
+}
+
+export class AdaptivityQuestion {
+  questionID: number;
+  questionText: string;
+  questionImage?: string;
+  questionPoints: number;
+  //adaptivityData: AdaptivityData[];
+  questionAnswers: QuizAnswer[];
+}
+
+export class AdaptivityContent {
+  questions: AdaptivityQuestion[];
+}
+
 export default class AdaptabilityElementViewModel {
-  constructor() {}
-
   isFinished: Observable<boolean> = new Observable<boolean>(false);
-  currentElement: Observable<QuizElementTO> = new Observable<QuizElementTO>();
   filePath = new Observable<string>();
+  currentElement: Observable<AdaptivityQuestion> =
+    new Observable<AdaptivityQuestion>();
+  contentData: Observable<AdaptivityContent> =
+    new Observable<AdaptivityContent>();
+  evaluation = new Observable<Map<number, StyledButtonColor>>();
 }
