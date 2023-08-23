@@ -9,7 +9,7 @@ export default class LearningSpaceTO {
   elements: (LearningElementTO | null)[];
   description: string;
   goals: string[];
-  requirementsString: string | "";
+  requirementsString: string;
   requirementsSyntaxTree: BooleanNode | null;
   isAvailable: boolean;
   requiredScore: number;
