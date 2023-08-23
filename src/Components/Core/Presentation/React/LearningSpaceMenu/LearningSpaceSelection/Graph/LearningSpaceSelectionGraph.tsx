@@ -33,7 +33,10 @@ import {
 import LearningSpaceSelectionRequirementNode, {
   BooleanOperatorType,
 } from "./LearningSpaceSelectionRequirementNode";
-import { logger } from "src/Lib/Logger";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 const elk = new ELK();
 
@@ -61,12 +64,16 @@ export default function LearningSpaceSelectionGraph(props: {
   const [lastSelectedSpaceID] = useObservable(
     props.viewModel.lastSelectedSpaceID
   );
+  const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
   useEffect(() => {
     if (spaces === undefined || spaces.length === 0) return;
 
     const setupGraph = async () => {
-      logger.log("LearningSpaceSelectionGraph", "Graph Setup");
+      logger.log(
+        LogLevelTypes.INFO,
+        "LearningSpaceSelectionGraph, Graph Setup"
+      );
 
       const requirementsTrees = createRequirementTrees(spaces);
       const spaceNodes = createSpaceNodes(spaces, lastSelectedSpaceID);

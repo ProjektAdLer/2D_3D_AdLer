@@ -7,9 +7,9 @@ import SCENE_TYPES, {
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import { Mesh, Vector3 } from "@babylonjs/core";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
-const modelLinkLShape = require("../../../../../Assets/prototype/LShape Sampleroom - Deko.glb");
-const modelLink2x2 = require("../../../../../Assets/prototype/2x2Shape Sampleroom - Deko.glb");
-const modelLink2x3 = require("../../../../../Assets/prototype/2x3Shape Sampleroom - Deko.glb");
+const modelLinkLShape = require("../../../../../Assets/3dModels/campusTheme/dLShape Sampleroom - Deko.glb");
+const modelLink2x2 = require("../../../../../Assets/3dModels/campusTheme/d2x2Shape Sampleroom - Deko.glb");
+const modelLink2x3 = require("../../../../../Assets/3dModels/campusTheme/d2x3Shape Sampleroom - Deko.glb");
 
 export default class DecorationView {
   private scenePresenter: IScenePresenter;

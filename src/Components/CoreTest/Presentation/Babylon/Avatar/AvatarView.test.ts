@@ -13,7 +13,6 @@ import {
 } from "@babylonjs/core";
 import { mock, mockDeep } from "jest-mock-extended";
 import { config } from "../../../../../config";
-import { logger } from "../../../../../Lib/Logger";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
@@ -28,10 +27,9 @@ import IMovementIndicator from "../../../../Core/Presentation/Babylon/MovementIn
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import MovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/MovementIndicator";
 import StateMachine from "../../../../Core/Presentation/Babylon/Avatar/StateMachine";
-import { sceneUboDeclaration } from "@babylonjs/core/Shaders/ShadersInclude/sceneUboDeclaration";
+import Logger from "../../../../Core/Adapters/Logger/Logger";
 
 jest.mock("@babylonjs/core/Materials");
-jest.mock("../../../../../Lib/Logger");
 
 const movementIndicatorMock = mock<MovementIndicator>();
 
@@ -625,6 +623,8 @@ describe("AvatarView", () => {
 
       MeshBuilder.CreateDashedLines = jest.fn();
 
+      const loggerMock = jest.spyOn(Logger.prototype, "log");
+
       await systemUnderTest.asyncSetup();
       systemUnderTest["viewModel"].parentNode.position = new Vector3(0, 0, 0); // reset position to unsnapped position
 
@@ -634,7 +634,7 @@ describe("AvatarView", () => {
         new Vector3(1, 2, 3)
       );
 
-      expect(logger.log).toHaveBeenCalledTimes(1);
+      expect(loggerMock).toHaveBeenCalledTimes(1);
     });
   });
 });

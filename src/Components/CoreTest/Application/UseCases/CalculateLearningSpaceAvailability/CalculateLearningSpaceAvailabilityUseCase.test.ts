@@ -10,8 +10,6 @@ import {
   BooleanIDNode,
 } from "../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
 
-jest.mock("src/Lib/Logger.ts");
-
 const entityContainerMock = mock<IEntityContainer>();
 const calculateLearningSpaceScoreUseCaseMock =
   mock<IInternalCalculateLearningSpaceScoreUseCase>();

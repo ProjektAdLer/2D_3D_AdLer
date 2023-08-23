@@ -14,12 +14,15 @@ import LearningSpaceTO from "../../DataTransferObjects/LearningSpaceTO";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "src/Components/Core/Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import type ICalculateLearningSpaceAvailabilityUseCase from "../CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
-
+import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 @injectable()
 export default class GetLearningSpacePrecursorAndSuccessorUseCase
   implements IGetLearningSpacePrecursorAndSuccessorUseCase
 {
   constructor(
+    @inject(CORE_TYPES.ILogger)
+    private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
@@ -42,12 +45,20 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
       .getEntitiesOfType(LearningWorldEntity)
       .find((world) => world.id === userLocation.worldID);
     if (!worldEntity) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `GetLearningSpacePrecursorAndSuccessorUseCase: World ${userLocation.worldID} not found!`
+      );
       throw new Error(`World ${userLocation.worldID} not found!`);
     }
     const currentSpace = worldEntity.spaces.find(
       (space) => space.id === userLocation.spaceID
     );
     if (!currentSpace) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `GetLearningSpacePrecursorAndSuccessorUseCase: Space ${userLocation.spaceID} not found!`
+      );
       throw new Error(`Space ${userLocation.spaceID} not found!`);
     }
     //Determine precursor room IDs
@@ -91,6 +102,10 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
       successorSpaces: successorSpaces,
     } as LearningSpacePrecursorAndSuccessorTO;
     this.worldPort.onLearningSpacePrecursorAndSuccessorLoaded(returnValue);
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      `GetLearningSpacePrecursorAndSuccessorUseCase: Loaded precursor and successor spaces.`
+    );
     return returnValue;
   }
 

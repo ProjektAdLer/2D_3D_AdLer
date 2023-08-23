@@ -5,8 +5,6 @@ import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USEC
 import LearningWorldSelectionController from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldSelection/LearningWorldSelectionController";
 import LearningWorldSelectionViewModel from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldSelection/LearningWorldSelectionViewModel";
 
-jest.mock("src/Lib/Logger");
-
 const viewModel = new LearningWorldSelectionViewModel();
 const loadWorldUseCaseMock = mock<ILoadLearningWorldUseCase>();
 

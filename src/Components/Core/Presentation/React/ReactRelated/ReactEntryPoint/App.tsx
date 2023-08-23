@@ -26,28 +26,24 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
   if (location?.pathname.includes("/spacedisplay")) {
     return (
       <>
-        <BugReportButton />
         <LearningSpace />
       </>
     );
   } else if (location?.pathname.includes("/worldmenu")) {
     return (
       <>
-        <BugReportButton />
         <LearningWorldMenu />
       </>
     );
   } else if (location?.pathname.includes("/spacemenu")) {
     return (
       <>
-        <BugReportButton />
         <LearningSpaceMenu />
       </>
     );
   } else {
     return (
       <>
-        <BugReportButton />
         <WelcomePage />
       </>
     );

@@ -13,12 +13,16 @@ import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import type ISetUserLocationUseCase from "../SetUserLocation/ISetUserLocationUseCase";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "src/Components/Core/Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import type ICalculateLearningSpaceAvailabilityUseCase from "../CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
+import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 @injectable()
 export default class LoadLearningSpaceUseCase
   implements ILoadLearningSpaceUseCase
 {
   constructor(
+    @inject(CORE_TYPES.ILogger)
+    private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
     @inject(USECASE_TYPES.ILoadLearningWorldUseCase)
@@ -51,8 +55,15 @@ export default class LoadLearningSpaceUseCase
       (spaceEntity) => spaceEntity.id === data.spaceID
     );
 
-    if (!spaceEntity)
+    if (!spaceEntity) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        "LoadLearningSpaceUseCase: SpaceEntity with " +
+          data.spaceID +
+          " not found."
+      );
       return Promise.reject("SpaceEntity with " + data.spaceID + " not found");
+    }
 
     // create SpaceTO and fill with scoring data
     let spaceTO = this.toTO(spaceEntity);
@@ -78,7 +89,10 @@ export default class LoadLearningSpaceUseCase
       worldID: data.worldID,
       spaceID: data.spaceID,
     });
-
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      "LoadLearningSpaceUseCase: Loaded space."
+    );
     this.worldPort.onLearningSpaceLoaded(spaceTO);
   }
 

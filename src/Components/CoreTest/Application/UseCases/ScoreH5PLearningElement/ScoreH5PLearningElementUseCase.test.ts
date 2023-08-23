@@ -1,5 +1,4 @@
 import { mock } from "jest-mock-extended";
-import { logger } from "../../../../../Lib/Logger";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
 import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
@@ -17,8 +16,8 @@ import LearningElementEntity from "../../../../Core/Domain/Entities/LearningElem
 import LearningSpaceEntity from "../../../../Core/Domain/Entities/LearningSpaceEntity";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
-
-jest.mock("../../../../../Lib/Logger");
+import Logger from "../../../../Core/Adapters/Logger/Logger";
+import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 
@@ -296,6 +295,7 @@ describe("ScoreH5PLearningElementUseCase", () => {
 
   test("rejectWithWarning calls logger.warn", async () => {
     const warningMessage = "warning message";
+    const loggerMock = jest.spyOn(Logger.prototype, "log");
 
     try {
       await systemUnderTest["rejectWithWarning"](warningMessage);
@@ -303,7 +303,8 @@ describe("ScoreH5PLearningElementUseCase", () => {
       console.log(e);
     }
 
-    expect(logger.warn).toHaveBeenCalledWith(
+    expect(loggerMock).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
       expect.stringContaining(warningMessage)
     );
   });

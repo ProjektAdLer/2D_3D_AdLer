@@ -9,6 +9,7 @@ const CORE_TYPES = {
   IEntityContainer: Symbol("IEntityContainer"),
   IBackendAdapter: Symbol("IBackendAdapter"),
   INavigation: Symbol("INavigation"),
+  ILogger: Symbol("ILogger"),
 };
 
 export default CORE_TYPES;

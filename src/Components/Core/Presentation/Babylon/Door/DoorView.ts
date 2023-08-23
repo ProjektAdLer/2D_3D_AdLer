@@ -1,7 +1,6 @@
 import {
   ActionManager,
   Animation,
-  AnimationGroup,
   Color3,
   ExecuteCodeAction,
   Mesh,
@@ -20,8 +19,8 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import DoorViewModel from "./DoorViewModel";
 import IDoorController from "./IDoorController";
 
-const entryDoorModelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Door.glb");
-const exitDoorModelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_ExitDoor.glb");
+const entryDoorModelLink = require("../../../../../Assets/3dModels/campusTheme/3DModel_Door.glb");
+const exitDoorModelLink = require("../../../../../Assets/3dModels/campusTheme/3DModel_ExitDoor.glb");
 const soundLink = require("../../../../../Assets/Sounds/door_opening.mp3");
 
 export default class DoorView extends Readyable {

@@ -5,10 +5,11 @@ import { injectable } from "inversify";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import App from "./App";
-import { logger } from "../../../../../../Lib/Logger";
 import { config } from "../../../../../../config";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 @injectable()
 export default class ReactEntry implements IReactEntry {
@@ -61,8 +62,8 @@ export default class ReactEntry implements IReactEntry {
           const entityMap = CoreDIContainer.get<IEntityContainer>(
             CORE_TYPES.IEntityContainer
           ).getAllEntities();
-
-          logger.log(entityMap);
+          const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
+          logger.log(LogLevelTypes.DEBUG, JSON.stringify(entityMap));
         }
       };
     }

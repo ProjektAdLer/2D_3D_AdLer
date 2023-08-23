@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #172d4d;
+        stroke-miterlimit: 10;
+        stroke-width: 70px;
+      }
+
+      .cls-3 {
+        fill: #e5bd73;
+      }
+
+      .cls-3, .cls-4, .cls-5 {
+        fill-rule: evenodd;
+      }
+
+      .cls-4 {
+        fill: #e6e6e6;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke-linecap: round;
+      }
+
+      .cls-5 {
+        fill: #e5a52e;
+      }
+    </style>
+  </defs>
+  <g id="Ebene_1" data-name="Ebene 1">
+    <path class="cls-4" d="m2000,80c0-44.15-35.84-80-80-80H80C35.85,0,0,35.85,0,80v1840c0,44.15,35.85,80,80,80h1840c44.16,0,80-35.85,80-80V80Z"/>
+  </g>
+  <g id="L-File_Back" data-name="L-File Back">
+    <polygon class="cls-5" points="50.79 1955.87 50.79 736.19 323.7 735.87 432.88 958.67 1590.65 958.4 1603.26 1955.87 50.79 1955.87"/>
+  </g>
+  <g id="L-Metadata_Back" data-name="L-Metadata Back">
+    <rect class="cls-1" x="457.75" y="58.28" width="915" height="1356" rx="137.35" ry="137.35"/>
+    <line class="cls-2" x1="607.75" y1="287.28" x2="939.75" y2="287.28"/>
+    <line class="cls-2" x1="892.75" y1="642.28" x2="1224.75" y2="642.28"/>
+    <line class="cls-2" x1="607.75" y1="1212.28" x2="939.75" y2="1212.28"/>
+    <line class="cls-2" x1="1107.75" y1="1204.62" x2="1216.3" y2="1204.62"/>
+    <line class="cls-2" x1="1118.03" y1="287.62" x2="1226.58" y2="287.62"/>
+    <line class="cls-2" x1="616.03" y1="642.62" x2="724.58" y2="642.62"/>
+    <line class="cls-2" x1="607.75" y1="464.28" x2="1224.75" y2="464.28"/>
+    <line class="cls-2" x1="607.75" y1="818.28" x2="1224.75" y2="818.28"/>
+    <line class="cls-2" x1="607.75" y1="1026.28" x2="831.75" y2="1026.28"/>
+    <line class="cls-2" x1="996.75" y1="1026.28" x2="1216.75" y2="1026.28"/>
+  </g>
+  <g id="L-Metadata_Front" data-name="L-Metadata Front">
+    <rect class="cls-1" x="766.75" y="406.28" width="915" height="1356" rx="137.35" ry="137.35"/>
+    <line class="cls-2" x1="916.75" y1="635.28" x2="1248.75" y2="635.28"/>
+    <line class="cls-2" x1="1201.75" y1="990.28" x2="1533.75" y2="990.28"/>
+    <line class="cls-2" x1="916.75" y1="1560.28" x2="1248.75" y2="1560.28"/>
+    <line class="cls-2" x1="1416.75" y1="1552.62" x2="1525.3" y2="1552.62"/>
+    <line class="cls-2" x1="1427.03" y1="635.62" x2="1535.58" y2="635.62"/>
+    <line class="cls-2" x1="925.03" y1="990.62" x2="1033.58" y2="990.62"/>
+    <line class="cls-2" x1="916.75" y1="812.28" x2="1533.75" y2="812.28"/>
+    <line class="cls-2" x1="916.75" y1="1166.28" x2="1533.75" y2="1166.28"/>
+    <line class="cls-2" x1="916.75" y1="1374.28" x2="1140.75" y2="1374.28"/>
+    <line class="cls-2" x1="1305.75" y1="1374.28" x2="1525.75" y2="1374.28"/>
+  </g>
+  <g id="L-File_Front" data-name="L-File Front">
+    <polygon class="cls-3" points="108.26 1952.87 1606.97 1952.87 1989.26 951.08 489.12 951.08 108.26 1952.87"/>
+  </g>
+</svg>

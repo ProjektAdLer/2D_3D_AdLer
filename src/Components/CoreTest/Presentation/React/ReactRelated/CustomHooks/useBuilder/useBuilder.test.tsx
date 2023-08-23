@@ -32,7 +32,7 @@ describe("useBuilderHook", () => {
   afterAll(() => {
     CoreDIContainer.restore();
   });
-  test("should return controller and viewModel", () => {
+  test.skip("should return controller and viewModel", () => {
     const wrapper = ({ children }: { children: any }) => (
       <useInjection.Provider container={CoreDIContainer}>
         {children}

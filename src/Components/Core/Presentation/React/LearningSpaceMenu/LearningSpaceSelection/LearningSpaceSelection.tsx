@@ -42,10 +42,17 @@ export default function LearningSpaceSelection({
   if (!viewModel || !controller) return null;
 
   return (
-    <div className={tailwindMerge(className, "w-full flex-col flex h-full")}>
+    <main
+      className={tailwindMerge(
+        className,
+        "w-full flex-col flex portrait:h-[45svh] h-[83svh] lg:h-[93svh] overflow-auto"
+      )}
+    >
       {
-        <div className="flex flex-row ml-4">
-          <p className="mr-3 font-medium text-md text-adlerdarkblue">Liste</p>
+        <section className="flex flex-row ml-4">
+          <span className="mr-3 font-medium text-md text-adlerdarkblue">
+            Liste
+          </span>
           <label className="relative inline-flex cursor-pointer">
             <input
               type="checkbox"
@@ -60,7 +67,7 @@ export default function LearningSpaceSelection({
               Graph
             </span>
           </label>
-        </div>
+        </section>
       }
       {showGraph && (
         <ReactFlowProvider>
@@ -76,6 +83,6 @@ export default function LearningSpaceSelection({
           viewModel={viewModel}
         />
       )}
-    </div>
+    </main>
   );
 }

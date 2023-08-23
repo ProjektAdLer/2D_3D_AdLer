@@ -32,6 +32,8 @@ import ICalculateLearningSpaceAvailabilityUseCase from "../../Application/UseCas
 import CalculateLearningSpaceAvailabilityUseCase from "../../Application/UseCases/CalculateLearningSpaceAvailability/CalculateLearningSpaceAvailabilityUseCase";
 import IGetLearningSpacePrecursorAndSuccessorUseCase from "../../Application/UseCases/GetLearningSpacePrecursorAndSuccessor/IGetLearningSpacePrecursorAndSuccessorUseCase";
 import GetLearningSpacePrecursorAndSuccessorUseCase from "../../Application/UseCases/GetLearningSpacePrecursorAndSuccessor/GetLearningSpacePrecursorAndSuccessorUseCase";
+import ILoadQuizElementUseCase from "../../Application/UseCases/Adaptability/LoadQuizElementUseCase/ILoadQuizElementUseCase";
+import LoadQuizElementUseCase from "../../Application/UseCases/Adaptability/LoadQuizElementUseCase/LoadQuizElementUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -109,6 +111,10 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
   )
     .to(GetLearningSpacePrecursorAndSuccessorUseCase)
+    .inSingletonScope();
+
+  bind<ILoadQuizElementUseCase>(USECASE_TYPES.ILoadQuizElementUseCase)
+    .to(LoadQuizElementUseCase)
     .inSingletonScope();
 });
 

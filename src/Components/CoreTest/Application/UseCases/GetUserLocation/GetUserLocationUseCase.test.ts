@@ -7,7 +7,6 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
 
 const entityContainerMock = mock<IEntityContainer>();
-jest.mock("../../../../../Lib/Logger");
 
 describe("SetUserLocationUseCase", () => {
   let systemUnderTest: GetUserLocationUseCase;

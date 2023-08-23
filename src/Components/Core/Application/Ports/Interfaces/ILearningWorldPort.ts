@@ -8,6 +8,7 @@ import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { IAbstractPort } from "./IAbstractPort";
 import ILearningWorldAdapter from "../LearningWorldPort/ILearningWorldAdapter";
 import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
+import QuizElementTO from "../../DataTransferObjects/QuizElementTO";
 
 export default interface ILearningWorldPort
   extends IAbstractPort<ILearningWorldAdapter> {
@@ -31,4 +32,7 @@ export default interface ILearningWorldPort
     hasScored: boolean,
     learningElementID: ComponentID
   ): void;
+
+  // adaptability
+  onAdaptabilityElementLoaded(quizelementTO: QuizElementTO): void;
 }

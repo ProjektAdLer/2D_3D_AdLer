@@ -6,9 +6,10 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { Semaphore } from "src/Lib/Semaphore";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
-import { logger } from "src/Lib/Logger";
 import ILoadUserLearningWorldsUseCase from "./ILoadUserLearningWorldsUseCase";
 import type IUIPort from "src/Components/Core/Application/Ports/Interfaces/IUIPort";
+import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 type AvailableLearningWorldsArray = {
   worldID: number;
@@ -20,6 +21,8 @@ export default class LoadUserLearningWorldsUseCase
   implements ILoadUserLearningWorldsUseCase
 {
   constructor(
+    @inject(CORE_TYPES.ILogger)
+    private logger: ILoggerPort,
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
     @inject(CORE_TYPES.IEntityContainer)
@@ -40,7 +43,10 @@ export default class LoadUserLearningWorldsUseCase
 
     if (userEntities.length === 0 || userEntities[0]?.isLoggedIn === false) {
       this.uiPort.displayNotification("User is not logged in!", "error");
-      logger.error("User is not logged in!");
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        "LoadUserLearningWorldsUseCase: User is not logged in!"
+      );
       return Promise.reject("User is not logged in");
     }
 
@@ -50,11 +56,18 @@ export default class LoadUserLearningWorldsUseCase
         userEntities[0].userToken
       );
       userEntities[0].availableWorlds = loadedAvailableWorlds;
-
+      this.logger.log(
+        LogLevelTypes.TRACE,
+        "LoadUserLearningWorldsUseCase: Loaded available worlds from backend."
+      );
       this.worldPort.onUserLearningWorldsLoaded({
         worldInfo: loadedAvailableWorlds,
       });
     } else {
+      this.logger.log(
+        LogLevelTypes.TRACE,
+        "LoadUserLearningWorldsUseCase: Loaded available worlds from cache."
+      );
       this.worldPort.onUserLearningWorldsLoaded({
         worldInfo: userEntities[0].availableWorlds,
       });

@@ -10,11 +10,13 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
--
+- new icon for manual
 
 ### Changed
 
--
+- improved portrait mobile display of LearningSpace
+- changed the direction of menus in portrait mode from side-by-side horizontal view to vertical view
+- the place where the help button is showed
 
 ### Deprecated
 
@@ -22,7 +24,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
--
+- FullscreenButton in SideBar (mobile)
+- Dotted borders in menus
 
 ### Fixed
 
@@ -33,6 +36,29 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 -
 
 </details>
+
+## Version 1.2.0 - 05.08.2023
+
+### Added
+
+- Vertical support for mobile
+- Added new avatar animations
+
+### Changed
+
+- Door sound improved.
+- Changed the mobile view of the score panel from next to, to on-top of each other
+- Scorepanels are now displayed vertically (mobile)
+- Font size adjustments in LearningSpaces (mobile)
+
+### Removed
+
+- Removed the modal which forces the user to turn their mnobile devices to landscape mode
+
+### Fixed
+
+- Space now opens when entering a completed space
+- Fixed container overflow issues in LearningWorldMenu and LearningSpaceMenu
 
 ## Version 1.1.0 - 17.07.2023
 

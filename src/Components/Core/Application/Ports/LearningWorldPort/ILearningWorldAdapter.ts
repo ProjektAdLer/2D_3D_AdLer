@@ -6,6 +6,7 @@ import LearningWorldScoreTO from "../../DataTransferObjects/LearningWorldScoreTO
 import UserLearningWorldsTO from "../../DataTransferObjects/UserLearningWorldsTO";
 import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
+import QuizElementTO from "../../DataTransferObjects/QuizElementTO";
 
 /**
  * This interface is used to register with the WorldPort and defines all the methods that can be called by the WorldPort.
@@ -31,4 +32,7 @@ export default interface ILearningWorldAdapter {
     hasScored: boolean,
     learningElementID: ComponentID
   ): void;
+
+  // adaptability
+  onAdaptabilityElementLoaded?(quizelementTO: QuizElementTO): void;
 }

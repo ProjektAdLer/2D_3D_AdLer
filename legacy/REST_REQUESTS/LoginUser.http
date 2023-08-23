@@ -1,7 +1,0 @@
-POST https://api.cluuub.xyz/UserLogin
-content-type: application/json
-
-{
-  "userName": "student",
-  "password": "Password"
-}

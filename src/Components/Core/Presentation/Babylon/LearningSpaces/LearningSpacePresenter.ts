@@ -10,6 +10,8 @@ import ILearningElementBuilder from "../LearningElements/ILearningElementBuilder
 import IStandInDecorationBuilder from "../StandInDecoration/IStandInDecorationBuilder";
 import IDoorBuilder from "../Door/IDoorBuilder";
 import IWindowBuilder from "../Window/IWindowBuilder";
+import AdaptabilityElementBuilder from "../../Adaptability/AdaptabilityElementBuilder";
+
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
   private director: IPresentationDirector;
@@ -66,6 +68,14 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         elementBuilder.elementPosition =
           this.viewModel.elementPositions.shift()!;
         loadingCompletePromises.push(this.director.buildAsync(elementBuilder));
+
+        // if (spaceTO.elements[i]?.type === "quiz") {
+        //   const adaptivityBuilder =
+        //     CoreDIContainer.get<AdaptabilityElementBuilder>(
+        //       BUILDER_TYPES.IAdaptabilityElementBuilder
+        //     );
+        //   this.director.build(adaptivityBuilder);
+        // }
       }
     }
 

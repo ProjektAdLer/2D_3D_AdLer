@@ -2,10 +2,9 @@ import { RenderResult, act, render, waitFor } from "@testing-library/react";
 import React from "react";
 import VimeoVideoHost from "./../../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/VimeoVideoHost";
 import axios from "axios";
-import { logger } from "../../../../../../../../Lib/Logger";
+import Logger from "../../../../../../../Core/Adapters/Logger/Logger";
 
 const url = "https://vimeo.com/236357509";
-jest.mock("../../../../../../../../Lib/Logger");
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
@@ -52,13 +51,14 @@ describe("VimeoVideoHost", () => {
         title: "title",
       },
     });
+    const loggerMock = jest.spyOn(Logger.prototype, "log");
 
     act(() => {
       render(<VimeoVideoHost url={url} />);
     });
 
     waitFor(() => {
-      expect(logger.error).toBeCalledTimes(1);
+      expect(loggerMock).toBeCalledTimes(1);
     });
   });
 });

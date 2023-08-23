@@ -7,10 +7,13 @@ import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContai
 import type ILMSPort from "../../Ports/Interfaces/ILMSPort";
 import type IUIPort from "../../Ports/Interfaces/IUIPort";
 import ILoginUseCase from "./ILoginUseCase";
+import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 @injectable()
 export default class LoginUseCase implements ILoginUseCase {
   constructor(
+    @inject(CORE_TYPES.ILogger) private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendPort,
@@ -25,6 +28,10 @@ export default class LoginUseCase implements ILoginUseCase {
       this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0]
         ?.isLoggedIn
     ) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        "LoginUseCase: User tried logging into Moodle while already logged in"
+      );
       this.uiPort.displayNotification(
         "You are already logged in to Moodle",
         "error"
@@ -39,6 +46,10 @@ export default class LoginUseCase implements ILoginUseCase {
         password: data.password,
       });
     } catch (error) {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        "LoginUseCase: User tried logging in with wrong Info: " + error
+      );
       this.uiPort.displayNotification("Falsche Daten!", "error");
       return Promise.reject("Wrong Password oder Username");
     }
@@ -52,6 +63,10 @@ export default class LoginUseCase implements ILoginUseCase {
       UserDataEntity
     );
 
+    this.logger.log(
+      LogLevelTypes.INFO,
+      "LoginUseCase: User logged in successfully"
+    );
     this.lmsPort.onLoginSuccessful();
 
     return Promise.resolve();

@@ -12,8 +12,11 @@ import {
 import { injectable } from "inversify";
 import AbstractSceneDefinition from "./Scenes/AbstractSceneDefinition";
 import IScenePresenter from "./IScenePresenter";
-import { logger } from "src/Lib/Logger";
 import bind from "bind-decorator";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 /**
  * @description This class is responsible for creating the Scene and managing the NavMesh navigation.
@@ -21,6 +24,8 @@ import bind from "bind-decorator";
 @injectable()
 export default class ScenePresenter implements IScenePresenter {
   private navigationMeshes: AbstractMesh[] = [];
+
+  private logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
   get Scene(): Scene {
     if (!this.sceneDefinition.Scene) {
@@ -97,7 +102,7 @@ export default class ScenePresenter implements IScenePresenter {
     if (this.Scene.activeCamera) {
       this.Scene.render();
     } else {
-      logger.warn("no active camera..");
+      this.logger.log(LogLevelTypes.WARN, "no active camera..");
     }
   }
 }

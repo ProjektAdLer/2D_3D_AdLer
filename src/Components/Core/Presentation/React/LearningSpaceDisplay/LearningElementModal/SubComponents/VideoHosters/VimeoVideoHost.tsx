@@ -1,10 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { logger } from "src/Lib/Logger";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
 
 export default function VimeoVideoHost({ url }: { url: string }) {
   const [videoUrl, setVideoUrl] = useState("");
   const [videoTitle, setVideoTitle] = useState("VideoTitle");
+  const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
   useEffect(() => {
     async function getVimeoVideoUrl() {
@@ -19,7 +23,10 @@ export default function VimeoVideoHost({ url }: { url: string }) {
         setVideoUrl(srcArray[1]);
         setVideoTitle(response.data.title);
       } else {
-        logger.error("Could not extract video url from vimeo oembed api");
+        logger.log(
+          LogLevelTypes.ERROR,
+          "Could not extract video url from vimeo oembed api"
+        );
         setVideoTitle("Could not extract video url from vimeo oembed api");
         setVideoUrl("");
       }

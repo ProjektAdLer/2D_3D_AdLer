@@ -5,7 +5,6 @@ import LearningElementEntity from "src/Components/Core/Domain/Entities/LearningE
 import LearningSpaceEntity from "src/Components/Core/Domain/Entities/LearningSpaceEntity";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
-import { logger } from "src/Lib/Logger";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
@@ -15,10 +14,14 @@ import IScoreH5PElementUseCase, {
 import type ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
+import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 @injectable()
 export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
   constructor(
+    @inject(CORE_TYPES.ILogger)
+    private logger: ILoggerPort,
     @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendPort,
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
@@ -49,6 +52,10 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
     // get the current user location
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `ScoreH5PLearningElementUseCase: User is not in a space!`
+      );
       throw new Error(`User is not in a space!`);
     }
 
@@ -102,7 +109,10 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
   }
 
   private rejectWithWarning(message: string): Promise<boolean> {
-    logger.warn("Tried scoring H5P learning element. " + message);
+    this.logger.log(
+      LogLevelTypes.WARN,
+      "ScoreH5PLearningElementUseCase: " + message
+    );
     return Promise.reject(message);
   }
 }

@@ -14,19 +14,22 @@ import type IUIPort from "../../Ports/Interfaces/IUIPort";
 import LearningWorldTO from "../../DataTransferObjects/LearningWorldTO";
 import { Semaphore } from "src/Lib/Semaphore";
 import LearningWorldStatusTO from "../../DataTransferObjects/LearningWorldStatusTO";
-import { logger } from "src/Lib/Logger";
 import type ISetUserLocationUseCase from "../SetUserLocation/ISetUserLocationUseCase";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import BackendWorldTO from "../../DataTransferObjects/BackendWorldTO";
 import BackendElementTO from "../../DataTransferObjects/BackendElementTO";
 import type ICalculateLearningSpaceAvailabilityUseCase from "../CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
+import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 @injectable()
 export default class LoadLearningWorldUseCase
   implements ILoadLearningWorldUseCase
 {
   constructor(
+    @inject(CORE_TYPES.ILogger)
+    private logger: ILoggerPort,
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
     @inject(CORE_TYPES.IEntityContainer)
@@ -52,7 +55,10 @@ export default class LoadLearningWorldUseCase
     const userData = this.container.getEntitiesOfType(UserDataEntity);
     if (userData.length === 0 || userData[0]?.isLoggedIn === false) {
       this.uiPort.displayNotification("User is not logged in!", "error");
-      logger.error("User is not logged in!");
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        "LoadLearningWorldUseCase: User is not logged in!"
+      );
       return Promise.reject("User is not logged in");
     }
 
@@ -63,7 +69,10 @@ export default class LoadLearningWorldUseCase
       ) === undefined
     ) {
       this.uiPort.displayNotification("World is not available!", "error");
-      logger.error("World is not available!");
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        "LoadLearningWorldUseCase: World is not available!"
+      );
       return Promise.reject("World is not available");
     }
 
@@ -102,10 +111,13 @@ export default class LoadLearningWorldUseCase
       space.requirementsString = spaceAvailability.requirementsString;
       space.requirementsSyntaxTree = spaceAvailability.requirementsSyntaxTree;
     });
-
     // set user location
     this.setUserLocationUseCase.execute({ worldID: data.worldID });
 
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      "LoadLearningWorldUseCase: Loaded world and cumulated space scores."
+    );
     this.worldPort.onLearningWorldLoaded(worldTO);
 
     lock.release();

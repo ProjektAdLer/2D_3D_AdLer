@@ -31,12 +31,21 @@ import WindowBuilder from "../../Presentation/Babylon/Window/WindowBuilder";
 import LearningSpaceScorePanelBuilder from "~ReactComponents/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanelBuilder";
 import DecorationBuilder from "../../Presentation/Babylon/Decoration/DecorationBuilder";
 import StandInDecorationBuilder from "../../Presentation/Babylon/StandInDecoration/StandInDecorationBuilder";
+import HelpDeskModalBuilder from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModalBuilder";
+import HelpDeskButtonBuilder from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButtonBuilder";
+import AdaptabilityElementBuilder from "../../Presentation/Adaptability/AdaptabilityElementBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
     PresentationDirector
   );
 
+  bind<IPresentationBuilder>(BUILDER_TYPES.IHelpDeskButtonBuilder).to(
+    HelpDeskButtonBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IHelpDeskModalBuilder).to(
+    HelpDeskModalBuilder
+  );
   bind<IPresentationBuilder>(BUILDER_TYPES.IDoorBuilder).to(DoorBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IWindowBuilder).to(WindowBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningSpaceScorePanelBuilder).to(
@@ -112,6 +121,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IStandInDecorationBuilder).to(
     StandInDecorationBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IAdaptabilityElementBuilder).to(
+    AdaptabilityElementBuilder
   );
 });
 

@@ -27,36 +27,36 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
   if (name === undefined || name === "") return null;
 
   return (
-    <div
+    <main
       className={tailwindMerge(
         className,
-        "flex flex-col self-start gap-2 w-full h-full"
+        "flex flex-col self-start gap-2 m-1 w-full h-full overflow-hidden"
       )}
     >
-      <div className="flex flex-row items-center justify-between p-1 border-b border-gray-500">
+      <article className="flex w-full flex-row portrait:flex-col portrait:items-between portrait:justify-center items-center h-[12%] portrait:h-[20%] portrait:gap-2 justify-between p-1 border-b border-gray-500">
         <div className="flex">
           <img src={worldIcon} className="w-6 xl:w-8" alt="Lernwelt-Icon"></img>
-          <h2 className="ml-2 text-lg font-black text-adlerdarkblue lg:text-2xl">
+          <h2 className="flex-wrap ml-2 overflow-x-auto font-black break-words text-md text-adlerdarkblue lg:text-2xl">
             {name}
           </h2>
         </div>
         <StyledButton
           color="highlight"
           shape="freefloatleft"
-          className="self-center mt-2 mb-2 justify-self-center animate-bounce-once bg-nodehandlecolor"
+          className="self-center block m-2 portrait:p-2 justify-self-center animate-bounce-once bg-nodehandlecolor"
           onClick={controller.onEnterLearningWorldButtonClicked}
         >
           {"Lernwelt öffnen!"}
         </StyledButton>
-      </div>
-      <div className="flex flex-col w-full gap-2 overflow-auto">
+      </article>
+      <article className="flex flex-col w-full gap-2 landscape:lg-[75%] h-[68%] overflow-y-auto">
         {description === undefined ||
           (description !== "" && (
             <div className="pb-2 border-b border-gray-500">
-              <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
+              <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
                 Beschreibung:
-              </div>
-              <div className="items-start ml-6 font-medium">
+              </h3>
+              <div className="items-start ml-6 font-medium portrait:text-xs">
                 <TextWithLineBreaks text={description} />
               </div>
             </div>
@@ -64,21 +64,21 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
         {goals === undefined ||
           (goals.length > 0 && (
             <div className="pb-2 border-b border-gray-500">
-              <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
+              <h3 className="self-center ml-2 font-black text-adlerdarkblue portrait:text-sm lg:mb-2">
                 {goals.length > 1 ? "Lernziele:" : "Lernziel:"}
-              </div>
-              <div className="items-start ml-6 font-medium lg:text:lg">
+              </h3>
+              <div className="items-start ml-6 font-medium portrait:text-xs lg:text:lg">
                 {goals.map((goal) => {
                   return <TextWithLineBreaks text={goal} key={goal} />;
                 })}
               </div>
             </div>
           ))}
-        <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
+        <section className="pb-2 border-b border-gray-500">
+          <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
             {spaces?.length > 1 ? "Räume:" : "Raum:"}
-          </div>
-          <div className="items-start ml-6 font-medium lg:text:lg">
+          </h3>
+          <div className="items-start ml-6 font-medium portrait:ml-3 portrait:text-xs lg:text:lg">
             {spaces?.map((space) => {
               return (
                 <div key={space.id}>
@@ -87,7 +87,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
                       <img
                         src={spaceIcon}
                         alt=""
-                        className="w-8 mr-4 xl:w-12"
+                        className="w-8 mr-4 portrait:w-6 portrait:mr-1 xl:w-12"
                       />
                       {space.currentScore >= space.requiredScore && (
                         <img
@@ -103,16 +103,16 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
               );
             })}
           </div>
-        </div>
-        <div className="pb-2 border-b border-gray-500">
-          <div className="self-center ml-2 font-black text-adlerdarkblue lg:mb-2">
+        </section>
+        <section className="pb-2 border-b border-gray-500">
+          <h3 className="self-center ml-2 font-black text-adlerdarkblue portrait:text-sm lg:mb-2">
             Anzahl Räume:
-          </div>
-          <div className="items-start ml-6 font-medium lg:text:lg">
+          </h3>
+          <div className="items-start ml-6 font-medium portrait:text-xs lg:text:lg">
             {spaces?.length}
           </div>
-        </div>
-      </div>
-    </div>
+        </section>
+      </article>
+    </main>
   );
 }

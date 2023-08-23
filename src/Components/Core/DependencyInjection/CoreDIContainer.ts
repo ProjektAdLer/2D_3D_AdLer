@@ -9,8 +9,15 @@ import Navigation from "../Presentation/Babylon/Navigation/Navigation";
 import NavigationConfiguration from "../Presentation/Babylon/Navigation/NavigationConfiguration";
 import ScenesDIContainer from "./Scenes/ScenesDIContainer";
 import PresentationDIContainer from "./Presentation/PresentationDIContainer";
+import ILoggerPort from "../Application/Ports/Interfaces/ILoggerPort";
+import Logger from "../Adapters/Logger/Logger";
 
 const CoreDIContainer = new Container();
+
+//Logger
+CoreDIContainer.bind<ILoggerPort>(CORE_TYPES.ILogger)
+  .to(Logger)
+  .inSingletonScope();
 
 // Navigation
 CoreDIContainer.bind<INavigation>(CORE_TYPES.INavigation)

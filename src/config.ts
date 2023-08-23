@@ -1,4 +1,4 @@
-import { LogLevel } from "./Lib/Logger";
+import { LogLevel } from "./Components/Core/Adapters/Logger/Logger";
 import { parseBool } from "./Lib/ParseBool";
 
 // We can not use the logger in here, its loglevel gets defined here.

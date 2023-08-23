@@ -2,8 +2,7 @@ import React from "react";
 import { render, act } from "@testing-library/react";
 import axios from "axios";
 import YoutubeVideoHost from "../../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/YoutubeVideoHost";
-
-import { logger } from "../../../../../../../../Lib/Logger";
+import Logger from "../../../../../../../Core/Adapters/Logger/Logger";
 
 jest.mock("axios");
 
@@ -47,7 +46,7 @@ describe("YoutubeVideoHost", () => {
     (axios.get as jest.Mock).mockResolvedValue({
       data: { items: [{ id: "invalid-id" }] },
     });
-    const errorSpy = jest.spyOn(logger, "error").mockImplementation(() => {});
+    const loggerMock = jest.spyOn(Logger.prototype, "log");
 
     let container;
     await act(async () => {
@@ -55,8 +54,8 @@ describe("YoutubeVideoHost", () => {
     });
 
     expect(container.firstChild).toBeNull();
-    expect(errorSpy).toHaveBeenCalled();
+    expect(loggerMock).toHaveBeenCalled();
 
-    errorSpy.mockRestore();
+    loggerMock.mockRestore();
   });
 });

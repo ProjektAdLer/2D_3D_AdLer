@@ -32,7 +32,7 @@ export default function LearningSpaceScorePanel({
   if (!viewModel) return null;
 
   return (
-    <div style={{ width: 70 }}>
+    <div className="w-[49px] lg:w-[70px]">
       <CircularProgressbarWithChildren
         value={percentage}
         strokeWidth={10}
@@ -45,17 +45,16 @@ export default function LearningSpaceScorePanel({
           pathColor: `#59B347`,
         })}
       >
-        <img style={{ width: 50, opacity: 0.4 }} src={coinIcon} alt="icon" />
+        <img
+          className="w-[35px] lg:w-[50px] opacity-40"
+          src={coinIcon}
+          alt="icon"
+        />
 
-        <div
-          className="font-bold text-center"
-          style={{ position: "absolute", fontSize: 12, lineHeight: 1.2 }}
-        >
+        <div className="absolute text-[10px] text-white lg:text-adlerdarkblue lg:text-[12px] font-bold leading-5 text-center">
           {scoreInfo && (
             <div>
-              {scoreInfo.currentScore}
-              <br /> von <br />
-              {scoreInfo.requiredScore}
+              {scoreInfo.currentScore} von {scoreInfo.requiredScore}
             </div>
           )}
         </div>

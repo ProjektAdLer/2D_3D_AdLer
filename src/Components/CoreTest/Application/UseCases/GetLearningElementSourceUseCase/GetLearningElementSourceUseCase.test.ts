@@ -4,9 +4,11 @@ import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityCon
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
+import Logger from "../../../../Core/Adapters/Logger/Logger";
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendMock = mock<IBackendPort>();
+const mockLogger = mock<Logger>();
 
 describe("GetLearningElementSource UseCase", () => {
   let systemUnderTest: GetLearningElementSourceUseCase;
@@ -14,6 +16,9 @@ describe("GetLearningElementSource UseCase", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.unbindAll();
+    CoreDIContainer.bind<Logger>(CORE_TYPES.ILogger).toConstantValue(
+      mockLogger
+    );
     CoreDIContainer.bind<IEntityContainer>(
       CORE_TYPES.IEntityContainer
     ).toConstantValue(entityContainerMock);

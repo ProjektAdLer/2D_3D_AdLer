@@ -1,53 +1,35 @@
 import React from "react";
 import LoginComponent from "~ReactComponents/WelcomePage/LoginComponent/LoginComponent";
-import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
-import useIsMobilePortrait from "~ReactComponents/ReactRelated/CustomHooks/useIsMobilePortrait";
 import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
 import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
-import TutorialPdfButton from "~ReactComponents/GeneralComponents/Tutorial/TutorialPdfButton";
+import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
+import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
 
 export default function WelcomePage() {
   return (
     <React.Fragment>
-      <div className="grid h-[100svh] grid-cols-5 grid-rows-5 p-6 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
-        <LoginComponent className="z-10 col-start-1 row-start-1" />
+      <div className="grid h-[100svh] grid-cols-5 grid-rows-6 p-6 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
+        <LoginComponent className="z-10 col-start-1 row-start-1 portrait:self-start portrait:justify-self-start" />
 
-        <h1 className="self-center col-span-2 col-start-4 row-start-1 p-2 text-lg font-extrabold font-[roboto] text-adlerdarkblue rounded-lg lg:col-span-3 lg:col-start-2 xl:col-start-1 xl:col-span-5 lg:row-start-1 lg:p-5 justify-self-center lg:text-4xl 2xl:text-8xl">
+        <HelpDeskButton className="col-start-5 row-start-1 justify-self-end" />
+        <HelpDeskModal />
+
+        <h1 className="self-end p-2 text-lg font-extrabold rounded-lg portrait:text-2xl portrait:row-start-1 portrait:row-span-1 portrait:col-start-1 portrait:col-span-5 landscape:col-span-2 landscape:col-start-4 landscape:row-start-1 text-adlerdarkblue lg:landscape:col-span-3 lg:landscape:col-start-2 xl:landscape:col-start-1 xl:landscape:col-span-5 lg:landscape:row-start-1 lg:p-5 justify-self-center lg:text-4xl 2xl:text-8xl">
           Willkommen bei AdLer!
         </h1>
 
-        <LearningWorldMenuButton className="self-center col-span-2 col-start-4 row-span-3 row-start-2 gap-4 m-1 justify-self-center w-fit h-fit lg:col-span-3 lg:col-start-2 lg:row-start-5" />
+        <LearningWorldMenuButton className="self-center gap-4 m-1 portrait:row-start-5 portrait:col-start-1 portrait:col-span-5 landscape:col-span-2 landscape:col-start-4 landscape:row-span-3 landscape:row-start-3 justify-self-center w-fit h-fit lg:landscape:col-span-3 lg:landscape:self-start lg:landscape:col-start-2 lg:landscape:row-start-6" />
 
-        <div className="flex items-center justify-center col-span-3 col-start-1 row-span-4 row-start-1 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-3">
-          <img
-            className="w-56 max-h-full m-4 lg:w-3/6"
-            src={logo}
-            alt="Adler Logo"
-          />
+        <div className="flex items-center justify-center portrait:row-start-2 portrait:row-span-3 portrait:col-start-2 portrait:col-span-3 landscape:col-span-3 landscape:col-start-1 landscape:row-span-4 landscape:row-start-1 lg:landscape:col-start-2 lg:landscape:col-span-3 lg:landscape:row-start-2 lg:Landscape:row-span-3">
+          <img className="w-56 m-4 lg:w-3/6" src={logo} alt="Adler Logo" />
         </div>
 
-        <p className="self-end col-span-5 col-start-1 row-start-5 p-2 text-xs text-center rounded-lg text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center">
+        <p className="self-end p-2 text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1 portrait:col-span-5 portrait:text-xs landscape:col-span-5 landscape:col-start-1 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6">
           © Projekt AdLer, Technische Hochschule Aschaffenburg, Hochschule für
           angewandte Wissenschaften Kempten, ZFH - Zentrum für Fernstudien im
           Hochschulverbund
         </p>
       </div>
-
-      <TutorialPdfButton
-        className="fixed z-20 right-2 top-2 max-h-3/4"
-        pdfFileUrl={"/manual/adler_user_manual-min.pdf"}
-      />
-
-      <StyledModal canClose={false} showModal={useIsMobilePortrait()}>
-        <div className="text-lg font-bold text-adlerdarkblue">
-          <h1>
-            Die AdLer Engine ist für den<br></br>
-            Landscape Modus konzipiert.<br></br>
-            Bitte nimm dein Smartphone quer.<br></br>
-            Danke!
-          </h1>
-        </div>
-      </StyledModal>
     </React.Fragment>
   );
 }

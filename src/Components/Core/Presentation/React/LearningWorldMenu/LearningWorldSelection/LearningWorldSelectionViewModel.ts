@@ -7,9 +7,7 @@ export interface LearningWorldSelectionLearningWorldData {
 }
 export default class LearningWorldSelectionViewModel {
   userWorlds: Observable<LearningWorldSelectionLearningWorldData[]> =
-    new Observable<LearningWorldSelectionLearningWorldData[]>([
-      { id: 0, name: "Adler flieg!", isCompleted: false },
-    ]);
+    new Observable<LearningWorldSelectionLearningWorldData[]>([]);
 
   selectedRowID: Observable<number> = new Observable<number>(-1);
 }

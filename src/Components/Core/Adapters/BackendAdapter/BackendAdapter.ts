@@ -21,17 +21,25 @@ import WorldStatusResponse, {
   PlayerDataResponse,
 } from "./Types/BackendResponseTypes";
 import LearningWorldStatusTO from "../../Application/DataTransferObjects/LearningWorldStatusTO";
-import { logger } from "src/Lib/Logger";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import { LogLevelTypes } from "../../Domain/Types/LogLevelTypes";
 
 @injectable()
 export default class BackendAdapter implements IBackendPort {
   constructor() {
+    const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
     try {
       axios.defaults.baseURL = new URL(config.serverURL).toString();
     } catch (error) {
-      console.error("Could not set Axios Base URL to: " + config.serverURL);
+      logger.log(
+        LogLevelTypes.ERROR,
+        "Could not set Axios Base URL to: " + config.serverURL
+      );
       if (config.isDebug)
         logger.log(
+          LogLevelTypes.DEBUG,
           "If you want to use the Fake Backend, set the environment variable REACT_APP_USE_FAKEBACKEND to true."
         );
       throw error;

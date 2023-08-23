@@ -2,10 +2,14 @@ import { injectable } from "inversify";
 import IPresentationBuilder from "./IPresentationBuilder";
 import IPresentationDirector from "./IPresentationDirector";
 import IAsyncPresentationBuilder from "./IAsyncPresentationBuilder";
-import { logger } from "../../../../Lib/Logger";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import ILoggerPort from "../../Application/Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "../../Domain/Types/LogLevelTypes";
 
 @injectable()
 export default class PresentationDirector implements IPresentationDirector {
+  private logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
   public build(builder: IPresentationBuilder): void {
     // reset builder
     builder.reset();
@@ -16,7 +20,10 @@ export default class PresentationDirector implements IPresentationDirector {
     builder.buildPresenter();
     builder.buildView();
 
-    logger.log("Concluded build process of " + builder.constructor.name);
+    this.logger.log(
+      LogLevelTypes.INFO,
+      "Concluded build process of " + builder.constructor.name
+    );
   }
 
   public buildAsync(builder: IAsyncPresentationBuilder): Promise<void> {
@@ -30,7 +37,10 @@ export default class PresentationDirector implements IPresentationDirector {
     builder.buildView();
 
     builder.isCompleted.then(() =>
-      logger.log("Concluded async build process of " + builder.constructor.name)
+      this.logger.log(
+        LogLevelTypes.INFO,
+        "Concluded async build process of " + builder.constructor.name
+      )
     );
 
     return builder.isCompleted;
