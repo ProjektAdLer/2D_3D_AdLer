@@ -23,22 +23,20 @@ export default function AdaptabilityQuiz({
     IAdaptabilityElementController
   >(BUILDER_TYPES.IAdaptabilityElementBuilder);
 
-  const [filepath] = useObservable(viewModel.filePath);
   const [element] = useObservable(vm.currentElement);
   const [answerColors, setAnswerColors] = useState<StyledButtonColor[]>([]);
   const [selectedAnswersCount, setSelectedAnswersCount] = useState(0);
   const [numberOfQuestions, setNumberOfQuestions] = useState(0);
 
   const [finished, setFinished] = useState<boolean>(false);
-  //const [displayType, setDisplayType] = useState<DisplayType>(() => {return "answer"});
   const [showFeedback, setShowFeedback] = useState<boolean>(() => {
     return false;
   });
 
   useEffect(() => {
-    c.loadAdaptivityElement(filepath);
+    c.loadAdaptivityElement();
     setNumberOfQuestions(vm.contentData.Value.questions.length);
-  }, [filepath]);
+  }, []);
 
   useEffect(() => {
     setSelectedAnswersCount(
@@ -176,12 +174,10 @@ export default function AdaptabilityQuiz({
     );
   }, [selectedAnswersCount, showFeedback, finished]);
 
-  if (!filepath || !element) {
+  if (!element) {
     return null;
   }
-  // {(displayType === "answer") ? displayAnswers() :
-  // (displayType === "feedback") ? displayFeedback() :
-  // null}
+
   return (
     <main className="box-border flex flex-col items-start">
       <p className="text-sm font-bold lg:text-lg">{displayQuestion()}</p>

@@ -1,5 +1,5 @@
 export default interface IAdaptabilityElementController {
-  loadAdaptivityElement(filePath: string): void;
+  loadAdaptivityElement(): void;
   submitSelection(): void;
   updateAdaptabilityElementDisplay(): void;
 }

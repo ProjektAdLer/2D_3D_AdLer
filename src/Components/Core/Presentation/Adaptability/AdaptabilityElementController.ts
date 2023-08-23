@@ -13,10 +13,10 @@ export default class AdaptabilityElementController
 {
   constructor(private viewModel: AdaptabilityElementViewModel) {}
 
-  loadAdaptivityElement(filePath: string): void {
+  loadAdaptivityElement(): void {
     CoreDIContainer.get<ILoadQuizElementUseCase>(
       USECASE_TYPES.ILoadQuizElementUseCase
-    ).executeAsync(filePath);
+    ).executeAsync();
   }
 
   submitSelection(): void {

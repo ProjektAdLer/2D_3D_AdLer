@@ -92,12 +92,7 @@ export default class LoadQuizElementUseCase implements ILoadQuizElementUseCase {
     private worldPort: ILearningWorldPort
   ) {}
 
-  async executeAsync(filepath: string): Promise<void> {
-    this.logger.log(
-      LogLevelTypes.TRACE,
-      `LoadQuizElementUseCase: Loaded QuizElement from ${filepath}.`
-    );
-
+  async executeAsync(): Promise<void> {
     const content = generateAdaptivityContentsTO();
     this.worldPort.onAdaptivityElementLoaded(content);
     return Promise.resolve();
