@@ -8,6 +8,7 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import AdaptabilityElementViewModel from "./AdaptabilityElementViewModel";
 import IAdaptabilityElementController from "./IAdaptabilityElementController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
+import quizBackgroundVRGuy from "../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
 
 function toggledColor(color: StyledButtonColor) {
   return color === "highlight" ? "default" : "highlight";
@@ -179,14 +180,16 @@ export default function AdaptabilityQuiz({
   }
 
   return (
-    <main className="box-border flex flex-col items-start">
-      <p className="text-sm font-bold lg:text-lg">{displayQuestion()}</p>
-      <section className="flex p-4 pl-0 m-auto">
-        <div className="flex flex-wrap justify-start gap-3 p-4">
-          {display()}
-        </div>
-        <div className="flex items-end">{continueButton()}</div>
-      </section>
-    </main>
+    <>
+      <main className="box-border flex flex-col items-start">
+        <p className="text-sm font-bold lg:text-lg">{displayQuestion()}</p>
+        <section className="flex p-4 pl-0 m-auto">
+          <div className="flex flex-wrap justify-start gap-3 p-4">
+            {display()}
+          </div>
+          <div className="flex items-end">{continueButton()}</div>
+        </section>
+      </main>
+    </>
   );
 }
