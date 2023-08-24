@@ -10,6 +10,8 @@ import ILearningElementBuilder from "../LearningElements/ILearningElementBuilder
 import IStandInDecorationBuilder from "../StandInDecoration/IStandInDecorationBuilder";
 import IDoorBuilder from "../Door/IDoorBuilder";
 import IWindowBuilder from "../Window/IWindowBuilder";
+import SeededRNG from "../../Utils/SeededRNG";
+
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
   private director: IPresentationDirector;
@@ -44,19 +46,26 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
 
     for (let i = 0; i < spaceTO.elements.length; i++) {
       if (!spaceTO.elements[i]) {
-        // create stand in decoration for empty slots
-        const standInDecorationBuilder =
-          CoreDIContainer.get<IStandInDecorationBuilder>(
-            BUILDER_TYPES.IStandInDecorationBuilder
+        const seededRNG = new SeededRNG(i.toString() + spaceTO.name);
+        const randomValue = seededRNG.seededRandom();
+        if (randomValue <= this.viewModel.standInDecoSpawnProbability) {
+          // create stand in decoration for empty slots
+          const standInDecorationBuilder =
+            CoreDIContainer.get<IStandInDecorationBuilder>(
+              BUILDER_TYPES.IStandInDecorationBuilder
+            );
+
+          let elementPosition = this.viewModel.elementPositions.shift()!;
+          standInDecorationBuilder.position = elementPosition[0];
+          standInDecorationBuilder.rotation = elementPosition[1];
+          standInDecorationBuilder.spaceName = spaceTO.name;
+          standInDecorationBuilder.slotNumber = i;
+          standInDecorationBuilder.theme = this.viewModel.theme;
+
+          loadingCompletePromises.push(
+            this.director.buildAsync(standInDecorationBuilder)
           );
-        let elementPosition = this.viewModel.elementPositions.shift()!;
-        standInDecorationBuilder.position = elementPosition[0];
-        standInDecorationBuilder.rotation = elementPosition[1];
-        standInDecorationBuilder.spaceName = spaceTO.name;
-        standInDecorationBuilder.slotNumber = i;
-        loadingCompletePromises.push(
-          this.director.buildAsync(standInDecorationBuilder)
-        );
+        }
       } else {
         // create learning element for non-empty slots
         const elementBuilder = CoreDIContainer.get<ILearningElementBuilder>(
