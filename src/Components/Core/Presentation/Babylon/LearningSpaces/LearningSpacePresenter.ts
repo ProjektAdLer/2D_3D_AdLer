@@ -79,6 +79,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     let exitDoorPosition = this.viewModel.exitDoorPosition;
     exitDoorBuilder.position = exitDoorPosition[0];
     exitDoorBuilder.rotation = exitDoorPosition[1];
+    exitDoorBuilder.theme = this.viewModel.theme;
     exitDoorBuilder.spaceID = this.viewModel.id;
     exitDoorBuilder.isExit = true;
     exitDoorBuilder.isOpen = spaceTO.currentScore >= spaceTO.requiredScore;
@@ -92,6 +93,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     let entryDoorPosition = this.viewModel.entryDoorPosition;
     entryDoorBuilder.position = entryDoorPosition[0];
     entryDoorBuilder.rotation = entryDoorPosition[1];
+    entryDoorBuilder.theme = this.viewModel.theme;
     entryDoorBuilder.spaceID = this.viewModel.id;
     entryDoorBuilder.isExit = false;
     entryDoorBuilder.isOpen = false;
