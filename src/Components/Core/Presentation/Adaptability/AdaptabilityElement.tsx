@@ -8,15 +8,11 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import AdaptabilityElementViewModel from "./AdaptabilityElementViewModel";
 import IAdaptabilityElementController from "./IAdaptabilityElementController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import { useInjection } from "inversify-react";
-import IPresentationBuilder from "../PresentationBuilder/IPresentationBuilder";
-import IPresentationDirector from "../PresentationBuilder/IPresentationDirector";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import ViewModelControllerProvider from "../ViewModelProvider/ViewModelControllerProvider";
-import CORE_TYPES from "~DependencyInjection/CoreTypes";
-import BuilderDIContainer from "~DependencyInjection/Builders/BuilderDIContainer";
-import { json } from "stream/consumers";
-import QuizElementTO from "../../Application/DataTransferObjects/QuizElementTO";
+import quizBackgroundVRGuy from "../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
+
+function toggledColor(color: StyledButtonColor) {
+  return color === "highlight" ? "default" : "highlight";
+}
 
 export default function AdaptabilityQuiz({
   viewModel,
@@ -28,14 +24,20 @@ export default function AdaptabilityQuiz({
     IAdaptabilityElementController
   >(BUILDER_TYPES.IAdaptabilityElementBuilder);
 
-  const [filepath] = useObservable(viewModel.filePath);
   const [element] = useObservable(vm.currentElement);
   const [answerColors, setAnswerColors] = useState<StyledButtonColor[]>([]);
   const [selectedAnswersCount, setSelectedAnswersCount] = useState(0);
+  const [numberOfQuestions, setNumberOfQuestions] = useState(0);
+
+  const [finished, setFinished] = useState<boolean>(false);
+  const [showFeedback, setShowFeedback] = useState<boolean>(() => {
+    return false;
+  });
 
   useEffect(() => {
-    c.loadAdaptivityElement(filepath);
-  }, [filepath]);
+    c.loadAdaptivityElement();
+    setNumberOfQuestions(vm.contentData.Value.questions.length);
+  }, []);
 
   useEffect(() => {
     setSelectedAnswersCount(
@@ -45,61 +47,149 @@ export default function AdaptabilityQuiz({
 
   useEffect(() => {
     if (element !== undefined)
-      setAnswerColors(element.answerOptions.map((color, index) => "default"));
+      setAnswerColors(element.questionAnswers.map((color, index) => "default"));
   }, [element]);
 
+  const display = useCallback(() => {
+    if (finished === true) {
+      return displayReport();
+    }
+
+    if (showFeedback === false) {
+      return displayAnswers();
+    } else if (showFeedback === true) {
+      return displayFeedback();
+    } else return null;
+  }, [showFeedback, element, answerColors]);
+
+  const displayReport = useCallback(() => {
+    if (finished === false) return null;
+
+    return "Gut gemacht!";
+  }, [finished]);
+
   const displayQuestion = useCallback(() => {
+    if (finished === true) return null;
+
     if (element !== undefined) {
-      return element.question;
+      return element.questionText;
     } else {
       return "Keine Frage geladen!";
     }
-  }, [element]);
+  }, [element, finished]);
+
+  const displayFeedback = useCallback(() => {
+    if (vm.evaluation.Value === undefined) return null;
+
+    if (element !== undefined) {
+      return element.questionAnswers.map((answer, index) => (
+        <StyledButton
+          shape="freefloatcenter"
+          key={answer.answerIndex}
+          color={vm.evaluation.Value.get(answer.answerIndex)}
+        >
+          {answer.answerText}
+        </StyledButton>
+      ));
+    } else {
+      return "Kein Feedback geladen!";
+    }
+  }, [showFeedback]);
 
   const displayAnswers = useCallback(() => {
-    const toggleAnswerSingleChoice = (index: number) => {
+    if (finished === true || showFeedback === true) return null;
+
+    const setSelection = (index: number, selected: boolean) => {
+      element.questionAnswers[index].isSelected = selected;
+    };
+
+    const toggleAnswersMultipleChoice = (index: number) => {
       setAnswerColors(
-        answerColors.map((color, i) => (i === index ? "highlight" : "default"))
+        answerColors.map((color, i) =>
+          i === index ? toggledColor(answerColors[index]) : answerColors[i]
+        )
       );
+      element.questionAnswers[index].isSelected === true
+        ? setSelection(index, false)
+        : setSelection(index, true);
     };
 
     if (element !== undefined) {
-      return element.answerOptions.map((answer, index) => (
+      return element.questionAnswers.map((answer, index) => (
         <StyledButton
           shape="freefloatcenter"
-          onClick={(e) => toggleAnswerSingleChoice(index)}
-          key={index}
+          onClick={(e) => toggleAnswersMultipleChoice(index)}
+          key={answer.answerIndex}
           color={answerColors[index]}
         >
-          {answer}
+          {answer.answerText}
         </StyledButton>
       ));
     } else {
       return "Keine Antworten geladen!";
     }
-  }, [element, answerColors]);
+  }, [element, answerColors, showFeedback]);
 
-  const nextButton = useCallback(() => {
+  // assigns next question to display
+  const continueButton = useCallback(() => {
+    function nextElement() {
+      if (finished === true) return;
+
+      for (let i = 0; i < numberOfQuestions; i++) {
+        if (
+          vm.currentElement.Value === vm.contentData.Value.questions[i] &&
+          i !== numberOfQuestions - 1
+        ) {
+          vm.currentElement.Value = vm.contentData.Value.questions[i + 1];
+          return;
+        }
+      }
+      setFinished(true);
+    }
+
+    function submitBehaviour() {
+      if (showFeedback === false) {
+        c.submitSelection();
+        setShowFeedback(true);
+      } else if (showFeedback === true) {
+        nextElement();
+        setShowFeedback(false);
+      }
+    }
+
+    if (finished === true) return null;
+
     return (
       <StyledButton
         className="box-border"
         shape="freefloatcenter"
-        disabled={selectedAnswersCount !== 1}
+        disabled={selectedAnswersCount < 1}
+        onClick={() => submitBehaviour()}
       >
-        Weiter
+        {vm.currentElement.Value !==
+          vm.contentData.Value.questions[numberOfQuestions - 1] ||
+        showFeedback === false
+          ? "Weiter"
+          : "Siehe Bericht"}
       </StyledButton>
     );
-  }, [selectedAnswersCount]);
+  }, [selectedAnswersCount, showFeedback, finished]);
+
+  if (!element) {
+    return null;
+  }
 
   return (
-    <main className="box-border flex flex-col items-start">
-      <p className="text-sm font-bold lg:text-lg">{displayQuestion()}</p>
-      <section className="flex p-4 pl-0 m-auto">
-        <div className="flex flex-wrap justify-start gap-3 p-4">
-          {displayAnswers()}
-        </div>
-        <div className="flex items-end">{nextButton()}</div>
-      </section>
-    </main>
+    <>
+      <main className="box-border flex flex-col items-start">
+        <p className="text-sm font-bold lg:text-lg">{displayQuestion()}</p>
+        <section className="flex p-4 pl-0 m-auto">
+          <div className="flex flex-wrap justify-start gap-3 p-4">
+            {display()}
+          </div>
+          <div className="flex items-end">{continueButton()}</div>
+        </section>
+      </main>
+    </>
   );
 }

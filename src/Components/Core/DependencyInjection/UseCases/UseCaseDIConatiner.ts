@@ -34,6 +34,8 @@ import IGetLearningSpacePrecursorAndSuccessorUseCase from "../../Application/Use
 import GetLearningSpacePrecursorAndSuccessorUseCase from "../../Application/UseCases/GetLearningSpacePrecursorAndSuccessor/GetLearningSpacePrecursorAndSuccessorUseCase";
 import ILoadQuizElementUseCase from "../../Application/UseCases/Adaptability/LoadQuizElementUseCase/ILoadQuizElementUseCase";
 import LoadQuizElementUseCase from "../../Application/UseCases/Adaptability/LoadQuizElementUseCase/LoadQuizElementUseCase";
+import ISubmitSelectionUseCase from "../../Application/UseCases/Adaptability/SubmitSelectionUseCase/ISubmitSelectionUseCase";
+import SubmitSelectionUseCase from "../../Application/UseCases/Adaptability/SubmitSelectionUseCase/SubmitSelectionUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -115,6 +117,10 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<ILoadQuizElementUseCase>(USECASE_TYPES.ILoadQuizElementUseCase)
     .to(LoadQuizElementUseCase)
+    .inSingletonScope();
+
+  bind<ISubmitSelectionUseCase>(USECASE_TYPES.ISubmitSelectionUseCase)
+    .to(SubmitSelectionUseCase)
     .inSingletonScope();
 });
 
