@@ -21,8 +21,6 @@ import DoorViewModel from "./DoorViewModel";
 import IDoorController from "./IDoorController";
 import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
 
-const entryDoorModelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_Door.glb");
-const exitDoorModelLink = require("../../../../../Assets/3dModels/defaultTheme/3DModel_ExitDoor.glb");
 const soundLink = require("../../../../../Assets/Sounds/door_opening.mp3");
 
 export default class DoorView extends Readyable {
