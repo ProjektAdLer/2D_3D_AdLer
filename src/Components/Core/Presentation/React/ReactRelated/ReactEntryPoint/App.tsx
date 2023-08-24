@@ -7,11 +7,17 @@ import history from "history/browser";
 import { Location, Update } from "history";
 import LearningWorldMenu from "./LearningWorldMenu";
 import BugReportButton from "../ReactBaseComponents/BugReportButton";
+import { useInjection } from "inversify-react";
+import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 export interface IAppProps {}
 
 const App: React.FunctionComponent<IAppProps> = (props) => {
   const [location, setLocation] = useState<Location>(history.location);
+  const getLoginStatusUseCase = useInjection<IGetLoginStatusUseCase>(
+    USECASE_TYPES.IGetLoginStatusUseCase
+  );
 
   useEffect(() => {
     const unlisten = history.listen((update: Update) => {
@@ -22,6 +28,13 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
       unlisten();
     };
   }, []);
+
+  useEffect(() => {
+    let userLoggedIn = getLoginStatusUseCase.execute();
+    if (!userLoggedIn) {
+      history.push("/");
+    }
+  }, [getLoginStatusUseCase]);
 
   if (location?.pathname.includes("/spacedisplay")) {
     return (

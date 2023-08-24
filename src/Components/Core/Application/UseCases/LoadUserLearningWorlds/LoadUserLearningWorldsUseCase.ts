@@ -47,6 +47,7 @@ export default class LoadUserLearningWorldsUseCase
         LogLevelTypes.ERROR,
         "LoadUserLearningWorldsUseCase: User is not logged in!"
       );
+      lock.release();
       return Promise.reject("User is not logged in");
     }
 

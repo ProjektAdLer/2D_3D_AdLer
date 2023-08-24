@@ -59,6 +59,7 @@ export default class LoadLearningWorldUseCase
         LogLevelTypes.ERROR,
         "LoadLearningWorldUseCase: User is not logged in!"
       );
+      lock.release();
       return Promise.reject("User is not logged in");
     }
 
@@ -73,6 +74,7 @@ export default class LoadLearningWorldUseCase
         LogLevelTypes.ERROR,
         "LoadLearningWorldUseCase: World is not available!"
       );
+      lock.release();
       return Promise.reject("World is not available");
     }
 
