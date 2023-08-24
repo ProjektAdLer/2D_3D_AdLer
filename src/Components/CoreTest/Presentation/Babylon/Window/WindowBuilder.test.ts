@@ -4,6 +4,7 @@ import PresentationBuilder from "../../../../Core/Presentation/PresentationBuild
 import WindowView from "../../../../Core/Presentation/Babylon/Window/WindowView";
 import { mock } from "jest-mock-extended";
 import { waitFor } from "@testing-library/react";
+import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 
 jest.mock("@babylonjs/core");
 jest.mock("../../../../Core/Presentation/Babylon/Window/WindowView");
@@ -26,6 +27,7 @@ describe("WindowBuilder", () => {
   test("buildView resolves isCompleted promise when the asyncSetup of the view resolves", async () => {
     systemUnderTest.position = new Vector3(0, 0, 0);
     systemUnderTest.rotation = 0;
+    systemUnderTest.theme = LearningSpaceThemeType.Campus;
 
     systemUnderTest.buildViewModel();
     const viewMock = mock<WindowView>();
@@ -36,9 +38,11 @@ describe("WindowBuilder", () => {
 
     await expect(systemUnderTest.isCompleted).resolves.toBeUndefined();
   });
+
   test("buildView logs the error which the asyncSetup of the view rejects", async () => {
     systemUnderTest.position = new Vector3(0, 0, 0);
     systemUnderTest.rotation = 0;
+    systemUnderTest.theme = LearningSpaceThemeType.Campus;
 
     systemUnderTest.buildViewModel();
     const viewMock = mock<WindowView>();

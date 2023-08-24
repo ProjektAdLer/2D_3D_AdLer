@@ -106,6 +106,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
       );
       windowBuilder.position = windowPosition[0];
       windowBuilder.rotation = windowPosition[1];
+      windowBuilder.theme = this.viewModel.theme;
       loadingWindowPromises.push(this.director.buildAsync(windowBuilder));
     }
     await Promise.all(loadingWindowPromises);
