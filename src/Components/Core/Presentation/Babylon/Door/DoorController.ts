@@ -33,14 +33,14 @@ export default class DoorController implements IDoorController {
 
   @bind
   picked(): void {
-    this.bottomTooltipPresenter.displayDoorTooltip(this.viewModel.isExit);
-  }
-
-  @bind
-  doublePicked(): void {
     CoreDIContainer.get<IGetLearningSpacePrecursorAndSuccessorUseCase>(
       USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
     ).execute();
     this.exitModalPresenter.open(this.viewModel.isExit);
+  }
+
+  @bind
+  doublePicked(): void {
+    this.bottomTooltipPresenter.displayDoorTooltip(this.viewModel.isExit);
   }
 }
