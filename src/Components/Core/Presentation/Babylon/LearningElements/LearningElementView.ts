@@ -22,7 +22,7 @@ import {
   LearningElementModelTypeEnums,
   isValidLearningElementModelType,
 } from "src/Components/Core/Domain/Types/LearningElementModelTypes";
-import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
+// import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
 
 const modelLinksByType: {
   [key in LearningElementTypes]?: any[];
