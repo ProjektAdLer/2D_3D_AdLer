@@ -22,7 +22,7 @@ export default function WelcomePage() {
 
         <div className="flex items-center justify-center portrait:row-start-2 portrait:row-span-3 portrait:col-start-2 portrait:col-span-3 landscape:col-span-3 landscape:col-start-1 landscape:row-span-4 landscape:row-start-1 lg:landscape:col-start-2 lg:landscape:col-span-3 lg:landscape:row-start-2 lg:Landscape:row-span-3">
           <img
-            className="w-56 m-4 lg:w-3/6 2xl:w-5/12"
+            className="w-56 m-4 lg:w-3/6 2xl:w-4/12"
             src={logo}
             alt="Adler Logo"
           />
