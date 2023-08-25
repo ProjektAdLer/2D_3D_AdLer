@@ -4,9 +4,10 @@ import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO
 import {
   LearningElementModelTypeEnums,
   isValidLearningElementModelType,
-} from "../../Domain/Types/LearningElementModelTypes";
+} from "../../Domain/LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypes } from "../../Domain/Types/LearningElementTypes";
 import { LearningSpaceTemplateType } from "../../Domain/Types/LearningSpaceTemplateType";
+import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
 import IDSL, { APIElement, APISpace } from "./Types/IDSL";
 
 /**
@@ -47,6 +48,19 @@ export default class BackendAdapterUtils {
         template = space.spaceTemplate.toUpperCase();
       }
 
+      let templateStyle: LearningSpaceThemeType;
+      if (
+        !Object.values<string>(LearningSpaceThemeType).includes(
+          space.spaceTemplateStyle.toUpperCase()
+        )
+      ) {
+        templateStyle = LearningSpaceThemeType.Campus;
+      } else {
+        // cast to enum
+        templateStyle =
+          space.spaceTemplateStyle.toUpperCase() as LearningSpaceThemeType;
+      }
+
       return {
         id: space.spaceId,
         name: space.spaceName,
@@ -59,6 +73,7 @@ export default class BackendAdapterUtils {
         requirements: space.requiredSpacesToEnter,
         requiredScore: space.requiredPointsToComplete,
         template: template,
+        templateStyle: templateStyle,
       } as BackendSpaceTO;
     });
   }

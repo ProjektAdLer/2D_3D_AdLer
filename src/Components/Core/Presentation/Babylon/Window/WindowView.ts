@@ -8,8 +8,7 @@ import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import bind from "bind-decorator";
 import { Mesh, Tools, Vector3 } from "@babylonjs/core";
-
-const windowModelLink = require("../../../../../Assets/3dModels/campusTheme/3DModel_Window.glb");
+import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
 
 export default class WindowView extends Readyable {
   private scenePresenter: IScenePresenter;
@@ -31,12 +30,17 @@ export default class WindowView extends Readyable {
   }
 
   private async loadMeshAsync(): Promise<void> {
-    const results = await this.scenePresenter.loadModel(windowModelLink);
+    const modelLinksByTheme = LearningSpaceThemeLookup.getLearningSpaceTheme(
+      this.viewModel.theme
+    ).windowModel;
+    const results = await this.scenePresenter.loadModel(modelLinksByTheme);
+
     // reset quaternion rotation because it can prevent mesh.rotate to have any effect
     results.forEach((mesh) => (mesh.rotationQuaternion = null));
 
     this.viewModel.meshes = results as Mesh[];
   }
+
   @bind
   private positionWindowMesh(): void {
     this.viewModel.meshes[0].position = this.viewModel.position;

@@ -18,9 +18,8 @@ import IScenePresenter from "../SceneManagement/IScenePresenter";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import DoorViewModel from "./DoorViewModel";
 import IDoorController from "./IDoorController";
+import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
 
-const entryDoorModelLink = require("../../../../../Assets/3dModels/campusTheme/3DModel_Door.glb");
-const exitDoorModelLink = require("../../../../../Assets/3dModels/campusTheme/3DModel_ExitDoor.glb");
 const soundLink = require("../../../../../Assets/Sounds/door_opening.mp3");
 
 export default class DoorView extends Readyable {
@@ -67,15 +66,23 @@ export default class DoorView extends Readyable {
   }
 
   private async loadMeshAsync(): Promise<void> {
-    let results;
-    if (this.viewModel.isExit)
-      results = await this.scenePresenter.loadModel(exitDoorModelLink);
-    else results = await this.scenePresenter.loadModel(entryDoorModelLink);
+    const modelLink = this.getModelLinkByThemeAndType();
+    const loadedMeshes = await this.scenePresenter.loadModel(modelLink);
 
     // reset quaternion rotation because it can prevent mesh.rotate to have any effect
-    results.forEach((mesh) => (mesh.rotationQuaternion = null));
+    loadedMeshes.forEach((mesh) => (mesh.rotationQuaternion = null));
 
-    this.viewModel.meshes = results as Mesh[];
+    this.viewModel.meshes = loadedMeshes as Mesh[];
+  }
+
+  private getModelLinkByThemeAndType(): string {
+    const themeConfig = LearningSpaceThemeLookup.getLearningSpaceTheme(
+      this.viewModel.theme
+    );
+
+    return this.viewModel.isExit
+      ? themeConfig.exitDoorModel
+      : themeConfig.entryDoorModel;
   }
 
   private setupAnimation(): void {

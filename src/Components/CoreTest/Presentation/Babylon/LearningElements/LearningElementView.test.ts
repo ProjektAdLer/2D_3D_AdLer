@@ -14,6 +14,7 @@ import {
   Vector3,
 } from "@babylonjs/core";
 import { ActionManager } from "@babylonjs/core/Actions/actionManager";
+import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -63,7 +64,9 @@ describe("LearningElementView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    const [, , systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, , systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Campus;
+
     await systemUnderTest.setupLearningElement();
 
     expect(scenePresenterMock.loadModel).toBeCalledTimes(2);
@@ -77,6 +80,7 @@ describe("LearningElementView", () => {
     ]);
     const [viewModel, , systemUnderTest] = buildSystemUnderTest();
     viewModel.modelType = "";
+    viewModel.theme = LearningSpaceThemeType.Campus;
 
     await systemUnderTest.setupLearningElement();
 
@@ -93,6 +97,7 @@ describe("LearningElementView", () => {
     ]);
 
     const [viewModel, , systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Campus;
 
     await systemUnderTest.setupLearningElement();
 
@@ -110,7 +115,9 @@ describe("LearningElementView", () => {
       new AbstractMesh("TestMesh1", new Scene(new NullEngine())),
     ]);
 
-    const [, controller, systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Campus;
+
     await systemUnderTest.setupLearningElement();
 
     // check to see if registerAction was called with the onPickTrigger callback
@@ -135,7 +142,9 @@ describe("LearningElementView", () => {
       new AbstractMesh("TestMesh1", new Scene(new NullEngine())),
     ]);
 
-    const [, controller, systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Campus;
+
     await systemUnderTest.setupLearningElement();
 
     // check to see if registerAction was called with the onPointerOverTrigger callback
@@ -160,7 +169,9 @@ describe("LearningElementView", () => {
       new AbstractMesh("TestMesh1", new Scene(new NullEngine())),
     ]);
 
-    const [, controller, systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Campus;
+
     await systemUnderTest.setupLearningElement();
 
     // check to see if registerAction was called with the onPointerOutTrigger callback
@@ -180,7 +191,9 @@ describe("LearningElementView", () => {
     const mesh = new AbstractMesh("TestMesh1", new Scene(new NullEngine()));
     scenePresenterMock.loadModel.mockResolvedValue([mesh]);
 
-    const [, , systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, , systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Campus;
+
     await systemUnderTest.setupLearningElement();
 
     expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
@@ -201,6 +214,7 @@ describe("LearningElementView", () => {
 
     const [viewModel, , systemUnderTest] = buildSystemUnderTest();
     viewModel.position = new Vector3(42, 42, 42);
+    viewModel.theme = LearningSpaceThemeType.Campus;
 
     await systemUnderTest.setupLearningElement();
 
@@ -216,6 +230,7 @@ describe("LearningElementView", () => {
 
     const [viewModel, , systemUnderTest] = buildSystemUnderTest();
     viewModel.rotation = 42;
+    viewModel.theme = LearningSpaceThemeType.Campus;
 
     await systemUnderTest.setupLearningElement();
 
@@ -228,6 +243,8 @@ describe("LearningElementView", () => {
     ]);
 
     const [viewModel, , systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Campus;
+
     await systemUnderTest.setupLearningElement();
 
     viewModel.hasScored.Value = true;

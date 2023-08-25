@@ -10,16 +10,22 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { Vector3 } from "@babylonjs/core";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
+import IDoorBuilder from "./IDoorBuilder";
+import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 
 @injectable()
-export default class DoorBuilder extends AsyncPresentationBuilder<
-  DoorViewModel,
-  DoorController,
-  DoorView,
-  IDoorPresenter
-> {
+export default class DoorBuilder
+  extends AsyncPresentationBuilder<
+    DoorViewModel,
+    DoorController,
+    DoorView,
+    IDoorPresenter
+  >
+  implements IDoorBuilder
+{
   position: Vector3;
   rotation: number;
+  theme: LearningSpaceThemeType;
   isExit: boolean;
   spaceID: ComponentID;
   isOpen: boolean;
@@ -31,6 +37,7 @@ export default class DoorBuilder extends AsyncPresentationBuilder<
     if (
       this.position === undefined ||
       this.rotation === undefined ||
+      this.theme === undefined ||
       this.isExit === undefined ||
       this.spaceID === undefined ||
       this.isOpen === undefined
@@ -41,6 +48,7 @@ export default class DoorBuilder extends AsyncPresentationBuilder<
 
     this.viewModel!.position = this.position;
     this.viewModel!.rotation = this.rotation;
+    this.viewModel!.theme = this.theme;
     this.viewModel!.isExit = this.isExit;
     this.viewModel!.spaceID = this.spaceID;
     this.viewModel!.isOpen.Value = this.isOpen;

@@ -5,18 +5,24 @@ import IStandInDecorationPresenter from "./IStandInDecorationPresenter";
 import StandInDecorationPresenter from "./StandInDecorationPresenter";
 import { Vector3 } from "@babylonjs/core";
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
+import IStandInDecorationBuilder from "./IStandInDecorationBuilder";
+import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 
 @injectable()
-export default class StandInDecorationBuilder extends AsyncPresentationBuilder<
-  StandInDecorationViewModel,
-  undefined,
-  StandInDecorationView,
-  IStandInDecorationPresenter
-> {
+export default class StandInDecorationBuilder
+  extends AsyncPresentationBuilder<
+    StandInDecorationViewModel,
+    undefined,
+    StandInDecorationView,
+    IStandInDecorationPresenter
+  >
+  implements IStandInDecorationBuilder
+{
   position: Vector3;
   rotation: number;
   spaceName: string;
   slotNumber: number;
+  theme: LearningSpaceThemeType;
 
   constructor() {
     super(
@@ -32,7 +38,8 @@ export default class StandInDecorationBuilder extends AsyncPresentationBuilder<
       this.position === undefined ||
       this.rotation === undefined ||
       this.spaceName === undefined ||
-      this.slotNumber === undefined
+      this.slotNumber === undefined ||
+      this.theme === undefined
     )
       throw new Error(
         `Position: ${this.position}, Rotation: ${this.rotation}, SpaceName: ${this.spaceName} or SlotNumber: ${this.slotNumber} is not defined. Set before using the builder.`
@@ -43,7 +50,9 @@ export default class StandInDecorationBuilder extends AsyncPresentationBuilder<
     this.viewModel!.rotation = this.rotation;
     this.viewModel!.spaceName = this.spaceName;
     this.viewModel!.slotNumber = this.slotNumber;
+    this.viewModel!.theme = this.theme;
   }
+
   buildView(): void {
     super.buildView();
 

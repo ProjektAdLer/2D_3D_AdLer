@@ -10,12 +10,14 @@ import LearningSpaceViewModel from "../../../../Core/Presentation/Babylon/Learni
 import IPresentationDirector from "../../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 import IDecorationPresenter from "../../../../Core/Presentation/Babylon/Decoration/IDecorationPresenter";
-import { LearningElementModelTypeEnums } from "../../../../Core/Domain/Types/LearningElementModelTypes";
 import DecorationBuilder from "../../../../Core/Presentation/Babylon/Decoration/DecorationBuilder";
 import DoorBuilder from "../../../../Core/Presentation/Babylon/Door/DoorBuilder";
 import WindowBuilder from "../../../../Core/Presentation/Babylon/Window/WindowBuilder";
 import LearningElementBuilder from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementBuilder";
 import StandInDecorationBuilder from "../../../../Core/Presentation/Babylon/StandInDecoration/StandInDecorationBuilder";
+import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import SeededRNG from "../../../../Core/Presentation/Utils/SeededRNG";
+import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 const directorMock = mock<IPresentationDirector>();
 const decorationBuilderMock = mock<DecorationBuilder>();
@@ -24,6 +26,8 @@ const windowBuilderMock = mock<WindowBuilder>();
 const elementBuilderMock = mock<LearningElementBuilder>();
 const standinBuilderMock = mock<StandInDecorationBuilder>();
 const worldPortMock = mock<ILearningWorldPort>();
+
+jest.mock("../../../../Core/Presentation/Utils/SeededRNG");
 
 const spaceTO: LearningSpaceTO = {
   id: 1,
@@ -47,11 +51,13 @@ const spaceTO: LearningSpaceTO = {
       hasScored: false,
       parentWorldID: 1,
       model: LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard,
+      theme: LearningSpaceThemeType.Campus,
     },
   ],
   requirementsSyntaxTree: null,
   isAvailable: true,
   template: LearningSpaceTemplateType.L,
+  theme: LearningSpaceThemeType.Campus,
 };
 
 describe("LearningSpacePresenter", () => {
@@ -92,6 +98,7 @@ describe("LearningSpacePresenter", () => {
 
   afterAll(() => {
     CoreDIContainer.restore();
+    jest.restoreAllMocks();
   });
 
   test("constructor throws error if viewModel is not defined", () => {
@@ -166,6 +173,8 @@ describe("LearningSpacePresenter", () => {
   });
 
   test("createLearningElements creates one element and sets the correct data in its builder", async () => {
+    SeededRNG.prototype.seededRandom = jest.fn().mockReturnValue(0);
+
     systemUnderTest["viewModel"].elementPositions = [
       [new Vector3(1, 1, 1), 0],
       [new Vector3(1, 1, 1), 0],
@@ -187,6 +196,8 @@ describe("LearningSpacePresenter", () => {
   });
 
   test("createLearningElements creates one standin deco and sets the correct data in its builder", async () => {
+    SeededRNG.prototype.seededRandom = jest.fn().mockReturnValue(0);
+
     systemUnderTest["viewModel"].elementPositions = [
       [new Vector3(1, 1, 1), 0],
       [new Vector3(1, 1, 1), 0],

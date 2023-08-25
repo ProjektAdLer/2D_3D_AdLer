@@ -7,19 +7,7 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import { Mesh, Tools, Vector3 } from "@babylonjs/core";
 import ArrayItemRandomizer from "../../Utils/ArrayItemRandomizer/ArrayItemRandomizer";
-
-const modelLinks = [
-  require("../../../../../Assets/3dModels/campusTheme/d-moebel-komp-1.glb"),
-  require("../../../../../Assets/3dModels/campusTheme/d-moebel-komp-2.glb"),
-  require("../../../../../Assets/3dModels/campusTheme/d-moebel-komp-3.glb"),
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-];
+import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
 
 export default class StandInDecorationView {
   private scenePresenter: IScenePresenter;
@@ -32,15 +20,15 @@ export default class StandInDecorationView {
   }
 
   public async asyncSetup(): Promise<void> {
-    let modelLink;
-
-    const modelRandomizer = new ArrayItemRandomizer(modelLinks);
-    modelLink = modelRandomizer.getItem(
+    const modelRandomizer = new ArrayItemRandomizer(
+      LearningSpaceThemeLookup.getLearningSpaceTheme(
+        this.viewModel.theme
+      ).standinDecorationModels
+    );
+    const modelLink = modelRandomizer.getItem(
       `${this.viewModel.slotNumber} ${this.viewModel.spaceName}`
     );
-    if (modelLink == null) {
-      return;
-    }
+
     this.viewModel.modelMeshes = (await this.scenePresenter.loadModel(
       modelLink,
       true

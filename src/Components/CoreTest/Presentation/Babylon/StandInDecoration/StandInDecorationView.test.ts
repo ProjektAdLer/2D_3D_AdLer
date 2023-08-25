@@ -6,6 +6,7 @@ import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManageme
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 import { AbstractMesh, NullEngine, Scene, Vector3 } from "@babylonjs/core";
 import ArrayItemRandomizer from "../../../../Core/Presentation/Utils/ArrayItemRandomizer/ArrayItemRandomizer";
+import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -40,6 +41,7 @@ describe("StandInDecorationView", () => {
     CoreDIContainer.restore();
     jest.restoreAllMocks();
   });
+
   test("constructor injects scenePresenter", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
@@ -63,26 +65,10 @@ describe("StandInDecorationView", () => {
     viewModel.position = new Vector3(0, 0, 0);
     viewModel.slotNumber = 0;
     viewModel.spaceName = "TestSpace";
+    viewModel.theme = LearningSpaceThemeType.Campus;
 
     await systemUnderTest.asyncSetup();
 
     expect(scenePresenterMock.loadModel).toBeCalledTimes(1);
-  });
-  test("async setup does not call scene presenter to load model, if modellink is null", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-
-    jest.spyOn(ArrayItemRandomizer.prototype, "getItem").mockReturnValue(null);
-
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.rotation = 0;
-    viewModel.position = new Vector3(0, 0, 0);
-    viewModel.slotNumber = 0;
-    viewModel.spaceName = "TestSpace";
-
-    await systemUnderTest.asyncSetup();
-
-    expect(scenePresenterMock.loadModel).toBeCalledTimes(0);
   });
 });

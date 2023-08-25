@@ -1,6 +1,6 @@
 import { LearningElementTypeStrings } from "../Types/LearningElementTypes";
 import { ComponentID } from "../Types/EntityTypes";
-import { LearningElementModel } from "../Types/LearningElementModelTypes";
+import { LearningElementModel } from "../LearningElementModels/LearningElementModelTypes";
 
 export default class LearningElementEntity {
   public id: ComponentID;

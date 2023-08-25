@@ -1,5 +1,5 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
-import { LearningElementModel } from "../../Domain/Types/LearningElementModelTypes";
+import { LearningElementModel } from "../../Domain/LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypeStrings } from "../../Domain/Types/LearningElementTypes";
 
 export default class BackendElementTO {
