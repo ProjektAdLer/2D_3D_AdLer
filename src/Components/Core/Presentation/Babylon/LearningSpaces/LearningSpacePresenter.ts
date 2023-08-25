@@ -10,7 +10,7 @@ import ILearningElementBuilder from "../LearningElements/ILearningElementBuilder
 import IStandInDecorationBuilder from "../StandInDecoration/IStandInDecorationBuilder";
 import IDoorBuilder from "../Door/IDoorBuilder";
 import IWindowBuilder from "../Window/IWindowBuilder";
-import AdaptabilityElementBuilder from "../../Adaptability/AdaptabilityElementBuilder";
+// import AdaptabilityElementBuilder from "../../Adaptability/AdaptabilityElementBuilder";
 import SeededRNG from "../../Utils/SeededRNG";
 
 @injectable()
