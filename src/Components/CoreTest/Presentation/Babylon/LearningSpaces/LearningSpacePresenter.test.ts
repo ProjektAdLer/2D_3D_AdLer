@@ -10,7 +10,6 @@ import LearningSpaceViewModel from "../../../../Core/Presentation/Babylon/Learni
 import IPresentationDirector from "../../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 import IDecorationPresenter from "../../../../Core/Presentation/Babylon/Decoration/IDecorationPresenter";
-import { LearningElementModelTypeEnums } from "../../../../Core/Domain/Types/LearningElementModelTypes";
 import DecorationBuilder from "../../../../Core/Presentation/Babylon/Decoration/DecorationBuilder";
 import DoorBuilder from "../../../../Core/Presentation/Babylon/Door/DoorBuilder";
 import WindowBuilder from "../../../../Core/Presentation/Babylon/Window/WindowBuilder";
@@ -18,6 +17,7 @@ import LearningElementBuilder from "../../../../Core/Presentation/Babylon/Learni
 import StandInDecorationBuilder from "../../../../Core/Presentation/Babylon/StandInDecoration/StandInDecorationBuilder";
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 import SeededRNG from "../../../../Core/Presentation/Utils/SeededRNG";
+import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 const directorMock = mock<IPresentationDirector>();
 const decorationBuilderMock = mock<DecorationBuilder>();

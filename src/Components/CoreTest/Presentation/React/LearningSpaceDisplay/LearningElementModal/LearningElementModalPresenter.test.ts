@@ -1,7 +1,7 @@
 import LearningElementModalPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalPresenter";
 import LearningElementModalViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 import LearningElementTO from "../../../../../Core/Application/DataTransferObjects/LearningElementTO";
-import { LearningElementModelTypeEnums } from "../../../../../Core/Domain/Types/LearningElementModelTypes";
+import { LearningElementModelTypeEnums } from "../../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 describe("LearningElementModalPresenter", () => {
   let systemUnderTest: LearningElementModalPresenter;

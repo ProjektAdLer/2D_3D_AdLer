@@ -7,11 +7,11 @@ import TemplateLearningSpaceDimensionStrategy from "../../../../Core/Presentatio
 import { waitFor } from "@testing-library/react";
 import LearningSpaceViewModel from "../../../../Core/Presentation/Babylon/LearningSpaces/LearningSpaceViewModel";
 import LearningSpaceTO from "../../../../Core/Application/DataTransferObjects/LearningSpaceTO";
-import { LearningElementModelTypeEnums } from "../../../../Core/Domain/Types/LearningElementModelTypes";
 import ILearningSpacePresenter from "../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpacePresenter";
 import PresentationBuilder from "../../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
 import ILearningSpaceView from "../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpaceView";
 import ILearningSpaceController from "../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpaceController";
+import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 jest.mock("@babylonjs/core");
 jest.mock(

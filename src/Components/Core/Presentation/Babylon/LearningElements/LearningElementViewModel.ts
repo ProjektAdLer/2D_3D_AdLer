@@ -2,7 +2,7 @@ import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { Mesh, Vector3 } from "@babylonjs/core";
 import Observable from "../../../../../Lib/Observable";
 import { LearningElementTypeStrings } from "src/Components/Core/Domain/Types/LearningElementTypes";
-import { LearningElementModel } from "src/Components/Core/Domain/Types/LearningElementModelTypes";
+import { LearningElementModel } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
 import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 
 export default class LearningElementViewModel {

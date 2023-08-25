@@ -1,7 +1,7 @@
 import BackendAdapterUtils from "../../../Core/Adapters/BackendAdapter/BackendAdapterUtils";
 import { APISpace } from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
 import BackendElementTO from "../../../Core/Application/DataTransferObjects/BackendElementTO";
-import { LearningElementModelTypeEnums } from "../../../Core/Domain/Types/LearningElementModelTypes";
+import { LearningElementModelTypeEnums } from "../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 describe("BackendAdapterUtils", () => {
   test("mapSpaces ", () => {

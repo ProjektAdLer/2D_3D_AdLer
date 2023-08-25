@@ -5,10 +5,10 @@ import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import LearningElementBuilder from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementBuilder";
 import LearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementPresenter";
 import LearningElementTO from "../../../../Core/Application/DataTransferObjects/LearningElementTO";
-import { LearningElementModelTypeEnums } from "../../../../Core/Domain/Types/LearningElementModelTypes";
 import { Vector3 } from "@babylonjs/core";
 import LearningElementView from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementView";
 import { waitFor } from "@testing-library/react";
+import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 jest.mock(
   "../../../../Core/Presentation/Babylon/LearningElements/LearningElementView"

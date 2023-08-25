@@ -3,9 +3,9 @@ import IDSL from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
 import BackendWorldTO from "../../../Core/Application/DataTransferObjects/BackendWorldTO";
 import BackendSpaceTO from "../../../Core/Application/DataTransferObjects/BackendSpaceTO";
 import BackendElementTO from "../../../Core/Application/DataTransferObjects/BackendElementTO";
-import { LearningElementModelTypeEnums } from "../../../Core/Domain/Types/LearningElementModelTypes";
 import { LearningSpaceTemplateType } from "../../../Core/Domain/Types/LearningSpaceTemplateType";
 import { LearningSpaceThemeType } from "../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { LearningElementModelTypeEnums } from "../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 export const minimalGetWorldDataResponse: BackendWorldTO = {
   worldName: "TestWorld",

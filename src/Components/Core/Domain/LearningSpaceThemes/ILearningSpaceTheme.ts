@@ -2,7 +2,7 @@ import { LearningElementTypes } from "../Types/LearningElementTypes";
 import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
 
 type LearningElementModelsMap = Readonly<
-  Record<LearningElementTypes, readonly string[]>
+  Record<LearningElementTypes, string[]>
 >;
 
 export default interface ILearningSpaceTheme {

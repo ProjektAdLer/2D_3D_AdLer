@@ -4,7 +4,7 @@ import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO
 import {
   LearningElementModelTypeEnums,
   isValidLearningElementModelType,
-} from "../../Domain/Types/LearningElementModelTypes";
+} from "../../Domain/LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypes } from "../../Domain/Types/LearningElementTypes";
 import { LearningSpaceTemplateType } from "../../Domain/Types/LearningSpaceTemplateType";
 import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
