@@ -29,7 +29,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
--
+- Overlapping AdLerEngine icon on WelcomeScreen
 
 ### Security
 
