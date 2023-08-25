@@ -18,68 +18,11 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import bind from "bind-decorator";
 import ArrayItemRandomizer from "../../Utils/ArrayItemRandomizer/ArrayItemRandomizer";
 import {
-  LearningElementModel,
   LearningElementModelTypeEnums,
   isValidLearningElementModelType,
-} from "src/Components/Core/Domain/Types/LearningElementModelTypes";
-
-const modelLinksByType: {
-  [key in LearningElementTypes]?: any[];
-} = {
-  [LearningElementTypes.h5p]: [
-    require("../../../../../Assets/3dModels/campusTheme/l_h5p_deskpc_1.glb"),
-    require("../../../../../Assets/3dModels/campusTheme/l_h5p_slotmachine_1.glb"),
-    require("../../../../../Assets/3dModels/campusTheme/l_h5p_blackboard_1.glb"),
-    require("../../../../../Assets/3dModels/campusTheme/l_h5p_drawingtable_1.glb"),
-  ],
-  [LearningElementTypes.text]: [
-    require("../../../../../Assets/3dModels/campusTheme/l_text_bookshelf_1.glb"),
-    require("../../../../../Assets/3dModels/campusTheme/l_text_bookshelf_2.glb"),
-  ],
-  [LearningElementTypes.pdf]: [
-    require("../../../../../Assets/3dModels/campusTheme/l_text_bookshelf_1.glb"),
-    require("../../../../../Assets/3dModels/campusTheme/l_text_bookshelf_2.glb"),
-  ],
-  [LearningElementTypes.image]: [
-    require("../../../../../Assets/3dModels/campusTheme/l_picture_painting_1.glb"),
-    require("../../../../../Assets/3dModels/campusTheme/l_picture_painting_2.glb"),
-    require("../../../../../Assets/3dModels/campusTheme/l_picture_paintingeasel_1.glb"),
-  ],
-  [LearningElementTypes.video]: [
-    require("../../../../../Assets/3dModels/campusTheme/l_video_television_1.glb"),
-  ],
-  [LearningElementTypes.quiz]: [
-    require("../../../../../Assets/3dModels/campusTheme/l_h5p_slotmachine_1.glb"),
-  ],
-  [LearningElementTypes.notAnElement]: [],
-};
-
-const modelLinksByModel: {
-  [key in LearningElementModel]?: any;
-} = {
-  [LearningElementModelTypeEnums.H5pElementModelTypes
-    .Blackboard]: require("../../../../../Assets/3dModels/campusTheme/l_h5p_blackboard_1.glb"),
-  [LearningElementModelTypeEnums.H5pElementModelTypes
-    .DeskPC]: require("../../../../../Assets/3dModels/campusTheme/l_h5p_deskpc_1.glb"),
-  [LearningElementModelTypeEnums.H5pElementModelTypes
-    .DrawingTable]: require("../../../../../Assets/3dModels/campusTheme/l_h5p_drawingtable_1.glb"),
-  [LearningElementModelTypeEnums.H5pElementModelTypes
-    .SlotMachine]: require("../../../../../Assets/3dModels/campusTheme/l_h5p_slotmachine_1.glb"),
-  [LearningElementModelTypeEnums.TextElementModelTypes
-    .Bookshelf1]: require("../../../../../Assets/3dModels/campusTheme/l_text_bookshelf_1.glb"),
-  [LearningElementModelTypeEnums.TextElementModelTypes
-    .Bookshelf2]: require("../../../../../Assets/3dModels/campusTheme/l_text_bookshelf_2.glb"),
-  [LearningElementModelTypeEnums.ImageElementModelTypes
-    .Painting1]: require("../../../../../Assets/3dModels/campusTheme/l_picture_painting_1.glb"),
-  [LearningElementModelTypeEnums.ImageElementModelTypes
-    .Painting2]: require("../../../../../Assets/3dModels/campusTheme/l_picture_painting_2.glb"),
-  [LearningElementModelTypeEnums.ImageElementModelTypes
-    .PaintingEasel]: require("../../../../../Assets/3dModels/campusTheme/l_picture_paintingeasel_1.glb"),
-  [LearningElementModelTypeEnums.VideoElementModelTypes
-    .Television]: require("../../../../../Assets/3dModels/campusTheme/l_video_television_1.glb"),
-  [LearningElementModelTypeEnums.QuizElementModelTypes
-    .QuizNPC]: require("../../../../../Assets/3dModels/campusTheme/l_h5p_slotmachine_1.glb"),
-};
+} from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
+import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
+import LearningElementModelLookup from "src/Components/Core/Domain/LearningElementModels/LearningElementModelLookup";
 
 const iconLinks: { [key in LearningElementTypes]?: any } = {
   [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/campusTheme/l-icons-h5p-1.glb"),
@@ -111,18 +54,33 @@ export default class LearningElementView {
   }
 
   public async setupLearningElement(): Promise<void> {
-    // load model
+    await Promise.all([this.loadElementModel(), this.loadIconModel()]);
+    this.setupInteractions();
+    this.addMeshesToHighlightLayer();
+    this.positionModel();
+  }
+
+  private async loadElementModel(): Promise<void> {
     let modelLink;
+
+    // get link to model by name if given
     if (
       isValidLearningElementModelType(this.viewModel.modelType) &&
       this.viewModel.modelType !==
         LearningElementModelTypeEnums.NoElementModelTypes.None
     ) {
-      modelLink = modelLinksByModel[this.viewModel.modelType];
-    } else {
-      const modelRandomizer = new ArrayItemRandomizer(
-        modelLinksByType[this.viewModel.type as LearningElementTypes]!
-      );
+      modelLink = LearningElementModelLookup[this.viewModel.modelType];
+    }
+    // get link to model from theme by element type
+    else {
+      const elementModelsForTheme =
+        LearningSpaceThemeLookup.getLearningSpaceTheme(
+          this.viewModel.theme
+        ).learningElementModels;
+      const elementModelsForType =
+        elementModelsForTheme[this.viewModel.type as LearningElementTypes];
+
+      const modelRandomizer = new ArrayItemRandomizer(elementModelsForType);
       modelLink = modelRandomizer.getItem(this.viewModel.name);
     }
 
@@ -130,13 +88,16 @@ export default class LearningElementView {
       modelLink,
       true
     )) as Mesh[];
+  }
 
-    // load icon
+  private async loadIconModel(): Promise<void> {
     this.viewModel.iconMeshes = (await this.scenePresenter.loadModel(
       iconLinks[this.viewModel.type as LearningElementTypes]!
     )) as Mesh[];
+  }
 
-    // create action manager for each mesh
+  private setupInteractions(): void {
+    // create one action manager for all meshes
     const actionManager = new ActionManager(this.scenePresenter.Scene);
     this.viewModel.modelMeshes.forEach((mesh) => {
       mesh.actionManager = actionManager;
@@ -167,25 +128,21 @@ export default class LearningElementView {
         this.controller.doublePicked
       )
     );
-
-    // add model meshes to highlight layer
-    this.viewModel.modelMeshes.forEach((mesh) => {
-      this.scenePresenter.HighlightLayer.addMesh(
-        mesh,
-        this.viewModel.hasScored.Value ? Color3.Green() : Color3.Red()
-      );
-    });
-    this.viewModel.iconMeshes.forEach((mesh) => {
-      this.scenePresenter.HighlightLayer.addMesh(
-        mesh,
-        this.viewModel.hasScored.Value ? Color3.Green() : Color3.Red()
-      );
-    });
-
-    this.positionModel();
   }
 
-  @bind
+  private addMeshesToHighlightLayer(): void {
+    const highlightColor = this.viewModel.hasScored.Value
+      ? Color3.Green()
+      : Color3.Red();
+
+    this.viewModel.modelMeshes.forEach((mesh) => {
+      this.scenePresenter.HighlightLayer.addMesh(mesh, highlightColor);
+    });
+    this.viewModel.iconMeshes.forEach((mesh) => {
+      this.scenePresenter.HighlightLayer.addMesh(mesh, highlightColor);
+    });
+  }
+
   private positionModel(): void {
     if (this.viewModel.modelMeshes && this.viewModel.iconMeshes) {
       this.viewModel.modelMeshes[0].position = this.viewModel.position;

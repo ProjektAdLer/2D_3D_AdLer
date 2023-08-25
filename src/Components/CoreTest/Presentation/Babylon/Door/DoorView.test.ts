@@ -15,6 +15,7 @@ import DoorView from "../../../../Core/Presentation/Babylon/Door/DoorView";
 import DoorViewModel from "../../../../Core/Presentation/Babylon/Door/DoorViewModel";
 import IDoorController from "../../../../Core/Presentation/Babylon/Door/IDoorController";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
+import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -65,8 +66,11 @@ describe("DoorView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
+
     const viewModel = new DoorViewModel();
     viewModel.isOpen.Value = true;
+    viewModel.theme = LearningSpaceThemeType.Campus;
+
     const controller = mock<IDoorController>();
     const systemUnderTest = new DoorView(viewModel, controller);
 
@@ -86,7 +90,9 @@ describe("DoorView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    const [, systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Campus;
+
     await systemUnderTest.asyncSetup();
     expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
   });
@@ -98,7 +104,8 @@ describe("DoorView", () => {
     mesh2.rotationQuaternion = new Quaternion();
     scenePresenterMock.loadModel.mockResolvedValue([mesh1, mesh2]);
 
-    const [, systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Campus;
 
     await systemUnderTest.asyncSetup();
     expect(mesh1.rotationQuaternion).toBeNull();
@@ -122,7 +129,10 @@ describe("DoorView", () => {
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     viewModel.isExit = true;
+    viewModel.theme = LearningSpaceThemeType.Campus;
+
     await systemUnderTest.asyncSetup();
+
     expect(mockMesh.animations.length).toBe(1);
   });
 
@@ -130,11 +140,14 @@ describe("DoorView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
 
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Campus;
     const position = new Vector3(1, 2, 3);
     viewModel.position = position;
+
     await systemUnderTest.asyncSetup();
+
     expect(viewModel.meshes[0].position).toStrictEqual(position);
   });
 
@@ -142,10 +155,12 @@ describe("DoorView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
 
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
     const newRotation = 42;
     viewModel.rotation = newRotation;
+    viewModel.theme = LearningSpaceThemeType.Campus;
+
     await systemUnderTest.asyncSetup();
 
     expect(viewModel.meshes[0].rotation.y).toStrictEqual(
@@ -157,6 +172,7 @@ describe("DoorView", () => {
     const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
     scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Campus;
 
     await systemUnderTest.asyncSetup();
     viewModel.isOpen.Value = true;

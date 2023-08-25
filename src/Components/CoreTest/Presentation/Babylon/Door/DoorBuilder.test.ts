@@ -7,6 +7,7 @@ import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import { Vector3 } from "@babylonjs/core";
 import DoorView from "../../../../Core/Presentation/Babylon/Door/DoorView";
 import { waitFor } from "@testing-library/react";
+import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 
 jest.mock("@babylonjs/core");
 jest.mock("../../../../Core/Presentation/Babylon/Door/DoorView");
@@ -33,17 +34,20 @@ describe("DoorBuilder", () => {
   test("constructor", () => {
     expect(systemUnderTest).toBeInstanceOf(PresentationBuilder);
   });
+
   test("buildViewModel throws an error when position, rotation, isexit or spaceid is not defined", () => {
     expect(() => {
       systemUnderTest.buildViewModel();
     }).toThrowError("DoorBuilder: one or more properties are undefined.");
   });
+
   test("buildView resolves isCompleted promise when the asyncSetup of the view resolves", async () => {
     systemUnderTest.position = new Vector3(0, 0, 0);
     systemUnderTest.rotation = 0;
     systemUnderTest.isExit = false;
     systemUnderTest.spaceID = 0;
     systemUnderTest.isOpen = false;
+    systemUnderTest.theme = LearningSpaceThemeType.Campus;
 
     systemUnderTest.buildViewModel();
     systemUnderTest.buildController();
@@ -55,12 +59,14 @@ describe("DoorBuilder", () => {
 
     await expect(systemUnderTest.isCompleted).resolves.toBeUndefined();
   });
+
   test("buildView logs the error which the asyncSetup of the view rejects", async () => {
     systemUnderTest.position = new Vector3(0, 0, 0);
     systemUnderTest.rotation = 0;
     systemUnderTest.isExit = false;
     systemUnderTest.spaceID = 0;
     systemUnderTest.isOpen = false;
+    systemUnderTest.theme = LearningSpaceThemeType.Campus;
 
     systemUnderTest.buildViewModel();
     systemUnderTest.buildController();
@@ -84,6 +90,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.isExit = false;
     systemUnderTest.spaceID = 0;
     systemUnderTest.isOpen = false;
+    systemUnderTest.theme = LearningSpaceThemeType.Campus;
 
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();

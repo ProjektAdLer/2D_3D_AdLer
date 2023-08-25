@@ -4,6 +4,7 @@ import StandInDecorationView from "../../../../Core/Presentation/Babylon/StandIn
 import PresentationBuilder from "../../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
 import { Vector3 } from "@babylonjs/core";
 import { waitFor } from "@testing-library/react";
+import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 
 jest.mock(
   "../../../../Core/Presentation/Babylon/StandInDecoration/StandInDecorationView"
@@ -19,11 +20,13 @@ describe("StandInDecorationBuilder", () => {
   test("constructor", () => {
     expect(systemUnderTest).toBeInstanceOf(PresentationBuilder);
   });
+
   test("buildView resolves isCompleted promise when the asyncSetup of the view resolves", async () => {
     systemUnderTest.position = new Vector3(1, 1, 1);
     systemUnderTest.rotation = 1;
     systemUnderTest.spaceName = "Test";
     systemUnderTest.slotNumber = 1;
+    systemUnderTest.theme = LearningSpaceThemeType.Campus;
     systemUnderTest.buildViewModel();
     const viewMock = mock<StandInDecorationView>();
     viewMock.asyncSetup.mockResolvedValue(undefined);
@@ -33,11 +36,13 @@ describe("StandInDecorationBuilder", () => {
 
     await expect(systemUnderTest.isCompleted).resolves.toBeUndefined();
   });
+
   test("buildView logs the error which the asyncSetup of the view rejects", async () => {
     systemUnderTest.position = new Vector3(1, 1, 1);
     systemUnderTest.rotation = 1;
     systemUnderTest.spaceName = "Test";
     systemUnderTest.slotNumber = 1;
+    systemUnderTest.theme = LearningSpaceThemeType.Campus;
     systemUnderTest.buildViewModel();
     const viewMock = mock<StandInDecorationView>();
     viewMock.asyncSetup.mockRejectedValue("Test Error");
@@ -52,6 +57,7 @@ describe("StandInDecorationBuilder", () => {
       expect(consoleErrorMock).toHaveBeenCalledWith("Test Error");
     });
   });
+
   test("buildViewModel throws an error when position, rotation, spacename or slotnumber is not defined", () => {
     expect(() => {
       systemUnderTest.buildViewModel();

@@ -55,6 +55,7 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
     super.buildViewModel();
     this.viewModel!.id = this.spaceData.id;
     this.viewModel!.learningSpaceTemplateType = this.spaceData.template;
+    this.viewModel!.theme = this.spaceData.theme;
 
     this.setDimensionsStrategy(this.spaceData.template);
     this.viewModel!.spaceCornerPoints = this.dimensionStrategy.getCornerPoints(

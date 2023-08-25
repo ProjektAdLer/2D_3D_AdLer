@@ -54,16 +54,17 @@ describe("DoorController", () => {
     expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
   });
 
-  test("double picked calls getLearningSpacePrecursorAndSuccessorUseCase.execute when pointerType is mouse", () => {
-    systemUnderTest.doublePicked();
+  test("picked calls getLearningSpacePrecursorAndSuccessorUseCase.execute when pointerType is mouse", () => {
+    systemUnderTest.picked();
 
     expect(
       getLearningSpacePrecursorAndSuccessorUseCaseMock.execute
     ).toHaveBeenCalledTimes(1);
   });
 
-  test("picked displays the bottom tooltip", () => {
-    systemUnderTest.picked();
+  test("double picked displays the bottom tooltip", () => {
+    systemUnderTest.doublePicked();
+
     expect(bottomTooltipPresenterMock.displayDoorTooltip).toHaveBeenCalledTimes(
       1
     );

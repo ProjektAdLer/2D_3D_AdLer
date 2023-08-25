@@ -2,11 +2,13 @@ import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { injectable } from "inversify";
 import { Mesh, StandardMaterial, Vector3 } from "@babylonjs/core";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
+import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 
 @injectable()
 export default class LearningSpaceViewModel {
   public id: ComponentID;
   public learningSpaceTemplateType: LearningSpaceTemplateType;
+  public theme: LearningSpaceThemeType;
 
   // space constants
   public readonly doorWidth = 0.95;
@@ -17,6 +19,7 @@ export default class LearningSpaceViewModel {
   public readonly wallHeight = 2.85;
   public readonly wallThickness = 0.3;
   public readonly wallGroundworkDepth = 0.5;
+  public readonly standInDecoSpawnProbability = 0.3;
 
   // materials
   public floorMaterial: StandardMaterial;

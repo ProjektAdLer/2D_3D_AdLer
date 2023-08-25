@@ -2,7 +2,7 @@ import { Vector3 } from "@babylonjs/core";
 import LearningElementTO from "../../../../Core/Application/DataTransferObjects/LearningElementTO";
 import LearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementPresenter";
 import LearningElementViewModel from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementViewModel";
-import { LearningElementModelTypeEnums } from "../../../../Core/Domain/Types/LearningElementModelTypes";
+import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 jest.mock("@babylonjs/core");
 

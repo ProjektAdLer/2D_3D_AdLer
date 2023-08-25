@@ -10,7 +10,8 @@ import ILearningElementBuilder from "../LearningElements/ILearningElementBuilder
 import IStandInDecorationBuilder from "../StandInDecoration/IStandInDecorationBuilder";
 import IDoorBuilder from "../Door/IDoorBuilder";
 import IWindowBuilder from "../Window/IWindowBuilder";
-import AdaptabilityElementBuilder from "../../Adaptability/AdaptabilityElementBuilder";
+// import AdaptabilityElementBuilder from "../../Adaptability/AdaptabilityElementBuilder";
+import SeededRNG from "../../Utils/SeededRNG";
 
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
@@ -46,25 +47,33 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
 
     for (let i = 0; i < spaceTO.elements.length; i++) {
       if (!spaceTO.elements[i]) {
-        // create stand in decoration for empty slots
-        const standInDecorationBuilder =
-          CoreDIContainer.get<IStandInDecorationBuilder>(
-            BUILDER_TYPES.IStandInDecorationBuilder
+        const seededRNG = new SeededRNG(i.toString() + spaceTO.name);
+        const randomValue = seededRNG.seededRandom();
+        if (randomValue <= this.viewModel.standInDecoSpawnProbability) {
+          // create stand in decoration for empty slots
+          const standInDecorationBuilder =
+            CoreDIContainer.get<IStandInDecorationBuilder>(
+              BUILDER_TYPES.IStandInDecorationBuilder
+            );
+
+          let elementPosition = this.viewModel.elementPositions.shift()!;
+          standInDecorationBuilder.position = elementPosition[0];
+          standInDecorationBuilder.rotation = elementPosition[1];
+          standInDecorationBuilder.spaceName = spaceTO.name;
+          standInDecorationBuilder.slotNumber = i;
+          standInDecorationBuilder.theme = this.viewModel.theme;
+
+          loadingCompletePromises.push(
+            this.director.buildAsync(standInDecorationBuilder)
           );
-        let elementPosition = this.viewModel.elementPositions.shift()!;
-        standInDecorationBuilder.position = elementPosition[0];
-        standInDecorationBuilder.rotation = elementPosition[1];
-        standInDecorationBuilder.spaceName = spaceTO.name;
-        standInDecorationBuilder.slotNumber = i;
-        loadingCompletePromises.push(
-          this.director.buildAsync(standInDecorationBuilder)
-        );
+        }
       } else {
         // create learning element for non-empty slots
         const elementBuilder = CoreDIContainer.get<ILearningElementBuilder>(
           BUILDER_TYPES.ILearningElementBuilder
         );
         elementBuilder.elementData = spaceTO.elements[i]!;
+        elementBuilder.elementData.theme = this.viewModel.theme;
         elementBuilder.elementPosition =
           this.viewModel.elementPositions.shift()!;
         loadingCompletePromises.push(this.director.buildAsync(elementBuilder));
@@ -89,6 +98,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     let exitDoorPosition = this.viewModel.exitDoorPosition;
     exitDoorBuilder.position = exitDoorPosition[0];
     exitDoorBuilder.rotation = exitDoorPosition[1];
+    exitDoorBuilder.theme = this.viewModel.theme;
     exitDoorBuilder.spaceID = this.viewModel.id;
     exitDoorBuilder.isExit = true;
     exitDoorBuilder.isOpen = spaceTO.currentScore >= spaceTO.requiredScore;
@@ -102,6 +112,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     let entryDoorPosition = this.viewModel.entryDoorPosition;
     entryDoorBuilder.position = entryDoorPosition[0];
     entryDoorBuilder.rotation = entryDoorPosition[1];
+    entryDoorBuilder.theme = this.viewModel.theme;
     entryDoorBuilder.spaceID = this.viewModel.id;
     entryDoorBuilder.isExit = false;
     entryDoorBuilder.isOpen = false;
@@ -116,6 +127,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
       );
       windowBuilder.position = windowPosition[0];
       windowBuilder.rotation = windowPosition[1];
+      windowBuilder.theme = this.viewModel.theme;
       loadingWindowPromises.push(this.director.buildAsync(windowBuilder));
     }
     await Promise.all(loadingWindowPromises);
