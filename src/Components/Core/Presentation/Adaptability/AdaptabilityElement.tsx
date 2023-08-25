@@ -179,9 +179,24 @@ export default function AdaptabilityQuiz({
     return null;
   }
 
+  let background: string =
+    "bg-[url('http://localhost:3000/SampleLearningElementData/testBild.png')] bg-no-repeat";
+  let settings: string = "box-border flex flex-col items-start";
+
+  function displayImageNPC() {
+    return (
+      <img
+        className="absolute top-0 right-0 -z-10 object-scale-down max-h-[93vh] w-fit max-w-[90vw] lg:max-w-[99vw]"
+        alt="LearningImage!"
+        src={quizBackgroundVRGuy}
+      ></img>
+    );
+  }
+
   return (
     <>
-      <main className="box-border flex flex-col items-start">
+      {displayImageNPC()}
+      <main className={settings}>
         <p className="text-sm font-bold lg:text-lg">{displayQuestion()}</p>
         <section className="flex p-4 pl-0 m-auto">
           <div className="flex flex-wrap justify-start gap-3 p-4">
