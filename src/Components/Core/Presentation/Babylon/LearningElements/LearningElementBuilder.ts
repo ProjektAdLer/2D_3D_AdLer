@@ -11,14 +11,18 @@ import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces
 import { Vector3 } from "@babylonjs/core";
 import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
+import ILearningElementBuilder from "./ILearningElementBuilder";
 
 @injectable()
-export default class LearningElementBuilder extends AsyncPresentationBuilder<
-  LearningElementViewModel,
-  ILearningElementController,
-  LearningElementView,
-  ILearningElementPresenter
-> {
+export default class LearningElementBuilder
+  extends AsyncPresentationBuilder<
+    LearningElementViewModel,
+    ILearningElementController,
+    LearningElementView,
+    ILearningElementPresenter
+  >
+  implements ILearningElementBuilder
+{
   elementData: LearningElementTO;
   elementPosition: [Vector3, number];
 

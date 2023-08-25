@@ -73,6 +73,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
           BUILDER_TYPES.ILearningElementBuilder
         );
         elementBuilder.elementData = spaceTO.elements[i]!;
+        elementBuilder.elementData.theme = this.viewModel.theme;
         elementBuilder.elementPosition =
           this.viewModel.elementPositions.shift()!;
         loadingCompletePromises.push(this.director.buildAsync(elementBuilder));
