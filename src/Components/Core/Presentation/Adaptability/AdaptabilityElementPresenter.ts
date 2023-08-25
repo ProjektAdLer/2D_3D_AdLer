@@ -15,10 +15,6 @@ export default class AdaptabilityElementPresenter
 {
   constructor(private viewModel: AdaptabilityElementViewModel) {}
 
-  onLearningElementLoaded(elementTO: LearningElementTO): void {
-    this.viewModel.filePath.Value = elementTO.filePath ?? "";
-  }
-
   onAdaptivityElementLoaded(contentTO: AdaptivityContentsTO): void {
     const content = new AdaptivityContent();
     content.questions = new Array();

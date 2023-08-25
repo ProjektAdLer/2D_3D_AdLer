@@ -12,7 +12,7 @@ import type ILoggerPort from "../../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 // temporary hardcoded data
-function generateAdaptivityContentsTO(): AdaptivityContentsTO {
+export function generateAdaptivityContentsTO(): AdaptivityContentsTO {
   const contents = new AdaptivityContentsTO();
   contents.shuffleQuestions = false;
   contents.questions = new Array();

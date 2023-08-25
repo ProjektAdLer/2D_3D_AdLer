@@ -8,7 +8,6 @@ import ILearningWorldAdapter from "../../Application/Ports/LearningWorldPort/ILe
 export default interface IAdaptabilityElementPresenter
   extends ILearningWorldAdapter,
     ILearningWorldAdapter {
-  onLearningElementLoaded(elementTO: LearningElementTO): void;
   onAdaptivityElementLoaded(question: AdaptivityContentsTO): void;
   onAdaptivityElementSubmitted(evaluationTO: EvaluationAnswerTO): void;
 }

@@ -23,7 +23,6 @@ export class AdaptivityContent {
 
 export default class AdaptabilityElementViewModel {
   isFinished: Observable<boolean> = new Observable<boolean>(false);
-  filePath = new Observable<string>();
   currentElement: Observable<AdaptivityQuestion> =
     new Observable<AdaptivityQuestion>();
   contentData: Observable<AdaptivityContent> =
