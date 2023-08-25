@@ -21,7 +21,11 @@ export default function WelcomePage() {
         <LearningWorldMenuButton className="self-center gap-4 m-1 portrait:row-start-5 portrait:col-start-1 portrait:col-span-5 landscape:col-span-2 landscape:col-start-4 landscape:row-span-3 landscape:row-start-3 justify-self-center w-fit h-fit lg:landscape:col-span-3 lg:landscape:self-start lg:landscape:col-start-2 lg:landscape:row-start-6" />
 
         <div className="flex items-center justify-center portrait:row-start-2 portrait:row-span-3 portrait:col-start-2 portrait:col-span-3 landscape:col-span-3 landscape:col-start-1 landscape:row-span-4 landscape:row-start-1 lg:landscape:col-start-2 lg:landscape:col-span-3 lg:landscape:row-start-2 lg:Landscape:row-span-3">
-          <img className="w-56 m-4 lg:w-3/6" src={logo} alt="Adler Logo" />
+          <img
+            className="w-56 m-4 lg:w-3/6 2xl:w-5/12"
+            src={logo}
+            alt="Adler Logo"
+          />
         </div>
 
         <p className="self-end p-2 text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1 portrait:col-span-5 portrait:text-xs landscape:col-span-5 landscape:col-start-1 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6">
