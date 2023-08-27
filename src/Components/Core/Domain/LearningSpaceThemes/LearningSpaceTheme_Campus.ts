@@ -30,7 +30,7 @@ const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
       require("../../../../Assets/3dModels/campusTheme/l_text_bookshelf_2.glb"),
     ],
     [LearningElementTypes.quiz]: [
-      require("../../../../Assets/3dModels/campusTheme/l_h5p_drawingtable_1.glb"),
+      require("../../../../Assets/3dModels/campusTheme/LukasNPC.glb"),
     ],
     [LearningElementTypes.notAnElement]: [],
   },
