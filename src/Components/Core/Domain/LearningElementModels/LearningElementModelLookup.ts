@@ -30,7 +30,7 @@ const LearningElementModelLookup: {
   [LearningElementModelTypeEnums.VideoElementModelTypes
     .Television]: require("../../../../Assets/3dModels/defaultTheme/l_video_television_1.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
-    .QuizNPC]: require("../../../../Assets/3dModels/defaultTheme/l_h5p_slotmachine_1.glb"),
+    .QuizNPC]: require("../../../../Assets/3dModels/defaultTheme/LukasNPC.glb"),
 };
 
 export default LearningElementModelLookup;
