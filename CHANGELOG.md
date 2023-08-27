@@ -10,13 +10,11 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- new icon for manual
+-
 
 ### Changed
 
-- improved portrait mobile display of LearningSpace
-- changed the direction of menus in portrait mode from side-by-side horizontal view to vertical view
-- the place where the help button is showed
+-
 
 ### Deprecated
 
@@ -24,18 +22,43 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
-- FullscreenButton in SideBar (mobile)
-- Dotted borders in menus
+-
 
 ### Fixed
 
-- Overlapping AdLerEngine icon on WelcomeScreen
+-
 
 ### Security
 
 -
 
 </details>
+
+## Version 1.3.0 - 27.08.2023
+
+### Added
+
+- There is a new Helpdesk Panel with partially new functionalities (LogExport) and partially new icons.
+- A first version of the upcoming Adaptivity Element is now integrated.
+- Users are now redirected to Welcome (and login) Page when trying to open a menu or space while not logged in.
+
+### Changed
+
+- Improved portrait display of LearningSpace on mobile.
+- Changed the direction of menus in portrait mode from side-by-side horizontal view to vertical view.
+- Help button displaced to better position.
+- Learning Elements and Doors can now be opened via click instead of doubleclick.
+
+### Removed
+
+- FullscreenButton in SideBar (mobile only).
+- Dotted borders in both LearningSpace and LearningWorld menus.
+- Default button 'Adler flieg' of selection menus.
+
+### Fixed
+
+- Overlapping AdLerEngine icon on WelcomeScreen.
+- ScorePanels are now responsive.
 
 ## Version 1.2.0 - 05.08.2023
 
