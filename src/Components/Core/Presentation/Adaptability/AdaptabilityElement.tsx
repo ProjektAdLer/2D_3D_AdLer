@@ -90,7 +90,7 @@ export default function AdaptabilityQuiz() {
       } else {
         return "Keine Antworten geladen!";
       }
-    } else if (showFeedback === true) {
+    } else {
       if (viewmodel.evaluation.Value === undefined) return null;
 
       return element.questionAnswers.map((answer, index) => (
