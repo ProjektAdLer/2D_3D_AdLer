@@ -95,6 +95,8 @@ export default class LoadQuizElementUseCase implements ILoadQuizElementUseCase {
   async executeAsync(): Promise<void> {
     const content = generateAdaptivityContentsTO();
     this.worldPort.onAdaptivityElementLoaded(content);
+
+    this.logger.log(LogLevelTypes.TRACE, "LoadQuizElementUsecase: Loaded.");
     return Promise.resolve();
   }
 }
