@@ -33,7 +33,7 @@ export default function VimeoVideoHost({ url }: { url: string }) {
     }
 
     getVimeoVideoUrl();
-  }, [url]);
+  }, [url, logger]);
 
   if (!videoUrl) return null;
 
