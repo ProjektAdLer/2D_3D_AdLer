@@ -61,60 +61,49 @@ export default function AdaptabilityQuiz() {
     }
 
     if (showFeedback === false) {
-      return displayAnswers();
+      const setSelection = (index: number, selected: boolean) => {
+        element.questionAnswers[index].isSelected = selected;
+      };
+
+      const toggleAnswersMultipleChoice = (index: number) => {
+        setAnswerColors(
+          answerColors.map((color, i) =>
+            i === index ? toggledColor(answerColors[index]) : answerColors[i]
+          )
+        );
+        element.questionAnswers[index].isSelected === true
+          ? setSelection(index, false)
+          : setSelection(index, true);
+      };
+
+      if (element !== undefined) {
+        return element.questionAnswers.map((answer, index) => (
+          <StyledButton
+            shape="freefloatcenter"
+            onClick={(e) => toggleAnswersMultipleChoice(index)}
+            key={answer.answerIndex}
+            color={answerColors[index]}
+          >
+            {answer.answerText}
+          </StyledButton>
+        ));
+      } else {
+        return "Keine Antworten geladen!";
+      }
     } else if (showFeedback === true) {
-      if (element !== undefined) return "Kein Feedback geladen!";
-      return displayFeedback();
-    } else return null;
-  }, [finished, displayFeedback, displayAnswers, showFeedback, element]);
+      if (viewmodel.evaluation.Value === undefined) return null;
 
-  function displayFeedback() {
-    if (viewmodel.evaluation.Value === undefined) return null;
-
-    return element.questionAnswers.map((answer, index) => (
-      <StyledButton
-        shape="freefloatcenter"
-        key={answer.answerIndex}
-        color={viewmodel.evaluation.Value.get(answer.answerIndex)}
-      >
-        {answer.answerText}
-      </StyledButton>
-    ));
-  }
-
-  function displayAnswers() {
-    if (finished === true || showFeedback === true) return null;
-
-    const setSelection = (index: number, selected: boolean) => {
-      element.questionAnswers[index].isSelected = selected;
-    };
-
-    const toggleAnswersMultipleChoice = (index: number) => {
-      setAnswerColors(
-        answerColors.map((color, i) =>
-          i === index ? toggledColor(answerColors[index]) : answerColors[i]
-        )
-      );
-      element.questionAnswers[index].isSelected === true
-        ? setSelection(index, false)
-        : setSelection(index, true);
-    };
-
-    if (element !== undefined) {
       return element.questionAnswers.map((answer, index) => (
         <StyledButton
           shape="freefloatcenter"
-          onClick={(e) => toggleAnswersMultipleChoice(index)}
           key={answer.answerIndex}
-          color={answerColors[index]}
+          color={viewmodel.evaluation.Value.get(answer.answerIndex)}
         >
           {answer.answerText}
         </StyledButton>
       ));
-    } else {
-      return "Keine Antworten geladen!";
     }
-  }
+  }, [finished, showFeedback, element]);
 
   // assigns next question to display
   const continueButton = useCallback(() => {
