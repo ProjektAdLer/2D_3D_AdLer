@@ -1,5 +1,4 @@
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
-import LearningElementModalViewModel from "~ReactComponents/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 import StyledButton, {
   StyledButtonColor,
 } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
@@ -64,33 +63,23 @@ export default function AdaptabilityQuiz() {
     if (showFeedback === false) {
       return displayAnswers();
     } else if (showFeedback === true) {
+      if (element !== undefined) return "Kein Feedback geladen!";
       return displayFeedback();
     } else return null;
-  }, [
-    finished,
-    displayFeedback,
-    displayAnswers,
-    showFeedback,
-    element,
-    answerColors,
-  ]);
+  }, [finished, displayFeedback, displayAnswers, showFeedback, element]);
 
   function displayFeedback() {
     if (viewmodel.evaluation.Value === undefined) return null;
 
-    if (element !== undefined) {
-      return element.questionAnswers.map((answer, index) => (
-        <StyledButton
-          shape="freefloatcenter"
-          key={answer.answerIndex}
-          color={viewmodel.evaluation.Value.get(answer.answerIndex)}
-        >
-          {answer.answerText}
-        </StyledButton>
-      ));
-    } else {
-      return "Kein Feedback geladen!";
-    }
+    return element.questionAnswers.map((answer, index) => (
+      <StyledButton
+        shape="freefloatcenter"
+        key={answer.answerIndex}
+        color={viewmodel.evaluation.Value.get(answer.answerIndex)}
+      >
+        {answer.answerText}
+      </StyledButton>
+    ));
   }
 
   function displayAnswers() {
