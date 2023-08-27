@@ -2,7 +2,6 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import IAdaptabilityElementController from "./IAdaptabilityElementController";
 import ILoadQuizElementUseCase from "../../Application/UseCases/Adaptability/LoadQuizElementUseCase/ILoadQuizElementUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import UseCaseDIContainer from "~DependencyInjection/UseCases/UseCaseDIConatiner";
 import IUpdateQuizElementUseCase from "../../Application/UseCases/Adaptability/UpdateQuizElementUseCase/IUpdateQuizElementUseCase";
 import AdaptabilityElementViewModel from "./AdaptabilityElementViewModel";
 import { SubmittedAnswersTO } from "../../Application/DataTransferObjects/QuizElementTO";
@@ -22,12 +21,12 @@ export default class AdaptabilityElementController
   submitSelection(): void {
     let selection = new SubmittedAnswersTO();
     selection.questionID = this.viewModel.currentElement.Value.questionID;
-    selection.allAnswerIndexes = new Array();
+    selection.allAnswerIndexes = [];
     selection.allAnswerIndexes =
       this.viewModel.currentElement.Value.questionAnswers.map((element) => {
         return element.answerIndex;
       });
-    selection.selectedAnswerIndexes = new Array();
+    selection.selectedAnswerIndexes = [];
     this.viewModel.currentElement.Value.questionAnswers.forEach((element) => {
       if (element.isSelected) {
         selection.selectedAnswerIndexes.push(element.answerIndex);
