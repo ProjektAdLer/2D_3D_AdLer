@@ -103,7 +103,7 @@ export default function AdaptabilityQuiz() {
         </StyledButton>
       ));
     }
-  }, [finished, showFeedback, element]);
+  }, [finished, showFeedback, element, answerColors, viewmodel.evaluation]);
 
   // assigns next question to display
   const continueButton = useCallback(() => {
