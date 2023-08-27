@@ -35,7 +35,7 @@ const createModalContent = (
     case LearningElementTypes.pdf:
       return <PDFComponent viewModel={viewModel} />;
     case LearningElementTypes.quiz:
-      return <AdaptabilityQuiz viewModel={viewModel} />;
+      return <AdaptabilityQuiz />;
     default:
       return <div>No Element selected</div>;
   }
