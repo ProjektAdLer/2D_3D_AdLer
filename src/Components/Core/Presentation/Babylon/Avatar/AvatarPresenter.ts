@@ -16,7 +16,6 @@ export default class AvatarPresenter implements IAvatarPresenter {
   }
 
   public onLearningElementLoaded(learningElementTO: LearningElementTO): void {
-    console.log("AvatarPresenter: onLearningElementLoaded");
     this.viewModel.animationStateMachine.applyAction(
       AvatarAnimationAction.InteractionStarted
     );
