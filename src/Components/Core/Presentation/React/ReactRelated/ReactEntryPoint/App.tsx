@@ -6,7 +6,6 @@ import WelcomePage from "./WelcomePage";
 import history from "history/browser";
 import { Location, Update } from "history";
 import LearningWorldMenu from "./LearningWorldMenu";
-import BugReportButton from "../ReactBaseComponents/BugReportButton";
 import { useInjection } from "inversify-react";
 import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";

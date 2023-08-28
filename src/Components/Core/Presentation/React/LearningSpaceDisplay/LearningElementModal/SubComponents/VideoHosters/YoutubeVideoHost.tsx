@@ -40,7 +40,7 @@ export default function YoutubeVideoHost({ url }: { url: string }) {
     }
 
     getYoutubeVideoUrl();
-  }, [url]);
+  }, [url, logger]);
 
   if (!videoUrl) return null;
 

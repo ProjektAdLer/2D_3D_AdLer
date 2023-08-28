@@ -15,11 +15,11 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 export function generateAdaptivityContentsTO(): AdaptivityContentsTO {
   const contents = new AdaptivityContentsTO();
   contents.shuffleQuestions = false;
-  contents.questions = new Array();
+  contents.questions = [];
 
   for (let k = 1; k < 4; k++) {
     const question = new AdaptivityQuestionTO();
-    question.questionAnswers = new Array();
+    question.questionAnswers = [];
     question.questionPoints = 1;
 
     if (k === 1) {
@@ -95,6 +95,8 @@ export default class LoadQuizElementUseCase implements ILoadQuizElementUseCase {
   async executeAsync(): Promise<void> {
     const content = generateAdaptivityContentsTO();
     this.worldPort.onAdaptivityElementLoaded(content);
+
+    this.logger.log(LogLevelTypes.TRACE, "LoadQuizElementUsecase: Loaded.");
     return Promise.resolve();
   }
 }

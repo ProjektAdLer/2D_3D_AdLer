@@ -102,7 +102,7 @@ export default function LearningSpaceSelectionGraph(props: {
     };
 
     setupGraph();
-  }, [reactFlowInstance, spaces, lastSelectedSpaceID]);
+  }, [reactFlowInstance, spaces, lastSelectedSpaceID, logger]);
 
   const onNodeClickCallback = useCallback<NodeMouseHandler>(
     (event: React.MouseEvent, clickedNode: Node) => {

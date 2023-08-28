@@ -3,7 +3,6 @@ import {
   EvaluationAnswerTO,
 } from "./../../Application/DataTransferObjects/QuizElementTO";
 import IAdaptabilityElementPresenter from "./IAdaptabilityElementPresenter";
-import LearningElementTO from "../../Application/DataTransferObjects/LearningElementTO";
 import AdaptabilityElementViewModel, {
   AdaptivityContent,
   AdaptivityQuestion,
@@ -17,11 +16,11 @@ export default class AdaptabilityElementPresenter
 
   onAdaptivityElementLoaded(contentTO: AdaptivityContentsTO): void {
     const content = new AdaptivityContent();
-    content.questions = new Array();
+    content.questions = [];
 
     contentTO.questions.forEach((question) => {
       const questionTarget = new AdaptivityQuestion();
-      questionTarget.questionAnswers = new Array();
+      questionTarget.questionAnswers = [];
 
       questionTarget.questionID = question.questionID;
       questionTarget.questionText = question.questionText;

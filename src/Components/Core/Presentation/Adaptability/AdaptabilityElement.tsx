@@ -1,5 +1,4 @@
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
-import LearningElementModalViewModel from "~ReactComponents/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 import StyledButton, {
   StyledButtonColor,
 } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
@@ -14,17 +13,13 @@ function toggledColor(color: StyledButtonColor) {
   return color === "highlight" ? "default" : "highlight";
 }
 
-export default function AdaptabilityQuiz({
-  viewModel,
-}: {
-  viewModel: LearningElementModalViewModel;
-}) {
-  const [vm, c] = useBuilder<
+export default function AdaptabilityQuiz() {
+  const [viewmodel, controller] = useBuilder<
     AdaptabilityElementViewModel,
     IAdaptabilityElementController
   >(BUILDER_TYPES.IAdaptabilityElementBuilder);
 
-  const [element] = useObservable(vm.currentElement);
+  const [element] = useObservable(viewmodel.currentElement);
   const [answerColors, setAnswerColors] = useState<StyledButtonColor[]>([]);
   const [selectedAnswersCount, setSelectedAnswersCount] = useState(0);
   const [numberOfQuestions, setNumberOfQuestions] = useState(0);
@@ -35,9 +30,9 @@ export default function AdaptabilityQuiz({
   });
 
   useEffect(() => {
-    c.loadAdaptivityElement();
-    setNumberOfQuestions(vm.contentData.Value.questions.length);
-  }, []);
+    controller.loadAdaptivityElement();
+    setNumberOfQuestions(viewmodel.contentData.Value.questions.length);
+  }, [controller, viewmodel.contentData]);
 
   useEffect(() => {
     setSelectedAnswersCount(
@@ -50,24 +45,6 @@ export default function AdaptabilityQuiz({
       setAnswerColors(element.questionAnswers.map((color, index) => "default"));
   }, [element]);
 
-  const display = useCallback(() => {
-    if (finished === true) {
-      return displayReport();
-    }
-
-    if (showFeedback === false) {
-      return displayAnswers();
-    } else if (showFeedback === true) {
-      return displayFeedback();
-    } else return null;
-  }, [showFeedback, element, answerColors]);
-
-  const displayReport = useCallback(() => {
-    if (finished === false) return null;
-
-    return "Gut gemacht!";
-  }, [finished]);
-
   const displayQuestion = useCallback(() => {
     if (finished === true) return null;
 
@@ -78,57 +55,55 @@ export default function AdaptabilityQuiz({
     }
   }, [element, finished]);
 
-  const displayFeedback = useCallback(() => {
-    if (vm.evaluation.Value === undefined) return null;
+  const display = useCallback(() => {
+    if (finished === true) {
+      return "Gut gemacht!";
+    }
 
-    if (element !== undefined) {
+    if (showFeedback === false) {
+      const setSelection = (index: number, selected: boolean) => {
+        element.questionAnswers[index].isSelected = selected;
+      };
+
+      const toggleAnswersMultipleChoice = (index: number) => {
+        setAnswerColors(
+          answerColors.map((color, i) =>
+            i === index ? toggledColor(answerColors[index]) : answerColors[i]
+          )
+        );
+        element.questionAnswers[index].isSelected === true
+          ? setSelection(index, false)
+          : setSelection(index, true);
+      };
+
+      if (element !== undefined) {
+        return element.questionAnswers.map((answer, index) => (
+          <StyledButton
+            shape="freefloatcenter"
+            onClick={(e) => toggleAnswersMultipleChoice(index)}
+            key={answer.answerIndex}
+            color={answerColors[index]}
+          >
+            {answer.answerText}
+          </StyledButton>
+        ));
+      } else {
+        return "Keine Antworten geladen!";
+      }
+    } else {
+      if (viewmodel.evaluation.Value === undefined) return null;
+
       return element.questionAnswers.map((answer, index) => (
         <StyledButton
           shape="freefloatcenter"
           key={answer.answerIndex}
-          color={vm.evaluation.Value.get(answer.answerIndex)}
+          color={viewmodel.evaluation.Value.get(answer.answerIndex)}
         >
           {answer.answerText}
         </StyledButton>
       ));
-    } else {
-      return "Kein Feedback geladen!";
     }
-  }, [showFeedback]);
-
-  const displayAnswers = useCallback(() => {
-    if (finished === true || showFeedback === true) return null;
-
-    const setSelection = (index: number, selected: boolean) => {
-      element.questionAnswers[index].isSelected = selected;
-    };
-
-    const toggleAnswersMultipleChoice = (index: number) => {
-      setAnswerColors(
-        answerColors.map((color, i) =>
-          i === index ? toggledColor(answerColors[index]) : answerColors[i]
-        )
-      );
-      element.questionAnswers[index].isSelected === true
-        ? setSelection(index, false)
-        : setSelection(index, true);
-    };
-
-    if (element !== undefined) {
-      return element.questionAnswers.map((answer, index) => (
-        <StyledButton
-          shape="freefloatcenter"
-          onClick={(e) => toggleAnswersMultipleChoice(index)}
-          key={answer.answerIndex}
-          color={answerColors[index]}
-        >
-          {answer.answerText}
-        </StyledButton>
-      ));
-    } else {
-      return "Keine Antworten geladen!";
-    }
-  }, [element, answerColors, showFeedback]);
+  }, [finished, showFeedback, element, answerColors, viewmodel.evaluation]);
 
   // assigns next question to display
   const continueButton = useCallback(() => {
@@ -137,10 +112,12 @@ export default function AdaptabilityQuiz({
 
       for (let i = 0; i < numberOfQuestions; i++) {
         if (
-          vm.currentElement.Value === vm.contentData.Value.questions[i] &&
+          viewmodel.currentElement.Value ===
+            viewmodel.contentData.Value.questions[i] &&
           i !== numberOfQuestions - 1
         ) {
-          vm.currentElement.Value = vm.contentData.Value.questions[i + 1];
+          viewmodel.currentElement.Value =
+            viewmodel.contentData.Value.questions[i + 1];
           return;
         }
       }
@@ -149,7 +126,7 @@ export default function AdaptabilityQuiz({
 
     function submitBehaviour() {
       if (showFeedback === false) {
-        c.submitSelection();
+        controller.submitSelection();
         setShowFeedback(true);
       } else if (showFeedback === true) {
         nextElement();
@@ -166,22 +143,43 @@ export default function AdaptabilityQuiz({
         disabled={selectedAnswersCount < 1}
         onClick={() => submitBehaviour()}
       >
-        {vm.currentElement.Value !==
-          vm.contentData.Value.questions[numberOfQuestions - 1] ||
+        {viewmodel.currentElement.Value !==
+          viewmodel.contentData.Value.questions[numberOfQuestions - 1] ||
         showFeedback === false
           ? "Weiter"
           : "Siehe Bericht"}
       </StyledButton>
     );
-  }, [selectedAnswersCount, showFeedback, finished]);
+  }, [
+    selectedAnswersCount,
+    showFeedback,
+    finished,
+    controller,
+    viewmodel.currentElement,
+    viewmodel.contentData,
+    numberOfQuestions,
+  ]);
 
   if (!element) {
     return null;
   }
 
+  let settings: string = "box-border flex flex-col items-start";
+
+  function displayImageNPC() {
+    return (
+      <img
+        className="absolute top-0 right-0 -z-10 object-scale-down max-h-[93vh] w-fit max-w-[90vw] lg:max-w-[99vw]"
+        alt="LearningImage!"
+        src={quizBackgroundVRGuy}
+      ></img>
+    );
+  }
+
   return (
     <>
-      <main className="box-border flex flex-col items-start">
+      {displayImageNPC()}
+      <main className={settings}>
         <p className="text-sm font-bold lg:text-lg">{displayQuestion()}</p>
         <section className="flex p-4 pl-0 m-auto">
           <div className="flex flex-wrap justify-start gap-3 p-4">

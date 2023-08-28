@@ -30,7 +30,7 @@ const iconLinks: { [key in LearningElementTypes]?: any } = {
   [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/campusTheme/l-icons-text-1.glb"),
   [LearningElementTypes.image]: require("../../../../../Assets/3dModels/campusTheme/l-icons-image-1.glb"),
   [LearningElementTypes.video]: require("../../../../../Assets/3dModels/campusTheme/l-icons-video-1.glb"),
-  [LearningElementTypes.quiz]: require("../../../../../Assets/3dModels/campusTheme/l-icons-video-1.glb"),
+  [LearningElementTypes.quiz]: require("../../../../../Assets/3dModels/campusTheme/l-icons-quiz-1.glb"),
   [LearningElementTypes.notAnElement]: [],
 };
 

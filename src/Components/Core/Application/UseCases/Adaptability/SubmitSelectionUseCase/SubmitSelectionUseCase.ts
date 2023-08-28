@@ -14,7 +14,7 @@ import type ILearningWorldPort from "../../../Ports/Interfaces/ILearningWorldPor
 function retrieveCorrectAnswers(questionID: number): CorrectAnswersTO {
   let correctAnswers = new CorrectAnswersTO();
   correctAnswers.questionID = questionID;
-  correctAnswers.answerIndexes = new Array();
+  correctAnswers.answerIndexes = [];
 
   if (questionID === 1) {
     correctAnswers.answerIndexes.push(8);
