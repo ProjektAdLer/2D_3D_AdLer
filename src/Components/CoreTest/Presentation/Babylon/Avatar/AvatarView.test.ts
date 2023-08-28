@@ -19,6 +19,7 @@ import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES
 import AvatarView from "../../../../Core/Presentation/Babylon/Avatar/AvatarView";
 import AvatarViewModel, {
   AvatarAnimationAction,
+  AvatarAnimationState,
 } from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
 import IAvatarController from "../../../../Core/Presentation/Babylon/Avatar/IAvatarController";
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
@@ -256,6 +257,83 @@ describe("AvatarView", () => {
         systemUnderTest["getVelocityAnimationInterpolationIncrement"]();
 
       expect(typeof result).toBe("number");
+    });
+
+    test("transitionFromIdleOrWalkToInteract resets animationBlendValue to 0", () => {
+      systemUnderTest["viewModel"].animationStateMachine = new StateMachine<
+        AvatarAnimationState,
+        AvatarAnimationAction
+      >(AvatarAnimationState.Idle, []);
+      systemUnderTest["viewModel"].interactionAnimation =
+        mock<AnimationGroup>();
+
+      systemUnderTest["transitionFromIdleOrWalkToInteract"]();
+
+      expect(systemUnderTest["animationBlendValue"]).toBe(0);
+    });
+
+    test("transitionFromIdleOrWalkToInteract plays the interactionAnimation non-looping", () => {
+      viewModel.animationStateMachine = new StateMachine<
+        AvatarAnimationState,
+        AvatarAnimationAction
+      >(AvatarAnimationState.Walking, []);
+      viewModel.interactionAnimation = mock<AnimationGroup>();
+
+      systemUnderTest["transitionFromIdleOrWalkToInteract"]();
+
+      expect(viewModel.interactionAnimation.play).toHaveBeenCalledTimes(1);
+      expect(viewModel.interactionAnimation.play).toHaveBeenCalledWith(false);
+    });
+
+    test("anonymous observer function on onBeforeAnimationsObservable in transitionFromIdleOrWalkToInteract doesn't throw", () => {
+      viewModel.idleAnimation = mock<AnimationGroup>();
+      viewModel.walkAnimation = mock<AnimationGroup>();
+      viewModel.interactionAnimation = mock<AnimationGroup>();
+      viewModel.animationStateMachine = new StateMachine<
+        AvatarAnimationState,
+        AvatarAnimationAction
+      >(AvatarAnimationState.Idle, []);
+
+      // setup mock implementation to get a reference to the anonymous callback function
+      // setup mock implementation to get a reference to the anonymous callback function
+      let anonymousCallback: (eventData: Scene, eventState: EventState) => void;
+      scenePresenterMock.Scene.onBeforeAnimationsObservable.add.mockImplementation(
+        (callback) => {
+          anonymousCallback = callback;
+          return mock<Observer<Scene>>();
+        }
+      );
+
+      systemUnderTest["transitionFromIdleOrWalkToInteract"]();
+
+      expect(() =>
+        anonymousCallback!(mock<Scene>(), mock<EventState>())
+      ).not.toThrow();
+    });
+
+    test("transitionFromInteractToIdle resets animationBlendValue to 0", () => {
+      systemUnderTest["transitionFromInteractToIdle"]();
+
+      expect(systemUnderTest["animationBlendValue"]).toBe(0);
+    });
+
+    test("anonymous observer function on onBeforeAnimationsObservable in transitionFromInteractToIdle doesn't throw", () => {
+      viewModel.idleAnimation = mock<AnimationGroup>();
+      viewModel.interactionAnimation = mock<AnimationGroup>();
+
+      // setup mock implementation to get a reference to the anonymous callback function
+      let anonymousCallback: (eventData: Scene, eventState: EventState) => void;
+      scenePresenterMock.Scene.onBeforeAnimationsObservable.add.mockImplementation(
+        (callback) => {
+          anonymousCallback = callback;
+          return mock<Observer<Scene>>();
+        }
+      );
+      systemUnderTest["transitionFromInteractToIdle"]();
+
+      expect(() =>
+        anonymousCallback!(mock<Scene>(), mock<EventState>())
+      ).not.toThrow();
     });
   });
 
