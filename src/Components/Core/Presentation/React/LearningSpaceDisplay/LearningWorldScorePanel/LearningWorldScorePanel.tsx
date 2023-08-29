@@ -42,7 +42,7 @@ export default function LearningWorldScorePanel({
   if (!viewModel) return null;
 
   return (
-    <div className="w-[49px] lg:w-[70px]">
+    <div className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full">
       <CircularProgressbarWithChildren
         value={percentage}
         strokeWidth={10}
