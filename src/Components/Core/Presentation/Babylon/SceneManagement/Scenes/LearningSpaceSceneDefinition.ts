@@ -122,9 +122,10 @@ export default class LearningSpaceSceneDefinition
 
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
     this.spaceData = learningSpaceTO;
-    this.playerSpawnPoint =
-      LearningSpaceTemplateLookup.getLearningSpaceTemplate(
-        learningSpaceTO.template
-      ).playerSpawnPoint;
+    if (this.spaceData.template)
+      this.playerSpawnPoint =
+        LearningSpaceTemplateLookup.getLearningSpaceTemplate(
+          learningSpaceTO.template
+        ).playerSpawnPoint;
   }
 }
