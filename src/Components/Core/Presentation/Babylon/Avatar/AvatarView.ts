@@ -76,7 +76,11 @@ export default class AvatarView {
     this.viewModel.meshes[0].setParent(this.viewModel.parentNode);
 
     // place model 0.05 above the ground ~ FK
-    this.viewModel.parentNode.position = this.viewModel.spawnPoint;
+    this.viewModel.parentNode.position = new Vector3(
+      this.viewModel.spawnPoint.position.x,
+      0,
+      this.viewModel.spawnPoint.position.y
+    );
     this.viewModel.meshes[0].position = new Vector3(0, 0.05, 0);
     this.viewModel.meshes[0].scaling = new Vector3(1, 1, -1);
     this.viewModel.meshes.forEach((mesh) => (mesh.rotationQuaternion = null));

@@ -25,6 +25,9 @@ import type ILearningWorldPort from "src/Components/Core/Application/Ports/Inter
 import ILearningWorldAdapter from "src/Components/Core/Application/Ports/LearningWorldPort/ILearningWorldAdapter";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import type ILearningSpaceBuilder from "../../LearningSpaces/ILearningSpaceBuilder";
+import type IAvatarBuilder from "../../Avatar/IAvatarBuilder";
+import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
+import { Transform } from "src/Components/Core/Domain/LearningSpaceTemplates/ILearningSpaceTemplate";
 
 @injectable()
 export default class LearningSpaceSceneDefinition
@@ -33,6 +36,7 @@ export default class LearningSpaceSceneDefinition
 {
   private avatarParentNode: TransformNode;
   private spaceData: LearningSpaceTO;
+  private playerSpawnPoint: Transform;
 
   constructor(
     @inject(BUILDER_TYPES.IPresentationDirector)
@@ -40,7 +44,7 @@ export default class LearningSpaceSceneDefinition
     @inject(BUILDER_TYPES.ILearningSpaceBuilder)
     private spaceBuilder: ILearningSpaceBuilder,
     @inject(BUILDER_TYPES.IAvatarBuilder)
-    private avatarBuilder: IAsyncPresentationBuilder,
+    private avatarBuilder: IAvatarBuilder,
     @inject(CORE_TYPES.INavigation)
     private navigation: INavigation,
     @inject(USECASE_TYPES.ILoadLearningSpaceUseCase)
@@ -91,6 +95,8 @@ export default class LearningSpaceSceneDefinition
     // initialize navigation for the room
     this.navigation.setupNavigation();
 
+    // create avatar
+    this.avatarBuilder.playerSpawnPoint = this.playerSpawnPoint;
     await this.director.buildAsync(this.avatarBuilder);
   }
 
@@ -116,5 +122,9 @@ export default class LearningSpaceSceneDefinition
 
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
     this.spaceData = learningSpaceTO;
+    this.playerSpawnPoint =
+      LearningSpaceTemplateLookup.getLearningSpaceTemplate(
+        learningSpaceTO.template
+      ).playerSpawnPoint;
   }
 }

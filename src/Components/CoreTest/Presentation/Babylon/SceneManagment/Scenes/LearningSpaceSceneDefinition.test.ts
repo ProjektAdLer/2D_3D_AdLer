@@ -14,6 +14,8 @@ import IPresentationDirector from "../../../../../Core/Presentation/Presentation
 import AvatarCameraViewModel from "../../../../../Core/Presentation/Babylon/AvatarCamera/AvatarCameraViewModel";
 import IGetUserLocationUseCase from "../../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import { waitFor } from "@testing-library/react";
+import LearningSpaceTO from "../../../../../Core/Application/DataTransferObjects/LearningSpaceTO";
+import { LearningSpaceTemplateType } from "../../../../../Core/Domain/Types/LearningSpaceTemplateType";
 
 const presentationDirectorMock = mock<IPresentationDirector>();
 const presentationBuilderMock = mock<IPresentationBuilder>();
@@ -109,8 +111,9 @@ describe("LearningSpaceScene", () => {
     expect(loadAvatarUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
   });
 
-  test("onLearningSpaceLoaded sets the private menber spaceData", () => {
-    const spaceData = mockDeep<ILearningSpacePresenter>();
+  test("onLearningSpaceLoaded sets the private member spaceData", () => {
+    const spaceData = new LearningSpaceTO();
+    spaceData.template = LearningSpaceTemplateType.L;
     systemUnderTest["onLearningSpaceLoaded"](spaceData);
 
     expect(systemUnderTest["spaceData"]).toBe(spaceData);

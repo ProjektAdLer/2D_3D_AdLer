@@ -8,6 +8,7 @@ import {
 } from "@babylonjs/core";
 import Observable from "src/Lib/Observable";
 import { IStateMachine } from "./StateMachine";
+import { Transform } from "src/Components/Core/Domain/LearningSpaceTemplates/ILearningSpaceTemplate";
 
 export enum AvatarAnimationState {
   Idle,
@@ -26,7 +27,7 @@ export default class AvatarViewModel {
 
   // transform
   public parentNode: TransformNode;
-  public spawnPoint: Vector3 = Vector3.Zero();
+  public spawnPoint: Transform;
 
   // animations
   public animationStateMachine: IStateMachine<

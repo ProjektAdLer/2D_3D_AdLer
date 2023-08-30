@@ -49,6 +49,10 @@ const scenePresenterFactoryMock = () => scenePresenterMock;
 // util function to create system under test
 function createAvatarView(): [AvatarView, AvatarViewModel] {
   const viewModel = new AvatarViewModel();
+  viewModel.spawnPoint = {
+    position: { x: 0, y: 0 },
+    orientation: { rotation: 0 },
+  };
   const controller = mock<IAvatarController>();
   const avatarView = new AvatarView(viewModel, controller);
   return [avatarView, viewModel];
