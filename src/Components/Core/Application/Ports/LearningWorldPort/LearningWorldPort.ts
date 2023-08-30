@@ -92,7 +92,7 @@ export default class LearningWorldPort
     });
   }
 
-  // adaptability
+  // adaptivity
   public onAdaptivityElementLoaded(contentsTO: AdaptivityContentsTO): void {
     this.adapters.forEach((adapter) => {
       if (adapter.onAdaptivityElementLoaded)

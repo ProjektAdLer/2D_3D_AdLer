@@ -3,36 +3,37 @@ import { mock } from "jest-mock-extended";
 import ILearningWorldPort from "../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import AdaptabilityElementController from "../../../Core/Presentation/Adaptability/AdaptabilityElementController";
-import ILoadQuizElementUseCase from "../../../Core/Application/UseCases/Adaptability/LoadQuizElementUseCase/ILoadQuizElementUseCase";
-import AdaptabilityElementViewModel, {
+import AdaptivityElementController from "../../../Core/Presentation/Adaptivity/AdaptivityElementController";
+import ILoadAdaptivityElementUseCase from "../../../Core/Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/ILoadAdaptivityElementUseCase";
+import AdaptivityElementViewModel, {
   AdaptivityQuestion,
   QuizAnswer,
-} from "../../../Core/Presentation/Adaptability/AdaptabilityElementViewModel";
-import { generateAdaptivityContentsTO } from "../../../Core/Application/UseCases/Adaptability/LoadQuizElementUseCase/LoadQuizElementUseCase";
-import ISubmitSelectionUseCase from "../../../Core/Application/UseCases/Adaptability/SubmitSelectionUseCase/ISubmitSelectionUseCase";
+} from "../../../Core/Presentation/Adaptivity/AdaptivityElementViewModel";
+import { generateAdaptivityContentsTO } from "../../../Core/Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/LoadAdaptivityElementUseCase";
+import ISubmitAdaptivityElementSelectionUseCase from "../../../Core/Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
 
 const worldPortMock = mock<ILearningWorldPort>();
-const loadQuizElementUseCaseMock = mock<ILoadQuizElementUseCase>();
-const submitSelectionUseCaseMock = mock<ISubmitSelectionUseCase>();
-const viewModel = new AdaptabilityElementViewModel();
+const loadQuizElementUseCaseMock = mock<ILoadAdaptivityElementUseCase>();
+const submitSelectionUseCaseMock =
+  mock<ISubmitAdaptivityElementSelectionUseCase>();
+const viewModel = new AdaptivityElementViewModel();
 
 describe("AdaptivityElementController", () => {
-  let systemUnderTest: AdaptabilityElementController;
+  let systemUnderTest: AdaptivityElementController;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(
-      USECASE_TYPES.ILoadQuizElementUseCase
+      USECASE_TYPES.ILoadAdaptivityElementUseCase
     ).toConstantValue(loadQuizElementUseCaseMock);
 
     CoreDIContainer.rebind(
-      USECASE_TYPES.ISubmitSelectionUseCase
+      USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
     ).toConstantValue(submitSelectionUseCaseMock);
   });
 
   beforeEach(() => {
-    systemUnderTest = new AdaptabilityElementController(viewModel);
+    systemUnderTest = new AdaptivityElementController(viewModel);
   });
 
   afterAll(() => {

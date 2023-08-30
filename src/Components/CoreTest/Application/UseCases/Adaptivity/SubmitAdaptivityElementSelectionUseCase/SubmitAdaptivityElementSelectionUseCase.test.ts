@@ -1,10 +1,10 @@
-import { expectedSpaceTO } from "./../../../../Adapters/BackendAdapter/BackendResponses";
+import { expectedSpaceTO } from "../../../../Adapters/BackendAdapter/BackendResponses";
 import {
   SubmittedAnswersTO,
   EvaluationAnswerTO,
-} from "./../../../../../Core/Application/DataTransferObjects/QuizElementTO";
+} from "../../../../../Core/Application/DataTransferObjects/QuizElementTO";
 import { mock } from "jest-mock-extended";
-import SubmitSelectionUseCase from "../../../../../Core/Application/UseCases/Adaptability/SubmitSelectionUseCase/SubmitSelectionUseCase";
+import SubmitAdaptivityElementSelectionUseCase from "../../../../../Core/Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/SubmitAdaptivityElementSelectionUseCase";
 import ILearningWorldPort from "../../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
@@ -12,8 +12,8 @@ import { StyledButtonColor } from "../../../../../Core/Presentation/React/ReactR
 
 const worldPortMock = mock<ILearningWorldPort>();
 
-describe("SubmitSelectionUseCase", () => {
-  let systemUnderTest: SubmitSelectionUseCase;
+describe("SubmitAdaptivityElementSelectionUseCase", () => {
+  let systemUnderTest: SubmitAdaptivityElementSelectionUseCase;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -23,7 +23,9 @@ describe("SubmitSelectionUseCase", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = CoreDIContainer.resolve(SubmitSelectionUseCase);
+    systemUnderTest = CoreDIContainer.resolve(
+      SubmitAdaptivityElementSelectionUseCase
+    );
   });
 
   afterAll(() => {

@@ -4,8 +4,8 @@ import StyledButton, {
 } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { useState, useEffect, useCallback } from "react";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import AdaptabilityElementViewModel from "./AdaptabilityElementViewModel";
-import IAdaptabilityElementController from "./IAdaptabilityElementController";
+import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
+import IAdaptivityElementController from "./IAdaptivityElementController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import quizBackgroundVRGuy from "../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
 
@@ -13,11 +13,11 @@ function toggledColor(color: StyledButtonColor) {
   return color === "highlight" ? "default" : "highlight";
 }
 
-export default function AdaptabilityQuiz() {
+export default function AdaptivityElement() {
   const [viewmodel, controller] = useBuilder<
-    AdaptabilityElementViewModel,
-    IAdaptabilityElementController
-  >(BUILDER_TYPES.IAdaptabilityElementBuilder);
+    AdaptivityElementViewModel,
+    IAdaptivityElementController
+  >(BUILDER_TYPES.IAdaptivityElementBuilder);
 
   const [element] = useObservable(viewmodel.currentElement);
   const [answerColors, setAnswerColors] = useState<StyledButtonColor[]>([]);

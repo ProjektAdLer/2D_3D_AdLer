@@ -1,6 +1,6 @@
-import { EvaluationAnswerTO } from "./../../../DataTransferObjects/QuizElementTO";
+import { EvaluationAnswerTO } from "../../../DataTransferObjects/QuizElementTO";
 import { inject, injectable } from "inversify";
-import ISubmitSelectionUseCase from "./ISubmitSelectionUseCase";
+import ISubmitAdaptivityElementSelectionUseCase from "./ISubmitAdaptivityElementSelectionUseCase";
 import {
   CorrectAnswersTO,
   SubmittedAnswersTO,
@@ -67,7 +67,9 @@ function determineButtonColor(
 }
 
 @injectable()
-export default class SubmitSelectionUseCase implements ISubmitSelectionUseCase {
+export default class SubmitAdaptivityElementSelectionUseCase
+  implements ISubmitAdaptivityElementSelectionUseCase
+{
   constructor(
     @inject(CORE_TYPES.ILogger)
     private logger: ILoggerPort,

@@ -1,29 +1,29 @@
 import { injectable } from "inversify";
 import PresentationBuilder from "../PresentationBuilder/AsyncPresentationBuilder";
-import AdaptabilityElementViewModel from "./AdaptabilityElementViewModel";
-import IAdaptabilityElementPresenter from "./IAdaptabilityElementPresenter";
-import AdaptabilityElementPresenter from "./AdaptabilityElementPresenter";
+import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
+import IAdaptivityElementPresenter from "./IAdaptivityElementPresenter";
+import AdaptivityElementPresenter from "./AdaptivityElementPresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ILearningWorldPort from "../../Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import IAdaptabilityElementController from "./IAdaptabilityElementController";
-import AdaptabilityElementController from "./AdaptabilityElementController";
+import IAdaptivityElementController from "./IAdaptivityElementController";
+import AdaptivityElementController from "./AdaptivityElementController";
 import ViewModelControllerProvider from "../ViewModelProvider/ViewModelControllerProvider";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 
 @injectable()
-export default class AdaptabilityElementBuilder extends PresentationBuilder<
-  AdaptabilityElementViewModel,
-  IAdaptabilityElementController,
+export default class AdaptivityElementBuilder extends PresentationBuilder<
+  AdaptivityElementViewModel,
+  IAdaptivityElementController,
   undefined,
-  IAdaptabilityElementPresenter
+  IAdaptivityElementPresenter
 > {
   constructor() {
     super(
-      AdaptabilityElementViewModel,
-      AdaptabilityElementController,
+      AdaptivityElementViewModel,
+      AdaptivityElementController,
       undefined,
-      AdaptabilityElementPresenter
+      AdaptivityElementPresenter
     );
   }
 
@@ -38,7 +38,7 @@ export default class AdaptabilityElementBuilder extends PresentationBuilder<
     ).registerTupel(
       this.viewModel,
       this.controller,
-      AdaptabilityElementViewModel
+      AdaptivityElementViewModel
     );
   }
 
