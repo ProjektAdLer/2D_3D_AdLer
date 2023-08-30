@@ -32,7 +32,7 @@ export default function LearningSpaceScorePanel({
   if (!viewModel) return null;
 
   return (
-    <div className="w-[49px] lg:w-[70px]">
+    <div className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full">
       <CircularProgressbarWithChildren
         value={percentage}
         strokeWidth={10}
@@ -51,7 +51,7 @@ export default function LearningSpaceScorePanel({
           alt="icon"
         />
 
-        <div className="absolute text-[10px] text-white lg:text-adlerdarkblue lg:text-[12px] font-bold leading-5 text-center">
+        <div className="absolute text-[10px] text-adlerdarkblue lg:text-[12px] font-bold leading-5 text-center">
           {scoreInfo && (
             <div>
               {scoreInfo.currentScore} von {scoreInfo.requiredScore}

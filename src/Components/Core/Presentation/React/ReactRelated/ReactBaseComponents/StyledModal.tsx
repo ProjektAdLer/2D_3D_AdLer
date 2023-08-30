@@ -51,9 +51,7 @@ export default function StyledModal({
             )}
           </div>
           {/*Content*/}
-          <div className="px-1 overflow-auto rounded-lg font-regular h-fit">
-            {children}
-          </div>
+          <div className="px-1 rounded-lg font-regular h-fit">{children}</div>
           {/*Optional Footer*/}
           {hasFooter && (
             <div className="modal-footer ">

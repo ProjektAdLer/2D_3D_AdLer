@@ -1,7 +1,12 @@
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import AvatarPresenter from "../../../../Core/Presentation/Babylon/Avatar/AvatarPresenter";
-import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
+import AvatarViewModel, {
+  AvatarAnimationAction,
+  AvatarAnimationState,
+} from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
+import { IStateMachine } from "../../../../Core/Presentation/Babylon/Avatar/StateMachine";
+import { mock } from "jest-mock-extended";
 
 describe("AvatarPresenter", () => {
   let systemUnderTest: AvatarPresenter;
@@ -22,5 +27,14 @@ describe("AvatarPresenter", () => {
     expect(systemUnderTest["viewModel"]).toBe(viewModel);
   });
 
-  test.todo("presentAvatar sets customization info in the viewmodel");
+  test("onLearningElementLoaded calls the applyAction method of the animationStateMachine member of the viewModel member", () => {
+    const viewModel = new AvatarViewModel();
+    viewModel.animationStateMachine =
+      mock<IStateMachine<AvatarAnimationState, AvatarAnimationAction>>();
+    systemUnderTest.ViewModel = viewModel;
+
+    systemUnderTest.onLearningElementLoaded(null);
+
+    expect(viewModel.animationStateMachine.applyAction).toBeCalledTimes(1);
+  });
 });
