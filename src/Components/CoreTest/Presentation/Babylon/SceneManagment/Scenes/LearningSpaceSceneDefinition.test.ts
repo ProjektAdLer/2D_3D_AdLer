@@ -1,5 +1,5 @@
 import { NullEngine, Scene } from "@babylonjs/core";
-import { mock, mockDeep } from "jest-mock-extended";
+import { mock } from "jest-mock-extended";
 import ILoadAvatarUseCase from "../../../../../Core/Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
 import ILoadLearningSpaceUseCase from "../../../../../Core/Application/UseCases/LoadLearningSpace/ILoadLearningSpaceUseCase";
 import BUILDER_TYPES from "../../../../../Core/DependencyInjection/Builders/BUILDER_TYPES";
@@ -13,7 +13,6 @@ import IPresentationBuilder from "../../../../../Core/Presentation/PresentationB
 import IPresentationDirector from "../../../../../Core/Presentation/PresentationBuilder/IPresentationDirector";
 import AvatarCameraViewModel from "../../../../../Core/Presentation/Babylon/AvatarCamera/AvatarCameraViewModel";
 import IGetUserLocationUseCase from "../../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
-import { waitFor } from "@testing-library/react";
 import LearningSpaceTO from "../../../../../Core/Application/DataTransferObjects/LearningSpaceTO";
 import { LearningSpaceTemplateType } from "../../../../../Core/Domain/Types/LearningSpaceTemplateType";
 
@@ -118,7 +117,7 @@ describe("LearningSpaceScene", () => {
 
     expect(systemUnderTest["spaceData"]).toBe(spaceData);
   });
-  test("onLearningSpaceLoaded does not crash if spacedata has no vlaue in template", () => {
+  test("onLearningSpaceLoaded does not crash if spacedata has no value in template", () => {
     const spaceData = new LearningSpaceTO();
     systemUnderTest["onLearningSpaceLoaded"](spaceData);
 

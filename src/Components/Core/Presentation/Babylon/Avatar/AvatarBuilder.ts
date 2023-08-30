@@ -12,6 +12,7 @@ import {
   Transform,
   Point,
 } from "src/Components/Core/Domain/LearningSpaceTemplates/ILearningSpaceTemplate";
+import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 
 export default class AvatarBuilder extends AsyncPresentationBuilder<
   AvatarViewModel,
@@ -19,20 +20,14 @@ export default class AvatarBuilder extends AsyncPresentationBuilder<
   AvatarView,
   IAvatarPresenter
 > {
-  playerSpawnPoint: Transform | undefined;
+  learningSpaceTemplateType: LearningSpaceTemplateType;
   constructor() {
     super(AvatarViewModel, AvatarController, AvatarView, undefined);
   }
 
   override buildViewModel(): void {
     super.buildViewModel();
-    if (this.playerSpawnPoint === undefined) {
-      let nullSpawnPoint = {
-        position: { x: 0, y: 0 } as Point,
-        orientation: { rotation: 0 },
-      };
-      this.viewModel!.spawnPoint = nullSpawnPoint;
-    } else this.viewModel!.spawnPoint = this.playerSpawnPoint;
+    this.viewModel!.learningSpaceTemplateType = this.learningSpaceTemplateType;
   }
 
   override buildPresenter(): void {

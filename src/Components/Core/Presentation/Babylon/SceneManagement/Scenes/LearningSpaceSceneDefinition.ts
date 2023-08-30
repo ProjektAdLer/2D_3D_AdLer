@@ -28,6 +28,7 @@ import type ILearningSpaceBuilder from "../../LearningSpaces/ILearningSpaceBuild
 import type IAvatarBuilder from "../../Avatar/IAvatarBuilder";
 import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
 import { Transform } from "src/Components/Core/Domain/LearningSpaceTemplates/ILearningSpaceTemplate";
+import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 
 @injectable()
 export default class LearningSpaceSceneDefinition
@@ -96,7 +97,7 @@ export default class LearningSpaceSceneDefinition
     this.navigation.setupNavigation();
 
     // create avatar
-    this.avatarBuilder.playerSpawnPoint = this.playerSpawnPoint;
+    this.avatarBuilder.learningSpaceTemplateType = this.spaceData?.template;
     await this.director.buildAsync(this.avatarBuilder);
   }
 
@@ -122,10 +123,5 @@ export default class LearningSpaceSceneDefinition
 
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
     this.spaceData = learningSpaceTO;
-    if (this.spaceData.template)
-      this.playerSpawnPoint =
-        LearningSpaceTemplateLookup.getLearningSpaceTemplate(
-          learningSpaceTO.template
-        ).playerSpawnPoint;
   }
 }

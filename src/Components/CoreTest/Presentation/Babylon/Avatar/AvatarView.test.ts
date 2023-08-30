@@ -29,6 +29,7 @@ import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentatio
 import MovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/MovementIndicator";
 import StateMachine from "../../../../Core/Presentation/Babylon/Avatar/StateMachine";
 import Logger from "../../../../Core/Adapters/Logger/Logger";
+import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 
 jest.mock("@babylonjs/core/Materials");
 
@@ -50,10 +51,7 @@ const scenePresenterFactoryMock = () => scenePresenterMock;
 // util function to create system under test
 function createAvatarView(): [AvatarView, AvatarViewModel] {
   const viewModel = new AvatarViewModel();
-  viewModel.spawnPoint = {
-    position: { x: 0, y: 0 },
-    orientation: { rotation: 0 },
-  };
+  viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.L;
   const controller = mock<IAvatarController>();
   const avatarView = new AvatarView(viewModel, controller);
   return [avatarView, viewModel];
@@ -298,7 +296,6 @@ describe("AvatarView", () => {
         AvatarAnimationAction
       >(AvatarAnimationState.Idle, []);
 
-      // setup mock implementation to get a reference to the anonymous callback function
       // setup mock implementation to get a reference to the anonymous callback function
       let anonymousCallback: (eventData: Scene, eventState: EventState) => void;
       scenePresenterMock.Scene.onBeforeAnimationsObservable.add.mockImplementation(

@@ -32,6 +32,9 @@ import IMovementIndicator from "../MovementIndicator/IMovementIndicator";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
+import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
+import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 
 const modelLink = require("../../../../../Assets/3dModels/campusTheme/3DModel_Avatar_male.glb");
 
@@ -75,16 +78,33 @@ export default class AvatarView {
 
     this.viewModel.meshes[0].setParent(this.viewModel.parentNode);
 
+    this.viewModel.parentNode.position = this.determineSpawnLocation();
     // place model 0.05 above the ground ~ FK
-    this.viewModel.parentNode.position = new Vector3(
-      this.viewModel.spawnPoint.position.x,
-      0,
-      this.viewModel.spawnPoint.position.y
-    );
     this.viewModel.meshes[0].position = new Vector3(0, 0.05, 0);
     this.viewModel.meshes[0].scaling = new Vector3(1, 1, -1);
     this.viewModel.meshes.forEach((mesh) => (mesh.rotationQuaternion = null));
     this.viewModel.meshes[0].rotationQuaternion = new Quaternion(0, 0, 0, 1);
+  }
+
+  private determineSpawnLocation(): Vector3 {
+    let spawnLocation;
+    if (
+      this.viewModel.learningSpaceTemplateType ===
+      LearningSpaceTemplateType.None
+    ) {
+      spawnLocation = new Vector3(0, 0, 0);
+    } else {
+      let spawnPoint = LearningSpaceTemplateLookup.getLearningSpaceTemplate(
+        this.viewModel.learningSpaceTemplateType
+      ).playerSpawnPoint;
+      spawnLocation = new Vector3(
+        spawnPoint.position.x,
+        0,
+        spawnPoint.position.y
+      );
+    }
+
+    return spawnLocation;
   }
 
   private setupAvatarAnimations(): void {

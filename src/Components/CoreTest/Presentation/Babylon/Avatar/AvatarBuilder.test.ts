@@ -11,11 +11,7 @@ import { waitFor } from "@testing-library/react";
 import MovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/MovementIndicator";
 import IMovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/IMovementIndicator";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
-import {
-  Orientation,
-  Point,
-  Transform,
-} from "../../../../Core/Domain/LearningSpaceTemplates/ILearningSpaceTemplate";
+import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 
 jest.mock("../../../../Core/Presentation/Babylon/Avatar/AvatarController");
 const setViewModelMock = jest.spyOn(
@@ -46,27 +42,22 @@ describe("AvatarBuilder", () => {
   });
 
   test("buildViewModel concludes the build step successfully and sets the given data in the viewModel", () => {
-    systemUnderTest.playerSpawnPoint = {
-      position: { x: 1, y: 1 },
-      orientation: { rotation: 1 },
-    };
+    systemUnderTest.learningSpaceTemplateType = LearningSpaceTemplateType.L;
 
     systemUnderTest.buildViewModel();
 
     expect(systemUnderTest["viewModel"]).toBeDefined();
-    expect(systemUnderTest["viewModel"]!.spawnPoint).toEqual({
-      position: { x: 1, y: 1 } as Point,
-      orientation: { rotation: 1 } as Orientation,
-    } as Transform);
+    expect(systemUnderTest["viewModel"]!.learningSpaceTemplateType).toEqual(
+      LearningSpaceTemplateType.L
+    );
   });
   test("buildViewModel concludes the build step successfully and sets playerspawnpoint to zero in the viewModel, if no data is given", () => {
     systemUnderTest.buildViewModel();
 
     expect(systemUnderTest["viewModel"]).toBeDefined();
-    expect(systemUnderTest["viewModel"]!.spawnPoint).toEqual({
-      position: { x: 0, y: 0 } as Point,
-      orientation: { rotation: 0 } as Orientation,
-    } as Transform);
+    expect(systemUnderTest["viewModel"]!.learningSpaceTemplateType).toEqual(
+      undefined
+    );
   });
 
   test("buildPresenter builds the AvatarPresenter and sets the ViewModel with its setter", () => {
