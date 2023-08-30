@@ -12,7 +12,7 @@ import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningE
 import PDFComponent from "./SubComponents/PDFComponent";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
-import AdaptabilityQuiz from "../../../Adaptability/AdaptabilityElement";
+import AdaptivityElement from "../../../Adaptivity/AdaptivityElement";
 
 const createModalContent = (
   viewModel: LearningElementModalViewModel,
@@ -35,7 +35,7 @@ const createModalContent = (
     case LearningElementTypes.pdf:
       return <PDFComponent viewModel={viewModel} />;
     case LearningElementTypes.quiz:
-      return <AdaptabilityQuiz />;
+      return <AdaptivityElement />;
     default:
       return <div>No Element selected</div>;
   }

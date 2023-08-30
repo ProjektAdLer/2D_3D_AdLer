@@ -23,9 +23,11 @@ const USECASE_TYPES = {
   IGetLearningSpacePrecursorAndSuccessorUseCase: Symbol(
     "IGetLearningSpacePrecursorAndSuccessorUseCase"
   ),
-  ILoadQuizElementUseCase: Symbol("ILoadQuizElementUseCase"),
+  ILoadAdaptivityElementUseCase: Symbol("ILoadAdaptivityElementUseCase"),
   IUpdateQuizElementUseCase: Symbol("IUpdateQuizElementUseCase"),
-  ISubmitSelectionUseCase: Symbol("ISubmitSelectionUseCase"),
+  ISubmitAdaptivityElementSelectionUseCase: Symbol(
+    "ISubmitAdaptivityElementSelectionUseCase"
+  ),
 };
 
 export default USECASE_TYPES;

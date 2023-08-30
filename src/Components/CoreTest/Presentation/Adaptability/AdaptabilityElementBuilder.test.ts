@@ -1,13 +1,13 @@
 import mock from "jest-mock-extended/lib/Mock";
-import AdaptabilityElementBuilder from "../../../Core/Presentation/Adaptability/AdaptabilityElementBuilder";
+import AdaptivityElementBuilder from "../../../Core/Presentation/Adaptivity/AdaptivityElementBuilder";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldPort from "../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 
 const worldPortMock = mock<ILearningWorldPort>();
 
-describe("AdaptabilityElementBuilder", () => {
-  let systemUnderTest: AdaptabilityElementBuilder;
+describe("AdaptivityElementBuilder", () => {
+  let systemUnderTest: AdaptivityElementBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -17,7 +17,7 @@ describe("AdaptabilityElementBuilder", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new AdaptabilityElementBuilder();
+    systemUnderTest = new AdaptivityElementBuilder();
   });
 
   afterAll(() => {

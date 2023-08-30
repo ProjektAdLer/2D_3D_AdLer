@@ -32,10 +32,10 @@ import ICalculateLearningSpaceAvailabilityUseCase from "../../Application/UseCas
 import CalculateLearningSpaceAvailabilityUseCase from "../../Application/UseCases/CalculateLearningSpaceAvailability/CalculateLearningSpaceAvailabilityUseCase";
 import IGetLearningSpacePrecursorAndSuccessorUseCase from "../../Application/UseCases/GetLearningSpacePrecursorAndSuccessor/IGetLearningSpacePrecursorAndSuccessorUseCase";
 import GetLearningSpacePrecursorAndSuccessorUseCase from "../../Application/UseCases/GetLearningSpacePrecursorAndSuccessor/GetLearningSpacePrecursorAndSuccessorUseCase";
-import ILoadQuizElementUseCase from "../../Application/UseCases/Adaptability/LoadQuizElementUseCase/ILoadQuizElementUseCase";
-import LoadQuizElementUseCase from "../../Application/UseCases/Adaptability/LoadQuizElementUseCase/LoadQuizElementUseCase";
-import ISubmitSelectionUseCase from "../../Application/UseCases/Adaptability/SubmitSelectionUseCase/ISubmitSelectionUseCase";
-import SubmitSelectionUseCase from "../../Application/UseCases/Adaptability/SubmitSelectionUseCase/SubmitSelectionUseCase";
+import ILoadAdaptivityElementUseCase from "../../Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/ILoadAdaptivityElementUseCase";
+import LoadAdaptivityElementUseCase from "../../Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/LoadAdaptivityElementUseCase";
+import ISubmitAdaptivityElementSelectionUseCase from "../../Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
+import SubmitAdaptivityElementSelectionUseCase from "../../Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/SubmitAdaptivityElementSelectionUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -115,12 +115,16 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(GetLearningSpacePrecursorAndSuccessorUseCase)
     .inSingletonScope();
 
-  bind<ILoadQuizElementUseCase>(USECASE_TYPES.ILoadQuizElementUseCase)
-    .to(LoadQuizElementUseCase)
+  bind<ILoadAdaptivityElementUseCase>(
+    USECASE_TYPES.ILoadAdaptivityElementUseCase
+  )
+    .to(LoadAdaptivityElementUseCase)
     .inSingletonScope();
 
-  bind<ISubmitSelectionUseCase>(USECASE_TYPES.ISubmitSelectionUseCase)
-    .to(SubmitSelectionUseCase)
+  bind<ISubmitAdaptivityElementSelectionUseCase>(
+    USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
+  )
+    .to(SubmitAdaptivityElementSelectionUseCase)
     .inSingletonScope();
 });
 

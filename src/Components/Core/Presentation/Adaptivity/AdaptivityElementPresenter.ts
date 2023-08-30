@@ -1,18 +1,18 @@
 import {
   AdaptivityContentsTO,
   EvaluationAnswerTO,
-} from "./../../Application/DataTransferObjects/QuizElementTO";
-import IAdaptabilityElementPresenter from "./IAdaptabilityElementPresenter";
-import AdaptabilityElementViewModel, {
+} from "../../Application/DataTransferObjects/QuizElementTO";
+import IAdaptivityElementPresenter from "./IAdaptivityElementPresenter";
+import AdaptivityElementViewModel, {
   AdaptivityContent,
   AdaptivityQuestion,
   QuizAnswer,
-} from "./AdaptabilityElementViewModel";
+} from "./AdaptivityElementViewModel";
 
-export default class AdaptabilityElementPresenter
-  implements IAdaptabilityElementPresenter
+export default class AdaptivityElementPresenter
+  implements IAdaptivityElementPresenter
 {
-  constructor(private viewModel: AdaptabilityElementViewModel) {}
+  constructor(private viewModel: AdaptivityElementViewModel) {}
 
   onAdaptivityElementLoaded(contentTO: AdaptivityContentsTO): void {
     const content = new AdaptivityContent();

@@ -1,17 +1,17 @@
-import LoadQuizElementUseCase, {
+import LoadAdaptivityElementUseCase, {
   generateAdaptivityContentsTO,
-} from "../../../../../Core/Application/UseCases/Adaptability/LoadQuizElementUseCase/LoadQuizElementUseCase";
+} from "../../../../../Core/Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/LoadAdaptivityElementUseCase";
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import ILearningWorldPort from "../../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import ILoadQuizElementUseCase from "../../../../../Core/Application/UseCases/Adaptability/LoadQuizElementUseCase/ILoadQuizElementUseCase";
+import ILoadAdaptivityElementUseCase from "../../../../../Core/Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/ILoadAdaptivityElementUseCase";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 
 const worldPortMock = mock<ILearningWorldPort>();
 
-describe("LoadQuizElementUseCase", () => {
-  let systemUnderTest: LoadQuizElementUseCase;
+describe("LoadAdaptivityElementUseCase", () => {
+  let systemUnderTest: ILoadAdaptivityElementUseCase;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -22,14 +22,14 @@ describe("LoadQuizElementUseCase", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = CoreDIContainer.resolve(LoadQuizElementUseCase);
+    systemUnderTest = CoreDIContainer.resolve(LoadAdaptivityElementUseCase);
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
   });
 
-  test("calls executeAsync on the LoadQuizElementUseCase", () => {
+  test("calls executeAsync on the LoadAdaptivityElementUseCase", () => {
     systemUnderTest.executeAsync();
 
     expect(worldPortMock.onAdaptivityElementLoaded).toHaveBeenCalledWith(

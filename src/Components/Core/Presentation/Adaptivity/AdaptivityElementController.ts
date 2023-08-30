@@ -1,20 +1,20 @@
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import IAdaptabilityElementController from "./IAdaptabilityElementController";
-import ILoadQuizElementUseCase from "../../Application/UseCases/Adaptability/LoadQuizElementUseCase/ILoadQuizElementUseCase";
+import IAdaptivityElementController from "./IAdaptivityElementController";
+import ILoadQuizElementUseCase from "../../Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/ILoadAdaptivityElementUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import IUpdateQuizElementUseCase from "../../Application/UseCases/Adaptability/UpdateQuizElementUseCase/IUpdateQuizElementUseCase";
-import AdaptabilityElementViewModel from "./AdaptabilityElementViewModel";
+import IUpdateQuizElementUseCase from "../../Application/UseCases/Adaptivity/UpdateQuizElementUseCase/IUpdateQuizElementUseCase";
+import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
 import { SubmittedAnswersTO } from "../../Application/DataTransferObjects/QuizElementTO";
-import ISubmitSelectionUseCase from "../../Application/UseCases/Adaptability/SubmitSelectionUseCase/ISubmitSelectionUseCase";
+import ISubmitAdaptivityElementSelectionUseCase from "../../Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
 
-export default class AdaptabilityElementController
-  implements IAdaptabilityElementController
+export default class AdaptivityElementController
+  implements IAdaptivityElementController
 {
-  constructor(private viewModel: AdaptabilityElementViewModel) {}
+  constructor(private viewModel: AdaptivityElementViewModel) {}
 
   loadAdaptivityElement(): void {
     CoreDIContainer.get<ILoadQuizElementUseCase>(
-      USECASE_TYPES.ILoadQuizElementUseCase
+      USECASE_TYPES.ILoadAdaptivityElementUseCase
     ).executeAsync();
   }
 
@@ -33,12 +33,12 @@ export default class AdaptabilityElementController
       }
     });
 
-    CoreDIContainer.get<ISubmitSelectionUseCase>(
-      USECASE_TYPES.ISubmitSelectionUseCase
+    CoreDIContainer.get<ISubmitAdaptivityElementSelectionUseCase>(
+      USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
     ).executeAsync(selection);
   }
 
-  updateAdaptabilityElementDisplay(): void {
+  updateAdaptivityElementDisplay(): void {
     CoreDIContainer.get<IUpdateQuizElementUseCase>(
       USECASE_TYPES.IUpdateQuizElementUseCase
     ).executeAsync();

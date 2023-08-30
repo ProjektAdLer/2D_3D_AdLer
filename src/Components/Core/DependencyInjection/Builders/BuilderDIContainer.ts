@@ -33,7 +33,7 @@ import DecorationBuilder from "../../Presentation/Babylon/Decoration/DecorationB
 import StandInDecorationBuilder from "../../Presentation/Babylon/StandInDecoration/StandInDecorationBuilder";
 import HelpDeskModalBuilder from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModalBuilder";
 import HelpDeskButtonBuilder from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButtonBuilder";
-import AdaptabilityElementBuilder from "../../Presentation/Adaptability/AdaptabilityElementBuilder";
+import AdaptivityElementBuilder from "../../Presentation/Adaptivity/AdaptivityElementBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -122,8 +122,8 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IStandInDecorationBuilder).to(
     StandInDecorationBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IAdaptabilityElementBuilder).to(
-    AdaptabilityElementBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.IAdaptivityElementBuilder).to(
+    AdaptivityElementBuilder
   );
 });
 

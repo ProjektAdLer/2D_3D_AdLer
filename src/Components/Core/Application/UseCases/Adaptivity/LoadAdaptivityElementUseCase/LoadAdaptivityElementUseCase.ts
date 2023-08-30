@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import ILoadQuizElementUseCase from "./ILoadQuizElementUseCase";
+import ILoadAdaptivityElementUseCase from "./ILoadAdaptivityElementUseCase";
 import {
   AdaptivityContentsTO,
   AdaptivityQuestionTO,
@@ -84,7 +84,9 @@ export function generateAdaptivityContentsTO(): AdaptivityContentsTO {
 }
 
 @injectable()
-export default class LoadQuizElementUseCase implements ILoadQuizElementUseCase {
+export default class LoadAdaptivityElementUseCase
+  implements ILoadAdaptivityElementUseCase
+{
   constructor(
     @inject(CORE_TYPES.ILogger)
     private logger: ILoggerPort,
@@ -96,7 +98,10 @@ export default class LoadQuizElementUseCase implements ILoadQuizElementUseCase {
     const content = generateAdaptivityContentsTO();
     this.worldPort.onAdaptivityElementLoaded(content);
 
-    this.logger.log(LogLevelTypes.TRACE, "LoadQuizElementUsecase: Loaded.");
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      "LoadAdaptivityElementUsecase: Loaded."
+    );
     return Promise.resolve();
   }
 }

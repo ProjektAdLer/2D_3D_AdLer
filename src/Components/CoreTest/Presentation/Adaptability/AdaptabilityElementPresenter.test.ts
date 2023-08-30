@@ -1,20 +1,20 @@
 import { StyledButtonColor } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-import { AdaptivityContent } from "./../../../Core/Presentation/Adaptability/AdaptabilityElementViewModel";
+import { AdaptivityContent } from "./../../../Core/Presentation/Adaptivity/AdaptivityElementViewModel";
 import { AdaptivityContentsTO } from "./../../../Core/Application/DataTransferObjects/QuizElementTO";
-import AdaptabilityElementPresenter from "../../../Core/Presentation/Adaptability/AdaptabilityElementPresenter";
-import AdaptabilityElementViewModel from "../../../Core/Presentation/Adaptability/AdaptabilityElementViewModel";
+import AdaptivityElementPresenter from "../../../Core/Presentation/Adaptivity/AdaptivityElementPresenter";
+import AdaptivityElementViewModel from "../../../Core/Presentation/Adaptivity/AdaptivityElementViewModel";
 import { EvaluationAnswerTO } from "../../../Core/Application/DataTransferObjects/QuizElementTO";
 
-describe("AdaptabilityElementPresenter", () => {
-  let systemUnderTest: AdaptabilityElementPresenter;
+describe("AdaptivityElementPresenter", () => {
+  let systemUnderTest: AdaptivityElementPresenter;
 
   beforeEach(() => {
-    systemUnderTest = new AdaptabilityElementPresenter(
-      new AdaptabilityElementViewModel()
+    systemUnderTest = new AdaptivityElementPresenter(
+      new AdaptivityElementViewModel()
     );
   });
 
-  test("onAdaptabilityElementLoaded should set viewModel data", () => {
+  test("onAdaptivityElementLoaded should set viewModel data", () => {
     const adaptivityTO: AdaptivityContentsTO = {
       shuffleQuestions: false,
       questions: [

@@ -21,7 +21,7 @@ export class AdaptivityContent {
   questions: AdaptivityQuestion[];
 }
 
-export default class AdaptabilityElementViewModel {
+export default class AdaptivityElementViewModel {
   isFinished: Observable<boolean> = new Observable<boolean>(false);
   currentElement: Observable<AdaptivityQuestion> =
     new Observable<AdaptivityQuestion>();
