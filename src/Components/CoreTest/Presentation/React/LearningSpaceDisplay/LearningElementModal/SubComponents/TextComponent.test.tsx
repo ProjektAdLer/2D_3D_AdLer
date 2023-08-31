@@ -37,6 +37,7 @@ describe("TextElementSubComponent", () => {
     const vm = new LearningElementModalViewModel();
     vm.parentWorldID.Value = 1;
     vm.id.Value = 1;
+    vm.filePath.Value = "";
     let component: RenderResult;
     await act(async () => {
       component = render(

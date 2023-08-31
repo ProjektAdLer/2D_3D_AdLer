@@ -11,9 +11,11 @@ export default function TextComponent({
   const [filepath] = useObservable(viewModel.filePath);
 
   useEffect(() => {
-    fetch(filepath).then((response) =>
-      response.text().then((text) => setText(text))
-    );
+    if (filepath !== undefined) {
+      fetch(filepath).then((response) =>
+        response.text().then((text) => setText(text))
+      );
+    }
   }, [filepath]);
 
   return (
