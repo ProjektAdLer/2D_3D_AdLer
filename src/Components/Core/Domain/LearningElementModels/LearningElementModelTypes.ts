@@ -24,7 +24,7 @@ enum H5pElementModelTypes {
 }
 
 enum QuizElementModelTypes {
-  QuizNPC = "l_h5p_slotmachine_1",
+  QuizNPC = "LukasNPC", // TODO: rename to l_quiz_npc_1 when models are updated
 }
 
 enum NoElementModelTypes {
