@@ -7,7 +7,7 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
 import IAdaptivityElementController from "./IAdaptivityElementController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import quizBackgroundVRGuy from "../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
+import quizBackgroundVRGuy from "../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
 
 function toggledColor(color: StyledButtonColor) {
   return color === "highlight" ? "default" : "highlight";
