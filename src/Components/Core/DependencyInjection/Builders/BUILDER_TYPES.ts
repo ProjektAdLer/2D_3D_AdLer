@@ -36,6 +36,9 @@ const BUILDER_TYPES = {
   IHelpDeskModalBuilder: Symbol("IHelpDeskModalBuilder"),
   IHelpDeskButtonBuilder: Symbol("IHelpDeskButtonBuilder"),
   IAdaptivityElementBuilder: Symbol("IAdaptivityElementBuilder"),
+  IOveralTimeSpentNotificationBuilder: Symbol(
+    "IOveralTimeSpentNotificationBuilder"
+  ),
 };
 
 export default BUILDER_TYPES;
