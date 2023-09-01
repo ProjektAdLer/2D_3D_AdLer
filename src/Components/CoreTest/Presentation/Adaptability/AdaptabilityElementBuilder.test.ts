@@ -1,5 +1,5 @@
 import mock from "jest-mock-extended/lib/Mock";
-import AdaptivityElementBuilder from "../../../Core/Presentation/Adaptivity/AdaptivityElementBuilder";
+import AdaptivityElementBuilder from "../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementBuilder";
 import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldPort from "../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
