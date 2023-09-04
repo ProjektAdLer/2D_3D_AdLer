@@ -1,9 +1,12 @@
-import { AdaptivityContent } from "./../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
-import { AdaptivityContentsTO } from "./../../../Core/Application/DataTransferObjects/QuizElementTO";
-import AdaptivityElementPresenter from "../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementPresenter";
-import AdaptivityElementViewModel from "../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
-import { EvaluationAnswerTO } from "../../../Core/Application/DataTransferObjects/QuizElementTO";
-import { StyledButtonColor } from "../../../Core/Presentation/React/ReactRelated/ReactBaseComponents/StyledButton";
+import {
+  AdaptivityContentsTO,
+  EvaluationAnswerTO,
+} from "../../../../Core/Application/DataTransferObjects/QuizElementTO";
+import AdaptivityElementPresenter from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementPresenter";
+import AdaptivityElementViewModel, {
+  AdaptivityContent,
+} from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
+import { StyledButtonColor } from "../../../../Core/Presentation/React/ReactRelated/ReactBaseComponents/StyledButton";
 
 describe("AdaptivityElementPresenter", () => {
   let systemUnderTest: AdaptivityElementPresenter;

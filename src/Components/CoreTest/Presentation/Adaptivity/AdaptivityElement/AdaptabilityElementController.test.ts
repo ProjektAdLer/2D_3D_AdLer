@@ -1,14 +1,14 @@
-import { SubmittedAnswersTO } from "./../../../Core/Application/DataTransferObjects/QuizElementTO";
+import { SubmittedAnswersTO } from "../../../../Core/Application/DataTransferObjects/QuizElementTO";
 import { mock } from "jest-mock-extended";
-import ILearningWorldPort from "../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
-import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
-import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import AdaptivityElementController from "../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementController";
-import ILoadAdaptivityElementUseCase from "../../../Core/Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/ILoadAdaptivityElementUseCase";
+import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
+import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
+import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import AdaptivityElementController from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementController";
+import ILoadAdaptivityElementUseCase from "../../../../Core/Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/ILoadAdaptivityElementUseCase";
 import AdaptivityElementViewModel, {
   AdaptivityQuestion,
-} from "../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
-import ISubmitAdaptivityElementSelectionUseCase from "../../../Core/Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
+} from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
+import ISubmitAdaptivityElementSelectionUseCase from "../../../../Core/Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
 
 const worldPortMock = mock<ILearningWorldPort>();
 const loadQuizElementUseCaseMock = mock<ILoadAdaptivityElementUseCase>();
