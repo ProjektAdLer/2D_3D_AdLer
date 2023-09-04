@@ -1,1 +1,1 @@
-export default interface IOveralTimeSpentAdaptivityNotificationPresenter {}
+export default interface IOverallTimeSpentAdaptivityNotificationPresenter {}

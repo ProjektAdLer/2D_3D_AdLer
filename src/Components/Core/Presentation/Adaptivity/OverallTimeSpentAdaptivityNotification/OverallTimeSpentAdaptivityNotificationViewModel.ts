@@ -7,7 +7,7 @@ export enum OverallTimeSpentAdaptivityNotificationBreakType {
   Long,
 }
 
-export default class OveralTimeSpentAdaptivityNotificationViewModel {
+export default class OverallTimeSpentAdaptivityNotificationViewModel {
   showModal: Observable<boolean> = new Observable<boolean>(false);
   breakType: Observable<OverallTimeSpentAdaptivityNotificationBreakType> =
     new Observable<OverallTimeSpentAdaptivityNotificationBreakType>(
