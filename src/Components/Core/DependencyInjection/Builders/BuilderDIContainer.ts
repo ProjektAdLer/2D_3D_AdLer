@@ -34,7 +34,7 @@ import StandInDecorationBuilder from "../../Presentation/Babylon/StandInDecorati
 import HelpDeskModalBuilder from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModalBuilder";
 import HelpDeskButtonBuilder from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButtonBuilder";
 import AdaptivityElementBuilder from "../../Presentation/Adaptivity/AdaptivityElement/AdaptivityElementBuilder";
-import OveralTimeSpentNotificationBuilder from "../../Presentation/Adaptivity/OverallTimeSpentNotification/OveralTimeSpentNotificationBuilder";
+import OveralTimeSpentNotificationBuilder from "../../Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
