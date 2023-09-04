@@ -1,10 +1,10 @@
 import { injectable } from "inversify";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
-import OveralTimeSpentNotificationController from "./OveralTimeSpentNotificationController";
-import OveralTimeSpentNotificationPresenter from "./OveralTimeSpentNotificationPresenter";
-import IOveralTimeSpentNotificationController from "./IOveralTimeSpentNotificationController";
-import IOveralTimeSpentNotificationPresenter from "./IOveralTimeSpentNotificationPresenter";
-import OveralTimeSpentNotificationViewModel from "./OveralTimeSpentNotificationViewModel";
+import OveralTimeSpentNotificationController from "./OverallTimeSpentAdaptivityNotificationController";
+import OveralTimeSpentNotificationPresenter from "./OverallTimeSpentAdaptivityNotificationPresenter";
+import IOveralTimeSpentNotificationController from "./IOverallTimeSpentAdaptivityNotificationController";
+import IOveralTimeSpentNotificationPresenter from "./IOverallTimeSpentAdaptivityNotificationPresenter";
+import OveralTimeSpentNotificationViewModel from "./OverallTimeSpentAdaptivityNotificationViewModel";
 
 @injectable()
 export default class OveralTimeSpentNotificationBuilder extends PresentationBuilder<
