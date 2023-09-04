@@ -1,14 +1,14 @@
 import { injectable } from "inversify";
-import PresentationBuilder from "../PresentationBuilder/AsyncPresentationBuilder";
+import PresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
 import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
 import IAdaptivityElementPresenter from "./IAdaptivityElementPresenter";
 import AdaptivityElementPresenter from "./AdaptivityElementPresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import ILearningWorldPort from "../../Application/Ports/Interfaces/ILearningWorldPort";
+import ILearningWorldPort from "../../../Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import IAdaptivityElementController from "./IAdaptivityElementController";
 import AdaptivityElementController from "./AdaptivityElementController";
-import ViewModelControllerProvider from "../ViewModelProvider/ViewModelControllerProvider";
+import ViewModelControllerProvider from "../../ViewModelProvider/ViewModelControllerProvider";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 
 @injectable()

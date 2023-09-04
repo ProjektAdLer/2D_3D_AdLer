@@ -26,9 +26,6 @@ import ILearningWorldAdapter from "src/Components/Core/Application/Ports/Learnin
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import type ILearningSpaceBuilder from "../../LearningSpaces/ILearningSpaceBuilder";
 import type IAvatarBuilder from "../../Avatar/IAvatarBuilder";
-import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
-import { Transform } from "src/Components/Core/Domain/LearningSpaceTemplates/ILearningSpaceTemplate";
-import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 
 @injectable()
 export default class LearningSpaceSceneDefinition
@@ -37,7 +34,6 @@ export default class LearningSpaceSceneDefinition
 {
   private avatarParentNode: TransformNode;
   private spaceData: LearningSpaceTO;
-  private playerSpawnPoint: Transform;
 
   constructor(
     @inject(BUILDER_TYPES.IPresentationDirector)

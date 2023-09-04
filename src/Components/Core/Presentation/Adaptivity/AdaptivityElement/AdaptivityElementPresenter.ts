@@ -1,7 +1,7 @@
 import {
   AdaptivityContentsTO,
   EvaluationAnswerTO,
-} from "../../Application/DataTransferObjects/QuizElementTO";
+} from "../../../Application/DataTransferObjects/QuizElementTO";
 import IAdaptivityElementPresenter from "./IAdaptivityElementPresenter";
 import AdaptivityElementViewModel, {
   AdaptivityContent,

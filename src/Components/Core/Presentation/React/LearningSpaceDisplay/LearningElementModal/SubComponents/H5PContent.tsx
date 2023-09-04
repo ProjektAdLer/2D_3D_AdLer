@@ -86,7 +86,7 @@ export default function H5PContent({
   return (
     <div className="App">
       <div
-        className="w-[90vw] h-[90vh]"
+        className="w-[80vw] h-[85vh]"
         id="h5p-container"
         ref={h5pContainerRef}
       ></div>
