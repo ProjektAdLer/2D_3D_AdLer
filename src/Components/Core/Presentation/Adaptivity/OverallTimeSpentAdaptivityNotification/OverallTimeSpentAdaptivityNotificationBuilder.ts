@@ -7,7 +7,7 @@ import IOverallTimeSpentAdaptivityNotificationPresenter from "./IOverallTimeSpen
 import OverallTimeSpentAdaptivityNotificationViewModel from "./OverallTimeSpentAdaptivityNotificationViewModel";
 
 @injectable()
-export default class OverallTimeSpentNotificationBuilder extends PresentationBuilder<
+export default class OverallTimeSpentAdaptivityNotificationBuilder extends PresentationBuilder<
   OverallTimeSpentAdaptivityNotificationViewModel,
   IOverallTimeSpentAdaptivityNotificationController,
   undefined,
