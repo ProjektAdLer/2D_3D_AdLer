@@ -13,7 +13,4 @@ export default class OverallTimeSpentAdaptivityNotificationViewModel {
     new Observable<OverallTimeSpentAdaptivityNotificationBreakType>(
       OverallTimeSpentAdaptivityNotificationBreakType.None
     );
-  readonly shortBreakText: string = "";
-  readonly mediumBreakText: string = "";
-  readonly longBreakText: string = "";
 }
