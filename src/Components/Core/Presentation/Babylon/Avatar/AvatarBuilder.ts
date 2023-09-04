@@ -7,11 +7,6 @@ import AvatarView from "./AvatarView";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
 import IAvatarPresenter from "./IAvatarPresenter";
-import { Vector3 } from "@babylonjs/core";
-import {
-  Transform,
-  Point,
-} from "src/Components/Core/Domain/LearningSpaceTemplates/ILearningSpaceTemplate";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 
 export default class AvatarBuilder extends AsyncPresentationBuilder<

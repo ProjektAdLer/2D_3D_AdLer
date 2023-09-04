@@ -8,7 +8,6 @@ import {
 } from "@babylonjs/core";
 import Observable from "src/Lib/Observable";
 import { IStateMachine } from "./StateMachine";
-import { Transform } from "src/Components/Core/Domain/LearningSpaceTemplates/ILearningSpaceTemplate";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 
 export enum AvatarAnimationState {
