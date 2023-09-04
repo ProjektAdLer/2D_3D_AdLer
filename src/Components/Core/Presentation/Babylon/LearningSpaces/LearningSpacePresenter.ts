@@ -46,9 +46,12 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     const loadingCompletePromises: Promise<void>[] = [];
 
     for (let i = 0; i < spaceTO.elements.length; i++) {
+      let elementPosition = this.viewModel.elementPositions.shift()!;
+
       if (!spaceTO.elements[i]) {
         const seededRNG = new SeededRNG(i.toString() + spaceTO.name);
         const randomValue = seededRNG.seededRandom();
+
         if (randomValue <= this.viewModel.standInDecoSpawnProbability) {
           // create stand in decoration for empty slots
           const standInDecorationBuilder =
@@ -56,7 +59,6 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
               BUILDER_TYPES.IStandInDecorationBuilder
             );
 
-          let elementPosition = this.viewModel.elementPositions.shift()!;
           standInDecorationBuilder.position = elementPosition[0];
           standInDecorationBuilder.rotation = elementPosition[1];
           standInDecorationBuilder.spaceName = spaceTO.name;
@@ -72,10 +74,11 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         const elementBuilder = CoreDIContainer.get<ILearningElementBuilder>(
           BUILDER_TYPES.ILearningElementBuilder
         );
+
         elementBuilder.elementData = spaceTO.elements[i]!;
         elementBuilder.elementData.theme = this.viewModel.theme;
-        elementBuilder.elementPosition =
-          this.viewModel.elementPositions.shift()!;
+        elementBuilder.elementPosition = elementPosition;
+
         loadingCompletePromises.push(this.director.buildAsync(elementBuilder));
 
         // if (spaceTO.elements[i]?.type === "quiz") {
@@ -87,7 +90,6 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         // }
       }
     }
-
     await Promise.all(loadingCompletePromises);
   }
 
