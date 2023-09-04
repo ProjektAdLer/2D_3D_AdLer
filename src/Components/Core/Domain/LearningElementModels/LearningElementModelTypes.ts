@@ -1,30 +1,63 @@
 enum TextElementModelTypes {
+  //default
   Bookshelf1 = "l_text_bookshelf_1",
   Bookshelf2 = "l_text_bookshelf_2",
+  //arcade
+  ComicShelfbig = "l_text_comicshelfbig_1",
+  ComicShelfsmall = "l_text_comicshelfsmall_1",
+  //campus
+  LibraryShelf = "l_text_libraryshelf_1",
 }
 
 enum ImageElementModelTypes {
-  // TODO: rename to l_image_... when models are updated
-  Painting1 = "l_picture_painting_1",
-  Painting2 = "l_picture_painting_2",
-  PaintingEasel = "l_picture_paintingeasel_1",
+  //default
+  Painting1 = "l_image_painting_1",
+  Painting2 = "l_image_painting_2",
+  PaintingEasel = "l_image_paintingeasel_1",
+  //arcade
+  Gameposter1 = "l_image_gameposter_1",
+  Gameposter2 = "l_image_gameposter_2",
+  Cardboardcutout = "l_image_cardboardcutout_1",
+  //campus
+  sciencegeo1 = "l_image_sciencegeo_1",
+  sciencebio1 = "l_image_sciencebio_1",
+  sciencewhiteboard = "l_image_sciencewhiteboard_1",
 }
 
 enum VideoElementModelTypes {
+  //default
   Television = "l_video_television_1",
+  //arcade
+  vrdesk = "l_video_vrdesk_1",
+  //campus
+  movieprojector = "l_video_movieprojektor_1",
 }
 
 // enum PdfElementModelTypes {}
 
 enum H5pElementModelTypes {
+  //default
   Blackboard = "l_h5p_blackboard_1",
-  DeskPC = "l_h5p_deskpc_1",
+  DeskPC1 = "l_h5p_deskpc_1",
   DrawingTable = "l_h5p_drawingtable_1",
   SlotMachine = "l_h5p_slotmachine_1",
+  //arcade
+  GreySlotmachine = "l_h5p_greyslotmachine_1",
+  RedSlotmachine = "l_h5p_redslotmachine_1",
+  PurpleSlotmachine = "l_h5p_purpleslotmachine_1",
+  BlackSlotmachine = "l_h5p_blackslotmachine_1",
+  DeskPC2 = "l_h5p_deskpc_2",
+  //campus
+  Blackboard2 = "l_h5p_blackboard_2",
+  DeskPC3 = "l_h5p_deskpc_3",
+  DrawingTable2 = "l_h5p_drawingtable_2",
+  Daylightprojector = "l_h5p_daylightprojector_1",
 }
 
 enum QuizElementModelTypes {
-  QuizNPC = "LukasNPC", // TODO: rename to l_quiz_npc_1 when models are updated
+  DefaultNPC = "a_npc_defaultnpc",
+  ArcadeNPC = "a_npc_sheriffjustice",
+  CampusNPC = "a_npc_dozentlukas",
 }
 
 enum NoElementModelTypes {
