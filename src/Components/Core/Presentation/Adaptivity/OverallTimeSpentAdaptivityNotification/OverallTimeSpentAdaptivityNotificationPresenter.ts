@@ -1,9 +1,11 @@
-import IOveralTimeSpentNotificationPresenter from "./IOverallTimeSpentAdaptivityNotificationPresenter";
-import OveralTimeSpentNotificationViewModel from "./OverallTimeSpentAdaptivityNotificationViewModel";
+import IOveralTimeSpentAdaptivityNotificationPresenter from "./IOverallTimeSpentAdaptivityNotificationPresenter";
+import OveralTimeSpentAdaptivityNotificationViewModel from "./OverallTimeSpentAdaptivityNotificationViewModel";
 
 // TODO: connect presenter with port to open modal
-export default class OveralTimeSpentNotificationPresenter
-  implements IOveralTimeSpentNotificationPresenter
+export default class OveralTimeSpentAdaptivityNotificationPresenter
+  implements IOveralTimeSpentAdaptivityNotificationPresenter
 {
-  constructor(private viewModel: OveralTimeSpentNotificationViewModel) {}
+  constructor(
+    private viewModel: OveralTimeSpentAdaptivityNotificationViewModel
+  ) {}
 }

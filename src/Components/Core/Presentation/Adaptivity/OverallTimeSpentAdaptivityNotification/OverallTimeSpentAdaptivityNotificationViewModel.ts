@@ -1,5 +1,19 @@
 import Observable from "../../../../../Lib/Observable";
 
-export default class OveralTimeSpentNotificationViewModel {
+export enum OverallTimeSpentAdaptivityNotificationBreakType {
+  None,
+  Short,
+  Medium,
+  Long,
+}
+
+export default class OveralTimeSpentAdaptivityNotificationViewModel {
   showModal: Observable<boolean> = new Observable<boolean>(false);
+  breakType: Observable<OverallTimeSpentAdaptivityNotificationBreakType> =
+    new Observable<OverallTimeSpentAdaptivityNotificationBreakType>(
+      OverallTimeSpentAdaptivityNotificationBreakType.None
+    );
+  readonly shortBreakText: string = "";
+  readonly mediumBreakText: string = "";
+  readonly longBreakText: string = "";
 }

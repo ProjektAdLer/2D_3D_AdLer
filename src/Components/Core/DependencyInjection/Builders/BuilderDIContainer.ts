@@ -127,7 +127,7 @@ const BuilderDIContainer = new ContainerModule((bind) => {
     AdaptivityElementBuilder
   );
   bind<IPresentationBuilder>(
-    BUILDER_TYPES.IOveralTimeSpentNotificationBuilder
+    BUILDER_TYPES.IOveralTimeSpentAdaptivityNotificationBuilder
   ).to(OveralTimeSpentNotificationBuilder);
 });
 

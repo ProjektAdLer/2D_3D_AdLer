@@ -1,1 +1,1 @@
-export default interface IOveralTimeSpentNotificationController {}
+export default interface IOveralTimeSpentAdaptivityNotificationController {}

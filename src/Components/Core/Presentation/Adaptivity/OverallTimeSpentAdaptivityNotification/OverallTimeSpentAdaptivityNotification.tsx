@@ -1,15 +1,15 @@
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import IOveralTimeSpentNotificationController from "./IOverallTimeSpentAdaptivityNotificationController";
-import OveralTimeSpentNotificationViewModel from "./OverallTimeSpentAdaptivityNotificationViewModel";
+import IOveralTimeSpentAdaptivityNotificationController from "./IOverallTimeSpentAdaptivityNotificationController";
+import OveralTimeSpentAdaptivityNotificationViewModel from "./OverallTimeSpentAdaptivityNotificationViewModel";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 
-export default function OveralTimeSpentNotification() {
+export default function OveralTimeSpentAdaptivityNotification() {
   const [viewModel, controller] = useBuilder<
-    OveralTimeSpentNotificationViewModel,
-    IOveralTimeSpentNotificationController
-  >(BUILDER_TYPES.IOveralTimeSpentNotificationBuilder);
+    OveralTimeSpentAdaptivityNotificationViewModel,
+    IOveralTimeSpentAdaptivityNotificationController
+  >(BUILDER_TYPES.IOveralTimeSpentAdaptivityNotificationBuilder);
 
   if (!viewModel || !controller) return null;
 

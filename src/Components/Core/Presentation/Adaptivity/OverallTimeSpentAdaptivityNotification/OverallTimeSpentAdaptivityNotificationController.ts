@@ -1,4 +1,4 @@
-import IOveralTimeSpentNotificationController from "./IOverallTimeSpentAdaptivityNotificationController";
+import IOveralTimeSpentAdaptivityNotificationController from "./IOverallTimeSpentAdaptivityNotificationController";
 
-export default class OveralTimeSpentNotificationController
-  implements IOveralTimeSpentNotificationController {}
+export default class OveralTimeSpentAdaptivityNotificationController
+  implements IOveralTimeSpentAdaptivityNotificationController {}

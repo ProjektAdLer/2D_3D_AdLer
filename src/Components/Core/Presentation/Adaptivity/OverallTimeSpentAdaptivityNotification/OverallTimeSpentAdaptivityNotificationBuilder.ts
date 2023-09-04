@@ -1,24 +1,24 @@
 import { injectable } from "inversify";
 import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
-import OveralTimeSpentNotificationController from "./OverallTimeSpentAdaptivityNotificationController";
-import OveralTimeSpentNotificationPresenter from "./OverallTimeSpentAdaptivityNotificationPresenter";
-import IOveralTimeSpentNotificationController from "./IOverallTimeSpentAdaptivityNotificationController";
-import IOveralTimeSpentNotificationPresenter from "./IOverallTimeSpentAdaptivityNotificationPresenter";
-import OveralTimeSpentNotificationViewModel from "./OverallTimeSpentAdaptivityNotificationViewModel";
+import OveralTimeSpentAdaptivityNotificationController from "./OverallTimeSpentAdaptivityNotificationController";
+import OveralTimeSpentAdaptivityNotificationPresenter from "./OverallTimeSpentAdaptivityNotificationPresenter";
+import IOveralTimeSpentAdaptivityNotificationController from "./IOverallTimeSpentAdaptivityNotificationController";
+import IOveralTimeSpentAdaptivityNotificationPresenter from "./IOverallTimeSpentAdaptivityNotificationPresenter";
+import OveralTimeSpentAdaptivityNotificationViewModel from "./OverallTimeSpentAdaptivityNotificationViewModel";
 
 @injectable()
 export default class OveralTimeSpentNotificationBuilder extends PresentationBuilder<
-  OveralTimeSpentNotificationViewModel,
-  IOveralTimeSpentNotificationController,
+  OveralTimeSpentAdaptivityNotificationViewModel,
+  IOveralTimeSpentAdaptivityNotificationController,
   undefined,
-  IOveralTimeSpentNotificationPresenter
+  IOveralTimeSpentAdaptivityNotificationPresenter
 > {
   constructor() {
     super(
-      OveralTimeSpentNotificationViewModel,
-      OveralTimeSpentNotificationController,
+      OveralTimeSpentAdaptivityNotificationViewModel,
+      OveralTimeSpentAdaptivityNotificationController,
       undefined,
-      OveralTimeSpentNotificationPresenter
+      OveralTimeSpentAdaptivityNotificationPresenter
     );
   }
 }
