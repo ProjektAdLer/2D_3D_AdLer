@@ -5,7 +5,7 @@ import NotificationManagerPresenter from "./NotificationManagerPresenter";
 import NotificationManagerViewModel from "./NotificationManagerViewModel";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
-import IUIPort from "../../../../Application/Ports/Interfaces/IUIPort";
+import INotificationPort from "../../../../Application/Ports/Interfaces/INotificationPort";
 import INotificationManagerPresenter from "./INotificationManagerPresenter";
 import INotificationManagerController from "./INotificationManagerController";
 
@@ -27,8 +27,8 @@ export default class NotificationManagerBuilder extends PresentationBuilder<
 
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<IUIPort>(PORT_TYPES.IUIPort).registerAdapter(
-      this.presenter!
-    );
+    CoreDIContainer.get<INotificationPort>(
+      PORT_TYPES.INotificationPort
+    ).registerAdapter(this.presenter!);
   }
 }

@@ -1,3 +1,4 @@
-import IUIAdapter from "src/Components/Core/Application/Ports/UIPort/IUIAdapter";
+import INotificationAdapter from "src/Components/Core/Application/Ports/NotificationPort/INotificationAdapter";
 
-export default interface INotificationManagerPresenter extends IUIAdapter {}
+export default interface INotificationManagerPresenter
+  extends INotificationAdapter {}

@@ -7,7 +7,7 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { Semaphore } from "src/Lib/Semaphore";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import ILoadUserLearningWorldsUseCase from "./ILoadUserLearningWorldsUseCase";
-import type IUIPort from "src/Components/Core/Application/Ports/Interfaces/IUIPort";
+import type INotificationPort from "src/Components/Core/Application/Ports/Interfaces/INotificationPort";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
@@ -29,8 +29,8 @@ export default class LoadUserLearningWorldsUseCase
     private container: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter)
     private backendAdapter: IBackendPort,
-    @inject(PORT_TYPES.IUIPort)
-    private uiPort: IUIPort
+    @inject(PORT_TYPES.INotificationPort)
+    private uiPort: INotificationPort
   ) {}
 
   private semaphore = new Semaphore("LoadUserWorlds in Use", 1);

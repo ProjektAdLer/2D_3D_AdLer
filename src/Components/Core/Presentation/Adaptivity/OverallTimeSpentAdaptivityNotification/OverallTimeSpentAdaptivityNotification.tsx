@@ -1,11 +1,10 @@
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import IOverallTimeSpentAdaptivityNotificationController from "./IOverallTimeSpentAdaptivityNotificationController";
-import OverallTimeSpentAdaptivityNotificationViewModel, {
-  OverallTimeSpentAdaptivityNotificationBreakType,
-} from "./OverallTimeSpentAdaptivityNotificationViewModel";
+import OverallTimeSpentAdaptivityNotificationViewModel from "./OverallTimeSpentAdaptivityNotificationViewModel";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../Application/Ports/NotificationPort/INotificationAdapter";
 
 export default function OverallTimeSpentAdaptivityNotification() {
   const [viewModel, controller] = useBuilder<

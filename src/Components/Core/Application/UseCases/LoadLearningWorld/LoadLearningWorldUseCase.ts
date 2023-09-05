@@ -10,7 +10,7 @@ import type ILearningWorldPort from "../../Ports/Interfaces/ILearningWorldPort";
 import ILoadLearningWorldUseCase from "./ILoadLearningWorldUseCase";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
-import type IUIPort from "../../Ports/Interfaces/IUIPort";
+import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
 import LearningWorldTO from "../../DataTransferObjects/LearningWorldTO";
 import { Semaphore } from "src/Lib/Semaphore";
 import LearningWorldStatusTO from "../../DataTransferObjects/LearningWorldStatusTO";
@@ -36,8 +36,8 @@ export default class LoadLearningWorldUseCase
     private container: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter)
     private backendAdapter: IBackendPort,
-    @inject(PORT_TYPES.IUIPort)
-    private uiPort: IUIPort,
+    @inject(PORT_TYPES.INotificationPort)
+    private uiPort: INotificationPort,
     @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
     private calculateSpaceScore: IInternalCalculateLearningSpaceScoreUseCase,
     @inject(USECASE_TYPES.ISetUserLocationUseCase)

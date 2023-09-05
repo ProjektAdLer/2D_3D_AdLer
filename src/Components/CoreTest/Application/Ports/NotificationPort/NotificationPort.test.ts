@@ -1,19 +1,19 @@
-import UIPort from "../../../../Core/Application/Ports/UIPort/UIPort";
-import CoreDIContainer from "../../../../../Components/Core/DependencyInjection/CoreDIContainer";
+import NotificationPort from "../../../../Core/Application/Ports/NotificationPort/NotificationPort";
+import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import { mock } from "jest-mock-extended";
-import IUIAdapter, {
+import INotificationAdapter, {
   NotificationType,
-} from "../../../../Core/Application/Ports/UIPort/IUIAdapter";
+} from "../../../../Core/Application/Ports/NotificationPort/INotificationAdapter";
 
 describe("UIPort", () => {
-  let systemUnderTest: UIPort;
+  let systemUnderTest: NotificationPort;
 
   beforeEach(() => {
-    systemUnderTest = CoreDIContainer.resolve(UIPort);
+    systemUnderTest = CoreDIContainer.resolve(NotificationPort);
   });
 
   test("displayNotification calls a registered adapter", () => {
-    const uiAdapterMock = mock<IUIAdapter>();
+    const uiAdapterMock = mock<INotificationAdapter>();
     systemUnderTest.registerAdapter(uiAdapterMock);
 
     systemUnderTest.displayNotification(

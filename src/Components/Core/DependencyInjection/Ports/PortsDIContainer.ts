@@ -4,8 +4,8 @@ import ILearningWorldPort from "../../Application/Ports/Interfaces/ILearningWorl
 import LearningWorldPort from "../../Application/Ports/LearningWorldPort/LearningWorldPort";
 import ILMSPort from "../../Application/Ports/Interfaces/ILMSPort";
 import LMSPort from "../../Application/Ports/LMSPort/LMSPort";
-import IUIPort from "../../Application/Ports/Interfaces/IUIPort";
-import UIPort from "../../Application/Ports/UIPort/UIPort";
+import INotificationPort from "../../Application/Ports/Interfaces/INotificationPort";
+import UIPort from "../../Application/Ports/NotificationPort/NotificationPort";
 import AvatarPresenter from "../../Presentation/Babylon/Avatar/AvatarPresenter";
 import PORT_TYPES from "./PORT_TYPES";
 
@@ -20,7 +20,9 @@ const PortsDIContainer = new ContainerModule((bind) => {
     .to(AvatarPresenter)
     .inSingletonScope();
 
-  bind<IUIPort>(PORT_TYPES.IUIPort).to(UIPort).inSingletonScope();
+  bind<INotificationPort>(PORT_TYPES.INotificationPort)
+    .to(UIPort)
+    .inSingletonScope();
 });
 
 export default PortsDIContainer;
