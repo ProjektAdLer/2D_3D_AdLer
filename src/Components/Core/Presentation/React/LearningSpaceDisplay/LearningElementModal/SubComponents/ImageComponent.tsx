@@ -11,7 +11,7 @@ export default function ImageComponent({
   return (
     <div className="flex justify-center max-h-[75vh] lg:max-h-[85vh] xl:max-h-[85vh] w-fit h-fit max-w-[99vw]">
       <img
-        className="object-scale-down max-h-[93vh] w-fit max-w-[90vw] lg:max-w-[99vw]"
+        className="object-scale-down max-h-[75vh] max-w-[90vw]"
         alt="LearningImage!"
         src={imageUrl}
       ></img>
