@@ -3,6 +3,7 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import { mock } from "jest-mock-extended";
 import INotificationAdapter, {
   NotificationType,
+  OverallTimeSpentAdaptivityNotificationBreakType,
 } from "../../../../Core/Application/Ports/NotificationPort/INotificationAdapter";
 
 describe("NotificationPort", () => {
@@ -25,5 +26,17 @@ describe("NotificationPort", () => {
       "error message",
       "error" as NotificationType
     );
+  });
+
+  test("displayOverallTimeSpentAdaptivityNotification calls a registered adapter", () => {
+    const uiAdapterMock = mock<INotificationAdapter>();
+    systemUnderTest.registerAdapter(uiAdapterMock);
+    const breakType = OverallTimeSpentAdaptivityNotificationBreakType.Medium;
+
+    systemUnderTest.displayOverallTimeSpentAdaptivityNotification(breakType);
+
+    expect(
+      uiAdapterMock.displayOverallTimeSpentAdaptivityNotification
+    ).toBeCalledWith(breakType);
   });
 });
