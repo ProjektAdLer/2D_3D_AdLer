@@ -7,11 +7,11 @@ import { mock } from "jest-mock-extended";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
-import IUIPort from "../../../../Core/Application/Ports/Interfaces/IUIPort";
+import INotificationPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
 
 const backendMock = mock<IBackendPort>();
 const worldPortMock = mock<ILearningWorldPort>();
-const uiPortMock = mock<IUIPort>();
+const uiPortMock = mock<INotificationPort>();
 const entityContainerMock = mock<IEntityContainer>();
 
 describe("LoadUserWorldsUseCase", () => {
@@ -23,7 +23,9 @@ describe("LoadUserWorldsUseCase", () => {
     CoreDIContainer.rebind<IEntityContainer>(
       CORE_TYPES.IEntityContainer
     ).toConstantValue(entityContainerMock);
-    CoreDIContainer.rebind(PORT_TYPES.IUIPort).toConstantValue(uiPortMock);
+    CoreDIContainer.rebind(PORT_TYPES.INotificationPort).toConstantValue(
+      uiPortMock
+    );
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
       worldPortMock
     );

@@ -4,9 +4,8 @@ import OverallTimeSpentAdaptivityNotification from "../../../../Core/Presentatio
 import useBuilderMock from "../../React/ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import IOverallTimeSpentAdaptivityNotificationController from "../../../../Core/Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/IOverallTimeSpentAdaptivityNotificationController";
 import { mock } from "jest-mock-extended";
-import OverallTimeSpentAdaptivityNotificationViewModel, {
-  OverallTimeSpentAdaptivityNotificationBreakType,
-} from "../../../../Core/Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationViewModel";
+import OverallTimeSpentAdaptivityNotificationViewModel from "../../../../Core/Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationViewModel";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../../Core/Application/Ports/NotificationPort/INotificationAdapter";
 
 const mockController =
   mock<IOverallTimeSpentAdaptivityNotificationController>();

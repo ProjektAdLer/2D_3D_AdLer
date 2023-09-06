@@ -7,12 +7,12 @@ import { mock } from "jest-mock-extended";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 import ILMSPort from "../../../../Core/Application/Ports/Interfaces/ILMSPort";
-import IUIPort from "../../../../Core/Application/Ports/Interfaces/IUIPort";
+import INotificationPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendMock = mock<IBackendPort>();
 const lmsPortMock = mock<ILMSPort>();
-const uiPortMock = mock<IUIPort>();
+const uiPortMock = mock<INotificationPort>();
 
 describe("LoginUseCase", () => {
   let systemUnderTest: LoginUseCase;
@@ -29,9 +29,9 @@ describe("LoginUseCase", () => {
     CoreDIContainer.rebind<IEntityContainer>(
       CORE_TYPES.IEntityContainer
     ).toConstantValue(entityContainerMock);
-    CoreDIContainer.rebind<IUIPort>(PORT_TYPES.IUIPort).toConstantValue(
-      uiPortMock
-    );
+    CoreDIContainer.rebind<INotificationPort>(
+      PORT_TYPES.INotificationPort
+    ).toConstantValue(uiPortMock);
   });
 
   beforeEach(() => {
