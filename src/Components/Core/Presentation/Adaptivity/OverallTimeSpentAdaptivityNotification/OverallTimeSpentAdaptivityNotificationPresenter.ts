@@ -1,8 +1,7 @@
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationViewModel";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../Application/Ports/NotificationPort/INotificationAdapter";
 import IOverallTimeSpentAdaptivityNotificationPresenter from "./IOverallTimeSpentAdaptivityNotificationPresenter";
 import OverallTimeSpentAdaptivityNotificationViewModel from "./OverallTimeSpentAdaptivityNotificationViewModel";
 
-// TODO: connect presenter with port to open modal
 export default class OverallTimeSpentAdaptivityNotificationPresenter
   implements IOverallTimeSpentAdaptivityNotificationPresenter
 {
@@ -10,7 +9,7 @@ export default class OverallTimeSpentAdaptivityNotificationPresenter
     private viewModel: OverallTimeSpentAdaptivityNotificationViewModel
   ) {}
 
-  updateOverallTimeSpentNotification(
+  displayOverallTimeSpentAdaptivityNotification(
     type: OverallTimeSpentAdaptivityNotificationBreakType
   ): void {
     this.viewModel.breakType.Value = type;

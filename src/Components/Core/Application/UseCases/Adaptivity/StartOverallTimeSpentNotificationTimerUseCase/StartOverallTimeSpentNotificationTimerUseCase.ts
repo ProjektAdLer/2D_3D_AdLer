@@ -1,13 +1,12 @@
-import type IUIPort from "src/Components/Core/Application/Ports/Interfaces/IUIPort";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import OverallTimeSpentAdaptivityNotificationSettingsTO from "../../../DataTransferObjects/OverallTimeSpentAdaptivityNotificationSettingsTO";
 import IStartOverallTimeSpentNotificationTimerUseCase from "./IStartOverallTimeSpentNotificationTimerUseCase";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import OverallTimeSpentAdaptivityNotificationEntity from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationViewModel";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import type INotificationPort from "../../../Ports/Interfaces/INotificationPort";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../Ports/NotificationPort/INotificationAdapter";
 
 @injectable()
 export default class StartOverallTimeSpentNotificationTimerUseCase
@@ -16,8 +15,8 @@ export default class StartOverallTimeSpentNotificationTimerUseCase
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
-    @inject(PORT_TYPES.IUIPort)
-    private uiPort: IUIPort
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort
   ) {}
 
   execute(data: OverallTimeSpentAdaptivityNotificationSettingsTO) {
@@ -32,7 +31,7 @@ export default class StartOverallTimeSpentNotificationTimerUseCase
         );
         if (entity.length !== 0) {
           entity[0].notificationType = data.breakType;
-          this.uiPort.updateOverallTimeSpentNotification(
+          this.notificationPort.displayOverallTimeSpentAdaptivityNotification(
             entity[0].notificationType
           );
           console.log(entity[0].notificationType);

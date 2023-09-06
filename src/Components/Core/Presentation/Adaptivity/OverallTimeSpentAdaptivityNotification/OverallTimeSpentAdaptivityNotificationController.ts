@@ -1,12 +1,10 @@
-import OverallTimeSpentAdaptivityNotificationViewModel, {
-  OverallTimeSpentAdaptivityNotificationBreakType,
-} from "./OverallTimeSpentAdaptivityNotificationViewModel";
+import OverallTimeSpentAdaptivityNotificationViewModel from "./OverallTimeSpentAdaptivityNotificationViewModel";
 import IOverallTimeSpentAdaptivityNotificationController from "./IOverallTimeSpentAdaptivityNotificationController";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import OverallTimeSpentAdaptivityNotificationSettingsTO from "src/Components/Core/Application/DataTransferObjects/OverallTimeSpentAdaptivityNotificationSettingsTO";
-import IStartOverallTimeSpentNotificationTimerUseCase from "src/Components/Core/Application/UseCases/Adaptivity/StartOverallTimeSpentNotificationTimerUseCase/IStartOverallTimeSpentNotificationTimerUseCase";
-import IGetOverallTimeSpentNotificationTypeUseCase from "src/Components/Core/Application/UseCases/Adaptivity/GetOverallTimeSpentNotificationTypeUseCase/IGetOverallTimeSpentNotificationTypeUseCase";
+import IStartOverallTimeSpentNotificationTimerUseCase from "../../../Application/UseCases/Adaptivity/StartOverallTimeSpentNotificationTimerUseCase/IStartOverallTimeSpentNotificationTimerUseCase";
+import IGetOverallTimeSpentNotificationTypeUseCase from "../../../Application/UseCases/Adaptivity/GetOverallTimeSpentNotificationTypeUseCase/IGetOverallTimeSpentNotificationTypeUseCase";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../Application/Ports/NotificationPort/INotificationAdapter";
 
 export default class OverallTimeSpentAdaptivityNotificationController
   implements IOverallTimeSpentAdaptivityNotificationController

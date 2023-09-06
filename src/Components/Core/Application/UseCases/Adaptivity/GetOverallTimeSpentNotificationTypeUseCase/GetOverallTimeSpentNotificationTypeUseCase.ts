@@ -1,10 +1,9 @@
 import OverallTimeSpentAdaptivityNotificationEntity from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "./../../../../Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationViewModel";
 import { inject, injectable } from "inversify";
 import IGetOverallTimeSpentNotificationTypeUseCase from "./IGetOverallTimeSpentNotificationTypeUseCase";
-import OverallTimeSpentAdaptivityNotificationSettingsTO from "../../../DataTransferObjects/OverallTimeSpentAdaptivityNotificationSettingsTO";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../Ports/NotificationPort/INotificationAdapter";
 
 @injectable()
 export default class GetOverallTimeSpentNotificationTypeUseCase

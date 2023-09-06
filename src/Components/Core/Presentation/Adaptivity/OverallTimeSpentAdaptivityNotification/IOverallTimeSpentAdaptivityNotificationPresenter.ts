@@ -1,9 +1,10 @@
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "./OverallTimeSpentAdaptivityNotificationViewModel";
-import IUIAdapter from "src/Components/Core/Application/Ports/UIPort/IUIAdapter";
+import INotificationAdapter, {
+  OverallTimeSpentAdaptivityNotificationBreakType,
+} from "../../../Application/Ports/NotificationPort/INotificationAdapter";
 
 export default interface IOverallTimeSpentAdaptivityNotificationPresenter
-  extends IUIAdapter {
-  updateOverallTimeSpentNotification(
+  extends INotificationAdapter {
+  displayOverallTimeSpentAdaptivityNotification(
     type: OverallTimeSpentAdaptivityNotificationBreakType
   ): void;
 }

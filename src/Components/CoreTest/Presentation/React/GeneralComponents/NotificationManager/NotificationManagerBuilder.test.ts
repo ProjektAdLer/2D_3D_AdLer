@@ -1,11 +1,11 @@
 import { mock } from "jest-mock-extended";
-import IUIPort from "../../../../../Core/Application/Ports/Interfaces/IUIPort";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import NotificationManagerBuilder from "../../../../../Core/Presentation/React/GeneralComponents/NotificationManager/NotificationManagerBuilder";
 import NotificationManagerPresenter from "../../../../../Core/Presentation/React/GeneralComponents/NotificationManager/NotificationManagerPresenter";
+import INotificationPort from "../../../../../Core/Application/Ports/Interfaces/INotificationPort";
 
-const UIPortMock = mock<IUIPort>();
+const NotificationPortMock = mock<INotificationPort>();
 
 describe("NotificationManagerBuilder", () => {
   let systemUnderTest: NotificationManagerBuilder;
@@ -13,7 +13,9 @@ describe("NotificationManagerBuilder", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
-    CoreDIContainer.rebind(PORT_TYPES.IUIPort).toConstantValue(UIPortMock);
+    CoreDIContainer.rebind(PORT_TYPES.INotificationPort).toConstantValue(
+      NotificationPortMock
+    );
   });
 
   beforeEach(() => {
@@ -32,8 +34,8 @@ describe("NotificationManagerBuilder", () => {
     expect(systemUnderTest["presenter"]).toBeInstanceOf(
       NotificationManagerPresenter
     );
-    expect(UIPortMock.registerAdapter).toHaveBeenCalledTimes(1);
-    expect(UIPortMock.registerAdapter).toHaveBeenCalledWith(
+    expect(NotificationPortMock.registerAdapter).toHaveBeenCalledTimes(1);
+    expect(NotificationPortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"]
     );
   });

@@ -1,4 +1,4 @@
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "./../../../Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationViewModel";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../Application/Ports/NotificationPort/INotificationAdapter";
 
 export default class OverallTimeSpentAdaptivityNotificationEntity {
   id: NodeJS.Timeout;

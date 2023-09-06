@@ -15,15 +15,15 @@ import { IInternalCalculateLearningSpaceScoreUseCase } from "../../../../Core/Ap
 import LearningSpaceScoreTO from "../../../../Core/Application/DataTransferObjects/LearningSpaceScoreTO";
 import LearningWorldStatusTO from "../../../../Core/Application/DataTransferObjects/LearningWorldStatusTO";
 import ISetUserLocationUseCase from "../../../../Core/Application/UseCases/SetUserLocation/ISetUserLocationUseCase";
-import IUIPort from "../../../../Core/Application/Ports/Interfaces/IUIPort";
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 import ICalculateLearningSpaceAvailabilityUseCase from "../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
+import INotificationPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
 
 const backendMock = mock<IBackendPort>();
 const worldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
-const uiPortMock = mock<IUIPort>();
+const notificationPortMock = mock<INotificationPort>();
 const loadAvatarUsecaseMock = mock<ILoadAvatarUseCase>();
 const calculateSpaceScoreUseCaseMock =
   mock<IInternalCalculateLearningSpaceScoreUseCase>();
@@ -54,7 +54,9 @@ describe("LoadLearningWorldUseCase", () => {
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
       entityContainerMock
     );
-    CoreDIContainer.rebind(PORT_TYPES.IUIPort).toConstantValue(uiPortMock);
+    CoreDIContainer.rebind(PORT_TYPES.INotificationPort).toConstantValue(
+      notificationPortMock
+    );
     CoreDIContainer.rebind(USECASE_TYPES.ILoadAvatarUseCase).toConstantValue(
       loadAvatarUsecaseMock
     );
@@ -92,7 +94,7 @@ describe("LoadLearningWorldUseCase", () => {
       UserDataEntity
     );
 
-    expect(uiPortMock.displayNotification).toHaveBeenCalledWith(
+    expect(notificationPortMock.displayNotification).toHaveBeenCalledWith(
       "User is not logged in!",
       "error"
     );
@@ -125,7 +127,7 @@ describe("LoadLearningWorldUseCase", () => {
       UserDataEntity
     );
 
-    expect(uiPortMock.displayNotification).toHaveBeenCalledWith(
+    expect(notificationPortMock.displayNotification).toHaveBeenCalledWith(
       "User is not logged in!",
       "error"
     );
@@ -144,7 +146,7 @@ describe("LoadLearningWorldUseCase", () => {
       UserDataEntity
     );
 
-    expect(uiPortMock.displayNotification).toHaveBeenCalledWith(
+    expect(notificationPortMock.displayNotification).toHaveBeenCalledWith(
       "World is not available!",
       "error"
     );

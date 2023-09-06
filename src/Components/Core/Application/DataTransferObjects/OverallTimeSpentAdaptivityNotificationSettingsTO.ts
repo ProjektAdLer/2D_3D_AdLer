@@ -1,4 +1,4 @@
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "./../../Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationViewModel";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "../Ports/NotificationPort/INotificationAdapter";
 
 export default class OverallTimeSpentAdaptivityNotificationSettingsTO {
   // timer in minutes
