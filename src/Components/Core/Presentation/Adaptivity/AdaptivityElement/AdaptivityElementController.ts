@@ -2,7 +2,6 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import IAdaptivityElementController from "./IAdaptivityElementController";
 import ILoadQuizElementUseCase from "../../../Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/ILoadAdaptivityElementUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import IUpdateQuizElementUseCase from "../../../Application/UseCases/Adaptivity/UpdateQuizElementUseCase/IUpdateQuizElementUseCase";
 import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
 import { SubmittedAnswersTO } from "../../../Application/DataTransferObjects/QuizElementTO";
 import ISubmitAdaptivityElementSelectionUseCase from "../../../Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
@@ -36,11 +35,5 @@ export default class AdaptivityElementController
     CoreDIContainer.get<ISubmitAdaptivityElementSelectionUseCase>(
       USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
     ).executeAsync(selection);
-  }
-
-  updateAdaptivityElementDisplay(): void {
-    CoreDIContainer.get<IUpdateQuizElementUseCase>(
-      USECASE_TYPES.IUpdateQuizElementUseCase
-    ).executeAsync();
   }
 }
