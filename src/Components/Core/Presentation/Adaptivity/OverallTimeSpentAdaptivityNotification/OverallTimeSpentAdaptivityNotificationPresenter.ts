@@ -1,3 +1,4 @@
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationViewModel";
 import IOverallTimeSpentAdaptivityNotificationPresenter from "./IOverallTimeSpentAdaptivityNotificationPresenter";
 import OverallTimeSpentAdaptivityNotificationViewModel from "./OverallTimeSpentAdaptivityNotificationViewModel";
 
@@ -8,4 +9,10 @@ export default class OverallTimeSpentAdaptivityNotificationPresenter
   constructor(
     private viewModel: OverallTimeSpentAdaptivityNotificationViewModel
   ) {}
+
+  updateOverallTimeSpentNotification(
+    type: OverallTimeSpentAdaptivityNotificationBreakType
+  ): void {
+    this.viewModel.breakType.Value = type;
+  }
 }

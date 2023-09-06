@@ -3,8 +3,21 @@ import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/Menu
 import LearningSpaceDetail from "~ReactComponents/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetail";
 import LearningWorldCompletionModal from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal";
 import SpaceSelection from "~ReactComponents/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelection";
+import { useInjection } from "inversify-react";
+import IStartOverallTimeSpentNotificationTimerUseCase from "src/Components/Core/Application/UseCases/Adaptivity/StartOverallTimeSpentNotificationTimerUseCase/IStartOverallTimeSpentNotificationTimerUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationViewModel";
 
 export default function LearningSpaceMenu() {
+  const startTimerUseCase =
+    useInjection<IStartOverallTimeSpentNotificationTimerUseCase>(
+      USECASE_TYPES.IStartOverallTimeSpentNotificationTimerUseCase
+    );
+  startTimerUseCase.execute({
+    delay: 30,
+    breakType: OverallTimeSpentAdaptivityNotificationBreakType.Short,
+  });
+
   return (
     <React.Fragment>
       <div className="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden">

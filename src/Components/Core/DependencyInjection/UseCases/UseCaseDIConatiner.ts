@@ -36,6 +36,10 @@ import ILoadAdaptivityElementUseCase from "../../Application/UseCases/Adaptivity
 import LoadAdaptivityElementUseCase from "../../Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/LoadAdaptivityElementUseCase";
 import ISubmitAdaptivityElementSelectionUseCase from "../../Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
 import SubmitAdaptivityElementSelectionUseCase from "../../Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/SubmitAdaptivityElementSelectionUseCase";
+import StartOverallTimeSpentNotificationTimerUseCase from "../../Application/UseCases/Adaptivity/StartOverallTimeSpentNotificationTimerUseCase/StartOverallTimeSpentNotificationTimerUseCase";
+import IStartOverallTimeSpentNotificationTimerUseCase from "../../Application/UseCases/Adaptivity/StartOverallTimeSpentNotificationTimerUseCase/IStartOverallTimeSpentNotificationTimerUseCase";
+import IGetOverallTimeSpentNotificationTypeUseCase from "../../Application/UseCases/Adaptivity/GetOverallTimeSpentNotificationTypeUseCase/IGetOverallTimeSpentNotificationTypeUseCase";
+import GetOverallTimeSpentNotificationTypeUseCase from "../../Application/UseCases/Adaptivity/GetOverallTimeSpentNotificationTypeUseCase/GetOverallTimeSpentNotificationTypeUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -125,6 +129,18 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
   )
     .to(SubmitAdaptivityElementSelectionUseCase)
+    .inSingletonScope();
+
+  bind<IStartOverallTimeSpentNotificationTimerUseCase>(
+    USECASE_TYPES.IStartOverallTimeSpentNotificationTimerUseCase
+  )
+    .to(StartOverallTimeSpentNotificationTimerUseCase)
+    .inSingletonScope();
+
+  bind<IGetOverallTimeSpentNotificationTypeUseCase>(
+    USECASE_TYPES.IGetOverallTimeSpentNotificationTypeUseCase
+  )
+    .to(GetOverallTimeSpentNotificationTypeUseCase)
     .inSingletonScope();
 });
 

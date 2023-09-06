@@ -1,3 +1,4 @@
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "./../../../Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationViewModel";
 export type NotificationType = "error" | "notification";
 export type ErrorMessage = {
   message: string;
@@ -5,5 +6,8 @@ export type ErrorMessage = {
 };
 
 export default interface IUIAdapter {
-  displayNotification(errorMessage: string, type: NotificationType): void;
+  displayNotification?(errorMessage: string, type: NotificationType): void;
+  updateOverallTimeSpentNotification?(
+    type: OverallTimeSpentAdaptivityNotificationBreakType
+  ): void;
 }

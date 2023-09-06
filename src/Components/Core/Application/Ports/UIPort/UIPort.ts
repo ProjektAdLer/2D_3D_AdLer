@@ -1,3 +1,4 @@
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "./../../../Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationViewModel";
 import { injectable } from "inversify";
 import IUIPort from "../Interfaces/IUIPort";
 import IUIAdapter, { NotificationType } from "./IUIAdapter";
@@ -12,6 +13,15 @@ export default class UIPort
     this.adapters.forEach((adapter) => {
       if (adapter.displayNotification)
         adapter.displayNotification(errorMessage, type);
+    });
+  }
+
+  updateOverallTimeSpentNotification(
+    type: OverallTimeSpentAdaptivityNotificationBreakType
+  ): void {
+    this.adapters.forEach((adapter) => {
+      if (adapter.updateOverallTimeSpentNotification)
+        adapter.updateOverallTimeSpentNotification(type);
     });
   }
 }
