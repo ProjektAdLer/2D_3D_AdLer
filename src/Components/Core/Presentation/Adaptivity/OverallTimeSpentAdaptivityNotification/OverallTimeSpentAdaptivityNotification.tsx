@@ -5,8 +5,12 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../Application/Ports/NotificationPort/INotificationAdapter";
+import { AdLerUIComponent } from "../../../Types/ReactTypes";
+import tailwindMerge from "../../Utils/TailwindMerge";
 
-export default function OverallTimeSpentAdaptivityNotification() {
+export default function OverallTimeSpentAdaptivityNotification({
+  className,
+}: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
     OverallTimeSpentAdaptivityNotificationViewModel,
     IOverallTimeSpentAdaptivityNotificationController
@@ -21,6 +25,7 @@ export default function OverallTimeSpentAdaptivityNotification() {
 
   return (
     <StyledModal
+      className={tailwindMerge(className, "")}
       showModal={showModal}
       onClose={() => OnCloseCallback(controller, breakType)}
     >
