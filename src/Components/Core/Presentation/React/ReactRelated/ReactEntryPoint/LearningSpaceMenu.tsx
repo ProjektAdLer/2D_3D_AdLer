@@ -7,6 +7,7 @@ import { useInjection } from "inversify-react";
 import IStartOverallTimeSpentNotificationTimerUseCase from "../../../../Application/UseCases/Adaptivity/StartOverallTimeSpentNotificationTimerUseCase/IStartOverallTimeSpentNotificationTimerUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../../Application/Ports/NotificationPort/INotificationAdapter";
+import OverallTimeSpentAdaptivityNotification from "../../../Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotification";
 
 export default function LearningSpaceMenu() {
   const startTimerUseCase =
@@ -31,6 +32,7 @@ export default function LearningSpaceMenu() {
         />
       </div>
       <LearningWorldCompletionModal className="transition-opacity duration-100 ease-in delay-75" />
+      <OverallTimeSpentAdaptivityNotification />
     </React.Fragment>
   );
 }
