@@ -1,5 +1,5 @@
 export default interface IOverallTimeSpentAdaptivityNotificationController {
-  startMediumTimer(): void;
-  startLongTimer(): void;
+  closedShortBreakNotification(): void;
+  closedMediumBreakNotification(): void;
   setAvailableNotificationType(): void;
 }

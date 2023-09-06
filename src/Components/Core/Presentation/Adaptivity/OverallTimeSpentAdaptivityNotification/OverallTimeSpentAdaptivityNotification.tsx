@@ -12,16 +12,35 @@ export default function OverallTimeSpentAdaptivityNotification() {
     IOverallTimeSpentAdaptivityNotificationController
   >(BUILDER_TYPES.IOverallTimeSpentAdaptivityNotificationBuilder);
 
+  if (!viewModel || !controller) return null;
+
   const [showModal] = useObservable(viewModel?.showModal);
   const [breakType] = useObservable(viewModel?.breakType);
 
-  if (!viewModel || !controller) return null;
+  if (!showModal || !breakType) return null;
 
   return (
-    <StyledModal showModal={showModal}>
+    <StyledModal
+      showModal={showModal}
+      onClose={() => OnCloseCallback(controller, breakType)}
+    >
       {GetNotificationModalContents(breakType)}
     </StyledModal>
   );
+}
+
+function OnCloseCallback(
+  controller: IOverallTimeSpentAdaptivityNotificationController,
+  breakType: OverallTimeSpentAdaptivityNotificationBreakType
+) {
+  switch (breakType) {
+    case OverallTimeSpentAdaptivityNotificationBreakType.Short:
+      controller.closedShortBreakNotification();
+      break;
+    case OverallTimeSpentAdaptivityNotificationBreakType.Medium:
+      controller.closedMediumBreakNotification();
+      break;
+  }
 }
 
 function GetNotificationModalContents(

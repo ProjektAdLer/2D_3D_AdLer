@@ -13,7 +13,9 @@ export default class OverallTimeSpentAdaptivityNotificationController
     private viewModel: OverallTimeSpentAdaptivityNotificationViewModel
   ) {}
 
-  startMediumTimer(): void {
+  closedShortBreakNotification(): void {
+    this.viewModel.showModal.Value = false;
+
     CoreDIContainer.get<IStartOverallTimeSpentNotificationTimerUseCase>(
       USECASE_TYPES.IStartOverallTimeSpentNotificationTimerUseCase
     ).execute({
@@ -22,7 +24,9 @@ export default class OverallTimeSpentAdaptivityNotificationController
     });
   }
 
-  startLongTimer(): void {
+  closedMediumBreakNotification(): void {
+    this.viewModel.showModal.Value = false;
+
     CoreDIContainer.get<IStartOverallTimeSpentNotificationTimerUseCase>(
       USECASE_TYPES.IStartOverallTimeSpentNotificationTimerUseCase
     ).execute({
