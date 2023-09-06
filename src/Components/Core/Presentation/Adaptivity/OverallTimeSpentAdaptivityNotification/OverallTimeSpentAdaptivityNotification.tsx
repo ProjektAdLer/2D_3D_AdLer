@@ -14,7 +14,7 @@ export default function OverallTimeSpentAdaptivityNotification() {
   >(BUILDER_TYPES.IOverallTimeSpentAdaptivityNotificationBuilder);
 
   const [showModal] = useObservable(viewModel?.showModal);
-  const [breakType] = useObservable(viewModel.breakType);
+  const [breakType] = useObservable(viewModel?.breakType);
 
   if (!viewModel || !controller) return null;
 
