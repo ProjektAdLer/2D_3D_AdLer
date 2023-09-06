@@ -1,10 +1,10 @@
-import { EvaluationAnswerTO } from "../../../DataTransferObjects/QuizElementTO";
-import { inject, injectable } from "inversify";
-import ISubmitAdaptivityElementSelectionUseCase from "./ISubmitAdaptivityElementSelectionUseCase";
 import {
+  EvaluationAnswerTO,
   CorrectAnswersTO,
   SubmittedAnswersTO,
 } from "../../../DataTransferObjects/QuizElementTO";
+import { inject, injectable } from "inversify";
+import ISubmitAdaptivityElementSelectionUseCase from "./ISubmitAdaptivityElementSelectionUseCase";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import type ILoggerPort from "../../../Ports/Interfaces/ILoggerPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
