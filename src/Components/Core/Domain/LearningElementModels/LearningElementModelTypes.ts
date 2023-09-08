@@ -59,6 +59,11 @@ enum QuizElementModelTypes {
   ArcadeNPC = "a_npc_sheriffjustice",
   CampusNPC = "a_npc_dozentlukas",
 }
+enum TrophyElementModelTypes {
+  BronzeTrophy = "l_trophy_bronze",
+  SilverTrophy = "l_trophy_silver",
+  GoldTrophy = "l_trophy_gold",
+}
 
 enum NoElementModelTypes {
   None = "",
@@ -74,6 +79,7 @@ export const LearningElementModelTypeEnums = {
   // PdfElementModelTypes: PdfElementModelTypes,
   H5pElementModelTypes: H5pElementModelTypes,
   QuizElementModelTypes: QuizElementModelTypes,
+  TrophyElementModelTypes: TrophyElementModelTypes,
   NoElementModelTypes: NoElementModelTypes,
 };
 
@@ -93,4 +99,5 @@ export type LearningElementModel =
   // | PdfElementModelTypes
   | H5pElementModelTypes
   | QuizElementModelTypes
+  | TrophyElementModelTypes
   | NoElementModelTypes;
