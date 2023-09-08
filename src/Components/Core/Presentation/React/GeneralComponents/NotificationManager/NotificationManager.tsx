@@ -1,7 +1,7 @@
 import {
   ErrorMessage,
   NotificationType,
-} from "src/Components/Core/Application/Ports/UIPort/IUIAdapter";
+} from "src/Components/Core/Application/Ports/NotificationPort/INotificationAdapter";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";

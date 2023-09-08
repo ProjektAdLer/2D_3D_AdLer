@@ -28,6 +28,12 @@ const USECASE_TYPES = {
   ISubmitAdaptivityElementSelectionUseCase: Symbol(
     "ISubmitAdaptivityElementSelectionUseCase"
   ),
+  IStartOverallTimeSpentNotificationTimerUseCase: Symbol(
+    "IStartOverallTimeSpentNotificationTimerUseCase"
+  ),
+  IGetOverallTimeSpentNotificationTypeUseCase: Symbol(
+    "IGetOverallTimeSpentNotificationTypeUseCase"
+  ),
 };
 
 export default USECASE_TYPES;

@@ -7,12 +7,12 @@ import { mock } from "jest-mock-extended";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 import ILMSPort from "../../../../Core/Application/Ports/Interfaces/ILMSPort";
-import IUIPort from "../../../../Core/Application/Ports/Interfaces/IUIPort";
+import INotificationPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendMock = mock<IBackendPort>();
 const lmsPortMock = mock<ILMSPort>();
-const uiPortMock = mock<IUIPort>();
+const notificationPortMock = mock<INotificationPort>();
 
 describe("LoginUseCase", () => {
   let systemUnderTest: LoginUseCase;
@@ -29,9 +29,9 @@ describe("LoginUseCase", () => {
     CoreDIContainer.rebind<IEntityContainer>(
       CORE_TYPES.IEntityContainer
     ).toConstantValue(entityContainerMock);
-    CoreDIContainer.rebind<IUIPort>(PORT_TYPES.IUIPort).toConstantValue(
-      uiPortMock
-    );
+    CoreDIContainer.rebind<INotificationPort>(
+      PORT_TYPES.INotificationPort
+    ).toConstantValue(notificationPortMock);
   });
 
   beforeEach(() => {
@@ -59,12 +59,12 @@ describe("LoginUseCase", () => {
       expect(error).toBe("User is already logged in");
     });
 
-    expect(uiPortMock.displayNotification).toHaveBeenCalledWith(
+    expect(notificationPortMock.displayNotification).toHaveBeenCalledWith(
       expect.any(String),
       "error"
     );
 
-    uiPortMock.displayNotification.mockReset();
+    notificationPortMock.displayNotification.mockReset();
   });
 
   test("executeAsync calls the backend and stores correct user data in Enity", async () => {
@@ -106,7 +106,7 @@ describe("LoginUseCase", () => {
 
     badCall().catch((error) => {
       expect(error).toBe("Wrong Password oder Username");
-      expect(uiPortMock.displayNotification).toHaveBeenCalledWith(
+      expect(notificationPortMock.displayNotification).toHaveBeenCalledWith(
         expect.any(String),
         "error"
       );

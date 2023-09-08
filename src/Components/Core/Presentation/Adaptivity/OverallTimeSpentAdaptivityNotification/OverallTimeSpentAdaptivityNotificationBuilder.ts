@@ -5,6 +5,9 @@ import OverallTimeSpentAdaptivityNotificationPresenter from "./OverallTimeSpentA
 import IOverallTimeSpentAdaptivityNotificationController from "./IOverallTimeSpentAdaptivityNotificationController";
 import IOverallTimeSpentAdaptivityNotificationPresenter from "./IOverallTimeSpentAdaptivityNotificationPresenter";
 import OverallTimeSpentAdaptivityNotificationViewModel from "./OverallTimeSpentAdaptivityNotificationViewModel";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import INotificationPort from "src/Components/Core/Application/Ports/Interfaces/INotificationPort";
 
 @injectable()
 export default class OverallTimeSpentAdaptivityNotificationBuilder extends PresentationBuilder<
@@ -20,5 +23,13 @@ export default class OverallTimeSpentAdaptivityNotificationBuilder extends Prese
       undefined,
       OverallTimeSpentAdaptivityNotificationPresenter
     );
+  }
+
+  override buildPresenter(): void {
+    super.buildPresenter();
+
+    CoreDIContainer.get<INotificationPort>(
+      PORT_TYPES.INotificationPort
+    ).registerAdapter(this.presenter!);
   }
 }

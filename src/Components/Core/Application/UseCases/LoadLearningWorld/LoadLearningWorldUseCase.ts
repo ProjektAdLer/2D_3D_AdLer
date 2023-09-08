@@ -10,7 +10,7 @@ import type ILearningWorldPort from "../../Ports/Interfaces/ILearningWorldPort";
 import ILoadLearningWorldUseCase from "./ILoadLearningWorldUseCase";
 import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
-import type IUIPort from "../../Ports/Interfaces/IUIPort";
+import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
 import LearningWorldTO from "../../DataTransferObjects/LearningWorldTO";
 import { Semaphore } from "src/Lib/Semaphore";
 import LearningWorldStatusTO from "../../DataTransferObjects/LearningWorldStatusTO";
@@ -36,8 +36,8 @@ export default class LoadLearningWorldUseCase
     private container: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter)
     private backendAdapter: IBackendPort,
-    @inject(PORT_TYPES.IUIPort)
-    private uiPort: IUIPort,
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort,
     @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
     private calculateSpaceScore: IInternalCalculateLearningSpaceScoreUseCase,
     @inject(USECASE_TYPES.ISetUserLocationUseCase)
@@ -54,7 +54,10 @@ export default class LoadLearningWorldUseCase
     // check if user is logged in
     const userData = this.container.getEntitiesOfType(UserDataEntity);
     if (userData.length === 0 || userData[0]?.isLoggedIn === false) {
-      this.uiPort.displayNotification("User is not logged in!", "error");
+      this.notificationPort.displayNotification(
+        "User is not logged in!",
+        "error"
+      );
       this.logger.log(
         LogLevelTypes.ERROR,
         "LoadLearningWorldUseCase: User is not logged in!"
@@ -69,7 +72,10 @@ export default class LoadLearningWorldUseCase
         (world) => world.worldID === data.worldID
       ) === undefined
     ) {
-      this.uiPort.displayNotification("World is not available!", "error");
+      this.notificationPort.displayNotification(
+        "World is not available!",
+        "error"
+      );
       this.logger.log(
         LogLevelTypes.ERROR,
         "LoadLearningWorldUseCase: World is not available!"

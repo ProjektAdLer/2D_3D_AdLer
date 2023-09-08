@@ -8,7 +8,7 @@ import LearningElementController from "../../../../Core/Presentation/Babylon/Lea
 import LearningElementViewModel from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementViewModel";
 import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 
-const elementStartedUseCaseMock = mock<ILoadLearningElementUseCase>();
+const loadLearningElementUseCaseMock = mock<ILoadLearningElementUseCase>();
 const bottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
 
 describe("LearningElementController", () => {
@@ -19,7 +19,7 @@ describe("LearningElementController", () => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(
       USECASE_TYPES.ILoadLearningElementUseCase
-    ).toConstantValue(elementStartedUseCaseMock);
+    ).toConstantValue(loadLearningElementUseCaseMock);
     CoreDIContainer.bind(
       PRESENTATION_TYPES.IBottomTooltipPresenter
     ).toConstantValue(bottomTooltipPresenterMock);
@@ -34,7 +34,7 @@ describe("LearningElementController", () => {
     CoreDIContainer.restore();
   });
 
-  test("pointerOver calls IUIPort.displayElementSummaryTooltip", () => {
+  test("pointerOver calls displayElementSummaryTooltip on tooltip presenter", () => {
     systemUnderTest.pointerOver();
 
     expect(
@@ -54,7 +54,7 @@ describe("LearningElementController", () => {
     );
   });
 
-  test("pointerOut calls IUIPort.hideBottomTooltip", () => {
+  test("pointerOut calls hideBottomTooltip on tooltip presenter", () => {
     systemUnderTest.pointerOut();
 
     expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
@@ -72,7 +72,7 @@ describe("LearningElementController", () => {
     );
   });
 
-  test("picked calls IUIPort.startLoadElementUseCase", () => {
+  test("picked calls LoadLearningElementUseCase", () => {
     viewModel.id = 42;
     const mockedEvent: ActionEvent = {
       sourceEvent: {
@@ -86,7 +86,9 @@ describe("LearningElementController", () => {
 
     systemUnderTest.picked(mockedEvent);
 
-    expect(elementStartedUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
+    expect(loadLearningElementUseCaseMock.executeAsync).toHaveBeenCalledTimes(
+      1
+    );
   });
 
   test("doublePicked displays the bottom tooltip", () => {

@@ -5,7 +5,7 @@ import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import type ILMSPort from "../../Ports/Interfaces/ILMSPort";
-import type IUIPort from "../../Ports/Interfaces/IUIPort";
+import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
 import ILoginUseCase from "./ILoginUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
@@ -18,7 +18,8 @@ export default class LoginUseCase implements ILoginUseCase {
     private container: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendPort,
     @inject(PORT_TYPES.ILMSPort) private lmsPort: ILMSPort,
-    @inject(PORT_TYPES.IUIPort) private uiPort: IUIPort
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort
   ) {}
   async executeAsync(data: {
     username: string;
@@ -32,7 +33,7 @@ export default class LoginUseCase implements ILoginUseCase {
         LogLevelTypes.ERROR,
         "LoginUseCase: User tried logging into Moodle while already logged in"
       );
-      this.uiPort.displayNotification(
+      this.notificationPort.displayNotification(
         "You are already logged in to Moodle",
         "error"
       );
@@ -50,7 +51,7 @@ export default class LoginUseCase implements ILoginUseCase {
         LogLevelTypes.WARN,
         "LoginUseCase: User tried logging in with wrong Info: " + error
       );
-      this.uiPort.displayNotification("Falsche Daten!", "error");
+      this.notificationPort.displayNotification("Falsche Daten!", "error");
       return Promise.reject("Wrong Password oder Username");
     }
 

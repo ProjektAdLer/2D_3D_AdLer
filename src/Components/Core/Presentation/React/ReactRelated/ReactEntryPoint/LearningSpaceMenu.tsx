@@ -3,8 +3,22 @@ import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/Menu
 import LearningSpaceDetail from "~ReactComponents/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetail";
 import LearningWorldCompletionModal from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal";
 import SpaceSelection from "~ReactComponents/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelection";
+import { useInjection } from "inversify-react";
+import IStartOverallTimeSpentNotificationTimerUseCase from "../../../../Application/UseCases/Adaptivity/StartOverallTimeSpentNotificationTimerUseCase/IStartOverallTimeSpentNotificationTimerUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../../Application/Ports/NotificationPort/INotificationAdapter";
+import OverallTimeSpentAdaptivityNotification from "../../../Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotification";
 
 export default function LearningSpaceMenu() {
+  const startTimerUseCase =
+    useInjection<IStartOverallTimeSpentNotificationTimerUseCase>(
+      USECASE_TYPES.IStartOverallTimeSpentNotificationTimerUseCase
+    );
+  startTimerUseCase.execute({
+    delay: 30,
+    breakType: OverallTimeSpentAdaptivityNotificationBreakType.Short,
+  });
+
   return (
     <React.Fragment>
       <div className="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden">
@@ -18,6 +32,7 @@ export default function LearningSpaceMenu() {
         />
       </div>
       <LearningWorldCompletionModal className="transition-opacity duration-100 ease-in delay-75" />
+      <OverallTimeSpentAdaptivityNotification />
     </React.Fragment>
   );
 }
