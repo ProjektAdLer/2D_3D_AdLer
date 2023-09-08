@@ -4,7 +4,7 @@
 
 ## Unterstützte AdLer-Versionen
 
-- Autorentool v1.0.2
+- Autorentool v1.0.3
 - AdLer Backend v1.0.0
 
 ## Vorbedingungen

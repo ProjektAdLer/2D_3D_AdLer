@@ -34,13 +34,16 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 </details>
 
-## Version 1.3.0 - 27.08.2023
+## Version 1.3.0 - 08.09.2023
 
 ### Added
 
 - There is a new Helpdesk Panel with partially new functionalities (LogExport) and partially new icons.
 - A first version of the upcoming Adaptivity Element is now integrated.
 - Users are now redirected to Welcome (and login) Page when trying to open a menu or space while not logged in.
+- Avatar spawns in front of the entry door.
+- support for more Learning Space themes
+- trophy models
 
 ### Changed
 
@@ -48,6 +51,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - Changed the direction of menus in portrait mode from side-by-side horizontal view to vertical view.
 - Help button displaced to better position.
 - Learning Elements and Doors can now be opened via click instead of doubleclick.
+- Improved learning element modals to prevent useless scroll bars.
 
 ### Removed
 
