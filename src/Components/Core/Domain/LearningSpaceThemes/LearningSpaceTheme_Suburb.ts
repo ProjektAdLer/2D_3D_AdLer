@@ -2,8 +2,8 @@ import { LearningElementTypes } from "../Types/LearningElementTypes";
 import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
 import ILearningSpaceTheme from "./ILearningSpaceTheme";
 
-const LearningSpaceTheme_Default: ILearningSpaceTheme = {
-  name: LearningSpaceThemeType.Default,
+const LearningSpaceTheme_Suburb: ILearningSpaceTheme = {
+  name: LearningSpaceThemeType.Suburb,
   wallTexture: require("../../../../Assets/textures/defaultTheme/1Wall.jpg"),
   floorTexture: require("../../../../Assets/textures/defaultTheme/1Floor.jpg"),
   learningElementModels: {
@@ -42,4 +42,4 @@ const LearningSpaceTheme_Default: ILearningSpaceTheme = {
   windowModel: require("../../../../Assets/3dModels/defaultTheme/3DModel_Window.glb"),
 };
 
-export default LearningSpaceTheme_Default;
+export default LearningSpaceTheme_Suburb;

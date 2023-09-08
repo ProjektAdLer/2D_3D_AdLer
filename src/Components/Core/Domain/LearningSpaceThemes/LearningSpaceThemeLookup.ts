@@ -1,7 +1,7 @@
 import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
 import LearningSpaceTheme_Campus from "./LearningSpaceTheme_Campus";
 import LearningSpaceTheme_Arcade from "./LearningSpaceTheme_Arcade";
-import LearningSpaceTheme_Default from "./LearningSpaceTheme_Default";
+import LearningSpaceTheme_Suburb from "./LearningSpaceTheme_Suburb";
 
 export default class LearningSpaceThemeLookup {
   static getLearningSpaceTheme(type: LearningSpaceThemeType) {
@@ -10,8 +10,9 @@ export default class LearningSpaceThemeLookup {
         return LearningSpaceTheme_Campus;
       case LearningSpaceThemeType.Arcade:
         return LearningSpaceTheme_Arcade;
+      case LearningSpaceThemeType.Suburb:
       default:
-        return LearningSpaceTheme_Default;
+        return LearningSpaceTheme_Suburb;
 
       // TODO: add other themes here
     }
