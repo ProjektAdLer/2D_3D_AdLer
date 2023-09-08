@@ -238,7 +238,7 @@ export default class MockBackendAdapter implements IBackendPort {
           ],
           elementFileType: "text",
           elementMaxScore: 1,
-          elementModel: "l_text_bookshelf_2",
+          elementModel: "l_trophy_bronze",
         },
         {
           elementId: 2,

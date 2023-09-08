@@ -80,6 +80,13 @@ const LearningElementModelLookup: {
     .movieprojector]: require("../../../../Assets/3dModels/campusTheme/l_video_movieprojektor_1.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
     .CampusNPC]: require("../../../../Assets/3dModels/campusTheme/a_npc_dozentlukas.glb"),
+
+  [LearningElementModelTypeEnums.TrophyElementModelTypes
+    .BronzeTrophy]: require("../../../../Assets/prototype/l_trophy_bronze.glb"),
+  [LearningElementModelTypeEnums.TrophyElementModelTypes
+    .SilverTrophy]: require("../../../../Assets/prototype/l_trophy_silver.glb"),
+  [LearningElementModelTypeEnums.TrophyElementModelTypes
+    .GoldTrophy]: require("../../../../Assets/prototype/l_trophy_gold.glb"),
 };
 
 export default LearningElementModelLookup;
