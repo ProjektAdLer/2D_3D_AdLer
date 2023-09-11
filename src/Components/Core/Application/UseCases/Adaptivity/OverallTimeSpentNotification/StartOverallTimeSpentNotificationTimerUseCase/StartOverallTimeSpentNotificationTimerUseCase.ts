@@ -1,5 +1,3 @@
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "./../../../../../Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
-import OverallTimeSpentAdaptivityNotificationSettingsTO from "../../../../DataTransferObjects/OverallTimeSpentAdaptivityNotificationSettingsTO";
 import IStartOverallTimeSpentNotificationTimerUseCase from "./IStartOverallTimeSpentNotificationTimerUseCase";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
