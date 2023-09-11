@@ -31,8 +31,11 @@ const USECASE_TYPES = {
   IStartOverallTimeSpentNotificationTimerUseCase: Symbol(
     "IStartOverallTimeSpentNotificationTimerUseCase"
   ),
-  IGetOverallTimeSpentNotificationTypeUseCase: Symbol(
-    "IGetOverallTimeSpentNotificationTypeUseCase"
+  ICreateOverallTimeSpentNotificationTimerUseCase: Symbol(
+    "ICreateOverallTimeSpentNotificationTimerUseCase"
+  ),
+  IPauseOverallTimeSpentNotificationTimerUseCase: Symbol(
+    "IPauseOverallTimeSpentNotificationTimerUseCase"
   ),
 };
 

@@ -36,10 +36,12 @@ import ILoadAdaptivityElementUseCase from "../../Application/UseCases/Adaptivity
 import LoadAdaptivityElementUseCase from "../../Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/LoadAdaptivityElementUseCase";
 import ISubmitAdaptivityElementSelectionUseCase from "../../Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
 import SubmitAdaptivityElementSelectionUseCase from "../../Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/SubmitAdaptivityElementSelectionUseCase";
-import StartOverallTimeSpentNotificationTimerUseCase from "../../Application/UseCases/Adaptivity/StartOverallTimeSpentNotificationTimerUseCase/StartOverallTimeSpentNotificationTimerUseCase";
-import IStartOverallTimeSpentNotificationTimerUseCase from "../../Application/UseCases/Adaptivity/StartOverallTimeSpentNotificationTimerUseCase/IStartOverallTimeSpentNotificationTimerUseCase";
-import IGetOverallTimeSpentNotificationTypeUseCase from "../../Application/UseCases/Adaptivity/GetOverallTimeSpentNotificationTypeUseCase/IGetOverallTimeSpentNotificationTypeUseCase";
-import GetOverallTimeSpentNotificationTypeUseCase from "../../Application/UseCases/Adaptivity/GetOverallTimeSpentNotificationTypeUseCase/GetOverallTimeSpentNotificationTypeUseCase";
+import StartOverallTimeSpentNotificationTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpentNotification/StartOverallTimeSpentNotificationTimerUseCase/StartOverallTimeSpentNotificationTimerUseCase";
+import IStartOverallTimeSpentNotificationTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpentNotification/StartOverallTimeSpentNotificationTimerUseCase/IStartOverallTimeSpentNotificationTimerUseCase";
+import ICreateOverallTimeSpentNotificationTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpentNotification/CreateOverallTimeSpentNotificationTimerUseCase/ICreateOverallTimeSpentNotificationTimerUseCase";
+import CreateOverallTimeSpentNotificationUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpentNotification/CreateOverallTimeSpentNotificationTimerUseCase/CreateOverallTimeSpentNotificationTimerUseCase";
+import IPauseOverallTimeSpentNotificationTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpentNotification/PauseOverallTimeSpentNotificationTimerUseCase/IPauseOverallTimeSpentNotificationTimerUseCase";
+import PauseOverallTimeSpentNotificationTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpentNotification/PauseOverallTimeSpentNotificationTimerUseCase/PauseOverallTimeSpentNotificationTimerUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -137,10 +139,16 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(StartOverallTimeSpentNotificationTimerUseCase)
     .inSingletonScope();
 
-  bind<IGetOverallTimeSpentNotificationTypeUseCase>(
-    USECASE_TYPES.IGetOverallTimeSpentNotificationTypeUseCase
+  bind<ICreateOverallTimeSpentNotificationTimerUseCase>(
+    USECASE_TYPES.ICreateOverallTimeSpentNotificationTimerUseCase
   )
-    .to(GetOverallTimeSpentNotificationTypeUseCase)
+    .to(CreateOverallTimeSpentNotificationUseCase)
+    .inSingletonScope();
+
+  bind<IPauseOverallTimeSpentNotificationTimerUseCase>(
+    USECASE_TYPES.IPauseOverallTimeSpentNotificationTimerUseCase
+  )
+    .to(PauseOverallTimeSpentNotificationTimerUseCase)
     .inSingletonScope();
 });
 

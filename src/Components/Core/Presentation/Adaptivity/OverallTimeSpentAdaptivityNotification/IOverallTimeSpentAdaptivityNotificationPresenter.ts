@@ -1,6 +1,5 @@
-import INotificationAdapter, {
-  OverallTimeSpentAdaptivityNotificationBreakType,
-} from "../../../Application/Ports/NotificationPort/INotificationAdapter";
+import INotificationAdapter from "../../../Application/Ports/NotificationPort/INotificationAdapter";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
 
 export default interface IOverallTimeSpentAdaptivityNotificationPresenter
   extends INotificationAdapter {

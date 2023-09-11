@@ -1,5 +1,5 @@
 import Observable from "../../../../../Lib/Observable";
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../Application/Ports/NotificationPort/INotificationAdapter";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
 
 export default class OverallTimeSpentAdaptivityNotificationViewModel {
   showModal: Observable<boolean> = new Observable<boolean>(false);

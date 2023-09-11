@@ -4,7 +4,7 @@ import OverallTimeSpentAdaptivityNotificationViewModel from "./OverallTimeSpentA
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../Application/Ports/NotificationPort/INotificationAdapter";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
 import { AdLerUIComponent } from "../../../Types/ReactTypes";
 import tailwindMerge from "../../Utils/TailwindMerge";
 
@@ -25,25 +25,11 @@ export default function OverallTimeSpentAdaptivityNotification({
     <StyledModal
       className={tailwindMerge(className, "")}
       showModal={showModal}
-      onClose={() => OnCloseCallback(controller, breakType)}
+      onClose={() => controller.closeBreakNotification()}
     >
       {GetNotificationModalContents(breakType)}
     </StyledModal>
   );
-}
-
-function OnCloseCallback(
-  controller: IOverallTimeSpentAdaptivityNotificationController,
-  breakType: OverallTimeSpentAdaptivityNotificationBreakType
-) {
-  switch (breakType) {
-    case OverallTimeSpentAdaptivityNotificationBreakType.Short:
-      controller.closedShortBreakNotification();
-      break;
-    case OverallTimeSpentAdaptivityNotificationBreakType.Medium:
-      controller.closedMediumBreakNotification();
-      break;
-  }
 }
 
 function GetNotificationModalContents(
@@ -83,7 +69,7 @@ function MediumBreakContent() {
 function LongBreakContent() {
   return (
     <div data-testid="long-break">
-      <p>Du bist seit 2 Stunden am arbeiten.</p>
+      <p>Du bist seit 3 Stunden am arbeiten.</p>
       <p>Mach doch erstmal etwas komplett anderes!</p>
     </div>
   );

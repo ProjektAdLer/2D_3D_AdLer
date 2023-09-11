@@ -1,4 +1,4 @@
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../../Core/Application/Ports/NotificationPort/INotificationAdapter";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "./../../../../Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
 import OverallTimeSpentAdaptivityNotificationPresenter from "../../../../Core/Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationPresenter";
 import OverallTimeSpentAdaptivityNotificationViewModel from "../../../../Core/Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationViewModel";
 

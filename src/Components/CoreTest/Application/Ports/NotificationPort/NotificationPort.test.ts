@@ -3,8 +3,8 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import { mock } from "jest-mock-extended";
 import INotificationAdapter, {
   NotificationType,
-  OverallTimeSpentAdaptivityNotificationBreakType,
 } from "../../../../Core/Application/Ports/NotificationPort/INotificationAdapter";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../../Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
 
 describe("NotificationPort", () => {
   let systemUnderTest: NotificationPort;

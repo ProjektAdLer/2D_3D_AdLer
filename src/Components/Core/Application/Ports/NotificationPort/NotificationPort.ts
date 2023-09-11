@@ -1,10 +1,8 @@
 import { injectable } from "inversify";
 import INotificationPort from "../Interfaces/INotificationPort";
-import INotificationAdapter, {
-  NotificationType,
-  OverallTimeSpentAdaptivityNotificationBreakType,
-} from "./INotificationAdapter";
+import INotificationAdapter, { NotificationType } from "./INotificationAdapter";
 import AbstractPort from "../AbstractPort/AbstractPort";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
 
 @injectable()
 export default class NotificationPort

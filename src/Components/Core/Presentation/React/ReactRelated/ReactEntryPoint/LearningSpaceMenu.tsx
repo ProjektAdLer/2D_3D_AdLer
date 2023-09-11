@@ -1,23 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBar";
 import LearningSpaceDetail from "~ReactComponents/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetail";
 import LearningWorldCompletionModal from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal";
 import SpaceSelection from "~ReactComponents/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelection";
 import { useInjection } from "inversify-react";
-import IStartOverallTimeSpentNotificationTimerUseCase from "../../../../Application/UseCases/Adaptivity/StartOverallTimeSpentNotificationTimerUseCase/IStartOverallTimeSpentNotificationTimerUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../../Application/Ports/NotificationPort/INotificationAdapter";
 import OverallTimeSpentAdaptivityNotification from "../../../Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotification";
+import ICreateOverallTimeSpentNotificationTimerUseCase from "src/Components/Core/Application/UseCases/Adaptivity/OverallTimeSpentNotification/CreateOverallTimeSpentNotificationTimerUseCase/ICreateOverallTimeSpentNotificationTimerUseCase";
+import IStartOverallTimeSpentNotificationTimerUseCase from "src/Components/Core/Application/UseCases/Adaptivity/OverallTimeSpentNotification/StartOverallTimeSpentNotificationTimerUseCase/IStartOverallTimeSpentNotificationTimerUseCase";
 
 export default function LearningSpaceMenu() {
-  const startTimerUseCase =
-    useInjection<IStartOverallTimeSpentNotificationTimerUseCase>(
-      USECASE_TYPES.IStartOverallTimeSpentNotificationTimerUseCase
+  const createTimerUseCase =
+    useInjection<ICreateOverallTimeSpentNotificationTimerUseCase>(
+      USECASE_TYPES.ICreateOverallTimeSpentNotificationTimerUseCase
     );
-  startTimerUseCase.execute({
-    delay: 30,
-    breakType: OverallTimeSpentAdaptivityNotificationBreakType.Short,
-  });
+
+  useEffect(() => {
+    createTimerUseCase.execute();
+  }, [createTimerUseCase]);
 
   return (
     <React.Fragment>
