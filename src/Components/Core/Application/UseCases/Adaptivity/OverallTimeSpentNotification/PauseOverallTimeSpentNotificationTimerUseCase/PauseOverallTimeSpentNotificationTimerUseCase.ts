@@ -22,7 +22,6 @@ export default class PauseOverallTimeSpentNotificationTimerUseCase
     const timerEntity = this.container.getEntitiesOfType(
       OverallTimeSpentAdaptivityNotificationEntity
     );
-    console.log("PAUSE:", timerEntity[0].notificationType, " Timer", Date());
 
     switch (timerEntity[0].notificationType) {
       case OverallTimeSpentAdaptivityNotificationBreakType.Short:
