@@ -3,6 +3,7 @@ import AmbienceBuilder from "../../../../Core/Presentation/Babylon/Ambience/Ambi
 import AmbienceView from "../../../../Core/Presentation/Babylon/Ambience/AmbienceView";
 import PresentationBuilder from "../../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
 import { waitFor } from "@testing-library/react";
+import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 
 jest.mock("../../../../Core/Presentation/Babylon/Ambience/AmbienceView");
 
@@ -15,6 +16,16 @@ describe("AmbienceBuilder", () => {
 
   test("constructor", () => {
     expect(systemUnderTest).toBeInstanceOf(PresentationBuilder);
+  });
+
+  test("buildViewModel sets the theme in the view model", () => {
+    systemUnderTest.theme = LearningSpaceThemeType.Arcade;
+
+    systemUnderTest.buildViewModel();
+
+    expect(systemUnderTest["viewModel"]?.theme).toBe(
+      LearningSpaceThemeType.Arcade
+    );
   });
 
   test("buildView resolves isCompleted promise when the asyncSetup of the view resolves", async () => {

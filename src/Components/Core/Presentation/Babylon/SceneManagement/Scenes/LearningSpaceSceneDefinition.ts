@@ -19,13 +19,13 @@ import type IPresentationBuilder from "../../../PresentationBuilder/IPresentatio
 import type INavigation from "../../Navigation/INavigation";
 import AvatarCameraViewModel from "../../AvatarCamera/AvatarCameraViewModel";
 import type IGetUserLocationUseCase from "src/Components/Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
-import type IAsyncPresentationBuilder from "../../../PresentationBuilder/IAsyncPresentationBuilder";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import ILearningWorldAdapter from "src/Components/Core/Application/Ports/LearningWorldPort/ILearningWorldAdapter";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import type ILearningSpaceBuilder from "../../LearningSpaces/ILearningSpaceBuilder";
 import type IAvatarBuilder from "../../Avatar/IAvatarBuilder";
+import type { IAmbienceBuilder } from "../../Ambience/IAmbienceBuilder";
 
 @injectable()
 export default class LearningSpaceSceneDefinition
@@ -53,7 +53,7 @@ export default class LearningSpaceSceneDefinition
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
     @inject(BUILDER_TYPES.IAmbienceBuilder)
-    private ambienceBuilder: IAsyncPresentationBuilder,
+    private ambienceBuilder: IAmbienceBuilder,
     @inject(PORT_TYPES.ILearningWorldPort)
     private learningWorldPort: ILearningWorldPort
   ) {
@@ -74,6 +74,7 @@ export default class LearningSpaceSceneDefinition
     this.highlightLayer.blurVerticalSize = 1;
 
     // create space ambience
+    this.ambienceBuilder.theme = this.spaceData?.theme;
     const ambienceCompleted = this.director.buildAsync(this.ambienceBuilder);
 
     // create space

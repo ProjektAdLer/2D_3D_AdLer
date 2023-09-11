@@ -5,6 +5,7 @@ import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES
 import AmbienceView from "../../../../Core/Presentation/Babylon/Ambience/AmbienceView";
 import AmbienceViewModel from "../../../../Core/Presentation/Babylon/Ambience/AmbienceViewModel";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
+import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -44,7 +45,9 @@ describe("AmbienceView", () => {
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
-    const [, systemUnderTest] = buildSystemUnderTest();
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Arcade;
+
     await systemUnderTest.asyncSetup();
 
     expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);

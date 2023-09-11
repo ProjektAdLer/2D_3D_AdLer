@@ -41,6 +41,7 @@ const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
   entryDoorModel: require("../../../../Assets/3dModels/arcadeTheme/3DModel_Door.glb"),
   exitDoorModel: require("../../../../Assets/3dModels/arcadeTheme/3DModel_ExitDoor.glb"),
   windowModel: require("../../../../Assets/3dModels/arcadeTheme/3DModel_Window.glb"),
+  ambienceModel: require("../../../../Assets/prototype/Lernraumumgebung_Prototype.glb"),
 };
 
 export default LearningSpaceTheme_Arcade;

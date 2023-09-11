@@ -6,7 +6,7 @@ import SCENE_TYPES, {
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import { Mesh, Vector3 } from "@babylonjs/core";
-const modelLink = require("../../../../../Assets/prototype/Lernraumumgebung_Prototype.glb");
+import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
 
 export default class AmbienceView {
   private scenePresenter: IScenePresenter;
@@ -19,7 +19,9 @@ export default class AmbienceView {
   }
 
   public async asyncSetup(): Promise<void> {
-    const results = await this.scenePresenter.loadModel(modelLink);
+    const results = await this.scenePresenter.loadModel(
+      this.getModelLinkByTheme()
+    );
 
     this.viewModel.meshes.Value = results as Mesh[];
     this.viewModel.meshes.Value.forEach((mesh) => {
@@ -27,5 +29,12 @@ export default class AmbienceView {
       mesh.alwaysSelectAsActiveMesh = true; //Fixes Background Animations being Culled, but may cause Performance Issues, Fix with Changing Camera Rotation Frustum
       mesh.isPickable = false;
     });
+  }
+
+  private getModelLinkByTheme(): string {
+    const themeConfig = LearningSpaceThemeLookup.getLearningSpaceTheme(
+      this.viewModel.theme
+    );
+    return themeConfig.ambienceModel;
   }
 }

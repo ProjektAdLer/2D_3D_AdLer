@@ -14,4 +14,5 @@ export default interface ILearningSpaceTheme {
   readonly entryDoorModel: string;
   readonly exitDoorModel: string;
   readonly windowModel: string;
+  readonly ambienceModel: string;
 }
