@@ -2,9 +2,7 @@ import { mock } from "jest-mock-extended";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
 import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
-import ICalculateLearningSpaceScoreUseCase, {
-  IInternalCalculateLearningSpaceScoreUseCase,
-} from "../../../../Core/Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
+import { IInternalCalculateLearningSpaceScoreUseCase } from "../../../../Core/Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import { XAPIEvent } from "../../../../Core/Application/UseCases/ScoreH5PLearningElement/IScoreH5PLearningElementUseCase";
 import ScoreH5PLearningElementUseCase from "../../../../Core/Application/UseCases/ScoreH5PLearningElement/ScoreH5PLearningElementUseCase";
@@ -18,6 +16,7 @@ import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import Logger from "../../../../Core/Adapters/Logger/Logger";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
+import { IInternalCalculateLearningWorldScoreUseCase } from "../../../../Core/Application/UseCases/CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
 
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 
@@ -71,6 +70,8 @@ const backendAdapterMock = mock<IBackendPort>();
 const worldPortMock = mock<ILearningWorldPort>();
 const calculateSpaceScoreUseCaseMock =
   mock<IInternalCalculateLearningSpaceScoreUseCase>();
+const calculateWorldScoreUseCaseMock =
+  mock<IInternalCalculateLearningWorldScoreUseCase>();
 
 const executeAsyncParams = {
   xapiData: {} as XAPIEvent,
@@ -96,6 +97,9 @@ describe("ScoreH5PLearningElementUseCase", () => {
     CoreDIContainer.rebind(
       USECASE_TYPES.ICalculateLearningSpaceScoreUseCase
     ).toConstantValue(calculateSpaceScoreUseCaseMock);
+    CoreDIContainer.rebind(
+      USECASE_TYPES.ICalculateLearningWorldScoreUseCase
+    ).toConstantValue(calculateWorldScoreUseCaseMock);
     CoreDIContainer.rebind(
       USECASE_TYPES.IGetUserLocationUseCase
     ).toConstantValue(getUserLocationUseCaseMock);

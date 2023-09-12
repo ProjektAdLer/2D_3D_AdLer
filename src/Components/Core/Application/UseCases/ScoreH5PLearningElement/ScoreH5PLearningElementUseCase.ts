@@ -16,6 +16,7 @@ import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLe
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import type { IInternalCalculateLearningWorldScoreUseCase } from "../CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
 
 @injectable()
 export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
@@ -29,6 +30,8 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
     private worldPort: ILearningWorldPort,
     @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
     private calculateSpaceScoreUseCase: IInternalCalculateLearningSpaceScoreUseCase,
+    @inject(USECASE_TYPES.ICalculateLearningWorldScoreUseCase)
+    private calculateWorldScoreUseCase: IInternalCalculateLearningWorldScoreUseCase,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
@@ -97,12 +100,17 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
 
       element.hasScored = true;
 
-      this.calculateSpaceScoreUseCase.internalExecute({
-        spaceID: userLocation.spaceID,
+      const newWorldScore = this.calculateWorldScoreUseCase.internalExecute({
         worldID: userLocation.worldID,
+      });
+      const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
+        worldID: userLocation.worldID,
+        spaceID: userLocation.spaceID,
       });
 
       this.worldPort.onLearningElementScored(true, data.elementID);
+      this.worldPort.onLearningSpaceScored(newSpaceScore);
+      this.worldPort.onLearningWorldScored(newWorldScore);
     }
 
     return Promise.resolve(scoredSuccessful);
