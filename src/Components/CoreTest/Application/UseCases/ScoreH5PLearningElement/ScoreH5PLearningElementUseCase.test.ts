@@ -17,6 +17,7 @@ import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityCon
 import Logger from "../../../../Core/Adapters/Logger/Logger";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 import { IInternalCalculateLearningWorldScoreUseCase } from "../../../../Core/Application/UseCases/CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
+import { error } from "console";
 
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 
@@ -113,6 +114,12 @@ describe("ScoreH5PLearningElementUseCase", () => {
 
   afterAll(() => {
     CoreDIContainer.restore();
+  });
+
+  test("executeAsync should reject if data is undefined", async () => {
+    await expect(
+      systemUnderTest.executeAsync({ xapiData: undefined as any, elementID: 1 })
+    ).rejects.toContain("data is (atleast partly) undefined");
   });
 
   test("executeAsync should resolves to true with correct params", async () => {
@@ -252,6 +259,24 @@ describe("ScoreH5PLearningElementUseCase", () => {
     await expect(
       systemUnderTest.executeAsync(executeAsyncParams)
     ).rejects.toContain("User is not logged in");
+  });
+
+  test("executeAsync rejects if user is not in a space", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: undefined,
+      worldID: 1,
+    } as UserLocationTO);
+    setupEntityContainerMock(
+      [userEntityMock],
+      [elementEntityMock],
+      [spaceEntityMock]
+    );
+
+    try {
+      await systemUnderTest.executeAsync(executeAsyncParams);
+    } catch (e) {
+      expect(e.message).toBe("User is not in a space!");
+    }
   });
 
   test("executeAsync rejects if EntityContainer returns no matching element entity", async () => {
