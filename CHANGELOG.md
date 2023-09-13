@@ -26,7 +26,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
--
+- bug that preventted update of score panel when scoring h5p elements
 
 ### Security
 
