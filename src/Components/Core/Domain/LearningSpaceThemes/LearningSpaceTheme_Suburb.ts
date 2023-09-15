@@ -4,43 +4,43 @@ import ILearningSpaceTheme from "./ILearningSpaceTheme";
 
 const LearningSpaceTheme_Suburb: ILearningSpaceTheme = {
   name: LearningSpaceThemeType.Suburb,
-  wallTexture: require("../../../../Assets/textures/defaultTheme/1Wall.jpg"),
-  floorTexture: require("../../../../Assets/textures/defaultTheme/1Floor.jpg"),
+  wallTexture: require("../../../../Assets/textures/suburbTheme/1Wall.jpg"),
+  floorTexture: require("../../../../Assets/textures/suburbTheme/1Floor.jpg"),
   learningElementModels: {
     [LearningElementTypes.h5p]: [
-      require("../../../../Assets/3dModels/defaultTheme/l_h5p_blackboard_1.glb"),
-      require("../../../../Assets/3dModels/defaultTheme/l_h5p_deskpc_1.glb"),
-      require("../../../../Assets/3dModels/defaultTheme/l_h5p_drawingtable_1.glb"),
-      require("../../../../Assets/3dModels/defaultTheme/l_h5p_slotmachine_1.glb"),
+      require("../../../../Assets/3dModels/suburbTheme/l_h5p_blackboard_1.glb"),
+      require("../../../../Assets/3dModels/suburbTheme/l_h5p_deskpc_1.glb"),
+      require("../../../../Assets/3dModels/suburbTheme/l_h5p_drawingtable_1.glb"),
+      require("../../../../Assets/3dModels/suburbTheme/l_h5p_slotmachine_1.glb"),
     ],
     [LearningElementTypes.text]: [
-      require("../../../../Assets/3dModels/defaultTheme/l_text_bookshelf_1.glb"),
+      require("../../../../Assets/3dModels/suburbTheme/l_text_bookshelf_1.glb"),
     ],
     [LearningElementTypes.image]: [
-      require("../../../../Assets/3dModels/defaultTheme/l_image_painting_1.glb"),
-      require("../../../../Assets/3dModels/defaultTheme/l_image_painting_2.glb"),
-      require("../../../../Assets/3dModels/defaultTheme/l_image_paintingeasel_1.glb"),
+      require("../../../../Assets/3dModels/suburbTheme/l_image_painting_1.glb"),
+      require("../../../../Assets/3dModels/suburbTheme/l_image_painting_2.glb"),
+      require("../../../../Assets/3dModels/suburbTheme/l_image_paintingeasel_1.glb"),
     ],
     [LearningElementTypes.video]: [
-      require("../../../../Assets/3dModels/defaultTheme/l_video_television_1.glb"),
+      require("../../../../Assets/3dModels/suburbTheme/l_video_television_1.glb"),
     ],
     [LearningElementTypes.pdf]: [
-      require("../../../../Assets/3dModels/defaultTheme/l_text_bookshelf_2.glb"),
+      require("../../../../Assets/3dModels/suburbTheme/l_text_bookshelf_2.glb"),
     ],
     [LearningElementTypes.quiz]: [
-      require("../../../../Assets/3dModels/defaultTheme/a_npc_defaultnpc.glb"),
+      require("../../../../Assets/3dModels/suburbTheme/a_npc_defaultnpc.glb"),
     ],
     [LearningElementTypes.notAnElement]: [],
   },
   standinDecorationModels: [
-    require("../../../../Assets/3dModels/defaultTheme/d_dcomp_dinnertable_1.glb"),
-    require("../../../../Assets/3dModels/defaultTheme/d_dcomp_desk_1.glb"),
-    require("../../../../Assets/3dModels/defaultTheme/d_dcomp_sideboardbookshelf_1.glb"),
+    require("../../../../Assets/3dModels/suburbTheme/d_dcomp_dinnertable_1.glb"),
+    require("../../../../Assets/3dModels/suburbTheme/d_dcomp_desk_1.glb"),
+    require("../../../../Assets/3dModels/suburbTheme/d_dcomp_sideboardbookshelf_1.glb"),
   ],
-  entryDoorModel: require("../../../../Assets/3dModels/defaultTheme/3DModel_Door.glb"),
-  exitDoorModel: require("../../../../Assets/3dModels/defaultTheme/3DModel_ExitDoor.glb"),
-  windowModel: require("../../../../Assets/3dModels/defaultTheme/3DModel_Window.glb"),
-  ambienceModel: require("../../../../Assets/prototype/Lernraumumgebung_Prototype.glb"),
+  entryDoorModel: require("../../../../Assets/3dModels/suburbTheme/3DModel_Door.glb"),
+  exitDoorModel: require("../../../../Assets/3dModels/suburbTheme/3DModel_ExitDoor.glb"),
+  windowModel: require("../../../../Assets/3dModels/suburbTheme/3DModel_Window.glb"),
+  ambienceModel: require("../../../../Assets/3dModels/suburbTheme/env_suburb.glb"),
 };
 
 export default LearningSpaceTheme_Suburb;

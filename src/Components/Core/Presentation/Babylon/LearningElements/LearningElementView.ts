@@ -25,12 +25,12 @@ import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceTh
 import LearningElementModelLookup from "src/Components/Core/Domain/LearningElementModels/LearningElementModelLookup";
 
 const iconLinks: { [key in LearningElementTypes]?: any } = {
-  [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/campusTheme/l-icons-h5p-1.glb"),
-  [LearningElementTypes.text]: require("../../../../../Assets/3dModels/campusTheme/l-icons-text-1.glb"),
-  [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/campusTheme/l-icons-text-1.glb"),
-  [LearningElementTypes.image]: require("../../../../../Assets/3dModels/campusTheme/l-icons-image-1.glb"),
-  [LearningElementTypes.video]: require("../../../../../Assets/3dModels/campusTheme/l-icons-video-1.glb"),
-  [LearningElementTypes.quiz]: require("../../../../../Assets/3dModels/campusTheme/l-icons-quiz-1.glb"),
+  [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb"),
+  [LearningElementTypes.text]: require("../../../../../Assets/3dModels/sharedModels/l-icons-text-1.glb"),
+  [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/sharedModels/l-icons-text-1.glb"),
+  [LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/l-icons-image-1.glb"),
+  [LearningElementTypes.video]: require("../../../../../Assets/3dModels/sharedModels/l-icons-video-1.glb"),
+  [LearningElementTypes.quiz]: require("../../../../../Assets/3dModels/sharedModels/l-icons-quiz-1.glb"),
   [LearningElementTypes.notAnElement]: [],
 };
 

@@ -30,7 +30,7 @@ enum VideoElementModelTypes {
   //arcade
   vrdesk = "l_video_vrdesk_1",
   //campus
-  movieprojector = "l_video_movieprojektor_1",
+  movieprojector = "l_video_movieprojector_1",
 }
 
 // enum PdfElementModelTypes {}

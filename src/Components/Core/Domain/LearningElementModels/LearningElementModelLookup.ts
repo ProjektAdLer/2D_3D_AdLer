@@ -9,29 +9,29 @@ import {
 const LearningElementModelLookup: {
   [key in LearningElementModel]?: any;
 } = {
-  //DefaultTheme
+  //suburbTheme
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .Blackboard]: require("../../../../Assets/3dModels/defaultTheme/l_h5p_blackboard_1.glb"),
+    .Blackboard]: require("../../../../Assets/3dModels/suburbTheme/l_h5p_blackboard_1.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .DeskPC1]: require("../../../../Assets/3dModels/defaultTheme/l_h5p_deskpc_1.glb"),
+    .DeskPC1]: require("../../../../Assets/3dModels/suburbTheme/l_h5p_deskpc_1.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .DrawingTable]: require("../../../../Assets/3dModels/defaultTheme/l_h5p_drawingtable_1.glb"),
+    .DrawingTable]: require("../../../../Assets/3dModels/suburbTheme/l_h5p_drawingtable_1.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .SlotMachine]: require("../../../../Assets/3dModels/defaultTheme/l_h5p_slotmachine_1.glb"),
+    .SlotMachine]: require("../../../../Assets/3dModels/suburbTheme/l_h5p_slotmachine_1.glb"),
   [LearningElementModelTypeEnums.TextElementModelTypes
-    .Bookshelf1]: require("../../../../Assets/3dModels/defaultTheme/l_text_bookshelf_1.glb"),
+    .Bookshelf1]: require("../../../../Assets/3dModels/suburbTheme/l_text_bookshelf_1.glb"),
   [LearningElementModelTypeEnums.TextElementModelTypes
-    .Bookshelf2]: require("../../../../Assets/3dModels/defaultTheme/l_text_bookshelf_2.glb"),
+    .Bookshelf2]: require("../../../../Assets/3dModels/suburbTheme/l_text_bookshelf_2.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .Painting1]: require("../../../../Assets/3dModels/defaultTheme/l_image_painting_1.glb"),
+    .Painting1]: require("../../../../Assets/3dModels/suburbTheme/l_image_painting_1.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .Painting2]: require("../../../../Assets/3dModels/defaultTheme/l_image_painting_2.glb"),
+    .Painting2]: require("../../../../Assets/3dModels/suburbTheme/l_image_painting_2.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .PaintingEasel]: require("../../../../Assets/3dModels/defaultTheme/l_image_paintingeasel_1.glb"),
+    .PaintingEasel]: require("../../../../Assets/3dModels/suburbTheme/l_image_paintingeasel_1.glb"),
   [LearningElementModelTypeEnums.VideoElementModelTypes
-    .Television]: require("../../../../Assets/3dModels/defaultTheme/l_video_television_1.glb"),
+    .Television]: require("../../../../Assets/3dModels/suburbTheme/l_video_television_1.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
-    .DefaultNPC]: require("../../../../Assets/3dModels/defaultTheme/a_npc_defaultnpc.glb"),
+    .DefaultNPC]: require("../../../../Assets/3dModels/suburbTheme/a_npc_defaultnpc.glb"),
 
   //ArcadeTheme
   [LearningElementModelTypeEnums.H5pElementModelTypes
@@ -77,7 +77,7 @@ const LearningElementModelLookup: {
   [LearningElementModelTypeEnums.ImageElementModelTypes
     .sciencewhiteboard]: require("../../../../Assets/3dModels/campusTheme/l_image_sciencewhiteboard_1.glb"),
   [LearningElementModelTypeEnums.VideoElementModelTypes
-    .movieprojector]: require("../../../../Assets/3dModels/campusTheme/l_video_movieprojektor_1.glb"),
+    .movieprojector]: require("../../../../Assets/3dModels/campusTheme/l_video_movieprojector_1.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
     .CampusNPC]: require("../../../../Assets/3dModels/campusTheme/a_npc_dozentlukas.glb"),
 
