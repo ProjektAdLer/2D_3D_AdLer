@@ -40,7 +40,7 @@ const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
   entryDoorModel: require("../../../../Assets/3dModels/campusTheme/3DModel_Door.glb"),
   exitDoorModel: require("../../../../Assets/3dModels/campusTheme/3DModel_ExitDoor.glb"),
   windowModel: require("../../../../Assets/3dModels/campusTheme/3DModel_Window.glb"),
-  ambienceModel: require("../../../../Assets/3dModels/campusTheme/campus.glb"),
+  ambienceModel: require("../../../../Assets/3dModels/campusTheme/env_campus.glb"),
 };
 
 export default LearningSpaceTheme_Campus;
