@@ -1,5 +1,5 @@
 import BackendAdapterUtils from "../../../Core/Adapters/BackendAdapter/BackendAdapterUtils";
-import { APISpace } from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
+import { APISpace } from "../../../Core/Adapters/BackendAdapter/Types/AWT";
 import BackendElementTO from "../../../Core/Application/DataTransferObjects/BackendElementTO";
 import { LearningElementModelTypeEnums } from "../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 

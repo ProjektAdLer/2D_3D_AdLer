@@ -3,7 +3,7 @@ import {
   expectedElementTO,
   expectedSpaceTO,
   expectedWorldTO,
-  mockDSL,
+  mockAWT,
 } from "./BackendResponses";
 import { config } from "../../../../config";
 import BackendAdapter from "../../../Core/Adapters/BackendAdapter/BackendAdapter";
@@ -37,11 +37,11 @@ describe("BackendAdapter", () => {
     config.serverURL = oldConfigServerURL;
   });
 
-  test("getWorldData calls backend to get DSL file", async () => {
+  test("getWorldData calls backend to get AWT file", async () => {
     const userToken = "testToken";
     const worldID = 1337;
 
-    mockedAxios.get.mockResolvedValue({ data: mockDSL });
+    mockedAxios.get.mockResolvedValue({ data: mockAWT });
 
     await systemUnderTest.getWorldData({
       userToken: userToken,
@@ -56,8 +56,8 @@ describe("BackendAdapter", () => {
     });
   });
 
-  test("getWorldData converts DSL to TOs", async () => {
-    mockedAxios.get.mockResolvedValue({ data: mockDSL });
+  test("getWorldData converts AWT to TOs", async () => {
+    mockedAxios.get.mockResolvedValue({ data: mockAWT });
 
     const result = await systemUnderTest.getWorldData({
       userToken: "",
@@ -74,17 +74,17 @@ describe("BackendAdapter", () => {
       });
     });
 
-    // check that the result has the same amount of learning rooms as the DSL
-    expect(result.spaces).toHaveLength(mockDSL.world.spaces.length);
+    // check that the result has the same amount of learning rooms as the AWT
+    expect(result.spaces).toHaveLength(mockAWT.world.spaces.length);
 
     result.spaces?.forEach((space, index) => {
       // check that the results learning rooms have
-      // the same amount of learning elements as in the DSL
-      // 4: Are the 4 Basic learning elements in the DSL
+      // the same amount of learning elements as in the AWT
+      // 4: Are the 4 Basic learning elements in the AWT
       expect(space.elements).toHaveLength(1);
     });
 
-    // TODO: add further comparisons between mockDSL and created TOs
+    // TODO: add further comparisons between mockAWT and created TOs
     // eg. check that the learning elements have the correct type/metadata
   });
 

@@ -1,5 +1,5 @@
 import LearningElementTO from "../../../Core/Application/DataTransferObjects/LearningElementTO";
-import IDSL from "../../../Core/Adapters/BackendAdapter/Types/IDSL";
+import AWT from "../../../Core/Adapters/BackendAdapter/Types/AWT";
 import BackendWorldTO from "../../../Core/Application/DataTransferObjects/BackendWorldTO";
 import BackendSpaceTO from "../../../Core/Application/DataTransferObjects/BackendSpaceTO";
 import BackendElementTO from "../../../Core/Application/DataTransferObjects/BackendElementTO";
@@ -69,7 +69,7 @@ export const expectedElementTO: Partial<LearningElementTO> = {
   model: expect.any(String),
 };
 
-export const mockDSL: IDSL = {
+export const mockAWT: AWT = {
   fileVersion: "0.3",
   amgVersion: "0.3.2",
   author: "wAuthors",

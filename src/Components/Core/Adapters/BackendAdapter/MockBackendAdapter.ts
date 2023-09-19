@@ -11,7 +11,7 @@ import IBackendPort, {
   ScoreH5PElementParams,
   UserCredentialParams,
 } from "../../Application/Ports/Interfaces/IBackendPort";
-import IDSL from "./Types/IDSL";
+import AWT from "./Types/AWT";
 import LearningWorldStatusTO from "../../Application/DataTransferObjects/LearningWorldStatusTO";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ILoggerPort from "../../Application/Ports/Interfaces/ILoggerPort";
@@ -184,7 +184,7 @@ export default class MockBackendAdapter implements IBackendPort {
     worldID,
   }: GetWorldDataParams): Promise<BackendWorldTO> {
     return Promise.resolve(
-      BackendAdapterUtils.parseDSL(
+      BackendAdapterUtils.parseAWT(
         worldID === 1
           ? this.smallWorld
           : worldID === 2
@@ -194,7 +194,7 @@ export default class MockBackendAdapter implements IBackendPort {
     );
   }
 
-  smallWorld: IDSL = {
+  smallWorld: AWT = {
     fileVersion: "0.4",
     amgVersion: "1.0",
     author: "Ricardo",
@@ -281,6 +281,74 @@ export default class MockBackendAdapter implements IBackendPort {
           elementFileType: "text",
           elementMaxScore: 1,
           elementModel: "",
+          adaptivityElement: {
+            adaptivityIntroText: "Hier wird das Adaptivitätselement erklärt",
+            shuffleTasks: false,
+            adaptivityTasks: [
+              {
+                adaptivityTaskId: 1,
+                adaptivityTaskTitle: "Aufgabe 1 - Geografie",
+                adaptivityTaskOptional: false,
+                requiredDifficulty: 100,
+                adaptivityQuestions: [
+                  {
+                    questionType: "singleResponse",
+                    questionId: 1,
+                    questionDifficulty: 100,
+                    questionText: "Welches Land grenzt nicht an Deutschland?",
+                    questionAnswers: [
+                      {
+                        answerIndex: 1,
+                        answerText: "Dänemark",
+                      },
+                      {
+                        answerIndex: 2,
+                        answerText: "Norwegen",
+                      },
+                      {
+                        answerIndex: 3,
+                        answerText: "Polen",
+                      },
+                      {
+                        answerIndex: 4,
+                        answerText: "Tschechien",
+                      },
+                    ],
+                    adaptivityRules: [
+                      {
+                        triggerId: 1,
+                        triggerType: "correctnessTrigger",
+                        triggerCondition: "correct",
+                        triggerAction: {
+                          actionType: "CommentAction",
+                          actionData:
+                            "Das war leider falsch, versuch es doch nochmal",
+                        },
+                      },
+                      {
+                        triggerId: 2,
+                        triggerType: "correctnessTrigger",
+                        triggerCondition: "incorrect",
+                        triggerAction: {
+                          actionType: "CommentAction",
+                          actionData: "Das war richtig. Gut gemacht!",
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        },
+        {
+          elementId: 999,
+          elementName: "Ein externes Lernelement",
+          elementCategory: "externalText",
+          elementDescription: "Beschreibung des externen Lernelemenets",
+          elementFileType: "text",
+          elementMaxScore: 0,
+          elementModel: "l_h5p_blackboard_1",
         },
         {
           elementId: 5,
@@ -314,7 +382,7 @@ export default class MockBackendAdapter implements IBackendPort {
     },
   };
 
-  bigWorld: IDSL = {
+  bigWorld: AWT = {
     fileVersion: "0.3",
     amgVersion: "0.3.2",
     author: "Au Thor",
@@ -476,7 +544,7 @@ export default class MockBackendAdapter implements IBackendPort {
       ],
     },
   };
-  newWorld: IDSL = {
+  newWorld: AWT = {
     fileVersion: "0.4",
     amgVersion: "1.0.0",
     author: "Paul Erhard",

@@ -8,29 +8,29 @@ import {
 import { LearningElementTypes } from "../../Domain/Types/LearningElementTypes";
 import { LearningSpaceTemplateType } from "../../Domain/Types/LearningSpaceTemplateType";
 import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
-import IDSL, { APIElement, APISpace } from "./Types/IDSL";
+import AWT, { APIElement, APISpace } from "./Types/AWT";
 
 /**
  * This class contains static utility functions for the BackendAdapters
  */
 export default class BackendAdapterUtils {
-  public static parseDSL(dsl: IDSL): BackendWorldTO {
-    const elements: BackendElementTO[] = this.mapElements(dsl.world.elements);
+  public static parseAWT(awt: AWT): BackendWorldTO {
+    const elements: BackendElementTO[] = this.mapElements(awt.world.elements);
 
-    const spaces: BackendSpaceTO[] = this.mapSpaces(dsl.world.spaces, elements);
+    const spaces: BackendSpaceTO[] = this.mapSpaces(awt.world.spaces, elements);
 
     const response: BackendWorldTO = {
-      worldName: dsl.world.worldName,
-      goals: dsl.world.worldGoals ?? [""],
+      worldName: awt.world.worldName,
+      goals: awt.world.worldGoals ?? [""],
       spaces: spaces,
-      description: dsl.world.worldDescription ?? "",
-      evaluationLink: dsl.world.evaluationLink ?? "",
+      description: awt.world.worldDescription ?? "",
+      evaluationLink: awt.world.evaluationLink ?? "",
     };
 
     return response;
   }
 
-  // maps the spaces from the DSL to BackendSpaceTOs and connects them with their elements
+  // maps the spaces from the AWT to BackendSpaceTOs and connects them with their elements
   private static mapSpaces(
     spaces: APISpace[],
     elements: BackendElementTO[]
@@ -78,7 +78,7 @@ export default class BackendAdapterUtils {
     });
   }
 
-  // creates BackendElementTOs from the DSL if the element type is supported
+  // creates BackendElementTOs from the AWT if the element type is supported
   private static mapElements(elements: APIElement[]): BackendElementTO[] {
     return elements.flatMap((element) => {
       if (element.elementCategory in LearningElementTypes) {

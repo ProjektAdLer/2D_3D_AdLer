@@ -1,7 +1,7 @@
 import axios from "axios";
 import { injectable } from "inversify";
 import { config } from "../../../../config";
-import IDSL from "./Types/IDSL";
+import AWT from "./Types/AWT";
 import IBackendPort, {
   ElementDataParams,
   GetWorldDataParams,
@@ -186,13 +186,13 @@ export default class BackendAdapter implements IBackendPort {
     userToken,
     worldID,
   }: GetWorldDataParams): Promise<BackendWorldTO> {
-    const response = await axios.get<IDSL>("/Worlds/" + worldID, {
+    const response = await axios.get<AWT>("/Worlds/" + worldID, {
       headers: {
         token: userToken,
       },
     });
 
-    return BackendAdapterUtils.parseDSL(response.data);
+    return BackendAdapterUtils.parseAWT(response.data);
   }
 
   async getCoursesAvailableForUser(userToken: string) {
