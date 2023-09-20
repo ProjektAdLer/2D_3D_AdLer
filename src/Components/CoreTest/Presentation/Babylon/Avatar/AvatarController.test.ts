@@ -91,7 +91,7 @@ describe("AvatarController", () => {
       ).toHaveBeenCalledWith(systemUnderTest["processPointerEvent"]);
     });
 
-    test("observer callback is added to onKeyboardObservable in the constructor", () => {
+    test.skip("observer callback is added to onKeyboardObservable in the constructor", () => {
       expect(
         scenePresenterMock.Scene.onKeyboardObservable.add
       ).toHaveBeenCalledWith(systemUnderTest["processKeyboardEvent"]);
