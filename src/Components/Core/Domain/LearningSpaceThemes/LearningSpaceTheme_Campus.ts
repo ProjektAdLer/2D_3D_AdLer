@@ -22,7 +22,7 @@ const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
       require("../../../../Assets/3dModels/campusTheme/l_image_sciencewhiteboard_1.glb"),
     ],
     [LearningElementTypes.video]: [
-      require("../../../../Assets/3dModels/campusTheme/l_video_movieprojektor_1.glb"),
+      require("../../../../Assets/3dModels/campusTheme/l_video_movieprojector_1.glb"),
     ],
     [LearningElementTypes.pdf]: [
       require("../../../../Assets/3dModels/campusTheme/l_text_libraryshelf_1.glb"),
@@ -40,7 +40,7 @@ const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
   entryDoorModel: require("../../../../Assets/3dModels/campusTheme/3DModel_Door.glb"),
   exitDoorModel: require("../../../../Assets/3dModels/campusTheme/3DModel_ExitDoor.glb"),
   windowModel: require("../../../../Assets/3dModels/campusTheme/3DModel_Window.glb"),
-  ambienceModel: require("../../../../Assets/prototype/Lernraumumgebung_Prototype.glb"),
+  ambienceModel: require("../../../../Assets/3dModels/campusTheme/env_campus.glb"),
 };
 
 export default LearningSpaceTheme_Campus;
