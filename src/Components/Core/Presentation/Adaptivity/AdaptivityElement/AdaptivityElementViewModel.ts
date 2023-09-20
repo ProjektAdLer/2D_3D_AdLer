@@ -4,28 +4,35 @@ import { StyledButtonColor } from "~ReactComponents/ReactRelated/ReactBaseCompon
 export class QuizAnswer {
   answerIndex: number;
   answerText: string;
-  answerImage?: string;
   isSelected: boolean;
 }
 
 export class AdaptivityQuestion {
   questionID: number;
   questionText: string;
-  questionImage?: string;
   questionPoints: number;
-  //adaptivityData: AdaptivityData[];
   questionAnswers: QuizAnswer[];
 }
 
-export class AdaptivityContent {
+export class AdaptivityTask {
+  taskID: number;
+  taskTitle: string;
   questions: AdaptivityQuestion[];
 }
 
+export class AdaptivityElementContent {
+  elementName: string;
+  introText: string;
+  tasks: AdaptivityTask[];
+}
+
 export default class AdaptivityElementViewModel {
+  isOpen: Observable<boolean> = new Observable<boolean>(false);
+  contentData: Observable<AdaptivityElementContent> =
+    new Observable<AdaptivityElementContent>();
+
   isFinished: Observable<boolean> = new Observable<boolean>(false);
   currentElement: Observable<AdaptivityQuestion> =
     new Observable<AdaptivityQuestion>();
-  contentData: Observable<AdaptivityContent> =
-    new Observable<AdaptivityContent>();
   evaluation = new Observable<Map<number, StyledButtonColor>>();
 }

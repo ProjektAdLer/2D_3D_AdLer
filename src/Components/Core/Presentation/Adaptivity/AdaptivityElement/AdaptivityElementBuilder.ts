@@ -8,8 +8,6 @@ import ILearningWorldPort from "../../../Application/Ports/Interfaces/ILearningW
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import IAdaptivityElementController from "./IAdaptivityElementController";
 import AdaptivityElementController from "./AdaptivityElementController";
-import ViewModelControllerProvider from "../../ViewModelProvider/ViewModelControllerProvider";
-import CORE_TYPES from "~DependencyInjection/CoreTypes";
 
 @injectable()
 export default class AdaptivityElementBuilder extends PresentationBuilder<
@@ -24,21 +22,6 @@ export default class AdaptivityElementBuilder extends PresentationBuilder<
       AdaptivityElementController,
       undefined,
       AdaptivityElementPresenter
-    );
-  }
-
-  override buildViewModel(): void {
-    super.buildViewModel();
-  }
-
-  override buildController(): void {
-    super.buildController();
-    CoreDIContainer.get<ViewModelControllerProvider>(
-      CORE_TYPES.IViewModelControllerProvider
-    ).registerTupel(
-      this.viewModel,
-      this.controller,
-      AdaptivityElementViewModel
     );
   }
 

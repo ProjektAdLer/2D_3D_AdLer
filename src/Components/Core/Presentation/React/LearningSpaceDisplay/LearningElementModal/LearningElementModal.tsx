@@ -34,8 +34,6 @@ const createModalContent = (
       );
     case LearningElementTypes.pdf:
       return <PDFComponent viewModel={viewModel} />;
-    case LearningElementTypes.quiz:
-      return <AdaptivityElement />;
     default:
       return <div>No Element selected</div>;
   }
@@ -56,25 +54,16 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
     image: "max-h-[90vh]",
     video: "",
     h5p: "",
-    quiz: "",
   };
 
-  const modalType = viewModel.type.Value as
-    | "text"
-    | "image"
-    | "video"
-    | "h5p"
-    | "quiz";
+  const modalType = viewModel.type.Value as "text" | "image" | "video" | "h5p";
 
   return (
     <StyledModal
       title={viewModel.name.Value}
       onClose={() => {
         setOpen(false);
-        if (
-          viewModel.type?.Value !== "h5p" &&
-          viewModel.type?.Value !== "quiz"
-        ) {
+        if (viewModel.type?.Value !== "h5p") {
           controller.scoreLearningElement();
         }
       }}

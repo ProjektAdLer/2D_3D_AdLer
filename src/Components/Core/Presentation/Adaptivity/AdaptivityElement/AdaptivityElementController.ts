@@ -5,11 +5,17 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
 import { SubmittedAnswersTO } from "../../../Application/DataTransferObjects/QuizElementTO";
 import ISubmitAdaptivityElementSelectionUseCase from "../../../Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
+import bind from "bind-decorator";
 
 export default class AdaptivityElementController
   implements IAdaptivityElementController
 {
   constructor(private viewModel: AdaptivityElementViewModel) {}
+
+  @bind
+  closeModal(): void {
+    this.viewModel.isOpen.Value = false;
+  }
 
   loadAdaptivityElement(): void {
     CoreDIContainer.get<ILoadQuizElementUseCase>(

@@ -8,12 +8,14 @@ import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
 import IAdaptivityElementController from "./IAdaptivityElementController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import quizBackgroundVRGuy from "../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
+import { AdLerUIComponent } from "../../../Types/ReactTypes";
+import tailwindMerge from "../../Utils/TailwindMerge";
 
 function toggledColor(color: StyledButtonColor) {
   return color === "highlight" ? "default" : "highlight";
 }
 
-export default function AdaptivityElement() {
+export default function AdaptivityElement({ className }: AdLerUIComponent) {
   const [viewmodel, controller] = useBuilder<
     AdaptivityElementViewModel,
     IAdaptivityElementController
@@ -164,8 +166,6 @@ export default function AdaptivityElement() {
     return null;
   }
 
-  let settings: string = "box-border flex flex-col items-start";
-
   function displayImageNPC() {
     return (
       <img
@@ -179,7 +179,12 @@ export default function AdaptivityElement() {
   return (
     <>
       {displayImageNPC()}
-      <main className={settings}>
+      <main
+        className={tailwindMerge(
+          className,
+          "box-border flex flex-col items-start"
+        )}
+      >
         <p className="text-sm font-bold lg:text-lg">{displayQuestion()}</p>
         <section className="flex p-4 pl-0 m-auto">
           <div className="flex flex-wrap justify-start gap-3 p-4">
