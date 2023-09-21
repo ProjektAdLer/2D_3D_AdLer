@@ -4,8 +4,8 @@ import ILearningSpaceTheme from "./ILearningSpaceTheme";
 
 const LearningSpaceTheme_Suburb: ILearningSpaceTheme = {
   name: LearningSpaceThemeType.Suburb,
-  wallTexture: require("../../../../Assets/textures/suburbTheme/1Wall.jpg"),
-  floorTexture: require("../../../../Assets/textures/suburbTheme/1Floor.jpg"),
+  wallTexture: require("../../../../Assets/textures/suburbTheme/m_wall_roughbricks_1.jpg"),
+  floorTexture: require("../../../../Assets/textures/suburbTheme/m_floor_woodboards_1.jpg"),
   learningElementModels: {
     [LearningElementTypes.h5p]: [
       require("../../../../Assets/3dModels/suburbTheme/l_h5p_blackboard_1.glb"),
