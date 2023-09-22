@@ -1,5 +1,7 @@
 import LearningElementEntity from "../LearningElementEntity";
 
-export default class AdaptivityElementEntity extends LearningElementEntity {
-  text: string = "Hello";
+export default class AdaptivityElementEntity {
+  element: LearningElementEntity;
+  introText: string;
+  // tasks
 }

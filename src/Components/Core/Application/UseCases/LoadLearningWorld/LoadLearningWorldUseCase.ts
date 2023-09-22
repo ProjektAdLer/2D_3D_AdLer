@@ -22,6 +22,7 @@ import BackendElementTO from "../../DataTransferObjects/BackendElementTO";
 import type ICalculateLearningSpaceAvailabilityUseCase from "../CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import AdaptivityElementEntity from "src/Components/Core/Domain/Entities/Adaptivity/AdaptivityElementEntity";
 
 @injectable()
 export default class LoadLearningWorldUseCase
@@ -234,9 +235,29 @@ export default class LoadLearningWorldUseCase
         LearningElementEntity
       );
 
+      if (newElementEntity.type === "quiz") {
+        if (element.adaptivity === undefined) {
+          this.logger.log(
+            LogLevelTypes.ERROR,
+            "LoadLearningWorldUseCase: No Adaptivity-Data found!"
+          );
+        } else {
+          this.createAdaptivityElementEntity(newElementEntity);
+        }
+      }
+
       return newElementEntity;
     });
   };
+
+  private createAdaptivityElementEntity(element: LearningElementEntity) {
+    let adaptivityElement = new AdaptivityElementEntity();
+    adaptivityElement.element = element;
+    this.container.createEntity<AdaptivityElementEntity>(
+      adaptivityElement,
+      AdaptivityElementEntity
+    );
+  }
 
   private createLearningWorldEntity(
     worldID: number,

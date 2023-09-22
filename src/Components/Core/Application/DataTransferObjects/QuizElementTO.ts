@@ -49,23 +49,16 @@ export class AdaptivityData {
   result: AdaptivityResponse;
 }
 
-export class AdaptivityQuestionTO {
+export class TOAdaptivityQuestionTO {
   questionID: number;
   questionTitle?: string;
   questionText: string;
   questionImage?: string;
   questionPoints: number;
-  //adaptivityData: AdaptivityData[];
   questionAnswers: AnswerTO[];
 }
 
 export class AdaptivityContentsTO {
   shuffleQuestions: boolean;
-  questions: AdaptivityQuestionTO[];
+  questions: TOAdaptivityQuestionTO[];
 }
-
-// export default class QuizElementTO {
-//   isSingleChoice: boolean;
-//   question: string;
-//   answerOptions: string[];
-// }

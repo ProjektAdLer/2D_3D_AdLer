@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import ILoadAdaptivityElementUseCase from "./ILoadAdaptivityElementUseCase";
 import {
   AdaptivityContentsTO,
-  AdaptivityQuestionTO,
+  TOAdaptivityQuestionTO,
   AnswerTO,
 } from "../../../DataTransferObjects/QuizElementTO";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
@@ -18,7 +18,7 @@ export function generateAdaptivityContentsTO(): AdaptivityContentsTO {
   contents.questions = [];
 
   for (let k = 1; k < 4; k++) {
-    const question = new AdaptivityQuestionTO();
+    const question = new TOAdaptivityQuestionTO();
     question.questionAnswers = [];
     question.questionPoints = 1;
 

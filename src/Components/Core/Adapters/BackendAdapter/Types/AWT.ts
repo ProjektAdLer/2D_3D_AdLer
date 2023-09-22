@@ -47,19 +47,19 @@ export interface APIElement {
   elementFileType: string;
   elementMaxScore: number;
   elementModel: string;
-  adaptivityElement?: APIAdaptivity;
+  adaptivityContent?: APIAdaptivity;
 }
 
 export interface APIAdaptivity {
-  adaptivityIntroText: string;
+  introText: string;
   shuffleTasks: boolean;
   adaptivityTasks: APIAdaptivityTask[];
 }
 
 export interface APIAdaptivityTask {
-  adaptivityTaskId: number;
-  adaptivityTaskTitle: string;
-  adaptivityTaskOptional: boolean;
+  taskId: number;
+  taskTitle: string;
+  optional: boolean;
   requiredDifficulty: number;
   adaptivityQuestions: APIAdaptivityQuestion[];
 }
@@ -69,26 +69,24 @@ export interface APIAdaptivityQuestion {
   questionId: number;
   questionDifficulty: number;
   questionText: string;
-  questionAnswers: APIAdaptivityAnswers[];
+  possibleAnswers: APIAdaptivityAnswers[];
   adaptivityRules: APIAdaptivityTrigger[];
 }
 
 export interface APIAdaptivityAnswers {
-  answerIndex: number;
   answerText?: string;
   answerImage?: string;
 }
 
 export interface APIAdaptivityTrigger {
   triggerId: number;
-  triggerType: string;
   triggerCondition: string;
-  triggerAction: APIAdaptivityAction;
+  adaptivityAction: APIAdaptivityAction;
 }
 
 export interface APIAdaptivityAction {
-  actionType: string;
-  actionData: string | number;
+  commentText?: string;
+  elementId?: number;
 }
 
 export default AWT;

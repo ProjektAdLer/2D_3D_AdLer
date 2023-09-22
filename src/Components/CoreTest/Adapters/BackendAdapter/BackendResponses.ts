@@ -59,7 +59,7 @@ export const expectedSpaceTO: BackendSpaceTO = {
   templateStyle: expect.any(String),
 };
 
-export const expectedElementTO: Partial<LearningElementTO> = {
+export const expectedElementTO: BackendElementTO = {
   id: expect.any(Number),
   name: expect.any(String),
   value: expect.any(Number),

@@ -1,6 +1,7 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import { LearningElementModel } from "../../Domain/LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypeStrings } from "../../Domain/Types/LearningElementTypes";
+import { AdaptivityDataTO } from "./AdaptivityDataTO";
 
 export default class BackendElementTO {
   id: ComponentID;
@@ -10,4 +11,5 @@ export default class BackendElementTO {
   goals: string[];
   type: LearningElementTypeStrings;
   model: LearningElementModel;
+  adaptivity?: AdaptivityDataTO;
 }

@@ -281,14 +281,14 @@ export default class MockBackendAdapter implements IBackendPort {
           elementFileType: "text",
           elementMaxScore: 1,
           elementModel: "",
-          adaptivityElement: {
-            adaptivityIntroText: "Hier wird das Adaptivitätselement erklärt",
+          adaptivityContent: {
+            introText: "Hier wird das Adaptivitätselement erklärt",
             shuffleTasks: false,
             adaptivityTasks: [
               {
-                adaptivityTaskId: 1,
-                adaptivityTaskTitle: "Aufgabe 1 - Geografie",
-                adaptivityTaskOptional: false,
+                taskId: 1,
+                taskTitle: "Aufgabe 1 - Geografie",
+                optional: false,
                 requiredDifficulty: 100,
                 adaptivityQuestions: [
                   {
@@ -296,43 +296,77 @@ export default class MockBackendAdapter implements IBackendPort {
                     questionId: 1,
                     questionDifficulty: 100,
                     questionText: "Welches Land grenzt nicht an Deutschland?",
-                    questionAnswers: [
-                      {
-                        answerIndex: 1,
-                        answerText: "Dänemark",
-                      },
-                      {
-                        answerIndex: 2,
-                        answerText: "Norwegen",
-                      },
-                      {
-                        answerIndex: 3,
-                        answerText: "Polen",
-                      },
-                      {
-                        answerIndex: 4,
-                        answerText: "Tschechien",
-                      },
-                    ],
                     adaptivityRules: [
                       {
                         triggerId: 1,
-                        triggerType: "correctnessTrigger",
                         triggerCondition: "correct",
-                        triggerAction: {
-                          actionType: "CommentAction",
-                          actionData:
-                            "Das war leider falsch, versuch es doch nochmal",
+                        adaptivityAction: {
+                          commentText: "Das war richtig. Gut gemacht!",
                         },
                       },
                       {
                         triggerId: 2,
-                        triggerType: "correctnessTrigger",
                         triggerCondition: "incorrect",
-                        triggerAction: {
-                          actionType: "CommentAction",
-                          actionData: "Das war richtig. Gut gemacht!",
+                        adaptivityAction: {
+                          commentText:
+                            "Das war leider falsch, versuch es doch nochmal",
                         },
+                      },
+                    ],
+                    possibleAnswers: [
+                      {
+                        answerText: "Dänemark",
+                      },
+                      {
+                        answerText: "Norwegen",
+                      },
+                      {
+                        answerText: "Polen",
+                      },
+                      {
+                        answerText: "Tschechien",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                taskId: 2,
+                taskTitle: "Aufgabe 2 - Mathematik",
+                optional: true,
+                requiredDifficulty: 0,
+                adaptivityQuestions: [
+                  {
+                    questionType: "multipleResponse",
+                    questionId: 1,
+                    questionDifficulty: 0,
+                    questionText: "Welche Zahlen sind Primzahlen?",
+                    adaptivityRules: [
+                      {
+                        triggerId: 1,
+                        triggerCondition: "correct",
+                        adaptivityAction: {
+                          commentText: "Das war richtig. Gut gemacht!",
+                        },
+                      },
+                      {
+                        triggerId: 2,
+                        triggerCondition: "incorrect",
+                        adaptivityAction: {
+                          commentText:
+                            "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
+                        },
+                      },
+                    ],
+                    possibleAnswers: [
+                      {
+                        answerText: "2",
+                      },
+                      {
+                        answerText: "3",
+                      },
+                      {
+                        answerText: "14",
                       },
                     ],
                   },

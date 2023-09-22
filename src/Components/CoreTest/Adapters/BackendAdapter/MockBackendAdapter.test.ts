@@ -9,6 +9,7 @@ import {
   expectedSpaceTO,
   expectedWorldTO,
 } from "./BackendResponses";
+import { AdaptivityDataTO } from "../../../Core/Application/DataTransferObjects/AdaptivityDataTO";
 
 const oldConfigValue = config.useFakeBackend;
 
@@ -39,7 +40,11 @@ describe("MockBackendAdapter", () => {
       expect(space).toEqual(expectedSpaceTO);
 
       space.elements?.forEach((element) => {
-        expect(element).toBeNullOrEqual(expectedElementTO);
+        if (element?.adaptivity === undefined) {
+          expect(element).toBeNullOrEqual(expectedElementTO);
+        } else {
+          expect(element.adaptivity).toEqual(expect.any(AdaptivityDataTO));
+        }
       });
     });
   });
