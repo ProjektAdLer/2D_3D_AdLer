@@ -10,6 +10,7 @@ import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "../../../../Types/ReactTypes";
 
 import quizBackgroundVRGuy from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
+import AdaptivityElementTaskSelection from "./AdaptivityElementTaskSelection";
 
 export default function AdaptivityElementDialogContainer({
   className,
@@ -20,13 +21,13 @@ export default function AdaptivityElementDialogContainer({
   >(BUILDER_TYPES.IAdaptivityElementBuilder);
 
   const [isOpen] = useObservable<boolean>(viewmodel?.isOpen);
+  const [contentData] = useObservable(viewmodel?.contentData);
 
   // TODO: remove DEBUG data
-  const [title] = useState("Hier entsteht ein Adaptivitätselement!");
   const [footer] = useState("Adaptivitätselement");
 
   if (!viewmodel || !controller) return null;
-  if (!isOpen) return null;
+  if (!isOpen || !contentData) return null;
 
   return (
     <>
@@ -39,7 +40,7 @@ export default function AdaptivityElementDialogContainer({
         <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center h-full">
           <div className="p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-auto">
             <div className="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit">
-              <div className="w-full">{title}</div>
+              <div className="w-full">{contentData.elementName}</div>
 
               <StyledButton
                 onClick={controller.closeModal}
@@ -49,7 +50,9 @@ export default function AdaptivityElementDialogContainer({
               </StyledButton>
             </div>
 
-            <div className="px-1 rounded-lg font-regular h-fit">{}</div>
+            <div className="px-1 rounded-lg font-regular h-fit">
+              <AdaptivityElementTaskSelection tasks={contentData.tasks} />
+            </div>
 
             {
               <div className="modal-footer">

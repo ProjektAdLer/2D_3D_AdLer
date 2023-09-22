@@ -16,6 +16,7 @@ export default class AdaptivityElementPresenter
   constructor(private viewModel: AdaptivityElementViewModel) {}
 
   onAdaptivityElementLoaded(contentTO: AdaptivityContentsTO): void {
+    /*
     // TODO: remove this placeholder data when TO is updated
     const tasks: AdaptivityTask[] = [
       {
@@ -55,6 +56,7 @@ export default class AdaptivityElementPresenter
 
     this.viewModel.currentElement.Value =
       this.viewModel.contentData.Value.tasks[0].questions[0];
+      */
 
     this.viewModel.isOpen.Value = true;
   }
