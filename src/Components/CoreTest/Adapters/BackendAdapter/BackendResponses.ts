@@ -1,4 +1,3 @@
-import LearningElementTO from "../../../Core/Application/DataTransferObjects/LearningElementTO";
 import AWT from "../../../Core/Adapters/BackendAdapter/Types/AWT";
 import BackendWorldTO from "../../../Core/Application/DataTransferObjects/BackendWorldTO";
 import BackendSpaceTO from "../../../Core/Application/DataTransferObjects/BackendSpaceTO";
