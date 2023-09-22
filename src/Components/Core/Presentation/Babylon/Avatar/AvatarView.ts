@@ -35,7 +35,7 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 
-const modelLink = require("../../../../../Assets/3dModels/campusTheme/3DModel_Avatar_male.glb");
+const modelLink = require("../../../../../Assets/3dModels/sharedModels/3DModel_Avatar_male.glb");
 
 export default class AvatarView {
   private scenePresenter: IScenePresenter;

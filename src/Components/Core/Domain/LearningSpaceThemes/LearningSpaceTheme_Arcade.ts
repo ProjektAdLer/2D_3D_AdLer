@@ -4,8 +4,8 @@ import ILearningSpaceTheme from "./ILearningSpaceTheme";
 
 const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
   name: LearningSpaceThemeType.Arcade,
-  wallTexture: require("../../../../Assets/textures/arcadeTheme/1Wall.jpg"),
-  floorTexture: require("../../../../Assets/textures/arcadeTheme/1Floor.jpg"),
+  wallTexture: require("../../../../Assets/textures/arcadeTheme/m_wall_bricks_1.jpg"),
+  floorTexture: require("../../../../Assets/textures/arcadeTheme/m_floor_bluecarpet_1.jpg"),
   learningElementModels: {
     [LearningElementTypes.h5p]: [
       require("../../../../Assets/3dModels/arcadeTheme/l_h5p_greyslotmachine_1.glb"),
@@ -41,7 +41,7 @@ const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
   entryDoorModel: require("../../../../Assets/3dModels/arcadeTheme/3DModel_Door.glb"),
   exitDoorModel: require("../../../../Assets/3dModels/arcadeTheme/3DModel_ExitDoor.glb"),
   windowModel: require("../../../../Assets/3dModels/arcadeTheme/3DModel_Window.glb"),
-  ambienceModel: require("../../../../Assets/prototype/Lernraumumgebung_Prototype.glb"),
+  ambienceModel: require("../../../../Assets/3dModels/arcadeTheme/env_arcade.glb"),
 };
 
 export default LearningSpaceTheme_Arcade;

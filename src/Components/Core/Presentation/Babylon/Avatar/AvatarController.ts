@@ -41,9 +41,9 @@ export default class AvatarController implements IAvatarController {
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
 
     this.scenePresenter.Scene.onPointerObservable.add(this.processPointerEvent);
-    this.scenePresenter.Scene.onKeyboardObservable.add(
-      this.processKeyboardEvent
-    );
+    // this.scenePresenter.Scene.onKeyboardObservable.add(
+    //   this.processKeyboardEvent
+    // );
     this.scenePresenter.Scene.onBeforeRenderObservable.add(this.applyInputs);
   }
 
