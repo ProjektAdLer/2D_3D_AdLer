@@ -12,6 +12,7 @@ import {
   AdaptivityContentsTO,
   EvaluationAnswerTO,
 } from "../../DataTransferObjects/QuizElementTO";
+import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 
 export default interface ILearningWorldPort
   extends IAbstractPort<ILearningWorldAdapter> {
@@ -37,6 +38,8 @@ export default interface ILearningWorldPort
   ): void;
 
   // adaptivity
-  onAdaptivityElementLoaded(quizelementTO: AdaptivityContentsTO): void;
+  onAdaptivityElementLoaded(
+    adaptivityElementProgressTO: AdaptivityElementProgressTO
+  ): void;
   onAdaptivityElementSubmitted(evaluationTO: EvaluationAnswerTO): void;
 }

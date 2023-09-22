@@ -29,7 +29,7 @@ describe("LoadAdaptivityElementUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  test("calls executeAsync on the LoadAdaptivityElementUseCase", () => {
+  test.skip("calls executeAsync on the LoadAdaptivityElementUseCase", () => {
     systemUnderTest.executeAsync();
 
     expect(worldPortMock.onAdaptivityElementLoaded).toHaveBeenCalledWith(

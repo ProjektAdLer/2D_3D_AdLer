@@ -10,6 +10,7 @@ import {
   AdaptivityContentsTO,
   EvaluationAnswerTO,
 } from "../../DataTransferObjects/QuizElementTO";
+import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 
 /**
  * This interface is used to register with the WorldPort and defines all the methods that can be called by the WorldPort.
@@ -37,6 +38,8 @@ export default interface ILearningWorldAdapter {
   ): void;
 
   // adaptivity
-  onAdaptivityElementLoaded?(quizelementTO: AdaptivityContentsTO): void;
+  onAdaptivityElementLoaded?(
+    adaptivityElementProgressTO: AdaptivityElementProgressTO
+  ): void;
   onAdaptivityElementSubmitted?(evaluationTO: EvaluationAnswerTO): void;
 }

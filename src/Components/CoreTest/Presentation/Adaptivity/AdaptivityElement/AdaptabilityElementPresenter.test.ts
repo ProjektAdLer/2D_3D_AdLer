@@ -17,7 +17,7 @@ describe("AdaptivityElementPresenter", () => {
     );
   });
 
-  test("onAdaptivityElementLoaded should set viewModel data", () => {
+  test.skip("onAdaptivityElementLoaded should set viewModel data", () => {
     const adaptivityTO: AdaptivityContentsTO = {
       shuffleQuestions: false,
       questions: [

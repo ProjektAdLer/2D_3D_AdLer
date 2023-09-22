@@ -14,6 +14,7 @@ import {
   AdaptivityContentsTO,
   EvaluationAnswerTO,
 } from "../../DataTransferObjects/QuizElementTO";
+import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 
 @injectable()
 export default class LearningWorldPort
@@ -93,10 +94,12 @@ export default class LearningWorldPort
   }
 
   // adaptivity
-  public onAdaptivityElementLoaded(contentsTO: AdaptivityContentsTO): void {
+  public onAdaptivityElementLoaded(
+    adaptivityElementProgressTO: AdaptivityElementProgressTO
+  ): void {
     this.adapters.forEach((adapter) => {
       if (adapter.onAdaptivityElementLoaded)
-        adapter.onAdaptivityElementLoaded(contentsTO);
+        adapter.onAdaptivityElementLoaded(adaptivityElementProgressTO);
     });
   }
 

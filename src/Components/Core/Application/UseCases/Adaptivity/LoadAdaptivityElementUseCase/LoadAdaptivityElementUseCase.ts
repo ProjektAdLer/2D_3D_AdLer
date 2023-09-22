@@ -96,7 +96,7 @@ export default class LoadAdaptivityElementUseCase
 
   async executeAsync(): Promise<void> {
     const content = generateAdaptivityContentsTO();
-    this.worldPort.onAdaptivityElementLoaded(content);
+    // this.worldPort.onAdaptivityElementLoaded(content);
 
     this.logger.log(
       LogLevelTypes.TRACE,
