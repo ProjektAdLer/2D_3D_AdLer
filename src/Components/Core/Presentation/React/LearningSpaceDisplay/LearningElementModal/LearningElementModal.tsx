@@ -12,7 +12,6 @@ import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningE
 import PDFComponent from "./SubComponents/PDFComponent";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
-import AdaptivityElement from "../../../Adaptivity/AdaptivityElement/AdaptivityElement";
 
 const createModalContent = (
   viewModel: LearningElementModalViewModel,
