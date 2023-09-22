@@ -33,7 +33,7 @@ export default function AdaptivityElement({ className }: AdLerUIComponent) {
 
   useEffect(() => {
     controller.loadAdaptivityElement();
-    setNumberOfQuestions(viewmodel.contentData.Value.questions.length);
+    setNumberOfQuestions(viewmodel.contentData.Value.tasks[0].questions.length);
   }, [controller, viewmodel.contentData]);
 
   useEffect(() => {
@@ -115,11 +115,11 @@ export default function AdaptivityElement({ className }: AdLerUIComponent) {
       for (let i = 0; i < numberOfQuestions; i++) {
         if (
           viewmodel.currentElement.Value ===
-            viewmodel.contentData.Value.questions[i] &&
+            viewmodel.contentData.Value.tasks[0].questions[i] &&
           i !== numberOfQuestions - 1
         ) {
           viewmodel.currentElement.Value =
-            viewmodel.contentData.Value.questions[i + 1];
+            viewmodel.contentData.Value.tasks[0].questions[i + 1];
           return;
         }
       }
@@ -146,8 +146,9 @@ export default function AdaptivityElement({ className }: AdLerUIComponent) {
         onClick={() => submitBehaviour()}
       >
         {viewmodel.currentElement.Value !==
-          viewmodel.contentData.Value.questions[numberOfQuestions - 1] ||
-        showFeedback === false
+          viewmodel.contentData.Value.tasks[0].questions[
+            numberOfQuestions - 1
+          ] || showFeedback === false
           ? "Weiter"
           : "Siehe Bericht"}
       </StyledButton>
