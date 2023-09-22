@@ -1,6 +1,7 @@
 import { StyledButtonColor } from "./../../Presentation/React/ReactRelated/ReactBaseComponents/StyledButton";
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 
+// this file will be deprecated after after using new AWT-file format
 export class SubmittedAnswersTO {
   questionID: number;
   selectedAnswerIndexes: number[];
