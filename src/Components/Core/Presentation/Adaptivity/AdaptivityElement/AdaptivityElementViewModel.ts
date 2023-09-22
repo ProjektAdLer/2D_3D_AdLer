@@ -1,26 +1,26 @@
 import Observable from "src/Lib/Observable";
 import { StyledButtonColor } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
-export class QuizAnswer {
+export interface AdaptivityAnswer {
   answerIndex: number;
   answerText: string;
   isSelected: boolean;
 }
 
-export class AdaptivityQuestion {
+export interface AdaptivityQuestion {
   questionID: number;
   questionText: string;
   questionPoints: number;
-  questionAnswers: QuizAnswer[];
+  questionAnswers: AdaptivityAnswer[];
 }
 
-export class AdaptivityTask {
+export interface AdaptivityTask {
   taskID: number;
   taskTitle: string;
   questions: AdaptivityQuestion[];
 }
 
-export class AdaptivityElementContent {
+export interface AdaptivityElementContent {
   elementName: string;
   introText: string;
   tasks: AdaptivityTask[];

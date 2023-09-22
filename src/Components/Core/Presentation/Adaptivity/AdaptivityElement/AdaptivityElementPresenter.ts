@@ -7,7 +7,7 @@ import AdaptivityElementViewModel, {
   AdaptivityElementContent,
   AdaptivityQuestion,
   AdaptivityTask,
-  QuizAnswer,
+  AdaptivityAnswer,
 } from "./AdaptivityElementViewModel";
 
 export default class AdaptivityElementPresenter
@@ -16,31 +16,43 @@ export default class AdaptivityElementPresenter
   constructor(private viewModel: AdaptivityElementViewModel) {}
 
   onAdaptivityElementLoaded(contentTO: AdaptivityContentsTO): void {
-    const content = new AdaptivityElementContent();
-    content.tasks = [new AdaptivityTask()];
+    // TODO: remove this placeholder data when TO is updated
+    const tasks: AdaptivityTask[] = [
+      {
+        taskID: 1,
+        taskTitle: "PLACEHOLDER_TASK_TITLE",
+        questions: [],
+      } as AdaptivityTask,
+    ];
 
     contentTO.questions.forEach((question) => {
-      const questionTarget = new AdaptivityQuestion();
+      const questionAnswers = question.questionAnswers.map((answer) => {
+        const newAnswer = {
+          answerIndex: answer.answerIndex,
+          answerText: answer.answerText,
+          isSelected: false,
+        } as AdaptivityAnswer;
 
-      questionTarget.questionID = question.questionID;
-      questionTarget.questionText = question.questionText;
-      questionTarget.questionPoints = question.questionPoints;
-
-      questionTarget.questionAnswers = [];
-      question.questionAnswers.forEach((answer) => {
-        const answerTarget = new QuizAnswer();
-        answerTarget.answerIndex = answer.answerIndex;
-        answerTarget.answerText = answer.answerText;
-        answerTarget.isSelected = false;
-        questionTarget.questionAnswers.push(answerTarget);
+        return newAnswer;
       });
 
-      content.tasks[0].questions.push(questionTarget);
+      const newQuestion = {
+        questionID: question.questionID,
+        questionText: question.questionText,
+        questionPoints: question.questionPoints,
+        questionAnswers: questionAnswers,
+      } as AdaptivityQuestion;
+
+      tasks[0].questions.push(newQuestion);
     });
 
-    this.viewModel.contentData.Value = content;
+    // TODO: remove this placeholder data when TO is updated
+    this.viewModel.contentData.Value = {
+      elementName: "PLACEHOLDER_NAME",
+      introText: "PLACEHOLDER_INTRO_TEXT",
+      tasks: tasks,
+    } as AdaptivityElementContent;
 
-    //this.viewModel.contentData.Value = contentTO;
     this.viewModel.currentElement.Value =
       this.viewModel.contentData.Value.tasks[0].questions[0];
 
