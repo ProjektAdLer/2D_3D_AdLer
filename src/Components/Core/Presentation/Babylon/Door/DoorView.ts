@@ -19,6 +19,9 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import DoorViewModel from "./DoorViewModel";
 import IDoorController from "./IDoorController";
 import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 const soundLink = require("../../../../../Assets/Sounds/door_opening.mp3");
 
@@ -27,6 +30,7 @@ export default class DoorView extends Readyable {
 
   private openTheDoorSound: Sound;
   private doorAnimation: Animation;
+  private logger: ILoggerPort;
 
   constructor(
     private viewModel: DoorViewModel,
@@ -38,6 +42,7 @@ export default class DoorView extends Readyable {
       SCENE_TYPES.ScenePresenterFactory
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
+    this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
     this.openTheDoorSound = new Sound(
       "openTheDoor",
@@ -89,7 +94,14 @@ export default class DoorView extends Readyable {
     const meshToRotate = this.viewModel.meshes.find(
       (mesh) => mesh.id === "Door"
     );
-    if (meshToRotate === undefined) throw new Error("Door mesh not found");
+
+    if (meshToRotate === undefined) {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        "DoorView: No submesh with name Door found. Door animation will not work."
+      );
+      return;
+    }
 
     this.doorAnimation = new Animation(
       "doorAnimation",
