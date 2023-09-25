@@ -51,7 +51,10 @@ export default function AdaptivityElementDialogContainer({
             </div>
 
             <div className="px-1 rounded-lg font-regular h-fit">
-              <AdaptivityElementTaskSelection tasks={contentData.tasks} />
+              <AdaptivityElementTaskSelection
+                tasks={contentData.tasks}
+                onSelectTask={controller.selectTask}
+              />
             </div>
 
             {

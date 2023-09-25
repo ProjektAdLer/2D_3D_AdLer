@@ -1,6 +1,5 @@
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import IAdaptivityElementController from "./IAdaptivityElementController";
-import ILoadQuizElementUseCase from "../../../Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/ILoadAdaptivityElementUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
 import { SubmittedAnswersTO } from "../../../Application/DataTransferObjects/QuizElementTO";
@@ -17,11 +16,10 @@ export default class AdaptivityElementController
     this.viewModel.isOpen.Value = false;
   }
 
-  // loadAdaptivityElement(): void {
-  //   CoreDIContainer.get<ILoadQuizElementUseCase>(
-  //     USECASE_TYPES.ILoadAdaptivityElementUseCase
-  //   ).executeAsync();
-  // }
+  @bind
+  selectTask(taskID: number): void {
+    this.viewModel.currentTaskID.Value = taskID;
+  }
 
   submitSelection(): void {
     let selection = new SubmittedAnswersTO();
