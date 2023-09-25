@@ -655,7 +655,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "image",
           elementFileType: "png",
           elementMaxScore: 1,
-          elementModel: "l_picture_painting_2",
+          elementModel: "l_image_sciencebio_1",
         },
         {
           elementId: 2,
@@ -665,7 +665,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "image",
           elementFileType: "jpg",
           elementMaxScore: 1,
-          elementModel: "l_picture_painting_1",
+          elementModel: "l_image_sciencegeo_1",
         },
         {
           elementId: 3,
@@ -675,7 +675,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "image",
           elementFileType: "webp",
           elementMaxScore: 1,
-          elementModel: "l_picture_painting_2",
+          elementModel: "l_image_sciencewhiteboard_1",
         },
         {
           elementId: 4,
@@ -685,7 +685,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "image",
           elementFileType: "jpeg",
           elementMaxScore: 1,
-          elementModel: "l_picture_painting_1",
+          elementModel: "l_h5p_daylightprojector_1",
         },
         {
           elementId: 5,
@@ -695,7 +695,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "video",
           elementFileType: "url",
           elementMaxScore: 1,
-          elementModel: "l_video_television_1",
+          elementModel: "l_h5p_blackslotmachine_1",
         },
         {
           elementId: 6,
@@ -705,7 +705,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "video",
           elementFileType: "url",
           elementMaxScore: 1,
-          elementModel: "l_video_television_1",
+          elementModel: "l_h5p_purpleslotmachine_1",
         },
         {
           elementId: 7,
@@ -715,7 +715,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "video",
           elementFileType: "url",
           elementMaxScore: 1,
-          elementModel: "l_video_television_1",
+          elementModel: "",
         },
         {
           elementId: 8,
@@ -725,7 +725,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "h5p",
           elementFileType: "h5p",
           elementMaxScore: 1,
-          elementModel: "l_h5p_slotmachine_1",
+          elementModel: "",
         },
         {
           elementId: 9,
@@ -735,7 +735,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "h5p",
           elementFileType: "h5p",
           elementMaxScore: 1,
-          elementModel: "l_h5p_deskpc_1",
+          elementModel: "",
         },
         {
           elementId: 10,
@@ -745,7 +745,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "h5p",
           elementFileType: "h5p",
           elementMaxScore: 1,
-          elementModel: "l_h5p_blackboard_1",
+          elementModel: "",
         },
         {
           elementId: 11,
@@ -755,7 +755,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "h5p",
           elementFileType: "h5p",
           elementMaxScore: 1,
-          elementModel: "l_h5p_drawingtable_1",
+          elementModel: "",
         },
         {
           elementId: 12,
@@ -765,7 +765,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "h5p",
           elementFileType: "h5p",
           elementMaxScore: 1,
-          elementModel: "l_h5p_slotmachine_1",
+          elementModel: "",
         },
         {
           elementId: 13,
@@ -775,7 +775,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "h5p",
           elementFileType: "h5p",
           elementMaxScore: 1,
-          elementModel: "l_h5p_deskpc_1",
+          elementModel: "",
         },
         {
           elementId: 14,
@@ -785,7 +785,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "h5p",
           elementFileType: "h5p",
           elementMaxScore: 1,
-          elementModel: "l_h5p_deskpc_1",
+          elementModel: "",
         },
         {
           elementId: 15,
@@ -795,7 +795,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "h5p",
           elementFileType: "h5p",
           elementMaxScore: 1,
-          elementModel: "l_h5p_blackboard_1",
+          elementModel: "",
         },
         {
           elementId: 16,
@@ -805,7 +805,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "h5p",
           elementFileType: "h5p",
           elementMaxScore: 1,
-          elementModel: "l_h5p_drawingtable_1",
+          elementModel: "",
         },
         {
           elementId: 17,
@@ -815,7 +815,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementCategory: "h5p",
           elementFileType: "h5p",
           elementMaxScore: 1,
-          elementModel: "l_h5p_slotmachine_1",
+          elementModel: "",
         },
         {
           elementId: 18,
