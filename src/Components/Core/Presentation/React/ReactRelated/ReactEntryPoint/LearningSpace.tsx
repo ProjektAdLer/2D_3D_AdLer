@@ -10,6 +10,7 @@ import ExitModal from "~ReactComponents/LearningSpaceDisplay/ExitModal/ExitModal
 import LearningSpaceScorePanel from "~ReactComponents/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanel";
 import LearningWorldScorePanel from "~ReactComponents/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanel";
 import OverallTimeSpentAdaptivityNotification from "../../../Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotification";
+import AdaptivityElementDialogContainer from "../../../Adaptivity/AdaptivityElement/UIComponents/AdaptivityElementDialogContainer";
 
 export default function LearningSpace() {
   return (
@@ -29,6 +30,7 @@ export default function LearningSpace() {
         <BottomTooltip />
         <SideBar className="z-10 col-span-3 col-start-1 row-start-1 m-2 pointer-events-none" />
         <LearningElementModal className="z-10" />
+        <AdaptivityElementDialogContainer className="z-10" />
         <ExitModal className="z-20" />
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}

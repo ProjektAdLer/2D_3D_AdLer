@@ -7,6 +7,8 @@ import LearningElementViewModel from "./LearningElementViewModel";
 import { ActionEvent } from "@babylonjs/core/Actions/actionEvent";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IBottomTooltipPresenter from "~ReactComponents/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
+import ILoadQuizElementUseCase from "../../../Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/ILoadAdaptivityElementUseCase";
+import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
 
 export default class LearningElementController
   implements ILearningElementController
@@ -33,7 +35,11 @@ export default class LearningElementController
 
   @bind
   picked(event?: ActionEvent | undefined): void {
-    this.startLoadElementUseCase();
+    if (this.viewModel.type === LearningElementTypes.adaptivity) {
+      this.startLoadAdaptivityElementUseCase();
+    } else {
+      this.startLoadElementUseCase();
+    }
   }
 
   @bind
@@ -55,5 +61,11 @@ export default class LearningElementController
     CoreDIContainer.get<ILoadLearningElementUseCase>(
       USECASE_TYPES.ILoadLearningElementUseCase
     ).executeAsync(this.viewModel.id);
+  }
+
+  private startLoadAdaptivityElementUseCase(): void {
+    CoreDIContainer.get<ILoadQuizElementUseCase>(
+      USECASE_TYPES.ILoadAdaptivityElementUseCase
+    ).executeAsync();
   }
 }
