@@ -27,7 +27,7 @@ const LearningSpaceTheme_Suburb: ILearningSpaceTheme = {
     [LearningElementTypes.pdf]: [
       require("../../../../Assets/3dModels/suburbTheme/l_text_bookshelf_2.glb"),
     ],
-    [LearningElementTypes.quiz]: [
+    [LearningElementTypes.adaptivity]: [
       require("../../../../Assets/3dModels/suburbTheme/a_npc_defaultnpc.glb"),
     ],
     [LearningElementTypes.notAnElement]: [],

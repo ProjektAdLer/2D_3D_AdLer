@@ -132,7 +132,7 @@ export default class MockBackendAdapter implements IBackendPort {
             window.location.host +
             "/SampleLearningElementData/testPDF.pdf"
         );
-      case "quiz":
+      case "adaptivity":
         return Promise.resolve(
           "http://" +
             window.location.host +
@@ -270,9 +270,9 @@ export default class MockBackendAdapter implements IBackendPort {
         },
         {
           elementId: 4,
-          elementName: "Ein Quiz-Lernelement",
-          elementCategory: "quiz",
-          elementDescription: "Beschreibung des Quiz-Lernelements",
+          elementName: "Ein Adaptivitäts-Lernelement",
+          elementCategory: "adaptivity",
+          elementDescription: "Beschreibung des Adaptivitäts-Lernelements",
           elementGoals: [
             "Elementziel 1/3",
             "Elementziel 2/3",

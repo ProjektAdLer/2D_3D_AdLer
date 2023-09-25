@@ -28,7 +28,7 @@ const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
     [LearningElementTypes.pdf]: [
       require("../../../../Assets/3dModels/arcadeTheme/l_text_comicshelfsmall_1.glb"),
     ],
-    [LearningElementTypes.quiz]: [
+    [LearningElementTypes.adaptivity]: [
       require("../../../../Assets/3dModels/arcadeTheme/a_npc_sheriffjustice.glb"),
     ],
     [LearningElementTypes.notAnElement]: [],

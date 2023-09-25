@@ -236,7 +236,7 @@ export default class LoadLearningWorldUseCase
         LearningElementEntity
       );
 
-      if (newElementEntity.type === "quiz") {
+      if (newElementEntity.type === "adaptivity") {
         if (element.adaptivity !== undefined) {
           this.createAdaptivityElementEntity(
             newElementEntity,

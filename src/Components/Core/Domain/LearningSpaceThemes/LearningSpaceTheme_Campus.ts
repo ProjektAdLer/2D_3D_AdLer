@@ -27,7 +27,7 @@ const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
     [LearningElementTypes.pdf]: [
       require("../../../../Assets/3dModels/campusTheme/l_text_libraryshelf_1.glb"),
     ],
-    [LearningElementTypes.quiz]: [
+    [LearningElementTypes.adaptivity]: [
       require("../../../../Assets/3dModels/campusTheme/a_npc_dozentlukas.glb"),
     ],
     [LearningElementTypes.notAnElement]: [],
