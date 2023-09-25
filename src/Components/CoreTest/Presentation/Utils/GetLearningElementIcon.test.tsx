@@ -10,6 +10,7 @@ describe("GetLearningElementIcon should return a react component for valid eleme
     ["video" as LearningElementTypeStrings, "video-icon"],
     ["h5p" as LearningElementTypeStrings, "h5p-icon"],
     ["pdf" as LearningElementTypeStrings, "text-icon"],
+    ["adaptivity" as LearningElementTypeStrings, "quiz-icon"],
   ])("should run for %s", (type, expected) => {
     const result = getLearningElementIcon(type);
     expect(result.props["src"]).toContain(expected);

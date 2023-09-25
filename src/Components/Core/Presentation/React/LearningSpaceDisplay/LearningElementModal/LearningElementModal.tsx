@@ -12,7 +12,6 @@ import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningE
 import PDFComponent from "./SubComponents/PDFComponent";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
-import AdaptivityElement from "../../../Adaptivity/AdaptivityElement/AdaptivityElement";
 
 const createModalContent = (
   viewModel: LearningElementModalViewModel,
@@ -34,8 +33,6 @@ const createModalContent = (
       );
     case LearningElementTypes.pdf:
       return <PDFComponent viewModel={viewModel} />;
-    case LearningElementTypes.adaptivity:
-      return <AdaptivityElement />;
     default:
       return <div>No Element selected</div>;
   }
@@ -56,7 +53,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
     image: "max-h-[90vh]",
     video: "",
     h5p: "",
-    adaptivity: "",
+    quiz: "",
   };
 
   const modalType = viewModel.type.Value as
@@ -64,7 +61,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
     | "image"
     | "video"
     | "h5p"
-    | "adaptivity";
+    | "quiz";
 
   return (
     <StyledModal
@@ -73,7 +70,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
         setOpen(false);
         if (
           viewModel.type?.Value !== "h5p" &&
-          viewModel.type?.Value !== "adaptivity"
+          viewModel.type?.Value !== "quiz"
         ) {
           controller.scoreLearningElement();
         }
