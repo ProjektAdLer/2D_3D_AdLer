@@ -1,3 +1,4 @@
+import { AdaptivityElementDataTO } from "./../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementDataTO";
 import { mock } from "jest-mock-extended";
 import {
   expectedElementTO,
@@ -13,7 +14,6 @@ import WorldStatusResponse, {
   CoursesAvailableForUserResponse,
 } from "../../../Core/Adapters/BackendAdapter/Types/BackendResponseTypes";
 import LearningWorldStatusTO from "../../../Core/Application/DataTransferObjects/LearningWorldStatusTO";
-import { AdaptivityDataTO } from "../../../Core/Application/DataTransferObjects/AdaptivityDataTO";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -74,7 +74,9 @@ describe("BackendAdapter", () => {
         if (element?.adaptivity === undefined) {
           expect(element).toBeNullOrEqual(expectedElementTO);
         } else {
-          expect(element.adaptivity).toEqual(expect.any(AdaptivityDataTO));
+          expect(element.adaptivity).toEqual(
+            expect.any(AdaptivityElementDataTO)
+          );
         }
       });
     });

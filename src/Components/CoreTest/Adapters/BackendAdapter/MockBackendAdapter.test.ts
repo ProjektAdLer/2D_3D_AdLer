@@ -1,3 +1,4 @@
+import { AdaptivityElementDataTO } from "./../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementDataTO";
 import { mock } from "jest-mock-extended";
 import { config } from "../../../../config";
 import MockBackendAdapter from "../../../Core/Adapters/BackendAdapter/MockBackendAdapter";
@@ -9,7 +10,6 @@ import {
   expectedSpaceTO,
   expectedWorldTO,
 } from "./BackendResponses";
-import { AdaptivityDataTO } from "../../../Core/Application/DataTransferObjects/AdaptivityDataTO";
 
 const oldConfigValue = config.useFakeBackend;
 
@@ -43,7 +43,9 @@ describe("MockBackendAdapter", () => {
         if (element?.adaptivity === undefined) {
           expect(element).toBeNullOrEqual(expectedElementTO);
         } else {
-          expect(element.adaptivity).toEqual(expect.any(AdaptivityDataTO));
+          expect(element.adaptivity).toEqual(
+            expect.any(AdaptivityElementDataTO)
+          );
         }
       });
     });
