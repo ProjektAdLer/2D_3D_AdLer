@@ -1,87 +1,16 @@
+import AdaptivityElementProgressTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import { inject, injectable } from "inversify";
 import ILoadAdaptivityElementUseCase from "./ILoadAdaptivityElementUseCase";
-import {
-  AdaptivityContentsTO,
-  TOAdaptivityQuestionTO,
-  AnswerTO,
-} from "../../../DataTransferObjects/QuizElementTO";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILearningWorldPort from "../../../Ports/Interfaces/ILearningWorldPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import type ILoggerPort from "../../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
-
-// temporary hardcoded data
-export function generateAdaptivityContentsTO(): AdaptivityContentsTO {
-  const contents = new AdaptivityContentsTO();
-  contents.shuffleQuestions = false;
-  contents.questions = [];
-
-  for (let k = 1; k < 4; k++) {
-    const question = new TOAdaptivityQuestionTO();
-    question.questionAnswers = [];
-    question.questionPoints = 1;
-
-    if (k === 1) {
-      question.questionID = k;
-      question.questionText =
-        "Wie viele Einwohner hatte Kempten im Jahr 2022? Also wie viele genau, quasi so ungefähr, wenn man die einen weglässt und die anderen dazu nimmt und die wieder anderen außen vor lässt, weil die eben, ja. Wie viele?";
-
-      for (let i = 1; i < 13; i++) {
-        const answer = new AnswerTO();
-        answer.answerIndex = i;
-        answer.answerText = (i * 10000).toString();
-        question.questionAnswers.push(answer);
-      }
-    }
-
-    if (k === 2) {
-      question.questionID = k;
-      question.questionText = "Welche Himmelsrichtungen existieren wirklich?";
-      let answer = new AnswerTO();
-      answer.answerIndex = 1;
-      answer.answerText = "Norden";
-      question.questionAnswers.push(answer);
-      answer = new AnswerTO();
-      answer.answerIndex = 2;
-      answer.answerText = "Rüben";
-      question.questionAnswers.push(answer);
-      answer = new AnswerTO();
-      answer.answerIndex = 3;
-      answer.answerText = "Süden";
-      question.questionAnswers.push(answer);
-      answer = new AnswerTO();
-      answer.answerIndex = 4;
-      answer.answerText = "Ozten";
-      question.questionAnswers.push(answer);
-    }
-
-    if (k === 3) {
-      question.questionID = k;
-      question.questionText = "Welche Automarken gehören zur BMW-group?";
-      let answer = new AnswerTO();
-      answer.answerIndex = 1;
-      answer.answerText = "BMW";
-      question.questionAnswers.push(answer);
-      answer = new AnswerTO();
-      answer.answerIndex = 2;
-      answer.answerText = "Mini";
-      question.questionAnswers.push(answer);
-      answer = new AnswerTO();
-      answer.answerIndex = 3;
-      answer.answerText = "Rolls-Royce";
-      question.questionAnswers.push(answer);
-      answer = new AnswerTO();
-      answer.answerIndex = 4;
-      answer.answerText = "VW";
-      question.questionAnswers.push(answer);
-    }
-
-    contents.questions.push(question);
-  }
-
-  return contents;
-}
+import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import type IGetUserLocationUseCase from "../../GetUserLocation/IGetUserLocationUseCase";
+import AdaptivityElementEntity from "src/Components/Core/Domain/Entities/Adaptivity/AdaptivityElementEntity";
+import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 
 @injectable()
 export default class LoadAdaptivityElementUseCase
@@ -90,13 +19,62 @@ export default class LoadAdaptivityElementUseCase
   constructor(
     @inject(CORE_TYPES.ILogger)
     private logger: ILoggerPort,
+    @inject(CORE_TYPES.IEntityContainer)
+    private entityContainer: IEntityContainer,
     @inject(PORT_TYPES.ILearningWorldPort)
-    private worldPort: ILearningWorldPort
+    private worldPort: ILearningWorldPort,
+    @inject(USECASE_TYPES.IGetUserLocationUseCase)
+    private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
 
-  async executeAsync(): Promise<void> {
-    const content = generateAdaptivityContentsTO();
-    this.worldPort.onAdaptivityElementLoaded(undefined as any);
+  async executeAsync(elementID: ComponentID): Promise<void> {
+    const userLocation = this.getUserLocationUseCase.execute();
+    if (!userLocation.worldID || !userLocation.spaceID) {
+      throw new Error(`User is not in a space!`);
+    }
+
+    const elementEntity =
+      this.entityContainer.filterEntitiesOfType<AdaptivityElementEntity>(
+        AdaptivityElementEntity,
+        (e) =>
+          e.element.id === elementID &&
+          e.element.parentWorldID === userLocation.worldID
+      );
+
+    if (elementEntity.length === 0) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `Could not find element with ID ${elementID} in world ${userLocation.worldID}`
+      );
+      throw new Error(
+        `Could not find element with ID ${elementID} in world ${userLocation.worldID}`
+      );
+    } else if (elementEntity.length > 1) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`
+      );
+      throw new Error(
+        `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`
+      );
+    }
+
+    let adaptivityTO = new AdaptivityElementProgressTO();
+    adaptivityTO = Object.assign(
+      adaptivityTO,
+      structuredClone(elementEntity[0])
+    );
+
+    // temporary hardcoded till backend call is available
+    adaptivityTO.isCompleted = false;
+    adaptivityTO.tasks.forEach((task) => {
+      task.isCompleted = false;
+      task.questions.forEach((question) => {
+        question.isCompleted = false;
+      });
+    });
+
+    this.worldPort.onAdaptivityElementLoaded(adaptivityTO);
 
     this.logger.log(
       LogLevelTypes.TRACE,

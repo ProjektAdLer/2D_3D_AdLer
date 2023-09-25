@@ -32,7 +32,7 @@ export default function AdaptivityElement({ className }: AdLerUIComponent) {
   });
 
   useEffect(() => {
-    controller.loadAdaptivityElement();
+    //controller.loadAdaptivityElement();
     setNumberOfQuestions(viewmodel.contentData.Value.tasks[0].questions.length);
   }, [controller, viewmodel.contentData]);
 

@@ -17,11 +17,11 @@ export default class AdaptivityElementController
     this.viewModel.isOpen.Value = false;
   }
 
-  loadAdaptivityElement(): void {
-    CoreDIContainer.get<ILoadQuizElementUseCase>(
-      USECASE_TYPES.ILoadAdaptivityElementUseCase
-    ).executeAsync();
-  }
+  // loadAdaptivityElement(): void {
+  //   CoreDIContainer.get<ILoadQuizElementUseCase>(
+  //     USECASE_TYPES.ILoadAdaptivityElementUseCase
+  //   ).executeAsync();
+  // }
 
   submitSelection(): void {
     let selection = new SubmittedAnswersTO();

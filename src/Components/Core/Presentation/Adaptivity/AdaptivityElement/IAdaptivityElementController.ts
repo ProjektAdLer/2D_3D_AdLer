@@ -1,5 +1,5 @@
 export default interface IAdaptivityElementController {
   closeModal(): void;
-  loadAdaptivityElement(): void;
+  //loadAdaptivityElement(): void;
   submitSelection(): void;
 }
