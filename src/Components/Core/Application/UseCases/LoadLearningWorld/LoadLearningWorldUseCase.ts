@@ -23,7 +23,7 @@ import type ICalculateLearningSpaceAvailabilityUseCase from "../CalculateLearnin
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import AdaptivityElementEntity from "src/Components/Core/Domain/Entities/Adaptivity/AdaptivityElementEntity";
-import { AdaptivityDataTO } from "../../DataTransferObjects/AdaptivityDataTO";
+import { AdaptivityElementDataTO } from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementDataTO";
 
 @injectable()
 export default class LoadLearningWorldUseCase
@@ -256,7 +256,7 @@ export default class LoadLearningWorldUseCase
 
   private createAdaptivityElementEntity(
     element: LearningElementEntity,
-    adaptivityData: AdaptivityDataTO
+    adaptivityData: AdaptivityElementDataTO
   ) {
     let adaptivityElement = this.toAdaptivityEntity(adaptivityData);
     adaptivityElement.element = element;
@@ -266,7 +266,9 @@ export default class LoadLearningWorldUseCase
     );
   }
 
-  private toAdaptivityEntity(data: AdaptivityDataTO): AdaptivityElementEntity {
+  private toAdaptivityEntity(
+    data: AdaptivityElementDataTO
+  ): AdaptivityElementEntity {
     let entity = new AdaptivityElementEntity();
     entity = Object.assign(entity, structuredClone(data));
     return entity;

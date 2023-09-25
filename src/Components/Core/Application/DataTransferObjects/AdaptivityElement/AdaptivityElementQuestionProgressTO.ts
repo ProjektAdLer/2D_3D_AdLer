@@ -1,5 +1,5 @@
-import { AdaptivityQuestionTO } from "../AdaptivityDataTO";
+import AdaptivityElementQuestionTO from "./AdaptivityElementQuestionTO";
 
-export default class AdaptivityElementQuestionProgressTO extends AdaptivityQuestionTO {
+export default class AdaptivityElementQuestionProgressTO extends AdaptivityElementQuestionTO {
   isCompleted: boolean | null;
 }

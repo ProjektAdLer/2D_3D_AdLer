@@ -1,11 +1,4 @@
-import {
-  AdaptivityActionTO,
-  AdaptivityAnswersTO,
-  AdaptivityTriggerTO,
-  AdaptivityDataTO,
-  AdaptivityQuestionTO,
-  AdaptivityTaskTO,
-} from "./../../Application/DataTransferObjects/AdaptivityDataTO";
+import { AdaptivityElementDataTO } from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementDataTO";
 import BackendElementTO from "../../Application/DataTransferObjects/BackendElementTO";
 import BackendSpaceTO from "../../Application/DataTransferObjects/BackendSpaceTO";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
@@ -25,6 +18,11 @@ import AWT, {
   APIElement,
   APISpace,
 } from "./Types/AWT";
+import AdaptivityElementActionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementActionTO";
+import AdaptivityElementTriggerTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTriggerTO";
+import AdaptivityElementAnswersTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementAnswerTO";
+import AdaptivityElementQuestionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionTO";
+import AdaptivityElementTaskTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTaskTO";
 
 /**
  * This class contains static utility functions for the BackendAdapters
@@ -121,12 +119,12 @@ export default class BackendAdapterUtils {
 
   private static extractAdaptivityData(
     adaptivitydata?: APIAdaptivity
-  ): AdaptivityDataTO | undefined {
+  ): AdaptivityElementDataTO | undefined {
     if (adaptivitydata === undefined) {
       return undefined;
     }
 
-    const newAdaptivityTO = new AdaptivityDataTO();
+    const newAdaptivityTO = new AdaptivityElementDataTO();
     newAdaptivityTO.introText = adaptivitydata.introText;
     newAdaptivityTO.shuffleTask = adaptivitydata.shuffleTasks;
     newAdaptivityTO.tasks = [];
@@ -140,7 +138,7 @@ export default class BackendAdapterUtils {
   }
 
   private static mapAdaptivityTasks(
-    tasks: AdaptivityTaskTO[],
+    tasks: AdaptivityElementTaskTO[],
     apiTasks: APIAdaptivityTask[]
   ) {
     apiTasks.forEach((task) => {
@@ -150,7 +148,7 @@ export default class BackendAdapterUtils {
         taskOptional: task.optional,
         requieredDifficulty: task.requiredDifficulty,
         questions: [],
-      } as AdaptivityTaskTO);
+      } as AdaptivityElementTaskTO);
 
       this.mapAdaptivityQuestions(
         tasks.at(-1)!.questions,
@@ -160,7 +158,7 @@ export default class BackendAdapterUtils {
   }
 
   private static mapAdaptivityQuestions(
-    questions: AdaptivityQuestionTO[],
+    questions: AdaptivityElementQuestionTO[],
     apiQuestions: APIAdaptivityQuestion[]
   ) {
     apiQuestions.forEach((question) => {
@@ -171,7 +169,7 @@ export default class BackendAdapterUtils {
         questionText: question.questionText,
         questionAnswers: [],
         trigger: [],
-      } as AdaptivityQuestionTO);
+      } as AdaptivityElementQuestionTO);
 
       this.mapAdaptivityAnswers(
         questions.at(-1)!.questionAnswers,
@@ -186,7 +184,7 @@ export default class BackendAdapterUtils {
   }
 
   private static mapAdaptivityAnswers(
-    answers: AdaptivityAnswersTO[],
+    answers: AdaptivityElementAnswersTO[],
     possibleAnswers: APIAdaptivityAnswers[]
   ) {
     let answerID = 0; // ID for communication with backend's index of answer
@@ -195,13 +193,13 @@ export default class BackendAdapterUtils {
         answerId: answerID,
         answerText: answer.answerText,
         answerImage: answer.answerImage,
-      } as AdaptivityAnswersTO);
+      } as AdaptivityElementAnswersTO);
       answerID++;
     });
   }
 
   private static mapAdaptivityTrigger(
-    trigger: AdaptivityTriggerTO[],
+    trigger: AdaptivityElementTriggerTO[],
     rules: APIAdaptivityTrigger[]
   ) {
     rules.forEach((rule) => {
@@ -212,8 +210,8 @@ export default class BackendAdapterUtils {
           actionData:
             rule.adaptivityAction.commentText ??
             rule.adaptivityAction.elementId,
-        } as AdaptivityActionTO,
-      } as AdaptivityTriggerTO);
+        } as AdaptivityElementActionTO,
+      } as AdaptivityElementTriggerTO);
     });
   }
 }
