@@ -16,10 +16,15 @@ import DoorViewModel from "../../../../Core/Presentation/Babylon/Door/DoorViewMo
 import IDoorController from "../../../../Core/Presentation/Babylon/Door/IDoorController";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
+import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
+
+const loggerMock = mock<ILoggerPort>();
 
 function buildSystemUnderTest(): [DoorViewModel, DoorView] {
   const viewModel = new DoorViewModel();
@@ -34,6 +39,7 @@ describe("DoorView", () => {
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
       scenePresenterFactoryMock
     );
+    CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
   });
 
   afterAll(() => {
@@ -112,14 +118,18 @@ describe("DoorView", () => {
     expect(mesh2.rotationQuaternion).toBeNull();
   });
 
-  test("setupAnimation throws error if no mesh with id Door are loaded", async () => {
+  test("setupAnimation calls logger with warning", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     viewModel.meshes = [
       new AbstractMesh("TestMesh", new Scene(new NullEngine())) as Mesh,
     ];
 
-    expect(() => systemUnderTest["setupAnimation"]()).toThrowError(
-      "Door mesh not found"
+    systemUnderTest["setupAnimation"]();
+
+    expect(loggerMock.log).toHaveBeenCalledTimes(1);
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      expect.stringContaining("No submesh with name Door found.")
     );
   });
 
