@@ -39,6 +39,7 @@ export default class AdaptivityElementViewModel {
   currentQuestionID: Observable<number | null> = new Observable<number | null>(
     null
   );
+  footerText: Observable<string> = new Observable<string>("");
 
   isFinished: Observable<boolean> = new Observable<boolean>(false);
   currentElement: Observable<AdaptivityQuestion> =

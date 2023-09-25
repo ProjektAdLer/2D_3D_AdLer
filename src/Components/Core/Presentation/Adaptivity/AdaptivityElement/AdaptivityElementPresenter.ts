@@ -10,11 +10,16 @@ import AdaptivityElementViewModel, {
   AdaptivityAnswer,
 } from "./AdaptivityElementViewModel";
 import AdaptivityElementProgressTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
+import bind from "bind-decorator";
 
 export default class AdaptivityElementPresenter
   implements IAdaptivityElementPresenter
 {
-  constructor(private viewModel: AdaptivityElementViewModel) {}
+  constructor(private viewModel: AdaptivityElementViewModel) {
+    viewModel.currentTaskID.subscribe(() => this.createFooterBreadcrumbs());
+    viewModel.currentElement.subscribe(() => this.createFooterBreadcrumbs());
+    viewModel.contentData.subscribe(() => this.createFooterBreadcrumbs());
+  }
 
   onAdaptivityElementLoaded?(
     adaptivityElementProgressTO: AdaptivityElementProgressTO
@@ -63,5 +68,31 @@ export default class AdaptivityElementPresenter
 
   onAdaptivityElementSubmitted(evaluationTO: EvaluationAnswerTO): void {
     this.viewModel.evaluation.Value = evaluationTO.evaluation;
+  }
+
+  @bind
+  private createFooterBreadcrumbs(): void {
+    const currentQuestionID = this.viewModel.currentElement.Value.questionID;
+    const currentTaskID = this.viewModel.currentTaskID.Value;
+    const contentData = this.viewModel.contentData.Value;
+
+    let newFooterText = contentData.elementName;
+
+    if (currentTaskID !== null) {
+      const currentTask = contentData.tasks.find(
+        (task) => task.taskID === currentTaskID
+      );
+      newFooterText += " => " + currentTask!.taskTitle;
+
+      if (currentQuestionID !== null) {
+        const currentQuestion = currentTask!.questions.find(
+          (question) => question.questionID === currentQuestionID
+        );
+        // TODO: create question title from difficulty
+        // newFooterText += " => " currentQuestion!.;
+      }
+    }
+
+    this.viewModel.footerText.Value = newFooterText;
   }
 }

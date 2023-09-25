@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import AdaptivityElementViewModel from "../AdaptivityElementViewModel";
+import AdaptivityElementViewModel, {
+  AdaptivityElementContent,
+} from "../AdaptivityElementViewModel";
 import IAdaptivityElementController from "../IAdaptivityElementController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
@@ -20,11 +22,16 @@ export default function AdaptivityElementDialogContainer({
     IAdaptivityElementController
   >(BUILDER_TYPES.IAdaptivityElementBuilder);
 
+  // -- Observables --
   const [isOpen] = useObservable<boolean>(viewmodel?.isOpen);
+  const [currentTaskID] = useObservable<number | null>(
+    viewmodel?.currentTaskID
+  );
+  const [currentQuestionID] = useObservable<number | null>(
+    viewmodel?.currentQuestionID
+  );
   const [contentData] = useObservable(viewmodel?.contentData);
-
-  // TODO: remove DEBUG data
-  const [footer] = useState("Adaptivitätselement");
+  const [footerText] = useObservable<string>(viewmodel?.footerText);
 
   if (!viewmodel || !controller) return null;
   if (!isOpen || !contentData) return null;
@@ -50,16 +57,18 @@ export default function AdaptivityElementDialogContainer({
               </StyledButton>
             </div>
 
-            <div className="px-1 rounded-lg font-regular h-fit">
-              <AdaptivityElementTaskSelection
-                tasks={contentData.tasks}
-                onSelectTask={controller.selectTask}
-              />
-            </div>
+            {currentTaskID === null && currentQuestionID === null && (
+              <div className="px-1 rounded-lg font-regular h-fit">
+                <AdaptivityElementTaskSelection
+                  tasks={contentData.tasks}
+                  onSelectTask={controller.selectTask}
+                />
+              </div>
+            )}
 
             {
               <div className="modal-footer">
-                <p>{footer}</p>
+                <p>{footerText}</p>
               </div>
             }
           </div>
