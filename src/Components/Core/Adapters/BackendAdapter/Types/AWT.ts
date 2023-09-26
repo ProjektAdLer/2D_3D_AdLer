@@ -69,7 +69,7 @@ export interface APIAdaptivityQuestion {
   questionId: number;
   questionDifficulty: number;
   questionText: string;
-  possibleAnswers: APIAdaptivityAnswers[];
+  choices: APIAdaptivityAnswers[];
   adaptivityRules: APIAdaptivityTrigger[];
 }
 

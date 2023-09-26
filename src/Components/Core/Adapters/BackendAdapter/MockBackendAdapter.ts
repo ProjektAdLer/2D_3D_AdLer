@@ -313,7 +313,7 @@ export default class MockBackendAdapter implements IBackendPort {
                         },
                       },
                     ],
-                    possibleAnswers: [
+                    choices: [
                       {
                         answerText: "Dänemark",
                       },
@@ -358,7 +358,7 @@ export default class MockBackendAdapter implements IBackendPort {
                         },
                       },
                     ],
-                    possibleAnswers: [
+                    choices: [
                       {
                         answerText: "2",
                       },

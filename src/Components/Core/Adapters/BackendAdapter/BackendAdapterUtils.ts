@@ -173,7 +173,7 @@ export default class BackendAdapterUtils {
 
       this.mapAdaptivityAnswers(
         questions.at(-1)!.questionAnswers,
-        question.possibleAnswers
+        question.choices
       );
 
       this.mapAdaptivityTrigger(
