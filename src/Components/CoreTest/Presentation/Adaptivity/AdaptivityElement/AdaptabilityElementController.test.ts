@@ -31,6 +31,17 @@ describe("AdaptivityElementController", () => {
     CoreDIContainer.restore();
   });
 
+  test("closeModal sets isOpen in viewModel to false", () => {
+    viewModel.isOpen.Value = true;
+    systemUnderTest.closeModal();
+    expect(viewModel.isOpen.Value).toBeFalsy();
+  });
+
+  test("selectTask sets currentTaskID in viewModel", () => {
+    systemUnderTest.selectTask(1);
+    expect(viewModel.currentTaskID.Value).toBe(1);
+  });
+
   test("submitSelection calls SubmitSelectionUseCase", () => {
     let submit = {
       questionID: 2,
