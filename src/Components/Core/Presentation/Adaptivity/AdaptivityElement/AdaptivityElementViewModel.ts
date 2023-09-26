@@ -10,7 +10,6 @@ export interface AdaptivityAnswer {
 export interface AdaptivityQuestion {
   questionID: number;
   questionText: string;
-  questionPoints: number;
   questionAnswers: AdaptivityAnswer[];
   isRequired: boolean;
   isCompleted: boolean;
@@ -59,7 +58,6 @@ const testAdaptivityElementContent: AdaptivityElementContent = {
         {
           questionID: 1,
           questionText: "PLACEHOLDER_QUESTION_TEXT",
-          questionPoints: 1,
           isRequired: true,
           isCompleted: true,
           questionAnswers: [
@@ -80,7 +78,6 @@ const testAdaptivityElementContent: AdaptivityElementContent = {
         {
           questionID: 2,
           questionText: "PLACEHOLDER_QUESTION_TEXT",
-          questionPoints: 1,
           isRequired: false,
           isCompleted: false,
           questionAnswers: [
