@@ -63,6 +63,8 @@ export default class AdaptivityElementPresenter
       this.viewModel.contentData.Value.questions[0];
       */
 
+    this.createFooterBreadcrumbs();
+
     this.viewModel.isOpen.Value = true;
   }
 
@@ -72,7 +74,7 @@ export default class AdaptivityElementPresenter
 
   @bind
   private createFooterBreadcrumbs(): void {
-    const currentQuestionID = this.viewModel.currentElement.Value.questionID;
+    const currentQuestionID = this.viewModel.currentQuestionID.Value;
     const currentTaskID = this.viewModel.currentTaskID.Value;
     const contentData = this.viewModel.contentData.Value;
 

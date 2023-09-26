@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import AdaptivityElementViewModel, {
-  AdaptivityElementContent,
-} from "../AdaptivityElementViewModel";
+import AdaptivityElementViewModel from "../AdaptivityElementViewModel";
 import IAdaptivityElementController from "../IAdaptivityElementController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
