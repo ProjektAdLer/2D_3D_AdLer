@@ -18,7 +18,7 @@ export default class AdaptivityElementPresenter
     viewModel.contentData.subscribe(() => this.createFooterBreadcrumbs());
   }
 
-  onAdaptivityElementLoaded?(
+  onAdaptivityElementLoaded(
     adaptivityElementProgressTO: AdaptivityElementProgressTO
   ): void {
     this.viewModel.contentData.Value = this.createContentData(
