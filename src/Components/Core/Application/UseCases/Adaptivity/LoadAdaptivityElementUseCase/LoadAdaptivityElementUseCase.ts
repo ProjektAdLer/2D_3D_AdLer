@@ -68,9 +68,9 @@ export default class LoadAdaptivityElementUseCase
     // temporary hardcoded till backend call is available
     adaptivityTO.isCompleted = false;
     adaptivityTO.tasks.forEach((task) => {
-      task.isCompleted = false;
+      task.isCompleted = null;
       task.questions.forEach((question) => {
-        question.isCompleted = false;
+        question.isCompleted = null;
       });
     });
 
