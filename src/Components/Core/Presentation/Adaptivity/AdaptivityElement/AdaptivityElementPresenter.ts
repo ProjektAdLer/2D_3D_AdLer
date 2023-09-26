@@ -14,7 +14,7 @@ export default class AdaptivityElementPresenter
 {
   constructor(private viewModel: AdaptivityElementViewModel) {
     viewModel.currentTaskID.subscribe(() => this.createFooterBreadcrumbs());
-    viewModel.currentElement.subscribe(() => this.createFooterBreadcrumbs());
+    viewModel.currentQuestionID.subscribe(() => this.createFooterBreadcrumbs());
     viewModel.contentData.subscribe(() => this.createFooterBreadcrumbs());
   }
 
