@@ -7,10 +7,11 @@ import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/S
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "../../../../Types/ReactTypes";
-
-import quizBackgroundVRGuy from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
 import AdaptivityElementTaskSelection from "./AdaptivityElementTaskSelection";
 import { useState } from "react";
+import AdaptivityElementQuestionAnswer from "./AdaptivityElementQuestionAnswer";
+
+import quizBackgroundVRGuy from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
 
 export default function AdaptivityElementDialogContainer({
   className,
@@ -66,6 +67,19 @@ export default function AdaptivityElementDialogContainer({
                   onSelectTask={controller.selectTask}
                 />
               </div>
+            )}
+            {currentTaskID !== null && currentQuestionID !== null && (
+              <AdaptivityElementQuestionAnswer
+                question={
+                  contentData.tasks
+                    .find((task) => task.taskID === currentTaskID)!
+                    .questions.find(
+                      (question) => question.questionID === currentQuestionID
+                    )!
+                }
+                setHeaderText={setHeaderText}
+                submitSelection={controller.submitSelection}
+              />
             )}
 
             {
