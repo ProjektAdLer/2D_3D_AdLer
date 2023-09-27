@@ -23,6 +23,7 @@ import AdaptivityElementTriggerTO from "../../Application/DataTransferObjects/Ad
 import AdaptivityElementAnswersTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementAnswerTO";
 import AdaptivityElementQuestionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionTO";
 import AdaptivityElementTaskTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTaskTO";
+import { AdaptivityElementQuestionDifficultyTypes } from "../../Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 
 /**
  * This class contains static utility functions for the BackendAdapters
@@ -146,7 +147,9 @@ export default class BackendAdapterUtils {
         taskId: task.taskId,
         taskTitle: task.taskTitle,
         taskOptional: task.optional,
-        requiredDifficulty: task.requiredDifficulty,
+        requiredDifficulty: this.mapAdaptivityElementQuestionDifficulty(
+          task.requiredDifficulty
+        ),
         questions: [],
       } as AdaptivityElementTaskTO);
 
@@ -165,7 +168,9 @@ export default class BackendAdapterUtils {
       questions.push({
         questionId: question.questionId,
         questionType: question.questionType,
-        questionDifficulty: question.questionDifficulty,
+        questionDifficulty: this.mapAdaptivityElementQuestionDifficulty(
+          question.questionDifficulty
+        ),
         questionText: question.questionText,
         questionAnswers: [],
         trigger: [],
@@ -181,6 +186,17 @@ export default class BackendAdapterUtils {
         question.adaptivityRules
       );
     });
+  }
+
+  private static mapAdaptivityElementQuestionDifficulty(
+    difficulty: number
+  ): AdaptivityElementQuestionDifficultyTypes {
+    if (difficulty >= 200) return AdaptivityElementQuestionDifficultyTypes.hard;
+    else if (difficulty >= 100)
+      return AdaptivityElementQuestionDifficultyTypes.medium;
+    else if (difficulty >= 0)
+      return AdaptivityElementQuestionDifficultyTypes.easy;
+    else return AdaptivityElementQuestionDifficultyTypes.easy;
   }
 
   private static mapAdaptivityAnswers(
