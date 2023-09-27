@@ -376,7 +376,7 @@ export default class MockBackendAdapter implements IBackendPort {
               {
                 taskId: 3,
                 taskTitle:
-                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, hier könnte Ihre Werbung stehen",
                 optional: true,
                 requiredDifficulty: 0,
                 adaptivityQuestions: [
@@ -419,9 +419,8 @@ export default class MockBackendAdapter implements IBackendPort {
 
               {
                 taskId: 4,
-                taskTitle:
-                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
-                optional: true,
+                taskTitle: "Aufgabe 4, nicht mehr ",
+                optional: false,
                 requiredDifficulty: 0,
                 adaptivityQuestions: [
                   {
@@ -464,8 +463,8 @@ export default class MockBackendAdapter implements IBackendPort {
               {
                 taskId: 5,
                 taskTitle:
-                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
-                optional: true,
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
+                optional: false,
                 requiredDifficulty: 0,
                 adaptivityQuestions: [
                   {
@@ -551,9 +550,8 @@ export default class MockBackendAdapter implements IBackendPort {
 
               {
                 taskId: 7,
-                taskTitle:
-                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
-                optional: true,
+                taskTitle: "Ja Moin, wer es bis hier schafft, ist ein Champion",
+                optional: false,
                 requiredDifficulty: 0,
                 adaptivityQuestions: [
                   {
