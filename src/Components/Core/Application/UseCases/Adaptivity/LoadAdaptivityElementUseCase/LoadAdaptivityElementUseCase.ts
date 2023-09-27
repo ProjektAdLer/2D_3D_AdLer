@@ -11,6 +11,7 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../../GetUserLocation/IGetUserLocationUseCase";
 import AdaptivityElementEntity from "src/Components/Core/Domain/Entities/Adaptivity/AdaptivityElementEntity";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
+import type IGetAdaptivityElementStatusUseCase from "../GetAdaptivityElementStatusUseCase/IGetAdaptivityElementStatusUseCase";
 
 @injectable()
 export default class LoadAdaptivityElementUseCase
@@ -24,7 +25,9 @@ export default class LoadAdaptivityElementUseCase
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
-    private getUserLocationUseCase: IGetUserLocationUseCase
+    private getUserLocationUseCase: IGetUserLocationUseCase,
+    @inject(USECASE_TYPES.IGetAdaptivityElementStatusUseCase)
+    private getAdaptivityElementStatusUseCase: IGetAdaptivityElementStatusUseCase
   ) {}
 
   async executeAsync(elementID: ComponentID): Promise<void> {
@@ -66,14 +69,10 @@ export default class LoadAdaptivityElementUseCase
     );
     adaptivityTO.elementName = elementEntity[0].element.name;
 
-    // temporary hardcoded till backend call is available
-    adaptivityTO.isCompleted = false;
-    adaptivityTO.tasks.forEach((task) => {
-      task.isCompleted = null;
-      task.questions.forEach((question) => {
-        question.isCompleted = null;
-      });
-    });
+    adaptivityTO =
+      await this.getAdaptivityElementStatusUseCase.internalExecuteAsync(
+        adaptivityTO
+      );
 
     this.worldPort.onAdaptivityElementLoaded(adaptivityTO);
 

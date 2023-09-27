@@ -24,7 +24,9 @@ const USECASE_TYPES = {
     "IGetLearningSpacePrecursorAndSuccessorUseCase"
   ),
   ILoadAdaptivityElementUseCase: Symbol("ILoadAdaptivityElementUseCase"),
-  IUpdateQuizElementUseCase: Symbol("IUpdateQuizElementUseCase"),
+  IGetAdaptivityElementStatusUseCase: Symbol(
+    "IGetAdaptivityElementStatusUseCase"
+  ),
   ISubmitAdaptivityElementSelectionUseCase: Symbol(
     "ISubmitAdaptivityElementSelectionUseCase"
   ),
