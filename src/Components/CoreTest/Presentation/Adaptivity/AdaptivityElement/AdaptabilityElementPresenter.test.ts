@@ -6,23 +6,48 @@ import AdaptivityElementViewModel, {
 } from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
 import { StyledButtonColor } from "../../../../Core/Presentation/React/ReactRelated/ReactBaseComponents/StyledButton";
 
-const adaptivityElementProgressTO: AdaptivityElementProgressTO = {
-  isCompleted: false,
-  tasks: [],
-  introText: "",
-  shuffleTask: false,
-};
-
 describe("AdaptivityElementPresenter", () => {
   let systemUnderTest: AdaptivityElementPresenter;
+  let viewModel: AdaptivityElementViewModel;
 
   beforeEach(() => {
-    systemUnderTest = new AdaptivityElementPresenter(
-      new AdaptivityElementViewModel()
-    );
+    viewModel = new AdaptivityElementViewModel();
+    systemUnderTest = new AdaptivityElementPresenter(viewModel);
   });
 
   test("onAdaptivityElementLoaded sets isOpen to true", () => {
+    const adaptivityElementProgressTO: AdaptivityElementProgressTO = {
+      isCompleted: false,
+      tasks: [
+        {
+          taskId: 1,
+          taskTitle: "TestTaskTitle",
+          taskOptional: false,
+          questions: [
+            {
+              questionId: 1,
+              questionText: "TestQuestionText",
+              questionType: "",
+              trigger: [],
+              questionAnswers: [
+                {
+                  answerId: 1,
+                  answerText: "TestAnswerText",
+                },
+              ],
+              questionDifficulty: 1,
+              isCompleted: false,
+            },
+          ],
+          requiredDifficulty: 1,
+          isCompleted: false,
+        },
+      ],
+      introText: "",
+      shuffleTask: false,
+      elementName: "",
+    };
+
     systemUnderTest.onAdaptivityElementLoaded(adaptivityElementProgressTO);
 
     expect(systemUnderTest["viewModel"].isOpen.Value).toBe(true);
@@ -43,9 +68,11 @@ describe("AdaptivityElementPresenter", () => {
               questionAnswers: [],
               isRequired: false,
               isCompleted: false,
+              difficulty: 100,
             },
           ],
           isCompleted: false,
+          requiredDifficulty: 100,
         },
       ],
     };
@@ -53,10 +80,10 @@ describe("AdaptivityElementPresenter", () => {
     systemUnderTest["viewModel"].currentTaskID.Value = 1;
     systemUnderTest["viewModel"].currentQuestionID.Value = 1;
 
-    const result = systemUnderTest["createFooterBreadcrumbs"]();
+    systemUnderTest["setFooterBreadcrumbs"]();
 
     // TODO: extend expected result when question title is implemented
-    expect(result).toBe("TestElement => TestTask");
+    expect(viewModel.footerText.Value).toBe("TestElement => TestTask");
   });
 
   test("createContentData returns the correct content data", () => {
@@ -65,60 +92,60 @@ describe("AdaptivityElementPresenter", () => {
       tasks: [
         {
           taskId: 1,
-          taskTitle: "",
+          taskTitle: "TestTaskTitle",
           taskOptional: false,
           questions: [
             {
               questionId: 1,
-              questionText: "",
+              questionText: "TestQuestionText",
               questionType: "",
               trigger: [],
               questionAnswers: [
                 {
                   answerId: 1,
-                  answerText: "",
+                  answerText: "TestAnswerText",
                 },
               ],
               questionDifficulty: 1,
               isCompleted: false,
             },
           ],
-          requieredDifficulty: 1,
+          requiredDifficulty: 1,
           isCompleted: false,
         },
       ],
       introText: "",
       shuffleTask: false,
+      elementName: "TestName",
     };
 
-    const result = systemUnderTest["createContentData"](
-      adaptivityElementProgressTO
-    );
+    systemUnderTest["setContentData"](adaptivityElementProgressTO);
 
-    expect(result).toStrictEqual({
-      // TODO: remove placeholder name
-      elementName: "PLACEHOLDER_NAME",
+    expect(viewModel.contentData.Value).toStrictEqual({
+      elementName: "TestName",
       introText: "",
       tasks: [
         {
           taskID: 1,
-          taskTitle: "",
+          taskTitle: "TestTaskTitle",
+          isCompleted: false,
+          requiredDifficulty: 1,
           questions: [
             {
               questionID: 1,
-              questionText: "",
+              questionText: "TestQuestionText",
+              isRequired: true,
+              isCompleted: false,
+              difficulty: 1,
               questionAnswers: [
                 {
                   answerIndex: 1,
-                  answerText: "",
+                  answerText: "TestAnswerText",
                   isSelected: false,
                 },
               ],
-              isRequired: true,
-              isCompleted: false,
             },
           ],
-          isCompleted: false,
         },
       ],
     });
