@@ -293,7 +293,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 adaptivityQuestions: [
                   {
                     questionType: "singleResponse",
-                    questionId: 1,
+                    questionId: 0,
                     questionDifficulty: 100,
                     questionText: "Welches Land grenzt nicht an Deutschland?",
                     adaptivityRules: [
