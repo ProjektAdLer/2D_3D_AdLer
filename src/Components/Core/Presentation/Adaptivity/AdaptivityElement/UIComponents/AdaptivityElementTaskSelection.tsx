@@ -9,12 +9,18 @@ import wrongIcon from "../../../../../../Assets/icons/35-wrong/wrong-icon-nobg.s
 
 export default function AdaptivityElementTaskSelection({
   tasks,
+  setHeaderText,
   onSelectTask,
 }: {
   tasks: AdaptivityTask[];
+  setHeaderText: (headerText: string) => void;
   onSelectTask: (taskID: number) => void;
 }) {
   const [taskButtons, setTaskButtons] = useState<JSX.Element[]>([]);
+
+  useEffect(() => {
+    setHeaderText("PLACEHOLDER_TEXT_TASK_SELECTION");
+  }, [setHeaderText]);
 
   useEffect(() => {
     setTaskButtons(
