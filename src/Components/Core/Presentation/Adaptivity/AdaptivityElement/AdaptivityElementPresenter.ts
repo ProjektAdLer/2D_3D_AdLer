@@ -104,7 +104,7 @@ export default class AdaptivityElementPresenter
 
     // TODO: add element name when it is available
     this.viewModel.contentData.Value = {
-      elementName: "PLACEHOLDER_NAME",
+      elementName: adaptivityElementProgressTO.elementName,
       introText: adaptivityElementProgressTO.introText,
       tasks: newTasks,
     } as AdaptivityElementContent;
