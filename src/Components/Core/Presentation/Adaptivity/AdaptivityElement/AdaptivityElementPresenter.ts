@@ -87,6 +87,7 @@ export default class AdaptivityElementPresenter
               questionAnswers: newAnswers,
               isRequired: isRequired,
               isCompleted: question.isCompleted,
+              difficulty: question.questionDifficulty,
             } as AdaptivityQuestion;
           }
         );
@@ -96,6 +97,7 @@ export default class AdaptivityElementPresenter
           taskTitle: task.taskTitle,
           questions: newQuestions,
           isCompleted: task.isCompleted,
+          requiredDifficulty: task.requiredDifficulty,
         } as AdaptivityTask;
       }
     );
