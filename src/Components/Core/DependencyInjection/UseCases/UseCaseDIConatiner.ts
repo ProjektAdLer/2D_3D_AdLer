@@ -42,6 +42,8 @@ import ICreateOverallTimeSpentNotificationTimerUseCase from "../../Application/U
 import CreateOverallTimeSpentNotificationUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpentNotification/CreateOverallTimeSpentNotificationTimerUseCase/CreateOverallTimeSpentNotificationTimerUseCase";
 import IPauseOverallTimeSpentNotificationTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpentNotification/PauseOverallTimeSpentNotificationTimerUseCase/IPauseOverallTimeSpentNotificationTimerUseCase";
 import PauseOverallTimeSpentNotificationTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpentNotification/PauseOverallTimeSpentNotificationTimerUseCase/PauseOverallTimeSpentNotificationTimerUseCase";
+import IGetAdaptivityElementStatusUseCase from "../../Application/UseCases/Adaptivity/GetAdaptivityElementStatusUseCase/IGetAdaptivityElementStatusUseCase";
+import GetAdaptivityElementStatusUseCase from "../../Application/UseCases/Adaptivity/GetAdaptivityElementStatusUseCase/GetAdaptivityElementStatusUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -125,6 +127,12 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.ILoadAdaptivityElementUseCase
   )
     .to(LoadAdaptivityElementUseCase)
+    .inSingletonScope();
+
+  bind<IGetAdaptivityElementStatusUseCase>(
+    USECASE_TYPES.IGetAdaptivityElementStatusUseCase
+  )
+    .to(GetAdaptivityElementStatusUseCase)
     .inSingletonScope();
 
   bind<ISubmitAdaptivityElementSelectionUseCase>(
