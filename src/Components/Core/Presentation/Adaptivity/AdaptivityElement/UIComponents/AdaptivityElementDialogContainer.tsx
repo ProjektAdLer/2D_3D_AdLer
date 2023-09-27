@@ -35,14 +35,14 @@ export default function AdaptivityElementDialogContainer({
 
   return (
     <>
-      <img
-        className="absolute top-0 right-0 z-10 max-h-[93vh] w-fit max-w-[90vw] lg:max-w-[99vw]"
-        alt="LearningImage!"
-        src={quizBackgroundVRGuy}
-      ></img>
       <StyledContainer className={tailwindMerge(className, "")}>
-        <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center h-full">
-          <div className="p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-auto">
+        <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-screen bg-black bg-opacity-50">
+          <img
+            className="absolute top-0 right-0 z-0 max-h-[93vh] w-fit max-w-[90vw] lg:max-w-[99vw]"
+            alt="LearningImage!"
+            src={quizBackgroundVRGuy}
+          ></img>
+          <div className="z-10 p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-auto">
             <div className="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit">
               <div className="w-full">{contentData.elementName}</div>
 
@@ -55,7 +55,7 @@ export default function AdaptivityElementDialogContainer({
             </div>
 
             {currentTaskID === null && currentQuestionID === null && (
-              <div className="px-1 rounded-lg font-regular h-fit">
+              <div className="flex justify-center items-center px-1 rounded-lg font-regular h-fit mt-2">
                 <AdaptivityElementTaskSelection
                   tasks={contentData.tasks}
                   onSelectTask={controller.selectTask}

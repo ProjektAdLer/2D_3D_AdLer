@@ -4,6 +4,6 @@ export default class AdaptivityElementTaskTO {
   taskId: number;
   taskTitle: string;
   taskOptional: boolean;
-  requieredDifficulty: number;
+  requiredDifficulty: number;
   questions: AdaptivityElementQuestionTO[];
 }

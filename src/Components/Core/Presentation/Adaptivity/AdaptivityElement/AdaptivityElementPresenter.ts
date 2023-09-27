@@ -13,18 +13,16 @@ export default class AdaptivityElementPresenter
   implements IAdaptivityElementPresenter
 {
   constructor(private viewModel: AdaptivityElementViewModel) {
-    viewModel.currentTaskID.subscribe(() => this.createFooterBreadcrumbs());
-    viewModel.currentQuestionID.subscribe(() => this.createFooterBreadcrumbs());
-    viewModel.contentData.subscribe(() => this.createFooterBreadcrumbs());
+    viewModel.currentTaskID.subscribe(() => this.setFooterBreadcrumbs());
+    viewModel.currentQuestionID.subscribe(() => this.setFooterBreadcrumbs());
+    viewModel.contentData.subscribe(() => this.setFooterBreadcrumbs());
   }
 
   onAdaptivityElementLoaded(
     adaptivityElementProgressTO: AdaptivityElementProgressTO
   ): void {
-    this.viewModel.contentData.Value = this.createContentData(
-      adaptivityElementProgressTO
-    );
-    this.viewModel.footerText.Value = this.createFooterBreadcrumbs();
+    this.setContentData(adaptivityElementProgressTO);
+    this.setFooterBreadcrumbs();
 
     this.viewModel.isOpen.Value = true;
   }
@@ -34,7 +32,7 @@ export default class AdaptivityElementPresenter
   }
 
   @bind
-  private createFooterBreadcrumbs(): string {
+  private setFooterBreadcrumbs(): void {
     const currentQuestionID = this.viewModel.currentQuestionID.Value;
     const currentTaskID = this.viewModel.currentTaskID.Value;
     const contentData = this.viewModel.contentData.Value;
@@ -56,12 +54,12 @@ export default class AdaptivityElementPresenter
       }
     }
 
-    return newFooterText;
+    this.viewModel.footerText.Value = newFooterText;
   }
 
-  private createContentData(
+  private setContentData(
     adaptivityElementProgressTO: AdaptivityElementProgressTO
-  ): AdaptivityElementContent {
+  ): void {
     const newTasks: AdaptivityTask[] = adaptivityElementProgressTO.tasks.map(
       (task) => {
         const newQuestions: AdaptivityQuestion[] = task.questions.map(
@@ -78,7 +76,7 @@ export default class AdaptivityElementPresenter
 
             // TODO: this is not completely correct yet
             const isRequired =
-              task.requieredDifficulty <= question.questionDifficulty;
+              task.requiredDifficulty <= question.questionDifficulty;
 
             return {
               questionID: question.questionId,
@@ -100,7 +98,7 @@ export default class AdaptivityElementPresenter
     );
 
     // TODO: add element name when it is available
-    return {
+    this.viewModel.contentData.Value = {
       elementName: "PLACEHOLDER_NAME",
       introText: adaptivityElementProgressTO.introText,
       tasks: newTasks,
