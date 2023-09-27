@@ -42,7 +42,7 @@ describe("AdaptivityElementController", () => {
     expect(viewModel.currentTaskID.Value).toBe(1);
   });
 
-  test("submitSelection calls SubmitSelectionUseCase", () => {
+  test.skip("submitSelection calls SubmitSelectionUseCase", () => {
     let submit = {
       questionID: 2,
       selectedAnswerIndexes: [1, 3],

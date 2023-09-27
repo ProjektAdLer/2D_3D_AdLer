@@ -1,3 +1,4 @@
+import { AdaptivityElementQuestionDifficultyTypes } from "../../Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 import LearningElementEntity from "../LearningElementEntity";
 
 export default class AdaptivityElementEntity {
@@ -11,14 +12,14 @@ export class AdaptivityTaskEntity {
   taskId: number;
   taskTitle: string;
   taskOptional: boolean;
-  requieredDifficulty: number;
+  requieredDifficulty: AdaptivityElementQuestionDifficultyTypes;
   questions: AdaptivityQuestionEntity[];
 }
 
 export class AdaptivityQuestionEntity {
   questionType: string;
   questionId: number;
-  questionDifficulty: number;
+  questionDifficulty: AdaptivityElementQuestionDifficultyTypes;
   questionText: string;
   questionAnswers: AdaptivityAnswerEntity[];
   trigger: AdaptivityTriggerEntity[];
