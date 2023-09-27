@@ -24,33 +24,46 @@ export default function AdaptivityElementTaskSelection({
         );
 
         return (
-          <li key={i.toString() + "_" + task.taskID}>
+          <div key={i.toString() + "_" + task.taskID} className="flex flex-col">
             <StyledButton
-              shape="freefloatleft"
+              shape="freefloatcenter"
+              className="w-full max-w-2xl"
               onClick={() => onSelectTask(task.taskID)}
             >
-              {task.isCompleted && (
-                <img alt="" className={"h-6 lg:h-8 pr-2"} src={correctIcon} />
-              )}
-              {!task.isCompleted && (
-                <img alt="" className={"h-6 lg:h-8 pr-2"} src={wrongIcon} />
-              )}
+              <div className="w-full h-full flex justify-between items-center align-center">
+                {task.isCompleted && (
+                  <img
+                    alt=""
+                    className={"h-6 lg:h-8 pr-4 xl:pr-8"}
+                    src={correctIcon}
+                  />
+                )}
+                {!task.isCompleted && (
+                  <img
+                    alt=""
+                    className={"h-6 lg:h-8 pr-4 xl:pr-8"}
+                    src={wrongIcon}
+                  />
+                )}
 
-              {task.taskTitle}
+                {task.taskTitle}
 
-              {isRequired && (
-                <img
-                  alt=""
-                  className={"h-6 lg:h-8 pr-2"}
-                  src={requiredTaskIcon}
-                />
-              )}
+                {isRequired && (
+                  <img
+                    alt=""
+                    className={"h-6 lg:h-8 pl-4 xl:pl-8"}
+                    src={requiredTaskIcon}
+                  />
+                )}
+              </div>
             </StyledButton>
-          </li>
+          </div>
         );
       })
     );
   }, [tasks, onSelectTask]);
 
-  return <ul>{taskButtons}</ul>;
+  return (
+    <div className="grid lg:grid-cols-2 gap-4 gap-x-8 my-2">{taskButtons}</div>
+  );
 }
