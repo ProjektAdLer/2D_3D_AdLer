@@ -76,7 +76,7 @@ export default class AdaptivityElementPresenter
 
             // TODO: this is not completely correct yet
             const isRequired =
-              task.requieredDifficulty <= question.questionDifficulty;
+              task.requiredDifficulty <= question.questionDifficulty;
 
             return {
               questionID: question.questionId,

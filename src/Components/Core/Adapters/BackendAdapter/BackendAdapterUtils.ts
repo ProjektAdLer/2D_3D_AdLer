@@ -146,7 +146,7 @@ export default class BackendAdapterUtils {
         taskId: task.taskId,
         taskTitle: task.taskTitle,
         taskOptional: task.optional,
-        requieredDifficulty: task.requiredDifficulty,
+        requiredDifficulty: task.requiredDifficulty,
         questions: [],
       } as AdaptivityElementTaskTO);
 
