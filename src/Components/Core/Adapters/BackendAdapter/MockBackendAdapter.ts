@@ -293,7 +293,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 adaptivityQuestions: [
                   {
                     questionType: "singleResponse",
-                    questionId: 1,
+                    questionId: 0,
                     questionDifficulty: 100,
                     questionText: "Welches Land grenzt nicht an Deutschland?",
                     adaptivityRules: [
@@ -313,7 +313,7 @@ export default class MockBackendAdapter implements IBackendPort {
                         },
                       },
                     ],
-                    possibleAnswers: [
+                    choices: [
                       {
                         answerText: "Dänemark",
                       },
@@ -332,7 +332,8 @@ export default class MockBackendAdapter implements IBackendPort {
               },
               {
                 taskId: 2,
-                taskTitle: "Aufgabe 2 - Mathematik",
+                taskTitle:
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
                 optional: true,
                 requiredDifficulty: 0,
                 adaptivityQuestions: [
@@ -358,7 +359,358 @@ export default class MockBackendAdapter implements IBackendPort {
                         },
                       },
                     ],
-                    possibleAnswers: [
+                    choices: [
+                      {
+                        answerText: "2",
+                      },
+                      {
+                        answerText: "3",
+                      },
+                      {
+                        answerText: "14",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                taskId: 3,
+                taskTitle:
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
+                optional: true,
+                requiredDifficulty: 0,
+                adaptivityQuestions: [
+                  {
+                    questionType: "multipleResponse",
+                    questionId: 1,
+                    questionDifficulty: 0,
+                    questionText: "Welche Zahlen sind Primzahlen?",
+                    adaptivityRules: [
+                      {
+                        triggerId: 1,
+                        triggerCondition: "correct",
+                        adaptivityAction: {
+                          commentText: "Das war richtig. Gut gemacht!",
+                        },
+                      },
+                      {
+                        triggerId: 2,
+                        triggerCondition: "incorrect",
+                        adaptivityAction: {
+                          commentText:
+                            "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
+                        },
+                      },
+                    ],
+                    choices: [
+                      {
+                        answerText: "2",
+                      },
+                      {
+                        answerText: "3",
+                      },
+                      {
+                        answerText: "14",
+                      },
+                    ],
+                  },
+                ],
+              },
+
+              {
+                taskId: 4,
+                taskTitle:
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
+                optional: true,
+                requiredDifficulty: 0,
+                adaptivityQuestions: [
+                  {
+                    questionType: "multipleResponse",
+                    questionId: 1,
+                    questionDifficulty: 0,
+                    questionText: "Welche Zahlen sind Primzahlen?",
+                    adaptivityRules: [
+                      {
+                        triggerId: 1,
+                        triggerCondition: "correct",
+                        adaptivityAction: {
+                          commentText: "Das war richtig. Gut gemacht!",
+                        },
+                      },
+                      {
+                        triggerId: 2,
+                        triggerCondition: "incorrect",
+                        adaptivityAction: {
+                          commentText:
+                            "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
+                        },
+                      },
+                    ],
+                    choices: [
+                      {
+                        answerText: "2",
+                      },
+                      {
+                        answerText: "3",
+                      },
+                      {
+                        answerText: "14",
+                      },
+                    ],
+                  },
+                ],
+              },
+
+              {
+                taskId: 5,
+                taskTitle:
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
+                optional: true,
+                requiredDifficulty: 0,
+                adaptivityQuestions: [
+                  {
+                    questionType: "multipleResponse",
+                    questionId: 1,
+                    questionDifficulty: 0,
+                    questionText: "Welche Zahlen sind Primzahlen?",
+                    adaptivityRules: [
+                      {
+                        triggerId: 1,
+                        triggerCondition: "correct",
+                        adaptivityAction: {
+                          commentText: "Das war richtig. Gut gemacht!",
+                        },
+                      },
+                      {
+                        triggerId: 2,
+                        triggerCondition: "incorrect",
+                        adaptivityAction: {
+                          commentText:
+                            "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
+                        },
+                      },
+                    ],
+                    choices: [
+                      {
+                        answerText: "2",
+                      },
+                      {
+                        answerText: "3",
+                      },
+                      {
+                        answerText: "14",
+                      },
+                    ],
+                  },
+                ],
+              },
+
+              {
+                taskId: 6,
+                taskTitle:
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
+                optional: true,
+                requiredDifficulty: 0,
+                adaptivityQuestions: [
+                  {
+                    questionType: "multipleResponse",
+                    questionId: 1,
+                    questionDifficulty: 0,
+                    questionText: "Welche Zahlen sind Primzahlen?",
+                    adaptivityRules: [
+                      {
+                        triggerId: 1,
+                        triggerCondition: "correct",
+                        adaptivityAction: {
+                          commentText: "Das war richtig. Gut gemacht!",
+                        },
+                      },
+                      {
+                        triggerId: 2,
+                        triggerCondition: "incorrect",
+                        adaptivityAction: {
+                          commentText:
+                            "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
+                        },
+                      },
+                    ],
+                    choices: [
+                      {
+                        answerText: "2",
+                      },
+                      {
+                        answerText: "3",
+                      },
+                      {
+                        answerText: "14",
+                      },
+                    ],
+                  },
+                ],
+              },
+
+              {
+                taskId: 7,
+                taskTitle:
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
+                optional: true,
+                requiredDifficulty: 0,
+                adaptivityQuestions: [
+                  {
+                    questionType: "multipleResponse",
+                    questionId: 1,
+                    questionDifficulty: 0,
+                    questionText: "Welche Zahlen sind Primzahlen?",
+                    adaptivityRules: [
+                      {
+                        triggerId: 1,
+                        triggerCondition: "correct",
+                        adaptivityAction: {
+                          commentText: "Das war richtig. Gut gemacht!",
+                        },
+                      },
+                      {
+                        triggerId: 2,
+                        triggerCondition: "incorrect",
+                        adaptivityAction: {
+                          commentText:
+                            "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
+                        },
+                      },
+                    ],
+                    choices: [
+                      {
+                        answerText: "2",
+                      },
+                      {
+                        answerText: "3",
+                      },
+                      {
+                        answerText: "14",
+                      },
+                    ],
+                  },
+                ],
+              },
+
+              {
+                taskId: 8,
+                taskTitle:
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
+                optional: true,
+                requiredDifficulty: 0,
+                adaptivityQuestions: [
+                  {
+                    questionType: "multipleResponse",
+                    questionId: 1,
+                    questionDifficulty: 0,
+                    questionText: "Welche Zahlen sind Primzahlen?",
+                    adaptivityRules: [
+                      {
+                        triggerId: 1,
+                        triggerCondition: "correct",
+                        adaptivityAction: {
+                          commentText: "Das war richtig. Gut gemacht!",
+                        },
+                      },
+                      {
+                        triggerId: 2,
+                        triggerCondition: "incorrect",
+                        adaptivityAction: {
+                          commentText:
+                            "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
+                        },
+                      },
+                    ],
+                    choices: [
+                      {
+                        answerText: "2",
+                      },
+                      {
+                        answerText: "3",
+                      },
+                      {
+                        answerText: "14",
+                      },
+                    ],
+                  },
+                ],
+              },
+
+              {
+                taskId: 9,
+                taskTitle:
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
+                optional: true,
+                requiredDifficulty: 0,
+                adaptivityQuestions: [
+                  {
+                    questionType: "multipleResponse",
+                    questionId: 1,
+                    questionDifficulty: 0,
+                    questionText: "Welche Zahlen sind Primzahlen?",
+                    adaptivityRules: [
+                      {
+                        triggerId: 1,
+                        triggerCondition: "correct",
+                        adaptivityAction: {
+                          commentText: "Das war richtig. Gut gemacht!",
+                        },
+                      },
+                      {
+                        triggerId: 2,
+                        triggerCondition: "incorrect",
+                        adaptivityAction: {
+                          commentText:
+                            "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
+                        },
+                      },
+                    ],
+                    choices: [
+                      {
+                        answerText: "2",
+                      },
+                      {
+                        answerText: "3",
+                      },
+                      {
+                        answerText: "14",
+                      },
+                    ],
+                  },
+                ],
+              },
+
+              {
+                taskId: 10,
+                taskTitle:
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
+                optional: true,
+                requiredDifficulty: 0,
+                adaptivityQuestions: [
+                  {
+                    questionType: "multipleResponse",
+                    questionId: 1,
+                    questionDifficulty: 0,
+                    questionText: "Welche Zahlen sind Primzahlen?",
+                    adaptivityRules: [
+                      {
+                        triggerId: 1,
+                        triggerCondition: "correct",
+                        adaptivityAction: {
+                          commentText: "Das war richtig. Gut gemacht!",
+                        },
+                      },
+                      {
+                        triggerId: 2,
+                        triggerCondition: "incorrect",
+                        adaptivityAction: {
+                          commentText:
+                            "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
+                        },
+                      },
+                    ],
+                    choices: [
                       {
                         answerText: "2",
                       },
@@ -375,6 +727,7 @@ export default class MockBackendAdapter implements IBackendPort {
             ],
           },
         },
+
         {
           elementId: 999,
           elementName: "Ein externes Lernelement",
