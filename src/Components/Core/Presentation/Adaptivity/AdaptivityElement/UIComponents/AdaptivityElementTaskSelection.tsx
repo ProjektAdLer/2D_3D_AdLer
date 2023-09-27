@@ -3,9 +3,9 @@ import { AdaptivityTask } from "../AdaptivityElementViewModel";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 //TODO: change this when key icon is available
-import requiredTaskIcon from "../../../../../../Assets/icons/01-badges/badge-gold-darkblue-icon-nobg.svg";
-import correctIcon from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
-import wrongIcon from "../../../../../../Assets/icons/35-wrong/wrong-icon-nobg.svg";
+import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
+import correctIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-solved-icon.svg";
+import wrongIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-unsolved-icon.svg";
 
 export default function AdaptivityElementTaskSelection({
   tasks,
@@ -63,7 +63,5 @@ export default function AdaptivityElementTaskSelection({
     );
   }, [tasks, onSelectTask]);
 
-  return (
-    <div className="grid lg:grid-cols-2 gap-4 gap-x-8 my-2">{taskButtons}</div>
-  );
+  return <div className="grid lg:grid-cols-2 gap-4 gap-x-8">{taskButtons}</div>;
 }
