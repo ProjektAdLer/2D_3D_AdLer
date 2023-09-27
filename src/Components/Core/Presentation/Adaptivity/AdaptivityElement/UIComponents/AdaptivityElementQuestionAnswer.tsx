@@ -21,7 +21,7 @@ export default function AdaptivityElementQuestionAnswer({
   useEffect(() => {
     setHeaderText(question.questionText);
     setAnswerColors(question.questionAnswers.map(() => "default"));
-  }, [question]);
+  }, [setHeaderText, question]);
 
   const onAnswerClicked = useCallback(
     (answer: AdaptivityAnswer, index: number) => {
