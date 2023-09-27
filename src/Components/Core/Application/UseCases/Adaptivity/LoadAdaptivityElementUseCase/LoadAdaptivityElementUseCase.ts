@@ -64,6 +64,7 @@ export default class LoadAdaptivityElementUseCase
       adaptivityTO,
       structuredClone(elementEntity[0])
     );
+    adaptivityTO.elementName = elementEntity[0].element.name;
 
     // temporary hardcoded till backend call is available
     adaptivityTO.isCompleted = false;
