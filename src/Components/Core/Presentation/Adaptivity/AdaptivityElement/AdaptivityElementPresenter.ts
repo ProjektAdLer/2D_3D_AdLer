@@ -24,6 +24,9 @@ export default class AdaptivityElementPresenter
     this.setContentData(adaptivityElementProgressTO);
     this.setFooterBreadcrumbs();
 
+    this.viewModel.currentTaskID.Value = null;
+    this.viewModel.currentQuestionID.Value = null;
+
     this.viewModel.isOpen.Value = true;
   }
 
