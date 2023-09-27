@@ -36,8 +36,8 @@ export default class AdaptivityElementController
       }
     });
 
-    CoreDIContainer.get<ISubmitAdaptivityElementSelectionUseCase>(
-      USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
-    ).executeAsync(selection);
+    // CoreDIContainer.get<ISubmitAdaptivityElementSelectionUseCase>(
+    //   USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
+    // ).executeAsync(selection);
   }
 }
