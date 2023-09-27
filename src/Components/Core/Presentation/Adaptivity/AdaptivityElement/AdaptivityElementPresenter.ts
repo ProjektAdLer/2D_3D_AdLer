@@ -1,7 +1,4 @@
-import {
-  AdaptivityContentsTO,
-  EvaluationAnswerTO,
-} from "../../../Application/DataTransferObjects/QuizElementTO";
+import { EvaluationAnswerTO } from "../../../Application/DataTransferObjects/QuizElementTO";
 import IAdaptivityElementPresenter from "./IAdaptivityElementPresenter";
 import AdaptivityElementViewModel, {
   AdaptivityElementContent,
@@ -17,51 +14,17 @@ export default class AdaptivityElementPresenter
 {
   constructor(private viewModel: AdaptivityElementViewModel) {
     viewModel.currentTaskID.subscribe(() => this.createFooterBreadcrumbs());
-    viewModel.currentElement.subscribe(() => this.createFooterBreadcrumbs());
+    viewModel.currentQuestionID.subscribe(() => this.createFooterBreadcrumbs());
     viewModel.contentData.subscribe(() => this.createFooterBreadcrumbs());
   }
 
-  onAdaptivityElementLoaded?(
+  onAdaptivityElementLoaded(
     adaptivityElementProgressTO: AdaptivityElementProgressTO
   ): void {
-    /*
-    // TODO: remove this placeholder data when TO is updated
-    const tasks: AdaptivityTask[] = [
-      {
-        taskID: 1,
-        taskTitle: "PLACEHOLDER_TASK_TITLE",
-        questions: [],
-      } as AdaptivityTask,
-    ];
-
-    contentTO.questions.forEach((question) => {
-      const questionTarget = new AdaptivityQuestion();
-      questionTarget.questionAnswers = [];
-
-      questionTarget.questionID = question.questionID;
-      questionTarget.questionText = question.questionText;
-      if (questionTarget.questionImage && question.questionImage)
-        questionTarget.questionImage = question.questionImage;
-      questionTarget.questionPoints = question.questionPoints;
-      question.questionAnswers.forEach((answer) => {
-        const answerTarget = new QuizAnswer();
-        answerTarget.answerIndex = answer.answerIndex;
-        answerTarget.answerText = answer.answerText;
-        if (answerTarget.answerImage && answer.answerImage)
-          answerTarget.answerImage = answer.answerImage;
-        answerTarget.isSelected = false;
-        questionTarget.questionAnswers.push(answerTarget);
-      });
-
-      content.questions.push(questionTarget);
-    });
-
-    this.viewModel.contentData.Value = content;
-
-    //this.viewModel.contentData.Value = contentTO;
-    this.viewModel.currentElement.Value =
-      this.viewModel.contentData.Value.questions[0];
-      */
+    this.viewModel.contentData.Value = this.createContentData(
+      adaptivityElementProgressTO
+    );
+    this.viewModel.footerText.Value = this.createFooterBreadcrumbs();
 
     this.viewModel.isOpen.Value = true;
   }
@@ -71,8 +34,8 @@ export default class AdaptivityElementPresenter
   }
 
   @bind
-  private createFooterBreadcrumbs(): void {
-    const currentQuestionID = this.viewModel.currentElement.Value.questionID;
+  private createFooterBreadcrumbs(): string {
+    const currentQuestionID = this.viewModel.currentQuestionID.Value;
     const currentTaskID = this.viewModel.currentTaskID.Value;
     const contentData = this.viewModel.contentData.Value;
 
@@ -93,6 +56,54 @@ export default class AdaptivityElementPresenter
       }
     }
 
-    this.viewModel.footerText.Value = newFooterText;
+    return newFooterText;
+  }
+
+  private createContentData(
+    adaptivityElementProgressTO: AdaptivityElementProgressTO
+  ): AdaptivityElementContent {
+    const newTasks: AdaptivityTask[] = adaptivityElementProgressTO.tasks.map(
+      (task) => {
+        const newQuestions: AdaptivityQuestion[] = task.questions.map(
+          (question) => {
+            const newAnswers: AdaptivityAnswer[] = question.questionAnswers.map(
+              (answer) => {
+                return {
+                  answerIndex: answer.answerId,
+                  answerText: answer.answerText,
+                  isSelected: false,
+                } as AdaptivityAnswer;
+              }
+            );
+
+            // TODO: this is not completely correct yet
+            const isRequired =
+              task.requieredDifficulty <= question.questionDifficulty;
+
+            return {
+              questionID: question.questionId,
+              questionText: question.questionText,
+              questionAnswers: newAnswers,
+              isRequired: isRequired,
+              isCompleted: question.isCompleted,
+            } as AdaptivityQuestion;
+          }
+        );
+
+        return {
+          taskID: task.taskId,
+          taskTitle: task.taskTitle,
+          questions: newQuestions,
+          isCompleted: task.isCompleted,
+        } as AdaptivityTask;
+      }
+    );
+
+    // TODO: add element name when it is available
+    return {
+      elementName: "PLACEHOLDER_NAME",
+      introText: adaptivityElementProgressTO.introText,
+      tasks: newTasks,
+    } as AdaptivityElementContent;
   }
 }

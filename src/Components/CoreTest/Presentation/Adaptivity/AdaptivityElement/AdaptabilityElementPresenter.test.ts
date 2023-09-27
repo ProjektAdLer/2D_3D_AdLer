@@ -1,12 +1,17 @@
-import {
-  AdaptivityContentsTO,
-  EvaluationAnswerTO,
-} from "../../../../Core/Application/DataTransferObjects/QuizElementTO";
+import AdaptivityElementProgressTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
+import { EvaluationAnswerTO } from "../../../../Core/Application/DataTransferObjects/QuizElementTO";
 import AdaptivityElementPresenter from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementPresenter";
 import AdaptivityElementViewModel, {
   AdaptivityElementContent,
 } from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
 import { StyledButtonColor } from "../../../../Core/Presentation/React/ReactRelated/ReactBaseComponents/StyledButton";
+
+const adaptivityElementProgressTO: AdaptivityElementProgressTO = {
+  isCompleted: false,
+  tasks: [],
+  introText: "",
+  shuffleTask: false,
+};
 
 describe("AdaptivityElementPresenter", () => {
   let systemUnderTest: AdaptivityElementPresenter;
@@ -17,99 +22,103 @@ describe("AdaptivityElementPresenter", () => {
     );
   });
 
-  test.skip("onAdaptivityElementLoaded should set viewModel data", () => {
-    const adaptivityTO: AdaptivityContentsTO = {
-      shuffleQuestions: false,
-      questions: [
+  test("onAdaptivityElementLoaded sets isOpen to true", () => {
+    systemUnderTest.onAdaptivityElementLoaded(adaptivityElementProgressTO);
+
+    expect(systemUnderTest["viewModel"].isOpen.Value).toBe(true);
+  });
+
+  test("createFooterBreadcrumbs returns the correct string of names", () => {
+    const contentData: AdaptivityElementContent = {
+      elementName: "TestElement",
+      introText: "",
+      tasks: [
         {
-          questionID: 1,
-          questionText: "text 1",
-          questionPoints: 1,
-          questionAnswers: [
+          taskID: 1,
+          taskTitle: "TestTask",
+          questions: [
             {
-              answerIndex: 1,
-              answerText: "answer 1.1",
-            },
-            {
-              answerIndex: 2,
-              answerText: "anser 1.2",
+              questionID: 1,
+              questionText: "",
+              questionAnswers: [],
+              isRequired: false,
+              isCompleted: false,
             },
           ],
-        },
-        {
-          questionID: 2,
-          questionText: "text 2",
-          questionPoints: 1,
-          questionAnswers: [
-            {
-              answerIndex: 1,
-              answerText: "answer 2.1",
-            },
-            {
-              answerIndex: 2,
-              answerText: "anser 2.2",
-            },
-          ],
+          isCompleted: false,
         },
       ],
     };
+    systemUnderTest["viewModel"].contentData.Value = contentData;
+    systemUnderTest["viewModel"].currentTaskID.Value = 1;
+    systemUnderTest["viewModel"].currentQuestionID.Value = 1;
 
-    systemUnderTest.onAdaptivityElementLoaded(adaptivityTO);
+    const result = systemUnderTest["createFooterBreadcrumbs"]();
 
-    const adaptivity: AdaptivityElementContent = {
-      questions: [
+    // TODO: extend expected result when question title is implemented
+    expect(result).toBe("TestElement => TestTask");
+  });
+
+  test("createContentData returns the correct content data", () => {
+    const adaptivityElementProgressTO: AdaptivityElementProgressTO = {
+      isCompleted: false,
+      tasks: [
         {
-          questionID: 1,
-          questionText: "text 1",
-          questionPoints: 1,
-          questionAnswers: [
+          taskId: 1,
+          taskTitle: "",
+          taskOptional: false,
+          questions: [
             {
-              answerIndex: 1,
-              answerText: "answer 1.1",
-              isSelected: false,
-            },
-            {
-              answerIndex: 2,
-              answerText: "anser 1.2",
-              isSelected: false,
+              questionId: 1,
+              questionText: "",
+              questionType: "",
+              trigger: [],
+              questionAnswers: [
+                {
+                  answerId: 1,
+                  answerText: "",
+                },
+              ],
+              questionDifficulty: 1,
+              isCompleted: false,
             },
           ],
-        },
-        {
-          questionID: 2,
-          questionText: "text 2",
-          questionPoints: 1,
-          questionAnswers: [
-            {
-              answerIndex: 1,
-              answerText: "answer 2.1",
-              isSelected: false,
-            },
-            {
-              answerIndex: 2,
-              answerText: "anser 2.2",
-              isSelected: false,
-            },
-          ],
+          requieredDifficulty: 1,
+          isCompleted: false,
         },
       ],
+      introText: "",
+      shuffleTask: false,
     };
 
-    expect(systemUnderTest["viewModel"].contentData.Value).toEqual(adaptivity);
-    expect(systemUnderTest["viewModel"].currentElement.Value).toEqual({
-      questionID: 1,
-      questionText: "text 1",
-      questionPoints: 1,
-      questionAnswers: [
+    const result = systemUnderTest["createContentData"](
+      adaptivityElementProgressTO
+    );
+
+    expect(result).toStrictEqual({
+      // TODO: remove placeholder name
+      elementName: "PLACEHOLDER_NAME",
+      introText: "",
+      tasks: [
         {
-          answerIndex: 1,
-          answerText: "answer 1.1",
-          isSelected: false,
-        },
-        {
-          answerIndex: 2,
-          answerText: "anser 1.2",
-          isSelected: false,
+          taskID: 1,
+          taskTitle: "",
+          questions: [
+            {
+              questionID: 1,
+              questionText: "",
+              questionAnswers: [
+                {
+                  answerIndex: 1,
+                  answerText: "",
+                  isSelected: false,
+                },
+              ],
+              isRequired: true,
+              isCompleted: false,
+            },
+          ],
+          isCompleted: false,
         },
       ],
     });
