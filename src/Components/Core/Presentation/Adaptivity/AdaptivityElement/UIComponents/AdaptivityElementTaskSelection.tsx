@@ -69,5 +69,9 @@ export default function AdaptivityElementTaskSelection({
     );
   }, [tasks, onSelectTask]);
 
-  return <div className="grid lg:grid-cols-2 gap-4 gap-x-8">{taskButtons}</div>;
+  return (
+    <div className="grid lg:grid-cols-2 gap-4 justify-center items-center gap-x-8">
+      {taskButtons}
+    </div>
+  );
 }

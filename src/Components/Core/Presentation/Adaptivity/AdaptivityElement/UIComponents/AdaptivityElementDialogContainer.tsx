@@ -12,6 +12,7 @@ import { useState } from "react";
 import AdaptivityElementQuestionAnswer from "./AdaptivityElementQuestionAnswer";
 
 import quizBackgroundVRGuy from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
+import quizBackgroundVRGuyCutted from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background_cutted.png";
 
 export default function AdaptivityElementDialogContainer({
   className,
@@ -42,12 +43,15 @@ export default function AdaptivityElementDialogContainer({
     <>
       <StyledContainer className={tailwindMerge(className, "")}>
         <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-screen bg-black bg-opacity-50">
-          <div className="relative p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-auto">
+          <div className="invisible lg:visible lg:w-3/4 2xl:w-1/2">
             <img
-              className="invisible lg:visibile absolute h-96"
+              className="invisible lg:visible z-20 h-0 lg:h-48 xl:h-72 place-self-start"
               alt="LearningImage!"
-              src={quizBackgroundVRGuy}
+              src={quizBackgroundVRGuyCutted}
             ></img>
+          </div>
+
+          <div className="flex flex-col p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-auto">
             <div className="z-20 flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit">
               <img
                 className="lg:invisible visible h-20 lg:h-0"
@@ -65,7 +69,7 @@ export default function AdaptivityElementDialogContainer({
             </div>
 
             {currentTaskID === null && currentQuestionID === null && (
-              <div className="flex justify-center items-center px-1 rounded-lg font-regular h-fit lg:m-4">
+              <div className="flex justify-center items-center px-1 rounded-lg font-regular h-fit mb-4 lg:m-4">
                 <AdaptivityElementTaskSelection
                   tasks={contentData.tasks}
                   setHeaderText={setHeaderText}
