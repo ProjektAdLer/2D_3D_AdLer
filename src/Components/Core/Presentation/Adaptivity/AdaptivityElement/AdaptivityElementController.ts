@@ -19,6 +19,15 @@ export default class AdaptivityElementController
   @bind
   selectTask(taskID: number): void {
     this.viewModel.currentTaskID.Value = taskID;
+
+    // TODO: remove this when question selection is implemented
+    const currentTask = this.viewModel.contentData.Value.tasks.find(
+      (task) => task.taskID === taskID
+    )!;
+    const currentQuestion = currentTask.questions.find(
+      (question) => question.difficulty === currentTask.requiredDifficulty
+    )!;
+    this.viewModel.currentQuestionID.Value = currentQuestion.questionID;
   }
 
   submitSelection(): void {
