@@ -54,11 +54,13 @@ export default function AdaptivityElementDialogContainer({
             <div className="flex flex-col p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto w-full max-w-[95%] max-h-[95%] lg:h-fit justify-between overflow-auto">
               <div className="z-20 flex items-center justify-center w-full gap-2 p-2 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
                 <img
-                  className="lg:invisible visible h-20 lg:h-0"
+                  className="lg:invisible visible h-16 lg:h-0"
                   alt="LearningImage!"
                   src={quizBackgroundVRGuy}
                 ></img>
-                <div className="w-full text-sm lg:text-xl">{headerText}</div>
+                <div className="w-full text-sm lg:text-xl pr-2">
+                  {headerText}
+                </div>
 
                 <StyledButton
                   onClick={controller.closeModal}

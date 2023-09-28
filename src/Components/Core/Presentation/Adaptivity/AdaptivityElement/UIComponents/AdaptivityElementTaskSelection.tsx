@@ -19,7 +19,9 @@ export default function AdaptivityElementTaskSelection({
   const [taskButtons, setTaskButtons] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
-    setHeaderText("PLACEHOLDER_TEXT TASK_SELECTION");
+    setHeaderText(
+      "Hallo Freund, ich helfe dir zu lernen. Such dir ein Thema aus und wir arbeiten gemeinsam an deinem Wissen."
+    );
   }, [setHeaderText]);
 
   useEffect(() => {
