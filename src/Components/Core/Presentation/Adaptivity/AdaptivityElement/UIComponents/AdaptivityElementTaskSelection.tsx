@@ -19,7 +19,7 @@ export default function AdaptivityElementTaskSelection({
   const [taskButtons, setTaskButtons] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
-    setHeaderText("PLACEHOLDER_TEXT_TASK_SELECTION");
+    setHeaderText("PLACEHOLDER_TEXT TASK_SELECTION");
   }, [setHeaderText]);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export default function AdaptivityElementTaskSelection({
   }, [tasks, onSelectTask]);
 
   return (
-    <div className="grid lg:grid-cols-2 gap-4 justify-center items-center gap-x-8">
+    <div className="grid lg:grid-cols-2 gap-4 justify-center gap-x-8">
       {taskButtons}
     </div>
   );

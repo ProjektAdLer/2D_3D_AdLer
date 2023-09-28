@@ -41,8 +41,8 @@ export default function AdaptivityElementQuestionAnswer({
   );
 
   return (
-    <div className="flex p-4 pl-0 m-auto">
-      <div className="flex flex-wrap justify-start gap-3 p-4">
+    <div className="flex flex-col w-full m-auto p-2">
+      <div className="flex flex-col lg:grid lg:grid-cols-2 flex-wrap justify-start gap-4 ">
         {question.questionAnswers.map((answer, index) => (
           <StyledButton
             key={answer.answerIndex}
@@ -57,7 +57,7 @@ export default function AdaptivityElementQuestionAnswer({
         ))}
       </div>
 
-      <div className="flex items-end">
+      <div className="flex items-end justify-end w-full pt-8 font-bold">
         <StyledButton
           className="box-border"
           shape="freefloatcenter"
