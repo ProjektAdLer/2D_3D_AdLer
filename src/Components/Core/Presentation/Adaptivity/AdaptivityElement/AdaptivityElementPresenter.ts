@@ -81,6 +81,10 @@ export default class AdaptivityElementPresenter
             const isRequired =
               task.requiredDifficulty <= question.questionDifficulty;
 
+            // TODO: update this check with enum type
+            const isMultipleChoice =
+              question.questionType === "multipleResponse";
+
             return {
               questionID: question.questionId,
               questionText: question.questionText,
@@ -88,6 +92,7 @@ export default class AdaptivityElementPresenter
               isRequired: isRequired,
               isCompleted: question.isCompleted,
               difficulty: question.questionDifficulty,
+              isMultipleChoice: isMultipleChoice,
             } as AdaptivityQuestion;
           }
         );

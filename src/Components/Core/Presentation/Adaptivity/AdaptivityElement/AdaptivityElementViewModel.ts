@@ -14,6 +14,7 @@ export interface AdaptivityQuestion {
   isRequired: boolean;
   isCompleted: boolean;
   difficulty: number;
+  isMultipleChoice: boolean;
 }
 
 export interface AdaptivityTask {

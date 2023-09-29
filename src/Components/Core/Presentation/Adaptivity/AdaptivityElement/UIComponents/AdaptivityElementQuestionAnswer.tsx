@@ -24,18 +24,20 @@ export default function AdaptivityElementQuestionAnswer({
   }, [setHeaderText, question]);
 
   const onAnswerClicked = useCallback(
-    (answer: AdaptivityAnswer, index: number) => {
-      answer.isSelected = !answer.isSelected;
+    (index: number) => {
+      const newColors = question.questionAnswers.map((answer, i) => {
+        if (index === i) {
+          // switch selection status of clicked answer
+          answer.isSelected = !answer.isSelected;
+        } else {
+          // deselect all other answers if question is single choice
+          if (!question.isMultipleChoice) answer.isSelected = false;
+        }
 
-      setAnswerColors(
-        answerColors.map((color, i) => {
-          if (i === index) {
-            return answer.isSelected ? "highlight" : "default";
-          } else {
-            return answerColors[i];
-          }
-        })
-      );
+        return answer.isSelected ? "highlight" : "default";
+      });
+
+      setAnswerColors(newColors);
     },
     [answerColors]
   );
@@ -48,7 +50,7 @@ export default function AdaptivityElementQuestionAnswer({
             key={answer.answerIndex}
             shape="freefloatcenter"
             onClick={() => {
-              onAnswerClicked(answer, index);
+              onAnswerClicked(index);
             }}
             color={answerColors[index]}
           >
