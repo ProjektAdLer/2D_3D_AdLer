@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdaptivityElementDialogContainer should render 1`] = `
+<div>
+  <div
+    class=" flex gap-2 m-2 w-fit h-fit text-adlertextgrey"
+  >
+    <div
+      class="fixed top-0 bottom-0 left-0 right-0 flex flex-col lg:grid lg:grid-rows-3 items-center lg:items-start justify-center w-screen h-screen bg-black bg-opacity-50"
+    >
+      <div
+        class="invisible lg:visible w-full lg:h-full flex justify-start items-end"
+      >
+        <img
+          alt="LearningImage!"
+          class="invisible lg:visible object-contain z-20 h-0 pl-16 lg:h-full "
+          src="vr-guy-quiz-background_cutted.png"
+        />
+      </div>
+      <div
+        class="flex justify-center items-start lg:row-span-2 w-full lg:w-[95vw] max-w-7xl h-full pt-2 lg:pt-0"
+      >
+        <div
+          class="flex flex-col p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto w-full max-w-[95%] max-h-[95%] lg:h-fit justify-between overflow-auto"
+        >
+          <div
+            class="z-20 flex items-center justify-center w-full gap-2 p-2 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl "
+          >
+            <img
+              alt="LearningImage!"
+              class="lg:invisible visible h-16 lg:h-0"
+              src="vr-guy-quiz-background.png"
+            />
+            <div
+              class="w-full text-sm lg:text-xl pr-2"
+            >
+              testQuestionText
+            </div>
+            <button
+              class="roboto-black xl:w-10 xl:h-10 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border bg-buttonbgblue"
+            >
+              X
+            </button>
+          </div>
+          <div
+            class="flex justify-center items-center px-1 rounded-lg font-regular h-fit mb-4 lg:m-4"
+          >
+            <div
+              class="flex flex-col w-full m-auto p-2"
+            >
+              <div
+                class="flex flex-col lg:grid lg:grid-cols-2 flex-wrap justify-start gap-4 "
+              >
+                <button
+                  class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border bg-buttonbgblue"
+                >
+                  testAnswerText
+                </button>
+              </div>
+              <div
+                class="flex items-end justify-end w-full pt-8 font-bold"
+              >
+                <button
+                  class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border bg-buttonbgblue"
+                >
+                  Antworten abgeben
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="modal-footer text-xs lg:text-sm"
+          >
+            <p />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
