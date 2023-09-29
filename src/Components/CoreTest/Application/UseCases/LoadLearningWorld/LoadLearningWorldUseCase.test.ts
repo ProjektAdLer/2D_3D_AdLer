@@ -1,3 +1,7 @@
+import {
+  LearningElementModel,
+  LearningElementModelTypeEnums,
+} from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 import LoadLearningWorldUseCase from "../../../../Core/Application/UseCases/LoadLearningWorld/LoadLearningWorldUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
@@ -19,6 +23,11 @@ import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/IL
 import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 import ICalculateLearningSpaceAvailabilityUseCase from "../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
 import INotificationPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
+import BackendWorldTO from "../../../../Core/Application/DataTransferObjects/BackendWorldTO";
+import { AdaptivityElementDataTO } from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementDataTO";
+import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
+import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import AdaptivityElementEntity from "../../../../Core/Domain/Entities/Adaptivity/AdaptivityElementEntity";
 
 const backendMock = mock<IBackendPort>();
 const worldPortMock = mock<ILearningWorldPort>();
@@ -206,7 +215,7 @@ describe("LoadLearningWorldUseCase", () => {
     entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
 
     backendMock.getWorldStatus.mockResolvedValue({
-      worldId: 1,
+      worldID: 1,
       elements: [{}],
     } as LearningWorldStatusTO);
 
@@ -321,7 +330,7 @@ describe("LoadLearningWorldUseCase", () => {
     entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
 
     backendMock.getWorldStatus.mockResolvedValue({
-      worldId: 1,
+      worldID: 1,
       elements: [{}],
     } as LearningWorldStatusTO);
 
@@ -330,5 +339,93 @@ describe("LoadLearningWorldUseCase", () => {
     expect(setUserLocationUseCaseMock.execute).toHaveBeenCalledWith({
       worldID: 42,
     });
+  });
+
+  test("creates adaptivity elements", async () => {
+    // mock user data response
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+      mockedGetEntitiesOfTypeUserDataReturnValue
+    );
+    // mock world response
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
+
+    // mock backend response
+    const minimalAdaptivityBackendWorldTO: BackendWorldTO = {
+      worldName: "TestWorld",
+      goals: ["TestGoal"],
+      description: "TestDescription",
+      evaluationLink: "TestLink",
+      spaces: [
+        {
+          description: "TestDescription",
+          goals: ["TestGoals"],
+          requirements: "",
+          id: 1,
+          name: "TestSpace",
+          requiredScore: 0,
+          elements: [
+            {
+              id: 1,
+              name: "TestElement",
+              value: 42,
+              type: "adaptivity",
+              description: "TestDescription",
+              goals: ["TestGoals"],
+              model:
+                LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC,
+              adaptivity: {
+                elementName: "",
+                introText: "",
+                shuffleTask: false,
+                tasks: [],
+              } as AdaptivityElementDataTO,
+            },
+          ],
+          template: LearningSpaceTemplateType.L,
+          templateStyle: LearningSpaceThemeType.Arcade,
+        },
+      ],
+    };
+    backendMock.getWorldData.mockResolvedValueOnce(
+      minimalAdaptivityBackendWorldTO
+    );
+
+    backendMock.getCoursesAvailableForUser.mockResolvedValue({
+      courses: [
+        {
+          courseID: 1,
+          courseName: "Testkurs",
+        },
+      ],
+    });
+
+    // mock entity creation
+    const mockedWorldEntity = new LearningWorldEntity();
+    mockedWorldEntity.name = minimalAdaptivityBackendWorldTO.worldName;
+    mockedWorldEntity.goals = minimalAdaptivityBackendWorldTO.goals;
+    mockedWorldEntity.spaces = [];
+
+    entityContainerMock.createEntity.mockReturnValueOnce({
+      type: "adaptivity",
+    } as LearningElementEntity);
+
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<AdaptivityElementEntity>()
+    );
+
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<LearningSpaceEntity>()
+    );
+
+    entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
+
+    backendMock.getWorldStatus.mockResolvedValue({
+      worldID: 1,
+      elements: [{}],
+    } as LearningWorldStatusTO);
+
+    await systemUnderTest.executeAsync({ worldID: 42 });
+
+    expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(4);
   });
 });

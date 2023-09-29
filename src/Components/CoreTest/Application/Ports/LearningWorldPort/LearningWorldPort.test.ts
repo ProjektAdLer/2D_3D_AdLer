@@ -9,6 +9,8 @@ import LearningElementTO from "../../../../Core/Application/DataTransferObjects/
 import UserLearningWorldsTO from "../../../../Core/Application/DataTransferObjects/UserLearningWorldsTO";
 import LearningWorldScoreTO from "../../../../Core/Application/DataTransferObjects/LearningWorldScoreTO";
 import LearningSpacePrecursorAndSuccessorTO from "../../../../Core/Application/DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
+import AdaptivityElementProgressTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
+import { EvaluationAnswerTO } from "../../../../Core/Application/DataTransferObjects/QuizElementTO";
 
 describe("LearningWorldPort", () => {
   let systemUnderTest: LearningWorldPort;
@@ -117,5 +119,29 @@ describe("LearningWorldPort", () => {
     systemUnderTest.onLearningElementScored(true, 1);
 
     expect(worldAdapterMock.onLearningElementScored).toBeCalledWith(true, 1);
+  });
+
+  test("onAdaptivityElementLoaded calls a registered adapter", () => {
+    const worldAdapterMock = mock<ILearningWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockAdaptivityElementProgressTO = mock<AdaptivityElementProgressTO>();
+
+    systemUnderTest.onAdaptivityElementLoaded(mockAdaptivityElementProgressTO);
+
+    expect(worldAdapterMock.onAdaptivityElementLoaded).toBeCalledWith(
+      mockAdaptivityElementProgressTO
+    );
+  });
+
+  test("onAdaptivityElementSubmitted calls a registered adapter", () => {
+    const worldAdapterMock = mock<ILearningWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockEvaluationAnswerTO = mock<EvaluationAnswerTO>();
+
+    systemUnderTest.onAdaptivityElementSubmitted(mockEvaluationAnswerTO);
+
+    expect(worldAdapterMock.onAdaptivityElementSubmitted).toBeCalledWith(
+      mockEvaluationAnswerTO
+    );
   });
 });
