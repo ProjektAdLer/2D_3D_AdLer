@@ -69,6 +69,7 @@ describe("AdaptivityElementPresenter", () => {
               isRequired: false,
               isCompleted: false,
               difficulty: 100,
+              isMultipleChoice: false,
             },
           ],
           isCompleted: false,
@@ -98,7 +99,7 @@ describe("AdaptivityElementPresenter", () => {
             {
               questionId: 1,
               questionText: "TestQuestionText",
-              questionType: "",
+              questionType: "singleResponse",
               trigger: [],
               questionAnswers: [
                 {
@@ -136,6 +137,7 @@ describe("AdaptivityElementPresenter", () => {
               questionText: "TestQuestionText",
               isRequired: true,
               isCompleted: false,
+              isMultipleChoice: false,
               difficulty: 1,
               questionAnswers: [
                 {
