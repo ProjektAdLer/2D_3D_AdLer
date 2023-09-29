@@ -16,6 +16,33 @@ describe("AdaptivityElementDialogContainer", () => {
     useBuilderMock([viewModel, mock<IAdaptivityElementController>()]);
   });
 
+  test("doesn't render if viewModel is undefined", () => {
+    useBuilderMock([undefined, undefined]);
+    const { container } = render(<AdaptivityElementDialogContainer />);
+    expect(container).toBeEmptyDOMElement();
+  });
+
+  test("doesn't render if controller is undefined", () => {
+    useBuilderMock([viewModel, undefined]);
+    const { container } = render(<AdaptivityElementDialogContainer />);
+    expect(container).toBeEmptyDOMElement();
+  });
+
+  test("doesn't render if isOpen is false", () => {
+    viewModel.isOpen.Value = false;
+
+    const { container } = render(<AdaptivityElementDialogContainer />);
+    expect(container).toBeEmptyDOMElement();
+  });
+
+  test("doesn't render if contentData is undefined", () => {
+    viewModel.isOpen.Value = true;
+    viewModel.contentData.Value = undefined;
+
+    const { container } = render(<AdaptivityElementDialogContainer />);
+    expect(container).toBeEmptyDOMElement();
+  });
+
   test("should render", () => {
     viewModel.isOpen.Value = true;
     const content: AdaptivityElementContent = {
