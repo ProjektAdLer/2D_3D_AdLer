@@ -8,11 +8,15 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "../../../../Types/ReactTypes";
 import AdaptivityElementTaskSelection from "./AdaptivityElementTaskSelection";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdaptivityElementQuestionAnswer from "./AdaptivityElementQuestionAnswer";
 
 import quizBackgroundVRGuy from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
 import quizBackgroundVRGuyCutted from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background_cutted.png";
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
 
 export default function AdaptivityElementDialogContainer({
   className,
@@ -35,6 +39,16 @@ export default function AdaptivityElementDialogContainer({
 
   // -- State --
   const [headerText, setHeaderText] = useState<string>("");
+  const [progressPercentage, setProgressPercentage] = useState<number>(0);
+
+  useEffect(() => {
+    if (!contentData) return;
+    const completedTasks = contentData.tasks.reduce(
+      (acc, task) => (task.isCompleted ? ++acc : acc),
+      0
+    );
+    setProgressPercentage((completedTasks / contentData.tasks.length) * 100);
+  }, [contentData]);
 
   if (!viewmodel || !controller) return null;
   if (!isOpen || !contentData) return null;
@@ -58,9 +72,27 @@ export default function AdaptivityElementDialogContainer({
                   alt="LearningImage!"
                   src={quizBackgroundVRGuy}
                 ></img>
-                <div className="w-full text-sm lg:text-xl pr-2">
-                  {headerText}
-                </div>
+
+                {currentTaskID === null && currentQuestionID === null && (
+                  <div className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full">
+                    <CircularProgressbarWithChildren
+                      value={progressPercentage}
+                      strokeWidth={10}
+                      styles={buildStyles({
+                        strokeLinecap: "butt",
+                        pathTransitionDuration: 1.5,
+
+                        // Colors
+                        trailColor: "#E64B17",
+                        pathColor: `#59B347`,
+                      })}
+                    >
+                      {progressPercentage + "%"}
+                    </CircularProgressbarWithChildren>
+                  </div>
+                )}
+
+                <div className="w-full text-sm lg:text-xl">{headerText}</div>
 
                 <StyledButton
                   onClick={controller.closeModal}
@@ -79,6 +111,7 @@ export default function AdaptivityElementDialogContainer({
                   />
                 </div>
               )}
+
               {currentTaskID !== null && currentQuestionID !== null && (
                 <div className="flex justify-center items-center px-1 rounded-lg font-regular h-fit mb-4 lg:m-4">
                   <AdaptivityElementQuestionAnswer
