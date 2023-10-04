@@ -339,8 +339,76 @@ export default class MockBackendAdapter implements IBackendPort {
                 adaptivityQuestions: [
                   {
                     questionType: "multipleResponse",
-                    questionId: 1,
+                    questionId: 0,
                     questionDifficulty: 0,
+                    questionText: "Welche Zahlen sind Primzahlen?",
+                    adaptivityRules: [
+                      {
+                        triggerId: 1,
+                        triggerCondition: "correct",
+                        adaptivityAction: {
+                          commentText: "Das war richtig. Gut gemacht!",
+                        },
+                      },
+                      {
+                        triggerId: 2,
+                        triggerCondition: "incorrect",
+                        adaptivityAction: {
+                          commentText:
+                            "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
+                        },
+                      },
+                    ],
+                    choices: [
+                      {
+                        answerText: "2",
+                      },
+                      {
+                        answerText: "3",
+                      },
+                      {
+                        answerText: "14",
+                      },
+                    ],
+                  },
+                  {
+                    questionType: "multipleResponse",
+                    questionId: 1,
+                    questionDifficulty: 100,
+                    questionText: "Welche Zahlen sind Primzahlen?",
+                    adaptivityRules: [
+                      {
+                        triggerId: 1,
+                        triggerCondition: "correct",
+                        adaptivityAction: {
+                          commentText: "Das war richtig. Gut gemacht!",
+                        },
+                      },
+                      {
+                        triggerId: 2,
+                        triggerCondition: "incorrect",
+                        adaptivityAction: {
+                          commentText:
+                            "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
+                        },
+                      },
+                    ],
+                    choices: [
+                      {
+                        answerText: "2",
+                      },
+                      {
+                        answerText: "3",
+                      },
+                      {
+                        answerText: "14",
+                      },
+                    ],
+                  },
+                  {
+                    questionType: "multipleResponse",
+                    questionId: 2,
+                    questionDifficulty: 200,
                     questionText: "Welche Zahlen sind Primzahlen?",
                     adaptivityRules: [
                       {
