@@ -57,6 +57,7 @@ export default function AdaptivityElementDialogContainer({
     <>
       <StyledContainer className={tailwindMerge(className, "")}>
         <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col lg:grid lg:grid-rows-3 items-center lg:items-start justify-center w-screen h-screen bg-black bg-opacity-50">
+          {/* Background NPC */}
           <div className="invisible lg:visible w-full lg:h-full flex justify-start items-end">
             <img
               className="invisible lg:visible object-contain z-20 h-0 pl-16 lg:h-full "
@@ -64,8 +65,11 @@ export default function AdaptivityElementDialogContainer({
               src={quizBackgroundVRGuyCutted}
             ></img>
           </div>
+
+          {/* Modal */}
           <div className="flex justify-center items-start lg:row-span-2 w-full lg:w-[95vw] max-w-7xl h-full pt-2 lg:pt-0">
             <div className="flex flex-col p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto w-full max-w-[95%] max-h-[95%] lg:h-fit justify-between overflow-auto">
+              {/* Header */}
               <div className="z-20 flex items-center justify-center w-full gap-2 p-2 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
                 <img
                   className="lg:invisible visible h-16 lg:h-0"
@@ -102,6 +106,7 @@ export default function AdaptivityElementDialogContainer({
                 </StyledButton>
               </div>
 
+              {/* Content */}
               {currentTaskID === null && currentQuestionID === null && (
                 <div className="flex justify-center items-center px-1 rounded-lg font-regular h-fit mb-4 lg:m-4">
                   <AdaptivityElementTaskSelection
@@ -129,6 +134,7 @@ export default function AdaptivityElementDialogContainer({
                 </div>
               )}
 
+              {/* Footer */}
               {
                 <div className="modal-footer text-xs lg:text-sm">
                   <p>{footerText}</p>
