@@ -13,6 +13,7 @@ describe("AdaptivityElementDifficultyStars", () => {
     AdaptivityElementDifficultyStarState.NotRequiredSolved,
     AdaptivityElementDifficultyStarState.NotRequiredUnsolved,
     AdaptivityElementDifficultyStarState.NotRequiredTried,
+    Number.MAX_VALUE,
   ])("should render with %p for each difficulty", (state) => {
     const { container } = render(
       <AdaptivityElementDifficultyStars
@@ -23,5 +24,22 @@ describe("AdaptivityElementDifficultyStars", () => {
       />
     );
     expect(container).toMatchSnapshot();
+  });
+
+  test("should only render one star with withEmptySlots set to false and only easy set to required solved", () => {
+    const { getAllByRole, getAllByTestId } = render(
+      <AdaptivityElementDifficultyStars
+        easyState={AdaptivityElementDifficultyStarState.RequiredSolved}
+        mediumState={AdaptivityElementDifficultyStarState.Empty}
+        hardState={AdaptivityElementDifficultyStarState.Empty}
+        starClassName=""
+        withEmptySlots={false}
+      />
+    );
+
+    expect(getAllByRole("img").length).toBe(1);
+    expect(() => {
+      getAllByTestId("empty-star-slot");
+    }).toThrowError("Unable to find an element");
   });
 });

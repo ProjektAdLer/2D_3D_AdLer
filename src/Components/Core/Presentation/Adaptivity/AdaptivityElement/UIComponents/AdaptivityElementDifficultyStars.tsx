@@ -82,7 +82,12 @@ function getIcon(
 }
 
 function EmptyStarSlot({ className }: { className: string }): JSX.Element {
-  return <div className={tailwindMerge(`${className}`)} />;
+  return (
+    <div
+      data-testid="empty-star-slot"
+      className={tailwindMerge(`${className}`)}
+    />
+  );
 }
 
 export default function AdaptivityElementDifficultyStars({

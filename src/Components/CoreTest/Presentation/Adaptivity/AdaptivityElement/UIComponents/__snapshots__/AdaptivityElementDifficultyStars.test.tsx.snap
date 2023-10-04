@@ -7,12 +7,15 @@ exports[`AdaptivityElementDifficultyStars should render with 0 for each difficul
   >
     <div
       class=""
+      data-testid="empty-star-slot"
     />
     <div
       class=""
+      data-testid="empty-star-slot"
     />
     <div
       class=""
+      data-testid="empty-star-slot"
     />
   </div>
 </div>
@@ -37,6 +40,27 @@ exports[`AdaptivityElementDifficultyStars should render with 1 for each difficul
       alt=""
       class=""
       src="diffculties-adaptivity-required-solved-icon.svg"
+    />
+  </div>
+</div>
+`;
+
+exports[`AdaptivityElementDifficultyStars should render with 1.7976931348623157e+308 for each difficulty 1`] = `
+<div>
+  <div
+    class="flex flex-row h-full"
+  >
+    <img
+      alt=""
+      class=""
+    />
+    <img
+      alt=""
+      class=""
+    />
+    <img
+      alt=""
+      class=""
     />
   </div>
 </div>
