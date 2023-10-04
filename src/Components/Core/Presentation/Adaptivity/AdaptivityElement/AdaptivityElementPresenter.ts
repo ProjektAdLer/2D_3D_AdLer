@@ -8,6 +8,7 @@ import AdaptivityElementViewModel, {
 } from "./AdaptivityElementViewModel";
 import AdaptivityElementProgressTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import bind from "bind-decorator";
+import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 
 export default class AdaptivityElementPresenter
   implements IAdaptivityElementPresenter
@@ -52,8 +53,21 @@ export default class AdaptivityElementPresenter
         const currentQuestion = currentTask!.questions.find(
           (question) => question.questionID === currentQuestionID
         );
-        // TODO: create question title from difficulty
-        // newFooterText += " => " currentQuestion!.;
+        if (
+          currentQuestion!.difficulty ===
+          AdaptivityElementQuestionDifficultyTypes.easy
+        )
+          newFooterText += " => Leichte Frage";
+        else if (
+          currentQuestion!.difficulty ===
+          AdaptivityElementQuestionDifficultyTypes.medium
+        )
+          newFooterText += " => Mittlere Frage";
+        else if (
+          currentQuestion!.difficulty ===
+          AdaptivityElementQuestionDifficultyTypes.hard
+        )
+          newFooterText += " => Schwere Frage";
       }
     }
 
