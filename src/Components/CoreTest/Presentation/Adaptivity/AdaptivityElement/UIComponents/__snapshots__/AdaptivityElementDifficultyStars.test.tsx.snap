@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdaptivityElementDifficultyStars should render with 0 for each difficulty 1`] = `
+<div>
+  <div
+    class="flex flex-row h-full"
+  >
+    <div
+      class=""
+    />
+    <div
+      class=""
+    />
+    <div
+      class=""
+    />
+  </div>
+</div>
+`;
+
+exports[`AdaptivityElementDifficultyStars should render with 1 for each difficulty 1`] = `
+<div>
+  <div
+    class="flex flex-row h-full"
+  >
+    <img
+      alt=""
+      class=""
+      src="diffculties-adaptivity-required-solved-icon.svg"
+    />
+    <img
+      alt=""
+      class=""
+      src="diffculties-adaptivity-required-solved-icon.svg"
+    />
+    <img
+      alt=""
+      class=""
+      src="diffculties-adaptivity-required-solved-icon.svg"
+    />
+  </div>
+</div>
+`;
+
+exports[`AdaptivityElementDifficultyStars should render with 2 for each difficulty 1`] = `
+<div>
+  <div
+    class="flex flex-row h-full"
+  >
+    <img
+      alt=""
+      class=""
+      src=""
+    />
+    <img
+      alt=""
+      class=""
+      src=""
+    />
+    <img
+      alt=""
+      class=""
+      src=""
+    />
+  </div>
+</div>
+`;
+
+exports[`AdaptivityElementDifficultyStars should render with 3 for each difficulty 1`] = `
+<div>
+  <div
+    class="flex flex-row h-full"
+  >
+    <img
+      alt=""
+      class=""
+      src="diffculties-adaptivity-required-unsolved-icon.svg"
+    />
+    <img
+      alt=""
+      class=""
+      src="diffculties-adaptivity-required-unsolved-icon.svg"
+    />
+    <img
+      alt=""
+      class=""
+      src="diffculties-adaptivity-required-unsolved-icon.svg"
+    />
+  </div>
+</div>
+`;
+
+exports[`AdaptivityElementDifficultyStars should render with 4 for each difficulty 1`] = `
+<div>
+  <div
+    class="flex flex-row h-full"
+  >
+    <img
+      alt=""
+      class=""
+      src="diffculties-adaptivity-solved-icon.svg"
+    />
+    <img
+      alt=""
+      class=""
+      src="diffculties-adaptivity-solved-icon.svg"
+    />
+    <img
+      alt=""
+      class=""
+      src="diffculties-adaptivity-solved-icon.svg"
+    />
+  </div>
+</div>
+`;
+
+exports[`AdaptivityElementDifficultyStars should render with 5 for each difficulty 1`] = `
+<div>
+  <div
+    class="flex flex-row h-full"
+  >
+    <img
+      alt=""
+      class=""
+      src=""
+    />
+    <img
+      alt=""
+      class=""
+      src=""
+    />
+    <img
+      alt=""
+      class=""
+      src=""
+    />
+  </div>
+</div>
+`;
+
+exports[`AdaptivityElementDifficultyStars should render with 6 for each difficulty 1`] = `
+<div>
+  <div
+    class="flex flex-row h-full"
+  >
+    <img
+      alt=""
+      class=""
+      src="diffculties-adaptivity-unsolved-icon.svg"
+    />
+    <img
+      alt=""
+      class=""
+      src="diffculties-adaptivity-unsolved-icon.svg"
+    />
+    <img
+      alt=""
+      class=""
+      src="diffculties-adaptivity-unsolved-icon.svg"
+    />
+  </div>
+</div>
+`;

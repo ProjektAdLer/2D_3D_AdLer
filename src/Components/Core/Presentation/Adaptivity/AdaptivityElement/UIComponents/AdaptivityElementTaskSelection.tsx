@@ -1,11 +1,31 @@
 import { useEffect, useState } from "react";
-import { AdaptivityTask } from "../AdaptivityElementViewModel";
+import {
+  AdaptivityQuestion,
+  AdaptivityTask,
+} from "../AdaptivityElementViewModel";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import AdaptivityElementDifficultyStars, {
+  AdaptivityElementDifficultyStarState,
+} from "./AdaptivityElementDifficultyStars";
 
 //TODO: change this when key icon is available
 import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
-import correctIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-solved-icon.svg";
-import wrongIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-unsolved-icon.svg";
+import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
+
+export function getAdaptivityQuestionStarState(
+  question: AdaptivityQuestion | undefined
+): AdaptivityElementDifficultyStarState {
+  if (question === undefined) return AdaptivityElementDifficultyStarState.Empty;
+  else if (question.isRequired) {
+    if (question.isCompleted === true)
+      return AdaptivityElementDifficultyStarState.RequiredSolved;
+    else return AdaptivityElementDifficultyStarState.RequiredUnsolved;
+  } else {
+    if (question.isCompleted === true)
+      return AdaptivityElementDifficultyStarState.NotRequiredSolved;
+    else return AdaptivityElementDifficultyStarState.NotRequiredUnsolved;
+  }
+}
 
 export default function AdaptivityElementTaskSelection({
   tasks,
@@ -31,6 +51,28 @@ export default function AdaptivityElementTaskSelection({
           (question) => question.isRequired
         );
 
+        const easyStatus = getAdaptivityQuestionStarState(
+          task.questions.find(
+            (question) =>
+              question.difficulty ===
+              AdaptivityElementQuestionDifficultyTypes.easy
+          )
+        );
+        const mediumStatus = getAdaptivityQuestionStarState(
+          task.questions.find(
+            (question) =>
+              question.difficulty ===
+              AdaptivityElementQuestionDifficultyTypes.medium
+          )
+        );
+        const hardStatus = getAdaptivityQuestionStarState(
+          task.questions.find(
+            (question) =>
+              question.difficulty ===
+              AdaptivityElementQuestionDifficultyTypes.hard
+          )
+        );
+
         return (
           <div key={i.toString() + "_" + task.taskID} className="flex flex-col">
             <StyledButton
@@ -39,23 +81,6 @@ export default function AdaptivityElementTaskSelection({
               onClick={() => onSelectTask(task.taskID)}
             >
               <div className="w-full h-full flex justify-between items-center align-center">
-                {task.isCompleted && (
-                  <img
-                    alt=""
-                    className={"h-6 lg:h-8 pr-4 xl:pr-8"}
-                    src={correctIcon}
-                  />
-                )}
-                {!task.isCompleted && (
-                  <img
-                    alt=""
-                    className={"h-6 lg:h-8 pr-4 xl:pr-8"}
-                    src={wrongIcon}
-                  />
-                )}
-
-                {task.taskTitle}
-
                 {isRequired && (
                   <img
                     alt=""
@@ -63,6 +88,15 @@ export default function AdaptivityElementTaskSelection({
                     src={requiredTaskIcon}
                   />
                 )}
+
+                {task.taskTitle}
+
+                <AdaptivityElementDifficultyStars
+                  easyState={easyStatus}
+                  mediumState={mediumStatus}
+                  hardState={hardStatus}
+                  starClassName="w-6 h-6"
+                />
               </div>
             </StyledButton>
           </div>

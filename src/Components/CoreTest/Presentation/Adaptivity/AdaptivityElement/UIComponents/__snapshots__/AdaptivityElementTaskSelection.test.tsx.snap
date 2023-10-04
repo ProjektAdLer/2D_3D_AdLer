@@ -14,12 +14,22 @@ exports[`AdaptivityElementTaskSelection should render 1`] = `
         <div
           class="w-full h-full flex justify-between items-center align-center"
         >
-          <img
-            alt=""
-            class="h-6 lg:h-8 pr-4 xl:pr-8"
-            src="diffculties-adaptivity-required-unsolved-icon.svg"
-          />
           testTaskTitle
+          <div
+            class="flex flex-row h-full"
+          >
+            <img
+              alt=""
+              class="w-6 h-6"
+              src="diffculties-adaptivity-unsolved-icon.svg"
+            />
+            <div
+              class="w-6 h-6"
+            />
+            <div
+              class="w-6 h-6"
+            />
+          </div>
         </div>
       </button>
     </div>

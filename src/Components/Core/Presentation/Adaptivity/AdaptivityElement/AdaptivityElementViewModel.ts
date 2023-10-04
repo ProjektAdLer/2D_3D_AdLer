@@ -1,3 +1,4 @@
+import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 import Observable from "src/Lib/Observable";
 import { StyledButtonColor } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
@@ -13,7 +14,7 @@ export interface AdaptivityQuestion {
   questionAnswers: AdaptivityAnswer[];
   isRequired: boolean;
   isCompleted: boolean;
-  difficulty: number;
+  difficulty: AdaptivityElementQuestionDifficultyTypes;
   isMultipleChoice: boolean;
 }
 
