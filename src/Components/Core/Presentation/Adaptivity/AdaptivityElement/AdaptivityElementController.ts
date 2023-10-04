@@ -1,9 +1,6 @@
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import IAdaptivityElementController from "./IAdaptivityElementController";
-import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
 import { SubmittedAnswersTO } from "../../../Application/DataTransferObjects/QuizElementTO";
-import ISubmitAdaptivityElementSelectionUseCase from "../../../Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
 import bind from "bind-decorator";
 
 export default class AdaptivityElementController
@@ -14,20 +11,18 @@ export default class AdaptivityElementController
   @bind
   closeModal(): void {
     this.viewModel.isOpen.Value = false;
+    console.log("close modal", this.viewModel.isOpen.Value);
   }
 
   @bind
   selectTask(taskID: number): void {
     this.viewModel.currentTaskID.Value = taskID;
+    console.log("select task", this.viewModel.currentTaskID.Value);
+  }
 
-    // TODO: remove this when question selection is implemented
-    const currentTask = this.viewModel.contentData.Value.tasks.find(
-      (task) => task.taskID === taskID
-    )!;
-    const currentQuestion = currentTask.questions.find(
-      (question) => question.difficulty === currentTask.requiredDifficulty
-    )!;
-    this.viewModel.currentQuestionID.Value = currentQuestion.questionID;
+  @bind
+  selectDifficulty(difficulty: number): void {
+    this.viewModel.currentQuestionID.Value = difficulty;
   }
 
   submitSelection(): void {

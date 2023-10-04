@@ -17,6 +17,7 @@ import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from "react-circular-progressbar";
+import AdaptivityElementDifficultySelection from "./AdaptivityElementDifficultySelection";
 
 export default function AdaptivityElementDialogContainer({
   className,
@@ -56,11 +57,11 @@ export default function AdaptivityElementDialogContainer({
   return (
     <>
       <StyledContainer className={tailwindMerge(className, "")}>
-        <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col lg:grid lg:grid-rows-3 items-center lg:items-start justify-center w-screen h-screen bg-black bg-opacity-50">
+        <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-screen bg-black bg-opacity-50 lg:grid lg:grid-rows-3 lg:items-start">
           {/* Background NPC */}
-          <div className="invisible lg:visible w-full lg:h-full flex justify-start items-end">
+          <div className="flex items-end justify-start invisible w-full lg:visible lg:h-full">
             <img
-              className="invisible lg:visible object-contain z-20 h-0 pl-16 lg:h-full "
+              className="z-20 invisible object-contain h-0 pl-16 lg:visible lg:h-full "
               alt="LearningImage!"
               src={quizBackgroundVRGuyCutted}
             ></img>
@@ -72,7 +73,7 @@ export default function AdaptivityElementDialogContainer({
               {/* Header */}
               <div className="z-20 flex items-center justify-center w-full gap-2 p-2 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
                 <img
-                  className="lg:invisible visible h-16 lg:h-0"
+                  className="visible h-16 lg:invisible lg:h-0"
                   alt="LearningImage!"
                   src={quizBackgroundVRGuy}
                 ></img>
@@ -108,7 +109,7 @@ export default function AdaptivityElementDialogContainer({
 
               {/* Content */}
               {currentTaskID === null && currentQuestionID === null && (
-                <div className="flex justify-center items-center px-1 rounded-lg font-regular h-fit mb-4 lg:m-4">
+                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
                   <AdaptivityElementTaskSelection
                     tasks={contentData.tasks}
                     setHeaderText={setHeaderText}
@@ -116,9 +117,22 @@ export default function AdaptivityElementDialogContainer({
                   />
                 </div>
               )}
+              {currentTaskID !== null && currentQuestionID === null && (
+                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
+                  <AdaptivityElementDifficultySelection
+                    selectedTask={
+                      contentData.tasks.find(
+                        (task) => task.taskID === currentTaskID
+                      )!
+                    }
+                    setHeaderText={setHeaderText}
+                    onSelectDifficulty={controller.selectDifficulty}
+                  />
+                </div>
+              )}
 
               {currentTaskID !== null && currentQuestionID !== null && (
-                <div className="flex justify-center items-center px-1 rounded-lg font-regular h-fit mb-4 lg:m-4">
+                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
                   <AdaptivityElementQuestionAnswer
                     question={
                       contentData.tasks
@@ -136,7 +150,7 @@ export default function AdaptivityElementDialogContainer({
 
               {/* Footer */}
               {
-                <div className="modal-footer text-xs lg:text-sm">
+                <div className="text-xs modal-footer lg:text-sm">
                   <p>{footerText}</p>
                 </div>
               }
