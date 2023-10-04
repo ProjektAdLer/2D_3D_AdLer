@@ -1,8 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import {
-  AdaptivityAnswer,
-  AdaptivityQuestion,
-} from "../AdaptivityElementViewModel";
+import { AdaptivityQuestion } from "../AdaptivityElementViewModel";
 import StyledButton, {
   StyledButtonColor,
 } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
@@ -21,7 +18,7 @@ export default function AdaptivityElementQuestionAnswer({
   useEffect(() => {
     setHeaderText(question.questionText);
     setAnswerColors(question.questionAnswers.map(() => "default"));
-  }, [setHeaderText, question]);
+  }, [setHeaderText, question.questionText, question.questionAnswers]);
 
   const onAnswerClicked = useCallback(
     (index: number) => {
@@ -39,7 +36,7 @@ export default function AdaptivityElementQuestionAnswer({
 
       setAnswerColors(newColors);
     },
-    [answerColors]
+    [question.isMultipleChoice, question.questionAnswers]
   );
 
   return (
