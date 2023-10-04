@@ -6,14 +6,14 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
     class=" flex gap-2 m-2 w-fit h-fit text-adlertextgrey"
   >
     <div
-      class="fixed top-0 bottom-0 left-0 right-0 flex flex-col lg:grid lg:grid-rows-3 items-center lg:items-start justify-center w-screen h-screen bg-black bg-opacity-50"
+      class="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-screen bg-black bg-opacity-50 lg:grid lg:grid-rows-3 lg:items-start"
     >
       <div
-        class="invisible lg:visible w-full lg:h-full flex justify-start items-end"
+        class="flex items-end justify-start invisible w-full lg:visible lg:h-full"
       >
         <img
           alt="LearningImage!"
-          class="invisible lg:visible object-contain z-20 h-0 pl-16 lg:h-full "
+          class="z-20 invisible object-contain h-0 pl-16 lg:visible lg:h-full "
           src="vr-guy-quiz-background_cutted.png"
         />
       </div>
@@ -28,7 +28,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
           >
             <img
               alt="LearningImage!"
-              class="lg:invisible visible h-16 lg:h-0"
+              class="visible h-16 lg:invisible lg:h-0"
               src="vr-guy-quiz-background.png"
             />
             <div
@@ -43,7 +43,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
             </button>
           </div>
           <div
-            class="flex justify-center items-center px-1 rounded-lg font-regular h-fit mb-4 lg:m-4"
+            class="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4"
           >
             <div
               class="flex flex-col w-full m-auto p-2"
@@ -69,7 +69,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
             </div>
           </div>
           <div
-            class="modal-footer text-xs lg:text-sm"
+            class="text-xs modal-footer lg:text-sm"
           >
             <p />
           </div>
