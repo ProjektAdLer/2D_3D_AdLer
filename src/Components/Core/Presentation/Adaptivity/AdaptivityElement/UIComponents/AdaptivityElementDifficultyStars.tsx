@@ -41,6 +41,8 @@ function getIcon(
           return notRequiredUnsolvedIcon;
         case AdaptivityElementDifficultyStarState.NotRequiredTried:
           return "";
+        default:
+          return undefined;
       }
     case AdaptivityElementQuestionDifficulty.Medium:
       switch (status) {
@@ -56,6 +58,8 @@ function getIcon(
           return notRequiredUnsolvedIcon;
         case AdaptivityElementDifficultyStarState.NotRequiredTried:
           return "";
+        default:
+          return undefined;
       }
     case AdaptivityElementQuestionDifficulty.Hard:
       switch (status) {
@@ -71,6 +75,8 @@ function getIcon(
           return notRequiredUnsolvedIcon;
         case AdaptivityElementDifficultyStarState.NotRequiredTried:
           return "";
+        default:
+          return undefined;
       }
   }
 }
