@@ -84,7 +84,7 @@ describe("AdaptivityElementPresenter", () => {
     systemUnderTest["setFooterBreadcrumbs"]();
 
     // TODO: extend expected result when question title is implemented
-    expect(viewModel.footerText.Value).toBe("TestElement => TestTask");
+    expect(viewModel.footerText.Value).toMatchSnapshot();
   });
 
   test("createContentData returns the correct content data", () => {

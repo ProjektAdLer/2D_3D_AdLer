@@ -90,11 +90,13 @@ export default function AdaptivityElementDifficultyStars({
   mediumState,
   hardState,
   starClassName,
+  withEmptySlots = true,
 }: {
   easyState: AdaptivityElementDifficultyStarState;
   mediumState: AdaptivityElementDifficultyStarState;
   hardState: AdaptivityElementDifficultyStarState;
   starClassName: string;
+  withEmptySlots?: boolean;
 }) {
   return (
     <div className="flex flex-row h-full">
@@ -105,7 +107,7 @@ export default function AdaptivityElementDifficultyStars({
           src={getIcon(AdaptivityElementQuestionDifficulty.Easy, easyState)}
         />
       ) : (
-        <EmptyStarSlot className={starClassName} />
+        withEmptySlots && <EmptyStarSlot className={starClassName} />
       )}
       {mediumState !== AdaptivityElementDifficultyStarState.Empty ? (
         <img
@@ -114,7 +116,7 @@ export default function AdaptivityElementDifficultyStars({
           src={getIcon(AdaptivityElementQuestionDifficulty.Medium, mediumState)}
         />
       ) : (
-        <EmptyStarSlot className={starClassName} />
+        withEmptySlots && <EmptyStarSlot className={starClassName} />
       )}
       {hardState !== AdaptivityElementDifficultyStarState.Empty ? (
         <img
@@ -123,7 +125,7 @@ export default function AdaptivityElementDifficultyStars({
           src={getIcon(AdaptivityElementQuestionDifficulty.Hard, hardState)}
         />
       ) : (
-        <EmptyStarSlot className={starClassName} />
+        withEmptySlots && <EmptyStarSlot className={starClassName} />
       )}
     </div>
   );
