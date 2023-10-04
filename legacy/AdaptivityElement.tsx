@@ -4,12 +4,12 @@ import StyledButton, {
 } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { useState, useEffect, useCallback } from "react";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
-import IAdaptivityElementController from "./IAdaptivityElementController";
+import AdaptivityElementViewModel from "../src/Components/Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
+import IAdaptivityElementController from "../src/Components/Core/Presentation/Adaptivity/AdaptivityElement/IAdaptivityElementController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import quizBackgroundVRGuy from "../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
-import { AdLerUIComponent } from "../../../Types/ReactTypes";
-import tailwindMerge from "../../Utils/TailwindMerge";
+import { AdLerUIComponent } from "../src/Components/Core/Types/ReactTypes";
+import tailwindMerge from "../src/Components/Core/Presentation/Utils/TailwindMerge";
 
 function toggledColor(color: StyledButtonColor) {
   return color === "highlight" ? "default" : "highlight";
