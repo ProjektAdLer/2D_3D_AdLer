@@ -17,6 +17,8 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ILoggerPort from "../../Application/Ports/Interfaces/ILoggerPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "../../Domain/Types/LogLevelTypes";
+import AdaptivityElementQuestionSubmissionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
+import { AdaptivityElementBackendQuestionResponse } from "./Types/BackendResponseTypes";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendPort {
@@ -192,6 +194,52 @@ export default class MockBackendAdapter implements IBackendPort {
           : this.newWorld
       )
     );
+  }
+
+  getAdaptivityElementQuestionResponse(
+    userToken: string,
+    submissionData: AdaptivityElementQuestionSubmissionTO
+  ): Promise<AdaptivityElementBackendQuestionResponse> {
+    const backendResponse = new AdaptivityElementBackendQuestionResponse();
+    backendResponse.elementScore.elementId = submissionData.elementID;
+    backendResponse.gradedQuestion.id = submissionData.questionID;
+    backendResponse.gradedTask.taskId = submissionData.taskID;
+
+    switch (submissionData.questionID) {
+      case 0:
+        if (
+          submissionData.selectedAnswerIDs.length === 1 &&
+          submissionData.selectedAnswerIDs[0] === 1
+        ) {
+          backendResponse.elementScore.success = true;
+          backendResponse.gradedTask.taskStatus = "Correct";
+          backendResponse.gradedQuestion.status = "Correct";
+        } else {
+          backendResponse.elementScore.success = false;
+          backendResponse.gradedQuestion.status = "Incorrect";
+          backendResponse.gradedTask.taskStatus = "Incorrect";
+        }
+        break;
+      case 1:
+        if (
+          submissionData.selectedAnswerIDs.length === 2 &&
+          submissionData.selectedAnswerIDs.find((e) => e === 0) &&
+          submissionData.selectedAnswerIDs.find((e) => e === 1)
+        ) {
+          backendResponse.elementScore.success = true;
+          backendResponse.gradedTask.taskStatus = "Correct";
+          backendResponse.gradedQuestion.status = "Correct";
+        } else {
+          backendResponse.elementScore.success = false;
+          backendResponse.gradedQuestion.status = "Incorrect";
+          backendResponse.gradedTask.taskStatus = "Incorrect";
+        }
+        break;
+      default:
+        break;
+    }
+
+    return Promise.resolve(backendResponse);
   }
 
   smallWorld: AWT = {

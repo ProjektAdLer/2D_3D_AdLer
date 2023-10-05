@@ -16,6 +16,7 @@ import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO
 import BackendAdapterUtils from "./BackendAdapterUtils";
 import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 import WorldStatusResponse, {
+  AdaptivityElementBackendQuestionResponse,
   CoursesAvailableForUserResponse,
   ElementScoreResponse,
   PlayerDataResponse,
@@ -25,6 +26,7 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import { LogLevelTypes } from "../../Domain/Types/LogLevelTypes";
+import AdaptivityElementQuestionSubmissionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 
 @injectable()
 export default class BackendAdapter implements IBackendPort {
@@ -225,5 +227,14 @@ export default class BackendAdapter implements IBackendPort {
     });
 
     return token.data.lmsToken;
+  }
+
+  async getAdaptivityElementQuestionResponse(
+    userToken: string,
+    submissionData: AdaptivityElementQuestionSubmissionTO
+  ): Promise<AdaptivityElementBackendQuestionResponse> {
+    throw new Error(
+      "function 'getAdaptivityElementQuestionResponse' not implemented"
+    );
   }
 }
