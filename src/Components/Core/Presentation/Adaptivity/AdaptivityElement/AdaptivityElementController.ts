@@ -27,6 +27,7 @@ export default class AdaptivityElementController
 
   @bind
   submitSelection(): void {
+    // TODO: remove this debug code
     this.viewModel.showFeedback.Value = true;
     this.viewModel.contentData.Value.tasks
       .find((task) => task.taskID === this.viewModel.currentTaskID.Value)!
