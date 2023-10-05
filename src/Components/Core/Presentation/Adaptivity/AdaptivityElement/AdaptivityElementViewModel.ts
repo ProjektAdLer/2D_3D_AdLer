@@ -1,6 +1,5 @@
 import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 import Observable from "src/Lib/Observable";
-import { StyledButtonColor } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 export interface AdaptivityAnswer {
   answerIndex: number;
