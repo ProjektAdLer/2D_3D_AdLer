@@ -17,7 +17,7 @@ import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from "react-circular-progressbar";
-import AdaptivityElementDifficultySelection from "./AdaptivityElementDifficultySelection";
+import AdaptivityElementQuestionSelection from "./AdaptivityElementQuestionSelection";
 
 export default function AdaptivityElementDialogContainer({
   className,
@@ -119,7 +119,7 @@ export default function AdaptivityElementDialogContainer({
               )}
               {currentTaskID !== null && currentQuestionID === null && (
                 <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
-                  <AdaptivityElementDifficultySelection
+                  <AdaptivityElementQuestionSelection
                     selectedTask={
                       contentData.tasks.find(
                         (task) => task.taskID === currentTaskID
