@@ -18,6 +18,7 @@ import {
   buildStyles,
 } from "react-circular-progressbar";
 import AdaptivityElementDifficultySelection from "./AdaptivityElementDifficultySelection";
+import AdaptivityElementAnswerFeedback from "./AdaptivityElementAnswerFeedback";
 
 export default function AdaptivityElementDialogContainer({
   className,
@@ -150,6 +151,23 @@ export default function AdaptivityElementDialogContainer({
                       closeSelection={controller.closeAnswerSelection}
                     />
                   </div>
+                )}
+
+              {currentTaskID !== null &&
+                currentQuestionID !== null &&
+                showAnswerFeedback && (
+                  <AdaptivityElementAnswerFeedback
+                    isCorrect={
+                      contentData.tasks
+                        .find((task) => task.taskID === currentTaskID)!
+                        .questions.find(
+                          (question) =>
+                            question.questionID === currentQuestionID
+                        )!.isCompleted
+                    }
+                    setHeaderText={setHeaderText}
+                    closeFeedback={controller.closeFeedback}
+                  />
                 )}
 
               {/* Footer */}
