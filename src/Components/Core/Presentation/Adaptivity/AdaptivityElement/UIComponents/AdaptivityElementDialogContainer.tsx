@@ -126,7 +126,7 @@ export default function AdaptivityElementDialogContainer({
                       )!
                     }
                     setHeaderText={setHeaderText}
-                    onSelectDifficulty={controller.selectDifficulty}
+                    onSelectQuestion={controller.selectQuestion}
                   />
                 </div>
               )}

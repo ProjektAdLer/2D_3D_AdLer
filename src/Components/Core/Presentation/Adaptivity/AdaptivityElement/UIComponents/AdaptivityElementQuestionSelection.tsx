@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { AdaptivityTask } from "../AdaptivityElementViewModel";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
@@ -6,17 +6,17 @@ import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Do
 export default function AdaptivityElementQuestionSelection({
   selectedTask,
   setHeaderText,
-  onSelectDifficulty,
+  onSelectQuestion,
 }: {
   selectedTask: AdaptivityTask;
   setHeaderText: (headerText: string) => void;
-  onSelectDifficulty: (taskID: number) => void;
+  onSelectQuestion: (taskID: number) => void;
 }) {
   useEffect(() => {
     setHeaderText(
       `Du hast Aufgabengebiet ${selectedTask.taskTitle} ausgewählt. Wähle jetzt eine Schwierigkeit aus.`
     );
-  }, [setHeaderText]);
+  }, [setHeaderText, selectedTask]);
 
   let questionButtons = selectedTask.questions.map((question) => {
     return (
@@ -24,7 +24,7 @@ export default function AdaptivityElementQuestionSelection({
         <StyledButton
           shape="freefloatcenter"
           className="w-full max-w-2xl"
-          onClick={() => onSelectDifficulty(question.questionID)}
+          onClick={() => onSelectQuestion(question.questionID)}
         >
           {question.difficulty ===
             AdaptivityElementQuestionDifficultyTypes.easy && "Leicht"}
