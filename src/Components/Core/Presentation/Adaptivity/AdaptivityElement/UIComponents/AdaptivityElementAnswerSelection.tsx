@@ -4,7 +4,7 @@ import StyledButton, {
   StyledButtonColor,
 } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
-export default function AdaptivityElementQuestionAnswer({
+export default function AdaptivityElementAnswerSelection({
   question,
   submitSelection,
   setHeaderText,

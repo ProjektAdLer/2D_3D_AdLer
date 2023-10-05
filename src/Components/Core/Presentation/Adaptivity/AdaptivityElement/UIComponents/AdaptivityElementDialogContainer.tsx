@@ -9,7 +9,7 @@ import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "../../../../Types/ReactTypes";
 import AdaptivityElementTaskSelection from "./AdaptivityElementTaskSelection";
 import { useEffect, useState } from "react";
-import AdaptivityElementQuestionAnswer from "./AdaptivityElementQuestionAnswer";
+import AdaptivityElementAnswerSelection from "./AdaptivityElementAnswerSelection";
 
 import quizBackgroundVRGuy from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
 import quizBackgroundVRGuyCutted from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background_cutted.png";
@@ -133,7 +133,7 @@ export default function AdaptivityElementDialogContainer({
 
               {currentTaskID !== null && currentQuestionID !== null && (
                 <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
-                  <AdaptivityElementQuestionAnswer
+                  <AdaptivityElementAnswerSelection
                     question={
                       contentData.tasks
                         .find((task) => task.taskID === currentTaskID)!

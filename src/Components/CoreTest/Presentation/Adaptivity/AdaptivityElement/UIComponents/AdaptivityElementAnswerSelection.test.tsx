@@ -1,11 +1,11 @@
 import { render } from "@testing-library/react";
-import AdaptivityElementQuestionAnswer from "../../../../../Core/Presentation/Adaptivity/AdaptivityElement/UIComponents/AdaptivityElementQuestionAnswer";
+import AdaptivityElementAnswerSelection from "../../../../../Core/Presentation/Adaptivity/AdaptivityElement/UIComponents/AdaptivityElementAnswerSelection";
 import React from "react";
 
-describe("AdaptivityElementQuestionAnswer", () => {
+describe("AdaptivityElementAnswerSelection", () => {
   test("should render", () => {
     const { container } = render(
-      <AdaptivityElementQuestionAnswer
+      <AdaptivityElementAnswerSelection
         question={{
           questionID: 0,
           questionText: "testQuestionText",

@@ -25,9 +25,11 @@ exports[`AdaptivityElementTaskSelection should render 1`] = `
             />
             <div
               class="w-6 h-6"
+              data-testid="empty-star-slot"
             />
             <div
               class="w-6 h-6"
+              data-testid="empty-star-slot"
             />
           </div>
         </div>
