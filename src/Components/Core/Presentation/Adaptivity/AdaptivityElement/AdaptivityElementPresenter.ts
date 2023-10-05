@@ -43,14 +43,17 @@ export default class AdaptivityElementPresenter
       adaptivityElementProgressUpdateTO.taskInfo.taskStatus ===
       AdaptivityElementStatusTypes.correct;
 
-    updatedTask.questions.find(
+    const updatedQuestion = updatedTask.questions.find(
       (question) =>
         question.questionID ===
         adaptivityElementProgressUpdateTO.questionInfo.questionId
     )!;
-    updatedTask.isCompleted =
+    updatedQuestion.isCompleted =
       adaptivityElementProgressUpdateTO.questionInfo.questionStatus ===
       AdaptivityElementStatusTypes.correct;
+    updatedQuestion.questionAnswers.forEach((answer) => {
+      answer.isSelected = false;
+    });
 
     this.viewModel.showFeedback.Value = true;
   }
