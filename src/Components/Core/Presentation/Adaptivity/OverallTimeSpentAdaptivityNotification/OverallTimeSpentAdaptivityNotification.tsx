@@ -51,7 +51,7 @@ function GetNotificationModalContents(
 function ShortBreakContent() {
   return (
     <div data-testid="short-break">
-      <p>Du bist seit 30min am arbeiten.</p>
+      <p>Du arbeitest seit 30 Minuten.</p>
       <p>Streck doch mal deine Beine aus!</p>
     </div>
   );
@@ -60,7 +60,7 @@ function ShortBreakContent() {
 function MediumBreakContent() {
   return (
     <div data-testid="medium-break">
-      <p>Du bist seit 90min am arbeiten.</p>
+      <p>Du arbeitest seit 90 Minuten.</p>
       <p>Mach doch mal 15min Kaffepause!</p>
     </div>
   );
@@ -69,7 +69,7 @@ function MediumBreakContent() {
 function LongBreakContent() {
   return (
     <div data-testid="long-break">
-      <p>Du bist seit 3 Stunden am arbeiten.</p>
+      <p>Du arbeitest seit 3 Stunden.</p>
       <p>Mach doch erstmal etwas komplett anderes!</p>
     </div>
   );
