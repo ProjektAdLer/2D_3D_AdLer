@@ -1,4 +1,3 @@
-import { EvaluationAnswerTO } from "../../../Application/DataTransferObjects/QuizElementTO";
 import IAdaptivityElementPresenter from "./IAdaptivityElementPresenter";
 import AdaptivityElementViewModel, {
   AdaptivityElementContent,
@@ -6,9 +5,10 @@ import AdaptivityElementViewModel, {
   AdaptivityTask,
   AdaptivityAnswer,
 } from "./AdaptivityElementViewModel";
-import AdaptivityElementProgressTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
+import AdaptivityElementProgressTO from "../../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import bind from "bind-decorator";
-import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
+import { AdaptivityElementQuestionDifficultyTypes } from "../../../Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
+import AdaptivityElementProgressUpdateTO from "../../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 
 export default class AdaptivityElementPresenter
   implements IAdaptivityElementPresenter
@@ -31,8 +31,10 @@ export default class AdaptivityElementPresenter
     this.viewModel.isOpen.Value = true;
   }
 
-  onAdaptivityElementSubmitted(evaluationTO: EvaluationAnswerTO): void {
-    this.viewModel.evaluation.Value = evaluationTO.evaluation;
+  onAdaptivityElementAnswerEvaluated(
+    adaptivityElementProgressUpdateTO: AdaptivityElementProgressUpdateTO
+  ): void {
+    // this.viewModel.evaluation.Value = evaluationTO.evaluation;
   }
 
   @bind

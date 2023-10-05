@@ -8,11 +8,8 @@ import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { IAbstractPort } from "./IAbstractPort";
 import ILearningWorldAdapter from "../LearningWorldPort/ILearningWorldAdapter";
 import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
-import {
-  AdaptivityContentsTO,
-  EvaluationAnswerTO,
-} from "../../DataTransferObjects/QuizElementTO";
 import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
+import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 
 export default interface ILearningWorldPort
   extends IAbstractPort<ILearningWorldAdapter> {
@@ -41,5 +38,7 @@ export default interface ILearningWorldPort
   onAdaptivityElementLoaded(
     adaptivityElementProgressTO: AdaptivityElementProgressTO
   ): void;
-  onAdaptivityElementSubmitted(evaluationTO: EvaluationAnswerTO): void;
+  onAdaptivityElementAnswerEvaluated(
+    adaptivityElementProgressUpdateTO: AdaptivityElementProgressUpdateTO
+  ): void;
 }

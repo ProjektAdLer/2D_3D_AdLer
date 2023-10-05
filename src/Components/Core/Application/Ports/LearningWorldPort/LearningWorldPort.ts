@@ -10,11 +10,8 @@ import UserLearningWorldsTO from "../../DataTransferObjects/UserLearningWorldsTO
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import LearningWorldScoreTO from "../../DataTransferObjects/LearningWorldScoreTO";
 import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
-import {
-  AdaptivityContentsTO,
-  EvaluationAnswerTO,
-} from "../../DataTransferObjects/QuizElementTO";
 import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
+import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 
 @injectable()
 export default class LearningWorldPort
@@ -103,10 +100,14 @@ export default class LearningWorldPort
     });
   }
 
-  public onAdaptivityElementSubmitted(evaluationTO: EvaluationAnswerTO): void {
+  public onAdaptivityElementAnswerEvaluated(
+    adaptivityElementProgressUpdateTO: AdaptivityElementProgressUpdateTO
+  ): void {
     this.adapters.forEach((adapter) => {
-      if (adapter.onAdaptivityElementSubmitted)
-        adapter.onAdaptivityElementSubmitted(evaluationTO);
+      if (adapter.onAdaptivityElementAnswerEvaluated)
+        adapter.onAdaptivityElementAnswerEvaluated(
+          adaptivityElementProgressUpdateTO
+        );
     });
   }
 }

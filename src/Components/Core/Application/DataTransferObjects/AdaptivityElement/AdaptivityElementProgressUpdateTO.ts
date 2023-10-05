@@ -1,3 +1,5 @@
+import { AdaptivityElementStatusTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementStatusTypes";
+
 export default class AdaptivityElementProgressUpdateTO {
   elementInfo: {
     elementId: number;
@@ -5,10 +7,10 @@ export default class AdaptivityElementProgressUpdateTO {
   };
   taskInfo: {
     taskId: number;
-    taskStatus: string;
+    taskStatus: AdaptivityElementStatusTypes;
   };
   questionInfo: {
-    id: number;
-    status: string;
+    questionId: number;
+    questionStatus: AdaptivityElementStatusTypes;
   };
 }

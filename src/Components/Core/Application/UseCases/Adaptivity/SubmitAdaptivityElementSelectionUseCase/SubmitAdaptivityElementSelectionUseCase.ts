@@ -91,14 +91,14 @@ export default class SubmitAdaptivityElementSelectionUseCase
     submission: AdaptivityElementQuestionSubmissionTO
   ): Promise<void> {
     const backendResult = simulateBackendCall(submission);
-    let progressUpdateTO: AdaptivityElementProgressUpdateTO = {
-      elementInfo: backendResult.elementScore,
-      taskInfo: backendResult.gradedTask,
-      questionInfo: {
-        id: backendResult.gradedQuestion.id,
-        status: backendResult.gradedQuestion.status,
-      },
-    };
+    // let progressUpdateTO: AdaptivityElementProgressUpdateTO = {
+    //   elementInfo: backendResult.elementScore,
+    //   taskInfo: backendResult.gradedTask,
+    //   questionInfo: {
+    //     questionId: backendResult.gradedQuestion.id,
+    //     questionStatus: backendResult.gradedQuestion.status,
+    //   },
+    // };
 
     //this.worlPort.onAdaptivityElementSubmitted(evaluationTO);
     return Promise.resolve();
