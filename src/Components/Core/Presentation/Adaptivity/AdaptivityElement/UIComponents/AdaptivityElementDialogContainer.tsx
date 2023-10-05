@@ -1,3 +1,6 @@
+import quizBackgroundVRGuy from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
+import quizBackgroundVRGuyCutted from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background_cutted.png";
+
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import AdaptivityElementViewModel from "../AdaptivityElementViewModel";
 import IAdaptivityElementController from "../IAdaptivityElementController";
@@ -10,14 +13,11 @@ import { AdLerUIComponent } from "../../../../Types/ReactTypes";
 import AdaptivityElementTaskSelection from "./AdaptivityElementTaskSelection";
 import { useEffect, useState } from "react";
 import AdaptivityElementAnswerSelection from "./AdaptivityElementAnswerSelection";
-
-import quizBackgroundVRGuy from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
-import quizBackgroundVRGuyCutted from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background_cutted.png";
 import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from "react-circular-progressbar";
-import AdaptivityElementDifficultySelection from "./AdaptivityElementDifficultySelection";
+import AdaptivityElementQuestionSelection from "./AdaptivityElementQuestionSelection";
 import AdaptivityElementAnswerFeedback from "./AdaptivityElementAnswerFeedback";
 
 export default function AdaptivityElementDialogContainer({
@@ -121,14 +121,14 @@ export default function AdaptivityElementDialogContainer({
               )}
               {currentTaskID !== null && currentQuestionID === null && (
                 <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
-                  <AdaptivityElementDifficultySelection
+                  <AdaptivityElementQuestionSelection
                     selectedTask={
                       contentData.tasks.find(
                         (task) => task.taskID === currentTaskID
                       )!
                     }
                     setHeaderText={setHeaderText}
-                    onSelectDifficulty={controller.selectDifficulty}
+                    onSelectQuestion={controller.selectQuestion}
                   />
                 </div>
               )}

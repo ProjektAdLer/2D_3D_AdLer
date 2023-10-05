@@ -21,8 +21,8 @@ export default class AdaptivityElementController
   }
 
   @bind
-  selectDifficulty(difficulty: number): void {
-    this.viewModel.currentQuestionID.Value = difficulty;
+  selectQuestion(selectedQuestionID: number): void {
+    this.viewModel.currentQuestionID.Value = selectedQuestionID;
   }
 
   @bind
