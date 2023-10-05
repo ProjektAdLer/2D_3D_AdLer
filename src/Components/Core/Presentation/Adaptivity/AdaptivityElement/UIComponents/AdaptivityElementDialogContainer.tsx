@@ -37,6 +37,7 @@ export default function AdaptivityElementDialogContainer({
   );
   const [contentData] = useObservable(viewmodel?.contentData);
   const [footerText] = useObservable<string>(viewmodel?.footerText);
+  const [showAnswerFeedback] = useObservable<boolean>(viewmodel?.showFeedback);
 
   // -- State --
   const [headerText, setHeaderText] = useState<string>("");
@@ -131,22 +132,25 @@ export default function AdaptivityElementDialogContainer({
                 </div>
               )}
 
-              {currentTaskID !== null && currentQuestionID !== null && (
-                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
-                  <AdaptivityElementAnswerSelection
-                    question={
-                      contentData.tasks
-                        .find((task) => task.taskID === currentTaskID)!
-                        .questions.find(
-                          (question) =>
-                            question.questionID === currentQuestionID
-                        )!
-                    }
-                    setHeaderText={setHeaderText}
-                    submitSelection={controller.submitSelection}
-                  />
-                </div>
-              )}
+              {currentTaskID !== null &&
+                currentQuestionID !== null &&
+                !showAnswerFeedback && (
+                  <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
+                    <AdaptivityElementAnswerSelection
+                      question={
+                        contentData.tasks
+                          .find((task) => task.taskID === currentTaskID)!
+                          .questions.find(
+                            (question) =>
+                              question.questionID === currentQuestionID
+                          )!
+                      }
+                      setHeaderText={setHeaderText}
+                      submitSelection={controller.submitSelection}
+                      closeSelection={controller.closeAnswerSelection}
+                    />
+                  </div>
+                )}
 
               {/* Footer */}
               {

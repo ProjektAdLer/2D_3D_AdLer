@@ -7,10 +7,12 @@ import StyledButton, {
 export default function AdaptivityElementAnswerSelection({
   question,
   submitSelection,
+  closeSelection,
   setHeaderText,
 }: {
   question: AdaptivityQuestion;
   submitSelection: () => void;
+  closeSelection: () => void;
   setHeaderText: (headerText: string) => void;
 }) {
   const [answerColors, setAnswerColors] = useState<StyledButtonColor[]>([]);
@@ -57,6 +59,13 @@ export default function AdaptivityElementAnswerSelection({
       </div>
 
       <div className="flex items-end justify-end w-full pt-8 font-bold">
+        <StyledButton
+          className="box-border"
+          shape="freefloatcenter"
+          onClick={closeSelection}
+        >
+          {"Zurück"}
+        </StyledButton>
         <StyledButton
           className="box-border"
           shape="freefloatcenter"

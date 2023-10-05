@@ -3,4 +3,6 @@ export default interface IAdaptivityElementController {
   selectTask(taskID: number): void;
   selectDifficulty(difficulty: number): void;
   submitSelection(): void;
+  closeFeedback(): void;
+  closeAnswerSelection(): void;
 }
