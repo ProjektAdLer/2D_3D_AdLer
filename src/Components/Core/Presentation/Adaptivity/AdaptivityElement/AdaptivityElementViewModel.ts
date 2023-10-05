@@ -1,6 +1,5 @@
 import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 import Observable from "src/Lib/Observable";
-import { StyledButtonColor } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 export interface AdaptivityAnswer {
   answerIndex: number;
@@ -34,6 +33,7 @@ export interface AdaptivityElementContent {
 
 export default class AdaptivityElementViewModel {
   isOpen: Observable<boolean> = new Observable<boolean>(false);
+  showFeedback: Observable<boolean> = new Observable<boolean>(false);
   contentData: Observable<AdaptivityElementContent> =
     new Observable<AdaptivityElementContent>();
   currentTaskID: Observable<number | null> = new Observable<number | null>(
@@ -43,9 +43,4 @@ export default class AdaptivityElementViewModel {
     null
   );
   footerText: Observable<string> = new Observable<string>("");
-
-  isFinished: Observable<boolean> = new Observable<boolean>(false);
-  currentElement: Observable<AdaptivityQuestion> =
-    new Observable<AdaptivityQuestion>();
-  evaluation = new Observable<Map<number, StyledButtonColor>>();
 }

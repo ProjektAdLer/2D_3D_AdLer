@@ -9,6 +9,7 @@ import AdaptivityElementProgressTO from "../../../Application/DataTransferObject
 import bind from "bind-decorator";
 import { AdaptivityElementQuestionDifficultyTypes } from "../../../Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 import AdaptivityElementProgressUpdateTO from "../../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
+import { AdaptivityElementStatusTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementStatusTypes";
 
 export default class AdaptivityElementPresenter
   implements IAdaptivityElementPresenter
@@ -34,7 +35,27 @@ export default class AdaptivityElementPresenter
   onAdaptivityElementAnswerEvaluated(
     adaptivityElementProgressUpdateTO: AdaptivityElementProgressUpdateTO
   ): void {
-    // this.viewModel.evaluation.Value = evaluationTO.evaluation;
+    const updatedTask = this.viewModel.contentData.Value.tasks.find(
+      (task) =>
+        task.taskID === adaptivityElementProgressUpdateTO.taskInfo.taskId
+    )!;
+    updatedTask.isCompleted =
+      adaptivityElementProgressUpdateTO.taskInfo.taskStatus ===
+      AdaptivityElementStatusTypes.correct;
+
+    const updatedQuestion = updatedTask.questions.find(
+      (question) =>
+        question.questionID ===
+        adaptivityElementProgressUpdateTO.questionInfo.questionId
+    )!;
+    updatedQuestion.isCompleted =
+      adaptivityElementProgressUpdateTO.questionInfo.questionStatus ===
+      AdaptivityElementStatusTypes.correct;
+    updatedQuestion.questionAnswers.forEach((answer) => {
+      answer.isSelected = false;
+    });
+
+    this.viewModel.showFeedback.Value = true;
   }
 
   @bind

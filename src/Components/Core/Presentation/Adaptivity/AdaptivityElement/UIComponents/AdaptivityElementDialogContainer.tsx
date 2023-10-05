@@ -1,3 +1,6 @@
+import quizBackgroundVRGuy from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
+import quizBackgroundVRGuyCutted from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background_cutted.png";
+
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import AdaptivityElementViewModel from "../AdaptivityElementViewModel";
 import IAdaptivityElementController from "../IAdaptivityElementController";
@@ -10,14 +13,12 @@ import { AdLerUIComponent } from "../../../../Types/ReactTypes";
 import AdaptivityElementTaskSelection from "./AdaptivityElementTaskSelection";
 import { useEffect, useState } from "react";
 import AdaptivityElementAnswerSelection from "./AdaptivityElementAnswerSelection";
-
-import quizBackgroundVRGuy from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
-import quizBackgroundVRGuyCutted from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background_cutted.png";
 import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from "react-circular-progressbar";
 import AdaptivityElementQuestionSelection from "./AdaptivityElementQuestionSelection";
+import AdaptivityElementAnswerFeedback from "./AdaptivityElementAnswerFeedback";
 
 export default function AdaptivityElementDialogContainer({
   className,
@@ -37,6 +38,7 @@ export default function AdaptivityElementDialogContainer({
   );
   const [contentData] = useObservable(viewmodel?.contentData);
   const [footerText] = useObservable<string>(viewmodel?.footerText);
+  const [showAnswerFeedback] = useObservable<boolean>(viewmodel?.showFeedback);
 
   // -- State --
   const [headerText, setHeaderText] = useState<string>("");
@@ -131,22 +133,42 @@ export default function AdaptivityElementDialogContainer({
                 </div>
               )}
 
-              {currentTaskID !== null && currentQuestionID !== null && (
-                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
-                  <AdaptivityElementAnswerSelection
-                    question={
+              {currentTaskID !== null &&
+                currentQuestionID !== null &&
+                !showAnswerFeedback && (
+                  <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
+                    <AdaptivityElementAnswerSelection
+                      question={
+                        contentData.tasks
+                          .find((task) => task.taskID === currentTaskID)!
+                          .questions.find(
+                            (question) =>
+                              question.questionID === currentQuestionID
+                          )!
+                      }
+                      setHeaderText={setHeaderText}
+                      submitSelection={controller.submitSelection}
+                      closeSelection={controller.closeAnswerSelection}
+                    />
+                  </div>
+                )}
+
+              {currentTaskID !== null &&
+                currentQuestionID !== null &&
+                showAnswerFeedback && (
+                  <AdaptivityElementAnswerFeedback
+                    isCorrect={
                       contentData.tasks
                         .find((task) => task.taskID === currentTaskID)!
                         .questions.find(
                           (question) =>
                             question.questionID === currentQuestionID
-                        )!
+                        )!.isCompleted
                     }
                     setHeaderText={setHeaderText}
-                    submitSelection={controller.submitSelection}
+                    closeFeedback={controller.closeFeedback}
                   />
-                </div>
-              )}
+                )}
 
               {/* Footer */}
               {
