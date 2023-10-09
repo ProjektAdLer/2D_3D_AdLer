@@ -50,9 +50,33 @@ function GetNotificationModalContents(
 
 function ShortBreakContent() {
   return (
-    <div data-testid="short-break">
-      <p>Du arbeitest seit 30 Minuten.</p>
-      <p>Streck doch mal deine Beine aus!</p>
+    <div data-testid="short-break" className="max-w-2xl px-4 pb-4">
+      <h1 className="text-xl">Sind Pausen wirklich Zeitverschwendung…?</h1>
+      <br />
+      <p className="text-justify">
+        Wenn man nur die Menge der Zeit betrachtet, die man mit geplanten Pausen
+        verbringt, scheint es so, als würde man Zeit verschwenden und die
+        verbleibende Lernzeit reduzieren. Aber wenn wir die Qualität der Zeit
+        berücksichtigen, ändert sich die Situation grundlegend. Nach einer Pause
+        arbeiten wir oft viel effizienter, sodass die insgesamt verfügbare Zeit
+        besser genutzt wird, obwohl sie objektiv betrachtet kürzer ist. Das
+        bedeutet, dass die scheinbar "verlorene" Zeit während der Pause durch
+        die gesteigerte Effizienz danach mehr als ausgeglichen wird.
+      </p>
+      <br />
+      <p className="text-justify">
+        Der Versuch, die verfügbare Zeit bis an die Grenze auszunutzen, indem
+        man ohne Pausen lernt, ist von vornherein zum Scheitern verurteilt.
+        Pausen sollten nicht trotz Zeitdruck, sondern gerade wegen Zeitmangels
+        eingeplant werden, da sie letztendlich die Effizienz steigern und die
+        Lernerfolge verbessern können.
+      </p>
+      <br />
+      <p className="text-xs">
+        (Hofmann, Eberhardt; Löhle, Monika (2012): Erfolgreich Lernen:
+        effiziente Lern- und Arbeitsstrategien für Schule, Studium und Beruf.
+        2., neu ausgestattete Aufl., Hogrefe, Göttingen. S. 83ff.)
+      </p>
     </div>
   );
 }
