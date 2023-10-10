@@ -10,7 +10,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
--
+- styling of general layout in adaptivity element, as well as buttons themselves
 
 ### Changed
 
