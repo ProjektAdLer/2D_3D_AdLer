@@ -1,7 +1,10 @@
 import IAdaptivityElementController from "./IAdaptivityElementController";
 import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
-import { SubmittedAnswersTO } from "../../../Application/DataTransferObjects/QuizElementTO";
 import bind from "bind-decorator";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import ISubmitAdaptivityElementSelectionUseCase from "src/Components/Core/Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import AdaptivityElementQuestionSubmissionTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 
 export default class AdaptivityElementController
   implements IAdaptivityElementController
@@ -26,7 +29,20 @@ export default class AdaptivityElementController
   }
 
   @bind
-  submitSelection(): void {
+  async submitSelection(): Promise<void> {
+    // to test backend response of submit usecase
+    const testsubmission: AdaptivityElementQuestionSubmissionTO = {
+      worldID: 0,
+      elementID: 0,
+      taskID: this.viewModel.currentTaskID.Value!,
+      questionID: this.viewModel.currentQuestionID.Value!,
+      selectedAnswerIDs: [],
+    };
+
+    await CoreDIContainer.get<ISubmitAdaptivityElementSelectionUseCase>(
+      USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
+    ).executeAsync(testsubmission);
+
     // TODO: remove this debug code
     this.viewModel.showFeedback.Value = true;
     this.viewModel.contentData.Value.tasks
@@ -35,23 +51,6 @@ export default class AdaptivityElementController
         (question) =>
           question.questionID === this.viewModel.currentQuestionID.Value
       )!.isCompleted = true;
-
-    // let selection = new SubmittedAnswersTO();
-    // selection.questionID = this.viewModel.currentElement.Value.questionID;
-    // selection.allAnswerIndexes = [];
-    // selection.allAnswerIndexes =
-    //   this.viewModel.currentElement.Value.questionAnswers.map((element) => {
-    //     return element.answerIndex;
-    //   });
-    // selection.selectedAnswerIndexes = [];
-    // this.viewModel.currentElement.Value.questionAnswers.forEach((element) => {
-    //   if (element.isSelected) {
-    //     selection.selectedAnswerIndexes.push(element.answerIndex);
-    //   }
-    // });
-    // CoreDIContainer.get<ISubmitAdaptivityElementSelectionUseCase>(
-    //   USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
-    // ).executeAsync(selection);
   }
 
   @bind

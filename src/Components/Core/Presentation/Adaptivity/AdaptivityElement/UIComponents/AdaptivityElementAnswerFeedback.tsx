@@ -14,5 +14,11 @@ export default function AdaptivityElementAnswerFeedback({
     setHeaderText(isCorrect ? "Korrekt!" : "Inkorrekt!");
   }, [isCorrect, setHeaderText]);
 
-  return <StyledButton onClick={closeFeedback}>Weiter</StyledButton>;
+  return (
+    <div className="flex justify-end w-full h-full">
+      <StyledButton shape="freefloatcenter" onClick={closeFeedback}>
+        Weiter
+      </StyledButton>
+    </div>
+  );
 }
