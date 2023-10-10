@@ -52,7 +52,7 @@ function GetNotificationModalContents(
 
 function ShortBreakContent() {
   return (
-    <div data-testid="medium-break" className="max-w-2xl px-4 pb-4">
+    <div data-testid="short-break" className="max-w-2xl px-4 pb-4">
       <p>
         Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn
         mit einer 5-minütigen Pause? Schauen Sie sich doch zur Aufheiterung

@@ -16,7 +16,7 @@ exports[`AdaptivityElementTaskSelection should render 1`] = `
         >
           testTaskTitle
           <div
-            class="flex flex-row h-full"
+            class="flex items-center h-full"
           >
             <img
               alt=""

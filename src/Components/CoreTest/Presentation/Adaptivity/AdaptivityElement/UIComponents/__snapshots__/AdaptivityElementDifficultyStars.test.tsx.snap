@@ -3,7 +3,7 @@
 exports[`AdaptivityElementDifficultyStars should render with 0 for each difficulty 1`] = `
 <div>
   <div
-    class="flex flex-row h-full"
+    class="flex items-center h-full"
   >
     <div
       class=""
@@ -24,7 +24,7 @@ exports[`AdaptivityElementDifficultyStars should render with 0 for each difficul
 exports[`AdaptivityElementDifficultyStars should render with 1 for each difficulty 1`] = `
 <div>
   <div
-    class="flex flex-row h-full"
+    class="flex items-center h-full"
   >
     <img
       alt=""
@@ -48,7 +48,7 @@ exports[`AdaptivityElementDifficultyStars should render with 1 for each difficul
 exports[`AdaptivityElementDifficultyStars should render with 1.7976931348623157e+308 for each difficulty 1`] = `
 <div>
   <div
-    class="flex flex-row h-full"
+    class="flex items-center h-full"
   >
     <img
       alt=""
@@ -69,7 +69,7 @@ exports[`AdaptivityElementDifficultyStars should render with 1.7976931348623157e
 exports[`AdaptivityElementDifficultyStars should render with 2 for each difficulty 1`] = `
 <div>
   <div
-    class="flex flex-row h-full"
+    class="flex items-center h-full"
   >
     <img
       alt=""
@@ -93,7 +93,7 @@ exports[`AdaptivityElementDifficultyStars should render with 2 for each difficul
 exports[`AdaptivityElementDifficultyStars should render with 3 for each difficulty 1`] = `
 <div>
   <div
-    class="flex flex-row h-full"
+    class="flex items-center h-full"
   >
     <img
       alt=""
@@ -117,7 +117,7 @@ exports[`AdaptivityElementDifficultyStars should render with 3 for each difficul
 exports[`AdaptivityElementDifficultyStars should render with 4 for each difficulty 1`] = `
 <div>
   <div
-    class="flex flex-row h-full"
+    class="flex items-center h-full"
   >
     <img
       alt=""
@@ -141,7 +141,7 @@ exports[`AdaptivityElementDifficultyStars should render with 4 for each difficul
 exports[`AdaptivityElementDifficultyStars should render with 5 for each difficulty 1`] = `
 <div>
   <div
-    class="flex flex-row h-full"
+    class="flex items-center h-full"
   >
     <img
       alt=""
@@ -165,7 +165,7 @@ exports[`AdaptivityElementDifficultyStars should render with 5 for each difficul
 exports[`AdaptivityElementDifficultyStars should render with 6 for each difficulty 1`] = `
 <div>
   <div
-    class="flex flex-row h-full"
+    class="flex items-center h-full"
   >
     <img
       alt=""
