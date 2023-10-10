@@ -1,5 +1,4 @@
 import { AdaptivityElementStatusTypes } from "./../../../../Domain/Types/Adaptivity/AdaptivityElementStatusTypes";
-import { AdaptivityElementBackendQuestionResponse } from "./../../../../Adapters/BackendAdapter/Types/BackendResponseTypes";
 import { inject, injectable } from "inversify";
 import ISubmitAdaptivityElementSelectionUseCase from "./ISubmitAdaptivityElementSelectionUseCase";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
