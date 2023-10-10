@@ -233,6 +233,20 @@ export default class BackendAdapter implements IBackendPort {
     userToken: string,
     submissionData: AdaptivityElementQuestionSubmissionTO
   ): Promise<AdaptivityElementBackendQuestionResponse> {
+    const response = await axios.get<AdaptivityElementBackendQuestionResponse>(
+      "/Elements/World/" +
+        submissionData.worldID +
+        "/Element/" +
+        submissionData.elementID +
+        "/Question/" +
+        submissionData.questionID,
+      {
+        headers: {
+          token: userToken,
+        },
+        params: submissionData.selectedAnswerIDs,
+      }
+    );
     throw new Error(
       "function 'getAdaptivityElementQuestionResponse' not implemented"
     );
