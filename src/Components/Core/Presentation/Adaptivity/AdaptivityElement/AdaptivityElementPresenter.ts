@@ -41,7 +41,7 @@ export default class AdaptivityElementPresenter
     )!;
     updatedTask.isCompleted =
       adaptivityElementProgressUpdateTO.taskInfo.taskStatus ===
-      AdaptivityElementStatusTypes.correct;
+      AdaptivityElementStatusTypes.Correct;
 
     const updatedQuestion = updatedTask.questions.find(
       (question) =>
@@ -50,7 +50,7 @@ export default class AdaptivityElementPresenter
     )!;
     updatedQuestion.isCompleted =
       adaptivityElementProgressUpdateTO.questionInfo.questionStatus ===
-      AdaptivityElementStatusTypes.correct;
+      AdaptivityElementStatusTypes.Correct;
     updatedQuestion.questionAnswers.forEach((answer) => {
       answer.isSelected = false;
     });
