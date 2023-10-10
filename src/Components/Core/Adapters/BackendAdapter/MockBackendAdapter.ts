@@ -200,10 +200,21 @@ export default class MockBackendAdapter implements IBackendPort {
     userToken: string,
     submissionData: AdaptivityElementQuestionSubmissionTO
   ): Promise<AdaptivityElementBackendQuestionResponse> {
-    const backendResponse = new AdaptivityElementBackendQuestionResponse();
-    backendResponse.elementScore.elementId = submissionData.elementID;
-    backendResponse.gradedQuestion.id = submissionData.questionID;
-    backendResponse.gradedTask.taskId = submissionData.taskID;
+    const backendResponse: AdaptivityElementBackendQuestionResponse = {
+      elementScore: {
+        elementId: submissionData.elementID,
+        success: false,
+      },
+      gradedTask: {
+        taskId: submissionData.taskID,
+        taskStatus: "Incorrect",
+      },
+      gradedQuestion: {
+        id: submissionData.questionID,
+        status: "Incorrect",
+        answer: undefined,
+      },
+    };
 
     switch (submissionData.questionID) {
       case 0:
@@ -214,10 +225,6 @@ export default class MockBackendAdapter implements IBackendPort {
           backendResponse.elementScore.success = true;
           backendResponse.gradedTask.taskStatus = "Correct";
           backendResponse.gradedQuestion.status = "Correct";
-        } else {
-          backendResponse.elementScore.success = false;
-          backendResponse.gradedQuestion.status = "Incorrect";
-          backendResponse.gradedTask.taskStatus = "Incorrect";
         }
         break;
       case 1:
@@ -229,10 +236,6 @@ export default class MockBackendAdapter implements IBackendPort {
           backendResponse.elementScore.success = true;
           backendResponse.gradedTask.taskStatus = "Correct";
           backendResponse.gradedQuestion.status = "Correct";
-        } else {
-          backendResponse.elementScore.success = false;
-          backendResponse.gradedQuestion.status = "Incorrect";
-          backendResponse.gradedTask.taskStatus = "Incorrect";
         }
         break;
       default:
