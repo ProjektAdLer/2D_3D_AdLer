@@ -1,5 +1,5 @@
 export enum AdaptivityElementStatusTypes {
-  correct = "Correct",
-  incorrect = "Incorrect",
-  notAttempted = "NotAttempted",
+  Correct = "Correct",
+  Incorrect = "Incorrect",
+  NotAttempted = "NotAttempted",
 }
