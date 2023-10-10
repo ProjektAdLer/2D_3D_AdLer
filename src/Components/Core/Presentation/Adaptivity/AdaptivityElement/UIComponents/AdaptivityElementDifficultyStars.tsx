@@ -104,7 +104,7 @@ export default function AdaptivityElementDifficultyStars({
   withEmptySlots?: boolean;
 }) {
   return (
-    <div className="flex flex-row h-full">
+    <div className="flex items-center h-full">
       {easyState !== AdaptivityElementDifficultyStarState.Empty ? (
         <img
           className={tailwindMerge(`${starClassName}`)}

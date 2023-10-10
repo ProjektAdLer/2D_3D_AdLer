@@ -20,7 +20,7 @@ export default function AdaptivityElementQuestionSelection({
 
   let questionButtons = selectedTask.questions.map((question) => {
     return (
-      <div key={question.questionID} className="flex flex-col w-[33%] ">
+      <div key={question.questionID} className="flex flex-col">
         <StyledButton
           shape="freefloatcenter"
           className="w-full max-w-2xl"

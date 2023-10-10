@@ -5,6 +5,8 @@ import LearningElementScoreTO from "../../DataTransferObjects/LearningElementSco
 import PlayerDataTO from "../../DataTransferObjects/PlayerDataTO";
 import BackendWorldTO from "../../DataTransferObjects/BackendWorldTO";
 import { XAPIEvent } from "../../UseCases/ScoreH5PLearningElement/IScoreH5PLearningElementUseCase";
+import AdaptivityElementQuestionSubmissionTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
+import { AdaptivityElementBackendQuestionResponse } from "src/Components/Core/Adapters/BackendAdapter/Types/BackendResponseTypes";
 
 export type GetWorldDataParams = {
   userToken: string;
@@ -72,4 +74,9 @@ export default interface IBackendPort {
     elementID,
     worldID,
   }: ElementDataParams): Promise<string>;
+
+  getAdaptivityElementQuestionResponse(
+    userToken: string,
+    submissionData: AdaptivityElementQuestionSubmissionTO
+  ): Promise<AdaptivityElementBackendQuestionResponse>;
 }
