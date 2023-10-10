@@ -173,7 +173,7 @@ export default class BackendAdapterUtils {
         ),
         questionText: question.questionText,
         questionAnswers: [],
-        trigger: [],
+        triggers: [],
       } as AdaptivityElementQuestionTO);
 
       this.mapAdaptivityAnswers(
@@ -182,7 +182,7 @@ export default class BackendAdapterUtils {
       );
 
       this.mapAdaptivityTrigger(
-        questions.at(-1)!.trigger,
+        questions.at(-1)!.triggers,
         question.adaptivityRules
       );
     });

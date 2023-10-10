@@ -7,6 +7,17 @@ export interface AdaptivityAnswer {
   isSelected: boolean;
 }
 
+export interface AdaptivityHintAction {
+  hintActionType: string;
+  hintActionData: string | number;
+}
+
+export interface AdaptivityHint {
+  hintID: number;
+  showOnIsWrong: boolean;
+  hintAction: AdaptivityHintAction;
+}
+
 export interface AdaptivityQuestion {
   questionID: number;
   questionText: string;
@@ -15,6 +26,7 @@ export interface AdaptivityQuestion {
   isCompleted: boolean;
   difficulty: AdaptivityElementQuestionDifficultyTypes;
   isMultipleChoice: boolean;
+  hints: AdaptivityHint[];
 }
 
 export interface AdaptivityTask {

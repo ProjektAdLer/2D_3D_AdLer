@@ -4,12 +4,18 @@ import AdaptivityElementViewModel, {
   AdaptivityQuestion,
   AdaptivityTask,
   AdaptivityAnswer,
+  AdaptivityHint,
+  AdaptivityHintAction,
 } from "./AdaptivityElementViewModel";
 import AdaptivityElementProgressTO from "../../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import bind from "bind-decorator";
 import { AdaptivityElementQuestionDifficultyTypes } from "../../../Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 import AdaptivityElementProgressUpdateTO from "../../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 import { AdaptivityElementStatusTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementStatusTypes";
+import AdaptivityElementTaskProgressTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTaskProgressTO";
+import AdaptivityElementQuestionProgressTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionProgressTO";
+import AdaptivityElementAnswersTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementAnswerTO";
+import AdaptivityElementTriggerTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTriggerTO";
 
 export default class AdaptivityElementPresenter
   implements IAdaptivityElementPresenter
@@ -100,55 +106,80 @@ export default class AdaptivityElementPresenter
   private setContentData(
     adaptivityElementProgressTO: AdaptivityElementProgressTO
   ): void {
-    const newTasks: AdaptivityTask[] = adaptivityElementProgressTO.tasks.map(
-      (task) => {
-        const newQuestions: AdaptivityQuestion[] = task.questions.map(
-          (question) => {
-            const newAnswers: AdaptivityAnswer[] = question.questionAnswers.map(
-              (answer) => {
-                return {
-                  answerIndex: answer.answerId,
-                  answerText: answer.answerText,
-                  isSelected: false,
-                } as AdaptivityAnswer;
-              }
-            );
-
-            // TODO: this is not completely correct yet
-            const isRequired =
-              task.requiredDifficulty <= question.questionDifficulty;
-
-            // TODO: update this check with enum type
-            const isMultipleChoice =
-              question.questionType === "multipleResponse";
-
-            return {
-              questionID: question.questionId,
-              questionText: question.questionText,
-              questionAnswers: newAnswers,
-              isRequired: isRequired,
-              isCompleted: question.isCompleted,
-              difficulty: question.questionDifficulty,
-              isMultipleChoice: isMultipleChoice,
-            } as AdaptivityQuestion;
-          }
-        );
-
-        return {
-          taskID: task.taskId,
-          taskTitle: task.taskTitle,
-          questions: newQuestions,
-          isCompleted: task.isCompleted,
-          requiredDifficulty: task.requiredDifficulty,
-        } as AdaptivityTask;
-      }
+    const newTasks: AdaptivityTask[] = this.mapTasks(
+      adaptivityElementProgressTO.tasks
     );
 
-    // TODO: add element name when it is available
     this.viewModel.contentData.Value = {
       elementName: adaptivityElementProgressTO.elementName,
       introText: adaptivityElementProgressTO.introText,
       tasks: newTasks,
     } as AdaptivityElementContent;
+  }
+
+  private mapTasks(tasks: AdaptivityElementTaskProgressTO[]): AdaptivityTask[] {
+    return tasks.map((task) => {
+      return {
+        taskID: task.taskId,
+        taskTitle: task.taskTitle,
+        questions: this.mapQuestions(task.questions, task.requiredDifficulty),
+        isCompleted: task.isCompleted,
+        requiredDifficulty: task.requiredDifficulty,
+      } as AdaptivityTask;
+    });
+  }
+
+  private mapQuestions(
+    questions: AdaptivityElementQuestionProgressTO[],
+    requiredDifficulty: AdaptivityElementQuestionDifficultyTypes
+  ): AdaptivityQuestion[] {
+    return questions.map((question) => {
+      // TODO: this is not completely correct yet
+      const isRequired = requiredDifficulty <= question.questionDifficulty;
+
+      // TODO: update this check with enum type
+      const isMultipleChoice = question.questionType === "multipleResponse";
+
+      return {
+        questionID: question.questionId,
+        questionText: question.questionText,
+        questionAnswers: this.mapAnswers(question.questionAnswers),
+        isRequired: isRequired,
+        isCompleted: question.isCompleted,
+        difficulty: question.questionDifficulty,
+        isMultipleChoice: isMultipleChoice,
+        hints: this.mapAdaptivityTriggers(question.triggers),
+      } as AdaptivityQuestion;
+    });
+  }
+
+  private mapAnswers(
+    answers: AdaptivityElementAnswersTO[]
+  ): AdaptivityAnswer[] {
+    return answers.map((answer) => {
+      return {
+        answerIndex: answer.answerId,
+        answerText: answer.answerText,
+        isSelected: false,
+      } as AdaptivityAnswer;
+    });
+  }
+
+  private mapAdaptivityTriggers(
+    triggers: AdaptivityElementTriggerTO[]
+  ): AdaptivityHint[] {
+    if (!triggers) return [];
+
+    // TODO: update with enum types
+    return triggers.map((trigger) => {
+      return {
+        hintID: trigger.triggerId,
+        showOnIsWrong: trigger.triggerCondition === "wrong",
+        hintAction: {
+          hintActionType: trigger.triggerAction.actionType,
+          hintActionData: trigger.triggerAction.actionData,
+        } as AdaptivityHintAction,
+      } as AdaptivityHint;
+    });
   }
 }

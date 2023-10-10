@@ -28,7 +28,7 @@ describe("AdaptivityElementPresenter", () => {
               questionId: 1,
               questionText: "TestQuestionText",
               questionType: "",
-              trigger: [],
+              triggers: [],
               questionAnswers: [
                 {
                   answerId: 1,
@@ -100,7 +100,7 @@ describe("AdaptivityElementPresenter", () => {
               questionId: 1,
               questionText: "TestQuestionText",
               questionType: "singleResponse",
-              trigger: [],
+              triggers: [],
               questionAnswers: [
                 {
                   answerId: 1,
@@ -146,27 +146,11 @@ describe("AdaptivityElementPresenter", () => {
                   isSelected: false,
                 },
               ],
+              hints: [],
             },
           ],
         },
       ],
     });
-  });
-
-  test.skip("onAdaptivityElementSubmitted should set evaluation in viewModel", () => {
-    const mappedValues: Map<number, StyledButtonColor> = new Map([
-      [1, "success"],
-      [2, "success"],
-    ]);
-    const evaluate: EvaluationAnswerTO = {
-      questionID: 1,
-      evaluation: mappedValues,
-    };
-
-    systemUnderTest.onAdaptivityElementAnswerEvaluated(evaluate);
-
-    expect(systemUnderTest["viewModel"].evaluation.Value).toEqual(
-      evaluate.evaluation
-    );
   });
 });

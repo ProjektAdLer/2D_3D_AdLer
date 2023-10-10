@@ -8,5 +8,5 @@ export default class AdaptivityElementQuestionTO {
   questionDifficulty: AdaptivityElementQuestionDifficultyTypes;
   questionText: string;
   questionAnswers: AdaptivityElementAnswersTO[];
-  trigger: AdaptivityElementTriggerTO[];
+  triggers: AdaptivityElementTriggerTO[];
 }
