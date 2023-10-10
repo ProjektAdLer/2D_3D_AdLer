@@ -20,10 +20,13 @@ export default function AdaptivityElementQuestionSelection({
 
   let questionButtons = selectedTask.questions.map((question) => {
     return (
-      <div key={question.questionID} className="flex flex-col">
+      <div
+        key={question.questionID}
+        className="flex flex-row justify-around w-full gap-2"
+      >
         <StyledButton
           shape="freefloatcenter"
-          className="w-full max-w-2xl"
+          className="w-1/3"
           onClick={() => onSelectQuestion(question.questionID)}
         >
           {question.difficulty ===
@@ -34,12 +37,12 @@ export default function AdaptivityElementQuestionSelection({
             AdaptivityElementQuestionDifficultyTypes.hard && "Schwer"}
         </StyledButton>
         {/* TODO: Compare AdaptivityRules with BackendResponse of question to give right hint */}
-        <StyledButton shape="freefloatcenter" className="w-full max-w-2xl">
+        <StyledButton shape="freefloatcenter" className="w-1/3">
           Hinweis
         </StyledButton>
       </div>
     );
   });
 
-  return <div className="flex flex-row w-[100%] gap-2">{questionButtons}</div>;
+  return <div className="flex flex-col w-full gap-2">{questionButtons}</div>;
 }

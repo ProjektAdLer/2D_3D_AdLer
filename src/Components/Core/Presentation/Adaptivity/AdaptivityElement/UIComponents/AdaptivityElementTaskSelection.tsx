@@ -80,7 +80,7 @@ export default function AdaptivityElementTaskSelection({
               className="w-full max-w-2xl"
               onClick={() => onSelectTask(task.taskID)}
             >
-              <div className="w-full h-full flex justify-between items-center align-center">
+              <div className="flex items-center justify-between w-full h-full align-center">
                 {isRequired && (
                   <img
                     alt=""
@@ -89,7 +89,7 @@ export default function AdaptivityElementTaskSelection({
                   />
                 )}
 
-                {task.taskTitle}
+                <p className="w-2/3">{task.taskTitle}</p>
 
                 <AdaptivityElementDifficultyStars
                   easyState={easyStatus}
@@ -106,7 +106,7 @@ export default function AdaptivityElementTaskSelection({
   }, [tasks, onSelectTask]);
 
   return (
-    <div className="grid lg:grid-cols-2 gap-4 justify-center gap-x-8">
+    <div className="grid justify-center gap-4 lg:grid-cols-2 gap-x-8">
       {taskButtons}
     </div>
   );
