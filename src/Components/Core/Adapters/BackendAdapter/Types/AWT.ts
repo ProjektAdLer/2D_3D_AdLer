@@ -52,7 +52,6 @@ export interface APIElement {
 
 export interface APIAdaptivity {
   introText: string;
-  shuffleTasks: boolean;
   adaptivityTasks: APIAdaptivityTask[];
 }
 
