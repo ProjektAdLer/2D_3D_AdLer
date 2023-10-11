@@ -45,18 +45,37 @@ export default class AdaptivityElementPresenter
       (task) =>
         task.taskID === adaptivityElementProgressUpdateTO.taskInfo.taskId
     )!;
-    updatedTask.isCompleted =
+
+    if (
       adaptivityElementProgressUpdateTO.taskInfo.taskStatus ===
-      AdaptivityElementStatusTypes.Correct;
+      AdaptivityElementStatusTypes.Correct
+    )
+      updatedTask.isCompleted = true;
+    else if (
+      adaptivityElementProgressUpdateTO.taskInfo.taskStatus ===
+      AdaptivityElementStatusTypes.Incorrect
+    )
+      updatedTask.isCompleted = false;
+    else updatedTask.isCompleted = null;
 
     const updatedQuestion = updatedTask.questions.find(
       (question) =>
         question.questionID ===
         adaptivityElementProgressUpdateTO.questionInfo.questionId
     )!;
-    updatedQuestion.isCompleted =
+
+    if (
       adaptivityElementProgressUpdateTO.questionInfo.questionStatus ===
-      AdaptivityElementStatusTypes.Correct;
+      AdaptivityElementStatusTypes.Correct
+    )
+      updatedQuestion.isCompleted = true;
+    else if (
+      adaptivityElementProgressUpdateTO.questionInfo.questionStatus ===
+      AdaptivityElementStatusTypes.Incorrect
+    )
+      updatedQuestion.isCompleted = false;
+    else updatedQuestion.isCompleted = null;
+
     updatedQuestion.questionAnswers.forEach((answer) => {
       answer.isSelected = false;
     });
