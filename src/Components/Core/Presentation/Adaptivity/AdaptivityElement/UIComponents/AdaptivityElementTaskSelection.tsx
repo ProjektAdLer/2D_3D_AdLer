@@ -19,10 +19,14 @@ export function getAdaptivityQuestionStarState(
   else if (question.isRequired) {
     if (question.isCompleted === true)
       return AdaptivityElementDifficultyStarState.RequiredSolved;
+    else if (question.isCompleted === false)
+      return AdaptivityElementDifficultyStarState.RequiredTried;
     else return AdaptivityElementDifficultyStarState.RequiredUnsolved;
   } else {
     if (question.isCompleted === true)
       return AdaptivityElementDifficultyStarState.NotRequiredSolved;
+    else if (question.isCompleted === false)
+      return AdaptivityElementDifficultyStarState.NotRequiredTried;
     else return AdaptivityElementDifficultyStarState.NotRequiredUnsolved;
   }
 }
