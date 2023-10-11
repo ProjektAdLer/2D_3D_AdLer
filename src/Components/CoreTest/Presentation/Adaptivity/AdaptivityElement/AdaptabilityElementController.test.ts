@@ -7,6 +7,7 @@ import AdaptivityElementViewModel, {
   AdaptivityQuestion,
 } from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
 import ISubmitAdaptivityElementSelectionUseCase from "../../../../Core/Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
+import exp from "constants";
 
 const submitSelectionUseCaseMock =
   mock<ISubmitAdaptivityElementSelectionUseCase>();
@@ -35,6 +36,19 @@ describe("AdaptivityElementController", () => {
     viewModel.isOpen.Value = true;
     systemUnderTest.closeModal();
     expect(viewModel.isOpen.Value).toBeFalsy();
+  });
+  test("back sets viewModel Data correctly", () => {
+    viewModel.currentTaskID.Value = 1;
+    viewModel.currentQuestionID.Value = null;
+    systemUnderTest.back();
+    expect(viewModel.currentTaskID.Value).toBe(null);
+    expect(viewModel.currentQuestionID.Value).toBe(null);
+
+    viewModel.currentTaskID.Value = 1;
+    viewModel.currentQuestionID.Value = 1;
+    systemUnderTest.back();
+    expect(viewModel.currentTaskID.Value).toBe(1);
+    expect(viewModel.currentQuestionID.Value).toBe(null);
   });
 
   test.skip("selectTask sets currentTaskID in viewModel", () => {
