@@ -135,7 +135,8 @@ export default class AdaptivityElementPresenter
   ): AdaptivityQuestion[] {
     return questions.map((question) => {
       // TODO: this is not completely correct yet
-      const isRequired = requiredDifficulty <= question.questionDifficulty;
+      // What happens if the required difficulty is something like 86?
+      const isRequired = requiredDifficulty === question.questionDifficulty;
 
       // TODO: update this check with enum type
       const isMultipleChoice = question.questionType === "multipleResponse";
