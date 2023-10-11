@@ -1,5 +1,5 @@
-import quizBackgroundVRGuy from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background.png";
-import quizBackgroundVRGuyCutted from "../../../../../../Assets/misc/quizBackgrounds/vr-guy-quiz-background_cutted.png";
+import quizBackgroundVRGuy from "../../../../../../Assets/misc/quizBackgrounds/a_npc_dozentlukas.png";
+import quizBackgroundVRGuyCutted from "../../../../../../Assets/misc/quizBackgrounds/a_npc_dozentlukas_close.png";
 
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import AdaptivityElementViewModel from "../AdaptivityElementViewModel";
@@ -61,9 +61,9 @@ export default function AdaptivityElementDialogContainer({
       <StyledContainer className={tailwindMerge(className, "")}>
         <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-screen bg-black bg-opacity-50 lg:grid lg:grid-rows-3 lg:items-start">
           {/* Background NPC */}
-          <div className="flex items-end justify-start invisible w-full lg:visible lg:h-full">
+          <div className="flex items-end justify-start invisible w-full pl-16  lg:visible lg:h-full">
             <img
-              className="z-20 invisible object-contain h-0 pl-16 lg:visible lg:h-full "
+              className="z-20 invisible object-contain -scale-x-100 h-0 lg:visible lg:h-full "
               alt="LearningImage!"
               src={quizBackgroundVRGuyCutted}
             ></img>
@@ -75,7 +75,7 @@ export default function AdaptivityElementDialogContainer({
               {/* Header */}
               <div className="z-20 flex items-center justify-center w-full gap-2 p-2 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
                 <img
-                  className="visible h-16 lg:invisible lg:h-0"
+                  className="visible -scale-x-100 h-16 lg:invisible lg:h-0"
                   alt="LearningImage!"
                   src={quizBackgroundVRGuy}
                 ></img>
