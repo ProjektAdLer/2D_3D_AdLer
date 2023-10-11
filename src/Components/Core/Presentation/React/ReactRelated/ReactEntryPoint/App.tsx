@@ -9,6 +9,7 @@ import LearningWorldMenu from "./LearningWorldMenu";
 import { useInjection } from "inversify-react";
 import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import InternetLossModal from "~ReactComponents/GeneralComponents/InternetLossModal/InternetLossModal";
 
 export interface IAppProps {}
 
@@ -38,24 +39,28 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
   if (location?.pathname.includes("/spacedisplay")) {
     return (
       <>
+        <InternetLossModal />
         <LearningSpace />
       </>
     );
   } else if (location?.pathname.includes("/worldmenu")) {
     return (
       <>
+        <InternetLossModal />
         <LearningWorldMenu />
       </>
     );
   } else if (location?.pathname.includes("/spacemenu")) {
     return (
       <>
+        <InternetLossModal />
         <LearningSpaceMenu />
       </>
     );
   } else {
     return (
       <>
+        <InternetLossModal />
         <WelcomePage />
       </>
     );
