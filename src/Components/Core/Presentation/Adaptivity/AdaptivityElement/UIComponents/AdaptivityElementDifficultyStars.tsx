@@ -91,15 +91,15 @@ function EmptyStarSlot({ className }: { className: string }): JSX.Element {
 }
 
 export default function AdaptivityElementDifficultyStars({
-  easyState,
-  mediumState,
-  hardState,
+  easyState = AdaptivityElementDifficultyStarState.Empty,
+  mediumState = AdaptivityElementDifficultyStarState.Empty,
+  hardState = AdaptivityElementDifficultyStarState.Empty,
   starClassName,
   withEmptySlots = true,
 }: {
-  easyState: AdaptivityElementDifficultyStarState;
-  mediumState: AdaptivityElementDifficultyStarState;
-  hardState: AdaptivityElementDifficultyStarState;
+  easyState?: AdaptivityElementDifficultyStarState;
+  mediumState?: AdaptivityElementDifficultyStarState;
+  hardState?: AdaptivityElementDifficultyStarState;
   starClassName: string;
   withEmptySlots?: boolean;
 }) {

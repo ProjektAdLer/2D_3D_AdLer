@@ -334,7 +334,6 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
           adaptivityContent: {
             introText: "Hier wird das Adaptivitätselement erklärt",
-            shuffleTasks: false,
             adaptivityTasks: [
               {
                 taskId: 1,
