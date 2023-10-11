@@ -63,7 +63,7 @@ export default function AdaptivityElementDialogContainer({
           {/* Background NPC */}
           <div className="flex items-end justify-start invisible w-full pl-16  lg:visible lg:h-full">
             <img
-              className="z-20 invisible object-contain -scale-x-100 h-0 lg:visible lg:h-full "
+              className="z-20 invisible object-contain -scale-x-100 brightness-125 h-0 lg:visible lg:h-full "
               alt="LearningImage!"
               src={quizBackgroundVRGuyCutted}
             ></img>
