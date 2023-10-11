@@ -3,7 +3,7 @@
 exports[`AdaptivityElementTaskSelection should render 1`] = `
 <div>
   <div
-    class="grid lg:grid-cols-2 gap-4 justify-center gap-x-8"
+    class="grid justify-center gap-4 lg:grid-cols-2 gap-x-8"
   >
     <div
       class="flex flex-col"
@@ -12,9 +12,13 @@ exports[`AdaptivityElementTaskSelection should render 1`] = `
         class="w-full max-w-2xl px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border bg-buttonbgblue"
       >
         <div
-          class="w-full h-full flex justify-between items-center align-center"
+          class="flex items-center justify-between w-full h-full align-center"
         >
-          testTaskTitle
+          <p
+            class="w-2/3"
+          >
+            testTaskTitle
+          </p>
           <div
             class="flex items-center h-full"
           >
