@@ -49,8 +49,6 @@ export default function AdaptivityElementQuestionSelection({
                 easyState={
                   AdaptivityElementDifficultyStarState.RequiredUnsolved
                 }
-                mediumState={AdaptivityElementDifficultyStarState.Empty}
-                hardState={AdaptivityElementDifficultyStarState.Empty}
                 starClassName="w-6 h-6"
               />
             </>
@@ -60,11 +58,9 @@ export default function AdaptivityElementQuestionSelection({
             <>
               <>{"Medium"} </>
               <AdaptivityElementDifficultyStars
-                easyState={AdaptivityElementDifficultyStarState.Empty}
                 mediumState={
                   AdaptivityElementDifficultyStarState.RequiredUnsolved
                 }
-                hardState={AdaptivityElementDifficultyStarState.Empty}
                 starClassName="w-6 h-6"
               />
             </>
@@ -74,8 +70,6 @@ export default function AdaptivityElementQuestionSelection({
             <>
               <>{"Schwer"} </>
               <AdaptivityElementDifficultyStars
-                easyState={AdaptivityElementDifficultyStarState.Empty}
-                mediumState={AdaptivityElementDifficultyStarState.Empty}
                 hardState={
                   AdaptivityElementDifficultyStarState.RequiredUnsolved
                 }
