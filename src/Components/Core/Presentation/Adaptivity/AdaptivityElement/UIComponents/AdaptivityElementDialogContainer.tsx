@@ -171,7 +171,7 @@ export default function AdaptivityElementDialogContainer({
                         .questions.find(
                           (question) =>
                             question.questionID === currentQuestionID
-                        )!.isCompleted
+                        )!.isCompleted!
                     }
                     setHeaderText={setHeaderText}
                     closeFeedback={controller.closeFeedback}

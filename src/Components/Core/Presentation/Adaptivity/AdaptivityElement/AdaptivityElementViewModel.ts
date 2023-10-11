@@ -23,7 +23,7 @@ export interface AdaptivityQuestion {
   questionText: string;
   questionAnswers: AdaptivityAnswer[];
   isRequired: boolean;
-  isCompleted: boolean;
+  isCompleted: boolean | null;
   difficulty: AdaptivityElementQuestionDifficultyTypes;
   isMultipleChoice: boolean;
   hints: AdaptivityHint[];
@@ -33,7 +33,7 @@ export interface AdaptivityTask {
   taskID: number;
   taskTitle: string;
   questions: AdaptivityQuestion[];
-  isCompleted: boolean;
+  isCompleted: boolean | null;
   requiredDifficulty: number;
 }
 
