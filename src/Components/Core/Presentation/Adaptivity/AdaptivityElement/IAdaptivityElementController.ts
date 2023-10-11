@@ -5,4 +5,5 @@ export default interface IAdaptivityElementController {
   submitSelection(): void;
   closeFeedback(): void;
   closeAnswerSelection(): void;
+  back(): void;
 }

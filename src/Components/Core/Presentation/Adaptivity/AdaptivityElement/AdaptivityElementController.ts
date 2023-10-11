@@ -63,4 +63,12 @@ export default class AdaptivityElementController
   closeAnswerSelection(): void {
     this.viewModel.currentQuestionID.Value = null;
   }
+
+  @bind
+  back(): void {
+    if (this.viewModel.currentQuestionID.Value === null) {
+      this.viewModel.currentTaskID.Value = null;
+    }
+    this.viewModel.currentQuestionID.Value = null;
+  }
 }
