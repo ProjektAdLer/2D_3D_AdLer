@@ -127,7 +127,6 @@ export default class BackendAdapterUtils {
 
     const newAdaptivityTO = new AdaptivityElementDataTO();
     newAdaptivityTO.introText = adaptivitydata.introText;
-    newAdaptivityTO.shuffleTask = adaptivitydata.shuffleTasks;
     newAdaptivityTO.tasks = [];
 
     this.mapAdaptivityTasks(
