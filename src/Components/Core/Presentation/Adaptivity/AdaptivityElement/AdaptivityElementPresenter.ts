@@ -1,3 +1,4 @@
+import { AdaptivityElementQuestionTypes } from "./../../../Domain/Types/Adaptivity/AdaptivityElementQuestionTypes";
 import IAdaptivityElementPresenter from "./IAdaptivityElementPresenter";
 import AdaptivityElementViewModel, {
   AdaptivityElementContent,
@@ -16,6 +17,7 @@ import AdaptivityElementTaskProgressTO from "src/Components/Core/Application/Dat
 import AdaptivityElementQuestionProgressTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionProgressTO";
 import AdaptivityElementAnswersTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementAnswerTO";
 import AdaptivityElementTriggerTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTriggerTO";
+import { AdaptivityElementTriggerConditionTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementTriggerConditionTypes";
 
 export default class AdaptivityElementPresenter
   implements IAdaptivityElementPresenter
@@ -141,24 +143,32 @@ export default class AdaptivityElementPresenter
       return {
         taskID: task.taskId,
         taskTitle: task.taskTitle,
-        questions: this.mapQuestions(task.questions, task.requiredDifficulty),
+        questions: this.mapQuestions(
+          task.questions,
+          task.requiredDifficulty,
+          task.taskOptional
+        ),
         isCompleted: task.isCompleted,
         requiredDifficulty: task.requiredDifficulty,
+        isRequired: !task.taskOptional,
       } as AdaptivityTask;
     });
   }
 
   private mapQuestions(
     questions: AdaptivityElementQuestionProgressTO[],
-    requiredDifficulty: AdaptivityElementQuestionDifficultyTypes
+    requiredDifficulty: AdaptivityElementQuestionDifficultyTypes,
+    isTaskOptional: boolean
   ): AdaptivityQuestion[] {
     return questions.map((question) => {
       // TODO: this is not completely correct yet
       // What happens if the required difficulty is something like 86?
-      const isRequired = requiredDifficulty === question.questionDifficulty;
+      const isRequired =
+        requiredDifficulty === question.questionDifficulty && !isTaskOptional;
 
-      // TODO: update this check with enum type
-      const isMultipleChoice = question.questionType === "multipleResponse";
+      const isMultipleChoice =
+        question.questionType ===
+        AdaptivityElementQuestionTypes.multipleResponse;
 
       return {
         questionID: question.questionId,
@@ -190,11 +200,12 @@ export default class AdaptivityElementPresenter
   ): AdaptivityHint[] {
     if (!triggers) return [];
 
-    // TODO: update with enum types
     return triggers.map((trigger) => {
       return {
         hintID: trigger.triggerId,
-        showOnIsWrong: trigger.triggerCondition === "wrong",
+        showOnIsWrong:
+          trigger.triggerCondition ===
+          AdaptivityElementTriggerConditionTypes.incorrect,
         hintAction: {
           hintActionType: trigger.triggerAction.actionType,
           hintActionData: trigger.triggerAction.actionData,

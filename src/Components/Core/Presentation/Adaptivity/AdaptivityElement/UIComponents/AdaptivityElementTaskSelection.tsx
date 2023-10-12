@@ -7,10 +7,10 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import AdaptivityElementDifficultyStars, {
   AdaptivityElementDifficultyStarState,
 } from "./AdaptivityElementDifficultyStars";
+import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 
 //TODO: change this when key icon is available
 import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
-import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 
 export function getAdaptivityQuestionStarState(
   question: AdaptivityQuestion | undefined
@@ -51,9 +51,11 @@ export default function AdaptivityElementTaskSelection({
   useEffect(() => {
     setTaskButtons(
       tasks.map((task, i) => {
-        const isRequired = task.questions.some(
-          (question) => question.isRequired
-        );
+        const isRequired =
+          // task.questions.some(
+          //   (question) => question.isRequired
+          // ) &&
+          task.isRequired;
 
         const easyStatus = getAdaptivityQuestionStarState(
           task.questions.find(
