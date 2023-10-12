@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import tailwindMerge from "../../../Utils/TailwindMerge";
@@ -9,6 +9,10 @@ export default function InternetLossModal({ className }: AdLerUIComponent<{}>) {
   const closeModal = useCallback(() => {
     setOpen(false);
   }, [setOpen]);
+
+  useEffect(() => {
+    window.navigator.onLine ? setOpen(false) : setOpen(true);
+  }, []);
 
   window.addEventListener("offline", () => {
     setOpen(true);
