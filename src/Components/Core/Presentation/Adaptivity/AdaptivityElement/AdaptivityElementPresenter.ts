@@ -200,7 +200,6 @@ export default class AdaptivityElementPresenter
   ): AdaptivityHint[] {
     if (!triggers) return [];
 
-    // TODO: update with enum types
     return triggers.map((trigger) => {
       return {
         hintID: trigger.triggerId,
