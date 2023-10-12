@@ -1,3 +1,4 @@
+import { AdaptivityElementQuestionTypes } from "./../../../Domain/Types/Adaptivity/AdaptivityElementQuestionTypes";
 import IAdaptivityElementPresenter from "./IAdaptivityElementPresenter";
 import AdaptivityElementViewModel, {
   AdaptivityElementContent,
@@ -157,8 +158,8 @@ export default class AdaptivityElementPresenter
       // What happens if the required difficulty is something like 86?
       const isRequired = requiredDifficulty === question.questionDifficulty;
 
-      // TODO: update this check with enum type
-      const isMultipleChoice = question.questionType === "multipleResponse";
+      const isMultipleChoice =
+        question.questionType === AdaptivityElementQuestionTypes.multipleChoice;
 
       return {
         questionID: question.questionId,

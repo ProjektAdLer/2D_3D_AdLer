@@ -1,4 +1,4 @@
 export enum AdaptivityElementQuestionTypes {
-  single = "SingleChoice",
-  multi = "MultipleChoice",
+  singleChoice = "SingleChoice",
+  multipleChoice = "MultipleChoice",
 }
