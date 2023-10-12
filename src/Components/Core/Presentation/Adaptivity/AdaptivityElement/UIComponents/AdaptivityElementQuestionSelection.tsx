@@ -34,11 +34,11 @@ export default function AdaptivityElementQuestionSelection({
     return (
       <div
         key={question.questionID}
-        className="flex flex-row justify-around w-full gap-2"
+        className="flex flex-row justify-center w-full gap-6"
       >
         <StyledButton
           shape="freefloatcenter"
-          className="w-1/3"
+          className="w-1/4"
           onClick={() => onSelectQuestion(question.questionID)}
         >
           <div className="flex items-center justify-between w-full h-full align-center">
@@ -49,10 +49,11 @@ export default function AdaptivityElementQuestionSelection({
                 src={requiredTaskIcon}
               />
             )}
+            {!question.isRequired && <div className="w-16"></div>}
             {question.difficulty ===
               AdaptivityElementQuestionDifficultyTypes.easy && (
               <>
-                <>{"Leicht"} </>
+                <p className="text-start">{"Leicht"} </p>
                 <AdaptivityElementDifficultyStars
                   easyState={starState}
                   starClassName="w-6 h-6"
@@ -62,7 +63,7 @@ export default function AdaptivityElementQuestionSelection({
             {question.difficulty ===
               AdaptivityElementQuestionDifficultyTypes.medium && (
               <>
-                <>{"Medium"} </>
+                <p className="text-start">{"Medium"} </p>
                 <AdaptivityElementDifficultyStars
                   mediumState={starState}
                   starClassName="w-6 h-6"
@@ -72,7 +73,7 @@ export default function AdaptivityElementQuestionSelection({
             {question.difficulty ===
               AdaptivityElementQuestionDifficultyTypes.hard && (
               <>
-                <>{"Schwer"} </>
+                <p className="text-start">{"Schwer"} </p>
                 <AdaptivityElementDifficultyStars
                   hardState={starState}
                   starClassName="w-6 h-6"
@@ -82,7 +83,7 @@ export default function AdaptivityElementQuestionSelection({
           </div>
         </StyledButton>
         {/* TODO: Compare AdaptivityRules with BackendResponse of question to give right hint */}
-        <StyledButton shape="freefloatcenter" className="w-1/3">
+        <StyledButton shape="freefloatcenter" className="w-1/4">
           Hinweis
         </StyledButton>
       </div>
