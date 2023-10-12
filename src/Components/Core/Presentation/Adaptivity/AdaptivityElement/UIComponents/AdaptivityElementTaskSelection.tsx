@@ -51,9 +51,11 @@ export default function AdaptivityElementTaskSelection({
   useEffect(() => {
     setTaskButtons(
       tasks.map((task, i) => {
-        const isRequired = task.questions.some(
-          (question) => question.isRequired
-        );
+        const isRequired =
+          // task.questions.some(
+          //   (question) => question.isRequired
+          // ) &&
+          task.isRequired;
 
         const easyStatus = getAdaptivityQuestionStarState(
           task.questions.find(
