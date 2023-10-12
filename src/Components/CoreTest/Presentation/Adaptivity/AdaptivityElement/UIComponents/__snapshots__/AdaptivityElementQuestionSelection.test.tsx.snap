@@ -55,7 +55,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
           <img
             alt=""
             class="w-6 h-6"
-            src="diffculties-adaptivity-required-unsolved-icon.svg"
+            src="diffculties-adaptivity-required-solved-icon.svg"
           />
           <div
             class="w-6 h-6"
@@ -91,7 +91,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
           <img
             alt=""
             class="w-6 h-6"
-            src="diffculties-adaptivity-required-unsolved-icon.svg"
+            src=""
           />
         </div>
       </button>

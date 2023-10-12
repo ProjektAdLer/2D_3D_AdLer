@@ -17,7 +17,7 @@ describe("AdaptivityElementQuestionSelection", () => {
               questionText: "testQuestionText",
               isMultipleChoice: false,
               difficulty: 0,
-              isCompleted: false,
+              isCompleted: null,
               isRequired: false,
               questionAnswers: [
                 {
@@ -26,13 +26,14 @@ describe("AdaptivityElementQuestionSelection", () => {
                   isSelected: false,
                 },
               ],
+              hints: [],
             },
             {
               questionID: 0,
               questionText: "testQuestionText",
               isMultipleChoice: false,
               difficulty: 100,
-              isCompleted: false,
+              isCompleted: true,
               isRequired: false,
               questionAnswers: [
                 {
@@ -41,6 +42,7 @@ describe("AdaptivityElementQuestionSelection", () => {
                   isSelected: false,
                 },
               ],
+              hints: [],
             },
             {
               questionID: 0,
@@ -56,6 +58,7 @@ describe("AdaptivityElementQuestionSelection", () => {
                   isSelected: false,
                 },
               ],
+              hints: [],
             },
           ],
         }}
@@ -89,6 +92,7 @@ describe("AdaptivityElementQuestionSelection", () => {
                   isSelected: false,
                 },
               ],
+              hints: [],
             },
           ],
         }}
