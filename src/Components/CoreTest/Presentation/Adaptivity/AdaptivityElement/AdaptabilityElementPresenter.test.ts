@@ -1,10 +1,9 @@
 import AdaptivityElementProgressTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
-import { EvaluationAnswerTO } from "../../../../Core/Application/DataTransferObjects/QuizElementTO";
+import { AdaptivityElementQuestionTypes } from "../../../../Core/Domain/Types/Adaptivity/AdaptivityElementQuestionTypes";
 import AdaptivityElementPresenter from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementPresenter";
 import AdaptivityElementViewModel, {
   AdaptivityElementContent,
 } from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
-import { StyledButtonColor } from "../../../../Core/Presentation/React/ReactRelated/ReactBaseComponents/StyledButton";
 
 describe("AdaptivityElementPresenter", () => {
   let systemUnderTest: AdaptivityElementPresenter;
@@ -27,7 +26,7 @@ describe("AdaptivityElementPresenter", () => {
             {
               questionId: 1,
               questionText: "TestQuestionText",
-              questionType: "",
+              questionType: AdaptivityElementQuestionTypes.singleResponse,
               triggers: [],
               questionAnswers: [
                 {
@@ -44,7 +43,6 @@ describe("AdaptivityElementPresenter", () => {
         },
       ],
       introText: "",
-      shuffleTask: false,
       elementName: "",
     };
 
@@ -70,9 +68,11 @@ describe("AdaptivityElementPresenter", () => {
               isCompleted: false,
               difficulty: 100,
               isMultipleChoice: false,
+              hints: [],
             },
           ],
           isCompleted: false,
+          isRequired: false,
           requiredDifficulty: 100,
         },
       ],
@@ -99,7 +99,7 @@ describe("AdaptivityElementPresenter", () => {
             {
               questionId: 1,
               questionText: "TestQuestionText",
-              questionType: "singleResponse",
+              questionType: AdaptivityElementQuestionTypes.singleResponse,
               triggers: [],
               questionAnswers: [
                 {
@@ -116,7 +116,6 @@ describe("AdaptivityElementPresenter", () => {
         },
       ],
       introText: "",
-      shuffleTask: false,
       elementName: "TestName",
     };
 
@@ -130,6 +129,7 @@ describe("AdaptivityElementPresenter", () => {
           taskID: 1,
           taskTitle: "TestTaskTitle",
           isCompleted: false,
+          isRequired: true,
           requiredDifficulty: 1,
           questions: [
             {
