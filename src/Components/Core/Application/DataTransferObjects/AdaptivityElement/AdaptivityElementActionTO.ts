@@ -1,4 +1,5 @@
+import { AdaptivityElementActionTypes } from "../../../Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 export default class AdaptivityElementActionTO {
-  actionType: string;
+  actionType: AdaptivityElementActionTypes;
   actionData: string | number;
 }
