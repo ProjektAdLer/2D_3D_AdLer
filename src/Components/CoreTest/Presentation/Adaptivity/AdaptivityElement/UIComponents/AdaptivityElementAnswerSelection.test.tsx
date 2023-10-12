@@ -20,9 +20,11 @@ describe("AdaptivityElementAnswerSelection", () => {
               isSelected: false,
             },
           ],
+          hints: [],
         }}
         setHeaderText={() => {}}
         submitSelection={() => {}}
+        closeSelection={() => {}}
       />
     );
 
