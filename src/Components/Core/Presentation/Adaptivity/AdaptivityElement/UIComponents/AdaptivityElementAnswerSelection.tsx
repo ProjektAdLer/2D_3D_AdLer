@@ -59,13 +59,13 @@ export default function AdaptivityElementAnswerSelection({
       </div>
 
       <div className="flex items-end justify-end w-full gap-2 pt-8 font-bold">
-        <StyledButton
+        {/* <StyledButton
           className="box-border"
           shape="freefloatcenter"
           onClick={closeSelection}
         >
           {"Zurück"}
-        </StyledButton>
+        </StyledButton> */}
         <StyledButton
           className="box-border"
           shape="freefloatcenter"

@@ -34,53 +34,56 @@ export default function AdaptivityElementQuestionSelection({
     return (
       <div
         key={question.questionID}
-        className="flex flex-row justify-around w-full gap-2"
+        className="flex flex-row justify-center w-full gap-6"
       >
         <StyledButton
           shape="freefloatcenter"
-          className="w-1/3"
+          className="w-1/4"
           onClick={() => onSelectQuestion(question.questionID)}
         >
-          {question.isRequired && (
-            <img
-              alt=""
-              className={"h-6 lg:h-8 pl-4 xl:pl-8"}
-              src={requiredTaskIcon}
-            />
-          )}
-          {question.difficulty ===
-            AdaptivityElementQuestionDifficultyTypes.easy && (
-            <>
-              <>{"Leicht"} </>
-              <AdaptivityElementDifficultyStars
-                easyState={starState}
-                starClassName="w-6 h-6"
+          <div className="flex items-center justify-between w-full h-full align-center">
+            {question.isRequired && (
+              <img
+                alt=""
+                className={"h-6 lg:h-8 pl-4 xl:pl-8"}
+                src={requiredTaskIcon}
               />
-            </>
-          )}
-          {question.difficulty ===
-            AdaptivityElementQuestionDifficultyTypes.medium && (
-            <>
-              <>{"Medium"} </>
-              <AdaptivityElementDifficultyStars
-                mediumState={starState}
-                starClassName="w-6 h-6"
-              />
-            </>
-          )}
-          {question.difficulty ===
-            AdaptivityElementQuestionDifficultyTypes.hard && (
-            <>
-              <>{"Schwer"} </>
-              <AdaptivityElementDifficultyStars
-                hardState={starState}
-                starClassName="w-6 h-6"
-              />
-            </>
-          )}
+            )}
+            {!question.isRequired && <div className="w-16"></div>}
+            {question.difficulty ===
+              AdaptivityElementQuestionDifficultyTypes.easy && (
+              <>
+                <p className="text-start">{"Leicht"} </p>
+                <AdaptivityElementDifficultyStars
+                  easyState={starState}
+                  starClassName="w-6 h-6"
+                />
+              </>
+            )}
+            {question.difficulty ===
+              AdaptivityElementQuestionDifficultyTypes.medium && (
+              <>
+                <p className="text-start">{"Medium"} </p>
+                <AdaptivityElementDifficultyStars
+                  mediumState={starState}
+                  starClassName="w-6 h-6"
+                />
+              </>
+            )}
+            {question.difficulty ===
+              AdaptivityElementQuestionDifficultyTypes.hard && (
+              <>
+                <p className="text-start">{"Schwer"} </p>
+                <AdaptivityElementDifficultyStars
+                  hardState={starState}
+                  starClassName="w-6 h-6"
+                />
+              </>
+            )}
+          </div>
         </StyledButton>
         {/* TODO: Compare AdaptivityRules with BackendResponse of question to give right hint */}
-        <StyledButton shape="freefloatcenter" className="w-1/3">
+        <StyledButton shape="freefloatcenter" className="w-1/4">
           Hinweis
         </StyledButton>
       </div>

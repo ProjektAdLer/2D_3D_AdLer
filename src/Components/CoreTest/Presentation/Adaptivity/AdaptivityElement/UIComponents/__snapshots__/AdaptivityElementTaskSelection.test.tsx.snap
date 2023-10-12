@@ -14,11 +14,6 @@ exports[`AdaptivityElementTaskSelection should render 1`] = `
         <div
           class="flex items-center justify-between w-full h-full align-center"
         >
-          <p
-            class="w-2/3"
-          >
-            testTaskTitle
-          </p>
           <div
             class="flex items-center h-full"
           >
@@ -27,15 +22,25 @@ exports[`AdaptivityElementTaskSelection should render 1`] = `
               class="w-6 h-6"
               src=""
             />
-            <div
-              class="w-6 h-6"
-              data-testid="empty-star-slot"
+            <img
+              alt="Platzhalter-Icon"
+              class="w-6 h-6opacity-60"
+              src="diffculties-adaptivity-placeholder.svg"
             />
-            <div
-              class="w-6 h-6"
-              data-testid="empty-star-slot"
+            <img
+              alt="Platzhalter-Icon"
+              class="w-6 h-6opacity-60"
+              src="diffculties-adaptivity-placeholder.svg"
             />
           </div>
+          <p
+            class="w-2/3 text-start"
+          >
+            testTaskTitle
+          </p>
+          <div
+            class="w-16"
+          />
         </div>
       </button>
     </div>

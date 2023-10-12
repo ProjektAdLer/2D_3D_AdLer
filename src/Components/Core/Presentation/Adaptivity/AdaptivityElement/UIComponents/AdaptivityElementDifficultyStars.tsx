@@ -4,6 +4,7 @@ import requiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-a
 import requiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-unsolved-icon.svg";
 import notRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-solved-icon.svg";
 import notRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-unsolved-icon.svg";
+import placeholderIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-placeholder.svg";
 
 export enum AdaptivityElementDifficultyStarState {
   Empty,
@@ -83,9 +84,14 @@ function getIcon(
 
 function EmptyStarSlot({ className }: { className: string }): JSX.Element {
   return (
-    <div
+    /*<div
       data-testid="empty-star-slot"
       className={tailwindMerge(`${className}`)}
+    />*/
+    <img
+      className={tailwindMerge(`${className}`) + "opacity-60"}
+      alt="Platzhalter-Icon"
+      src={placeholderIcon}
     />
   );
 }

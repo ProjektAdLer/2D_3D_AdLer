@@ -70,5 +70,6 @@ export default class AdaptivityElementController
       this.viewModel.currentTaskID.Value = null;
     }
     this.viewModel.currentQuestionID.Value = null;
+    this.viewModel.showFeedback.Value = false;
   }
 }
