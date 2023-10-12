@@ -23,6 +23,7 @@ describe("AdaptivityElementTaskSelection", () => {
                 difficulty: 0,
                 isCompleted: false,
                 isRequired: false,
+                hints: [],
                 questionAnswers: [
                   {
                     answerIndex: 0,
@@ -60,6 +61,7 @@ describe("AdaptivityElementTaskSelection", () => {
                 difficulty: 0,
                 isCompleted: false,
                 isRequired: false,
+                hints: [],
                 questionAnswers: [
                   {
                     answerIndex: 0,
@@ -97,6 +99,11 @@ describe("AdaptivityElementTaskSelection", () => {
     {
       isRequired: true,
       isCompleted: false,
+      expected: AdaptivityElementDifficultyStarState.RequiredTried,
+    },
+    {
+      isRequired: true,
+      isCompleted: null,
       expected: AdaptivityElementDifficultyStarState.RequiredUnsolved,
     },
     {
@@ -107,6 +114,11 @@ describe("AdaptivityElementTaskSelection", () => {
     {
       isRequired: false,
       isCompleted: false,
+      expected: AdaptivityElementDifficultyStarState.NotRequiredTried,
+    },
+    {
+      isRequired: false,
+      isCompleted: null,
       expected: AdaptivityElementDifficultyStarState.NotRequiredUnsolved,
     },
   ])(
@@ -119,6 +131,7 @@ describe("AdaptivityElementTaskSelection", () => {
         difficulty: 0,
         isCompleted,
         isRequired,
+        hints: [],
         questionAnswers: [
           {
             answerIndex: 0,

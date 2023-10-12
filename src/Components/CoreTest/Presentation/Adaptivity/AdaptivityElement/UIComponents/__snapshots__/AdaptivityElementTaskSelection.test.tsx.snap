@@ -25,7 +25,7 @@ exports[`AdaptivityElementTaskSelection should render 1`] = `
             <img
               alt=""
               class="w-6 h-6"
-              src="diffculties-adaptivity-unsolved-icon.svg"
+              src=""
             />
             <div
               class="w-6 h-6"
