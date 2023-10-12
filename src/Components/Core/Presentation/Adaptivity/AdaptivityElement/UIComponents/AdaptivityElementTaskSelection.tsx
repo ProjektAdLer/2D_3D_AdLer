@@ -87,13 +87,16 @@ export default function AdaptivityElementTaskSelection({
               onClick={() => onSelectTask(task.taskID)}
             >
               <div className="flex items-center justify-between w-full h-full align-center">
-                {isRequired && (
-                  <img
-                    alt=""
-                    className={"h-6 lg:h-8 pl-4 xl:pl-8"}
-                    src={requiredTaskIcon}
-                  />
-                )}
+                <div className="w-1/10">
+                  {isRequired && (
+                    <img
+                      alt=""
+                      className={"h-6 lg:h-8 pl-4 xl:pl-8"}
+                      src={requiredTaskIcon}
+                      hidden={!isRequired}
+                    />
+                  )}
+                </div>
 
                 <p className="w-2/3">{task.taskTitle}</p>
 
