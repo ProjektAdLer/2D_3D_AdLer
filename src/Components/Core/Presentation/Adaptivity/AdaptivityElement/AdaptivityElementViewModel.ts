@@ -1,4 +1,5 @@
 import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
+import { AdaptivityElementActionTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 import Observable from "src/Lib/Observable";
 
 export interface AdaptivityAnswer {
@@ -8,7 +9,7 @@ export interface AdaptivityAnswer {
 }
 
 export interface AdaptivityHintAction {
-  hintActionType: string;
+  hintActionType: AdaptivityElementActionTypes;
   hintActionData: string | number;
 }
 

@@ -18,13 +18,13 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
         />
       </div>
       <div
-        class="flex justify-center items-start lg:row-span-2 w-full lg:w-[95vw] max-w-7xl h-full pt-2 lg:pt-0"
+        class="flex justify-center items-start lg:row-span-2 w-full lg:w-[95vw] max-w-7xl h-full pt-2 lg:pt-0 "
       >
         <div
           class="flex flex-col p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto w-full max-w-[95%] max-h-[95%] lg:h-fit justify-between overflow-auto"
         >
           <div
-            class="z-20 flex items-center justify-center w-full gap-2 p-2 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl "
+            class="z-20 flex items-center justify-center w-full gap-2 p-2 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl overflow-hidden "
           >
             <img
               alt="LearningImage!"
@@ -48,38 +48,42 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
             </button>
           </div>
           <div
-            class="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4"
+            class="overflow-auto"
           >
             <div
-              class="flex flex-col w-full p-2 m-auto"
+              class="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4"
             >
               <div
-                class="flex flex-col flex-wrap justify-start gap-4 lg:grid lg:grid-cols-2 "
+                class="flex flex-col w-full p-2 m-auto"
               >
-                <button
-                  class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border bg-buttonbgblue"
+                <div
+                  class="flex flex-col flex-wrap justify-start gap-4 lg:grid lg:grid-cols-2 "
                 >
-                  testAnswerText
-                </button>
-              </div>
-              <div
-                class="flex items-end justify-end w-full gap-2 pt-8 font-bold"
-              >
-                <button
-                  class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border bg-buttonbgblue"
+                  <button
+                    class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border bg-buttonbgblue"
+                  >
+                    testAnswerText
+                  </button>
+                </div>
+                <div
+                  class="flex items-end justify-end w-full gap-2 pt-8 font-bold"
                 >
-                  Zurück
-                </button>
-                <button
-                  class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border bg-buttonbgblue"
-                >
-                  Antworten abgeben
-                </button>
+                  <button
+                    class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border bg-buttonbgblue"
+                  >
+                    Zurück
+                  </button>
+                  <button
+                    class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border bg-buttonbgblue"
+                  >
+                    Antworten abgeben
+                  </button>
+                </div>
               </div>
             </div>
           </div>
           <div
-            class="text-xs modal-footer lg:text-sm"
+            class="text-xs modal-footer pt-1 lg:text-sm"
           >
             <p />
           </div>

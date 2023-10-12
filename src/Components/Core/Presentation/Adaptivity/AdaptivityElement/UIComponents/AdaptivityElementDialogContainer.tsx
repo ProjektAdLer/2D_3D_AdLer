@@ -70,10 +70,10 @@ export default function AdaptivityElementDialogContainer({
           </div>
 
           {/* Modal */}
-          <div className="flex justify-center items-start lg:row-span-2 w-full lg:w-[95vw] max-w-7xl h-full pt-2 lg:pt-0">
+          <div className="flex justify-center items-start lg:row-span-2 w-full lg:w-[95vw] max-w-7xl h-full pt-2 lg:pt-0 ">
             <div className="flex flex-col p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto w-full max-w-[95%] max-h-[95%] lg:h-fit justify-between overflow-auto">
               {/* Header */}
-              <div className="z-20 flex items-center justify-center w-full gap-2 p-2 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
+              <div className="z-20 flex items-center justify-center w-full gap-2 p-2 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl overflow-hidden ">
                 <img
                   className="visible -scale-x-100 h-16 lg:invisible lg:h-0"
                   alt="LearningImage!"
@@ -81,7 +81,7 @@ export default function AdaptivityElementDialogContainer({
                 ></img>
 
                 {currentTaskID === null && currentQuestionID === null && (
-                  <div className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full">
+                  <div className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full ">
                     <CircularProgressbarWithChildren
                       value={progressPercentage}
                       strokeWidth={10}
@@ -118,69 +118,71 @@ export default function AdaptivityElementDialogContainer({
               </div>
 
               {/* Content */}
-              {currentTaskID === null && currentQuestionID === null && (
-                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
-                  <AdaptivityElementTaskSelection
-                    tasks={contentData.tasks}
-                    setHeaderText={setHeaderText}
-                    onSelectTask={controller.selectTask}
-                  />
-                </div>
-              )}
-              {currentTaskID !== null && currentQuestionID === null && (
-                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
-                  <AdaptivityElementQuestionSelection
-                    selectedTask={
-                      contentData.tasks.find(
-                        (task) => task.taskID === currentTaskID
-                      )!
-                    }
-                    setHeaderText={setHeaderText}
-                    onSelectQuestion={controller.selectQuestion}
-                  />
-                </div>
-              )}
-
-              {currentTaskID !== null &&
-                currentQuestionID !== null &&
-                !showAnswerFeedback && (
+              <div className="overflow-auto">
+                {currentTaskID === null && currentQuestionID === null && (
+                  <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit overflow-auto lg:m-4">
+                    <AdaptivityElementTaskSelection
+                      tasks={contentData.tasks}
+                      setHeaderText={setHeaderText}
+                      onSelectTask={controller.selectTask}
+                    />
+                  </div>
+                )}
+                {currentTaskID !== null && currentQuestionID === null && (
                   <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
-                    <AdaptivityElementAnswerSelection
-                      question={
+                    <AdaptivityElementQuestionSelection
+                      selectedTask={
+                        contentData.tasks.find(
+                          (task) => task.taskID === currentTaskID
+                        )!
+                      }
+                      setHeaderText={setHeaderText}
+                      onSelectQuestion={controller.selectQuestion}
+                    />
+                  </div>
+                )}
+
+                {currentTaskID !== null &&
+                  currentQuestionID !== null &&
+                  !showAnswerFeedback && (
+                    <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
+                      <AdaptivityElementAnswerSelection
+                        question={
+                          contentData.tasks
+                            .find((task) => task.taskID === currentTaskID)!
+                            .questions.find(
+                              (question) =>
+                                question.questionID === currentQuestionID
+                            )!
+                        }
+                        setHeaderText={setHeaderText}
+                        submitSelection={controller.submitSelection}
+                        closeSelection={controller.closeAnswerSelection}
+                      />
+                    </div>
+                  )}
+
+                {currentTaskID !== null &&
+                  currentQuestionID !== null &&
+                  showAnswerFeedback && (
+                    <AdaptivityElementAnswerFeedback
+                      isCorrect={
                         contentData.tasks
                           .find((task) => task.taskID === currentTaskID)!
                           .questions.find(
                             (question) =>
                               question.questionID === currentQuestionID
-                          )!
+                          )!.isCompleted!
                       }
                       setHeaderText={setHeaderText}
-                      submitSelection={controller.submitSelection}
-                      closeSelection={controller.closeAnswerSelection}
+                      closeFeedback={controller.closeFeedback}
                     />
-                  </div>
-                )}
-
-              {currentTaskID !== null &&
-                currentQuestionID !== null &&
-                showAnswerFeedback && (
-                  <AdaptivityElementAnswerFeedback
-                    isCorrect={
-                      contentData.tasks
-                        .find((task) => task.taskID === currentTaskID)!
-                        .questions.find(
-                          (question) =>
-                            question.questionID === currentQuestionID
-                        )!.isCompleted!
-                    }
-                    setHeaderText={setHeaderText}
-                    closeFeedback={controller.closeFeedback}
-                  />
-                )}
+                  )}
+              </div>
 
               {/* Footer */}
               {
-                <div className="text-xs modal-footer lg:text-sm">
+                <div className="text-xs modal-footer pt-1 lg:text-sm">
                   <p>{footerText}</p>
                 </div>
               }

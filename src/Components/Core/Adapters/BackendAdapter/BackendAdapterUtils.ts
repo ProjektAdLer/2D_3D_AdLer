@@ -1,3 +1,6 @@
+import { AdaptivityElementQuestionTypes } from "./../../Domain/Types/Adaptivity/AdaptivityElementQuestionTypes";
+import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
+import { AdaptivityElementTriggerConditionTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementTriggerConditionTypes";
 import { AdaptivityElementDataTO } from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementDataTO";
 import BackendElementTO from "../../Application/DataTransferObjects/BackendElementTO";
 import BackendSpaceTO from "../../Application/DataTransferObjects/BackendSpaceTO";
@@ -23,7 +26,6 @@ import AdaptivityElementTriggerTO from "../../Application/DataTransferObjects/Ad
 import AdaptivityElementAnswersTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementAnswerTO";
 import AdaptivityElementQuestionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionTO";
 import AdaptivityElementTaskTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTaskTO";
-import { AdaptivityElementQuestionDifficultyTypes } from "../../Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 
 /**
  * This class contains static utility functions for the BackendAdapters
@@ -166,7 +168,10 @@ export default class BackendAdapterUtils {
     apiQuestions.forEach((question) => {
       questions.push({
         questionId: question.questionId,
-        questionType: question.questionType,
+        questionType:
+          AdaptivityElementQuestionTypes[
+            question.questionType as keyof typeof AdaptivityElementQuestionTypes
+          ],
         questionDifficulty: this.mapAdaptivityElementQuestionDifficulty(
           question.questionDifficulty
         ),
@@ -220,7 +225,10 @@ export default class BackendAdapterUtils {
     rules.forEach((rule) => {
       trigger.push({
         triggerId: rule.triggerId,
-        triggerCondition: rule.triggerCondition,
+        triggerCondition:
+          AdaptivityElementTriggerConditionTypes[
+            rule.triggerCondition as keyof typeof AdaptivityElementTriggerConditionTypes
+          ],
         triggerAction: {
           actionData:
             rule.adaptivityAction.commentText ??

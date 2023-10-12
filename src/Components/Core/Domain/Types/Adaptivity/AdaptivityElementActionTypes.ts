@@ -1,4 +1,4 @@
-export enum AdaptivityElementTriggerActionTypes {
+export enum AdaptivityElementActionTypes {
   CommentAction,
   ReferenceAction,
   ContentAction,
