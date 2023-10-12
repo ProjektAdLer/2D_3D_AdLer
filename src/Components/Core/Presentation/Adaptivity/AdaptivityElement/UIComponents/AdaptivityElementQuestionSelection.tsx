@@ -53,7 +53,7 @@ export default function AdaptivityElementQuestionSelection({
             {question.difficulty ===
               AdaptivityElementQuestionDifficultyTypes.easy && (
               <>
-                <>{"Leicht"} </>
+                <p className="text-start">{"Leicht"} </p>
                 <AdaptivityElementDifficultyStars
                   easyState={starState}
                   starClassName="w-6 h-6"
@@ -63,7 +63,7 @@ export default function AdaptivityElementQuestionSelection({
             {question.difficulty ===
               AdaptivityElementQuestionDifficultyTypes.medium && (
               <>
-                <>{"Medium"} </>
+                <p className="text-start">{"Medium"} </p>
                 <AdaptivityElementDifficultyStars
                   mediumState={starState}
                   starClassName="w-6 h-6"
@@ -73,7 +73,7 @@ export default function AdaptivityElementQuestionSelection({
             {question.difficulty ===
               AdaptivityElementQuestionDifficultyTypes.hard && (
               <>
-                <>{"Schwer"} </>
+                <p className="text-start">{"Schwer"} </p>
                 <AdaptivityElementDifficultyStars
                   hardState={starState}
                   starClassName="w-6 h-6"

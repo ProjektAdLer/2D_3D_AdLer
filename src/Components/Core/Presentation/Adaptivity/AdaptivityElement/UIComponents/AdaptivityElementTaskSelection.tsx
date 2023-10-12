@@ -81,6 +81,15 @@ export default function AdaptivityElementTaskSelection({
               onClick={() => onSelectTask(task.taskID)}
             >
               <div className="flex items-center justify-between w-full h-full align-center">
+                <AdaptivityElementDifficultyStars
+                  easyState={easyStatus}
+                  mediumState={mediumStatus}
+                  hardState={hardStatus}
+                  starClassName="w-6 h-6"
+                />
+
+                <p className="w-2/3 text-start">{task.taskTitle}</p>
+
                 {task.isRequired && (
                   <img
                     alt=""
@@ -89,15 +98,6 @@ export default function AdaptivityElementTaskSelection({
                   />
                 )}
                 {!task.isRequired && <div className="w-16"></div>}
-
-                <p className="w-2/3 text-start">{task.taskTitle}</p>
-
-                <AdaptivityElementDifficultyStars
-                  easyState={easyStatus}
-                  mediumState={mediumStatus}
-                  hardState={hardStatus}
-                  starClassName="w-6 h-6"
-                />
               </div>
             </StyledButton>
           </div>
