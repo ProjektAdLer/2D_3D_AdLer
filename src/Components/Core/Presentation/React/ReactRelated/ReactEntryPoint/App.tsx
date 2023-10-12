@@ -39,29 +39,28 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
   if (location?.pathname.includes("/spacedisplay")) {
     return (
       <>
-        <InternetLossModal />
         <LearningSpace />
       </>
     );
   } else if (location?.pathname.includes("/worldmenu")) {
     return (
       <>
-        <InternetLossModal />
         <LearningWorldMenu />
+        <InternetLossModal />
       </>
     );
   } else if (location?.pathname.includes("/spacemenu")) {
     return (
       <>
-        <InternetLossModal />
         <LearningSpaceMenu />
+        <InternetLossModal />
       </>
     );
   } else {
     return (
       <>
-        <InternetLossModal />
         <WelcomePage />
+        <InternetLossModal />
       </>
     );
   }
