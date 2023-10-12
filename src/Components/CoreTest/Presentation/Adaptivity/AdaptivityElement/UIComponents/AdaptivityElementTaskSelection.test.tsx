@@ -14,6 +14,7 @@ describe("AdaptivityElementTaskSelection", () => {
             taskID: 0,
             taskTitle: "testTaskTitle",
             isCompleted: false,
+            isRequired: false,
             requiredDifficulty: 0,
             questions: [
               {
@@ -52,6 +53,7 @@ describe("AdaptivityElementTaskSelection", () => {
             taskID: 42,
             taskTitle: "testTaskTitle",
             isCompleted: false,
+            isRequired: false,
             requiredDifficulty: 0,
             questions: [
               {
