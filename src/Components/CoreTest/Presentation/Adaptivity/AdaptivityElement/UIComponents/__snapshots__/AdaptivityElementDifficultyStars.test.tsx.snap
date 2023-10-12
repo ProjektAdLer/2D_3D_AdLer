@@ -5,17 +5,20 @@ exports[`AdaptivityElementDifficultyStars should render with 0 for each difficul
   <div
     class="flex items-center h-full"
   >
-    <div
-      class=""
-      data-testid="empty-star-slot"
+    <img
+      alt="Platzhalter-Icon"
+      class="opacity-60"
+      src="diffculties-adaptivity-placeholder.svg"
     />
-    <div
-      class=""
-      data-testid="empty-star-slot"
+    <img
+      alt="Platzhalter-Icon"
+      class="opacity-60"
+      src="diffculties-adaptivity-placeholder.svg"
     />
-    <div
-      class=""
-      data-testid="empty-star-slot"
+    <img
+      alt="Platzhalter-Icon"
+      class="opacity-60"
+      src="diffculties-adaptivity-placeholder.svg"
     />
   </div>
 </div>
