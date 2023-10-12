@@ -24,6 +24,13 @@ export default function AdaptivityElementQuestionSelection({
   }, [setHeaderText, selectedTask]);
 
   let questionButtons = selectedTask.questions.map((question) => {
+    let starState = AdaptivityElementDifficultyStarState.RequiredUnsolved;
+    if (question.isCompleted === true) {
+      starState = AdaptivityElementDifficultyStarState.RequiredSolved;
+    }
+    if (question.isCompleted === false) {
+      starState = AdaptivityElementDifficultyStarState.RequiredTried;
+    }
     return (
       <div
         key={question.questionID}
@@ -46,9 +53,7 @@ export default function AdaptivityElementQuestionSelection({
             <>
               <>{"Leicht"} </>
               <AdaptivityElementDifficultyStars
-                easyState={
-                  AdaptivityElementDifficultyStarState.RequiredUnsolved
-                }
+                easyState={starState}
                 starClassName="w-6 h-6"
               />
             </>
@@ -58,9 +63,7 @@ export default function AdaptivityElementQuestionSelection({
             <>
               <>{"Medium"} </>
               <AdaptivityElementDifficultyStars
-                mediumState={
-                  AdaptivityElementDifficultyStarState.RequiredUnsolved
-                }
+                mediumState={starState}
                 starClassName="w-6 h-6"
               />
             </>
@@ -70,9 +73,7 @@ export default function AdaptivityElementQuestionSelection({
             <>
               <>{"Schwer"} </>
               <AdaptivityElementDifficultyStars
-                hardState={
-                  AdaptivityElementDifficultyStarState.RequiredUnsolved
-                }
+                hardState={starState}
                 starClassName="w-6 h-6"
               />
             </>
