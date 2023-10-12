@@ -51,12 +51,6 @@ export default function AdaptivityElementTaskSelection({
   useEffect(() => {
     setTaskButtons(
       tasks.map((task, i) => {
-        const isRequired =
-          // task.questions.some(
-          //   (question) => question.isRequired
-          // ) &&
-          task.isRequired;
-
         const easyStatus = getAdaptivityQuestionStarState(
           task.questions.find(
             (question) =>
@@ -87,14 +81,14 @@ export default function AdaptivityElementTaskSelection({
               onClick={() => onSelectTask(task.taskID)}
             >
               <div className="flex items-center justify-between w-full h-full align-center">
-                {isRequired && (
+                {task.isRequired && (
                   <img
                     alt=""
                     className={"h-6 lg:h-8 pl-4 xl:pl-8"}
                     src={requiredTaskIcon}
                   />
                 )}
-                {!isRequired && <div className="w-16"></div>}
+                {!task.isRequired && <div className="w-16"></div>}
 
                 <p className="w-2/3 text-start">{task.taskTitle}</p>
 
