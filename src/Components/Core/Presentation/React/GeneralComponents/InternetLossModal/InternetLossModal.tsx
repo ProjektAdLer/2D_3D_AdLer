@@ -26,11 +26,11 @@ export default function InternetLossModal({ className }: AdLerUIComponent<{}>) {
         showModal={isOpen}
         className={tailwindMerge(className, "p-5 rounded-lg")}
       >
-        <p className="m-2 my-4 font-bold text-adlerdarkblue">
-          Die Internet verbindung ist verloren gegangen.
+        <p className="m-1 my-4 font-bold text-adlerdarkblue">
+          Die Verbindung ist verloren gegangen.
         </p>
-        <p className="m-2 my-4 font-bold text-adlerdarkblue">
-          Bitte überprüfe deine Internetverbindung oder lade die Seite neu.
+        <p className="m-1 my-4 font-bold text-adlerdarkblue">
+          Bitte überprüfe deine Internetverbindung.
         </p>
       </StyledModal>
     </div>

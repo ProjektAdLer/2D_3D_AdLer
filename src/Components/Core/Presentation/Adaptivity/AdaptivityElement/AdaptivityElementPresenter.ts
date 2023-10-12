@@ -143,21 +143,28 @@ export default class AdaptivityElementPresenter
       return {
         taskID: task.taskId,
         taskTitle: task.taskTitle,
-        questions: this.mapQuestions(task.questions, task.requiredDifficulty),
+        questions: this.mapQuestions(
+          task.questions,
+          task.requiredDifficulty,
+          task.taskOptional
+        ),
         isCompleted: task.isCompleted,
         requiredDifficulty: task.requiredDifficulty,
+        isRequired: !task.taskOptional,
       } as AdaptivityTask;
     });
   }
 
   private mapQuestions(
     questions: AdaptivityElementQuestionProgressTO[],
-    requiredDifficulty: AdaptivityElementQuestionDifficultyTypes
+    requiredDifficulty: AdaptivityElementQuestionDifficultyTypes,
+    isTaskOptional: boolean
   ): AdaptivityQuestion[] {
     return questions.map((question) => {
       // TODO: this is not completely correct yet
       // What happens if the required difficulty is something like 86?
-      const isRequired = requiredDifficulty === question.questionDifficulty;
+      const isRequired =
+        requiredDifficulty === question.questionDifficulty && !isTaskOptional;
 
       const isMultipleChoice =
         question.questionType ===
@@ -193,7 +200,6 @@ export default class AdaptivityElementPresenter
   ): AdaptivityHint[] {
     if (!triggers) return [];
 
-    // TODO: update with enum types
     return triggers.map((trigger) => {
       return {
         hintID: trigger.triggerId,
