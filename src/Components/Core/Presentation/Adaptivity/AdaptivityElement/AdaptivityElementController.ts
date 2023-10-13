@@ -1,3 +1,4 @@
+import type { ComponentID } from "./../../../Domain/Types/EntityTypes";
 import IAdaptivityElementController from "./IAdaptivityElementController";
 import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
 import bind from "bind-decorator";
@@ -29,28 +30,29 @@ export default class AdaptivityElementController
   }
 
   @bind
-  async submitSelection(): Promise<void> {
-    // to test backend response of submit usecase
-    const testsubmission: AdaptivityElementQuestionSubmissionTO = {
-      worldID: 0,
-      elementID: 0,
+  async submitSelection(
+    elementId: ComponentID,
+    selectedAnswers: number[]
+  ): Promise<void> {
+    const submission: AdaptivityElementQuestionSubmissionTO = {
+      elementID: elementId,
       taskID: this.viewModel.currentTaskID.Value!,
       questionID: this.viewModel.currentQuestionID.Value!,
-      selectedAnswerIDs: [],
+      selectedAnswerIDs: selectedAnswers,
     };
 
     await CoreDIContainer.get<ISubmitAdaptivityElementSelectionUseCase>(
       USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
-    ).executeAsync(testsubmission);
+    ).executeAsync(submission);
 
     // TODO: remove this debug code
-    this.viewModel.showFeedback.Value = true;
-    this.viewModel.contentData.Value.tasks
-      .find((task) => task.taskID === this.viewModel.currentTaskID.Value)!
-      .questions.find(
-        (question) =>
-          question.questionID === this.viewModel.currentQuestionID.Value
-      )!.isCompleted = true;
+    //this.viewModel.showFeedback.Value = true;
+    // this.viewModel.contentData.Value.tasks
+    //   .find((task) => task.taskID === this.viewModel.currentTaskID.Value)!
+    //   .questions.find(
+    //     (question) =>
+    //       question.questionID === this.viewModel.currentQuestionID.Value
+    //   )!.isCompleted = true;
   }
 
   @bind
