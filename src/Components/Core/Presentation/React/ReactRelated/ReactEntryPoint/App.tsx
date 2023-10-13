@@ -40,6 +40,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
     return (
       <>
         <LearningSpace />
+        <InternetLossModal />
       </>
     );
   } else if (location?.pathname.includes("/worldmenu")) {
