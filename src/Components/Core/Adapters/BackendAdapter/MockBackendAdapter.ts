@@ -198,6 +198,7 @@ export default class MockBackendAdapter implements IBackendPort {
 
   getAdaptivityElementQuestionResponse(
     userToken: string,
+    worldID: number,
     submissionData: AdaptivityElementQuestionSubmissionTO
   ): Promise<AdaptivityElementBackendQuestionResponse> {
     const backendResponse: AdaptivityElementBackendQuestionResponse = {
@@ -230,8 +231,8 @@ export default class MockBackendAdapter implements IBackendPort {
       case 1:
         if (
           submissionData.selectedAnswerIDs.length === 2 &&
-          submissionData.selectedAnswerIDs.find((e) => e === 0) &&
-          submissionData.selectedAnswerIDs.find((e) => e === 1)
+          submissionData.selectedAnswerIDs.includes(0) &&
+          submissionData.selectedAnswerIDs.includes(1)
         ) {
           backendResponse.elementScore.success = true;
           backendResponse.gradedTask.taskStatus = "Correct";
@@ -385,11 +386,11 @@ export default class MockBackendAdapter implements IBackendPort {
                 taskTitle:
                   "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
                 optional: true,
-                requiredDifficulty: 0,
+                requiredDifficulty: 1,
                 adaptivityQuestions: [
                   {
                     questionType: "multipleResponse",
-                    questionId: 0,
+                    questionId: 1,
                     questionDifficulty: 0,
                     questionText: "Welche Zahlen sind Primzahlen?",
                     adaptivityRules: [
@@ -457,7 +458,7 @@ export default class MockBackendAdapter implements IBackendPort {
                   },
                   {
                     questionType: "multipleResponse",
-                    questionId: 2,
+                    questionId: 1,
                     questionDifficulty: 200,
                     questionText: "Welche Zahlen sind Primzahlen?",
                     adaptivityRules: [
@@ -539,7 +540,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 taskId: 4,
                 taskTitle: "Aufgabe 4, nicht mehr ",
                 optional: false,
-                requiredDifficulty: 0,
+                requiredDifficulty: 1,
                 adaptivityQuestions: [
                   {
                     questionType: "multipleResponse",

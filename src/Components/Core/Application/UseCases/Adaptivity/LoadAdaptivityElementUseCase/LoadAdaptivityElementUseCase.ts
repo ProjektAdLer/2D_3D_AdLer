@@ -68,6 +68,7 @@ export default class LoadAdaptivityElementUseCase
       structuredClone(elementEntity[0])
     );
     adaptivityTO.elementName = elementEntity[0].element.name;
+    adaptivityTO.id = elementEntity[0].element.id;
 
     adaptivityTO =
       await this.getAdaptivityElementStatusUseCase.internalExecuteAsync(
