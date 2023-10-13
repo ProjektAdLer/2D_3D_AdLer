@@ -187,7 +187,7 @@ export default function AdaptivityElementDialogContainer({
 
               {/* Footer */}
               {
-                <div className="flex justify-between items-end pt-1 text-[0.5rem] lg:text-xs modal-footer lg:text-sm">
+                <div className="flex justify-between items-end pt-1 text-[0.5rem] lg:text-xs modal-footer">
                   <p>{footerText}</p>
                   <div className="relative group">
                     <p className="absolute group-hover:invisible right-1 bottom-1">

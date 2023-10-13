@@ -32,7 +32,6 @@ enum AdaptivityElementQuestionDifficulty {
   Hard,
 }
 
-// TODO: add more star icons here
 function getIcon(
   difficulty: AdaptivityElementQuestionDifficulty,
   status: AdaptivityElementDifficultyStarState
