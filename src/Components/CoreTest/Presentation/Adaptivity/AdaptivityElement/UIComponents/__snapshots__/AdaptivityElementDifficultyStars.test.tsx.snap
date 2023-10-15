@@ -32,17 +32,17 @@ exports[`AdaptivityElementDifficultyStars should render with 1 for each difficul
     <img
       alt=""
       class=""
-      src="diffculties-adaptivity-required-solved-icon.svg"
+      src="diffculties-adaptivity-easy-required-solved.svg"
     />
     <img
       alt=""
       class=""
-      src="diffculties-adaptivity-required-solved-icon.svg"
+      src="diffculties-adaptivity-medium-required-solved.svg"
     />
     <img
       alt=""
       class=""
-      src="diffculties-adaptivity-required-solved-icon.svg"
+      src="diffculties-adaptivity-hard-required-solved-icon.svg"
     />
   </div>
 </div>
@@ -77,17 +77,17 @@ exports[`AdaptivityElementDifficultyStars should render with 2 for each difficul
     <img
       alt=""
       class=""
-      src=""
+      src="diffculties-adaptivity-easy-required-tried.svg"
     />
     <img
       alt=""
       class=""
-      src=""
+      src="diffculties-adaptivity-medium-required-tried.svg"
     />
     <img
       alt=""
       class=""
-      src=""
+      src="diffculties-adaptivity-hard-required-tried.svg"
     />
   </div>
 </div>
@@ -125,17 +125,17 @@ exports[`AdaptivityElementDifficultyStars should render with 4 for each difficul
     <img
       alt=""
       class=""
-      src="diffculties-adaptivity-solved-icon.svg"
+      src="diffculties-adaptivity-easy-solved.svg"
     />
     <img
       alt=""
       class=""
-      src="diffculties-adaptivity-solved-icon.svg"
+      src="diffculties-adaptivity-medium-solved.svg"
     />
     <img
       alt=""
       class=""
-      src="diffculties-adaptivity-solved-icon.svg"
+      src="diffculties-adaptivity-hard-solved-icon.svg"
     />
   </div>
 </div>
@@ -149,17 +149,17 @@ exports[`AdaptivityElementDifficultyStars should render with 5 for each difficul
     <img
       alt=""
       class=""
-      src=""
+      src="diffculties-adaptivity-easy-tried.svg"
     />
     <img
       alt=""
       class=""
-      src=""
+      src="diffculties-adaptivity-medium-tried.svg"
     />
     <img
       alt=""
       class=""
-      src=""
+      src="diffculties-adaptivity-hard-tried.svg"
     />
   </div>
 </div>

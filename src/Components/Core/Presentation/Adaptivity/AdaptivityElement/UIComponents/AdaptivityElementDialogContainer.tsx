@@ -190,77 +190,79 @@ export default function AdaptivityElementDialogContainer({
               {
                 <div className="flex justify-between items-end pt-1 text-[0.5rem] lg:text-xs modal-footer">
                   <p>{footerText}</p>
-                  <div className="relative group">
-                    <p className="absolute group-hover:invisible right-1 bottom-1">
-                      Bewege deine Maus hier her, um die Symbollegende
-                      anzuzeigen
-                    </p>
-                    <div className="invisible group-hover:visible">
-                      <div className="flex gap-1 opacity-60">
-                        <img
-                          className="w-2 lg:w-4"
-                          src={requiredUnsolvedIcon}
-                          alt="Benötigt, ungelöst Icon"
-                        />
-                        <img
-                          className="w-2 lg:w-4"
-                          src={requiredUnsolvedIcon}
-                          alt="Benötigt, ungelöst Icon"
-                        />
-                        <img
-                          className="w-2 lg:w-4"
-                          src={requiredUnsolvedIcon}
-                          alt="Benötigt, ungelöst Icon"
-                        />
-                        <p>
-                          Links: Leichte Aufagbe, Mitte: Mittelschwere Aufgabe,
-                          Rechts: Schwere Aufgabe
-                        </p>
-                      </div>
-                      <div>
+                  {!(currentTaskID !== null && currentQuestionID !== null) && (
+                    <div className="relative group">
+                      <p className="absolute group-hover:invisible right-1 bottom-1">
+                        Bewege deine Maus hier her, um die Symbollegende
+                        anzuzeigen
+                      </p>
+                      <div className="invisible group-hover:visible">
                         <div className="flex gap-1 opacity-60">
                           <img
                             className="w-2 lg:w-4"
                             src={requiredUnsolvedIcon}
                             alt="Benötigt, ungelöst Icon"
                           />
-                          <p>Benötigte, ungelöste Aufgabe</p>
-                        </div>
-                        <div className="flex gap-1 opacity-60">
                           <img
                             className="w-2 lg:w-4"
-                            src={notRequiredUnsolvedIcon}
-                            alt="Not required unsolved Icon"
+                            src={requiredUnsolvedIcon}
+                            alt="Benötigt, ungelöst Icon"
                           />
-                          <p>Nicht benötigte, ungelöste Aufgabe</p>
-                        </div>
-                        <div className="flex gap-1 opacity-60">
                           <img
                             className="w-2 lg:w-4"
-                            src={requiredSolvedIcon}
-                            alt="Benötigt, gelöst Icon"
+                            src={requiredUnsolvedIcon}
+                            alt="Benötigt, ungelöst Icon"
                           />
-                          <p>Benötigte, gelöste Aufgabe</p>
+                          <p>
+                            Links: Leichte Aufagbe, Mitte: Mittelschwere
+                            Aufgabe, Rechts: Schwere Aufgabe
+                          </p>
                         </div>
-                        <div className="flex gap-1 opacity-60">
-                          <img
-                            className="w-2 lg:w-4"
-                            src={notRequiredSolvedIcon}
-                            alt="Not required solved Icon"
-                          />
-                          <p>Nicht benötigte, gelöste Aufgabe</p>
-                        </div>
-                        <div className="flex gap-1 opacity-60">
-                          <img
-                            className="w-2 lg:w-4"
-                            src={placeholderIcon}
-                            alt="Platzhalter Icon"
-                          />
-                          <p>Keine Aufgabe dieser Schwierigkeit vorhanden</p>
+                        <div>
+                          <div className="flex gap-1 opacity-60">
+                            <img
+                              className="w-2 lg:w-4"
+                              src={requiredUnsolvedIcon}
+                              alt="Benötigt, ungelöst Icon"
+                            />
+                            <p>Benötigte, ungelöste Aufgabe</p>
+                          </div>
+                          <div className="flex gap-1 opacity-60">
+                            <img
+                              className="w-2 lg:w-4"
+                              src={notRequiredUnsolvedIcon}
+                              alt="Not required unsolved Icon"
+                            />
+                            <p>Nicht benötigte, ungelöste Aufgabe</p>
+                          </div>
+                          <div className="flex gap-1 opacity-60">
+                            <img
+                              className="w-2 lg:w-4"
+                              src={requiredSolvedIcon}
+                              alt="Benötigt, gelöst Icon"
+                            />
+                            <p>Benötigte, gelöste Aufgabe</p>
+                          </div>
+                          <div className="flex gap-1 opacity-60">
+                            <img
+                              className="w-2 lg:w-4"
+                              src={notRequiredSolvedIcon}
+                              alt="Not required solved Icon"
+                            />
+                            <p>Nicht benötigte, gelöste Aufgabe</p>
+                          </div>
+                          <div className="flex gap-1 opacity-60">
+                            <img
+                              className="w-2 lg:w-4"
+                              src={placeholderIcon}
+                              alt="Platzhalter Icon"
+                            />
+                            <p>Keine Aufgabe dieser Schwierigkeit vorhanden</p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               }
             </div>

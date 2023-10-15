@@ -78,21 +78,9 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
             </div>
           </div>
           <div
-            class="flex justify-between pt-1 text-xs modal-footer lg:text-sm"
+            class="flex justify-between items-end pt-1 text-[0.5rem] lg:text-xs modal-footer"
           >
             <p />
-            <div
-              class="flex gap-1 opacity-60"
-            >
-              <img
-                alt="Benötigt, gelöst Icon"
-                class="w-4"
-                src="diffculties-adaptivity-required-solved-icon.svg"
-              />
-              <p>
-                Benötigte, erledigte Aufgabe
-              </p>
-            </div>
           </div>
         </div>
       </div>

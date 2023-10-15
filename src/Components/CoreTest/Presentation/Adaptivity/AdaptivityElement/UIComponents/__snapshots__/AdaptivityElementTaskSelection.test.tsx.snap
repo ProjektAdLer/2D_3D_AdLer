@@ -20,7 +20,7 @@ exports[`AdaptivityElementTaskSelection should render 1`] = `
             <img
               alt=""
               class="w-6 h-6"
-              src=""
+              src="diffculties-adaptivity-easy-tried.svg"
             />
             <img
               alt="Platzhalter-Icon"
