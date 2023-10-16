@@ -28,12 +28,9 @@ export default class AdaptivityElementController
   }
 
   @bind
-  async submitSelection(
-    elementId: ComponentID,
-    selectedAnswers: number[]
-  ): Promise<void> {
+  async submitSelection(selectedAnswers: number[]): Promise<void> {
     const submission: AdaptivityElementQuestionSubmissionTO = {
-      elementID: elementId,
+      elementID: this.viewModel.elementID.Value,
       taskID: this.viewModel.currentTaskID.Value!,
       questionID: this.viewModel.currentQuestionID.Value!,
       selectedAnswerIDs: selectedAnswers,
