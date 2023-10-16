@@ -38,15 +38,6 @@ export default class AdaptivityElementController
     await CoreDIContainer.get<ISubmitAdaptivityElementSelectionUseCase>(
       USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
     ).executeAsync(submission);
-
-    // TODO: remove this debug code
-    //this.viewModel.showFeedback.Value = true;
-    // this.viewModel.contentData.Value.tasks
-    //   .find((task) => task.taskID === this.viewModel.currentTaskID.Value)!
-    //   .questions.find(
-    //     (question) =>
-    //       question.questionID === this.viewModel.currentQuestionID.Value
-    //   )!.isCompleted = true;
   }
 
   @bind
