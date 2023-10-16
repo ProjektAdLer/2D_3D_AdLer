@@ -3,18 +3,15 @@ import { AdaptivityQuestion } from "../AdaptivityElementViewModel";
 import StyledButton, {
   StyledButtonColor,
 } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 
 export default function AdaptivityElementAnswerSelection({
   question,
-  id,
   submitSelection,
   closeSelection,
   setHeaderText,
 }: {
   question: AdaptivityQuestion;
-  id: ComponentID;
-  submitSelection: (id: number, selectedAnswers: number[]) => void;
+  submitSelection: (selectedAnswers: number[]) => void;
   closeSelection: () => void;
   setHeaderText: (headerText: string) => void;
 }) {
@@ -84,7 +81,7 @@ export default function AdaptivityElementAnswerSelection({
           shape="freefloatcenter"
           onClick={() => {
             console.log(selectedAnswerIDs);
-            submitSelection(id, selectedAnswerIDs);
+            submitSelection(selectedAnswerIDs);
           }}
         >
           {"Antworten abgeben"}

@@ -161,7 +161,6 @@ export default function AdaptivityElementDialogContainer({
                                 question.questionID === currentQuestionID
                             )!
                         }
-                        id={viewmodel.elementID.Value}
                         setHeaderText={setHeaderText}
                         submitSelection={controller.submitSelection}
                         closeSelection={controller.closeAnswerSelection}
