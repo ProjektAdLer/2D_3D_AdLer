@@ -3,7 +3,6 @@ import { AdaptivityQuestion } from "../AdaptivityElementViewModel";
 import StyledButton, {
   StyledButtonColor,
 } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 
 export default function AdaptivityElementAnswerSelection({
   question,
