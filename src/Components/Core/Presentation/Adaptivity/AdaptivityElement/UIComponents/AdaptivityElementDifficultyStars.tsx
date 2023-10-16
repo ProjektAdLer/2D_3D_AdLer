@@ -1,10 +1,24 @@
 import tailwindMerge from "../../../Utils/TailwindMerge";
 
-import requiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-solved-icon.svg";
-import requiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-unsolved-icon.svg";
-import notRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-solved-icon.svg";
-import notRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-unsolved-icon.svg";
 import placeholderIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-placeholder.svg";
+import easyRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-easy-required-unsolved-icon.svg";
+import easyNotRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-easy-unsolved-icon.svg";
+import easyRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-easy-required-solved.svg";
+import easyRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-easy-required-tried.svg";
+import easyNotRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-easy-solved.svg";
+import easyNotRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-easy-tried.svg";
+import mediumRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-required-unsolved-icon.svg";
+import mediumNotRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-unsolved-icon.svg";
+import mediumRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-required-solved.svg";
+import mediumRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-required-tried.svg";
+import mediumNotRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-solved.svg";
+import mediumNotRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-tried.svg";
+import hardRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-unsolved-icon.svg";
+import hardNotRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-unsolved-icon.svg";
+import hardRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-solved-icon.svg";
+import hardRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-tried.svg";
+import hardNotRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-tried.svg";
+import hardNotRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-solved-icon.svg";
 
 export enum AdaptivityElementDifficultyStarState {
   Empty,
@@ -22,7 +36,6 @@ enum AdaptivityElementQuestionDifficulty {
   Hard,
 }
 
-// TODO: add more star icons here
 function getIcon(
   difficulty: AdaptivityElementQuestionDifficulty,
   status: AdaptivityElementDifficultyStarState
@@ -31,51 +44,51 @@ function getIcon(
     case AdaptivityElementQuestionDifficulty.Easy:
       switch (status) {
         case AdaptivityElementDifficultyStarState.RequiredSolved:
-          return requiredSolvedIcon;
+          return easyRequiredSolvedIcon;
         case AdaptivityElementDifficultyStarState.RequiredUnsolved:
-          return requiredUnsolvedIcon;
+          return easyRequiredUnsolvedIcon;
         case AdaptivityElementDifficultyStarState.RequiredTried:
-          return "";
+          return easyRequiredTriedIcon;
         case AdaptivityElementDifficultyStarState.NotRequiredSolved:
-          return notRequiredSolvedIcon;
+          return easyNotRequiredSolvedIcon;
         case AdaptivityElementDifficultyStarState.NotRequiredUnsolved:
-          return notRequiredUnsolvedIcon;
+          return easyNotRequiredUnsolvedIcon;
         case AdaptivityElementDifficultyStarState.NotRequiredTried:
-          return "";
+          return easyNotRequiredTriedIcon;
         default:
           return undefined;
       }
     case AdaptivityElementQuestionDifficulty.Medium:
       switch (status) {
         case AdaptivityElementDifficultyStarState.RequiredSolved:
-          return requiredSolvedIcon;
+          return mediumRequiredSolvedIcon;
         case AdaptivityElementDifficultyStarState.RequiredUnsolved:
-          return requiredUnsolvedIcon;
+          return mediumRequiredUnsolvedIcon;
         case AdaptivityElementDifficultyStarState.RequiredTried:
-          return "";
+          return mediumRequiredTriedIcon;
         case AdaptivityElementDifficultyStarState.NotRequiredSolved:
-          return notRequiredSolvedIcon;
+          return mediumNotRequiredSolvedIcon;
         case AdaptivityElementDifficultyStarState.NotRequiredUnsolved:
-          return notRequiredUnsolvedIcon;
+          return mediumNotRequiredUnsolvedIcon;
         case AdaptivityElementDifficultyStarState.NotRequiredTried:
-          return "";
+          return mediumNotRequiredTriedIcon;
         default:
           return undefined;
       }
     case AdaptivityElementQuestionDifficulty.Hard:
       switch (status) {
         case AdaptivityElementDifficultyStarState.RequiredSolved:
-          return requiredSolvedIcon;
+          return hardRequiredSolvedIcon;
         case AdaptivityElementDifficultyStarState.RequiredUnsolved:
-          return requiredUnsolvedIcon;
+          return hardRequiredUnsolvedIcon;
         case AdaptivityElementDifficultyStarState.RequiredTried:
-          return "";
+          return hardRequiredTriedIcon;
         case AdaptivityElementDifficultyStarState.NotRequiredSolved:
-          return notRequiredSolvedIcon;
+          return hardNotRequiredSolvedIcon;
         case AdaptivityElementDifficultyStarState.NotRequiredUnsolved:
-          return notRequiredUnsolvedIcon;
+          return hardNotRequiredUnsolvedIcon;
         case AdaptivityElementDifficultyStarState.NotRequiredTried:
-          return "";
+          return hardNotRequiredTriedIcon;
         default:
           return undefined;
       }

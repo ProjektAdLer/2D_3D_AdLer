@@ -77,6 +77,7 @@ export default interface IBackendPort {
 
   getAdaptivityElementQuestionResponse(
     userToken: string,
+    worldID: number,
     submissionData: AdaptivityElementQuestionSubmissionTO
   ): Promise<AdaptivityElementBackendQuestionResponse>;
 }

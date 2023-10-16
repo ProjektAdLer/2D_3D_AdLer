@@ -11,10 +11,14 @@ import UserDataEntity from "../../../../../Core/Domain/Entities/UserDataEntity";
 import { AdaptivityElementBackendQuestionResponse } from "../../../../../Core/Adapters/BackendAdapter/Types/BackendResponseTypes";
 import AdaptivityElementProgressUpdateTO from "../../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 import { AdaptivityElementStatusTypes } from "../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementStatusTypes";
+import IGetUserLocationUseCase from "../../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
+import UserLocationTO from "../../../../../Core/Application/DataTransferObjects/UserLocationTO";
+import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 
 const worldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const backendPortMock = mock<IBackendPort>();
+const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 
 describe("SubmitAdaptivityElementSelectionUseCase", () => {
   let systemUnderTest: SubmitAdaptivityElementSelectionUseCase;
@@ -30,6 +34,9 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
     CoreDIContainer.rebind(CORE_TYPES.IBackendAdapter).toConstantValue(
       backendPortMock
     );
+    CoreDIContainer.rebind(
+      USECASE_TYPES.IGetUserLocationUseCase
+    ).toConstantValue(getUserLocationUseCaseMock);
   });
 
   beforeEach(() => {
@@ -44,7 +51,6 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
 
   test("calls executeAsync on the SubmitSelectionUseCase", async () => {
     const submitted: AdaptivityElementQuestionSubmissionTO = {
-      worldID: 0,
       elementID: 1,
       taskID: 2,
       questionID: 3,
@@ -58,6 +64,7 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
         isLoggedIn: true,
       } as UserDataEntity,
     ]);
+
     backendPortMock.getAdaptivityElementQuestionResponse.mockResolvedValue({
       elementScore: {
         elementId: 1,
@@ -74,7 +81,13 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
       },
     } as AdaptivityElementBackendQuestionResponse);
 
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: 1,
+    } as UserLocationTO);
+
     await systemUnderTest.executeAsync(submitted);
+
     expect(worldPortMock.onAdaptivityElementAnswerEvaluated).toBeCalledTimes(1);
     expect(worldPortMock.onAdaptivityElementAnswerEvaluated).toBeCalledWith({
       elementInfo: { elementId: 1, success: true },
