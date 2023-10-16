@@ -144,6 +144,7 @@ export default function AdaptivityElementDialogContainer({
                       }
                       setHeaderText={setHeaderText}
                       onSelectQuestion={controller.selectQuestion}
+                      onSelectHint={controller.selectHint}
                     />
                   </div>
                 )}

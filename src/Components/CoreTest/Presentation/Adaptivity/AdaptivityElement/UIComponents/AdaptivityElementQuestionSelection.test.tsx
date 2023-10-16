@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import AdaptivityElementQuestionSelection from "../../../../../Core/Presentation/Adaptivity/AdaptivityElement/UIComponents/AdaptivityElementQuestionSelection";
 import React from "react";
+import { AdaptivityElementActionTypes } from "../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 
 describe("AdaptivityElementQuestionSelection", () => {
   test("should render (with all difficulties)", () => {
@@ -27,7 +28,16 @@ describe("AdaptivityElementQuestionSelection", () => {
                   isSelected: false,
                 },
               ],
-              hints: [],
+              hints: [
+                {
+                  hintID: 0,
+                  showOnIsWrong: true,
+                  hintAction: {
+                    hintActionData: "testHintActionData",
+                    hintActionType: AdaptivityElementActionTypes.CommentAction,
+                  },
+                },
+              ],
             },
             {
               questionID: 0,
@@ -43,7 +53,16 @@ describe("AdaptivityElementQuestionSelection", () => {
                   isSelected: false,
                 },
               ],
-              hints: [],
+              hints: [
+                {
+                  hintID: 0,
+                  showOnIsWrong: false,
+                  hintAction: {
+                    hintActionData: "testHintActionData",
+                    hintActionType: AdaptivityElementActionTypes.CommentAction,
+                  },
+                },
+              ],
             },
             {
               questionID: 0,
@@ -59,16 +78,28 @@ describe("AdaptivityElementQuestionSelection", () => {
                   isSelected: false,
                 },
               ],
-              hints: [],
+              hints: [
+                {
+                  hintID: 0,
+                  showOnIsWrong: true,
+                  hintAction: {
+                    hintActionData: "testHintActionData",
+                    hintActionType: AdaptivityElementActionTypes.CommentAction,
+                  },
+                },
+              ],
             },
           ],
         }}
         setHeaderText={() => {}}
         onSelectQuestion={() => {}}
+        onSelectHint={() => {}}
       />
     );
+
     expect(container).toMatchSnapshot();
   });
+
   test("onSelectQuestion button calls onSelectQuestion callback when clicked", () => {
     const onSelectQuestionMock = jest.fn();
     const { getByText } = render(
@@ -100,11 +131,61 @@ describe("AdaptivityElementQuestionSelection", () => {
         }}
         setHeaderText={() => {}}
         onSelectQuestion={onSelectQuestionMock}
+        onSelectHint={() => {}}
       />
     );
     getByText("Leicht").click();
 
     expect(onSelectQuestionMock).toHaveBeenCalledTimes(1);
     expect(onSelectQuestionMock).toHaveBeenCalledWith(42);
+  });
+
+  test("onSelectHint button calls onSelectHint callback when clicked", () => {
+    const onSelectHintMock = jest.fn();
+    const { getByText } = render(
+      <AdaptivityElementQuestionSelection
+        selectedTask={{
+          taskID: 0,
+          taskTitle: "testTaskTitle",
+          isCompleted: false,
+          isRequired: false,
+          requiredDifficulty: 0,
+          questions: [
+            {
+              questionID: 42,
+              questionText: "testQuestionText",
+              isMultipleChoice: false,
+              difficulty: 0,
+              isCompleted: false,
+              isRequired: false,
+              questionAnswers: [
+                {
+                  answerIndex: 0,
+                  answerText: "testAnswerText",
+                  isSelected: false,
+                },
+              ],
+              hints: [
+                {
+                  hintID: 0,
+                  showOnIsWrong: true,
+                  hintAction: {
+                    hintActionData: "testHintActionData",
+                    hintActionType: AdaptivityElementActionTypes.CommentAction,
+                  },
+                },
+              ],
+            },
+          ],
+        }}
+        setHeaderText={() => {}}
+        onSelectQuestion={() => {}}
+        onSelectHint={onSelectHintMock}
+      />
+    );
+    getByText("Hinweis").click();
+
+    expect(onSelectHintMock).toHaveBeenCalledTimes(1);
+    expect(onSelectHintMock).toHaveBeenCalledWith(42, 0);
   });
 });

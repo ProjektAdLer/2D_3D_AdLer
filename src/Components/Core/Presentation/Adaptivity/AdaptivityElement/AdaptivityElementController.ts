@@ -22,8 +22,14 @@ export default class AdaptivityElementController
   }
 
   @bind
-  selectQuestion(selectedQuestionID: number): void {
-    this.viewModel.currentQuestionID.Value = selectedQuestionID;
+  selectQuestion(questionID: number): void {
+    this.viewModel.currentQuestionID.Value = questionID;
+  }
+
+  @bind
+  selectHint(questionID: number, hintID: number): void {
+    // TODO: implement logic
+    console.log("selectHint", questionID, hintID);
   }
 
   @bind
