@@ -7,7 +7,6 @@ import AdaptivityElementViewModel, {
   AdaptivityQuestion,
 } from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
 import ISubmitAdaptivityElementSelectionUseCase from "../../../../Core/Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
-import exp from "constants";
 
 const submitSelectionUseCaseMock =
   mock<ISubmitAdaptivityElementSelectionUseCase>();
@@ -37,6 +36,7 @@ describe("AdaptivityElementController", () => {
     systemUnderTest.closeModal();
     expect(viewModel.isOpen.Value).toBeFalsy();
   });
+
   test("back sets viewModel Data correctly", () => {
     viewModel.currentTaskID.Value = 1;
     viewModel.currentQuestionID.Value = null;
@@ -51,33 +51,42 @@ describe("AdaptivityElementController", () => {
     expect(viewModel.currentQuestionID.Value).toBe(null);
   });
 
-  test.skip("selectTask sets currentTaskID in viewModel", () => {
+  test("selectTask sets currentTaskID in viewModel", () => {
     systemUnderTest.selectTask(1);
     expect(viewModel.currentTaskID.Value).toBe(1);
   });
 
-  test.skip("submitSelection calls SubmitSelectionUseCase", () => {
-    let submit = {
-      questionID: 2,
-      selectedAnswerIndexes: [1, 3],
-      allAnswerIndexes: [1, 2, 3, 4],
-    } as SubmittedAnswersTO;
+  test("selectQuestion sets currentQuestionID in viewModel", () => {
+    systemUnderTest.selectQuestion(1);
+    expect(viewModel.currentQuestionID.Value).toBe(1);
+  });
 
-    let element = {
-      questionID: 2,
-      questionText: "",
-      questionPoints: 1,
-      questionAnswers: [
-        { answerIndex: 1, answerText: "", isSelected: true },
-        { answerIndex: 2, answerText: "", isSelected: false },
-        { answerIndex: 3, answerText: "", isSelected: true },
-        { answerIndex: 4, answerText: "", isSelected: false },
-      ],
-    } as AdaptivityQuestion;
+  test("submitSelection calls SubmitSelectionUseCase", () => {
+    viewModel.elementID.Value = 42;
+    viewModel.currentTaskID.Value = 42;
+    viewModel.currentQuestionID.Value = 42;
 
-    viewModel.currentElement.Value = element;
+    systemUnderTest.submitSelection([1, 3]);
 
-    systemUnderTest.submitSelection();
-    expect(submitSelectionUseCaseMock.executeAsync).toBeCalledWith(submit);
+    expect(submitSelectionUseCaseMock.executeAsync).toBeCalledWith({
+      elementID: 42,
+      taskID: 42,
+      questionID: 42,
+      selectedAnswerIDs: [1, 3],
+    });
+  });
+
+  test("closeFeedback sets showFeedback to false and currentQuestionID to null", () => {
+    viewModel.showFeedback.Value = true;
+    viewModel.currentQuestionID.Value = 1;
+    systemUnderTest.closeFeedback();
+    expect(viewModel.showFeedback.Value).toBeFalsy();
+    expect(viewModel.currentQuestionID.Value).toBe(null);
+  });
+
+  test("closeAnswerSelection sets currentQuestionID to null", () => {
+    viewModel.currentQuestionID.Value = 1;
+    systemUnderTest.closeAnswerSelection();
+    expect(viewModel.currentQuestionID.Value).toBe(null);
   });
 });
