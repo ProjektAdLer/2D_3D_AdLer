@@ -15,13 +15,11 @@ export default class AdaptivityElementController
   @bind
   closeModal(): void {
     this.viewModel.isOpen.Value = false;
-    console.log("close modal", this.viewModel.isOpen.Value);
   }
 
   @bind
   selectTask(taskID: number): void {
     this.viewModel.currentTaskID.Value = taskID;
-    console.log("select task", this.viewModel.currentTaskID.Value);
   }
 
   @bind
