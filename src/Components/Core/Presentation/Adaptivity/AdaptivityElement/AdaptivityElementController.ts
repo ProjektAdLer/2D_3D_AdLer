@@ -1,4 +1,3 @@
-import type { ComponentID } from "./../../../Domain/Types/EntityTypes";
 import IAdaptivityElementController from "./IAdaptivityElementController";
 import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
 import bind from "bind-decorator";
