@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { AdaptivityTask } from "../AdaptivityElementViewModel";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
-//TODO: change this when key icon is available
 import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
 import AdaptivityElementDifficultyStars, {
   AdaptivityElementDifficultyStarState,
