@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`AdaptivityElementPresenter createFooterBreadcrumbs returns the correct string of names 1`] = `"TestElement => TestTask => Mittlere Frage"`;
