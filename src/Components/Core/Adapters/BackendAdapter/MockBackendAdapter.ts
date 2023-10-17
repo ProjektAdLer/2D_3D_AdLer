@@ -764,6 +764,7 @@ export default class MockBackendAdapter implements IBackendPort {
       return task.adaptivityQuestions.map((question) => ({
         id: question.questionId,
         status: "NotAttempted",
+        answers: [],
       }));
     }),
   };

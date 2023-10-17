@@ -8,10 +8,10 @@ export default class AdaptivtyElementStatusResponse {
   questions: {
     id: ComponentID;
     status: string;
-    // answers?: {
-    //   checked: false;
-    //   correct: boolean;
-    // }[];
+    answers: {
+      checked: false;
+      correct: boolean;
+    }[];
   }[];
   tasks: {
     taskId: ComponentID;
