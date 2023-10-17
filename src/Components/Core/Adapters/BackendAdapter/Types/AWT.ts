@@ -84,6 +84,7 @@ export interface APIAdaptivityTrigger {
 }
 
 export interface APIAdaptivityAction {
+  $type: string;
   commentText?: string;
   elementId?: number;
 }
