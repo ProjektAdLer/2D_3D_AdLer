@@ -276,8 +276,14 @@ export default class BackendAdapter implements IBackendPort {
           },
         }
     );
+
     throw new Error(
-      "function 'getAdaptivityElementStatusResponse not implemented'"
+      "function 'getAdaptivityElementStatusResponse' not implemented. Response: Element-ID: " +
+        response.data.elementScore.elementId +
+        " Task-ID: " +
+        response.data.gradedTask.taskId +
+        " Question-ID: " +
+        response.data.gradedQuestion.id
     );
   }
 }
