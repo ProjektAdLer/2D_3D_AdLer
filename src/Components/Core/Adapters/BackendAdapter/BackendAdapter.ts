@@ -16,7 +16,6 @@ import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO
 import BackendAdapterUtils from "./BackendAdapterUtils";
 import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 import WorldStatusResponse, {
-  AdaptivityElementBackendQuestionResponse,
   CoursesAvailableForUserResponse,
   ElementScoreResponse,
   PlayerDataResponse,
@@ -27,6 +26,8 @@ import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILogge
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import { LogLevelTypes } from "../../Domain/Types/LogLevelTypes";
 import AdaptivityElementQuestionSubmissionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
+import AdaptivityElementQuestionResponse from "./Types/AdaptivityElementQuestionResponse";
+import AdaptivtyElementStatusResponse from "./Types/AdaptivityElementStatusResponse";
 
 @injectable()
 export default class BackendAdapter implements IBackendPort {
@@ -233,8 +234,8 @@ export default class BackendAdapter implements IBackendPort {
     userToken: string,
     worldID: number,
     submissionData: AdaptivityElementQuestionSubmissionTO
-  ): Promise<AdaptivityElementBackendQuestionResponse> {
-    const response = await axios.get<AdaptivityElementBackendQuestionResponse>(
+  ): Promise<AdaptivityElementQuestionResponse> {
+    const response = await axios.get<AdaptivityElementQuestionResponse>(
       "/Elements/World/" +
         worldID +
         "/Element/" +
@@ -256,6 +257,33 @@ export default class BackendAdapter implements IBackendPort {
         response.data.gradedTask.taskStatus +
         " Question-Status: " +
         response.data.gradedQuestion.status
+    );
+  }
+
+  async getAdaptivityElementStatusResponse({
+    userToken,
+    elementID,
+    worldID,
+  }: ElementDataParams): Promise<AdaptivtyElementStatusResponse> {
+    const response = await axios.get<AdaptivityElementQuestionResponse>(
+      "/Elements/World/" +
+        worldID +
+        "/Element/" +
+        elementID +
+        {
+          headers: {
+            token: userToken,
+          },
+        }
+    );
+
+    throw new Error(
+      "function 'getAdaptivityElementStatusResponse' not implemented. Response: Element-ID: " +
+        response.data.elementScore.elementId +
+        " Task-ID: " +
+        response.data.gradedTask.taskId +
+        " Question-ID: " +
+        response.data.gradedQuestion.id
     );
   }
 }

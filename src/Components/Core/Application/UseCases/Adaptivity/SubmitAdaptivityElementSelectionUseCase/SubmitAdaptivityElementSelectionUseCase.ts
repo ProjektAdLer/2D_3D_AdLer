@@ -13,6 +13,7 @@ import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../../GetUserLocation/IGetUserLocationUseCase";
+import type IScoreLearningElementUseCase from "../../ScoreLearningElement/IScoreLearningElementUseCase";
 
 @injectable()
 export default class SubmitAdaptivityElementSelectionUseCase
@@ -28,7 +29,9 @@ export default class SubmitAdaptivityElementSelectionUseCase
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
-    private userLocationUseCase: IGetUserLocationUseCase
+    private userLocationUseCase: IGetUserLocationUseCase,
+    @inject(USECASE_TYPES.IScoreLearningElementUseCase)
+    private scoreLearningElementUseCase: IScoreLearningElementUseCase
   ) {}
 
   async executeAsync(
@@ -69,6 +72,10 @@ export default class SubmitAdaptivityElementSelectionUseCase
           ],
       },
     };
+
+    if (progressUpdateTO.elementInfo.success) {
+      await this.scoreLearningElementUseCase.executeAsync(submission.elementID);
+    }
 
     this.worlPort.onAdaptivityElementAnswerEvaluated(progressUpdateTO);
 

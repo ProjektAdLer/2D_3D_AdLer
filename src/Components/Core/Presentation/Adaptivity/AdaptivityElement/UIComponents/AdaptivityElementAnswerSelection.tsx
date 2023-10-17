@@ -80,7 +80,6 @@ export default function AdaptivityElementAnswerSelection({
           className="box-border"
           shape="freefloatcenter"
           onClick={() => {
-            console.log(selectedAnswerIDs);
             submitSelection(selectedAnswerIDs);
           }}
         >

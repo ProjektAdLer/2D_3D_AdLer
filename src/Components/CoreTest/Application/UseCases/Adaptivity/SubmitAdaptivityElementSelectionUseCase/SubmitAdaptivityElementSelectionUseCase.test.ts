@@ -8,17 +8,19 @@ import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import AdaptivityElementQuestionSubmissionTO from "../../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 import IBackendPort from "../../../../../Core/Application/Ports/Interfaces/IBackendPort";
 import UserDataEntity from "../../../../../Core/Domain/Entities/UserDataEntity";
-import { AdaptivityElementBackendQuestionResponse } from "../../../../../Core/Adapters/BackendAdapter/Types/BackendResponseTypes";
 import AdaptivityElementProgressUpdateTO from "../../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 import { AdaptivityElementStatusTypes } from "../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementStatusTypes";
 import IGetUserLocationUseCase from "../../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import UserLocationTO from "../../../../../Core/Application/DataTransferObjects/UserLocationTO";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import IScoreLearningElementUseCase from "../../../../../Core/Application/UseCases/ScoreLearningElement/IScoreLearningElementUseCase";
+import AdaptivityElementQuestionResponse from "../../../../../Core/Adapters/BackendAdapter/Types/AdaptivityElementQuestionResponse";
 
 const worldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const backendPortMock = mock<IBackendPort>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
+const scoreLearningElementUseCaseMock = mock<IScoreLearningElementUseCase>();
 
 describe("SubmitAdaptivityElementSelectionUseCase", () => {
   let systemUnderTest: SubmitAdaptivityElementSelectionUseCase;
@@ -37,6 +39,9 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
     CoreDIContainer.rebind(
       USECASE_TYPES.IGetUserLocationUseCase
     ).toConstantValue(getUserLocationUseCaseMock);
+    CoreDIContainer.rebind(
+      USECASE_TYPES.IScoreLearningElementUseCase
+    ).toConstantValue(scoreLearningElementUseCaseMock);
   });
 
   beforeEach(() => {
@@ -79,7 +84,7 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
         status: "Correct",
         answer: [{ checked: true, correct: true }],
       },
-    } as AdaptivityElementBackendQuestionResponse);
+    } as AdaptivityElementQuestionResponse);
 
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
