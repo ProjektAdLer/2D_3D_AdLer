@@ -99,7 +99,7 @@ export default function AdaptivityElementDialogContainer({
                         pathColor: `#59B347`,
                       })}
                     >
-                      {progressPercentage + "%"}
+                      {Math.round(progressPercentage) + "%"}
                     </CircularProgressbarWithChildren>
                   </div>
                 )}
