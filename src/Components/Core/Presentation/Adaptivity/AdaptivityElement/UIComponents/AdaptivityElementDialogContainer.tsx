@@ -25,6 +25,7 @@ import notRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficultie
 import notRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-unsolved-icon.svg";
 import placeholderIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-placeholder.svg";
 import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
+import AdaptivityElementHint from "./AdaptivityElementHint";
 
 export default function AdaptivityElementDialogContainer({
   className,
@@ -41,6 +42,9 @@ export default function AdaptivityElementDialogContainer({
   );
   const [currentQuestionID] = useObservable<number | null>(
     viewmodel?.currentQuestionID
+  );
+  const [selectedHintID] = useObservable<number | null>(
+    viewmodel?.selectedHintID
   );
   const [contentData] = useObservable(viewmodel?.contentData);
   const [footerText] = useObservable<string>(viewmodel?.footerText);
@@ -151,7 +155,8 @@ export default function AdaptivityElementDialogContainer({
 
                 {currentTaskID !== null &&
                   currentQuestionID !== null &&
-                  !showAnswerFeedback && (
+                  !showAnswerFeedback &&
+                  selectedHintID === null && (
                     <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
                       <AdaptivityElementAnswerSelection
                         question={
@@ -171,7 +176,8 @@ export default function AdaptivityElementDialogContainer({
 
                 {currentTaskID !== null &&
                   currentQuestionID !== null &&
-                  showAnswerFeedback && (
+                  showAnswerFeedback &&
+                  selectedHintID === null && (
                     <AdaptivityElementAnswerFeedback
                       isCorrect={
                         contentData.tasks
@@ -183,6 +189,23 @@ export default function AdaptivityElementDialogContainer({
                       }
                       setHeaderText={setHeaderText}
                       closeFeedback={controller.closeFeedback}
+                    />
+                  )}
+                {currentTaskID !== null &&
+                  currentQuestionID !== null &&
+                  !showAnswerFeedback &&
+                  selectedHintID !== null && (
+                    <AdaptivityElementHint
+                      hint={
+                        contentData.tasks
+                          .find((task) => task.taskID === currentTaskID)!
+                          .questions.find(
+                            (question) =>
+                              question.questionID === currentQuestionID
+                          )!
+                          .hints.find((hint) => hint.hintID === selectedHintID)!
+                      }
+                      setHeaderText={setHeaderText}
                     />
                   )}
               </div>

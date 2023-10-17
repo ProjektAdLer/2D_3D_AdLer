@@ -15,6 +15,7 @@ describe("AdaptivityElementHint", () => {
           },
           showOnIsWrong: true,
         }}
+        setHeaderText={() => {}}
       />
     );
     expect(container).toMatchSnapshot();
