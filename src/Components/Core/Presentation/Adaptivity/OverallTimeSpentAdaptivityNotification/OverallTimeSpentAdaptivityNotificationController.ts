@@ -11,4 +11,8 @@ export default class OverallTimeSpentAdaptivityNotificationController
   closeBreakNotification(): void {
     this.viewModel.showModal.Value = false;
   }
+  minimizeOrMaximizeBreakNotification(): void {
+    this.viewModel.showMinimizedModal.Value =
+      !this.viewModel.showMinimizedModal.Value;
+  }
 }
