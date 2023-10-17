@@ -18,7 +18,10 @@ import ILoggerPort from "../../Application/Ports/Interfaces/ILoggerPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "../../Domain/Types/LogLevelTypes";
 import AdaptivityElementQuestionSubmissionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
-import { AdaptivityElementBackendQuestionResponse } from "./Types/BackendResponseTypes";
+import AdaptivityElementQuestionResponse from "./Types/AdaptivityElementQuestionResponse";
+import AdaptivityElementStatusResponse from "./Types/AdaptivityElementStatusResponse";
+import AdaptivtyElementStatusResponse from "./Types/AdaptivityElementStatusResponse";
+import { AdaptivityElementStatusTypes } from "../../Domain/Types/Adaptivity/AdaptivityElementStatusTypes";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendPort {
@@ -200,8 +203,8 @@ export default class MockBackendAdapter implements IBackendPort {
     userToken: string,
     worldID: number,
     submissionData: AdaptivityElementQuestionSubmissionTO
-  ): Promise<AdaptivityElementBackendQuestionResponse> {
-    const backendResponse: AdaptivityElementBackendQuestionResponse = {
+  ): Promise<AdaptivityElementQuestionResponse> {
+    const backendResponse: AdaptivityElementQuestionResponse = {
       elementScore: {
         elementId: submissionData.elementID,
         success: false,
@@ -217,37 +220,37 @@ export default class MockBackendAdapter implements IBackendPort {
       },
     };
 
-    switch (submissionData.questionID) {
-      case 0:
-      case 1:
-      case 2:
-        if (
-          submissionData.selectedAnswerIDs.length === 1 &&
-          submissionData.selectedAnswerIDs[0] === 1
-        ) {
-          backendResponse.elementScore.success = true;
-          backendResponse.gradedTask.taskStatus = "Correct";
-          backendResponse.gradedQuestion.status = "Correct";
-        }
-        break;
-      case 3:
-      case 4:
-      case 5:
-        if (
-          submissionData.selectedAnswerIDs.length === 2 &&
-          submissionData.selectedAnswerIDs.includes(0) &&
-          submissionData.selectedAnswerIDs.includes(1)
-        ) {
-          backendResponse.elementScore.success = true;
-          backendResponse.gradedTask.taskStatus = "Correct";
-          backendResponse.gradedQuestion.status = "Correct";
-        }
-        break;
-      default:
-        break;
+    if (submissionData.questionID === 0) {
+      if (
+        submissionData.selectedAnswerIDs.length === 1 &&
+        submissionData.selectedAnswerIDs[0] === 1
+      ) {
+        backendResponse.gradedQuestion.status = "Correct";
+      }
+    } else if (
+      submissionData.questionID > 0 &&
+      submissionData.questionID < 12
+    ) {
+      if (
+        submissionData.selectedAnswerIDs.length === 2 &&
+        submissionData.selectedAnswerIDs.includes(0) &&
+        submissionData.selectedAnswerIDs.includes(1)
+      ) {
+        backendResponse.gradedQuestion.status = "Correct";
+      }
     }
 
+    this.updateFakeBackEnd(backendResponse);
+
     return Promise.resolve(backendResponse);
+  }
+
+  getAdaptivityElementStatusResponse({
+    userToken,
+    elementID,
+    worldID,
+  }: ElementDataParams): Promise<AdaptivtyElementStatusResponse> {
+    return Promise.resolve(this.fakeAdaptivityBackendData);
   }
 
   adaptivityData: APIAdaptivity = {
@@ -305,7 +308,7 @@ export default class MockBackendAdapter implements IBackendPort {
         adaptivityQuestions: [
           {
             questionType: "multipleResponse",
-            questionId: 3,
+            questionId: 1,
             questionDifficulty: 0,
             questionText: "Welche Zahlen sind Primzahlen?",
             adaptivityRules: [
@@ -339,7 +342,7 @@ export default class MockBackendAdapter implements IBackendPort {
           },
           {
             questionType: "multipleResponse",
-            questionId: 4,
+            questionId: 2,
             questionDifficulty: 100,
             questionText: "Welche Zahlen sind Primzahlen?",
             adaptivityRules: [
@@ -373,7 +376,7 @@ export default class MockBackendAdapter implements IBackendPort {
           },
           {
             questionType: "multipleResponse",
-            questionId: 5,
+            questionId: 3,
             questionDifficulty: 200,
             questionText: "Welche Zahlen sind Primzahlen?",
             adaptivityRules: [
@@ -416,7 +419,7 @@ export default class MockBackendAdapter implements IBackendPort {
         adaptivityQuestions: [
           {
             questionType: "multipleResponse",
-            questionId: 3,
+            questionId: 4,
             questionDifficulty: 0,
             questionText: "Welche Zahlen sind Primzahlen?",
             adaptivityRules: [
@@ -454,11 +457,11 @@ export default class MockBackendAdapter implements IBackendPort {
         taskId: 4,
         taskTitle: "Aufgabe 4, nicht mehr ",
         optional: false,
-        requiredDifficulty: 3,
+        requiredDifficulty: 0,
         adaptivityQuestions: [
           {
             questionType: "multipleResponse",
-            questionId: 1,
+            questionId: 5,
             questionDifficulty: 0,
             questionText: "Welche Zahlen sind Primzahlen?",
             adaptivityRules: [
@@ -501,7 +504,7 @@ export default class MockBackendAdapter implements IBackendPort {
         adaptivityQuestions: [
           {
             questionType: "multipleResponse",
-            questionId: 3,
+            questionId: 6,
             questionDifficulty: 0,
             questionText: "Welche Zahlen sind Primzahlen?",
             adaptivityRules: [
@@ -543,7 +546,7 @@ export default class MockBackendAdapter implements IBackendPort {
         adaptivityQuestions: [
           {
             questionType: "multipleResponse",
-            questionId: 3,
+            questionId: 7,
             questionDifficulty: 0,
             questionText: "Welche Zahlen sind Primzahlen?",
             adaptivityRules: [
@@ -580,12 +583,12 @@ export default class MockBackendAdapter implements IBackendPort {
       {
         taskId: 7,
         taskTitle: "Ja Moin, wer es bis hier schafft, ist ein Champion",
-        optional: false,
+        optional: true,
         requiredDifficulty: 0,
         adaptivityQuestions: [
           {
             questionType: "multipleResponse",
-            questionId: 3,
+            questionId: 8,
             questionDifficulty: 0,
             questionText: "Welche Zahlen sind Primzahlen?",
             adaptivityRules: [
@@ -627,7 +630,7 @@ export default class MockBackendAdapter implements IBackendPort {
         adaptivityQuestions: [
           {
             questionType: "multipleResponse",
-            questionId: 3,
+            questionId: 9,
             questionDifficulty: 0,
             questionText: "Welche Zahlen sind Primzahlen?",
             adaptivityRules: [
@@ -669,7 +672,7 @@ export default class MockBackendAdapter implements IBackendPort {
         adaptivityQuestions: [
           {
             questionType: "multipleResponse",
-            questionId: 1,
+            questionId: 10,
             questionDifficulty: 0,
             questionText: "Welche Zahlen sind Primzahlen?",
             adaptivityRules: [
@@ -711,7 +714,7 @@ export default class MockBackendAdapter implements IBackendPort {
         adaptivityQuestions: [
           {
             questionType: "multipleResponse",
-            questionId: 1,
+            questionId: 11,
             questionDifficulty: 3,
             questionText: "Welche Zahlen sind Primzahlen?",
             adaptivityRules: [
@@ -747,6 +750,87 @@ export default class MockBackendAdapter implements IBackendPort {
       },
     ],
   };
+
+  fakeAdaptivityBackendData: AdaptivityElementStatusResponse = {
+    element: {
+      elementID: -1,
+      success: false,
+    },
+    tasks: this.adaptivityData.adaptivityTasks.map((task) => ({
+      taskId: task.taskId,
+      taskStatus: "NotAttempted",
+    })),
+    questions: this.adaptivityData.adaptivityTasks.flatMap((task) => {
+      return task.adaptivityQuestions.map((question) => ({
+        id: question.questionId,
+        status: "NotAttempted",
+      }));
+    }),
+  };
+
+  private updateFakeBackEnd(response: AdaptivityElementQuestionResponse) {
+    const BackendTask = this.fakeAdaptivityBackendData.tasks.find(
+      (task) => task.taskId === response.gradedTask.taskId
+    );
+
+    const BackendQuestion = this.fakeAdaptivityBackendData.questions.find(
+      (question) => question.id === response.gradedQuestion.id
+    );
+
+    BackendQuestion!.status = response.gradedQuestion.status;
+
+    if (
+      response.gradedQuestion.status !== AdaptivityElementStatusTypes.Correct
+    ) {
+      BackendTask!.taskStatus = AdaptivityElementStatusTypes.Incorrect;
+      return;
+    }
+
+    // check if task of AE is complete
+    const currentTask = this.adaptivityData.adaptivityTasks.find(
+      (t) => t.taskId === BackendTask?.taskId
+    );
+
+    const isTaskComplete = currentTask!.adaptivityQuestions.every(
+      (question) => {
+        const q = this.fakeAdaptivityBackendData.questions.find(
+          (q) => q.id === question.questionId
+        );
+        return q!.status === AdaptivityElementStatusTypes.Correct;
+      }
+    );
+
+    if (isTaskComplete) {
+      BackendTask!.taskStatus = AdaptivityElementStatusTypes.Correct;
+      response.gradedTask.taskStatus = AdaptivityElementStatusTypes.Correct;
+    } else {
+      BackendTask!.taskStatus = AdaptivityElementStatusTypes.Incorrect;
+    }
+
+    if (!isTaskComplete) {
+      return;
+    }
+
+    // check if every required task is complete
+    const RequiredTasks = this.fakeAdaptivityBackendData.tasks.filter(
+      (task) => {
+        const rt = this.adaptivityData.adaptivityTasks.filter(
+          (t) => t.optional === false
+        );
+        const r = rt.find((t) => t.taskId === task.taskId);
+        return r;
+      }
+    );
+
+    const isEveryTaskComplete = RequiredTasks.every((task) => {
+      return task.taskStatus === "Correct";
+    });
+
+    if (isEveryTaskComplete) {
+      response.elementScore.success = true;
+      this.fakeAdaptivityBackendData.element.success = true;
+    }
+  }
 
   smallWorld: AWT = {
     fileVersion: "0.4",
