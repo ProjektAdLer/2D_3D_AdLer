@@ -101,17 +101,17 @@ exports[`AdaptivityElementDifficultyStars should render with 3 for each difficul
     <img
       alt=""
       class=""
-      src="diffculties-adaptivity-required-unsolved-icon.svg"
+      src="diffculties-adaptivity-easy-required-unsolved-icon.svg"
     />
     <img
       alt=""
       class=""
-      src="diffculties-adaptivity-required-unsolved-icon.svg"
+      src="diffculties-adaptivity-medium-required-unsolved-icon.svg"
     />
     <img
       alt=""
       class=""
-      src="diffculties-adaptivity-required-unsolved-icon.svg"
+      src="diffculties-adaptivity-hard-required-unsolved-icon.svg"
     />
   </div>
 </div>
@@ -173,17 +173,17 @@ exports[`AdaptivityElementDifficultyStars should render with 6 for each difficul
     <img
       alt=""
       class=""
-      src="diffculties-adaptivity-unsolved-icon.svg"
+      src="diffculties-adaptivity-easy-unsolved-icon.svg"
     />
     <img
       alt=""
       class=""
-      src="diffculties-adaptivity-unsolved-icon.svg"
+      src="diffculties-adaptivity-medium-unsolved-icon.svg"
     />
     <img
       alt=""
       class=""
-      src="diffculties-adaptivity-unsolved-icon.svg"
+      src="diffculties-adaptivity-hard-unsolved-icon.svg"
     />
   </div>
 </div>

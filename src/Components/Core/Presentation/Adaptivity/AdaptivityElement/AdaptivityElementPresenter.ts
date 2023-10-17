@@ -49,15 +49,10 @@ export default class AdaptivityElementPresenter
         task.taskID === adaptivityElementProgressUpdateTO.taskInfo.taskId
     )!;
 
-    if (
-      adaptivityElementProgressUpdateTO.taskInfo.taskStatus ===
-      AdaptivityElementStatusTypes.Correct
-    )
+    const taskStatus = adaptivityElementProgressUpdateTO.taskInfo.taskStatus;
+    if (taskStatus === AdaptivityElementStatusTypes.Correct)
       updatedTask.isCompleted = true;
-    else if (
-      adaptivityElementProgressUpdateTO.taskInfo.taskStatus ===
-      AdaptivityElementStatusTypes.Incorrect
-    )
+    else if (taskStatus === AdaptivityElementStatusTypes.Incorrect)
       updatedTask.isCompleted = false;
     else updatedTask.isCompleted = null;
 
@@ -67,15 +62,11 @@ export default class AdaptivityElementPresenter
         adaptivityElementProgressUpdateTO.questionInfo.questionId
     )!;
 
-    if (
-      adaptivityElementProgressUpdateTO.questionInfo.questionStatus ===
-      AdaptivityElementStatusTypes.Correct
-    )
+    const questionStatus =
+      adaptivityElementProgressUpdateTO.questionInfo.questionStatus;
+    if (questionStatus === AdaptivityElementStatusTypes.Correct)
       updatedQuestion.isCompleted = true;
-    else if (
-      adaptivityElementProgressUpdateTO.questionInfo.questionStatus ===
-      AdaptivityElementStatusTypes.Incorrect
-    )
+    else if (questionStatus === AdaptivityElementStatusTypes.Incorrect)
       updatedQuestion.isCompleted = false;
     else updatedQuestion.isCompleted = null;
 

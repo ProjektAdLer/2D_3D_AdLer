@@ -1,4 +1,3 @@
-import type { ComponentID } from "./../../../Domain/Types/EntityTypes";
 import IAdaptivityElementController from "./IAdaptivityElementController";
 import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
 import bind from "bind-decorator";
@@ -15,27 +14,28 @@ export default class AdaptivityElementController
   @bind
   closeModal(): void {
     this.viewModel.isOpen.Value = false;
-    console.log("close modal", this.viewModel.isOpen.Value);
   }
 
   @bind
   selectTask(taskID: number): void {
     this.viewModel.currentTaskID.Value = taskID;
-    console.log("select task", this.viewModel.currentTaskID.Value);
   }
 
   @bind
-  selectQuestion(selectedQuestionID: number): void {
-    this.viewModel.currentQuestionID.Value = selectedQuestionID;
+  selectQuestion(questionID: number): void {
+    this.viewModel.currentQuestionID.Value = questionID;
   }
 
   @bind
-  async submitSelection(
-    elementId: ComponentID,
-    selectedAnswers: number[]
-  ): Promise<void> {
+  selectHint(questionID: number, hintID: number): void {
+    // TODO: implement logic
+    console.log("selectHint", questionID, hintID);
+  }
+
+  @bind
+  async submitSelection(selectedAnswers: number[]): Promise<void> {
     const submission: AdaptivityElementQuestionSubmissionTO = {
-      elementID: elementId,
+      elementID: this.viewModel.elementID.Value,
       taskID: this.viewModel.currentTaskID.Value!,
       questionID: this.viewModel.currentQuestionID.Value!,
       selectedAnswerIDs: selectedAnswers,
@@ -44,15 +44,6 @@ export default class AdaptivityElementController
     await CoreDIContainer.get<ISubmitAdaptivityElementSelectionUseCase>(
       USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
     ).executeAsync(submission);
-
-    // TODO: remove this debug code
-    //this.viewModel.showFeedback.Value = true;
-    // this.viewModel.contentData.Value.tasks
-    //   .find((task) => task.taskID === this.viewModel.currentTaskID.Value)!
-    //   .questions.find(
-    //     (question) =>
-    //       question.questionID === this.viewModel.currentQuestionID.Value
-    //   )!.isCompleted = true;
   }
 
   @bind
