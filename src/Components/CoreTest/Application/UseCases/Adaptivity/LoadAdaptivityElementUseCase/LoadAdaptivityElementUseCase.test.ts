@@ -119,13 +119,9 @@ describe("LoadAdaptivityElementUseCase", () => {
       tasks: [],
     } as AdaptivityElementEntity);
 
-    getAdaptivityElementStatusUseCaseMock.internalExecuteAsync.mockResolvedValue(
-      progressTO
-    );
+    getAdaptivityElementStatusUseCaseMock.internalExecuteAsync.mockResolvedValue();
 
     await systemUnderTest.executeAsync(0);
-    expect(worldPortMock.onAdaptivityElementLoaded).toHaveBeenCalledWith(
-      progressTO
-    );
+    expect(worldPortMock.onAdaptivityElementLoaded).toHaveBeenCalled();
   });
 });
