@@ -9,4 +9,6 @@ export default interface IAdaptivityElementController {
   closeFeedback(): void;
   closeAnswerSelection(): void;
   back(): void;
+  showFooterTooltip(): void;
+  hideFooterTooltip(): void;
 }
