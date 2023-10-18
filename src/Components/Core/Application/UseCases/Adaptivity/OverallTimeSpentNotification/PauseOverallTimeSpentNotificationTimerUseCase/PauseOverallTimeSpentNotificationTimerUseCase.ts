@@ -1,7 +1,4 @@
-import {
-  OverallTimeSpentAdaptivityNotificationBreakType,
-  OverallTimeSpentAdaptivityNotificationWaitingType,
-} from "./../../../../../Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
+import { OverallTimeSpentAdaptivityNotificationBreakType } from "./../../../../../Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
 import { inject, injectable } from "inversify";
 import IPauseOverallTimeSpentNotificationTimerUseCase from "./IPauseOverallTimeSpentNotificationTimerUseCase";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
@@ -18,34 +15,32 @@ export default class PauseOverallTimeSpentNotificationTimerUseCase
     private container: IEntityContainer
   ) {}
 
-  internalExecute(di: IStartOverallTimeSpentNotificationTimerUseCase): void {
+  internalExecute(
+    startTimerUseCase: IStartOverallTimeSpentNotificationTimerUseCase
+  ): void {
     const timerEntity = this.container.getEntitiesOfType(
       OverallTimeSpentAdaptivityNotificationEntity
     );
 
-    switch (timerEntity[0].notificationType) {
-      case OverallTimeSpentAdaptivityNotificationBreakType.Short:
-        timerEntity[0].notificationType =
-          OverallTimeSpentAdaptivityNotificationBreakType.Medium;
+    switch (timerEntity[0].notificationIterator) {
+      case 4:
         setTimeout(() => {
-          di.execute();
-        }, OverallTimeSpentAdaptivityNotificationWaitingType.Short * 1000 * 60);
+          startTimerUseCase.execute();
+        }, OverallTimeSpentAdaptivityNotificationBreakType.Medium * 1000 * 60);
         break;
 
-      case OverallTimeSpentAdaptivityNotificationBreakType.Medium:
-        timerEntity[0].notificationType =
-          OverallTimeSpentAdaptivityNotificationBreakType.Long;
+      case 8:
+        //Resets the timer (starting from 0 after long break)
+        timerEntity[0].notificationIterator = 0;
         setTimeout(() => {
-          di.execute();
-        }, OverallTimeSpentAdaptivityNotificationWaitingType.Medium * 1000 * 60);
-        break;
-
-      case OverallTimeSpentAdaptivityNotificationBreakType.Long:
-        timerEntity[0].notificationType =
-          OverallTimeSpentAdaptivityNotificationBreakType.None;
+          startTimerUseCase.execute();
+        }, OverallTimeSpentAdaptivityNotificationBreakType.Long * 1000 * 60);
         break;
 
       default:
+        setTimeout(() => {
+          startTimerUseCase.execute();
+        }, OverallTimeSpentAdaptivityNotificationBreakType.Short * 1000 * 60);
         break;
     }
   }
