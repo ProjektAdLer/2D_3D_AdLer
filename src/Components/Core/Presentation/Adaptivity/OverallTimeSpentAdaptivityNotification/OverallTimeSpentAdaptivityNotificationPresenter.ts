@@ -14,5 +14,6 @@ export default class OverallTimeSpentAdaptivityNotificationPresenter
   ): void {
     this.viewModel.breakType.Value = type;
     this.viewModel.showModal.Value = true;
+    this.viewModel.showMinimizedModal.Value = true;
   }
 }

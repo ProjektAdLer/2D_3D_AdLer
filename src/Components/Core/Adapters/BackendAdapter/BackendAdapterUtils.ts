@@ -14,6 +14,7 @@ import { LearningSpaceTemplateType } from "../../Domain/Types/LearningSpaceTempl
 import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
 import AWT, {
   APIAdaptivity,
+  APIAdaptivityAction,
   APIAdaptivityAnswers,
   APIAdaptivityQuestion,
   APIAdaptivityTask,
@@ -26,6 +27,7 @@ import AdaptivityElementTriggerTO from "../../Application/DataTransferObjects/Ad
 import AdaptivityElementAnswersTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementAnswerTO";
 import AdaptivityElementQuestionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionTO";
 import AdaptivityElementTaskTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTaskTO";
+import { AdaptivityElementActionTypes } from "../../Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 
 /**
  * This class contains static utility functions for the BackendAdapters
@@ -229,12 +231,33 @@ export default class BackendAdapterUtils {
           AdaptivityElementTriggerConditionTypes[
             rule.triggerCondition as keyof typeof AdaptivityElementTriggerConditionTypes
           ],
-        triggerAction: {
-          actionData:
-            rule.adaptivityAction.commentText ??
-            rule.adaptivityAction.elementId,
-        } as AdaptivityElementActionTO,
+        triggerAction: this.mapAdaptivityAction(rule.adaptivityAction),
       } as AdaptivityElementTriggerTO);
     });
+  }
+
+  private static mapAdaptivityAction(
+    triggerAction: APIAdaptivityAction
+  ): AdaptivityElementActionTO {
+    let actionType;
+    switch (triggerAction.$type) {
+      case "CommentAction":
+        actionType = AdaptivityElementActionTypes.CommentAction;
+        break;
+      case "AdaptivityReferenceAction":
+        actionType = AdaptivityElementActionTypes.ReferenceAction;
+        break;
+      case "AdaptivityContentReferenceAction":
+        actionType = AdaptivityElementActionTypes.ContentAction;
+        break;
+      default:
+        actionType = undefined;
+        break;
+    }
+
+    return {
+      actionType: actionType,
+      actionData: triggerAction.commentText ?? triggerAction.elementId,
+    } as AdaptivityElementActionTO;
   }
 }

@@ -272,6 +272,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 1,
                 triggerCondition: "correct",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText: "Das war richtig. Gut gemacht!",
                 },
               },
@@ -279,6 +280,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText: "Das war leider falsch, versuch es doch nochmal",
                 },
               },
@@ -316,6 +318,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 1,
                 triggerCondition: "correct",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText: "Das war richtig. Gut gemacht!",
                 },
               },
@@ -323,6 +326,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText:
                     "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
                 },
@@ -350,6 +354,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 1,
                 triggerCondition: "correct",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText: "Das war richtig. Gut gemacht!",
                 },
               },
@@ -357,6 +362,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText:
                     "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
                 },
@@ -384,6 +390,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 1,
                 triggerCondition: "correct",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText: "Das war richtig. Gut gemacht!",
                 },
               },
@@ -391,6 +398,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText:
                     "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
                 },
@@ -427,6 +435,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 1,
                 triggerCondition: "correct",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText: "Das war richtig. Gut gemacht!",
                 },
               },
@@ -434,6 +443,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText:
                     "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
                 },
@@ -469,6 +479,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 1,
                 triggerCondition: "correct",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText: "Das war richtig. Gut gemacht!",
                 },
               },
@@ -476,6 +487,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText:
                     "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
                 },
@@ -512,6 +524,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 1,
                 triggerCondition: "correct",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText: "Das war richtig. Gut gemacht!",
                 },
               },
@@ -519,6 +532,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText:
                     "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
                 },
@@ -554,6 +568,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 1,
                 triggerCondition: "correct",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText: "Das war richtig. Gut gemacht!",
                 },
               },
@@ -561,6 +576,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText:
                     "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
                 },
@@ -596,6 +612,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 1,
                 triggerCondition: "correct",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText: "Das war richtig. Gut gemacht!",
                 },
               },
@@ -603,6 +620,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText:
                     "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
                 },
@@ -638,6 +656,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 1,
                 triggerCondition: "correct",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText: "Das war richtig. Gut gemacht!",
                 },
               },
@@ -645,6 +664,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText:
                     "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
                 },
@@ -680,6 +700,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 1,
                 triggerCondition: "correct",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText: "Das war richtig. Gut gemacht!",
                 },
               },
@@ -687,6 +708,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText:
                     "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
                 },
@@ -722,6 +744,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 1,
                 triggerCondition: "correct",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText: "Das war richtig. Gut gemacht!",
                 },
               },
@@ -729,6 +752,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
+                  $type: "CommentAction",
                   commentText:
                     "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
                 },

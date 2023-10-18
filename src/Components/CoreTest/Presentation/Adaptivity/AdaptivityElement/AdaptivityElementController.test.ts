@@ -67,6 +67,12 @@ describe("AdaptivityElementController", () => {
     expect(viewModel.currentQuestionID.Value).toBe(1);
   });
 
+  test("selectHint sets currentQuestionID and selectedHintID in viewModel", () => {
+    systemUnderTest.selectHint(42, 43);
+    expect(viewModel.currentQuestionID.Value).toBe(42);
+    expect(viewModel.selectedHintID.Value).toBe(43);
+  });
+
   test("submitSelection calls SubmitSelectionUseCase", () => {
     viewModel.elementID.Value = 42;
     viewModel.currentTaskID.Value = 42;

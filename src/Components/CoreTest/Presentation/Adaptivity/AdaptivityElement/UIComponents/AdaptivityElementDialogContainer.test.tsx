@@ -7,6 +7,7 @@ import AdaptivityElementViewModel, {
 } from "../../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
 import { mock } from "jest-mock-extended";
 import IAdaptivityElementController from "../../../../../Core/Presentation/Adaptivity/AdaptivityElement/IAdaptivityElementController";
+import { AdaptivityElementActionTypes } from "../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 
 describe("AdaptivityElementDialogContainer", () => {
   let viewModel: AdaptivityElementViewModel;
@@ -53,6 +54,7 @@ describe("AdaptivityElementDialogContainer", () => {
           taskID: 0,
           taskTitle: "testTaskTitle",
           isCompleted: false,
+          isRequired: false,
           requiredDifficulty: 0,
           questions: [
             {
@@ -67,6 +69,16 @@ describe("AdaptivityElementDialogContainer", () => {
                   answerIndex: 0,
                   answerText: "testAnswerText",
                   isSelected: false,
+                },
+              ],
+              hints: [
+                {
+                  hintID: 0,
+                  hintAction: {
+                    hintActionData: "testHintActionData",
+                    hintActionType: AdaptivityElementActionTypes.CommentAction,
+                  },
+                  showOnIsWrong: false,
                 },
               ],
             },

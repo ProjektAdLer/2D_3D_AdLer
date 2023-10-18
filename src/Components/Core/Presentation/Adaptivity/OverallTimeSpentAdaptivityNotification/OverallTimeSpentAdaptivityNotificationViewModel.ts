@@ -3,6 +3,7 @@ import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/
 
 export default class OverallTimeSpentAdaptivityNotificationViewModel {
   showModal: Observable<boolean> = new Observable<boolean>(false);
+  showMinimizedModal: Observable<boolean> = new Observable<boolean>(false);
   breakType: Observable<OverallTimeSpentAdaptivityNotificationBreakType> =
     new Observable<OverallTimeSpentAdaptivityNotificationBreakType>(
       OverallTimeSpentAdaptivityNotificationBreakType.Short

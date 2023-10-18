@@ -3,7 +3,7 @@
 exports[`AdaptivityElementHint should render 1`] = `
 <div>
   <div>
-    hint.hintAction.hintActionData
+    testHintActionData
   </div>
 </div>
 `;

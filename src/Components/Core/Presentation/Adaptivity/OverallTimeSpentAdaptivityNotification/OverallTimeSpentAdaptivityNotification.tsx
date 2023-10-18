@@ -8,6 +8,8 @@ import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/
 import { AdLerUIComponent } from "../../../Types/ReactTypes";
 import tailwindMerge from "../../Utils/TailwindMerge";
 import exampleBreakPicture from "../../../../../Assets/prototype/breakPictureExample.png";
+import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
+import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 export default function OverallTimeSpentAdaptivityNotification({
   className,
@@ -18,15 +20,40 @@ export default function OverallTimeSpentAdaptivityNotification({
   >(BUILDER_TYPES.IOverallTimeSpentAdaptivityNotificationBuilder);
 
   const [showModal] = useObservable(viewModel?.showModal);
+  const [showMinimizedModal] = useObservable(viewModel?.showMinimizedModal);
   const [breakType] = useObservable(viewModel?.breakType);
 
   if (!viewModel || !controller || !showModal || !breakType) return null;
+
+  if (showMinimizedModal)
+    return (
+      <StyledContainer
+        className={
+          tailwindMerge(`${className}`) +
+          "flex flex-row-reverse bottom-1.5 right-1.5 bg-buttonbgblue rounded-lg"
+        }
+      >
+        <StyledButton
+          onClick={() => controller.closeBreakNotification()}
+          className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+        >
+          X
+        </StyledButton>
+        <div
+          className="flex flex-col items-center justify-center gap-2"
+          onClick={() => controller.minimizeOrMaximizeBreakNotification()}
+        >
+          <p className="text-center underline">Pausenempfehlung</p>
+          <p className="text-center">Klicke hier um mehr zu erfahren!</p>
+        </div>
+      </StyledContainer>
+    );
 
   return (
     <StyledModal
       className={tailwindMerge(className, "")}
       showModal={showModal}
-      onClose={() => controller.closeBreakNotification()}
+      onClose={() => controller.minimizeOrMaximizeBreakNotification()}
       title="Überschrift für Pausenhinweis"
     >
       {GetNotificationModalContents(breakType)}
@@ -82,7 +109,7 @@ function MediumBreakContent() {
         kreatives Denken fördern. Hier sind einige der wichtigsten Gründe, warum
         regelmäßige Spaziergänge eine wertvolle Ergänzung zu unserem Alltag
         sind: <br />
-        <ul className="list-disc pl-4">
+        <ul className="pl-4 list-disc">
           <li className="pt-4">
             <b>Körperliche Gesundheit:</b> Spaziergänge sind eine ausgezeichnete
             Form der körperlichen Aktivität. Sie fördern die Herzgesundheit,
@@ -139,7 +166,7 @@ function MediumBreakContent() {
 function LongBreakContent() {
   return (
     <div data-testid="long-break" className="max-w-2xl px-4 pb-4">
-      <div className="lg:flex justify-center  gap-4 ">
+      <div className="justify-center gap-4 lg:flex ">
         <img src={exampleBreakPicture} alt="" className="" />
         <div>
           <p className="text-justify">

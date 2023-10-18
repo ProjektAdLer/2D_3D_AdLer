@@ -28,8 +28,8 @@ export default class AdaptivityElementController
 
   @bind
   selectHint(questionID: number, hintID: number): void {
-    // TODO: implement logic
-    console.log("selectHint", questionID, hintID);
+    this.viewModel.currentQuestionID.Value = questionID;
+    this.viewModel.selectedHintID.Value = hintID;
   }
 
   @bind
@@ -64,5 +64,6 @@ export default class AdaptivityElementController
     }
     this.viewModel.currentQuestionID.Value = null;
     this.viewModel.showFeedback.Value = false;
+    this.viewModel.selectedHintID.Value = null;
   }
 }

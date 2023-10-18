@@ -2,6 +2,7 @@ import BackendAdapterUtils from "../../../Core/Adapters/BackendAdapter/BackendAd
 import { APISpace } from "../../../Core/Adapters/BackendAdapter/Types/AWT";
 import BackendElementTO from "../../../Core/Application/DataTransferObjects/BackendElementTO";
 import { LearningElementModelTypeEnums } from "../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
+import { AdaptivityElementActionTypes } from "../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 
 describe("BackendAdapterUtils", () => {
   test("mapSpaces ", () => {
@@ -87,4 +88,21 @@ describe("BackendAdapterUtils", () => {
       LearningElementModelTypeEnums.NoElementModelTypes.None
     );
   });
+
+  test.each([
+    ["CommentAction", AdaptivityElementActionTypes.CommentAction],
+    ["AdaptivityReferenceAction", AdaptivityElementActionTypes.ReferenceAction],
+    [
+      "AdaptivityContentReferenceAction",
+      AdaptivityElementActionTypes.ContentAction,
+    ],
+  ])(
+    "mapAdaptivityElementAction, when given type %s, returns an action TO with type %s",
+    (backendTypeInput, expectedResult) => {
+      const result = BackendAdapterUtils["mapAdaptivityAction"]({
+        $type: backendTypeInput,
+      });
+      expect(result.actionType).toBe(expectedResult);
+    }
+  );
 });

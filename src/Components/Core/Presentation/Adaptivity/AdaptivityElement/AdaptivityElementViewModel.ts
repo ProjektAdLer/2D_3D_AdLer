@@ -57,6 +57,9 @@ export default class AdaptivityElementViewModel {
   currentQuestionID: Observable<number | null> = new Observable<number | null>(
     null
   );
+  selectedHintID: Observable<number | null> = new Observable<number | null>(
+    null
+  );
   footerText: Observable<string> = new Observable<string>("");
   elementID: Observable<ComponentID> = new Observable<ComponentID>();
 }
