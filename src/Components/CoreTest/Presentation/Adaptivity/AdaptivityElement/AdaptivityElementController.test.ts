@@ -77,8 +77,34 @@ describe("AdaptivityElementController", () => {
     viewModel.elementID.Value = 42;
     viewModel.currentTaskID.Value = 42;
     viewModel.currentQuestionID.Value = 42;
+    viewModel.contentData.Value = {
+      tasks: [
+        {
+          taskID: 42,
+          questions: [
+            {
+              questionID: 42,
+              questionAnswers: [
+                {
+                  answerIndex: 1,
+                  isSelected: true,
+                },
+                {
+                  answerIndex: 2,
+                  isSelected: false,
+                },
+                {
+                  answerIndex: 3,
+                  isSelected: true,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
 
-    systemUnderTest.submitSelection([1, 3]);
+    systemUnderTest.submitSelection();
 
     expect(submitSelectionUseCaseMock.executeAsync).toBeCalledWith({
       elementID: 42,
