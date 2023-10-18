@@ -1,6 +1,6 @@
 export enum OverallTimeSpentAdaptivityNotificationBreakType {
   None = 0,
-  Short = 30,
+  Short = 0.1,
   Medium = 60,
   Long = 90,
 }
