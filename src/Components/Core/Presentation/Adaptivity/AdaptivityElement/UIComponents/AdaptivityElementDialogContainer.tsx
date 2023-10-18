@@ -61,7 +61,7 @@ export default function AdaptivityElementDialogContainer({
       0
     );
     setProgressPercentage((completedTasks / contentData.tasks.length) * 100);
-  }, [contentData]);
+  }, [contentData, currentTaskID]);
 
   if (!viewmodel || !controller) return null;
   if (!isOpen || !contentData) return null;
