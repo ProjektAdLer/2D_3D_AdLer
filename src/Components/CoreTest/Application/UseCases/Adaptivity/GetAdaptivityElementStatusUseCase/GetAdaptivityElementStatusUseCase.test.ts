@@ -1,3 +1,4 @@
+import { AdaptivityElementStatusTypes } from "./../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementStatusTypes";
 import { AdaptivityElementActionTypes } from "./../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 import { AdaptivityElementTriggerConditionTypes } from "./../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementTriggerConditionTypes";
 import { AdaptivityElementTriggerTypes } from "./../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementTriggerTypes";
@@ -25,6 +26,79 @@ const entityContainerMock = mock<IEntityContainer>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 const backendAdapterMock = mock<IBackendPort>();
 
+const progressTO = {
+  id: 0,
+  elementName: "abc",
+  shuffleTask: false,
+  introText: "",
+  tasks: [
+    {
+      isCompleted: null,
+      taskId: 0,
+      taskTitle: "",
+      taskOptional: false,
+      requiredDifficulty: AdaptivityElementQuestionDifficultyTypes.easy,
+      questions: [
+        {
+          isCompleted: null,
+          questionType: AdaptivityElementQuestionTypes.multipleResponse,
+          questionId: 0,
+          questionDifficulty: AdaptivityElementQuestionDifficultyTypes.easy,
+          questionText: "",
+          questionAnswers: [],
+          triggers: [],
+        },
+        {
+          isCompleted: null,
+          questionType: AdaptivityElementQuestionTypes.multipleResponse,
+          questionId: 1,
+          questionDifficulty: AdaptivityElementQuestionDifficultyTypes.medium,
+          questionText: "",
+          questionAnswers: [],
+          triggers: [],
+        },
+        {
+          isCompleted: null,
+          questionType: AdaptivityElementQuestionTypes.multipleResponse,
+          questionId: 2,
+          questionDifficulty: AdaptivityElementQuestionDifficultyTypes.hard,
+          questionText: "",
+          questionAnswers: [],
+          triggers: [],
+        },
+      ],
+    },
+  ] as AdaptivityElementTaskProgressTO[],
+  isCompleted: false,
+} as AdaptivityElementProgressTO;
+
+const backendResponseMock = {
+  element: {
+    elementID: 0,
+    success: false,
+  },
+  questions: [
+    {
+      id: 0,
+      status: AdaptivityElementStatusTypes.Correct,
+    },
+    {
+      id: 1,
+      status: AdaptivityElementStatusTypes.Incorrect,
+    },
+    {
+      id: 2,
+      status: AdaptivityElementStatusTypes.NotAttempted,
+    },
+  ],
+  tasks: [
+    {
+      taskId: 0,
+      taskStatus: AdaptivityElementStatusTypes.Incorrect,
+    },
+  ],
+} as AdaptivtyElementStatusResponse;
+
 describe("GetAdaptivityElementStatusUseCase", () => {
   let systemUnderTest: IGetAdaptivityElementStatusUseCase;
 
@@ -51,16 +125,33 @@ describe("GetAdaptivityElementStatusUseCase", () => {
     );
   });
 
-  test("should get adaptivity status", async () => {
-    let progressTO = {
-      id: 0,
-      elementName: "abc",
-      shuffleTask: false,
-      introText: "",
-      tasks: [] as AdaptivityElementTaskProgressTO[],
-      isCompleted: false,
-    } as AdaptivityElementProgressTO;
+  test("throws error when worldID is not set", async () => {
+    entityContainerMock.getEntitiesOfType.mockReturnValue([
+      {} as UserDataEntity,
+    ]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: undefined,
+      spaceID: 1,
+    });
 
+    const result = systemUnderTest.internalExecuteAsync(progressTO);
+    await expect(result).rejects.toThrowError();
+  });
+
+  test("throws error when spaceID is not set", async () => {
+    entityContainerMock.getEntitiesOfType.mockReturnValue([
+      {} as UserDataEntity,
+    ]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: undefined,
+    });
+
+    const result = systemUnderTest.internalExecuteAsync(progressTO);
+    await expect(result).rejects.toThrowError();
+  });
+
+  test("should get adaptivity status", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       { userToken: "", username: "", isLoggedIn: true },
     ] as UserDataEntity[]);
@@ -70,11 +161,18 @@ describe("GetAdaptivityElementStatusUseCase", () => {
       spaceID: 1,
     } as UserLocationTO);
 
-    backendAdapterMock.getAdaptivityElementStatusResponse.mockResolvedValue({
-      element: { elementID: 0, success: false },
-    } as AdaptivtyElementStatusResponse);
+    backendAdapterMock.getAdaptivityElementStatusResponse.mockResolvedValue(
+      backendResponseMock
+    );
 
-    const result = await systemUnderTest.internalExecuteAsync(progressTO);
-    expect(result).toEqual(progressTO);
+    const result = structuredClone(progressTO);
+    result.tasks[0].isCompleted = false;
+    result.tasks[0].questions[0].isCompleted = true;
+    result.tasks[0].questions[1].isCompleted = false;
+    result.tasks[0].questions[2].isCompleted = null;
+
+    await systemUnderTest.internalExecuteAsync(progressTO);
+
+    expect(progressTO).toEqual(result);
   });
 });
