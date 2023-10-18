@@ -78,7 +78,6 @@ function GetNotificationModalContents(
       return MediumBreakContent();
     case OverallTimeSpentAdaptivityNotificationBreakType.Long:
       return LongBreakContent();
-    case OverallTimeSpentAdaptivityNotificationBreakType.None:
     default:
       return "";
   }
@@ -108,14 +107,14 @@ function MediumBreakContent() {
   return (
     <div data-testid="medium-break" className="max-w-2xl px-4 pb-4">
       <p className="text-justify">
-        Sie haben nun 4 Stunden am Stück im AdLer-System gelernt und gearbeitet.
-        Wir würden Ihnen eine längere Pause von mindestens 90 Minuten empfehlen.
-        Wie wäre es denn mit einem Spaziergang? Spaziergänge sind eine einfache,
-        aber äußerst wirkungsvolle Möglichkeit, Körper und Geist zu entspannen.
-        Sie bieten eine Vielzahl von gesundheitlichen Vorteilen und können sogar
-        kreatives Denken fördern. Hier sind einige der wichtigsten Gründe, warum
-        regelmäßige Spaziergänge eine wertvolle Ergänzung zu unserem Alltag
-        sind: <br />
+        THIS IS A MEDIUM BREAK MESSAGE! Sie haben nun 4 Stunden am Stück im
+        AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine längere Pause
+        von mindestens 90 Minuten empfehlen. Wie wäre es denn mit einem
+        Spaziergang? Spaziergänge sind eine einfache, aber äußerst wirkungsvolle
+        Möglichkeit, Körper und Geist zu entspannen. Sie bieten eine Vielzahl
+        von gesundheitlichen Vorteilen und können sogar kreatives Denken
+        fördern. Hier sind einige der wichtigsten Gründe, warum regelmäßige
+        Spaziergänge eine wertvolle Ergänzung zu unserem Alltag sind: <br />
         <ul className="pl-4 list-disc">
           <li className="pt-4">
             <b>Körperliche Gesundheit:</b> Spaziergänge sind eine ausgezeichnete

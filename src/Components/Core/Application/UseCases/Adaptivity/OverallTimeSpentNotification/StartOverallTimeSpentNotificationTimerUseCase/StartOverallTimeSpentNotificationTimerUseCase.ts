@@ -2,7 +2,9 @@ import IStartOverallTimeSpentNotificationTimerUseCase from "./IStartOverallTimeS
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
-import OverallTimeSpentAdaptivityNotificationEntity from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
+import OverallTimeSpentAdaptivityNotificationEntity, {
+  OverallTimeSpentAdaptivityNotificationBreakType,
+} from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type INotificationPort from "../../../../Ports/Interfaces/INotificationPort";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
@@ -27,10 +29,22 @@ export default class StartOverallTimeSpentNotificationTimerUseCase
     );
 
     setTimeout(() => {
-      this.notificationPort.displayOverallTimeSpentAdaptivityNotification(
-        timer[0].notificationType
-      );
+      timer[0].notificationIterator++;
+      if (timer[0].notificationIterator === 4) {
+        this.notificationPort.displayOverallTimeSpentAdaptivityNotification(
+          OverallTimeSpentAdaptivityNotificationBreakType.Medium
+        );
+      } else if (timer[0].notificationIterator === 8) {
+        this.notificationPort.displayOverallTimeSpentAdaptivityNotification(
+          OverallTimeSpentAdaptivityNotificationBreakType.Long
+        );
+      } else {
+        this.notificationPort.displayOverallTimeSpentAdaptivityNotification(
+          OverallTimeSpentAdaptivityNotificationBreakType.Short
+        );
+      }
       this.pauseOverallTimeSpentNotificationTimerUseCase.internalExecute(this);
-    }, timer[0].notificationType * 1000 * 60);
+    }, 30 * 1000 * 60);
+    // 30 minuten (Lernzeitraum)
   }
 }
