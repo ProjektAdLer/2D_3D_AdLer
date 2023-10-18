@@ -33,12 +33,26 @@ export default class AdaptivityElementController
   }
 
   @bind
-  async submitSelection(selectedAnswers: number[]): Promise<void> {
+  async submitSelection(): Promise<void> {
+    const question = this.viewModel.contentData.Value.tasks
+      .find((task) => task.taskID === this.viewModel.currentTaskID.Value)!
+      .questions.find(
+        (question) =>
+          question.questionID === this.viewModel.currentQuestionID.Value
+      )!;
+    const selectedAnswerIDs = question.questionAnswers
+      .filter((answer) => {
+        return answer.isSelected;
+      })
+      .map((selectedAnswer) => {
+        return selectedAnswer.answerIndex;
+      });
+
     const submission: AdaptivityElementQuestionSubmissionTO = {
       elementID: this.viewModel.elementID.Value,
       taskID: this.viewModel.currentTaskID.Value!,
       questionID: this.viewModel.currentQuestionID.Value!,
-      selectedAnswerIDs: selectedAnswers,
+      selectedAnswerIDs: selectedAnswerIDs,
     };
 
     await CoreDIContainer.get<ISubmitAdaptivityElementSelectionUseCase>(

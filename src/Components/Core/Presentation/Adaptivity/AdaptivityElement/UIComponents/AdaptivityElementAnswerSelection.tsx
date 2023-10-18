@@ -11,12 +11,11 @@ export default function AdaptivityElementAnswerSelection({
   setHeaderText,
 }: {
   question: AdaptivityQuestion;
-  submitSelection: (selectedAnswers: number[]) => void;
+  submitSelection: () => void;
   closeSelection: () => void;
   setHeaderText: (headerText: string) => void;
 }) {
   const [answerColors, setAnswerColors] = useState<StyledButtonColor[]>([]);
-  const [selectedAnswerIDs, setSelectedAnswerIDs] = useState<number[]>([]);
 
   useEffect(() => {
     setHeaderText(question.questionText);
@@ -38,15 +37,6 @@ export default function AdaptivityElementAnswerSelection({
       });
 
       setAnswerColors(newColors);
-
-      const selectedIDs = question.questionAnswers
-        .filter((answer) => {
-          return answer.isSelected;
-        })
-        .map((selectedAnswer) => {
-          return selectedAnswer.answerIndex;
-        });
-      setSelectedAnswerIDs(selectedIDs);
     },
     [question.isMultipleChoice, question.questionAnswers]
   );
@@ -69,18 +59,11 @@ export default function AdaptivityElementAnswerSelection({
       </div>
 
       <div className="flex items-end justify-end w-full gap-2 pt-8 font-bold">
-        {/* <StyledButton
-          className="box-border"
-          shape="freefloatcenter"
-          onClick={closeSelection}
-        >
-          {"Zurück"}
-        </StyledButton> */}
         <StyledButton
           className="box-border"
           shape="freefloatcenter"
           onClick={() => {
-            submitSelection(selectedAnswerIDs);
+            submitSelection();
           }}
         >
           {"Antworten abgeben"}
