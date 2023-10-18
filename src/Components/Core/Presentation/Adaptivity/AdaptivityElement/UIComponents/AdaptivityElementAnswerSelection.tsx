@@ -28,9 +28,9 @@ export default function AdaptivityElementAnswerSelection({
         if (index === i) {
           // switch selection status of clicked answer
           answer.isSelected = !answer.isSelected;
-        } else {
+        } else if (!question.isMultipleChoice) {
           // deselect all other answers if question is single choice
-          if (!question.isMultipleChoice) answer.isSelected = false;
+          answer.isSelected = false;
         }
 
         return answer.isSelected ? "highlight" : "default";
