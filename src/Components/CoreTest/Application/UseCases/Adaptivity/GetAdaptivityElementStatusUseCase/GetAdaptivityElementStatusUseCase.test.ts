@@ -1,7 +1,4 @@
 import { AdaptivityElementStatusTypes } from "./../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementStatusTypes";
-import { AdaptivityElementActionTypes } from "./../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
-import { AdaptivityElementTriggerConditionTypes } from "./../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementTriggerConditionTypes";
-import { AdaptivityElementTriggerTypes } from "./../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementTriggerTypes";
 import IGetAdaptivityElementStatusUseCase from "../../../../../Core/Application/UseCases/Adaptivity/GetAdaptivityElementStatusUseCase/IGetAdaptivityElementStatusUseCase";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import GetAdaptivityElementStatusUseCase from "../../../../../Core/Application/UseCases/Adaptivity/GetAdaptivityElementStatusUseCase/GetAdaptivityElementStatusUseCase";
@@ -11,9 +8,6 @@ import IEntityContainer from "../../../../../Core/Domain/EntityContainer/IEntity
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import { AdaptivityElementQuestionDifficultyTypes } from "../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 import { AdaptivityElementQuestionTypes } from "../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementQuestionTypes";
-import AdaptivityElementAnswersTO from "../../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementAnswerTO";
-import AdaptivityElementTriggerTO from "../../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTriggerTO";
-import AdaptivityElementActionTO from "../../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementActionTO";
 import AdaptivityElementTaskProgressTO from "../../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTaskProgressTO";
 import UserDataEntity from "../../../../../Core/Domain/Entities/UserDataEntity";
 import IGetUserLocationUseCase from "../../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";

@@ -22,6 +22,13 @@ const backendPortMock = mock<IBackendPort>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 const scoreLearningElementUseCaseMock = mock<IScoreLearningElementUseCase>();
 
+const submitted: AdaptivityElementQuestionSubmissionTO = {
+  elementID: 1,
+  taskID: 2,
+  questionID: 3,
+  selectedAnswerIDs: [1, 2],
+};
+
 describe("SubmitAdaptivityElementSelectionUseCase", () => {
   let systemUnderTest: SubmitAdaptivityElementSelectionUseCase;
 
@@ -54,14 +61,33 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  test("calls executeAsync on the SubmitSelectionUseCase", async () => {
-    const submitted: AdaptivityElementQuestionSubmissionTO = {
-      elementID: 1,
-      taskID: 2,
-      questionID: 3,
-      selectedAnswerIDs: [1, 2],
-    };
+  test("throws error when worldID is not set", async () => {
+    entityContainerMock.getEntitiesOfType.mockReturnValue([
+      {} as UserDataEntity,
+    ]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: undefined,
+      spaceID: 1,
+    });
 
+    const result = systemUnderTest.executeAsync(submitted);
+    await expect(result).rejects.toThrowError();
+  });
+
+  test("throws error when spaceID is not set", async () => {
+    entityContainerMock.getEntitiesOfType.mockReturnValue([
+      {} as UserDataEntity,
+    ]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: undefined,
+    });
+
+    const result = systemUnderTest.executeAsync(submitted);
+    await expect(result).rejects.toThrowError();
+  });
+
+  test("calls executeAsync on the SubmitSelectionUseCase", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       {
         userToken: "",
