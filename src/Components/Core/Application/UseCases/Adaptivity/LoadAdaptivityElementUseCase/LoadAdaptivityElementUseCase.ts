@@ -70,10 +70,9 @@ export default class LoadAdaptivityElementUseCase
     adaptivityTO.elementName = elementEntity[0].element.name;
     adaptivityTO.id = elementEntity[0].element.id;
 
-    adaptivityTO =
-      await this.getAdaptivityElementStatusUseCase.internalExecuteAsync(
-        adaptivityTO
-      );
+    await this.getAdaptivityElementStatusUseCase.internalExecuteAsync(
+      adaptivityTO
+    );
 
     this.worldPort.onAdaptivityElementLoaded(adaptivityTO);
 

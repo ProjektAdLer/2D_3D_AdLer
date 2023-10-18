@@ -25,10 +25,7 @@ export default class GetAdaptivityElementStatusUseCase
     private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
 
-  // TODO remove data as argument, repalce with other arguments
-  async internalExecuteAsync(
-    data: AdaptivityElementProgressTO
-  ): Promise<AdaptivityElementProgressTO> {
+  async internalExecuteAsync(data: AdaptivityElementProgressTO): Promise<void> {
     const token =
       this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0]
         .userToken;
@@ -54,8 +51,6 @@ export default class GetAdaptivityElementStatusUseCase
         question.isCompleted = this.parseStatusToBoolean(q!.status);
       });
     });
-
-    return data;
   }
 
   private parseStatusToBoolean(status: string): boolean | null {
