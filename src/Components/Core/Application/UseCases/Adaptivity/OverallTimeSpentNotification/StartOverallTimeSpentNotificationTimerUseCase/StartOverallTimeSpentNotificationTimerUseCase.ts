@@ -44,7 +44,7 @@ export default class StartOverallTimeSpentNotificationTimerUseCase
         );
       }
       this.pauseOverallTimeSpentNotificationTimerUseCase.internalExecute(this);
-    }, 30 * 1000 * 60);
+    }, 0.1 * 1000 * 60);
     // 30 minuten (Lernzeitraum)
   }
 }
