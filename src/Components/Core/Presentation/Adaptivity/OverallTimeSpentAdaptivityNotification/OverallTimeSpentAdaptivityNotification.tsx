@@ -7,10 +7,9 @@ import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/Style
 import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
 import { AdLerUIComponent } from "../../../Types/ReactTypes";
 import tailwindMerge from "../../Utils/TailwindMerge";
-import exampleBreakPicture from "../../../../../Assets/prototype/breakPictureExample.png";
-import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
+import pauseIcon from "../../../../../Assets/icons/42-pause-icon/47-pause-icon-nobg.svg";
 
 export default function OverallTimeSpentAdaptivityNotification({
   className,
@@ -28,26 +27,28 @@ export default function OverallTimeSpentAdaptivityNotification({
 
   if (showMinimizedModal)
     return (
-      <StyledContainer
-        className={
-          tailwindMerge(`${className}`) +
-          "flex flex-row-reverse bottom-1.5 right-1.5 bg-buttonbgblue rounded-lg"
-        }
-      >
+      <div>
         <StyledButton
-          onClick={() => controller.closeBreakNotification()}
-          className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-        >
-          X
-        </StyledButton>
-        <div
-          className="flex flex-col items-center justify-center gap-2"
+          shape="freefloatleft"
           onClick={() => controller.minimizeOrMaximizeBreakNotification()}
+          className="!hidden lg:flex fixed left-2 bottom-2"
         >
-          <p className="text-center underline">Pausenempfehlung</p>
-          <p className="text-center">Klicke hier um mehr zu erfahren!</p>
-        </div>
-      </StyledContainer>
+          <img src={pauseIcon} className="h-12" alt="" />
+          <div className="flex flex-col items-start pl-4 pr-2">
+            <h1 className="text-xl font-bold">Zeit für eine Pause!</h1>
+            <p className="text-sm">Klicke für mehr Informationen</p>
+          </div>
+          <div
+            className="place-self-start flex items-center justify-center border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue rounded-lg px-1.5"
+            onClick={() => controller.closeBreakNotification()}
+          >
+            x
+          </div>
+        </StyledButton>
+        <StyledButton className="fixed lg:hidden left-2 bottom-2">
+          <img src={pauseIcon} className="h-fit" alt="" />
+        </StyledButton>
+      </div>
     );
 
   return (
