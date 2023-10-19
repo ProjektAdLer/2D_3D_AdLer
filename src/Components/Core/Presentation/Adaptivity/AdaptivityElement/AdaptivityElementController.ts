@@ -41,18 +41,17 @@ export default class AdaptivityElementController
   ): void {
     if (
       selectedHint.hintAction.hintActionType ===
-      AdaptivityElementActionTypes.ReferenceAction
+        AdaptivityElementActionTypes.ReferenceAction &&
+      typeof selectedHint.hintAction.hintActionData === "number"
     ) {
       // call all element presenters via port
-      if (typeof selectedHint.hintAction.hintActionData === "number") {
-        const learningWorldPort = CoreDIContainer.get<ILearningWorldPort>(
-          PORT_TYPES.ILearningWorldPort
-        );
+      const learningWorldPort = CoreDIContainer.get<ILearningWorldPort>(
+        PORT_TYPES.ILearningWorldPort
+      );
 
-        learningWorldPort.onLearningElementHighlighted(
-          selectedHint.hintAction.hintActionData
-        );
-      }
+      learningWorldPort.onLearningElementHighlighted(
+        selectedHint.hintAction.hintActionData
+      );
     }
 
     this.viewModel.currentQuestion.Value = associatedQuestion;
@@ -106,6 +105,7 @@ export default class AdaptivityElementController
   showFooterTooltip(): void {
     this.viewModel.showFooterTooltip.Value = true;
   }
+
   @bind
   hideFooterTooltip(): void {
     this.viewModel.showFooterTooltip.Value = false;
