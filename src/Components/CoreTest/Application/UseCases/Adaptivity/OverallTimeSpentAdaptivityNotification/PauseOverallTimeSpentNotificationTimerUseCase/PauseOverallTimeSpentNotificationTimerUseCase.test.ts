@@ -1,5 +1,6 @@
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../../../../Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
-import OverallTimeSpentAdaptivityNotificationEntity from "../../../../../../Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
+import OverallTimeSpentAdaptivityNotificationEntity, {
+  OverallTimeSpentAdaptivityNotificationBreakType,
+} from "../../../../../../Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
 import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import mock from "jest-mock-extended/lib/Mock";
