@@ -4,9 +4,13 @@ import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE
 import AdaptivityElementController from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementController";
 import AdaptivityElementViewModel from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
 import ISubmitAdaptivityElementSelectionUseCase from "../../../../Core/Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
+import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
+import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import { AdaptivityElementActionTypes } from "../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 
 const submitSelectionUseCaseMock =
   mock<ISubmitAdaptivityElementSelectionUseCase>();
+const worldPortMock = mock<ILearningWorldPort>();
 
 const mockHint = {
   hintID: 1,
@@ -56,6 +60,9 @@ describe("AdaptivityElementController", () => {
     CoreDIContainer.rebind(
       USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
     ).toConstantValue(submitSelectionUseCaseMock);
+    CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
+      worldPortMock
+    );
   });
 
   beforeEach(() => {
@@ -109,6 +116,21 @@ describe("AdaptivityElementController", () => {
     systemUnderTest.selectHint(mockHint, mockQuestion);
     expect(viewModel.currentQuestion.Value).toBe(mockQuestion);
     expect(viewModel.selectedHint.Value).toBe(mockHint);
+  });
+
+  test("selectHint calls worldPort.onLearningElementHighlighted with hintActionData", () => {
+    const hint = {
+      hintID: 1,
+      showOnIsWrong: false,
+      hintAction: {
+        hintActionType: AdaptivityElementActionTypes.ReferenceAction,
+        hintActionData: 42,
+      },
+    };
+
+    systemUnderTest.selectHint(hint, mockQuestion);
+
+    expect(worldPortMock.onLearningElementHighlighted).toBeCalledWith(42);
   });
 
   test("submitSelection calls SubmitSelectionUseCase", () => {
