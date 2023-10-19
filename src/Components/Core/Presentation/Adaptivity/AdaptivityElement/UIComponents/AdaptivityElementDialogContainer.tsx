@@ -49,6 +49,9 @@ export default function AdaptivityElementDialogContainer({
   const [contentData] = useObservable(viewmodel?.contentData);
   const [footerText] = useObservable<string>(viewmodel?.footerText);
   const [showAnswerFeedback] = useObservable<boolean>(viewmodel?.showFeedback);
+  const [showFooterTooltip] = useObservable<boolean>(
+    viewmodel?.showFooterTooltip
+  );
 
   // -- State --
   const [headerText, setHeaderText] = useState<string>("");
@@ -61,11 +64,11 @@ export default function AdaptivityElementDialogContainer({
       0
     );
     setProgressPercentage((completedTasks / contentData.tasks.length) * 100);
-  }, [contentData]);
+  }, [contentData, currentTaskID]);
 
   if (!viewmodel || !controller) return null;
   if (!isOpen || !contentData) return null;
-
+  console.log("showFooterTooltip: ", showFooterTooltip);
   return (
     <>
       <StyledContainer className={tailwindMerge(className, "")}>
@@ -216,13 +219,44 @@ export default function AdaptivityElementDialogContainer({
                   <p>{footerText}</p>
                   {!(currentTaskID !== null && currentQuestionID !== null) && (
                     <div className="relative flex group">
-                      <p className="absolute group-hover:invisible right-1 bottom-1">
-                        Bewege deine Maus hier her, um die Symbollegende
-                        anzuzeigen
-                      </p>
-                      <div className="flex invisible gap-2 group-hover:visible">
-                        <div className="flex-col items-center justify-center">
-                          <div className="flex opacity-60">
+                      {!showFooterTooltip && (
+                        <p
+                          className="right-1 bottom-1"
+                          onMouseEnter={() => {
+                            controller.showFooterTooltip();
+                          }}
+                        >
+                          Bewege deine Maus hier her, um die Symbollegende
+                          anzuzeigen
+                        </p>
+                      )}
+                      {showFooterTooltip && (
+                        <div
+                          className="flex gap-2"
+                          onMouseLeave={() => {
+                            controller.hideFooterTooltip();
+                          }}
+                        >
+                          <div className="flex-col items-center justify-center">
+                            <div className="flex opacity-60">
+                              <img
+                                className="w-2 lg:w-4"
+                                src={requiredUnsolvedIcon}
+                                alt="required unsolved icon"
+                              />
+                              <img
+                                className="w-2 lg:w-4"
+                                src={requiredUnsolvedIcon}
+                                alt="required unsolved icon"
+                              />
+                              <img
+                                className="w-2 lg:w-4"
+                                src={requiredUnsolvedIcon}
+                                alt="required unsolved icon"
+                              />
+                            </div>
+                            <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
+                            <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
                             <img
                               className="w-2 lg:w-4"
                               src={requiredUnsolvedIcon}
@@ -230,65 +264,48 @@ export default function AdaptivityElementDialogContainer({
                             />
                             <img
                               className="w-2 lg:w-4"
-                              src={requiredUnsolvedIcon}
-                              alt="required unsolved icon"
+                              src={notRequiredUnsolvedIcon}
+                              alt="not required unsolved Icon"
                             />
                             <img
                               className="w-2 lg:w-4"
-                              src={requiredUnsolvedIcon}
-                              alt="required unsolved icon"
+                              src={requiredSolvedIcon}
+                              alt="required solved icon"
+                            />
+                            <img
+                              className="w-2 lg:w-4"
+                              src={notRequiredSolvedIcon}
+                              alt="not required solved Icon"
+                            />
+                            <img
+                              className="w-2 lg:w-4"
+                              src={placeholderIcon}
+                              alt="placeholder icon"
+                            />
+                            <img
+                              className="w-2 lg:w-4"
+                              src={requiredTaskIcon}
+                              alt="required task icon"
                             />
                           </div>
-                          <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
-                          <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
-                          <img
-                            className="w-2 lg:w-4"
-                            src={requiredUnsolvedIcon}
-                            alt="required unsolved icon"
-                          />
-                          <img
-                            className="w-2 lg:w-4"
-                            src={notRequiredUnsolvedIcon}
-                            alt="not required unsolved Icon"
-                          />
-                          <img
-                            className="w-2 lg:w-4"
-                            src={requiredSolvedIcon}
-                            alt="required solved icon"
-                          />
-                          <img
-                            className="w-2 lg:w-4"
-                            src={notRequiredSolvedIcon}
-                            alt="not required solved Icon"
-                          />
-                          <img
-                            className="w-2 lg:w-4"
-                            src={placeholderIcon}
-                            alt="placeholder icon"
-                          />
-                          <img
-                            className="w-2 lg:w-4"
-                            src={requiredTaskIcon}
-                            alt="required task icon"
-                          />
+                          <div className="flex-col items-start justify-center icons">
+                            <p>
+                              Links: Leichte Frage<br></br>Mitte: Mittelschwere
+                              Frage<br></br>
+                              Rechts: Schwere Frage
+                            </p>
+                            <p>Benötigte, ungelöste Frage</p>
+                            <p>Nicht benötigte, ungelöste Frage</p>
+                            <p>Benötigte, gelöste Frage</p>
+                            <p>Nicht benötigte, gelöste Frage</p>
+                            <p>Keine Frage dieser Schwierigkeit vorhanden</p>
+                            <p>
+                              Diese Aufgabe muss bearbeitet werden, um weiter zu
+                              kommen.
+                            </p>
+                          </div>
                         </div>
-                        <div className="flex-col items-start justify-center icons">
-                          <p>
-                            Links: Leichte Frage<br></br>Mitte: Mittelschwere
-                            Frage<br></br>
-                            Rechts: Schwere Frage
-                          </p>
-                          <p>Benötigte, ungelöste Frage</p>
-                          <p>Nicht benötigte, ungelöste Frage</p>
-                          <p>Benötigte, gelöste Frage</p>
-                          <p>Nicht benötigte, gelöste Frage</p>
-                          <p>Keine Frage dieser Schwierigkeit vorhanden</p>
-                          <p>
-                            Diese Aufgabe muss bearbeitet werden, um weiter zu
-                            kommen.
-                          </p>
-                        </div>
-                      </div>
+                      )}
                     </div>
                   )}
                 </div>

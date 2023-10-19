@@ -220,17 +220,23 @@ export default class MockBackendAdapter implements IBackendPort {
       },
     };
 
-    if (submissionData.questionID === 0) {
+    const id = submissionData.questionID;
+
+    if (id === 0 || id === 2) {
       if (
         submissionData.selectedAnswerIDs.length === 1 &&
         submissionData.selectedAnswerIDs[0] === 1
       ) {
         backendResponse.gradedQuestion.status = "Correct";
       }
-    } else if (
-      submissionData.questionID > 0 &&
-      submissionData.questionID < 12
-    ) {
+    } else if (id === 3) {
+      if (
+        submissionData.selectedAnswerIDs.length === 1 &&
+        submissionData.selectedAnswerIDs[0] === 0
+      ) {
+        backendResponse.gradedQuestion.status = "Correct";
+      }
+    } else if (id > 0 && id < 12) {
       if (
         submissionData.selectedAnswerIDs.length === 2 &&
         submissionData.selectedAnswerIDs.includes(0) &&
@@ -304,7 +310,7 @@ export default class MockBackendAdapter implements IBackendPort {
       },
       {
         taskId: 2,
-        taskTitle: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
+        taskTitle: "Debug Aufgabe",
         optional: true,
         requiredDifficulty: 1,
         adaptivityQuestions: [
@@ -312,7 +318,8 @@ export default class MockBackendAdapter implements IBackendPort {
             questionType: "multipleResponse",
             questionId: 1,
             questionDifficulty: 0,
-            questionText: "Welche Zahlen sind Primzahlen?",
+            questionText:
+              "Multiple Choice Frage: Wähle alle richtigen Antworten aus",
             adaptivityRules: [
               {
                 triggerId: 1,
@@ -334,21 +341,21 @@ export default class MockBackendAdapter implements IBackendPort {
             ],
             choices: [
               {
-                answerText: "2",
+                answerText: "richtig",
               },
               {
-                answerText: "3",
+                answerText: "richtig",
               },
               {
-                answerText: "14",
+                answerText: "falsch",
               },
             ],
           },
           {
-            questionType: "multipleResponse",
+            questionType: "singleResponse",
             questionId: 2,
             questionDifficulty: 100,
-            questionText: "Welche Zahlen sind Primzahlen?",
+            questionText: "Single Choice: Wähle die richtige Antwort",
             adaptivityRules: [
               {
                 triggerId: 1,
@@ -370,21 +377,21 @@ export default class MockBackendAdapter implements IBackendPort {
             ],
             choices: [
               {
-                answerText: "2",
+                answerText: "falsch",
               },
               {
-                answerText: "3",
+                answerText: "richtig",
               },
               {
-                answerText: "14",
+                answerText: "falsch",
               },
             ],
           },
           {
-            questionType: "multipleResponse",
+            questionType: "singleResponse",
             questionId: 3,
             questionDifficulty: 200,
-            questionText: "Welche Zahlen sind Primzahlen?",
+            questionText: "Single Choice: Wähle die richtige Antwort",
             adaptivityRules: [
               {
                 triggerId: 1,
@@ -406,13 +413,13 @@ export default class MockBackendAdapter implements IBackendPort {
             ],
             choices: [
               {
-                answerText: "2",
+                answerText: "richtig",
               },
               {
-                answerText: "3",
+                answerText: "falsch",
               },
               {
-                answerText: "14",
+                answerText: "falsch",
               },
             ],
           },

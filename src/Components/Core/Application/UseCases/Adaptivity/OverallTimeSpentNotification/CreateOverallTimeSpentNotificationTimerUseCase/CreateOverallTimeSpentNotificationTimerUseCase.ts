@@ -1,5 +1,4 @@
 import type IStartOverallTimeSpentNotificationTimerUseCase from "src/Components/Core/Application/UseCases/Adaptivity/OverallTimeSpentNotification/StartOverallTimeSpentNotificationTimerUseCase/IStartOverallTimeSpentNotificationTimerUseCase";
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
 import OverallTimeSpentAdaptivityNotificationEntity from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
 import { inject, injectable } from "inversify";
 import ICreateOverallTimeSpentNotificationUseCase from "./ICreateOverallTimeSpentNotificationTimerUseCase";
@@ -30,7 +29,7 @@ export default class CreateOverallTimeSpentNotificationUseCase
 
     this.container.useSingletonEntity<OverallTimeSpentAdaptivityNotificationEntity>(
       {
-        notificationType: OverallTimeSpentAdaptivityNotificationBreakType.Short,
+        notificationIterator: 0,
       } as OverallTimeSpentAdaptivityNotificationEntity,
       OverallTimeSpentAdaptivityNotificationEntity
     );

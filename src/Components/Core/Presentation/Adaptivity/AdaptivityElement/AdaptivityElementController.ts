@@ -80,4 +80,13 @@ export default class AdaptivityElementController
     this.viewModel.showFeedback.Value = false;
     this.viewModel.selectedHintID.Value = null;
   }
+
+  @bind
+  showFooterTooltip(): void {
+    this.viewModel.showFooterTooltip.Value = true;
+  }
+  @bind
+  hideFooterTooltip(): void {
+    this.viewModel.showFooterTooltip.Value = false;
+  }
 }

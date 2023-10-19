@@ -48,6 +48,7 @@ export interface AdaptivityElementContent {
 
 export default class AdaptivityElementViewModel {
   isOpen: Observable<boolean> = new Observable<boolean>(false);
+  showFooterTooltip: Observable<boolean> = new Observable<boolean>(false);
   showFeedback: Observable<boolean> = new Observable<boolean>(false);
   contentData: Observable<AdaptivityElementContent> =
     new Observable<AdaptivityElementContent>();
