@@ -9,6 +9,7 @@ export default class LearningElementViewModel {
   // constants
   public readonly iconScaleUpOnHover: number = 1.02;
   public readonly iconYOffset: number = 2.3;
+  public readonly highlightTimeout: number = 10000; // in ms
 
   // meshes
   public modelMeshes: Mesh[];
@@ -28,4 +29,5 @@ export default class LearningElementViewModel {
 
   // runtime properties
   public hasScored = new Observable<boolean>();
+  public isHighlighted = new Observable<boolean>(false);
 }

@@ -1,24 +1,7 @@
-import { Vector3 } from "@babylonjs/core";
-import LearningElementTO from "../../../../Core/Application/DataTransferObjects/LearningElementTO";
 import LearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementPresenter";
 import LearningElementViewModel from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementViewModel";
-import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 jest.mock("@babylonjs/core");
-
-const testElementTO: LearningElementTO = {
-  id: 0,
-  value: 0,
-  parentSpaceID: 0,
-  parentWorldID: 0,
-  name: "test",
-  description: "",
-  goals: [""],
-  type: "h5p",
-  hasScored: false,
-  model: LearningElementModelTypeEnums.NoElementModelTypes.None,
-};
-const testVector = new Vector3(1, 2, 3);
 
 describe("LearningElementPresenter", () => {
   let systemUnderTest: LearningElementPresenter;
@@ -47,5 +30,34 @@ describe("LearningElementPresenter", () => {
     systemUnderTest.onLearningElementScored(true, 42);
 
     expect(systemUnderTest["viewModel"].hasScored.Value).toBe(false);
+  });
+
+  test("onLearningElementHighlighted sets isHighlighted if the id matches", () => {
+    viewModel.id = 42;
+    viewModel.isHighlighted.Value = false;
+    systemUnderTest.onLearningElementHighlighted(42);
+
+    expect(systemUnderTest["viewModel"].isHighlighted.Value).toBe(true);
+  });
+
+  test("onLearningElementHighlighted sets isHighlighted to false after the timeout", () => {
+    jest.useFakeTimers();
+    viewModel.id = 42;
+    viewModel.isHighlighted.Value = false;
+    systemUnderTest.onLearningElementHighlighted(42);
+
+    expect(systemUnderTest["viewModel"].isHighlighted.Value).toBe(true);
+    jest.advanceTimersByTime(10000);
+    expect(systemUnderTest["viewModel"].isHighlighted.Value).toBe(false);
+
+    jest.useRealTimers();
+  });
+
+  test("onLearningElementHighlighted does not set isHighlighted if the id does not match", () => {
+    viewModel.id = 0;
+    viewModel.isHighlighted.Value = false;
+    systemUnderTest.onLearningElementHighlighted(42);
+
+    expect(systemUnderTest["viewModel"].isHighlighted.Value).toBe(false);
   });
 });

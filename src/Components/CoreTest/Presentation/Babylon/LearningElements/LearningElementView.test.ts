@@ -59,6 +59,61 @@ describe("LearningElementView", () => {
     expect(viewModel.hasScored["subscribers"].length).toBe(1);
   });
 
+  test("constructor sets up isHighlighted observable callbacks", () => {
+    scenePresenterMock.loadModel.mockResolvedValue([
+      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+    ]);
+
+    const [viewModel, ,] = buildSystemUnderTest();
+
+    // only check for length, because the callback is anonymous
+    expect(viewModel.isHighlighted["subscribers"].length).toBe(1);
+  });
+
+  test("changing isHighlighted to true changes the highlight color to purple", async () => {
+    scenePresenterMock.loadModel.mockResolvedValue([
+      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+    ]);
+
+    const [viewModel, , systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Campus;
+
+    await systemUnderTest.setupLearningElement();
+
+    viewModel.isHighlighted.Value = true;
+
+    expect(scenePresenterMock.HighlightLayer.removeMesh).toHaveBeenCalledWith(
+      viewModel.modelMeshes[0]
+    );
+    expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
+      viewModel.modelMeshes[0],
+      Color3.Purple()
+    );
+  });
+
+  test("changing isHighlighted to false changes the highlight color to green if hasScored is true", async () => {
+    scenePresenterMock.loadModel.mockResolvedValue([
+      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+    ]);
+
+    const [viewModel, , systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Campus;
+    viewModel.hasScored.Value = true;
+    viewModel.isHighlighted.Value = true;
+
+    await systemUnderTest.setupLearningElement();
+
+    viewModel.isHighlighted.Value = false;
+
+    expect(scenePresenterMock.HighlightLayer.removeMesh).toHaveBeenCalledWith(
+      viewModel.modelMeshes[0]
+    );
+    expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
+      viewModel.modelMeshes[0],
+      Color3.Green()
+    );
+  });
+
   test("async setup calls scene presenter to load model and icon", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
