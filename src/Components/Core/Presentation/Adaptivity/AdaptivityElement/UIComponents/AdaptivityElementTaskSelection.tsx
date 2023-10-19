@@ -38,7 +38,7 @@ export default function AdaptivityElementTaskSelection({
 }: {
   tasks: AdaptivityTask[];
   setHeaderText: (headerText: string) => void;
-  onSelectTask: (taskID: number) => void;
+  onSelectTask: (selectedTask: AdaptivityTask) => void;
 }) {
   const [taskButtons, setTaskButtons] = useState<JSX.Element[]>([]);
 
@@ -78,7 +78,7 @@ export default function AdaptivityElementTaskSelection({
             <StyledButton
               shape="freefloatcenter"
               className="w-full max-w-2xl"
-              onClick={() => onSelectTask(task.taskID)}
+              onClick={() => onSelectTask(task)}
             >
               <div className="flex items-center justify-between w-full h-full align-center">
                 <AdaptivityElementDifficultyStars

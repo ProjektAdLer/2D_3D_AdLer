@@ -46,35 +46,34 @@ describe("AdaptivityElementTaskSelection", () => {
 
   test("task button calls onSelectTask callback when clicked", () => {
     const onSelectTaskMock = jest.fn();
+    const task = {
+      taskID: 42,
+      taskTitle: "testTaskTitle",
+      isCompleted: false,
+      isRequired: false,
+      requiredDifficulty: 0,
+      questions: [
+        {
+          questionID: 0,
+          questionText: "testQuestionText",
+          isMultipleChoice: false,
+          difficulty: 0,
+          isCompleted: false,
+          isRequired: false,
+          hints: [],
+          questionAnswers: [
+            {
+              answerIndex: 0,
+              answerText: "testAnswerText",
+              isSelected: false,
+            },
+          ],
+        },
+      ],
+    };
     const { getByText } = render(
       <AdaptivityElementTaskSelection
-        tasks={[
-          {
-            taskID: 42,
-            taskTitle: "testTaskTitle",
-            isCompleted: false,
-            isRequired: false,
-            requiredDifficulty: 0,
-            questions: [
-              {
-                questionID: 0,
-                questionText: "testQuestionText",
-                isMultipleChoice: false,
-                difficulty: 0,
-                isCompleted: false,
-                isRequired: false,
-                hints: [],
-                questionAnswers: [
-                  {
-                    answerIndex: 0,
-                    answerText: "testAnswerText",
-                    isSelected: false,
-                  },
-                ],
-              },
-            ],
-          },
-        ]}
+        tasks={[task]}
         setHeaderText={() => {}}
         onSelectTask={onSelectTaskMock}
       />
@@ -83,7 +82,7 @@ describe("AdaptivityElementTaskSelection", () => {
     getByText("testTaskTitle").click();
 
     expect(onSelectTaskMock).toHaveBeenCalledTimes(1);
-    expect(onSelectTaskMock).toHaveBeenCalledWith(42);
+    expect(onSelectTaskMock).toHaveBeenCalledWith(task);
   });
 
   test("getAdaptivityQuestionStarState returns state Empty for undefined question", () => {

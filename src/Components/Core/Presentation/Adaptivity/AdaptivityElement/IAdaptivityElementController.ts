@@ -1,8 +1,17 @@
+import {
+  AdaptivityHint,
+  AdaptivityQuestion,
+  AdaptivityTask,
+} from "./AdaptivityElementViewModel";
+
 export default interface IAdaptivityElementController {
   closeModal(): void;
-  selectTask(taskID: number): void;
-  selectQuestion(questionID: number): void;
-  selectHint(questionID: number, hintID: number): void;
+  selectTask(selectedTask: AdaptivityTask): void;
+  selectQuestion(selectedQuestion: AdaptivityQuestion): void;
+  selectHint(
+    selectedHint: AdaptivityHint,
+    associatedQuestion: AdaptivityQuestion
+  ): void;
   submitSelection(): void;
   closeFeedback(): void;
   closeAnswerSelection(): void;

@@ -102,6 +102,22 @@ describe("AdaptivityElementQuestionSelection", () => {
 
   test("onSelectQuestion button calls onSelectQuestion callback when clicked", () => {
     const onSelectQuestionMock = jest.fn();
+    const question = {
+      questionID: 42,
+      questionText: "testQuestionText",
+      isMultipleChoice: false,
+      difficulty: 0,
+      isCompleted: false,
+      isRequired: false,
+      questionAnswers: [
+        {
+          answerIndex: 0,
+          answerText: "testAnswerText",
+          isSelected: false,
+        },
+      ],
+      hints: [],
+    };
     const { getByText } = render(
       <AdaptivityElementQuestionSelection
         selectedTask={{
@@ -110,24 +126,7 @@ describe("AdaptivityElementQuestionSelection", () => {
           isCompleted: false,
           isRequired: false,
           requiredDifficulty: 0,
-          questions: [
-            {
-              questionID: 42,
-              questionText: "testQuestionText",
-              isMultipleChoice: false,
-              difficulty: 0,
-              isCompleted: false,
-              isRequired: false,
-              questionAnswers: [
-                {
-                  answerIndex: 0,
-                  answerText: "testAnswerText",
-                  isSelected: false,
-                },
-              ],
-              hints: [],
-            },
-          ],
+          questions: [question],
         }}
         setHeaderText={() => {}}
         onSelectQuestion={onSelectQuestionMock}
@@ -137,11 +136,35 @@ describe("AdaptivityElementQuestionSelection", () => {
     getByText("Leicht").click();
 
     expect(onSelectQuestionMock).toHaveBeenCalledTimes(1);
-    expect(onSelectQuestionMock).toHaveBeenCalledWith(42);
+    expect(onSelectQuestionMock).toHaveBeenCalledWith(question);
   });
 
   test("onSelectHint button calls onSelectHint callback when clicked", () => {
     const onSelectHintMock = jest.fn();
+    const hint = {
+      hintID: 0,
+      showOnIsWrong: true,
+      hintAction: {
+        hintActionData: "testHintActionData",
+        hintActionType: AdaptivityElementActionTypes.CommentAction,
+      },
+    };
+    const question = {
+      questionID: 42,
+      questionText: "testQuestionText",
+      isMultipleChoice: false,
+      difficulty: 0,
+      isCompleted: false,
+      isRequired: false,
+      questionAnswers: [
+        {
+          answerIndex: 0,
+          answerText: "testAnswerText",
+          isSelected: false,
+        },
+      ],
+      hints: [hint],
+    };
     const { getByText } = render(
       <AdaptivityElementQuestionSelection
         selectedTask={{
@@ -150,33 +173,7 @@ describe("AdaptivityElementQuestionSelection", () => {
           isCompleted: false,
           isRequired: false,
           requiredDifficulty: 0,
-          questions: [
-            {
-              questionID: 42,
-              questionText: "testQuestionText",
-              isMultipleChoice: false,
-              difficulty: 0,
-              isCompleted: false,
-              isRequired: false,
-              questionAnswers: [
-                {
-                  answerIndex: 0,
-                  answerText: "testAnswerText",
-                  isSelected: false,
-                },
-              ],
-              hints: [
-                {
-                  hintID: 0,
-                  showOnIsWrong: true,
-                  hintAction: {
-                    hintActionData: "testHintActionData",
-                    hintActionType: AdaptivityElementActionTypes.CommentAction,
-                  },
-                },
-              ],
-            },
-          ],
+          questions: [question],
         }}
         setHeaderText={() => {}}
         onSelectQuestion={() => {}}
@@ -186,6 +183,6 @@ describe("AdaptivityElementQuestionSelection", () => {
     getByText("Hinweis").click();
 
     expect(onSelectHintMock).toHaveBeenCalledTimes(1);
-    expect(onSelectHintMock).toHaveBeenCalledWith(42, 0);
+    expect(onSelectHintMock).toHaveBeenCalledWith(hint, question);
   });
 });

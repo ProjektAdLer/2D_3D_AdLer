@@ -1,5 +1,9 @@
 import { useEffect } from "react";
-import { AdaptivityTask } from "../AdaptivityElementViewModel";
+import {
+  AdaptivityHint,
+  AdaptivityQuestion,
+  AdaptivityTask,
+} from "../AdaptivityElementViewModel";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
@@ -15,8 +19,11 @@ export default function AdaptivityElementQuestionSelection({
 }: {
   selectedTask: AdaptivityTask;
   setHeaderText: (headerText: string) => void;
-  onSelectQuestion: (questionID: number) => void;
-  onSelectHint: (questionID: number, hintID: number) => void;
+  onSelectQuestion: (selectedQuestion: AdaptivityQuestion) => void;
+  onSelectHint: (
+    selectedHint: AdaptivityHint,
+    associatedQuestion: AdaptivityQuestion
+  ) => void;
 }) {
   useEffect(() => {
     setHeaderText(
@@ -42,7 +49,7 @@ export default function AdaptivityElementQuestionSelection({
             <StyledButton
               shape="freefloatcenter"
               className="w-1/4"
-              onClick={() => onSelectQuestion(question.questionID)}
+              onClick={() => onSelectQuestion(question)}
             >
               <div className="flex items-center justify-between w-full h-full align-center">
                 {question.isRequired && (
@@ -99,9 +106,7 @@ export default function AdaptivityElementQuestionSelection({
                       shape="freefloatcenter"
                       className="w-1/4"
                       key={"hint-" + hint.hintID}
-                      onClick={() =>
-                        onSelectHint(question.questionID, hint.hintID)
-                      }
+                      onClick={() => onSelectHint(hint, question)}
                     >
                       Hinweis
                     </StyledButton>
