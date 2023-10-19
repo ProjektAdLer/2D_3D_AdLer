@@ -165,4 +165,20 @@ describe("AdaptivityElementController", () => {
 
     expect(viewModel.currentQuestion.Value).toBe(null);
   });
+
+  test("showFooterTooltip sets showFooterTooltip to true", () => {
+    viewModel.showFooterTooltip.Value = false;
+
+    systemUnderTest.showFooterTooltip();
+
+    expect(viewModel.showFooterTooltip.Value).toBeTruthy();
+  });
+
+  test("hideFooterTooltip sets showFooterTooltip to false", () => {
+    viewModel.showFooterTooltip.Value = true;
+
+    systemUnderTest.hideFooterTooltip();
+
+    expect(viewModel.showFooterTooltip.Value).toBeFalsy();
+  });
 });

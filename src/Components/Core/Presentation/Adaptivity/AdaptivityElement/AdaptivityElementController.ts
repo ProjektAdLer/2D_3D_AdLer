@@ -105,6 +105,7 @@ export default class AdaptivityElementController
   showFooterTooltip(): void {
     this.viewModel.showFooterTooltip.Value = true;
   }
+
   @bind
   hideFooterTooltip(): void {
     this.viewModel.showFooterTooltip.Value = false;
