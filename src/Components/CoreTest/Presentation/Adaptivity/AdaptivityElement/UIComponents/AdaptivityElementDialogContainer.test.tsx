@@ -46,49 +46,48 @@ describe("AdaptivityElementDialogContainer", () => {
 
   test("should render", () => {
     viewModel.isOpen.Value = true;
-    const content: AdaptivityElementContent = {
-      elementName: "testName",
-      introText: "testIntroText",
-      tasks: [
+    const question = {
+      questionID: 0,
+      questionText: "testQuestionText",
+      isMultipleChoice: false,
+      isRequired: false,
+      isCompleted: false,
+      difficulty: 0,
+      questionAnswers: [
         {
-          taskID: 0,
-          taskTitle: "testTaskTitle",
-          isCompleted: false,
-          isRequired: false,
-          requiredDifficulty: 0,
-          questions: [
-            {
-              questionID: 0,
-              questionText: "testQuestionText",
-              isMultipleChoice: false,
-              isRequired: false,
-              isCompleted: false,
-              difficulty: 0,
-              questionAnswers: [
-                {
-                  answerIndex: 0,
-                  answerText: "testAnswerText",
-                  isSelected: false,
-                },
-              ],
-              hints: [
-                {
-                  hintID: 0,
-                  hintAction: {
-                    hintActionData: "testHintActionData",
-                    hintActionType: AdaptivityElementActionTypes.CommentAction,
-                  },
-                  showOnIsWrong: false,
-                },
-              ],
-            },
-          ],
+          answerIndex: 0,
+          answerText: "testAnswerText",
+          isSelected: false,
+        },
+      ],
+      hints: [
+        {
+          hintID: 0,
+          hintAction: {
+            hintActionData: "testHintActionData",
+            hintActionType: AdaptivityElementActionTypes.CommentAction,
+          },
+          showOnIsWrong: false,
         },
       ],
     };
+    const task = {
+      taskID: 0,
+      taskTitle: "testTaskTitle",
+      isCompleted: false,
+      isRequired: false,
+      requiredDifficulty: 0,
+      questions: [question],
+    };
+
+    const content: AdaptivityElementContent = {
+      elementName: "testName",
+      introText: "testIntroText",
+      tasks: [task],
+    };
     viewModel.contentData.Value = content;
-    viewModel.currentTaskID.Value = 0;
-    viewModel.currentQuestionID.Value = 0;
+    viewModel.currentTask.Value = task;
+    viewModel.currentQuestion.Value = question;
 
     const { container } = render(<AdaptivityElementDialogContainer />);
     expect(container).toMatchSnapshot();

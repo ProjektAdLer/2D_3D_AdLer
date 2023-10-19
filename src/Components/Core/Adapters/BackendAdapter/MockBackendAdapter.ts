@@ -286,8 +286,8 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
-                  $type: "CommentAction",
-                  commentText: "Das war leider falsch, versuch es doch nochmal",
+                  $type: "AdaptivityReferenceAction",
+                  elementId: 1,
                 },
               },
             ],

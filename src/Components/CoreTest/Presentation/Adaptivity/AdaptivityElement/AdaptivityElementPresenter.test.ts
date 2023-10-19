@@ -61,34 +61,32 @@ describe("AdaptivityElementPresenter", () => {
   ])(
     "createFooterBreadcrumbs returns the correct string of names with a current question difficulty of %s",
     (testDifficulty) => {
+      const question = {
+        questionID: 1,
+        questionText: "",
+        questionAnswers: [],
+        isRequired: false,
+        isCompleted: false,
+        difficulty: testDifficulty,
+        isMultipleChoice: false,
+        hints: [],
+      };
+      const task = {
+        taskID: 1,
+        taskTitle: "TestTask",
+        questions: [question],
+        isCompleted: false,
+        isRequired: false,
+        requiredDifficulty: testDifficulty,
+      };
       const contentData: AdaptivityElementContent = {
         elementName: "TestElement",
         introText: "",
-        tasks: [
-          {
-            taskID: 1,
-            taskTitle: "TestTask",
-            questions: [
-              {
-                questionID: 1,
-                questionText: "",
-                questionAnswers: [],
-                isRequired: false,
-                isCompleted: false,
-                difficulty: testDifficulty,
-                isMultipleChoice: false,
-                hints: [],
-              },
-            ],
-            isCompleted: false,
-            isRequired: false,
-            requiredDifficulty: testDifficulty,
-          },
-        ],
+        tasks: [task],
       };
       systemUnderTest["viewModel"].contentData.Value = contentData;
-      systemUnderTest["viewModel"].currentTaskID.Value = 1;
-      systemUnderTest["viewModel"].currentQuestionID.Value = 1;
+      systemUnderTest["viewModel"].currentTask.Value = task;
+      systemUnderTest["viewModel"].currentQuestion.Value = question;
 
       systemUnderTest["setFooterBreadcrumbs"]();
 
@@ -128,50 +126,39 @@ describe("AdaptivityElementPresenter", () => {
   );
 
   test("onAdaptivityElementAnswerEvaluated resets isSelected for all answers of the current question", () => {
+    const question = {
+      questionID: 1,
+      questionText: "",
+      questionAnswers: [
+        {
+          answerIndex: 1,
+          answerText: "",
+          isSelected: true,
+        },
+      ],
+      isRequired: false,
+      isCompleted: false,
+      difficulty: 0,
+      isMultipleChoice: false,
+      hints: [],
+    };
+    const task = {
+      taskID: 1,
+      taskTitle: "TestTask",
+      questions: [question],
+      isCompleted: false,
+      isRequired: false,
+      requiredDifficulty: 0,
+    };
     const contentData: AdaptivityElementContent = {
       elementName: "TestElement",
       introText: "",
-      tasks: [
-        {
-          taskID: 1,
-          taskTitle: "TestTask",
-          questions: [
-            {
-              questionID: 1,
-              questionText: "",
-              questionAnswers: [
-                {
-                  answerIndex: 0,
-                  answerText: "",
-                  isSelected: true,
-                },
-                {
-                  answerIndex: 1,
-                  answerText: "",
-                  isSelected: true,
-                },
-                {
-                  answerIndex: 2,
-                  answerText: "",
-                  isSelected: false,
-                },
-              ],
-              isRequired: false,
-              isCompleted: false,
-              difficulty: 0,
-              isMultipleChoice: false,
-              hints: [],
-            },
-          ],
-          isCompleted: false,
-          isRequired: false,
-          requiredDifficulty: 0,
-        },
-      ],
+      tasks: [task],
     };
+
     systemUnderTest["viewModel"].contentData.Value = contentData;
-    systemUnderTest["viewModel"].currentTaskID.Value = 1;
-    systemUnderTest["viewModel"].currentQuestionID.Value = 1;
+    systemUnderTest["viewModel"].currentTask.Value = task;
+    systemUnderTest["viewModel"].currentQuestion.Value = question;
     systemUnderTest["viewModel"].showFeedback.Value = false;
 
     systemUnderTest.onAdaptivityElementAnswerEvaluated({
@@ -195,34 +182,33 @@ describe("AdaptivityElementPresenter", () => {
   });
 
   test("onAdaptivityElementAnswerEvaluated sets showFeedback to true", () => {
+    const question = {
+      questionID: 1,
+      questionText: "",
+      questionAnswers: [],
+      isRequired: false,
+      isCompleted: false,
+      difficulty: 0,
+      isMultipleChoice: false,
+      hints: [],
+    };
+    const task = {
+      taskID: 1,
+      taskTitle: "TestTask",
+      questions: [question],
+      isCompleted: false,
+      isRequired: false,
+      requiredDifficulty: 0,
+    };
     const contentData: AdaptivityElementContent = {
       elementName: "TestElement",
       introText: "",
-      tasks: [
-        {
-          taskID: 1,
-          taskTitle: "TestTask",
-          questions: [
-            {
-              questionID: 1,
-              questionText: "",
-              questionAnswers: [],
-              isRequired: false,
-              isCompleted: false,
-              difficulty: 0,
-              isMultipleChoice: false,
-              hints: [],
-            },
-          ],
-          isCompleted: false,
-          isRequired: false,
-          requiredDifficulty: 0,
-        },
-      ],
+      tasks: [task],
     };
+
     systemUnderTest["viewModel"].contentData.Value = contentData;
-    systemUnderTest["viewModel"].currentTaskID.Value = 1;
-    systemUnderTest["viewModel"].currentQuestionID.Value = 1;
+    systemUnderTest["viewModel"].currentTask.Value = task;
+    systemUnderTest["viewModel"].currentQuestion.Value = question;
     systemUnderTest["viewModel"].showFeedback.Value = false;
 
     systemUnderTest.onAdaptivityElementAnswerEvaluated({

@@ -8,6 +8,44 @@ import ISubmitAdaptivityElementSelectionUseCase from "../../../../Core/Applicati
 const submitSelectionUseCaseMock =
   mock<ISubmitAdaptivityElementSelectionUseCase>();
 
+const mockHint = {
+  hintID: 1,
+  showOnIsWrong: false,
+  hintAction: {
+    hintActionType: 1,
+    hintActionData: "TestHintActionData",
+  },
+};
+const mockQuestion = {
+  questionID: 1,
+  questionText: "TestQuestionText",
+  questionAnswers: [
+    {
+      answerIndex: 1,
+      answerText: "TestAnswerText",
+      isSelected: false,
+    },
+    {
+      answerIndex: 3,
+      answerText: "TestAnswerText",
+      isSelected: true,
+    },
+  ],
+  isRequired: false,
+  isCompleted: false,
+  difficulty: 1,
+  isMultipleChoice: false,
+  hints: [mockHint],
+};
+const mockTask = {
+  taskID: 1,
+  taskTitle: "TestTaskTitle",
+  questions: [mockQuestion],
+  isCompleted: false,
+  requiredDifficulty: 1,
+  isRequired: false,
+};
+
 describe("AdaptivityElementController", () => {
   let systemUnderTest: AdaptivityElementController;
   let viewModel: AdaptivityElementViewModel;
@@ -36,95 +74,73 @@ describe("AdaptivityElementController", () => {
   });
 
   test("back allways resets currentQuestionID and showFeedback in viewmodel", () => {
-    viewModel.currentTaskID.Value = 1;
-    viewModel.currentQuestionID.Value = 1;
+    viewModel.currentTask.Value = mockTask;
+    viewModel.currentQuestion.Value = mockQuestion;
     viewModel.showFeedback.Value = true;
 
     systemUnderTest.back();
 
-    expect(viewModel.currentTaskID.Value).toBe(1);
-    expect(viewModel.currentQuestionID.Value).toBe(null);
+    expect(viewModel.currentTask.Value).toBe(mockTask);
+    expect(viewModel.currentQuestion.Value).toBe(null);
     expect(viewModel.showFeedback.Value).toBeFalsy();
   });
 
   test("back resets currentTaskID when currentQuestionID is null", () => {
-    viewModel.currentTaskID.Value = 1;
+    viewModel.currentTask.Value = mockTask;
 
-    viewModel.currentQuestionID.Value = null;
+    viewModel.currentQuestion.Value = null;
 
     systemUnderTest.back();
 
-    expect(viewModel.currentTaskID.Value).toBe(null);
+    expect(viewModel.currentTask.Value).toBe(null);
   });
 
   test("selectTask sets currentTaskID in viewModel", () => {
-    systemUnderTest.selectTask(1);
-    expect(viewModel.currentTaskID.Value).toBe(1);
+    systemUnderTest.selectTask(mockTask);
+    expect(viewModel.currentTask.Value).toBe(mockTask);
   });
 
   test("selectQuestion sets currentQuestionID in viewModel", () => {
-    systemUnderTest.selectQuestion(1);
-    expect(viewModel.currentQuestionID.Value).toBe(1);
+    systemUnderTest.selectQuestion(mockQuestion);
+    expect(viewModel.currentQuestion.Value).toBe(mockQuestion);
   });
 
   test("selectHint sets currentQuestionID and selectedHintID in viewModel", () => {
-    systemUnderTest.selectHint(42, 43);
-    expect(viewModel.currentQuestionID.Value).toBe(42);
-    expect(viewModel.selectedHintID.Value).toBe(43);
+    systemUnderTest.selectHint(mockHint, mockQuestion);
+    expect(viewModel.currentQuestion.Value).toBe(mockQuestion);
+    expect(viewModel.selectedHint.Value).toBe(mockHint);
   });
 
   test("submitSelection calls SubmitSelectionUseCase", () => {
     viewModel.elementID.Value = 42;
-    viewModel.currentTaskID.Value = 42;
-    viewModel.currentQuestionID.Value = 42;
-    viewModel.contentData.Value = {
-      tasks: [
-        {
-          taskID: 42,
-          questions: [
-            {
-              questionID: 42,
-              questionAnswers: [
-                {
-                  answerIndex: 1,
-                  isSelected: true,
-                },
-                {
-                  answerIndex: 2,
-                  isSelected: false,
-                },
-                {
-                  answerIndex: 3,
-                  isSelected: true,
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    };
+    viewModel.currentTask.Value = mockTask;
+    viewModel.currentQuestion.Value = mockQuestion;
 
     systemUnderTest.submitSelection();
 
     expect(submitSelectionUseCaseMock.executeAsync).toBeCalledWith({
       elementID: 42,
-      taskID: 42,
-      questionID: 42,
-      selectedAnswerIDs: [1, 3],
+      taskID: 1,
+      questionID: 1,
+      selectedAnswerIDs: [3],
     });
   });
 
   test("closeFeedback sets showFeedback to false and currentQuestionID to null", () => {
     viewModel.showFeedback.Value = true;
-    viewModel.currentQuestionID.Value = 1;
+    viewModel.currentQuestion.Value = mockQuestion;
+
     systemUnderTest.closeFeedback();
+
     expect(viewModel.showFeedback.Value).toBeFalsy();
-    expect(viewModel.currentQuestionID.Value).toBe(null);
+    expect(viewModel.currentQuestion.Value).toBe(null);
   });
 
   test("closeAnswerSelection sets currentQuestionID to null", () => {
-    viewModel.currentQuestionID.Value = 1;
+    viewModel.currentQuestion.Value = mockQuestion;
+
     systemUnderTest.closeAnswerSelection();
-    expect(viewModel.currentQuestionID.Value).toBe(null);
+
+    expect(viewModel.currentQuestion.Value).toBe(null);
   });
 });
