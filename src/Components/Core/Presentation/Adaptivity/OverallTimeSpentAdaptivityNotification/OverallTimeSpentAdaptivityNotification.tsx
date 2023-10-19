@@ -45,9 +45,6 @@ export default function OverallTimeSpentAdaptivityNotification({
             x
           </div>
         </StyledButton>
-        <StyledButton className="fixed lg:hidden left-2 bottom-2">
-          <img src={pauseIcon} className="h-fit" alt="" />
-        </StyledButton>
       </div>
     );
 

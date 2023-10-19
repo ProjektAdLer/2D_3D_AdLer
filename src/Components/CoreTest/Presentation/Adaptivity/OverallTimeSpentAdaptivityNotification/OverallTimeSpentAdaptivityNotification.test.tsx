@@ -1,4 +1,4 @@
-import { getByRole, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import OverallTimeSpentAdaptivityNotification from "../../../../Core/Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotification";
 import useBuilderMock from "../../React/ReactRelated/CustomHooks/useBuilder/useBuilderMock";
@@ -60,6 +60,43 @@ describe("OverallTimeSpentAdaptivityNotification", () => {
 
     expect(longBreak).toBeTruthy();
   });
+  test("should render small button when showMinimized is true", () => {
+    useBuilderMock([viewModel, mockController]);
+    viewModel.showModal.Value = true;
+    viewModel.breakType.Value =
+      OverallTimeSpentAdaptivityNotificationBreakType.Long;
+    viewModel.showMinimizedModal.Value = true;
+
+    render(<OverallTimeSpentAdaptivityNotification />);
+
+    expect(screen.getByText("Zeit für eine Pause!")).toBeInTheDocument();
+  });
+  test("should call controller when clicked in minimized form", () => {
+    useBuilderMock([viewModel, mockController]);
+    viewModel.showModal.Value = true;
+    viewModel.breakType.Value =
+      OverallTimeSpentAdaptivityNotificationBreakType.Long;
+    viewModel.showMinimizedModal.Value = true;
+
+    render(<OverallTimeSpentAdaptivityNotification />);
+    fireEvent.click(screen.getByText("Zeit für eine Pause!"));
+
+    expect(
+      mockController.minimizeOrMaximizeBreakNotification
+    ).toHaveBeenCalledTimes(1);
+  });
+  test("should call controller when closed in minimized form", () => {
+    useBuilderMock([viewModel, mockController]);
+    viewModel.showModal.Value = true;
+    viewModel.breakType.Value =
+      OverallTimeSpentAdaptivityNotificationBreakType.Long;
+    viewModel.showMinimizedModal.Value = true;
+
+    render(<OverallTimeSpentAdaptivityNotification />);
+    fireEvent.click(screen.getByText("x"));
+
+    expect(mockController.closeBreakNotification).toHaveBeenCalledTimes(1);
+  });
 
   test("click on close button calls closedBreakNotification on controller", () => {
     useBuilderMock([viewModel, mockController]);
@@ -72,6 +109,8 @@ describe("OverallTimeSpentAdaptivityNotification", () => {
 
     closeButton.click();
 
-    expect(mockController.closeBreakNotification).toHaveBeenCalledTimes(1);
+    expect(
+      mockController.minimizeOrMaximizeBreakNotification
+    ).toHaveBeenCalledTimes(1);
   });
 });
