@@ -1,5 +1,6 @@
 import Observable from "../../../../../Lib/Observable";
 import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
+import adaptivityPlaceholderImage from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/pausenhinweis1-slide1_AD_without.svg";
 
 export default class OverallTimeSpentAdaptivityNotificationViewModel {
   showModal: Observable<boolean> = new Observable<boolean>(false);
@@ -11,12 +12,13 @@ export default class OverallTimeSpentAdaptivityNotificationViewModel {
 
   //shortBreakContentPool structure: title, content, source
   shortBreakContentPool: [string, string, string][] = [
-    [
-      "Why not play a game of AoE2?",
-      "Here are a bunch of reasons why playing right now is a good idea. \n Reason 1. \n Reason 2. \n Reason 3.",
-      "https://media.tenor.com/xTyVDYFg_fsAAAAC/lizard-hehe.gif",
-    ],
-    ["title2", "Content2", ""],
+    // [
+    //   "Why not play a game of AoE2?",
+    //   "Here are a bunch of reasons why playing right now is a good idea. \n Reason 1. \n Reason 2. \n Reason 3.",
+    //   "https://media.tenor.com/xTyVDYFg_fsAAAAC/lizard-hehe.gif",
+    // ],
+    // ["title2", "Content2", ""],
+    ["", "", adaptivityPlaceholderImage],
   ];
 
   //mediumBreakContentPool structure: title, content, source

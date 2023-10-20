@@ -83,7 +83,7 @@ function ShortBreakContent(
     Math.random() * viewModel.shortBreakContentPool.length
   );
   return (
-    <div data-testid="short-break" className="max-w-2xl px-4 pb-4">
+    <div data-testid="short-break" className="px-4 pb-4 w-[60vw] z-90">
       {/* title */}
       <p>{viewModel.shortBreakContentPool[randomIndex][0]}</p>
       {/* content */}
@@ -93,13 +93,19 @@ function ShortBreakContent(
       <br />
       {/* media */}
       {viewModel.shortBreakContentPool[randomIndex][2] !== "" && (
-        <iframe
-          className="w-full rounded-lg aspect-video"
+        // <iframe
+        //   className="w-full rounded-lg aspect-video"
+        //   // src={viewModel.shortBreakContentPool[randomIndex][2]}
+        //   src={require(viewModel.shortBreakContentPool[randomIndex][2])}
+        //   title="Break item iframe"
+        //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        //   allowFullScreen
+        // ></iframe>
+        <img
+          className="w-full rounded-lg"
           src={viewModel.shortBreakContentPool[randomIndex][2]}
-          title="Break Item Iframe"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
+          title="Break item image"
+        ></img>
       )}
     </div>
   );

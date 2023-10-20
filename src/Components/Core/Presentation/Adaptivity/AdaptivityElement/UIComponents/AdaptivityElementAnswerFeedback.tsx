@@ -15,10 +15,17 @@ export default function AdaptivityElementAnswerFeedback({
   }, [isCorrect, setHeaderText]);
 
   return (
-    <div className="flex justify-end w-full h-full">
-      <StyledButton shape="freefloatcenter" onClick={closeFeedback}>
-        Weiter
-      </StyledButton>
+    <div className="flex w-full h-full my-4">
+      <div className="w-1/2">
+        <p className="pl-4 font-bold">
+          Glückwunsch! Diese Antwort war richtig!
+        </p>
+      </div>
+      <div className="flex justify-end w-1/2">
+        <StyledButton shape="freefloatcenter" onClick={closeFeedback}>
+          Weiter
+        </StyledButton>
+      </div>
     </div>
   );
 }
