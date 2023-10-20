@@ -1,6 +1,6 @@
 import Observable from "../../../../../Lib/Observable";
 import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
-import adaptivityPlaceholderImage from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/pausenhinweis1-slide1_AD_without.svg";
+import adaptivityPlaceholderImage from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/pausenhinweis1-slide1_AD_ohneAnschnitt.png";
 
 export default class OverallTimeSpentAdaptivityNotificationViewModel {
   showModal: Observable<boolean> = new Observable<boolean>(false);

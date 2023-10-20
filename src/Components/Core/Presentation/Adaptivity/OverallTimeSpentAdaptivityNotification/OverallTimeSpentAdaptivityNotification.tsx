@@ -83,7 +83,10 @@ function ShortBreakContent(
     Math.random() * viewModel.shortBreakContentPool.length
   );
   return (
-    <div data-testid="short-break" className="px-4 pb-4 w-[60vw] z-90">
+    <div
+      data-testid="short-break"
+      className="pb-4 w-[90vw] portrait:w-[99vw] lg:w-[60vw]"
+    >
       {/* title */}
       <p>{viewModel.shortBreakContentPool[randomIndex][0]}</p>
       {/* content */}
@@ -105,6 +108,7 @@ function ShortBreakContent(
           className="w-full rounded-lg"
           src={viewModel.shortBreakContentPool[randomIndex][2]}
           title="Break item image"
+          alt=""
         ></img>
       )}
     </div>
