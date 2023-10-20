@@ -19,8 +19,9 @@ describe("AbstractPort", () => {
 
     CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
   });
+
   beforeEach(() => {
-    systemUnderTest = new TestPort();
+    systemUnderTest = CoreDIContainer.resolve(TestPort);
   });
 
   afterAll(() => {
@@ -34,7 +35,7 @@ describe("AbstractPort", () => {
     expect(systemUnderTest["adapters"]).toContain(testAdapter);
   });
 
-  test.skip("registerAdapter logs a warning if an adapter is already registered and doesn't adds it again", () => {
+  test("registerAdapter logs a warning if an adapter is already registered and doesn't adds it again", () => {
     systemUnderTest.registerAdapter(testAdapter);
     systemUnderTest.registerAdapter(testAdapter);
 
