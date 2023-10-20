@@ -17,7 +17,9 @@ export default function AdaptivityElementHint({
     <>
       {hint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.CommentAction && (
-        <div>{hint.hintAction.hintActionData}</div>
+        <div className="pl-4 my-4 font-bold">
+          {hint.hintAction.hintActionData}
+        </div>
       )}
       {hint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.ContentAction && null}
