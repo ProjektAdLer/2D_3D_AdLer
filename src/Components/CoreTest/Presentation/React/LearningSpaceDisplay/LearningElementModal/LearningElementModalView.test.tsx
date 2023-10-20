@@ -12,6 +12,7 @@ fakeModel.isOpen.Value = true;
 fakeModel.id.Value = 123;
 fakeModel.type.Value = "text";
 fakeModel.parentWorldID.Value = 456;
+fakeModel.isScoreable.Value = true;
 
 const fakeController = mock<LearningElementModalController>();
 

@@ -44,6 +44,7 @@ describe("LearningElementModalController", () => {
   });
 
   test("should handle a XAPI call with a statement", async () => {
+    viewModel.isScoreable.Value = true;
     await systemUnderTest.h5pEventCalled({
       data: {
         statement: {
@@ -70,6 +71,7 @@ describe("LearningElementModalController", () => {
   });
 
   test("should not call useCase with invalid data", async () => {
+    viewModel.isScoreable.Value = true;
     await systemUnderTest.h5pEventCalled({
       data: {},
     });
@@ -78,6 +80,7 @@ describe("LearningElementModalController", () => {
   });
 
   test("should not call usecase with invalid h5p verb", async () => {
+    viewModel.isScoreable.Value = true;
     await systemUnderTest.h5pEventCalled({
       data: {
         statement: {
