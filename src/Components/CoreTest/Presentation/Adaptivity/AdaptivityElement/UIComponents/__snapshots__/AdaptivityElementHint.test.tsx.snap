@@ -2,7 +2,9 @@
 
 exports[`AdaptivityElementHint should render CommentAction 1`] = `
 <div>
-  <div>
+  <div
+    class="pl-4 my-4 font-bold"
+  >
     test
   </div>
 </div>
