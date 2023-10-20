@@ -4,20 +4,40 @@ import AdaptivityElementHint from "../../../../../Core/Presentation/Adaptivity/A
 import { AdaptivityElementActionTypes } from "../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 
 describe("AdaptivityElementHint", () => {
-  test("should render", () => {
+  test("should render CommentAction", () => {
     const { container } = render(
       <AdaptivityElementHint
         hint={{
           hintID: 0,
           hintAction: {
-            hintActionData: "testHintActionData",
             hintActionType: AdaptivityElementActionTypes.CommentAction,
+            textData: "test",
           },
           showOnIsWrong: true,
         }}
         setHeaderText={() => {}}
       />
     );
+
+    expect(container).toMatchSnapshot();
+  });
+
+  test("should render ReferenceAction", () => {
+    const { container } = render(
+      <AdaptivityElementHint
+        hint={{
+          hintID: 0,
+          hintAction: {
+            hintActionType: AdaptivityElementActionTypes.ReferenceAction,
+            textData: "test",
+            idData: 0,
+          },
+          showOnIsWrong: true,
+        }}
+        setHeaderText={() => {}}
+      />
+    );
+
     expect(container).toMatchSnapshot();
   });
 });

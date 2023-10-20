@@ -42,7 +42,7 @@ export default class AdaptivityElementController
     if (
       selectedHint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.ReferenceAction &&
-      typeof selectedHint.hintAction.hintActionData === "number"
+      selectedHint.hintAction.idData !== undefined
     ) {
       // call all element presenters via port
       const learningWorldPort = CoreDIContainer.get<ILearningWorldPort>(
@@ -50,7 +50,7 @@ export default class AdaptivityElementController
       );
 
       learningWorldPort.onLearningElementHighlighted(
-        selectedHint.hintAction.hintActionData
+        selectedHint.hintAction.idData
       );
     }
 

@@ -2,7 +2,9 @@ import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import AdaptivityElementController from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementController";
-import AdaptivityElementViewModel from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
+import AdaptivityElementViewModel, {
+  AdaptivityHint,
+} from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
 import ISubmitAdaptivityElementSelectionUseCase from "../../../../Core/Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
@@ -119,12 +121,13 @@ describe("AdaptivityElementController", () => {
   });
 
   test("selectHint calls worldPort.onLearningElementHighlighted with hintActionData", () => {
-    const hint = {
+    const hint: AdaptivityHint = {
       hintID: 1,
       showOnIsWrong: false,
       hintAction: {
         hintActionType: AdaptivityElementActionTypes.ReferenceAction,
-        hintActionData: 42,
+        idData: 42,
+        textData: "TestHintActionData",
       },
     };
 

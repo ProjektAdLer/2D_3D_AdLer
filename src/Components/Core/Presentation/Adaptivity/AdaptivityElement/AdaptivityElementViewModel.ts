@@ -11,7 +11,8 @@ export interface AdaptivityAnswer {
 
 export interface AdaptivityHintAction {
   hintActionType: AdaptivityElementActionTypes;
-  hintActionData: string | number;
+  idData?: number;
+  textData?: string;
 }
 
 export interface AdaptivityHint {
