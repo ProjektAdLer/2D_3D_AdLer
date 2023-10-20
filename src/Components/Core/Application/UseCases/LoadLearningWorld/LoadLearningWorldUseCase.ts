@@ -24,6 +24,7 @@ import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import AdaptivityElementEntity from "src/Components/Core/Domain/Entities/Adaptivity/AdaptivityElementEntity";
 import { AdaptivityElementDataTO } from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementDataTO";
+import ExternalLearningElementEntity from "src/Components/Core/Domain/Entities/Adaptivity/ExternalLearningElementEntity";
 
 @injectable()
 export default class LoadLearningWorldUseCase
@@ -153,6 +154,11 @@ export default class LoadLearningWorldUseCase
       apiWorldDataResponse
     );
 
+    this.createExternalLearningElementEntities(
+      apiWorldDataResponse.externalElements,
+      worldID
+    );
+
     return worldEntity;
   }
 
@@ -215,7 +221,9 @@ export default class LoadLearningWorldUseCase
     worldStatus: LearningWorldStatusTO
   ): (LearningElementEntity | null)[] => {
     return elements.map((element) => {
-      if (element === null) return null;
+      if (element === null || element.model === undefined) {
+        return null;
+      }
 
       let newElementEntity: LearningElementEntity = {
         id: element.id,
@@ -302,5 +310,25 @@ export default class LoadLearningWorldUseCase
     worldTO = Object.assign(worldTO, structuredClone(entityToConvert));
 
     return worldTO;
+  }
+
+  private createExternalLearningElementEntities(
+    externalElements: BackendElementTO[] | undefined,
+    worldID: number
+  ) {
+    if (externalElements === undefined || externalElements.length === 0) {
+      return;
+    }
+    externalElements.forEach((element) => {
+      this.container.createEntity<ExternalLearningElementEntity>(
+        {
+          id: element.id,
+          worldID: worldID,
+          name: element.name,
+          type: element.type,
+        },
+        ExternalLearningElementEntity
+      );
+    });
   }
 }
