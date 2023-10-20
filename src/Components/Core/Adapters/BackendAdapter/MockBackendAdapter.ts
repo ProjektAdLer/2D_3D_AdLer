@@ -20,7 +20,6 @@ import { LogLevelTypes } from "../../Domain/Types/LogLevelTypes";
 import AdaptivityElementQuestionSubmissionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 import AdaptivityElementQuestionResponse from "./Types/AdaptivityElementQuestionResponse";
 import AdaptivityElementStatusResponse from "./Types/AdaptivityElementStatusResponse";
-import AdaptivtyElementStatusResponse from "./Types/AdaptivityElementStatusResponse";
 import { AdaptivityElementStatusTypes } from "../../Domain/Types/Adaptivity/AdaptivityElementStatusTypes";
 
 @injectable()
@@ -255,7 +254,7 @@ export default class MockBackendAdapter implements IBackendPort {
     userToken,
     elementID,
     worldID,
-  }: ElementDataParams): Promise<AdaptivtyElementStatusResponse> {
+  }: ElementDataParams): Promise<AdaptivityElementStatusResponse> {
     return Promise.resolve(this.fakeAdaptivityBackendData);
   }
 
@@ -957,7 +956,7 @@ export default class MockBackendAdapter implements IBackendPort {
         {
           elementId: 999,
           elementName: "Ein externes Lernelement",
-          elementCategory: "externalText",
+          elementCategory: "text",
           elementDescription: "Beschreibung des externen Lernelemenets",
           elementFileType: "text",
           elementMaxScore: 0,

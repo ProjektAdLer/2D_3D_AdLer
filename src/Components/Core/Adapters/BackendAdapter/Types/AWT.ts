@@ -45,8 +45,8 @@ export interface APIElement {
   elementGoals?: string[];
   elementCategory: string;
   elementFileType: string;
-  elementMaxScore: number;
-  elementModel: string;
+  elementMaxScore?: number;
+  elementModel?: string;
   adaptivityContent?: APIAdaptivity;
 }
 

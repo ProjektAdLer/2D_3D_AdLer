@@ -38,12 +38,20 @@ export default class BackendAdapterUtils {
 
     const spaces: BackendSpaceTO[] = this.mapSpaces(awt.world.spaces, elements);
 
+    const elementsInSpace = spaces.flatMap((space) => {
+      return space.elements.filter((e) => e !== null);
+    });
+
+    // every element that is not in a space is an external learning element
+    const difference = elements.filter((e) => !elementsInSpace.includes(e));
+
     const response: BackendWorldTO = {
       worldName: awt.world.worldName,
       goals: awt.world.worldGoals ?? [""],
       spaces: spaces,
       description: awt.world.worldDescription ?? "",
       evaluationLink: awt.world.evaluationLink ?? "",
+      externalElements: difference,
     };
 
     return response;
@@ -101,25 +109,35 @@ export default class BackendAdapterUtils {
   private static mapElements(elements: APIElement[]): BackendElementTO[] {
     return elements.flatMap((element) => {
       if (element.elementCategory in LearningElementTypes) {
-        let model: string;
-        if (isValidLearningElementModelType(element.elementModel)) {
-          model = element.elementModel;
-        } else {
-          model = LearningElementModelTypeEnums.NoElementModelTypes.None;
-        }
+        const adaptivityData = this.extractAdaptivityData(
+          element.adaptivityContent
+        );
+        const model = this.extractModelData(element.elementModel);
 
         return {
           id: element.elementId,
-          description: element.elementDescription,
+          description: element.elementDescription ?? "",
           goals: element.elementGoals ?? [""],
           name: element.elementName,
           type: element.elementCategory ?? "",
-          value: element.elementMaxScore || 0,
+          value: element.elementMaxScore ?? 0,
           model: model,
-          adaptivity: this.extractAdaptivityData(element.adaptivityContent),
+          adaptivity: adaptivityData,
         } as BackendElementTO;
       } else return [];
     });
+  }
+
+  private static extractModelData(modelData?: string): string | undefined {
+    if (modelData === undefined) {
+      return undefined;
+    }
+
+    if (isValidLearningElementModelType(modelData)) {
+      return modelData;
+    } else {
+      return LearningElementModelTypeEnums.NoElementModelTypes.None;
+    }
   }
 
   private static extractAdaptivityData(

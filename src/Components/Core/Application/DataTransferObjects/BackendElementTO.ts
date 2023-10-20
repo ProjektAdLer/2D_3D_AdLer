@@ -10,6 +10,6 @@ export default class BackendElementTO {
   description: string;
   goals: string[];
   type: LearningElementTypeStrings;
-  model: LearningElementModel;
+  model?: LearningElementModel;
   adaptivity?: AdaptivityElementDataTO;
 }
