@@ -70,7 +70,8 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
         setOpen(false);
         if (
           viewModel.type?.Value !== "h5p" &&
-          viewModel.type?.Value !== "quiz"
+          viewModel.type?.Value !== "quiz" &&
+          viewModel.isScoreable?.Value === true
         ) {
           controller.scoreLearningElement();
         }

@@ -43,7 +43,7 @@ export default class LearningElementModalController
       statement.context.contextActivities.parent[0] &&
       statement.context.contextActivities.parent[0].id;
 
-    if (isCompleted && !isChild) {
+    if (isCompleted && !isChild && this.viewModel.isScoreable.Value) {
       const xapiData = event.data.statement as XAPIData;
 
       statement.result.success =

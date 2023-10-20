@@ -7,6 +7,7 @@ export default class LearningElementModalViewModel {
   name: Observable<string> = new Observable<string>();
   type = new Observable<string>();
   filePath = new Observable<string>();
+  isScoreable = new Observable<boolean>();
 
   readonly openDelay: number = 1000;
 
