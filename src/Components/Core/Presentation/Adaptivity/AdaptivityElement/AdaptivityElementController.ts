@@ -13,6 +13,8 @@ import AdaptivityElementQuestionSubmissionTO from "../../../Application/DataTran
 import { AdaptivityElementActionTypes } from "../../../Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldPort from "../../../Application/Ports/Interfaces/ILearningWorldPort";
+import ILoadExternalLearningElementUseCase from "src/Components/Core/Application/UseCases/Adaptivity/LoadExternalLearningElementUseCase/ILoadExternalLearningElementUseCase";
+import type { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 
 export default class AdaptivityElementController
   implements IAdaptivityElementController
@@ -109,5 +111,12 @@ export default class AdaptivityElementController
   @bind
   hideFooterTooltip(): void {
     this.viewModel.showFooterTooltip.Value = false;
+  }
+
+  @bind
+  async loadExternalContentReference(elementID: ComponentID): Promise<void> {
+    await CoreDIContainer.get<ILoadExternalLearningElementUseCase>(
+      USECASE_TYPES.ILoadExternalLearningElementUseCase
+    ).executeAsync(elementID);
   }
 }

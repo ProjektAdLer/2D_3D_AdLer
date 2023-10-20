@@ -1,3 +1,4 @@
+import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import {
   AdaptivityHint,
   AdaptivityQuestion,
@@ -18,4 +19,5 @@ export default interface IAdaptivityElementController {
   back(): void;
   showFooterTooltip(): void;
   hideFooterTooltip(): void;
+  loadExternalContentReference(elementID: ComponentID): void;
 }
