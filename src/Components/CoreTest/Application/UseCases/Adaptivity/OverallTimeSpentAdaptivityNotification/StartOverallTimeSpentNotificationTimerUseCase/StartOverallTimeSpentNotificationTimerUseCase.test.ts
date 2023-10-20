@@ -42,36 +42,66 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
     );
   });
 
-  test("execute notifies NotificationPort", () => {
+  test("execute notifies NotificationPort (type: short)", () => {
     jest.useFakeTimers();
     const entity = new OverallTimeSpentAdaptivityNotificationEntity();
-    entity.notificationType =
-      OverallTimeSpentAdaptivityNotificationBreakType.Short;
+    entity.notificationIterator = 0;
 
     entitycontainermock.getEntitiesOfType.mockReturnValue([entity]);
 
     systemUnderTest.execute();
 
-    jest.advanceTimersByTime(entity.notificationType * 1000 * 60 + 1);
+    jest.advanceTimersByTime(30 * 1000 * 60 + 1);
     expect(
       notificationPortmock.displayOverallTimeSpentAdaptivityNotification
     ).toHaveBeenCalledTimes(1);
+    expect(
+      notificationPortmock.displayOverallTimeSpentAdaptivityNotification
+    ).toHaveBeenCalledWith(
+      OverallTimeSpentAdaptivityNotificationBreakType.Short
+    );
 
     jest.useRealTimers();
   });
-
-  test("execute calls internal UseCase", () => {
+  test("execute notifies NotificationPort (type: medium)", () => {
     jest.useFakeTimers();
     const entity = new OverallTimeSpentAdaptivityNotificationEntity();
-    entity.notificationType =
-      OverallTimeSpentAdaptivityNotificationBreakType.Short;
+    entity.notificationIterator = 3;
 
     entitycontainermock.getEntitiesOfType.mockReturnValue([entity]);
 
     systemUnderTest.execute();
 
-    jest.advanceTimersByTime(entity.notificationType * 1000 * 60 + 1);
-    expect(pauseUseCaseMock.internalExecute).toHaveBeenCalledTimes(1);
+    jest.advanceTimersByTime(30 * 1000 * 60 + 1);
+    expect(
+      notificationPortmock.displayOverallTimeSpentAdaptivityNotification
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      notificationPortmock.displayOverallTimeSpentAdaptivityNotification
+    ).toHaveBeenCalledWith(
+      OverallTimeSpentAdaptivityNotificationBreakType.Medium
+    );
+
+    jest.useRealTimers();
+  });
+  test("execute notifies NotificationPort (type: long)", () => {
+    jest.useFakeTimers();
+    const entity = new OverallTimeSpentAdaptivityNotificationEntity();
+    entity.notificationIterator = 7;
+
+    entitycontainermock.getEntitiesOfType.mockReturnValue([entity]);
+
+    systemUnderTest.execute();
+
+    jest.advanceTimersByTime(30 * 1000 * 60 + 1);
+    expect(
+      notificationPortmock.displayOverallTimeSpentAdaptivityNotification
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      notificationPortmock.displayOverallTimeSpentAdaptivityNotification
+    ).toHaveBeenCalledWith(
+      OverallTimeSpentAdaptivityNotificationBreakType.Long
+    );
 
     jest.useRealTimers();
   });

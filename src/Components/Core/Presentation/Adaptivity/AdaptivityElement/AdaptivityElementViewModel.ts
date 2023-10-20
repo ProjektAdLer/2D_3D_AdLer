@@ -11,7 +11,8 @@ export interface AdaptivityAnswer {
 
 export interface AdaptivityHintAction {
   hintActionType: AdaptivityElementActionTypes;
-  hintActionData: string | number;
+  idData?: number;
+  textData?: string;
 }
 
 export interface AdaptivityHint {
@@ -52,15 +53,12 @@ export default class AdaptivityElementViewModel {
   showFeedback: Observable<boolean> = new Observable<boolean>(false);
   contentData: Observable<AdaptivityElementContent> =
     new Observable<AdaptivityElementContent>();
-  currentTaskID: Observable<number | null> = new Observable<number | null>(
-    null
-  );
-  currentQuestionID: Observable<number | null> = new Observable<number | null>(
-    null
-  );
-  selectedHintID: Observable<number | null> = new Observable<number | null>(
-    null
-  );
+  currentTask: Observable<AdaptivityTask | null> =
+    new Observable<AdaptivityTask | null>(null);
+  currentQuestion: Observable<AdaptivityQuestion | null> =
+    new Observable<AdaptivityQuestion | null>(null);
+  selectedHint: Observable<AdaptivityHint | null> =
+    new Observable<AdaptivityHint | null>(null);
   footerText: Observable<string> = new Observable<string>("");
   elementID: Observable<ComponentID> = new Observable<ComponentID>();
 }

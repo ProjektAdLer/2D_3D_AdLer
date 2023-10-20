@@ -16,15 +16,19 @@ export default function AdaptivityElementHint({
   return (
     <>
       {hint.hintAction.hintActionType ===
-        AdaptivityElementActionTypes.CommentAction && (
-        <div className="pl-4 my-4 font-bold">
-          {hint.hintAction.hintActionData}
-        </div>
-      )}
+        AdaptivityElementActionTypes.CommentAction &&
+        hint.hintAction.textData !== undefined && (
+          <div>{hint.hintAction.textData}</div>
+        )}
+
       {hint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.ContentAction && null}
+
       {hint.hintAction.hintActionType ===
-        AdaptivityElementActionTypes.ReferenceAction && null}
+        AdaptivityElementActionTypes.ReferenceAction &&
+        hint.hintAction.textData !== undefined && (
+          <div>{hint.hintAction.textData}</div>
+        )}
     </>
   );
 }

@@ -2,7 +2,11 @@ import quizBackgroundVRGuy from "../../../../../../Assets/misc/quizBackgrounds/a
 import quizBackgroundVRGuyCutted from "../../../../../../Assets/misc/quizBackgrounds/a_npc_dozentlukas_close.png";
 
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import AdaptivityElementViewModel from "../AdaptivityElementViewModel";
+import AdaptivityElementViewModel, {
+  AdaptivityHint,
+  AdaptivityQuestion,
+  AdaptivityTask,
+} from "../AdaptivityElementViewModel";
 import IAdaptivityElementController from "../IAdaptivityElementController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
@@ -37,14 +41,14 @@ export default function AdaptivityElementDialogContainer({
 
   // -- Observables --
   const [isOpen] = useObservable<boolean>(viewmodel?.isOpen);
-  const [currentTaskID] = useObservable<number | null>(
-    viewmodel?.currentTaskID
+  const [currentTask] = useObservable<AdaptivityTask | null>(
+    viewmodel?.currentTask
   );
-  const [currentQuestionID] = useObservable<number | null>(
-    viewmodel?.currentQuestionID
+  const [currentQuestion] = useObservable<AdaptivityQuestion | null>(
+    viewmodel?.currentQuestion
   );
-  const [selectedHintID] = useObservable<number | null>(
-    viewmodel?.selectedHintID
+  const [selectedHint] = useObservable<AdaptivityHint | null>(
+    viewmodel?.selectedHint
   );
   const [contentData] = useObservable(viewmodel?.contentData);
   const [footerText] = useObservable<string>(viewmodel?.footerText);
@@ -64,7 +68,7 @@ export default function AdaptivityElementDialogContainer({
       0
     );
     setProgressPercentage((completedTasks / contentData.tasks.length) * 100);
-  }, [contentData, currentTaskID]);
+  }, [contentData, currentTask]);
 
   if (!viewmodel || !controller) return null;
   if (!isOpen || !contentData) return null;
@@ -93,7 +97,7 @@ export default function AdaptivityElementDialogContainer({
                   src={quizBackgroundVRGuy}
                 ></img>
 
-                {currentTaskID === null && currentQuestionID === null && (
+                {currentTask === null && currentQuestion === null && (
                   <div className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full ">
                     <CircularProgressbarWithChildren
                       value={progressPercentage}
@@ -113,7 +117,7 @@ export default function AdaptivityElementDialogContainer({
                 )}
 
                 <div className="w-full text-sm lg:text-xl">{headerText}</div>
-                {!(currentTaskID === null && currentQuestionID === null) && (
+                {!(currentTask === null && currentQuestion === null) && (
                   <StyledButton
                     onClick={controller.back}
                     className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
@@ -132,7 +136,7 @@ export default function AdaptivityElementDialogContainer({
 
               {/* Content */}
               <div className="overflow-auto">
-                {currentTaskID === null && currentQuestionID === null && (
+                {currentTask === null && currentQuestion === null && (
                   <div className="flex items-center justify-center px-1 mb-4 overflow-auto rounded-lg font-regular h-fit lg:m-4">
                     <AdaptivityElementTaskSelection
                       tasks={contentData.tasks}
@@ -141,14 +145,10 @@ export default function AdaptivityElementDialogContainer({
                     />
                   </div>
                 )}
-                {currentTaskID !== null && currentQuestionID === null && (
+                {currentTask !== null && currentQuestion === null && (
                   <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
                     <AdaptivityElementQuestionSelection
-                      selectedTask={
-                        contentData.tasks.find(
-                          (task) => task.taskID === currentTaskID
-                        )!
-                      }
+                      selectedTask={currentTask}
                       setHeaderText={setHeaderText}
                       onSelectQuestion={controller.selectQuestion}
                       onSelectHint={controller.selectHint}
@@ -156,20 +156,13 @@ export default function AdaptivityElementDialogContainer({
                   </div>
                 )}
 
-                {currentTaskID !== null &&
-                  currentQuestionID !== null &&
+                {currentTask !== null &&
+                  currentQuestion !== null &&
                   !showAnswerFeedback &&
-                  selectedHintID === null && (
+                  selectedHint === null && (
                     <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
                       <AdaptivityElementAnswerSelection
-                        question={
-                          contentData.tasks
-                            .find((task) => task.taskID === currentTaskID)!
-                            .questions.find(
-                              (question) =>
-                                question.questionID === currentQuestionID
-                            )!
-                        }
+                        question={currentQuestion}
                         setHeaderText={setHeaderText}
                         submitSelection={controller.submitSelection}
                         closeSelection={controller.closeAnswerSelection}
@@ -177,37 +170,22 @@ export default function AdaptivityElementDialogContainer({
                     </div>
                   )}
 
-                {currentTaskID !== null &&
-                  currentQuestionID !== null &&
+                {currentTask !== null &&
+                  currentQuestion !== null &&
                   showAnswerFeedback &&
-                  selectedHintID === null && (
+                  selectedHint === null && (
                     <AdaptivityElementAnswerFeedback
-                      isCorrect={
-                        contentData.tasks
-                          .find((task) => task.taskID === currentTaskID)!
-                          .questions.find(
-                            (question) =>
-                              question.questionID === currentQuestionID
-                          )!.isCompleted!
-                      }
+                      isCorrect={currentQuestion.isCompleted!}
                       setHeaderText={setHeaderText}
                       closeFeedback={controller.closeFeedback}
                     />
                   )}
-                {currentTaskID !== null &&
-                  currentQuestionID !== null &&
+                {currentTask !== null &&
+                  currentQuestion !== null &&
                   !showAnswerFeedback &&
-                  selectedHintID !== null && (
+                  selectedHint !== null && (
                     <AdaptivityElementHint
-                      hint={
-                        contentData.tasks
-                          .find((task) => task.taskID === currentTaskID)!
-                          .questions.find(
-                            (question) =>
-                              question.questionID === currentQuestionID
-                          )!
-                          .hints.find((hint) => hint.hintID === selectedHintID)!
-                      }
+                      hint={selectedHint}
                       setHeaderText={setHeaderText}
                     />
                   )}
@@ -217,7 +195,7 @@ export default function AdaptivityElementDialogContainer({
               {
                 <div className="flex justify-between items-end pt-1 text-[0.5rem] lg:text-xs modal-footer">
                   <p>{footerText}</p>
-                  {!(currentTaskID !== null && currentQuestionID !== null) && (
+                  {!(currentTask !== null && currentQuestion !== null) && (
                     <div className="relative flex group">
                       {!showFooterTooltip && (
                         <p

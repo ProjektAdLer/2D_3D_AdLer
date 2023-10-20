@@ -89,6 +89,12 @@ export default class LearningWorldPort
         adapter.onLearningElementScored(hasScored, learningElementID);
     });
   }
+  public onLearningElementHighlighted(learningElementID: ComponentID): void {
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLearningElementHighlighted)
+        adapter.onLearningElementHighlighted(learningElementID);
+    });
+  }
 
   // adaptivity
   public onAdaptivityElementLoaded(

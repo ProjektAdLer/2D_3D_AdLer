@@ -23,8 +23,8 @@ export default class AdaptivityElementPresenter
   implements IAdaptivityElementPresenter
 {
   constructor(private viewModel: AdaptivityElementViewModel) {
-    viewModel.currentTaskID.subscribe(() => this.setFooterBreadcrumbs());
-    viewModel.currentQuestionID.subscribe(() => this.setFooterBreadcrumbs());
+    viewModel.currentTask.subscribe(() => this.setFooterBreadcrumbs());
+    viewModel.currentQuestion.subscribe(() => this.setFooterBreadcrumbs());
     viewModel.contentData.subscribe(() => this.setFooterBreadcrumbs());
   }
 
@@ -35,8 +35,8 @@ export default class AdaptivityElementPresenter
     this.setFooterBreadcrumbs();
 
     this.viewModel.elementID.Value = adaptivityElementProgressTO.id;
-    this.viewModel.currentTaskID.Value = null;
-    this.viewModel.currentQuestionID.Value = null;
+    this.viewModel.currentTask.Value = null;
+    this.viewModel.currentQuestion.Value = null;
 
     this.viewModel.isOpen.Value = true;
   }
@@ -79,37 +79,23 @@ export default class AdaptivityElementPresenter
 
   @bind
   private setFooterBreadcrumbs(): void {
-    const currentQuestionID = this.viewModel.currentQuestionID.Value;
-    const currentTaskID = this.viewModel.currentTaskID.Value;
-    const contentData = this.viewModel.contentData.Value;
+    let newFooterText = this.viewModel.contentData.Value.elementName;
 
-    let newFooterText = contentData.elementName;
+    if (this.viewModel.currentTask.Value !== null) {
+      newFooterText += " => " + this.viewModel.currentTask.Value.taskTitle;
 
-    if (currentTaskID !== null) {
-      const currentTask = contentData.tasks.find(
-        (task) => task.taskID === currentTaskID
-      );
-      newFooterText += " => " + currentTask!.taskTitle;
-
-      if (currentQuestionID !== null) {
-        const currentQuestion = currentTask!.questions.find(
-          (question) => question.questionID === currentQuestionID
-        );
-        if (
-          currentQuestion!.difficulty ===
-          AdaptivityElementQuestionDifficultyTypes.easy
-        )
-          newFooterText += " => Leichte Frage";
-        else if (
-          currentQuestion!.difficulty ===
-          AdaptivityElementQuestionDifficultyTypes.medium
-        )
-          newFooterText += " => Mittlere Frage";
-        else if (
-          currentQuestion!.difficulty ===
-          AdaptivityElementQuestionDifficultyTypes.hard
-        )
-          newFooterText += " => Schwere Frage";
+      if (this.viewModel.currentQuestion.Value !== null) {
+        switch (this.viewModel.currentQuestion.Value.difficulty) {
+          case AdaptivityElementQuestionDifficultyTypes.easy:
+            newFooterText += " => Leichte Frage";
+            break;
+          case AdaptivityElementQuestionDifficultyTypes.medium:
+            newFooterText += " => Mittlere Frage";
+            break;
+          case AdaptivityElementQuestionDifficultyTypes.hard:
+            newFooterText += " => Schwere Frage";
+            break;
+        }
       }
     }
 
@@ -200,7 +186,8 @@ export default class AdaptivityElementPresenter
           AdaptivityElementTriggerConditionTypes.incorrect,
         hintAction: {
           hintActionType: trigger.triggerAction.actionType,
-          hintActionData: trigger.triggerAction.actionData,
+          idData: trigger.triggerAction.idData,
+          textData: trigger.triggerAction.textData,
         } as AdaptivityHintAction,
       } as AdaptivityHint;
     });

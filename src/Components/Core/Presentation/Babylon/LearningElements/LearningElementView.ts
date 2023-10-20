@@ -51,6 +51,15 @@ export default class LearningElementView {
         this.viewModel.hasScored.Value ? Color3.Green() : Color3.Red()
       );
     });
+    viewModel.isHighlighted.subscribe(() => {
+      if (this.viewModel.isHighlighted.Value) {
+        this.changeHighlightColor(Color3.Purple());
+      } else {
+        this.changeHighlightColor(
+          this.viewModel.hasScored.Value ? Color3.Green() : Color3.Red()
+        );
+      }
+    });
   }
 
   public async setupLearningElement(): Promise<void> {

@@ -33,6 +33,7 @@ export default interface ILearningWorldAdapter {
     hasScored: boolean,
     learningElementID: ComponentID
   ): void;
+  onLearningElementHighlighted?(learningElementID: ComponentID): void;
 
   // adaptivity
   onAdaptivityElementLoaded?(

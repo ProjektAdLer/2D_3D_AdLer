@@ -121,6 +121,15 @@ describe("LearningWorldPort", () => {
     expect(worldAdapterMock.onLearningElementScored).toBeCalledWith(true, 1);
   });
 
+  test("onLearningELementHighlighted calls a registered adapter", () => {
+    const worldAdapterMock = mock<ILearningWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+
+    systemUnderTest.onLearningElementHighlighted(1);
+
+    expect(worldAdapterMock.onLearningElementHighlighted).toBeCalledWith(1);
+  });
+
   test("onAdaptivityElementLoaded calls a registered adapter", () => {
     const worldAdapterMock = mock<ILearningWorldAdapter>();
     systemUnderTest.registerAdapter(worldAdapterMock);
