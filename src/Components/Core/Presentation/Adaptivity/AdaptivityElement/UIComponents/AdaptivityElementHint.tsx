@@ -18,7 +18,7 @@ export default function AdaptivityElementHint({
       {hint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.CommentAction &&
         hint.hintAction.textData !== undefined && (
-          <div>{hint.hintAction.textData}</div>
+          <div className="pl-4 my-4 font-bold">{hint.hintAction.textData}</div>
         )}
 
       {hint.hintAction.hintActionType ===
