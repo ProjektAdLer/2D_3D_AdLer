@@ -287,6 +287,7 @@ export default class MockBackendAdapter implements IBackendPort {
                 adaptivityAction: {
                   $type: "AdaptivityReferenceAction",
                   elementId: 1,
+                  hintText: "Schau dir die Karte nochmal an.",
                 },
               },
             ],

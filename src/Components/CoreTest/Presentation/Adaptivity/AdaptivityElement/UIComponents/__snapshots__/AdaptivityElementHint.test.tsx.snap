@@ -1,9 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AdaptivityElementHint should render 1`] = `
+exports[`AdaptivityElementHint should render CommentAction 1`] = `
+<div>
+  <div
+    class="pl-4 my-4 font-bold"
+  >
+    test
+  </div>
+</div>
+`;
+
+exports[`AdaptivityElementHint should render ReferenceAction 1`] = `
 <div>
   <div>
-    testHintActionData
+    test
   </div>
 </div>
 `;

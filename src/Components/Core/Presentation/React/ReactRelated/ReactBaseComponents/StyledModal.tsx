@@ -44,14 +44,14 @@ export default function StyledModal({
             {canClose && (
               <StyledButton
                 onClick={onClose}
-                className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+                className="w-8 h-8 p-1 text-xs roboto-black"
               >
                 X
               </StyledButton>
             )}
           </div>
           {/*Content*/}
-          <div className="px-1 rounded-lg font-regular h-fit overflow-auto">
+          <div className="px-1 overflow-auto rounded-lg font-regular h-fit">
             {children}
           </div>
           {/*Optional Footer*/}

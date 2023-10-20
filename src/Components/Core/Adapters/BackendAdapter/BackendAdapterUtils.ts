@@ -273,9 +273,17 @@ export default class BackendAdapterUtils {
         break;
     }
 
+    let textData;
+    if (triggerAction.commentText) {
+      textData = triggerAction.commentText;
+    } else if (triggerAction.hintText) {
+      textData = triggerAction.hintText;
+    }
+
     return {
       actionType: actionType,
-      actionData: triggerAction.commentText ?? triggerAction.elementId,
+      idData: triggerAction.elementId ? triggerAction.elementId : undefined,
+      textData: textData,
     } as AdaptivityElementActionTO;
   }
 }

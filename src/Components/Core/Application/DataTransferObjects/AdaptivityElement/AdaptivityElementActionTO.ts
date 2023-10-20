@@ -1,5 +1,6 @@
 import { AdaptivityElementActionTypes } from "../../../Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 export default class AdaptivityElementActionTO {
   actionType: AdaptivityElementActionTypes;
-  actionData: string | number;
+  idData?: number;
+  textData?: string;
 }

@@ -186,7 +186,8 @@ export default class AdaptivityElementPresenter
           AdaptivityElementTriggerConditionTypes.incorrect,
         hintAction: {
           hintActionType: trigger.triggerAction.actionType,
-          hintActionData: trigger.triggerAction.actionData,
+          idData: trigger.triggerAction.idData,
+          textData: trigger.triggerAction.textData,
         } as AdaptivityHintAction,
       } as AdaptivityHint;
     });
