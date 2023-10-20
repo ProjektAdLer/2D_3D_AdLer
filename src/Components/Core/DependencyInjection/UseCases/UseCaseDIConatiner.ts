@@ -44,6 +44,8 @@ import IPauseOverallTimeSpentNotificationTimerUseCase from "../../Application/Us
 import PauseOverallTimeSpentNotificationTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpentNotification/PauseOverallTimeSpentNotificationTimerUseCase/PauseOverallTimeSpentNotificationTimerUseCase";
 import IGetAdaptivityElementStatusUseCase from "../../Application/UseCases/Adaptivity/GetAdaptivityElementStatusUseCase/IGetAdaptivityElementStatusUseCase";
 import GetAdaptivityElementStatusUseCase from "../../Application/UseCases/Adaptivity/GetAdaptivityElementStatusUseCase/GetAdaptivityElementStatusUseCase";
+import ILoadExternalLearningElementUseCase from "../../Application/UseCases/Adaptivity/LoadExternalLearningElementUseCase/ILoadExternalLearningElementUseCase";
+import LoadExternalLearningElementUseCase from "../../Application/UseCases/Adaptivity/LoadExternalLearningElementUseCase/LoadExternalLearningElementUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -157,6 +159,12 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.IPauseOverallTimeSpentNotificationTimerUseCase
   )
     .to(PauseOverallTimeSpentNotificationTimerUseCase)
+    .inSingletonScope();
+
+  bind<ILoadExternalLearningElementUseCase>(
+    USECASE_TYPES.ILoadExternalLearningElementUseCase
+  )
+    .to(LoadExternalLearningElementUseCase)
     .inSingletonScope();
 });
 

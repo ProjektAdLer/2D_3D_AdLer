@@ -39,6 +39,9 @@ const USECASE_TYPES = {
   IPauseOverallTimeSpentNotificationTimerUseCase: Symbol(
     "IPauseOverallTimeSpentNotificationTimerUseCase"
   ),
+  ILoadExternalLearningElementUseCase: Symbol(
+    "ILoadExternalLearningElementUseCase"
+  ),
 };
 
 export default USECASE_TYPES;
