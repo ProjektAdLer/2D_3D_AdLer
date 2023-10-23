@@ -37,6 +37,7 @@ export interface AdaptivityTask {
   taskTitle: string;
   questions: AdaptivityQuestion[];
   isCompleted: boolean | null;
+  hasBeenCompleted: boolean;
   requiredDifficulty: number;
   isRequired: boolean;
 }

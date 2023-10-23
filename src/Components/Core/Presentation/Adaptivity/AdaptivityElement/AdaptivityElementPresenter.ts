@@ -50,9 +50,10 @@ export default class AdaptivityElementPresenter
     )!;
 
     const taskStatus = adaptivityElementProgressUpdateTO.taskInfo.taskStatus;
-    if (taskStatus === AdaptivityElementStatusTypes.Correct)
+    if (taskStatus === AdaptivityElementStatusTypes.Correct) {
       updatedTask.isCompleted = true;
-    else if (taskStatus === AdaptivityElementStatusTypes.Incorrect)
+      updatedTask.hasBeenCompleted = true;
+    } else if (taskStatus === AdaptivityElementStatusTypes.Incorrect)
       updatedTask.isCompleted = false;
     else updatedTask.isCompleted = null;
 
@@ -127,6 +128,7 @@ export default class AdaptivityElementPresenter
           task.taskOptional
         ),
         isCompleted: task.isCompleted,
+        hasBeenCompleted: task.isCompleted !== null ? task.isCompleted : false,
         requiredDifficulty: task.requiredDifficulty,
         isRequired: !task.taskOptional,
       } as AdaptivityTask;

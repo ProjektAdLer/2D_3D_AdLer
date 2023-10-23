@@ -64,10 +64,14 @@ export default function AdaptivityElementDialogContainer({
   useEffect(() => {
     if (!contentData) return;
     const completedTasks = contentData.tasks.reduce(
-      (acc, task) => (task.isCompleted ? ++acc : acc),
+      (acc, task) => (task.hasBeenCompleted && task.isRequired ? ++acc : acc),
       0
     );
-    setProgressPercentage((completedTasks / contentData.tasks.length) * 100);
+    const requiredTasks = contentData.tasks.reduce(
+      (acc, task) => (task.isRequired ? ++acc : acc),
+      0
+    );
+    setProgressPercentage((completedTasks / requiredTasks) * 100);
   }, [contentData, currentTask]);
 
   if (!viewmodel || !controller) return null;
