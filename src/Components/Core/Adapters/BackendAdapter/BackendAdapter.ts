@@ -249,15 +249,7 @@ export default class BackendAdapter implements IBackendPort {
         params: submissionData.selectedAnswerIDs,
       }
     );
-
-    throw new Error(
-      "function 'getAdaptivityElementQuestionResponse' not implemented. Response: Success: " +
-        response.data.elementScore.success +
-        " Task-Status: " +
-        response.data.gradedTask.taskStatus +
-        " Question-Status: " +
-        response.data.gradedQuestion.status
-    );
+    return response.data;
   }
 
   async getAdaptivityElementStatusResponse({
@@ -265,25 +257,14 @@ export default class BackendAdapter implements IBackendPort {
     elementID,
     worldID,
   }: ElementDataParams): Promise<AdaptivtyElementStatusResponse> {
-    const response = await axios.get<AdaptivityElementQuestionResponse>(
-      "/Elements/World/" +
-        worldID +
-        "/Element/" +
-        elementID +
-        {
-          headers: {
-            token: userToken,
-          },
-        }
+    const response = await axios.get<AdaptivtyElementStatusResponse>(
+      "/Elements/World/" + worldID + "/Element/" + elementID,
+      {
+        headers: {
+          token: userToken,
+        },
+      }
     );
-
-    throw new Error(
-      "function 'getAdaptivityElementStatusResponse' not implemented. Response: Element-ID: " +
-        response.data.elementScore.elementId +
-        " Task-ID: " +
-        response.data.gradedTask.taskId +
-        " Question-ID: " +
-        response.data.gradedQuestion.id
-    );
+    return response.data;
   }
 }
