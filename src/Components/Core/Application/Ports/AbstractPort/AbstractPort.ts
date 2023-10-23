@@ -1,6 +1,5 @@
 import { inject, injectable } from "inversify";
 import { IAbstractPort } from "../Interfaces/IAbstractPort";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import type ILoggerPort from "../Interfaces/ILoggerPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
