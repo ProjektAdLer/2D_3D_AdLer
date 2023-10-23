@@ -369,9 +369,9 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
-                  $type: "CommentAction",
-                  commentText:
-                    "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
+                  $type: "AdaptivityContentReferenceAction",
+                  elementId: 999,
+                  hintText: "Das war falsch. Hier hast du etwas Hilfe.",
                 },
               },
             ],

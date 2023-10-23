@@ -54,6 +54,14 @@ export default class AdaptivityElementController
       learningWorldPort.onLearningElementHighlighted(
         selectedHint.hintAction.idData
       );
+    } else if (
+      selectedHint.hintAction.hintActionType ===
+        AdaptivityElementActionTypes.ContentAction &&
+      selectedHint.hintAction.idData !== undefined
+    ) {
+      this.loadExternalContentReference(selectedHint.hintAction.idData);
+      this.viewModel.selectedHint.Value = null;
+      return;
     }
 
     this.viewModel.currentQuestion.Value = associatedQuestion;
