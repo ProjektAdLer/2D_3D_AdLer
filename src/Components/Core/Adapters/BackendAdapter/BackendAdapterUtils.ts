@@ -110,6 +110,7 @@ export default class BackendAdapterUtils {
     return elements.flatMap((element) => {
       if (element.elementCategory in LearningElementTypes) {
         const adaptivityData = this.extractAdaptivityData(
+          element.elementId,
           element.adaptivityContent
         );
         const model = this.extractModelData(element.elementModel);
@@ -141,6 +142,7 @@ export default class BackendAdapterUtils {
   }
 
   private static extractAdaptivityData(
+    id: number,
     adaptivitydata?: APIAdaptivity
   ): AdaptivityElementDataTO | undefined {
     if (adaptivitydata === undefined) {
@@ -150,6 +152,7 @@ export default class BackendAdapterUtils {
     const newAdaptivityTO = new AdaptivityElementDataTO();
     newAdaptivityTO.introText = adaptivitydata.introText;
     newAdaptivityTO.tasks = [];
+    newAdaptivityTO.id = id;
 
     this.mapAdaptivityTasks(
       newAdaptivityTO.tasks,
