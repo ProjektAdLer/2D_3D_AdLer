@@ -9,7 +9,7 @@ export default class AdaptivtyElementStatusResponse {
     id: ComponentID;
     status: string;
     answers: {
-      checked: false;
+      checked: boolean;
       correct: boolean;
     }[];
   }[];
