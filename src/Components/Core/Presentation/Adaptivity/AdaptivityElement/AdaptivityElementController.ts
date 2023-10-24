@@ -72,7 +72,7 @@ export default class AdaptivityElementController
 
   @bind
   async submitSelection(): Promise<void> {
-    const selectedAnswerIDs =
+    const selectedAnswers =
       this.viewModel.currentQuestion.Value!.questionAnswers.map((answer) => {
         return answer.isSelected;
       });
@@ -81,7 +81,7 @@ export default class AdaptivityElementController
       elementID: this.viewModel.elementID.Value,
       taskID: this.viewModel.currentTask.Value!.taskID,
       questionID: this.viewModel.currentQuestion.Value!.questionID,
-      selectedAnswerIDs: selectedAnswerIDs,
+      selectedAnswers: selectedAnswers,
     };
 
     await CoreDIContainer.get<ISubmitAdaptivityElementSelectionUseCase>(

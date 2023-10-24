@@ -231,23 +231,26 @@ export default class MockBackendAdapter implements IBackendPort {
 
     if (id === 0 || id === 2) {
       if (
-        submissionData.selectedAnswerIDs.length === 1 &&
-        submissionData.selectedAnswerIDs[0] === 1
+        submissionData.selectedAnswers.filter((selected) => selected === true)
+          .length === 1 &&
+        submissionData.selectedAnswers[1] === true
       ) {
         backendResponse.gradedQuestion.status = "Correct";
       }
     } else if (id === 3) {
       if (
-        submissionData.selectedAnswerIDs.length === 1 &&
-        submissionData.selectedAnswerIDs[0] === 0
+        submissionData.selectedAnswers.filter((selected) => selected === true)
+          .length === 1 &&
+        submissionData.selectedAnswers[0] === true
       ) {
         backendResponse.gradedQuestion.status = "Correct";
       }
     } else if (id > 0 && id < 12) {
       if (
-        submissionData.selectedAnswerIDs.length === 2 &&
-        submissionData.selectedAnswerIDs.includes(0) &&
-        submissionData.selectedAnswerIDs.includes(1)
+        submissionData.selectedAnswers.filter((selected) => selected === true)
+          .length === 2 &&
+        submissionData.selectedAnswers[0] === true &&
+        submissionData.selectedAnswers[1] === true
       ) {
         backendResponse.gradedQuestion.status = "Correct";
       }
@@ -437,7 +440,6 @@ export default class MockBackendAdapter implements IBackendPort {
         taskId: 3,
         taskTitle:
           "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, hier könnte Ihre Werbung stehen",
-        optional: true,
         requiredDifficulty: 0,
         adaptivityQuestions: [
           {

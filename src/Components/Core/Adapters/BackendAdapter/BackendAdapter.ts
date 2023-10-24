@@ -235,18 +235,19 @@ export default class BackendAdapter implements IBackendPort {
     worldID: number,
     submissionData: AdaptivityElementQuestionSubmissionTO
   ): Promise<AdaptivityElementQuestionResponse> {
-    const response = await axios.get<AdaptivityElementQuestionResponse>(
+    const response = await axios.patch<AdaptivityElementQuestionResponse>(
       "/Elements/World/" +
         worldID +
         "/Element/" +
         submissionData.elementID +
         "/Question/" +
         submissionData.questionID,
+      submissionData.selectedAnswers,
       {
         headers: {
           token: userToken,
         },
-        params: submissionData.selectedAnswerIDs,
+        params: submissionData.selectedAnswers,
       }
     );
     return response.data;

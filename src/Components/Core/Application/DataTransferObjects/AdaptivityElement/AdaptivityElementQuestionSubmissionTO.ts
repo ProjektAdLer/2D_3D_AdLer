@@ -4,5 +4,5 @@ export default class AdaptivityElementQuestionSubmissionTO {
   elementID: ComponentID;
   taskID: number;
   questionID: number;
-  selectedAnswerIDs: number[];
+  selectedAnswers: boolean[];
 }
