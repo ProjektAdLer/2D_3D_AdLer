@@ -58,7 +58,7 @@ export interface APIAdaptivity {
 export interface APIAdaptivityTask {
   taskId: number;
   taskTitle: string;
-  optional: boolean;
+  optional?: boolean;
   requiredDifficulty: number;
   adaptivityQuestions: APIAdaptivityQuestion[];
 }

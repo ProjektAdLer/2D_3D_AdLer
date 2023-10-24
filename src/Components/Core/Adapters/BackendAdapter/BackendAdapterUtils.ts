@@ -170,7 +170,7 @@ export default class BackendAdapterUtils {
       tasks.push({
         taskId: task.taskId,
         taskTitle: task.taskTitle,
-        taskOptional: task.optional,
+        taskOptional: task.optional !== undefined ? task.optional : true,
         requiredDifficulty: this.mapAdaptivityElementQuestionDifficulty(
           task.requiredDifficulty
         ),
