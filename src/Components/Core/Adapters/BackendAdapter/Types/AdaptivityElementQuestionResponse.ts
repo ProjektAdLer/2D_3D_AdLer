@@ -10,7 +10,7 @@ export default class AdaptivityElementQuestionResponse {
   gradedQuestion: {
     id: number;
     status: string;
-    answer:
+    answers:
       | [
           {
             checked: boolean;
