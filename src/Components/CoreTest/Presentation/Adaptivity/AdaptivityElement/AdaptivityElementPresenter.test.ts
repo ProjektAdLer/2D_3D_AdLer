@@ -77,6 +77,7 @@ describe("AdaptivityElementPresenter", () => {
         questions: [question],
         isCompleted: false,
         isRequired: false,
+        hasBeenCompleted: false,
         requiredDifficulty: testDifficulty,
       };
       const contentData: AdaptivityElementContent = {
@@ -148,6 +149,7 @@ describe("AdaptivityElementPresenter", () => {
       questions: [question],
       isCompleted: false,
       isRequired: false,
+      hasBeenCompleted: false,
       requiredDifficulty: 0,
     };
     const contentData: AdaptivityElementContent = {
@@ -198,6 +200,7 @@ describe("AdaptivityElementPresenter", () => {
       questions: [question],
       isCompleted: false,
       isRequired: false,
+      hasBeenCompleted: false,
       requiredDifficulty: 0,
     };
     const contentData: AdaptivityElementContent = {
@@ -273,6 +276,7 @@ describe("AdaptivityElementPresenter", () => {
           taskTitle: "TestTaskTitle",
           isCompleted: false,
           isRequired: true,
+          hasBeenCompleted: false,
           requiredDifficulty: 1,
           questions: [
             {
