@@ -72,12 +72,9 @@ export default class AdaptivityElementController
 
   @bind
   async submitSelection(): Promise<void> {
-    const selectedAnswerIDs = this.viewModel.currentQuestion
-      .Value!.questionAnswers.filter((answer) => {
+    const selectedAnswerIDs =
+      this.viewModel.currentQuestion.Value!.questionAnswers.map((answer) => {
         return answer.isSelected;
-      })
-      .map((selectedAnswer) => {
-        return selectedAnswer.answerIndex;
       });
 
     const submission: AdaptivityElementQuestionSubmissionTO = {
