@@ -73,10 +73,6 @@ export default class SubmitAdaptivityElementSelectionUseCase
       },
     };
 
-    if (progressUpdateTO.elementInfo.success) {
-      await this.scoreLearningElementUseCase.executeAsync(submission.elementID);
-    }
-
     this.worlPort.onAdaptivityElementAnswerEvaluated(progressUpdateTO);
 
     this.logger.log(
