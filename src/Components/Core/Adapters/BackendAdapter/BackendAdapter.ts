@@ -258,7 +258,7 @@ export default class BackendAdapter implements IBackendPort {
     worldID,
   }: ElementDataParams): Promise<AdaptivtyElementStatusResponse> {
     const response = await axios.get<AdaptivtyElementStatusResponse>(
-      "/Elements/World/" + worldID + "/Element/" + elementID,
+      "/Elements/World/" + worldID + "/Element/" + elementID + "/Adaptivity",
       {
         headers: {
           token: userToken,
