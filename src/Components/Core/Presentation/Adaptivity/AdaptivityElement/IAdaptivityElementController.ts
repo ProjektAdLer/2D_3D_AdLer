@@ -19,5 +19,8 @@ export default interface IAdaptivityElementController {
   back(): void;
   showFooterTooltip(): void;
   hideFooterTooltip(): void;
-  loadExternalContentReference(elementID: ComponentID): void;
+  loadExternalContentReference(
+    elementID: ComponentID,
+    associatedQuestion: AdaptivityQuestion
+  ): void;
 }

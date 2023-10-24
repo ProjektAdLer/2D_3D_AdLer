@@ -59,8 +59,10 @@ export default class AdaptivityElementController
         AdaptivityElementActionTypes.ContentAction &&
       selectedHint.hintAction.idData !== undefined
     ) {
-      this.loadExternalContentReference(selectedHint.hintAction.idData);
-      this.viewModel.selectedHint.Value = null;
+      this.loadExternalContentReference(
+        selectedHint.hintAction.idData,
+        associatedQuestion
+      );
       return;
     }
 
@@ -122,9 +124,45 @@ export default class AdaptivityElementController
   }
 
   @bind
-  async loadExternalContentReference(elementID: ComponentID): Promise<void> {
-    await CoreDIContainer.get<ILoadExternalLearningElementUseCase>(
-      USECASE_TYPES.ILoadExternalLearningElementUseCase
-    ).executeAsync(elementID);
+  async loadExternalContentReference(
+    elementID: ComponentID,
+    associatedQuestion: AdaptivityQuestion
+  ): Promise<void> {
+    this.viewModel.selectedHint.Value = null;
+    //TODO: filter out hints in LoadLearningWorldUseCase that reference invalid
+    //learningelement or external elements to avoid error handling here
+    try {
+      await CoreDIContainer.get<ILoadExternalLearningElementUseCase>(
+        USECASE_TYPES.ILoadExternalLearningElementUseCase
+      ).executeAsync(elementID);
+    } catch (error) {
+      if (error instanceof Error) {
+        if (error.message.includes(`Could not find element with ID`)) {
+          this.viewModel.selectedHint.Value = {
+            hintID: -1,
+            showOnIsWrong: true,
+            hintAction: {
+              hintActionType: AdaptivityElementActionTypes.CommentAction,
+              textData:
+                "Der hier hinterlegte Hinweis existiert leider nicht. Bitte fülle einen Bugreport aus.",
+            },
+          } as AdaptivityHint;
+          this.viewModel.currentQuestion.Value = associatedQuestion;
+        } else if (
+          error.message.includes(`Found more than one element with ID`)
+        ) {
+          this.viewModel.selectedHint.Value = {
+            hintID: -1,
+            showOnIsWrong: true,
+            hintAction: {
+              hintActionType: AdaptivityElementActionTypes.CommentAction,
+              textData:
+                "Der hier hinterlegte Hinweis ist nicht eindeutig zuordbar. Bitte fülle einen Bugreport aus.",
+            },
+          } as AdaptivityHint;
+          this.viewModel.currentQuestion.Value = associatedQuestion;
+        }
+      }
+    }
   }
 }
