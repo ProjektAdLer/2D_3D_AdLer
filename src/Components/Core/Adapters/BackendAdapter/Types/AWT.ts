@@ -87,7 +87,7 @@ export interface APIAdaptivityAction {
   $type: string;
   commentText?: string;
   elementId?: number;
-  hintText?: string;
+  hintText?: string | null;
 }
 
 export default AWT;

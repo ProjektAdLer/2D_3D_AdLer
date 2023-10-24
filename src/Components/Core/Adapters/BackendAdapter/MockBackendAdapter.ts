@@ -102,7 +102,9 @@ export default class MockBackendAdapter implements IBackendPort {
         ? this.smallWorld
         : worldID === 2
         ? this.bigWorld
-        : this.newWorld;
+        : this.newWorld
+        ? this.adpativityWorld
+        : this.adpativityWorld;
     const elementType = worldToUse.world.elements.find(
       (element) => element.elementId === elementID
     )!.elementCategory;
@@ -167,6 +169,10 @@ export default class MockBackendAdapter implements IBackendPort {
           courseID: 3,
           courseName: "New World",
         },
+        {
+          courseID: 4,
+          courseName: "Adaptivity World",
+        },
       ],
     });
   }
@@ -194,6 +200,8 @@ export default class MockBackendAdapter implements IBackendPort {
           : worldID === 2
           ? this.bigWorld
           : this.newWorld
+          ? this.adpativityWorld
+          : this.adpativityWorld
       )
     );
   }
@@ -215,7 +223,7 @@ export default class MockBackendAdapter implements IBackendPort {
       gradedQuestion: {
         id: submissionData.questionID,
         status: "Incorrect",
-        answer: undefined,
+        answers: undefined,
       },
     };
 
@@ -1455,6 +1463,300 @@ export default class MockBackendAdapter implements IBackendPort {
           elementFileType: "webp",
           elementMaxScore: 1,
           elementModel: "l_random",
+        },
+      ],
+    },
+  };
+  adpativityWorld: AWT = {
+    fileVersion: "2.0",
+    amgVersion: "1.0.0",
+    author: "",
+    language: "de",
+    world: {
+      evaluationLink: "https://www.soscisurvey.de/adler-umfrage_extern/",
+      worldName: "AdLer Demo",
+      worldDescription: "",
+      worldGoals: [
+        "Demonstration der aktuellen Version und Information \u00FCber das Projekt Adaptive digitale Lernr\u00E4ume (AdLer)",
+      ],
+      topics: [],
+      spaces: [
+        {
+          spaceGoals: [
+            "Begr\u00FC\u00DFung und Onboarding in der Lernwelt",
+            "Bezeichnung des Projekts",
+          ],
+          spaceName: "Raum 1 - Willkommen",
+          requiredPointsToComplete: 2,
+          spaceId: 1,
+          spaceDescription: "",
+          spaceSlotContents: [null, 1, 2, 4, null, null],
+          requiredSpacesToEnter: "",
+          spaceTemplate: "R_20X20_6L",
+          spaceTemplateStyle: "Campus",
+        },
+        {
+          spaceGoals: [
+            "In diesem Raum werden die grundlegenden Informationen zum Projekt AdLer vermittelt",
+          ],
+          spaceName: "Raum 2 - Grundlegendes zum Projekt ",
+          requiredPointsToComplete: 4,
+          spaceId: 2,
+          spaceDescription: "",
+          spaceSlotContents: [5, 6, 7, null, 8, null, null, null, null, null],
+          requiredSpacesToEnter: "1",
+          spaceTemplate: "L_32X31_10L",
+          spaceTemplateStyle: "Campus",
+        },
+        {
+          spaceGoals: [
+            "Belohnung f\u00FCr Abschluss Raum \u0022Grundlegendes zum Projekt\u0022 ",
+          ],
+          spaceName: "Raum 3 - Belohnung mittel",
+          requiredPointsToComplete: 2,
+          spaceId: 3,
+          spaceDescription: "",
+          spaceSlotContents: [9, null, null, 10, null, null],
+          requiredSpacesToEnter: "2",
+          spaceTemplate: "R_20X20_6L",
+          spaceTemplateStyle: "Campus",
+        },
+        {
+          spaceGoals: [
+            "In diesem Raum wird der Aufbau von AdLer aus seinen verschiedenen Komponenten erkl\u00E4rt",
+          ],
+          spaceName: "Raum 4 - Aufbau von AdLer",
+          requiredPointsToComplete: 2,
+          spaceId: 4,
+          spaceDescription: "",
+          spaceSlotContents: [11, null, null, 12, null, null],
+          requiredSpacesToEnter: "2",
+          spaceTemplate: "R_20X20_6L",
+          spaceTemplateStyle: "Campus",
+        },
+        {
+          spaceGoals: [
+            "Belohnung f\u00FCr Abschluss Raum \u0022Aufbau von AdLer\u0022 ",
+          ],
+          spaceName: "Raum 5 - Belohnung schwer",
+          requiredPointsToComplete: 2,
+          spaceId: 5,
+          spaceDescription: "",
+          spaceSlotContents: [null, 13, null, 14, null, null],
+          requiredSpacesToEnter: "4",
+          spaceTemplate: "R_20X20_6L",
+          spaceTemplateStyle: "Campus",
+        },
+      ],
+      elements: [
+        {
+          elementDescription: "",
+          elementGoals: [""],
+          elementMaxScore: 1,
+          elementModel: "l_video_television_1",
+          elementId: 1,
+          elementName: "Begr\u00FC\u00DFung",
+          elementCategory: "video",
+          elementFileType: "url",
+        },
+        {
+          elementId: 2,
+          elementName: "ele7",
+          elementDescription: "d",
+          elementGoals: ["e"],
+          elementCategory: "adaptivity",
+          elementFileType: "adaptivity",
+          elementMaxScore: 1,
+          elementModel: "l_h5p_slotmachine_1",
+          adaptivityContent: {
+            introText: "Abschlussquiz zur Stadt Aschaffenburg",
+            adaptivityTasks: [
+              {
+                taskId: 1,
+                taskTitle: "Stadtteile AB",
+                optional: false,
+                requiredDifficulty: 100,
+                adaptivityQuestions: [
+                  {
+                    questionType: "singleResponse",
+                    questionId: 1,
+                    questionDifficulty: 0,
+                    questionText:
+                      "Die Stadt Aschaffenburg hat insgesamt 10 Stadtteile",
+                    adaptivityRules: [
+                      {
+                        triggerId: 1,
+                        triggerCondition: "incorrect",
+                        adaptivityAction: {
+                          $type: "CommentAction",
+                          commentText: "Bla bla bla",
+                        },
+                      },
+                    ],
+                    choices: [
+                      {
+                        answerText: "Ja",
+                      },
+                      {
+                        answerText: "Nein",
+                      },
+                    ],
+                  },
+                  {
+                    questionType: "multipleResponse",
+                    questionId: 2,
+                    questionDifficulty: 100,
+                    questionText:
+                      "Welche der folgenden Stadtteile geh\u00F6ren zu Aschaffenburg?",
+                    adaptivityRules: [
+                      {
+                        triggerId: 1,
+                        triggerCondition: "incorrect",
+                        adaptivityAction: {
+                          $type: "AdaptivityReferenceAction",
+                          elementId: 1,
+                          hintText: null,
+                        },
+                      },
+                      {
+                        triggerId: 2,
+                        triggerCondition: "incorrect",
+                        adaptivityAction: {
+                          $type: "AdaptivityContentReferenceAction",
+                          elementId: 3,
+                          hintText: "rule3ActionComment",
+                        },
+                      },
+                    ],
+                    choices: [
+                      {
+                        answerText: "\u00D6sterreicher Kolonie",
+                      },
+                      {
+                        answerText: "Obernauer Kolonie",
+                      },
+                      {
+                        answerText: "Nilkheimer Kolonie",
+                      },
+                      {
+                        answerText: "Schweinheimer Kolonie",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        },
+        {
+          elementDescription: "",
+          elementGoals: [""],
+          elementMaxScore: 1,
+          elementModel: "l_random",
+          elementId: 4,
+          elementName: "AdLer Definition",
+          elementCategory: "image",
+          elementFileType: "jpg",
+        },
+        {
+          elementDescription: "",
+          elementGoals: [""],
+          elementMaxScore: 1,
+          elementModel: "l_random",
+          elementId: 5,
+          elementName: "Adler Team",
+          elementCategory: "image",
+          elementFileType: "jpg",
+        },
+        {
+          elementDescription: "",
+          elementGoals: [""],
+          elementMaxScore: 1,
+          elementModel: "l_random",
+          elementId: 6,
+          elementName: "Standorte",
+          elementCategory: "pdf",
+          elementFileType: "pdf",
+        },
+        {
+          elementDescription: "",
+          elementGoals: [""],
+          elementMaxScore: 1,
+          elementModel: "l_random",
+          elementId: 7,
+          elementName: "Ziele",
+          elementCategory: "h5p",
+          elementFileType: "h5p",
+        },
+        {
+          elementDescription: "",
+          elementGoals: [""],
+          elementMaxScore: 1,
+          elementModel: "l_random",
+          elementId: 8,
+          elementName: "Challenge Mittel",
+          elementCategory: "h5p",
+          elementFileType: "h5p",
+        },
+        {
+          elementDescription: "",
+          elementGoals: [""],
+          elementMaxScore: 1,
+          elementModel: "l_video_television_1",
+          elementId: 9,
+          elementName: "Gl\u00FCckwunsch silber",
+          elementCategory: "video",
+          elementFileType: "url",
+        },
+        {
+          elementDescription: "",
+          elementGoals: [""],
+          elementMaxScore: 1,
+          elementModel: "l_random",
+          elementId: 10,
+          elementName: "Diplom silber",
+          elementCategory: "image",
+          elementFileType: "jpg",
+        },
+        {
+          elementDescription: "",
+          elementGoals: [""],
+          elementMaxScore: 1,
+          elementModel: "l_random",
+          elementId: 11,
+          elementName: "Komponenten von AdLer",
+          elementCategory: "h5p",
+          elementFileType: "h5p",
+        },
+        {
+          elementDescription: "",
+          elementGoals: [""],
+          elementMaxScore: 1,
+          elementModel: "l_random",
+          elementId: 12,
+          elementName: "Challenge schwer",
+          elementCategory: "h5p",
+          elementFileType: "h5p",
+        },
+        {
+          elementDescription: "",
+          elementGoals: [""],
+          elementMaxScore: 1,
+          elementModel: "l_video_television_1",
+          elementId: 13,
+          elementName: "Gl\u00FCckwunsch gold",
+          elementCategory: "video",
+          elementFileType: "url",
+        },
+        {
+          elementDescription: "",
+          elementGoals: [""],
+          elementMaxScore: 1,
+          elementModel: "l_random",
+          elementId: 14,
+          elementName: "Diplom Gold",
+          elementCategory: "image",
+          elementFileType: "jpg",
         },
       ],
     },
