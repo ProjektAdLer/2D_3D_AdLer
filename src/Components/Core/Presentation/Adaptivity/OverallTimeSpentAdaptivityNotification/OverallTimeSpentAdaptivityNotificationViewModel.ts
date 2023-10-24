@@ -1,6 +1,8 @@
 import Observable from "../../../../../Lib/Observable";
 import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
-import adaptivityPlaceholderImage from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/pausenhinweis1-slide1_AD_ohneAnschnitt.png";
+import adaptivityPlaceholderImageSlide1 from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/pausenhinweis1-slide1_AD_ohneAnschnitt.png";
+import adaptivityPlaceholderImageSlide2 from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/pausenhinweis1-slide2_AD_ohneAnschnitt.png";
+import adaptivityPlaceholderImageSlide3 from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/pausenhinweis1-slide3_AD_ohneAnschnitt.png";
 
 export default class OverallTimeSpentAdaptivityNotificationViewModel {
   showModal: Observable<boolean> = new Observable<boolean>(false);
@@ -18,7 +20,11 @@ export default class OverallTimeSpentAdaptivityNotificationViewModel {
     //   "https://media.tenor.com/xTyVDYFg_fsAAAAC/lizard-hehe.gif",
     // ],
     // ["title2", "Content2", ""],
-    ["", "", adaptivityPlaceholderImage],
+    [
+      adaptivityPlaceholderImageSlide1,
+      adaptivityPlaceholderImageSlide2,
+      adaptivityPlaceholderImageSlide3,
+    ],
   ];
 
   //mediumBreakContentPool structure: title, content, source

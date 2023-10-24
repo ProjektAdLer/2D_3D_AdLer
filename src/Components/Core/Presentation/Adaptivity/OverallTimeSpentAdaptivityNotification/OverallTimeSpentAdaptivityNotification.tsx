@@ -83,33 +83,64 @@ function ShortBreakContent(
     Math.random() * viewModel.shortBreakContentPool.length
   );
   return (
-    <div
-      data-testid="short-break"
-      className="pb-4 w-[90vw] portrait:w-[99vw] lg:w-[60vw]"
-    >
-      {/* title */}
-      <p>{viewModel.shortBreakContentPool[randomIndex][0]}</p>
-      {/* content */}
-      <TextWithLineBreaks
-        text={viewModel.shortBreakContentPool[randomIndex][1]}
-      ></TextWithLineBreaks>
-      <br />
+    <div data-testid="short-break" className="pb-4 w-[90vw] lg:w-[60vw]">
       {/* media */}
+      {/*Bitte die "nicht Tailwindklassen" drinne lassen! Brauchen hierfür Plain CSS in de app.css*/}
       {viewModel.shortBreakContentPool[randomIndex][2] !== "" && (
-        // <iframe
-        //   className="w-full rounded-lg aspect-video"
-        //   // src={viewModel.shortBreakContentPool[randomIndex][2]}
-        //   src={require(viewModel.shortBreakContentPool[randomIndex][2])}
-        //   title="Break item iframe"
-        //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        //   allowFullScreen
-        // ></iframe>
-        <img
-          className="w-full rounded-lg"
-          src={viewModel.shortBreakContentPool[randomIndex][2]}
-          title="Break item image"
-          alt=""
-        ></img>
+        <div className="relative mx-0 my-auto slider-wrapper">
+          <div className="flex gap-4 overflow-x-auto slider snap-x snap-mandatory scroll-smooth lg:max-w-[60vw] max-w-[90vw]">
+            <figure>
+              <img
+                id="slide-1"
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                src={viewModel.shortBreakContentPool[randomIndex][0]}
+                title="Slide 1/3"
+                alt=""
+              ></img>
+              <figcaption className="p-4 text-lg font-bold text-end lg:text-xl text-adlerdarkblue">
+                1/3
+              </figcaption>
+            </figure>
+            <figure>
+              <img
+                id="slide-2"
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                src={viewModel.shortBreakContentPool[randomIndex][1]}
+                title="Slide 2/3"
+                alt=""
+              ></img>
+              <figcaption className="p-4 text-lg font-bold text-end lg:text-xl text-adlerdarkblue">
+                2/3
+              </figcaption>
+            </figure>
+            <figure>
+              <img
+                id="slide-3"
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                src={viewModel.shortBreakContentPool[randomIndex][2]}
+                title="Slide 3/3"
+                alt=""
+              ></img>
+              <figcaption className="p-4 text-lg font-bold text-end lg:text-xl text-adlerdarkblue">
+                3/3
+              </figcaption>
+            </figure>
+          </div>
+          <div className="absolute z-10 flex gap-4 -translate-x-1/2 lg:gap-6 slider-nav bottom-2 lg:bottom-4 left-1/2">
+            <a
+              href="#slide-1"
+              className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+            ></a>
+            <a
+              href="#slide-2"
+              className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+            ></a>
+            <a
+              href="#slide-3"
+              className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+            ></a>
+          </div>
+        </div>
       )}
     </div>
   );
@@ -122,7 +153,10 @@ function MediumBreakContent(
     Math.random() * viewModel.mediumBreakContentPool.length
   );
   return (
-    <div data-testid="medium-break" className="max-w-2xl px-4 pb-4">
+    <div
+      data-testid="medium-break"
+      className="pb-4 w-[90vw] portrait:w-[99vw] lg:w-[60vw]"
+    >
       {/* title */}
       <p>{viewModel.mediumBreakContentPool[randomIndex][0]}</p>
       {/* content */}
@@ -151,7 +185,10 @@ function LongBreakContent(
     Math.random() * viewModel.longBreakContentPool.length
   );
   return (
-    <div data-testid="long-break" className="max-w-2xl px-4 pb-4">
+    <div
+      data-testid="long-break"
+      className="pb-4 w-[90vw] portrait:w-[99vw] lg:w-[60vw]"
+    >
       {/* title */}
       <p>{viewModel.longBreakContentPool[randomIndex][0]}</p>
       {/* content */}

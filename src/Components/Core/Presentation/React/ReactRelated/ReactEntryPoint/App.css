@@ -79,3 +79,14 @@ body {
   top: 5rem !important;
   left: 1rem !important;
 }
+
+/* Special Styles for OverallTimeSpentAdaptivityNotification Slider */
+.slider {
+  -ms-overflow-style: none; /* Hide scrollbar IE and Edge */
+  scrollbar-width: none; /* Hide scrollbar Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.slider::-webkit-scrollbar {
+  display: none;
+}
