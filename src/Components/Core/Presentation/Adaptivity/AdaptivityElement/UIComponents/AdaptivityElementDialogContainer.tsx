@@ -121,14 +121,15 @@ export default function AdaptivityElementDialogContainer({
                 )}
 
                 <div className="w-full text-sm lg:text-xl">{headerText}</div>
-                {!(currentTask === null && currentQuestion === null) && (
-                  <StyledButton
-                    onClick={controller.back}
-                    className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-                  >
-                    {"<"}
-                  </StyledButton>
-                )}
+                {!(currentTask === null && currentQuestion === null) &&
+                  !showAnswerFeedback && (
+                    <StyledButton
+                      onClick={controller.back}
+                      className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+                    >
+                      {"<"}
+                    </StyledButton>
+                  )}
 
                 <StyledButton
                   onClick={controller.closeModal}
