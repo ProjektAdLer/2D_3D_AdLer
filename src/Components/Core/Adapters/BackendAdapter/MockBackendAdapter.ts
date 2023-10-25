@@ -322,8 +322,8 @@ export default class MockBackendAdapter implements IBackendPort {
       {
         taskId: 2,
         taskTitle: "Debug Aufgabe",
-        optional: true,
-        requiredDifficulty: 1,
+        optional: false,
+        requiredDifficulty: 100,
         adaptivityQuestions: [
           {
             questionType: "multipleResponse",
@@ -332,14 +332,6 @@ export default class MockBackendAdapter implements IBackendPort {
             questionText:
               "Multiple Choice Frage: Wähle alle richtigen Antworten aus",
             adaptivityRules: [
-              {
-                triggerId: 1,
-                triggerCondition: "correct",
-                adaptivityAction: {
-                  $type: "CommentAction",
-                  commentText: "Das war richtig. Gut gemacht!",
-                },
-              },
               {
                 triggerId: 2,
                 triggerCondition: "incorrect",
@@ -369,14 +361,6 @@ export default class MockBackendAdapter implements IBackendPort {
             questionText: "Single Choice: Wähle die richtige Antwort",
             adaptivityRules: [
               {
-                triggerId: 1,
-                triggerCondition: "correct",
-                adaptivityAction: {
-                  $type: "CommentAction",
-                  commentText: "Das war richtig. Gut gemacht!",
-                },
-              },
-              {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
@@ -404,14 +388,6 @@ export default class MockBackendAdapter implements IBackendPort {
             questionDifficulty: 200,
             questionText: "Single Choice: Wähle die richtige Antwort",
             adaptivityRules: [
-              {
-                triggerId: 1,
-                triggerCondition: "correct",
-                adaptivityAction: {
-                  $type: "CommentAction",
-                  commentText: "Das war richtig. Gut gemacht!",
-                },
-              },
               {
                 triggerId: 2,
                 triggerCondition: "incorrect",
@@ -850,7 +826,27 @@ export default class MockBackendAdapter implements IBackendPort {
     }
 
     if (!isTaskComplete) {
-      return;
+      // check if required question answered correct
+      const currentQuestion = currentTask?.adaptivityQuestions.find(
+        (q) => q.questionId === BackendQuestion?.id
+      );
+
+      const taskDifficulty = this.adaptivityData.adaptivityTasks.find(
+        (t) => t.taskId === BackendTask?.taskId
+      )!.requiredDifficulty;
+
+      const questionDifficulty = this.adaptivityData.adaptivityTasks
+        .flatMap((task) => {
+          return task.adaptivityQuestions.find(
+            (question) => question.questionId === currentQuestion?.questionId
+          )?.questionDifficulty;
+        })
+        .filter((e) => e !== undefined)[0];
+
+      if (questionDifficulty && questionDifficulty >= taskDifficulty) {
+        BackendTask!.taskStatus = AdaptivityElementStatusTypes.Correct;
+        response.gradedTask.taskStatus = AdaptivityElementStatusTypes.Correct;
+      }
     }
 
     // check if every required task is complete
