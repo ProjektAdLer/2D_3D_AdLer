@@ -34,6 +34,9 @@ export default class AdaptivityElementController
   @bind
   selectQuestion(selectedQuestion: AdaptivityQuestion): void {
     this.viewModel.currentQuestion.Value = selectedQuestion;
+    this.viewModel.currentQuestion.Value.questionAnswers.forEach((answer) => {
+      answer.isSelected = false;
+    });
   }
 
   @bind
