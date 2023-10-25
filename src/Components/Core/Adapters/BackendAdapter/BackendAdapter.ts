@@ -247,7 +247,6 @@ export default class BackendAdapter implements IBackendPort {
         headers: {
           token: userToken,
         },
-        params: submissionData.selectedAnswers,
       }
     );
     return response.data;
