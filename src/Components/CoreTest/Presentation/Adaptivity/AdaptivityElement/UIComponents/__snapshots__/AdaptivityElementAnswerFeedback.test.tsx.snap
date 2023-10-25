@@ -11,7 +11,7 @@ exports[`AdaptivityElementAnswerFeedback should render 1`] = `
       <p
         class="pl-4 font-bold"
       >
-        Glückwunsch! Diese Antwort war richtig!
+        Schade, leider war deine Antwort falsch.
       </p>
     </div>
     <div

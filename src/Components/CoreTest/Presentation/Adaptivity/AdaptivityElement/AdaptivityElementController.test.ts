@@ -4,6 +4,8 @@ import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE
 import AdaptivityElementController from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementController";
 import AdaptivityElementViewModel, {
   AdaptivityHint,
+  AdaptivityQuestion,
+  AdaptivityTask,
 } from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
 import ISubmitAdaptivityElementSelectionUseCase from "../../../../Core/Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
@@ -14,15 +16,16 @@ const submitSelectionUseCaseMock =
   mock<ISubmitAdaptivityElementSelectionUseCase>();
 const worldPortMock = mock<ILearningWorldPort>();
 
-const mockHint = {
+const mockHint: AdaptivityHint = {
   hintID: 1,
   showOnIsWrong: false,
   hintAction: {
     hintActionType: 1,
-    hintActionData: "TestHintActionData",
+    idData: 42,
+    textData: "TestHintActionData",
   },
 };
-const mockQuestion = {
+const mockQuestion: AdaptivityQuestion = {
   questionID: 1,
   questionText: "TestQuestionText",
   questionAnswers: [
@@ -43,13 +46,14 @@ const mockQuestion = {
   isMultipleChoice: false,
   hints: [mockHint],
 };
-const mockTask = {
+const mockTask: AdaptivityTask = {
   taskID: 1,
   taskTitle: "TestTaskTitle",
   questions: [mockQuestion],
   isCompleted: false,
   requiredDifficulty: 1,
   isRequired: false,
+  hasBeenCompleted: false,
 };
 
 describe("AdaptivityElementController", () => {
@@ -147,7 +151,7 @@ describe("AdaptivityElementController", () => {
       elementID: 42,
       taskID: 1,
       questionID: 1,
-      selectedAnswerIDs: [3],
+      selectedAnswers: [false, true],
     });
   });
 

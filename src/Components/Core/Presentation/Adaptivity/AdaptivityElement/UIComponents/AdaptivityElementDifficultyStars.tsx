@@ -102,7 +102,7 @@ function EmptyStarSlot({ className }: { className: string }): JSX.Element {
       className={tailwindMerge(`${className}`)}
     />*/
     <img
-      className={tailwindMerge(`${className}`) + "opacity-60"}
+      className={tailwindMerge(`${className}`) + " opacity-60"}
       alt="Platzhalter-Icon"
       src={placeholderIcon}
     />

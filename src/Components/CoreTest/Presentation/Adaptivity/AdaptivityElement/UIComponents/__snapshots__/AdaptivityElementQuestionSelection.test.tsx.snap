@@ -33,12 +33,12 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
             />
             <img
               alt="Platzhalter-Icon"
-              class="w-6 h-6opacity-60"
+              class="w-6 h-6 opacity-60"
               src="diffculties-adaptivity-placeholder.svg"
             />
             <img
               alt="Platzhalter-Icon"
-              class="w-6 h-6opacity-60"
+              class="w-6 h-6 opacity-60"
               src="diffculties-adaptivity-placeholder.svg"
             />
           </div>
@@ -68,7 +68,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
           >
             <img
               alt="Platzhalter-Icon"
-              class="w-6 h-6opacity-60"
+              class="w-6 h-6 opacity-60"
               src="diffculties-adaptivity-placeholder.svg"
             />
             <img
@@ -78,7 +78,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
             />
             <img
               alt="Platzhalter-Icon"
-              class="w-6 h-6opacity-60"
+              class="w-6 h-6 opacity-60"
               src="diffculties-adaptivity-placeholder.svg"
             />
           </div>
@@ -113,12 +113,12 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
           >
             <img
               alt="Platzhalter-Icon"
-              class="w-6 h-6opacity-60"
+              class="w-6 h-6 opacity-60"
               src="diffculties-adaptivity-placeholder.svg"
             />
             <img
               alt="Platzhalter-Icon"
-              class="w-6 h-6opacity-60"
+              class="w-6 h-6 opacity-60"
               src="diffculties-adaptivity-placeholder.svg"
             />
             <img

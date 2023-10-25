@@ -80,24 +80,26 @@ export default function AdaptivityElementTaskSelection({
               className="w-full max-w-2xl"
               onClick={() => onSelectTask(task)}
             >
-              <div className="flex items-center justify-between w-full h-full align-center">
+              <div className="grid grid-cols-7 items-center justify-between w-full h-full align-center">
                 <AdaptivityElementDifficultyStars
                   easyState={easyStatus}
                   mediumState={mediumStatus}
                   hardState={hardStatus}
-                  starClassName="w-6 h-6"
+                  starClassName="w-4 h-4 sm:w-6 sm:h-6 "
                 />
 
-                <p className="w-2/3 text-start">{task.taskTitle}</p>
+                <p className="text-start col-span-5 pl-4">{task.taskTitle}</p>
 
-                {task.isRequired && (
-                  <img
-                    alt=""
-                    className={"h-6 lg:h-8 pl-4 xl:pl-8"}
-                    src={requiredTaskIcon}
-                  />
-                )}
-                {!task.isRequired && <div className="w-16"></div>}
+                <div className="flex justify-end">
+                  {task.isRequired && (
+                    <img
+                      alt=""
+                      className={"h-6 lg:h-8 pl-4 xl:pl-8"}
+                      src={requiredTaskIcon}
+                    />
+                  )}
+                  {!task.isRequired && <div className="w-16"></div>}
+                </div>
               </div>
             </StyledButton>
           </div>

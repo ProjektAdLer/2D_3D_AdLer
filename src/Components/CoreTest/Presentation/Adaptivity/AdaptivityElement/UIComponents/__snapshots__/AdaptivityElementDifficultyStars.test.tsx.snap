@@ -7,17 +7,17 @@ exports[`AdaptivityElementDifficultyStars should render with 0 for each difficul
   >
     <img
       alt="Platzhalter-Icon"
-      class="opacity-60"
+      class=" opacity-60"
       src="diffculties-adaptivity-placeholder.svg"
     />
     <img
       alt="Platzhalter-Icon"
-      class="opacity-60"
+      class=" opacity-60"
       src="diffculties-adaptivity-placeholder.svg"
     />
     <img
       alt="Platzhalter-Icon"
-      class="opacity-60"
+      class=" opacity-60"
       src="diffculties-adaptivity-placeholder.svg"
     />
   </div>

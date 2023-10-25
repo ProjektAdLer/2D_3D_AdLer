@@ -32,7 +32,7 @@ export default function AdaptivityElementQuestionSelection({
   }, [setHeaderText, selectedTask]);
 
   return (
-    <div className="flex flex-col w-full gap-2">
+    <div className="grid w-full py-2 px-2 gap-4">
       {selectedTask.questions.map((question) => {
         let starState = AdaptivityElementDifficultyStarState.RequiredUnsolved;
         if (question.isCompleted === true) {
@@ -44,75 +44,83 @@ export default function AdaptivityElementQuestionSelection({
         return (
           <div
             key={question.questionID}
-            className="flex flex-row justify-center w-full gap-6"
+            className="grid grid-cols-3 md:grid-cols-2 w-full justify-center items-center gap-4"
           >
             <StyledButton
               shape="freefloatcenter"
-              className="w-1/4"
+              className="w-full col-span-2 md:col-span-1"
               onClick={() => onSelectQuestion(question)}
             >
-              <div className="flex items-center justify-between w-full h-full align-center">
-                {question.isRequired && (
-                  <img
-                    alt=""
-                    className={"h-6 lg:h-8 pl-4 xl:pl-8"}
-                    src={requiredTaskIcon}
-                  />
-                )}
-
-                {!question.isRequired && <div className="w-16"></div>}
-
+              <div className="grid grid-cols-5 w-full h-full items-center ">
                 {question.difficulty ===
                   AdaptivityElementQuestionDifficultyTypes.easy && (
                   <>
-                    <p className="text-start">{"Leicht"} </p>
                     <AdaptivityElementDifficultyStars
                       easyState={starState}
-                      starClassName="w-6 h-6"
+                      starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
+                    <p className="text-start px-4 col-span-3 flex justify-center">
+                      {"Leicht"}{" "}
+                    </p>
                   </>
                 )}
                 {question.difficulty ===
                   AdaptivityElementQuestionDifficultyTypes.medium && (
                   <>
-                    <p className="text-start">{"Medium"} </p>
                     <AdaptivityElementDifficultyStars
                       mediumState={starState}
-                      starClassName="w-6 h-6"
+                      starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
+                    <p className="text-start px-4 col-span-3 flex justify-center">
+                      {"Mittelschwer"}{" "}
+                    </p>
                   </>
                 )}
                 {question.difficulty ===
                   AdaptivityElementQuestionDifficultyTypes.hard && (
                   <>
-                    <p className="text-start">{"Schwer"} </p>
                     <AdaptivityElementDifficultyStars
                       hardState={starState}
-                      starClassName="w-6 h-6"
+                      starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
+                    <p className="text-start px-4 col-span-3 flex justify-center">
+                      {"Schwer"}{" "}
+                    </p>
                   </>
                 )}
+                <div className="flex justify-end items-center pr-2">
+                  {question.isRequired && (
+                    <img
+                      alt=""
+                      className={"h-5 md:h-7"}
+                      src={requiredTaskIcon}
+                    />
+                  )}
+
+                  {!question.isRequired && <div className="w-16"></div>}
+                </div>
               </div>
             </StyledButton>
-
-            {question.hints.length > 0 &&
-              question.hints.map((hint) => {
-                if (
-                  (hint.showOnIsWrong && question.isCompleted === false) ||
-                  (!hint.showOnIsWrong && question.isCompleted === true)
-                ) {
-                  return (
-                    <StyledButton
-                      shape="freefloatcenter"
-                      className="w-1/4"
-                      key={"hint-" + hint.hintID}
-                      onClick={() => onSelectHint(hint, question)}
-                    >
-                      Hinweis
-                    </StyledButton>
-                  );
-                } else return null;
-              })}
+            <div className="flex flex-row md:gap-4 h-full">
+              {question.hints.length > 0 &&
+                question.hints.map((hint) => {
+                  if (
+                    (hint.showOnIsWrong && question.isCompleted === false) ||
+                    (!hint.showOnIsWrong && question.isCompleted === true)
+                  ) {
+                    return (
+                      <StyledButton
+                        shape="freefloatcenter"
+                        className="w-full h-full"
+                        key={"hint-" + hint.hintID}
+                        onClick={() => onSelectHint(hint, question)}
+                      >
+                        Hinweis
+                      </StyledButton>
+                    );
+                  } else return null;
+                })}
+            </div>
           </div>
         );
       })}
