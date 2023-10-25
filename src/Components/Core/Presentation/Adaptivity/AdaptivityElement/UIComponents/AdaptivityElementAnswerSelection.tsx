@@ -16,6 +16,8 @@ export default function AdaptivityElementAnswerSelection({
   setHeaderText: (headerText: string) => void;
 }) {
   const [answerColors, setAnswerColors] = useState<StyledButtonColor[]>([]);
+  const [isAnyAnswerSelected, setIsAnyAnswerSelected] =
+    useState<boolean>(false);
 
   useEffect(() => {
     setHeaderText(question.questionText);
@@ -35,6 +37,11 @@ export default function AdaptivityElementAnswerSelection({
 
         return answer.isSelected ? "highlight" : "default";
       });
+
+      const isSelected = question.questionAnswers.some(
+        (a) => a.isSelected === true
+      );
+      setIsAnyAnswerSelected(isSelected);
 
       setAnswerColors(newColors);
     },
@@ -65,6 +72,7 @@ export default function AdaptivityElementAnswerSelection({
           onClick={() => {
             submitSelection();
           }}
+          disabled={!isAnyAnswerSelected}
         >
           {"Antworten abgeben"}
         </StyledButton>
