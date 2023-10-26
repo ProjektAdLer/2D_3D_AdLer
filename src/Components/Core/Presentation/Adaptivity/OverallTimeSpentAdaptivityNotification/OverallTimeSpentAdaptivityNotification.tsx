@@ -10,6 +10,7 @@ import tailwindMerge from "../../Utils/TailwindMerge";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
 import pauseIcon from "../../../../../Assets/icons/42-pause-icon/47-pause-icon-nobg.svg";
+import { useEffect } from "react";
 
 export default function OverallTimeSpentAdaptivityNotification({
   className,
@@ -23,6 +24,9 @@ export default function OverallTimeSpentAdaptivityNotification({
   const [showMinimizedModal] = useObservable(viewModel?.showMinimizedModal);
   const [breakType] = useObservable(viewModel?.breakType);
 
+  useEffect(() => {
+    let randomIndex = Math.floor(Math.random());
+  }, [viewModel?.showModal]);
   if (!viewModel || !controller || !showModal || !breakType) return null;
 
   if (showMinimizedModal)
@@ -55,32 +59,34 @@ export default function OverallTimeSpentAdaptivityNotification({
       onClose={() => controller.minimizeOrMaximizeBreakNotification()}
       title="Pausenhinweis"
     >
-      {GetNotificationModalContents(breakType, viewModel)}
+      {GetNotificationModalContents(breakType, viewModel, randomIndex)}
     </StyledModal>
   );
 }
 
 function GetNotificationModalContents(
   breakType: OverallTimeSpentAdaptivityNotificationBreakType,
-  viewModel: OverallTimeSpentAdaptivityNotificationViewModel
+  viewModel: OverallTimeSpentAdaptivityNotificationViewModel,
+  randomIndex: number
 ) {
   switch (breakType) {
     case OverallTimeSpentAdaptivityNotificationBreakType.Short:
-      return ShortBreakContent(viewModel);
+      return ShortBreakContent(viewModel, randomIndex);
     case OverallTimeSpentAdaptivityNotificationBreakType.Medium:
-      return MediumBreakContent(viewModel);
+      return MediumBreakContent(viewModel, randomIndex);
     case OverallTimeSpentAdaptivityNotificationBreakType.Long:
-      return LongBreakContent(viewModel);
+      return LongBreakContent(viewModel, randomIndex);
     default:
       return "";
   }
 }
 
 function ShortBreakContent(
-  viewModel: OverallTimeSpentAdaptivityNotificationViewModel
+  viewModel: OverallTimeSpentAdaptivityNotificationViewModel,
+  randomIndex: number
 ) {
-  let randomIndex = Math.floor(
-    Math.random() * viewModel.shortBreakContentPool.length
+  randomIndex = Math.floor(
+    randomIndex * viewModel.shortBreakContentPool.length
   );
   return (
     <div data-testid="short-break" className="pb-4 w-[90vw] lg:w-[60vw]">
@@ -147,10 +153,11 @@ function ShortBreakContent(
 }
 
 function MediumBreakContent(
-  viewModel: OverallTimeSpentAdaptivityNotificationViewModel
+  viewModel: OverallTimeSpentAdaptivityNotificationViewModel,
+  randomIndex: number
 ) {
-  let randomIndex = Math.floor(
-    Math.random() * viewModel.mediumBreakContentPool.length
+  randomIndex = Math.floor(
+    randomIndex * viewModel.mediumBreakContentPool.length
   );
   return (
     <div
@@ -179,11 +186,10 @@ function MediumBreakContent(
 }
 
 function LongBreakContent(
-  viewModel: OverallTimeSpentAdaptivityNotificationViewModel
+  viewModel: OverallTimeSpentAdaptivityNotificationViewModel,
+  randomIndex: number
 ) {
-  let randomIndex = Math.floor(
-    Math.random() * viewModel.longBreakContentPool.length
-  );
+  randomIndex = Math.floor(randomIndex * viewModel.longBreakContentPool.length);
   return (
     <div
       data-testid="long-break"
