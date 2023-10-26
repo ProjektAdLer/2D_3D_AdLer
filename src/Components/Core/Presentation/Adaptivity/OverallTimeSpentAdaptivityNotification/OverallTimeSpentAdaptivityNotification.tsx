@@ -24,9 +24,12 @@ export default function OverallTimeSpentAdaptivityNotification({
   const [showMinimizedModal] = useObservable(viewModel?.showMinimizedModal);
   const [breakType] = useObservable(viewModel?.breakType);
 
+  let randomIndex = 0;
+
   useEffect(() => {
-    let randomIndex = Math.floor(Math.random());
+    randomIndex = Math.floor(Math.random());
   }, [viewModel?.showModal]);
+
   if (!viewModel || !controller || !showModal || !breakType) return null;
 
   if (showMinimizedModal)
