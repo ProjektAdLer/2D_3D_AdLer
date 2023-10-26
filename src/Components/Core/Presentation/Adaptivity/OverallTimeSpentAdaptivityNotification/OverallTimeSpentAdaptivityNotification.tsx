@@ -89,62 +89,109 @@ function ShortBreakContent(
     randomIndex * viewModel.shortBreakContentPool.length
   );
   return (
-    <div data-testid="short-break" className="pb-4 w-[90vw] lg:w-[60vw]">
+    <div
+      data-testid="short-break"
+      className="pb-4 max-w-[90vw] lg:max-w-[60vw]"
+    >
       {/* media */}
-      {/*Bitte die "nicht Tailwindklassen" drinne lassen! Brauchen hierfür Plain CSS in de app.css*/}
+      {/*Bitte die "nicht Tailwindklassen" drinne lassen! Brauchen hierfür Plain CSS in der app.css*/}
       {viewModel.shortBreakContentPool[randomIndex][2] !== "" && (
         <div className="relative mx-0 my-auto slider-wrapper">
           <div className="flex gap-4 overflow-x-auto slider snap-x snap-mandatory scroll-smooth lg:max-w-[60vw] max-w-[90vw]">
-            <figure>
-              <img
-                id="slide-1"
-                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                src={viewModel.shortBreakContentPool[randomIndex][0]}
-                title="Slide 1/3"
-                alt=""
-              ></img>
-              <figcaption className="p-4 text-lg font-bold text-end lg:text-xl text-adlerdarkblue">
-                1/3
-              </figcaption>
-            </figure>
-            <figure>
-              <img
-                id="slide-2"
-                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                src={viewModel.shortBreakContentPool[randomIndex][1]}
-                title="Slide 2/3"
-                alt=""
-              ></img>
-              <figcaption className="p-4 text-lg font-bold text-end lg:text-xl text-adlerdarkblue">
-                2/3
-              </figcaption>
-            </figure>
-            <figure>
-              <img
-                id="slide-3"
-                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                src={viewModel.shortBreakContentPool[randomIndex][2]}
-                title="Slide 3/3"
-                alt=""
-              ></img>
-              <figcaption className="p-4 text-lg font-bold text-end lg:text-xl text-adlerdarkblue">
-                3/3
-              </figcaption>
-            </figure>
+            {viewModel.shortBreakContentPool[randomIndex][1] !== "" && (
+              <figure>
+                <p className="pb-4 pl-6 text-lg font-bold lg:text-xl text-adlerdarkblue">
+                  {viewModel.shortBreakContentPool[randomIndex][0]}
+                </p>
+                <img
+                  id="slide-1"
+                  className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                  src={viewModel.shortBreakContentPool[randomIndex][1]}
+                  title="Slide 1/3"
+                  alt=""
+                ></img>
+                <figcaption className="p-4 text-lg font-bold text-end lg:text-xl text-adlerdarkblue">
+                  1/3
+                </figcaption>
+              </figure>
+            )}
+            {viewModel.shortBreakContentPool[randomIndex][2] !== "" && (
+              <figure>
+                <p className="pb-4 pl-6 text-lg font-bold lg:text-xl text-adlerdarkblue">
+                  {viewModel.shortBreakContentPool[randomIndex][0]}
+                </p>
+                <img
+                  id="slide-2"
+                  className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                  src={viewModel.shortBreakContentPool[randomIndex][2]}
+                  title="Slide 2/3"
+                  alt=""
+                ></img>
+                <figcaption className="p-4 text-lg font-bold text-end lg:text-xl text-adlerdarkblue">
+                  2/3
+                </figcaption>
+              </figure>
+            )}
+            {viewModel.shortBreakContentPool[randomIndex][3] !== "" && (
+              <figure>
+                <p className="pb-4 pl-6 text-lg font-bold lg:text-xl text-adlerdarkblue">
+                  {viewModel.shortBreakContentPool[randomIndex][0]}
+                </p>
+                <img
+                  id="slide-3"
+                  className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                  src={viewModel.shortBreakContentPool[randomIndex][3]}
+                  title="Slide 3/3"
+                  alt=""
+                ></img>
+                <figcaption className="p-4 text-lg font-bold text-end lg:text-xl text-adlerdarkblue">
+                  3/3
+                </figcaption>
+              </figure>
+            )}
+            {viewModel.shortBreakContentPool[randomIndex][4] !== "" && (
+              <figure>
+                <p className="pb-4 pl-6 text-lg font-bold lg:text-xl text-adlerdarkblue">
+                  {viewModel.shortBreakContentPool[randomIndex][0]}
+                </p>
+                <img
+                  id="slide-4"
+                  className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                  src={viewModel.shortBreakContentPool[randomIndex][4]}
+                  title="Slide 4/4"
+                  alt=""
+                ></img>
+                <figcaption className="p-4 text-lg font-bold text-end lg:text-xl text-adlerdarkblue">
+                  3/3
+                </figcaption>
+              </figure>
+            )}
           </div>
           <div className="absolute z-10 flex gap-4 -translate-x-1/2 lg:gap-6 slider-nav bottom-2 lg:bottom-4 left-1/2">
-            <a
-              href="#slide-1"
-              className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
-            ></a>
-            <a
-              href="#slide-2"
-              className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
-            ></a>
-            <a
-              href="#slide-3"
-              className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
-            ></a>
+            {viewModel.shortBreakContentPool[randomIndex][1] !== "" && (
+              <a
+                href="#slide-1"
+                className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+              ></a>
+            )}
+            {viewModel.shortBreakContentPool[randomIndex][2] !== "" && (
+              <a
+                href="#slide-2"
+                className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+              ></a>
+            )}
+            {viewModel.shortBreakContentPool[randomIndex][3] !== "" && (
+              <a
+                href="#slide-3"
+                className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+              ></a>
+            )}
+            {viewModel.shortBreakContentPool[randomIndex][4] !== "" && (
+              <a
+                href="#slide-4"
+                className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+              ></a>
+            )}
           </div>
         </div>
       )}
