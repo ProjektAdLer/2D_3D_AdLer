@@ -143,7 +143,13 @@ describe("AdaptivityElementController", () => {
   test("submitSelection calls SubmitSelectionUseCase", () => {
     viewModel.elementID.Value = 42;
     viewModel.currentTask.Value = mockTask;
-    viewModel.currentQuestion.Value = mockQuestion;
+    viewModel.currentQuestion.Value = {
+      ...mockQuestion,
+      questionAnswers: [
+        { ...mockQuestion.questionAnswers[0], isSelected: false },
+        { ...mockQuestion.questionAnswers[1], isSelected: true },
+      ],
+    };
 
     systemUnderTest.submitSelection();
 
