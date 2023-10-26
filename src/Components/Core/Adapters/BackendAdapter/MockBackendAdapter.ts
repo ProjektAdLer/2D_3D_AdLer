@@ -416,7 +416,6 @@ export default class MockBackendAdapter implements IBackendPort {
         taskId: 3,
         taskTitle:
           "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, hier könnte Ihre Werbung stehen",
-        requiredDifficulty: 0,
         adaptivityQuestions: [
           {
             questionType: "multipleResponse",
@@ -843,7 +842,11 @@ export default class MockBackendAdapter implements IBackendPort {
         })
         .filter((e) => e !== undefined)[0];
 
-      if (questionDifficulty && questionDifficulty >= taskDifficulty) {
+      if (
+        questionDifficulty &&
+        taskDifficulty &&
+        questionDifficulty >= taskDifficulty
+      ) {
         BackendTask!.taskStatus = AdaptivityElementStatusTypes.Correct;
         response.gradedTask.taskStatus = AdaptivityElementStatusTypes.Correct;
       }

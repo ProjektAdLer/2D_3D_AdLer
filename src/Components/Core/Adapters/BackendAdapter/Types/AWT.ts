@@ -59,7 +59,7 @@ export interface APIAdaptivityTask {
   taskId: number;
   taskTitle: string;
   optional?: boolean;
-  requiredDifficulty: number;
+  requiredDifficulty?: number;
   adaptivityQuestions: APIAdaptivityQuestion[];
 }
 
