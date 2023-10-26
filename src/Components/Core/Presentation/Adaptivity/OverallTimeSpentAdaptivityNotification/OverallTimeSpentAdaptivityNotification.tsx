@@ -175,25 +175,33 @@ function ShortBreakContent(
               <a
                 href="#slide-1"
                 className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
-              ></a>
+              >
+                <div></div>
+              </a>
             )}
             {viewModel.shortBreakContentPool[randomIndex][2] !== "" && (
               <a
                 href="#slide-2"
                 className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
-              ></a>
+              >
+                <div></div>
+              </a>
             )}
             {viewModel.shortBreakContentPool[randomIndex][3] !== "" && (
               <a
                 href="#slide-3"
                 className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
-              ></a>
+              >
+                <div></div>
+              </a>
             )}
             {viewModel.shortBreakContentPool[randomIndex][4] !== "" && (
               <a
                 href="#slide-4"
                 className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
-              ></a>
+              >
+                <div></div>
+              </a>
             )}
           </div>
         </div>
