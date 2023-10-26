@@ -5,7 +5,7 @@ import LearningWorldCompletionModal from "~ReactComponents/LearningSpaceMenu/Lea
 import SpaceSelection from "~ReactComponents/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelection";
 import { useInjection } from "inversify-react";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import OverallTimeSpentAdaptivityNotification from "../../../Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotification.1";
+import OverallTimeSpentAdaptivityNotification from "../../../Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotification";
 import ICreateOverallTimeSpentNotificationTimerUseCase from "src/Components/Core/Application/UseCases/Adaptivity/OverallTimeSpentNotification/CreateOverallTimeSpentNotificationTimerUseCase/ICreateOverallTimeSpentNotificationTimerUseCase";
 
 export default function LearningSpaceMenu() {

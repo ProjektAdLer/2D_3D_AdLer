@@ -9,7 +9,7 @@ import LearningSpaceSceneDefinition from "../../../Babylon/SceneManagement/Scene
 import ExitModal from "~ReactComponents/LearningSpaceDisplay/ExitModal/ExitModal";
 import LearningSpaceScorePanel from "~ReactComponents/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanel";
 import LearningWorldScorePanel from "~ReactComponents/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanel";
-import OverallTimeSpentAdaptivityNotification from "../../../Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotification.1";
+import OverallTimeSpentAdaptivityNotification from "../../../Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotification";
 import AdaptivityElementDialogContainer from "../../../Adaptivity/AdaptivityElement/UIComponents/AdaptivityElementDialogContainer";
 
 export default function LearningSpace() {
