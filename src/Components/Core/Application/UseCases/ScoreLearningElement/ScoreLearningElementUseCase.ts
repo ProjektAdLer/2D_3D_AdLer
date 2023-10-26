@@ -88,15 +88,6 @@ export default class ScoreLearningElementUseCase
         elementID
       );
 
-    const space =
-      this.entityContainer.filterEntitiesOfType<LearningSpaceEntity>(
-        LearningSpaceEntity,
-        (space) => space?.elements?.includes(elements[0])
-      )[0];
-
-    if (!space)
-      return this.rejectWithWarning("No matching space found!", elementID);
-
     elements[0].hasScored = true;
 
     const newWorldScore = this.calculateWorldScoreUseCase.internalExecute({
