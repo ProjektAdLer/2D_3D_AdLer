@@ -46,6 +46,8 @@ import IGetAdaptivityElementStatusUseCase from "../../Application/UseCases/Adapt
 import GetAdaptivityElementStatusUseCase from "../../Application/UseCases/Adaptivity/GetAdaptivityElementStatusUseCase/GetAdaptivityElementStatusUseCase";
 import ILoadExternalLearningElementUseCase from "../../Application/UseCases/Adaptivity/LoadExternalLearningElementUseCase/ILoadExternalLearningElementUseCase";
 import LoadExternalLearningElementUseCase from "../../Application/UseCases/Adaptivity/LoadExternalLearningElementUseCase/LoadExternalLearningElementUseCase";
+import IScoreAdaptivityElementUseCase from "../../Application/UseCases/Adaptivity/ScoreAdaptivityElementUseCase/IScoreAdaptivityElementUseCase";
+import ScoreAdaptivityElementUseCase from "../../Application/UseCases/Adaptivity/ScoreAdaptivityElementUseCase/ScoreAdaptivityElementUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -165,6 +167,12 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.ILoadExternalLearningElementUseCase
   )
     .to(LoadExternalLearningElementUseCase)
+    .inSingletonScope();
+
+  bind<IScoreAdaptivityElementUseCase>(
+    USECASE_TYPES.IScoreAdaptivityElementUseCase
+  )
+    .to(ScoreAdaptivityElementUseCase)
     .inSingletonScope();
 });
 

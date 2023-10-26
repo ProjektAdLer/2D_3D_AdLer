@@ -322,7 +322,7 @@ export default class MockBackendAdapter implements IBackendPort {
       {
         taskId: 2,
         taskTitle: "Debug Aufgabe",
-        optional: false,
+        optional: true,
         requiredDifficulty: 100,
         adaptivityQuestions: [
           {
@@ -459,7 +459,7 @@ export default class MockBackendAdapter implements IBackendPort {
       {
         taskId: 4,
         taskTitle: "Aufgabe 4, nicht mehr ",
-        optional: false,
+        optional: true,
         requiredDifficulty: 0,
         adaptivityQuestions: [
           {
@@ -504,7 +504,7 @@ export default class MockBackendAdapter implements IBackendPort {
         taskId: 5,
         taskTitle:
           "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, Lorem ipsum dolor sit amet, consetetur sadipscing elitr,",
-        optional: false,
+        optional: true,
         requiredDifficulty: 0,
         adaptivityQuestions: [
           {

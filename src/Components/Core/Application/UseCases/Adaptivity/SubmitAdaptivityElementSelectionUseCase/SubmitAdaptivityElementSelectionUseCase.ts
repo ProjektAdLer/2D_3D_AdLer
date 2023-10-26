@@ -14,6 +14,7 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../../GetUserLocation/IGetUserLocationUseCase";
 import type IScoreLearningElementUseCase from "../../ScoreLearningElement/IScoreLearningElementUseCase";
+import type IScoreAdaptivityElementUseCase from "../ScoreAdaptivityElementUseCase/IScoreAdaptivityElementUseCase";
 
 @injectable()
 export default class SubmitAdaptivityElementSelectionUseCase
@@ -30,8 +31,8 @@ export default class SubmitAdaptivityElementSelectionUseCase
     private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private userLocationUseCase: IGetUserLocationUseCase,
-    @inject(USECASE_TYPES.IScoreLearningElementUseCase)
-    private scoreLearningElementUseCase: IScoreLearningElementUseCase
+    @inject(USECASE_TYPES.IScoreAdaptivityElementUseCase)
+    private scoreAdaptivityElementUseCase: IScoreAdaptivityElementUseCase
   ) {}
 
   async executeAsync(
@@ -52,6 +53,13 @@ export default class SubmitAdaptivityElementSelectionUseCase
         userLocation.worldID,
         submission
       );
+
+    // score the element
+    if (backendResult.elementScore.success === true) {
+      this.scoreAdaptivityElementUseCase.internalExecute(
+        backendResult.elementScore.elementId
+      );
+    }
 
     let progressUpdateTO: AdaptivityElementProgressUpdateTO = {
       elementInfo: backendResult.elementScore,
