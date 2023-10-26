@@ -170,7 +170,10 @@ export default class BackendAdapterUtils {
       tasks.push({
         taskId: task.taskId,
         taskTitle: task.taskTitle,
-        taskOptional: task.optional !== undefined ? task.optional : true,
+        taskOptional:
+          task.optional !== undefined && task.requiredDifficulty !== undefined
+            ? task.optional
+            : true,
         requiredDifficulty: this.mapAdaptivityElementQuestionDifficulty(
           task.requiredDifficulty
         ),
@@ -216,9 +219,12 @@ export default class BackendAdapterUtils {
   }
 
   private static mapAdaptivityElementQuestionDifficulty(
-    difficulty: number
-  ): AdaptivityElementQuestionDifficultyTypes {
-    if (difficulty >= 200) return AdaptivityElementQuestionDifficultyTypes.hard;
+    difficulty: number | undefined
+  ): AdaptivityElementQuestionDifficultyTypes | undefined {
+    if (difficulty === undefined) {
+      return AdaptivityElementQuestionDifficultyTypes.easy;
+    } else if (difficulty >= 200)
+      return AdaptivityElementQuestionDifficultyTypes.hard;
     else if (difficulty >= 100)
       return AdaptivityElementQuestionDifficultyTypes.medium;
     else if (difficulty >= 0)
