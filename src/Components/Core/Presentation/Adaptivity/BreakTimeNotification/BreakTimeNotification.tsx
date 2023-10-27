@@ -21,13 +21,13 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
   const [showModal] = useObservable(viewModel?.showModal);
   const [showMinimizedModal] = useObservable(viewModel?.showMinimizedModal);
   const [breakType] = useObservable(viewModel?.breakType);
-  const [slideIndex] = useObservable(viewModel?.slideIndex);
+  useObservable(viewModel?.slideIndex);
 
   let randomIndex = 0;
 
   useEffect(() => {
     randomIndex = Math.floor(Math.random());
-    viewModel.slideIndex.Value = 1;
+    controller.setSliderIndex(1);
   }, [viewModel?.showModal]);
 
   if (!viewModel || !controller || !showModal || !breakType) return null;

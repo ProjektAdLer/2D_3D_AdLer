@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, getByText, render, screen } from "@testing-library/react";
 import React from "react";
 import BreakTimeNotification from "../../../../Core/Presentation/Adaptivity/BreakTimeNotification/BreakTimeNotification";
 import useBuilderMock from "../../React/ReactRelated/CustomHooks/useBuilder/useBuilderMock";
@@ -95,9 +95,10 @@ describe("BreakTimeNotification", () => {
     useBuilderMock([viewModel, mockController]);
     viewModel.showModal.Value = true;
     viewModel.breakType.Value = BreakTimeNotificationType.Short;
+    viewModel.slideIndex.Value = 0;
 
-    const { getByRole } = render(<BreakTimeNotification />);
-    const closeButton = getByRole("button");
+    const { getByText } = render(<BreakTimeNotification />);
+    const closeButton = getByText("X");
 
     closeButton.click();
 
