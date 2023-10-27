@@ -1,4 +1,4 @@
 import { ISynchronousUsecase } from "../../../../Abstract/ISynchronousUsecase";
 
-export default interface IStartOverallTimeSpentNotificationTimerUseCase
+export default interface IStartOverallTimeSpentTimerUseCase
   extends ISynchronousUsecase<void, void> {}

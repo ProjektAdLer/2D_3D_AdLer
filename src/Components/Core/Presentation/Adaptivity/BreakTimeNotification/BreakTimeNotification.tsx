@@ -1,10 +1,10 @@
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import IOverallTimeSpentAdaptivityNotificationController from "./IOverallTimeSpentAdaptivityNotificationController";
-import OverallTimeSpentAdaptivityNotificationViewModel from "./OverallTimeSpentAdaptivityNotificationViewModel";
+import IBreakTimeNotificationController from "./IBreakTimeNotificationController";
+import BreakTimeNotificationViewModel from "./BreakTimeNotificationViewModel";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
+import { BreakTimeNotificationType } from "src/Components/Core/Domain/Entities/Adaptivity/BreakTimeNotificationEntity";
 import { AdLerUIComponent } from "../../../Types/ReactTypes";
 import tailwindMerge from "../../Utils/TailwindMerge";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
@@ -12,13 +12,11 @@ import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponent
 import pauseIcon from "../../../../../Assets/icons/42-pause-icon/47-pause-icon-nobg.svg";
 import { useEffect } from "react";
 
-export default function OverallTimeSpentAdaptivityNotification({
-  className,
-}: AdLerUIComponent) {
+export default function BreakTimeNotification({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
-    OverallTimeSpentAdaptivityNotificationViewModel,
-    IOverallTimeSpentAdaptivityNotificationController
-  >(BUILDER_TYPES.IOverallTimeSpentAdaptivityNotificationBuilder);
+    BreakTimeNotificationViewModel,
+    IBreakTimeNotificationController
+  >(BUILDER_TYPES.IBreakTimeNotificationBuilder);
 
   const [showModal] = useObservable(viewModel?.showModal);
   const [showMinimizedModal] = useObservable(viewModel?.showMinimizedModal);
@@ -68,16 +66,16 @@ export default function OverallTimeSpentAdaptivityNotification({
 }
 
 function GetNotificationModalContents(
-  breakType: OverallTimeSpentAdaptivityNotificationBreakType,
-  viewModel: OverallTimeSpentAdaptivityNotificationViewModel,
+  breakType: BreakTimeNotificationType,
+  viewModel: BreakTimeNotificationViewModel,
   randomIndex: number
 ) {
   switch (breakType) {
-    case OverallTimeSpentAdaptivityNotificationBreakType.Short:
+    case BreakTimeNotificationType.Short:
       return ShortBreakContent(viewModel, randomIndex);
-    case OverallTimeSpentAdaptivityNotificationBreakType.Medium:
+    case BreakTimeNotificationType.Medium:
       return MediumBreakContent(viewModel, randomIndex);
-    case OverallTimeSpentAdaptivityNotificationBreakType.Long:
+    case BreakTimeNotificationType.Long:
       return LongBreakContent(viewModel, randomIndex);
     default:
       return "";
@@ -85,7 +83,7 @@ function GetNotificationModalContents(
 }
 
 function ShortBreakContent(
-  viewModel: OverallTimeSpentAdaptivityNotificationViewModel,
+  viewModel: BreakTimeNotificationViewModel,
   randomIndex: number
 ) {
   randomIndex = Math.floor(
@@ -211,7 +209,7 @@ function ShortBreakContent(
 }
 
 function MediumBreakContent(
-  viewModel: OverallTimeSpentAdaptivityNotificationViewModel,
+  viewModel: BreakTimeNotificationViewModel,
   randomIndex: number
 ) {
   randomIndex = Math.floor(
@@ -244,7 +242,7 @@ function MediumBreakContent(
 }
 
 function LongBreakContent(
-  viewModel: OverallTimeSpentAdaptivityNotificationViewModel,
+  viewModel: BreakTimeNotificationViewModel,
   randomIndex: number
 ) {
   randomIndex = Math.floor(randomIndex * viewModel.longBreakContentPool.length);

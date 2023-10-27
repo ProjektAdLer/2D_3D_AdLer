@@ -34,7 +34,7 @@ import StandInDecorationBuilder from "../../Presentation/Babylon/StandInDecorati
 import HelpDeskModalBuilder from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModalBuilder";
 import HelpDeskButtonBuilder from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButtonBuilder";
 import AdaptivityElementBuilder from "../../Presentation/Adaptivity/AdaptivityElement/AdaptivityElementBuilder";
-import OverallTimeSpentAdaptivityNotificationBuilder from "../../Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationBuilder";
+import BreakTimeNotificationBuilder from "../../Presentation/Adaptivity/BreakTimeNotification/BreakTimeNotificationBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -126,9 +126,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IAdaptivityElementBuilder).to(
     AdaptivityElementBuilder
   );
-  bind<IPresentationBuilder>(
-    BUILDER_TYPES.IOverallTimeSpentAdaptivityNotificationBuilder
-  ).to(OverallTimeSpentAdaptivityNotificationBuilder);
+  bind<IPresentationBuilder>(BUILDER_TYPES.IBreakTimeNotificationBuilder).to(
+    BreakTimeNotificationBuilder
+  );
 });
 
 export default BuilderDIContainer;

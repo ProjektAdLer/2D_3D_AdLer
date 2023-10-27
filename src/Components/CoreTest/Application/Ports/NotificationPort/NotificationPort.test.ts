@@ -4,7 +4,7 @@ import { mock } from "jest-mock-extended";
 import INotificationAdapter, {
   NotificationType,
 } from "../../../../Core/Application/Ports/NotificationPort/INotificationAdapter";
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "../../../../Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
+import { BreakTimeNotificationType } from "../../../../Core/Domain/Entities/Adaptivity/BreakTimeNotificationEntity";
 
 describe("NotificationPort", () => {
   let systemUnderTest: NotificationPort;
@@ -28,15 +28,15 @@ describe("NotificationPort", () => {
     );
   });
 
-  test("displayOverallTimeSpentAdaptivityNotification calls a registered adapter", () => {
+  test("displayBreakTimeNotification calls a registered adapter", () => {
     const uiAdapterMock = mock<INotificationAdapter>();
     systemUnderTest.registerAdapter(uiAdapterMock);
-    const breakType = OverallTimeSpentAdaptivityNotificationBreakType.Medium;
+    const breakType = BreakTimeNotificationType.Medium;
 
-    systemUnderTest.displayOverallTimeSpentAdaptivityNotification(breakType);
+    systemUnderTest.displayBreakTimeNotification(breakType);
 
-    expect(
-      uiAdapterMock.displayOverallTimeSpentAdaptivityNotification
-    ).toBeCalledWith(breakType);
+    expect(uiAdapterMock.displayBreakTimeNotification).toBeCalledWith(
+      breakType
+    );
   });
 });

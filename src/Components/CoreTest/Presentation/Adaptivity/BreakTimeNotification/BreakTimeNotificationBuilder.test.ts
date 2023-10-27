@@ -1,15 +1,13 @@
 import INotificationPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
 import mock from "jest-mock-extended/lib/Mock";
-import OverallTimeSpentAdaptivityNotificationBuilder from "../../../../Core/Presentation/Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotificationBuilder";
+import BreakTimeNotificationBuilder from "../../../../Core/Presentation/Adaptivity/BreakTimeNotification/BreakTimeNotificationBuilder";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import IUIPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
 
 const uiPortMock = mock<INotificationPort>();
 
-describe("OverallTimeSpentAdaptivityNotificationBuilder", () => {
-  let systemUnderTest: OverallTimeSpentAdaptivityNotificationBuilder;
+describe("BreakTimeNotificationBuilder", () => {
+  let systemUnderTest: BreakTimeNotificationBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -23,7 +21,7 @@ describe("OverallTimeSpentAdaptivityNotificationBuilder", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new OverallTimeSpentAdaptivityNotificationBuilder();
+    systemUnderTest = new BreakTimeNotificationBuilder();
   });
 
   test("buildController builds the controller and registers the viewModel and controller", () => {

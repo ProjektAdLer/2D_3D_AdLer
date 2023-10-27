@@ -9,7 +9,7 @@ import LearningSpaceSceneDefinition from "../../../Babylon/SceneManagement/Scene
 import ExitModal from "~ReactComponents/LearningSpaceDisplay/ExitModal/ExitModal";
 import LearningSpaceScorePanel from "~ReactComponents/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanel";
 import LearningWorldScorePanel from "~ReactComponents/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanel";
-import OverallTimeSpentAdaptivityNotification from "../../../Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotification";
+import BreakTimeNotification from "../../../Adaptivity/BreakTimeNotification/BreakTimeNotification";
 import AdaptivityElementDialogContainer from "../../../Adaptivity/AdaptivityElement/UIComponents/AdaptivityElementDialogContainer";
 
 export default function LearningSpace() {
@@ -35,7 +35,7 @@ export default function LearningSpace() {
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
         <NotificationManager className="z-50" />
-        <OverallTimeSpentAdaptivityNotification />
+        <BreakTimeNotification />
       </div>
     </React.Fragment>
   );

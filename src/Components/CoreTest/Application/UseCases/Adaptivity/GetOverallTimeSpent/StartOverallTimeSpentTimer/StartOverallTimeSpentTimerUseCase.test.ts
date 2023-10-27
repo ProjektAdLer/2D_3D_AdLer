@@ -1,21 +1,22 @@
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "./../../../../../../Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
-import OverallTimeSpentAdaptivityNotificationEntity from "../../../../../../Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
+import BreakTimeNotificationEntity, {
+  BreakTimeNotificationType,
+} from "../../../../../../Core/Domain/Entities/Adaptivity/BreakTimeNotificationEntity";
 import INotificationPort from "../../../../../../Core/Application/Ports/NotificationPort/INotificationAdapter";
-import StartOverallTimeSpentNotificationTimerUseCase from "../../../../../../Core/Application/UseCases/Adaptivity/OverallTimeSpentNotification/StartOverallTimeSpentNotificationTimerUseCase/StartOverallTimeSpentNotificationTimerUseCase";
+import StartOverallTimeSpentTimerUseCase from "../../../../../../Core/Application/UseCases/Adaptivity/GetOverallTimeSpent/StartOverallTimeSpentTimer/StartOverallTimeSpentTimerUseCase";
 import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import mock from "jest-mock-extended/lib/Mock";
 import IEntityContainer from "../../../../../../Core/Domain/EntityContainer/IEntityContainer";
 import CORE_TYPES from "../../../../../../Core/DependencyInjection/CoreTypes";
-import IPauseOverallTimeSpentNotificationTimerUseCase from "../../../../../../Core/Application/UseCases/Adaptivity/OverallTimeSpentNotification/PauseOverallTimeSpentNotificationTimerUseCase/IPauseOverallTimeSpentNotificationTimerUseCase";
+import IPauseOverallTimeSpentTimerUseCase from "../../../../../../Core/Application/UseCases/Adaptivity/GetOverallTimeSpent/PauseOverallTimeSpentTimer/IPauseOverallTimeSpentTimerUseCase";
 
 const notificationPortmock = mock<INotificationPort>();
 const entitycontainermock = mock<IEntityContainer>();
-const pauseUseCaseMock = mock<IPauseOverallTimeSpentNotificationTimerUseCase>();
+const pauseUseCaseMock = mock<IPauseOverallTimeSpentTimerUseCase>();
 
 describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
-  let systemUnderTest: StartOverallTimeSpentNotificationTimerUseCase;
+  let systemUnderTest: StartOverallTimeSpentTimerUseCase;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -27,8 +28,8 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
       CORE_TYPES.IEntityContainer
     ).toConstantValue(entitycontainermock);
 
-    CoreDIContainer.rebind<IPauseOverallTimeSpentNotificationTimerUseCase>(
-      USECASE_TYPES.IPauseOverallTimeSpentNotificationTimerUseCase
+    CoreDIContainer.rebind<IPauseOverallTimeSpentTimerUseCase>(
+      USECASE_TYPES.IPauseOverallTimeSpentTimerUseCase
     ).toConstantValue(pauseUseCaseMock);
   });
 
@@ -38,13 +39,13 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(
-      StartOverallTimeSpentNotificationTimerUseCase
+      StartOverallTimeSpentTimerUseCase
     );
   });
 
   test("execute notifies NotificationPort (type: short)", () => {
     jest.useFakeTimers();
-    const entity = new OverallTimeSpentAdaptivityNotificationEntity();
+    const entity = new BreakTimeNotificationEntity();
     entity.notificationIterator = 0;
 
     entitycontainermock.getEntitiesOfType.mockReturnValue([entity]);
@@ -53,19 +54,17 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
 
     jest.advanceTimersByTime(30 * 1000 * 60 + 1);
     expect(
-      notificationPortmock.displayOverallTimeSpentAdaptivityNotification
+      notificationPortmock.displayBreakTimeNotification
     ).toHaveBeenCalledTimes(1);
     expect(
-      notificationPortmock.displayOverallTimeSpentAdaptivityNotification
-    ).toHaveBeenCalledWith(
-      OverallTimeSpentAdaptivityNotificationBreakType.Short
-    );
+      notificationPortmock.displayBreakTimeNotification
+    ).toHaveBeenCalledWith(BreakTimeNotificationType.Short);
 
     jest.useRealTimers();
   });
   test("execute notifies NotificationPort (type: medium)", () => {
     jest.useFakeTimers();
-    const entity = new OverallTimeSpentAdaptivityNotificationEntity();
+    const entity = new BreakTimeNotificationEntity();
     entity.notificationIterator = 3;
 
     entitycontainermock.getEntitiesOfType.mockReturnValue([entity]);
@@ -74,19 +73,17 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
 
     jest.advanceTimersByTime(30 * 1000 * 60 + 1);
     expect(
-      notificationPortmock.displayOverallTimeSpentAdaptivityNotification
+      notificationPortmock.displayBreakTimeNotification
     ).toHaveBeenCalledTimes(1);
     expect(
-      notificationPortmock.displayOverallTimeSpentAdaptivityNotification
-    ).toHaveBeenCalledWith(
-      OverallTimeSpentAdaptivityNotificationBreakType.Medium
-    );
+      notificationPortmock.displayBreakTimeNotification
+    ).toHaveBeenCalledWith(BreakTimeNotificationType.Medium);
 
     jest.useRealTimers();
   });
   test("execute notifies NotificationPort (type: long)", () => {
     jest.useFakeTimers();
-    const entity = new OverallTimeSpentAdaptivityNotificationEntity();
+    const entity = new BreakTimeNotificationEntity();
     entity.notificationIterator = 7;
 
     entitycontainermock.getEntitiesOfType.mockReturnValue([entity]);
@@ -95,13 +92,11 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
 
     jest.advanceTimersByTime(30 * 1000 * 60 + 1);
     expect(
-      notificationPortmock.displayOverallTimeSpentAdaptivityNotification
+      notificationPortmock.displayBreakTimeNotification
     ).toHaveBeenCalledTimes(1);
     expect(
-      notificationPortmock.displayOverallTimeSpentAdaptivityNotification
-    ).toHaveBeenCalledWith(
-      OverallTimeSpentAdaptivityNotificationBreakType.Long
-    );
+      notificationPortmock.displayBreakTimeNotification
+    ).toHaveBeenCalledWith(BreakTimeNotificationType.Long);
 
     jest.useRealTimers();
   });

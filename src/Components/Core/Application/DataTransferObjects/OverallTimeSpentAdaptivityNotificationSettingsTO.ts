@@ -1,6 +1,6 @@
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
+import { BreakTimeNotificationType } from "src/Components/Core/Domain/Entities/Adaptivity/BreakTimeNotificationEntity";
 
 export default class OverallTimeSpentAdaptivityNotificationSettingsTO {
   // timer in minutes
-  breakType: OverallTimeSpentAdaptivityNotificationBreakType;
+  breakType: BreakTimeNotificationType;
 }

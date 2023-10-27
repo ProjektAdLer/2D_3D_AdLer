@@ -30,14 +30,14 @@ const USECASE_TYPES = {
   ISubmitAdaptivityElementSelectionUseCase: Symbol(
     "ISubmitAdaptivityElementSelectionUseCase"
   ),
-  IStartOverallTimeSpentNotificationTimerUseCase: Symbol(
-    "IStartOverallTimeSpentNotificationTimerUseCase"
+  IStartOverallTimeSpentTimerUseCase: Symbol(
+    "IStartOverallTimeSpentTimerUseCase"
   ),
-  ICreateOverallTimeSpentNotificationTimerUseCase: Symbol(
-    "ICreateOverallTimeSpentNotificationTimerUseCase"
+  ICreateOverallTimeSpentTimerUseCase: Symbol(
+    "ICreateOverallTimeSpentTimerUseCase"
   ),
-  IPauseOverallTimeSpentNotificationTimerUseCase: Symbol(
-    "IPauseOverallTimeSpentNotificationTimerUseCase"
+  IPauseOverallTimeSpentTimerUseCase: Symbol(
+    "IPauseOverallTimeSpentTimerUseCase"
   ),
   ILoadExternalLearningElementUseCase: Symbol(
     "ILoadExternalLearningElementUseCase"

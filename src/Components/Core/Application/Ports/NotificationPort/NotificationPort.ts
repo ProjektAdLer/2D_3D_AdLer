@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import INotificationPort from "../Interfaces/INotificationPort";
 import INotificationAdapter, { NotificationType } from "./INotificationAdapter";
 import AbstractPort from "../AbstractPort/AbstractPort";
-import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
+import { BreakTimeNotificationType } from "src/Components/Core/Domain/Entities/Adaptivity/BreakTimeNotificationEntity";
 
 @injectable()
 export default class NotificationPort
@@ -16,12 +16,10 @@ export default class NotificationPort
     });
   }
 
-  displayOverallTimeSpentAdaptivityNotification(
-    type: OverallTimeSpentAdaptivityNotificationBreakType
-  ): void {
+  displayBreakTimeNotification(type: BreakTimeNotificationType): void {
     this.adapters.forEach((adapter) => {
-      if (adapter.displayOverallTimeSpentAdaptivityNotification)
-        adapter.displayOverallTimeSpentAdaptivityNotification(type);
+      if (adapter.displayBreakTimeNotification)
+        adapter.displayBreakTimeNotification(type);
     });
   }
 }

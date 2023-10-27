@@ -5,14 +5,13 @@ import LearningWorldCompletionModal from "~ReactComponents/LearningSpaceMenu/Lea
 import SpaceSelection from "~ReactComponents/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelection";
 import { useInjection } from "inversify-react";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import OverallTimeSpentAdaptivityNotification from "../../../Adaptivity/OverallTimeSpentAdaptivityNotification/OverallTimeSpentAdaptivityNotification";
-import ICreateOverallTimeSpentNotificationTimerUseCase from "src/Components/Core/Application/UseCases/Adaptivity/OverallTimeSpentNotification/CreateOverallTimeSpentNotificationTimerUseCase/ICreateOverallTimeSpentNotificationTimerUseCase";
+import BreakTimeNotification from "../../../Adaptivity/BreakTimeNotification/BreakTimeNotification";
+import ICreateOverallTimeSpentTimerUseCase from "src/Components/Core/Application/UseCases/Adaptivity/GetOverallTimeSpent/CreateOverallTimeSpentTimer/ICreateOverallTimeSpentTimerUseCase";
 
 export default function LearningSpaceMenu() {
-  const createTimerUseCase =
-    useInjection<ICreateOverallTimeSpentNotificationTimerUseCase>(
-      USECASE_TYPES.ICreateOverallTimeSpentNotificationTimerUseCase
-    );
+  const createTimerUseCase = useInjection<ICreateOverallTimeSpentTimerUseCase>(
+    USECASE_TYPES.ICreateOverallTimeSpentTimerUseCase
+  );
 
   useEffect(() => {
     createTimerUseCase.execute();
@@ -31,7 +30,7 @@ export default function LearningSpaceMenu() {
         />
       </div>
       <LearningWorldCompletionModal className="transition-opacity duration-100 ease-in delay-75" />
-      <OverallTimeSpentAdaptivityNotification />
+      <BreakTimeNotification />
     </React.Fragment>
   );
 }
