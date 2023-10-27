@@ -13,20 +13,21 @@ import { AdaptivityElementStatusTypes } from "../../../../../Core/Domain/Types/A
 import IGetUserLocationUseCase from "../../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import UserLocationTO from "../../../../../Core/Application/DataTransferObjects/UserLocationTO";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import IScoreLearningElementUseCase from "../../../../../Core/Application/UseCases/ScoreLearningElement/IScoreLearningElementUseCase";
 import AdaptivityElementQuestionResponse from "../../../../../Core/Adapters/BackendAdapter/Types/AdaptivityElementQuestionResponse";
+import IScoreAdaptivityElementUseCase from "../../../../../Core/Application/UseCases/Adaptivity/ScoreAdaptivityElementUseCase/IScoreAdaptivityElementUseCase";
 
 const worldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const backendPortMock = mock<IBackendPort>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
-const scoreLearningElementUseCaseMock = mock<IScoreLearningElementUseCase>();
+const scoreAdaptivityElementUseCaseMock =
+  mock<IScoreAdaptivityElementUseCase>();
 
 const submitted: AdaptivityElementQuestionSubmissionTO = {
   elementID: 1,
   taskID: 2,
   questionID: 3,
-  selectedAnswerIDs: [1, 2],
+  selectedAnswers: [true, true],
 };
 
 describe("SubmitAdaptivityElementSelectionUseCase", () => {
@@ -47,8 +48,8 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
       USECASE_TYPES.IGetUserLocationUseCase
     ).toConstantValue(getUserLocationUseCaseMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.IScoreLearningElementUseCase
-    ).toConstantValue(scoreLearningElementUseCaseMock);
+      USECASE_TYPES.IScoreAdaptivityElementUseCase
+    ).toConstantValue(scoreAdaptivityElementUseCaseMock);
   });
 
   beforeEach(() => {
@@ -87,7 +88,39 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
     await expect(result).rejects.toThrowError();
   });
 
-  test("calls executeAsync on the SubmitSelectionUseCase", async () => {
+  test("calls ScoreAdaptivityElementUseCase when elementScore.success is true", async () => {
+    entityContainerMock.getEntitiesOfType.mockReturnValue([
+      {} as UserDataEntity,
+    ]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: 1,
+    });
+    backendPortMock.getAdaptivityElementQuestionResponse.mockResolvedValue({
+      elementScore: {
+        elementId: 1,
+        success: true,
+      },
+      gradedTask: {
+        taskId: 2,
+        taskStatus: "Correct",
+      },
+      gradedQuestion: {
+        id: 3,
+        status: "Correct",
+        answers: [{ checked: true, correct: true }],
+      },
+    } as AdaptivityElementQuestionResponse);
+
+    await systemUnderTest.executeAsync(submitted);
+
+    expect(scoreAdaptivityElementUseCaseMock.internalExecute).toBeCalledTimes(
+      1
+    );
+    expect(scoreAdaptivityElementUseCaseMock.internalExecute).toBeCalledWith(1);
+  });
+
+  test("calls onAdaptivityElementAnswerEvaluated on world port", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       {
         userToken: "",
@@ -108,7 +141,7 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
       gradedQuestion: {
         id: 3,
         status: "Correct",
-        answer: [{ checked: true, correct: true }],
+        answers: [{ checked: true, correct: true }],
       },
     } as AdaptivityElementQuestionResponse);
 
