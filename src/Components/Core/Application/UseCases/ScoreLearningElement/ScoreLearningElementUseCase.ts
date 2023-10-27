@@ -6,7 +6,6 @@ import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContai
 import IScoreLearningElementUseCase from "./IScoreLearningElementUseCase";
 import type IBackendPort from "../../Ports/Interfaces/IBackendPort";
 import LearningElementEntity from "../../../Domain/Entities/LearningElementEntity";
-import LearningSpaceEntity from "../../../Domain/Entities/LearningSpaceEntity";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";

@@ -13,7 +13,6 @@ import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../../GetUserLocation/IGetUserLocationUseCase";
-import type IScoreLearningElementUseCase from "../../ScoreLearningElement/IScoreLearningElementUseCase";
 import type IScoreAdaptivityElementUseCase from "../ScoreAdaptivityElementUseCase/IScoreAdaptivityElementUseCase";
 
 @injectable()
