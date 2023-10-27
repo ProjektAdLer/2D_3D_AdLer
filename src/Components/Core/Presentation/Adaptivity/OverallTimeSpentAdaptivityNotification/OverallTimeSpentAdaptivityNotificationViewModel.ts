@@ -159,9 +159,9 @@ export default class OverallTimeSpentAdaptivityNotificationViewModel {
   longBreakContentPool: [string, string, string, string, string][] = [
     [
       "Sie haben nun 4 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine längere Pause von mindestens 90 Minuten empfehlen. Wie wäre es denn mit einem Spaziergang?",
-      MediumBreakS3Slide1Image,
-      MediumBreakS3Slide2Image,
-      MediumBreakS3Slide3Image,
+      LongBreakH1Slide1Image,
+      LongBreakH1Slide2Image,
+      LongBreakH1Slide3Image,
       "",
     ],
   ];
