@@ -1,10 +1,12 @@
 import Observable from "../../../../../Lib/Observable";
 import { OverallTimeSpentAdaptivityNotificationBreakType } from "src/Components/Core/Domain/Entities/Adaptivity/OverallTimeSpentAdaptivityNotificationEntity";
 // Small Break alles außer H und S
-// Small Break L1
-import SmallBreakL1Slide1Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/L1/smallBreakContent-L1-slide1.png";
-import SmallBreakL1Slide2Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/L1/smallBreakContent-L1-slide2.png";
-import SmallBreakL1Slide3Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/L1/smallBreakContent-L1-slide3.png";
+// Small Break B3
+import SmallBreakB3Slide1Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/B3/smallBreakContent-B3-slide1.png";
+import SmallBreakB3Slide2Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/B3/smallBreakContent-B3-slide2.png";
+// Small Break B7
+import SmallBreakB7Slide1Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/B7/smallBreakContent-B7-slide1.png";
+import SmallBreakB7Slide2Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/B7/smallBreakContent-B7-slide2.png";
 // Small Break B8
 import SmallBreakB8Slide1Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/B8/smallBreakContent-B8-slide1.png";
 import SmallBreakB8Slide2Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/B8/smallBreakContent-B8-slide2.png";
@@ -17,6 +19,13 @@ import SmallBreakE4Slide1Image from "../../../../../Assets/OverallTimeSpentAdapt
 // Small Break E10
 import SmallBreakE10Slide1Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/E10/smallBreakContent-E10-slide1.png";
 import SmallBreakE10Slide2Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/E10/smallBreakContent-E10-slide2.png";
+// Small Break L1
+import SmallBreakL1Slide1Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/L1/smallBreakContent-L1-slide1.png";
+import SmallBreakL1Slide2Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/L1/smallBreakContent-L1-slide2.png";
+import SmallBreakL1Slide3Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/L1/smallBreakContent-L1-slide3.png";
+// Small Break L3
+import SmallBreakL3Slide1Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/L3/smallBreakContent-L3-slide1.png";
+import SmallBreakL3Slide2Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/L3/smallBreakContent-L3-slide2.png";
 // Small Break L5
 import SmallBreakL5Slide1Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/L5/smallBreakContent-L5-slide1.png";
 import SmallBreakL5Slide2Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/L5/smallBreakContent-L5-slide2.png";
@@ -27,10 +36,19 @@ import SmallBreakU3Slide3Image from "../../../../../Assets/OverallTimeSpentAdapt
 import SmallBreakU3Slide4Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/U3/smallBreakContent-U3-slide4.png";
 // Medium Break = S
 // Medium Break S1
-import MediumBreak1Slide1Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/S1/mediumBreakContent-S1-slide1.png";
-import MediumBreak1Slide2Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/S1/mediumBreakContent-S1-slide2.png";
-import MediumBreak1Slide3Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/S1/mediumBreakContent-S1-slide3.png";
+import MediumBreakS1Slide1Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/S1/mediumBreakContent-S1-slide1.png";
+import MediumBreakS1Slide2Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/S1/mediumBreakContent-S1-slide2.png";
+import MediumBreakS1Slide3Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/S1/mediumBreakContent-S1-slide3.png";
+import MediumBreakS1Slide4Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/S1/mediumBreakContent-S1-slide4.png";
+// Medium Break S3
+import MediumBreakS3Slide1Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/S3/mediumBreakContent-S3-slide1.png";
+import MediumBreakS3Slide2Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/S3/mediumBreakContent-S3-slide2.png";
+import MediumBreakS3Slide3Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/S3/mediumBreakContent-S3-slide3.png";
 // Long Break = H
+//Long Break H1
+import LongBreakH1Slide1Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/H1/longBreakContent-H1-slide1.png";
+import LongBreakH1Slide2Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/H1/longBreakContent-H1-slide2.png";
+import LongBreakH1Slide3Image from "../../../../../Assets/OverallTimeSpentAdaptivityAssets/H1/longBreakContent-H1-slide3.png";
 export default class OverallTimeSpentAdaptivityNotificationViewModel {
   showModal: Observable<boolean> = new Observable<boolean>(false);
   showMinimizedModal: Observable<boolean> = new Observable<boolean>(false);
@@ -48,10 +66,17 @@ export default class OverallTimeSpentAdaptivityNotificationViewModel {
     // ],
     // ["title2", "Content2", ""],
     [
-      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
-      SmallBreakL1Slide1Image,
-      SmallBreakL1Slide2Image,
-      SmallBreakL1Slide3Image,
+      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Auf dem Bild sehen Sie eine kurze Übung zur Mobilisation.",
+      SmallBreakB3Slide1Image,
+      SmallBreakB3Slide2Image,
+      "",
+      "",
+    ],
+    [
+      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Auf dem Bild sehen Sie eine kurze Übung zur Mobilisation.",
+      SmallBreakB7Slide1Image,
+      SmallBreakB7Slide2Image,
+      "",
       "",
     ],
     [
@@ -84,6 +109,20 @@ export default class OverallTimeSpentAdaptivityNotificationViewModel {
     ],
     [
       "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
+      SmallBreakL1Slide1Image,
+      SmallBreakL1Slide2Image,
+      SmallBreakL1Slide3Image,
+      "",
+    ],
+    [
+      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
+      SmallBreakL3Slide1Image,
+      SmallBreakL3Slide2Image,
+      "",
+      "",
+    ],
+    [
+      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
       SmallBreakL5Slide1Image,
       SmallBreakL5Slide2Image,
       "",
@@ -99,14 +138,31 @@ export default class OverallTimeSpentAdaptivityNotificationViewModel {
   ];
 
   //mediumBreakContentPool structure: title, content, source
-  mediumBreakContentPool: [string, string, string][] = [
-    ["title1", "Content1", "Source1"],
-    ["title2", "Content2", "Source2"],
+  mediumBreakContentPool: [string, string, string, string, string][] = [
+    [
+      "Sie haben nun 2 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine Pause von mindestens 20 Minuten empfehlen. Wie wäre es denn mit aktivem bzw. bewusstem Musikhören?",
+      MediumBreakS1Slide1Image,
+      MediumBreakS1Slide1Image,
+      MediumBreakS1Slide1Image,
+      MediumBreakS1Slide1Image,
+    ],
+    [
+      "Sie haben nun 2 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine Pause von mindestens 20 Minuten empfehlen. Warum?",
+      MediumBreakS3Slide1Image,
+      MediumBreakS3Slide2Image,
+      MediumBreakS3Slide3Image,
+      "",
+    ],
   ];
 
   //longBreakContentPool structure: title, content, source
-  longBreakContentPool: [string, string, string][] = [
-    ["title1", "Content1", "Source1"],
-    ["title2", "Content2", "Source2"],
+  longBreakContentPool: [string, string, string, string, string][] = [
+    [
+      "Sie haben nun 4 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine längere Pause von mindestens 90 Minuten empfehlen. Wie wäre es denn mit einem Spaziergang?",
+      MediumBreakS3Slide1Image,
+      MediumBreakS3Slide2Image,
+      MediumBreakS3Slide3Image,
+      "",
+    ],
   ];
 }
