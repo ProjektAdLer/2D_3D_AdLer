@@ -133,7 +133,7 @@ export default class OverallTimeSpentAdaptivityNotificationViewModel {
       SmallBreakU3Slide1Image,
       SmallBreakU3Slide2Image,
       SmallBreakU3Slide3Image,
-      SmallBreakU3Slide3Image,
+      SmallBreakU3Slide4Image,
     ],
   ];
 
@@ -142,9 +142,9 @@ export default class OverallTimeSpentAdaptivityNotificationViewModel {
     [
       "Sie haben nun 2 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine Pause von mindestens 20 Minuten empfehlen. Wie wäre es denn mit aktivem bzw. bewusstem Musikhören?",
       MediumBreakS1Slide1Image,
-      MediumBreakS1Slide1Image,
-      MediumBreakS1Slide1Image,
-      MediumBreakS1Slide1Image,
+      MediumBreakS1Slide2Image,
+      MediumBreakS1Slide3Image,
+      MediumBreakS1Slide4Image,
     ],
     [
       "Sie haben nun 2 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine Pause von mindestens 20 Minuten empfehlen. Warum?",
