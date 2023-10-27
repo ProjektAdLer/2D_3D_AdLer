@@ -257,8 +257,7 @@ describe("ScoreLearningElementUseCase", () => {
     );
   });
 
-  // TODO: fix this test
-  test.skip("executeAsync rejects if spaceID is set undefined in UserLocation", async () => {
+  test("executeAsync rejects if spaceID is set undefined in UserLocation", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: undefined,
       worldID: 1,

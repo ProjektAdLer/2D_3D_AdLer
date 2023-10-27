@@ -50,11 +50,9 @@ export default class ScoreLearningElementUseCase
     // get the current user location
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
-      this.logger.log(
-        LogLevelTypes.ERROR,
-        `ScoreLearningElementUseCase: User is not in a space!`
+      return this.rejectWithWarning(
+        "User is not in a space! Trying to score elememt " + elementID
       );
-      throw new Error(`User is not in a space!`);
     }
 
     // call backend
