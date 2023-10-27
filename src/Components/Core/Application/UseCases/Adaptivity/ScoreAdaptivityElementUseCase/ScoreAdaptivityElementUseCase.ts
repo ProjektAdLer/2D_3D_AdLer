@@ -39,20 +39,17 @@ export default class ScoreAdaptivityElementUseCase
       this.entityContainer.getEntitiesOfType(UserDataEntity)[0];
 
     if (!userEntity?.isLoggedIn) {
-      this.rejectWithWarning(
-        "User is not logged in! Trying to score elememt " + elementID
-      );
+      this.warn("User is not logged in! Trying to score elememt " + elementID);
       return;
     }
 
     // get the current user location
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
-      this.logger.log(
-        LogLevelTypes.ERROR,
-        `ScoreLearningElementUseCase: User is not in a space!`
+      this.warn(
+        "User is not in a world or space! Trying to score element " + elementID
       );
-      throw new Error(`User is not in a space!`);
+      return;
     }
 
     const elements =
@@ -64,13 +61,10 @@ export default class ScoreAdaptivityElementUseCase
       );
 
     if (elements.length === 0) {
-      this.rejectWithWarning("No matching element found!", elementID);
+      this.warn("No matching element found!", elementID);
       return;
     } else if (elements.length > 1) {
-      this.rejectWithWarning(
-        "More than one matching element found!",
-        elementID
-      );
+      this.warn("More than one matching element found!", elementID);
       return;
     }
 
@@ -90,13 +84,12 @@ export default class ScoreAdaptivityElementUseCase
     this.worldPort.onLearningWorldScored(newWorldScore);
   }
 
-  private rejectWithWarning(message: string, id?: ComponentID): Promise<void> {
+  private warn(message: string, id?: ComponentID): void {
     this.logger.log(
       LogLevelTypes.WARN,
       `ScoreLearningElementUseCase: ` +
         message +
         `${id ? " ElementID: " + id : ""}`
     );
-    return Promise.reject(message);
   }
 }
