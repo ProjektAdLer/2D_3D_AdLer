@@ -46,7 +46,7 @@ describe("AdaptivityElementAnswerSelection", () => {
             {
               answerIndex: 0,
               answerText: "testAnswerText",
-              isSelected: false,
+              isSelected: true, // must be true to enable submit button
             },
           ],
           hints: [],

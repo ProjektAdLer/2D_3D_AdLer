@@ -4,6 +4,10 @@ import StyledButton, {
   StyledButtonColor,
 } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
+function getIsAnyAnswerSelected(question: AdaptivityQuestion): boolean {
+  return question.questionAnswers.some((a) => a.isSelected === true);
+}
+
 export default function AdaptivityElementAnswerSelection({
   question,
   submitSelection,
@@ -16,8 +20,9 @@ export default function AdaptivityElementAnswerSelection({
   setHeaderText: (headerText: string) => void;
 }) {
   const [answerColors, setAnswerColors] = useState<StyledButtonColor[]>([]);
-  const [isAnyAnswerSelected, setIsAnyAnswerSelected] =
-    useState<boolean>(false);
+  const [isAnyAnswerSelected, setIsAnyAnswerSelected] = useState<boolean>(
+    getIsAnyAnswerSelected(question)
+  );
 
   useEffect(() => {
     setHeaderText(question.questionText);
@@ -38,10 +43,7 @@ export default function AdaptivityElementAnswerSelection({
         return answer.isSelected ? "highlight" : "default";
       });
 
-      const isSelected = question.questionAnswers.some(
-        (a) => a.isSelected === true
-      );
-      setIsAnyAnswerSelected(isSelected);
+      setIsAnyAnswerSelected(getIsAnyAnswerSelected(question));
 
       setAnswerColors(newColors);
     },
