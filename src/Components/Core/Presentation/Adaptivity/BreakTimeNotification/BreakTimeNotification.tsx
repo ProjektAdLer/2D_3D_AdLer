@@ -21,11 +21,13 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
   const [showModal] = useObservable(viewModel?.showModal);
   const [showMinimizedModal] = useObservable(viewModel?.showMinimizedModal);
   const [breakType] = useObservable(viewModel?.breakType);
+  const [slideIndex] = useObservable(viewModel?.slideIndex);
 
   let randomIndex = 0;
 
   useEffect(() => {
     randomIndex = Math.floor(Math.random());
+    viewModel.slideIndex.Value = 1;
   }, [viewModel?.showModal]);
 
   if (!viewModel || !controller || !showModal || !breakType) return null;
@@ -60,7 +62,12 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
       onClose={() => controller.minimizeOrMaximizeBreakNotification()}
       title="Pausenhinweis"
     >
-      {GetNotificationModalContents(breakType, viewModel, randomIndex)}
+      {GetNotificationModalContents(
+        breakType,
+        viewModel,
+        controller,
+        randomIndex
+      )}
     </StyledModal>
   );
 }
@@ -68,15 +75,16 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
 function GetNotificationModalContents(
   breakType: BreakTimeNotificationType,
   viewModel: BreakTimeNotificationViewModel,
+  controller: IBreakTimeNotificationController,
   randomIndex: number
 ) {
   switch (breakType) {
     case BreakTimeNotificationType.Short:
-      return ShortBreakContent(viewModel, randomIndex);
+      return ShortBreakContent(viewModel, controller, randomIndex);
     case BreakTimeNotificationType.Medium:
-      return MediumBreakContent(viewModel, randomIndex);
+      return MediumBreakContent(viewModel, controller, randomIndex);
     case BreakTimeNotificationType.Long:
-      return LongBreakContent(viewModel, randomIndex);
+      return LongBreakContent(viewModel, controller, randomIndex);
     default:
       return "";
   }
@@ -84,6 +92,7 @@ function GetNotificationModalContents(
 
 function ShortBreakContent(
   viewModel: BreakTimeNotificationViewModel,
+  controller: IBreakTimeNotificationController,
   randomIndex: number
 ) {
   randomIndex = Math.floor(
@@ -96,120 +105,107 @@ function ShortBreakContent(
     >
       {/* media */}
       {/*Bitte die "nicht Tailwindklassen" drinne lassen! Brauchen hierfür Plain CSS in der app.css*/}
-      {viewModel.shortBreakContentPool[randomIndex][2] !== "" && (
-        <div className="relative mx-0 my-auto slider-wrapper">
-          <div className="flex gap-4 overflow-x-auto slider snap-x snap-mandatory scroll-smooth lg:max-w-[60vw] max-w-[90vw]">
-            {viewModel.shortBreakContentPool[randomIndex][1] !== "" && (
-              <figure>
-                <p className="pb-4 pl-6 text-lg font-bold lg:text-xl text-adlerdarkblue">
-                  {viewModel.shortBreakContentPool[randomIndex][0]}
-                </p>
-                <img
-                  id="slide-1"
-                  className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                  src={viewModel.shortBreakContentPool[randomIndex][1]}
-                  title="Slide 1/3"
-                  alt=""
-                ></img>
-                <figcaption className="p-4 text-lg font-bold text-end lg:text-xl text-adlerdarkblue">
-                  1/3
-                </figcaption>
-              </figure>
+
+      <div className="relative mx-0 my-auto slider-wrapper">
+        <div className="flex gap-4 overflow-x-auto slider snap-x snap-mandatory scroll-smooth lg:max-w-[60vw] max-w-[90vw]">
+          <figure>
+            <p className="pb-4 pl-6 text-lg font-bold lg:text-xl text-adlerdarkblue">
+              {viewModel.shortBreakContentPool[randomIndex][0]}
+            </p>
+            {viewModel.slideIndex.Value === 1 && (
+              <img
+                id="slide-1"
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                src={viewModel.shortBreakContentPool[randomIndex][1]}
+                title="Slide 1/3"
+                alt=""
+              ></img>
             )}
-            {viewModel.shortBreakContentPool[randomIndex][2] !== "" && (
-              <figure>
-                <p className="pb-4 pl-6 text-lg font-bold lg:text-xl text-adlerdarkblue">
-                  {viewModel.shortBreakContentPool[randomIndex][0]}
-                </p>
-                <img
-                  id="slide-2"
-                  className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                  src={viewModel.shortBreakContentPool[randomIndex][2]}
-                  title="Slide 2/3"
-                  alt=""
-                ></img>
-                <figcaption className="p-4 text-lg font-bold text-end lg:text-xl text-adlerdarkblue">
-                  2/3
-                </figcaption>
-              </figure>
+            {viewModel.slideIndex.Value === 2 && (
+              <img
+                id="slide-2"
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                src={viewModel.shortBreakContentPool[randomIndex][2]}
+                title="Slide 2/3"
+                alt=""
+              ></img>
             )}
-            {viewModel.shortBreakContentPool[randomIndex][3] !== "" && (
-              <figure>
-                <p className="pb-4 pl-6 text-lg font-bold lg:text-xl text-adlerdarkblue">
-                  {viewModel.shortBreakContentPool[randomIndex][0]}
-                </p>
-                <img
-                  id="slide-3"
-                  className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                  src={viewModel.shortBreakContentPool[randomIndex][3]}
-                  title="Slide 3/3"
-                  alt=""
-                ></img>
-                <figcaption className="p-4 text-lg font-bold text-end lg:text-xl text-adlerdarkblue">
-                  3/3
-                </figcaption>
-              </figure>
+            {viewModel.slideIndex.Value === 3 && (
+              <img
+                id="slide-3"
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                src={viewModel.shortBreakContentPool[randomIndex][3]}
+                title="Slide 3/3"
+                alt=""
+              ></img>
             )}
-            {viewModel.shortBreakContentPool[randomIndex][4] !== "" && (
-              <figure>
-                <p className="pb-4 pl-6 text-lg font-bold lg:text-xl text-adlerdarkblue">
-                  {viewModel.shortBreakContentPool[randomIndex][0]}
-                </p>
-                <img
-                  id="slide-4"
-                  className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                  src={viewModel.shortBreakContentPool[randomIndex][4]}
-                  title="Slide 4/4"
-                  alt=""
-                ></img>
-                <figcaption className="p-4 text-lg font-bold text-end lg:text-xl text-adlerdarkblue">
-                  3/3
-                </figcaption>
-              </figure>
+            {viewModel.slideIndex.Value === 4 && (
+              <img
+                id="slide-4"
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                src={viewModel.shortBreakContentPool[randomIndex][4]}
+                title="Slide 4/4"
+                alt=""
+              ></img>
             )}
-          </div>
+          </figure>
+        </div>
+        {viewModel.shortBreakContentPool[randomIndex][2] !== "" && (
           <div className="absolute z-10 flex gap-4 -translate-x-1/2 lg:gap-6 slider-nav bottom-2 lg:bottom-4 left-1/2">
             {viewModel.shortBreakContentPool[randomIndex][1] !== "" && (
-              <a
-                href="#slide-1"
-                className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
-              >
-                <div></div>
-              </a>
+              <button
+                className={
+                  (viewModel.slideIndex.Value === 1
+                    ? "bg-yellow-400 "
+                    : "bg-white ") +
+                  "w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+                }
+                onClick={() => controller.setSliderIndex(1)}
+              ></button>
             )}
             {viewModel.shortBreakContentPool[randomIndex][2] !== "" && (
-              <a
-                href="#slide-2"
-                className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
-              >
-                <div></div>
-              </a>
+              <button
+                className={
+                  (viewModel.slideIndex.Value === 2
+                    ? "bg-yellow-400 "
+                    : "bg-white ") +
+                  "w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+                }
+                onClick={() => controller.setSliderIndex(2)}
+              ></button>
             )}
             {viewModel.shortBreakContentPool[randomIndex][3] !== "" && (
-              <a
-                href="#slide-3"
-                className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
-              >
-                <div></div>
-              </a>
+              <button
+                className={
+                  (viewModel.slideIndex.Value === 3
+                    ? "bg-yellow-400 "
+                    : "bg-white ") +
+                  "w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+                }
+                onClick={() => controller.setSliderIndex(3)}
+              ></button>
             )}
             {viewModel.shortBreakContentPool[randomIndex][4] !== "" && (
-              <a
-                href="#slide-4"
-                className="w-2 h-2 transition duration-200 ease-in-out bg-white rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
-              >
-                <div></div>
-              </a>
+              <button
+                className={
+                  (viewModel.slideIndex.Value === 4
+                    ? "bg-yellow-400 "
+                    : "bg-white ") +
+                  "w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+                }
+                onClick={() => controller.setSliderIndex(4)}
+              ></button>
             )}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
 
 function MediumBreakContent(
   viewModel: BreakTimeNotificationViewModel,
+  controller: IBreakTimeNotificationController,
   randomIndex: number
 ) {
   randomIndex = Math.floor(
@@ -243,6 +239,7 @@ function MediumBreakContent(
 
 function LongBreakContent(
   viewModel: BreakTimeNotificationViewModel,
+  controller: IBreakTimeNotificationController,
   randomIndex: number
 ) {
   randomIndex = Math.floor(randomIndex * viewModel.longBreakContentPool.length);

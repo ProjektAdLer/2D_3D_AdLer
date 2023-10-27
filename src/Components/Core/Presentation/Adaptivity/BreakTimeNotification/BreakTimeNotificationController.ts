@@ -13,4 +13,7 @@ export default class BreakTimeNotificationController
     this.viewModel.showMinimizedModal.Value =
       !this.viewModel.showMinimizedModal.Value;
   }
+  setSliderIndex(index: number): void {
+    this.viewModel.slideIndex.Value = index;
+  }
 }
