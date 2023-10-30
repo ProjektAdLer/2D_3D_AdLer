@@ -10,7 +10,7 @@ import tailwindMerge from "../../Utils/TailwindMerge";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
 import pauseIcon from "../../../../../Assets/icons/42-pause-icon/47-pause-icon-nobg.svg";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function BreakTimeNotification({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
@@ -22,13 +22,12 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
   const [showMinimizedModal] = useObservable(viewModel?.showMinimizedModal);
   const [breakType] = useObservable(viewModel?.breakType);
   useObservable(viewModel?.slideIndex);
-
-  let randomIndex = 0;
+  const [randomIndex, setRandomIndex] = useState<number>(0);
 
   useEffect(() => {
-    randomIndex = Math.floor(Math.random());
+    setRandomIndex(Math.floor(Math.random()));
     controller.setSliderIndex(1);
-  }, [viewModel?.showModal]);
+  }, [viewModel?.showModal, controller]);
 
   if (!viewModel || !controller || !showModal || !breakType) return null;
 

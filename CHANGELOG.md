@@ -10,6 +10,34 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+-
+
+### Changed
+
+-
+
+### Deprecated
+
+-
+
+### Removed
+
+-
+
+### Fixed
+
+-
+
+### Security
+
+-
+
+</details>
+
+## Version 2.0.0-rc.1
+
+### Added
+
 - Adaptivity Element:
 
   - specific icon for adaptivity element
@@ -50,8 +78,6 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Security
 
 -
-
-</details>
 
 ## Version 1.3.0 - 08.09.2023
 
