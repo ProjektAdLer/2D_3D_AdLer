@@ -10,7 +10,12 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- styling of general layout in adaptivity element, as well as buttons themselves
+- Adaptivity Element:
+  - progressmeter
+  - task selection with icons for question status
+  - question selection with adaptive hints
+  - question answer mask for single and multiple choice
+  - responsive UI
 
 ### Changed
 
@@ -26,7 +31,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- bug that preventted update of score panel when scoring h5p elements
+- bug that prevented update of score panel when scoring h5p elements
 
 ### Security
 
