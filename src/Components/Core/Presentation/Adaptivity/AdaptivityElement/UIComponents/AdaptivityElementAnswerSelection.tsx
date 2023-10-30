@@ -47,7 +47,7 @@ export default function AdaptivityElementAnswerSelection({
 
       setAnswerColors(newColors);
     },
-    [question.isMultipleChoice, question.questionAnswers]
+    [question]
   );
 
   return (
