@@ -11,10 +11,23 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Adaptivity Element:
+
+  - specific icon for adaptivity element
+  - 3D representation of NPC
+  - 2D representation of NPC
+  - dialog line
   - progressmeter
   - task selection with icons for question status
   - question selection with adaptive hints
+  - three different diffculties for questions
   - question answer mask for single and multiple choice
+  - responsive UI
+
+- Time Spent Element:
+  - break notification every 30 minutes
+  - 3 types of break advices for short, medium and long breaks
+  - 13 different break advices
+  - randomized selection of break advice
   - responsive UI
 
 ### Changed
