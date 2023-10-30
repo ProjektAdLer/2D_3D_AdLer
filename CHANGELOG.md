@@ -59,25 +59,9 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
   - up to four slides per break notification
   - responsive UI
 
-### Changed
-
--
-
-### Deprecated
-
--
-
-### Removed
-
--
-
 ### Fixed
 
 - bug that prevented update of score panel when scoring h5p elements
-
-### Security
-
--
 
 ## Version 1.3.0 - 08.09.2023
 
