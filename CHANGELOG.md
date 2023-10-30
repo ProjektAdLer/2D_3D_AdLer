@@ -28,6 +28,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
   - 3 types of break advices for short, medium and long breaks
   - 13 different break advices
   - randomized selection of break advice
+  - up to four slides per break notification
   - responsive UI
 
 ### Changed
