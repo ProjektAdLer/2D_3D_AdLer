@@ -49,6 +49,15 @@ import MediumBreakS3Slide3Image from "../../../../../Assets/BreakTimeAssets/S3/m
 import LongBreakH1Slide1Image from "../../../../../Assets/BreakTimeAssets/H1/longBreakContent-H1-slide1.png";
 import LongBreakH1Slide2Image from "../../../../../Assets/BreakTimeAssets/H1/longBreakContent-H1-slide2.png";
 import LongBreakH1Slide3Image from "../../../../../Assets/BreakTimeAssets/H1/longBreakContent-H1-slide3.png";
+
+type breakObject = {
+  titleMessage: string;
+  image1: string;
+  image2: string;
+  image3: string;
+  image4: string;
+  seenBefore: boolean;
+};
 export default class BreakTimeNotificationViewModel {
   showModal: Observable<boolean> = new Observable<boolean>(false);
   showMinimizedModal: Observable<boolean> = new Observable<boolean>(false);
@@ -57,111 +66,131 @@ export default class BreakTimeNotificationViewModel {
   slideIndex: Observable<number> = new Observable<number>(1);
 
   //shortBreakContentPool structure: title, imageContent, imageContent, imageContent, imageContent
-  shortBreakContentPool: [string, string, string, string, string][] = [
-    // [
-    //   "Why not play a game of AoE2?",
-    //   "Here are a bunch of reasons why playing right now is a good idea. \n Reason 1. \n Reason 2. \n Reason 3.",
-    //   "https://media.tenor.com/xTyVDYFg_fsAAAAC/lizard-hehe.gif",
-    // ],
-    // ["title2", "Content2", ""],
-    [
-      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Auf dem Bild sehen Sie eine kurze Übung zur Mobilisation.",
-      SmallBreakB3Slide1Image,
-      SmallBreakB3Slide2Image,
-      "",
-      "",
-    ],
-    [
-      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Auf dem Bild sehen Sie eine kurze Übung zur Mobilisation.",
-      SmallBreakB7Slide1Image,
-      SmallBreakB7Slide2Image,
-      "",
-      "",
-    ],
-    [
-      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
-      SmallBreakB8Slide1Image,
-      SmallBreakB8Slide2Image,
-      "",
-      "",
-    ],
-    [
-      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Vielleicht interessiert Sie in dem Zusammenhang auch, dass auch die Ernährung für das Lernen wichtig ist.",
-      SmallBreakE2Slide1Image,
-      SmallBreakE2Slide2Image,
-      SmallBreakE2Slide3Image,
-      "",
-    ],
-    [
-      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
-      SmallBreakE4Slide1Image,
-      "",
-      "",
-      "",
-    ],
-    [
-      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Vielleicht interessiert Sie in dem Zusammenhang auch, dass auch die Ernährung für das Lernen wichtig ist.",
-      SmallBreakE10Slide1Image,
-      SmallBreakE10Slide2Image,
-      "",
-      "",
-    ],
-    [
-      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
-      SmallBreakL1Slide1Image,
-      SmallBreakL1Slide2Image,
-      SmallBreakL1Slide3Image,
-      "",
-    ],
-    [
-      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
-      SmallBreakL3Slide1Image,
-      SmallBreakL3Slide2Image,
-      "",
-      "",
-    ],
-    [
-      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
-      SmallBreakL5Slide1Image,
-      SmallBreakL5Slide2Image,
-      "",
-      "",
-    ],
-    [
-      "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Vielleicht interessiert Sie in dem Zusammenhang auch, dass eine richtige Sitzhaltung und ein optimaler Abstand zum Bildschirm für das Lernen wichtig ist.",
-      SmallBreakU3Slide1Image,
-      SmallBreakU3Slide2Image,
-      SmallBreakU3Slide3Image,
-      SmallBreakU3Slide4Image,
-    ],
+  shortBreakContentPool: breakObject[] = [
+    {
+      titleMessage:
+        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Auf dem Bild sehen Sie eine kurze Übung zur Mobilisation.",
+      image1: SmallBreakB3Slide1Image,
+      image2: SmallBreakB3Slide2Image,
+      image3: "",
+      image4: "",
+      seenBefore: false,
+    },
+    {
+      titleMessage:
+        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Auf dem Bild sehen Sie eine kurze Übung zur Mobilisation.",
+      image1: SmallBreakB7Slide1Image,
+      image2: SmallBreakB7Slide2Image,
+      image3: "",
+      image4: "",
+      seenBefore: false,
+    },
+    {
+      titleMessage:
+        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
+      image1: SmallBreakB8Slide1Image,
+      image2: SmallBreakB8Slide2Image,
+      image3: "",
+      image4: "",
+      seenBefore: false,
+    },
+    {
+      titleMessage:
+        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Vielleicht interessiert Sie in dem Zusammenhang auch, dass auch die Ernährung für das Lernen wichtig ist.",
+      image1: SmallBreakE2Slide1Image,
+      image2: SmallBreakE2Slide2Image,
+      image3: SmallBreakE2Slide3Image,
+      image4: "",
+      seenBefore: false,
+    },
+    {
+      titleMessage:
+        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
+      image1: SmallBreakE4Slide1Image,
+      image2: "",
+      image3: "",
+      image4: "",
+      seenBefore: false,
+    },
+    {
+      titleMessage:
+        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Vielleicht interessiert Sie in dem Zusammenhang auch, dass auch die Ernährung für das Lernen wichtig ist.",
+      image1: SmallBreakE10Slide1Image,
+      image2: SmallBreakE10Slide2Image,
+      image3: "",
+      image4: "",
+      seenBefore: false,
+    },
+    {
+      titleMessage:
+        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
+      image1: SmallBreakL1Slide1Image,
+      image2: SmallBreakL1Slide2Image,
+      image3: SmallBreakL1Slide3Image,
+      image4: "",
+      seenBefore: false,
+    },
+    {
+      titleMessage:
+        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
+      image1: SmallBreakL3Slide1Image,
+      image2: SmallBreakL3Slide2Image,
+      image3: "",
+      image4: "",
+      seenBefore: false,
+    },
+    {
+      titleMessage:
+        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
+      image1: SmallBreakL5Slide1Image,
+      image2: SmallBreakL5Slide2Image,
+      image3: "",
+      image4: "",
+      seenBefore: false,
+    },
+    {
+      titleMessage:
+        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Vielleicht interessiert Sie in dem Zusammenhang auch, dass eine richtige Sitzhaltung und ein optimaler Abstand zum Bildschirm für das Lernen wichtig ist.",
+      image1: SmallBreakU3Slide1Image,
+      image2: SmallBreakU3Slide2Image,
+      image3: SmallBreakU3Slide3Image,
+      image4: SmallBreakU3Slide4Image,
+      seenBefore: false,
+    },
   ];
 
   //mediumBreakContentPool structure: title, content, source
-  mediumBreakContentPool: [string, string, string, string, string][] = [
-    [
-      "Sie haben nun 2 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine Pause von mindestens 20 Minuten empfehlen. Wie wäre es denn mit aktivem bzw. bewusstem Musikhören?",
-      MediumBreakS1Slide1Image,
-      MediumBreakS1Slide2Image,
-      MediumBreakS1Slide3Image,
-      MediumBreakS1Slide4Image,
-    ],
-    [
-      "Sie haben nun 2 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine Pause von mindestens 20 Minuten empfehlen. Warum?",
-      MediumBreakS3Slide1Image,
-      MediumBreakS3Slide2Image,
-      MediumBreakS3Slide3Image,
-      "",
-    ],
+  mediumBreakContentPool: breakObject[] = [
+    {
+      titleMessage:
+        "Sie haben nun 2 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine Pause von mindestens 20 Minuten empfehlen. Wie wäre es denn mit aktivem bzw. bewusstem Musikhören?",
+      image1: MediumBreakS1Slide1Image,
+      image2: MediumBreakS1Slide2Image,
+      image3: MediumBreakS1Slide3Image,
+      image4: MediumBreakS1Slide4Image,
+      seenBefore: false,
+    },
+    {
+      titleMessage:
+        "Sie haben nun 2 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine Pause von mindestens 20 Minuten empfehlen. Warum?",
+      image1: MediumBreakS3Slide1Image,
+      image2: MediumBreakS3Slide2Image,
+      image3: MediumBreakS3Slide3Image,
+      image4: "",
+      seenBefore: false,
+    },
   ];
 
   //longBreakContentPool structure: title, content, source
-  longBreakContentPool: [string, string, string, string, string][] = [
-    [
-      "Sie haben nun 4 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine längere Pause von mindestens 90 Minuten empfehlen. Wie wäre es denn mit einem Spaziergang?",
-      LongBreakH1Slide1Image,
-      LongBreakH1Slide2Image,
-      LongBreakH1Slide3Image,
-      "",
-    ],
+  longBreakContentPool: breakObject[] = [
+    {
+      titleMessage:
+        "Sie haben nun 4 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine längere Pause von mindestens 90 Minuten empfehlen. Wie wäre es denn mit einem Spaziergang?",
+      image1: LongBreakH1Slide1Image,
+      image2: LongBreakH1Slide2Image,
+      image3: LongBreakH1Slide3Image,
+      image4: "",
+      seenBefore: false,
+    },
   ];
 }
