@@ -1,6 +1,8 @@
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import IBreakTimeNotificationController from "./IBreakTimeNotificationController";
-import BreakTimeNotificationViewModel from "./BreakTimeNotificationViewModel";
+import BreakTimeNotificationViewModel, {
+  breakObject,
+} from "./BreakTimeNotificationViewModel";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
@@ -22,13 +24,26 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
   const [breakType] = useObservable(viewModel?.breakType);
   useObservable(viewModel?.slideIndex);
   const [randomNumber, setRandomNumber] = useState<number>(0);
+  const [chosenBreakContent, setChosenBreakContent] = useState<breakObject>();
 
   useEffect(() => {
     setRandomNumber(Math.random());
+  }, [viewModel?.showModal]);
+  useEffect(() => {
     controller.setSliderIndex(1);
-  }, [viewModel?.showModal, controller]);
+  }, [controller]);
+  useEffect(() => {
+    let breakContent = ChooseRandomBreakContent(
+      breakType,
+      viewModel,
+      randomNumber
+    );
+    setChosenBreakContent(breakContent);
+    console.log("chosenBreakContent", chosenBreakContent);
+  }, [randomNumber, viewModel]);
 
-  if (!viewModel || !controller || !showModal || !breakType) return null;
+  if (!viewModel || !controller || !showModal || !chosenBreakContent)
+    return null;
 
   if (showMinimizedModal)
     return (
@@ -63,104 +78,49 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
       onClose={() => controller.minimizeOrMaximizeBreakNotification()}
       title="Pausenhinweis"
     >
-      {GetBreakTimeModalContents(
-        breakType,
-        viewModel,
+      {RenderBreakContent(
         controller,
-        randomNumber
+        chosenBreakContent,
+        viewModel.slideIndex.Value
       )}
     </StyledModal>
   );
 }
-
-function GetBreakTimeModalContents(
+function ChooseRandomBreakContent(
   breakType: BreakTimeNotificationType,
   viewModel: BreakTimeNotificationViewModel,
-  controller: IBreakTimeNotificationController,
   randomNumber: number
 ) {
+  let randomIndex = 0;
   switch (breakType) {
     case BreakTimeNotificationType.Short:
-      return ShortBreakContent(viewModel, controller, randomNumber);
+      let notSeenBeforeShortBreaks = viewModel.shortBreakContentPool.filter(
+        (shortBreaks) => !shortBreaks.seenBefore
+      );
+      randomIndex = Math.floor(randomNumber * notSeenBeforeShortBreaks.length);
+      viewModel.shortBreakContentPool[randomIndex].seenBefore = true;
+      return viewModel.shortBreakContentPool[randomIndex];
     case BreakTimeNotificationType.Medium:
-      return MediumBreakContent(viewModel, controller, randomNumber);
+      let notSeenBeforeMediumBreaks = viewModel.mediumBreakContentPool.filter(
+        (mediumBreaks) => !mediumBreaks.seenBefore
+      );
+      randomIndex = Math.floor(randomNumber * notSeenBeforeMediumBreaks.length);
+      viewModel.mediumBreakContentPool[randomIndex].seenBefore = true;
+      return viewModel.mediumBreakContentPool[randomIndex];
     case BreakTimeNotificationType.Long:
-      return LongBreakContent(viewModel, controller, randomNumber);
+      let notSeenBeforeLongBreaks = viewModel.longBreakContentPool.filter(
+        (longBreaks) => !longBreaks.seenBefore
+      );
+      randomIndex = Math.floor(randomNumber * notSeenBeforeLongBreaks.length);
+      viewModel.longBreakContentPool[randomIndex].seenBefore = true;
+      return viewModel.longBreakContentPool[randomIndex];
     default:
-      return "";
+      return;
   }
-}
-
-function ShortBreakContent(
-  viewModel: BreakTimeNotificationViewModel,
-  controller: IBreakTimeNotificationController,
-  randomNumber: number
-) {
-  let notSeenBeforeShortBreaks = viewModel.shortBreakContentPool.filter(
-    (shortBreaks) => !shortBreaks.seenBefore
-  );
-  let randomIndex = Math.floor(randomNumber * notSeenBeforeShortBreaks.length);
-  viewModel.shortBreakContentPool[randomIndex].seenBefore = true;
-
-  return (
-    <div data-testid="short-break">
-      {RenderBreakContent(
-        controller,
-        randomIndex,
-        viewModel.shortBreakContentPool,
-        viewModel.slideIndex.Value
-      )}
-    </div>
-  );
-}
-
-function MediumBreakContent(
-  viewModel: BreakTimeNotificationViewModel,
-  controller: IBreakTimeNotificationController,
-  randomNumber: number
-) {
-  let notSeenBeforeMediumBreaks = viewModel.mediumBreakContentPool.filter(
-    (mediumBreaks) => !mediumBreaks.seenBefore
-  );
-  let randomIndex = Math.floor(randomNumber * notSeenBeforeMediumBreaks.length);
-  viewModel.mediumBreakContentPool[randomIndex].seenBefore = true;
-  return (
-    <div data-testid="medium-break">
-      {RenderBreakContent(
-        controller,
-        randomIndex,
-        viewModel.mediumBreakContentPool,
-        viewModel.slideIndex.Value
-      )}
-    </div>
-  );
-}
-
-function LongBreakContent(
-  viewModel: BreakTimeNotificationViewModel,
-  controller: IBreakTimeNotificationController,
-  randomNumber: number
-) {
-  let notSeenBeforeLongBreaks = viewModel.longBreakContentPool.filter(
-    (longBreaks) => !longBreaks.seenBefore
-  );
-  let randomIndex = Math.floor(randomNumber * notSeenBeforeLongBreaks.length);
-  viewModel.longBreakContentPool[randomIndex].seenBefore = true;
-  return (
-    <div data-testid="long-break">
-      {RenderBreakContent(
-        controller,
-        randomIndex,
-        viewModel.longBreakContentPool,
-        viewModel.slideIndex.Value
-      )}
-    </div>
-  );
 }
 function RenderBreakContent(
   controller: IBreakTimeNotificationController,
-  randomIndex: number,
-  breakContentPool: any,
+  chosenBreakContent: breakObject,
   currentSlideIndex: number
 ) {
   return (
@@ -169,13 +129,13 @@ function RenderBreakContent(
         <div className="flex gap-4 overflow-x-auto slider snap-x snap-mandatory scroll-smooth lg:max-w-[60vw] max-w-[90vw]">
           <figure>
             <p className="pb-4 pl-6 text-lg font-bold lg:text-xl text-adlerdarkblue">
-              {breakContentPool[randomIndex].titleMessage}
+              {chosenBreakContent.titleMessage}
             </p>
             {currentSlideIndex === 1 && (
               <img
                 id="slide-1"
                 className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                src={breakContentPool[randomIndex].image1}
+                src={chosenBreakContent.image1}
                 title="Slide 1/3"
                 alt=""
               ></img>
@@ -184,7 +144,7 @@ function RenderBreakContent(
               <img
                 id="slide-2"
                 className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                src={breakContentPool[randomIndex].image2}
+                src={chosenBreakContent.image2}
                 title="Slide 2/3"
                 alt=""
               ></img>
@@ -193,7 +153,7 @@ function RenderBreakContent(
               <img
                 id="slide-3"
                 className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                src={breakContentPool[randomIndex].image3}
+                src={chosenBreakContent.image3}
                 title="Slide 3/3"
                 alt=""
               ></img>
@@ -202,16 +162,16 @@ function RenderBreakContent(
               <img
                 id="slide-4"
                 className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                src={breakContentPool[randomIndex].image4}
+                src={chosenBreakContent.image4}
                 title="Slide 4/4"
                 alt=""
               ></img>
             )}
           </figure>
         </div>
-        {breakContentPool[randomIndex].image2 !== "" && (
+        {chosenBreakContent.image2 !== "" && (
           <div className="absolute z-10 flex gap-4 -translate-x-1/2 lg:gap-6 slider-nav bottom-2 lg:bottom-4 left-1/2">
-            {breakContentPool[randomIndex].image1 !== "" && (
+            {chosenBreakContent.image1 !== "" && (
               <button
                 className={
                   (currentSlideIndex === 1 ? "bg-yellow-400 " : "bg-white ") +
@@ -220,7 +180,7 @@ function RenderBreakContent(
                 onClick={() => controller.setSliderIndex(1)}
               ></button>
             )}
-            {breakContentPool[randomIndex].image2 !== "" && (
+            {chosenBreakContent.image2 !== "" && (
               <button
                 className={
                   (currentSlideIndex === 2 ? "bg-yellow-400 " : "bg-white ") +
@@ -229,7 +189,7 @@ function RenderBreakContent(
                 onClick={() => controller.setSliderIndex(2)}
               ></button>
             )}
-            {breakContentPool[randomIndex].image3 !== "" && (
+            {chosenBreakContent.image3 !== "" && (
               <button
                 className={
                   (currentSlideIndex === 3 ? "bg-yellow-400 " : "bg-white ") +
@@ -238,7 +198,7 @@ function RenderBreakContent(
                 onClick={() => controller.setSliderIndex(3)}
               ></button>
             )}
-            {breakContentPool[randomIndex].image4 !== "" && (
+            {chosenBreakContent.image4 !== "" && (
               <button
                 className={
                   (currentSlideIndex === 4 ? "bg-yellow-400 " : "bg-white ") +

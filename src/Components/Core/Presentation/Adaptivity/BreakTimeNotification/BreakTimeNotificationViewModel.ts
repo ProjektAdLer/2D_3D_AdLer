@@ -50,7 +50,7 @@ import LongBreakH1Slide1Image from "../../../../../Assets/BreakTimeAssets/H1/lon
 import LongBreakH1Slide2Image from "../../../../../Assets/BreakTimeAssets/H1/longBreakContent-H1-slide2.png";
 import LongBreakH1Slide3Image from "../../../../../Assets/BreakTimeAssets/H1/longBreakContent-H1-slide3.png";
 
-type breakObject = {
+export type breakObject = {
   titleMessage: string;
   image1: string;
   image2: string;
