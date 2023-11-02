@@ -1,3 +1,4 @@
+import { LearningElementModelTypeEnums } from "../LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypes } from "../Types/LearningElementTypes";
 import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
 import ILearningSpaceTheme from "./ILearningSpaceTheme";
@@ -8,27 +9,27 @@ const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
   floorTexture: require("../../../../Assets/textures/campusTheme/m_floor_bluecarpet2_1.jpg"),
   learningElementModels: {
     [LearningElementTypes.h5p]: [
-      require("../../../../Assets/3dModels/campusTheme/l_h5p_blackboard_2.glb"),
-      require("../../../../Assets/3dModels/campusTheme/l_h5p_deskpc_3.glb"),
-      require("../../../../Assets/3dModels/campusTheme/l_h5p_drawingtable_2.glb"),
-      require("../../../../Assets/3dModels/campusTheme/l_h5p_daylightprojector_1.glb"),
+      LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard2,
+      LearningElementModelTypeEnums.H5pElementModelTypes.DeskPC3,
+      LearningElementModelTypeEnums.H5pElementModelTypes.DrawingTable2,
+      LearningElementModelTypeEnums.H5pElementModelTypes.Daylightprojector,
     ],
     [LearningElementTypes.text]: [
-      require("../../../../Assets/3dModels/campusTheme/l_text_libraryshelf_1.glb"),
+      LearningElementModelTypeEnums.TextElementModelTypes.LibraryShelf,
     ],
     [LearningElementTypes.image]: [
-      require("../../../../Assets/3dModels/campusTheme/l_image_sciencegeo_1.glb"),
-      require("../../../../Assets/3dModels/campusTheme/l_image_sciencebio_1.glb"),
-      require("../../../../Assets/3dModels/campusTheme/l_image_sciencewhiteboard_1.glb"),
+      LearningElementModelTypeEnums.ImageElementModelTypes.sciencegeo1,
+      LearningElementModelTypeEnums.ImageElementModelTypes.sciencebio1,
+      LearningElementModelTypeEnums.ImageElementModelTypes.sciencewhiteboard,
     ],
     [LearningElementTypes.video]: [
-      require("../../../../Assets/3dModels/campusTheme/l_video_movieprojector_1.glb"),
+      LearningElementModelTypeEnums.VideoElementModelTypes.movieprojector,
     ],
     [LearningElementTypes.pdf]: [
-      require("../../../../Assets/3dModels/campusTheme/l_text_libraryshelf_1.glb"),
+      LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
     ],
     [LearningElementTypes.adaptivity]: [
-      require("../../../../Assets/3dModels/campusTheme/a_npc_dozentlukas.glb"),
+      LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC,
     ],
     [LearningElementTypes.notAnElement]: [],
   },

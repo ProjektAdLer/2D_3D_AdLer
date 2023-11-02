@@ -25,7 +25,7 @@ describe("BackendAdapterUtils", () => {
         name: "test",
         description: "test",
         goals: ["test"],
-        model: LearningElementModelTypeEnums.NoElementModelTypes.None,
+        model: LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard,
         type: "h5p",
         value: 1,
       },
@@ -71,7 +71,7 @@ describe("BackendAdapterUtils", () => {
     );
   });
 
-  test("mapElements return an element with NoElementModelTypes.None if the modelname is invalid", () => {
+  test("mapElements return an element with undfined model if the modelname is invalid", () => {
     const result = BackendAdapterUtils["mapElements"]([
       {
         elementId: 1,
@@ -84,9 +84,7 @@ describe("BackendAdapterUtils", () => {
         elementModel: "invalid",
       },
     ]);
-    expect(result[0].model).toBe(
-      LearningElementModelTypeEnums.NoElementModelTypes.None
-    );
+    expect(result[0].model).toBe(undefined);
   });
 
   test.each([

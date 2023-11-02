@@ -34,6 +34,7 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
       templateStyle: LearningSpaceThemeType.Campus,
     },
   ],
+  externalElements: [],
 };
 
 // expected structure of the TOs
@@ -44,6 +45,7 @@ export const expectedWorldTO: BackendWorldTO = {
   spaces: expect.any(Array),
   description: expect.any(String),
   evaluationLink: expect.any(String),
+  externalElements: expect.any(Array<BackendElementTO>),
 };
 
 export const expectedSpaceTO: BackendSpaceTO = {
@@ -58,15 +60,16 @@ export const expectedSpaceTO: BackendSpaceTO = {
   templateStyle: expect.any(String),
 };
 
-export const expectedElementTO: BackendElementTO = {
+export const expectedElementTO = expect.objectContaining({
   id: expect.any(Number),
   name: expect.any(String),
   value: expect.any(Number),
   description: expect.any(String),
   goals: expect.arrayContaining([expect.any(String)]),
   type: expect.any(String),
-  model: expect.any(String),
-};
+  model: expect.toBeOneOf([expect.any(String), undefined]),
+  adaptivity: expect.toBeOneOf([expect.any(Object), undefined]),
+});
 
 export const mockAWT: AWT = {
   fileVersion: "0.3",

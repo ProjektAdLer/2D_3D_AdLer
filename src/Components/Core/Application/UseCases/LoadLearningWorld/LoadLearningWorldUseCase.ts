@@ -25,6 +25,11 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import AdaptivityElementEntity from "src/Components/Core/Domain/Entities/Adaptivity/AdaptivityElementEntity";
 import { AdaptivityElementDataTO } from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementDataTO";
 import ExternalLearningElementEntity from "src/Components/Core/Domain/Entities/Adaptivity/ExternalLearningElementEntity";
+import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
+import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
+import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
+import ArrayItemRandomizer from "src/Components/Core/Presentation/Utils/ArrayItemRandomizer/ArrayItemRandomizer";
+import { isValidLearningElementModelType } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 @injectable()
 export default class LoadLearningWorldUseCase
@@ -189,7 +194,8 @@ export default class LoadLearningWorldUseCase
         ? this.createLearningElementEntities(
             worldID,
             space.elements,
-            apiWorldScoreResponse
+            apiWorldScoreResponse,
+            space.templateStyle
           )
         : [];
 
@@ -218,11 +224,28 @@ export default class LoadLearningWorldUseCase
   private createLearningElementEntities = (
     worldID: number,
     elements: (BackendElementTO | null)[],
-    worldStatus: LearningWorldStatusTO
+    worldStatus: LearningWorldStatusTO,
+    spaceTheme: LearningSpaceThemeType
   ): (LearningElementEntity | null)[] => {
     return elements.map((element) => {
-      if (element === null || element.model === undefined) {
+      if (element === null) {
         return null;
+      }
+
+      // randomly assign model if not set
+      if (
+        element.model === undefined ||
+        !isValidLearningElementModelType(element.model)
+      ) {
+        const elementModelsForTheme =
+          LearningSpaceThemeLookup.getLearningSpaceTheme(
+            spaceTheme
+          ).learningElementModels;
+        const elementModelsForType =
+          elementModelsForTheme[element.type as LearningElementTypes];
+
+        const modelRandomizer = new ArrayItemRandomizer(elementModelsForType);
+        element.model = modelRandomizer.getItem(element.name);
       }
 
       let newElementEntity: LearningElementEntity = {

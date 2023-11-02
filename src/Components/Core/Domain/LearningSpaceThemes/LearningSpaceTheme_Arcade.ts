@@ -1,3 +1,4 @@
+import { LearningElementModelTypeEnums } from "../LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypes } from "../Types/LearningElementTypes";
 import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
 import ILearningSpaceTheme from "./ILearningSpaceTheme";
@@ -8,28 +9,28 @@ const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
   floorTexture: require("../../../../Assets/textures/arcadeTheme/m_floor_bluecarpet_1.jpg"),
   learningElementModels: {
     [LearningElementTypes.h5p]: [
-      require("../../../../Assets/3dModels/arcadeTheme/l_h5p_greyslotmachine_1.glb"),
-      require("../../../../Assets/3dModels/arcadeTheme/l_h5p_redslotmachine_1.glb"),
-      require("../../../../Assets/3dModels/arcadeTheme/l_h5p_purpleslotmachine_1.glb"),
-      require("../../../../Assets/3dModels/arcadeTheme/l_h5p_blackslotmachine_1.glb"),
-      require("../../../../Assets/3dModels/arcadeTheme/l_h5p_deskpc_2.glb"),
+      LearningElementModelTypeEnums.H5pElementModelTypes.GreySlotmachine,
+      LearningElementModelTypeEnums.H5pElementModelTypes.RedSlotmachine,
+      LearningElementModelTypeEnums.H5pElementModelTypes.PurpleSlotmachine,
+      LearningElementModelTypeEnums.H5pElementModelTypes.BlackSlotmachine,
+      LearningElementModelTypeEnums.H5pElementModelTypes.DeskPC2,
     ],
     [LearningElementTypes.text]: [
-      require("../../../../Assets/3dModels/arcadeTheme/l_text_comicshelfbig_1.glb"),
+      LearningElementModelTypeEnums.TextElementModelTypes.ComicShelfbig,
     ],
     [LearningElementTypes.image]: [
-      require("../../../../Assets/3dModels/arcadeTheme/l_image_gameposter_1.glb"),
-      require("../../../../Assets/3dModels/arcadeTheme/l_image_gameposter_2.glb"),
-      require("../../../../Assets/3dModels/arcadeTheme/l_image_cardboardcutout_1.glb"),
+      LearningElementModelTypeEnums.ImageElementModelTypes.Gameposter1,
+      LearningElementModelTypeEnums.ImageElementModelTypes.Gameposter2,
+      LearningElementModelTypeEnums.ImageElementModelTypes.Cardboardcutout,
     ],
     [LearningElementTypes.video]: [
-      require("../../../../Assets/3dModels/arcadeTheme/l_video_vrdesk_1.glb"),
+      LearningElementModelTypeEnums.VideoElementModelTypes.vrdesk,
     ],
     [LearningElementTypes.pdf]: [
-      require("../../../../Assets/3dModels/arcadeTheme/l_text_comicshelfsmall_1.glb"),
+      LearningElementModelTypeEnums.TextElementModelTypes.ComicShelfsmall,
     ],
     [LearningElementTypes.adaptivity]: [
-      require("../../../../Assets/3dModels/arcadeTheme/a_npc_sheriffjustice.glb"),
+      LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC,
     ],
     [LearningElementTypes.notAnElement]: [],
   },

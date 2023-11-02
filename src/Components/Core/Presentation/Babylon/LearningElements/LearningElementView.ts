@@ -16,12 +16,6 @@ import SCENE_TYPES, {
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import bind from "bind-decorator";
-import ArrayItemRandomizer from "../../Utils/ArrayItemRandomizer/ArrayItemRandomizer";
-import {
-  LearningElementModelTypeEnums,
-  isValidLearningElementModelType,
-} from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
-import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
 import LearningElementModelLookup from "src/Components/Core/Domain/LearningElementModels/LearningElementModelLookup";
 
 const iconLinks: { [key in LearningElementTypes]?: any } = {
@@ -73,25 +67,7 @@ export default class LearningElementView {
     let modelLink;
 
     // get link to model by name if given
-    if (
-      isValidLearningElementModelType(this.viewModel.modelType) &&
-      this.viewModel.modelType !==
-        LearningElementModelTypeEnums.NoElementModelTypes.None
-    ) {
-      modelLink = LearningElementModelLookup[this.viewModel.modelType];
-    }
-    // get link to model from theme by element type
-    else {
-      const elementModelsForTheme =
-        LearningSpaceThemeLookup.getLearningSpaceTheme(
-          this.viewModel.theme
-        ).learningElementModels;
-      const elementModelsForType =
-        elementModelsForTheme[this.viewModel.type as LearningElementTypes];
-
-      const modelRandomizer = new ArrayItemRandomizer(elementModelsForType);
-      modelLink = modelRandomizer.getItem(this.viewModel.name);
-    }
+    modelLink = LearningElementModelLookup[this.viewModel.modelType];
 
     this.viewModel.modelMeshes = (await this.scenePresenter.loadModel(
       modelLink,
