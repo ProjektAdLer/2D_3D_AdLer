@@ -97,6 +97,7 @@ function ShortBreakContent(
     (shortBreaks) => !shortBreaks.seenBefore
   );
   let randomIndex = Math.floor(randomNumber * notSeenBeforeShortBreaks.length);
+  viewModel.shortBreakContentPool[randomIndex].seenBefore = true;
 
   return (
     <div data-testid="short-break">
@@ -119,6 +120,7 @@ function MediumBreakContent(
     (mediumBreaks) => !mediumBreaks.seenBefore
   );
   let randomIndex = Math.floor(randomNumber * notSeenBeforeMediumBreaks.length);
+  viewModel.mediumBreakContentPool[randomIndex].seenBefore = true;
   return (
     <div data-testid="medium-break">
       {RenderBreakContent(
@@ -140,6 +142,7 @@ function LongBreakContent(
     (longBreaks) => !longBreaks.seenBefore
   );
   let randomIndex = Math.floor(randomNumber * notSeenBeforeLongBreaks.length);
+  viewModel.longBreakContentPool[randomIndex].seenBefore = true;
   return (
     <div data-testid="long-break">
       {RenderBreakContent(

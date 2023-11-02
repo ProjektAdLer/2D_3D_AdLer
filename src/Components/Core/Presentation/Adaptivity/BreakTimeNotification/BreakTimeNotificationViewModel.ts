@@ -64,8 +64,6 @@ export default class BreakTimeNotificationViewModel {
   breakType: Observable<BreakTimeNotificationType> =
     new Observable<BreakTimeNotificationType>(BreakTimeNotificationType.Short);
   slideIndex: Observable<number> = new Observable<number>(1);
-
-  //shortBreakContentPool structure: title, imageContent, imageContent, imageContent, imageContent
   shortBreakContentPool: breakObject[] = [
     {
       titleMessage:
