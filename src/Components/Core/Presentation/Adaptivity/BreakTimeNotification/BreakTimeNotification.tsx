@@ -24,7 +24,7 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
   const [randomNumber, setRandomNumber] = useState<number>(0);
 
   useEffect(() => {
-    setRandomNumber(Math.floor(Math.random()));
+    setRandomNumber(Math.random());
     controller.setSliderIndex(1);
   }, [viewModel?.showModal, controller]);
 
@@ -97,6 +97,7 @@ function ShortBreakContent(
     (shortBreaks) => !shortBreaks.seenBefore
   );
   let randomIndex = Math.floor(randomNumber * notSeenBeforeShortBreaks.length);
+
   return (
     <div data-testid="short-break">
       {RenderBreakContent(
