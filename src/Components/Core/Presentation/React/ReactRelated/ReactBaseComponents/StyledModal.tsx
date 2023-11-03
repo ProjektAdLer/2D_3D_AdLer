@@ -37,7 +37,7 @@ export default function StyledModal({
   return (
     <StyledContainer
       {...restProps}
-      className="flex items-center justify-center"
+      className="z-50 flex items-center justify-center"
     >
       <div
         className="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans"
@@ -59,7 +59,7 @@ export default function StyledModal({
                 onClick={(event) => {
                   onClose?.();
                 }}
-                className="w-8 h-8 p-1 text-xs roboto-black"
+                className="p-2 text-xs roboto-black"
               >
                 X
               </StyledButton>
