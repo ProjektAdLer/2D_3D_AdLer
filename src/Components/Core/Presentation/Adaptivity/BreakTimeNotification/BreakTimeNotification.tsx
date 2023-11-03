@@ -39,8 +39,7 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
       randomNumber
     );
     setChosenBreakContent(breakContent);
-    console.log("chosenBreakContent", chosenBreakContent);
-  }, [randomNumber, viewModel]);
+  }, [randomNumber, viewModel, breakType]);
 
   if (!viewModel || !controller || !showModal || !chosenBreakContent)
     return null;
