@@ -101,19 +101,30 @@ export default function AdaptivityElementDialogContainer({
   console.log("showFooterTooltip: ", showFooterTooltip);
   return (
     <StyledContainer className={tailwindMerge(className, "")}>
-      <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-screen bg-black bg-opacity-50 lg:grid lg:grid-rows-3 lg:items-start">
+      <div
+        className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-screen bg-black bg-opacity-50 lg:grid lg:grid-rows-3 lg:items-start"
+        onClick={controller.closeModal}
+      >
         {/* Background NPC */}
         <div className="flex items-end justify-start invisible w-full pl-16 lg:visible lg:h-full">
           <img
             className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
             alt="LearningImage!"
             src={getNPCImage(model, true)}
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
           ></img>
         </div>
 
         {/* Modal */}
         <div className="flex justify-center items-start lg:row-span-2 w-full lg:w-[95vw] max-w-7xl h-full pt-2 lg:pt-0 ">
-          <div className="flex flex-col p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto w-full max-w-[95%] max-h-[95%] lg:h-fit justify-between overflow-auto">
+          <div
+            className="flex flex-col p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto w-full max-w-[95%] max-h-[95%] lg:h-fit justify-between overflow-auto"
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+          >
             {/* Header */}
             <div className="z-20 flex items-center justify-center w-full gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
               <img
