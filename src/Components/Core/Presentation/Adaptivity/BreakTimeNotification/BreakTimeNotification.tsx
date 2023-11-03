@@ -124,8 +124,8 @@ function RenderBreakContent(
 ) {
   return (
     <div className="pb-4 max-w-[90vw] lg:max-w-[60vw]">
-      <div className="relative mx-0 my-auto slider-wrapper">
-        <div className="flex gap-4 overflow-x-auto slider snap-x snap-mandatory scroll-smooth lg:max-w-[60vw] max-w-[90vw]">
+      <div className="flex flex-col items-center gap-6 mx-0 my-auto slider-wrapper">
+        <div className="flex gap-4 overflow-x-auto slider lg:max-w-[60vw] max-w-[90vw]">
           <figure>
             <p className="pb-4 pl-6 text-lg font-bold lg:text-xl text-adlerdarkblue">
               {chosenBreakContent.titleMessage}
@@ -133,7 +133,7 @@ function RenderBreakContent(
             {currentSlideIndex === 1 && (
               <img
                 id="slide-1"
-                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg"
                 src={chosenBreakContent.image1}
                 title="Slide 1/3"
                 alt=""
@@ -142,7 +142,7 @@ function RenderBreakContent(
             {currentSlideIndex === 2 && (
               <img
                 id="slide-2"
-                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg"
                 src={chosenBreakContent.image2}
                 title="Slide 2/3"
                 alt=""
@@ -151,7 +151,7 @@ function RenderBreakContent(
             {currentSlideIndex === 3 && (
               <img
                 id="slide-3"
-                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg"
                 src={chosenBreakContent.image3}
                 title="Slide 3/3"
                 alt=""
@@ -160,7 +160,7 @@ function RenderBreakContent(
             {currentSlideIndex === 4 && (
               <img
                 id="slide-4"
-                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg"
                 src={chosenBreakContent.image4}
                 title="Slide 4/4"
                 alt=""
@@ -169,7 +169,7 @@ function RenderBreakContent(
           </figure>
         </div>
         {chosenBreakContent.image2 !== "" && (
-          <div className="absolute z-10 flex gap-4 -translate-x-1/2 lg:gap-6 slider-nav bottom-2 lg:bottom-4 left-1/2">
+          <div className="z-10 flex gap-4 lg:gap-6 slider-nav">
             {chosenBreakContent.image1 !== "" && (
               <button
                 className={
