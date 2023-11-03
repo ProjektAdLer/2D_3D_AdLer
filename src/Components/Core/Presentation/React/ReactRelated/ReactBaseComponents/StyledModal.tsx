@@ -35,15 +35,19 @@ export default function StyledModal({
 }: Readonly<Props>) {
   if (!showModal) return null;
   return (
-    <StyledContainer {...restProps}>
+    <>
       <div
-        className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center h-full bg-blacktrans"
+        className="fixed top-0 bottom-0 left-0 right-0 h-full bg-blacktrans"
         onClick={onClose}
         // onKeyDown={onClose}
         // tabIndex={0}
+      />
+      <StyledContainer
+        {...restProps}
+        className="flex justify-center items-center"
       >
         {/*Header with optional close button*/}
-        <div className="p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden">
+        <div className="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden">
           <div className="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit">
             <div className="w-full">{title}</div>
             {canClose && (
@@ -69,7 +73,7 @@ export default function StyledModal({
             </div>
           )}
         </div>
-      </div>
-    </StyledContainer>
+      </StyledContainer>
+    </>
   );
 }
