@@ -35,6 +35,7 @@ export default class AdaptivityElementPresenter
     this.setFooterBreadcrumbs();
 
     this.viewModel.elementID.Value = adaptivityElementProgressTO.id;
+    this.viewModel.model.Value = adaptivityElementProgressTO.model;
     this.viewModel.currentTask.Value = null;
     this.viewModel.currentQuestion.Value = null;
 

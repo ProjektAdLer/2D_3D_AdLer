@@ -14,7 +14,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
         <img
           alt="LearningImage!"
           class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
-          src="a_npc_dozentlukas_close.png"
+          src="a_npc_defaultnpc_close.png"
         />
       </div>
       <div
@@ -29,7 +29,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
             <img
               alt="LearningImage!"
               class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
-              src="a_npc_dozentlukas.png"
+              src="a_npc_defaultnpc.png"
             />
             <div
               class="w-full text-sm lg:text-xl"
