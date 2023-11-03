@@ -48,7 +48,10 @@ export default function StyledModal({
             <div className="w-full">{title}</div>
             {canClose && (
               <StyledButton
-                onClick={onClose}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  onClose?.();
+                }}
                 className="w-8 h-8 p-1 text-xs roboto-black"
               >
                 X

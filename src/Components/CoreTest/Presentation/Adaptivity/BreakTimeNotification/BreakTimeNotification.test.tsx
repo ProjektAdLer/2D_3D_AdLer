@@ -23,6 +23,7 @@ describe("BreakTimeNotification", () => {
 
     expect(container).toBeEmptyDOMElement();
   });
+
   test("should render small button when showMinimized is true", () => {
     useBuilderMock([viewModel, mockController]);
     viewModel.showModal.Value = true;
@@ -33,6 +34,7 @@ describe("BreakTimeNotification", () => {
 
     expect(screen.getByText("Zeit für eine Pause!")).toBeInTheDocument();
   });
+
   test("should call controller when clicked in minimized form", () => {
     useBuilderMock([viewModel, mockController]);
     viewModel.showModal.Value = true;
@@ -46,6 +48,7 @@ describe("BreakTimeNotification", () => {
       mockController.minimizeOrMaximizeBreakNotification
     ).toHaveBeenCalledTimes(1);
   });
+
   test("should call controller when closed in minimized form", () => {
     useBuilderMock([viewModel, mockController]);
     viewModel.showModal.Value = true;

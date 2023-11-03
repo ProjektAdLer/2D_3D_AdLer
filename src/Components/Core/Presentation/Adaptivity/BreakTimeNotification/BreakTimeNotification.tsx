@@ -74,7 +74,7 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
     <StyledModal
       className={tailwindMerge(className, "")}
       showModal={showModal}
-      onClose={() => controller.minimizeOrMaximizeBreakNotification()}
+      onClose={controller.minimizeOrMaximizeBreakNotification}
       title="Pausenhinweis"
     >
       {RenderBreakContent(
