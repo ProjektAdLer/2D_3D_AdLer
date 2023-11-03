@@ -35,7 +35,7 @@ export default function StyledModal({
 }: Readonly<Props>) {
   if (!showModal) return null;
   return (
-    <>
+    <div>
       <div
         className="fixed top-0 bottom-0 left-0 right-0 h-full bg-blacktrans"
         onClick={onClose}
@@ -74,6 +74,6 @@ export default function StyledModal({
           )}
         </div>
       </StyledContainer>
-    </>
+    </div>
   );
 }
