@@ -26,7 +26,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
--
+- Break Notifications should behave correctly now
 
 ### Security
 
