@@ -11,14 +11,15 @@ import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/Lear
 import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
+import { Vector3 } from "@babylonjs/core";
 
 export default interface ILearningWorldPort
   extends IAbstractPort<ILearningWorldAdapter> {
   //userWorlds
   onUserLearningWorldsLoaded(userLearningWorldsTO: UserLearningWorldsTO): void;
+
   // world
   onLearningWorldLoaded(learningWorldTO: LearningWorldTO): void;
-
   onLearningWorldScored(learningWorldScoreTO: LearningWorldScoreTO): void;
 
   // space
@@ -46,4 +47,7 @@ export default interface ILearningWorldPort
   onAdaptivityElementUserHintInformed(
     adaptivityElementHintTO: AdaptivityElementHintTO
   ): void;
+
+  // avatar
+  onAvatarPositionChanged(position: Vector3, interactionRadius: number): void;
 }
