@@ -29,6 +29,9 @@ describe("LearningElementsDropdownController", () => {
     systemUnderTest.startLearningElement(1337);
 
     expect(useCaseMock.executeAsync).toHaveBeenCalledTimes(1);
-    expect(useCaseMock.executeAsync).toHaveBeenCalledWith(1337);
+    expect(useCaseMock.executeAsync).toHaveBeenCalledWith({
+      elementID: 1337,
+      isScoreable: true,
+    });
   });
 });

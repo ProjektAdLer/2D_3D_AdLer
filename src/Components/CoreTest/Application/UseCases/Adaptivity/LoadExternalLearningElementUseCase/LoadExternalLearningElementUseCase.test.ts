@@ -141,6 +141,7 @@ describe("LoadExternalLearningElementUseCase", () => {
     expect(worldPortMock.onLearningElementLoaded).toHaveBeenCalledWith({
       id: 1,
       filePath: "path",
+      isScoreable: false,
     });
   });
 

@@ -49,6 +49,7 @@ describe("LearningElementModalPresenter", () => {
       parentWorldID: 0,
       hasScored: false,
       model: LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
+      isScoreable: true,
     };
 
     systemUnderTest.onLearningElementLoaded(elementTO);
