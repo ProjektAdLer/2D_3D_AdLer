@@ -43,6 +43,7 @@ const USECASE_TYPES = {
     "ILoadExternalLearningElementUseCase"
   ),
   IScoreAdaptivityElementUseCase: Symbol("IScoreAdaptivityElementUseCase"),
+  IDisplayLearningElementUseCase: Symbol("IDisplayLearningElementUseCase"),
 };
 
 export default USECASE_TYPES;

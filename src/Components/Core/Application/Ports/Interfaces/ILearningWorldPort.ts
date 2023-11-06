@@ -10,6 +10,7 @@ import ILearningWorldAdapter from "../LearningWorldPort/ILearningWorldAdapter";
 import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
 import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
+import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
 
 export default interface ILearningWorldPort
   extends IAbstractPort<ILearningWorldAdapter> {
@@ -41,5 +42,8 @@ export default interface ILearningWorldPort
   ): void;
   onAdaptivityElementAnswerEvaluated(
     adaptivityElementProgressUpdateTO: AdaptivityElementProgressUpdateTO
+  ): void;
+  onAdaptivityElementUserHintInformed(
+    adaptivityElementHintTO: AdaptivityElementHintTO
   ): void;
 }

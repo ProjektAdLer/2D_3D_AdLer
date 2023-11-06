@@ -8,6 +8,7 @@ import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/Lear
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
+import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
 
 /**
  * This interface is used to register with the WorldPort and defines all the methods that can be called by the WorldPort.
@@ -41,5 +42,8 @@ export default interface ILearningWorldAdapter {
   ): void;
   onAdaptivityElementAnswerEvaluated?(
     adaptivityElementProgressUpdateTO: AdaptivityElementProgressUpdateTO
+  ): void;
+  onAdaptivityElementUserHintInformed?(
+    adaptivityElementHintTO: AdaptivityElementHintTO
   ): void;
 }

@@ -322,7 +322,7 @@ export default class MockBackendAdapter implements IBackendPort {
       {
         taskId: 2,
         taskTitle: "Debug Aufgabe",
-        optional: true,
+        optional: false,
         requiredDifficulty: 100,
         adaptivityQuestions: [
           {
@@ -392,9 +392,9 @@ export default class MockBackendAdapter implements IBackendPort {
                 triggerId: 2,
                 triggerCondition: "incorrect",
                 adaptivityAction: {
-                  $type: "CommentAction",
-                  commentText:
-                    "Das war leider falsch, eine Primzahl ist nur durch sich selbst, oder durch 1 teilbar.",
+                  $type: "AdaptivityReferenceAction",
+                  elementId: 2,
+                  hintText: null,
                 },
               },
             ],
@@ -965,7 +965,7 @@ export default class MockBackendAdapter implements IBackendPort {
 
         {
           elementId: 999,
-          elementName: "Ein externes Lernelement",
+          elementName: "Hier steht ein externes Lernelement",
           elementCategory: "text",
           elementDescription: "Beschreibung des externen Lernelemenets",
           elementFileType: "text",
@@ -1137,17 +1137,18 @@ export default class MockBackendAdapter implements IBackendPort {
         },
         {
           elementId: 4,
-          elementName: "Ein Video-Lernelement",
-          elementDescription: " Beschreibung des Video-Lernelements",
+          elementName: "Ein Adaptivitäts-Lernelement",
+          elementDescription: "Beschreibung des Adaptivitäts-Lernelements",
           elementGoals: [
             "Elementziel 1/3",
             "Elementziel 2/3",
             "Elementziel 3/3",
           ],
-          elementCategory: "video",
+          elementCategory: "adaptivity",
           elementFileType: "url",
-          elementMaxScore: 2,
+          elementMaxScore: 3,
           elementModel: "",
+          adaptivityContent: this.adaptivityData,
         },
         {
           elementId: 5,

@@ -18,6 +18,7 @@ import AdaptivityElementQuestionProgressTO from "src/Components/Core/Application
 import AdaptivityElementAnswersTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementAnswerTO";
 import AdaptivityElementTriggerTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTriggerTO";
 import { AdaptivityElementTriggerConditionTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementTriggerConditionTypes";
+import AdaptivityElementHintTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
 
 export default class AdaptivityElementPresenter
   implements IAdaptivityElementPresenter
@@ -76,6 +77,21 @@ export default class AdaptivityElementPresenter
     });
 
     this.viewModel.showFeedback.Value = true;
+  }
+
+  onAdaptivityElementUserHintInformed?(
+    adaptivityElementHintTO: AdaptivityElementHintTO
+  ): void {
+    const hint = {
+      hintID: adaptivityElementHintTO.hintID,
+      showOnIsWrong: adaptivityElementHintTO.showOnIsWrong,
+      hintAction: {
+        hintActionType: adaptivityElementHintTO.hintAction.hintActionType,
+        idData: adaptivityElementHintTO.hintAction.idData,
+        textData: adaptivityElementHintTO.hintAction.textData,
+      } as AdaptivityHintAction,
+    } as AdaptivityHint;
+    this.viewModel.selectedHint.Value = hint;
   }
 
   @bind

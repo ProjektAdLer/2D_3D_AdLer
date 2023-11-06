@@ -12,6 +12,7 @@ import LearningWorldScoreTO from "../../DataTransferObjects/LearningWorldScoreTO
 import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
 import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
+import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
 
 @injectable()
 export default class LearningWorldPort
@@ -114,6 +115,15 @@ export default class LearningWorldPort
         adapter.onAdaptivityElementAnswerEvaluated(
           adaptivityElementProgressUpdateTO
         );
+    });
+  }
+
+  public onAdaptivityElementUserHintInformed(
+    adaptivityElementHintTO: AdaptivityElementHintTO
+  ): void {
+    this.adapters.forEach((adapter) => {
+      if (adapter.onAdaptivityElementUserHintInformed)
+        adapter.onAdaptivityElementUserHintInformed(adaptivityElementHintTO);
     });
   }
 }

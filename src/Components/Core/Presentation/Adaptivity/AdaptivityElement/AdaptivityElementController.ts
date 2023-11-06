@@ -15,6 +15,7 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldPort from "../../../Application/Ports/Interfaces/ILearningWorldPort";
 import ILoadExternalLearningElementUseCase from "src/Components/Core/Application/UseCases/Adaptivity/LoadExternalLearningElementUseCase/ILoadExternalLearningElementUseCase";
 import type { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
+import IDisplayLearningElementUseCase from "src/Components/Core/Application/UseCases/Adaptivity/DisplayLearningElementUseCase/IDisplayLearningElementUseCase";
 
 export default class AdaptivityElementController
   implements IAdaptivityElementController
@@ -40,23 +41,30 @@ export default class AdaptivityElementController
   }
 
   @bind
-  selectHint(
+  async selectHint(
     selectedHint: AdaptivityHint,
     associatedQuestion: AdaptivityQuestion
-  ): void {
+  ): Promise<void> {
     if (
       selectedHint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.ReferenceAction &&
       selectedHint.hintAction.idData !== undefined
     ) {
+      // if element is in same learning space then highlight,
+      // if not in element nothing will happen
       // call all element presenters via port
       const learningWorldPort = CoreDIContainer.get<ILearningWorldPort>(
         PORT_TYPES.ILearningWorldPort
       );
-
       learningWorldPort.onLearningElementHighlighted(
         selectedHint.hintAction.idData
       );
+
+      await CoreDIContainer.get<IDisplayLearningElementUseCase>(
+        USECASE_TYPES.IDisplayLearningElementUseCase
+      ).executeAsync(selectedHint.hintAction.idData);
+      this.viewModel.currentQuestion.Value = associatedQuestion;
+      return;
     } else if (
       selectedHint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.ContentAction &&
