@@ -102,11 +102,11 @@ export default function AdaptivityElementDialogContainer({
   return (
     <StyledContainer className={tailwindMerge(className, "")}>
       <div
-        className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-screen bg-black bg-opacity-50 lg:grid lg:grid-rows-3 lg:items-start"
+        className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center bg-black bg-opacity-30 justify-center w-screen h-screen lg:grid lg:grid-rows-3 lg:items-start"
         onClick={controller.closeModal}
       >
         {/* Background NPC */}
-        <div className="flex items-end justify-start invisible w-full pl-16 lg:visible lg:h-full">
+        <div className="flex items-end justify-start invisible w-full pl-16 lg:visible lg:h-full row-start-2">
           <img
             className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
             alt="LearningImage!"
@@ -118,15 +118,15 @@ export default function AdaptivityElementDialogContainer({
         </div>
 
         {/* Modal */}
-        <div className="flex justify-center items-start lg:row-span-2 w-full lg:w-[95vw] max-w-7xl h-full pt-2 lg:pt-0 ">
+        <div className="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl h-full pt-2 lg:pt-0 row-start-3 ">
           <div
-            className="flex flex-col p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto w-full max-w-[95%] max-h-[95%] lg:h-fit justify-between overflow-auto"
+            className="flex flex-col p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%]  justify-between overflow-auto"
             onClick={(event) => {
               event.stopPropagation();
             }}
           >
             {/* Header */}
-            <div className="z-20 flex items-center justify-center w-full gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
+            <div className="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
               <img
                 className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
                 alt="LearningImage!"
@@ -134,7 +134,7 @@ export default function AdaptivityElementDialogContainer({
               ></img>
 
               {currentTask === null && currentQuestion === null && (
-                <div className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full ">
+                <div className="w-[50px] lg:w-[50px] bg-buttonbgblue rounded-full ">
                   <CircularProgressbarWithChildren
                     value={progressPercentage}
                     strokeWidth={10}

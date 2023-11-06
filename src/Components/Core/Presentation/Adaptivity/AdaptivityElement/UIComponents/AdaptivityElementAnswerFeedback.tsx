@@ -15,7 +15,7 @@ export default function AdaptivityElementAnswerFeedback({
   }, [isCorrect, setHeaderText]);
 
   return (
-    <div className="flex w-full h-full my-4">
+    <div className="flex w-full h-fit my-4">
       <div className="w-1/2">
         {isCorrect && (
           <p className="pl-4 font-bold">
