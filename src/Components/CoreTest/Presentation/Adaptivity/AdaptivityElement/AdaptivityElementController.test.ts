@@ -11,10 +11,12 @@ import ISubmitAdaptivityElementSelectionUseCase from "../../../../Core/Applicati
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import { AdaptivityElementActionTypes } from "../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
+import IDisplayLearningElementUseCase from "../../../../Core/Application/UseCases/Adaptivity/DisplayLearningElementUseCase/IDisplayLearningElementUseCase";
 
 const submitSelectionUseCaseMock =
   mock<ISubmitAdaptivityElementSelectionUseCase>();
 const worldPortMock = mock<ILearningWorldPort>();
+const displayLearningElmentUseCaseMock = mock<IDisplayLearningElementUseCase>();
 
 const mockHint: AdaptivityHint = {
   hintID: 1,
@@ -69,6 +71,9 @@ describe("AdaptivityElementController", () => {
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
       worldPortMock
     );
+    CoreDIContainer.rebind(
+      USECASE_TYPES.IDisplayLearningElementUseCase
+    ).toConstantValue(displayLearningElmentUseCaseMock);
   });
 
   beforeEach(() => {
@@ -118,13 +123,13 @@ describe("AdaptivityElementController", () => {
     expect(viewModel.currentQuestion.Value).toBe(mockQuestion);
   });
 
-  test("selectHint sets currentQuestionID and selectedHintID in viewModel", () => {
-    systemUnderTest.selectHint(mockHint, mockQuestion);
+  test("selectHint sets currentQuestionID and selectedHintID in viewModel", async () => {
+    await systemUnderTest.selectHint(mockHint, mockQuestion);
     expect(viewModel.currentQuestion.Value).toBe(mockQuestion);
     expect(viewModel.selectedHint.Value).toBe(mockHint);
   });
 
-  test("selectHint calls worldPort.onLearningElementHighlighted with hintActionData", () => {
+  test("selectHint calls worldPort.onLearningElementHighlighted with hintActionData", async () => {
     const hint: AdaptivityHint = {
       hintID: 1,
       showOnIsWrong: false,
@@ -135,7 +140,7 @@ describe("AdaptivityElementController", () => {
       },
     };
 
-    systemUnderTest.selectHint(hint, mockQuestion);
+    await systemUnderTest.selectHint(hint, mockQuestion);
 
     expect(worldPortMock.onLearningElementHighlighted).toBeCalledWith(42);
   });
