@@ -24,48 +24,17 @@ describe("BreakTimeNotification", () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  test("should render short break content when break type is set to Short", () => {
-    useBuilderMock([viewModel, mockController]);
-    viewModel.showModal.Value = true;
-    viewModel.breakType.Value = BreakTimeNotificationType.Short;
-
-    const { container } = render(<BreakTimeNotification />);
-    const shortBreak = container.querySelector("[data-testid=short-break]");
-
-    expect(shortBreak).toBeTruthy();
-  });
-
-  test("should render medium break content when break type is set to Medium", () => {
-    useBuilderMock([viewModel, mockController]);
-    viewModel.showModal.Value = true;
-    viewModel.breakType.Value = BreakTimeNotificationType.Medium;
-
-    const { container } = render(<BreakTimeNotification />);
-    const mediumBreak = container.querySelector("[data-testid=medium-break]");
-
-    expect(mediumBreak).toBeTruthy();
-  });
-
-  test("should render long break content when break type is set to Long", () => {
-    useBuilderMock([viewModel, mockController]);
-    viewModel.showModal.Value = true;
-    viewModel.breakType.Value = BreakTimeNotificationType.Long;
-
-    const { container } = render(<BreakTimeNotification />);
-    const longBreak = container.querySelector("[data-testid=long-break]");
-
-    expect(longBreak).toBeTruthy();
-  });
   test("should render small button when showMinimized is true", () => {
     useBuilderMock([viewModel, mockController]);
     viewModel.showModal.Value = true;
-    viewModel.breakType.Value = BreakTimeNotificationType.Long;
+    viewModel.breakType.Value = BreakTimeNotificationType.Medium;
     viewModel.showMinimizedModal.Value = true;
 
     render(<BreakTimeNotification />);
 
     expect(screen.getByText("Zeit für eine Pause!")).toBeInTheDocument();
   });
+
   test("should call controller when clicked in minimized form", () => {
     useBuilderMock([viewModel, mockController]);
     viewModel.showModal.Value = true;
@@ -79,6 +48,7 @@ describe("BreakTimeNotification", () => {
       mockController.minimizeOrMaximizeBreakNotification
     ).toHaveBeenCalledTimes(1);
   });
+
   test("should call controller when closed in minimized form", () => {
     useBuilderMock([viewModel, mockController]);
     viewModel.showModal.Value = true;

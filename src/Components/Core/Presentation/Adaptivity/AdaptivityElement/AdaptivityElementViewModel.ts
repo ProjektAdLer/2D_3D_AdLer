@@ -2,6 +2,7 @@ import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Do
 import { AdaptivityElementActionTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 import Observable from "src/Lib/Observable";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
+import { LearningElementModel } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 export interface AdaptivityAnswer {
   answerIndex: number;
@@ -62,4 +63,5 @@ export default class AdaptivityElementViewModel {
     new Observable<AdaptivityHint | null>(null);
   footerText: Observable<string> = new Observable<string>("");
   elementID: Observable<ComponentID> = new Observable<ComponentID>();
+  model: Observable<LearningElementModel> = new Observable();
 }

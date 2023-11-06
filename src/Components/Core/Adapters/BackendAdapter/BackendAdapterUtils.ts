@@ -5,10 +5,7 @@ import { AdaptivityElementDataTO } from "../../Application/DataTransferObjects/A
 import BackendElementTO from "../../Application/DataTransferObjects/BackendElementTO";
 import BackendSpaceTO from "../../Application/DataTransferObjects/BackendSpaceTO";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
-import {
-  LearningElementModelTypeEnums,
-  isValidLearningElementModelType,
-} from "../../Domain/LearningElementModels/LearningElementModelTypes";
+import { isValidLearningElementModelType } from "../../Domain/LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypes } from "../../Domain/Types/LearningElementTypes";
 import { LearningSpaceTemplateType } from "../../Domain/Types/LearningSpaceTemplateType";
 import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
@@ -137,7 +134,7 @@ export default class BackendAdapterUtils {
     if (isValidLearningElementModelType(modelData)) {
       return modelData;
     } else {
-      return LearningElementModelTypeEnums.NoElementModelTypes.None;
+      return undefined;
     }
   }
 

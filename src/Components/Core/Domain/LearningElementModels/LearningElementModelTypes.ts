@@ -65,9 +65,9 @@ enum TrophyElementModelTypes {
   GoldTrophy = "l_trophy_gold",
 }
 
-enum NoElementModelTypes {
-  None = "",
-}
+// enum NoElementModelTypes {
+//   None = "",
+// }
 
 /** 
  Pseudo-nested enum to reference all possible members of the element model enums.
@@ -80,7 +80,7 @@ export const LearningElementModelTypeEnums = {
   H5pElementModelTypes: H5pElementModelTypes,
   QuizElementModelTypes: QuizElementModelTypes,
   TrophyElementModelTypes: TrophyElementModelTypes,
-  NoElementModelTypes: NoElementModelTypes,
+  // NoElementModelTypes: NoElementModelTypes,
 };
 
 export function isValidLearningElementModelType(type: string): boolean {
@@ -99,5 +99,5 @@ export type LearningElementModel =
   // | PdfElementModelTypes
   | H5pElementModelTypes
   | QuizElementModelTypes
-  | TrophyElementModelTypes
-  | NoElementModelTypes;
+  | TrophyElementModelTypes;
+// | NoElementModelTypes;

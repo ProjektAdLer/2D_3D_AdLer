@@ -4,6 +4,7 @@ import "@testing-library/jest-dom";
 import { config } from "./src/config";
 import { toBeNullOrEqual } from "./src/Components/CoreTest/JestExtensions/toBeNullOrAny";
 import { expect } from "@jest/globals";
+import { toBeOneOf } from "jest-extended";
 
 // The Backend gets constructed at some points in the tests, so we need to set
 // the config values before the tests are run.
@@ -12,6 +13,7 @@ config.serverURL = "http://localhost:1337";
 // matcher extensions
 expect.extend({
   toBeNullOrEqual: toBeNullOrEqual,
+  toBeOneOf: toBeOneOf,
 });
 declare global {
   namespace jest {

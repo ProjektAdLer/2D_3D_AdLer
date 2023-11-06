@@ -1,6 +1,8 @@
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import IBreakTimeNotificationController from "./IBreakTimeNotificationController";
-import BreakTimeNotificationViewModel from "./BreakTimeNotificationViewModel";
+import BreakTimeNotificationViewModel, {
+  breakObject,
+} from "./BreakTimeNotificationViewModel";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
@@ -8,7 +10,6 @@ import { BreakTimeNotificationType } from "src/Components/Core/Domain/Entities/A
 import { AdLerUIComponent } from "../../../Types/ReactTypes";
 import tailwindMerge from "../../Utils/TailwindMerge";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
 import pauseIcon from "../../../../../Assets/icons/42-pause-icon/47-pause-icon-nobg.svg";
 import { useEffect, useState } from "react";
 
@@ -22,14 +23,26 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
   const [showMinimizedModal] = useObservable(viewModel?.showMinimizedModal);
   const [breakType] = useObservable(viewModel?.breakType);
   useObservable(viewModel?.slideIndex);
-  const [randomIndex, setRandomIndex] = useState<number>(0);
+  const [randomNumber, setRandomNumber] = useState<number>(0);
+  const [chosenBreakContent, setChosenBreakContent] = useState<breakObject>();
 
   useEffect(() => {
-    setRandomIndex(Math.floor(Math.random()));
+    setRandomNumber(Math.random());
+  }, [viewModel?.showModal]);
+  useEffect(() => {
     controller.setSliderIndex(1);
-  }, [viewModel?.showModal, controller]);
+  }, [controller]);
+  useEffect(() => {
+    let breakContent = ChooseRandomBreakContent(
+      breakType,
+      viewModel,
+      randomNumber
+    );
+    setChosenBreakContent(breakContent);
+  }, [randomNumber, viewModel, breakType]);
 
-  if (!viewModel || !controller || !showModal || !breakType) return null;
+  if (!viewModel || !controller || !showModal || !chosenBreakContent)
+    return null;
 
   if (showMinimizedModal)
     return (
@@ -51,6 +64,9 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
             x
           </div>
         </StyledButton>
+        <StyledButton className="fixed lg:hidden left-2 bottom-2">
+          <img src={pauseIcon} className="h-fit" alt="" />
+        </StyledButton>
       </div>
     );
 
@@ -58,138 +74,133 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
     <StyledModal
       className={tailwindMerge(className, "")}
       showModal={showModal}
-      onClose={() => controller.minimizeOrMaximizeBreakNotification()}
+      onClose={controller.minimizeOrMaximizeBreakNotification}
       title="Pausenhinweis"
     >
-      {GetNotificationModalContents(
-        breakType,
-        viewModel,
+      {RenderBreakContent(
         controller,
-        randomIndex
+        chosenBreakContent,
+        viewModel.slideIndex.Value
       )}
     </StyledModal>
   );
 }
-
-function GetNotificationModalContents(
+function ChooseRandomBreakContent(
   breakType: BreakTimeNotificationType,
   viewModel: BreakTimeNotificationViewModel,
-  controller: IBreakTimeNotificationController,
-  randomIndex: number
+  randomNumber: number
 ) {
+  let randomIndex = 0;
   switch (breakType) {
     case BreakTimeNotificationType.Short:
-      return ShortBreakContent(viewModel, controller, randomIndex);
+      let notSeenBeforeShortBreaks = viewModel.shortBreakContentPool.filter(
+        (shortBreaks) => !shortBreaks.seenBefore
+      );
+      randomIndex = Math.floor(randomNumber * notSeenBeforeShortBreaks.length);
+      viewModel.shortBreakContentPool[randomIndex].seenBefore = true;
+      return viewModel.shortBreakContentPool[randomIndex];
     case BreakTimeNotificationType.Medium:
-      return MediumBreakContent(viewModel, controller, randomIndex);
+      let notSeenBeforeMediumBreaks = viewModel.mediumBreakContentPool.filter(
+        (mediumBreaks) => !mediumBreaks.seenBefore
+      );
+      randomIndex = Math.floor(randomNumber * notSeenBeforeMediumBreaks.length);
+      viewModel.mediumBreakContentPool[randomIndex].seenBefore = true;
+      return viewModel.mediumBreakContentPool[randomIndex];
     case BreakTimeNotificationType.Long:
-      return LongBreakContent(viewModel, controller, randomIndex);
+      let notSeenBeforeLongBreaks = viewModel.longBreakContentPool.filter(
+        (longBreaks) => !longBreaks.seenBefore
+      );
+      randomIndex = Math.floor(randomNumber * notSeenBeforeLongBreaks.length);
+      viewModel.longBreakContentPool[randomIndex].seenBefore = true;
+      return viewModel.longBreakContentPool[randomIndex];
     default:
-      return "";
+      return;
   }
 }
-
-function ShortBreakContent(
-  viewModel: BreakTimeNotificationViewModel,
+function RenderBreakContent(
   controller: IBreakTimeNotificationController,
-  randomIndex: number
+  chosenBreakContent: breakObject,
+  currentSlideIndex: number
 ) {
-  randomIndex = Math.floor(
-    randomIndex * viewModel.shortBreakContentPool.length
-  );
   return (
-    <div
-      data-testid="short-break"
-      className="pb-4 max-w-[90vw] lg:max-w-[60vw]"
-    >
-      {/* media */}
-      {/*Bitte die "nicht Tailwindklassen" drinne lassen! Brauchen hierfür Plain CSS in der app.css*/}
-
-      <div className="relative mx-0 my-auto slider-wrapper">
-        <div className="flex gap-4 overflow-x-auto slider snap-x snap-mandatory scroll-smooth lg:max-w-[60vw] max-w-[90vw]">
+    <div className="pb-4 max-w-[90vw] lg:max-w-[60vw]">
+      <div className="flex flex-col items-center gap-6 mx-0 my-auto slider-wrapper">
+        <div className="flex gap-4 overflow-x-auto slider lg:max-w-[60vw] max-w-[90vw]">
           <figure>
             <p className="pb-4 pl-6 text-lg font-bold lg:text-xl text-adlerdarkblue">
-              {viewModel.shortBreakContentPool[randomIndex][0]}
+              {chosenBreakContent.titleMessage}
             </p>
-            {viewModel.slideIndex.Value === 1 && (
+            {currentSlideIndex === 1 && (
               <img
                 id="slide-1"
-                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                src={viewModel.shortBreakContentPool[randomIndex][1]}
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg"
+                src={chosenBreakContent.image1}
                 title="Slide 1/3"
                 alt=""
               ></img>
             )}
-            {viewModel.slideIndex.Value === 2 && (
+            {currentSlideIndex === 2 && (
               <img
                 id="slide-2"
-                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                src={viewModel.shortBreakContentPool[randomIndex][2]}
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg"
+                src={chosenBreakContent.image2}
                 title="Slide 2/3"
                 alt=""
               ></img>
             )}
-            {viewModel.slideIndex.Value === 3 && (
+            {currentSlideIndex === 3 && (
               <img
                 id="slide-3"
-                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                src={viewModel.shortBreakContentPool[randomIndex][3]}
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg"
+                src={chosenBreakContent.image3}
                 title="Slide 3/3"
                 alt=""
               ></img>
             )}
-            {viewModel.slideIndex.Value === 4 && (
+            {currentSlideIndex === 4 && (
               <img
                 id="slide-4"
-                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg snap-start"
-                src={viewModel.shortBreakContentPool[randomIndex][4]}
+                className="object-cover lg:max-w-[60vw] max-w-[90vw] rounded-lg"
+                src={chosenBreakContent.image4}
                 title="Slide 4/4"
                 alt=""
               ></img>
             )}
           </figure>
         </div>
-        {viewModel.shortBreakContentPool[randomIndex][2] !== "" && (
-          <div className="absolute z-10 flex gap-4 -translate-x-1/2 lg:gap-6 slider-nav bottom-2 lg:bottom-4 left-1/2">
-            {viewModel.shortBreakContentPool[randomIndex][1] !== "" && (
+        {chosenBreakContent.image2 !== "" && (
+          <div className="z-10 flex gap-4 lg:gap-6 slider-nav">
+            {chosenBreakContent.image1 !== "" && (
               <button
                 className={
-                  (viewModel.slideIndex.Value === 1
-                    ? "bg-yellow-400 "
-                    : "bg-white ") +
+                  (currentSlideIndex === 1 ? "bg-yellow-400 " : "bg-white ") +
                   "w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
                 }
                 onClick={() => controller.setSliderIndex(1)}
               ></button>
             )}
-            {viewModel.shortBreakContentPool[randomIndex][2] !== "" && (
+            {chosenBreakContent.image2 !== "" && (
               <button
                 className={
-                  (viewModel.slideIndex.Value === 2
-                    ? "bg-yellow-400 "
-                    : "bg-white ") +
+                  (currentSlideIndex === 2 ? "bg-yellow-400 " : "bg-white ") +
                   "w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
                 }
                 onClick={() => controller.setSliderIndex(2)}
               ></button>
             )}
-            {viewModel.shortBreakContentPool[randomIndex][3] !== "" && (
+            {chosenBreakContent.image3 !== "" && (
               <button
                 className={
-                  (viewModel.slideIndex.Value === 3
-                    ? "bg-yellow-400 "
-                    : "bg-white ") +
+                  (currentSlideIndex === 3 ? "bg-yellow-400 " : "bg-white ") +
                   "w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
                 }
                 onClick={() => controller.setSliderIndex(3)}
               ></button>
             )}
-            {viewModel.shortBreakContentPool[randomIndex][4] !== "" && (
+            {chosenBreakContent.image4 !== "" && (
               <button
                 className={
-                  (viewModel.slideIndex.Value === 4
-                    ? "bg-yellow-400 "
-                    : "bg-white ") +
+                  (currentSlideIndex === 4 ? "bg-yellow-400 " : "bg-white ") +
                   "w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
                 }
                 onClick={() => controller.setSliderIndex(4)}
@@ -198,72 +209,6 @@ function ShortBreakContent(
           </div>
         )}
       </div>
-    </div>
-  );
-}
-
-function MediumBreakContent(
-  viewModel: BreakTimeNotificationViewModel,
-  controller: IBreakTimeNotificationController,
-  randomIndex: number
-) {
-  randomIndex = Math.floor(
-    randomIndex * viewModel.mediumBreakContentPool.length
-  );
-  return (
-    <div
-      data-testid="medium-break"
-      className="pb-4 w-[90vw] portrait:w-[99vw] lg:w-[60vw]"
-    >
-      {/* title */}
-      <p>{viewModel.mediumBreakContentPool[randomIndex][0]}</p>
-      {/* content */}
-      <TextWithLineBreaks
-        text={viewModel.mediumBreakContentPool[randomIndex][1]}
-      ></TextWithLineBreaks>
-      <br />
-      {/* media */}
-      {viewModel.mediumBreakContentPool[randomIndex][2] !== "" && (
-        <iframe
-          className="w-full rounded-lg aspect-video"
-          src={viewModel.mediumBreakContentPool[randomIndex][2]}
-          title="Break Item Iframe"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
-      )}
-    </div>
-  );
-}
-
-function LongBreakContent(
-  viewModel: BreakTimeNotificationViewModel,
-  controller: IBreakTimeNotificationController,
-  randomIndex: number
-) {
-  randomIndex = Math.floor(randomIndex * viewModel.longBreakContentPool.length);
-  return (
-    <div
-      data-testid="long-break"
-      className="pb-4 w-[90vw] portrait:w-[99vw] lg:w-[60vw]"
-    >
-      {/* title */}
-      <p>{viewModel.longBreakContentPool[randomIndex][0]}</p>
-      {/* content */}
-      <TextWithLineBreaks
-        text={viewModel.longBreakContentPool[randomIndex][1]}
-      ></TextWithLineBreaks>
-      <br />
-      {/* media */}
-      {viewModel.longBreakContentPool[randomIndex][2] !== "" && (
-        <iframe
-          className="w-full rounded-lg aspect-video"
-          src={viewModel.longBreakContentPool[randomIndex][2]}
-          title="Break Item Iframe"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
-      )}
     </div>
   );
 }

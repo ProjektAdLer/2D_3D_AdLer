@@ -10,7 +10,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
--
+- dynamic NPC image matching the 3D model in the space to Adaptivity Element
 
 ### Changed
 
@@ -26,7 +26,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
--
+- Break Notifications should behave correctly now
 
 ### Security
 

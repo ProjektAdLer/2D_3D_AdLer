@@ -8,6 +8,7 @@ import AdaptivityElementViewModel, {
 import { mock } from "jest-mock-extended";
 import IAdaptivityElementController from "../../../../../Core/Presentation/Adaptivity/AdaptivityElement/IAdaptivityElementController";
 import { AdaptivityElementActionTypes } from "../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
+import { LearningElementModelTypeEnums } from "../../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 describe("AdaptivityElementDialogContainer", () => {
   let viewModel: AdaptivityElementViewModel;
@@ -46,6 +47,8 @@ describe("AdaptivityElementDialogContainer", () => {
 
   test("should render", () => {
     viewModel.isOpen.Value = true;
+    viewModel.model.Value =
+      LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard;
     const question = {
       questionID: 0,
       questionText: "testQuestionText",
@@ -76,6 +79,7 @@ describe("AdaptivityElementDialogContainer", () => {
       taskTitle: "testTaskTitle",
       isCompleted: false,
       isRequired: false,
+      hasBeenCompleted: false,
       requiredDifficulty: 0,
       questions: [question],
     };

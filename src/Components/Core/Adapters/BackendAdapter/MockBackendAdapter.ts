@@ -959,7 +959,7 @@ export default class MockBackendAdapter implements IBackendPort {
           ],
           elementFileType: "text",
           elementMaxScore: 1,
-          elementModel: "",
+          elementModel: "a_npc_defaultnpc",
           adaptivityContent: this.adaptivityData,
         },
 

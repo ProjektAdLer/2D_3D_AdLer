@@ -1,3 +1,4 @@
+import { LearningElementModelTypeEnums } from "../LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypes } from "../Types/LearningElementTypes";
 import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
 import ILearningSpaceTheme from "./ILearningSpaceTheme";
@@ -8,27 +9,27 @@ const LearningSpaceTheme_Suburb: ILearningSpaceTheme = {
   floorTexture: require("../../../../Assets/textures/suburbTheme/m_floor_woodboards_1.jpg"),
   learningElementModels: {
     [LearningElementTypes.h5p]: [
-      require("../../../../Assets/3dModels/suburbTheme/l_h5p_blackboard_1.glb"),
-      require("../../../../Assets/3dModels/suburbTheme/l_h5p_deskpc_1.glb"),
-      require("../../../../Assets/3dModels/suburbTheme/l_h5p_drawingtable_1.glb"),
-      require("../../../../Assets/3dModels/suburbTheme/l_h5p_slotmachine_1.glb"),
+      LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard,
+      LearningElementModelTypeEnums.H5pElementModelTypes.DeskPC1,
+      LearningElementModelTypeEnums.H5pElementModelTypes.DrawingTable,
+      LearningElementModelTypeEnums.H5pElementModelTypes.SlotMachine,
     ],
     [LearningElementTypes.text]: [
-      require("../../../../Assets/3dModels/suburbTheme/l_text_bookshelf_1.glb"),
+      LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
     ],
     [LearningElementTypes.image]: [
-      require("../../../../Assets/3dModels/suburbTheme/l_image_painting_1.glb"),
-      require("../../../../Assets/3dModels/suburbTheme/l_image_painting_2.glb"),
-      require("../../../../Assets/3dModels/suburbTheme/l_image_paintingeasel_1.glb"),
+      LearningElementModelTypeEnums.ImageElementModelTypes.Painting1,
+      LearningElementModelTypeEnums.ImageElementModelTypes.Painting2,
+      LearningElementModelTypeEnums.ImageElementModelTypes.PaintingEasel,
     ],
     [LearningElementTypes.video]: [
-      require("../../../../Assets/3dModels/suburbTheme/l_video_television_1.glb"),
+      LearningElementModelTypeEnums.VideoElementModelTypes.Television,
     ],
     [LearningElementTypes.pdf]: [
-      require("../../../../Assets/3dModels/suburbTheme/l_text_bookshelf_2.glb"),
+      LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf2,
     ],
     [LearningElementTypes.adaptivity]: [
-      require("../../../../Assets/3dModels/suburbTheme/a_npc_defaultnpc.glb"),
+      LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
     ],
     [LearningElementTypes.notAnElement]: [],
   },

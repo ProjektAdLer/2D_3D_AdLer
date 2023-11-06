@@ -1,5 +1,16 @@
-import quizBackgroundVRGuy from "../../../../../../Assets/misc/quizBackgrounds/a_npc_dozentlukas.png";
-import quizBackgroundVRGuyCutted from "../../../../../../Assets/misc/quizBackgrounds/a_npc_dozentlukas_close.png";
+import campusNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_dozentlukas.png";
+import campusNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_dozentlukas_close.png";
+import arcadeNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_sheriffjustice.png";
+import arcadeNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_sheriffjustice_close.png";
+import defaultNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_defaultnpc.png";
+import defaultNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_defaultnpc_close.png";
+
+import requiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-solved-icon.svg";
+import requiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-unsolved-icon.svg";
+import notRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-solved-icon.svg";
+import notRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-unsolved-icon.svg";
+import placeholderIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-placeholder.svg";
+import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
 
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import AdaptivityElementViewModel, {
@@ -23,13 +34,23 @@ import {
 } from "react-circular-progressbar";
 import AdaptivityElementQuestionSelection from "./AdaptivityElementQuestionSelection";
 import AdaptivityElementAnswerFeedback from "./AdaptivityElementAnswerFeedback";
-import requiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-solved-icon.svg";
-import requiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-unsolved-icon.svg";
-import notRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-solved-icon.svg";
-import notRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-unsolved-icon.svg";
-import placeholderIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-placeholder.svg";
-import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
 import AdaptivityElementHint from "./AdaptivityElementHint";
+import {
+  LearningElementModel,
+  LearningElementModelTypeEnums,
+} from "../../../../Domain/LearningElementModels/LearningElementModelTypes";
+
+function getNPCImage(model: LearningElementModel, close: boolean): string {
+  switch (model) {
+    case LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC:
+      return close ? arcadeNPCClose : arcadeNPC;
+    case LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC:
+      return close ? campusNPCClose : campusNPC;
+    case LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC:
+    default:
+      return close ? defaultNPCClose : defaultNPC;
+  }
+}
 
 export default function AdaptivityElementDialogContainer({
   className,
@@ -56,6 +77,7 @@ export default function AdaptivityElementDialogContainer({
   const [showFooterTooltip] = useObservable<boolean>(
     viewmodel?.showFooterTooltip
   );
+  const [model] = useObservable<LearningElementModel>(viewmodel?.model);
 
   // -- State --
   const [headerText, setHeaderText] = useState<string>("");
@@ -78,168 +100,160 @@ export default function AdaptivityElementDialogContainer({
   if (!isOpen || !contentData) return null;
   console.log("showFooterTooltip: ", showFooterTooltip);
   return (
-    <>
-      <StyledContainer className={tailwindMerge(className, "")}>
-        <div className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-screen bg-black bg-opacity-50 lg:grid lg:grid-rows-3 lg:items-start">
-          {/* Background NPC */}
-          <div className="flex items-end justify-start invisible w-full pl-16 lg:visible lg:h-full">
-            <img
-              className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
-              alt="LearningImage!"
-              src={quizBackgroundVRGuyCutted}
-            ></img>
-          </div>
+    <StyledContainer className={tailwindMerge(className, "")}>
+      <div
+        className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-screen bg-black bg-opacity-50 lg:grid lg:grid-rows-3 lg:items-start"
+        onClick={controller.closeModal}
+      >
+        {/* Background NPC */}
+        <div className="flex items-end justify-start invisible w-full pl-16 lg:visible lg:h-full">
+          <img
+            className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+            alt="LearningImage!"
+            src={getNPCImage(model, true)}
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+          ></img>
+        </div>
 
-          {/* Modal */}
-          <div className="flex justify-center items-start lg:row-span-2 w-full lg:w-[95vw] max-w-7xl h-full pt-2 lg:pt-0 ">
-            <div className="flex flex-col p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto w-full max-w-[95%] max-h-[95%] lg:h-fit justify-between overflow-auto">
-              {/* Header */}
-              <div className="z-20 flex items-center justify-center w-full gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
-                <img
-                  className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
-                  alt="LearningImage!"
-                  src={quizBackgroundVRGuy}
-                ></img>
+        {/* Modal */}
+        <div className="flex justify-center items-start lg:row-span-2 w-full lg:w-[95vw] max-w-7xl h-full pt-2 lg:pt-0 ">
+          <div
+            className="flex flex-col p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto w-full max-w-[95%] max-h-[95%] lg:h-fit justify-between overflow-auto"
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+          >
+            {/* Header */}
+            <div className="z-20 flex items-center justify-center w-full gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
+              <img
+                className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+                alt="LearningImage!"
+                src={getNPCImage(model, false)}
+              ></img>
 
-                {currentTask === null && currentQuestion === null && (
-                  <div className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full ">
-                    <CircularProgressbarWithChildren
-                      value={progressPercentage}
-                      strokeWidth={10}
-                      styles={buildStyles({
-                        strokeLinecap: "butt",
-                        pathTransitionDuration: 1.5,
+              {currentTask === null && currentQuestion === null && (
+                <div className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full ">
+                  <CircularProgressbarWithChildren
+                    value={progressPercentage}
+                    strokeWidth={10}
+                    styles={buildStyles({
+                      strokeLinecap: "butt",
+                      pathTransitionDuration: 1.5,
 
-                        // Colors
-                        trailColor: "#E64B17",
-                        pathColor: `#59B347`,
-                      })}
-                    >
-                      {Math.round(progressPercentage) + "%"}
-                    </CircularProgressbarWithChildren>
-                  </div>
+                      // Colors
+                      trailColor: "#E64B17",
+                      pathColor: `#59B347`,
+                    })}
+                  >
+                    {Math.round(progressPercentage) + "%"}
+                  </CircularProgressbarWithChildren>
+                </div>
+              )}
+
+              <div className="w-full text-sm lg:text-xl">{headerText}</div>
+              {!(currentTask === null && currentQuestion === null) &&
+                !showAnswerFeedback && (
+                  <StyledButton
+                    onClick={controller.back}
+                    className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+                  >
+                    {"<"}
+                  </StyledButton>
                 )}
 
-                <div className="w-full text-sm lg:text-xl">{headerText}</div>
-                {!(currentTask === null && currentQuestion === null) &&
-                  !showAnswerFeedback && (
-                    <StyledButton
-                      onClick={controller.back}
-                      className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-                    >
-                      {"<"}
-                    </StyledButton>
-                  )}
+              <StyledButton
+                onClick={controller.closeModal}
+                className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+              >
+                X
+              </StyledButton>
+            </div>
 
-                <StyledButton
-                  onClick={controller.closeModal}
-                  className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-                >
-                  X
-                </StyledButton>
-              </div>
+            {/* Content */}
+            <div className="overflow-auto">
+              {currentTask === null && currentQuestion === null && (
+                <div className="flex items-center justify-center px-1 mb-4 overflow-auto rounded-lg font-regular h-fit lg:m-4">
+                  <AdaptivityElementTaskSelection
+                    tasks={contentData.tasks}
+                    setHeaderText={setHeaderText}
+                    onSelectTask={controller.selectTask}
+                  />
+                </div>
+              )}
+              {currentTask !== null && currentQuestion === null && (
+                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
+                  <AdaptivityElementQuestionSelection
+                    selectedTask={currentTask}
+                    setHeaderText={setHeaderText}
+                    onSelectQuestion={controller.selectQuestion}
+                    onSelectHint={controller.selectHint}
+                  />
+                </div>
+              )}
 
-              {/* Content */}
-              <div className="overflow-auto">
-                {currentTask === null && currentQuestion === null && (
-                  <div className="flex items-center justify-center px-1 mb-4 overflow-auto rounded-lg font-regular h-fit lg:m-4">
-                    <AdaptivityElementTaskSelection
-                      tasks={contentData.tasks}
-                      setHeaderText={setHeaderText}
-                      onSelectTask={controller.selectTask}
-                    />
-                  </div>
-                )}
-                {currentTask !== null && currentQuestion === null && (
+              {currentTask !== null &&
+                currentQuestion !== null &&
+                !showAnswerFeedback &&
+                selectedHint === null && (
                   <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
-                    <AdaptivityElementQuestionSelection
-                      selectedTask={currentTask}
+                    <AdaptivityElementAnswerSelection
+                      question={currentQuestion}
                       setHeaderText={setHeaderText}
-                      onSelectQuestion={controller.selectQuestion}
-                      onSelectHint={controller.selectHint}
+                      submitSelection={controller.submitSelection}
+                      closeSelection={controller.closeAnswerSelection}
                     />
                   </div>
                 )}
 
-                {currentTask !== null &&
-                  currentQuestion !== null &&
-                  !showAnswerFeedback &&
-                  selectedHint === null && (
-                    <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
-                      <AdaptivityElementAnswerSelection
-                        question={currentQuestion}
-                        setHeaderText={setHeaderText}
-                        submitSelection={controller.submitSelection}
-                        closeSelection={controller.closeAnswerSelection}
-                      />
-                    </div>
-                  )}
+              {currentTask !== null &&
+                currentQuestion !== null &&
+                showAnswerFeedback &&
+                selectedHint === null && (
+                  <AdaptivityElementAnswerFeedback
+                    isCorrect={currentQuestion.isCompleted!}
+                    setHeaderText={setHeaderText}
+                    closeFeedback={controller.closeFeedback}
+                  />
+                )}
+              {currentTask !== null &&
+                currentQuestion !== null &&
+                !showAnswerFeedback &&
+                selectedHint !== null && (
+                  <AdaptivityElementHint
+                    hint={selectedHint}
+                    setHeaderText={setHeaderText}
+                  />
+                )}
+            </div>
 
-                {currentTask !== null &&
-                  currentQuestion !== null &&
-                  showAnswerFeedback &&
-                  selectedHint === null && (
-                    <AdaptivityElementAnswerFeedback
-                      isCorrect={currentQuestion.isCompleted!}
-                      setHeaderText={setHeaderText}
-                      closeFeedback={controller.closeFeedback}
-                    />
-                  )}
-                {currentTask !== null &&
-                  currentQuestion !== null &&
-                  !showAnswerFeedback &&
-                  selectedHint !== null && (
-                    <AdaptivityElementHint
-                      hint={selectedHint}
-                      setHeaderText={setHeaderText}
-                    />
-                  )}
-              </div>
-
-              {/* Footer */}
-              {
-                <div className="flex justify-between items-end pt-1 text-[0.5rem] lg:text-xs modal-footer">
-                  <p>{footerText}</p>
-                  {!(currentTask !== null && currentQuestion !== null) && (
-                    <div className="relative flex group">
-                      {!showFooterTooltip && (
-                        <p
-                          className="right-1 bottom-1"
-                          onMouseEnter={() => {
-                            controller.showFooterTooltip();
-                          }}
-                        >
-                          Bewege deine Maus hier her, um die Symbollegende
-                          anzuzeigen
-                        </p>
-                      )}
-                      {showFooterTooltip && (
-                        <div
-                          className="flex gap-2"
-                          onMouseLeave={() => {
-                            controller.hideFooterTooltip();
-                          }}
-                        >
-                          <div className="flex-col items-center justify-center">
-                            <div className="flex opacity-60">
-                              <img
-                                className="w-2 lg:w-4"
-                                src={requiredUnsolvedIcon}
-                                alt="required unsolved icon"
-                              />
-                              <img
-                                className="w-2 lg:w-4"
-                                src={requiredUnsolvedIcon}
-                                alt="required unsolved icon"
-                              />
-                              <img
-                                className="w-2 lg:w-4"
-                                src={requiredUnsolvedIcon}
-                                alt="required unsolved icon"
-                              />
-                            </div>
-                            <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
-                            <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
+            {/* Footer */}
+            {
+              <div className="flex justify-between items-end pt-1 text-[0.5rem] lg:text-xs modal-footer">
+                <p>{footerText}</p>
+                {!(currentTask !== null && currentQuestion !== null) && (
+                  <div className="relative flex group">
+                    {!showFooterTooltip && (
+                      <p
+                        className="right-1 bottom-1"
+                        onMouseEnter={() => {
+                          controller.showFooterTooltip();
+                        }}
+                      >
+                        Bewege deine Maus hier her, um die Symbollegende
+                        anzuzeigen
+                      </p>
+                    )}
+                    {showFooterTooltip && (
+                      <div
+                        className="flex gap-2"
+                        onMouseLeave={() => {
+                          controller.hideFooterTooltip();
+                        }}
+                      >
+                        <div className="flex-col items-center justify-center">
+                          <div className="flex opacity-60">
                             <img
                               className="w-2 lg:w-4"
                               src={requiredUnsolvedIcon}
@@ -247,56 +261,73 @@ export default function AdaptivityElementDialogContainer({
                             />
                             <img
                               className="w-2 lg:w-4"
-                              src={notRequiredUnsolvedIcon}
-                              alt="not required unsolved Icon"
+                              src={requiredUnsolvedIcon}
+                              alt="required unsolved icon"
                             />
                             <img
                               className="w-2 lg:w-4"
-                              src={requiredSolvedIcon}
-                              alt="required solved icon"
-                            />
-                            <img
-                              className="w-2 lg:w-4"
-                              src={notRequiredSolvedIcon}
-                              alt="not required solved Icon"
-                            />
-                            <img
-                              className="w-2 lg:w-4"
-                              src={placeholderIcon}
-                              alt="placeholder icon"
-                            />
-                            <img
-                              className="w-2 lg:w-4"
-                              src={requiredTaskIcon}
-                              alt="required task icon"
+                              src={requiredUnsolvedIcon}
+                              alt="required unsolved icon"
                             />
                           </div>
-                          <div className="flex-col items-start justify-center icons">
-                            <p>
-                              Links: Leichte Frage<br></br>Mitte: Mittelschwere
-                              Frage<br></br>
-                              Rechts: Schwere Frage
-                            </p>
-                            <p>Benötigte, ungelöste Frage</p>
-                            <p>Nicht benötigte, ungelöste Frage</p>
-                            <p>Benötigte, gelöste Frage</p>
-                            <p>Nicht benötigte, gelöste Frage</p>
-                            <p>Keine Frage dieser Schwierigkeit vorhanden</p>
-                            <p>
-                              Diese Aufgabe muss bearbeitet werden, um weiter zu
-                              kommen.
-                            </p>
-                          </div>
+                          <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
+                          <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
+                          <img
+                            className="w-2 lg:w-4"
+                            src={requiredUnsolvedIcon}
+                            alt="required unsolved icon"
+                          />
+                          <img
+                            className="w-2 lg:w-4"
+                            src={notRequiredUnsolvedIcon}
+                            alt="not required unsolved Icon"
+                          />
+                          <img
+                            className="w-2 lg:w-4"
+                            src={requiredSolvedIcon}
+                            alt="required solved icon"
+                          />
+                          <img
+                            className="w-2 lg:w-4"
+                            src={notRequiredSolvedIcon}
+                            alt="not required solved Icon"
+                          />
+                          <img
+                            className="w-2 lg:w-4"
+                            src={placeholderIcon}
+                            alt="placeholder icon"
+                          />
+                          <img
+                            className="w-2 lg:w-4"
+                            src={requiredTaskIcon}
+                            alt="required task icon"
+                          />
                         </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              }
-            </div>
+                        <div className="flex-col items-start justify-center icons">
+                          <p>
+                            Links: Leichte Frage<br></br>Mitte: Mittelschwere
+                            Frage<br></br>
+                            Rechts: Schwere Frage
+                          </p>
+                          <p>Benötigte, ungelöste Frage</p>
+                          <p>Nicht benötigte, ungelöste Frage</p>
+                          <p>Benötigte, gelöste Frage</p>
+                          <p>Nicht benötigte, gelöste Frage</p>
+                          <p>Keine Frage dieser Schwierigkeit vorhanden</p>
+                          <p>
+                            Diese Aufgabe muss bearbeitet werden, um weiter zu
+                            kommen.
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            }
           </div>
         </div>
-      </StyledContainer>
-    </>
+      </div>
+    </StyledContainer>
   );
 }

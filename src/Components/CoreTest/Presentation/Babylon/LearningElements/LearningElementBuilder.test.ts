@@ -9,6 +9,7 @@ import { Vector3 } from "@babylonjs/core";
 import LearningElementView from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementView";
 import { waitFor } from "@testing-library/react";
 import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
+import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 
 jest.mock(
   "../../../../Core/Presentation/Babylon/LearningElements/LearningElementView"
@@ -26,7 +27,8 @@ const mockElementData: LearningElementTO = {
   goals: ["TestGoal"],
   type: "h5p",
   hasScored: false,
-  model: LearningElementModelTypeEnums.NoElementModelTypes.None,
+  model: LearningElementModelTypeEnums.H5pElementModelTypes.GreySlotmachine,
+  theme: LearningSpaceThemeType.Campus,
 };
 const mockElementPosition: [Vector3, number] = [new Vector3(1, 2, 3), 0];
 
