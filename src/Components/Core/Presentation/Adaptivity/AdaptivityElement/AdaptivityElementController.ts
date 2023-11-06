@@ -64,7 +64,6 @@ export default class AdaptivityElementController
         USECASE_TYPES.IDisplayLearningElementUseCase
       ).executeAsync(selectedHint.hintAction.idData);
       this.viewModel.currentQuestion.Value = associatedQuestion;
-      return;
     } else if (
       selectedHint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.ContentAction &&
@@ -74,11 +73,10 @@ export default class AdaptivityElementController
         selectedHint.hintAction.idData,
         associatedQuestion
       );
-      return;
+    } else {
+      this.viewModel.currentQuestion.Value = associatedQuestion;
+      this.viewModel.selectedHint.Value = selectedHint;
     }
-
-    this.viewModel.currentQuestion.Value = associatedQuestion;
-    this.viewModel.selectedHint.Value = selectedHint;
   }
 
   @bind
