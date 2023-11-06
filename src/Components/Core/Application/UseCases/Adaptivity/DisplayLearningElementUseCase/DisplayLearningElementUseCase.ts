@@ -42,12 +42,20 @@ export default class DisplayLearningElementUseCase
       return space.elements.filter((e) => e?.id === elementID).length > 0;
     });
 
-    if (space.length !== 1) return;
+    if (space.length === 0) {
+      throw new Error(
+        "Could not find space in which external learning element is."
+      );
+    }
 
     const element = this.entityContainer.filterEntitiesOfType(
       LearningElementEntity,
       (e) => e.id === elementID
     );
+
+    if (element.length === 0) {
+      throw new Error("Could not find external element.");
+    }
 
     const location = this.getUserLocationUseCase.execute();
 
