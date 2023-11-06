@@ -11,6 +11,7 @@ import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUse
 import ILoadLearningElementUseCase from "./ILoadLearningElementUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 
 @injectable()
 export default class LoadLearningElementUseCase
@@ -29,13 +30,17 @@ export default class LoadLearningElementUseCase
     private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
 
-  async executeAsync(elementID: number): Promise<void> {
+  async executeAsync(data: {
+    elementID: ComponentID;
+    isScoreable: boolean;
+  }): Promise<void> {
     // get the current user location
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
       throw new Error(`User is not in a space!`);
     }
 
+    const elementID = data.elementID;
     const elementEntity =
       this.entityContainer.filterEntitiesOfType<LearningElementEntity>(
         LearningElementEntity,
@@ -66,6 +71,8 @@ export default class LoadLearningElementUseCase
         elementID: elementID,
         worldID: elementTO.parentWorldID,
       });
+
+    elementTO.isScoreable = data.isScoreable;
 
     this.logger.log(
       LogLevelTypes.TRACE,

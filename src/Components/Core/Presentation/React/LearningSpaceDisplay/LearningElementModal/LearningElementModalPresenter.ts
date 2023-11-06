@@ -12,7 +12,7 @@ export default class LearningElementModalPresenter
     this.viewModel.id.Value = elementTO.id;
     this.viewModel.name.Value = elementTO.name;
     this.viewModel.filePath.Value = elementTO.filePath ?? "";
-    this.viewModel.isScoreable.Value = elementTO?.model !== undefined;
+    this.viewModel.isScoreable.Value = elementTO.isScoreable;
 
     if (this.viewModel.isScoreable.Value) {
       setTimeout(() => {

@@ -10,6 +10,6 @@ export default class LearningElementsDropdownController
   startLearningElement(elementID: ComponentID): void {
     CoreDIContainer.get<ILoadLearningElementUseCase>(
       USECASE_TYPES.ILoadLearningElementUseCase
-    ).executeAsync(elementID);
+    ).executeAsync({ elementID: elementID, isScoreable: true });
   }
 }

@@ -68,6 +68,8 @@ export default class LoadExternalLearningElementUseCase
         worldID: elementEntity[0].worldID,
       });
 
+    elementTO.isScoreable = false;
+
     this.logger.log(
       LogLevelTypes.TRACE,
       `Loaded element ${elementID} in world ${userLocation.worldID}.`

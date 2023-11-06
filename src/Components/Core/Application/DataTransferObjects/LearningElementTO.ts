@@ -16,4 +16,5 @@ export default class LearningElementTO {
   filePath?: string;
   model: LearningElementModel;
   theme: LearningSpaceThemeType;
+  isScoreable: boolean;
 }

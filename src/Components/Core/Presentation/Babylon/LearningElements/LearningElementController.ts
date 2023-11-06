@@ -60,7 +60,7 @@ export default class LearningElementController
   private startLoadElementUseCase() {
     CoreDIContainer.get<ILoadLearningElementUseCase>(
       USECASE_TYPES.ILoadLearningElementUseCase
-    ).executeAsync(this.viewModel.id);
+    ).executeAsync({ elementID: this.viewModel.id, isScoreable: true });
   }
 
   private startLoadAdaptivityElementUseCase(): void {
