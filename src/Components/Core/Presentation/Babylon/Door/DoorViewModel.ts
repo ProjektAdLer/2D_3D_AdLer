@@ -9,6 +9,7 @@ export default class DoorViewModel {
   public rotation: number;
   public theme: LearningSpaceThemeType;
   public isOpen: Observable<boolean> = new Observable<boolean>(false);
+  public isInteractable: Observable<boolean> = new Observable<boolean>(false);
   public isExit: boolean;
   public spaceID: ComponentID;
 }

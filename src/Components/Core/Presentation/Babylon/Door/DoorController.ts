@@ -33,10 +33,12 @@ export default class DoorController implements IDoorController {
 
   @bind
   picked(): void {
-    CoreDIContainer.get<IGetLearningSpacePrecursorAndSuccessorUseCase>(
-      USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
-    ).execute();
-    this.exitModalPresenter.open(this.viewModel.isExit);
+    if (this.viewModel.isInteractable) {
+      CoreDIContainer.get<IGetLearningSpacePrecursorAndSuccessorUseCase>(
+        USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
+      ).execute();
+      this.exitModalPresenter.open(this.viewModel.isExit);
+    }
   }
 
   @bind

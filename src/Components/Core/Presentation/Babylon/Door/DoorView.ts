@@ -58,6 +58,8 @@ export default class DoorView extends Readyable {
         );
       });
     } else viewModel.isOpen.subscribe(this.onIsOpenChanged);
+
+    viewModel.isInteractable.subscribe(this.updateHighlight);
   }
 
   public async asyncSetup(): Promise<void> {
@@ -163,24 +165,43 @@ export default class DoorView extends Readyable {
           this.controller.picked
         )
       );
-      mesh.actionManager.registerAction(
-        new ExecuteCodeAction(
-          ActionManager.OnPointerOverTrigger,
-          this.controller.pointerOver
-        )
-      );
-      mesh.actionManager.registerAction(
-        new ExecuteCodeAction(
-          ActionManager.OnPointerOutTrigger,
-          this.controller.pointerOut
-        )
-      );
-      mesh.actionManager.registerAction(
-        new ExecuteCodeAction(
-          ActionManager.OnDoublePickTrigger,
-          this.controller.doublePicked
-        )
-      );
+      // mesh.actionManager.registerAction(
+      //   new ExecuteCodeAction(
+      //     ActionManager.OnPointerOverTrigger,
+      //     this.controller.pointerOver
+      //   )
+      // );
+      // mesh.actionManager.registerAction(
+      //   new ExecuteCodeAction(
+      //     ActionManager.OnPointerOutTrigger,
+      //     this.controller.pointerOut
+      //   )
+      // );
+      // mesh.actionManager.registerAction(
+      //   new ExecuteCodeAction(
+      //     ActionManager.OnDoublePickTrigger,
+      //     this.controller.doublePicked
+      //   )
+      // );
     });
+  }
+
+  @bind
+  private updateHighlight(): void {
+    if (this.viewModel.isInteractable.Value) {
+      this.viewModel.meshes.forEach((mesh) => {
+        this.scenePresenter.HighlightLayer.removeMesh(mesh);
+      });
+      this.viewModel.meshes.forEach((mesh) => {
+        this.scenePresenter.HighlightLayer.addMesh(mesh, Color3.Yellow());
+      });
+    } else {
+      this.viewModel.meshes.forEach((mesh) => {
+        this.scenePresenter.HighlightLayer.removeMesh(mesh);
+      });
+      this.viewModel.meshes.forEach((mesh) => {
+        this.scenePresenter.HighlightLayer.addMesh(mesh, Color3.Blue());
+      });
+    }
   }
 }
