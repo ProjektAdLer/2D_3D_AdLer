@@ -35,7 +35,7 @@ export default function LearningSpaceScorePanel({
 
   return (
     <div
-      className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full"
+      className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full hover:cursor-pointer"
       onClick={controller.panelClicked}
     >
       <CircularProgressbarWithChildren
