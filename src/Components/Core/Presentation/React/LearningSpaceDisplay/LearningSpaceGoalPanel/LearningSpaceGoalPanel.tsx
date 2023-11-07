@@ -15,7 +15,6 @@ export default function LearningSpaceGoalPanel() {
 
   const [goals] = useObservable<string[]>(viewModel?.goals);
   const [isOpen] = useObservable<boolean>(viewModel?.isOpen);
-  console.log("isOpen", isOpen);
 
   if (!isOpen) return null;
   return (
@@ -34,13 +33,8 @@ export default function LearningSpaceGoalPanel() {
         <div>Zu diesem Lernraum gibt es keine eingetragenen Lernziele!</div>
       )}
       {goals &&
-        goals.map((goal) => {
-          return (
-            <TextWithLineBreaks
-              text={goal}
-              key={"goal_" + goal.substring(0, 8)}
-            />
-          );
+        goals.map((goal, index) => {
+          return <TextWithLineBreaks text={goal} key={index} />;
         })}
     </StyledModal>
   );

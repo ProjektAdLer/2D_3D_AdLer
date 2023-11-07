@@ -3,7 +3,7 @@
 exports[`AdaptivityElementAnswerFeedback should render 1`] = `
 <div>
   <div
-    class="flex w-full h-full my-4"
+    class="flex w-full h-fit my-4"
   >
     <div
       class="w-1/2"

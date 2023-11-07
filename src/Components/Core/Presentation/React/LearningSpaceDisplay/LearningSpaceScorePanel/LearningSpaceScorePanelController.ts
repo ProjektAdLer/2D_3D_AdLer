@@ -12,7 +12,6 @@ export default class LearningSpaceScorePanelController
   constructor() {}
   @bind
   panelClicked(): void {
-    console.log("panel clicked");
     //pseudo lazy loading, due to timing issues ~fk
     //Both Score and Goal panel are called at the same time, but the Goal panel is not yet loaded
     this.learningSpaceGoalPanelPresenter === undefined &&
