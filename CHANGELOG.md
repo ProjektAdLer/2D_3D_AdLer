@@ -11,6 +11,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Added
 
 - dynamic NPC image matching the 3D model in the space to Adaptivity Element
+- bulletpoint list for learning outcomes in LearningSpaceMenu and LearningSpace
 
 ### Changed
 

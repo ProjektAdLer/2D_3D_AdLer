@@ -19,17 +19,13 @@ export default function LearningSpaceGoalPanel() {
   if (!isOpen) return null;
   return (
     <StyledModal
+      title="Lernziele"
       showModal={isOpen}
       onClose={() => {
         viewModel.isOpen.Value = false;
       }}
     >
-      <div className="flex flex-col gap-4">
-        <img
-          className="w-4 mr-4 lg:w-10"
-          src={goalIcon}
-          alt="Learning-Goal-Icon"
-        ></img>
+      <div className="flex flex-col gap-4 m-2">
         {!goals ||
           (goals.length === 0 && (
             <div>Zu diesem Lernraum gibt es keine eingetragenen Lernziele!</div>
