@@ -7,6 +7,11 @@ export default class LearningSpaceGoalPanelPresenter
 {
   constructor(private viewModel: LearningSpaceGoalPanelViewModel) {}
 
+  openOrCloseGoals(): void {
+    console.log("openOrCloseGoals");
+    this.viewModel.isOpen.Value = !this.viewModel.isOpen.Value;
+  }
+
   onLearningSpaceLoaded(spaceTO: LearningSpaceTO): void {
     this.viewModel.goals.Value = spaceTO.goals;
   }

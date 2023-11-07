@@ -11,15 +11,17 @@ import {
 import { useEffect, useState } from "react";
 
 import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
+import LearningSpaceScorePanelController from "./LearningSpaceScorePanelController";
 
 interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export default function LearningSpaceScorePanel({
   ...rest
 }: React.DetailedHTMLProps<PanelProps, HTMLDivElement>) {
-  const [viewModel] = useBuilder<LearningSpaceScorePanelViewModel, undefined>(
-    BUILDER_TYPES.ILearningSpaceScorePanelBuilder
-  );
+  const [viewModel, controller] = useBuilder<
+    LearningSpaceScorePanelViewModel,
+    LearningSpaceScorePanelController
+  >(BUILDER_TYPES.ILearningSpaceScorePanelBuilder);
 
   const [scoreInfo] = useObservable<ScoreInfo>(viewModel?.scoreInfo);
   const [percentage, setPercentage] = useState(0);
@@ -32,7 +34,10 @@ export default function LearningSpaceScorePanel({
   if (!viewModel) return null;
 
   return (
-    <div className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full">
+    <div
+      className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full"
+      onClick={controller.panelClicked}
+    >
       <CircularProgressbarWithChildren
         value={percentage}
         strokeWidth={10}

@@ -11,6 +11,7 @@ import LearningSpaceScorePanel from "~ReactComponents/LearningSpaceDisplay/Learn
 import LearningWorldScorePanel from "~ReactComponents/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanel";
 import BreakTimeNotification from "../../../Adaptivity/BreakTimeNotification/BreakTimeNotification";
 import AdaptivityElementDialogContainer from "../../../Adaptivity/AdaptivityElement/UIComponents/AdaptivityElementDialogContainer";
+import LearningSpaceGoalPanel from "~ReactComponents/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanel";
 
 export default function LearningSpace() {
   return (
@@ -36,6 +37,7 @@ export default function LearningSpace() {
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
         <NotificationManager className="z-50" />
         <BreakTimeNotification />
+        <LearningSpaceGoalPanel />
       </div>
     </React.Fragment>
   );

@@ -1,1 +1,3 @@
-export default interface ILearningSpaceGoalPanelController {}
+export default interface ILearningSpaceGoalPanelController {
+  closePanel(): void;
+}

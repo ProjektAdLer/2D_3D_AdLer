@@ -5,18 +5,19 @@ import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import LearningSpaceScorePanelPresenter from "./LearningSpaceScorePanelPresenter";
 import LearningSpaceScorePanelViewModel from "./LearningSpaceScorePanelViewModel";
+import LearningSpaceScorePanelController from "./LearningSpaceScorePanelController";
 
 @injectable()
 export default class LearningSpaceScorePanelBuilder extends PresentationBuilder<
   LearningSpaceScorePanelViewModel,
-  undefined,
+  LearningSpaceScorePanelController,
   undefined,
   LearningSpaceScorePanelPresenter
 > {
   constructor() {
     super(
       LearningSpaceScorePanelViewModel,
-      undefined,
+      LearningSpaceScorePanelController,
       undefined,
       LearningSpaceScorePanelPresenter
     );
