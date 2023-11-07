@@ -24,18 +24,27 @@ export default function LearningSpaceGoalPanel() {
         viewModel.isOpen.Value = false;
       }}
     >
-      <img
-        className="w-4 mr-4 lg:w-10"
-        src={goalIcon}
-        alt="Learning-Goal-Icon"
-      ></img>
-      {!goals && (
-        <div>Zu diesem Lernraum gibt es keine eingetragenen Lernziele!</div>
-      )}
-      {goals &&
-        goals.map((goal, index) => {
-          return <TextWithLineBreaks text={goal} key={index} />;
-        })}
+      <div className="flex flex-col gap-4">
+        <img
+          className="w-4 mr-4 lg:w-10"
+          src={goalIcon}
+          alt="Learning-Goal-Icon"
+        ></img>
+        {!goals && (
+          <div>Zu diesem Lernraum gibt es keine eingetragenen Lernziele!</div>
+        )}
+        {goals && (
+          <ul className="ml-4 list-disc">
+            {goals.map((goal, index) => {
+              return (
+                <li key={index}>
+                  <TextWithLineBreaks text={goal} />
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
     </StyledModal>
   );
 }

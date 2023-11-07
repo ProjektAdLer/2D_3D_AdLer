@@ -94,9 +94,15 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
               {goals.length > 1 ? "Lernziele:" : "Lernziel:"}
             </h3>
             <div className="items-start ml-6 font-medium portrait:text-xs portrait:ml-3 lg:text:lg">
-              {goals.map((goal) => {
-                return <TextWithLineBreaks text={goal} key={goal} />;
-              })}
+              <ul className="ml-4 list-disc">
+                {goals.map((goal, index) => {
+                  return (
+                    <li key={index}>
+                      <TextWithLineBreaks text={goal} />
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </section>
         )}
