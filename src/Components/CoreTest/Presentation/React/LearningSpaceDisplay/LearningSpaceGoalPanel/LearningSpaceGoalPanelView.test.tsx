@@ -4,12 +4,15 @@ import React from "react";
 import LearningSpaceGoalPanel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanel";
 import LearningSpaceGoalPanelViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanelViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import LearningSpaceGoalPanelController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanelController";
 
 const viewModelMock = new LearningSpaceGoalPanelViewModel();
+const controllerMock = new LearningSpaceGoalPanelController(viewModelMock);
 
 describe("LearningSpaceGoalPanel", () => {
   test("should render", () => {
     viewModelMock.goals.Value = ["Lernziel"];
+    viewModelMock.isOpen.Value = true;
     useBuilderMock([viewModelMock, undefined]);
 
     const componentUnderTest = render(<LearningSpaceGoalPanel />);
@@ -19,35 +22,36 @@ describe("LearningSpaceGoalPanel", () => {
     ).toBeInTheDocument();
   });
 
-  test("should not render, if no  World Goal is provided", () => {
-    //@ts-ignore
-    viewModelMock.goals.Value = undefined;
+  test("should not render, if isOpen is false", () => {
+    viewModelMock.goals.Value = ["Lernziel"];
+    viewModelMock.isOpen.Value = false;
     useBuilderMock([viewModelMock, undefined]);
 
     const componentUnderTest = render(<LearningSpaceGoalPanel />);
 
     expect(componentUnderTest.queryByText("Test World")).toBeNull();
   });
-
-  test("onClick sets isOpen state correctly", () => {
-    viewModelMock.goals.Value = ["Test World"];
+  test("should render generic text if no goals are set", () => {
+    viewModelMock.goals.Value = [];
+    viewModelMock.isOpen.Value = true;
     useBuilderMock([viewModelMock, undefined]);
 
-    const componentUnderTest = render(
-      <LearningSpaceGoalPanel key="WorldGoalPanel" />
-    );
+    const componentUnderTest = render(<LearningSpaceGoalPanel />);
 
     expect(
-      componentUnderTest.queryByText("Test World")
-    ).not.toBeInTheDocument();
-    fireEvent.click(componentUnderTest.getByRole("img"));
-    expect(componentUnderTest.getByText("Test World")).toBeInTheDocument();
-    fireEvent.click(componentUnderTest.getByRole("img"));
-    expect(
-      componentUnderTest.queryByText("Test World")
-    ).not.toBeInTheDocument();
-    expect(
-      componentUnderTest.queryByText("Test World")
-    ).not.toBeInTheDocument();
+      componentUnderTest.getByText(
+        "Zu diesem Lernraum gibt es keine eingetragenen Lernziele!"
+      )
+    ).toBeInTheDocument();
+  });
+  test("onclose should set isOpen to false", () => {
+    viewModelMock.goals.Value = ["Lernziel"];
+    viewModelMock.isOpen.Value = true;
+    useBuilderMock([viewModelMock, controllerMock]);
+
+    const componentUnderTest = render(<LearningSpaceGoalPanel />);
+
+    fireEvent.click(componentUnderTest.getByRole("button"));
+    expect(viewModelMock.isOpen.Value).toBe(false);
   });
 });

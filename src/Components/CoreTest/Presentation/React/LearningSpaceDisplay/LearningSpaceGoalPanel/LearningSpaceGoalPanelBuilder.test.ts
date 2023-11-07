@@ -4,6 +4,8 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import LearningSpaceGoalPanelBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanelBuilder";
 import LearningSpaceGoalPanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanelPresenter";
+import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
+import ILearningSpaceGoalPanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceGoalPanel/ILearningSpaceGoalPanelPresenter";
 
 const worldPortMock = mock<ILearningWorldPort>();
 
@@ -37,5 +39,17 @@ describe("LearningSpaceGoalPanelBuilder", () => {
     expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"]
     );
+  });
+  test("buildPresenter unbinds the presenter if it is already bound", () => {
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.ILearningSpaceGoalPanelPresenter
+    ).toConstantValue(mock<ILearningSpaceGoalPanelPresenter>);
+
+    const unbindSpy = jest.spyOn(CoreDIContainer, "unbind");
+
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildPresenter();
+
+    expect(unbindSpy).toHaveBeenCalledTimes(1);
   });
 });

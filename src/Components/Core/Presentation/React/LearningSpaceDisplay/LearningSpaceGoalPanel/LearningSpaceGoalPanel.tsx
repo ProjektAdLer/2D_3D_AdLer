@@ -30,9 +30,10 @@ export default function LearningSpaceGoalPanel() {
           src={goalIcon}
           alt="Learning-Goal-Icon"
         ></img>
-        {!goals && (
-          <div>Zu diesem Lernraum gibt es keine eingetragenen Lernziele!</div>
-        )}
+        {!goals ||
+          (goals.length === 0 && (
+            <div>Zu diesem Lernraum gibt es keine eingetragenen Lernziele!</div>
+          ))}
         {goals && (
           <ul className="ml-4 list-disc">
             {goals.map((goal, index) => {
