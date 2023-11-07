@@ -1,6 +1,8 @@
 import LearningSpaceGoalPanelViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanelViewModel";
 import LearningSpaceGoalPanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanelPresenter";
 import LearningSpaceTO from "../../../../../Core/Application/DataTransferObjects/LearningSpaceTO";
+import { LearningSpaceTemplateType } from "../../../../../Core/Domain/Types/LearningSpaceTemplateType";
+import { LearningSpaceThemeType } from "../../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 
 describe("LearningSpaceGoalPanel", () => {
   let systemUnderTest: LearningSpaceGoalPanelPresenter;
@@ -19,14 +21,25 @@ describe("LearningSpaceGoalPanel", () => {
       elements: [],
       description: "",
       goals: goal,
-      requirements: "",
       requiredScore: 0,
       currentScore: 0,
       maxScore: 0,
+      requirementsString: "",
+      requirementsSyntaxTree: null,
+      isAvailable: false,
+      template: LearningSpaceTemplateType.None,
+      theme: LearningSpaceThemeType.Arcade,
     };
 
     systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
     expect(vm.goals.Value).toEqual(goal);
+  });
+  test("openOrCloseModal should set the isOpen of the vm accordingly", () => {
+    vm.isOpen.Value = false;
+    systemUnderTest.openOrCloseGoals();
+    expect(vm.isOpen.Value).toBeTruthy();
+    systemUnderTest.openOrCloseGoals();
+    expect(vm.isOpen.Value).toBeFalsy();
   });
 });
