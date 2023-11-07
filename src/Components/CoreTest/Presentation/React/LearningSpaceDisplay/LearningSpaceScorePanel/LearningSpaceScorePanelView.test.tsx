@@ -8,6 +8,7 @@ import ICalculateLearningWorldScoreUseCase from "../../../../../Core/Application
 import { mock } from "jest-mock-extended";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
+import LearningSpaceScorePanelController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanelController";
 
 let fakeModel = new LearningSpaceScorePanelViewModel();
 fakeModel.scoreInfo.Value = {
@@ -15,6 +16,7 @@ fakeModel.scoreInfo.Value = {
   requiredScore: 2,
   maxScore: 3,
 };
+const fakeController = new LearningSpaceScorePanelController();
 const calculateWorldScoreMock = mock<ICalculateLearningWorldScoreUseCase>();
 
 describe("Learning Space Score Panel View", () => {
@@ -29,7 +31,7 @@ describe("Learning Space Score Panel View", () => {
   });
 
   it("Learning Space Score Panel View renders the correct score", () => {
-    useBuilderMock([fakeModel, undefined]);
+    useBuilderMock([fakeModel, fakeController]);
     const comp = render(<LearningSpaceScorePanel />);
 
     expect(comp.container).toHaveTextContent("1");
