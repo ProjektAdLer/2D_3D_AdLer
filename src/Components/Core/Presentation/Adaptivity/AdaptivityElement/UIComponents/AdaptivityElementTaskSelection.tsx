@@ -44,7 +44,7 @@ export default function AdaptivityElementTaskSelection({
 
   useEffect(() => {
     setHeaderText(
-      "Hallo Freund, ich helfe dir zu lernen. Such dir ein Thema aus und wir arbeiten gemeinsam an deinem Wissen."
+      "Hallo Freund, ich helfe dir zu lernen. Suche dir ein Thema aus und wir arbeiten gemeinsam an deinem Wissen."
     );
   }, [setHeaderText]);
 
@@ -74,7 +74,10 @@ export default function AdaptivityElementTaskSelection({
         );
 
         return (
-          <div key={i.toString() + "_" + task.taskID} className="flex flex-col">
+          <div
+            key={i.toString() + "_" + task.taskID}
+            className="flex flex-col text-sm"
+          >
             <StyledButton
               shape="freefloatcenter"
               className="w-full max-w-2xl"

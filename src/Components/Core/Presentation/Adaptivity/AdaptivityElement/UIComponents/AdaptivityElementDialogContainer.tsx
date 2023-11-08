@@ -134,7 +134,7 @@ export default function AdaptivityElementDialogContainer({
               ></img>
 
               {currentTask === null && currentQuestion === null && (
-                <div className="w-[50px] lg:w-[50px] bg-buttonbgblue rounded-full ">
+                <div className="w-[50px] lg:w-[50px] bg-buttonbgblue rounded-full text-sm">
                   <CircularProgressbarWithChildren
                     value={progressPercentage}
                     strokeWidth={10}
