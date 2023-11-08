@@ -6,15 +6,6 @@ exports[`AdaptivityElementAnswerFeedback should render 1`] = `
     class="flex w-full h-fit my-4"
   >
     <div
-      class="w-1/2"
-    >
-      <p
-        class="pl-4 font-bold"
-      >
-        Schade, leider war deine Antwort falsch.
-      </p>
-    </div>
-    <div
       class="flex justify-end w-1/2"
     >
       <button
