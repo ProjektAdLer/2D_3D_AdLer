@@ -1,6 +1,5 @@
 import LearningSpaceGoalPanelController from "./LearningSpaceGoalPanelController";
 import LearningSpaceGoalPanelViewModel from "./LearningSpaceGoalPanelViewModel";
-import goalIcon from "../../../../../../Assets/icons/20-goal/goal-icon-nobg.svg";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";

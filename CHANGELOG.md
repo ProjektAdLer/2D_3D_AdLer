@@ -10,8 +10,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- dynamic NPC image matching the 3D model in the space to Adaptivity Element
-- bulletpoint list for learning outcomes in LearningSpaceMenu and LearningSpace
+-
 
 ### Changed
 
@@ -27,7 +26,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- Break Notifications should behave correctly now
+-
 
 ### Security
 
@@ -35,34 +34,48 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 </details>
 
+## Version 2.0.0-rc.3
+
+### Added
+
+- dynamic NPC image matching the 3D model in the space to Adaptivity Element.
+- bulletpoint list for learning outcomes in LearningSpaceMenu and LearningSpace.
+- Support for Display of Learningelements which are not in the displayed room has been added.
+- Learning Goals can now be displayed by clicking the spacescore panel.
+
+### Fixed
+
+- Break Notifications should behave correctly now.
+- Fontsizes in Adaptivity elements should be displayed correctly now.
+
 ## Version 2.0.0-rc.1
 
 ### Added
 
 - Adaptivity Element:
 
-  - specific icon for adaptivity element
-  - 3D representation of NPC
-  - 2D representation of NPC
-  - dialog line
-  - progressmeter
-  - task selection with icons for question status
-  - question selection with adaptive hints
-  - three different diffculties for questions
-  - question answer mask for single and multiple choice
-  - responsive UI
+  - specific icon for adaptivity element.
+  - 3D representation of NPC.
+  - 2D representation of NPC.
+  - dialog line.
+  - progressmeter.
+  - task selection with icons for question status.
+  - question selection with adaptive hints.
+  - three different diffculties for questions.
+  - question answer mask for single and multiple choice.
+  - responsive UI.
 
 - Time Spent Element:
-  - break notification every 30 minutes
-  - 3 types of break advices for short, medium and long breaks
-  - 13 different break advices
-  - randomized selection of break advice
-  - up to four slides per break notification
-  - responsive UI
+  - break notification every 30 minutes.
+  - 3 types of break advices for short, medium and long breaks.
+  - 13 different break advices.
+  - randomized selection of break advice.
+  - up to four slides per break notification.
+  - responsive UI.
 
 ### Fixed
 
-- bug that prevented update of score panel when scoring h5p elements
+- bug that prevented update of score panel when scoring h5p elements.
 
 ## Version 1.3.0 - 08.09.2023
 

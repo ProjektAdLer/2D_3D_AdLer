@@ -10,18 +10,6 @@ const viewModelMock = new LearningSpaceGoalPanelViewModel();
 const controllerMock = new LearningSpaceGoalPanelController(viewModelMock);
 
 describe("LearningSpaceGoalPanel", () => {
-  test("should render", () => {
-    viewModelMock.goals.Value = ["Lernziel"];
-    viewModelMock.isOpen.Value = true;
-    useBuilderMock([viewModelMock, undefined]);
-
-    const componentUnderTest = render(<LearningSpaceGoalPanel />);
-
-    expect(
-      componentUnderTest.getByAltText("Learning-Goal-Icon")
-    ).toBeInTheDocument();
-  });
-
   test("should not render, if isOpen is false", () => {
     viewModelMock.goals.Value = ["Lernziel"];
     viewModelMock.isOpen.Value = false;
