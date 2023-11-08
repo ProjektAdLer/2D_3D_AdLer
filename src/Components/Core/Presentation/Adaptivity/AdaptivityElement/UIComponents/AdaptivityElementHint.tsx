@@ -10,7 +10,7 @@ export default function AdaptivityElementHint({
   setHeaderText: (headerText: string) => void;
 }) {
   useEffect(() => {
-    setHeaderText("HINT_PLACEHOLDER_HEADER");
+    setHeaderText("Ich helfe dir auf die Sprünge");
   }, [setHeaderText]);
 
   return (
