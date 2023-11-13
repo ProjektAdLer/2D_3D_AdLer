@@ -32,7 +32,6 @@ export default function LearningSpaceScorePanel({
   }, [scoreInfo?.currentScore, scoreInfo?.requiredScore, scoreInfo]);
 
   if (!viewModel) return null;
-
   return (
     <div
       className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full hover:cursor-pointer"
