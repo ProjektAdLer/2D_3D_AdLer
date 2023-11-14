@@ -23,7 +23,9 @@ export default class DoorController implements IDoorController {
 
   @bind
   pointerOver(): void {
-    this.bottomTooltipPresenter.displayDoorTooltip(this.viewModel.isExit);
+    this.bottomTooltipPresenter.display(
+      this.viewModel.isExit ? "Ausgangstüre" : "Eingangstüre"
+    );
   }
 
   @bind
@@ -43,6 +45,8 @@ export default class DoorController implements IDoorController {
 
   @bind
   doublePicked(): void {
-    this.bottomTooltipPresenter.displayDoorTooltip(this.viewModel.isExit);
+    this.bottomTooltipPresenter.display(
+      this.viewModel.isExit ? "Ausgangstüre" : "Eingangstüre"
+    );
   }
 }

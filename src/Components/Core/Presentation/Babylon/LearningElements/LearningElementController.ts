@@ -50,11 +50,7 @@ export default class LearningElementController
   private displayTooltip(): void {
     CoreDIContainer.get<IBottomTooltipPresenter>(
       PRESENTATION_TYPES.IBottomTooltipPresenter
-    ).displayLearningElementSummaryTooltip({
-      name: this.viewModel.name,
-      type: this.viewModel.type,
-      points: this.viewModel.value,
-    });
+    ).display(this.viewModel.name, this.viewModel.type, this.viewModel.value);
   }
 
   private startLoadElementUseCase() {

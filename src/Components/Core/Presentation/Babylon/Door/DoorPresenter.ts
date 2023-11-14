@@ -28,7 +28,9 @@ export default class DoorPresenter implements IDoorPresenter {
     const distance = Vector3.Distance(position, this.viewModel.position);
 
     if (distance <= interactionRadius) {
-      this.bottomTooltipPresenter.displayDoorTooltip(this.viewModel.isExit);
+      this.bottomTooltipPresenter.display(
+        this.viewModel.isExit ? "Ausgangstüre" : "Eingangstüre"
+      );
       this.viewModel.isInteractable.Value = true;
     } else if (this.viewModel.isInteractable.Value) {
       this.bottomTooltipPresenter.hide();

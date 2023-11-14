@@ -31,6 +31,20 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
     this.viewModel.showPoints.Value = true;
   }
 
+  display(
+    text: string,
+    iconType: LearningElementTypeStrings = LearningElementTypes.notAnElement,
+    points: number | undefined = undefined
+  ): void {
+    this.viewModel.show.Value = true;
+    this.viewModel.text.Value = text;
+    this.viewModel.iconType.Value = iconType;
+    if (points) {
+      this.viewModel.points.Value = points;
+      this.viewModel.showPoints.Value = true;
+    } else this.viewModel.showPoints.Value = false;
+  }
+
   hide(): void {
     this.viewModel.show.Value = false;
   }
