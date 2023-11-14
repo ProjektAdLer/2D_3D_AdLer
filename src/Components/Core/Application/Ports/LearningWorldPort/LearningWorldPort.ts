@@ -13,7 +13,6 @@ import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/Lear
 import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
-import { Vector3 } from "@babylonjs/core";
 
 @injectable()
 export default class LearningWorldPort
@@ -127,17 +126,6 @@ export default class LearningWorldPort
     this.adapters.forEach((adapter) => {
       if (adapter.onAdaptivityElementUserHintInformed)
         adapter.onAdaptivityElementUserHintInformed(adaptivityElementHintTO);
-    });
-  }
-
-  // avatar
-  public onAvatarPositionChanged(
-    position: Vector3,
-    interactionRadius: number
-  ): void {
-    this.adapters.forEach((adapter) => {
-      if (adapter.onAvatarPositionChanged)
-        adapter.onAvatarPositionChanged(position, interactionRadius);
     });
   }
 }

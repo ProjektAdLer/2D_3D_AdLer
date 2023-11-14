@@ -11,7 +11,6 @@ import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/Lear
 import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
-import { Vector3 } from "@babylonjs/core";
 
 export default interface ILearningWorldPort
   extends IAbstractPort<ILearningWorldAdapter> {
@@ -47,7 +46,4 @@ export default interface ILearningWorldPort
   onAdaptivityElementUserHintInformed(
     adaptivityElementHintTO: AdaptivityElementHintTO
   ): void;
-
-  // avatar
-  onAvatarPositionChanged(position: Vector3, interactionRadius: number): void;
 }

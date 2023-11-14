@@ -47,7 +47,4 @@ export default interface ILearningWorldAdapter {
   onAdaptivityElementUserHintInformed?(
     adaptivityElementHintTO: AdaptivityElementHintTO
   ): void;
-
-  // avatar
-  onAvatarPositionChanged?(position: Vector3, interactionRadius: number): void;
 }
