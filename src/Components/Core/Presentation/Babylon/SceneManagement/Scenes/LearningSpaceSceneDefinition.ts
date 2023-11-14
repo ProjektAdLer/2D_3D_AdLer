@@ -81,7 +81,7 @@ export default class LearningSpaceSceneDefinition
     this.spaceBuilder.spaceData = this.spaceData;
     const spaceCompleted = this.director.buildAsync(this.spaceBuilder);
 
-    // create avatar
+    // create avatar camera
     this.avatarParentNode = new TransformNode("AvatarParentNode", this.scene);
     this.director.build(this.avatarCameraBuilder);
     (
@@ -95,6 +95,8 @@ export default class LearningSpaceSceneDefinition
 
     // create avatar
     this.avatarBuilder.learningSpaceTemplateType = this.spaceData?.template;
+    this.avatarBuilder.learningSpacePresenter =
+      this.spaceBuilder.getPresenter();
     await this.director.buildAsync(this.avatarBuilder);
   }
 

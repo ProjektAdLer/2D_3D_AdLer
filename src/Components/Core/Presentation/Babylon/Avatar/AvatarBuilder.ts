@@ -8,6 +8,7 @@ import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
 import IAvatarPresenter from "./IAvatarPresenter";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
+import ILearningSpacePresenter from "../LearningSpaces/ILearningSpacePresenter";
 
 export default class AvatarBuilder extends AsyncPresentationBuilder<
   AvatarViewModel,
@@ -16,6 +17,8 @@ export default class AvatarBuilder extends AsyncPresentationBuilder<
   IAvatarPresenter
 > {
   learningSpaceTemplateType: LearningSpaceTemplateType;
+  learningSpacePresenter: ILearningSpacePresenter;
+
   constructor() {
     super(AvatarViewModel, AvatarController, AvatarView, undefined);
   }
@@ -35,6 +38,12 @@ export default class AvatarBuilder extends AsyncPresentationBuilder<
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
     ).registerAdapter(this.presenter);
+  }
+
+  override buildController(): void {
+    super.buildController();
+
+    this.controller!.learningSpacePresenter = this.learningSpacePresenter;
   }
 
   override buildView(): void {

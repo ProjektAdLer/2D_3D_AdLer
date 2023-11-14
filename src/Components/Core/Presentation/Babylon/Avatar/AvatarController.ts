@@ -22,16 +22,16 @@ import IScenePresenter from "../SceneManagement/IScenePresenter";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
-import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
-import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import ILearningSpacePresenter from "../LearningSpaces/ILearningSpacePresenter";
 
 const validKeys = ["w", "a", "s", "d"];
 
 export default class AvatarController implements IAvatarController {
+  learningSpacePresenter: ILearningSpacePresenter; // set by builder
+
   private scenePresenter: IScenePresenter;
   private navigation: INavigation;
   private pathLine: LinesMesh;
-  private worldPort: ILearningWorldPort;
 
   private keyMovementTarget: Nullable<Vector3> = null;
   private pointerMovementTarget: Nullable<Vector3> = null;
@@ -39,9 +39,6 @@ export default class AvatarController implements IAvatarController {
 
   constructor(private viewModel: AvatarViewModel) {
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
-    this.worldPort = CoreDIContainer.get<ILearningWorldPort>(
-      PORT_TYPES.ILearningWorldPort
-    );
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
       SCENE_TYPES.ScenePresenterFactory
     );
@@ -148,7 +145,7 @@ export default class AvatarController implements IAvatarController {
         this.viewModel.parentNode.position
       ) > 0.1
     ) {
-      this.worldPort.onAvatarPositionChanged(
+      this.learningSpacePresenter.broadcastAvatarPosition(
         this.viewModel.parentNode.position,
         2
       );
