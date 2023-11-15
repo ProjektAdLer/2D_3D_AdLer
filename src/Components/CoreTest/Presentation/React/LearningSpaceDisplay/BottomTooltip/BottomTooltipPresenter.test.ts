@@ -5,6 +5,7 @@ import ScorePanelViewModel from "../../../../../Core/Presentation/React/Learning
 describe("BottomTooltipPresenter", () => {
   let systemUnderTest: IBottomTooltipPresenter;
   const vm = new ScorePanelViewModel();
+
   beforeEach(() => {
     systemUnderTest = new BottomTooltipPresenter(vm);
   });

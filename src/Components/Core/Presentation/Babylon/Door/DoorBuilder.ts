@@ -53,6 +53,7 @@ export default class DoorBuilder
     this.viewModel!.spaceID = this.spaceID;
     this.viewModel!.isOpen.Value = this.isOpen;
   }
+
   override buildView(): void {
     super.buildView();
 

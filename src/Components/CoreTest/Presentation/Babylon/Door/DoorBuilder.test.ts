@@ -8,6 +8,7 @@ import { Vector3 } from "@babylonjs/core";
 import DoorView from "../../../../Core/Presentation/Babylon/Door/DoorView";
 import { waitFor } from "@testing-library/react";
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 jest.mock("@babylonjs/core");
 jest.mock("../../../../Core/Presentation/Babylon/Door/DoorView");
@@ -17,16 +18,24 @@ const worldPortMock = mock<ILearningWorldPort>();
 
 describe("DoorBuilder", () => {
   let systemUnderTest: DoorBuilder;
+
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
     ).toConstantValue(worldPortMock);
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    ).toConstantValue(mock());
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IExitModalPresenter
+    ).toConstantValue(mock());
   });
 
   beforeEach(() => {
     systemUnderTest = new DoorBuilder();
   });
+
   afterAll(() => {
     CoreDIContainer.restore();
   });
