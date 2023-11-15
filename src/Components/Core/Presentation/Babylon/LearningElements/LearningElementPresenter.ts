@@ -24,8 +24,7 @@ export default class LearningElementPresenter
   }
 
   onAvatarPositionChanged(position: Vector3, interactionRadius: number): void {
-    const distance = Vector3.Distance(position, this.viewModel.position);
-
+    // const distance = Vector3.Distance(position, this.viewModel.position);
     // if (distance <= interactionRadius) {
     //   this.bottomTooltipPresenter.displayDoorTooltip(this.viewModel.isExit);
     //   this.viewModel.isInteractable.Value = true;
