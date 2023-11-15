@@ -1,10 +1,28 @@
 import DoorPresenter from "../../../../Core/Presentation/Babylon/Door/DoorPresenter";
 import DoorViewModel from "../../../../Core/Presentation/Babylon/Door/DoorViewModel";
 import LearningSpaceScoreTO from "../../../../Core/Application/DataTransferObjects/LearningSpaceScoreTO";
+import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
+import { mock } from "jest-mock-extended";
+import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
+import IExitModalPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/ExitModal/IExitModalPresenter";
+
+const mockBottomTooltipPresenter = mock<IBottomTooltipPresenter>();
+const mockExitModalPresenter = mock<IExitModalPresenter>();
 
 describe("DoorPresenter", () => {
   let systemUnderTest: DoorPresenter;
   let viewModel: DoorViewModel;
+
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    ).toConstantValue(mockBottomTooltipPresenter);
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IExitModalPresenter
+    ).toConstantValue(mockExitModalPresenter);
+  });
 
   beforeEach(() => {
     systemUnderTest = new DoorPresenter(new DoorViewModel());
