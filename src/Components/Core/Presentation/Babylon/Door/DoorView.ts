@@ -165,12 +165,12 @@ export default class DoorView extends Readyable {
           this.controller.picked
         )
       );
-      // mesh.actionManager.registerAction(
-      //   new ExecuteCodeAction(
-      //     ActionManager.OnPointerOverTrigger,
-      //     this.controller.pointerOver
-      //   )
-      // );
+      mesh.actionManager.registerAction(
+        new ExecuteCodeAction(
+          ActionManager.OnPointerOverTrigger,
+          this.controller.pointerOver
+        )
+      );
       // mesh.actionManager.registerAction(
       //   new ExecuteCodeAction(
       //     ActionManager.OnPointerOutTrigger,
