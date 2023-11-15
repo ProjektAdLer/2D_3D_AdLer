@@ -8,8 +8,6 @@ export default class LearningSpaceScorePanelController
   implements ILearningSpaceScorePanelController
 {
   private learningSpaceGoalPanelPresenter: ILearningSpaceGoalPanelPresenter;
-
-  constructor() {}
   @bind
   panelClicked(): void {
     //pseudo lazy loading, due to timing issues ~fk
