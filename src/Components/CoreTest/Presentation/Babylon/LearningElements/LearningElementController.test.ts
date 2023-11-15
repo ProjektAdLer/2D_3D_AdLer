@@ -37,9 +37,7 @@ describe("LearningElementController", () => {
   test("pointerOver calls displayElementSummaryTooltip on tooltip presenter", () => {
     systemUnderTest.pointerOver();
 
-    expect(
-      bottomTooltipPresenterMock.displayLearningElementSummaryTooltip
-    ).toHaveBeenCalledTimes(1);
+    expect(bottomTooltipPresenterMock.display).toHaveBeenCalledTimes(1);
   });
 
   test("pointerOver scales up iconMeshes", () => {
@@ -96,8 +94,6 @@ describe("LearningElementController", () => {
 
     systemUnderTest.doublePicked();
 
-    expect(
-      bottomTooltipPresenterMock.displayLearningElementSummaryTooltip
-    ).toHaveBeenCalledTimes(1);
+    expect(bottomTooltipPresenterMock.display).toHaveBeenCalledTimes(1);
   });
 });
