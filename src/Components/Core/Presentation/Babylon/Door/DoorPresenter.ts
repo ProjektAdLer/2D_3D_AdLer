@@ -6,6 +6,8 @@ import IBottomTooltipPresenter from "~ReactComponents/LearningSpaceDisplay/Botto
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IExitModalPresenter from "~ReactComponents/LearningSpaceDisplay/ExitModal/IExitModalPresenter";
+import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
+import bind from "bind-decorator";
 
 export default class DoorPresenter implements IDoorPresenter {
   private bottomTooltipPresenter: IBottomTooltipPresenter;
@@ -29,7 +31,10 @@ export default class DoorPresenter implements IDoorPresenter {
 
     if (distance <= interactionRadius) {
       this.bottomTooltipPresenter.display(
-        this.viewModel.isExit ? "Ausgangstüre" : "Eingangstüre"
+        this.viewModel.isExit ? "Ausgangstüre" : "Eingangstüre",
+        LearningElementTypes.notAnElement,
+        undefined,
+        this.openExitModal
       );
       this.viewModel.isInteractable.Value = true;
     } else if (this.viewModel.isInteractable.Value) {
@@ -49,5 +54,10 @@ export default class DoorPresenter implements IDoorPresenter {
 
   openDoor(): void {
     this.viewModel.isOpen.Value = true;
+  }
+
+  @bind
+  private openExitModal(): void {
+    this.exitModalPresenter.open(this.viewModel.isExit);
   }
 }

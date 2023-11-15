@@ -4,7 +4,8 @@ export default interface IBottomTooltipPresenter {
   display(
     text: string,
     iconType?: LearningElementTypeStrings,
-    points?: number | undefined
+    points?: number | undefined,
+    onClickCallback?: () => void
   ): void;
   hide(): void;
 }

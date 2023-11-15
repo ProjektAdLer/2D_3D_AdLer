@@ -10,31 +10,11 @@ import { injectable } from "inversify";
 export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
   constructor(private viewModel: BottomTooltipViewModel) {}
 
-  displayDoorTooltip(isExit: boolean): void {
-    this.viewModel.show.Value = true;
-    this.viewModel.iconType.Value = LearningElementTypes.notAnElement;
-    this.viewModel.points.Value = 0;
-    this.viewModel.showPoints.Value = false;
-    if (isExit) this.viewModel.text.Value = "Ausgangstüre";
-    else this.viewModel.text.Value = "Eingangstüre";
-  }
-
-  displayLearningElementSummaryTooltip(elementData: {
-    name: string;
-    type: LearningElementTypeStrings;
-    points: number;
-  }): void {
-    this.viewModel.show.Value = true;
-    this.viewModel.text.Value = elementData.name;
-    this.viewModel.iconType.Value = elementData.type;
-    this.viewModel.points.Value = elementData.points;
-    this.viewModel.showPoints.Value = true;
-  }
-
   display(
     text: string,
     iconType: LearningElementTypeStrings = LearningElementTypes.notAnElement,
-    points: number | undefined = undefined
+    points: number | undefined = undefined,
+    onClickCallback?: () => void
   ): void {
     this.viewModel.show.Value = true;
     this.viewModel.text.Value = text;
@@ -43,9 +23,15 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
       this.viewModel.points.Value = points;
       this.viewModel.showPoints.Value = true;
     } else this.viewModel.showPoints.Value = false;
+    if (onClickCallback) this.viewModel.onClickCallback.Value = onClickCallback;
   }
 
   hide(): void {
     this.viewModel.show.Value = false;
+
+    this.viewModel.text.Value = "";
+    this.viewModel.iconType.Value = LearningElementTypes.notAnElement;
+    this.viewModel.showPoints.Value = false;
+    this.viewModel.onClickCallback.Value = () => {};
   }
 }

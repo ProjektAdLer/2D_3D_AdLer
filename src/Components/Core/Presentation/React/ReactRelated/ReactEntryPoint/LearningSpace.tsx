@@ -27,8 +27,8 @@ export default function LearningSpace() {
           className="w-screen h-screen col-span-9 col-start-1 row-span-6 row-start-1"
           engineOptions={{ stencil: true }}
         />
-        <BottomTooltip />
         <SideBar className="z-10 col-span-3 col-start-1 row-start-1 m-2 pointer-events-none" />
+        <BottomTooltip className="z-10" />
         <AdaptivityElementDialogContainer className="z-10" />
         <LearningElementModal className="z-10" />
         <ExitModal className="z-20" />
