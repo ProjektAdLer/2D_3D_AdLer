@@ -59,7 +59,7 @@ export default function AdaptivityElementQuestionSelection({
                       easyState={starState}
                       starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
-                    <p className="text-start px-4 col-span-3 flex justify-center">
+                    <p className="text-start text-sm px-4 col-span-3 flex justify-center">
                       {"Leicht"}{" "}
                     </p>
                   </>
@@ -71,7 +71,7 @@ export default function AdaptivityElementQuestionSelection({
                       mediumState={starState}
                       starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
-                    <p className="text-start px-4 col-span-3 flex justify-center">
+                    <p className="text-start text-sm px-4 col-span-3 flex justify-center">
                       {"Mittelschwer"}{" "}
                     </p>
                   </>
@@ -83,7 +83,7 @@ export default function AdaptivityElementQuestionSelection({
                       hardState={starState}
                       starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
-                    <p className="text-start px-4 col-span-3 flex justify-center">
+                    <p className="text-start text-sm px-4 col-span-3 flex justify-center">
                       {"Schwer"}{" "}
                     </p>
                   </>
@@ -101,7 +101,7 @@ export default function AdaptivityElementQuestionSelection({
                 </div>
               </div>
             </StyledButton>
-            <div className="flex flex-row md:gap-4 h-full">
+            <div className="flex flex-row md:gap-4 h-full ">
               {question.hints.length > 0 &&
                 question.hints.map((hint) => {
                   if (
@@ -111,11 +111,11 @@ export default function AdaptivityElementQuestionSelection({
                     return (
                       <StyledButton
                         shape="freefloatcenter"
-                        className="w-full h-full"
+                        className="w-full h-full "
                         key={"hint-" + hint.hintID}
                         onClick={() => onSelectHint(hint, question)}
                       >
-                        Hinweis
+                        <p className="text-sm">Hinweis</p>
                       </StyledButton>
                     );
                   } else return null;

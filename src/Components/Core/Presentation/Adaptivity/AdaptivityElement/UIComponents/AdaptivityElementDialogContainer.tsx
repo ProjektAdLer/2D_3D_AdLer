@@ -133,6 +133,16 @@ export default function AdaptivityElementDialogContainer({
                 src={getNPCImage(model, false)}
               ></img>
 
+              {!(currentTask === null && currentQuestion === null) &&
+                !showAnswerFeedback && (
+                  <StyledButton
+                    onClick={controller.back}
+                    className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10 mr-2"
+                  >
+                    {"<"}
+                  </StyledButton>
+                )}
+
               {currentTask === null && currentQuestion === null && (
                 <div className="w-[50px] lg:w-[50px] bg-buttonbgblue rounded-full text-sm">
                   <CircularProgressbarWithChildren
@@ -152,16 +162,7 @@ export default function AdaptivityElementDialogContainer({
                 </div>
               )}
 
-              <div className="w-full text-sm lg:text-xl">{headerText}</div>
-              {!(currentTask === null && currentQuestion === null) &&
-                !showAnswerFeedback && (
-                  <StyledButton
-                    onClick={controller.back}
-                    className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-                  >
-                    {"<"}
-                  </StyledButton>
-                )}
+              <div className="w-full text-sm lg:text-lg">{headerText}</div>
 
               <StyledButton
                 onClick={controller.closeModal}
@@ -174,7 +175,7 @@ export default function AdaptivityElementDialogContainer({
             {/* Content */}
             <div className="overflow-auto">
               {currentTask === null && currentQuestion === null && (
-                <div className="flex items-center justify-center px-1 mb-4 overflow-auto rounded-lg font-regular h-fit lg:m-4">
+                <div className="flex items-center justify-center px-1 mb-4 overflow-auto rounded-lg font-regular h-fit !text-sm lg:m-4">
                   <AdaptivityElementTaskSelection
                     tasks={contentData.tasks}
                     setHeaderText={setHeaderText}

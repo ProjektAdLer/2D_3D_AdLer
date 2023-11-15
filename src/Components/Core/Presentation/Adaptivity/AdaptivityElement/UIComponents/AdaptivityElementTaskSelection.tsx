@@ -91,7 +91,9 @@ export default function AdaptivityElementTaskSelection({
                   starClassName="w-4 h-4 sm:w-6 sm:h-6 "
                 />
 
-                <p className="text-start col-span-5 pl-4">{task.taskTitle}</p>
+                <p className="text-start text-sm col-span-5 pl-4">
+                  {task.taskTitle}
+                </p>
 
                 <div className="flex justify-end">
                   {task.isRequired && (

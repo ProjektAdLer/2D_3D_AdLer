@@ -52,7 +52,7 @@ export default function AdaptivityElementAnswerSelection({
 
   return (
     <div className="flex flex-col w-full p-2 m-auto">
-      <div className="flex flex-col flex-wrap justify-start gap-4 lg:grid lg:grid-cols-2 ">
+      <div className="flex flex-col flex-wrap justify-start gap-4 lg:grid lg:grid-cols-2">
         {question.questionAnswers.map((answer, index) => (
           <StyledButton
             key={answer.answerIndex}
@@ -62,21 +62,21 @@ export default function AdaptivityElementAnswerSelection({
             }}
             color={answerColors[index]}
           >
-            {answer.answerText}
+            <p className="text-sm">{answer.answerText}</p>
           </StyledButton>
         ))}
       </div>
 
       <div className="flex items-end justify-end w-full gap-2 pt-8 font-bold">
         <StyledButton
-          className="box-border"
+          className="box-border "
           shape="freefloatcenter"
           onClick={() => {
             submitSelection();
           }}
           disabled={!isAnyAnswerSelected}
         >
-          {"Antworten abgeben"}
+          <p className="text-sm">{"Antworten abgeben"}</p>
         </StyledButton>
       </div>
     </div>

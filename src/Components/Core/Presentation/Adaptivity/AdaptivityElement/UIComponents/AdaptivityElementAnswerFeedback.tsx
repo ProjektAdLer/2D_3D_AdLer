@@ -34,7 +34,7 @@ export default function AdaptivityElementAnswerFeedback({
       </div> */}
       <div className="flex justify-end w-1/2">
         <StyledButton shape="freefloatcenter" onClick={closeFeedback}>
-          Weiter
+          <p className="text-sm">Weiter</p>
         </StyledButton>
       </div>
     </div>
