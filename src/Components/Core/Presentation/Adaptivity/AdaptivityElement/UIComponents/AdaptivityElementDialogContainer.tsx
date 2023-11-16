@@ -127,12 +127,6 @@ export default function AdaptivityElementDialogContainer({
           >
             {/* Header */}
             <div className="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
-              <img
-                className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
-                alt="LearningImage!"
-                src={getNPCImage(model, false)}
-              ></img>
-
               {!(currentTask === null && currentQuestion === null) &&
                 !showAnswerFeedback && (
                   <StyledButton
@@ -161,6 +155,12 @@ export default function AdaptivityElementDialogContainer({
                   </CircularProgressbarWithChildren>
                 </div>
               )}
+
+              <img
+                className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+                alt="LearningImage!"
+                src={getNPCImage(model, false)}
+              ></img>
 
               <div className="w-full text-sm lg:text-lg">{headerText}</div>
 
