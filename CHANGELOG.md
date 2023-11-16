@@ -48,7 +48,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- position of back button now on left side
+- position of back button in adaptivity element now on left side
 
 ## Version 2.0.0-rc.3
 
