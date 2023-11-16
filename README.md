@@ -4,8 +4,8 @@
 
 ## Unterstützte AdLer-Versionen
 
-- Autorentool v1.0.3
-- AdLer Backend v1.0.0
+- Autorentool 2.0.0
+- AdLer Backend 2.0.0
 
 ## Vorbedingungen
 
@@ -46,10 +46,10 @@ Einzeiler mit API_URL und Port: ` docker run -e API_URL=https://demo.api.projekt
 
 Unter Windows (und wsl) muss die Datei `Dockerfile-twostage` genutzt werden, da Windows falsche Lineendings setzt, wodurch der Container nicht startet. Die twostage variante enthält einen Fix hierfür.
 
-## Abhänigkeiten
+## Abhängigkeiten
 
 | 3D Version | [Backend Version](https://github.com/ProjektAdLer/AdLerBackend) |
 | ---------- | --------------------------------------------------------------- |
-| 2.0.0      | >=3.1.0 und <=4.0.0                                             |
+| 2.0.0      | 2.0.0                                                           |
 
 Zu jeden neuen Release wird diese Tabelle Aktuallisiert.
