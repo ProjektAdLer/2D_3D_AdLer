@@ -1,7 +1,10 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import { LearningSpaceTemplateType } from "../../Domain/Types/LearningSpaceTemplateType";
 import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
-import BackendElementTO from "./BackendElementTO";
+import {
+  BackendAdaptivityElementTO,
+  BackendLearningElementTO,
+} from "./BackendElementTO";
 
 /**
  * Data Transfer Object for a Space
@@ -19,7 +22,7 @@ import BackendElementTO from "./BackendElementTO";
 export default class BackendSpaceTO {
   id: ComponentID;
   name: string;
-  elements: (BackendElementTO | null)[];
+  elements: (BackendLearningElementTO | BackendAdaptivityElementTO | null)[];
   description: string;
   goals: string[];
   requirements: string;

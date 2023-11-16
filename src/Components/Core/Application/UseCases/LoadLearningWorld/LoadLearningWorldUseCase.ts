@@ -18,7 +18,11 @@ import type ISetUserLocationUseCase from "../SetUserLocation/ISetUserLocationUse
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import BackendWorldTO from "../../DataTransferObjects/BackendWorldTO";
-import BackendElementTO from "../../DataTransferObjects/BackendElementTO";
+import {
+  BackendAdaptivityElementTO,
+  BackendBaseElementTO,
+  BackendLearningElementTO,
+} from "../../DataTransferObjects/BackendElementTO";
 import type ICalculateLearningSpaceAvailabilityUseCase from "../CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
@@ -223,7 +227,7 @@ export default class LoadLearningWorldUseCase
 
   private createLearningElementEntities = (
     worldID: number,
-    elements: (BackendElementTO | null)[],
+    elements: (BackendLearningElementTO | BackendAdaptivityElementTO | null)[],
     worldStatus: LearningWorldStatusTO,
     spaceTheme: LearningSpaceThemeType
   ): (LearningElementEntity | null)[] => {
@@ -267,7 +271,7 @@ export default class LoadLearningWorldUseCase
         LearningElementEntity
       );
 
-      if (newElementEntity.type === "adaptivity") {
+      if (element instanceof BackendAdaptivityElementTO) {
         if (element.adaptivity !== undefined) {
           this.createAdaptivityElementEntity(
             newElementEntity,
@@ -336,7 +340,7 @@ export default class LoadLearningWorldUseCase
   }
 
   private createExternalLearningElementEntities(
-    externalElements: BackendElementTO[] | undefined,
+    externalElements: BackendBaseElementTO[] | undefined,
     worldID: number
   ) {
     if (externalElements === undefined || externalElements.length === 0) {
