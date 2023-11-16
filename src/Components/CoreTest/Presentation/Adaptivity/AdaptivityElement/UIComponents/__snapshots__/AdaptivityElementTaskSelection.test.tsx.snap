@@ -34,7 +34,7 @@ exports[`AdaptivityElementTaskSelection should render 1`] = `
             />
           </div>
           <p
-            class="text-start col-span-5 pl-4"
+            class="text-start text-sm col-span-5 pl-4"
           >
             testTaskTitle
           </p>

@@ -34,7 +34,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
             />
           </div>
           <p
-            class="text-start px-4 col-span-3 flex justify-center"
+            class="text-start text-sm px-4 col-span-3 flex justify-center"
           >
             Leicht
              
@@ -49,7 +49,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
         </div>
       </button>
       <div
-        class="flex flex-row md:gap-4 h-full"
+        class="flex flex-row md:gap-4 h-full "
       />
     </div>
     <div
@@ -81,7 +81,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
             />
           </div>
           <p
-            class="text-start px-4 col-span-3 flex justify-center"
+            class="text-start text-sm px-4 col-span-3 flex justify-center"
           >
             Mittelschwer
              
@@ -96,12 +96,16 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
         </div>
       </button>
       <div
-        class="flex flex-row md:gap-4 h-full"
+        class="flex flex-row md:gap-4 h-full "
       >
         <button
           class="w-full h-full px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border bg-buttonbgblue"
         >
-          Hinweis
+          <p
+            class="text-sm"
+          >
+            Hinweis
+          </p>
         </button>
       </div>
     </div>
@@ -134,7 +138,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
             />
           </div>
           <p
-            class="text-start px-4 col-span-3 flex justify-center"
+            class="text-start text-sm px-4 col-span-3 flex justify-center"
           >
             Schwer
              
@@ -149,12 +153,16 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
         </div>
       </button>
       <div
-        class="flex flex-row md:gap-4 h-full"
+        class="flex flex-row md:gap-4 h-full "
       >
         <button
           class="w-full h-full px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border bg-buttonbgblue"
         >
-          Hinweis
+          <p
+            class="text-sm"
+          >
+            Hinweis
+          </p>
         </button>
       </div>
     </div>
