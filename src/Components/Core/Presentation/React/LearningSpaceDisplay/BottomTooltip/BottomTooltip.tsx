@@ -36,7 +36,7 @@ export default function BottomTooltip({
     >
       <StyledContainer
         className="cursor-pointer"
-        onClick={viewModel.onClickCallback.Value}
+        onClick={viewModel.onClickCallback.Value} // didn't use useObservable because react has problems with functions in states
       >
         <div className="flex items-center gap-1 p-2 font-bold rounded-lg lg:p-4 text-adlerdarkblue text-md lg:text-2xl bg-buttonbgblue">
           {type !== LearningElementTypes.notAnElement &&
