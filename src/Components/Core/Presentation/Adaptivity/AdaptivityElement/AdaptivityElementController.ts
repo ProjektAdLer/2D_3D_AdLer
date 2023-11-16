@@ -56,6 +56,7 @@ export default class AdaptivityElementController
       const learningWorldPort = CoreDIContainer.get<ILearningWorldPort>(
         PORT_TYPES.ILearningWorldPort
       );
+
       learningWorldPort.onLearningElementHighlighted(
         selectedHint.hintAction.idData
       );
