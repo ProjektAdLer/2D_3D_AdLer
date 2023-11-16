@@ -64,7 +64,10 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
             x
           </div>
         </StyledButton>
-        <StyledButton className="fixed lg:hidden left-2 bottom-2">
+        <StyledButton
+          className="fixed lg:hidden left-2 bottom-2"
+          onClick={() => controller.minimizeOrMaximizeBreakNotification()}
+        >
           <img src={pauseIcon} className="h-fit" alt="" />
         </StyledButton>
       </div>

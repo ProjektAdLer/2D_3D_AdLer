@@ -102,7 +102,7 @@ export default function AdaptivityElementDialogContainer({
   return (
     <StyledContainer className={tailwindMerge(className, "")}>
       <div
-        className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center bg-black bg-opacity-30 justify-center w-screen h-screen lg:grid lg:grid-rows-3 lg:items-start"
+        className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center bg-black bg-opacity-30 justify-center w-screen h-full lg:grid lg:grid-rows-3 lg:items-start"
         onClick={controller.closeModal}
       >
         {/* Background NPC */}
