@@ -8,6 +8,8 @@ import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_T
 import IExitModalPresenter from "~ReactComponents/LearningSpaceDisplay/ExitModal/IExitModalPresenter";
 import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import bind from "bind-decorator";
+import IGetLearningSpacePrecursorAndSuccessorUseCase from "../../../Application/UseCases/GetLearningSpacePrecursorAndSuccessor/IGetLearningSpacePrecursorAndSuccessorUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 export default class DoorPresenter implements IDoorPresenter {
   private bottomTooltipPresenter: IBottomTooltipPresenter;
@@ -58,6 +60,9 @@ export default class DoorPresenter implements IDoorPresenter {
 
   @bind
   private openExitModal(): void {
+    CoreDIContainer.get<IGetLearningSpacePrecursorAndSuccessorUseCase>(
+      USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
+    ).execute();
     this.exitModalPresenter.open(this.viewModel.isExit);
   }
 }

@@ -31,14 +31,12 @@ export default function BottomTooltip({
     <div
       className={tailwindMerge(
         className,
-        "absolute flex justify-center w-screen bottom-2 md:bottom-10 pointer-events-auto"
+        "absolute flex justify-center w-screen bottom-2 md:bottom-10"
       )}
     >
       <StyledContainer
-        onClick={() => {
-          console.log("click"); // TODO: remove log when click works
-          viewModel.onClickCallback.Value();
-        }}
+        className="cursor-pointer"
+        onClick={viewModel.onClickCallback.Value}
       >
         <div className="flex items-center gap-1 p-2 font-bold rounded-lg lg:p-4 text-adlerdarkblue text-md lg:text-2xl bg-buttonbgblue">
           {type !== LearningElementTypes.notAnElement &&
