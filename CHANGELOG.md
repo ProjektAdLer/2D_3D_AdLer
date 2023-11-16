@@ -34,6 +34,22 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 </details>
 
+## Version 2.0.0
+
+### Added
+
+- overview of licenses used
+
+### Fixed
+
+- questions after selecting a hint will be displayed correctly
+- fixed styling issues for adaptivity on mobile
+- improved 2D display of NPC on mobile
+
+### Changed
+
+- position of back button now on left side
+
 ## Version 2.0.0-rc.3
 
 ### Added
