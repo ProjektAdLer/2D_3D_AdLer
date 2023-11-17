@@ -128,48 +128,46 @@ function RenderBreakContent(
   return (
     <div className="pb-4 max-h-[90vh] portrait:max-w-[90vw]">
       <div className="flex flex-col items-center gap-6 mx-0 my-auto slider-wrapper">
-        <div className="flex gap-4 overflow-y-auto items-center justify-center slider portrait:max-w-[90vw] max-h-[90vh]">
-          <figure>
-            <p className="pb-4 pl-6 text-sm font-bold md:text-xl lg:text-xl text-adlerdarkblue">
-              {chosenBreakContent.titleMessage}
-            </p>
-            {currentSlideIndex === 1 && (
-              <img
-                id="slide-1"
-                className="object-cover max-h-[60vh] portrait:max-w-full rounded-lg"
-                src={chosenBreakContent.image1}
-                title="Slide 1/3"
-                alt=""
-              ></img>
-            )}
-            {currentSlideIndex === 2 && (
-              <img
-                id="slide-2"
-                className="object-cover max-h-[60vh] portrait:max-w-full rounded-lg"
-                src={chosenBreakContent.image2}
-                title="Slide 2/3"
-                alt=""
-              ></img>
-            )}
-            {currentSlideIndex === 3 && (
-              <img
-                id="slide-3"
-                className="object-cover max-h-[60vh] portrait:max-w-full rounded-lg"
-                src={chosenBreakContent.image3}
-                title="Slide 3/3"
-                alt=""
-              ></img>
-            )}
-            {currentSlideIndex === 4 && (
-              <img
-                id="slide-4"
-                className="object-cover max-h-[60vh] portrait:max-w-full rounded-lg"
-                src={chosenBreakContent.image4}
-                title="Slide 4/4"
-                alt=""
-              ></img>
-            )}
-          </figure>
+        <div className="flex flex-col gap-4 overflow-y-auto items-center justify-center slider portrait:max-w-[90vw] max-h-[90vh]">
+          <p className="w-full pb-4 pl-6 text-sm font-bold md:text-xl lg:text-xl max-w-[60vw] ultraWide:max-w-[40vw] text-adlerdarkblue">
+            {chosenBreakContent.titleMessage}
+          </p>
+          {currentSlideIndex === 1 && (
+            <img
+              id="slide-1"
+              className="object-cover max-h-[60vh] portrait:max-w-full rounded-lg"
+              src={chosenBreakContent.image1}
+              title="Slide 1/3"
+              alt=""
+            ></img>
+          )}
+          {currentSlideIndex === 2 && (
+            <img
+              id="slide-2"
+              className="object-cover max-h-[60vh] portrait:max-w-full rounded-lg"
+              src={chosenBreakContent.image2}
+              title="Slide 2/3"
+              alt=""
+            ></img>
+          )}
+          {currentSlideIndex === 3 && (
+            <img
+              id="slide-3"
+              className="object-cover max-h-[60vh] portrait:max-w-full rounded-lg"
+              src={chosenBreakContent.image3}
+              title="Slide 3/3"
+              alt=""
+            ></img>
+          )}
+          {currentSlideIndex === 4 && (
+            <img
+              id="slide-4"
+              className="object-cover max-h-[60vh] portrait:max-w-full rounded-lg"
+              src={chosenBreakContent.image4}
+              title="Slide 4/4"
+              alt=""
+            ></img>
+          )}
         </div>
         {chosenBreakContent.image2 !== "" && (
           <div className="z-10 flex gap-4 lg:gap-6 slider-nav">
