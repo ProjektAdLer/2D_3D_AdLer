@@ -7,6 +7,8 @@ import SCENE_TYPES, {
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../Utils/TailwindMerge";
+import ILoadingScreenPresenter from "~ReactComponents/GeneralComponents/LoadingScreen/ILoadingScreenPresenter";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 export type BabylonCanvasProps = {
   sceneDefinitionType: { new (...args: any[]): AbstractSceneDefinition };
@@ -40,6 +42,12 @@ export default function BabylonCanvas(
   useEffect(() => {
     if (!canvasRef.current) return;
 
+    // call LoadingScreen
+    const loadingScreenPresenter = CoreDIContainer.get<ILoadingScreenPresenter>(
+      PRESENTATION_TYPES.ILoadingScreenPresenter
+    );
+    loadingScreenPresenter.showLoadingScreen();
+
     // create engine
     const engine = new Engine(
       canvasRef.current,
@@ -54,7 +62,11 @@ export default function BabylonCanvas(
     );
     const scenePresenter = scenePresenterFactory(sceneDefinitionType);
     const createSceneAsync = async () => {
-      await scenePresenter.createScene(engine, sceneOptions);
+      loadingScreenPresenter.pushLoadStep("Lade Lernraum...");
+      await scenePresenter.createScene(engine, sceneOptions).then(() => {
+        loadingScreenPresenter.pushLoadStep("Lernraum fertig geladen!");
+        loadingScreenPresenter.releaseLoadingLock();
+      });
       scenePresenter.startRenderLoop();
     };
     createSceneAsync();

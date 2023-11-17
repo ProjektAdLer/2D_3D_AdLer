@@ -10,6 +10,7 @@ import { useInjection } from "inversify-react";
 import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import InternetLossModal from "~ReactComponents/GeneralComponents/InternetLossModal/InternetLossModal";
+import LoadingScreen from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreen";
 
 export interface IAppProps {}
 
@@ -39,6 +40,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
   if (location?.pathname.includes("/spacedisplay")) {
     return (
       <>
+        <LoadingScreen />
         <LearningSpace />
         <InternetLossModal />
       </>

@@ -98,15 +98,14 @@ export default function AdaptivityElementDialogContainer({
 
   if (!viewmodel || !controller) return null;
   if (!isOpen || !contentData) return null;
-  console.log("showFooterTooltip: ", showFooterTooltip);
   return (
     <StyledContainer className={tailwindMerge(className, "")}>
       <div
-        className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center bg-black bg-opacity-30 justify-center w-screen h-full lg:grid lg:grid-rows-3 lg:items-start"
+        className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-full bg-black bg-opacity-30 lg:grid lg:grid-rows-3 lg:items-start"
         onClick={controller.closeModal}
       >
         {/* Background NPC */}
-        <div className="flex items-end justify-start invisible w-full pl-16 lg:visible lg:h-full row-start-2">
+        <div className="flex items-end justify-start invisible w-full row-start-2 pl-16 lg:visible lg:h-full">
           <img
             className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
             alt="LearningImage!"
@@ -131,7 +130,7 @@ export default function AdaptivityElementDialogContainer({
                 !showAnswerFeedback && (
                   <StyledButton
                     onClick={controller.back}
-                    className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10 mr-2"
+                    className="w-8 h-8 p-1 mr-2 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
                   >
                     {"<"}
                   </StyledButton>
