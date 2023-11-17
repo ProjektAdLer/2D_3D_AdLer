@@ -97,7 +97,6 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
           LearningSpaceEntity,
           (space) => space?.id === userLocation.spaceID
         )[0];
-
       if (!space) {
         return this.rejectWithWarning("Space with given element not found!");
       }
