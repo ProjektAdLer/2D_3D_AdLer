@@ -10,6 +10,7 @@ import LearningElementView from "../../../../Core/Presentation/Babylon/LearningE
 import { waitFor } from "@testing-library/react";
 import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 jest.mock(
   "../../../../Core/Presentation/Babylon/LearningElements/LearningElementView"
@@ -40,6 +41,9 @@ describe("LearningElementBuilder", () => {
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
       worldPortMock
     );
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    ).toConstantValue(mock());
   });
 
   beforeEach(() => {

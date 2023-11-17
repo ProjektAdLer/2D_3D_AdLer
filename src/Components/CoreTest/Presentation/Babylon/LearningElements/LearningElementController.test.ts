@@ -1,4 +1,4 @@
-import { AbstractMesh, ActionEvent, Mesh } from "@babylonjs/core";
+import { AbstractMesh, ActionEvent, Mesh, Vector3 } from "@babylonjs/core";
 import { mock, mockDeep } from "jest-mock-extended";
 import ILoadLearningElementUseCase from "../../../../Core/Application/UseCases/LoadLearningElement/ILoadLearningElementUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
@@ -7,8 +7,11 @@ import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE
 import LearningElementController from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementController";
 import LearningElementViewModel from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementViewModel";
 import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
+import { LearningElementTypes } from "../../../../Core/Domain/Types/LearningElementTypes";
+import ILoadAdaptivityElementUseCase from "../../../../Core/Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/ILoadAdaptivityElementUseCase";
 
 const loadLearningElementUseCaseMock = mock<ILoadLearningElementUseCase>();
+const LoadAdaptivityElementUseCaseMock = mock<ILoadAdaptivityElementUseCase>();
 const bottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
 
 describe("LearningElementController", () => {
@@ -20,6 +23,9 @@ describe("LearningElementController", () => {
     CoreDIContainer.rebind(
       USECASE_TYPES.ILoadLearningElementUseCase
     ).toConstantValue(loadLearningElementUseCaseMock);
+    CoreDIContainer.rebind(
+      USECASE_TYPES.ILoadAdaptivityElementUseCase
+    ).toConstantValue(LoadAdaptivityElementUseCaseMock);
     CoreDIContainer.bind(
       PRESENTATION_TYPES.IBottomTooltipPresenter
     ).toConstantValue(bottomTooltipPresenterMock);
@@ -46,9 +52,12 @@ describe("LearningElementController", () => {
 
     systemUnderTest.pointerOver();
 
-    expect(mockedMesh.scaling.scaleInPlace).toHaveBeenCalledTimes(1);
-    expect(mockedMesh.scaling.scaleInPlace).toHaveBeenCalledWith(
-      viewModel.iconScaleUpOnHover
+    expect(mockedMesh.scaling).toStrictEqual(
+      new Vector3(
+        viewModel.iconScaleUpOnHover,
+        viewModel.iconScaleUpOnHover,
+        viewModel.iconScaleUpOnHover
+      )
     );
   });
 
@@ -64,36 +73,45 @@ describe("LearningElementController", () => {
 
     systemUnderTest.pointerOut();
 
-    expect(mockedMesh.scaling.scaleInPlace).toHaveBeenCalledTimes(1);
-    expect(mockedMesh.scaling.scaleInPlace).toHaveBeenCalledWith(
-      1 / viewModel.iconScaleUpOnHover
-    );
+    expect(mockedMesh.scaling).toStrictEqual(Vector3.One());
   });
 
-  test("picked calls LoadLearningElementUseCase", () => {
+  test("picked calls LoadLearningElementUseCase for non-adaptivity elements when isInteractable is true", () => {
     viewModel.id = 42;
-    const mockedEvent: ActionEvent = {
-      sourceEvent: {
-        pointerType: "mouse",
-      },
-      source: undefined,
-      pointerX: 0,
-      pointerY: 0,
-      meshUnderPointer: null,
-    };
+    viewModel.type = LearningElementTypes.pdf;
+    viewModel.isInteractable.Value = true;
 
-    systemUnderTest.picked(mockedEvent);
+    systemUnderTest.picked();
 
     expect(loadLearningElementUseCaseMock.executeAsync).toHaveBeenCalledTimes(
       1
     );
   });
 
-  test("doublePicked displays the bottom tooltip", () => {
+  test("picked calls LoadAdaptivityElementUseCase for adaptivity elements when isInteractable is true", () => {
     viewModel.id = 42;
+    viewModel.type = LearningElementTypes.adaptivity;
+    viewModel.isInteractable.Value = true;
 
-    systemUnderTest.doublePicked();
+    systemUnderTest.picked();
 
-    expect(bottomTooltipPresenterMock.display).toHaveBeenCalledTimes(1);
+    expect(LoadAdaptivityElementUseCaseMock.executeAsync).toHaveBeenCalledTimes(
+      1
+    );
+  });
+
+  test("picked calls no use case when isInteractable is false", () => {
+    viewModel.id = 42;
+    viewModel.type = LearningElementTypes.pdf;
+    viewModel.isInteractable.Value = false;
+
+    systemUnderTest.picked();
+
+    expect(loadLearningElementUseCaseMock.executeAsync).toHaveBeenCalledTimes(
+      0
+    );
+    expect(LoadAdaptivityElementUseCaseMock.executeAsync).toHaveBeenCalledTimes(
+      0
+    );
   });
 });
