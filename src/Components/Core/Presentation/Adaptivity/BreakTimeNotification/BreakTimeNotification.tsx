@@ -128,9 +128,9 @@ function RenderBreakContent(
   return (
     <div className="pb-4 max-h-[90vh] portrait:max-w-[90vw]">
       <div className="flex flex-col items-center gap-6 mx-0 my-auto slider-wrapper">
-        <div className="flex gap-4 overflow-y-auto justify-center slider portrait:max-w-[90vw] max-h-[90vh]">
+        <div className="flex gap-4 overflow-y-auto items-center justify-center slider portrait:max-w-[90vw] max-h-[90vh]">
           <figure>
-            <p className="pb-4 pl-6 text-lg font-bold lg:text-xl text-adlerdarkblue">
+            <p className="pb-4 pl-6 text-sm font-bold md:text-xl lg:text-xl text-adlerdarkblue">
               {chosenBreakContent.titleMessage}
             </p>
             {currentSlideIndex === 1 && (
