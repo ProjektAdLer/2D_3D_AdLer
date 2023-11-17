@@ -50,6 +50,6 @@ Unter Windows (und wsl) muss die Datei `Dockerfile-twostage` genutzt werden, da 
 
 | 3D Version | [Backend Version](https://github.com/ProjektAdLer/AdLerBackend) |
 | ---------- | --------------------------------------------------------------- |
-| 2.0.0      | 2.0.0                                                           |
+| 2.0.1      | 2.0.0                                                           |
 
 Zu jeden neuen Release wird diese Tabelle Aktuallisiert.
