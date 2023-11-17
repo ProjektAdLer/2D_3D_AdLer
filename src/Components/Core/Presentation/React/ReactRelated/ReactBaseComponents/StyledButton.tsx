@@ -35,7 +35,7 @@ export default function StyledButton({
 
     // Shapes
     square:
-      "justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square",
+      "justify-center p-1 md:w-12 md:h-12 sm:w-10 sm:h-10 w-10 h-10 aspect-square",
     freefloatleft: "px-2 py-1",
     freefloatcenter: "flex px-2 py-1 justify-center",
   };
