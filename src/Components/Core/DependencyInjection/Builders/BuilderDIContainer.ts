@@ -35,6 +35,7 @@ import HelpDeskModalBuilder from "~ReactComponents/GeneralComponents/HelpDeskMod
 import HelpDeskButtonBuilder from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButtonBuilder";
 import AdaptivityElementBuilder from "../../Presentation/Adaptivity/AdaptivityElement/AdaptivityElementBuilder";
 import BreakTimeNotificationBuilder from "../../Presentation/Adaptivity/BreakTimeNotification/BreakTimeNotificationBuilder";
+import LoadingScreenBuilder from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreenBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -46,6 +47,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IHelpDeskModalBuilder).to(
     HelpDeskModalBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.ILoadingScreenBuilder).to(
+    LoadingScreenBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IDoorBuilder).to(DoorBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IWindowBuilder).to(WindowBuilder);
