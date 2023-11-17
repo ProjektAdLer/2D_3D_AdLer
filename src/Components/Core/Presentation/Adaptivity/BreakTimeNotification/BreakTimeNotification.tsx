@@ -137,7 +137,7 @@ function RenderBreakContent(
               id="slide-1"
               className="object-cover max-h-[60vh] portrait:max-w-full rounded-lg"
               src={chosenBreakContent.image1}
-              title="Slide 1/3"
+              title="Pausenhinweis"
               alt=""
             ></img>
           )}
@@ -146,7 +146,7 @@ function RenderBreakContent(
               id="slide-2"
               className="object-cover max-h-[60vh] portrait:max-w-full rounded-lg"
               src={chosenBreakContent.image2}
-              title="Slide 2/3"
+              title="Pausenhinweis"
               alt=""
             ></img>
           )}
@@ -155,7 +155,7 @@ function RenderBreakContent(
               id="slide-3"
               className="object-cover max-h-[60vh] portrait:max-w-full rounded-lg"
               src={chosenBreakContent.image3}
-              title="Slide 3/3"
+              title="Pausenhinweis"
               alt=""
             ></img>
           )}
@@ -164,7 +164,7 @@ function RenderBreakContent(
               id="slide-4"
               className="object-cover max-h-[60vh] portrait:max-w-full rounded-lg"
               src={chosenBreakContent.image4}
-              title="Slide 4/4"
+              title="Pausenhinweis"
               alt=""
             ></img>
           )}
