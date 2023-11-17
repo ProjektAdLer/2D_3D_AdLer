@@ -34,6 +34,17 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 </details>
 
+## Version 2.0.1
+
+### Fixed
+
+- bug that prevents h5p element sometimes from scoring in 3d environment
+
+### Changed
+
+- improved styling of close-button of modal
+- improved styling of breaktime notification
+
 ## Version 2.0.0
 
 ### Added
