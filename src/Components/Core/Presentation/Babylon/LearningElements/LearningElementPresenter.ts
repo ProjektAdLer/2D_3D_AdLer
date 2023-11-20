@@ -31,7 +31,6 @@ export default class LearningElementPresenter
 
     if (distance <= interactionRadius)
       this.viewModel.isInteractable.Value = true;
-    else if (this.viewModel.isInteractable.Value)
-      this.viewModel.isInteractable.Value = false;
+    else this.viewModel.isInteractable.Value = false;
   }
 }

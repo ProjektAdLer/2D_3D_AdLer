@@ -14,6 +14,8 @@ export default class LearningElementController
   implements ILearningElementController
 {
   private bottomTooltipPresenter: IBottomTooltipPresenter;
+  private proximityToolTipId: number = -1;
+  private hoverToolTipId: number = -1;
 
   constructor(private viewModel: LearningElementViewModel) {
     this.bottomTooltipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
@@ -25,14 +27,19 @@ export default class LearningElementController
 
   @bind
   pointerOver(): void {
-    this.displayTooltip();
-    this.scaleUpIcon();
+    if (this.proximityToolTipId === -1 && this.hoverToolTipId === -1) {
+      this.proximityToolTipId = this.displayTooltip();
+      this.scaleUpIcon();
+    }
   }
 
   @bind
   pointerOut(): void {
-    this.bottomTooltipPresenter.hide();
-    this.resetIconScale();
+    if (this.hoverToolTipId !== -1) {
+      this.resetIconScale();
+      this.bottomTooltipPresenter.hide(this.hoverToolTipId);
+      this.hoverToolTipId = -1;
+    }
   }
 
   @bind
@@ -49,16 +56,16 @@ export default class LearningElementController
   @bind
   private onAvatarInteractableChange(isInteractable: boolean): void {
     if (isInteractable) {
-      this.displayTooltip();
+      this.proximityToolTipId = this.displayTooltip();
       this.scaleUpIcon();
-    } else {
-      this.bottomTooltipPresenter.hide();
+    } else if (this.proximityToolTipId !== -1) {
+      this.bottomTooltipPresenter.hide(this.proximityToolTipId);
       this.resetIconScale();
     }
   }
 
-  private displayTooltip(): void {
-    this.bottomTooltipPresenter.display(
+  private displayTooltip(): number {
+    return this.bottomTooltipPresenter.display(
       this.viewModel.name,
       this.viewModel.type,
       this.viewModel.value,
