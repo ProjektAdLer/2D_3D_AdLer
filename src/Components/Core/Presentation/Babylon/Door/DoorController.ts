@@ -11,6 +11,8 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 export default class DoorController implements IDoorController {
   private bottomTooltipPresenter: IBottomTooltipPresenter;
   private exitModalPresenter: IExitModalPresenter;
+  private proximityToolTipId: number = -1;
+  private hoverToolTipId: number = -1;
 
   constructor(private viewModel: DoorViewModel) {
     this.bottomTooltipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
@@ -19,23 +21,27 @@ export default class DoorController implements IDoorController {
     this.exitModalPresenter = CoreDIContainer.get<IExitModalPresenter>(
       PRESENTATION_TYPES.IExitModalPresenter
     );
+
+    this.viewModel.isInteractable.subscribe(this.onAvatarInteractableChange);
   }
 
   @bind
   pointerOver(): void {
-    this.bottomTooltipPresenter.display(
-      this.viewModel.isExit ? "Ausgangstüre" : "Eingangstüre"
-    );
+    if (this.proximityToolTipId === -1 && this.hoverToolTipId === -1)
+      this.hoverToolTipId = this.displayTooltip();
   }
 
   @bind
   pointerOut(): void {
-    this.bottomTooltipPresenter.hide();
+    if (this.hoverToolTipId !== -1) {
+      this.bottomTooltipPresenter.hide(this.hoverToolTipId);
+      this.hoverToolTipId = -1;
+    }
   }
 
   @bind
   picked(): void {
-    if (this.viewModel.isInteractable) {
+    if (this.viewModel.isInteractable.Value) {
       CoreDIContainer.get<IGetLearningSpacePrecursorAndSuccessorUseCase>(
         USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
       ).execute();
@@ -44,9 +50,21 @@ export default class DoorController implements IDoorController {
   }
 
   @bind
-  doublePicked(): void {
-    this.bottomTooltipPresenter.display(
-      this.viewModel.isExit ? "Ausgangstüre" : "Eingangstüre"
+  private onAvatarInteractableChange(isInteractable: boolean): void {
+    if (isInteractable) {
+      this.proximityToolTipId = this.displayTooltip();
+    } else if (this.proximityToolTipId !== -1) {
+      this.bottomTooltipPresenter.hide(this.proximityToolTipId);
+      this.proximityToolTipId = -1;
+    }
+  }
+
+  private displayTooltip(): number {
+    return this.bottomTooltipPresenter.display(
+      this.viewModel.isExit ? "Ausgangstüre" : "Eingangstüre",
+      undefined,
+      undefined,
+      this.picked
     );
   }
 }
