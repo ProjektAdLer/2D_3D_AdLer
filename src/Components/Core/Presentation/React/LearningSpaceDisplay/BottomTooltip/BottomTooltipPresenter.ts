@@ -5,7 +5,6 @@ import {
   LearningElementTypes,
 } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { injectable } from "inversify";
-import { Observable } from "@babylonjs/core";
 
 interface BottomTooltipData {
   id: number;

@@ -2,9 +2,6 @@ import { Vector3 } from "@babylonjs/core";
 import DoorViewModel from "./DoorViewModel";
 import IDoorPresenter from "./IDoorPresenter";
 import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
-import IExitModalPresenter from "~ReactComponents/LearningSpaceDisplay/ExitModal/IExitModalPresenter";
 
 export default class DoorPresenter implements IDoorPresenter {
   constructor(private viewModel: DoorViewModel) {

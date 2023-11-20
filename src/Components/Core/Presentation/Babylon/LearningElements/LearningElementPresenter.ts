@@ -1,9 +1,6 @@
 import { Vector3 } from "@babylonjs/core/Maths/math";
 import ILearningElementPresenter from "./ILearningElementPresenter";
 import LearningElementViewModel from "./LearningElementViewModel";
-import IBottomTooltipPresenter from "~ReactComponents/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 export default class LearningElementPresenter
   implements ILearningElementPresenter
