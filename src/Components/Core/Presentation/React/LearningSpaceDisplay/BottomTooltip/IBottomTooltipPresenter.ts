@@ -6,6 +6,6 @@ export default interface IBottomTooltipPresenter {
     iconType?: LearningElementTypeStrings,
     points?: number | undefined,
     onClickCallback?: () => void
-  ): void;
-  hide(): void;
+  ): number;
+  hide(toolTipId: number): void;
 }

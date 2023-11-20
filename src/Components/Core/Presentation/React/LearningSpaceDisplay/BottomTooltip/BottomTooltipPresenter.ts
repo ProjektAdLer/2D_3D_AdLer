@@ -5,9 +5,23 @@ import {
   LearningElementTypes,
 } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { injectable } from "inversify";
+import { Observable } from "@babylonjs/core";
+
+interface BottomTooltipData {
+  id: number;
+  show: boolean;
+  text: string;
+  iconType: LearningElementTypeStrings;
+  points: number;
+  showPoints: boolean;
+  onClickCallback: () => void;
+}
 
 @injectable()
 export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
+  dataQueue: BottomTooltipData[] = [];
+  idCounter = 0;
+
   constructor(private viewModel: BottomTooltipViewModel) {}
 
   display(
@@ -15,23 +29,44 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
     iconType: LearningElementTypeStrings = LearningElementTypes.notAnElement,
     points: number | undefined = undefined,
     onClickCallback?: () => void
-  ): void {
-    this.viewModel.show.Value = true;
-    this.viewModel.text.Value = text;
-    this.viewModel.iconType.Value = iconType;
-    if (points) {
-      this.viewModel.points.Value = points;
-      this.viewModel.showPoints.Value = true;
-    } else this.viewModel.showPoints.Value = false;
-    if (onClickCallback) this.viewModel.onClickCallback.Value = onClickCallback;
+  ): number {
+    const data: BottomTooltipData = {
+      id: this.idCounter++,
+      show: true,
+      text: text,
+      iconType: iconType,
+      points: points ? points : 0,
+      showPoints: points !== undefined,
+      onClickCallback: onClickCallback ?? (() => {}),
+    };
+    this.dataQueue.push(data);
+
+    this.updateViewModel();
+
+    return data.id;
   }
 
-  hide(): void {
-    this.viewModel.show.Value = false;
+  hide(toolTipId: number): void {
+    const index = this.dataQueue.findIndex((data) => data.id === toolTipId);
+    if (index >= 0) {
+      this.dataQueue.splice(index, 1);
+    }
 
-    this.viewModel.text.Value = "";
-    this.viewModel.iconType.Value = LearningElementTypes.notAnElement;
-    this.viewModel.showPoints.Value = false;
-    this.viewModel.onClickCallback.Value = () => {};
+    this.updateViewModel();
+  }
+
+  private updateViewModel(): void {
+    if (this.dataQueue.length <= 0) {
+      this.viewModel.show.Value = false;
+    } else {
+      const data = this.dataQueue[this.dataQueue.length - 1];
+
+      this.viewModel.show.Value = data.show;
+      this.viewModel.text.Value = data.text;
+      this.viewModel.iconType.Value = data.iconType;
+      this.viewModel.points.Value = data.points;
+      this.viewModel.showPoints.Value = data.showPoints;
+      this.viewModel.onClickCallback.Value = data.onClickCallback;
+    }
   }
 }
