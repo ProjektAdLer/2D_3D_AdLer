@@ -77,7 +77,10 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
         this.entityContainer.filterEntitiesOfType<LearningElementEntity>(
           LearningElementEntity,
           (entity) => {
-            return entity.id === data.elementID;
+            return (
+              entity.id === data.elementID &&
+              entity.parentWorldID === userLocation.worldID
+            );
           }
         );
 
@@ -107,7 +110,6 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
         worldID: userLocation.worldID,
         spaceID: userLocation.spaceID,
       });
-
       this.worldPort.onLearningElementScored(true, data.elementID);
       this.worldPort.onLearningSpaceScored(newSpaceScore);
       this.worldPort.onLearningWorldScored(newWorldScore);

@@ -906,6 +906,7 @@ export default class MockBackendAdapter implements IBackendPort {
       ],
       elements: [
         {
+          $type: "LearningElement",
           elementId: 1,
           elementName: "Ein Text-Lernelement",
           elementCategory: "text",
@@ -920,6 +921,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "l_trophy_bronze",
         },
         {
+          $type: "LearningElement",
           elementId: 2,
           elementName: "Ein Video-Lernelement",
           elementCategory: "video",
@@ -934,6 +936,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "LearningElement",
           elementId: 3,
           elementName: "Ein Bild-Lernelement",
           elementCategory: "image",
@@ -948,6 +951,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "AdaptivityElement",
           elementId: 4,
           elementName: "Ein Adaptivitäts-Lernelement",
           elementCategory: "adaptivity",
@@ -962,17 +966,15 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "a_npc_defaultnpc",
           adaptivityContent: this.adaptivityData,
         },
-
         {
+          $type: "BaseLearningElement",
           elementId: 999,
           elementName: "Hier steht ein externes Lernelement",
           elementCategory: "text",
-          elementDescription: "Beschreibung des externen Lernelemenets",
           elementFileType: "text",
-          elementMaxScore: 0,
-          elementModel: "l_h5p_blackboard_1",
         },
         {
+          $type: "LearningElement",
           elementId: 5,
           elementName: "Ein H5P-Lernelement",
           elementCategory: "h5p",
@@ -987,6 +989,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "l_h5p_blackboard_1",
         },
         {
+          $type: "LearningElement",
           elementId: 6,
           elementName: "Ein PDF-Lernelement",
           elementCategory: "pdf",
@@ -1093,6 +1096,7 @@ export default class MockBackendAdapter implements IBackendPort {
       ],
       elements: [
         {
+          $type: "LearningElement",
           elementId: 1,
           elementName: "Bild welches in Raum 1 abgeschlossen ist",
           elementDescription:
@@ -1108,6 +1112,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "LearningElement",
           elementId: 2,
           elementName: "Ein PDF-Lernelement",
           elementDescription: "Beschreibung des PDF-Lernelements",
@@ -1122,6 +1127,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "LearningElement",
           elementId: 3,
           elementName: "Ein Text-Lernelement",
           elementDescription: "Beschreibung des Text-Lernelements",
@@ -1136,6 +1142,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "AdaptivityElement",
           elementId: 4,
           elementName: "Ein Adaptivitäts-Lernelement",
           elementDescription: "Beschreibung des Adaptivitäts-Lernelements",
@@ -1151,6 +1158,7 @@ export default class MockBackendAdapter implements IBackendPort {
           adaptivityContent: this.adaptivityData,
         },
         {
+          $type: "LearningElement",
           elementId: 5,
           elementName: "Ein H5P-Lernelement",
           elementDescription: "Beschreibung des H5P-Lernelements",
@@ -1237,6 +1245,7 @@ export default class MockBackendAdapter implements IBackendPort {
       ],
       elements: [
         {
+          $type: "LearningElement",
           elementId: 1,
           elementName: "Bild1",
           elementDescription: "",
@@ -1247,6 +1256,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "l_image_sciencebio_1",
         },
         {
+          $type: "LearningElement",
           elementId: 2,
           elementName: "Bild2",
           elementDescription: "",
@@ -1257,6 +1267,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "l_image_sciencegeo_1",
         },
         {
+          $type: "LearningElement",
           elementId: 3,
           elementName: "Bild3(1)",
           elementDescription: "",
@@ -1267,6 +1278,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "l_image_sciencewhiteboard_1",
         },
         {
+          $type: "LearningElement",
           elementId: 4,
           elementName: "Bild4(1)",
           elementDescription: "",
@@ -1277,6 +1289,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "l_h5p_daylightprojector_1",
         },
         {
+          $type: "LearningElement",
           elementId: 5,
           elementName: "YouTube",
           elementDescription: "",
@@ -1287,6 +1300,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "l_h5p_blackslotmachine_1",
         },
         {
+          $type: "LearningElement",
           elementId: 6,
           elementName: "Vimeo",
           elementDescription: "",
@@ -1297,6 +1311,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "l_h5p_purpleslotmachine_1",
         },
         {
+          $type: "LearningElement",
           elementId: 7,
           elementName: "TH AB",
           elementDescription: "",
@@ -1307,6 +1322,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "LearningElement",
           elementId: 8,
           elementName: "\u00DCbung1",
           elementDescription: "",
@@ -1317,6 +1333,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "LearningElement",
           elementId: 9,
           elementName: "\u00DCbung2",
           elementDescription: "",
@@ -1327,6 +1344,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "LearningElement",
           elementId: 10,
           elementName: "\u00DCbung3",
           elementDescription: "",
@@ -1337,6 +1355,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "LearningElement",
           elementId: 11,
           elementName: "\u00DCbung4",
           elementDescription: "",
@@ -1347,6 +1366,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "LearningElement",
           elementId: 12,
           elementName: "\u00DCbung5",
           elementDescription: "",
@@ -1357,6 +1377,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "LearningElement",
           elementId: 13,
           elementName: "\u00DCbung6",
           elementDescription: "",
@@ -1367,6 +1388,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "LearningElement",
           elementId: 14,
           elementName: "\u00DCbung7",
           elementDescription: "",
@@ -1377,6 +1399,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "LearningElement",
           elementId: 15,
           elementName: "\u00DCbung8",
           elementDescription: "",
@@ -1387,6 +1410,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "LearningElement",
           elementId: 16,
           elementName: "\u00DCbung9",
           elementDescription: "",
@@ -1397,6 +1421,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "LearningElement",
           elementId: 17,
           elementName: "\u00DCbung10",
           elementDescription: "",
@@ -1407,6 +1432,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "",
         },
         {
+          $type: "LearningElement",
           elementId: 18,
           elementName: "Bild3(2)",
           elementDescription: "",
@@ -1417,6 +1443,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "l_random",
         },
         {
+          $type: "LearningElement",
           elementId: 19,
           elementName: "Video4(1)",
           elementDescription: "",
@@ -1427,6 +1454,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "l_random",
         },
         {
+          $type: "LearningElement",
           elementId: 20,
           elementName: "Text1",
           elementDescription: "",
@@ -1437,6 +1465,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "l_random",
         },
         {
+          $type: "LearningElement",
           elementId: 21,
           elementName: "H5P11",
           elementDescription: "",
@@ -1447,6 +1476,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "l_random",
         },
         {
+          $type: "LearningElement",
           elementId: 22,
           elementName: "Video4(2)",
           elementDescription: "",
@@ -1457,6 +1487,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementModel: "l_random",
         },
         {
+          $type: "LearningElement",
           elementId: 23,
           elementName: "Bild4(2)",
           elementDescription: "",
@@ -1552,6 +1583,7 @@ export default class MockBackendAdapter implements IBackendPort {
       ],
       elements: [
         {
+          $type: "LearningElement",
           elementDescription: "",
           elementGoals: [""],
           elementMaxScore: 1,
@@ -1562,6 +1594,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementFileType: "url",
         },
         {
+          $type: "AdaptivityElement",
           elementId: 2,
           elementName: "ele7",
           elementDescription: "d",
@@ -1651,6 +1684,7 @@ export default class MockBackendAdapter implements IBackendPort {
           },
         },
         {
+          $type: "LearningElement",
           elementDescription: "",
           elementGoals: [""],
           elementMaxScore: 1,
@@ -1661,6 +1695,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementFileType: "jpg",
         },
         {
+          $type: "LearningElement",
           elementDescription: "",
           elementGoals: [""],
           elementMaxScore: 1,
@@ -1671,6 +1706,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementFileType: "jpg",
         },
         {
+          $type: "LearningElement",
           elementDescription: "",
           elementGoals: [""],
           elementMaxScore: 1,
@@ -1681,6 +1717,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementFileType: "pdf",
         },
         {
+          $type: "LearningElement",
           elementDescription: "",
           elementGoals: [""],
           elementMaxScore: 1,
@@ -1691,6 +1728,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementFileType: "h5p",
         },
         {
+          $type: "LearningElement",
           elementDescription: "",
           elementGoals: [""],
           elementMaxScore: 1,
@@ -1701,6 +1739,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementFileType: "h5p",
         },
         {
+          $type: "LearningElement",
           elementDescription: "",
           elementGoals: [""],
           elementMaxScore: 1,
@@ -1711,6 +1750,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementFileType: "url",
         },
         {
+          $type: "LearningElement",
           elementDescription: "",
           elementGoals: [""],
           elementMaxScore: 1,
@@ -1721,6 +1761,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementFileType: "jpg",
         },
         {
+          $type: "LearningElement",
           elementDescription: "",
           elementGoals: [""],
           elementMaxScore: 1,
@@ -1731,6 +1772,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementFileType: "h5p",
         },
         {
+          $type: "LearningElement",
           elementDescription: "",
           elementGoals: [""],
           elementMaxScore: 1,
@@ -1741,6 +1783,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementFileType: "h5p",
         },
         {
+          $type: "LearningElement",
           elementDescription: "",
           elementGoals: [""],
           elementMaxScore: 1,
@@ -1751,6 +1794,7 @@ export default class MockBackendAdapter implements IBackendPort {
           elementFileType: "url",
         },
         {
+          $type: "LearningElement",
           elementDescription: "",
           elementGoals: [""],
           elementMaxScore: 1,

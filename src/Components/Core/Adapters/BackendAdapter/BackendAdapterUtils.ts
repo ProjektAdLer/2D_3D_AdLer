@@ -1,11 +1,18 @@
+import { BackendAdaptivityElementTO } from "./../../Application/DataTransferObjects/BackendElementTO";
 import { AdaptivityElementQuestionTypes } from "./../../Domain/Types/Adaptivity/AdaptivityElementQuestionTypes";
 import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 import { AdaptivityElementTriggerConditionTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementTriggerConditionTypes";
 import { AdaptivityElementDataTO } from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementDataTO";
-import BackendElementTO from "../../Application/DataTransferObjects/BackendElementTO";
+import {
+  BackendBaseElementTO,
+  BackendLearningElementTO,
+} from "../../Application/DataTransferObjects/BackendElementTO";
 import BackendSpaceTO from "../../Application/DataTransferObjects/BackendSpaceTO";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
-import { isValidLearningElementModelType } from "../../Domain/LearningElementModels/LearningElementModelTypes";
+import {
+  LearningElementModel,
+  isValidLearningElementModelType,
+} from "../../Domain/LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypes } from "../../Domain/Types/LearningElementTypes";
 import { LearningSpaceTemplateType } from "../../Domain/Types/LearningSpaceTemplateType";
 import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
@@ -26,21 +33,29 @@ import AdaptivityElementQuestionTO from "../../Application/DataTransferObjects/A
 import AdaptivityElementTaskTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTaskTO";
 import { AdaptivityElementActionTypes } from "../../Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 
+type BackendTO =
+  | BackendBaseElementTO
+  | BackendLearningElementTO
+  | BackendAdaptivityElementTO;
 /**
  * This class contains static utility functions for the BackendAdapters
  */
 export default class BackendAdapterUtils {
   public static parseAWT(awt: AWT): BackendWorldTO {
-    const elements: BackendElementTO[] = this.mapElements(awt.world.elements);
+    const elements: BackendTO[] = this.mapElements(awt.world.elements);
 
     const spaces: BackendSpaceTO[] = this.mapSpaces(awt.world.spaces, elements);
 
-    const elementsInSpace = spaces.flatMap((space) => {
-      return space.elements.filter((e) => e !== null);
-    });
-
-    // every element that is not in a space is an external learning element
-    const difference = elements.filter((e) => !elementsInSpace.includes(e));
+    // every BackendBaseElementTO is an external learning element
+    const externalLearningElements: BackendBaseElementTO[] = elements.filter(
+      (e) => {
+        return (
+          e instanceof BackendBaseElementTO &&
+          e instanceof BackendLearningElementTO === false &&
+          e instanceof BackendAdaptivityElementTO === false
+        );
+      }
+    );
 
     const response: BackendWorldTO = {
       worldName: awt.world.worldName,
@@ -48,7 +63,7 @@ export default class BackendAdapterUtils {
       spaces: spaces,
       description: awt.world.worldDescription ?? "",
       evaluationLink: awt.world.evaluationLink ?? "",
-      externalElements: difference,
+      externalElements: externalLearningElements,
     };
 
     return response;
@@ -57,7 +72,7 @@ export default class BackendAdapterUtils {
   // maps the spaces from the AWT to BackendSpaceTOs and connects them with their elements
   private static mapSpaces(
     spaces: APISpace[],
-    elements: BackendElementTO[]
+    elements: BackendTO[]
   ): BackendSpaceTO[] {
     return spaces.map((space) => {
       // compare template type to supported templates
@@ -103,49 +118,66 @@ export default class BackendAdapterUtils {
   }
 
   // creates BackendElementTOs from the AWT if the element type is supported
-  private static mapElements(elements: APIElement[]): BackendElementTO[] {
+  private static mapElements(elements: APIElement[]): BackendTO[] {
     return elements.flatMap((element) => {
-      if (element.elementCategory in LearningElementTypes) {
-        const adaptivityData = this.extractAdaptivityData(
+      if (element.$type === "BaseLearningElement") {
+        let base = new BackendBaseElementTO();
+        this.assignBasicTOData(base, element);
+        return base;
+      } else if (element.$type === "LearningElement") {
+        let learning = new BackendLearningElementTO();
+        this.assignBasicTOData(learning, element);
+        this.assignLearningTOData(learning, element);
+        return learning;
+      } else if (element.$type === "AdaptivityElement") {
+        let adaptiv = new BackendAdaptivityElementTO();
+        this.assignBasicTOData(adaptiv, element);
+        this.assignLearningTOData(adaptiv, element);
+        adaptiv.adaptivity = this.extractAdaptivityData(
           element.elementId,
-          element.adaptivityContent
+          element.adaptivityContent!
         );
-        const model = this.extractModelData(element.elementModel);
-
-        return {
-          id: element.elementId,
-          description: element.elementDescription ?? "",
-          goals: element.elementGoals ?? [""],
-          name: element.elementName,
-          type: element.elementCategory ?? "",
-          value: element.elementMaxScore ?? 0,
-          model: model,
-          adaptivity: adaptivityData,
-        } as BackendElementTO;
+        return adaptiv;
       } else return [];
     });
   }
 
-  private static extractModelData(modelData?: string): string | undefined {
-    if (modelData === undefined) {
-      return undefined;
-    }
+  private static assignBasicTOData(
+    elementTO: BackendTO,
+    apiElement: APIElement
+  ): void {
+    elementTO.id = apiElement.elementId;
+    elementTO.name = apiElement.elementName;
+    elementTO.type = apiElement.elementCategory as LearningElementTypes;
+  }
 
-    if (isValidLearningElementModelType(modelData)) {
-      return modelData;
-    } else {
+  private static assignLearningTOData(
+    elementTO: BackendLearningElementTO | BackendAdaptivityElementTO,
+    apiElement: APIElement
+  ): void {
+    elementTO.description = apiElement.elementDescription ?? "";
+    elementTO.value = apiElement.elementMaxScore ?? 0;
+    elementTO.goals = apiElement.elementGoals ?? [""];
+    elementTO.model = this.extractModelData(
+      apiElement.elementModel
+    ) as LearningElementModel;
+  }
+
+  private static extractModelData(modelData?: string): string | undefined {
+    if (
+      modelData === undefined ||
+      !isValidLearningElementModelType(modelData)
+    ) {
       return undefined;
+    } else {
+      return modelData;
     }
   }
 
   private static extractAdaptivityData(
     id: number,
-    adaptivitydata?: APIAdaptivity
-  ): AdaptivityElementDataTO | undefined {
-    if (adaptivitydata === undefined) {
-      return undefined;
-    }
-
+    adaptivitydata: APIAdaptivity
+  ): AdaptivityElementDataTO {
     const newAdaptivityTO = new AdaptivityElementDataTO();
     newAdaptivityTO.introText = adaptivitydata.introText;
     newAdaptivityTO.tasks = [];

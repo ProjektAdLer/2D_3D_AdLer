@@ -3,13 +3,19 @@ import { LearningElementModel } from "../../Domain/LearningElementModels/Learnin
 import { LearningElementTypeStrings } from "../../Domain/Types/LearningElementTypes";
 import { AdaptivityElementDataTO } from "./AdaptivityElement/AdaptivityElementDataTO";
 
-export default class BackendElementTO {
+export class BackendBaseElementTO {
   id: ComponentID;
-  value: number;
   name: string;
-  description: string;
-  goals: string[];
   type: LearningElementTypeStrings;
-  model?: LearningElementModel;
-  adaptivity?: AdaptivityElementDataTO;
+}
+
+export class BackendLearningElementTO extends BackendBaseElementTO {
+  description: string;
+  value: number;
+  goals: string[];
+  model: LearningElementModel;
+}
+
+export class BackendAdaptivityElementTO extends BackendLearningElementTO {
+  adaptivity: AdaptivityElementDataTO;
 }

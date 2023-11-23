@@ -56,6 +56,7 @@ export default function StyledModal({
             <div className="w-full">{title}</div>
             {canClose && (
               <StyledButton
+                shape="closebutton"
                 onClick={(event) => {
                   onClose?.();
                 }}

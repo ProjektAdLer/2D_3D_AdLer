@@ -3,15 +3,18 @@ import "@testing-library/jest-dom";
 import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
+import ILoadingScreenPresenter from "../../../../Core/Presentation/React/GeneralComponents/LoadingScreen/ILoadingScreenPresenter";
 import BabylonCanvas from "../../../../Core/Presentation/Babylon/SceneManagement/BabylonCanvas";
 import { Engine } from "@babylonjs/core";
 import React from "react";
 import TestSceneDefinition from "./TestSceneDefinition";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 jest.mock("@babylonjs/core");
 const scenePresenterMock = mock<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
+const loadingScreenPresenterMock = mock<ILoadingScreenPresenter>();
 
 describe("Babylon Canvas", () => {
   beforeAll(() => {
@@ -20,6 +23,13 @@ describe("Babylon Canvas", () => {
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
       scenePresenterFactoryMock
     );
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.ILoadingScreenPresenter
+    ).toConstantValue(loadingScreenPresenterMock);
+  });
+
+  beforeEach(() => {
+    scenePresenterMock.createScene.mockResolvedValue();
   });
 
   afterEach(() => {

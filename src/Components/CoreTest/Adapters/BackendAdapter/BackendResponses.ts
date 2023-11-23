@@ -1,10 +1,14 @@
 import AWT from "../../../Core/Adapters/BackendAdapter/Types/AWT";
 import BackendWorldTO from "../../../Core/Application/DataTransferObjects/BackendWorldTO";
 import BackendSpaceTO from "../../../Core/Application/DataTransferObjects/BackendSpaceTO";
-import BackendElementTO from "../../../Core/Application/DataTransferObjects/BackendElementTO";
 import { LearningSpaceTemplateType } from "../../../Core/Domain/Types/LearningSpaceTemplateType";
 import { LearningSpaceThemeType } from "../../../Core/Domain/Types/LearningSpaceThemeTypes";
 import { LearningElementModelTypeEnums } from "../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
+import {
+  BackendAdaptivityElementTO,
+  BackendBaseElementTO,
+  BackendLearningElementTO,
+} from "../../../Core/Application/DataTransferObjects/BackendElementTO";
 
 export const minimalGetWorldDataResponse: BackendWorldTO = {
   worldName: "TestWorld",
@@ -45,13 +49,15 @@ export const expectedWorldTO: BackendWorldTO = {
   spaces: expect.any(Array),
   description: expect.any(String),
   evaluationLink: expect.any(String),
-  externalElements: expect.any(Array<BackendElementTO>),
+  externalElements: expect.any(Array<BackendBaseElementTO>),
 };
 
 export const expectedSpaceTO: BackendSpaceTO = {
   id: expect.any(Number),
   name: expect.any(String),
-  elements: expect.any(Array<BackendElementTO | null>),
+  elements: expect.any(
+    Array<BackendLearningElementTO | BackendAdaptivityElementTO | null>
+  ),
   description: expect.any(String),
   goals: expect.arrayContaining([expect.any(String)]),
   requirements: expect.any(String),
@@ -60,7 +66,25 @@ export const expectedSpaceTO: BackendSpaceTO = {
   templateStyle: expect.any(String),
 };
 
-export const expectedElementTO = expect.objectContaining({
+export const expectedBaseElementTO =
+  expect.objectContaining<BackendBaseElementTO>({
+    id: expect.any(Number),
+    name: expect.any(String),
+    type: expect.any(String),
+  });
+
+export const expectedLearningElementTO =
+  expect.objectContaining<BackendLearningElementTO>({
+    id: expect.any(Number),
+    name: expect.any(String),
+    value: expect.any(Number),
+    description: expect.any(String),
+    goals: expect.arrayContaining([expect.any(String)]),
+    type: expect.any(String),
+    model: expect.toBeOneOf([expect.any(String), undefined]),
+  });
+
+export const expectedAdaptivityElementTO = expect.objectContaining({
   id: expect.any(Number),
   name: expect.any(String),
   value: expect.any(Number),
@@ -156,6 +180,7 @@ export const mockAWT: AWT = {
     ],
     elements: [
       {
+        $type: "LearningElement",
         elementId: 1,
         elementName: "bild",
         elementDescription: "bildbesch",
@@ -166,6 +191,7 @@ export const mockAWT: AWT = {
         elementModel: "",
       },
       {
+        $type: "LearningElement",
         elementId: 2,
         elementName: "pdf",
         elementDescription: "pdfbes",
@@ -176,6 +202,7 @@ export const mockAWT: AWT = {
         elementModel: "",
       },
       {
+        $type: "LearningElement",
         elementId: 3,
         elementName: "text",
         elementDescription: "textbesch",
@@ -186,6 +213,7 @@ export const mockAWT: AWT = {
         elementModel: "",
       },
       {
+        $type: "LearningElement",
         elementId: 4,
         elementName: "yturl",
         elementDescription: "yt",
@@ -196,6 +224,7 @@ export const mockAWT: AWT = {
         elementModel: "",
       },
       {
+        $type: "LearningElement",
         elementId: 5,
         elementName: "h5pfile",
         elementDescription: "h5pbes",
@@ -204,6 +233,21 @@ export const mockAWT: AWT = {
         elementFileType: "h5p",
         elementMaxScore: 2,
         elementModel: "",
+      },
+      {
+        $type: "AdaptivityElement",
+        elementId: 6,
+        elementName: "adaptiv element",
+        elementDescription: "ae",
+        elementGoals: ["adaptivitygoals"],
+        elementCategory: "adaptivity",
+        elementFileType: "text",
+        elementMaxScore: 1,
+        elementModel: "",
+        adaptivityContent: {
+          introText: "",
+          adaptivityTasks: [],
+        },
       },
     ],
   },

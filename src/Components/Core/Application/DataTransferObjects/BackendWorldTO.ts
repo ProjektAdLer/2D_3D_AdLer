@@ -1,4 +1,4 @@
-import BackendElementTO from "./BackendElementTO";
+import { BackendBaseElementTO } from "./BackendElementTO";
 import BackendSpaceTO from "./BackendSpaceTO";
 
 export default class BackendWorldTO {
@@ -7,5 +7,5 @@ export default class BackendWorldTO {
   goals: string[];
   description: string;
   evaluationLink: string;
-  externalElements: BackendElementTO[];
+  externalElements: BackendBaseElementTO[];
 }

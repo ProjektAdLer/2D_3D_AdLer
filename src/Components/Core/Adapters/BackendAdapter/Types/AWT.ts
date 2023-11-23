@@ -39,6 +39,7 @@ export interface APISpace {
 }
 
 export interface APIElement {
+  $type: string;
   elementId: number;
   elementName: string;
   elementDescription?: string;

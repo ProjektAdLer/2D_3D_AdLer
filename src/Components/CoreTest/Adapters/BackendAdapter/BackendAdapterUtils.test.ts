@@ -1,6 +1,6 @@
 import BackendAdapterUtils from "../../../Core/Adapters/BackendAdapter/BackendAdapterUtils";
 import { APISpace } from "../../../Core/Adapters/BackendAdapter/Types/AWT";
-import BackendElementTO from "../../../Core/Application/DataTransferObjects/BackendElementTO";
+import { BackendLearningElementTO } from "../../../Core/Application/DataTransferObjects/BackendElementTO";
 import { LearningElementModelTypeEnums } from "../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 import { AdaptivityElementActionTypes } from "../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 
@@ -19,7 +19,7 @@ describe("BackendAdapterUtils", () => {
         requiredSpacesToEnter: "test",
       },
     ];
-    const inputElements: BackendElementTO[] = [
+    const inputElements: BackendLearningElementTO[] = [
       {
         id: 1,
         name: "test",
@@ -39,6 +39,7 @@ describe("BackendAdapterUtils", () => {
   test("mapElements returns empty array if given element type is not supported", () => {
     const result = BackendAdapterUtils["mapElements"]([
       {
+        $type: "test",
         elementId: 1,
         elementName: "test",
         elementDescription: "test",
@@ -55,6 +56,7 @@ describe("BackendAdapterUtils", () => {
   test("mapElements return an element with given model if the modelname is valid", () => {
     const result = BackendAdapterUtils["mapElements"]([
       {
+        $type: "LearningElement",
         elementId: 1,
         elementName: "test",
         elementDescription: "test",
@@ -66,14 +68,16 @@ describe("BackendAdapterUtils", () => {
           LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard,
       },
     ]);
-    expect(result[0].model).toBe(
+    let resulting = result[0] as BackendLearningElementTO;
+    expect(resulting.model).toBe(
       LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard
     );
   });
 
-  test("mapElements return an element with undfined model if the modelname is invalid", () => {
+  test("mapElements return an element with undefined model if the modelname is invalid", () => {
     const result = BackendAdapterUtils["mapElements"]([
       {
+        $type: "LearningElement",
         elementId: 1,
         elementName: "test",
         elementDescription: "test",
@@ -84,7 +88,8 @@ describe("BackendAdapterUtils", () => {
         elementModel: "invalid",
       },
     ]);
-    expect(result[0].model).toBe(undefined);
+    let resulting = result[0] as BackendLearningElementTO;
+    expect(resulting.model).toBe(undefined);
   });
 
   test.each([

@@ -6,10 +6,14 @@ import PlayerDataTO from "../../../Core/Application/DataTransferObjects/PlayerDa
 import LearningWorldStatusTO from "../../../Core/Application/DataTransferObjects/LearningWorldStatusTO";
 import { XAPIEvent } from "../../../Core/Application/UseCases/ScoreH5PLearningElement/IScoreH5PLearningElementUseCase";
 import {
-  expectedElementTO,
+  expectedLearningElementTO,
   expectedSpaceTO,
   expectedWorldTO,
 } from "./BackendResponses";
+import {
+  BackendAdaptivityElementTO,
+  BackendLearningElementTO,
+} from "../../../Core/Application/DataTransferObjects/BackendElementTO";
 
 const oldConfigValue = config.useFakeBackend;
 
@@ -40,12 +44,14 @@ describe("MockBackendAdapter", () => {
       expect(space).toEqual(expectedSpaceTO);
 
       space.elements?.forEach((element) => {
-        if (element?.adaptivity === undefined) {
-          expect(element).toBeNullOrEqual(expectedElementTO);
-        } else {
+        if (element instanceof BackendAdaptivityElementTO) {
           expect(element.adaptivity).toEqual(
             expect.any(AdaptivityElementDataTO)
           );
+        } else if (element instanceof BackendLearningElementTO) {
+          expect(element).toEqual(expectedLearningElementTO);
+        } else {
+          expect(element).toEqual(null);
         }
       });
     });

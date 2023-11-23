@@ -56,6 +56,7 @@ export default class AdaptivityElementController
       const learningWorldPort = CoreDIContainer.get<ILearningWorldPort>(
         PORT_TYPES.ILearningWorldPort
       );
+
       learningWorldPort.onLearningElementHighlighted(
         selectedHint.hintAction.idData
       );
@@ -63,7 +64,12 @@ export default class AdaptivityElementController
       await CoreDIContainer.get<IDisplayLearningElementUseCase>(
         USECASE_TYPES.IDisplayLearningElementUseCase
       ).executeAsync(selectedHint.hintAction.idData);
-      this.viewModel.currentQuestion.Value = associatedQuestion;
+
+      if (this.viewModel.selectedHint.Value) {
+        this.viewModel.currentQuestion.Value = associatedQuestion;
+      } else {
+        this.viewModel.currentQuestion.Value = null;
+      }
     } else if (
       selectedHint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.ContentAction &&

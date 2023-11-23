@@ -34,6 +34,33 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 </details>
 
+## Version 2.0.1
+
+### Fixed
+
+- bug that prevents h5p element sometimes from scoring in 3d environment
+
+### Changed
+
+- improved styling of close-button of modal
+- improved styling of breaktime notification
+
+## Version 2.0.0
+
+### Added
+
+- overview of licenses used
+
+### Fixed
+
+- questions after selecting a hint will be displayed correctly
+- fixed styling issues for adaptivity on mobile
+- improved 2D display of NPC on mobile
+
+### Changed
+
+- position of back button in adaptivity element now on left side
+
 ## Version 2.0.0-rc.3
 
 ### Added
