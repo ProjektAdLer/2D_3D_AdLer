@@ -62,6 +62,8 @@ describe("LearningElementController", () => {
   });
 
   test("pointerOut calls hideBottomTooltip on tooltip presenter", () => {
+    systemUnderTest["hoverToolTipId"] = 1; // set tooltip id to non-default value
+
     systemUnderTest.pointerOut();
 
     expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
@@ -70,10 +72,19 @@ describe("LearningElementController", () => {
   test("pointerOut scales down iconMeshes", () => {
     const mockedMesh = mockDeep<Mesh>();
     viewModel.iconMeshes = [mockedMesh];
+    systemUnderTest["hoverToolTipId"] = 1; // set tooltip id to non-default value
 
     systemUnderTest.pointerOut();
 
     expect(mockedMesh.scaling).toStrictEqual(Vector3.One());
+  });
+
+  test("pointerOut resets hoverToolTipId to -1 when hoverTooltipId is set", () => {
+    systemUnderTest["hoverToolTipId"] = 1; // set tooltip id to non-default value
+
+    systemUnderTest.pointerOut();
+
+    expect(systemUnderTest["hoverToolTipId"]).toBe(-1);
   });
 
   test("picked calls LoadLearningElementUseCase for non-adaptivity elements when isInteractable is true", () => {
@@ -113,5 +124,23 @@ describe("LearningElementController", () => {
     expect(LoadAdaptivityElementUseCaseMock.executeAsync).toHaveBeenCalledTimes(
       0
     );
+  });
+
+  test("onAvatarInteractableChange calls display on tooltip presenter when isInteractable is true", () => {
+    viewModel.name = "testName";
+    viewModel.type = LearningElementTypes.pdf;
+    viewModel.value = 42;
+
+    systemUnderTest["onAvatarInteractableChange"](true);
+
+    expect(bottomTooltipPresenterMock.display).toHaveBeenCalledTimes(1);
+  });
+
+  test("onAvatarInteractableChange calls hide on tooltip presenter when isInteractable is false and proximityToolTipId is set", () => {
+    systemUnderTest["proximityToolTipId"] = 1; // set tooltip id to non-default value
+
+    systemUnderTest["onAvatarInteractableChange"](false);
+
+    expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
   });
 });
