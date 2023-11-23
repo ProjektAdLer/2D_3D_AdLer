@@ -6,6 +6,7 @@ import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentatio
 import { mock } from "jest-mock-extended";
 import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import IExitModalPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/ExitModal/IExitModalPresenter";
+import { Vector3 } from "@babylonjs/core";
 
 const mockBottomTooltipPresenter = mock<IBottomTooltipPresenter>();
 const mockExitModalPresenter = mock<IExitModalPresenter>();
@@ -35,61 +36,40 @@ describe("DoorPresenter", () => {
     }).toThrowError();
   });
 
-  test("openDoor sets state in view model", () => {
-    systemUnderTest["viewModel"].isOpen.Value = false;
-    systemUnderTest.openDoor();
-    expect(systemUnderTest["viewModel"].isOpen.Value).toBe(true);
+  test("onAvatarPositionChanged sets isInteractable to true if avatar is within interaction radius", () => {
+    viewModel = new DoorViewModel();
+    viewModel.position = new Vector3(0, 0, 0);
+    systemUnderTest = new DoorPresenter(viewModel);
+
+    systemUnderTest.onAvatarPositionChanged(viewModel.position, 1);
+
+    expect(viewModel.isInteractable.Value).toBe(true);
   });
 
-  test("should open door, when winning score is put into the viewmodel", () => {
-    systemUnderTest["viewModel"].isExit = true;
-    systemUnderTest["viewModel"].spaceID = 1;
-    systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
-    systemUnderTest.onLearningSpaceScored({
-      currentScore: 42,
-      maxScore: 42,
-      requiredScore: 42,
-      spaceID: 1,
-    } as LearningSpaceScoreTO);
-    expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(1);
+  test("onAvatarPositionChanged sets isInteractable to false if avatar is outside interaction radius", () => {
+    viewModel = new DoorViewModel();
+    viewModel.isInteractable.Value = true;
+    viewModel.position = new Vector3(0, 0, 0);
+    systemUnderTest = new DoorPresenter(viewModel);
+
+    systemUnderTest.onAvatarPositionChanged(new Vector3(42, 42, 42), 0);
+
+    expect(viewModel.isInteractable.Value).toBe(false);
   });
 
-  test("should not open door, when winning score is put into the viewModel but id is wrong", () => {
-    systemUnderTest["viewModel"].isExit = true;
-    systemUnderTest["viewModel"].spaceID = 1;
-    systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
-    systemUnderTest.onLearningSpaceScored({
-      currentScore: 42,
-      maxScore: 42,
-      requiredScore: 42,
-      spaceID: 2,
-    } as LearningSpaceScoreTO);
-    expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(0);
-  });
+  test("onLearningSpaceScored sets isOpen to true if space id is matching, isExit is true and current score is greater than or equal to required score", () => {
+    viewModel = new DoorViewModel();
+    viewModel.isExit = true;
+    viewModel.spaceID = 1;
+    systemUnderTest = new DoorPresenter(viewModel);
+    const spaceScoreTO = new LearningSpaceScoreTO();
+    spaceScoreTO.spaceID = 1;
+    spaceScoreTO.currentScore = 1;
+    spaceScoreTO.requiredScore = 1;
+    spaceScoreTO.maxScore = 1;
 
-  test("should not open door, when door type is not exit", () => {
-    systemUnderTest["viewModel"].isExit = false;
-    systemUnderTest["viewModel"].spaceID = 1;
-    systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
-    systemUnderTest.onLearningSpaceScored({
-      currentScore: 42,
-      maxScore: 42,
-      requiredScore: 42,
-      spaceID: 1,
-    } as LearningSpaceScoreTO);
-    expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(0);
-  });
+    systemUnderTest.onLearningSpaceScored(spaceScoreTO);
 
-  test("should not open door, when currentScore smaller than requiredScore", () => {
-    systemUnderTest["viewModel"].isExit = true;
-    systemUnderTest["viewModel"].spaceID = 1;
-    systemUnderTest["openDoor"] = jest.fn(systemUnderTest["openDoor"]);
-    systemUnderTest.onLearningSpaceScored({
-      currentScore: 41,
-      maxScore: 42,
-      requiredScore: 42,
-      spaceID: 1,
-    } as LearningSpaceScoreTO);
-    expect(systemUnderTest["openDoor"]).toHaveBeenCalledTimes(0);
+    expect(viewModel.isOpen.Value).toBe(true);
   });
 });

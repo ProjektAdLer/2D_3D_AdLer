@@ -19,8 +19,8 @@ export default class DoorPresenter implements IDoorPresenter {
   }
 
   onLearningSpaceScored(spaceScoreTO: LearningSpaceScoreTO): void {
-    if (spaceScoreTO.spaceID !== this.viewModel.spaceID) return;
     if (
+      spaceScoreTO.spaceID === this.viewModel.spaceID &&
       this.viewModel.isExit &&
       spaceScoreTO.currentScore >= spaceScoreTO.requiredScore
     )
