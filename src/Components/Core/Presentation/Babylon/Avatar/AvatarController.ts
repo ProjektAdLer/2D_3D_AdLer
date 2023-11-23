@@ -22,16 +22,20 @@ import IScenePresenter from "../SceneManagement/IScenePresenter";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
+import ILearningSpacePresenter from "../LearningSpaces/ILearningSpacePresenter";
 
 const validKeys = ["w", "a", "s", "d"];
 
 export default class AvatarController implements IAvatarController {
+  learningSpacePresenter: ILearningSpacePresenter; // set by builder
+
   private scenePresenter: IScenePresenter;
   private navigation: INavigation;
   private pathLine: LinesMesh;
 
   private keyMovementTarget: Nullable<Vector3> = null;
   private pointerMovementTarget: Nullable<Vector3> = null;
+  private lastFramePosition: Nullable<Vector3> = null;
 
   constructor(private viewModel: AvatarViewModel) {
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
@@ -45,6 +49,9 @@ export default class AvatarController implements IAvatarController {
     //   this.processKeyboardEvent
     // );
     this.scenePresenter.Scene.onBeforeRenderObservable.add(this.applyInputs);
+    this.scenePresenter.Scene.onAfterRenderObservable.add(
+      this.broadcastNewAvatarPosition
+    );
   }
 
   @bind
@@ -127,6 +134,23 @@ export default class AvatarController implements IAvatarController {
     this.pointerMovementTarget = this.navigation.Plugin.getClosestPoint(
       pointerInfo.pickInfo.pickedPoint.multiplyByFloats(1, 0, 1)
     );
+  }
+
+  @bind
+  private broadcastNewAvatarPosition(): void {
+    if (
+      this.lastFramePosition === null ||
+      Vector3.Distance(
+        this.lastFramePosition,
+        this.viewModel.parentNode.position
+      ) > 0.1
+    ) {
+      this.learningSpacePresenter.broadcastAvatarPosition(
+        this.viewModel.parentNode.position,
+        2
+      );
+      this.lastFramePosition = this.viewModel.parentNode.position;
+    }
   }
 
   private debug_drawPath(target: Vector3): void {

@@ -28,6 +28,7 @@ export default class LearningWorldPort
         adapter.onUserLearningWorldsLoaded(userLearningWorldsTO);
     });
   }
+
   // world
   public onLearningWorldLoaded(learningWorldTO: LearningWorldTO): void {
     this.adapters.forEach((adapter) => {
@@ -52,6 +53,7 @@ export default class LearningWorldPort
         adapter.onLearningSpaceLoaded(learningSpaceTO);
     });
   }
+
   public onLearningSpaceScored(
     learningSpaceScoreTO: LearningSpaceScoreTO
   ): void {

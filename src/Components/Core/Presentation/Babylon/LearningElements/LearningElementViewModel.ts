@@ -7,7 +7,7 @@ import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/Learnin
 
 export default class LearningElementViewModel {
   // constants
-  public readonly iconScaleUpOnHover: number = 1.02;
+  public readonly iconScaleUpOnHover: number = 1.05;
   public readonly iconYOffset: number = 2.3;
   public readonly highlightTimeout: number = 10000; // in ms
 
@@ -30,4 +30,5 @@ export default class LearningElementViewModel {
   // runtime properties
   public hasScored = new Observable<boolean>();
   public isHighlighted = new Observable<boolean>(false);
+  public isInteractable = new Observable<boolean>(false, true);
 }

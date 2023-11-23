@@ -1,3 +1,6 @@
+import mock from "jest-mock-extended/lib/Mock";
+import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import LearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementPresenter";
 import LearningElementViewModel from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementViewModel";
 

@@ -16,9 +16,9 @@ export default interface ILearningWorldPort
   extends IAbstractPort<ILearningWorldAdapter> {
   //userWorlds
   onUserLearningWorldsLoaded(userLearningWorldsTO: UserLearningWorldsTO): void;
+
   // world
   onLearningWorldLoaded(learningWorldTO: LearningWorldTO): void;
-
   onLearningWorldScored(learningWorldScoreTO: LearningWorldScoreTO): void;
 
   // space

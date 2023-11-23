@@ -4,57 +4,73 @@ import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import ILearningElementController from "./ILearningElementController";
 import LearningElementViewModel from "./LearningElementViewModel";
-import { ActionEvent } from "@babylonjs/core/Actions/actionEvent";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IBottomTooltipPresenter from "~ReactComponents/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import ILoadAdaptivityElementUseCase from "../../../Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/ILoadAdaptivityElementUseCase";
+import { Vector3 } from "@babylonjs/core";
 
 export default class LearningElementController
   implements ILearningElementController
 {
-  constructor(private viewModel: LearningElementViewModel) {}
+  private bottomTooltipPresenter: IBottomTooltipPresenter;
+  private proximityToolTipId: number = -1;
+  private hoverToolTipId: number = -1;
+
+  constructor(private viewModel: LearningElementViewModel) {
+    this.bottomTooltipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    );
+
+    this.viewModel.isInteractable.subscribe(this.onAvatarInteractableChange);
+  }
 
   @bind
   pointerOver(): void {
-    this.displayTooltip();
-    this.viewModel.iconMeshes?.forEach((mesh) => {
-      mesh.scaling.scaleInPlace(this.viewModel.iconScaleUpOnHover);
-    });
-  }
-
-  @bind
-  pointerOut(): void {
-    CoreDIContainer.get<IBottomTooltipPresenter>(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
-    ).hide();
-    this.viewModel.iconMeshes?.forEach((mesh) => {
-      mesh.scaling.scaleInPlace(1 / this.viewModel.iconScaleUpOnHover);
-    });
-  }
-
-  @bind
-  picked(event?: ActionEvent | undefined): void {
-    if (this.viewModel.type === LearningElementTypes.adaptivity) {
-      this.startLoadAdaptivityElementUseCase();
-    } else {
-      this.startLoadElementUseCase();
+    if (this.proximityToolTipId === -1 && this.hoverToolTipId === -1) {
+      this.proximityToolTipId = this.displayTooltip();
+      this.scaleUpIcon();
     }
   }
 
   @bind
-  doublePicked(event?: ActionEvent): void {
-    this.displayTooltip();
+  pointerOut(): void {
+    if (this.hoverToolTipId !== -1) {
+      this.resetIconScale();
+      this.bottomTooltipPresenter.hide(this.hoverToolTipId);
+      this.hoverToolTipId = -1;
+    }
   }
 
-  private displayTooltip(): void {
-    CoreDIContainer.get<IBottomTooltipPresenter>(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
-    ).displayLearningElementSummaryTooltip({
-      name: this.viewModel.name,
-      type: this.viewModel.type,
-      points: this.viewModel.value,
-    });
+  @bind
+  picked(): void {
+    if (this.viewModel.isInteractable.Value) {
+      if (this.viewModel.type === LearningElementTypes.adaptivity) {
+        this.startLoadAdaptivityElementUseCase();
+      } else {
+        this.startLoadElementUseCase();
+      }
+    }
+  }
+
+  @bind
+  private onAvatarInteractableChange(isInteractable: boolean): void {
+    if (isInteractable) {
+      this.proximityToolTipId = this.displayTooltip();
+      this.scaleUpIcon();
+    } else if (this.proximityToolTipId !== -1) {
+      this.bottomTooltipPresenter.hide(this.proximityToolTipId);
+      this.resetIconScale();
+    }
+  }
+
+  private displayTooltip(): number {
+    return this.bottomTooltipPresenter.display(
+      this.viewModel.name,
+      this.viewModel.type,
+      this.viewModel.value,
+      this.picked
+    );
   }
 
   private startLoadElementUseCase() {
@@ -67,5 +83,21 @@ export default class LearningElementController
     CoreDIContainer.get<ILoadAdaptivityElementUseCase>(
       USECASE_TYPES.ILoadAdaptivityElementUseCase
     ).executeAsync(this.viewModel.id);
+  }
+
+  private scaleUpIcon(): void {
+    this.viewModel.iconMeshes?.forEach((mesh) => {
+      mesh.scaling = new Vector3(
+        this.viewModel.iconScaleUpOnHover,
+        this.viewModel.iconScaleUpOnHover,
+        this.viewModel.iconScaleUpOnHover
+      );
+    });
+  }
+
+  private resetIconScale(): void {
+    this.viewModel.iconMeshes?.forEach((mesh) => {
+      mesh.scaling = Vector3.One();
+    });
   }
 }

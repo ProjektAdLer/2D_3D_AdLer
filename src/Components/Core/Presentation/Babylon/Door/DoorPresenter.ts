@@ -1,3 +1,4 @@
+import { Vector3 } from "@babylonjs/core";
 import DoorViewModel from "./DoorViewModel";
 import IDoorPresenter from "./IDoorPresenter";
 import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
@@ -9,15 +10,20 @@ export default class DoorPresenter implements IDoorPresenter {
     }
   }
 
+  onAvatarPositionChanged(position: Vector3, interactionRadius: number): void {
+    const distance = Vector3.Distance(position, this.viewModel.position);
+
+    if (distance <= interactionRadius)
+      this.viewModel.isInteractable.Value = true;
+    else this.viewModel.isInteractable.Value = false;
+  }
+
   onLearningSpaceScored(spaceScoreTO: LearningSpaceScoreTO): void {
-    if (spaceScoreTO.spaceID !== this.viewModel.spaceID) return;
     if (
+      spaceScoreTO.spaceID === this.viewModel.spaceID &&
       this.viewModel.isExit &&
       spaceScoreTO.currentScore >= spaceScoreTO.requiredScore
     )
-      this.openDoor();
-  }
-  openDoor(): void {
-    this.viewModel.isOpen.Value = true;
+      this.viewModel.isOpen.Value = true;
   }
 }

@@ -9,8 +9,12 @@ import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
 import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
+import { AdLerUIComponent } from "../../../../Types/ReactTypes";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
-export default function BottomTooltip() {
+export default function BottomTooltip({
+  className,
+}: Readonly<AdLerUIComponent>) {
   const [viewModel] = useBuilder<BottomTooltipViewModel, undefined>(
     BUILDER_TYPES.IBottomTooltipBuilder
   );
@@ -24,8 +28,16 @@ export default function BottomTooltip() {
   if (!show || !type) return null;
 
   return (
-    <div className="absolute flex justify-center w-screen pointer-events-none bottom-2 md:bottom-10 ">
-      <StyledContainer>
+    <div
+      className={tailwindMerge(
+        className,
+        "absolute flex justify-center w-screen bottom-2 md:bottom-10"
+      )}
+    >
+      <StyledContainer
+        className="cursor-pointer"
+        onClick={viewModel.onClickCallback.Value} // didn't use useObservable because react has problems with functions in states
+      >
         <div className="flex items-center gap-1 p-2 font-bold rounded-lg lg:p-4 text-adlerdarkblue text-md lg:text-2xl bg-buttonbgblue">
           {type !== LearningElementTypes.notAnElement &&
             getLearningElementIcon(type)}

@@ -11,11 +11,16 @@ import IStandInDecorationBuilder from "../StandInDecoration/IStandInDecorationBu
 import IDoorBuilder from "../Door/IDoorBuilder";
 import IWindowBuilder from "../Window/IWindowBuilder";
 import SeededRNG from "../../Utils/SeededRNG";
+import { Vector3 } from "@babylonjs/core/Maths/math";
+import IDoorPresenter from "../Door/IDoorPresenter";
+import ILearningElementPresenter from "../LearningElements/ILearningElementPresenter";
 
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
   private director: IPresentationDirector;
   private decorationBuilder: IDecorationBuilder;
+  private doorPresenters: IDoorPresenter[] = [];
+  private elmentPresenters: ILearningElementPresenter[] = [];
 
   constructor(private viewModel: LearningSpaceViewModel) {
     if (!this.viewModel) {
@@ -39,10 +44,20 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     await this.director.buildAsync(this.decorationBuilder);
   }
 
+  broadcastAvatarPosition(position: Vector3, interactionRadius: number): void {
+    for (const doorPresenter of this.doorPresenters) {
+      doorPresenter.onAvatarPositionChanged(position, interactionRadius);
+    }
+    for (const elementPresenter of this.elmentPresenters) {
+      elementPresenter.onAvatarPositionChanged(position, interactionRadius);
+    }
+  }
+
   private async fillLearningElementSlots(
     spaceTO: LearningSpaceTO
   ): Promise<void> {
     const loadingCompletePromises: Promise<void>[] = [];
+    const elementBuilders: ILearningElementBuilder[] = [];
 
     for (let i = 0; i < spaceTO.elements.length; i++) {
       let elementPosition = this.viewModel.elementPositions.shift()!;
@@ -79,9 +94,13 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         elementBuilder.elementPosition = elementPosition;
 
         loadingCompletePromises.push(this.director.buildAsync(elementBuilder));
+        elementBuilders.push(elementBuilder);
       }
     }
     await Promise.all(loadingCompletePromises);
+
+    for (const elementBuilder of elementBuilders)
+      this.elmentPresenters.push(elementBuilder.getPresenter());
   }
 
   private async createExitDoor(spaceTO: LearningSpaceTO): Promise<void> {
@@ -95,7 +114,10 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     exitDoorBuilder.spaceID = this.viewModel.id;
     exitDoorBuilder.isExit = true;
     exitDoorBuilder.isOpen = spaceTO.currentScore >= spaceTO.requiredScore;
+
     await this.director.buildAsync(exitDoorBuilder);
+
+    this.doorPresenters.push(exitDoorBuilder.getPresenter());
   }
 
   private async createEntryDoor(): Promise<void> {
@@ -109,7 +131,10 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     entryDoorBuilder.spaceID = this.viewModel.id;
     entryDoorBuilder.isExit = false;
     entryDoorBuilder.isOpen = false;
+
     await this.director.buildAsync(entryDoorBuilder);
+
+    this.doorPresenters.push(entryDoorBuilder.getPresenter());
   }
 
   private async createWindows(): Promise<void> {

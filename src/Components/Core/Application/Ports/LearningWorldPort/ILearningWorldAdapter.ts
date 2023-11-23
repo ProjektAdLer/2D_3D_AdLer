@@ -9,6 +9,7 @@ import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
+import { Vector3 } from "@babylonjs/core";
 
 /**
  * This interface is used to register with the WorldPort and defines all the methods that can be called by the WorldPort.

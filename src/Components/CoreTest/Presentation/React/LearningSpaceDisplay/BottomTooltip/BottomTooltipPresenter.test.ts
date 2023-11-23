@@ -5,6 +5,7 @@ import ScorePanelViewModel from "../../../../../Core/Presentation/React/Learning
 describe("BottomTooltipPresenter", () => {
   let systemUnderTest: IBottomTooltipPresenter;
   const vm = new ScorePanelViewModel();
+
   beforeEach(() => {
     systemUnderTest = new BottomTooltipPresenter(vm);
   });
@@ -15,21 +16,29 @@ describe("BottomTooltipPresenter", () => {
     expect(vm.show.Value).toBe(false);
   });
 
-  test("should set the Text of Panel and show it", () => {
-    systemUnderTest.displayLearningElementSummaryTooltip({
-      id: 1,
-      name: "Test",
-      elementData: {
-        type: "text",
-      },
-    });
-    expect(vm.text.Value).toBe("Test");
+  test("display should set the value of the viewModel when called", () => {
+    const text = "test";
+    const iconType = "test";
+    const points = 1;
+    const onClickCallback = () => {};
+
+    systemUnderTest.display(text, iconType, points, onClickCallback);
+
     expect(vm.show.Value).toBe(true);
+    expect(vm.text.Value).toBe(text);
+    expect(vm.iconType.Value).toBe(iconType);
+    expect(vm.points.Value).toBe(points);
+    expect(vm.showPoints.Value).toBe(true);
+    expect(vm.onClickCallback.Value).toBe(onClickCallback);
   });
-  test("displayExitQueryTooltip should set text and type correctly ", () => {
-    systemUnderTest.displayDoorTooltip(false);
-    expect(vm.text.Value).toBe("Eingangstüre");
-    expect(vm.iconType.Value).toBe("notAnElement");
-    expect(vm.show.Value).toBe(true);
+
+  test("display sets showPoints to false when points is undefined", () => {
+    const text = "test";
+    const iconType = "test";
+    const onClickCallback = () => {};
+
+    systemUnderTest.display(text, iconType, undefined, onClickCallback);
+
+    expect(vm.showPoints.Value).toBe(false);
   });
 });

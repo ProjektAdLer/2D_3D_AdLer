@@ -40,20 +40,9 @@ export default class LearningElementView {
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
 
-    viewModel.hasScored.subscribe(() => {
-      this.changeHighlightColor(
-        this.viewModel.hasScored.Value ? Color3.Green() : Color3.Red()
-      );
-    });
-    viewModel.isHighlighted.subscribe(() => {
-      if (this.viewModel.isHighlighted.Value) {
-        this.changeHighlightColor(Color3.Purple());
-      } else {
-        this.changeHighlightColor(
-          this.viewModel.hasScored.Value ? Color3.Green() : Color3.Red()
-        );
-      }
-    });
+    viewModel.hasScored.subscribe(this.updateHighlight);
+    viewModel.isHighlighted.subscribe(this.updateHighlight);
+    viewModel.isInteractable.subscribe(this.updateHighlight);
   }
 
   public async setupLearningElement(): Promise<void> {
@@ -107,12 +96,6 @@ export default class LearningElementView {
         this.controller.pointerOut
       )
     );
-    actionManager.registerAction(
-      new ExecuteCodeAction(
-        ActionManager.OnDoublePickTrigger,
-        this.controller.doublePicked
-      )
-    );
   }
 
   private addMeshesToHighlightLayer(): void {
@@ -146,7 +129,6 @@ export default class LearningElementView {
     }
   }
 
-  @bind
   private changeHighlightColor(color: Color3): void {
     this.viewModel.modelMeshes?.forEach((mesh) => {
       this.scenePresenter.HighlightLayer.removeMesh(mesh);
@@ -156,5 +138,19 @@ export default class LearningElementView {
       this.scenePresenter.HighlightLayer.removeMesh(mesh);
       this.scenePresenter.HighlightLayer.addMesh(mesh, color);
     });
+  }
+
+  @bind
+  private updateHighlight(): void {
+    let highlightColor: Color3;
+
+    if (this.viewModel.isHighlighted.Value) highlightColor = Color3.Purple();
+    else if (this.viewModel.hasScored.Value) highlightColor = Color3.Green();
+    else highlightColor = Color3.Red();
+
+    if (this.viewModel.isInteractable.Value)
+      highlightColor = highlightColor.add(new Color3(0.5, 0.5, 0.5));
+
+    this.changeHighlightColor(highlightColor);
   }
 }

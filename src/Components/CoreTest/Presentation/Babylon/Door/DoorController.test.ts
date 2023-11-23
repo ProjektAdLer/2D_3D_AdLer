@@ -34,6 +34,9 @@ describe("DoorController", () => {
   beforeEach(() => {
     viewModel = new DoorViewModel();
     systemUnderTest = new DoorController(viewModel);
+
+    bottomTooltipPresenterMock.display.mockClear();
+    bottomTooltipPresenterMock.hide.mockClear();
   });
 
   afterAll(() => {
@@ -43,18 +46,28 @@ describe("DoorController", () => {
   test("pointerOver calls BottomTooltipPresenter.displayExitQueryTooltip", () => {
     systemUnderTest.pointerOver();
 
-    expect(bottomTooltipPresenterMock.displayDoorTooltip).toHaveBeenCalledTimes(
-      1
-    );
+    expect(bottomTooltipPresenterMock.display).toHaveBeenCalledTimes(1);
   });
 
-  test("pointerOut calls BottomTooltipPresenter.hide", () => {
+  test("pointerOut calls BottomTooltipPresenter.hide when hoverTooltipId is set", () => {
+    systemUnderTest["hoverToolTipId"] = 1; // set tooltip id to non-default value
+
     systemUnderTest.pointerOut();
 
     expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
   });
 
-  test("picked calls getLearningSpacePrecursorAndSuccessorUseCase.execute when pointerType is mouse", () => {
+  test("pointerOut resets hoverToolTipId to -1 when hoverTooltipId is set", () => {
+    systemUnderTest["hoverToolTipId"] = 1; // set tooltip id to non-default value
+
+    systemUnderTest.pointerOut();
+
+    expect(systemUnderTest["hoverToolTipId"]).toBe(-1);
+  });
+
+  test("picked calls getLearningSpacePrecursorAndSuccessorUseCase.execute when isInteractable is set to true", () => {
+    systemUnderTest["viewModel"].isInteractable.Value = true;
+
     systemUnderTest.picked();
 
     expect(
@@ -62,11 +75,37 @@ describe("DoorController", () => {
     ).toHaveBeenCalledTimes(1);
   });
 
-  test("double picked displays the bottom tooltip", () => {
-    systemUnderTest.doublePicked();
+  test("picked calls ExitModalPresenter.open when isInteractable is set to true", () => {
+    systemUnderTest["viewModel"].isInteractable.Value = true;
 
-    expect(bottomTooltipPresenterMock.displayDoorTooltip).toHaveBeenCalledTimes(
-      1
-    );
+    systemUnderTest.picked();
+
+    expect(exitModalPresenterMock.open).toHaveBeenCalledTimes(1);
+  });
+
+  test("onAvatarInteractableChange calls BottomTooltipPresenter.display when isInteractable is set to true", () => {
+    systemUnderTest["viewModel"].isInteractable.Value = false;
+
+    systemUnderTest["onAvatarInteractableChange"](true);
+
+    expect(bottomTooltipPresenterMock.display).toHaveBeenCalledTimes(1);
+  });
+
+  test("onAvatarInteractableChange calls BottomTooltipPresenter.hide when isInteractable is set to false and proximityTooltipId is set", () => {
+    systemUnderTest["proximityToolTipId"] = 1; // set tooltip id to non-default value
+    systemUnderTest["viewModel"].isInteractable.Value = false;
+
+    systemUnderTest["onAvatarInteractableChange"](false);
+
+    expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
+  });
+
+  test("onAvatarInteractableChange resets proximityTooltipId to -1 when isInteractable is set to false and proximityTooltipId is set", () => {
+    systemUnderTest["proximityToolTipId"] = 1; // set tooltip id to non-default value
+    systemUnderTest["viewModel"].isInteractable.Value = false;
+
+    systemUnderTest["onAvatarInteractableChange"](false);
+
+    expect(systemUnderTest["proximityToolTipId"]).toBe(-1);
   });
 });
