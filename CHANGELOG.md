@@ -10,11 +10,11 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
--
+- background-color to SideBar
 
 ### Changed
 
--
+- responsive styling of LoadingScreen
 
 ### Deprecated
 

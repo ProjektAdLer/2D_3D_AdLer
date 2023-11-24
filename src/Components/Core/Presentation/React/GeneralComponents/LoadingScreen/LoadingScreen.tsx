@@ -20,20 +20,20 @@ export default function LoadingScreen() {
   return (
     <div className="absolute z-[20000]">
       <main className="grid w-screen h-screen grid-cols-6 grid-rows-5 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
-        <section className="z-20 flex items-center justify-center col-span-4 col-start-2 row-span-3 row-start-1 mt-10">
+        <section className="z-20 flex items-center justify-center col-span-4 col-start-2 row-span-2 row-start-1 mt-10 lg:row-span-3">
           <img
-            className="w-32 m-4 xs:w-36 md:w-64 lg:w-72 xl:w-96 animate-wiggle"
+            className="w-full m-4 xs:w-36 md:w-64 lg:w-72 xl:w-96 animate-wiggle"
             src={logo}
             alt="AdlerEngine Logo"
           />
         </section>
-        <section className="z-10 flex flex-col items-center justify-center col-span-2 col-start-3 row-span-1 row-start-4 mb-10 text-lg font-medium rounded-lg justify-self-center w-96 h-1/3 bg-buttonbgblue text-adlerdarkblue lg:text-2xl">
+        <section className="z-10 flex flex-col items-center self-center justify-center col-span-4 col-start-2 row-span-1 row-start-3 p-4 mb-10 text-lg font-medium rounded-lg lg:self-start lg:p-0 lg:col-span-2 lg:col-start-3 lg:row-start-4 justify-self-center lg:w-96 h-1/3 bg-buttonbgblue text-adlerdarkblue lg:text-2xl">
           {viewModel.loadStep.Value && <p>{viewModel.loadStep.Value}</p>}
         </section>
 
         {!canClose && (
           <section className="self-end col-span-2 col-start-3 row-start-4 justify-self-center">
-            <div className="flex w-full border-4 border-white rounded-lg">
+            <div className="flex w-full scale-50 border-4 border-white rounded-lg lg:scale-100">
               <div className="w-10 h-10 m-1 animate-loadtileone bg-adlerdarkblue"></div>
               <div className="w-10 h-10 m-1 animate-loadtiletwo bg-adlerdarkblue"></div>
               <div className="w-10 h-10 m-1 animate-loadtilethree bg-adlerdarkblue"></div>
@@ -48,7 +48,7 @@ export default function LoadingScreen() {
           </section>
         )}
         {canClose && (
-          <section className="self-end col-span-2 col-start-3 row-start-4 justify-self-center">
+          <section className="self-center col-span-4 col-start-2 row-start-4 lg:self-end lg:col-span-2 lg:col-start-3 justify-self-center">
             <StyledButton
               shape={"freefloatcenter"}
               onClick={() => controller.closeLoadingScreen()}
@@ -59,7 +59,7 @@ export default function LoadingScreen() {
           </section>
         )}
 
-        <section className="flex items-center self-center col-span-4 col-start-2 row-start-5 justify-self-center">
+        <section className="flex items-center self-center col-span-6 col-start-1 row-start-5 lg:col-span-4 lg:col-start-2 justify-self-center">
           <p className="p-4 text-lg font-medium text-center lg:text-xl text-adlerdarkblue">
             Du willst mehr über das Projekt AdLer erfahren? Dann schau doch mal
             auf unserer{" "}
