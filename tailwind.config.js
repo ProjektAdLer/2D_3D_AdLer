@@ -180,6 +180,7 @@ module.exports = {
         adlerbggradientfrom: "#a1c8e5",
         adlerbggradientto: "#e2eaf2",
         nodehandlecolor: "#e9d6b3",
+        adleroceanblue: "#45a0e5",
         // Neue Farben, die noch nicht im Wiki dokumentiert sind, bitte unter diesem Kommentar einfügen
       },
       gridTemplateRows: {

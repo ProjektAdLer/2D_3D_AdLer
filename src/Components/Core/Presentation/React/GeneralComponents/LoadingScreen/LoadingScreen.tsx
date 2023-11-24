@@ -20,14 +20,14 @@ export default function LoadingScreen() {
   return (
     <div className="absolute z-[20000]">
       <main className="grid w-screen h-screen grid-cols-6 grid-rows-5 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
-        <section className="z-20 flex items-center justify-center col-span-4 col-start-2 row-span-3 row-start-1 mt-24">
+        <section className="z-20 flex items-center justify-center col-span-4 col-start-2 row-span-3 row-start-1 mt-10">
           <img
             className="w-32 m-4 xs:w-36 md:w-64 lg:w-72 xl:w-96 animate-wiggle"
             src={logo}
             alt="AdlerEngine Logo"
           />
         </section>
-        <section className="z-10 flex flex-col items-center justify-center col-span-4 col-start-2 row-span-1 row-start-4 mb-10">
+        <section className="z-10 flex flex-col items-center justify-center col-span-2 col-start-3 row-span-1 row-start-4 mb-10 text-lg font-medium rounded-lg justify-self-center w-96 h-1/3 bg-buttonbgblue text-adlerdarkblue lg:text-2xl">
           {viewModel.loadStep.Value && <p>{viewModel.loadStep.Value}</p>}
         </section>
 
@@ -52,15 +52,15 @@ export default function LoadingScreen() {
             <StyledButton
               shape={"freefloatcenter"}
               onClick={() => controller.closeLoadingScreen()}
-              className="p-5"
+              className="p-5 scale-125 lg:scale-150"
             >
               Weiter zum Lernraum
             </StyledButton>
           </section>
         )}
 
-        <section className="flex items-center self-center col-span-4 col-start-2 row-start-5 rounded-lg bg-buttonbgblue justify-self-center">
-          <p className="p-4 text-xl font-medium text-center text-adlerdarkblue">
+        <section className="flex items-center self-center col-span-4 col-start-2 row-start-5 justify-self-center">
+          <p className="p-4 text-lg font-medium text-center lg:text-xl text-adlerdarkblue">
             Du willst mehr über das Projekt AdLer erfahren? Dann schau doch mal
             auf unserer{" "}
             <a
@@ -68,9 +68,9 @@ export default function LoadingScreen() {
               href="https://projekt-adler.eu"
               title="AdLer Projekthomepage https://projekt-adler.eu"
               rel="noreferrer"
-              className="underline text-nodehandlecolor"
+              className="underline text-adleroceanblue hover:text-nodehandlecolor"
             >
-              Projekt Homepage
+              Projekt-Homepage
             </a>{" "}
             vorbei.
           </p>
