@@ -46,7 +46,9 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
 
   if (showMinimizedModal)
     return (
-      <div>
+      <div className="relative">
+        <div className="absolute z-50 w-5 h-5 rounded-full -right-[4.5rem] -top-20 animate-ping bg-nodehandlecolor pointer-events-none"></div>
+        <div className="absolute z-50 w-5 h-5 rounded-full -right-[4.5rem] -top-20 bg-nodehandlecolor pointer-events-none"></div>
         <StyledButton
           shape="freefloatleft"
           onClick={() => controller.minimizeOrMaximizeBreakNotification()}
