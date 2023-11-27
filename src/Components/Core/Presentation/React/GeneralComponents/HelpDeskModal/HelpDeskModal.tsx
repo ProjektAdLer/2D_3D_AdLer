@@ -9,11 +9,20 @@ import tailwindMerge from "../../../Utils/TailwindMerge";
 import TutorialPdfButton from "../Tutorial/TutorialPdfButton";
 import LogExportButton from "~ReactComponents/ReactRelated/ReactBaseComponents/LogExportButton";
 import BugReportButton from "~ReactComponents/ReactRelated/ReactBaseComponents/BugReportButton";
+import SCENE_TYPES, {
+  ScenePresenterFactory,
+} from "~DependencyInjection/Scenes/SCENE_TYPES";
+import LearningSpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/LearningSpaceSceneDefinition";
+import { useInjection } from "inversify-react";
 
 export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
   const [viewModel] = useBuilder<HelpDeskModalViewModel, undefined>(
     BUILDER_TYPES.IHelpDeskModalBuilder
   );
+  const scenePresenter = useInjection<ScenePresenterFactory>(
+    SCENE_TYPES.ScenePresenterFactory
+  )(LearningSpaceSceneDefinition);
+
   const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
 
   const closeModal = useCallback(() => {
@@ -30,6 +39,15 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
         showModal={isOpen}
         className={tailwindMerge(className, "p-5 rounded-lg")}
       >
+        <button
+          className="bg-red-600"
+          onClick={() => {
+            scenePresenter.toggleInspector({ overlay: true });
+          }}
+        >
+          debug_inspector
+        </button>
+
         <p className="m-2 my-4 font-bold text-adlerdarkblue">
           Falls Probleme mit der AdLer Engine auftreten sollten oder du etwas
           nicht verstehst, kannst du hier:

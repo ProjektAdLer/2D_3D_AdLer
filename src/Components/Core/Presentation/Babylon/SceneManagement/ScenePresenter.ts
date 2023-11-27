@@ -8,6 +8,7 @@ import {
   SceneOptions,
   Engine,
   HighlightLayer,
+  IInspectorOptions,
 } from "@babylonjs/core";
 import { injectable } from "inversify";
 import AbstractSceneDefinition from "./Scenes/AbstractSceneDefinition";
@@ -17,6 +18,8 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import { Inspector } from "@babylonjs/inspector";
+import { config } from "src/config";
 
 /**
  * @description This class is responsible for creating the Scene and managing the NavMesh navigation.
@@ -95,6 +98,13 @@ export default class ScenePresenter implements IScenePresenter {
 
   startRenderLoop(): void {
     this.Scene.getEngine().runRenderLoop(this.renderFunction);
+  }
+
+  toggleInspector(options?: IInspectorOptions): void {
+    if (config.isDebug) {
+      if (Inspector.IsVisible) Inspector.Hide();
+      else Inspector.Show(this.Scene, options ?? {});
+    }
   }
 
   @bind
