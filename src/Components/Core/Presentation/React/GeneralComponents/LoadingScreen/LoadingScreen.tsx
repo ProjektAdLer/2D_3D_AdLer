@@ -66,7 +66,7 @@ export default function LoadingScreen() {
             <a
               target="_blank"
               href="https://projekt-adler.eu"
-              title="AdLer Projekthomepage https://projekt-adler.eu"
+              title="Dieser Link öffnet die AdLer Projekthomepage https://projekt-adler.eu in einem neuen Tab."
               rel="noreferrer"
               className="underline text-adleroceanblue hover:text-nodehandlecolor"
             >
