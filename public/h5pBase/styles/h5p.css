@@ -24,7 +24,14 @@
   font-style: normal;
   font-display: block;
 }
-
+[role="button"].h5p-control.h5p-fullscreen {
+  width: 0px !important;
+  height: 0px !important;
+}
+[role="button"].h5p-my-fullscreen-button-enter {
+  width: 0px !important;
+  height: 0px !important;
+}
 html.h5p-iframe,
 html.h5p-iframe > body {
   font-family: Sans-Serif; /* Use the browser's default sans-serif font. (Since Heletica doesn't look nice on Windows, and Arial on OS X.) */

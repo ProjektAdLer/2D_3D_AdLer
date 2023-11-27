@@ -169,6 +169,7 @@ module.exports = {
       colors: {
         babylonbg: "#33334d", //Babylon Default Hintergrundfarbe
         blacktrans: "rgba(0,0,0,0.5)",
+        whitetrans: "rgba(255,255,255,0.3)",
         adlerblue: "#a1c8e5",
         adlerdarkblue: "rgb(23,45,77)" /*#172d4d*/,
         adlergreen: "#59b347",
@@ -180,6 +181,7 @@ module.exports = {
         adlerbggradientfrom: "#a1c8e5",
         adlerbggradientto: "#e2eaf2",
         nodehandlecolor: "#e9d6b3",
+        adleroceanblue: "#45a0e5",
         // Neue Farben, die noch nicht im Wiki dokumentiert sind, bitte unter diesem Kommentar einfügen
       },
       gridTemplateRows: {
