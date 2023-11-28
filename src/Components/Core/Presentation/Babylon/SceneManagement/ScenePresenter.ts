@@ -19,7 +19,6 @@ import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILogge
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import { Inspector } from "@babylonjs/inspector";
-import { config } from "src/config";
 
 /**
  * @description This class is responsible for creating the Scene and managing the NavMesh navigation.
@@ -101,10 +100,8 @@ export default class ScenePresenter implements IScenePresenter {
   }
 
   toggleInspector(options?: IInspectorOptions): void {
-    if (config.isDebug) {
-      if (Inspector.IsVisible) Inspector.Hide();
-      else Inspector.Show(this.Scene, options ?? {});
-    }
+    if (Inspector.IsVisible) Inspector.Hide();
+    else Inspector.Show(this.Scene, options ?? {});
   }
 
   @bind
