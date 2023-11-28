@@ -32,7 +32,7 @@ export default function LoadingScreen() {
         </section>
 
         {!canClose && (
-          <section className="self-end col-span-2 col-start-3 row-start-4 justify-self-center">
+          <section className="self-center col-span-2 col-start-3 row-start-4 lg:self-end justify-self-center">
             <div className="flex w-full scale-50 border-4 border-white rounded-lg lg:scale-100">
               <div className="w-10 h-10 m-1 animate-loadtileone bg-adlerdarkblue"></div>
               <div className="w-10 h-10 m-1 animate-loadtiletwo bg-adlerdarkblue"></div>
