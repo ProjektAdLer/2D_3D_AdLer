@@ -10,6 +10,10 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import SCENE_TYPES, {
+  ScenePresenterFactory,
+} from "~DependencyInjection/Scenes/SCENE_TYPES";
+import LearningSpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/LearningSpaceSceneDefinition";
 
 @injectable()
 export default class ReactEntry implements IReactEntry {
@@ -64,6 +68,16 @@ export default class ReactEntry implements IReactEntry {
           ).getAllEntities();
           const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
           logger.log(LogLevelTypes.DEBUG, JSON.stringify(entityMap));
+        }
+        if (e.ctrlKey && e.key === "i") {
+          try {
+            const scenePresenter = CoreDIContainer.get<ScenePresenterFactory>(
+              SCENE_TYPES.ScenePresenterFactory
+            )(LearningSpaceSceneDefinition);
+            scenePresenter?.toggleInspector({ overlay: true });
+          } catch (error) {
+            console.log(error);
+          }
         }
       };
     }
