@@ -29,7 +29,7 @@ export default function LearningSpace() {
           engineOptions={{ stencil: true }}
         />
         <SideBar className="z-10 col-span-3 col-start-1 row-start-1 m-2 pointer-events-none" />
-        <BottomTooltip className="z-10 items-start justify-center col-span-5 col-start-3 row-start-6" />
+        <BottomTooltip className="z-10 items-start justify-center col-start-2 col-span-7 lg:col-span-5 lg:col-start-3 row-start-6" />
         <AdaptivityElementDialogContainer className="z-10" />
         <LearningElementModal className="z-10" />
         <ExitModal className="z-20" />

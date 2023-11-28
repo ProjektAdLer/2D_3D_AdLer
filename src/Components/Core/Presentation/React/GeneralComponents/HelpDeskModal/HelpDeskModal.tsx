@@ -40,13 +40,11 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
         className={tailwindMerge(className, "p-5 rounded-lg")}
       >
         <button
-          className="bg-red-600"
+          className="fixed bottom-0 left-0 w-10 h-10"
           onClick={() => {
             scenePresenter.toggleInspector({ overlay: true });
           }}
-        >
-          debug_inspector
-        </button>
+        ></button>
 
         <p className="m-2 my-4 font-bold text-adlerdarkblue">
           Falls Probleme mit der AdLer Engine auftreten sollten oder du etwas

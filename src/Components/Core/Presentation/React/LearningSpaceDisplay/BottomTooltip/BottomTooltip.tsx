@@ -31,7 +31,7 @@ export default function BottomTooltip({
     <div
       className={tailwindMerge(
         className,
-        "flex justify-center w-full bottom-2 md:bottom-10"
+        "flex justify-center w-full bottom-2 md:bottom-10 z-40"
       )}
     >
       <StyledContainer
