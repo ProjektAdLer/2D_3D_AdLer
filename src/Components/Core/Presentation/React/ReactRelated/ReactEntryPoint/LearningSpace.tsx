@@ -29,15 +29,15 @@ export default function LearningSpace() {
           engineOptions={{ stencil: true }}
         />
         <SideBar className="z-10 col-span-3 col-start-1 row-start-1 m-2 pointer-events-none" />
-        <BottomTooltip className="z-10 items-start justify-center col-start-2 col-span-7 lg:col-span-5 lg:col-start-3 row-start-6" />
+        <BottomTooltip className="z-10 items-start justify-center col-span-7 col-start-2 row-start-6 lg:col-span-5 lg:col-start-3" />
         <AdaptivityElementDialogContainer className="z-10" />
         <LearningElementModal className="z-10" />
         <ExitModal className="z-20" />
+        <BreakTimeNotification className="z-10" />
+        <LearningSpaceGoalPanel />
         {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
         {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
         <NotificationManager className="z-50" />
-        <BreakTimeNotification />
-        <LearningSpaceGoalPanel />
       </div>
     </React.Fragment>
   );
