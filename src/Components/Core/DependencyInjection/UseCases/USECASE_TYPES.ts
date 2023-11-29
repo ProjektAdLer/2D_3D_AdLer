@@ -44,6 +44,7 @@ const USECASE_TYPES = {
   ),
   IScoreAdaptivityElementUseCase: Symbol("IScoreAdaptivityElementUseCase"),
   IDisplayLearningElementUseCase: Symbol("IDisplayLearningElementUseCase"),
+  ILogoutUseCase: Symbol("ILogoutUseCase"),
 };
 
 export default USECASE_TYPES;
