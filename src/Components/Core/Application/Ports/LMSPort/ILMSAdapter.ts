@@ -1,3 +1,4 @@
 export default interface ILMSAdapter {
-  onLoginSuccessful(): void;
+  onLoginSuccessful?(): void;
+  onLogoutSuccessful?(): void;
 }

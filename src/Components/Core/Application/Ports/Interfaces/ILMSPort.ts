@@ -3,4 +3,5 @@ import { IAbstractPort } from "./IAbstractPort";
 
 export default interface ILMSPort extends IAbstractPort<ILMSAdapter> {
   onLoginSuccessful(): void;
+  onLogoutSuccessful(): void;
 }

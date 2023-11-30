@@ -10,7 +10,17 @@ export default class LMSPort
 {
   onLoginSuccessful(): void {
     this.adapters.forEach((adapter) => {
-      adapter.onLoginSuccessful();
+      if (adapter.onLoginSuccessful) {
+        adapter.onLoginSuccessful();
+      }
+    });
+  }
+
+  onLogoutSuccessful(): void {
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLogoutSuccessful) {
+        adapter.onLogoutSuccessful();
+      }
     });
   }
 }
