@@ -17,7 +17,9 @@ import tailwindMerge from "../../../Utils/TailwindMerge";
 /**
  * React Component that displays a login button. When clicked, a modal will be overlayed.
  */
-export default function LoginComponent({ className }: AdLerUIComponent) {
+export default function LoginComponent({
+  className,
+}: Readonly<AdLerUIComponent>) {
   const [viewModel, controller] = useBuilder<
     LoginComponentViewModel,
     LoginComponentController
@@ -40,21 +42,27 @@ export default function LoginComponent({ className }: AdLerUIComponent) {
   if (!controller || !viewModel) return null;
 
   return (
-    <React.Fragment>
+    <div className={tailwindMerge(className)}>
       <StyledButton
-        className={tailwindMerge(className)}
         color={userLoggedIn ? "success" : "default"}
         onClick={() => setModalVisible(true)}
         data-testid="login-button"
       >
         <img src={moodleIcon} alt="Moodle-Icon"></img>
       </StyledButton>
+
+      {userLoggedIn && (
+        <StyledButton onClick={() => controller.logout()} data-testid="logout">
+          debug_logout
+        </StyledButton>
+      )}
+
       {createPortal(
         <div className="z-10">
           <LoginModal viewModel={viewModel} controller={controller} />
         </div>,
         document.body
       )}
-    </React.Fragment>
+    </div>
   );
 }

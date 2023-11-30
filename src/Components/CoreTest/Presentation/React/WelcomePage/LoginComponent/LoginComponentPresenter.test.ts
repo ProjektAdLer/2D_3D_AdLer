@@ -1,9 +1,8 @@
 import LoginComponentPresenter from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentPresenter";
-import ILoginComponentPresenter from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/ILoginComponentPresenter";
 import LoginComponentViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentViewModel";
 
 describe("LoginComponentPresenter", () => {
-  let systemUnderTest: ILoginComponentPresenter;
+  let systemUnderTest: LoginComponentPresenter;
   let vm: LoginComponentViewModel;
 
   beforeEach(() => {
@@ -19,5 +18,15 @@ describe("LoginComponentPresenter", () => {
   test("onLoginSuccessful sets modalVisible in the VM to false", () => {
     systemUnderTest.onLoginSuccessful();
     expect(vm.modalVisible.Value).toBe(false);
+  });
+
+  test("onLogoutSuccessful sets userLoggedIn in VM to false", () => {
+    systemUnderTest.onLogoutSuccessful();
+    expect(vm.userLoggedIn.Value).toBe(false);
+  });
+
+  test("onLogoutSuccessful sets modalVisible in the VM to true", () => {
+    systemUnderTest.onLogoutSuccessful();
+    expect(vm.modalVisible.Value).toBe(true);
   });
 });

@@ -2,11 +2,26 @@ import { waitFor } from "@testing-library/react";
 import LoginUseCase from "../../../../../Core/Application/UseCases/Login/LoginUseCase";
 import LoginComponentController from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentController";
 import LoginComponentViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentViewModel";
+import LogoutUseCase from "../../../../../Core/Application/UseCases/Logout/LogoutUseCase";
+import { mock } from "jest-mock-extended";
+import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
+import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 
-const executeAsyncMock = jest.spyOn(LoginUseCase.prototype, "executeAsync");
+const loginUseCaseMock = mock<LoginUseCase>();
+const logoutUseCaseMock = mock<LogoutUseCase>();
 
 describe("LoginComponentController", () => {
   let systemUnderTest: LoginComponentController;
+
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+    CoreDIContainer.rebind(USECASE_TYPES.ILoginUseCase).toConstantValue(
+      loginUseCaseMock
+    );
+    CoreDIContainer.rebind(USECASE_TYPES.ILogoutUseCase).toConstantValue(
+      logoutUseCaseMock
+    );
+  });
 
   beforeEach(() => {
     systemUnderTest = new LoginComponentController(
@@ -14,25 +29,35 @@ describe("LoginComponentController", () => {
     );
   });
 
+  afterAll(() => {
+    CoreDIContainer.restore();
+  });
+
   test("login calls the use case", () => {
-    executeAsyncMock.mockResolvedValueOnce();
+    loginUseCaseMock.executeAsync.mockResolvedValueOnce();
 
     systemUnderTest.login("username", "password");
 
-    expect(executeAsyncMock).toHaveBeenCalledTimes(1);
-    expect(executeAsyncMock).toHaveBeenCalledWith({
+    expect(loginUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
+    expect(loginUseCaseMock.executeAsync).toHaveBeenCalledWith({
       username: "username",
       password: "password",
     });
   });
 
   test("login sets loginFailed to false when the use case rejects", () => {
-    executeAsyncMock.mockRejectedValueOnce("error");
+    loginUseCaseMock.executeAsync.mockRejectedValueOnce("error");
 
     systemUnderTest.login("username", "password");
 
     waitFor(() => {
       expect(systemUnderTest["viewModel"].loginFailed.Value).toBe(true);
     });
+  });
+
+  test("logout calls the use case", () => {
+    systemUnderTest.logout();
+
+    expect(logoutUseCaseMock.execute).toHaveBeenCalledTimes(1);
   });
 });

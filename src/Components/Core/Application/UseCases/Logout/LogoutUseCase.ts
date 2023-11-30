@@ -5,13 +5,16 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "../../../Domain/Types/LogLevelTypes";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import type ILMSPort from "../../Ports/Interfaces/ILMSPort";
 
 @injectable()
 export default class LogoutUseCase implements ILogoutUseCase {
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
-    @inject(CORE_TYPES.ILogger) private logger: ILoggerPort
+    @inject(CORE_TYPES.ILogger) private logger: ILoggerPort,
+    @inject(PORT_TYPES.ILMSPort) private lmsPort: ILMSPort
   ) {}
 
   execute(): void {
@@ -26,5 +29,7 @@ export default class LogoutUseCase implements ILogoutUseCase {
       LogLevelTypes.INFO,
       "LoginUseCase: User logged out successfully"
     );
+
+    this.lmsPort.onLogoutSuccessful();
   }
 }
