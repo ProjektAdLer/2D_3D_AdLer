@@ -69,7 +69,7 @@ export default class ReactEntry implements IReactEntry {
           const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
           logger.log(LogLevelTypes.DEBUG, JSON.stringify(entityMap));
         }
-        if (e.ctrlKey && e.key === "i") {
+        if (e.ctrlKey && e.altKey && e.key === "i") {
           try {
             const scenePresenter = CoreDIContainer.get<ScenePresenterFactory>(
               SCENE_TYPES.ScenePresenterFactory
