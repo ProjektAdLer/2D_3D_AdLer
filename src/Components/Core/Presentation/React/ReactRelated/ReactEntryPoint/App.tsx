@@ -11,6 +11,7 @@ import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/Get
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import InternetLossModal from "~ReactComponents/GeneralComponents/InternetLossModal/InternetLossModal";
 import LoadingScreen from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreen";
+import "src/localize/i18next-config";
 
 export interface IAppProps {}
 
