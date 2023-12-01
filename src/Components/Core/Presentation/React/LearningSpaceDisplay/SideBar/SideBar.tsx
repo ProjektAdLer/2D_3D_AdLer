@@ -14,11 +14,13 @@ import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
 import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
+import { useTranslation } from "react-i18next";
 
 export default function SideBar({ className }: AdLerUIComponent) {
   const [, controller] = useBuilder<SideBarViewModel, SideBarController>(
     BUILDER_TYPES.IMenuBarBuilder
   );
+  const { t } = useTranslation();
   return (
     <CustomDropdown
       className={tailwindMerge(className, "w-20")}
@@ -42,7 +44,7 @@ export default function SideBar({ className }: AdLerUIComponent) {
             <img src={spaceIcon} alt="" />
           </StyledButton>
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            Lernraum-Menü
+            {t("sidebar_learningSpaceMenu", { ns: "learningSpace" })}
           </p>
         </div>
 
@@ -51,7 +53,7 @@ export default function SideBar({ className }: AdLerUIComponent) {
             <img src={worldIcon} alt="" />
           </StyledButton>
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            Lernwelt-Menü
+            {t("sidebar_learningWorldMenu", { ns: "learningSpace" })}
           </p>
         </div>
 
@@ -60,21 +62,21 @@ export default function SideBar({ className }: AdLerUIComponent) {
             <img src={engineLogo} alt="" />
           </StyledButton>
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            Hauptmenü
+            {t("sidebar_mainMenu", { ns: "learningSpace" })}
           </p>
         </div>
 
         <div className="flex flex-row items-center">
           <FullscreenSwitch />
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            Vollbild
+            {t("sidebar_fullScreen", { ns: "learningSpace" })}
           </p>
         </div>
         <div className="flex flex-row items-center">
           <HelpDeskButton />
           <HelpDeskModal />
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            Hilfe-Fenster
+            {t("sidebar_help", { ns: "learningSpace" })}
           </p>
         </div>
       </StyledContainer>

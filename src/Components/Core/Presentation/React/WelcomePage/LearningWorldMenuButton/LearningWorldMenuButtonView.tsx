@@ -10,6 +10,7 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import { useEffect } from "react";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
+import { useTranslation } from "react-i18next";
 
 export default function LearningWorldMenuButton({
   className,
@@ -20,6 +21,8 @@ export default function LearningWorldMenuButton({
   const getLoginStatusUseCase = useInjection<IGetLoginStatusUseCase>(
     USECASE_TYPES.IGetLoginStatusUseCase
   );
+
+  const { t } = useTranslation();
 
   const [userLoggedIn, setUserLoggedIn] = useObservable<boolean>(
     viewModel?.userLoggedIn
@@ -36,7 +39,7 @@ export default function LearningWorldMenuButton({
       disabled={!userLoggedIn}
       onClick={() => history.push("/worldmenu")}
     >
-      Gehe zum Lernwelt Menü
+      {t("start_learningWorldButton", { ns: "menu" })}
     </StyledButton>
   );
 }
