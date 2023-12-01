@@ -34,6 +34,7 @@ export const getLearningElementIcon = (type: LearningElementTypeStrings) => {
         ></img>
       );
     case "h5p":
+    case "primitiveH5P":
       return (
         <img src={h5pIcon} alt="h5p-icon" className="h-8 mr-2 lg:h-12"></img>
       );

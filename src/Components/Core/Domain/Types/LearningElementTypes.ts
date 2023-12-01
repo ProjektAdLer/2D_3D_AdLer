@@ -1,5 +1,6 @@
 export enum LearningElementTypes {
   h5p = "h5p",
+  primitiveH5P = "primitiveH5P",
   text = "text",
   image = "image",
   video = "video",

@@ -12,6 +12,7 @@ import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningE
 import PDFComponent from "./SubComponents/PDFComponent";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
+import PrimitiveH5PContent from "./SubComponents/PrimitiveH5PContent";
 
 const createModalContent = (
   viewModel: LearningElementModalViewModel,
@@ -20,6 +21,8 @@ const createModalContent = (
   switch (viewModel.type.Value) {
     case LearningElementTypes.h5p:
       return <H5PContent viewModel={viewModel} controller={controller} />;
+    case LearningElementTypes.primitiveH5P:
+      return <PrimitiveH5PContent viewModel={viewModel} />;
     case LearningElementTypes.text:
       return <TextComponent viewModel={viewModel} />;
     case LearningElementTypes.video:

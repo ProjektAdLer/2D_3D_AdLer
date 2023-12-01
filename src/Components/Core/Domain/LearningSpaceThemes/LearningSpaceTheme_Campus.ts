@@ -14,6 +14,12 @@ const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
       LearningElementModelTypeEnums.H5pElementModelTypes.DrawingTable2,
       LearningElementModelTypeEnums.H5pElementModelTypes.Daylightprojector,
     ],
+    [LearningElementTypes.primitiveH5P]: [
+      LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard2,
+      LearningElementModelTypeEnums.H5pElementModelTypes.DeskPC3,
+      LearningElementModelTypeEnums.H5pElementModelTypes.DrawingTable2,
+      LearningElementModelTypeEnums.H5pElementModelTypes.Daylightprojector,
+    ],
     [LearningElementTypes.text]: [
       LearningElementModelTypeEnums.TextElementModelTypes.LibraryShelf,
     ],

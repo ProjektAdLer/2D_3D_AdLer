@@ -20,6 +20,7 @@ import LearningElementModelLookup from "src/Components/Core/Domain/LearningEleme
 
 const iconLinks: { [key in LearningElementTypes]?: any } = {
   [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb"),
+  [LearningElementTypes.primitiveH5P]: require("../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb"),
   [LearningElementTypes.text]: require("../../../../../Assets/3dModels/sharedModels/l-icons-text-1.glb"),
   [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/sharedModels/l-icons-text-1.glb"),
   [LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/l-icons-image-1.glb"),

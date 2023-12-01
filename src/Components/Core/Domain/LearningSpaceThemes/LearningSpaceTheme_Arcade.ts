@@ -15,6 +15,13 @@ const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
       LearningElementModelTypeEnums.H5pElementModelTypes.BlackSlotmachine,
       LearningElementModelTypeEnums.H5pElementModelTypes.DeskPC2,
     ],
+    [LearningElementTypes.primitiveH5P]: [
+      LearningElementModelTypeEnums.H5pElementModelTypes.GreySlotmachine,
+      LearningElementModelTypeEnums.H5pElementModelTypes.RedSlotmachine,
+      LearningElementModelTypeEnums.H5pElementModelTypes.PurpleSlotmachine,
+      LearningElementModelTypeEnums.H5pElementModelTypes.BlackSlotmachine,
+      LearningElementModelTypeEnums.H5pElementModelTypes.DeskPC2,
+    ],
     [LearningElementTypes.text]: [
       LearningElementModelTypeEnums.TextElementModelTypes.ComicShelfbig,
     ],

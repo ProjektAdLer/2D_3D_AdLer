@@ -111,6 +111,7 @@ export default class MockBackendAdapter implements IBackendPort {
 
     switch (elementType) {
       case "h5p":
+      case "primitiveH5P":
         return Promise.reject(
           "H5P elements are not supported in the backend mock."
         );
@@ -977,7 +978,7 @@ export default class MockBackendAdapter implements IBackendPort {
           $type: "LearningElement",
           elementId: 5,
           elementName: "Ein H5P-Lernelement",
-          elementCategory: "h5p",
+          elementCategory: "primitiveH5P",
           elementDescription: "Beschreibung des H5P-Lernelements",
           elementGoals: [
             "Elementziel 1/3",

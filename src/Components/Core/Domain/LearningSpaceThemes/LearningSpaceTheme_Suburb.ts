@@ -14,6 +14,12 @@ const LearningSpaceTheme_Suburb: ILearningSpaceTheme = {
       LearningElementModelTypeEnums.H5pElementModelTypes.DrawingTable,
       LearningElementModelTypeEnums.H5pElementModelTypes.SlotMachine,
     ],
+    [LearningElementTypes.primitiveH5P]: [
+      LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard,
+      LearningElementModelTypeEnums.H5pElementModelTypes.DeskPC1,
+      LearningElementModelTypeEnums.H5pElementModelTypes.DrawingTable,
+      LearningElementModelTypeEnums.H5pElementModelTypes.SlotMachine,
+    ],
     [LearningElementTypes.text]: [
       LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
     ],
