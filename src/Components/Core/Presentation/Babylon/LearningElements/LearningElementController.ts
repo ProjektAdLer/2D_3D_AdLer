@@ -28,7 +28,7 @@ export default class LearningElementController
   @bind
   pointerOver(): void {
     if (this.proximityToolTipId === -1 && this.hoverToolTipId === -1) {
-      this.proximityToolTipId = this.displayTooltip();
+      this.hoverToolTipId = this.displayTooltip();
       this.scaleUpIcon();
     }
   }
@@ -55,12 +55,13 @@ export default class LearningElementController
 
   @bind
   private onAvatarInteractableChange(isInteractable: boolean): void {
-    if (isInteractable) {
+    if (isInteractable && this.proximityToolTipId === -1) {
       this.proximityToolTipId = this.displayTooltip();
       this.scaleUpIcon();
-    } else if (this.proximityToolTipId !== -1) {
+    } else if (!isInteractable && this.proximityToolTipId !== -1) {
       this.bottomTooltipPresenter.hide(this.proximityToolTipId);
       this.resetIconScale();
+      this.proximityToolTipId = -1;
     }
   }
 

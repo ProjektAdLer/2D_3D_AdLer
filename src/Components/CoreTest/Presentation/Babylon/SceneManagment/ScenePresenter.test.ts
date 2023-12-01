@@ -15,6 +15,7 @@ import TestSceneDefinition, {
   fillTestSceneDefinitionSceneGetter,
 } from "./TestSceneDefinition";
 import Logger from "../../../../Core/Adapters/Logger/Logger";
+import { Inspector } from "@babylonjs/inspector";
 
 jest.mock("@babylonjs/core");
 
@@ -176,5 +177,24 @@ describe("scenePresenter", () => {
     systemUnderTest["renderFunction"]();
 
     expect(loggerMock).toHaveBeenCalledWith("WARN", "no active camera..");
+  });
+
+  test("toggleInspector calls Inspector.Show when inspector isn't visible", async () => {
+    Inspector.Show = jest.fn();
+    jest.spyOn(Inspector, "IsVisible", "get").mockReturnValue(false);
+    jest.spyOn(systemUnderTest, "Scene", "get").mockReturnValue(mock<Scene>());
+
+    systemUnderTest.toggleInspector();
+
+    expect(Inspector.Show).toHaveBeenCalledTimes(1);
+  });
+
+  test("toggleInspector calls Inspector.Hide when inspector is visible", async () => {
+    Inspector.Hide = jest.fn();
+    jest.spyOn(Inspector, "IsVisible", "get").mockReturnValue(true);
+
+    systemUnderTest.toggleInspector();
+
+    expect(Inspector.Hide).toHaveBeenCalledTimes(1);
   });
 });

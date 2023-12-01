@@ -50,6 +50,8 @@ import IScoreAdaptivityElementUseCase from "../../Application/UseCases/Adaptivit
 import ScoreAdaptivityElementUseCase from "../../Application/UseCases/Adaptivity/ScoreAdaptivityElementUseCase/ScoreAdaptivityElementUseCase";
 import IDisplayLearningElementUseCase from "../../Application/UseCases/Adaptivity/DisplayLearningElementUseCase/IDisplayLearningElementUseCase";
 import DisplayLearningElementUseCase from "../../Application/UseCases/Adaptivity/DisplayLearningElementUseCase/DisplayLearningElementUseCase";
+import ILogoutUseCase from "../../Application/UseCases/Logout/ILogoutUseCase";
+import LogoutUseCase from "../../Application/UseCases/Logout/LogoutUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -181,6 +183,10 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.IDisplayLearningElementUseCase
   )
     .to(DisplayLearningElementUseCase)
+    .inSingletonScope();
+
+  bind<ILogoutUseCase>(USECASE_TYPES.ILogoutUseCase)
+    .to(LogoutUseCase)
     .inSingletonScope();
 });
 

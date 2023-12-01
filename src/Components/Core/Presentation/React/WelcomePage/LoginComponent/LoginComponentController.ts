@@ -3,6 +3,7 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import ILoginComponentController from "./ILoginComponentController";
 import LoginComponentViewModel from "./LoginComponentViewModel";
+import ILogoutUseCase from "src/Components/Core/Application/UseCases/Logout/ILogoutUseCase";
 
 export default class LoginComponentController
   implements ILoginComponentController
@@ -20,5 +21,9 @@ export default class LoginComponentController
       .catch(() => {
         this.viewModel.loginFailed.Value = true;
       });
+  }
+
+  logout(): void {
+    CoreDIContainer.get<ILogoutUseCase>(USECASE_TYPES.ILogoutUseCase).execute();
   }
 }

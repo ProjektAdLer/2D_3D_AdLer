@@ -7,6 +7,7 @@ import {
   Engine,
   SceneOptions,
   HighlightLayer,
+  IInspectorOptions,
 } from "@babylonjs/core";
 
 export default interface IScenePresenter {
@@ -58,4 +59,9 @@ export default interface IScenePresenter {
    * @param mesh the mesh to be registered
    */
   registerNavigationMesh(mesh: Mesh): void;
+
+  /**
+   * Toggles Babylonjs inspector visibility.
+   */
+  toggleInspector(options?: IInspectorOptions): void;
 }

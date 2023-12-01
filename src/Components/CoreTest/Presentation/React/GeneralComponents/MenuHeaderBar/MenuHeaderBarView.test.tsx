@@ -5,6 +5,8 @@ import MenuHeaderBarViewModel from "../../../../../Core/Presentation/React/Gener
 import IMenuHeaderBarController from "../../../../../Core/Presentation/React/GeneralComponents/MenuHeaderBar/IMenuHeaderBarController";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import React from "react";
+import { Provider } from "inversify-react";
+import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 
 describe("MenuHeaderBar", () => {
   test("should render", () => {
@@ -12,18 +14,30 @@ describe("MenuHeaderBar", () => {
       new MenuHeaderBarViewModel(),
       mock<IMenuHeaderBarController>(),
     ]);
-    render(<MenuHeaderBar location="space" />);
+    render(
+      <Provider container={CoreDIContainer}>
+        <MenuHeaderBar location="space" />
+      </Provider>
+    );
   });
 
   test("doesn't render without controller", () => {
     useBuilderMock([new MenuHeaderBarViewModel(), undefined]);
-    const { container } = render(<MenuHeaderBar location="space" />);
+    const { container } = render(
+      <Provider container={CoreDIContainer}>
+        <MenuHeaderBar location="space" />
+      </Provider>
+    );
     expect(container.firstChild).toBeNull();
   });
 
   test("doesn't render without view model", () => {
     useBuilderMock([undefined, mock<IMenuHeaderBarController>()]);
-    const { container } = render(<MenuHeaderBar location="space" />);
+    const { container } = render(
+      <Provider container={CoreDIContainer}>
+        <MenuHeaderBar location="space" />
+      </Provider>
+    );
     expect(container.firstChild).toBeNull();
   });
 });

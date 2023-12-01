@@ -11,6 +11,7 @@ import LearningWorldScoreTO from "../../../../Core/Application/DataTransferObjec
 import LearningSpacePrecursorAndSuccessorTO from "../../../../Core/Application/DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
 import AdaptivityElementProgressTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import AdaptivityElementProgressUpdateTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
+import AdaptivityElementHintTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
 
 describe("LearningWorldPort", () => {
   let systemUnderTest: LearningWorldPort;
@@ -154,6 +155,20 @@ describe("LearningWorldPort", () => {
 
     expect(worldAdapterMock.onAdaptivityElementAnswerEvaluated).toBeCalledWith(
       mockAdaptivityElementProgressUpdateTO
+    );
+  });
+
+  test("onAdaptivityElementUserHintInformed calls a registered adapter", () => {
+    const worldAdapterMock = mock<ILearningWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockAdaptivityElementHintTO = mock<AdaptivityElementHintTO>();
+
+    systemUnderTest.onAdaptivityElementUserHintInformed(
+      mockAdaptivityElementHintTO
+    );
+
+    expect(worldAdapterMock.onAdaptivityElementUserHintInformed).toBeCalledWith(
+      mockAdaptivityElementHintTO
     );
   });
 });

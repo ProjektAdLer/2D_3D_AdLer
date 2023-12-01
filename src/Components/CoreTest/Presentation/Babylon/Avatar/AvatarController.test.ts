@@ -21,6 +21,8 @@ import AvatarController from "../../../../Core/Presentation/Babylon/Avatar/Avata
 import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
+import ILearningSpacePresenter from "../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpacePresenter";
+import exp from "constants";
 
 jest.mock("@babylonjs/core/Meshes");
 jest.mock("@babylonjs/core/Materials");
@@ -101,6 +103,42 @@ describe("AvatarController", () => {
       expect(
         scenePresenterMock.Scene.onBeforeRenderObservable.add
       ).toHaveBeenCalledWith(systemUnderTest["applyInputs"]);
+    });
+  });
+
+  describe("position broadcast", () => {
+    test("broadcastNewAvatarPosition broadcasts the new avatar position if no lastFramePosition is set", () => {
+      viewModel.parentNode = new TransformNode("mockParentNode");
+      viewModel.parentNode.position = new Vector3(42, 42, 42);
+      systemUnderTest["lastFramePosition"] = null;
+      const mockLearningSpacePresenter = mockDeep<ILearningSpacePresenter>();
+      systemUnderTest["learningSpacePresenter"] = mockLearningSpacePresenter;
+
+      systemUnderTest["broadcastNewAvatarPosition"]();
+
+      expect(
+        mockLearningSpacePresenter.broadcastAvatarPosition
+      ).toHaveBeenCalledTimes(1);
+      expect(
+        mockLearningSpacePresenter.broadcastAvatarPosition
+      ).toHaveBeenCalledWith(new Vector3(42, 42, 42), expect.any(Number));
+    });
+
+    test("broadcastNewAvatarPosition broadcasts the new avatar position if the distance between lastFramePosition and current position is greater than the broadcastThreshold", () => {
+      viewModel.parentNode = new TransformNode("mockParentNode");
+      viewModel.parentNode.position = new Vector3(42, 42, 42);
+      systemUnderTest["lastFramePosition"] = new Vector3(0, 0, 0);
+      const mockLearningSpacePresenter = mockDeep<ILearningSpacePresenter>();
+      systemUnderTest["learningSpacePresenter"] = mockLearningSpacePresenter;
+
+      systemUnderTest["broadcastNewAvatarPosition"]();
+
+      expect(
+        mockLearningSpacePresenter.broadcastAvatarPosition
+      ).toHaveBeenCalledTimes(1);
+      expect(
+        mockLearningSpacePresenter.broadcastAvatarPosition
+      ).toHaveBeenCalledWith(new Vector3(42, 42, 42), expect.any(Number));
     });
   });
 

@@ -36,8 +36,8 @@ export default function SideBar({ className }: AdLerUIComponent) {
       initialOpen={false}
       useAsTriggerOnly={true}
     >
-      <StyledContainer className="flex flex-col bg-transparent">
-        <div className="flex flex-row items-center w-64">
+      <StyledContainer className="flex flex-col p-2 rounded-lg w-44 lg:w-64 bg-whitetrans">
+        <div className="flex flex-row items-center">
           <StyledButton onClick={controller.onSpaceMenuButtonClicked}>
             <img src={spaceIcon} alt="" />
           </StyledButton>
@@ -46,7 +46,7 @@ export default function SideBar({ className }: AdLerUIComponent) {
           </p>
         </div>
 
-        <div className="flex flex-row items-center w-64">
+        <div className="flex flex-row items-center">
           <StyledButton onClick={controller.onWorldMenuButtonClicked}>
             <img src={worldIcon} alt="" />
           </StyledButton>
@@ -55,7 +55,7 @@ export default function SideBar({ className }: AdLerUIComponent) {
           </p>
         </div>
 
-        <div className="flex flex-row items-center w-64">
+        <div className="flex flex-row items-center">
           <StyledButton onClick={controller.onMainMenuButtonClicked}>
             <img src={engineLogo} alt="" />
           </StyledButton>
@@ -64,13 +64,13 @@ export default function SideBar({ className }: AdLerUIComponent) {
           </p>
         </div>
 
-        <div className="flex flex-row items-center w-64">
+        <div className="flex flex-row items-center">
           <FullscreenSwitch />
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
             Vollbild
           </p>
         </div>
-        <div className="flex flex-row items-center w-64">
+        <div className="flex flex-row items-center">
           <HelpDeskButton />
           <HelpDeskModal />
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">

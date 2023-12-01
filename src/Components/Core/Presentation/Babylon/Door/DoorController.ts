@@ -51,9 +51,9 @@ export default class DoorController implements IDoorController {
 
   @bind
   private onAvatarInteractableChange(isInteractable: boolean): void {
-    if (isInteractable) {
+    if (isInteractable && this.proximityToolTipId === -1) {
       this.proximityToolTipId = this.displayTooltip();
-    } else if (this.proximityToolTipId !== -1) {
+    } else if (!isInteractable && this.proximityToolTipId !== -1) {
       this.bottomTooltipPresenter.hide(this.proximityToolTipId);
       this.proximityToolTipId = -1;
     }

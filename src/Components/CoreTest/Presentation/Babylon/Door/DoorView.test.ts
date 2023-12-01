@@ -1,5 +1,6 @@
 import {
   AbstractMesh,
+  Color3,
   Mesh,
   NullEngine,
   Quaternion,
@@ -193,6 +194,34 @@ describe("DoorView", () => {
       mockMesh,
       expect.any(Number),
       expect.any(Number)
+    );
+  });
+
+  test("updateHighlight sets highlight to yellow when door is interactable", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
+    viewModel.meshes = [mockMesh as Mesh];
+    viewModel.isInteractable.Value = true;
+
+    systemUnderTest["updateHighlight"]();
+
+    expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
+      mockMesh,
+      Color3.Yellow()
+    );
+  });
+
+  test("changeHighlight sets highlight to blue when door is not interactable", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
+    viewModel.meshes = [mockMesh as Mesh];
+    viewModel.isInteractable.Value = false;
+
+    systemUnderTest["updateHighlight"]();
+
+    expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
+      mockMesh,
+      Color3.Blue()
     );
   });
 });
