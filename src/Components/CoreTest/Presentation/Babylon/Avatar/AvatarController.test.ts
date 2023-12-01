@@ -22,7 +22,6 @@ import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/Avatar
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import ILearningSpacePresenter from "../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpacePresenter";
-import exp from "constants";
 
 jest.mock("@babylonjs/core/Meshes");
 jest.mock("@babylonjs/core/Materials");
