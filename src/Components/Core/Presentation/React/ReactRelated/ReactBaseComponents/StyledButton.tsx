@@ -43,7 +43,7 @@ export default function StyledButton({
     freefloatleft: "px-2 py-1",
     freefloatcenter: "flex px-2 py-1 justify-center",
     closebutton:
-      "justify-center p-1 md:w-12 md:h-12 sm:w-10 sm:h-10 w-10 h-10 aspect-square",
+      "justify-center p-1 md:w-12 md:h-12 sm:w-10 sm:h-10 w-8 h-8 aspect-square",
   };
 
   return (
@@ -55,7 +55,7 @@ export default function StyledButton({
         disabled
           ? "box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-transparent overflow-hidden"
           : tailwindMerge(
-              "flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border",
+              "flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer",
               buttonConfig[color]
             )
       )}

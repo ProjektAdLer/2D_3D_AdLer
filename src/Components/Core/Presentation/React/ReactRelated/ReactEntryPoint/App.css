@@ -80,6 +80,21 @@ body {
   left: 1rem !important;
 }
 
+@media screen and (max-width: 500px) {
+  #inspector-host,
+  #scene-explorer-host {
+    transform: scale(0.6);
+  }
+
+  #inspector-host {
+    right: 11.2rem !important;
+  }
+
+  #scene-explorer-host {
+    left: 0.2rem !important;
+  }
+}
+
 /* Special Styles for OverallTimeSpentAdaptivityNotification Slider */
 .slider {
   -ms-overflow-style: none; /* Hide scrollbar IE and Edge */
