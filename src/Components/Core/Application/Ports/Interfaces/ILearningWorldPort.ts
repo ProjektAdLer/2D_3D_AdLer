@@ -1,7 +1,7 @@
 import LearningElementTO from "../../DataTransferObjects/LearningElementTO";
 import LearningSpaceScoreTO from "../../DataTransferObjects/LearningSpaceScoreTO";
 import LearningSpaceTO from "../../DataTransferObjects/LearningSpaceTO";
-import UserLearningWorldsTO from "../../DataTransferObjects/UserLearningWorldsTO";
+import UserInitialLearningWorldsInfoTO from "../../DataTransferObjects/UserInitialLearningWorldsInfoTO";
 import LearningWorldTO from "../../DataTransferObjects/LearningWorldTO";
 import LearningWorldScoreTO from "../../DataTransferObjects/LearningWorldScoreTO";
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
@@ -15,7 +15,9 @@ import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement
 export default interface ILearningWorldPort
   extends IAbstractPort<ILearningWorldAdapter> {
   //userWorlds
-  onUserLearningWorldsLoaded(userLearningWorldsTO: UserLearningWorldsTO): void;
+  onUserInitialLearningWorldsInfoLoaded(
+    userInitialLearningWorldsInfoTO: UserInitialLearningWorldsInfoTO
+  ): void;
 
   // world
   onLearningWorldLoaded(learningWorldTO: LearningWorldTO): void;

@@ -6,7 +6,7 @@ import ILearningWorldAdapter from "./ILearningWorldAdapter";
 import LearningElementTO from "../../DataTransferObjects/LearningElementTO";
 import LearningSpaceScoreTO from "../../DataTransferObjects/LearningSpaceScoreTO";
 import LearningSpaceTO from "../../DataTransferObjects/LearningSpaceTO";
-import UserLearningWorldsTO from "../../DataTransferObjects/UserLearningWorldsTO";
+import UserInitialLearningWorldsInfoTO from "../../DataTransferObjects/UserInitialLearningWorldsInfoTO";
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import LearningWorldScoreTO from "../../DataTransferObjects/LearningWorldScoreTO";
 import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
@@ -20,12 +20,14 @@ export default class LearningWorldPort
   implements ILearningWorldPort
 {
   // userWorlds
-  public onUserLearningWorldsLoaded(
-    userLearningWorldsTO: UserLearningWorldsTO
+  public onUserInitialLearningWorldsInfoLoaded(
+    userInitialLearningWorldsInfoTO: UserInitialLearningWorldsInfoTO
   ): void {
     this.adapters.forEach((adapter) => {
-      if (adapter.onUserLearningWorldsLoaded)
-        adapter.onUserLearningWorldsLoaded(userLearningWorldsTO);
+      if (adapter.onUserInitialLearningWorldsInfoLoaded)
+        adapter.onUserInitialLearningWorldsInfoLoaded(
+          userInitialLearningWorldsInfoTO
+        );
     });
   }
 

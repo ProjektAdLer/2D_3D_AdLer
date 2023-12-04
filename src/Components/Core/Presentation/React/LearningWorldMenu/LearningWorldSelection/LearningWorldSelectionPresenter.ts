@@ -1,4 +1,4 @@
-import UserLearningWorldsTO from "src/Components/Core/Application/DataTransferObjects/UserLearningWorldsTO";
+import UserInitialLearningWorldsInfoTO from "src/Components/Core/Application/DataTransferObjects/UserInitialLearningWorldsInfoTO";
 import ILearningWorldSelectionPresenter from "./ILearningWorldSelectionPresenter";
 import LearningWorldSelectionViewModel from "./LearningWorldSelectionViewModel";
 
@@ -7,7 +7,9 @@ export default class LearningWorldSelectionPresenter
 {
   constructor(private viewModel: LearningWorldSelectionViewModel) {}
 
-  onUserLearningWorldsLoaded(userWorlds: UserLearningWorldsTO): void {
+  onUserInitialLearningWorldsInfoLoaded(
+    userWorlds: UserInitialLearningWorldsInfoTO
+  ): void {
     this.viewModel.userWorlds.Value = [];
     userWorlds.worldInfo.forEach((world) => {
       this.viewModel.userWorlds.Value.push({

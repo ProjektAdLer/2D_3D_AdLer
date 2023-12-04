@@ -6,7 +6,7 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { Semaphore } from "src/Lib/Semaphore";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
-import ILoadUserLearningWorldsUseCase from "./ILoadUserLearningWorldsUseCase";
+import ILoadUserInitialLearningWorldsInfoUseCase from "./ILoadUserInitialLearningWorldsInfoUseCase";
 import type INotificationPort from "src/Components/Core/Application/Ports/Interfaces/INotificationPort";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
@@ -17,8 +17,8 @@ type AvailableLearningWorldsArray = {
 }[];
 
 @injectable()
-export default class LoadUserLearningWorldsUseCase
-  implements ILoadUserLearningWorldsUseCase
+export default class LoadUserInitialLearningWorldsInfoUseCase
+  implements ILoadUserInitialLearningWorldsInfoUseCase
 {
   constructor(
     @inject(CORE_TYPES.ILogger)
@@ -48,7 +48,7 @@ export default class LoadUserLearningWorldsUseCase
       );
       this.logger.log(
         LogLevelTypes.ERROR,
-        "LoadUserLearningWorldsUseCase: User is not logged in!"
+        "LoadUserInitialLearningWorldsInfoUseCase: User is not logged in!"
       );
       lock.release();
       return Promise.reject("User is not logged in");
@@ -62,17 +62,17 @@ export default class LoadUserLearningWorldsUseCase
       userEntities[0].availableWorlds = loadedAvailableWorlds;
       this.logger.log(
         LogLevelTypes.TRACE,
-        "LoadUserLearningWorldsUseCase: Loaded available worlds from backend."
+        "LoadUserInitialLearningWorldsInfoUseCase: Loaded available worlds from backend."
       );
-      this.worldPort.onUserLearningWorldsLoaded({
+      this.worldPort.onUserInitialLearningWorldsInfoLoaded({
         worldInfo: loadedAvailableWorlds,
       });
     } else {
       this.logger.log(
         LogLevelTypes.TRACE,
-        "LoadUserLearningWorldsUseCase: Loaded available worlds from cache."
+        "LoadUserInitialLearningWorldsInfoUseCase: Loaded available worlds from cache."
       );
-      this.worldPort.onUserLearningWorldsLoaded({
+      this.worldPort.onUserInitialLearningWorldsInfoLoaded({
         worldInfo: userEntities[0].availableWorlds,
       });
     }

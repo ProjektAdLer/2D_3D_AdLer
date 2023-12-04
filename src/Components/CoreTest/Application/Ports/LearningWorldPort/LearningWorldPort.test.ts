@@ -6,7 +6,7 @@ import { mock } from "jest-mock-extended";
 import ILearningWorldAdapter from "../../../../Core/Application/Ports/LearningWorldPort/ILearningWorldAdapter";
 import LearningSpaceScoreTO from "../../../../Core/Application/DataTransferObjects/LearningSpaceScoreTO";
 import LearningElementTO from "../../../../Core/Application/DataTransferObjects/LearningElementTO";
-import UserLearningWorldsTO from "../../../../Core/Application/DataTransferObjects/UserLearningWorldsTO";
+import UserInitialLearningWorldsInfoTO from "../../../../Core/Application/DataTransferObjects/UserInitialLearningWorldsInfoTO";
 import LearningWorldScoreTO from "../../../../Core/Application/DataTransferObjects/LearningWorldScoreTO";
 import LearningSpacePrecursorAndSuccessorTO from "../../../../Core/Application/DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
 import AdaptivityElementProgressTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
@@ -28,16 +28,16 @@ describe("LearningWorldPort", () => {
     CoreDIContainer.restore();
   });
 
-  test("onUserLearningWorldsLoaded calls a registered adapter", () => {
+  test("onUserInitialLearningWorldsInfoLoaded calls a registered adapter", () => {
     const worldAdapterMock = mock<ILearningWorldAdapter>();
     systemUnderTest.registerAdapter(worldAdapterMock);
-    const mockedUserWorldsTO = mock<UserLearningWorldsTO>();
+    const mockedUserWorldsTO = mock<UserInitialLearningWorldsInfoTO>();
 
-    systemUnderTest.onUserLearningWorldsLoaded(mockedUserWorldsTO);
+    systemUnderTest.onUserInitialLearningWorldsInfoLoaded(mockedUserWorldsTO);
 
-    expect(worldAdapterMock.onUserLearningWorldsLoaded).toBeCalledWith(
-      mockedUserWorldsTO
-    );
+    expect(
+      worldAdapterMock.onUserInitialLearningWorldsInfoLoaded
+    ).toBeCalledWith(mockedUserWorldsTO);
   });
 
   test("onLearningWorldLoaded calls a registered adapter", () => {

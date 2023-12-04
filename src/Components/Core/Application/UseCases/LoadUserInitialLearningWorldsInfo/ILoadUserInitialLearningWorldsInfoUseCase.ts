@@ -1,3 +1,3 @@
 import { IAsyncUsecase } from "../../Abstract/IAsyncUsecase";
-export default interface ILoadUserLearningWorldsUseCase
+export default interface ILoadUserInitialLearningWorldsInfoUseCase
   extends IAsyncUsecase<void, void> {}
