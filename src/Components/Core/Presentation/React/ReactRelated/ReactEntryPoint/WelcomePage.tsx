@@ -1,4 +1,3 @@
-import React from "react";
 import LoginComponent from "~ReactComponents/WelcomePage/LoginComponent/LoginComponent";
 import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
 import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
