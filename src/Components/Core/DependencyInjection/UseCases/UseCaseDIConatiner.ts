@@ -18,8 +18,8 @@ import IScoreH5PElementUseCase from "../../Application/UseCases/ScoreH5PLearning
 import ScoreH5PElementUseCase from "../../Application/UseCases/ScoreH5PLearningElement/ScoreH5PLearningElementUseCase";
 import IGetLearningElementSourceUseCase from "../../Application/UseCases/GetLearningElementSource/IGetLearningElementSourceUseCase";
 import GetLearningElementSourceUseCase from "../../Application/UseCases/GetLearningElementSource/GetLearningElementSourceUseCase";
-import ILoadUserLearningWorldsUseCase from "../../Application/UseCases/LoadUserLearningWorlds/ILoadUserLearningWorldsUseCase";
-import LoadUserLearningWorldsUseCase from "../../Application/UseCases/LoadUserLearningWorlds/LoadUserLearningWorldsUseCase";
+import ILoadUserInitialLearningWorldsInfoUseCase from "../../Application/UseCases/LoadUserInitialLearningWorldsInfo/ILoadUserInitialLearningWorldsInfoUseCase";
+import LoadUserInitialLearningWorldsInfoUseCase from "../../Application/UseCases/LoadUserInitialLearningWorldsInfo/LoadUserInitialLearningWorldsInfoUseCase";
 import IGetLoginStatusUseCase from "../../Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
 import GetLoginStatusUseCase from "../../Application/UseCases/GetLoginStatus/GetLoginStatusUseCase";
 import SetUserLocationUseCase from "../../Application/UseCases/SetUserLocation/SetUserLocationUseCase";
@@ -56,10 +56,10 @@ import LogoutUseCase from "../../Application/UseCases/Logout/LogoutUseCase";
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
   // Use Cases always have to be Singleton
-  bind<ILoadUserLearningWorldsUseCase>(
-    USECASE_TYPES.ILoadUserLearningWorldsUseCase
+  bind<ILoadUserInitialLearningWorldsInfoUseCase>(
+    USECASE_TYPES.ILoadUserInitialLearningWorldsInfoUseCase
   )
-    .to(LoadUserLearningWorldsUseCase)
+    .to(LoadUserInitialLearningWorldsInfoUseCase)
     .inSingletonScope();
 
   bind<ILoadLearningWorldUseCase>(USECASE_TYPES.ILoadLearningWorldUseCase)

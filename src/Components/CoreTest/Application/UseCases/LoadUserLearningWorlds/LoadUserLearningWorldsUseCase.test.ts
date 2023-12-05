@@ -1,4 +1,4 @@
-import LoadUserLearningWorldsUseCase from "../../../../Core/Application/UseCases/LoadUserLearningWorlds/LoadUserLearningWorldsUseCase";
+import LoadUserInitialLearningWorldsInfoUseCase from "../../../../Core/Application/UseCases/LoadUserInitialLearningWorldsInfo/LoadUserInitialLearningWorldsInfoUseCase";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
@@ -15,7 +15,7 @@ const notificationPortMock = mock<INotificationPort>();
 const entityContainerMock = mock<IEntityContainer>();
 
 describe("LoadUserWorldsUseCase", () => {
-  let systemUnderTest: LoadUserLearningWorldsUseCase;
+  let systemUnderTest: LoadUserInitialLearningWorldsInfoUseCase;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -35,7 +35,9 @@ describe("LoadUserWorldsUseCase", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = CoreDIContainer.resolve(LoadUserLearningWorldsUseCase);
+    systemUnderTest = CoreDIContainer.resolve(
+      LoadUserInitialLearningWorldsInfoUseCase
+    );
   });
 
   afterAll(() => {
@@ -94,7 +96,7 @@ describe("LoadUserWorldsUseCase", () => {
     );
   });
 
-  test("doesn't load UserLearningWorlds, if an entity is available", async () => {
+  test("doesn't load UserInitialLearningWorldsInfo, if an entity is available", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
       {
         isLoggedIn: true,
@@ -114,7 +116,7 @@ describe("LoadUserWorldsUseCase", () => {
     expect(entityContainerMock.createEntity).not.toHaveBeenCalled();
   });
 
-  test("loads the UserLearningWorlds and notifies its presenters", async () => {
+  test("loads the UserInitialLearningWorldsInfo and notifies its presenters", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
       {
@@ -141,6 +143,8 @@ describe("LoadUserWorldsUseCase", () => {
 
     await systemUnderTest.executeAsync();
 
-    expect(worldPortMock.onUserLearningWorldsLoaded).toHaveBeenCalledTimes(1);
+    expect(
+      worldPortMock.onUserInitialLearningWorldsInfoLoaded
+    ).toHaveBeenCalledTimes(1);
   });
 });

@@ -11,7 +11,7 @@ import worldSolved from "../../../../../../Assets/icons/14-1-world-completed/wor
 import worldAvailable from "../../../../../../Assets/icons/14-world/world-icon-nobg.svg";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import { useInjection } from "inversify-react";
-import ILoadUserLearningWorldsUseCase from "src/Components/Core/Application/UseCases/LoadUserLearningWorlds/ILoadUserLearningWorldsUseCase";
+import ILoadUserInitialLearningWorldsInfoUseCase from "src/Components/Core/Application/UseCases/LoadUserInitialLearningWorldsInfo/ILoadUserInitialLearningWorldsInfoUseCase";
 import { useEffect } from "react";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
@@ -19,9 +19,10 @@ import tailwindMerge from "../../../Utils/TailwindMerge";
 export default function LearningWorldSelection({
   className,
 }: AdLerUIComponent) {
-  const loadUserWorldsUseCase = useInjection<ILoadUserLearningWorldsUseCase>(
-    USECASE_TYPES.ILoadUserLearningWorldsUseCase
-  );
+  const loadUserInitialWorldsInfoUseCase =
+    useInjection<ILoadUserInitialLearningWorldsInfoUseCase>(
+      USECASE_TYPES.ILoadUserInitialLearningWorldsInfoUseCase
+    );
   const [viewModel, controller] = useBuilder<
     LearningWorldSelectionViewModel,
     ILearningWorldSelectionController
@@ -29,11 +30,11 @@ export default function LearningWorldSelection({
 
   useEffect(() => {
     // call load user worlds use case to get relevant data
-    const loadUserLearningWorldsAsync = async (): Promise<void> => {
-      await loadUserWorldsUseCase.executeAsync();
+    const loadUserInitialLearningWorldsInfoAsync = async (): Promise<void> => {
+      await loadUserInitialWorldsInfoUseCase.executeAsync();
     };
-    if (viewModel) loadUserLearningWorldsAsync();
-  }, [viewModel, loadUserWorldsUseCase]);
+    if (viewModel) loadUserInitialLearningWorldsInfoAsync();
+  }, [viewModel, loadUserInitialWorldsInfoUseCase]);
 
   const [worlds] = useObservable<LearningWorldSelectionLearningWorldData[]>(
     viewModel?.userWorlds

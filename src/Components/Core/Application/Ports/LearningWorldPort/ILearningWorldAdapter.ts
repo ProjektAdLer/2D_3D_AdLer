@@ -3,7 +3,7 @@ import LearningSpaceScoreTO from "../../DataTransferObjects/LearningSpaceScoreTO
 import LearningSpaceTO from "../../DataTransferObjects/LearningSpaceTO";
 import LearningWorldTO from "../../DataTransferObjects/LearningWorldTO";
 import LearningWorldScoreTO from "../../DataTransferObjects/LearningWorldScoreTO";
-import UserLearningWorldsTO from "../../DataTransferObjects/UserLearningWorldsTO";
+import UserInitialLearningWorldsInfoTO from "../../DataTransferObjects/UserInitialLearningWorldsInfoTO";
 import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/LearningSpacePrecursorAndSuccessorTO";
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
@@ -16,7 +16,9 @@ import { Vector3 } from "@babylonjs/core";
  */
 export default interface ILearningWorldAdapter {
   // userWorlds
-  onUserLearningWorldsLoaded?(userLearningWorldsTO: UserLearningWorldsTO): void;
+  onUserInitialLearningWorldsInfoLoaded?(
+    userInitialLearningWorldsInfoTO: UserInitialLearningWorldsInfoTO
+  ): void;
 
   // world
   onLearningWorldLoaded?(learningWorldTO: LearningWorldTO): void;

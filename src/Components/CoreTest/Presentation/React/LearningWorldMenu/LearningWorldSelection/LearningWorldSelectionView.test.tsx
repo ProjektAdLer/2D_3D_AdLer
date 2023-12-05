@@ -9,17 +9,18 @@ import LearningWorldSelection from "../../../../../Core/Presentation/React/Learn
 import ILearningWorldSelectionController from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldSelection/ILearningWorldSelectionController";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import ILoadUserLearningWorldsUseCase from "../../../../../Core/Application/UseCases/LoadUserLearningWorlds/ILoadUserLearningWorldsUseCase";
+import ILoadUserInitialLearningWorldsInfoUseCase from "../../../../../Core/Application/UseCases/LoadUserInitialLearningWorldsInfo/ILoadUserInitialLearningWorldsInfoUseCase";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 
-const loadUserWorldsUseCase = mock<ILoadUserLearningWorldsUseCase>();
+const loadUserInitialWorldsInfoUseCase =
+  mock<ILoadUserInitialLearningWorldsInfoUseCase>();
 describe("LearningWorldSelection", () => {
   beforeAll(() => {
     CoreDIContainer.unbindAll();
 
-    CoreDIContainer.bind<ILoadUserLearningWorldsUseCase>(
-      USECASE_TYPES.ILoadUserLearningWorldsUseCase
-    ).toConstantValue(loadUserWorldsUseCase);
+    CoreDIContainer.bind<ILoadUserInitialLearningWorldsInfoUseCase>(
+      USECASE_TYPES.ILoadUserInitialLearningWorldsInfoUseCase
+    ).toConstantValue(loadUserInitialWorldsInfoUseCase);
   });
   test("should render and call controller on click", () => {
     const vm = new LearningWorldSelectionViewModel();
