@@ -2,9 +2,12 @@ import { useState, useCallback, useEffect } from "react";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import tailwindMerge from "../../../Utils/TailwindMerge";
+import { useTranslation } from "react-i18next";
 
 export default function InternetLossModal({ className }: AdLerUIComponent<{}>) {
   const [isOpen, setOpen] = useState<boolean>(false);
+
+  const { t } = useTranslation("internetLoss");
 
   const closeModal = useCallback(() => {
     setOpen(false);
@@ -30,12 +33,8 @@ export default function InternetLossModal({ className }: AdLerUIComponent<{}>) {
         showModal={isOpen}
         className={tailwindMerge(className, "p-5 rounded-lg")}
       >
-        <p className="m-1 my-4 font-bold text-adlerdarkblue">
-          Die Verbindung ist verloren gegangen.
-        </p>
-        <p className="m-1 my-4 font-bold text-adlerdarkblue">
-          Bitte überprüfe deine Internetverbindung.
-        </p>
+        <p className="m-1 my-4 font-bold text-adlerdarkblue">{t("info")}</p>
+        <p className="m-1 my-4 font-bold text-adlerdarkblue">{t("advise")}</p>
       </StyledModal>
     </div>
   );

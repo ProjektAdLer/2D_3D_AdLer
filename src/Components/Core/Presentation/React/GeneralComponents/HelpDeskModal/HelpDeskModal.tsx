@@ -24,7 +24,7 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
     SCENE_TYPES.ScenePresenterFactory
   )(LearningSpaceSceneDefinition);
 
-  const { t } = useTranslation();
+  const { t } = useTranslation("helpMenu");
 
   const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
 
@@ -50,12 +50,12 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
         ></button>
 
         <p className="m-2 my-4 font-bold text-adlerdarkblue">
-          {t("helpDesk_explanation", { ns: "menu" })}
+          {t("explanation")}
         </p>
         <ul className="flex flex-col items-start ml-10 list-disc text-adlerdarkblue">
-          <li>{t("helpDesk_manual", { ns: "menu" })}</li>
-          <li>{t("helpDesk_bug", { ns: "menu" })}</li>
-          <li>{t("helpDesk_logData", { ns: "menu" })}</li>
+          <li>{t("manual")}</li>
+          <li>{t("bug")}</li>
+          <li>{t("logData")}</li>
         </ul>
         <section className="flex flex-row justify-around gap-2 my-6">
           <div className="flex flex-col items-center">
@@ -63,19 +63,19 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
               pdfFileUrl={"/manual/adler_user_manual-min.pdf"}
             />
             <p className="p-1 font-bold text-center text-adlerdarkblue">
-              <Trans i18nKey="helpDesk_btn_manual" />
+              <Trans i18nKey="manualPDF" ns="helpMenu" />
             </p>
           </div>
           <div className="flex flex-col items-center">
             <BugReportButton />
             <p className="p-1 font-bold text-center text-adlerdarkblue">
-              {t("helpDesk_btn_bugResport", { ns: "menu" })}
+              {t("bugReport")}
             </p>
           </div>
           <div className="flex flex-col items-center">
             <LogExportButton />
             <p className="p-1 font-bold text-center text-adlerdarkblue">
-              <Trans i18nKey="helpDesk_btn_logExport" />
+              <Trans i18nKey="logExport" ns="helpMenu" />
             </p>
           </div>
         </section>
