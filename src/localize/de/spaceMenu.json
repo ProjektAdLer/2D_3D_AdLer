@@ -1,0 +1,24 @@
+{
+  "learningSpaceButton": "Lernraum betreten!",
+  "description": "Beschreibung:",
+  "goal_one": "Lernziel:",
+  "goal_other": "Lernziele:",
+  "learningElement_one": "Lernelement:",
+  "learningElement_other": "Lernelemente:",
+  "requiredPoints": "Benötigte Punkte:",
+  "maximumPoints": "Maximal erreichbare Punkte:",
+
+  "graph": "Graph",
+  "list": "Liste",
+  "nodeAND": "UND",
+  "nodeOR": "ODER",
+
+  "learningWorldCompleted": "Lernwelt abgeschlossen!",
+  "congratulation": "Du hast alle Lernräume erfolgreich abgeschlossen und somit die Lernwelt bestanden, herzlichen Glückwunsch!",
+  "survey": "Fragebogen",
+  "thanks": "Vielen Dank für Ihre Unterstützung!",
+
+  "pauseTitle": "Pausenhinweis",
+  "pauseInfo": "Zeit für eine Pause!",
+  "pauseExplanation": "Klicke auf die Tasse, um Informationen zu Pausen zu erhalten oder schließe die Meldung über den 'x' Button."
+}
