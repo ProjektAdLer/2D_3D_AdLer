@@ -1,4 +1,3 @@
-import React from "react";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
@@ -8,6 +7,7 @@ import LearningWorldCompletionModalViewModel from "./LearningWorldCompletionModa
 import SolutionIcon from "../../../../../../Assets/icons/14-1-world-completed/world-completed-icon-nobg.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
+import { useTranslation } from "react-i18next";
 
 export default function LearningWorldCompletionModal({
   className,
@@ -20,6 +20,8 @@ export default function LearningWorldCompletionModal({
   const [showModal] = useObservable(viewModel.showModal);
   const [evaluationLink] = useObservable(viewModel.evaluationLink);
 
+  const { t } = useTranslation("spaceMenu");
+
   if (!viewModel || !controller) return null;
 
   return (
@@ -28,7 +30,7 @@ export default function LearningWorldCompletionModal({
         className,
         "flex flex-col items-center justify-center"
       )}
-      title="Lernwelt abgeschlossen!"
+      title={t("learningWorldCompleted").toString()}
       showModal={showModal && !viewModel.wasClosedOnce}
       onClose={() => {
         controller.CloseButtonClicked();
@@ -37,10 +39,7 @@ export default function LearningWorldCompletionModal({
       <div className="flex flex-col items-center justify-center">
         {<img className="w-32 mb-4" src={SolutionIcon} alt=""></img>}
         <div className="w-96">
-          <p className="mb-4">
-            Du hast alle Lernräume erfolgreich abgeschlossen und somit die
-            Lernwelt bestanden, herzlichen Glückwunsch!
-          </p>
+          <p className="mb-4">{t("congratulation")}</p>
           {evaluationLink && (
             <div>
               <div className="flex justify-center">
@@ -50,11 +49,11 @@ export default function LearningWorldCompletionModal({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Fragebogen.
+                  {t("survey")}
                 </a>
               </div>
               <div className="flex justify-center m-2 font-bold">
-                <p>Vielen Dank für Ihre Unterstützung!</p>
+                <p>{t("thanks")}</p>
               </div>
             </div>
           )}
