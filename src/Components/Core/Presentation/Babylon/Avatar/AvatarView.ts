@@ -108,7 +108,6 @@ export default class AvatarView {
         this.viewModel.eyeTextures.forEach((texture) => {
           texture.uOffset = 0;
         });
-        console.log("blink reset");
         this.setBlinkTimeout();
       }, this.viewModel.blinkDuration);
     }, this.viewModel.blinkInterval + Math.random() * this.viewModel.blinkIntervalMaxOffset);

@@ -383,7 +383,7 @@ describe("AvatarView", () => {
       jest.clearAllTimers();
     });
 
-    test.skip("blink timeout sets timeout to reset eye uvs", () => {
+    test("blink timeout sets timeout to reset eye uvs", () => {
       jest.useFakeTimers();
       const setTimeoutMock = jest.spyOn(global, "setTimeout");
       const eyeTexture = new Texture("eyeTexture", new Scene(new NullEngine()));
@@ -392,10 +392,26 @@ describe("AvatarView", () => {
       systemUnderTest["setBlinkTimeout"]();
       jest.runOnlyPendingTimers();
 
-      expect(setTimeoutMock).toHaveBeenCalledTimes(2);
-      expect(setTimeoutMock.mock.calls[1][1]).toBe(viewModel.blinkDuration);
+      expect(setTimeoutMock.mock.calls[2][1]).toBe(viewModel.blinkDuration);
 
       setTimeoutMock.mockRestore();
+      jest.clearAllTimers();
+    });
+
+    test("blink timeout resets the blinkTextureUOffset on the eye texture", () => {
+      jest.useFakeTimers();
+      const eyeTexture = new Texture("eyeTexture", new Scene(new NullEngine()));
+      viewModel.eyeTextures = [eyeTexture];
+
+      systemUnderTest["setBlinkTimeout"]();
+      jest.runOnlyPendingTimers();
+      expect(viewModel.eyeTextures[0].uOffset).toBe(
+        viewModel.blinkTextureUOffset
+      );
+
+      jest.runOnlyPendingTimers();
+      expect(viewModel.eyeTextures[0].uOffset).toBe(0);
+
       jest.clearAllTimers();
     });
   });
