@@ -48,22 +48,22 @@ export default function LoginComponent({
         shape="freefloatleft"
         onClick={() => setModalVisible(true)}
         data-testid="login-button"
-        className="flex h-16 gap-2 m-1 border-none pointer-events-none w-fit"
+        className="flex h-10 gap-2 m-1 !border-b-[1px] !border-r-[1px] pointer-events-none w-fit"
       >
         <img className="w-10" src={moodleIcon} alt="Moodle-Icon"></img>
-        <p className="text-lg font-regular">Eingeloggt als "Username"</p>
+        <p className="text-sm font-regular portrait:hidden">
+          Eingeloggt als "Username"
+        </p>
       </StyledButton>
 
       {userLoggedIn && (
         <StyledButton
           shape="freefloatleft"
-          className="h-10 !bg-red-300 w-fit"
+          className="h-6 !bg-red-300 w-fit absolute top-10 left-44 portrait:-left-2 portrait:-top-4"
           onClick={() => controller.logout()}
           data-testid="logout"
         >
-          <p className="text-xs font-bold break-words rounded-lg">
-            debug moodle logout
-          </p>
+          <p className="text-xs rounded-lg">Ausloggen</p>
         </StyledButton>
       )}
 
