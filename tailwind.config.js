@@ -13,6 +13,12 @@ module.exports = {
       ultraWide: "3400px",
     },
     extend: {
+      backgroundImage: {
+        learningworldbg:
+          "url('/src/Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.png')",
+        avatarcreatorbg:
+          "url('/src/Assets/misc/WelcomeScreenButtonBackgrounds/AvatarCreatorButtonBackground.png')",
+      },
       keyframes: {
         wiggle: {
           "0%, 100%": { transform: "rotate(-1deg)" },

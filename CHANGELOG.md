@@ -15,6 +15,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - responsive styling of LoadingScreen
+- BreakNotification message is now not a complete button. This gives better read- and usability
+- refactored styling of WelcomePage and added new button for future functionality
 
 ### Deprecated
 
