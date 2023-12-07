@@ -17,11 +17,7 @@ describe("LearningWorldCompletionModalView", () => {
 
     const container = render(<LearningWorldCompletionModal />);
 
-    expect(
-      container.getByText(
-        "Du hast alle Lernräume erfolgreich abgeschlossen und somit die Lernwelt bestanden, herzlichen Glückwunsch!"
-      )
-    ).toBeInTheDocument();
+    expect(container.getByText("learningWorldCompleted")).toBeInTheDocument();
   });
 
   test("should not render when not openend", () => {

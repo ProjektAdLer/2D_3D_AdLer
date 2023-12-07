@@ -22,7 +22,7 @@ export default function LearningWorldMenuButton({
     USECASE_TYPES.IGetLoginStatusUseCase
   );
 
-  const { t } = useTranslation();
+  const { t } = useTranslation("start");
 
   const [userLoggedIn, setUserLoggedIn] = useObservable<boolean>(
     viewModel?.userLoggedIn
@@ -39,7 +39,7 @@ export default function LearningWorldMenuButton({
       disabled={!userLoggedIn}
       onClick={() => history.push("/worldmenu")}
     >
-      {t("start_learningWorldButton", { ns: "menu" })}
+      {t("learningWorldButton")}
     </StyledButton>
   );
 }

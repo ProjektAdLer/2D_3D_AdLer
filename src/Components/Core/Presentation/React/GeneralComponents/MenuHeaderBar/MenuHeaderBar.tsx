@@ -11,6 +11,7 @@ import worldIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-ic
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import HelpDeskModal from "../HelpDeskModal/HelpDeskModal";
 import HelpDeskButton from "../HelpDeskButton/HelpDeskButton";
+import { useTranslation } from "react-i18next";
 
 interface MenuHeaderBarProps extends React.HTMLAttributes<HTMLDivElement> {
   location: "world" | "space";
@@ -28,38 +29,35 @@ export default function MenuHeaderBar({
 
   const [currentWorldName] = useObservable<string>(viewModel?.currentWorldName);
 
+  const { t } = useTranslation("worldMenu");
+
   if (!viewModel || !controller) return null;
 
   return (
-    <React.Fragment>
-      <div className={tailwindMerge(className, "flex place-content-stretch")}>
-        <div className="flex items-center w-1/2 place-content-stretch justify-self-start ">
-          <StyledButton
-            onClick={controller.onHomeButtonClicked}
-            className="mr-4"
-          >
-            <img className="w-10 xl:w-12 " src={homeIcon} alt="Home Icon" />
+    <div className={tailwindMerge(className, "flex place-content-stretch")}>
+      <div className="flex items-center w-1/2 place-content-stretch justify-self-start ">
+        <StyledButton onClick={controller.onHomeButtonClicked} className="mr-4">
+          <img className="w-10 xl:w-12 " src={homeIcon} alt="Home Icon" />
+        </StyledButton>
+        {location === "space" && (
+          <StyledButton onClick={controller.onLearningWorldButtonClicked}>
+            <img className="w-10 xl:w-12" src={worldIcon} alt="World Icon" />
           </StyledButton>
-          {location === "space" && (
-            <StyledButton onClick={controller.onLearningWorldButtonClicked}>
-              <img className="w-10 xl:w-12" src={worldIcon} alt="World Icon" />
-            </StyledButton>
-          )}
-        </div>
-        <div className="flex justify-center w-full">
-          <StyledContainer
-            className="text-xl truncate lg:text-4xl font-[roboto]"
-            textColor="darkblue"
-          >
-            {location === "space" ? currentWorldName : null}
-            {location === "world" ? "Lernwelt Menu" : null}
-          </StyledContainer>
-        </div>
-        <div className="flex justify-end w-1/2 ">
-          <HelpDeskButton />
-          <HelpDeskModal />
-        </div>
+        )}
       </div>
-    </React.Fragment>
+      <div className="flex justify-center w-full">
+        <StyledContainer
+          className="text-xl truncate lg:text-4xl font-[roboto]"
+          textColor="darkblue"
+        >
+          {location === "space" ? currentWorldName : null}
+          {location === "world" ? t("learningWorldMenuTitle").toString() : null}
+        </StyledContainer>
+      </div>
+      <div className="flex justify-end w-1/2 ">
+        <HelpDeskButton />
+        <HelpDeskModal />
+      </div>
+    </div>
   );
 }

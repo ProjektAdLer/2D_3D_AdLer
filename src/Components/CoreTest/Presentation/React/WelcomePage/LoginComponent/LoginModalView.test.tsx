@@ -35,14 +35,14 @@ describe("LoginModal", () => {
     const componentUnderTest = render(
       <LoginModal controller={mockedController} viewModel={viewModel} />
     );
-    fireEvent.change(componentUnderTest.getByPlaceholderText("Nutzername"), {
+    fireEvent.change(componentUnderTest.getByPlaceholderText("userName"), {
       target: { value: "test" },
     });
-    fireEvent.change(componentUnderTest.getByPlaceholderText("Passwort"), {
+    fireEvent.change(componentUnderTest.getByPlaceholderText("password"), {
       target: { value: "test" },
     });
 
-    fireEvent.click(componentUnderTest.getByText("Login"));
+    fireEvent.click(componentUnderTest.getByText("loginButton"));
 
     expect(mockedController.login).toHaveBeenCalledWith("test", "test");
   });

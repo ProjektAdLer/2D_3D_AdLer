@@ -7,6 +7,7 @@ import StyledModal from "../../ReactRelated/ReactBaseComponents/StyledModal";
 import StyledPasswordField from "../../ReactRelated/ReactBaseComponents/StyledPasswordField";
 import ILoginComponentController from "./ILoginComponentController";
 import LoginComponentViewModel from "./LoginComponentViewModel";
+import { useTranslation } from "react-i18next";
 
 export default function LoginModal(props: {
   viewModel: LoginComponentViewModel;
@@ -19,13 +20,15 @@ export default function LoginModal(props: {
   );
   const [loginFailed] = useObservable<boolean>(props.viewModel.loginFailed);
 
+  const { t } = useTranslation("start");
+
   const handleSubmit = React.useCallback(() => {
     props.controller.login(userName, password);
   }, [props.controller, userName, password]);
 
   return (
     <StyledModal
-      title="Moodle Login"
+      title={t("loginTitle").toString()}
       showModal={modalVisible}
       onClose={() => setModalVisible(false)}
     >
@@ -38,7 +41,7 @@ export default function LoginModal(props: {
           }}
         >
           <StyledInputField
-            placeholder="Nutzername"
+            placeholder={t("userName").toString()}
             defaultValue={userName}
             onChange={(newVal) => {
               setUserName(newVal.target.value);
@@ -46,7 +49,7 @@ export default function LoginModal(props: {
           />
 
           <StyledPasswordField
-            placeholder="Passwort"
+            placeholder={t("password").toString()}
             defaultValue={password}
             onChange={(newVal) => {
               setPassword(newVal.target.value);
@@ -56,16 +59,16 @@ export default function LoginModal(props: {
           {loginFailed && (
             <div className="bg-red-100 rounded-lg">
               <p className="m-1 text-xs font-bold text-center text-red-500">
-                Login fehlgeschlagen.
+                {t("loginFail")}
               </p>
               <p className="m-1 text-xs font-bold text-center text-red-500">
-                Bitte überprüfe deine Eingaben.
+                {t("loginFailAdvise")}
               </p>
             </div>
           )}
 
           <StyledButton shape="freefloatcenter" onClick={handleSubmit}>
-            <p>Login</p>
+            <p>{t("loginButton")}</p>
           </StyledButton>
 
           {/* <StyledButton

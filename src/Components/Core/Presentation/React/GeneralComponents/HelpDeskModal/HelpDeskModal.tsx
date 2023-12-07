@@ -14,6 +14,7 @@ import SCENE_TYPES, {
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import LearningSpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import { useInjection } from "inversify-react";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
   const [viewModel] = useBuilder<HelpDeskModalViewModel, undefined>(
@@ -22,6 +23,8 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
   const scenePresenter = useInjection<ScenePresenterFactory>(
     SCENE_TYPES.ScenePresenterFactory
   )(LearningSpaceSceneDefinition);
+
+  const { t } = useTranslation("helpMenu");
 
   const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
 
@@ -47,16 +50,12 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
         ></button>
 
         <p className="m-2 my-4 font-bold text-adlerdarkblue">
-          Falls Probleme mit der AdLer Engine auftreten sollten oder du etwas
-          nicht verstehst, kannst du hier:
+          {t("explanation")}
         </p>
         <ul className="flex flex-col items-start ml-10 list-disc text-adlerdarkblue">
-          <li>die AdLer Engine Bedienungsanleitung aufrufen</li>
-          <li>Bugs melden...</li>
-          <li>
-            ...die dazugehörige Log Datei herunterladen, um sie an den Bug
-            Report anzuhängen.
-          </li>
+          <li>{t("manual")}</li>
+          <li>{t("bug")}</li>
+          <li>{t("logData")}</li>
         </ul>
         <section className="flex flex-row justify-around gap-2 my-6">
           <div className="flex flex-col items-center">
@@ -64,19 +63,19 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
               pdfFileUrl={"/manual/adler_user_manual-min.pdf"}
             />
             <p className="p-1 font-bold text-center text-adlerdarkblue">
-              AdLer Engine <br></br>Bedienungsanleitung
+              <Trans i18nKey="manualPDF" ns="helpMenu" />
             </p>
           </div>
           <div className="flex flex-col items-center">
             <BugReportButton />
             <p className="p-1 font-bold text-center text-adlerdarkblue">
-              Bug Report
+              {t("bugReport")}
             </p>
           </div>
           <div className="flex flex-col items-center">
             <LogExportButton />
             <p className="p-1 font-bold text-center text-adlerdarkblue">
-              Log Export für <br></br>Bug Report
+              <Trans i18nKey="logExport" ns="helpMenu" />
             </p>
           </div>
         </section>
