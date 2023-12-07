@@ -7,9 +7,7 @@ import de_helpMenu from "./de/helpMenu.json";
 import de_learningSpace from "./de/learningSpace.json";
 import de_worldMenu from "./de/worldMenu.json";
 import de_spaceMenu from "./de/spaceMenu.json";
-// Import language: en
-import en_coreMenu from "./en/coreMenu.json";
-import en_learningSpace from "./en/learningSpace.json";
+import de_breakTime from "./de/breakTime.json";
 
 /**
  namespace explanation:
@@ -25,6 +23,7 @@ const resources = {
     worldMenu: de_worldMenu,
     spaceMenu: de_spaceMenu,
     learningSpace: de_learningSpace,
+    breakTime: de_breakTime,
   },
 };
 const defaultNS = "start";
@@ -39,6 +38,7 @@ i18next.use(initReactI18next).init({
     "worldMenu",
     "spaceMenu",
     "learningSpace",
+    "breakTime",
   ],
   resources: resources,
   defaultNS: defaultNS,

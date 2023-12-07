@@ -51,7 +51,7 @@ import LongBreakH1Slide2Image from "../../../../../Assets/BreakTimeAssets/H1/lon
 import LongBreakH1Slide3Image from "../../../../../Assets/BreakTimeAssets/H1/longBreakContent-H1-slide3.png";
 
 export type breakObject = {
-  titleMessage: string;
+  titleMessageKeys: string[]; // keys reference strings inside localize language package
   image1: string;
   image2: string;
   image3: string;
@@ -66,8 +66,7 @@ export default class BreakTimeNotificationViewModel {
   slideIndex: Observable<number> = new Observable<number>(1);
   shortBreakContentPool: breakObject[] = [
     {
-      titleMessage:
-        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Auf dem Bild sehen Sie eine kurze Übung zur Mobilisation.",
+      titleMessageKeys: ["shortBreakBase", "infoMobilization"],
       image1: SmallBreakB3Slide1Image,
       image2: SmallBreakB3Slide2Image,
       image3: "",
@@ -75,8 +74,7 @@ export default class BreakTimeNotificationViewModel {
       seenBefore: false,
     },
     {
-      titleMessage:
-        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Auf dem Bild sehen Sie eine kurze Übung zur Mobilisation.",
+      titleMessageKeys: ["shortBreakBase", "infoMobilization"],
       image1: SmallBreakB7Slide1Image,
       image2: SmallBreakB7Slide2Image,
       image3: "",
@@ -84,8 +82,7 @@ export default class BreakTimeNotificationViewModel {
       seenBefore: false,
     },
     {
-      titleMessage:
-        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
+      titleMessageKeys: ["shortBreakBase"],
       image1: SmallBreakB8Slide1Image,
       image2: SmallBreakB8Slide2Image,
       image3: "",
@@ -93,8 +90,7 @@ export default class BreakTimeNotificationViewModel {
       seenBefore: false,
     },
     {
-      titleMessage:
-        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Vielleicht interessiert Sie in dem Zusammenhang auch, dass auch die Ernährung für das Lernen wichtig ist.",
+      titleMessageKeys: ["shortBreakBase", "infoNutrition"],
       image1: SmallBreakE2Slide1Image,
       image2: SmallBreakE2Slide2Image,
       image3: SmallBreakE2Slide3Image,
@@ -102,8 +98,7 @@ export default class BreakTimeNotificationViewModel {
       seenBefore: false,
     },
     {
-      titleMessage:
-        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
+      titleMessageKeys: ["shortBreakBase"],
       image1: SmallBreakE4Slide1Image,
       image2: "",
       image3: "",
@@ -111,8 +106,7 @@ export default class BreakTimeNotificationViewModel {
       seenBefore: false,
     },
     {
-      titleMessage:
-        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Vielleicht interessiert Sie in dem Zusammenhang auch, dass auch die Ernährung für das Lernen wichtig ist.",
+      titleMessageKeys: ["shortBreakBase", "infoNutrition"],
       image1: SmallBreakE10Slide1Image,
       image2: SmallBreakE10Slide2Image,
       image3: "",
@@ -120,8 +114,7 @@ export default class BreakTimeNotificationViewModel {
       seenBefore: false,
     },
     {
-      titleMessage:
-        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
+      titleMessageKeys: ["shortBreakBase"],
       image1: SmallBreakL1Slide1Image,
       image2: SmallBreakL1Slide2Image,
       image3: SmallBreakL1Slide3Image,
@@ -129,8 +122,7 @@ export default class BreakTimeNotificationViewModel {
       seenBefore: false,
     },
     {
-      titleMessage:
-        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
+      titleMessageKeys: ["shortBreakBase"],
       image1: SmallBreakL3Slide1Image,
       image2: SmallBreakL3Slide2Image,
       image3: "",
@@ -138,8 +130,7 @@ export default class BreakTimeNotificationViewModel {
       seenBefore: false,
     },
     {
-      titleMessage:
-        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
+      titleMessageKeys: ["shortBreakBase"],
       image1: SmallBreakL5Slide1Image,
       image2: SmallBreakL5Slide2Image,
       image3: "",
@@ -147,8 +138,7 @@ export default class BreakTimeNotificationViewModel {
       seenBefore: false,
     },
     {
-      titleMessage:
-        "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause? Vielleicht interessiert Sie in dem Zusammenhang auch, dass eine richtige Sitzhaltung und ein optimaler Abstand zum Bildschirm für das Lernen wichtig ist.",
+      titleMessageKeys: ["shortBreakBase", "infoSeatingPosition"],
       image1: SmallBreakU3Slide1Image,
       image2: SmallBreakU3Slide2Image,
       image3: SmallBreakU3Slide3Image,
@@ -160,8 +150,7 @@ export default class BreakTimeNotificationViewModel {
   //mediumBreakContentPool structure: title, content, source
   mediumBreakContentPool: breakObject[] = [
     {
-      titleMessage:
-        "Sie haben nun 2 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine Pause von mindestens 20 Minuten empfehlen. Wie wäre es denn mit aktivem bzw. bewusstem Musikhören?",
+      titleMessageKeys: ["mediumBreakBase", "infoMusic"],
       image1: MediumBreakS1Slide1Image,
       image2: MediumBreakS1Slide2Image,
       image3: MediumBreakS1Slide3Image,
@@ -169,8 +158,7 @@ export default class BreakTimeNotificationViewModel {
       seenBefore: false,
     },
     {
-      titleMessage:
-        "Sie haben nun 2 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine Pause von mindestens 20 Minuten empfehlen. Warum?",
+      titleMessageKeys: ["mediumBreakBase", "infoWhy"],
       image1: MediumBreakS3Slide1Image,
       image2: MediumBreakS3Slide2Image,
       image3: MediumBreakS3Slide3Image,
@@ -182,8 +170,7 @@ export default class BreakTimeNotificationViewModel {
   //longBreakContentPool structure: title, content, source
   longBreakContentPool: breakObject[] = [
     {
-      titleMessage:
-        "Sie haben nun 4 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine längere Pause von mindestens 90 Minuten empfehlen. Wie wäre es denn mit einem Spaziergang?",
+      titleMessageKeys: ["longBreakBase", "infoStroll"],
       image1: LongBreakH1Slide1Image,
       image2: LongBreakH1Slide2Image,
       image3: LongBreakH1Slide3Image,
