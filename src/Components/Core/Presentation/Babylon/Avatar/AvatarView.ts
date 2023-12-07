@@ -11,6 +11,7 @@ import type {
   Nullable,
   Observer,
   Scene,
+  Texture,
 } from "@babylonjs/core";
 import bind from "bind-decorator";
 import SCENE_TYPES, {
@@ -64,6 +65,7 @@ export default class AvatarView {
   public async asyncSetup(): Promise<void> {
     await this.loadAvatarAsync();
     this.setupAvatarAnimations();
+    this.setupBlinkAnimation();
     await this.navigation.IsReady.then(this.setupAvatarNavigation);
   }
 
@@ -83,6 +85,33 @@ export default class AvatarView {
     this.viewModel.meshes[0].scaling = new Vector3(1, 1, -1);
     this.viewModel.meshes.forEach((mesh) => (mesh.rotationQuaternion = null));
     this.viewModel.meshes[0].rotationQuaternion = new Quaternion(0, 0, 0, 1);
+  }
+
+  private setupBlinkAnimation(): void {
+    const eyeMaterial = this.viewModel.meshes.find(
+      (mesh) => mesh.material?.name === "Eyes_mat"
+    )?.material!;
+    this.viewModel.eyeTextures = eyeMaterial.getActiveTextures() as Texture[];
+
+    this.setBlinkTimeout();
+  }
+
+  private setBlinkTimeout(): void {
+    setTimeout(() => {
+      // set eye texture offset to blink texture
+      this.viewModel.eyeTextures.forEach((texture) => {
+        texture.uOffset = this.viewModel.blinkTextureUOffset;
+      });
+
+      // set timeout to reset eye texture offset and restart blink timeout
+      setTimeout(() => {
+        this.viewModel.eyeTextures.forEach((texture) => {
+          texture.uOffset = 0;
+        });
+        console.log("blink reset");
+        this.setBlinkTimeout();
+      }, this.viewModel.blinkDuration);
+    }, this.viewModel.blinkInterval + Math.random() * this.viewModel.blinkIntervalMaxOffset);
   }
 
   private determineSpawnLocation(): Vector3 {
