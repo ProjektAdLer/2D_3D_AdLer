@@ -42,7 +42,7 @@ describe("BreakTimeNotification", () => {
     viewModel.showMinimizedModal.Value = true;
 
     render(<BreakTimeNotification />);
-    fireEvent.click(screen.getByText("Zeit für eine Pause!"));
+    fireEvent.click(screen.getByAltText("Pause Icon"));
 
     expect(
       mockController.minimizeOrMaximizeBreakNotification
