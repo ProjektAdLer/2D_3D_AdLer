@@ -24,7 +24,7 @@ export default function WelcomePage() {
       <HelpDeskButton className="col-start-8 row-start-1 justify-self-end" />
       <HelpDeskModal />
 
-      <section className="flex flex-col items-center portrait:row-start-1 portrait:row-span-1 portrait:col-start-1 portrait:col-span-7 landscape:col-span-6 landscape:col-start-2 landscape:row-start-1 text-adlerdarkblue lg:landscape:col-span-7 lg:landscape:col-start-1 xl:landscape:col-start-2 xl:landscape:col-span-6 lg:landscape:row-start-1">
+      <section className="flex flex-col items-center portrait:row-start-1 portrait:row-span-1 portrait:col-start-2 portrait:col-span-6 landscape:col-span-6 landscape:col-start-2 landscape:row-start-1 text-adlerdarkblue lg:landscape:col-span-7 lg:landscape:col-start-1 xl:landscape:col-start-2 xl:landscape:col-span-6 lg:landscape:row-start-1">
         <h1 className="p-2 text-xl font-extrabold text-center justify-self-center portrait:text-xl lg:text-4xl 2xl:text-8xl">
           {t("welcome")}
         </h1>
@@ -33,6 +33,9 @@ export default function WelcomePage() {
           weitergehen soll.
         </p>
       </section>
+      <h2 className="col-span-6 col-start-2 row-start-2 pt-2 text-xl font-extrabold text-center justify-self-center portrait:text-sm lg:text-xl text-adlerdarkblue portrait:row-start-1 portrait:self-end portrait:col-start-1 portrait:col-span-8">
+        {t("moodleLoginSubheading")}
+      </h2>
       {/* Folgende Section ist Platzhalter für den Moodle Login */}
       <section className="flex items-center justify-center col-span-6 col-start-2 row-start-2 gap-2 m-4 text-xl font-bold text-center rounded-lg portrait:self-end portrait:row-start-1 portrait:scale-50 portrait:col-start-1 portrait:col-span-8">
         <StyledInputField
@@ -52,7 +55,7 @@ export default function WelcomePage() {
           <div className="w-full h-full bg-black opacity-30 hover:opacity-20" />
           <LearningWorldMenuButton className="absolute mx-auto mb-4 bottom-3 portrait:scale-125" />
         </StyledContainer>
-        <StyledContainer className="relative flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-contain border-8 rounded-lg border-gray-600 bg-avatarcreatorbg">
+        <StyledContainer className="relative flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover border-8 rounded-lg border-gray-600 bg-avatarcreatorbg">
           <div className="w-full h-full bg-black opacity-50" />
           <p className="absolute p-4 mx-auto text-2xl font-bold rounded-lg text-center bg-adlerbuttonlocked lg:bottom-[42%] portrait:bottom-[20%] portrait:text-lg bottom-32 text-adlerdeactivatedtext">
             Der Avatar Creator ist demnächst verfügbar!
@@ -60,7 +63,7 @@ export default function WelcomePage() {
         </StyledContainer>
       </section>
 
-      <p className="self-end p-2 text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1 portrait:col-span-7 portrait:text-xs landscape:col-span-6 landscape:col-start-1 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6">
+      <p className="self-end p-2 text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1 portrait:col-span-6 portrait:text-xs landscape:col-span-6 landscape:col-start-2 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6">
         {t("copyright")}
       </p>
     </div>
