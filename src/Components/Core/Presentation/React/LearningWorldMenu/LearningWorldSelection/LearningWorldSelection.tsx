@@ -39,9 +39,10 @@ export default function LearningWorldSelection({
   const [worlds] = useObservable<LearningWorldSelectionLearningWorldData[]>(
     viewModel?.userWorlds
   );
+  const [newData] = useObservable<boolean>(viewModel?.newData);
   useEffect(() => {
-    viewModel.newData.Value = false;
-  }, [viewModel.newData.Value]);
+    if (viewModel) viewModel.newData.Value = false;
+  }, [newData, viewModel]);
   const [selectedRowID] = useObservable<number>(viewModel?.selectedRowID);
 
   if (!viewModel || !controller) return null;
