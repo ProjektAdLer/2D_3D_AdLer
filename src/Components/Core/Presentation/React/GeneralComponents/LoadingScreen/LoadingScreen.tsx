@@ -6,6 +6,7 @@ import LoadingScreenViewModel from "./LoadingScreenViewModel";
 import ILoadingScreenController from "./ILoadingScreenController";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function LoadingScreen() {
   const [viewModel, controller] = useBuilder<
@@ -14,6 +15,7 @@ export default function LoadingScreen() {
   >(BUILDER_TYPES.ILoadingScreenBuilder);
   const [isOpen] = useObservable<boolean>(viewModel?.isOpen);
   const [canClose] = useObservable<boolean>(viewModel?.isReadyToBeClosed);
+  const { t } = useTranslation("learningSpace");
 
   if (!viewModel || !controller || !isOpen) return null;
 
@@ -54,32 +56,33 @@ export default function LoadingScreen() {
               onClick={() => controller.closeLoadingScreen()}
               className="p-5 scale-125 lg:scale-150"
             >
-              Weiter zum Lernraum
+              {t("enterLearningSpace")}
             </StyledButton>
           </section>
         )}
 
         <section className="flex items-center self-center col-span-6 col-start-1 row-start-5 lg:col-span-4 lg:col-start-2 justify-self-center">
           <p className="p-4 text-lg font-medium text-center lg:text-xl text-adlerdarkblue">
-            Du willst mehr über das Projekt AdLer erfahren? Dann schau doch mal
-            auf unserer{" "}
-            <a
-              target="_blank"
-              href="https://projekt-adler.eu"
-              title="Dieser Link öffnet die AdLer Projekthomepage https://projekt-adler.eu in einem neuen Tab."
-              rel="noreferrer"
-              className="underline text-adleroceanblue hover:text-nodehandlecolor"
-            >
-              Projekt-Homepage
-            </a>{" "}
-            vorbei.
+            <Trans
+              i18nKey="projectInformation"
+              ns="learningSpace"
+              components={[
+                <a
+                  key={0}
+                  target="_blank"
+                  href="https://projekt-adler.eu"
+                  title={t("linkInfo").toString()}
+                  rel="noreferrer"
+                  className="underline text-adleroceanblue hover:text-nodehandlecolor"
+                ></a>,
+              ]}
+              values={{ homepageLink: t("homepage") }}
+            />
           </p>
         </section>
 
         <p className="self-end col-span-6 col-start-1 row-start-6 p-2 mb-8 text-xs text-center rounded-lg text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center">
-          © Projekt AdLer, Technische Hochschule Aschaffenburg, Hochschule für
-          angewandte Wissenschaften Kempten, ZFH - Zentrum für Fernstudien im
-          Hochschulverbund
+          {t("copyright", { ns: "start" })}
         </p>
       </main>
     </div>
