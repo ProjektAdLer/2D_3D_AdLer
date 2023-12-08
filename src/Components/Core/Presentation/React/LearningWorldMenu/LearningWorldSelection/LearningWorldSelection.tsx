@@ -11,17 +11,17 @@ import worldSolved from "../../../../../../Assets/icons/14-1-world-completed/wor
 import worldAvailable from "../../../../../../Assets/icons/14-world/world-icon-nobg.svg";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import { useInjection } from "inversify-react";
-import ILoadUserInitialLearningWorldsInfoUseCase from "src/Components/Core/Application/UseCases/LoadUserInitialLearningWorldsInfo/ILoadUserInitialLearningWorldsInfoUseCase";
 import { useEffect } from "react";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
+import ILoadUserLearningWorldsInfoUseCase from "src/Components/Core/Application/UseCases/LoadUserLearningWorldsInfo/ILoadUserLearningWorldsInfoUseCase";
 
 export default function LearningWorldSelection({
   className,
 }: AdLerUIComponent) {
-  const loadUserInitialWorldsInfoUseCase =
-    useInjection<ILoadUserInitialLearningWorldsInfoUseCase>(
-      USECASE_TYPES.ILoadUserInitialLearningWorldsInfoUseCase
+  const loadUserWorldsInfoUseCase =
+    useInjection<ILoadUserLearningWorldsInfoUseCase>(
+      USECASE_TYPES.ILoadUserLearningWorldsInfoUseCase
     );
   const [viewModel, controller] = useBuilder<
     LearningWorldSelectionViewModel,
@@ -30,15 +30,19 @@ export default function LearningWorldSelection({
 
   useEffect(() => {
     // call load user worlds use case to get relevant data
-    const loadUserInitialLearningWorldsInfoAsync = async (): Promise<void> => {
-      await loadUserInitialWorldsInfoUseCase.executeAsync();
+    const loadUserLearningWorldsInfoAsync = async (): Promise<void> => {
+      await loadUserWorldsInfoUseCase.executeAsync();
     };
-    if (viewModel) loadUserInitialLearningWorldsInfoAsync();
-  }, [viewModel, loadUserInitialWorldsInfoUseCase]);
+    if (viewModel) loadUserLearningWorldsInfoAsync();
+  }, [viewModel, loadUserWorldsInfoUseCase]);
 
   const [worlds] = useObservable<LearningWorldSelectionLearningWorldData[]>(
     viewModel?.userWorlds
   );
+  const [newData] = useObservable<boolean>(viewModel?.newData);
+  useEffect(() => {
+    if (viewModel) viewModel.newData.Value = false;
+  }, [newData, viewModel]);
   const [selectedRowID] = useObservable<number>(viewModel?.selectedRowID);
 
   if (!viewModel || !controller) return null;

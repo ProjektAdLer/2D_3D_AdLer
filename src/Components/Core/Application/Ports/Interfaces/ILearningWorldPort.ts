@@ -11,12 +11,16 @@ import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/Lear
 import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
+import UserLearningWorldsInfoTO from "../../DataTransferObjects/UserLearningWorldsInfoTO";
 
 export default interface ILearningWorldPort
   extends IAbstractPort<ILearningWorldAdapter> {
   //userWorlds
   onUserInitialLearningWorldsInfoLoaded(
     userInitialLearningWorldsInfoTO: UserInitialLearningWorldsInfoTO
+  ): void;
+  onUserLearningWorldsInfoLoaded(
+    userLearningWorldsInfoTO: UserLearningWorldsInfoTO
   ): void;
 
   // world
