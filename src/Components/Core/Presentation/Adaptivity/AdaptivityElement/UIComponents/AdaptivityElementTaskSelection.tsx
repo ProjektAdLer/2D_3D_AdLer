@@ -11,6 +11,7 @@ import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Do
 
 //TODO: change this when key icon is available
 import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
+import { useTranslation } from "react-i18next";
 
 export function getAdaptivityQuestionStarState(
   question: AdaptivityQuestion | undefined
@@ -41,12 +42,10 @@ export default function AdaptivityElementTaskSelection({
   onSelectTask: (selectedTask: AdaptivityTask) => void;
 }) {
   const [taskButtons, setTaskButtons] = useState<JSX.Element[]>([]);
-
+  const { t } = useTranslation("learningElement");
   useEffect(() => {
-    setHeaderText(
-      "Hallo Freund, ich helfe dir zu lernen. Suche dir ein Thema aus und wir arbeiten gemeinsam an deinem Wissen."
-    );
-  }, [setHeaderText]);
+    setHeaderText(t("adaptivityIntro"));
+  }, [setHeaderText, t]);
 
   useEffect(() => {
     setTaskButtons(
@@ -83,7 +82,7 @@ export default function AdaptivityElementTaskSelection({
               className="w-full max-w-2xl"
               onClick={() => onSelectTask(task)}
             >
-              <div className="grid grid-cols-7 items-center justify-between w-full h-full align-center">
+              <div className="grid items-center justify-between w-full h-full grid-cols-7 align-center">
                 <AdaptivityElementDifficultyStars
                   easyState={easyStatus}
                   mediumState={mediumStatus}
@@ -91,7 +90,7 @@ export default function AdaptivityElementTaskSelection({
                   starClassName="w-4 h-4 sm:w-6 sm:h-6 "
                 />
 
-                <p className="text-start text-sm col-span-5 pl-4">
+                <p className="col-span-5 pl-4 text-sm text-start">
                   {task.taskTitle}
                 </p>
 

@@ -10,6 +10,7 @@ import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptiv
 import AdaptivityElementDifficultyStars, {
   AdaptivityElementDifficultyStarState,
 } from "./AdaptivityElementDifficultyStars";
+import { useTranslation } from "react-i18next";
 
 export default function AdaptivityElementQuestionSelection({
   selectedTask,
@@ -25,14 +26,16 @@ export default function AdaptivityElementQuestionSelection({
     associatedQuestion: AdaptivityQuestion
   ) => void;
 }) {
+  const { t } = useTranslation("learningElement");
+
   useEffect(() => {
     setHeaderText(
-      `Du hast Aufgabengebiet ${selectedTask.taskTitle} ausgewählt. Wähle jetzt eine Schwierigkeit aus.`
+      t("taskSelectionTitle", { selectedTaskTitle: selectedTask.taskTitle })
     );
-  }, [setHeaderText, selectedTask]);
+  }, [setHeaderText, selectedTask, t]);
 
   return (
-    <div className="grid w-full py-2 px-2 gap-4">
+    <div className="grid w-full gap-4 px-2 py-2">
       {selectedTask.questions.map((question) => {
         let starState = AdaptivityElementDifficultyStarState.RequiredUnsolved;
         if (question.isCompleted === true) {
@@ -44,14 +47,14 @@ export default function AdaptivityElementQuestionSelection({
         return (
           <div
             key={question.questionID}
-            className="grid grid-cols-3 md:grid-cols-2 w-full justify-center items-center gap-4"
+            className="grid items-center justify-center w-full grid-cols-3 gap-4 md:grid-cols-2"
           >
             <StyledButton
               shape="freefloatcenter"
               className="w-full col-span-2 md:col-span-1"
               onClick={() => onSelectQuestion(question)}
             >
-              <div className="grid grid-cols-5 w-full h-full items-center ">
+              <div className="grid items-center w-full h-full grid-cols-5 ">
                 {question.difficulty ===
                   AdaptivityElementQuestionDifficultyTypes.easy && (
                   <>
@@ -59,8 +62,8 @@ export default function AdaptivityElementQuestionSelection({
                       easyState={starState}
                       starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
-                    <p className="text-start text-sm px-4 col-span-3 flex justify-center">
-                      {"Leicht"}{" "}
+                    <p className="flex justify-center col-span-3 px-4 text-sm text-start">
+                      {t("easy")}{" "}
                     </p>
                   </>
                 )}
@@ -71,8 +74,8 @@ export default function AdaptivityElementQuestionSelection({
                       mediumState={starState}
                       starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
-                    <p className="text-start text-sm px-4 col-span-3 flex justify-center">
-                      {"Mittelschwer"}{" "}
+                    <p className="flex justify-center col-span-3 px-4 text-sm text-start">
+                      {t("normal")}{" "}
                     </p>
                   </>
                 )}
@@ -83,12 +86,12 @@ export default function AdaptivityElementQuestionSelection({
                       hardState={starState}
                       starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
-                    <p className="text-start text-sm px-4 col-span-3 flex justify-center">
-                      {"Schwer"}{" "}
+                    <p className="flex justify-center col-span-3 px-4 text-sm text-start">
+                      {t("hard")}{" "}
                     </p>
                   </>
                 )}
-                <div className="flex justify-end items-center pr-2">
+                <div className="flex items-center justify-end pr-2">
                   {question.isRequired && (
                     <img
                       alt=""
@@ -101,7 +104,7 @@ export default function AdaptivityElementQuestionSelection({
                 </div>
               </div>
             </StyledButton>
-            <div className="flex flex-row md:gap-4 h-full ">
+            <div className="flex flex-row h-full md:gap-4 ">
               {question.hints.length > 0 &&
                 question.hints.map((hint) => {
                   if (
