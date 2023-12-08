@@ -28,7 +28,7 @@ exports[`AdaptivityElementAnswerSelection should render 1`] = `
         <p
           class="text-sm"
         >
-          Antworten abgeben
+          submitAnswers
         </p>
       </button>
     </div>
