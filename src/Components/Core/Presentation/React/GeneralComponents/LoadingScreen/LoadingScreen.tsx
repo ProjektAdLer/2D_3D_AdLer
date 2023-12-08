@@ -74,7 +74,9 @@ export default function LoadingScreen() {
                   title={t("linkInfo").toString()}
                   rel="noreferrer"
                   className="underline text-adleroceanblue hover:text-nodehandlecolor"
-                ></a>,
+                >
+                  {}
+                </a>,
               ]}
               values={{ homepageLink: t("homepage") }}
             />
