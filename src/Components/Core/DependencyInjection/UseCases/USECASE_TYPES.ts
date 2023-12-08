@@ -2,6 +2,9 @@ const USECASE_TYPES = {
   ILoadUserInitialLearningWorldsInfoUseCase: Symbol(
     "ILoadUserInitialLearningWorldsInfoUseCase"
   ),
+  ILoadUserLearningWorldsInfoUseCase: Symbol(
+    "ILoadUserLearningWorldsInfoUseCase"
+  ),
   ILoadLearningWorldUseCase: Symbol("ILoadLearningWorldUseCase"),
   ILoadAvatarUseCase: Symbol("ILoadAvatarUseCase"),
   ILoadLearningElementUseCase: Symbol("ILoadLearningElementUseCase"),

@@ -1174,7 +1174,7 @@ export default class MockBackendAdapter implements IBackendPort {
     author: "Paul Erhard",
     language: "de",
     world: {
-      worldName: "TestLernwelt0723",
+      worldName: "New World",
       worldDescription:
         "Alle Funktionen in AdLer sind erfolgreich absolvierbar",
       worldGoals: [""],
