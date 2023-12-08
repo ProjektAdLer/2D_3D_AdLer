@@ -45,15 +45,25 @@ export default function LoginComponent({
     <div className={tailwindMerge(className)}>
       <StyledButton
         color={userLoggedIn ? "success" : "default"}
+        shape="freefloatleft"
         onClick={() => setModalVisible(true)}
         data-testid="login-button"
+        className="flex h-10 gap-2 m-1 !border-b-[1px] !border-r-[1px] pointer-events-none w-fit"
       >
-        <img src={moodleIcon} alt="Moodle-Icon"></img>
+        <img className="w-10" src={moodleIcon} alt="Moodle-Icon"></img>
+        <p className="text-sm font-regular portrait:hidden">
+          Eingeloggt als "Username"
+        </p>
       </StyledButton>
 
       {userLoggedIn && (
-        <StyledButton onClick={() => controller.logout()} data-testid="logout">
-          debug_logout
+        <StyledButton
+          shape="freefloatleft"
+          className="h-6 !bg-red-300 w-fit absolute top-10 left-44 portrait:-left-2 portrait:-top-4"
+          onClick={() => controller.logout()}
+          data-testid="logout"
+        >
+          <p className="text-xs rounded-lg">Ausloggen</p>
         </StyledButton>
       )}
 

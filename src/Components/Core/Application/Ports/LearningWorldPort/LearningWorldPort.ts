@@ -13,6 +13,7 @@ import LearningSpacePrecursorAndSuccessorTO from "../../DataTransferObjects/Lear
 import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
+import UserLearningWorldsInfoTO from "../../DataTransferObjects/UserLearningWorldsInfoTO";
 
 @injectable()
 export default class LearningWorldPort
@@ -28,6 +29,14 @@ export default class LearningWorldPort
         adapter.onUserInitialLearningWorldsInfoLoaded(
           userInitialLearningWorldsInfoTO
         );
+    });
+  }
+  public onUserLearningWorldsInfoLoaded(
+    userLearningWorldsInfoTO: UserLearningWorldsInfoTO
+  ): void {
+    this.adapters.forEach((adapter) => {
+      if (adapter.onUserLearningWorldsInfoLoaded)
+        adapter.onUserLearningWorldsInfoLoaded(userLearningWorldsInfoTO);
     });
   }
 

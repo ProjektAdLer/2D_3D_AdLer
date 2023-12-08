@@ -60,9 +60,35 @@ export default class LoadLearningWorldUseCase
 
   private semaphore = new Semaphore("LoadWorld in Use", 1);
 
+  async internalExecuteAsync(data: {
+    worldID: number;
+  }): Promise<LearningWorldTO> {
+    const lock = await this.semaphore.acquire();
+    const loadedWorld = await this.loadWorld(data, lock);
+
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      "LoadLearningWorldUseCase (internalExecuteAsync): Loaded world and cumulated space scores."
+    );
+    return loadedWorld;
+  }
   async executeAsync(data: { worldID: number }): Promise<void> {
     const lock = await this.semaphore.acquire();
+    const loadedWorlds = await this.loadWorld(data, lock);
+    // set user location
+    this.setUserLocationUseCase.execute({ worldID: data.worldID });
 
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      "LoadLearningWorldUseCase (executeAsync): Loaded world and cumulated space scores."
+    );
+    this.worldPort.onLearningWorldLoaded(loadedWorlds);
+  }
+
+  async loadWorld(
+    data: { worldID: number },
+    lock: any
+  ): Promise<LearningWorldTO> {
     // check if user is logged in
     const userData = this.container.getEntitiesOfType(UserDataEntity);
     if (userData.length === 0 || userData[0]?.isLoggedIn === false) {
@@ -131,16 +157,9 @@ export default class LoadLearningWorldUseCase
       space.requirementsString = spaceAvailability.requirementsString;
       space.requirementsSyntaxTree = spaceAvailability.requirementsSyntaxTree;
     });
-    // set user location
-    this.setUserLocationUseCase.execute({ worldID: data.worldID });
-
-    this.logger.log(
-      LogLevelTypes.TRACE,
-      "LoadLearningWorldUseCase: Loaded world and cumulated space scores."
-    );
-    this.worldPort.onLearningWorldLoaded(worldTO);
 
     lock.release();
+    return worldTO;
   }
 
   private async loadLearningWorld(

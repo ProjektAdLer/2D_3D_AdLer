@@ -10,6 +10,7 @@ import ILoadUserInitialLearningWorldsInfoUseCase from "./ILoadUserInitialLearnin
 import type INotificationPort from "src/Components/Core/Application/Ports/Interfaces/INotificationPort";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import UserInitialLearningWorldsInfoTO from "../../DataTransferObjects/UserInitialLearningWorldsInfoTO";
 
 type AvailableLearningWorldsArray = {
   worldID: number;
@@ -34,8 +35,15 @@ export default class LoadUserInitialLearningWorldsInfoUseCase
   ) {}
 
   private semaphore = new Semaphore("LoadUserWorlds in Use", 1);
-
+  async internalExecuteAsync(): Promise<UserInitialLearningWorldsInfoTO> {
+    const loadedWorlds = await this.loadInitialWorldsInfo();
+    return loadedWorlds;
+  }
   async executeAsync(): Promise<void> {
+    const loadedWorlds = await this.loadInitialWorldsInfo();
+    this.worldPort.onUserInitialLearningWorldsInfoLoaded(loadedWorlds);
+  }
+  async loadInitialWorldsInfo(): Promise<UserInitialLearningWorldsInfoTO> {
     const lock = await this.semaphore.acquire();
 
     const userEntities =
@@ -64,20 +72,17 @@ export default class LoadUserInitialLearningWorldsInfoUseCase
         LogLevelTypes.TRACE,
         "LoadUserInitialLearningWorldsInfoUseCase: Loaded available worlds from backend."
       );
-      this.worldPort.onUserInitialLearningWorldsInfoLoaded({
-        worldInfo: loadedAvailableWorlds,
-      });
+      lock.release();
+      return { worldInfo: loadedAvailableWorlds };
     } else {
       this.logger.log(
         LogLevelTypes.TRACE,
         "LoadUserInitialLearningWorldsInfoUseCase: Loaded available worlds from cache."
       );
-      this.worldPort.onUserInitialLearningWorldsInfoLoaded({
-        worldInfo: userEntities[0].availableWorlds,
-      });
+      const worlds = { worldInfo: userEntities[0].availableWorlds };
+      lock.release();
+      return worlds;
     }
-
-    lock.release();
   }
 
   private async loadAvailableLearningWorlds(

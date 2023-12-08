@@ -52,6 +52,8 @@ import IDisplayLearningElementUseCase from "../../Application/UseCases/Adaptivit
 import DisplayLearningElementUseCase from "../../Application/UseCases/Adaptivity/DisplayLearningElementUseCase/DisplayLearningElementUseCase";
 import ILogoutUseCase from "../../Application/UseCases/Logout/ILogoutUseCase";
 import LogoutUseCase from "../../Application/UseCases/Logout/LogoutUseCase";
+import ILoadUserLearningWorldsInfoUseCase from "../../Application/UseCases/LoadUserLearningWorldsInfo/ILoadUserLearningWorldsInfoUseCase";
+import LoadUserLearningWorldsInfoUseCase from "../../Application/UseCases/LoadUserLearningWorldsInfo/LoadUserLearningWorldsInfoUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -60,6 +62,11 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.ILoadUserInitialLearningWorldsInfoUseCase
   )
     .to(LoadUserInitialLearningWorldsInfoUseCase)
+    .inSingletonScope();
+  bind<ILoadUserLearningWorldsInfoUseCase>(
+    USECASE_TYPES.ILoadUserLearningWorldsInfoUseCase
+  )
+    .to(LoadUserLearningWorldsInfoUseCase)
     .inSingletonScope();
 
   bind<ILoadLearningWorldUseCase>(USECASE_TYPES.ILoadLearningWorldUseCase)
