@@ -14,7 +14,7 @@ export default function AdaptivityElementAnswerFeedback({
   const { t } = useTranslation("learningElement");
   useEffect(() => {
     setHeaderText(isCorrect ? t("rightAnswer") : t("wrongAnswer"));
-  }, [isCorrect, setHeaderText]);
+  }, [isCorrect, setHeaderText, t]);
 
   return (
     <div className="flex w-full my-4 h-fit">

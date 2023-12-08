@@ -91,6 +91,7 @@ export default function BabylonCanvas(
     adaptToDeviceRatio,
     sceneOptions,
     sceneDefinitionType,
+    t,
   ]);
 
   return (
