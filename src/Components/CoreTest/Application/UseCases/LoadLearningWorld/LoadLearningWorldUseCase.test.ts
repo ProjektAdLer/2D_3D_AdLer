@@ -216,7 +216,7 @@ describe("LoadLearningWorldUseCase", () => {
     expect(entityContainerMock.createEntity).not.toHaveBeenCalled();
   });
 
-  test("loads the World and notifies port", async () => {
+  test("loads the World and notifies port (executeAsync)", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
       mockedGetEntitiesOfTypeUserDataReturnValue
@@ -260,6 +260,51 @@ describe("LoadLearningWorldUseCase", () => {
     expect(backendMock.getWorldData).toHaveBeenCalledTimes(1);
     expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(3);
     expect(worldPortMock.onLearningWorldLoaded).toHaveBeenCalledTimes(1);
+  });
+
+  test("loads the World and returns value (internalExecuteAsync)", async () => {
+    // mock user data response
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+      mockedGetEntitiesOfTypeUserDataReturnValue
+    );
+    // mock world response
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
+
+    // mock backend response
+    backendMock.getWorldData.mockResolvedValueOnce(minimalGetWorldDataResponse);
+
+    backendMock.getCoursesAvailableForUser.mockResolvedValue({
+      courses: [
+        {
+          courseID: 1,
+          courseName: "Testkurs",
+        },
+      ],
+    });
+
+    // mock entity creation
+    const mockedWorldEntity = new LearningWorldEntity();
+    mockedWorldEntity.name = minimalGetWorldDataResponse.worldName;
+    mockedWorldEntity.goals = minimalGetWorldDataResponse.goals;
+    mockedWorldEntity.spaces = [];
+
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<LearningElementEntity>()
+    );
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<LearningSpaceEntity>()
+    );
+    entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
+
+    backendMock.getWorldStatus.mockResolvedValue({
+      worldID: 1,
+      elements: [{}],
+    } as LearningWorldStatusTO);
+
+    await systemUnderTest.internalExecuteAsync({ worldID: 42 });
+
+    expect(backendMock.getWorldData).toHaveBeenCalledTimes(1);
+    expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(3);
   });
 
   test("uses worldEntity if one is available", async () => {
