@@ -3,6 +3,7 @@ import { AdaptivityQuestion } from "../AdaptivityElementViewModel";
 import StyledButton, {
   StyledButtonColor,
 } from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import { useTranslation } from "react-i18next";
 
 function getIsAnyAnswerSelected(question: AdaptivityQuestion): boolean {
   return question.questionAnswers.some((a) => a.isSelected === true);
@@ -23,6 +24,8 @@ export default function AdaptivityElementAnswerSelection({
   const [isAnyAnswerSelected, setIsAnyAnswerSelected] = useState<boolean>(
     getIsAnyAnswerSelected(question)
   );
+
+  const { t } = useTranslation("learningElement");
 
   useEffect(() => {
     setHeaderText(question.questionText);
@@ -76,7 +79,7 @@ export default function AdaptivityElementAnswerSelection({
           }}
           disabled={!isAnyAnswerSelected}
         >
-          <p className="text-sm">{"Antworten abgeben"}</p>
+          <p className="text-sm">{t("submitAnswers")}</p>
         </StyledButton>
       </div>
     </div>

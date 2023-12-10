@@ -39,6 +39,7 @@ import {
   LearningElementModel,
   LearningElementModelTypeEnums,
 } from "../../../../Domain/LearningElementModels/LearningElementModelTypes";
+import { Trans, useTranslation } from "react-i18next";
 
 function getNPCImage(model: LearningElementModel, close: boolean): string {
   switch (model) {
@@ -78,6 +79,8 @@ export default function AdaptivityElementDialogContainer({
     viewmodel?.showFooterTooltip
   );
   const [model] = useObservable<LearningElementModel>(viewmodel?.model);
+
+  const { t } = useTranslation("learningElement");
 
   // -- State --
   const [headerText, setHeaderText] = useState<string>("");
@@ -241,8 +244,7 @@ export default function AdaptivityElementDialogContainer({
                           controller.showFooterTooltip();
                         }}
                       >
-                        Bewege deine Maus hier her, um die Symbollegende
-                        anzuzeigen
+                        {t("legendHover")}
                       </p>
                     )}
                     {showFooterTooltip && (
@@ -305,19 +307,17 @@ export default function AdaptivityElementDialogContainer({
                         </div>
                         <div className="flex-col items-start justify-center icons">
                           <p>
-                            Links: Leichte Frage<br></br>Mitte: Mittelschwere
-                            Frage<br></br>
-                            Rechts: Schwere Frage
+                            <Trans
+                              i18nKey="legendDifficulty"
+                              ns="learningElement"
+                            />
                           </p>
-                          <p>Benötigte, ungelöste Frage</p>
-                          <p>Nicht benötigte, ungelöste Frage</p>
-                          <p>Benötigte, gelöste Frage</p>
-                          <p>Nicht benötigte, gelöste Frage</p>
-                          <p>Keine Frage dieser Schwierigkeit vorhanden</p>
-                          <p>
-                            Diese Aufgabe muss bearbeitet werden, um weiter zu
-                            kommen.
-                          </p>
+                          <p>{t("requiredUnsolved")}</p>
+                          <p>{t("optionalUnsolved")}</p>
+                          <p>{t("requiredSolved")}</p>
+                          <p>{t("optionalSolved")}</p>
+                          <p>{t("noQuestionDifficulty")}</p>
+                          <p>{t("requiredTask")}</p>
                         </div>
                       </div>
                     )}

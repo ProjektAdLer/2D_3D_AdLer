@@ -16,6 +16,7 @@ import ILearningWorldPort from "../../../Application/Ports/Interfaces/ILearningW
 import ILoadExternalLearningElementUseCase from "src/Components/Core/Application/UseCases/Adaptivity/LoadExternalLearningElementUseCase/ILoadExternalLearningElementUseCase";
 import type { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import IDisplayLearningElementUseCase from "src/Components/Core/Application/UseCases/Adaptivity/DisplayLearningElementUseCase/IDisplayLearningElementUseCase";
+import i18next from "i18next";
 
 export default class AdaptivityElementController
   implements IAdaptivityElementController
@@ -155,8 +156,7 @@ export default class AdaptivityElementController
             showOnIsWrong: true,
             hintAction: {
               hintActionType: AdaptivityElementActionTypes.CommentAction,
-              textData:
-                "Der hier hinterlegte Hinweis existiert leider nicht. Bitte fülle einen Bugreport aus.",
+              textData: i18next.t("noQuestion", { ns: "learningElement" }),
             },
           } as AdaptivityHint;
           this.viewModel.currentQuestion.Value = associatedQuestion;
@@ -168,8 +168,7 @@ export default class AdaptivityElementController
             showOnIsWrong: true,
             hintAction: {
               hintActionType: AdaptivityElementActionTypes.CommentAction,
-              textData:
-                "Der hier hinterlegte Hinweis ist nicht eindeutig zuordbar. Bitte fülle einen Bugreport aus.",
+              textData: i18next.t("tooManyHints", { ns: "learningElement" }),
             },
           } as AdaptivityHint;
           this.viewModel.currentQuestion.Value = associatedQuestion;

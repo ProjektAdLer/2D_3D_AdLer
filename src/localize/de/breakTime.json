@@ -1,0 +1,17 @@
+{
+  "pauseTitle": "Pausenhinweis",
+  "pauseInfo": "Zeit für eine Pause!",
+  "pauseExplanation": "Klicke auf die Tasse, um Informationen zu Pausen zu erhalten oder schließe die Meldung über den 'x' Button.",
+
+  "shortBreakBase": "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
+  "infoMobilization": "Auf dem Bild sehen Sie eine kurze Übung zur Mobilisation.",
+  "infoNutrition": "Vielleicht interessiert Sie in dem Zusammenhang auch, dass auch die Ernährung für das Lernen wichtig ist.",
+  "infoSeatingPosition": "Vielleicht interessiert Sie in dem Zusammenhang auch, dass eine richtige Sitzhaltung und ein optimaler Abstand zum Bildschirm für das Lernen wichtig ist.",
+
+  "mediumBreakBase": "Sie haben nun 2 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine Pause von mindestens 20 Minuten empfehlen.",
+  "infoMusic": "Wie wäre es denn mit aktivem bzw. bewusstem Musikhören?",
+  "infoWhy": "Warum?",
+
+  "longBreakBase": "Sie haben nun 4 Stunden am Stück im AdLer-System gelernt und gearbeitet. Wir würden Ihnen eine längere Pause von mindestens 90 Minuten empfehlen.",
+  "infoStroll": "Wie wäre es denn mit einem Spaziergang?"
+}

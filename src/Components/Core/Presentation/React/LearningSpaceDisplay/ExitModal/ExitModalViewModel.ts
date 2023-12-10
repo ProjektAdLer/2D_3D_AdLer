@@ -2,8 +2,8 @@ import LearningSpaceTO from "../../../../Application/DataTransferObjects/Learnin
 import Observable from "../../../../../../Lib/Observable";
 
 export default class ExitModalViewModel {
-  modalTitle = new Observable<string>("Raum verlassen?");
-  exitButtonTitle = new Observable<string>("Raum verlassen");
+  modalTitle = new Observable<string>("exitRoomTitle");
+  exitButtonTitle = new Observable<string>("exitRoomButton");
   successorSpaces = new Observable<LearningSpaceTO[]>();
   precursorSpaces = new Observable<LearningSpaceTO[]>();
 

@@ -1,0 +1,30 @@
+{
+  "easyQuestion": "Leichte Frage",
+  "normalQuestion": "Mittlere Frage",
+  "hardQuestion": "Schwere Frage",
+  "easy": "Leicht",
+  "normal": "Mittelschwer",
+  "hard": "Schwer",
+
+  "noQuestion": "Der hier hinterlegte Hinweis existiert leider nicht. Bitte fülle einen Bugreport aus.",
+  "tooManyHints": "Der hier hinterlegte Hinweis ist nicht eindeutig zuordbar. Bitte fülle einen Bugreport aus.",
+  "wrongAnswer": "Schade, leider war deine Antwort falsch.",
+  "rightAnswer": "Glückwunsch! Diese Antwort war richtig!",
+  "nextButton": "Weiter",
+  "submitAnswers": "Antworten abgeben",
+  "hintTitle": "Ich helfe dir auf die Sprünge",
+  "taskSelectionTitle": "Du hast Aufgabengebiet {{selectedTaskTitle}} ausgewählt. Wähle jetzt eine Schwierigkeit aus.",
+  "adaptivityIntro": "Hallo Freund, ich helfe dir zu lernen. Suche dir ein Thema aus und wir arbeiten gemeinsam an deinem Wissen.",
+
+  "legendHover": "Bewege deine Maus hier her, um die Symbollegende anzuzeigen",
+  "leftEasy": "Links: Leichte Frage<br/>",
+  "middleNormal": "Mitte: Mittelschwer<br/>",
+  "rightHard": "Rechts: Schwere Frage",
+  "legendDifficulty": "Links: Leichte Frage<br/>Mitte: Mittelschwer<br/>Rechts: Schwere Frage",
+  "requiredUnsolved": "Benötigte, ungelöste Frage",
+  "optionalUnsolved": "Nicht benötigt, ungelöste Frage",
+  "requiredSolved": "Benötigte, gelöste Frage",
+  "optionalSolved": "Nicht benötigt, gelöste Frage",
+  "noQuestionDifficulty": "Keiner Frage dieser Schwierigkeit vorhanden",
+  "requiredTask": "Diese Aufgabe muss bearbeitet werden, um weiter zu kommen."
+}
