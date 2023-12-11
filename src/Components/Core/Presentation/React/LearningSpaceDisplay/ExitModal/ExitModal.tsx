@@ -12,6 +12,7 @@ import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects
 import spaceSolved from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import spaceAvailable from "../../../../../../Assets/icons/27-1-lock-open/lock-icon-open-nobg.svg";
 import spaceLocked from "../../../../../../Assets/icons/27-lock-closed/lock-icon-closed-nobg.svg";
+import { useTranslation } from "react-i18next";
 
 export default function ExitModal({ className }: AdLerUIComponent<{}>) {
   const [viewModel, controller] = useBuilder<
@@ -24,13 +25,15 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
     setOpen(false);
   }, [setOpen]);
 
+  const { t } = useTranslation("learningSpace");
+
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;
 
   return (
     <div>
       <StyledModal
-        title={viewModel.modalTitle.Value}
+        title={t(viewModel.modalTitle.Value).toString()}
         onClose={closeModal}
         showModal={isOpen}
         className={tailwindMerge(
@@ -44,7 +47,7 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
           className="flex w-[100%] mb-2 "
           onClick={controller.onExitButtonClicked}
         >
-          {viewModel.exitButtonTitle.Value}
+          {t(viewModel.exitButtonTitle.Value).toString()}
         </StyledButton>
 
         {viewModel.isExit.Value &&

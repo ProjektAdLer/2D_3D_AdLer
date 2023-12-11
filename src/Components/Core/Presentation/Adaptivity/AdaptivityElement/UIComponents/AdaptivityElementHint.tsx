@@ -1,6 +1,7 @@
 import { AdaptivityElementActionTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 import { AdaptivityHint } from "../AdaptivityElementViewModel";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function AdaptivityElementHint({
   hint,
@@ -9,9 +10,11 @@ export default function AdaptivityElementHint({
   hint: AdaptivityHint;
   setHeaderText: (headerText: string) => void;
 }) {
+  const { t } = useTranslation("learningElement");
+
   useEffect(() => {
-    setHeaderText("Ich helfe dir auf die Sprünge");
-  }, [setHeaderText]);
+    setHeaderText(t("hintTitle"));
+  }, [setHeaderText, t]);
 
   return (
     <>

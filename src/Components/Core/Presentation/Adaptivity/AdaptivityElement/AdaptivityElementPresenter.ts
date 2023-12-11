@@ -19,6 +19,7 @@ import AdaptivityElementAnswersTO from "src/Components/Core/Application/DataTran
 import AdaptivityElementTriggerTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTriggerTO";
 import { AdaptivityElementTriggerConditionTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementTriggerConditionTypes";
 import AdaptivityElementHintTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
+import i18next from "i18next";
 
 export default class AdaptivityElementPresenter
   implements IAdaptivityElementPresenter
@@ -105,13 +106,16 @@ export default class AdaptivityElementPresenter
       if (this.viewModel.currentQuestion.Value !== null) {
         switch (this.viewModel.currentQuestion.Value.difficulty) {
           case AdaptivityElementQuestionDifficultyTypes.easy:
-            newFooterText += " => Leichte Frage";
+            newFooterText +=
+              " => " + i18next.t("easyQuestion", { ns: "learningElement" });
             break;
           case AdaptivityElementQuestionDifficultyTypes.medium:
-            newFooterText += " => Mittlere Frage";
+            newFooterText +=
+              " => " + i18next.t("normalQuestion", { ns: "learningElement" });
             break;
           case AdaptivityElementQuestionDifficultyTypes.hard:
-            newFooterText += " => Schwere Frage";
+            newFooterText +=
+              " => " + i18next.t("hardQuestion", { ns: "learningElement" });
             break;
         }
       }

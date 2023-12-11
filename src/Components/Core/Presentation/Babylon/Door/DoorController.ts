@@ -7,6 +7,7 @@ import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_T
 import IExitModalPresenter from "~ReactComponents/LearningSpaceDisplay/ExitModal/IExitModalPresenter";
 import IGetLearningSpacePrecursorAndSuccessorUseCase from "src/Components/Core/Application/UseCases/GetLearningSpacePrecursorAndSuccessor/IGetLearningSpacePrecursorAndSuccessorUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import i18next from "i18next";
 
 export default class DoorController implements IDoorController {
   private bottomTooltipPresenter: IBottomTooltipPresenter;
@@ -61,7 +62,9 @@ export default class DoorController implements IDoorController {
 
   private displayTooltip(): number {
     return this.bottomTooltipPresenter.display(
-      this.viewModel.isExit ? "Ausgangstüre" : "Eingangstüre",
+      this.viewModel.isExit
+        ? i18next.t("exitDoor", { ns: "learningSpace" })
+        : i18next.t("enterDoor", { ns: "learningSpace" }),
       undefined,
       undefined,
       this.picked

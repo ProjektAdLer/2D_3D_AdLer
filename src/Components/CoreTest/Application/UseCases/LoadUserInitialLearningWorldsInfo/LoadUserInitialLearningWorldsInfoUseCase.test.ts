@@ -14,7 +14,7 @@ const worldPortMock = mock<ILearningWorldPort>();
 const notificationPortMock = mock<INotificationPort>();
 const entityContainerMock = mock<IEntityContainer>();
 
-describe("LoadUserWorldsUseCase", () => {
+describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
   let systemUnderTest: LoadUserInitialLearningWorldsInfoUseCase;
 
   beforeAll(() => {
@@ -116,7 +116,7 @@ describe("LoadUserWorldsUseCase", () => {
     expect(entityContainerMock.createEntity).not.toHaveBeenCalled();
   });
 
-  test("loads the UserInitialLearningWorldsInfo and notifies its presenters", async () => {
+  test("loads the UserInitialLearningWorldsInfo and notifies its presenters (execute)", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
       {
@@ -146,5 +146,40 @@ describe("LoadUserWorldsUseCase", () => {
     expect(
       worldPortMock.onUserInitialLearningWorldsInfoLoaded
     ).toHaveBeenCalledTimes(1);
+  });
+
+  test("loads the UserInitialLearningWorldsInfo and returns (internalExecute)", async () => {
+    // mock user data response
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
+      {
+        isLoggedIn: true,
+        userToken: "token",
+        username: "username",
+        availableWorlds: [],
+      } as Partial<UserDataEntity>,
+    ]);
+
+    // mock backend response
+    backendMock.getCoursesAvailableForUser.mockResolvedValue({
+      courses: [
+        {
+          courseID: 1,
+          courseName: "Testkurs 1",
+        },
+        {
+          courseID: 2,
+          courseName: "Testkurs 2",
+        },
+      ],
+    });
+
+    const returnValue = await systemUnderTest.internalExecuteAsync();
+
+    expect(returnValue).toStrictEqual({
+      worldInfo: [
+        { worldID: 1, worldName: "Testkurs 1" },
+        { worldID: 2, worldName: "Testkurs 2" },
+      ],
+    });
   });
 });

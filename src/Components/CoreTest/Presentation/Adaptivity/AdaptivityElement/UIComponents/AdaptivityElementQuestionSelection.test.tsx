@@ -133,7 +133,7 @@ describe("AdaptivityElementQuestionSelection", () => {
         onSelectHint={() => {}}
       />
     );
-    getByText("Leicht").click();
+    getByText("easy").click();
 
     expect(onSelectQuestionMock).toHaveBeenCalledTimes(1);
     expect(onSelectQuestionMock).toHaveBeenCalledWith(question);

@@ -13,6 +13,8 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import pauseIcon from "../../../../../Assets/icons/42-pause-icon/47-pause-icon-nobg.svg";
 import { useEffect, useState } from "react";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 export default function BreakTimeNotification({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
@@ -42,6 +44,8 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
     setChosenBreakContent(breakContent);
   }, [randomNumber, viewModel, breakType]);
 
+  const { t } = useTranslation("breakTime");
+
   if (!viewModel || !controller || !showModal || !chosenBreakContent)
     return null;
 
@@ -57,11 +61,8 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
           <img src={pauseIcon} className="h-fit" alt="Pause Icon" />
         </StyledButton>
         <div className="hidden lg:visible lg:flex lg:flex-col items-start max-w-[60%] text-adlerdarkblue">
-          <h1 className="text-xl font-bold">Zeit für eine Pause!</h1>
-          <p className="text-sm">
-            Klicke auf die Tasse, um Informationen zu Pausen zu erhalten oder
-            schließe die Meldung über den "x" Button.
-          </p>
+          <h1 className="text-xl font-bold">{t("pauseInfo")}</h1>
+          <p className="text-sm">{t("pauseExplanation")}</p>
         </div>
         <StyledButton
           shape="closebutton"
@@ -78,7 +79,7 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
       className={tailwindMerge(className, "")}
       showModal={showModal}
       onClose={controller.minimizeOrMaximizeBreakNotification}
-      title="Pausenhinweis"
+      title={t("pauseTitle").toString()}
     >
       {RenderBreakContent(
         controller,
@@ -130,7 +131,9 @@ function RenderBreakContent(
       <div className="flex flex-col items-center gap-6 mx-0 my-auto slider-wrapper">
         <div className="flex flex-col gap-4 overflow-y-auto items-center justify-center slider portrait:max-w-[90vw] max-h-[90vh]">
           <p className="w-full pb-4 pl-6 text-sm font-bold md:text-xl lg:text-xl max-w-[60vw] ultraWide:max-w-[40vw] text-adlerdarkblue">
-            {chosenBreakContent.titleMessage}
+            {chosenBreakContent.titleMessageKeys.map((e) => {
+              return i18next.t(e, { ns: "breakTime" }) + " ";
+            })}
           </p>
           {currentSlideIndex === 1 && (
             <img

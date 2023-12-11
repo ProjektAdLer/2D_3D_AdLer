@@ -32,7 +32,7 @@ describe("BreakTimeNotification", () => {
 
     render(<BreakTimeNotification />);
 
-    expect(screen.getByText("Zeit für eine Pause!")).toBeInTheDocument();
+    expect(screen.getByText("pauseInfo")).toBeInTheDocument();
   });
 
   test("should call controller when clicked in minimized form", () => {

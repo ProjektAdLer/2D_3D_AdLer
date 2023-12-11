@@ -80,7 +80,7 @@ describe("Calculate Learning World Score UseCase", () => {
     entityContainerMock.filterEntitiesOfType.mockReset();
   });
 
-  test("should calculate the correct total world score", () => {
+  test("should calculate the correct total world score (execute)", () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce(userLocationTO);
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
       {
@@ -115,6 +115,50 @@ describe("Calculate Learning World Score UseCase", () => {
     const result = systemUnderTest.execute();
 
     expect(worldPortMock.onLearningWorldScored).toHaveBeenCalledWith({
+      currentScore: 30,
+      requiredScore: 60,
+      maxScore: 120,
+      worldID: 1,
+    } as LearningWorldScoreTO);
+
+    entityContainerMock.filterEntitiesOfType.mockReset();
+  });
+
+  test("should calculate the correct total world score (internalExecute)", () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce(userLocationTO);
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      {
+        id: 1,
+        spaces: [
+          {
+            id: 1,
+          },
+          {
+            id: 2,
+          },
+        ],
+        name: "TestWorld",
+        description: "TestWorldDescription",
+        goals: "Testgoal",
+      } as LearningWorldEntity,
+    ]);
+
+    calculateSpaceScoreMock.internalExecute.mockReturnValueOnce({
+      currentScore: 10,
+      maxScore: 30,
+      requiredScore: 20,
+      spaceID: 1,
+    } as LearningSpaceScoreTO);
+    calculateSpaceScoreMock.internalExecute.mockReturnValueOnce({
+      currentScore: 20,
+      maxScore: 90,
+      requiredScore: 40,
+      spaceID: 2,
+    } as LearningSpaceScoreTO);
+
+    const result = systemUnderTest.internalExecute({ worldID: 1 });
+
+    expect(result).toStrictEqual({
       currentScore: 30,
       requiredScore: 60,
       maxScore: 120,

@@ -1,7 +1,7 @@
 import LoginComponent from "~ReactComponents/WelcomePage/LoginComponent/LoginComponent";
 import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
 import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
-import learningRoomBg from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.png";
+//import learningRoomBg from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.png";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
 import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
 import { useTranslation } from "react-i18next";

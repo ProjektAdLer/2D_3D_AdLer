@@ -3,7 +3,7 @@
 exports[`AdaptivityElementAnswerFeedback should render 1`] = `
 <div>
   <div
-    class="flex w-full h-fit my-4"
+    class="flex w-full my-4 h-fit"
   >
     <div
       class="flex justify-end w-1/2"
@@ -14,7 +14,7 @@ exports[`AdaptivityElementAnswerFeedback should render 1`] = `
         <p
           class="text-sm"
         >
-          Weiter
+          nextButton
         </p>
       </button>
     </div>
