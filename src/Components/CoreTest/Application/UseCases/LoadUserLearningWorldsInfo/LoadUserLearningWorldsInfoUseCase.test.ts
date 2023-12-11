@@ -12,6 +12,9 @@ import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/IL
 import LearningWorldEntity from "../../../../Core/Domain/Entities/LearningWorldEntity";
 import { IInternalLoadLearningWorldUseCase } from "../../../../Core/Application/UseCases/LoadLearningWorld/ILoadLearningWorldUseCase";
 import LearningWorldTO from "../../../../Core/Application/DataTransferObjects/LearningWorldTO";
+import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
+import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { IInternalCalculateLearningSpaceScoreUseCase } from "../../../../Core/Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 
 const entityContainerMock = mock<IEntityContainer>();
 const notificationPortMock = mock<INotificationPort>();
@@ -19,6 +22,8 @@ const loadUserInitialLearningWorldsInfoUseCaseMock =
   mock<IInternalLoadUserInitialLearningWorldsInfoUseCase>();
 const worldPortMock = mock<ILearningWorldPort>();
 const loadLearningWorldUseCaseMock = mock<IInternalLoadLearningWorldUseCase>();
+const calculateSpaceScoreMock =
+  mock<IInternalCalculateLearningSpaceScoreUseCase>();
 
 describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
   let systemUnderTest: LoadUserLearningWorldsInfoUseCase;
@@ -35,6 +40,9 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
       worldPortMock
     );
+    CoreDIContainer.rebind(
+      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase
+    ).toConstantValue(calculateSpaceScoreMock);
     CoreDIContainer.rebind(
       USECASE_TYPES.ILoadLearningWorldUseCase
     ).toConstantValue(loadLearningWorldUseCaseMock);
@@ -54,21 +62,71 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
   });
 
   test("calls world port twice, once initially, once with all data", async () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValue([
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
-        name: "string",
-        spaces: [],
-        goals: [],
+        name: "worldEntity",
         id: 1,
+        spaces: [
+          {
+            id: 1,
+            name: "string",
+            elements: [],
+            description: "string",
+            goals: [],
+            requirements: "",
+            requiredScore: 1,
+            template: LearningSpaceTemplateType.None,
+            theme: LearningSpaceThemeType.Suburb,
+            parentWorldID: 1,
+          },
+        ],
+        goals: [],
         description: "string",
         evaluationLink: "string",
       } as LearningWorldEntity,
+      {
+        name: "string2",
+        id: 2,
+        spaces: [
+          {
+            id: 2,
+            name: "string",
+            elements: [],
+            description: "string",
+            goals: [],
+            requirements: "",
+            requiredScore: 100000000,
+            template: LearningSpaceTemplateType.None,
+            theme: LearningSpaceThemeType.Suburb,
+            parentWorldID: 1,
+          },
+        ],
+        goals: [],
+        description: "string2",
+        evaluationLink: "string2",
+      } as LearningWorldEntity,
     ]);
     loadLearningWorldUseCaseMock.internalExecuteAsync.mockResolvedValue({
-      name: "string",
-      spaces: [],
+      name: "worldTO",
+      spaces: [
+        {
+          id: 2,
+          name: "string",
+          elements: [],
+          description: "string",
+          goals: [],
+          requirementsString: "",
+          requirementsSyntaxTree: null,
+          isAvailable: true,
+          requiredScore: 100000000,
+          currentScore: 0,
+          maxScore: 0,
+          template: LearningSpaceTemplateType.None,
+          theme: LearningSpaceThemeType.Suburb,
+        },
+      ],
       goals: [],
-      id: 1,
+      id: 2,
       description: "string",
       evaluationLink: "string",
     } as LearningWorldTO);
@@ -77,6 +135,12 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
         worldInfo: [{ worldID: 1, worldName: "TestWorld" }],
       } as UserInitialLearningWorldsInfoTO
     );
+    calculateSpaceScoreMock.internalExecute.mockReturnValue({
+      currentScore: 10,
+      maxScore: 30,
+      requiredScore: 20,
+      spaceID: 1,
+    });
 
     await systemUnderTest.executeAsync();
 
