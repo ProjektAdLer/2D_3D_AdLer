@@ -6,9 +6,10 @@ export default class LoginComponentPresenter
 {
   constructor(private viewModel: LoginComponentViewModel) {}
 
-  onLoginSuccessful(): void {
+  onLoginSuccessful(userName: string): void {
     this.viewModel.userLoggedIn.Value = true;
     this.viewModel.modalVisible.Value = false;
+    this.viewModel.userName.Value = userName;
   }
 
   onLogoutSuccessful(): void {

@@ -68,7 +68,7 @@ export default class LoginUseCase implements ILoginUseCase {
       LogLevelTypes.INFO,
       "LoginUseCase: User logged in successfully"
     );
-    this.lmsPort.onLoginSuccessful();
+    this.lmsPort.onLoginSuccessful(data.username);
 
     return Promise.resolve();
   }
