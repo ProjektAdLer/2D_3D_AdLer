@@ -8,10 +8,10 @@ export default class LMSPort
   extends AbstractPort<ILMSAdapter>
   implements ILMSPort
 {
-  onLoginSuccessful(): void {
+  onLoginSuccessful(userName: string): void {
     this.adapters.forEach((adapter) => {
       if (adapter.onLoginSuccessful) {
-        adapter.onLoginSuccessful();
+        adapter.onLoginSuccessful(userName);
       }
     });
   }

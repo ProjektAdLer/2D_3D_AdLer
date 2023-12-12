@@ -32,10 +32,12 @@ export default function LoginComponent({
   const [userLoggedIn, setUserLoggedIn] = useObservable<boolean>(
     viewModel?.userLoggedIn
   );
+  const [userName] = useObservable<string>(viewModel?.userName);
 
   useEffect(() => {
     const loginStatus = getLoginStatusUseCase.execute();
-    setUserLoggedIn(loginStatus.isLoggedIn);
+    setUserLoggedIn(loginStatus);
+    setModalVisible(!loginStatus);
   }, [getLoginStatusUseCase, setUserLoggedIn, setModalVisible]);
 
   if (!controller || !viewModel) return null;
@@ -50,9 +52,11 @@ export default function LoginComponent({
         className="flex h-10 gap-2 m-1 !border-b-[1px] !border-r-[1px] pointer-events-none w-fit"
       >
         <img className="w-10" src={moodleIcon} alt="Moodle-Icon"></img>
-        <p className="text-sm font-regular portrait:hidden">
-          Eingeloggt als "Username"
-        </p>
+        {userLoggedIn && (
+          <p className="text-sm font-regular portrait:hidden">
+            {"Eingeloggt als " + userName}
+          </p>
+        )}
       </StyledButton>
 
       {userLoggedIn && (
