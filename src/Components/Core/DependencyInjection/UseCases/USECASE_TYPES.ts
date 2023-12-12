@@ -5,6 +5,9 @@ const USECASE_TYPES = {
   ILoadUserLearningWorldsInfoUseCase: Symbol(
     "ILoadUserLearningWorldsInfoUseCase"
   ),
+  ISetWorldCompletionModalToShownUseCase: Symbol(
+    "ISetWorldCompletionModalToShownUseCase"
+  ),
   ILoadLearningWorldUseCase: Symbol("ILoadLearningWorldUseCase"),
   ILoadAvatarUseCase: Symbol("ILoadAvatarUseCase"),
   ILoadLearningElementUseCase: Symbol("ILoadLearningElementUseCase"),
