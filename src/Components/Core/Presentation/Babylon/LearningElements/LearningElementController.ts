@@ -45,6 +45,7 @@ export default class LearningElementController
   @bind
   picked(): void {
     if (this.viewModel.isInteractable.Value) {
+      this.bottomTooltipPresenter.hideAll();
       if (this.viewModel.type === LearningElementTypes.adaptivity) {
         this.startLoadAdaptivityElementUseCase();
       } else {

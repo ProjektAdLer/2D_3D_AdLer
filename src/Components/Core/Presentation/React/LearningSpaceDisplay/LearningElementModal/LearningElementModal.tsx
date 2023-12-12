@@ -71,6 +71,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
       title={viewModel.name.Value}
       onClose={() => {
         setOpen(false);
+        controller.showBottomToolTip();
         if (
           viewModel.type?.Value !== "h5p" &&
           viewModel.type?.Value !== "quiz" &&
