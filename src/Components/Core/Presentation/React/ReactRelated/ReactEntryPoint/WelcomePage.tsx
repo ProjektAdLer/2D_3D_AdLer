@@ -1,4 +1,5 @@
 import LoginComponent from "~ReactComponents/WelcomePage/LoginComponent/LoginComponent";
+import history from "history/browser";
 import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
 import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
 //import learningRoomBg from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.png";
@@ -51,10 +52,16 @@ export default function WelcomePage() {
         </StyledButton>
       </section>
       <section className="flex items-center justify-around col-span-6 col-start-2 row-span-3 row-start-3 mb-4 portrait:flex-col portrait:row-start-2 portrait:row-span-4 portrait:col-start-2 portrait:gap-6">
-        <StyledContainer className="relative flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover border-8 rounded-lg border-adlerdarkblue bg-learningworldbg">
+        <StyledButton
+          shape="freefloatcenter"
+          onClick={() => history.push("/worldmenu")}
+          className="relative !px-0 !py-0 flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover !bg-learningworldbg"
+        >
           <div className="w-full h-full bg-black opacity-30 hover:opacity-20" />
-          <LearningWorldMenuButton className="absolute mx-auto mb-4 bottom-3 portrait:scale-125" />
-        </StyledContainer>
+          <p className="absolute p-4 mx-auto text-2xl font-bold rounded-lg text-center bg-buttonbgblue lg:bottom-[42%] portrait:bottom-[20%] portrait:text-lg bottom-32 text-adlerdarkblue">
+            Zu den Lernwelten
+          </p>
+        </StyledButton>
         <StyledContainer className="relative flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover border-8 rounded-lg border-gray-600 bg-avatarcreatorbg">
           <div className="w-full h-full bg-black opacity-50" />
           <p className="absolute p-4 mx-auto text-2xl font-bold rounded-lg text-center bg-adlerbuttonlocked lg:bottom-[42%] portrait:bottom-[20%] portrait:text-lg bottom-32 text-adlerdeactivatedtext">
