@@ -29,7 +29,7 @@ export default function LearningWorldMenuButton({
   );
 
   useEffect(() => {
-    setUserLoggedIn(getLoginStatusUseCase.execute());
+    setUserLoggedIn(getLoginStatusUseCase.execute().isLoggedIn);
   }, [getLoginStatusUseCase, setUserLoggedIn]);
 
   return (

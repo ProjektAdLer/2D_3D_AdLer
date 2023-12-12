@@ -35,8 +35,7 @@ export default function LoginComponent({
 
   useEffect(() => {
     const loginStatus = getLoginStatusUseCase.execute();
-    setUserLoggedIn(loginStatus);
-    setModalVisible(!loginStatus);
+    setUserLoggedIn(loginStatus.isLoggedIn);
   }, [getLoginStatusUseCase, setUserLoggedIn, setModalVisible]);
 
   if (!controller || !viewModel) return null;

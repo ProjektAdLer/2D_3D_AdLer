@@ -6,6 +6,13 @@ import React from "react";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 
+jest.mock(
+  "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponent.tsx"
+);
+jest.mock(
+  "../../../../../Core/Presentation/React/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView.tsx"
+);
+
 describe("Welcome Page", () => {
   test("should render", () => {
     useBuilderMock([undefined, undefined]);
