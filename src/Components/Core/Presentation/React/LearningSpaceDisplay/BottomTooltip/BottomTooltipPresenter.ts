@@ -54,6 +54,14 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
     this.updateViewModel();
   }
 
+  hideAll(): void {
+    this.viewModel.show.Value = false;
+  }
+
+  show(): void {
+    this.updateViewModel();
+  }
+
   private updateViewModel(): void {
     if (this.dataQueue.length <= 0) {
       this.viewModel.show.Value = false;

@@ -8,4 +8,6 @@ export default interface IBottomTooltipPresenter {
     onClickCallback?: () => void
   ): number;
   hide(toolTipId: number): void;
+  hideAll(): void;
+  show(): void;
 }
