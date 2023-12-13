@@ -1,6 +1,5 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
-import { getByTitle, waitFor } from "@testing-library/dom";
 import { Provider } from "inversify-react";
 import { mock } from "jest-mock-extended";
 import React from "react";
@@ -8,13 +7,13 @@ import IGetLoginStatusUseCase from "../../../../../Core/Application/UseCases/Get
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import ILoginComponentController from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/ILoginComponentController";
-import LoginComponent from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponent";
+import LoginForm from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginForm";
 import LoginComponentViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 
 const getLoginStatusUseCaseMock = mock<IGetLoginStatusUseCase>();
 
-describe("LoginComponent", () => {
+describe("LoginForm", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind<IGetLoginStatusUseCase>(
@@ -28,10 +27,14 @@ describe("LoginComponent", () => {
 
   test("doesn't render without controller", () => {
     useBuilderMock([new LoginComponentViewModel(), undefined]);
+    getLoginStatusUseCaseMock.execute.mockReturnValue({
+      isLoggedIn: false,
+      userName: undefined,
+    });
 
     const { container } = render(
       <Provider container={CoreDIContainer}>
-        <LoginComponent />
+        <LoginForm />
       </Provider>
     );
 
@@ -40,80 +43,65 @@ describe("LoginComponent", () => {
 
   test("doesn't render without view model", () => {
     useBuilderMock([undefined, mock<ILoginComponentController>()]);
+    getLoginStatusUseCaseMock.execute.mockReturnValue({
+      isLoggedIn: false,
+      userName: undefined,
+    });
 
     const { container } = render(
       <Provider container={CoreDIContainer}>
-        <LoginComponent />
+        <LoginForm />
       </Provider>
     );
 
     expect(container.firstChild).toBeNull();
   });
 
-  test("LoginComponent calls GetLoginStatusUseCase.execute on mount", () => {
+  test("LoginForm calls GetLoginStatusUseCase.execute on mount", () => {
     useBuilderMock([
       new LoginComponentViewModel(),
       mock<ILoginComponentController>(),
     ]);
+    getLoginStatusUseCaseMock.execute.mockReturnValue({
+      isLoggedIn: true,
+      userName: undefined,
+    });
 
     render(
       <Provider container={CoreDIContainer}>
-        <LoginComponent />
+        <LoginForm />
       </Provider>
     );
 
     expect(getLoginStatusUseCaseMock.execute).toBeCalled();
   });
 
-  test("LoginComponent Tailwind Styling contains normal backgroundColor if not logged in", () => {
-    let fakeModel = new LoginComponentViewModel();
-    fakeModel.userLoggedIn.Value = false;
-    getLoginStatusUseCaseMock.execute.mockReturnValue(false);
-    useBuilderMock([fakeModel, mock<ILoginComponentController>()]);
+  test("should set text in username and password field", () => {
+    const mockedController = mock<ILoginComponentController>();
+    useBuilderMock([new LoginComponentViewModel(), mockedController]);
+    getLoginStatusUseCaseMock.execute.mockReturnValue({
+      isLoggedIn: false,
+      userName: undefined,
+    });
 
     const componentUnderTest = render(
       <Provider container={CoreDIContainer}>
-        <LoginComponent />
+        <LoginForm />
       </Provider>
     );
 
-    const buttonStyle =
-      componentUnderTest.getByTestId("login-button").className;
-    expect(buttonStyle).toMatchSnapshot();
-  });
+    fireEvent.change(componentUnderTest.getByTestId("userName"), {
+      target: { value: "testName" },
+    });
+    fireEvent.change(componentUnderTest.getByTestId("password"), {
+      target: { value: "testPassword" },
+    });
 
-  test("LoginComponent Tailwind Styling contains green backgroundColor if logged in", () => {
-    let fakeModel = new LoginComponentViewModel();
-    fakeModel.userLoggedIn.Value = true;
-    getLoginStatusUseCaseMock.execute.mockReturnValue(true);
-    useBuilderMock([fakeModel, mock<ILoginComponentController>()]);
+    fireEvent.click(componentUnderTest.getByTestId("loginButton"));
 
-    const componentUnderTest = render(
-      <Provider container={CoreDIContainer}>
-        <LoginComponent />
-      </Provider>
+    expect(mockedController.login).toHaveBeenCalledWith(
+      "testName",
+      "testPassword"
     );
-
-    const buttonStyle =
-      componentUnderTest.getByTestId("login-button").className;
-    expect(buttonStyle).toMatchSnapshot();
-  });
-
-  test("should render modal when clicked", () => {
-    useBuilderMock([
-      new LoginComponentViewModel(),
-      mock<ILoginComponentController>(),
-    ]);
-
-    const componentUnderTest = render(
-      <Provider container={CoreDIContainer}>
-        <LoginComponent />
-      </Provider>
-    );
-    fireEvent.click(componentUnderTest.getByTestId("login-button"));
-
-    expect(
-      componentUnderTest.findByTitle("Moodle Login")
-    ).resolves.toBeInTheDocument();
   });
 });

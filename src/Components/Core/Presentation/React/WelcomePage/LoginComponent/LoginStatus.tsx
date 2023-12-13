@@ -1,25 +1,18 @@
-import useObservable from "../../ReactRelated/CustomHooks/useObservable";
-import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
-import LoginComponentController from "./LoginComponentController";
-import LoginComponentViewModel from "./LoginComponentViewModel";
-import moodleIcon from "../../../../../../Assets/icons/16-moodle/moodle-icon-nobg.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
+import LoginComponentViewModel from "./LoginComponentViewModel";
+import LoginComponentController from "./LoginComponentController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import { createPortal } from "react-dom";
-import LoginModal from "./LoginModal";
-import React, { useEffect } from "react";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
+import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import moodleIcon from "../../../../../../Assets/icons/16-moodle/moodle-icon-nobg.svg";
+import tailwindMerge from "../../../Utils/TailwindMerge";
+import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import { useInjection } from "inversify-react";
 import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
-import tailwindMerge from "../../../Utils/TailwindMerge";
+import { useEffect } from "react";
 
-/**
- * React Component that displays a login button. When clicked, a modal will be overlayed.
- */
-export default function LoginComponent({
-  className,
-}: Readonly<AdLerUIComponent>) {
+export default function LoginStatus({ className }: Readonly<AdLerUIComponent>) {
   const [viewModel, controller] = useBuilder<
     LoginComponentViewModel,
     LoginComponentController
@@ -28,31 +21,31 @@ export default function LoginComponent({
     USECASE_TYPES.IGetLoginStatusUseCase
   );
 
-  const [, setModalVisible] = useObservable<boolean>(viewModel?.modalVisible);
   const [userLoggedIn, setUserLoggedIn] = useObservable<boolean>(
     viewModel?.userLoggedIn
   );
+  const [userName, setUserName] = useObservable<string>(viewModel?.userName);
 
   useEffect(() => {
     const loginStatus = getLoginStatusUseCase.execute();
     setUserLoggedIn(loginStatus.isLoggedIn);
-  }, [getLoginStatusUseCase, setUserLoggedIn, setModalVisible]);
-
-  if (!controller || !viewModel) return null;
+    setUserName(loginStatus.isLoggedIn ? loginStatus.userName! : "");
+  }, [getLoginStatusUseCase, setUserLoggedIn, setUserName]);
 
   return (
     <div className={tailwindMerge(className)}>
       <StyledButton
         color={userLoggedIn ? "success" : "default"}
         shape="freefloatleft"
-        onClick={() => setModalVisible(true)}
         data-testid="login-button"
         className="flex h-10 gap-2 m-1 !border-b-[1px] !border-r-[1px] pointer-events-none w-fit"
       >
         <img className="w-10" src={moodleIcon} alt="Moodle-Icon"></img>
-        <p className="text-sm font-regular portrait:hidden">
-          Eingeloggt als "Username"
-        </p>
+        {userLoggedIn && (
+          <p className="text-sm font-regular portrait:hidden">
+            {"Eingeloggt als " + userName}
+          </p>
+        )}
       </StyledButton>
 
       {userLoggedIn && (
@@ -64,13 +57,6 @@ export default function LoginComponent({
         >
           <p className="text-xs rounded-lg">Ausloggen</p>
         </StyledButton>
-      )}
-
-      {createPortal(
-        <div className="z-10">
-          <LoginModal viewModel={viewModel} controller={controller} />
-        </div>,
-        document.body
       )}
     </div>
   );
