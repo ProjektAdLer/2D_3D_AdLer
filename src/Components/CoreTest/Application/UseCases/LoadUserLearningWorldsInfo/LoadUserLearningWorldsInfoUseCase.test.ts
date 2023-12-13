@@ -129,6 +129,7 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
       id: 2,
       description: "string",
       evaluationLink: "string",
+      completionModalShown: false,
     } as LearningWorldTO);
     loadUserInitialLearningWorldsInfoUseCaseMock.internalExecuteAsync.mockResolvedValue(
       {
