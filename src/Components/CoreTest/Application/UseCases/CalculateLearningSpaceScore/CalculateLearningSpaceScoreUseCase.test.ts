@@ -106,7 +106,7 @@ describe("Calculate Learning Space Score UseCase", () => {
         goals: ["test"],
         parentWorldID: 200,
         requirements: "",
-      } as LearningSpaceEntity,
+      } as Partial<LearningSpaceEntity>,
     ]);
 
     const result = systemUnderTest["calculateLearningSpaceScore"](1, 1);
@@ -166,7 +166,7 @@ describe("Calculate Learning Space Score UseCase", () => {
         goals: ["test"],
         requirements: "",
         parentWorldID: 200,
-      } as LearningSpaceEntity,
+      } as Partial<LearningSpaceEntity>,
     ]);
 
     systemUnderTest.execute();
