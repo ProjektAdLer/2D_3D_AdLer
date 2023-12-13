@@ -5,11 +5,19 @@ import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPES";
 import LearningElementModalViewModel from "./LearningElementModalViewModel";
 import ILearningElementModalController from "./ILearningElementModalController";
+import IBottomTooltipPresenter from "../BottomTooltip/IBottomTooltipPresenter";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 export default class LearningElementModalController
   implements ILearningElementModalController
 {
-  constructor(private viewModel: LearningElementModalViewModel) {}
+  private BottomTooltipPresenter: IBottomTooltipPresenter;
+
+  constructor(private viewModel: LearningElementModalViewModel) {
+    this.BottomTooltipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    );
+  }
 
   async scoreLearningElement(): Promise<void> {
     if (this.viewModel.type.Value !== LearningElementTypes.h5p) {
@@ -57,6 +65,10 @@ export default class LearningElementModalController
         elementID: this.viewModel.id.Value,
       });
     }
+  }
+
+  showBottomToolTip(): void {
+    this.BottomTooltipPresenter.show();
   }
 }
 

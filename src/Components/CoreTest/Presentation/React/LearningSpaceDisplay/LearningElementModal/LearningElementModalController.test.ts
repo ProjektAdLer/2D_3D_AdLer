@@ -6,6 +6,8 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import { LearningElementTypes } from "../../../../../Core/Domain/Types/LearningElementTypes";
 import LearningElementModalViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
+import IBottomTooltipPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
+import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 const scoreElementUseCaseMock = mock<IScoreLearningElementUseCase>();
 const scoreH5PUseCaseMock = mock<IScoreH5PLearningElementUseCase>();
@@ -22,6 +24,9 @@ describe("LearningElementModalController", () => {
     CoreDIContainer.rebind<IScoreH5PLearningElementUseCase>(
       USECASE_TYPES.IScoreH5PLearningElementUseCase
     ).toConstantValue(scoreH5PUseCaseMock);
+    CoreDIContainer.bind<IBottomTooltipPresenter>(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    ).toConstantValue(mock());
   });
 
   beforeEach(() => {

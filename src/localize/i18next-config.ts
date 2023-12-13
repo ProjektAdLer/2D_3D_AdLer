@@ -10,12 +10,6 @@ import de_spaceMenu from "./de/spaceMenu.json";
 import de_breakTime from "./de/breakTime.json";
 import de_learningElement from "./de/learningElement.json";
 
-/**
- namespace explanation:
- menu: contains everything from login up to the entering of a learning space
- learningSpace: contains everything that is displayed in the actual learning space
-*/
-
 const resources = {
   de: {
     start: de_startPage,
@@ -31,7 +25,7 @@ const resources = {
 const defaultNS = "start";
 
 i18next.use(initReactI18next).init({
-  debug: true,
+  debug: false,
   fallbackLng: "de",
   ns: [
     "start",

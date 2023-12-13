@@ -3,6 +3,7 @@ import AdaptivityElementBuilder from "../../../../Core/Presentation/Adaptivity/A
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 const worldPortMock = mock<ILearningWorldPort>();
 
@@ -14,6 +15,9 @@ describe("AdaptivityElementBuilder", () => {
     CoreDIContainer.rebind<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
     ).toConstantValue(worldPortMock);
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    ).toConstantValue(mock());
   });
 
   beforeEach(() => {

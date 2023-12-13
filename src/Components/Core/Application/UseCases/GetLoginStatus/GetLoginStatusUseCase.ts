@@ -20,15 +20,15 @@ export default class GetLoginStatusUseCase implements IGetLoginStatusUseCase {
     const userDataEntity =
       this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
 
-    if (!userDataEntity) throw new Error("No UserDataEntity found.");
+    //if (!userDataEntity) throw new Error("No UserDataEntity found.");
 
     this.logger.log(
       LogLevelTypes.TRACE,
       `GetLoginStatusUseCase: Checked LoginStatus: ${userDataEntity?.isLoggedIn}.`
     );
     return {
-      isLoggedIn: userDataEntity.isLoggedIn,
-      userName: userDataEntity.username,
+      isLoggedIn: userDataEntity?.isLoggedIn ?? false,
+      userName: userDataEntity?.username ?? "",
     };
   }
 }

@@ -17,15 +17,24 @@ import ILoadExternalLearningElementUseCase from "src/Components/Core/Application
 import type { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import IDisplayLearningElementUseCase from "src/Components/Core/Application/UseCases/Adaptivity/DisplayLearningElementUseCase/IDisplayLearningElementUseCase";
 import i18next from "i18next";
+import IBottomTooltipPresenter from "~ReactComponents/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 export default class AdaptivityElementController
   implements IAdaptivityElementController
 {
-  constructor(private viewModel: AdaptivityElementViewModel) {}
+  private bottomToolTipPresenter: IBottomTooltipPresenter;
+
+  constructor(private viewModel: AdaptivityElementViewModel) {
+    this.bottomToolTipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    );
+  }
 
   @bind
   closeModal(): void {
     this.viewModel.isOpen.Value = false;
+    this.showBottomToolTip();
   }
 
   @bind
@@ -175,5 +184,9 @@ export default class AdaptivityElementController
         }
       }
     }
+  }
+
+  private showBottomToolTip(): void {
+    this.bottomToolTipPresenter.show();
   }
 }

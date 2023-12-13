@@ -12,6 +12,7 @@ import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/IL
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import { AdaptivityElementActionTypes } from "../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 import IDisplayLearningElementUseCase from "../../../../Core/Application/UseCases/Adaptivity/DisplayLearningElementUseCase/IDisplayLearningElementUseCase";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 const submitSelectionUseCaseMock =
   mock<ISubmitAdaptivityElementSelectionUseCase>();
@@ -74,6 +75,9 @@ describe("AdaptivityElementController", () => {
     CoreDIContainer.rebind(
       USECASE_TYPES.IDisplayLearningElementUseCase
     ).toConstantValue(displayLearningElmentUseCaseMock);
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    ).toConstantValue(mock());
   });
 
   beforeEach(() => {
