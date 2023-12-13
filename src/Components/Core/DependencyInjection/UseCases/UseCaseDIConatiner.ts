@@ -54,6 +54,8 @@ import ILogoutUseCase from "../../Application/UseCases/Logout/ILogoutUseCase";
 import LogoutUseCase from "../../Application/UseCases/Logout/LogoutUseCase";
 import ILoadUserLearningWorldsInfoUseCase from "../../Application/UseCases/LoadUserLearningWorldsInfo/ILoadUserLearningWorldsInfoUseCase";
 import LoadUserLearningWorldsInfoUseCase from "../../Application/UseCases/LoadUserLearningWorldsInfo/LoadUserLearningWorldsInfoUseCase";
+import ISetWorldCompletionModalToShownUseCase from "../../Application/UseCases/SetWorldCompletionModalToShown/ISetWorldCompletionModalToShownUseCase";
+import SetWorldCompletionModalToShownUseCase from "../../Application/UseCases/SetWorldCompletionModalToShown/SetWorldCompletionModalToShownUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -71,6 +73,11 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<ILoadLearningWorldUseCase>(USECASE_TYPES.ILoadLearningWorldUseCase)
     .to(LoadLearningWorldUseCase)
+    .inSingletonScope();
+  bind<ISetWorldCompletionModalToShownUseCase>(
+    USECASE_TYPES.ISetWorldCompletionModalToShownUseCase
+  )
+    .to(SetWorldCompletionModalToShownUseCase)
     .inSingletonScope();
 
   bind<ILoadAvatarUseCase>(USECASE_TYPES.ILoadAvatarUseCase)

@@ -8,4 +8,5 @@ export default class LearningWorldTO {
   goals: string[];
   description: string;
   evaluationLink: string;
+  completionModalShown: boolean | undefined;
 }
