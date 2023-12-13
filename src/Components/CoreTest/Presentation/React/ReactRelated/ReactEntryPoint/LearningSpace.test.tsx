@@ -3,6 +3,8 @@ import LearningSpace from "../../../../../Core/Presentation/React/ReactRelated/R
 import React from "react";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
+import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
+import { mock } from "jest-mock-extended";
 
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/BottomTooltip",
@@ -46,6 +48,17 @@ jest.mock(
 );
 
 describe("LearningSpace.tsx", () => {
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    ).toConstantValue(mock());
+  });
+
+  afterAll(() => {
+    CoreDIContainer.restore();
+  });
+
   test("should render", () => {
     render(
       <Provider container={CoreDIContainer}>
