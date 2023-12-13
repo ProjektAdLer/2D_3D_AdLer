@@ -83,7 +83,7 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
         goals: [],
         description: "string",
         evaluationLink: "string",
-      } as LearningWorldEntity,
+      } as Partial<LearningWorldEntity>,
       {
         name: "string2",
         id: 2,
@@ -104,7 +104,7 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
         goals: [],
         description: "string2",
         evaluationLink: "string2",
-      } as LearningWorldEntity,
+      } as Partial<LearningWorldEntity>,
     ]);
     loadLearningWorldUseCaseMock.internalExecuteAsync.mockResolvedValue({
       name: "worldTO",
