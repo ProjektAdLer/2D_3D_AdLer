@@ -56,15 +56,9 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
     image: "max-h-[90vh]",
     video: "",
     h5p: "",
-    quiz: "",
   };
 
-  const modalType = viewModel.type.Value as
-    | "text"
-    | "image"
-    | "video"
-    | "h5p"
-    | "quiz";
+  const modalType = viewModel.type.Value as "text" | "image" | "video" | "h5p";
 
   return (
     <StyledModal
@@ -74,7 +68,6 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
         controller.showBottomToolTip();
         if (
           viewModel.type?.Value !== "h5p" &&
-          viewModel.type?.Value !== "quiz" &&
           viewModel.isScoreable?.Value === true
         ) {
           controller.scoreLearningElement();

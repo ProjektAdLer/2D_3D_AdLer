@@ -137,12 +137,6 @@ export default class MockBackendAdapter implements IBackendPort {
             window.location.host +
             "/SampleLearningElementData/testPDF.pdf"
         );
-      case "adaptivity":
-        return Promise.resolve(
-          "http://" +
-            window.location.host +
-            "/SampleLearningElementData/testQuiz.json"
-        );
       /* istanbul ignore next */
       default:
         throw new Error("Unknown element type");
