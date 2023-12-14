@@ -5,6 +5,7 @@ import {
   BackendAdaptivityElementTO,
   BackendLearningElementTO,
 } from "./BackendElementTO";
+import BackendStoryTO from "./BackendStoryTO";
 
 /**
  * Data Transfer Object for a Space
@@ -29,4 +30,6 @@ export default class BackendSpaceTO {
   requiredScore: number;
   template: LearningSpaceTemplateType;
   templateStyle: LearningSpaceThemeType;
+  introStory: BackendStoryTO | null;
+  outroStory: BackendStoryTO | null;
 }

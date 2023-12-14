@@ -2,6 +2,7 @@ import { ComponentID } from "../Types/EntityTypes";
 import { LearningSpaceTemplateType } from "../Types/LearningSpaceTemplateType";
 import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
 import LearningElementEntity from "./LearningElementEntity";
+import StoryElementEntity from "./StoryElementEntity";
 
 export default class LearningSpaceEntity {
   public id: ComponentID;
@@ -14,4 +15,6 @@ export default class LearningSpaceEntity {
   public template: LearningSpaceTemplateType;
   public theme: LearningSpaceThemeType;
   public parentWorldID: ComponentID;
+  public introStory: StoryElementEntity | null;
+  public outroStory: StoryElementEntity | null;
 }

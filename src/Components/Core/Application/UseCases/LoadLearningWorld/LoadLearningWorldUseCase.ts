@@ -34,6 +34,8 @@ import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/Learnin
 import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import ArrayItemRandomizer from "src/Components/Core/Presentation/Utils/ArrayItemRandomizer/ArrayItemRandomizer";
 import { isValidLearningElementModelType } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
+import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElementEntity";
+import BackendStoryTO from "../../DataTransferObjects/BackendStoryTO";
 
 @injectable()
 export default class LoadLearningWorldUseCase
@@ -235,6 +237,8 @@ export default class LoadLearningWorldUseCase
             template: space.template,
             theme: space.templateStyle,
             parentWorldID: worldID,
+            introStory: this.createStoryElementEntityOrNull(space.introStory),
+            outroStory: this.createStoryElementEntityOrNull(space.outroStory),
           },
           LearningSpaceEntity
         )
@@ -242,6 +246,21 @@ export default class LoadLearningWorldUseCase
     });
 
     return spaceEntities;
+  }
+
+  private createStoryElementEntityOrNull(
+    storyElement: BackendStoryTO | null
+  ): StoryElementEntity | null {
+    if (storyElement === null) return null;
+
+    let storyElementEntity = this.container.createEntity<StoryElementEntity>(
+      {
+        storyTexts: storyElement.storyTexts,
+        elementModel: storyElement.elementModel,
+      },
+      StoryElementEntity
+    );
+    return storyElementEntity;
   }
 
   private createLearningElementEntities = (

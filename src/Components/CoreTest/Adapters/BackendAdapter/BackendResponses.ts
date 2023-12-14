@@ -9,6 +9,7 @@ import {
   BackendBaseElementTO,
   BackendLearningElementTO,
 } from "../../../Core/Application/DataTransferObjects/BackendElementTO";
+import BackendStoryTO from "../../../Core/Application/DataTransferObjects/BackendStoryTO";
 
 export const minimalGetWorldDataResponse: BackendWorldTO = {
   worldName: "TestWorld",
@@ -36,6 +37,8 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
       ],
       template: LearningSpaceTemplateType.L,
       templateStyle: LearningSpaceThemeType.Campus,
+      introStory: null,
+      outroStory: null,
     },
   ],
   externalElements: [],
@@ -64,6 +67,8 @@ export const expectedSpaceTO: BackendSpaceTO = {
   requiredScore: expect.any(Number),
   template: expect.any(String),
   templateStyle: expect.any(String),
+  introStory: expect.toBeOneOf([BackendStoryTO, null]),
+  outroStory: expect.toBeOneOf([BackendStoryTO, null]),
 };
 
 export const expectedBaseElementTO =
@@ -132,6 +137,10 @@ export const mockAWT: AWT = {
         requiredSpacesToEnter: "",
         spaceTemplate: "",
         spaceTemplateStyle: "",
+        spaceStory: {
+          introStory: null,
+          outroStory: null,
+        },
       },
       {
         spaceId: 2,
@@ -143,6 +152,10 @@ export const mockAWT: AWT = {
         requiredSpacesToEnter: "",
         spaceTemplate: "",
         spaceTemplateStyle: "",
+        spaceStory: {
+          introStory: null,
+          outroStory: null,
+        },
       },
       {
         spaceId: 3,
@@ -154,6 +167,10 @@ export const mockAWT: AWT = {
         requiredSpacesToEnter: "",
         spaceTemplate: "",
         spaceTemplateStyle: "",
+        spaceStory: {
+          introStory: null,
+          outroStory: null,
+        },
       },
       {
         spaceId: 4,
@@ -165,6 +182,10 @@ export const mockAWT: AWT = {
         requiredSpacesToEnter: "(3)v((2)^(1))",
         spaceTemplate: "",
         spaceTemplateStyle: "",
+        spaceStory: {
+          introStory: null,
+          outroStory: null,
+        },
       },
       {
         spaceId: 5,
@@ -176,6 +197,10 @@ export const mockAWT: AWT = {
         requiredSpacesToEnter: "4",
         spaceTemplate: "",
         spaceTemplateStyle: "",
+        spaceStory: {
+          introStory: null,
+          outroStory: null,
+        },
       },
     ],
     elements: [

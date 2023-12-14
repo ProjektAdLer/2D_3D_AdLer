@@ -79,6 +79,8 @@ const minimalAdaptivityBackendWorldTO: BackendWorldTO = {
       elements: [backendAdaptivityElementTOMock],
       template: LearningSpaceTemplateType.L,
       templateStyle: LearningSpaceThemeType.Arcade,
+      introStory: null,
+      outroStory: null,
     },
   ],
   externalElements: [],

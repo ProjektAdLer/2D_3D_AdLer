@@ -36,6 +36,15 @@ export interface APISpace {
   requiredSpacesToEnter: string;
   spaceTemplate: string;
   spaceTemplateStyle: string;
+  spaceStory: {
+    introStory: APIStoryElement | null;
+    outroStory: APIStoryElement | null;
+  };
+}
+
+export interface APIStoryElement {
+  storyTexts: string[];
+  elementModel: string;
 }
 
 export interface APIElement {

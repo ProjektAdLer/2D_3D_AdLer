@@ -25,6 +25,7 @@ import AWT, {
   APIAdaptivityTrigger,
   APIElement,
   APISpace,
+  APIStoryElement,
 } from "./Types/AWT";
 import AdaptivityElementActionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementActionTO";
 import AdaptivityElementTriggerTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTriggerTO";
@@ -32,6 +33,7 @@ import AdaptivityElementAnswersTO from "../../Application/DataTransferObjects/Ad
 import AdaptivityElementQuestionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionTO";
 import AdaptivityElementTaskTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTaskTO";
 import { AdaptivityElementActionTypes } from "../../Domain/Types/Adaptivity/AdaptivityElementActionTypes";
+import BackendStoryTO from "../../Application/DataTransferObjects/BackendStoryTO";
 
 type BackendTO =
   | BackendBaseElementTO
@@ -113,8 +115,23 @@ export default class BackendAdapterUtils {
         requiredScore: space.requiredPointsToComplete,
         template: template,
         templateStyle: templateStyle,
+        introStory: this.mapStoryElement(space.spaceStory.introStory),
+        outroStory: this.mapStoryElement(space.spaceStory.outroStory),
       } as BackendSpaceTO;
     });
+  }
+
+  private static mapStoryElement(
+    storyElement: APIStoryElement | null
+  ): BackendStoryTO | null {
+    if (storyElement === null) return null;
+    else
+      return {
+        storyTexts: storyElement.storyTexts,
+        elementModel: this.extractModelData(
+          storyElement.elementModel
+        ) as LearningElementModel,
+      } as BackendStoryTO;
   }
 
   // creates BackendElementTOs from the AWT if the element type is supported
@@ -162,7 +179,6 @@ export default class BackendAdapterUtils {
       apiElement.elementModel
     ) as LearningElementModel;
   }
-
   private static extractModelData(modelData?: string): string | undefined {
     if (
       modelData === undefined ||

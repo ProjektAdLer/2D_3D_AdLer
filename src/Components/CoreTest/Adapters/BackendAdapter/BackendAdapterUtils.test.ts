@@ -17,6 +17,16 @@ describe("BackendAdapterUtils", () => {
         spaceSlotContents: [1],
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "test",
+        spaceStory: {
+          introStory: {
+            storyTexts: ["test"],
+            elementModel: "test",
+          },
+          outroStory: {
+            storyTexts: ["test"],
+            elementModel: "test",
+          },
+        },
       },
     ];
     const inputElements: BackendLearningElementTO[] = [

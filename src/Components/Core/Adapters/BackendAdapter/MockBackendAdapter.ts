@@ -889,6 +889,10 @@ export default class MockBackendAdapter implements IBackendPort {
           spaceGoals: ["Raumziel 1/3", "Raumziel 2/3", "Raumziel 3/3"],
           spaceTemplate: "L_32x31_10L",
           spaceTemplateStyle: "Campus",
+          spaceStory: {
+            introStory: null,
+            outroStory: null,
+          },
         },
       ],
       elements: [
@@ -1035,6 +1039,10 @@ export default class MockBackendAdapter implements IBackendPort {
           requiredSpacesToEnter: "",
           spaceTemplate: "",
           spaceTemplateStyle: "",
+          spaceStory: {
+            introStory: null,
+            outroStory: null,
+          },
         },
         {
           spaceId: 2,
@@ -1046,6 +1054,10 @@ export default class MockBackendAdapter implements IBackendPort {
           requiredSpacesToEnter: "",
           spaceTemplate: "Suburb",
           spaceTemplateStyle: "",
+          spaceStory: {
+            introStory: null,
+            outroStory: null,
+          },
         },
         {
           spaceId: 3,
@@ -1057,6 +1069,10 @@ export default class MockBackendAdapter implements IBackendPort {
           requiredSpacesToEnter: "",
           spaceTemplate: "campus",
           spaceTemplateStyle: "",
+          spaceStory: {
+            introStory: null,
+            outroStory: null,
+          },
         },
         {
           spaceId: 4,
@@ -1068,6 +1084,10 @@ export default class MockBackendAdapter implements IBackendPort {
           requiredSpacesToEnter: "(3)v((2)^(1))",
           spaceTemplate: "arcade",
           spaceTemplateStyle: "",
+          spaceStory: {
+            introStory: null,
+            outroStory: null,
+          },
         },
         {
           spaceId: 5,
@@ -1079,6 +1099,10 @@ export default class MockBackendAdapter implements IBackendPort {
           requiredSpacesToEnter: "4",
           spaceTemplate: "suburb",
           spaceTemplateStyle: "",
+          spaceStory: {
+            introStory: null,
+            outroStory: null,
+          },
         },
       ],
       elements: [
@@ -1184,6 +1208,10 @@ export default class MockBackendAdapter implements IBackendPort {
           requiredSpacesToEnter: "",
           spaceTemplate: "R_20X20_6L",
           spaceTemplateStyle: "Campus",
+          spaceStory: {
+            introStory: null,
+            outroStory: null,
+          },
         },
         {
           spaceId: 2,
@@ -1195,6 +1223,10 @@ export default class MockBackendAdapter implements IBackendPort {
           requiredSpacesToEnter: "1",
           spaceTemplate: "R_20X20_6L",
           spaceTemplateStyle: "Arcade",
+          spaceStory: {
+            introStory: null,
+            outroStory: null,
+          },
         },
         {
           spaceId: 3,
@@ -1206,6 +1238,10 @@ export default class MockBackendAdapter implements IBackendPort {
           requiredSpacesToEnter: "(5)v(4)",
           spaceTemplate: "L_32X31_10L",
           spaceTemplateStyle: "Suburb",
+          spaceStory: {
+            introStory: null,
+            outroStory: null,
+          },
         },
         {
           spaceId: 4,
@@ -1217,6 +1253,10 @@ export default class MockBackendAdapter implements IBackendPort {
           requiredSpacesToEnter: "2",
           spaceTemplate: "R_20X30_8L",
           spaceTemplateStyle: "Suburb",
+          spaceStory: {
+            introStory: null,
+            outroStory: null,
+          },
         },
         {
           spaceId: 5,
@@ -1228,6 +1268,10 @@ export default class MockBackendAdapter implements IBackendPort {
           requiredSpacesToEnter: "(1)",
           spaceTemplate: "R_20X20_6L",
           spaceTemplateStyle: "Suburb",
+          spaceStory: {
+            introStory: null,
+            outroStory: null,
+          },
         },
       ],
       elements: [
