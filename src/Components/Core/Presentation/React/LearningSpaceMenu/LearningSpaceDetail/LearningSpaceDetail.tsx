@@ -91,7 +91,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
             </div>
           </section>
         )}
-        {goals.length > 0 && (
+        {goals.length > 0 && goals[0] !== "" && (
           <section className="pb-2 border-b border-gray-500">
             <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
               {t("goal", { count: goals?.length })}

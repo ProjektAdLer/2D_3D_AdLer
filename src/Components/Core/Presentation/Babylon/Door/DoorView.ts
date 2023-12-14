@@ -49,6 +49,7 @@ export default class DoorView extends Readyable {
       soundLink,
       this.scenePresenter.Scene
     );
+    this.openTheDoorSound.setVolume(0.5);
     if (this.viewModel.isOpen.Value) {
       this.IsReady.then(() => {
         this.scenePresenter.Scene.beginAnimation(
