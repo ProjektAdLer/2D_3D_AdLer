@@ -10,7 +10,7 @@ import StyledButton from "../ReactBaseComponents/StyledButton";
 import LoginStatus from "~ReactComponents/WelcomePage/LoginComponent/LoginStatus";
 
 export default function WelcomePage() {
-  const { t } = useTranslation("start");
+  const { t: i18nString } = useTranslation("start");
   return (
     <div className="relative grid h-[100svh] grid-cols-8 grid-rows-6 p-6 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
       <img
@@ -24,7 +24,7 @@ export default function WelcomePage() {
 
       <section className="flex flex-col items-center portrait:row-start-1 portrait:row-span-1 portrait:col-start-2 portrait:col-span-6 landscape:col-span-6 landscape:col-start-2 landscape:row-start-1 text-adlerdarkblue lg:landscape:col-span-7 lg:landscape:col-start-1 xl:landscape:col-start-2 xl:landscape:col-span-6 lg:landscape:row-start-1">
         <h1 className="p-2 text-xl font-extrabold text-center justify-self-center portrait:text-xl lg:text-4xl 2xl:text-8xl">
-          {t("welcome")}
+          {i18nString("welcome")}
         </h1>
         {/* <p className="-mt-3 text-lg text-center portrait:text-xs">
           Loggen Sie sich zunächst in Moodle ein. Wählen Sie dann aus, wie es
@@ -32,7 +32,7 @@ export default function WelcomePage() {
         </p> */}
       </section>
 
-      <LoginForm className="" />
+      <LoginForm className="flex flex-col items-center justify-around col-span-6 col-start-2" />
 
       <section className="flex items-center justify-around col-span-6 col-start-2 row-span-3 row-start-3 mb-4 portrait:flex-col portrait:row-start-2 portrait:row-span-4 portrait:col-start-2 portrait:gap-6">
         <StyledButton
@@ -45,18 +45,22 @@ export default function WelcomePage() {
             Zu den Lernwelten
           </p>
         </StyledButton>
-        <StyledContainer className="relative flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover border-8 rounded-lg border-gray-600 bg-avatarcreatorbg">
+        <StyledButton
+          disabled
+          shape="freefloatcenter"
+          className="relative !px-0 !py-0 flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover !bg-avatarcreatorbg"
+        >
           <div className="w-full h-full bg-black opacity-50" />
           <p className="absolute p-4 mx-auto text-2xl font-bold rounded-lg text-center bg-adlerbuttonlocked lg:bottom-[42%] portrait:bottom-[20%] portrait:text-lg bottom-32 text-adlerdeactivatedtext">
             Der Avatar Creator ist demnächst verfügbar!
           </p>
-        </StyledContainer>
+        </StyledButton>
       </section>
 
       <LoginStatus className="relative z-0 flex flex-col self-end col-span-2 col-start-7 row-start-6 gap-2 justify-self-end" />
 
       <p className="self-end p-2 text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1 portrait:col-span-6 portrait:text-xs landscape:col-span-6 landscape:col-start-2 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6">
-        {t("copyright")}
+        {i18nString("copyright")}
       </p>
     </div>
   );
