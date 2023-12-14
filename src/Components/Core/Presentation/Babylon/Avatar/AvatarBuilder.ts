@@ -9,13 +9,17 @@ import IAvatarController from "./IAvatarController";
 import IAvatarPresenter from "./IAvatarPresenter";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import ILearningSpacePresenter from "../LearningSpaces/ILearningSpacePresenter";
+import IAvatarBuilder from "./IAvatarBuilder";
 
-export default class AvatarBuilder extends AsyncPresentationBuilder<
-  AvatarViewModel,
-  IAvatarController,
-  AvatarView,
-  IAvatarPresenter
-> {
+export default class AvatarBuilder
+  extends AsyncPresentationBuilder<
+    AvatarViewModel,
+    IAvatarController,
+    AvatarView,
+    IAvatarPresenter
+  >
+  implements IAvatarBuilder
+{
   learningSpaceTemplateType: LearningSpaceTemplateType;
   learningSpacePresenter: ILearningSpacePresenter;
 
