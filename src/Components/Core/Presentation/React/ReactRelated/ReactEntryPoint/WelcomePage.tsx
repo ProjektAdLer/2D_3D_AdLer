@@ -5,7 +5,6 @@ import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-log
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
 import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
 import { useTranslation } from "react-i18next";
-import StyledContainer from "../ReactBaseComponents/StyledContainer";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import LoginStatus from "~ReactComponents/WelcomePage/LoginComponent/LoginStatus";
 
