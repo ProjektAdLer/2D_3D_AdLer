@@ -49,6 +49,7 @@ export default function BabylonCanvas(
     const loadingScreenPresenter = CoreDIContainer.get<ILoadingScreenPresenter>(
       PRESENTATION_TYPES.ILoadingScreenPresenter
     );
+    loadingScreenPresenter.lockLoadingLock();
     loadingScreenPresenter.showLoadingScreen();
 
     // create engine
