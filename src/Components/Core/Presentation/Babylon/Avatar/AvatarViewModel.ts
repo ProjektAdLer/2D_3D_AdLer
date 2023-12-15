@@ -8,8 +8,8 @@ import {
   Vector3,
 } from "@babylonjs/core";
 import Observable from "src/Lib/Observable";
-import { IStateMachine } from "./StateMachine";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
+import IStateMachine from "../../Utils/StateMachine/IStateMachine";
 
 export enum AvatarAnimationState {
   Idle,

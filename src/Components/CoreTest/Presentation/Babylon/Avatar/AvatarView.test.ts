@@ -1,7 +1,5 @@
 import {
-  AbstractMesh,
   AnimationGroup,
-  BaseTexture,
   EventState,
   Material,
   Mesh,
@@ -31,9 +29,9 @@ import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManageme
 import IMovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/IMovementIndicator";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import MovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/MovementIndicator";
-import StateMachine from "../../../../Core/Presentation/Babylon/Avatar/StateMachine";
 import Logger from "../../../../Core/Adapters/Logger/Logger";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
+import StateMachine from "../../../../Core/Presentation/Utils/StateMachine/StateMachine";
 
 const movementIndicatorMock = mock<MovementIndicator>();
 

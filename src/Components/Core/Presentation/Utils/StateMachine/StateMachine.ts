@@ -1,14 +1,5 @@
-export interface IStateTransition<STATE, ACTION> {
-  action: ACTION;
-  from: STATE;
-  to: STATE;
-  onTransitionCallback?: () => void;
-}
-
-export interface IStateMachine<STATE, ACTION> {
-  readonly CurrentState: STATE;
-  applyAction(action: ACTION): boolean;
-}
+import IStateMachine from "./IStateMachine";
+import IStateTransition from "./IStateTransition";
 
 export default class StateMachine<STATE, ACTION>
   implements IStateMachine<STATE, ACTION>
