@@ -28,7 +28,7 @@ import AvatarViewModel, {
   AvatarAnimationState,
 } from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
-import StateMachine from "./StateMachine";
+import StateMachine from "../../Utils/StateMachine/StateMachine";
 import IMovementIndicator from "../MovementIndicator/IMovementIndicator";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
