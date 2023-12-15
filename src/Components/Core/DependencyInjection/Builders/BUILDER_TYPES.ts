@@ -38,6 +38,7 @@ const BUILDER_TYPES = {
   IAdaptivityElementBuilder: Symbol("IAdaptivityElementBuilder"),
   IBreakTimeNotificationBuilder: Symbol("IBreakTimeNotificationBuilder"),
   ILoadingScreenBuilder: Symbol("ILoadingScreenBuilder"),
+  IStoryNPCBuilder: Symbol("IStoryNPCBuilder"),
 };
 
 export default BUILDER_TYPES;
