@@ -16,6 +16,10 @@ export default class StateMachine<STATE, ACTION>
     this.currentState = initialState;
   }
 
+  addTransition(transition: IStateTransition<STATE, ACTION>): void {
+    this.transitions.push(transition);
+  }
+
   applyAction(action: ACTION): boolean {
     const transition = this.transitions.find(
       (transition) =>
