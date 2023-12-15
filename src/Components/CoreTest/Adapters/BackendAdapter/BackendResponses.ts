@@ -67,8 +67,8 @@ export const expectedSpaceTO: BackendSpaceTO = {
   requiredScore: expect.any(Number),
   template: expect.any(String),
   templateStyle: expect.any(String),
-  introStory: expect.toBeOneOf([BackendStoryTO, null]),
-  outroStory: expect.toBeOneOf([BackendStoryTO, null]),
+  introStory: expect.toBeOneOf([expect.any(BackendStoryTO), null]),
+  outroStory: expect.toBeOneOf([expect.any(BackendStoryTO), null]),
 };
 
 export const expectedBaseElementTO =

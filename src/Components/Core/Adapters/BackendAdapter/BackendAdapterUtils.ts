@@ -125,13 +125,14 @@ export default class BackendAdapterUtils {
     storyElement: APIStoryElement | null
   ): BackendStoryTO | null {
     if (storyElement === null) return null;
-    else
-      return {
-        storyTexts: storyElement.storyTexts,
-        elementModel: this.extractModelData(
-          storyElement.elementModel
-        ) as LearningElementModel,
-      } as BackendStoryTO;
+    else {
+      let backendStoryTO = new BackendStoryTO();
+      backendStoryTO.storyTexts = storyElement.storyTexts;
+      backendStoryTO.elementModel = this.extractModelData(
+        storyElement.elementModel
+      ) as LearningElementModel;
+      return backendStoryTO;
+    }
   }
 
   // creates BackendElementTOs from the AWT if the element type is supported
