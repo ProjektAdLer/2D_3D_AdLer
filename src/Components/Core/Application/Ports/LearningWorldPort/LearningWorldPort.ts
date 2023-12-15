@@ -14,6 +14,7 @@ import AdaptivityElementProgressTO from "../../DataTransferObjects/AdaptivityEle
 import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
 import UserLearningWorldsInfoTO from "../../DataTransferObjects/UserLearningWorldsInfoTO";
+import StoryElementTextTO from "../../DataTransferObjects/StoryElementTextTO";
 
 @injectable()
 export default class LearningWorldPort
@@ -137,6 +138,13 @@ export default class LearningWorldPort
     this.adapters.forEach((adapter) => {
       if (adapter.onAdaptivityElementUserHintInformed)
         adapter.onAdaptivityElementUserHintInformed(adaptivityElementHintTO);
+    });
+  }
+
+  public onStoryElementLoaded(storyelementTextTO: StoryElementTextTO): void {
+    this.adapters.forEach((adapter) => {
+      if (adapter.onStoryElementLoaded)
+        adapter.onStoryElementLoaded(storyelementTextTO);
     });
   }
 }
