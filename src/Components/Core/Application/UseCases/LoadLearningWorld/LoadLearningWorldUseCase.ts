@@ -36,6 +36,7 @@ import ArrayItemRandomizer from "src/Components/Core/Presentation/Utils/ArrayIte
 import { isValidLearningElementModelType } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
 import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElementEntity";
 import BackendStoryTO from "../../DataTransferObjects/BackendStoryTO";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 @injectable()
 export default class LoadLearningWorldUseCase
@@ -237,8 +238,16 @@ export default class LoadLearningWorldUseCase
             template: space.template,
             theme: space.templateStyle,
             parentWorldID: worldID,
-            introStory: this.createStoryElementEntityOrNull(space.introStory),
-            outroStory: this.createStoryElementEntityOrNull(space.outroStory),
+            introStory: this.createStoryElementEntityOrNull(
+              space.introStory,
+              space.id,
+              StoryElementType.Intro
+            ),
+            outroStory: this.createStoryElementEntityOrNull(
+              space.outroStory,
+              space.id,
+              StoryElementType.Outro
+            ),
           },
           LearningSpaceEntity
         )
@@ -249,14 +258,18 @@ export default class LoadLearningWorldUseCase
   }
 
   private createStoryElementEntityOrNull(
-    storyElement: BackendStoryTO | null
+    storyElement: BackendStoryTO | null,
+    id: number,
+    storyType: StoryElementType
   ): StoryElementEntity | null {
     if (storyElement === null) return null;
 
     let storyElementEntity = this.container.createEntity<StoryElementEntity>(
       {
+        spaceID: id,
         storyTexts: storyElement.storyTexts,
         elementModel: storyElement.elementModel,
+        type: storyType,
       },
       StoryElementEntity
     );
