@@ -12,6 +12,8 @@
   "exitRoomTitle": "Raum verlassen?",
   "exitRoomButton": "Raum verlassen",
 
+  "introStoryTitle": "Lernraum Einführung",
+
   "spaceScore": "{{current}} von {{required}}",
 
   "sidebar_learningSpaceMenu": "Lernraum-Menü",
