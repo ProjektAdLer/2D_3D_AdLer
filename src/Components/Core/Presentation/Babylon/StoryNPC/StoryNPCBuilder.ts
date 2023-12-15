@@ -7,6 +7,7 @@ import StoryNPCViewModel from "./StoryNPCViewModel";
 import StoryNPCView from "./StoryNPCView";
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
 import { LearningElementModel } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
+import IStoryNPCBuilder from "./IStoryNPCBuilder";
 
 /*
 This Template Provides the whole scaffolding for a React Component.
@@ -22,12 +23,15 @@ director.build();
 */
 
 @injectable()
-export default class StoryNPCBuilder extends AsyncPresentationBuilder<
-  StoryNPCViewModel,
-  IStoryNPCController,
-  StoryNPCView,
-  IStoryNPCPresenter
-> {
+export default class StoryNPCBuilder
+  extends AsyncPresentationBuilder<
+    StoryNPCViewModel,
+    IStoryNPCController,
+    StoryNPCView,
+    IStoryNPCPresenter
+  >
+  implements IStoryNPCBuilder
+{
   constructor() {
     super(
       StoryNPCViewModel,
@@ -39,8 +43,16 @@ export default class StoryNPCBuilder extends AsyncPresentationBuilder<
 
   public modelType: LearningElementModel;
 
-  public buildViewModel(): void {
+  override buildViewModel(): void {
     super.buildViewModel();
     this.viewModel!.modelType = this.modelType;
+  }
+
+  override buildView(): void {
+    super.buildView();
+    this.view!.asyncSetupStoryNPC().then(
+      () => this.resolveIsCompleted(),
+      (e) => console.log(e)
+    );
   }
 }

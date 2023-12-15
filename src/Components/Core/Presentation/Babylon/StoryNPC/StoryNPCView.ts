@@ -7,7 +7,7 @@ import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
-import { Mesh } from "@babylonjs/core";
+import { Mesh, Vector3 } from "@babylonjs/core";
 
 import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb";
 
@@ -23,7 +23,7 @@ export default class StoryNPCView {
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
   }
 
-  public async setupStoryNPC(): Promise<void> {
+  public async asyncSetupStoryNPC(): Promise<void> {
     await Promise.all([this.loadElementModel(), this.loadIconModel()]);
   }
 
@@ -41,5 +41,9 @@ export default class StoryNPCView {
     this.viewModel.iconMeshes = (await this.scenePresenter.loadModel(
       iconLink
     )) as Mesh[];
+
+    this.viewModel.iconMeshes[0].position.addInPlace(
+      new Vector3(0, this.viewModel.iconYOffset, 0)
+    );
   }
 }
