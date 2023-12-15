@@ -51,7 +51,7 @@ export default function LoginStatus({ className }: Readonly<AdLerUIComponent>) {
       {userLoggedIn && (
         <StyledButton
           shape="freefloatleft"
-          className="h-6 !bg-red-300 w-fit absolute top-10 left-44 portrait:-left-2 portrait:-top-4"
+          className="h-6 !bg-red-300 w-fit absolute bottom-[45px] right-1 portrait:-left-2 portrait:-top-4"
           onClick={() => controller.logout()}
           data-testid="logout"
         >
