@@ -57,4 +57,14 @@ describe("StateMachine", () => {
     systemUnderTest.applyAction(MockActions.action);
     expect(mockCallback).toBeCalledTimes(1);
   });
+
+  test("addTransition adds transition", () => {
+    systemUnderTest = new StateMachine(MockStates.initialState, []);
+    systemUnderTest.addTransition({
+      action: MockActions.action,
+      from: MockStates.initialState,
+      to: MockStates.secondState,
+    });
+    expect(systemUnderTest.applyAction(MockActions.action)).toBe(true);
+  });
 });
