@@ -37,6 +37,7 @@ import AdaptivityElementBuilder from "../../Presentation/Adaptivity/AdaptivityEl
 import BreakTimeNotificationBuilder from "../../Presentation/Adaptivity/BreakTimeNotification/BreakTimeNotificationBuilder";
 import LoadingScreenBuilder from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreenBuilder";
 import IntroStoryElementBuilder from "~ReactComponents/LearningSpaceDisplay/IntroStoryElement/IntroStoryElementBuilder";
+import StoryNPCBuilder from "../../Presentation/Babylon/StoryNPC/StoryNPCBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -136,6 +137,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IIntroStoryElementBuilder).to(
     IntroStoryElementBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IStoryNPCBuilder).to(
+    StoryNPCBuilder
   );
 });
 
