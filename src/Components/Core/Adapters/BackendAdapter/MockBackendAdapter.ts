@@ -890,8 +890,14 @@ export default class MockBackendAdapter implements IBackendPort {
           spaceTemplate: "L_32x31_10L",
           spaceTemplateStyle: "Campus",
           spaceStory: {
-            introStory: null,
-            outroStory: null,
+            introStory: {
+              storyTexts: ["Hallo", "Ich bin ein Story-Element"],
+              elementModel: "",
+            },
+            outroStory: {
+              storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+              elementModel: "",
+            },
           },
         },
       ],
