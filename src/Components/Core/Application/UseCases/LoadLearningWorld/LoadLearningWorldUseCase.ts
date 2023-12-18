@@ -75,6 +75,7 @@ export default class LoadLearningWorldUseCase
     );
     return loadedWorld;
   }
+
   async executeAsync(data: { worldID: number }): Promise<void> {
     const lock = await this.semaphore.acquire();
     const loadedWorlds = await this.loadWorld(data, lock);
