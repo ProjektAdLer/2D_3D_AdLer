@@ -12,7 +12,7 @@ describe("BottomTooltipPresenter", () => {
 
   test("should set the value of the viewModel when hide is called", () => {
     vm.show.Value = true;
-    systemUnderTest.hide();
+    systemUnderTest.hide(1);
     expect(vm.show.Value).toBe(false);
   });
 
@@ -40,5 +40,15 @@ describe("BottomTooltipPresenter", () => {
     systemUnderTest.display(text, iconType, undefined, onClickCallback);
 
     expect(vm.showPoints.Value).toBe(false);
+  });
+  test("hideAll sets show in viewModel to false", () => {
+    vm.show.Value = true;
+    systemUnderTest.hideAll();
+    expect(vm.show.Value).toBe(false);
+  });
+  test("show sets show in viewModel to true", () => {
+    vm.show.Value = false;
+    systemUnderTest.show();
+    expect(vm.show.Value).toBe(true);
   });
 });
