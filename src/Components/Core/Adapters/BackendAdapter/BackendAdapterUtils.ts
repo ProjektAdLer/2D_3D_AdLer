@@ -115,8 +115,8 @@ export default class BackendAdapterUtils {
         requiredScore: space.requiredPointsToComplete,
         template: template,
         templateStyle: templateStyle,
-        introStory: this.mapStoryElement(space.spaceStory.introStory),
-        outroStory: this.mapStoryElement(space.spaceStory.outroStory),
+        introStory: this.mapStoryElement(space.spaceStory?.introStory),
+        outroStory: this.mapStoryElement(space.spaceStory?.outroStory),
       } as BackendSpaceTO;
     });
   }
@@ -124,7 +124,7 @@ export default class BackendAdapterUtils {
   private static mapStoryElement(
     storyElement: APIStoryElement | null
   ): BackendStoryTO | null {
-    if (storyElement === null) return null;
+    if (storyElement === null || storyElement === undefined) return null;
     else {
       let backendStoryTO = new BackendStoryTO();
       backendStoryTO.storyTexts = storyElement.storyTexts;
