@@ -33,6 +33,8 @@ export default function IntroStoryElement({ className }: AdLerUIComponent<{}>) {
         className,
         "flex flex-col justify-center gap-2 p-5 rounded-lg"
       )}
-    ></StyledModal>
+    >
+      {viewModel.texts.Value[0].toString()}
+    </StyledModal>
   );
 }
