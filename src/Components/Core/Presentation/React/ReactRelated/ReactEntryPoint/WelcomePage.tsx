@@ -29,9 +29,8 @@ export default function WelcomePage() {
           Loggen Sie sich zunächst in Moodle ein. Wählen Sie dann aus, wie es
           weitergehen soll.
         </p> */}
+        <LoginForm className="flex flex-col items-center justify-around col-span-6 col-start-2 xl:pt-8 lg:pt-4" />
       </section>
-
-      <LoginForm className="flex flex-col items-center justify-around col-span-6 col-start-2" />
 
       <section className="flex items-center justify-around col-span-6 col-start-2 row-span-3 row-start-3 mb-4 portrait:flex-col portrait:row-start-2 portrait:row-span-4 portrait:col-start-2 portrait:gap-6">
         <StyledButton

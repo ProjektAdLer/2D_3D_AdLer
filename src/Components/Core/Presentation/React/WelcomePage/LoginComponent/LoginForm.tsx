@@ -49,7 +49,7 @@ export default function LoginForm({ className }: Readonly<AdLerUIComponent>) {
 
   return (
     <div className={tailwindMerge(className)}>
-      <h2 className="col-span-6 col-start-2 row-start-2 pt-2 text-xl font-extrabold text-center justify-self-center portrait:text-sm lg:text-xl text-adlerdarkblue portrait:row-start-1 portrait:self-end portrait:col-start-1 portrait:col-span-8">
+      <h2 className="col-span-6 col-start-2 row-start-2 pt-2 text-xl font-extrabold text-center justify-self-center portrait:text-sm lg:text-xl text-adlerdarkblue portrait:row-start-1 portrait:col-start-1 portrait:col-span-8">
         {userLoggedIn
           ? t("loginSuccessfullSubheading")
           : t("moodleLoginSubheading")}
