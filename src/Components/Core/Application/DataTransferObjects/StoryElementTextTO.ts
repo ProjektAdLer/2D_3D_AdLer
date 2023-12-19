@@ -1,4 +1,4 @@
 export default class StoryElementTextTO {
-  introTexte: string[] | undefined;
-  outroTexte: string[] | undefined;
+  introTexts: string[] | undefined;
+  outroTexts: string[] | undefined;
 }

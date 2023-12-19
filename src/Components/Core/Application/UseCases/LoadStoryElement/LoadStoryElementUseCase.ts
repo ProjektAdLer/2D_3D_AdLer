@@ -67,7 +67,7 @@ export default class LoadStoryElementUseCase
       storyType === LoadStoryElementType.Intro ||
       storyType === LoadStoryElementType.IntroOutro
     ) {
-      storyTO.introTexte = storyEntities.find((e) => {
+      storyTO.introTexts = storyEntities.find((e) => {
         return e.type === StoryElementType.Intro;
       })?.storyTexts;
 
@@ -81,7 +81,7 @@ export default class LoadStoryElementUseCase
       storyType === LoadStoryElementType.Outro ||
       storyType === LoadStoryElementType.IntroOutro
     ) {
-      storyTO.outroTexte = storyEntities.find((e) => {
+      storyTO.outroTexts = storyEntities.find((e) => {
         return e.type === StoryElementType.Outro;
       })?.storyTexts;
 

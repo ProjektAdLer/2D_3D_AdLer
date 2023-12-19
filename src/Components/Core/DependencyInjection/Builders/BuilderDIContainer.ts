@@ -36,7 +36,7 @@ import HelpDeskButtonBuilder from "~ReactComponents/GeneralComponents/HelpDeskBu
 import AdaptivityElementBuilder from "../../Presentation/Adaptivity/AdaptivityElement/AdaptivityElementBuilder";
 import BreakTimeNotificationBuilder from "../../Presentation/Adaptivity/BreakTimeNotification/BreakTimeNotificationBuilder";
 import LoadingScreenBuilder from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreenBuilder";
-import IntroStoryElementBuilder from "~ReactComponents/LearningSpaceDisplay/IntroStoryElement/IntroStoryElementBuilder";
+import StoryElementBuilder from "~ReactComponents/LearningSpaceDisplay/StoryElement/StoryElementBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -134,8 +134,8 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IBreakTimeNotificationBuilder).to(
     BreakTimeNotificationBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IIntroStoryElementBuilder).to(
-    IntroStoryElementBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.IStoryElementBuilder).to(
+    StoryElementBuilder
   );
 });
 

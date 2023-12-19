@@ -1,14 +1,14 @@
 import mock from "jest-mock-extended/lib/Mock";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
-import IntroStoryElementBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/IntroStoryElement/IntroStoryElementBuilder";
-import IIntroStoryElementPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/IntroStoryElement/IIntroStoryElementPresenter";
+import StoryElementBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/StoryElementBuilder";
+import IStoryElementPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
 
-describe("IntroStoryElementBuilder", () => {
-  let systemUnderTest: IntroStoryElementBuilder;
+describe("StoryElementBuilder", () => {
+  let systemUnderTest: StoryElementBuilder;
 
   beforeEach(() => {
-    systemUnderTest = new IntroStoryElementBuilder();
+    systemUnderTest = new StoryElementBuilder();
   });
 
   test("buildController builds the controller and registers the viewModel and controller", () => {
@@ -24,17 +24,17 @@ describe("IntroStoryElementBuilder", () => {
     systemUnderTest.buildPresenter();
 
     expect(
-      CoreDIContainer.isBound(PRESENTATION_TYPES.IIntroStoryElementPresenter)
+      CoreDIContainer.isBound(PRESENTATION_TYPES.IStoryElementPresenter)
     ).toBe(true);
-    expect(
-      CoreDIContainer.get(PRESENTATION_TYPES.IIntroStoryElementPresenter)
-    ).toBe(systemUnderTest.getPresenter()!);
+    expect(CoreDIContainer.get(PRESENTATION_TYPES.IStoryElementPresenter)).toBe(
+      systemUnderTest.getPresenter()!
+    );
   });
 
   test("buildPresenter unbinds the presenter if it is already bound", () => {
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.IIntroStoryElementPresenter
-    ).toConstantValue(mock<IIntroStoryElementPresenter>);
+      PRESENTATION_TYPES.IStoryElementPresenter
+    ).toConstantValue(mock<IStoryElementPresenter>);
 
     const unbindSpy = jest.spyOn(CoreDIContainer, "unbind");
 

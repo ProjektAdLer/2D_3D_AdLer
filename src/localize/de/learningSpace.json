@@ -13,6 +13,7 @@
   "exitRoomButton": "Raum verlassen",
 
   "introStoryTitle": "Lernraum Einführung",
+  "outroStoryTitle": "Lernraum Abschluss",
 
   "spaceScore": "{{current}} von {{required}}",
 

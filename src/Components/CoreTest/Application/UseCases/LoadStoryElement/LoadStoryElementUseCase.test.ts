@@ -119,8 +119,8 @@ describe("LoadStoryElementUseCase", () => {
 
     await systemUnderTest.executeAsync(LoadStoryElementType.Intro);
     expect(worldPortMock.onStoryElementLoaded).toHaveBeenCalledWith({
-      introTexte: ["intro"],
-      outroTexte: undefined,
+      introTexts: ["intro"],
+      outroTexts: undefined,
     } as StoryElementTextTO);
   });
 
@@ -147,8 +147,8 @@ describe("LoadStoryElementUseCase", () => {
 
     await systemUnderTest.executeAsync(LoadStoryElementType.Outro);
     expect(worldPortMock.onStoryElementLoaded).toHaveBeenCalledWith({
-      introTexte: undefined,
-      outroTexte: ["outro"],
+      introTexts: undefined,
+      outroTexts: ["outro"],
     } as StoryElementTextTO);
   });
 
@@ -175,8 +175,8 @@ describe("LoadStoryElementUseCase", () => {
 
     await systemUnderTest.executeAsync(LoadStoryElementType.IntroOutro);
     expect(worldPortMock.onStoryElementLoaded).toHaveBeenCalledWith({
-      introTexte: ["intro"],
-      outroTexte: ["outro"],
+      introTexts: ["intro"],
+      outroTexts: ["outro"],
     } as StoryElementTextTO);
   });
 });
