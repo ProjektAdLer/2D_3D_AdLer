@@ -12,6 +12,8 @@ import LearningSpacePrecursorAndSuccessorTO from "../../../../Core/Application/D
 import AdaptivityElementProgressTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import AdaptivityElementProgressUpdateTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 import AdaptivityElementHintTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
+import UserLearningWorldsInfoTO from "../../../../Core/Application/DataTransferObjects/UserLearningWorldsInfoTO";
+import StoryElementTextTO from "../../../../Core/Application/DataTransferObjects/StoryElementTextTO";
 
 describe("LearningWorldPort", () => {
   let systemUnderTest: LearningWorldPort;
@@ -38,6 +40,18 @@ describe("LearningWorldPort", () => {
     expect(
       worldAdapterMock.onUserInitialLearningWorldsInfoLoaded
     ).toBeCalledWith(mockedUserWorldsTO);
+  });
+
+  test("onUserLearningWorldsInfoLoaded calls a registered adapter", () => {
+    const worldAdapterMock = mock<ILearningWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockedUserWorldsTO = mock<UserLearningWorldsInfoTO>();
+
+    systemUnderTest.onUserLearningWorldsInfoLoaded(mockedUserWorldsTO);
+
+    expect(worldAdapterMock.onUserLearningWorldsInfoLoaded).toBeCalledWith(
+      mockedUserWorldsTO
+    );
   });
 
   test("onLearningWorldLoaded calls a registered adapter", () => {
@@ -169,6 +183,18 @@ describe("LearningWorldPort", () => {
 
     expect(worldAdapterMock.onAdaptivityElementUserHintInformed).toBeCalledWith(
       mockAdaptivityElementHintTO
+    );
+  });
+
+  test("onStoryElementLoaded calls a registered adapter", () => {
+    const worldAdapterMock = mock<ILearningWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockStoryElementTextTO = mock<StoryElementTextTO>();
+
+    systemUnderTest.onStoryElementLoaded(mockStoryElementTextTO);
+
+    expect(worldAdapterMock.onStoryElementLoaded).toBeCalledWith(
+      mockStoryElementTextTO
     );
   });
 });
