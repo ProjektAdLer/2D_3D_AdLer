@@ -80,7 +80,7 @@ export default function AdaptivityElementDialogContainer({
   );
   const [model] = useObservable<LearningElementModel>(viewmodel?.model);
 
-  const { t } = useTranslation("learningElement");
+  const { t: translate } = useTranslation("learningElement");
 
   // -- State --
   const [headerText, setHeaderText] = useState<string>("");
@@ -244,7 +244,7 @@ export default function AdaptivityElementDialogContainer({
                           controller.showFooterTooltip();
                         }}
                       >
-                        {t("legendHover")}
+                        {translate("legendHover")}
                       </p>
                     )}
                     {showFooterTooltip && (
@@ -312,12 +312,12 @@ export default function AdaptivityElementDialogContainer({
                               ns="learningElement"
                             />
                           </p>
-                          <p>{t("requiredUnsolved")}</p>
-                          <p>{t("optionalUnsolved")}</p>
-                          <p>{t("requiredSolved")}</p>
-                          <p>{t("optionalSolved")}</p>
-                          <p>{t("noQuestionDifficulty")}</p>
-                          <p>{t("requiredTask")}</p>
+                          <p>{translate("requiredUnsolved")}</p>
+                          <p>{translate("optionalUnsolved")}</p>
+                          <p>{translate("requiredSolved")}</p>
+                          <p>{translate("optionalSolved")}</p>
+                          <p>{translate("noQuestionDifficulty")}</p>
+                          <p>{translate("requiredTask")}</p>
                         </div>
                       </div>
                     )}

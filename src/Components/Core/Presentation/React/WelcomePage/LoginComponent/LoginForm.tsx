@@ -25,7 +25,7 @@ export default function LoginForm({ className }: Readonly<AdLerUIComponent>) {
   const getLoginStatusUseCase = useInjection<IGetLoginStatusUseCase>(
     USECASE_TYPES.IGetLoginStatusUseCase
   );
-  const { t } = useTranslation("start");
+  const { t: translate } = useTranslation("start");
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -51,8 +51,8 @@ export default function LoginForm({ className }: Readonly<AdLerUIComponent>) {
     <div className={tailwindMerge(className)}>
       <h2 className="col-span-6 col-start-2 row-start-2 pt-2 text-xl font-extrabold text-center justify-self-center portrait:text-sm lg:text-xl text-adlerdarkblue portrait:row-start-1 portrait:col-start-1 portrait:col-span-8">
         {userLoggedIn
-          ? t("loginSuccessfullSubheading")
-          : t("moodleLoginSubheading")}
+          ? translate("loginSuccessfullSubheading")
+          : translate("moodleLoginSubheading")}
       </h2>
 
       {!userLoggedIn && (
@@ -67,7 +67,7 @@ export default function LoginForm({ className }: Readonly<AdLerUIComponent>) {
             <StyledInputField
               className="text-adlerdarkblue"
               data-testid="userName"
-              placeholder={t("userName").toString()}
+              placeholder={translate("userName").toString()}
               onChange={(newVal) => {
                 setUserName(newVal.target.value);
               }}
@@ -75,7 +75,7 @@ export default function LoginForm({ className }: Readonly<AdLerUIComponent>) {
             <StyledPasswordField
               className="text-adlerdarkblue"
               data-testid="password"
-              placeholder={t("password").toString()}
+              placeholder={translate("password").toString()}
               onChange={(newVal) => {
                 setPassword(newVal.target.value);
               }}
@@ -85,17 +85,17 @@ export default function LoginForm({ className }: Readonly<AdLerUIComponent>) {
               data-testid="loginButton"
               onClick={handleSubmit}
             >
-              <p>{t("loginButton")}</p>
+              <p>{translate("loginButton")}</p>
             </StyledButton>
           </form>
 
           {loginFailed && (
             <div className="bg-red-100 rounded-lg">
               <p className="m-1 text-xs font-bold text-center text-red-500">
-                {t("loginFail")}
+                {translate("loginFail")}
               </p>
               <p className="m-1 text-xs font-bold text-center text-red-500">
-                {t("loginFailAdvise")}
+                {translate("loginFailAdvise")}
               </p>
             </div>
           )}

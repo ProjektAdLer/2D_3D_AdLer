@@ -29,7 +29,7 @@ export default function MenuHeaderBar({
 
   const [currentWorldName] = useObservable<string>(viewModel?.currentWorldName);
 
-  const { t } = useTranslation("worldMenu");
+  const { t: translate } = useTranslation("worldMenu");
 
   if (!viewModel || !controller) return null;
 
@@ -51,7 +51,9 @@ export default function MenuHeaderBar({
           textColor="darkblue"
         >
           {location === "space" ? currentWorldName : null}
-          {location === "world" ? t("learningWorldMenuTitle").toString() : null}
+          {location === "world"
+            ? translate("learningWorldMenuTitle").toString()
+            : null}
         </StyledContainer>
       </div>
       <div className="flex justify-end w-1/2 ">

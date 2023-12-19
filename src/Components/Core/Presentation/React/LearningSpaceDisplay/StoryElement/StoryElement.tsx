@@ -22,14 +22,14 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
     setOpen(false);
   }, [setOpen]);
 
-  const { t: i18nString } = useTranslation("learningSpace");
+  const { t: translate } = useTranslation("learningSpace");
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;
 
   let titleText =
     type === StoryElementType.Intro
-      ? i18nString("introStoryTitle").toString()
-      : i18nString("outroStoryTitle").toString();
+      ? translate("introStoryTitle").toString()
+      : translate("outroStoryTitle").toString();
 
   return (
     <StyledModal

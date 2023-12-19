@@ -20,7 +20,7 @@ export default function LoginModal(props: {
   );
   const [loginFailed] = useObservable<boolean>(props.viewModel.loginFailed);
 
-  const { t } = useTranslation("start");
+  const { t: translate } = useTranslation("start");
 
   const handleSubmit = React.useCallback(() => {
     props.controller.login(userName, password);
@@ -28,7 +28,7 @@ export default function LoginModal(props: {
 
   return (
     <StyledModal
-      title={t("loginTitle").toString()}
+      title={translate("loginTitle").toString()}
       showModal={modalVisible}
       onClose={() => setModalVisible(false)}
     >
@@ -41,7 +41,7 @@ export default function LoginModal(props: {
           }}
         >
           <StyledInputField
-            placeholder={t("userName").toString()}
+            placeholder={translate("userName").toString()}
             defaultValue={userName}
             onChange={(newVal) => {
               setUserName(newVal.target.value);
@@ -49,7 +49,7 @@ export default function LoginModal(props: {
           />
 
           <StyledPasswordField
-            placeholder={t("password").toString()}
+            placeholder={translate("password").toString()}
             defaultValue={password}
             onChange={(newVal) => {
               setPassword(newVal.target.value);
@@ -59,16 +59,16 @@ export default function LoginModal(props: {
           {loginFailed && (
             <div className="bg-red-100 rounded-lg">
               <p className="m-1 text-xs font-bold text-center text-red-500">
-                {t("loginFail")}
+                {translate("loginFail")}
               </p>
               <p className="m-1 text-xs font-bold text-center text-red-500">
-                {t("loginFailAdvise")}
+                {translate("loginFailAdvise")}
               </p>
             </div>
           )}
 
           <StyledButton shape="freefloatcenter" onClick={handleSubmit}>
-            <p>{t("loginButton")}</p>
+            <p>{translate("loginButton")}</p>
           </StyledButton>
 
           {/* <StyledButton

@@ -24,7 +24,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
   const [goals] = useObservable<string[]>(viewModel.goals);
   const [spaces] = useObservable<LearningSpaceTO[]>(viewModel.spaces);
 
-  const { t } = useTranslation("worldMenu");
+  const { t: translate } = useTranslation("worldMenu");
 
   // return if any of the observables is undefined
   if (name === undefined || name === "") return null;
@@ -49,7 +49,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
           className="self-center block m-2 portrait:p-2 justify-self-center animate-bounce-once bg-nodehandlecolor"
           onClick={controller.onEnterLearningWorldButtonClicked}
         >
-          {t("openLearningWorldButton")}
+          {translate("openLearningWorldButton")}
         </StyledButton>
       </article>
       <article className="flex flex-col w-full gap-2 landscape:lg-[75%] h-[68%] overflow-y-auto">
@@ -57,7 +57,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
           (description !== "" && (
             <div className="pb-2 border-b border-gray-500">
               <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
-                {t("description")}
+                {translate("description")}
               </h3>
               <div className="items-start ml-6 font-medium portrait:text-xs">
                 <TextWithLineBreaks text={description} />
@@ -68,7 +68,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
           (goals.length > 0 && (
             <div className="pb-2 border-b border-gray-500">
               <h3 className="self-center ml-2 font-black text-adlerdarkblue portrait:text-sm lg:mb-2">
-                {t("goal", { count: goals?.length })}
+                {translate("goal", { count: goals?.length })}
               </h3>
               <div className="items-start ml-6 font-medium portrait:text-xs lg:text:lg">
                 {goals.map((goal) => {
@@ -79,7 +79,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
           ))}
         <section className="pb-2 border-b border-gray-500">
           <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
-            {t("rooms", { count: spaces?.length })}
+            {translate("rooms", { count: spaces?.length })}
           </h3>
           <div className="items-start ml-6 font-medium portrait:ml-3 portrait:text-xs lg:text:lg">
             {spaces?.map((space) => {
@@ -109,7 +109,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
         </section>
         <section className="pb-2 border-b border-gray-500">
           <h3 className="self-center ml-2 font-black text-adlerdarkblue portrait:text-sm lg:mb-2">
-            {t("roomCount")}
+            {translate("roomCount")}
           </h3>
           <div className="items-start ml-6 font-medium portrait:text-xs lg:text:lg">
             {spaces?.length}

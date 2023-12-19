@@ -27,7 +27,7 @@ export default function LearningSpaceScorePanel({
   const [scoreInfo] = useObservable<ScoreInfo>(viewModel?.scoreInfo);
   const [percentage, setPercentage] = useState(0);
 
-  const { t } = useTranslation("learningSpace");
+  const { t: translate } = useTranslation("learningSpace");
 
   useEffect(() => {
     if (!scoreInfo) return;
@@ -61,7 +61,7 @@ export default function LearningSpaceScorePanel({
         <div className="absolute text-[10px] text-adlerdarkblue lg:text-[12px] font-bold leading-5 text-center">
           {scoreInfo && (
             <div>
-              {t("spaceScore", {
+              {translate("spaceScore", {
                 current: scoreInfo.currentScore,
                 required: scoreInfo.requiredScore,
               })}

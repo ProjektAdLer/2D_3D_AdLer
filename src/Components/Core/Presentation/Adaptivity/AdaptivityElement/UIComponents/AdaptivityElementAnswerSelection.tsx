@@ -25,7 +25,7 @@ export default function AdaptivityElementAnswerSelection({
     getIsAnyAnswerSelected(question)
   );
 
-  const { t } = useTranslation("learningElement");
+  const { t: translate } = useTranslation("learningElement");
 
   useEffect(() => {
     setHeaderText(question.questionText);
@@ -79,7 +79,7 @@ export default function AdaptivityElementAnswerSelection({
           }}
           disabled={!isAnyAnswerSelected}
         >
-          <p className="text-sm">{t("submitAnswers")}</p>
+          <p className="text-sm">{translate("submitAnswers")}</p>
         </StyledButton>
       </div>
     </div>

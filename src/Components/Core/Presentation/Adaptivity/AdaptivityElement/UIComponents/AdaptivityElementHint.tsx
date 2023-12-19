@@ -10,11 +10,11 @@ export default function AdaptivityElementHint({
   hint: AdaptivityHint;
   setHeaderText: (headerText: string) => void;
 }) {
-  const { t } = useTranslation("learningElement");
+  const { t: translate } = useTranslation("learningElement");
 
   useEffect(() => {
-    setHeaderText(t("hintTitle"));
-  }, [setHeaderText, t]);
+    setHeaderText(translate("hintTitle"));
+  }, [setHeaderText, translate]);
 
   return (
     <>

@@ -42,10 +42,10 @@ export default function AdaptivityElementTaskSelection({
   onSelectTask: (selectedTask: AdaptivityTask) => void;
 }) {
   const [taskButtons, setTaskButtons] = useState<JSX.Element[]>([]);
-  const { t } = useTranslation("learningElement");
+  const { t: translate } = useTranslation("learningElement");
   useEffect(() => {
-    setHeaderText(t("adaptivityIntro"));
-  }, [setHeaderText, t]);
+    setHeaderText(translate("adaptivityIntro"));
+  }, [setHeaderText, translate]);
 
   useEffect(() => {
     setTaskButtons(

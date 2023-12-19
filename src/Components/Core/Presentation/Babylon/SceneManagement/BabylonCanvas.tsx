@@ -40,7 +40,7 @@ export default function BabylonCanvas(
     ...rest
   } = props;
 
-  const { t } = useTranslation("learningSpace");
+  const { t: translate } = useTranslation("learningSpace");
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -66,9 +66,11 @@ export default function BabylonCanvas(
     );
     const scenePresenter = scenePresenterFactory(sceneDefinitionType);
     const createSceneAsync = async () => {
-      loadingScreenPresenter.pushLoadStep(t("loadLearningSpace"));
+      loadingScreenPresenter.pushLoadStep(translate("loadLearningSpace"));
       await scenePresenter.createScene(engine, sceneOptions).then(() => {
-        loadingScreenPresenter.pushLoadStep(t("finishedLoadingLearningSpace"));
+        loadingScreenPresenter.pushLoadStep(
+          translate("finishedLoadingLearningSpace")
+        );
         loadingScreenPresenter.releaseLoadingLock();
       });
       scenePresenter.startRenderLoop();
@@ -92,7 +94,7 @@ export default function BabylonCanvas(
     adaptToDeviceRatio,
     sceneOptions,
     sceneDefinitionType,
-    t,
+    translate,
   ]);
 
   return (

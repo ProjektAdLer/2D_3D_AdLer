@@ -20,7 +20,7 @@ export default function SideBar({ className }: AdLerUIComponent) {
   const [, controller] = useBuilder<SideBarViewModel, SideBarController>(
     BUILDER_TYPES.IMenuBarBuilder
   );
-  const { t } = useTranslation("learningSpace");
+  const { t: translate } = useTranslation("learningSpace");
   return (
     <CustomDropdown
       className={tailwindMerge(className, "w-20")}
@@ -44,7 +44,7 @@ export default function SideBar({ className }: AdLerUIComponent) {
             <img src={spaceIcon} alt="" />
           </StyledButton>
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {t("sidebar_learningSpaceMenu")}
+            {translate("sidebar_learningSpaceMenu")}
           </p>
         </div>
 
@@ -53,7 +53,7 @@ export default function SideBar({ className }: AdLerUIComponent) {
             <img src={worldIcon} alt="" />
           </StyledButton>
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {t("sidebar_learningWorldMenu")}
+            {translate("sidebar_learningWorldMenu")}
           </p>
         </div>
 
@@ -62,21 +62,21 @@ export default function SideBar({ className }: AdLerUIComponent) {
             <img src={engineLogo} alt="" />
           </StyledButton>
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {t("sidebar_mainMenu")}
+            {translate("sidebar_mainMenu")}
           </p>
         </div>
 
         <div className="flex flex-row items-center">
           <FullscreenSwitch />
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {t("sidebar_fullScreen")}
+            {translate("sidebar_fullScreen")}
           </p>
         </div>
         <div className="flex flex-row items-center">
           <HelpDeskButton />
           <HelpDeskModal />
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {t("sidebar_help")}
+            {translate("sidebar_help")}
           </p>
         </div>
       </StyledContainer>

@@ -31,7 +31,7 @@ export default function LearningSpaceSelection({
 
   const [showGraph, setShowGraph] = useState(true);
 
-  const { t } = useTranslation("spaceMenu");
+  const { t: translate } = useTranslation("spaceMenu");
 
   useEffect(() => {
     // call load world use case to get relevant data
@@ -54,7 +54,7 @@ export default function LearningSpaceSelection({
       {
         <section className="flex flex-row ml-4">
           <span className="mr-3 font-medium text-md text-adlerdarkblue">
-            {t("list")}
+            {translate("list")}
           </span>
           <label className="relative inline-flex cursor-pointer">
             <input
@@ -67,7 +67,7 @@ export default function LearningSpaceSelection({
             ></input>
             <div className="w-11 h-6 bg-adlerdarkblue rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:adlerdarkblue"></div>
             <span className="ml-3 font-medium text-md text-adlerdarkblue">
-              {t("graph")}
+              {translate("graph")}
             </span>
           </label>
         </section>

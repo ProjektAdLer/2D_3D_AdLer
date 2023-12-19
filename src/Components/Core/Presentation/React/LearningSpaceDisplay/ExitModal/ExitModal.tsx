@@ -25,7 +25,7 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
     setOpen(false);
   }, [setOpen]);
 
-  const { t } = useTranslation("learningSpace");
+  const { t: translate } = useTranslation("learningSpace");
 
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;
@@ -33,7 +33,7 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
   return (
     <div>
       <StyledModal
-        title={t(viewModel.modalTitle.Value).toString()}
+        title={translate(viewModel.modalTitle.Value).toString()}
         onClose={closeModal}
         showModal={isOpen}
         className={tailwindMerge(
@@ -47,7 +47,7 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
           className="flex w-[100%] mb-2 "
           onClick={controller.onExitButtonClicked}
         >
-          {t(viewModel.exitButtonTitle.Value).toString()}
+          {translate(viewModel.exitButtonTitle.Value).toString()}
         </StyledButton>
 
         {viewModel.isExit.Value &&

@@ -9,7 +9,7 @@ import StyledButton from "../ReactBaseComponents/StyledButton";
 import LoginStatus from "~ReactComponents/WelcomePage/LoginComponent/LoginStatus";
 
 export default function WelcomePage() {
-  const { t: i18nString } = useTranslation("start");
+  const { t: translate } = useTranslation("start");
   return (
     <div className="relative grid h-[100svh] grid-cols-8 grid-rows-6 p-6 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
       <img
@@ -23,7 +23,7 @@ export default function WelcomePage() {
 
       <section className="flex flex-col items-center portrait:row-start-1 portrait:row-span-1 portrait:col-start-2 portrait:col-span-6 landscape:col-span-6 landscape:col-start-2 landscape:row-start-1 text-adlerdarkblue lg:landscape:col-span-7 lg:landscape:col-start-1 xl:landscape:col-start-2 xl:landscape:col-span-6 lg:landscape:row-start-1">
         <h1 className="p-2 text-xl font-extrabold text-center justify-self-center portrait:text-xl lg:text-4xl 2xl:text-8xl">
-          {i18nString("welcome")}
+          {translate("welcome")}
         </h1>
         {/* <p className="-mt-3 text-lg text-center portrait:text-xs">
           Loggen Sie sich zunächst in Moodle ein. Wählen Sie dann aus, wie es
@@ -58,7 +58,7 @@ export default function WelcomePage() {
       <LoginStatus className="relative z-0 flex flex-col self-end col-span-2 col-start-7 row-start-6 gap-2 justify-self-end" />
 
       <p className="self-end p-2 text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1 portrait:col-span-6 portrait:text-xs landscape:col-span-6 landscape:col-start-2 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6">
-        {i18nString("copyright")}
+        {translate("copyright")}
       </p>
     </div>
   );

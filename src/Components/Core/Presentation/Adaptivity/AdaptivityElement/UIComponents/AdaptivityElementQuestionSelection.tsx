@@ -26,13 +26,15 @@ export default function AdaptivityElementQuestionSelection({
     associatedQuestion: AdaptivityQuestion
   ) => void;
 }) {
-  const { t } = useTranslation("learningElement");
+  const { t: translate } = useTranslation("learningElement");
 
   useEffect(() => {
     setHeaderText(
-      t("taskSelectionTitle", { selectedTaskTitle: selectedTask.taskTitle })
+      translate("taskSelectionTitle", {
+        selectedTaskTitle: selectedTask.taskTitle,
+      })
     );
-  }, [setHeaderText, selectedTask, t]);
+  }, [setHeaderText, selectedTask, translate]);
 
   return (
     <div className="grid w-full gap-4 px-2 py-2">
@@ -63,7 +65,7 @@ export default function AdaptivityElementQuestionSelection({
                       starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
                     <p className="flex justify-center col-span-3 px-4 text-sm text-start">
-                      {t("easy")}{" "}
+                      {translate("easy")}{" "}
                     </p>
                   </>
                 )}
@@ -75,7 +77,7 @@ export default function AdaptivityElementQuestionSelection({
                       starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
                     <p className="flex justify-center col-span-3 px-4 text-sm text-start">
-                      {t("normal")}{" "}
+                      {translate("normal")}{" "}
                     </p>
                   </>
                 )}
@@ -87,7 +89,7 @@ export default function AdaptivityElementQuestionSelection({
                       starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
                     <p className="flex justify-center col-span-3 px-4 text-sm text-start">
-                      {t("hard")}{" "}
+                      {translate("hard")}{" "}
                     </p>
                   </>
                 )}

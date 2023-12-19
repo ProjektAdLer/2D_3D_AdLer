@@ -11,10 +11,12 @@ export default function AdaptivityElementAnswerFeedback({
   setHeaderText: (text: string) => void;
   closeFeedback: () => void;
 }) {
-  const { t } = useTranslation("learningElement");
+  const { t: translate } = useTranslation("learningElement");
   useEffect(() => {
-    setHeaderText(isCorrect ? t("rightAnswer") : t("wrongAnswer"));
-  }, [isCorrect, setHeaderText, t]);
+    setHeaderText(
+      isCorrect ? translate("rightAnswer") : translate("wrongAnswer")
+    );
+  }, [isCorrect, setHeaderText, translate]);
 
   return (
     <div className="flex w-full my-4 h-fit">
@@ -32,7 +34,7 @@ export default function AdaptivityElementAnswerFeedback({
       </div> */}
       <div className="flex justify-end w-1/2">
         <StyledButton shape="freefloatcenter" onClick={closeFeedback}>
-          <p className="text-sm">{t("nextButton")}</p>
+          <p className="text-sm">{translate("nextButton")}</p>
         </StyledButton>
       </div>
     </div>

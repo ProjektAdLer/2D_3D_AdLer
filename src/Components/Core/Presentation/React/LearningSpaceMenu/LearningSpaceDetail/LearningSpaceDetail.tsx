@@ -40,7 +40,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
   );
   const [isAvailable] = useObservable<boolean>(viewModel.isAvailable);
 
-  const { t } = useTranslation("spaceMenu");
+  const { t: translate } = useTranslation("spaceMenu");
 
   // return if any of the observables is undefined
   if (
@@ -76,7 +76,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
             className="self-center block m-2 portrait:p-4 justify-self-center animate-bounce-once bg-nodehandlecolor"
             onClick={controller.onLearningSpaceButtonClicked}
           >
-            {t("learningSpaceButton")}
+            {translate("learningSpaceButton")}
           </StyledButton>
         )}
       </article>
@@ -84,7 +84,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
         {description !== "" && (
           <section className="pb-2 border-b border-gray-500">
             <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
-              {t("description")}
+              {translate("description")}
             </h3>
             <div className="items-start ml-6 font-medium portrait:ml-3 portrait:text-xs">
               <TextWithLineBreaks text={description} />
@@ -94,7 +94,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
         {goals.length > 0 && goals[0] !== "" && (
           <section className="pb-2 border-b border-gray-500">
             <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
-              {t("goal", { count: goals?.length })}
+              {translate("goal", { count: goals?.length })}
             </h3>
             <div className="items-start ml-6 font-medium portrait:text-xs portrait:ml-3 lg:text:lg">
               <ul className="ml-4 list-disc">
@@ -112,7 +112,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
         {elements.length > 0 && (
           <section className="pb-2 border-b border-gray-500">
             <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
-              {t("learningElement", { count: elements?.length })}
+              {translate("learningElement", { count: elements?.length })}
             </h3>
             <div className="flex flex-col items-start ml-6 font-medium portrait:ml-3 portrait:text-xs lg:text-lg">
               {elements.map((element) => {
@@ -157,7 +157,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
           <section className="flex flex-col gap-2">
             <div className="flex flex-row items-center justify-between w-full xl:w-3/4">
               <h3 className="self-center max-w-[75%] ml-2 text-lg font-black portrait:text-sm text-adlerdarkblue">
-                {t("requiredPoints")}
+                {translate("requiredPoints")}
               </h3>
               <div className="flex flex-row ml-6 text-lg font-medium portrait:text-xs portrait:ml-2">
                 {requiredPoints}
@@ -170,7 +170,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
             </div>
             <div className="flex flex-row items-center justify-between w-full xl:w-3/4">
               <h3 className="max-w-[75%] self-center ml-2 text-lg font-black portrait:text-sm text-adlerdarkblue">
-                {t("maximumPoints")}
+                {translate("maximumPoints")}
               </h3>
               <div className="flex flex-row items-start ml-6 text-lg font-medium portrait:text-xs portrait:ml-2">
                 {elements.reduce((acc, element) => acc + element[3], 0)}

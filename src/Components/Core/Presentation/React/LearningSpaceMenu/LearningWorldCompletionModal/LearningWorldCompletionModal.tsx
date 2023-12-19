@@ -20,7 +20,7 @@ export default function LearningWorldCompletionModal({
   const [showModal] = useObservable(viewModel.showModal);
   const [evaluationLink] = useObservable(viewModel.evaluationLink);
 
-  const { t } = useTranslation("spaceMenu");
+  const { t: translate } = useTranslation("spaceMenu");
 
   if (!viewModel || !controller) return null;
 
@@ -30,7 +30,7 @@ export default function LearningWorldCompletionModal({
         className,
         "flex flex-col items-center justify-center"
       )}
-      title={t("learningWorldCompleted").toString()}
+      title={translate("learningWorldCompleted").toString()}
       showModal={showModal && !viewModel.wasClosedOnce}
       onClose={() => {
         controller.CloseButtonClicked();
@@ -39,7 +39,7 @@ export default function LearningWorldCompletionModal({
       <div className="flex flex-col items-center justify-center">
         {<img className="w-32 mb-4" src={SolutionIcon} alt=""></img>}
         <div className="w-96">
-          <p className="mb-4">{t("congratulation")}</p>
+          <p className="mb-4">{translate("congratulation")}</p>
           {evaluationLink && (
             <div>
               <div className="flex justify-center">
@@ -49,11 +49,11 @@ export default function LearningWorldCompletionModal({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {t("survey")}
+                  {translate("survey")}
                 </a>
               </div>
               <div className="flex justify-center m-2 font-bold">
-                <p>{t("thanks")}</p>
+                <p>{translate("thanks")}</p>
               </div>
             </div>
           )}

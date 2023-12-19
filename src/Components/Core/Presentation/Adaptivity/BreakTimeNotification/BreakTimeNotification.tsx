@@ -44,7 +44,7 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
     setChosenBreakContent(breakContent);
   }, [randomNumber, viewModel, breakType]);
 
-  const { t } = useTranslation("breakTime");
+  const { t: translate } = useTranslation("breakTime");
 
   if (!viewModel || !controller || !showModal || !chosenBreakContent)
     return null;
@@ -61,8 +61,8 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
           <img src={pauseIcon} className="h-fit" alt="Pause Icon" />
         </StyledButton>
         <div className="hidden lg:visible lg:flex lg:flex-col items-start max-w-[60%] text-adlerdarkblue">
-          <h1 className="text-xl font-bold">{t("pauseInfo")}</h1>
-          <p className="text-sm">{t("pauseExplanation")}</p>
+          <h1 className="text-xl font-bold">{translate("pauseInfo")}</h1>
+          <p className="text-sm">{translate("pauseExplanation")}</p>
         </div>
         <StyledButton
           shape="closebutton"
@@ -79,7 +79,7 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
       className={tailwindMerge(className, "")}
       showModal={showModal}
       onClose={controller.minimizeOrMaximizeBreakNotification}
-      title={t("pauseTitle").toString()}
+      title={translate("pauseTitle").toString()}
     >
       {RenderBreakContent(
         controller,

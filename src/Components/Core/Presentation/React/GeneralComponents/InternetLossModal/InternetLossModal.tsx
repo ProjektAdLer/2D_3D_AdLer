@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 export default function InternetLossModal({ className }: AdLerUIComponent<{}>) {
   const [isOpen, setOpen] = useState<boolean>(false);
 
-  const { t } = useTranslation("internetLoss");
+  const { t: translate } = useTranslation("internetLoss");
 
   const closeModal = useCallback(() => {
     setOpen(false);
@@ -33,8 +33,12 @@ export default function InternetLossModal({ className }: AdLerUIComponent<{}>) {
         showModal={isOpen}
         className={tailwindMerge(className, "p-5 rounded-lg")}
       >
-        <p className="m-1 my-4 font-bold text-adlerdarkblue">{t("info")}</p>
-        <p className="m-1 my-4 font-bold text-adlerdarkblue">{t("advise")}</p>
+        <p className="m-1 my-4 font-bold text-adlerdarkblue">
+          {translate("info")}
+        </p>
+        <p className="m-1 my-4 font-bold text-adlerdarkblue">
+          {translate("advise")}
+        </p>
       </StyledModal>
     </div>
   );

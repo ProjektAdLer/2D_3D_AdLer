@@ -24,7 +24,7 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
     SCENE_TYPES.ScenePresenterFactory
   )(LearningSpaceSceneDefinition);
 
-  const { t } = useTranslation("helpMenu");
+  const { t: translate } = useTranslation("helpMenu");
 
   const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
 
@@ -50,12 +50,12 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
         ></button>
 
         <p className="m-2 my-4 font-bold text-adlerdarkblue">
-          {t("explanation")}
+          {translate("explanation")}
         </p>
         <ul className="flex flex-col items-start ml-10 list-disc text-adlerdarkblue">
-          <li>{t("manual")}</li>
-          <li>{t("bug")}</li>
-          <li>{t("logData")}</li>
+          <li>{translate("manual")}</li>
+          <li>{translate("bug")}</li>
+          <li>{translate("logData")}</li>
         </ul>
         <section className="flex flex-row justify-around gap-2 my-6">
           <div className="flex flex-col items-center">
@@ -69,7 +69,7 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
           <div className="flex flex-col items-center">
             <BugReportButton />
             <p className="p-1 font-bold text-center text-adlerdarkblue">
-              {t("bugReport")}
+              {translate("bugReport")}
             </p>
           </div>
           <div className="flex flex-col items-center">

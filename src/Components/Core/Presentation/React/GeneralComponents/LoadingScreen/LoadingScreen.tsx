@@ -15,7 +15,7 @@ export default function LoadingScreen() {
   >(BUILDER_TYPES.ILoadingScreenBuilder);
   const [isOpen] = useObservable<boolean>(viewModel?.isOpen);
   const [canClose] = useObservable<boolean>(viewModel?.isReadyToBeClosed);
-  const { t } = useTranslation("learningSpace");
+  const { t: translate } = useTranslation("learningSpace");
 
   if (!viewModel || !controller || !isOpen) return null;
 
@@ -56,7 +56,7 @@ export default function LoadingScreen() {
               onClick={() => controller.closeLoadingScreen()}
               className="p-5 scale-125 lg:scale-150"
             >
-              {t("enterLearningSpace")}
+              {translate("enterLearningSpace")}
             </StyledButton>
           </section>
         )}
@@ -71,20 +71,20 @@ export default function LoadingScreen() {
                   key={0}
                   target="_blank"
                   href="https://projekt-adler.eu"
-                  title={t("linkInfo").toString()}
+                  title={translate("linkInfo").toString()}
                   rel="noreferrer"
                   className="underline text-adleroceanblue hover:text-nodehandlecolor"
                 >
                   {}
                 </a>,
               ]}
-              values={{ homepageLink: t("homepage") }}
+              values={{ homepageLink: translate("homepage") }}
             />
           </p>
         </section>
 
         <p className="self-end col-span-6 col-start-1 row-start-6 p-2 mb-8 text-xs text-center rounded-lg text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center">
-          {t("copyright", { ns: "start" })}
+          {translate("copyright", { ns: "start" })}
         </p>
       </main>
     </div>
