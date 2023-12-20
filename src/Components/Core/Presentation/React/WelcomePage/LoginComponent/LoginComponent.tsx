@@ -17,7 +17,9 @@ import { useTranslation } from "react-i18next";
 /**
  * React Component that displays a login button. When clicked, a modal will be overlayed.
  */
-export default function LoginForm({ className }: Readonly<AdLerUIComponent>) {
+export default function LoginComponent({
+  className,
+}: Readonly<AdLerUIComponent>) {
   const [viewModel, controller] = useBuilder<
     LoginComponentViewModel,
     LoginComponentController

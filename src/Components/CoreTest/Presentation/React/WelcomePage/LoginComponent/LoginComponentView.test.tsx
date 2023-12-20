@@ -7,13 +7,13 @@ import IGetLoginStatusUseCase from "../../../../../Core/Application/UseCases/Get
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import ILoginComponentController from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/ILoginComponentController";
-import LoginForm from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginForm";
+import LoginComponent from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponent";
 import LoginComponentViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 
 const getLoginStatusUseCaseMock = mock<IGetLoginStatusUseCase>();
 
-describe("LoginForm", () => {
+describe("LoginComponent", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind<IGetLoginStatusUseCase>(
@@ -34,7 +34,7 @@ describe("LoginForm", () => {
 
     const { container } = render(
       <Provider container={CoreDIContainer}>
-        <LoginForm />
+        <LoginComponent />
       </Provider>
     );
 
@@ -50,7 +50,7 @@ describe("LoginForm", () => {
 
     const { container } = render(
       <Provider container={CoreDIContainer}>
-        <LoginForm />
+        <LoginComponent />
       </Provider>
     );
 
@@ -69,7 +69,7 @@ describe("LoginForm", () => {
 
     render(
       <Provider container={CoreDIContainer}>
-        <LoginForm />
+        <LoginComponent />
       </Provider>
     );
 
@@ -86,7 +86,7 @@ describe("LoginForm", () => {
 
     const componentUnderTest = render(
       <Provider container={CoreDIContainer}>
-        <LoginForm />
+        <LoginComponent />
       </Provider>
     );
 

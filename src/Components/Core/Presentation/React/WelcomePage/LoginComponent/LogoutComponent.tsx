@@ -12,7 +12,9 @@ import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/Get
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import { useEffect } from "react";
 
-export default function LoginStatus({ className }: Readonly<AdLerUIComponent>) {
+export default function LogoutComponent({
+  className,
+}: Readonly<AdLerUIComponent>) {
   const [viewModel, controller] = useBuilder<
     LoginComponentViewModel,
     LoginComponentController

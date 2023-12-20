@@ -1,4 +1,4 @@
-import LoginForm from "~ReactComponents/WelcomePage/LoginComponent/LoginForm";
+import LoginComponent from "~ReactComponents/WelcomePage/LoginComponent/LoginComponent";
 import history from "history/browser";
 import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
 //import learningRoomBg from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.png";
@@ -6,7 +6,7 @@ import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/He
 import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
 import { useTranslation } from "react-i18next";
 import StyledButton from "../ReactBaseComponents/StyledButton";
-import LoginStatus from "~ReactComponents/WelcomePage/LoginComponent/LoginStatus";
+import LogoutComponent from "~ReactComponents/WelcomePage/LoginComponent/LogoutComponent";
 
 export default function WelcomePage() {
   const { t: translate } = useTranslation("start");
@@ -29,7 +29,7 @@ export default function WelcomePage() {
           Loggen Sie sich zunächst in Moodle ein. Wählen Sie dann aus, wie es
           weitergehen soll.
         </p> */}
-        <LoginForm className="flex flex-col items-center justify-around col-span-6 col-start-2 xl:pt-8 lg:pt-4" />
+        <LoginComponent className="flex flex-col items-center justify-around col-span-6 col-start-2 xl:pt-8 lg:pt-4" />
       </section>
 
       <section className="flex items-center justify-around col-span-6 col-start-2 row-span-3 row-start-3 mb-4 portrait:flex-col portrait:row-start-2 portrait:row-span-4 portrait:col-start-2 portrait:gap-6">
@@ -55,7 +55,7 @@ export default function WelcomePage() {
         </StyledButton>
       </section>
 
-      <LoginStatus className="relative z-0 flex flex-col self-end col-span-2 col-start-7 row-start-6 gap-2 justify-self-end" />
+      <LogoutComponent className="relative z-0 flex flex-col self-end col-span-2 col-start-7 row-start-6 gap-2 justify-self-end" />
 
       <p className="self-end p-2 text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1 portrait:col-span-6 portrait:text-xs landscape:col-span-6 landscape:col-start-2 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6">
         {translate("copyright")}
