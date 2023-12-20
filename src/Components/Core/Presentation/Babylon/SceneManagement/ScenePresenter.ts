@@ -9,6 +9,7 @@ import {
   Engine,
   HighlightLayer,
   IInspectorOptions,
+  ISceneLoaderAsyncResult,
 } from "@babylonjs/core";
 import { injectable } from "inversify";
 import AbstractSceneDefinition from "./Scenes/AbstractSceneDefinition";
@@ -67,6 +68,26 @@ export default class ScenePresenter implements IScenePresenter {
     }
 
     return Promise.resolve(result.meshes);
+  }
+
+  async loadGLTFModel(
+    url: string,
+    isRelevantForNavigation: boolean = false,
+    onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>
+  ): Promise<ISceneLoaderAsyncResult> {
+    const result = await SceneLoader.ImportMeshAsync(
+      "",
+      url,
+      "",
+      this.Scene,
+      onProgress
+    );
+
+    if (isRelevantForNavigation) {
+      this.navigationMeshes.push(...result.meshes);
+    }
+
+    return Promise.resolve(result);
   }
 
   createMesh(name: string, isRelevantForNavigation: boolean = false): Mesh {

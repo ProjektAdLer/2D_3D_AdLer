@@ -8,6 +8,7 @@ import {
   SceneOptions,
   HighlightLayer,
   IInspectorOptions,
+  ISceneLoaderAsyncResult,
 } from "@babylonjs/core";
 
 export default interface IScenePresenter {
@@ -45,6 +46,19 @@ export default interface IScenePresenter {
     isRelevantForNavigation?: boolean,
     onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>
   ): Promise<AbstractMesh[]>;
+
+  /**
+   * Loads a gltf model from given url into the scene
+   * @param url the url to the model
+   * @param isRelevantForNavigation defines if the model is considered when creating the NavMesh (default: false)
+   * @param onProgress  the callback function for progress events (optional)
+   * @returns a promise with all loaded elements contained in the model
+   */
+  loadGLTFModel(
+    url: string,
+    isRelevantForNavigation?: boolean,
+    onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>
+  ): Promise<ISceneLoaderAsyncResult>;
 
   /**
    * Creates a new mesh in the scene
