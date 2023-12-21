@@ -1,7 +1,7 @@
 import bind from "bind-decorator";
 import StateMachine from "../../Utils/StateMachine/StateMachine";
 import { AnimationGroup, Observer, Scene } from "@babylonjs/core";
-import type { Nullable } from "@babylonjs/core";
+import type { Nullable, Vector3 } from "@babylonjs/core";
 import CharacterAnimationStates from "./CharacterAnimationStates";
 import CharacterAnimationActions from "./CharacterAnimationActions";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
@@ -12,16 +12,16 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 
 export default class CharacterAnimator {
-  private stateMachine: StateMachine<
+  private stateMachine = new StateMachine<
     CharacterAnimationStates,
     CharacterAnimationActions
-  >;
+  >(CharacterAnimationStates.Idle, []);
   private animationBlendValue: number = 0;
   private scenePresenter: IScenePresenter;
 
   constructor(
     private idleAnimation: AnimationGroup,
-    private walkAnimation?: AnimationGroup,
+    private walkAnimation: AnimationGroup,
     private interactionAnimation?: AnimationGroup
   ) {
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
@@ -29,13 +29,8 @@ export default class CharacterAnimator {
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
 
-    this.stateMachine = new StateMachine<
-      CharacterAnimationStates,
-      CharacterAnimationActions
-    >(CharacterAnimationStates.Idle, []);
-
     this.setupIdleAnimation();
-    if (this.walkAnimation) this.setupWalkAnimation();
+    this.setupWalkAnimation();
     if (this.interactionAnimation) this.setupInteractionAnimation();
   }
 
@@ -45,8 +40,8 @@ export default class CharacterAnimator {
   }
 
   private setupWalkAnimation(): void {
-    this.walkAnimation!.play(true);
-    this.walkAnimation!.setWeightForAllAnimatables(0.0);
+    this.walkAnimation.play(true);
+    this.walkAnimation.setWeightForAllAnimatables(0.0);
 
     this.stateMachine.addTransition({
       action: CharacterAnimationActions.MovementStarted,
@@ -60,6 +55,10 @@ export default class CharacterAnimator {
       to: CharacterAnimationStates.Idle,
       onTransitionCallback: this.transitionFromWalkToIdle,
     });
+
+    this.scenePresenter.Scene.onBeforeRenderObservable.add(
+      this.setWalkingAnimationSpeed
+    );
   }
 
   private setupInteractionAnimation(): void {
@@ -114,7 +113,7 @@ export default class CharacterAnimator {
       () => {
         this.onBeforeAnimationTransitionObserver(
           this.idleAnimation,
-          this.walkAnimation!,
+          this.walkAnimation,
           observer,
           this.getVelocityAnimationInterpolationIncrement
         );
@@ -128,7 +127,7 @@ export default class CharacterAnimator {
     const observer = this.scenePresenter.Scene.onBeforeAnimationsObservable.add(
       () => {
         this.onBeforeAnimationTransitionObserver(
-          this.walkAnimation!,
+          this.walkAnimation,
           this.idleAnimation,
           observer,
           () => this.getTimedAnimationInterpolationIncrement(100)
@@ -193,5 +192,14 @@ export default class CharacterAnimator {
     transitionTimeInMs: number
   ): number {
     return this.scenePresenter.Scene.deltaTime / transitionTimeInMs;
+  }
+
+  @bind
+  private setWalkingAnimationSpeed(): void {
+    if (this.stateMachine.CurrentState !== CharacterAnimationStates.Walking)
+      return;
+
+    let velocity = this.getCharacterVelocity().length();
+    this.walkAnimation.speedRatio = Math.max(velocity, 1);
   }
 }
