@@ -20,6 +20,7 @@ export default class CharacterAnimator {
   private scenePresenter: IScenePresenter;
 
   constructor(
+    private getCharacterVelocity: () => Vector3,
     private idleAnimation: AnimationGroup,
     private walkAnimation: AnimationGroup,
     private interactionAnimation?: AnimationGroup
@@ -181,9 +182,7 @@ export default class CharacterAnimator {
   @bind
   private getVelocityAnimationInterpolationIncrement(): number {
     return (
-      this.navigation.Crowd.getAgentVelocity(
-        this.viewModel.agentIndex
-      ).length() / this.scenePresenter.Scene.deltaTime
+      this.getCharacterVelocity().length() / this.scenePresenter.Scene.deltaTime
     );
   }
 
