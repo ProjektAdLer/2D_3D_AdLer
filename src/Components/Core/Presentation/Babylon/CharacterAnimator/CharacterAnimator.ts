@@ -10,8 +10,9 @@ import SCENE_TYPES, {
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
+import ICharacterAnimator from "./ICharacterAnimator";
 
-export default class CharacterAnimator {
+export default class CharacterAnimator implements ICharacterAnimator {
   private stateMachine = new StateMachine<
     CharacterAnimationStates,
     CharacterAnimationActions
@@ -33,6 +34,10 @@ export default class CharacterAnimator {
     this.setupIdleAnimation();
     this.setupWalkAnimation();
     if (this.interactionAnimation) this.setupInteractionAnimation();
+  }
+
+  public transition(action: CharacterAnimationActions): void {
+    this.stateMachine.applyAction(action);
   }
 
   private setupIdleAnimation(): void {
