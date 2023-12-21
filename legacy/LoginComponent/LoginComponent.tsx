@@ -23,7 +23,7 @@ export default function LoginComponent({
   const [viewModel, controller] = useBuilder<
     LoginComponentViewModel,
     LoginComponentController
-  >(BUILDER_TYPES.ILoginButtonBuilder);
+  >(BUILDER_TYPES.ISignInAndOutComponentBuilder);
   const getLoginStatusUseCase = useInjection<IGetLoginStatusUseCase>(
     USECASE_TYPES.IGetLoginStatusUseCase
   );

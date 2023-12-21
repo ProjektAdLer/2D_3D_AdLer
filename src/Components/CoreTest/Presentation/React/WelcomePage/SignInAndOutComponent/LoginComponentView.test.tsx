@@ -6,9 +6,9 @@ import React from "react";
 import IGetLoginStatusUseCase from "../../../../../Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import ILoginComponentController from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/ILoginComponentController";
-import LoginComponent from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponent";
-import LoginComponentViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentViewModel";
+import ISignInAndOutComponentController from "../../../../../Core/Presentation/React/WelcomePage/SignInAndOutComponent/ISignInAndOutComponentController";
+import LoginComponent from "../../../../../Core/Presentation/React/WelcomePage/SignInAndOutComponent/LoginComponent";
+import SignInAndOutComponentViewModel from "../../../../../Core/Presentation/React/WelcomePage/SignInAndOutComponent/SignInAndOutComponentViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 
 const getLoginStatusUseCaseMock = mock<IGetLoginStatusUseCase>();
@@ -26,7 +26,7 @@ describe("LoginComponent", () => {
   });
 
   test("doesn't render without controller", () => {
-    useBuilderMock([new LoginComponentViewModel(), undefined]);
+    useBuilderMock([new SignInAndOutComponentViewModel(), undefined]);
     getLoginStatusUseCaseMock.execute.mockReturnValue({
       isLoggedIn: false,
       userName: undefined,
@@ -42,7 +42,7 @@ describe("LoginComponent", () => {
   });
 
   test("doesn't render without view model", () => {
-    useBuilderMock([undefined, mock<ILoginComponentController>()]);
+    useBuilderMock([undefined, mock<ISignInAndOutComponentController>()]);
     getLoginStatusUseCaseMock.execute.mockReturnValue({
       isLoggedIn: false,
       userName: undefined,
@@ -59,8 +59,8 @@ describe("LoginComponent", () => {
 
   test("LoginForm calls GetLoginStatusUseCase.execute on mount", () => {
     useBuilderMock([
-      new LoginComponentViewModel(),
-      mock<ILoginComponentController>(),
+      new SignInAndOutComponentViewModel(),
+      mock<ISignInAndOutComponentController>(),
     ]);
     getLoginStatusUseCaseMock.execute.mockReturnValue({
       isLoggedIn: true,
@@ -77,8 +77,8 @@ describe("LoginComponent", () => {
   });
 
   test("should set text in username and password field", () => {
-    const mockedController = mock<ILoginComponentController>();
-    useBuilderMock([new LoginComponentViewModel(), mockedController]);
+    const mockedController = mock<ISignInAndOutComponentController>();
+    useBuilderMock([new SignInAndOutComponentViewModel(), mockedController]);
     getLoginStatusUseCaseMock.execute.mockReturnValue({
       isLoggedIn: false,
       userName: undefined,

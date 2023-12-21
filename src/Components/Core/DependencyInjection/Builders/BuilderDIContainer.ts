@@ -11,7 +11,7 @@ import LearningElementsDropdownBuilder from "../../Presentation/React/LearningSp
 import LearningWorldScorePanelBuilder from "../../Presentation/React/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanelBuilder";
 import NotificationManagerBuilder from "../../Presentation/React/GeneralComponents/NotificationManager/NotificationManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
-import LoginComponentBuilder from "../../Presentation/React/WelcomePage/LoginComponent/LoginComponentBuilder";
+import SignInAndOutComponentBuilder from "../../Presentation/React/WelcomePage/SignInAndOutComponent/SignInAndOutComponentBuilder";
 import BottomTooltipBuilder from "../../Presentation/React/LearningSpaceDisplay/BottomTooltip/BottomTooltipBuilder";
 import SpaceNamePanelBuilder from "../../Presentation/React/LearningSpaceDisplay/LearningSpaceNamePanel/LearningSpaceNamePanelBuilder";
 import FullscreenSwitchBuilder from "../../Presentation/React/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitchBuilder";
@@ -76,8 +76,8 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IModalManagerBuilder).to(
     NotificationManagerBuilder
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.ILoginButtonBuilder).to(
-    LoginComponentBuilder
+  bind<IPresentationBuilder>(BUILDER_TYPES.ISignInAndOutComponentBuilder).to(
+    SignInAndOutComponentBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IBottomTooltipBuilder).to(
     BottomTooltipBuilder

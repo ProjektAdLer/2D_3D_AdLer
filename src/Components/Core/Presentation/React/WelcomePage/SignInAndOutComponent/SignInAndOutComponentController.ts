@@ -1,14 +1,14 @@
 import ILoginUseCase from "src/Components/Core/Application/UseCases/Login/ILoginUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
-import ILoginComponentController from "./ILoginComponentController";
-import LoginComponentViewModel from "./LoginComponentViewModel";
+import ISignInAndOutComponentController from "./ISignInAndOutComponentController";
+import SignInAndOutComponentViewModel from "./SignInAndOutComponentViewModel";
 import ILogoutUseCase from "src/Components/Core/Application/UseCases/Logout/ILogoutUseCase";
 
-export default class LoginComponentController
-  implements ILoginComponentController
+export default class SignInAndOutComponentController
+  implements ISignInAndOutComponentController
 {
-  constructor(private viewModel: LoginComponentViewModel) {}
+  constructor(private viewModel: SignInAndOutComponentViewModel) {}
 
   login(username: string, password: string): void {
     this.viewModel.loginFailed.Value = false;

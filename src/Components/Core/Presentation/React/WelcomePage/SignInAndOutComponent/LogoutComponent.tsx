@@ -1,6 +1,6 @@
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import LoginComponentViewModel from "./LoginComponentViewModel";
-import LoginComponentController from "./LoginComponentController";
+import SignInAndOutComponentViewModel from "./SignInAndOutComponentViewModel";
+import SignInAndOutComponentController from "./SignInAndOutComponentController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
@@ -16,9 +16,9 @@ export default function LogoutComponent({
   className,
 }: Readonly<AdLerUIComponent>) {
   const [viewModel, controller] = useBuilder<
-    LoginComponentViewModel,
-    LoginComponentController
-  >(BUILDER_TYPES.ILoginButtonBuilder);
+    SignInAndOutComponentViewModel,
+    SignInAndOutComponentController
+  >(BUILDER_TYPES.ISignInAndOutComponentBuilder);
   const getLoginStatusUseCase = useInjection<IGetLoginStatusUseCase>(
     USECASE_TYPES.IGetLoginStatusUseCase
   );

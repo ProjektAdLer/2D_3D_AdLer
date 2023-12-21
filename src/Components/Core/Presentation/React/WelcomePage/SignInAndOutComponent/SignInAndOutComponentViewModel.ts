@@ -1,6 +1,6 @@
 import Observable from "../../../../../../Lib/Observable";
 
-export default class LoginComponentViewModel {
+export default class SignInAndOutComponentViewModel {
   userLoggedIn = new Observable<boolean>(false);
   modalVisible = new Observable<boolean>(true);
   loginFailed = new Observable<boolean>(false);

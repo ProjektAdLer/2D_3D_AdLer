@@ -1,7 +1,7 @@
 import { waitFor } from "@testing-library/react";
 import LoginUseCase from "../../../../../Core/Application/UseCases/Login/LoginUseCase";
-import LoginComponentController from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentController";
-import LoginComponentViewModel from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentViewModel";
+import SignInAndOutComponentController from "../../../../../Core/Presentation/React/WelcomePage/SignInAndOutComponent/SignInAndOutComponentController";
+import SignInAndOutComponentViewModel from "../../../../../Core/Presentation/React/WelcomePage/SignInAndOutComponent/SignInAndOutComponentViewModel";
 import LogoutUseCase from "../../../../../Core/Application/UseCases/Logout/LogoutUseCase";
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
@@ -10,8 +10,8 @@ import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USEC
 const loginUseCaseMock = mock<LoginUseCase>();
 const logoutUseCaseMock = mock<LogoutUseCase>();
 
-describe("LoginComponentController", () => {
-  let systemUnderTest: LoginComponentController;
+describe("SignInAndOutComponentController", () => {
+  let systemUnderTest: SignInAndOutComponentController;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -24,8 +24,8 @@ describe("LoginComponentController", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new LoginComponentController(
-      new LoginComponentViewModel()
+    systemUnderTest = new SignInAndOutComponentController(
+      new SignInAndOutComponentViewModel()
     );
   });
 

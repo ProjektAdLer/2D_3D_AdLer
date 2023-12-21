@@ -1,26 +1,26 @@
 import { injectable } from "inversify";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
-import LoginComponentController from "./LoginComponentController";
-import LoginComponentPresenter from "./LoginComponentPresenter";
-import LoginComponentViewModel from "./LoginComponentViewModel";
+import SignInAndOutComponentController from "./SignInAndOutComponentController";
+import SignInAndOutComponentPresenter from "./SignInAndOutComponentPresenter";
+import SignInAndOutComponentViewModel from "./SignInAndOutComponentViewModel";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
 import ILMSAdapter from "src/Components/Core/Application/Ports/LMSPort/ILMSAdapter";
 
 @injectable()
-export default class LoginComponentBuilder extends PresentationBuilder<
-  LoginComponentViewModel,
-  LoginComponentController,
+export default class SignInAndOutComponentBuilder extends PresentationBuilder<
+  SignInAndOutComponentViewModel,
+  SignInAndOutComponentController,
   undefined,
-  LoginComponentPresenter
+  SignInAndOutComponentPresenter
 > {
   constructor() {
     super(
-      LoginComponentViewModel,
-      LoginComponentController,
+      SignInAndOutComponentViewModel,
+      SignInAndOutComponentController,
       undefined,
-      LoginComponentPresenter
+      SignInAndOutComponentPresenter
     );
   }
 

@@ -2,14 +2,14 @@ import { mock } from "jest-mock-extended";
 import ILMSPort from "../../../../../Core/Application/Ports/Interfaces/ILMSPort";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import LoginComponentBuilder from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentBuilder";
-import LoginComponentController from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentController";
-import LoginComponentPresenter from "../../../../../Core/Presentation/React/WelcomePage/LoginComponent/LoginComponentPresenter";
+import SignInAndOutComponentBuilder from "../../../../../Core/Presentation/React/WelcomePage/SignInAndOutComponent/SignInAndOutComponentBuilder";
+import SignInAndOutComponentController from "../../../../../Core/Presentation/React/WelcomePage/SignInAndOutComponent/SignInAndOutComponentController";
+import SignInAndOutComponentPresenter from "../../../../../Core/Presentation/React/WelcomePage/SignInAndOutComponent/SignInAndOutComponentPresenter";
 
 const lmsPortMock = mock<ILMSPort>();
 
-describe("LoginComponentBuilder", () => {
-  let systemUnderTest: LoginComponentBuilder;
+describe("SignInAndOutComponentBuilder", () => {
+  let systemUnderTest: SignInAndOutComponentBuilder;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -18,7 +18,7 @@ describe("LoginComponentBuilder", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new LoginComponentBuilder();
+    systemUnderTest = new SignInAndOutComponentBuilder();
   });
 
   afterAll(() => {
@@ -31,7 +31,7 @@ describe("LoginComponentBuilder", () => {
 
     expect(systemUnderTest["controller"]).toBeDefined();
     expect(systemUnderTest["controller"]).toBeInstanceOf(
-      LoginComponentController
+      SignInAndOutComponentController
     );
   });
 
@@ -41,7 +41,7 @@ describe("LoginComponentBuilder", () => {
 
     expect(systemUnderTest["presenter"]).toBeDefined();
     expect(systemUnderTest["presenter"]).toBeInstanceOf(
-      LoginComponentPresenter
+      SignInAndOutComponentPresenter
     );
   });
 });
