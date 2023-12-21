@@ -1,7 +1,8 @@
 import { injectable } from "inversify";
-import AvatarViewModel, { AvatarAnimationAction } from "./AvatarViewModel";
+import AvatarViewModel from "./AvatarViewModel";
 import IAvatarPresenter from "./IAvatarPresenter";
 import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
+import CharacterAnimationActions from "../CharacterAnimator/CharacterAnimationActions";
 
 /**
  * @class AvatarPresenter
@@ -16,8 +17,8 @@ export default class AvatarPresenter implements IAvatarPresenter {
   }
 
   public onLearningElementLoaded(learningElementTO: LearningElementTO): void {
-    this.viewModel.animationStateMachine.applyAction(
-      AvatarAnimationAction.InteractionStarted
+    this.viewModel.characterAnimator.transition(
+      CharacterAnimationActions.InteractionStarted
     );
   }
 }

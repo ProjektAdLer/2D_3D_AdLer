@@ -3,8 +3,6 @@ import {
   EventState,
   KeyboardEventTypes,
   KeyboardInfo,
-  LinesMesh,
-  MeshBuilder,
   Nullable,
   PointerEventTypes,
   PointerInfo,
@@ -14,7 +12,6 @@ import bind from "bind-decorator";
 import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
-import { config } from "../../../../../config";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../DependencyInjection/CoreTypes";
 import INavigation from "../Navigation/INavigation";
@@ -31,7 +28,6 @@ export default class AvatarController implements IAvatarController {
 
   private scenePresenter: IScenePresenter;
   private navigation: INavigation;
-  private pathLine: LinesMesh;
 
   private keyMovementTarget: Nullable<Vector3> = null;
   private pointerMovementTarget: Nullable<Vector3> = null;
@@ -57,26 +53,18 @@ export default class AvatarController implements IAvatarController {
   @bind
   private applyInputs(): void {
     if (this.keyMovementTarget !== null) {
-      this.navigation.Crowd.agentGoto(
-        this.viewModel.agentIndex,
-        this.keyMovementTarget
-      );
       this.viewModel.movementTarget.Value = this.keyMovementTarget;
-
-      this.debug_drawPath(this.keyMovementTarget);
+      this.viewModel.characterNavigator.startMovement(this.keyMovementTarget);
     } else if (this.pointerMovementTarget !== null) {
       const movementDistance = this.pointerMovementTarget
         .subtract(this.viewModel.parentNode.position)
         .length();
 
       if (movementDistance > this.viewModel.pointerMovementThreshold) {
-        this.navigation.Crowd.agentGoto(
-          this.viewModel.agentIndex,
+        this.viewModel.movementTarget.Value = this.pointerMovementTarget;
+        this.viewModel.characterNavigator.startMovement(
           this.pointerMovementTarget
         );
-        this.viewModel.movementTarget.Value = this.pointerMovementTarget;
-
-        this.debug_drawPath(this.pointerMovementTarget);
       }
     }
     this.pointerMovementTarget = null;
@@ -151,19 +139,5 @@ export default class AvatarController implements IAvatarController {
       );
       this.lastFramePosition = this.viewModel.parentNode.position;
     }
-  }
-
-  private debug_drawPath(target: Vector3): void {
-    if (config.isDebug === false) return;
-
-    let pathPoints = this.navigation.Plugin.computePath(
-      this.navigation.Crowd.getAgentPosition(this.viewModel.agentIndex),
-      target
-    );
-    this.pathLine = MeshBuilder.CreateDashedLines(
-      "navigation path",
-      { points: pathPoints, updatable: true, instance: this.pathLine },
-      this.scenePresenter.Scene
-    );
   }
 }
