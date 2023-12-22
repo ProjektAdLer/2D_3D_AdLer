@@ -11,10 +11,11 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Added
 
 - background-color to SideBar.
+- Logout from Moodle.
 
 ### Changed
 
-- responsive styling of LoadingScreen
+- responsive styling of LoadingScreen.
 - BreakNotification message is now not a complete button. This gives better read- and usability.
 - refactored styling of WelcomePage and added new button for future functionality.
 
@@ -29,7 +30,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - Learningworld completed - Modal now only shows once per session.
-- Loading Screen readies before space is ready
+- Loading Screen readies before space is ready.
+- Bottom Tooltip does not show over elements anymore.
 
 ### Security
 
