@@ -29,6 +29,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - Learningworld completed - Modal now only shows once per session.
+- Loading Screen readies before space is ready
 
 ### Security
 
