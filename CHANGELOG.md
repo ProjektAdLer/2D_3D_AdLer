@@ -10,13 +10,13 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- background-color to SideBar
+- background-color to SideBar.
 
 ### Changed
 
 - responsive styling of LoadingScreen
-- BreakNotification message is now not a complete button. This gives better read- and usability
-- refactored styling of WelcomePage and added new button for future functionality
+- BreakNotification message is now not a complete button. This gives better read- and usability.
+- refactored styling of WelcomePage and added new button for future functionality.
 
 ### Deprecated
 
@@ -28,7 +28,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
--
+- Learningworld completed - Modal now only shows once per session.
 
 ### Security
 
@@ -40,28 +40,28 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- bug that prevents h5p element sometimes from scoring in 3d environment
+- bug that prevents h5p element sometimes from scoring in 3d environment.
 
 ### Changed
 
-- improved styling of close-button of modal
-- improved styling of breaktime notification
+- improved styling of close-button of modal.
+- improved styling of breaktime notification.
 
 ## Version 2.0.0
 
 ### Added
 
-- overview of licenses used
+- overview of licenses used.
 
 ### Fixed
 
-- questions after selecting a hint will be displayed correctly
-- fixed styling issues for adaptivity on mobile
-- improved 2D display of NPC on mobile
+- questions after selecting a hint will be displayed correctly.
+- fixed styling issues for adaptivity on mobile.
+- improved 2D display of NPC on mobile.
 
 ### Changed
 
-- position of back button in adaptivity element now on left side
+- position of back button in adaptivity element now on left side.
 
 ## Version 2.0.0-rc.3
 
