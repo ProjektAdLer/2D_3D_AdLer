@@ -41,6 +41,9 @@ export default class CharacterNavigator
   private scenePresenter: IScenePresenter;
   private agentIndex: number;
   private rotationObserverRef: Nullable<Observer<Scene>>;
+  private targetReachedObserverRef: Nullable<
+    Observer<{ agentIndex: number; destination: Vector3 }>
+  >;
 
   private debug_pathLine: LinesMesh;
 
@@ -65,21 +68,28 @@ export default class CharacterNavigator
     return this.navigation.Crowd.getAgentVelocity(this.agentIndex);
   }
 
-  public startMovement(target: Vector3, onTargetReached?: () => void): void {
+  public startMovement(
+    target: Vector3,
+    onTargetReachedCallback?: () => void
+  ): void {
     this.navigation.Crowd.agentGoto(this.agentIndex, target);
     this.characterAnimator.transition(
       CharacterAnimationActions.MovementStarted
     );
 
-    // save reference to observer so we can remove it later
     this.rotationObserverRef =
       this.scenePresenter.Scene.onBeforeRenderObservable.add(
         this.rotateCharacter
       );
-
-    if (onTargetReached) {
-      this.handleOnTargetReachedCallback(onTargetReached);
-    }
+    this.targetReachedObserverRef =
+      this.navigation.Crowd.onReachTargetObservable.add(
+        (eventData: { agentIndex: number }) => {
+          if (eventData.agentIndex === this.agentIndex) {
+            if (onTargetReachedCallback) onTargetReachedCallback();
+            this.stopMovement();
+          }
+        }
+      );
 
     this.debug_drawPath(target);
   }
@@ -94,6 +104,9 @@ export default class CharacterNavigator
 
     this.scenePresenter.Scene.onBeforeRenderObservable.remove(
       this.rotationObserverRef
+    );
+    this.navigation.Crowd.onReachTargetObservable.remove(
+      this.targetReachedObserverRef
     );
   }
 
@@ -115,12 +128,6 @@ export default class CharacterNavigator
       this.parentNode
     );
 
-    this.navigation.Crowd.onReachTargetObservable.add(
-      (eventData: { agentIndex: number }) => {
-        if (eventData.agentIndex === this.agentIndex) this.stopMovement();
-      }
-    );
-
     this.resolveIsReady();
   }
 
@@ -137,22 +144,6 @@ export default class CharacterNavigator
         desiredRotation
       );
     }
-  }
-
-  private handleOnTargetReachedCallback(
-    onTargetReachedCallback: () => void
-  ): void {
-    const targetReachedObserver =
-      this.navigation.Crowd.onReachTargetObservable.add(
-        (eventData: { agentIndex: number }) => {
-          if (eventData.agentIndex === this.agentIndex) {
-            onTargetReachedCallback();
-            this.navigation.Crowd.onReachTargetObservable.remove(
-              targetReachedObserver
-            );
-          }
-        }
-      );
   }
 
   private debug_drawPath(target: Vector3): void {

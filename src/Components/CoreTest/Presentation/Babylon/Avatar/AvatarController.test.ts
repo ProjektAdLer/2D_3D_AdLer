@@ -22,9 +22,10 @@ import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/Avatar
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import ILearningSpacePresenter from "../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpacePresenter";
+import CharacterNavigator from "../../../../Core/Presentation/Babylon/CharacterNavigator/CharacterNavigator";
 
-jest.mock("@babylonjs/core/Meshes");
 jest.mock("@babylonjs/core/Materials");
+jest.mock("@babylonjs/core/Meshes");
 
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
@@ -35,6 +36,8 @@ const navigationMock = mock<INavigation>();
 // apply mocks to the readonly properties (getters)
 Object.defineProperty(navigationMock, "Plugin", { value: recastJSPluginMock });
 Object.defineProperty(navigationMock, "Crowd", { value: crowdMock });
+
+const characterNavigatorMock = mock<CharacterNavigator>();
 
 // creates a new PointerInfo object with given paramters for use in testing
 function setupMockedPointerInfo(
@@ -76,7 +79,7 @@ describe("AvatarController", () => {
 
   beforeEach(() => {
     viewModel = new AvatarViewModel();
-    viewModel.agentIndex = 0;
+    viewModel.characterNavigator = characterNavigatorMock;
 
     systemUnderTest = new AvatarController(viewModel);
   });
@@ -155,9 +158,8 @@ describe("AvatarController", () => {
 
         systemUnderTest["applyInputs"]();
 
-        expect(crowdMock.agentGoto).toHaveBeenCalledTimes(1);
-        expect(crowdMock.agentGoto).toHaveBeenCalledWith(
-          viewModel.agentIndex,
+        expect(characterNavigatorMock.startMovement).toHaveBeenCalledTimes(1);
+        expect(characterNavigatorMock.startMovement).toHaveBeenCalledWith(
           target
         );
       }
@@ -170,7 +172,7 @@ describe("AvatarController", () => {
 
       systemUnderTest["applyInputs"]();
 
-      expect(crowdMock.agentGoto).toHaveBeenCalledTimes(0);
+      expect(characterNavigatorMock.startMovement).toHaveBeenCalledTimes(0);
     });
 
     test(
@@ -185,9 +187,8 @@ describe("AvatarController", () => {
 
         systemUnderTest["applyInputs"]();
 
-        expect(crowdMock.agentGoto).toHaveBeenCalledTimes(1);
-        expect(crowdMock.agentGoto).toHaveBeenCalledWith(
-          viewModel.agentIndex,
+        expect(characterNavigatorMock.startMovement).toHaveBeenCalledTimes(1);
+        expect(characterNavigatorMock.startMovement).toHaveBeenCalledWith(
           target
         );
       }
@@ -333,25 +334,6 @@ describe("AvatarController", () => {
         new Vector3(42, 0, 42)
       );
       //might need to add the last 2 expects to process keyboard event too.
-    });
-  });
-
-  describe("debug code", () => {
-    test("debug_drawPath returns when config.isDebug is set false", () => {
-      config.isDebug = false;
-
-      systemUnderTest["debug_drawPath"](new Vector3(1, 2, 3));
-
-      expect(recastJSPluginMock.computePath).toHaveBeenCalledTimes(0);
-    });
-
-    test("debug_drawPath computes a path and draws it when config.isDebug is set true", () => {
-      config.isDebug = true;
-
-      systemUnderTest["debug_drawPath"](new Vector3(1, 2, 3));
-
-      expect(recastJSPluginMock.computePath).toHaveBeenCalledTimes(1);
-      expect(MeshBuilder.CreateDashedLines).toHaveBeenCalledTimes(1);
     });
   });
 });
