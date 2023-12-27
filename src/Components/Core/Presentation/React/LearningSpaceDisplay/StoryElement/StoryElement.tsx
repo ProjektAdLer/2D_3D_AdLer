@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
+import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   const [viewModel, controller] = useBuilder<
@@ -16,6 +17,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
     IStoryElementController
   >(BUILDER_TYPES.IStoryElementBuilder);
   const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
+  const [pageId] = useObservable<number>(viewModel?.pageId);
   const [type] = useObservable<StoryElementType>(viewModel?.type);
 
   const closeModal = useCallback(() => {
@@ -41,10 +43,19 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
         "flex flex-col justify-center gap-2 p-5 rounded-lg"
       )}
     >
-      {type === StoryElementType.Intro &&
-        viewModel.introTexts.Value[0].toString()}
-      {type === StoryElementType.Outro &&
-        viewModel.outroTexts.Value[0].toString()}
+      {viewModel.texts.Value[pageId].toString()}
+      <div className="flex justify-center gap-2">
+        {pageId < viewModel.texts.Value.length && (
+          <StyledButton shape="square" onClick={controller.increasePageId}>
+            {">"}
+          </StyledButton>
+        )}
+        {pageId > viewModel.texts.Value.length && (
+          <StyledButton shape="square" onClick={controller.decreasePageId}>
+            {"<"}
+          </StyledButton>
+        )}
+      </div>
     </StyledModal>
   );
 }

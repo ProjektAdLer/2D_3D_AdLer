@@ -10,4 +10,16 @@ describe("StoryElementController", () => {
     systemUnderTest.closePanel();
     expect(viewModelMock.isOpen.Value).toBeFalsy();
   });
+  test("increasePageId increases pageId in viewmodel by 1", () => {
+    viewModelMock.pageId.Value = 0;
+    systemUnderTest = new StoryElementController(viewModelMock);
+    systemUnderTest.increasePageId();
+    expect(viewModelMock.pageId.Value).toBe(1);
+  });
+  test("decreasePageId decreases pageId in viewmodel by 1", () => {
+    viewModelMock.pageId.Value = 10;
+    systemUnderTest = new StoryElementController(viewModelMock);
+    systemUnderTest.decreasePageId();
+    expect(viewModelMock.pageId.Value).toBe(9);
+  });
 });

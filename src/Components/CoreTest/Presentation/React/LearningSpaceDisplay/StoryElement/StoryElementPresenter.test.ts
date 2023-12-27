@@ -30,26 +30,34 @@ describe("StoryElementPresenter", () => {
       introTexts: ["blabla111"],
       outroTexts: ["blabla222"],
     };
+    viewModel.texts.Value = ["nicht blabla"];
+    viewModel.type.Value = StoryElementType.Intro;
     systemUnderTest.onStoryElementLoaded(storyElementText);
-    expect(viewModel.introTexts.Value).toStrictEqual(["blabla111"]);
-    expect(viewModel.outroTexts.Value).toStrictEqual(["blabla222"]);
+    expect(viewModel.texts.Value).toStrictEqual(["blabla111"]);
+
+    viewModel.texts.Value = ["nicht blabla"];
+    viewModel.type.Value = StoryElementType.Outro;
+    systemUnderTest.onStoryElementLoaded(storyElementText);
+    expect(viewModel.texts.Value).toStrictEqual(["blabla222"]);
   });
   test("onStoryElementLoaded sets nothing in intro if no text is given by port", () => {
     let storyElementText: StoryElementTextTO = {
       introTexts: [],
       outroTexts: ["blabla222"],
     };
-    viewModel.introTexts.Value = ["nicht blabla"];
+    viewModel.type.Value = StoryElementType.Intro;
+    viewModel.texts.Value = ["nicht blabla"];
     systemUnderTest.onStoryElementLoaded(storyElementText);
-    expect(viewModel.introTexts.Value).toStrictEqual(["nicht blabla"]);
+    expect(viewModel.texts.Value).toStrictEqual(["nicht blabla"]);
   });
   test("onStoryElementLoaded sets nothing in outro if no text is given by port", () => {
     let storyElementText: StoryElementTextTO = {
       introTexts: [],
       outroTexts: [],
     };
-    viewModel.outroTexts.Value = ["nicht blabla"];
+    viewModel.type.Value = StoryElementType.Outro;
+    viewModel.texts.Value = ["nicht blabla"];
     systemUnderTest.onStoryElementLoaded(storyElementText);
-    expect(viewModel.outroTexts.Value).toStrictEqual(["nicht blabla"]);
+    expect(viewModel.texts.Value).toStrictEqual(["nicht blabla"]);
   });
 });

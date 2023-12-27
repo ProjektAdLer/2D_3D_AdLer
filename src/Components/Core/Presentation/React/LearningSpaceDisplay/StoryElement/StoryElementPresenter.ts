@@ -14,13 +14,15 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
   onStoryElementLoaded(storyElementTextTO: StoryElementTextTO): void {
     if (
       storyElementTextTO.introTexts &&
-      storyElementTextTO.introTexts.length > 0
+      storyElementTextTO.introTexts.length > 0 &&
+      this.viewModel.type.Value === StoryElementType.Intro
     )
-      this.viewModel.introTexts.Value = storyElementTextTO.introTexts;
+      this.viewModel.texts.Value = storyElementTextTO.introTexts;
     if (
       storyElementTextTO.outroTexts &&
-      storyElementTextTO.outroTexts.length > 0
+      storyElementTextTO.outroTexts.length > 0 &&
+      this.viewModel.type.Value === StoryElementType.Outro
     )
-      this.viewModel.outroTexts.Value = storyElementTextTO.outroTexts;
+      this.viewModel.texts.Value = storyElementTextTO.outroTexts;
   }
 }

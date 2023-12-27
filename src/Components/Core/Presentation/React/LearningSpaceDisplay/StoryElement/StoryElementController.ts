@@ -9,4 +9,12 @@ export default class StoryElementController implements IStoryElementController {
   closePanel(): void {
     this.viewModel.isOpen.Value = false;
   }
+  @bind
+  increasePageId(): void {
+    this.viewModel.pageId.Value++;
+  }
+  @bind
+  decreasePageId(): void {
+    this.viewModel.pageId.Value--;
+  }
 }
