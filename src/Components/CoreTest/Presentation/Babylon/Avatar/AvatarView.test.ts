@@ -26,15 +26,6 @@ import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/Learnin
 
 const movementIndicatorMock = mock<MovementIndicator>();
 
-// setup navigation mock
-const navigationMock = mock<INavigation>();
-navigationMock.Plugin.getClosestPoint = jest
-  .fn()
-  .mockReturnValue(Vector3.Zero());
-navigationMock.Crowd.onReachTargetObservable = new Observable();
-navigationMock.Crowd.onReachTargetObservable.add = jest.fn();
-navigationMock.Crowd.agentTeleport = jest.fn();
-
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
@@ -69,9 +60,6 @@ describe("AvatarView", () => {
   beforeAll(() => {
     // setup dependency injection
     CoreDIContainer.snapshot();
-    CoreDIContainer.rebind(CORE_TYPES.INavigation).toConstantValue(
-      navigationMock
-    );
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
       scenePresenterFactoryMock
     );
