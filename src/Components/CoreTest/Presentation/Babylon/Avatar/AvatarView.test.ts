@@ -3,7 +3,6 @@ import {
   ISceneLoaderAsyncResult,
   Material,
   Mesh,
-  MeshBuilder,
   NullEngine,
   Observable,
   Scene,
@@ -23,7 +22,6 @@ import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManageme
 import IMovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/IMovementIndicator";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import MovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/MovementIndicator";
-import Logger from "../../../../Core/Adapters/Logger/Logger";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 
 const movementIndicatorMock = mock<MovementIndicator>();
@@ -265,14 +263,15 @@ describe("AvatarView", () => {
   });
 
   describe("movement indicator", () => {
-    test("onMovementTargetChanged calls movementIndicator.display when movement target is set", () => {
-      systemUnderTest["onMovementTargetChanged"](new Vector3(1, 2, 3));
+    test("onMovementTargetChanged calls movementIndicator.display when movement target is set a vector", () => {
+      viewModel.movementTarget.Value = new Vector3(1, 2, 3);
 
       expect(movementIndicatorMock.display).toHaveBeenCalledTimes(1);
     });
 
     test("onMovementTargetChanged calls movementIndicator.hide when movement target is set to null", () => {
-      systemUnderTest["onMovementTargetChanged"](null);
+      viewModel.movementTarget.Value = new Vector3(1, 2, 3); // set movementTarget to something first
+      viewModel.movementTarget.Value = null;
 
       expect(movementIndicatorMock.hide).toHaveBeenCalledTimes(1);
     });
