@@ -12,12 +12,10 @@ import {
 } from "@babylonjs/core";
 import { mock, mockDeep } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 import AvatarView from "../../../../Core/Presentation/Babylon/Avatar/AvatarView";
 import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
 import IAvatarController from "../../../../Core/Presentation/Babylon/Avatar/IAvatarController";
-import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import IMovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/IMovementIndicator";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
