@@ -38,7 +38,7 @@ export default class AvatarView {
       PRESENTATION_TYPES.IMovementIndicator
     );
 
-    this.viewModel.movementTarget.subscribe(this.onMovementTargetChange);
+    this.viewModel.movementTarget.subscribe(this.onMovementTargetChanged);
   }
 
   public async asyncSetup(): Promise<void> {
@@ -142,7 +142,7 @@ export default class AvatarView {
   }
 
   @bind
-  private onMovementTargetChange(newTarget: Nullable<Vector3>): void {
+  private onMovementTargetChanged(newTarget: Nullable<Vector3>): void {
     if (newTarget === null) this.movementIndicator.hide();
     else this.movementIndicator.display(newTarget);
   }
