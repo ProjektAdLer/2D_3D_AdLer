@@ -54,7 +54,10 @@ export default class AvatarController implements IAvatarController {
   private applyInputs(): void {
     if (this.keyMovementTarget !== null) {
       this.viewModel.movementTarget.Value = this.keyMovementTarget;
-      this.viewModel.characterNavigator.startMovement(this.keyMovementTarget);
+      this.viewModel.characterNavigator.startMovement(
+        this.keyMovementTarget,
+        this.onMovementTargetReached
+      );
     } else if (this.pointerMovementTarget !== null) {
       const movementDistance = this.pointerMovementTarget
         .subtract(this.viewModel.parentNode.position)
@@ -63,12 +66,18 @@ export default class AvatarController implements IAvatarController {
       if (movementDistance > this.viewModel.pointerMovementThreshold) {
         this.viewModel.movementTarget.Value = this.pointerMovementTarget;
         this.viewModel.characterNavigator.startMovement(
-          this.pointerMovementTarget
+          this.pointerMovementTarget,
+          this.onMovementTargetReached
         );
       }
     }
     this.pointerMovementTarget = null;
     this.keyMovementTarget = null;
+  }
+
+  @bind
+  private onMovementTargetReached(): void {
+    this.viewModel.movementTarget.Value = null;
   }
 
   @bind

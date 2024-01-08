@@ -160,7 +160,8 @@ describe("AvatarController", () => {
 
         expect(characterNavigatorMock.startMovement).toHaveBeenCalledTimes(1);
         expect(characterNavigatorMock.startMovement).toHaveBeenCalledWith(
-          target
+          target,
+          systemUnderTest["onMovementTargetReached"]
         );
       }
     );
@@ -189,7 +190,8 @@ describe("AvatarController", () => {
 
         expect(characterNavigatorMock.startMovement).toHaveBeenCalledTimes(1);
         expect(characterNavigatorMock.startMovement).toHaveBeenCalledWith(
-          target
+          target,
+          systemUnderTest["onMovementTargetReached"]
         );
       }
     );
@@ -335,5 +337,11 @@ describe("AvatarController", () => {
       );
       //might need to add the last 2 expects to process keyboard event too.
     });
+  });
+
+  test("onMovementTargetReached sets movementTarget in view model to null", () => {
+    systemUnderTest["onMovementTargetReached"]();
+
+    expect(viewModel.movementTarget.Value).toBeNull();
   });
 });
