@@ -34,7 +34,8 @@ export default function LearningWorldMenuButton({
 
   return (
     <StyledButton
-      shape="freefloatcenter"
+      shape="freefloatcenternopadding"
+      containerClassName="w-full h-full"
       onClick={() => history.push("/worldmenu")}
       disabled={!userLoggedIn}
       className={
