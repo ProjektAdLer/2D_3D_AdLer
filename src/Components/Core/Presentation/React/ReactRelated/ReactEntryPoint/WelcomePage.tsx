@@ -38,6 +38,7 @@ export default function WelcomePage() {
         <StyledButton
           disabled
           shape="freefloatcenter"
+          containerClassName="w-full h-full"
           className="relative !px-0 !py-0 flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover !bg-avatarcreatorbg"
         >
           <div className="w-full h-full bg-black opacity-50" />
