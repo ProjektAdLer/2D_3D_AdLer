@@ -14,8 +14,6 @@ import SeededRNG from "../../Utils/SeededRNG";
 import { Vector3 } from "@babylonjs/core/Maths/math";
 import IDoorPresenter from "../Door/IDoorPresenter";
 import ILearningElementPresenter from "../LearningElements/ILearningElementPresenter";
-import IStoryNPCBuilder from "../StoryNPC/IStoryNPCBuilder";
-import { LearningElementModelTypeEnums } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
@@ -44,7 +42,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     if (this.viewModel.entryDoorPosition) await this.createEntryDoor();
     this.decorationBuilder.spaceTemplate = spaceTO.template;
     await this.director.buildAsync(this.decorationBuilder);
-    await this.createStoryNPC();
+    await this.createStoryNPCs();
   }
 
   broadcastAvatarPosition(position: Vector3, interactionRadius: number): void {
@@ -154,13 +152,13 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     await Promise.all(loadingWindowPromises);
   }
 
-  private async createStoryNPC(): Promise<void> {
-    const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
-      BUILDER_TYPES.IStoryNPCBuilder
-    );
-    storyNPCBuilder.modelType =
-      LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC;
-
-    await this.director.buildAsync(storyNPCBuilder);
+  private async createStoryNPCs(): Promise<void> {
+    // TODO: implement this
+    // const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
+    //   BUILDER_TYPES.IStoryNPCBuilder
+    // );
+    // storyNPCBuilder.modelType =
+    //   LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC;
+    // await this.director.buildAsync(storyNPCBuilder);
   }
 }
