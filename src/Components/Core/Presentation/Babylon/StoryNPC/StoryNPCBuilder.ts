@@ -8,19 +8,9 @@ import StoryNPCView from "./StoryNPCView";
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
 import { LearningElementModel } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
 import IStoryNPCBuilder from "./IStoryNPCBuilder";
-
-/*
-This Template Provides the whole scaffolding for a React Component.
-Copy below lines in the DI Container and its Types
-
-bind<IPresentationBuilder>(BUILDER_TYPES.IStoryNPCBuilder).to(StoryNPCBuilder);
-IStoryNPCBuilder: Symbol("IStoryNPCBuilder"),
-
-director.Builder = CoreDIContainer.get<IPresentationBuilder>(
-  BUILDER_TYPES.IStoryNPCBuilder
-);
-director.build();
-*/
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 
 @injectable()
 export default class StoryNPCBuilder
@@ -54,5 +44,12 @@ export default class StoryNPCBuilder
       () => this.resolveIsCompleted(),
       (e) => console.log(e)
     );
+  }
+
+  override buildPresenter(): void {
+    super.buildPresenter();
+    CoreDIContainer.get<ILearningWorldPort>(
+      PORT_TYPES.ILearningWorldPort
+    ).registerAdapter(this.presenter!);
   }
 }

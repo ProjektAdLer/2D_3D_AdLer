@@ -1,1 +1,3 @@
-export default interface IStoryNPCController {}
+export default interface IStoryNPCController {
+  picked(): void;
+}
