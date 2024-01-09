@@ -36,6 +36,7 @@ import HelpDeskButtonBuilder from "~ReactComponents/GeneralComponents/HelpDeskBu
 import AdaptivityElementBuilder from "../../Presentation/Adaptivity/AdaptivityElement/AdaptivityElementBuilder";
 import BreakTimeNotificationBuilder from "../../Presentation/Adaptivity/BreakTimeNotification/BreakTimeNotificationBuilder";
 import LoadingScreenBuilder from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreenBuilder";
+import StoryNPCBuilder from "../../Presentation/Babylon/StoryNPC/StoryNPCBuilder";
 import StoryElementBuilder from "~ReactComponents/LearningSpaceDisplay/StoryElement/StoryElementBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
@@ -136,6 +137,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IStoryElementBuilder).to(
     StoryElementBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IStoryNPCBuilder).to(
+    StoryNPCBuilder
   );
 });
 

@@ -4,4 +4,5 @@ export default class LearningWorldCompletionModalViewModel {
   wasClosedOnce: boolean = false;
   showModal = new Observable<boolean>(false);
   evaluationLink = new Observable<string>("");
+  currentWorldId = new Observable<number>(0);
 }

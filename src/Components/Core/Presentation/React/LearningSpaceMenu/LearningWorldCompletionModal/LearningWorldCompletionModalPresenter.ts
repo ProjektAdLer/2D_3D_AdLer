@@ -16,12 +16,16 @@ export default class LearningWorldCompletionModalPresenter
   }
 
   onLearningWorldLoaded(world: LearningWorldTO): void {
+    console.log(
+      "LearningWorldCompletionModalPresenter: onLearningWorldLoaded",
+      world
+    );
     if (!world.completionModalShown) {
       this.viewModel.showModal.Value = world.spaces.every(
         (space) => space.currentScore >= space.requiredScore
       );
       this.viewModel.evaluationLink.Value = world.evaluationLink;
-      this.setWorldCompletionModalToShown.execute({ worldID: world.id });
+      this.viewModel.currentWorldId.Value = world.id;
     }
   }
 }
