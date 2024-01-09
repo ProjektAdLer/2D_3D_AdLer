@@ -34,9 +34,10 @@ export default function WelcomePage() {
 
       <section className="flex items-center justify-around col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:flex-col portrait:row-start-2 portrait:row-span-4 portrait:col-start-2 portrait:gap-6">
         <StyledButton
-          shape="freefloatcenter"
+          shape="freefloatcenternopadding"
+          containerClassName="w-full h-full"
           onClick={() => history.push("/worldmenu")}
-          className="relative !px-0 !py-0 flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover !bg-learningworldbg"
+          className="relative flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover !bg-learningworldbg"
         >
           <div className="w-full h-full bg-black opacity-30 hover:opacity-20" />
           <p className="absolute p-4 mx-auto text-2xl font-bold rounded-lg text-center bg-buttonbgblue lg:bottom-[42%] portrait:bottom-[20%] portrait:text-lg bottom-32 text-adlerdarkblue">
@@ -46,6 +47,7 @@ export default function WelcomePage() {
         <StyledButton
           disabled
           shape="freefloatcenter"
+          containerClassName="w-full h-full"
           className="relative !px-0 !py-0 flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover !bg-avatarcreatorbg"
         >
           <div className="w-full h-full bg-black opacity-50" />
