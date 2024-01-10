@@ -15,12 +15,13 @@ import {
   TransformNode,
   Vector3,
 } from "@babylonjs/core";
-
-import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb";
 import CharacterAnimator from "../CharacterAnimator/CharacterAnimator";
 import CharacterNavigator from "../CharacterNavigator/CharacterNavigator";
 import { config } from "src/config";
 import IStoryNPCController from "./IStoryNPCController";
+
+import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb";
+const modelLink = require("../../../../../Assets/3dModels/sharedModels/3DModel_Avatar_male.glb"); // TODO: remove this when NPC models are ready
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
@@ -40,16 +41,17 @@ export default class StoryNPCView {
 
   public async asyncSetupStoryNPC(): Promise<void> {
     await Promise.all([this.loadElementModel(), this.loadIconModel()]);
-    this.setupModel();
     this.createParentNode();
+    this.setupModel();
     this.setupInteractions();
     this.createNPCAnimator();
-    await this.createNPCNavigator();
+    this.createNPCNavigator();
   }
 
   private async loadElementModel(): Promise<void> {
-    let modelLink;
-    modelLink = LearningElementModelLookup[this.viewModel.modelType];
+    // TODO: comment in when NPC models are ready
+    // let modelLink;
+    // modelLink = LearningElementModelLookup[this.viewModel.modelType];
 
     const result = await this.scenePresenter.loadGLTFModel(modelLink);
 
@@ -69,13 +71,13 @@ export default class StoryNPCView {
   }
 
   private setupModel(): void {
+    this.viewModel.modelMeshes[0].position = new Vector3(0, 0.05, 0);
+    this.viewModel.modelMeshes[0].scaling = new Vector3(1, 1, -1);
+
     this.viewModel.modelMeshes.forEach(
       (mesh) => (mesh.rotationQuaternion = null)
     );
     this.viewModel.modelMeshes[0].rotationQuaternion = Quaternion.Zero();
-
-    this.viewModel.modelMeshes[0].position = new Vector3(0, 0.05, 0);
-    this.viewModel.modelMeshes[0].scaling = new Vector3(1, 1, -1);
   }
 
   private async loadIconModel(): Promise<void> {
@@ -122,13 +124,15 @@ export default class StoryNPCView {
     );
   }
 
-  private async createNPCNavigator(): Promise<void> {
+  private createNPCNavigator(): void {
     this.viewModel.characterNavigator = new CharacterNavigator(
       this.viewModel.parentNode,
       this.viewModel.modelMeshes[0],
       this.viewModel.characterAnimator,
       config.isDebug
     );
-    await this.viewModel.characterNavigator.IsReady;
+    this.viewModel.characterNavigator.IsReady.then(() => {
+      this.controller.setRandomMovementTarget();
+    });
   }
 }
