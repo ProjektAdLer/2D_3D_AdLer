@@ -33,7 +33,6 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
 
   useEffect(() => {
     let userLoggedIn = getLoginStatusUseCase.execute().isLoggedIn;
-    console.log(userLoggedIn);
     if (!userLoggedIn) {
       history.replace("/");
     }

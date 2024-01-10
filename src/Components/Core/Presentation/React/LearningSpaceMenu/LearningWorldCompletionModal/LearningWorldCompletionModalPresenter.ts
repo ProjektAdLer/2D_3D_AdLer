@@ -16,10 +16,6 @@ export default class LearningWorldCompletionModalPresenter
   }
 
   onLearningWorldLoaded(world: LearningWorldTO): void {
-    console.log(
-      "LearningWorldCompletionModalPresenter: onLearningWorldLoaded",
-      world
-    );
     if (!world.completionModalShown) {
       this.viewModel.showModal.Value = world.spaces.every(
         (space) => space.currentScore >= space.requiredScore
