@@ -18,6 +18,6 @@ export default class NavigationConfiguration {
     detailSampleDist: 6,
     detailSampleMaxError: 1,
   };
-  public maxAgentCount: number = 1;
+  public maxAgentCount: number = 3;
   public maxAgentRadius: number = 0.1;
 }
