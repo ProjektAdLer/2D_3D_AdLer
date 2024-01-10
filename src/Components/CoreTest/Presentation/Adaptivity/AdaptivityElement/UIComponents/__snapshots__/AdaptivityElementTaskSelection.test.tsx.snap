@@ -8,45 +8,49 @@ exports[`AdaptivityElementTaskSelection should render 1`] = `
     <div
       class="flex flex-col text-sm"
     >
-      <button
-        class="w-full max-w-2xl px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+      <div
+        class=""
       >
-        <div
-          class="grid items-center justify-between w-full h-full grid-cols-7 align-center"
+        <button
+          class="w-full max-w-2xl px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
         >
           <div
-            class="flex items-center h-full"
-          >
-            <img
-              alt=""
-              class="w-4 h-4 sm:w-6 sm:h-6"
-              src="diffculties-adaptivity-easy-tried.svg"
-            />
-            <img
-              alt="Platzhalter-Icon"
-              class="w-4 h-4 sm:w-6 sm:h-6 opacity-60"
-              src="diffculties-adaptivity-placeholder.svg"
-            />
-            <img
-              alt="Platzhalter-Icon"
-              class="w-4 h-4 sm:w-6 sm:h-6 opacity-60"
-              src="diffculties-adaptivity-placeholder.svg"
-            />
-          </div>
-          <p
-            class="col-span-5 pl-4 text-sm text-start"
-          >
-            testTaskTitle
-          </p>
-          <div
-            class="flex justify-end"
+            class="grid items-center justify-between w-full h-full grid-cols-7 align-center"
           >
             <div
-              class="w-16"
-            />
+              class="flex items-center h-full"
+            >
+              <img
+                alt=""
+                class="w-4 h-4 sm:w-6 sm:h-6"
+                src="diffculties-adaptivity-easy-tried.svg"
+              />
+              <img
+                alt="Platzhalter-Icon"
+                class="w-4 h-4 sm:w-6 sm:h-6 opacity-60"
+                src="diffculties-adaptivity-placeholder.svg"
+              />
+              <img
+                alt="Platzhalter-Icon"
+                class="w-4 h-4 sm:w-6 sm:h-6 opacity-60"
+                src="diffculties-adaptivity-placeholder.svg"
+              />
+            </div>
+            <p
+              class="col-span-5 pl-4 text-sm text-start"
+            >
+              testTaskTitle
+            </p>
+            <div
+              class="flex justify-end"
+            >
+              <div
+                class="w-16"
+              />
+            </div>
           </div>
-        </div>
-      </button>
+        </button>
+      </div>
     </div>
   </div>
 </div>

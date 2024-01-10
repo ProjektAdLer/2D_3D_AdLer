@@ -26,11 +26,15 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
           <div
             class="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl "
           >
-            <button
-              class="mr-2 roboto-black xl:w-10 xl:h-10 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+            <div
+              class=""
             >
-              &lt;
-            </button>
+              <button
+                class="mr-2 roboto-black xl:w-10 xl:h-10 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+              >
+                &lt;
+              </button>
+            </div>
             <img
               alt="LearningImage!"
               class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
@@ -41,11 +45,15 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
             >
               testQuestionText
             </div>
-            <button
-              class="roboto-black xl:w-10 xl:h-10 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+            <div
+              class=""
             >
-              X
-            </button>
+              <button
+                class="roboto-black xl:w-10 xl:h-10 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+              >
+                X
+              </button>
+            </div>
           </div>
           <div
             class="overflow-auto"
@@ -59,29 +67,37 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
                 <div
                   class="flex flex-col flex-wrap justify-start gap-4 lg:grid lg:grid-cols-2"
                 >
-                  <button
-                    class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                  <div
+                    class=""
                   >
-                    <p
-                      class="text-sm"
+                    <button
+                      class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                     >
-                      testAnswerText
-                    </p>
-                  </button>
+                      <p
+                        class="text-sm"
+                      >
+                        testAnswerText
+                      </p>
+                    </button>
+                  </div>
                 </div>
                 <div
                   class="flex items-end justify-end w-full gap-2 pt-8 font-bold"
                 >
-                  <button
-                    class="px-2 py-1 justify-center box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-transparent overflow-hidden"
-                    disabled=""
+                  <div
+                    class=""
                   >
-                    <p
-                      class="text-sm"
+                    <button
+                      class="px-2 py-1 justify-center box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-white overflow-hidden"
+                      disabled=""
                     >
-                      submitAnswers
-                    </p>
-                  </button>
+                      <p
+                        class="text-sm"
+                      >
+                        submitAnswers
+                      </p>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

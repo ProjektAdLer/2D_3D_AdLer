@@ -8,29 +8,37 @@ exports[`AdaptivityElementAnswerSelection should render 1`] = `
     <div
       class="flex flex-col flex-wrap justify-start gap-4 lg:grid lg:grid-cols-2"
     >
-      <button
-        class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+      <div
+        class=""
       >
-        <p
-          class="text-sm"
+        <button
+          class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
         >
-          testAnswerText
-        </p>
-      </button>
+          <p
+            class="text-sm"
+          >
+            testAnswerText
+          </p>
+        </button>
+      </div>
     </div>
     <div
       class="flex items-end justify-end w-full gap-2 pt-8 font-bold"
     >
-      <button
-        class="px-2 py-1 justify-center box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-transparent overflow-hidden"
-        disabled=""
+      <div
+        class=""
       >
-        <p
-          class="text-sm"
+        <button
+          class="px-2 py-1 justify-center box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-white overflow-hidden"
+          disabled=""
         >
-          submitAnswers
-        </p>
-      </button>
+          <p
+            class="text-sm"
+          >
+            submitAnswers
+          </p>
+        </button>
+      </div>
     </div>
   </div>
 </div>

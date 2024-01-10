@@ -8,46 +8,50 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
     <div
       class="grid items-center justify-center w-full grid-cols-3 gap-4 md:grid-cols-2"
     >
-      <button
-        class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+      <div
+        class=""
       >
-        <div
-          class="grid items-center w-full h-full grid-cols-5 "
+        <button
+          class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
         >
           <div
-            class="flex items-center h-full"
-          >
-            <img
-              alt=""
-              class="w-4 h-4 md:w-6 md:h-6"
-              src="diffculties-adaptivity-easy-required-unsolved-icon.svg"
-            />
-            <img
-              alt="Platzhalter-Icon"
-              class="w-4 h-4 md:w-6 md:h-6 opacity-60"
-              src="diffculties-adaptivity-placeholder.svg"
-            />
-            <img
-              alt="Platzhalter-Icon"
-              class="w-4 h-4 md:w-6 md:h-6 opacity-60"
-              src="diffculties-adaptivity-placeholder.svg"
-            />
-          </div>
-          <p
-            class="flex justify-center col-span-3 px-4 text-sm text-start"
-          >
-            easy
-             
-          </p>
-          <div
-            class="flex items-center justify-end pr-2"
+            class="grid items-center w-full h-full grid-cols-5 "
           >
             <div
-              class="w-16"
-            />
+              class="flex items-center h-full"
+            >
+              <img
+                alt=""
+                class="w-4 h-4 md:w-6 md:h-6"
+                src="diffculties-adaptivity-easy-required-unsolved-icon.svg"
+              />
+              <img
+                alt="Platzhalter-Icon"
+                class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                src="diffculties-adaptivity-placeholder.svg"
+              />
+              <img
+                alt="Platzhalter-Icon"
+                class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                src="diffculties-adaptivity-placeholder.svg"
+              />
+            </div>
+            <p
+              class="flex justify-center col-span-3 px-4 text-sm text-start"
+            >
+              easy
+               
+            </p>
+            <div
+              class="flex items-center justify-end pr-2"
+            >
+              <div
+                class="w-16"
+              />
+            </div>
           </div>
-        </div>
-      </button>
+        </button>
+      </div>
       <div
         class="flex flex-row h-full md:gap-4 "
       />
@@ -55,115 +59,131 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
     <div
       class="grid items-center justify-center w-full grid-cols-3 gap-4 md:grid-cols-2"
     >
-      <button
-        class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+      <div
+        class=""
       >
-        <div
-          class="grid items-center w-full h-full grid-cols-5 "
+        <button
+          class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
         >
           <div
-            class="flex items-center h-full"
-          >
-            <img
-              alt="Platzhalter-Icon"
-              class="w-4 h-4 md:w-6 md:h-6 opacity-60"
-              src="diffculties-adaptivity-placeholder.svg"
-            />
-            <img
-              alt=""
-              class="w-4 h-4 md:w-6 md:h-6"
-              src="diffculties-adaptivity-medium-required-solved.svg"
-            />
-            <img
-              alt="Platzhalter-Icon"
-              class="w-4 h-4 md:w-6 md:h-6 opacity-60"
-              src="diffculties-adaptivity-placeholder.svg"
-            />
-          </div>
-          <p
-            class="flex justify-center col-span-3 px-4 text-sm text-start"
-          >
-            normal
-             
-          </p>
-          <div
-            class="flex items-center justify-end pr-2"
+            class="grid items-center w-full h-full grid-cols-5 "
           >
             <div
-              class="w-16"
-            />
+              class="flex items-center h-full"
+            >
+              <img
+                alt="Platzhalter-Icon"
+                class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                src="diffculties-adaptivity-placeholder.svg"
+              />
+              <img
+                alt=""
+                class="w-4 h-4 md:w-6 md:h-6"
+                src="diffculties-adaptivity-medium-required-solved.svg"
+              />
+              <img
+                alt="Platzhalter-Icon"
+                class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                src="diffculties-adaptivity-placeholder.svg"
+              />
+            </div>
+            <p
+              class="flex justify-center col-span-3 px-4 text-sm text-start"
+            >
+              normal
+               
+            </p>
+            <div
+              class="flex items-center justify-end pr-2"
+            >
+              <div
+                class="w-16"
+              />
+            </div>
           </div>
-        </div>
-      </button>
+        </button>
+      </div>
       <div
         class="flex flex-row h-full md:gap-4 "
       >
-        <button
-          class="w-full h-full px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+        <div
+          class=""
         >
-          <p
-            class="text-sm"
+          <button
+            class="w-full h-full px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
           >
-            Hinweis
-          </p>
-        </button>
+            <p
+              class="text-sm"
+            >
+              Hinweis
+            </p>
+          </button>
+        </div>
       </div>
     </div>
     <div
       class="grid items-center justify-center w-full grid-cols-3 gap-4 md:grid-cols-2"
     >
-      <button
-        class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+      <div
+        class=""
       >
-        <div
-          class="grid items-center w-full h-full grid-cols-5 "
+        <button
+          class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
         >
           <div
-            class="flex items-center h-full"
-          >
-            <img
-              alt="Platzhalter-Icon"
-              class="w-4 h-4 md:w-6 md:h-6 opacity-60"
-              src="diffculties-adaptivity-placeholder.svg"
-            />
-            <img
-              alt="Platzhalter-Icon"
-              class="w-4 h-4 md:w-6 md:h-6 opacity-60"
-              src="diffculties-adaptivity-placeholder.svg"
-            />
-            <img
-              alt=""
-              class="w-4 h-4 md:w-6 md:h-6"
-              src="diffculties-adaptivity-hard-required-tried.svg"
-            />
-          </div>
-          <p
-            class="flex justify-center col-span-3 px-4 text-sm text-start"
-          >
-            hard
-             
-          </p>
-          <div
-            class="flex items-center justify-end pr-2"
+            class="grid items-center w-full h-full grid-cols-5 "
           >
             <div
-              class="w-16"
-            />
+              class="flex items-center h-full"
+            >
+              <img
+                alt="Platzhalter-Icon"
+                class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                src="diffculties-adaptivity-placeholder.svg"
+              />
+              <img
+                alt="Platzhalter-Icon"
+                class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                src="diffculties-adaptivity-placeholder.svg"
+              />
+              <img
+                alt=""
+                class="w-4 h-4 md:w-6 md:h-6"
+                src="diffculties-adaptivity-hard-required-tried.svg"
+              />
+            </div>
+            <p
+              class="flex justify-center col-span-3 px-4 text-sm text-start"
+            >
+              hard
+               
+            </p>
+            <div
+              class="flex items-center justify-end pr-2"
+            >
+              <div
+                class="w-16"
+              />
+            </div>
           </div>
-        </div>
-      </button>
+        </button>
+      </div>
       <div
         class="flex flex-row h-full md:gap-4 "
       >
-        <button
-          class="w-full h-full px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+        <div
+          class=""
         >
-          <p
-            class="text-sm"
+          <button
+            class="w-full h-full px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
           >
-            Hinweis
-          </p>
-        </button>
+            <p
+              class="text-sm"
+            >
+              Hinweis
+            </p>
+          </button>
+        </div>
       </div>
     </div>
   </div>
