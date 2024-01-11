@@ -19,5 +19,5 @@ export default class NavigationConfiguration {
     detailSampleMaxError: 1,
   };
   public maxAgentCount: number = 3;
-  public maxAgentRadius: number = 0.1;
+  public maxAgentRadius: number = 1;
 }

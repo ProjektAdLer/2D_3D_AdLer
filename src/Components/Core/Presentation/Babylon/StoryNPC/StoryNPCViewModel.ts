@@ -9,8 +9,8 @@ export default class StoryNPCViewModel {
   characterNavigator: ICharacterNavigator;
   characterAnimator: ICharacterAnimator;
 
-  readonly movementRange: number = 4; // in m
-  readonly minMovementDistance: number = 1; // in m
+  readonly movementRange: number = 5; // in m
+  readonly minMovementDistance: number = 2; // in m
   readonly idleTime: number = 4000; // in ms
 
   modelType: LearningElementModel;

@@ -26,14 +26,14 @@ export default class CharacterNavigator
   implements ICharacterNavigator
 {
   private readonly agentParams: IAgentParameters = {
-    radius: 1,
+    radius: 0.5,
     height: 1,
     maxAcceleration: 5000.0,
     maxSpeed: 3.0,
-    collisionQueryRange: 0.5,
+    collisionQueryRange: 20.0,
     pathOptimizationRange: 0.0,
     separationWeight: 1.0,
-    reachRadius: 0.2, // acts as stopping distance
+    reachRadius: 0.4, // acts as stopping distance
   };
   private readonly rotationVelocityThreshold: number = 0.5;
 
