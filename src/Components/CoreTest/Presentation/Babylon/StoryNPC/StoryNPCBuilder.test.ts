@@ -5,7 +5,6 @@ import PresentationBuilder from "../../../../Core/Presentation/PresentationBuild
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import { waitFor } from "@testing-library/react";
-import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 
 jest.spyOn(PresentationBuilder.prototype, "buildPresenter");
