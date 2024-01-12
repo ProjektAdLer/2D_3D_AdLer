@@ -11,9 +11,13 @@ import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import ILoadUserLearningWorldsInfoUseCase from "../../../../../Core/Application/UseCases/LoadUserLearningWorldsInfo/ILoadUserLearningWorldsInfoUseCase";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import ILoadingScreenPresenter from "../../../../../Core/Presentation/React/GeneralComponents/LoadingScreen/ILoadingScreenPresenter";
+import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 const loadUserLearningWorldsInfoUseCase =
   mock<ILoadUserLearningWorldsInfoUseCase>();
+const loadingScreenPresenterMock = mock<ILoadingScreenPresenter>();
+
 describe("LearningWorldSelection", () => {
   beforeAll(() => {
     CoreDIContainer.unbindAll();
@@ -21,7 +25,11 @@ describe("LearningWorldSelection", () => {
     CoreDIContainer.bind<ILoadUserLearningWorldsInfoUseCase>(
       USECASE_TYPES.ILoadUserLearningWorldsInfoUseCase
     ).toConstantValue(loadUserLearningWorldsInfoUseCase);
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.ILoadingScreenPresenter
+    ).toConstantValue(loadingScreenPresenterMock);
   });
+
   test("should render and call controller on click", () => {
     const vm = new LearningWorldSelectionViewModel();
     vm.userWorlds.Value = [
