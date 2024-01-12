@@ -3,4 +3,5 @@ export default interface ILoadingScreenPresenter {
   releaseLoadingLock(): void;
   lockLoadingLock(): void;
   pushLoadStep(step: string): void;
+  closeLoadingScreen(): void;
 }
