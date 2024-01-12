@@ -19,4 +19,8 @@ export default class LoadingScreenPresenter implements ILoadingScreenPresenter {
   pushLoadStep(step: string) {
     this.viewModel.loadStep.Value = step;
   }
+
+  closeLoadingScreen() {
+    this.viewModel.isOpen.Value = false;
+  }
 }
