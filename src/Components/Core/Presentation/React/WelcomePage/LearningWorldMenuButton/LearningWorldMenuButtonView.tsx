@@ -34,12 +34,19 @@ export default function LearningWorldMenuButton({
 
   return (
     <StyledButton
-      className={tailwindMerge(className)}
-      shape="freefloatleft"
-      disabled={!userLoggedIn}
+      shape="freefloatcenternopadding"
+      containerClassName="w-full h-full"
       onClick={() => history.push("/worldmenu")}
+      disabled={!userLoggedIn}
+      className={
+        `relative !px-0 !py-0 flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover !bg-learningworldbg` +
+        tailwindMerge(className)
+      }
     >
-      {translate("learningWorldButton")}
+      <div className="w-full h-full bg-black opacity-30 hover:opacity-20" />
+      <p className="absolute p-4 mx-auto text-2xl font-bold rounded-lg text-center bg-buttonbgblue lg:bottom-[42%] portrait:bottom-[20%] portrait:text-lg bottom-32 text-adlerdarkblue">
+        {translate("learningWorldButton")}
+      </p>
     </StyledButton>
   );
 }

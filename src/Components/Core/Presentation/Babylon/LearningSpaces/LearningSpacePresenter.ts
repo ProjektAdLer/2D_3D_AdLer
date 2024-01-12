@@ -42,6 +42,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     if (this.viewModel.entryDoorPosition) await this.createEntryDoor();
     this.decorationBuilder.spaceTemplate = spaceTO.template;
     await this.director.buildAsync(this.decorationBuilder);
+    await this.createStoryNPCs();
   }
 
   broadcastAvatarPosition(position: Vector3, interactionRadius: number): void {
@@ -149,5 +150,15 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
       loadingWindowPromises.push(this.director.buildAsync(windowBuilder));
     }
     await Promise.all(loadingWindowPromises);
+  }
+
+  private async createStoryNPCs(): Promise<void> {
+    // TODO: implement this
+    // const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
+    //   BUILDER_TYPES.IStoryNPCBuilder
+    // );
+    // storyNPCBuilder.modelType =
+    //   LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC;
+    // await this.director.buildAsync(storyNPCBuilder);
   }
 }

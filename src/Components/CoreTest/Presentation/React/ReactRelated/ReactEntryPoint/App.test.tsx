@@ -34,6 +34,12 @@ describe("App", () => {
       USECASE_TYPES.IGetLoginStatusUseCase
     ).toConstantValue(getLoginStatusUseCaseMock);
   });
+  beforeEach(() => {
+    getLoginStatusUseCaseMock.execute.mockReturnValue({
+      isLoggedIn: true,
+      userName: "",
+    });
+  });
 
   afterAll(() => {
     CoreDIContainer.restore();

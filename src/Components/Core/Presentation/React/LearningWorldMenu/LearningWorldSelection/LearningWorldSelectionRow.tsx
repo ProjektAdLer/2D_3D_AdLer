@@ -14,7 +14,8 @@ export default function LearningWorldSelectionRow({
   return (
     <StyledButton
       icon={icon}
-      className="xl:pl-8 w-[100%]"
+      containerClassName="w-full"
+      className="w-full xl:pl-8"
       shape="freefloatcenter"
       onClick={onClickCallback}
       color={selected ? "pressed" : "default"}

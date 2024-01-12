@@ -10,7 +10,7 @@ export default class NavigationConfiguration {
     walkableHeight: 1.0,
     walkableClimb: 1,
     walkableRadius: 3,
-    maxEdgeLen: 12,
+    maxEdgeLen: 5,
     maxSimplificationError: 1.3,
     minRegionArea: 8,
     mergeRegionArea: 20,
@@ -18,6 +18,6 @@ export default class NavigationConfiguration {
     detailSampleDist: 6,
     detailSampleMaxError: 1,
   };
-  public maxAgentCount: number = 1;
-  public maxAgentRadius: number = 0.1;
+  public maxAgentCount: number = 3;
+  public maxAgentRadius: number = 1;
 }
