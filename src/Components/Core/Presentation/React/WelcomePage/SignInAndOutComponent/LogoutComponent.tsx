@@ -36,20 +36,21 @@ export default function LogoutComponent({
 
   return (
     <div className={tailwindMerge(className)}>
-      <StyledButton
-        color={userLoggedIn ? "success" : "default"}
-        shape="freefloatleft"
-        data-testid="login-button"
-        className="flex h-10 gap-2 m-1 !border-b-[1px] !border-r-[1px] pointer-events-none w-fit"
-      >
-        <img className="w-10" src={moodleIcon} alt="Moodle-Icon"></img>
-        {userLoggedIn && (
-          <p className="text-sm font-regular portrait:hidden">
-            {"Eingeloggt als " + userName}
-          </p>
-        )}
-      </StyledButton>
-
+      {userLoggedIn && (
+        <StyledButton
+          color={userLoggedIn ? "success" : "default"}
+          shape="freefloatleft"
+          data-testid="login-button"
+          className="flex h-10 gap-2 m-1 !border-b-[1px] !border-r-[1px] pointer-events-none w-fit"
+        >
+          <img className="w-10" src={moodleIcon} alt="Moodle-Icon"></img>
+          {userLoggedIn && (
+            <p className="text-sm font-regular portrait:hidden">
+              {"Eingeloggt als " + userName}
+            </p>
+          )}
+        </StyledButton>
+      )}
       {userLoggedIn && (
         <StyledButton
           shape="freefloatleft"

@@ -33,9 +33,9 @@ export default function WelcomePage() {
         <LoginComponent className="flex flex-col items-center justify-around col-span-6 col-start-2 xl:pt-8 lg:pt-4" />
       </section>
 
-      <section className="flex items-center justify-around col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:flex-col portrait:row-start-2 portrait:row-span-4 portrait:col-start-2 portrait:gap-6">
+      <section className="flex items-center justify-around  col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:flex-col portrait:row-start-2 portrait:row-span-4 portrait:col-start-2 portrait:gap-6">
         <LearningWorldMenuButton />
-        <StyledButton
+        {/*         <StyledButton
           disabled
           shape="freefloatcenter"
           containerClassName="w-full h-full"
@@ -45,7 +45,7 @@ export default function WelcomePage() {
           <p className="absolute p-4 mx-auto text-2xl font-bold rounded-lg text-center bg-adlerbuttonlocked lg:bottom-[42%] portrait:bottom-[20%] portrait:text-lg bottom-32 text-adlerdeactivatedtext">
             Der Avatar Creator ist demnächst verfügbar!
           </p>
-        </StyledButton>
+        </StyledButton> */}
       </section>
 
       <LogoutComponent className="relative z-0 flex flex-col self-end col-span-2 col-start-7 row-start-6 gap-2 justify-self-end" />
