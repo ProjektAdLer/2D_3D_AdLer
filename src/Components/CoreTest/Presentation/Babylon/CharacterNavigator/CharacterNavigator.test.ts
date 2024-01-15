@@ -1,7 +1,10 @@
 import {
+  Color3,
+  Mesh,
   MeshBuilder,
   NullEngine,
   Scene,
+  StandardMaterial,
   TransformNode,
   Vector3,
 } from "@babylonjs/core";
@@ -16,6 +19,7 @@ import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManageme
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 
 jest.mock("@babylonjs/core/Meshes");
+jest.mock("@babylonjs/core/Materials");
 
 const navigationMock = mockDeep<INavigation>();
 
@@ -94,6 +98,23 @@ describe("CharacterNavigator", () => {
     );
   });
 
+  // TODO: fix this
+  test.skip("startMovement's onReachTargetObservable callback calls given onTargetReachedCallback", () => {
+    const onTargetReachedCallback = jest.fn();
+    navigationMock.Crowd.onReachTargetObservable.add((callback: any) => {
+      callback(
+        {
+          agentIndex: systemUnderTest["agentIndex"],
+        } as any,
+        {} as any
+      );
+    });
+
+    systemUnderTest.startMovement(Vector3.Zero(), onTargetReachedCallback);
+
+    expect(onTargetReachedCallback).toHaveBeenCalledTimes(1);
+  });
+
   test("stopMovement calls agentTeleport on the navigation crowd", () => {
     systemUnderTest.stopMovement();
 
@@ -111,19 +132,25 @@ describe("CharacterNavigator", () => {
     );
   });
 
-  // TODO: finish this test
-  test.skip("rotateCharacter rotates character according to its velocity", () => {
+  test("rotateCharacter rotates character according to its velocity", () => {
     const expectedVelocity = new Vector3(1, 0, 1);
     navigationMock.Crowd.getAgentVelocity.mockReturnValue(expectedVelocity);
 
     systemUnderTest["rotateCharacter"]();
 
-    expect(systemUnderTest["characterRotationNode"].rotationQuaternion).toEqual(
-      expectedVelocity.toQuaternion()
-    );
+    expect(systemUnderTest["characterRotationNode"].rotationQuaternion)
+      .toMatchInlineSnapshot(`
+      Quaternion {
+        "_isDirty": true,
+        "_w": 0.9238795325112867,
+        "_x": 0,
+        "_y": 0.3826834323650898,
+        "_z": 0,
+      }
+    `);
   });
 
-  test("debug_drawPath returns verbose is false", () => {
+  test("debug_drawPath does nothing when verbose is false", () => {
     systemUnderTest["verbose"] = false;
 
     systemUnderTest["debug_drawPath"](new Vector3(1, 2, 3));
@@ -138,5 +165,50 @@ describe("CharacterNavigator", () => {
 
     expect(navigationMock.Plugin.computePath).toHaveBeenCalledTimes(1);
     expect(MeshBuilder.CreateDashedLines).toHaveBeenCalledTimes(1);
+  });
+
+  test("debug_drawCircle does nothing when verbose is false", () => {
+    systemUnderTest["verbose"] = false;
+
+    systemUnderTest["debug_drawCircle"](1);
+
+    expect(MeshBuilder.CreateTorus).toHaveBeenCalledTimes(0);
+  });
+
+  test("debug_drawCircle draws a circle when verbose is set true", () => {
+    systemUnderTest["verbose"] = true;
+    const mockParentNode = new TransformNode(
+      "mockParentNode",
+      new Scene(new NullEngine())
+    );
+    systemUnderTest["parentNode"] = mockParentNode;
+    MeshBuilder.CreateTorus = jest
+      .fn()
+      .mockReturnValue(new Mesh("mockMesh", new Scene(new NullEngine())));
+
+    systemUnderTest["debug_drawCircle"](1);
+
+    expect(MeshBuilder.CreateTorus).toHaveBeenCalledTimes(1);
+  });
+
+  test("debug_drawCircle sets a color on the created circle if color is given", () => {
+    // arange
+    systemUnderTest["verbose"] = true;
+
+    const mockParentNode = new TransformNode(
+      "mockParentNode",
+      new Scene(new NullEngine())
+    );
+    systemUnderTest["parentNode"] = mockParentNode;
+
+    const mockCircle = new Mesh("mockMesh", new Scene(new NullEngine()));
+    MeshBuilder.CreateTorus = jest.fn().mockReturnValue(mockCircle);
+
+    // act
+    expect(mockCircle.material).toBeUndefined();
+
+    systemUnderTest["debug_drawCircle"](1, new Color3(1, 1, 1));
+
+    expect(mockCircle.material).toBeDefined();
   });
 });
