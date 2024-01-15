@@ -9,6 +9,8 @@ import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
 import ILoginUseCase from "./ILoginUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import { AxiosError } from "axios";
+import i18next from "i18next";
 
 @injectable()
 export default class LoginUseCase implements ILoginUseCase {
@@ -47,12 +49,32 @@ export default class LoginUseCase implements ILoginUseCase {
         password: data.password,
       });
     } catch (error) {
-      this.logger.log(
-        LogLevelTypes.WARN,
-        "LoginUseCase: User tried logging in with wrong Info: " + error
-      );
-      this.notificationPort.displayNotification("Falsche Daten!", "error");
-      return Promise.reject("Wrong Password oder Username");
+      // server timeout
+      if (error instanceof AxiosError && error.code === "ECONNABORTED") {
+        this.logger.log(
+          LogLevelTypes.WARN,
+          "LoginUseCase: Connection timeout exceeded with error: " + error
+        );
+        this.notificationPort.displayNotification("Timeout", "error");
+        this.lmsPort.onLoginFailure(
+          i18next.t("loginFail", { ns: "start" }) +
+            " " +
+            i18next.t("serverTimeOut"),
+          i18next.t("loginRetry")
+        );
+      } else {
+        // wrong password or username
+        this.logger.log(
+          LogLevelTypes.WARN,
+          "LoginUseCase: User tried logging in with wrong Info: " + error
+        );
+        this.notificationPort.displayNotification("Falsche Daten!", "error");
+        this.lmsPort.onLoginFailure(
+          i18next.t("loginFail", { ns: "start" }),
+          i18next.t("loginFailAdvise")
+        );
+      }
+      return Promise.resolve();
     }
 
     this.container.useSingletonEntity<UserDataEntity>(

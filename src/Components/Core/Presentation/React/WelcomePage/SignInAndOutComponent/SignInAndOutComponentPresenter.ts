@@ -12,6 +12,12 @@ export default class SignInAndOutComponentPresenter
     this.viewModel.userName.Value = userName;
   }
 
+  onLoginFailure(errorMessage: string, errorMessageAdvise: string): void {
+    this.viewModel.errorMessage.Value = errorMessage;
+    this.viewModel.errorMessageAdvise.Value = errorMessageAdvise;
+    this.viewModel.loginFailed.Value = true;
+  }
+
   onLogoutSuccessful(): void {
     this.viewModel.userLoggedIn.Value = false;
     this.viewModel.modalVisible.Value = true;

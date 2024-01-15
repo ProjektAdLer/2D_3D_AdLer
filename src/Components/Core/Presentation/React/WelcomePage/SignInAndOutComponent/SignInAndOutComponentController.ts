@@ -13,14 +13,12 @@ export default class SignInAndOutComponentController
   login(username: string, password: string): void {
     this.viewModel.loginFailed.Value = false;
 
-    CoreDIContainer.get<ILoginUseCase>(USECASE_TYPES.ILoginUseCase)
-      .executeAsync({
-        username: username,
-        password: password,
-      })
-      .catch(() => {
-        this.viewModel.loginFailed.Value = true;
-      });
+    CoreDIContainer.get<ILoginUseCase>(
+      USECASE_TYPES.ILoginUseCase
+    ).executeAsync({
+      username: username,
+      password: password,
+    });
   }
 
   logout(): void {

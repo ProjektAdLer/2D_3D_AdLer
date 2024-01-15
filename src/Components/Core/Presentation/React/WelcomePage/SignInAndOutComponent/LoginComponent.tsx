@@ -94,10 +94,10 @@ export default function LoginComponent({
           {loginFailed && (
             <div className="bg-red-100 rounded-lg">
               <p className="m-1 text-xs font-bold text-center text-red-500">
-                {translate("loginFail")}
+                {viewModel.errorMessage.Value}
               </p>
               <p className="m-1 text-xs font-bold text-center text-red-500">
-                {translate("loginFailAdvise")}
+                {viewModel.errorMessageAdvise.Value}
               </p>
             </div>
           )}

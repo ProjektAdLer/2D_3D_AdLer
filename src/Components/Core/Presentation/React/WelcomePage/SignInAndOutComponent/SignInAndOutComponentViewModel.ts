@@ -5,4 +5,6 @@ export default class SignInAndOutComponentViewModel {
   modalVisible = new Observable<boolean>(true);
   loginFailed = new Observable<boolean>(false);
   userName = new Observable<string>("");
+  errorMessage = new Observable<string>("");
+  errorMessageAdvise = new Observable<string>("");
 }
