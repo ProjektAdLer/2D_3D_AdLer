@@ -5,8 +5,9 @@ import {
   Quaternion,
   Axis,
   MeshBuilder,
+  StandardMaterial,
 } from "@babylonjs/core";
-import type { LinesMesh, Nullable, Observer, Scene } from "@babylonjs/core";
+import { Color3, LinesMesh, Nullable, Observer, Scene } from "@babylonjs/core";
 import bind from "bind-decorator";
 import INavigation from "../Navigation/INavigation";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
@@ -114,6 +115,9 @@ export default class CharacterNavigator
   private async setupCharacterNavigation(): Promise<void> {
     await this.navigation.IsReady;
 
+    this.debug_drawCircle(this.agentParams.radius, Color3.Blue());
+    this.debug_drawCircle(this.agentParams.reachRadius!, Color3.Red());
+
     // snap to navmesh if character is placed outside of it
     this.parentNode.position = this.navigation.Plugin.getClosestPoint(
       this.parentNode.position
@@ -158,5 +162,32 @@ export default class CharacterNavigator
       { points: pathPoints, updatable: true, instance: this.debug_pathLine },
       this.scenePresenter.Scene
     );
+  }
+
+  private debug_drawCircle(radius: number, color?: Color3): void {
+    if (this.verbose === false) return;
+
+    const circle = MeshBuilder.CreateTorus(
+      "debug radius",
+      {
+        diameter: radius * 2,
+        thickness: 0.03,
+        tessellation: 32,
+      },
+      this.scenePresenter.Scene
+    );
+
+    if (color) {
+      const material = new StandardMaterial(
+        "debug radius material",
+        this.scenePresenter.Scene
+      );
+      material.diffuseColor = color;
+      circle.material = material;
+    }
+
+    circle.position = this.parentNode.position;
+    circle.position.y += this.agentParams.height / 2;
+    circle.setParent(this.parentNode);
   }
 }
