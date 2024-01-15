@@ -16,6 +16,14 @@ export default class LMSPort
     });
   }
 
+  onLoginFailure(errorMessage: string, errorMessageAdvise: string): void {
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLoginFailure) {
+        adapter.onLoginFailure(errorMessage, errorMessageAdvise);
+      }
+    });
+  }
+
   onLogoutSuccessful(): void {
     this.adapters.forEach((adapter) => {
       if (adapter.onLogoutSuccessful) {
