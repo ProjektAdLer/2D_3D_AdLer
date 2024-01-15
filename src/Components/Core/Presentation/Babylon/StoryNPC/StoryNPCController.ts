@@ -27,7 +27,7 @@ export default class StoryNPCController implements IStoryNPCController {
         this.viewModel.movementRange
       );
       distance = Vector3.Distance(target, this.viewModel.parentNode.position);
-    } while (distance < 0.5);
+    } while (distance < this.viewModel.minMovementDistance);
 
     this.viewModel.characterNavigator.startMovement(
       target,
