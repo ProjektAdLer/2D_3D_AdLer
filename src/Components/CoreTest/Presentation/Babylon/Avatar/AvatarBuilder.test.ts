@@ -12,6 +12,7 @@ import MovementIndicator from "../../../../Core/Presentation/Babylon/MovementInd
 import IMovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/IMovementIndicator";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
+import ILearningSpacePresenter from "../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpacePresenter";
 
 jest.mock("../../../../Core/Presentation/Babylon/Avatar/AvatarController");
 const setViewModelMock = jest.spyOn(
@@ -68,6 +69,18 @@ describe("AvatarBuilder", () => {
       CoreDIContainer.get<IAvatarPort>(PORT_TYPES.IAvatarPort)
     );
     expect(setViewModelMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("buildCOntroller sets the learning space presenter on the controller", () => {
+    systemUnderTest["viewModel"] = mock<AvatarViewModel>();
+    const mockLearningSpacePresenter = mock<ILearningSpacePresenter>();
+    systemUnderTest["learningSpacePresenter"] = mockLearningSpacePresenter;
+
+    systemUnderTest.buildController();
+
+    expect(systemUnderTest["controller"]!.learningSpacePresenter).toBe(
+      mockLearningSpacePresenter
+    );
   });
 
   test("buildView calls asyncSetup on the view", () => {
