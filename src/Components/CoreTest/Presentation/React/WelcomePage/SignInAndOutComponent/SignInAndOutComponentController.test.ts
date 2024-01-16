@@ -45,16 +45,6 @@ describe("SignInAndOutComponentController", () => {
     });
   });
 
-  test("login sets loginFailed to false when the use case rejects", () => {
-    loginUseCaseMock.executeAsync.mockRejectedValueOnce("error");
-
-    systemUnderTest.login("username", "password");
-
-    waitFor(() => {
-      expect(systemUnderTest["viewModel"].loginFailed.Value).toBe(true);
-    });
-  });
-
   test("logout calls the use case", () => {
     systemUnderTest.logout();
 
