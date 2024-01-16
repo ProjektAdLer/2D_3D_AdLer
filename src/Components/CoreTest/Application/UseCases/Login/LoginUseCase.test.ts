@@ -8,6 +8,8 @@ import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityCon
 import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 import ILMSPort from "../../../../Core/Application/Ports/Interfaces/ILMSPort";
 import INotificationPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
+import i18next from "i18next";
+import { AxiosError } from "axios";
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendMock = mock<IBackendPort>();
@@ -48,16 +50,16 @@ describe("LoginUseCase", () => {
       },
     ]);
 
-    const badCall = async () => {
-      await systemUnderTest.executeAsync({
-        username: "test",
-        password: "test",
-      });
-    };
-
-    await badCall().catch((error) => {
-      expect(error).toBe("User is already logged in");
+    await systemUnderTest.executeAsync({
+      username: "test",
+      password: "test",
     });
+
+    expect(lmsPortMock.onLoginFailure).toHaveBeenCalled();
+    expect(lmsPortMock.onLoginFailure).toHaveBeenCalledWith(
+      i18next.t("alreadyLoggedIn", { ns: "start" }),
+      ""
+    );
 
     expect(notificationPortMock.displayNotification).toHaveBeenCalledWith(
       expect.any(String),
@@ -97,19 +99,35 @@ describe("LoginUseCase", () => {
     backendMock.loginUser.mockRejectedValue("error");
     entityContainerMock.getEntitiesOfType.mockReturnValue([]);
 
-    const badCall = async () => {
-      await systemUnderTest.executeAsync({
-        username: "username",
-        password: "password",
-      });
-    };
-
-    badCall().catch((error) => {
-      expect(error).toBe("Wrong Password oder Username");
-      expect(notificationPortMock.displayNotification).toHaveBeenCalledWith(
-        expect.any(String),
-        "error"
-      );
+    await systemUnderTest.executeAsync({
+      username: "username",
+      password: "password",
     });
+
+    expect(lmsPortMock.onLoginFailure).toHaveBeenCalled();
+    expect(lmsPortMock.onLoginFailure).toHaveBeenCalledWith(
+      i18next.t("loginFail", { ns: "start" }),
+      i18next.t("loginFailAdvise")
+    );
+  });
+
+  test("Throws and displays error, if server timeout is reached", async () => {
+    let error = new AxiosError();
+    error.code = "ECONNABORTED";
+    backendMock.loginUser.mockRejectedValue(error);
+    entityContainerMock.getEntitiesOfType.mockReturnValue([]);
+
+    await systemUnderTest.executeAsync({
+      username: "username",
+      password: "password",
+    });
+
+    expect(lmsPortMock.onLoginFailure).toHaveBeenCalled();
+    expect(lmsPortMock.onLoginFailure).toHaveBeenCalledWith(
+      i18next.t("loginFail", { ns: "start" }) +
+        " " +
+        i18next.t("serverTimeOut"),
+      i18next.t("loginRetry")
+    );
   });
 });

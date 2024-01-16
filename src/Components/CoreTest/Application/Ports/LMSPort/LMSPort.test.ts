@@ -18,10 +18,22 @@ describe("LMSPort", () => {
     systemUnderTest.registerAdapter(lmsAdapterMock1);
     systemUnderTest.registerAdapter(lmsAdapterMock2);
 
-    systemUnderTest.onLoginSuccessful();
+    systemUnderTest.onLoginSuccessful("username");
 
     expect(lmsAdapterMock1.onLoginSuccessful).toHaveBeenCalledTimes(1);
     expect(lmsAdapterMock2.onLoginSuccessful).toHaveBeenCalledTimes(1);
+  });
+
+  test("onLoginFailure is being called", () => {
+    const lmsAdapterMock1 = mock<ILMSAdapter>();
+    const lmsAdapterMock2 = mock<ILMSAdapter>();
+    systemUnderTest.registerAdapter(lmsAdapterMock1);
+    systemUnderTest.registerAdapter(lmsAdapterMock2);
+
+    systemUnderTest.onLoginFailure("test1", "test2");
+
+    expect(lmsAdapterMock1.onLoginFailure).toHaveBeenCalledTimes(1);
+    expect(lmsAdapterMock2.onLoginFailure).toHaveBeenCalledTimes(1);
   });
 
   test("onLogoutSuccessful is being called on scorePanelPresenter", () => {

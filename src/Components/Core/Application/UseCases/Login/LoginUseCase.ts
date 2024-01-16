@@ -39,7 +39,11 @@ export default class LoginUseCase implements ILoginUseCase {
         "You are already logged in to Moodle",
         "error"
       );
-      return Promise.reject("User is already logged in");
+      this.lmsPort.onLoginFailure(
+        i18next.t("alreadyLoggedIn", { ns: "start" }),
+        ""
+      );
+      return Promise.resolve();
     }
     let userToken: string;
 
