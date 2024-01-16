@@ -15,7 +15,6 @@ import { useEffect } from "react";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import ILoadUserLearningWorldsInfoUseCase from "src/Components/Core/Application/UseCases/LoadUserLearningWorldsInfo/ILoadUserLearningWorldsInfoUseCase";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ILoadingScreenPresenter from "~ReactComponents/GeneralComponents/LoadingScreen/ILoadingScreenPresenter";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import { useTranslation } from "react-i18next";
@@ -27,7 +26,7 @@ export default function LearningWorldSelection({
     useInjection<ILoadUserLearningWorldsInfoUseCase>(
       USECASE_TYPES.ILoadUserLearningWorldsInfoUseCase
     );
-  const loadingScreenPresenter = CoreDIContainer.get<ILoadingScreenPresenter>(
+  const loadingScreenPresenter = useInjection<ILoadingScreenPresenter>(
     PRESENTATION_TYPES.ILoadingScreenPresenter
   );
 
