@@ -187,7 +187,6 @@ export default class CharacterNavigator
     }
 
     circle.position = this.parentNode.position;
-    circle.position.y += this.agentParams.height / 2;
     circle.setParent(this.parentNode);
   }
 }
