@@ -1,11 +1,9 @@
 import LoginComponent from "~ReactComponents/WelcomePage/SignInAndOutComponent/LoginComponent";
-import history from "history/browser";
 import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
 //import learningRoomBg from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.png";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
 import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
 import { useTranslation } from "react-i18next";
-import StyledButton from "../ReactBaseComponents/StyledButton";
 import LogoutComponent from "~ReactComponents/WelcomePage/SignInAndOutComponent/LogoutComponent";
 import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
 
@@ -33,7 +31,7 @@ export default function WelcomePage() {
         <LoginComponent className="flex flex-col items-center justify-around col-span-6 col-start-2 xl:pt-8 lg:pt-4" />
       </section>
 
-      <section className="flex items-center justify-around  col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:flex-col portrait:row-start-2 portrait:row-span-4 portrait:col-start-2 portrait:gap-6">
+      <section className="flex items-center justify-around col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:flex-col portrait:row-start-2 portrait:row-span-4 portrait:col-start-2 portrait:gap-6">
         <LearningWorldMenuButton />
         {/*         <StyledButton
           disabled
