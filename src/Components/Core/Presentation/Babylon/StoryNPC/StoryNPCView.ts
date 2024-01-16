@@ -1,4 +1,3 @@
-import LearningElementModelLookup from "src/Components/Core/Domain/LearningElementModels/LearningElementModelLookup";
 import StoryNPCViewModel from "./StoryNPCViewModel";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";

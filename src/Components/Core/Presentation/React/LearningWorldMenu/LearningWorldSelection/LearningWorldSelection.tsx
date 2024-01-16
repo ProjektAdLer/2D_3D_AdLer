@@ -53,7 +53,7 @@ export default function LearningWorldSelection({
       );
       loadUserLearningWorldsInfoAsync();
     }
-  }, [viewModel, loadUserWorldsInfoUseCase]);
+  }, [viewModel, loadUserWorldsInfoUseCase, translate, loadingScreenPresenter]);
 
   const [worlds] = useObservable<LearningWorldSelectionLearningWorldData[]>(
     viewModel?.userWorlds
