@@ -10,6 +10,7 @@
   "loginFail": "Login fehlgeschlagen.",
   "serverTimeOut": "Antwort des Servers hat zu lange gedauert.",
   "loginRetry": "Bitte versuche dich noch einmal anzumelden.",
+  "alreadyLoggedIn": "Du bist bereits angemeldet.",
   "loginFailAdvise": "Bitte überprüfe deine Eingaben.",
   "loginButton": "Login"
 }
