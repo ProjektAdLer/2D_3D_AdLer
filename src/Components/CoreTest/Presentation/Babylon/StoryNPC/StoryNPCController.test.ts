@@ -6,7 +6,6 @@ import { NullEngine, Scene, TransformNode, Vector3 } from "@babylonjs/core";
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
-import { Trans } from "react-i18next";
 
 const characterNavigatorMock = mock<CharacterNavigator>();
 const navigationMock = mockDeep<INavigation>();
