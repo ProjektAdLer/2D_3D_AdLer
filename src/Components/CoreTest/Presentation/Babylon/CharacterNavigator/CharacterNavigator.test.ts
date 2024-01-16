@@ -1,8 +1,10 @@
 import {
   Color3,
+  EventState,
   Mesh,
   MeshBuilder,
   NullEngine,
+  Observer,
   Scene,
   StandardMaterial,
   TransformNode,
@@ -98,17 +100,20 @@ describe("CharacterNavigator", () => {
     );
   });
 
-  // TODO: fix this
-  test.skip("startMovement's onReachTargetObservable callback calls given onTargetReachedCallback", () => {
+  test("startMovement's onReachTargetObservable callback calls given onTargetReachedCallback", () => {
     const onTargetReachedCallback = jest.fn();
-    navigationMock.Crowd.onReachTargetObservable.add((callback: any) => {
-      callback(
-        {
-          agentIndex: systemUnderTest["agentIndex"],
-        } as any,
-        {} as any
-      );
-    });
+    navigationMock.Crowd.onReachTargetObservable.add.mockImplementation(
+      (cb) => {
+        cb(
+          {
+            agentIndex: systemUnderTest["agentIndex"],
+            destination: Vector3.Zero(),
+          },
+          mock<EventState>()
+        );
+        return null;
+      }
+    );
 
     systemUnderTest.startMovement(Vector3.Zero(), onTargetReachedCallback);
 
