@@ -1,3 +1,4 @@
+import { AdaptivityElementQuestionDifficultyTypes } from "./../../../Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 import BackendAdapterUtils from "../../../Core/Adapters/BackendAdapter/BackendAdapterUtils";
 import { APISpace } from "../../../Core/Adapters/BackendAdapter/Types/AWT";
 import { BackendLearningElementTO } from "../../../Core/Application/DataTransferObjects/BackendElementTO";
@@ -109,6 +110,7 @@ describe("BackendAdapterUtils", () => {
       "AdaptivityContentReferenceAction",
       AdaptivityElementActionTypes.ContentAction,
     ],
+    ["undefined", undefined],
   ])(
     "mapAdaptivityElementAction, when given type %s, returns an action TO with type %s",
     (backendTypeInput, expectedResult) => {
@@ -116,6 +118,23 @@ describe("BackendAdapterUtils", () => {
         $type: backendTypeInput,
       });
       expect(result.actionType).toBe(expectedResult);
+    }
+  );
+
+  test.each([
+    [undefined, AdaptivityElementQuestionDifficultyTypes.easy],
+    [0, AdaptivityElementQuestionDifficultyTypes.easy],
+    [100, AdaptivityElementQuestionDifficultyTypes.medium],
+    [200, AdaptivityElementQuestionDifficultyTypes.hard],
+    [-1, AdaptivityElementQuestionDifficultyTypes.easy],
+  ])(
+    "mapAdaptivityElementQuestionDifficulty, when given difficulty %s, returns difficulty type %s",
+    (difficulty, expectedResult) => {
+      const result =
+        BackendAdapterUtils["mapAdaptivityElementQuestionDifficulty"](
+          difficulty
+        );
+      expect(result).toBe(expectedResult);
     }
   );
 });

@@ -29,4 +29,12 @@ describe("SignInAndOutComponentPresenter", () => {
     systemUnderTest.onLogoutSuccessful();
     expect(vm.modalVisible.Value).toBe(true);
   });
+
+  test("onLoginFailure sets loginFailed in VM to false and errors strings", () => {
+    expect(vm.loginFailed.Value).toBe(false);
+    systemUnderTest.onLoginFailure("error", "advise");
+    expect(vm.loginFailed.Value).toBe(true);
+    expect(vm.errorMessage.Value).toBe("error");
+    expect(vm.errorMessageAdvise.Value).toBe("advise");
+  });
 });

@@ -18,6 +18,9 @@ import {
   BackendAdaptivityElementTO,
   BackendLearningElementTO,
 } from "../../../Core/Application/DataTransferObjects/BackendElementTO";
+import AdaptivityElementQuestionSubmissionTO from "../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
+import { ElementDataParams } from "../../../Core/Application/Ports/Interfaces/IBackendPort";
+import AdaptivityElementstatusResponse from "../../../Core/Adapters/BackendAdapter/Types/AdaptivityElementStatusResponse";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -30,16 +33,25 @@ describe("BackendAdapter", () => {
 
   beforeAll(() => {
     config.useFakeBackend = false;
-    config.serverURL = "http://localhost:1337";
   });
 
   beforeEach(() => {
+    config.serverURL = "http://localhost:1337";
     systemUnderTest = new BackendAdapter();
   });
 
   afterAll(() => {
     config.useFakeBackend = oldConfigBackendValue;
     config.serverURL = oldConfigServerURL;
+  });
+
+  test("should throw error if url is invalid", () => {
+    config.serverURL = "errorURL";
+    config.isDebug = true;
+    expect(() => {
+      new BackendAdapter();
+    }).toThrowError();
+    config.isDebug = false;
   });
 
   test("getWorldData calls backend to get AWT file", async () => {
@@ -327,5 +339,127 @@ describe("BackendAdapter", () => {
     expect(mockedAxios.delete).toHaveBeenCalledTimes(1);
 
     expect(returnedVal).toEqual(true);
+  });
+
+  test("should update adaptivity data", async () => {
+    mockedAxios.patch.mockResolvedValue({
+      data: {
+        elementScore: {
+          elementId: 1,
+          success: true,
+        },
+        gradedTask: {
+          taskId: 1,
+          taskStatus: "",
+        },
+        gradedQuestion: {
+          id: 1,
+          status: "",
+          answers: undefined,
+        },
+      },
+    });
+    const returnedVal =
+      await systemUnderTest.getAdaptivityElementQuestionResponse("token", 0, {
+        elementID: 1,
+        taskID: 1,
+        questionID: 1,
+        selectedAnswers: [false, false, true],
+      } as AdaptivityElementQuestionSubmissionTO);
+
+    expect(mockedAxios.patch).toHaveBeenCalled();
+    expect(mockedAxios.patch).toHaveBeenCalledWith(
+      "/Elements/World/" + 0 + "/Element/" + 1 + "/Question/" + 1,
+      [false, false, true],
+      {
+        headers: {
+          token: "token",
+        },
+      }
+    );
+    expect(returnedVal).toEqual({
+      elementScore: {
+        elementId: 1,
+        success: true,
+      },
+      gradedTask: {
+        taskId: 1,
+        taskStatus: "",
+      },
+      gradedQuestion: {
+        id: 1,
+        status: "",
+        answers: undefined,
+      },
+    });
+  });
+
+  test("getAdaptivityElementStatusResponse calls backend and returns a response ", async () => {
+    mockedAxios.get.mockResolvedValue({
+      data: {
+        element: {
+          elementID: 1,
+          success: true,
+        },
+        questions: [
+          {
+            id: 1,
+            status: "",
+            answers: [
+              {
+                checked: true,
+                correct: true,
+              },
+            ],
+          },
+        ],
+        tasks: [
+          {
+            taskId: 1,
+            taskStatus: "",
+          },
+        ],
+      },
+    });
+    const returnedVal =
+      await systemUnderTest.getAdaptivityElementStatusResponse({
+        userToken: "token",
+        elementID: 1,
+        worldID: 0,
+      } as ElementDataParams);
+
+    expect(mockedAxios.get).toHaveBeenCalled();
+    expect(mockedAxios.get).toHaveBeenCalledWith(
+      "/Elements/World/" + 0 + "/Element/" + 1 + "/Adaptivity",
+      {
+        headers: {
+          token: "token",
+        },
+      }
+    );
+    expect(returnedVal).toEqual({
+      element: {
+        elementID: 1,
+        success: true,
+      },
+      questions: [
+        {
+          id: 1,
+          status: "",
+          answers: [
+            {
+              checked: true,
+              correct: true,
+            },
+          ],
+        },
+      ],
+      tasks: [
+        {
+          taskId: 1,
+          taskStatus: "",
+        },
+      ],
+    } as AdaptivityElementstatusResponse);
   });
 });

@@ -62,6 +62,19 @@ describe("App", () => {
     expect(history.location.pathname).toBe("/spacedisplay");
   });
 
+  test("App works if user is not logged in", () => {
+    getLoginStatusUseCaseMock.execute.mockReturnValue({
+      isLoggedIn: false,
+      userName: "",
+    });
+    render(
+      <Provider container={CoreDIContainer}>
+        <App />
+      </Provider>
+    );
+    expect(history.location.pathname).toBe("/");
+  });
+
   test("App works if pathname is /spacemenu", () => {
     render(
       <Provider container={CoreDIContainer}>
