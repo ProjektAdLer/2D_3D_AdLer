@@ -35,7 +35,7 @@ const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
       LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
     ],
     [LearningElementTypes.adaptivity]: [
-      LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC,
+      LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC,
     ],
     [LearningElementTypes.notAnElement]: [],
   },

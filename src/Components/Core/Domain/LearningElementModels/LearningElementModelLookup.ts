@@ -81,6 +81,9 @@ const LearningElementModelLookup: {
   [LearningElementModelTypeEnums.QuizElementModelTypes
     .CampusNPC]: require("../../../../Assets/3dModels/campusTheme/a_npc_dozentlukas.glb"),
 
+  //sharedModels
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .RobotNPC]: require("../../../../Assets/3dModels/sharedModels/a_npc_alerobot.glb"),
   [LearningElementModelTypeEnums.TrophyElementModelTypes
     .BronzeTrophy]: require("../../../../Assets/prototype/l_trophy_bronze.glb"),
   [LearningElementModelTypeEnums.TrophyElementModelTypes

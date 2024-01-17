@@ -35,7 +35,7 @@ const LearningSpaceTheme_Suburb: ILearningSpaceTheme = {
       LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf2,
     ],
     [LearningElementTypes.adaptivity]: [
-      LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+      LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC,
     ],
     [LearningElementTypes.notAnElement]: [],
   },
