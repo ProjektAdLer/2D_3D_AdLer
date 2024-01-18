@@ -14,9 +14,10 @@ import SeededRNG from "../../Utils/SeededRNG";
 import { Vector3 } from "@babylonjs/core/Maths/math";
 import IDoorPresenter from "../Door/IDoorPresenter";
 import ILearningElementPresenter from "../LearningElements/ILearningElementPresenter";
-import IStoryNPCBuilder from "../StoryNPC/IStoryNPCBuilder";
-import { LearningElementModelTypeEnums } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
 import IStoryNPCPresenter from "../StoryNPC/IStoryNPCPresenter";
+
+// import IStoryNPCBuilder from "../StoryNPC/IStoryNPCBuilder";
+// import { LearningElementModelTypeEnums } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
