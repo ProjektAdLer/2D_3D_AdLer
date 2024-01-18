@@ -163,12 +163,12 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
 
   private async createStoryNPCs(): Promise<void> {
     // TODO: implement this
-    const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
-      BUILDER_TYPES.IStoryNPCBuilder
-    );
-    storyNPCBuilder.modelType =
-      LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC;
-    await this.director.buildAsync(storyNPCBuilder);
-    this.storyNPCPresenters = storyNPCBuilder.getPresenter();
+    // const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
+    //   BUILDER_TYPES.IStoryNPCBuilder
+    // );
+    // storyNPCBuilder.modelType =
+    //   LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC;
+    // await this.director.buildAsync(storyNPCBuilder);
+    // this.storyNPCPresenters = storyNPCBuilder.getPresenter();
   }
 }
