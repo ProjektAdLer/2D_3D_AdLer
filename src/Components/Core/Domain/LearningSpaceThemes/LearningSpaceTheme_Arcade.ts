@@ -37,7 +37,7 @@ const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
       LearningElementModelTypeEnums.TextElementModelTypes.ComicShelfsmall,
     ],
     [LearningElementTypes.adaptivity]: [
-      LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC,
+      LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC,
     ],
     [LearningElementTypes.notAnElement]: [],
   },

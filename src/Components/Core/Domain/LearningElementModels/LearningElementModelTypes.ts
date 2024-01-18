@@ -55,6 +55,7 @@ enum H5pElementModelTypes {
 }
 
 enum QuizElementModelTypes {
+  RobotNPC = "a_npc_alerobot",
   DefaultNPC = "a_npc_defaultnpc",
   ArcadeNPC = "a_npc_sheriffjustice",
   CampusNPC = "a_npc_dozentlukas",

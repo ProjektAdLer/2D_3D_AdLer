@@ -8,16 +8,28 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 <details>
 <summary> Changes that are not yet included in a release are listed here. Click to expand! </summary>
 
+## Version 2.1.1
+
+### Fixed
+
+- Joined meshes of TH Aschaffenburg 3D environment to optimize performance
+
+## Version 2.1.0
+
 ### Added
 
 - background-color to SideBar.
 - Logout from Moodle.
+- loading screen to learningworld menu to load data and preventing UI pop-in.
+- error message and advice if server timeout in login context is reached.
+- Campus TH Aschaffenburg as 3D environment
 
 ### Changed
 
 - responsive styling of LoadingScreen.
 - BreakNotification message is now not a complete button. This gives better read- and usability.
 - refactored styling of WelcomePage and added new button for future functionality.
+- displaying moodle symbol on welcome screen only after successful login.
 
 ### Deprecated
 
@@ -25,7 +37,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
--
+- fullscreen functionality in UI of h5p element to prevent bug that breaks h5p display.
 
 ### Fixed
 

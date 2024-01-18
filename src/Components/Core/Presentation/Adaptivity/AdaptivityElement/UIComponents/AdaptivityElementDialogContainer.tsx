@@ -4,6 +4,8 @@ import arcadeNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_sheri
 import arcadeNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_sheriffjustice_close.png";
 import defaultNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_defaultnpc.png";
 import defaultNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_defaultnpc_close.png";
+import robotNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot.png";
+import robotNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot_close.png";
 
 import requiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-solved-icon.svg";
 import requiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-unsolved-icon.svg";
@@ -43,6 +45,8 @@ import { Trans, useTranslation } from "react-i18next";
 
 function getNPCImage(model: LearningElementModel, close: boolean): string {
   switch (model) {
+    case LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC:
+      return close ? robotNPCClose : robotNPC;
     case LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC:
       return close ? arcadeNPCClose : arcadeNPC;
     case LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC:

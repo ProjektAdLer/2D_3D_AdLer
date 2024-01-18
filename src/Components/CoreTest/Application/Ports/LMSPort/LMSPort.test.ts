@@ -1,6 +1,5 @@
 import { mock } from "jest-mock-extended";
 import LMSPort from "../../../../Core/Application/Ports/LMSPort/LMSPort";
-import LearningWorldMenuButtonPresenter from "../../../../Core/Presentation/React/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonPresenter";
 import ILMSAdapter from "../../../../Core/Application/Ports/LMSPort/ILMSAdapter";
 import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
 
