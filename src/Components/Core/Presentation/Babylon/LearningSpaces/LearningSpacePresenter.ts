@@ -14,13 +14,17 @@ import SeededRNG from "../../Utils/SeededRNG";
 import { Vector3 } from "@babylonjs/core/Maths/math";
 import IDoorPresenter from "../Door/IDoorPresenter";
 import ILearningElementPresenter from "../LearningElements/ILearningElementPresenter";
+import IStoryNPCBuilder from "../StoryNPC/IStoryNPCBuilder";
+import { LearningElementModelTypeEnums } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
+import IStoryNPCPresenter from "../StoryNPC/IStoryNPCPresenter";
 
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
   private director: IPresentationDirector;
   private decorationBuilder: IDecorationBuilder;
   private doorPresenters: IDoorPresenter[] = [];
-  private elmentPresenters: ILearningElementPresenter[] = [];
+  private elementPresenters: ILearningElementPresenter[] = [];
+  private storyNPCPresenters: IStoryNPCPresenter;
 
   constructor(private viewModel: LearningSpaceViewModel) {
     if (!this.viewModel) {
@@ -49,9 +53,14 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     for (const doorPresenter of this.doorPresenters) {
       doorPresenter.onAvatarPositionChanged(position, interactionRadius);
     }
-    for (const elementPresenter of this.elmentPresenters) {
+    for (const elementPresenter of this.elementPresenters) {
       elementPresenter.onAvatarPositionChanged(position, interactionRadius);
     }
+    if (this.storyNPCPresenters)
+      this.storyNPCPresenters.onAvatarPositionChanged(
+        position,
+        interactionRadius
+      );
   }
 
   private async fillLearningElementSlots(
@@ -101,7 +110,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     await Promise.all(loadingCompletePromises);
 
     for (const elementBuilder of elementBuilders)
-      this.elmentPresenters.push(elementBuilder.getPresenter());
+      this.elementPresenters.push(elementBuilder.getPresenter());
   }
 
   private async createExitDoor(spaceTO: LearningSpaceTO): Promise<void> {
@@ -154,11 +163,12 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
 
   private async createStoryNPCs(): Promise<void> {
     // TODO: implement this
-    // const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
-    //   BUILDER_TYPES.IStoryNPCBuilder
-    // );
-    // storyNPCBuilder.modelType =
-    //   LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC;
-    // await this.director.buildAsync(storyNPCBuilder);
+    const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
+      BUILDER_TYPES.IStoryNPCBuilder
+    );
+    storyNPCBuilder.modelType =
+      LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC;
+    await this.director.buildAsync(storyNPCBuilder);
+    this.storyNPCPresenters = storyNPCBuilder.getPresenter();
   }
 }
