@@ -5,16 +5,30 @@ import StoryNPCViewModel from "./StoryNPCViewModel";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import bind from "bind-decorator";
 import { Vector3 } from "@babylonjs/core";
+import IStoryElementPresenter from "~ReactComponents/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 export default class StoryNPCController implements IStoryNPCController {
   private navigation: INavigation;
+  private storyElementPresenter: IStoryElementPresenter;
+  private storyType: StoryElementType = StoryElementType.Intro;
 
   constructor(private viewModel: StoryNPCViewModel) {
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
+
+    this.storyElementPresenter = CoreDIContainer.get<IStoryElementPresenter>(
+      PRESENTATION_TYPES.IStoryElementPresenter
+    );
   }
 
+  @bind
   picked(): void {
-    if (this.viewModel.isInteractable.Value) console.log("Picked");
+    if (this.viewModel.isIntro) this.storyType = StoryElementType.Intro;
+    if (this.viewModel.isOutro) this.storyType = StoryElementType.Outro;
+    if (this.viewModel.isInteractable.Value) {
+      this.storyElementPresenter.open(this.storyType);
+    }
   }
 
   @bind

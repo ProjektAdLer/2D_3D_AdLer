@@ -6,6 +6,7 @@ import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/IL
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import { waitFor } from "@testing-library/react";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 jest.spyOn(PresentationBuilder.prototype, "buildPresenter");
 jest.spyOn(PresentationBuilder.prototype, "buildView");
@@ -20,6 +21,9 @@ describe("StoryNPCBuilder", () => {
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
       learningWorldPortMock
     );
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IStoryElementPresenter
+    ).toConstantValue(mock());
   });
 
   beforeEach(() => {

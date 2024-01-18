@@ -6,6 +6,7 @@ import { NullEngine, Scene, TransformNode, Vector3 } from "@babylonjs/core";
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 const characterNavigatorMock = mock<CharacterNavigator>();
 const navigationMock = mockDeep<INavigation>();
@@ -19,6 +20,9 @@ describe("StoryNPCController", () => {
     CoreDIContainer.rebind(CORE_TYPES.INavigation).toConstantValue(
       navigationMock
     );
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IStoryElementPresenter
+    ).toConstantValue(mock());
   });
 
   beforeEach(() => {

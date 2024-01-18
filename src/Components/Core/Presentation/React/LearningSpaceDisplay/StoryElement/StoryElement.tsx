@@ -25,6 +25,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   }, [setOpen]);
 
   const { t: translate } = useTranslation("learningSpace");
+
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;
 
@@ -45,12 +46,12 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
     >
       {viewModel.texts.Value[pageId].toString()}
       <div className="flex justify-center gap-2">
-        {pageId < viewModel.texts.Value.length && (
+        {pageId < viewModel.texts.Value.length - 1 && (
           <StyledButton shape="square" onClick={controller.increasePageId}>
             {">"}
           </StyledButton>
         )}
-        {pageId > viewModel.texts.Value.length && (
+        {pageId > 0 && (
           <StyledButton shape="square" onClick={controller.decreasePageId}>
             {"<"}
           </StyledButton>
