@@ -8,6 +8,32 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 <details>
 <summary> Changes that are not yet included in a release are listed here. Click to expand! </summary>
 
+### Added
+
+-
+
+### Changed
+
+-
+
+### Removed
+
+-
+
+### Fixed
+
+-
+
+### Deprecated
+
+-
+
+### Security
+
+-
+
+</details>
+
 ## Version 2.1.1
 
 ### Fixed
@@ -44,12 +70,6 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - Learningworld completed - Modal now only shows once per session.
 - Loading Screen readies before space is ready.
 - Bottom Tooltip does not show over elements anymore.
-
-### Security
-
--
-
-</details>
 
 ## Version 2.0.1
 
