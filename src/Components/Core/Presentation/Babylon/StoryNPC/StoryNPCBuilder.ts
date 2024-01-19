@@ -11,6 +11,7 @@ import IStoryNPCBuilder from "./IStoryNPCBuilder";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 @injectable()
 export default class StoryNPCBuilder
@@ -32,10 +33,12 @@ export default class StoryNPCBuilder
   }
 
   public modelType: LearningElementModel;
+  public storyType: StoryElementType;
 
   override buildViewModel(): void {
     super.buildViewModel();
     this.viewModel!.modelType = this.modelType;
+    this.viewModel!.storyType = this.storyType;
   }
 
   override buildView(): void {

@@ -34,46 +34,4 @@ describe("StoryNPCPresenter", () => {
 
     expect(viewModel.isInteractable.Value).toBe(false);
   });
-
-  test("onStoryElementLoaded sets isIntro to false when the introTexts are undefined", () => {
-    viewModel.isIntro = true;
-    systemUnderTest.onStoryElementLoaded({ introTexts: undefined } as any);
-
-    expect(viewModel.isIntro).toBe(false);
-  });
-
-  test("onStoryElementLoaded sets isIntro to false when the introTexts are empty", () => {
-    viewModel.isIntro = true;
-    systemUnderTest.onStoryElementLoaded({ introTexts: [] } as any);
-
-    expect(viewModel.isIntro).toBe(false);
-  });
-
-  test("onStoryElementLoaded sets isIntro to true when the introTexts are not empty", () => {
-    viewModel.isIntro = false;
-    systemUnderTest.onStoryElementLoaded({ introTexts: ["test"] } as any);
-
-    expect(viewModel.isIntro).toBe(true);
-  });
-
-  test("onStoryElementLoaded sets isOutro to false when the outroTexts are undefined", () => {
-    viewModel.isOutro = true;
-    systemUnderTest.onStoryElementLoaded({ outroTexts: undefined } as any);
-
-    expect(viewModel.isOutro).toBe(false);
-  });
-
-  test("onStoryElementLoaded sets isOutro to false when the outroTexts are empty", () => {
-    viewModel.isOutro = true;
-    systemUnderTest.onStoryElementLoaded({ outroTexts: [] } as any);
-
-    expect(viewModel.isOutro).toBe(false);
-  });
-
-  test("onStoryElementLoaded sets isOutro to true when the outroTexts are not empty", () => {
-    viewModel.isOutro = false;
-    systemUnderTest.onStoryElementLoaded({ outroTexts: ["test"] } as any);
-
-    expect(viewModel.isOutro).toBe(true);
-  });
 });

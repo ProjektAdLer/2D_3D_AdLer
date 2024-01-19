@@ -16,6 +16,7 @@ import IDoorPresenter from "../Door/IDoorPresenter";
 import ILearningElementPresenter from "../LearningElements/ILearningElementPresenter";
 import IStoryNPCPresenter from "../StoryNPC/IStoryNPCPresenter";
 import IStoryNPCBuilder from "../StoryNPC/IStoryNPCBuilder";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
@@ -165,8 +166,15 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
       const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
         BUILDER_TYPES.IStoryNPCBuilder
       );
+
       storyNPCBuilder.modelType =
         spaceTO.introStory?.modelType! ?? spaceTO.outroStory?.modelType!;
+
+      storyNPCBuilder.storyType = StoryElementType.None;
+      if (spaceTO.introStory)
+        storyNPCBuilder.storyType |= StoryElementType.Intro;
+      if (spaceTO.outroStory)
+        storyNPCBuilder.storyType |= StoryElementType.Outro;
 
       await this.director.buildAsync(storyNPCBuilder);
 
