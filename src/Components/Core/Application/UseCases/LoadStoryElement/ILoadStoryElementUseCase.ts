@@ -1,5 +1,5 @@
-import { LoadStoryElementType } from "./../../../Domain/Types/LoadStoryElementType";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import { IAsyncUsecase } from "../../Abstract/IAsyncUsecase";
 
 export default interface ILoadStoryElementUseCase
-  extends IAsyncUsecase<LoadStoryElementType, void> {}
+  extends IAsyncUsecase<StoryElementType, void> {}

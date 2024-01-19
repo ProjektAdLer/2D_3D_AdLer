@@ -8,7 +8,6 @@ import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IE
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElementEntity";
-import { LoadStoryElementType } from "src/Components/Core/Domain/Types/LoadStoryElementType";
 import StoryElementTextTO from "../../DataTransferObjects/StoryElementTextTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
@@ -28,7 +27,7 @@ export default class LoadStoryElementUseCase
     private worldPort: ILearningWorldPort
   ) {}
 
-  async executeAsync(storyType: LoadStoryElementType): Promise<void> {
+  async executeAsync(storyType: StoryElementType): Promise<void> {
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
       throw new Error(`User is not in a space!`);
@@ -64,8 +63,8 @@ export default class LoadStoryElementUseCase
     let storyTO = new StoryElementTextTO();
 
     if (
-      storyType === LoadStoryElementType.Intro ||
-      storyType === LoadStoryElementType.IntroOutro
+      storyType === StoryElementType.Intro ||
+      storyType === StoryElementType.IntroOutro
     ) {
       storyTO.introTexts = storyEntities.find((e) => {
         return e.storyType === StoryElementType.Intro;
@@ -78,8 +77,8 @@ export default class LoadStoryElementUseCase
     }
 
     if (
-      storyType === LoadStoryElementType.Outro ||
-      storyType === LoadStoryElementType.IntroOutro
+      storyType === StoryElementType.Outro ||
+      storyType === StoryElementType.IntroOutro
     ) {
       storyTO.outroTexts = storyEntities.find((e) => {
         return e.storyType === StoryElementType.Outro;
