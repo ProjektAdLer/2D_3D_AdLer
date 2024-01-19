@@ -3,6 +3,7 @@ import { LearningSpaceTemplateType } from "../../Domain/Types/LearningSpaceTempl
 import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
 import { BooleanNode } from "../UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
 import LearningElementTO from "./LearningElementTO";
+import StoryElementTO from "./StoryElementTO";
 
 export default class LearningSpaceTO {
   id: ComponentID;
@@ -18,4 +19,6 @@ export default class LearningSpaceTO {
   maxScore: number;
   template: LearningSpaceTemplateType;
   theme: LearningSpaceThemeType;
+  introStory: StoryElementTO | null;
+  outroStory: StoryElementTO | null;
 }

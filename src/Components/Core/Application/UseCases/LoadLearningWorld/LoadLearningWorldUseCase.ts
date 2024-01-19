@@ -79,7 +79,7 @@ export default class LoadLearningWorldUseCase
   async executeAsync(data: { worldID: number }): Promise<void> {
     const lock = await this.semaphore.acquire();
     const loadedWorlds = await this.loadWorld(data, lock);
-    // set user location
+
     this.setUserLocationUseCase.execute({ worldID: data.worldID });
 
     this.logger.log(
@@ -269,20 +269,20 @@ export default class LoadLearningWorldUseCase
       {
         spaceID: id,
         storyTexts: storyElement.storyTexts,
-        elementModel: storyElement.elementModel,
-        type: storyType,
+        modelType: storyElement.elementModel,
+        storyType: storyType,
       },
       StoryElementEntity
     );
     return storyElementEntity;
   }
 
-  private createLearningElementEntities = (
+  private createLearningElementEntities(
     worldID: number,
     elements: (BackendLearningElementTO | BackendAdaptivityElementTO | null)[],
     worldStatus: LearningWorldStatusTO,
     spaceTheme: LearningSpaceThemeType
-  ): (LearningElementEntity | null)[] => {
+  ): (LearningElementEntity | null)[] {
     return elements.map((element) => {
       if (element === null) {
         return null;
@@ -339,7 +339,7 @@ export default class LoadLearningWorldUseCase
 
       return newElementEntity;
     });
-  };
+  }
 
   private createAdaptivityElementEntity(
     element: LearningElementEntity,

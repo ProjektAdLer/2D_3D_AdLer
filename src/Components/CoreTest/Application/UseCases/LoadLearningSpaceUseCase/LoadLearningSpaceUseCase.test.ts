@@ -18,6 +18,8 @@ import { ConstructorReference } from "../../../../Core/Types/EntityManagerTypes"
 import ICalculateLearningSpaceAvailabilityUseCase from "../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
 import LearningSpaceAvailabilityTO from "../../../../Core/Application/DataTransferObjects/LearningSpaceAvailabilityTO";
 import { BooleanIDNode } from "../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
+import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
+import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 const entityContainerMock = mock<IEntityContainer>();
 const loadWorldMock = mock<ILoadLearningWorldUseCase>();
@@ -68,6 +70,8 @@ describe("LoadSpaceUseCase", () => {
       {
         id: 1,
         name: "Space 1",
+        introStory: null,
+        outroStory: null,
       } as LearningSpaceEntity,
     ];
     worldEntity.id = 1;
@@ -103,6 +107,8 @@ describe("LoadSpaceUseCase", () => {
       {
         id: 1,
         name: "Space 1",
+        introStory: null,
+        outroStory: null,
       } as LearningSpaceEntity,
     ];
     worldEntity.id = 2;
@@ -139,6 +145,8 @@ describe("LoadSpaceUseCase", () => {
       {
         id: 1,
         name: "Space 1",
+        introStory: null,
+        outroStory: null,
       } as LearningSpaceEntity,
     ];
     worldEntity.id = 1;
@@ -155,6 +163,8 @@ describe("LoadSpaceUseCase", () => {
       {
         id: 1,
         name: "Space 1",
+        introStory: null,
+        outroStory: null,
       } as LearningSpaceEntity,
     ];
     worldEntity.id = 1;
@@ -205,5 +215,55 @@ describe("LoadSpaceUseCase", () => {
 
     // @ts-ignore TS does not know about the mock
     expect(filterReturn).toBe(true);
+  });
+
+  test("toTO converts intro StoryElementEntity to StoryElementTO", () => {
+    const spaceEntity = new LearningSpaceEntity();
+    spaceEntity.id = 1;
+    spaceEntity.name = "Space 1";
+    spaceEntity.introStory = {
+      spaceID: 1,
+      storyTexts: ["Intro Text"],
+      storyType: StoryElementType.Intro,
+      modelType: LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+    };
+    spaceEntity.outroStory = null;
+
+    const spaceTO = systemUnderTest["toTO"](spaceEntity);
+
+    expect(spaceTO.introStory?.modelType).toStrictEqual(
+      spaceEntity.introStory?.modelType
+    );
+    expect(spaceTO.introStory?.storyTexts).toStrictEqual(
+      spaceEntity.introStory?.storyTexts
+    );
+    expect(spaceTO.introStory?.storyType).toStrictEqual(
+      spaceEntity.introStory?.storyType
+    );
+  });
+
+  test("toTO converts outro StoryElementEntity to StoryElementTO", () => {
+    const spaceEntity = new LearningSpaceEntity();
+    spaceEntity.id = 1;
+    spaceEntity.name = "Space 1";
+    spaceEntity.introStory = null;
+    spaceEntity.outroStory = {
+      spaceID: 1,
+      storyTexts: ["Outro Text"],
+      storyType: StoryElementType.Outro,
+      modelType: LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+    };
+
+    const spaceTO = systemUnderTest["toTO"](spaceEntity);
+
+    expect(spaceTO.outroStory?.modelType).toStrictEqual(
+      spaceEntity.outroStory?.modelType
+    );
+    expect(spaceTO.outroStory?.storyTexts).toStrictEqual(
+      spaceEntity.outroStory?.storyTexts
+    );
+    expect(spaceTO.outroStory?.storyType).toStrictEqual(
+      spaceEntity.outroStory?.storyType
+    );
   });
 });
