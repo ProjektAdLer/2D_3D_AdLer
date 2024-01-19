@@ -7,12 +7,10 @@ import bind from "bind-decorator";
 import { Vector3 } from "@babylonjs/core";
 import IStoryElementPresenter from "~ReactComponents/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
-import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 export default class StoryNPCController implements IStoryNPCController {
   private navigation: INavigation;
   private storyElementPresenter: IStoryElementPresenter;
-  private storyType: StoryElementType = StoryElementType.Intro;
 
   constructor(private viewModel: StoryNPCViewModel) {
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
@@ -24,10 +22,8 @@ export default class StoryNPCController implements IStoryNPCController {
 
   @bind
   picked(): void {
-    if (this.viewModel.isIntro) this.storyType = StoryElementType.Intro;
-    if (this.viewModel.isOutro) this.storyType = StoryElementType.Outro;
     if (this.viewModel.isInteractable.Value) {
-      this.storyElementPresenter.open(this.storyType);
+      this.storyElementPresenter.open(this.viewModel.storyType);
     }
   }
 

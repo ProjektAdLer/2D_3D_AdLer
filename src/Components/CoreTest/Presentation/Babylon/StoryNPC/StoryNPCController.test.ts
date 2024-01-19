@@ -7,9 +7,12 @@ import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavig
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
+import IStoryElementPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
+import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 
 const characterNavigatorMock = mock<CharacterNavigator>();
 const navigationMock = mockDeep<INavigation>();
+const storyElementPresenterMock = mockDeep<IStoryElementPresenter>();
 
 describe("StoryNPCController", () => {
   let systemUnderTest: StoryNPCController;
@@ -22,7 +25,7 @@ describe("StoryNPCController", () => {
     );
     CoreDIContainer.bind(
       PRESENTATION_TYPES.IStoryElementPresenter
-    ).toConstantValue(mock());
+    ).toConstantValue(storyElementPresenterMock);
   });
 
   beforeEach(() => {
@@ -35,7 +38,23 @@ describe("StoryNPCController", () => {
     CoreDIContainer.restore();
   });
 
-  test.todo("picked");
+  test("picked calls open on the storyElementPresenter when isInteractable is true", () => {
+    viewModel.isInteractable.Value = true;
+    viewModel.storyType = StoryElementType.Intro;
+
+    systemUnderTest.picked();
+
+    expect(storyElementPresenterMock.open).toBeCalledTimes(1);
+    expect(storyElementPresenterMock.open).toBeCalledWith(viewModel.storyType);
+  });
+
+  test("picked doesn't call open on the storyElementPresenter when isInteractable is false", () => {
+    viewModel.isInteractable.Value = false;
+
+    systemUnderTest.picked();
+
+    expect(storyElementPresenterMock.open).not.toBeCalled();
+  });
 
   test("setRandomTarget calls startMovement on the characterNavigator with a target", () => {
     navigationMock.Plugin.getRandomPointAround.mockReturnValue(

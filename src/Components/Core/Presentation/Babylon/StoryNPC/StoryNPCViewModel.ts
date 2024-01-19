@@ -3,6 +3,7 @@ import { LearningElementModel } from "../../../Domain/LearningElementModels/Lear
 import ICharacterNavigator from "../CharacterNavigator/ICharacterNavigator";
 import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
 import Observable from "../../../../../Lib/Observable";
+import { StoryElementType } from "../../../Domain/Types/StoryElementType";
 
 export default class StoryNPCViewModel {
   characterNavigator: ICharacterNavigator;
@@ -11,10 +12,7 @@ export default class StoryNPCViewModel {
   modelMeshes: Mesh[];
   iconMeshes: Mesh[];
   parentNode: TransformNode;
-
-  isIntro: boolean = false;
-  isOutro: boolean = false;
-  isInCutScene: boolean = false;
+  storyType: StoryElementType;
 
   readonly iconYOffset: number = 2.3;
   readonly movementRange: number = 5; // in m

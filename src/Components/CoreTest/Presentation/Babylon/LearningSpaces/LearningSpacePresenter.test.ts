@@ -18,6 +18,8 @@ import StandInDecorationBuilder from "../../../../Core/Presentation/Babylon/Stan
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 import SeededRNG from "../../../../Core/Presentation/Utils/SeededRNG";
 import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
+import IStoryNPCBuilder from "../../../../Core/Presentation/Babylon/StoryNPC/IStoryNPCBuilder";
+import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 
 const directorMock = mock<IPresentationDirector>();
 const decorationBuilderMock = mock<DecorationBuilder>();
@@ -26,6 +28,7 @@ const windowBuilderMock = mock<WindowBuilder>();
 const elementBuilderMock = mock<LearningElementBuilder>();
 const standinBuilderMock = mock<StandInDecorationBuilder>();
 const worldPortMock = mock<ILearningWorldPort>();
+const storyNPCBuilderMock = mock<IStoryNPCBuilder>();
 
 jest.mock("../../../../Core/Presentation/Utils/SeededRNG");
 
@@ -52,12 +55,15 @@ const spaceTO: LearningSpaceTO = {
       parentWorldID: 1,
       model: LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard,
       theme: LearningSpaceThemeType.Campus,
+      isScoreable: true,
     },
   ],
   requirementsSyntaxTree: null,
   isAvailable: true,
   template: LearningSpaceTemplateType.L,
   theme: LearningSpaceThemeType.Campus,
+  introStory: null,
+  outroStory: null,
 };
 
 describe("LearningSpacePresenter", () => {
@@ -88,6 +94,9 @@ describe("LearningSpacePresenter", () => {
     CoreDIContainer.rebind<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
     ).toConstantValue(worldPortMock);
+    CoreDIContainer.rebind<IStoryNPCBuilder>(
+      BUILDER_TYPES.IStoryNPCBuilder
+    ).toConstantValue(storyNPCBuilderMock);
   });
 
   beforeEach(() => {
@@ -260,5 +269,39 @@ describe("LearningSpacePresenter", () => {
 
     expect(directorMock.buildAsync).toHaveBeenCalledTimes(2);
     expect(directorMock.buildAsync).toHaveBeenCalledWith(windowBuilderMock);
+  });
+
+  test("createStoryNPC creates a storyNPC with its builder when introStory is set", async () => {
+    await systemUnderTest["createStoryNPCs"]({
+      ...spaceTO,
+      introStory: {
+        storyTexts: ["test"],
+        storyType: StoryElementType.Intro,
+        modelType:
+          LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+      },
+    });
+
+    expect(directorMock.buildAsync).toHaveBeenCalledTimes(1);
+    expect(directorMock.buildAsync).toHaveBeenCalledWith(storyNPCBuilderMock);
+
+    expect(storyNPCBuilderMock.storyType).toBe(StoryElementType.Intro);
+  });
+
+  test("createStoryNPC creates a storyNPC with its builder when outroStory is set", async () => {
+    await systemUnderTest["createStoryNPCs"]({
+      ...spaceTO,
+      outroStory: {
+        storyTexts: ["test"],
+        storyType: StoryElementType.Outro,
+        modelType:
+          LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+      },
+    });
+
+    expect(directorMock.buildAsync).toHaveBeenCalledTimes(1);
+    expect(directorMock.buildAsync).toHaveBeenCalledWith(storyNPCBuilderMock);
+
+    expect(storyNPCBuilderMock.storyType).toBe(StoryElementType.Outro);
   });
 });

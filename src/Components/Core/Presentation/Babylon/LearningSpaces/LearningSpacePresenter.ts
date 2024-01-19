@@ -15,9 +15,8 @@ import { Vector3 } from "@babylonjs/core/Maths/math";
 import IDoorPresenter from "../Door/IDoorPresenter";
 import ILearningElementPresenter from "../LearningElements/ILearningElementPresenter";
 import IStoryNPCPresenter from "../StoryNPC/IStoryNPCPresenter";
-
-// import IStoryNPCBuilder from "../StoryNPC/IStoryNPCBuilder";
-// import { LearningElementModelTypeEnums } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
+import IStoryNPCBuilder from "../StoryNPC/IStoryNPCBuilder";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
@@ -47,7 +46,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     if (this.viewModel.entryDoorPosition) await this.createEntryDoor();
     this.decorationBuilder.spaceTemplate = spaceTO.template;
     await this.director.buildAsync(this.decorationBuilder);
-    await this.createStoryNPCs();
+    await this.createStoryNPCs(spaceTO);
   }
 
   broadcastAvatarPosition(position: Vector3, interactionRadius: number): void {
@@ -162,14 +161,24 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     await Promise.all(loadingWindowPromises);
   }
 
-  private async createStoryNPCs(): Promise<void> {
-    // TODO: implement this
-    // const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
-    //   BUILDER_TYPES.IStoryNPCBuilder
-    // );
-    // storyNPCBuilder.modelType =
-    //   LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC;
-    // await this.director.buildAsync(storyNPCBuilder);
-    // this.storyNPCPresenters = storyNPCBuilder.getPresenter();
+  private async createStoryNPCs(spaceTO: LearningSpaceTO): Promise<void> {
+    if (spaceTO.introStory || spaceTO.outroStory) {
+      const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
+        BUILDER_TYPES.IStoryNPCBuilder
+      );
+
+      storyNPCBuilder.modelType =
+        spaceTO.introStory?.modelType! ?? spaceTO.outroStory?.modelType!;
+
+      storyNPCBuilder.storyType = StoryElementType.None;
+      if (spaceTO.introStory)
+        storyNPCBuilder.storyType |= StoryElementType.Intro;
+      if (spaceTO.outroStory)
+        storyNPCBuilder.storyType |= StoryElementType.Outro;
+
+      await this.director.buildAsync(storyNPCBuilder);
+
+      this.storyNPCPresenters = storyNPCBuilder.getPresenter();
+    }
   }
 }
