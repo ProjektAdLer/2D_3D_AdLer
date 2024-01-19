@@ -11,8 +11,10 @@ export default class StoryNPCViewModel {
   modelMeshes: Mesh[];
   iconMeshes: Mesh[];
   parentNode: TransformNode;
+
   isIntro: boolean = false;
   isOutro: boolean = false;
+  isInCutScene: boolean = false;
 
   readonly iconYOffset: number = 2.3;
   readonly movementRange: number = 5; // in m
