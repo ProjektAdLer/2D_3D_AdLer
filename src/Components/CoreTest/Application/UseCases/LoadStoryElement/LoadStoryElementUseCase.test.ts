@@ -10,6 +10,7 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import StoryElementEntity from "../../../../Core/Domain/Entities/StoryElementEntity";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import StoryElementTextTO from "../../../../Core/Application/DataTransferObjects/StoryElementTextTO";
+import LearningSpaceEntity from "../../../../Core/Domain/Entities/LearningSpaceEntity";
 
 const worldPortMock = mock<ILearningWorldPort>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
@@ -17,6 +18,7 @@ const entityContainerMock = mock<IEntityContainer>();
 
 describe("LoadStoryElementUseCase", () => {
   let systemUnderTest: LoadStoryElementUseCase;
+
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
@@ -32,11 +34,13 @@ describe("LoadStoryElementUseCase", () => {
       entityContainerMock
     );
   });
-  afterAll(() => {
-    CoreDIContainer.restore();
-  });
+
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(LoadStoryElementUseCase);
+  });
+
+  afterAll(() => {
+    CoreDIContainer.restore();
   });
 
   test("should throw, if user is not in learningspace", async () => {
@@ -45,12 +49,12 @@ describe("LoadStoryElementUseCase", () => {
       spaceID: undefined,
     });
 
-    await expect(
-      systemUnderTest.executeAsync(StoryElementType.Intro)
-    ).rejects.toThrow("User is not in a space");
+    await expect(() => systemUnderTest.execute()).toThrow(
+      "User is not in a space"
+    );
   });
 
-  test("should throw, if more than 2 story-elements are found", async () => {
+  test("should throw, if more than one space is found", () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
       spaceID: 1,
@@ -77,12 +81,12 @@ describe("LoadStoryElementUseCase", () => {
       } as StoryElementEntity,
     ]);
 
-    await expect(
-      systemUnderTest.executeAsync(StoryElementType.Intro)
-    ).rejects.toThrow("Found more than two stories with spaceID");
+    expect(() => systemUnderTest.execute()).toThrow(
+      "Found more than one space with spaceID"
+    );
   });
 
-  test("should throw if no story entities are found", async () => {
+  test("should throw if no space entities are found", () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
       spaceID: 1,
@@ -90,12 +94,12 @@ describe("LoadStoryElementUseCase", () => {
 
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 
-    await expect(
-      systemUnderTest.executeAsync(StoryElementType.Intro)
-    ).rejects.toThrow("Could not find a story in space with spaceID");
+    expect(() => systemUnderTest.execute()).toThrow(
+      "Could not find a space with spaceID"
+    );
   });
 
-  test("calls onStoryElementLoaded Port with intro text only in TO", async () => {
+  test("calls onStoryElementLoaded Port with story texts", () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
       spaceID: 1,
@@ -103,76 +107,23 @@ describe("LoadStoryElementUseCase", () => {
 
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
-        spaceID: 1,
-        storyTexts: ["intro"],
-        modelType: "a_npc_defaultnpc",
-        storyType: StoryElementType.Intro,
-      } as StoryElementEntity,
-      {
-        spaceID: 1,
-        storyTexts: ["outro"],
-        modelType: "a_npc_defaultnpc",
-        storyType: StoryElementType.Outro,
-      } as StoryElementEntity,
+        introStory: {
+          spaceID: 1,
+          storyTexts: ["intro"],
+          modelType: "a_npc_defaultnpc",
+          storyType: StoryElementType.Intro,
+        } as StoryElementEntity,
+        outroStory: {
+          spaceID: 1,
+          storyTexts: ["outro"],
+          modelType: "a_npc_defaultnpc",
+          storyType: StoryElementType.Outro,
+        } as StoryElementEntity,
+      } as LearningSpaceEntity,
     ]);
 
-    await systemUnderTest.executeAsync(StoryElementType.Intro);
-    expect(worldPortMock.onStoryElementLoaded).toHaveBeenCalledWith({
-      introTexts: ["intro"],
-      outroTexts: undefined,
-    } as StoryElementTextTO);
-  });
+    systemUnderTest.execute();
 
-  test("calls onStoryElementLoaded Port with outro text only in TO", async () => {
-    getUserLocationUseCaseMock.execute.mockReturnValue({
-      worldID: 1,
-      spaceID: 1,
-    });
-
-    entityContainerMock.filterEntitiesOfType.mockReturnValue([
-      {
-        spaceID: 1,
-        storyTexts: ["intro"],
-        modelType: "a_npc_defaultnpc",
-        storyType: StoryElementType.Intro,
-      } as StoryElementEntity,
-      {
-        spaceID: 1,
-        storyTexts: ["outro"],
-        modelType: "a_npc_defaultnpc",
-        storyType: StoryElementType.Outro,
-      } as StoryElementEntity,
-    ]);
-
-    await systemUnderTest.executeAsync(StoryElementType.Outro);
-    expect(worldPortMock.onStoryElementLoaded).toHaveBeenCalledWith({
-      introTexts: undefined,
-      outroTexts: ["outro"],
-    } as StoryElementTextTO);
-  });
-
-  test("calls onStoryElementLoaded Port with intro and outro text in TO", async () => {
-    getUserLocationUseCaseMock.execute.mockReturnValue({
-      worldID: 1,
-      spaceID: 1,
-    });
-
-    entityContainerMock.filterEntitiesOfType.mockReturnValue([
-      {
-        spaceID: 1,
-        storyTexts: ["intro"],
-        modelType: "a_npc_defaultnpc",
-        storyType: StoryElementType.Intro,
-      } as StoryElementEntity,
-      {
-        spaceID: 1,
-        storyTexts: ["outro"],
-        modelType: "a_npc_defaultnpc",
-        storyType: StoryElementType.Outro,
-      } as StoryElementEntity,
-    ]);
-
-    await systemUnderTest.executeAsync(StoryElementType.IntroOutro);
     expect(worldPortMock.onStoryElementLoaded).toHaveBeenCalledWith({
       introTexts: ["intro"],
       outroTexts: ["outro"],
