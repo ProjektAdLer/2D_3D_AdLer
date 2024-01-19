@@ -68,7 +68,7 @@ export default class LoadStoryElementUseCase
       storyType === LoadStoryElementType.IntroOutro
     ) {
       storyTO.introTexts = storyEntities.find((e) => {
-        return e.type === StoryElementType.Intro;
+        return e.storyType === StoryElementType.Intro;
       })?.storyTexts;
 
       this.logger.log(
@@ -82,7 +82,7 @@ export default class LoadStoryElementUseCase
       storyType === LoadStoryElementType.IntroOutro
     ) {
       storyTO.outroTexts = storyEntities.find((e) => {
-        return e.type === StoryElementType.Outro;
+        return e.storyType === StoryElementType.Outro;
       })?.storyTexts;
 
       this.logger.log(
