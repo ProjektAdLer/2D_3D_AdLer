@@ -7,10 +7,9 @@ import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
-import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElementEntity";
 import StoryElementTextTO from "../../DataTransferObjects/StoryElementTextTO";
-import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import LearningSpaceEntity from "src/Components/Core/Domain/Entities/LearningSpaceEntity";
 
 @injectable()
 export default class LoadStoryElementUseCase
@@ -27,71 +26,62 @@ export default class LoadStoryElementUseCase
     private worldPort: ILearningWorldPort
   ) {}
 
-  async executeAsync(storyType: StoryElementType): Promise<void> {
+  execute(): void {
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
+      this.logger.log(LogLevelTypes.ERROR, `User is not in a space!`);
       throw new Error(`User is not in a space!`);
     }
 
-    const storyEntities =
-      this.entityContainter.filterEntitiesOfType<StoryElementEntity>(
-        StoryElementEntity,
+    const learningSpaceEntity = this.getLearningSpaceEntity(
+      userLocation.worldID,
+      userLocation.spaceID
+    );
+    const storyTO = this.createStoryTextTO(learningSpaceEntity);
+
+    this.worldPort.onStoryElementLoaded(storyTO);
+  }
+
+  private getLearningSpaceEntity(
+    worldID: number,
+    spaceID: number
+  ): LearningSpaceEntity {
+    const learningSpaceEntities =
+      this.entityContainter.filterEntitiesOfType<LearningSpaceEntity>(
+        LearningSpaceEntity,
         (entity) => {
-          return entity.spaceID === userLocation.spaceID;
+          return entity.parentWorldID === worldID && entity.id === spaceID;
         }
       );
 
     // throw expeciton if no entities found
-    if (storyEntities.length === 0) {
+    if (learningSpaceEntities.length === 0) {
       this.logger.log(
         LogLevelTypes.ERROR,
-        `Could not find a story in space with spaceID ${userLocation.spaceID} in world ${userLocation.worldID}`
+        `Could not find a space with spaceID ${spaceID} in world ${worldID}`
       );
       throw new Error(
-        `Could not find a story in space with spaceID ${userLocation.spaceID} in world ${userLocation.worldID}`
+        `Could not find a space with spaceID ${spaceID} in world ${worldID}`
       );
-    } else if (storyEntities.length > 2) {
+    } else if (learningSpaceEntities.length > 1) {
       this.logger.log(
         LogLevelTypes.ERROR,
-        `Found more than two stories with spaceID ${userLocation.spaceID} in world ${userLocation.worldID}`
+        `Found more than one space with spaceID ${spaceID} in world ${worldID}`
       );
       throw new Error(
-        `Found more than two stories with spaceID ${userLocation.spaceID} in world ${userLocation.worldID}`
+        `Found more than one space with spaceID ${spaceID} in world ${worldID}`
       );
     }
 
+    return learningSpaceEntities[0];
+  }
+
+  private createStoryTextTO(
+    LearningSpaceEntity: LearningSpaceEntity
+  ): StoryElementTextTO {
     let storyTO = new StoryElementTextTO();
-
-    if (
-      storyType === StoryElementType.Intro ||
-      storyType === StoryElementType.IntroOutro
-    ) {
-      storyTO.introTexts = storyEntities.find((e) => {
-        return e.storyType === StoryElementType.Intro;
-      })?.storyTexts;
-
-      this.logger.log(
-        LogLevelTypes.TRACE,
-        `Loaded intro story in space ${userLocation.spaceID}`
-      );
-    }
-
-    if (
-      storyType === StoryElementType.Outro ||
-      storyType === StoryElementType.IntroOutro
-    ) {
-      storyTO.outroTexts = storyEntities.find((e) => {
-        return e.storyType === StoryElementType.Outro;
-      })?.storyTexts;
-
-      this.logger.log(
-        LogLevelTypes.TRACE,
-        `Loaded outro story in space ${userLocation.spaceID}`
-      );
-    }
-
-    this.worldPort.onStoryElementLoaded(storyTO);
-
-    return Promise.resolve();
+    storyTO.introTexts = LearningSpaceEntity.introStory?.storyTexts;
+    storyTO.outroTexts = LearningSpaceEntity.outroStory?.storyTexts;
+    return storyTO;
   }
 }

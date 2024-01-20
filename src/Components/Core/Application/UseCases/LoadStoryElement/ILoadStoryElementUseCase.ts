@@ -1,5 +1,3 @@
-import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
-import { IAsyncUsecase } from "../../Abstract/IAsyncUsecase";
+import { ISynchronousUsecase } from "../../Abstract/ISynchronousUsecase";
 
-export default interface ILoadStoryElementUseCase
-  extends IAsyncUsecase<StoryElementType, void> {}
+export default interface ILoadStoryElementUseCase extends ISynchronousUsecase {}
