@@ -1,6 +1,9 @@
 import bind from "bind-decorator";
 import IStoryElementController from "./IStoryElementController";
 import StoryElementViewModel from "./StoryElementViewModel";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import IEndStoryElementCutScene from "src/Components/Core/Application/UseCases/EndStoryElementCutScene/IEndStoryElementCutScene";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 export default class StoryElementController implements IStoryElementController {
   constructor(private viewModel: StoryElementViewModel) {}
@@ -8,7 +11,11 @@ export default class StoryElementController implements IStoryElementController {
   @bind
   closePanel(): void {
     this.viewModel.isOpen.Value = false;
+    CoreDIContainer.get<IEndStoryElementCutScene>(
+      USECASE_TYPES.IEndStoryElementCutScene
+    ).execute();
   }
+
   @bind
   increasePageId(): void {
     this.viewModel.pageId.Value++;
