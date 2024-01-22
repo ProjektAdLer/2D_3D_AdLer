@@ -56,4 +56,5 @@ export default interface ILearningWorldAdapter {
 
   // story
   onStoryElementLoaded?(storyElementTextTO: StoryElementTextTO): void;
+  onStoryElementCutSceneTriggered?(enableInput: boolean): void;
 }

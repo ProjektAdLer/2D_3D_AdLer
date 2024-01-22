@@ -147,4 +147,11 @@ export default class LearningWorldPort
         adapter.onStoryElementLoaded(storyelementTextTO);
     });
   }
+
+  public onStoryElementCutSceneTriggered(enableInput: boolean): void {
+    this.adapters.forEach((adapter) => {
+      if (adapter.onStoryElementCutSceneTriggered)
+        adapter.onStoryElementCutSceneTriggered(enableInput);
+    });
+  }
 }
