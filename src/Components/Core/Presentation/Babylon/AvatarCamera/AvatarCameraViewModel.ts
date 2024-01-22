@@ -17,4 +17,6 @@ export default class AvatarCameraViewModel {
   wheelDeltaPercentage: number = 0.01;
   upperBetaLimit: number = Math.PI / 3;
   rotationButtons: number[] = [0];
+
+  enableUserInput: Observable<boolean> = new Observable<boolean>(true);
 }
