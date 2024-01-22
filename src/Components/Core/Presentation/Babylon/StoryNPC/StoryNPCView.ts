@@ -160,14 +160,14 @@ export default class StoryNPCView {
     );
     this.viewModel.characterNavigator.IsReady.then(() => {
       // NPC faces door
-      const negatedOffset = this.viewModel.positionOffset.negate();
-      let desiredRotation = Math.atan2(negatedOffset.x, negatedOffset.z);
-      this.viewModel.parentNode.rotationQuaternion = Quaternion.RotationAxis(
-        Axis.Y,
-        desiredRotation
-      );
-
-      this.controller.setRandomMovementTarget();
+      // const negatedOffset = this.viewModel.positionOffset.negate();
+      // negatedOffset.normalize();
+      // let desiredRotation = Math.atan2(negatedOffset.x, negatedOffset.z);
+      // this.viewModel.parentNode.rotationQuaternion = Quaternion.RotationAxis(
+      //   Axis.Y,
+      //   desiredRotation
+      // );
+      this.controller.setRandomMovementTarget(); // enable this based on storytype
     });
   }
 }

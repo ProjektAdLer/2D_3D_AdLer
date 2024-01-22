@@ -21,6 +21,9 @@ export default class StoryNPCController implements IStoryNPCController {
     this.viewModel.isInCutScene.subscribe((b: boolean) => {
       this.checkRandomTarget(b);
     });
+    this.viewModel.isInteractable.subscribe((b: boolean) => {
+      this.checkCutSceneModalOpen(b);
+    });
   }
 
   @bind
@@ -33,6 +36,15 @@ export default class StoryNPCController implements IStoryNPCController {
   private checkRandomTarget(isInCutScene: boolean) {
     if (!isInCutScene) {
       this.setRandomMovementTarget();
+    }
+  }
+
+  private checkCutSceneModalOpen(isInCutScene: boolean) {
+    if (
+      this.viewModel.isInCutScene.Value &&
+      this.viewModel.isInteractable.Value
+    ) {
+      this.storyElementPresenter.open(this.viewModel.storyType);
     }
   }
 
@@ -52,6 +64,8 @@ export default class StoryNPCController implements IStoryNPCController {
       distance = Vector3.Distance(target, this.viewModel.parentNode.position);
     } while (distance < this.viewModel.minMovementDistance);
 
+    console.log("current pos: ", this.viewModel.parentNode.position);
+    console.log("target pos: ", target);
     this.viewModel.characterNavigator.startMovement(
       target,
       this.startIdleTimeout

@@ -15,7 +15,7 @@ export default class StoryNPCViewModel {
   parentNode: TransformNode;
   storyType: StoryElementType;
   isInCutScene: Observable<boolean> = new Observable<boolean>(false, false);
-  outroCutSceneAlreadyPlayed: boolean = false;
+  //outroCutSceneAlreadyPlayed: boolean = false;
 
   readonly positionOffset: Vector3 = new Vector3(0, 0, 6);
 
@@ -28,5 +28,5 @@ export default class StoryNPCViewModel {
   readonly minMovementDistance: number = 2; // in m
   readonly idleTime: number = 4000; // in ms
 
-  public isInteractable = new Observable<boolean>(false, true);
+  public isInteractable = new Observable<boolean>(false);
 }

@@ -14,9 +14,9 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
 
     this.viewModel.avatarPosition = position;
 
-    if (distance <= interactionRadius)
+    if (distance <= interactionRadius) {
       this.viewModel.isInteractable.Value = true;
-    else this.viewModel.isInteractable.Value = false;
+    } else this.viewModel.isInteractable.Value = false;
   }
 
   onStoryElementCutSceneTriggered(enableInput: boolean): void {
@@ -25,10 +25,19 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
       return;
     }
 
+    let movementVector = this.viewModel.avatarPosition.subtract(
+      this.viewModel.parentNode.position
+    );
+    movementVector.normalize();
+    movementVector = movementVector.scale(1.5);
+    const target = this.viewModel.avatarPosition.subtract(movementVector);
+
+    // go to avatar
     setTimeout(() => {
-      this.viewModel.characterNavigator.startMovement(
-        this.viewModel.avatarPosition.add(new Vector3(0, 0, 1.5))
-      );
+      this.viewModel.characterNavigator.startMovement(target, () => {
+        this.viewModel.isInteractable.Value = true; // trigger observer
+        this.viewModel.isInteractable.Value = false; // reset
+      });
     }, 3000);
   }
 
