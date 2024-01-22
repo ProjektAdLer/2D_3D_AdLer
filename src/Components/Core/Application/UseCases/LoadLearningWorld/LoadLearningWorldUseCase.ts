@@ -241,11 +241,13 @@ export default class LoadLearningWorldUseCase
             parentWorldID: worldID,
             introStory: this.createStoryElementEntityOrNull(
               space.introStory,
+              worldID,
               space.id,
               StoryElementType.Intro
             ),
             outroStory: this.createStoryElementEntityOrNull(
               space.outroStory,
+              worldID,
               space.id,
               StoryElementType.Outro
             ),
@@ -260,14 +262,16 @@ export default class LoadLearningWorldUseCase
 
   private createStoryElementEntityOrNull(
     storyElement: BackendStoryTO | null,
-    id: number,
+    worldId: number,
+    spaceId: number,
     storyType: StoryElementType
   ): StoryElementEntity | null {
     if (storyElement === null) return null;
 
     let storyElementEntity = this.container.createEntity<StoryElementEntity>(
       {
-        spaceID: id,
+        worldID: worldId,
+        spaceID: spaceId,
         storyTexts: storyElement.storyTexts,
         modelType: storyElement.elementModel,
         storyType: storyType,
