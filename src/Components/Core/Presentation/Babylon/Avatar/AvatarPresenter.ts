@@ -16,6 +16,10 @@ export default class AvatarPresenter implements IAvatarPresenter {
     this.viewModel = newViewModel;
   }
 
+  onStoryElementCutSceneTriggered(enableInput: boolean): void {
+    this.viewModel.inputEnabled.Value = enableInput;
+  }
+
   public onLearningElementLoaded(learningElementTO: LearningElementTO): void {
     this.viewModel.characterAnimator.transition(
       CharacterAnimationActions.InteractionStarted

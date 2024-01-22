@@ -52,6 +52,10 @@ export default class AvatarController implements IAvatarController {
 
   @bind
   private applyInputs(): void {
+    if (!this.viewModel.inputEnabled.Value) {
+      return;
+    }
+
     if (this.keyMovementTarget !== null) {
       this.viewModel.movementTarget.Value = this.keyMovementTarget;
       this.viewModel.characterNavigator.startMovement(
