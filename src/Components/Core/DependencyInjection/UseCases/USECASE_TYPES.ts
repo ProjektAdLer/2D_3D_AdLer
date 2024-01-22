@@ -54,6 +54,10 @@ const USECASE_TYPES = {
   IDisplayLearningElementUseCase: Symbol("IDisplayLearningElementUseCase"),
   ILogoutUseCase: Symbol("ILogoutUseCase"),
   ILoadStoryElementUseCase: Symbol("ILoadStoryElementUseCase"),
+  IBeginStoryElementCutSceneUseCase: Symbol(
+    "IBeginStoryElementCutSceneUseCase"
+  ),
+  IEndStoryElementCutScene: Symbol("IEndStoryElementCutScene"),
 };
 
 export default USECASE_TYPES;

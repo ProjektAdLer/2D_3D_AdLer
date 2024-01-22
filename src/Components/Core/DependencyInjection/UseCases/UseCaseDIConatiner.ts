@@ -58,6 +58,10 @@ import ISetWorldCompletionModalToShownUseCase from "../../Application/UseCases/S
 import SetWorldCompletionModalToShownUseCase from "../../Application/UseCases/SetWorldCompletionModalToShown/SetWorldCompletionModalToShownUseCase";
 import ILoadStoryElementUseCase from "../../Application/UseCases/LoadStoryElement/ILoadStoryElementUseCase";
 import LoadStoryElementUseCase from "../../Application/UseCases/LoadStoryElement/LoadStoryElementUseCase";
+import IBeginStoryElementCutSceneUseCase from "../../Application/UseCases/BeginStoryElementCutScene/IBeginStoryElementCutSceneUseCase";
+import BeginStoryElementCutSceneUseCase from "../../Application/UseCases/BeginStoryElementCutScene/BeginStoryElementCutSceneUseCase";
+import IEndStoryElementCutScene from "../../Application/UseCases/EndStoryElementCutScene/IEndStoryElementCutScene";
+import EndStoryElementCutScene from "../../Application/UseCases/EndStoryElementCutScene/EndStoryElementCutScene";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -207,6 +211,16 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<ILoadStoryElementUseCase>(USECASE_TYPES.ILoadStoryElementUseCase)
     .to(LoadStoryElementUseCase)
+    .inSingletonScope();
+
+  bind<IBeginStoryElementCutSceneUseCase>(
+    USECASE_TYPES.IBeginStoryElementCutSceneUseCase
+  )
+    .to(BeginStoryElementCutSceneUseCase)
+    .inSingletonScope();
+
+  bind<IEndStoryElementCutScene>(USECASE_TYPES.IEndStoryElementCutScene)
+    .to(EndStoryElementCutScene)
     .inSingletonScope();
 });
 
