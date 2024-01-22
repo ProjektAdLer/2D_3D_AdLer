@@ -23,7 +23,12 @@ export default class DoorPresenter implements IDoorPresenter {
       spaceScoreTO.spaceID === this.viewModel.spaceID &&
       this.viewModel.isExit &&
       spaceScoreTO.currentScore >= spaceScoreTO.requiredScore
-    )
+    ) {
       this.viewModel.isOpen.Value = true;
+    }
+  }
+
+  onStoryElementCutSceneTriggered(enableInput: boolean): void {
+    this.viewModel.isInputEnabled.Value = enableInput;
   }
 }

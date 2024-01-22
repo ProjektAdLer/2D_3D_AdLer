@@ -12,4 +12,5 @@ export default class DoorViewModel {
   public isInteractable: Observable<boolean> = new Observable<boolean>(false);
   public isExit: boolean;
   public spaceID: ComponentID;
+  public isInputEnabled: Observable<boolean> = new Observable<boolean>(true);
 }

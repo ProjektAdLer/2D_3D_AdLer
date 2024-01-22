@@ -3,4 +3,5 @@ import ILearningWorldAdapter from "src/Components/Core/Application/Ports/Learnin
 
 export default interface IDoorPresenter extends ILearningWorldAdapter {
   onAvatarPositionChanged(position: Vector3, interactionRadius: number): void;
+  onStoryElementCutSceneTriggered(enableInput: boolean): void;
 }
