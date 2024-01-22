@@ -8,6 +8,7 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import {
   ActionManager,
   AnimationGroup,
+  Axis,
   ExecuteCodeAction,
   Mesh,
   Quaternion,
@@ -20,6 +21,8 @@ import { config } from "src/config";
 import IStoryNPCController from "./IStoryNPCController";
 
 import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb";
+import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
+import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
 const modelLink = require("../../../../../Assets/3dModels/sharedModels/3DModel_Avatar_male.glb"); // TODO: remove this when NPC models are ready
 
 export default class StoryNPCView {
@@ -43,6 +46,7 @@ export default class StoryNPCView {
     this.createParentNode();
     this.setupModel();
     this.setupInteractions();
+    this.determineSpawnLocation();
     this.createNPCAnimator();
     this.createNPCNavigator();
   }
@@ -90,6 +94,7 @@ export default class StoryNPCView {
   }
 
   private createParentNode(): void {
+    console.log("is in Cutscene: ", this.viewModel.isInCutScene);
     this.viewModel.parentNode = new TransformNode(
       "NPCParentNode",
       this.scenePresenter.Scene
@@ -115,6 +120,29 @@ export default class StoryNPCView {
     );
   }
 
+  private determineSpawnLocation(): void {
+    // nearly identical as in AvatarView.ts
+    let spawnLocation;
+    if (
+      this.viewModel.learningSpaceTemplateType ===
+      LearningSpaceTemplateType.None
+    ) {
+      spawnLocation = new Vector3(0, 0, 0);
+    } else {
+      let spawnPoint = LearningSpaceTemplateLookup.getLearningSpaceTemplate(
+        this.viewModel.learningSpaceTemplateType
+      ).playerSpawnPoint;
+      spawnLocation = new Vector3(
+        spawnPoint.position.x,
+        0,
+        spawnPoint.position.y
+      );
+    }
+    // TODO test for all LearningSpaceTemplates
+    spawnLocation = spawnLocation.add(this.viewModel.positionOffset);
+    this.viewModel.parentNode.position = spawnLocation;
+  }
+
   private createNPCAnimator(): void {
     this.viewModel.characterAnimator = new CharacterAnimator(
       () => this.viewModel.characterNavigator.CharacterVelocity,
@@ -131,6 +159,14 @@ export default class StoryNPCView {
       config.isDebug
     );
     this.viewModel.characterNavigator.IsReady.then(() => {
+      // NPC faces door
+      const negatedOffset = this.viewModel.positionOffset.negate();
+      let desiredRotation = Math.atan2(negatedOffset.x, negatedOffset.z);
+      this.viewModel.parentNode.rotationQuaternion = Quaternion.RotationAxis(
+        Axis.Y,
+        desiredRotation
+      );
+
       this.controller.setRandomMovementTarget();
     });
   }

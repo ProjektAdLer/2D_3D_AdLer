@@ -18,6 +18,9 @@ export default class StoryNPCController implements IStoryNPCController {
     this.storyElementPresenter = CoreDIContainer.get<IStoryElementPresenter>(
       PRESENTATION_TYPES.IStoryElementPresenter
     );
+    this.viewModel.isInCutScene.subscribe((b: boolean) => {
+      this.checkRandomTarget(b);
+    });
   }
 
   @bind
@@ -27,8 +30,18 @@ export default class StoryNPCController implements IStoryNPCController {
     }
   }
 
+  private checkRandomTarget(isInCutScene: boolean) {
+    if (!isInCutScene) {
+      this.setRandomMovementTarget();
+    }
+  }
+
   @bind
   setRandomMovementTarget(): void {
+    if (this.viewModel.isInCutScene.Value) {
+      return;
+    }
+
     let target: Vector3;
     let distance: number = 0;
     do {
