@@ -8,6 +8,8 @@ import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUse
 import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElementEntity";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILearningWorldPort from "../../Ports/Interfaces/ILearningWorldPort";
+import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 @injectable()
 export default class BeginStoryElementCutSceneUseCase
@@ -20,11 +22,13 @@ export default class BeginStoryElementCutSceneUseCase
     private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
+    @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
+    private calculateLearningSpaceScoreUseCase: IInternalCalculateLearningSpaceScoreUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort
   ) {}
 
-  execute(): void {
+  execute(storyType: StoryElementType): void {
     const userLocation = this.getUserLocationUseCase.execute();
 
     const elements =
@@ -37,6 +41,17 @@ export default class BeginStoryElementCutSceneUseCase
 
     if (elements.length === 0) return;
 
-    this.worldPort.onStoryElementCutSceneTriggered(false);
+    const spaceScore = this.calculateLearningSpaceScoreUseCase.internalExecute({
+      spaceID: elements[0].spaceID,
+      worldID: elements[0].worldID,
+    });
+
+    if (
+      (spaceScore.currentScore === 0 && storyType === StoryElementType.Intro) ||
+      (spaceScore.currentScore >= spaceScore.requiredScore &&
+        storyType === StoryElementType.Outro) // not really correct
+    ) {
+      this.worldPort.onStoryElementCutSceneTriggered(false);
+    }
   }
 }

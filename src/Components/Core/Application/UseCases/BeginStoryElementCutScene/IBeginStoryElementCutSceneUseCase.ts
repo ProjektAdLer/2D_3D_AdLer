@@ -1,4 +1,5 @@
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import { ISynchronousUsecase } from "../../Abstract/ISynchronousUsecase";
 
 export default interface IBeginStoryElementCutSceneUseCase
-  extends ISynchronousUsecase<void, void> {}
+  extends ISynchronousUsecase<StoryElementType, void> {}
