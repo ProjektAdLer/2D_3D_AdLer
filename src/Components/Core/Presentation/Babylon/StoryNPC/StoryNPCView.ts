@@ -23,6 +23,7 @@ import IStoryNPCController from "./IStoryNPCController";
 import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 const modelLink = require("../../../../../Assets/3dModels/sharedModels/3DModel_Avatar_male.glb"); // TODO: remove this when NPC models are ready
 
 export default class StoryNPCView {
@@ -167,7 +168,9 @@ export default class StoryNPCView {
       //   Axis.Y,
       //   desiredRotation
       // );
-      this.controller.setRandomMovementTarget(); // enable this based on storytype
+      if (this.viewModel.storyType === StoryElementType.Outro) {
+        this.controller.setRandomMovementTarget();
+      }
     });
   }
 }
