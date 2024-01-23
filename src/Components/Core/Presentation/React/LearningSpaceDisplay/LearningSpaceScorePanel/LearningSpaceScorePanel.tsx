@@ -58,7 +58,7 @@ export default function LearningSpaceScorePanel({
           alt="icon"
         />
 
-        <div className="absolute text-[10px] text-adlerdarkblue lg:text-[12px] font-bold leading-5 text-center">
+        <div className="absolute text-adlerdarkblue text-[8px] lg:text-[10px] xl:[12px] font-bold leading-5 text-center">
           {scoreInfo && (
             <div>
               {translate("spaceScore", {

@@ -892,11 +892,11 @@ export default class MockBackendAdapter implements IBackendPort {
           spaceStory: {
             introStory: {
               storyTexts: ["Hallo", "Ich bin ein Story-Element"],
-              elementModel: "",
+              elementModel: "a_npc_defaultnpc",
             },
             outroStory: {
               storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
-              elementModel: "",
+              elementModel: "a_npc_defaultnpc",
             },
           },
         },
@@ -960,7 +960,7 @@ export default class MockBackendAdapter implements IBackendPort {
           ],
           elementFileType: "text",
           elementMaxScore: 1,
-          elementModel: "a_npc_defaultnpc",
+          elementModel: "",
           adaptivityContent: this.adaptivityData,
         },
         {

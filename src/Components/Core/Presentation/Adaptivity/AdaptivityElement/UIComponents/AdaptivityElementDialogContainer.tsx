@@ -124,142 +124,165 @@ export default function AdaptivityElementDialogContainer({
         </div>
 
         {/* Modal */}
-        <div className="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl h-full pt-2 lg:pt-0 row-start-3 ">
+        <div className="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl lg:h-[32vh] pt-2 lg:pt-0 row-start-3 ">
           <div
-            className="flex flex-col p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%]  justify-between overflow-auto"
+            className="flex flex-col justify-between p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%]   overflow-auto"
             onClick={(event) => {
               event.stopPropagation();
             }}
           >
-            {/* Header */}
-            <div className="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
-              {!(currentTask === null && currentQuestion === null) &&
-                !showAnswerFeedback && (
-                  <StyledButton
-                    onClick={controller.back}
-                    className="w-8 h-8 p-1 mr-2 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-                  >
-                    {"<"}
-                  </StyledButton>
+            <div className="overflow-auto">
+              {/* Header */}
+              <div className="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
+                {!(currentTask === null && currentQuestion === null) &&
+                  !showAnswerFeedback && (
+                    <StyledButton
+                      onClick={controller.back}
+                      className="w-8 h-8 p-1 mr-2 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+                      shape="closebutton"
+                    >
+                      {"<"}
+                    </StyledButton>
+                  )}
+
+                {currentTask === null && currentQuestion === null && (
+                  <div className="w-[50px] lg:w-[50px] bg-buttonbgblue rounded-full text-sm">
+                    <CircularProgressbarWithChildren
+                      value={progressPercentage}
+                      strokeWidth={10}
+                      styles={buildStyles({
+                        strokeLinecap: "butt",
+                        pathTransitionDuration: 1.5,
+
+                        // Colors
+                        trailColor: "#E64B17",
+                        pathColor: `#59B347`,
+                      })}
+                    >
+                      {Math.round(progressPercentage) + "%"}
+                    </CircularProgressbarWithChildren>
+                  </div>
                 )}
 
-              {currentTask === null && currentQuestion === null && (
-                <div className="w-[50px] lg:w-[50px] bg-buttonbgblue rounded-full text-sm">
-                  <CircularProgressbarWithChildren
-                    value={progressPercentage}
-                    strokeWidth={10}
-                    styles={buildStyles({
-                      strokeLinecap: "butt",
-                      pathTransitionDuration: 1.5,
+                <img
+                  className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+                  alt="LearningImage!"
+                  src={getNPCImage(model, false)}
+                ></img>
 
-                      // Colors
-                      trailColor: "#E64B17",
-                      pathColor: `#59B347`,
-                    })}
-                  >
-                    {Math.round(progressPercentage) + "%"}
-                  </CircularProgressbarWithChildren>
-                </div>
-              )}
+                <div className="w-full text-xs lg:text-lg">{headerText}</div>
 
-              <img
-                className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
-                alt="LearningImage!"
-                src={getNPCImage(model, false)}
-              ></img>
+                <StyledButton
+                  onClick={controller.closeModal}
+                  className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+                  shape="closebutton"
+                >
+                  X
+                </StyledButton>
+              </div>
 
-              <div className="w-full text-sm lg:text-lg">{headerText}</div>
-
-              <StyledButton
-                onClick={controller.closeModal}
-                className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-              >
-                X
-              </StyledButton>
-            </div>
-
-            {/* Content */}
-            <div className="overflow-auto">
-              {currentTask === null && currentQuestion === null && (
-                <div className="flex items-center justify-center px-1 mb-4 overflow-auto rounded-lg font-regular h-fit !text-sm lg:m-4">
-                  <AdaptivityElementTaskSelection
-                    tasks={contentData.tasks}
-                    setHeaderText={setHeaderText}
-                    onSelectTask={controller.selectTask}
-                  />
-                </div>
-              )}
-              {currentTask !== null && currentQuestion === null && (
-                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
-                  <AdaptivityElementQuestionSelection
-                    selectedTask={currentTask}
-                    setHeaderText={setHeaderText}
-                    onSelectQuestion={controller.selectQuestion}
-                    onSelectHint={controller.selectHint}
-                  />
-                </div>
-              )}
-
-              {currentTask !== null &&
-                currentQuestion !== null &&
-                !showAnswerFeedback &&
-                selectedHint === null && (
-                  <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
-                    <AdaptivityElementAnswerSelection
-                      question={currentQuestion}
+              {/* Content */}
+              <div className="overflow-auto">
+                {currentTask === null && currentQuestion === null && (
+                  <div className="flex items-center justify-center px-1 mb-4 overflow-auto rounded-lg font-regular h-fit !text-sm lg:m-4">
+                    <AdaptivityElementTaskSelection
+                      tasks={contentData.tasks}
                       setHeaderText={setHeaderText}
-                      submitSelection={controller.submitSelection}
-                      closeSelection={controller.closeAnswerSelection}
+                      onSelectTask={controller.selectTask}
+                    />
+                  </div>
+                )}
+                {currentTask !== null && currentQuestion === null && (
+                  <div className="flex items-center justify-center px-1 mb-4 overflow-auto rounded-lg font-regular h-fit lg:m-4">
+                    <AdaptivityElementQuestionSelection
+                      selectedTask={currentTask}
+                      setHeaderText={setHeaderText}
+                      onSelectQuestion={controller.selectQuestion}
+                      onSelectHint={controller.selectHint}
                     />
                   </div>
                 )}
 
-              {currentTask !== null &&
-                currentQuestion !== null &&
-                showAnswerFeedback &&
-                selectedHint === null && (
-                  <AdaptivityElementAnswerFeedback
-                    isCorrect={currentQuestion.isCompleted!}
-                    setHeaderText={setHeaderText}
-                    closeFeedback={controller.closeFeedback}
-                  />
-                )}
-              {currentTask !== null &&
-                currentQuestion !== null &&
-                !showAnswerFeedback &&
-                selectedHint !== null && (
-                  <AdaptivityElementHint
-                    hint={selectedHint}
-                    setHeaderText={setHeaderText}
-                  />
-                )}
+                {currentTask !== null &&
+                  currentQuestion !== null &&
+                  !showAnswerFeedback &&
+                  selectedHint === null && (
+                    <div className="flex items-center justify-center px-1 mb-4 overflow-auto rounded-lg font-regular h-fit lg:m-4">
+                      <AdaptivityElementAnswerSelection
+                        question={currentQuestion}
+                        setHeaderText={setHeaderText}
+                        submitSelection={controller.submitSelection}
+                        closeSelection={controller.closeAnswerSelection}
+                      />
+                    </div>
+                  )}
+
+                {currentTask !== null &&
+                  currentQuestion !== null &&
+                  showAnswerFeedback &&
+                  selectedHint === null && (
+                    <AdaptivityElementAnswerFeedback
+                      isCorrect={currentQuestion.isCompleted!}
+                      setHeaderText={setHeaderText}
+                      closeFeedback={controller.closeFeedback}
+                    />
+                  )}
+                {currentTask !== null &&
+                  currentQuestion !== null &&
+                  !showAnswerFeedback &&
+                  selectedHint !== null && (
+                    <AdaptivityElementHint
+                      hint={selectedHint}
+                      setHeaderText={setHeaderText}
+                    />
+                  )}
+              </div>
             </div>
 
-            {/* Footer */}
-            {
-              <div className="flex justify-between items-end pt-1 text-[0.5rem] lg:text-xs modal-footer">
-                <p>{footerText}</p>
-                {!(currentTask !== null && currentQuestion !== null) && (
-                  <div className="relative flex group">
-                    {!showFooterTooltip && (
-                      <p
-                        className="right-1 bottom-1"
-                        onMouseEnter={() => {
-                          controller.showFooterTooltip();
-                        }}
-                      >
-                        {translate("legendHover")}
-                      </p>
-                    )}
-                    {showFooterTooltip && (
-                      <div
-                        className="flex gap-2"
-                        onMouseLeave={() => {
-                          controller.hideFooterTooltip();
-                        }}
-                      >
-                        <div className="flex-col items-center justify-center">
-                          <div className="flex opacity-60">
+            <div>
+              {/* Footer */}
+              {
+                <div className=" flex justify-between items-end pt-1 text-[0.5rem] lg:text-xs modal-footer">
+                  <p>{footerText}</p>
+                  {!(currentTask !== null && currentQuestion !== null) && (
+                    <div className="relative flex group">
+                      {!showFooterTooltip && (
+                        <p
+                          className="right-1 bottom-1"
+                          onMouseEnter={() => {
+                            controller.showFooterTooltip();
+                          }}
+                        >
+                          {translate("legendHover")}
+                        </p>
+                      )}
+                      {showFooterTooltip && (
+                        <div
+                          className="flex gap-2"
+                          onMouseLeave={() => {
+                            controller.hideFooterTooltip();
+                          }}
+                        >
+                          <div className="flex-col items-center justify-center">
+                            <div className="flex opacity-60">
+                              <img
+                                className="w-2 lg:w-4"
+                                src={requiredUnsolvedIcon}
+                                alt="required unsolved icon"
+                              />
+                              <img
+                                className="w-2 lg:w-4"
+                                src={requiredUnsolvedIcon}
+                                alt="required unsolved icon"
+                              />
+                              <img
+                                className="w-2 lg:w-4"
+                                src={requiredUnsolvedIcon}
+                                alt="required unsolved icon"
+                              />
+                            </div>
+                            <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
+                            <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
                             <img
                               className="w-2 lg:w-4"
                               src={requiredUnsolvedIcon}
@@ -267,68 +290,51 @@ export default function AdaptivityElementDialogContainer({
                             />
                             <img
                               className="w-2 lg:w-4"
-                              src={requiredUnsolvedIcon}
-                              alt="required unsolved icon"
+                              src={notRequiredUnsolvedIcon}
+                              alt="not required unsolved Icon"
                             />
                             <img
                               className="w-2 lg:w-4"
-                              src={requiredUnsolvedIcon}
-                              alt="required unsolved icon"
+                              src={requiredSolvedIcon}
+                              alt="required solved icon"
+                            />
+                            <img
+                              className="w-2 lg:w-4"
+                              src={notRequiredSolvedIcon}
+                              alt="not required solved Icon"
+                            />
+                            <img
+                              className="w-2 lg:w-4"
+                              src={placeholderIcon}
+                              alt="placeholder icon"
+                            />
+                            <img
+                              className="w-2 lg:w-4"
+                              src={requiredTaskIcon}
+                              alt="required task icon"
                             />
                           </div>
-                          <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
-                          <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
-                          <img
-                            className="w-2 lg:w-4"
-                            src={requiredUnsolvedIcon}
-                            alt="required unsolved icon"
-                          />
-                          <img
-                            className="w-2 lg:w-4"
-                            src={notRequiredUnsolvedIcon}
-                            alt="not required unsolved Icon"
-                          />
-                          <img
-                            className="w-2 lg:w-4"
-                            src={requiredSolvedIcon}
-                            alt="required solved icon"
-                          />
-                          <img
-                            className="w-2 lg:w-4"
-                            src={notRequiredSolvedIcon}
-                            alt="not required solved Icon"
-                          />
-                          <img
-                            className="w-2 lg:w-4"
-                            src={placeholderIcon}
-                            alt="placeholder icon"
-                          />
-                          <img
-                            className="w-2 lg:w-4"
-                            src={requiredTaskIcon}
-                            alt="required task icon"
-                          />
+                          <div className="flex-col items-start justify-center icons">
+                            <p>
+                              <Trans
+                                i18nKey="legendDifficulty"
+                                ns="learningElement"
+                              />
+                            </p>
+                            <p>{translate("requiredUnsolved")}</p>
+                            <p>{translate("optionalUnsolved")}</p>
+                            <p>{translate("requiredSolved")}</p>
+                            <p>{translate("optionalSolved")}</p>
+                            <p>{translate("noQuestionDifficulty")}</p>
+                            <p>{translate("requiredTask")}</p>
+                          </div>
                         </div>
-                        <div className="flex-col items-start justify-center icons">
-                          <p>
-                            <Trans
-                              i18nKey="legendDifficulty"
-                              ns="learningElement"
-                            />
-                          </p>
-                          <p>{translate("requiredUnsolved")}</p>
-                          <p>{translate("optionalUnsolved")}</p>
-                          <p>{translate("requiredSolved")}</p>
-                          <p>{translate("optionalSolved")}</p>
-                          <p>{translate("noQuestionDifficulty")}</p>
-                          <p>{translate("requiredTask")}</p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            }
+                      )}
+                    </div>
+                  )}
+                </div>
+              }
+            </div>
           </div>
         </div>
       </div>

@@ -31,7 +31,7 @@ export default function WelcomePage() {
         <LoginComponent className="flex flex-col items-center justify-around col-span-6 col-start-2 xl:pt-8 lg:pt-4" />
       </section>
 
-      <section className="flex items-center justify-around col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:flex-col portrait:row-start-2 portrait:row-span-4 portrait:col-start-2 portrait:gap-6">
+      <section className="flex items-center justify-around col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:h-full portrait:flex-col portrait:row-start-3 portrait:row-span-3 portrait:col-start-2 portrait:gap-6">
         <LearningWorldMenuButton />
         {/*         <StyledButton
           disabled
@@ -48,7 +48,7 @@ export default function WelcomePage() {
 
       <LogoutComponent className="relative z-0 flex flex-col self-end col-span-2 col-start-7 row-start-6 gap-2 justify-self-end" />
 
-      <p className="self-end p-2 text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1 portrait:col-span-6 portrait:text-xs landscape:col-span-6 landscape:col-start-2 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6">
+      <p className="self-end p-2 text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1 portrait:col-span-6 portrait:text-xs landscape:col-span-4 landscape:col-start-3 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6">
         {translate("copyright")}
       </p>
     </div>

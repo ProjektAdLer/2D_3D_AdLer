@@ -54,8 +54,8 @@ export default function AdaptivityElementAnswerSelection({
   );
 
   return (
-    <div className="flex flex-col w-full p-2 m-auto">
-      <div className="flex flex-col flex-wrap justify-start gap-4 lg:grid lg:grid-cols-2">
+    <div className="flex flex-col lg:justify-between lg:flex-row w-full p-2 m-auto">
+      <div className="flex flex-wrap justify-start gap-4">
         {question.questionAnswers.map((answer, index) => (
           <StyledButton
             key={answer.answerIndex}
@@ -70,7 +70,7 @@ export default function AdaptivityElementAnswerSelection({
         ))}
       </div>
 
-      <div className="flex items-end justify-end w-full gap-2 pt-8 font-bold">
+      <div className="flex items-end justify-end lg:w-1/6 gap-2 pt-8 font-bold">
         <StyledButton
           className="box-border "
           shape="freefloatcenter"

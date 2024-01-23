@@ -20,7 +20,7 @@ import { config } from "src/config";
 import IStoryNPCController from "./IStoryNPCController";
 
 import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb";
-const modelLink = require("../../../../../Assets/3dModels/sharedModels/3DModel_Avatar_male.glb"); // TODO: remove this when NPC models are ready
+import LearningElementModelLookup from "src/Components/Core/Domain/LearningElementModels/LearningElementModelLookup";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
@@ -49,8 +49,8 @@ export default class StoryNPCView {
 
   private async loadElementModel(): Promise<void> {
     // TODO: comment in when NPC models are ready
-    // let modelLink;
-    // modelLink = LearningElementModelLookup[this.viewModel.modelType];
+    let modelLink;
+    modelLink = LearningElementModelLookup[this.viewModel.modelType];
 
     const result = await this.scenePresenter.loadGLTFModel(modelLink);
 
@@ -59,10 +59,10 @@ export default class StoryNPCView {
     result.animationGroups.forEach((animationGroup) => {
       // TODO: change the animation names to actual names
       switch (animationGroup.name) {
-        case "IdleAnimation":
+        case "anim_idle":
           this.idleAnimation = animationGroup;
           break;
-        case "WalkCycle":
+        case "anim_walk":
           this.walkAnimation = animationGroup;
           break;
       }
