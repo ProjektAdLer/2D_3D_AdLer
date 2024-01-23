@@ -12,6 +12,10 @@ import {
   NullEngine,
   Scene,
 } from "@babylonjs/core";
+import ICharacterAnimator from "../../../../Core/Presentation/Babylon/CharacterAnimator/ICharacterAnimator";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
+
+const characterAnimatorMock = mock<ICharacterAnimator>();
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -29,6 +33,9 @@ describe("StoryNPCView", () => {
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
       scenePresenterFactoryMock
     );
+    CoreDIContainer.rebind(
+      PRESENTATION_TYPES.ICharacterAnimator
+    ).toConstantValue(characterAnimatorMock);
   });
 
   beforeEach(() => {
@@ -53,7 +60,7 @@ describe("StoryNPCView", () => {
     test("loadElementModel gets idleAnimation from loading results", async () => {
       const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
       const mockIdleAnimationGroup = new AnimationGroup(
-        "IdleAnimation",
+        "anim_idle",
         new Scene(new NullEngine())
       );
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
@@ -71,7 +78,7 @@ describe("StoryNPCView", () => {
     test("loadElementModel gets walkAnimation from loading results", async () => {
       const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
       const mockWalkAnimationGroup = new AnimationGroup(
-        "WalkCycle",
+        "anim_walk",
         new Scene(new NullEngine())
       );
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();

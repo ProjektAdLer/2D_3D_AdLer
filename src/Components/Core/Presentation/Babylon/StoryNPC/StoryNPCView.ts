@@ -21,6 +21,8 @@ import IStoryNPCController from "./IStoryNPCController";
 
 import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb";
 import LearningElementModelLookup from "src/Components/Core/Domain/LearningElementModels/LearningElementModelLookup";
+import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
@@ -116,7 +118,10 @@ export default class StoryNPCView {
   }
 
   private createNPCAnimator(): void {
-    this.viewModel.characterAnimator = new CharacterAnimator(
+    this.viewModel.characterAnimator = CoreDIContainer.get<ICharacterAnimator>(
+      PRESENTATION_TYPES.ICharacterAnimator
+    );
+    this.viewModel.characterAnimator.setup(
       () => this.viewModel.characterNavigator.CharacterVelocity,
       this.idleAnimation,
       this.walkAnimation
