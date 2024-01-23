@@ -49,7 +49,8 @@ describe("CharacterNavigator", () => {
     navigationMock.Crowd.addAgent.mockReturnValue(42);
     navigationMock.Plugin.getClosestPoint.mockReturnValue(Vector3.Zero());
 
-    systemUnderTest = new CharacterNavigator(
+    systemUnderTest = new CharacterNavigator();
+    systemUnderTest.setup(
       new TransformNode("mockParentNode", new Scene(new NullEngine())),
       new TransformNode("mockRotationNode", new Scene(new NullEngine())),
       characterAnimatorMock,

@@ -12,10 +12,10 @@ import IMovementIndicator from "../MovementIndicator/IMovementIndicator";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
-import CharacterNavigator from "../CharacterNavigator/CharacterNavigator";
 import { config } from "src/config";
 import bind from "bind-decorator";
 import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
+import ICharacterNavigator from "../CharacterNavigator/ICharacterNavigator";
 
 const modelLink = require("../../../../../Assets/3dModels/sharedModels/3DModel_Avatar_male.glb");
 
@@ -44,24 +44,8 @@ export default class AvatarView {
   public async asyncSetup(): Promise<void> {
     await this.loadAvatarAsync();
     this.setupBlinkAnimation();
-
-    this.viewModel.characterAnimator = CoreDIContainer.get<ICharacterAnimator>(
-      PRESENTATION_TYPES.ICharacterAnimator
-    );
-    this.viewModel.characterAnimator.setup(
-      () => this.viewModel.characterNavigator.CharacterVelocity,
-      this.idleAnimation,
-      this.walkAnimation,
-      this.interactionAnimation
-    );
-
-    this.viewModel.characterNavigator = new CharacterNavigator(
-      this.viewModel.parentNode,
-      this.viewModel.meshes[0],
-      this.viewModel.characterAnimator,
-      config.isDebug
-    );
-    await this.viewModel.characterNavigator.IsReady;
+    this.createCharacterAniamtor();
+    await this.createNPCNavigator();
   }
 
   private async loadAvatarAsync(): Promise<void> {
@@ -121,6 +105,32 @@ export default class AvatarView {
         this.setBlinkTimeout();
       }, this.viewModel.blinkDuration);
     }, this.viewModel.blinkInterval + Math.random() * this.viewModel.blinkIntervalMaxOffset);
+  }
+
+  private createCharacterAniamtor(): void {
+    this.viewModel.characterAnimator = CoreDIContainer.get<ICharacterAnimator>(
+      PRESENTATION_TYPES.ICharacterAnimator
+    );
+    this.viewModel.characterAnimator.setup(
+      () => this.viewModel.characterNavigator.CharacterVelocity,
+      this.idleAnimation,
+      this.walkAnimation,
+      this.interactionAnimation
+    );
+  }
+
+  private async createNPCNavigator(): Promise<void> {
+    this.viewModel.characterNavigator =
+      CoreDIContainer.get<ICharacterNavigator>(
+        PRESENTATION_TYPES.ICharacterNavigator
+      );
+    this.viewModel.characterNavigator.setup(
+      this.viewModel.parentNode,
+      this.viewModel.meshes[0],
+      this.viewModel.characterAnimator,
+      config.isDebug
+    );
+    await this.viewModel.characterNavigator.IsReady;
   }
 
   private determineSpawnLocation(): Vector3 {

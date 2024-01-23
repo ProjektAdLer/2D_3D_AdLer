@@ -6,8 +6,12 @@ import {
   Axis,
   MeshBuilder,
   StandardMaterial,
+  Color3,
+  LinesMesh,
+  Nullable,
+  Observer,
+  Scene,
 } from "@babylonjs/core";
-import { Color3, LinesMesh, Nullable, Observer, Scene } from "@babylonjs/core";
 import bind from "bind-decorator";
 import INavigation from "../Navigation/INavigation";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
@@ -21,7 +25,9 @@ import SCENE_TYPES, {
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import ICharacterNavigator from "./ICharacterNavigator";
 import Readyable from "src/Lib/Readyable";
+import { injectable } from "inversify";
 
+@injectable()
 export default class CharacterNavigator
   extends Readyable
   implements ICharacterNavigator
@@ -45,24 +51,34 @@ export default class CharacterNavigator
   private targetReachedObserverRef: Nullable<
     Observer<{ agentIndex: number; destination: Vector3 }>
   >;
+  private parentNode: TransformNode;
+  private characterRotationNode: TransformNode;
+  private characterAnimator: ICharacterAnimator;
+  private verbose: boolean = false;
 
   private debug_pathLine: LinesMesh;
 
-  constructor(
-    private parentNode: TransformNode,
-    private characterRotationNode: TransformNode,
-    private characterAnimator: ICharacterAnimator,
-    private verbose: boolean = false
-  ) {
+  constructor() {
     super();
-
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
       SCENE_TYPES.ScenePresenterFactory
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
+  }
 
-    this.setupCharacterNavigation();
+  public setup(
+    parentNode: TransformNode,
+    characterRotationNode: TransformNode,
+    characterAnimator: ICharacterAnimator,
+    verbose?: boolean
+  ): void {
+    this.parentNode = parentNode;
+    this.characterRotationNode = characterRotationNode;
+    this.characterAnimator = characterAnimator;
+    if (verbose) this.verbose = verbose;
+
+    this.asyncSetup();
   }
 
   public get CharacterVelocity(): Vector3 {
@@ -112,7 +128,7 @@ export default class CharacterNavigator
   }
 
   @bind
-  private async setupCharacterNavigation(): Promise<void> {
+  private async asyncSetup(): Promise<void> {
     await this.navigation.IsReady;
 
     this.debug_drawCircle(this.agentParams.radius, Color3.Blue());

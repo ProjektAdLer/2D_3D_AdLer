@@ -20,9 +20,14 @@ import IMovementIndicator from "../../../../Core/Presentation/Babylon/MovementIn
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 import ICharacterAnimator from "../../../../Core/Presentation/Babylon/CharacterAnimator/ICharacterAnimator";
+import ICharacterNavigator from "../../../../Core/Presentation/Babylon/CharacterNavigator/ICharacterNavigator";
+import { IReadyable } from "../../../../../Lib/Readyable";
 
 const movementIndicatorMock = mock<IMovementIndicator>();
 const characterAnimatorMock = mock<ICharacterAnimator>();
+const characterNavigatorMock = mock<ICharacterNavigator>();
+// @ts-ignore
+(characterNavigatorMock as IReadyable).IsReady = Promise.resolve();
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -67,6 +72,9 @@ describe("AvatarView", () => {
     CoreDIContainer.rebind<ICharacterAnimator>(
       PRESENTATION_TYPES.ICharacterAnimator
     ).toConstantValue(characterAnimatorMock);
+    CoreDIContainer.rebind<ICharacterNavigator>(
+      PRESENTATION_TYPES.ICharacterNavigator
+    ).toConstantValue(characterNavigatorMock);
   });
 
   beforeEach(() => {
