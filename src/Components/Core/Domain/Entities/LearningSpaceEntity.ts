@@ -15,6 +15,5 @@ export default class LearningSpaceEntity {
   public template: LearningSpaceTemplateType;
   public theme: LearningSpaceThemeType;
   public parentWorldID: ComponentID;
-  public introStory: StoryElementEntity | null;
-  public outroStory: StoryElementEntity | null;
+  public storyElement: StoryElementEntity;
 }

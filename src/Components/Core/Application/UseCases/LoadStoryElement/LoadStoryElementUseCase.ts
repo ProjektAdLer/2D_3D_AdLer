@@ -7,9 +7,9 @@ import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
-import StoryElementTextTO from "../../DataTransferObjects/StoryElementTextTO";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import LearningSpaceEntity from "src/Components/Core/Domain/Entities/LearningSpaceEntity";
+import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
 
 @injectable()
 export default class LoadStoryElementUseCase
@@ -78,10 +78,12 @@ export default class LoadStoryElementUseCase
 
   private createStoryTextTO(
     LearningSpaceEntity: LearningSpaceEntity
-  ): StoryElementTextTO {
-    let storyTO = new StoryElementTextTO();
-    storyTO.introTexts = LearningSpaceEntity.introStory?.storyTexts;
-    storyTO.outroTexts = LearningSpaceEntity.outroStory?.storyTexts;
+  ): StoryElementTO {
+    let storyTO = new StoryElementTO();
+    storyTO.introStoryTexts = LearningSpaceEntity.storyElement.introStoryTexts;
+    storyTO.outroStoryTexts = LearningSpaceEntity.storyElement.outroStoryTexts;
+    storyTO.storyType = LearningSpaceEntity.storyElement.storyType;
+    storyTO.modelType = LearningSpaceEntity.storyElement.modelType;
     return storyTO;
   }
 }

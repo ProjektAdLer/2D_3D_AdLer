@@ -15,7 +15,6 @@ import type { IInternalCalculateLearningSpaceScoreUseCase } from "src/Components
 import type ICalculateLearningSpaceAvailabilityUseCase from "../CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
-import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
 
 @injectable()
 export default class LoadLearningSpaceUseCase
@@ -100,22 +99,6 @@ export default class LoadLearningSpaceUseCase
   private toTO(spaceEntity: LearningSpaceEntity): LearningSpaceTO {
     let spaceTO = new LearningSpaceTO();
     spaceTO = Object.assign(spaceTO, structuredClone(spaceEntity));
-
-    if (spaceEntity.introStory === null) {
-      spaceTO.introStory = null;
-    } else {
-      let introStory = new StoryElementTO();
-      Object.assign(introStory, structuredClone(spaceEntity.introStory));
-      spaceTO.introStory = introStory;
-    }
-
-    if (spaceEntity.outroStory === null) {
-      spaceTO.outroStory = null;
-    } else {
-      let outroStory = new StoryElementTO();
-      Object.assign(outroStory, structuredClone(spaceEntity.introStory));
-      spaceTO.introStory = outroStory;
-    }
 
     return spaceTO;
   }

@@ -20,6 +20,7 @@ import SeededRNG from "../../../../Core/Presentation/Utils/SeededRNG";
 import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 import IStoryNPCBuilder from "../../../../Core/Presentation/Babylon/StoryNPC/IStoryNPCBuilder";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
+import StoryElementTO from "../../../../Core/Application/DataTransferObjects/StoryElementTO";
 
 const directorMock = mock<IPresentationDirector>();
 const decorationBuilderMock = mock<DecorationBuilder>();
@@ -62,8 +63,12 @@ const spaceTO: LearningSpaceTO = {
   isAvailable: true,
   template: LearningSpaceTemplateType.L,
   theme: LearningSpaceThemeType.Campus,
-  introStory: null,
-  outroStory: null,
+  storyElement: {
+    introStoryTexts: null,
+    outroStoryTexts: null,
+    storyType: StoryElementType.None,
+    modelType: null,
+  } as StoryElementTO,
 };
 
 describe("LearningSpacePresenter", () => {
@@ -271,11 +276,12 @@ describe("LearningSpacePresenter", () => {
     expect(directorMock.buildAsync).toHaveBeenCalledWith(windowBuilderMock);
   });
 
-  test("createStoryNPC creates a storyNPC with its builder when introStory is set", async () => {
+  test("createStoryNPC creates a storyNPC with its builder when story element is available", async () => {
     await systemUnderTest["createStoryNPCs"]({
       ...spaceTO,
-      introStory: {
-        storyTexts: ["test"],
+      storyElement: {
+        introStoryTexts: ["test"],
+        outroStoryTexts: null,
         storyType: StoryElementType.Intro,
         modelType:
           LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
@@ -286,22 +292,5 @@ describe("LearningSpacePresenter", () => {
     expect(directorMock.buildAsync).toHaveBeenCalledWith(storyNPCBuilderMock);
 
     expect(storyNPCBuilderMock.storyType).toBe(StoryElementType.Intro);
-  });
-
-  test("createStoryNPC creates a storyNPC with its builder when outroStory is set", async () => {
-    await systemUnderTest["createStoryNPCs"]({
-      ...spaceTO,
-      outroStory: {
-        storyTexts: ["test"],
-        storyType: StoryElementType.Outro,
-        modelType:
-          LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
-      },
-    });
-
-    expect(directorMock.buildAsync).toHaveBeenCalledTimes(1);
-    expect(directorMock.buildAsync).toHaveBeenCalledWith(storyNPCBuilderMock);
-
-    expect(storyNPCBuilderMock.storyType).toBe(StoryElementType.Outro);
   });
 });

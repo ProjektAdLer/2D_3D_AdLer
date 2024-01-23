@@ -239,15 +239,10 @@ export default class LoadLearningWorldUseCase
             template: space.template,
             theme: space.templateStyle,
             parentWorldID: worldID,
-            introStory: this.createStoryElementEntityOrNull(
+            storyElement: this.createStoryElementEntity(
               space.introStory,
-              space.id,
-              StoryElementType.Intro
-            ),
-            outroStory: this.createStoryElementEntityOrNull(
               space.outroStory,
-              space.id,
-              StoryElementType.Outro
+              space.id
             ),
           },
           LearningSpaceEntity
@@ -258,22 +253,33 @@ export default class LoadLearningWorldUseCase
     return spaceEntities;
   }
 
-  private createStoryElementEntityOrNull(
-    storyElement: BackendStoryTO | null,
-    id: number,
-    storyType: StoryElementType
-  ): StoryElementEntity | null {
-    if (storyElement === null) return null;
+  private createStoryElementEntity(
+    introStoryElement: BackendStoryTO | null,
+    outroStoryElement: BackendStoryTO | null,
+    id: number
+  ): StoryElementEntity {
+    let storytype: StoryElementType = StoryElementType.None;
+    if (introStoryElement !== null) storytype |= StoryElementType.Intro;
+    if (outroStoryElement !== null) storytype |= StoryElementType.Outro;
 
     let storyElementEntity = this.container.createEntity<StoryElementEntity>(
       {
         spaceID: id,
-        storyTexts: storyElement.storyTexts,
-        modelType: storyElement.elementModel,
-        storyType: storyType,
+        introStoryTexts: introStoryElement
+          ? introStoryElement.storyTexts
+          : null,
+        outroStoryTexts: outroStoryElement
+          ? outroStoryElement.storyTexts
+          : null,
+        modelType:
+          introStoryElement?.elementModel ??
+          outroStoryElement?.elementModel ??
+          null,
+        storyType: storytype,
       },
       StoryElementEntity
     );
+
     return storyElementEntity;
   }
 
