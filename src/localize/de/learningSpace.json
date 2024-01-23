@@ -14,6 +14,10 @@
 
   "introStoryTitle": "Lernraum Einführung",
   "outroStoryTitle": "Lernraum Abschluss",
+  "introOutroStoryTitle": "Lernraum Einführung & Abschluss",
+  "outroLockedTitle": "Lernraum Abschluss gesperrt",
+  "outroLockedText": "Dieses Element ist noch nicht verfügbar. Schließe zuerst den Raum ab!",
+  "backButton": "Zurück zur Auswahl",
 
   "spaceScore": "{{current}} von {{required}}",
 

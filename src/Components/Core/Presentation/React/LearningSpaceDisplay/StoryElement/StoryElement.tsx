@@ -29,10 +29,63 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;
 
-  let titleText =
-    type === StoryElementType.Intro
-      ? translate("introStoryTitle").toString()
-      : translate("outroStoryTitle").toString();
+  // Cases:
+  // 1. Intro or locked IntroOutro
+  // 2. Unlocked Outro or just now unlocked IntroOutro
+  // 3. Locked Outro
+  // 4. IntroOutro, but not just unlocked (Menu)
+  // 4.1 IntroOutro, Intro selected (Back to Menu Button)
+  // 4.2 IntroOutro, Outro selected (Back to Menu Button)
+
+  // Debatable if just unlocked IntroOutro is 5 or 2
+
+  let titleText = "";
+  let contentTexts = [""];
+  let complexStory = false;
+  // 1
+  if (
+    type === StoryElementType.Intro ||
+    (type === StoryElementType.IntroOutro && !viewModel.outroUnlocked.Value)
+  ) {
+    titleText = translate("introStoryTitle").toString();
+    contentTexts = viewModel.introTexts.Value!;
+  }
+  // 2
+  else if (
+    (type === StoryElementType.Outro && viewModel.outroUnlocked.Value) ||
+    (type === StoryElementType.IntroOutro &&
+      viewModel.outroJustNowUnlocked.Value)
+  ) {
+    titleText = translate("outroStoryTitle").toString();
+    contentTexts = viewModel.outroTexts.Value!;
+  }
+  // 3
+  else if (type === StoryElementType.Outro && !viewModel.outroUnlocked.Value) {
+    titleText = translate("outroStoryTitle").toString();
+    contentTexts = translate("outroLockedText").toString().split("\n");
+  }
+  // 4, 4.1, 4.2
+  else if (type === StoryElementType.IntroOutro) {
+    complexStory = true;
+    // 4
+    if (!viewModel.showOnlyIntro && !viewModel.showOnlyOutro) {
+      titleText = translate("introOutroStoryTitle").toString();
+    }
+    // 4.1
+    else if (viewModel.showOnlyIntro) {
+      titleText = translate("introStoryTitle").toString();
+      contentTexts = viewModel.introTexts.Value!;
+    }
+    // 4.2
+    else if (viewModel.showOnlyOutro) {
+      titleText = translate("outroStoryTitle").toString();
+      contentTexts = viewModel.outroTexts.Value!;
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  }
 
   return (
     <StyledModal
@@ -44,9 +97,43 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
         "flex flex-col justify-center gap-2 p-5 rounded-lg"
       )}
     >
-      {viewModel.texts.Value[pageId].toString()}
+      {!complexStory && createBasicLayout(contentTexts, pageId, controller)}
+      {complexStory && (
+        <>
+          {!viewModel.showOnlyIntro && !viewModel.showOnlyOutro && (
+            <>
+              <StyledButton
+                shape="freefloatcenter"
+                onClick={controller.onIntroButtonClicked}
+              >
+                {translate("introStoryTitle").toString()}
+              </StyledButton>
+              <StyledButton
+                shape="freefloatcenter"
+                onClick={controller.onOutroButtonClicked}
+              >
+                {translate("outroStoryTitle").toString()}
+              </StyledButton>
+            </>
+          )}
+          {(viewModel.showOnlyIntro || viewModel.showOnlyOutro) &&
+            createBasicLayoutWithBackButton(contentTexts, pageId, controller)}
+        </>
+      )}
+    </StyledModal>
+  );
+}
+
+function createBasicLayout(
+  contentTexts: string[],
+  pageId: number,
+  controller: IStoryElementController
+) {
+  return (
+    <>
+      {contentTexts[pageId].toString()}
       <div className="flex justify-center gap-2">
-        {pageId < viewModel.texts.Value.length - 1 && (
+        {pageId < contentTexts.length - 1 && (
           <StyledButton shape="square" onClick={controller.increasePageId}>
             {">"}
           </StyledButton>
@@ -57,6 +144,36 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
           </StyledButton>
         )}
       </div>
-    </StyledModal>
+    </>
+  );
+}
+function createBasicLayoutWithBackButton(
+  contentTexts: string[],
+  pageId: number,
+  controller: IStoryElementController
+) {
+  const { t: translate } = useTranslation("learningSpace");
+  return (
+    <>
+      {contentTexts[pageId].toString()}
+      <div className="flex justify-center gap-2">
+        {pageId < contentTexts.length - 1 && (
+          <StyledButton shape="square" onClick={controller.increasePageId}>
+            {">"}
+          </StyledButton>
+        )}
+        {pageId > 0 && (
+          <StyledButton shape="square" onClick={controller.decreasePageId}>
+            {"<"}
+          </StyledButton>
+        )}
+        <StyledButton
+          shape="freefloatleft"
+          onClick={controller.backToMenuButtonClicked}
+        >
+          {translate("backButton").toString()}
+        </StyledButton>
+      </div>
+    </>
   );
 }

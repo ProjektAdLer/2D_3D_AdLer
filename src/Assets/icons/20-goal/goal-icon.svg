@@ -1,13 +1,14 @@
-<svg viewBox="0 0 2000 2000" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5">
-    <path d="M1399 457.84c0-25.3-15.18-45.84-33.88-45.84H585.88c-18.699 0-33.88 20.54-33.88 45.84v1054.32c0 25.3 15.181 45.84 33.88 45.84h779.24c18.7 0 33.88-20.54 33.88-45.84V457.84Z" style="fill:#e6e6e6" transform="matrix(2.36128 0 0 1.7452 -1303.42 -719.023)"/>
-    <path d="M1880.234 271.772c2.44-20.471-12.195-39.072-32.669-41.513L379.02 55.189c-20.47-2.44-39.072 12.199-41.513 32.67l-101.7 853.095c-2.44 20.474 12.199 39.072 32.67 41.513l1468.545 175.07c20.473 2.44 39.072-12.196 41.512-32.67l101.7-853.095Z"/>
-    <path d="M334.563 854.322c1.434-12.03-7.169-22.961-19.199-24.395l-43.594-5.197c-12.03-1.435-22.962 7.168-24.396 19.198L119.65 1915.323c-1.435 12.033 7.168 22.962 19.198 24.396l43.595 5.197c12.03 1.434 22.961-7.166 24.395-19.199L334.563 854.322Z"/>
-    <path style="fill:#fff" d="M890 1286h278v278H890z" transform="rotate(6.813 9394.536 5360.02) scale(1.13824)"/>
-    <path style="fill:#fff" d="M890 1286h278v278H890z" transform="rotate(6.813 9707.73 40.09) scale(1.13824)"/>
-    <path style="fill:#fff" d="M890 1286h278v278H890z" transform="matrix(1.02522 .12248 -.13502 1.1302 -432.922 -1211.324)"/>
-    <path style="fill:#fff" d="M890 1286h278v278H890z" transform="matrix(1.1302 .13502 -.12926 1.08197 415.952 -1351.891)"/>
-    <path style="fill:#fff" d="M890 1286h278v278H890z" transform="rotate(6.813 12515.873 -2463.787) scale(1.13824)"/>
-    <path style="fill:#fff" d="M890 1286h278v278H890z" transform="rotate(6.813 6902.232 2544.108) scale(1.13824)"/>
-    <path style="fill:#fff" d="M890 1286h278v278H890z" transform="rotate(6.813 7215.426 -2775.834) scale(1.13824)"/>
-    <path d="m250.942 213.698-.722 1840.412c-.005 12.11 9.827 21.95 21.943 21.96l43.903.01c12.115.01 21.955-9.82 21.96-21.94l.371-943.92 1428.493.57c20.62 0 37.36-16.73 37.37-37.34l.34-859.142c0-20.616-16.73-37.36-37.34-37.368l-1478.949-.581c-20.616-.008-37.361 16.723-37.369 37.339Z" style="fill:none;stroke:#e5bd73;stroke-width:45.83px" transform="rotate(6.777 1357.097 881.9)"/>
+<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
+    <defs>
+        <style>
+            .cls-3,.cls-4{stroke-width:60px;fill:none;stroke:#172d4d;stroke-miterlimit:10}.cls-4{stroke-linecap:round;stroke-width:50px}
+        </style>
+    </defs>
+    <circle class="cls-3" cx="1000" cy="1000" r="946.1"/>
+    <circle class="cls-3" cx="1000" cy="1000" r="756.88"/>
+    <circle class="cls-3" cx="1000" cy="1000" r="567.66"/>
+    <circle class="cls-3" cx="1000" cy="1000" r="368.98"/>
+    <circle cx="1000" cy="1000" r="57.9" style="fill:#172d4d;stroke-width:0"/>
+    <path style="stroke-linecap:round;fill:none;stroke:#172d4d;stroke-miterlimit:10;stroke-width:60px" d="m995.17 1000 817.16 808.43"/>
+    <path class="cls-4" d="m1686.94 1684.63 164.74-.79M1746.7 1741.02l164.75-.79M1806.68 1797.62l164.75-.8M1816.43 1971.43l-9.37-164.3M1756.18 1915.12l-9.38-164.3M1696.14 1859.02l-9.37-164.3M1003.09-21.71v2043.42M-18.63 1000H2024.8"/>
 </svg>
