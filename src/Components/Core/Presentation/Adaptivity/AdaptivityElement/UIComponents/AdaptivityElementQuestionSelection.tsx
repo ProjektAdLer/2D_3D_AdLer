@@ -49,7 +49,7 @@ export default function AdaptivityElementQuestionSelection({
         return (
           <div
             key={question.questionID}
-            className="grid items-center justify-center w-full grid-cols-3 gap-4 md:grid-cols-2"
+            className="flex items-center  w-full gap-4 "
           >
             <StyledButton
               shape="freefloatcenter"
