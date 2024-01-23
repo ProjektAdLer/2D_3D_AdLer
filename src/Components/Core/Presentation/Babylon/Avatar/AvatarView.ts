@@ -14,8 +14,8 @@ import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpac
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import CharacterNavigator from "../CharacterNavigator/CharacterNavigator";
 import { config } from "src/config";
-import CharacterAnimator from "../CharacterAnimator/CharacterAnimator";
 import bind from "bind-decorator";
+import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
 
 const modelLink = require("../../../../../Assets/3dModels/sharedModels/3DModel_Avatar_male.glb");
 
@@ -45,7 +45,10 @@ export default class AvatarView {
     await this.loadAvatarAsync();
     this.setupBlinkAnimation();
 
-    this.viewModel.characterAnimator = new CharacterAnimator(
+    this.viewModel.characterAnimator = CoreDIContainer.get<ICharacterAnimator>(
+      PRESENTATION_TYPES.ICharacterAnimator
+    );
+    this.viewModel.characterAnimator.setup(
       () => this.viewModel.characterNavigator.CharacterVelocity,
       this.idleAnimation,
       this.walkAnimation,

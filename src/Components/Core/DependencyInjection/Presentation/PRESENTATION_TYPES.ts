@@ -8,6 +8,8 @@ const PRESENTATION_TYPES = {
   IHelpDeskModalPresenter: Symbol("IHelpDeskModalPresenter"),
   ILearningSpaceGoalPanelPresenter: Symbol("ILearningSpaceGoalPanelPresenter"),
   ILoadingScreenPresenter: Symbol("ILoadingScreenPresenter"),
+  ICharacterAnimator: Symbol("ICharacterAnimator"),
+  ICharacterNavigator: Symbol("ICharacterNavigator"),
 };
 
 export default PRESENTATION_TYPES;

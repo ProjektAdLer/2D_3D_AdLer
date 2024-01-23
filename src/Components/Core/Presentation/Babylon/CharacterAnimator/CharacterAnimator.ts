@@ -11,7 +11,9 @@ import SCENE_TYPES, {
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import ICharacterAnimator from "./ICharacterAnimator";
+import { injectable } from "inversify";
 
+@injectable()
 export default class CharacterAnimator implements ICharacterAnimator {
   private stateMachine = new StateMachine<
     CharacterAnimationStates,
@@ -19,13 +21,22 @@ export default class CharacterAnimator implements ICharacterAnimator {
   >(CharacterAnimationStates.Idle, []);
   private animationBlendValue: number = 0;
   private scenePresenter: IScenePresenter;
+  private getCharacterVelocity: () => Vector3;
+  private idleAnimation: AnimationGroup;
+  private walkAnimation: AnimationGroup;
+  private interactionAnimation?: AnimationGroup;
 
-  constructor(
-    private getCharacterVelocity: () => Vector3,
-    private idleAnimation: AnimationGroup,
-    private walkAnimation: AnimationGroup,
-    private interactionAnimation?: AnimationGroup
-  ) {
+  public setup(
+    getCharacterVelocity: () => Vector3,
+    idleAnimation: AnimationGroup,
+    walkAnimation: AnimationGroup,
+    interactionAnimation?: AnimationGroup
+  ): void {
+    this.getCharacterVelocity = getCharacterVelocity;
+    this.idleAnimation = idleAnimation;
+    this.walkAnimation = walkAnimation;
+    this.interactionAnimation = interactionAnimation;
+
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
       SCENE_TYPES.ScenePresenterFactory
     );

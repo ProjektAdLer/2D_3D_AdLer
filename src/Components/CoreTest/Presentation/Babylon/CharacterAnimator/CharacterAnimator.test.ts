@@ -40,8 +40,9 @@ describe("CharacterAnimator", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new CharacterAnimator(
-      () => new Vector3(2, 0, 0),
+    systemUnderTest = new CharacterAnimator();
+    systemUnderTest.setup(
+      () => new Vector3(0, 0, 0),
       mockIdleAnimation,
       mockWalkAnimation,
       mockInteractionAnimation
@@ -272,11 +273,11 @@ describe("CharacterAnimator", () => {
   test("setWalkingAnimationSpeed sets the speedRatio of the walk animation to 1 (for velocity vector [2,0,0]) if the current state is walking", () => {
     systemUnderTest["stateMachine"]["currentState"] =
       CharacterAnimationStates.Walking;
-    mockWalkAnimation.speedRatio = 1;
+    mockWalkAnimation.speedRatio = 0;
 
     systemUnderTest["setWalkingAnimationSpeed"]();
 
-    expect(mockWalkAnimation.speedRatio).toEqual(2);
+    expect(mockWalkAnimation.speedRatio).toEqual(1);
   });
 
   test("setWalkingAnimationSpeed doesn't set the speedRation to less than 1", () => {
