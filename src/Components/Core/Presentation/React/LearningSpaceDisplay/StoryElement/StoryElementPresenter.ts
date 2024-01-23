@@ -1,3 +1,4 @@
+import StoryElementTO from "src/Components/Core/Application/DataTransferObjects/StoryElementTO";
 import IStoryElementPresenter from "./IStoryElementPresenter";
 import StoryElementViewModel from "./StoryElementViewModel";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
@@ -5,23 +6,22 @@ import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementT
 export default class StoryElementPresenter implements IStoryElementPresenter {
   constructor(private viewModel: StoryElementViewModel) {}
 
-  open(type: StoryElementType): void {
+  open(): void {
     this.viewModel.isOpen.Value = true;
-    this.viewModel.type.Value = type;
+    this.viewModel.pageId.Value = 0;
+    this.viewModel.showOnlyIntro.Value = false;
+    this.viewModel.showOnlyOutro.Value = false;
+  }
+  outroSequenceOpening(): void {
+    this.viewModel.outroJustNowUnlocked.Value = true;
+    this.viewModel.outroUnlocked.Value = true;
+    this.viewModel.isOpen.Value = true;
+    this.viewModel.pageId.Value = 0;
   }
 
-  // onStoryElementLoaded(storyElementTextTO: StoryElementTextTO): void {
-  //   if (
-  //     storyElementTextTO.introTexts &&
-  //     storyElementTextTO.introTexts.length > 0 &&
-  //     this.viewModel.type.Value === StoryElementType.Intro
-  //   )
-  //     this.viewModel.texts.Value = storyElementTextTO.introTexts;
-  //   if (
-  //     storyElementTextTO.outroTexts &&
-  //     storyElementTextTO.outroTexts.length > 0 &&
-  //     this.viewModel.type.Value === StoryElementType.Outro
-  //   )
-  //     this.viewModel.texts.Value = storyElementTextTO.outroTexts;
-  // }
+  onStoryElementLoaded(storyElementTO: StoryElementTO): void {
+    this.viewModel.type.Value = storyElementTO.storyType;
+    this.viewModel.introTexts.Value = storyElementTO.introStoryTexts;
+    this.viewModel.outroTexts.Value = storyElementTO.outroStoryTexts;
+  }
 }
