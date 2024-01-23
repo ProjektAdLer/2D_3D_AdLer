@@ -2,7 +2,8 @@ import { LearningElementModel } from "../../Domain/LearningElementModels/Learnin
 import { StoryElementType } from "../../Domain/Types/StoryElementType";
 
 export default class StoryElementTO {
-  storyTexts: string[];
+  introStoryTexts: string[] | null;
+  outroStoryTexts: string[] | null;
+  modelType: LearningElementModel | null;
   storyType: StoryElementType;
-  modelType: LearningElementModel;
 }

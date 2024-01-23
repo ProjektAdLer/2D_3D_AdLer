@@ -4,7 +4,8 @@ import { StoryElementType } from "../Types/StoryElementType";
 
 export default class StoryElementEntity {
   spaceID: ComponentID;
-  storyTexts: string[];
-  modelType: LearningElementModel;
+  introStoryTexts: string[] | null;
+  outroStoryTexts: string[] | null;
+  modelType: LearningElementModel | null;
   storyType: StoryElementType;
 }

@@ -11,6 +11,7 @@ import StoryElementEntity from "../../../../Core/Domain/Entities/StoryElementEnt
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import StoryElementTextTO from "../../../../Core/Application/DataTransferObjects/StoryElementTextTO";
 import LearningSpaceEntity from "../../../../Core/Domain/Entities/LearningSpaceEntity";
+import StoryElementTO from "../../../../Core/Application/DataTransferObjects/StoryElementTO";
 
 const worldPortMock = mock<ILearningWorldPort>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
@@ -62,23 +63,11 @@ describe("LoadStoryElementUseCase", () => {
 
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
-        spaceID: 1,
-        storyTexts: ["test1"],
-        modelType: "a_npc_defaultnpc",
-        storyType: StoryElementType.Intro,
-      } as StoryElementEntity,
+        id: 1,
+      } as LearningSpaceEntity,
       {
-        spaceID: 1,
-        storyTexts: ["test2"],
-        modelType: "a_npc_defaultnpc",
-        storyType: StoryElementType.Intro,
-      } as StoryElementEntity,
-      {
-        spaceID: 1,
-        storyTexts: ["test3"],
-        modelType: "a_npc_defaultnpc",
-        storyType: StoryElementType.Outro,
-      } as StoryElementEntity,
+        id: 1,
+      } as LearningSpaceEntity,
     ]);
 
     expect(() => systemUnderTest.execute()).toThrow(
@@ -107,17 +96,13 @@ describe("LoadStoryElementUseCase", () => {
 
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
-        introStory: {
+        id: 1,
+        storyElement: {
           spaceID: 1,
-          storyTexts: ["intro"],
+          introStoryTexts: ["intro"],
+          outroStoryTexts: ["outro"],
           modelType: "a_npc_defaultnpc",
-          storyType: StoryElementType.Intro,
-        } as StoryElementEntity,
-        outroStory: {
-          spaceID: 1,
-          storyTexts: ["outro"],
-          modelType: "a_npc_defaultnpc",
-          storyType: StoryElementType.Outro,
+          storyType: StoryElementType.IntroOutro,
         } as StoryElementEntity,
       } as LearningSpaceEntity,
     ]);
@@ -125,8 +110,10 @@ describe("LoadStoryElementUseCase", () => {
     systemUnderTest.execute();
 
     expect(worldPortMock.onStoryElementLoaded).toHaveBeenCalledWith({
-      introTexts: ["intro"],
-      outroTexts: ["outro"],
-    } as StoryElementTextTO);
+      introStoryTexts: ["intro"],
+      outroStoryTexts: ["outro"],
+      modelType: "a_npc_defaultnpc",
+      storyType: StoryElementType.IntroOutro,
+    } as StoryElementTO);
   });
 });

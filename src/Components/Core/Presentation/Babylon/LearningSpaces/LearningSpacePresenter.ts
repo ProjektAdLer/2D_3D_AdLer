@@ -162,19 +162,12 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
   }
 
   private async createStoryNPCs(spaceTO: LearningSpaceTO): Promise<void> {
-    if (spaceTO.introStory || spaceTO.outroStory) {
+    if (spaceTO.storyElement.storyType !== StoryElementType.None) {
       const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
         BUILDER_TYPES.IStoryNPCBuilder
       );
-
-      storyNPCBuilder.modelType =
-        spaceTO.introStory?.modelType! ?? spaceTO.outroStory?.modelType!;
-
-      storyNPCBuilder.storyType = StoryElementType.None;
-      if (spaceTO.introStory)
-        storyNPCBuilder.storyType |= StoryElementType.Intro;
-      if (spaceTO.outroStory)
-        storyNPCBuilder.storyType |= StoryElementType.Outro;
+      storyNPCBuilder.storyType = spaceTO.storyElement.storyType;
+      storyNPCBuilder.modelType = spaceTO.storyElement.modelType!;
 
       await this.director.buildAsync(storyNPCBuilder);
 
