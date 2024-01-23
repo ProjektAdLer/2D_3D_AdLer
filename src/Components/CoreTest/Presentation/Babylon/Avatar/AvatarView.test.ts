@@ -4,7 +4,6 @@ import {
   Material,
   Mesh,
   NullEngine,
-  Observable,
   Scene,
   Texture,
   TransformNode,
@@ -204,7 +203,7 @@ describe("AvatarView", () => {
         new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
       );
       const mockAnimationGroup = mockDeep<AnimationGroup>();
-      mockAnimationGroup.name = "IdleAnimation";
+      mockAnimationGroup.name = "anim_idle";
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
@@ -220,7 +219,7 @@ describe("AvatarView", () => {
         new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
       );
       const mockAnimationGroup = mockDeep<AnimationGroup>();
-      mockAnimationGroup.name = "WalkCycle";
+      mockAnimationGroup.name = "anim_walk";
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
@@ -236,7 +235,7 @@ describe("AvatarView", () => {
         new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
       );
       const mockAnimationGroup = mockDeep<AnimationGroup>();
-      mockAnimationGroup.name = "Interact";
+      mockAnimationGroup.name = "anim_interact";
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
