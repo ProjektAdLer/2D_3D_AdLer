@@ -1,7 +1,6 @@
 import StoryElementTO from "src/Components/Core/Application/DataTransferObjects/StoryElementTO";
 import IStoryElementPresenter from "./IStoryElementPresenter";
 import StoryElementViewModel from "./StoryElementViewModel";
-import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 export default class StoryElementPresenter implements IStoryElementPresenter {
   constructor(private viewModel: StoryElementViewModel) {}

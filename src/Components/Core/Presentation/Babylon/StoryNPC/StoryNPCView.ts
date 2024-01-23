@@ -14,8 +14,6 @@ import {
   TransformNode,
   Vector3,
 } from "@babylonjs/core";
-import CharacterAnimator from "../CharacterAnimator/CharacterAnimator";
-import CharacterNavigator from "../CharacterNavigator/CharacterNavigator";
 import { config } from "src/config";
 import IStoryNPCController from "./IStoryNPCController";
 
@@ -23,6 +21,7 @@ import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.
 import LearningElementModelLookup from "src/Components/Core/Domain/LearningElementModels/LearningElementModelLookup";
 import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
+import ICharacterNavigator from "../CharacterNavigator/ICharacterNavigator";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
@@ -129,7 +128,11 @@ export default class StoryNPCView {
   }
 
   private createNPCNavigator(): void {
-    this.viewModel.characterNavigator = new CharacterNavigator(
+    this.viewModel.characterNavigator =
+      CoreDIContainer.get<ICharacterNavigator>(
+        PRESENTATION_TYPES.ICharacterNavigator
+      );
+    this.viewModel.characterNavigator.setup(
       this.viewModel.parentNode,
       this.viewModel.modelMeshes[0],
       this.viewModel.characterAnimator,
