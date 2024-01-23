@@ -18,10 +18,11 @@ import IAvatarController from "../../../../Core/Presentation/Babylon/Avatar/IAva
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import IMovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/IMovementIndicator";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
-import MovementIndicator from "../../../../Core/Presentation/Babylon/MovementIndicator/MovementIndicator";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
+import ICharacterAnimator from "../../../../Core/Presentation/Babylon/CharacterAnimator/ICharacterAnimator";
 
-const movementIndicatorMock = mock<MovementIndicator>();
+const movementIndicatorMock = mock<IMovementIndicator>();
+const characterAnimatorMock = mock<ICharacterAnimator>();
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -63,6 +64,9 @@ describe("AvatarView", () => {
     CoreDIContainer.rebind<IMovementIndicator>(
       PRESENTATION_TYPES.IMovementIndicator
     ).toConstantValue(movementIndicatorMock);
+    CoreDIContainer.rebind<ICharacterAnimator>(
+      PRESENTATION_TYPES.ICharacterAnimator
+    ).toConstantValue(characterAnimatorMock);
   });
 
   beforeEach(() => {
