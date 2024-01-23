@@ -87,6 +87,30 @@ describe("AvatarView", () => {
     CoreDIContainer.restore();
   });
 
+  describe("setup", () => {
+    test("asyncSetup creates character animator", async () => {
+      scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
+        new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
+      );
+      setupScenePresenterLoadGTLFModelMock();
+
+      await systemUnderTest.asyncSetup();
+
+      expect(viewModel.characterAnimator).toBe(characterAnimatorMock);
+    });
+
+    test("asyncSetup creates character navigator", async () => {
+      scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
+        new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
+      );
+      setupScenePresenterLoadGTLFModelMock();
+
+      await systemUnderTest.asyncSetup();
+
+      expect(viewModel.characterNavigator).toBe(characterNavigatorMock);
+    });
+  });
+
   describe("blink animation", () => {
     test("setupBlinkAnimation gets the eye texture from the loaded meshes", () => {
       const mockEyeMaterial = mockDeep<Material>();
