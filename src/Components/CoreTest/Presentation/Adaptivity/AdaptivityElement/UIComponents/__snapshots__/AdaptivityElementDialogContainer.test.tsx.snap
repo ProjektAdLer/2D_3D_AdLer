@@ -18,94 +18,100 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
         />
       </div>
       <div
-        class="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl h-full pt-2 lg:pt-0 row-start-3 "
+        class="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl lg:h-[32vh] pt-2 lg:pt-0 row-start-3 "
       >
         <div
-          class="flex flex-col p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%]  justify-between overflow-auto"
+          class="flex flex-col justify-between p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%]   overflow-auto"
         >
-          <div
-            class="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl "
-          >
-            <div
-              class=""
-            >
-              <button
-                class="mr-2 roboto-black xl:w-10 xl:h-10 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
-              >
-                &lt;
-              </button>
-            </div>
-            <img
-              alt="LearningImage!"
-              class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
-              src="a_npc_defaultnpc.png"
-            />
-            <div
-              class="w-full text-sm lg:text-lg"
-            >
-              testQuestionText
-            </div>
-            <div
-              class=""
-            >
-              <button
-                class="roboto-black xl:w-10 xl:h-10 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
-              >
-                X
-              </button>
-            </div>
-          </div>
           <div
             class="overflow-auto"
           >
             <div
-              class="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4"
+              class="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl "
             >
               <div
-                class="flex flex-col w-full p-2 m-auto"
+                class=""
+              >
+                <button
+                  class="mr-2 roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 justify-center p-1 md:w-12 md:h-12 sm:w-10 sm:h-10 w-8 h-8 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                >
+                  &lt;
+                </button>
+              </div>
+              <img
+                alt="LearningImage!"
+                class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+                src="a_npc_defaultnpc.png"
+              />
+              <div
+                class="w-full text-xs lg:text-lg"
+              >
+                testQuestionText
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 justify-center p-1 md:w-12 md:h-12 sm:w-10 sm:h-10 w-8 h-8 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                >
+                  X
+                </button>
+              </div>
+            </div>
+            <div
+              class="overflow-auto"
+            >
+              <div
+                class="flex items-center justify-center px-1 mb-4 overflow-auto rounded-lg font-regular h-fit lg:m-4"
               >
                 <div
-                  class="flex flex-col flex-wrap justify-start gap-4 lg:grid lg:grid-cols-2"
+                  class="flex flex-col lg:justify-between lg:flex-row w-full p-2 m-auto"
                 >
                   <div
-                    class=""
+                    class="flex flex-wrap justify-start gap-4"
                   >
-                    <button
-                      class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                    <div
+                      class=""
                     >
-                      <p
-                        class="text-sm"
+                      <button
+                        class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                       >
-                        testAnswerText
-                      </p>
-                    </button>
+                        <p
+                          class="text-sm"
+                        >
+                          testAnswerText
+                        </p>
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div
-                  class="flex items-end justify-end w-full gap-2 pt-8 font-bold"
-                >
                   <div
-                    class=""
+                    class="flex items-end justify-end lg:w-1/6 gap-2 pt-8 font-bold"
                   >
-                    <button
-                      class="px-2 py-1 justify-center box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-white overflow-hidden"
-                      disabled=""
+                    <div
+                      class=""
                     >
-                      <p
-                        class="text-sm"
+                      <button
+                        class="px-2 py-1 justify-center box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-white overflow-hidden"
+                        disabled=""
                       >
-                        submitAnswers
-                      </p>
-                    </button>
+                        <p
+                          class="text-sm"
+                        >
+                          submitAnswers
+                        </p>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div
-            class="flex justify-between items-end pt-1 text-[0.5rem] lg:text-xs modal-footer"
-          >
-            <p />
+          <div>
+            <div
+              class=" flex justify-between items-end pt-1 text-[0.5rem] lg:text-xs modal-footer"
+            >
+              <p />
+            </div>
           </div>
         </div>
       </div>
