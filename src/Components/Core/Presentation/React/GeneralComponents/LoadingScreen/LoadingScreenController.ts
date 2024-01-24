@@ -12,14 +12,10 @@ export default class LoadingScreenController
   closeLoadingScreen() {
     this.viewModel.isOpen.Value = false;
 
-    console.log(this.viewModel.loadingLocation);
-
     if (this.viewModel.loadingLocation.Value.includes("spacedisplay")) {
       CoreDIContainer.get<IBeginStoryElementCutSceneUseCase>(
         USECASE_TYPES.IBeginStoryElementCutSceneUseCase
       ).execute(StoryElementType.Intro);
-
-      console.log("disable User-Inputs");
     }
   }
 }
