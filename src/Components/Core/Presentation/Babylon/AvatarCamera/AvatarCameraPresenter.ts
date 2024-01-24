@@ -1,8 +1,6 @@
 import { injectable } from "inversify";
 import IAvatarCameraPresenter from "./IAvatarCameraPresenter";
 import AvatarCameraViewModel from "./AvatarCameraViewModel";
-import bind from "bind-decorator";
-import { ArcRotateCamera, ArcRotateCameraPointersInput } from "@babylonjs/core";
 
 @injectable()
 export default class AvatarCameraPresenter implements IAvatarCameraPresenter {
