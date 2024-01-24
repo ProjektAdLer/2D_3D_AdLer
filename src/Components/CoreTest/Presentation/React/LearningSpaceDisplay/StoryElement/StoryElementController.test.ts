@@ -22,4 +22,24 @@ describe("StoryElementController", () => {
     systemUnderTest.decreasePageId();
     expect(viewModelMock.pageId.Value).toBe(9);
   });
+  test("onIntroButtonClicked sets showOnlyIntro in viewmodel to true", () => {
+    viewModelMock.showOnlyIntro.Value = false;
+    systemUnderTest = new StoryElementController(viewModelMock);
+    systemUnderTest.onIntroButtonClicked();
+    expect(viewModelMock.showOnlyIntro.Value).toBeTruthy();
+  });
+  test("onOutroButtonClicked sets showOnlyOutro in viewmodel to true", () => {
+    viewModelMock.showOnlyOutro.Value = false;
+    systemUnderTest = new StoryElementController(viewModelMock);
+    systemUnderTest.onOutroButtonClicked();
+    expect(viewModelMock.showOnlyOutro.Value).toBeTruthy();
+  });
+  test("backToMenuButtonClicked sets showOnlyIntro and showOnlyOutro in viewmodel to false", () => {
+    viewModelMock.showOnlyIntro.Value = true;
+    viewModelMock.showOnlyOutro.Value = true;
+    systemUnderTest = new StoryElementController(viewModelMock);
+    systemUnderTest.backToMenuButtonClicked();
+    expect(viewModelMock.showOnlyIntro.Value).toBeFalsy();
+    expect(viewModelMock.showOnlyOutro.Value).toBeFalsy();
+  });
 });
