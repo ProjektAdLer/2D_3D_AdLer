@@ -1,3 +1,4 @@
+import StoryElementTO from "../../../../../Core/Application/DataTransferObjects/StoryElementTO";
 import StoryElementTextTO from "../../../../../Core/Application/DataTransferObjects/StoryElementTextTO";
 import { StoryElementType } from "../../../../../Core/Domain/Types/StoryElementType";
 import StoryElementPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/StoryElementPresenter";
@@ -12,55 +13,52 @@ describe("StoryElementPresenter", () => {
     viewModel = systemUnderTest["viewModel"];
   });
 
-  test("openStoryElement (intro) sets isOpen to true and type to intro", () => {
+  test("open sets the correct values", () => {
     viewModel.isOpen.Value = false;
-    systemUnderTest.open(StoryElementType.Intro);
+    viewModel.pageId.Value = 1;
+    viewModel.showOnlyIntro.Value = true;
+    viewModel.showOnlyOutro.Value = true;
+
+    systemUnderTest.open();
+
     expect(viewModel.isOpen.Value).toBe(true);
+    expect(viewModel.pageId.Value).toBe(0);
+    expect(viewModel.showOnlyIntro.Value).toBe(false);
+    expect(viewModel.showOnlyOutro.Value).toBe(false);
+  });
+
+  test("outroSequenceOpening sets the correct values", () => {
+    viewModel.isOpen.Value = false;
+    viewModel.pageId.Value = 1;
+    viewModel.outroJustNowUnlocked.Value = false;
+    viewModel.outroUnlocked.Value = false;
+
+    systemUnderTest.outroSequenceOpening();
+
+    expect(viewModel.isOpen.Value).toBe(true);
+    expect(viewModel.pageId.Value).toBe(0);
+    expect(viewModel.outroJustNowUnlocked.Value).toBe(true);
+    expect(viewModel.outroUnlocked.Value).toBe(true);
+  });
+
+  test("onStoryElementLoaded sets the correct values", () => {
+    let storyElementText: StoryElementTO = {
+      introStoryTexts: ["blabla111", "blabla222"],
+      outroStoryTexts: ["blabla333"],
+      modelType: null,
+      storyType: StoryElementType.Intro,
+    };
+    viewModel.introTexts.Value = ["nicht blabla"];
+    viewModel.outroTexts.Value = ["nicht blabla"];
+    viewModel.type.Value = StoryElementType.None;
+
+    systemUnderTest.onStoryElementLoaded(storyElementText);
+
+    expect(viewModel.introTexts.Value).toStrictEqual([
+      "blabla111",
+      "blabla222",
+    ]);
+    expect(viewModel.outroTexts.Value).toStrictEqual(["blabla333"]);
     expect(viewModel.type.Value).toBe(StoryElementType.Intro);
-  });
-
-  test("openStoryElement (outro) sets isOpen to true and type to outro", () => {
-    viewModel.isOpen.Value = false;
-    systemUnderTest.open(StoryElementType.Outro);
-    expect(viewModel.isOpen.Value).toBe(true);
-    expect(viewModel.type.Value).toBe(StoryElementType.Outro);
-  });
-
-  test.skip("onStoryElementLoaded sets texts in viewmodel", () => {
-    let storyElementText: StoryElementTextTO = {
-      introTexts: ["blabla111"],
-      outroTexts: ["blabla222"],
-    };
-    viewModel.texts.Value = ["nicht blabla"];
-    viewModel.type.Value = StoryElementType.Intro;
-    systemUnderTest.onStoryElementLoaded(storyElementText);
-    expect(viewModel.texts.Value).toStrictEqual(["blabla111"]);
-
-    viewModel.texts.Value = ["nicht blabla"];
-    viewModel.type.Value = StoryElementType.Outro;
-    systemUnderTest.onStoryElementLoaded(storyElementText);
-    expect(viewModel.texts.Value).toStrictEqual(["blabla222"]);
-  });
-
-  test.skip("onStoryElementLoaded sets nothing in intro if no text is given by port", () => {
-    let storyElementText: StoryElementTextTO = {
-      introTexts: [],
-      outroTexts: ["blabla222"],
-    };
-    viewModel.type.Value = StoryElementType.Intro;
-    viewModel.texts.Value = ["nicht blabla"];
-    systemUnderTest.onStoryElementLoaded(storyElementText);
-    expect(viewModel.texts.Value).toStrictEqual(["nicht blabla"]);
-  });
-
-  test.skip("onStoryElementLoaded sets nothing in outro if no text is given by port", () => {
-    let storyElementText: StoryElementTextTO = {
-      introTexts: [],
-      outroTexts: [],
-    };
-    viewModel.type.Value = StoryElementType.Outro;
-    viewModel.texts.Value = ["nicht blabla"];
-    systemUnderTest.onStoryElementLoaded(storyElementText);
-    expect(viewModel.texts.Value).toStrictEqual(["nicht blabla"]);
   });
 });
