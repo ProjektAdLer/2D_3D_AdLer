@@ -8,7 +8,6 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import {
   ActionManager,
   AnimationGroup,
-  Axis,
   ExecuteCodeAction,
   Mesh,
   Quaternion,
@@ -20,7 +19,7 @@ import CharacterNavigator from "../CharacterNavigator/CharacterNavigator";
 import { config } from "src/config";
 import IStoryNPCController from "./IStoryNPCController";
 
-import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb";
+import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-quiz-1.glb";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
@@ -95,7 +94,7 @@ export default class StoryNPCView {
   }
 
   private createParentNode(): void {
-    console.log("is in Cutscene: ", this.viewModel.isInCutScene);
+    console.log("is in Cutscene: ", this.viewModel.isInCutScene.Value);
     this.viewModel.parentNode = new TransformNode(
       "NPCParentNode",
       this.scenePresenter.Scene
@@ -140,7 +139,7 @@ export default class StoryNPCView {
       );
     }
     // TODO test for all LearningSpaceTemplates
-    spawnLocation = spawnLocation.add(this.viewModel.positionOffset);
+    spawnLocation = spawnLocation.add(this.viewModel.spawnPositionOffset);
     this.viewModel.parentNode.position = spawnLocation;
   }
 
@@ -168,7 +167,10 @@ export default class StoryNPCView {
       //   Axis.Y,
       //   desiredRotation
       // );
-      if (this.viewModel.storyType === StoryElementType.Outro) {
+      if (
+        this.viewModel.storyType === StoryElementType.Outro ||
+        this.viewModel.isInCutScene.Value === false
+      ) {
         this.controller.setRandomMovementTarget();
       }
     });

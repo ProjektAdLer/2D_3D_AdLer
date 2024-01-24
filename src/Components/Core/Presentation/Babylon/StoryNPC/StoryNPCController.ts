@@ -10,26 +10,23 @@ import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_T
 
 export default class StoryNPCController implements IStoryNPCController {
   private navigation: INavigation;
-  private storyElementPresenter: IStoryElementPresenter;
 
   constructor(private viewModel: StoryNPCViewModel) {
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
 
-    this.storyElementPresenter = CoreDIContainer.get<IStoryElementPresenter>(
-      PRESENTATION_TYPES.IStoryElementPresenter
-    );
-    this.viewModel.isInCutScene.subscribe((b: boolean) => {
-      this.checkRandomTarget(b);
-    });
-    this.viewModel.isInteractable.subscribe((b: boolean) => {
-      this.checkCutSceneModalOpen(b);
-    });
+    this.viewModel.storyElementPresenter =
+      CoreDIContainer.get<IStoryElementPresenter>(
+        PRESENTATION_TYPES.IStoryElementPresenter
+      );
+    // this.viewModel.isInCutScene.subscribe((b: boolean) => {
+    //   this.checkRandomTarget(b);
+    // });
   }
 
   @bind
   picked(): void {
     if (this.viewModel.isInteractable.Value) {
-      this.storyElementPresenter.open(this.viewModel.storyType);
+      this.viewModel.storyElementPresenter.open(this.viewModel.storyType);
     }
   }
 
@@ -39,21 +36,15 @@ export default class StoryNPCController implements IStoryNPCController {
     }
   }
 
-  private checkCutSceneModalOpen(isInCutScene: boolean) {
-    if (
-      this.viewModel.isInCutScene.Value &&
-      this.viewModel.isInteractable.Value
-    ) {
-      this.storyElementPresenter.open(this.viewModel.storyType);
-    }
-  }
-
   @bind
   setRandomMovementTarget(): void {
+    // check every x ms if cutscene has ended
     if (this.viewModel.isInCutScene.Value) {
+      setTimeout(() => {
+        this.setRandomMovementTarget();
+      }, 2000);
       return;
     }
-
     let target: Vector3;
     let distance: number = 0;
     do {
@@ -64,8 +55,6 @@ export default class StoryNPCController implements IStoryNPCController {
       distance = Vector3.Distance(target, this.viewModel.parentNode.position);
     } while (distance < this.viewModel.minMovementDistance);
 
-    console.log("current pos: ", this.viewModel.parentNode.position);
-    console.log("target pos: ", target);
     this.viewModel.characterNavigator.startMovement(
       target,
       this.startIdleTimeout

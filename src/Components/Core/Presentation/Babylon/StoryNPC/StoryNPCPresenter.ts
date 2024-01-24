@@ -25,20 +25,19 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
       return;
     }
 
-    let movementVector = this.viewModel.avatarPosition.subtract(
-      this.viewModel.parentNode.position
-    );
-    movementVector.normalize();
-    movementVector = movementVector.scale(1.5);
-    const target = this.viewModel.avatarPosition.subtract(movementVector);
+    // npc stops in specific distance from avatar
+    const targetOffset = this.viewModel.avatarPosition
+      .subtract(this.viewModel.parentNode.position)
+      .normalize()
+      .scale(this.viewModel.cutSceneDistanceFromAvatar);
+    const target = this.viewModel.avatarPosition.subtract(targetOffset);
 
     // go to avatar
     setTimeout(() => {
       this.viewModel.characterNavigator.startMovement(target, () => {
-        this.viewModel.isInteractable.Value = true; // trigger observer
-        this.viewModel.isInteractable.Value = false; // reset
+        this.viewModel.storyElementPresenter.open(this.viewModel.storyType);
       });
-    }, 3000);
+    }, this.viewModel.introCutSceneDelay);
   }
 
   onLearningSpaceScored(learningSpaceScoreTO: LearningSpaceScoreTO): void {
