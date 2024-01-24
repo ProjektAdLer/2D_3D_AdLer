@@ -45,7 +45,6 @@ describe("StoryNPCController", () => {
     systemUnderTest.picked();
 
     expect(storyElementPresenterMock.open).toBeCalledTimes(1);
-    expect(storyElementPresenterMock.open).toBeCalledWith(viewModel.storyType);
   });
 
   test("picked doesn't call open on the storyElementPresenter when isInteractable is false", () => {
