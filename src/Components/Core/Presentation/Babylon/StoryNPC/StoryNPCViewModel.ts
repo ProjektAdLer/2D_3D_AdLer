@@ -17,8 +17,9 @@ export default class StoryNPCViewModel {
   iconMeshes: Mesh[];
   parentNode: TransformNode;
   storyType: StoryElementType;
-  isInCutScene: Observable<boolean> = new Observable<boolean>(false, false);
+  isInCutScene: Observable<boolean>;
   //outroCutSceneAlreadyPlayed: boolean = false;
+  idleTimer: NodeJS.Timeout;
 
   storyElementPresenter: IStoryElementPresenter =
     CoreDIContainer.get<IStoryElementPresenter>(
