@@ -115,7 +115,12 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
             </>
           )}
           {(viewModel.showOnlyIntro || viewModel.showOnlyOutro) &&
-            createBasicLayoutWithBackButton(contentTexts, pageId, controller)}
+            createBasicLayoutWithBackButton(
+              contentTexts,
+              pageId,
+              controller,
+              translate("backButton").toString()
+            )}
         </>
       )}
     </StyledModal>
@@ -148,9 +153,9 @@ function createBasicLayout(
 function createBasicLayoutWithBackButton(
   contentTexts: string[],
   pageId: number,
-  controller: IStoryElementController
+  controller: IStoryElementController,
+  backbuttonText: string
 ) {
-  const { t: translate } = useTranslation("learningSpace");
   return (
     <>
       {contentTexts[pageId].toString()}
@@ -169,7 +174,7 @@ function createBasicLayoutWithBackButton(
           shape="freefloatleft"
           onClick={controller.backToMenuButtonClicked}
         >
-          {translate("backButton").toString()}
+          {backbuttonText}
         </StyledButton>
       </div>
     </>
