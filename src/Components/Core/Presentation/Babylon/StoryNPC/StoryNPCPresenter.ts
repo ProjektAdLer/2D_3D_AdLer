@@ -20,11 +20,6 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
   }
 
   onStoryElementCutSceneTriggered(enableInput: boolean): void {
-    if (enableInput) {
-      this.viewModel.isInCutScene.Value = false;
-      return;
-    }
-
     // npc stops in specific distance from avatar
     const targetOffset = this.viewModel.avatarPosition
       .subtract(this.viewModel.parentNode.position)
@@ -38,6 +33,10 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
         this.viewModel.storyElementPresenter.open(this.viewModel.storyType);
       });
     }, this.viewModel.introCutSceneDelay);
+  }
+
+  onStoryElementCutSceneFinished(): void {
+    this.viewModel.isInCutScene.Value = false;
   }
 
   onLearningSpaceScored(learningSpaceScoreTO: LearningSpaceScoreTO): void {
