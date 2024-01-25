@@ -29,6 +29,8 @@ export default interface IScenePresenter {
 
   disposeScene(): void;
 
+  addDisposeSceneCallback(callback: () => void): void;
+
   /**
    * Starts the render loop.
    */

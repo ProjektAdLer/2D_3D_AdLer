@@ -197,4 +197,22 @@ describe("scenePresenter", () => {
 
     expect(Inspector.Hide).toHaveBeenCalledTimes(1);
   });
+
+  test("AddDisposeSceneCallback adds callback that is called when scene is disposed", () => {
+    testSceneDefinition.disposeScene = jest.fn();
+    const callback = jest.fn();
+    systemUnderTest.addDisposeSceneCallback(callback);
+
+    systemUnderTest.disposeScene();
+
+    expect(callback).toHaveBeenCalledTimes(1);
+  });
+
+  test("disposeScene calls disposeScene on sceneDefinition", () => {
+    testSceneDefinition.disposeScene = jest.fn();
+
+    systemUnderTest.disposeScene();
+
+    expect(testSceneDefinition.disposeScene).toHaveBeenCalledTimes(1);
+  });
 });
