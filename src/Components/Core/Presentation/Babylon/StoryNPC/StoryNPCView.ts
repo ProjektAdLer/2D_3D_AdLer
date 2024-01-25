@@ -39,6 +39,16 @@ export default class StoryNPCView {
       SCENE_TYPES.ScenePresenterFactory
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
+    this.viewModel.isInCutScene.subscribe((b: boolean) => {
+      this.cutSceneTrigger(b);
+    });
+  }
+
+  private cutSceneTrigger(isInCutScene: boolean): void {
+    if (!isInCutScene) {
+      console.log("set from Callback");
+      this.controller.setRandomMovementTarget();
+    }
   }
 
   public async asyncSetupStoryNPC(): Promise<void> {
@@ -49,6 +59,7 @@ export default class StoryNPCView {
     this.determineSpawnLocation();
     this.createNPCAnimator();
     this.createNPCNavigator();
+    this.setupNPCCleanUp();
   }
 
   private async loadElementModel(): Promise<void> {
@@ -94,7 +105,6 @@ export default class StoryNPCView {
   }
 
   private createParentNode(): void {
-    console.log("is in Cutscene: ", this.viewModel.isInCutScene.Value);
     this.viewModel.parentNode = new TransformNode(
       "NPCParentNode",
       this.scenePresenter.Scene
@@ -167,12 +177,16 @@ export default class StoryNPCView {
       //   Axis.Y,
       //   desiredRotation
       // );
-      if (
-        this.viewModel.storyType === StoryElementType.Outro ||
-        this.viewModel.isInCutScene.Value === false
-      ) {
+      if (this.viewModel.isInCutScene.Value === false) {
         this.controller.setRandomMovementTarget();
       }
+    });
+  }
+
+  private setupNPCCleanUp(): void {
+    // timer needs to be cleared, else StoryNPC won't be cleaned up by garbage collection
+    this.scenePresenter.addDisposeSceneCallback(() => {
+      clearTimeout(this.viewModel.idleTimer);
     });
   }
 }

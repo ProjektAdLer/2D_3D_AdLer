@@ -13,6 +13,7 @@ import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
+import Observable from "src/Lib/Observable";
 
 @injectable()
 export default class StoryNPCBuilder
@@ -42,7 +43,10 @@ export default class StoryNPCBuilder
     super.buildViewModel();
     this.viewModel!.modelType = this.modelType;
     this.viewModel!.storyType = this.storyType;
-    this.viewModel!.isInCutScene.Value = this.isInCutScene;
+    this.viewModel!.isInCutScene = new Observable<boolean>(
+      this.isInCutScene,
+      false
+    );
     this.viewModel!.learningSpaceTemplateType = this.learningSpaceTemplateType;
   }
 

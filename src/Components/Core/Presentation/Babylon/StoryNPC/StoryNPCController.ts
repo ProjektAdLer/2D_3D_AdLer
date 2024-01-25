@@ -18,9 +18,6 @@ export default class StoryNPCController implements IStoryNPCController {
       CoreDIContainer.get<IStoryElementPresenter>(
         PRESENTATION_TYPES.IStoryElementPresenter
       );
-    // this.viewModel.isInCutScene.subscribe((b: boolean) => {
-    //   this.checkRandomTarget(b);
-    // });
   }
 
   @bind
@@ -30,21 +27,8 @@ export default class StoryNPCController implements IStoryNPCController {
     }
   }
 
-  private checkRandomTarget(isInCutScene: boolean) {
-    if (!isInCutScene) {
-      this.setRandomMovementTarget();
-    }
-  }
-
   @bind
-  setRandomMovementTarget(): void {
-    // check every x ms if cutscene has ended
-    if (this.viewModel.isInCutScene.Value) {
-      setTimeout(() => {
-        this.setRandomMovementTarget();
-      }, 2000);
-      return;
-    }
+  setRandomMovementTarget() {
     let target: Vector3;
     let distance: number = 0;
     do {
@@ -63,8 +47,10 @@ export default class StoryNPCController implements IStoryNPCController {
 
   @bind
   private startIdleTimeout(): void {
-    setTimeout(() => {
-      this.setRandomMovementTarget();
+    this.viewModel.idleTimer = setTimeout(() => {
+      if (!this.viewModel.isInCutScene.Value) {
+        this.setRandomMovementTarget();
+      }
     }, this.viewModel.idleTime);
   }
 }
