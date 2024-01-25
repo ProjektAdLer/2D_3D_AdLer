@@ -1,5 +1,4 @@
 import StoryElementTO from "../../../../../Core/Application/DataTransferObjects/StoryElementTO";
-import StoryElementTextTO from "../../../../../Core/Application/DataTransferObjects/StoryElementTextTO";
 import { StoryElementType } from "../../../../../Core/Domain/Types/StoryElementType";
 import StoryElementPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/StoryElementPresenter";
 import StoryElementViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/StoryElementViewModel";
@@ -33,7 +32,7 @@ describe("StoryElementPresenter", () => {
     viewModel.outroJustNowUnlocked.Value = false;
     viewModel.outroUnlocked.Value = false;
 
-    systemUnderTest.outroSequenceOpening();
+    systemUnderTest.openThroughOutroSequence();
 
     expect(viewModel.isOpen.Value).toBe(true);
     expect(viewModel.pageId.Value).toBe(0);

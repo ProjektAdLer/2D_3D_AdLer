@@ -11,7 +11,7 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
     this.viewModel.showOnlyIntro.Value = false;
     this.viewModel.showOnlyOutro.Value = false;
   }
-  outroSequenceOpening(): void {
+  openThroughOutroSequence(): void {
     this.viewModel.outroJustNowUnlocked.Value = true;
     this.viewModel.outroUnlocked.Value = true;
     this.viewModel.isOpen.Value = true;
