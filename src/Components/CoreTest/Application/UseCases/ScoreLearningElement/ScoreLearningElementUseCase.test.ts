@@ -16,6 +16,9 @@ import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/IL
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 import Logger from "../../../../Core/Adapters/Logger/Logger";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
+import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
+import IBeginStoryElementOutroCutSceneUseCase from "../../../../Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
+import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendAdapterMock = mock<IBackendPort>();
@@ -23,35 +26,49 @@ const InternalCalculateWorldScoreMock =
   mock<IInternalCalculateLearningWorldScoreUseCase>();
 const worldPortMock = mock<ILearningWorldPort>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
+const beginStoryElementOutroCutSceneUseCaseMock =
+  mock<IBeginStoryElementOutroCutSceneUseCase>();
 
-const userEntity: UserDataEntity = {
-  isLoggedIn: true,
-  username: "",
-  userToken: "",
-  availableWorlds: [],
-  currentWorldID: undefined,
-  currentSpaceID: undefined,
-};
-const elementEntity: LearningElementEntity = {
-  id: 1,
-  value: 0,
-  hasScored: false,
-  name: "",
-  description: "",
-  goals: [""],
-  type: "h5p",
-  parentWorldID: 0,
-};
-const spaceEntity: LearningSpaceEntity = {
-  id: 1,
-  name: "",
-  elements: [elementEntity],
-  description: "",
-  goals: [""],
-  requirements: "",
-  requiredScore: 0,
-  parentWorldID: 200,
-  template: LearningSpaceTemplateType.None,
+const getNewTestEntities = () => {
+  const userEntity: UserDataEntity = {
+    isLoggedIn: true,
+    username: "",
+    userToken: "",
+    availableWorlds: [],
+    currentWorldID: undefined,
+    currentSpaceID: undefined,
+  };
+  const elementEntity: LearningElementEntity = {
+    id: 1,
+    value: 0,
+    hasScored: false,
+    name: "",
+    description: "",
+    goals: [""],
+    type: "h5p",
+    parentWorldID: 0,
+    model: LearningElementModelTypeEnums.H5pElementModelTypes.DeskPC1,
+  };
+  const spaceEntity: LearningSpaceEntity = {
+    id: 1,
+    name: "",
+    elements: [elementEntity],
+    description: "",
+    goals: [""],
+    requirements: "",
+    requiredScore: 0,
+    parentWorldID: 200,
+    template: LearningSpaceTemplateType.None,
+    theme: LearningSpaceThemeType.Suburb,
+    introStory: null,
+    outroStory: null,
+  };
+
+  return {
+    userEntity,
+    elementEntity,
+    spaceEntity,
+  };
 };
 
 const setupEntityContainerMock = (
@@ -107,6 +124,9 @@ describe("ScoreLearningElementUseCase", () => {
     CoreDIContainer.rebind<IGetUserLocationUseCase>(
       USECASE_TYPES.IGetUserLocationUseCase
     ).toConstantValue(getUserLocationUseCaseMock);
+    CoreDIContainer.rebind<IBeginStoryElementOutroCutSceneUseCase>(
+      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+    ).toConstantValue(beginStoryElementOutroCutSceneUseCaseMock);
   });
 
   beforeEach(() => {
@@ -124,6 +144,7 @@ describe("ScoreLearningElementUseCase", () => {
       spaceID: 1,
       worldID: 1,
     } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
     setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
 
     await expect(systemUnderTest.executeAsync(1)).resolves.toBeUndefined();
@@ -134,6 +155,7 @@ describe("ScoreLearningElementUseCase", () => {
       spaceID: 1,
       worldID: 1,
     } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
     setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
     backendAdapterMock.scoreElement.mockResolvedValue(true);
 
@@ -155,6 +177,7 @@ describe("ScoreLearningElementUseCase", () => {
       spaceID: 1,
       worldID: 1,
     } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
     setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
@@ -174,6 +197,7 @@ describe("ScoreLearningElementUseCase", () => {
       spaceID: 1,
       worldID: 1,
     } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
     setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
@@ -193,6 +217,7 @@ describe("ScoreLearningElementUseCase", () => {
       spaceID: 1,
       worldID: 1,
     } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
     setupEntityContainerMock([], [elementEntity], [spaceEntity]);
 
     await expect(systemUnderTest.executeAsync(1)).rejects.toContain(
@@ -203,6 +228,7 @@ describe("ScoreLearningElementUseCase", () => {
   test("executeAsync rejects if user is not logged in", async () => {
     const notLoggedInuserEntityMock = new UserDataEntity();
     notLoggedInuserEntityMock.isLoggedIn = false;
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
     setupEntityContainerMock(
       [notLoggedInuserEntityMock],
       [elementEntity],
@@ -219,6 +245,7 @@ describe("ScoreLearningElementUseCase", () => {
       spaceID: 1,
       worldID: 1,
     } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
     setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
     backendAdapterMock.scoreElement.mockRejectedValue("error");
 
@@ -232,6 +259,7 @@ describe("ScoreLearningElementUseCase", () => {
       spaceID: 1,
       worldID: 1,
     } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
     setupEntityContainerMock([userEntity], [], [spaceEntity]);
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
@@ -245,6 +273,7 @@ describe("ScoreLearningElementUseCase", () => {
       spaceID: 1,
       worldID: 1,
     } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
     setupEntityContainerMock(
       [userEntity],
       [elementEntity, elementEntity],
@@ -262,6 +291,7 @@ describe("ScoreLearningElementUseCase", () => {
       spaceID: undefined,
       worldID: 1,
     } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
     setupEntityContainerMock([userEntity], [elementEntity], []);
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 

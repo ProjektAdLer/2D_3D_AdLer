@@ -58,10 +58,12 @@ import ISetWorldCompletionModalToShownUseCase from "../../Application/UseCases/S
 import SetWorldCompletionModalToShownUseCase from "../../Application/UseCases/SetWorldCompletionModalToShown/SetWorldCompletionModalToShownUseCase";
 import ILoadStoryElementUseCase from "../../Application/UseCases/LoadStoryElement/ILoadStoryElementUseCase";
 import LoadStoryElementUseCase from "../../Application/UseCases/LoadStoryElement/LoadStoryElementUseCase";
-import IBeginStoryElementCutSceneUseCase from "../../Application/UseCases/BeginStoryElementCutScene/IBeginStoryElementCutSceneUseCase";
-import BeginStoryElementCutSceneUseCase from "../../Application/UseCases/BeginStoryElementCutScene/BeginStoryElementCutSceneUseCase";
+import IBeginStoryElementIntroCutSceneUseCase from "../../Application/UseCases/BeginStoryElementIntroCutScene/IBeginStoryElementIntroCutSceneUseCase";
+import BeginStoryElementIntroCutSceneUseCase from "../../Application/UseCases/BeginStoryElementIntroCutScene/BeginStoryElementIntroCutSceneUseCase";
 import IEndStoryElementCutScene from "../../Application/UseCases/EndStoryElementCutScene/IEndStoryElementCutSceneUseCase";
 import EndStoryElementCutSceneUseCase from "../../Application/UseCases/EndStoryElementCutScene/EndStoryElementCutSceneUseCase";
+import IBeginStoryElementOutroCutSceneUseCase from "../../Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
+import BeginStoryElementOutroCutSceneUseCase from "../../Application/UseCases/BeginStoryElementOutroCutScene/BeginStoryElementOutroCutScene";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -213,10 +215,15 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(LoadStoryElementUseCase)
     .inSingletonScope();
 
-  bind<IBeginStoryElementCutSceneUseCase>(
-    USECASE_TYPES.IBeginStoryElementCutSceneUseCase
+  bind<IBeginStoryElementIntroCutSceneUseCase>(
+    USECASE_TYPES.IBeginStoryElementIntroCutSceneUseCase
   )
-    .to(BeginStoryElementCutSceneUseCase)
+    .to(BeginStoryElementIntroCutSceneUseCase)
+    .inSingletonScope();
+  bind<IBeginStoryElementOutroCutSceneUseCase>(
+    USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+  )
+    .to(BeginStoryElementOutroCutSceneUseCase)
     .inSingletonScope();
 
   bind<IEndStoryElementCutScene>(USECASE_TYPES.IEndStoryElementCutSceneUseCase)

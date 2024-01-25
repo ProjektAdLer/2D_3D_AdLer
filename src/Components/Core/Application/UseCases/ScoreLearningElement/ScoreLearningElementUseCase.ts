@@ -14,6 +14,7 @@ import type { IInternalCalculateLearningWorldScoreUseCase } from "../CalculateLe
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import type IBeginStoryElementOutroCutSceneUseCase from "../BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 
 @injectable()
 export default class ScoreLearningElementUseCase
@@ -33,7 +34,9 @@ export default class ScoreLearningElementUseCase
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
-    private getUserLocationUseCase: IGetUserLocationUseCase
+    private getUserLocationUseCase: IGetUserLocationUseCase,
+    @inject(USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase)
+    private beginStoryElementOutroCutSceneUseCase: IBeginStoryElementOutroCutSceneUseCase
   ) {}
 
   async executeAsync(elementID: ComponentID): Promise<void> {
@@ -85,20 +88,27 @@ export default class ScoreLearningElementUseCase
         elementID
       );
 
-    elements[0].hasScored = true;
+    if (!elements[0].hasScored) {
+      elements[0].hasScored = true;
 
-    const newWorldScore = this.calculateWorldScoreUseCase.internalExecute({
-      worldID: userLocation.worldID,
-    });
+      const newWorldScore = this.calculateWorldScoreUseCase.internalExecute({
+        worldID: userLocation.worldID,
+      });
 
-    const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
-      worldID: userLocation.worldID,
-      spaceID: userLocation.spaceID,
-    });
+      const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
+        worldID: userLocation.worldID,
+        spaceID: userLocation.spaceID,
+      });
 
-    this.worldPort.onLearningElementScored(true, elementID);
-    this.worldPort.onLearningSpaceScored(newSpaceScore);
-    this.worldPort.onLearningWorldScored(newWorldScore);
+      // trigger cutscene
+      this.beginStoryElementOutroCutSceneUseCase.execute({
+        scoredLearningElementID: elementID,
+      });
+
+      this.worldPort.onLearningElementScored(true, elementID);
+      this.worldPort.onLearningSpaceScored(newSpaceScore);
+      this.worldPort.onLearningWorldScored(newWorldScore);
+    }
   }
 
   private rejectWithWarning(message: string, id?: ComponentID): Promise<void> {

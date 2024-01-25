@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import IBeginStoryElementCutSceneUseCase from "./IBeginStoryElementCutSceneUseCase";
+import IBeginStoryElementIntroCutSceneUseCase from "./IBeginStoryElementIntroCutSceneUseCase";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
@@ -9,11 +9,10 @@ import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElement
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILearningWorldPort from "../../Ports/Interfaces/ILearningWorldPort";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
-import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 @injectable()
-export default class BeginStoryElementCutSceneUseCase
-  implements IBeginStoryElementCutSceneUseCase
+export default class BeginStoryElementIntroCutSceneUseCase
+  implements IBeginStoryElementIntroCutSceneUseCase
 {
   constructor(
     @inject(CORE_TYPES.ILogger)
@@ -28,7 +27,7 @@ export default class BeginStoryElementCutSceneUseCase
     private worldPort: ILearningWorldPort
   ) {}
 
-  execute(storyType: StoryElementType): void {
+  execute(): void {
     const userLocation = this.getUserLocationUseCase.execute();
 
     const elements =
@@ -46,11 +45,7 @@ export default class BeginStoryElementCutSceneUseCase
       worldID: elements[0].worldID,
     });
 
-    if (
-      (spaceScore.currentScore === 0 && storyType === StoryElementType.Intro) ||
-      (spaceScore.currentScore >= spaceScore.requiredScore &&
-        storyType === StoryElementType.Outro) // not really correct
-    ) {
+    if (spaceScore.currentScore === 0) {
       this.worldPort.onStoryElementCutSceneTriggered(false);
     }
   }
