@@ -178,7 +178,6 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
       if (spaceTO.introStory) {
         storyNPCBuilder.storyType |= StoryElementType.Intro;
         storyNPCBuilder.isInCutScene = spaceTO.currentScore === 0;
-        //storyNPCBuilder.isInCutScene = true; // TODO: comment this Debug-code
       }
       if (spaceTO.outroStory)
         storyNPCBuilder.storyType |= StoryElementType.Outro;
