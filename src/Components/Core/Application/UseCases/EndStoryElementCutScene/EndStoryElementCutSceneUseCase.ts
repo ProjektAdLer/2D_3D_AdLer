@@ -24,7 +24,7 @@ export default class EndStoryElementCutSceneUseCase
     private worldPort: ILearningWorldPort
   ) {}
 
-  execute(data: void): void {
+  execute(): void {
     const userLocation = this.getUserLocationUseCase.execute();
 
     const elements =
