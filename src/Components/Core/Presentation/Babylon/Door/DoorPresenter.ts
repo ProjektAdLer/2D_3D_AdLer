@@ -29,6 +29,10 @@ export default class DoorPresenter implements IDoorPresenter {
   }
 
   onStoryElementCutSceneTriggered(enableInput: boolean): void {
-    this.viewModel.isInputEnabled.Value = enableInput;
+    this.viewModel.isInputEnabled.Value = false;
+  }
+
+  onStoryElementCutSceneFinished(): void {
+    this.viewModel.isInputEnabled.Value = true;
   }
 }
