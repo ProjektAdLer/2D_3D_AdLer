@@ -5,4 +5,5 @@ export default interface IAvatarPresenter extends ILearningWorldAdapter {
   set ViewModel(newViewModel: AvatarViewModel);
 
   onStoryElementCutSceneTriggered(enableInput: boolean): void;
+  onStoryElementCutSceneFinished(): void;
 }
