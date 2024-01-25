@@ -2,4 +2,5 @@ import ILearningWorldAdapter from "src/Components/Core/Application/Ports/Learnin
 
 export default interface IAvatarCameraPresenter extends ILearningWorldAdapter {
   onStoryElementCutSceneTriggered(enableInput: boolean): void;
+  onStoryElementCutSceneFinished(): void;
 }

@@ -7,12 +7,12 @@ export default class AvatarCameraPresenter implements IAvatarCameraPresenter {
   constructor(private viewModel: AvatarCameraViewModel) {}
 
   onStoryElementCutSceneTriggered(enableInput: boolean): void {
-    if (enableInput) {
-      this.viewModel.camera.Value.attachControl();
-    } else {
-      this.viewModel.camera.Value.detachControl();
-      // zooms camera in
-      this.viewModel.camera.Value.radius = this.viewModel.lowerRadiusLimit;
-    }
+    this.viewModel.camera.Value.detachControl();
+    // zooms camera in
+    this.viewModel.camera.Value.radius = this.viewModel.lowerRadiusLimit;
+  }
+
+  onStoryElementCutSceneFinished(): void {
+    this.viewModel.camera.Value.attachControl();
   }
 }
