@@ -68,20 +68,18 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   else if (type === StoryElementType.IntroOutro) {
     complexStory = true;
     // 4
-    if (!viewModel.showOnlyIntro && !viewModel.showOnlyOutro) {
+    if (!viewModel.showOnlyIntro.Value && !viewModel.showOnlyOutro.Value) {
       titleText = translate("introOutroStoryTitle").toString();
     }
     // 4.1
-    else if (viewModel.showOnlyIntro) {
+    else if (viewModel.showOnlyIntro.Value) {
       titleText = translate("introStoryTitle").toString();
       contentTexts = viewModel.introTexts.Value!;
     }
     // 4.2
-    else if (viewModel.showOnlyOutro) {
+    else if (viewModel.showOnlyOutro.Value) {
       titleText = translate("outroStoryTitle").toString();
       contentTexts = viewModel.outroTexts.Value!;
-    } else {
-      return null;
     }
   } else {
     return null;
