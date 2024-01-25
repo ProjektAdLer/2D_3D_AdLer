@@ -57,7 +57,7 @@ const USECASE_TYPES = {
   IBeginStoryElementCutSceneUseCase: Symbol(
     "IBeginStoryElementCutSceneUseCase"
   ),
-  IEndStoryElementCutScene: Symbol("IEndStoryElementCutScene"),
+  IEndStoryElementCutSceneUseCase: Symbol("IEndStoryElementCutSceneUseCase"),
 };
 
 export default USECASE_TYPES;

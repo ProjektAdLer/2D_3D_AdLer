@@ -2,7 +2,7 @@ import bind from "bind-decorator";
 import IStoryElementController from "./IStoryElementController";
 import StoryElementViewModel from "./StoryElementViewModel";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import IEndStoryElementCutScene from "src/Components/Core/Application/UseCases/EndStoryElementCutScene/IEndStoryElementCutScene";
+import IEndStoryElementCutScene from "src/Components/Core/Application/UseCases/EndStoryElementCutScene/IEndStoryElementCutSceneUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 export default class StoryElementController implements IStoryElementController {
@@ -12,7 +12,7 @@ export default class StoryElementController implements IStoryElementController {
   closePanel(): void {
     this.viewModel.isOpen.Value = false;
     CoreDIContainer.get<IEndStoryElementCutScene>(
-      USECASE_TYPES.IEndStoryElementCutScene
+      USECASE_TYPES.IEndStoryElementCutSceneUseCase
     ).execute();
   }
 

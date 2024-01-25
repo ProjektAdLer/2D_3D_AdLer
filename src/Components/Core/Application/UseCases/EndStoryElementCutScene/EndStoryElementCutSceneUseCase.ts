@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import IEndStoryElementCutScene from "./IEndStoryElementCutScene";
+import IEndStoryElementCutSceneUseCase from "./IEndStoryElementCutSceneUseCase";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
@@ -10,8 +10,8 @@ import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IE
 import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElementEntity";
 
 @injectable()
-export default class EndStoryElementCutScene
-  implements IEndStoryElementCutScene
+export default class EndStoryElementCutSceneUseCase
+  implements IEndStoryElementCutSceneUseCase
 {
   constructor(
     @inject(CORE_TYPES.ILogger)
@@ -37,6 +37,6 @@ export default class EndStoryElementCutScene
 
     if (elements.length === 0) return;
 
-    this.worldPort.onStoryElementCutSceneTriggered(true);
+    this.worldPort.onStoryElementCutSceneFinished();
   }
 }
