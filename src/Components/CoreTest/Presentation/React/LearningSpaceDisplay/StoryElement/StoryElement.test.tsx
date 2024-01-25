@@ -14,7 +14,10 @@ const fakeController = mock<StoryElementController>();
 
 describe("StoryElement", () => {
   beforeEach(() => {
-    viewModel.texts.Value = [""];
+    viewModel.introTexts.Value = ["Blabla Intro 1"];
+    viewModel.outroTexts.Value = ["Blabla Outro 1"];
+    viewModel.isOpen.Value = true;
+    viewModel.pageId.Value = 0;
   });
 
   test("doesn't render without controller", () => {
