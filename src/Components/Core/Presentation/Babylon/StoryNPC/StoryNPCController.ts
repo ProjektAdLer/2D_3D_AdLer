@@ -29,6 +29,9 @@ export default class StoryNPCController implements IStoryNPCController {
 
   @bind
   setRandomMovementTarget() {
+    if (this.viewModel.isInCutScene.Value) {
+      return;
+    }
     let target: Vector3;
     let distance: number = 0;
     do {
@@ -48,9 +51,7 @@ export default class StoryNPCController implements IStoryNPCController {
   @bind
   private startIdleTimeout(): void {
     this.viewModel.idleTimer = setTimeout(() => {
-      if (!this.viewModel.isInCutScene.Value) {
-        this.setRandomMovementTarget();
-      }
+      this.setRandomMovementTarget();
     }, this.viewModel.idleTime);
   }
 }
