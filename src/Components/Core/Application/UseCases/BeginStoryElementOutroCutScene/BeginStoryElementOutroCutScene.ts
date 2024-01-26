@@ -13,6 +13,7 @@ import LearningElementEntity from "src/Components/Core/Domain/Entities/LearningE
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
+import type ILoadStoryElementUseCase from "../LoadStoryElement/ILoadStoryElementUseCase";
 
 @injectable()
 export default class BeginStoryElementOutroCutSceneUseCase
@@ -27,6 +28,8 @@ export default class BeginStoryElementOutroCutSceneUseCase
     private getUserLocationUseCase: IGetUserLocationUseCase,
     @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
     private calculateLearningSpaceScoreUseCase: IInternalCalculateLearningSpaceScoreUseCase,
+    @inject(USECASE_TYPES.ILoadStoryElementUseCase)
+    private loadStoryElementUseCase: ILoadStoryElementUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort
   ) {}
@@ -81,17 +84,8 @@ export default class BeginStoryElementOutroCutSceneUseCase
         spaceScore.requiredScore &&
       spaceScore.currentScore >= spaceScore.requiredScore
     ) {
-      this.worldPort.onStoryElementLoaded(this.toTO(storyElementsInSpace[0]));
+      this.loadStoryElementUseCase.execute();
       this.worldPort.onStoryElementCutSceneTriggered(StoryElementType.Outro);
     }
-  }
-
-  private toTO(entity: StoryElementEntity): StoryElementTO {
-    return {
-      introStoryTexts: entity.introStoryTexts,
-      outroStoryTexts: entity.outroStoryTexts,
-      modelType: entity.modelType,
-      storyType: entity.storyType,
-    } as StoryElementTO;
   }
 }
