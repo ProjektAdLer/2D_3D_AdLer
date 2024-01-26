@@ -15,6 +15,7 @@ import {
 import ICharacterAnimator from "../../../../Core/Presentation/Babylon/CharacterAnimator/ICharacterAnimator";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IStoryElementPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
+import Observable from "../../../../../Lib/Observable";
 
 const characterAnimatorMock = mock<ICharacterAnimator>();
 
