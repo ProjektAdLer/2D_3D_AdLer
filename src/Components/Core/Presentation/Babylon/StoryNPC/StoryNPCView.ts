@@ -22,7 +22,6 @@ import IStoryNPCController from "./IStoryNPCController";
 import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-quiz-1.glb";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
-import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 const modelLink = require("../../../../../Assets/3dModels/sharedModels/3DModel_Avatar_male.glb"); // TODO: remove this when NPC models are ready
 
 export default class StoryNPCView {
@@ -169,14 +168,6 @@ export default class StoryNPCView {
       config.isDebug
     );
     this.viewModel.characterNavigator.IsReady.then(() => {
-      // NPC faces door
-      // const negatedOffset = this.viewModel.positionOffset.negate();
-      // negatedOffset.normalize();
-      // let desiredRotation = Math.atan2(negatedOffset.x, negatedOffset.z);
-      // this.viewModel.parentNode.rotationQuaternion = Quaternion.RotationAxis(
-      //   Axis.Y,
-      //   desiredRotation
-      // );
       if (this.viewModel.isInCutScene.Value === false) {
         this.controller.setRandomMovementTarget();
       }
@@ -184,7 +175,7 @@ export default class StoryNPCView {
   }
 
   private setupNPCCleanUp(): void {
-    // timer needs to be cleared, else StoryNPC won't be cleaned up by garbage collection
+    // timer needs to be cleared, else StoryNPC won't be cleaned up by
     this.scenePresenter.addDisposeSceneCallback(() => {
       clearTimeout(this.viewModel.idleTimer);
     });
