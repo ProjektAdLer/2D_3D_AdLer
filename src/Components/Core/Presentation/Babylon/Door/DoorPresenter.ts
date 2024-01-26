@@ -2,6 +2,7 @@ import { Vector3 } from "@babylonjs/core";
 import DoorViewModel from "./DoorViewModel";
 import IDoorPresenter from "./IDoorPresenter";
 import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 export default class DoorPresenter implements IDoorPresenter {
   constructor(private viewModel: DoorViewModel) {
@@ -28,7 +29,7 @@ export default class DoorPresenter implements IDoorPresenter {
     }
   }
 
-  onStoryElementCutSceneTriggered(enableInput: boolean): void {
+  onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
     this.viewModel.isInputEnabled.Value = false;
   }
 

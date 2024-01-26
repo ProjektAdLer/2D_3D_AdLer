@@ -13,6 +13,7 @@ import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/Adaptiv
 import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
 import UserLearningWorldsInfoTO from "../../DataTransferObjects/UserLearningWorldsInfoTO";
 import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 export default interface ILearningWorldPort
   extends IAbstractPort<ILearningWorldAdapter> {
@@ -56,6 +57,6 @@ export default interface ILearningWorldPort
 
   // story
   onStoryElementLoaded(storyElementTextTO: StoryElementTO): void;
-  onStoryElementCutSceneTriggered(enableInput: boolean): void;
+  onStoryElementCutSceneTriggered(storyType: StoryElementType): void;
   onStoryElementCutSceneFinished(): void;
 }

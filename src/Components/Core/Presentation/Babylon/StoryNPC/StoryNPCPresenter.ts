@@ -1,6 +1,7 @@
 import { Vector3 } from "@babylonjs/core";
 import IStoryNPCPresenter from "./IStoryNPCPresenter";
 import StoryNPCViewModel from "./StoryNPCViewModel";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 export default class StoryNPCPresenter implements IStoryNPCPresenter {
   constructor(private viewModel: StoryNPCViewModel) {}
@@ -18,7 +19,7 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
     } else this.viewModel.isInteractable.Value = false;
   }
 
-  onStoryElementCutSceneTriggered(enableInput: boolean): void {
+  onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
     this.viewModel.isInCutScene.Value = true;
 
     // npc stops in specific distance from avatar
@@ -28,10 +29,17 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
       .scale(this.viewModel.cutSceneDistanceFromAvatar);
     const target = this.viewModel.avatarPosition.subtract(targetOffset);
 
+    const isIntro: boolean =
+      (storyType & StoryElementType.Intro) === StoryElementType.Intro;
+
     // go to avatar
     setTimeout(() => {
       this.viewModel.characterNavigator.startMovement(target, () => {
-        this.viewModel.storyElementPresenter.open(this.viewModel.storyType);
+        if (isIntro) {
+          this.viewModel.storyElementPresenter.open();
+        } else {
+          this.viewModel.storyElementPresenter.openThroughOutroSequence();
+        }
       });
     }, this.viewModel.introCutSceneDelay);
   }

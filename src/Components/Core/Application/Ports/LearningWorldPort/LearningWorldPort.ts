@@ -15,6 +15,7 @@ import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/Adaptiv
 import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
 import UserLearningWorldsInfoTO from "../../DataTransferObjects/UserLearningWorldsInfoTO";
 import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 @injectable()
 export default class LearningWorldPort
@@ -148,10 +149,10 @@ export default class LearningWorldPort
     });
   }
 
-  public onStoryElementCutSceneTriggered(enableInput: boolean): void {
+  public onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
     this.adapters.forEach((adapter) => {
       if (adapter.onStoryElementCutSceneTriggered)
-        adapter.onStoryElementCutSceneTriggered(enableInput);
+        adapter.onStoryElementCutSceneTriggered(storyType);
     });
   }
 

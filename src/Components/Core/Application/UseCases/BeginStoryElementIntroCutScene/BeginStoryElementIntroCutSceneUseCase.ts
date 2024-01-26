@@ -9,6 +9,8 @@ import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElement
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILearningWorldPort from "../../Ports/Interfaces/ILearningWorldPort";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
+import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 @injectable()
 export default class BeginStoryElementIntroCutSceneUseCase
@@ -46,7 +48,17 @@ export default class BeginStoryElementIntroCutSceneUseCase
     });
 
     if (spaceScore.currentScore === 0) {
-      this.worldPort.onStoryElementCutSceneTriggered(false);
+      this.worldPort.onStoryElementLoaded(this.toTO(elements[0]));
+      this.worldPort.onStoryElementCutSceneTriggered(StoryElementType.Intro);
     }
+  }
+
+  private toTO(entity: StoryElementEntity): StoryElementTO {
+    return {
+      introStoryTexts: entity.introStoryTexts,
+      outroStoryTexts: entity.outroStoryTexts,
+      modelType: entity.modelType,
+      storyType: entity.storyType,
+    } as StoryElementTO;
   }
 }

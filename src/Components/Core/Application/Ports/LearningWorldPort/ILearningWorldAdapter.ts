@@ -11,6 +11,7 @@ import AdaptivityElementProgressUpdateTO from "../../DataTransferObjects/Adaptiv
 import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
 import UserLearningWorldsInfoTO from "../../DataTransferObjects/UserLearningWorldsInfoTO";
 import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 /**
  * This interface is used to register with the WorldPort and defines all the methods that can be called by the WorldPort.
@@ -56,6 +57,6 @@ export default interface ILearningWorldAdapter {
 
   // story
   onStoryElementLoaded?(storyElementTextTO: StoryElementTO): void;
-  onStoryElementCutSceneTriggered?(enableInput: boolean): void;
+  onStoryElementCutSceneTriggered?(storyType: StoryElementType): void;
   onStoryElementCutSceneFinished?(): void;
 }
