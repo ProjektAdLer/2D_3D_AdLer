@@ -25,7 +25,8 @@ const iconLinks: { [key in LearningElementTypes]?: any } = {
   [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/sharedModels/l-icons-text-1.glb"),
   [LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/l-icons-image-1.glb"),
   [LearningElementTypes.video]: require("../../../../../Assets/3dModels/sharedModels/l-icons-video-1.glb"),
-  [LearningElementTypes.adaptivity]: require("../../../../../Assets/3dModels/sharedModels/l-icons-quiz-1.glb"),
+  //[LearningElementTypes.story]: require("../../../../../Assets/3dModels/sharedModels/l-icons-story-1.glb"),
+  [LearningElementTypes.adaptivity]: require("../../../../../Assets/3dModels/sharedModels/l-icons-adaptivity-1.glb"),
   [LearningElementTypes.notAnElement]: [],
 };
 
