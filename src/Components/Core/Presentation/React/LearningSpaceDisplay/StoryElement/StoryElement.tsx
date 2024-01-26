@@ -38,6 +38,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
     <StyledModal
       title={titleText}
       onClose={() => {
+        closeModal();
         controller.closePanel();
       }}
       showModal={isOpen}
