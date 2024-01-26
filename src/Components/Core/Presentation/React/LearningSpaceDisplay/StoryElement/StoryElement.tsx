@@ -88,7 +88,10 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   return (
     <StyledModal
       title={titleText}
-      onClose={closeModal}
+      onClose={() => {
+        closeModal();
+        controller.closePanel();
+      }}
       showModal={isOpen}
       className={tailwindMerge(
         className,

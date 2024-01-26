@@ -9,6 +9,7 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IStoryElementPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
+import Observable from "../../../../../Lib/Observable";
 
 const characterNavigatorMock = mock<CharacterNavigator>();
 const navigationMock = mockDeep<INavigation>();
@@ -31,6 +32,7 @@ describe("StoryNPCController", () => {
   beforeEach(() => {
     viewModel = new StoryNPCViewModel();
     viewModel.characterNavigator = characterNavigatorMock;
+    viewModel.isInCutScene = new Observable<boolean>(false, false);
     systemUnderTest = new StoryNPCController(viewModel);
   });
 

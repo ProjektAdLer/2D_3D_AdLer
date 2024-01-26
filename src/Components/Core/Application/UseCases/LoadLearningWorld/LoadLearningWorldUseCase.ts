@@ -241,8 +241,15 @@ export default class LoadLearningWorldUseCase
             parentWorldID: worldID,
             storyElement: this.createStoryElementEntity(
               space.introStory,
+              worldID,
+              space.id,
+              StoryElementType.Intro
+            ),
+            outroStory: this.createStoryElementEntityOrNull(
               space.outroStory,
-              space.id
+              worldID,
+              space.id,
+              StoryElementType.Outro
             ),
           },
           LearningSpaceEntity

@@ -10,14 +10,14 @@ import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_T
 
 export default class StoryNPCController implements IStoryNPCController {
   private navigation: INavigation;
-  private storyElementPresenter: IStoryElementPresenter;
 
   constructor(private viewModel: StoryNPCViewModel) {
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
 
-    this.storyElementPresenter = CoreDIContainer.get<IStoryElementPresenter>(
-      PRESENTATION_TYPES.IStoryElementPresenter
-    );
+    this.viewModel.storyElementPresenter =
+      CoreDIContainer.get<IStoryElementPresenter>(
+        PRESENTATION_TYPES.IStoryElementPresenter
+      );
   }
 
   @bind
@@ -28,7 +28,10 @@ export default class StoryNPCController implements IStoryNPCController {
   }
 
   @bind
-  setRandomMovementTarget(): void {
+  setRandomMovementTarget() {
+    if (this.viewModel.isInCutScene.Value) {
+      return;
+    }
     let target: Vector3;
     let distance: number = 0;
     do {
@@ -47,7 +50,7 @@ export default class StoryNPCController implements IStoryNPCController {
 
   @bind
   private startIdleTimeout(): void {
-    setTimeout(() => {
+    this.viewModel.idleTimer = setTimeout(() => {
       this.setRandomMovementTarget();
     }, this.viewModel.idleTime);
   }

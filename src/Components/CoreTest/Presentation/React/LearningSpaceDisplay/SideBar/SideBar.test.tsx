@@ -6,6 +6,8 @@ import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilder
 import ISideBarController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/SideBar/ISideBarController";
 import SideBar from "../../../../../Core/Presentation/React/LearningSpaceDisplay/SideBar/SideBar";
 import React from "react";
+import SideBarViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/SideBar/SideBarViewModel";
+import Observable from "../../../../../../Lib/Observable";
 
 const mockHistoryBack = jest.spyOn(history, "back");
 
@@ -15,8 +17,15 @@ jest.mock(
 );
 
 describe("SideBar", () => {
+  let viewModel: SideBarViewModel;
+
+  beforeEach(() => {
+    viewModel = new SideBarViewModel();
+    viewModel.isDisabled = new Observable<boolean>(false);
+  });
+
   test("should render", () => {
-    useBuilderMock([undefined, mock<ISideBarController>()]);
+    useBuilderMock([viewModel, mock<ISideBarController>()]);
     // disable console.error
     const originalError = console.error;
     console.error = jest.fn();

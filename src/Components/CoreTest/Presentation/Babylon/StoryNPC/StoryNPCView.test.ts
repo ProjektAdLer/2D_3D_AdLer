@@ -14,6 +14,7 @@ import {
 } from "@babylonjs/core";
 import ICharacterAnimator from "../../../../Core/Presentation/Babylon/CharacterAnimator/ICharacterAnimator";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
+import IStoryElementPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
 
 const characterAnimatorMock = mock<ICharacterAnimator>();
 
@@ -22,6 +23,7 @@ const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
 // @ts-ignore
 scenePresenterMock.Scene = new Scene(new NullEngine());
+const storyElementPresenterMock = mockDeep<IStoryElementPresenter>();
 
 describe("StoryNPCView", () => {
   let systemUnderTest: StoryNPCView;
@@ -36,10 +38,18 @@ describe("StoryNPCView", () => {
     CoreDIContainer.rebind(
       PRESENTATION_TYPES.ICharacterAnimator
     ).toConstantValue(characterAnimatorMock);
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IStoryElementPresenter
+    ).toConstantValue(storyElementPresenterMock);
+  });
+
+  afterAll(() => {
+    CoreDIContainer.restore();
   });
 
   beforeEach(() => {
     viewModel = new StoryNPCViewModel();
+    viewModel.isInCutScene = new Observable<boolean>(false, false);
     controllerMock = mock<IStoryNPCController>();
     systemUnderTest = new StoryNPCView(viewModel, controllerMock);
   });

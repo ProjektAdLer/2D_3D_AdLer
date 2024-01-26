@@ -56,4 +56,6 @@ export default interface ILearningWorldPort
 
   // story
   onStoryElementLoaded(storyElementTextTO: StoryElementTO): void;
+  onStoryElementCutSceneTriggered(enableInput: boolean): void;
+  onStoryElementCutSceneFinished(): void;
 }

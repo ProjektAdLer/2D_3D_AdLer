@@ -42,7 +42,10 @@ export default class DoorController implements IDoorController {
 
   @bind
   picked(): void {
-    if (this.viewModel.isInteractable.Value) {
+    if (
+      this.viewModel.isInteractable.Value &&
+      this.viewModel.isInputEnabled.Value
+    ) {
       CoreDIContainer.get<IGetLearningSpacePrecursorAndSuccessorUseCase>(
         USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
       ).execute();

@@ -10,6 +10,7 @@ const PRESENTATION_TYPES = {
   ILoadingScreenPresenter: Symbol("ILoadingScreenPresenter"),
   ICharacterAnimator: Symbol("ICharacterAnimator"),
   ICharacterNavigator: Symbol("ICharacterNavigator"),
+  IAvatarCameraPresenter: Symbol("IAvatarCameraPresenter"),
 };
 
 export default PRESENTATION_TYPES;

@@ -32,4 +32,5 @@ export default class AvatarViewModel {
   public movementTarget: Observable<Nullable<Vector3>> = new Observable<
     Nullable<Vector3>
   >(null);
+  public inputEnabled: Observable<boolean> = new Observable<boolean>(true);
 }

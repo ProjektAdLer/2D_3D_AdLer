@@ -6,6 +6,8 @@ import ICharacterAnimator from "../../Presentation/Babylon/CharacterAnimator/ICh
 import CharacterAnimator from "../../Presentation/Babylon/CharacterAnimator/CharacterAnimator";
 import ICharacterNavigator from "../../Presentation/Babylon/CharacterNavigator/ICharacterNavigator";
 import CharacterNavigator from "../../Presentation/Babylon/CharacterNavigator/CharacterNavigator";
+import IAvatarCameraPresenter from "../../Presentation/Babylon/AvatarCamera/IAvatarCameraPresenter";
+import AvatarCameraPresenter from "../../Presentation/Babylon/AvatarCamera/AvatarCameraPresenter";
 
 const PresentationDIContainer = new ContainerModule((bind) => {
   bind<IMovementIndicator>(PRESENTATION_TYPES.IMovementIndicator).to(
@@ -16,6 +18,9 @@ const PresentationDIContainer = new ContainerModule((bind) => {
   );
   bind<ICharacterNavigator>(PRESENTATION_TYPES.ICharacterNavigator).to(
     CharacterNavigator
+  );
+  bind<IAvatarCameraPresenter>(PRESENTATION_TYPES.IAvatarCameraPresenter).to(
+    AvatarCameraPresenter
   );
 });
 

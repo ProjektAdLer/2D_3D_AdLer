@@ -27,6 +27,7 @@ import { Inspector } from "@babylonjs/inspector";
 @injectable()
 export default class ScenePresenter implements IScenePresenter {
   private navigationMeshes: AbstractMesh[] = [];
+  private disposeSceneCallbacks: (() => void)[] = [];
 
   private logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
@@ -113,7 +114,12 @@ export default class ScenePresenter implements IScenePresenter {
 
   disposeScene(): void {
     this.navigationMeshes = [];
+    this.disposeSceneCallbacks.forEach((callback) => callback());
     this.sceneDefinition.disposeScene();
+  }
+
+  addDisposeSceneCallback(callback: () => void): void {
+    this.disposeSceneCallbacks.push(callback);
   }
 
   startRenderLoop(): void {

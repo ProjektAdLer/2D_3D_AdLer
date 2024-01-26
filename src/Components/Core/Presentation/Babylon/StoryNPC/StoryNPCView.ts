@@ -22,6 +22,8 @@ import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_T
 import ICharacterNavigator from "../CharacterNavigator/ICharacterNavigator";
 
 import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-story-1.glb";
+import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
+import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
@@ -37,6 +39,16 @@ export default class StoryNPCView {
       SCENE_TYPES.ScenePresenterFactory
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
+    this.viewModel.isInCutScene.subscribe((b: boolean) => {
+      this.cutSceneTrigger(b);
+    });
+  }
+
+  private cutSceneTrigger(isInCutScene: boolean): void {
+    if (!isInCutScene) {
+      console.log("set from Callback");
+      this.controller.setRandomMovementTarget();
+    }
   }
 
   public async asyncSetupStoryNPC(): Promise<void> {
@@ -44,8 +56,10 @@ export default class StoryNPCView {
     this.createParentNode();
     this.setupModel();
     this.setupInteractions();
+    this.determineSpawnLocation();
     this.createNPCAnimator();
     this.createNPCNavigator();
+    this.setupNPCCleanUp();
   }
 
   private async loadElementModel(): Promise<void> {
@@ -116,6 +130,29 @@ export default class StoryNPCView {
     );
   }
 
+  private determineSpawnLocation(): void {
+    // nearly identical as in AvatarView.ts
+    let spawnLocation;
+    if (
+      this.viewModel.learningSpaceTemplateType ===
+      LearningSpaceTemplateType.None
+    ) {
+      spawnLocation = new Vector3(0, 0, 0);
+    } else {
+      let spawnPoint = LearningSpaceTemplateLookup.getLearningSpaceTemplate(
+        this.viewModel.learningSpaceTemplateType
+      ).playerSpawnPoint;
+      spawnLocation = new Vector3(
+        spawnPoint.position.x,
+        0,
+        spawnPoint.position.y
+      );
+    }
+    // TODO test for all LearningSpaceTemplates
+    spawnLocation = spawnLocation.add(this.viewModel.spawnPositionOffset);
+    this.viewModel.parentNode.position = spawnLocation;
+  }
+
   private createNPCAnimator(): void {
     this.viewModel.characterAnimator = CoreDIContainer.get<ICharacterAnimator>(
       PRESENTATION_TYPES.ICharacterAnimator
@@ -139,7 +176,16 @@ export default class StoryNPCView {
       config.isDebug
     );
     this.viewModel.characterNavigator.IsReady.then(() => {
-      this.controller.setRandomMovementTarget();
+      if (this.viewModel.isInCutScene.Value === false) {
+        this.controller.setRandomMovementTarget();
+      }
+    });
+  }
+
+  private setupNPCCleanUp(): void {
+    // timer needs to be cleared, else StoryNPC won't be cleaned up by
+    this.scenePresenter.addDisposeSceneCallback(() => {
+      clearTimeout(this.viewModel.idleTimer);
     });
   }
 }

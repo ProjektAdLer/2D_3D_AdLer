@@ -884,7 +884,7 @@ export default class MockBackendAdapter implements IBackendPort {
           spaceName: "Raum der kleinen Welt",
           spaceDescription: "Raumbeschreibung der kleinen Welt",
           spaceSlotContents: [1, 2, 3, null, 4, null, null, 5, null, 6],
-          requiredPointsToComplete: 1,
+          requiredPointsToComplete: 2,
           requiredSpacesToEnter: "",
           spaceGoals: ["Raumziel 1/3", "Raumziel 2/3", "Raumziel 3/3"],
           spaceTemplate: "L_32x31_10L",
