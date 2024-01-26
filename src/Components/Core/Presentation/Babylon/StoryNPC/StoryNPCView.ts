@@ -16,12 +16,12 @@ import {
 } from "@babylonjs/core";
 import { config } from "src/config";
 import IStoryNPCController from "./IStoryNPCController";
-
-import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb";
 import LearningElementModelLookup from "src/Components/Core/Domain/LearningElementModels/LearningElementModelLookup";
 import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import ICharacterNavigator from "../CharacterNavigator/ICharacterNavigator";
+
+import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-story-1.glb";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
