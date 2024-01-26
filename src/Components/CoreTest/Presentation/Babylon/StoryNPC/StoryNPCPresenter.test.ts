@@ -1,10 +1,27 @@
 import { NullEngine, Scene, TransformNode, Vector3 } from "@babylonjs/core";
 import StoryNPCPresenter from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCPresenter";
 import StoryNPCViewModel from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCViewModel";
+import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
+import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
+import { mockDeep } from "jest-mock-extended";
+import IStoryElementPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
+
+const storyElementPresenterMock = mockDeep<IStoryElementPresenter>();
 
 describe("StoryNPCPresenter", () => {
   let systemUnderTest: StoryNPCPresenter;
   let viewModel: StoryNPCViewModel;
+
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IStoryElementPresenter
+    ).toConstantValue(storyElementPresenterMock);
+  });
+
+  afterAll(() => {
+    CoreDIContainer.restore();
+  });
 
   beforeEach(() => {
     viewModel = new StoryNPCViewModel();

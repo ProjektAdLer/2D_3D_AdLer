@@ -5,7 +5,6 @@ import StoryElement from "../../../../../Core/Presentation/React/LearningSpaceDi
 import StoryElementController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/StoryElementController";
 import StoryElementViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/StoryElementViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
-import { LearningSpaceTemplateType } from "../../../../../Core/Domain/Types/LearningSpaceTemplateType";
 import { StoryElementType } from "../../../../../Core/Domain/Types/StoryElementType";
 
 let viewModel = new StoryElementViewModel();
