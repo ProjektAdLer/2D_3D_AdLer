@@ -1,4 +1,4 @@
-import { inject } from "inversify";
+import { inject, injectable } from "inversify";
 import IBeginStoryElementOutroCutSceneUseCase from "./IBeginStoryElementOutroCutSceneUseCase";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
@@ -12,6 +12,7 @@ import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElement
 import LearningElementEntity from "src/Components/Core/Domain/Entities/LearningElementEntity";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
+@injectable()
 export default class BeginStoryElementOutroCutSceneUseCase
   implements IBeginStoryElementOutroCutSceneUseCase
 {
