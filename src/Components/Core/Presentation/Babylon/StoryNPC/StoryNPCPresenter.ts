@@ -1,7 +1,6 @@
 import { Vector3 } from "@babylonjs/core";
 import IStoryNPCPresenter from "./IStoryNPCPresenter";
 import StoryNPCViewModel from "./StoryNPCViewModel";
-import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
 
 export default class StoryNPCPresenter implements IStoryNPCPresenter {
   constructor(private viewModel: StoryNPCViewModel) {}
@@ -20,6 +19,8 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
   }
 
   onStoryElementCutSceneTriggered(enableInput: boolean): void {
+    this.viewModel.isInCutScene.Value = true;
+
     // npc stops in specific distance from avatar
     const targetOffset = this.viewModel.avatarPosition
       .subtract(this.viewModel.parentNode.position)
@@ -37,17 +38,5 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
 
   onStoryElementCutSceneFinished(): void {
     this.viewModel.isInCutScene.Value = false;
-  }
-
-  onLearningSpaceScored(learningSpaceScoreTO: LearningSpaceScoreTO): void {
-    // TODO: what if current == required but element was answered incorrectly? => unnecessary outro?
-    this.viewModel.isInCutScene.Value =
-      learningSpaceScoreTO.currentScore === learningSpaceScoreTO.requiredScore;
-    if (this.viewModel.isInCutScene) {
-      console.log("NPC Cutscene: last element finished");
-      return;
-    }
-
-    console.log("No Cutscene in StoryNPC");
   }
 }
