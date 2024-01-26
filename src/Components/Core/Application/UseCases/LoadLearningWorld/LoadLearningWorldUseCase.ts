@@ -241,15 +241,9 @@ export default class LoadLearningWorldUseCase
             parentWorldID: worldID,
             storyElement: this.createStoryElementEntity(
               space.introStory,
-              worldID,
-              space.id,
-              StoryElementType.Intro
-            ),
-            outroStory: this.createStoryElementEntityOrNull(
               space.outroStory,
               worldID,
-              space.id,
-              StoryElementType.Outro
+              space.id
             ),
           },
           LearningSpaceEntity
@@ -263,7 +257,8 @@ export default class LoadLearningWorldUseCase
   private createStoryElementEntity(
     introStoryElement: BackendStoryTO | null,
     outroStoryElement: BackendStoryTO | null,
-    id: number
+    worldID: number,
+    spaceID: number
   ): StoryElementEntity {
     let storytype: StoryElementType = StoryElementType.None;
     if (introStoryElement !== null) storytype |= StoryElementType.Intro;
@@ -271,7 +266,8 @@ export default class LoadLearningWorldUseCase
 
     let storyElementEntity = this.container.createEntity<StoryElementEntity>(
       {
-        spaceID: id,
+        worldID: worldID,
+        spaceID: spaceID,
         introStoryTexts: introStoryElement
           ? introStoryElement.storyTexts
           : null,

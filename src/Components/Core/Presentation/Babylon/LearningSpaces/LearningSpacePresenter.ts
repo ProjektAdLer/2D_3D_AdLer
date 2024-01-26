@@ -173,7 +173,10 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         this.viewModel.learningSpaceTemplateType;
 
       storyNPCBuilder.isInCutScene = false;
-      if (spaceTO.introStory) {
+      if (
+        (spaceTO.storyElement.storyType & StoryElementType.Intro) ===
+        StoryElementType.Intro
+      ) {
         storyNPCBuilder.isInCutScene = spaceTO.currentScore === 0;
       }
       await this.director.buildAsync(storyNPCBuilder);
