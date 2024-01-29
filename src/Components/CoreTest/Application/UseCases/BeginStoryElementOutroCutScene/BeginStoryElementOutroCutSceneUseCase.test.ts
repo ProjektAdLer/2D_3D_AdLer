@@ -15,6 +15,7 @@ import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 import LearningSpaceScoreTO from "../../../../Core/Application/DataTransferObjects/LearningSpaceScoreTO";
 import ILoadStoryElementUseCase from "../../../../Core/Application/UseCases/LoadStoryElement/ILoadStoryElementUseCase";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
+import StoryElementEntity from "../../../../Core/Domain/Entities/StoryElementEntity";
 
 const loggerMock = mock<ILoggerPort>();
 const entityContainerMock = mock<IEntityContainer>();
@@ -136,5 +137,71 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
     expect(
       learningWorldPortMock.onStoryElementCutSceneTriggered
     ).toBeCalledWith(StoryElementType.Outro);
+  });
+
+  test("filterEntitiesOfType callback for story entity filtering should return true when story element is in the same world and space as the user", () => {
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: 1,
+    });
+
+    const storyElementEntityMock = {
+      worldID: 1,
+      spaceID: 1,
+    };
+    let filterResult;
+    entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
+      (entityType, callback) => {
+        filterResult = callback(storyElementEntityMock as StoryElementEntity);
+        return [storyElementEntityMock];
+      }
+    );
+
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      { value: 1 } as LearningElementEntity,
+    ]);
+
+    calculateLearningSpaceScoreUseCaseMock.internalExecute.mockReturnValueOnce({
+      currentScore: 1,
+      requiredScore: 1,
+    } as LearningSpaceScoreTO);
+
+    systemUnderTest.execute({ scoredLearningElementID: 1 });
+
+    expect(filterResult).toBe(true);
+  });
+
+  test("filterEntitiesOfType callback for learning element filtering should return true when learning element is the scored learning element", () => {
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: 1,
+    });
+
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      { value: 1 } as LearningElementEntity,
+    ]);
+
+    const learningElementEntityMock = {
+      id: 1,
+      parentWorldID: 1,
+    };
+    let filterResult;
+    entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
+      (entityType, callback) => {
+        filterResult = callback(
+          learningElementEntityMock as LearningElementEntity
+        );
+        return [learningElementEntityMock];
+      }
+    );
+
+    calculateLearningSpaceScoreUseCaseMock.internalExecute.mockReturnValueOnce({
+      currentScore: 1,
+      requiredScore: 1,
+    } as LearningSpaceScoreTO);
+
+    systemUnderTest.execute({ scoredLearningElementID: 1 });
+
+    expect(filterResult).toBe(true);
   });
 });
