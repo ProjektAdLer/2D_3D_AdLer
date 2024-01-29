@@ -1,4 +1,3 @@
-import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import { mock } from "jest-mock-extended";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";

@@ -11,7 +11,6 @@ import type ILearningWorldPort from "../../Ports/Interfaces/ILearningWorldPort";
 import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElementEntity";
 import LearningElementEntity from "src/Components/Core/Domain/Entities/LearningElementEntity";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
-import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import type ILoadStoryElementUseCase from "../LoadStoryElement/ILoadStoryElementUseCase";
 
