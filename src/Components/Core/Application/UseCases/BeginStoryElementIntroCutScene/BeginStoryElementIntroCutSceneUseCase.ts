@@ -1,7 +1,6 @@
 import { inject, injectable } from "inversify";
 import IBeginStoryElementIntroCutSceneUseCase from "./IBeginStoryElementIntroCutSceneUseCase";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
-import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
@@ -9,7 +8,6 @@ import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElement
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILearningWorldPort from "../../Ports/Interfaces/ILearningWorldPort";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
-import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import type ILoadStoryElementUseCase from "../LoadStoryElement/ILoadStoryElementUseCase";
 
@@ -18,8 +16,6 @@ export default class BeginStoryElementIntroCutSceneUseCase
   implements IBeginStoryElementIntroCutSceneUseCase
 {
   constructor(
-    @inject(CORE_TYPES.ILogger)
-    private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
