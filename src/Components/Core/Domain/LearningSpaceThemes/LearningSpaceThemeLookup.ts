@@ -16,9 +16,5 @@ export default class LearningSpaceThemeLookup {
 
       // TODO: add other themes here
     }
-
-    // throw new Error(
-    //   `LearningSpaceThemeLookup.getLearningSpaceTheme: Learning space theme for ${type} not found.`
-    // );
   }
 }
