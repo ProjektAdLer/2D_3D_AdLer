@@ -14,6 +14,8 @@ import AdaptivityElementProgressUpdateTO from "../../../../Core/Application/Data
 import AdaptivityElementHintTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
 import UserLearningWorldsInfoTO from "../../../../Core/Application/DataTransferObjects/UserLearningWorldsInfoTO";
 import StoryElementTextTO from "../../../../Core/Application/DataTransferObjects/StoryElementTextTO";
+import StoryElementTO from "../../../../Core/Application/DataTransferObjects/StoryElementTO";
+import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 
 describe("LearningWorldPort", () => {
   let systemUnderTest: LearningWorldPort;
@@ -189,12 +191,33 @@ describe("LearningWorldPort", () => {
   test("onStoryElementLoaded calls a registered adapter", () => {
     const worldAdapterMock = mock<ILearningWorldAdapter>();
     systemUnderTest.registerAdapter(worldAdapterMock);
-    const mockStoryElementTextTO = mock<StoryElementTextTO>();
+    const mockStoryElementTO = mock<StoryElementTO>();
 
-    systemUnderTest.onStoryElementLoaded(mockStoryElementTextTO);
+    systemUnderTest.onStoryElementLoaded(mockStoryElementTO);
 
     expect(worldAdapterMock.onStoryElementLoaded).toBeCalledWith(
-      mockStoryElementTextTO
+      mockStoryElementTO
     );
+  });
+
+  test("onStoryElementCutSceneTriggered calls a registered adapter", () => {
+    const worldAdapterMock = mock<ILearningWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+
+    systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.Intro);
+
+    expect(worldAdapterMock.onStoryElementCutSceneTriggered).toBeCalledWith(1);
+    expect(
+      worldAdapterMock.onStoryElementCutSceneTriggered
+    ).toHaveBeenCalledWith(StoryElementType.Intro);
+  });
+
+  test("onStoryElementCutSceneFinished calls a registered adapter", () => {
+    const worldAdapterMock = mock<ILearningWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+
+    systemUnderTest.onStoryElementCutSceneFinished();
+
+    expect(worldAdapterMock.onStoryElementCutSceneFinished).toBeCalled();
   });
 });
