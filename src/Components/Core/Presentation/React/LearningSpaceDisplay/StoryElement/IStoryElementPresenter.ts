@@ -4,5 +4,4 @@ import ILearningWorldAdapter from "src/Components/Core/Application/Ports/Learnin
 export default interface IStoryElementPresenter extends ILearningWorldAdapter {
   open(): void;
   openThroughOutroSequence(): void;
-  onStoryElementLoaded(storyElementTO: StoryElementTO): void;
 }
