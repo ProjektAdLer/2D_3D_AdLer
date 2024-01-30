@@ -1,6 +1,6 @@
-import StoryElementTO from "src/Components/Core/Application/DataTransferObjects/StoryElementTO";
 import IStoryElementPresenter from "./IStoryElementPresenter";
 import StoryElementViewModel from "./StoryElementViewModel";
+import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 
 export default class StoryElementPresenter implements IStoryElementPresenter {
   constructor(private viewModel: StoryElementViewModel) {}
@@ -18,9 +18,11 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
     this.viewModel.pageId.Value = 0;
   }
 
-  onStoryElementLoaded(storyElementTO: StoryElementTO): void {
-    this.viewModel.type.Value = storyElementTO.storyType;
-    this.viewModel.introTexts.Value = storyElementTO.introStoryTexts;
-    this.viewModel.outroTexts.Value = storyElementTO.outroStoryTexts;
+  onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
+    this.viewModel.type.Value = learningSpaceTO.storyElement.storyType;
+    this.viewModel.introTexts.Value =
+      learningSpaceTO.storyElement.introStoryTexts;
+    this.viewModel.outroTexts.Value =
+      learningSpaceTO.storyElement.outroStoryTexts;
   }
 }
