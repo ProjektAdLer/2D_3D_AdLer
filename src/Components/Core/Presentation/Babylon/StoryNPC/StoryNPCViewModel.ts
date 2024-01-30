@@ -37,7 +37,7 @@ export default class StoryNPCViewModel {
   readonly movementRange: number = 5; // in m
   readonly minMovementDistance: number = 2; // in m
   readonly idleTime: number = 4000; // in ms
-  readonly introCutSceneDelay: number = 3000; // in ms
+  readonly introCutSceneDelay: number = 2000; // in ms
 
   public isInteractable = new Observable<boolean>(false);
 }
