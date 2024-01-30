@@ -51,7 +51,6 @@ export default class StoryNPCView {
 
   private cutSceneTrigger(isInCutScene: boolean): void {
     if (!isInCutScene) {
-      console.log("set from Callback");
       this.controller.setRandomMovementTarget();
     }
   }
@@ -59,12 +58,11 @@ export default class StoryNPCView {
   public async asyncSetupStoryNPC(): Promise<void> {
     await Promise.all([this.loadElementModel(), this.loadIconModel()]);
     this.createParentNode();
-    this.setupModel();
     this.setupInteractions();
     this.setSpawnLocation();
-    this.createNPCAnimator();
-    this.createNPCNavigator();
-    this.setupNPCCleanUp();
+    this.createCharacterAnimator();
+    this.createCharacterNavigator();
+    this.setupCleanup();
   }
 
   private async loadElementModel(): Promise<void> {
@@ -74,6 +72,8 @@ export default class StoryNPCView {
     const result = await this.scenePresenter.loadGLTFModel(modelLink);
 
     this.viewModel.modelMeshes = result.meshes as Mesh[];
+
+    this.setupModel();
 
     result.animationGroups.forEach((animationGroup) => {
       switch (animationGroup.name) {
@@ -158,7 +158,7 @@ export default class StoryNPCView {
     this.viewModel.parentNode.position = spawnLocation;
   }
 
-  private createNPCAnimator(): void {
+  private createCharacterAnimator(): void {
     this.viewModel.characterAnimator = CoreDIContainer.get<ICharacterAnimator>(
       PRESENTATION_TYPES.ICharacterAnimator
     );
@@ -169,7 +169,7 @@ export default class StoryNPCView {
     );
   }
 
-  private createNPCNavigator(): void {
+  private createCharacterNavigator(): void {
     this.viewModel.characterNavigator =
       CoreDIContainer.get<ICharacterNavigator>(
         PRESENTATION_TYPES.ICharacterNavigator
@@ -187,7 +187,7 @@ export default class StoryNPCView {
     });
   }
 
-  private setupNPCCleanUp(): void {
+  private setupCleanup(): void {
     // timer needs to be cleared, else StoryNPC won't be cleaned up by
     this.scenePresenter.addDisposeSceneCallback(() => {
       clearTimeout(this.viewModel.idleTimer);

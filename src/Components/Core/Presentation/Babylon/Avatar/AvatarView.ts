@@ -44,7 +44,7 @@ export default class AvatarView {
   public async asyncSetup(): Promise<void> {
     await this.loadAvatarAsync();
     this.setupBlinkAnimation();
-    this.createCharacterAniamtor();
+    this.createCharacterAnimator();
     await this.createNPCNavigator();
   }
 
@@ -107,7 +107,7 @@ export default class AvatarView {
     }, this.viewModel.blinkInterval + Math.random() * this.viewModel.blinkIntervalMaxOffset);
   }
 
-  private createCharacterAniamtor(): void {
+  private createCharacterAnimator(): void {
     this.viewModel.characterAnimator = CoreDIContainer.get<ICharacterAnimator>(
       PRESENTATION_TYPES.ICharacterAnimator
     );
