@@ -15,21 +15,18 @@ import tailwindMerge from "../../../Utils/TailwindMerge";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
 import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
 import { useTranslation } from "react-i18next";
-import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 
-export default function SideBar({ className }: AdLerUIComponent) {
-  const [viewModel, controller] = useBuilder<
-    SideBarViewModel,
-    SideBarController
-  >(BUILDER_TYPES.IMenuBarBuilder);
+export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
+  const [, controller] = useBuilder<SideBarViewModel, SideBarController>(
+    BUILDER_TYPES.IMenuBarBuilder
+  );
   const { t: translate } = useTranslation("learningSpace");
-  const [isDisabled] = useObservable(viewModel.isDisabled);
 
   return (
     <CustomDropdown
       className={tailwindMerge(className, "w-20")}
       headerPart={
-        <StyledButton disabled={isDisabled}>
+        <StyledButton>
           <img
             src={hamburgerButton}
             className="lg:w-20 md:w-16 sm:w-14"
