@@ -37,7 +37,7 @@ export default class LoadStoryElementUseCase
       userLocation.worldID,
       userLocation.spaceID
     );
-    const storyTO = this.createStoryTextTO(learningSpaceEntity);
+    const storyTO = this.createStoryTO(learningSpaceEntity);
 
     this.worldPort.onStoryElementLoaded(storyTO);
   }
@@ -76,7 +76,7 @@ export default class LoadStoryElementUseCase
     return learningSpaceEntities[0];
   }
 
-  private createStoryTextTO(
+  private createStoryTO(
     LearningSpaceEntity: LearningSpaceEntity
   ): StoryElementTO {
     let storyTO = new StoryElementTO();
