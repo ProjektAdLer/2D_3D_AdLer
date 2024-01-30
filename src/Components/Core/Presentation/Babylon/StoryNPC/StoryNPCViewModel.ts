@@ -16,7 +16,7 @@ export default class StoryNPCViewModel {
     );
 
   // observable runtime properties
-  isInCutScene: Observable<boolean> = new Observable<boolean>(false);
+  isInCutScene = new Observable<boolean>(false);
   isInteractable = new Observable<boolean>(false);
 
   // non-observable runtime properties
