@@ -40,7 +40,7 @@ describe("StoryElementPresenter", () => {
     expect(viewModel.outroUnlocked.Value).toBe(true);
   });
 
-  test("onStoryElementLoaded sets the correct values", () => {
+  test("onLearningSpaceLoaded sets the correct values", () => {
     let storyElementText: StoryElementTO = {
       introStoryTexts: ["blabla111", "blabla222"],
       outroStoryTexts: ["blabla333"],
@@ -51,7 +51,7 @@ describe("StoryElementPresenter", () => {
     viewModel.outroTexts.Value = ["nicht blabla"];
     viewModel.type.Value = StoryElementType.None;
 
-    systemUnderTest.onStoryElementLoaded(storyElementText);
+    systemUnderTest.onLearningSpaceLoaded(storyElementText);
 
     expect(viewModel.introTexts.Value).toStrictEqual([
       "blabla111",
