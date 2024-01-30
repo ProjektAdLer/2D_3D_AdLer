@@ -20,13 +20,16 @@ import LearningElementModelLookup from "src/Components/Core/Domain/LearningEleme
 import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import ICharacterNavigator from "../CharacterNavigator/ICharacterNavigator";
-
-import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-story-1.glb";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
+import INavigation from "../Navigation/INavigation";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+
+import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-story-1.glb";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
+  private navigation: INavigation;
 
   private walkAnimation: AnimationGroup;
   private idleAnimation: AnimationGroup;
@@ -39,6 +42,8 @@ export default class StoryNPCView {
       SCENE_TYPES.ScenePresenterFactory
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
+    this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
+
     this.viewModel.isInCutScene.subscribe((b: boolean) => {
       this.cutSceneTrigger(b);
     });
@@ -56,14 +61,13 @@ export default class StoryNPCView {
     this.createParentNode();
     this.setupModel();
     this.setupInteractions();
-    this.determineSpawnLocation();
+    this.setSpawnLocation();
     this.createNPCAnimator();
     this.createNPCNavigator();
     this.setupNPCCleanUp();
   }
 
   private async loadElementModel(): Promise<void> {
-    // TODO: comment in when NPC models are ready
     let modelLink;
     modelLink = LearningElementModelLookup[this.viewModel.modelType];
 
@@ -72,7 +76,6 @@ export default class StoryNPCView {
     this.viewModel.modelMeshes = result.meshes as Mesh[];
 
     result.animationGroups.forEach((animationGroup) => {
-      // TODO: change the animation names to actual names
       switch (animationGroup.name) {
         case "anim_idle":
           this.idleAnimation = animationGroup;
@@ -98,10 +101,10 @@ export default class StoryNPCView {
     this.viewModel.iconMeshes = (await this.scenePresenter.loadModel(
       iconLink
     )) as Mesh[];
-
     this.viewModel.iconMeshes[0].position.addInPlace(
       new Vector3(0, this.viewModel.iconYOffset, 0)
     );
+    this.viewModel.iconMeshes[0].rotation = new Vector3(0, -Math.PI / 4, 0);
   }
 
   private createParentNode(): void {
@@ -130,7 +133,7 @@ export default class StoryNPCView {
     );
   }
 
-  private determineSpawnLocation(): void {
+  private async setSpawnLocation(): Promise<void> {
     // nearly identical as in AvatarView.ts
     let spawnLocation;
     if (
@@ -148,8 +151,10 @@ export default class StoryNPCView {
         spawnPoint.position.y
       );
     }
-    // TODO test for all LearningSpaceTemplates
     spawnLocation = spawnLocation.add(this.viewModel.spawnPositionOffset);
+
+    await this.navigation.IsReady;
+    spawnLocation = this.navigation.Plugin.getClosestPoint(spawnLocation);
     this.viewModel.parentNode.position = spawnLocation;
   }
 

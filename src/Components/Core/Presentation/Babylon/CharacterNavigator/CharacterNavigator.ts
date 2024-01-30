@@ -130,9 +130,6 @@ export default class CharacterNavigator
   @bind
   private async asyncSetup(): Promise<void> {
     await this.navigation.IsReady;
-    // commenting this debug code solves avatar spawn bug
-    //this.debug_drawCircle(this.agentParams.radius, Color3.Blue());
-    //this.debug_drawCircle(this.agentParams.reachRadius!, Color3.Red());
 
     // snap to navmesh if character is placed outside of it
     this.parentNode.position = this.navigation.Plugin.getClosestPoint(
@@ -147,6 +144,10 @@ export default class CharacterNavigator
       this.agentParams,
       this.parentNode
     );
+
+    // commenting this debug code solves avatar spawn bug
+    this.debug_drawCircle(this.agentParams.radius, Color3.Blue());
+    this.debug_drawCircle(this.agentParams.reachRadius!, Color3.Red());
 
     this.resolveIsReady();
   }
