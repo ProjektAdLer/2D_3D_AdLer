@@ -19,6 +19,9 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
   const [pageId] = useObservable<number>(viewModel?.pageId);
   const [type] = useObservable<StoryElementType>(viewModel?.type);
+  useObservable<boolean>(viewModel?.showOnlyIntro);
+  useObservable<boolean>(viewModel?.showOnlyOutro);
+  useObservable<boolean>(viewModel?.outroUnlocked);
 
   const closeModal = useCallback(() => {
     setOpen(false);
@@ -84,7 +87,6 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   } else {
     return null;
   }
-
   return (
     <StyledModal
       title={titleText}
@@ -101,7 +103,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
       {!complexStory && createBasicLayout(contentTexts, pageId, controller)}
       {complexStory && (
         <>
-          {!viewModel.showOnlyIntro && !viewModel.showOnlyOutro && (
+          {!viewModel.showOnlyIntro.Value && !viewModel.showOnlyOutro.Value && (
             <>
               <StyledButton
                 shape="freefloatcenter"
@@ -117,7 +119,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
               </StyledButton>
             </>
           )}
-          {(viewModel.showOnlyIntro || viewModel.showOnlyOutro) &&
+          {(viewModel.showOnlyIntro.Value || viewModel.showOnlyOutro.Value) &&
             createBasicLayoutWithBackButton(
               contentTexts,
               pageId,
