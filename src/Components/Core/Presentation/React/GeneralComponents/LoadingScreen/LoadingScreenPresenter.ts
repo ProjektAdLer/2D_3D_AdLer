@@ -9,9 +9,11 @@ export default class LoadingScreenPresenter implements ILoadingScreenPresenter {
     this.viewModel.isOpen.Value = true;
     this.viewModel.loadStep.Value = "";
   }
+
   releaseLoadingLock() {
     this.viewModel.isReadyToBeClosed.Value = true;
   }
+
   lockLoadingLock() {
     this.viewModel.isReadyToBeClosed.Value = false;
   }
