@@ -10,6 +10,16 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 export default class StoryNPCViewModel {
+  storyElementPresenter: IStoryElementPresenter =
+    CoreDIContainer.get<IStoryElementPresenter>(
+      PRESENTATION_TYPES.IStoryElementPresenter
+    );
+
+  // observable runtime properties
+  isInCutScene: Observable<boolean> = new Observable<boolean>(false);
+  isInteractable = new Observable<boolean>(false);
+
+  // non-observable runtime properties
   characterNavigator: ICharacterNavigator;
   characterAnimator: ICharacterAnimator;
   modelType: LearningElementModel;
@@ -17,27 +27,16 @@ export default class StoryNPCViewModel {
   iconMeshes: Mesh[];
   parentNode: TransformNode;
   storyType: StoryElementType;
-  isInCutScene: Observable<boolean>;
-  //outroCutSceneAlreadyPlayed: boolean = false;
   idleTimer: NodeJS.Timeout;
+  avatarPosition: Vector3 = new Vector3(0, 0, 0);
+  learningSpaceTemplateType: LearningSpaceTemplateType;
 
-  storyElementPresenter: IStoryElementPresenter =
-    CoreDIContainer.get<IStoryElementPresenter>(
-      PRESENTATION_TYPES.IStoryElementPresenter
-    );
-
+  // readonly configuration properties
   readonly spawnPositionOffset: Vector3 = new Vector3(0, 0, 6);
   readonly cutSceneDistanceFromAvatar: number = 1.5;
-
-  avatarPosition: Vector3 = new Vector3(0, 0, 0);
-
-  public learningSpaceTemplateType: LearningSpaceTemplateType;
-
   readonly iconYOffset: number = 2.3;
   readonly movementRange: number = 5; // in m
   readonly minMovementDistance: number = 2; // in m
   readonly idleTime: number = 4000; // in ms
   readonly introCutSceneDelay: number = 2000; // in ms
-
-  public isInteractable = new Observable<boolean>(false);
 }
