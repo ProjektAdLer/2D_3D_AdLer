@@ -54,6 +54,7 @@ export default function LearningSpaceGoalPanel() {
             </div>
             <div className="flex flex-col pl-4 justify-end">
               <StyledButton
+                shape="closebutton"
                 onClick={() => {
                   viewModel.isOpen.Value = false;
                 }}
