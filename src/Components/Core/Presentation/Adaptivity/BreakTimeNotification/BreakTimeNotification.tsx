@@ -51,7 +51,7 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
 
   if (showMinimizedModal)
     return (
-      <StyledContainer className="relative flex justify-between items-center p-1 rounded-lg bottom-2 left-2 bg-buttonbgblue lg:!w-96">
+      <StyledContainer className="fixed z-10 flex justify-between items-start lg:x-2 p-1 rounded-lg bottom-2 left-2 bg-buttonbgblue lg:!w-96">
         <div className="absolute z-50 w-5 h-5 rounded-full pointer-events-none -top-2 -right-2 animate-ping bg-nodehandlecolor"></div>
         <div className="absolute z-50 w-5 h-5 rounded-full pointer-events-none -top-2 -right-2 bg-nodehandlecolor"></div>
         <StyledButton
