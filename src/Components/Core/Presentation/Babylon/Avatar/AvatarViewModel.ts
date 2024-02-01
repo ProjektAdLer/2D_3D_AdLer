@@ -18,6 +18,7 @@ export default class AvatarViewModel {
 
   // transform
   public parentNode: TransformNode;
+  public modelRootNode: TransformNode;
   public learningSpaceTemplateType: LearningSpaceTemplateType;
 
   // blink animation

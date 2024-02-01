@@ -137,7 +137,8 @@ export default class CharacterNavigator
     );
 
     // make sure rotation node has quaternion set
-    this.characterRotationNode.rotationQuaternion = new Quaternion(0, 0, 0, 1);
+    if (!this.characterRotationNode.rotationQuaternion)
+      this.characterRotationNode.rotationQuaternion = new Quaternion();
 
     this.agentIndex = this.navigation.Crowd.addAgent(
       this.parentNode.position,

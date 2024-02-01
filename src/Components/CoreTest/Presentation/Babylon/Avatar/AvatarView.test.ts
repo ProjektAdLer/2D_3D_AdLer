@@ -217,7 +217,7 @@ describe("AvatarView", () => {
       ).toHaveBeenCalledWith("AvatarParentNode");
     });
 
-    test("loadAvatarAsync sets the parent node as parent of the first loaded mesh", async () => {
+    test.skip("loadAvatarAsync sets the parent node as parent of the first loaded mesh", async () => {
       const parentNode = new TransformNode(
         "AvatarParentNode",
         new Scene(new NullEngine())

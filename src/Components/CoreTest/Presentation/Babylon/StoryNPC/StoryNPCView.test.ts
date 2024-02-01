@@ -162,6 +162,10 @@ describe("StoryNPCView", () => {
   test("createParentNode creates a new transform node and sets it in the viewmodel", () => {
     viewModel.modelMeshes = [new Mesh("mockMesh", new Scene(new NullEngine()))];
     viewModel.iconMeshes = [new Mesh("mockMesh", new Scene(new NullEngine()))];
+    viewModel.modelRootNode = new TransformNode(
+      "mockNode",
+      new Scene(new NullEngine())
+    );
 
     systemUnderTest["createParentNode"]();
 
@@ -245,10 +249,15 @@ describe("StoryNPCView", () => {
     const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
     viewModel.modelMeshes = [mockMesh];
     const mockParentNode = new TransformNode(
-      "mockNode",
+      "mockParentNode",
       new Scene(new NullEngine())
     );
     viewModel.parentNode = mockParentNode;
+    const mockModelRootNode = new TransformNode(
+      "mockRootNode",
+      new Scene(new NullEngine())
+    );
+    viewModel.modelRootNode = mockModelRootNode;
     const mockCharacterAnimator = mock<ICharacterAnimator>();
     viewModel.characterAnimator = mockCharacterAnimator;
 
@@ -258,7 +267,7 @@ describe("StoryNPCView", () => {
     expect(characterNavigatorMock.setup).toHaveBeenCalledTimes(1);
     expect(characterNavigatorMock.setup).toHaveBeenCalledWith(
       mockParentNode,
-      mockMesh,
+      mockModelRootNode,
       mockCharacterAnimator,
       expect.any(Boolean)
     );
