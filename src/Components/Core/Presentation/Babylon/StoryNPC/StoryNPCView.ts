@@ -164,6 +164,7 @@ export default class StoryNPCView {
     );
     this.viewModel.characterAnimator.setup(
       () => this.viewModel.characterNavigator.CharacterVelocity,
+      this.viewModel.modelRootNode,
       this.idleAnimation,
       this.walkAnimation
     );
@@ -176,7 +177,6 @@ export default class StoryNPCView {
       );
     this.viewModel.characterNavigator.setup(
       this.viewModel.parentNode,
-      this.viewModel.modelRootNode,
       this.viewModel.characterAnimator,
       config.isDebug
     );

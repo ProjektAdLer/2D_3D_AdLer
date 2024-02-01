@@ -116,6 +116,7 @@ export default class AvatarView {
     );
     this.viewModel.characterAnimator.setup(
       () => this.viewModel.characterNavigator.CharacterVelocity,
+      this.viewModel.modelRootNode,
       this.idleAnimation,
       this.walkAnimation,
       this.interactionAnimation
@@ -129,7 +130,6 @@ export default class AvatarView {
       );
     this.viewModel.characterNavigator.setup(
       this.viewModel.parentNode,
-      this.viewModel.modelRootNode,
       this.viewModel.characterAnimator,
       config.isDebug
     );

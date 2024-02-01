@@ -1,9 +1,10 @@
-import { AnimationGroup, Vector3 } from "@babylonjs/core";
+import { AnimationGroup, TransformNode, Vector3 } from "@babylonjs/core";
 import CharacterAnimationActions from "./CharacterAnimationActions";
 
 export default interface ICharacterAnimator {
   setup(
     getCharacterVelocity: () => Vector3,
+    characterRotationNode: TransformNode,
     idleAnimation: AnimationGroup,
     walkAnimation: AnimationGroup,
     interactionAnimation?: AnimationGroup

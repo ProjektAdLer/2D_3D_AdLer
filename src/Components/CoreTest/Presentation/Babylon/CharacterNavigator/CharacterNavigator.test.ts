@@ -52,7 +52,6 @@ describe("CharacterNavigator", () => {
     systemUnderTest = new CharacterNavigator();
     systemUnderTest.setup(
       new TransformNode("mockParentNode", new Scene(new NullEngine())),
-      new TransformNode("mockRotationNode", new Scene(new NullEngine())),
       characterAnimatorMock,
       false
     );
@@ -136,24 +135,6 @@ describe("CharacterNavigator", () => {
     expect(characterAnimatorMock.transition).toHaveBeenCalledWith(
       CharacterAnimationActions.TargetReached
     );
-  });
-
-  test("rotateCharacter rotates character according to its velocity", () => {
-    const expectedVelocity = new Vector3(1, 0, 1);
-    navigationMock.Crowd.getAgentVelocity.mockReturnValue(expectedVelocity);
-
-    systemUnderTest["rotateCharacter"]();
-
-    expect(systemUnderTest["characterRotationNode"].rotationQuaternion)
-      .toMatchInlineSnapshot(`
-      Quaternion {
-        "_isDirty": true,
-        "_w": 0.9238795325112867,
-        "_x": 0,
-        "_y": 0.3826834323650898,
-        "_z": 0,
-      }
-    `);
   });
 
   test("debug_drawPath does nothing when verbose is false", () => {

@@ -6,7 +6,6 @@ export default interface ICharacterNavigator extends IReadyable {
   get CharacterVelocity(): Vector3;
   setup(
     parentNode: TransformNode,
-    characterRotationNode: TransformNode,
     characterAnimator: ICharacterAnimator,
     verbose?: boolean
   ): void;

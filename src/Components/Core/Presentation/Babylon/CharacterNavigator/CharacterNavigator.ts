@@ -2,15 +2,12 @@ import {
   Vector3,
   IAgentParameters,
   TransformNode,
-  Quaternion,
-  Axis,
   MeshBuilder,
   StandardMaterial,
   Color3,
   LinesMesh,
   Nullable,
   Observer,
-  Scene,
 } from "@babylonjs/core";
 import bind from "bind-decorator";
 import INavigation from "../Navigation/INavigation";
@@ -42,17 +39,14 @@ export default class CharacterNavigator
     separationWeight: 1.0,
     reachRadius: 0.4, // acts as stopping distance
   };
-  private readonly rotationVelocityThreshold: number = 0.5;
 
   private navigation: INavigation;
   private scenePresenter: IScenePresenter;
   private agentIndex: number;
-  private rotationObserverRef: Nullable<Observer<Scene>>;
   private targetReachedObserverRef: Nullable<
     Observer<{ agentIndex: number; destination: Vector3 }>
   >;
   private parentNode: TransformNode;
-  private characterRotationNode: TransformNode;
   private characterAnimator: ICharacterAnimator;
   private verbose: boolean = false;
 
@@ -69,12 +63,10 @@ export default class CharacterNavigator
 
   public setup(
     parentNode: TransformNode,
-    characterRotationNode: TransformNode,
     characterAnimator: ICharacterAnimator,
     verbose?: boolean
   ): void {
     this.parentNode = parentNode;
-    this.characterRotationNode = characterRotationNode;
     this.characterAnimator = characterAnimator;
     if (verbose) this.verbose = verbose;
 
@@ -94,10 +86,6 @@ export default class CharacterNavigator
       CharacterAnimationActions.MovementStarted
     );
 
-    this.rotationObserverRef =
-      this.scenePresenter.Scene.onBeforeRenderObservable.add(
-        this.rotateCharacter
-      );
     this.targetReachedObserverRef =
       this.navigation.Crowd.onReachTargetObservable.add(
         (eventData: { agentIndex: number }) => {
@@ -119,9 +107,6 @@ export default class CharacterNavigator
     );
     this.characterAnimator.transition(CharacterAnimationActions.TargetReached);
 
-    this.scenePresenter.Scene.onBeforeRenderObservable.remove(
-      this.rotationObserverRef
-    );
     this.navigation.Crowd.onReachTargetObservable.remove(
       this.targetReachedObserverRef
     );
@@ -136,10 +121,6 @@ export default class CharacterNavigator
       this.parentNode.position
     );
 
-    // make sure rotation node has quaternion set
-    if (!this.characterRotationNode.rotationQuaternion)
-      this.characterRotationNode.rotationQuaternion = new Quaternion();
-
     this.agentIndex = this.navigation.Crowd.addAgent(
       this.parentNode.position,
       this.agentParams,
@@ -151,21 +132,6 @@ export default class CharacterNavigator
     this.debug_drawCircle(this.agentParams.reachRadius!, Color3.Red());
 
     this.resolveIsReady();
-  }
-
-  @bind
-  private rotateCharacter(): void {
-    const velocity = this.navigation.Crowd.getAgentVelocity(this.agentIndex);
-
-    if (velocity.length() > this.rotationVelocityThreshold) {
-      velocity.normalize();
-      let desiredRotation = Math.atan2(velocity.x, velocity.z);
-
-      this.characterRotationNode.rotationQuaternion = Quaternion.RotationAxis(
-        Axis.Y,
-        desiredRotation
-      );
-    }
   }
 
   private debug_drawPath(target: Vector3): void {
