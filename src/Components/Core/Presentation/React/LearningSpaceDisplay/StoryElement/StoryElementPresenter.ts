@@ -20,6 +20,7 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
 
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
     this.viewModel.type.Value = learningSpaceTO.storyElement.storyType;
+    this.viewModel.modelType.Value = learningSpaceTO.storyElement.modelType;
     this.viewModel.introTexts.Value =
       learningSpaceTO.storyElement.introStoryTexts;
     this.viewModel.outroTexts.Value =

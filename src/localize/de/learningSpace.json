@@ -12,12 +12,12 @@
   "exitRoomTitle": "Raum verlassen?",
   "exitRoomButton": "Raum verlassen",
 
-  "introStoryTitle": "Lernraum Einführung",
-  "outroStoryTitle": "Lernraum Abschluss",
-  "introOutroStoryTitle": "Lernraum Einführung & Abschluss",
+  "introStoryTitle": "Intro",
+  "outroStoryTitle": "Outro",
+  "introOutroStoryTitle": "Wähle zwischen Intro oder Outro der Lernraumstory",
   "outroLockedTitle": "Lernraum Abschluss gesperrt",
   "outroLockedText": "Dieses Element ist noch nicht verfügbar. Schließe zuerst den Raum ab!",
-  "backButton": "Zurück zur Auswahl",
+  "backButton": "Intro/Outro Auswahl",
 
   "spaceScore": "{{current}} von {{required}}",
 

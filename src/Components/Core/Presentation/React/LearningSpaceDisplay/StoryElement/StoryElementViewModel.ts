@@ -1,5 +1,6 @@
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import Observable from "../../../../../../Lib/Observable";
+import { LearningElementModel } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 export default class StoryElementViewModel {
   introTexts: Observable<string[] | null> = new Observable<string[] | null>(
@@ -17,4 +18,6 @@ export default class StoryElementViewModel {
   //MenuNavigation
   showOnlyIntro: Observable<boolean> = new Observable<boolean>(false);
   showOnlyOutro: Observable<boolean> = new Observable<boolean>(false);
+  modelType: Observable<LearningElementModel | null> =
+    new Observable<LearningElementModel | null>(null);
 }
