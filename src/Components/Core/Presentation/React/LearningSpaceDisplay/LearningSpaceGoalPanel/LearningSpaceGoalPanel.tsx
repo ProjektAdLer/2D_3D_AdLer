@@ -27,9 +27,9 @@ export default function LearningSpaceGoalPanel() {
             <div>Zu diesem Lernraum gibt es keine eingetragenen Lernziele!</div>
           ))}
         {goals && (
-          <div className="flex flex-row ">
+          <div className="flex flex-row">
             <div>
-              <div className="flex flex-row justify-center">
+              <div className="flex flex-row ">
                 <img
                   src={GoalLogo}
                   alt="Lernziel Logo"
@@ -40,10 +40,10 @@ export default function LearningSpaceGoalPanel() {
                 </h3>
               </div>
 
-              <ul className="ml-4 text-xs list-disc lg:text-sm">
+              <ul className="ml-4 text-xs list-disc lg:text-sm ">
                 {goals.map((goal, index) => {
                   return (
-                    <li key={index}>
+                    <li className="my-2" key={index}>
                       <TextWithLineBreaks text={goal} />
                     </li>
                   );
