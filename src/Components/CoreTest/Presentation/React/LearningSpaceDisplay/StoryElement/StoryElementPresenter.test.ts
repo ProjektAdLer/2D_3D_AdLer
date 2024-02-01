@@ -2,6 +2,7 @@ import StoryElementTO from "../../../../../Core/Application/DataTransferObjects/
 import { StoryElementType } from "../../../../../Core/Domain/Types/StoryElementType";
 import StoryElementPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/StoryElementPresenter";
 import StoryElementViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/StoryElementViewModel";
+import LearningSpaceTO from "../../../../../Core/Application/DataTransferObjects/LearningSpaceTO";
 
 describe("StoryElementPresenter", () => {
   let systemUnderTest: StoryElementPresenter;
@@ -41,17 +42,34 @@ describe("StoryElementPresenter", () => {
   });
 
   test("onLearningSpaceLoaded sets the correct values", () => {
-    let storyElementText: StoryElementTO = {
+    let storyElement: StoryElementTO = {
       introStoryTexts: ["blabla111", "blabla222"],
       outroStoryTexts: ["blabla333"],
       modelType: null,
       storyType: StoryElementType.Intro,
     };
+    let learningSpaceTO: LearningSpaceTO = {
+      id: 1,
+      name: "blabla",
+      elements: [],
+      description: "blabla",
+      goals: [],
+      requirementsString: "blabla",
+      requirementsSyntaxTree: null,
+      isAvailable: true,
+      requiredScore: 1,
+      currentScore: 1,
+      maxScore: 1,
+      template: null,
+      theme: null,
+      storyElement: storyElement,
+    };
+
     viewModel.introTexts.Value = ["nicht blabla"];
     viewModel.outroTexts.Value = ["nicht blabla"];
     viewModel.type.Value = StoryElementType.None;
 
-    systemUnderTest.onLearningSpaceLoaded(storyElementText);
+    systemUnderTest.onLearningSpaceLoaded(learningSpaceTO);
 
     expect(viewModel.introTexts.Value).toStrictEqual([
       "blabla111",
