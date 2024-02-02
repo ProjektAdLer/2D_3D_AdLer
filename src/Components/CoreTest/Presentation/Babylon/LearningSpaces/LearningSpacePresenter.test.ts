@@ -63,12 +63,14 @@ const spaceTO: LearningSpaceTO = {
   isAvailable: true,
   template: LearningSpaceTemplateType.L,
   theme: LearningSpaceThemeType.Campus,
-  storyElement: {
-    introStoryTexts: null,
-    outroStoryTexts: null,
-    storyType: StoryElementType.None,
-    modelType: null,
-  } as StoryElementTO,
+  storyElements: [
+    {
+      introStoryTexts: null,
+      outroStoryTexts: null,
+      storyType: StoryElementType.None,
+      modelType: null,
+    } as StoryElementTO,
+  ],
 };
 
 describe("LearningSpacePresenter", () => {
@@ -279,13 +281,15 @@ describe("LearningSpacePresenter", () => {
   test("createStoryNPC creates a storyNPC with its builder when story element is available", async () => {
     await systemUnderTest["createStoryNPCs"]({
       ...spaceTO,
-      storyElement: {
-        introStoryTexts: ["test"],
-        outroStoryTexts: null,
-        storyType: StoryElementType.Intro,
-        modelType:
-          LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
-      },
+      storyElements: [
+        {
+          introStoryTexts: ["test"],
+          outroStoryTexts: null,
+          storyType: StoryElementType.Intro,
+          modelType:
+            LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+        },
+      ],
     });
 
     expect(directorMock.buildAsync).toHaveBeenCalledTimes(1);

@@ -239,7 +239,7 @@ export default class LoadLearningWorldUseCase
             template: space.template,
             theme: space.templateStyle,
             parentWorldID: worldID,
-            storyElement: this.createStoryElementEntity(
+            storyElements: this.createStoryElementEntitiesForSpace(
               space.introStory,
               space.outroStory,
               worldID,
@@ -254,36 +254,66 @@ export default class LoadLearningWorldUseCase
     return spaceEntities;
   }
 
-  private createStoryElementEntity(
+  private createStoryElementEntitiesForSpace(
     introStoryElement: BackendStoryTO | null,
     outroStoryElement: BackendStoryTO | null,
     worldID: number,
     spaceID: number
-  ): StoryElementEntity {
-    let storytype: StoryElementType = StoryElementType.None;
-    if (introStoryElement !== null) storytype |= StoryElementType.Intro;
-    if (outroStoryElement !== null) storytype |= StoryElementType.Outro;
+  ): StoryElementEntity[] {
+    let storyElementEntities: StoryElementEntity[] = [];
 
-    let storyElementEntity = this.container.createEntity<StoryElementEntity>(
-      {
-        worldID: worldID,
-        spaceID: spaceID,
-        introStoryTexts: introStoryElement
-          ? introStoryElement.storyTexts
-          : null,
-        outroStoryTexts: outroStoryElement
-          ? outroStoryElement.storyTexts
-          : null,
-        modelType:
-          introStoryElement?.elementModel ??
-          outroStoryElement?.elementModel ??
-          null,
-        storyType: storytype,
-      },
-      StoryElementEntity
-    );
+    // create combined intro-outro story element if both are present and have the same model
+    if (
+      introStoryElement !== null &&
+      outroStoryElement !== null &&
+      introStoryElement.elementModel === outroStoryElement.elementModel
+    ) {
+      storyElementEntities.push(
+        this.container.createEntity<StoryElementEntity>(
+          {
+            worldID: worldID,
+            spaceID: spaceID,
+            introStoryTexts: introStoryElement.storyTexts,
+            outroStoryTexts: outroStoryElement.storyTexts,
+            modelType: introStoryElement.elementModel,
+            storyType: StoryElementType.IntroOutro,
+          },
+          StoryElementEntity
+        )
+      );
+    }
 
-    return storyElementEntity;
+    // create separate intro and outro story elements if present
+    if (introStoryElement !== null) {
+      storyElementEntities.push(
+        this.container.createEntity<StoryElementEntity>(
+          {
+            worldID: worldID,
+            spaceID: spaceID,
+            introStoryTexts: introStoryElement.storyTexts,
+            modelType: introStoryElement.elementModel,
+            storyType: StoryElementType.Intro,
+          },
+          StoryElementEntity
+        )
+      );
+    }
+    if (outroStoryElement !== null) {
+      storyElementEntities.push(
+        this.container.createEntity<StoryElementEntity>(
+          {
+            worldID: worldID,
+            spaceID: spaceID,
+            outroStoryTexts: outroStoryElement.storyTexts,
+            modelType: outroStoryElement.elementModel,
+            storyType: StoryElementType.Outro,
+          },
+          StoryElementEntity
+        )
+      );
+    }
+
+    return storyElementEntities;
   }
 
   private createLearningElementEntities(

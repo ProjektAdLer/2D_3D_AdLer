@@ -45,7 +45,8 @@ export default class BeginStoryElementOutroCutSceneUseCase
         StoryElementEntity,
         (entity) =>
           entity.worldID === userLocation.worldID &&
-          entity.spaceID === userLocation.spaceID
+          entity.spaceID === userLocation.spaceID &&
+          (entity.storyType & StoryElementType.Outro) === StoryElementType.Outro
       );
 
     if (storyElementsInSpace.length === 0) return; // return if space has no story elements
@@ -83,7 +84,7 @@ export default class BeginStoryElementOutroCutSceneUseCase
         spaceScore.requiredScore &&
       spaceScore.currentScore >= spaceScore.requiredScore
     ) {
-      this.loadStoryElementUseCase.execute();
+      this.loadStoryElementUseCase.execute(StoryElementType.Outro);
       this.worldPort.onStoryElementCutSceneTriggered(StoryElementType.Outro);
     }
   }

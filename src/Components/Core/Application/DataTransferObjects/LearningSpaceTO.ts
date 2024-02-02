@@ -19,5 +19,5 @@ export default class LearningSpaceTO {
   maxScore: number;
   template: LearningSpaceTemplateType;
   theme: LearningSpaceThemeType;
-  storyElement: StoryElementTO;
+  storyElements: StoryElementTO[];
 }

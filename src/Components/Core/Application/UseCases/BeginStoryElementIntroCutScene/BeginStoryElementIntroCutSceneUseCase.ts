@@ -36,7 +36,8 @@ export default class BeginStoryElementIntroCutSceneUseCase
         StoryElementEntity,
         (entity) =>
           entity.worldID === userLocation.worldID &&
-          entity.spaceID === userLocation.spaceID
+          entity.spaceID === userLocation.spaceID &&
+          (entity.storyType & StoryElementType.Intro) === StoryElementType.Intro
       );
 
     if (elements.length === 0) return;
@@ -47,7 +48,7 @@ export default class BeginStoryElementIntroCutSceneUseCase
     });
 
     if (spaceScore.currentScore === 0) {
-      this.loadStoryElementUseCase.execute();
+      this.loadStoryElementUseCase.execute(StoryElementType.Intro);
       this.worldPort.onStoryElementCutSceneTriggered(StoryElementType.Intro);
     }
   }

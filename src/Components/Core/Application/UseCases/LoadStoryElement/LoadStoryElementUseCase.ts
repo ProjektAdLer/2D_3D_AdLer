@@ -10,6 +10,7 @@ import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUse
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import LearningSpaceEntity from "src/Components/Core/Domain/Entities/LearningSpaceEntity";
 import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 @injectable()
 export default class LoadStoryElementUseCase
@@ -26,26 +27,30 @@ export default class LoadStoryElementUseCase
     private worldPort: ILearningWorldPort
   ) {}
 
-  execute(): void {
+  execute(storyElementType: StoryElementType): void {
+    if (storyElementType === StoryElementType.None) return;
+
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
-      this.logger.log(LogLevelTypes.ERROR, `User is not in a space!`);
-      throw new Error(`User is not in a space!`);
+      this.logger.log(LogLevelTypes.WARN, `User is not in a space!`);
+      return;
     }
 
     const learningSpaceEntity = this.getLearningSpaceEntity(
       userLocation.worldID,
       userLocation.spaceID
     );
-    const storyTO = this.createStoryTO(learningSpaceEntity);
+    if (!learningSpaceEntity) return;
 
-    this.worldPort.onStoryElementLoaded(storyTO);
+    const storyTO = this.createStoryTO(learningSpaceEntity, storyElementType);
+
+    if (storyTO) this.worldPort.onStoryElementLoaded(storyTO);
   }
 
   private getLearningSpaceEntity(
     worldID: number,
     spaceID: number
-  ): LearningSpaceEntity {
+  ): LearningSpaceEntity | null {
     const learningSpaceEntities =
       this.entityContainter.filterEntitiesOfType<LearningSpaceEntity>(
         LearningSpaceEntity,
@@ -57,33 +62,43 @@ export default class LoadStoryElementUseCase
     // throw expeciton if no entities found
     if (learningSpaceEntities.length === 0) {
       this.logger.log(
-        LogLevelTypes.ERROR,
+        LogLevelTypes.WARN,
         `Could not find a space with spaceID ${spaceID} in world ${worldID}`
       );
-      throw new Error(
-        `Could not find a space with spaceID ${spaceID} in world ${worldID}`
-      );
+      return null;
     } else if (learningSpaceEntities.length > 1) {
       this.logger.log(
-        LogLevelTypes.ERROR,
+        LogLevelTypes.WARN,
         `Found more than one space with spaceID ${spaceID} in world ${worldID}`
       );
-      throw new Error(
-        `Found more than one space with spaceID ${spaceID} in world ${worldID}`
-      );
+      return null;
     }
 
     return learningSpaceEntities[0];
   }
 
   private createStoryTO(
-    LearningSpaceEntity: LearningSpaceEntity
-  ): StoryElementTO {
+    learningSpaceEntity: LearningSpaceEntity,
+    storyElementType: StoryElementType
+  ): StoryElementTO | null {
+    const storyElementEntity = learningSpaceEntity.storyElements?.find(
+      (storyElement) =>
+        (storyElement.storyType & storyElementType) === storyElementType
+    );
+
+    if (!storyElementEntity) {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        `Could not find story element of type ${storyElementType}`
+      );
+      return null;
+    }
+
     let storyTO = new StoryElementTO();
-    storyTO.introStoryTexts = LearningSpaceEntity.storyElement.introStoryTexts;
-    storyTO.outroStoryTexts = LearningSpaceEntity.storyElement.outroStoryTexts;
-    storyTO.storyType = LearningSpaceEntity.storyElement.storyType;
-    storyTO.modelType = LearningSpaceEntity.storyElement.modelType;
+    storyTO.introStoryTexts = storyElementEntity.introStoryTexts;
+    storyTO.outroStoryTexts = storyElementEntity.outroStoryTexts;
+    storyTO.storyType = storyElementEntity.storyType;
+    storyTO.modelType = storyElementEntity.modelType;
     return storyTO;
   }
 }
