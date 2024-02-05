@@ -1,7 +1,13 @@
 import bind from "bind-decorator";
 import StateMachine from "../../Utils/StateMachine/StateMachine";
-import { AnimationGroup, Observer, Scene } from "@babylonjs/core";
-import type { Nullable, Vector3 } from "@babylonjs/core";
+import {
+  AnimationGroup,
+  Axis,
+  Observer,
+  Quaternion,
+  Scene,
+} from "@babylonjs/core";
+import type { Nullable, TransformNode, Vector3 } from "@babylonjs/core";
 import CharacterAnimationStates from "./CharacterAnimationStates";
 import CharacterAnimationActions from "./CharacterAnimationActions";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
@@ -15,24 +21,30 @@ import { injectable } from "inversify";
 
 @injectable()
 export default class CharacterAnimator implements ICharacterAnimator {
+  private readonly rotationVelocityThreshold: number = 0.5;
+
   private stateMachine = new StateMachine<
     CharacterAnimationStates,
     CharacterAnimationActions
   >(CharacterAnimationStates.Idle, []);
   private animationBlendValue: number = 0;
+  private rotationObserverRef: Nullable<Observer<Scene>>;
   private scenePresenter: IScenePresenter;
   private getCharacterVelocity: () => Vector3;
+  private characterRotationNode: TransformNode;
   private idleAnimation: AnimationGroup;
   private walkAnimation: AnimationGroup;
   private interactionAnimation?: AnimationGroup;
 
   public setup(
     getCharacterVelocity: () => Vector3,
+    characterRotationNode: TransformNode,
     idleAnimation: AnimationGroup,
     walkAnimation: AnimationGroup,
     interactionAnimation?: AnimationGroup
   ): void {
     this.getCharacterVelocity = getCharacterVelocity;
+    this.characterRotationNode = characterRotationNode;
     this.idleAnimation = idleAnimation;
     this.walkAnimation = walkAnimation;
     this.interactionAnimation = interactionAnimation;
@@ -41,6 +53,10 @@ export default class CharacterAnimator implements ICharacterAnimator {
       SCENE_TYPES.ScenePresenterFactory
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
+
+    // make sure rotation node has quaternion set
+    if (!this.characterRotationNode.rotationQuaternion)
+      this.characterRotationNode.rotationQuaternion = new Quaternion();
 
     this.setupIdleAnimation();
     this.setupWalkAnimation();
@@ -102,11 +118,35 @@ export default class CharacterAnimator implements ICharacterAnimator {
   }
 
   @bind
+  private rotateCharacter(): void {
+    const velocity = this.getCharacterVelocity();
+
+    if (velocity.length() > this.rotationVelocityThreshold) {
+      velocity.normalize();
+      let desiredRotation = Math.atan2(velocity.x, velocity.z);
+
+      this.characterRotationNode.rotationQuaternion = Quaternion.RotationAxis(
+        Axis.Y,
+        desiredRotation
+      );
+    }
+  }
+
+  @bind
+  private removeRotationObserver(): void {
+    if (this.rotationObserverRef)
+      this.scenePresenter.Scene.onBeforeRenderObservable.remove(
+        this.rotationObserverRef
+      );
+  }
+
+  @bind
   private onBeforeAnimationTransitionObserver(
     from: AnimationGroup,
     to: AnimationGroup,
     observerToRemove: Nullable<Observer<Scene>>,
-    blendValueIncrementFunction: () => number
+    blendValueIncrementFunction: () => number,
+    transitionFinishedCallback?: () => void
   ): void {
     this.animationBlendValue += blendValueIncrementFunction();
 
@@ -125,6 +165,11 @@ export default class CharacterAnimator implements ICharacterAnimator {
 
   @bind
   private transitionFromIdleToWalk(): void {
+    this.rotationObserverRef =
+      this.scenePresenter.Scene.onBeforeRenderObservable.add(
+        this.rotateCharacter
+      );
+
     this.animationBlendValue = 0;
     const observer = this.scenePresenter.Scene.onBeforeAnimationsObservable.add(
       () => {
@@ -147,7 +192,8 @@ export default class CharacterAnimator implements ICharacterAnimator {
           this.walkAnimation,
           this.idleAnimation,
           observer,
-          () => this.getTimedAnimationInterpolationIncrement(100)
+          () => this.getTimedAnimationInterpolationIncrement(100),
+          this.removeRotationObserver
         );
       }
     );
@@ -174,7 +220,8 @@ export default class CharacterAnimator implements ICharacterAnimator {
           fromAnimation,
           this.interactionAnimation!,
           observer,
-          () => this.getTimedAnimationInterpolationIncrement(100)
+          () => this.getTimedAnimationInterpolationIncrement(100),
+          this.removeRotationObserver
         );
       }
     );

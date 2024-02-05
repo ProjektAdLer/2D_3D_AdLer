@@ -26,6 +26,7 @@ export default class StoryNPCViewModel {
   modelMeshes: Mesh[];
   iconMeshes: Mesh[];
   parentNode: TransformNode;
+  modelRootNode: TransformNode;
   storyType: StoryElementType;
   idleTimer: NodeJS.Timeout;
   avatarPosition: Vector3 = new Vector3(0, 0, 0);

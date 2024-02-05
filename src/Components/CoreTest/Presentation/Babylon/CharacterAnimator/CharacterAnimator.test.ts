@@ -7,9 +7,11 @@ import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES
 import {
   AnimationGroup,
   EventState,
+  NullEngine,
   Nullable,
   Observer,
   Scene,
+  TransformNode,
   Vector3,
 } from "@babylonjs/core";
 import CharacterAnimator from "../../../../Core/Presentation/Babylon/CharacterAnimator/CharacterAnimator";
@@ -42,7 +44,8 @@ describe("CharacterAnimator", () => {
   beforeEach(() => {
     systemUnderTest = new CharacterAnimator();
     systemUnderTest.setup(
-      () => new Vector3(0, 0, 0),
+      () => new Vector3(1, 0, 0),
+      new TransformNode("mockRotationNode", new Scene(new NullEngine())),
       mockIdleAnimation,
       mockWalkAnimation,
       mockInteractionAnimation
@@ -84,6 +87,21 @@ describe("CharacterAnimator", () => {
     expect(mockWalkAnimation.setWeightForAllAnimatables).toHaveBeenCalledWith(
       0
     );
+  });
+
+  test("rotateCharacter rotates character according to its velocity", () => {
+    systemUnderTest["rotateCharacter"]();
+
+    expect(systemUnderTest["characterRotationNode"].rotationQuaternion)
+      .toMatchInlineSnapshot(`
+      Quaternion {
+        "_isDirty": true,
+        "_w": 0.7071067811865476,
+        "_x": 0,
+        "_y": 0.7071067811865475,
+        "_z": 0,
+      }
+    `);
   });
 
   test("onBeforeAnimationTransitionObserver removes the given observer from the onBeforeAniamtionObservable of the scene when the transition is done", () => {

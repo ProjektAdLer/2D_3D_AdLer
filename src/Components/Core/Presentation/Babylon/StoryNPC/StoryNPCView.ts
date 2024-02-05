@@ -10,7 +10,6 @@ import {
   AnimationGroup,
   ExecuteCodeAction,
   Mesh,
-  Quaternion,
   TransformNode,
   Vector3,
 } from "@babylonjs/core";
@@ -89,12 +88,14 @@ export default class StoryNPCView {
 
   private setupModel(): void {
     this.viewModel.modelMeshes[0].position = new Vector3(0, 0.05, 0);
-    this.viewModel.modelMeshes[0].scaling = new Vector3(1, 1, -1);
 
-    this.viewModel.modelMeshes.forEach(
-      (mesh) => (mesh.rotationQuaternion = null)
+    // create separate root node for model
+    // so that it can be rotated without affecting gltf coordinate system conversions in __root__ node created by Babylon
+    this.viewModel.modelRootNode = new TransformNode(
+      "NPCRootNode",
+      this.scenePresenter.Scene
     );
-    this.viewModel.modelMeshes[0].rotationQuaternion = Quaternion.Zero();
+    this.viewModel.modelMeshes[0].setParent(this.viewModel.modelRootNode);
   }
 
   private async loadIconModel(): Promise<void> {
@@ -112,8 +113,7 @@ export default class StoryNPCView {
       "NPCParentNode",
       this.scenePresenter.Scene
     );
-
-    this.viewModel.modelMeshes[0].setParent(this.viewModel.parentNode);
+    this.viewModel.modelRootNode.setParent(this.viewModel.parentNode);
     this.viewModel.iconMeshes[0].setParent(this.viewModel.parentNode);
   }
 
@@ -164,6 +164,7 @@ export default class StoryNPCView {
     );
     this.viewModel.characterAnimator.setup(
       () => this.viewModel.characterNavigator.CharacterVelocity,
+      this.viewModel.modelRootNode,
       this.idleAnimation,
       this.walkAnimation
     );
@@ -176,7 +177,6 @@ export default class StoryNPCView {
       );
     this.viewModel.characterNavigator.setup(
       this.viewModel.parentNode,
-      this.viewModel.modelMeshes[0],
       this.viewModel.characterAnimator,
       config.isDebug
     );

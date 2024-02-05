@@ -9,13 +9,15 @@ import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityCon
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import StoryElementEntity from "../../../../Core/Domain/Entities/StoryElementEntity";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
-import StoryElementTextTO from "../../../../Core/Application/DataTransferObjects/StoryElementTextTO";
 import LearningSpaceEntity from "../../../../Core/Domain/Entities/LearningSpaceEntity";
 import StoryElementTO from "../../../../Core/Application/DataTransferObjects/StoryElementTO";
+import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 
 const worldPortMock = mock<ILearningWorldPort>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 const entityContainerMock = mock<IEntityContainer>();
+const loggerMock = mock<ILoggerPort>();
 
 describe("LoadStoryElementUseCase", () => {
   let systemUnderTest: LoadStoryElementUseCase;
@@ -26,14 +28,13 @@ describe("LoadStoryElementUseCase", () => {
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
       worldPortMock
     );
-
     CoreDIContainer.rebind(
       USECASE_TYPES.IGetUserLocationUseCase
     ).toConstantValue(getUserLocationUseCaseMock);
-
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
       entityContainerMock
     );
+    CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
   });
 
   beforeEach(() => {
@@ -44,18 +45,22 @@ describe("LoadStoryElementUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  test("should throw, if user is not in learningspace", async () => {
+  test("should warn and don't call world port, if user is not in learningspace", () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
       spaceID: undefined,
     });
 
-    await expect(() => systemUnderTest.execute()).toThrow(
-      "User is not in a space"
+    systemUnderTest.execute(StoryElementType.IntroOutro);
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      "User is not in a space!"
     );
+    expect(worldPortMock.onStoryElementLoaded).not.toHaveBeenCalled();
   });
 
-  test("should throw, if more than one space is found", () => {
+  test("should warn and don't call world port, if more than one space is found", () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
       spaceID: 1,
@@ -70,12 +75,16 @@ describe("LoadStoryElementUseCase", () => {
       } as LearningSpaceEntity,
     ]);
 
-    expect(() => systemUnderTest.execute()).toThrow(
-      "Found more than one space with spaceID"
+    systemUnderTest.execute(StoryElementType.IntroOutro);
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      "Found more than one space with spaceID 1 in world 1"
     );
+    expect(worldPortMock.onStoryElementLoaded).not.toHaveBeenCalled();
   });
 
-  test("should throw if no space entities are found", () => {
+  test("should warn and don't call world port, if no space entities are found", () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
       spaceID: 1,
@@ -83,9 +92,33 @@ describe("LoadStoryElementUseCase", () => {
 
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 
-    expect(() => systemUnderTest.execute()).toThrow(
-      "Could not find a space with spaceID"
+    systemUnderTest.execute(StoryElementType.IntroOutro);
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      "Could not find a space with spaceID 1 in world 1"
     );
+    expect(worldPortMock.onStoryElementLoaded).not.toHaveBeenCalled();
+  });
+
+  test("should warn and don't call world port, if no story element is found", () => {
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: 1,
+    });
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      {
+        id: 1,
+      } as LearningSpaceEntity,
+    ]);
+
+    systemUnderTest.execute(StoryElementType.IntroOutro);
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      expect.stringContaining("Could not find story element of type")
+    );
+    expect(worldPortMock.onStoryElementLoaded).not.toHaveBeenCalled();
   });
 
   test("calls onStoryElementLoaded Port with story texts", () => {
@@ -97,17 +130,19 @@ describe("LoadStoryElementUseCase", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
         id: 1,
-        storyElement: {
-          spaceID: 1,
-          introStoryTexts: ["intro"],
-          outroStoryTexts: ["outro"],
-          modelType: "a_npc_defaultnpc",
-          storyType: StoryElementType.IntroOutro,
-        } as StoryElementEntity,
+        storyElements: [
+          {
+            spaceID: 1,
+            introStoryTexts: ["intro"],
+            outroStoryTexts: ["outro"],
+            modelType: "a_npc_defaultnpc",
+            storyType: StoryElementType.IntroOutro,
+          } as StoryElementEntity,
+        ],
       } as LearningSpaceEntity,
     ]);
 
-    systemUnderTest.execute();
+    systemUnderTest.execute(StoryElementType.Intro);
 
     expect(worldPortMock.onStoryElementLoaded).toHaveBeenCalledWith({
       introStoryTexts: ["intro"],

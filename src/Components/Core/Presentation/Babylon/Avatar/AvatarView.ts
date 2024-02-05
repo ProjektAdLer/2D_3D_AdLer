@@ -1,4 +1,4 @@
-import { Mesh, Quaternion, Vector3 } from "@babylonjs/core";
+import { Mesh, TransformNode, Vector3 } from "@babylonjs/core";
 import type { AnimationGroup, Nullable, Texture } from "@babylonjs/core";
 import SCENE_TYPES, {
   ScenePresenterFactory,
@@ -53,17 +53,20 @@ export default class AvatarView {
       this.scenePresenter.Scene.getTransformNodeByName("AvatarParentNode")!;
 
     let result = await this.scenePresenter.loadGLTFModel(modelLink);
-
-    // mesh setup
     this.viewModel.meshes = result.meshes as Mesh[];
-    this.viewModel.meshes[0].setParent(this.viewModel.parentNode);
+
+    // create separate root node for model
+    // so that it can be rotated without affecting gltf coordinate system conversions in __root__ node created by Babylon
+    this.viewModel.modelRootNode = new TransformNode(
+      "AvatarModelRootNode",
+      this.scenePresenter.Scene
+    );
+    this.viewModel.modelRootNode.position = new Vector3(0, 0.05, 0);
+    this.viewModel.modelRootNode.setParent(this.viewModel.parentNode);
+    this.viewModel.meshes[0].setParent(this.viewModel.modelRootNode);
 
     this.viewModel.parentNode.position = this.determineSpawnLocation();
     // place model 0.05 above the ground ~ FK
-    this.viewModel.meshes[0].position = new Vector3(0, 0.05, 0);
-    this.viewModel.meshes[0].scaling = new Vector3(1, 1, -1);
-    this.viewModel.meshes.forEach((mesh) => (mesh.rotationQuaternion = null));
-    this.viewModel.meshes[0].rotationQuaternion = new Quaternion(0, 0, 0, 1);
 
     // animation setup
     result.animationGroups.forEach((animationGroup) => {
@@ -113,6 +116,7 @@ export default class AvatarView {
     );
     this.viewModel.characterAnimator.setup(
       () => this.viewModel.characterNavigator.CharacterVelocity,
+      this.viewModel.modelRootNode,
       this.idleAnimation,
       this.walkAnimation,
       this.interactionAnimation
@@ -126,7 +130,6 @@ export default class AvatarView {
       );
     this.viewModel.characterNavigator.setup(
       this.viewModel.parentNode,
-      this.viewModel.meshes[0],
       this.viewModel.characterAnimator,
       config.isDebug
     );

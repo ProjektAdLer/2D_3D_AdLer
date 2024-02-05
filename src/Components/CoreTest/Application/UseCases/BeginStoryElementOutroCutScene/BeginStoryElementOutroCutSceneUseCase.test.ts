@@ -148,6 +148,7 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
     const storyElementEntityMock = {
       worldID: 1,
       spaceID: 1,
+      storyType: StoryElementType.Outro,
     };
     let filterResult;
     entityContainerMock.filterEntitiesOfType.mockImplementationOnce(

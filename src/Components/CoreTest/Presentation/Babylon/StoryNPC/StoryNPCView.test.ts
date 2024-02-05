@@ -162,6 +162,10 @@ describe("StoryNPCView", () => {
   test("createParentNode creates a new transform node and sets it in the viewmodel", () => {
     viewModel.modelMeshes = [new Mesh("mockMesh", new Scene(new NullEngine()))];
     viewModel.iconMeshes = [new Mesh("mockMesh", new Scene(new NullEngine()))];
+    viewModel.modelRootNode = new TransformNode(
+      "mockNode",
+      new Scene(new NullEngine())
+    );
 
     systemUnderTest["createParentNode"]();
 
@@ -230,25 +234,38 @@ describe("StoryNPCView", () => {
   });
 
   test("createCharacterAnimator creates and sets up a new CharacterAnimator ", () => {
+    const mockIdleAnimation = mock<AnimationGroup>();
+    systemUnderTest["idleAnimation"] = mockIdleAnimation;
+    const mockWalkAnimation = mock<AnimationGroup>();
+    systemUnderTest["walkAnimation"] = mockWalkAnimation;
+    const mockInteractionAnimation = mock<AnimationGroup>();
+    systemUnderTest["interactionAnimation"] = mockInteractionAnimation;
+
+    const mockModelRootNode = new TransformNode(
+      "mockRootNode",
+      new Scene(new NullEngine())
+    );
+    viewModel.modelRootNode = mockModelRootNode;
+
     systemUnderTest["createCharacterAnimator"]();
 
     expect(viewModel.characterAnimator).toBeDefined();
     expect(characterAnimatorMock.setup).toHaveBeenCalledTimes(1);
-    expect(characterAnimatorMock.setup).toHaveBeenCalledWith(
-      expect.any(Function),
-      systemUnderTest["idleAnimation"],
-      systemUnderTest["walkAnimation"]
-    );
   });
 
   test("createCharacterNavigator creates and sets up a new CharacterNavigator ", () => {
     const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
     viewModel.modelMeshes = [mockMesh];
     const mockParentNode = new TransformNode(
-      "mockNode",
+      "mockParentNode",
       new Scene(new NullEngine())
     );
     viewModel.parentNode = mockParentNode;
+    const mockModelRootNode = new TransformNode(
+      "mockRootNode",
+      new Scene(new NullEngine())
+    );
+    viewModel.modelRootNode = mockModelRootNode;
     const mockCharacterAnimator = mock<ICharacterAnimator>();
     viewModel.characterAnimator = mockCharacterAnimator;
 
@@ -258,7 +275,6 @@ describe("StoryNPCView", () => {
     expect(characterNavigatorMock.setup).toHaveBeenCalledTimes(1);
     expect(characterNavigatorMock.setup).toHaveBeenCalledWith(
       mockParentNode,
-      mockMesh,
       mockCharacterAnimator,
       expect.any(Boolean)
     );

@@ -1,3 +1,12 @@
+import campusNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_dozentlukas.png";
+import campusNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_dozentlukas_close.png";
+import arcadeNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_sheriffjustice.png";
+import arcadeNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_sheriffjustice_close.png";
+import defaultNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_defaultnpc.png";
+import defaultNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_defaultnpc_close.png";
+import robotNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot.png";
+import robotNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot_close.png";
+
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import StoryElementViewModel from "./StoryElementViewModel";
@@ -6,10 +15,31 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
+import {
+  LearningElementModel,
+  LearningElementModelTypeEnums,
+} from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
+
+function getNPCImage(
+  model: LearningElementModel | null,
+  close: boolean
+): string {
+  switch (model) {
+    case LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC:
+      return close ? robotNPCClose : robotNPC;
+    case LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC:
+      return close ? arcadeNPCClose : arcadeNPC;
+    case LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC:
+      return close ? campusNPCClose : campusNPC;
+    case LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC:
+    default:
+      return close ? defaultNPCClose : defaultNPC;
+  }
+}
 
 export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   const [viewModel, controller] = useBuilder<
@@ -19,6 +49,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
   const [pageId] = useObservable<number>(viewModel?.pageId);
   const [type] = useObservable<StoryElementType>(viewModel?.type);
+
   useObservable<boolean>(viewModel?.showOnlyIntro);
   useObservable<boolean>(viewModel?.showOnlyOutro);
   useObservable<boolean>(viewModel?.outroUnlocked);
@@ -87,101 +118,163 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   } else {
     return null;
   }
-  return (
-    <StyledModal
-      title={titleText}
-      onClose={() => {
-        closeModal();
-        controller.closePanel();
-      }}
-      showModal={isOpen}
-      className={tailwindMerge(
-        className,
-        "flex flex-col justify-center gap-2 p-5 rounded-lg"
-      )}
-    >
-      {!complexStory && createBasicLayout(contentTexts, pageId, controller)}
-      {complexStory && (
-        <>
-          {!viewModel.showOnlyIntro.Value && !viewModel.showOnlyOutro.Value && (
-            <>
-              <StyledButton
-                shape="freefloatcenter"
-                onClick={controller.onIntroButtonClicked}
-              >
-                {translate("introStoryTitle").toString()}
-              </StyledButton>
-              <StyledButton
-                shape="freefloatcenter"
-                onClick={controller.onOutroButtonClicked}
-              >
-                {translate("outroStoryTitle").toString()}
-              </StyledButton>
-            </>
-          )}
-          {(viewModel.showOnlyIntro.Value || viewModel.showOnlyOutro.Value) &&
-            createBasicLayoutWithBackButton(
-              contentTexts,
-              pageId,
-              controller,
-              translate("backButton").toString()
-            )}
-        </>
-      )}
-    </StyledModal>
-  );
-}
 
-function createBasicLayout(
-  contentTexts: string[],
-  pageId: number,
-  controller: IStoryElementController
-) {
   return (
-    <>
-      {contentTexts[pageId].toString()}
-      <div className="flex justify-center gap-2">
-        {pageId < contentTexts.length - 1 && (
-          <StyledButton shape="square" onClick={controller.increasePageId}>
-            {">"}
-          </StyledButton>
-        )}
-        {pageId > 0 && (
-          <StyledButton shape="square" onClick={controller.decreasePageId}>
-            {"<"}
-          </StyledButton>
-        )}
+    <StyledContainer className={tailwindMerge(className, "")}>
+      <div className="z-50 fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-full lg:grid lg:grid-rows-3 lg:items-start">
+        {/* Background NPC */}
+        <div className="flex items-end justify-start invisible w-full row-start-2 pl-16 lg:visible lg:h-full">
+          <img
+            className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+            alt="LearningImage!"
+            src={getNPCImage(viewModel.modelType.Value, true)}
+          ></img>
+        </div>
+        {/* Modal */}
+        <div className="flex items-start justify-center pb-2 w-full lg:w-[95vw] max-w-7xl h-full lg:h-[32vh] pt-2 lg:pt-0 row-start-3 ">
+          <div className="grid grid-rows-5 p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%]   overflow-auto">
+            {/* Header */}
+            <div className="z-20 flex items-start justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
+              <img
+                className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+                alt="LearningImage!"
+                src={getNPCImage(viewModel.modelType.Value, false)}
+              ></img>
+
+              <div className="w-full lg:text-xl">{titleText}</div>
+
+              <StyledButton
+                onClick={controller.closePanel}
+                className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+                shape="closebutton"
+              >
+                X
+              </StyledButton>
+            </div>
+            <div className="row-span-4 items-center justify-center w-full grid grid-rows-4 lg:px-4">
+              {!complexStory &&
+                createBasicLayout(contentTexts, pageId, controller)}
+              {complexStory && (
+                <>
+                  {!viewModel.showOnlyIntro.Value &&
+                    !viewModel.showOnlyOutro.Value && (
+                      <>
+                        <StyledButton
+                          shape="freefloatcenter"
+                          onClick={controller.onIntroButtonClicked}
+                          className="!text-xl w-32"
+                        >
+                          {translate("introStoryTitle").toString()}
+                        </StyledButton>
+                        <StyledButton
+                          shape="freefloatcenter"
+                          onClick={controller.onOutroButtonClicked}
+                          className="!text-xl w-32"
+                        >
+                          {translate("outroStoryTitle").toString()}
+                        </StyledButton>
+                      </>
+                    )}
+                  {(viewModel.showOnlyIntro.Value ||
+                    viewModel.showOnlyOutro.Value) &&
+                    createBasicLayoutWithBackButton(
+                      contentTexts,
+                      pageId,
+                      controller,
+                      translate("backButton").toString()
+                    )}
+                </>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
-    </>
+    </StyledContainer>
   );
-}
-function createBasicLayoutWithBackButton(
-  contentTexts: string[],
-  pageId: number,
-  controller: IStoryElementController,
-  backbuttonText: string
-) {
-  return (
-    <>
-      {contentTexts[pageId].toString()}
-      <div className="flex justify-center gap-2">
-        {pageId < contentTexts.length - 1 && (
-          <StyledButton shape="square" onClick={controller.increasePageId}>
-            {">"}
+
+  function createBasicLayout(
+    contentTexts: string[],
+    pageId: number,
+    controller: IStoryElementController
+  ) {
+    return (
+      <>
+        <div className="row-span-3 flex justify-center items-center bg-buttonbgblue p-2 rounded-xl">
+          {contentTexts[pageId].toString()}
+        </div>
+        <div className="flex lg:w-[80vw] max-w-5xl justify-between">
+          <div className="grid grid-cols-2 w-32">
+            <div>
+              {" "}
+              {pageId > 0 && (
+                <StyledButton
+                  shape="closebutton"
+                  onClick={controller.decreasePageId}
+                >
+                  {"<"}
+                </StyledButton>
+              )}
+            </div>
+
+            <div className="col-start-2">
+              {pageId < contentTexts.length - 1 && (
+                <StyledButton
+                  shape="closebutton"
+                  onClick={controller.increasePageId}
+                >
+                  {">"}
+                </StyledButton>
+              )}
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+  function createBasicLayoutWithBackButton(
+    contentTexts: string[],
+    pageId: number,
+    controller: IStoryElementController,
+    backbuttonText: string
+  ) {
+    return (
+      <>
+        <div className="row-span-3 flex justify-center items-center bg-buttonbgblue p-2 rounded-xl">
+          {contentTexts[pageId].toString()}
+        </div>
+        <div className="flex lg:w-[80vw] max-w-5xl justify-between">
+          <StyledButton
+            shape="freefloatleft"
+            onClick={controller.backToMenuButtonClicked}
+          >
+            {backbuttonText}
           </StyledButton>
-        )}
-        {pageId > 0 && (
-          <StyledButton shape="square" onClick={controller.decreasePageId}>
-            {"<"}
-          </StyledButton>
-        )}
-        <StyledButton
-          shape="freefloatleft"
-          onClick={controller.backToMenuButtonClicked}
-        >
-          {backbuttonText}
-        </StyledButton>
-      </div>
-    </>
-  );
+          <div className="grid grid-cols-2 w-32">
+            <div>
+              {" "}
+              {pageId > 0 && (
+                <StyledButton
+                  shape="closebutton"
+                  onClick={controller.decreasePageId}
+                >
+                  {"<"}
+                </StyledButton>
+              )}
+            </div>
+
+            <div className="col-start-2">
+              {pageId < contentTexts.length - 1 && (
+                <StyledButton
+                  shape="closebutton"
+                  onClick={controller.increasePageId}
+                >
+                  {">"}
+                </StyledButton>
+              )}
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 }

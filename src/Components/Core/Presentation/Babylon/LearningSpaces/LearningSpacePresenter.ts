@@ -162,26 +162,28 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
   }
 
   private async createStoryNPCs(spaceTO: LearningSpaceTO): Promise<void> {
-    if (spaceTO.storyElement.storyType !== StoryElementType.None) {
-      const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
-        BUILDER_TYPES.IStoryNPCBuilder
-      );
-      storyNPCBuilder.storyType = spaceTO.storyElement.storyType;
-      storyNPCBuilder.modelType = spaceTO.storyElement.modelType!;
+    for (const storyElement of spaceTO.storyElements) {
+      if (storyElement.storyType !== StoryElementType.None) {
+        const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
+          BUILDER_TYPES.IStoryNPCBuilder
+        );
+        storyNPCBuilder.storyType = storyElement.storyType;
+        storyNPCBuilder.modelType = storyElement.modelType!;
 
-      storyNPCBuilder.learningSpaceTemplateType =
-        this.viewModel.learningSpaceTemplateType;
+        storyNPCBuilder.learningSpaceTemplateType =
+          this.viewModel.learningSpaceTemplateType;
 
-      storyNPCBuilder.isInCutScene = false;
-      if (
-        (spaceTO.storyElement.storyType & StoryElementType.Intro) ===
-        StoryElementType.Intro
-      ) {
-        storyNPCBuilder.isInCutScene = spaceTO.currentScore === 0;
+        storyNPCBuilder.isInCutScene = false;
+        if (
+          (storyElement.storyType & StoryElementType.Intro) ===
+          StoryElementType.Intro
+        ) {
+          storyNPCBuilder.isInCutScene = spaceTO.currentScore === 0;
+        }
+        await this.director.buildAsync(storyNPCBuilder);
+
+        this.storyNPCPresenters = storyNPCBuilder.getPresenter();
       }
-      await this.director.buildAsync(storyNPCBuilder);
-
-      this.storyNPCPresenters = storyNPCBuilder.getPresenter();
     }
   }
 }
