@@ -132,9 +132,9 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
         </div>
         {/* Modal */}
         <div className="flex items-start justify-center pb-2 w-full lg:w-[95vw] max-w-7xl h-full lg:h-[32vh] pt-2 lg:pt-0 row-start-3 ">
-          <div className="grid grid-rows-5 p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%]   overflow-auto">
+          <div className="grid grid-rows-5 p-2 xl:px-8 justify-center rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%]   overflow-auto">
             {/* Header */}
-            <div className="z-20 flex items-start justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
+            <div className="z-20 flex items-start justify-center w-[90vw] lg:max-w-5xl xl:max-w-6xl h-20 gap-2 py-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
               <img
                 className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
                 alt="LearningImage!"
@@ -151,41 +151,43 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                 X
               </StyledButton>
             </div>
-            <div className="grid items-center justify-center w-full grid-rows-4 row-span-4 lg:px-4">
-              {!complexStory &&
-                createBasicLayout(contentTexts, pageId, controller)}
-              {complexStory && (
-                <>
-                  {!viewModel.showOnlyIntro.Value &&
-                    !viewModel.showOnlyOutro.Value && (
-                      <>
-                        <StyledButton
-                          shape="freefloatcenter"
-                          onClick={controller.onIntroButtonClicked}
-                          className="!text-xl w-32"
-                        >
-                          {translate("introStoryTitle").toString()}
-                        </StyledButton>
-                        <StyledButton
-                          shape="freefloatcenter"
-                          onClick={controller.onOutroButtonClicked}
-                          className="!text-xl w-32"
-                        >
-                          {translate("outroStoryTitle").toString()}
-                        </StyledButton>
-                      </>
-                    )}
-                  {(viewModel.showOnlyIntro.Value ||
-                    viewModel.showOnlyOutro.Value) &&
-                    createBasicLayoutWithBackButton(
+            {!complexStory &&
+              createBasicLayout(contentTexts, pageId, controller)}
+            {complexStory && (
+              <>
+                {!viewModel.showOnlyIntro.Value &&
+                  !viewModel.showOnlyOutro.Value && (
+                    <div className="row-span-4 flex flex-col lg:flex-row w-full h-full justify-center items-center gap-4 pb-16 lg:pb-8">
+                      <StyledButton
+                        shape="freefloatcenter"
+                        onClick={controller.onIntroButtonClicked}
+                        className="!text-xl w-32"
+                      >
+                        {translate("introStoryTitle").toString()}
+                      </StyledButton>
+                      <StyledButton
+                        shape="freefloatcenter"
+                        onClick={controller.onOutroButtonClicked}
+                        className="!text-xl w-32"
+                      >
+                        {translate("outroStoryTitle").toString()}
+                      </StyledButton>
+                    </div>
+                  )}
+
+                {(viewModel.showOnlyIntro.Value ||
+                  viewModel.showOnlyOutro.Value) && (
+                  <div className="row-span-4 grid items-center justify-center w-full h-full grid-rows-4">
+                    {createBasicLayoutWithBackButton(
                       contentTexts,
                       pageId,
                       controller,
                       translate("backButton").toString()
                     )}
-                </>
-              )}
-            </div>
+                  </div>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -199,11 +201,11 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   ) {
     return (
       <>
-        <div className="flex items-center justify-center row-span-3 p-2 bg-buttonbgblue rounded-xl">
+        <div className="flex items-center justify-center w-full row-span-3 p-2 bg-buttonbgblue rounded-xl">
           {contentTexts[pageId].toString()}
         </div>
-        <div className="flex lg:w-[80vw] max-w-5xl justify-between">
-          <div className="grid w-32 grid-cols-2">
+        <div className="flex w-[90vw] lg:max-w-5xl xl:max-w-6xl justify-between">
+          <div className="grid w-16 lg:w-32 grid-cols-2 justify-items-end">
             <div>
               {" "}
               {pageId > 0 && (
@@ -239,17 +241,17 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   ) {
     return (
       <>
-        <div className="flex items-center justify-center row-span-3 p-2 bg-buttonbgblue rounded-xl">
+        <div className="flex items-center justify-center w-full row-span-3 p-2 bg-buttonbgblue rounded-xl">
           {contentTexts[pageId].toString()}
         </div>
-        <div className="flex lg:w-[80vw] max-w-5xl justify-between">
+        <div className="flex w-[90vw] lg:max-w-5xl xl:max-w-6xl justify-between">
           <StyledButton
             shape="freefloatleft"
             onClick={controller.backToMenuButtonClicked}
           >
             {backbuttonText}
           </StyledButton>
-          <div className="grid w-32 grid-cols-2">
+          <div className="grid w-16 lg:w-32 grid-cols-2 justify-items-end">
             <div>
               {" "}
               {pageId > 0 && (
