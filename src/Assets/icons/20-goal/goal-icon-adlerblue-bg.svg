@@ -1,0 +1,64 @@
+<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
+  <defs
+     id="defs4">
+    <style
+       id="style2">
+            .cls-3,.cls-4{stroke-width:60px;fill:none;stroke:#172d4d;stroke-miterlimit:10}.cls-4{stroke-linecap:round;stroke-width:50px}
+        </style>
+  </defs>
+  <circle
+     style="display:none;opacity:1;fill:#ace8fc;fill-opacity:1;stroke:none;stroke-width:79.5443;stroke-dasharray:none;stroke-opacity:1"
+     id="circle3806"
+     cx="999.10199"
+     cy="999.10199"
+     r="794.72858" />
+  <circle
+     style="display:inline;opacity:1;fill:#e9f2fa;fill-opacity:1;stroke:#172d4c;stroke-width:195.15;stroke-dasharray:none;stroke-opacity:1"
+     id="circle3065"
+     cx="999.10199"
+     cy="999.10199"
+     r="895.45935" />
+  <circle
+     class="cls-3"
+     cx="997.33862"
+     cy="995.44794"
+     r="578.55029"
+     id="circle6"
+     style="display:inline;fill:#ffffff;fill-opacity:0;stroke:#172d4c;stroke-opacity:1" />
+  <circle
+     class="cls-3"
+     cx="997.33862"
+     cy="995.44794"
+     r="462.84024"
+     id="circle8"
+     style="fill:#ffffff;fill-opacity:0;stroke:#172d4c;stroke-opacity:1" />
+  <circle
+     class="cls-3"
+     cx="997.33862"
+     cy="995.44794"
+     r="347.13016"
+     id="circle10"
+     style="fill:#ffffff;fill-opacity:0;stroke:#172d4c;stroke-opacity:1" />
+  <circle
+     class="cls-3"
+     cx="997.33862"
+     cy="995.44794"
+     r="225.63525"
+     id="circle12"
+     style="display:inline;fill:#ffffff;fill-opacity:0;stroke:#172d4c;stroke-opacity:1" />
+  <circle
+     cx="997.33862"
+     cy="995.44794"
+     r="35.406471"
+     style="display:inline;fill:#ffffff;fill-opacity:0;stroke:#172d4c;stroke-width:0;stroke-opacity:1"
+     id="circle14" />
+  <path
+     style="display:inline;fill:#ffffff;stroke:#172d4c;stroke-width:36.6906px;stroke-linecap:round;stroke-miterlimit:10;stroke-opacity:1"
+     d="M 994.38496,995.44792 1494.087,1489.8115"
+     id="path16" />
+  <path
+     class="cls-4"
+     d="m 1417.4097,1414.1065 100.7403,-0.4831 m -64.1964,34.9662 100.7463,-0.483 m -64.0678,35.0945 100.7463,-0.4892 m -94.7841,106.7759 -5.7299,-100.4712 m -31.1138,66.037 -5.7358,-100.4712 m -30.9792,66.1656 -5.7298,-100.4714 M 999.22812,370.66126 V 1620.2346 M 374.43538,995.44792 H 1624.0148"
+     id="path18"
+     style="display:inline;fill:#ffffff;stroke:#172d4c;stroke-opacity:1" />
+</svg>

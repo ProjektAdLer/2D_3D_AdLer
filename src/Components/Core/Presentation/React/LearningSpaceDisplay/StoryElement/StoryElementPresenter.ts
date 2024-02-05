@@ -19,13 +19,19 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
   }
 
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
-    // this.viewModel.type.Value = learningSpaceTO.storyElements.storyType;
-    // this.viewModel.introTexts.Value =
-    //   learningSpaceTO.storyElements.introStoryTexts;
-    // this.viewModel.outroTexts.Value =
-    //   learningSpaceTO.storyElements.outroStoryTexts;
-    // if (learningSpaceTO.currentScore >= learningSpaceTO.requiredScore) {
-    //   this.viewModel.outroUnlocked.Value = true;
-    // }
+    this.viewModel.numberOfStories.Value = learningSpaceTO.storyElements.length;
+    for (let i = 0; i < learningSpaceTO.storyElements.length; i++) {
+      this.viewModel.type.Value[i] = learningSpaceTO.storyElements[i].storyType;
+      this.viewModel.introTexts.Value =
+        learningSpaceTO.storyElements[i].introStoryTexts;
+      this.viewModel.outroTexts.Value =
+        learningSpaceTO.storyElements[i].outroStoryTexts;
+      if (learningSpaceTO.storyElements[i].modelType !== null)
+        this.viewModel.modelType.Value[i] =
+          learningSpaceTO.storyElements[i].modelType!;
+    }
+    if (learningSpaceTO.currentScore >= learningSpaceTO.requiredScore) {
+      this.viewModel.outroUnlocked.Value = true;
+    }
   }
 }
