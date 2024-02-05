@@ -28,4 +28,6 @@ export default interface ILearningSpaceTemplate {
   exitDoor: Transform;
   windows: Transform[];
   playerSpawnPoint: Transform;
+  introStoryElementIdlePoint: Transform;
+  outroStoryElementIdlePoint: Transform;
 }

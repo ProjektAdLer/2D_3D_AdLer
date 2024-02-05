@@ -93,4 +93,12 @@ export const LearningSpaceTemplate_L: ILearningSpaceTemplate = {
     position: { x: -3.2, y: -7.6 },
     orientation: { rotation: -90 },
   },
+  introStoryElementIdlePoint: {
+    position: { x: -5, y: -8.6 },
+    orientation: { rotation: -90 },
+  },
+  outroStoryElementIdlePoint: {
+    position: { x: 4.6, y: 1 },
+    orientation: { rotation: 0 },
+  },
 };
