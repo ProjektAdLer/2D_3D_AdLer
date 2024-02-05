@@ -19,9 +19,9 @@ export default class StoryElementViewModel {
   showOnlyOutro: Observable<boolean> = new Observable<boolean>(false);
 
   //Story Types
-  type: Observable<StoryElementType[]> = new Observable<StoryElementType[]>();
+  type: Observable<StoryElementType[]> = new Observable<StoryElementType[]>([]);
   modelType: Observable<LearningElementModel[]> = new Observable<
     LearningElementModel[]
-  >();
+  >([]);
   numberOfStories: Observable<number> = new Observable<number>();
 }
