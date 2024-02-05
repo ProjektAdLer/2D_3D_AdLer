@@ -77,4 +77,12 @@ export const LearningSpaceTemplate_R8: ILearningSpaceTemplate = {
     position: { x: 0, y: -5.2 },
     orientation: { rotation: 0 },
   },
+  introStoryElementIdlePoint: {
+    position: { x: -1, y: -5 },
+    orientation: { rotation: 0 },
+  },
+  outroStoryElementIdlePoint: {
+    position: { x: 3, y: 3 },
+    orientation: { rotation: 0 },
+  },
 };
