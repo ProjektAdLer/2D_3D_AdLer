@@ -13,7 +13,7 @@ import BreakTimeNotification from "../../../Adaptivity/BreakTimeNotification/Bre
 import AdaptivityElementDialogContainer from "../../../Adaptivity/AdaptivityElement/UIComponents/AdaptivityElementDialogContainer";
 import LearningSpaceGoalPanel from "~ReactComponents/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanel";
 import StoryElement from "~ReactComponents/LearningSpaceDisplay/StoryElement/StoryElement";
-import GoalIcon from "../../../../../../Assets/icons/20-goal/goal-icon-adlergray-bg.svg";
+import GoalIcon from "../../../../../../Assets/icons/20-goal/goal-icon-adlerblue-bg.svg";
 
 export default function LearningSpace() {
   return (
@@ -21,7 +21,7 @@ export default function LearningSpace() {
       <section className="fixed z-10 flex flex-col-reverse col-span-2 col-start-8 row-start-1 gap-1 space-x-2 space-x-reverse lg:flex-row-reverse right-2 top-2">
         <LearningWorldScorePanel />
         <LearningSpaceScorePanel />
-        {/* <img className="w-[48px] lg:w-[69px]" src={GoalIcon}></img> */}
+        {/* <img className="w-[48px] lg:w-[69px]" src={GoalIcon}></img>  */}
       </section>
       <LearningSpaceNamePanel className="z-10 col-span-5 col-start-3 row-start-1 pointer-events-none justify-self-center" />
 
