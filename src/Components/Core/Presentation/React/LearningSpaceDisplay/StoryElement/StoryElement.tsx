@@ -48,7 +48,6 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   >(BUILDER_TYPES.IStoryElementBuilder);
   const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
   const [pageId] = useObservable<number>(viewModel?.pageId);
-  const [type] = useObservable<StoryElementType>(viewModel?.type);
 
   useObservable<boolean>(viewModel?.showOnlyIntro);
   useObservable<boolean>(viewModel?.showOnlyOutro);
@@ -76,6 +75,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   let titleText = "";
   let contentTexts = [""];
   let complexStory = false;
+  let type = viewModel.type.Value[0];
   // 1
   if (
     type === StoryElementType.Intro ||
@@ -121,13 +121,13 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
 
   return (
     <StyledContainer className={tailwindMerge(className, "")}>
-      <div className="z-50 fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-full lg:grid lg:grid-rows-3 lg:items-start">
+      <div className="fixed top-0 bottom-0 left-0 right-0 z-50 flex flex-col items-center justify-center w-screen h-full lg:grid lg:grid-rows-3 lg:items-start">
         {/* Background NPC */}
         <div className="flex items-end justify-start invisible w-full row-start-2 pl-16 lg:visible lg:h-full">
           <img
             className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
             alt="LearningImage!"
-            src={getNPCImage(viewModel.modelType.Value, true)}
+            src={getNPCImage(viewModel.modelType.Value[0], true)}
           ></img>
         </div>
         {/* Modal */}
@@ -138,7 +138,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
               <img
                 className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
                 alt="LearningImage!"
-                src={getNPCImage(viewModel.modelType.Value, false)}
+                src={getNPCImage(viewModel.modelType.Value[0], false)}
               ></img>
 
               <div className="w-full lg:text-xl">{titleText}</div>
@@ -151,7 +151,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                 X
               </StyledButton>
             </div>
-            <div className="row-span-4 items-center justify-center w-full grid grid-rows-4 lg:px-4">
+            <div className="grid items-center justify-center w-full grid-rows-4 row-span-4 lg:px-4">
               {!complexStory &&
                 createBasicLayout(contentTexts, pageId, controller)}
               {complexStory && (
@@ -199,11 +199,11 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   ) {
     return (
       <>
-        <div className="row-span-3 flex justify-center items-center bg-buttonbgblue p-2 rounded-xl">
+        <div className="flex items-center justify-center row-span-3 p-2 bg-buttonbgblue rounded-xl">
           {contentTexts[pageId].toString()}
         </div>
         <div className="flex lg:w-[80vw] max-w-5xl justify-between">
-          <div className="grid grid-cols-2 w-32">
+          <div className="grid w-32 grid-cols-2">
             <div>
               {" "}
               {pageId > 0 && (
@@ -239,7 +239,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   ) {
     return (
       <>
-        <div className="row-span-3 flex justify-center items-center bg-buttonbgblue p-2 rounded-xl">
+        <div className="flex items-center justify-center row-span-3 p-2 bg-buttonbgblue rounded-xl">
           {contentTexts[pageId].toString()}
         </div>
         <div className="flex lg:w-[80vw] max-w-5xl justify-between">
@@ -249,7 +249,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
           >
             {backbuttonText}
           </StyledButton>
-          <div className="grid grid-cols-2 w-32">
+          <div className="grid w-32 grid-cols-2">
             <div>
               {" "}
               {pageId > 0 && (
