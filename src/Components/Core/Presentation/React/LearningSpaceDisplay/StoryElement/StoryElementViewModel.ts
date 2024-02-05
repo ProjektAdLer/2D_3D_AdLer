@@ -10,7 +10,6 @@ export default class StoryElementViewModel {
     null
   );
   isOpen: Observable<boolean> = new Observable<boolean>(false);
-  type: Observable<StoryElementType> = new Observable<StoryElementType>();
   pageId: Observable<number> = new Observable<number>(0);
   outroUnlocked: Observable<boolean> = new Observable<boolean>(false);
   outroJustNowUnlocked: Observable<boolean> = new Observable<boolean>(false);
@@ -18,6 +17,11 @@ export default class StoryElementViewModel {
   //MenuNavigation
   showOnlyIntro: Observable<boolean> = new Observable<boolean>(false);
   showOnlyOutro: Observable<boolean> = new Observable<boolean>(false);
-  modelType: Observable<LearningElementModel | null> =
-    new Observable<LearningElementModel | null>(null);
+
+  //Story Types
+  type: Observable<StoryElementType[]> = new Observable<StoryElementType[]>();
+  modelType: Observable<LearningElementModel[]> = new Observable<
+    LearningElementModel[]
+  >();
+  numberOfStories: Observable<number> = new Observable<number>();
 }
