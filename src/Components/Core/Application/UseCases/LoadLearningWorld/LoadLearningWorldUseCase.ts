@@ -281,36 +281,36 @@ export default class LoadLearningWorldUseCase
           StoryElementEntity
         )
       );
-    }
-
-    // create separate intro and outro story elements if present
-    if (introStoryElement !== null) {
-      storyElementEntities.push(
-        this.container.createEntity<StoryElementEntity>(
-          {
-            worldID: worldID,
-            spaceID: spaceID,
-            introStoryTexts: introStoryElement.storyTexts,
-            modelType: introStoryElement.elementModel,
-            storyType: StoryElementType.Intro,
-          },
-          StoryElementEntity
-        )
-      );
-    }
-    if (outroStoryElement !== null) {
-      storyElementEntities.push(
-        this.container.createEntity<StoryElementEntity>(
-          {
-            worldID: worldID,
-            spaceID: spaceID,
-            outroStoryTexts: outroStoryElement.storyTexts,
-            modelType: outroStoryElement.elementModel,
-            storyType: StoryElementType.Outro,
-          },
-          StoryElementEntity
-        )
-      );
+    } else {
+      // create separate intro and outro story elements if present
+      if (introStoryElement !== null) {
+        storyElementEntities.push(
+          this.container.createEntity<StoryElementEntity>(
+            {
+              worldID: worldID,
+              spaceID: spaceID,
+              introStoryTexts: introStoryElement.storyTexts,
+              modelType: introStoryElement.elementModel,
+              storyType: StoryElementType.Intro,
+            },
+            StoryElementEntity
+          )
+        );
+      }
+      if (outroStoryElement !== null) {
+        storyElementEntities.push(
+          this.container.createEntity<StoryElementEntity>(
+            {
+              worldID: worldID,
+              spaceID: spaceID,
+              outroStoryTexts: outroStoryElement.storyTexts,
+              modelType: outroStoryElement.elementModel,
+              storyType: StoryElementType.Outro,
+            },
+            StoryElementEntity
+          )
+        );
+      }
     }
 
     return storyElementEntities;
