@@ -36,7 +36,7 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
     setTimeout(() => {
       this.viewModel.characterNavigator.startMovement(target, () => {
         if (isIntro) {
-          this.viewModel.storyElementPresenter.open();
+          this.viewModel.storyElementPresenter.open(StoryElementType.Intro);
         } else {
           this.viewModel.storyElementPresenter.openThroughOutroSequence();
         }

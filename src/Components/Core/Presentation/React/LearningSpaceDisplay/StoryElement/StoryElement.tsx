@@ -13,7 +13,6 @@ import StoryElementViewModel from "./StoryElementViewModel";
 import IStoryElementController from "./IStoryElementController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
-import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
@@ -46,39 +45,37 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
     StoryElementViewModel,
     IStoryElementController
   >(BUILDER_TYPES.IStoryElementBuilder);
-  const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
+  const [isOpen] = useObservable<boolean>(viewModel?.isOpen);
   const [pageId] = useObservable<number>(viewModel?.pageId);
+  const [pickedStory] = useObservable<StoryElementType>(viewModel?.pickedStory);
 
   useObservable<boolean>(viewModel?.showOnlyIntro);
   useObservable<boolean>(viewModel?.showOnlyOutro);
   useObservable<boolean>(viewModel?.outroUnlocked);
-
-  const closeModal = useCallback(() => {
-    setOpen(false);
-  }, [setOpen]);
 
   const { t: translate } = useTranslation("learningSpace");
 
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;
 
-  // Cases:
-  // 1. Intro or locked IntroOutro
-  // 2. Unlocked Outro or just now unlocked IntroOutro
-  // 3. Locked Outro
+  // Cases (~FK):
+  // 1. Intro OR Split IntroOutro, Intro selected OR locked IntroOutro
+  // 2. Unlocked Outro OR Split IntroOutro, unlocked Outro selected OR just now unlocked IntroOutro
+  // 3. Locked Outro OR Split IntroOutro, locked Outro selected
   // 4. IntroOutro, but not just unlocked (Menu)
   // 4.1 IntroOutro, Intro selected (Back to Menu Button)
   // 4.2 IntroOutro, Outro selected (Back to Menu Button)
 
-  // Debatable if just unlocked IntroOutro is 5 or 2
-
   let titleText = "";
   let contentTexts = [""];
   let complexStory = false;
+  // We only use the first element of the array. If we have 2 stories, we decide based on the picked story. ~FK
   let type = viewModel.type.Value[0];
   // 1
   if (
     type === StoryElementType.Intro ||
+    (viewModel.numberOfStories.Value === 2 &&
+      pickedStory === StoryElementType.Intro) ||
     (type === StoryElementType.IntroOutro && !viewModel.outroUnlocked.Value)
   ) {
     titleText = translate("introStoryTitle").toString();
@@ -87,6 +84,9 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   // 2
   else if (
     (type === StoryElementType.Outro && viewModel.outroUnlocked.Value) ||
+    (viewModel.numberOfStories.Value === 2 &&
+      pickedStory === StoryElementType.Outro &&
+      viewModel.outroUnlocked.Value) ||
     (type === StoryElementType.IntroOutro &&
       viewModel.outroJustNowUnlocked.Value)
   ) {
@@ -94,7 +94,12 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
     contentTexts = viewModel.outroTexts.Value!;
   }
   // 3
-  else if (type === StoryElementType.Outro && !viewModel.outroUnlocked.Value) {
+  else if (
+    (type === StoryElementType.Outro && !viewModel.outroUnlocked.Value) ||
+    (viewModel.numberOfStories.Value === 2 &&
+      pickedStory === StoryElementType.Outro &&
+      !viewModel.outroUnlocked.Value)
+  ) {
     titleText = translate("outroStoryTitle").toString();
     contentTexts = translate("outroLockedText").toString().split("\n");
   }

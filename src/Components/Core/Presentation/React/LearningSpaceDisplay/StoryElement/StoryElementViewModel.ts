@@ -24,4 +24,6 @@ export default class StoryElementViewModel {
     LearningElementModel[]
   >([]);
   numberOfStories: Observable<number> = new Observable<number>();
+  pickedStory: Observable<StoryElementType> =
+    new Observable<StoryElementType>();
 }

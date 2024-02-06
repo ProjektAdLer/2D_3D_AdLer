@@ -1,15 +1,20 @@
 import IStoryElementPresenter from "./IStoryElementPresenter";
 import StoryElementViewModel from "./StoryElementViewModel";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 export default class StoryElementPresenter implements IStoryElementPresenter {
   constructor(private viewModel: StoryElementViewModel) {}
 
-  open(): void {
+  open(type: StoryElementType): void {
     this.viewModel.isOpen.Value = true;
     this.viewModel.pageId.Value = 0;
     this.viewModel.showOnlyIntro.Value = false;
     this.viewModel.showOnlyOutro.Value = false;
+
+    if (this.viewModel.numberOfStories.Value === 2) {
+      this.viewModel.pickedStory.Value = type;
+    }
   }
   openThroughOutroSequence(): void {
     this.viewModel.outroJustNowUnlocked.Value = true;

@@ -23,7 +23,7 @@ export default class StoryNPCController implements IStoryNPCController {
   @bind
   picked(): void {
     if (this.viewModel.isInteractable.Value) {
-      this.viewModel.storyElementPresenter.open();
+      this.viewModel.storyElementPresenter.open(this.viewModel.storyType);
     }
   }
 
