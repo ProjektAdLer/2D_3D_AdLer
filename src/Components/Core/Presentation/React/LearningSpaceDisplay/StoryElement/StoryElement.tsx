@@ -71,6 +71,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   let complexStory = false;
   // We only use the first element of the array. If we have 2 stories, we decide based on the picked story. ~FK
   let type = viewModel.type.Value[0];
+
   // 1
   if (
     type === StoryElementType.Intro ||
@@ -162,7 +163,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
               <>
                 {!viewModel.showOnlyIntro.Value &&
                   !viewModel.showOnlyOutro.Value && (
-                    <div className="row-span-4 flex flex-col lg:flex-row w-full h-full justify-center items-center gap-4 pb-16 lg:pb-8">
+                    <div className="flex flex-col items-center justify-center w-full h-full row-span-4 gap-4 pb-16 lg:flex-row lg:pb-8">
                       <StyledButton
                         shape="freefloatcenter"
                         onClick={controller.onIntroButtonClicked}
@@ -182,7 +183,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
 
                 {(viewModel.showOnlyIntro.Value ||
                   viewModel.showOnlyOutro.Value) && (
-                  <div className="row-span-4 grid items-center justify-center w-full h-full grid-rows-4">
+                  <div className="grid items-center justify-center w-full h-full grid-rows-4 row-span-4">
                     {createBasicLayoutWithBackButton(
                       contentTexts,
                       pageId,
@@ -210,7 +211,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
           {contentTexts[pageId].toString()}
         </div>
         <div className="flex w-[90vw] lg:max-w-5xl xl:max-w-6xl justify-end">
-          <div className="grid w-16 lg:w-32 grid-cols-2 justify-items-end">
+          <div className="grid w-16 grid-cols-2 lg:w-32 justify-items-end">
             <div>
               {" "}
               {pageId > 0 && (
@@ -256,7 +257,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
           >
             {backbuttonText}
           </StyledButton>
-          <div className="grid w-16 lg:w-32 grid-cols-2 justify-items-end">
+          <div className="grid w-16 grid-cols-2 lg:w-32 justify-items-end">
             <div>
               {" "}
               {pageId > 0 && (
