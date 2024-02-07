@@ -28,6 +28,7 @@ export default function LearningSpaceGoalPanel() {
           className="w-[48px] lg:w-[69px]"
           src={GoalIcon}
           onClick={controller.openPanel}
+          alt="Lernziel Icon"
         ></img>
       )}
 
