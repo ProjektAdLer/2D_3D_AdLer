@@ -20,6 +20,8 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
   }
 
   onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
+    if ((this.viewModel.storyType ?? storyType) !== storyType) return;
+
     this.viewModel.isInCutScene.Value = true;
 
     // npc stops in specific distance from avatar
