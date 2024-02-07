@@ -42,12 +42,14 @@ describe("StoryElementPresenter", () => {
   });
 
   test("onLearningSpaceLoaded sets the correct values", () => {
-    let storyElement: StoryElementTO = {
-      introStoryTexts: ["blabla111", "blabla222"],
-      outroStoryTexts: ["blabla333"],
-      modelType: null,
-      storyType: StoryElementType.Intro,
-    };
+    let storyElement: StoryElementTO[] = [
+      {
+        introStoryTexts: ["blabla111", "blabla222"],
+        outroStoryTexts: ["blabla333"],
+        modelType: null,
+        storyType: StoryElementType.Intro,
+      },
+    ];
     let learningSpaceTO: LearningSpaceTO = {
       id: 1,
       name: "blabla",
@@ -62,12 +64,12 @@ describe("StoryElementPresenter", () => {
       maxScore: 1,
       template: null,
       theme: null,
-      storyElement: storyElement,
+      storyElements: storyElement,
     };
 
     viewModel.introTexts.Value = ["nicht blabla"];
     viewModel.outroTexts.Value = ["nicht blabla"];
-    viewModel.type.Value = StoryElementType.None;
+    viewModel.type.Value = [StoryElementType.None];
 
     systemUnderTest.onLearningSpaceLoaded(learningSpaceTO);
 
@@ -76,6 +78,6 @@ describe("StoryElementPresenter", () => {
       "blabla222",
     ]);
     expect(viewModel.outroTexts.Value).toStrictEqual(["blabla333"]);
-    expect(viewModel.type.Value).toBe(StoryElementType.Intro);
+    expect(viewModel.type.Value).toStrictEqual([StoryElementType.Intro]);
   });
 });
