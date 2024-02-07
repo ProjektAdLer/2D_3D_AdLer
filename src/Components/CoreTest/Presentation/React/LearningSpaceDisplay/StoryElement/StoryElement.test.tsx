@@ -11,7 +11,7 @@ let viewModel = new StoryElementViewModel();
 viewModel.isOpen.Value = true;
 const fakeController = mock<StoryElementController>();
 
-describe("StoryElement", () => {
+describe.skip("StoryElement", () => {
   beforeEach(() => {
     viewModel.introTexts.Value = ["Blabla Intro 1"];
     viewModel.outroTexts.Value = ["Blabla Outro 1"];

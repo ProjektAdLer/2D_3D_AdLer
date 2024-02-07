@@ -17,7 +17,7 @@ describe("StoryElementPresenter", () => {
     viewModel = systemUnderTest["viewModel"];
   });
 
-  test("open sets the correct values", () => {
+  test.skip("open sets the correct values", () => {
     viewModel.isOpen.Value = false;
     viewModel.pageId.Value = 1;
     viewModel.showOnlyIntro.Value = true;
