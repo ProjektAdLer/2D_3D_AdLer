@@ -173,13 +173,10 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         storyNPCBuilder.learningSpaceTemplateType =
           this.viewModel.learningSpaceTemplateType;
 
-        storyNPCBuilder.isInCutScene = false;
-        if (
+        storyNPCBuilder.startInCutScene =
           (storyElement.storyType & StoryElementType.Intro) ===
-          StoryElementType.Intro
-        ) {
-          storyNPCBuilder.isInCutScene = spaceTO.currentScore === 0;
-        }
+            StoryElementType.Intro && spaceTO.currentScore === 0;
+
         await this.director.buildAsync(storyNPCBuilder);
 
         this.storyNPCPresenters = storyNPCBuilder.getPresenter();

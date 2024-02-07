@@ -36,7 +36,7 @@ export default class StoryNPCBuilder
 
   public modelType: LearningElementModel;
   public storyType: StoryElementType;
-  public isInCutScene: boolean;
+  public startInCutScene: boolean;
   public learningSpaceTemplateType: LearningSpaceTemplateType;
 
   override buildViewModel(): void {
@@ -44,7 +44,7 @@ export default class StoryNPCBuilder
     this.viewModel!.modelType = this.modelType;
     this.viewModel!.storyType = this.storyType;
     this.viewModel!.isInCutScene = new Observable<boolean>(
-      this.isInCutScene,
+      this.startInCutScene,
       false
     );
     this.viewModel!.learningSpaceTemplateType = this.learningSpaceTemplateType;

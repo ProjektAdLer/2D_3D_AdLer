@@ -5,6 +5,6 @@ import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/Lear
 export default interface IStoryNPCBuilder extends IAsyncPresentationBuilder {
   modelType: string;
   storyType: StoryElementType;
-  isInCutScene: boolean;
+  startInCutScene: boolean;
   learningSpaceTemplateType: LearningSpaceTemplateType;
 }
