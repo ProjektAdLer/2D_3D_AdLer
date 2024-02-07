@@ -80,7 +80,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
     (type === StoryElementType.IntroOutro && !viewModel.outroUnlocked.Value)
   ) {
     titleText = translate("introStoryTitle").toString();
-    contentTexts = viewModel.introTexts.Value!;
+    contentTexts = viewModel.introTexts.Value;
   }
   // 2
   else if (
@@ -94,7 +94,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
       viewModel.outroJustNowUnlocked.Value)
   ) {
     titleText = translate("outroStoryTitle").toString();
-    contentTexts = viewModel.outroTexts.Value!;
+    contentTexts = viewModel.outroTexts.Value;
   }
   // 3
   else if (
@@ -118,7 +118,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
     // 4.1
     else if (viewModel.showOnlyIntro.Value) {
       titleText = translate("introStoryTitle").toString();
-      contentTexts = viewModel.introTexts.Value!;
+      contentTexts = viewModel.introTexts.Value;
     }
     // 4.2
     else if (viewModel.showOnlyOutro.Value) {
