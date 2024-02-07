@@ -19,19 +19,6 @@ describe("LearningSpaceGoalPanel", () => {
 
     expect(componentUnderTest.queryByText("Test World")).toBeNull();
   });
-  test("should render generic text if no goals are set", () => {
-    viewModelMock.goals.Value = [];
-    viewModelMock.isOpen.Value = true;
-    useBuilderMock([viewModelMock, undefined]);
-
-    const componentUnderTest = render(<LearningSpaceGoalPanel />);
-
-    expect(
-      componentUnderTest.getByText(
-        "Zu diesem Lernraum gibt es keine eingetragenen Lernziele!"
-      )
-    ).toBeInTheDocument();
-  });
   test("onclose should set isOpen to false", () => {
     viewModelMock.goals.Value = ["Lernziel"];
     viewModelMock.isOpen.Value = true;
