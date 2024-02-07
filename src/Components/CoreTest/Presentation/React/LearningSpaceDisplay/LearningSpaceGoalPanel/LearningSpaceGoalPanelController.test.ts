@@ -10,4 +10,10 @@ describe("LearningSpaceGoalPanelController", () => {
     systemUnderTest.closePanel();
     expect(viewModelMock.isOpen.Value).toBeFalsy();
   });
+  test("openPanel sets isOpen in viewmodel to true", () => {
+    viewModelMock.isOpen.Value = false;
+    systemUnderTest = new LearningSpaceGoalPanelController(viewModelMock);
+    systemUnderTest.openPanel();
+    expect(viewModelMock.isOpen.Value).toBeTruthy();
+  });
 });
