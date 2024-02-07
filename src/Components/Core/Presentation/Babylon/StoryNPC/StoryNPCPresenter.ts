@@ -20,7 +20,7 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
   }
 
   onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
-    if ((this.viewModel.storyType ?? storyType) !== storyType) return;
+    if ((this.viewModel.storyType & storyType) !== storyType) return;
 
     this.viewModel.isInCutScene.Value = true;
 
