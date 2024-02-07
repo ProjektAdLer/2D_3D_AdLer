@@ -126,7 +126,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
 
   return (
     <StyledContainer className={tailwindMerge(className, "")}>
-      <div className="fixed top-0 bottom-0 left-0 right-0 z-50 flex flex-col items-center justify-center w-screen h-full lg:grid lg:grid-rows-3 lg:items-start">
+      <div className="fixed top-0 bottom-0 left-0 right-0 z-50 flex flex-col items-center justify-center w-screen h-full bg-blacktrans lg:grid lg:grid-rows-3 lg:items-start">
         {/* Background NPC */}
         <div className="flex items-end justify-start invisible w-full row-start-2 pl-16 lg:visible lg:h-full">
           <img
@@ -209,7 +209,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
         <div className="flex items-center justify-center w-full row-span-3 p-2 bg-buttonbgblue rounded-xl">
           {contentTexts[pageId].toString()}
         </div>
-        <div className="flex w-[90vw] lg:max-w-5xl xl:max-w-6xl justify-between">
+        <div className="flex w-[90vw] lg:max-w-5xl xl:max-w-6xl justify-end">
           <div className="grid w-16 lg:w-32 grid-cols-2 justify-items-end">
             <div>
               {" "}
