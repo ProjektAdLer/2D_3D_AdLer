@@ -71,12 +71,12 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   let complexStory = false;
   // We only use the first element of the array. If we have 2 stories, we decide based on the picked story. ~FK
   let type = viewModel.type.Value[0];
+  let isSplitStory = viewModel.isSplitStory.Value;
 
   // 1
   if (
-    type === StoryElementType.Intro ||
-    (viewModel.numberOfStories.Value === 2 &&
-      pickedStory === StoryElementType.Intro) ||
+    (type === StoryElementType.Intro && !isSplitStory) ||
+    (isSplitStory && pickedStory === StoryElementType.Intro) ||
     (type === StoryElementType.IntroOutro && !viewModel.outroUnlocked.Value)
   ) {
     titleText = translate("introStoryTitle").toString();
@@ -84,8 +84,10 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   }
   // 2
   else if (
-    (type === StoryElementType.Outro && viewModel.outroUnlocked.Value) ||
-    (viewModel.numberOfStories.Value === 2 &&
+    (type === StoryElementType.Outro &&
+      viewModel.outroUnlocked.Value &&
+      !isSplitStory) ||
+    (isSplitStory &&
       pickedStory === StoryElementType.Outro &&
       viewModel.outroUnlocked.Value) ||
     (type === StoryElementType.IntroOutro &&
@@ -96,8 +98,10 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   }
   // 3
   else if (
-    (type === StoryElementType.Outro && !viewModel.outroUnlocked.Value) ||
-    (viewModel.numberOfStories.Value === 2 &&
+    (type === StoryElementType.Outro &&
+      !viewModel.outroUnlocked.Value &&
+      !isSplitStory) ||
+    (viewModel.isSplitStory &&
       pickedStory === StoryElementType.Outro &&
       !viewModel.outroUnlocked.Value)
   ) {
@@ -119,7 +123,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
     // 4.2
     else if (viewModel.showOnlyOutro.Value) {
       titleText = translate("outroStoryTitle").toString();
-      contentTexts = viewModel.outroTexts.Value!;
+      contentTexts = viewModel.outroTexts.Value;
     }
   } else {
     return null;
