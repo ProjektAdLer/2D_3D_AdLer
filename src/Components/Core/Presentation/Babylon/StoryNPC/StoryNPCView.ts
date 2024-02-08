@@ -19,10 +19,10 @@ import LearningElementModelLookup from "src/Components/Core/Domain/LearningEleme
 import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import ICharacterNavigator from "../CharacterNavigator/ICharacterNavigator";
-import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
-import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
 import INavigation from "../Navigation/INavigation";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
+import bind from "bind-decorator";
 
 import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-story-1.glb";
 
@@ -42,36 +42,24 @@ export default class StoryNPCView {
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
-
-    this.viewModel.isInCutScene.subscribe((b: boolean) => {
-      this.cutSceneTrigger(b);
-    });
   }
 
-  private cutSceneTrigger(isInCutScene: boolean): void {
-    if (!isInCutScene) {
-      this.controller.setRandomMovementTarget();
-    }
-  }
-
+  // -- Setup --
   public async asyncSetupStoryNPC(): Promise<void> {
     await Promise.all([this.loadElementModel(), this.loadIconModel()]);
     this.createParentNode();
-    this.setupInteractions();
     this.setSpawnLocation();
+    this.setupInteractions();
     this.createCharacterAnimator();
     this.createCharacterNavigator();
     this.setupCleanup();
   }
 
   private async loadElementModel(): Promise<void> {
-    let modelLink;
-    modelLink = LearningElementModelLookup[this.viewModel.modelType];
+    const modelLink = LearningElementModelLookup[this.viewModel.modelType];
 
     const result = await this.scenePresenter.loadGLTFModel(modelLink);
-
     this.viewModel.modelMeshes = result.meshes as Mesh[];
-
     this.setupModel();
 
     result.animationGroups.forEach((animationGroup) => {
@@ -134,28 +122,26 @@ export default class StoryNPCView {
   }
 
   private async setSpawnLocation(): Promise<void> {
-    // nearly identical as in AvatarView.ts
-    let spawnLocation;
-    if (
-      this.viewModel.learningSpaceTemplateType ===
-      LearningSpaceTemplateType.None
-    ) {
-      spawnLocation = new Vector3(0, 0, 0);
-    } else {
-      let spawnPoint = LearningSpaceTemplateLookup.getLearningSpaceTemplate(
-        this.viewModel.learningSpaceTemplateType
-      ).playerSpawnPoint;
-      spawnLocation = new Vector3(
-        spawnPoint.position.x,
-        0,
-        spawnPoint.position.y
-      );
-    }
-    spawnLocation = spawnLocation.add(this.viewModel.spawnPositionOffset);
+    // get spawn location depending on story type
+    let spawnLocation: Vector3 =
+      (this.viewModel.storyType ?? StoryElementType.Intro) ===
+      StoryElementType.Intro
+        ? this.getIntroSpawnLocation()
+        : this.viewModel.outroIdlePosition;
 
+    // snap spawn to navmesh
     await this.navigation.IsReady;
     spawnLocation = this.navigation.Plugin.getClosestPoint(spawnLocation);
+
+    // apply spawn location
     this.viewModel.parentNode.position = spawnLocation;
+  }
+
+  private getIntroSpawnLocation(): Vector3 {
+    const spawnLocation = this.viewModel.avatarPosition.add(
+      this.viewModel.introSpawnPositionOffsetFromAvatar
+    );
+    return spawnLocation;
   }
 
   private createCharacterAnimator(): void {
@@ -180,17 +166,51 @@ export default class StoryNPCView {
       this.viewModel.characterAnimator,
       config.isDebug
     );
-    this.viewModel.characterNavigator.IsReady.then(() => {
-      if (this.viewModel.isInCutScene.Value === false) {
-        this.controller.setRandomMovementTarget();
-      }
-    });
+
+    // start random movement, except when npc is part of a intro cutscene
+    if (
+      (this.viewModel.storyType & StoryElementType.Intro) ===
+        StoryElementType.Intro &&
+      this.viewModel.isInCutScene === false
+    )
+      this.viewModel.characterNavigator.IsReady.then(() => {
+        this.setRandomMovementTarget();
+      });
   }
 
   private setupCleanup(): void {
-    // timer needs to be cleared, else StoryNPC won't be cleaned up by
+    // timer needs to be cleared, else StoryNPC won't be cleaned up by garbage collection
     this.scenePresenter.addDisposeSceneCallback(() => {
       clearTimeout(this.viewModel.idleTimer);
     });
+  }
+
+  // -- Movement --
+
+  @bind
+  setRandomMovementTarget() {
+    if (this.viewModel.isInCutScene) return;
+
+    let target: Vector3;
+    let distance: number = 0;
+    do {
+      target = this.navigation.Plugin.getRandomPointAround(
+        this.viewModel.parentNode.position,
+        this.viewModel.movementRange
+      );
+      distance = Vector3.Distance(target, this.viewModel.parentNode.position);
+    } while (distance < this.viewModel.minMovementDistance);
+
+    this.viewModel.characterNavigator.startMovement(
+      target,
+      this.startIdleTimeout
+    );
+  }
+
+  @bind
+  private startIdleTimeout(): void {
+    this.viewModel.idleTimer = setTimeout(() => {
+      this.setRandomMovementTarget();
+    }, this.viewModel.idleTime);
   }
 }

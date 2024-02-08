@@ -18,12 +18,11 @@ import {
 import ICharacterAnimator from "../../../../Core/Presentation/Babylon/CharacterAnimator/ICharacterAnimator";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IStoryElementPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
-import Observable from "../../../../../Lib/Observable";
-import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 import { LearningSpaceTemplate_L } from "../../../../Core/Domain/LearningSpaceTemplates/LearningSpaceTemplate_L";
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import ICharacterNavigator from "../../../../Core/Presentation/Babylon/CharacterNavigator/ICharacterNavigator";
+import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -67,7 +66,8 @@ describe("StoryNPCView", () => {
 
   beforeEach(() => {
     viewModel = new StoryNPCViewModel();
-    viewModel.isInCutScene = new Observable<boolean>(false, false);
+    viewModel.isInCutScene = false;
+    viewModel.avatarPosition = new Vector3(0, 0, 0);
     controllerMock = mock<IStoryNPCController>();
     systemUnderTest = new StoryNPCView(viewModel, controllerMock);
   });
@@ -92,8 +92,6 @@ describe("StoryNPCView", () => {
     ];
     scenePresenterMock.loadGLTFModel.mockResolvedValue(mockLoadingResult);
     scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
-
-    viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.None;
 
     navigationMock.Plugin.getClosestPoint.mockImplementation(
       (vector: Vector3) => vector
@@ -200,7 +198,6 @@ describe("StoryNPCView", () => {
       "mockNode",
       new Scene(new NullEngine())
     );
-    viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.None;
 
     systemUnderTest["setSpawnLocation"]();
 
@@ -213,24 +210,17 @@ describe("StoryNPCView", () => {
       new Scene(new NullEngine())
     );
     // @ts-ignore
-    viewModel.spawnPositionOffset = new Vector3(0, 0, 1);
+    viewModel.introSpawnPositionOffsetFromAvatar = new Vector3(0, 0, 1);
+    viewModel.storyType = StoryElementType.Intro;
     // @ts-ignore
     navigationMock.IsReady = Promise.resolve();
     navigationMock.Plugin.getClosestPoint.mockImplementation(
       (vector: Vector3) => vector
     );
 
-    viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.L;
-    const playerSpawnPoint = LearningSpaceTemplate_L.playerSpawnPoint;
-    const targetVector = new Vector3(
-      playerSpawnPoint.position.x,
-      0,
-      playerSpawnPoint.position.y + 1
-    );
-
     await systemUnderTest["setSpawnLocation"]();
 
-    expect(viewModel.parentNode.position).toEqual(targetVector);
+    expect(viewModel.parentNode.position).toEqual(new Vector3(0, 0, 1));
   });
 
   test("createCharacterAnimator creates and sets up a new CharacterAnimator ", () => {
@@ -284,5 +274,51 @@ describe("StoryNPCView", () => {
     systemUnderTest["setupCleanup"]();
 
     expect(scenePresenterMock.addDisposeSceneCallback).toHaveBeenCalledTimes(1);
+  });
+
+  test("setRandomTarget calls startMovement on the characterNavigator with a target", () => {
+    navigationMock.Plugin.getRandomPointAround.mockReturnValue(
+      new Vector3(2, 0, 2)
+    );
+    viewModel.parentNode = new TransformNode(
+      "mockParentNode",
+      new Scene(new NullEngine())
+    );
+    viewModel.parentNode.position = new Vector3(0, 0, 0);
+    viewModel.characterNavigator = characterNavigatorMock;
+
+    systemUnderTest.setRandomMovementTarget();
+
+    expect(characterNavigatorMock.startMovement).toBeCalledTimes(1);
+    expect(characterNavigatorMock.startMovement).toBeCalledWith(
+      expect.any(Vector3),
+      systemUnderTest["startIdleTimeout"]
+    );
+  });
+
+  test("startIdleTimeout calls setRandomTarget after the idleTime", () => {
+    navigationMock.Plugin.getRandomPointAround.mockReturnValue(
+      new Vector3(2, 0, 2)
+    );
+    viewModel.parentNode = new TransformNode(
+      "mockParentNode",
+      new Scene(new NullEngine())
+    );
+    viewModel.parentNode.position = new Vector3(0, 0, 0);
+    viewModel.characterNavigator = characterNavigatorMock;
+
+    jest.useFakeTimers();
+    const setRandomMovementTargetMock = jest.spyOn(
+      systemUnderTest,
+      "setRandomMovementTarget"
+    );
+
+    systemUnderTest["startIdleTimeout"]();
+
+    expect(setRandomMovementTargetMock).not.toBeCalled();
+
+    jest.advanceTimersByTime(viewModel.idleTime);
+
+    expect(setRandomMovementTargetMock).toBeCalledTimes(1);
   });
 });

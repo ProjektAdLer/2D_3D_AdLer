@@ -53,9 +53,9 @@ describe("StoryNPCPresenter", () => {
   });
 
   test("onStoryElementCutSceneFinished sets isInCutScene to false", () => {
-    viewModel.isInCutScene.Value = true;
+    viewModel.isInCutScene = true;
     systemUnderTest.onStoryElementCutSceneFinished();
 
-    expect(viewModel.isInCutScene.Value).toBe(false);
+    expect(viewModel.isInCutScene).toBe(false);
   });
 });

@@ -7,6 +7,7 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import { waitFor } from "@testing-library/react";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
+import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 
 jest.spyOn(PresentationBuilder.prototype, "buildPresenter");
 jest.spyOn(PresentationBuilder.prototype, "buildView");
@@ -36,6 +37,7 @@ describe("StoryNPCBuilder", () => {
 
   test("buildViewModel sets modelType", () => {
     systemUnderTest.modelType = "test";
+    systemUnderTest.learningSpaceTemplateType = LearningSpaceTemplateType.L;
 
     systemUnderTest.buildViewModel();
 
@@ -44,6 +46,8 @@ describe("StoryNPCBuilder", () => {
 
   test("buildView resolves isCompleted promise when the asyncSetup of the view resolves", async () => {
     systemUnderTest.modelType = "test";
+    systemUnderTest.learningSpaceTemplateType = LearningSpaceTemplateType.L;
+
     systemUnderTest.buildViewModel();
     systemUnderTest.buildController();
     const viewMock = mock<StoryNPCView>();
@@ -57,6 +61,8 @@ describe("StoryNPCBuilder", () => {
 
   test("buildView logs error the asyncSetup of the view rejects", async () => {
     systemUnderTest.modelType = "test";
+    systemUnderTest.learningSpaceTemplateType = LearningSpaceTemplateType.L;
+
     systemUnderTest.buildViewModel();
     systemUnderTest.buildController();
     const viewMock = mock<StoryNPCView>();
@@ -75,6 +81,8 @@ describe("StoryNPCBuilder", () => {
 
   test("buildPresenter registers presenter with world port", () => {
     systemUnderTest.modelType = "test";
+    systemUnderTest.learningSpaceTemplateType = LearningSpaceTemplateType.L;
+
     systemUnderTest.buildViewModel();
     systemUnderTest.buildController();
 
