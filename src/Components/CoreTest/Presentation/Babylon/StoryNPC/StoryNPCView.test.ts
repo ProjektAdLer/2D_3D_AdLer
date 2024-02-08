@@ -276,6 +276,15 @@ describe("StoryNPCView", () => {
     expect(scenePresenterMock.addDisposeSceneCallback).toHaveBeenCalledTimes(1);
   });
 
+  test("setRandomTarget doesn't call startMovement when the npc is in a cutscene", () => {
+    viewModel.isInCutScene = true;
+    viewModel.characterNavigator = characterNavigatorMock;
+
+    systemUnderTest.setRandomMovementTarget();
+
+    expect(characterNavigatorMock.startMovement).not.toBeCalled();
+  });
+
   test("setRandomTarget calls startMovement on the characterNavigator with a target", () => {
     navigationMock.Plugin.getRandomPointAround.mockReturnValue(
       new Vector3(2, 0, 2)
