@@ -1,4 +1,3 @@
-import { ValueLineComponent } from "@babylonjs/inspector/lines/valueLineComponent";
 import IStoryElementPresenter from "./IStoryElementPresenter";
 import StoryElementViewModel from "./StoryElementViewModel";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
