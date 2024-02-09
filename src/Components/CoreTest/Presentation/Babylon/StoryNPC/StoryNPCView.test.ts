@@ -1,7 +1,9 @@
 import { mock, mockDeep } from "jest-mock-extended";
 import IStoryNPCController from "../../../../Core/Presentation/Babylon/StoryNPC/IStoryNPCController";
 import StoryNPCView from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCView";
-import StoryNPCViewModel from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCViewModel";
+import StoryNPCViewModel, {
+  StoryNPCState,
+} from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCViewModel";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
@@ -66,7 +68,6 @@ describe("StoryNPCView", () => {
 
   beforeEach(() => {
     viewModel = new StoryNPCViewModel();
-    viewModel.isInCutScene = false;
     viewModel.avatarPosition = new Vector3(0, 0, 0);
     controllerMock = mock<IStoryNPCController>();
     systemUnderTest = new StoryNPCView(viewModel, controllerMock);
@@ -276,15 +277,6 @@ describe("StoryNPCView", () => {
     expect(scenePresenterMock.addDisposeSceneCallback).toHaveBeenCalledTimes(1);
   });
 
-  test("setRandomTarget doesn't call startMovement when the npc is in a cutscene", () => {
-    viewModel.isInCutScene = true;
-    viewModel.characterNavigator = characterNavigatorMock;
-
-    systemUnderTest.setRandomMovementTarget();
-
-    expect(characterNavigatorMock.startMovement).not.toBeCalled();
-  });
-
   test("setRandomTarget calls startMovement on the characterNavigator with a target", () => {
     navigationMock.Plugin.getRandomPointAround.mockReturnValue(
       new Vector3(2, 0, 2)
@@ -315,6 +307,7 @@ describe("StoryNPCView", () => {
     );
     viewModel.parentNode.position = new Vector3(0, 0, 0);
     viewModel.characterNavigator = characterNavigatorMock;
+    viewModel.state.Value = StoryNPCState.RandomMovement;
 
     jest.useFakeTimers();
     const setRandomMovementTargetMock = jest.spyOn(
@@ -329,5 +322,21 @@ describe("StoryNPCView", () => {
     jest.advanceTimersByTime(viewModel.idleTime);
 
     expect(setRandomMovementTargetMock).toBeCalledTimes(1);
+  });
+
+  test("startIdleTimeout does not call setRandomTarget when state is not RandomMovement", () => {
+    viewModel.state.Value = StoryNPCState.Idle;
+
+    jest.useFakeTimers();
+    const setRandomMovementTargetMock = jest.spyOn(
+      systemUnderTest,
+      "setRandomMovementTarget"
+    );
+
+    systemUnderTest["startIdleTimeout"]();
+
+    jest.advanceTimersByTime(viewModel.idleTime);
+
+    expect(setRandomMovementTargetMock).not.toBeCalled();
   });
 });

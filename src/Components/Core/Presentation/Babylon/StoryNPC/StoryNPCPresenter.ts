@@ -1,10 +1,18 @@
 import { Vector3 } from "@babylonjs/core";
 import IStoryNPCPresenter from "./IStoryNPCPresenter";
-import StoryNPCViewModel from "./StoryNPCViewModel";
+import StoryNPCViewModel, { StoryNPCState } from "./StoryNPCViewModel";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 export default class StoryNPCPresenter implements IStoryNPCPresenter {
-  constructor(private viewModel: StoryNPCViewModel) {}
+  private logger: ILoggerPort;
+
+  constructor(private viewModel: StoryNPCViewModel) {
+    this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
+  }
 
   onAvatarPositionChanged(position: Vector3, interactionRadius: number): void {
     const distance = Vector3.Distance(
@@ -20,35 +28,28 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
   }
 
   onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
-    if ((this.viewModel.storyType & storyType) !== storyType) return;
+    // go to idle when another cutscene is started
+    if ((this.viewModel.storyType & storyType) !== storyType) {
+      this.viewModel.state.Value = StoryNPCState.Idle;
+      return;
+    }
 
-    this.viewModel.isInCutScene = true;
+    this.viewModel.state.Value = StoryNPCState.CutScene;
 
-    // npc stops in specific distance from avatar
-    const targetOffset = this.viewModel.avatarPosition
-      .subtract(this.viewModel.parentNode.position)
-      .normalize()
-      .scale(this.viewModel.cutSceneDistanceFromAvatar);
-    const target = this.viewModel.avatarPosition.subtract(targetOffset);
-
-    const isIntro: boolean =
-      (storyType & StoryElementType.Intro) === StoryElementType.Intro;
-
-    // go to avatar
-    setTimeout(() => {
-      this.viewModel.characterNavigator.startMovement(target, () => {
-        if (isIntro) {
-          this.viewModel.storyElementPresenter.open(StoryElementType.Intro);
-        } else {
-          this.viewModel.storyElementPresenter.openThroughOutroSequence();
-        }
-      });
-    }, this.viewModel.cutSceneStartDelay);
+    this.logger.log(
+      LogLevelTypes.INFO,
+      `StoryNPCPresenter (onStoryElementCutSceneTriggered): ${this.viewModel.storyType} Cutscene triggered`
+    );
   }
 
   onStoryElementCutSceneFinished(): void {
-    if (!this.viewModel.isInCutScene) return;
-
-    this.viewModel.isInCutScene = false;
+    // go back to walking after own cutscene is finished
+    if (this.viewModel.state.Value === StoryNPCState.CutScene) {
+      this.viewModel.state.Value = StoryNPCState.RandomMovement;
+      this.logger.log(
+        LogLevelTypes.INFO,
+        `StoryNPCPresenter (onStoryElementCutSceneFinished): ${this.viewModel.storyType} Cutscene finished`
+      );
+    }
   }
 }

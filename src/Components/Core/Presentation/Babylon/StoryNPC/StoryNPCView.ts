@@ -1,4 +1,4 @@
-import StoryNPCViewModel from "./StoryNPCViewModel";
+import StoryNPCViewModel, { StoryNPCState } from "./StoryNPCViewModel";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import SCENE_TYPES, {
@@ -42,6 +42,8 @@ export default class StoryNPCView {
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
+
+    this.viewModel.state.subscribe(this.onStateChanged);
   }
 
   // -- Setup --
@@ -167,12 +169,7 @@ export default class StoryNPCView {
       config.isDebug
     );
 
-    // start random movement, except when npc is part of a intro cutscene
-    if (
-      (this.viewModel.storyType & StoryElementType.Intro) ===
-        StoryElementType.Intro &&
-      this.viewModel.isInCutScene === false
-    )
+    if (this.viewModel.state.Value === StoryNPCState.RandomMovement)
       this.viewModel.characterNavigator.IsReady.then(() => {
         this.setRandomMovementTarget();
       });
@@ -188,9 +185,59 @@ export default class StoryNPCView {
   // -- Movement --
 
   @bind
-  setRandomMovementTarget() {
-    if (this.viewModel.isInCutScene) return;
+  onStateChanged(newState: StoryNPCState): void {
+    switch (newState) {
+      case StoryNPCState.Idle:
+        this.moveToIdlePosition();
+        break;
+      case StoryNPCState.RandomMovement:
+        this.setRandomMovementTarget();
+        break;
+      case StoryNPCState.CutScene:
+        this.startCutSceneMovement();
+        break;
+    }
+  }
 
+  moveToIdlePosition(): void {
+    const idlePosition =
+      this.viewModel.storyType === StoryElementType.Intro
+        ? this.viewModel.introIdlePosition
+        : this.viewModel.outroIdlePosition;
+
+    this.viewModel.characterNavigator.startMovement(idlePosition, () => {
+      // TODO: set correct rotation when idle position is reached
+      console.log("Idle position reached");
+    });
+  }
+
+  startCutSceneMovement(): void {
+    // npc stops in specific distance from avatar
+    const targetOffset = this.viewModel.avatarPosition
+      .subtract(this.viewModel.parentNode.position)
+      .normalize()
+      .scale(this.viewModel.cutSceneDistanceFromAvatar);
+    const target = this.viewModel.avatarPosition.subtract(targetOffset);
+
+    const isIntro: boolean =
+      (this.viewModel.storyType & StoryElementType.Intro) ===
+      StoryElementType.Intro;
+
+    // go to avatar
+    setTimeout(() => {
+      this.viewModel.characterNavigator.startMovement(target, () => {
+        // open ui when avatar is reached
+        if (isIntro) {
+          this.viewModel.storyElementPresenter.open(StoryElementType.Intro);
+        } else {
+          this.viewModel.storyElementPresenter.openThroughOutroSequence();
+        }
+      });
+    }, this.viewModel.cutSceneStartDelay);
+  }
+
+  @bind
+  setRandomMovementTarget() {
     let target: Vector3;
     let distance: number = 0;
     do {
@@ -210,7 +257,9 @@ export default class StoryNPCView {
   @bind
   private startIdleTimeout(): void {
     this.viewModel.idleTimer = setTimeout(() => {
-      this.setRandomMovementTarget();
+      // prevent movement when in invalid state
+      if (this.viewModel.state.Value === StoryNPCState.RandomMovement)
+        this.setRandomMovementTarget();
     }, this.viewModel.idleTime);
   }
 }

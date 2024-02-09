@@ -1,6 +1,8 @@
 import { NullEngine, Scene, TransformNode, Vector3 } from "@babylonjs/core";
 import StoryNPCPresenter from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCPresenter";
-import StoryNPCViewModel from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCViewModel";
+import StoryNPCViewModel, {
+  StoryNPCState,
+} from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCViewModel";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import { mockDeep } from "jest-mock-extended";
@@ -52,10 +54,10 @@ describe("StoryNPCPresenter", () => {
     expect(viewModel.isInteractable.Value).toBe(false);
   });
 
-  test("onStoryElementCutSceneFinished sets isInCutScene to false", () => {
-    viewModel.isInCutScene = true;
+  test("onStoryElementCutSceneFinished sets state to RandomMovement when currently CutScene is set", () => {
+    viewModel.state.Value = StoryNPCState.CutScene;
     systemUnderTest.onStoryElementCutSceneFinished();
 
-    expect(viewModel.isInCutScene).toBe(false);
+    expect(viewModel.state.Value).toBe(StoryNPCState.RandomMovement);
   });
 });

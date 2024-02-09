@@ -8,6 +8,12 @@ import IStoryElementPresenter from "~ReactComponents/LearningSpaceDisplay/StoryE
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
+export enum StoryNPCState {
+  Idle,
+  RandomMovement,
+  CutScene,
+}
+
 export default class StoryNPCViewModel {
   storyElementPresenter: IStoryElementPresenter =
     CoreDIContainer.get<IStoryElementPresenter>(
@@ -16,6 +22,7 @@ export default class StoryNPCViewModel {
 
   // observable runtime properties
   isInteractable = new Observable<boolean>(false);
+  state = new Observable(StoryNPCState.Idle);
 
   // non-observable runtime properties
   characterNavigator: ICharacterNavigator;
@@ -30,7 +37,6 @@ export default class StoryNPCViewModel {
   avatarPosition: Vector3;
   introIdlePosition: Vector3;
   outroIdlePosition: Vector3;
-  isInCutScene = false;
 
   // readonly configuration properties
   readonly introSpawnPositionOffsetFromAvatar: Vector3 = new Vector3(0, 0, 6);
@@ -38,6 +44,6 @@ export default class StoryNPCViewModel {
   readonly iconYOffset: number = 2.3;
   readonly movementRange: number = 5; // in m
   readonly minMovementDistance: number = 2; // in m
-  readonly idleTime: number = 4000; // in ms
+  readonly idleTime: number = 5000; // in ms
   readonly cutSceneStartDelay: number = 2000; // in ms
 }

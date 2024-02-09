@@ -3,7 +3,7 @@ import StoryNPCController from "./StoryNPCController";
 import StoryNPCPresenter from "./StoryNPCPresenter";
 import IStoryNPCController from "./IStoryNPCController";
 import IStoryNPCPresenter from "./IStoryNPCPresenter";
-import StoryNPCViewModel from "./StoryNPCViewModel";
+import StoryNPCViewModel, { StoryNPCState } from "./StoryNPCViewModel";
 import StoryNPCView from "./StoryNPCView";
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
 import { LearningElementModel } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
@@ -37,14 +37,20 @@ export default class StoryNPCBuilder
 
   public modelType: LearningElementModel;
   public storyType: StoryElementType;
-  public startInCutScene: boolean;
+  public noLearningElementHasScored: boolean;
   public learningSpaceTemplateType: LearningSpaceTemplateType;
 
   override buildViewModel(): void {
     super.buildViewModel();
     this.viewModel!.modelType = this.modelType;
     this.viewModel!.storyType = this.storyType;
-    this.viewModel!.isInCutScene = this.startInCutScene;
+
+    // intro story elements start in random movement when intro cutscene doesn't play
+    this.viewModel!.state.Value =
+      this.noLearningElementHasScored ||
+      this.storyType === StoryElementType.Outro
+        ? StoryNPCState.Idle
+        : StoryNPCState.RandomMovement;
 
     if (this.learningSpaceTemplateType !== LearningSpaceTemplateType.None) {
       const template = LearningSpaceTemplateLookup.getLearningSpaceTemplate(
