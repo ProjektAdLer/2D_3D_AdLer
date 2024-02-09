@@ -81,6 +81,7 @@ export default class CharacterNavigator
     target: Vector3,
     onTargetReachedCallback?: () => void
   ): void {
+    target = this.navigation.Plugin.getClosestPoint(target);
     this.navigation.Crowd.agentGoto(this.agentIndex, target);
     this.characterAnimator.transition(
       CharacterAnimationActions.MovementStarted

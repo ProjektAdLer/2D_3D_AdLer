@@ -4,9 +4,7 @@ import {
   Mesh,
   MeshBuilder,
   NullEngine,
-  Observer,
   Scene,
-  StandardMaterial,
   TransformNode,
   Vector3,
 } from "@babylonjs/core";
@@ -83,8 +81,9 @@ describe("CharacterNavigator", () => {
 
   test("startMovement calls agentGoto on the navigation crowd", () => {
     const expectedTarget = new Vector3(1, 2, 3);
+    navigationMock.Plugin.getClosestPoint.mockReturnValue(expectedTarget);
 
-    systemUnderTest.startMovement(expectedTarget);
+    systemUnderTest.startMovement(new Vector3(4, 2, 0));
 
     expect(navigationMock.Crowd.agentGoto).toHaveBeenCalledWith(
       systemUnderTest["agentIndex"],
