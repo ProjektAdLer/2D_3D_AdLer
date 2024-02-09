@@ -11,7 +11,7 @@ let viewModel = new StoryElementViewModel();
 viewModel.isOpen.Value = true;
 const fakeController = mock<StoryElementController>();
 
-describe.skip("StoryElement", () => {
+describe("StoryElement", () => {
   beforeEach(() => {
     viewModel.introTexts.Value = ["Blabla Intro 1"];
     viewModel.outroTexts.Value = ["Blabla Outro 1"];
@@ -19,7 +19,7 @@ describe.skip("StoryElement", () => {
     viewModel.pageId.Value = 0;
     viewModel.outroUnlocked.Value = false;
     viewModel.outroJustNowUnlocked.Value = false;
-    viewModel.numberOfStories.Value = 0;
+    viewModel.isSplitStory.Value = false;
   });
 
   test("doesn't render without controller", () => {
@@ -63,7 +63,7 @@ describe.skip("StoryElement", () => {
   });
   test("should render its content (Case 1: Split IntroOutro, Intro selected)", () => {
     viewModel.type.Value = [StoryElementType.Intro, StoryElementType.Outro];
-    viewModel.numberOfStories.Value = 2;
+    viewModel.isSplitStory.Value = true;
     viewModel.pickedStory.Value = StoryElementType.Intro;
     useBuilderMock([viewModel, fakeController]);
 
@@ -88,7 +88,7 @@ describe.skip("StoryElement", () => {
   });
   test("should render its content (Case 2: Split IntroOutro, unlocked Outro selected)", () => {
     viewModel.type.Value = [StoryElementType.Intro, StoryElementType.Outro];
-    viewModel.numberOfStories.Value = 2;
+    viewModel.isSplitStory.Value = true;
     viewModel.pickedStory.Value = StoryElementType.Outro;
     viewModel.outroUnlocked.Value = true;
     useBuilderMock([viewModel, fakeController]);
@@ -105,16 +105,26 @@ describe.skip("StoryElement", () => {
     const componentUnderTest = render(<StoryElement />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
-  test.skip("should render its content (Case 3: Locked Outro)", () => {
-    viewModel.type.Value = StoryElementType.Outro;
+  test("should render its content (Case 3: Locked Outro)", () => {
+    viewModel.type.Value = [StoryElementType.Outro];
     viewModel.outroUnlocked.Value = false;
     useBuilderMock([viewModel, fakeController]);
 
     const componentUnderTest = render(<StoryElement />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
-  test.skip("should render its content (Case 4: IntroOutro)", () => {
-    viewModel.type.Value = StoryElementType.IntroOutro;
+  test("should render its content (Case 3: Split IntroOutro, locked Outro selected)", () => {
+    viewModel.type.Value = [StoryElementType.Intro, StoryElementType.Outro];
+    viewModel.outroUnlocked.Value = false;
+    viewModel.isSplitStory.Value = true;
+    viewModel.pickedStory.Value = StoryElementType.Outro;
+    useBuilderMock([viewModel, fakeController]);
+
+    const componentUnderTest = render(<StoryElement />);
+    expect(componentUnderTest.container.childElementCount).toBe(1);
+  });
+  test("should render its content (Case 4: IntroOutro)", () => {
+    viewModel.type.Value = [StoryElementType.IntroOutro];
     viewModel.outroUnlocked.Value = true;
     viewModel.showOnlyIntro.Value = false;
     viewModel.showOnlyOutro.Value = false;
@@ -123,8 +133,8 @@ describe.skip("StoryElement", () => {
     const componentUnderTest = render(<StoryElement />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
-  test.skip("should render its content (Case 4: IntroOutro, Intro selected)", () => {
-    viewModel.type.Value = StoryElementType.IntroOutro;
+  test("should render its content (Case 4: IntroOutro, Intro selected)", () => {
+    viewModel.type.Value = [StoryElementType.IntroOutro];
     viewModel.outroUnlocked.Value = true;
     viewModel.showOnlyIntro.Value = true;
     viewModel.showOnlyOutro.Value = false;
@@ -133,8 +143,8 @@ describe.skip("StoryElement", () => {
     const componentUnderTest = render(<StoryElement />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
-  test.skip("should render its content (Case 4: IntroOutro, Outro selected)", () => {
-    viewModel.type.Value = StoryElementType.IntroOutro;
+  test("should render its content (Case 4: IntroOutro, Outro selected)", () => {
+    viewModel.type.Value = [StoryElementType.IntroOutro];
     viewModel.outroUnlocked.Value = true;
     viewModel.showOnlyIntro.Value = false;
     viewModel.showOnlyOutro.Value = true;
@@ -145,6 +155,7 @@ describe.skip("StoryElement", () => {
   });
   test("should not render if no case is matched (type = null)", () => {
     viewModel.type.Value = [StoryElementType.None];
+    viewModel.pickedStory.Value = StoryElementType.None;
     useBuilderMock([viewModel, fakeController]);
     const { container } = render(<StoryElement />);
     expect(container.firstChild).toBeNull();
