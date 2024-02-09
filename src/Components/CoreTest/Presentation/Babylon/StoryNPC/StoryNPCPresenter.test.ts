@@ -5,10 +5,14 @@ import StoryNPCViewModel, {
 } from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCViewModel";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
-import { mockDeep } from "jest-mock-extended";
+import { mock, mockDeep } from "jest-mock-extended";
 import IStoryElementPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
+import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
+import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 
 const storyElementPresenterMock = mockDeep<IStoryElementPresenter>();
+const loggerMock = mock<ILoggerPort>();
 
 describe("StoryNPCPresenter", () => {
   let systemUnderTest: StoryNPCPresenter;
@@ -19,6 +23,7 @@ describe("StoryNPCPresenter", () => {
     CoreDIContainer.bind(
       PRESENTATION_TYPES.IStoryElementPresenter
     ).toConstantValue(storyElementPresenterMock);
+    CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
   });
 
   afterAll(() => {
@@ -52,6 +57,22 @@ describe("StoryNPCPresenter", () => {
     systemUnderTest.onAvatarPositionChanged(new Vector3(0, 0, 2), 1);
 
     expect(viewModel.isInteractable.Value).toBe(false);
+  });
+
+  test("onStoryElementCutSceneTriggered sets state to Idle when another story type cutscene is triggered", () => {
+    viewModel.state.Value = StoryNPCState.RandomMovement;
+    viewModel.storyType = StoryElementType.Outro;
+    systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.Intro);
+
+    expect(viewModel.state.Value).toBe(StoryNPCState.Idle);
+  });
+
+  test("onStoryElementCutSceneTriggered sets state to CutScene when the same story type cutscene is triggered", () => {
+    viewModel.state.Value = StoryNPCState.RandomMovement;
+    viewModel.storyType = StoryElementType.Intro;
+    systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.Intro);
+
+    expect(viewModel.state.Value).toBe(StoryNPCState.CutScene);
   });
 
   test("onStoryElementCutSceneFinished sets state to RandomMovement when currently CutScene is set", () => {
