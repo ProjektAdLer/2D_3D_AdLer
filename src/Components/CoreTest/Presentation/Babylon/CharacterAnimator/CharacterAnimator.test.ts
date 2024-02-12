@@ -298,7 +298,7 @@ describe("CharacterAnimator", () => {
     expect(mockWalkAnimation.speedRatio).toEqual(1);
   });
 
-  test("setWalkingAnimationSpeed doesn't set the speedRation to less than 1", () => {
+  test("setWalkingAnimationSpeed doesn't set the speedRation to less than 0.5", () => {
     systemUnderTest["stateMachine"]["currentState"] =
       CharacterAnimationStates.Walking;
     systemUnderTest["getCharacterVelocity"] = () => new Vector3(0.5, 0, 0);
@@ -306,6 +306,6 @@ describe("CharacterAnimator", () => {
 
     systemUnderTest["setWalkingAnimationSpeed"]();
 
-    expect(mockWalkAnimation.speedRatio).toEqual(1);
+    expect(mockWalkAnimation.speedRatio).toEqual(0.5);
   });
 });

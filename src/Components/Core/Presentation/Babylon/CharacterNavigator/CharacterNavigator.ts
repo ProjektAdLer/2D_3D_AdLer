@@ -8,6 +8,7 @@ import {
   LinesMesh,
   Nullable,
   Observer,
+  Scene,
 } from "@babylonjs/core";
 import bind from "bind-decorator";
 import INavigation from "../Navigation/INavigation";
@@ -30,7 +31,7 @@ export default class CharacterNavigator
   implements ICharacterNavigator
 {
   private readonly agentParams: IAgentParameters = {
-    radius: 0.5,
+    radius: 0.4,
     height: 1,
     maxAcceleration: 5000.0,
     maxSpeed: 3.0,
@@ -39,16 +40,21 @@ export default class CharacterNavigator
     separationWeight: 1.0,
     reachRadius: 0.4, // acts as stopping distance
   };
+  private readonly earlyStoppingPatience = 300; // in ms
+  private readonly earlyStoppingVelocityThreshold = 0.3;
 
   private navigation: INavigation;
   private scenePresenter: IScenePresenter;
+  private characterAnimator: ICharacterAnimator;
   private agentIndex: number;
   private targetReachedObserverRef: Nullable<
     Observer<{ agentIndex: number; destination: Vector3 }>
   >;
+  private targetReachedCallback: (() => void) | null;
   private parentNode: TransformNode;
-  private characterAnimator: ICharacterAnimator;
   private verbose: boolean = false;
+  private checkEarlyStoppingObserverRef: Nullable<Observer<Scene>>;
+  private earlyStoppingCounter = 0;
 
   private debug_pathLine: LinesMesh;
 
@@ -81,12 +87,28 @@ export default class CharacterNavigator
     target: Vector3,
     onTargetReachedCallback?: () => void
   ): void {
+    // reset navigation
+    this.navigation.Crowd.agentTeleport(
+      this.agentIndex,
+      this.parentNode.position
+    );
+    this.resetObservers();
+
+    // get target on navmesh
     target = this.navigation.Plugin.getClosestPoint(target);
+
+    // start movement
     this.navigation.Crowd.agentGoto(this.agentIndex, target);
     this.characterAnimator.transition(
       CharacterAnimationActions.MovementStarted
     );
 
+    // setup observers
+    this.targetReachedCallback = onTargetReachedCallback ?? null;
+    this.checkEarlyStoppingObserverRef =
+      this.scenePresenter.Scene.onBeforeRenderObservable.add(
+        this.checkEarlyStopping
+      );
     this.targetReachedObserverRef =
       this.navigation.Crowd.onReachTargetObservable.add(
         (eventData: { agentIndex: number }) => {
@@ -97,6 +119,7 @@ export default class CharacterNavigator
         }
       );
 
+    // debug drawings
     this.debug_drawPath(target);
   }
 
@@ -108,9 +131,7 @@ export default class CharacterNavigator
     );
     this.characterAnimator.transition(CharacterAnimationActions.TargetReached);
 
-    this.navigation.Crowd.onReachTargetObservable.remove(
-      this.targetReachedObserverRef
-    );
+    this.resetObservers();
   }
 
   @bind
@@ -128,11 +149,42 @@ export default class CharacterNavigator
       this.parentNode
     );
 
-    // commenting this debug code solves avatar spawn bug
     this.debug_drawCircle(this.agentParams.radius, Color3.Blue());
     this.debug_drawCircle(this.agentParams.reachRadius!, Color3.Red());
 
     this.resolveIsReady();
+  }
+
+  @bind
+  private checkEarlyStopping(scene: Scene): void {
+    const velocity = this.navigation.Crowd.getAgentVelocity(
+      this.agentIndex
+    ).length();
+
+    if (velocity < this.earlyStoppingVelocityThreshold)
+      this.earlyStoppingCounter += scene.deltaTime;
+    else this.earlyStoppingCounter = 0;
+
+    if (this.earlyStoppingCounter >= this.earlyStoppingPatience) {
+      if (this.targetReachedCallback) this.targetReachedCallback();
+      this.stopMovement();
+    }
+  }
+
+  private resetObservers(): void {
+    if (this.targetReachedObserverRef !== null) {
+      this.navigation.Crowd.onReachTargetObservable.remove(
+        this.targetReachedObserverRef
+      );
+      this.targetReachedObserverRef = null;
+    }
+    if (this.checkEarlyStoppingObserverRef !== null) {
+      this.scenePresenter.Scene.onBeforeRenderObservable.remove(
+        this.checkEarlyStoppingObserverRef
+      );
+      this.checkEarlyStoppingObserverRef = null;
+    }
+    if (this.targetReachedCallback !== null) this.targetReachedCallback = null;
   }
 
   private debug_drawPath(target: Vector3): void {

@@ -136,6 +136,42 @@ describe("CharacterNavigator", () => {
     );
   });
 
+  test("checkEarlyStopping increases earlyStoppingCounter when velocity is under threshold", () => {
+    navigationMock.Crowd.getAgentVelocity.mockReturnValue(
+      new Vector3(0.1, 0, 0)
+    );
+    const sceneMock = mockDeep<Scene>();
+    sceneMock.deltaTime = 1;
+
+    systemUnderTest["checkEarlyStopping"](sceneMock);
+
+    expect(systemUnderTest["earlyStoppingCounter"]).toBe(1);
+  });
+
+  test("checkEarlyStopping resets earlyStoppingCounter when velocity is above threshold", () => {
+    navigationMock.Crowd.getAgentVelocity.mockReturnValue(new Vector3(1, 0, 0));
+    const sceneMock = mockDeep<Scene>();
+    sceneMock.deltaTime = 1;
+
+    systemUnderTest["checkEarlyStopping"](sceneMock);
+
+    expect(systemUnderTest["earlyStoppingCounter"]).toBe(0);
+  });
+
+  test("checkEarlyStopping calls targetReachedCallback when earlyStoppingPatience is exceeded", () => {
+    const sceneMock = mockDeep<Scene>();
+    sceneMock.deltaTime = 1;
+    navigationMock.Crowd.getAgentVelocity.mockReturnValue(new Vector3(0, 0, 0));
+
+    systemUnderTest["earlyStoppingCounter"] = 500;
+    const targetReachedCallback = jest.fn();
+    systemUnderTest["targetReachedCallback"] = targetReachedCallback;
+
+    systemUnderTest["checkEarlyStopping"](sceneMock);
+
+    expect(targetReachedCallback).toHaveBeenCalledTimes(1);
+  });
+
   test("debug_drawPath does nothing when verbose is false", () => {
     systemUnderTest["verbose"] = false;
 

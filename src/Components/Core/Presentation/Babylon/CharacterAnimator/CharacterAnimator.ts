@@ -262,6 +262,6 @@ export default class CharacterAnimator implements ICharacterAnimator {
       return;
 
     let velocity = this.getCharacterVelocity().length();
-    this.walkAnimation.speedRatio = Math.max(velocity, 1);
+    this.walkAnimation.speedRatio = Math.max(velocity, 0.5);
   }
 }
