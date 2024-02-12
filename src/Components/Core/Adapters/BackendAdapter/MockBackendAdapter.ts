@@ -66,11 +66,11 @@ export default class MockBackendAdapter implements IBackendPort {
       elements: [
         {
           elementID: 1,
-          hasScored: true,
+          hasScored: false,
         },
         {
           elementID: 2,
-          hasScored: true,
+          hasScored: false,
         },
         {
           elementID: 3,
@@ -884,9 +884,13 @@ export default class MockBackendAdapter implements IBackendPort {
           spaceName: "Raum der kleinen Welt",
           spaceDescription: "Raumbeschreibung der kleinen Welt",
           spaceSlotContents: [1, 2, 3, null, 4, null, null, 5, null, 6],
-          requiredPointsToComplete: 2,
+          requiredPointsToComplete: 1,
           requiredSpacesToEnter: "",
-          spaceGoals: ["Raumziel 1/3", "Raumziel 2/3", "Raumziel 3/3"],
+          spaceGoals: [
+            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit",
+            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit",
+            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit",
+          ],
           spaceTemplate: "L_32x31_10L",
           spaceTemplateStyle: "Campus",
           spaceStory: {
@@ -1114,7 +1118,7 @@ export default class MockBackendAdapter implements IBackendPort {
           spaceDescription: "rdescription4",
           spaceGoals: ["rgoals4"],
           spaceSlotContents: [4],
-          requiredPointsToComplete: 0,
+          requiredPointsToComplete: 1,
           requiredSpacesToEnter: "(3)v((2)^(1))",
           spaceTemplate: "L_32x31_10L",
           spaceTemplateStyle: "",
