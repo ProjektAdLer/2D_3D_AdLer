@@ -31,11 +31,11 @@ export default function BottomTooltip({
     <div
       className={tailwindMerge(
         className,
-        "flex justify-center w-full bottom-2 md:bottom-10 z-40"
+        "flex justify-center w-full bottom-2 md:bottom-10 z-40 pointer-events-none "
       )}
     >
       <StyledContainer
-        className="cursor-pointer"
+        className="cursor-pointer pointer-events-auto"
         onClick={viewModel.onClickCallback.Value} // didn't use useObservable because react has problems with functions in states
       >
         <div className="flex items-center gap-1 p-2 font-bold rounded-lg lg:p-4 text-adlerdarkblue text-md lg:text-2xl bg-buttonbgblue">
