@@ -4,6 +4,6 @@ import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementT
 
 export default interface IStoryElementPresenter extends ILearningWorldAdapter {
   open(type: StoryElementType): void;
-  openThroughOutroSequence(): void;
+  onStoryElementCutSceneTriggered(storyType: StoryElementType): void;
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void;
 }

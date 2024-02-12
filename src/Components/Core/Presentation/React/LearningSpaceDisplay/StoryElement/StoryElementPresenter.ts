@@ -16,11 +16,13 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
       this.viewModel.pickedStory.Value = type;
     }
   }
-  openThroughOutroSequence(): void {
-    this.viewModel.outroJustNowUnlocked.Value = true;
-    this.viewModel.outroUnlocked.Value = true;
-    this.viewModel.isOpen.Value = true;
-    this.viewModel.pageId.Value = 0;
+
+  onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
+    if (storyType === StoryElementType.Outro) {
+      this.viewModel.outroJustNowUnlocked.Value = true;
+      this.viewModel.outroUnlocked.Value = true;
+      this.viewModel.pageId.Value = 0;
+    }
   }
 
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
