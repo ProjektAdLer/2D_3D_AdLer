@@ -1,6 +1,6 @@
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import IStoryNPCController from "./IStoryNPCController";
-import StoryNPCViewModel from "./StoryNPCViewModel";
+import StoryNPCViewModel, { StoryNPCState } from "./StoryNPCViewModel";
 import bind from "bind-decorator";
 import IStoryElementPresenter from "~ReactComponents/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
@@ -15,7 +15,10 @@ export default class StoryNPCController implements IStoryNPCController {
 
   @bind
   picked(): void {
-    if (this.viewModel.isInteractable.Value) {
+    if (
+      this.viewModel.isInteractable.Value &&
+      this.viewModel.state.Value !== StoryNPCState.CutScene
+    ) {
       this.viewModel.storyElementPresenter.open(this.viewModel.storyType);
     }
   }

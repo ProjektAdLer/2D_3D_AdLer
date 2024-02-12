@@ -219,19 +219,10 @@ export default class StoryNPCView {
       .scale(this.viewModel.cutSceneDistanceFromAvatar);
     const target = this.viewModel.avatarPosition.subtract(targetOffset);
 
-    const isIntro: boolean =
-      (this.viewModel.storyType & StoryElementType.Intro) ===
-      StoryElementType.Intro;
-
     // go to avatar
     setTimeout(() => {
       this.viewModel.characterNavigator.startMovement(target, () => {
-        // open ui when avatar is reached
-        if (isIntro) {
-          this.viewModel.storyElementPresenter.open(StoryElementType.Intro);
-        } else {
-          this.viewModel.storyElementPresenter.openThroughOutroSequence();
-        }
+        this.viewModel.storyElementPresenter.open(this.viewModel.storyType);
       });
     }, this.viewModel.cutSceneStartDelay);
   }
