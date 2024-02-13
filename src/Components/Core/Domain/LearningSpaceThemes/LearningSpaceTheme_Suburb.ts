@@ -48,6 +48,7 @@ const LearningSpaceTheme_Suburb: ILearningSpaceTheme = {
   exitDoorModel: require("../../../../Assets/3dModels/suburbTheme/3DModel_ExitDoor.glb"),
   windowModel: require("../../../../Assets/3dModels/suburbTheme/3DModel_Window.glb"),
   ambienceModel: require("../../../../Assets/3dModels/suburbTheme/env_suburb.glb"),
+  storyElementModel: require("../../../../Assets/3dModels/suburbTheme/a_npc_defaultnpc.glb"),
 };
 
 export default LearningSpaceTheme_Suburb;
