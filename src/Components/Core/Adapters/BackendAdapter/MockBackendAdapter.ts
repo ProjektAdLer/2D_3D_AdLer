@@ -883,24 +883,8 @@ export default class MockBackendAdapter implements IBackendPort {
           spaceId: 1,
           spaceName: "Raum der kleinen Welt",
           spaceDescription: "Raumbeschreibung der kleinen Welt",
-          spaceSlotContents: [
-            1,
-            2,
-            3,
-            null,
-            4,
-            null,
-            null,
-            5,
-            null,
-            6,
-            null,
-            null,
-            null,
-          ],
           requiredPointsToComplete: 2,
           spaceSlotContents: [1, 2, 3, null, 4, null, null, 5, null, 6],
-          requiredPointsToComplete: 1,
           requiredSpacesToEnter: "",
           spaceGoals: [
             "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit",
@@ -909,9 +893,6 @@ export default class MockBackendAdapter implements IBackendPort {
           ],
           spaceTemplate: "L_32x31_10L",
           spaceTemplateStyle: "Campus",
-          spaceGoals: ["Raumziel 1/3", "Raumziel 2/3", "Raumziel 3/3"],
-          spaceTemplate: "T_38X31_13L",
-          spaceTemplateStyle: "Arcade",
           spaceStory: {
             introStory: {
               storyTexts: [
