@@ -101,21 +101,22 @@ export default class AdaptivityElementPresenter
     let newFooterText = this.viewModel.contentData.Value.elementName;
 
     if (this.viewModel.currentTask.Value !== null) {
-      newFooterText += " => " + this.viewModel.currentTask.Value.taskTitle;
+      newFooterText += " \u2794 " + this.viewModel.currentTask.Value.taskTitle;
 
       if (this.viewModel.currentQuestion.Value !== null) {
         switch (this.viewModel.currentQuestion.Value.difficulty) {
           case AdaptivityElementQuestionDifficultyTypes.easy:
             newFooterText +=
-              " => " + i18next.t("easyQuestion", { ns: "learningElement" });
+              " \u2794 " + i18next.t("easyQuestion", { ns: "learningElement" });
             break;
           case AdaptivityElementQuestionDifficultyTypes.medium:
             newFooterText +=
-              " => " + i18next.t("normalQuestion", { ns: "learningElement" });
+              " \u2794 " +
+              i18next.t("normalQuestion", { ns: "learningElement" });
             break;
           case AdaptivityElementQuestionDifficultyTypes.hard:
             newFooterText +=
-              " => " + i18next.t("hardQuestion", { ns: "learningElement" });
+              " \u2794 " + i18next.t("hardQuestion", { ns: "learningElement" });
             break;
         }
       }

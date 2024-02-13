@@ -7,6 +7,7 @@ import {
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
+import solvedTaskIcon from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import AdaptivityElementDifficultyStars, {
   AdaptivityElementDifficultyStarState,
 } from "./AdaptivityElementDifficultyStars";
@@ -94,12 +95,15 @@ export default function AdaptivityElementQuestionSelection({
                   </>
                 )}
                 <div className="flex items-center justify-end pr-2">
-                  {question.isRequired && (
+                  {question.isRequired && !question.isCompleted && (
                     <img
                       alt=""
                       className={"h-5 md:h-7"}
                       src={requiredTaskIcon}
                     />
+                  )}
+                  {question.isRequired && question.isCompleted && (
+                    <img alt="" className={"h-5 md:h-7"} src={solvedTaskIcon} />
                   )}
 
                   {!question.isRequired && <div className="w-16"></div>}

@@ -11,6 +11,7 @@ import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Do
 
 //TODO: change this when key icon is available
 import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
+import solvedTaskIcon from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import { useTranslation } from "react-i18next";
 
 export function getAdaptivityQuestionStarState(
@@ -95,11 +96,18 @@ export default function AdaptivityElementTaskSelection({
                 </p>
 
                 <div className="flex justify-end">
-                  {task.isRequired && (
+                  {task.isRequired && !task.isCompleted && (
                     <img
                       alt=""
                       className={"h-6 lg:h-8 pl-4 xl:pl-8"}
                       src={requiredTaskIcon}
+                    />
+                  )}
+                  {task.isRequired && task.isCompleted && (
+                    <img
+                      alt=""
+                      className={"h-6 lg:h-8 pl-4 xl:pl-8"}
+                      src={solvedTaskIcon}
                     />
                   )}
                   {!task.isRequired && <div className="w-16"></div>}
