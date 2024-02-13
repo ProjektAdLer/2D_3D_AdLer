@@ -50,7 +50,8 @@ const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
   exitDoorModel: require("../../../../Assets/3dModels/arcadeTheme/3DModel_ExitDoor.glb"),
   windowModel: require("../../../../Assets/3dModels/arcadeTheme/3DModel_Window.glb"),
   ambienceModel: require("../../../../Assets/3dModels/arcadeTheme/env_arcade.glb"),
-  storyElementModel: require("../../../../Assets/3dModels/arcadeTheme/a_npc_sheriffjustice.glb"),
+  storyElementModel:
+    LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC,
 };
 
 export default LearningSpaceTheme_Arcade;

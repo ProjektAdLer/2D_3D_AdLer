@@ -33,7 +33,10 @@ import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceTh
 import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import ArrayItemRandomizer from "src/Components/Core/Presentation/Utils/ArrayItemRandomizer/ArrayItemRandomizer";
-import { isValidLearningElementModelType } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
+import {
+  LearningElementModel,
+  isValidLearningElementModelType,
+} from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
 import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElementEntity";
 import BackendStoryTO from "../../DataTransferObjects/BackendStoryTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
@@ -243,7 +246,8 @@ export default class LoadLearningWorldUseCase
               space.introStory,
               space.outroStory,
               worldID,
-              space.id
+              space.id,
+              space.templateStyle
             ),
           },
           LearningSpaceEntity
@@ -258,7 +262,8 @@ export default class LoadLearningWorldUseCase
     introStoryElement: BackendStoryTO | null,
     outroStoryElement: BackendStoryTO | null,
     worldID: number,
-    spaceID: number
+    spaceID: number,
+    spaceTheme: LearningSpaceThemeType
   ): StoryElementEntity[] {
     let storyElementEntities: StoryElementEntity[] = [];
 
@@ -275,7 +280,10 @@ export default class LoadLearningWorldUseCase
             spaceID: spaceID,
             introStoryTexts: introStoryElement.storyTexts,
             outroStoryTexts: outroStoryElement.storyTexts,
-            modelType: introStoryElement.elementModel,
+            modelType: this.getStoryElementModelType(
+              spaceTheme,
+              introStoryElement.elementModel
+            ),
             storyType: StoryElementType.IntroOutro,
           },
           StoryElementEntity
@@ -290,7 +298,10 @@ export default class LoadLearningWorldUseCase
               worldID: worldID,
               spaceID: spaceID,
               introStoryTexts: introStoryElement.storyTexts,
-              modelType: introStoryElement.elementModel,
+              modelType: this.getStoryElementModelType(
+                spaceTheme,
+                introStoryElement.elementModel
+              ),
               storyType: StoryElementType.Intro,
             },
             StoryElementEntity
@@ -304,7 +315,10 @@ export default class LoadLearningWorldUseCase
               worldID: worldID,
               spaceID: spaceID,
               outroStoryTexts: outroStoryElement.storyTexts,
-              modelType: outroStoryElement.elementModel,
+              modelType: this.getStoryElementModelType(
+                spaceTheme,
+                outroStoryElement.elementModel
+              ),
               storyType: StoryElementType.Outro,
             },
             StoryElementEntity
@@ -314,6 +328,21 @@ export default class LoadLearningWorldUseCase
     }
 
     return storyElementEntities;
+  }
+
+  getStoryElementModelType(
+    spaceTheme: LearningSpaceThemeType,
+    modelType?: LearningElementModel
+  ): LearningElementModel {
+    if (
+      modelType === undefined ||
+      !isValidLearningElementModelType(modelType)
+    ) {
+      modelType = LearningSpaceThemeLookup.getLearningSpaceTheme(spaceTheme)
+        .storyElementModel as LearningElementModel;
+    }
+
+    return modelType;
   }
 
   private createLearningElementEntities(

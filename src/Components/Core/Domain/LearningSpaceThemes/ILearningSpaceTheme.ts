@@ -16,5 +16,5 @@ export default interface ILearningSpaceTheme {
   readonly exitDoorModel: string;
   readonly windowModel: string;
   readonly ambienceModel: string;
-  readonly storyElementModel: string;
+  readonly storyElementModel: LearningElementModel;
 }

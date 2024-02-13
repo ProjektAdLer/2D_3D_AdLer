@@ -48,7 +48,8 @@ const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
   exitDoorModel: require("../../../../Assets/3dModels/campusTheme/3DModel_ExitDoor.glb"),
   windowModel: require("../../../../Assets/3dModels/campusTheme/3DModel_Window.glb"),
   ambienceModel: require("../../../../Assets/3dModels/campusTheme/env_campus.glb"),
-  storyElementModel: require("../../../../Assets/3dModels/campusTheme/a_npc_dozentlukas.glb"),
+  storyElementModel:
+    LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
 };
 
 export default LearningSpaceTheme_Campus;
