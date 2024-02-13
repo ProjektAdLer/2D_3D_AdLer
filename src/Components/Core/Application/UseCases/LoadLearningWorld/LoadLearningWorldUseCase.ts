@@ -265,13 +265,22 @@ export default class LoadLearningWorldUseCase
     spaceID: number,
     spaceTheme: LearningSpaceThemeType
   ): StoryElementEntity[] {
-    let storyElementEntities: StoryElementEntity[] = [];
+    const storyElementEntities: StoryElementEntity[] = [];
+
+    const introStoryModel = this.getStoryElementModelType(
+      spaceTheme,
+      introStoryElement?.elementModel
+    );
+    const outroStoryModel = this.getStoryElementModelType(
+      spaceTheme,
+      outroStoryElement?.elementModel
+    );
 
     // create combined intro-outro story element if both are present and have the same model
     if (
       introStoryElement !== null &&
       outroStoryElement !== null &&
-      introStoryElement.elementModel === outroStoryElement.elementModel
+      introStoryModel === outroStoryModel
     ) {
       storyElementEntities.push(
         this.container.createEntity<StoryElementEntity>(
@@ -280,10 +289,7 @@ export default class LoadLearningWorldUseCase
             spaceID: spaceID,
             introStoryTexts: introStoryElement.storyTexts,
             outroStoryTexts: outroStoryElement.storyTexts,
-            modelType: this.getStoryElementModelType(
-              spaceTheme,
-              introStoryElement.elementModel
-            ),
+            modelType: introStoryModel,
             storyType: StoryElementType.IntroOutro,
           },
           StoryElementEntity
@@ -298,10 +304,7 @@ export default class LoadLearningWorldUseCase
               worldID: worldID,
               spaceID: spaceID,
               introStoryTexts: introStoryElement.storyTexts,
-              modelType: this.getStoryElementModelType(
-                spaceTheme,
-                introStoryElement.elementModel
-              ),
+              modelType: introStoryModel,
               storyType: StoryElementType.Intro,
             },
             StoryElementEntity
@@ -315,10 +318,7 @@ export default class LoadLearningWorldUseCase
               worldID: worldID,
               spaceID: spaceID,
               outroStoryTexts: outroStoryElement.storyTexts,
-              modelType: this.getStoryElementModelType(
-                spaceTheme,
-                outroStoryElement.elementModel
-              ),
+              modelType: outroStoryModel,
               storyType: StoryElementType.Outro,
             },
             StoryElementEntity
