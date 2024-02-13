@@ -37,20 +37,32 @@ export default class StoryNPCBuilder
 
   public modelType: LearningElementModel;
   public storyType: StoryElementType;
-  public noLearningElementHasScored: boolean;
+  public noLearningElementHasScored: boolean = false;
+  public learningSpaceCompleted: boolean = false;
   public learningSpaceTemplateType: LearningSpaceTemplateType;
 
   override buildViewModel(): void {
     super.buildViewModel();
+
     this.viewModel!.modelType = this.modelType;
     this.viewModel!.storyType = this.storyType;
 
-    // intro story elements start in random movement when intro cutscene doesn't play
-    this.viewModel!.state.Value =
-      this.noLearningElementHasScored ||
-      this.storyType === StoryElementType.Outro
-        ? StoryNPCState.Idle
+    // set inital state
+    // cut scene state is only set by the presenter for timing reasons
+    if (this.storyType === StoryElementType.IntroOutro)
+      this.viewModel!.state.Value = this.noLearningElementHasScored
+        ? StoryNPCState.WaitOnCutSceneTrigger
         : StoryNPCState.RandomMovement;
+    else if (this.storyType === StoryElementType.Intro) {
+      if (this.noLearningElementHasScored)
+        this.viewModel!.state.Value = StoryNPCState.WaitOnCutSceneTrigger;
+      else if (this.learningSpaceCompleted)
+        this.viewModel!.state.Value = StoryNPCState.Idle;
+      else this.viewModel!.state.Value = StoryNPCState.RandomMovement;
+    } else if (this.storyType === StoryElementType.Outro)
+      this.viewModel!.state.Value = this.learningSpaceCompleted
+        ? StoryNPCState.RandomMovement
+        : StoryNPCState.Idle;
 
     if (this.learningSpaceTemplateType !== LearningSpaceTemplateType.None) {
       const template = LearningSpaceTemplateLookup.getLearningSpaceTemplate(
@@ -62,11 +74,17 @@ export default class StoryNPCBuilder
         0,
         template.introStoryElementIdlePoint.position.y
       );
+      this.viewModel!.introIdlePosRotation =
+        template.introStoryElementIdlePoint.orientation.rotation;
+
       this.viewModel!.outroIdlePosition = new Vector3(
         template.outroStoryElementIdlePoint.position.x,
         0,
         template.outroStoryElementIdlePoint.position.y
       );
+      this.viewModel!.outroIdlePosRotation =
+        template.outroStoryElementIdlePoint.orientation.rotation;
+
       this.viewModel!.avatarPosition = new Vector3(
         template.playerSpawnPoint.position.x,
         0,

@@ -11,6 +11,7 @@ import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_T
 export enum StoryNPCState {
   Idle,
   RandomMovement,
+  WaitOnCutSceneTrigger,
   CutScene,
 }
 
@@ -36,10 +37,12 @@ export default class StoryNPCViewModel {
   idleTimer: NodeJS.Timeout;
   avatarPosition: Vector3;
   introIdlePosition: Vector3;
+  introIdlePosRotation: number;
   outroIdlePosition: Vector3;
+  outroIdlePosRotation: number;
 
   // readonly configuration properties
-  readonly introSpawnPositionOffsetFromAvatar: Vector3 = new Vector3(0, 0, 6);
+  readonly introSpawnPositionOffsetFromAvatar: Vector3 = new Vector3(0, 0, 5);
   readonly cutSceneDistanceFromAvatar: number = 1.5;
   readonly iconYOffset: number = 2.3;
   readonly movementRange: number = 5; // in m

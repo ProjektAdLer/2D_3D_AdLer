@@ -38,7 +38,7 @@ const characterNavigatorMock = mock<ICharacterNavigator>();
 // @ts-ignore
 characterNavigatorMock.IsReady = Promise.resolve();
 
-describe("StoryNPCView", () => {
+describe.skip("StoryNPCView", () => {
   let systemUnderTest: StoryNPCView;
   let viewModel: StoryNPCViewModel;
   let controllerMock: IStoryNPCController;

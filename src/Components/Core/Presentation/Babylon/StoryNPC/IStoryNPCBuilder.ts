@@ -6,5 +6,6 @@ export default interface IStoryNPCBuilder extends IAsyncPresentationBuilder {
   modelType: string;
   storyType: StoryElementType;
   noLearningElementHasScored: boolean;
+  learningSpaceCompleted: boolean;
   learningSpaceTemplateType: LearningSpaceTemplateType;
 }

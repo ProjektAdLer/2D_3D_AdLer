@@ -10,6 +10,7 @@ import {
   AnimationGroup,
   ExecuteCodeAction,
   Mesh,
+  Quaternion,
   TransformNode,
   Vector3,
 } from "@babylonjs/core";
@@ -123,27 +124,40 @@ export default class StoryNPCView {
     );
   }
 
-  private async setSpawnLocation(): Promise<void> {
-    // get spawn location depending on story type
-    let spawnLocation: Vector3 =
-      (this.viewModel.storyType ?? StoryElementType.Intro) ===
-      StoryElementType.Intro
-        ? this.getIntroSpawnLocation()
+  private setSpawnLocation(): void {
+    let spawnPosition: Vector3;
+    let spawnRotation: number;
+
+    if (this.viewModel.state.Value === StoryNPCState.Idle) {
+      const isIntro =
+        (this.viewModel.storyType & StoryElementType.Intro) ===
+        StoryElementType.Intro;
+
+      spawnPosition = isIntro
+        ? this.viewModel.introIdlePosition
         : this.viewModel.outroIdlePosition;
+      spawnRotation = isIntro
+        ? this.viewModel.introIdlePosRotation
+        : this.viewModel.outroIdlePosRotation;
+    } else {
+      [spawnPosition, spawnRotation] =
+        this.calculateAvatarOffsetSpawnLocation();
+    }
 
-    // snap spawn to navmesh
-    await this.navigation.IsReady;
-    spawnLocation = this.navigation.Plugin.getClosestPoint(spawnLocation);
-
-    // apply spawn location
-    this.viewModel.parentNode.position = spawnLocation;
+    // apply spawn position and rotation
+    this.viewModel.parentNode.position = spawnPosition;
+    this.viewModel.modelRootNode.rotationQuaternion = Quaternion.RotationAxis(
+      Vector3.Up(),
+      spawnRotation
+    );
   }
 
-  private getIntroSpawnLocation(): Vector3 {
+  private calculateAvatarOffsetSpawnLocation(): [Vector3, number] {
     const spawnLocation = this.viewModel.avatarPosition.add(
       this.viewModel.introSpawnPositionOffsetFromAvatar
     );
-    return spawnLocation;
+
+    return [spawnLocation, Math.PI];
   }
 
   private createCharacterAnimator(): void {
@@ -206,8 +220,13 @@ export default class StoryNPCView {
         : this.viewModel.outroIdlePosition;
 
     this.viewModel.characterNavigator.startMovement(idlePosition, () => {
-      // TODO: set correct rotation when idle position is reached
-      console.log("Idle position reached");
+      // set correct rotation when idle position is reached
+      this.viewModel.modelRootNode.rotationQuaternion = Quaternion.RotationAxis(
+        Vector3.Up(),
+        this.viewModel.storyType === StoryElementType.Intro
+          ? this.viewModel.introIdlePosRotation
+          : this.viewModel.outroIdlePosRotation
+      );
     });
   }
 

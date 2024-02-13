@@ -88,10 +88,6 @@ export default class CharacterNavigator
     onTargetReachedCallback?: () => void
   ): void {
     // reset navigation
-    this.navigation.Crowd.agentTeleport(
-      this.agentIndex,
-      this.parentNode.position
-    );
     this.resetObservers();
 
     // get target on navmesh

@@ -193,6 +193,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
           this.idleAnimation,
           observer,
           () => this.getTimedAnimationInterpolationIncrement(100),
+          // () => 1 - this.getVelocityAnimationInterpolationIncrement(),
           this.removeRotationObserver
         );
       }
@@ -262,6 +263,6 @@ export default class CharacterAnimator implements ICharacterAnimator {
       return;
 
     let velocity = this.getCharacterVelocity().length();
-    this.walkAnimation.speedRatio = Math.max(velocity, 0.5);
+    this.walkAnimation.speedRatio = Math.max(velocity, 0);
   }
 }
