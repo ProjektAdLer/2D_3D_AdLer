@@ -7,6 +7,7 @@ import {
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
+import requiredTaskSolvedIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity-solved.svg";
 import solvedTaskIcon from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import AdaptivityElementDifficultyStars, {
   AdaptivityElementDifficultyStarState,

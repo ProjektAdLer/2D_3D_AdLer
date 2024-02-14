@@ -11,6 +11,7 @@ import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Do
 
 //TODO: change this when key icon is available
 import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
+import requiredTaskSolvedIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity-solved.svg";
 import solvedTaskIcon from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import { useTranslation } from "react-i18next";
 
