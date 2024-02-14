@@ -19,7 +19,7 @@ export default function LearningSpaceGoalPanel() {
   const [goals] = useObservable<string[]>(viewModel?.goals);
   const [isOpen] = useObservable<boolean>(viewModel?.isOpen);
 
-  if (!viewModel || !controller || !goals) return null;
+  if (!viewModel || !controller || !goals || !goals[0]) return null;
 
   return (
     <>
@@ -57,12 +57,12 @@ export default function LearningSpaceGoalPanel() {
                   </div>
 
                   {goals.length === 1 && (
-                    <div className="ml-4 text-xs lg:text-sm ">
+                    <div className=" text-xs lg:text-sm ">
                       {goals.map((goal, index) => {
                         return (
-                          <p className="my-2" key={index}>
+                          <div className="my-2" key={index}>
                             <TextWithLineBreaks text={goal} />
-                          </p>
+                          </div>
                         );
                       })}
                     </div>
