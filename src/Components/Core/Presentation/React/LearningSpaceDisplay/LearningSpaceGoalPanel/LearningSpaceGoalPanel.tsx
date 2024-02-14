@@ -23,7 +23,7 @@ export default function LearningSpaceGoalPanel() {
 
   return (
     <>
-      {goals.length !== 0 && (
+      {goals[0].length !== 0 && (
         <img
           className="w-[48px] lg:w-[69px]"
           src={GoalIcon}
@@ -44,20 +44,41 @@ export default function LearningSpaceGoalPanel() {
                       alt="Lernziel Logo"
                       className="h-4 pr-2 lg:h-6"
                     />
-                    <h3 className="pb-1 text-sm font-semibold lg:text-xl">
-                      Lernziele
-                    </h3>
+                    {goals.length === 1 && (
+                      <h3 className="pb-1 text-sm font-semibold lg:text-xl">
+                        Lernziel
+                      </h3>
+                    )}
+                    {goals.length > 1 && (
+                      <h3 className="pb-1 text-sm font-semibold lg:text-xl">
+                        Lernziele
+                      </h3>
+                    )}
                   </div>
 
-                  <ul className="ml-4 text-xs list-disc lg:text-sm ">
-                    {goals.map((goal, index) => {
-                      return (
-                        <li className="my-2" key={index}>
-                          <TextWithLineBreaks text={goal} />
-                        </li>
-                      );
-                    })}
-                  </ul>
+                  {goals.length === 1 && (
+                    <div className="ml-4 text-xs lg:text-sm ">
+                      {goals.map((goal, index) => {
+                        return (
+                          <p className="my-2" key={index}>
+                            <TextWithLineBreaks text={goal} />
+                          </p>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {goals.length > 1 && (
+                    <ul className="ml-4 text-xs list-disc lg:text-sm ">
+                      {goals.map((goal, index) => {
+                        return (
+                          <li className="my-2" key={index}>
+                            <TextWithLineBreaks text={goal} />
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
                 </div>
                 <div className="flex flex-col justify-end pl-4">
                   <StyledButton
