@@ -17,7 +17,7 @@ describe("StoryElementPresenter", () => {
     viewModel = systemUnderTest["viewModel"];
   });
 
-  test.skip("open sets the correct values", () => {
+  test("open sets the correct values", () => {
     viewModel.isOpen.Value = false;
     viewModel.pageId.Value = 1;
     viewModel.showOnlyIntro.Value = true;
@@ -35,7 +35,7 @@ describe("StoryElementPresenter", () => {
     viewModel.pageId.Value = 1;
     viewModel.showOnlyIntro.Value = true;
     viewModel.showOnlyOutro.Value = true;
-    viewModel.numberOfStories.Value = 2;
+    viewModel.isSplitStory.Value = true;
 
     systemUnderTest.open(StoryElementType.Intro);
 
@@ -46,18 +46,27 @@ describe("StoryElementPresenter", () => {
     expect(viewModel.pickedStory.Value).toBe(StoryElementType.Intro);
   });
 
-  test("outroSequenceOpening sets the correct values", () => {
-    viewModel.isOpen.Value = false;
+  test("onStoryElementCutSceneTriggered sets the correct values, if the type is outro", () => {
     viewModel.pageId.Value = 1;
     viewModel.outroJustNowUnlocked.Value = false;
     viewModel.outroUnlocked.Value = false;
 
-    systemUnderTest.openThroughOutroSequence();
+    systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.Outro);
 
-    expect(viewModel.isOpen.Value).toBe(true);
     expect(viewModel.pageId.Value).toBe(0);
     expect(viewModel.outroJustNowUnlocked.Value).toBe(true);
     expect(viewModel.outroUnlocked.Value).toBe(true);
+  });
+  test("onStoryElementCutSceneTriggered sets no values, if the type is not outro", () => {
+    viewModel.pageId.Value = 1;
+    viewModel.outroJustNowUnlocked.Value = false;
+    viewModel.outroUnlocked.Value = false;
+
+    systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.Intro);
+
+    expect(viewModel.pageId.Value).toBe(1);
+    expect(viewModel.outroJustNowUnlocked.Value).toBe(false);
+    expect(viewModel.outroUnlocked.Value).toBe(false);
   });
 
   test("onLearningSpaceLoaded sets the correct values", () => {
@@ -137,6 +146,44 @@ describe("StoryElementPresenter", () => {
       "blabla222",
     ]);
     expect(viewModel.outroTexts.Value).toStrictEqual(["blabla333"]);
+    expect(viewModel.type.Value).toStrictEqual([StoryElementType.Intro]);
+  });
+
+  test("onLearningSpaceLoaded sets the correct values if no texts are given", () => {
+    let storyElement: StoryElementTO[] = [
+      {
+        introStoryTexts: [],
+        outroStoryTexts: null,
+        modelType:
+          LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
+        storyType: StoryElementType.Intro,
+      },
+    ];
+    let learningSpaceTO: LearningSpaceTO = {
+      id: 1,
+      name: "blabla",
+      elements: [],
+      description: "blabla",
+      goals: [],
+      requirementsString: "blabla",
+      requirementsSyntaxTree: null,
+      isAvailable: true,
+      requiredScore: 1,
+      currentScore: 0,
+      maxScore: 1,
+      template: null,
+      theme: null,
+      storyElements: storyElement,
+    };
+
+    viewModel.introTexts.Value = ["nicht blabla"];
+    viewModel.outroTexts.Value = ["nicht blabla"];
+    viewModel.type.Value = [StoryElementType.None];
+
+    systemUnderTest.onLearningSpaceLoaded(learningSpaceTO);
+
+    expect(viewModel.introTexts.Value).toStrictEqual(["Kein Text vorhanden."]);
+    expect(viewModel.outroTexts.Value).toStrictEqual(["Kein Text vorhanden."]);
     expect(viewModel.type.Value).toStrictEqual([StoryElementType.Intro]);
   });
 });
