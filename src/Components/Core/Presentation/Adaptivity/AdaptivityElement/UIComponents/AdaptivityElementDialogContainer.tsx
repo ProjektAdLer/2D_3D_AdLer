@@ -257,7 +257,7 @@ export default function AdaptivityElementDialogContainer({
                         <div className="fixed right-2 top-2 flex flex-col bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto rounded-xl p-4 flex gap-2 ">
                           <div className="flex flex-row gap-4 w-full justify-between">
                             <h1 className="text-xs lg:text-xl font-bold">
-                              {translate("headerSy")}
+                              {translate("headerLegend")}
                             </h1>
                             <StyledButton
                               shape="closebutton"
