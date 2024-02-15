@@ -223,7 +223,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                   shape="closebutton"
                   onClick={controller.decreasePageId}
                 >
-                  {"\u21B6"}
+                  {"\u25C0"}
                 </StyledButton>
               )}
             </div>
@@ -234,7 +234,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                   shape="closebutton"
                   onClick={controller.increasePageId}
                 >
-                  {"\u21B7"}
+                  {"\u25B6"}
                 </StyledButton>
               )}
             </div>
@@ -269,7 +269,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                   shape="closebutton"
                   onClick={controller.decreasePageId}
                 >
-                  {"\u21B6"}
+                  {"\u25C0"}
                 </StyledButton>
               )}
             </div>
@@ -280,7 +280,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                   shape="closebutton"
                   onClick={controller.increasePageId}
                 >
-                  {"\u21B7"}
+                  {"\u25B6"}
                 </StyledButton>
               )}
             </div>

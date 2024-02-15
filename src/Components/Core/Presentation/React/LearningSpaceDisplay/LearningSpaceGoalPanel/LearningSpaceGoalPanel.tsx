@@ -9,6 +9,7 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 
 import GoalLogo from "../../../../../../Assets/icons/20-goal/goal-icon.svg";
 import GoalIcon from "../../../../../../Assets/icons/20-goal/goal-icon-adlerblue-bg.svg";
+import { useTranslation } from "react-i18next";
 
 export default function LearningSpaceGoalPanel() {
   const [viewModel, controller] = useBuilder<
@@ -18,6 +19,8 @@ export default function LearningSpaceGoalPanel() {
 
   const [goals] = useObservable<string[]>(viewModel?.goals);
   const [isOpen] = useObservable<boolean>(viewModel?.isOpen);
+
+  const { t: translate } = useTranslation("spaceGoal");
 
   if (!viewModel || !controller || !goals || !goals[0]) return null;
 
@@ -31,7 +34,7 @@ export default function LearningSpaceGoalPanel() {
       ></img>
 
       {isOpen && (
-        <StyledContainer className="fixed z-10 max-w-2xl p-2 overflow-hidden rounded-lg top-12 right-2 md:top-20 lg:right-40 bg-buttonbgblue">
+        <StyledContainer className="fixed z-10 max-w-2xl p-2 overflow-hidden rounded-lg top-12 right-0 md:top-20 lg:right-40 bg-buttonbgblue">
           <div className="flex flex-col gap-4 m-2">
             {goals && (
               <div className="flex flex-row">
@@ -44,12 +47,12 @@ export default function LearningSpaceGoalPanel() {
                     />
                     {goals.length === 1 && (
                       <h3 className="pb-1 text-sm font-semibold lg:text-xl">
-                        Lernziel
+                        {translate("learningGoalHeader_singular")}
                       </h3>
                     )}
                     {goals.length > 1 && (
                       <h3 className="pb-1 text-sm font-semibold lg:text-xl">
-                        Lernziele
+                        <p>{translate("learningGoalsHeader_plural")}</p>
                       </h3>
                     )}
                   </div>
@@ -85,7 +88,7 @@ export default function LearningSpaceGoalPanel() {
                       viewModel.isOpen.Value = false;
                     }}
                   >
-                    OK
+                    {translate("confirmButton")}
                   </StyledButton>
                 </div>
               </div>
