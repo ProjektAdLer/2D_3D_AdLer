@@ -10,11 +10,13 @@ import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentatio
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import { StoryNPCState } from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCViewModel";
+import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 
 jest.spyOn(PresentationBuilder.prototype, "buildPresenter");
 jest.spyOn(PresentationBuilder.prototype, "buildView");
 
 const learningWorldPortMock = mock<ILearningWorldPort>();
+const bottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
 
 describe("StoryNPCBuilder", () => {
   let systemUnderTest: StoryNPCBuilder;
@@ -27,6 +29,9 @@ describe("StoryNPCBuilder", () => {
     CoreDIContainer.bind(
       PRESENTATION_TYPES.IStoryElementPresenter
     ).toConstantValue(mock());
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    ).toConstantValue(bottomTooltipPresenterMock);
   });
 
   beforeEach(() => {
