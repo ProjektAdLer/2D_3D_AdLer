@@ -18,13 +18,13 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
         />
       </div>
       <div
-        class="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl lg:h-[32vh] pt-2 lg:pt-0 row-start-3 "
+        class="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl lg:max-h-[32vh] pt-2 lg:pt-0 row-start-3 "
       >
         <div
-          class="flex flex-col justify-between p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%]   overflow-auto"
+          class="flex flex-col justify-between p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%] "
         >
           <div
-            class="overflow-auto"
+            class="overflow-auto lg:max-h-[26vh]"
           >
             <div
               class="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl "
@@ -59,48 +59,44 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
               </div>
             </div>
             <div
-              class="overflow-auto"
+              class="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4"
             >
               <div
-                class="flex items-center justify-center px-1 mb-4 overflow-auto rounded-lg font-regular h-fit lg:m-4"
+                class="flex flex-col lg:justify-between lg:flex-row w-full p-2 m-auto"
               >
                 <div
-                  class="flex flex-col lg:justify-between lg:flex-row w-full p-2 m-auto"
+                  class="flex flex-wrap justify-start gap-4"
                 >
                   <div
-                    class="flex flex-wrap justify-start gap-4"
+                    class=""
                   >
-                    <div
-                      class=""
+                    <button
+                      class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                     >
-                      <button
-                        class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      <p
+                        class="text-sm"
                       >
-                        <p
-                          class="text-sm"
-                        >
-                          testAnswerText
-                        </p>
-                      </button>
-                    </div>
+                        testAnswerText
+                      </p>
+                    </button>
                   </div>
+                </div>
+                <div
+                  class="flex items-end justify-end lg:w-1/6 gap-2 pt-8 font-bold"
+                >
                   <div
-                    class="flex items-end justify-end lg:w-1/6 gap-2 pt-8 font-bold"
+                    class=""
                   >
-                    <div
-                      class=""
+                    <button
+                      class="px-2 py-1 justify-center box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-white overflow-hidden"
+                      disabled=""
                     >
-                      <button
-                        class="px-2 py-1 justify-center box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-white overflow-hidden"
-                        disabled=""
+                      <p
+                        class="text-sm"
                       >
-                        <p
-                          class="text-sm"
-                        >
-                          submitAnswers
-                        </p>
-                      </button>
-                    </div>
+                        submitAnswers
+                      </p>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -108,7 +104,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
           </div>
           <div>
             <div
-              class=" flex justify-between items-end pt-1 text-[0.5rem] lg:text-xs modal-footer"
+              class=" flex justify-between items-end pt-4 text-[0.5rem] lg:text-xs modal-footer"
             >
               <p />
             </div>
