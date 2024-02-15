@@ -57,7 +57,7 @@ describe("AdaptivityElementAnswerSelection", () => {
       />
     );
 
-    getByText("submitAnswers").click();
+    getByText("submitAnswer").click();
 
     expect(submitSelection).toHaveBeenCalledTimes(1);
   });

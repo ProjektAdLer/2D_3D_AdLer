@@ -46,7 +46,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
               <div
                 class="w-full text-xs lg:text-lg"
               >
-                testQuestionText
+                singleChoiceSelectedtestQuestionText
               </div>
               <div
                 class=""
@@ -94,7 +94,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
                       <p
                         class="text-sm"
                       >
-                        submitAnswers
+                        submitAnswer
                       </p>
                     </button>
                   </div>

@@ -28,7 +28,11 @@ export default function AdaptivityElementAnswerSelection({
   const { t: translate } = useTranslation("learningElement");
 
   useEffect(() => {
-    setHeaderText(question.questionText);
+    setHeaderText(
+      (question.isMultipleChoice
+        ? translate("multipleChoiceSelected")
+        : translate("singleChoiceSelected")) + question.questionText
+    );
     setAnswerColors(question.questionAnswers.map(() => "default"));
   }, [setHeaderText, question.questionText, question.questionAnswers]);
 
@@ -79,7 +83,11 @@ export default function AdaptivityElementAnswerSelection({
           }}
           disabled={!isAnyAnswerSelected}
         >
-          <p className="text-sm">{translate("submitAnswers")}</p>
+          <p className="text-sm">
+            {question.isMultipleChoice
+              ? translate("submitAnswers")
+              : translate("submitAnswer")}
+          </p>
         </StyledButton>
       </div>
     </div>
