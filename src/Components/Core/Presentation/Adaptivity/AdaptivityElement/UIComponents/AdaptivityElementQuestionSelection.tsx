@@ -6,20 +6,21 @@ import {
 } from "../AdaptivityElementViewModel";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
-import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
-import requiredTaskSolvedIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity-solved.svg";
-import solvedTaskIcon from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import AdaptivityElementDifficultyStars, {
   AdaptivityElementDifficultyStarState,
 } from "./AdaptivityElementDifficultyStars";
 import { useTranslation } from "react-i18next";
+
+import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
+// import requiredTaskSolvedIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity-solved.svg";
+import solvedTaskIcon from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 
 export default function AdaptivityElementQuestionSelection({
   selectedTask,
   setHeaderText,
   onSelectQuestion,
   onSelectHint,
-}: {
+}: Readonly<{
   selectedTask: AdaptivityTask;
   setHeaderText: (headerText: string) => void;
   onSelectQuestion: (selectedQuestion: AdaptivityQuestion) => void;
@@ -27,7 +28,7 @@ export default function AdaptivityElementQuestionSelection({
     selectedHint: AdaptivityHint,
     associatedQuestion: AdaptivityQuestion
   ) => void;
-}) {
+}>) {
   const { t: translate } = useTranslation("learningElement");
 
   useEffect(() => {

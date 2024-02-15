@@ -8,12 +8,11 @@ import AdaptivityElementDifficultyStars, {
   AdaptivityElementDifficultyStarState,
 } from "./AdaptivityElementDifficultyStars";
 import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
-
-//TODO: change this when key icon is available
-import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
-import requiredTaskSolvedIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity-solved.svg";
-import solvedTaskIcon from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import { useTranslation } from "react-i18next";
+
+import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
+// import requiredTaskSolvedIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity-solved.svg";
+import solvedTaskIcon from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 
 export function getAdaptivityQuestionStarState(
   question: AdaptivityQuestion | undefined
@@ -38,11 +37,11 @@ export default function AdaptivityElementTaskSelection({
   tasks,
   setHeaderText,
   onSelectTask,
-}: {
+}: Readonly<{
   tasks: AdaptivityTask[];
   setHeaderText: (headerText: string) => void;
   onSelectTask: (selectedTask: AdaptivityTask) => void;
-}) {
+}>) {
   const [taskButtons, setTaskButtons] = useState<JSX.Element[]>([]);
   const { t: translate } = useTranslation("learningElement");
   useEffect(() => {
