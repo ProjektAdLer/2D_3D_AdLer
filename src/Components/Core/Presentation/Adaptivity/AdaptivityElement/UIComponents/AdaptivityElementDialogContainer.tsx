@@ -124,14 +124,14 @@ export default function AdaptivityElementDialogContainer({
         </div>
 
         {/* Modal */}
-        <div className="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl lg:h-[32vh] pt-2 lg:pt-0 row-start-3 ">
+        <div className="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl lg:max-h-[32vh] pt-2 lg:pt-0 row-start-3 ">
           <div
-            className="flex flex-col justify-between p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%]   overflow-auto"
+            className="flex flex-col justify-between p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%] "
             onClick={(event) => {
               event.stopPropagation();
             }}
           >
-            <div className="overflow-auto">
+            <div className="overflow-auto lg:max-h-[26vh]">
               {/* Header */}
               <div className="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
                 {!(currentTask === null && currentQuestion === null) &&
@@ -182,89 +182,114 @@ export default function AdaptivityElementDialogContainer({
               </div>
 
               {/* Content */}
-              <div className="overflow-auto">
-                {currentTask === null && currentQuestion === null && (
-                  <div className="flex items-center justify-center px-1 mb-4 overflow-auto rounded-lg font-regular h-fit !text-sm lg:m-4">
-                    <AdaptivityElementTaskSelection
-                      tasks={contentData.tasks}
+              {currentTask === null && currentQuestion === null && (
+                <div className="flex items-center justify-center px-1 mb-4 h-fit rounded-lg font-regular !text-sm lg:m-4">
+                  <AdaptivityElementTaskSelection
+                    tasks={contentData.tasks}
+                    setHeaderText={setHeaderText}
+                    onSelectTask={controller.selectTask}
+                  />
+                </div>
+              )}
+              {currentTask !== null && currentQuestion === null && (
+                <div className="flex items-center justify-center px-1 mb-4  rounded-lg font-regular lg:m-4">
+                  <AdaptivityElementQuestionSelection
+                    selectedTask={currentTask}
+                    setHeaderText={setHeaderText}
+                    onSelectQuestion={controller.selectQuestion}
+                    onSelectHint={controller.selectHint}
+                  />
+                </div>
+              )}
+
+              {currentTask !== null &&
+                currentQuestion !== null &&
+                !showAnswerFeedback &&
+                selectedHint === null && (
+                  <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
+                    <AdaptivityElementAnswerSelection
+                      question={currentQuestion}
                       setHeaderText={setHeaderText}
-                      onSelectTask={controller.selectTask}
-                    />
-                  </div>
-                )}
-                {currentTask !== null && currentQuestion === null && (
-                  <div className="flex items-center justify-center px-1 mb-4 overflow-auto rounded-lg font-regular h-fit lg:m-4">
-                    <AdaptivityElementQuestionSelection
-                      selectedTask={currentTask}
-                      setHeaderText={setHeaderText}
-                      onSelectQuestion={controller.selectQuestion}
-                      onSelectHint={controller.selectHint}
+                      submitSelection={controller.submitSelection}
+                      closeSelection={controller.closeAnswerSelection}
                     />
                   </div>
                 )}
 
-                {currentTask !== null &&
-                  currentQuestion !== null &&
-                  !showAnswerFeedback &&
-                  selectedHint === null && (
-                    <div className="flex items-center justify-center px-1 mb-4 overflow-auto rounded-lg font-regular h-fit lg:m-4">
-                      <AdaptivityElementAnswerSelection
-                        question={currentQuestion}
-                        setHeaderText={setHeaderText}
-                        submitSelection={controller.submitSelection}
-                        closeSelection={controller.closeAnswerSelection}
-                      />
-                    </div>
-                  )}
-
-                {currentTask !== null &&
-                  currentQuestion !== null &&
-                  showAnswerFeedback &&
-                  selectedHint === null && (
-                    <AdaptivityElementAnswerFeedback
-                      isCorrect={currentQuestion.isCompleted!}
-                      setHeaderText={setHeaderText}
-                      closeFeedback={controller.closeFeedback}
-                    />
-                  )}
-                {currentTask !== null &&
-                  currentQuestion !== null &&
-                  !showAnswerFeedback &&
-                  selectedHint !== null && (
-                    <AdaptivityElementHint
-                      hint={selectedHint}
-                      setHeaderText={setHeaderText}
-                    />
-                  )}
-              </div>
+              {currentTask !== null &&
+                currentQuestion !== null &&
+                showAnswerFeedback &&
+                selectedHint === null && (
+                  <AdaptivityElementAnswerFeedback
+                    isCorrect={currentQuestion.isCompleted!}
+                    setHeaderText={setHeaderText}
+                    closeFeedback={controller.closeFeedback}
+                  />
+                )}
+              {currentTask !== null &&
+                currentQuestion !== null &&
+                !showAnswerFeedback &&
+                selectedHint !== null && (
+                  <AdaptivityElementHint
+                    hint={selectedHint}
+                    setHeaderText={setHeaderText}
+                  />
+                )}
             </div>
 
             <div>
               {/* Footer */}
               {
-                <div className=" flex justify-between items-end pt-1 text-[0.5rem] lg:text-xs modal-footer">
+                <div className=" flex justify-between items-end pt-4 text-[0.5rem] lg:text-xs modal-footer">
                   <p>{footerText}</p>
                   {!(currentTask !== null && currentQuestion !== null) && (
                     <div className="relative flex group">
-                      {!showFooterTooltip && (
-                        <p
-                          className="right-1 bottom-1"
-                          onMouseEnter={() => {
-                            controller.showFooterTooltip();
-                          }}
-                        >
-                          {translate("legendHover")}
-                        </p>
-                      )}
+                      <p
+                        className="right-1 bottom-1"
+                        onClick={() => {
+                          controller.showFooterTooltip();
+                        }}
+                      >
+                        {translate("legendHover")}
+                      </p>
+
                       {showFooterTooltip && (
-                        <div
-                          className="flex gap-2"
-                          onMouseLeave={() => {
-                            controller.hideFooterTooltip();
-                          }}
-                        >
-                          <div className="flex-col items-center justify-center">
-                            <div className="flex opacity-60">
+                        <div className="fixed right-2 top-2 flex flex-col bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto rounded-xl p-4 flex gap-2 ">
+                          <div className="flex flex-row gap-4 w-full justify-between">
+                            <h1 className="text-xs lg:text-xl font-bold">
+                              Symbollegende Adaptivitätselement
+                            </h1>
+                            <StyledButton
+                              shape="closebutton"
+                              onClick={() => {
+                                controller.hideFooterTooltip();
+                              }}
+                            >
+                              x
+                            </StyledButton>
+                          </div>
+
+                          <div className="flex flex-row gap-4">
+                            <div className="flex-row items-end justify-items-end">
+                              <div className="flex opacity-60">
+                                <img
+                                  className="w-2 lg:w-4"
+                                  src={requiredUnsolvedIcon}
+                                  alt="required unsolved icon"
+                                />
+                                <img
+                                  className="w-2 lg:w-4"
+                                  src={requiredUnsolvedIcon}
+                                  alt="required unsolved icon"
+                                />
+                                <img
+                                  className="w-2 lg:w-4"
+                                  src={requiredUnsolvedIcon}
+                                  alt="required unsolved icon"
+                                />
+                              </div>
+                              <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
+                              <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
                               <img
                                 className="w-2 lg:w-4"
                                 src={requiredUnsolvedIcon}
@@ -272,61 +297,44 @@ export default function AdaptivityElementDialogContainer({
                               />
                               <img
                                 className="w-2 lg:w-4"
-                                src={requiredUnsolvedIcon}
-                                alt="required unsolved icon"
+                                src={notRequiredUnsolvedIcon}
+                                alt="not required unsolved Icon"
                               />
                               <img
                                 className="w-2 lg:w-4"
-                                src={requiredUnsolvedIcon}
-                                alt="required unsolved icon"
+                                src={requiredSolvedIcon}
+                                alt="required solved icon"
+                              />
+                              <img
+                                className="w-2 lg:w-4"
+                                src={notRequiredSolvedIcon}
+                                alt="not required solved Icon"
+                              />
+                              <img
+                                className="w-2 lg:w-4"
+                                src={placeholderIcon}
+                                alt="placeholder icon"
+                              />
+                              <img
+                                className="w-2 lg:w-4"
+                                src={requiredTaskIcon}
+                                alt="required task icon"
                               />
                             </div>
-                            <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
-                            <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
-                            <img
-                              className="w-2 lg:w-4"
-                              src={requiredUnsolvedIcon}
-                              alt="required unsolved icon"
-                            />
-                            <img
-                              className="w-2 lg:w-4"
-                              src={notRequiredUnsolvedIcon}
-                              alt="not required unsolved Icon"
-                            />
-                            <img
-                              className="w-2 lg:w-4"
-                              src={requiredSolvedIcon}
-                              alt="required solved icon"
-                            />
-                            <img
-                              className="w-2 lg:w-4"
-                              src={notRequiredSolvedIcon}
-                              alt="not required solved Icon"
-                            />
-                            <img
-                              className="w-2 lg:w-4"
-                              src={placeholderIcon}
-                              alt="placeholder icon"
-                            />
-                            <img
-                              className="w-2 lg:w-4"
-                              src={requiredTaskIcon}
-                              alt="required task icon"
-                            />
-                          </div>
-                          <div className="flex-col items-start justify-center icons">
-                            <p>
-                              <Trans
-                                i18nKey="legendDifficulty"
-                                ns="learningElement"
-                              />
-                            </p>
-                            <p>{translate("requiredUnsolved")}</p>
-                            <p>{translate("optionalUnsolved")}</p>
-                            <p>{translate("requiredSolved")}</p>
-                            <p>{translate("optionalSolved")}</p>
-                            <p>{translate("noQuestionDifficulty")}</p>
-                            <p>{translate("requiredTask")}</p>
+                            <div className="flex-col items-start justify-center icons">
+                              <p>
+                                <Trans
+                                  i18nKey="legendDifficulty"
+                                  ns="learningElement"
+                                />
+                              </p>
+                              <p>{translate("requiredUnsolved")}</p>
+                              <p>{translate("optionalUnsolved")}</p>
+                              <p>{translate("requiredSolved")}</p>
+                              <p>{translate("optionalSolved")}</p>
+                              <p>{translate("noQuestionDifficulty")}</p>
+                              <p>{translate("requiredTask")}</p>
+                            </div>
                           </div>
                         </div>
                       )}
