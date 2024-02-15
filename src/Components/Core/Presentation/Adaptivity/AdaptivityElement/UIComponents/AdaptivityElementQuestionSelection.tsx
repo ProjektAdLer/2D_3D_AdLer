@@ -39,6 +39,14 @@ export default function AdaptivityElementQuestionSelection({
     );
   }, [setHeaderText, selectedTask, translate]);
 
+  selectedTask.questions.sort(compareQuestionsByDifficulty);
+  function compareQuestionsByDifficulty(
+    a: AdaptivityQuestion,
+    b: AdaptivityQuestion
+  ) {
+    return a.difficulty - b.difficulty;
+  }
+
   return (
     <div className="grid w-full gap-4 px-2 py-2">
       {selectedTask.questions.map((question) => {
