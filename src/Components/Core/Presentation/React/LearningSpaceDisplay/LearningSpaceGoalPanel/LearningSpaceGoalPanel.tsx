@@ -23,14 +23,12 @@ export default function LearningSpaceGoalPanel() {
 
   return (
     <>
-      {goals[0].length !== 0 && (
-        <img
-          className="w-[48px] lg:w-[69px]"
-          src={GoalIcon}
-          onClick={controller.openPanel}
-          alt="Lernziel Icon"
-        ></img>
-      )}
+      <img
+        className="w-[48px] lg:w-[69px]"
+        src={GoalIcon}
+        onClick={controller.openPanel}
+        alt="Lernziel Icon"
+      ></img>
 
       {isOpen && (
         <StyledContainer className="fixed z-10 max-w-2xl p-2 overflow-hidden rounded-lg top-12 md:top-20 lg:right-40 bg-buttonbgblue">
