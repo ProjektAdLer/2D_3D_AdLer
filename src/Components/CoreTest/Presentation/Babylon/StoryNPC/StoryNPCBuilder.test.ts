@@ -8,6 +8,8 @@ import { waitFor } from "@testing-library/react";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
+import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
+import { StoryNPCState } from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCViewModel";
 
 jest.spyOn(PresentationBuilder.prototype, "buildPresenter");
 jest.spyOn(PresentationBuilder.prototype, "buildView");
@@ -43,6 +45,51 @@ describe("StoryNPCBuilder", () => {
 
     expect(systemUnderTest["viewModel"]?.modelType).toBe("test");
   });
+
+  test("buildViewModel sets storyType", () => {
+    systemUnderTest.modelType = "test";
+    systemUnderTest.learningSpaceTemplateType = LearningSpaceTemplateType.L;
+    systemUnderTest.storyType = StoryElementType.Intro;
+
+    systemUnderTest.buildViewModel();
+
+    expect(systemUnderTest["viewModel"]?.storyType).toBe(
+      StoryElementType.Intro
+    );
+  });
+
+  test.each([
+    [
+      StoryNPCState.WaitOnCutSceneTrigger,
+      StoryElementType.IntroOutro,
+      true,
+      false,
+    ],
+    [StoryNPCState.RandomMovement, StoryElementType.IntroOutro, false, false],
+    [StoryNPCState.WaitOnCutSceneTrigger, StoryElementType.Intro, true, false],
+    [StoryNPCState.Idle, StoryElementType.Intro, false, true],
+    [StoryNPCState.RandomMovement, StoryElementType.Intro, false, false],
+    [StoryNPCState.RandomMovement, StoryElementType.Outro, false, true],
+    [StoryNPCState.Idle, StoryElementType.Outro, false, false],
+  ])(
+    "buildViewModel sets initial state to %p for storyType=%p, noLearningElementHasScored=%p, learningSpaceCompleted=%p",
+    (
+      initialState,
+      storyType,
+      noLearningElementHasScored,
+      learningSpaceCompleted
+    ) => {
+      systemUnderTest.modelType = "";
+      systemUnderTest.learningSpaceTemplateType = LearningSpaceTemplateType.L;
+      systemUnderTest.storyType = storyType;
+      systemUnderTest.noLearningElementHasScored = noLearningElementHasScored;
+      systemUnderTest.learningSpaceCompleted = learningSpaceCompleted;
+
+      systemUnderTest.buildViewModel();
+
+      expect(systemUnderTest["viewModel"]?.state.Value).toBe(initialState);
+    }
+  );
 
   test("buildView resolves isCompleted promise when the asyncSetup of the view resolves", async () => {
     systemUnderTest.modelType = "test";
