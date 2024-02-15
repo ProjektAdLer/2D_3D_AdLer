@@ -35,11 +35,11 @@ export default class StoryNPCViewModel {
   modelRootNode: TransformNode;
   storyType: StoryElementType;
   idleTimer: NodeJS.Timeout;
-  avatarPosition: Vector3;
-  introIdlePosition: Vector3;
-  introIdlePosRotation: number;
-  outroIdlePosition: Vector3;
-  outroIdlePosRotation: number;
+  avatarPosition: Vector3 = new Vector3(0, 0, 0);
+  introIdlePosition: Vector3 = new Vector3(0, 0, 0);
+  introIdlePosRotation: number = 0;
+  outroIdlePosition: Vector3 = new Vector3(0, 0, 0);
+  outroIdlePosRotation: number = 0;
 
   // readonly configuration properties
   readonly introSpawnPositionOffsetFromAvatar: Vector3 = new Vector3(0, 0, 5);

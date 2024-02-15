@@ -199,13 +199,13 @@ export default class StoryNPCView {
   // -- Movement --
 
   @bind
-  onStateChanged(newState: StoryNPCState): void {
+  private onStateChanged(newState: StoryNPCState): void {
     switch (newState) {
       case StoryNPCState.Idle:
         this.moveToIdlePosition();
         break;
       case StoryNPCState.RandomMovement:
-        this.setRandomMovementTarget();
+        this.startRandomMovementIdleTimeout();
         break;
       case StoryNPCState.CutScene:
         this.startCutSceneMovement();
@@ -213,7 +213,7 @@ export default class StoryNPCView {
     }
   }
 
-  moveToIdlePosition(): void {
+  private moveToIdlePosition(): void {
     const idlePosition =
       this.viewModel.storyType === StoryElementType.Intro
         ? this.viewModel.introIdlePosition
@@ -230,7 +230,7 @@ export default class StoryNPCView {
     });
   }
 
-  startCutSceneMovement(): void {
+  private startCutSceneMovement(): void {
     // npc stops in specific distance from avatar
     const targetOffset = this.viewModel.avatarPosition
       .subtract(this.viewModel.parentNode.position)
@@ -247,7 +247,7 @@ export default class StoryNPCView {
   }
 
   @bind
-  setRandomMovementTarget() {
+  private setRandomMovementTarget() {
     let target: Vector3;
     let distance: number = 0;
     do {
@@ -260,12 +260,12 @@ export default class StoryNPCView {
 
     this.viewModel.characterNavigator.startMovement(
       target,
-      this.startIdleTimeout
+      this.startRandomMovementIdleTimeout
     );
   }
 
   @bind
-  private startIdleTimeout(): void {
+  private startRandomMovementIdleTimeout(): void {
     this.viewModel.idleTimer = setTimeout(() => {
       // prevent movement when in invalid state
       if (this.viewModel.state.Value === StoryNPCState.RandomMovement)
