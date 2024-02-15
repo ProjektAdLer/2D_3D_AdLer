@@ -12,6 +12,9 @@
   "exitRoomTitle": "Raum verlassen?",
   "exitRoomButton": "zurück zum Lernraum-Menü",
 
+  "introNPC": "Intro-NPC",
+  "outroNPC": "Outro-NPC",
+  "introOutroNPC": "Intro/Outro-NPC",
   "introStoryTitle": "Intro",
   "outroStoryTitle": "Outro",
   "introOutroStoryTitle": "Wähle zwischen Intro oder Outro der Lernraumstory",

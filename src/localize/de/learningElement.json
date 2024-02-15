@@ -16,7 +16,7 @@
   "taskSelectionTitle": "Du hast Aufgabengebiet {{selectedTaskTitle}} ausgewählt. Wähle jetzt eine Schwierigkeit aus.",
   "adaptivityIntro": "Hallo Freund, ich helfe dir zu lernen. Suche dir ein Thema aus und wir arbeiten gemeinsam an deinem Wissen.",
 
-  "legendHover": "Bewege deine Maus hier her, um die Symbollegende anzuzeigen",
+  "legendHover": "Klicke hier, um die Symbollegende anzuzeigen",
   "leftEasy": "Links: Leichte Frage<br/>",
   "middleNormal": "Mitte: Mittelschwer<br/>",
   "rightHard": "Rechts: Schwere Frage",

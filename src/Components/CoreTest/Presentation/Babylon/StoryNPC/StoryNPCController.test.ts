@@ -2,16 +2,19 @@ import { mock, mockDeep } from "jest-mock-extended";
 import StoryNPCController from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCController";
 import StoryNPCViewModel from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCViewModel";
 import CharacterNavigator from "../../../../Core/Presentation/Babylon/CharacterNavigator/CharacterNavigator";
+import { Mesh, Vector3 } from "@babylonjs/core";
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IStoryElementPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
+import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 
 const characterNavigatorMock = mock<CharacterNavigator>();
 const navigationMock = mockDeep<INavigation>();
 const storyElementPresenterMock = mockDeep<IStoryElementPresenter>();
+const bottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
 
 describe("StoryNPCController", () => {
   let systemUnderTest: StoryNPCController;
@@ -25,6 +28,9 @@ describe("StoryNPCController", () => {
     CoreDIContainer.bind(
       PRESENTATION_TYPES.IStoryElementPresenter
     ).toConstantValue(storyElementPresenterMock);
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.IBottomTooltipPresenter
+    ).toConstantValue(bottomTooltipPresenterMock);
   });
 
   beforeEach(() => {
@@ -52,5 +58,44 @@ describe("StoryNPCController", () => {
     systemUnderTest.picked();
 
     expect(storyElementPresenterMock.open).not.toBeCalled();
+  });
+  test("pointerOver scales up iconMeshes", () => {
+    const mockedMesh = mockDeep<Mesh>();
+    viewModel.iconMeshes = [mockedMesh];
+
+    systemUnderTest.pointerOver();
+
+    expect(mockedMesh.scaling).toStrictEqual(
+      new Vector3(
+        viewModel.iconScaleUpOnHover,
+        viewModel.iconScaleUpOnHover,
+        viewModel.iconScaleUpOnHover
+      )
+    );
+  });
+  test("pointerOut calls hideBottomTooltip on tooltip presenter", () => {
+    systemUnderTest["hoverToolTipId"] = 1; // set tooltip id to non-default value
+
+    systemUnderTest.pointerOut();
+
+    expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
+  });
+
+  test("pointerOut scales down iconMeshes", () => {
+    const mockedMesh = mockDeep<Mesh>();
+    viewModel.iconMeshes = [mockedMesh];
+    systemUnderTest["hoverToolTipId"] = 1; // set tooltip id to non-default value
+
+    systemUnderTest.pointerOut();
+
+    expect(mockedMesh.scaling).toStrictEqual(Vector3.One());
+  });
+
+  test("pointerOut resets hoverToolTipId to -1 when hoverTooltipId is set", () => {
+    systemUnderTest["hoverToolTipId"] = 1; // set tooltip id to non-default value
+
+    systemUnderTest.pointerOut();
+
+    expect(systemUnderTest["hoverToolTipId"]).toBe(-1);
   });
 });

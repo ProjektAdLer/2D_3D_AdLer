@@ -122,6 +122,18 @@ export default class StoryNPCView {
     actionManager.registerAction(
       new ExecuteCodeAction(ActionManager.OnPickTrigger, this.controller.picked)
     );
+    actionManager.registerAction(
+      new ExecuteCodeAction(
+        ActionManager.OnPointerOverTrigger,
+        this.controller.pointerOver
+      )
+    );
+    actionManager.registerAction(
+      new ExecuteCodeAction(
+        ActionManager.OnPointerOutTrigger,
+        this.controller.pointerOut
+      )
+    );
   }
 
   private setSpawnLocation(): void {
