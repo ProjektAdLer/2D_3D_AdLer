@@ -23,7 +23,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
               <img
                 alt=""
                 class="w-4 h-4 md:w-6 md:h-6"
-                src="diffculties-adaptivity-easy-required-unsolved-icon.svg"
+                src="diffculties-adaptivity-easy-unsolved-icon.svg"
               />
               <img
                 alt="Platzhalter-Icon"
@@ -79,7 +79,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
               <img
                 alt=""
                 class="w-4 h-4 md:w-6 md:h-6"
-                src="diffculties-adaptivity-medium-required-solved.svg"
+                src="diffculties-adaptivity-medium-solved.svg"
               />
               <img
                 alt="Platzhalter-Icon"
@@ -149,7 +149,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
               <img
                 alt=""
                 class="w-4 h-4 md:w-6 md:h-6"
-                src="diffculties-adaptivity-hard-required-tried.svg"
+                src="diffculties-adaptivity-hard-tried.svg"
               />
             </div>
             <p
