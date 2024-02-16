@@ -22,7 +22,7 @@ export default function LearningSpaceGoalPanel() {
 
   const { t: translate } = useTranslation("spaceGoal");
 
-  if (!viewModel || !controller || !goals || !goals[0]) return null;
+  if (!viewModel || !controller || goals?.length <= 0) return null;
 
   return (
     <>
@@ -39,6 +39,7 @@ export default function LearningSpaceGoalPanel() {
             {goals && (
               <div className="flex flex-row">
                 <div>
+                  {/* Header */}
                   <div className="flex flex-row ">
                     <img
                       src={GoalLogo}
@@ -56,7 +57,7 @@ export default function LearningSpaceGoalPanel() {
                       </h3>
                     )}
                   </div>
-
+                  {/* Learning Goals */}
                   {goals.length === 1 && (
                     <div className=" text-xs lg:text-sm ">
                       {goals.map((goal, index) => {
