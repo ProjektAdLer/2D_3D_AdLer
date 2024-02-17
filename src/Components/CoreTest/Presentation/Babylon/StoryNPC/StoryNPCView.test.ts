@@ -8,8 +8,10 @@ import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManageme
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 import {
+  AbstractMesh,
   ActionManager,
   AnimationGroup,
+  Color3,
   ISceneLoaderAsyncResult,
   Mesh,
   NullEngine,
@@ -306,6 +308,20 @@ describe("StoryNPCView", () => {
       );
 
       expect(controllerMock.picked).toHaveBeenCalledTimes(1);
+    });
+    test("async setup adds mesh to the scene presenters HighlightLayer", async () => {
+      viewModel.modelMeshes = [
+        new Mesh("mockMesh", new Scene(new NullEngine())),
+      ];
+
+      viewModel.iconMeshes = [];
+
+      systemUnderTest["addMeshesToHighlightLayer"]();
+
+      expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
+        viewModel.modelMeshes[0],
+        expect.any(Color3)
+      );
     });
   });
 
