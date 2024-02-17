@@ -12,6 +12,11 @@ export default class LearningSpaceGoalPanelPresenter
   }
 
   onLearningSpaceLoaded(spaceTO: LearningSpaceTO): void {
-    this.viewModel.goals.Value = spaceTO.goals;
+    let goals: string[] = [];
+    spaceTO.goals.forEach((goal) => {
+      if (goal && goal !== "") goals.push(goal);
+    });
+
+    this.viewModel.goals.Value = goals;
   }
 }

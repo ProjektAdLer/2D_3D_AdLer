@@ -39,14 +39,36 @@ export default function AdaptivityElementQuestionSelection({
     );
   }, [setHeaderText, selectedTask, translate]);
 
+  selectedTask.questions.sort(compareQuestionsByDifficulty);
+  function compareQuestionsByDifficulty(
+    a: AdaptivityQuestion,
+    b: AdaptivityQuestion
+  ) {
+    return a.difficulty - b.difficulty;
+  }
+
   return (
     <div className="grid w-full gap-4 px-2 py-2">
       {selectedTask.questions.map((question) => {
-        let starState = AdaptivityElementDifficultyStarState.RequiredUnsolved;
-        if (question.isCompleted === true) {
+        let starState =
+          AdaptivityElementDifficultyStarState.NotRequiredUnsolved;
+        if (question.isCompleted === true && question.isRequired === true) {
           starState = AdaptivityElementDifficultyStarState.RequiredSolved;
-        } else if (question.isCompleted === false) {
+        } else if (
+          question.isCompleted === false &&
+          question.isRequired === true
+        ) {
           starState = AdaptivityElementDifficultyStarState.RequiredTried;
+        } else if (
+          question.isCompleted === true &&
+          question.isRequired === false
+        ) {
+          starState = AdaptivityElementDifficultyStarState.NotRequiredSolved;
+        } else if (
+          question.isCompleted === false &&
+          question.isRequired === false
+        ) {
+          starState = AdaptivityElementDifficultyStarState.NotRequiredTried;
         }
 
         return (

@@ -2,20 +2,13 @@ import { mock, mockDeep } from "jest-mock-extended";
 import StoryNPCController from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCController";
 import StoryNPCViewModel from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCViewModel";
 import CharacterNavigator from "../../../../Core/Presentation/Babylon/CharacterNavigator/CharacterNavigator";
-import {
-  Mesh,
-  NullEngine,
-  Scene,
-  TransformNode,
-  Vector3,
-} from "@babylonjs/core";
+import { Mesh, Vector3 } from "@babylonjs/core";
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IStoryElementPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
-import Observable from "../../../../../Lib/Observable";
 import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 
 const characterNavigatorMock = mock<CharacterNavigator>();

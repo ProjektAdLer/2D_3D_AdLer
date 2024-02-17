@@ -13,6 +13,7 @@ import {
   ISceneLoaderAsyncResult,
   Mesh,
   NullEngine,
+  Quaternion,
   Scene,
   TransformNode,
   Vector3,
@@ -20,7 +21,6 @@ import {
 import ICharacterAnimator from "../../../../Core/Presentation/Babylon/CharacterAnimator/ICharacterAnimator";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IStoryElementPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
-import { LearningSpaceTemplate_L } from "../../../../Core/Domain/LearningSpaceTemplates/LearningSpaceTemplate_L";
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import ICharacterNavigator from "../../../../Core/Presentation/Babylon/CharacterNavigator/ICharacterNavigator";
@@ -38,7 +38,7 @@ const characterNavigatorMock = mock<ICharacterNavigator>();
 // @ts-ignore
 characterNavigatorMock.IsReady = Promise.resolve();
 
-describe.skip("StoryNPCView", () => {
+describe("StoryNPCView", () => {
   let systemUnderTest: StoryNPCView;
   let viewModel: StoryNPCViewModel;
   let controllerMock: IStoryNPCController;
@@ -73,270 +73,424 @@ describe.skip("StoryNPCView", () => {
     systemUnderTest = new StoryNPCView(viewModel, controllerMock);
   });
 
-  test("asyncSetupStoryNPC does not throw", async () => {
-    const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
-    const mockIdleAnimationGroup = new AnimationGroup(
-      "anim_idle",
-      new Scene(new NullEngine())
-    );
-    const mockWalkAnimationGroup = new AnimationGroup(
-      "anim_walk",
-      new Scene(new NullEngine())
-    );
-    const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
-    // @ts-ignore
-    mockLoadingResult.meshes = [mockMesh];
-    // @ts-ignore
-    mockLoadingResult.animationGroups = [
-      mockIdleAnimationGroup,
-      mockWalkAnimationGroup,
-    ];
-    scenePresenterMock.loadGLTFModel.mockResolvedValue(mockLoadingResult);
-    scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
+  describe("setup", () => {
+    test("asyncSetupStoryNPC does not throw", async () => {
+      const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
+      const mockIdleAnimationGroup = new AnimationGroup(
+        "anim_idle",
+        new Scene(new NullEngine())
+      );
+      const mockWalkAnimationGroup = new AnimationGroup(
+        "anim_walk",
+        new Scene(new NullEngine())
+      );
+      const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
+      // @ts-ignore
+      mockLoadingResult.meshes = [mockMesh];
+      // @ts-ignore
+      mockLoadingResult.animationGroups = [
+        mockIdleAnimationGroup,
+        mockWalkAnimationGroup,
+      ];
+      scenePresenterMock.loadGLTFModel.mockResolvedValue(mockLoadingResult);
+      scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
 
-    navigationMock.Plugin.getClosestPoint.mockImplementation(
-      (vector: Vector3) => vector
-    );
+      navigationMock.Plugin.getClosestPoint.mockImplementation(
+        (vector: Vector3) => vector
+      );
 
-    await expect(systemUnderTest.asyncSetupStoryNPC()).resolves.not.toThrow();
+      await expect(systemUnderTest.asyncSetupStoryNPC()).resolves.not.toThrow();
+    });
+
+    test("loadElementModel calls the scenePresenter to load npc models", async () => {
+      const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
+      const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
+      // @ts-ignore
+      mockLoadingResult.meshes = [mockMesh];
+      scenePresenterMock.loadGLTFModel.mockResolvedValue(mockLoadingResult);
+
+      await systemUnderTest["loadElementModel"]();
+
+      expect(scenePresenterMock.loadGLTFModel).toHaveBeenCalledTimes(1);
+    });
+
+    test("loadElementModel gets idleAnimation from loading results", async () => {
+      const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
+      const mockIdleAnimationGroup = new AnimationGroup(
+        "anim_idle",
+        new Scene(new NullEngine())
+      );
+      const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
+      // @ts-ignore
+      mockLoadingResult.meshes = [mockMesh];
+      // @ts-ignore
+      mockLoadingResult.animationGroups = [mockIdleAnimationGroup];
+      scenePresenterMock.loadGLTFModel.mockResolvedValue(mockLoadingResult);
+
+      await systemUnderTest["loadElementModel"]();
+
+      expect(systemUnderTest["idleAnimation"]).toBe(mockIdleAnimationGroup);
+    });
+
+    test("loadElementModel gets walkAnimation from loading results", async () => {
+      const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
+      const mockWalkAnimationGroup = new AnimationGroup(
+        "anim_walk",
+        new Scene(new NullEngine())
+      );
+      const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
+      // @ts-ignore
+      mockLoadingResult.meshes = [mockMesh];
+      // @ts-ignore
+      mockLoadingResult.animationGroups = [mockWalkAnimationGroup];
+      scenePresenterMock.loadGLTFModel.mockResolvedValue(mockLoadingResult);
+
+      await systemUnderTest["loadElementModel"]();
+
+      expect(systemUnderTest["walkAnimation"]).toBe(mockWalkAnimationGroup);
+    });
+
+    test("loadIconModel calls the scenePresenter to load npc icon models", async () => {
+      const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
+      scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
+
+      await systemUnderTest["loadIconModel"]();
+
+      expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
+    });
+
+    test("createParentNode creates a new transform node and sets it in the viewmodel", () => {
+      viewModel.modelMeshes = [
+        new Mesh("mockMesh", new Scene(new NullEngine())),
+      ];
+      viewModel.iconMeshes = [
+        new Mesh("mockMesh", new Scene(new NullEngine())),
+      ];
+      viewModel.modelRootNode = new TransformNode(
+        "mockNode",
+        new Scene(new NullEngine())
+      );
+
+      systemUnderTest["createParentNode"]();
+
+      expect(viewModel.parentNode).toBeDefined();
+    });
+
+    test("setupInteraction creates a ActionManager and sets it on all meshes", () => {
+      viewModel.modelMeshes = [
+        new Mesh("mockMesh", new Scene(new NullEngine())),
+      ];
+      viewModel.iconMeshes = [
+        new Mesh("mockMesh", new Scene(new NullEngine())),
+      ];
+
+      systemUnderTest["setupInteractions"]();
+
+      expect(viewModel.modelMeshes[0].actionManager).toBeDefined();
+      expect(viewModel.iconMeshes[0].actionManager).toBeDefined();
+    });
+
+    test("setSpawnLocation sets the position and rotation to value from viewModel when state is Idle", () => {
+      viewModel.modelRootNode = new TransformNode(
+        "mockRootNode",
+        new Scene(new NullEngine())
+      );
+      viewModel.parentNode = new TransformNode(
+        "mockParentNode",
+        new Scene(new NullEngine())
+      );
+      viewModel.state.Value = StoryNPCState.Idle;
+      viewModel.storyType = StoryElementType.Intro;
+      viewModel.introIdlePosition = new Vector3(4, 2, 0);
+      viewModel.introIdlePosRotation = (3 / 4) * Math.PI;
+
+      systemUnderTest["setSpawnLocation"]();
+
+      expect(viewModel.parentNode.position).toEqual(new Vector3(4, 2, 0));
+      expect(viewModel.modelRootNode.rotationQuaternion).toEqual(
+        Quaternion.RotationAxis(Vector3.Up(), (3 / 4) * Math.PI)
+      );
+    });
+
+    test("setSpawnLocation calcualtes spawn location when state is not Idle", () => {
+      viewModel.modelRootNode = new TransformNode(
+        "mockRootNode",
+        new Scene(new NullEngine())
+      );
+      viewModel.parentNode = new TransformNode(
+        "mockParentNode",
+        new Scene(new NullEngine())
+      );
+      viewModel.state.Value = StoryNPCState.CutScene;
+      viewModel.avatarPosition = new Vector3(10, 0, 0);
+      // @ts-ignore
+      viewModel.introSpawnPositionOffsetFromAvatar = new Vector3(1, 0, 0);
+      viewModel.parentNode.position = new Vector3(0, 0, 0);
+      viewModel.storyType = StoryElementType.Intro;
+
+      systemUnderTest["setSpawnLocation"]();
+
+      expect(viewModel.parentNode.position).toEqual(new Vector3(11, 0, 0));
+      expect(viewModel.modelRootNode.rotationQuaternion).toEqual(
+        Quaternion.RotationAxis(Vector3.Up(), Math.PI)
+      );
+    });
+
+    test("createCharacterAnimator creates and sets up a new CharacterAnimator ", () => {
+      const mockIdleAnimation = mock<AnimationGroup>();
+      systemUnderTest["idleAnimation"] = mockIdleAnimation;
+      const mockWalkAnimation = mock<AnimationGroup>();
+      systemUnderTest["walkAnimation"] = mockWalkAnimation;
+      const mockInteractionAnimation = mock<AnimationGroup>();
+      systemUnderTest["interactionAnimation"] = mockInteractionAnimation;
+
+      const mockModelRootNode = new TransformNode(
+        "mockRootNode",
+        new Scene(new NullEngine())
+      );
+      viewModel.modelRootNode = mockModelRootNode;
+
+      systemUnderTest["createCharacterAnimator"]();
+
+      expect(viewModel.characterAnimator).toBeDefined();
+      expect(characterAnimatorMock.setup).toHaveBeenCalledTimes(1);
+    });
+
+    test("createCharacterNavigator creates and sets up a new CharacterNavigator ", () => {
+      const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
+      viewModel.modelMeshes = [mockMesh];
+      const mockParentNode = new TransformNode(
+        "mockParentNode",
+        new Scene(new NullEngine())
+      );
+      viewModel.parentNode = mockParentNode;
+      const mockModelRootNode = new TransformNode(
+        "mockRootNode",
+        new Scene(new NullEngine())
+      );
+      viewModel.modelRootNode = mockModelRootNode;
+      const mockCharacterAnimator = mock<ICharacterAnimator>();
+      viewModel.characterAnimator = mockCharacterAnimator;
+
+      systemUnderTest["createCharacterNavigator"]();
+
+      expect(viewModel.characterNavigator).toBeDefined();
+      expect(characterNavigatorMock.setup).toHaveBeenCalledTimes(1);
+      expect(characterNavigatorMock.setup).toHaveBeenCalledWith(
+        mockParentNode,
+        mockCharacterAnimator,
+        expect.any(Boolean)
+      );
+    });
+
+    test("setupCleanup sets up a callback to stop movement when isInCutScene changes to false", () => {
+      systemUnderTest["setupCleanup"]();
+
+      expect(scenePresenterMock.addDisposeSceneCallback).toHaveBeenCalledTimes(
+        1
+      );
+    });
   });
 
-  test("loadElementModel calls the scenePresenter to load npc models", async () => {
-    const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
-    const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
-    // @ts-ignore
-    mockLoadingResult.meshes = [mockMesh];
-    scenePresenterMock.loadGLTFModel.mockResolvedValue(mockLoadingResult);
+  describe("interactions", () => {
+    test("click on npc calls controller.picked", () => {
+      viewModel.modelMeshes = [
+        new Mesh("mockMesh", new Scene(new NullEngine())),
+      ];
+      viewModel.iconMeshes = [];
 
-    await systemUnderTest["loadElementModel"]();
+      systemUnderTest["setupInteractions"]();
 
-    expect(scenePresenterMock.loadGLTFModel).toHaveBeenCalledTimes(1);
+      viewModel.modelMeshes[0].actionManager!.processTrigger(
+        ActionManager.OnPickTrigger
+      );
+
+      expect(controllerMock.picked).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test("loadElementModel gets idleAnimation from loading results", async () => {
-    const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
-    const mockIdleAnimationGroup = new AnimationGroup(
-      "anim_idle",
-      new Scene(new NullEngine())
-    );
-    const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
-    // @ts-ignore
-    mockLoadingResult.meshes = [mockMesh];
-    // @ts-ignore
-    mockLoadingResult.animationGroups = [mockIdleAnimationGroup];
-    scenePresenterMock.loadGLTFModel.mockResolvedValue(mockLoadingResult);
+  describe("movement", () => {
+    test.each([
+      [StoryNPCState.Idle, "moveToIdlePosition"],
+      [StoryNPCState.CutScene, "startCutSceneMovement"],
+    ])("onStateChanged calls %p when state is changed to %p", (state, fn) => {
+      // set state to value that triggers no function
+      viewModel.state.Value = StoryNPCState.WaitOnCutSceneTrigger;
+      try {
+        systemUnderTest[fn] = jest.fn();
+      } catch (e) {
+        // @ts-ignore
+        jest.spyOn(systemUnderTest, fn, "get");
+      }
 
-    await systemUnderTest["loadElementModel"]();
+      systemUnderTest["onStateChanged"](state);
 
-    expect(systemUnderTest["idleAnimation"]).toBe(mockIdleAnimationGroup);
-  });
+      expect(systemUnderTest[fn]).toHaveBeenCalledTimes(1);
+    });
 
-  test("loadElementModel gets walkAnimation from loading results", async () => {
-    const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
-    const mockWalkAnimationGroup = new AnimationGroup(
-      "anim_walk",
-      new Scene(new NullEngine())
-    );
-    const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
-    // @ts-ignore
-    mockLoadingResult.meshes = [mockMesh];
-    // @ts-ignore
-    mockLoadingResult.animationGroups = [mockWalkAnimationGroup];
-    scenePresenterMock.loadGLTFModel.mockResolvedValue(mockLoadingResult);
+    // needs special handling for bound private method
+    test("onStateChanged calls startRandomMovementIdleTimeout when state is changed to RandomMovement", () => {
+      viewModel.state.Value = StoryNPCState.Idle;
+      const startRandomMovementIdleTimeoutMock = jest.spyOn(
+        systemUnderTest,
+        // @ts-ignore
+        "startRandomMovementIdleTimeout",
+        "get"
+      );
 
-    await systemUnderTest["loadElementModel"]();
+      systemUnderTest["onStateChanged"](StoryNPCState.RandomMovement);
 
-    expect(systemUnderTest["walkAnimation"]).toBe(mockWalkAnimationGroup);
-  });
+      expect(startRandomMovementIdleTimeoutMock).toHaveBeenCalledTimes(1);
+    });
 
-  test("loadIconModel calls the scenePresenter to load npc icon models", async () => {
-    const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
-    scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
+    test("moveToIdlePosition calls startMovement on the characterNavigator with the idle position", () => {
+      viewModel.characterNavigator = characterNavigatorMock;
+      viewModel.storyType = StoryElementType.Intro;
+      viewModel.introIdlePosition = new Vector3(4, 2, 0);
 
-    await systemUnderTest["loadIconModel"]();
+      systemUnderTest["moveToIdlePosition"]();
 
-    expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
-  });
+      expect(characterNavigatorMock.startMovement).toBeCalledTimes(1);
+      expect(characterNavigatorMock.startMovement).toBeCalledWith(
+        new Vector3(4, 2, 0),
+        expect.any(Function)
+      );
+    });
 
-  test("createParentNode creates a new transform node and sets it in the viewmodel", () => {
-    viewModel.modelMeshes = [new Mesh("mockMesh", new Scene(new NullEngine()))];
-    viewModel.iconMeshes = [new Mesh("mockMesh", new Scene(new NullEngine()))];
-    viewModel.modelRootNode = new TransformNode(
-      "mockNode",
-      new Scene(new NullEngine())
-    );
+    test("moveToIdlePosition sets idlePosRotation on modelRootNode when idle position is reached", () => {
+      viewModel.storyType = StoryElementType.Intro;
+      viewModel.introIdlePosition = new Vector3(4, 2, 0);
+      viewModel.introIdlePosRotation = Math.PI;
+      viewModel.modelRootNode = new TransformNode(
+        "mockRootNode",
+        new Scene(new NullEngine())
+      );
 
-    systemUnderTest["createParentNode"]();
+      viewModel.characterNavigator = characterNavigatorMock;
+      characterNavigatorMock.startMovement.mockImplementationOnce(
+        (target: Vector3, callback?: () => void) => {
+          viewModel.modelRootNode.position = target;
+          callback!();
+        }
+      );
 
-    expect(viewModel.parentNode).toBeDefined();
-  });
+      systemUnderTest["moveToIdlePosition"]();
 
-  test("setupInteraction creates a ActionManager and sets it on all meshes", () => {
-    viewModel.modelMeshes = [new Mesh("mockMesh", new Scene(new NullEngine()))];
-    viewModel.iconMeshes = [new Mesh("mockMesh", new Scene(new NullEngine()))];
+      expect(viewModel.modelRootNode.rotationQuaternion).toEqual(
+        Quaternion.RotationAxis(Vector3.Up(), Math.PI)
+      );
+    });
 
-    systemUnderTest["setupInteractions"]();
+    test("startCutSceneMovement calls startMovement on the characterNavigator after timeout", () => {
+      viewModel.characterNavigator = characterNavigatorMock;
+      viewModel.storyType = StoryElementType.Intro;
+      viewModel.avatarPosition = new Vector3(10, 0, 0);
+      viewModel.parentNode = new TransformNode(
+        "mockParentNode",
+        new Scene(new NullEngine())
+      );
+      viewModel.parentNode.position = new Vector3(0, 0, 0);
 
-    expect(viewModel.modelMeshes[0].actionManager).toBeDefined();
-    expect(viewModel.iconMeshes[0].actionManager).toBeDefined();
-  });
+      jest.useFakeTimers();
+      systemUnderTest["startCutSceneMovement"]();
 
-  test("click on npc calls controller.picked", () => {
-    viewModel.modelMeshes = [new Mesh("mockMesh", new Scene(new NullEngine()))];
-    viewModel.iconMeshes = [];
+      expect(characterNavigatorMock.startMovement).not.toBeCalled();
+      jest.advanceTimersByTime(viewModel.cutSceneStartDelay);
 
-    systemUnderTest["setupInteractions"]();
+      expect(characterNavigatorMock.startMovement).toBeCalledTimes(1);
+    });
 
-    viewModel.modelMeshes[0].actionManager!.processTrigger(
-      ActionManager.OnPickTrigger
-    );
+    test("startCutSceneMovement calls open on the storyElementPresenter after cutscene position reached", () => {
+      viewModel.storyType = StoryElementType.Intro;
+      viewModel.avatarPosition = new Vector3(10, 0, 0);
+      viewModel.parentNode = new TransformNode(
+        "mockParentNode",
+        new Scene(new NullEngine())
+      );
+      viewModel.parentNode.position = new Vector3(0, 0, 0);
 
-    expect(controllerMock.picked).toHaveBeenCalledTimes(1);
-  });
+      viewModel.characterNavigator = characterNavigatorMock;
+      characterNavigatorMock.startMovement.mockImplementationOnce(
+        (target: Vector3, callback?: () => void) => {
+          callback!();
+        }
+      );
 
-  test("setSpawnLocation sets the position of the parent node to (0,0,0) when no space template is set", () => {
-    viewModel.parentNode = new TransformNode(
-      "mockNode",
-      new Scene(new NullEngine())
-    );
+      jest.useFakeTimers();
+      systemUnderTest["startCutSceneMovement"]();
+      jest.advanceTimersByTime(viewModel.cutSceneStartDelay);
 
-    systemUnderTest["setSpawnLocation"]();
+      expect(storyElementPresenterMock.open).toBeCalledTimes(1);
+      expect(storyElementPresenterMock.open).toBeCalledWith(
+        StoryElementType.Intro
+      );
+    });
 
-    expect(viewModel.parentNode.position).toEqual(new Vector3(0, 0, 0));
-  });
+    test("setRandomTarget calls startMovement on the characterNavigator with a target", () => {
+      navigationMock.Plugin.getRandomPointAround.mockReturnValue(
+        new Vector3(2, 0, 2)
+      );
+      viewModel.parentNode = new TransformNode(
+        "mockParentNode",
+        new Scene(new NullEngine())
+      );
+      viewModel.parentNode.position = new Vector3(0, 0, 0);
+      viewModel.characterNavigator = characterNavigatorMock;
 
-  test("setSpawnLocation sets the position of the parent node to template spawn when space template is set", async () => {
-    viewModel.parentNode = new TransformNode(
-      "mockNode",
-      new Scene(new NullEngine())
-    );
-    // @ts-ignore
-    viewModel.introSpawnPositionOffsetFromAvatar = new Vector3(0, 0, 1);
-    viewModel.storyType = StoryElementType.Intro;
-    // @ts-ignore
-    navigationMock.IsReady = Promise.resolve();
-    navigationMock.Plugin.getClosestPoint.mockImplementation(
-      (vector: Vector3) => vector
-    );
+      systemUnderTest["setRandomMovementTarget"]();
 
-    await systemUnderTest["setSpawnLocation"]();
+      expect(characterNavigatorMock.startMovement).toBeCalledTimes(1);
+      expect(characterNavigatorMock.startMovement).toBeCalledWith(
+        expect.any(Vector3),
+        systemUnderTest["startRandomMovementIdleTimeout"]
+      );
+    });
 
-    expect(viewModel.parentNode.position).toEqual(new Vector3(0, 0, 1));
-  });
+    test("startRandomMovementIdleTimeout calls setRandomTarget after the idleTime", () => {
+      navigationMock.Plugin.getRandomPointAround.mockReturnValue(
+        new Vector3(2, 0, 2)
+      );
+      viewModel.parentNode = new TransformNode(
+        "mockParentNode",
+        new Scene(new NullEngine())
+      );
+      viewModel.parentNode.position = new Vector3(0, 0, 0);
+      viewModel.characterNavigator = characterNavigatorMock;
 
-  test("createCharacterAnimator creates and sets up a new CharacterAnimator ", () => {
-    const mockIdleAnimation = mock<AnimationGroup>();
-    systemUnderTest["idleAnimation"] = mockIdleAnimation;
-    const mockWalkAnimation = mock<AnimationGroup>();
-    systemUnderTest["walkAnimation"] = mockWalkAnimation;
-    const mockInteractionAnimation = mock<AnimationGroup>();
-    systemUnderTest["interactionAnimation"] = mockInteractionAnimation;
+      jest.useFakeTimers();
+      const setRandomMovementTargetMock = jest.spyOn(
+        systemUnderTest,
+        // prevent incorrect ts error for spying on private method
+        // @ts-ignore
+        "setRandomMovementTarget"
+      );
 
-    const mockModelRootNode = new TransformNode(
-      "mockRootNode",
-      new Scene(new NullEngine())
-    );
-    viewModel.modelRootNode = mockModelRootNode;
+      // trigger call startRandomMovementIdleTimeout to by setting state to RandomMovement
+      viewModel.state.Value = StoryNPCState.RandomMovement;
 
-    systemUnderTest["createCharacterAnimator"]();
+      expect(setRandomMovementTargetMock).not.toBeCalled();
 
-    expect(viewModel.characterAnimator).toBeDefined();
-    expect(characterAnimatorMock.setup).toHaveBeenCalledTimes(1);
-  });
+      jest.advanceTimersByTime(viewModel.idleTime);
 
-  test("createCharacterNavigator creates and sets up a new CharacterNavigator ", () => {
-    const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
-    viewModel.modelMeshes = [mockMesh];
-    const mockParentNode = new TransformNode(
-      "mockParentNode",
-      new Scene(new NullEngine())
-    );
-    viewModel.parentNode = mockParentNode;
-    const mockModelRootNode = new TransformNode(
-      "mockRootNode",
-      new Scene(new NullEngine())
-    );
-    viewModel.modelRootNode = mockModelRootNode;
-    const mockCharacterAnimator = mock<ICharacterAnimator>();
-    viewModel.characterAnimator = mockCharacterAnimator;
+      expect(setRandomMovementTargetMock).toBeCalledTimes(1);
+    });
 
-    systemUnderTest["createCharacterNavigator"]();
+    test("startRandomMovementIdleTimeout does not call setRandomTarget when state is not RandomMovement", () => {
+      viewModel.state.Value = StoryNPCState.Idle;
 
-    expect(viewModel.characterNavigator).toBeDefined();
-    expect(characterNavigatorMock.setup).toHaveBeenCalledTimes(1);
-    expect(characterNavigatorMock.setup).toHaveBeenCalledWith(
-      mockParentNode,
-      mockCharacterAnimator,
-      expect.any(Boolean)
-    );
-  });
+      jest.useFakeTimers();
+      const setRandomMovementTargetMock = jest.spyOn(
+        systemUnderTest,
+        // prevent incorrect ts error for spying on private method
+        // @ts-ignore
+        "setRandomMovementTarget"
+      );
 
-  test("setupCleanup sets up a callback to stop movement when isInCutScene changes to false", () => {
-    systemUnderTest["setupCleanup"]();
+      systemUnderTest["startRandomMovementIdleTimeout"]();
 
-    expect(scenePresenterMock.addDisposeSceneCallback).toHaveBeenCalledTimes(1);
-  });
+      jest.advanceTimersByTime(viewModel.idleTime);
 
-  test("setRandomTarget calls startMovement on the characterNavigator with a target", () => {
-    navigationMock.Plugin.getRandomPointAround.mockReturnValue(
-      new Vector3(2, 0, 2)
-    );
-    viewModel.parentNode = new TransformNode(
-      "mockParentNode",
-      new Scene(new NullEngine())
-    );
-    viewModel.parentNode.position = new Vector3(0, 0, 0);
-    viewModel.characterNavigator = characterNavigatorMock;
-
-    systemUnderTest.setRandomMovementTarget();
-
-    expect(characterNavigatorMock.startMovement).toBeCalledTimes(1);
-    expect(characterNavigatorMock.startMovement).toBeCalledWith(
-      expect.any(Vector3),
-      systemUnderTest["startIdleTimeout"]
-    );
-  });
-
-  test("startIdleTimeout calls setRandomTarget after the idleTime", () => {
-    navigationMock.Plugin.getRandomPointAround.mockReturnValue(
-      new Vector3(2, 0, 2)
-    );
-    viewModel.parentNode = new TransformNode(
-      "mockParentNode",
-      new Scene(new NullEngine())
-    );
-    viewModel.parentNode.position = new Vector3(0, 0, 0);
-    viewModel.characterNavigator = characterNavigatorMock;
-    viewModel.state.Value = StoryNPCState.RandomMovement;
-
-    jest.useFakeTimers();
-    const setRandomMovementTargetMock = jest.spyOn(
-      systemUnderTest,
-      "setRandomMovementTarget"
-    );
-
-    systemUnderTest["startIdleTimeout"]();
-
-    expect(setRandomMovementTargetMock).not.toBeCalled();
-
-    jest.advanceTimersByTime(viewModel.idleTime);
-
-    expect(setRandomMovementTargetMock).toBeCalledTimes(1);
-  });
-
-  test("startIdleTimeout does not call setRandomTarget when state is not RandomMovement", () => {
-    viewModel.state.Value = StoryNPCState.Idle;
-
-    jest.useFakeTimers();
-    const setRandomMovementTargetMock = jest.spyOn(
-      systemUnderTest,
-      "setRandomMovementTarget"
-    );
-
-    systemUnderTest["startIdleTimeout"]();
-
-    jest.advanceTimersByTime(viewModel.idleTime);
-
-    expect(setRandomMovementTargetMock).not.toBeCalled();
+      expect(setRandomMovementTargetMock).not.toBeCalled();
+    });
   });
 });
