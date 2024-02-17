@@ -8,6 +8,7 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import {
   ActionManager,
   AnimationGroup,
+  Color3,
   ExecuteCodeAction,
   Mesh,
   Quaternion,
@@ -53,6 +54,7 @@ export default class StoryNPCView {
     this.createParentNode();
     this.setSpawnLocation();
     this.setupInteractions();
+    this.addMeshesToHighlightLayer();
     this.createCharacterAnimator();
     this.createCharacterNavigator();
     this.setupCleanup();
@@ -134,6 +136,16 @@ export default class StoryNPCView {
         this.controller.pointerOut
       )
     );
+  }
+  private addMeshesToHighlightLayer(): void {
+    const highlightColor = Color3.Teal();
+
+    this.viewModel.modelMeshes.forEach((mesh) => {
+      this.scenePresenter.HighlightLayer.addMesh(mesh, highlightColor);
+    });
+    this.viewModel.iconMeshes.forEach((mesh) => {
+      this.scenePresenter.HighlightLayer.addMesh(mesh, highlightColor);
+    });
   }
 
   private setSpawnLocation(): void {
