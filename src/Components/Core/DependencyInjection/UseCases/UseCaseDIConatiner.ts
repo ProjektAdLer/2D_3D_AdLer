@@ -48,8 +48,8 @@ import ILoadExternalLearningElementUseCase from "../../Application/UseCases/Adap
 import LoadExternalLearningElementUseCase from "../../Application/UseCases/Adaptivity/LoadExternalLearningElementUseCase/LoadExternalLearningElementUseCase";
 import IScoreAdaptivityElementUseCase from "../../Application/UseCases/Adaptivity/ScoreAdaptivityElementUseCase/IScoreAdaptivityElementUseCase";
 import ScoreAdaptivityElementUseCase from "../../Application/UseCases/Adaptivity/ScoreAdaptivityElementUseCase/ScoreAdaptivityElementUseCase";
-import IDisplayLearningElementUseCase from "../../Application/UseCases/Adaptivity/DisplayLearningElementUseCase/IDisplayLearningElementUseCase";
-import DisplayLearningElementUseCase from "../../Application/UseCases/Adaptivity/DisplayLearningElementUseCase/DisplayLearningElementUseCase";
+import IDisplayAdaptivityHintLearningElementUseCase from "../../Application/UseCases/Adaptivity/DisplayAdaptivityHintLearningElement/IDisplayAdaptivityHintLearningElementUseCase";
+import DisplayAdaptivityHintLearningElementUseCase from "../../Application/UseCases/Adaptivity/DisplayAdaptivityHintLearningElement/DisplayAdaptivityHintLearningElementUseCase";
 import ILogoutUseCase from "../../Application/UseCases/Logout/ILogoutUseCase";
 import LogoutUseCase from "../../Application/UseCases/Logout/LogoutUseCase";
 import ILoadUserLearningWorldsInfoUseCase from "../../Application/UseCases/LoadUserLearningWorldsInfo/ILoadUserLearningWorldsInfoUseCase";
@@ -201,10 +201,10 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(ScoreAdaptivityElementUseCase)
     .inSingletonScope();
 
-  bind<IDisplayLearningElementUseCase>(
-    USECASE_TYPES.IDisplayLearningElementUseCase
+  bind<IDisplayAdaptivityHintLearningElementUseCase>(
+    USECASE_TYPES.IDisplayAdaptivityHintLearningElementUseCase
   )
-    .to(DisplayLearningElementUseCase)
+    .to(DisplayAdaptivityHintLearningElementUseCase)
     .inSingletonScope();
 
   bind<ILogoutUseCase>(USECASE_TYPES.ILogoutUseCase)

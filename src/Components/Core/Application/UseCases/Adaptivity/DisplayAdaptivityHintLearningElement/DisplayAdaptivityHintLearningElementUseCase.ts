@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import IDisplayLearningElementUseCase from "./IDisplayLearningElementUseCase";
+import IDisplayAdaptivityHintLearningElementUseCase from "./IDisplayAdaptivityHintLearningElementUseCase";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import type ILoggerPort from "../../../Ports/Interfaces/ILoggerPort";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
@@ -16,8 +16,8 @@ import AdaptivityElementHintTO from "../../../DataTransferObjects/AdaptivityElem
 import { AdaptivityElementActionTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 
 @injectable()
-export default class DisplayLearningElementUseCase
-  implements IDisplayLearningElementUseCase
+export default class DisplayAdaptivityHintLearningElementUseCase
+  implements IDisplayAdaptivityHintLearningElementUseCase
 {
   constructor(
     @inject(CORE_TYPES.ILogger)
@@ -35,36 +35,43 @@ export default class DisplayLearningElementUseCase
   ) {}
 
   async executeAsync(elementID: ComponentID): Promise<void> {
-    const spaces = this.entityContainer.getEntitiesOfType(LearningSpaceEntity);
-
-    // calculate space in which external learningelement is
-    const space = spaces.filter((space) => {
-      return space.elements.filter((e) => e?.id === elementID).length > 0;
-    });
-
-    if (space.length === 0) {
-      throw new Error(
-        "Could not find space in which external learning element is."
-      );
-    }
-
-    const element = this.entityContainer.filterEntitiesOfType(
-      LearningElementEntity,
-      (e) => e.id === elementID
-    );
-
-    if (element.length === 0) {
-      throw new Error("Could not find external element.");
-    }
-
     const location = this.getUserLocationUseCase.execute();
 
     if (!location.spaceID || !location.worldID) {
       throw new Error(`User not in a space!`);
     }
 
+    // get spaces of current learning world
+    const spaces = this.entityContainer.filterEntitiesOfType(
+      LearningSpaceEntity,
+      (entity: LearningSpaceEntity) => {
+        return entity.parentWorldID === location.worldID;
+      }
+    );
+
+    if (spaces.length === 0) {
+      throw new Error(
+        "Could not find space for currently active learning world."
+      );
+    }
+
+    // get learning element with given id in current learning world
+    const elements = this.entityContainer.filterEntitiesOfType(
+      LearningElementEntity,
+      (e) => e.id === elementID && e.parentWorldID === location.worldID
+    );
+
+    if (elements.length === 0) {
+      throw new Error("Could not find referenced learning element.");
+    }
+
+    // check if element is in current space
+    const currentSpace = spaces.find((e) => e.id === location.spaceID);
+    const isInCurrentSpace =
+      currentSpace?.elements.find((e) => e?.id === elementID) !== undefined;
+
     // element is in space
-    if (location.spaceID === space[0].id) {
+    if (isInCurrentSpace) {
       this.worldPort.onAdaptivityElementUserHintInformed({
         hintID: -1,
         showOnIsWrong: true,
@@ -72,7 +79,7 @@ export default class DisplayLearningElementUseCase
           hintActionType: AdaptivityElementActionTypes.CommentAction,
           textData:
             "Der Hinweis für diese Frage befindet sich hier in diesem Raum. Schau dir `" +
-            element[0].name +
+            elements[0].name +
             "` nochmal an.",
         },
       } as AdaptivityElementHintTO);
@@ -80,7 +87,7 @@ export default class DisplayLearningElementUseCase
       // check if space is available
       const spaceAvailability =
         this.calculateLearningSpaceAvailabilityUseCase.internalExecute({
-          spaceID: space[0].id,
+          spaceID: spaces[0].id,
           worldID: location.worldID,
         });
 
@@ -98,9 +105,9 @@ export default class DisplayLearningElementUseCase
             hintActionType: AdaptivityElementActionTypes.CommentAction,
             textData:
               "Der Hinweis für diese Frage ist das Lernelement `" +
-              element[0].name +
+              elements[0].name +
               "` im Lernraum `" +
-              space[0].name +
+              spaces[0].name +
               "`",
           },
         } as AdaptivityElementHintTO);

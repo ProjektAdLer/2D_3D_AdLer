@@ -15,7 +15,7 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldPort from "../../../Application/Ports/Interfaces/ILearningWorldPort";
 import ILoadExternalLearningElementUseCase from "src/Components/Core/Application/UseCases/Adaptivity/LoadExternalLearningElementUseCase/ILoadExternalLearningElementUseCase";
 import type { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
-import IDisplayLearningElementUseCase from "src/Components/Core/Application/UseCases/Adaptivity/DisplayLearningElementUseCase/IDisplayLearningElementUseCase";
+import IDisplayAdaptivityHintLearningElementUseCase from "src/Components/Core/Application/UseCases/Adaptivity/DisplayAdaptivityHintLearningElement/IDisplayAdaptivityHintLearningElementUseCase";
 import i18next from "i18next";
 import IBottomTooltipPresenter from "~ReactComponents/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
@@ -61,7 +61,7 @@ export default class AdaptivityElementController
       selectedHint.hintAction.idData !== undefined
     ) {
       // if element is in same learning space then highlight,
-      // if not in element nothing will happen
+      // if not in space nothing will happen
       // call all element presenters via port
       const learningWorldPort = CoreDIContainer.get<ILearningWorldPort>(
         PORT_TYPES.ILearningWorldPort
@@ -71,8 +71,8 @@ export default class AdaptivityElementController
         selectedHint.hintAction.idData
       );
 
-      await CoreDIContainer.get<IDisplayLearningElementUseCase>(
-        USECASE_TYPES.IDisplayLearningElementUseCase
+      await CoreDIContainer.get<IDisplayAdaptivityHintLearningElementUseCase>(
+        USECASE_TYPES.IDisplayAdaptivityHintLearningElementUseCase
       ).executeAsync(selectedHint.hintAction.idData);
 
       if (this.viewModel.selectedHint.Value) {
