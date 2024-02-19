@@ -1,5 +1,5 @@
 import { async } from "q";
-import DisplayLearningElementUseCase from "../../../../../Core/Application/UseCases/Adaptivity/DisplayLearningElementUseCase/DisplayLearningElementUseCase";
+import DisplayLearningElementUseCase from "../../../../../Core/Application/UseCases/Adaptivity/DisplayAdaptivityHintLearningElement/DisplayAdaptivityHintLearningElementUseCase";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import mock from "jest-mock-extended/lib/Mock";
 import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
@@ -16,6 +16,7 @@ import { AdaptivityElementActionTypes } from "../../../../../Core/Domain/Types/A
 import ICalculateLearningSpaceAvailabilityUseCase from "../../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
 import LearningSpaceAvailabilityTO from "../../../../../Core/Application/DataTransferObjects/LearningSpaceAvailabilityTO";
 import ILoadLearningElementUseCase from "../../../../../Core/Application/UseCases/LoadLearningElement/ILoadLearningElementUseCase";
+import { LearningElementModelTypeEnums } from "../../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 const entityContainer = mock<IEntityContainer>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
@@ -59,34 +60,7 @@ describe("DisplayLearningElementUseCase", () => {
     systemUnderTest = CoreDIContainer.resolve(DisplayLearningElementUseCase);
   });
 
-  test("should throw, if no space space is found", async () => {
-    entityContainer.getEntitiesOfType.mockReturnValue([]);
-
-    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
-      `Could not find space in which external learning element is.`
-    );
-  });
-
-  test("should throw, if no element is found", async () => {
-    entityContainer.getEntitiesOfType.mockReturnValue([
-      { id: 0, elements: [{ id: 1 }] } as LearningSpaceEntity,
-    ]);
-    entityContainer.filterEntitiesOfType.mockReturnValue([]);
-
-    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
-      "Could not find external element."
-    );
-  });
-
   test("should throw, if user is not in space", async () => {
-    entityContainer.getEntitiesOfType.mockReturnValue([
-      { id: 0, elements: [{ id: 1 }] } as LearningSpaceEntity,
-    ]);
-
-    entityContainer.filterEntitiesOfType.mockReturnValue([
-      { id: 3 } as LearningElementEntity,
-    ]);
-
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: undefined,
       spaceID: undefined,
@@ -104,21 +78,76 @@ describe("DisplayLearningElementUseCase", () => {
     await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
       `User not in a space!`
     );
+
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: undefined,
+      spaceID: 1,
+    } as UserLocationTO);
+
+    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
+      `User not in a space!`
+    );
   });
 
-  test("learning element in same space calls onAdaptivityElementUserHintInformed", async () => {
-    entityContainer.getEntitiesOfType.mockReturnValue([
-      { id: 1, elements: [{ id: 1 }] } as LearningSpaceEntity,
-    ]);
-
-    entityContainer.filterEntitiesOfType.mockReturnValue([
-      { id: 1, name: "test" } as LearningElementEntity,
-    ]);
-
+  test("should throw, if no space space is found", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
       spaceID: 1,
     } as UserLocationTO);
+
+    entityContainer.filterEntitiesOfType.mockReturnValue([]);
+
+    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
+      `Could not find space for currently active learning world.`
+    );
+  });
+
+  test("should throw, if no element is found", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: 1,
+    } as UserLocationTO);
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([
+      { id: 0, elements: [{ id: 1 }] } as LearningSpaceEntity,
+    ]);
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([]);
+
+    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
+      "Could not find referenced learning element."
+    );
+  });
+
+  test("learning element in same space calls onAdaptivityElementUserHintInformed", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: 1,
+    } as UserLocationTO);
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([
+      {
+        id: 1,
+        elements: [
+          {
+            id: 1,
+            value: 3,
+            hasScored: false,
+            name: "",
+            description: "",
+            goals: [],
+            type: "text",
+            model:
+              LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
+            parentWorldID: 1,
+          },
+        ] as LearningElementEntity[],
+      } as LearningSpaceEntity,
+    ]);
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([
+      { id: 1, name: "test" } as LearningElementEntity,
+    ]);
 
     await systemUnderTest.executeAsync(1);
 
