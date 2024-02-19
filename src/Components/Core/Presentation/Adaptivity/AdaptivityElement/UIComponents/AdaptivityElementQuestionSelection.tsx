@@ -39,14 +39,6 @@ export default function AdaptivityElementQuestionSelection({
     );
   }, [setHeaderText, selectedTask, translate]);
 
-  selectedTask.questions.sort(compareQuestionsByDifficulty);
-  function compareQuestionsByDifficulty(
-    a: AdaptivityQuestion,
-    b: AdaptivityQuestion
-  ) {
-    return a.difficulty - b.difficulty;
-  }
-
   return (
     <div className="grid w-full gap-4 px-2 py-2">
       {selectedTask.questions.map((question) => {
@@ -77,7 +69,7 @@ export default function AdaptivityElementQuestionSelection({
         return (
           <div
             key={question.questionID}
-            className="flex items-center  w-full gap-4 "
+            className="flex items-center w-full gap-4 "
           >
             <StyledButton
               shape="freefloatcenter"
