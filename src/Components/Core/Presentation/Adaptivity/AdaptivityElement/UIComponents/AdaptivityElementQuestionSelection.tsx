@@ -52,6 +52,9 @@ export default function AdaptivityElementQuestionSelection({
       {selectedTask.questions.map((question) => {
         let starState =
           AdaptivityElementDifficultyStarState.NotRequiredUnsolved;
+        if (question.isRequired === true) {
+          starState = AdaptivityElementDifficultyStarState.RequiredUnsolved;
+        }
         if (question.isCompleted === true && question.isRequired === true) {
           starState = AdaptivityElementDifficultyStarState.RequiredSolved;
         } else if (
