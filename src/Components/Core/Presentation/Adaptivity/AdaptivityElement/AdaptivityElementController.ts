@@ -11,8 +11,6 @@ import ISubmitAdaptivityElementSelectionUseCase from "../../../Application/UseCa
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import AdaptivityElementQuestionSubmissionTO from "../../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 import { AdaptivityElementActionTypes } from "../../../Domain/Types/Adaptivity/AdaptivityElementActionTypes";
-import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import ILearningWorldPort from "../../../Application/Ports/Interfaces/ILearningWorldPort";
 import ILoadExternalLearningElementUseCase from "src/Components/Core/Application/UseCases/Adaptivity/LoadExternalLearningElementUseCase/ILoadExternalLearningElementUseCase";
 import type { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import IDisplayAdaptivityHintLearningElementUseCase from "src/Components/Core/Application/UseCases/Adaptivity/DisplayAdaptivityHintLearningElement/IDisplayAdaptivityHintLearningElementUseCase";

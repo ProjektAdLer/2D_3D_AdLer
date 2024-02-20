@@ -25,7 +25,7 @@ export default function AdaptivityElementAnswerFeedback({
       isCorrect ? translate("rightAnswer") : translate("wrongAnswer")
     );
   }, [isCorrect, setHeaderText, translate]);
-  const contentText = useRef(null as string | null);
+  const difficultyHint = useRef(null as string | null);
   useEffect(() => {
     currentTask.questions.some((question) => {
       return (
@@ -33,7 +33,7 @@ export default function AdaptivityElementAnswerFeedback({
       );
     }) &&
       isCorrect &&
-      (contentText.current = translate(
+      (difficultyHint.current = translate(
         "questionSolvedWithHigherDifficultyQuestionAvailable"
       ).toString());
 
@@ -43,18 +43,38 @@ export default function AdaptivityElementAnswerFeedback({
       );
     }) &&
       !isCorrect &&
-      (contentText.current = translate(
+      (difficultyHint.current = translate(
         "questionSolvedWithLowerDifficultyQuestionAvailable"
       ));
   }, [currentQuestion, currentTask, isCorrect, translate]);
+  const solvedHint = useRef(null as string | null);
+  useEffect(() => {
+    if (
+      // hint is given if the solved question is required or if a question of lower difficulty is required
+      (currentTask.questions.some((question) => {
+        return (
+          question.isRequired &&
+          question.difficulty.valueOf() < currentQuestion.difficulty.valueOf()
+        );
+      }) ||
+        currentQuestion.isRequired) &&
+      isCorrect
+    ) {
+      solvedHint.current = translate("requiredQuestionSolvedCorrectly");
+    }
+  }, [
+    currentQuestion.difficulty,
+    currentQuestion.isRequired,
+    currentTask,
+    isCorrect,
+    translate,
+  ]);
 
   return (
     <div className="flex flex-col gap-4 pl-4 pr-2 my-4 h-fit">
       <div className="flex flex-col items-start justify-start gap-2 p-2 bg-buttonbgblue rounded-xl">
-        {currentQuestion.isRequired && isCorrect && (
-          <div className="">{translate("requiredQuestionSolvedCorrectly")}</div>
-        )}
-        {contentText && <div className="">{contentText.current}</div>}
+        {solvedHint.current && <div>{solvedHint.current}</div>}
+        {difficultyHint.current && <div>{difficultyHint.current}</div>}
       </div>
       <div className="flex justify-end w-full">
         <StyledButton shape="freefloatcenter" onClick={closeFeedback}>
