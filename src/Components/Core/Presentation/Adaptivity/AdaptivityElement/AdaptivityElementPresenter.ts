@@ -157,11 +157,25 @@ export default class AdaptivityElementPresenter
     });
   }
 
+  private sortQuestionsByDifficulty(
+    questions: AdaptivityElementQuestionProgressTO[]
+  ) {
+    questions.sort(
+      (
+        a: AdaptivityElementQuestionProgressTO,
+        b: AdaptivityElementQuestionProgressTO
+      ) => {
+        return a.questionDifficulty - b.questionDifficulty;
+      }
+    );
+  }
+
   private mapQuestions(
     questions: AdaptivityElementQuestionProgressTO[],
     requiredDifficulty: AdaptivityElementQuestionDifficultyTypes,
     isTaskOptional: boolean
   ): AdaptivityQuestion[] {
+    this.sortQuestionsByDifficulty(questions);
     return questions.map((question) => {
       // TODO: this is not completely correct yet
       // What happens if the required difficulty is something like 86?

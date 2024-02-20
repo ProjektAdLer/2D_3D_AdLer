@@ -6,7 +6,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
     class="grid w-full gap-4 px-2 py-2"
   >
     <div
-      class="flex items-center  w-full gap-4 "
+      class="flex items-center w-full gap-4 "
     >
       <div
         class=""
@@ -57,7 +57,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
       />
     </div>
     <div
-      class="flex items-center  w-full gap-4 "
+      class="flex items-center w-full gap-4 "
     >
       <div
         class=""
@@ -122,7 +122,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
       </div>
     </div>
     <div
-      class="flex items-center  w-full gap-4 "
+      class="flex items-center w-full gap-4 "
     >
       <div
         class=""

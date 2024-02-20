@@ -60,7 +60,7 @@ export const MockAdaptivityData: APIAdaptivity = {
         {
           questionType: "multipleResponse",
           questionId: 1,
-          questionDifficulty: 0,
+          questionDifficulty: 100,
           questionText:
             "Multiple Choice Frage: Wähle alle richtigen Antworten aus",
           adaptivityRules: [
@@ -89,7 +89,7 @@ export const MockAdaptivityData: APIAdaptivity = {
         {
           questionType: "singleResponse",
           questionId: 2,
-          questionDifficulty: 100,
+          questionDifficulty: 200,
           questionText: "Single Choice: Wähle die richtige Antwort",
           adaptivityRules: [
             {
@@ -117,7 +117,7 @@ export const MockAdaptivityData: APIAdaptivity = {
         {
           questionType: "singleResponse",
           questionId: 3,
-          questionDifficulty: 200,
+          questionDifficulty: 0,
           questionText: "Single Choice: Wähle die richtige Antwort",
           adaptivityRules: [
             {

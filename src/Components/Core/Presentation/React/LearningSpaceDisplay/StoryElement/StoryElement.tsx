@@ -214,7 +214,10 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
         <div className="flex  items-center justify-center p-2 bg-buttonbgblue rounded-xl">
           {contentTexts[pageId].toString()}
         </div>
-        <div className="flex w-full min-h-8 lg:max-w-5xl xl:max-w-6xl justify-end">
+        <div
+          className="flex w-full lg:max-w-5xl xl:max-w-6xl justify-end"
+          style={{ minHeight: "32px" }}
+        >
           <div className="grid w-16 grid-cols-2 lg:w-32 justify-items-end">
             <div>
               {" "}

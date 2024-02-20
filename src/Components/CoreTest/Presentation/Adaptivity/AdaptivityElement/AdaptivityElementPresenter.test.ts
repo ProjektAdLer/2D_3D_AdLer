@@ -252,11 +252,39 @@ describe("AdaptivityElementPresenter", () => {
                   answerText: "TestAnswerText",
                 },
               ],
-              questionDifficulty: 1,
+              questionDifficulty: 100,
+              isCompleted: false,
+            },
+            {
+              questionId: 2,
+              questionText: "TestQuestionText",
+              questionType: AdaptivityElementQuestionTypes.singleResponse,
+              triggers: [],
+              questionAnswers: [
+                {
+                  answerId: 1,
+                  answerText: "TestAnswerText",
+                },
+              ],
+              questionDifficulty: 200,
+              isCompleted: false,
+            },
+            {
+              questionId: 3,
+              questionText: "TestQuestionText",
+              questionType: AdaptivityElementQuestionTypes.singleResponse,
+              triggers: [],
+              questionAnswers: [
+                {
+                  answerId: 1,
+                  answerText: "TestAnswerText",
+                },
+              ],
+              questionDifficulty: 0,
               isCompleted: false,
             },
           ],
-          requiredDifficulty: 1,
+          requiredDifficulty: 100,
           isCompleted: false,
         },
       ],
@@ -277,15 +305,47 @@ describe("AdaptivityElementPresenter", () => {
           isCompleted: false,
           isRequired: true,
           hasBeenCompleted: false,
-          requiredDifficulty: 1,
+          requiredDifficulty: 100,
           questions: [
+            {
+              questionID: 3,
+              questionText: "TestQuestionText",
+              isRequired: false,
+              isCompleted: false,
+              isMultipleChoice: false,
+              difficulty: 0,
+              questionAnswers: [
+                {
+                  answerIndex: 1,
+                  answerText: "TestAnswerText",
+                  isSelected: false,
+                },
+              ],
+              hints: [],
+            },
             {
               questionID: 1,
               questionText: "TestQuestionText",
               isRequired: true,
               isCompleted: false,
               isMultipleChoice: false,
-              difficulty: 1,
+              difficulty: 100,
+              questionAnswers: [
+                {
+                  answerIndex: 1,
+                  answerText: "TestAnswerText",
+                  isSelected: false,
+                },
+              ],
+              hints: [],
+            },
+            {
+              questionID: 2,
+              questionText: "TestQuestionText",
+              isRequired: false,
+              isCompleted: false,
+              isMultipleChoice: false,
+              difficulty: 200,
               questionAnswers: [
                 {
                   answerIndex: 1,
