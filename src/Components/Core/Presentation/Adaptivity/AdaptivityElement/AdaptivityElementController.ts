@@ -60,17 +60,6 @@ export default class AdaptivityElementController
         AdaptivityElementActionTypes.ReferenceAction &&
       selectedHint.hintAction.idData !== undefined
     ) {
-      // if element is in same learning space then highlight,
-      // if not in space nothing will happen
-      // call all element presenters via port
-      const learningWorldPort = CoreDIContainer.get<ILearningWorldPort>(
-        PORT_TYPES.ILearningWorldPort
-      );
-
-      learningWorldPort.onLearningElementHighlighted(
-        selectedHint.hintAction.idData
-      );
-
       await CoreDIContainer.get<IDisplayAdaptivityHintLearningElementUseCase>(
         USECASE_TYPES.IDisplayAdaptivityHintLearningElementUseCase
       ).executeAsync(selectedHint.hintAction.idData);
