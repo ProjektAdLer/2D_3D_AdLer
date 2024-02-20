@@ -25,7 +25,7 @@ export default function AdaptivityElementAnswerFeedback({
       isCorrect ? translate("rightAnswer") : translate("wrongAnswer")
     );
   }, [isCorrect, setHeaderText, translate]);
-  const contentText = useRef("");
+  const contentText = useRef(null as string | null);
   useEffect(() => {
     currentTask.questions.some((question) => {
       return (
@@ -49,8 +49,8 @@ export default function AdaptivityElementAnswerFeedback({
   }, [currentQuestion, currentTask, isCorrect, translate]);
 
   return (
-    <div className="flex flex-col my-4 pl-4 pr-2 h-fit gap-4">
-      <div className="flex flex-col items-start justify-start p-2 bg-buttonbgblue rounded-xl gap-2">
+    <div className="flex flex-col gap-4 pl-4 pr-2 my-4 h-fit">
+      <div className="flex flex-col items-start justify-start gap-2 p-2 bg-buttonbgblue rounded-xl">
         {currentQuestion.isRequired && isCorrect && (
           <div className="">{translate("requiredQuestionSolvedCorrectly")}</div>
         )}
