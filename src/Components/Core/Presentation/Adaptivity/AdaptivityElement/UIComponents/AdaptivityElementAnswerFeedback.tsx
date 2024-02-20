@@ -1,13 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import {
+  AdaptivityQuestion,
+  AdaptivityTask,
+} from "../AdaptivityElementViewModel";
 
 export default function AdaptivityElementAnswerFeedback({
   isCorrect,
+  currentQuestion,
+  currentTask,
   setHeaderText,
   closeFeedback,
 }: {
   isCorrect: boolean;
+  currentQuestion: AdaptivityQuestion;
+  currentTask: AdaptivityTask;
   setHeaderText: (text: string) => void;
   closeFeedback: () => void;
 }) {
@@ -17,21 +25,35 @@ export default function AdaptivityElementAnswerFeedback({
       isCorrect ? translate("rightAnswer") : translate("wrongAnswer")
     );
   }, [isCorrect, setHeaderText, translate]);
+  const contentText = useRef("");
+  useEffect(() => {
+    currentTask.questions.some((question) => {
+      return (
+        question.difficulty.valueOf() > currentQuestion.difficulty.valueOf()
+      );
+    }) &&
+      isCorrect &&
+      (contentText.current = translate(
+        "questionSolvedWithHigherDifficultyQuestionAvailable"
+      ).toString());
+
+    currentTask.questions.some((question) => {
+      return (
+        question.difficulty.valueOf() < currentQuestion.difficulty.valueOf()
+      );
+    }) &&
+      !isCorrect &&
+      (contentText.current = translate(
+        "questionSolvedWithLowerDifficultyQuestionAvailable"
+      ));
+  }, [currentQuestion, currentTask, isCorrect, translate]);
 
   return (
-    <div className="flex w-full my-4 h-fit">
-      {/*       <div className="w-1/2">
-        {isCorrect && (
-          <p className="pl-4 font-bold">
-            Glückwunsch! Diese Antwort war richtig!
-          </p>
-        )}
-        {!isCorrect && (
-          <p className="pl-4 font-bold">
-            Schade, leider war deine Antwort falsch.
-          </p>
-        )}
-      </div> */}
+    <div className="flex flex-col w-full my-4 h-fit">
+      {currentQuestion.isRequired && isCorrect && (
+        <div>{translate("requiredQuestionSolvedCorrectly")}</div>
+      )}
+      {contentText && <div className="h-10">{contentText.current}</div>}
       <div className="flex justify-end w-1/2">
         <StyledButton shape="freefloatcenter" onClick={closeFeedback}>
           <p className="text-sm">{translate("nextButton")}</p>
