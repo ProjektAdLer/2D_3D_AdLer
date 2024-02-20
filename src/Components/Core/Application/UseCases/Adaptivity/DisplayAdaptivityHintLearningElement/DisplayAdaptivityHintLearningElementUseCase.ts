@@ -72,17 +72,10 @@ export default class DisplayAdaptivityHintLearningElementUseCase
 
     // element is in space
     if (isInCurrentSpace) {
-      this.worldPort.onAdaptivityElementUserHintInformed({
-        hintID: -1,
-        showOnIsWrong: true,
-        hintAction: {
-          hintActionType: AdaptivityElementActionTypes.CommentAction,
-          textData:
-            "Der Hinweis für diese Frage befindet sich hier in diesem Raum. Schau dir `" +
-            elements[0].name +
-            "` nochmal an.",
-        },
-      } as AdaptivityElementHintTO);
+      await this.loadLearningElementUseCase.executeAsync({
+        elementID: elementID,
+        isScoreable: true,
+      });
     } else {
       // check if space is available
       const spaceAvailability =
