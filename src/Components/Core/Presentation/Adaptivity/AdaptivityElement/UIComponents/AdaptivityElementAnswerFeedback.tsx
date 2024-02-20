@@ -49,12 +49,14 @@ export default function AdaptivityElementAnswerFeedback({
   }, [currentQuestion, currentTask, isCorrect, translate]);
 
   return (
-    <div className="flex flex-col w-full my-4 h-fit">
-      {currentQuestion.isRequired && isCorrect && (
-        <div>{translate("requiredQuestionSolvedCorrectly")}</div>
-      )}
-      {contentText && <div className="h-10">{contentText.current}</div>}
-      <div className="flex justify-end w-1/2">
+    <div className="flex flex-col my-4 pl-4 pr-2 h-fit gap-4">
+      <div className="flex flex-col items-start justify-start p-2 bg-buttonbgblue rounded-xl gap-2">
+        {currentQuestion.isRequired && isCorrect && (
+          <div className="">{translate("requiredQuestionSolvedCorrectly")}</div>
+        )}
+        {contentText && <div className="">{contentText.current}</div>}
+      </div>
+      <div className="flex justify-end w-full">
         <StyledButton shape="freefloatcenter" onClick={closeFeedback}>
           <p className="text-sm">{translate("nextButton")}</p>
         </StyledButton>

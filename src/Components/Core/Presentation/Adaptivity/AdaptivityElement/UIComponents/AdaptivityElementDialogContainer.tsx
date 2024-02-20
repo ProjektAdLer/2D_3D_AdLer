@@ -183,7 +183,7 @@ export default function AdaptivityElementDialogContainer({
 
               {/* Content */}
               {currentTask === null && currentQuestion === null && (
-                <div className="flex items-center justify-center px-1 mb-4 h-fit rounded-lg font-regular !text-sm lg:m-4">
+                <div className="flex items-center justify-center px-1 mb-4 h-fit rounded-lg font-regular !text-sm lg:mx-4">
                   <AdaptivityElementTaskSelection
                     tasks={contentData.tasks}
                     setHeaderText={setHeaderText}
@@ -192,7 +192,7 @@ export default function AdaptivityElementDialogContainer({
                 </div>
               )}
               {currentTask !== null && currentQuestion === null && (
-                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular lg:m-4">
+                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular lg:mx-4">
                   <AdaptivityElementQuestionSelection
                     selectedTask={currentTask}
                     setHeaderText={setHeaderText}
@@ -206,7 +206,7 @@ export default function AdaptivityElementDialogContainer({
                 currentQuestion !== null &&
                 !showAnswerFeedback &&
                 selectedHint === null && (
-                  <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
+                  <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:mx-4">
                     <AdaptivityElementAnswerSelection
                       question={currentQuestion}
                       setHeaderText={setHeaderText}
