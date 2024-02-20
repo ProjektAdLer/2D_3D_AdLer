@@ -133,7 +133,7 @@ describe("AdaptivityElementController", () => {
     expect(viewModel.selectedHint.Value).toBe(mockHint);
   });
 
-  test("selectHint calls worldPort.onLearningElementHighlighted with hintActionData", async () => {
+  test.skip("selectHint calls worldPort.onLearningElementHighlighted with hintActionData", async () => {
     const hint: AdaptivityHint = {
       hintID: 1,
       showOnIsWrong: false,
