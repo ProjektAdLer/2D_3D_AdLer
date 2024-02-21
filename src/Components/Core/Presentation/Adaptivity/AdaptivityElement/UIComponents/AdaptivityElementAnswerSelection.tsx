@@ -34,7 +34,13 @@ export default function AdaptivityElementAnswerSelection({
         : translate("singleChoiceSelected")) + question.questionText
     );
     setAnswerColors(question.questionAnswers.map(() => "default"));
-  }, [setHeaderText, question.questionText, question.questionAnswers]);
+  }, [
+    setHeaderText,
+    question.questionText,
+    question.questionAnswers,
+    question.isMultipleChoice,
+    translate,
+  ]);
 
   const onAnswerClicked = useCallback(
     (index: number) => {
