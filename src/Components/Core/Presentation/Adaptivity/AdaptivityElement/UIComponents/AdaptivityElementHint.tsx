@@ -2,13 +2,16 @@ import { AdaptivityElementActionTypes } from "src/Components/Core/Domain/Types/A
 import { AdaptivityHint } from "../AdaptivityElementViewModel";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 export default function AdaptivityElementHint({
   hint,
   setHeaderText,
+  closeHint,
 }: {
   hint: AdaptivityHint;
   setHeaderText: (headerText: string) => void;
+  closeHint: () => void;
 }) {
   const { t: translate } = useTranslation("learningElement");
 
@@ -21,7 +24,7 @@ export default function AdaptivityElementHint({
       {hint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.CommentAction &&
         hint.hintAction.textData !== undefined && (
-          <div className="pl-4 my-4 flex items-center justify-center p-2 bg-buttonbgblue rounded-xl">
+          <div className="flex items-center justify-center p-2 pl-4 my-4 bg-buttonbgblue rounded-xl">
             {hint.hintAction.textData}
           </div>
         )}
@@ -34,6 +37,11 @@ export default function AdaptivityElementHint({
         hint.hintAction.textData !== undefined && (
           <div>{hint.hintAction.textData}</div>
         )}
+      <div className="flex justify-end w-full">
+        <StyledButton shape="freefloatcenter" onClick={closeHint}>
+          <p className="text-sm">{translate("nextButton")}</p>
+        </StyledButton>
+      </div>
     </>
   );
 }
