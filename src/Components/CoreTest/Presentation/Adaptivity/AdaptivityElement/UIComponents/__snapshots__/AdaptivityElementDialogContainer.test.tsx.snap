@@ -24,7 +24,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
           class="flex flex-col justify-between p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%] "
         >
           <div
-            class="overflow-auto lg:max-h-[26vh]"
+            class="overflow-auto lg:max-h-[27vh]"
           >
             <div
               class="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl "
@@ -104,7 +104,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
           </div>
           <div>
             <div
-              class=" flex justify-between items-end pt-4 text-[0.5rem] lg:text-xs modal-footer"
+              class=" flex justify-between items-end pt-4 text-[0.5rem] lg:text-xs modal-footer "
             >
               <p />
             </div>

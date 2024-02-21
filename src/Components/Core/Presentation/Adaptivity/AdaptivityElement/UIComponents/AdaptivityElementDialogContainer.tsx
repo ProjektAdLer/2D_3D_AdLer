@@ -242,12 +242,12 @@ export default function AdaptivityElementDialogContainer({
             <div>
               {/* Footer */}
               {
-                <div className=" flex justify-between items-end pt-4 text-[0.5rem] lg:text-xs modal-footer">
+                <div className=" flex justify-between items-end pt-4 text-[0.5rem] lg:text-xs modal-footer ">
                   <p>{footerText}</p>
                   {!(currentTask !== null && currentQuestion !== null) && (
                     <div className="relative flex group">
                       <p
-                        className="right-1 bottom-1"
+                        className="right-1 bottom-1 cursor-pointer"
                         onClick={() => {
                           controller.showFooterTooltip();
                         }}
