@@ -43,24 +43,16 @@ describe("StoryNPCController", () => {
     CoreDIContainer.restore();
   });
 
-  test("picked calls open on the storyElementPresenter when isInteractable is true", () => {
-    viewModel.isInteractable.Value = true;
-    viewModel.storyType = StoryElementType.Intro;
+  test("pointerOver calls BottomTooltipPresenter.displayExitQueryTooltip", () => {
+    systemUnderTest.pointerOver();
 
-    systemUnderTest.picked();
-
-    expect(storyElementPresenterMock.open).toBeCalledTimes(1);
+    expect(bottomTooltipPresenterMock.display).toHaveBeenCalledTimes(1);
   });
 
-  test("picked doesn't call open on the storyElementPresenter when isInteractable is false", () => {
-    viewModel.isInteractable.Value = false;
-
-    systemUnderTest.picked();
-
-    expect(storyElementPresenterMock.open).not.toBeCalled();
-  });
   test("pointerOver scales up iconMeshes", () => {
     const mockedMesh = mockDeep<Mesh>();
+    // @ts-ignore
+    mockedMesh.scaling = Vector3.One();
     viewModel.iconMeshes = [mockedMesh];
 
     systemUnderTest.pointerOver();
@@ -73,8 +65,11 @@ describe("StoryNPCController", () => {
       )
     );
   });
+
   test("pointerOut calls hideBottomTooltip on tooltip presenter", () => {
     systemUnderTest["hoverToolTipId"] = 1; // set tooltip id to non-default value
+    const mockedMesh = mockDeep<Mesh>();
+    viewModel.iconMeshes = [mockedMesh];
 
     systemUnderTest.pointerOut();
 
@@ -93,9 +88,28 @@ describe("StoryNPCController", () => {
 
   test("pointerOut resets hoverToolTipId to -1 when hoverTooltipId is set", () => {
     systemUnderTest["hoverToolTipId"] = 1; // set tooltip id to non-default value
+    const mockedMesh = mockDeep<Mesh>();
+    viewModel.iconMeshes = [mockedMesh];
 
     systemUnderTest.pointerOut();
 
     expect(systemUnderTest["hoverToolTipId"]).toBe(-1);
+  });
+
+  test("picked calls open on the storyElementPresenter when isInteractable is true", () => {
+    viewModel.isInteractable.Value = true;
+    viewModel.storyType = StoryElementType.Intro;
+
+    systemUnderTest.picked();
+
+    expect(storyElementPresenterMock.open).toBeCalledTimes(1);
+  });
+
+  test("picked doesn't call open on the storyElementPresenter when isInteractable is false", () => {
+    viewModel.isInteractable.Value = false;
+
+    systemUnderTest.picked();
+
+    expect(storyElementPresenterMock.open).not.toBeCalled();
   });
 });

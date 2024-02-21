@@ -3,10 +3,13 @@
 exports[`AdaptivityElementAnswerFeedback should render 1`] = `
 <div>
   <div
-    class="flex w-full my-4 h-fit"
+    class="flex flex-col gap-4 pl-4 pr-2 my-4 h-fit"
   >
     <div
-      class="flex justify-end w-1/2"
+      class="flex flex-col items-start justify-start bg-buttonbgblue rounded-xl"
+    />
+    <div
+      class="flex justify-end w-full"
     >
       <div
         class=""
