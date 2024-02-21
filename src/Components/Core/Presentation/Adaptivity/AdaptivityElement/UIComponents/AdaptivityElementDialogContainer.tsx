@@ -235,6 +235,7 @@ export default function AdaptivityElementDialogContainer({
                   <AdaptivityElementHint
                     hint={selectedHint}
                     setHeaderText={setHeaderText}
+                    closeHint={controller.closeHint}
                   />
                 )}
             </div>
