@@ -4,7 +4,7 @@ export enum LearningSpaceTemplateType {
   T = "T_40X32_13L",
   R6 = "R_20X20_6L",
   R8 = "R_20X30_8L",
-  R15 = "R_40X37_15L",
+  D = "D_40X37_15L",
   None = "",
 }
 

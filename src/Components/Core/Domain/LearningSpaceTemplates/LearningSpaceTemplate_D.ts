@@ -1,8 +1,8 @@
 import { LearningSpaceTemplateType } from "../Types/LearningSpaceTemplateType";
 import ILearningSpaceTemplate from "./ILearningSpaceTemplate";
 
-export const LearningSpaceTemplate_R15: ILearningSpaceTemplate = {
-  name: LearningSpaceTemplateType.R15,
+export const LearningSpaceTemplate_D: ILearningSpaceTemplate = {
+  name: LearningSpaceTemplateType.D,
   cornerPoints: [
     { x: -8.4, y: 7.6 }, // A
     { x: 1.2, y: 7.6 }, // B

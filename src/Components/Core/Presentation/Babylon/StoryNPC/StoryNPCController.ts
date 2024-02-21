@@ -66,9 +66,9 @@ export default class StoryNPCController implements IStoryNPCController {
   private scaleUpIcon(): void {
     this.viewModel.iconMeshes?.forEach((mesh) => {
       mesh.scaling = new Vector3(
-        this.viewModel.iconScaleUpOnHover,
-        this.viewModel.iconScaleUpOnHover,
-        this.viewModel.iconScaleUpOnHover
+        mesh.scaling._x * this.viewModel.iconScaleUpOnHover,
+        mesh.scaling._y * this.viewModel.iconScaleUpOnHover,
+        mesh.scaling._z * this.viewModel.iconScaleUpOnHover
       );
     });
   }
@@ -76,5 +76,6 @@ export default class StoryNPCController implements IStoryNPCController {
     this.viewModel.iconMeshes?.forEach((mesh) => {
       mesh.scaling = Vector3.One();
     });
+    this.viewModel.iconMeshes[0].rotation = new Vector3(0, -Math.PI / 4, 0);
   }
 }

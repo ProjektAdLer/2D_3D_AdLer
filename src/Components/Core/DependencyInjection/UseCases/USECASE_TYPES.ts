@@ -51,7 +51,9 @@ const USECASE_TYPES = {
     "ILoadExternalLearningElementUseCase"
   ),
   IScoreAdaptivityElementUseCase: Symbol("IScoreAdaptivityElementUseCase"),
-  IDisplayLearningElementUseCase: Symbol("IDisplayLearningElementUseCase"),
+  IDisplayAdaptivityHintLearningElementUseCase: Symbol(
+    "IDisplayAdaptivityHintLearningElementUseCase"
+  ),
   ILogoutUseCase: Symbol("ILogoutUseCase"),
   ILoadStoryElementUseCase: Symbol("ILoadStoryElementUseCase"),
   IBeginStoryElementIntroCutSceneUseCase: Symbol(

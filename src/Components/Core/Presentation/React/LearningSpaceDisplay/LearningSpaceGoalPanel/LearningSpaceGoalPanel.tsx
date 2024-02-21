@@ -25,7 +25,7 @@ export default function LearningSpaceGoalPanel() {
   if (!viewModel || !controller || goals?.length <= 0) return null;
 
   return (
-    <>
+    <div>
       <img
         className="w-[48px] lg:w-[69px]"
         src={GoalIcon}
@@ -34,7 +34,7 @@ export default function LearningSpaceGoalPanel() {
       ></img>
 
       {isOpen && (
-        <StyledContainer className="fixed z-10 max-w-2xl p-2 overflow-hidden rounded-lg top-12 right-0 md:top-20 lg:right-40 bg-buttonbgblue">
+        <StyledContainer className="fixed z-10 max-w-2xl max-h-[90vh] p-2 overflow-auto rounded-lg top-12 right-0 md:top-20 lg:right-40 bg-buttonbgblue">
           <div className="flex flex-col gap-4 m-2">
             {goals && (
               <div className="flex flex-row">
@@ -97,6 +97,6 @@ export default function LearningSpaceGoalPanel() {
           </div>
         </StyledContainer>
       )}
-    </>
+    </div>
   );
 }

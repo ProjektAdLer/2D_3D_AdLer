@@ -3,7 +3,7 @@
 exports[`AdaptivityElementHint should render CommentAction 1`] = `
 <div>
   <div
-    class="pl-4 my-4 font-bold"
+    class="pl-4 my-4 flex items-center justify-center p-2 bg-buttonbgblue rounded-xl"
   >
     test
   </div>

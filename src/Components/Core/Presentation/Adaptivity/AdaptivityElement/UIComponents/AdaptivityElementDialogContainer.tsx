@@ -183,7 +183,7 @@ export default function AdaptivityElementDialogContainer({
 
               {/* Content */}
               {currentTask === null && currentQuestion === null && (
-                <div className="flex items-center justify-center px-1 mb-4 h-fit rounded-lg font-regular !text-sm lg:m-4">
+                <div className="flex items-center justify-center px-1 mb-4 h-fit rounded-lg font-regular !text-sm lg:mx-4">
                   <AdaptivityElementTaskSelection
                     tasks={contentData.tasks}
                     setHeaderText={setHeaderText}
@@ -192,7 +192,7 @@ export default function AdaptivityElementDialogContainer({
                 </div>
               )}
               {currentTask !== null && currentQuestion === null && (
-                <div className="flex items-center justify-center px-1 mb-4  rounded-lg font-regular lg:m-4">
+                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular lg:mx-4">
                   <AdaptivityElementQuestionSelection
                     selectedTask={currentTask}
                     setHeaderText={setHeaderText}
@@ -206,7 +206,7 @@ export default function AdaptivityElementDialogContainer({
                 currentQuestion !== null &&
                 !showAnswerFeedback &&
                 selectedHint === null && (
-                  <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:m-4">
+                  <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:mx-4">
                     <AdaptivityElementAnswerSelection
                       question={currentQuestion}
                       setHeaderText={setHeaderText}
@@ -222,6 +222,8 @@ export default function AdaptivityElementDialogContainer({
                 selectedHint === null && (
                   <AdaptivityElementAnswerFeedback
                     isCorrect={currentQuestion.isCompleted!}
+                    currentQuestion={currentQuestion}
+                    currentTask={currentTask}
                     setHeaderText={setHeaderText}
                     closeFeedback={controller.closeFeedback}
                   />
@@ -254,9 +256,9 @@ export default function AdaptivityElementDialogContainer({
                       </p>
 
                       {showFooterTooltip && (
-                        <div className="fixed right-2 top-2 flex flex-col bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto rounded-xl p-4 flex gap-2 ">
-                          <div className="flex flex-row gap-4 w-full justify-between">
-                            <h1 className="text-xs lg:text-xl font-bold">
+                        <div className="fixed flex flex-col gap-2 p-4 right-2 top-2 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto rounded-xl ">
+                          <div className="flex flex-row justify-between w-full gap-4">
+                            <h1 className="text-xs font-bold lg:text-xl">
                               {translate("headerLegend")}
                             </h1>
                             <StyledButton
