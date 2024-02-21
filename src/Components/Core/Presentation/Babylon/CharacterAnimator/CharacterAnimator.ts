@@ -67,6 +67,8 @@ export default class CharacterAnimator implements ICharacterAnimator {
     this.stateMachine.applyAction(action);
   }
 
+  // -- Setup Animations --
+
   private setupIdleAnimation(): void {
     this.idleAnimation.play(true);
     this.idleAnimation.setWeightForAllAnimatables(1.0);
@@ -94,6 +96,15 @@ export default class CharacterAnimator implements ICharacterAnimator {
     );
   }
 
+  @bind
+  private setWalkingAnimationSpeed(): void {
+    if (this.stateMachine.CurrentState !== CharacterAnimationStates.Walking)
+      return;
+
+    let velocity = this.getCharacterVelocity().length();
+    this.walkAnimation.speedRatio = Math.max(velocity, 0);
+  }
+
   private setupInteractionAnimation(): void {
     this.interactionAnimation!.onAnimationGroupEndObservable.add(() => {
       this.stateMachine.applyAction(
@@ -116,6 +127,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
       onTransitionCallback: this.transitionFromInteractToIdle,
     });
   }
+  // -- Rotation Callback --
 
   @bind
   private rotateCharacter(): void {
@@ -139,6 +151,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
         this.rotationObserverRef
       );
   }
+  // -- Animation Transition --
 
   @bind
   private onBeforeAnimationTransitionObserver(
@@ -255,14 +268,5 @@ export default class CharacterAnimator implements ICharacterAnimator {
     transitionTimeInMs: number
   ): number {
     return this.scenePresenter.Scene.deltaTime / transitionTimeInMs;
-  }
-
-  @bind
-  private setWalkingAnimationSpeed(): void {
-    if (this.stateMachine.CurrentState !== CharacterAnimationStates.Walking)
-      return;
-
-    let velocity = this.getCharacterVelocity().length();
-    this.walkAnimation.speedRatio = Math.max(velocity, 0);
   }
 }
