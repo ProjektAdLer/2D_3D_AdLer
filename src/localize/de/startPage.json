@@ -2,15 +2,15 @@
   "welcome": "Willkommen in AdLer!",
   "moodleLoginSubheading": "Bitte loggen Sie sich in Moodle ein.",
   "loginSuccessfullSubheading": "Login erfolgreich!",
-  "learningWorldButton": "Gehe zum Lernwelt-Menü",
+  "learningWorldButton": "zum Lernwelt-Menü",
   "copyright": "© Projekt AdLer, Technische Hochschule Aschaffenburg, Hochschule für angewandte Wissenschaften Kempten, ZFH - Zentrum für Fernstudien im Hochschulverbund",
 
   "userName": "Nutzername",
   "password": "Passwort",
   "loginFail": "Login fehlgeschlagen.",
   "serverTimeOut": "Antwort des Servers hat zu lange gedauert.",
-  "loginRetry": "Bitte versuche dich noch einmal anzumelden.",
-  "alreadyLoggedIn": "Du bist bereits angemeldet.",
-  "loginFailAdvise": "Bitte überprüfe deine Eingaben.",
+  "loginRetry": "Bitte versuchen Sie sich noch einmal anzumelden.",
+  "alreadyLoggedIn": "Sie sind bereits angemeldet.",
+  "loginFailAdvise": "Bitte überprüfen sie Ihre Eingaben.",
   "loginButton": "Login"
 }
