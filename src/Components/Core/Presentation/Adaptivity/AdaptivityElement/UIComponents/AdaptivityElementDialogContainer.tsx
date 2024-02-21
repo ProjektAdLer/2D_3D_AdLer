@@ -131,7 +131,7 @@ export default function AdaptivityElementDialogContainer({
               event.stopPropagation();
             }}
           >
-            <div className="overflow-auto lg:max-h-[26vh]">
+            <div className="overflow-auto lg:max-h-[27vh]">
               {/* Header */}
               <div className="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
                 {!(currentTask === null && currentQuestion === null) &&
@@ -243,12 +243,12 @@ export default function AdaptivityElementDialogContainer({
             <div>
               {/* Footer */}
               {
-                <div className=" flex justify-between items-end pt-4 text-[0.5rem] lg:text-xs modal-footer">
+                <div className=" flex justify-between items-end pt-4 text-[0.5rem] lg:text-xs modal-footer ">
                   <p>{footerText}</p>
                   {!(currentTask !== null && currentQuestion !== null) && (
                     <div className="relative flex group">
                       <p
-                        className="right-1 bottom-1"
+                        className="right-1 bottom-1 cursor-pointer"
                         onClick={() => {
                           controller.showFooterTooltip();
                         }}

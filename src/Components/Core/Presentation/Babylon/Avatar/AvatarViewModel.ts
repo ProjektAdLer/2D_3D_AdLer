@@ -16,6 +16,8 @@ export default class AvatarViewModel {
 
   public meshes: Mesh[];
 
+  public readonly interactionRadius: number = 2.5; // in m
+
   // transform
   public parentNode: TransformNode;
   public modelRootNode: TransformNode;

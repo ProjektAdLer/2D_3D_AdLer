@@ -132,9 +132,13 @@ export default class AvatarController implements IAvatarController {
     )
       return;
 
-    this.pointerMovementTarget = this.navigation.Plugin.getClosestPoint(
-      pointerInfo.pickInfo.pickedPoint.multiplyByFloats(1, 0, 1)
+    const projectedPoint = pointerInfo.pickInfo.pickedPoint.multiplyByFloats(
+      1,
+      0,
+      1
     );
+    const snappedPoint = this.navigation.Plugin.getClosestPoint(projectedPoint);
+    this.pointerMovementTarget = snappedPoint;
   }
 
   @bind
@@ -148,7 +152,7 @@ export default class AvatarController implements IAvatarController {
     ) {
       this.learningSpacePresenter.broadcastAvatarPosition(
         this.viewModel.parentNode.position,
-        2
+        this.viewModel.interactionRadius
       );
       this.lastFramePosition = this.viewModel.parentNode.position;
     }

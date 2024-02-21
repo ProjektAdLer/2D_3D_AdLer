@@ -104,6 +104,20 @@ describe("CharacterAnimator", () => {
     `);
   });
 
+  test("removeRotationObserver removes the onBeforeRenderObservable on the scene", () => {
+    const mockObserver = mock<Nullable<Observer<Scene>>>();
+    systemUnderTest["rotationObserverRef"] = mockObserver;
+
+    systemUnderTest["removeRotationObserver"]();
+
+    expect(
+      scenePresenterMock.Scene.onBeforeRenderObservable.remove
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      scenePresenterMock.Scene.onBeforeRenderObservable.remove
+    ).toHaveBeenCalledWith(mockObserver);
+  });
+
   test("onBeforeAnimationTransitionObserver removes the given observer from the onBeforeAniamtionObservable of the scene when the transition is done", () => {
     const fromAnimation = mock<AnimationGroup>();
     const toAnimation = mock<AnimationGroup>();
