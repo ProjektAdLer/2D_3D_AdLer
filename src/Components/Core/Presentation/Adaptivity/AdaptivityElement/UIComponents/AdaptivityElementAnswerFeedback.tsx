@@ -72,9 +72,11 @@ export default function AdaptivityElementAnswerFeedback({
 
   return (
     <div className="flex flex-col gap-4 pl-4 pr-2 my-4 h-fit">
-      <div className="flex flex-col items-start justify-start gap-2 p-2 bg-buttonbgblue rounded-xl">
-        {solvedHint.current && <div>{solvedHint.current}</div>}
-        {difficultyHint.current && <div>{difficultyHint.current}</div>}
+      <div className="flex flex-col items-start justify-start bg-buttonbgblue rounded-xl">
+        {solvedHint.current && <div className="p-2">{solvedHint.current}</div>}
+        {difficultyHint.current && (
+          <div className="p-2">{difficultyHint.current}</div>
+        )}
       </div>
       <div className="flex justify-end w-full">
         <StyledButton shape="freefloatcenter" onClick={closeFeedback}>
