@@ -4,6 +4,4 @@ import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementT
 
 export default interface IStoryNPCPresenter extends ILearningWorldAdapter {
   onAvatarPositionChanged(position: Vector3, interactionRadius: number): void;
-  onStoryElementCutSceneTriggered(storyType: StoryElementType): void;
-  onStoryElementCutSceneFinished(): void;
 }
