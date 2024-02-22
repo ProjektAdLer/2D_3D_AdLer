@@ -28,6 +28,7 @@ export default class DecorationView {
   public async asyncSetup(): Promise<void> {
     //TODO: Refactor this when we have a better Decoration System in AdLer
     let results = await this.setupSpaceDecorationModels();
+    if (!results) return;
     this.viewModel.meshes.Value = results as Mesh[];
     this.viewModel.meshes.Value.forEach((mesh) => {
       mesh.translate(new Vector3(0, -0.05, 0), 1);
