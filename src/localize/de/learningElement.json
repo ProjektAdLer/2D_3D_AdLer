@@ -24,23 +24,20 @@
 
   "legendHover": "Klicken Sie hier, um die Symbollegende anzuzeigen",
   "headerLegend": "Symbollegende Adaptivitätselement",
-
   "headerLegendTask": "Symbole für Aufgaben",
   "legendTaskRequired": "Diese Aufgabe ist für den Abschluss des Adaptivitätselements erforderlich",
   "legendTaskRequiredSolved": "Diese erforderliche Aufgabe wurde erfolgreich abgeschlossen",
   "legendTaskNotRequired": "Kein Symbol - Diese Aufgabe ist zum Abschluss des Adaptivitätselements nicht erforderlich",
-
   "legendHeaderDifficulties": "Symbole für Schwierigkeiten",
-  "legendEasyDifficulty": "Leichte Schwierigkeit vorhanden und erforderlich",
-  "legendMediumDifficulty": "Mittlere Schwierigkeit vorhanden und falsch beantwortet",
-  "legendHardDifficulty": "Hohe Schwierigkeit vorhanden, erforderlich und abgeschlossen",
-
+  "legendEasyDifficulty": "Schwierigkeitssymbol - Leicht - optional",
+  "legendMediumDifficulty": "Schwierigkeitssymbol - Mittelschwer - optional",
+  "legendHardDifficulty": "Schwierigkeitssymbol - Schwer - erforderlich",
   "legendHeaderStar": "Zustände von Schwierigkeitsgraden",
   "legendStarRequiredUnsolved": "Erforderliche Schwierigkeit für Abschluss der Aufgabe",
   "legendStarRequiredTried": "Erforderliche Schwierigkeit falsch beantwortet",
   "legendStarRequiredSolved": "Erforderliche Schwierigkeit erfolgreich abgeschlossen",
-  "legendStarNotRequiredUnsolved": "Nicht erforderliche Schwierigkeit vorhanden",
-  "legendStarNotRequiredTried": "Nicht erforderliche Schwierigkeit falsch beantwortet",
-  "legendStarNotRequiredSolved": "Nicht erforderliche Schwierigkeit erfolgreich abgeschlossen",
+  "legendStarNotRequiredUnsolved": "optionale Schwierigkeit vorhanden",
+  "legendStarNotRequiredTried": "optionale Schwierigkeit falsch beantwortet",
+  "legendStarNotRequiredSolved": "optionale Schwierigkeit erfolgreich abgeschlossen",
   "legendNoStar": "Schwierigkeitsgrad nicht vorhanden"
 }

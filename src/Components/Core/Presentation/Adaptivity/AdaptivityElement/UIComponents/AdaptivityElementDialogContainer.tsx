@@ -10,9 +10,9 @@ import robotNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_a
 import requiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-solved-icon.svg";
 import requiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-tried.svg";
 import requiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-unsolved-icon.svg";
-import notRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-solved-icon.svg";
-import notRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-tried.svg";
-import notRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-unsolved-icon.svg";
+import notRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-solved.svg";
+import notRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-tried.svg";
+import notRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-unsolved-icon.svg";
 import placeholderIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-placeholder.svg";
 import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
 import solvedTaskIcon from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
@@ -131,7 +131,7 @@ export default function AdaptivityElementDialogContainer({
         </div>
 
         {/* Modal */}
-        <div className="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl lg:max-h-[32vh] pt-2 lg:pt-0 row-start-3 ">
+        <div className="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl max-h-[100vh] lg:max-h-[32vh] pt-2 lg:pt-0 row-start-3 ">
           <div
             className="flex flex-col justify-between p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%] "
             onClick={(event) => {
@@ -286,7 +286,7 @@ export default function AdaptivityElementDialogContainer({
                               <tr>
                                 <td className="pr-2">
                                   <img
-                                    className="w-2 lg:w-6"
+                                    className="w-4 lg:w-6"
                                     src={requiredTaskIcon}
                                     alt="required Task icon"
                                   />
@@ -296,7 +296,7 @@ export default function AdaptivityElementDialogContainer({
                               <tr>
                                 <td className="pr-2">
                                   <img
-                                    className="w-2 lg:w-6"
+                                    className="w-4 lg:w-6"
                                     src={solvedTaskIcon}
                                     alt="required unsolved icon"
                                   />
@@ -318,7 +318,7 @@ export default function AdaptivityElementDialogContainer({
                                 <td className="pr-2">
                                   <AdaptivityElementDifficultyStars
                                     easyState={
-                                      AdaptivityElementDifficultyStarState.RequiredUnsolved
+                                      AdaptivityElementDifficultyStarState.NotRequiredSolved
                                     }
                                     mediumState={
                                       AdaptivityElementDifficultyStarState.Empty
@@ -329,7 +329,9 @@ export default function AdaptivityElementDialogContainer({
                                     starClassName="w-4 h-4 sm:w-6 sm:h-6 "
                                   />
                                 </td>
-                                <td>{translate("legendEasyDifficulty")}</td>
+                                <td className="">
+                                  {translate("legendEasyDifficulty")}
+                                </td>
                               </tr>
                               <tr>
                                 <td className="pr-2">
@@ -338,7 +340,7 @@ export default function AdaptivityElementDialogContainer({
                                       AdaptivityElementDifficultyStarState.Empty
                                     }
                                     mediumState={
-                                      AdaptivityElementDifficultyStarState.NotRequiredTried
+                                      AdaptivityElementDifficultyStarState.NotRequiredSolved
                                     }
                                     hardState={
                                       AdaptivityElementDifficultyStarState.Empty
@@ -375,17 +377,19 @@ export default function AdaptivityElementDialogContainer({
                               <tr>
                                 <td className="pr-2">
                                   <img
-                                    className="w-2 lg:w-6"
+                                    className="w-4 lg:w-6"
                                     src={requiredUnsolvedIcon}
                                     alt="required unsolved icon"
                                   />
                                 </td>
-                                <td>{translate("legendStarRequiredSolved")}</td>
+                                <td>
+                                  {translate("legendStarRequiredUnsolved")}
+                                </td>
                               </tr>
                               <tr>
                                 <td className="pr-2">
                                   <img
-                                    className="w-2 lg:w-6"
+                                    className="w-4 lg:w-6"
                                     src={requiredTriedIcon}
                                     alt="required unsolved icon"
                                   />
@@ -395,20 +399,18 @@ export default function AdaptivityElementDialogContainer({
                               <tr>
                                 <td className="pr-2">
                                   <img
-                                    className="w-2 lg:w-6"
+                                    className="w-4 lg:w-6"
                                     src={requiredSolvedIcon}
                                     alt="not required unsolved icon"
                                   />
                                 </td>
 
-                                <td>
-                                  {translate("legendStarRequiredUnsolved")}
-                                </td>
+                                <td>{translate("legendStarRequiredSolved")}</td>
                               </tr>
                               <tr>
                                 <td className="pr-2">
                                   <img
-                                    className="w-2 lg:w-6"
+                                    className="w-4 lg:w-6"
                                     src={notRequiredUnsolvedIcon}
                                     alt="not required unsolved icon"
                                   />
@@ -421,7 +423,7 @@ export default function AdaptivityElementDialogContainer({
                               <tr>
                                 <td className="pr-2">
                                   <img
-                                    className="w-2 lg:w-6"
+                                    className="w-4 lg:w-6"
                                     src={notRequiredTriedIcon}
                                     alt="not required unsolved icon"
                                   />
@@ -434,7 +436,7 @@ export default function AdaptivityElementDialogContainer({
                               <tr>
                                 <td className="pr-2">
                                   <img
-                                    className="w-2 lg:w-6"
+                                    className="w-4 lg:w-6"
                                     src={notRequiredSolvedIcon}
                                     alt="not required unsolved icon"
                                   />
@@ -448,7 +450,7 @@ export default function AdaptivityElementDialogContainer({
                               <tr>
                                 <td className="pr-2">
                                   <img
-                                    className="w-2 lg:w-6"
+                                    className="w-4 lg:w-6"
                                     src={placeholderIcon}
                                     alt="not required unsolved icon"
                                   />
