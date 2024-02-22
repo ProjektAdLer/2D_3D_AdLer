@@ -18,7 +18,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
         />
       </div>
       <div
-        class="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl lg:max-h-[32vh] pt-2 lg:pt-0 row-start-3 "
+        class="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl max-h-[100vh] lg:max-h-[32vh] pt-2 lg:pt-0 row-start-3 "
       >
         <div
           class="flex flex-col justify-between p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%] "
