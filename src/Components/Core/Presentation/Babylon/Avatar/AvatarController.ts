@@ -125,6 +125,7 @@ export default class AvatarController implements IAvatarController {
 
   @bind
   private processPointerEvent(pointerInfo: PointerInfo) {
+    // abort if the pointer event is not a tap or if no collision was detected
     if (
       pointerInfo.type !== PointerEventTypes.POINTERTAP ||
       pointerInfo.pickInfo === null ||
@@ -132,13 +133,34 @@ export default class AvatarController implements IAvatarController {
     )
       return;
 
-    const projectedPoint = pointerInfo.pickInfo.pickedPoint.multiplyByFloats(
-      1,
-      0,
-      1
+    // project the picked point to the ground and snap it to the navmesh
+    const pickedPointOnGround =
+      pointerInfo.pickInfo.pickedPoint.multiplyByFloats(1, 0, 1);
+    const snappedPoint =
+      this.navigation.Plugin.getClosestPoint(pickedPointOnGround);
+    const distanceToSnappedPoint = Vector3.Distance(
+      pickedPointOnGround,
+      snappedPoint
     );
-    const snappedPoint = this.navigation.Plugin.getClosestPoint(projectedPoint);
-    this.pointerMovementTarget = snappedPoint;
+
+    // if the snapped point is already on the navmesh (ie. close to the projected point), use it as the movement target
+    if (distanceToSnappedPoint < 0.1) {
+      this.pointerMovementTarget = snappedPoint;
+    } else {
+      // refine the movement target
+      // take original snap as distance estimation from picked point to navmesh edge
+      // adjust target in direction of avatar
+      const pickedPointToAvatar =
+        this.viewModel.parentNode.position.subtract(pickedPointOnGround);
+      const pickedPointToAvatarNormalized = pickedPointToAvatar.normalize();
+      const adjustedTarget = pickedPointToAvatarNormalized
+        .scale(distanceToSnappedPoint)
+        .add(pickedPointOnGround);
+
+      // snap adjusted target to navmesh again
+      this.pointerMovementTarget =
+        this.navigation.Plugin.getClosestPoint(adjustedTarget);
+    }
   }
 
   @bind

@@ -4,7 +4,6 @@ import {
   IMouseEvent,
   KeyboardEventTypes,
   KeyboardInfo,
-  MeshBuilder,
   PickingInfo,
   PointerEventTypes,
   PointerInfo,
@@ -145,6 +144,14 @@ describe("AvatarController", () => {
   });
 
   describe("input handling", () => {
+    test("applyInputs returns if inputEnabled is false", () => {
+      viewModel.inputEnabled.Value = false;
+
+      systemUnderTest["applyInputs"]();
+
+      expect(characterNavigatorMock.startMovement).not.toHaveBeenCalled();
+    });
+
     test(
       "applyInputs applies the pointerMovementTarget to the avatar " +
         "when keyMovementTarget is zero and pointerMovementTarget is non-zero",
@@ -312,31 +319,48 @@ describe("AvatarController", () => {
       expect(crowdMock.agentGoto).not.toHaveBeenCalled();
     });
 
-    test("processPointerEvent sets the pointerMovementTarget in the viewModel", () => {
-      // prevent execution of debug code
-      config.isDebug = false;
-
+    test("processPointerEvent sets pointerMovementTarget to first snapped point if the distance between pickedPoint and snapped point is smaller 0.01", () => {
       const pointerInfo = setupMockedPointerInfo(
         PointerEventTypes.POINTERTAP,
         false,
         new Vector3(42, 42, 42)
       );
       recastJSPluginMock.getClosestPoint.mockReturnValueOnce(
-        new Vector3(42, 42, 42)
+        new Vector3(42, 0, 42.05)
       );
 
       systemUnderTest["processPointerEvent"](pointerInfo);
 
       expect(systemUnderTest["pointerMovementTarget"]).not.toBeNull();
+      expect(systemUnderTest["pointerMovementTarget"]!).toBeDefined();
       expect(systemUnderTest["pointerMovementTarget"]!.x).toBe(42);
-      expect(systemUnderTest["pointerMovementTarget"]!.y).toBe(42);
-      expect(systemUnderTest["pointerMovementTarget"]!.z).toBe(42);
-      expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledTimes(1);
-      expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledWith(
-        new Vector3(42, 0, 42)
-      );
-      //might need to add the last 2 expects to process keyboard event too.
+      expect(systemUnderTest["pointerMovementTarget"]!.y).toBe(0);
+      expect(systemUnderTest["pointerMovementTarget"]!.z).toBe(42.05);
     });
+  });
+
+  test("processPointerEvent sets pointerMovementTarget to adjusted target if the distance between pickedPoint and snapped point is greater 0.01", () => {
+    viewModel.parentNode = new TransformNode("mockParentNode");
+    viewModel.parentNode.position = new Vector3(42, 0, 43);
+    const pointerInfo = setupMockedPointerInfo(
+      PointerEventTypes.POINTERTAP,
+      false,
+      new Vector3(42, 42, 42)
+    );
+    recastJSPluginMock.getClosestPoint.mockReturnValueOnce(
+      new Vector3(42, 0, 42.5)
+    );
+    recastJSPluginMock.getClosestPoint.mockImplementationOnce((target) => {
+      return target;
+    });
+
+    systemUnderTest["processPointerEvent"](pointerInfo);
+
+    expect(systemUnderTest["pointerMovementTarget"]).not.toBeNull();
+    expect(systemUnderTest["pointerMovementTarget"]).toBeDefined();
+    expect(systemUnderTest["pointerMovementTarget"]!.x).toBe(42);
+    expect(systemUnderTest["pointerMovementTarget"]!.y).toBe(0);
+    expect(systemUnderTest["pointerMovementTarget"]!.z).toBe(42.5);
   });
 
   test("onMovementTargetReached sets movementTarget in view model to null", () => {
