@@ -50,6 +50,9 @@ const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
   ambienceModel: require("../../../../Assets/3dModels/campusTheme/env_campus.glb"),
   storyElementModel:
     LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+  modelLinkLShape: require("../../../../Assets/3dModels/campusTheme/dLShape Sampleroom - Deko.glb"),
+  modelLink2x2: require("../../../../Assets/3dModels/campusTheme/d2x2Shape Sampleroom - Deko.glb"),
+  modelLink2x3: require("../../../../Assets/3dModels/campusTheme/d2x3Shape Sampleroom - Deko.glb"),
 };
 
 export default LearningSpaceTheme_Campus;

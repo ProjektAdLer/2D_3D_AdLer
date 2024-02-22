@@ -50,6 +50,9 @@ const LearningSpaceTheme_Suburb: ILearningSpaceTheme = {
   ambienceModel: require("../../../../Assets/3dModels/suburbTheme/env_suburb.glb"),
   storyElementModel:
     LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+  modelLinkLShape: require("../../../../Assets/3dModels/suburbTheme/dLShape Sampleroom - Deko.glb"),
+  modelLink2x2: require("../../../../Assets/3dModels/suburbTheme/d2x2Shape Sampleroom - Deko.glb"),
+  modelLink2x3: require("../../../../Assets/3dModels/suburbTheme/d2x3Shape Sampleroom - Deko.glb"),
 };
 
 export default LearningSpaceTheme_Suburb;

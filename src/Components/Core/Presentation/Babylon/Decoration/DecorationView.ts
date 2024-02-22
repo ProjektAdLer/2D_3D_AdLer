@@ -8,13 +8,6 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import { Mesh, Vector3 } from "@babylonjs/core";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
-import LearningSpaceTheme_Campus from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Campus";
-import LearningSpaceTheme_Arcade from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Arcade";
-import LearningSpaceTheme_Suburb from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Suburb";
-import IDecorationTheme from "./IDecorationTheme";
-import DecorationTheme_Campus from "./DecorationTheme_Campus";
-import DecorationTheme_Arcade from "./DecorationTheme_Arcade";
-import DecorationTheme_Suburb from "./DecorationTheme_Suburb";
 
 export default class DecorationView {
   private scenePresenter: IScenePresenter;
@@ -36,24 +29,9 @@ export default class DecorationView {
   }
 
   private async setupSpaceDecorationModels(): Promise<any> {
-    let theme: IDecorationTheme;
-
-    switch (
-      LearningSpaceThemeLookup.getLearningSpaceTheme(this.viewModel.theme)
-    ) {
-      case LearningSpaceTheme_Campus:
-        theme = DecorationTheme_Campus;
-        break;
-      case LearningSpaceTheme_Arcade:
-        theme = DecorationTheme_Arcade;
-        break;
-      case LearningSpaceTheme_Suburb:
-        theme = DecorationTheme_Suburb;
-        break;
-      default:
-        theme = DecorationTheme_Campus;
-        break;
-    }
+    let theme = LearningSpaceThemeLookup.getLearningSpaceTheme(
+      this.viewModel.theme
+    );
 
     let results;
     switch (this.viewModel.learningSpaceTemplateType.Value) {
