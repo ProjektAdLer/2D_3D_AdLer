@@ -5,6 +5,7 @@ import DecorationViewModel from "./DecorationViewModel";
 import IDecorationPresenter from "./IDecorationPresenter";
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
+import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 
 @injectable()
 export default class DecorationBuilder extends AsyncPresentationBuilder<
@@ -14,6 +15,7 @@ export default class DecorationBuilder extends AsyncPresentationBuilder<
   IDecorationPresenter
 > {
   spaceTemplate: LearningSpaceTemplateType;
+  theme: LearningSpaceThemeType;
   constructor() {
     super(DecorationViewModel, undefined, DecorationView, DecorationPresenter);
   }
@@ -27,6 +29,7 @@ export default class DecorationBuilder extends AsyncPresentationBuilder<
     super.buildViewModel();
 
     this.viewModel!.learningSpaceTemplateType.Value = this.spaceTemplate;
+    this.viewModel!.theme = this.theme;
   }
 
   buildView(): void {
