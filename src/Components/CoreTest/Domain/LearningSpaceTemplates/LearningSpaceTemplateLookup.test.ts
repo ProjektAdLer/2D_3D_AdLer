@@ -1,5 +1,5 @@
 import { LearningSpaceTemplate_L } from "../../../Core/Domain/LearningSpaceTemplates/LearningSpaceTemplate_L";
-import { LearningSpaceTemplate_R15 } from "../../../Core/Domain/LearningSpaceTemplates/LearningSpaceTemplate_R15";
+import { LearningSpaceTemplate_D } from "../../../Core/Domain/LearningSpaceTemplates/LearningSpaceTemplate_D";
 import { LearningSpaceTemplate_R6 } from "../../../Core/Domain/LearningSpaceTemplates/LearningSpaceTemplate_R6";
 import { LearningSpaceTemplate_R8 } from "../../../Core/Domain/LearningSpaceTemplates/LearningSpaceTemplate_R8";
 import { LearningSpaceTemplate_T } from "../../../Core/Domain/LearningSpaceTemplates/LearningSpaceTemplate_T";
@@ -35,11 +35,11 @@ describe("LearningSpaceTemplateLookup", () => {
     expect(result).toMatchObject(LearningSpaceTemplate_T);
   });
 
-  test("getLearningSpaceTemplate returns correct template for R15", () => {
+  test("getLearningSpaceTemplate returns correct template for D", () => {
     const result = LearningSpaceLookup.getLearningSpaceTemplate(
-      LearningSpaceTemplateType.R15
+      LearningSpaceTemplateType.D
     );
-    expect(result).toMatchObject(LearningSpaceTemplate_R15);
+    expect(result).toMatchObject(LearningSpaceTemplate_D);
   });
 
   test("getLearningSpaceTemplate throws error for unknown template", () => {

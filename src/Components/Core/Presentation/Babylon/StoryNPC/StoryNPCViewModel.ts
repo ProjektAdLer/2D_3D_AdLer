@@ -47,7 +47,7 @@ export default class StoryNPCViewModel {
   readonly iconYOffset: number = 2.3;
   readonly movementRange: number = 5; // in m
   readonly minMovementDistance: number = 2; // in m
-  readonly idleTime: number = 5000; // in ms
+  readonly idleTime: number = 7000; // in ms
   readonly cutSceneStartDelay: number = 2000; // in ms
   readonly iconScaleUpOnHover: number = 1.05;
 }

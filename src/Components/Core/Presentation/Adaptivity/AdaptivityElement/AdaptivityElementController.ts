@@ -111,6 +111,11 @@ export default class AdaptivityElementController
   closeAnswerSelection(): void {
     this.viewModel.currentQuestion.Value = null;
   }
+  @bind
+  closeHint(): void {
+    this.viewModel.selectedHint.Value = null;
+    this.viewModel.currentQuestion.Value = null;
+  }
 
   @bind
   back(): void {

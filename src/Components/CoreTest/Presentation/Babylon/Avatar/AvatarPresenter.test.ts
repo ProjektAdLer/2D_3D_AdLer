@@ -24,6 +24,26 @@ describe("AvatarPresenter", () => {
     expect(systemUnderTest["viewModel"]).toBe(viewModel);
   });
 
+  test("onStoryElementCutSceneTriggered sets the inputEnabled member of the viewModel member to false", () => {
+    const viewModel = new AvatarViewModel();
+    viewModel.inputEnabled.Value = true;
+    systemUnderTest.ViewModel = viewModel;
+
+    systemUnderTest.onStoryElementCutSceneTriggered();
+
+    expect(viewModel.inputEnabled.Value).toBe(false);
+  });
+
+  test("onStoryElementCutSceneFinished sets the inputEnabled member of the viewModel member to true", () => {
+    const viewModel = new AvatarViewModel();
+    viewModel.inputEnabled.Value = false;
+    systemUnderTest.ViewModel = viewModel;
+
+    systemUnderTest.onStoryElementCutSceneFinished();
+
+    expect(viewModel.inputEnabled.Value).toBe(true);
+  });
+
   test("onLearningElementLoaded calls the applyAction method of the animationStateMachine member of the viewModel member", () => {
     const viewModel = new AvatarViewModel();
     viewModel.characterAnimator = mock();

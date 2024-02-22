@@ -24,7 +24,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
   private decorationBuilder: IDecorationBuilder;
   private doorPresenters: IDoorPresenter[] = [];
   private elementPresenters: ILearningElementPresenter[] = [];
-  private storyNPCPresenters: IStoryNPCPresenter;
+  private storyNPCPresenters: IStoryNPCPresenter[] = [];
 
   constructor(private viewModel: LearningSpaceViewModel) {
     if (!this.viewModel) {
@@ -57,11 +57,8 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     for (const elementPresenter of this.elementPresenters) {
       elementPresenter.onAvatarPositionChanged(position, interactionRadius);
     }
-    if (this.storyNPCPresenters)
-      this.storyNPCPresenters.onAvatarPositionChanged(
-        position,
-        interactionRadius
-      );
+    for (const npcPresenter of this.storyNPCPresenters)
+      npcPresenter.onAvatarPositionChanged(position, interactionRadius);
   }
 
   private async fillLearningElementSlots(
@@ -179,7 +176,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
 
         await this.director.buildAsync(storyNPCBuilder);
 
-        this.storyNPCPresenters = storyNPCBuilder.getPresenter();
+        this.storyNPCPresenters.push(storyNPCBuilder.getPresenter());
       }
     }
   }

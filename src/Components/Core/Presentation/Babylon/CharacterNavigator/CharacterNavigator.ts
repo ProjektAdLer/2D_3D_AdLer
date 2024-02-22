@@ -40,7 +40,7 @@ export default class CharacterNavigator
     separationWeight: 1.0,
     reachRadius: 0.4, // acts as stopping distance
   };
-  private readonly earlyStoppingPatience = 300; // in ms
+  private readonly earlyStoppingPatience = 400; // in ms
   private readonly earlyStoppingVelocityThreshold = 0.3;
 
   private navigation: INavigation;
@@ -100,11 +100,11 @@ export default class CharacterNavigator
     );
 
     // setup observers
-    this.targetReachedCallback = onTargetReachedCallback ?? null;
     this.checkEarlyStoppingObserverRef =
       this.scenePresenter.Scene.onBeforeRenderObservable.add(
         this.checkEarlyStopping
       );
+    this.targetReachedCallback = onTargetReachedCallback ?? null;
     this.targetReachedObserverRef =
       this.navigation.Crowd.onReachTargetObservable.add(
         (eventData: { agentIndex: number }) => {
@@ -164,6 +164,7 @@ export default class CharacterNavigator
     if (this.earlyStoppingCounter >= this.earlyStoppingPatience) {
       if (this.targetReachedCallback) this.targetReachedCallback();
       this.stopMovement();
+      this.earlyStoppingCounter = 0;
     }
   }
 

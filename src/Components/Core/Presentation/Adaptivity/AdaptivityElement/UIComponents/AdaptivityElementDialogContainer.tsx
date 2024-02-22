@@ -7,12 +7,19 @@ import defaultNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc
 import robotNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot.png";
 import robotNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot_close.png";
 
-import requiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-solved-icon.svg";
-import requiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-required-unsolved-icon.svg";
-import notRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-solved-icon.svg";
-import notRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-unsolved-icon.svg";
+import requiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-solved-icon.svg";
+import requiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-tried.svg";
+import requiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-unsolved-icon.svg";
+import notRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-solved-icon.svg";
+import notRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-tried.svg";
+import notRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-unsolved-icon.svg";
 import placeholderIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-placeholder.svg";
 import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
+import solvedTaskIcon from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
+
+import AdaptivityElementDifficultyStars, {
+  AdaptivityElementDifficultyStarState,
+} from "./AdaptivityElementDifficultyStars";
 
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import AdaptivityElementViewModel, {
@@ -131,7 +138,7 @@ export default function AdaptivityElementDialogContainer({
               event.stopPropagation();
             }}
           >
-            <div className="overflow-auto lg:max-h-[26vh]">
+            <div className="overflow-auto lg:max-h-[27vh]">
               {/* Header */}
               <div className="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
                 {!(currentTask === null && currentQuestion === null) &&
@@ -235,6 +242,7 @@ export default function AdaptivityElementDialogContainer({
                   <AdaptivityElementHint
                     hint={selectedHint}
                     setHeaderText={setHeaderText}
+                    closeHint={controller.closeHint}
                   />
                 )}
             </div>
@@ -242,12 +250,12 @@ export default function AdaptivityElementDialogContainer({
             <div>
               {/* Footer */}
               {
-                <div className=" flex justify-between items-end pt-4 text-[0.5rem] lg:text-xs modal-footer">
+                <div className=" flex justify-between items-end pt-4 text-[0.5rem] lg:text-xs modal-footer ">
                   <p>{footerText}</p>
                   {!(currentTask !== null && currentQuestion !== null) && (
                     <div className="relative flex group">
                       <p
-                        className="right-1 bottom-1"
+                        className="right-1 bottom-1 cursor-pointer"
                         onClick={() => {
                           controller.showFooterTooltip();
                         }}
@@ -270,74 +278,185 @@ export default function AdaptivityElementDialogContainer({
                               x
                             </StyledButton>
                           </div>
+                          <h3 className="text-sm font-bold">
+                            {translate("headerLegendTask")}
+                          </h3>
+                          <table className="table-auto text-left">
+                            <tbody>
+                              <tr>
+                                <td className="pr-2">
+                                  <img
+                                    className="w-2 lg:w-6"
+                                    src={requiredTaskIcon}
+                                    alt="required Task icon"
+                                  />
+                                </td>
+                                <td>{translate("legendTaskRequired")}</td>
+                              </tr>
+                              <tr>
+                                <td className="pr-2">
+                                  <img
+                                    className="w-2 lg:w-6"
+                                    src={solvedTaskIcon}
+                                    alt="required unsolved icon"
+                                  />
+                                </td>
+                                <td>{translate("legendTaskRequiredSolved")}</td>
+                              </tr>
+                              <tr>
+                                <td className="lg:h-6"></td>
+                                <td>{translate("legendTaskNotRequired")}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <h3 className="text-sm font-bold pt-2 text-left ">
+                            {translate("legendHeaderDifficulties")}
+                          </h3>
+                          <table className="table-auto text-left">
+                            <tbody>
+                              <tr>
+                                <td className="pr-2">
+                                  <AdaptivityElementDifficultyStars
+                                    easyState={
+                                      AdaptivityElementDifficultyStarState.RequiredUnsolved
+                                    }
+                                    mediumState={
+                                      AdaptivityElementDifficultyStarState.Empty
+                                    }
+                                    hardState={
+                                      AdaptivityElementDifficultyStarState.Empty
+                                    }
+                                    starClassName="w-4 h-4 sm:w-6 sm:h-6 "
+                                  />
+                                </td>
+                                <td>{translate("legendEasyDifficulty")}</td>
+                              </tr>
+                              <tr>
+                                <td className="pr-2">
+                                  <AdaptivityElementDifficultyStars
+                                    easyState={
+                                      AdaptivityElementDifficultyStarState.Empty
+                                    }
+                                    mediumState={
+                                      AdaptivityElementDifficultyStarState.NotRequiredTried
+                                    }
+                                    hardState={
+                                      AdaptivityElementDifficultyStarState.Empty
+                                    }
+                                    starClassName="w-4 h-4 sm:w-6 sm:h-6 "
+                                  />
+                                </td>
+                                <td>{translate("legendMediumDifficulty")}</td>
+                              </tr>
+                              <tr>
+                                <td className="pr-2">
+                                  <AdaptivityElementDifficultyStars
+                                    easyState={
+                                      AdaptivityElementDifficultyStarState.Empty
+                                    }
+                                    mediumState={
+                                      AdaptivityElementDifficultyStarState.Empty
+                                    }
+                                    hardState={
+                                      AdaptivityElementDifficultyStarState.RequiredSolved
+                                    }
+                                    starClassName="w-4 h-4 sm:w-6 sm:h-6 "
+                                  />
+                                </td>
+                                <td>{translate("legendHardDifficulty")}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <h3 className="text-sm font-bold pt-2 text-left ">
+                            {translate("legendHeaderStar")}
+                          </h3>
+                          <table>
+                            <tbody>
+                              <tr>
+                                <td className="pr-2">
+                                  <img
+                                    className="w-2 lg:w-6"
+                                    src={requiredUnsolvedIcon}
+                                    alt="required unsolved icon"
+                                  />
+                                </td>
+                                <td>{translate("legendStarRequiredSolved")}</td>
+                              </tr>
+                              <tr>
+                                <td className="pr-2">
+                                  <img
+                                    className="w-2 lg:w-6"
+                                    src={requiredTriedIcon}
+                                    alt="required unsolved icon"
+                                  />
+                                </td>
+                                <td>{translate("legendStarRequiredTried")}</td>
+                              </tr>
+                              <tr>
+                                <td className="pr-2">
+                                  <img
+                                    className="w-2 lg:w-6"
+                                    src={requiredSolvedIcon}
+                                    alt="not required unsolved icon"
+                                  />
+                                </td>
 
-                          <div className="flex flex-row gap-4">
-                            <div className="flex-row items-end justify-items-end">
-                              <div className="flex opacity-60">
-                                <img
-                                  className="w-2 lg:w-4"
-                                  src={requiredUnsolvedIcon}
-                                  alt="required unsolved icon"
-                                />
-                                <img
-                                  className="w-2 lg:w-4"
-                                  src={requiredUnsolvedIcon}
-                                  alt="required unsolved icon"
-                                />
-                                <img
-                                  className="w-2 lg:w-4"
-                                  src={requiredUnsolvedIcon}
-                                  alt="required unsolved icon"
-                                />
-                              </div>
-                              <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
-                              <div className="w-2 h-2 lg:w-4 lg:h-4"></div>
-                              <img
-                                className="w-2 lg:w-4"
-                                src={requiredUnsolvedIcon}
-                                alt="required unsolved icon"
-                              />
-                              <img
-                                className="w-2 lg:w-4"
-                                src={notRequiredUnsolvedIcon}
-                                alt="not required unsolved Icon"
-                              />
-                              <img
-                                className="w-2 lg:w-4"
-                                src={requiredSolvedIcon}
-                                alt="required solved icon"
-                              />
-                              <img
-                                className="w-2 lg:w-4"
-                                src={notRequiredSolvedIcon}
-                                alt="not required solved Icon"
-                              />
-                              <img
-                                className="w-2 lg:w-4"
-                                src={placeholderIcon}
-                                alt="placeholder icon"
-                              />
-                              <img
-                                className="w-2 lg:w-4"
-                                src={requiredTaskIcon}
-                                alt="required task icon"
-                              />
-                            </div>
-                            <div className="flex-col items-start justify-center icons">
-                              <p>
-                                <Trans
-                                  i18nKey="legendDifficulty"
-                                  ns="learningElement"
-                                />
-                              </p>
-                              <p>{translate("requiredUnsolved")}</p>
-                              <p>{translate("optionalUnsolved")}</p>
-                              <p>{translate("requiredSolved")}</p>
-                              <p>{translate("optionalSolved")}</p>
-                              <p>{translate("noQuestionDifficulty")}</p>
-                              <p>{translate("requiredTask")}</p>
-                            </div>
-                          </div>
+                                <td>
+                                  {translate("legendStarRequiredUnsolved")}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td className="pr-2">
+                                  <img
+                                    className="w-2 lg:w-6"
+                                    src={notRequiredUnsolvedIcon}
+                                    alt="not required unsolved icon"
+                                  />
+                                </td>
+
+                                <td>
+                                  {translate("legendStarNotRequiredUnsolved")}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td className="pr-2">
+                                  <img
+                                    className="w-2 lg:w-6"
+                                    src={notRequiredTriedIcon}
+                                    alt="not required unsolved icon"
+                                  />
+                                </td>
+
+                                <td>
+                                  {translate("legendStarNotRequiredTried")}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td className="pr-2">
+                                  <img
+                                    className="w-2 lg:w-6"
+                                    src={notRequiredSolvedIcon}
+                                    alt="not required unsolved icon"
+                                  />
+                                </td>
+
+                                <td>
+                                  {translate("legendStarNotRequiredSolved")}
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td className="pr-2">
+                                  <img
+                                    className="w-2 lg:w-6"
+                                    src={placeholderIcon}
+                                    alt="not required unsolved icon"
+                                  />
+                                </td>
+                                <td>{translate("legendNoStar")}</td>
+                              </tr>
+                            </tbody>
+                          </table>
                         </div>
                       )}
                     </div>

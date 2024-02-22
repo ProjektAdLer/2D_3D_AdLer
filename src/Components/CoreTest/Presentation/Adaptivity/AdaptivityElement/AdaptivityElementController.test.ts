@@ -188,6 +188,16 @@ describe("AdaptivityElementController", () => {
     expect(viewModel.currentQuestion.Value).toBe(null);
   });
 
+  test("closeHint sets selectedHint and currentQuestion to null", () => {
+    viewModel.currentQuestion.Value = mockQuestion;
+    viewModel.selectedHint.Value = mockHint;
+
+    systemUnderTest.closeHint();
+
+    expect(viewModel.currentQuestion.Value).toBe(null);
+    expect(viewModel.selectedHint.Value).toBe(null);
+  });
+
   test("showFooterTooltip sets showFooterTooltip to true", () => {
     viewModel.showFooterTooltip.Value = false;
 

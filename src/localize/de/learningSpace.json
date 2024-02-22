@@ -2,7 +2,7 @@
   "loadLearningSpace": "Lade Lernraum...",
   "finishedLoadingLearningSpace": "Lernraum fertig geladen!",
   "enterLearningSpace": "Weiter zum Lernraum",
-  "projectInformation": "Du willst mehr über das Projekt AdLer erfahren? Dann schau doch mal auf unserer <0>{{homepageLink}}</0> vorbei.",
+  "projectInformation": "Sie wollen mehr über das Projekt AdLer erfahren? Dann schauen Sie doch mal auf unserer <0>{{homepageLink}}</0> vorbei.",
   "homepage": "Projekt-Homepage",
   "linkInfo": "Dieser Link öffnet die AdLer Projekthomepage https://projekt-adler.eu in einem neuen Tab.",
 
@@ -17,9 +17,9 @@
   "introOutroNPC": "Intro/Outro-NPC",
   "introStoryTitle": "Intro",
   "outroStoryTitle": "Outro",
-  "introOutroStoryTitle": "Wähle zwischen Intro oder Outro der Lernraumstory",
+  "introOutroStoryTitle": "Wählen Sie zwischen Intro oder Outro der Lernraumstory",
   "outroLockedTitle": "Lernraum Abschluss gesperrt",
-  "outroLockedText": "Dieses Element ist noch nicht verfügbar. Schließe zuerst den Raum ab!",
+  "outroLockedText": "Dieses Element ist noch nicht verfügbar. Schließen Sie zuerst den Raum ab!",
   "backButton": "Intro/Outro Auswahl",
 
   "spaceScore": "{{current}} von {{required}}",

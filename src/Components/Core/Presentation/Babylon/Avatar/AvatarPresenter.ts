@@ -3,7 +3,6 @@ import AvatarViewModel from "./AvatarViewModel";
 import IAvatarPresenter from "./IAvatarPresenter";
 import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
 import CharacterAnimationActions from "../CharacterAnimator/CharacterAnimationActions";
-import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 /**
  * @class AvatarPresenter
@@ -17,7 +16,7 @@ export default class AvatarPresenter implements IAvatarPresenter {
     this.viewModel = newViewModel;
   }
 
-  onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
+  onStoryElementCutSceneTriggered(): void {
     this.viewModel.inputEnabled.Value = false;
   }
 
