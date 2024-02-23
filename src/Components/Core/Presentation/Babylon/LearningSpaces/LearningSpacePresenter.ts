@@ -45,6 +45,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     if (this.viewModel.exitDoorPosition) await this.createExitDoor(spaceTO);
     if (this.viewModel.entryDoorPosition) await this.createEntryDoor();
     this.decorationBuilder.spaceTemplate = spaceTO.template;
+    this.decorationBuilder.theme = spaceTO.theme;
     await this.director.buildAsync(this.decorationBuilder);
     await this.createStoryNPCs(spaceTO);
   }

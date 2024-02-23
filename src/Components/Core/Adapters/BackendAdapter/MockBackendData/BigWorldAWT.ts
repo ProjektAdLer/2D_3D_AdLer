@@ -62,7 +62,7 @@ const BigWorldAWT: AWT = {
         spaceSlotContents: [2],
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "",
-        spaceTemplate: "L_32x31_10L",
+        spaceTemplate: "D_40X37_15L",
         spaceTemplateStyle: "",
         spaceStory: {
           introStory: null,
@@ -84,7 +84,7 @@ const BigWorldAWT: AWT = {
         spaceSlotContents: [3],
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "",
-        spaceTemplate: "L_32x31_10L",
+        spaceTemplate: "T_40X32_13L",
         spaceTemplateStyle: "",
         spaceStory: {
           introStory: {

@@ -1,3 +1,6 @@
+import LearningSpaceTheme_Campus from "../../../../Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Arcade";
+import LearningSpaceTheme_Arcade from "../../../../Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Arcade";
+import LearningSpaceTheme_Suburb from "../../../../Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Suburb";
 import { AbstractMesh, NullEngine, Scene } from "@babylonjs/core";
 import { mockDeep } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
@@ -6,6 +9,7 @@ import DecorationView from "../../../../Core/Presentation/Babylon/Decoration/Dec
 import DecorationViewModel from "../../../../Core/Presentation/Babylon/Decoration/DecorationViewModel";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
+import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -86,4 +90,85 @@ describe("DecorationView", () => {
 
     expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(0);
   });
+
+  test("asyncSetup sets default theme, if no theme is provided", async () => {
+    scenePresenterMock.loadModel.mockResolvedValue([
+      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+    ]);
+
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.L;
+    viewModel.theme = "";
+    await systemUnderTest.asyncSetup();
+    expect(scenePresenterMock.loadModel).toHaveBeenCalledWith(
+      LearningSpaceTheme_Arcade.modelLinkLShape,
+      true
+    );
+  });
+
+  test.each([
+    [LearningSpaceTemplateType.L, LearningSpaceTheme_Arcade.modelLinkLShape],
+    [LearningSpaceTemplateType.R6, LearningSpaceTheme_Arcade.modelLink2x2],
+    [LearningSpaceTemplateType.R8, LearningSpaceTheme_Arcade.modelLink2x3],
+  ])(
+    "asyncSetup loads with theme `Campus` models, when given spacetemplatetype %s, returns modelLink %s",
+    async (templateType, expectedResult) => {
+      scenePresenterMock.loadModel.mockResolvedValue([
+        new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+      ]);
+
+      const [viewModel, systemUnderTest] = buildSystemUnderTest();
+      viewModel.theme = LearningSpaceThemeType.Arcade;
+      viewModel.learningSpaceTemplateType.Value = templateType;
+      await systemUnderTest.asyncSetup();
+      expect(scenePresenterMock.loadModel).toHaveBeenCalledWith(
+        expectedResult,
+        true
+      );
+    }
+  );
+
+  test.each([
+    [LearningSpaceTemplateType.L, LearningSpaceTheme_Campus.modelLinkLShape],
+    [LearningSpaceTemplateType.R6, LearningSpaceTheme_Campus.modelLink2x2],
+    [LearningSpaceTemplateType.R8, LearningSpaceTheme_Campus.modelLink2x3],
+  ])(
+    "asyncSetup loads with theme `Campus` models, when given spacetemplatetype %s, returns modelLink %s",
+    async (templateType, expectedResult) => {
+      scenePresenterMock.loadModel.mockResolvedValue([
+        new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+      ]);
+
+      const [viewModel, systemUnderTest] = buildSystemUnderTest();
+      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.learningSpaceTemplateType.Value = templateType;
+      await systemUnderTest.asyncSetup();
+      expect(scenePresenterMock.loadModel).toHaveBeenCalledWith(
+        expectedResult,
+        true
+      );
+    }
+  );
+
+  test.each([
+    [LearningSpaceTemplateType.L, LearningSpaceTheme_Suburb.modelLinkLShape],
+    [LearningSpaceTemplateType.R6, LearningSpaceTheme_Suburb.modelLink2x2],
+    [LearningSpaceTemplateType.R8, LearningSpaceTheme_Suburb.modelLink2x3],
+  ])(
+    "asyncSetup loads with theme `Suburb` models, when given spacetemplatetype %s, returns modelLink %s",
+    async (templateType, expectedResult) => {
+      scenePresenterMock.loadModel.mockResolvedValue([
+        new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+      ]);
+
+      const [viewModel, systemUnderTest] = buildSystemUnderTest();
+      viewModel.theme = LearningSpaceThemeType.Suburb;
+      viewModel.learningSpaceTemplateType.Value = templateType;
+      await systemUnderTest.asyncSetup();
+      expect(scenePresenterMock.loadModel).toHaveBeenCalledWith(
+        expectedResult,
+        true
+      );
+    }
+  );
 });
