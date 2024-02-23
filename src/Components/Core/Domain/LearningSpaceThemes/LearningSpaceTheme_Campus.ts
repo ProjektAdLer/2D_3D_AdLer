@@ -63,4 +63,7 @@ export const LearningSpaceTheme_CampusKE: ILearningSpaceTheme = {
   windowModel: LearningSpaceTheme_CampusAB.windowModel,
   ambienceModel: LearningSpaceTheme_CampusAB.ambienceModel,
   storyElementModel: LearningSpaceTheme_CampusAB.storyElementModel,
+  modelLinkLShape: LearningSpaceTheme_CampusAB.modelLinkLShape,
+  modelLink2x2: LearningSpaceTheme_CampusAB.modelLink2x2,
+  modelLink2x3: LearningSpaceTheme_CampusAB.modelLink2x3,
 };
