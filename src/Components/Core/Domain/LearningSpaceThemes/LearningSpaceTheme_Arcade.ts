@@ -1,10 +1,8 @@
 import { LearningElementModelTypeEnums } from "../LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypes } from "../Types/LearningElementTypes";
-import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
 import ILearningSpaceTheme from "./ILearningSpaceTheme";
 
 const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
-  name: LearningSpaceThemeType.Arcade,
   wallTexture: require("../../../../Assets/textures/arcadeTheme/m_wall_bricks_1.jpg"),
   floorTexture: require("../../../../Assets/textures/arcadeTheme/m_floor_bluecarpet_1.jpg"),
   learningElementModels: {
