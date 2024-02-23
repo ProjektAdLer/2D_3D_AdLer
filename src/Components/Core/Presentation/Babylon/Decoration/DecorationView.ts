@@ -37,15 +37,21 @@ export default class DecorationView {
     switch (this.viewModel.learningSpaceTemplateType.Value) {
       case LearningSpaceTemplateType.L:
         results = await this.scenePresenter.loadModel(
-          theme.modelLinkLShape,
+          theme.decorationModelLinkLShape,
           true
         );
         break;
       case LearningSpaceTemplateType.R6:
-        results = await this.scenePresenter.loadModel(theme.modelLink2x2, true);
+        results = await this.scenePresenter.loadModel(
+          theme.decorationModelLink2x2,
+          true
+        );
         break;
       case LearningSpaceTemplateType.R8:
-        results = await this.scenePresenter.loadModel(theme.modelLink2x3, true);
+        results = await this.scenePresenter.loadModel(
+          theme.decorationModelLink2x3,
+          true
+        );
         break;
       default:
         return;
