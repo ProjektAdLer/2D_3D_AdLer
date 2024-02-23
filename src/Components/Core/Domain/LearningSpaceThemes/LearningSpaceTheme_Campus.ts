@@ -1,10 +1,8 @@
 import { LearningElementModelTypeEnums } from "../LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypes } from "../Types/LearningElementTypes";
-import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
 import ILearningSpaceTheme from "./ILearningSpaceTheme";
 
-const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
-  name: LearningSpaceThemeType.Campus,
+export const LearningSpaceTheme_CampusAB: ILearningSpaceTheme = {
   wallTexture: require("../../../../Assets/textures/campusTheme/m_wall_woodtiles_1.jpg"),
   floorTexture: require("../../../../Assets/textures/campusTheme/m_floor_bluecarpet2_1.jpg"),
   learningElementModels: {
@@ -52,4 +50,14 @@ const LearningSpaceTheme_Campus: ILearningSpaceTheme = {
     LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
 };
 
-export default LearningSpaceTheme_Campus;
+export const LearningSpaceTheme_CampusKE: ILearningSpaceTheme = {
+  wallTexture: LearningSpaceTheme_CampusAB.wallTexture,
+  floorTexture: LearningSpaceTheme_CampusAB.floorTexture,
+  learningElementModels: LearningSpaceTheme_CampusAB.learningElementModels,
+  standinDecorationModels: LearningSpaceTheme_CampusAB.standinDecorationModels,
+  entryDoorModel: LearningSpaceTheme_CampusAB.entryDoorModel,
+  exitDoorModel: LearningSpaceTheme_CampusAB.exitDoorModel,
+  windowModel: LearningSpaceTheme_CampusAB.windowModel,
+  ambienceModel: LearningSpaceTheme_CampusAB.ambienceModel,
+  storyElementModel: LearningSpaceTheme_CampusAB.storyElementModel,
+};

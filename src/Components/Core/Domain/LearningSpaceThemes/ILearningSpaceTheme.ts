@@ -7,7 +7,6 @@ type LearningElementModelsMap = Readonly<
 >;
 
 export default interface ILearningSpaceTheme {
-  readonly name: LearningSpaceThemeType;
   readonly wallTexture: string;
   readonly floorTexture: string;
   readonly learningElementModels: LearningElementModelsMap;
