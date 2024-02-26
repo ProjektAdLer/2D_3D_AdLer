@@ -134,14 +134,14 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
       <div className="fixed top-0 bottom-0 left-0 right-0 z-50 flex flex-col items-center justify-center w-screen h-full bg-blacktrans lg:grid lg:grid-rows-3 lg:items-start">
         {/* Background NPC */}
         <div className="flex items-end justify-start invisible w-full row-start-2 pl-16 lg:visible lg:h-full">
-          {!isSplitStory ||
-            (isSplitStory && pickedStory === StoryElementType.Intro && (
-              <img
-                className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
-                alt="LearningImage!"
-                src={getNPCImage(viewModel.modelType.Value[0], true)}
-              />
-            ))}
+          {(!isSplitStory ||
+            (isSplitStory && pickedStory === StoryElementType.Intro)) && (
+            <img
+              className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+              alt="LearningImage!"
+              src={getNPCImage(viewModel.modelType.Value[0], true)}
+            />
+          )}
           {isSplitStory && pickedStory === StoryElementType.Outro && (
             <img
               className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
@@ -155,14 +155,14 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
           <div className="flex flex-col p-2 xl:px-8 gap-2 justify-center rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%]">
             {/* Header */}
             <div className="z-20 flex items-start justify-center gap-2 py-2 pb-3 overflow-hidden text-xl font-bold lg:max-w-5xl xl:max-w-6xl text-adlerdarkblue lg:roboto-black lg:text-2xl ">
-              {!isSplitStory ||
-                (isSplitStory && pickedStory === StoryElementType.Intro && (
-                  <img
-                    className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
-                    alt="LearningImage!"
-                    src={getNPCImage(viewModel.modelType.Value[0], false)}
-                  />
-                ))}
+              {(!isSplitStory ||
+                (isSplitStory && pickedStory === StoryElementType.Intro)) && (
+                <img
+                  className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+                  alt="LearningImage!"
+                  src={getNPCImage(viewModel.modelType.Value[0], false)}
+                />
+              )}
               {isSplitStory && pickedStory === StoryElementType.Outro && (
                 <img
                   className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
