@@ -8,8 +8,12 @@ import IBottomTooltipPresenter from "~ReactComponents/LearningSpaceDisplay/Botto
 import { Vector3 } from "@babylonjs/core";
 import i18next from "i18next";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 export default class StoryNPCController implements IStoryNPCController {
+  private logger: ILoggerPort;
   private bottomTooltipPresenter: IBottomTooltipPresenter;
   private proximityToolTipId: number = -1;
   private hoverToolTipId: number = -1;
@@ -22,6 +26,7 @@ export default class StoryNPCController implements IStoryNPCController {
     this.bottomTooltipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
       PRESENTATION_TYPES.IBottomTooltipPresenter
     );
+    this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
   }
 
   @bind
@@ -40,6 +45,7 @@ export default class StoryNPCController implements IStoryNPCController {
       this.hoverToolTipId = -1;
     }
   }
+
   @bind
   picked(): void {
     if (
@@ -48,21 +54,33 @@ export default class StoryNPCController implements IStoryNPCController {
     ) {
       this.bottomTooltipPresenter.hideAll();
       this.viewModel.storyElementPresenter.open(this.viewModel.storyType);
-    }
+    } else
+      this.logger.log(
+        LogLevelTypes.TRACE,
+        "[StoryNPCController.picked]: StoryNPC is not interactable or in cutscene state (state: " +
+          this.viewModel.state.Value +
+          "isInteractable: " +
+          this.viewModel.isInteractable.Value +
+          ")"
+      );
   }
 
   private displayTooltip(): number {
+    let tooltipText: string;
+    if (this.viewModel.storyType === StoryElementType.Intro)
+      tooltipText = i18next.t("introNPC", { ns: "learningSpace" });
+    else if (this.viewModel.storyType === StoryElementType.Outro)
+      tooltipText = i18next.t("outroNPC", { ns: "learningSpace" });
+    else tooltipText = i18next.t("introOutroNPC", { ns: "learningSpace" });
+
     return this.bottomTooltipPresenter.display(
-      this.viewModel.storyType === StoryElementType.Intro
-        ? i18next.t("introNPC", { ns: "learningSpace" })
-        : this.viewModel.storyType === StoryElementType.Outro
-        ? i18next.t("outroNPC", { ns: "learningSpace" })
-        : i18next.t("introOutroNPC", { ns: "learningSpace" }),
+      tooltipText,
       undefined,
       undefined,
       this.picked
     );
   }
+
   private scaleUpIcon(): void {
     this.viewModel.iconMeshes?.forEach((mesh) => {
       mesh.scaling = new Vector3(
@@ -72,6 +90,7 @@ export default class StoryNPCController implements IStoryNPCController {
       );
     });
   }
+
   private resetIconScale(): void {
     this.viewModel.iconMeshes?.forEach((mesh) => {
       mesh.scaling = Vector3.One();
