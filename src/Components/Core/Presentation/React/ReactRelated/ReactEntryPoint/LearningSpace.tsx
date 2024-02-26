@@ -16,7 +16,7 @@ import StoryElement from "~ReactComponents/LearningSpaceDisplay/StoryElement/Sto
 
 export default function LearningSpace() {
   return (
-    <div className="grid h-0 min-h-screen grid-cols-9 grid-rows-6 root">
+    <div className="grid h-0 min-h-[90vh] lg:min-h-screen grid-cols-9 grid-rows-6 root">
       <section className="fixed z-10 flex flex-col-reverse col-span-2 col-start-8 row-start-1 gap-1 space-x-2 space-x-reverse lg:flex-row-reverse right-2 top-2">
         <LearningWorldScorePanel />
         <LearningSpaceScorePanel />
