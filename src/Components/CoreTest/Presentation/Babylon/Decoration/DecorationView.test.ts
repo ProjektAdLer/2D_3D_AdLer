@@ -101,15 +101,24 @@ describe("DecorationView", () => {
     viewModel.theme = "";
     await systemUnderTest.asyncSetup();
     expect(scenePresenterMock.loadModel).toHaveBeenCalledWith(
-      LearningSpaceTheme_Arcade.modelLinkLShape,
+      LearningSpaceTheme_Arcade.decorationModelLinkLShape,
       true
     );
   });
 
   test.each([
-    [LearningSpaceTemplateType.L, LearningSpaceTheme_Arcade.modelLinkLShape],
-    [LearningSpaceTemplateType.R6, LearningSpaceTheme_Arcade.modelLink2x2],
-    [LearningSpaceTemplateType.R8, LearningSpaceTheme_Arcade.modelLink2x3],
+    [
+      LearningSpaceTemplateType.L,
+      LearningSpaceTheme_Arcade.decorationModelLinkLShape,
+    ],
+    [
+      LearningSpaceTemplateType.R6,
+      LearningSpaceTheme_Arcade.decorationModelLink2x2,
+    ],
+    [
+      LearningSpaceTemplateType.R8,
+      LearningSpaceTheme_Arcade.decorationModelLink2x3,
+    ],
   ])(
     "asyncSetup loads with theme `Campus` models, when given spacetemplatetype %s, returns modelLink %s",
     async (templateType, expectedResult) => {
@@ -129,9 +138,18 @@ describe("DecorationView", () => {
   );
 
   test.each([
-    [LearningSpaceTemplateType.L, LearningSpaceTheme_Campus.modelLinkLShape],
-    [LearningSpaceTemplateType.R6, LearningSpaceTheme_Campus.modelLink2x2],
-    [LearningSpaceTemplateType.R8, LearningSpaceTheme_Campus.modelLink2x3],
+    [
+      LearningSpaceTemplateType.L,
+      LearningSpaceTheme_Campus.decorationModelLinkLShape,
+    ],
+    [
+      LearningSpaceTemplateType.R6,
+      LearningSpaceTheme_Campus.decorationModelLink2x2,
+    ],
+    [
+      LearningSpaceTemplateType.R8,
+      LearningSpaceTheme_Campus.decorationModelLink2x3,
+    ],
   ])(
     "asyncSetup loads with theme `Campus` models, when given spacetemplatetype %s, returns modelLink %s",
     async (templateType, expectedResult) => {
@@ -151,9 +169,18 @@ describe("DecorationView", () => {
   );
 
   test.each([
-    [LearningSpaceTemplateType.L, LearningSpaceTheme_Suburb.modelLinkLShape],
-    [LearningSpaceTemplateType.R6, LearningSpaceTheme_Suburb.modelLink2x2],
-    [LearningSpaceTemplateType.R8, LearningSpaceTheme_Suburb.modelLink2x3],
+    [
+      LearningSpaceTemplateType.L,
+      LearningSpaceTheme_Suburb.decorationModelLinkLShape,
+    ],
+    [
+      LearningSpaceTemplateType.R6,
+      LearningSpaceTheme_Suburb.decorationModelLink2x2,
+    ],
+    [
+      LearningSpaceTemplateType.R8,
+      LearningSpaceTheme_Suburb.decorationModelLink2x3,
+    ],
   ])(
     "asyncSetup loads with theme `Suburb` models, when given spacetemplatetype %s, returns modelLink %s",
     async (templateType, expectedResult) => {
