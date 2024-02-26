@@ -7,7 +7,7 @@ const BigWorldAWT: AWT = {
   author: "Au Thor",
   language: "de",
   world: {
-    worldName: "Big World",
+    worldName: "Story World",
     worldDescription: "Beschreibung der großen Welt",
     worldGoals: ["Weltziel 1/3", "Weltziel 2/3", "Weltziel 3/3"],
     topics: [
@@ -30,7 +30,7 @@ const BigWorldAWT: AWT = {
     spaces: [
       {
         spaceId: 1,
-        spaceName: "Abgeschlossener Raum mit einem Lernelement",
+        spaceName: "Intro Story",
         spaceDescription: "Ja, der Name dieses Raumes ist extrea so lang",
         spaceGoals: [
           "Ziel des abgeschlossenen Raumes 1/3",
@@ -40,7 +40,7 @@ const BigWorldAWT: AWT = {
         spaceSlotContents: [1],
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "",
-        spaceTemplate: "L_32x31_10L",
+        spaceTemplate: "R_20X20_6L",
         spaceTemplateStyle: "",
         spaceStory: {
           introStory: {
@@ -56,13 +56,13 @@ const BigWorldAWT: AWT = {
       },
       {
         spaceId: 2,
-        spaceName: "Lernraum 2",
+        spaceName: "Outro Story",
         spaceDescription: "rdescription2",
         spaceGoals: ["rgoals2"],
         spaceSlotContents: [2],
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "",
-        spaceTemplate: "D_40X37_15L",
+        spaceTemplate: "R_20X30_8L",
         spaceTemplateStyle: "",
         spaceStory: {
           introStory: null,
@@ -78,13 +78,13 @@ const BigWorldAWT: AWT = {
       },
       {
         spaceId: 3,
-        spaceName: "Lernraum 3",
+        spaceName: "Intro + Outro 1 NPC",
         spaceDescription: "rdescription3",
         spaceGoals: ["rgoals3"],
         spaceSlotContents: [3],
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "",
-        spaceTemplate: "T_40X32_13L",
+        spaceTemplate: "L_32X31_10L",
         spaceTemplateStyle: "",
         spaceStory: {
           introStory: {
@@ -103,13 +103,13 @@ const BigWorldAWT: AWT = {
       },
       {
         spaceId: 4,
-        spaceName: "  Lernraum 4",
+        spaceName: "Intro + Outro 2 NPC",
         spaceDescription: "rdescription4",
         spaceGoals: ["rgoals4"],
         spaceSlotContents: [4],
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "(3)v((2)^(1))",
-        spaceTemplate: "L_32x31_10L",
+        spaceTemplate: "T_40X32_13L",
         spaceTemplateStyle: "",
         spaceStory: {
           introStory: {
@@ -132,17 +132,31 @@ const BigWorldAWT: AWT = {
       },
       {
         spaceId: 5,
-        spaceName: "Der lernraum 5",
+        spaceName: "Intro + Outro 2 NPC",
         spaceDescription: "rdescription5",
         spaceGoals: ["rgoals5"],
         spaceSlotContents: [5],
-        requiredPointsToComplete: 0,
+        requiredPointsToComplete: 1,
         requiredSpacesToEnter: "4",
-        spaceTemplate: "L_32x31_10L",
+        spaceTemplate: "D_40X37_15L",
         spaceTemplateStyle: "",
         spaceStory: {
-          introStory: null,
-          outroStory: null,
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolorekasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+            ],
+            elementModel: "a_npc_defaultnpc",
+          },
+          outroStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolorekasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+            ],
+            elementModel: "a_npc_sheriffjustice",
+          },
         },
       },
     ],
