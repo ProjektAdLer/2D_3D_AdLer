@@ -1,3 +1,4 @@
+import { MockAdaptivityElementStatusResponse } from "./../../../Core/Adapters/BackendAdapter/MockBackendData/MockAdaptivityData";
 import { AdaptivityElementDataTO } from "./../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementDataTO";
 import { mock } from "jest-mock-extended";
 import { config } from "../../../../config";
@@ -14,8 +15,30 @@ import {
   BackendAdaptivityElementTO,
   BackendLearningElementTO,
 } from "../../../Core/Application/DataTransferObjects/BackendElementTO";
+import AdaptivityElementQuestionSubmissionTO from "../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
+import AdaptivityElementQuestionResponse from "../../../Core/Adapters/BackendAdapter/Types/AdaptivityElementQuestionResponse";
 
 const oldConfigValue = config.useFakeBackend;
+
+let mockGetQuestionResponseFromSubmission = (
+  submission: AdaptivityElementQuestionSubmissionTO
+): AdaptivityElementQuestionResponse => {
+  return {
+    elementScore: {
+      elementId: submission.elementID,
+      success: false,
+    },
+    gradedTask: {
+      taskId: submission.taskID,
+      taskStatus: "Incorrect",
+    },
+    gradedQuestion: {
+      id: submission.questionID,
+      status: "Incorrect",
+      answers: undefined,
+    },
+  };
+};
 
 describe("MockBackendAdapter", () => {
   let systemUnderTest: MockBackendAdapter;
@@ -194,5 +217,101 @@ describe("MockBackendAdapter", () => {
     await expect(systemUnderTest.deletePlayerData("token")).resolves.toEqual(
       true
     );
+  });
+
+  test("should get adaptivity question response for single-choice questions", async () => {
+    let questionSubmissionTO: AdaptivityElementQuestionSubmissionTO = {
+      elementID: 1,
+      taskID: 1,
+      questionID: 0,
+      selectedAnswers: [false, true, false, false],
+    };
+
+    // first single-choice question (in first task)
+    let response_1 =
+      mockGetQuestionResponseFromSubmission(questionSubmissionTO);
+    response_1.gradedQuestion.status = "Correct";
+    response_1.gradedTask.taskStatus = "Correct";
+    await expect(
+      systemUnderTest.getAdaptivityElementQuestionResponse(
+        "",
+        0,
+        questionSubmissionTO
+      )
+    ).resolves.toStrictEqual(response_1);
+
+    // second single-choice question (in second task)
+    questionSubmissionTO.taskID = 2;
+    questionSubmissionTO.questionID = 3;
+    questionSubmissionTO.selectedAnswers = [true, false, false, false];
+    let response_2 =
+      mockGetQuestionResponseFromSubmission(questionSubmissionTO);
+    response_2.gradedQuestion.status = "Correct";
+    response_2.gradedTask.taskStatus = "Incorrect";
+    await expect(
+      systemUnderTest.getAdaptivityElementQuestionResponse(
+        "",
+        0,
+        questionSubmissionTO
+      )
+    ).resolves.toStrictEqual(response_2);
+  });
+
+  test("should get adaptivity question response for multiple-choice questions", async () => {
+    let questionSubmissionTO: AdaptivityElementQuestionSubmissionTO = {
+      elementID: 1,
+      taskID: 2,
+      questionID: 5,
+      selectedAnswers: [true, true, false, false],
+    };
+
+    let response = mockGetQuestionResponseFromSubmission(questionSubmissionTO);
+    response.gradedQuestion.status = "Correct";
+    response.gradedTask.taskStatus = "Incorrect";
+    await expect(
+      systemUnderTest.getAdaptivityElementQuestionResponse(
+        "",
+        0,
+        questionSubmissionTO
+      )
+    ).resolves.toStrictEqual(response);
+  });
+
+  test("should get adaptivity element status", async () => {
+    await expect(
+      systemUnderTest.getAdaptivityElementStatusResponse({
+        userToken: "",
+        elementID: 1,
+        worldID: 1,
+      })
+    ).resolves.toStrictEqual(MockAdaptivityElementStatusResponse);
+  });
+
+  test("should complete adaptivity element if all every required task is answered correct", async () => {
+    let singleChoice: AdaptivityElementQuestionSubmissionTO = {
+      elementID: 1,
+      taskID: 1,
+      questionID: 0,
+      selectedAnswers: [false, true, false, false],
+    };
+    systemUnderTest.getAdaptivityElementQuestionResponse("", 0, singleChoice);
+
+    let multiChoice: AdaptivityElementQuestionSubmissionTO = {
+      elementID: 1,
+      taskID: 2,
+      questionID: 1,
+      selectedAnswers: [true, true, false],
+    };
+    systemUnderTest.getAdaptivityElementQuestionResponse("", 0, multiChoice);
+
+    const result = await systemUnderTest.getAdaptivityElementStatusResponse({
+      userToken: "",
+      worldID: 1,
+      elementID: 1,
+    });
+    expect(result.element).toStrictEqual({
+      elementID: -1,
+      success: true,
+    });
   });
 });
