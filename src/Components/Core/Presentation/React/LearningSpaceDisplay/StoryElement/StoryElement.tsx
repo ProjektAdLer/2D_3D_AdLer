@@ -134,22 +134,42 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
       <div className="fixed top-0 bottom-0 left-0 right-0 z-50 flex flex-col items-center justify-center w-screen h-full bg-blacktrans lg:grid lg:grid-rows-3 lg:items-start">
         {/* Background NPC */}
         <div className="flex items-end justify-start invisible w-full row-start-2 pl-16 lg:visible lg:h-full">
-          <img
-            className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
-            alt="LearningImage!"
-            src={getNPCImage(viewModel.modelType.Value[0], true)}
-          ></img>
+          {!isSplitStory ||
+            (isSplitStory && pickedStory === StoryElementType.Intro && (
+              <img
+                className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+                alt="LearningImage!"
+                src={getNPCImage(viewModel.modelType.Value[0], true)}
+              />
+            ))}
+          {isSplitStory && pickedStory === StoryElementType.Outro && (
+            <img
+              className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+              alt="LearningImage!"
+              src={getNPCImage(viewModel.modelType.Value[1], true)}
+            />
+          )}
         </div>
         {/* Modal */}
         <div className="flex items-start justify-center pb-2 w-full lg:w-[95vw] max-w-7xl lg:max-h-[32vh] pt-2 lg:pt-0 row-start-3 ">
           <div className="flex flex-col p-2 xl:px-8 gap-2 justify-center rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%]">
             {/* Header */}
-            <div className="z-20 flex items-start justify-center lg:max-w-5xl xl:max-w-6xl gap-2 py-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
-              <img
-                className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
-                alt="LearningImage!"
-                src={getNPCImage(viewModel.modelType.Value[0], false)}
-              ></img>
+            <div className="z-20 flex items-start justify-center gap-2 py-2 pb-3 overflow-hidden text-xl font-bold lg:max-w-5xl xl:max-w-6xl text-adlerdarkblue lg:roboto-black lg:text-2xl ">
+              {!isSplitStory ||
+                (isSplitStory && pickedStory === StoryElementType.Intro && (
+                  <img
+                    className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+                    alt="LearningImage!"
+                    src={getNPCImage(viewModel.modelType.Value[0], false)}
+                  />
+                ))}
+              {isSplitStory && pickedStory === StoryElementType.Outro && (
+                <img
+                  className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+                  alt="LearningImage!"
+                  src={getNPCImage(viewModel.modelType.Value[1], false)}
+                />
+              )}
 
               <div className="w-full lg:text-xl">{titleText}</div>
 
@@ -187,7 +207,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
 
                 {(viewModel.showOnlyIntro.Value ||
                   viewModel.showOnlyOutro.Value) && (
-                  <div className="flex flex-col gap-6 lg:gap-8 items-center justify-center w-full h-full ">
+                  <div className="flex flex-col items-center justify-center w-full h-full gap-6 lg:gap-8 ">
                     {createBasicLayoutWithBackButton(
                       contentTexts,
                       pageId,
@@ -211,11 +231,11 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   ) {
     return (
       <>
-        <div className="flex  items-center justify-center p-2 bg-buttonbgblue rounded-xl">
+        <div className="flex items-center justify-center p-2 bg-buttonbgblue rounded-xl">
           {contentTexts[pageId].toString()}
         </div>
         <div
-          className="flex w-full lg:max-w-5xl xl:max-w-6xl justify-end"
+          className="flex justify-end w-full lg:max-w-5xl xl:max-w-6xl"
           style={{ minHeight: "32px" }}
         >
           <div className="grid w-16 grid-cols-2 lg:w-32 justify-items-end">
@@ -254,10 +274,10 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   ) {
     return (
       <>
-        <div className="flex items-center justify-center  p-2 bg-buttonbgblue rounded-xl">
+        <div className="flex items-center justify-center p-2 bg-buttonbgblue rounded-xl">
           {contentTexts[pageId].toString()}
         </div>
-        <div className="flex w-full min-h-8 lg:max-w-5xl xl:max-w-6xl justify-between">
+        <div className="flex justify-between w-full min-h-8 lg:max-w-5xl xl:max-w-6xl">
           <StyledButton
             shape="freefloatleft"
             onClick={controller.backToMenuButtonClicked}
