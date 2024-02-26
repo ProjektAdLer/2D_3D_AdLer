@@ -72,11 +72,11 @@ export default class MockBackendAdapter implements IBackendPort {
       elements: [
         {
           elementID: 1,
-          hasScored: true,
+          hasScored: false,
         },
         {
           elementID: 2,
-          hasScored: true,
+          hasScored: false,
         },
         {
           elementID: 3,
