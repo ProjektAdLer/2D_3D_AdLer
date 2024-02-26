@@ -1,7 +1,7 @@
 export enum LearningSpaceThemeType {
   Campus = "CAMPUS", // kept for backwards campatibility
-  CampusAB = "CAMPUS_AB",
-  CampusKE = "CAMPUS_KE",
+  CampusAB = "CAMPUSASCHAFFENBURG",
+  CampusKE = "CAMPUSKEMPTEN",
   Arcade = "ARCADE",
   Suburb = "SUBURB",
 }
