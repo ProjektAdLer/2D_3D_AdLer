@@ -19,7 +19,7 @@ export const LearningSpaceTemplate_D: ILearningSpaceTemplate = {
   elementSlots: [
     {
       // 1
-      position: { x: -7.6, y: 6.8 },
+      position: { x: -7.2, y: 6.4 },
       orientation: { rotation: 135 },
     },
     {
@@ -69,7 +69,7 @@ export const LearningSpaceTemplate_D: ILearningSpaceTemplate = {
     },
     {
       // 11
-      position: { x: -7.6, y: -7.6 },
+      position: { x: -7.2, y: -7.2 },
       orientation: { rotation: 45 },
     },
     {
@@ -103,11 +103,11 @@ export const LearningSpaceTemplate_D: ILearningSpaceTemplate = {
   },
   windows: [
     {
-      position: { x: -8.4, y: -3.4 },
+      position: { x: -8.6, y: -3.4 },
       orientation: { rotation: 180 },
     },
     {
-      position: { x: -8.4, y: 2.6 },
+      position: { x: -8.6, y: 2.6 },
       orientation: { rotation: 180 },
     },
   ],
