@@ -161,11 +161,11 @@ describe("MockBackendAdapter", () => {
       elements: [
         {
           elementID: 1,
-          hasScored: true,
+          hasScored: false,
         },
         {
           elementID: 2,
-          hasScored: true,
+          hasScored: false,
         },
         {
           elementID: 3,
