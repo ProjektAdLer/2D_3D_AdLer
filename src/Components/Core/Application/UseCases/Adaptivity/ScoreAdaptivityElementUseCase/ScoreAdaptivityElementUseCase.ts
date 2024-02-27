@@ -13,6 +13,7 @@ import type { IInternalCalculateLearningWorldScoreUseCase } from "../../Calculat
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILearningWorldPort from "../../../Ports/Interfaces/ILearningWorldPort";
+import type IBeginStoryElementOutroCutSceneUseCase from "../../BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 
 @injectable()
 export default class ScoreAdaptivityElementUseCase
@@ -30,7 +31,9 @@ export default class ScoreAdaptivityElementUseCase
     @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
     private calculateSpaceScoreUseCase: IInternalCalculateLearningSpaceScoreUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
-    private worldPort: ILearningWorldPort
+    private worldPort: ILearningWorldPort,
+    @inject(USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase)
+    private beginStoryElementOutroCutSceneUseCase: IBeginStoryElementOutroCutSceneUseCase
   ) {}
 
   internalExecute(elementID: ComponentID): void {
@@ -77,6 +80,11 @@ export default class ScoreAdaptivityElementUseCase
     const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
       worldID: userLocation.worldID,
       spaceID: userLocation.spaceID,
+    });
+
+    // trigger cutscene
+    this.beginStoryElementOutroCutSceneUseCase.execute({
+      scoredLearningElementID: elementID,
     });
 
     this.worldPort.onLearningElementScored(true, elementID);
