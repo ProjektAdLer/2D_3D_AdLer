@@ -115,6 +115,7 @@ export default class ScenePresenter implements IScenePresenter {
   disposeScene(): void {
     this.navigationMeshes = [];
     this.disposeSceneCallbacks.forEach((callback) => callback());
+    this.disposeSceneCallbacks = [];
     this.sceneDefinition.disposeScene();
   }
 
