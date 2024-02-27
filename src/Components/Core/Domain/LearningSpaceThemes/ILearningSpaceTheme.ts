@@ -17,6 +17,8 @@ export default interface ILearningSpaceTheme {
   readonly ambienceModel: string;
   readonly storyElementModel: LearningElementModel;
   readonly decorationModelLinkLShape: string;
+  readonly decorationModelLinkTShape: string;
+  readonly decorationModelLinkDShape: string;
   readonly decorationModelLink2x2: string;
   readonly decorationModelLink2x3: string;
   readonly decorationModelLinkTShape: string;

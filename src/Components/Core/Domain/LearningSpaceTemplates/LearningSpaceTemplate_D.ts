@@ -94,7 +94,7 @@ export const LearningSpaceTemplate_D: ILearningSpaceTemplate = {
     },
   ],
   entryDoor: {
-    position: { x: -5.2, y: -8.4 },
+    position: { x: -4.4, y: -8.4 }, //-5.2 Collides with Arcade Env
     orientation: { rotation: 90 },
   },
   exitDoor: {

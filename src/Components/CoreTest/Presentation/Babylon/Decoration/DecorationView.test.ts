@@ -123,6 +123,10 @@ describe("DecorationView", () => {
       LearningSpaceTemplateType.T,
       LearningSpaceTheme_Arcade.decorationModelLinkTShape,
     ],
+    [
+      LearningSpaceTemplateType.D,
+      LearningSpaceTheme_Arcade.decorationModelLinkDShape,
+    ],
   ])(
     "asyncSetup loads with theme `Campus` models, when given spacetemplatetype %s, returns modelLink %s",
     async (templateType, expectedResult) => {
@@ -156,7 +160,11 @@ describe("DecorationView", () => {
     ],
     [
       LearningSpaceTemplateType.T,
-      LearningSpaceTheme_Arcade.decorationModelLinkTShape,
+      LearningSpaceTheme_Campus.decorationModelLinkTShape,
+    ],
+    [
+      LearningSpaceTemplateType.D,
+      LearningSpaceTheme_Campus.decorationModelLinkDShape,
     ],
   ])(
     "asyncSetup loads with theme `Campus` models, when given spacetemplatetype %s, returns modelLink %s",
@@ -191,7 +199,11 @@ describe("DecorationView", () => {
     ],
     [
       LearningSpaceTemplateType.T,
-      LearningSpaceTheme_Arcade.decorationModelLinkTShape,
+      LearningSpaceTheme_Suburb.decorationModelLinkTShape,
+    ],
+    [
+      LearningSpaceTemplateType.D,
+      LearningSpaceTheme_Suburb.decorationModelLinkDShape,
     ],
   ])(
     "asyncSetup loads with theme `Suburb` models, when given spacetemplatetype %s, returns modelLink %s",

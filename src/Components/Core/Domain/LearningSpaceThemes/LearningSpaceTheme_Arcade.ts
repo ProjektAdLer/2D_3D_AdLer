@@ -54,6 +54,7 @@ const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
   decorationModelLink2x2: require("../../../../Assets/3dModels/arcadeTheme/d2x2Shape Sampleroom - Deko.glb"),
   decorationModelLink2x3: require("../../../../Assets/3dModels/arcadeTheme/d2x3Shape Sampleroom - Deko.glb"),
   decorationModelLinkTShape: require("../../../../Assets/3dModels/arcadeTheme/dTShape Sampleroom - Deko.glb"),
+  decorationModelLinkDShape: require("../../../../Assets/3dModels/arcadeTheme/dDShape Sampleroom - Deko.glb"),
 };
 
 export default LearningSpaceTheme_Arcade;
