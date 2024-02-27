@@ -17,9 +17,11 @@ import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityCon
 import Logger from "../../../../Core/Adapters/Logger/Logger";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 import { IInternalCalculateLearningWorldScoreUseCase } from "../../../../Core/Application/UseCases/CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
-import { error } from "console";
+import IBeginStoryElementOutroCutSceneUseCase from "../../../../Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
+const beginStoryElementOutroCutSceneUseCaseMock =
+  mock<IBeginStoryElementOutroCutSceneUseCase>();
 
 // create EntityContainer mock
 const entityContainerMock = mock<IEntityContainer>();
@@ -104,6 +106,9 @@ describe("ScoreH5PLearningElementUseCase", () => {
     CoreDIContainer.rebind(
       USECASE_TYPES.IGetUserLocationUseCase
     ).toConstantValue(getUserLocationUseCaseMock);
+    CoreDIContainer.rebind(
+      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+    ).toConstantValue(beginStoryElementOutroCutSceneUseCaseMock);
   });
 
   beforeEach(() => {
