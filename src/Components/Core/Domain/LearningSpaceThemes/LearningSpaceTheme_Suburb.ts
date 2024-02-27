@@ -52,6 +52,7 @@ const LearningSpaceTheme_Suburb: ILearningSpaceTheme = {
   decorationModelLink2x2: require("../../../../Assets/3dModels/suburbTheme/d2x2Shape Sampleroom - Deko.glb"),
   decorationModelLink2x3: require("../../../../Assets/3dModels/suburbTheme/d2x3Shape Sampleroom - Deko.glb"),
   decorationModelLinkTShape: require("../../../../Assets/3dModels/suburbTheme/dTShape Sampleroom - Deko.glb"),
+  decorationModelLinkDShape: require("../../../../Assets/3dModels/suburbTheme/dDShape Sampleroom - Deko.glb"),
 };
 
 export default LearningSpaceTheme_Suburb;

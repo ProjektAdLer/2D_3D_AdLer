@@ -6,9 +6,9 @@ export default class NavigationConfiguration {
   public navmeshParameters: INavMeshParameters = {
     cs: 0.2,
     ch: 0.2,
-    walkableSlopeAngle: 90,
+    walkableSlopeAngle: 10,
     walkableHeight: 1.0,
-    walkableClimb: 1,
+    walkableClimb: 0.05,
     walkableRadius: 3,
     maxEdgeLen: 5,
     maxSimplificationError: 1.3,
