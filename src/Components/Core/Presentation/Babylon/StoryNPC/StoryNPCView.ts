@@ -217,6 +217,7 @@ export default class StoryNPCView {
     // timer needs to be cleared, else StoryNPC won't be cleaned up by garbage collection
     this.scenePresenter.addDisposeSceneCallback(() => {
       clearTimeout(this.viewModel.idleTimer);
+      this.viewModel.state.Value = StoryNPCState.Idle; // prevent random movement calls after scene is disposed
     });
   }
 

@@ -15,6 +15,11 @@ import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementT
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
 import { Vector3 } from "@babylonjs/core";
+import IScenePresenter from "../SceneManagement/IScenePresenter";
+import SCENE_TYPES, {
+  ScenePresenterFactory,
+} from "~DependencyInjection/Scenes/SCENE_TYPES";
+import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 
 @injectable()
 export default class StoryNPCBuilder
@@ -26,6 +31,14 @@ export default class StoryNPCBuilder
   >
   implements IStoryNPCBuilder
 {
+  public modelType: LearningElementModel;
+  public storyType: StoryElementType;
+  public noLearningElementHasScored: boolean = false;
+  public learningSpaceCompleted: boolean = false;
+  public learningSpaceTemplateType: LearningSpaceTemplateType;
+
+  private scenePresenter: IScenePresenter;
+
   constructor() {
     super(
       StoryNPCViewModel,
@@ -33,13 +46,12 @@ export default class StoryNPCBuilder
       StoryNPCView,
       StoryNPCPresenter
     );
-  }
 
-  public modelType: LearningElementModel;
-  public storyType: StoryElementType;
-  public noLearningElementHasScored: boolean = false;
-  public learningSpaceCompleted: boolean = false;
-  public learningSpaceTemplateType: LearningSpaceTemplateType;
+    const scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
+      SCENE_TYPES.ScenePresenterFactory
+    );
+    this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
+  }
 
   override buildViewModel(): void {
     super.buildViewModel();
@@ -103,8 +115,14 @@ export default class StoryNPCBuilder
 
   override buildPresenter(): void {
     super.buildPresenter();
-    CoreDIContainer.get<ILearningWorldPort>(
+
+    const learningWorldPort = CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!);
+    );
+    learningWorldPort.registerAdapter(this.presenter!);
+
+    this.scenePresenter.addDisposeSceneCallback(() => {
+      learningWorldPort.unregisterAdapter(this.presenter!);
+    });
   }
 }
