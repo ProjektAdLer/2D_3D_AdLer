@@ -51,6 +51,7 @@ export const LearningSpaceTheme_CampusAB: ILearningSpaceTheme = {
   decorationModelLinkLShape: require("../../../../Assets/3dModels/campusTheme/dLShape Sampleroom - Deko.glb"),
   decorationModelLink2x2: require("../../../../Assets/3dModels/campusTheme/d2x2Shape Sampleroom - Deko.glb"),
   decorationModelLink2x3: require("../../../../Assets/3dModels/campusTheme/d2x3Shape Sampleroom - Deko.glb"),
+  decorationModelLinkTShape: require("../../../../Assets/3dModels/campusTheme/dTShape Sampleroom - Deko.glb"),
 };
 
 export const LearningSpaceTheme_CampusKE: ILearningSpaceTheme = {
@@ -67,4 +68,6 @@ export const LearningSpaceTheme_CampusKE: ILearningSpaceTheme = {
     LearningSpaceTheme_CampusAB.decorationModelLinkLShape,
   decorationModelLink2x2: LearningSpaceTheme_CampusAB.decorationModelLink2x2,
   decorationModelLink2x3: LearningSpaceTheme_CampusAB.decorationModelLink2x3,
+  decorationModelLinkTShape:
+    LearningSpaceTheme_CampusAB.decorationModelLinkTShape,
 };

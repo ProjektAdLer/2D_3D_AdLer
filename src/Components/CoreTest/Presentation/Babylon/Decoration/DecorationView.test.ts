@@ -119,6 +119,10 @@ describe("DecorationView", () => {
       LearningSpaceTemplateType.R8,
       LearningSpaceTheme_Arcade.decorationModelLink2x3,
     ],
+    [
+      LearningSpaceTemplateType.T,
+      LearningSpaceTheme_Arcade.decorationModelLinkTShape,
+    ],
   ])(
     "asyncSetup loads with theme `Campus` models, when given spacetemplatetype %s, returns modelLink %s",
     async (templateType, expectedResult) => {
@@ -150,6 +154,10 @@ describe("DecorationView", () => {
       LearningSpaceTemplateType.R8,
       LearningSpaceTheme_Campus.decorationModelLink2x3,
     ],
+    [
+      LearningSpaceTemplateType.T,
+      LearningSpaceTheme_Arcade.decorationModelLinkTShape,
+    ],
   ])(
     "asyncSetup loads with theme `Campus` models, when given spacetemplatetype %s, returns modelLink %s",
     async (templateType, expectedResult) => {
@@ -180,6 +188,10 @@ describe("DecorationView", () => {
     [
       LearningSpaceTemplateType.R8,
       LearningSpaceTheme_Suburb.decorationModelLink2x3,
+    ],
+    [
+      LearningSpaceTemplateType.T,
+      LearningSpaceTheme_Arcade.decorationModelLinkTShape,
     ],
   ])(
     "asyncSetup loads with theme `Suburb` models, when given spacetemplatetype %s, returns modelLink %s",
