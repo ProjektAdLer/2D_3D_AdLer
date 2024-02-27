@@ -273,6 +273,9 @@ export default class StoryNPCView {
 
   @bind
   private setRandomMovementTarget() {
+    // prevent movement when in invalid state
+    if (this.viewModel.state.Value !== StoryNPCState.RandomMovement) return;
+
     let target: Vector3;
     let distance: number = 0;
     do {
@@ -292,9 +295,7 @@ export default class StoryNPCView {
   @bind
   private startRandomMovementIdleTimeout(): void {
     this.viewModel.idleTimer = setTimeout(() => {
-      // prevent movement when in invalid state
-      if (this.viewModel.state.Value === StoryNPCState.RandomMovement)
-        this.setRandomMovementTarget();
+      this.setRandomMovementTarget();
     }, this.viewModel.idleTime);
   }
 }

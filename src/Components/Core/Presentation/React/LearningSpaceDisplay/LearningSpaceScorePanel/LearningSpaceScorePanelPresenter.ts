@@ -16,6 +16,7 @@ export default class LearningSpaceScorePanelPresenter
       spaceTO.maxScore
     );
   }
+
   onLearningSpaceScored(spaceScoreTO: LearningSpaceScoreTO): void {
     this.updateSpaceScoreInfo(
       spaceScoreTO.currentScore,

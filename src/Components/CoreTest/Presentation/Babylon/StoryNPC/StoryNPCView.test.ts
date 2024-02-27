@@ -442,7 +442,7 @@ describe("StoryNPCView", () => {
       );
     });
 
-    test("setRandomTarget calls startMovement on the characterNavigator with a target", () => {
+    test("setRandomMovementTarget calls startMovement on the characterNavigator with a target", () => {
       navigationMock.Plugin.getRandomPointAround.mockReturnValue(
         new Vector3(2, 0, 2)
       );
@@ -452,6 +452,7 @@ describe("StoryNPCView", () => {
       );
       viewModel.parentNode.position = new Vector3(0, 0, 0);
       viewModel.characterNavigator = characterNavigatorMock;
+      viewModel.state.Value = StoryNPCState.RandomMovement;
 
       systemUnderTest["setRandomMovementTarget"]();
 
@@ -491,22 +492,23 @@ describe("StoryNPCView", () => {
       expect(setRandomMovementTargetMock).toBeCalledTimes(1);
     });
 
-    test("startRandomMovementIdleTimeout does not call setRandomTarget when state is not RandomMovement", () => {
+    test("setRandomMovementTarget does not call character navigator when state is not RandomMovement", () => {
       viewModel.state.Value = StoryNPCState.Idle;
 
-      jest.useFakeTimers();
-      const setRandomMovementTargetMock = jest.spyOn(
-        systemUnderTest,
-        // prevent incorrect ts error for spying on private method
-        // @ts-ignore
-        "setRandomMovementTarget"
+      // mock correct target selection in case early return fails
+      navigationMock.Plugin.getRandomPointAround.mockReturnValue(
+        new Vector3(2, 0, 2)
       );
+      viewModel.parentNode = new TransformNode(
+        "mockParentNode",
+        new Scene(new NullEngine())
+      );
+      viewModel.parentNode.position = new Vector3(0, 0, 0);
+      viewModel.characterNavigator = characterNavigatorMock;
 
-      systemUnderTest["startRandomMovementIdleTimeout"]();
+      systemUnderTest["setRandomMovementTarget"]();
 
-      jest.advanceTimersByTime(viewModel.idleTime);
-
-      expect(setRandomMovementTargetMock).not.toBeCalled();
+      expect(characterNavigatorMock.startMovement).not.toBeCalled();
     });
   });
 });
