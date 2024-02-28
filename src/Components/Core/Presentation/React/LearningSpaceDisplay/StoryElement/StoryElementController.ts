@@ -11,6 +11,7 @@ export default class StoryElementController implements IStoryElementController {
   @bind
   closePanel(): void {
     this.viewModel.isOpen.Value = false;
+    this.viewModel.outroJustNowUnlocked.Value = false;
     CoreDIContainer.get<IEndStoryElementCutScene>(
       USECASE_TYPES.IEndStoryElementCutSceneUseCase
     ).execute();
