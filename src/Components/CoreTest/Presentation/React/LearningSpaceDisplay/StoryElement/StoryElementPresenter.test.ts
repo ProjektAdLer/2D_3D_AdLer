@@ -75,7 +75,7 @@ describe("StoryElementPresenter", () => {
         introStoryTexts: ["blabla111", "blabla222"],
         outroStoryTexts: ["blabla333"],
         modelType: null,
-        storyType: StoryElementType.Intro,
+        storyType: StoryElementType.IntroOutro,
       },
     ];
     let learningSpaceTO: LearningSpaceTO = {
@@ -106,7 +106,7 @@ describe("StoryElementPresenter", () => {
       "blabla222",
     ]);
     expect(viewModel.outroTexts.Value).toStrictEqual(["blabla333"]);
-    expect(viewModel.type.Value).toStrictEqual([StoryElementType.Intro]);
+    expect(viewModel.type.Value).toStrictEqual([StoryElementType.IntroOutro]);
   });
   test("onLearningSpaceLoaded sets the correct values, with model types", () => {
     let storyElement: StoryElementTO[] = [
@@ -115,7 +115,7 @@ describe("StoryElementPresenter", () => {
         outroStoryTexts: ["blabla333"],
         modelType:
           LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
-        storyType: StoryElementType.Intro,
+        storyType: StoryElementType.IntroOutro,
       },
     ];
     let learningSpaceTO: LearningSpaceTO = {
@@ -146,7 +146,7 @@ describe("StoryElementPresenter", () => {
       "blabla222",
     ]);
     expect(viewModel.outroTexts.Value).toStrictEqual(["blabla333"]);
-    expect(viewModel.type.Value).toStrictEqual([StoryElementType.Intro]);
+    expect(viewModel.type.Value).toStrictEqual([StoryElementType.IntroOutro]);
   });
 
   test("onLearningSpaceLoaded sets the correct values if no texts are given", () => {
@@ -156,7 +156,7 @@ describe("StoryElementPresenter", () => {
         outroStoryTexts: null,
         modelType:
           LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
-        storyType: StoryElementType.Intro,
+        storyType: StoryElementType.IntroOutro,
       },
     ];
     let learningSpaceTO: LearningSpaceTO = {
@@ -184,6 +184,6 @@ describe("StoryElementPresenter", () => {
 
     expect(viewModel.introTexts.Value).toStrictEqual(["Kein Text vorhanden."]);
     expect(viewModel.outroTexts.Value).toStrictEqual(["Kein Text vorhanden."]);
-    expect(viewModel.type.Value).toStrictEqual([StoryElementType.Intro]);
+    expect(viewModel.type.Value).toStrictEqual([StoryElementType.IntroOutro]);
   });
 });
