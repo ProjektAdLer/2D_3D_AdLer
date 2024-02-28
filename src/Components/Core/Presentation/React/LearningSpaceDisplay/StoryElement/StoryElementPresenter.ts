@@ -28,27 +28,40 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
     this.viewModel.isSplitStory.Value =
       learningSpaceTO.storyElements.length === 2;
+
     for (let i = 0; i < learningSpaceTO.storyElements.length; i++) {
       this.viewModel.type.Value[i] = learningSpaceTO.storyElements[i].storyType;
       if (
-        learningSpaceTO.storyElements[i].introStoryTexts === undefined ||
-        learningSpaceTO.storyElements[i].introStoryTexts === null ||
-        learningSpaceTO.storyElements[i].introStoryTexts!.length === 0
+        (learningSpaceTO.storyElements[i].storyType &
+          StoryElementType.Intro) ===
+        StoryElementType.Intro
       ) {
-        this.viewModel.introTexts.Value = ["Kein Text vorhanden."];
-      } else {
-        this.viewModel.introTexts.Value =
-          learningSpaceTO.storyElements[i].introStoryTexts!;
+        if (
+          learningSpaceTO.storyElements[i].introStoryTexts === undefined ||
+          learningSpaceTO.storyElements[i].introStoryTexts === null ||
+          learningSpaceTO.storyElements[i].introStoryTexts!.length === 0
+        ) {
+          this.viewModel.introTexts.Value = ["Kein Text vorhanden."];
+        } else {
+          this.viewModel.introTexts.Value =
+            learningSpaceTO.storyElements[i].introStoryTexts!;
+        }
       }
       if (
-        learningSpaceTO.storyElements[i].outroStoryTexts === undefined ||
-        learningSpaceTO.storyElements[i].outroStoryTexts === null ||
-        learningSpaceTO.storyElements[i].outroStoryTexts!.length === 0
+        (learningSpaceTO.storyElements[0].storyType &
+          StoryElementType.Outro) ===
+        StoryElementType.Outro
       ) {
-        this.viewModel.outroTexts.Value = ["Kein Text vorhanden."];
-      } else {
-        this.viewModel.outroTexts.Value =
-          learningSpaceTO.storyElements[i].outroStoryTexts!;
+        if (
+          learningSpaceTO.storyElements[i].outroStoryTexts === undefined ||
+          learningSpaceTO.storyElements[i].outroStoryTexts === null ||
+          learningSpaceTO.storyElements[i].outroStoryTexts!.length === 0
+        ) {
+          this.viewModel.outroTexts.Value = ["Kein Text vorhanden."];
+        } else {
+          this.viewModel.outroTexts.Value =
+            learningSpaceTO.storyElements[i].outroStoryTexts!;
+        }
       }
       if (learningSpaceTO.storyElements[i].modelType !== null)
         this.viewModel.modelType.Value[i] =
