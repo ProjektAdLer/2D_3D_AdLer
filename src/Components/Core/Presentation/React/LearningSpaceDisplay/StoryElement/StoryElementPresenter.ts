@@ -48,7 +48,7 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
         }
       }
       if (
-        (learningSpaceTO.storyElements[0].storyType &
+        (learningSpaceTO.storyElements[i].storyType &
           StoryElementType.Outro) ===
         StoryElementType.Outro
       ) {
@@ -70,5 +70,6 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
     if (learningSpaceTO.currentScore >= learningSpaceTO.requiredScore) {
       this.viewModel.outroUnlocked.Value = true;
     }
+    console.log(this.viewModel);
   }
 }
