@@ -35,7 +35,7 @@ export default class CharacterNavigator
     height: 1,
     maxAcceleration: 5000.0,
     maxSpeed: 3.0,
-    collisionQueryRange: 20.0,
+    collisionQueryRange: 2,
     pathOptimizationRange: 0.0,
     separationWeight: 1.0,
     reachRadius: 0.4, // acts as stopping distance
