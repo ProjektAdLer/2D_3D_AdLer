@@ -29,6 +29,8 @@ export default class CharacterAnimator implements ICharacterAnimator {
   >(CharacterAnimationStates.Idle, []);
   private animationBlendValue: number = 0;
   private rotationObserverRef: Nullable<Observer<Scene>>;
+  private transitionObserverRef: Nullable<Observer<Scene>>;
+  private transitionFinishedCallback: Nullable<() => void>;
   private scenePresenter: IScenePresenter;
   private getCharacterVelocity: () => Vector3;
   private characterRotationNode: TransformNode;
@@ -153,13 +155,34 @@ export default class CharacterAnimator implements ICharacterAnimator {
   }
   // -- Animation Transition --
 
+  private createOnBeforeAnimationTransitionObserver(
+    from: AnimationGroup,
+    to: AnimationGroup,
+    blendValueIncrementFunction: () => number
+  ) {
+    if (this.transitionObserverRef !== null) {
+      this.scenePresenter.Scene.onBeforeAnimationsObservable.remove(
+        this.transitionObserverRef
+      );
+      this.transitionObserverRef = null;
+      this.resolveTransitionFinishedCallback();
+    }
+
+    this.transitionObserverRef =
+      this.scenePresenter.Scene.onBeforeAnimationsObservable.add(() => {
+        this.onBeforeAnimationTransitionObserver(
+          this.idleAnimation,
+          this.walkAnimation,
+          this.getVelocityAnimationInterpolationIncrement
+        );
+      });
+  }
+
   @bind
   private onBeforeAnimationTransitionObserver(
     from: AnimationGroup,
     to: AnimationGroup,
-    observerToRemove: Nullable<Observer<Scene>>,
-    blendValueIncrementFunction: () => number,
-    transitionFinishedCallback?: () => void
+    blendValueIncrementFunction: () => number
   ): void {
     this.animationBlendValue += blendValueIncrementFunction();
 
@@ -168,54 +191,57 @@ export default class CharacterAnimator implements ICharacterAnimator {
       to.setWeightForAllAnimatables(1.0);
 
       this.scenePresenter.Scene.onBeforeAnimationsObservable.remove(
-        observerToRemove
+        this.transitionObserverRef
       );
+      this.transitionObserverRef = null;
+      this.resolveTransitionFinishedCallback();
     } else {
       from.setWeightForAllAnimatables(1.0 - this.animationBlendValue);
       to.setWeightForAllAnimatables(this.animationBlendValue);
     }
   }
 
+  private resolveTransitionFinishedCallback(): void {
+    this.transitionFinishedCallback?.();
+    this.transitionFinishedCallback = null;
+  }
+
   @bind
   private transitionFromIdleToWalk(): void {
+    this.animationBlendValue = 0;
+    this.idleAnimation.setWeightForAllAnimatables(1.0);
+    this.walkAnimation.setWeightForAllAnimatables(0.0);
+
     this.rotationObserverRef =
       this.scenePresenter.Scene.onBeforeRenderObservable.add(
         this.rotateCharacter
       );
 
-    this.animationBlendValue = 0;
-    const observer = this.scenePresenter.Scene.onBeforeAnimationsObservable.add(
-      () => {
-        this.onBeforeAnimationTransitionObserver(
-          this.idleAnimation,
-          this.walkAnimation,
-          observer,
-          this.getVelocityAnimationInterpolationIncrement
-        );
-      }
+    this.createOnBeforeAnimationTransitionObserver(
+      this.idleAnimation,
+      this.walkAnimation,
+      this.getVelocityAnimationInterpolationIncrement
     );
   }
 
   @bind
   private transitionFromWalkToIdle(): void {
     this.animationBlendValue = 0;
-    const observer = this.scenePresenter.Scene.onBeforeAnimationsObservable.add(
-      () => {
-        this.onBeforeAnimationTransitionObserver(
-          this.walkAnimation,
-          this.idleAnimation,
-          observer,
-          () => this.getTimedAnimationInterpolationIncrement(100),
-          // () => 1 - this.getVelocityAnimationInterpolationIncrement(),
-          this.removeRotationObserver
-        );
-      }
+    this.walkAnimation.setWeightForAllAnimatables(1.0);
+    this.idleAnimation.setWeightForAllAnimatables(0.0);
+
+    this.transitionFinishedCallback = this.removeRotationObserver;
+
+    this.createOnBeforeAnimationTransitionObserver(
+      this.walkAnimation,
+      this.idleAnimation,
+      // () => this.getTimedAnimationInterpolationIncrement(30)
+      () => 1 - this.getVelocityAnimationInterpolationIncrement()
     );
   }
 
   @bind
   private transitionFromIdleOrWalkToInteract(): void {
-    this.animationBlendValue = 0;
     let fromAnimation: AnimationGroup;
     switch (this.stateMachine.CurrentState) {
       case CharacterAnimationStates.Idle:
@@ -226,33 +252,31 @@ export default class CharacterAnimator implements ICharacterAnimator {
         break;
     }
 
+    this.animationBlendValue = 0;
+    fromAnimation!.setWeightForAllAnimatables(1.0);
+    this.interactionAnimation!.setWeightForAllAnimatables(0.0);
+
+    this.transitionFinishedCallback = this.removeRotationObserver;
+
     this.interactionAnimation!.play(false);
 
-    const observer = this.scenePresenter.Scene.onBeforeAnimationsObservable.add(
-      () => {
-        this.onBeforeAnimationTransitionObserver(
-          fromAnimation,
-          this.interactionAnimation!,
-          observer,
-          () => this.getTimedAnimationInterpolationIncrement(100),
-          this.removeRotationObserver
-        );
-      }
+    this.createOnBeforeAnimationTransitionObserver(
+      fromAnimation!,
+      this.interactionAnimation!,
+      () => this.getTimedAnimationInterpolationIncrement(100)
     );
   }
 
   @bind
   private transitionFromInteractToIdle(): void {
     this.animationBlendValue = 0;
-    const observer = this.scenePresenter.Scene.onBeforeAnimationsObservable.add(
-      () => {
-        this.onBeforeAnimationTransitionObserver(
-          this.interactionAnimation!,
-          this.idleAnimation,
-          observer,
-          () => this.getTimedAnimationInterpolationIncrement(50)
-        );
-      }
+    this.interactionAnimation!.setWeightForAllAnimatables(1.0);
+    this.idleAnimation.setWeightForAllAnimatables(0.0);
+
+    this.createOnBeforeAnimationTransitionObserver(
+      this.interactionAnimation!,
+      this.idleAnimation,
+      () => this.getTimedAnimationInterpolationIncrement(100)
     );
   }
 
