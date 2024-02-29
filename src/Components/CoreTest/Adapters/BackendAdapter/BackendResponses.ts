@@ -34,6 +34,7 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
           goals: ["TestGoals"],
           model: LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
         },
+        null,
       ],
       template: LearningSpaceTemplateType.L,
       templateStyle: LearningSpaceThemeType.Campus,
