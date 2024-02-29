@@ -392,17 +392,10 @@ export default class LoadLearningWorldUseCase
       );
 
       if (element instanceof BackendAdaptivityElementTO) {
-        if (element.adaptivity !== undefined) {
-          this.createAdaptivityElementEntity(
-            newElementEntity,
-            element.adaptivity
-          );
-        } else {
-          this.logger.log(
-            LogLevelTypes.ERROR,
-            "LoadLearningWorldUseCase: No Adaptivity-Data found!"
-          );
-        }
+        this.createAdaptivityElementEntity(
+          newElementEntity,
+          element.adaptivity
+        );
       }
 
       return newElementEntity;
