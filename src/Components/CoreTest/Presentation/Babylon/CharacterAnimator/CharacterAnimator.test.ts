@@ -121,32 +121,25 @@ describe("CharacterAnimator", () => {
   test("onBeforeAnimationTransitionObserver removes the given observer from the onBeforeAniamtionObservable of the scene when the transition is done", () => {
     const fromAnimation = mock<AnimationGroup>();
     const toAnimation = mock<AnimationGroup>();
-    const mockObserver = mock<Nullable<Observer<Scene>>>();
 
     systemUnderTest["onBeforeAnimationTransitionObserver"](
       fromAnimation,
       toAnimation,
-      mockObserver,
       () => 1 // transition is done within the first call
     );
 
     expect(
       scenePresenterMock.Scene.onBeforeAnimationsObservable.remove
     ).toHaveBeenCalledTimes(1);
-    expect(
-      scenePresenterMock.Scene.onBeforeAnimationsObservable.remove
-    ).toHaveBeenCalledWith(mockObserver);
   });
 
   test("onBeforeAnimationTransitionObserver sets from animation weight to 0 and to animation weigth to 1 when transition is done", () => {
     const fromAnimation = mock<AnimationGroup>();
     const toAnimation = mock<AnimationGroup>();
-    const mockObserver = mock<Nullable<Observer<Scene>>>();
 
     systemUnderTest["onBeforeAnimationTransitionObserver"](
       fromAnimation,
       toAnimation,
-      mockObserver,
       () => 1 // transition is done within the first call
     );
 
@@ -159,12 +152,10 @@ describe("CharacterAnimator", () => {
   test("onBeforeAnimationTransitionObserver sets from animation weight to 1-increment and to animation weigth to increment for one step of the transition", () => {
     const fromAnimation = mock<AnimationGroup>();
     const toAnimation = mock<AnimationGroup>();
-    const mockObserver = mock<Nullable<Observer<Scene>>>();
 
     systemUnderTest["onBeforeAnimationTransitionObserver"](
       fromAnimation,
       toAnimation,
-      mockObserver,
       () => 0.1
     );
 
