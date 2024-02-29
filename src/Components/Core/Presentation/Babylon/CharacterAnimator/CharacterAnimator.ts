@@ -29,6 +29,8 @@ export default class CharacterAnimator implements ICharacterAnimator {
   >(CharacterAnimationStates.Idle, []);
   private animationBlendValue: number = 0;
   private rotationObserverRef: Nullable<Observer<Scene>>;
+  private transitionObserverRef: Nullable<Observer<Scene>>;
+  private transitionFinishedCallback: Nullable<() => void>;
   private scenePresenter: IScenePresenter;
   private getCharacterVelocity: () => Vector3;
   private characterRotationNode: TransformNode;
@@ -67,7 +69,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
     this.stateMachine.applyAction(action);
   }
 
-  // -- Setup Animations --
+  // -- State Machine Setup --
 
   private setupIdleAnimation(): void {
     this.idleAnimation.play(true);
@@ -92,24 +94,47 @@ export default class CharacterAnimator implements ICharacterAnimator {
     });
 
     this.scenePresenter.Scene.onBeforeRenderObservable.add(
-      this.setWalkingAnimationSpeed
+      this.walkingStateOnBeforeRenderCallback
     );
   }
 
   @bind
-  private setWalkingAnimationSpeed(): void {
-    if (this.stateMachine.CurrentState !== CharacterAnimationStates.Walking)
-      return;
+  private walkingStateOnBeforeRenderCallback(): void {
+    if (this.stateMachine.CurrentState === CharacterAnimationStates.Walking) {
+      const absoluteVelocity = this.getCharacterVelocity().length();
 
-    let velocity = this.getCharacterVelocity().length();
-    this.walkAnimation.speedRatio = Math.max(velocity, 0);
+      this.setWalkingAnimationSpeed(absoluteVelocity);
+      this.rotateCharacter(absoluteVelocity);
+    }
+  }
+
+  private setWalkingAnimationSpeed(absoluteVelocity: number): void {
+    this.walkAnimation.speedRatio = Math.max(absoluteVelocity, 0);
+  }
+
+  private rotateCharacter(absoluteVelocity: number): void {
+    if (absoluteVelocity > this.rotationVelocityThreshold) {
+      const normalizedVelocity = this.getCharacterVelocity().normalize();
+      const desiredRotation = Math.atan2(
+        normalizedVelocity.x,
+        normalizedVelocity.z
+      );
+
+      this.characterRotationNode.rotationQuaternion = Quaternion.RotationAxis(
+        Axis.Y,
+        desiredRotation
+      );
+    }
   }
 
   private setupInteractionAnimation(): void {
     this.interactionAnimation!.onAnimationGroupEndObservable.add(() => {
-      this.stateMachine.applyAction(
-        CharacterAnimationActions.InteractionFinished
-      );
+      if (
+        this.stateMachine.CurrentState === CharacterAnimationStates.Interaction
+      )
+        this.stateMachine.applyAction(
+          CharacterAnimationActions.InteractionFinished
+        );
     });
 
     this.interactionAnimation!.setWeightForAllAnimatables(0.0);
@@ -126,96 +151,90 @@ export default class CharacterAnimator implements ICharacterAnimator {
       to: CharacterAnimationStates.Idle,
       onTransitionCallback: this.transitionFromInteractToIdle,
     });
+    this.stateMachine.addTransition({
+      action: CharacterAnimationActions.MovementStarted,
+      from: CharacterAnimationStates.Interaction,
+      to: CharacterAnimationStates.Walking,
+      onTransitionCallback: this.transitionFromInteractToWalk,
+    });
   }
-  // -- Rotation Callback --
 
-  @bind
-  private rotateCharacter(): void {
-    const velocity = this.getCharacterVelocity();
+  // -- Animation Transition Management --
 
-    if (velocity.length() > this.rotationVelocityThreshold) {
-      velocity.normalize();
-      let desiredRotation = Math.atan2(velocity.x, velocity.z);
-
-      this.characterRotationNode.rotationQuaternion = Quaternion.RotationAxis(
-        Axis.Y,
-        desiredRotation
-      );
+  private createOnBeforeAnimationTransitionObserver(
+    from: AnimationGroup,
+    to: AnimationGroup,
+    blendValueIncrementFunction: () => number
+  ) {
+    if (this.transitionObserverRef !== null) {
+      this.cleanupOnBeforeAnimationTransitionObserver();
     }
-  }
 
-  @bind
-  private removeRotationObserver(): void {
-    if (this.rotationObserverRef)
-      this.scenePresenter.Scene.onBeforeRenderObservable.remove(
-        this.rotationObserverRef
-      );
+    this.animationBlendValue = 0;
+    from.setWeightForAllAnimatables(1.0);
+    to.setWeightForAllAnimatables(0.0);
+
+    this.transitionObserverRef =
+      this.scenePresenter.Scene.onBeforeAnimationsObservable.add(() => {
+        this.onBeforeAnimationTransitionObserver(
+          from,
+          to,
+          blendValueIncrementFunction
+        );
+      });
   }
-  // -- Animation Transition --
 
   @bind
   private onBeforeAnimationTransitionObserver(
-    from: AnimationGroup,
-    to: AnimationGroup,
-    observerToRemove: Nullable<Observer<Scene>>,
-    blendValueIncrementFunction: () => number,
-    transitionFinishedCallback?: () => void
+    fromAnimation: AnimationGroup,
+    toAnimation: AnimationGroup,
+    blendValueIncrementFunction: () => number
   ): void {
     this.animationBlendValue += blendValueIncrementFunction();
 
     if (this.animationBlendValue >= 1) {
-      from.setWeightForAllAnimatables(0.0);
-      to.setWeightForAllAnimatables(1.0);
+      fromAnimation.setWeightForAllAnimatables(0.0);
+      toAnimation.setWeightForAllAnimatables(1.0);
 
-      this.scenePresenter.Scene.onBeforeAnimationsObservable.remove(
-        observerToRemove
-      );
+      this.cleanupOnBeforeAnimationTransitionObserver();
     } else {
-      from.setWeightForAllAnimatables(1.0 - this.animationBlendValue);
-      to.setWeightForAllAnimatables(this.animationBlendValue);
+      fromAnimation.setWeightForAllAnimatables(1.0 - this.animationBlendValue);
+      toAnimation.setWeightForAllAnimatables(this.animationBlendValue);
     }
   }
 
+  private cleanupOnBeforeAnimationTransitionObserver(): void {
+    this.scenePresenter.Scene.onBeforeAnimationsObservable.remove(
+      this.transitionObserverRef
+    );
+    this.transitionObserverRef = null;
+
+    this.transitionFinishedCallback?.();
+    this.transitionFinishedCallback = null;
+  }
+
+  // -- Animation Transition Functions --
+
   @bind
   private transitionFromIdleToWalk(): void {
-    this.rotationObserverRef =
-      this.scenePresenter.Scene.onBeforeRenderObservable.add(
-        this.rotateCharacter
-      );
-
-    this.animationBlendValue = 0;
-    const observer = this.scenePresenter.Scene.onBeforeAnimationsObservable.add(
-      () => {
-        this.onBeforeAnimationTransitionObserver(
-          this.idleAnimation,
-          this.walkAnimation,
-          observer,
-          this.getVelocityAnimationInterpolationIncrement
-        );
-      }
+    this.createOnBeforeAnimationTransitionObserver(
+      this.idleAnimation,
+      this.walkAnimation,
+      () => this.getVelocityAnimationInterpolationIncrement()
     );
   }
 
   @bind
   private transitionFromWalkToIdle(): void {
-    this.animationBlendValue = 0;
-    const observer = this.scenePresenter.Scene.onBeforeAnimationsObservable.add(
-      () => {
-        this.onBeforeAnimationTransitionObserver(
-          this.walkAnimation,
-          this.idleAnimation,
-          observer,
-          () => this.getTimedAnimationInterpolationIncrement(100),
-          // () => 1 - this.getVelocityAnimationInterpolationIncrement(),
-          this.removeRotationObserver
-        );
-      }
+    this.createOnBeforeAnimationTransitionObserver(
+      this.walkAnimation,
+      this.idleAnimation,
+      () => this.getTimedAnimationInterpolationIncrement(100)
     );
   }
 
   @bind
   private transitionFromIdleOrWalkToInteract(): void {
-    this.animationBlendValue = 0;
     let fromAnimation: AnimationGroup;
     switch (this.stateMachine.CurrentState) {
       case CharacterAnimationStates.Idle:
@@ -228,31 +247,28 @@ export default class CharacterAnimator implements ICharacterAnimator {
 
     this.interactionAnimation!.play(false);
 
-    const observer = this.scenePresenter.Scene.onBeforeAnimationsObservable.add(
-      () => {
-        this.onBeforeAnimationTransitionObserver(
-          fromAnimation,
-          this.interactionAnimation!,
-          observer,
-          () => this.getTimedAnimationInterpolationIncrement(100),
-          this.removeRotationObserver
-        );
-      }
+    this.createOnBeforeAnimationTransitionObserver(
+      fromAnimation!,
+      this.interactionAnimation!,
+      () => this.getTimedAnimationInterpolationIncrement(100)
     );
   }
 
   @bind
   private transitionFromInteractToIdle(): void {
-    this.animationBlendValue = 0;
-    const observer = this.scenePresenter.Scene.onBeforeAnimationsObservable.add(
-      () => {
-        this.onBeforeAnimationTransitionObserver(
-          this.interactionAnimation!,
-          this.idleAnimation,
-          observer,
-          () => this.getTimedAnimationInterpolationIncrement(50)
-        );
-      }
+    this.createOnBeforeAnimationTransitionObserver(
+      this.interactionAnimation!,
+      this.idleAnimation,
+      () => this.getTimedAnimationInterpolationIncrement(100)
+    );
+  }
+
+  @bind
+  private transitionFromInteractToWalk(): void {
+    this.createOnBeforeAnimationTransitionObserver(
+      this.interactionAnimation!,
+      this.walkAnimation,
+      () => this.getVelocityAnimationInterpolationIncrement()
     );
   }
 
