@@ -33,12 +33,12 @@ export default class CharacterNavigator
   private readonly agentParams: IAgentParameters = {
     radius: 0.4,
     height: 1,
-    maxAcceleration: 5000.0,
-    maxSpeed: 3.0,
+    maxAcceleration: 10.0,
+    maxSpeed: 3.5,
     collisionQueryRange: 2,
     pathOptimizationRange: 0.0,
     separationWeight: 1.0,
-    reachRadius: 0.4, // acts as stopping distance
+    reachRadius: 0.5, // acts as stopping distance
   };
   private readonly earlyStoppingPatience = 400; // in ms
   private readonly earlyStoppingVelocityThreshold = 0.3;
