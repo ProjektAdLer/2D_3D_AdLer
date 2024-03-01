@@ -38,7 +38,7 @@ const LearningSpaceTheme_Suburb: ILearningSpaceTheme = {
     [LearningElementTypes.notAnElement]: [],
   },
   standinDecorationModels: [
-    require("../../../../Assets/3dModels/suburbTheme/d_dcomp_dinnertable_1.glb"),
+    require("../../../../Assets/3dModels/suburbTheme/d_dcomp_hatstand_1.glb"),
     require("../../../../Assets/3dModels/suburbTheme/d_dcomp_desk_1.glb"),
     require("../../../../Assets/3dModels/suburbTheme/d_dcomp_sideboardbookshelf_1.glb"),
   ],
