@@ -26,15 +26,16 @@ export default function AdaptivityElementAnswerSelection({
   );
 
   const { t: translate } = useTranslation("learningElement");
+  const [text] = useState<string>(
+    (question.isMultipleChoice
+      ? translate("multipleChoiceSelected")
+      : translate("singleChoiceSelected")) + question.questionText
+  );
 
   useEffect(() => {
-    setHeaderText(
-      (question.isMultipleChoice
-        ? translate("multipleChoiceSelected")
-        : translate("singleChoiceSelected")) + question.questionText
-    );
+    setHeaderText(text);
     setAnswerColors(question.questionAnswers.map(() => "default"));
-  }, [setHeaderText, question.questionText, question.questionAnswers]);
+  }, [setHeaderText, question.questionAnswers, text]);
 
   const onAnswerClicked = useCallback(
     (index: number) => {
@@ -58,7 +59,7 @@ export default function AdaptivityElementAnswerSelection({
   );
 
   return (
-    <div className="flex flex-col lg:justify-between lg:flex-row w-full p-2 m-auto">
+    <div className="flex flex-col w-full p-2 m-auto lg:justify-between lg:flex-row">
       <div className="flex flex-wrap justify-start gap-4">
         {question.questionAnswers.map((answer, index) => (
           <StyledButton
@@ -74,7 +75,7 @@ export default function AdaptivityElementAnswerSelection({
         ))}
       </div>
 
-      <div className="flex items-end justify-end lg:w-1/6 gap-2 pt-8 font-bold">
+      <div className="flex items-end justify-end gap-2 pt-8 font-bold lg:w-1/6">
         <StyledButton
           className="box-border "
           shape="freefloatcenter"
