@@ -32,6 +32,11 @@ export default class AdaptivityElementController
   @bind
   closeModal(): void {
     this.viewModel.isOpen.Value = false;
+    this.viewModel.currentTask.Value = null;
+    this.viewModel.currentQuestion.Value = null;
+    this.viewModel.showFeedback.Value = false;
+    this.viewModel.selectedHint.Value = null;
+
     this.showBottomToolTip();
   }
 
