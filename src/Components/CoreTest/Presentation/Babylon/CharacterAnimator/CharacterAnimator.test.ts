@@ -90,7 +90,7 @@ describe("CharacterAnimator", () => {
   });
 
   test("rotateCharacter rotates character according to its velocity", () => {
-    systemUnderTest["rotateCharacter"]();
+    systemUnderTest["rotateCharacter"](1);
 
     expect(systemUnderTest["characterRotationNode"].rotationQuaternion)
       .toMatchInlineSnapshot(`
@@ -104,49 +104,28 @@ describe("CharacterAnimator", () => {
     `);
   });
 
-  test("removeRotationObserver removes the onBeforeRenderObservable on the scene", () => {
-    const mockObserver = mock<Nullable<Observer<Scene>>>();
-    systemUnderTest["rotationObserverRef"] = mockObserver;
-
-    systemUnderTest["removeRotationObserver"]();
-
-    expect(
-      scenePresenterMock.Scene.onBeforeRenderObservable.remove
-    ).toHaveBeenCalledTimes(1);
-    expect(
-      scenePresenterMock.Scene.onBeforeRenderObservable.remove
-    ).toHaveBeenCalledWith(mockObserver);
-  });
-
   test("onBeforeAnimationTransitionObserver removes the given observer from the onBeforeAniamtionObservable of the scene when the transition is done", () => {
     const fromAnimation = mock<AnimationGroup>();
     const toAnimation = mock<AnimationGroup>();
-    const mockObserver = mock<Nullable<Observer<Scene>>>();
 
     systemUnderTest["onBeforeAnimationTransitionObserver"](
       fromAnimation,
       toAnimation,
-      mockObserver,
       () => 1 // transition is done within the first call
     );
 
     expect(
       scenePresenterMock.Scene.onBeforeAnimationsObservable.remove
     ).toHaveBeenCalledTimes(1);
-    expect(
-      scenePresenterMock.Scene.onBeforeAnimationsObservable.remove
-    ).toHaveBeenCalledWith(mockObserver);
   });
 
   test("onBeforeAnimationTransitionObserver sets from animation weight to 0 and to animation weigth to 1 when transition is done", () => {
     const fromAnimation = mock<AnimationGroup>();
     const toAnimation = mock<AnimationGroup>();
-    const mockObserver = mock<Nullable<Observer<Scene>>>();
 
     systemUnderTest["onBeforeAnimationTransitionObserver"](
       fromAnimation,
       toAnimation,
-      mockObserver,
       () => 1 // transition is done within the first call
     );
 
@@ -159,12 +138,10 @@ describe("CharacterAnimator", () => {
   test("onBeforeAnimationTransitionObserver sets from animation weight to 1-increment and to animation weigth to increment for one step of the transition", () => {
     const fromAnimation = mock<AnimationGroup>();
     const toAnimation = mock<AnimationGroup>();
-    const mockObserver = mock<Nullable<Observer<Scene>>>();
 
     systemUnderTest["onBeforeAnimationTransitionObserver"](
       fromAnimation,
       toAnimation,
-      mockObserver,
       () => 0.1
     );
 
@@ -292,22 +269,12 @@ describe("CharacterAnimator", () => {
     ).not.toThrow();
   });
 
-  test("setWalkingAnimationSpeed does nothing if the current state is not walking", () => {
-    systemUnderTest["stateMachine"]["currentState"] =
-      CharacterAnimationStates.Idle;
-    const startSpeedRatio = mockWalkAnimation.speedRatio;
-
-    systemUnderTest["setWalkingAnimationSpeed"]();
-
-    expect(mockWalkAnimation.speedRatio).toEqual(startSpeedRatio);
-  });
-
   test("setWalkingAnimationSpeed sets the speedRatio of the walk animation to 1 (for velocity vector [2,0,0]) if the current state is walking", () => {
     systemUnderTest["stateMachine"]["currentState"] =
       CharacterAnimationStates.Walking;
     mockWalkAnimation.speedRatio = 0;
 
-    systemUnderTest["setWalkingAnimationSpeed"]();
+    systemUnderTest["setWalkingAnimationSpeed"](1);
 
     expect(mockWalkAnimation.speedRatio).toEqual(1);
   });
@@ -318,7 +285,7 @@ describe("CharacterAnimator", () => {
     systemUnderTest["getCharacterVelocity"] = () => new Vector3(0.5, 0, 0);
     mockWalkAnimation.speedRatio = 0;
 
-    systemUnderTest["setWalkingAnimationSpeed"]();
+    systemUnderTest["setWalkingAnimationSpeed"](0.5);
 
     expect(mockWalkAnimation.speedRatio).toEqual(0.5);
   });
