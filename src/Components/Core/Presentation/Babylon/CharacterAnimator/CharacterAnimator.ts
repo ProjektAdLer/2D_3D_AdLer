@@ -109,7 +109,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
   }
 
   private setWalkingAnimationSpeed(absoluteVelocity: number): void {
-    this.walkAnimation.speedRatio = Math.max(absoluteVelocity, 0);
+    this.walkAnimation.speedRatio = Math.max(absoluteVelocity, 0.1);
   }
 
   private rotateCharacter(absoluteVelocity: number): void {
@@ -220,7 +220,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
     this.createOnBeforeAnimationTransitionObserver(
       this.idleAnimation,
       this.walkAnimation,
-      () => this.getVelocityAnimationInterpolationIncrement()
+      () => Math.max(this.getVelocityAnimationInterpolationIncrement(), 0.1)
     );
   }
 

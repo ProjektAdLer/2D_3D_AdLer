@@ -33,7 +33,7 @@ export default class CharacterNavigator
   private readonly agentParams: IAgentParameters = {
     radius: 0.4,
     height: 1,
-    maxAcceleration: 10.0,
+    maxAcceleration: 30.0,
     maxSpeed: 3.5,
     collisionQueryRange: 2,
     pathOptimizationRange: 0.0,
