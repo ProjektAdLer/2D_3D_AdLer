@@ -10,6 +10,7 @@ describe("BreakTimeNotificationController", () => {
     systemUnderTest = new BreakTimeNotificationController(viewModel);
   });
 
+  // EKJ0005. EKJ0006
   test("closeBreakNotification sets correct value in the viewModel", () => {
     viewModel = new BreakTimeNotificationViewModel();
     viewModel.showModal.Value = true;
@@ -18,6 +19,8 @@ describe("BreakTimeNotificationController", () => {
     systemUnderTest.closeBreakNotification();
     expect(viewModel.showModal.Value).toEqual(false);
   });
+
+  //EKJ0001, EKJ0002, EKJ0005, EKJ0006
   test("minimizeOrMaximizeBreakNotification sets correct value in the viewModel", () => {
     viewModel = new BreakTimeNotificationViewModel();
     viewModel.showMinimizedModal.Value = true;
@@ -28,6 +31,8 @@ describe("BreakTimeNotificationController", () => {
     systemUnderTest.minimizeOrMaximizeBreakNotification();
     expect(viewModel.showMinimizedModal.Value).toEqual(true);
   });
+
+  //EKJ 0003
   test("setSliderIndex sets correct value in the viewModel", () => {
     viewModel = new BreakTimeNotificationViewModel();
     viewModel.slideIndex.Value = 1;
