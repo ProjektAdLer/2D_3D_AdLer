@@ -10,19 +10,23 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
--
+- added story element
+- added learning space decoration according to theme
+- added T-shaped layout as learning space
+- added D-shaped layout as learning space
 
 ### Changed
 
--
+- changed hint of adaptivity element to open learning element if learning element and player are in same learning space
 
 ### Removed
 
--
+- removed highlighting of learning element if hint of adaptivity element was referencing learning element in same learning space
 
 ### Fixed
 
--
+- fixed order of question in adaptivity element by difficulty
+- fixed display of incorrect hint in adaptivity element
 
 ### Deprecated
 
