@@ -151,7 +151,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
           )}
         </div>
         {/* Modal */}
-        <div className="flex items-start justify-center pb-2 w-full lg:w-[95vw] max-w-7xl lg:max-h-[32vh] pt-2 lg:pt-0 row-start-3 ">
+        <div className="flex items-start justify-center pb-2 w-full lg:w-[95vw] max-w-7xl lg:max-h-[30vh] xl:max-h-[32vh] pt-2 lg:pt-0 row-start-3 overflow-auto">
           <div className="flex flex-col p-2 xl:px-8 gap-2 justify-center rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%]">
             {/* Header */}
             <div className="z-20 flex items-start justify-center gap-2 py-2 pb-3 overflow-hidden text-xl font-bold lg:max-w-5xl xl:max-w-6xl text-adlerdarkblue lg:roboto-black lg:text-2xl ">
@@ -231,7 +231,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   ) {
     return (
       <>
-        <div className="flex items-center justify-center p-2 bg-buttonbgblue rounded-xl">
+        <div className="flex items-center justify-center p-2 bg-buttonbgblue rounded-xl text-sm xl:text-base">
           {contentTexts[pageId].toString()}
         </div>
         <div
