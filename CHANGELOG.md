@@ -15,6 +15,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - added T-shaped layout as learning space
 - added D-shaped layout as learning space
 - added campus theme variants for Aschaffenburg and Kempten campi
+- added button for learning outcomes (goals) next to space and world progress
 
 ### Changed
 
@@ -33,6 +34,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - fixed display of incorrect hint in adaptivity element
 - fixed avatar getting stuck in animations
 - fixed break time notification timings
+- fixed inconsistent navigation options within adaptivity elements
+- fixed answering a harder question than required within adaptivity elements not counting towards progression of said element
 
 ### Deprecated
 
