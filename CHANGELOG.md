@@ -18,6 +18,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - changed hint of adaptivity element to open learning element if learning element and player are in same learning space
+- optimized presentation of learning goal in learning space view
 
 ### Removed
 
