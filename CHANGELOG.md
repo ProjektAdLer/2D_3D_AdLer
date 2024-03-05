@@ -32,6 +32,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - fixed order of question in adaptivity element by difficulty
 - fixed display of incorrect hint in adaptivity element
 - fixed avatar getting stuck in animations
+- fixed break time notification timings
 
 ### Deprecated
 
