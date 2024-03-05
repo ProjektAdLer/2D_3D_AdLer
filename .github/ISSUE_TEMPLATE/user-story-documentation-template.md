@@ -30,6 +30,7 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 - [ ] ZenHub Tasks sind gecheckt
 - [ ] Wiki ist gecheckt
 - [ ] Anforderungen mit IDs sind erstellt
+- [ ] Glossar verlinkt und gegebenenfalls erweitert
 - [ ] Aktivitätsdiagramm (falls nötig) ist erstellt
 - [ ] Unit-Tests sind zugewiesen
 - [ ] Fehlende Unit-Tests sind dokumentiert
