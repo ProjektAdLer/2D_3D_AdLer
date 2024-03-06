@@ -2,10 +2,14 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/ProjektAdLer/2D_3D_AdLer/badge.svg?branch=main)](https://coveralls.io/github/ProjektAdLer/2D_3D_AdLer?branch=main)
 
-## Unterstützte AdLer-Versionen
+## Abhängigkeiten
 
-- Autorentool 2.0.0
-- AdLer Backend 2.0.0
+| Engine Version | [Backend Version][https://github.com/projektadler/adlerbackend] |
+| -------------- | --------------------------------------------------------------- |
+| 2.2.0          | 2.1.0                                                           |
+| 2.1.0          | 2.0.0                                                           |
+
+Diese Tabelle wird zu jedem neuen Release von oben aktualisiert.
 
 ## Vorbedingungen
 
