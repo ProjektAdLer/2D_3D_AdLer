@@ -32,7 +32,7 @@ export default class LoginUseCase implements ILoginUseCase {
         ?.isLoggedIn
     ) {
       this.logger.log(
-        LogLevelTypes.ERROR,
+        LogLevelTypes.WARN,
         "LoginUseCase: User tried logging into Moodle while already logged in"
       );
       this.notificationPort.displayNotification(

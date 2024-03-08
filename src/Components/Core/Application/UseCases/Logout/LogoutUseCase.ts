@@ -20,7 +20,7 @@ export default class LogoutUseCase implements ILogoutUseCase {
   execute(): void {
     const userEntity = this.entityContainer.getEntitiesOfType(UserDataEntity);
     if (userEntity.length <= 0) {
-      throw new Error("No User logged in");
+      return;
     }
 
     this.entityContainer.deleteEntity(userEntity[0]);
@@ -29,7 +29,6 @@ export default class LogoutUseCase implements ILogoutUseCase {
       LogLevelTypes.INFO,
       "LoginUseCase: User logged out successfully"
     );
-
     this.lmsPort.onLogoutSuccessful();
   }
 }

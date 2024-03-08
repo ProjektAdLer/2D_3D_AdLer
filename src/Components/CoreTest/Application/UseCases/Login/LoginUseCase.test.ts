@@ -39,6 +39,7 @@ describe("LoginUseCase", () => {
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(LoginUseCase);
   });
+
   afterAll(() => {
     CoreDIContainer.restore();
   });
@@ -69,6 +70,7 @@ describe("LoginUseCase", () => {
     notificationPortMock.displayNotification.mockReset();
   });
 
+  // ANF-ID: [EZZ0001]
   test("executeAsync calls the backend and stores correct user data in Enity", async () => {
     backendMock.loginUser.mockResolvedValue("token");
     entityContainerMock.getEntitiesOfType.mockReturnValue([]);
@@ -95,6 +97,20 @@ describe("LoginUseCase", () => {
     expect(lmsPortMock.onLoginSuccessful).toHaveBeenCalled();
   });
 
+  // ANF-ID: [EZZ0003]
+  test("executeAsync calls onLoginSuccess on lms port", async () => {
+    backendMock.loginUser.mockResolvedValue("token");
+    entityContainerMock.getEntitiesOfType.mockReturnValue([]);
+
+    await systemUnderTest.executeAsync({
+      username: "username",
+      password: "password",
+    });
+
+    expect(lmsPortMock.onLoginSuccessful).toHaveBeenCalled();
+  });
+
+  // ANF-ID: [EZZ0005]
   test("Throws and displays error, if wrong userData is sent to the Backend", async () => {
     backendMock.loginUser.mockRejectedValue("error");
     entityContainerMock.getEntitiesOfType.mockReturnValue([]);
@@ -111,6 +127,7 @@ describe("LoginUseCase", () => {
     );
   });
 
+  // ANF-ID: [EZZ0004]
   test("Throws and displays error, if server timeout is reached", async () => {
     let error = new AxiosError();
     error.code = "ECONNABORTED";
