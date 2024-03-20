@@ -60,8 +60,7 @@ const getNewTestEntities = () => {
     parentWorldID: 200,
     template: LearningSpaceTemplateType.None,
     theme: LearningSpaceThemeType.Suburb,
-    introStory: null,
-    outroStory: null,
+    storyElements: [],
   };
 
   return {
@@ -139,6 +138,7 @@ describe("ScoreLearningElementUseCase", () => {
     CoreDIContainer.restore();
   });
 
+  // REQ-ID: [EZZ0009]
   test("executeAsync resolves successfully with correct params", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
@@ -150,6 +150,7 @@ describe("ScoreLearningElementUseCase", () => {
     await expect(systemUnderTest.executeAsync(1)).resolves.toBeUndefined();
   });
 
+  // REQ-ID: [EZZ0011]
   test("executeAsync should call backendAdapter.scoreElement", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
