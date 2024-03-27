@@ -116,6 +116,7 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
     expect(entityContainerMock.createEntity).not.toHaveBeenCalled();
   });
 
+  //ANF-ID: [ELG0008]
   test("loads the UserInitialLearningWorldsInfo and notifies its presenters (execute)", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
@@ -148,6 +149,7 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
     ).toHaveBeenCalledTimes(1);
   });
 
+  //ANF-ID: [ELG0008]
   test("loads the UserInitialLearningWorldsInfo and returns (internalExecute)", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([

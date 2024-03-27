@@ -317,6 +317,7 @@ describe("LoadLearningWorldUseCase", () => {
     expect(entityContainerMock.createEntity).not.toHaveBeenCalled();
   });
 
+  //ANF-ID: [ELG0005]
   test("loads the World and notifies port (executeAsync)", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
@@ -363,6 +364,7 @@ describe("LoadLearningWorldUseCase", () => {
     expect(worldPortMock.onLearningWorldLoaded).toHaveBeenCalledTimes(1);
   });
 
+  //ANF-ID: [ELG0005]
   test("loads the World and returns value (internalExecuteAsync)", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
@@ -408,6 +410,7 @@ describe("LoadLearningWorldUseCase", () => {
     expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(3);
   });
 
+  //ANF-ID: [ELG0005]
   test("uses worldEntity if one is available", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
@@ -430,6 +433,7 @@ describe("LoadLearningWorldUseCase", () => {
     expect(worldPortMock.onLearningWorldLoaded).toHaveBeenCalledTimes(1);
   });
 
+  //ANF-ID: [ELG0005]
   test("calls CalculateSpaceScoreUseCase for each space in the loaded world", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
@@ -469,6 +473,7 @@ describe("LoadLearningWorldUseCase", () => {
     ).toHaveBeenCalledTimes(2);
   });
 
+  //ANF-ID: [ELG0005]
   test("calls CalculateSpaceAvailabilityUseCase for each space in the loaded world", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
@@ -508,6 +513,7 @@ describe("LoadLearningWorldUseCase", () => {
     ).toHaveBeenCalledTimes(2);
   });
 
+  //ANF-ID: [ELG0006, ELG0007]
   test("calls SetUserLocationUseCase", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
