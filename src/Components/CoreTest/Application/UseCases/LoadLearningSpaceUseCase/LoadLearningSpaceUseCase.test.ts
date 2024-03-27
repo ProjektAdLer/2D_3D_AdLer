@@ -64,6 +64,7 @@ describe("LoadSpaceUseCase", () => {
     CoreDIContainer.restore();
   });
 
+  //ANF-ID: [ELG0004]
   test("should load learningspace when LearningWorld Entity is already present", async () => {
     const worldEntity: LearningWorldEntity = new LearningWorldEntity();
     worldEntity.spaces = [
@@ -101,6 +102,7 @@ describe("LoadSpaceUseCase", () => {
     );
   });
 
+  //ANF-ID: [ELG0004]
   test("should load space when World Entity is not present", async () => {
     const worldEntity: LearningWorldEntity = new LearningWorldEntity();
     worldEntity.spaces = [
@@ -157,6 +159,7 @@ describe("LoadSpaceUseCase", () => {
     ).rejects.toBe("SpaceEntity with 2 not found");
   });
 
+  //ANF-ID: [ELG0002, ELG0003]
   test("sets user location via SetUserLocationUseCase", async () => {
     const worldEntity: LearningWorldEntity = new LearningWorldEntity();
     worldEntity.spaces = [

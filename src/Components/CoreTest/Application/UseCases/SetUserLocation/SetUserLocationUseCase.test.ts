@@ -54,7 +54,7 @@ describe("SetUserLocationUseCase", () => {
     );
   });
 
-  //ANF-ID: [ELG0006, ELG0007]
+  //ANF-ID: [ELG0006, ELG0007, ELG0002, ELG0003]
   test("sets current world and space id on user entity", () => {
     let userDataEntity = {
       isLoggedIn: true,
@@ -71,7 +71,7 @@ describe("SetUserLocationUseCase", () => {
     });
   });
 
-  //ANF-ID: [ELG0006, ELG0007]
+  //ANF-ID: [ELG0006, ELG0007, ELG0002, ELG0003]
   test("sets current world and space id to undefined on user entity when none are given", () => {
     let userDataEntity = {
       isLoggedIn: true,
