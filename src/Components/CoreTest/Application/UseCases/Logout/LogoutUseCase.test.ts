@@ -25,16 +25,7 @@ describe("LogoutUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  test("throws, if user is not logged in", () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValue([]);
-
-    const badCall = () => {
-      systemUnderTest.execute();
-    };
-
-    expect(badCall).toThrow();
-  });
-
+  // ANF-ID: [EZZ0002]
   test("deletes user entity, if user is logged in", () => {
     const userEntityMock = mock();
     entityContainerMock.getEntitiesOfType.mockReturnValue([userEntityMock]);

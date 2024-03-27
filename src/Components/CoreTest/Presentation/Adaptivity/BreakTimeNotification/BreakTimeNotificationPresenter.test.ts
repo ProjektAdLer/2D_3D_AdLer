@@ -11,7 +11,7 @@ describe("OverallTimeSpentAdaptivityNotificationPresenter", () => {
     systemUnderTest = new BreakTimeNotificationPresenter(viewModel);
   });
 
-  //EKJ0001
+  //REQ-ID: [EKJ0001]
   test("displayBreakTimeNotification sets correct values in the viewModel", () => {
     const newBreakType = BreakTimeNotificationType.Medium;
 

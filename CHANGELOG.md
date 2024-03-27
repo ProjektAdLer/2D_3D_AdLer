@@ -10,12 +10,41 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+-
+
+### Changed
+
+-
+
+### Removed
+
+-
+
+### Fixed
+
+-
+
+### Deprecated
+
+-
+
+### Security
+
+-
+
+</details>
+
+## Version 2.2.0 - 06.03.2024
+
+### Added
+
 - added story element
 - added learning space decoration according to theme
 - added T-shaped layout as learning space
 - added D-shaped layout as learning space
 - added campus theme variants for Aschaffenburg and Kempten campi
 - added button for learning outcomes (goals) next to space and world progress
+- added new robot NPC as default model for adaptivity element
 
 ### Changed
 
@@ -36,16 +65,6 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - fixed break time notification timings
 - fixed inconsistent navigation options within adaptivity elements
 - fixed answering a harder question than required within adaptivity elements not counting towards progression of said element
-
-### Deprecated
-
--
-
-### Security
-
--
-
-</details>
 
 ## Version 2.1.1
 
