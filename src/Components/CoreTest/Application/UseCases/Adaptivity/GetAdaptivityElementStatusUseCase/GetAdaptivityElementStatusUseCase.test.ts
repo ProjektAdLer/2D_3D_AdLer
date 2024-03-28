@@ -145,6 +145,7 @@ describe("GetAdaptivityElementStatusUseCase", () => {
     await expect(result).rejects.toThrowError();
   });
 
+  // ANF-ID: [EWE0002]
   test("should get adaptivity status", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       { userToken: "", username: "", isLoggedIn: true },

@@ -95,6 +95,7 @@ describe("LoadAdaptivityElementUseCase", () => {
     );
   });
 
+  // ANF-ID: [EWE0013]
   test("calls port onAdaptivityElementLoaded", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,

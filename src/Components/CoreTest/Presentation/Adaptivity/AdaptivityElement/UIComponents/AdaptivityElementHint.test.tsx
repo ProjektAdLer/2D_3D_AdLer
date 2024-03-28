@@ -4,6 +4,7 @@ import AdaptivityElementHint from "../../../../../Core/Presentation/Adaptivity/A
 import { AdaptivityElementActionTypes } from "../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 
 describe("AdaptivityElementHint", () => {
+  // ANF-ID: [EWE0004]
   test("should render CommentAction", () => {
     const { container } = render(
       <AdaptivityElementHint

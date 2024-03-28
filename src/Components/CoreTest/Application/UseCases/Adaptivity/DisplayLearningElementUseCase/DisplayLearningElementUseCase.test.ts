@@ -167,6 +167,7 @@ describe("DisplayLearningElementUseCase", () => {
     } as AdaptivityElementHintTO);
   });
 
+  // ANF-ID: [EWE0006]
   test("available learning element in other space calls loaddLearningElementUseCase", async () => {
     entityContainer.getEntitiesOfType.mockReturnValue([
       { id: 1, elements: [{ id: 1 }] } as LearningSpaceEntity,
@@ -196,6 +197,7 @@ describe("DisplayLearningElementUseCase", () => {
     expect(loadLearningElementUseCaseMock.executeAsync).toHaveBeenCalled();
   });
 
+  // ANF-ID: [EWE0007]
   test("not available learning element in other space calls onAdaptivityElementUserHintInformed", async () => {
     entityContainer.getEntitiesOfType.mockReturnValue([
       { id: 1, elements: [{ id: 1 }] } as LearningSpaceEntity,

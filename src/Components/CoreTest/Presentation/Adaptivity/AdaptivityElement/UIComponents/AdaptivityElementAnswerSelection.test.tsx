@@ -31,6 +31,7 @@ describe("AdaptivityElementAnswerSelection", () => {
     expect(container).toMatchSnapshot();
   });
 
+  // ANF-ID: [EWE0008, EWE0009]
   test("click on submit button should call submitSelection", () => {
     const submitSelection = jest.fn();
     const { getByText } = render(
@@ -62,6 +63,7 @@ describe("AdaptivityElementAnswerSelection", () => {
     expect(submitSelection).toHaveBeenCalledTimes(1);
   });
 
+  // ANF-ID: [EWE0008, EWE0009]
   test("click on answer button inverts its isSelected flag", () => {
     const answer = {
       answerIndex: 0,
@@ -94,6 +96,7 @@ describe("AdaptivityElementAnswerSelection", () => {
     }
   });
 
+  // ANF-ID: [EWE0008]
   test("click on answer button deselects all other answers if question is single choice", () => {
     const answer1 = {
       answerIndex: 0,

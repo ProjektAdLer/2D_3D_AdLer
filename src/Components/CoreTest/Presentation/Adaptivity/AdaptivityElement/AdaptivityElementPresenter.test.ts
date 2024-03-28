@@ -54,6 +54,7 @@ describe("AdaptivityElementPresenter", () => {
     expect(systemUnderTest["viewModel"].isOpen.Value).toBe(true);
   });
 
+  // ANF-ID: [EWE0020]
   test.each([
     AdaptivityElementQuestionDifficultyTypes.easy,
     AdaptivityElementQuestionDifficultyTypes.medium,
@@ -232,7 +233,8 @@ describe("AdaptivityElementPresenter", () => {
     expect(viewModel.showFeedback.Value).toBe(true);
   });
 
-  test("createContentData returns the correct content data", () => {
+  // ANF-ID: [EWE0012]
+  test("createContentData returns the correct and sorted content data", () => {
     const adaptivityElementProgressTO: AdaptivityElementProgressTO = {
       isCompleted: false,
       tasks: [

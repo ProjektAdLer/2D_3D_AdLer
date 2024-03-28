@@ -141,6 +141,7 @@ describe("ScoreAdaptivityElementUseCase", () => {
     expect(worldPortMock.onLearningElementScored).not.toHaveBeenCalled();
   });
 
+  // ANF-ID: [EWE0003]
   test("scores the element and updates the world and space score", () => {
     const userEntity = mock<UserDataEntity>();
     userEntity.isLoggedIn = true;

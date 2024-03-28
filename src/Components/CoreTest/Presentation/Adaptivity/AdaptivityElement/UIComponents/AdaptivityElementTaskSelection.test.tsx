@@ -91,6 +91,7 @@ describe("AdaptivityElementTaskSelection", () => {
     );
   });
 
+  // ANF-ID: [EWE0011]
   test.each([
     {
       isRequired: true,

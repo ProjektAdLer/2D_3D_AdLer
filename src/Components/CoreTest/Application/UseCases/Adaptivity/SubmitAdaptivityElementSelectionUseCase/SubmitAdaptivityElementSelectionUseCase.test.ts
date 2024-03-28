@@ -88,6 +88,7 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
     await expect(result).rejects.toThrowError();
   });
 
+  // ANF-ID: [EWE0005]
   test("calls ScoreAdaptivityElementUseCase when elementScore.success is true", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       {} as UserDataEntity,
@@ -120,6 +121,7 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
     expect(scoreAdaptivityElementUseCaseMock.internalExecute).toBeCalledWith(1);
   });
 
+  // ANF-ID: [EWE0005]
   test("calls onAdaptivityElementAnswerEvaluated on world port", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       {

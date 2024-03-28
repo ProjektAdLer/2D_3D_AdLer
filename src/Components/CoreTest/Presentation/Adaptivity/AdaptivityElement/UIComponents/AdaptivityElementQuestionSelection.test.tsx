@@ -4,6 +4,7 @@ import React from "react";
 import { AdaptivityElementActionTypes } from "../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 
 describe("AdaptivityElementQuestionSelection", () => {
+  // ANF-ID: [EWE0012]
   test("should render (with all difficulties)", () => {
     const { container } = render(
       <AdaptivityElementQuestionSelection
@@ -139,6 +140,7 @@ describe("AdaptivityElementQuestionSelection", () => {
     expect(onSelectQuestionMock).toHaveBeenCalledWith(question);
   });
 
+  // ANF-ID: [EWE0010]
   test("onSelectHint button calls onSelectHint callback when clicked", () => {
     const onSelectHintMock = jest.fn();
     const hint = {
