@@ -22,6 +22,7 @@ describe("InternetLossModal", () => {
     fireEvent.click(closeButton);
     expect(componentUnderTest.container.firstChild).toBeNull();
   });
+  // ANF-ID: [EWE0022]
   test("should close when connection is back", () => {
     const componentUnderTest = render(<InternetLossModal />);
     expect(componentUnderTest.container.firstChild).toBeNull();
