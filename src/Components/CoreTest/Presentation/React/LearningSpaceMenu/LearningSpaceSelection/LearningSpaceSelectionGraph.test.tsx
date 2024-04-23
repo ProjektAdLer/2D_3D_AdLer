@@ -44,6 +44,7 @@ describe("LearningSpaceSelectionGraph", () => {
     expect(container).not.toBeEmptyDOMElement();
   });
 
+  // ANF-ID: [EWE0024]
   test("creates a node for each space with correct data_id's", () => {
     const vm = new LearningSpaceSelectionViewModel();
     vm.spaces.Value = [
@@ -89,6 +90,7 @@ describe("LearningSpaceSelectionGraph", () => {
     });
   });
 
+  // ANF-ID: [EWE0024]
   test("creates a node for each boolean operator in the requirements", () => {
     const vm = new LearningSpaceSelectionViewModel();
     vm.spaces.Value = [
@@ -135,6 +137,7 @@ describe("LearningSpaceSelectionGraph", () => {
     });
   });
 
+  // ANF-ID: [EWE0024]
   test("creates an edge for each node inside requirements", () => {
     const vm = new LearningSpaceSelectionViewModel();
     vm.spaces.Value = [
