@@ -12,7 +12,6 @@ import {
   Vector3,
 } from "@babylonjs/core";
 import mock, { mockDeep } from "jest-mock-extended/lib/Mock";
-import { config } from "../../../../../config";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
@@ -319,6 +318,7 @@ describe("AvatarController", () => {
       expect(crowdMock.agentGoto).not.toHaveBeenCalled();
     });
 
+    // REQ-ID: [EZZ0012]
     test("processPointerEvent sets pointerMovementTarget to first snapped point if the distance between pickedPoint and snapped point is smaller 0.01", () => {
       const pointerInfo = setupMockedPointerInfo(
         PointerEventTypes.POINTERTAP,
@@ -339,6 +339,7 @@ describe("AvatarController", () => {
     });
   });
 
+  // REQ-ID: [EZZ0012]
   test("processPointerEvent sets pointerMovementTarget to adjusted target if the distance between pickedPoint and snapped point is greater 0.01", () => {
     viewModel.parentNode = new TransformNode("mockParentNode");
     viewModel.parentNode.position = new Vector3(42, 0, 43);

@@ -67,6 +67,7 @@ describe("LearningSpaceView", () => {
   });
 
   describe("Material Creation Methods", () => {
+    //ANF-ID: [ELG0017]
     test("createFloorMaterial creates a material", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.theme = LearningSpaceThemeType.Campus;
@@ -76,6 +77,7 @@ describe("LearningSpaceView", () => {
       expect(viewModel.floorMaterial).toBeInstanceOf(StandardMaterial);
     });
 
+    //ANF-ID: [ELG0017]
     test("createFloorMaterial sets a texture for the floor material", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.theme = LearningSpaceThemeType.Campus;
@@ -85,6 +87,7 @@ describe("LearningSpaceView", () => {
       expect(viewModel.floorMaterial.diffuseTexture).toBeInstanceOf(Texture);
     });
 
+    //ANF-ID: [ELG0017]
     test("createWallMaterial creates a material", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.theme = LearningSpaceThemeType.Campus;
@@ -94,6 +97,7 @@ describe("LearningSpaceView", () => {
       expect(viewModel.wallMaterial).toBeInstanceOf(StandardMaterial);
     });
 
+    //ANF-ID: [ELG0017]
     test("createWallMaterial sets a texture for the wall material", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.theme = LearningSpaceThemeType.Campus;
@@ -123,6 +127,7 @@ describe("LearningSpaceView", () => {
       }
     });
 
+    //ANF-ID: [ELG0017]
     test("asyncSetup calls createFloorMaterial", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.spaceCornerPoints = [
@@ -140,6 +145,7 @@ describe("LearningSpaceView", () => {
       expect(systemUnderTest["createFloorMaterial"]).toBeCalledTimes(1);
     });
 
+    //ANF-ID: [ELG0017]
     test("asyncSetup calls createWallMaterial", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.spaceCornerPoints = [
@@ -157,6 +163,7 @@ describe("LearningSpaceView", () => {
       expect(systemUnderTest["createWallMaterial"]).toBeCalledTimes(1);
     });
 
+    //ANF-ID: [ELG0016]
     test("asyncSetup calls createFloor", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.spaceCornerPoints = [
@@ -174,6 +181,7 @@ describe("LearningSpaceView", () => {
       expect(systemUnderTest["createFloor"]).toBeCalledTimes(1);
     });
 
+    //ANF-ID: [ELG0016]
     test("asyncSetup calls createWalls", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.spaceCornerPoints = [
@@ -193,6 +201,7 @@ describe("LearningSpaceView", () => {
   });
 
   describe("createFloor method", () => {
+    //ANF-ID: [ELG0016]
     test("createFloor creates builds a mesh with the PolyMeshBuilder", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.spaceCornerPoints = [
@@ -229,6 +238,7 @@ describe("LearningSpaceView", () => {
       );
     });
 
+    //ANF-ID: [ELG0017]
     test("createFloor applies the floorMaterial to the new mesh", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.spaceCornerPoints = [
@@ -250,6 +260,7 @@ describe("LearningSpaceView", () => {
   });
 
   describe("createWalls method", () => {
+    //ANF-ID: [ELG0016]
     test("createWalls creates a merged wall mesh", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.spaceCornerPoints = [
@@ -283,6 +294,7 @@ describe("LearningSpaceView", () => {
       expect(viewModel.wallMesh).toBeDefined();
     });
 
+    //ANF-ID: [ELG0016]
     test("createWalls calls internal createDoorCutout when exitDoorPosition is set", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
 
@@ -320,6 +332,7 @@ describe("LearningSpaceView", () => {
       expect(systemUnderTest["createDoorCutout"]).toBeCalledTimes(1);
     });
 
+    //ANF-ID: [ELG0016]
     test("createWalls calls the internal createDoorCutout method when entryDoorPosition is set", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
 
@@ -357,6 +370,7 @@ describe("LearningSpaceView", () => {
       expect(systemUnderTest["createDoorCutout"]).toBeCalledTimes(1);
     });
 
+    //ANF-ID: [ELG0016]
     test("createWalls calls the internal createWindowCutout method for each windowPosition", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
 
@@ -397,6 +411,7 @@ describe("LearningSpaceView", () => {
       expect(systemUnderTest["createWindowCutout"]).toBeCalledTimes(2);
     });
 
+    //ANF-ID: [ELG0017]
     test("createWalls applies the wall material to the new mesh", async () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.spaceCornerPoints = [
@@ -466,6 +481,7 @@ describe("LearningSpaceView", () => {
       );
     });
 
+    //ANF-ID: [ELG0016]
     test("createWallSegment returns a mesh", () => {
       const [systemUnderTest, ,] = createSystemUnderTest();
 
@@ -479,6 +495,7 @@ describe("LearningSpaceView", () => {
       expect(result).toBeInstanceOf(Mesh);
     });
 
+    //ANF-ID: [ELG0016]
     test("createCornerPoles creates 1 corner pole when there are 2 walls segments with one shared endpoint", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
       viewModel.spaceCornerPoints = [
@@ -503,6 +520,7 @@ describe("LearningSpaceView", () => {
       expect(result).toHaveLength(1);
     });
 
+    //ANF-ID: [ELG0016]
     test("createPole returns a mesh", () => {
       const [systemUnderTest, ,] = createSystemUnderTest();
       //@ts-ignore
@@ -513,6 +531,7 @@ describe("LearningSpaceView", () => {
       expect(result).toBeInstanceOf(Mesh);
     });
 
+    //ANF-ID: [ELG0016]
     test("createPole calls MeshBuilder.CreateCylinder", () => {
       const [systemUnderTest, ,] = createSystemUnderTest();
       jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
@@ -522,6 +541,7 @@ describe("LearningSpaceView", () => {
       expect(MeshBuilder.CreateCylinder).toBeCalledTimes(1);
     });
 
+    //ANF-ID: [ELG0016]
     test("createDoorCutour returns a mesh", () => {
       const [systemUnderTest, ,] = createSystemUnderTest();
 
@@ -543,6 +563,7 @@ describe("LearningSpaceView", () => {
       expect(result).toBeInstanceOf(Mesh);
     });
 
+    //ANF-ID: [ELG0016]
     test("createWindowCutout returns a mesh", () => {
       const [systemUnderTest, ,] = createSystemUnderTest();
 
