@@ -10,6 +10,7 @@ import "@testing-library/jest-dom";
 const controllerMock = mock<LearningWorldCompletionModalController>();
 
 describe("LearningWorldCompletionModalView", () => {
+  //ANF-ID: [EWE0028]
   test("should render when openend", () => {
     const vm = new LearningWorldCompletionModalViewModel();
     vm.showModal.Value = true;
@@ -32,6 +33,7 @@ describe("LearningWorldCompletionModalView", () => {
     ).not.toBeInTheDocument();
   });
 
+  //ANF-ID: [EWE0028]
   test("should call controller when clicked", () => {
     const vm = new LearningWorldCompletionModalViewModel();
     vm.showModal.Value = true;
