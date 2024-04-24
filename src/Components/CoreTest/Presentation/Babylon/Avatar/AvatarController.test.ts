@@ -151,7 +151,7 @@ describe("AvatarController", () => {
       expect(characterNavigatorMock.startMovement).not.toHaveBeenCalled();
     });
 
-    // REQ-ID: [EZZ0015]
+    // REQ-ID: [EZZ0014, EZZ0015]
     test(
       "applyInputs applies the pointerMovementTarget to the avatar " +
         "when keyMovementTarget is zero and pointerMovementTarget is non-zero",
