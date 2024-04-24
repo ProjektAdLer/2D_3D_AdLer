@@ -124,6 +124,7 @@ describe("Calculate Learning World Score UseCase", () => {
     entityContainerMock.filterEntitiesOfType.mockReset();
   });
 
+  // ANF-ID: [EWE0003]
   test("should calculate the correct total world score (internalExecute)", () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce(userLocationTO);
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
