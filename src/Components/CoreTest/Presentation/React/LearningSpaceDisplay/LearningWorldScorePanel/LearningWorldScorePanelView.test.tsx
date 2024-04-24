@@ -28,9 +28,10 @@ describe("Learning World Score Panel View", () => {
     CoreDIContainer.restore();
   });
 
+  // ANF-ID: [EWE0027]
   it("Learning World Score Panel View renders the correct score", () => {
     useBuilderMock([fakeModel, undefined]);
-    const comp = render(<LearningWorldScorePanel />);
+    let comp = render(<LearningWorldScorePanel />);
 
     expect(comp.container).toHaveTextContent("80%");
   });
