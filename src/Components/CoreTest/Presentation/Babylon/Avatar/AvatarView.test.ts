@@ -193,6 +193,7 @@ describe("AvatarView", () => {
   });
 
   describe("model loading", () => {
+    // ANF-ID: [EZZ0017]
     test("loadAvatarAsync calls the scenePresenter to load avatar models", async () => {
       scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
         new TransformNode("AvatarParentNode", new Scene(new NullEngine()))

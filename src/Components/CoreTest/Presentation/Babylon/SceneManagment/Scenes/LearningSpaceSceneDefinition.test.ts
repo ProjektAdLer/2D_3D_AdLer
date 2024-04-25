@@ -117,6 +117,7 @@ describe("LearningSpaceScene", () => {
 
     expect(systemUnderTest["spaceData"]).toBe(spaceData);
   });
+
   test("onLearningSpaceLoaded does not crash if spacedata has no value in template", () => {
     const spaceData = new LearningSpaceTO();
     systemUnderTest["onLearningSpaceLoaded"](spaceData);
