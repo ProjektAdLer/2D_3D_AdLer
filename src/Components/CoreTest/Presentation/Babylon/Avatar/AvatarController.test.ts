@@ -151,7 +151,7 @@ describe("AvatarController", () => {
       expect(characterNavigatorMock.startMovement).not.toHaveBeenCalled();
     });
 
-    // REQ-ID: [EZZ0014, EZZ0015]
+    // ANF-ID: [EZZ0014, EZZ0015]
     test(
       "applyInputs applies the pointerMovementTarget to the avatar " +
         "when keyMovementTarget is zero and pointerMovementTarget is non-zero",
@@ -173,7 +173,7 @@ describe("AvatarController", () => {
       }
     );
 
-    // REQ-ID: [EZZ0015]
+    // ANF-ID: [EZZ0015]
     test("applyInputs does not apply the pointerMovementTarget to the avatar when the movement distance is below the movementThreshold", () => {
       systemUnderTest["pointerMovementTarget"] = new Vector3(42, 42, 42);
       viewModel.parentNode = new TransformNode("parentNode");
@@ -281,7 +281,7 @@ describe("AvatarController", () => {
       }
     );
 
-    // REQ-ID: [EZZ0015]
+    // ANF-ID: [EZZ0015]
     test("processPointerEvent returns when pointer event type isn't POINTERTAP", () => {
       let invalidPointerInfo = setupMockedPointerInfo(
         PointerEventTypes.POINTERMOVE,
@@ -295,7 +295,7 @@ describe("AvatarController", () => {
       expect(crowdMock.agentGoto).not.toHaveBeenCalled();
     });
 
-    // REQ-ID: [EZZ0015]
+    // ANF-ID: [EZZ0015]
     test("processPointerEvent returns when pickInfo is null", () => {
       let invalidPointerInfo = setupMockedPointerInfo(
         PointerEventTypes.POINTERTAP,
@@ -309,7 +309,7 @@ describe("AvatarController", () => {
       expect(crowdMock.agentGoto).not.toHaveBeenCalled();
     });
 
-    // REQ-ID: [EZZ0015]
+    // ANF-ID: [EZZ0015]
     test("processPointerEvent returns when pickInfo.pickedPoint is null", () => {
       let invalidPointerInfo = setupMockedPointerInfo(
         PointerEventTypes.POINTERTAP,
@@ -323,7 +323,7 @@ describe("AvatarController", () => {
       expect(crowdMock.agentGoto).not.toHaveBeenCalled();
     });
 
-    // REQ-ID: [EZZ0012]
+    // ANF-ID: [EZZ0012]
     test("processPointerEvent sets pointerMovementTarget to first snapped point if the distance between pickedPoint and snapped point is smaller 0.01", () => {
       const pointerInfo = setupMockedPointerInfo(
         PointerEventTypes.POINTERTAP,
@@ -344,7 +344,7 @@ describe("AvatarController", () => {
     });
   });
 
-  // REQ-ID: [EZZ0012]
+  // ANF-ID: [EZZ0012]
   test("processPointerEvent sets pointerMovementTarget to adjusted target if the distance between pickedPoint and snapped point is greater 0.01", () => {
     viewModel.parentNode = new TransformNode("mockParentNode");
     viewModel.parentNode.position = new Vector3(42, 0, 43);

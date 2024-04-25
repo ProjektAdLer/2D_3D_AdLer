@@ -284,14 +284,14 @@ describe("AvatarView", () => {
   });
 
   describe("movement indicator", () => {
-    // REQ-ID: [EZZ0016]
+    // ANF-ID: [EZZ0016]
     test("onMovementTargetChanged calls movementIndicator.display when movement target is set a vector", () => {
       viewModel.movementTarget.Value = new Vector3(1, 2, 3);
 
       expect(movementIndicatorMock.display).toHaveBeenCalledTimes(1);
     });
 
-    // REQ-ID: [EZZ0016]
+    // ANF-ID: [EZZ0016]
     test("onMovementTargetChanged calls movementIndicator.hide when movement target is set to null", () => {
       viewModel.movementTarget.Value = new Vector3(1, 2, 3); // set movementTarget to something first
       viewModel.movementTarget.Value = null;

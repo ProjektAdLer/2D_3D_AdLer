@@ -138,7 +138,7 @@ describe("ScoreLearningElementUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  // REQ-ID: [EZZ0009]
+  // ANF-ID: [EZZ0009]
   test("executeAsync resolves successfully with correct params", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
@@ -150,7 +150,7 @@ describe("ScoreLearningElementUseCase", () => {
     await expect(systemUnderTest.executeAsync(1)).resolves.toBeUndefined();
   });
 
-  // REQ-ID: [EZZ0011]
+  // ANF-ID: [EZZ0011]
   test("executeAsync should call backendAdapter.scoreElement", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,

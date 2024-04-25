@@ -24,7 +24,7 @@ describe("BreakTimeNotification", () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  // REQ-ID: [EKJ0001]
+  // ANF-ID: [EKJ0001]
   test("should render small button when showMinimized is true", () => {
     useBuilderMock([viewModel, mockController]);
     viewModel.showModal.Value = true;
@@ -36,7 +36,7 @@ describe("BreakTimeNotification", () => {
     expect(screen.getByText("pauseInfo")).toBeInTheDocument();
   });
 
-  // REQ-ID: [EKJ0002]
+  // ANF-ID: [EKJ0002]
   test("should call controller when clicked in minimized form", () => {
     useBuilderMock([viewModel, mockController]);
     viewModel.showModal.Value = true;
@@ -51,7 +51,7 @@ describe("BreakTimeNotification", () => {
     ).toHaveBeenCalledTimes(1);
   });
 
-  // REQ-ID: [EKJ0005]
+  // ANF-ID: [EKJ0005]
   test("should call controller when closed in minimized form", () => {
     useBuilderMock([viewModel, mockController]);
     viewModel.showModal.Value = true;
@@ -64,7 +64,7 @@ describe("BreakTimeNotification", () => {
     expect(mockController.closeBreakNotification).toHaveBeenCalledTimes(1);
   });
 
-  // REQ-ID: [EKJ0005, EKJ0006]
+  // ANF-ID: [EKJ0005, EKJ0006]
   test("click on close button calls closedBreakNotification on controller", () => {
     useBuilderMock([viewModel, mockController]);
     viewModel.showModal.Value = true;

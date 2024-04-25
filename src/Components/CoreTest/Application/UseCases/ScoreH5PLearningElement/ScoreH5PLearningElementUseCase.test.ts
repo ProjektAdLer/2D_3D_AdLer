@@ -127,7 +127,7 @@ describe("ScoreH5PLearningElementUseCase", () => {
     ).rejects.toContain("data is (atleast partly) undefined");
   });
 
-  // REQ-ID: [EZZ0010]
+  // ANF-ID: [EZZ0010]
   test("executeAsync should resolves to true with correct params", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
@@ -145,7 +145,7 @@ describe("ScoreH5PLearningElementUseCase", () => {
     ).resolves.toBe(true);
   });
 
-  // REQ-ID: [EZZ0011]
+  // ANF-ID: [EZZ0011]
   test("executeAsync should call backendAdapter.scoreH5PElement", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
