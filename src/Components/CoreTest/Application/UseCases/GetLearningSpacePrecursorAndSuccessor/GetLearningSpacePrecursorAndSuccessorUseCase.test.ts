@@ -86,6 +86,8 @@ describe("GetLearningSpacePrecursorAndSuccessorUseCase", () => {
 
     expect(() => systemUnderTest.execute()).toThrowError("Space 1 not found!");
   });
+
+  // ANF-ID: [EWE0029]
   test("UseCase returns an object with current id, precursor spaces and successor spaces", () => {
     let worldID = 1;
     let spaceID = 2;
