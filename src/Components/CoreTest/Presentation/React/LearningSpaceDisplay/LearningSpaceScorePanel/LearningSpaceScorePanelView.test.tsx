@@ -30,6 +30,7 @@ describe("Learning Space Score Panel View", () => {
     CoreDIContainer.restore();
   });
 
+  // ANF-ID: [EWE0030]
   it("Learning Space Score Panel View renders the correct score", () => {
     useBuilderMock([fakeModel, fakeController]);
     const comp = render(<LearningSpaceScorePanel />);
