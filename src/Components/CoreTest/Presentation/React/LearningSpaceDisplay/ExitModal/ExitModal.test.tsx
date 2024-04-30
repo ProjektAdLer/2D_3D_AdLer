@@ -29,6 +29,7 @@ describe("ExitModal", () => {
     expect(container.firstChild).toBeNull();
   });
 
+  // ANF-ID: [EWE0033]
   test("should not render when closed", () => {
     viewModel.isOpen.Value = false;
 
@@ -46,6 +47,7 @@ describe("ExitModal", () => {
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
 
+  // ANF-ID: [EWE0033]
   test("should close when close button is clicked", () => {
     viewModel.isOpen.Value = true;
     useBuilderMock([viewModel, fakeController]);
@@ -55,6 +57,7 @@ describe("ExitModal", () => {
     expect(viewModel.isOpen.Value).toBe(false);
   });
 
+  // ANF-ID: [EWE0032]
   test("should render if solved successor space is in the viewmodel and doorType is Exit", () => {
     viewModel.isOpen.Value = true;
     viewModel.isExit.Value = true;
@@ -79,6 +82,7 @@ describe("ExitModal", () => {
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
 
+  // ANF-ID: [EWE0032]
   test("should render if available unsolved successor space is in the viewmodel and doorType is Exit", () => {
     viewModel.isOpen.Value = true;
     viewModel.isExit.Value = true;
@@ -103,6 +107,7 @@ describe("ExitModal", () => {
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
 
+  // ANF-ID: [EWE0032]
   test("should render if unavailable successor space is in the viewmodel and doorType is Exit", () => {
     viewModel.isOpen.Value = true;
     viewModel.isExit.Value = true;
@@ -127,6 +132,7 @@ describe("ExitModal", () => {
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
 
+  // ANF-ID: [EWE0032]
   test("should render if solved precursor space is in the viewmodel and doorType is Entry", () => {
     viewModel.isOpen.Value = true;
     viewModel.isExit.Value = false;
@@ -151,6 +157,7 @@ describe("ExitModal", () => {
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
 
+  // ANF-ID: [EWE0032]
   test("should render if available unsolved precursor space is in the viewmodel and doorType is Entry", () => {
     viewModel.isOpen.Value = true;
     viewModel.isExit.Value = false;
@@ -175,6 +182,7 @@ describe("ExitModal", () => {
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
 
+  // ANF-ID: [EWE0032]
   test("should render if unavailable precursor space is in the viewmodel and doorType is Entry", () => {
     viewModel.isOpen.Value = true;
     viewModel.isExit.Value = false;
