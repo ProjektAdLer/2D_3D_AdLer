@@ -65,6 +65,7 @@ describe("DoorController", () => {
     expect(systemUnderTest["hoverToolTipId"]).toBe(-1);
   });
 
+  // ANF-ID: [EWE0032]
   test("picked calls getLearningSpacePrecursorAndSuccessorUseCase.execute when isInteractable is set to true", () => {
     systemUnderTest["viewModel"].isInteractable.Value = true;
 
@@ -75,6 +76,7 @@ describe("DoorController", () => {
     ).toHaveBeenCalledTimes(1);
   });
 
+  // ANF-ID: [EWE0032]
   test("picked calls ExitModalPresenter.open when isInteractable is set to true", () => {
     systemUnderTest["viewModel"].isInteractable.Value = true;
 
