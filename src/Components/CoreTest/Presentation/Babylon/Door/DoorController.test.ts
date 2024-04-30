@@ -43,12 +43,14 @@ describe("DoorController", () => {
     CoreDIContainer.restore();
   });
 
+  //ANF-ID: [ELG0022]
   test("pointerOver calls BottomTooltipPresenter.displayExitQueryTooltip", () => {
     systemUnderTest.pointerOver();
 
     expect(bottomTooltipPresenterMock.display).toHaveBeenCalledTimes(1);
   });
 
+  //ANF-ID: [ELG0022]
   test("pointerOut calls BottomTooltipPresenter.hide when hoverTooltipId is set", () => {
     systemUnderTest["hoverToolTipId"] = 1; // set tooltip id to non-default value
 

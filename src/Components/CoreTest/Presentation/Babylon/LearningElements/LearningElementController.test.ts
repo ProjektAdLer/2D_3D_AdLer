@@ -40,6 +40,7 @@ describe("LearningElementController", () => {
     CoreDIContainer.restore();
   });
 
+  //ANF-ID: [ELG0024]
   test("pointerOver calls displayElementSummaryTooltip on tooltip presenter", () => {
     systemUnderTest.pointerOver();
 
@@ -61,6 +62,7 @@ describe("LearningElementController", () => {
     );
   });
 
+  //ANF-ID: [ELG0024]
   test("pointerOut calls hideBottomTooltip on tooltip presenter", () => {
     systemUnderTest["hoverToolTipId"] = 1; // set tooltip id to non-default value
 
