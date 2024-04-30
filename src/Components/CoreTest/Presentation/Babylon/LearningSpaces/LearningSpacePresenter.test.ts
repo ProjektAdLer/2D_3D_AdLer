@@ -263,6 +263,7 @@ describe("LearningSpacePresenter", () => {
     expect(directorMock.buildAsync).toHaveBeenCalledWith(doorBuilderMock);
   });
 
+  //ANF-ID: [ELG0020]
   test("createWindows creates windows with its builder and calls the new presenter", async () => {
     systemUnderTest["viewModel"].windowPositions = [
       [new Vector3(1, 1, 1), 0],

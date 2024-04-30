@@ -43,6 +43,7 @@ describe("StoryNPCController", () => {
     CoreDIContainer.restore();
   });
 
+  //ANF-ID: [ELG0023]
   test("pointerOver calls BottomTooltipPresenter.displayExitQueryTooltip", () => {
     systemUnderTest.pointerOver();
 
@@ -66,6 +67,7 @@ describe("StoryNPCController", () => {
     );
   });
 
+  //ANF-ID: [ELG0023]
   test("pointerOut calls hideBottomTooltip on tooltip presenter", () => {
     systemUnderTest["hoverToolTipId"] = 1; // set tooltip id to non-default value
     const mockedMesh = mockDeep<Mesh>();

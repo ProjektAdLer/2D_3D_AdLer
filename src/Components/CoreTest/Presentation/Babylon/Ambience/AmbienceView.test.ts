@@ -40,6 +40,7 @@ describe("AmbienceView", () => {
     expect(systemUnderTest["scenePresenter"]).toBeDefined();
   });
 
+  //ANF-ID: [ELG0021]
   test("asyncSetup calls scenePresenter.loadModel", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),

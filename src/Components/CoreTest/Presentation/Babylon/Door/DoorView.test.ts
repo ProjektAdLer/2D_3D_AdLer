@@ -197,6 +197,7 @@ describe("DoorView", () => {
     );
   });
 
+  //ANF-ID: [ELG0018]
   test("updateHighlight sets highlight to yellow when door is interactable", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
@@ -211,6 +212,7 @@ describe("DoorView", () => {
     );
   });
 
+  //ANF-ID: [ELG0018]
   test("changeHighlight sets highlight to blue when door is not interactable", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));

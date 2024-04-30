@@ -18,6 +18,7 @@ describe("AmbienceBuilder", () => {
     expect(systemUnderTest).toBeInstanceOf(PresentationBuilder);
   });
 
+  //ANF-ID: [ELG0021]
   test("buildViewModel sets the theme in the view model", () => {
     systemUnderTest.theme = LearningSpaceThemeType.Arcade;
 
