@@ -59,6 +59,7 @@ describe("LearningElementView", () => {
     expect(viewModel.hasScored["subscribers"].length).toBe(1);
   });
 
+  //ANF-ID: [ELG0027]
   test("constructor sets up isHighlighted observable callbacks", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
@@ -70,6 +71,7 @@ describe("LearningElementView", () => {
     expect(viewModel.isHighlighted["subscribers"].length).toBe(1);
   });
 
+  //ANF-ID: [ELG0027]
   test("changing isHighlighted to true changes the highlight color to purple", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
@@ -91,6 +93,7 @@ describe("LearningElementView", () => {
     );
   });
 
+  //ANF-ID: [ELG0027]
   test("changing isHighlighted to false changes the highlight color to green if hasScored is true", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
