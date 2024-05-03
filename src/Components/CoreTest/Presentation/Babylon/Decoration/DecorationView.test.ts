@@ -43,6 +43,7 @@ describe("DecorationView", () => {
     expect(systemUnderTest["scenePresenter"]).toBeDefined();
   });
 
+  //ANF-ID: [ELG0025]
   test("asyncSetup/loadMeshAsync calls scenePresenter.loadModel with L room", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
@@ -55,6 +56,7 @@ describe("DecorationView", () => {
     expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
   });
 
+  //ANF-ID: [ELG0025]
   test("asyncSetup/loadMeshAsync calls scenePresenter.loadModel with R6 room", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
@@ -67,6 +69,7 @@ describe("DecorationView", () => {
     expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
   });
 
+  //ANF-ID: [ELG0025]
   test("asyncSetup/loadMeshAsync calls scenePresenter.loadModel with R8 room", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
@@ -79,6 +82,7 @@ describe("DecorationView", () => {
     expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
   });
 
+  //ANF-ID: [ELG0025]
   test("asyncSetup/loadMeshAsync returns without calling loadModel when templateType is None", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
@@ -106,6 +110,7 @@ describe("DecorationView", () => {
     );
   });
 
+  //ANF-ID: [ELG0025]
   test.each([
     [
       LearningSpaceTemplateType.L,
@@ -145,6 +150,7 @@ describe("DecorationView", () => {
     }
   );
 
+  //ANF-ID: [ELG0025]
   test.each([
     [
       LearningSpaceTemplateType.L,
@@ -184,6 +190,7 @@ describe("DecorationView", () => {
     }
   );
 
+  //ANF-ID: [ELG0025]
   test.each([
     [
       LearningSpaceTemplateType.L,
@@ -199,6 +206,7 @@ describe("DecorationView", () => {
     ],
     [
       LearningSpaceTemplateType.T,
+
       LearningSpaceTheme_Suburb.decorationModelLinkTShape,
     ],
     [
