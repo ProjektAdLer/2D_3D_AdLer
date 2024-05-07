@@ -157,15 +157,15 @@ export default class CharacterNavigator
       this.agentIndex
     ).length();
 
-    if (velocity < this.earlyStoppingVelocityThreshold)
+    if (velocity < this.earlyStoppingVelocityThreshold) {
       this.earlyStoppingCounter += scene.deltaTime;
-    else this.earlyStoppingCounter = 0;
 
-    if (this.earlyStoppingCounter >= this.earlyStoppingPatience) {
-      if (this.targetReachedCallback) this.targetReachedCallback();
-      this.stopMovement();
-      this.earlyStoppingCounter = 0;
-    }
+      if (this.earlyStoppingCounter >= this.earlyStoppingPatience) {
+        if (this.targetReachedCallback) this.targetReachedCallback();
+        this.stopMovement();
+        this.earlyStoppingCounter = 0;
+      }
+    } else this.earlyStoppingCounter = 0;
   }
 
   private resetObservers(): void {
