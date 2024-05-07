@@ -260,6 +260,7 @@ describe("LearningElementView", () => {
     );
   });
 
+  //ANF-ID: [ELG0028]
   test("positionModel changes the model position when the position value in the viewModel is changed", async () => {
     // mock resolve value twice to circumvent returning the same mesh twice
     scenePresenterMock.loadModel
@@ -282,6 +283,7 @@ describe("LearningElementView", () => {
     );
   });
 
+  //Anf-ID: [ELG0028]
   test("positionModel changes the model rotation when the rotation value in the viewModel is changed", async () => {
     const mockedMesh = mockDeep<AbstractMesh>();
     scenePresenterMock.loadModel.mockResolvedValue([mockedMesh]);
