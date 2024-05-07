@@ -6,7 +6,6 @@ const BUILDER_TYPES = {
   IWindowBuilder: Symbol("IWindowBuilder"),
   ILearningElementModalBuilder: Symbol("ILearningElementModalBuilder"),
   IAvatarBuilder: Symbol("IAvatarBuilder"),
-  ILearningElementsDropdownBuilder: Symbol("ILearningElementsDropdownBuilder"),
   IModalManagerBuilder: Symbol("IModalManagerBuilder"),
   ISignInAndOutComponentBuilder: Symbol("ISignInAndOutComponentBuilder"),
   IBottomTooltipBuilder: Symbol("IBottomTooltipBuilder"),

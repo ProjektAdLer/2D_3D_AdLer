@@ -15,10 +15,6 @@ jest.mock(
   () => "mocked"
 );
 jest.mock(
-  "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementsDropdown/LearningElementsDropdown",
-  () => "mocked"
-);
-jest.mock(
   "../../../../../Core/Presentation/React/GeneralComponents/NotificationManager/NotificationManager",
   () => "mocked"
 );

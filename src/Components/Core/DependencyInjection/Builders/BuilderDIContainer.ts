@@ -7,7 +7,6 @@ import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresen
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
 import PresentationDirector from "../../Presentation/PresentationBuilder/PresentationDirector";
 import ElementModalBuilder from "../../Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalBuilder";
-import LearningElementsDropdownBuilder from "../../Presentation/React/LearningSpaceDisplay/LearningElementsDropdown/LearningElementsDropdownBuilder";
 import LearningWorldScorePanelBuilder from "../../Presentation/React/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanelBuilder";
 import NotificationManagerBuilder from "../../Presentation/React/GeneralComponents/NotificationManager/NotificationManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
@@ -71,9 +70,6 @@ const BuilderDIContainer = new ContainerModule((bind) => {
     LearningElementBuilder
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarBuilder).to(AvatarBuilder);
-  bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementsDropdownBuilder).to(
-    LearningElementsDropdownBuilder
-  );
   bind<IPresentationBuilder>(BUILDER_TYPES.IModalManagerBuilder).to(
     NotificationManagerBuilder
   );
