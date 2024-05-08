@@ -41,6 +41,7 @@ describe("VideoComponent", () => {
     expect(component!).toBeDefined();
   });
 
+  // ANF-ID: [EWE0037]
   test("should render when a valid Link Vimeo is Provided", async () => {
     let component: RenderResult;
     const vm = new LearningElementModalViewModel();
@@ -58,6 +59,7 @@ describe("VideoComponent", () => {
     expect(component!).toBeDefined();
   });
 
+  // ANF-ID: [EWE0037]
   test("should render when a valid Link Opencast is Provided", async () => {
     let component: RenderResult;
     const vm = new LearningElementModalViewModel();
@@ -75,6 +77,7 @@ describe("VideoComponent", () => {
     expect(component!).toBeDefined();
   });
 
+  // ANF-ID: [EWE0037]
   test("should throw an error, if no valid link is provided", async () => {
     let component: RenderResult;
     const vm = new LearningElementModalViewModel();

@@ -21,6 +21,7 @@ describe("PrimitiveH5PContent", () => {
     jest.clearAllMocks();
   });
 
+  // ANF-ID: [EWE0037]
   test("should render", () => {
     viewModel.filePath.Value =
       "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel";

@@ -8,6 +8,7 @@ describe("PDFComponent", () => {
   viewModel.filePath.Value =
     "https://www.africau.edu/images/default/sample.pdf";
 
+  // ANF-ID: [EWE0037]
   test("should render its DesktopPDFComponent when supportsPDFs returns false", () => {
     const pdfobject = require("pdfobject");
     pdfobject.supportsPDFs = true;
@@ -17,6 +18,7 @@ describe("PDFComponent", () => {
     expect(container.querySelector("#pdf")).toBeTruthy();
   });
 
+  // ANF-ID: [EWE0037]
   test("should render its MobilePDFComponent when supportsPDFs returns false", () => {
     const pdfobject = require("pdfobject");
     pdfobject.supportsPDFs = false;

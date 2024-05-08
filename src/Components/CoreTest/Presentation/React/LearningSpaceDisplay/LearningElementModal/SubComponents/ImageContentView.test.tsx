@@ -32,6 +32,7 @@ describe("ImageComponent", () => {
     CoreDIContainer.restore();
   });
 
+  // ANF-ID: [EWE0037]
   it("should render", async () => {
     let component: RenderResult;
     const vm = new LearningElementModalViewModel();

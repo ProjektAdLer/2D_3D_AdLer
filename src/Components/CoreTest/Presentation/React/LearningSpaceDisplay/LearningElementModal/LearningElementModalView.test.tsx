@@ -67,6 +67,7 @@ describe("LearningElementModal", () => {
     expect(componentUnderTest.container.childElementCount).toBe(1);
   });
 
+  // ANF-ID: [EWE0037]
   test.each([["text"], ["image"], ["video"], ["h5p"]])(
     "should render its content with the correct type",
     (type) => {

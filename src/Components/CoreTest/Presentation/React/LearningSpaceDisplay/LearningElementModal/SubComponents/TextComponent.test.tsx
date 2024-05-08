@@ -33,6 +33,8 @@ describe("TextElementSubComponent", () => {
   afterAll(() => {
     CoreDIContainer.restore();
   });
+
+  // ANF-ID: [EWE0037]
   test("should render its Text", async () => {
     const vm = new LearningElementModalViewModel();
     vm.parentWorldID.Value = 1;
