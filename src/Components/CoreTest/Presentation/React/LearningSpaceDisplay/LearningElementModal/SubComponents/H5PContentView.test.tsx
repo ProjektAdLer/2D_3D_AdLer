@@ -17,7 +17,7 @@ jest.mock("h5p-standalone");
 const elementModalControllerMock = mock<ILearningElementModalController>();
 
 describe("H5PContentView", () => {
-  // ANF-ID: [EWE0037]
+  //ANF-ID: [ELG0030, EWE0037]
   test("should render", () => {
     viewModel.filePath.Value =
       "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel";
