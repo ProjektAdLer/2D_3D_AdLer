@@ -136,7 +136,7 @@ describe("CharacterNavigator", () => {
     );
   });
 
-  // REG-ID: [EZZ019]
+  // ANF-ID: [EZZ019]
   test("checkEarlyStopping increases earlyStoppingCounter when velocity is under threshold", () => {
     navigationMock.Crowd.getAgentVelocity.mockReturnValue(
       new Vector3(0.1, 0, 0)
@@ -149,7 +149,7 @@ describe("CharacterNavigator", () => {
     expect(systemUnderTest["earlyStoppingCounter"]).toBe(1);
   });
 
-  // REG-ID: [EZZ019]
+  // ANF-ID: [EZZ019]
   test("checkEarlyStopping resets earlyStoppingCounter when velocity is above threshold", () => {
     navigationMock.Crowd.getAgentVelocity.mockReturnValue(new Vector3(1, 0, 0));
     const sceneMock = mockDeep<Scene>();
@@ -160,7 +160,7 @@ describe("CharacterNavigator", () => {
     expect(systemUnderTest["earlyStoppingCounter"]).toBe(0);
   });
 
-  // REG-ID: [EZZ019]
+  // ANF-ID: [EZZ019]
   test("checkEarlyStopping calls targetReachedCallback when earlyStoppingPatience is exceeded", () => {
     const sceneMock = mockDeep<Scene>();
     sceneMock.deltaTime = 1;
