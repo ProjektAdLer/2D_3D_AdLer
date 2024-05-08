@@ -17,6 +17,7 @@ jest.mock("h5p-standalone");
 const elementModalControllerMock = mock<ILearningElementModalController>();
 
 describe("H5PContentView", () => {
+
   //ANF-ID: [ELG0030, EWE0037]
   test("should render", () => {
     viewModel.filePath.Value =
