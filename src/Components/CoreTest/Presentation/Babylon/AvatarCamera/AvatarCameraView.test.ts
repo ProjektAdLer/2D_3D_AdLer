@@ -66,6 +66,26 @@ describe("AvatarCameraView", () => {
     expect(viewModel.camera.Value).toBeDefined();
   });
 
+  // ANF-ID: [EZZ0020]
+  test("createCamera sets the camera parent to the parentNode", () => {
+    const viewModel = new AvatarCameraViewModel();
+    const scene = new Scene(new NullEngine());
+    const mockedParentNode = mockDeep<TransformNode>();
+    mockedParentNode.position = mockDeep<Vector3>();
+    viewModel.parentNode.Value = mockedParentNode;
+    //@ts-ignore
+    scenePresenterMock.Scene = scene;
+    systemUnderTest = new AvatarCameraView(
+      viewModel,
+      mock<AvatarCameraController>
+    );
+
+    systemUnderTest["createCamera"](mockedParentNode);
+
+    expect(viewModel.camera.Value?.parent).toBe(mockedParentNode);
+  });
+
+  // ANF-ID: [EZZ0020]
   test("createCamera returns without creating a camera when viewModel.parentNode is undefined", () => {
     const viewModel = new AvatarCameraViewModel();
     systemUnderTest = new AvatarCameraView(
