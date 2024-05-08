@@ -34,6 +34,7 @@ describe("StoryElement", () => {
     expect(container.firstChild).toBeNull();
   });
 
+  // ANF-ID: [EWE0041]
   test("should not render when closed", () => {
     viewModel.isOpen.Value = false;
 
@@ -42,6 +43,8 @@ describe("StoryElement", () => {
     const componentUnderTest = render(<StoryElement />);
     expect(componentUnderTest.container.childElementCount).toBe(0);
   });
+
+  // ANF-ID: [EWE0041]
   test("should close when x Button is clicked", () => {
     viewModel.isOpen.Value = true;
     viewModel.type.Value = [StoryElementType.Intro];
