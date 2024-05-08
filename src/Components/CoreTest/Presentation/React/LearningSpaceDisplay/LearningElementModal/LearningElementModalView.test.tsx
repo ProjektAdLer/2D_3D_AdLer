@@ -49,6 +49,7 @@ describe("LearningElementModal", () => {
     expect(container.firstChild).toBeNull();
   });
 
+  // ANF-ID: [EWE0038]
   test("should not render when closed", () => {
     fakeModel.isOpen.Value = false;
 
