@@ -137,6 +137,7 @@ export default class StoryNPCView {
       )
     );
   }
+
   private addMeshesToHighlightLayer(): void {
     const highlightColor = Color3.Teal();
 

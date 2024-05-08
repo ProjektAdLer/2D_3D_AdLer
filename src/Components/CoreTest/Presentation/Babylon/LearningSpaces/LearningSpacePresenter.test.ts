@@ -279,6 +279,7 @@ describe("LearningSpacePresenter", () => {
     expect(directorMock.buildAsync).toHaveBeenCalledWith(windowBuilderMock);
   });
 
+  // ANF-ID: [EZZ0022]
   test("createStoryNPC creates a storyNPC with its builder when story element is available", async () => {
     await systemUnderTest["createStoryNPCs"]({
       ...spaceTO,

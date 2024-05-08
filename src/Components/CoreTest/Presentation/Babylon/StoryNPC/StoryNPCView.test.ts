@@ -104,6 +104,7 @@ describe("StoryNPCView", () => {
       await expect(systemUnderTest.asyncSetupStoryNPC()).resolves.not.toThrow();
     });
 
+    // ANF-ID: [EZZ0022]
     test("loadElementModel calls the scenePresenter to load npc models", async () => {
       const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
@@ -116,6 +117,7 @@ describe("StoryNPCView", () => {
       expect(scenePresenterMock.loadGLTFModel).toHaveBeenCalledTimes(1);
     });
 
+    // ANF-ID: [EZZ0022]
     test("loadElementModel gets idleAnimation from loading results", async () => {
       const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
       const mockIdleAnimationGroup = new AnimationGroup(
@@ -134,6 +136,7 @@ describe("StoryNPCView", () => {
       expect(systemUnderTest["idleAnimation"]).toBe(mockIdleAnimationGroup);
     });
 
+    // ANF-ID: [EZZ0022]
     test("loadElementModel gets walkAnimation from loading results", async () => {
       const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
       const mockWalkAnimationGroup = new AnimationGroup(
