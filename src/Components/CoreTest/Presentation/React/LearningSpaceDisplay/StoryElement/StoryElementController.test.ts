@@ -29,6 +29,7 @@ describe("StoryElementController", () => {
     expect(viewModelMock.isOpen.Value).toBeFalsy();
   });
 
+  //ANF-ID: [EWE0040]
   test("increasePageId increases pageId in viewmodel by 1", () => {
     viewModelMock.pageId.Value = 0;
     systemUnderTest = new StoryElementController(viewModelMock);
@@ -36,18 +37,23 @@ describe("StoryElementController", () => {
     expect(viewModelMock.pageId.Value).toBe(1);
   });
 
+  //ANF-ID: [EWE0040]
   test("decreasePageId decreases pageId in viewmodel by 1", () => {
     viewModelMock.pageId.Value = 10;
     systemUnderTest = new StoryElementController(viewModelMock);
     systemUnderTest.decreasePageId();
     expect(viewModelMock.pageId.Value).toBe(9);
   });
+
+  //ANF-ID: [EWE0040]
   test("onIntroButtonClicked sets showOnlyIntro in viewmodel to true", () => {
     viewModelMock.showOnlyIntro.Value = false;
     systemUnderTest = new StoryElementController(viewModelMock);
     systemUnderTest.onIntroButtonClicked();
     expect(viewModelMock.showOnlyIntro.Value).toBeTruthy();
   });
+
+  //ANF-ID: [EWE0040]
   test("onOutroButtonClicked sets showOnlyOutro in viewmodel to true", () => {
     viewModelMock.showOnlyOutro.Value = false;
     systemUnderTest = new StoryElementController(viewModelMock);
