@@ -98,6 +98,7 @@ describe("StoryNPCController", () => {
     expect(systemUnderTest["hoverToolTipId"]).toBe(-1);
   });
 
+  // ANF-ID: [EWE0039]
   test("picked calls open on the storyElementPresenter when isInteractable is true", () => {
     viewModel.isInteractable.Value = true;
     viewModel.storyType = StoryElementType.Intro;
@@ -107,6 +108,7 @@ describe("StoryNPCController", () => {
     expect(storyElementPresenterMock.open).toBeCalledTimes(1);
   });
 
+  // ANF-ID: [EWE0039]
   test("picked doesn't call open on the storyElementPresenter when isInteractable is false", () => {
     viewModel.isInteractable.Value = false;
 
