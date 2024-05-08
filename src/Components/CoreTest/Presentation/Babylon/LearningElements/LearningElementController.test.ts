@@ -89,6 +89,7 @@ describe("LearningElementController", () => {
     expect(systemUnderTest["hoverToolTipId"]).toBe(-1);
   });
 
+  // ANF-ID: [EWE0034]
   test("picked calls LoadLearningElementUseCase for non-adaptivity elements when isInteractable is true", () => {
     viewModel.id = 42;
     viewModel.type = LearningElementTypes.pdf;
@@ -101,6 +102,7 @@ describe("LearningElementController", () => {
     );
   });
 
+  // ANF-ID: [EWE0034]
   test("picked calls LoadAdaptivityElementUseCase for adaptivity elements when isInteractable is true", () => {
     viewModel.id = 42;
     viewModel.type = LearningElementTypes.adaptivity;
