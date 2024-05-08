@@ -312,6 +312,8 @@ describe("StoryNPCView", () => {
 
       expect(controllerMock.picked).toHaveBeenCalledTimes(1);
     });
+
+    //ANF-ID: [ELG0031]
     test("async setup adds mesh to the scene presenters HighlightLayer", async () => {
       viewModel.modelMeshes = [
         new Mesh("mockMesh", new Scene(new NullEngine())),
