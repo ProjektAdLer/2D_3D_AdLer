@@ -178,6 +178,7 @@ export default class StoryNPCView {
   }
 
   private calculateAvatarOffsetSpawnLocation(): [Vector3, number] {
+    // TODO: correct for avatar rotation
     const spawnLocation = this.viewModel.avatarPosition.add(
       this.viewModel.introSpawnPositionOffsetFromAvatar
     );
