@@ -195,6 +195,7 @@ describe("StoryNPCView", () => {
       expect(viewModel.iconMeshes[0].actionManager).toBeDefined();
     });
 
+    // ANF-ID: [EZZ0023]
     test("setSpawnLocation sets the position and rotation to value from viewModel when state is Idle", () => {
       viewModel.modelRootNode = new TransformNode(
         "mockRootNode",
