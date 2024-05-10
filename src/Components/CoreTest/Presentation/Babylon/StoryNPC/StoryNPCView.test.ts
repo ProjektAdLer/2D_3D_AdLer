@@ -217,6 +217,7 @@ describe("StoryNPCView", () => {
       );
     });
 
+    // ANF-ID: [EZZ0023]
     test("setSpawnLocation calcualtes spawn location when state is not Idle", () => {
       viewModel.modelRootNode = new TransformNode(
         "mockRootNode",
