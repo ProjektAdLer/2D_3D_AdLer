@@ -409,6 +409,7 @@ describe("StoryNPCView", () => {
       );
     });
 
+    // ANF-ID: [EZZ0026]
     test("startCutSceneMovement calls startMovement on the characterNavigator after timeout", () => {
       viewModel.characterNavigator = characterNavigatorMock;
       viewModel.storyType = StoryElementType.Intro;
@@ -428,6 +429,7 @@ describe("StoryNPCView", () => {
       expect(characterNavigatorMock.startMovement).toBeCalledTimes(1);
     });
 
+    // ANF-ID: [EZZ0026]
     test("startCutSceneMovement calls open on the storyElementPresenter after cutscene position reached", () => {
       viewModel.storyType = StoryElementType.Intro;
       viewModel.avatarPosition = new Vector3(10, 0, 0);
