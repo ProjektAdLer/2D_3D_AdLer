@@ -35,6 +35,7 @@ describe("StoryNPCPresenter", () => {
     systemUnderTest = new StoryNPCPresenter(viewModel);
   });
 
+  // ANF-ID: [EWE0039]
   test("onAvatarPositionChanged sets isInteractable to true when the avatar is in the interaction radius", () => {
     viewModel.parentNode = new TransformNode(
       "mockParentNode",
@@ -47,6 +48,7 @@ describe("StoryNPCPresenter", () => {
     expect(viewModel.isInteractable.Value).toBe(true);
   });
 
+  // ANF-ID: [EWE0039]
   test("onAvatarPositionChanged sets isInteractable to false when the avatar is outside the interaction radius", () => {
     viewModel.parentNode = new TransformNode(
       "mockParentNode",
@@ -59,6 +61,7 @@ describe("StoryNPCPresenter", () => {
     expect(viewModel.isInteractable.Value).toBe(false);
   });
 
+  // ANF-ID: [EZZ0024]
   test("onStoryElementCutSceneTriggered sets state to Idle when another story type cutscene is triggered", () => {
     viewModel.state.Value = StoryNPCState.RandomMovement;
     viewModel.storyType = StoryElementType.Outro;
@@ -75,6 +78,7 @@ describe("StoryNPCPresenter", () => {
     expect(viewModel.state.Value).toBe(StoryNPCState.CutScene);
   });
 
+  // ANF-ID: [EZZ0025]
   test("onStoryElementCutSceneFinished sets state to RandomMovement when currently CutScene is set", () => {
     viewModel.state.Value = StoryNPCState.CutScene;
     systemUnderTest.onStoryElementCutSceneFinished();
