@@ -8,7 +8,6 @@ import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManageme
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 import {
-  AbstractMesh,
   ActionManager,
   AnimationGroup,
   Color3,
@@ -181,6 +180,7 @@ describe("StoryNPCView", () => {
       expect(viewModel.parentNode).toBeDefined();
     });
 
+    // ANF-ID: [EWE0039]
     test("setupInteraction creates a ActionManager and sets it on all meshes", () => {
       viewModel.modelMeshes = [
         new Mesh("mockMesh", new Scene(new NullEngine())),
@@ -300,6 +300,7 @@ describe("StoryNPCView", () => {
   });
 
   describe("interactions", () => {
+    // ANF-ID: [EWE0039]
     test("click on npc calls controller.picked", () => {
       viewModel.modelMeshes = [
         new Mesh("mockMesh", new Scene(new NullEngine())),
@@ -333,6 +334,7 @@ describe("StoryNPCView", () => {
   });
 
   describe("movement", () => {
+    // ANF-ID: [EZZ0024]
     test.each([
       [StoryNPCState.Idle, "moveToIdlePosition"],
       [StoryNPCState.CutScene, "startCutSceneMovement"],
@@ -351,6 +353,7 @@ describe("StoryNPCView", () => {
       expect(systemUnderTest[fn]).toHaveBeenCalledTimes(1);
     });
 
+    // ANF-ID: [EZZ0025]
     // needs special handling for bound private method
     test("onStateChanged calls startRandomMovementIdleTimeout when state is changed to RandomMovement", () => {
       viewModel.state.Value = StoryNPCState.Idle;
@@ -366,6 +369,7 @@ describe("StoryNPCView", () => {
       expect(startRandomMovementIdleTimeoutMock).toHaveBeenCalledTimes(1);
     });
 
+    // ANF-ID: [EZZ0024]
     test("moveToIdlePosition calls startMovement on the characterNavigator with the idle position", () => {
       viewModel.characterNavigator = characterNavigatorMock;
       viewModel.storyType = StoryElementType.Intro;
@@ -380,6 +384,7 @@ describe("StoryNPCView", () => {
       );
     });
 
+    // ANF-ID: [EZZ0024]
     test("moveToIdlePosition sets idlePosRotation on modelRootNode when idle position is reached", () => {
       viewModel.storyType = StoryElementType.Intro;
       viewModel.introIdlePosition = new Vector3(4, 2, 0);
@@ -449,6 +454,7 @@ describe("StoryNPCView", () => {
       );
     });
 
+    // ANF-ID: [EZZ0025]
     test("setRandomMovementTarget calls startMovement on the characterNavigator with a target", () => {
       navigationMock.Plugin.getRandomPointAround.mockReturnValue(
         new Vector3(2, 0, 2)
@@ -470,6 +476,7 @@ describe("StoryNPCView", () => {
       );
     });
 
+    // ANF-ID: [EZZ0025]
     test("startRandomMovementIdleTimeout calls setRandomTarget after the idleTime", () => {
       navigationMock.Plugin.getRandomPointAround.mockReturnValue(
         new Vector3(2, 0, 2)
@@ -499,6 +506,7 @@ describe("StoryNPCView", () => {
       expect(setRandomMovementTargetMock).toBeCalledTimes(1);
     });
 
+    // ANF-ID: [EZZ0025]
     test("setRandomMovementTarget does not call character navigator when state is not RandomMovement", () => {
       viewModel.state.Value = StoryNPCState.Idle;
 
