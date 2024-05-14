@@ -34,7 +34,8 @@ describe("LoadingScreenController", () => {
     expect(viewModel.isOpen.Value).toBe(false);
   });
 
-  test("closeLoadingScreen calls beginStoryElementIntroCutSceneUseCase when laodingLocation is spacedisplay", () => {
+  //ANF-ID: [EWE0036]
+  test("closeLoadingScreen calls beginStoryElementIntroCutSceneUseCase when loadingLocation is spacedisplay", () => {
     viewModel.loadingLocation.Value = "spacedisplay";
 
     systemUnderTest.closeLoadingScreen();

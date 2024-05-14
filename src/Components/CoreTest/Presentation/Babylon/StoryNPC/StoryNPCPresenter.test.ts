@@ -67,6 +67,7 @@ describe("StoryNPCPresenter", () => {
     expect(viewModel.state.Value).toBe(StoryNPCState.Idle);
   });
 
+  //ANF-ID: [EWE0036]
   test("onStoryElementCutSceneTriggered sets state to CutScene when the same story type cutscene is triggered", () => {
     viewModel.state.Value = StoryNPCState.RandomMovement;
     viewModel.storyType = StoryElementType.Intro;
