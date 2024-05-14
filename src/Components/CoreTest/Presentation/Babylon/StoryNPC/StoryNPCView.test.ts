@@ -8,7 +8,6 @@ import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManageme
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 import {
-  AbstractMesh,
   ActionManager,
   AnimationGroup,
   Color3,
@@ -181,6 +180,7 @@ describe("StoryNPCView", () => {
       expect(viewModel.parentNode).toBeDefined();
     });
 
+    // ANF-ID: [EWE0039]
     test("setupInteraction creates a ActionManager and sets it on all meshes", () => {
       viewModel.modelMeshes = [
         new Mesh("mockMesh", new Scene(new NullEngine())),
@@ -300,6 +300,7 @@ describe("StoryNPCView", () => {
   });
 
   describe("interactions", () => {
+    // ANF-ID: [EWE0039]
     test("click on npc calls controller.picked", () => {
       viewModel.modelMeshes = [
         new Mesh("mockMesh", new Scene(new NullEngine())),
