@@ -38,6 +38,7 @@ describe("EndStoryElementCutSceneUseCase", () => {
     CoreDIContainer.restore();
   });
 
+  //ANF-ID: [EWE0043]
   test("execute() should call onStoryElementCutSceneFinished() on the world port when story element exists", () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
@@ -50,6 +51,7 @@ describe("EndStoryElementCutSceneUseCase", () => {
     expect(learnignWorldPortMock.onStoryElementCutSceneFinished).toBeCalled();
   });
 
+  //ANF-ID: [EWE0043]
   test("execute() should not call onStoryElementCutSceneFinished() on the world port when story element does not exist", () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,

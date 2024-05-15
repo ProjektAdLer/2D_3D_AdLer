@@ -83,6 +83,7 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
     );
   });
 
+  //ANF-ID: [EWE0042]
   test("does not call loadStoryElementUseCase when requiredScore was already exceeded", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
       {} as StoryElementTO,
@@ -117,6 +118,7 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
     expect(loadStoryElementUseCaseMock.execute).toBeCalledTimes(1);
   });
 
+  //ANF-ID: [EWE0042]
   test("calls worldPort.onStoryElementCutSceneTriggered when requiredScore was just exceeded", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
       {} as StoryElementTO,

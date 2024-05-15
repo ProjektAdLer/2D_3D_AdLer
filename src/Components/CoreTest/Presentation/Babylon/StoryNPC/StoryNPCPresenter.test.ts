@@ -70,7 +70,7 @@ describe("StoryNPCPresenter", () => {
     expect(viewModel.state.Value).toBe(StoryNPCState.Idle);
   });
 
-  //ANF-ID: [EWE0036]
+  //ANF-ID: [EWE0036,EWE0042]
   test("onStoryElementCutSceneTriggered sets state to CutScene when the same story type cutscene is triggered", () => {
     viewModel.state.Value = StoryNPCState.RandomMovement;
     viewModel.storyType = StoryElementType.Intro;
@@ -79,7 +79,7 @@ describe("StoryNPCPresenter", () => {
     expect(viewModel.state.Value).toBe(StoryNPCState.CutScene);
   });
 
-  // ANF-ID: [EZZ0025]
+  // ANF-ID: [EZZ0025,EWE0043]
   test("onStoryElementCutSceneFinished sets state to RandomMovement when currently CutScene is set", () => {
     viewModel.state.Value = StoryNPCState.CutScene;
     systemUnderTest.onStoryElementCutSceneFinished();

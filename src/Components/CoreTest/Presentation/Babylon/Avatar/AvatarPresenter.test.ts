@@ -24,6 +24,7 @@ describe("AvatarPresenter", () => {
     expect(systemUnderTest["viewModel"]).toBe(viewModel);
   });
 
+  //ANF-ID:[EWE0036,EWE0042]
   test("onStoryElementCutSceneTriggered sets the inputEnabled member of the viewModel member to false", () => {
     const viewModel = new AvatarViewModel();
     viewModel.inputEnabled.Value = true;
@@ -34,6 +35,7 @@ describe("AvatarPresenter", () => {
     expect(viewModel.inputEnabled.Value).toBe(false);
   });
 
+  //ANF-ID:[EWE0043]
   test("onStoryElementCutSceneFinished sets the inputEnabled member of the viewModel member to true", () => {
     const viewModel = new AvatarViewModel();
     viewModel.inputEnabled.Value = false;
