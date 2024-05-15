@@ -112,6 +112,7 @@ export default function AdaptivityElementDialogContainer({
 
   if (!viewmodel || !controller) return null;
   if (!isOpen || !contentData) return null;
+
   return (
     <StyledContainer className={tailwindMerge(className, "")}>
       <div
@@ -123,6 +124,7 @@ export default function AdaptivityElementDialogContainer({
           <img
             className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
             alt="LearningImage!"
+            data-testid="npcImage"
             src={getNPCImage(model, true)}
             onClick={(event) => {
               event.stopPropagation();

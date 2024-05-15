@@ -1,5 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_alerobot" 1`] = `
+<img
+  alt="LearningImage!"
+  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+  data-testid="npcImage"
+  src="a_npc_alerobot_close.png"
+/>
+`;
+
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_defaultnpc" 1`] = `
+<img
+  alt="LearningImage!"
+  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+  data-testid="npcImage"
+  src="a_npc_defaultnpc_close.png"
+/>
+`;
+
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_dozentlukas" 1`] = `
+<img
+  alt="LearningImage!"
+  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+  data-testid="npcImage"
+  src="a_npc_dozentlukas_close.png"
+/>
+`;
+
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_sheriffjustice" 1`] = `
+<img
+  alt="LearningImage!"
+  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+  data-testid="npcImage"
+  src="a_npc_sheriffjustice_close.png"
+/>
+`;
+
 exports[`AdaptivityElementDialogContainer should render 1`] = `
 <div>
   <div
@@ -14,6 +50,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
         <img
           alt="LearningImage!"
           class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+          data-testid="npcImage"
           src="a_npc_defaultnpc_close.png"
         />
       </div>
