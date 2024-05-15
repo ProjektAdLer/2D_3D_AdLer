@@ -6,6 +6,7 @@ import StoryElementController from "../../../../../Core/Presentation/React/Learn
 import StoryElementViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/StoryElementViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import { StoryElementType } from "../../../../../Core/Domain/Types/StoryElementType";
+import { LearningElementModelTypeEnums } from "../../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 let viewModel = new StoryElementViewModel();
 viewModel.isOpen.Value = true;
@@ -32,6 +33,30 @@ describe("StoryElement", () => {
     useBuilderMock([undefined, fakeController]);
     const { container } = render(<StoryElement />);
     expect(container.firstChild).toBeNull();
+  });
+
+  // ANF-ID: [ELG0032]
+  test.each([
+    [LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC],
+    [LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC],
+    [LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC],
+    [LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC],
+  ])("displays correct npc thumbnail for model %p", (model) => {
+    viewModel.modelType.Value = [model];
+    viewModel.isOpen.Value = true;
+    viewModel.type.Value = [StoryElementType.Intro, StoryElementType.Outro];
+    viewModel.isSplitStory.Value = true;
+    viewModel.pickedStory.Value = StoryElementType.Intro;
+    useBuilderMock([viewModel, fakeController]);
+
+    const componentUnderTest = render(<StoryElement />);
+
+    const npcThumbnails = componentUnderTest.getAllByTestId("npcImage");
+
+    npcThumbnails.forEach((npcThumbnail) => {
+      expect(npcThumbnail).toBeInTheDocument();
+      expect(npcThumbnail).toMatchSnapshot();
+    });
   });
 
   // ANF-ID: [EWE0041]

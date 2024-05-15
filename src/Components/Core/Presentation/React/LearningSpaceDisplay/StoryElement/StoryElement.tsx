@@ -48,6 +48,9 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   const [isOpen] = useObservable<boolean>(viewModel?.isOpen);
   const [pageId] = useObservable<number>(viewModel?.pageId);
   const [pickedStory] = useObservable<StoryElementType>(viewModel?.pickedStory);
+  const [modelTypes] = useObservable<LearningElementModel[]>(
+    viewModel?.modelType
+  );
 
   useObservable<boolean>(viewModel?.showOnlyIntro);
   useObservable<boolean>(viewModel?.showOnlyOutro);
@@ -139,17 +142,20 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
             <img
               className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
               alt="LearningImage!"
-              src={getNPCImage(viewModel.modelType.Value[0], true)}
+              data-testid="npcImage"
+              src={getNPCImage(modelTypes[0], true)}
             />
           )}
           {isSplitStory && pickedStory === StoryElementType.Outro && (
             <img
               className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
               alt="LearningImage!"
-              src={getNPCImage(viewModel.modelType.Value[1], true)}
+              data-testid="npcImage"
+              src={getNPCImage(modelTypes[1], true)}
             />
           )}
         </div>
+
         {/* Modal */}
         <div className="flex items-start justify-center pb-2 w-full lg:w-[95vw] max-w-7xl lg:max-h-[30vh] xl:max-h-[32vh] pt-2 lg:pt-0 row-start-3 overflow-auto">
           <div className="flex flex-col p-2 xl:px-8 gap-2 justify-center rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%]">
@@ -160,14 +166,16 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                 <img
                   className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
                   alt="LearningImage!"
-                  src={getNPCImage(viewModel.modelType.Value[0], false)}
+                  date-testid="npcImage"
+                  src={getNPCImage(modelTypes[0], false)}
                 />
               )}
               {isSplitStory && pickedStory === StoryElementType.Outro && (
                 <img
                   className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
                   alt="LearningImage!"
-                  src={getNPCImage(viewModel.modelType.Value[1], false)}
+                  date-testid="npcImage"
+                  src={getNPCImage(modelTypes[1], false)}
                 />
               )}
 
@@ -181,6 +189,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                 X
               </StyledButton>
             </div>
+
             {!complexStory &&
               createBasicLayout(contentTexts, pageId, controller)}
             {complexStory && (
