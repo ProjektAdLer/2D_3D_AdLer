@@ -18,7 +18,7 @@ describe("AvatarCameraController", () => {
     expect(subscribeMock).toHaveBeenCalledTimes(1);
   });
 
-  // ANF-ID: [EZZ021]
+  // ANF-ID: [EZZ0021]
   test("applyCameraControls applies lowerRadiusLimit from viewModel to camera", () => {
     const viewModel = new AvatarCameraViewModel();
     const camera = mockDeep<ArcRotateCamera>();
@@ -29,7 +29,7 @@ describe("AvatarCameraController", () => {
     expect(camera.lowerRadiusLimit).toBe(viewModel.lowerRadiusLimit);
   });
 
-  // ANF-ID: [EZZ021]
+  // ANF-ID: [EZZ0021]
   test("applyCameraControls applies upperRadiusLimit from viewModel to camera", () => {
     const viewModel = new AvatarCameraViewModel();
     const camera = mockDeep<ArcRotateCamera>();
@@ -40,7 +40,7 @@ describe("AvatarCameraController", () => {
     expect(camera.upperRadiusLimit).toBe(viewModel.upperRadiusLimit);
   });
 
-  // ANF-ID: [EZZ021]
+  // ANF-ID: [EZZ0021]
   test("applyCameraControls applies wheelDeltaPercentage from viewModel to camera", () => {
     const viewModel = new AvatarCameraViewModel();
     const camera = mockDeep<ArcRotateCamera>();
@@ -51,7 +51,7 @@ describe("AvatarCameraController", () => {
     expect(camera.wheelDeltaPercentage).toBe(viewModel.wheelDeltaPercentage);
   });
 
-  // ANF-ID: [EZZ021]
+  // ANF-ID: [EZZ0021]
   test("applyCameraControls attaches mousewheel zoom controls to camera", () => {
     const viewModel = new AvatarCameraViewModel();
     const camera = mockDeep<ArcRotateCamera>();
@@ -64,7 +64,7 @@ describe("AvatarCameraController", () => {
     ).toHaveBeenCalledTimes(1);
   });
 
-  // ANF-ID: [EZZ021]
+  // ANF-ID: [EZZ0021]
   test("applyCameraControls attaches pointer controls to camera", () => {
     const viewModel = new AvatarCameraViewModel();
     const camera = mockDeep<ArcRotateCamera>();
@@ -77,7 +77,7 @@ describe("AvatarCameraController", () => {
     );
   });
 
-  // ANF-ID: [EZZ021]
+  // ANF-ID: [EZZ0021]
   test("applyCameraControls sets multiTouchPanAndZoom to true on pointers input", () => {
     const viewModel = new AvatarCameraViewModel();
     const camera = mockDeep<ArcRotateCamera>();
@@ -91,7 +91,7 @@ describe("AvatarCameraController", () => {
     expect(pointersInput.multiTouchPanAndZoom).toBe(true);
   });
 
-  // ANF-ID: [EZZ021]
+  // ANF-ID: [EZZ0021]
   test("applyCameraControls sets pinchZoom to true on pointers input", () => {
     const viewModel = new AvatarCameraViewModel();
     const camera = mockDeep<ArcRotateCamera>();
