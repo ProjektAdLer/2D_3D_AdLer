@@ -69,6 +69,7 @@ describe("LearningSpaceScene", () => {
     jest.restoreAllMocks();
   });
 
+  // ANF-ID: [EZZ0027]
   test("initializeScene doesn't throw", () => {
     systemUnderTest["scene"] = new Scene(new NullEngine());
     presentationBuilderMock.getPresenter.mockReturnValue(
