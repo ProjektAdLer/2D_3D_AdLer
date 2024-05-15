@@ -9,12 +9,30 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
 />
 `;
 
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_alerobot" 2`] = `
+<img
+  alt="LearningImage!"
+  class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+  data-testid="npcImage"
+  src="a_npc_alerobot.png"
+/>
+`;
+
 exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_defaultnpc" 1`] = `
 <img
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
   src="a_npc_defaultnpc_close.png"
+/>
+`;
+
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_defaultnpc" 2`] = `
+<img
+  alt="LearningImage!"
+  class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+  data-testid="npcImage"
+  src="a_npc_defaultnpc.png"
 />
 `;
 
@@ -27,12 +45,30 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
 />
 `;
 
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_dozentlukas" 2`] = `
+<img
+  alt="LearningImage!"
+  class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+  data-testid="npcImage"
+  src="a_npc_dozentlukas.png"
+/>
+`;
+
 exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_sheriffjustice" 1`] = `
 <img
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
   src="a_npc_sheriffjustice_close.png"
+/>
+`;
+
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_sheriffjustice" 2`] = `
+<img
+  alt="LearningImage!"
+  class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+  data-testid="npcImage"
+  src="a_npc_sheriffjustice.png"
 />
 `;
 
@@ -78,6 +114,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
               <img
                 alt="LearningImage!"
                 class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+                data-testid="npcImage"
                 src="a_npc_defaultnpc.png"
               />
               <div

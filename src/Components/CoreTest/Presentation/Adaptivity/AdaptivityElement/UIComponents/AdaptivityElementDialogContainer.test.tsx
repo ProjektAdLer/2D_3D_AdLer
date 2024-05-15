@@ -1,4 +1,4 @@
-import { getByTestId, render } from "@testing-library/react";
+import { getAllByTestId, getByTestId, render } from "@testing-library/react";
 import React from "react";
 import AdaptivityElementDialogContainer from "../../../../../Core/Presentation/Adaptivity/AdaptivityElement/UIComponents/AdaptivityElementDialogContainer";
 import useBuilderMock from "../../../React/ReactRelated/CustomHooks/useBuilder/useBuilderMock";
@@ -153,9 +153,12 @@ describe("AdaptivityElementDialogContainer", () => {
 
     const { container } = render(<AdaptivityElementDialogContainer />);
 
-    const npcImage = getByTestId(container, "npcImage");
+    const npcImages = getAllByTestId(container, "npcImage");
 
-    expect(npcImage).toBeInTheDocument();
-    expect(npcImage).toMatchSnapshot();
+    expect(npcImages).toHaveLength(2);
+    npcImages.forEach((npcImage) => {
+      expect(npcImage).toBeInTheDocument();
+      expect(npcImage).toMatchSnapshot();
+    });
   });
 });

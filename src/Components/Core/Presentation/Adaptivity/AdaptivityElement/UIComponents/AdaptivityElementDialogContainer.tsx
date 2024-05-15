@@ -176,6 +176,7 @@ export default function AdaptivityElementDialogContainer({
                 <img
                   className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
                   alt="LearningImage!"
+                  data-testid="npcImage"
                   src={getNPCImage(model, false)}
                 ></img>
 
