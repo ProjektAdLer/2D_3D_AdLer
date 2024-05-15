@@ -11,6 +11,7 @@ import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/Learnin
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import { StoryNPCState } from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCViewModel";
 import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
+import LearningSpaceTemplateLookup from "../../../../Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
 
 jest.spyOn(PresentationBuilder.prototype, "buildPresenter");
 jest.spyOn(PresentationBuilder.prototype, "buildView");
@@ -95,6 +96,22 @@ describe("StoryNPCBuilder", () => {
       expect(systemUnderTest["viewModel"]?.state.Value).toBe(initialState);
     }
   );
+
+  // ANF-ID: [EZZ0023]
+  test("buidlViewModel gets idle position and rotation from learning space template", () => {
+    systemUnderTest.modelType = "";
+    systemUnderTest.learningSpaceTemplateType = LearningSpaceTemplateType.L;
+    const template = LearningSpaceTemplateLookup.getLearningSpaceTemplate(
+      LearningSpaceTemplateType.L
+    );
+
+    systemUnderTest.buildViewModel();
+
+    expect(systemUnderTest["viewModel"]?.introIdlePosition).toBeDefined();
+    expect(systemUnderTest["viewModel"]?.introIdlePosRotation).toBeDefined();
+    expect(systemUnderTest["viewModel"]?.outroIdlePosition).toBeDefined();
+    expect(systemUnderTest["viewModel"]?.outroIdlePosRotation).toBeDefined();
+  });
 
   test("buildView resolves isCompleted promise when the asyncSetup of the view resolves", async () => {
     systemUnderTest.modelType = "test";
