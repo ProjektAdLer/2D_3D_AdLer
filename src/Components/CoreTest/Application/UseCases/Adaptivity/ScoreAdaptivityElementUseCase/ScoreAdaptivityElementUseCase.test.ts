@@ -12,6 +12,7 @@ import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USEC
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import UserDataEntity from "../../../../../Core/Domain/Entities/UserDataEntity";
 import { LogLevelTypes } from "../../../../../Core/Domain/Types/LogLevelTypes";
+import IBeginStoryElementOutroCutSceneUseCase from "../../../../../Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 
 const entityContainerMock = mock<IEntityContainer>();
 const loggerMock = mock<ILoggerPort>();
@@ -21,6 +22,8 @@ const calculateWorldScoreUseCaseMock =
 const calculateSpaceScoreUseCaseMock =
   mock<IInternalCalculateLearningSpaceScoreUseCase>();
 const worldPortMock = mock<ILearningWorldPort>();
+const beginStoryElementOutroCutSceneUseCaseMock =
+  mock<IBeginStoryElementOutroCutSceneUseCase>();
 
 describe("ScoreAdaptivityElementUseCase", () => {
   let systemUnderTest: ScoreAdaptivityElementUseCase;
@@ -43,6 +46,9 @@ describe("ScoreAdaptivityElementUseCase", () => {
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
       worldPortMock
     );
+    CoreDIContainer.rebind(
+      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+    ).toConstantValue(beginStoryElementOutroCutSceneUseCaseMock);
   });
 
   beforeEach(() => {
@@ -184,5 +190,25 @@ describe("ScoreAdaptivityElementUseCase", () => {
     expect(worldPortMock.onLearningWorldScored).toHaveBeenCalledWith(
       newWorldScore
     );
+  });
+
+  // ANF-ID: [EWE0042]
+  test("internalExecute calls beginStoryElementOutroCutSceneUseCase", () => {
+    const userEntity = mock<UserDataEntity>();
+    userEntity.isLoggedIn = true;
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userEntity]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 42,
+      spaceID: 24,
+    });
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      { parentWorldID: 42, id: 42 },
+    ]);
+
+    systemUnderTest.internalExecute(42);
+
+    expect(
+      beginStoryElementOutroCutSceneUseCaseMock.execute
+    ).toHaveBeenCalledWith({ scoredLearningElementID: 42 });
   });
 });

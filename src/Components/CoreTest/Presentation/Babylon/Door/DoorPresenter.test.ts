@@ -7,6 +7,7 @@ import { mock } from "jest-mock-extended";
 import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import IExitModalPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/ExitModal/IExitModalPresenter";
 import { Vector3 } from "@babylonjs/core";
+import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 
 const mockBottomTooltipPresenter = mock<IBottomTooltipPresenter>();
 const mockExitModalPresenter = mock<IExitModalPresenter>();
@@ -71,5 +72,27 @@ describe("DoorPresenter", () => {
     systemUnderTest.onLearningSpaceScored(spaceScoreTO);
 
     expect(viewModel.isOpen.Value).toBe(true);
+  });
+
+  //ANF-ID: [EWE0036, EWE0042]
+  test("onStoryElementCutSceneTriggered sets isInputEnabled to false if a story element intro or outro cutscene is triggered", () => {
+    viewModel = new DoorViewModel();
+    viewModel.isInputEnabled.Value = true;
+    systemUnderTest = new DoorPresenter(viewModel);
+
+    systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.None);
+
+    expect(viewModel.isInputEnabled.Value).toBe(false);
+  });
+
+  //ANF-ID: [EWE0043]
+  test("onStoryElementCutSceneTriggered sets isInputEnabled to true if any story element cutscene is finished", () => {
+    viewModel = new DoorViewModel();
+    viewModel.isInputEnabled.Value = false;
+    systemUnderTest = new DoorPresenter(viewModel);
+
+    systemUnderTest.onStoryElementCutSceneFinished();
+
+    expect(viewModel.isInputEnabled.Value).toBe(true);
   });
 });

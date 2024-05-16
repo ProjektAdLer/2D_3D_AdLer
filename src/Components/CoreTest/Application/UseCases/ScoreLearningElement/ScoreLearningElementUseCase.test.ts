@@ -213,6 +213,27 @@ describe("ScoreLearningElementUseCase", () => {
     expect(worldPortMock.onLearningWorldScored).toHaveBeenCalled();
   });
 
+  //ANF-ID: [EWE0042]
+  test("executeAsync calls beginStoryElementOutroCutSceneUseCase", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
+    setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
+    backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
+
+    try {
+      await systemUnderTest.executeAsync(1);
+    } catch (e) {
+      console.log(e);
+    }
+
+    expect(
+      beginStoryElementOutroCutSceneUseCaseMock.execute
+    ).toHaveBeenCalledWith({ scoredLearningElementID: 1 });
+  });
+
   test("executeAsync rejects if EntityContainer returns no user entity", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
