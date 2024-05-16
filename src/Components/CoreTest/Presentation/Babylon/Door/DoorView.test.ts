@@ -1,5 +1,6 @@
 import {
   AbstractMesh,
+  ActionManager,
   Color3,
   Mesh,
   NullEngine,
@@ -225,5 +226,18 @@ describe("DoorView", () => {
       mockMesh,
       Color3.Blue()
     );
+  });
+
+  //ANF-ID: [EWE0031]
+  test("meshes are interactible0 when clicked on", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
+    viewModel.meshes = [mockMesh as Mesh];
+    viewModel.isInteractable.Value = true;
+    systemUnderTest["viewModel"].meshes.forEach((mesh) => {
+      expect(
+        mesh.actionManager?.hasSpecificTrigger(ActionManager.OnPickTrigger)
+      );
+    });
   });
 });
