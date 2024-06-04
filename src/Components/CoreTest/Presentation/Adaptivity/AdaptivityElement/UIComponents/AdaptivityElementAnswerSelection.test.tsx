@@ -31,6 +31,62 @@ describe("AdaptivityElementAnswerSelection", () => {
     expect(container).toMatchSnapshot();
   });
 
+  // ANF-ID: [EWE0008]
+  test("submit button is deactive if no answer is selected if question is single choice", () => {
+    const { getByText } = render(
+      <AdaptivityElementAnswerSelection
+        question={{
+          questionID: 0,
+          questionText: "testQuestionText",
+          isMultipleChoice: false,
+          difficulty: 0,
+          isCompleted: false,
+          isRequired: false,
+          questionAnswers: [
+            {
+              answerIndex: 0,
+              answerText: "testAnswerText",
+              isSelected: false,
+            },
+          ],
+          hints: [],
+        }}
+        setHeaderText={() => {}}
+        submitSelection={() => {}}
+        closeSelection={() => {}}
+      />
+    );
+    expect(getByText("submitAnswer").closest("button")).toBeDisabled();
+  });
+
+  // ANF-ID: [EWE0009]
+  test("submit button is deactive if no answer is selected if question is multiple choice", () => {
+    const { getByText } = render(
+      <AdaptivityElementAnswerSelection
+        question={{
+          questionID: 0,
+          questionText: "testQuestionText",
+          isMultipleChoice: true,
+          difficulty: 0,
+          isCompleted: false,
+          isRequired: false,
+          questionAnswers: [
+            {
+              answerIndex: 0,
+              answerText: "testAnswerText",
+              isSelected: false,
+            },
+          ],
+          hints: [],
+        }}
+        setHeaderText={() => {}}
+        submitSelection={() => {}}
+        closeSelection={() => {}}
+      />
+    );
+    expect(getByText("submitAnswers").closest("button")).toBeDisabled();
+  });
+
   // ANF-ID: [EWE0008, EWE0009]
   test("click on submit button should call submitSelection", () => {
     const submitSelection = jest.fn();
