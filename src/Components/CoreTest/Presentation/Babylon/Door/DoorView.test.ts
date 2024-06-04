@@ -93,6 +93,7 @@ describe("DoorView", () => {
     );
   });
 
+  // ANF-ID: [ELG0019]
   test("asyncSetup/loadMeshAsync calls scenePresenter.loadModel", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
@@ -148,6 +149,7 @@ describe("DoorView", () => {
     expect(mockMesh.animations.length).toBe(1);
   });
 
+  // ANF-ID: [ELG0019]
   test("positionMesh sets position of the first mesh to viewModel.position", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
@@ -163,6 +165,7 @@ describe("DoorView", () => {
     expect(viewModel.meshes[0].position).toStrictEqual(position);
   });
 
+  // ANF-ID: [ELG0019]
   test("positionMesh sets rotation of the first mesh to viewModel.rotation", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
@@ -229,7 +232,7 @@ describe("DoorView", () => {
   });
 
   //ANF-ID: [EWE0031]
-  test("meshes are interactible0 when clicked on", async () => {
+  test("meshes are interactible when clicked on", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
     viewModel.meshes = [mockMesh as Mesh];
@@ -240,4 +243,28 @@ describe("DoorView", () => {
       );
     });
   });
+
+  //ANF-ID: [ELG0019]
+  test.each([
+    { theme: LearningSpaceThemeType.Arcade, isExit: true },
+    { theme: LearningSpaceThemeType.Arcade, isExit: false },
+    { theme: LearningSpaceThemeType.Campus, isExit: true },
+    { theme: LearningSpaceThemeType.Campus, isExit: false },
+    { theme: LearningSpaceThemeType.CampusAB, isExit: true },
+    { theme: LearningSpaceThemeType.CampusAB, isExit: false },
+    { theme: LearningSpaceThemeType.CampusKE, isExit: true },
+    { theme: LearningSpaceThemeType.CampusKE, isExit: false },
+    { theme: LearningSpaceThemeType.Suburb, isExit: true },
+    { theme: LearningSpaceThemeType.Suburb, isExit: false },
+  ])(
+    "getModelLinkByThemeAndType returns valid model link for $theme and isExit=$isExit",
+    ({ theme, isExit }) => {
+      const [viewModel, systemUnderTest] = buildSystemUnderTest();
+      viewModel.theme = theme;
+      viewModel.isExit = isExit;
+      const link = systemUnderTest["getModelLinkByThemeAndType"]();
+
+      expect(link).toBeDefined();
+    }
+  );
 });
