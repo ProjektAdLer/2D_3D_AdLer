@@ -27,6 +27,33 @@ exports[`AdaptivityElementHint should render CommentAction 1`] = `
 </div>
 `;
 
+exports[`AdaptivityElementHint should render ContentAction 1`] = `
+<div>
+  <div
+    class="flex items-center justify-center p-2 pl-4 my-4 bg-buttonbgblue rounded-xl"
+  >
+    test
+  </div>
+  <div
+    class="flex justify-end w-full"
+  >
+    <div
+      class=""
+    >
+      <button
+        class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+      >
+        <p
+          class="text-sm"
+        >
+          nextButton
+        </p>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`AdaptivityElementHint should render ReferenceAction 1`] = `
 <div>
   <div>
