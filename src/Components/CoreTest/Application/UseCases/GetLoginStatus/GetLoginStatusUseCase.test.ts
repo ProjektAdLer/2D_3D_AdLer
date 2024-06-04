@@ -37,7 +37,10 @@ describe("GetLoginStatus", () => {
       },
     ]);
 
-    expect(systemUnderTest.internalExecute()).toBe(false);
+    expect(systemUnderTest.internalExecute()).toMatchObject({
+      isLoggedIn: false,
+      userName: undefined,
+    });
     expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
       UserDataEntity
     );
@@ -50,7 +53,10 @@ describe("GetLoginStatus", () => {
   test("InternalExecute: Throws, if no User Entity is present", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([]);
 
-    expect(systemUnderTest.internalExecute()).toBe(false);
+    expect(systemUnderTest.internalExecute()).toMatchObject({
+      isLoggedIn: false,
+      userName: undefined,
+    });
     expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
       UserDataEntity
     );
@@ -67,7 +73,10 @@ describe("GetLoginStatus", () => {
       },
     ]);
 
-    expect(systemUnderTest.internalExecute()).toBe(true);
+    expect(systemUnderTest.internalExecute()).toMatchObject({
+      isLoggedIn: true,
+      userName: undefined,
+    });
     expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
       UserDataEntity
     );

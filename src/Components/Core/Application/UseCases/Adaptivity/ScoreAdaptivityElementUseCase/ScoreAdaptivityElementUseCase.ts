@@ -14,6 +14,7 @@ import type { IInternalCalculateLearningSpaceScoreUseCase } from "../../Calculat
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILearningWorldPort from "../../../Ports/Interfaces/ILearningWorldPort";
 import type IBeginStoryElementOutroCutSceneUseCase from "../../BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
+import type { IInternalGetLoginStatusUseCase } from "../../GetLoginStatus/IGetLoginStatusUseCase";
 
 @injectable()
 export default class ScoreAdaptivityElementUseCase
@@ -33,15 +34,14 @@ export default class ScoreAdaptivityElementUseCase
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
     @inject(USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase)
-    private beginStoryElementOutroCutSceneUseCase: IBeginStoryElementOutroCutSceneUseCase
+    private beginStoryElementOutroCutSceneUseCase: IBeginStoryElementOutroCutSceneUseCase,
+    @inject(USECASE_TYPES.IGetLoginStatusUseCase)
+    private getLoginStatusUseCase: IInternalGetLoginStatusUseCase
   ) {}
 
   internalExecute(elementID: ComponentID): void {
-    // get user token
-    const userEntity =
-      this.entityContainer.getEntitiesOfType(UserDataEntity)[0];
-
-    if (!userEntity?.isLoggedIn) {
+    const loginStatus = this.getLoginStatusUseCase.internalExecute();
+    if (loginStatus.isLoggedIn === false) {
       this.warn("User is not logged in! Trying to score elememt " + elementID);
       return;
     }

@@ -19,7 +19,7 @@ export default class GetLoginStatusUseCase implements IGetLoginStatusUseCase {
     private notificationPort: INotificationPort
   ) {}
 
-  internalExecute(): boolean {
+  internalExecute(): LoginStatusTO {
     const userDataEntity =
       this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
     if (!userDataEntity?.isLoggedIn) {
@@ -37,7 +37,10 @@ export default class GetLoginStatusUseCase implements IGetLoginStatusUseCase {
         `InternalGetLoginStatusUseCase: Checked LoginStatus: ${userDataEntity?.isLoggedIn}.`
       );
     }
-    return userDataEntity?.isLoggedIn ?? false;
+    return {
+      isLoggedIn: userDataEntity?.isLoggedIn ?? false,
+      userName: userDataEntity?.username ?? undefined,
+    };
   }
   execute(): LoginStatusTO {
     const userDataEntity =
