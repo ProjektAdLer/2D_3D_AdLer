@@ -139,6 +139,12 @@ describe("AdaptivityElementController", () => {
     expect(viewModel.selectedHint.Value).toBe(mockHint);
   });
 
+  // ANF-ID: [EWE0006, EWE0007]
+  test("selectHint calls displayAdaptivityHintLearningElementUseCase if hint is reference (learning element)", async () => {
+    await systemUnderTest.selectHint(mockHint, mockQuestion);
+    expect(displayLearningElmentUseCaseMock.executeAsync).toBeCalledWith(42);
+  });
+
   // ANF-ID: [EWE0044]
   test("selectHint calls loadExternalLearningElementUseCase if hint is contentreference (external learning element)", async () => {
     let contentQuestion = mockQuestion;

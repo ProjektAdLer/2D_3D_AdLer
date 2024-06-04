@@ -23,6 +23,7 @@ describe("AdaptivityElementHint", () => {
     expect(container).toMatchSnapshot();
   });
 
+  // ANF-ID: [EWE0006]
   test("should render ReferenceAction", () => {
     const { container } = render(
       <AdaptivityElementHint
