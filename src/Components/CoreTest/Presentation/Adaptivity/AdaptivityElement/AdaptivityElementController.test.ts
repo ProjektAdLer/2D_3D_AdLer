@@ -12,18 +12,21 @@ import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/IL
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import { AdaptivityElementActionTypes } from "../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 import IDisplayLearningElementUseCase from "../../../../Core/Application/UseCases/Adaptivity/DisplayAdaptivityHintLearningElement/IDisplayAdaptivityHintLearningElementUseCase";
+import ILoadExternalLearningElementUseCase from "../../../../Core/Application/UseCases/Adaptivity/LoadExternalLearningElementUseCase/ILoadExternalLearningElementUseCase";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 const submitSelectionUseCaseMock =
   mock<ISubmitAdaptivityElementSelectionUseCase>();
 const worldPortMock = mock<ILearningWorldPort>();
 const displayLearningElmentUseCaseMock = mock<IDisplayLearningElementUseCase>();
+const loadExternalLearningElementUseCaseMock =
+  mock<ILoadExternalLearningElementUseCase>();
 
 const mockHint: AdaptivityHint = {
   hintID: 1,
   showOnIsWrong: false,
   hintAction: {
-    hintActionType: 1,
+    hintActionType: AdaptivityElementActionTypes.ReferenceAction,
     idData: 42,
     textData: "TestHintActionData",
   },
@@ -75,6 +78,9 @@ describe("AdaptivityElementController", () => {
     CoreDIContainer.rebind(
       USECASE_TYPES.IDisplayAdaptivityHintLearningElementUseCase
     ).toConstantValue(displayLearningElmentUseCaseMock);
+    CoreDIContainer.rebind(
+      USECASE_TYPES.ILoadExternalLearningElementUseCase
+    ).toConstantValue(loadExternalLearningElementUseCaseMock);
     CoreDIContainer.bind(
       PRESENTATION_TYPES.IBottomTooltipPresenter
     ).toConstantValue(mock());
@@ -131,6 +137,17 @@ describe("AdaptivityElementController", () => {
     await systemUnderTest.selectHint(mockHint, mockQuestion);
     expect(viewModel.currentQuestion.Value).toBe(mockQuestion);
     expect(viewModel.selectedHint.Value).toBe(mockHint);
+  });
+
+  // ANF-ID: [EWE0044]
+  test("selectHint calls loadExternalLearningElementUseCase if hint is contentreference (external learning element)", async () => {
+    let contentQuestion = mockQuestion;
+    contentQuestion.hints[0].hintAction.hintActionType =
+      AdaptivityElementActionTypes.ContentAction;
+    await systemUnderTest.selectHint(contentQuestion.hints[0], contentQuestion);
+    expect(
+      loadExternalLearningElementUseCaseMock.executeAsync
+    ).toHaveBeenCalled();
   });
 
   test.skip("selectHint calls worldPort.onLearningElementHighlighted with hintActionData", async () => {

@@ -41,4 +41,24 @@ describe("AdaptivityElementHint", () => {
 
     expect(container).toMatchSnapshot();
   });
+
+  // ANF-ID: [EWE0044]
+  test("should render ContentAction", () => {
+    const { container } = render(
+      <AdaptivityElementHint
+        hint={{
+          hintID: 0,
+          hintAction: {
+            hintActionType: AdaptivityElementActionTypes.ContentAction,
+            textData: "test",
+            idData: 0,
+          },
+          showOnIsWrong: true,
+        }}
+        setHeaderText={() => {}}
+      />
+    );
+
+    expect(container).toMatchSnapshot();
+  });
 });
