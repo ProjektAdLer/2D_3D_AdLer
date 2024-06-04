@@ -234,34 +234,6 @@ describe("ScoreLearningElementUseCase", () => {
     ).toHaveBeenCalledWith({ scoredLearningElementID: 1 });
   });
 
-  test("executeAsync rejects if EntityContainer returns no user entity", async () => {
-    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
-      spaceID: 1,
-      worldID: 1,
-    } as UserLocationTO);
-    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
-    setupEntityContainerMock([], [elementEntity], [spaceEntity]);
-
-    await expect(systemUnderTest.executeAsync(1)).rejects.toContain(
-      "User is not logged in"
-    );
-  });
-
-  test("executeAsync rejects if user is not logged in", async () => {
-    const notLoggedInuserEntityMock = new UserDataEntity();
-    notLoggedInuserEntityMock.isLoggedIn = false;
-    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
-    setupEntityContainerMock(
-      [notLoggedInuserEntityMock],
-      [elementEntity],
-      [spaceEntity]
-    );
-
-    await expect(systemUnderTest.executeAsync(1)).rejects.toContain(
-      "User is not logged in"
-    );
-  });
-
   test("executeAsync rejects when the call to scoreElement() on the Backend fails", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,

@@ -272,28 +272,6 @@ describe("ScoreH5PLearningElementUseCase", () => {
     );
   });
 
-  test("executeAsync rejects if EntityContainer returns no user entity", async () => {
-    setupEntityContainerMock([], [elementEntityMock], [spaceEntityMock]);
-
-    await expect(
-      systemUnderTest.executeAsync(executeAsyncParams)
-    ).rejects.toContain("User is not logged in");
-  });
-
-  test("executeAsync rejects if user is not logged in", async () => {
-    const notLoggedInuserEntityMock = new UserDataEntity();
-    notLoggedInuserEntityMock.isLoggedIn = false;
-    setupEntityContainerMock(
-      [notLoggedInuserEntityMock],
-      [elementEntityMock],
-      [spaceEntityMock]
-    );
-
-    await expect(
-      systemUnderTest.executeAsync(executeAsyncParams)
-    ).rejects.toContain("User is not logged in");
-  });
-
   test("executeAsync rejects if user is not in a space", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: undefined,

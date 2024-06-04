@@ -225,39 +225,6 @@ describe("LoadLearningWorldUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  test("Detects, if a User is not logged in", async () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValue([
-      {
-        isLoggedIn: false,
-      },
-    ]);
-
-    await expect(systemUnderTest.executeAsync({ worldID: 42 })).rejects.toEqual(
-      "User is not logged in"
-    );
-
-    expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
-      UserDataEntity
-    );
-
-    expect(notificationPortMock.displayNotification).toHaveBeenCalledWith(
-      "User is not logged in!",
-      "error"
-    );
-  });
-
-  test("Throws, if no User Entity is present", async () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValue([]);
-
-    await expect(systemUnderTest.executeAsync({ worldID: 42 })).rejects.toEqual(
-      "User is not logged in"
-    );
-
-    expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
-      UserDataEntity
-    );
-  });
-
   test("Displays error, if User is not logged in", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       {
@@ -280,7 +247,7 @@ describe("LoadLearningWorldUseCase", () => {
   });
 
   test("Displays error, if World is not available", async () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
       mockedGetEntitiesOfTypeUserDataReturnValue
     );
 
@@ -299,7 +266,7 @@ describe("LoadLearningWorldUseCase", () => {
   });
 
   test("doesn't load a World, if an entity is available", async () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
       mockedGetEntitiesOfTypeUserDataReturnValue
     );
 
@@ -320,7 +287,7 @@ describe("LoadLearningWorldUseCase", () => {
   //ANF-ID: [ELG0005]
   test("loads the World and notifies port (executeAsync)", async () => {
     // mock user data response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
       mockedGetEntitiesOfTypeUserDataReturnValue
     );
     // mock world response
@@ -367,7 +334,7 @@ describe("LoadLearningWorldUseCase", () => {
   //ANF-ID: [ELG0005]
   test("loads the World and returns value (internalExecuteAsync)", async () => {
     // mock user data response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
       mockedGetEntitiesOfTypeUserDataReturnValue
     );
     // mock world response
@@ -413,7 +380,7 @@ describe("LoadLearningWorldUseCase", () => {
   //ANF-ID: [ELG0005]
   test("uses worldEntity if one is available", async () => {
     // mock user data response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
       mockedGetEntitiesOfTypeUserDataReturnValue
     );
 
@@ -436,7 +403,7 @@ describe("LoadLearningWorldUseCase", () => {
   //ANF-ID: [ELG0005]
   test("calls CalculateSpaceScoreUseCase for each space in the loaded world", async () => {
     // mock user data response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
       mockedGetEntitiesOfTypeUserDataReturnValue
     );
 
@@ -476,7 +443,7 @@ describe("LoadLearningWorldUseCase", () => {
   //ANF-ID: [ELG0005]
   test("calls CalculateSpaceAvailabilityUseCase for each space in the loaded world", async () => {
     // mock user data response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
       mockedGetEntitiesOfTypeUserDataReturnValue
     );
 
@@ -516,7 +483,7 @@ describe("LoadLearningWorldUseCase", () => {
   //ANF-ID: [ELG0006, ELG0007]
   test("calls SetUserLocationUseCase", async () => {
     // mock user data response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
       mockedGetEntitiesOfTypeUserDataReturnValue
     );
     // mock world response
@@ -553,7 +520,7 @@ describe("LoadLearningWorldUseCase", () => {
 
   test("creates adaptivity elements", async () => {
     // mock user data response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
       mockedGetEntitiesOfTypeUserDataReturnValue
     );
 
@@ -603,7 +570,7 @@ describe("LoadLearningWorldUseCase", () => {
 
   test("creates combined intro and outro story element", async () => {
     // mock user data response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
       mockedGetEntitiesOfTypeUserDataReturnValue
     );
 
@@ -649,7 +616,7 @@ describe("LoadLearningWorldUseCase", () => {
 
   test("creates seperate intro and outro story elements", async () => {
     // mock user data response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
       mockedGetEntitiesOfTypeUserDataReturnValue
     );
 
@@ -699,7 +666,7 @@ describe("LoadLearningWorldUseCase", () => {
 
   test("creates external element", async () => {
     // mock user data response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce(
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
       mockedGetEntitiesOfTypeUserDataReturnValue
     );
 

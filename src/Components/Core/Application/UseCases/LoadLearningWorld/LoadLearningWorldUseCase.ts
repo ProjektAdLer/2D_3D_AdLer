@@ -40,6 +40,7 @@ import {
 import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElementEntity";
 import BackendStoryTO from "../../DataTransferObjects/BackendStoryTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
+import type { IInternalGetLoginStatusUseCase } from "../GetLoginStatus/IGetLoginStatusUseCase";
 
 @injectable()
 export default class LoadLearningWorldUseCase
@@ -61,7 +62,9 @@ export default class LoadLearningWorldUseCase
     @inject(USECASE_TYPES.ISetUserLocationUseCase)
     private setUserLocationUseCase: ISetUserLocationUseCase,
     @inject(USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase)
-    private calculateSpaceAvailabilityUseCase: ICalculateLearningSpaceAvailabilityUseCase
+    private calculateSpaceAvailabilityUseCase: ICalculateLearningSpaceAvailabilityUseCase,
+    @inject(USECASE_TYPES.IGetLoginStatusUseCase)
+    private getLoginStatusUseCase: IInternalGetLoginStatusUseCase
   ) {}
 
   private semaphore = new Semaphore("LoadWorld in Use", 1);
@@ -96,13 +99,8 @@ export default class LoadLearningWorldUseCase
     data: { worldID: number },
     lock: any
   ): Promise<LearningWorldTO> {
-    // check if user is logged in
-    const userData = this.container.getEntitiesOfType(UserDataEntity);
-    if (userData.length === 0 || userData[0]?.isLoggedIn === false) {
-      this.notificationPort.displayNotification(
-        "User is not logged in!",
-        "error"
-      );
+    const loginStatus = this.getLoginStatusUseCase.internalExecute();
+    if (!loginStatus.isLoggedIn) {
       this.logger.log(
         LogLevelTypes.ERROR,
         "LoadLearningWorldUseCase: User is not logged in!"
@@ -110,8 +108,8 @@ export default class LoadLearningWorldUseCase
       lock.release();
       return Promise.reject("User is not logged in");
     }
-
     // check if world is available to user
+    const userData = this.container.getEntitiesOfType(UserDataEntity);
     if (
       userData[0].availableWorlds.find(
         (world) => world.worldID === data.worldID

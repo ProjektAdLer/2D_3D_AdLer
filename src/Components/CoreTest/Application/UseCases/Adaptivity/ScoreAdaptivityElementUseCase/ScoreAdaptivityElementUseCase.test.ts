@@ -59,20 +59,6 @@ describe("ScoreAdaptivityElementUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  test("warns and doesn't score if user is not logged in", () => {
-    const userEntity = mock<UserDataEntity>();
-    userEntity.isLoggedIn = false;
-    entityContainerMock.getEntitiesOfType.mockReturnValue([userEntity]);
-
-    systemUnderTest.internalExecute(42);
-
-    expect(loggerMock.log).toHaveBeenCalledWith(
-      LogLevelTypes.WARN,
-      expect.stringContaining("User is not logged in!")
-    );
-    expect(worldPortMock.onLearningElementScored).not.toHaveBeenCalled();
-  });
-
   test("warns and doesn't score if user is not in a world", () => {
     const userEntity = mock<UserDataEntity>();
     userEntity.isLoggedIn = true;

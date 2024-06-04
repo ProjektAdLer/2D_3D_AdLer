@@ -51,10 +51,6 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
     const userEntity =
       this.entityContainer.getEntitiesOfType(UserDataEntity)[0];
 
-    if (!userEntity?.isLoggedIn) {
-      return this.rejectWithWarning("User is not logged in!");
-    }
-
     // get the current user location
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {

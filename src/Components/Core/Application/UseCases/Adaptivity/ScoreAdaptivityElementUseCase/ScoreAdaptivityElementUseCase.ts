@@ -40,12 +40,6 @@ export default class ScoreAdaptivityElementUseCase
   ) {}
 
   internalExecute(elementID: ComponentID): void {
-    const loginStatus = this.getLoginStatusUseCase.internalExecute();
-    if (loginStatus.isLoggedIn === false) {
-      this.warn("User is not logged in! Trying to score elememt " + elementID);
-      return;
-    }
-
     // get the current user location
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {

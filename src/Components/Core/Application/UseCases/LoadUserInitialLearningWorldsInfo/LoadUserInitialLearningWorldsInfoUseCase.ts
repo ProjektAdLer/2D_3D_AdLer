@@ -11,6 +11,8 @@ import type INotificationPort from "src/Components/Core/Application/Ports/Interf
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import UserInitialLearningWorldsInfoTO from "../../DataTransferObjects/UserInitialLearningWorldsInfoTO";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import type { IInternalGetLoginStatusUseCase } from "../GetLoginStatus/IGetLoginStatusUseCase";
 
 type AvailableLearningWorldsArray = {
   worldID: number;
@@ -31,7 +33,9 @@ export default class LoadUserInitialLearningWorldsInfoUseCase
     @inject(CORE_TYPES.IBackendAdapter)
     private backendAdapter: IBackendPort,
     @inject(PORT_TYPES.INotificationPort)
-    private notificationPort: INotificationPort
+    private notificationPort: INotificationPort,
+    @inject(USECASE_TYPES.IGetLoginStatusUseCase)
+    private getLoginStatusUseCase: IInternalGetLoginStatusUseCase
   ) {}
 
   private semaphore = new Semaphore("LoadUserWorlds in Use", 1);
@@ -46,14 +50,8 @@ export default class LoadUserInitialLearningWorldsInfoUseCase
   async loadInitialWorldsInfo(): Promise<UserInitialLearningWorldsInfoTO> {
     const lock = await this.semaphore.acquire();
 
-    const userEntities =
-      this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity);
-
-    if (userEntities.length === 0 || userEntities[0]?.isLoggedIn === false) {
-      this.notificationPort.displayNotification(
-        "User is not logged in!",
-        "error"
-      );
+    const loginStatus = this.getLoginStatusUseCase.internalExecute();
+    if (!loginStatus.isLoggedIn) {
       this.logger.log(
         LogLevelTypes.ERROR,
         "LoadUserInitialLearningWorldsInfoUseCase: User is not logged in!"
@@ -62,6 +60,8 @@ export default class LoadUserInitialLearningWorldsInfoUseCase
       return Promise.reject("User is not logged in");
     }
 
+    const userEntities =
+      this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity);
     let loadedAvailableWorlds: AvailableLearningWorldsArray;
     if (userEntities[0].availableWorlds.length === 0) {
       loadedAvailableWorlds = await this.loadAvailableLearningWorlds(
