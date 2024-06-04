@@ -97,7 +97,7 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
   });
 
   test("doesn't load UserInitialLearningWorldsInfo, if an entity is available", async () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
+    entityContainerMock.getEntitiesOfType.mockReturnValue([
       {
         isLoggedIn: true,
         userToken: "token",
@@ -119,7 +119,7 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
   //ANF-ID: [ELG0008]
   test("loads the UserInitialLearningWorldsInfo and notifies its presenters (execute)", async () => {
     // mock user data response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
+    entityContainerMock.getEntitiesOfType.mockReturnValue([
       {
         isLoggedIn: true,
         userToken: "token",
@@ -152,7 +152,7 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
   //ANF-ID: [ELG0008]
   test("loads the UserInitialLearningWorldsInfo and returns (internalExecute)", async () => {
     // mock user data response
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
+    entityContainerMock.getEntitiesOfType.mockReturnValue([
       {
         isLoggedIn: true,
         userToken: "token",

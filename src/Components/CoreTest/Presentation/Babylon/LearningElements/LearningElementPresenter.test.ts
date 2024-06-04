@@ -1,10 +1,6 @@
-import mock from "jest-mock-extended/lib/Mock";
-import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import LearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementPresenter";
 import LearningElementViewModel from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementViewModel";
-
-jest.mock("@babylonjs/core");
+import { Vector3 } from "@babylonjs/core";
 
 describe("LearningElementPresenter", () => {
   let systemUnderTest: LearningElementPresenter;
@@ -13,10 +9,6 @@ describe("LearningElementPresenter", () => {
   beforeEach(() => {
     viewModel = new LearningElementViewModel();
     systemUnderTest = new LearningElementPresenter(viewModel);
-  });
-
-  afterAll(() => {
-    jest.restoreAllMocks();
   });
 
   test("onLearningElementScored sets is hasScored if the id matches", () => {
@@ -62,5 +54,23 @@ describe("LearningElementPresenter", () => {
     systemUnderTest.onLearningElementHighlighted(42);
 
     expect(systemUnderTest["viewModel"].isHighlighted.Value).toBe(false);
+  });
+
+  // ANF-ID: [EWE0035]
+  test("onAvatarPositionChanged sets isInteractable to true when the avatar is in the interaction radius", () => {
+    viewModel.position = new Vector3(0, 0, 0);
+    viewModel.isInteractable.Value = false;
+    systemUnderTest.onAvatarPositionChanged(new Vector3(0, 0, 0), 1);
+
+    expect(viewModel.isInteractable.Value).toBe(true);
+  });
+
+  // ANF-ID: [EWE0035]
+  test("onAvatarPositionChanged sets isInteractable to false when the avatar is outside the interaction radius", () => {
+    viewModel.position = new Vector3(0, 0, 0);
+    viewModel.isInteractable.Value = true;
+    systemUnderTest.onAvatarPositionChanged(new Vector3(0, 0, 2), 1);
+
+    expect(viewModel.isInteractable.Value).toBe(false);
   });
 });

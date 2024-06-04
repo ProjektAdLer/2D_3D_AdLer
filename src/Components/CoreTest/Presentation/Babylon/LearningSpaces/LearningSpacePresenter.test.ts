@@ -233,6 +233,7 @@ describe("LearningSpacePresenter", () => {
     );
   });
 
+  // ANF-ID: [ELG0019]
   test("createExitDoor creates a door with its builder and calls the new presenter", async () => {
     systemUnderTest["viewModel"].exitDoorPosition = [new Vector3(1, 1, 1), 0];
     spaceTO.currentScore = 1;
@@ -248,6 +249,7 @@ describe("LearningSpacePresenter", () => {
     expect(directorMock.buildAsync).toHaveBeenCalledWith(doorBuilderMock);
   });
 
+  // ANF-ID: [ELG0019]
   test("createEntryDoor creates a door with its builder and calls the new presenter", async () => {
     systemUnderTest["viewModel"].entryDoorPosition = [new Vector3(2, 2, 2), 1];
 

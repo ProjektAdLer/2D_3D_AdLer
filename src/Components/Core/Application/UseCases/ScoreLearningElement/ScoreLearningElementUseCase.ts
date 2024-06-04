@@ -44,12 +44,6 @@ export default class ScoreLearningElementUseCase
     const userEntity =
       this.entityContainer.getEntitiesOfType(UserDataEntity)[0];
 
-    if (!userEntity?.isLoggedIn) {
-      return this.rejectWithWarning(
-        "User is not logged in! Trying to score elememt " + elementID
-      );
-    }
-
     // get the current user location
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {

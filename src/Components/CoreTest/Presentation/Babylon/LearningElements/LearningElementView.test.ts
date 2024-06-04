@@ -164,6 +164,7 @@ describe("LearningElementView", () => {
     });
   });
 
+  // ANF-ID: [EWE0035]
   test("async setup registers onPickTrigger callback for the all meshes", async () => {
     const registerActionSpy = jest.spyOn(
       ActionManager.prototype,
