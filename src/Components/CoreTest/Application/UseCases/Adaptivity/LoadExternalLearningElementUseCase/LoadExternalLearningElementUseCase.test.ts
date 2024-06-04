@@ -116,6 +116,7 @@ describe("LoadExternalLearningElementUseCase", () => {
     expect(getElementSourceUseCaseMock.internalExecuteAsync).toBeCalledTimes(1);
   });
 
+  // ANF-ID: [EWE0045]
   test("calls the port with the TO", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
