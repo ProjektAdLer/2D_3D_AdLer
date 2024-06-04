@@ -6,17 +6,40 @@ import IGetLoginStatusUseCase from "./IGetLoginStatusUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import LoginStatusTO from "../../DataTransferObjects/LoginStatusTO";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
 @injectable()
 export default class GetLoginStatusUseCase implements IGetLoginStatusUseCase {
   constructor(
     @inject(CORE_TYPES.ILogger)
     private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
-    private container: IEntityContainer
+    private container: IEntityContainer,
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort
   ) {}
 
+  internalExecute(): boolean {
+    const userDataEntity =
+      this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
+    if (!userDataEntity?.isLoggedIn) {
+      this.notificationPort.displayNotification(
+        "User is not logged in!",
+        "error"
+      );
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `InternalGetLoginStatusUseCase: Checked LoginStatus: ${userDataEntity?.isLoggedIn}. User is not logged in!`
+      );
+    } else {
+      this.logger.log(
+        LogLevelTypes.TRACE,
+        `InternalGetLoginStatusUseCase: Checked LoginStatus: ${userDataEntity?.isLoggedIn}.`
+      );
+    }
+    return userDataEntity?.isLoggedIn ?? false;
+  }
   execute(): LoginStatusTO {
-    // TODO: change this when multiple users are supported
     const userDataEntity =
       this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
 
