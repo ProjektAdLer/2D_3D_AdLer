@@ -3,7 +3,6 @@ import IScoreAdaptivityElementUseCase from "./IScoreAdaptivityElementUseCase";
 import { inject, injectable } from "inversify";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import EntityContainer from "../../../../Domain/EntityContainer/EntityContainer";
-import UserDataEntity from "../../../../Domain/Entities/UserDataEntity";
 import type ILoggerPort from "../../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "../../../../Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
