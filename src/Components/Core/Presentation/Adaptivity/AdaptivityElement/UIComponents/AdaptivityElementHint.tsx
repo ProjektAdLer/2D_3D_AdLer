@@ -30,7 +30,12 @@ export default function AdaptivityElementHint({
         )}
 
       {hint.hintAction.hintActionType ===
-        AdaptivityElementActionTypes.ContentAction && null}
+        AdaptivityElementActionTypes.ContentAction &&
+        hint.hintAction.textData !== undefined && (
+          <div className="flex items-center justify-center p-2 pl-4 my-4 bg-buttonbgblue rounded-xl">
+            {hint.hintAction.textData}
+          </div>
+        )}
 
       {hint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.ReferenceAction &&

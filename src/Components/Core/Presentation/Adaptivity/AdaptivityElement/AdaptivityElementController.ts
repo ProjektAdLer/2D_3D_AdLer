@@ -81,10 +81,9 @@ export default class AdaptivityElementController
         selectedHint.hintAction.idData,
         associatedQuestion
       );
-    } else {
-      this.viewModel.currentQuestion.Value = associatedQuestion;
-      this.viewModel.selectedHint.Value = selectedHint;
     }
+    this.viewModel.currentQuestion.Value = associatedQuestion;
+    this.viewModel.selectedHint.Value = selectedHint;
   }
 
   @bind
