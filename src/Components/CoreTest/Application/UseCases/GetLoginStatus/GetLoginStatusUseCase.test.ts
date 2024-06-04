@@ -30,6 +30,7 @@ describe("GetLoginStatus", () => {
     CoreDIContainer.restore();
   });
 
+  //ANF-ID: [EWE0021]
   test("InternalExecute: Detects, if a User is not logged in", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       {
@@ -50,6 +51,7 @@ describe("GetLoginStatus", () => {
     );
   });
 
+  //ANF-ID: [EWE0021]
   test("InternalExecute: Throws, if no User Entity is present", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([]);
 
@@ -66,6 +68,7 @@ describe("GetLoginStatus", () => {
     );
   });
 
+  //ANF-ID: [EWE0021]
   test("InternalExecute: Returns true if User Entity is present", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       {
