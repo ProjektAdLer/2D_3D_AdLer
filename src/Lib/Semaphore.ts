@@ -1,7 +1,7 @@
 /**
  * A lock that is granted when calling [[Semaphore.acquire]].
  */
-type Lock = {
+export type Lock = {
   release: () => void;
 };
 

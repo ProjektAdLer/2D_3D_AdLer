@@ -12,7 +12,7 @@ import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
 import LearningWorldTO from "../../DataTransferObjects/LearningWorldTO";
-import { Semaphore } from "src/Lib/Semaphore";
+import { Lock, Semaphore } from "src/Lib/Semaphore";
 import LearningWorldStatusTO from "../../DataTransferObjects/LearningWorldStatusTO";
 import type ISetUserLocationUseCase from "../SetUserLocation/ISetUserLocationUseCase";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
@@ -72,8 +72,7 @@ export default class LoadLearningWorldUseCase
   async internalExecuteAsync(data: {
     worldID: number;
   }): Promise<LearningWorldTO> {
-    const lock = await this.semaphore.acquire();
-    const loadedWorld = await this.loadWorld(data, lock);
+    const loadedWorld = await this.loadWorld(data);
 
     this.logger.log(
       LogLevelTypes.TRACE,
@@ -83,8 +82,7 @@ export default class LoadLearningWorldUseCase
   }
 
   async executeAsync(data: { worldID: number }): Promise<void> {
-    const lock = await this.semaphore.acquire();
-    const loadedWorlds = await this.loadWorld(data, lock);
+    const loadedWorld = await this.loadWorld(data);
 
     this.setUserLocationUseCase.execute({ worldID: data.worldID });
 
@@ -92,20 +90,16 @@ export default class LoadLearningWorldUseCase
       LogLevelTypes.TRACE,
       "LoadLearningWorldUseCase (executeAsync): Loaded world and cumulated space scores."
     );
-    this.worldPort.onLearningWorldLoaded(loadedWorlds);
+    this.worldPort.onLearningWorldLoaded(loadedWorld);
   }
 
-  async loadWorld(
-    data: { worldID: number },
-    lock: any
-  ): Promise<LearningWorldTO> {
+  async loadWorld(data: { worldID: number }): Promise<LearningWorldTO> {
     const loginStatus = this.getLoginStatusUseCase.internalExecute();
     if (!loginStatus.isLoggedIn) {
       this.logger.log(
         LogLevelTypes.ERROR,
         "LoadLearningWorldUseCase: User is not logged in!"
       );
-      lock.release();
       return Promise.reject("User is not logged in");
     }
     // check if world is available to user
@@ -123,9 +117,11 @@ export default class LoadLearningWorldUseCase
         LogLevelTypes.ERROR,
         "LoadLearningWorldUseCase: World is not available!"
       );
-      lock.release();
       return Promise.reject("World is not available");
     }
+
+    // acquire semaphore lock, to prevent inconsistencies when the same learning world is loaded multiple times
+    const lock = await this.semaphore.acquire();
 
     // search for world entity with given ID in all world entities
     let worldEntity = this.container.filterEntitiesOfType(
@@ -133,13 +129,14 @@ export default class LoadLearningWorldUseCase
       (WorldEntity) => WorldEntity.id === data.worldID
     )[0];
 
-    // if world entity does not exist, load it from backend
     if (!worldEntity) {
-      worldEntity = await this.loadLearningWorld(
+      worldEntity = await this.loadLearningWorldFromBackend(
         userData[0].userToken,
         data.worldID
       );
     }
+
+    lock.release();
 
     let worldTO =
       this.createLearningWorldTOFromLearningWorldEntity(worldEntity);
@@ -167,12 +164,17 @@ export default class LoadLearningWorldUseCase
     return worldTO;
   }
 
-  private async loadLearningWorld(
+  private async loadLearningWorldFromBackend(
     userToken: string,
     worldID: number
   ): Promise<LearningWorldEntity> {
-    const [apiWorldDataResponse, apiWorldScoreResponse] =
-      await this.loadLearningWorldDataFromBackend(userToken, worldID);
+    const [apiWorldDataResponse, apiWorldScoreResponse] = await Promise.all([
+      this.backendAdapter.getWorldData({
+        userToken: userToken,
+        worldID: worldID,
+      }),
+      this.backendAdapter.getWorldStatus(userToken, worldID),
+    ]);
 
     const spaceEntities: LearningSpaceEntity[] =
       this.createLearningSpaceEntities(
@@ -193,21 +195,6 @@ export default class LoadLearningWorldUseCase
     );
 
     return worldEntity;
-  }
-
-  private async loadLearningWorldDataFromBackend(
-    userToken: string,
-    worldID: ComponentID
-  ): Promise<[Partial<BackendWorldTO>, LearningWorldStatusTO]> {
-    const [apiWorldDataResponse, apiWorldScoreResponse] = await Promise.all([
-      this.backendAdapter.getWorldData({
-        userToken: userToken,
-        worldID: worldID,
-      }),
-      this.backendAdapter.getWorldStatus(userToken, worldID),
-    ]);
-
-    return [apiWorldDataResponse, apiWorldScoreResponse];
   }
 
   private createLearningSpaceEntities(
@@ -404,20 +391,13 @@ export default class LoadLearningWorldUseCase
     element: LearningElementEntity,
     adaptivityData: AdaptivityElementDataTO
   ) {
-    let adaptivityElement = this.toAdaptivityEntity(adaptivityData);
-    adaptivityElement.element = element;
+    let entity = new AdaptivityElementEntity();
+    entity = Object.assign(entity, structuredClone(adaptivityData));
+    entity.element = element;
     this.container.createEntity<AdaptivityElementEntity>(
-      adaptivityElement,
+      entity,
       AdaptivityElementEntity
     );
-  }
-
-  private toAdaptivityEntity(
-    data: AdaptivityElementDataTO
-  ): AdaptivityElementEntity {
-    let entity = new AdaptivityElementEntity();
-    entity = Object.assign(entity, structuredClone(data));
-    return entity;
   }
 
   private createLearningWorldEntity(
@@ -440,16 +420,6 @@ export default class LoadLearningWorldUseCase
     return worldEntity;
   }
 
-  private createLearningWorldTOFromLearningWorldEntity(
-    entityToConvert: LearningWorldEntity
-  ): LearningWorldTO {
-    // this will need to be changed when entity and TO are not matching in structure anymore
-    let worldTO = new LearningWorldTO();
-    worldTO = Object.assign(worldTO, structuredClone(entityToConvert));
-
-    return worldTO;
-  }
-
   private createExternalLearningElementEntities(
     externalElements: BackendBaseElementTO[] | undefined,
     worldID: number
@@ -468,5 +438,15 @@ export default class LoadLearningWorldUseCase
         ExternalLearningElementEntity
       );
     });
+  }
+
+  private createLearningWorldTOFromLearningWorldEntity(
+    entityToConvert: LearningWorldEntity
+  ): LearningWorldTO {
+    // this will need to be changed when entity and TO are not matching in structure anymore
+    let worldTO = new LearningWorldTO();
+    worldTO = Object.assign(worldTO, structuredClone(entityToConvert));
+
+    return worldTO;
   }
 }
