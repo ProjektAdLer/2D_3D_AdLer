@@ -188,4 +188,57 @@ describe("AdaptivityElementAnswerFeedback", () => {
       ).not.toBeInTheDocument();
     });
   });
+
+  // ANF-ID: [EWE0017]
+  test("answering a question correctly and the questions difficulty is equal or higher than the required difficulty then the user will be informed that task is completed", () => {
+    const container = render(
+      <AdaptivityElementAnswerFeedback
+        isCorrect={true}
+        currentQuestion={middleQuestion}
+        currentTask={{
+          taskID: 0,
+          taskTitle: "testTaskTitle",
+          isCompleted: false,
+          isRequired: false,
+          hasBeenCompleted: false,
+          requiredDifficulty: 100,
+          questions: [easyQuestion, middleQuestion, hardQuestion],
+        }}
+        setHeaderText={() => {}}
+        closeFeedback={() => {}}
+      />
+    );
+
+    waitFor(() => {
+      expect(
+        container.getByText("requiredQuestionSolvedCorrectly")
+      ).toBeInTheDocument();
+    });
+  });
+
+  test("answering a question correctly and the questions difficulty is not equal or higher than the required difficulty then the user will not be informed that task is completed", () => {
+    const container = render(
+      <AdaptivityElementAnswerFeedback
+        isCorrect={true}
+        currentQuestion={easyQuestion}
+        currentTask={{
+          taskID: 0,
+          taskTitle: "testTaskTitle",
+          isCompleted: false,
+          isRequired: false,
+          hasBeenCompleted: false,
+          requiredDifficulty: 100,
+          questions: [easyQuestion, middleQuestion, hardQuestion],
+        }}
+        setHeaderText={() => {}}
+        closeFeedback={() => {}}
+      />
+    );
+
+    waitFor(() => {
+      expect(
+        container.getByText("requiredQuestionSolvedCorrectly")
+      ).not.toBeInTheDocument();
+    });
+  });
 });
