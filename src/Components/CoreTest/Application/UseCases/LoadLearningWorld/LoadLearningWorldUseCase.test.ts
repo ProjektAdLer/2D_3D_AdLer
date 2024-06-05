@@ -2,6 +2,7 @@ import ExternalLearningElementEntity from "../../../../Core/Domain/Entities/Adap
 import {
   LearningElementModel,
   LearningElementModelTypeEnums,
+  isValidLearningElementModelType,
 } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 import LoadLearningWorldUseCase from "../../../../Core/Application/UseCases/LoadLearningWorld/LoadLearningWorldUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
@@ -29,7 +30,10 @@ import { AdaptivityElementDataTO } from "../../../../Core/Application/DataTransf
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 import AdaptivityElementEntity from "../../../../Core/Domain/Entities/Adaptivity/AdaptivityElementEntity";
-import { BackendAdaptivityElementTO } from "../../../../Core/Application/DataTransferObjects/BackendElementTO";
+import {
+  BackendAdaptivityElementTO,
+  BackendLearningElementTO,
+} from "../../../../Core/Application/DataTransferObjects/BackendElementTO";
 import StoryElementEntity from "../../../../Core/Domain/Entities/StoryElementEntity";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import StoryElementTO from "../../../../Core/Application/DataTransferObjects/StoryElementTO";
@@ -708,5 +712,88 @@ describe("LoadLearningWorldUseCase", () => {
 
     await systemUnderTest.executeAsync({ worldID: 42 });
     expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(5);
+  });
+
+  // ANF-ID: [EZZ0008]
+  test("createLearningElementEntities returns null for an empty learning element slot", async () => {
+    const result = systemUnderTest["createLearningElementEntities"](
+      42,
+      [null],
+      mock<LearningWorldStatusTO>(),
+      LearningSpaceThemeType.Campus
+    );
+    expect(result[0]).toBeNull();
+  });
+
+  // ANF-ID: [EZZ0008]
+  test("createLearningElementEntities creates a LearningElementEntity with correctly assigned model", async () => {
+    entityContainerMock.createEntity.mockImplementation((entity) => entity);
+
+    const learningElementTO: BackendLearningElementTO = {
+      id: 42,
+      name: "testElement",
+      value: 1,
+      type: "h5p",
+      description: "",
+      goals: [""],
+      model: LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+    };
+    const worldStatusTO: LearningWorldStatusTO = {
+      worldID: 1,
+      elements: [
+        {
+          elementID: 42,
+          hasScored: false,
+        },
+      ],
+    };
+
+    const result = systemUnderTest["createLearningElementEntities"](
+      42,
+      [learningElementTO],
+      worldStatusTO,
+      LearningSpaceThemeType.Campus
+    );
+
+    expect(result[0]!.id).toBe(42);
+    expect(result[0]!.name).toBe("testElement");
+    expect(result[0]!.model).toBe(
+      LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC
+    );
+  });
+
+  // ANF-ID: [EZZ0008]
+  test("createLearningElementEntities assigns a model to learning element without set model", async () => {
+    entityContainerMock.createEntity.mockImplementation((entity) => entity);
+
+    const learningElementTO: BackendLearningElementTO = {
+      id: 42,
+      name: "testElement",
+      value: 1,
+      type: "h5p",
+      description: "",
+      // @ts-ignore
+      model: undefined,
+      goals: [""],
+    };
+    const worldStatusTO: LearningWorldStatusTO = {
+      worldID: 1,
+      elements: [
+        {
+          elementID: 42,
+          hasScored: false,
+        },
+      ],
+    };
+
+    const result = systemUnderTest["createLearningElementEntities"](
+      42,
+      [learningElementTO],
+      worldStatusTO,
+      LearningSpaceThemeType.Campus
+    );
+
+    expect(result[0]!.id).toBe(42);
+    expect(isValidLearningElementModelType(result[0]!.model)).toBe(true);
   });
 });

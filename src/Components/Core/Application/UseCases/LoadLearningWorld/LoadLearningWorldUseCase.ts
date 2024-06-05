@@ -371,7 +371,7 @@ export default class LoadLearningWorldUseCase
         parentWorldID: worldID,
       };
 
-      newElementEntity = this.container.createEntity<LearningElementEntity>(
+      newElementEntity = this.container.createEntity(
         newElementEntity,
         LearningElementEntity
       );
