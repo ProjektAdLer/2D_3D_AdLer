@@ -126,6 +126,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                             <img
                               src={greenSwosh}
                               alt=""
+                              data-testid="checkMark"
                               className="absolute h-4 portrait:h-2 lg:h-6 portrait:bottom-5 portrait:left-3 bottom-3 left-4 lg:bottom-6 lg:left-6 "
                             />
                           )}
