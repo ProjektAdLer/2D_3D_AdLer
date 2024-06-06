@@ -1,4 +1,4 @@
-import { getAllByTestId, getByTestId, render } from "@testing-library/react";
+import { getAllByTestId, render, waitFor } from "@testing-library/react";
 import React from "react";
 import AdaptivityElementDialogContainer from "../../../../../Core/Presentation/Adaptivity/AdaptivityElement/UIComponents/AdaptivityElementDialogContainer";
 import useBuilderMock from "../../../React/ReactRelated/CustomHooks/useBuilder/useBuilderMock";
@@ -159,6 +159,38 @@ describe("AdaptivityElementDialogContainer", () => {
     npcImages.forEach((npcImage) => {
       expect(npcImage).toBeInTheDocument();
       expect(npcImage).toMatchSnapshot();
+    });
+  });
+
+  // ANF-ID: [EWE0019]
+  test("click on legend-text calls showFooterTooltip", () => {
+    const controllerMock = mock<IAdaptivityElementController>();
+
+    const content: AdaptivityElementContent = {
+      elementName: "testName",
+      introText: "testIntroText",
+      tasks: [],
+    };
+    viewModel.contentData.Value = content;
+    viewModel.isOpen.Value = true;
+
+    useBuilderMock([viewModel, controllerMock]);
+
+    const { getByText } = render(<AdaptivityElementDialogContainer />);
+    getByText("legendHover").click();
+    expect(controllerMock.showFooterTooltip).toBeCalled();
+  });
+
+  // ANF-ID: [EWE0019]
+  test("displays legend", () => {
+    viewModel.showFooterTooltip.Value = true;
+    const container = render(<AdaptivityElementDialogContainer />);
+
+    waitFor(() => {
+      expect(container.getByText("headerLegend")).toBeInTheDocument();
+      expect(
+        container.getByTestId("requiredTaskIconImage")
+      ).toBeInTheDocument();
     });
   });
 });

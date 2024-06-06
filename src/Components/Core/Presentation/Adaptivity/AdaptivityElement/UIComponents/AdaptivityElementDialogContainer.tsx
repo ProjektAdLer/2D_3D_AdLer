@@ -258,7 +258,7 @@ export default function AdaptivityElementDialogContainer({
                   {!(currentTask !== null && currentQuestion !== null) && (
                     <div className="relative flex group">
                       <p
-                        className="right-1 bottom-1 cursor-pointer"
+                        className="cursor-pointer right-1 bottom-1"
                         onClick={() => {
                           controller.showFooterTooltip();
                         }}
@@ -284,7 +284,7 @@ export default function AdaptivityElementDialogContainer({
                           <h3 className="text-sm font-bold">
                             {translate("headerLegendTask")}
                           </h3>
-                          <table className="table-auto text-left">
+                          <table className="text-left table-auto">
                             <tbody>
                               <tr>
                                 <td className="pr-2">
@@ -292,6 +292,7 @@ export default function AdaptivityElementDialogContainer({
                                     className="w-4 lg:w-6"
                                     src={requiredTaskIcon}
                                     alt="required Task icon"
+                                    data-testid="requiredTaskIconImage"
                                   />
                                 </td>
                                 <td>{translate("legendTaskRequired")}</td>
@@ -312,10 +313,10 @@ export default function AdaptivityElementDialogContainer({
                               </tr>
                             </tbody>
                           </table>
-                          <h3 className="text-sm font-bold pt-2 text-left ">
+                          <h3 className="pt-2 text-sm font-bold text-left ">
                             {translate("legendHeaderDifficulties")}
                           </h3>
-                          <table className="table-auto text-left">
+                          <table className="text-left table-auto">
                             <tbody>
                               <tr>
                                 <td className="pr-2">
@@ -372,7 +373,7 @@ export default function AdaptivityElementDialogContainer({
                               </tr>
                             </tbody>
                           </table>
-                          <h3 className="text-sm font-bold pt-2 text-left ">
+                          <h3 className="pt-2 text-sm font-bold text-left ">
                             {translate("legendHeaderStar")}
                           </h3>
                           <table>
