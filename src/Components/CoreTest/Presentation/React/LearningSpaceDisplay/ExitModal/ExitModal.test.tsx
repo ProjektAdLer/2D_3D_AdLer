@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { mock } from "jest-mock-extended";
 import React from "react";
 import ExitModal from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ExitModal/ExitModal";
@@ -48,13 +48,18 @@ describe("ExitModal", () => {
   });
 
   // ANF-ID: [EWE0033]
-  test("should close when close button is clicked", () => {
+  test("should close when close button is clicked", async () => {
     viewModel.isOpen.Value = true;
     useBuilderMock([viewModel, fakeController]);
+
     const componentUnderTest = render(<ExitModal />);
     const closeButton = componentUnderTest.getByRole("button", { name: "X" });
     fireEvent.click(closeButton);
+
     expect(viewModel.isOpen.Value).toBe(false);
+    await waitFor(() =>
+      expect(componentUnderTest.container).toBeEmptyDOMElement()
+    );
   });
 
   // ANF-ID: [EWE0032]
