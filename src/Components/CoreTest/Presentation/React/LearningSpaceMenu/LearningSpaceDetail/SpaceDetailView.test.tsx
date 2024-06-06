@@ -41,16 +41,10 @@ describe("LearningSpaceDetail in Space Menu", () => {
     mockViewModel.goals = mockGoals;
     mockViewModel.elements = mockElements;
     mockViewModel.requiredPoints = mockRequiredPoints;
-    mockViewModel.requirements = mockRequirements;
     mockViewModel.spaces = mockSpaces;
   });
 
   test("should render", () => {
-    render(<LearningSpaceDetail />);
-  });
-
-  test("should render without requirements if requirement does not match with spaceid.", () => {
-    mockViewModel.requirements.Value = [20];
     render(<LearningSpaceDetail />);
   });
 
@@ -80,12 +74,6 @@ describe("LearningSpaceDetail in Space Menu", () => {
 
   test("should not render if requiredPoints is undefined", () => {
     mockViewModel.requiredPoints = undefined;
-    const componentUnderTest = render(<LearningSpaceDetail />);
-    expect(componentUnderTest.container).toBeEmptyDOMElement();
-  });
-
-  test("should not render if requirements is undefined", () => {
-    mockViewModel.requirements = undefined;
     const componentUnderTest = render(<LearningSpaceDetail />);
     expect(componentUnderTest.container).toBeEmptyDOMElement();
   });
