@@ -34,7 +34,6 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
     [LearningElementTypeStrings, string, boolean, number][]
   >(viewModel.elements);
   const [requiredPoints] = useObservable<number>(viewModel.requiredPoints);
-  const [requirements] = useObservable<number[]>(viewModel.requirements);
   const [spaces] = useObservable<LearningSpaceDetailLearningSpaceData[]>(
     viewModel.spaces
   );
@@ -50,7 +49,6 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
     goals === undefined ||
     elements === undefined ||
     requiredPoints === undefined ||
-    requirements === undefined ||
     spaces === undefined
   )
     return null;
@@ -186,48 +184,6 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
         )}
         {elements.length > 0 && (
           <div className="pb-2 border-b border-gray-500"></div>
-        )}
-        {requirements.length > 0 && (
-          <div className="pb-2 border-b border-gray-500">
-            <div className="self-center ml-2 text-lg font-black text-adlerdarkblue">
-              {requirements.length > 1
-                ? "Benötigte Räume zur Freischaltung:"
-                : "Benötigter Raum zur Freischaltung:"}
-            </div>
-            <div className="items-start ml-6 text-lg font-medium">
-              {requirements.map((requirement) => {
-                let name;
-                let completed;
-                const lookup = spaces.find((space) => space.id === requirement);
-                if (lookup === undefined) {
-                  logger.log(
-                    LogLevelTypes.WARN,
-                    "Requirement not found in spaces."
-                  );
-                  return undefined;
-                }
-                name = lookup.name;
-                completed = lookup.isCompleted;
-
-                return (
-                  <div
-                    className="relative flex my-4 ml-2"
-                    key={name + completed}
-                  >
-                    <img src={spaceIcon} alt="" className="w-8 mr-4 xl:w-8" />
-                    {completed && (
-                      <img
-                        src={greenSwosh}
-                        alt=""
-                        className="absolute h-4 lg:h-6 bottom-3 left-4 lg:bottom-3 lg:left-6 "
-                      />
-                    )}
-                    {name}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
         )}
       </article>
     </main>
