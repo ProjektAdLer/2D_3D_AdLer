@@ -10,6 +10,7 @@ const viewModel = new LoadingScreenViewModel();
 const controllerMock = mock<ILoadingScreenController>();
 
 describe("LoadingScreen", () => {
+  //ANF-ID: [EWE0023]
   test("should render", () => {
     useBuilderMock([viewModel, controllerMock]);
 
@@ -29,7 +30,8 @@ describe("LoadingScreen", () => {
     expect(container.firstChild).toBeNull();
   });
 
-  test("onClick calls controller", () => {
+  //ANF-ID: [EWE0023]
+  test("onClick calls controller to close loading screen", () => {
     useBuilderMock([viewModel, controllerMock]);
     viewModel.isReadyToBeClosed.Value = true;
     const componentUnderTest = render(<LoadingScreen />);

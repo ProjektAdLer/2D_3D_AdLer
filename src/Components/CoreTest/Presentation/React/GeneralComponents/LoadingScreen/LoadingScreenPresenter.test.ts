@@ -29,6 +29,7 @@ describe("LoadingScreenPresenter", () => {
     expect(viewModelMock.loadStep.Value).toBe("test");
   });
 
+  //ANF-ID: [EWE0023]
   test("closeLoadingScreen sets isOpen to false", () => {
     viewModelMock.isOpen.Value = true;
     systemUnderTest.closeLoadingScreen();
