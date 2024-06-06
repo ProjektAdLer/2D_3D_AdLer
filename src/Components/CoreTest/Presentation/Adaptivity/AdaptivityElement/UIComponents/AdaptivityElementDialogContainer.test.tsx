@@ -10,6 +10,60 @@ import IAdaptivityElementController from "../../../../../Core/Presentation/Adapt
 import { AdaptivityElementActionTypes } from "../../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 import { LearningElementModelTypeEnums } from "../../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
+const question = {
+  questionID: 0,
+  questionText: "testQuestionText",
+  isMultipleChoice: false,
+  isRequired: false,
+  isCompleted: false,
+  difficulty: 0,
+  questionAnswers: [
+    {
+      answerIndex: 0,
+      answerText: "testAnswerText",
+      isSelected: false,
+    },
+  ],
+  hints: [
+    {
+      hintID: 0,
+      hintAction: {
+        hintActionData: "testHintActionData",
+        hintActionType: AdaptivityElementActionTypes.CommentAction,
+      },
+      showOnIsWrong: false,
+    },
+  ],
+};
+
+const notCompletedRequiredTask = {
+  taskID: 0,
+  taskTitle: "testTaskTitle",
+  isCompleted: false,
+  isRequired: true,
+  hasBeenCompleted: false,
+  requiredDifficulty: 0,
+  questions: [question],
+};
+const completedRequiredTask = {
+  taskID: 1,
+  taskTitle: "testTaskTitle",
+  isCompleted: true,
+  isRequired: true,
+  hasBeenCompleted: false,
+  requiredDifficulty: 0,
+  questions: [question],
+};
+const completedNotRequiredTask = {
+  taskID: 2,
+  taskTitle: "testTaskTitle",
+  isCompleted: true,
+  isRequired: false,
+  hasBeenCompleted: false,
+  requiredDifficulty: 0,
+  questions: [question],
+};
+
 describe("AdaptivityElementDialogContainer", () => {
   let viewModel: AdaptivityElementViewModel;
 
@@ -50,31 +104,7 @@ describe("AdaptivityElementDialogContainer", () => {
     viewModel.isOpen.Value = true;
     viewModel.model.Value =
       LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard;
-    const question = {
-      questionID: 0,
-      questionText: "testQuestionText",
-      isMultipleChoice: false,
-      isRequired: false,
-      isCompleted: false,
-      difficulty: 0,
-      questionAnswers: [
-        {
-          answerIndex: 0,
-          answerText: "testAnswerText",
-          isSelected: false,
-        },
-      ],
-      hints: [
-        {
-          hintID: 0,
-          hintAction: {
-            hintActionData: "testHintActionData",
-            hintActionType: AdaptivityElementActionTypes.CommentAction,
-          },
-          showOnIsWrong: false,
-        },
-      ],
-    };
+
     const task = {
       taskID: 0,
       taskTitle: "testTaskTitle",
@@ -107,31 +137,7 @@ describe("AdaptivityElementDialogContainer", () => {
   ])("displays correct npc thumbnail for model %p", (model) => {
     viewModel.isOpen.Value = true;
     viewModel.model.Value = model;
-    const question = {
-      questionID: 0,
-      questionText: "testQuestionText",
-      isMultipleChoice: false,
-      isRequired: false,
-      isCompleted: false,
-      difficulty: 0,
-      questionAnswers: [
-        {
-          answerIndex: 0,
-          answerText: "testAnswerText",
-          isSelected: false,
-        },
-      ],
-      hints: [
-        {
-          hintID: 0,
-          hintAction: {
-            hintActionData: "testHintActionData",
-            hintActionType: AdaptivityElementActionTypes.CommentAction,
-          },
-          showOnIsWrong: false,
-        },
-      ],
-    };
+
     const task = {
       taskID: 0,
       taskTitle: "testTaskTitle",
@@ -191,6 +197,65 @@ describe("AdaptivityElementDialogContainer", () => {
       expect(
         container.getByTestId("requiredTaskIconImage")
       ).toBeInTheDocument();
+    });
+  });
+
+  // ANF-ID: [EWE0018]
+  test("displays circular progressbar with completed tasks in percent", () => {
+    const content: AdaptivityElementContent = {
+      elementName: "testName",
+      introText: "testIntroText",
+      tasks: [
+        notCompletedRequiredTask,
+        completedRequiredTask,
+        completedNotRequiredTask,
+      ],
+    };
+    viewModel.contentData.Value = content;
+    viewModel.isOpen.Value = true;
+    const { container } = render(<AdaptivityElementDialogContainer />);
+
+    waitFor(() => {
+      expect(container).toHaveTextContent("50%");
+    });
+  });
+
+  // ANF-ID: [EWE0018]
+  test("updates circular progressbar if required task is completed", () => {
+    let content: AdaptivityElementContent = {
+      elementName: "testName",
+      introText: "testIntroText",
+      tasks: [
+        notCompletedRequiredTask,
+        completedRequiredTask,
+        completedNotRequiredTask,
+      ],
+    };
+    viewModel.isOpen.Value = true;
+    viewModel.contentData.Value = content;
+
+    let container = render(<AdaptivityElementDialogContainer />);
+    waitFor(() => {
+      expect(container.container).toHaveTextContent("50%");
+    });
+
+    let completedARequiredTask = notCompletedRequiredTask;
+    completedARequiredTask.isCompleted = true;
+
+    content = {
+      elementName: "testName",
+      introText: "testIntroText",
+      tasks: [
+        completedARequiredTask,
+        completedRequiredTask,
+        completedNotRequiredTask,
+      ],
+    };
+
+    container = render(<AdaptivityElementDialogContainer />);
+
+    waitFor(() => {
+      expect(container.container).toHaveTextContent("100%");
     });
   });
 });
