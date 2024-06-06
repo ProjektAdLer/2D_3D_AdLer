@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { cleanup, render, waitFor } from "@testing-library/react";
 import LearningSpaceScorePanel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanel";
 import LearningSpaceScorePanelViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanelViewModel";
 import "@testing-library/jest-dom";
@@ -8,15 +8,15 @@ import ICalculateLearningWorldScoreUseCase from "../../../../../Core/Application
 import { mock } from "jest-mock-extended";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import LearningSpaceScorePanelController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanelController";
+import ILearningSpaceScorePanelController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceScorePanel/ILearningSpaceScorePanelController";
 
-let fakeModel = new LearningSpaceScorePanelViewModel();
-fakeModel.scoreInfo.Value = {
-  currentScore: 1,
-  requiredScore: 2,
-  maxScore: 3,
+let mockedViewModel = new LearningSpaceScorePanelViewModel();
+mockedViewModel.scoreInfo.Value = {
+  currentScore: 0,
+  requiredScore: 42,
+  maxScore: 3000,
 };
-const fakeController = new LearningSpaceScorePanelController();
+const mockedController = mock<ILearningSpaceScorePanelController>();
 const calculateWorldScoreMock = mock<ICalculateLearningWorldScoreUseCase>();
 
 describe("Learning Space Score Panel View", () => {
@@ -26,23 +26,40 @@ describe("Learning Space Score Panel View", () => {
       USECASE_TYPES.ICalculateLearningWorldScoreUseCase
     ).toConstantValue(calculateWorldScoreMock);
   });
+
   afterAll(() => {
     CoreDIContainer.restore();
   });
 
   // ANF-ID: [EWE0030]
-  it("Learning Space Score Panel View renders the correct score", () => {
-    useBuilderMock([fakeModel, fakeController]);
+  test("renders the current score and the required score", () => {
+    useBuilderMock([mockedViewModel, mockedController]);
     const comp = render(<LearningSpaceScorePanel />);
 
-    expect(comp.container).toHaveTextContent("1");
-    expect(comp.container).toHaveTextContent("2");
+    expect(comp.container).toHaveTextContent("0");
+    expect(comp.container).toHaveTextContent("42");
   });
 
-  it("returns null when viewModel is not registered", () => {
+  test("returns null when viewModel is not registered", () => {
     useBuilderMock([undefined, undefined]);
     const comp = render(<LearningSpaceScorePanel />);
 
     expect(comp.container).toBeEmptyDOMElement();
+  });
+
+  // ANF-ID: [EWE0030]
+  test("updates the current score when the value in the viewmodel changes", async () => {
+    useBuilderMock([mockedViewModel, mockedController]);
+    const comp = render(<LearningSpaceScorePanel />);
+
+    expect(comp.container).toHaveTextContent("0");
+
+    mockedViewModel.scoreInfo.Value = {
+      currentScore: 1,
+      requiredScore: 42,
+      maxScore: 3000,
+    };
+
+    await waitFor(() => expect(comp.container).toHaveTextContent("1"));
   });
 });

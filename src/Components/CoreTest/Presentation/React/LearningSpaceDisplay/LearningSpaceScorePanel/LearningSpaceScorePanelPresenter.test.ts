@@ -16,7 +16,8 @@ describe("LearningSpaceScorePanelPresenter", () => {
     expect(viewModel.currentSpaceID.Value).toBe(123);
   });
 
-  test("presentScore sets the score in the ViewModel", () => {
+  // ANF-ID: [EWE0030]
+  test("onLearningSpaceLoaded sets the score in the ViewModel", () => {
     viewModel.currentSpaceID.Value = 42;
     systemUnderTest.onLearningSpaceScored({
       currentScore: 1,
