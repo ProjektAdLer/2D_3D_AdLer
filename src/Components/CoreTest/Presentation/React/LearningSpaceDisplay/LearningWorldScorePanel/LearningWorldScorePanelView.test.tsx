@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import LearningWorldScorePanel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanel";
 import LearningWorldScorePanelViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanelViewModel";
 import "@testing-library/jest-dom";
@@ -8,9 +8,10 @@ import ICalculateLearningWorldScoreUseCase from "../../../../../Core/Application
 import { mock } from "jest-mock-extended";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
+import ILearningWorldScorePanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningWorldScorePanel/ILearningWorldScorePanelPresenter";
 
-let fakeModel = new LearningWorldScorePanelViewModel();
-fakeModel.scoreInfo.Value = {
+let mockedViewModel = new LearningWorldScorePanelViewModel();
+mockedViewModel.scoreInfo.Value = {
   currentScore: 4,
   requiredScore: 5,
   maxScore: 6,
@@ -24,22 +25,39 @@ describe("Learning World Score Panel View", () => {
       USECASE_TYPES.ICalculateLearningWorldScoreUseCase
     ).toConstantValue(calculateWorldScoreMock);
   });
+
   afterAll(() => {
     CoreDIContainer.restore();
   });
 
   // ANF-ID: [EWE0027]
-  it("Learning World Score Panel View renders the correct score", () => {
-    useBuilderMock([fakeModel, undefined]);
+  test("renders the correct score", () => {
+    useBuilderMock([mockedViewModel, undefined]);
     let comp = render(<LearningWorldScorePanel />);
 
     expect(comp.container).toHaveTextContent("80%");
   });
 
-  it("returns null when viewModel is not registered", () => {
+  test("returns null when viewModel is not registered", () => {
     useBuilderMock([undefined, undefined]);
     const comp = render(<LearningWorldScorePanel />);
 
     expect(comp.container).toBeEmptyDOMElement();
+  });
+
+  // ANF-ID: [EWE0027]
+  test("updates the displayed score when the current score in the viewmodel changes", async () => {
+    useBuilderMock([mockedViewModel, mock<ILearningWorldScorePanelPresenter>]);
+    const comp = render(<LearningWorldScorePanel />);
+
+    expect(comp.container).toHaveTextContent("80%");
+
+    mockedViewModel.scoreInfo.Value = {
+      currentScore: 5,
+      requiredScore: 5,
+      maxScore: 6,
+    };
+
+    await waitFor(() => expect(comp.container).toHaveTextContent("100%"));
   });
 });

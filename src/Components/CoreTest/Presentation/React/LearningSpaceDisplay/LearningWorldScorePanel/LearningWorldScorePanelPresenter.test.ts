@@ -10,7 +10,8 @@ describe("LearningWorldScorePanelPresenter", () => {
     systemUnderTest = new LearningWorldScorePanelPresenter(viewModel);
   });
 
-  test("presentScore sets the score in the ViewModel", () => {
+  // ANF-ID: [EWE0027]
+  test("onLearningWorldScored sets the score in the ViewModel", () => {
     systemUnderTest.onLearningWorldScored({
       currentScore: 4,
       requiredScore: 5,
