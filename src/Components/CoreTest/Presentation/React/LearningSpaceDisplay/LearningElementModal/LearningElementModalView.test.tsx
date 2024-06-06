@@ -1,20 +1,21 @@
 import "@testing-library/jest-dom";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { mock } from "jest-mock-extended";
 import React from "react";
 import LearningElementModalController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalController";
 import LearningElementModalViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import LearningElementModal from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModal";
+import { WeightAnimationPropertyInfo } from "@babylonjs/loaders/glTF/2.0/glTFLoaderAnimation";
 
-let fakeModel = new LearningElementModalViewModel();
-fakeModel.isOpen.Value = true;
-fakeModel.id.Value = 123;
-fakeModel.type.Value = "text";
-fakeModel.parentWorldID.Value = 456;
-fakeModel.isScoreable.Value = true;
+let mockViewModel = new LearningElementModalViewModel();
+mockViewModel.isOpen.Value = true;
+mockViewModel.id.Value = 123;
+mockViewModel.type.Value = "text";
+mockViewModel.parentWorldID.Value = 456;
+mockViewModel.isScoreable.Value = true;
 
-const fakeController = mock<LearningElementModalController>();
+const mockController = mock<LearningElementModalController>();
 
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/ImageComponent.tsx",
@@ -38,31 +39,31 @@ jest.mock(
 
 describe("LearningElementModal", () => {
   test("doesn't render without controller", () => {
-    useBuilderMock([fakeModel, undefined]);
+    useBuilderMock([mockViewModel, undefined]);
     const { container } = render(<LearningElementModal />);
     expect(container.firstChild).toBeNull();
   });
 
   test("doesn't render without view model", () => {
-    useBuilderMock([undefined, fakeController]);
+    useBuilderMock([undefined, mockController]);
     const { container } = render(<LearningElementModal />);
     expect(container.firstChild).toBeNull();
   });
 
   // ANF-ID: [EWE0038]
   test("should not render when closed", () => {
-    fakeModel.isOpen.Value = false;
+    mockViewModel.isOpen.Value = false;
 
-    useBuilderMock([fakeModel, fakeController]);
+    useBuilderMock([mockViewModel, mockController]);
 
     const componentUnderTest = render(<LearningElementModal />);
     expect(componentUnderTest.container.childElementCount).toBe(0);
 
-    fakeModel.isOpen.Value = true;
+    mockViewModel.isOpen.Value = true;
   });
 
   test("should render its content", () => {
-    useBuilderMock([fakeModel, fakeController]);
+    useBuilderMock([mockViewModel, mockController]);
 
     const componentUnderTest = render(<LearningElementModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
@@ -72,9 +73,9 @@ describe("LearningElementModal", () => {
   test.each([["text"], ["image"], ["video"], ["h5p"]])(
     "should render its content with the correct type",
     (type) => {
-      fakeModel.type.Value = type;
+      mockViewModel.type.Value = type;
 
-      useBuilderMock([fakeModel, fakeController]);
+      useBuilderMock([mockViewModel, mockController]);
 
       const componentUnderTest = render(<LearningElementModal />);
       expect(componentUnderTest.container.childElementCount).toBe(1);
@@ -82,8 +83,8 @@ describe("LearningElementModal", () => {
   );
 
   test("should render error, if no element is selected", () => {
-    fakeModel.type.Value = "type";
-    useBuilderMock([fakeModel, fakeController]);
+    mockViewModel.type.Value = "type";
+    useBuilderMock([mockViewModel, mockController]);
 
     const componentUnderTest = render(<LearningElementModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
@@ -93,11 +94,26 @@ describe("LearningElementModal", () => {
   });
 
   test("should call controller with element id when closed", () => {
-    useBuilderMock([fakeModel, fakeController]);
+    useBuilderMock([mockViewModel, mockController]);
 
     const componentUnderTest = render(<LearningElementModal />);
     fireEvent.click(componentUnderTest.getByRole("button"));
 
-    expect(fakeController.scoreLearningElement).toHaveBeenCalledTimes(1);
+    expect(mockController.scoreLearningElement).toHaveBeenCalledTimes(1);
+  });
+
+  // ANF-ID: [EWE0038]
+  test("should close when close button is clicked", async () => {
+    useBuilderMock([mockViewModel, mockController]);
+    mockViewModel.isOpen.Value = true;
+
+    const componentUnderTest = render(<LearningElementModal />);
+    const closeButton = componentUnderTest.getByRole("button", { name: "X" });
+    fireEvent.click(closeButton);
+
+    expect(mockViewModel.isOpen.Value).toBe(false);
+    await waitFor(() =>
+      expect(componentUnderTest.container).toBeEmptyDOMElement()
+    );
   });
 });
