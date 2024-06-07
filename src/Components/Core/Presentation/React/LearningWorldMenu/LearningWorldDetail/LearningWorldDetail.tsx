@@ -95,6 +95,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
                       {space.currentScore >= space.requiredScore && (
                         <img
                           src={greenSwosh}
+                          data-testid="greenSwosh"
                           alt=""
                           className="absolute w-6 bottom-3 left-4 xl:w-8 xl:left-6 xl:bottom-4"
                         />

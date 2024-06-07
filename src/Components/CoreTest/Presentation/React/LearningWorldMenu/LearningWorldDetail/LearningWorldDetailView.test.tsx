@@ -9,7 +9,7 @@ import LearningSpaceTO from "../../../../../Core/Application/DataTransferObjects
 
 let mockViewModel = new LearningWorldDetailViewModel();
 const mockSpaces: Observable<LearningSpaceTO[]> = new Observable([
-  { name: "Space1", id: "1", currentScore: 0, requiredScore: 0 },
+  { name: "Space1", id: "1", currentScore: 5, requiredScore: 0 },
   { name: "Space2", id: "2", currentScore: 0, requiredScore: 10 },
   { name: "Space3", id: "3", currentScore: 0, requiredScore: 0 },
 ]) as unknown as Observable<LearningSpaceTO[]>;
@@ -35,5 +35,15 @@ describe("LearningWorldDetail in World Menu", () => {
     mockViewModel.name = undefined;
     const componentUnderTest = render(<LearningWorldDetail />);
     expect(componentUnderTest.container).toBeEmptyDOMElement();
+  });
+
+  //ANF-ID: [EWE0025]
+  test("Renders green swoosh on listed Spaces, if they're completed", () => {
+    mockViewModel.spaces = new Observable([
+      { name: "Space1", id: "1", currentScore: 5, requiredScore: 0 },
+    ]) as unknown as Observable<LearningSpaceTO[]>;
+    const componentUnderTest = render(<LearningWorldDetail />);
+
+    expect(componentUnderTest.getByTestId("greenSwosh")).toBeInTheDocument();
   });
 });
