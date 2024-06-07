@@ -41,7 +41,7 @@ export default class LoadLearningSpaceUseCase
     spaceID: ComponentID;
     worldID: ComponentID;
   }): Promise<void> {
-    // try to get the world entity from the container, there should always be only one at most
+    // try to get the world entity from the container
     let worldEntity = this.getLearningWorldEntity(data.worldID);
 
     // if the world is not loaded yet, load it via the LoadWorldUseCase
