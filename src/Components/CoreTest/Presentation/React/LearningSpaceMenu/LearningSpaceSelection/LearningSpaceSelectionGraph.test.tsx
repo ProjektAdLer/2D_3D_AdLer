@@ -12,6 +12,8 @@ import {
   BooleanOrNode,
 } from "../../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
 
+const controllerMock = mock<ILearningSpaceSelectionController>();
+
 // mock elk to prevent async layouting
 jest.mock("elkjs/lib/elk.bundled.js", () => {
   return function () {
@@ -28,15 +30,18 @@ jest.mock("elkjs/lib/elk.bundled.js", () => {
 });
 
 describe("LearningSpaceSelectionGraph", () => {
-  test("should render", () => {
-    const vm = new LearningSpaceSelectionViewModel();
-    const controllerMock = mock<ILearningSpaceSelectionController>();
+  let vmMock: LearningSpaceSelectionViewModel;
 
+  beforeEach(() => {
+    vmMock = new LearningSpaceSelectionViewModel();
+  });
+
+  test("should render", () => {
     const { container } = render(
       <ReactFlowProvider>
         <LearningSpaceSelectionGraph
           controller={controllerMock}
-          viewModel={vm}
+          viewModel={vmMock}
         />
       </ReactFlowProvider>
     );
@@ -46,8 +51,7 @@ describe("LearningSpaceSelectionGraph", () => {
 
   // ANF-ID: [EWE0024]
   test("creates a node for each space with correct data_id's", () => {
-    const vm = new LearningSpaceSelectionViewModel();
-    vm.spaces.Value = [
+    vmMock.spaces.Value = [
       {
         id: 1,
         name: "test",
@@ -70,13 +74,12 @@ describe("LearningSpaceSelectionGraph", () => {
         requirementsSyntaxTree: null,
       },
     ];
-    const controllerMock = mock<ILearningSpaceSelectionController>();
 
     const { container } = render(
       <ReactFlowProvider>
         <LearningSpaceSelectionGraph
           controller={controllerMock}
-          viewModel={vm}
+          viewModel={vmMock}
         />
       </ReactFlowProvider>
     );
@@ -92,8 +95,7 @@ describe("LearningSpaceSelectionGraph", () => {
 
   // ANF-ID: [EWE0024]
   test("creates a node for each boolean operator in the requirements", () => {
-    const vm = new LearningSpaceSelectionViewModel();
-    vm.spaces.Value = [
+    vmMock.spaces.Value = [
       {
         id: 1,
         name: "test",
@@ -119,13 +121,12 @@ describe("LearningSpaceSelectionGraph", () => {
         ]),
       },
     ];
-    const controllerMock = mock<ILearningSpaceSelectionController>();
 
     const { container } = render(
       <ReactFlowProvider>
         <LearningSpaceSelectionGraph
           controller={controllerMock}
-          viewModel={vm}
+          viewModel={vmMock}
         />
       </ReactFlowProvider>
     );
@@ -139,8 +140,7 @@ describe("LearningSpaceSelectionGraph", () => {
 
   // ANF-ID: [EWE0024]
   test("creates an edge for each node inside requirements", () => {
-    const vm = new LearningSpaceSelectionViewModel();
-    vm.spaces.Value = [
+    vmMock.spaces.Value = [
       {
         id: 1,
         name: "test",
@@ -166,13 +166,12 @@ describe("LearningSpaceSelectionGraph", () => {
         ]),
       },
     ];
-    const controllerMock = mock<ILearningSpaceSelectionController>();
 
     const { container } = render(
       <ReactFlowProvider>
         <LearningSpaceSelectionGraph
           controller={controllerMock}
-          viewModel={vm}
+          viewModel={vmMock}
         />
       </ReactFlowProvider>
     );
@@ -187,9 +186,8 @@ describe("LearningSpaceSelectionGraph", () => {
   test.todo("sets node position calculated by elk");
 
   test("calls controller with space id when a node is clicked", async () => {
-    const vm = new LearningSpaceSelectionViewModel();
     const spaceID = 42;
-    vm.spaces.Value = [
+    vmMock.spaces.Value = [
       {
         id: spaceID,
         name: "test",
@@ -198,13 +196,12 @@ describe("LearningSpaceSelectionGraph", () => {
         requirementsSyntaxTree: null,
       },
     ];
-    const controllerMock = mock<ILearningSpaceSelectionController>();
 
     const container = render(
       <ReactFlowProvider>
         <LearningSpaceSelectionGraph
           controller={controllerMock}
-          viewModel={vm}
+          viewModel={vmMock}
         />
       </ReactFlowProvider>
     );
@@ -214,5 +211,85 @@ describe("LearningSpaceSelectionGraph", () => {
       fireEvent.click(node);
     });
     expect(controllerMock.onLearningSpaceClicked).toBeCalledWith(spaceID);
+  });
+
+  // ANF-ID: [EWE0026]
+  test("displays open lock icon if space is available and not completed", () => {
+    vmMock.spaces.Value = [
+      {
+        id: 1,
+        name: "test",
+        isAvailable: true,
+        isCompleted: false,
+        requirementsSyntaxTree: null,
+      },
+    ];
+
+    const { container } = render(
+      <ReactFlowProvider>
+        <LearningSpaceSelectionGraph
+          controller={controllerMock}
+          viewModel={vmMock}
+        />
+      </ReactFlowProvider>
+    );
+
+    waitFor(() => {
+      const displayedImage = container.querySelector("img") as HTMLImageElement;
+      expect(displayedImage.src).toContain("lock-icon-open");
+    });
+  });
+
+  test("displays solved lock icon if space is available and completed", () => {
+    vmMock.spaces.Value = [
+      {
+        id: 1,
+        name: "test",
+        isAvailable: true,
+        isCompleted: true,
+        requirementsSyntaxTree: null,
+      },
+    ];
+
+    const { container } = render(
+      <ReactFlowProvider>
+        <LearningSpaceSelectionGraph
+          controller={controllerMock}
+          viewModel={vmMock}
+        />
+      </ReactFlowProvider>
+    );
+
+    waitFor(() => {
+      const displayedImage = container.querySelector("img") as HTMLImageElement;
+      expect(displayedImage.src).toContain("check-solution-icon");
+    });
+  });
+
+  // ANF-ID: [EWE0026]
+  test("displays closed lock icon if space is not available", () => {
+    vmMock.spaces.Value = [
+      {
+        id: 1,
+        name: "test",
+        isAvailable: false,
+        isCompleted: false,
+        requirementsSyntaxTree: null,
+      },
+    ];
+
+    const { container } = render(
+      <ReactFlowProvider>
+        <LearningSpaceSelectionGraph
+          controller={controllerMock}
+          viewModel={vmMock}
+        />
+      </ReactFlowProvider>
+    );
+
+    waitFor(() => {
+      const displayedImage = container.querySelector("img") as HTMLImageElement;
+      expect(displayedImage.src).toContain("lock-icon-closed");
+    });
   });
 });
