@@ -49,7 +49,7 @@ describe("LearningSpaceSelectionGraph", () => {
     expect(container).not.toBeEmptyDOMElement();
   });
 
-  // ANF-ID: [EWE0024]
+  // ANF-ID: [EWE0024, EWE0025]
   test("creates a node for each space with correct data_id's", () => {
     vmMock.spaces.Value = [
       {

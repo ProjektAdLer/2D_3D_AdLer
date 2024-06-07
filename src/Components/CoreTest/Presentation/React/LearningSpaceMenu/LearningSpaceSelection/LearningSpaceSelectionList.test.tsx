@@ -27,7 +27,7 @@ describe("LearningSpaceSelectionList", () => {
     CoreDIContainer.restore();
   });
 
-  // ANF-ID: [EWE0024]
+  // ANF-ID: [EWE0024, EWE0025]
   test("should render and call controller on click on completed space", () => {
     const vm = new LearningSpaceSelectionViewModel();
     vm.spaces.Value = [
