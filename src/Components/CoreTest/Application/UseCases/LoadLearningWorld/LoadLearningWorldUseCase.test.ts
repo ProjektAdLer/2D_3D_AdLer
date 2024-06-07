@@ -250,7 +250,7 @@ describe("LoadLearningWorldUseCase", () => {
     );
   });
 
-  // ANF-ID: [ELG0009]
+  // ANF-ID: [ELG0010]
   test("Displays error, if World is not available", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue(
       mockedGetEntitiesOfTypeUserDataReturnValue
