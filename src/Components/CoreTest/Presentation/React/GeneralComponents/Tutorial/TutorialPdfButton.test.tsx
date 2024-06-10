@@ -3,13 +3,13 @@ import { render } from "@testing-library/react";
 import TutorialPdfButton from "../../../../../Core/Presentation/React/GeneralComponents/Tutorial/TutorialPdfButton";
 
 describe("TutorialPdfButton", () => {
-  //ANF-ID: [ELG00014]
+  //ANF-ID: [ELG0014]
   test("should render", () => {
     const renderResult = render(<TutorialPdfButton />);
 
     expect(renderResult.container).not.toBeEmptyDOMElement();
   });
-  //ANF-ID: [ELG00014]
+  //ANF-ID: [ELG0014]
   test("click on button calls window.open", () => {
     const openSpy = jest.spyOn(window, "open");
     const renderResult = render(<TutorialPdfButton pdfFileUrl="test" />);

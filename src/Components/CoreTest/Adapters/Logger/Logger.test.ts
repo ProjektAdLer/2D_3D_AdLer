@@ -57,7 +57,7 @@ describe("Logger", () => {
     expect(console.error).toHaveBeenCalledWith(`[${logLevel2}]: ${message}`);
   });
 
-  //ANF-ID: [ELG00013]
+  //ANF-ID: [ELG0013]
   test("Logger calls fileExporter", () => {
     const circularLogBufferMock = jest.spyOn(
       CircularLogBuffer.prototype,

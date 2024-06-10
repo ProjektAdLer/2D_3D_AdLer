@@ -9,7 +9,7 @@ import HelpDeskButton from "../../../../../Core/Presentation/React/GeneralCompon
 const viewModel = new HelpDeskButtonViewModel();
 const controllerMock = mock<IHelpDeskButtonController>();
 describe("HelpDeskButtonView", () => {
-  //ANF-ID: [ELG00012]
+  //ANF-ID: [ELG0012]
   test("should render", () => {
     useBuilderMock([viewModel, controllerMock]);
     render(<HelpDeskButton />);

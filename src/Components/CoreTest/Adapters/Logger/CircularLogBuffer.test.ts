@@ -6,7 +6,7 @@ describe("CircularLogBuffer", () => {
   beforeEach(() => {
     systemUnderTest = new CircularLogBuffer();
   });
-  //ANF-ID: [ELG00013]
+  //ANF-ID: [ELG0013]
   test("WriteLog writes message into buffer list", () => {
     const message = "test message";
     systemUnderTest.writeLog(message);
@@ -18,7 +18,7 @@ describe("CircularLogBuffer", () => {
     systemUnderTest.writeLog(message);
     expect(systemUnderTest.isEmpty()).toBe(false);
   });
-  //ANF-ID: [ELG00013]
+  //ANF-ID: [ELG0013]
   test("writing 501 logs overwrites the first log (implicitly tests for buffersize of 500)", () => {
     const message = "test message";
     for (let i = 0; i < 501; i++) {
