@@ -51,7 +51,7 @@ describe("StandInDecorationView", () => {
     expect(systemUnderTest["scenePresenter"]).toBeDefined();
   });
 
-  //Anf-ID: [ELG0026]
+  //ANF-ID: [ELG0026]
   test("async setup calls scene presenter to load model", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
