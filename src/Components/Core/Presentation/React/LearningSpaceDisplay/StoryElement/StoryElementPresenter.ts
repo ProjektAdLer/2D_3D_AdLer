@@ -70,6 +70,5 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
     if (learningSpaceTO.currentScore >= learningSpaceTO.requiredScore) {
       this.viewModel.outroUnlocked.Value = true;
     }
-    console.log(this.viewModel);
   }
 }
