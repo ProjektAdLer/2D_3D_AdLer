@@ -64,7 +64,7 @@ describe("BreakTimeNotification", () => {
     expect(mockController.closeBreakNotification).toHaveBeenCalledTimes(1);
   });
 
-  // ANF-ID: [EKJ0005, EKJ0006]
+  // ANF-ID: [EKJ0004, EKJ0005, EKJ0006]
   test("click on close button calls closedBreakNotification on controller", () => {
     useBuilderMock([viewModel, mockController]);
     viewModel.showModal.Value = true;
