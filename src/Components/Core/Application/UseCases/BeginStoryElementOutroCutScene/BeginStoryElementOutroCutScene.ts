@@ -72,6 +72,11 @@ export default class BeginStoryElementOutroCutSceneUseCase
       return;
     }
 
+    // only scored learning elements can trigger cutscene
+    if (!scoredLearningElement[0].hasScored) {
+      return;
+    }
+
     const spaceScore = this.calculateLearningSpaceScoreUseCase.internalExecute({
       spaceID: storyElementsInSpace[0].spaceID,
       worldID: storyElementsInSpace[0].worldID,

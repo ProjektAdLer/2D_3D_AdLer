@@ -188,7 +188,7 @@ describe("ScoreAdaptivityElementUseCase", () => {
       spaceID: 24,
     });
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
-      { parentWorldID: 42, id: 42 },
+      { parentWorldID: 42, id: 42, hasScored: false },
     ]);
 
     systemUnderTest.internalExecute(42);
@@ -196,5 +196,24 @@ describe("ScoreAdaptivityElementUseCase", () => {
     expect(
       beginStoryElementOutroCutSceneUseCaseMock.execute
     ).toHaveBeenCalledWith({ scoredLearningElementID: 42 });
+  });
+
+  test("internalExecute doesnt calls beginStoryElementOutroCutSceneUseCase when element was already scored", () => {
+    const userEntity = mock<UserDataEntity>();
+    userEntity.isLoggedIn = true;
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userEntity]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 42,
+      spaceID: 24,
+    });
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      { parentWorldID: 42, id: 42, hasScored: true },
+    ]);
+
+    systemUnderTest.internalExecute(42);
+
+    expect(
+      beginStoryElementOutroCutSceneUseCaseMock.execute
+    ).not.toHaveBeenCalled();
   });
 });

@@ -106,7 +106,7 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
       {} as StoryElementTO,
     ]);
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
-      { value: 1 } as LearningElementEntity,
+      { value: 1, hasScored: true } as LearningElementEntity,
     ]);
     calculateLearningSpaceScoreUseCaseMock.internalExecute.mockReturnValueOnce({
       currentScore: 1,
@@ -118,13 +118,30 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
     expect(loadStoryElementUseCaseMock.execute).toBeCalledTimes(1);
   });
 
+  test("does not call loadStoryElementUseCase when element has not been scored", () => {
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      {} as StoryElementTO,
+    ]);
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      { value: 1, hasScored: false } as LearningElementEntity,
+    ]);
+    calculateLearningSpaceScoreUseCaseMock.internalExecute.mockReturnValueOnce({
+      currentScore: 1,
+      requiredScore: 1,
+    } as LearningSpaceScoreTO);
+
+    systemUnderTest.execute({ scoredLearningElementID: 0 });
+
+    expect(loadStoryElementUseCaseMock.execute).not.toHaveBeenCalled();
+  });
+
   //ANF-ID: [EWE0042]
   test("calls worldPort.onStoryElementCutSceneTriggered when requiredScore was just exceeded", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
       {} as StoryElementTO,
     ]);
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
-      { value: 1 } as LearningElementEntity,
+      { value: 1, hasScored: true } as LearningElementEntity,
     ]);
     calculateLearningSpaceScoreUseCaseMock.internalExecute.mockReturnValueOnce({
       currentScore: 1,

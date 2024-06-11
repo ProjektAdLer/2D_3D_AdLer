@@ -31,8 +31,6 @@ userEntityMock.userToken = "test";
 userEntityMock.username = "test";
 const spaceEntityMock = new LearningSpaceEntity();
 spaceEntityMock.id = 1;
-const elementEntityMock = new LearningElementEntity();
-elementEntityMock.id = 1;
 
 const setupEntityContainerMock = (
   userEntityMock: UserDataEntity[],
@@ -84,6 +82,7 @@ const executeAsyncParams = {
 
 describe("ScoreH5PLearningElementUseCase", () => {
   let systemUnderTest: ScoreH5PLearningElementUseCase;
+  let elementEntityMock = new LearningElementEntity();
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -115,6 +114,8 @@ describe("ScoreH5PLearningElementUseCase", () => {
     systemUnderTest = CoreDIContainer.get(
       USECASE_TYPES.IScoreH5PLearningElementUseCase
     );
+    elementEntityMock.id = 1;
+    elementEntityMock.hasScored = false;
   });
 
   afterAll(() => {
@@ -194,6 +195,30 @@ describe("ScoreH5PLearningElementUseCase", () => {
       LearningSpaceEntity,
       expect.any(Function)
     );
+  });
+
+  test("executeAsync doesnt call calculateSpaceScoreUseCase if element has been scored", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
+    elementEntityMock.hasScored = true;
+    setupEntityContainerMock(
+      [userEntityMock],
+      [elementEntityMock],
+      [spaceEntityMock]
+    );
+    backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
+
+    try {
+      await systemUnderTest.executeAsync(executeAsyncParams);
+    } catch (e) {
+      console.log(e);
+    }
+
+    expect(
+      calculateSpaceScoreUseCaseMock.internalExecute
+    ).not.toHaveBeenCalled();
   });
 
   test("executeAsync should call calculateSpaceScoreUseCase", async () => {

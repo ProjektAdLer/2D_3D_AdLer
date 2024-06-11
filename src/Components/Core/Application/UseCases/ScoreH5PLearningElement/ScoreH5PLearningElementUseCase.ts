@@ -100,24 +100,27 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
         return this.rejectWithWarning("Space with given element not found!");
       }
 
-      element.hasScored = true;
+      // prevents calling usecases and ports multiple times
+      if (!element.hasScored) {
+        element.hasScored = true;
 
-      const newWorldScore = this.calculateWorldScoreUseCase.internalExecute({
-        worldID: userLocation.worldID,
-      });
-      const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
-        worldID: userLocation.worldID,
-        spaceID: userLocation.spaceID,
-      });
+        const newWorldScore = this.calculateWorldScoreUseCase.internalExecute({
+          worldID: userLocation.worldID,
+        });
+        const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
+          worldID: userLocation.worldID,
+          spaceID: userLocation.spaceID,
+        });
 
-      // trigger cutscene
-      this.beginStoryElementOutroCutSceneUseCase.execute({
-        scoredLearningElementID: data.elementID,
-      });
+        // trigger cutscene
+        this.beginStoryElementOutroCutSceneUseCase.execute({
+          scoredLearningElementID: data.elementID,
+        });
 
-      this.worldPort.onLearningElementScored(true, data.elementID);
-      this.worldPort.onLearningSpaceScored(newSpaceScore);
-      this.worldPort.onLearningWorldScored(newWorldScore);
+        this.worldPort.onLearningElementScored(true, data.elementID);
+        this.worldPort.onLearningSpaceScored(newSpaceScore);
+        this.worldPort.onLearningWorldScored(newWorldScore);
+      }
     }
 
     return Promise.resolve(scoredSuccessful);

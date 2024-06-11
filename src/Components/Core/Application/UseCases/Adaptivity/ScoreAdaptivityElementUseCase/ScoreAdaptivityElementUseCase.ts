@@ -64,6 +64,10 @@ export default class ScoreAdaptivityElementUseCase
       return;
     }
 
+    if (elements[0].hasScored === true) {
+      return;
+    }
+
     elements[0].hasScored = true;
 
     const newWorldScore = this.calculateWorldScoreUseCase.internalExecute({
