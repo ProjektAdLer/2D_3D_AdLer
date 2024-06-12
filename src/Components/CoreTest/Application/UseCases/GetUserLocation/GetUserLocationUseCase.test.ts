@@ -46,6 +46,7 @@ describe("SetUserLocationUseCase", () => {
     expect(() => systemUnderTest.execute()).toThrowError();
   });
 
+  // ANF-ID: [ELG0009]
   test("throws error when world id is not set on the user entity", () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       {
