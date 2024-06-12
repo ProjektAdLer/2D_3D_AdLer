@@ -56,6 +56,7 @@ describe("CharacterAnimator", () => {
     CoreDIContainer.restore();
   });
 
+  // ANF-ID: [EZZ0018]
   test("transition applies given action to state machine", () => {
     const applyActionMock = jest.spyOn(StateMachine.prototype, "applyAction");
 
@@ -69,6 +70,7 @@ describe("CharacterAnimator", () => {
     applyActionMock.mockRestore();
   });
 
+  // ANF-ID: [EZZ0018]
   test("setup sets idle animation weight to 1 and plays animation", () => {
     expect(mockIdleAnimation.play).toHaveBeenCalledTimes(1);
     expect(mockIdleAnimation.setWeightForAllAnimatables).toHaveBeenCalledTimes(
@@ -79,6 +81,7 @@ describe("CharacterAnimator", () => {
     );
   });
 
+  // ANF-ID: [EZZ0018]
   test("setup sets walk animation weight to 0 and plays animation", () => {
     expect(mockWalkAnimation.play).toHaveBeenCalledTimes(1);
     expect(mockWalkAnimation.setWeightForAllAnimatables).toHaveBeenCalledTimes(
@@ -89,6 +92,17 @@ describe("CharacterAnimator", () => {
     );
   });
 
+  // ANF-ID: [EZZ0018]
+  test("setup sets interaction animation weight to 0", () => {
+    expect(
+      mockInteractionAnimation.setWeightForAllAnimatables
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      mockInteractionAnimation.setWeightForAllAnimatables
+    ).toHaveBeenCalledWith(0);
+  });
+
+  // ANF-ID: [EZZ0018]
   test("rotateCharacter rotates character according to its velocity", () => {
     systemUnderTest["rotateCharacter"](1);
 
@@ -119,6 +133,7 @@ describe("CharacterAnimator", () => {
     ).toHaveBeenCalledTimes(1);
   });
 
+  // ANF-ID: [EZZ0018]
   test("onBeforeAnimationTransitionObserver sets from animation weight to 0 and to animation weigth to 1 when transition is done", () => {
     const fromAnimation = mock<AnimationGroup>();
     const toAnimation = mock<AnimationGroup>();
@@ -135,6 +150,7 @@ describe("CharacterAnimator", () => {
     expect(toAnimation.setWeightForAllAnimatables).toHaveBeenCalledWith(1);
   });
 
+  // ANF-ID: [EZZ0018]
   test("onBeforeAnimationTransitionObserver sets from animation weight to 1-increment and to animation weigth to increment for one step of the transition", () => {
     const fromAnimation = mock<AnimationGroup>();
     const toAnimation = mock<AnimationGroup>();
@@ -269,7 +285,8 @@ describe("CharacterAnimator", () => {
     ).not.toThrow();
   });
 
-  test("setWalkingAnimationSpeed sets the speedRatio of the walk animation to 1 (for velocity vector [2,0,0]) if the current state is walking", () => {
+  // ANF-ID: [EZZ0018]
+  test("setWalkingAnimationSpeed sets the speedRatio of the walk animation to given absolue velocity", () => {
     systemUnderTest["stateMachine"]["currentState"] =
       CharacterAnimationStates.Walking;
     mockWalkAnimation.speedRatio = 0;
@@ -279,14 +296,14 @@ describe("CharacterAnimator", () => {
     expect(mockWalkAnimation.speedRatio).toEqual(1);
   });
 
-  test("setWalkingAnimationSpeed doesn't set the speedRation to less than 0.5", () => {
+  // ANF-ID: [EZZ0018]
+  test("setWalkingAnimationSpeed doesn't set the speedRation to less than 0.1", () => {
     systemUnderTest["stateMachine"]["currentState"] =
       CharacterAnimationStates.Walking;
-    systemUnderTest["getCharacterVelocity"] = () => new Vector3(0.5, 0, 0);
     mockWalkAnimation.speedRatio = 0;
 
-    systemUnderTest["setWalkingAnimationSpeed"](0.5);
+    systemUnderTest["setWalkingAnimationSpeed"](0.02);
 
-    expect(mockWalkAnimation.speedRatio).toEqual(0.5);
+    expect(mockWalkAnimation.speedRatio).toEqual(0.1);
   });
 });
