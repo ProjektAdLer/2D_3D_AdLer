@@ -243,6 +243,7 @@ describe("StoryNPCView", () => {
       );
     });
 
+    // ANF-ID: [EZZ0018]
     test("createCharacterAnimator creates and sets up a new CharacterAnimator ", () => {
       const mockIdleAnimation = mock<AnimationGroup>();
       systemUnderTest["idleAnimation"] = mockIdleAnimation;

@@ -88,6 +88,7 @@ describe("AvatarView", () => {
   });
 
   describe("setup", () => {
+    // ANF-ID: [EZZ0018]
     test("asyncSetup creates character animator", async () => {
       scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
         new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
