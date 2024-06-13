@@ -39,6 +39,7 @@ import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType
 import StoryElementTO from "../../../../Core/Application/DataTransferObjects/StoryElementTO";
 import BackendStoryTO from "../../../../Core/Application/DataTransferObjects/BackendStoryTO";
 import { LearningElementTypes } from "../../../../Core/Domain/Types/LearningElementTypes";
+import EntityContainer from "../../../../Core/Domain/EntityContainer/EntityContainer";
 
 const backendMock = mock<IBackendPort>();
 const worldPortMock = mock<ILearningWorldPort>();
@@ -796,5 +797,104 @@ describe("LoadLearningWorldUseCase", () => {
 
     expect(result[0]!.id).toBe(42);
     expect(isValidLearningElementModelType(result[0]!.model)).toBe(true);
+  });
+
+  test("createLearningElementEntites creates no adaptivity entity if element is of incorrect transport object type", async () => {
+    entityContainerMock.createEntity.mockImplementation((entity) => entity);
+
+    const learningElementTO: BackendLearningElementTO = {
+      id: 42,
+      name: "testElement",
+      value: 1,
+      type: "h5p",
+      description: "",
+      model:
+        LearningElementModelTypeEnums.ImageElementModelTypes.Cardboardcutout,
+      goals: [""],
+    };
+    const worldStatusTO: LearningWorldStatusTO = {
+      worldID: 1,
+      elements: [
+        {
+          elementID: 42,
+          hasScored: false,
+        },
+      ],
+    };
+
+    systemUnderTest["createLearningElementEntities"](
+      1,
+      [learningElementTO],
+      worldStatusTO,
+      LearningSpaceThemeType.Campus
+    );
+    expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(1);
+  });
+
+  // ANF-ID: [EWE0001]
+  test("createLearningElementEntites creates adaptivity entity if element is of correct transport object type", async () => {
+    entityContainerMock.createEntity.mockImplementation((entity) => entity);
+
+    const worldStatusTO: LearningWorldStatusTO = {
+      worldID: 1,
+      elements: [
+        {
+          elementID: 42,
+          hasScored: false,
+        },
+      ],
+    };
+
+    systemUnderTest["createLearningElementEntities"](
+      1,
+      [backendAdaptivityElementTOMock],
+      worldStatusTO,
+      LearningSpaceThemeType.Campus
+    );
+    expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(2);
+  });
+
+  // ANF-ID: [EWE0001]
+  test("createAdaptivityElementEntityd creates a adaptivity entity with correctly assigned values", () => {
+    entityContainerMock.createEntity.mockImplementation((entity) => {
+      return entity;
+    });
+    const learningElementEntity = {
+      id: 1,
+      value: 2,
+      hasScored: true,
+      name: "testName",
+      description: "testDescription",
+      goals: [],
+      type: "h5p",
+      model:
+        LearningElementModelTypeEnums.ImageElementModelTypes.Cardboardcutout,
+      parentWorldID: 5,
+    } as LearningElementEntity;
+
+    const adapivityTO = {
+      id: 4,
+      elementName: "name",
+      introText: "introText",
+      model: learningElementEntity.model,
+      tasks: [],
+    } as AdaptivityElementDataTO;
+
+    systemUnderTest["createAdaptivityElementEntity"](
+      learningElementEntity,
+      adapivityTO
+    );
+
+    expect(entityContainerMock.createEntity).toHaveBeenCalledWith(
+      {
+        element: learningElementEntity,
+        introText: adapivityTO.introText,
+        tasks: [],
+        elementName: adapivityTO.elementName,
+        id: adapivityTO.id,
+        model: adapivityTO.model,
+      },
+      AdaptivityElementEntity
+    );
   });
 });
