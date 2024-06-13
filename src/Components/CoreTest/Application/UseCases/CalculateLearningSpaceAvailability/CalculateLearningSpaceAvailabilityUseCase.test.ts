@@ -98,6 +98,7 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
     });
   });
 
+  //ANF-ID: [EZZ0013]
   test("internalExecute throws an error if the space is not found", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 

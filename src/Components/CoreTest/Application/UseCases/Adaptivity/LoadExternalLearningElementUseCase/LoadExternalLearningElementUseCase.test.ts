@@ -51,6 +51,7 @@ describe("LoadExternalLearningElementUseCase", () => {
     CoreDIContainer.restore();
   });
 
+  //ANF-ID: [EZZ0013]
   test("should throw, if user is not in LearningSpace", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: undefined,

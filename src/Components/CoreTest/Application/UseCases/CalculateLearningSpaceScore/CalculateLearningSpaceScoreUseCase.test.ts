@@ -121,6 +121,7 @@ describe("Calculate Learning Space Score UseCase", () => {
     entityContainerMock.filterEntitiesOfType.mockReset();
   });
 
+  //ANF-ID: [EZZ0013]
   test("calculateLearningSpaceScore should throw an error if the space is not found", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 

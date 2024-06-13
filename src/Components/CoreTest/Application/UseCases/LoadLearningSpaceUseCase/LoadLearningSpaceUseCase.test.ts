@@ -141,6 +141,7 @@ describe("LoadSpaceUseCase", () => {
     );
   });
 
+  //ANF-ID: [EZZ0013]
   test("should throw error when space is not found", async () => {
     const worldEntity: LearningWorldEntity = new LearningWorldEntity();
     worldEntity.spaces = [

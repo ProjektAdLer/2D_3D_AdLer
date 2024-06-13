@@ -71,6 +71,7 @@ describe("LoadAdaptivityElementUseCase", () => {
     );
   });
 
+  //ANF-ID: [EZZ0013]
   test("should throw, if user is not in learningspace", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: undefined,

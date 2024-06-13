@@ -52,6 +52,8 @@ describe("GetLearningSpacePrecursorAndSuccessorUseCase", () => {
       "UserLocation is empty or incomplete!"
     );
   });
+
+  //ANF-ID: [EZZ0013]
   test("throws error when no space entity is present on the container", () => {
     let worldID = 1;
     getUserLocationUseCaseMock.execute.mockReturnValue({ worldID } as any);

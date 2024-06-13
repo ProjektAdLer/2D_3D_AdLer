@@ -60,6 +60,7 @@ describe("DisplayLearningElementUseCase", () => {
     systemUnderTest = CoreDIContainer.resolve(DisplayLearningElementUseCase);
   });
 
+  //ANF-ID: [EZZ0013]
   test("should throw, if user is not in space", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: undefined,
