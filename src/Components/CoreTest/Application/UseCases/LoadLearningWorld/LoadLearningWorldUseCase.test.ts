@@ -574,6 +574,7 @@ describe("LoadLearningWorldUseCase", () => {
     expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(4);
   });
 
+  // ANF-ID: [EZZ0006]
   test("creates combined intro and outro story element", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValue(
@@ -620,6 +621,7 @@ describe("LoadLearningWorldUseCase", () => {
     expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(5);
   });
 
+  // ANF-ID: [EZZ0006]
   test("creates seperate intro and outro story elements", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValue(
@@ -668,6 +670,94 @@ describe("LoadLearningWorldUseCase", () => {
 
     await systemUnderTest.executeAsync({ worldID: 42 });
     expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(6);
+  });
+
+  // ANF-ID: [EZZ0006]
+  test("applies model to story element if none is assigned in ATF", async () => {
+    // mock user data response
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
+      mockedGetEntitiesOfTypeUserDataReturnValue
+    );
+
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
+
+    backendMock.getWorldData.mockResolvedValue({
+      worldName: "TestWorld",
+      goals: ["TestGoal"],
+      description: "TestDescription",
+      evaluationLink: "TestLink",
+      spaces: [
+        {
+          description: "TestDescription",
+          goals: ["TestGoals"],
+          requirements: "",
+          id: 1,
+          name: "TestSpace",
+          requiredScore: 0,
+          elements: [backendAdaptivityElementTOMock],
+          template: LearningSpaceTemplateType.L,
+          templateStyle: LearningSpaceThemeType.Arcade,
+          introStory: {
+            storyTexts: ["hello"],
+            elementModel: undefined,
+          } as unknown as BackendStoryTO,
+          outroStory: {
+            storyTexts: ["hello"],
+            elementModel:
+              LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+          } as BackendStoryTO,
+        },
+      ],
+      externalElements: [],
+    });
+
+    backendMock.getWorldStatus.mockResolvedValue({
+      worldID: 42,
+      elements: [{}],
+    } as LearningWorldStatusTO);
+
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<LearningElementEntity>()
+    );
+
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<StoryElementEntity>()
+    );
+
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<StoryElementEntity>()
+    );
+
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<LearningSpaceEntity>()
+    );
+
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<AdaptivityElementEntity>()
+    );
+
+    // mock world response
+    const mockedWorldEntity = new LearningWorldEntity();
+    mockedWorldEntity.name = minimalAdaptivityBackendWorldTO.worldName;
+    mockedWorldEntity.goals = minimalAdaptivityBackendWorldTO.goals;
+    mockedWorldEntity.spaces = [];
+    mockedWorldEntity.completionModalShown = true;
+
+    entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
+
+    await systemUnderTest.executeAsync({ worldID: 42 });
+
+    expect(entityContainerMock.createEntity.mock.calls).toContainEqual([
+      {
+        worldID: expect.any(Number),
+        spaceID: expect.any(Number),
+        introStoryTexts: expect.any(Array),
+        modelType:
+          LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC,
+        storyType: StoryElementType.Intro,
+      },
+      StoryElementEntity,
+    ]);
   });
 
   test("creates external element", async () => {
