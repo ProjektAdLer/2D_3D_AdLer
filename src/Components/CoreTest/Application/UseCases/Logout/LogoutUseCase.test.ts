@@ -36,4 +36,12 @@ describe("LogoutUseCase", () => {
       userEntityMock
     );
   });
+
+  test("returns without deleting user entity, if user is not logged in", () => {
+    entityContainerMock.getEntitiesOfType.mockReturnValue([]);
+
+    systemUnderTest.execute();
+
+    expect(entityContainerMock.deleteEntity).not.toHaveBeenCalled();
+  });
 });
