@@ -35,8 +35,10 @@ export default class LoadUserLearningWorldsInfoUseCase
     const initialUserWorlds =
       await this.loadInitialWorldsInfo.internalExecuteAsync();
     this.worldPort.onUserInitialLearningWorldsInfoLoaded(initialUserWorlds);
+
     const userWorlds: UserLearningWorldsInfoTO = { worldInfo: [] };
     let loadWorldPromise: Promise<void>[] = [];
+
     initialUserWorlds.worldInfo.forEach((world) => {
       loadWorldPromise.push(
         this.loadWorld
@@ -46,6 +48,7 @@ export default class LoadUserLearningWorldsInfoUseCase
               LearningWorldEntity,
               (WorldEntity) => WorldEntity.id === world.worldID
             )[0];
+
             let worldCompleted = true;
             worldEntity.spaces.forEach((space) => {
               let spaceScores = this.calculateSpaceScore.internalExecute({
@@ -57,6 +60,7 @@ export default class LoadUserLearningWorldsInfoUseCase
                 worldCompleted = false;
               }
             });
+
             userWorlds.worldInfo.push({
               worldID: worldEntity.id,
               worldName: worldEntity.name,
@@ -66,11 +70,11 @@ export default class LoadUserLearningWorldsInfoUseCase
       );
     });
     await Promise.allSettled(loadWorldPromise);
+
     this.logger.log(
       LogLevelTypes.TRACE,
       "LoadUserLearningWorldsUseCase: Loading user learning worlds"
     );
-
     this.worldPort.onUserLearningWorldsInfoLoaded(userWorlds);
     return Promise.resolve();
   }
