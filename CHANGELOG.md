@@ -34,6 +34,13 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 </details>
 
+## Version 2.2.1 - 14.06.24
+
+### Fixed
+
+- fixed multiple outro story triggers when answering adaptivity element questions
+- fixed incorrectly displayed adaptivity hint
+
 ## Version 2.2.0 - 06.03.2024
 
 ### Added
