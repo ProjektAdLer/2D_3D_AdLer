@@ -6,6 +6,7 @@
 
 | Engine Version | [Backend Version][https://github.com/projektadler/adlerbackend] |
 | -------------- | --------------------------------------------------------------- |
+| 2.2.1          | 2.1.0                                                           |
 | 2.2.0          | 2.1.0                                                           |
 | 2.1.0          | 2.0.0                                                           |
 
