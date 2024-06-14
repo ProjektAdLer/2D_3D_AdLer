@@ -14,9 +14,6 @@ import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponent
 import greenSwosh from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
-import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { useTranslation } from "react-i18next";
 
 export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
