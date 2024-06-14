@@ -12,11 +12,10 @@ import PORT_TYPES from "../../../DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../DependencyInjection/UseCases/USECASE_TYPES";
 import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
 import LearningWorldTO from "../../DataTransferObjects/LearningWorldTO";
-import { Lock, Semaphore } from "src/Lib/Semaphore";
+import { Semaphore } from "src/Lib/Semaphore";
 import LearningWorldStatusTO from "../../DataTransferObjects/LearningWorldStatusTO";
 import type ISetUserLocationUseCase from "../SetUserLocation/ISetUserLocationUseCase";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
-import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import BackendWorldTO from "../../DataTransferObjects/BackendWorldTO";
 import {
   BackendAdaptivityElementTO,

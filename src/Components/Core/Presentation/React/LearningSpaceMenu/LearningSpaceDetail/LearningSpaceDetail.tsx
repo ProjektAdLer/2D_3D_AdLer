@@ -17,7 +17,6 @@ import tailwindMerge from "../../../Utils/TailwindMerge";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
-import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import { useTranslation } from "react-i18next";
 
 export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
@@ -25,7 +24,6 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
     LearningSpaceDetailViewModel,
     LearningSpaceDetailController
   >(BUILDER_TYPES.ILearningSpaceDetailBuilder);
-  const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
   const [name] = useObservable<string>(viewModel.name);
   const [description] = useObservable<string>(viewModel.description);
