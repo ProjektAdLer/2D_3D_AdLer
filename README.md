@@ -50,11 +50,3 @@ docker run 2d3d
 Einzeiler mit API_URL und Port: ` docker run -e API_URL=https://demo.api.projekt-adler.eu/api -p 8043:80 --rm $(docker build -q -f Dockerfile-twostage .)`
 
 Unter Windows (und wsl) muss die Datei `Dockerfile-twostage` genutzt werden, da Windows falsche Lineendings setzt, wodurch der Container nicht startet. Die twostage variante enthält einen Fix hierfür.
-
-## Abhängigkeiten
-
-| 3D Version | [Backend Version](https://github.com/ProjektAdLer/AdLerBackend) |
-| ---------- | --------------------------------------------------------------- |
-| 2.0.1      | 2.0.0                                                           |
-
-Zu jeden neuen Release wird diese Tabelle Aktuallisiert.
