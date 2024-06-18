@@ -70,6 +70,7 @@ describe("DoorView", () => {
     ]);
   });
 
+  //ANF-ID: [ELG0033]
   test("constructor does not subscribe to viewModel.isOpen when isOpen is true, calls animation instead", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
@@ -136,6 +137,7 @@ describe("DoorView", () => {
     );
   });
 
+  // ANF-ID: [ELG0033]
   test("asyncSetup/setupAnimation creates a new animation and applies it to the first mesh", async () => {
     const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
     scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
@@ -183,6 +185,7 @@ describe("DoorView", () => {
     );
   });
 
+  // ANF-ID: [ELG0033]
   test("onIsOpenChanged calls beginAnimation on the scene if viewModel.isOpen is true", async () => {
     const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
     scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
