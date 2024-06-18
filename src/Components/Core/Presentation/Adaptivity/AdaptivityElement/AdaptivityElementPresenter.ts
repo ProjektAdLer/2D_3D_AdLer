@@ -214,7 +214,7 @@ export default class AdaptivityElementPresenter
   private mapAdaptivityTriggers(
     triggers: AdaptivityElementTriggerTO[]
   ): AdaptivityHint[] {
-    if (!triggers) return [];
+    if (!triggers.length) return [];
 
     return triggers.map((trigger) => {
       return {

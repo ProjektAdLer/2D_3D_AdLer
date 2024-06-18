@@ -1,3 +1,9 @@
+import { AdaptivityElementTriggerConditionTypes } from "./../../../../Core/Domain/Types/Adaptivity/AdaptivityElementTriggerConditionTypes";
+import { AdaptivityElementTriggerTypes } from "./../../../../Core/Domain/Types/Adaptivity/AdaptivityElementTriggerTypes";
+import {
+  AdaptivityHint,
+  AdaptivityTask,
+} from "./../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
 import AdaptivityElementProgressTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import { AdaptivityElementQuestionDifficultyTypes } from "../../../../Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 import { AdaptivityElementQuestionTypes } from "../../../../Core/Domain/Types/Adaptivity/AdaptivityElementQuestionTypes";
@@ -6,6 +12,11 @@ import AdaptivityElementViewModel, {
   AdaptivityElementContent,
 } from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
 import { AdaptivityElementStatusTypes } from "../../../../Core/Domain/Types/Adaptivity/AdaptivityElementStatusTypes";
+import { Observable } from "@babylonjs/core";
+import AdaptivityElementHintTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
+import { AdaptivityElementActionTypes } from "../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
+import AdaptivityElementTriggerTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTriggerTO";
+import AdaptivityElementActionTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementActionTO";
 
 describe("AdaptivityElementPresenter", () => {
   let systemUnderTest: AdaptivityElementPresenter;
@@ -96,35 +107,121 @@ describe("AdaptivityElementPresenter", () => {
     }
   );
 
-  // TODO: complete this test
-  test.skip.each([
-    [
-      AdaptivityElementStatusTypes.Correct,
-      AdaptivityElementStatusTypes.Correct,
-      true,
-      true,
-    ],
-    [
-      AdaptivityElementStatusTypes.Correct,
-      AdaptivityElementStatusTypes.Incorrect,
-      true,
-      false,
-    ],
-    [
-      AdaptivityElementStatusTypes.Incorrect,
-      AdaptivityElementStatusTypes.Correct,
-      false,
-      true,
-    ],
-    [
-      AdaptivityElementStatusTypes.Incorrect,
-      AdaptivityElementStatusTypes.Incorrect,
-      false,
-      false,
-    ],
+  test.each([
+    [true, AdaptivityElementStatusTypes.Correct],
+    [false, AdaptivityElementStatusTypes.Incorrect],
+    [null, AdaptivityElementStatusTypes.NotAttempted],
   ])(
-    `onAdaptivityElementAnswerEvaluated sets isCompleted to %s if the question status is %s`,
-    (testIsCompleted, testQuestionStatus) => {}
+    "onAdaptivityElementAnswerEvaluated sets isCompleted of task to %s if the task status is %s",
+    (testIsCompleted, testTaskStatus) => {
+      const adaptivityElementProgressUpdateTO = {
+        isCompleted: undefined,
+        hasbeenCompleted: undefined,
+        taskInfo: {
+          taskId: 0,
+          taskStatus: testTaskStatus,
+        },
+        elementInfo: {
+          elementId: 0,
+          success: false,
+        },
+        questionInfo: {
+          questionId: 1,
+          questionStatus: undefined,
+        },
+      };
+      const question = {
+        questionID: 1,
+        questionText: "",
+        questionAnswers: [],
+        isRequired: false,
+        isCompleted: false,
+        difficulty: undefined,
+        isMultipleChoice: false,
+        hints: [],
+      };
+      const task = {
+        taskID: 0,
+        taskTitle: "TestTask",
+        questions: [question],
+        isCompleted: false,
+        isRequired: false,
+        hasBeenCompleted: false,
+        requiredDifficulty: undefined,
+      };
+      const contentData = {
+        elementName: "TestElement",
+        introText: "",
+        tasks: [task],
+      };
+      viewModel.contentData.Value = contentData;
+
+      systemUnderTest.onAdaptivityElementAnswerEvaluated(
+        adaptivityElementProgressUpdateTO
+      );
+      expect(
+        systemUnderTest["viewModel"].contentData.Value.tasks[0].isCompleted
+      ).toBe(testIsCompleted);
+    }
+  );
+
+  test.each([
+    [true, AdaptivityElementStatusTypes.Correct],
+    [false, AdaptivityElementStatusTypes.Incorrect],
+    [null, AdaptivityElementStatusTypes.NotAttempted],
+  ])(
+    "onAdaptivityElementAnswerEvaluated sets isCompleted of question to %s if the question status is %s",
+    (testIsCompleted, testQuestionStatus) => {
+      const adaptivityElementProgressUpdateTO = {
+        isCompleted: undefined,
+        hasbeenCompleted: undefined,
+        taskInfo: {
+          taskId: 0,
+          taskStatus: AdaptivityElementStatusTypes.Correct,
+        },
+        elementInfo: {
+          elementId: 0,
+          success: false,
+        },
+        questionInfo: {
+          questionId: 1,
+          questionStatus: testQuestionStatus,
+        },
+      };
+      const question = {
+        questionID: 1,
+        questionText: "",
+        questionAnswers: [],
+        isRequired: false,
+        isCompleted: false,
+        difficulty: undefined,
+        isMultipleChoice: false,
+        hints: [],
+      };
+      const task = {
+        taskID: 0,
+        taskTitle: "TestTask",
+        questions: [question],
+        isCompleted: false,
+        isRequired: false,
+        hasBeenCompleted: false,
+        requiredDifficulty: undefined,
+      };
+      const contentData = {
+        elementName: "TestElement",
+        introText: "",
+        tasks: [task],
+      };
+      viewModel.contentData.Value = contentData;
+
+      systemUnderTest.onAdaptivityElementAnswerEvaluated(
+        adaptivityElementProgressUpdateTO
+      );
+      expect(
+        systemUnderTest["viewModel"].contentData.Value.tasks[0].questions[0]
+          .isCompleted
+      ).toBe(testIsCompleted);
+    }
   );
 
   test("onAdaptivityElementAnswerEvaluated resets isSelected for all answers of the current question", () => {
@@ -231,6 +328,56 @@ describe("AdaptivityElementPresenter", () => {
     });
 
     expect(viewModel.showFeedback.Value).toBe(true);
+  });
+
+  test("onAdaptivityElementUserHintInformed sets selectedHint in viewmodel", () => {
+    const adaptivityElementHintTO: AdaptivityElementHintTO = {
+      hintID: 0,
+      showOnIsWrong: true,
+      hintAction: {
+        hintActionType: AdaptivityElementActionTypes.CommentAction,
+        idData: 42,
+        textData: "test",
+      },
+    };
+    systemUnderTest.onAdaptivityElementUserHintInformed!(
+      adaptivityElementHintTO
+    );
+    expect(viewModel.selectedHint.Value).toEqual(adaptivityElementHintTO);
+  });
+
+  test("mapAdaptivityTriggers returns empty if no triggers exist", () => {
+    const testTriggers = [];
+    const result = systemUnderTest["mapAdaptivityTriggers"]([]);
+    expect(result).toStrictEqual([]);
+  });
+
+  test("mapAdaptivityTriggers returns mapped adaptivityhint if triggers exist", () => {
+    const testTriggers: AdaptivityElementTriggerTO[] = [
+      {
+        triggerId: 42,
+        triggerType: AdaptivityElementTriggerTypes.correctness,
+        triggerCondition: AdaptivityElementTriggerConditionTypes.correct,
+        triggerAction: {
+          actionType: AdaptivityElementActionTypes.CommentAction,
+          idData: 0,
+          textData: "test",
+        },
+      },
+    ];
+    const result = systemUnderTest["mapAdaptivityTriggers"](testTriggers);
+    const expectedResult: AdaptivityHint[] = [
+      {
+        hintID: 42,
+        showOnIsWrong: false,
+        hintAction: {
+          hintActionType: AdaptivityElementActionTypes.CommentAction,
+          idData: 0,
+          textData: "test",
+        },
+      },
+    ];
+    expect(result).toStrictEqual(expectedResult);
   });
 
   // ANF-ID: [EWE0012]
