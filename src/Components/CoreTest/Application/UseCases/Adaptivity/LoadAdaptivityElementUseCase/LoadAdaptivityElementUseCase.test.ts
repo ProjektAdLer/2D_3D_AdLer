@@ -71,6 +71,35 @@ describe("LoadAdaptivityElementUseCase", () => {
     );
   });
 
+  test("filterEntitiesOfType should return true when query is correct", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
+
+    const adaptivityElementEntityMock = {
+      element: {
+        id: 0,
+        parentWorldID: 1,
+      } as LearningElementEntity,
+    } as AdaptivityElementEntity;
+    let filterResult;
+    entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
+      (entityType, callback) => {
+        filterResult = callback(
+          adaptivityElementEntityMock as AdaptivityElementEntity
+        );
+        return [adaptivityElementEntityMock];
+      }
+    );
+
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
+
+    systemUnderTest.executeAsync(0);
+
+    expect(filterResult).toBe(true);
+  });
+
   //ANF-ID: [EZZ0013]
   test("should throw, if user is not in learningspace", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
@@ -104,10 +133,12 @@ describe("LoadAdaptivityElementUseCase", () => {
     } as UserLocationTO);
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
+        id: 0,
         element: learningElement,
         introText: "",
         shuffleTask: false,
         tasks: [],
+        parentWorldID: 1,
       } as AdaptivityElementEntity,
     ]);
     let progressTO = {
