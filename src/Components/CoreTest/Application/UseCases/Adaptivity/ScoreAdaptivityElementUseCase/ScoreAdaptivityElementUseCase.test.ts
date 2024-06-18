@@ -13,6 +13,7 @@ import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES
 import UserDataEntity from "../../../../../Core/Domain/Entities/UserDataEntity";
 import { LogLevelTypes } from "../../../../../Core/Domain/Types/LogLevelTypes";
 import IBeginStoryElementOutroCutSceneUseCase from "../../../../../Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
+import LearningElementEntity from "../../../../../Core/Domain/Entities/LearningElementEntity";
 
 const entityContainerMock = mock<IEntityContainer>();
 const loggerMock = mock<ILoggerPort>();
@@ -215,5 +216,32 @@ describe("ScoreAdaptivityElementUseCase", () => {
     expect(
       beginStoryElementOutroCutSceneUseCaseMock.execute
     ).not.toHaveBeenCalled();
+  });
+
+  test("filterEntitiesOfType callback for learning element entity filtering should return true when element is in the same world and id matches", () => {
+    const userEntity = mock<UserDataEntity>();
+    userEntity.isLoggedIn = true;
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userEntity]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 42,
+      spaceID: 24,
+    });
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      { parentWorldID: 42, id: 2, hasScored: false },
+    ]);
+    const learningElementMock = {
+      id: 2,
+      parentWorldID: 42,
+      hasScored: false,
+    };
+    let filterResult;
+    entityContainerMock.filterEntitiesOfType.mockImplementation(
+      (mock, callback) => {
+        filterResult = callback(learningElementMock);
+        return [learningElementMock];
+      }
+    );
+    systemUnderTest.internalExecute(2);
+    expect(filterResult).toBe(true);
   });
 });
