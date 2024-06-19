@@ -25,6 +25,74 @@ const loadLearningWorldUseCaseMock = mock<IInternalLoadLearningWorldUseCase>();
 const calculateSpaceScoreMock =
   mock<IInternalCalculateLearningSpaceScoreUseCase>();
 
+const learningWorldEntity: Partial<LearningWorldEntity> = {
+  name: "worldEntity",
+  id: 1,
+  spaces: [
+    {
+      id: 1,
+      name: "string",
+      elements: [],
+      description: "string",
+      goals: [],
+      requirements: "",
+      requiredScore: 1,
+      template: LearningSpaceTemplateType.None,
+      theme: LearningSpaceThemeType.Suburb,
+      parentWorldID: 1,
+      storyElements: [],
+    },
+  ],
+  goals: [],
+  description: "string",
+  evaluationLink: "string",
+} as Partial<LearningWorldEntity>;
+
+const setupMocks = () => {
+  loadUserInitialLearningWorldsInfoUseCaseMock.internalExecuteAsync.mockResolvedValue(
+    {
+      worldInfo: [{ worldID: 1, worldName: "TestWorld" }],
+    } as UserInitialLearningWorldsInfoTO
+  );
+
+  loadLearningWorldUseCaseMock.internalExecuteAsync.mockResolvedValue({
+    name: "worldTO",
+    spaces: [
+      {
+        id: 2,
+        name: "string",
+        elements: [],
+        description: "string",
+        goals: [],
+        requirementsString: "",
+        requirementsSyntaxTree: null,
+        isAvailable: true,
+        requiredScore: 100000000,
+        currentScore: 0,
+        maxScore: 0,
+        template: LearningSpaceTemplateType.None,
+        theme: LearningSpaceThemeType.Suburb,
+        storyElements: [],
+      },
+    ],
+    goals: [],
+    id: 2,
+    description: "string",
+    evaluationLink: "string",
+    completionModalShown: false,
+  } as LearningWorldTO);
+
+  entityContainerMock.filterEntitiesOfType.mockReturnValue([
+    learningWorldEntity,
+  ]);
+
+  calculateSpaceScoreMock.internalExecute.mockReturnValue({
+    currentScore: 10,
+    maxScore: 30,
+    requiredScore: 20,
+    spaceID: 1,
+  });
+};
 describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
   let systemUnderTest: LoadUserLearningWorldsInfoUseCase;
 
@@ -62,86 +130,7 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
   });
 
   test("calls world port twice, once initially, once with all data", async () => {
-    entityContainerMock.filterEntitiesOfType.mockReturnValue([
-      {
-        name: "worldEntity",
-        id: 1,
-        spaces: [
-          {
-            id: 1,
-            name: "string",
-            elements: [],
-            description: "string",
-            goals: [],
-            requirements: "",
-            requiredScore: 1,
-            template: LearningSpaceTemplateType.None,
-            theme: LearningSpaceThemeType.Suburb,
-            parentWorldID: 1,
-          },
-        ],
-        goals: [],
-        description: "string",
-        evaluationLink: "string",
-      } as Partial<LearningWorldEntity>,
-      {
-        name: "string2",
-        id: 2,
-        spaces: [
-          {
-            id: 2,
-            name: "string",
-            elements: [],
-            description: "string",
-            goals: [],
-            requirements: "",
-            requiredScore: 100000000,
-            template: LearningSpaceTemplateType.None,
-            theme: LearningSpaceThemeType.Suburb,
-            parentWorldID: 1,
-          },
-        ],
-        goals: [],
-        description: "string2",
-        evaluationLink: "string2",
-      } as Partial<LearningWorldEntity>,
-    ]);
-    loadLearningWorldUseCaseMock.internalExecuteAsync.mockResolvedValue({
-      name: "worldTO",
-      spaces: [
-        {
-          id: 2,
-          name: "string",
-          elements: [],
-          description: "string",
-          goals: [],
-          requirementsString: "",
-          requirementsSyntaxTree: null,
-          isAvailable: true,
-          requiredScore: 100000000,
-          currentScore: 0,
-          maxScore: 0,
-          template: LearningSpaceTemplateType.None,
-          theme: LearningSpaceThemeType.Suburb,
-        },
-      ],
-      goals: [],
-      id: 2,
-      description: "string",
-      evaluationLink: "string",
-      completionModalShown: false,
-    } as LearningWorldTO);
-    loadUserInitialLearningWorldsInfoUseCaseMock.internalExecuteAsync.mockResolvedValue(
-      {
-        worldInfo: [{ worldID: 1, worldName: "TestWorld" }],
-      } as UserInitialLearningWorldsInfoTO
-    );
-    calculateSpaceScoreMock.internalExecute.mockReturnValue({
-      currentScore: 10,
-      maxScore: 30,
-      requiredScore: 20,
-      spaceID: 1,
-    });
+    setupMocks();
 
     await systemUnderTest.executeAsync();
 
@@ -151,5 +140,21 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
     expect(worldPortMock.onUserLearningWorldsInfoLoaded).toHaveBeenCalledTimes(
       1
     );
+  });
+
+  test("filterEntitiesOfType callback for learning world entity filtering should return true when ids are matching", async () => {
+    setupMocks();
+
+    let filterResult;
+    entityContainerMock.filterEntitiesOfType.mockImplementation(
+      (entityType, callback) => {
+        filterResult = callback(learningWorldEntity);
+        return [learningWorldEntity];
+      }
+    );
+
+    await systemUnderTest.executeAsync();
+
+    expect(filterResult).toBe(true);
   });
 });

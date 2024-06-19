@@ -31,6 +31,7 @@ export default class LoadUserLearningWorldsInfoUseCase
     @inject(USECASE_TYPES.ILoadLearningWorldUseCase)
     private loadWorld: IInternalLoadLearningWorldUseCase
   ) {}
+
   async executeAsync(): Promise<void> {
     const initialUserWorlds =
       await this.loadInitialWorldsInfo.internalExecuteAsync();
