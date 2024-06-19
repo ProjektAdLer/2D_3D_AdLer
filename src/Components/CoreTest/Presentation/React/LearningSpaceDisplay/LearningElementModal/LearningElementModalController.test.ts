@@ -11,6 +11,7 @@ import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presenta
 
 const scoreElementUseCaseMock = mock<IScoreLearningElementUseCase>();
 const scoreH5PUseCaseMock = mock<IScoreH5PLearningElementUseCase>();
+const bottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
 
 describe("LearningElementModalController", () => {
   let systemUnderTest: LearningElementModalController;
@@ -26,7 +27,7 @@ describe("LearningElementModalController", () => {
     ).toConstantValue(scoreH5PUseCaseMock);
     CoreDIContainer.bind<IBottomTooltipPresenter>(
       PRESENTATION_TYPES.IBottomTooltipPresenter
-    ).toConstantValue(mock());
+    ).toConstantValue(bottomTooltipPresenterMock);
   });
 
   beforeEach(() => {
@@ -98,5 +99,11 @@ describe("LearningElementModalController", () => {
     });
 
     expect(scoreH5PUseCaseMock.executeAsync).not.toHaveBeenCalled();
+  });
+
+  test("showBbottomTooltip should call the presenter", () => {
+    systemUnderTest.showBottomToolTip();
+
+    expect(bottomTooltipPresenterMock.show).toBeCalledTimes(1);
   });
 });
