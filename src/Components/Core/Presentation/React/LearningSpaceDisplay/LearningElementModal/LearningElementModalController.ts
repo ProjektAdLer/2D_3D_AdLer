@@ -60,10 +60,28 @@ export default class LearningElementModalController
       await CoreDIContainer.get<IScoreH5PElementUseCase>(
         USECASE_TYPES.IScoreH5PLearningElementUseCase
       ).executeAsync({
-        //@ts-ignore
+        // @ts-ignore
         xapiData: xapiData,
         elementID: this.viewModel.id.Value,
       });
+    }
+  }
+
+  xAPICompletedListener(t: any): void {
+    if (
+      ("completed" === t.getVerb(undefined) || "answered" === t.getVerb()) &&
+      !t.getVerifiedStatementValue(["context", "contextActivities", "parent"])
+    ) {
+      let n = t.getScore(),
+        r = t.getMaxScore(),
+        i = t.getVerifiedStatementValue([
+          "object",
+          "definition",
+          "extensions",
+          "http://h5p.org/x-api/h5p-local-content-id",
+        ]);
+      // @ts-ignore
+      e.setFinished(i, n, r);
     }
   }
 

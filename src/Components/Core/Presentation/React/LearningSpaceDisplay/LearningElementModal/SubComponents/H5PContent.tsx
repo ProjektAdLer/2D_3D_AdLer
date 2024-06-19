@@ -43,33 +43,10 @@ export default function H5PContent({
 
         await new H5PPlayer(el, options);
 
-        /* istanbul ignore next */
         //@ts-ignore
-        H5P.externalDispatcher.on("xAPI", (event: any) => {
-          controller.h5pEventCalled(event);
-        });
-        //@ts-ignore
-        H5P.xAPICompletedListener = function (t) {
-          if (
-            ("completed" === t.getVerb() || "answered" === t.getVerb()) &&
-            !t.getVerifiedStatementValue([
-              "context",
-              "contextActivities",
-              "parent",
-            ])
-          ) {
-            let n = t.getScore(),
-              r = t.getMaxScore(),
-              i = t.getVerifiedStatementValue([
-                "object",
-                "definition",
-                "extensions",
-                "http://h5p.org/x-api/h5p-local-content-id",
-              ]);
-            //@ts-ignore
-            e.setFinished(i, n, r);
-          }
-        };
+        H5P.externalDispatcher.on("xAPI", controller.h5pEventCalled);
+        // @ts-ignore
+        H5P.xAPICompletedListener = controller.xAPICompletedListener;
       }
     };
     debug();
