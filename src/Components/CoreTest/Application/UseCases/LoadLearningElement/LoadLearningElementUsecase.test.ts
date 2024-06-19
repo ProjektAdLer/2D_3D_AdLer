@@ -143,4 +143,14 @@ describe("LoadLearningElementUseCase", () => {
     // @ts-ignore TS does not know about the mock
     expect(filterReturn).toBe(false);
   });
+
+  test("should throw, if the User is not in a Space", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      worldID: 1,
+    } as UserLocationTO);
+
+    await expect(systemUnderTest.executeAsync(2)).rejects.toThrow(
+      "User is not in a space!"
+    );
+  });
 });
