@@ -5,10 +5,6 @@ import CalculateLearningSpaceAvailabilityUseCase from "../../../../Core/Applicat
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import {
-  BooleanAndNode,
-  BooleanIDNode,
-} from "../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
 
 const entityContainerMock = mock<IEntityContainer>();
 const calculateLearningSpaceScoreUseCaseMock =
@@ -32,6 +28,10 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
     systemUnderTest = CoreDIContainer.resolve(
       CalculateLearningSpaceAvailabilityUseCase
     );
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   afterAll(() => {
@@ -60,7 +60,10 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
         spaceID: 3,
       });
 
-    const result = systemUnderTest.internalExecute(1);
+    const result = systemUnderTest.internalExecute({
+      spaceID: 1,
+      worldID: 1,
+    });
 
     expect(result).toMatchObject({
       requirementsString: "(2)^(3)",
@@ -89,7 +92,10 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
       },
     ]);
 
-    const result = systemUnderTest.internalExecute(1);
+    const result = systemUnderTest.internalExecute({
+      spaceID: 1,
+      worldID: 1,
+    });
 
     expect(result).toStrictEqual({
       requirementsString: "",
@@ -102,7 +108,12 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
   test("internalExecute throws an error if the space is not found", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 
-    expect(() => systemUnderTest.internalExecute(1)).toThrowError();
+    expect(() =>
+      systemUnderTest.internalExecute({
+        spaceID: 1,
+        worldID: 1,
+      })
+    ).toThrowError();
   });
 
   test("internalExecute throws an error if more than one space with given id is found", () => {
@@ -115,7 +126,12 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
       },
     ]);
 
-    expect(() => systemUnderTest.internalExecute(1)).toThrowError();
+    expect(() =>
+      systemUnderTest.internalExecute({
+        spaceID: 1,
+        worldID: 1,
+      })
+    ).toThrowError();
   });
 
   test("internalExecute returns false and calls logger.error if the requirements string is invalid", () => {
@@ -126,6 +142,49 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
       },
     ]);
 
-    expect(() => systemUnderTest.internalExecute(1)).toThrowError();
+    expect(() =>
+      systemUnderTest.internalExecute({
+        spaceID: 1,
+        worldID: 1,
+      })
+    ).toThrowError();
+  });
+
+  test("filterEntitiesOfType filter callback returns true if the space has the correct id and parentWorldID", () => {
+    let filterResult;
+    entityContainerMock.filterEntitiesOfType.mockImplementation((_, cb) => {
+      filterResult = cb({
+        id: 1,
+        parentWorldID: 1,
+      });
+
+      return [
+        {
+          id: 1,
+          requirements: "(2)^(3)",
+        },
+      ];
+    });
+
+    calculateLearningSpaceScoreUseCaseMock.internalExecute
+      .mockReturnValueOnce({
+        requiredScore: 2,
+        currentScore: 3,
+        maxScore: 4,
+        spaceID: 2,
+      })
+      .mockReturnValueOnce({
+        requiredScore: 2,
+        currentScore: 3,
+        maxScore: 4,
+        spaceID: 3,
+      });
+
+    systemUnderTest.internalExecute({
+      spaceID: 1,
+      worldID: 1,
+    });
+
+    expect(filterResult).toBe(true);
   });
 });
