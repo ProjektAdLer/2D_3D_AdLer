@@ -66,12 +66,6 @@ export default class AdaptivityElementController
       await CoreDIContainer.get<IDisplayAdaptivityHintLearningElementUseCase>(
         USECASE_TYPES.IDisplayAdaptivityHintLearningElementUseCase
       ).executeAsync(selectedHint.hintAction.idData);
-
-      if (this.viewModel.selectedHint.Value) {
-        this.viewModel.currentQuestion.Value = associatedQuestion;
-      } else {
-        this.viewModel.currentQuestion.Value = null;
-      }
     } else if (
       selectedHint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.ContentAction &&
