@@ -987,4 +987,59 @@ describe("LoadLearningWorldUseCase", () => {
       AdaptivityElementEntity
     );
   });
+  test("filter world function filters correctly", async () => {
+    // mock user data response
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
+      mockedGetEntitiesOfTypeUserDataReturnValue
+    );
+
+    const worldEntityMock = new LearningWorldEntity();
+    worldEntityMock.name = minimalGetWorldDataResponse.worldName;
+    worldEntityMock.goals = minimalGetWorldDataResponse.goals;
+    worldEntityMock.id = 42;
+    worldEntityMock.spaces = [];
+    let filterResult;
+    entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
+      (entityType, callback) => {
+        filterResult = callback(worldEntityMock as LearningWorldEntity);
+        return [worldEntityMock];
+      }
+    );
+    // mock world response
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
+
+    // mock backend response
+    backendMock.getWorldData.mockResolvedValueOnce(minimalGetWorldDataResponse);
+
+    backendMock.getCoursesAvailableForUser.mockResolvedValue({
+      courses: [
+        {
+          courseID: 1,
+          courseName: "Testkurs",
+        },
+      ],
+    });
+    // mock entity creation
+    const mockedWorldEntity = new LearningWorldEntity();
+    mockedWorldEntity.name = minimalGetWorldDataResponse.worldName;
+    mockedWorldEntity.goals = minimalGetWorldDataResponse.goals;
+    mockedWorldEntity.spaces = [];
+
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<LearningElementEntity>()
+    );
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<LearningSpaceEntity>()
+    );
+    entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
+
+    backendMock.getWorldStatus.mockResolvedValue({
+      worldID: 1,
+      elements: [{}],
+    } as LearningWorldStatusTO);
+
+    await systemUnderTest.executeAsync({ worldID: 42 });
+
+    expect(filterResult).toBe(true);
+  });
 });
