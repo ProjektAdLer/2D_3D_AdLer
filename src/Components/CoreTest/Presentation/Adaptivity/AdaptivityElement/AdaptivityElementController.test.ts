@@ -14,6 +14,7 @@ import { AdaptivityElementActionTypes } from "../../../../Core/Domain/Types/Adap
 import IDisplayLearningElementUseCase from "../../../../Core/Application/UseCases/Adaptivity/DisplayAdaptivityHintLearningElement/IDisplayAdaptivityHintLearningElementUseCase";
 import ILoadExternalLearningElementUseCase from "../../../../Core/Application/UseCases/Adaptivity/LoadExternalLearningElementUseCase/ILoadExternalLearningElementUseCase";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
+import { Observable } from "@babylonjs/core";
 
 const submitSelectionUseCaseMock =
   mock<ISubmitAdaptivityElementSelectionUseCase>();
@@ -101,7 +102,7 @@ describe("AdaptivityElementController", () => {
     expect(viewModel.isOpen.Value).toBeFalsy();
   });
 
-  test("back allways resets currentQuestionID and showFeedback in viewmodel", () => {
+  test("back always resets currentQuestionID and showFeedback in viewmodel", () => {
     viewModel.currentTask.Value = mockTask;
     viewModel.currentQuestion.Value = mockQuestion;
     viewModel.showFeedback.Value = true;
@@ -154,6 +155,16 @@ describe("AdaptivityElementController", () => {
     expect(
       loadExternalLearningElementUseCaseMock.executeAsync
     ).toHaveBeenCalled();
+  });
+
+  test("selectHint sets viewmodels currentQuestion to associated question", async () => {
+    viewModel.selectedHint = new Observable<AdaptivityQuestion>();
+    viewModel.selectedHint.Value = {
+      questionID: 0,
+      questionText: "test",
+    };
+    await systemUnderTest.selectHint(mockHint, mockQuestion);
+    expect(viewModel.currentQuestion.Value).toBe(mockQuestion);
   });
 
   test.skip("selectHint calls worldPort.onLearningElementHighlighted with hintActionData", async () => {
@@ -235,5 +246,44 @@ describe("AdaptivityElementController", () => {
     systemUnderTest.hideFooterTooltip();
 
     expect(viewModel.showFooterTooltip.Value).toBeFalsy();
+  });
+
+  test("loadExternalContentReference handles error and sets hint if loadExternalLearningElementUseCase throw exception because no external element could be found", async () => {
+    const mockElementID = 1;
+    loadExternalLearningElementUseCaseMock.executeAsync.mockImplementation(
+      () => {
+        throw new Error(
+          `Could not find element with ID ${mockElementID} in world 0`
+        );
+      }
+    );
+    systemUnderTest.loadExternalContentReference(mockElementID, mockQuestion);
+    expect(viewModel.selectedHint.Value).toEqual({
+      hintID: -1,
+      showOnIsWrong: true,
+      hintAction: {
+        hintActionType: AdaptivityElementActionTypes.CommentAction,
+        textData:
+          "Der hier hinterlegte Hinweis existiert leider nicht. Bitte füllen Sie einen Bugreport aus.",
+      },
+    } as AdaptivityHint);
+  });
+
+  test("loadExternalContentReference handles error and sets hint if loadExternalLearningElementUseCase throw exception because more than one external element was found", async () => {
+    loadExternalLearningElementUseCaseMock.executeAsync.mockImplementation(
+      () => {
+        throw new Error(`Found more than one element with ID`);
+      }
+    );
+    systemUnderTest.loadExternalContentReference(1, mockQuestion);
+    expect(viewModel.selectedHint.Value).toEqual({
+      hintID: -1,
+      showOnIsWrong: true,
+      hintAction: {
+        hintActionType: AdaptivityElementActionTypes.CommentAction,
+        textData:
+          "Der hier hinterlegte Hinweis ist nicht eindeutig zuordbar. Bitte füllen Sie einen Bugreport aus.",
+      },
+    } as AdaptivityHint);
   });
 });
