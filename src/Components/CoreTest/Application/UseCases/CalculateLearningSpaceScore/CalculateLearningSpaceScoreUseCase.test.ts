@@ -18,6 +18,7 @@ const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 
 describe("Calculate Learning Space Score UseCase", () => {
   let systemUnderTest: CalculateLearningSpaceScoreUseCase;
+
   beforeAll(() => {
     CoreDIContainer.snapshot();
 
@@ -32,29 +33,32 @@ describe("Calculate Learning Space Score UseCase", () => {
     ).toConstantValue(getUserLocationUseCaseMock);
   });
 
-  afterAll(() => {
-    CoreDIContainer.restore();
-  });
-
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(
       CalculateLearningSpaceScoreUseCase
     );
   });
 
-  test("filter Callback should return a boolean", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    CoreDIContainer.restore();
+  });
+
+  test("filter Callback should return true when ids are matching", () => {
     entityContainerMock.filterEntitiesOfType.mockImplementation(
       filterEntitiesOfTypeMockImplUtil([
         {
           id: 1,
+          parentWorldID: 1,
           elements: [],
         },
       ])
     );
 
     systemUnderTest["calculateLearningSpaceScore"](1, 1);
-
-    entityContainerMock.filterEntitiesOfType.mockReset();
   });
 
   test("calculateLearningSpaceScore should calculate the correct total space score", () => {
@@ -91,8 +95,6 @@ describe("Calculate Learning Space Score UseCase", () => {
       maxScore: 30,
       spaceID: 1,
     } as LearningSpaceScoreTO);
-
-    entityContainerMock.filterEntitiesOfType.mockReset();
   });
 
   test("calculateLearningSpaceScore should return 0 for each score when no Elements are present", () => {
@@ -117,8 +119,6 @@ describe("Calculate Learning Space Score UseCase", () => {
       maxScore: 0,
       spaceID: 1,
     } as LearningSpaceScoreTO);
-
-    entityContainerMock.filterEntitiesOfType.mockReset();
   });
 
   //ANF-ID: [EZZ0013]
@@ -173,8 +173,6 @@ describe("Calculate Learning Space Score UseCase", () => {
     systemUnderTest.execute();
 
     expect(worldPortMock.onLearningSpaceScored).toHaveBeenCalledTimes(1);
-
-    entityContainerMock.filterEntitiesOfType.mockReset();
   });
 
   test("internalExecute returns the correct LearningSpaceScoreTO", () => {
@@ -186,6 +184,7 @@ describe("Calculate Learning Space Score UseCase", () => {
             hasScored: true,
             value: 10,
           },
+          null,
           {
             hasScored: true,
             value: 10,
@@ -207,7 +206,5 @@ describe("Calculate Learning Space Score UseCase", () => {
       maxScore: 30,
       spaceID: 1,
     } as LearningSpaceScoreTO);
-
-    entityContainerMock.filterEntitiesOfType.mockReset();
   });
 });
