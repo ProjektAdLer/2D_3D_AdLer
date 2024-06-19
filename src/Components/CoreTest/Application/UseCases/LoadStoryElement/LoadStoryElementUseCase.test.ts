@@ -45,6 +45,12 @@ describe("LoadStoryElementUseCase", () => {
     CoreDIContainer.restore();
   });
 
+  test("does nothing if storyElementType is None", () => {
+    systemUnderTest.execute(StoryElementType.None);
+
+    expect(getUserLocationUseCaseMock.execute).not.toHaveBeenCalled();
+  });
+
   test("should warn and don't call world port, if user is not in learningspace", () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
@@ -150,5 +156,28 @@ describe("LoadStoryElementUseCase", () => {
       modelType: "a_npc_defaultnpc",
       storyType: StoryElementType.IntroOutro,
     } as StoryElementTO);
+  });
+
+  test("filterEntitiesOfType filter callback returns true if world and space id match", () => {
+    let filterResult = false;
+    entityContainerMock.filterEntitiesOfType.mockImplementation(
+      (_, filterFunction) => {
+        filterResult = filterFunction({
+          parentWorldID: 1,
+          id: 1,
+        } as LearningSpaceEntity);
+
+        return [
+          {
+            parentWorldID: 1,
+            id: 1,
+          } as LearningSpaceEntity,
+        ];
+      }
+    );
+
+    const result = systemUnderTest["getLearningSpaceEntity"](1, 1);
+
+    expect(filterResult).toBe(true);
   });
 });
