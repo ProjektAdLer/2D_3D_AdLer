@@ -118,6 +118,29 @@ describe("CharacterAnimator", () => {
     `);
   });
 
+  test("walkingStateOnBeforeRenderCallback does nothing if current state isn't Walking", () => {
+    systemUnderTest["stateMachine"]["currentState"] =
+      CharacterAnimationStates.Idle;
+    const mockGetCharacterVelocity = jest.fn();
+    systemUnderTest["getCharacterVelocity"] = mockGetCharacterVelocity;
+
+    systemUnderTest["walkingStateOnBeforeRenderCallback"]();
+
+    expect(mockGetCharacterVelocity).not.toHaveBeenCalled();
+  });
+
+  test("walkingStateOnBeforeRenderCallback calls setWalkingAnimationSpeed and rotateCharacter if current state is Walking", () => {
+    systemUnderTest["stateMachine"]["currentState"] =
+      CharacterAnimationStates.Walking;
+    const mockFunction = jest.fn();
+    systemUnderTest["rotateCharacter"] = mockFunction;
+    systemUnderTest["setWalkingAnimationSpeed"] = mockFunction;
+
+    systemUnderTest["walkingStateOnBeforeRenderCallback"]();
+
+    expect(mockFunction).toHaveBeenCalledTimes(2);
+  });
+
   test("onBeforeAnimationTransitionObserver removes the given observer from the onBeforeAniamtionObservable of the scene when the transition is done", () => {
     const fromAnimation = mock<AnimationGroup>();
     const toAnimation = mock<AnimationGroup>();
@@ -283,6 +306,12 @@ describe("CharacterAnimator", () => {
     expect(() =>
       anonymousCallback!(mock<Scene>(), mock<EventState>())
     ).not.toThrow();
+  });
+
+  test("transitionFromInteractToWalk resets animationBlendValue to 0", () => {
+    systemUnderTest["transitionFromInteractToWalk"]();
+
+    expect(systemUnderTest["animationBlendValue"]).toBe(0);
   });
 
   // ANF-ID: [EZZ0018]
