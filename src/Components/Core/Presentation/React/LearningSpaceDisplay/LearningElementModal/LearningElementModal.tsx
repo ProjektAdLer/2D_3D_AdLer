@@ -41,24 +41,25 @@ const createModalContent = (
   }
 };
 
+const modalStyleByTypeMap = {
+  text: "h-[80vh]",
+  pdf: "h-[80vh]",
+  image: "max-h-[90vh]",
+  video: "",
+  h5p: "",
+  primitiveH5P: "",
+};
+
 export default function LearningElementModal({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
     LearningElementModalViewModel,
     ILearningElementModalController
   >(BUILDER_TYPES.ILearningElementModalBuilder);
   const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
+  const [elementType] = useObservable<string>(viewModel?.type);
 
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;
-
-  const modalConfig = {
-    text: "h-[80vh]",
-    image: "max-h-[90vh]",
-    video: "",
-    h5p: "",
-  };
-
-  const modalType = viewModel.type.Value as "text" | "image" | "video" | "h5p";
 
   return (
     <StyledModal
@@ -77,7 +78,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
       className={tailwindMerge(
         className,
         "flex flex-col justify-center gap-2 p-2 m-3 rounded-lg",
-        modalConfig[modalType]
+        modalStyleByTypeMap[elementType as keyof typeof modalStyleByTypeMap]
       )}
     >
       {createModalContent(viewModel, controller)}

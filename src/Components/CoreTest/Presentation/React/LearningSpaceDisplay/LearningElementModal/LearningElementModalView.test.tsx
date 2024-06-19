@@ -7,6 +7,7 @@ import LearningElementModalViewModel from "../../../../../Core/Presentation/Reac
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import LearningElementModal from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModal";
 import { WeightAnimationPropertyInfo } from "@babylonjs/loaders/glTF/2.0/glTFLoaderAnimation";
+import { LearningElementTypes } from "../../../../../Core/Domain/Types/LearningElementTypes";
 
 let mockViewModel = new LearningElementModalViewModel();
 mockViewModel.isOpen.Value = true;
@@ -21,19 +22,24 @@ jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/ImageComponent.tsx",
   () => () => <div>Hello World</div>
 );
-
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/H5PContent",
   () => () => <div>Hello World</div>
 );
-
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoComponent.tsx",
   () => () => <div>Hello World</div>
 );
-
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/TextComponent.tsx",
+  () => () => <div>Hello World</div>
+);
+jest.mock(
+  "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/PDFComponent.tsx",
+  () => () => <div>Hello World</div>
+);
+jest.mock(
+  "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/PrimitiveH5PContent.tsx",
   () => () => <div>Hello World</div>
 );
 
@@ -70,17 +76,21 @@ describe("LearningElementModal", () => {
   });
 
   // ANF-ID: [EWE0037]
-  test.each([["text"], ["image"], ["video"], ["h5p"]])(
-    "should render its content with the correct type",
-    (type) => {
-      mockViewModel.type.Value = type;
+  test.each([
+    [LearningElementTypes.text],
+    [LearningElementTypes.pdf],
+    [LearningElementTypes.image],
+    [LearningElementTypes.video],
+    [LearningElementTypes.h5p],
+    [LearningElementTypes.primitiveH5P],
+  ])("should render its content with the correct type", (type) => {
+    mockViewModel.type.Value = type;
 
-      useBuilderMock([mockViewModel, mockController]);
+    useBuilderMock([mockViewModel, mockController]);
 
-      const componentUnderTest = render(<LearningElementModal />);
-      expect(componentUnderTest.container.childElementCount).toBe(1);
-    }
-  );
+    const componentUnderTest = render(<LearningElementModal />);
+    expect(componentUnderTest.container.childElementCount).toBe(1);
+  });
 
   test("should render error, if no element is selected", () => {
     mockViewModel.type.Value = "type";
