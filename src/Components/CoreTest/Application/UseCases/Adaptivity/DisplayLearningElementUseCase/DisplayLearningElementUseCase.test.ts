@@ -1,4 +1,3 @@
-import { async } from "q";
 import DisplayLearningElementUseCase from "../../../../../Core/Application/UseCases/Adaptivity/DisplayAdaptivityHintLearningElement/DisplayAdaptivityHintLearningElementUseCase";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import mock from "jest-mock-extended/lib/Mock";
@@ -120,68 +119,130 @@ describe("DisplayLearningElementUseCase", () => {
     );
   });
 
-  test.skip("learning element in same space calls onAdaptivityElementUserHintInformed", async () => {
+  test("should throw, if no space has referenced element", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
       spaceID: 1,
     } as UserLocationTO);
 
     entityContainer.filterEntitiesOfType.mockReturnValueOnce([
+      { id: 0, elements: undefined },
+    ]);
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([
+      { id: 0, elements: [{ id: 1 }] } as LearningSpaceEntity,
+    ]);
+
+    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
+      "No space contains referenced learning element"
+    );
+  });
+
+  test("filterEntitiesOfType callback for learning space entity filtering should return true when element is in the same world", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: 1,
+    } as UserLocationTO);
+
+    const learningSpaceEntityMock = {
+      parentWorldID: 1,
+    } as LearningSpaceEntity;
+
+    let filterResult;
+    entityContainer.filterEntitiesOfType.mockImplementationOnce(
+      (mock, callback) => {
+        filterResult = callback(learningSpaceEntityMock);
+        return [learningSpaceEntityMock];
+      }
+    );
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([]);
+
+    try {
+      await systemUnderTest.executeAsync(2);
+    } catch (e) {}
+    expect(filterResult).toBe(true);
+  });
+
+  test("filterEntitiesOfType callback for learning element entity filtering should return true when element exists and is in the same world", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: 1,
+    } as UserLocationTO);
+
+    const learningElementEntityMock = {
+      id: 42,
+      parentWorldID: 1,
+    } as LearningElementEntity;
+
+    let filterResult;
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([
+      { id: 0, elements: [{ id: 42 }] } as LearningSpaceEntity,
+    ]);
+
+    entityContainer.filterEntitiesOfType.mockImplementationOnce(
+      (mock, callback) => {
+        filterResult = callback(learningElementEntityMock);
+        return [learningElementEntityMock];
+      }
+    );
+    calculateLearingSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
+      { isAvailable: true } as LearningSpaceAvailabilityTO
+    );
+    await systemUnderTest.executeAsync(42);
+    expect(filterResult).toBe(true);
+  });
+
+  test("learning element in same space calls loadLearningElementUseCase", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: 2,
+    } as UserLocationTO);
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([
       {
-        id: 1,
+        id: 2,
         elements: [
-          {
-            id: 1,
-            value: 3,
-            hasScored: false,
-            name: "",
-            description: "",
-            goals: [],
-            type: "text",
-            model:
-              LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
-            parentWorldID: 1,
-          },
+          { id: 42 } as LearningElementEntity,
         ] as LearningElementEntity[],
       } as LearningSpaceEntity,
     ]);
 
     entityContainer.filterEntitiesOfType.mockReturnValueOnce([
-      { id: 1, name: "test" } as LearningElementEntity,
+      { id: 42, name: "test" } as LearningElementEntity,
     ]);
 
-    await systemUnderTest.executeAsync(1);
+    await systemUnderTest.executeAsync(42);
 
     expect(
       wordlPortMock.onAdaptivityElementUserHintInformed
-    ).toHaveBeenCalled();
-    expect(
-      wordlPortMock.onAdaptivityElementUserHintInformed
-    ).toHaveBeenCalledWith({
-      hintID: -1,
-      showOnIsWrong: true,
-      hintAction: {
-        hintActionType: AdaptivityElementActionTypes.CommentAction,
-        textData:
-          "Der Hinweis für diese Frage befindet sich hier in diesem Raum. Schau dir `test` nochmal an.",
-      },
-    } as AdaptivityElementHintTO);
+    ).not.toHaveBeenCalled();
+
+    expect(loadLearningElementUseCaseMock.executeAsync).toHaveBeenCalledWith({
+      elementID: 42,
+      isScoreable: true,
+    });
   });
 
   // ANF-ID: [EWE0006]
-  test("available learning element in other space calls loaddLearningElementUseCase", async () => {
-    entityContainer.getEntitiesOfType.mockReturnValue([
-      { id: 1, elements: [{ id: 1 }] } as LearningSpaceEntity,
-    ]);
-
-    entityContainer.filterEntitiesOfType.mockReturnValue([
-      { id: 1, name: "test" } as LearningElementEntity,
-    ]);
-
+  test("available learning element in other space calls loadLearningElementUseCase", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
       spaceID: 2,
     } as UserLocationTO);
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([
+      {
+        id: 10,
+        elements: [
+          { id: 42 } as LearningElementEntity,
+        ] as LearningElementEntity[],
+      } as LearningSpaceEntity,
+    ]);
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([
+      { id: 42, name: "test" } as LearningElementEntity,
+    ]);
 
     calculateLearingSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
       {
@@ -189,29 +250,36 @@ describe("DisplayLearningElementUseCase", () => {
       } as LearningSpaceAvailabilityTO
     );
 
-    await systemUnderTest.executeAsync(1);
+    await systemUnderTest.executeAsync(42);
 
     expect(
       wordlPortMock.onAdaptivityElementUserHintInformed
     ).not.toHaveBeenCalled();
 
-    expect(loadLearningElementUseCaseMock.executeAsync).toHaveBeenCalled();
+    expect(
+      calculateLearingSpaceAvailabilityUseCaseMock.internalExecute
+    ).toHaveBeenCalled();
+
+    expect(loadLearningElementUseCaseMock.executeAsync).toHaveBeenCalledWith({
+      elementID: 42,
+      isScoreable: false,
+    });
   });
 
   // ANF-ID: [EWE0007]
   test("not available learning element in other space calls onAdaptivityElementUserHintInformed", async () => {
-    entityContainer.getEntitiesOfType.mockReturnValue([
-      { id: 1, elements: [{ id: 1 }] } as LearningSpaceEntity,
-    ]);
-
-    entityContainer.filterEntitiesOfType.mockReturnValue([
-      { id: 1, name: "test" } as LearningElementEntity,
-    ]);
-
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
       spaceID: 2,
     } as UserLocationTO);
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([
+      { id: 1, elements: [{ id: 1 }], name: "Testraum" } as LearningSpaceEntity,
+    ]);
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([
+      { id: 1, name: "TestLernelement" } as LearningElementEntity,
+    ]);
 
     calculateLearingSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
       {
@@ -223,6 +291,14 @@ describe("DisplayLearningElementUseCase", () => {
 
     expect(
       wordlPortMock.onAdaptivityElementUserHintInformed
-    ).toHaveBeenCalled();
+    ).toHaveBeenCalledWith({
+      hintID: -1,
+      showOnIsWrong: true,
+      hintAction: {
+        hintActionType: AdaptivityElementActionTypes.CommentAction,
+        textData:
+          "Der Hinweis für diese Frage ist das Lernelement `TestLernelement` im Lernraum `Testraum`",
+      },
+    });
   });
 });
