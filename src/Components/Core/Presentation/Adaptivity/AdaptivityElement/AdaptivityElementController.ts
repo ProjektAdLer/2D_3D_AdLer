@@ -58,6 +58,8 @@ export default class AdaptivityElementController
     selectedHint: AdaptivityHint,
     associatedQuestion: AdaptivityQuestion
   ): Promise<void> {
+    this.viewModel.currentQuestion.Value = associatedQuestion;
+
     if (
       selectedHint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.ReferenceAction &&
@@ -76,8 +78,10 @@ export default class AdaptivityElementController
         associatedQuestion
       );
     }
-    this.viewModel.currentQuestion.Value = associatedQuestion;
-    this.viewModel.selectedHint.Value = selectedHint;
+    // check if selected hint in vm was not set in usecase
+    if (!this.viewModel.selectedHint.Value) {
+      this.viewModel.selectedHint.Value = selectedHint;
+    }
   }
 
   @bind

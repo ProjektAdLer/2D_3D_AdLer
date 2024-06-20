@@ -77,10 +77,20 @@ export default class DisplayAdaptivityHintLearningElementUseCase
         isScoreable: true,
       });
     } else {
+      const destinationSpace = spaces.find((space) => {
+        return space.elements?.find((element) => {
+          return element?.id === elementID;
+        });
+      });
+
+      if (destinationSpace === undefined) {
+        throw new Error("No space contains referenced learning element");
+      }
+
       // check if space is available
       const spaceAvailability =
         this.calculateLearningSpaceAvailabilityUseCase.internalExecute({
-          spaceID: spaces[0].id,
+          spaceID: destinationSpace.id,
           worldID: location.worldID,
         });
 
@@ -100,7 +110,7 @@ export default class DisplayAdaptivityHintLearningElementUseCase
               "Der Hinweis für diese Frage ist das Lernelement `" +
               elements[0].name +
               "` im Lernraum `" +
-              spaces[0].name +
+              destinationSpace.name +
               "`",
           },
         } as AdaptivityElementHintTO);
