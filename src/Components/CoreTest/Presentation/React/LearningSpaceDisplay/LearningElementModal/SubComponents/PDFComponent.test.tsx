@@ -2,11 +2,12 @@ import { fireEvent, render, waitFor } from "@testing-library/react";
 import React from "react";
 import LearningElementModalViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 import PDFComponent from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/PDFComponent";
+import { act } from "react-dom/test-utils";
 
 describe("PDFComponent", () => {
   const viewModel = new LearningElementModalViewModel();
   viewModel.filePath.Value =
-    "https://www.africau.edu/images/default/sample.pdf";
+    "https://projekt-adler.eu/wp-content/uploads/Poster_DGWF-Jahrestagung.pdf";
 
   // ANF-ID: [EWE0037]
   test("should render its DesktopPDFComponent when supportsPDFs returns false", () => {
@@ -49,12 +50,22 @@ describe("PDFComponent", () => {
 
     const renderResult = render(<PDFComponent viewModel={viewModel} />);
 
-    const previousPageButton = renderResult.getByRole("button", { name: "<" });
-    fireEvent.click(previousPageButton);
+    // wait for the PDF to load
+    let page;
+    waitFor(() => {
+      page = renderResult.getByTestId("pdfPage");
+      expect(page).not.toBeEmptyDOMElement();
+    });
+
+    const previousPageButton = renderResult.getByRole("button", {
+      name: "<",
+    });
+    act(() => {
+      fireEvent.click(previousPageButton);
+    });
 
     // TODO: comment in when loading the PDF is fixed
     // await waitFor(() => {
-    //   const page = renderResult.getByTestId("pdfPage");
     //   expect(page).toHaveAttribute("data-page-number", "1");
     // });
   });
