@@ -1,10 +1,10 @@
 import IBottomTooltipPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import BottomTooltipPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/BottomTooltipPresenter";
-import ScorePanelViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/BottomTooltipViewModel";
+import BottomTooltipViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/BottomTooltipViewModel";
 
 describe("BottomTooltipPresenter", () => {
   let systemUnderTest: IBottomTooltipPresenter;
-  const vm = new ScorePanelViewModel();
+  const vm = new BottomTooltipViewModel();
 
   beforeEach(() => {
     systemUnderTest = new BottomTooltipPresenter(vm);
@@ -41,14 +41,33 @@ describe("BottomTooltipPresenter", () => {
 
     expect(vm.showPoints.Value).toBe(false);
   });
+
+  test("display sets default clickCallback if none is provided", () => {
+    systemUnderTest.display("test");
+    expect(vm.onClickCallback.Value).toEqual(expect.any(Function));
+  });
+
   test("hideAll sets show in viewModel to false", () => {
     vm.show.Value = true;
     systemUnderTest.hideAll();
     expect(vm.show.Value).toBe(false);
   });
-  test.skip("show sets show in viewModel to true", () => {
+
+  test("hide removes tooltip from vm", () => {
+    systemUnderTest.display("test1");
+    systemUnderTest.display("test2");
+    systemUnderTest.hide(0);
+    expect(systemUnderTest["dataQueue"].length).toBe(1);
+    expect(systemUnderTest["dataQueue"][0].text).toBe("test2");
+  });
+
+  test("show sets show in viewModel to false, if no tooltip exists", () => {
+    systemUnderTest.show();
+    expect(vm.show.Value).toBe(false);
+  });
+
+  test("show sets show in viewModel to true, if tooltip exists", () => {
     systemUnderTest.display("test");
-    vm.show.Value = false;
     systemUnderTest.show();
     expect(vm.show.Value).toBe(true);
   });
