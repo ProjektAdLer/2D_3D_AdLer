@@ -65,7 +65,7 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
           <p className="text-sm">{translate("pauseExplanation")}</p>
         </div>
         <StyledButton
-          shape="closebutton"
+          shape="closeButton"
           className="place-self-start flex items-center justify-center border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue rounded-lg font-bold"
           onClick={() => controller.closeBreakNotification()}
         >

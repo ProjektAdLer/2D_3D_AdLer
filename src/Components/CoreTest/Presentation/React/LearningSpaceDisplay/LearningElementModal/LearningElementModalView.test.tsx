@@ -6,7 +6,6 @@ import LearningElementModalController from "../../../../../Core/Presentation/Rea
 import LearningElementModalViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import LearningElementModal from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModal";
-import { WeightAnimationPropertyInfo } from "@babylonjs/loaders/glTF/2.0/glTFLoaderAnimation";
 import { LearningElementTypes } from "../../../../../Core/Domain/Types/LearningElementTypes";
 
 let mockViewModel = new LearningElementModalViewModel();
@@ -105,20 +104,61 @@ describe("LearningElementModal", () => {
 
   test("should call controller with element id when closed", () => {
     useBuilderMock([mockViewModel, mockController]);
+    mockViewModel.type.Value = "text";
 
     const componentUnderTest = render(<LearningElementModal />);
-    fireEvent.click(componentUnderTest.getByRole("button"));
+    const closeButton = componentUnderTest.getByRole("button", {
+      name: "submitElement",
+    });
+    fireEvent.click(closeButton);
 
     expect(mockController.scoreLearningElement).toHaveBeenCalledTimes(1);
   });
 
   // ANF-ID: [EWE0038]
-  test("should close when close button is clicked", async () => {
+  test("should close when submit Element button is clicked", async () => {
     useBuilderMock([mockViewModel, mockController]);
     mockViewModel.isOpen.Value = true;
+    mockViewModel.type.Value = "text";
 
     const componentUnderTest = render(<LearningElementModal />);
-    const closeButton = componentUnderTest.getByRole("button", { name: "X" });
+    const closeButton = componentUnderTest.getByRole("button", {
+      name: "submitElement",
+    });
+    fireEvent.click(closeButton);
+
+    expect(mockViewModel.isOpen.Value).toBe(false);
+    await waitFor(() =>
+      expect(componentUnderTest.container).toBeEmptyDOMElement()
+    );
+  });
+  // ANF-ID: [EWE0038]
+  test("should close when close button of non primitive Element is clicked", async () => {
+    useBuilderMock([mockViewModel, mockController]);
+    mockViewModel.isOpen.Value = true;
+    mockViewModel.type.Value = "h5p";
+
+    const componentUnderTest = render(<LearningElementModal />);
+    const closeButton = componentUnderTest.getByRole("button", {
+      name: "X",
+    });
+    fireEvent.click(closeButton);
+
+    expect(mockViewModel.isOpen.Value).toBe(false);
+    await waitFor(() =>
+      expect(componentUnderTest.container).toBeEmptyDOMElement()
+    );
+  });
+  // ANF-ID: [EWE0038]
+  test("should close when close button of primitive Element is clicked", async () => {
+    useBuilderMock([mockViewModel, mockController]);
+    mockViewModel.isOpen.Value = true;
+    mockViewModel.type.Value = "text";
+
+    const componentUnderTest = render(<LearningElementModal />);
+    const closeButton = componentUnderTest.getByRole("button", {
+      name: "X",
+    });
     fireEvent.click(closeButton);
 
     expect(mockViewModel.isOpen.Value).toBe(false);

@@ -5,6 +5,7 @@ import StyledButton from "./StyledButton";
 type Props = Partial<{
   hasFooter?: boolean;
   showModal: boolean;
+  smallCloseButton: boolean;
   children: React.ReactNode;
   title: string;
   canClose: boolean;
@@ -17,6 +18,7 @@ type Props = Partial<{
  * A generic, styled modal component. Can be used to display any content.
  *
  * @param showModal decides, if the modal should be shown
+ * @param smallCloseButton can be used to depict smaller X button
  * @param children the content of the modal
  * @param title the title of the modal
  * @param onClose the callback, that is called, when the modal is closed
@@ -26,6 +28,7 @@ type Props = Partial<{
 export default function StyledModal({
   hasFooter = false,
   showModal,
+  smallCloseButton = false,
   children,
   title,
   canClose = true,
@@ -56,11 +59,10 @@ export default function StyledModal({
             <div className="w-full">{title}</div>
             {canClose && (
               <StyledButton
-                shape="closebutton"
+                shape={smallCloseButton ? "smallCloseButton" : "closeButton"}
                 onClick={(event) => {
                   onClose?.();
                 }}
-                className="p-2 text-xs roboto-black"
               >
                 X
               </StyledButton>

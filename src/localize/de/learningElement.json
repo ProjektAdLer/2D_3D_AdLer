@@ -7,6 +7,7 @@
   "hard": "Schwer",
   "singleChoiceSelected": "Einfachauswahl - ",
   "multipleChoiceSelected": "Mehrfachauswahl - ",
+  "submitElement": "Lernelement abschließen!",
 
   "noQuestion": "Der hier hinterlegte Hinweis existiert leider nicht. Bitte füllen Sie einen Bugreport aus.",
   "tooManyHints": "Der hier hinterlegte Hinweis ist nicht eindeutig zuordbar. Bitte füllen Sie einen Bugreport aus.",

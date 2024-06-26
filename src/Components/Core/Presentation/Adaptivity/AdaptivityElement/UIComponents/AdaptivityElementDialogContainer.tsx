@@ -148,7 +148,7 @@ export default function AdaptivityElementDialogContainer({
                     <StyledButton
                       onClick={controller.back}
                       className="w-8 h-8 p-1 mr-2 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-                      shape="closebutton"
+                      shape="closeButton"
                     >
                       {"\u25C0"}
                     </StyledButton>
@@ -185,7 +185,7 @@ export default function AdaptivityElementDialogContainer({
                 <StyledButton
                   onClick={controller.closeModal}
                   className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-                  shape="closebutton"
+                  shape="closeButton"
                 >
                   X
                 </StyledButton>
@@ -273,7 +273,7 @@ export default function AdaptivityElementDialogContainer({
                               {translate("headerLegend")}
                             </h1>
                             <StyledButton
-                              shape="closebutton"
+                              shape="closeButton"
                               onClick={() => {
                                 controller.hideFooterTooltip();
                               }}

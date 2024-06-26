@@ -59,7 +59,7 @@ export default function LearningSpaceGoalPanel() {
                   </div>
                   {/* Learning Goals */}
                   {goals.length === 1 && (
-                    <div className=" text-xs lg:text-sm ">
+                    <div className="text-xs  lg:text-sm">
                       {goals.map((goal, index) => {
                         return (
                           <div className="my-2" key={index}>
@@ -84,7 +84,7 @@ export default function LearningSpaceGoalPanel() {
                 </div>
                 <div className="flex flex-col justify-end pl-4">
                   <StyledButton
-                    shape="closebutton"
+                    shape="closeButton"
                     onClick={() => {
                       viewModel.isOpen.Value = false;
                     }}

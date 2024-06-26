@@ -13,6 +13,8 @@ import PDFComponent from "./SubComponents/PDFComponent";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import PrimitiveH5PContent from "./SubComponents/PrimitiveH5PContent";
+import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import { useTranslation } from "react-i18next";
 
 const createModalContent = (
   viewModel: LearningElementModalViewModel,
@@ -57,23 +59,38 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
   >(BUILDER_TYPES.ILearningElementModalBuilder);
   const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
   const [elementType] = useObservable<string>(viewModel?.type);
+  const { t: translate } = useTranslation("learningElement");
 
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;
 
+  const isPrimitive =
+    viewModel.type.Value === LearningElementTypes.primitiveH5P ||
+    viewModel.type.Value === LearningElementTypes.text ||
+    viewModel.type.Value === LearningElementTypes.video ||
+    viewModel.type.Value === LearningElementTypes.image ||
+    viewModel.type.Value === LearningElementTypes.pdf;
   return (
     <StyledModal
       title={viewModel.name.Value}
-      onClose={() => {
-        setOpen(false);
-        controller.showBottomToolTip();
-        if (
-          viewModel.type?.Value !== "h5p" &&
-          viewModel.isScoreable?.Value === true
-        ) {
-          controller.scoreLearningElement();
-        }
-      }}
+      onClose={
+        isPrimitive
+          ? () => {
+              setOpen(false);
+              controller.showBottomToolTip();
+              if (
+                viewModel.type?.Value !== "h5p" &&
+                viewModel.isScoreable?.Value === true
+              ) {
+                controller.scoreLearningElement();
+              }
+            }
+          : () => {
+              setOpen(false);
+              controller.showBottomToolTip();
+            }
+      }
+      smallCloseButton={isPrimitive}
       showModal={isOpen}
       className={tailwindMerge(
         className,
@@ -82,6 +99,22 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
       )}
     >
       {createModalContent(viewModel, controller)}
+      {isPrimitive && (
+        <div className="grid justify-items-end">
+          <StyledButton
+            shape="freefloatcenter"
+            onClick={() => {
+              setOpen(false);
+              controller.showBottomToolTip();
+              if (viewModel.isScoreable?.Value === true) {
+                controller.scoreLearningElement();
+              }
+            }}
+          >
+            {translate("submitElement")}
+          </StyledButton>
+        </div>
+      )}
     </StyledModal>
   );
 }

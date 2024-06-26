@@ -184,7 +184,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
               <StyledButton
                 onClick={controller.closePanel}
                 className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-                shape="closebutton"
+                shape="closeButton"
               >
                 X
               </StyledButton>
@@ -240,7 +240,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   ) {
     return (
       <>
-        <div className="flex items-center justify-center p-2 bg-buttonbgblue rounded-xl text-sm xl:text-base">
+        <div className="flex items-center justify-center p-2 text-sm bg-buttonbgblue rounded-xl xl:text-base">
           {contentTexts[pageId].toString()}
         </div>
         <div
@@ -252,7 +252,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
               {" "}
               {pageId > 0 && (
                 <StyledButton
-                  shape="closebutton"
+                  shape="closeButton"
                   onClick={controller.decreasePageId}
                 >
                   {"\u25C0"}
@@ -263,7 +263,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
             <div className="col-start-2">
               {pageId < contentTexts.length - 1 && (
                 <StyledButton
-                  shape="closebutton"
+                  shape="closeButton"
                   onClick={controller.increasePageId}
                 >
                   {"\u25B6"}
@@ -298,7 +298,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
               {" "}
               {pageId > 0 && (
                 <StyledButton
-                  shape="closebutton"
+                  shape="closeButton"
                   onClick={controller.decreasePageId}
                 >
                   {"\u25C0"}
@@ -309,7 +309,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
             <div className="col-start-2">
               {pageId < contentTexts.length - 1 && (
                 <StyledButton
-                  shape="closebutton"
+                  shape="closeButton"
                   onClick={controller.increasePageId}
                 >
                   {"\u25B6"}
