@@ -44,6 +44,7 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
       >
         <button
           className="fixed bottom-0 left-0 w-10 h-10"
+          data-testid="testInspectorButton"
           onClick={() => {
             scenePresenter.toggleInspector({ overlay: true });
           }}
