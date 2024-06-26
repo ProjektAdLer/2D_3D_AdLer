@@ -1,4 +1,10 @@
-import { fireEvent, getByText, render, screen } from "@testing-library/react";
+import {
+  fireEvent,
+  getByText,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import React from "react";
 import BreakTimeNotification from "../../../../Core/Presentation/Adaptivity/BreakTimeNotification/BreakTimeNotification";
 import useBuilderMock from "../../React/ReactRelated/CustomHooks/useBuilder/useBuilderMock";
@@ -14,6 +20,14 @@ describe("BreakTimeNotification", () => {
 
   beforeEach(() => {
     viewModel = new BreakTimeNotificationViewModel();
+  });
+
+  beforeAll(() => {
+    jest.spyOn(Math, "random").mockReturnValue(0); // gets pool with 4 images
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
   test("should not render if view model is null", () => {
@@ -80,4 +94,25 @@ describe("BreakTimeNotification", () => {
       mockController.minimizeOrMaximizeBreakNotification
     ).toHaveBeenCalledTimes(1);
   });
+
+  test.each([
+    ["breakSliderButton1", 1],
+    ["breakSliderButton2", 2],
+    ["breakSliderButton3", 3],
+    ["breakSliderButton4", 4],
+  ])(
+    "should call controller if button with id %s is clicked and sets slider index to %s",
+    (testid, index) => {
+      useBuilderMock([viewModel, mockController]);
+      viewModel.showModal.Value = true;
+      viewModel.breakType.Value = BreakTimeNotificationType.Medium;
+      viewModel.slideIndex.Value = 0;
+
+      const renderResult = render(<BreakTimeNotification />);
+      waitFor(() => {
+        fireEvent.click(renderResult.getByTestId(testid));
+        expect(mockController.setSliderIndex).toHaveBeenCalledWith(index);
+      });
+    }
+  );
 });

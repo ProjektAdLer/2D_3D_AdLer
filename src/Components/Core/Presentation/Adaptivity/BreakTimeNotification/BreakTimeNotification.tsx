@@ -180,6 +180,7 @@ function RenderBreakContent(
                   (currentSlideIndex === 1 ? "bg-yellow-400 " : "bg-white ") +
                   "w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
                 }
+                data-testid="breakSliderButton1"
                 onClick={() => controller.setSliderIndex(1)}
               ></button>
             )}
@@ -189,6 +190,7 @@ function RenderBreakContent(
                   (currentSlideIndex === 2 ? "bg-yellow-400 " : "bg-white ") +
                   "w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
                 }
+                data-testid="breakSliderButton2"
                 onClick={() => controller.setSliderIndex(2)}
               ></button>
             )}
@@ -198,6 +200,7 @@ function RenderBreakContent(
                   (currentSlideIndex === 3 ? "bg-yellow-400 " : "bg-white ") +
                   "w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
                 }
+                data-testid="breakSliderButton3"
                 onClick={() => controller.setSliderIndex(3)}
               ></button>
             )}
@@ -207,6 +210,7 @@ function RenderBreakContent(
                   (currentSlideIndex === 4 ? "bg-yellow-400 " : "bg-white ") +
                   "w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
                 }
+                data-testid="breakSliderButton4"
                 onClick={() => controller.setSliderIndex(4)}
               ></button>
             )}
