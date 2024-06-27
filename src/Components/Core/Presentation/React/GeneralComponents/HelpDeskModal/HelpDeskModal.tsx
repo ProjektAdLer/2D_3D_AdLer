@@ -6,7 +6,7 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import { useCallback } from "react";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
-import TutorialPdfButton from "../Tutorial/TutorialPdfButton";
+import TutorialButton from "../Tutorial/TutorialButton";
 import LogExportButton from "~ReactComponents/ReactRelated/ReactBaseComponents/LogExportButton";
 import BugReportButton from "~ReactComponents/ReactRelated/ReactBaseComponents/BugReportButton";
 import SCENE_TYPES, {
@@ -60,8 +60,10 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
         </ul>
         <section className="flex flex-row justify-around gap-2 my-6">
           <div className="flex flex-col items-center">
-            <TutorialPdfButton
-              pdfFileUrl={"/manual/adler_user_manual-min.pdf"}
+            <TutorialButton
+              url={
+                "https://projektadler.github.io/Documentation/lernende-bd.html"
+              }
             />
             <p className="p-1 font-bold text-center text-adlerdarkblue">
               <Trans i18nKey="manualPDF" ns="helpMenu" />

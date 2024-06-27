@@ -4,17 +4,17 @@ import manualIcon from "../../../../../../Assets/icons/37-manual/manual-icon-nob
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 
-export default function TutorialPdfButton({
+export default function TutorialButton({
   className,
-  pdfFileUrl,
-}: AdLerUIComponent<{ pdfFileUrl: string }>) {
+  url,
+}: AdLerUIComponent<{ url: string }>) {
   const openInNewTab = useCallback((url: string) => {
     window.open(url, "_blank", "noreferrer");
   }, []);
 
   return (
     <StyledButton
-      onClick={() => openInNewTab(pdfFileUrl)}
+      onClick={() => openInNewTab(url)}
       className={tailwindMerge(className)}
     >
       <img className="w-10 xl:w-12" src={manualIcon} alt="Help Icon" />
