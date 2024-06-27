@@ -105,6 +105,42 @@ describe("scenePresenter", () => {
     expect(systemUnderTest["navigationMeshes"]).toContain(meshMock);
   });
 
+  test("loadGLTFModel calls SceneLoader.ImportMeshAsync", async () => {
+    const url = "test.glb";
+    const onProgress = (event: ISceneLoaderProgressEvent) => {};
+    SceneLoader.ImportMeshAsync = jest.fn();
+    fillTestSceneDefinitionSceneGetter(testSceneDefinition);
+
+    let result = await systemUnderTest.loadGLTFModel(url, false, onProgress);
+
+    expect(SceneLoader.ImportMeshAsync).toHaveBeenCalledTimes(1);
+    expect(SceneLoader.ImportMeshAsync).toHaveBeenCalledWith(
+      "",
+      url,
+      "",
+      systemUnderTest.Scene,
+      onProgress
+    );
+  });
+
+  test("loadGLTFModel adds mesh to navigation meshes, when isRelevantForNavigation in set true", async () => {
+    const url = "test.glb";
+    const meshMock = mock<Mesh>();
+    SceneLoader.ImportMeshAsync = jest.fn().mockImplementation(() => {
+      let result = mock<ISceneLoaderAsyncResult>();
+      //@ts-ignore
+      result.meshes = [meshMock];
+      return Promise.resolve(result);
+    });
+    fillTestSceneDefinitionSceneGetter(testSceneDefinition);
+
+    await systemUnderTest.loadGLTFModel(url, true);
+
+    expect(SceneLoader.ImportMeshAsync).toHaveBeenCalledTimes(1);
+    expect(systemUnderTest["navigationMeshes"]).toHaveLength(1);
+    expect(systemUnderTest["navigationMeshes"]).toContain(meshMock);
+  });
+
   test("createMesh creates a mesh", () => {
     fillTestSceneDefinitionSceneGetter(testSceneDefinition);
 
