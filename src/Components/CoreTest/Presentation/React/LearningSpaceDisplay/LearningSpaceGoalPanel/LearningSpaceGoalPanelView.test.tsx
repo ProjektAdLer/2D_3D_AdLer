@@ -19,6 +19,7 @@ describe("LearningSpaceGoalPanel", () => {
 
     expect(componentUnderTest.queryByText("Test World")).toBeNull();
   });
+
   test("onclose should set isOpen to false", () => {
     viewModelMock.goals.Value = ["Lernziel"];
     viewModelMock.isOpen.Value = true;
@@ -28,5 +29,29 @@ describe("LearningSpaceGoalPanel", () => {
 
     fireEvent.click(componentUnderTest.getByRole("button"));
     expect(viewModelMock.isOpen.Value).toBe(false);
+  });
+
+  test("should render single learning space goal", () => {
+    viewModelMock.goals.Value = ["Learning goal 1"];
+    viewModelMock.isOpen.Value = true;
+    useBuilderMock([viewModelMock, controllerMock]);
+    const componentUnderTest = render(<LearningSpaceGoalPanel />);
+
+    expect(componentUnderTest.queryByText("Learning goal 1")).not.toBeNull();
+  });
+
+  test("should render multiple learning space goals", () => {
+    viewModelMock.goals.Value = [
+      "Learning goal 1",
+      "Learning goal 2",
+      "Learning goal 3",
+    ];
+    viewModelMock.isOpen.Value = true;
+    useBuilderMock([viewModelMock, controllerMock]);
+    const componentUnderTest = render(<LearningSpaceGoalPanel />);
+
+    expect(componentUnderTest.queryByText("Learning goal 1")).not.toBeNull();
+    expect(componentUnderTest.queryByText("Learning goal 2")).not.toBeNull();
+    expect(componentUnderTest.queryByText("Learning goal 3")).not.toBeNull();
   });
 });
