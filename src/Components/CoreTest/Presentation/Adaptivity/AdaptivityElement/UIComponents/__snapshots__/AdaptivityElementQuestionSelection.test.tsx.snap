@@ -1,5 +1,120 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AdaptivityElementQuestionSelection should render (every required combination) 1`] = `
+<div>
+  <div
+    class="grid w-full gap-4 px-2 py-2"
+  >
+    <div
+      class="flex items-center w-full gap-4 "
+    >
+      <div
+        class=""
+      >
+        <button
+          class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+        >
+          <div
+            class="grid items-center w-full h-full grid-cols-5 "
+          >
+            <div
+              class="flex items-center h-full"
+            >
+              <img
+                alt="Platzhalter-Icon"
+                class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                src="diffculties-adaptivity-placeholder.svg"
+              />
+              <img
+                alt=""
+                class="w-4 h-4 md:w-6 md:h-6"
+                src="diffculties-adaptivity-medium-required-solved.svg"
+              />
+              <img
+                alt="Platzhalter-Icon"
+                class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                src="diffculties-adaptivity-placeholder.svg"
+              />
+            </div>
+            <p
+              class="flex justify-center col-span-3 px-4 text-sm text-start"
+            >
+              normal
+               
+            </p>
+            <div
+              class="flex items-center justify-end pr-2"
+            >
+              <img
+                alt=""
+                class="h-5 md:h-7"
+                src="check-solution-icon-nobg.svg"
+              />
+            </div>
+          </div>
+        </button>
+      </div>
+      <div
+        class="flex flex-row h-full md:gap-4 "
+      />
+    </div>
+    <div
+      class="flex items-center w-full gap-4 "
+    >
+      <div
+        class=""
+      >
+        <button
+          class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+        >
+          <div
+            class="grid items-center w-full h-full grid-cols-5 "
+          >
+            <div
+              class="flex items-center h-full"
+            >
+              <img
+                alt="Platzhalter-Icon"
+                class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                src="diffculties-adaptivity-placeholder.svg"
+              />
+              <img
+                alt="Platzhalter-Icon"
+                class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                src="diffculties-adaptivity-placeholder.svg"
+              />
+              <img
+                alt=""
+                class="w-4 h-4 md:w-6 md:h-6"
+                src="diffculties-adaptivity-hard-required-tried.svg"
+              />
+            </div>
+            <p
+              class="flex justify-center col-span-3 px-4 text-sm text-start"
+            >
+              hard
+               
+            </p>
+            <div
+              class="flex items-center justify-end pr-2"
+            >
+              <img
+                alt=""
+                class="h-5 md:h-7"
+                src="required-adaptivity.svg"
+              />
+            </div>
+          </div>
+        </button>
+      </div>
+      <div
+        class="flex flex-row h-full md:gap-4 "
+      />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`AdaptivityElementQuestionSelection should render (with all difficulties) 1`] = `
 <div>
   <div

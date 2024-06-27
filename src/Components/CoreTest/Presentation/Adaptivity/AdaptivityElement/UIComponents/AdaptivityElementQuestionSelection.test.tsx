@@ -101,6 +101,59 @@ describe("AdaptivityElementQuestionSelection", () => {
     expect(container).toMatchSnapshot();
   });
 
+  test("should render (every required combination)", () => {
+    const { container } = render(
+      <AdaptivityElementQuestionSelection
+        selectedTask={{
+          taskID: 0,
+          taskTitle: "testTaskTitle",
+          isRequired: true,
+          isCompleted: false,
+          requiredDifficulty: 0,
+          questions: [
+            {
+              questionID: 0,
+              questionText: "testQuestionText",
+              isMultipleChoice: false,
+              difficulty: 100,
+              isCompleted: true,
+              isRequired: true,
+              questionAnswers: [
+                {
+                  answerIndex: 0,
+                  answerText: "testAnswerText",
+                  isSelected: false,
+                },
+              ],
+              hints: [],
+            },
+            {
+              questionID: 0,
+              questionText: "testQuestionText",
+              isMultipleChoice: false,
+              difficulty: 200,
+              isCompleted: false,
+              isRequired: true,
+              questionAnswers: [
+                {
+                  answerIndex: 0,
+                  answerText: "testAnswerText",
+                  isSelected: false,
+                },
+              ],
+              hints: [],
+            },
+          ],
+        }}
+        setHeaderText={() => {}}
+        onSelectQuestion={() => {}}
+        onSelectHint={() => {}}
+      />
+    );
+
+    expect(container).toMatchSnapshot();
+  });
+
   test("onSelectQuestion button calls onSelectQuestion callback when clicked", () => {
     const onSelectQuestionMock = jest.fn();
     const question = {
