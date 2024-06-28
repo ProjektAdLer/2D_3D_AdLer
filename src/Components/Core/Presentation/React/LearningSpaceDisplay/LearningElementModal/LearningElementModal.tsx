@@ -32,7 +32,7 @@ const createModalContent = (
     case LearningElementTypes.image:
       return (
         // max-h-[90vh] falls mehrere ImageComponents benutzt werden, sonst schiebts über die Fensterhöhe hinaus [DG]
-        <div className="max-h[90vh]">
+        <div className="max-h[85vh]">
           <ImageComponent viewModel={viewModel} />
         </div>
       );
@@ -44,9 +44,9 @@ const createModalContent = (
 };
 
 const modalStyleByTypeMap = {
-  text: "h-[80vh]",
-  pdf: "h-[80vh]",
-  image: "max-h-[90vh]",
+  text: "h-[75vh]",
+  pdf: "h-[75vh]",
+  image: "max-h-[85vh]",
   video: "",
   h5p: "",
   primitiveH5P: "",
@@ -100,7 +100,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
     >
       {createModalContent(viewModel, controller)}
       {isPrimitive && (
-        <div className="grid justify-items-end">
+        <div className="grid mt-2 justify-items-end">
           <StyledButton
             shape="freefloatcenter"
             onClick={() => {
