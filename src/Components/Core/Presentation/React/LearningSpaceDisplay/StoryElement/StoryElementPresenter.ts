@@ -67,8 +67,8 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
         this.viewModel.modelType.Value[i] =
           learningSpaceTO.storyElements[i].modelType!;
     }
-    if (learningSpaceTO.currentScore >= learningSpaceTO.requiredScore) {
-      this.viewModel.outroUnlocked.Value = true;
-    }
+
+    this.viewModel.outroUnlocked.Value =
+      learningSpaceTO.currentScore >= learningSpaceTO.requiredScore;
   }
 }
