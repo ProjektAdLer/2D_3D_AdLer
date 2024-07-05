@@ -28,24 +28,28 @@ export default function CookieModal() {
         <h1>{translate("cookieTitle")}</h1>
         <p>{translate("cookieText")}</p>
 
-        <StyledButton
-          data-testid="cookieDecline"
-          onClick={() => {
-            setShowModal(false);
-            controller.decline();
-          }}
-        >
-          {translate("cookieDecline")}
-        </StyledButton>
-        <StyledButton
-          data-testid="cookieAcceptAll"
-          onClick={() => {
-            setShowModal(false);
-            controller.accept();
-          }}
-        >
-          {translate("cookieAcceptAll")}
-        </StyledButton>
+        <div className="flex justify-end gap-2">
+          <StyledButton
+            shape="freefloatcenter"
+            data-testid="cookieDecline"
+            onClick={() => {
+              setShowModal(false);
+              controller.decline();
+            }}
+          >
+            {translate("cookieDecline")}
+          </StyledButton>
+          <StyledButton
+            shape="freefloatcenter"
+            data-testid="cookieAcceptAll"
+            onClick={() => {
+              setShowModal(false);
+              controller.accept();
+            }}
+          >
+            {translate("cookieAcceptAll")}
+          </StyledButton>
+        </div>
       </div>
     </StyledModal>
   );
