@@ -37,5 +37,6 @@ export default class StoryElementController implements IStoryElementController {
   backToMenuButtonClicked(): void {
     this.viewModel.showOnlyIntro.Value = false;
     this.viewModel.showOnlyOutro.Value = false;
+    this.viewModel.pageId.Value = 0;
   }
 }
