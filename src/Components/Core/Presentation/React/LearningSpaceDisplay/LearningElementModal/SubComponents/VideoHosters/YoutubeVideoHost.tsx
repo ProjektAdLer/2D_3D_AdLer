@@ -27,7 +27,8 @@ export default function YoutubeVideoHost({ url }: { url: string }) {
       const srcArray = regex.exec(response.data.html);
 
       if (srcArray?.length === 2) {
-        setVideoUrl(srcArray[1]);
+        const videoURL = srcArray[1].replace("youtube", "youtube-nocookie");
+        setVideoUrl(videoURL);
         setVideoTitle(response.data.title);
       } else {
         logger.log(

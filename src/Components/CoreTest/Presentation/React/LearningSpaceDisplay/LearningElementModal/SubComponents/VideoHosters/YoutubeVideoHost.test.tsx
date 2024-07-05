@@ -14,7 +14,8 @@ describe("YoutubeVideoHost", () => {
   });
 
   it("renders an iframe with the provided URL", async () => {
-    const videoUrl = "https://www.youtube.com/embed/BqfiwegsGpY?feature=oembed";
+    const videoUrl =
+      "https://www.youtube-nocookie.com/embed/BqfiwegsGpY?feature=oembed";
     const response = {
       data: {
         html: '<iframe width="200" height="113" src="https://www.youtube.com/embed/BqfiwegsGpY?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="Tesla FSD gets Overly Aggressive: The Sequel"></iframe>',
