@@ -212,7 +212,7 @@ export default class LearningSpaceView implements ILearningSpaceView {
       {
         height: this.viewModel.doorHeight + 0.2,
         width: this.viewModel.doorWidth,
-        depth: this.viewModel.wallThickness * 10,
+        depth: this.viewModel.wallThickness * 3,
       },
       this.scenePresenter.Scene
     );
@@ -220,9 +220,9 @@ export default class LearningSpaceView implements ILearningSpaceView {
     // door outline x, y, z needs to be adjusted, cause door origin is not centered
     // The Adjustments with doorWidth has to be discarded when door origin is fixed
     doorCutout.position = new Vector3(
-      doorPosition[0].x - 0.5 * this.viewModel.doorWidth,
+      doorPosition[0].x - 0.1 * this.viewModel.doorWidth,
       doorPosition[0].y + 0.5 * this.viewModel.doorHeight - 0.2,
-      doorPosition[0].z - 0.5 * this.viewModel.doorWidth
+      doorPosition[0].z - 0.4 * this.viewModel.doorWidth
     );
     doorCutout.rotation = new Vector3(
       0.0,
