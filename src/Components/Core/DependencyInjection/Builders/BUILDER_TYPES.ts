@@ -38,6 +38,7 @@ const BUILDER_TYPES = {
   ILoadingScreenBuilder: Symbol("ILoadingScreenBuilder"),
   IStoryElementBuilder: Symbol("IStoryElementBuilder"),
   IStoryNPCBuilder: Symbol("IStoryNPCBuilder"),
+  ICookieModalBuilder: Symbol("ICookieModalBuilder"),
 };
 
 export default BUILDER_TYPES;

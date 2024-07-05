@@ -12,5 +12,10 @@
   "loginRetry": "Bitte versuchen Sie sich noch einmal anzumelden.",
   "alreadyLoggedIn": "Sie sind bereits angemeldet.",
   "loginFailAdvise": "Bitte überprüfen sie Ihre Eingaben.",
-  "loginButton": "Login"
+  "loginButton": "Login",
+
+  "cookieTitle": "Einwilligung zu Cookies & Daten",
+  "cookieText": "TODO: ERKLÄRUNGSTEXT HIER HINZUFÜGEN ...",
+  "cookieAcceptAll": "Alle akzeptieren",
+  "cookieDecline": "Ablehnen"
 }
