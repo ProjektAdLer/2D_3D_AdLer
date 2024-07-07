@@ -219,14 +219,14 @@ export default class LearningSpaceView implements ILearningSpaceView {
 
     // door outline x, y, z needs to be adjusted, cause door origin is not centered
     // The Adjustments with doorWidth has to be discarded when door origin is fixed
-    const radians = (doorPosition[1] * Math.PI) / 180;
+    const doorPosInRadians = (doorPosition[1] * Math.PI) / 180;
     doorCutout.position = new Vector3(
       doorPosition[0].x +
-        (Math.sin(radians) * 0.4 + Math.cos(radians) * 0.1) *
+        (Math.sin(doorPosInRadians) * 0.4 + Math.cos(doorPosInRadians) * 0.1) *
           this.viewModel.doorWidth,
       doorPosition[0].y + 0.5 * this.viewModel.doorHeight - 0.2,
       doorPosition[0].z +
-        (Math.sin(radians) * 0.1 + Math.cos(radians) * 0.4) *
+        (Math.sin(doorPosInRadians) * 0.1 + Math.cos(doorPosInRadians) * 0.4) *
           this.viewModel.doorWidth
     );
     doorCutout.rotation = new Vector3(
