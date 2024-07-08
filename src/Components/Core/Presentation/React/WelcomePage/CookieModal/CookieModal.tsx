@@ -32,6 +32,7 @@ export default function CookieModal() {
           <StyledButton
             shape="freefloatcenter"
             data-testid="cookieDecline"
+            title={translate("cookieTitle").toString()}
             onClick={() => {
               setShowModal(false);
               controller.decline();
@@ -42,6 +43,7 @@ export default function CookieModal() {
           <StyledButton
             shape="freefloatcenter"
             data-testid="cookieAcceptAll"
+            title={translate("cookieTitle").toString()}
             onClick={() => {
               setShowModal(false);
               controller.accept();
