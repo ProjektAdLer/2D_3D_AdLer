@@ -247,32 +247,6 @@ describe("ScoreH5PLearningElementUseCase", () => {
     );
   });
 
-  //ANF-ID: [EWE0042]
-  test("executeAsync calls beginStoryElementOutroCutSceneUseCase", async () => {
-    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
-      spaceID: 1,
-      worldID: 1,
-    } as UserLocationTO);
-    setupEntityContainerMock(
-      [userEntityMock],
-      [elementEntityMock],
-      [spaceEntityMock]
-    );
-    backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
-
-    try {
-      await systemUnderTest.executeAsync(executeAsyncParams);
-    } catch (e) {
-      console.log(e);
-    }
-
-    expect(
-      beginStoryElementOutroCutSceneUseCaseMock.execute
-    ).toHaveBeenCalledWith({
-      scoredLearningElementID: executeAsyncParams.elementID,
-    });
-  });
-
   test("executeAsync should call elementPort.onElementScored", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,

@@ -179,26 +179,6 @@ describe("ScoreAdaptivityElementUseCase", () => {
     );
   });
 
-  // ANF-ID: [EWE0042]
-  test("internalExecute calls beginStoryElementOutroCutSceneUseCase", () => {
-    const userEntity = mock<UserDataEntity>();
-    userEntity.isLoggedIn = true;
-    entityContainerMock.getEntitiesOfType.mockReturnValue([userEntity]);
-    getUserLocationUseCaseMock.execute.mockReturnValue({
-      worldID: 42,
-      spaceID: 24,
-    });
-    entityContainerMock.filterEntitiesOfType.mockReturnValue([
-      { parentWorldID: 42, id: 42, hasScored: false },
-    ]);
-
-    systemUnderTest.internalExecute(42);
-
-    expect(
-      beginStoryElementOutroCutSceneUseCaseMock.execute
-    ).toHaveBeenCalledWith({ scoredLearningElementID: 42 });
-  });
-
   test("internalExecute doesnt calls beginStoryElementOutroCutSceneUseCase when element was already scored", () => {
     const userEntity = mock<UserDataEntity>();
     userEntity.isLoggedIn = true;

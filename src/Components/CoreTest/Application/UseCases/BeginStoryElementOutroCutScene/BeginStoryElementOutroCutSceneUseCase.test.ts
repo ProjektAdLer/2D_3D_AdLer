@@ -118,21 +118,34 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
     expect(loadStoryElementUseCaseMock.execute).toBeCalledTimes(1);
   });
 
-  test("does not call loadStoryElementUseCase when element has not been scored", () => {
+  test("does not call calculateLearningSpaceScoreUseCase when element has not been scored", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
-      {} as StoryElementTO,
+      { hasOutroTriggered: false } as StoryElementEntity,
     ]);
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
-      { value: 1, hasScored: false } as LearningElementEntity,
+      { value: 1, hasScored: false, id: 0 } as LearningElementEntity,
     ]);
-    calculateLearningSpaceScoreUseCaseMock.internalExecute.mockReturnValueOnce({
-      currentScore: 1,
-      requiredScore: 1,
-    } as LearningSpaceScoreTO);
 
     systemUnderTest.execute({ scoredLearningElementID: 0 });
 
-    expect(loadStoryElementUseCaseMock.execute).not.toHaveBeenCalled();
+    expect(
+      calculateLearningSpaceScoreUseCaseMock.internalExecute
+    ).not.toHaveBeenCalled();
+  });
+
+  test("does not call calculateLearningSpaceScoreUseCase when outro was already triggered", () => {
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      { hasOutroTriggered: true } as StoryElementEntity,
+    ]);
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      { value: 1, hasScored: true, id: 0 } as LearningElementEntity,
+    ]);
+
+    systemUnderTest.execute({ scoredLearningElementID: 0 });
+
+    expect(
+      calculateLearningSpaceScoreUseCaseMock.internalExecute
+    ).not.toHaveBeenCalled();
   });
 
   //ANF-ID: [EWE0042]

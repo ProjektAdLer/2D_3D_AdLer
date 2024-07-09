@@ -8,10 +8,13 @@ import { LearningElementTypes } from "../../../../../Core/Domain/Types/LearningE
 import LearningElementModalViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 import IBottomTooltipPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
+import IBeginStoryElementOutroCutSceneUseCase from "../../../../../Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 
 const scoreElementUseCaseMock = mock<IScoreLearningElementUseCase>();
 const scoreH5PUseCaseMock = mock<IScoreH5PLearningElementUseCase>();
 const bottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
+const beginStoryElementOutroCutSceneUseCaseMock =
+  mock<IBeginStoryElementOutroCutSceneUseCase>();
 
 describe("LearningElementModalController", () => {
   let systemUnderTest: LearningElementModalController;
@@ -28,6 +31,9 @@ describe("LearningElementModalController", () => {
     CoreDIContainer.bind<IBottomTooltipPresenter>(
       PRESENTATION_TYPES.IBottomTooltipPresenter
     ).toConstantValue(bottomTooltipPresenterMock);
+    CoreDIContainer.rebind<IBeginStoryElementOutroCutSceneUseCase>(
+      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+    ).toConstantValue(beginStoryElementOutroCutSceneUseCaseMock);
   });
 
   beforeEach(() => {
@@ -47,6 +53,23 @@ describe("LearningElementModalController", () => {
 
     expect(scoreElementUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
     expect(scoreElementUseCaseMock.executeAsync).toHaveBeenCalledWith(1);
+  });
+
+  test("closeModal sets isOpen to false", () => {
+    viewModel.isOpen.Value = true;
+    systemUnderTest.closeModal();
+    expect(viewModel.isOpen.Value).toBe(false);
+  });
+
+  //ANF-ID: [EWE0042]
+  test("closeModal calls beginStoryElementOutroCutSceneUseCase", () => {
+    viewModel.id.Value = 42;
+    systemUnderTest.closeModal();
+    expect(
+      beginStoryElementOutroCutSceneUseCaseMock.execute
+    ).toHaveBeenCalledWith({
+      scoredLearningElementID: 42,
+    });
   });
 
   test("should handle a XAPI call with a statement", async () => {

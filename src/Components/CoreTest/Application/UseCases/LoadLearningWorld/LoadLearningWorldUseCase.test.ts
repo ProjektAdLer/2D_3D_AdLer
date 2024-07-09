@@ -1,3 +1,4 @@
+import { toBeOneOf } from "jest-extended";
 import ExternalLearningElementEntity from "../../../../Core/Domain/Entities/Adaptivity/ExternalLearningElementEntity";
 import {
   LearningElementModel,
@@ -36,10 +37,8 @@ import {
 } from "../../../../Core/Application/DataTransferObjects/BackendElementTO";
 import StoryElementEntity from "../../../../Core/Domain/Entities/StoryElementEntity";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
-import StoryElementTO from "../../../../Core/Application/DataTransferObjects/StoryElementTO";
 import BackendStoryTO from "../../../../Core/Application/DataTransferObjects/BackendStoryTO";
 import { LearningElementTypes } from "../../../../Core/Domain/Types/LearningElementTypes";
-import EntityContainer from "../../../../Core/Domain/EntityContainer/EntityContainer";
 
 const backendMock = mock<IBackendPort>();
 const worldPortMock = mock<ILearningWorldPort>();
@@ -755,6 +754,7 @@ describe("LoadLearningWorldUseCase", () => {
         modelType:
           LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC,
         storyType: StoryElementType.Intro,
+        hasOutroTriggered: expect.toBeOneOf([expect.any(Boolean), null]),
       },
       StoryElementEntity,
     ]);

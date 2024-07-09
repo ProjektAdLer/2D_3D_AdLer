@@ -15,6 +15,7 @@ import IDisplayLearningElementUseCase from "../../../../Core/Application/UseCase
 import ILoadExternalLearningElementUseCase from "../../../../Core/Application/UseCases/Adaptivity/LoadExternalLearningElementUseCase/ILoadExternalLearningElementUseCase";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import { Observable } from "@babylonjs/core";
+import IBeginStoryElementOutroCutSceneUseCase from "../../../../Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 
 const submitSelectionUseCaseMock =
   mock<ISubmitAdaptivityElementSelectionUseCase>();
@@ -22,6 +23,8 @@ const worldPortMock = mock<ILearningWorldPort>();
 const displayLearningElmentUseCaseMock = mock<IDisplayLearningElementUseCase>();
 const loadExternalLearningElementUseCaseMock =
   mock<ILoadExternalLearningElementUseCase>();
+const beginStoryElementOutroCutSceneMock =
+  mock<IBeginStoryElementOutroCutSceneUseCase>();
 
 const mockHint: AdaptivityHint = {
   hintID: 1,
@@ -85,6 +88,9 @@ describe("AdaptivityElementController", () => {
     CoreDIContainer.bind(
       PRESENTATION_TYPES.IBottomTooltipPresenter
     ).toConstantValue(mock());
+    CoreDIContainer.rebind(
+      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+    ).toConstantValue(beginStoryElementOutroCutSceneMock);
   });
 
   beforeEach(() => {
@@ -100,6 +106,16 @@ describe("AdaptivityElementController", () => {
     viewModel.isOpen.Value = true;
     systemUnderTest.closeModal();
     expect(viewModel.isOpen.Value).toBeFalsy();
+  });
+
+  // ANF-ID: [EWE0042]
+  test("closeModal calls beginStoryElementOutroCutSceneUseCase", () => {
+    systemUnderTest.closeModal();
+    expect(
+      systemUnderTest["beginStoryElementOutroCutSceneUseCase"].execute
+    ).toHaveBeenCalledWith({
+      scoredLearningElementID: viewModel.elementID.Value,
+    });
   });
 
   test("back always resets currentQuestionID and showFeedback in viewmodel", () => {

@@ -43,6 +43,17 @@ jest.mock(
 );
 
 describe("LearningElementModal", () => {
+  let mockViewModel: LearningElementModalViewModel;
+
+  beforeEach(() => {
+    mockViewModel = new LearningElementModalViewModel();
+    mockViewModel.isOpen.Value = true;
+    mockViewModel.id.Value = 123;
+    mockViewModel.type.Value = "text";
+    mockViewModel.parentWorldID.Value = 456;
+    mockViewModel.isScoreable.Value = true;
+  });
+
   test("doesn't render without controller", () => {
     useBuilderMock([mockViewModel, undefined]);
     const { container } = render(<LearningElementModal />);
@@ -117,6 +128,9 @@ describe("LearningElementModal", () => {
 
   // ANF-ID: [EWE0038]
   test("should close when submit Element button is clicked", async () => {
+    mockController.closeModal.mockImplementation(() => {
+      mockViewModel.isOpen.Value = false;
+    });
     useBuilderMock([mockViewModel, mockController]);
     mockViewModel.isOpen.Value = true;
     mockViewModel.type.Value = "text";
@@ -127,13 +141,18 @@ describe("LearningElementModal", () => {
     });
     fireEvent.click(closeButton);
 
-    expect(mockViewModel.isOpen.Value).toBe(false);
-    await waitFor(() =>
-      expect(componentUnderTest.container).toBeEmptyDOMElement()
-    );
+    await waitFor(() => {
+      expect(mockController.closeModal).toHaveBeenCalled();
+      expect(mockViewModel.isOpen.Value).toBe(false);
+      expect(componentUnderTest.container).toBeEmptyDOMElement();
+    });
   });
+
   // ANF-ID: [EWE0038]
   test("should close when close button of non primitive Element is clicked", async () => {
+    mockController.closeModal.mockImplementation(() => {
+      mockViewModel.isOpen.Value = false;
+    });
     useBuilderMock([mockViewModel, mockController]);
     mockViewModel.isOpen.Value = true;
     mockViewModel.type.Value = "h5p";
@@ -144,13 +163,18 @@ describe("LearningElementModal", () => {
     });
     fireEvent.click(closeButton);
 
+    expect(mockController.closeModal).toHaveBeenCalled();
     expect(mockViewModel.isOpen.Value).toBe(false);
-    await waitFor(() =>
-      expect(componentUnderTest.container).toBeEmptyDOMElement()
-    );
+    await waitFor(() => {
+      expect(componentUnderTest.container).toBeEmptyDOMElement();
+    });
   });
+
   // ANF-ID: [EWE0038]
   test("should close when close button of primitive Element is clicked", async () => {
+    mockController.closeModal.mockImplementation(() => {
+      mockViewModel.isOpen.Value = false;
+    });
     useBuilderMock([mockViewModel, mockController]);
     mockViewModel.isOpen.Value = true;
     mockViewModel.type.Value = "text";
@@ -161,6 +185,7 @@ describe("LearningElementModal", () => {
     });
     fireEvent.click(closeButton);
 
+    expect(mockController.closeModal).toHaveBeenCalled();
     expect(mockViewModel.isOpen.Value).toBe(false);
     await waitFor(() =>
       expect(componentUnderTest.container).toBeEmptyDOMElement()
