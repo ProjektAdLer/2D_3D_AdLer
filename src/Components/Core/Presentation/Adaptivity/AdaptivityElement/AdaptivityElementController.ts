@@ -17,16 +17,22 @@ import IDisplayAdaptivityHintLearningElementUseCase from "src/Components/Core/Ap
 import i18next from "i18next";
 import IBottomTooltipPresenter from "~ReactComponents/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
+import IBeginStoryElementOutroCutSceneUseCase from "src/Components/Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 
 export default class AdaptivityElementController
   implements IAdaptivityElementController
 {
   private bottomToolTipPresenter: IBottomTooltipPresenter;
+  private beginStoryElementOutroCutSceneUseCase: IBeginStoryElementOutroCutSceneUseCase;
 
   constructor(private viewModel: AdaptivityElementViewModel) {
     this.bottomToolTipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
       PRESENTATION_TYPES.IBottomTooltipPresenter
     );
+    this.beginStoryElementOutroCutSceneUseCase =
+      CoreDIContainer.get<IBeginStoryElementOutroCutSceneUseCase>(
+        USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+      );
   }
 
   @bind
@@ -36,8 +42,12 @@ export default class AdaptivityElementController
     this.viewModel.currentQuestion.Value = null;
     this.viewModel.showFeedback.Value = false;
     this.viewModel.selectedHint.Value = null;
-
     this.showBottomToolTip();
+
+    // trigger cutscene
+    this.beginStoryElementOutroCutSceneUseCase.execute({
+      scoredLearningElementID: this.viewModel.elementID.Value,
+    });
   }
 
   @bind

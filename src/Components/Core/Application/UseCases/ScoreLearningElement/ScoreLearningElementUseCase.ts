@@ -14,7 +14,6 @@ import type { IInternalCalculateLearningWorldScoreUseCase } from "../CalculateLe
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
-import type IBeginStoryElementOutroCutSceneUseCase from "../BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 
 @injectable()
 export default class ScoreLearningElementUseCase
@@ -34,9 +33,7 @@ export default class ScoreLearningElementUseCase
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
-    private getUserLocationUseCase: IGetUserLocationUseCase,
-    @inject(USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase)
-    private beginStoryElementOutroCutSceneUseCase: IBeginStoryElementOutroCutSceneUseCase
+    private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
 
   async executeAsync(elementID: ComponentID): Promise<void> {
@@ -92,11 +89,6 @@ export default class ScoreLearningElementUseCase
       const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
         worldID: userLocation.worldID,
         spaceID: userLocation.spaceID,
-      });
-
-      // trigger cutscene
-      this.beginStoryElementOutroCutSceneUseCase.execute({
-        scoredLearningElementID: elementID,
       });
 
       this.worldPort.onLearningElementScored(true, elementID);

@@ -7,16 +7,32 @@ import LearningElementModalViewModel from "./LearningElementModalViewModel";
 import ILearningElementModalController from "./ILearningElementModalController";
 import IBottomTooltipPresenter from "../BottomTooltip/IBottomTooltipPresenter";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
+import bind from "bind-decorator";
+import IBeginStoryElementOutroCutSceneUseCase from "src/Components/Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 
 export default class LearningElementModalController
   implements ILearningElementModalController
 {
   private BottomTooltipPresenter: IBottomTooltipPresenter;
+  private beginStoryElementOutroCutSceneUseCase: IBeginStoryElementOutroCutSceneUseCase;
 
   constructor(private viewModel: LearningElementModalViewModel) {
     this.BottomTooltipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
       PRESENTATION_TYPES.IBottomTooltipPresenter
     );
+    this.beginStoryElementOutroCutSceneUseCase =
+      CoreDIContainer.get<IBeginStoryElementOutroCutSceneUseCase>(
+        USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+      );
+  }
+
+  @bind
+  closeModal(): void {
+    this.viewModel.isOpen.Value = false;
+    // trigger cutscene
+    this.beginStoryElementOutroCutSceneUseCase.execute({
+      scoredLearningElementID: this.viewModel.id.Value,
+    });
   }
 
   async scoreLearningElement(): Promise<void> {

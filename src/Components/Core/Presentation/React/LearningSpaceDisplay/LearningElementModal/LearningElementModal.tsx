@@ -57,7 +57,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
     LearningElementModalViewModel,
     ILearningElementModalController
   >(BUILDER_TYPES.ILearningElementModalBuilder);
-  const [isOpen, setOpen] = useObservable<boolean>(viewModel?.isOpen);
+  const [isOpen] = useObservable<boolean>(viewModel?.isOpen);
   const [elementType] = useObservable<string>(viewModel?.type);
   const { t: translate } = useTranslation("learningElement");
 
@@ -73,23 +73,10 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
   return (
     <StyledModal
       title={viewModel.name.Value}
-      onClose={
-        isPrimitive
-          ? () => {
-              setOpen(false);
-              controller.showBottomToolTip();
-              if (
-                viewModel.type?.Value !== "h5p" &&
-                viewModel.isScoreable?.Value === true
-              ) {
-                controller.scoreLearningElement();
-              }
-            }
-          : () => {
-              setOpen(false);
-              controller.showBottomToolTip();
-            }
-      }
+      onClose={() => {
+        controller.closeModal();
+        controller.showBottomToolTip();
+      }}
       smallCloseButton={isPrimitive}
       showModal={isOpen}
       className={tailwindMerge(
@@ -103,12 +90,16 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
         <div className="grid mt-2 justify-items-end">
           <StyledButton
             shape="freefloatcenter"
-            onClick={() => {
-              setOpen(false);
-              controller.showBottomToolTip();
-              if (viewModel.isScoreable?.Value === true) {
-                controller.scoreLearningElement();
+            onClick={async () => {
+              if (
+                isPrimitive &&
+                viewModel.type?.Value !== "h5p" &&
+                viewModel.isScoreable?.Value === true
+              ) {
+                await controller.scoreLearningElement();
               }
+              controller.closeModal();
+              controller.showBottomToolTip();
             }}
           >
             {translate("submitElement")}

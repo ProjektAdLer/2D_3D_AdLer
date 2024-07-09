@@ -17,7 +17,6 @@ import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUse
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import type { IInternalCalculateLearningWorldScoreUseCase } from "../CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
-import type IBeginStoryElementOutroCutSceneUseCase from "../BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 
 @injectable()
 export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
@@ -34,9 +33,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
     @inject(USECASE_TYPES.ICalculateLearningWorldScoreUseCase)
     private calculateWorldScoreUseCase: IInternalCalculateLearningWorldScoreUseCase,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
-    private getUserLocationUseCase: IGetUserLocationUseCase,
-    @inject(USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase)
-    private beginStoryElementOutroCutSceneUseCase: IBeginStoryElementOutroCutSceneUseCase
+    private getUserLocationUseCase: IGetUserLocationUseCase
   ) {}
 
   async executeAsync(data: {
@@ -110,11 +107,6 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
         const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
           worldID: userLocation.worldID,
           spaceID: userLocation.spaceID,
-        });
-
-        // trigger cutscene
-        this.beginStoryElementOutroCutSceneUseCase.execute({
-          scoredLearningElementID: data.elementID,
         });
 
         this.worldPort.onLearningElementScored(true, data.elementID);
