@@ -275,6 +275,7 @@ export default class LoadLearningWorldUseCase
             outroStoryTexts: outroStoryElement.storyTexts,
             modelType: introStoryModel,
             storyType: StoryElementType.IntroOutro,
+            hasOutroTriggered: false,
           },
           StoryElementEntity
         )
@@ -290,6 +291,7 @@ export default class LoadLearningWorldUseCase
               introStoryTexts: introStoryElement.storyTexts,
               modelType: introStoryModel,
               storyType: StoryElementType.Intro,
+              hasOutroTriggered: null,
             },
             StoryElementEntity
           )
@@ -304,6 +306,7 @@ export default class LoadLearningWorldUseCase
               outroStoryTexts: outroStoryElement.storyTexts,
               modelType: outroStoryModel,
               storyType: StoryElementType.Outro,
+              hasOutroTriggered: false,
             },
             StoryElementEntity
           )

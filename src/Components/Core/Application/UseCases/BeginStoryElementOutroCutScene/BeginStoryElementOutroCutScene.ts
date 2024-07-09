@@ -51,7 +51,7 @@ export default class BeginStoryElementOutroCutSceneUseCase
 
     if (storyElementsInSpace.length === 0) return; // return if space has no story elements
 
-    const scoredLearningElement =
+    const scoredLearningElements =
       this.entityContainer.filterEntitiesOfType<LearningElementEntity>(
         LearningElementEntity,
         (entity) =>
@@ -60,8 +60,8 @@ export default class BeginStoryElementOutroCutSceneUseCase
       );
 
     if (
-      scoredLearningElement.length === 0 ||
-      scoredLearningElement.length > 1
+      scoredLearningElements.length === 0 ||
+      scoredLearningElements.length > 1
     ) {
       this.logger.log(
         LogLevelTypes.WARN,
@@ -72,23 +72,30 @@ export default class BeginStoryElementOutroCutSceneUseCase
       return;
     }
 
+    const scoredLearningElement = scoredLearningElements[0];
+    const storyElementEntity = storyElementsInSpace[0];
+
     // only scored learning elements can trigger cutscene
-    if (!scoredLearningElement[0].hasScored) {
+    if (
+      !scoredLearningElement.hasScored ||
+      storyElementEntity.hasOutroTriggered
+    ) {
       return;
     }
 
     const spaceScore = this.calculateLearningSpaceScoreUseCase.internalExecute({
-      spaceID: storyElementsInSpace[0].spaceID,
-      worldID: storyElementsInSpace[0].worldID,
+      spaceID: storyElementEntity.spaceID,
+      worldID: storyElementEntity.worldID,
     });
 
     // only trigger cut scene if the score was below the required score before scoring the element
     // to prevent triggering the cut scene multiple times
     if (
-      spaceScore.currentScore - scoredLearningElement[0].value <
+      spaceScore.currentScore - scoredLearningElement.value <
         spaceScore.requiredScore &&
       spaceScore.currentScore >= spaceScore.requiredScore
     ) {
+      storyElementEntity.hasOutroTriggered = true;
       this.loadStoryElementUseCase.execute(StoryElementType.Outro);
       this.worldPort.onStoryElementCutSceneTriggered(StoryElementType.Outro);
     }

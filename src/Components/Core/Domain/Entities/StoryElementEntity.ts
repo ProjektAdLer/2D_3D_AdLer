@@ -9,4 +9,5 @@ export default class StoryElementEntity {
   outroStoryTexts: string[] | null;
   modelType: LearningElementModel | null;
   storyType: StoryElementType;
+  hasOutroTriggered: boolean | null;
 }
