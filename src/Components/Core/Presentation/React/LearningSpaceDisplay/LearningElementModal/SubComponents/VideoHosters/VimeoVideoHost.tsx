@@ -20,7 +20,9 @@ export default function VimeoVideoHost({ url }: { url: string }) {
       const srcArray = regex.exec(response.data.html);
 
       if (srcArray?.length === 2) {
-        setVideoUrl(srcArray[1]);
+        const url = new URL(srcArray[1]);
+        url.searchParams.set("dnt", "1");
+        setVideoUrl(url.toString());
         setVideoTitle(response.data.title);
       } else {
         logger.log(
