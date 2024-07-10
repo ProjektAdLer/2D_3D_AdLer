@@ -1,10 +1,23 @@
+import { mock } from "jest-mock-extended";
 import UserInitialLearningWorldsInfoTO from "../../../../../Core/Application/DataTransferObjects/UserInitialLearningWorldsInfoTO";
 import UserLearningWorldsInfoTO from "../../../../../Core/Application/DataTransferObjects/UserLearningWorldsInfoTO";
 import LearningWorldSelectionPresenter from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldSelection/LearningWorldSelectionPresenter";
 import LearningWorldSelectionViewModel from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldSelection/LearningWorldSelectionViewModel";
+import ILoadLearningWorldUseCase from "../../../../../Core/Application/UseCases/LoadLearningWorld/ILoadLearningWorldUseCase";
+import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
+import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+
+const loadWorldUseCaseMock = mock<ILoadLearningWorldUseCase>();
 
 describe("LearningWorldSelectionPresenter", () => {
   let systemUnderTest: LearningWorldSelectionPresenter;
+
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+    CoreDIContainer.rebind(
+      USECASE_TYPES.ILoadLearningWorldUseCase
+    ).toConstantValue(loadWorldUseCaseMock);
+  });
 
   beforeEach(() => {
     systemUnderTest = new LearningWorldSelectionPresenter(

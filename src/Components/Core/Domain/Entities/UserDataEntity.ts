@@ -7,4 +7,5 @@ export default class UserDataEntity {
   availableWorlds: { worldID: ComponentID; worldName: string }[] = [];
   currentWorldID: ComponentID | undefined = undefined;
   currentSpaceID: ComponentID | undefined = undefined;
+  lastVisitedWorldID: ComponentID | undefined = undefined;
 }

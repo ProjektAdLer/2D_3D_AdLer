@@ -2,10 +2,22 @@ import LearningSpaceSelectionPresenter from "../../../../../Core/Presentation/Re
 import LearningSpaceSelectionViewModel from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelectionViewModel";
 import LearningWorldTO from "../../../../../Core/Application/DataTransferObjects/LearningWorldTO";
 import { BooleanIDNode } from "../../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
+import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
+import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import { mock } from "jest-mock-extended";
+import ILoadLearningSpaceUseCase from "../../../../../Core/Application/UseCases/LoadLearningSpace/ILoadLearningSpaceUseCase";
+
+const loadSpaceUseCaseMock = mock<ILoadLearningSpaceUseCase>();
 
 describe("LearningSpaceSelectionPresenter", () => {
   let systemUnderTest: LearningSpaceSelectionPresenter;
 
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+    CoreDIContainer.rebind(
+      USECASE_TYPES.ILoadLearningSpaceUseCase
+    ).toConstantValue(loadSpaceUseCaseMock);
+  });
   beforeEach(() => {
     systemUnderTest = new LearningSpaceSelectionPresenter(
       new LearningSpaceSelectionViewModel()

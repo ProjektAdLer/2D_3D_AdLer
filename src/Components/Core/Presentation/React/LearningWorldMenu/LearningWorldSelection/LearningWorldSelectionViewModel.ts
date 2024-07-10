@@ -9,6 +9,6 @@ export default class LearningWorldSelectionViewModel {
   userWorlds: Observable<LearningWorldSelectionLearningWorldData[]> =
     new Observable<LearningWorldSelectionLearningWorldData[]>([]);
 
-  selectedRowID: Observable<number> = new Observable<number>(-1);
+  selectedWorldID: Observable<number> = new Observable<number>(-1);
   newData: Observable<boolean> = new Observable<boolean>(false);
 }

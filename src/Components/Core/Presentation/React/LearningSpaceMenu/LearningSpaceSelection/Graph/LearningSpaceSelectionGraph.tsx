@@ -61,9 +61,7 @@ export default function LearningSpaceSelectionGraph(props: {
 }) {
   const reactFlowInstance = useReactFlow();
   const [spaces] = useObservable(props.viewModel.spaces);
-  const [lastSelectedSpaceID] = useObservable(
-    props.viewModel.lastSelectedSpaceID
-  );
+  const [lastSelectedSpaceID] = useObservable(props.viewModel.selectedSpaceID);
   const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
   useEffect(() => {

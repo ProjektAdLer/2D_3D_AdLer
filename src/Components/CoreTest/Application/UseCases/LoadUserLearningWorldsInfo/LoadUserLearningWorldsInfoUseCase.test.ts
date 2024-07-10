@@ -15,6 +15,7 @@ import LearningWorldTO from "../../../../Core/Application/DataTransferObjects/Le
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 import { IInternalCalculateLearningSpaceScoreUseCase } from "../../../../Core/Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
+import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 
 const entityContainerMock = mock<IEntityContainer>();
 const notificationPortMock = mock<INotificationPort>();
@@ -85,6 +86,10 @@ const setupMocks = () => {
   entityContainerMock.filterEntitiesOfType.mockReturnValue([
     learningWorldEntity,
   ]);
+  const userDataEntity: Partial<UserDataEntity> = {
+    lastVisitedWorldID: 1,
+  } as Partial<UserDataEntity>;
+  entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
 
   calculateSpaceScoreMock.internalExecute.mockReturnValue({
     currentScore: 10,

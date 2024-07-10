@@ -16,7 +16,7 @@ export default class LearningWorldSelectionController
   }
 
   onLearningWorldRowClicked(worldID: number): void {
-    this.viewModel.selectedRowID.Value = worldID;
+    this.viewModel.selectedWorldID.Value = worldID;
     this.loadWorldUseCase.executeAsync({ worldID });
   }
 }

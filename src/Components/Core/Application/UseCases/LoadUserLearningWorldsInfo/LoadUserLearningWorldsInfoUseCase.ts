@@ -12,6 +12,7 @@ import UserLearningWorldsInfoTO from "../../DataTransferObjects/UserLearningWorl
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import LearningWorldEntity from "src/Components/Core/Domain/Entities/LearningWorldEntity";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
+import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 
 @injectable()
 export default class LoadUserLearningWorldsInfoUseCase
@@ -37,7 +38,10 @@ export default class LoadUserLearningWorldsInfoUseCase
       await this.loadInitialWorldsInfo.internalExecuteAsync();
     this.worldPort.onUserInitialLearningWorldsInfoLoaded(initialUserWorlds);
 
-    const userWorlds: UserLearningWorldsInfoTO = { worldInfo: [] };
+    const userWorlds: UserLearningWorldsInfoTO = {
+      worldInfo: [],
+      lastVisitedWorldID: undefined,
+    };
     let loadWorldPromise: Promise<void>[] = [];
 
     initialUserWorlds.worldInfo.forEach((world) => {
@@ -71,6 +75,10 @@ export default class LoadUserLearningWorldsInfoUseCase
       );
     });
     await Promise.allSettled(loadWorldPromise);
+
+    //set last visited world
+    let userEntity = this.container.getEntitiesOfType(UserDataEntity)[0];
+    userWorlds.lastVisitedWorldID = userEntity.lastVisitedWorldID;
 
     this.logger.log(
       LogLevelTypes.TRACE,

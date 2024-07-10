@@ -24,7 +24,7 @@ describe("LearningWorldSelectionController", () => {
   test("onLearningWorldRowClicked sets the correct selectedRowID in the viewmodel", () => {
     systemUnderTest.onLearningWorldRowClicked(420);
 
-    expect(viewModel.selectedRowID.Value).toBe(420);
+    expect(viewModel.selectedWorldID.Value).toBe(420);
     expect(loadWorldUseCaseMock.executeAsync).toBeCalledWith({
       worldID: 420,
     });

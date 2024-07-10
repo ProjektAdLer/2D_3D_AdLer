@@ -20,7 +20,7 @@ export default function LearningSpaceSelectionList(props: {
     props.viewModel.spaces
   );
   const [selectedRowID] = useObservable<number>(
-    props.viewModel.lastSelectedSpaceID
+    props.viewModel.selectedSpaceID
   );
   const onRowClicked = useCallback(
     (id: ComponentID) => props.controller.onLearningSpaceClicked(id),

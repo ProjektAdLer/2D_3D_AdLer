@@ -2,11 +2,19 @@ import UserInitialLearningWorldsInfoTO from "src/Components/Core/Application/Dat
 import ILearningWorldSelectionPresenter from "./ILearningWorldSelectionPresenter";
 import LearningWorldSelectionViewModel from "./LearningWorldSelectionViewModel";
 import UserLearningWorldsInfoTO from "src/Components/Core/Application/DataTransferObjects/UserLearningWorldsInfoTO";
+import ILoadLearningWorldUseCase from "src/Components/Core/Application/UseCases/LoadLearningWorld/ILoadLearningWorldUseCase";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 export default class LearningWorldSelectionPresenter
   implements ILearningWorldSelectionPresenter
 {
-  constructor(private viewModel: LearningWorldSelectionViewModel) {}
+  private loadWorldUseCase: ILoadLearningWorldUseCase;
+  constructor(private viewModel: LearningWorldSelectionViewModel) {
+    this.loadWorldUseCase = CoreDIContainer.get<ILoadLearningWorldUseCase>(
+      USECASE_TYPES.ILoadLearningWorldUseCase
+    );
+  }
 
   onUserInitialLearningWorldsInfoLoaded(
     userWorlds: UserInitialLearningWorldsInfoTO
@@ -30,5 +38,12 @@ export default class LearningWorldSelectionPresenter
       });
     });
     this.viewModel.newData.Value = true;
+
+    // set the initially selected space
+    this.viewModel.selectedWorldID.Value =
+      userWorlds.lastVisitedWorldID || userWorlds.worldInfo[0].worldID;
+    this.loadWorldUseCase.executeAsync({
+      worldID: userWorlds.lastVisitedWorldID || userWorlds.worldInfo[0].worldID,
+    });
   }
 }

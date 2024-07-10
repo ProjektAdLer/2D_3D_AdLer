@@ -21,5 +21,5 @@ export default class LearningSpaceSelectionViewModel {
   spaces: Observable<LearningSpaceSelectionLearningSpaceData[]> =
     new Observable<LearningSpaceSelectionLearningSpaceData[]>([]);
 
-  lastSelectedSpaceID: Observable<number> = new Observable<number>(-1);
+  selectedSpaceID: Observable<number> = new Observable<number>(-1);
 }

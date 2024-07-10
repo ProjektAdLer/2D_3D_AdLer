@@ -9,4 +9,5 @@ export default class LearningWorldEntity {
   description: string;
   evaluationLink: string;
   completionModalShown: boolean | undefined;
+  lastVisitedSpaceID: ComponentID | undefined;
 }

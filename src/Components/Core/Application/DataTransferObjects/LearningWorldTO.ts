@@ -9,4 +9,5 @@ export default class LearningWorldTO {
   description: string;
   evaluationLink: string;
   completionModalShown: boolean | undefined;
+  lastVisitedSpaceID: ComponentID | undefined;
 }

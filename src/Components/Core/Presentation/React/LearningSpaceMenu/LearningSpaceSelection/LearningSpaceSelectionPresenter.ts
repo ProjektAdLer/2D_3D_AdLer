@@ -3,11 +3,19 @@ import ILearningSpaceSelectionPresenter from "./ILearningSpaceSelectionPresenter
 import LearningSpaceSelectionViewModel, {
   LearningSpaceSelectionLearningSpaceData,
 } from "./LearningSpaceSelectionViewModel";
+import ILoadLearningSpaceUseCase from "src/Components/Core/Application/UseCases/LoadLearningSpace/ILoadLearningSpaceUseCase";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 export default class LearningSpaceSelectionPresenter
   implements ILearningSpaceSelectionPresenter
 {
-  constructor(private viewModel: LearningSpaceSelectionViewModel) {}
+  private loadLearningSpaceUseCase: ILoadLearningSpaceUseCase;
+  constructor(private viewModel: LearningSpaceSelectionViewModel) {
+    this.loadLearningSpaceUseCase = CoreDIContainer.get(
+      USECASE_TYPES.ILoadLearningSpaceUseCase
+    );
+  }
 
   onLearningWorldLoaded(world: LearningWorldTO): void {
     const newSpaces: LearningSpaceSelectionLearningSpaceData[] = [];
@@ -30,6 +38,14 @@ export default class LearningSpaceSelectionPresenter
 
     // set all values to ensure correct rendering
     this.viewModel.spaces.Value = newSpaces;
+
+    // set the initially selected space
+    this.viewModel.selectedSpaceID.Value =
+      world.lastVisitedSpaceID || newSpaces[0].id;
+    this.loadLearningSpaceUseCase.executeAsync({
+      spaceID: world.lastVisitedSpaceID || newSpaces[0].id,
+      worldID: this.viewModel.worldID.Value,
+    });
   }
 
   private sortLearningSpaces(

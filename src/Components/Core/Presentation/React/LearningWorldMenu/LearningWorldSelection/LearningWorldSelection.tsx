@@ -61,7 +61,7 @@ export default function LearningWorldSelection({
   useEffect(() => {
     if (viewModel) viewModel.newData.Value = false;
   }, [newData, viewModel]);
-  const [selectedRowID] = useObservable<number>(viewModel?.selectedRowID);
+  const [selectedWorldID] = useObservable<number>(viewModel?.selectedWorldID);
 
   if (!viewModel || !controller) return null;
 
@@ -78,7 +78,7 @@ export default function LearningWorldSelection({
               <LearningWorldSelectionRow
                 icon={worldIcon}
                 title={world.name}
-                selected={selectedRowID === world.id}
+                selected={selectedWorldID === world.id}
                 onClickCallback={() =>
                   controller.onLearningWorldRowClicked(world.id)
                 }

@@ -6,6 +6,7 @@ import { mock } from "jest-mock-extended";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import Logger from "../../../../Core/Adapters/Logger/Logger";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
+import LearningWorldEntity from "../../../../Core/Domain/Entities/LearningWorldEntity";
 
 const entityContainerMock = mock<IEntityContainer>();
 const loggerMock = jest.spyOn(Logger.prototype, "log");
@@ -61,7 +62,11 @@ describe("SetUserLocationUseCase", () => {
       currentWorldID: 0,
       currentSpaceID: 0,
     };
-    entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([userDataEntity]);
+
+    entityContainerMock.getEntitiesOfType.mockReturnValue([
+      { name: "world", id: 1, lastVisitedSpaceID: undefined },
+    ]);
 
     systemUnderTest.execute({ worldID: 1, spaceID: 1 });
 
@@ -77,6 +82,7 @@ describe("SetUserLocationUseCase", () => {
       isLoggedIn: true,
       currentWorldID: 0,
       currentSpaceID: 0,
+      lastVisitedSpaceID: 0,
     };
     entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
 
