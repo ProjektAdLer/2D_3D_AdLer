@@ -39,7 +39,7 @@ export default class LearningWorldSelectionPresenter
     });
     this.viewModel.newData.Value = true;
 
-    if (userWorlds.worldInfo.length != 0) {
+    if (userWorlds.worldInfo.length !== 0) {
       // set the initially selected space
       this.viewModel.selectedWorldID.Value =
         userWorlds.lastVisitedWorldID || userWorlds.worldInfo[0].worldID;
