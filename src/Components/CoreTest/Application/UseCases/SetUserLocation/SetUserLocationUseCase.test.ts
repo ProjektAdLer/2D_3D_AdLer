@@ -6,9 +6,10 @@ import { mock } from "jest-mock-extended";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import Logger from "../../../../Core/Adapters/Logger/Logger";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
-import LearningWorldEntity from "../../../../Core/Domain/Entities/LearningWorldEntity";
+import { IInternalGetLoginStatusUseCase } from "../../../../Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
 
 const entityContainerMock = mock<IEntityContainer>();
+const getLoginStatusUseCaseMock = mock<IInternalGetLoginStatusUseCase>();
 const loggerMock = jest.spyOn(Logger.prototype, "log");
 
 describe("SetUserLocationUseCase", () => {
@@ -19,6 +20,9 @@ describe("SetUserLocationUseCase", () => {
     CoreDIContainer.rebind<IEntityContainer>(
       CORE_TYPES.IEntityContainer
     ).toConstantValue(entityContainerMock);
+    CoreDIContainer.rebind<IInternalGetLoginStatusUseCase>(
+      USECASE_TYPES.IGetLoginStatusUseCase
+    ).toConstantValue(getLoginStatusUseCaseMock);
   });
 
   beforeEach(() => {
@@ -26,26 +30,19 @@ describe("SetUserLocationUseCase", () => {
       USECASE_TYPES.ISetUserLocationUseCase
     );
   });
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
 
   afterAll(() => {
     CoreDIContainer.restore();
   });
 
-  test("throws error when no user entity is present on the container", () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValue([]);
-    systemUnderTest.execute({ worldID: 1, spaceID: 1 });
-    expect(loggerMock).toHaveBeenCalledWith(
-      LogLevelTypes.ERROR,
-      "SetUserLocationUseCase: User is not logged in, cannot set current location"
-    );
-  });
-
   test("throws error when user entity is present but user is not logged in", () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValue([
-      {
-        isLoggedIn: false,
-      },
-    ]);
+    getLoginStatusUseCaseMock.internalExecute.mockReturnValue({
+      isLoggedIn: false,
+      userName: "test",
+    });
 
     systemUnderTest.execute({ worldID: 1, spaceID: 1 });
 
@@ -62,9 +59,13 @@ describe("SetUserLocationUseCase", () => {
       currentWorldID: 0,
       currentSpaceID: 0,
     };
-    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([userDataEntity]);
+    getLoginStatusUseCaseMock.internalExecute.mockReturnValue({
+      isLoggedIn: true,
+      userName: "test",
+    });
 
-    entityContainerMock.getEntitiesOfType.mockReturnValue([
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([userDataEntity]);
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
       { name: "world", id: 1, lastVisitedSpaceID: undefined },
     ]);
 
@@ -84,6 +85,10 @@ describe("SetUserLocationUseCase", () => {
       currentSpaceID: 0,
       lastVisitedSpaceID: 0,
     };
+    getLoginStatusUseCaseMock.internalExecute.mockReturnValue({
+      isLoggedIn: true,
+      userName: "test",
+    });
     entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
 
     systemUnderTest.execute({});
