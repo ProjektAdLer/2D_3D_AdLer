@@ -3,7 +3,7 @@ import CookieModalViewModel from "./CookieModalViewModel";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { useState } from "react";
 
@@ -22,11 +22,11 @@ export default function CookieModal() {
     <StyledModal
       canClose={false}
       showModal={showModal}
+      title={translate("cookieTitle").toString()}
       data-testid="cookieModal"
     >
       <div>
-        <h1>{translate("cookieTitle")}</h1>
-        <p>{translate("cookieText")}</p>
+        <p>{<Trans i18nKey="cookieText" ns="start" />}</p>
 
         <div className="flex justify-end gap-2">
           <StyledButton
