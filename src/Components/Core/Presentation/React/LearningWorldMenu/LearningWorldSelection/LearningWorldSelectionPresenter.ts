@@ -39,11 +39,14 @@ export default class LearningWorldSelectionPresenter
     });
     this.viewModel.newData.Value = true;
 
-    // set the initially selected space
-    this.viewModel.selectedWorldID.Value =
-      userWorlds.lastVisitedWorldID || userWorlds.worldInfo[0].worldID;
-    this.loadWorldUseCase.executeAsync({
-      worldID: userWorlds.lastVisitedWorldID || userWorlds.worldInfo[0].worldID,
-    });
+    if (userWorlds.worldInfo.length != 0) {
+      // set the initially selected space
+      this.viewModel.selectedWorldID.Value =
+        userWorlds.lastVisitedWorldID || userWorlds.worldInfo[0].worldID;
+      this.loadWorldUseCase.executeAsync({
+        worldID:
+          userWorlds.lastVisitedWorldID || userWorlds.worldInfo[0].worldID,
+      });
+    }
   }
 }
