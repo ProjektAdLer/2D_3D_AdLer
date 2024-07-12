@@ -1,6 +1,6 @@
 {
   "welcome": "Willkommen in AdLer!",
-  "moodleLoginSubheading": "Bitte loggen Sie sich in Moodle ein.",
+  "moodleLoginSubheading": "Bitte loggen Sie sich ein.",
   "loginSuccessfullSubheading": "Login erfolgreich!",
   "learningWorldButton": "zum Lernwelt-Menü",
   "copyright": "© Projekt AdLer, Technische Hochschule Aschaffenburg, Hochschule für angewandte Wissenschaften Kempten, ZFH - Zentrum für Fernstudien im Hochschulverbund",
@@ -15,7 +15,7 @@
   "loginButton": "Login",
 
   "cookieTitle": "Einwilligung zu Cookies & Daten",
-  "cookieText": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+  "cookieText": "Dies ist ein geklauter Standardtext! Wir verwenden Cookies und ähnliche Technologien auf unserer Website und verarbeiten personenbezogene Daten von dir (z.B. IP-Adresse), um z.B. Inhalte und Anzeigen zu personalisieren, Medien von Drittanbietern einzubinden oder Zugriffe auf unsere Website zu analysieren. Die Datenverarbeitung kann auch erst in Folge gesetzter Cookies stattfinden. Wir teilen diese Daten mit Dritten, die wir in den Privatsphäre-Einstellungen benennen. Die Datenverarbeitung kann mit deiner Einwilligung oder auf Basis eines berechtigten Interesses erfolgen, dem du in den Privatsphäre-Einstellungen widersprechen kannst. Du hast das Recht, nicht einzuwilligen und deine Einwilligung zu einem späteren Zeitpunkt zu ändern oder zu widerrufen. Weitere Informationen zur Verwendung deiner Daten findest du in unserer Datenschutzerklärung.",
   "cookieAcceptAll": "Alle akzeptieren",
   "cookieDecline": "Ablehnen"
 }

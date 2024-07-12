@@ -27,10 +27,12 @@ export default function ReturnHomeModal({ className }: AdLerUIComponent) {
       canClose={false}
       showModal={isNoWorldAvailable}
     >
-      <Trans i18nKey="NoAvailableCoursesReturnHomeText" ns="worldMenu" />
-      <StyledButton onClick={() => history.push("/")} className="mr-4">
-        <img className="w-10 xl:w-12 " src={homeIcon} alt="Home Icon" />
-      </StyledButton>
+      <div className="flex flex-col items-center">
+        <Trans i18nKey="NoAvailableCoursesReturnHomeText" ns="worldMenu" />
+        <StyledButton onClick={() => history.push("/")} className="mr-4 m-1">
+          <img className="w-10 xl:w-12" src={homeIcon} alt="Home Icon" />
+        </StyledButton>
+      </div>
     </StyledModal>
   );
 }
