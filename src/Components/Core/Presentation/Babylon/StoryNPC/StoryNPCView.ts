@@ -27,6 +27,7 @@ import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementT
 import bind from "bind-decorator";
 
 import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-story-1.glb";
+import HighlightColors from "../HighlightColors";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
@@ -46,6 +47,7 @@ export default class StoryNPCView {
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
 
     this.viewModel.state.subscribe(this.onStateChanged);
+    this.viewModel.isInteractable.subscribe(this.updateHighlight);
   }
 
   // -- Setup --
@@ -139,13 +141,17 @@ export default class StoryNPCView {
   }
 
   private addMeshesToHighlightLayer(): void {
-    const highlightColor = Color3.Teal();
-
     this.viewModel.modelMeshes.forEach((mesh) => {
-      this.scenePresenter.HighlightLayer.addMesh(mesh, highlightColor);
+      this.scenePresenter.HighlightLayer.addMesh(
+        mesh,
+        HighlightColors.NonLearningElementBase
+      );
     });
     this.viewModel.iconMeshes.forEach((mesh) => {
-      this.scenePresenter.HighlightLayer.addMesh(mesh, highlightColor);
+      this.scenePresenter.HighlightLayer.addMesh(
+        mesh,
+        HighlightColors.NonLearningElementBase
+      );
     });
   }
 
@@ -299,5 +305,28 @@ export default class StoryNPCView {
     this.viewModel.idleTimer = setTimeout(() => {
       this.setRandomMovementTarget();
     }, this.viewModel.idleTime);
+  }
+
+  private changeHighlightColor(color: Color3): void {
+    this.viewModel.modelMeshes?.forEach((mesh) => {
+      this.scenePresenter.HighlightLayer.removeMesh(mesh);
+      this.scenePresenter.HighlightLayer.addMesh(mesh, color);
+    });
+    this.viewModel.iconMeshes?.forEach((mesh) => {
+      this.scenePresenter.HighlightLayer.removeMesh(mesh);
+      this.scenePresenter.HighlightLayer.addMesh(mesh, color);
+    });
+  }
+
+  @bind
+  private updateHighlight(): void {
+    if (this.viewModel.isInteractable.Value)
+      this.changeHighlightColor(HighlightColors.NonLearningElementBase);
+    else
+      this.changeHighlightColor(
+        HighlightColors.getNonInteractableColor(
+          HighlightColors.NonLearningElementBase
+        )
+      );
   }
 }

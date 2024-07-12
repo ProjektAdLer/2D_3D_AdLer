@@ -22,6 +22,7 @@ import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceTh
 import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import HighlightColors from "../HighlightColors";
 
 const soundLink = require("../../../../../Assets/Sounds/door_opening.mp3");
 
@@ -153,7 +154,10 @@ export default class DoorView extends Readyable {
 
   private addToHighlightLayer(): void {
     this.viewModel.meshes.forEach((mesh) => {
-      this.scenePresenter.HighlightLayer.addMesh(mesh, Color3.Blue());
+      this.scenePresenter.HighlightLayer.addMesh(
+        mesh,
+        HighlightColors.NonLearningElementBase
+      );
     });
   }
 
@@ -181,22 +185,22 @@ export default class DoorView extends Readyable {
     });
   }
 
+  private changeHighlightColor(color: Color3): void {
+    this.viewModel.meshes?.forEach((mesh) => {
+      this.scenePresenter.HighlightLayer.removeMesh(mesh);
+      this.scenePresenter.HighlightLayer.addMesh(mesh, color);
+    });
+  }
+
   @bind
   private updateHighlight(): void {
-    if (this.viewModel.isInteractable.Value) {
-      this.viewModel.meshes.forEach((mesh) => {
-        this.scenePresenter.HighlightLayer.removeMesh(mesh);
-      });
-      this.viewModel.meshes.forEach((mesh) => {
-        this.scenePresenter.HighlightLayer.addMesh(mesh, Color3.Yellow());
-      });
-    } else {
-      this.viewModel.meshes.forEach((mesh) => {
-        this.scenePresenter.HighlightLayer.removeMesh(mesh);
-      });
-      this.viewModel.meshes.forEach((mesh) => {
-        this.scenePresenter.HighlightLayer.addMesh(mesh, Color3.Blue());
-      });
-    }
+    if (this.viewModel.isInteractable.Value)
+      this.changeHighlightColor(HighlightColors.NonLearningElementBase);
+    else
+      this.changeHighlightColor(
+        HighlightColors.getNonInteractableColor(
+          HighlightColors.NonLearningElementBase
+        )
+      );
   }
 }

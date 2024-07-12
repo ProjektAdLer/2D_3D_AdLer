@@ -17,6 +17,7 @@ import SCENE_TYPES, {
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import bind from "bind-decorator";
 import LearningElementModelLookup from "src/Components/Core/Domain/LearningElementModels/LearningElementModelLookup";
+import HighlightColors from "../HighlightColors";
 
 const iconLinks: { [key in LearningElementTypes]?: any } = {
   [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb"),
@@ -102,8 +103,8 @@ export default class LearningElementView {
 
   private addMeshesToHighlightLayer(): void {
     const highlightColor = this.viewModel.hasScored.Value
-      ? Color3.Green()
-      : Color3.Red();
+      ? HighlightColors.LearningElementSolved
+      : HighlightColors.LearningElementUnsolved;
 
     this.viewModel.modelMeshes.forEach((mesh) => {
       this.scenePresenter.HighlightLayer.addMesh(mesh, highlightColor);
@@ -146,12 +147,15 @@ export default class LearningElementView {
   private updateHighlight(): void {
     let highlightColor: Color3;
 
-    if (this.viewModel.isHighlighted.Value) highlightColor = Color3.Purple();
-    else if (this.viewModel.hasScored.Value) highlightColor = Color3.Green();
-    else highlightColor = Color3.Red();
+    // set base color
+    if (this.viewModel.isHighlighted.Value)
+      highlightColor = HighlightColors.LearningElementHighlighted;
+    else if (this.viewModel.hasScored.Value)
+      highlightColor = HighlightColors.LearningElementSolved;
+    else highlightColor = HighlightColors.LearningElementUnsolved;
 
-    if (this.viewModel.isInteractable.Value)
-      highlightColor = highlightColor.add(new Color3(0.5, 0.5, 0.5));
+    if (!this.viewModel.isInteractable.Value)
+      highlightColor = HighlightColors.getNonInteractableColor(highlightColor);
 
     this.changeHighlightColor(highlightColor);
   }
