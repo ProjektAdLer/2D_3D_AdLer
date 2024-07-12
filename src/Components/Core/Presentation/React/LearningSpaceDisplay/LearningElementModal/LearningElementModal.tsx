@@ -47,7 +47,7 @@ const modalStyleByTypeMap = {
   text: "h-[75vh]",
   pdf: "h-[75vh]",
   image: "max-h-[85vh]",
-  video: "",
+  video: "h-[60vh]",
   h5p: "",
   primitiveH5P: "",
 };

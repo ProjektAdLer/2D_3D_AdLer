@@ -6,7 +6,7 @@ const HighlightColors = {
   NonLearningElementBase: Color3.Blue(),
   LearningElementHighlighted: Color3.Purple(),
   getNonInteractableColor: (baseColor: Color3) => {
-    return baseColor.add(new Color3(0.5, 0.5, 0.5));
+    return baseColor.add(new Color3(0.45, 0.45, 0.45));
   },
 };
 

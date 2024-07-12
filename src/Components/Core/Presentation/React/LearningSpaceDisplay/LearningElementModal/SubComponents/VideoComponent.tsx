@@ -16,7 +16,7 @@ export default function VideoComponent({
   const videoComponent = getVideoComponent(filepath); // Set the video component using regex
 
   return (
-    <div className="flex justify-center items-top  h-[80vh] sm:h-[70vh] lg:h-[80vh] xl:h-[85vh] w-[85vw] ">
+    <div className="flex justify-center items-top  h-[80vh] sm:h-[70vh] lg:h-[75vh] xl:h-[80vh] w-[85vw] ">
       {videoComponent}
     </div>
   );

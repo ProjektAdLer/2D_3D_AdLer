@@ -15,7 +15,7 @@ export default function PDFComponent({
   viewModel: LearningElementModalViewModel;
 }) {
   return (
-    <div className="w-[90vw] h-[85vh] text-black font-medium overflow-auto bg-adlerblue-100 p-3">
+    <div className="w-[90vw] h-[80vh] sm:h-[70vh] lg:h-[75vh] xl:h-[80vh] text-black font-medium overflow-auto bg-adlerblue-100 p-3">
       {PDFObject.supportsPDFs || debug_alwaysShowMobile ? (
         <DesktopPDFComponent viewModel={viewModel} />
       ) : (
