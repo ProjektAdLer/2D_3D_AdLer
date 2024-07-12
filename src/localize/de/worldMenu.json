@@ -7,5 +7,7 @@
   "rooms_one": "Raum:",
   "rooms_other": "Räume:",
   "roomCount": "Anzahl Räume:",
-  "loadLearningWorldOverview": "Lade Lernwelten..."
+  "loadLearningWorldOverview": "Lade Lernwelten...",
+  "NoAvailableCoursesReturnHomeTitle": "Keinen Kurs gefunden",
+  "NoAvailableCoursesReturnHomeText": "Du bist momentan in keinen Kurs eingeschrieben.<br/>Bitte gehe zum Startbildschirm und melde dich bei einem Kurs an."
 }

@@ -38,6 +38,7 @@ import LoadingScreenBuilder from "~ReactComponents/GeneralComponents/LoadingScre
 import StoryNPCBuilder from "../../Presentation/Babylon/StoryNPC/StoryNPCBuilder";
 import StoryElementBuilder from "~ReactComponents/LearningSpaceDisplay/StoryElement/StoryElementBuilder";
 import CookieModalBuilder from "~ReactComponents/WelcomePage/CookieModal/CookieModalBuilder";
+import ReturnHomeModalBuilder from "~ReactComponents/LearningWorldMenu/ReturnHomeModal/ReturnHomeModalBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -140,6 +141,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ICookieModalBuilder).to(
     CookieModalBuilder
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IReturnHomeModalBuilder).to(
+    ReturnHomeModalBuilder
   );
 });
 
