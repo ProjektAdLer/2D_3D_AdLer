@@ -6,7 +6,6 @@ import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/Help
 import { useTranslation } from "react-i18next";
 import LogoutComponent from "~ReactComponents/WelcomePage/SignInAndOutComponent/LogoutComponent";
 import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
-import CookieModal from "~ReactComponents/WelcomePage/CookieModal/CookieModal";
 
 export default function WelcomePage() {
   const { t: translate } = useTranslation("start");
