@@ -26,6 +26,7 @@ import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavig
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import ICharacterNavigator from "../../../../Core/Presentation/Babylon/CharacterNavigator/ICharacterNavigator";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
+import HighlightColors from "../../../../Core/Presentation/Babylon/HighlightColors";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -527,6 +528,70 @@ describe("StoryNPCView", () => {
       systemUnderTest["setRandomMovementTarget"]();
 
       expect(characterNavigatorMock.startMovement).not.toBeCalled();
+    });
+  });
+
+  describe("highlighting", () => {
+    test("changeHighlightColor calls removeMesh and addMesh on the HighlightLayer", () => {
+      viewModel.modelMeshes = [
+        new Mesh("mockMesh", new Scene(new NullEngine())),
+      ];
+      viewModel.iconMeshes = [
+        new Mesh("mockMesh", new Scene(new NullEngine())),
+      ];
+
+      systemUnderTest["changeHighlightColor"](new Color3(1, 0, 0));
+
+      expect(scenePresenterMock.HighlightLayer.removeMesh).toBeCalledTimes(2);
+      expect(scenePresenterMock.HighlightLayer.removeMesh).toBeCalledWith(
+        viewModel.modelMeshes[0]
+      );
+      expect(scenePresenterMock.HighlightLayer.removeMesh).toBeCalledWith(
+        viewModel.iconMeshes[0]
+      );
+
+      expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledTimes(2);
+      expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
+        viewModel.modelMeshes[0],
+        new Color3(1, 0, 0)
+      );
+      expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
+        viewModel.iconMeshes[0],
+        new Color3(1, 0, 0)
+      );
+    });
+
+    test("changing isInteractable calls changeHighlightColor", () => {
+      viewModel.isInteractable.Value = true;
+      systemUnderTest["changeHighlightColor"] = jest.fn();
+
+      viewModel.isInteractable.Value = false;
+
+      expect(systemUnderTest["changeHighlightColor"]).toBeCalledTimes(1);
+    });
+
+    test("updateHighlight sets highlight color correctly when interactable", () => {
+      viewModel.isInteractable.Value = true;
+      systemUnderTest["changeHighlightColor"] = jest.fn();
+
+      systemUnderTest["updateHighlight"]();
+
+      expect(systemUnderTest["changeHighlightColor"]).toBeCalledWith(
+        HighlightColors.NonLearningElementBase
+      );
+    });
+
+    test("updateHighlight sets highlight color correctly when not interactable", () => {
+      viewModel.isInteractable.Value = false;
+      systemUnderTest["changeHighlightColor"] = jest.fn();
+
+      systemUnderTest["updateHighlight"]();
+
+      expect(systemUnderTest["changeHighlightColor"]).toBeCalledWith(
+        HighlightColors.getNonInteractableColor(
+          HighlightColors.NonLearningElementBase
+        )
+      );
     });
   });
 });

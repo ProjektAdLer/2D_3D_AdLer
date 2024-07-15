@@ -15,6 +15,7 @@ import {
 } from "@babylonjs/core";
 import { ActionManager } from "@babylonjs/core/Actions/actionManager";
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import HighlightColors from "../../../../Core/Presentation/Babylon/HighlightColors";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -72,7 +73,7 @@ describe("LearningElementView", () => {
   });
 
   //ANF-ID: [ELG0027]
-  test("changing isHighlighted to true changes the highlight color to purple", async () => {
+  test("changing isHighlighted to true changes the highlight color", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
@@ -83,18 +84,19 @@ describe("LearningElementView", () => {
     await systemUnderTest.setupLearningElement();
 
     viewModel.isHighlighted.Value = true;
+    viewModel.isInteractable.Value = true;
 
     expect(scenePresenterMock.HighlightLayer.removeMesh).toHaveBeenCalledWith(
       viewModel.modelMeshes[0]
     );
     expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
       viewModel.modelMeshes[0],
-      Color3.Purple()
+      HighlightColors.LearningElementHighlighted
     );
   });
 
   //ANF-ID: [ELG0027]
-  test("changing isHighlighted to false changes the highlight color to green if hasScored is true", async () => {
+  test("changing isHighlighted to false changes the highlight color if hasScored is true", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
@@ -113,7 +115,7 @@ describe("LearningElementView", () => {
     );
     expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
       viewModel.modelMeshes[0],
-      Color3.Green()
+      HighlightColors.LearningElementSolved
     );
   });
 

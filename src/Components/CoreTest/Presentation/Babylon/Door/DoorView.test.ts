@@ -21,6 +21,7 @@ import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSp
 import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
+import HighlightColors from "../../../../Core/Presentation/Babylon/HighlightColors";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -205,7 +206,7 @@ describe("DoorView", () => {
   });
 
   //ANF-ID: [ELG0018]
-  test("updateHighlight sets highlight to yellow when door is interactable", async () => {
+  test("updateHighlight sets highlight when door is interactable", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
     viewModel.meshes = [mockMesh as Mesh];
@@ -215,12 +216,12 @@ describe("DoorView", () => {
 
     expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
       mockMesh,
-      Color3.Yellow()
+      HighlightColors.NonLearningElementBase
     );
   });
 
   //ANF-ID: [ELG0018]
-  test("changeHighlight sets highlight to blue when door is not interactable", async () => {
+  test("changeHighlight sets highlight when door is not interactable", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
     viewModel.meshes = [mockMesh as Mesh];
@@ -230,7 +231,9 @@ describe("DoorView", () => {
 
     expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
       mockMesh,
-      Color3.Blue()
+      HighlightColors.getNonInteractableColor(
+        HighlightColors.NonLearningElementBase
+      )
     );
   });
 
