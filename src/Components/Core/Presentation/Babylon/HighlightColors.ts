@@ -1,7 +1,7 @@
 import { Color3 } from "@babylonjs/core";
 
 const HighlightColors = {
-  LearningElementUnsolved: Color3.FromHexString("#FA0000"),
+  LearningElementUnsolved: Color3.FromHexString("#FFFF00"),
   LearningElementSolved: Color3.FromInts(0, 255, 0),
   NonLearningElementBase: new Color3(0, 0, 1),
   LearningElementHighlighted: new Color3(1, 0, 1),
