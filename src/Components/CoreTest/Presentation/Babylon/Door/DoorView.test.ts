@@ -216,9 +216,7 @@ describe("DoorView", () => {
 
     expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
       mockMesh,
-      HighlightColors.getNonInteractableColor(
-        HighlightColors.NonLearningElementBase
-      )
+      HighlightColors.NonLearningElementBase
     );
   });
 
@@ -233,7 +231,9 @@ describe("DoorView", () => {
 
     expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
       mockMesh,
-      HighlightColors.NonLearningElementBase
+      HighlightColors.getNonInteractableColor(
+        HighlightColors.NonLearningElementBase
+      )
     );
   });
 
