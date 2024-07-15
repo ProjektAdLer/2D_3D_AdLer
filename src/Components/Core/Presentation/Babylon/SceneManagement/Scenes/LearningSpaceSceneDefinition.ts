@@ -70,8 +70,8 @@ export default class LearningSpaceSceneDefinition
     // setup highlight layer
     this.highlightLayer = new HighlightLayer("highlightLayer", this.scene);
     this.highlightLayer.innerGlow = false;
-    this.highlightLayer.blurHorizontalSize = 1;
-    this.highlightLayer.blurVerticalSize = 1;
+    this.highlightLayer.blurHorizontalSize = 2.2;
+    this.highlightLayer.blurVerticalSize = 2.2;
 
     // create space ambience
     this.ambienceBuilder.theme = this.spaceData?.theme;
