@@ -23,6 +23,7 @@ export default class AvatarCameraController implements IAvatarCameraController {
       .pointers as ArcRotateCameraPointersInput;
     pointersInput.multiTouchPanAndZoom = true;
     pointersInput.pinchZoom = true;
+    pointersInput.panningSensibility = 0;
 
     // clamp camera rotation to the default values to prevent panning
     camera.upperAlphaLimit = this.viewModel.defaultAlphaRotation;
