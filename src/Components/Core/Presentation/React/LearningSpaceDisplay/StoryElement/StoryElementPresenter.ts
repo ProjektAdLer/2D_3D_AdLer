@@ -37,24 +37,26 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
           StoryElementType.Intro) ===
         StoryElementType.Intro
       ) {
-        if (learningSpaceTO.storyElements[i].introStoryTexts?.length === 0) {
-          this.viewModel.introTexts.Value = ["Kein Text vorhanden."];
-        } else {
+        if (
+          learningSpaceTO.storyElements[i].introStoryTexts &&
+          learningSpaceTO.storyElements[i].introStoryTexts?.length !== 0
+        )
           this.viewModel.introTexts.Value =
             learningSpaceTO.storyElements[i].introStoryTexts!;
-        }
+        else this.viewModel.introTexts.Value = ["Kein Text vorhanden."];
       }
       if (
         (learningSpaceTO.storyElements[i].storyType &
           StoryElementType.Outro) ===
         StoryElementType.Outro
       ) {
-        if (learningSpaceTO.storyElements[i].outroStoryTexts?.length === 0) {
-          this.viewModel.outroTexts.Value = ["Kein Text vorhanden."];
-        } else {
+        if (
+          learningSpaceTO.storyElements[i].outroStoryTexts &&
+          learningSpaceTO.storyElements[i].outroStoryTexts?.length !== 0
+        )
           this.viewModel.outroTexts.Value =
             learningSpaceTO.storyElements[i].outroStoryTexts!;
-        }
+        else this.viewModel.outroTexts.Value = ["Kein Text vorhanden."];
       }
 
       if (learningSpaceTO.storyElements[i].modelType !== null)

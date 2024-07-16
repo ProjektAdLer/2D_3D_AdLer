@@ -3,10 +3,7 @@ import { StoryElementType } from "../../../../../Core/Domain/Types/StoryElementT
 import StoryElementPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/StoryElementPresenter";
 import StoryElementViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/StoryElementViewModel";
 import LearningSpaceTO from "../../../../../Core/Application/DataTransferObjects/LearningSpaceTO";
-import {
-  LearningElementModel,
-  LearningElementModelTypeEnums,
-} from "../../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
+import { LearningElementModelTypeEnums } from "../../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
 describe("StoryElementPresenter", () => {
   let systemUnderTest: StoryElementPresenter;
@@ -30,6 +27,7 @@ describe("StoryElementPresenter", () => {
     expect(viewModel.showOnlyIntro.Value).toBe(false);
     expect(viewModel.showOnlyOutro.Value).toBe(false);
   });
+
   test("open sets the correct values, when split stories present", () => {
     viewModel.isOpen.Value = false;
     viewModel.pageId.Value = 1;
@@ -57,6 +55,7 @@ describe("StoryElementPresenter", () => {
     expect(viewModel.outroJustNowUnlocked.Value).toBe(true);
     expect(viewModel.outroUnlocked.Value).toBe(true);
   });
+
   test("onStoryElementCutSceneTriggered sets no values, if the type is not outro", () => {
     viewModel.pageId.Value = 1;
     viewModel.outroJustNowUnlocked.Value = false;
@@ -78,28 +77,12 @@ describe("StoryElementPresenter", () => {
         storyType: StoryElementType.IntroOutro,
       },
     ];
-    let learningSpaceTO: LearningSpaceTO = {
-      id: 1,
-      name: "blabla",
-      elements: [],
-      description: "blabla",
-      goals: [],
-      requirementsString: "blabla",
-      requirementsSyntaxTree: null,
-      isAvailable: true,
-      requiredScore: 1,
-      currentScore: 1,
-      maxScore: 1,
-      template: null,
-      theme: null,
-      storyElements: storyElement,
-    };
 
     viewModel.introTexts.Value = ["nicht blabla"];
     viewModel.outroTexts.Value = ["nicht blabla"];
     viewModel.type.Value = [StoryElementType.None];
 
-    systemUnderTest.onLearningSpaceLoaded(learningSpaceTO);
+    systemUnderTest.onLearningSpaceLoaded({ storyElements: storyElement });
 
     expect(viewModel.introTexts.Value).toStrictEqual([
       "blabla111",
@@ -108,8 +91,9 @@ describe("StoryElementPresenter", () => {
     expect(viewModel.outroTexts.Value).toStrictEqual(["blabla333"]);
     expect(viewModel.type.Value).toStrictEqual([StoryElementType.IntroOutro]);
   });
+
   test("onLearningSpaceLoaded sets the correct values, with model types", () => {
-    let storyElement: StoryElementTO[] = [
+    let mockedStoryElements: StoryElementTO[] = [
       {
         introStoryTexts: ["blabla111", "blabla222"],
         outroStoryTexts: ["blabla333"],
@@ -118,28 +102,14 @@ describe("StoryElementPresenter", () => {
         storyType: StoryElementType.IntroOutro,
       },
     ];
-    let learningSpaceTO: LearningSpaceTO = {
-      id: 1,
-      name: "blabla",
-      elements: [],
-      description: "blabla",
-      goals: [],
-      requirementsString: "blabla",
-      requirementsSyntaxTree: null,
-      isAvailable: true,
-      requiredScore: 1,
-      currentScore: 0,
-      maxScore: 1,
-      template: null,
-      theme: null,
-      storyElements: storyElement,
-    };
 
     viewModel.introTexts.Value = ["nicht blabla"];
     viewModel.outroTexts.Value = ["nicht blabla"];
     viewModel.type.Value = [StoryElementType.None];
 
-    systemUnderTest.onLearningSpaceLoaded(learningSpaceTO);
+    systemUnderTest.onLearningSpaceLoaded({
+      storyElements: mockedStoryElements,
+    });
 
     expect(viewModel.introTexts.Value).toStrictEqual([
       "blabla111",
@@ -150,7 +120,7 @@ describe("StoryElementPresenter", () => {
   });
 
   test("onLearningSpaceLoaded sets the correct values if no texts are given", () => {
-    let storyElement: StoryElementTO[] = [
+    let mockedStoryElements: StoryElementTO[] = [
       {
         introStoryTexts: [],
         outroStoryTexts: null,
@@ -159,28 +129,14 @@ describe("StoryElementPresenter", () => {
         storyType: StoryElementType.IntroOutro,
       },
     ];
-    let learningSpaceTO: LearningSpaceTO = {
-      id: 1,
-      name: "blabla",
-      elements: [],
-      description: "blabla",
-      goals: [],
-      requirementsString: "blabla",
-      requirementsSyntaxTree: null,
-      isAvailable: true,
-      requiredScore: 1,
-      currentScore: 0,
-      maxScore: 1,
-      template: null,
-      theme: null,
-      storyElements: storyElement,
-    };
 
     viewModel.introTexts.Value = ["nicht blabla"];
     viewModel.outroTexts.Value = ["nicht blabla"];
     viewModel.type.Value = [StoryElementType.None];
 
-    systemUnderTest.onLearningSpaceLoaded(learningSpaceTO);
+    systemUnderTest.onLearningSpaceLoaded({
+      storyElements: mockedStoryElements,
+    });
 
     expect(viewModel.introTexts.Value).toStrictEqual(["Kein Text vorhanden."]);
     expect(viewModel.outroTexts.Value).toStrictEqual(["Kein Text vorhanden."]);
