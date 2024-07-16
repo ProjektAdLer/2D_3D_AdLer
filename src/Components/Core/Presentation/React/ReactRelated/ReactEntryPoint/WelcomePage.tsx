@@ -10,7 +10,7 @@ import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldM
 export default function WelcomePage() {
   const { t: translate } = useTranslation("start");
   return (
-    <div className="relative grid h-[100svh] grid-cols-8 grid-rows-6 p-6 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
+    <div className=" relative grid h-[100svh] grid-cols-8 grid-rows-6 p-2 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
       <img
         className="absolute w-32 m-4 -bottom-3 -right-3 opacity-20"
         src={logo}
