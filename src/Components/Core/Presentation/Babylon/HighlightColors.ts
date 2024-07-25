@@ -1,6 +1,7 @@
 import { Color3 } from "@babylonjs/core";
 
 // this will hopefully be the first line of a working commit.
+// This worked. Let's see if the second line works too.
 // possible ways to write color:
 // Color3.FromHexString("#FFFF00") -> HEX-Code standard way to use
 // Color3.FromInts(0, 255, 0) -> RGB-Code 0-256
