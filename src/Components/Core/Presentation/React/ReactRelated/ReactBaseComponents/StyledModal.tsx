@@ -1,6 +1,7 @@
 import React from "react";
 import StyledContainer from "./StyledContainer";
 import StyledButton from "./StyledButton";
+import closeIcon from "../../../../../../Assets/icons/53-close/close-icon-nobg.svg";
 
 type Props = Partial<{
   hasFooter?: boolean;
@@ -64,7 +65,11 @@ export default function StyledModal({
                   onClose?.();
                 }}
               >
-                X
+                <img
+                  src={closeIcon}
+                  className="lg:w-10 md:w-8 sm:w-6"
+                  alt="CloseButton"
+                ></img>
               </StyledButton>
             )}
           </div>

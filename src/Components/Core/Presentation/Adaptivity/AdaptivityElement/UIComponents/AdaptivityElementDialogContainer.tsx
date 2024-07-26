@@ -6,6 +6,7 @@ import defaultNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_defa
 import defaultNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_defaultnpc_close.png";
 import robotNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot.png";
 import robotNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot_close.png";
+import closeIcon from "../../../../../../Assets/icons/53-close/close-icon-nobg.svg";
 
 import requiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-solved-icon.svg";
 import requiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-tried.svg";
@@ -187,7 +188,11 @@ export default function AdaptivityElementDialogContainer({
                   className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
                   shape="closeButton"
                 >
-                  X
+                  <img
+                    src={closeIcon}
+                    className="lg:w-10 md:w-8 sm:w-6"
+                    alt="CloseButton"
+                  ></img>
                 </StyledButton>
               </div>
 
