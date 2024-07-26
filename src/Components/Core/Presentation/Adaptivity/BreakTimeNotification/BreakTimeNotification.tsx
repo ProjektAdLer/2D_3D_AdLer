@@ -11,6 +11,7 @@ import { AdLerUIComponent } from "../../../Types/ReactTypes";
 import tailwindMerge from "../../Utils/TailwindMerge";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import pauseIcon from "../../../../../Assets/icons/42-pause-icon/47-pause-icon-nobg.svg";
+import closeIcon from "../../../../../../src/Assets/icons/53-close/close-icon-nobg.svg";
 import { useEffect, useState } from "react";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import { useTranslation } from "react-i18next";
@@ -69,7 +70,11 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
           className="place-self-start flex items-center justify-center border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue rounded-lg font-bold"
           onClick={() => controller.closeBreakNotification()}
         >
-          x
+          <img
+            src={closeIcon}
+            className="lg:w-10 md:w-8 sm:w-6"
+            alt="CloseIcon"
+          ></img>
         </StyledButton>
       </StyledContainer>
     );
