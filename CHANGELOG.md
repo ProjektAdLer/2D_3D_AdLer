@@ -10,15 +10,15 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
--
+- close-icon-nobg.svg
 
 ### Changed
 
--
+- new icon to Modal Close Buttons
 
 ### Removed
 
--
+- Typo "x" in Modal Close Buttons
 
 ### Fixed
 
