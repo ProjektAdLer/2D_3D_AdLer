@@ -128,7 +128,11 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
                 <button
                   class="roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 justify-center p-1 md:w-12 md:h-12 sm:w-10 sm:h-10 w-8 h-8 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-1 active:translate-y-1 active:border-transparent text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                 >
-                  X
+                  <img
+                    alt="CloseButton"
+                    class="lg:w-10 md:w-8 sm:w-6"
+                    src="close-icon-nobg.svg"
+                  />
                 </button>
               </div>
             </div>
