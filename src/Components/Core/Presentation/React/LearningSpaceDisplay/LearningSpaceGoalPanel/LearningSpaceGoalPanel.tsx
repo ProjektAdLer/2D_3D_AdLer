@@ -26,12 +26,13 @@ export default function LearningSpaceGoalPanel() {
 
   return (
     <div>
-      <img
-        className="w-[48px] lg:w-[69px] hover:cursor-pointer"
-        src={GoalIcon}
-        onClick={controller.openPanel}
-        alt="Lernziel Icon"
-      ></img>
+      <StyledButton onClick={controller.openOrCloseGoals}>
+        <img
+          className="w-[48px] lg:w-[69px] hover:cursor-pointer"
+          src={GoalIcon}
+          alt="Lernziel Icon"
+        ></img>
+      </StyledButton>
 
       {isOpen && (
         <StyledContainer className="fixed z-10 max-w-2xl max-h-[90vh] p-2 overflow-auto rounded-lg top-12 right-0 md:top-20 lg:right-40 bg-buttonbgblue">
@@ -59,7 +60,7 @@ export default function LearningSpaceGoalPanel() {
                   </div>
                   {/* Learning Goals */}
                   {goals.length === 1 && (
-                    <div className="text-xs  lg:text-sm">
+                    <div className="text-xs lg:text-sm">
                       {goals.map((goal, index) => {
                         return (
                           <div className="my-2" key={index}>
@@ -86,7 +87,7 @@ export default function LearningSpaceGoalPanel() {
                   <StyledButton
                     shape="closeButton"
                     onClick={() => {
-                      viewModel.isOpen.Value = false;
+                      controller.closePanel();
                     }}
                   >
                     {translate("confirmButton")}

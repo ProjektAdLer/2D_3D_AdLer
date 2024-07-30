@@ -15,4 +15,8 @@ export default class LearningSpaceGoalPanelController
   openPanel(): void {
     this.viewModel.isOpen.Value = true;
   }
+  @bind
+  openOrCloseGoals(): void {
+    this.viewModel.isOpen.Value = !this.viewModel.isOpen.Value;
+  }
 }
