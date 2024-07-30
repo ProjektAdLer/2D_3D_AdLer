@@ -19,7 +19,7 @@ interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {}
 export default function LearningSpaceScorePanel({
   ...rest
 }: React.DetailedHTMLProps<PanelProps, HTMLDivElement>) {
-  const [viewModel, controller] = useBuilder<
+  const [viewModel] = useBuilder<
     LearningSpaceScorePanelViewModel,
     LearningSpaceScorePanelController
   >(BUILDER_TYPES.ILearningSpaceScorePanelBuilder);
@@ -36,10 +36,7 @@ export default function LearningSpaceScorePanel({
 
   if (!viewModel) return null;
   return (
-    <div
-      className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full hover:cursor-pointer"
-      onClick={controller.panelClicked}
-    >
+    <div className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full">
       <CircularProgressbarWithChildren
         value={percentage}
         strokeWidth={10}

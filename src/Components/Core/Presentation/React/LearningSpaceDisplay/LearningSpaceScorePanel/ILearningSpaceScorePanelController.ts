@@ -1,3 +1,1 @@
-export default interface ILearningSpaceScorePanelController {
-  panelClicked(): void;
-}
+export default interface ILearningSpaceScorePanelController {}
