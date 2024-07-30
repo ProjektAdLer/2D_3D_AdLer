@@ -27,7 +27,7 @@ export default function LearningSpaceGoalPanel() {
   return (
     <div>
       <img
-        className="w-[48px] lg:w-[69px]"
+        className="w-[48px] lg:w-[69px] hover:cursor-pointer"
         src={GoalIcon}
         onClick={controller.openPanel}
         alt="Lernziel Icon"
