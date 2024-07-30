@@ -17,7 +17,7 @@ import StoryElement from "~ReactComponents/LearningSpaceDisplay/StoryElement/Sto
 export default function LearningSpace() {
   return (
     <div className="grid h-0 min-h-[90vh] lg:min-h-[90vh] grid-cols-9 grid-rows-6 root">
-      <section className="fixed z-10 flex flex-col-reverse col-span-2 col-start-8 row-start-1 gap-1 space-x-2 space-x-reverse lg:flex-row-reverse right-2 top-2">
+      <section className="fixed z-20 flex flex-col-reverse col-span-2 col-start-8 row-start-1 gap-1 space-x-2 space-x-reverse lg:flex-row-reverse right-2 top-2">
         <LearningWorldScorePanel />
         <LearningSpaceScorePanel />
         <LearningSpaceGoalPanel />
@@ -33,7 +33,7 @@ export default function LearningSpace() {
       <BottomTooltip className="z-10 items-start justify-center col-span-7 col-start-2 row-start-6 lg:col-span-5 lg:col-start-3" />
       <AdaptivityElementDialogContainer className="z-50" />
       <LearningElementModal className="z-10" />
-      <ExitModal className="z-20" />
+      <ExitModal className="z-30" />
       <BreakTimeNotification className="z-10" />
 
       <StoryElement />

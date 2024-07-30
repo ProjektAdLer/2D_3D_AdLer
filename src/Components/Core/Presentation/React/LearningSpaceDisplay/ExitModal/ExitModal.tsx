@@ -31,39 +31,37 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
   if (!isOpen) return null;
 
   return (
-    <div>
-      <StyledModal
-        title={translate(viewModel.modalTitle.Value).toString()}
-        onClose={closeModal}
-        showModal={isOpen}
-        className={tailwindMerge(
-          className,
-          "flex flex-col justify-center gap-2 p-5 rounded-lg"
-        )}
+    <StyledModal
+      title={translate(viewModel.modalTitle.Value).toString()}
+      onClose={closeModal}
+      showModal={isOpen}
+      className={tailwindMerge(
+        className,
+        "flex flex-col justify-center gap-2 p-5 rounded-lg"
+      )}
+    >
+      <StyledButton
+        disabled={false}
+        shape="freefloatcenter"
+        className="flex w-[100%] mb-2 "
+        onClick={controller.onExitButtonClicked}
       >
-        <StyledButton
-          disabled={false}
-          shape="freefloatcenter"
-          className="flex w-[100%] mb-2 "
-          onClick={controller.onExitButtonClicked}
-        >
-          {translate(viewModel.exitButtonTitle.Value).toString()}
-        </StyledButton>
+        {translate(viewModel.exitButtonTitle.Value).toString()}
+      </StyledButton>
 
-        {viewModel.isExit.Value &&
-          viewModel.successorSpaces.Value.length > 0 &&
-          viewModel.successorSpaces.Value.map((successorSpace) => {
-            return createSpaceButton(successorSpace, controller);
-          })}
-        {!viewModel.isExit.Value &&
-          viewModel.precursorSpaces.Value.length > 0 &&
-          viewModel.precursorSpaces.Value.map(
-            (precursorSpace: LearningSpaceTO) => {
-              return createSpaceButton(precursorSpace, controller);
-            }
-          )}
-      </StyledModal>
-    </div>
+      {viewModel.isExit.Value &&
+        viewModel.successorSpaces.Value.length > 0 &&
+        viewModel.successorSpaces.Value.map((successorSpace) => {
+          return createSpaceButton(successorSpace, controller);
+        })}
+      {!viewModel.isExit.Value &&
+        viewModel.precursorSpaces.Value.length > 0 &&
+        viewModel.precursorSpaces.Value.map(
+          (precursorSpace: LearningSpaceTO) => {
+            return createSpaceButton(precursorSpace, controller);
+          }
+        )}
+    </StyledModal>
   );
 }
 
