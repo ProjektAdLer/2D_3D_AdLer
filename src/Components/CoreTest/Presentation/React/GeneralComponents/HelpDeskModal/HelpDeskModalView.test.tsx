@@ -69,7 +69,7 @@ describe("HelpDeskModal", () => {
         <HelpDeskModal />
       </Provider>
     );
-    const closeButton = componentUnderTest.getByRole("button", { name: "X" });
+    const closeButton = componentUnderTest.getByAltText("CloseButton");
     fireEvent.click(closeButton);
     expect(viewModel.isOpen.Value).toBe(false);
   });

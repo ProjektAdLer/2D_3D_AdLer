@@ -53,7 +53,7 @@ describe("ExitModal", () => {
     useBuilderMock([viewModel, fakeController]);
 
     const componentUnderTest = render(<ExitModal />);
-    const closeButton = componentUnderTest.getByRole("button", { name: "X" });
+    const closeButton = componentUnderTest.getByAltText("CloseButton");
     fireEvent.click(closeButton);
 
     expect(viewModel.isOpen.Value).toBe(false);

@@ -27,7 +27,7 @@ describe("LearningSpaceGoalPanel", () => {
 
     const componentUnderTest = render(<LearningSpaceGoalPanel />);
 
-    fireEvent.click(componentUnderTest.getByRole("button"));
+    fireEvent.click(componentUnderTest.getByText("confirmButton"));
     expect(viewModelMock.isOpen.Value).toBe(false);
   });
 

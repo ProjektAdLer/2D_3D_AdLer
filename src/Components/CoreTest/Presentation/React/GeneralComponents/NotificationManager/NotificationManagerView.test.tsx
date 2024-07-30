@@ -31,7 +31,7 @@ describe("NotificationManager", () => {
 
     expect(componentUnderTest.getByText("test2")).toBeInTheDocument();
 
-    fireEvent.click(componentUnderTest.getByText("X"));
+    fireEvent.click(componentUnderTest.getByAltText("CloseButton"));
 
     expect(componentUnderTest.getByText("test")).toBeInTheDocument();
   });

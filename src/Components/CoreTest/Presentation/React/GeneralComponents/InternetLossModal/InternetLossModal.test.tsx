@@ -18,7 +18,7 @@ describe("InternetLossModal", () => {
     expect(componentUnderTest.container.firstChild).toBeNull();
     fireEvent(window, new Event("offline"));
     expect(componentUnderTest.container.firstChild).not.toBeNull();
-    const closeButton = componentUnderTest.getByRole("button", { name: "X" });
+    const closeButton = componentUnderTest.getByAltText("CloseButton");
     fireEvent.click(closeButton);
     expect(componentUnderTest.container.firstChild).toBeNull();
   });

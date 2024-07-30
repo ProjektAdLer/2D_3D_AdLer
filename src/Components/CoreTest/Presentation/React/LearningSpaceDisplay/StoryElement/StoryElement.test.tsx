@@ -77,7 +77,7 @@ describe("StoryElement", () => {
     useBuilderMock([viewModel, fakeController]);
 
     const componentUnderTest = render(<StoryElement />);
-    const xButton = componentUnderTest.getByRole("button", { name: "X" });
+    const xButton = componentUnderTest.getByAltText("CloseButton");
     fireEvent.click(xButton);
     expect(fakeController.closePanel).toHaveBeenCalled();
   });

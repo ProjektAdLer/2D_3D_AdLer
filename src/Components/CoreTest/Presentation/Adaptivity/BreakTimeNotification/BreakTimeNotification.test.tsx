@@ -73,7 +73,7 @@ describe("BreakTimeNotification", () => {
     viewModel.showMinimizedModal.Value = true;
 
     render(<BreakTimeNotification />);
-    fireEvent.click(screen.getByText("x"));
+    fireEvent.click(screen.getByAltText("CloseIcon"));
 
     expect(mockController.closeBreakNotification).toHaveBeenCalledTimes(1);
   });
@@ -85,8 +85,8 @@ describe("BreakTimeNotification", () => {
     viewModel.breakType.Value = BreakTimeNotificationType.Short;
     viewModel.slideIndex.Value = 0;
 
-    const { getByText } = render(<BreakTimeNotification />);
-    const closeButton = getByText("X");
+    const { getByAltText } = render(<BreakTimeNotification />);
+    const closeButton = getByAltText("CloseButton");
 
     closeButton.click();
 

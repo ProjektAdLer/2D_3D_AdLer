@@ -158,9 +158,7 @@ describe("LearningElementModal", () => {
     mockViewModel.type.Value = "h5p";
 
     const componentUnderTest = render(<LearningElementModal />);
-    const closeButton = componentUnderTest.getByRole("button", {
-      name: "X",
-    });
+    const closeButton = componentUnderTest.getByAltText("CloseButton");
     fireEvent.click(closeButton);
 
     expect(mockController.closeModal).toHaveBeenCalled();
@@ -180,9 +178,7 @@ describe("LearningElementModal", () => {
     mockViewModel.type.Value = "text";
 
     const componentUnderTest = render(<LearningElementModal />);
-    const closeButton = componentUnderTest.getByRole("button", {
-      name: "X",
-    });
+    const closeButton = componentUnderTest.getByAltText("CloseButton");
     fireEvent.click(closeButton);
 
     expect(mockController.closeModal).toHaveBeenCalled();
