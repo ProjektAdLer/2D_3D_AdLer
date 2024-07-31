@@ -11,18 +11,22 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Added
 
 - close-icon-nobg.svg
+- added informing modal if user is not registered in any courses
 
 ### Changed
 
 - new icon to Modal Close Buttons
+- move trigger of potential outro cutscene of story and learning element to closing respective modal
 
 ### Removed
 
 - Typo "x" in Modal Close Buttons
+- removed displaying space goal panel from space score panel
 
 ### Fixed
 
--
+- fixed unlocking of outro cutscene text in story element dialog menu
+- fixed crash if story element accesses non-existing text-element
 
 ### Deprecated
 
