@@ -1,6 +1,8 @@
+import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
+import ILearningWorldAdapter from "src/Components/Core/Application/Ports/LearningWorldPort/ILearningWorldAdapter";
 import { LearningElementTypeStrings } from "src/Components/Core/Domain/Types/LearningElementTypes";
 
-export default interface IBottomTooltipPresenter {
+export default interface IBottomTooltipPresenter extends ILearningWorldAdapter {
   display(
     text: string,
     iconType?: LearningElementTypeStrings,
@@ -10,4 +12,5 @@ export default interface IBottomTooltipPresenter {
   hide(toolTipId: number): void;
   hideAll(): void;
   show(): void;
+  onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void;
 }

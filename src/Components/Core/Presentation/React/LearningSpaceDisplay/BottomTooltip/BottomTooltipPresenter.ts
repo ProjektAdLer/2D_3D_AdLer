@@ -5,6 +5,8 @@ import {
   LearningElementTypes,
 } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { injectable } from "inversify";
+import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
+import bind from "bind-decorator";
 
 interface BottomTooltipData {
   id: number;
@@ -59,6 +61,11 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
   }
 
   show(): void {
+    this.updateViewModel();
+  }
+
+  onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
+    this.dataQueue = []; // prevents displaying tooltip of previous space
     this.updateViewModel();
   }
 

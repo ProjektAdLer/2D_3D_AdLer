@@ -71,4 +71,16 @@ describe("BottomTooltipPresenter", () => {
     systemUnderTest.show();
     expect(vm.show.Value).toBe(true);
   });
+
+  test("should clear queue if onLearningSpaceLoaded was called", () => {
+    const text = "test";
+    const iconType = "test";
+    const points = 1;
+    const onClickCallback = () => {};
+    systemUnderTest.display(text, iconType, points, onClickCallback);
+    systemUnderTest.onLearningSpaceLoaded({});
+
+    expect(systemUnderTest["dataQueue"].length).toBe(0);
+    expect(vm.show.Value).toBe(false);
+  });
 });
