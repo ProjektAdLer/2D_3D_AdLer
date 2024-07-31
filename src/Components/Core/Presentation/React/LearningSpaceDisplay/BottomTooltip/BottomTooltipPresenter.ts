@@ -6,7 +6,6 @@ import {
 } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { injectable } from "inversify";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
-import bind from "bind-decorator";
 
 interface BottomTooltipData {
   id: number;
