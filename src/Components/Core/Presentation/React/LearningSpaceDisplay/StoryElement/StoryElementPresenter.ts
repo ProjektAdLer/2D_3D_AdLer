@@ -8,30 +8,29 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
 
   open(type: StoryElementType): void {
     this.viewModel.isOpen.Value = true;
-    this.viewModel.pageId.Value = 0;
-    this.viewModel.showOnlyIntro.Value = false;
-    this.viewModel.showOnlyOutro.Value = false;
 
-    if (this.viewModel.isSplitStory.Value) {
-      this.viewModel.pickedStory.Value = type;
-    }
+    if (type === StoryElementType.IntroOutro) {
+      if (this.viewModel.isOutroCutsceneRunning.Value)
+        this.viewModel.storyTypeToDisplay.Value = StoryElementType.Outro;
+      else if (!this.viewModel.isOutroUnlocked.Value)
+        this.viewModel.storyTypeToDisplay.Value = StoryElementType.Intro;
+      else
+        this.viewModel.storyTypeToDisplay.Value = StoryElementType.IntroOutro;
+    } else this.viewModel.storyTypeToDisplay.Value = type;
   }
 
   onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
     if (storyType === StoryElementType.Outro) {
-      this.viewModel.outroJustNowUnlocked.Value = true;
-      this.viewModel.outroUnlocked.Value = true;
-      this.viewModel.pageId.Value = 0;
+      this.viewModel.isOutroUnlocked.Value = true;
+      this.viewModel.isOutroCutsceneRunning.Value = true;
     }
   }
 
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
-    this.viewModel.isSplitStory.Value =
-      learningSpaceTO.storyElements.length === 2;
+    this.viewModel.isOutroUnlocked.Value =
+      learningSpaceTO.currentScore >= learningSpaceTO.requiredScore;
 
     for (let i = 0; i < learningSpaceTO.storyElements.length; i++) {
-      this.viewModel.type.Value[i] = learningSpaceTO.storyElements[i].storyType;
-
       if (
         (learningSpaceTO.storyElements[i].storyType &
           StoryElementType.Intro) ===
@@ -44,6 +43,9 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
           this.viewModel.introTexts.Value =
             learningSpaceTO.storyElements[i].introStoryTexts!;
         else this.viewModel.introTexts.Value = ["Kein Text vorhanden."];
+
+        this.viewModel.introModelType.Value =
+          learningSpaceTO.storyElements[i].modelType!;
       }
       if (
         (learningSpaceTO.storyElements[i].storyType &
@@ -57,14 +59,10 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
           this.viewModel.outroTexts.Value =
             learningSpaceTO.storyElements[i].outroStoryTexts!;
         else this.viewModel.outroTexts.Value = ["Kein Text vorhanden."];
-      }
 
-      if (learningSpaceTO.storyElements[i].modelType !== null)
-        this.viewModel.modelType.Value[i] =
+        this.viewModel.outroModelType.Value =
           learningSpaceTO.storyElements[i].modelType!;
+      }
     }
-
-    this.viewModel.outroUnlocked.Value =
-      learningSpaceTO.currentScore >= learningSpaceTO.requiredScore;
   }
 }

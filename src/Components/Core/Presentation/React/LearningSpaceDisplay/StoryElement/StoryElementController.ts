@@ -4,6 +4,7 @@ import StoryElementViewModel from "./StoryElementViewModel";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import IEndStoryElementCutScene from "src/Components/Core/Application/UseCases/EndStoryElementCutScene/IEndStoryElementCutSceneUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 export default class StoryElementController implements IStoryElementController {
   constructor(private viewModel: StoryElementViewModel) {}
@@ -11,32 +12,27 @@ export default class StoryElementController implements IStoryElementController {
   @bind
   closePanel(): void {
     this.viewModel.isOpen.Value = false;
-    this.viewModel.outroJustNowUnlocked.Value = false;
-    CoreDIContainer.get<IEndStoryElementCutScene>(
-      USECASE_TYPES.IEndStoryElementCutSceneUseCase
-    ).execute();
+
+    if (this.viewModel.isOutroCutsceneRunning.Value) {
+      this.viewModel.isOutroCutsceneRunning.Value = false;
+      CoreDIContainer.get<IEndStoryElementCutScene>(
+        USECASE_TYPES.IEndStoryElementCutSceneUseCase
+      ).execute();
+    }
   }
 
   @bind
-  increasePageId(): void {
-    this.viewModel.pageId.Value++;
-  }
-  @bind
-  decreasePageId(): void {
-    this.viewModel.pageId.Value--;
-  }
-  @bind
   onIntroButtonClicked(): void {
-    this.viewModel.showOnlyIntro.Value = true;
+    this.viewModel.storyTypeToDisplay.Value = StoryElementType.Intro;
   }
+
   @bind
   onOutroButtonClicked(): void {
-    this.viewModel.showOnlyOutro.Value = true;
+    this.viewModel.storyTypeToDisplay.Value = StoryElementType.Outro;
   }
+
   @bind
-  backToMenuButtonClicked(): void {
-    this.viewModel.showOnlyIntro.Value = false;
-    this.viewModel.showOnlyOutro.Value = false;
-    this.viewModel.pageId.Value = 0;
+  onBackToSelectionButtonClicked(): void {
+    this.viewModel.storyTypeToDisplay.Value = StoryElementType.IntroOutro;
   }
 }
