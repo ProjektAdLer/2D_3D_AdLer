@@ -23,6 +23,8 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
     if (storyType === StoryElementType.Outro) {
       this.viewModel.isOutroUnlocked.Value = true;
       this.viewModel.isOutroCutsceneRunning.Value = true;
+    } else {
+      this.viewModel.isIntroCutsceneRunning.Value = true;
     }
   }
 

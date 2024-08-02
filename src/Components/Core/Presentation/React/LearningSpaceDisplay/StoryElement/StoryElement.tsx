@@ -54,6 +54,9 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
     viewModel?.storyTypeToDisplay
   );
   const [outroUnlocked] = useObservable<boolean>(viewModel?.isOutroUnlocked);
+  const [introCutsceneRunning] = useObservable<boolean>(
+    viewModel?.isIntroCutsceneRunning
+  );
   const [outroCutsceneRunning] = useObservable<boolean>(
     viewModel?.isOutroCutsceneRunning
   );
@@ -159,7 +162,11 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
               <SingleStoryLayout
                 contentTexts={contentTexts}
                 controller={controller}
-                withBackButton={outroUnlocked && !outroCutsceneRunning}
+                withBackButton={
+                  !introCutsceneRunning &&
+                  outroUnlocked &&
+                  !outroCutsceneRunning
+                }
               />
             )}
           </div>

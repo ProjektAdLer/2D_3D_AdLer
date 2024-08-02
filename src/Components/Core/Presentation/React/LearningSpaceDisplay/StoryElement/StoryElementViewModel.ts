@@ -18,4 +18,5 @@ export default class StoryElementViewModel {
 
   isOutroUnlocked: Observable<boolean> = new Observable<boolean>(false);
   isOutroCutsceneRunning: Observable<boolean> = new Observable<boolean>(false);
+  isIntroCutsceneRunning: Observable<boolean> = new Observable<boolean>(false);
 }

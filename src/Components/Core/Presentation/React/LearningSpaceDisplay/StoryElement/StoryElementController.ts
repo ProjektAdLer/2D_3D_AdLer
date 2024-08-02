@@ -13,8 +13,13 @@ export default class StoryElementController implements IStoryElementController {
   closePanel(): void {
     this.viewModel.isOpen.Value = false;
 
-    if (this.viewModel.isOutroCutsceneRunning.Value) {
+    if (
+      this.viewModel.isIntroCutsceneRunning.Value ||
+      this.viewModel.isOutroCutsceneRunning.Value
+    ) {
       this.viewModel.isOutroCutsceneRunning.Value = false;
+      this.viewModel.isIntroCutsceneRunning.Value = false;
+
       CoreDIContainer.get<IEndStoryElementCutScene>(
         USECASE_TYPES.IEndStoryElementCutSceneUseCase
       ).execute();
