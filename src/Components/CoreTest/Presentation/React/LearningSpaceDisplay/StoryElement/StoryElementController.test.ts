@@ -4,6 +4,7 @@ import StoryElementViewModel from "../../../../../Core/Presentation/React/Learni
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IEndStoryElementCutScene from "../../../../../Core/Application/UseCases/EndStoryElementCutScene/IEndStoryElementCutSceneUseCase";
+import { StoryElementType } from "../../../../../Core/Domain/Types/StoryElementType";
 
 const viewModelMock = new StoryElementViewModel();
 const endStoryElementCutSceneUseCaseMock = mock<IEndStoryElementCutScene>();
@@ -29,43 +30,51 @@ describe("StoryElementController", () => {
     expect(viewModelMock.isOpen.Value).toBeFalsy();
   });
 
-  //ANF-ID: [EWE0040]
-  test("increasePageId increases pageId in viewmodel by 1", () => {
-    viewModelMock.pageId.Value = 0;
+  test("closePanel resets isIntroCutsceneRunning and isOutroCutsceneRunning in viewmodel", () => {
+    viewModelMock.isIntroCutsceneRunning.Value = true;
+    viewModelMock.isOutroCutsceneRunning.Value = true;
     systemUnderTest = new StoryElementController(viewModelMock);
-    systemUnderTest.increasePageId();
-    expect(viewModelMock.pageId.Value).toBe(1);
+    systemUnderTest.closePanel();
+    expect(viewModelMock.isIntroCutsceneRunning.Value).toBeFalsy();
+    expect(viewModelMock.isOutroCutsceneRunning.Value).toBeFalsy();
+  });
+
+  test("closePanel calls EndStoryElementCutSceneUseCase when isIntroCutsceneRunning is true", () => {
+    viewModelMock.isIntroCutsceneRunning.Value = true;
+    systemUnderTest = new StoryElementController(viewModelMock);
+    systemUnderTest.closePanel();
+    expect(endStoryElementCutSceneUseCaseMock.execute).toBeCalled();
+  });
+
+  test("closePanel doesn't call EndStoryElementCutSceneUseCase when isOutroCutsceneRunning is false", () => {
+    viewModelMock.isOutroCutsceneRunning.Value = false;
+    systemUnderTest = new StoryElementController(viewModelMock);
+    systemUnderTest.closePanel();
+    expect(endStoryElementCutSceneUseCaseMock.execute).not.toBeCalled();
   });
 
   //ANF-ID: [EWE0040]
-  test("decreasePageId decreases pageId in viewmodel by 1", () => {
-    viewModelMock.pageId.Value = 10;
-    systemUnderTest = new StoryElementController(viewModelMock);
-    systemUnderTest.decreasePageId();
-    expect(viewModelMock.pageId.Value).toBe(9);
-  });
-
-  //ANF-ID: [EWE0040]
-  test("onIntroButtonClicked sets showOnlyIntro in viewmodel to true", () => {
-    viewModelMock.showOnlyIntro.Value = false;
+  test("onIntroButtonClicked sets storyTypeToDisplay in viewmodel to Intro", () => {
+    viewModelMock.storyTypeToDisplay.Value = StoryElementType.None;
     systemUnderTest = new StoryElementController(viewModelMock);
     systemUnderTest.onIntroButtonClicked();
-    expect(viewModelMock.showOnlyIntro.Value).toBeTruthy();
+    expect(viewModelMock.storyTypeToDisplay.Value).toBe(StoryElementType.Intro);
   });
 
   //ANF-ID: [EWE0040]
-  test("onOutroButtonClicked sets showOnlyOutro in viewmodel to true", () => {
-    viewModelMock.showOnlyOutro.Value = false;
+  test("onOutroButtonClicked sets storyTypeToDisplay in viewmodel to Outro", () => {
+    viewModelMock.storyTypeToDisplay.Value = StoryElementType.None;
     systemUnderTest = new StoryElementController(viewModelMock);
     systemUnderTest.onOutroButtonClicked();
-    expect(viewModelMock.showOnlyOutro.Value).toBeTruthy();
+    expect(viewModelMock.storyTypeToDisplay.Value).toBe(StoryElementType.Outro);
   });
-  test("backToMenuButtonClicked sets showOnlyIntro and showOnlyOutro in viewmodel to false", () => {
-    viewModelMock.showOnlyIntro.Value = true;
-    viewModelMock.showOnlyOutro.Value = true;
+
+  test("backToMenuButtonClicked sets storyTypeToDisplay to IntroOutro", () => {
+    viewModelMock.storyTypeToDisplay.Value = StoryElementType.None;
     systemUnderTest = new StoryElementController(viewModelMock);
-    systemUnderTest.backToMenuButtonClicked();
-    expect(viewModelMock.showOnlyIntro.Value).toBeFalsy();
-    expect(viewModelMock.showOnlyOutro.Value).toBeFalsy();
+    systemUnderTest.onBackToSelectionButtonClicked();
+    expect(viewModelMock.storyTypeToDisplay.Value).toBe(
+      StoryElementType.IntroOutro
+    );
   });
 });
