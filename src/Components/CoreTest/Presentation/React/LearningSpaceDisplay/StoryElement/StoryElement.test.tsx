@@ -17,10 +17,10 @@ describe("StoryElement", () => {
     viewModel.introTexts.Value = ["Blabla Intro 1"];
     viewModel.outroTexts.Value = ["Blabla Outro 1"];
     viewModel.isOpen.Value = true;
-    viewModel.pageId.Value = 0;
-    viewModel.outroUnlocked.Value = false;
-    viewModel.outroJustNowUnlocked.Value = false;
-    viewModel.isSplitStory.Value = false;
+    viewModel.isOutroUnlocked.Value = false;
+    viewModel.isIntroCutsceneRunning.Value = false;
+    viewModel.isOutroCutsceneRunning.Value = false;
+    viewModel.storyTypeToDisplay.Value = StoryElementType.None;
   });
 
   test("doesn't render without controller", () => {
@@ -35,6 +35,13 @@ describe("StoryElement", () => {
     expect(container.firstChild).toBeNull();
   });
 
+  test("doesn't render when storyTypeToDisplay is None", () => {
+    viewModel.storyTypeToDisplay.Value = StoryElementType.None;
+    useBuilderMock([viewModel, fakeController]);
+    const { container } = render(<StoryElement />);
+    expect(container.firstChild).toBeNull();
+  });
+
   // ANF-ID: [ELG0032]
   test.each([
     [LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC],
@@ -42,11 +49,9 @@ describe("StoryElement", () => {
     [LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC],
     [LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC],
   ])("displays correct npc thumbnail for model %p", (model) => {
-    viewModel.modelType.Value = [model];
+    viewModel.introModelType.Value = model;
     viewModel.isOpen.Value = true;
-    viewModel.type.Value = [StoryElementType.Intro, StoryElementType.Outro];
-    viewModel.isSplitStory.Value = true;
-    viewModel.pickedStory.Value = StoryElementType.Intro;
+    viewModel.storyTypeToDisplay.Value = StoryElementType.Intro;
     useBuilderMock([viewModel, fakeController]);
 
     const componentUnderTest = render(<StoryElement />);
@@ -70,9 +75,9 @@ describe("StoryElement", () => {
   });
 
   // ANF-ID: [EWE0041]
-  test("should close when x Button is clicked", () => {
+  test("should close when x Button is clicked in story selection", () => {
     viewModel.isOpen.Value = true;
-    viewModel.type.Value = [StoryElementType.Intro];
+    viewModel.storyTypeToDisplay.Value = StoryElementType.IntroOutro;
 
     useBuilderMock([viewModel, fakeController]);
 
@@ -83,132 +88,60 @@ describe("StoryElement", () => {
   });
 
   //ANF-ID: [EWE0040]
-  test("should render its content (Case 1: Intro)", () => {
-    viewModel.type.Value = [StoryElementType.Intro];
+  test("should render with introTitle and introTexts when storyTypeToDisplay is Intro", () => {
+    viewModel.storyTypeToDisplay.Value = StoryElementType.Intro;
     useBuilderMock([viewModel, fakeController]);
 
     const componentUnderTest = render(<StoryElement />);
-    expect(componentUnderTest.container.childElementCount).toBe(1);
+    const title = componentUnderTest.getByText("introStoryTitle");
+    const text = componentUnderTest.getByText("Blabla Intro 1");
+
+    expect(title).toBeInTheDocument();
+    expect(text).toBeInTheDocument();
   });
 
   //ANF-ID: [EWE0040]
-  test("should render its content (Case 1: Split IntroOutro, Intro selected)", () => {
-    viewModel.type.Value = [StoryElementType.Intro, StoryElementType.Outro];
-    viewModel.isSplitStory.Value = true;
-    viewModel.pickedStory.Value = StoryElementType.Intro;
+  test("should render with outroTitle and outroTexts when storyTypeToDisplay is Outro and isOutroUnlocked is true", () => {
+    viewModel.storyTypeToDisplay.Value = StoryElementType.Outro;
+    viewModel.isOutroUnlocked.Value = true;
     useBuilderMock([viewModel, fakeController]);
 
     const componentUnderTest = render(<StoryElement />);
-    expect(componentUnderTest.container.childElementCount).toBe(1);
+    const title = componentUnderTest.getByText("outroStoryTitle");
+    const text = componentUnderTest.getByText("Blabla Outro 1");
+
+    expect(title).toBeInTheDocument();
+    expect(text).toBeInTheDocument();
   });
 
   //ANF-ID: [EWE0040]
-  test("should render its content (Case 1: Locked IntroOutro)", () => {
-    viewModel.type.Value = [StoryElementType.IntroOutro];
-    viewModel.outroUnlocked.Value = false;
+  test("should render with outroTitle and outroLockedText placeholder when storyTypeToDisplay is Outro and isOutroUnlocked is false", () => {
+    viewModel.storyTypeToDisplay.Value = StoryElementType.Outro;
+    viewModel.isOutroUnlocked.Value = false;
     useBuilderMock([viewModel, fakeController]);
 
     const componentUnderTest = render(<StoryElement />);
-    expect(componentUnderTest.container.childElementCount).toBe(1);
+    const title = componentUnderTest.getByText("outroStoryTitle");
+    const text = componentUnderTest.getByText("outroLockedText");
+
+    expect(title).toBeInTheDocument();
+    expect(text).toBeInTheDocument();
   });
 
   //ANF-ID: [EWE0040]
-  test("should render its content (Case 2: Unlocked Outro)", () => {
-    viewModel.type.Value = [StoryElementType.Outro];
-    viewModel.outroUnlocked.Value = true;
+  test("should render selection when storyTypeToDisplay is IntroOutro", () => {
+    viewModel.storyTypeToDisplay.Value = StoryElementType.IntroOutro;
     useBuilderMock([viewModel, fakeController]);
 
     const componentUnderTest = render(<StoryElement />);
-    expect(componentUnderTest.container.childElementCount).toBe(1);
-  });
+    const introButton = componentUnderTest.getByRole("button", {
+      name: "introStoryTitle",
+    });
+    const outroButton = componentUnderTest.getByRole("button", {
+      name: "outroStoryTitle",
+    });
 
-  //ANF-ID: [EWE0040]
-  test("should render its content (Case 2: Split IntroOutro, unlocked Outro selected)", () => {
-    viewModel.type.Value = [StoryElementType.Intro, StoryElementType.Outro];
-    viewModel.isSplitStory.Value = true;
-    viewModel.pickedStory.Value = StoryElementType.Outro;
-    viewModel.outroUnlocked.Value = true;
-    useBuilderMock([viewModel, fakeController]);
-
-    const componentUnderTest = render(<StoryElement />);
-    expect(componentUnderTest.container.childElementCount).toBe(1);
-  });
-
-  //ANF-ID: [EWE0040]
-  test("should render its content (Case 2: Just Unlocked Outro)", () => {
-    viewModel.type.Value = [StoryElementType.IntroOutro];
-    viewModel.outroUnlocked.Value = true;
-    viewModel.outroJustNowUnlocked.Value = true;
-    useBuilderMock([viewModel, fakeController]);
-
-    const componentUnderTest = render(<StoryElement />);
-    expect(componentUnderTest.container.childElementCount).toBe(1);
-  });
-
-  //ANF-ID: [EWE0040]
-  test("should render its content (Case 3: Locked Outro)", () => {
-    viewModel.type.Value = [StoryElementType.Outro];
-    viewModel.outroUnlocked.Value = false;
-    useBuilderMock([viewModel, fakeController]);
-
-    const componentUnderTest = render(<StoryElement />);
-    expect(componentUnderTest.container.childElementCount).toBe(1);
-  });
-
-  //ANF-ID: [EWE0040]
-  test("should render its content (Case 3: Split IntroOutro, locked Outro selected)", () => {
-    viewModel.type.Value = [StoryElementType.Intro, StoryElementType.Outro];
-    viewModel.outroUnlocked.Value = false;
-    viewModel.isSplitStory.Value = true;
-    viewModel.pickedStory.Value = StoryElementType.Outro;
-    useBuilderMock([viewModel, fakeController]);
-
-    const componentUnderTest = render(<StoryElement />);
-    expect(componentUnderTest.container.childElementCount).toBe(1);
-  });
-
-  //ANF-ID: [EWE0040]
-  test("should render its content (Case 4: IntroOutro)", () => {
-    viewModel.type.Value = [StoryElementType.IntroOutro];
-    viewModel.outroUnlocked.Value = true;
-    viewModel.showOnlyIntro.Value = false;
-    viewModel.showOnlyOutro.Value = false;
-    useBuilderMock([viewModel, fakeController]);
-
-    const componentUnderTest = render(<StoryElement />);
-    expect(componentUnderTest.container.childElementCount).toBe(1);
-  });
-
-  //ANF-ID: [EWE0040]
-  test("should render its content (Case 4: IntroOutro, Intro selected)", () => {
-    viewModel.type.Value = [StoryElementType.IntroOutro];
-    viewModel.outroUnlocked.Value = true;
-    viewModel.showOnlyIntro.Value = true;
-    viewModel.showOnlyOutro.Value = false;
-    useBuilderMock([viewModel, fakeController]);
-
-    const componentUnderTest = render(<StoryElement />);
-    expect(componentUnderTest.container.childElementCount).toBe(1);
-  });
-
-  //ANF-ID: [EWE0040]
-  test("should render its content (Case 4: IntroOutro, Outro selected)", () => {
-    viewModel.type.Value = [StoryElementType.IntroOutro];
-    viewModel.outroUnlocked.Value = true;
-    viewModel.showOnlyIntro.Value = false;
-    viewModel.showOnlyOutro.Value = true;
-    useBuilderMock([viewModel, fakeController]);
-
-    const componentUnderTest = render(<StoryElement />);
-    expect(componentUnderTest.container.childElementCount).toBe(1);
-  });
-
-  //ANF-ID: [EWE0040]
-  test("should not render if no case is matched (type = null)", () => {
-    viewModel.type.Value = [StoryElementType.None];
-    viewModel.pickedStory.Value = StoryElementType.None;
-    useBuilderMock([viewModel, fakeController]);
-    const { container } = render(<StoryElement />);
-    expect(container.firstChild).toBeNull();
+    expect(introButton).toBeInTheDocument();
+    expect(outroButton).toBeInTheDocument();
   });
 });

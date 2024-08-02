@@ -77,13 +77,10 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
         setContentTexts(viewModel.introTexts.Value);
         break;
       case StoryElementType.Outro:
-        if (outroUnlocked) {
-          setTitleText(translate("outroStoryTitle").toString());
-          setContentTexts(viewModel.outroTexts.Value);
-        } else {
-          setTitleText(translate("outroStoryTitle").toString());
+        setTitleText(translate("outroStoryTitle").toString());
+        if (outroUnlocked) setContentTexts(viewModel.outroTexts.Value);
+        else
           setContentTexts(translate("outroLockedText").toString().split("\n"));
-        }
         break;
       case StoryElementType.IntroOutro:
         setTitleText(translate("introOutroStoryTitle").toString());
