@@ -14,58 +14,67 @@ describe("StoryElementPresenter", () => {
     viewModel = systemUnderTest["viewModel"];
   });
 
-  test("open sets the correct values", () => {
+  test("open sets isOpen true", () => {
     viewModel.isOpen.Value = false;
-    viewModel.pageId.Value = 1;
-    viewModel.showOnlyIntro.Value = true;
-    viewModel.showOnlyOutro.Value = true;
 
     systemUnderTest.open(StoryElementType.Intro);
 
     expect(viewModel.isOpen.Value).toBe(true);
-    expect(viewModel.pageId.Value).toBe(0);
-    expect(viewModel.showOnlyIntro.Value).toBe(false);
-    expect(viewModel.showOnlyOutro.Value).toBe(false);
   });
 
-  test("open sets the correct values, when split stories present", () => {
-    viewModel.isOpen.Value = false;
-    viewModel.pageId.Value = 1;
-    viewModel.showOnlyIntro.Value = true;
-    viewModel.showOnlyOutro.Value = true;
-    viewModel.isSplitStory.Value = true;
+  test("open sets storyTypeToDisplay to given value when its not IntroOutro", () => {
+    viewModel.storyTypeToDisplay.Value = StoryElementType.None;
 
     systemUnderTest.open(StoryElementType.Intro);
 
-    expect(viewModel.isOpen.Value).toBe(true);
-    expect(viewModel.pageId.Value).toBe(0);
-    expect(viewModel.showOnlyIntro.Value).toBe(false);
-    expect(viewModel.showOnlyOutro.Value).toBe(false);
-    expect(viewModel.pickedStory.Value).toBe(StoryElementType.Intro);
+    expect(viewModel.storyTypeToDisplay.Value).toBe(StoryElementType.Intro);
   });
 
-  test("onStoryElementCutSceneTriggered sets the correct values, if the type is outro", () => {
-    viewModel.pageId.Value = 1;
-    viewModel.outroJustNowUnlocked.Value = false;
-    viewModel.outroUnlocked.Value = false;
+  test("open sets storyTypeToDisplay to Intro when its IntroOutro and isIntroCutsceneRunning is true", () => {
+    viewModel.storyTypeToDisplay.Value = StoryElementType.None;
+    viewModel.isIntroCutsceneRunning.Value = true;
+
+    systemUnderTest.open(StoryElementType.IntroOutro);
+
+    expect(viewModel.storyTypeToDisplay.Value).toBe(StoryElementType.Intro);
+  });
+
+  test("open sets storyTypeToDisplay to Intro when its IntroOutro and outro is not unlocked", () => {
+    viewModel.storyTypeToDisplay.Value = StoryElementType.None;
+    viewModel.isOutroUnlocked.Value = false;
+
+    systemUnderTest.open(StoryElementType.IntroOutro);
+
+    expect(viewModel.storyTypeToDisplay.Value).toBe(StoryElementType.Intro);
+  });
+
+  test("open sets storyTypeToDisplay to Outro when its IntroOutro and isOutroCutsceneRunning is true", () => {
+    viewModel.storyTypeToDisplay.Value = StoryElementType.None;
+    viewModel.isIntroCutsceneRunning.Value = false;
+    viewModel.isOutroUnlocked.Value = true;
+    viewModel.isOutroCutsceneRunning.Value = true;
+
+    systemUnderTest.open(StoryElementType.IntroOutro);
+
+    expect(viewModel.storyTypeToDisplay.Value).toBe(StoryElementType.Outro);
+  });
+
+  test("onStoryElementCutSceneTriggered sets isOutroUnlocked to true and isOutroCutsceneRunning to true when storyType is Outro", () => {
+    viewModel.isOutroUnlocked.Value = false;
+    viewModel.isOutroCutsceneRunning.Value = false;
 
     systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.Outro);
 
-    expect(viewModel.pageId.Value).toBe(0);
-    expect(viewModel.outroJustNowUnlocked.Value).toBe(true);
-    expect(viewModel.outroUnlocked.Value).toBe(true);
+    expect(viewModel.isOutroUnlocked.Value).toBe(true);
+    expect(viewModel.isOutroCutsceneRunning.Value).toBe(true);
   });
 
-  test("onStoryElementCutSceneTriggered sets no values, if the type is not outro", () => {
-    viewModel.pageId.Value = 1;
-    viewModel.outroJustNowUnlocked.Value = false;
-    viewModel.outroUnlocked.Value = false;
+  test("onStoryElementCutSceneTriggered sets isIntroCutsceneRunning to true when storyType is Intro", () => {
+    viewModel.isIntroCutsceneRunning.Value = false;
 
     systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.Intro);
 
-    expect(viewModel.pageId.Value).toBe(1);
-    expect(viewModel.outroJustNowUnlocked.Value).toBe(false);
-    expect(viewModel.outroUnlocked.Value).toBe(false);
+    expect(viewModel.isIntroCutsceneRunning.Value).toBe(true);
   });
 
   test("onLearningSpaceLoaded sets the correct values", () => {
@@ -80,7 +89,6 @@ describe("StoryElementPresenter", () => {
 
     viewModel.introTexts.Value = ["nicht blabla"];
     viewModel.outroTexts.Value = ["nicht blabla"];
-    viewModel.type.Value = [StoryElementType.None];
 
     systemUnderTest.onLearningSpaceLoaded({ storyElements: storyElement });
 
@@ -89,7 +97,6 @@ describe("StoryElementPresenter", () => {
       "blabla222",
     ]);
     expect(viewModel.outroTexts.Value).toStrictEqual(["blabla333"]);
-    expect(viewModel.type.Value).toStrictEqual([StoryElementType.IntroOutro]);
   });
 
   test("onLearningSpaceLoaded sets the correct values, with model types", () => {
@@ -105,7 +112,6 @@ describe("StoryElementPresenter", () => {
 
     viewModel.introTexts.Value = ["nicht blabla"];
     viewModel.outroTexts.Value = ["nicht blabla"];
-    viewModel.type.Value = [StoryElementType.None];
 
     systemUnderTest.onLearningSpaceLoaded({
       storyElements: mockedStoryElements,
@@ -116,7 +122,6 @@ describe("StoryElementPresenter", () => {
       "blabla222",
     ]);
     expect(viewModel.outroTexts.Value).toStrictEqual(["blabla333"]);
-    expect(viewModel.type.Value).toStrictEqual([StoryElementType.IntroOutro]);
   });
 
   test("onLearningSpaceLoaded sets the correct values if no texts are given", () => {
@@ -132,7 +137,6 @@ describe("StoryElementPresenter", () => {
 
     viewModel.introTexts.Value = ["nicht blabla"];
     viewModel.outroTexts.Value = ["nicht blabla"];
-    viewModel.type.Value = [StoryElementType.None];
 
     systemUnderTest.onLearningSpaceLoaded({
       storyElements: mockedStoryElements,
@@ -140,6 +144,5 @@ describe("StoryElementPresenter", () => {
 
     expect(viewModel.introTexts.Value).toStrictEqual(["Kein Text vorhanden."]);
     expect(viewModel.outroTexts.Value).toStrictEqual(["Kein Text vorhanden."]);
-    expect(viewModel.type.Value).toStrictEqual([StoryElementType.IntroOutro]);
   });
 });

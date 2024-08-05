@@ -8,22 +8,24 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
 
   open(type: StoryElementType): void {
     this.viewModel.isOpen.Value = true;
+    this.viewModel.storyTypeToDisplay.Value = type;
 
     if (type === StoryElementType.IntroOutro) {
-      if (this.viewModel.isOutroCutsceneRunning.Value)
-        this.viewModel.storyTypeToDisplay.Value = StoryElementType.Outro;
-      else if (!this.viewModel.isOutroUnlocked.Value)
+      if (
+        this.viewModel.isIntroCutsceneRunning.Value ||
+        !this.viewModel.isOutroUnlocked.Value
+      )
         this.viewModel.storyTypeToDisplay.Value = StoryElementType.Intro;
-      else
-        this.viewModel.storyTypeToDisplay.Value = StoryElementType.IntroOutro;
-    } else this.viewModel.storyTypeToDisplay.Value = type;
+      else if (this.viewModel.isOutroCutsceneRunning.Value)
+        this.viewModel.storyTypeToDisplay.Value = StoryElementType.Outro;
+    }
   }
 
   onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
     if (storyType === StoryElementType.Outro) {
       this.viewModel.isOutroUnlocked.Value = true;
       this.viewModel.isOutroCutsceneRunning.Value = true;
-    } else {
+    } else if (storyType === StoryElementType.Intro) {
       this.viewModel.isIntroCutsceneRunning.Value = true;
     }
   }

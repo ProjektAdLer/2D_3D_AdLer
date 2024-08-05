@@ -40,6 +40,13 @@ export default function SingleStoryLayout({
           </>
         )}
 
+        <StyledButton onClick={() => controller.closePanel()}>
+          {
+            "ADD TRANSLATION HERE"
+            //translate("closeButton")
+          }
+        </StyledButton>
+
         {contentTexts.length > 1 && (
           <div className="grid w-16 grid-cols-2 lg:w-32 justify-items-end">
             <div>
