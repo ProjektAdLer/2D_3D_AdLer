@@ -2,38 +2,38 @@
 name: Bug Template
 about: Bug im AdLer Projekt Team 3D
 title: ""
-labels: asset
+labels: bug
 assignees: ""
 ---
 
-## Beschreibung des Problems:
+**Beschreibung des Problems:**
 
 (kurze Beschreibung des Fehlerverhaltens)
 
-## Schritte zum Reproduzieren:
+**Schritte zum Reproduzieren:**
 
 (bitte möglichst _genaue_ Beschreibung, wie und unter welchen Umständen das Problem reproduziert werden kann und, falls nötig, relevante Dateien anhängen)
 
-## Informationen zum Endgerät
+**Informationen zum Endgerät:**
 
 (Bitte möglichst detaillierte Informationen zum Endgerät und Browser)
 
-## Erwartetes Verhalten:
+**Erwartetes Verhalten:**
 
 (Erwartetes Verhalten nach eigenem Verständnis)
 
-## Tatsächliches Verhalten:
+**Tatsächliches Verhalten:**
 
 (ausführliche Beschreibung des Fehlerverhaltens, falls möglich. Gerne auch Screenshot, Log, etc.)
 
-## Ansprechpartner:
+**Ansprechpartner:**
 
 (für weitere Fragen)
 
-## Ursache (erst bei Fix angeben):
+**Ursache (erst bei Fix angeben):**
 
 (wird durch Team 3D ausgefüllt)
 
-## Lösung (erst bei Fix angeben):
+**Lösung (erst bei Fix angeben):**
 
 (wird durch Team 3D ausgefüllt)
