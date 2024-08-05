@@ -16,6 +16,7 @@ export default function LearningSpaceSelectionRow({
   return (
     <StyledButton
       icon={icon}
+      containerClassName="w-full"
       className="xl:pl-8 w-[100%]"
       shape="freefloatcenter"
       onClick={onClickCallback}
