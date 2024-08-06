@@ -10,6 +10,14 @@ assignees: ""
 
 Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 
+**Problemstellung**
+
+Beschreibung des Problems
+
+**Lösungsansatz**
+
+Um die _Problemstellung_ zu adressieren implementieren wir _Funktionalität_ / ändern wir _Darstellung_
+
 **Akzeptanzkriterien**
 
 - [ ] Akzeptanzkriterium 1
