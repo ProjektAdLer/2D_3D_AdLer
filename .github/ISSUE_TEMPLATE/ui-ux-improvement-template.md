@@ -8,7 +8,7 @@ assignees: ""
 
 **User Story**
 
-<input placeholder="Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer">
+Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 
 **Problemstellung**
 
