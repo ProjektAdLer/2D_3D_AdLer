@@ -20,6 +20,7 @@ import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 @injectable()
 export default class StoryNPCBuilder
@@ -115,6 +116,14 @@ export default class StoryNPCBuilder
 
   override buildPresenter(): void {
     super.buildPresenter();
+
+    if (CoreDIContainer.isBound(PRESENTATION_TYPES.IStoryNPCPresenter)) {
+      CoreDIContainer.unbind(PRESENTATION_TYPES.IStoryNPCPresenter);
+    }
+
+    CoreDIContainer.bind<IStoryNPCPresenter>(
+      PRESENTATION_TYPES.IStoryNPCPresenter
+    ).toConstantValue(this.presenter!);
 
     const learningWorldPort = CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort

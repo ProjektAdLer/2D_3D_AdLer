@@ -13,6 +13,7 @@ export enum StoryNPCState {
   RandomMovement,
   WaitOnCutSceneTrigger,
   CutScene,
+  Stop,
 }
 
 export default class StoryNPCViewModel {

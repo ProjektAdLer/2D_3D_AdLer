@@ -2,7 +2,6 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import IStoryNPCController from "./IStoryNPCController";
 import StoryNPCViewModel, { StoryNPCState } from "./StoryNPCViewModel";
 import bind from "bind-decorator";
-import IStoryElementPresenter from "~ReactComponents/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IBottomTooltipPresenter from "~ReactComponents/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import { Vector3 } from "@babylonjs/core";
@@ -19,10 +18,6 @@ export default class StoryNPCController implements IStoryNPCController {
   private hoverToolTipId: number = -1;
 
   constructor(private viewModel: StoryNPCViewModel) {
-    this.viewModel.storyElementPresenter =
-      CoreDIContainer.get<IStoryElementPresenter>(
-        PRESENTATION_TYPES.IStoryElementPresenter
-      );
     this.bottomTooltipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
       PRESENTATION_TYPES.IBottomTooltipPresenter
     );
@@ -52,6 +47,7 @@ export default class StoryNPCController implements IStoryNPCController {
       this.viewModel.isInteractable.Value &&
       this.viewModel.state.Value !== StoryNPCState.CutScene
     ) {
+      this.viewModel.state.Value = StoryNPCState.Stop;
       this.bottomTooltipPresenter.hideAll();
       this.viewModel.storyElementPresenter.open(this.viewModel.storyType);
     } else

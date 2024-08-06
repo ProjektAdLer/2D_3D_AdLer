@@ -86,4 +86,10 @@ describe("StoryNPCPresenter", () => {
 
     expect(viewModel.state.Value).toBe(StoryNPCState.RandomMovement);
   });
+
+  test("changeStateToRandomMovement sets state to RandomMovement", () => {
+    viewModel.state.Value = StoryNPCState.Stop;
+    systemUnderTest.changeStateToRandomMovement();
+    expect(viewModel.state.Value).toBe(StoryNPCState.RandomMovement);
+  });
 });

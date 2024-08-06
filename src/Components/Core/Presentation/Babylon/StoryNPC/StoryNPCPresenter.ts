@@ -14,6 +14,11 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
     this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
   }
 
+  changeStateToRandomMovement() {
+    if (this.viewModel.state.Value !== StoryNPCState.RandomMovement)
+      this.viewModel.state.Value = StoryNPCState.RandomMovement;
+  }
+
   onAvatarPositionChanged(position: Vector3, interactionRadius: number): void {
     const distance = Vector3.Distance(
       position,

@@ -5,9 +5,12 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IEndStoryElementCutScene from "../../../../../Core/Application/UseCases/EndStoryElementCutScene/IEndStoryElementCutSceneUseCase";
 import { StoryElementType } from "../../../../../Core/Domain/Types/StoryElementType";
+import IStoryNPCPresenter from "../../../../../Core/Presentation/Babylon/StoryNPC/IStoryNPCPresenter";
+import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 const viewModelMock = new StoryElementViewModel();
 const endStoryElementCutSceneUseCaseMock = mock<IEndStoryElementCutScene>();
+const storyNPCPresenterMock = mock<IStoryNPCPresenter>();
 
 describe("StoryElementController", () => {
   let systemUnderTest: StoryElementController;
@@ -17,6 +20,9 @@ describe("StoryElementController", () => {
     CoreDIContainer.rebind<IEndStoryElementCutScene>(
       USECASE_TYPES.IEndStoryElementCutSceneUseCase
     ).toConstantValue(endStoryElementCutSceneUseCaseMock);
+    CoreDIContainer.bind<IStoryNPCPresenter>(
+      PRESENTATION_TYPES.IStoryNPCPresenter
+    ).toConstantValue(storyNPCPresenterMock);
   });
 
   afterAll(() => {
@@ -51,6 +57,13 @@ describe("StoryElementController", () => {
     systemUnderTest = new StoryElementController(viewModelMock);
     systemUnderTest.closePanel();
     expect(endStoryElementCutSceneUseCaseMock.execute).not.toBeCalled();
+  });
+
+  test("closePanel calls changeStateToRandomMovement", () => {
+    systemUnderTest.closePanel();
+    expect(
+      systemUnderTest["storyNPCPresenter"].changeStateToRandomMovement
+    ).toHaveBeenCalled();
   });
 
   //ANF-ID: [EWE0040]

@@ -1,6 +1,8 @@
 import { mock, mockDeep } from "jest-mock-extended";
 import StoryNPCController from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCController";
-import StoryNPCViewModel from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCViewModel";
+import StoryNPCViewModel, {
+  StoryNPCState,
+} from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCViewModel";
 import CharacterNavigator from "../../../../Core/Presentation/Babylon/CharacterNavigator/CharacterNavigator";
 import { Mesh, Vector3 } from "@babylonjs/core";
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
@@ -115,5 +117,14 @@ describe("StoryNPCController", () => {
     systemUnderTest.picked();
 
     expect(storyElementPresenterMock.open).not.toBeCalled();
+  });
+
+  test("picked sets state in viewmodel to Stop", () => {
+    viewModel.isInteractable.Value = true;
+    viewModel.state.Value = StoryNPCState.RandomMovement;
+
+    systemUnderTest.picked();
+
+    expect(viewModel.state.Value).toBe(StoryNPCState.Stop);
   });
 });
