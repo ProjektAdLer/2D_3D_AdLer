@@ -1,14 +1,14 @@
 ---
 name: User Interface / User Experience Improvement
 about: UI / UX Improvement im AdLer Projekt
-title: "[UI/UX]"
+title: "[UI/UX] - "
 labels: coding, styling
 assignees: ""
 ---
 
 **User Story**
 
-Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
+<input placeholder="Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer">
 
 **Problemstellung**
 
