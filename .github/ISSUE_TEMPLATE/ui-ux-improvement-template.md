@@ -1,7 +1,7 @@
 ---
 name: User Interface / User Experience Improvement
 about: UI / UX Improvement im AdLer Projekt
-title: ""
+title: "[UI/UX]"
 labels: coding, styling
 assignees: ""
 ---
