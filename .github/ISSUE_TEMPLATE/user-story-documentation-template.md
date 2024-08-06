@@ -20,9 +20,6 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 - [ ] User Story ist für jeden beteiligten Entwickler klar verständlich
 - [ ] User Story Aufwand ist geschätzt
 - [ ] User Story hat Akzeptanzkriterien
-- [ ] User Story hat einen Mehrwert für das Produkt oder die Entwicklung
-- [ ] User Story Ursprung ist bekannt (Stakeholder)
-- [ ] User Story ist Release zugewiesen
 
 **Definition of Done**
 
@@ -31,7 +28,7 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 - [ ] Wiki ist gecheckt
 - [ ] Anforderungen mit IDs sind erstellt
 - [ ] Glossar verlinkt und gegebenenfalls erweitert
-- [ ] Aktivitätsdiagramm (falls nötig) ist erstellt
 - [ ] Unit-Tests sind zugewiesen
 - [ ] Fehlende Unit-Tests sind dokumentiert
 - [ ] Review wurde durchgeführt
+- [ ] [Optional] Aktivitätsdiagramm ist erstellt

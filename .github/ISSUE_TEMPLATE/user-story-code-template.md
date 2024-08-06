@@ -21,22 +21,18 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 - [ ] User Story ist für jeden beteiligten Entwickler klar verständlich
 - [ ] User Story Aufwand ist geschätzt
 - [ ] User Story hat Akzeptanzkriterien
-- [ ] User Story hat einen Mehrwert für das Produkt oder die Entwicklung
-- [ ] User Story Ursprung ist bekannt (Stakeholder)
-- [ ] User Story ist Release zugewiesen
 
 **Definition of Done**
 
+- [ ] Requirements sind erstellt/angepasst und auf Writerside dokumentiert
 - [ ] Alle Akzeptanzkriterien sind erfüllt
 - [ ] Die Implementierung ist gepusht
-- [ ] Die Codekonventionen sind eingehalten
 - [ ] Eine Code Review wurde durchgeführt (oder in Paired Programming gearbeitet)
-- [ ] Unittestabdeckung muss größer 92% sein
+- [ ] Unittests sind erstellt
 - [ ] Alle Tests müssen bestanden sein
-- [ ] Technische Dokumentation innerhalb der Realisierung wurde, falls nötig, erstellt (Quellcode)
-- [ ] Benutzerdokumentation wurde, falls nötig, angelegt (Wiki)
-- [ ] Dokumentation des Vorgehens wurde, falls nötig, angelegt (Zenhub Kommentar)
-- [ ] UML Aktivitätsdiagramm wurde erstellt bzw. aktualisiert falls nötig
-- [ ] Changelog des jeweiligen Release wurde aktualisiert, falls erforderlich (Wiki)
-- [ ] Es gibt keine bekannten Bugs
+- [ ] Benutzerdokumentation wurde angelegt oder angepasst (Writerside)
+- [ ] Changelog des jeweiligen Release wurde aktualisiert
+- [ ] Es gibt keine bekannten Bugs oder für Bug wurde Issue erstellt
 - [ ] Die Realisierung der User Story wurde erfolgreich durch den Product Owner abgenommen
+- [ ] [Optional] Dokumentation des Vorgehens oder externer Quellen wurde angelegt (Zenhub Kommentar)
+- [ ] [Optional] UML Aktivitätsdiagramm wurde erstellt bzw. aktualisiert

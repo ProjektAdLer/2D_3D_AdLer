@@ -21,9 +21,6 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 - [ ] User Story ist für jeden beteiligten Entwickler klar verständlich
 - [ ] User Story Aufwand ist geschätzt
 - [ ] User Story hat Akzeptanzkriterien
-- [ ] User Story hat einen Mehrwert für das Produkt oder die Entwicklung
-- [ ] User Story Ursprung ist bekannt (Stakeholder)
-- [ ] User Story ist Release zugewiesen
 
 **Definition of Done**
 
@@ -31,8 +28,8 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 - [ ] Die Assets sind in GitHub bzw. auf Zugriffsbereit auf dem Fileserver vorhanden
 - [ ] Eine Asset Review wurde durchgeführt (oder in Paired Modelling(?) gearbeitet)
 - [ ] Alle Tests müssen mit dem Asset in der Szene bestanden sein
-- [ ] Benutzerdokumentation wurde, falls nötig, angelegt (Wiki)
-- [ ] Dokumentation des Vorgehens wurde angelegt (Zenhub Kommentar)
-- [ ] Changelog des jeweiligen Release wurde aktualisiert (Wiki)
+- [ ] Benutzerdokumentation wurde angelegt oder angepasst (Writerside)
+- [ ] Changelog des jeweiligen Release wurde aktualisiert
 - [ ] Es gibt keine bekannten Bugs
 - [ ] Die Realisierung der User Story wurde erfolgreich durch den Product Owner abgenommen
+- [ ] [Optional] Dokumentation des Vorgehens oder externer Quellen wurde angelegt (Zenhub Kommentar)
