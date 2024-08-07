@@ -43,6 +43,7 @@ export default class LearningElementModalController
     }
   }
 
+  @bind
   async h5pEventCalled(event: any): Promise<void> {
     // Skip malformed events.
     const hasStatement = event && event.data && event.data.statement;
