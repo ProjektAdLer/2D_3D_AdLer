@@ -4,6 +4,13 @@ import LearningElementModalViewModel from "../LearningElementModalViewModel";
 import { config } from "../../../../../../../config";
 import ILearningElementModalController from "../ILearningElementModalController";
 
+function fixLocalhost(url: string) {
+  if (url.includes("localhost")) {
+    return url.replace("http:", "");
+  }
+  return url;
+}
+
 export default function H5PContent({
   viewModel,
   controller,
@@ -28,17 +35,9 @@ export default function H5PContent({
           );
 
         const options = {
-          h5pJsonPath: h5pJsonURL,
-          frameJs:
-            window.location.protocol +
-            "//" +
-            window.location.host +
-            "/h5pBase/frame.bundle.js",
-          frameCss:
-            window.location.protocol +
-            "//" +
-            window.location.host +
-            "/h5pBase/styles/h5p.css",
+          h5pJsonPath: fixLocalhost(h5pJsonURL),
+          frameJs: "/h5pBase/frame.bundle.js",
+          frameCss: "/h5pBase/styles/h5p.css",
         };
 
         await new H5PPlayer(el, options);
