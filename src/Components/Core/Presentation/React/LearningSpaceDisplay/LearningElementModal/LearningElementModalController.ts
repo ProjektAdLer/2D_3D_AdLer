@@ -45,6 +45,11 @@ export default class LearningElementModalController
 
   @bind
   async h5pEventCalled(event: any): Promise<void> {
+    // Skip XAPI events if the element is a primitive h5p
+    if (this.viewModel.isScoreable.Value === false) {
+      return;
+    }
+
     // Skip malformed events.
     const hasStatement = event && event.data && event.data.statement;
     if (!hasStatement) {
@@ -68,7 +73,7 @@ export default class LearningElementModalController
       statement.context.contextActivities.parent[0] &&
       statement.context.contextActivities.parent[0].id;
 
-    if (isCompleted && !isChild && this.viewModel.isScoreable.Value) {
+    if (isCompleted && !isChild) {
       const xapiData = event.data.statement as XAPIData;
 
       statement.result.success =
