@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import { H5P as H5PPlayer } from "h5p-standalone";
 import LearningElementModalViewModel from "../LearningElementModalViewModel";
-import { config } from "../../../../../../../config";
 import ILearningElementModalController from "../ILearningElementModalController";
+import { createH5POptions } from "./H5pUtils";
 
 export default function H5PContent({
   viewModel,
@@ -17,31 +17,7 @@ export default function H5PContent({
     const debug = async () => {
       if (h5pContainerRef.current) {
         const el = h5pContainerRef.current;
-
-        let baseURL = config.serverURL.replace(/api\/?$/, "");
-
-        let h5pJsonURL =
-          baseURL +
-          viewModel.filePath.Value.replaceAll("\\", "/").replaceAll(
-            "wwwroot/",
-            ""
-          );
-
-        const options = {
-          h5pJsonPath: h5pJsonURL,
-          frameJs:
-            window.location.protocol +
-            "//" +
-            window.location.host +
-            "/h5pBase/frame.bundle.js",
-          frameCss:
-            window.location.protocol +
-            "//" +
-            window.location.host +
-            "/h5pBase/styles/h5p.css",
-        };
-
-        await new H5PPlayer(el, options);
+        await new H5PPlayer(el, createH5POptions(viewModel));
 
         //@ts-ignore
         H5P.externalDispatcher.on("xAPI", controller.h5pEventCalled);
