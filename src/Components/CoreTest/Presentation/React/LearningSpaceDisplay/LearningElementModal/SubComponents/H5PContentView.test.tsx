@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import LearningElementModalViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 import H5PContent from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/H5PContent";
 import React from "react";
@@ -17,7 +17,6 @@ jest.mock("h5p-standalone");
 const elementModalControllerMock = mock<ILearningElementModalController>();
 
 describe("H5PContentView", () => {
-
   //ANF-ID: [ELG0030, EWE0037]
   test("should render", () => {
     viewModel.filePath.Value =
@@ -32,6 +31,8 @@ describe("H5PContentView", () => {
       </Provider>
     );
 
-    expect(container).not.toBeEmptyDOMElement();
+    waitFor(() => {
+      expect(container).not.toBeEmptyDOMElement();
+    });
   });
 });
