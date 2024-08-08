@@ -1,6 +1,5 @@
 ---
 name: User Interface / User Experience Improvement
-pipelines: Product Backlog
 about: UI / UX Improvement im AdLer Projekt
 title: "[UI/UX] - "
 labels: coding, styling
