@@ -34,7 +34,7 @@ export default function H5PContent({
       //@ts-ignore
       H5PIntegration.contents = {};
     };
-  }, [controller, viewModel.filePath.Value]);
+  }, [controller, viewModel]);
 
   return (
     <div className="App">

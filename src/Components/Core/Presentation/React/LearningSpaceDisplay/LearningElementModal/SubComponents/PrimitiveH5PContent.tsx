@@ -19,7 +19,7 @@ export default function H5PContent({
       }
     };
     setup();
-  }, [viewModel.filePath.Value]);
+  }, [viewModel]);
 
   return (
     <div className="App">
