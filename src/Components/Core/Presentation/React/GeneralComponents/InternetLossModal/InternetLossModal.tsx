@@ -9,20 +9,24 @@ export default function InternetLossModal({ className }: AdLerUIComponent<{}>) {
 
   const { t: translate } = useTranslation("internetLoss");
 
+  const openModal = useCallback(() => {
+    setOpen(true);
+  }, [setOpen]);
+
   const closeModal = useCallback(() => {
     setOpen(false);
   }, [setOpen]);
 
   useEffect(() => {
-    window.navigator.onLine ? setOpen(false) : setOpen(true);
-  }, []);
+    window.navigator.onLine ? closeModal() : openModal();
+    window.addEventListener("offline", openModal);
+    window.addEventListener("online", closeModal);
 
-  window.addEventListener("offline", () => {
-    setOpen(true);
-  });
-  window.addEventListener("online", () => {
-    setOpen(false);
-  });
+    return () => {
+      window.removeEventListener("offline", openModal);
+      window.removeEventListener("online", closeModal);
+    };
+  }, [openModal, closeModal]);
 
   if (!isOpen) return null;
   return (
