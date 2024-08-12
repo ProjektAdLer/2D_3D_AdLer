@@ -17,6 +17,11 @@ import ILearningElementPresenter from "../LearningElements/ILearningElementPrese
 import IStoryNPCPresenter from "../StoryNPC/IStoryNPCPresenter";
 import IStoryNPCBuilder from "../StoryNPC/IStoryNPCBuilder";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
+import type {
+  LearningSpaceWallSegmentLocationData,
+  LearningSpaceCornerPoleLocationData,
+} from "./LearningSpaceViewModel";
+import { start } from "repl";
 
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
@@ -40,6 +45,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
   }
 
   async asyncSetupSpace(spaceTO: LearningSpaceTO): Promise<void> {
+    this.computeWallCoordinates();
     await this.fillLearningElementSlots(spaceTO);
     await this.createWindows();
     if (this.viewModel.exitDoorPosition) await this.createExitDoor(spaceTO);
@@ -179,5 +185,74 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         this.storyNPCPresenters.push(storyNPCBuilder.getPresenter());
       }
     }
+  }
+
+  private computeWallCoordinates(): void {
+    let examinedCornerPoints: Set<number> = new Set<number>();
+    let segmentData: LearningSpaceWallSegmentLocationData | null = null;
+    let previousSegmentData: LearningSpaceWallSegmentLocationData | null = null;
+    let firstSegmentData: LearningSpaceWallSegmentLocationData | null = null;
+    let cornerPoleData: LearningSpaceCornerPoleLocationData | null = null;
+
+    this.viewModel.wallSegments.forEach((wallSegment) => {
+      segmentData = this.computeWallSegmentData(wallSegment);
+      if (examinedCornerPoints.has(wallSegment.start)) {
+        cornerPoleData = this.computeCornerPoleData(
+          segmentData,
+          previousSegmentData!
+        );
+      } else examinedCornerPoints.add(wallSegment.start);
+
+      if (examinedCornerPoints.has(wallSegment.end)) {
+        cornerPoleData = this.computeCornerPoleData(
+          firstSegmentData!,
+          segmentData!
+        );
+      } else examinedCornerPoints.add(wallSegment.end);
+      previousSegmentData = segmentData;
+      if (firstSegmentData === null) firstSegmentData = segmentData;
+      this.viewModel.wallSegmentLocations.push(segmentData);
+      if (cornerPoleData)
+        this.viewModel.cornerPoleLocations.push(cornerPoleData);
+    });
+  }
+
+  private computeWallSegmentData(wallSegment: {
+    start: number;
+    end: number;
+  }): LearningSpaceWallSegmentLocationData {
+    let startPoint = this.viewModel.spaceCornerPoints[wallSegment.start];
+    let endPoint = this.viewModel.spaceCornerPoints[wallSegment.end];
+    let angle = Math.atan2(
+      endPoint.z - startPoint.z,
+      endPoint.x - startPoint.x
+    );
+    startPoint.x =
+      startPoint.x - (Math.sin(angle) * this.viewModel.wallThickness) / 2;
+    startPoint.z =
+      startPoint.z + (Math.cos(angle) * this.viewModel.wallThickness) / 2;
+    return {
+      index: wallSegment.start,
+      startPoint: { x: startPoint.x, z: startPoint.z },
+      endPoint: { x: endPoint.x, z: endPoint.z },
+      angle: angle,
+    };
+  }
+
+  private computeCornerPoleData(
+    segmentData: LearningSpaceWallSegmentLocationData,
+    previousSegmentData: LearningSpaceWallSegmentLocationData
+  ): LearningSpaceCornerPoleLocationData {
+    let cornerPolePosition =
+      this.viewModel.spaceCornerPoints[segmentData.index];
+    let angle = (segmentData.angle + previousSegmentData.angle) / 2;
+    cornerPolePosition.x =
+      cornerPolePosition.x - Math.sin(angle) * this.viewModel.wallThickness;
+    cornerPolePosition.z =
+      cornerPolePosition.z + Math.cos(angle) * this.viewModel.wallThickness;
+    return {
+      index: segmentData.index,
+      position: cornerPolePosition,
+    };
   }
 }

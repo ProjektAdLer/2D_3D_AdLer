@@ -106,8 +106,8 @@ export default class LearningSpaceView implements ILearningSpaceView {
   }
 
   private async createWalls(): Promise<void> {
-    let wallMeshes: Mesh[] = this.createCornerPoles();
-    wallMeshes = wallMeshes.concat(this.createWallSegments());
+    let wallMeshes: Mesh[] = this.createAllCornerPoles();
+    wallMeshes = wallMeshes.concat(this.createAllWallSegments());
 
     let mergedWallMeshes = Mesh.MergeMeshes(wallMeshes, true) as Mesh;
     this.scenePresenter.Scene.removeMesh(mergedWallMeshes);
@@ -138,13 +138,14 @@ export default class LearningSpaceView implements ILearningSpaceView {
     mergedWallMeshes.material = this.viewModel.wallMaterial;
   }
 
-  private createWallSegments(): Mesh[] {
+  private createAllWallSegments(): Mesh[] {
     const wallSegments: Mesh[] = [];
-    this.viewModel.wallSegments.forEach((wallSegment) => {
+    this.viewModel.wallSegmentLocations.forEach((wallSegmentLocation) => {
       wallSegments.push(
         this.createWallSegment(
-          this.viewModel.spaceCornerPoints[wallSegment.start],
-          this.viewModel.spaceCornerPoints[wallSegment.end]
+          wallSegmentLocation.startPoint,
+          wallSegmentLocation.endPoint,
+          wallSegmentLocation.angle
         )
       );
     });
@@ -152,27 +153,15 @@ export default class LearningSpaceView implements ILearningSpaceView {
     return wallSegments;
   }
 
-  private createWallSegment(startPoint: Vector3, endPoint: Vector3): Mesh {
-    // offset with wall thickness to create outside alligned walls
-    const offsetStartPoint = new Vector3(
-      startPoint.x +
-        Math.sign(startPoint.x) * (this.viewModel.wallThickness / 2),
-      startPoint.y,
-      startPoint.z +
-        Math.sign(startPoint.z) * (this.viewModel.wallThickness / 2)
+  private createWallSegment(
+    startPoint: { x: number; z: number },
+    endPoint: { x: number; z: number },
+    angle: number
+  ): Mesh {
+    const wallLength = Math.sqrt(
+      Math.pow(endPoint.x - startPoint.x, 2) +
+        Math.pow(endPoint.z - startPoint.z, 2)
     );
-    const offsetEndPoint = new Vector3(
-      endPoint.x + Math.sign(endPoint.x) * (this.viewModel.wallThickness / 2),
-      endPoint.y,
-      endPoint.z + Math.sign(endPoint.z) * (this.viewModel.wallThickness / 2)
-    );
-
-    // create mesh
-    const wallLength =
-      Math.sqrt(
-        Math.pow(offsetEndPoint.x - offsetStartPoint.x, 2) +
-          Math.pow(offsetEndPoint.z - offsetStartPoint.z, 2)
-      ) + 0.01; // extend wall to avoid z-fighting at the edges
     const wallSegmentOptions = {
       height: this.viewModel.wallHeight + this.viewModel.wallGroundworkDepth,
       width: wallLength,
@@ -186,22 +175,16 @@ export default class LearningSpaceView implements ILearningSpaceView {
     this.scenePresenter.Scene.removeMesh(wallSegment);
 
     // set position
-    wallSegment.position.x = (offsetStartPoint.x + offsetEndPoint.x) / 2;
+    wallSegment.position.x = (startPoint.x + endPoint.x) / 2;
     wallSegment.position.y =
       (this.viewModel.baseHeight || 0) +
       (this.viewModel.wallHeight - this.viewModel.wallGroundworkDepth) / 2;
-    wallSegment.position.z = (offsetStartPoint.z + offsetEndPoint.z) / 2;
+    wallSegment.position.z = (startPoint.z + endPoint.z) / 2;
 
-    wallSegment.rotation.y =
-      Math.PI -
-      Math.atan2(
-        offsetEndPoint.z - offsetStartPoint.z,
-        offsetEndPoint.x - offsetStartPoint.x
-      );
+    wallSegment.rotation.y = Math.PI - angle;
 
     return wallSegment;
   }
-
   private createDoorCutout(
     doorPosition: [Vector3, number],
     wallSegment: Mesh
@@ -291,42 +274,23 @@ export default class LearningSpaceView implements ILearningSpaceView {
     return wallSegmentWithCutout;
   }
 
-  private createCornerPoles(): Mesh[] {
-    let wallSegmentIntersections: Set<number> = new Set<number>();
-    let visitedCornerPoints: Set<number> = new Set<number>();
-    this.viewModel.wallSegments.forEach((wallSegment) => {
-      if (visitedCornerPoints.has(wallSegment.start))
-        wallSegmentIntersections.add(wallSegment.start);
-      else visitedCornerPoints.add(wallSegment.start);
-
-      if (visitedCornerPoints.has(wallSegment.end))
-        wallSegmentIntersections.add(wallSegment.end);
-      else visitedCornerPoints.add(wallSegment.end);
-    });
-
+  private createAllCornerPoles(): Mesh[] {
     const cornerPoles: Mesh[] = [];
-    wallSegmentIntersections.forEach((intersectionPoint) => {
-      const poleMesh = this.createPole(
-        this.viewModel.spaceCornerPoints[intersectionPoint]
+    this.viewModel.cornerPoleLocations.forEach((cornerPoleLocation) => {
+      cornerPoles.push(
+        this.createCornerPole(
+          cornerPoleLocation.position.x,
+          cornerPoleLocation.position.z
+        )
       );
-      cornerPoles.push(poleMesh);
     });
-
     return cornerPoles;
   }
 
-  private createPole(corner: Vector3): Mesh {
-    // offset with wall thickness to create outside alligned walls
-    const offsetCorner = new Vector3(
-      corner.x + Math.sign(corner.x) * (this.viewModel.wallThickness / 2),
-      corner.y,
-      corner.z + Math.sign(corner.z) * (this.viewModel.wallThickness / 2)
-    );
-
-    // create pole mesh
+  private createCornerPole(posX: number, posZ: number): Mesh {
     const poleOptions = {
       height: this.viewModel.wallHeight + this.viewModel.wallGroundworkDepth,
-      diameter: this.viewModel.wallThickness,
+      diameter: this.viewModel.wallThickness * 2,
       tessellation: 12,
     };
     const pole = MeshBuilder.CreateCylinder(
@@ -334,13 +298,11 @@ export default class LearningSpaceView implements ILearningSpaceView {
       poleOptions,
       this.scenePresenter.Scene
     );
-
-    // position pole
-    pole.position.x = offsetCorner.x;
+    pole.position.x = posX;
     pole.position.y =
       (this.viewModel.baseHeight || 0) +
       (this.viewModel.wallHeight - this.viewModel.wallGroundworkDepth) / 2;
-    pole.position.z = offsetCorner.z;
+    pole.position.z = posZ;
 
     return pole;
   }

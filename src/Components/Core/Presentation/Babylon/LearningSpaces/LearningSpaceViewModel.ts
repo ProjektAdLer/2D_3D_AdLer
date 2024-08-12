@@ -4,6 +4,16 @@ import { Mesh, StandardMaterial, Vector3 } from "@babylonjs/core";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 
+export type LearningSpaceWallSegmentLocationData = {
+  index: number;
+  startPoint: { x: number; z: number };
+  endPoint: { x: number; z: number };
+  angle: number;
+};
+export type LearningSpaceCornerPoleLocationData = {
+  index: number;
+  position: { x: number; z: number };
+};
 @injectable()
 export default class LearningSpaceViewModel {
   public id: ComponentID;
@@ -36,4 +46,6 @@ export default class LearningSpaceViewModel {
   public exitDoorPosition: [Vector3, number];
   public entryDoorPosition: [Vector3, number];
   public windowPositions: [Vector3, number][] = [];
+  public wallSegmentLocations: LearningSpaceWallSegmentLocationData[] = [];
+  public cornerPoleLocations: LearningSpaceCornerPoleLocationData[] = [];
 }

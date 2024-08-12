@@ -84,7 +84,7 @@ const BigWorldAWT: AWT = {
         spaceSlotContents: [3],
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "",
-        spaceTemplate: "L_32X31_10L",
+        spaceTemplate: "D_40X37_15L",
         spaceTemplateStyle: "",
         spaceStory: {
           introStory: {
