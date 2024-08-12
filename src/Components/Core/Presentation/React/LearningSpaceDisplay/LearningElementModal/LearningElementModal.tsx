@@ -87,7 +87,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
     >
       {createModalContent(viewModel, controller)}
       {isPrimitive && (
-        <div className="grid mt-2 justify-items-end">
+        <div className="grid mt-2 mb-1 justify-items-end">
           <StyledButton
             shape="freefloatcenter"
             onClick={async () => {

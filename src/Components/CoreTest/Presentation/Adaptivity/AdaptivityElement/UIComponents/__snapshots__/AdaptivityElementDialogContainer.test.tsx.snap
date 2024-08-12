@@ -97,45 +97,45 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
           class="flex flex-col justify-between p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%] "
         >
           <div
-            class="overflow-auto lg:max-h-[24vh] xl:max-h-[27vh]"
+            class="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl "
           >
             <div
-              class="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl "
+              class=""
             >
-              <div
-                class=""
+              <button
+                class="mr-2 roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 justify-center p-1 md:w-12 md:h-12 sm:w-10 sm:h-10 w-8 h-8 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
               >
-                <button
-                  class="mr-2 roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 justify-center p-1 md:w-12 md:h-12 sm:w-10 sm:h-10 w-8 h-8 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
-                >
-                  ◀
-                </button>
-              </div>
-              <img
-                alt="LearningImage!"
-                class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
-                data-testid="npcImage"
-                src="a_npc_defaultnpc.png"
-              />
-              <div
-                class="w-full text-xs lg:text-lg"
-              >
-                singleChoiceSelectedtestQuestionText
-              </div>
-              <div
-                class=""
-              >
-                <button
-                  class="roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 justify-center p-1 md:w-12 md:h-12 sm:w-10 sm:h-10 w-8 h-8 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
-                >
-                  <img
-                    alt="CloseButton"
-                    class="lg:w-10 md:w-8 sm:w-6"
-                    src="close-icon-nobg.svg"
-                  />
-                </button>
-              </div>
+                ◀
+              </button>
             </div>
+            <img
+              alt="LearningImage!"
+              class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+              data-testid="npcImage"
+              src="a_npc_defaultnpc.png"
+            />
+            <div
+              class="w-full text-xs lg:text-lg"
+            >
+              singleChoiceSelectedtestQuestionText
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 justify-center p-1 md:w-12 md:h-12 sm:w-10 sm:h-10 w-8 h-8 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+              >
+                <img
+                  alt="CloseButton"
+                  class="lg:w-10 md:w-8 sm:w-6"
+                  src="close-icon-nobg.svg"
+                />
+              </button>
+            </div>
+          </div>
+          <div
+            class="overflow-auto max-h-[80vh] lg:max-h-[16vh] xl:max-h-[20vh]"
+          >
             <div
               class="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:mx-4"
             >

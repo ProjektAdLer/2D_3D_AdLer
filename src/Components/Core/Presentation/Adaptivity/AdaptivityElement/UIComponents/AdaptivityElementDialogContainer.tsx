@@ -141,7 +141,6 @@ export default function AdaptivityElementDialogContainer({
               event.stopPropagation();
             }}
           >
-            <div className="overflow-auto lg:max-h-[24vh] xl:max-h-[27vh]">
               {/* Header */}
               <div className="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
                 {!(currentTask === null && currentQuestion === null) &&
@@ -197,8 +196,9 @@ export default function AdaptivityElementDialogContainer({
               </div>
 
               {/* Content */}
+              <div className="overflow-auto max-h-[80vh] lg:max-h-[16vh] xl:max-h-[20vh]">
               {currentTask === null && currentQuestion === null && (
-                <div className="flex items-center justify-center px-1 mb-4 h-fit rounded-lg font-regular !text-sm lg:mx-4">
+                <div className=" flex items-center justify-center px-1 mb-4 h-fit rounded-lg font-regular !text-sm lg:mx-4">
                   <AdaptivityElementTaskSelection
                     tasks={contentData.tasks}
                     setHeaderText={setHeaderText}
@@ -207,7 +207,7 @@ export default function AdaptivityElementDialogContainer({
                 </div>
               )}
               {currentTask !== null && currentQuestion === null && (
-                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular lg:mx-4">
+                <div className=" flex items-center justify-center px-1 mb-4 rounded-lg font-regular lg:mx-4">
                   <AdaptivityElementQuestionSelection
                     selectedTask={currentTask}
                     setHeaderText={setHeaderText}
