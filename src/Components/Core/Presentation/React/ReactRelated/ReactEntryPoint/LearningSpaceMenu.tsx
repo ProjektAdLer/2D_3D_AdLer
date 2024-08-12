@@ -20,7 +20,7 @@ export default function LearningSpaceMenu() {
   return (
     <React.Fragment>
       <div className="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden">
-        <div className="grid order-2 grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg">
+        <div className="grid order-2 grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 portrait:gap-4 grow lg:rounded-lg">
           <SpaceSelection className="col-start-1 p-2 portrait:row-start-1 lg:pb-8" />
           <LearningSpaceDetail className="flex col-start-2 p-2 portrait:col-start-1 portrait:row-start-2 lg:p-8" />
         </div>
