@@ -18,7 +18,7 @@ function LearningSpaceSelectionSpaceNode(
   return (
     <>
       <StyledButton
-        className="justify-between w-44 active:mb-[2px]"
+        className="justify-between w-44 "
         shape="freefloatleft"
         color={props.data?.lastSelected ? "pressed" : "default"}
         icon={props.data?.icon}

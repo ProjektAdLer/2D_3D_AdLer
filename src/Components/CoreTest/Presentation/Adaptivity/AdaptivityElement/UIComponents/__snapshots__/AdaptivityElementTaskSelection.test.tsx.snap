@@ -12,7 +12,7 @@ exports[`AdaptivityElementTaskSelection should render 1`] = `
         class=""
       >
         <button
-          class="w-full max-w-2xl px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 text-adlerdarkblue font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+          class="w-full max-w-2xl px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-buttonbgblue hover:text-buttonbgblue hover:bg-adlerdarkblue lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
         >
           <div
             class="grid items-center justify-between w-full h-full grid-cols-7 align-center"
