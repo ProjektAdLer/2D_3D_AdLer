@@ -221,31 +221,31 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     start: number;
     end: number;
   }): LearningSpaceWallSegmentLocationData {
-    let originalStartPoint =
+    let startPointOriginal =
       this.viewModel.spaceCornerPoints[wallSegment.start];
-    let originalEndPoint = this.viewModel.spaceCornerPoints[wallSegment.end];
+    let endPointOriginal = this.viewModel.spaceCornerPoints[wallSegment.end];
     let angle = Math.atan2(
-      originalEndPoint.z - originalStartPoint.z,
-      originalEndPoint.x - originalStartPoint.x
+      endPointOriginal.z - startPointOriginal.z,
+      endPointOriginal.x - startPointOriginal.x
     );
-    let newStartPoint = { x: 0, z: 0 };
-    let newEndPoint = { x: 0, z: 0 };
+    let startPointNew = { x: 0, z: 0 };
+    let endPointNew = { x: 0, z: 0 };
 
-    newStartPoint.x =
-      originalStartPoint.x -
+    startPointNew.x =
+      startPointOriginal.x -
       (Math.sin(angle) * this.viewModel.wallThickness) / 2;
-    newStartPoint.z =
-      originalStartPoint.z +
+    startPointNew.z =
+      startPointOriginal.z +
       (Math.cos(angle) * this.viewModel.wallThickness) / 2;
-    newEndPoint.x =
-      originalEndPoint.x - (Math.sin(angle) * this.viewModel.wallThickness) / 2;
-    newEndPoint.z =
-      originalEndPoint.z + (Math.cos(angle) * this.viewModel.wallThickness) / 2;
+    endPointNew.x =
+      endPointOriginal.x - (Math.sin(angle) * this.viewModel.wallThickness) / 2;
+    endPointNew.z =
+      endPointOriginal.z + (Math.cos(angle) * this.viewModel.wallThickness) / 2;
 
     return {
       index: wallSegment.start,
-      startPoint: { x: newStartPoint.x, z: newStartPoint.z },
-      endPoint: { x: newEndPoint.x, z: newEndPoint.z },
+      startPoint: { x: startPointNew.x, z: startPointNew.z },
+      endPoint: { x: endPointNew.x, z: endPointNew.z },
       angle: angle,
     };
   }
@@ -254,21 +254,21 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     segmentData: LearningSpaceWallSegmentLocationData,
     previousSegmentData: LearningSpaceWallSegmentLocationData
   ): LearningSpaceCornerPoleLocationData {
-    let originalCornerPolePosition =
+    let cornerPolePositionOriginal =
       this.viewModel.spaceCornerPoints[segmentData.index];
     let angle = (segmentData.angle + previousSegmentData.angle) / 2;
-    let newCornerPolePosition = { x: 0, z: 0 };
+    let cornerPolePositionNew = { x: 0, z: 0 };
 
-    newCornerPolePosition.x =
-      originalCornerPolePosition.x -
+    cornerPolePositionNew.x =
+      cornerPolePositionOriginal.x -
       Math.sin(angle) * this.viewModel.wallThickness * 0.75;
-    newCornerPolePosition.z =
-      originalCornerPolePosition.z +
+    cornerPolePositionNew.z =
+      cornerPolePositionOriginal.z +
       Math.cos(angle) * this.viewModel.wallThickness * 0.75;
 
     return {
       index: segmentData.index,
-      position: newCornerPolePosition,
+      position: cornerPolePositionNew,
     };
   }
 }
