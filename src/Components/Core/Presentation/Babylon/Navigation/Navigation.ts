@@ -98,5 +98,9 @@ export default class Navigation extends Readyable implements INavigation {
 
   reset(): void {
     this.resetIsReady();
+    this.crowd.dispose();
+    this.matDebug.dispose();
+    this.navMeshDebug.dispose();
+    this.plugin.dispose();
   }
 }
