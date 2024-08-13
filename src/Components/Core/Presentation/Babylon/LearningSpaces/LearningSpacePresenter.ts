@@ -54,7 +54,6 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     this.decorationBuilder.theme = spaceTO.theme;
     await this.director.buildAsync(this.decorationBuilder);
     await this.createStoryNPCs(spaceTO);
-    console.log("pres: viewmodel", this.viewModel);
   }
 
   broadcastAvatarPosition(position: Vector3, interactionRadius: number): void {
