@@ -12,11 +12,14 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 - close-icon-nobg.svg
 - added informing modal if user is not registered in any courses
+- "submit" button to storyelement
+- new templates for github issues and refactored the existing ones
 
 ### Changed
 
 - new icon to Modal Close Buttons
 - move trigger of potential outro cutscene of story and learning element to closing respective modal
+- size of Break Time Notofication close button
 
 ### Removed
 
@@ -27,6 +30,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 - fixed unlocking of outro cutscene text in story element dialog menu
 - fixed crash if story element accesses non-existing text-element
+- fixed layout issues on mobile with goal panel and points
 
 ### Deprecated
 
