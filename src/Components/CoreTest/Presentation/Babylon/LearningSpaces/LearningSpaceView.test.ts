@@ -452,6 +452,26 @@ describe("LearningSpaceView", () => {
         new Vector3(-5.3, 0, 4.3),
         new Vector3(-5.3, 0, -4.3),
       ];
+      viewModel.wallSegmentLocations = [
+        {
+          index: 0,
+          startPoint: { x: 0, z: 0 },
+          endPoint: { x: 1, z: 1 },
+          angle: 0,
+        },
+        {
+          index: 1,
+          startPoint: { x: 1, z: 1 },
+          endPoint: { x: 2, z: 2 },
+          angle: 0,
+        },
+        {
+          index: 2,
+          startPoint: { x: 2, z: 2 },
+          endPoint: { x: 0, z: 0 },
+          angle: 0,
+        },
+      ];
       viewModel.wallSegments = [
         {
           start: 0,
@@ -489,19 +509,22 @@ describe("LearningSpaceView", () => {
       scenePresenterMock.Scene = new Scene(new NullEngine());
       const result = systemUnderTest["createWallSegment"](
         new Vector3(0, 0, 0),
-        new Vector3(1, 1, 1)
+        new Vector3(1, 1, 1),
+        0
       );
 
       expect(result).toBeInstanceOf(Mesh);
     });
 
     //ANF-ID: [ELG0016]
-    test("createCornerPoles creates 1 corner pole when there are 2 walls segments with one shared endpoint", () => {
+    test("createAllCornerPoles creates 1 corner pole when there are 2 walls segments with one shared endpoint", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.spaceCornerPoints = [
-        new Vector3(5.3, 0, 4.3),
-        new Vector3(-5.3, 0, 4.3),
-        new Vector3(-5.3, 0, -4.3),
+
+      viewModel.cornerPoleLocations = [
+        {
+          index: 0,
+          position: { x: 0, z: 0 },
+        },
       ];
       viewModel.wallSegments = [
         {
@@ -515,28 +538,28 @@ describe("LearningSpaceView", () => {
       ];
       jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
 
-      const result = systemUnderTest["createCornerPoles"]();
+      const result = systemUnderTest["createAllCornerPoles"]();
 
       expect(result).toHaveLength(1);
     });
 
     //ANF-ID: [ELG0016]
-    test("createPole returns a mesh", () => {
+    test("createCornerPole returns a mesh", () => {
       const [systemUnderTest, ,] = createSystemUnderTest();
       //@ts-ignore
       scenePresenterMock.Scene = new Scene(new NullEngine());
 
-      const result = systemUnderTest["createPole"](new Vector3(0, 0, 0));
+      const result = systemUnderTest["createCornerPole"](0, 0);
 
       expect(result).toBeInstanceOf(Mesh);
     });
 
     //ANF-ID: [ELG0016]
-    test("createPole calls MeshBuilder.CreateCylinder", () => {
+    test("createCornerPole calls MeshBuilder.CreateCylinder", () => {
       const [systemUnderTest, ,] = createSystemUnderTest();
       jest.spyOn(MeshBuilder, "CreateCylinder").mockReturnValue(mock<Mesh>());
 
-      systemUnderTest["createPole"](new Vector3(0, 0, 0));
+      systemUnderTest["createCornerPole"](0, 0);
 
       expect(MeshBuilder.CreateCylinder).toBeCalledTimes(1);
     });

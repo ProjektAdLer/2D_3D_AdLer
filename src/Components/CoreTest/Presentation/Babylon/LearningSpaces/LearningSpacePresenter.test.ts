@@ -303,7 +303,8 @@ describe("LearningSpacePresenter", () => {
     expect(storyNPCBuilderMock.storyType).toBe(StoryElementType.Intro);
   });
 
-  test("computeWallCoordinates goes through all wallsegments and creates them", async () => {
+  //ANF-ID: [ELG0016]
+  test("computeWallCoordinates goes through all wallsegments and computes them correctly", async () => {
     systemUnderTest["viewModel"].wallSegments = [{ start: 0, end: 1 }];
     systemUnderTest["viewModel"].spaceCornerPoints = [
       new Vector3(0, 0, 1),
@@ -322,7 +323,8 @@ describe("LearningSpacePresenter", () => {
     ]);
   });
 
-  test("computeWallCoordinates creates CornerPoles correctly", async () => {
+  //ANF-ID: [ELG0016]
+  test("computeWallCoordinates computes CornerPoles correctly", async () => {
     systemUnderTest["viewModel"].wallSegments = [
       { start: 0, end: 1 },
       { start: 1, end: 2 },
@@ -343,7 +345,8 @@ describe("LearningSpacePresenter", () => {
     ]);
   });
 
-  test("computeWallCoordinates creates CornerPoles correctly, even if Cornerpole is at index 0", async () => {
+  //ANF-ID: [ELG0016]
+  test("computeWallCoordinates computes CornerPoles correctly, even if Cornerpole is at index 0", async () => {
     systemUnderTest["viewModel"].wallSegments = [
       { start: 0, end: 1 },
       { start: 3, end: 0 },
