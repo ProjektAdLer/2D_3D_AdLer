@@ -1,7 +1,7 @@
 ---
 name: Coding User Story Template
 about: Coding User Story im AdLer Projekt
-title: ""
+title: "[Code] -"
 labels: coding
 assignees: ""
 ---

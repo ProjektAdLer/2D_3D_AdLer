@@ -1,7 +1,7 @@
 ---
 name: Prototyping Template
 about: Prototyping im AdLer Projekt Team 3D
-title: ""
+title: "[Prototype] - "
 labels: prototyping
 assignees: ""
 ---

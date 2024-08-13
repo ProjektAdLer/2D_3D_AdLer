@@ -28,7 +28,7 @@ export default function SingleStoryLayout({
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex justify-between w-full min-h-8 lg:max-w-5xl xl:max-w-6xl">
+      <div className="flex flex-row-reverse justify-between w-full min-h-8 lg:max-w-5xl xl:max-w-6xl">
         {withBackButton && (
           <>
             <StyledButton
@@ -40,15 +40,19 @@ export default function SingleStoryLayout({
           </>
         )}
 
-        <StyledButton onClick={() => controller.closePanel()}>
+        {/* Storyelement abschließen Button */}
+        <StyledButton
+          shape="freefloatcenter"
+          onClick={() => controller.closePanel()}
+        >
           {
-            "ADD TRANSLATION HERE"
+            "Danke und mach's gut!"
             //translate("closeButton")
           }
         </StyledButton>
 
         {contentTexts.length > 1 && (
-          <div className="grid w-16 grid-cols-2 lg:w-32 justify-items-end">
+          <div className="grid w-16 mx-1 gap-2 grid-cols-2 lg:w-32 justify-items-end">
             <div>
               <StyledButton
                 shape="closeButton"

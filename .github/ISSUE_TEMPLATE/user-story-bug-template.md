@@ -1,7 +1,7 @@
 ---
 name: Bug Template
 about: Bug im AdLer Projekt Team 3D
-title: ""
+title: "[Bug] - "
 labels: bug
 assignees: ""
 ---

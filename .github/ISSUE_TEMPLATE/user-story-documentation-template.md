@@ -1,7 +1,7 @@
 ---
 name: Documentation User Story Template
 about: Documentation User Story im AdLer Projekt
-title: ""
+title: "[Doc] - "
 labels: documentation
 assignees: ""
 ---

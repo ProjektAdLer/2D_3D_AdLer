@@ -1,7 +1,7 @@
 ---
 name: Testing User Story Template
 about: Testing User Story im AdLer Projekt
-title: ""
+title: "[Test] - "
 labels: coding
 assignees: ""
 ---

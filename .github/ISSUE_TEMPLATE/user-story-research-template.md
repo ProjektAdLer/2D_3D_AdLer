@@ -1,7 +1,7 @@
 ---
 name: Research Template
 about: Research im AdLer Projekt Team 3D
-title: ""
+title: "[Research] - "
 labels: research
 assignees: ""
 ---
