@@ -221,31 +221,28 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     start: number;
     end: number;
   }): LearningSpaceWallSegmentLocationData {
-    let startPointOriginal =
-      this.viewModel.spaceCornerPoints[wallSegment.start];
-    let endPointOriginal = this.viewModel.spaceCornerPoints[wallSegment.end];
+    let startCornerPoint = this.viewModel.spaceCornerPoints[wallSegment.start];
+    let endCornerPoint = this.viewModel.spaceCornerPoints[wallSegment.end];
     let angle = Math.atan2(
-      endPointOriginal.z - startPointOriginal.z,
-      endPointOriginal.x - startPointOriginal.x
+      endCornerPoint.z - startCornerPoint.z,
+      endCornerPoint.x - startCornerPoint.x
     );
-    let startPointNew = { x: 0, z: 0 };
-    let endPointNew = { x: 0, z: 0 };
+    let startPosition = { x: 0, z: 0 };
+    let endPosition = { x: 0, z: 0 };
 
-    startPointNew.x =
-      startPointOriginal.x -
-      (Math.sin(angle) * this.viewModel.wallThickness) / 2;
-    startPointNew.z =
-      startPointOriginal.z +
-      (Math.cos(angle) * this.viewModel.wallThickness) / 2;
-    endPointNew.x =
-      endPointOriginal.x - (Math.sin(angle) * this.viewModel.wallThickness) / 2;
-    endPointNew.z =
-      endPointOriginal.z + (Math.cos(angle) * this.viewModel.wallThickness) / 2;
+    startPosition.x =
+      startCornerPoint.x - (Math.sin(angle) * this.viewModel.wallThickness) / 2;
+    startPosition.z =
+      startCornerPoint.z + (Math.cos(angle) * this.viewModel.wallThickness) / 2;
+    endPosition.x =
+      endCornerPoint.x - (Math.sin(angle) * this.viewModel.wallThickness) / 2;
+    endPosition.z =
+      endCornerPoint.z + (Math.cos(angle) * this.viewModel.wallThickness) / 2;
 
     return {
       index: wallSegment.start,
-      startPoint: { x: startPointNew.x, z: startPointNew.z },
-      endPoint: { x: endPointNew.x, z: endPointNew.z },
+      startPoint: { x: startPosition.x, z: startPosition.z },
+      endPoint: { x: endPosition.x, z: endPosition.z },
       angle: angle,
     };
   }
@@ -254,21 +251,18 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     segmentData: LearningSpaceWallSegmentLocationData,
     previousSegmentData: LearningSpaceWallSegmentLocationData
   ): LearningSpaceCornerPoleLocationData {
-    let cornerPolePositionOriginal =
-      this.viewModel.spaceCornerPoints[segmentData.index];
+    let cornerPoint = this.viewModel.spaceCornerPoints[segmentData.index];
     let angle = (segmentData.angle + previousSegmentData.angle) / 2;
-    let cornerPolePositionNew = { x: 0, z: 0 };
+    let polePosition = { x: 0, z: 0 };
 
-    cornerPolePositionNew.x =
-      cornerPolePositionOriginal.x -
-      Math.sin(angle) * this.viewModel.wallThickness * 0.75;
-    cornerPolePositionNew.z =
-      cornerPolePositionOriginal.z +
-      Math.cos(angle) * this.viewModel.wallThickness * 0.75;
+    polePosition.x =
+      cornerPoint.x - Math.sin(angle) * this.viewModel.wallThickness * 0.75;
+    polePosition.z =
+      cornerPoint.z + Math.cos(angle) * this.viewModel.wallThickness * 0.75;
 
     return {
       index: segmentData.index,
-      position: cornerPolePositionNew,
+      position: polePosition,
     };
   }
 }
