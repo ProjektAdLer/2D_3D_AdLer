@@ -109,6 +109,7 @@ describe("LearningSpacePresenter", () => {
   beforeEach(() => {
     viewModel = new LearningSpaceViewModel();
     viewModel.id = 1;
+    viewModel.wallSegments = [];
     systemUnderTest = new LearningSpacePresenter(viewModel);
   });
 
@@ -300,5 +301,66 @@ describe("LearningSpacePresenter", () => {
     expect(directorMock.buildAsync).toHaveBeenCalledWith(storyNPCBuilderMock);
 
     expect(storyNPCBuilderMock.storyType).toBe(StoryElementType.Intro);
+  });
+
+  test("computeWallCoordinates goes through all wallsegments and creates them", async () => {
+    systemUnderTest["viewModel"].wallSegments = [{ start: 0, end: 1 }];
+    systemUnderTest["viewModel"].spaceCornerPoints = [
+      new Vector3(0, 0, 1),
+      new Vector3(1, 0, 1),
+      new Vector3(1, 0, 2),
+    ];
+    systemUnderTest["computeWallCoordinates"]();
+
+    expect(systemUnderTest["viewModel"].wallSegmentLocations).toEqual([
+      {
+        index: 0,
+        startPoint: { x: 0, z: 1.15 },
+        endPoint: { x: 1, z: 1.15 },
+        angle: 0,
+      },
+    ]);
+  });
+
+  test("computeWallCoordinates creates CornerPoles correctly", async () => {
+    systemUnderTest["viewModel"].wallSegments = [
+      { start: 0, end: 1 },
+      { start: 1, end: 2 },
+    ];
+    systemUnderTest["viewModel"].spaceCornerPoints = [
+      new Vector3(0, 0, 1),
+      new Vector3(1, 0, 1),
+      new Vector3(2, 0, 1),
+      new Vector3(2, 0, 2),
+    ];
+    systemUnderTest["computeWallCoordinates"]();
+
+    expect(systemUnderTest["viewModel"].cornerPoleLocations).toEqual([
+      {
+        index: 1,
+        position: { x: 1, z: 1.225 },
+      },
+    ]);
+  });
+
+  test("computeWallCoordinates creates CornerPoles correctly, even if Cornerpole is at index 0", async () => {
+    systemUnderTest["viewModel"].wallSegments = [
+      { start: 0, end: 1 },
+      { start: 3, end: 0 },
+    ];
+    systemUnderTest["viewModel"].spaceCornerPoints = [
+      new Vector3(0, 0, 1),
+      new Vector3(1, 0, 1),
+      new Vector3(-2, 0, 2),
+      new Vector3(-1, 0, 1),
+    ];
+    systemUnderTest["computeWallCoordinates"]();
+
+    expect(systemUnderTest["viewModel"].cornerPoleLocations).toEqual([
+      {
+        index: 0,
+        position: { x: 0, z: 1.225 },
+      },
+    ]);
   });
 });
