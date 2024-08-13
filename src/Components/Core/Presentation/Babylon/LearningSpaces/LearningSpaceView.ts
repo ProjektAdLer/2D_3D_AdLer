@@ -290,7 +290,7 @@ export default class LearningSpaceView implements ILearningSpaceView {
   private createCornerPole(posX: number, posZ: number): Mesh {
     const poleOptions = {
       height: this.viewModel.wallHeight + this.viewModel.wallGroundworkDepth,
-      diameter: this.viewModel.wallThickness * 2,
+      diameter: this.viewModel.wallThickness * 1.5,
       tessellation: 12,
     };
     const pole = MeshBuilder.CreateCylinder(

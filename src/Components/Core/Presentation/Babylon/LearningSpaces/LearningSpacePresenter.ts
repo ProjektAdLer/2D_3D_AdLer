@@ -261,10 +261,10 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
 
     newCornerPolePosition.x =
       originalCornerPolePosition.x -
-      Math.sin(angle) * this.viewModel.wallThickness;
+      Math.sin(angle) * this.viewModel.wallThickness * 0.75;
     newCornerPolePosition.z =
       originalCornerPolePosition.z +
-      Math.cos(angle) * this.viewModel.wallThickness;
+      Math.cos(angle) * this.viewModel.wallThickness * 0.75;
 
     return {
       index: segmentData.index,
