@@ -63,8 +63,12 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     for (const elementPresenter of this.elementPresenters) {
       elementPresenter.onAvatarPositionChanged(position, interactionRadius);
     }
-    for (const npcPresenter of this.storyNPCPresenters)
+    for (const npcPresenter of this.storyNPCPresenters) {
       npcPresenter.onAvatarPositionChanged(position, interactionRadius);
+    }
+    for (const storyNPCPresenter of this.storyNPCPresenters) {
+      storyNPCPresenter.onAvatarPositionChanged(position, interactionRadius);
+    }
   }
 
   private async fillLearningElementSlots(
