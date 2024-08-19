@@ -22,6 +22,8 @@ export default class StoryNPCController implements IStoryNPCController {
       PRESENTATION_TYPES.IBottomTooltipPresenter
     );
     this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
+
+    this.viewModel.isInteractable.subscribe(this.onAvatarInteractableChange);
   }
 
   @bind
@@ -59,6 +61,15 @@ export default class StoryNPCController implements IStoryNPCController {
           this.viewModel.isInteractable.Value +
           ")"
       );
+  }
+  @bind
+  private onAvatarInteractableChange(isInteractable: boolean): void {
+    if (isInteractable && this.proximityToolTipId === -1) {
+      this.proximityToolTipId = this.displayTooltip();
+    } else if (!isInteractable && this.proximityToolTipId !== -1) {
+      this.bottomTooltipPresenter.hide(this.proximityToolTipId);
+      this.proximityToolTipId = -1;
+    }
   }
 
   private displayTooltip(): number {
