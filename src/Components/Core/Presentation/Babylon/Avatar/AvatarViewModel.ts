@@ -28,6 +28,8 @@ export default class AvatarViewModel {
   public readonly blinkDuration: number = 200; // in ms
   public readonly blinkInterval: number = 4000; // in ms
   public readonly blinkIntervalMaxOffset: number = 2000; // in ms (random offset up to this value is added to blinkInterval)
+  public setEyeTimer: NodeJS.Timeout;
+  public resetEyeTimer: NodeJS.Timeout;
   public eyeTextures: Texture[];
 
   // navigation

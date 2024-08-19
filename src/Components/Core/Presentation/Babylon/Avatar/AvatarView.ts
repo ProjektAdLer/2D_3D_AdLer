@@ -46,6 +46,7 @@ export default class AvatarView {
     this.setupBlinkAnimation();
     this.createCharacterAnimator();
     await this.createNPCNavigator();
+    this.setupCleanup();
   }
 
   private async loadAvatarAsync(): Promise<void> {
@@ -84,6 +85,7 @@ export default class AvatarView {
     });
   }
 
+  @bind
   private setupBlinkAnimation(): void {
     const eyeMaterial = this.viewModel.meshes.find(
       (mesh) => mesh.material?.name === "Eyes_mat"
@@ -93,15 +95,16 @@ export default class AvatarView {
     this.setBlinkTimeout();
   }
 
+  @bind
   private setBlinkTimeout(): void {
-    setTimeout(() => {
+    this.viewModel.setEyeTimer = setTimeout(() => {
       // set eye texture offset to blink texture
       this.viewModel.eyeTextures.forEach((texture) => {
         texture.uOffset = this.viewModel.blinkTextureUOffset;
       });
 
       // set timeout to reset eye texture offset and restart blink timeout
-      setTimeout(() => {
+      this.viewModel.resetEyeTimer = setTimeout(() => {
         this.viewModel.eyeTextures.forEach((texture) => {
           texture.uOffset = 0;
         });
@@ -161,5 +164,13 @@ export default class AvatarView {
   private onMovementTargetChanged(newTarget: Nullable<Vector3>): void {
     if (newTarget === null) this.movementIndicator.hide();
     else this.movementIndicator.display(newTarget);
+  }
+
+  @bind
+  private setupCleanup(): void {
+    this.scenePresenter.addDisposeSceneCallback(() => {
+      clearTimeout(this.viewModel.resetEyeTimer);
+      clearTimeout(this.viewModel.setEyeTimer);
+    });
   }
 }
