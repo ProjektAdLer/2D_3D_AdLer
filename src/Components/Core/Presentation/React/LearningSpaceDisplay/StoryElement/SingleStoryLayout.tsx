@@ -34,6 +34,7 @@ export default function SingleStoryLayout({
             <StyledButton
               shape="freefloatleft"
               onClick={() => controller.onBackToSelectionButtonClicked()}
+              data-testid="back"
             >
               {translate("backButton")}
             </StyledButton>
@@ -44,6 +45,7 @@ export default function SingleStoryLayout({
         <StyledButton
           shape="freefloatcenter"
           onClick={() => controller.closePanel()}
+          data-testid="close"
         >
           {
             "Danke und mach's gut!"
@@ -58,6 +60,7 @@ export default function SingleStoryLayout({
                 shape="closeButton"
                 onClick={() => setPageId(Math.max(0, pageId - 1))}
                 disabled={pageId <= 0}
+                data-testid="back"
               >
                 {"\u25C0"}
               </StyledButton>
@@ -70,6 +73,7 @@ export default function SingleStoryLayout({
                   setPageId(Math.min(contentTexts.length, pageId + 1))
                 }
                 disabled={pageId >= contentTexts.length - 1}
+                data-testid="next"
               >
                 {"\u25B6"}
               </StyledButton>
