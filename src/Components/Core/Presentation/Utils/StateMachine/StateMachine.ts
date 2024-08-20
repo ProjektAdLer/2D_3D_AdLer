@@ -37,6 +37,16 @@ export default class StateMachine<STATE, ACTION>
         transition.onTransitionCallback();
       }
       this.currentState = transition.to;
+
+      this.logger.log(
+        LogLevelTypes.INFO,
+        "[StateMachine]: Transitioned from " +
+          transition.from +
+          " to " +
+          transition.to +
+          " after action " +
+          action
+      );
       return true;
     }
 
