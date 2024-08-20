@@ -21,7 +21,6 @@ import type {
   LearningSpaceWallSegmentLocationData,
   LearningSpaceCornerPoleLocationData,
 } from "./LearningSpaceViewModel";
-import { start } from "repl";
 
 @injectable()
 export default class LearningSpacePresenter implements ILearningSpacePresenter {
