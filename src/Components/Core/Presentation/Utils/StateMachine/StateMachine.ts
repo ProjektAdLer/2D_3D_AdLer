@@ -42,7 +42,10 @@ export default class StateMachine<STATE, ACTION>
 
     this.logger.log(
       LogLevelTypes.WARN,
-      "[StateMachine]: No transition found for action " + action
+      "[StateMachine]: No transition found for action " +
+        action +
+        " in state " +
+        this.currentState
     );
     return false;
   }

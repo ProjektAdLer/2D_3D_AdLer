@@ -128,14 +128,13 @@ export default class CharacterAnimator implements ICharacterAnimator {
   }
 
   private setupInteractionAnimation(): void {
-    this.interactionAnimation!.onAnimationGroupEndObservable.add(() => {
-      if (
-        this.stateMachine.CurrentState === CharacterAnimationStates.Interaction
-      )
-        this.stateMachine.applyAction(
-          CharacterAnimationActions.InteractionFinished
-        );
-    });
+    // unused for now, because the interaction animation is played looping for smoother transition back to idle -MK
+    // this.interactionAnimation!.onAnimationGroupEndObservable.add(() => {
+    //   if (
+    //     this.stateMachine.CurrentState === CharacterAnimationStates.Interaction
+    //   )
+    //   this.transition(CharacterAnimationActions.InteractionFinished);
+    // });
 
     this.interactionAnimation!.setWeightForAllAnimatables(0.0);
 
@@ -245,13 +244,21 @@ export default class CharacterAnimator implements ICharacterAnimator {
         break;
     }
 
-    this.interactionAnimation!.play(false);
+    this.interactionAnimation!.play(true);
 
     this.createOnBeforeAnimationTransitionObserver(
       fromAnimation!,
       this.interactionAnimation!,
       () => this.getTimedAnimationInterpolationIncrement(100)
     );
+
+    if (
+      this.stateMachine.CurrentState !== CharacterAnimationStates.Interaction
+    ) {
+      setTimeout(() => {
+        this.transition(CharacterAnimationActions.InteractionFinished);
+      }, 2000);
+    }
   }
 
   @bind
@@ -259,7 +266,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
     this.createOnBeforeAnimationTransitionObserver(
       this.interactionAnimation!,
       this.idleAnimation,
-      () => this.getTimedAnimationInterpolationIncrement(100)
+      () => this.getTimedAnimationInterpolationIncrement(300)
     );
   }
 

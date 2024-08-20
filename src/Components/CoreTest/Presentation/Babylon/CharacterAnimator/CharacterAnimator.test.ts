@@ -262,11 +262,11 @@ describe("CharacterAnimator", () => {
     expect(systemUnderTest["animationBlendValue"]).toBe(0);
   });
 
-  test("transitionFromIdleOrWalkToInteract plays the interactionAnimation non-looping", () => {
+  test("transitionFromIdleOrWalkToInteract plays the interactionAnimation looping", () => {
     systemUnderTest["transitionFromIdleOrWalkToInteract"]();
 
     expect(mockInteractionAnimation.play).toHaveBeenCalledTimes(1);
-    expect(mockInteractionAnimation.play).toHaveBeenCalledWith(false);
+    expect(mockInteractionAnimation.play).toHaveBeenCalledWith(true);
   });
 
   test("anonymous observer function on onBeforeAnimationsObservable in transitionFromIdleOrWalkToInteract doesn't throw", () => {
