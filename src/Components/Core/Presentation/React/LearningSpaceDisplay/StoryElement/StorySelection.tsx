@@ -15,6 +15,7 @@ export default function StorySelection({
         shape="freefloatcenter"
         onClick={() => controller.onIntroButtonClicked()}
         className="!text-xl w-32"
+        data-testid="intro"
       >
         {translate("introStoryTitle")}
       </StyledButton>
@@ -23,6 +24,7 @@ export default function StorySelection({
         shape="freefloatcenter"
         onClick={() => controller.onOutroButtonClicked()}
         className="!text-xl w-32"
+        data-testid="outro"
       >
         {translate("outroStoryTitle")}
       </StyledButton>
