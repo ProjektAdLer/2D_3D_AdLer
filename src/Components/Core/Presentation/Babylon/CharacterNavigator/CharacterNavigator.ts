@@ -24,6 +24,7 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import ICharacterNavigator from "./ICharacterNavigator";
 import Readyable from "src/Lib/Readyable";
 import { injectable } from "inversify";
+import CharacterAnimationStates from "../CharacterAnimator/CharacterAnimationStates";
 
 @injectable()
 export default class CharacterNavigator
@@ -87,17 +88,21 @@ export default class CharacterNavigator
     target: Vector3,
     onTargetReachedCallback?: () => void
   ): void {
-    // reset navigation
-    this.resetObservers();
-
-    // get target on navmesh
-    target = this.navigation.Plugin.getClosestPoint(target);
-
-    // start movement
-    this.navigation.Crowd.agentGoto(this.agentIndex, target);
-    this.characterAnimator.transition(
+    // only actually move to new target if transition was successful or character is already walking
+    const transitionSuccessful = this.characterAnimator.transition(
       CharacterAnimationActions.MovementStarted
     );
+    if (
+      !transitionSuccessful &&
+      this.characterAnimator.CurrentAnimationState !==
+        CharacterAnimationStates.Walking
+    )
+      return;
+
+    this.resetObservers();
+
+    target = this.navigation.Plugin.getClosestPoint(target);
+    this.navigation.Crowd.agentGoto(this.agentIndex, target);
 
     // setup observers
     this.checkEarlyStoppingObserverRef =
@@ -115,7 +120,6 @@ export default class CharacterNavigator
         }
       );
 
-    // debug drawings
     this.debug_drawPath(target);
   }
 

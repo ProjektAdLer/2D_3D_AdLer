@@ -1,5 +1,6 @@
 import { AnimationGroup, TransformNode, Vector3 } from "@babylonjs/core";
 import CharacterAnimationActions from "./CharacterAnimationActions";
+import CharacterAnimationStates from "./CharacterAnimationStates";
 
 export default interface ICharacterAnimator {
   setup(
@@ -9,5 +10,6 @@ export default interface ICharacterAnimator {
     walkAnimation: AnimationGroup,
     interactionAnimation?: AnimationGroup
   ): void;
-  transition(action: CharacterAnimationActions): void;
+  transition(action: CharacterAnimationActions): boolean;
+  readonly CurrentAnimationState: CharacterAnimationStates;
 }

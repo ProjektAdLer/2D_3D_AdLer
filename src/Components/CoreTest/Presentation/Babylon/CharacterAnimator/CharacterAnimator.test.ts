@@ -13,6 +13,7 @@ import {
   Scene,
   TransformNode,
   Vector3,
+  expandToProperty,
 } from "@babylonjs/core";
 import CharacterAnimator from "../../../../Core/Presentation/Babylon/CharacterAnimator/CharacterAnimator";
 import CharacterAnimationActions from "../../../../Core/Presentation/Babylon/CharacterAnimator/CharacterAnimationActions";
@@ -93,16 +94,6 @@ describe("CharacterAnimator", () => {
   });
 
   // ANF-ID: [EZZ0018]
-  test("setup sets interaction animation weight to 0", () => {
-    expect(
-      mockInteractionAnimation.setWeightForAllAnimatables
-    ).toHaveBeenCalledTimes(1);
-    expect(
-      mockInteractionAnimation.setWeightForAllAnimatables
-    ).toHaveBeenCalledWith(0);
-  });
-
-  // ANF-ID: [EZZ0018]
   test("rotateCharacter rotates character according to its velocity", () => {
     systemUnderTest["rotateCharacter"](1);
 
@@ -144,26 +135,34 @@ describe("CharacterAnimator", () => {
   test("onBeforeAnimationTransitionObserver removes the given observer from the onBeforeAniamtionObservable of the scene when the transition is done", () => {
     const fromAnimation = mock<AnimationGroup>();
     const toAnimation = mock<AnimationGroup>();
+    const blendValueObject = { value: 0 };
+
+    const observerMock = mock<Observer<Scene>>();
+    systemUnderTest["transitionObserverRef"] = observerMock;
 
     systemUnderTest["onBeforeAnimationTransitionObserver"](
       fromAnimation,
       toAnimation,
+      blendValueObject,
       () => 1 // transition is done within the first call
     );
 
     expect(
       scenePresenterMock.Scene.onBeforeAnimationsObservable.remove
     ).toHaveBeenCalledTimes(1);
+    expect(systemUnderTest["transitionObserverRef"]).toBeNull();
   });
 
   // ANF-ID: [EZZ0018]
   test("onBeforeAnimationTransitionObserver sets from animation weight to 0 and to animation weigth to 1 when transition is done", () => {
     const fromAnimation = mock<AnimationGroup>();
     const toAnimation = mock<AnimationGroup>();
+    const blendValueObject = { value: 0 };
 
     systemUnderTest["onBeforeAnimationTransitionObserver"](
       fromAnimation,
       toAnimation,
+      blendValueObject,
       () => 1 // transition is done within the first call
     );
 
@@ -177,10 +176,12 @@ describe("CharacterAnimator", () => {
   test("onBeforeAnimationTransitionObserver sets from animation weight to 1-increment and to animation weigth to increment for one step of the transition", () => {
     const fromAnimation = mock<AnimationGroup>();
     const toAnimation = mock<AnimationGroup>();
+    const blendValueObject = { value: 0 };
 
     systemUnderTest["onBeforeAnimationTransitionObserver"](
       fromAnimation,
       toAnimation,
+      blendValueObject,
       () => 0.1
     );
 
@@ -188,12 +189,6 @@ describe("CharacterAnimator", () => {
     expect(fromAnimation.setWeightForAllAnimatables).toHaveBeenCalledWith(0.9);
     expect(toAnimation.setWeightForAllAnimatables).toHaveBeenCalledTimes(1);
     expect(toAnimation.setWeightForAllAnimatables).toHaveBeenCalledWith(0.1);
-  });
-
-  test("transitionFromIdleToWalk resets animationBlendValue to 0", () => {
-    systemUnderTest["transitionFromIdleToWalk"]();
-
-    expect(systemUnderTest["animationBlendValue"]).toBe(0);
   });
 
   test("anonymous callback function on onBeforeAnimationsObservable in transitionFromIdleToWalk doesn't throw", () => {
@@ -223,12 +218,6 @@ describe("CharacterAnimator", () => {
     expect(typeof result).toBe("number");
   });
 
-  test("transitionFromWalkToIdle resets animationBlendValue to 0", () => {
-    systemUnderTest["transitionFromWalkToIdle"]();
-
-    expect(systemUnderTest["animationBlendValue"]).toBe(0);
-  });
-
   test("anonymous callback function on onBeforeAnimationsObservable in transitionFromWalkToIdle doesn't throw", () => {
     // setup mock implementation to get a reference to the anonymous callback function
     let anonymousCallback: (eventData: Scene, eventState: EventState) => void;
@@ -256,17 +245,10 @@ describe("CharacterAnimator", () => {
     expect(typeof result).toBe("number");
   });
 
-  test("transitionFromIdleOrWalkToInteract resets animationBlendValue to 0", () => {
-    systemUnderTest["transitionFromIdleOrWalkToInteract"]();
-
-    expect(systemUnderTest["animationBlendValue"]).toBe(0);
-  });
-
-  test("transitionFromIdleOrWalkToInteract plays the interactionAnimation looping", () => {
-    systemUnderTest["transitionFromIdleOrWalkToInteract"]();
+  test("transitionFromAnyToInteract plays the interactionAnimation", () => {
+    systemUnderTest["transitionFromAnyToInteract"](mockIdleAnimation);
 
     expect(mockInteractionAnimation.play).toHaveBeenCalledTimes(1);
-    expect(mockInteractionAnimation.play).toHaveBeenCalledWith(true);
   });
 
   test("anonymous observer function on onBeforeAnimationsObservable in transitionFromIdleOrWalkToInteract doesn't throw", () => {
@@ -279,39 +261,28 @@ describe("CharacterAnimator", () => {
       }
     );
 
-    systemUnderTest["transitionFromIdleOrWalkToInteract"]();
+    systemUnderTest["transitionFromAnyToInteract"](mockIdleAnimation);
 
     expect(() =>
       anonymousCallback!(mock<Scene>(), mock<EventState>())
     ).not.toThrow();
   });
 
-  test("transitionFromInteractToIdle resets animationBlendValue to 0", () => {
-    systemUnderTest["transitionFromInteractToIdle"]();
+  test("transitionFromInteractToAny plays given animation", () => {
+    // reset to exclude calls inside setup code
+    mockIdleAnimation.play.mockReset();
+    mockIdleAnimation.setWeightForAllAnimatables.mockReset();
 
-    expect(systemUnderTest["animationBlendValue"]).toBe(0);
-  });
+    systemUnderTest["transitionFromInteractToAny"](mockIdleAnimation);
 
-  test("anonymous observer function on onBeforeAnimationsObservable in transitionFromInteractToIdle doesn't throw", () => {
-    // setup mock implementation to get a reference to the anonymous callback function
-    let anonymousCallback: (eventData: Scene, eventState: EventState) => void;
-    scenePresenterMock.Scene.onBeforeAnimationsObservable.add.mockImplementation(
-      (callback) => {
-        anonymousCallback = callback;
-        return mock<Observer<Scene>>();
-      }
+    expect(mockIdleAnimation.play).toHaveBeenCalledTimes(1);
+    expect(mockIdleAnimation.play).toHaveBeenCalledWith(true);
+    expect(mockIdleAnimation.setWeightForAllAnimatables).toHaveBeenCalledTimes(
+      1
     );
-    systemUnderTest["transitionFromInteractToIdle"]();
-
-    expect(() =>
-      anonymousCallback!(mock<Scene>(), mock<EventState>())
-    ).not.toThrow();
-  });
-
-  test("transitionFromInteractToWalk resets animationBlendValue to 0", () => {
-    systemUnderTest["transitionFromInteractToWalk"]();
-
-    expect(systemUnderTest["animationBlendValue"]).toBe(0);
+    expect(mockIdleAnimation.setWeightForAllAnimatables).toHaveBeenCalledWith(
+      1
+    );
   });
 
   // ANF-ID: [EZZ0018]

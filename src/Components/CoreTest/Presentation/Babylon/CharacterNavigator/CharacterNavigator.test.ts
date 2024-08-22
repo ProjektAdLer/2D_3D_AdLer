@@ -17,6 +17,7 @@ import CharacterNavigator from "../../../../Core/Presentation/Babylon/CharacterN
 import CharacterAnimationActions from "../../../../Core/Presentation/Babylon/CharacterAnimator/CharacterAnimationActions";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
+import CharacterAnimationStates from "../../../../Core/Presentation/Babylon/CharacterAnimator/CharacterAnimationStates";
 
 jest.mock("@babylonjs/core/Meshes");
 jest.mock("@babylonjs/core/Materials");
@@ -26,9 +27,10 @@ const navigationMock = mockDeep<INavigation>();
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
 
+let characterAnimatorMock = mock<ICharacterAnimator>();
+
 describe("CharacterNavigator", () => {
   let systemUnderTest: CharacterNavigator;
-  let characterAnimatorMock: ICharacterAnimator;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -82,6 +84,7 @@ describe("CharacterNavigator", () => {
   test("startMovement calls agentGoto on the navigation crowd", () => {
     const expectedTarget = new Vector3(1, 2, 3);
     navigationMock.Plugin.getClosestPoint.mockReturnValue(expectedTarget);
+    characterAnimatorMock.transition.mockReturnValueOnce(true);
 
     systemUnderTest.startMovement(new Vector3(4, 2, 0));
 
@@ -113,6 +116,7 @@ describe("CharacterNavigator", () => {
         return null;
       }
     );
+    characterAnimatorMock.transition.mockReturnValueOnce(true);
 
     systemUnderTest.startMovement(Vector3.Zero(), onTargetReachedCallback);
 

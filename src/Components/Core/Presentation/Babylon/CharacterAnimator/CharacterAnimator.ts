@@ -18,6 +18,7 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import ICharacterAnimator from "./ICharacterAnimator";
 import { injectable } from "inversify";
+import { startTransition } from "react";
 
 @injectable()
 export default class CharacterAnimator implements ICharacterAnimator {
@@ -27,16 +28,21 @@ export default class CharacterAnimator implements ICharacterAnimator {
     CharacterAnimationStates,
     CharacterAnimationActions
   >(CharacterAnimationStates.Idle, []);
-  private animationBlendValue: number = 0;
-  private rotationObserverRef: Nullable<Observer<Scene>>;
   private transitionObserverRef: Nullable<Observer<Scene>>;
-  private transitionFinishedCallback: Nullable<() => void>;
-  private scenePresenter: IScenePresenter;
-  private getCharacterVelocity: () => Vector3;
-  private characterRotationNode: TransformNode;
+  private lastTransitionFromAnimation: Nullable<AnimationGroup>;
+  private lastTransitionToAnimation: Nullable<AnimationGroup>;
+
   private idleAnimation: AnimationGroup;
   private walkAnimation: AnimationGroup;
   private interactionAnimation?: AnimationGroup;
+  private scenePresenter: IScenePresenter;
+
+  private getCharacterVelocity: () => Vector3;
+  private characterRotationNode: TransformNode;
+
+  public get CurrentAnimationState(): CharacterAnimationStates {
+    return this.stateMachine.CurrentState;
+  }
 
   public setup(
     getCharacterVelocity: () => Vector3,
@@ -65,8 +71,8 @@ export default class CharacterAnimator implements ICharacterAnimator {
     if (this.interactionAnimation) this.setupInteractionAnimation();
   }
 
-  public transition(action: CharacterAnimationActions): void {
-    this.stateMachine.applyAction(action);
+  public transition(action: CharacterAnimationActions): boolean {
+    return this.stateMachine.applyAction(action);
   }
 
   // -- State Machine Setup --
@@ -128,33 +134,50 @@ export default class CharacterAnimator implements ICharacterAnimator {
   }
 
   private setupInteractionAnimation(): void {
-    // unused for now, because the interaction animation is played looping for smoother transition back to idle -MK
-    // this.interactionAnimation!.onAnimationGroupEndObservable.add(() => {
-    //   if (
-    //     this.stateMachine.CurrentState === CharacterAnimationStates.Interaction
-    //   )
-    //   this.transition(CharacterAnimationActions.InteractionFinished);
-    // });
+    this.interactionAnimation!.onAnimationGroupEndObservable.add(() => {
+      // if (
+      //   this.stateMachine.CurrentState === CharacterAnimationStates.Interaction
+      // )
+      this.transition(CharacterAnimationActions.InteractionFinished);
+    });
 
-    this.interactionAnimation!.setWeightForAllAnimatables(0.0);
+    // this.interactionAnimation!.setWeightForAllAnimatables(0.0);
+    // this.interactionAnimation!.play(true);
 
     this.stateMachine.addTransition({
       action: CharacterAnimationActions.InteractionStarted,
       from: CharacterAnimationStates.Idle,
       to: CharacterAnimationStates.Interaction,
-      onTransitionCallback: this.transitionFromIdleOrWalkToInteract,
+      onTransitionCallback: () =>
+        this.transitionFromAnyToInteract(this.idleAnimation),
+    });
+    this.stateMachine.addTransition({
+      action: CharacterAnimationActions.InteractionStarted,
+      from: CharacterAnimationStates.Walking,
+      to: CharacterAnimationStates.Interaction,
+      onTransitionCallback: () =>
+        this.transitionFromAnyToInteract(this.walkAnimation),
+    });
+    this.stateMachine.addTransition({
+      action: CharacterAnimationActions.InteractionStarted,
+      from: CharacterAnimationStates.Interaction,
+      to: CharacterAnimationStates.Interaction,
+      onTransitionCallback: () =>
+        this.transitionFromAnyToInteract(this.interactionAnimation!),
     });
     this.stateMachine.addTransition({
       action: CharacterAnimationActions.InteractionFinished,
       from: CharacterAnimationStates.Interaction,
       to: CharacterAnimationStates.Idle,
-      onTransitionCallback: this.transitionFromInteractToIdle,
+      onTransitionCallback: () =>
+        this.transitionFromInteractToAny(this.idleAnimation),
     });
     this.stateMachine.addTransition({
       action: CharacterAnimationActions.MovementStarted,
       from: CharacterAnimationStates.Interaction,
       to: CharacterAnimationStates.Walking,
-      onTransitionCallback: this.transitionFromInteractToWalk,
+      onTransitionCallback: () =>
+        this.transitionFromInteractToAny(this.walkAnimation),
     });
   }
 
@@ -165,19 +188,43 @@ export default class CharacterAnimator implements ICharacterAnimator {
     to: AnimationGroup,
     blendValueIncrementFunction: () => number
   ) {
-    if (this.transitionObserverRef !== null) {
-      this.cleanupOnBeforeAnimationTransitionObserver();
+    // reset animation weight from last transition if necessary
+    if (
+      this.lastTransitionFromAnimation &&
+      this.lastTransitionFromAnimation !== from &&
+      this.lastTransitionFromAnimation !== to
+    ) {
+      this.lastTransitionFromAnimation.setWeightForAllAnimatables(0);
+      this.lastTransitionFromAnimation = null;
+    }
+    if (
+      this.lastTransitionToAnimation &&
+      this.lastTransitionToAnimation !== from &&
+      this.lastTransitionToAnimation !== to
+    ) {
+      this.lastTransitionToAnimation.setWeightForAllAnimatables(1);
+      this.lastTransitionToAnimation = null;
     }
 
-    this.animationBlendValue = 0;
-    from.setWeightForAllAnimatables(1.0);
-    to.setWeightForAllAnimatables(0.0);
+    // setup blend value
+    const startBlendValue = from.animatables[0]
+      ? 1 - from.animatables[0].weight
+      : 0;
+    // wrap animation blend value in object to get passed by reference
+    const animationBlendValueObject = { value: startBlendValue };
 
+    // set starting weights
+    from.setWeightForAllAnimatables(1 - startBlendValue);
+    to.setWeightForAllAnimatables(startBlendValue);
+
+    // setup transition observer
+    this.cleanupOnBeforeAnimationTransitionObserver();
     this.transitionObserverRef =
       this.scenePresenter.Scene.onBeforeAnimationsObservable.add(() => {
         this.onBeforeAnimationTransitionObserver(
           from,
           to,
+          animationBlendValueObject,
           blendValueIncrementFunction
         );
       });
@@ -187,29 +234,33 @@ export default class CharacterAnimator implements ICharacterAnimator {
   private onBeforeAnimationTransitionObserver(
     fromAnimation: AnimationGroup,
     toAnimation: AnimationGroup,
+    animationBlendValueObject: { value: number }, // wrapped in object to get passed by reference
     blendValueIncrementFunction: () => number
   ): void {
-    this.animationBlendValue += blendValueIncrementFunction();
+    animationBlendValueObject.value += blendValueIncrementFunction();
 
-    if (this.animationBlendValue >= 1) {
-      fromAnimation.setWeightForAllAnimatables(0.0);
-      toAnimation.setWeightForAllAnimatables(1.0);
+    if (animationBlendValueObject.value >= 1) {
+      // transition finished - set final weights and cleanup
+      fromAnimation.setWeightForAllAnimatables(0);
+      toAnimation.setWeightForAllAnimatables(1);
 
       this.cleanupOnBeforeAnimationTransitionObserver();
     } else {
-      fromAnimation.setWeightForAllAnimatables(1.0 - this.animationBlendValue);
-      toAnimation.setWeightForAllAnimatables(this.animationBlendValue);
+      // transition still in progress - set new weights
+      fromAnimation.setWeightForAllAnimatables(
+        1.0 - animationBlendValueObject.value
+      );
+      toAnimation.setWeightForAllAnimatables(animationBlendValueObject.value);
     }
   }
 
   private cleanupOnBeforeAnimationTransitionObserver(): void {
+    if (!this.transitionObserverRef) return;
+
     this.scenePresenter.Scene.onBeforeAnimationsObservable.remove(
       this.transitionObserverRef
     );
     this.transitionObserverRef = null;
-
-    this.transitionFinishedCallback?.();
-    this.transitionFinishedCallback = null;
   }
 
   // -- Animation Transition Functions --
@@ -233,51 +284,26 @@ export default class CharacterAnimator implements ICharacterAnimator {
   }
 
   @bind
-  private transitionFromIdleOrWalkToInteract(): void {
-    let fromAnimation: AnimationGroup;
-    switch (this.stateMachine.CurrentState) {
-      case CharacterAnimationStates.Idle:
-        fromAnimation = this.idleAnimation;
-        break;
-      case CharacterAnimationStates.Walking:
-        fromAnimation = this.walkAnimation!;
-        break;
-    }
-
-    this.interactionAnimation!.play(true);
+  private transitionFromAnyToInteract(fromAnimation: AnimationGroup): void {
+    this.interactionAnimation!.play(false);
+    this.interactionAnimation!.goToFrame(this.interactionAnimation!.from);
+    this.interactionAnimation!.setWeightForAllAnimatables(0);
 
     this.createOnBeforeAnimationTransitionObserver(
       fromAnimation!,
       this.interactionAnimation!,
       () => this.getTimedAnimationInterpolationIncrement(100)
     );
-
-    if (
-      this.stateMachine.CurrentState !== CharacterAnimationStates.Interaction
-    ) {
-      setTimeout(() => {
-        this.transition(CharacterAnimationActions.InteractionFinished);
-      }, 2000);
-    }
   }
 
   @bind
-  private transitionFromInteractToIdle(): void {
-    this.createOnBeforeAnimationTransitionObserver(
-      this.interactionAnimation!,
-      this.idleAnimation,
-      () => this.getTimedAnimationInterpolationIncrement(300)
-    );
+  private transitionFromInteractToAny(toAnimation: AnimationGroup): void {
+    this.interactionAnimation?.stop();
+    toAnimation.play(true);
+    toAnimation.setWeightForAllAnimatables(1);
   }
 
-  @bind
-  private transitionFromInteractToWalk(): void {
-    this.createOnBeforeAnimationTransitionObserver(
-      this.interactionAnimation!,
-      this.walkAnimation,
-      () => this.getVelocityAnimationInterpolationIncrement()
-    );
-  }
+  // -- Transition Blending Increment Functions --
 
   @bind
   private getVelocityAnimationInterpolationIncrement(): number {
