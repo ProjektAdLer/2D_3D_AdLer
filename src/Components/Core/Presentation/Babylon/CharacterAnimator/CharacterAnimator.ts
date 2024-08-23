@@ -135,14 +135,8 @@ export default class CharacterAnimator implements ICharacterAnimator {
 
   private setupInteractionAnimation(): void {
     this.interactionAnimation!.onAnimationGroupEndObservable.add(() => {
-      // if (
-      //   this.stateMachine.CurrentState === CharacterAnimationStates.Interaction
-      // )
       this.transition(CharacterAnimationActions.InteractionFinished);
     });
-
-    // this.interactionAnimation!.setWeightForAllAnimatables(0.0);
-    // this.interactionAnimation!.play(true);
 
     this.stateMachine.addTransition({
       action: CharacterAnimationActions.InteractionStarted,
@@ -188,7 +182,8 @@ export default class CharacterAnimator implements ICharacterAnimator {
     to: AnimationGroup,
     blendValueIncrementFunction: () => number
   ) {
-    // reset animation weight from last transition if necessary
+    // reset animation weights from last transition if not part of new transition
+    // this ensures a valid end state of the last transition
     if (
       this.lastTransitionFromAnimation &&
       this.lastTransitionFromAnimation !== from &&
