@@ -18,7 +18,6 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import ICharacterAnimator from "./ICharacterAnimator";
 import { injectable } from "inversify";
-import { startTransition } from "react";
 
 @injectable()
 export default class CharacterAnimator implements ICharacterAnimator {
