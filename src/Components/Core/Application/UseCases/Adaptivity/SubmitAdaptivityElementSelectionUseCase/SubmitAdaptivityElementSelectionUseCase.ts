@@ -23,7 +23,7 @@ export default class SubmitAdaptivityElementSelectionUseCase
     @inject(CORE_TYPES.ILogger)
     private logger: ILoggerPort,
     @inject(PORT_TYPES.ILearningWorldPort)
-    private worlPort: ILearningWorldPort,
+    private worldPort: ILearningWorldPort,
     @inject(CORE_TYPES.IBackendAdapter)
     private backendAdapter: IBackendPort,
     @inject(CORE_TYPES.IEntityContainer)
@@ -80,7 +80,7 @@ export default class SubmitAdaptivityElementSelectionUseCase
       },
     };
 
-    this.worlPort.onAdaptivityElementAnswerEvaluated(progressUpdateTO);
+    this.worldPort.onAdaptivityElementAnswerEvaluated(progressUpdateTO);
 
     this.logger.log(
       LogLevelTypes.TRACE,
