@@ -8,6 +8,7 @@ import ILearningWorldPort from "../../../Application/Ports/Interfaces/ILearningW
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import IAdaptivityElementController from "./IAdaptivityElementController";
 import AdaptivityElementController from "./AdaptivityElementController";
+import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class AdaptivityElementBuilder extends PresentationBuilder<
@@ -30,6 +31,6 @@ export default class AdaptivityElementBuilder extends PresentationBuilder<
 
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!);
+    ).registerAdapter(this.presenter!, History.currentLocationScope());
   }
 }

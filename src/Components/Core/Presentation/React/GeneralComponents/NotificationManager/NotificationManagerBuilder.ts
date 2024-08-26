@@ -8,6 +8,7 @@ import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import INotificationPort from "../../../../Application/Ports/Interfaces/INotificationPort";
 import INotificationManagerPresenter from "./INotificationManagerPresenter";
 import INotificationManagerController from "./INotificationManagerController";
+import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class NotificationManagerBuilder extends PresentationBuilder<
@@ -29,6 +30,6 @@ export default class NotificationManagerBuilder extends PresentationBuilder<
     super.buildPresenter();
     CoreDIContainer.get<INotificationPort>(
       PORT_TYPES.INotificationPort
-    ).registerAdapter(this.presenter!);
+    ).registerAdapter(this.presenter!, History.currentLocationScope());
   }
 }

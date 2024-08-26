@@ -9,6 +9,7 @@ import ILearningWorldSelectionPresenter from "./ILearningWorldSelectionPresenter
 import LearningWorldSelectionController from "./LearningWorldSelectionController";
 import LearningWorldSelectionPresenter from "./LearningWorldSelectionPresenter";
 import LearningWorldSelectionViewModel from "./LearningWorldSelectionViewModel";
+import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class LearningWorldSelectionBuilder extends PresentationBuilder<
@@ -30,6 +31,6 @@ export default class LearningWorldSelectionBuilder extends PresentationBuilder<
     super.buildPresenter();
     CoreDIContainer.get<AbstractPort<ILearningWorldAdapter>>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!);
+    ).registerAdapter(this.presenter!, History.currentLocationScope());
   }
 }

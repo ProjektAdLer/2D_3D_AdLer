@@ -21,6 +21,7 @@ import SCENE_TYPES, {
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
+import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class StoryNPCBuilder
@@ -128,7 +129,10 @@ export default class StoryNPCBuilder
     const learningWorldPort = CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
     );
-    learningWorldPort.registerAdapter(this.presenter!);
+    learningWorldPort.registerAdapter(
+      this.presenter!,
+      History.currentLocationScope()
+    );
 
     this.scenePresenter.addDisposeSceneCallback(() => {
       learningWorldPort.unregisterAdapter(this.presenter!);

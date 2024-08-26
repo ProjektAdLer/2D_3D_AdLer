@@ -7,6 +7,7 @@ import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
 import ILMSAdapter from "src/Components/Core/Application/Ports/LMSPort/ILMSAdapter";
+import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class SignInAndOutComponentBuilder extends PresentationBuilder<
@@ -28,6 +29,6 @@ export default class SignInAndOutComponentBuilder extends PresentationBuilder<
     super.buildPresenter();
     CoreDIContainer.get<AbstractPort<ILMSAdapter>>(
       PORT_TYPES.ILMSPort
-    ).registerAdapter(this.presenter!);
+    ).registerAdapter(this.presenter!, History.currentLocationScope());
   }
 }
