@@ -9,6 +9,7 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldAdapter from "src/Components/Core/Application/Ports/LearningWorldPort/ILearningWorldAdapter";
+import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class LearningWorldCompletionModalBuilder extends PresentationBuilder<
@@ -31,6 +32,6 @@ export default class LearningWorldCompletionModalBuilder extends PresentationBui
 
     CoreDIContainer.get<AbstractPort<ILearningWorldAdapter>>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!);
+    ).registerAdapter(this.presenter!, History.currentLocationScope());
   }
 }

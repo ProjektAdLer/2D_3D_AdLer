@@ -3,6 +3,10 @@ import ILearningWorldPort from "../../../../../Core/Application/Ports/Interfaces
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import LearningWorldDetailBuilder from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldDetail/LearningWorldDetailBuilder";
+import {
+  History,
+  LocationScope,
+} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
 
 const worldPortMock = mock<ILearningWorldPort>();
 describe("LearningWorldDetailBuilder", () => {
@@ -15,8 +19,16 @@ describe("LearningWorldDetailBuilder", () => {
       worldPortMock
     );
   });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
   beforeEach(() => {
     systemUnderTest = new LearningWorldDetailBuilder();
+    jest
+      .spyOn(History, "currentLocationScope")
+      .mockReturnValue(LocationScope.worldMenu);
   });
 
   test("constructor doesn't throw", () => {
@@ -29,7 +41,8 @@ describe("LearningWorldDetailBuilder", () => {
 
     expect(systemUnderTest["presenter"]).toBeDefined();
     expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
-      systemUnderTest["presenter"]
+      systemUnderTest["presenter"],
+      LocationScope.worldMenu
     );
   });
 });

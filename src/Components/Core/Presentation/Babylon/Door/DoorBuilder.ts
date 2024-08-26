@@ -12,6 +12,7 @@ import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
 import IDoorBuilder from "./IDoorBuilder";
 import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
+import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class DoorBuilder
@@ -71,6 +72,6 @@ export default class DoorBuilder
     super.buildPresenter();
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!);
+    ).registerAdapter(this.presenter!, History.currentLocationScope());
   }
 }

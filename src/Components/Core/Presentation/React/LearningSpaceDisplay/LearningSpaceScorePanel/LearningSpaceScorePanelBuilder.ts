@@ -6,6 +6,7 @@ import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilde
 import LearningSpaceScorePanelPresenter from "./LearningSpaceScorePanelPresenter";
 import LearningSpaceScorePanelViewModel from "./LearningSpaceScorePanelViewModel";
 import LearningSpaceScorePanelController from "./LearningSpaceScorePanelController";
+import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class LearningSpaceScorePanelBuilder extends PresentationBuilder<
@@ -27,6 +28,6 @@ export default class LearningSpaceScorePanelBuilder extends PresentationBuilder<
     super.buildPresenter();
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!);
+    ).registerAdapter(this.presenter!, History.currentLocationScope());
   }
 }
