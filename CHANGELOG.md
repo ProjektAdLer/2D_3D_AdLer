@@ -10,6 +10,26 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+### Changed
+
+### Removed
+
+### Fixed
+
+### Deprecated
+
+-
+
+### Security
+
+-
+
+</details>
+
+## Version 2.3.0 - 26.08.24
+
+### Added
+
 - close-icon-nobg.svg
 - added informing modal if user is not registered in any courses
 - "submit" button to storyelement
@@ -35,16 +55,6 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - fixed some jittery avatar animation transitions
 - fixed story npc not stopping movement in dialog menu
 - fixed memory leak in spacedisplay
-
-### Deprecated
-
--
-
-### Security
-
--
-
-</details>
 
 ## Version 2.2.1 - 14.06.24
 
