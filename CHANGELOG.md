@@ -33,6 +33,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - fixed crash if story element accesses non-existing text-element
 - fixed layout issues on mobile with goal panel and points
 - fixed some jittery avatar animation transitions
+- fixed story npc not stopping movement in dialog menu
+- fixed memory leak in spacedisplay
 
 ### Deprecated
 
