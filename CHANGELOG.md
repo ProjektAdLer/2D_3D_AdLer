@@ -20,6 +20,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - move trigger of potential outro cutscene of story and learning element to closing respective modal
 - size of Break Time Notofication close button
 - increased pointer movement threshold of avatar
+- updated H5P standalone library
 
 ### Removed
 
