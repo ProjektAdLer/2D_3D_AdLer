@@ -76,6 +76,7 @@ export default class Navigation extends Readyable implements INavigation {
         this.scenePresenter.Scene
       );
       this.navMeshDebug.position = new Vector3(0, 0.01, 0);
+      this.matDebug?.dispose();
       this.matDebug = new StandardMaterial(
         "matdebug",
         this.scenePresenter.Scene
@@ -99,8 +100,8 @@ export default class Navigation extends Readyable implements INavigation {
   reset(): void {
     this.resetIsReady();
     this.crowd.dispose();
-    this.matDebug.dispose();
-    this.navMeshDebug.dispose();
+    this.matDebug?.dispose();
+    this.navMeshDebug?.dispose();
     this.plugin.dispose();
   }
 }

@@ -121,6 +121,7 @@ export default class LearningSpaceSceneDefinition
       });
   }
 
+  @bind
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
     this.spaceData = learningSpaceTO;
   }
