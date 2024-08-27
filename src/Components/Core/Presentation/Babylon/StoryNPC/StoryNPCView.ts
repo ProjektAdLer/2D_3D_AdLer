@@ -25,9 +25,9 @@ import INavigation from "../Navigation/INavigation";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import bind from "bind-decorator";
+import HighlightColors from "../HighlightColors";
 
 import iconLink from "../../../../../Assets/3dModels/sharedModels/l-icons-story-1.glb";
-import HighlightColors from "../HighlightColors";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
