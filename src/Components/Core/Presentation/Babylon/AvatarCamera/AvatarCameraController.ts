@@ -17,7 +17,7 @@ export default class AvatarCameraController implements IAvatarCameraController {
     camera.upperRadiusLimit = this.viewModel.upperRadiusLimit;
     camera.wheelDeltaPercentage = this.viewModel.wheelDeltaPercentage;
 
-    // add pointer controls for pinch zoom
+    // add pointer controls for pinch zoom and rotation
     camera.inputs.attached.pointers.attachControl();
     const pointersInput = camera.inputs.attached
       .pointers as ArcRotateCameraPointersInput;
@@ -27,6 +27,7 @@ export default class AvatarCameraController implements IAvatarCameraController {
     pointersInput.angularSensibilityX = this.viewModel.rotationSesibility;
     pointersInput.buttons = this.viewModel.rotationButtons;
 
+    // set camera rotation/zoom limits
     camera.upperAlphaLimit =
       this.viewModel.defaultAlphaRotation + this.viewModel.alphaLimitOffset;
     camera.lowerAlphaLimit =
