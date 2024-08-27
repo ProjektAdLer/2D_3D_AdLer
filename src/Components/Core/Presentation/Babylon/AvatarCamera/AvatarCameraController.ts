@@ -23,19 +23,15 @@ export default class AvatarCameraController implements IAvatarCameraController {
       .pointers as ArcRotateCameraPointersInput;
     pointersInput.multiTouchPanAndZoom = true;
     pointersInput.pinchZoom = true;
-    pointersInput.panningSensibility = 0;
+    pointersInput.panningSensibility = 0; // prevents panning
+    pointersInput.angularSensibilityX = this.viewModel.rotationSesibility;
+    pointersInput.buttons = this.viewModel.rotationButtons;
 
-    // clamp camera rotation to the default values to prevent panning
-    camera.upperAlphaLimit = this.viewModel.defaultAlphaRotation;
-    camera.lowerAlphaLimit = this.viewModel.defaultAlphaRotation;
+    camera.upperAlphaLimit =
+      this.viewModel.defaultAlphaRotation + this.viewModel.alphaLimitOffset;
+    camera.lowerAlphaLimit =
+      this.viewModel.defaultAlphaRotation - this.viewModel.alphaLimitOffset;
     camera.upperBetaLimit = this.viewModel.defaultBetaRotation;
     camera.lowerBetaLimit = this.viewModel.defaultBetaRotation;
-
-    // old (currently unneeded) camera rotation
-    // camera.upperBetaLimit = this.viewModel.upperBetaLimit;
-    // camera.inputs.attached.pointers.attachControl();
-    // // only rotate with the left mouse button (index: 0)
-    // (camera.inputs.attached.pointers as ArcRotateCameraPointersInput).buttons =
-    //   this.viewModel.rotationButtons;
   }
 }

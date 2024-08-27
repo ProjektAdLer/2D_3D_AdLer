@@ -7,16 +7,17 @@ export default class AvatarCameraViewModel {
 
   // camera settings
   //left right angle
-  defaultAlphaRotation: number = -(Math.PI / 4);
+  readonly defaultAlphaRotation: number = -(Math.PI / 4);
   //up down angle
-  defaultBetaRotation: number = Math.PI * 0.3;
-  defaultRadius: number = 15;
-  defaultTargetOffset: Vector3 = new Vector3(0, 1, 0);
-  lowerRadiusLimit: number = 5;
-  upperRadiusLimit: number = 25;
-  wheelDeltaPercentage: number = 0.01;
-  upperBetaLimit: number = Math.PI / 3;
-  rotationButtons: number[] = [0];
+  readonly defaultBetaRotation: number = Math.PI * 0.3;
+  readonly defaultRadius: number = 15;
+  readonly defaultTargetOffset: Vector3 = new Vector3(0, 1, 0);
+  readonly lowerRadiusLimit: number = 5;
+  readonly upperRadiusLimit: number = 25;
+  readonly wheelDeltaPercentage: number = 0.01;
+  readonly rotationButtons: number[] = [1];
+  readonly alphaLimitOffset: number = Math.PI / 4;
+  readonly rotationSesibility: number = 3000;
 
   enableUserInput: Observable<boolean> = new Observable<boolean>(true);
 }
