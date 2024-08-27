@@ -105,13 +105,33 @@ describe("AvatarCameraController", () => {
     expect(pointersInput.pinchZoom).toBe(true);
   });
 
-  test.skip("applyCameraControls applies upperBetaLimit from viewModel to camera", () => {
+  // ANF-ID: [EZZ0030]
+  test("applyCameraControls sets angularSensibilityX", () => {
     const viewModel = new AvatarCameraViewModel();
     const camera = mockDeep<ArcRotateCamera>();
     systemUnderTest = new AvatarCameraController(viewModel);
 
     systemUnderTest["applyCameraControls"](camera);
 
-    expect(camera.upperBetaLimit).toBe(viewModel.upperBetaLimit);
+    const pointersInput = camera.inputs.attached
+      .pointers as DeepMockProxy<ArcRotateCameraPointersInput>;
+
+    expect(pointersInput.angularSensibilityX).toBe(
+      viewModel.rotationSesibility
+    );
+  });
+
+  // ANF-ID: [EZZ0030]
+  test("applyCameraControls sets alpha limits", () => {
+    const viewModel = new AvatarCameraViewModel();
+    const camera = mockDeep<ArcRotateCamera>();
+    systemUnderTest = new AvatarCameraController(viewModel);
+    // @ts-ignore
+    viewModel.defaultAlphaRotation = 0;
+
+    systemUnderTest["applyCameraControls"](camera);
+
+    expect(camera.upperAlphaLimit).toBe(viewModel.alphaLimitOffset);
+    expect(camera.lowerAlphaLimit).toBe(-viewModel.alphaLimitOffset);
   });
 });
