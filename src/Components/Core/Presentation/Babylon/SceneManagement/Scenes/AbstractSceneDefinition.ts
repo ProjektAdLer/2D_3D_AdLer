@@ -64,7 +64,7 @@ export default abstract class AbstractSceneDefinition {
 
   disposeScene(): void {
     this.scene.dispose();
-    this.highlightLayer.dispose();
+    this.highlightLayer?.dispose();
   }
 
   /**
