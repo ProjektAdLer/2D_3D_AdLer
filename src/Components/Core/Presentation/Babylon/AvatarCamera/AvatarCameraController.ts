@@ -2,7 +2,6 @@ import bind from "bind-decorator";
 import AvatarCameraViewModel from "./AvatarCameraViewModel";
 import IAvatarCameraController from "./IAvatarCameraController";
 import { ArcRotateCamera, ArcRotateCameraPointersInput } from "@babylonjs/core";
-// import {} ArcRotateCameraPointersInput } from "@babylonjs/core";
 
 export default class AvatarCameraController implements IAvatarCameraController {
   constructor(private viewModel: AvatarCameraViewModel) {
@@ -23,16 +22,21 @@ export default class AvatarCameraController implements IAvatarCameraController {
       .pointers as ArcRotateCameraPointersInput;
     pointersInput.multiTouchPanAndZoom = true;
     pointersInput.pinchZoom = true;
-    pointersInput.panningSensibility = 0; // prevents panning
-    pointersInput.angularSensibilityX = this.viewModel.rotationSesibility;
     pointersInput.buttons = this.viewModel.rotationButtons;
 
-    // set camera rotation/zoom limits
+    // add keyboard controls for rotation
+    camera.inputs.attached.keyboard.attachControl();
+    camera.keysLeft = [81]; // Q
+    camera.keysRight = [69]; // E
+
+    // set camera properties
     camera.upperAlphaLimit =
       this.viewModel.defaultAlphaRotation + this.viewModel.alphaLimitOffset;
     camera.lowerAlphaLimit =
       this.viewModel.defaultAlphaRotation - this.viewModel.alphaLimitOffset;
     camera.upperBetaLimit = this.viewModel.defaultBetaRotation;
     camera.lowerBetaLimit = this.viewModel.defaultBetaRotation;
+    camera.angularSensibilityX = this.viewModel.rotationSesibility;
+    camera.panningSensibility = 0; // prevents panning
   }
 }
