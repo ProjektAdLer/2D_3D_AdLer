@@ -116,9 +116,7 @@ describe("AvatarCameraController", () => {
     const pointersInput = camera.inputs.attached
       .pointers as DeepMockProxy<ArcRotateCameraPointersInput>;
 
-    expect(pointersInput.angularSensibilityX).toBe(
-      viewModel.rotationSesibility
-    );
+    expect(camera.angularSensibilityX).toBe(viewModel.rotationSesibility);
   });
 
   // ANF-ID: [EZZ0030]
