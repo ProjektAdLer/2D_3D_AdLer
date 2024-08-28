@@ -113,9 +113,6 @@ describe("AvatarCameraController", () => {
 
     systemUnderTest["applyCameraControls"](camera);
 
-    const pointersInput = camera.inputs.attached
-      .pointers as DeepMockProxy<ArcRotateCameraPointersInput>;
-
     expect(camera.angularSensibilityX).toBe(viewModel.rotationSesibility);
   });
 
