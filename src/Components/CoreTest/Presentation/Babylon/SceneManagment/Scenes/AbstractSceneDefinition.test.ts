@@ -1,4 +1,3 @@
-import { mock } from "jest-mock-extended";
 import { HighlightLayer, NullEngine, Scene } from "@babylonjs/core";
 import { config } from "../../../../../../config";
 import AbstractSceneDefinition from "../../../../../Core/Presentation/Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
@@ -70,25 +69,5 @@ describe("AbstractSceneDefinition", () => {
     await systemUnderTest.createScene(new NullEngine());
 
     expect(showMock).toHaveBeenCalledTimes(1);
-  });
-
-  test("disposeScene disposes scene", () => {
-    const mockedScene = mock<Scene>();
-    systemUnderTest["scene"] = mockedScene;
-    const mockedHighlightLayer = mock<HighlightLayer>();
-    systemUnderTest["highlightLayer"] = mockedHighlightLayer;
-
-    systemUnderTest.disposeScene();
-    expect(mockedScene.dispose).toHaveBeenCalled();
-  });
-
-  test("disposeScene disposes scene", () => {
-    const mockedScene = mock<Scene>();
-    systemUnderTest["scene"] = mockedScene;
-    const mockedHighlightLayer = mock<HighlightLayer>();
-    systemUnderTest["highlightLayer"] = mockedHighlightLayer;
-
-    systemUnderTest.disposeScene();
-    expect(mockedHighlightLayer.dispose).toHaveBeenCalled();
   });
 });

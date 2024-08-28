@@ -9,7 +9,6 @@ import IExitModalController from "./IExitModalController";
 import IExitModalPresenter from "./IExitModalPresenter";
 import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class ExitModalBuilder extends PresentationBuilder<
@@ -39,6 +38,6 @@ export default class ExitModalBuilder extends PresentationBuilder<
     ).toConstantValue(this.presenter!);
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!, History.currentLocationScope());
+    ).registerAdapter(this.presenter!);
   }
 }

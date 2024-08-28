@@ -11,10 +11,6 @@ import { waitFor } from "@testing-library/react";
 import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
-import {
-  History,
-  LocationScope,
-} from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
 
 jest.mock(
   "../../../../Core/Presentation/Babylon/LearningElements/LearningElementView"
@@ -52,14 +48,10 @@ describe("LearningElementBuilder", () => {
 
   beforeEach(() => {
     systemUnderTest = new LearningElementBuilder();
-    jest
-      .spyOn(History, "currentLocationScope")
-      .mockReturnValue(LocationScope.spaceDisplay);
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
-    jest.restoreAllMocks();
   });
 
   test("buildViewModel throws if elementData is not set", () => {
@@ -116,8 +108,7 @@ describe("LearningElementBuilder", () => {
     // call to the element port
     expect(worldPortMock.registerAdapter).toHaveBeenCalledTimes(1);
     expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
-      systemUnderTest["presenter"],
-      LocationScope.spaceDisplay
+      systemUnderTest["presenter"]
     );
   });
 

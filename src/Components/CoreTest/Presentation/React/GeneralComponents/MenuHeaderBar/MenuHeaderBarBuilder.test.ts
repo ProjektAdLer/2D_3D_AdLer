@@ -1,7 +1,3 @@
-import {
-  LocationScope,
-  History,
-} from "./../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
 import { mock } from "jest-mock-extended";
 import ILearningWorldPort from "../../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
@@ -22,14 +18,10 @@ describe("MenuHeaderBarBuilder", () => {
 
   beforeEach(() => {
     systemUnderTest = new MenuHeaderBarBuilder();
-    jest
-      .spyOn(History, "currentLocationScope")
-      .mockReturnValue(LocationScope.worldMenu);
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
-    jest.restoreAllMocks();
   });
 
   test("buildPresenter registers the presenter with the world port", () => {
@@ -37,8 +29,7 @@ describe("MenuHeaderBarBuilder", () => {
     systemUnderTest.buildPresenter();
 
     expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
-      systemUnderTest.getPresenter(),
-      LocationScope.worldMenu
+      systemUnderTest.getPresenter()
     );
   });
 });

@@ -9,32 +9,26 @@ export default class LMSPort
   implements ILMSPort
 {
   onLoginSuccessful(userName: string): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onLoginSuccessful) {
-          value.onLoginSuccessful(userName);
-        }
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLoginSuccessful) {
+        adapter.onLoginSuccessful(userName);
+      }
     });
   }
 
   onLoginFailure(errorMessage: string, errorMessageAdvise: string): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onLoginFailure) {
-          value.onLoginFailure(errorMessage, errorMessageAdvise);
-        }
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLoginFailure) {
+        adapter.onLoginFailure(errorMessage, errorMessageAdvise);
+      }
     });
   }
 
   onLogoutSuccessful(): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onLogoutSuccessful) {
-          value.onLogoutSuccessful();
-        }
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLogoutSuccessful) {
+        adapter.onLogoutSuccessful();
+      }
     });
   }
 }

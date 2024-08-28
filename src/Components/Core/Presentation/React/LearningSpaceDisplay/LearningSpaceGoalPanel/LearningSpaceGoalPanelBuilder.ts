@@ -9,7 +9,6 @@ import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces
 import ILearningSpaceGoalPanelPresenter from "./ILearningSpaceGoalPanelPresenter";
 import ILearningSpaceGoalPanelController from "./ILearningSpaceGoalPanelController";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
-import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class LearningSpaceGoalPanelBuilder extends PresentationBuilder<
@@ -46,6 +45,6 @@ export default class LearningSpaceGoalPanelBuilder extends PresentationBuilder<
 
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!, History.currentLocationScope());
+    ).registerAdapter(this.presenter!);
   }
 }

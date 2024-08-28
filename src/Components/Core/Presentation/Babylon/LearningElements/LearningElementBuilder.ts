@@ -12,7 +12,6 @@ import { Vector3 } from "@babylonjs/core";
 import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
 import ILearningElementBuilder from "./ILearningElementBuilder";
-import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class LearningElementBuilder
@@ -63,7 +62,7 @@ export default class LearningElementBuilder
 
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!, History.currentLocationScope());
+    ).registerAdapter(this.presenter!);
   }
 
   override buildView(): void {

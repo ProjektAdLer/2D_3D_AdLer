@@ -9,7 +9,6 @@ import IStoryElementController from "./IStoryElementController";
 import IStoryElementPresenter from "./IStoryElementPresenter";
 import StoryElementController from "./StoryElementController";
 import StoryElementPresenter from "./StoryElementPresenter";
-import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class StoryElementBuilder extends PresentationBuilder<
@@ -41,6 +40,6 @@ export default class StoryElementBuilder extends PresentationBuilder<
 
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!, History.currentLocationScope());
+    ).registerAdapter(this.presenter!);
   }
 }

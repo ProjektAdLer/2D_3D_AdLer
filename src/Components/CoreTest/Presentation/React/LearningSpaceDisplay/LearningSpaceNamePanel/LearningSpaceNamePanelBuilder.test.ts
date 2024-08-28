@@ -4,10 +4,6 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import LearningSpaceNamePanelBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceNamePanel/LearningSpaceNamePanelBuilder";
 import LearningSpaceNamePanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceNamePanel/LearningSpaceNamePanelPresenter";
-import {
-  History,
-  LocationScope,
-} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
 
 const worldPortMock = mock<ILearningWorldPort>();
 
@@ -24,14 +20,10 @@ describe("LearningSpaceNamePanelBuilder", () => {
 
   beforeEach(() => {
     systemUnderTest = new LearningSpaceNamePanelBuilder();
-    jest
-      .spyOn(History, "currentLocationScope")
-      .mockReturnValue(LocationScope.spaceDisplay);
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
-    jest.restoreAllMocks();
   });
 
   test("buildPresenter builds the presenter and register it with the worldPort", () => {
@@ -43,8 +35,7 @@ describe("LearningSpaceNamePanelBuilder", () => {
       LearningSpaceNamePanelPresenter
     );
     expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
-      systemUnderTest["presenter"],
-      LocationScope.spaceDisplay
+      systemUnderTest["presenter"]
     );
   });
 });

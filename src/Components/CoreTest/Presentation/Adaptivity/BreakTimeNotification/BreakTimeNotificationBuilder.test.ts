@@ -3,10 +3,6 @@ import mock from "jest-mock-extended/lib/Mock";
 import BreakTimeNotificationBuilder from "../../../../Core/Presentation/Adaptivity/BreakTimeNotification/BreakTimeNotificationBuilder";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import {
-  History,
-  LocationScope,
-} from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
 
 const uiPortMock = mock<INotificationPort>();
 
@@ -22,14 +18,10 @@ describe("BreakTimeNotificationBuilder", () => {
 
   afterAll(() => {
     CoreDIContainer.restore();
-    jest.restoreAllMocks();
   });
 
   beforeEach(() => {
     systemUnderTest = new BreakTimeNotificationBuilder();
-    jest
-      .spyOn(History, "currentLocationScope")
-      .mockReturnValue(LocationScope.spaceMenu);
   });
 
   test("buildController builds the controller and registers the viewModel and controller", () => {
@@ -45,8 +37,7 @@ describe("BreakTimeNotificationBuilder", () => {
     systemUnderTest.buildPresenter();
 
     expect(uiPortMock.registerAdapter).toHaveBeenCalledWith(
-      systemUnderTest["presenter"],
-      LocationScope.spaceMenu
+      systemUnderTest["presenter"]
     );
   });
 });

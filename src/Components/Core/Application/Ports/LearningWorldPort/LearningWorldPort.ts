@@ -26,78 +26,64 @@ export default class LearningWorldPort
   public onUserInitialLearningWorldsInfoLoaded(
     userInitialLearningWorldsInfoTO: UserInitialLearningWorldsInfoTO
   ): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onUserInitialLearningWorldsInfoLoaded)
-          value.onUserInitialLearningWorldsInfoLoaded(
-            userInitialLearningWorldsInfoTO
-          );
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onUserInitialLearningWorldsInfoLoaded)
+        adapter.onUserInitialLearningWorldsInfoLoaded(
+          userInitialLearningWorldsInfoTO
+        );
     });
   }
   public onUserLearningWorldsInfoLoaded(
     userLearningWorldsInfoTO: UserLearningWorldsInfoTO
   ): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onUserLearningWorldsInfoLoaded)
-          value.onUserLearningWorldsInfoLoaded(userLearningWorldsInfoTO);
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onUserLearningWorldsInfoLoaded)
+        adapter.onUserLearningWorldsInfoLoaded(userLearningWorldsInfoTO);
     });
   }
 
   // world
   public onLearningWorldLoaded(learningWorldTO: LearningWorldTO): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onLearningWorldLoaded)
-          value.onLearningWorldLoaded(learningWorldTO);
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLearningWorldLoaded)
+        adapter.onLearningWorldLoaded(learningWorldTO);
     });
   }
 
   public onLearningWorldScored(
     learningWorldScoreTO: LearningWorldScoreTO
   ): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onLearningWorldScored)
-          value.onLearningWorldScored(learningWorldScoreTO);
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLearningWorldScored)
+        adapter.onLearningWorldScored(learningWorldScoreTO);
     });
   }
 
   // space
   public onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onLearningSpaceLoaded)
-          value.onLearningSpaceLoaded(learningSpaceTO);
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLearningSpaceLoaded)
+        adapter.onLearningSpaceLoaded(learningSpaceTO);
     });
   }
 
   public onLearningSpaceScored(
     learningSpaceScoreTO: LearningSpaceScoreTO
   ): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onLearningSpaceScored)
-          value.onLearningSpaceScored(learningSpaceScoreTO);
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLearningSpaceScored)
+        adapter.onLearningSpaceScored(learningSpaceScoreTO);
     });
   }
 
   public onLearningSpacePrecursorAndSuccessorLoaded(
     LearningSpacePrecursorAndSuccessorTO: LearningSpacePrecursorAndSuccessorTO
   ): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onLearningSpacePrecursorAndSuccessorLoaded)
-          value.onLearningSpacePrecursorAndSuccessorLoaded(
-            LearningSpacePrecursorAndSuccessorTO
-          );
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLearningSpacePrecursorAndSuccessorLoaded)
+        adapter.onLearningSpacePrecursorAndSuccessorLoaded(
+          LearningSpacePrecursorAndSuccessorTO
+        );
     });
   }
 
@@ -105,30 +91,24 @@ export default class LearningWorldPort
   public onLearningElementLoaded(
     learningElementStartedTO: LearningElementTO
   ): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onLearningElementLoaded)
-          value.onLearningElementLoaded(learningElementStartedTO);
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLearningElementLoaded)
+        adapter.onLearningElementLoaded(learningElementStartedTO);
     });
   }
   public onLearningElementScored(
     hasScored: boolean,
     learningElementID: ComponentID
   ): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onLearningElementScored)
-          value.onLearningElementScored(hasScored, learningElementID);
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLearningElementScored)
+        adapter.onLearningElementScored(hasScored, learningElementID);
     });
   }
   public onLearningElementHighlighted(learningElementID: ComponentID): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onLearningElementHighlighted)
-          value.onLearningElementHighlighted(learningElementID);
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onLearningElementHighlighted)
+        adapter.onLearningElementHighlighted(learningElementID);
     });
   }
 
@@ -136,62 +116,50 @@ export default class LearningWorldPort
   public onAdaptivityElementLoaded(
     adaptivityElementProgressTO: AdaptivityElementProgressTO
   ): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onAdaptivityElementLoaded)
-          value.onAdaptivityElementLoaded(adaptivityElementProgressTO);
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onAdaptivityElementLoaded)
+        adapter.onAdaptivityElementLoaded(adaptivityElementProgressTO);
     });
   }
 
   public onAdaptivityElementAnswerEvaluated(
     adaptivityElementProgressUpdateTO: AdaptivityElementProgressUpdateTO
   ): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onAdaptivityElementAnswerEvaluated)
-          value.onAdaptivityElementAnswerEvaluated(
-            adaptivityElementProgressUpdateTO
-          );
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onAdaptivityElementAnswerEvaluated)
+        adapter.onAdaptivityElementAnswerEvaluated(
+          adaptivityElementProgressUpdateTO
+        );
     });
   }
 
   public onAdaptivityElementUserHintInformed(
     adaptivityElementHintTO: AdaptivityElementHintTO
   ): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onAdaptivityElementUserHintInformed)
-          value.onAdaptivityElementUserHintInformed(adaptivityElementHintTO);
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onAdaptivityElementUserHintInformed)
+        adapter.onAdaptivityElementUserHintInformed(adaptivityElementHintTO);
     });
   }
 
   public onStoryElementLoaded(storyelementTO: StoryElementTO): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onStoryElementLoaded)
-          value.onStoryElementLoaded(storyelementTO);
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onStoryElementLoaded)
+        adapter.onStoryElementLoaded(storyelementTO);
     });
   }
 
   public onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onStoryElementCutSceneTriggered)
-          value.onStoryElementCutSceneTriggered(storyType);
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onStoryElementCutSceneTriggered)
+        adapter.onStoryElementCutSceneTriggered(storyType);
     });
   }
 
   public onStoryElementCutSceneFinished(): void {
-    this.mappedAdapters.forEach((adapter) => {
-      adapter.forEach((value) => {
-        if (value.onStoryElementCutSceneFinished)
-          value.onStoryElementCutSceneFinished();
-      });
+    this.adapters.forEach((adapter) => {
+      if (adapter.onStoryElementCutSceneFinished)
+        adapter.onStoryElementCutSceneFinished();
     });
   }
 }

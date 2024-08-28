@@ -8,7 +8,6 @@ import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import ILearningSpaceNamePanelController from "./ILearningSpaceNamePanelController";
 import ILearningSpaceNamePanelPresenter from "./ILearningSpaceNamePanelPresenter";
-import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class LearningSpaceNamePanelBuilder extends PresentationBuilder<
@@ -30,6 +29,6 @@ export default class LearningSpaceNamePanelBuilder extends PresentationBuilder<
     super.buildPresenter();
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!, History.currentLocationScope());
+    ).registerAdapter(this.presenter!);
   }
 }

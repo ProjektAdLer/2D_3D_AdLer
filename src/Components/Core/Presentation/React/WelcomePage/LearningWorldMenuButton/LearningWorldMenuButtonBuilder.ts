@@ -6,7 +6,6 @@ import LearningWorldMenuButtonViewModel from "./LearningWorldMenuButtonViewModel
 import LearningWorldMenuButtonPresenter from "./LearningWorldMenuButtonPresenter";
 import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
 import ILMSAdapter from "src/Components/Core/Application/Ports/LMSPort/ILMSAdapter";
-import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class LearningWorldMenuButtonBuilder extends PresentationBuilder<
@@ -28,6 +27,6 @@ export default class LearningWorldMenuButtonBuilder extends PresentationBuilder<
     super.buildPresenter();
     CoreDIContainer.get<AbstractPort<ILMSAdapter>>(
       PORT_TYPES.ILMSPort
-    ).registerAdapter(this.presenter!, History.currentLocationScope());
+    ).registerAdapter(this.presenter!);
   }
 }

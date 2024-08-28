@@ -3,10 +3,6 @@ import ILearningWorldPort from "../../../../../Core/Application/Ports/Interfaces
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import LearningElementModalBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalBuilder";
-import {
-  History,
-  LocationScope,
-} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
 
 const worldPortMock = mock<ILearningWorldPort>();
 
@@ -22,14 +18,10 @@ describe("LearningElementModalBuilder", () => {
 
   beforeEach(() => {
     systemUnderTest = new LearningElementModalBuilder();
-    jest
-      .spyOn(History, "currentLocationScope")
-      .mockReturnValue(LocationScope.spaceDisplay);
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
-    jest.restoreAllMocks();
   });
 
   test("buildPresenter builds the presenter and registers presenter with the ElementPort", () => {
@@ -39,8 +31,7 @@ describe("LearningElementModalBuilder", () => {
     expect(systemUnderTest["presenter"]).toBeDefined();
     expect(worldPortMock.registerAdapter).toHaveBeenCalledTimes(1);
     expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
-      systemUnderTest["presenter"],
-      LocationScope.spaceDisplay
+      systemUnderTest["presenter"]
     );
   });
 });

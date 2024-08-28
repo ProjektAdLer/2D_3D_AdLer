@@ -9,7 +9,6 @@ import ILearningSpaceSelectionPresenter from "./ILearningSpaceSelectionPresenter
 import LearningSpaceSelectionController from "./LearningSpaceSelectionController";
 import LearningSpaceSelectionPresenter from "./LearningSpaceSelectionPresenter";
 import LearningSpaceSelectionViewModel from "./LearningSpaceSelectionViewModel";
-import { History } from "~ReactComponents/ReactRelated/ReactEntryPoint/History";
 
 @injectable()
 export default class LearningSpaceSelectionBuilder extends PresentationBuilder<
@@ -31,6 +30,6 @@ export default class LearningSpaceSelectionBuilder extends PresentationBuilder<
     super.buildPresenter();
     CoreDIContainer.get<AbstractPort<ILearningWorldAdapter>>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!, History.currentLocationScope());
+    ).registerAdapter(this.presenter!);
   }
 }
