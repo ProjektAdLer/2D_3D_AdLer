@@ -225,6 +225,7 @@ export default class StoryNPCView {
     // timer needs to be cleared, else StoryNPC won't be cleaned up by garbage collection
     this.scenePresenter.addDisposeSceneCallback(() => {
       clearTimeout(this.viewModel.idleTimer);
+      clearTimeout(this.viewModel.cutSceneTimer);
       this.viewModel.state.Value = StoryNPCState.Idle; // prevent random movement calls after scene is disposed
     });
   }
@@ -272,7 +273,7 @@ export default class StoryNPCView {
     const target = this.viewModel.avatarPosition.subtract(targetOffset);
 
     // go to avatar
-    setTimeout(() => {
+    this.viewModel.cutSceneTimer = setTimeout(() => {
       this.viewModel.characterNavigator.startMovement(target, () => {
         this.viewModel.storyElementPresenter.open(this.viewModel.storyType);
       });
