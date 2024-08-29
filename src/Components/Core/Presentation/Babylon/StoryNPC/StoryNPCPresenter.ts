@@ -14,8 +14,8 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
     this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
   }
 
-  changeStateToRandomMovement() {
-    if (this.viewModel.state.Value !== StoryNPCState.RandomMovement)
+  changeStateFromStopToRandomMovement() {
+    if (this.viewModel.state.Value === StoryNPCState.Stop)
       this.viewModel.state.Value = StoryNPCState.RandomMovement;
   }
 

@@ -49,7 +49,9 @@ export default class StoryNPCController implements IStoryNPCController {
       this.viewModel.isInteractable.Value &&
       this.viewModel.state.Value !== StoryNPCState.CutScene
     ) {
-      this.viewModel.state.Value = StoryNPCState.Stop;
+      if (this.viewModel.state.Value !== StoryNPCState.Idle) {
+        this.viewModel.state.Value = StoryNPCState.Stop;
+      }
       this.bottomTooltipPresenter.hideAll();
       this.viewModel.storyElementPresenter.open(this.viewModel.storyType);
     } else
