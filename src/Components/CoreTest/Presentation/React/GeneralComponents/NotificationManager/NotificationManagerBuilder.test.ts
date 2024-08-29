@@ -5,9 +5,9 @@ import NotificationManagerBuilder from "../../../../../Core/Presentation/React/G
 import NotificationManagerPresenter from "../../../../../Core/Presentation/React/GeneralComponents/NotificationManager/NotificationManagerPresenter";
 import INotificationPort from "../../../../../Core/Application/Ports/Interfaces/INotificationPort";
 import {
-  History,
+  HistoryWrapper,
   LocationScope,
-} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
+} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 const NotificationPortMock = mock<INotificationPort>();
 
@@ -25,7 +25,7 @@ describe("NotificationManagerBuilder", () => {
   beforeEach(() => {
     systemUnderTest = new NotificationManagerBuilder();
     jest
-      .spyOn(History, "currentLocationScope")
+      .spyOn(HistoryWrapper, "currentLocationScope")
       .mockReturnValue(LocationScope._global);
   });
 

@@ -10,9 +10,9 @@ import { waitFor } from "@testing-library/react";
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import {
-  History,
+  HistoryWrapper,
   LocationScope,
-} from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
+} from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 jest.mock("@babylonjs/core");
 jest.mock("../../../../Core/Presentation/Babylon/Door/DoorView");
@@ -39,7 +39,7 @@ describe("DoorBuilder", () => {
   beforeEach(() => {
     systemUnderTest = new DoorBuilder();
     jest
-      .spyOn(History, "currentLocationScope")
+      .spyOn(HistoryWrapper, "currentLocationScope")
       .mockReturnValue(LocationScope.spaceDisplay);
   });
 
@@ -113,7 +113,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.buildPresenter();
     expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"],
-      LocationScope.spaceDisplay
+      LocationScope._sceneRendering
     );
   });
 });

@@ -7,9 +7,9 @@ import LearningSpaceGoalPanelPresenter from "../../../../../Core/Presentation/Re
 import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import ILearningSpaceGoalPanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceGoalPanel/ILearningSpaceGoalPanelPresenter";
 import {
-  History,
+  HistoryWrapper,
   LocationScope,
-} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
+} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 const worldPortMock = mock<ILearningWorldPort>();
 
@@ -27,7 +27,7 @@ describe("LearningSpaceGoalPanelBuilder", () => {
   beforeEach(() => {
     systemUnderTest = new LearningSpaceGoalPanelBuilder();
     jest
-      .spyOn(History, "currentLocationScope")
+      .spyOn(HistoryWrapper, "currentLocationScope")
       .mockReturnValue(LocationScope.spaceDisplay);
   });
 

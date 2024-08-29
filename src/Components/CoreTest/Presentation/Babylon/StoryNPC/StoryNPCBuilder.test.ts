@@ -13,9 +13,9 @@ import { StoryNPCState } from "../../../../Core/Presentation/Babylon/StoryNPC/St
 import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import LearningSpaceTemplateLookup from "../../../../Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
 import {
-  History,
+  HistoryWrapper,
   LocationScope,
-} from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
+} from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 jest.spyOn(PresentationBuilder.prototype, "buildPresenter");
 jest.spyOn(PresentationBuilder.prototype, "buildView");
@@ -42,8 +42,8 @@ describe("StoryNPCBuilder", () => {
   beforeEach(() => {
     systemUnderTest = new StoryNPCBuilder();
     jest
-      .spyOn(History, "currentLocationScope")
-      .mockReturnValue(LocationScope.spaceDisplay);
+      .spyOn(HistoryWrapper, "currentLocationScope")
+      .mockReturnValue(LocationScope._sceneRendering);
   });
 
   afterAll(() => {
@@ -168,7 +168,7 @@ describe("StoryNPCBuilder", () => {
     expect(learningWorldPortMock.registerAdapter).toHaveBeenCalledTimes(1);
     expect(learningWorldPortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"],
-      LocationScope.spaceDisplay
+      LocationScope._sceneRendering
     );
   });
 });

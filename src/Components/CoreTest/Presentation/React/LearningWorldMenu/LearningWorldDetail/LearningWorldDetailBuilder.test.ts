@@ -4,9 +4,9 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import LearningWorldDetailBuilder from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldDetail/LearningWorldDetailBuilder";
 import {
-  History,
+  HistoryWrapper,
   LocationScope,
-} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
+} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 const worldPortMock = mock<ILearningWorldPort>();
 describe("LearningWorldDetailBuilder", () => {
@@ -27,7 +27,7 @@ describe("LearningWorldDetailBuilder", () => {
   beforeEach(() => {
     systemUnderTest = new LearningWorldDetailBuilder();
     jest
-      .spyOn(History, "currentLocationScope")
+      .spyOn(HistoryWrapper, "currentLocationScope")
       .mockReturnValue(LocationScope.worldMenu);
   });
 

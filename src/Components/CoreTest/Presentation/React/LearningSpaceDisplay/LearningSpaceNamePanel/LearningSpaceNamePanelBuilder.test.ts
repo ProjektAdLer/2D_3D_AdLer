@@ -5,9 +5,9 @@ import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES
 import LearningSpaceNamePanelBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceNamePanel/LearningSpaceNamePanelBuilder";
 import LearningSpaceNamePanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceNamePanel/LearningSpaceNamePanelPresenter";
 import {
-  History,
+  HistoryWrapper,
   LocationScope,
-} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
+} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 const worldPortMock = mock<ILearningWorldPort>();
 
@@ -25,7 +25,7 @@ describe("LearningSpaceNamePanelBuilder", () => {
   beforeEach(() => {
     systemUnderTest = new LearningSpaceNamePanelBuilder();
     jest
-      .spyOn(History, "currentLocationScope")
+      .spyOn(HistoryWrapper, "currentLocationScope")
       .mockReturnValue(LocationScope.spaceDisplay);
   });
 

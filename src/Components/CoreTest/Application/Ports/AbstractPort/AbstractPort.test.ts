@@ -4,8 +4,7 @@ import AbstractPort from "../../../../Core/Application/Ports/AbstractPort/Abstra
 import Logger from "../../../../Core/Adapters/Logger/Logger";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
-import { LocationScope } from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
-import { Update } from "history";
+import { LocationScope } from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 const loggerMock = mock<Logger>();
 

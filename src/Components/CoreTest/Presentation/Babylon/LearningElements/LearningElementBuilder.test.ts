@@ -12,9 +12,9 @@ import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningE
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import {
-  History,
+  HistoryWrapper,
   LocationScope,
-} from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
+} from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 jest.mock(
   "../../../../Core/Presentation/Babylon/LearningElements/LearningElementView"
@@ -53,7 +53,7 @@ describe("LearningElementBuilder", () => {
   beforeEach(() => {
     systemUnderTest = new LearningElementBuilder();
     jest
-      .spyOn(History, "currentLocationScope")
+      .spyOn(HistoryWrapper, "currentLocationScope")
       .mockReturnValue(LocationScope.spaceDisplay);
   });
 
@@ -117,7 +117,7 @@ describe("LearningElementBuilder", () => {
     expect(worldPortMock.registerAdapter).toHaveBeenCalledTimes(1);
     expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"],
-      LocationScope.spaceDisplay
+      LocationScope._sceneRendering
     );
   });
 

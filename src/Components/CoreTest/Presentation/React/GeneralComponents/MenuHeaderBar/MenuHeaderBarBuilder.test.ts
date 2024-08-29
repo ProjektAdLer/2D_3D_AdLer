@@ -1,7 +1,7 @@
 import {
   LocationScope,
-  History,
-} from "./../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
+  HistoryWrapper,
+} from "./../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 import { mock } from "jest-mock-extended";
 import ILearningWorldPort from "../../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
@@ -23,7 +23,7 @@ describe("MenuHeaderBarBuilder", () => {
   beforeEach(() => {
     systemUnderTest = new MenuHeaderBarBuilder();
     jest
-      .spyOn(History, "currentLocationScope")
+      .spyOn(HistoryWrapper, "currentLocationScope")
       .mockReturnValue(LocationScope.worldMenu);
   });
 

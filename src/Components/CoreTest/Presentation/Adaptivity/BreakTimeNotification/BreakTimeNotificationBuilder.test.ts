@@ -4,9 +4,9 @@ import BreakTimeNotificationBuilder from "../../../../Core/Presentation/Adaptivi
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import {
-  History,
+  HistoryWrapper,
   LocationScope,
-} from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
+} from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 const uiPortMock = mock<INotificationPort>();
 
@@ -28,7 +28,7 @@ describe("BreakTimeNotificationBuilder", () => {
   beforeEach(() => {
     systemUnderTest = new BreakTimeNotificationBuilder();
     jest
-      .spyOn(History, "currentLocationScope")
+      .spyOn(HistoryWrapper, "currentLocationScope")
       .mockReturnValue(LocationScope.spaceMenu);
   });
 

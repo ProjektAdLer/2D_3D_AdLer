@@ -5,9 +5,9 @@ import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import {
-  History,
+  HistoryWrapper,
   LocationScope,
-} from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
+} from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 const worldPortMock = mock<ILearningWorldPort>();
 
@@ -27,7 +27,7 @@ describe("AdaptivityElementBuilder", () => {
   beforeEach(() => {
     systemUnderTest = new AdaptivityElementBuilder();
     jest
-      .spyOn(History, "currentLocationScope")
+      .spyOn(HistoryWrapper, "currentLocationScope")
       .mockReturnValue(LocationScope.spaceDisplay);
   });
 

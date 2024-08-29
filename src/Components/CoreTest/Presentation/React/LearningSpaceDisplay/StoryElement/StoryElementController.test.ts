@@ -62,7 +62,7 @@ describe("StoryElementController", () => {
   test("closePanel calls changeStateToRandomMovement", () => {
     systemUnderTest.closePanel();
     expect(
-      systemUnderTest["storyNPCPresenter"].changeStateToRandomMovement
+      storyNPCPresenterMock.changeStateFromStopToRandomMovement
     ).toHaveBeenCalled();
   });
 

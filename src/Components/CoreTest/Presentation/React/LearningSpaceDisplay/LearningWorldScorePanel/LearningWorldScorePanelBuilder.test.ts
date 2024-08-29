@@ -4,9 +4,9 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import LearningWorldScorePanelBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanelBuilder";
 import {
-  History,
+  HistoryWrapper,
   LocationScope,
-} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
+} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 const worldPortMock = mock<ILearningWorldPort>();
 
@@ -23,7 +23,7 @@ describe("LearningWorldScorePanelBuilder", () => {
   beforeEach(() => {
     systemUnderTest = new LearningWorldScorePanelBuilder();
     jest
-      .spyOn(History, "currentLocationScope")
+      .spyOn(HistoryWrapper, "currentLocationScope")
       .mockReturnValue(LocationScope.spaceDisplay);
   });
 

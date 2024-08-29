@@ -5,8 +5,8 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import {
   LocationScope,
-  History,
-} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
+  HistoryWrapper,
+} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 const worldPortMock = mock<ILearningWorldPort>();
 
@@ -22,7 +22,7 @@ describe("ReturnHomeModalBuilder", () => {
   beforeEach(() => {
     systemUnderTest = new ReturnHomeModalBuilder();
     jest
-      .spyOn(History, "currentLocationScope")
+      .spyOn(HistoryWrapper, "currentLocationScope")
       .mockReturnValue(LocationScope.worldMenu);
   });
 
