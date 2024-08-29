@@ -301,9 +301,10 @@ export default class CharacterAnimator implements ICharacterAnimator {
 
   @bind
   private getVelocityAnimationInterpolationIncrement(): number {
-    return (
-      this.getCharacterVelocity().length() / this.scenePresenter.Scene.deltaTime
-    );
+    const increment =
+      this.getCharacterVelocity().length() /
+      this.scenePresenter.Scene.deltaTime;
+    return Number.isNaN(increment) ? 0 : increment;
   }
 
   @bind
