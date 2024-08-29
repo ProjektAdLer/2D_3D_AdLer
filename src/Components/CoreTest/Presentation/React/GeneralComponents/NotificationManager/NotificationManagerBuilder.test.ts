@@ -4,6 +4,10 @@ import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES
 import NotificationManagerBuilder from "../../../../../Core/Presentation/React/GeneralComponents/NotificationManager/NotificationManagerBuilder";
 import NotificationManagerPresenter from "../../../../../Core/Presentation/React/GeneralComponents/NotificationManager/NotificationManagerPresenter";
 import INotificationPort from "../../../../../Core/Application/Ports/Interfaces/INotificationPort";
+import {
+  History,
+  LocationScope,
+} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
 
 const NotificationPortMock = mock<INotificationPort>();
 
@@ -20,6 +24,9 @@ describe("NotificationManagerBuilder", () => {
 
   beforeEach(() => {
     systemUnderTest = new NotificationManagerBuilder();
+    jest
+      .spyOn(History, "currentLocationScope")
+      .mockReturnValue(LocationScope._global);
   });
 
   afterAll(() => {
@@ -36,7 +43,8 @@ describe("NotificationManagerBuilder", () => {
     );
     expect(NotificationPortMock.registerAdapter).toHaveBeenCalledTimes(1);
     expect(NotificationPortMock.registerAdapter).toHaveBeenCalledWith(
-      systemUnderTest["presenter"]
+      systemUnderTest["presenter"],
+      LocationScope._global
     );
   });
 });

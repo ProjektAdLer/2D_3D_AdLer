@@ -1,3 +1,4 @@
+import bind from "bind-decorator";
 import IStoryElementPresenter from "./IStoryElementPresenter";
 import StoryElementViewModel from "./StoryElementViewModel";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
@@ -6,6 +7,7 @@ import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementT
 export default class StoryElementPresenter implements IStoryElementPresenter {
   constructor(private viewModel: StoryElementViewModel) {}
 
+  @bind
   open(type: StoryElementType): void {
     this.viewModel.isOpen.Value = true;
     this.viewModel.storyTypeToDisplay.Value = type;
@@ -21,6 +23,7 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
     }
   }
 
+  @bind
   onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
     if (storyType === StoryElementType.Outro) {
       this.viewModel.isOutroUnlocked.Value = true;
@@ -30,6 +33,7 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
     }
   }
 
+  @bind
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
     this.viewModel.isOutroUnlocked.Value =
       learningSpaceTO.currentScore >= learningSpaceTO.requiredScore;

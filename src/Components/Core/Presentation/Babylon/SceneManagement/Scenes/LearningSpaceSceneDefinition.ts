@@ -26,6 +26,7 @@ import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects
 import type ILearningSpaceBuilder from "../../LearningSpaces/ILearningSpaceBuilder";
 import type IAvatarBuilder from "../../Avatar/IAvatarBuilder";
 import type { IAmbienceBuilder } from "../../Ambience/IAmbienceBuilder";
+import { LocationScope } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 @injectable()
 export default class LearningSpaceSceneDefinition
@@ -58,7 +59,7 @@ export default class LearningSpaceSceneDefinition
     private learningWorldPort: ILearningWorldPort
   ) {
     super();
-    this.learningWorldPort.registerAdapter(this);
+    this.learningWorldPort.registerAdapter(this, LocationScope._global);
   }
 
   protected override preTasks = [this.loadAvatarPreTask, this.loadSpacePreTask];

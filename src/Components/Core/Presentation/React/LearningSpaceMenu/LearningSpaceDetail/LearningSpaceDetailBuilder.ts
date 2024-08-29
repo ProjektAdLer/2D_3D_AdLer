@@ -8,6 +8,7 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
 import LearningSpaceDetailController from "./LearningSpaceDetailController";
 import ILearningWorldAdapter from "src/Components/Core/Application/Ports/LearningWorldPort/ILearningWorldAdapter";
+import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 @injectable()
 export default class LearningSpaceDetailBuilder extends PresentationBuilder<
@@ -30,6 +31,9 @@ export default class LearningSpaceDetailBuilder extends PresentationBuilder<
 
     CoreDIContainer.get<AbstractPort<ILearningWorldAdapter>>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter as ILearningWorldAdapter);
+    ).registerAdapter(
+      this.presenter as ILearningWorldAdapter,
+      HistoryWrapper.currentLocationScope()
+    );
   }
 }

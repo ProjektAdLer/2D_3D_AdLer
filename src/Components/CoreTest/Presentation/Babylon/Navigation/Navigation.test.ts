@@ -1,7 +1,13 @@
 import Navigation from "../../../../Core/Presentation/Babylon/Navigation/Navigation";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import { ICrowd, Mesh, RecastJSPlugin } from "@babylonjs/core";
+import {
+  ICrowd,
+  Mesh,
+  RecastJSCrowd,
+  RecastJSPlugin,
+  StandardMaterial,
+} from "@babylonjs/core";
 import { config } from "../../../../../config";
 import { mock, mockDeep } from "jest-mock-extended";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
@@ -96,4 +102,18 @@ describe("Navigation", () => {
       1
     );
   });
+
+  test.each(["crowd", "matDebug", "navMeshDebug", "plugin"])(
+    "reset calls dispose for %s",
+    (attribute) => {
+      systemUnderTest["crowd"] = mock<RecastJSCrowd>();
+      systemUnderTest["matDebug"] = mock<StandardMaterial>();
+      systemUnderTest["navMeshDebug"] = mock<Mesh>();
+      systemUnderTest["plugin"] = mock<RecastJSPlugin>();
+
+      systemUnderTest.reset();
+
+      expect(systemUnderTest[attribute].dispose).toHaveBeenCalled();
+    }
+  );
 });

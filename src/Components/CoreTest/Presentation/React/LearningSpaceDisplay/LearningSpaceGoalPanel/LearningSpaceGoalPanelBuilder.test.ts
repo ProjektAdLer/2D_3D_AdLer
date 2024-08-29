@@ -6,6 +6,10 @@ import LearningSpaceGoalPanelBuilder from "../../../../../Core/Presentation/Reac
 import LearningSpaceGoalPanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanelPresenter";
 import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import ILearningSpaceGoalPanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceGoalPanel/ILearningSpaceGoalPanelPresenter";
+import {
+  History,
+  LocationScope,
+} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/History";
 
 const worldPortMock = mock<ILearningWorldPort>();
 
@@ -22,10 +26,14 @@ describe("LearningSpaceGoalPanelBuilder", () => {
 
   beforeEach(() => {
     systemUnderTest = new LearningSpaceGoalPanelBuilder();
+    jest
+      .spyOn(History, "currentLocationScope")
+      .mockReturnValue(LocationScope.spaceDisplay);
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
+    jest.restoreAllMocks();
   });
 
   test("buildPresenter builds the presenter and register it with the WorldPort", () => {
@@ -37,7 +45,8 @@ describe("LearningSpaceGoalPanelBuilder", () => {
       LearningSpaceGoalPanelPresenter
     );
     expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
-      systemUnderTest["presenter"]
+      systemUnderTest["presenter"],
+      LocationScope.spaceDisplay
     );
   });
   test("buildPresenter unbinds the presenter if it is already bound", () => {

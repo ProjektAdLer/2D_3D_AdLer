@@ -1,31 +1,77 @@
+import history from "history/browser";
 import { inject, injectable } from "inversify";
 import { IAbstractPort } from "../Interfaces/IAbstractPort";
 import type ILoggerPort from "../Interfaces/ILoggerPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import {
+  HistoryWrapper,
+  LocationScope,
+} from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import type { Update } from "history";
+import bind from "bind-decorator";
 
 @injectable()
 /**
  * The AbstractPort class is a base class for all ports. It provides a basic methods for registering and unregistering adapters.
  */
 export default abstract class AbstractPort<T> implements IAbstractPort<T> {
-  protected adapters: T[] = [];
+  protected mappedAdapters = new Map<LocationScope, T[]>();
 
-  constructor(@inject(CORE_TYPES.ILogger) private logger: ILoggerPort) {}
+  name(): string {
+    return "Abstract-Port";
+  }
 
-  public registerAdapter(adapter: T): void {
-    if (this.adapters.includes(adapter)) {
+  constructor(@inject(CORE_TYPES.ILogger) private logger: ILoggerPort) {
+    history.listen((update: Update) => {
+      HistoryWrapper.setlastLocation(update.location); //TODO: temporary, remove if all history occurances are replaced with HistoryWrapper
+      this.evaluateScope(update);
+    });
+  }
+
+  @bind
+  public registerAdapter(adapter: T, location: LocationScope): void {
+    if (!this.mappedAdapters.get(location)) {
+      this.mappedAdapters.set(location, []);
+    }
+
+    if (!this.mappedAdapters.get(location)!.includes(adapter)) {
+      this.mappedAdapters.get(location)!.push(adapter);
+    } else {
       this.logger.log(
         LogLevelTypes.WARN,
         'Adapter "' + adapter + '" is already registered with: ' + this
       );
-      return;
     }
-    this.adapters.push(adapter);
   }
 
+  @bind
   public unregisterAdapter(adapter: T): void {
-    if (this.adapters.includes(adapter))
-      this.adapters.splice(this.adapters.indexOf(adapter), 1);
+    this.mappedAdapters.forEach((ada) => {
+      if (ada.includes(adapter)) {
+        ada.splice(ada.indexOf(adapter), 1);
+      }
+    });
+  }
+
+  @bind
+  private evaluateScope(update: Update) {
+    this.mappedAdapters.forEach((value, scope) => {
+      const notGlobalAndNotSameLocation =
+        scope !== LocationScope._global &&
+        scope !== HistoryWrapper.currentLocationScope();
+
+      if (notGlobalAndNotSameLocation) {
+        this.mappedAdapters.get(scope)?.splice(0);
+      }
+
+      console.log(this.name(), scope);
+      console.log(
+        "clearing Adapters: ",
+        notGlobalAndNotSameLocation,
+        "size: ",
+        this.mappedAdapters.get(scope)?.length
+      );
+    });
   }
 }

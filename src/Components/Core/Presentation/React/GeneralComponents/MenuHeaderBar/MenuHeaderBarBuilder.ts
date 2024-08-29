@@ -8,6 +8,7 @@ import MenuHeaderBarPresenter from "./MenuHeaderBarPresenter";
 import MenuHeaderBarViewModel from "./MenuHeaderBarViewModel";
 import IMenuHeaderBarController from "./IMenuHeaderBarController";
 import IMenuHeaderBarPresenter from "./IMenuHeaderBarPresenter";
+import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 @injectable()
 export default class MenuHeaderBarBuilder extends PresentationBuilder<
@@ -30,6 +31,6 @@ export default class MenuHeaderBarBuilder extends PresentationBuilder<
 
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!);
+    ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
   }
 }

@@ -10,6 +10,7 @@ import IAvatarPresenter from "./IAvatarPresenter";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import ILearningSpacePresenter from "../LearningSpaces/ILearningSpacePresenter";
 import IAvatarBuilder from "./IAvatarBuilder";
+import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 export default class AvatarBuilder
   extends AsyncPresentationBuilder<
@@ -41,7 +42,7 @@ export default class AvatarBuilder
 
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter);
+    ).registerAdapter(this.presenter, HistoryWrapper.currentLocationScope());
   }
 
   override buildController(): void {

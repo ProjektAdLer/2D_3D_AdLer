@@ -8,6 +8,7 @@ import LearningElementModalPresenter from "./LearningElementModalPresenter";
 import LearningElementModalViewModel from "./LearningElementModalViewModel";
 import ILearningElementModalController from "./ILearningElementModalController";
 import ILearningElementModalPresenter from "./ILearningElementModalPresenter";
+import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 @injectable()
 export default class LearningElementModalBuilder extends PresentationBuilder<
@@ -30,6 +31,6 @@ export default class LearningElementModalBuilder extends PresentationBuilder<
 
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!);
+    ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
   }
 }

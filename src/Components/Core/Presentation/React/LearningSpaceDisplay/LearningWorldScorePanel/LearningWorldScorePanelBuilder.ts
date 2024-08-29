@@ -5,6 +5,7 @@ import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import LearningWorldScorePanelPresenter from "./LearningWorldScorePanelPresenter";
 import LearningWorldScorePanelViewModel from "./LearningWorldScorePanelViewModel";
+import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 @injectable()
 export default class LearningWorldScorePanelBuilder extends PresentationBuilder<
@@ -26,6 +27,6 @@ export default class LearningWorldScorePanelBuilder extends PresentationBuilder<
     super.buildPresenter();
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!);
+    ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
   }
 }
