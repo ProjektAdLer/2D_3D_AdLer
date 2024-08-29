@@ -125,10 +125,7 @@ export default class LearningElementView {
         Vector3.Up(),
         Tools.ToRadians(this.viewModel.rotation)
       );
-      this.viewModel.iconMeshes[0].rotate(
-        Vector3.Up(),
-        Tools.ToRadians(this.viewModel.rotation)
-      );
+      this.viewModel.iconMeshes[0].rotation = new Vector3(0, -Math.PI / 4, 0);
     }
   }
 
