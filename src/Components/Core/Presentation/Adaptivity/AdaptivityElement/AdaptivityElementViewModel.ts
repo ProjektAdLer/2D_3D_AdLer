@@ -8,6 +8,7 @@ export interface AdaptivityAnswer {
   answerIndex: number;
   answerText: string;
   isSelected: boolean;
+  isCorrect: boolean;
 }
 
 export interface AdaptivityHintAction {

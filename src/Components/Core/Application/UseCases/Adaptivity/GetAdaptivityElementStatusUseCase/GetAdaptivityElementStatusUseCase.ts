@@ -9,6 +9,7 @@ import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IE
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../../GetUserLocation/IGetUserLocationUseCase";
+import AdaptivityElementAnswerTO from "../../../DataTransferObjects/AdaptivityElement/AdaptivityElementAnswerTO";
 
 @injectable()
 export default class GetAdaptivityElementStatusUseCase
@@ -48,6 +49,11 @@ export default class GetAdaptivityElementStatusUseCase
       task.isCompleted = this.parseStatusToBoolean(t!.taskStatus);
       task.questions.forEach((question) => {
         const q = response.questions.find((q) => q.id === question.questionId);
+        if (q!.answers !== null && q!.answers !== undefined) {
+          question.questionAnswers.forEach((answer, index) => {
+            answer.answerIsCorrect = q!.answers[index].correct;
+          });
+        }
         question.isCompleted = this.parseStatusToBoolean(q!.status);
       });
     });

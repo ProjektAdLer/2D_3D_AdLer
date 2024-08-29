@@ -15,7 +15,7 @@ import AdaptivityElementProgressUpdateTO from "../../../Application/DataTransfer
 import { AdaptivityElementStatusTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementStatusTypes";
 import AdaptivityElementTaskProgressTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTaskProgressTO";
 import AdaptivityElementQuestionProgressTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionProgressTO";
-import AdaptivityElementAnswersTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementAnswerTO";
+import AdaptivityElementAnswerTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementAnswerTO";
 import AdaptivityElementTriggerTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTriggerTO";
 import { AdaptivityElementTriggerConditionTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementTriggerConditionTypes";
 import AdaptivityElementHintTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
@@ -199,14 +199,13 @@ export default class AdaptivityElementPresenter
     });
   }
 
-  private mapAnswers(
-    answers: AdaptivityElementAnswersTO[]
-  ): AdaptivityAnswer[] {
+  private mapAnswers(answers: AdaptivityElementAnswerTO[]): AdaptivityAnswer[] {
     return answers.map((answer) => {
       return {
         answerIndex: answer.answerId,
         answerText: answer.answerText,
         isSelected: false,
+        isCorrect: answer.answerIsCorrect,
       } as AdaptivityAnswer;
     });
   }

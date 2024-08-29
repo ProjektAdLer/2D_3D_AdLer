@@ -29,7 +29,7 @@ import AWT, {
 } from "./Types/AWT";
 import AdaptivityElementActionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementActionTO";
 import AdaptivityElementTriggerTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTriggerTO";
-import AdaptivityElementAnswersTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementAnswerTO";
+import AdaptivityElementAnswerTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementAnswerTO";
 import AdaptivityElementQuestionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionTO";
 import AdaptivityElementTaskTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTaskTO";
 import { AdaptivityElementActionTypes } from "../../Domain/Types/Adaptivity/AdaptivityElementActionTypes";
@@ -279,7 +279,7 @@ export default class BackendAdapterUtils {
   }
 
   private static mapAdaptivityAnswers(
-    answers: AdaptivityElementAnswersTO[],
+    answers: AdaptivityElementAnswerTO[],
     possibleAnswers: APIAdaptivityAnswers[]
   ) {
     let answerID = 0; // ID for communication with backend's index of answer
@@ -288,7 +288,7 @@ export default class BackendAdapterUtils {
         answerId: answerID,
         answerText: answer.answerText,
         answerImage: answer.answerImage,
-      } as AdaptivityElementAnswersTO);
+      } as AdaptivityElementAnswerTO);
       answerID++;
     });
   }

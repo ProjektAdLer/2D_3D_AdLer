@@ -17,6 +17,7 @@
   "questionSolvedWithHigherDifficultyQuestionAvailable": "Sie können es noch in einer höheren Schwierigkeit versuchen.",
   "questionSolvedWithLowerDifficultyQuestionAvailable": "Sie können es erst Mal in einer niedrigeren Schwierigkeit versuchen.",
   "nextButton": "Weiter",
+  "questionAlreadyAnswered": "Frage bereits abgeschlossen",
   "submitAnswer": "Antwort abgeben",
   "submitAnswers": "Antworten abgeben",
   "hintTitle": "Ich helfe Ihnen auf die Sprünge",

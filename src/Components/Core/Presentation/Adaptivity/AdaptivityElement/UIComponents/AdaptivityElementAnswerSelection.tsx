@@ -68,7 +68,7 @@ export default function AdaptivityElementAnswerSelection({
             onClick={() => {
               onAnswerClicked(index);
             }}
-            color={answerColors[index]}
+            color={answer.isCorrect ? "success" : answerColors[index]}
           >
             <p className="text-sm">{answer.answerText}</p>
           </StyledButton>
@@ -82,10 +82,12 @@ export default function AdaptivityElementAnswerSelection({
           onClick={() => {
             submitSelection();
           }}
-          disabled={!isAnyAnswerSelected}
+          disabled={!isAnyAnswerSelected || question.isCompleted === true}
         >
           <p className="text-sm">
-            {question.isMultipleChoice
+            {question.isCompleted
+              ? translate("questionAlreadyAnswered")
+              : question.isMultipleChoice
               ? translate("submitAnswers")
               : translate("submitAnswer")}
           </p>
