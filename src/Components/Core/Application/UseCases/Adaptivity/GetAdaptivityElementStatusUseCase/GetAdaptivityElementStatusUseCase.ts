@@ -9,7 +9,6 @@ import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IE
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../../GetUserLocation/IGetUserLocationUseCase";
-import AdaptivityElementAnswerTO from "../../../DataTransferObjects/AdaptivityElement/AdaptivityElementAnswerTO";
 
 @injectable()
 export default class GetAdaptivityElementStatusUseCase
