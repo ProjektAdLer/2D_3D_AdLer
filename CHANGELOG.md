@@ -21,6 +21,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
+- vanishing Story-NPC, when they start in random movement mode after loading a learning space
+
 ### Deprecated
 
 -
