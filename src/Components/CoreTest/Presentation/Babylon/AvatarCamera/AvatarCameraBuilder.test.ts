@@ -3,6 +3,10 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import AvatarCameraBuilder from "../../../../Core/Presentation/Babylon/AvatarCamera/AvatarCameraBuilder";
 import PresentationDirector from "../../../../Core/Presentation/PresentationBuilder/PresentationDirector";
 
+jest.mock(
+  "../../../../Core/Presentation/Babylon/AvatarCamera/AvatarCameraController"
+);
+
 describe("AvatarCamerBuilder", () => {
   let systemUnderTest: AvatarCameraBuilder;
 
