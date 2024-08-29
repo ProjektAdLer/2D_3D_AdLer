@@ -11,8 +11,11 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Updated adaptivity element functionality to now display already given correct answers for completed tasks.
+- Made Avatar Camera rotatable
 
 ### Changed
+
+- Learning Element icon rotation for better readability
 
 ### Removed
 
