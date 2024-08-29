@@ -10,6 +10,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- Updated adaptivity element functionality to now display already given correct answers for completed tasks.
+
 ### Changed
 
 ### Removed
@@ -55,6 +57,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - fixed some jittery avatar animation transitions
 - fixed story npc not stopping movement in dialog menu
 - fixed memory leak in spacedisplay
+- fixed 3d placements of walls on non 90° angles on rooms.
 
 ## Version 2.2.1 - 14.06.24
 
