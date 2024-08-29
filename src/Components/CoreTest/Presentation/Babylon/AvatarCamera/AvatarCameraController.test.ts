@@ -1,11 +1,17 @@
 import AvatarCameraViewModel from "../../../../Core/Presentation/Babylon/AvatarCamera/AvatarCameraViewModel";
 import AvatarCameraController from "../../../../Core/Presentation/Babylon/AvatarCamera/AvatarCameraController";
-import { ArcRotateCamera, ArcRotateCameraPointersInput } from "@babylonjs/core";
+import {
+  ArcRotateCamera,
+  ArcRotateCameraPointersInput,
+  DeviceSourceManager,
+  DeviceType,
+} from "@babylonjs/core";
 import { mockDeep } from "jest-mock-extended";
 import { DeepMockProxy } from "jest-mock-extended/lib/Mock";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
+import type { DeviceSourceType } from "@babylonjs/core/DeviceInput/internalDeviceSourceManager";
 
 jest.mock("@babylonjs/core/DeviceInput/InputDevices/DeviceSourceManager");
 
@@ -13,7 +19,7 @@ jest.mock("@babylonjs/core/DeviceInput/InputDevices/DeviceSourceManager");
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
 
-describe.skip("AvatarCameraController", () => {
+describe("AvatarCameraController", () => {
   let systemUnderTest: AvatarCameraController;
 
   beforeAll(() => {
@@ -26,8 +32,11 @@ describe.skip("AvatarCameraController", () => {
 
   beforeEach(() => {
     systemUnderTest = new AvatarCameraController(new AvatarCameraViewModel());
-    // const deviceSourceManagerMock = mockDeep<DeviceSourceManager>();
-    // systemUnderTest["deviceSourceManager"] = deviceSourceManagerMock;
+
+    // @ts-ignore
+    DeviceSourceManager.prototype.onDeviceConnectedObservable = {
+      add: jest.fn(),
+    };
   });
 
   afterAll(() => {
@@ -43,6 +52,41 @@ describe.skip("AvatarCameraController", () => {
 
     expect(systemUnderTest).toBeDefined();
     expect(subscribeMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("updateCameraControls sets rotation buttons when mouse is detected", () => {
+    const viewModel = new AvatarCameraViewModel();
+    const camera = mockDeep<ArcRotateCamera>();
+    viewModel.camera.Value = camera;
+    systemUnderTest = new AvatarCameraController(viewModel);
+
+    let mockDeviceSource = mockDeep<DeviceSourceType>();
+    // @ts-ignore
+    mockDeviceSource.deviceType = DeviceType.Mouse;
+
+    systemUnderTest["updateCameraControls"](mockDeviceSource);
+
+    expect(
+      // @ts-ignore
+      (camera.inputs.attached.pointers as ArcRotateCameraPointersInput).buttons
+    ).toEqual(viewModel.rotationButtons);
+  });
+
+  test("updateCameraControls attaches keyboard controls when keyboard is detected", () => {
+    const viewModel = new AvatarCameraViewModel();
+    const camera = mockDeep<ArcRotateCamera>();
+    viewModel.camera.Value = camera;
+    systemUnderTest = new AvatarCameraController(viewModel);
+
+    let mockDeviceSource = mockDeep<DeviceSourceType>();
+    // @ts-ignore
+    mockDeviceSource.deviceType = DeviceType.Keyboard;
+
+    systemUnderTest["updateCameraControls"](mockDeviceSource);
+
+    expect(camera.inputs.attached.keyboard.attachControl).toHaveBeenCalledTimes(
+      1
+    );
   });
 
   // ANF-ID: [EZZ0021]
