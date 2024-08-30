@@ -27,6 +27,7 @@ import {
 import SmallWorldAWT from "./MockBackendData/SmallWorldAWT";
 import BigWorldAWT from "./MockBackendData/BigWorldAWT";
 import NewWorldAWT from "./MockBackendData/NewWorldAWT";
+import AWT from "./Types/AWT";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendPort {
@@ -103,8 +104,11 @@ export default class MockBackendAdapter implements IBackendPort {
     elementID,
     worldID,
   }: ElementDataParams): Promise<string> {
-    const worldToUse =
-      worldID === 1 ? SmallWorldAWT : worldID === 2 ? BigWorldAWT : NewWorldAWT;
+    let worldToUse: AWT;
+    if (worldID === 1) worldToUse = SmallWorldAWT;
+    else if (worldID === 2) worldToUse = BigWorldAWT;
+    else worldToUse = NewWorldAWT;
+
     const elementType = worldToUse.world.elements.find(
       (element) => element.elementId === elementID
     )!.elementCategory;
@@ -184,15 +188,12 @@ export default class MockBackendAdapter implements IBackendPort {
     userToken,
     worldID,
   }: GetWorldDataParams): Promise<BackendWorldTO> {
-    return Promise.resolve(
-      BackendAdapterUtils.parseAWT(
-        worldID === 1
-          ? SmallWorldAWT
-          : worldID === 2
-          ? BigWorldAWT
-          : NewWorldAWT
-      )
-    );
+    let worldToUse: AWT;
+    if (worldID === 1) worldToUse = SmallWorldAWT;
+    else if (worldID === 2) worldToUse = BigWorldAWT;
+    else worldToUse = NewWorldAWT;
+
+    return Promise.resolve(BackendAdapterUtils.parseAWT(worldToUse));
   }
 
   getAdaptivityElementQuestionResponse(
