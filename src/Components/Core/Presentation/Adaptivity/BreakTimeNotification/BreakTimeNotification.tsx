@@ -94,6 +94,7 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
     </StyledModal>
   );
 }
+
 function ChooseRandomBreakContent(
   breakType: BreakTimeNotificationType,
   viewModel: BreakTimeNotificationViewModel,
@@ -101,31 +102,35 @@ function ChooseRandomBreakContent(
 ) {
   let randomIndex = 0;
   switch (breakType) {
-    case BreakTimeNotificationType.Short:
+    case BreakTimeNotificationType.Short: {
       let notSeenBeforeShortBreaks = viewModel.shortBreakContentPool.filter(
         (shortBreaks) => !shortBreaks.seenBefore
       );
       randomIndex = Math.floor(randomNumber * notSeenBeforeShortBreaks.length);
       viewModel.shortBreakContentPool[randomIndex].seenBefore = true;
       return viewModel.shortBreakContentPool[randomIndex];
-    case BreakTimeNotificationType.Medium:
+    }
+    case BreakTimeNotificationType.Medium: {
       let notSeenBeforeMediumBreaks = viewModel.mediumBreakContentPool.filter(
         (mediumBreaks) => !mediumBreaks.seenBefore
       );
       randomIndex = Math.floor(randomNumber * notSeenBeforeMediumBreaks.length);
       viewModel.mediumBreakContentPool[randomIndex].seenBefore = true;
       return viewModel.mediumBreakContentPool[randomIndex];
-    case BreakTimeNotificationType.Long:
+    }
+    case BreakTimeNotificationType.Long: {
       let notSeenBeforeLongBreaks = viewModel.longBreakContentPool.filter(
         (longBreaks) => !longBreaks.seenBefore
       );
       randomIndex = Math.floor(randomNumber * notSeenBeforeLongBreaks.length);
       viewModel.longBreakContentPool[randomIndex].seenBefore = true;
       return viewModel.longBreakContentPool[randomIndex];
+    }
     default:
       return;
   }
 }
+
 function RenderBreakContent(
   controller: IBreakTimeNotificationController,
   chosenBreakContent: breakObject,
