@@ -13,7 +13,7 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 import type { DeviceSourceType } from "@babylonjs/core/DeviceInput/internalDeviceSourceManager";
 
-jest.mock("@babylonjs/core/DeviceInput/InputDevices/DeviceSourceManager");
+jest.mock("@babylonjs/core/DeviceInput");
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
