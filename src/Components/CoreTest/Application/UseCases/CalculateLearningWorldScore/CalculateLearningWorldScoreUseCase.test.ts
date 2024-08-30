@@ -112,7 +112,7 @@ describe("Calculate Learning World Score UseCase", () => {
       spaceID: 2,
     } as LearningSpaceScoreTO);
 
-    const result = systemUnderTest.execute();
+    systemUnderTest.execute();
 
     expect(worldPortMock.onLearningWorldScored).toHaveBeenCalledWith({
       currentScore: 30,

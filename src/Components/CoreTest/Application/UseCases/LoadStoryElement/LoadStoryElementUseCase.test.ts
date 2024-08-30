@@ -176,7 +176,7 @@ describe("LoadStoryElementUseCase", () => {
       }
     );
 
-    const result = systemUnderTest["getLearningSpaceEntity"](1, 1);
+    systemUnderTest["getLearningSpaceEntity"](1, 1);
 
     expect(filterResult).toBe(true);
   });

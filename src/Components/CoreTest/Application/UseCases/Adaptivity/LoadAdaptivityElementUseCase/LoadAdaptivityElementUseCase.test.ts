@@ -11,7 +11,6 @@ import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import IGetUserLocationUseCase from "../../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import UserLocationTO from "../../../../../Core/Application/DataTransferObjects/UserLocationTO";
 import LearningElementEntity from "../../../../../Core/Domain/Entities/LearningElementEntity";
-import AdaptivityElementProgressTO from "../../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressTO";
 import IGetAdaptivityElementStatusUseCase from "../../../../../Core/Application/UseCases/Adaptivity/GetAdaptivityElementStatusUseCase/IGetAdaptivityElementStatusUseCase";
 
 const worldPortMock = mock<ILearningWorldPort>();
@@ -141,16 +140,6 @@ describe("LoadAdaptivityElementUseCase", () => {
         parentWorldID: 1,
       } as AdaptivityElementEntity,
     ]);
-    let progressTO = {
-      elementName: "abc",
-    } as AdaptivityElementProgressTO;
-
-    progressTO = Object.assign(progressTO, {
-      element: learningElement,
-      introText: "",
-      shuffleTask: false,
-      tasks: [],
-    } as AdaptivityElementEntity);
 
     getAdaptivityElementStatusUseCaseMock.internalExecuteAsync.mockResolvedValue();
 

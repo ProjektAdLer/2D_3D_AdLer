@@ -232,7 +232,7 @@ describe("ScoreLearningElementUseCase", () => {
       spaceID: 1,
       worldID: 1,
     } as UserLocationTO);
-    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
+    const { userEntity, spaceEntity } = getNewTestEntities();
     setupEntityContainerMock([userEntity], [], [spaceEntity]);
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
@@ -264,7 +264,7 @@ describe("ScoreLearningElementUseCase", () => {
       spaceID: undefined,
       worldID: 1,
     } as UserLocationTO);
-    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
+    const { userEntity, elementEntity } = getNewTestEntities();
     setupEntityContainerMock([userEntity], [elementEntity], []);
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
