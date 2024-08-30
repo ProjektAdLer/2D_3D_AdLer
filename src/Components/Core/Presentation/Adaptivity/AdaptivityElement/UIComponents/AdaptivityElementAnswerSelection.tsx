@@ -58,6 +58,7 @@ export default function AdaptivityElementAnswerSelection({
     [question]
   );
 
+  console.log("question", question);
   return (
     <div className="flex flex-col w-full p-2 m-auto lg:justify-between lg:flex-row">
       <div className="flex flex-wrap justify-start gap-4">
@@ -68,7 +69,11 @@ export default function AdaptivityElementAnswerSelection({
             onClick={() => {
               onAnswerClicked(index);
             }}
-            color={answer.isCorrect ? "success" : answerColors[index]}
+            color={
+              question.isCompleted && answer.isCorrect
+                ? "success"
+                : answerColors[index]
+            }
           >
             <p className="text-sm">{answer.answerText}</p>
           </StyledButton>
