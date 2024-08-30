@@ -109,9 +109,6 @@ describe("StoryNPCBuilder", () => {
   test("buidlViewModel gets idle position and rotation from learning space template", () => {
     systemUnderTest.modelType = "";
     systemUnderTest.learningSpaceTemplateType = LearningSpaceTemplateType.L;
-    const template = LearningSpaceTemplateLookup.getLearningSpaceTemplate(
-      LearningSpaceTemplateType.L
-    );
 
     systemUnderTest.buildViewModel();
 
