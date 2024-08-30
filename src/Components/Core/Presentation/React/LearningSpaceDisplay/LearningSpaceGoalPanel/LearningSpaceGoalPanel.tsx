@@ -6,10 +6,10 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import { useTranslation } from "react-i18next";
 
 import GoalLogo from "../../../../../../Assets/icons/20-goal/goal-icon.svg";
 import GoalIcon from "../../../../../../Assets/icons/20-goal/goal-icon-adlerblue-bg.svg";
-import { useTranslation } from "react-i18next";
 
 export default function LearningSpaceGoalPanel() {
   const [viewModel, controller] = useBuilder<
@@ -61,13 +61,9 @@ export default function LearningSpaceGoalPanel() {
                   {/* Learning Goals */}
                   {goals.length === 1 && (
                     <div className="text-xs lg:text-sm">
-                      {goals.map((goal, index) => {
-                        return (
-                          <div className="my-2" key={index}>
-                            <TextWithLineBreaks text={goal} />
-                          </div>
-                        );
-                      })}
+                      <div className="my-2">
+                        <TextWithLineBreaks text={goals[0]} />
+                      </div>
                     </div>
                   )}
 
