@@ -74,7 +74,7 @@ export default class LearningSpaceAvailabilityStringParser {
         case "6":
         case "7":
         case "8":
-        case "9":
+        case "9": {
           let value = "";
           while (
             index < expression.length &&
@@ -86,7 +86,7 @@ export default class LearningSpaceAvailabilityStringParser {
           }
           tokens.push(value);
           break;
-
+        }
         default:
           throw new Error(
             "Invalid expression. Expected only numbers, ^, v, ( or )"
