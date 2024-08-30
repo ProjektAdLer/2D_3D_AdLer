@@ -111,7 +111,7 @@ describe("scenePresenter", () => {
     SceneLoader.ImportMeshAsync = jest.fn();
     fillTestSceneDefinitionSceneGetter(testSceneDefinition);
 
-    let result = await systemUnderTest.loadGLTFModel(url, false, onProgress);
+    await systemUnderTest.loadGLTFModel(url, false, onProgress);
 
     expect(SceneLoader.ImportMeshAsync).toHaveBeenCalledTimes(1);
     expect(SceneLoader.ImportMeshAsync).toHaveBeenCalledWith(
