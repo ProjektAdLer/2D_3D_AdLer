@@ -28,7 +28,7 @@ const learningElement = {
   description: "",
   goals: [],
   type: "adaptivity",
-  model: "",
+  model: "" as unknown,
   parentWorldID: 1,
 } as LearningElementEntity;
 
