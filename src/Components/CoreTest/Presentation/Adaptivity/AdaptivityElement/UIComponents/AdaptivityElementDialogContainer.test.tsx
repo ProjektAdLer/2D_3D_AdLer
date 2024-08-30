@@ -242,16 +242,6 @@ describe("AdaptivityElementDialogContainer", () => {
     let completedARequiredTask = notCompletedRequiredTask;
     completedARequiredTask.isCompleted = true;
 
-    content = {
-      elementName: "testName",
-      introText: "testIntroText",
-      tasks: [
-        completedARequiredTask,
-        completedRequiredTask,
-        completedNotRequiredTask,
-      ],
-    };
-
     container = render(<AdaptivityElementDialogContainer />);
 
     waitFor(() => {
