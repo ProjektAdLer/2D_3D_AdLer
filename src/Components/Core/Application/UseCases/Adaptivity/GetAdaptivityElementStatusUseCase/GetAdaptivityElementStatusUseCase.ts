@@ -50,7 +50,8 @@ export default class GetAdaptivityElementStatusUseCase
         const q = response.questions.find((q) => q.id === question.questionId);
         if (q!.answers !== null && q!.answers !== undefined) {
           question.questionAnswers.forEach((answer, index) => {
-            answer.answerIsCorrect = q!.answers[index].correct;
+            answer.answerIsCorrect =
+              q!.answers[index].correct && q!.answers[index].checked;
           });
         }
         question.isCompleted = this.parseStatusToBoolean(q!.status);
