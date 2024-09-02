@@ -21,7 +21,6 @@ import { AdaptivityElementTriggerConditionTypes } from "src/Components/Core/Doma
 import AdaptivityElementHintTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
 import AdaptivityElementQuestionPresentationUpdateTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionPresentationUpdateTO";
 import i18next from "i18next";
-import { AssetTaskState } from "@babylonjs/core";
 
 export default class AdaptivityElementPresenter
   implements IAdaptivityElementPresenter
@@ -112,9 +111,9 @@ export default class AdaptivityElementPresenter
       )!;
 
     questionToBeUpdated.questionAnswers.map((answer, index) => {
-      answer.isCorrect =
+      return (answer.isCorrect =
         questionPresentationUpdateTO.questionInfo.answers[index].correct &&
-        questionPresentationUpdateTO.questionInfo.answers[index].checked;
+        questionPresentationUpdateTO.questionInfo.answers[index].checked);
     });
   }
 
