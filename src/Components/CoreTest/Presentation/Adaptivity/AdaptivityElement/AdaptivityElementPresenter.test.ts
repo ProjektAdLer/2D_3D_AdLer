@@ -346,6 +346,60 @@ describe("AdaptivityElementPresenter", () => {
     expect(viewModel.selectedHint.Value).toEqual(adaptivityElementHintTO);
   });
 
+  test("onAdaptivityElementQuestionAnsweredCorrectly sets isCorrect correctly", () => {
+    const answer = {
+      answerIndex: 0,
+      answerText: "testanswer",
+      isSelected: true,
+      isCorrect: false,
+    };
+    const question = {
+      questionID: 1,
+      questionText: "",
+      questionAnswers: [answer],
+      isRequired: false,
+      isCompleted: false,
+      difficulty: 0,
+      isMultipleChoice: false,
+      hints: [],
+    };
+    const task = {
+      taskID: 1,
+      taskTitle: "TestTask",
+      questions: [question],
+      isCompleted: false,
+      isRequired: false,
+      hasBeenCompleted: false,
+      requiredDifficulty: 0,
+    };
+    const contentData: AdaptivityElementContent = {
+      elementName: "TestElement",
+      introText: "",
+      tasks: [task],
+    };
+
+    systemUnderTest["viewModel"].contentData.Value = contentData;
+
+    systemUnderTest.onAdaptivityElementQuestionAnsweredCorrectly!({
+      taskInfo: {
+        taskId: 1,
+      },
+      questionInfo: {
+        questionId: 1,
+        answers: [
+          {
+            checked: true,
+            correct: true,
+          },
+        ],
+      },
+    });
+    expect(
+      viewModel.contentData.Value.tasks[0].questions[0].questionAnswers[0]
+        .isCorrect
+    ).toBe(true);
+  });
+
   test("mapAdaptivityTriggers returns empty if no triggers exist", () => {
     const testTriggers = [];
     const result = systemUnderTest["mapAdaptivityTriggers"]([]);
