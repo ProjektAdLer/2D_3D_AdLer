@@ -16,6 +16,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Learning Element icon rotation for better readability
+- Decreased closest walkable distance to obstacles in the learning space
 
 ### Removed
 
