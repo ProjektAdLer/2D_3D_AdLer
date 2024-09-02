@@ -14,7 +14,6 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../../GetUserLocation/IGetUserLocationUseCase";
 import type IScoreAdaptivityElementUseCase from "../ScoreAdaptivityElementUseCase/IScoreAdaptivityElementUseCase";
-import AdaptivityElementQuestionTO from "../../../DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionTO";
 import AdaptivityElementQuestionPresentationUpdateTO from "../../../DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionPresentationUpdateTO";
 
 @injectable()
