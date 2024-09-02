@@ -19,7 +19,9 @@ import AdaptivityElementAnswerTO from "src/Components/Core/Application/DataTrans
 import AdaptivityElementTriggerTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTriggerTO";
 import { AdaptivityElementTriggerConditionTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementTriggerConditionTypes";
 import AdaptivityElementHintTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
+import AdaptivityElementQuestionPresentationUpdateTO from "src/Components/Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionPresentationUpdateTO";
 import i18next from "i18next";
+import { AssetTaskState } from "@babylonjs/core";
 
 export default class AdaptivityElementPresenter
   implements IAdaptivityElementPresenter
@@ -94,6 +96,25 @@ export default class AdaptivityElementPresenter
       } as AdaptivityHintAction,
     } as AdaptivityHint;
     this.viewModel.selectedHint.Value = hint;
+  }
+
+  onAdaptivityElementQuestionAnsweredCorrectly?(
+    questionPresentationUpdateTO: AdaptivityElementQuestionPresentationUpdateTO
+  ): void {
+    const questionToBeUpdated = this.viewModel.contentData.Value.tasks
+      .find(
+        (task) => task.taskID === questionPresentationUpdateTO.taskInfo.taskId
+      )!
+      .questions.find(
+        (question) =>
+          question.questionID ===
+          questionPresentationUpdateTO.questionInfo.questionId
+      )!;
+
+    questionToBeUpdated.questionAnswers.map((answer, index) => {
+      answer.isCorrect =
+        questionPresentationUpdateTO.questionInfo.answers[index].correct;
+    });
   }
 
   @bind

@@ -14,6 +14,7 @@ import AdaptivityElementHintTO from "../../DataTransferObjects/AdaptivityElement
 import UserLearningWorldsInfoTO from "../../DataTransferObjects/UserLearningWorldsInfoTO";
 import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
+import adaptivityElementQuestionPresentationUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionPresentationUpdateTO";
 
 export default interface ILearningWorldPort
   extends IAbstractPort<ILearningWorldAdapter> {
@@ -53,6 +54,9 @@ export default interface ILearningWorldPort
   ): void;
   onAdaptivityElementUserHintInformed(
     adaptivityElementHintTO: AdaptivityElementHintTO
+  ): void;
+  onAdaptivityElementQuestionAnsweredCorrectly(
+    adaptivityElementQuestionPresentationUpdateTO: adaptivityElementQuestionPresentationUpdateTO
   ): void;
 
   // story

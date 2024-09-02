@@ -14,6 +14,8 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../../GetUserLocation/IGetUserLocationUseCase";
 import type IScoreAdaptivityElementUseCase from "../ScoreAdaptivityElementUseCase/IScoreAdaptivityElementUseCase";
+import AdaptivityElementQuestionTO from "../../../DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionTO";
+import AdaptivityElementQuestionPresentationUpdateTO from "../../../DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionPresentationUpdateTO";
 
 @injectable()
 export default class SubmitAdaptivityElementSelectionUseCase
@@ -79,6 +81,23 @@ export default class SubmitAdaptivityElementSelectionUseCase
           ],
       },
     };
+
+    if (
+      progressUpdateTO.questionInfo.questionStatus ===
+      AdaptivityElementStatusTypes.Correct
+    ) {
+      let questionPresentationUpdateTO: AdaptivityElementQuestionPresentationUpdateTO =
+        {
+          taskInfo: { taskId: backendResult.gradedTask.taskId },
+          questionInfo: {
+            questionId: backendResult.gradedQuestion.id,
+            answers: backendResult.gradedQuestion.answers!,
+          },
+        };
+      this.worldPort.onAdaptivityElementQuestionAnsweredCorrectly(
+        questionPresentationUpdateTO
+      );
+    }
 
     this.worldPort.onAdaptivityElementAnswerEvaluated(progressUpdateTO);
 

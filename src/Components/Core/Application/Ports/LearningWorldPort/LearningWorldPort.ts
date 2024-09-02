@@ -17,6 +17,7 @@ import UserLearningWorldsInfoTO from "../../DataTransferObjects/UserLearningWorl
 import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import bind from "bind-decorator";
+import AdaptivityElementQuestionPresentationUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionPresentationUpdateTO";
 
 @injectable()
 export default class LearningWorldPort
@@ -174,6 +175,20 @@ export default class LearningWorldPort
     });
   }
 
+  public onAdaptivityElementQuestionAnsweredCorrectly(
+    adaptivityElementQuestionPresentationUpdateTO: AdaptivityElementQuestionPresentationUpdateTO
+  ): void {
+    this.mappedAdapters.forEach((adapter) => {
+      adapter.forEach((value) => {
+        if (value.onAdaptivityElementQuestionAnsweredCorrectly)
+          value.onAdaptivityElementQuestionAnsweredCorrectly(
+            adaptivityElementQuestionPresentationUpdateTO
+          );
+      });
+    });
+  }
+
+  //Story
   public onStoryElementLoaded(storyelementTO: StoryElementTO): void {
     this.mappedAdapters.forEach((adapter) => {
       adapter.forEach((value) => {
