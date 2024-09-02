@@ -10,6 +10,22 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+### Changed
+
+### Removed
+
+### Fixed
+
+### Deprecated
+
+### Security
+
+</details>
+
+## Version 2.4.0 - 02.09.24
+
+### Added
+
 - Updated adaptivity element functionality to now display already given correct answers for completed tasks.
 - Made Avatar Camera rotatable
 
@@ -18,23 +34,11 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - Learning Element icon rotation for better readability
 - Decreased closest walkable distance to obstacles in the learning space
 
-### Removed
-
 ### Fixed
 
 - vanishing Story-NPC, when they start in random movement mode after loading a learning space
 - fixed crash in learning space in production-environment
 - appearance of intro and outro selection button in Story-NPC when story has only intro or outro
-
-### Deprecated
-
--
-
-### Security
-
--
-
-</details>
 
 ## Version 2.3.0 - 26.08.24
 
