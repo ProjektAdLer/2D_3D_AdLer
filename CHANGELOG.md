@@ -23,6 +23,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 - vanishing Story-NPC, when they start in random movement mode after loading a learning space
 - fixed crash in learning space in production-environment
+- appearance of intro and outro selection button in Story-NPC when story has only intro or outro
 
 ### Deprecated
 
