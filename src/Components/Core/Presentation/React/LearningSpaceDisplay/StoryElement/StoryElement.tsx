@@ -164,7 +164,9 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                 withBackButton={
                   !introCutsceneRunning &&
                   outroUnlocked &&
-                  !outroCutsceneRunning
+                  !outroCutsceneRunning &&
+                  introModelType !== undefined &&
+                  outroModelType !== undefined
                 }
               />
             )}

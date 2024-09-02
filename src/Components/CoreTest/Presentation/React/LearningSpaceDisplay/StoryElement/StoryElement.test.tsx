@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { mock } from "jest-mock-extended";
 import React from "react";
 import StoryElement from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/StoryElement";
@@ -145,4 +145,60 @@ describe("StoryElement", () => {
     expect(introButton).toBeInTheDocument();
     expect(outroButton).toBeInTheDocument();
   });
+
+  test.each([StoryElementType.Intro, StoryElementType.Outro])(
+    "renders back button when storyelement has intro and outro cutscene and storyTypeToDisplay is %p",
+    (storyType) => {
+      viewModel.storyTypeToDisplay.Value = storyType;
+      viewModel.isIntroCutsceneRunning.Value = false;
+      viewModel.isOutroCutsceneRunning.Value = false;
+      viewModel.isOutroUnlocked.Value = true;
+      viewModel.introModelType.Value =
+        LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC;
+      viewModel.outroModelType.Value =
+        LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC;
+
+      useBuilderMock([viewModel, fakeController]);
+
+      const componentUnderTest = render(<StoryElement />);
+      const backButton = componentUnderTest.getByText("backButton");
+
+      expect(backButton).toBeInTheDocument();
+    }
+  );
+
+  test.each([
+    [
+      StoryElementType.Intro,
+      false,
+      LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC,
+      undefined,
+    ],
+    [
+      StoryElementType.Outro,
+      true,
+      undefined,
+      LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC,
+    ],
+  ])(
+    "doesn't render back button when storyelement has only intro or outro cutscene and storyElementType is %p",
+    (storyType, isOutroUnlocked, introModel, outroModel) => {
+      viewModel.storyTypeToDisplay.Value = storyType;
+      viewModel.isIntroCutsceneRunning.Value = false;
+      viewModel.isOutroCutsceneRunning.Value = false;
+      viewModel.isOutroUnlocked.Value = isOutroUnlocked;
+      viewModel.introModelType.Value = introModel;
+      viewModel.outroModelType.Value = outroModel;
+
+      useBuilderMock([viewModel, fakeController]);
+
+      const componentUnderTest = render(<StoryElement />);
+
+      waitFor(() => {
+        expect(
+          componentUnderTest.getByText("backButton")
+        ).not.toBeInTheDocument();
+      });
+    }
+  );
 });
