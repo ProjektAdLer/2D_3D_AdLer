@@ -9,7 +9,7 @@ export default class NavigationConfiguration {
     walkableSlopeAngle: 10,
     walkableHeight: 3.0,
     walkableClimb: 0.05,
-    walkableRadius: 3,
+    walkableRadius: 2,
     maxEdgeLen: 5,
     maxSimplificationError: 1.3,
     minRegionArea: 8,
