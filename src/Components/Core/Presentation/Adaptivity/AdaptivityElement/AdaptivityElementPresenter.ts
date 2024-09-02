@@ -113,7 +113,8 @@ export default class AdaptivityElementPresenter
 
     questionToBeUpdated.questionAnswers.map((answer, index) => {
       answer.isCorrect =
-        questionPresentationUpdateTO.questionInfo.answers[index].correct;
+        questionPresentationUpdateTO.questionInfo.answers[index].correct &&
+        questionPresentationUpdateTO.questionInfo.answers[index].checked;
     });
   }
 
