@@ -28,7 +28,4 @@ export default class HelpDeskModalBuilder extends PresentationBuilder<
       PRESENTATION_TYPES.IHelpDeskModalPresenter
     ).toConstantValue(this.presenter!);
   }
-  override buildViewModel(): void {
-    super.buildViewModel();
-  }
 }

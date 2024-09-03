@@ -28,6 +28,7 @@ describe("HelpDeskModalBuilder", () => {
       CoreDIContainer.get(PRESENTATION_TYPES.IHelpDeskModalPresenter)
     ).toBe(systemUnderTest.getPresenter()!);
   });
+
   test("buildPresenter unbinds the presenter if it is already bound", () => {
     CoreDIContainer.bind(
       PRESENTATION_TYPES.IHelpDeskModalPresenter
