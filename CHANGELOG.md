@@ -10,6 +10,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- controls explanation to learning space display
+
 ### Changed
 
 - wrong space icon in SideBar to correct spaceMenuIcon
