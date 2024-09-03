@@ -8,12 +8,10 @@ import {
   AnimationGroup,
   EventState,
   NullEngine,
-  Nullable,
   Observer,
   Scene,
   TransformNode,
   Vector3,
-  expandToProperty,
 } from "@babylonjs/core";
 import CharacterAnimator from "../../../../Core/Presentation/Babylon/CharacterAnimator/CharacterAnimator";
 import CharacterAnimationActions from "../../../../Core/Presentation/Babylon/CharacterAnimator/CharacterAnimationActions";
@@ -55,6 +53,15 @@ describe("CharacterAnimator", () => {
 
   afterAll(() => {
     CoreDIContainer.restore();
+  });
+
+  test("CurrentAnimationState returns current state from state machine", () => {
+    systemUnderTest["stateMachine"]["currentState"] =
+      CharacterAnimationStates.Walking;
+
+    expect(systemUnderTest.CurrentAnimationState).toEqual(
+      CharacterAnimationStates.Walking
+    );
   });
 
   // ANF-ID: [EZZ0018]
