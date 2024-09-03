@@ -9,7 +9,7 @@ import SideBarViewModel from "./SideBarViewModel";
 import SideBarController from "./SideBarController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import worldIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
-import spaceIcon from "../../../../../../Assets/icons/13-space/space-icon-nobg.svg";
+import spaceMenuIcon from "../../../../../../Assets/icons/24-spacemenu/spacemenu-icon-nobg.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
@@ -42,7 +42,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
       <StyledContainer className="flex flex-col p-2 rounded-lg w-44 lg:w-64 bg-whitetrans">
         <div className="flex flex-row items-center">
           <StyledButton onClick={controller.onSpaceMenuButtonClicked}>
-            <img src={spaceIcon} alt="" />
+            <img src={spaceMenuIcon} alt="" />
           </StyledButton>
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
             {translate("sidebar_learningSpaceMenu")}
