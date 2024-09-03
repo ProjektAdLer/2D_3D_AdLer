@@ -1,0 +1,25 @@
+{
+  "title": "3D-Steuerung",
+
+  "confirmation": "Sie können die Steuerungs-Erklärung jederzeit über das Menü in der 3D-Ansicht erneut aufrufen.",
+
+  "controlAvatar": "Avatar bewegen",
+  "controlAvatarMouse": "Linksklick auf eine Position",
+  "controlAvatarTouch": "Einfacher Touch auf eine Position",
+  "controlAvatarHint": "Der Avatar kann nur innerhlab des mit Fussboden begrenzten Raums bewegt werden",
+
+  "openContent": "Inhalte öffnen",
+  "openContentMouse": "Linksklick auf ein 3D Objekt",
+  "openContentTouch": "Einfacher Touch auf ein 3D Objekt",
+  "openContentHint": "Nur farblich umrandete 3D-Modelle mit 3D-Icons und Türen sind mit Inhalten verknüpft \n Inhalte können nur geöffnet werden, wenn der Avatar sich in der Nähe des 3D-Objekts befindet   ",
+
+  "rotateCamera": "Kamera drehen",
+  "rotateCameraMouse": "Mausrad drücken und seitliche Bewegung",
+  "rotateCameraTouch": "Einfacher Touch und seitliche Bewegung",
+  "rotateCameraHint": "Die Kamera ist um 45° nach links und rechts schwenkbar",
+
+  "zoomCamera": "Kamera zoomen",
+  "zoomCameraMouse": "Mausrad drehen",
+  "zoomCameraTouch": "Zwei Touchpunkte entfernen / annäheren",
+  "zoomCameraHint": "Die Kamera ist in einem bestimmen Nah- und Fernbereich zoombar"
+}

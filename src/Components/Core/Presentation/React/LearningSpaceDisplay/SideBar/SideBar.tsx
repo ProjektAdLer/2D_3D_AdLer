@@ -73,6 +73,16 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             {translate("sidebar_fullScreen")}
           </p>
         </div>
+
+        <div className="flex flex-row items-center">
+          <StyledButton onClick={controller.onControlsExplanationButtonClicked}>
+            <img src={engineLogo} alt="" />
+          </StyledButton>
+          <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
+            {translate("sidebar_controls")}
+          </p>
+        </div>
+
         <div className="flex flex-row items-center">
           <HelpDeskButton />
           <HelpDeskModal />

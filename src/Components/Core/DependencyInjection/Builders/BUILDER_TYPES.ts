@@ -40,6 +40,7 @@ const BUILDER_TYPES = {
   IStoryNPCBuilder: Symbol("IStoryNPCBuilder"),
   ICookieModalBuilder: Symbol("ICookieModalBuilder"),
   IReturnHomeModalBuilder: Symbol("IReturnHomeModalBuilder"),
+  IControlsExplanationModalBuilder: Symbol("IControlsExplanationModalBuilder"),
 };
 
 export default BUILDER_TYPES;

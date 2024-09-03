@@ -13,6 +13,7 @@ import BreakTimeNotification from "../../../Adaptivity/BreakTimeNotification/Bre
 import AdaptivityElementDialogContainer from "../../../Adaptivity/AdaptivityElement/UIComponents/AdaptivityElementDialogContainer";
 import LearningSpaceGoalPanel from "~ReactComponents/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanel";
 import StoryElement from "~ReactComponents/LearningSpaceDisplay/StoryElement/StoryElement";
+import ControlsExplanationModal from "~ReactComponents/GeneralComponents/ControlsExplanationModal/ControlsExplanationModal";
 
 export default function LearningSpace() {
   return (
@@ -35,7 +36,7 @@ export default function LearningSpace() {
       <LearningElementModal className="z-10" />
       <ExitModal className="z-30" />
       <BreakTimeNotification className="z-10" />
-
+      <ControlsExplanationModal />
       <StoryElement />
       {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
       {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}

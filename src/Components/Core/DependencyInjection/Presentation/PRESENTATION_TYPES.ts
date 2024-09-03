@@ -12,6 +12,9 @@ const PRESENTATION_TYPES = {
   ICharacterAnimator: Symbol("ICharacterAnimator"),
   ICharacterNavigator: Symbol("ICharacterNavigator"),
   IAvatarCameraPresenter: Symbol("IAvatarCameraPresenter"),
+  IControlsExplanationModalPresenter: Symbol(
+    "IControlsExplanationModalPresenter"
+  ),
 };
 
 export default PRESENTATION_TYPES;
