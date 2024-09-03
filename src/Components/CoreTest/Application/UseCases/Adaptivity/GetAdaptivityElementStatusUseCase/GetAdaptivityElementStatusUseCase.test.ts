@@ -25,6 +25,7 @@ const progressTO = {
   elementName: "abc",
   shuffleTask: false,
   introText: "",
+  model: null,
   tasks: [
     {
       isCompleted: null,
@@ -39,7 +40,13 @@ const progressTO = {
           questionId: 0,
           questionDifficulty: AdaptivityElementQuestionDifficultyTypes.easy,
           questionText: "",
-          questionAnswers: [],
+          questionAnswers: [
+            {
+              answerId: 0,
+              answerText: "a",
+              answerIsCorrect: false,
+            },
+          ],
           triggers: [],
         },
         {
@@ -169,5 +176,31 @@ describe("GetAdaptivityElementStatusUseCase", () => {
     await systemUnderTest.internalExecuteAsync(progressTO);
 
     expect(progressTO).toEqual(result);
+  });
+
+  test("should set answers correctly to isCorrect", async () => {
+    entityContainerMock.getEntitiesOfType.mockReturnValue([
+      { userToken: "", username: "", isLoggedIn: true },
+    ] as UserDataEntity[]);
+
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: 1,
+    } as UserLocationTO);
+    backendResponseMock.questions[0].answers = [
+      {
+        correct: true,
+        checked: true,
+      },
+    ];
+    backendAdapterMock.getAdaptivityElementStatusResponse.mockResolvedValue(
+      backendResponseMock
+    );
+
+    await systemUnderTest.internalExecuteAsync(progressTO);
+
+    expect(
+      progressTO.tasks[0].questions[0].questionAnswers[0].answerIsCorrect
+    ).toEqual(true);
   });
 });
