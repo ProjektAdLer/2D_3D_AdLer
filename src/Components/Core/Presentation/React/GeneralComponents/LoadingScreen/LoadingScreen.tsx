@@ -22,7 +22,7 @@ export default function LoadingScreen() {
 
   return (
     <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-start">
-      <div className="grid grid-rows-8 h-[85vh] max-h-[1000px] xl:pt-24">
+      <div className="grid grid-rows-8  max-h-[1000px] portrait:max-h-[50vh] xl:pt-24">
         <section className="row-span-2 portrait:row-span-2 flex w-full justify-center items-center gap-8 portrait:gap-8 portrait:px-4">
           <img
             className="w-full m-4 xs:w-16 md:w-24 lg:w-32 xl:w-48 portrait:w-16 animate-wiggle"
@@ -37,7 +37,7 @@ export default function LoadingScreen() {
           )}
         </section>
 
-        <div className="row-span-4 portrait:row-span-5 w-[85vw] max-w-6xl portrait:h-[70vh] flex flex-col justify-center">
+        <div className="row-span-4 w-[85vw] max-w-6xl portrait:h-[60vh] flex flex-col justify-center">
           <h1 className="pl-4 pb-1 font-bold">
             {translate("sidebar_controls")}
           </h1>
