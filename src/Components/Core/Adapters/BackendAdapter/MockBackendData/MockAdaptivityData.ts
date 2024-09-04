@@ -513,7 +513,7 @@ export const MockAdaptivityElementStatusResponse: AdaptivityElementStatusRespons
       return task.adaptivityQuestions.map((question) => ({
         id: question.questionId,
         status: "NotAttempted",
-        answers: [],
+        answers: null!,
       }));
     }),
   };
