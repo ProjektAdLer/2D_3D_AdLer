@@ -22,7 +22,7 @@ export default function LoadingScreen() {
 
   return (
     <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-start">
-      <div className="grid grid-rows-7 h-[85vh] xl:pt-24">
+      <div className="grid grid-rows-8 h-[85vh] max-h-[1000px] xl:pt-24">
         <section className="row-span-2 portrait:row-span-2 flex w-full justify-center items-center gap-8 portrait:gap-8 portrait:px-4">
           <img
             className="w-full m-4 xs:w-16 md:w-24 lg:w-32 xl:w-48 portrait:w-16 animate-wiggle"
@@ -31,7 +31,9 @@ export default function LoadingScreen() {
           />
 
           {viewModel.loadStep.Value && (
-            <p className="text-sm">{viewModel.loadStep.Value}</p>
+            <p className="text-sm lg:text-lg xl:text-xl">
+              {viewModel.loadStep.Value}
+            </p>
           )}
         </section>
 
@@ -40,36 +42,36 @@ export default function LoadingScreen() {
             {translate("sidebar_controls")}
           </h1>
           <ControlsExplanationContent className="gap-4 bg-buttonbgblue p-4 rounded-xl" />
-          <div className="w-full flex justify-center items-center pt-16 portrait:pt-8 ">
-            {!canClose && (
-              <section className="w-full h-12 flex justify-center content-center">
-                <div className="flex scale-60 rounded-lg lg:scale-50 border-4 border-white">
-                  <div className="w-10 h-10 mx-1 animate-loadtileone bg-adlerdarkblue"></div>
-                  <div className="w-10 h-10 mx-1 animate-loadtiletwo bg-adlerdarkblue"></div>
-                  <div className="w-10 h-10 mx-1 animate-loadtilethree bg-adlerdarkblue"></div>
-                  <div className="w-10 h-10 mx-1 animate-loadtilefour bg-adlerdarkblue"></div>
-                  <div className="w-10 h-10 mx-1 animate-loadtilefive bg-adlerdarkblue"></div>
-                  <div className="w-10 h-10 mx-1 animate-loadtilesix bg-adlerdarkblue"></div>
-                  <div className="w-10 h-10 mx-1 animate-loadtileseven bg-adlerdarkblue"></div>
-                  <div className="w-10 h-10 mx-1 animate-loadtileeight bg-adlerdarkblue"></div>
-                  <div className="w-10 h-10 mx-1 animate-loadtilenine bg-adlerdarkblue"></div>
-                  <div className="w-10 h-10 mx-1 animate-loadtileten bg-adlerdarkblue"></div>
-                </div>
-              </section>
-            )}
+        </div>
+        <div className="w-full flex justify-center items-center pt-16 portrait:pt-8 ">
+          {!canClose && (
+            <section className="w-full h-12 flex justify-center content-center">
+              <div className="flex scale-60 rounded-lg lg:scale-50 border-4 border-white">
+                <div className="w-10 h-10 mx-1 animate-loadtileone bg-adlerdarkblue"></div>
+                <div className="w-10 h-10 mx-1 animate-loadtiletwo bg-adlerdarkblue"></div>
+                <div className="w-10 h-10 mx-1 animate-loadtilethree bg-adlerdarkblue"></div>
+                <div className="w-10 h-10 mx-1 animate-loadtilefour bg-adlerdarkblue"></div>
+                <div className="w-10 h-10 mx-1 animate-loadtilefive bg-adlerdarkblue"></div>
+                <div className="w-10 h-10 mx-1 animate-loadtilesix bg-adlerdarkblue"></div>
+                <div className="w-10 h-10 mx-1 animate-loadtileseven bg-adlerdarkblue"></div>
+                <div className="w-10 h-10 mx-1 animate-loadtileeight bg-adlerdarkblue"></div>
+                <div className="w-10 h-10 mx-1 animate-loadtilenine bg-adlerdarkblue"></div>
+                <div className="w-10 h-10 mx-1 animate-loadtileten bg-adlerdarkblue"></div>
+              </div>
+            </section>
+          )}
 
-            {canClose && (
-              <section className="w-full flex justify-center content-center h-12">
-                <StyledButton
-                  shape={"freefloatcenter"}
-                  onClick={() => controller.closeLoadingScreen()}
-                  className="p-5 scale-60 lg:scale-90"
-                >
-                  {translate("enterLearningSpace")}
-                </StyledButton>
-              </section>
-            )}
-          </div>
+          {canClose && (
+            <section className="w-full flex justify-center content-center h-12">
+              <StyledButton
+                shape={"freefloatcenter"}
+                onClick={() => controller.closeLoadingScreen()}
+                className="p-5 scale-60 lg:scale-90"
+              >
+                {translate("enterLearningSpace")}
+              </StyledButton>
+            </section>
+          )}
         </div>
       </div>
       <div className="fixed bottom-4 w-full flex flex-col justify-center items-center gap-2 px-4">
