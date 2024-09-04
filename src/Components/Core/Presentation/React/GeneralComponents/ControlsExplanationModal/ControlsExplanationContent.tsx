@@ -10,7 +10,7 @@ export default function ControlsExplanationContent({
     <div
       className={tailwindMerge(
         className,
-        "w-[90vw] grid grid-cols-4 portrait:grid-cols-1 gap-12 pb-4 text-xs lg:text-sm overflow-y-auto"
+        "grid grid-cols-4 portrait:grid-cols-1 gap-8 pb-4 text-xs lg:text-sm overflow-y-auto"
       )}
     >
       {/* Avatar Controls */}
@@ -43,7 +43,10 @@ export default function ControlsExplanationContent({
         </div>
         <div className="flex flex-row gap-2">
           <img className="w-6" alt="Icon"></img>
-          <p>{translate("openContentHint")}</p>
+          <div className="flex flex-col gap-1">
+            <p>{translate("openContentHint1")}</p>
+            <p>{translate("openContentHint2")}</p>
+          </div>
         </div>
       </div>
 

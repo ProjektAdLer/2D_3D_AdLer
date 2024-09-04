@@ -11,7 +11,8 @@
   "openContent": "Inhalte öffnen",
   "openContentMouse": "Linksklick auf ein 3D Objekt",
   "openContentTouch": "Einfacher Touch auf ein 3D Objekt",
-  "openContentHint": "Nur farblich umrandete 3D-Modelle mit 3D-Icons und Türen sind mit Inhalten verknüpft \n Inhalte können nur geöffnet werden, wenn der Avatar sich in der Nähe des 3D-Objekts befindet   ",
+  "openContentHint1": "Nur farblich umrandete 3D-Modelle mit 3D-Icons und Türen sind mit Inhalten verknüpft ",
+  "openContentHint2": "Inhalte können nur geöffnet werden, wenn der Avatar sich in der Nähe des 3D-Objekts befindet   ",
 
   "rotateCamera": "Kamera drehen",
   "rotateCameraMouse": "Mausrad drücken und seitliche Bewegung",

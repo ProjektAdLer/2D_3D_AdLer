@@ -57,7 +57,9 @@ export default function ControlsExplanationModal({
           setShowConfirmation(true);
         }}
       >
-        <ControlsExplanationContent />
+        <ControlsExplanationContent
+          className={tailwindMerge(className, "max-w-[90vw] max-h-[80vh]")}
+        />
       </StyledModal>
     </React.Fragment>
   );

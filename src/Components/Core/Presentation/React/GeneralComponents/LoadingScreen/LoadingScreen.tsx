@@ -7,6 +7,7 @@ import ILoadingScreenController from "./ILoadingScreenController";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { Trans, useTranslation } from "react-i18next";
+import ControlsExplanationContent from "../ControlsExplanationModal/ControlsExplanationContent";
 
 export default function LoadingScreen() {
   const [viewModel, controller] = useBuilder<
@@ -20,73 +21,80 @@ export default function LoadingScreen() {
   if (!viewModel || !controller || !isOpen) return null;
 
   return (
-    <div className="absolute z-[20000]">
-      <main className="grid w-screen h-screen grid-cols-6 grid-rows-5 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
-        <section className="z-20 flex items-center justify-center col-span-4 col-start-2 row-span-2 row-start-1 mt-10 lg:row-span-3">
+    <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-start">
+      <div className="grid grid-rows-8 h-[85vh]">
+        <section className="row-span-3 portrait:row-span-2 flex w-full justify-center items-center gap-8 portrait:gap-8 portrait:px-4">
           <img
-            className="w-full m-4 xs:w-36 md:w-64 lg:w-72 xl:w-96 animate-wiggle"
+            className="w-full m-4 xs:w-18 md:w-32 lg:w-36 xl:w-48 portrait:w-16 animate-wiggle"
             src={logo}
             alt="AdlerEngine Logo"
           />
-        </section>
-        <section className="z-10 flex flex-col items-center self-center justify-center col-span-4 col-start-2 row-span-1 row-start-3 p-4 mb-10 text-lg font-medium rounded-lg lg:self-start lg:p-0 lg:col-span-2 lg:col-start-3 lg:row-start-4 justify-self-center lg:w-96 h-1/3 bg-buttonbgblue text-adlerdarkblue lg:text-2xl">
-          {viewModel.loadStep.Value && <p>{viewModel.loadStep.Value}</p>}
+
+          {viewModel.loadStep.Value && (
+            <p className="text-sm">{viewModel.loadStep.Value}</p>
+          )}
         </section>
 
-        {!canClose && (
-          <section className="self-center col-span-2 col-start-3 row-start-4 lg:self-end justify-self-center">
-            <div className="flex w-full scale-50 border-4 border-white rounded-lg lg:scale-100">
-              <div className="w-10 h-10 m-1 animate-loadtileone bg-adlerdarkblue"></div>
-              <div className="w-10 h-10 m-1 animate-loadtiletwo bg-adlerdarkblue"></div>
-              <div className="w-10 h-10 m-1 animate-loadtilethree bg-adlerdarkblue"></div>
-              <div className="w-10 h-10 m-1 animate-loadtilefour bg-adlerdarkblue"></div>
-              <div className="w-10 h-10 m-1 animate-loadtilefive bg-adlerdarkblue"></div>
-              <div className="w-10 h-10 m-1 animate-loadtilesix bg-adlerdarkblue"></div>
-              <div className="w-10 h-10 m-1 animate-loadtileseven bg-adlerdarkblue"></div>
-              <div className="w-10 h-10 m-1 animate-loadtileeight bg-adlerdarkblue"></div>
-              <div className="w-10 h-10 m-1 animate-loadtilenine bg-adlerdarkblue"></div>
-              <div className="w-10 h-10 m-1 animate-loadtileten bg-adlerdarkblue"></div>
-            </div>
-          </section>
-        )}
-        {canClose && (
-          <section className="self-center col-span-4 col-start-2 row-start-4 lg:self-end lg:col-span-2 lg:col-start-3 justify-self-center">
-            <StyledButton
-              shape={"freefloatcenter"}
-              onClick={() => controller.closeLoadingScreen()}
-              className="p-5 scale-125 lg:scale-150"
-            >
-              {translate("enterLearningSpace")}
-            </StyledButton>
-          </section>
-        )}
+        <div className="row-span-5 portrait:row-span-6 w-[85vw] max-w-6xl portrait:h-[70vh] flex flex-col ">
+          <h1 className="pl-4 pb-1 font-bold">Steuerung</h1>
+          <ControlsExplanationContent className="gap-4 bg-buttonbgblue p-4 rounded-xl" />
+          <div className="w-full flex justify-center items-center pt-16 portrait:pt-4 ">
+            {!canClose && (
+              <section className="w-full h-12 flex justify-center content-center">
+                <div className="flex scale-60 rounded-lg lg:scale-50 border-4 border-white">
+                  <div className="w-10 h-10 mx-1 animate-loadtileone bg-adlerdarkblue"></div>
+                  <div className="w-10 h-10 mx-1 animate-loadtiletwo bg-adlerdarkblue"></div>
+                  <div className="w-10 h-10 mx-1 animate-loadtilethree bg-adlerdarkblue"></div>
+                  <div className="w-10 h-10 mx-1 animate-loadtilefour bg-adlerdarkblue"></div>
+                  <div className="w-10 h-10 mx-1 animate-loadtilefive bg-adlerdarkblue"></div>
+                  <div className="w-10 h-10 mx-1 animate-loadtilesix bg-adlerdarkblue"></div>
+                  <div className="w-10 h-10 mx-1 animate-loadtileseven bg-adlerdarkblue"></div>
+                  <div className="w-10 h-10 mx-1 animate-loadtileeight bg-adlerdarkblue"></div>
+                  <div className="w-10 h-10 mx-1 animate-loadtilenine bg-adlerdarkblue"></div>
+                  <div className="w-10 h-10 mx-1 animate-loadtileten bg-adlerdarkblue"></div>
+                </div>
+              </section>
+            )}
 
-        <section className="flex items-center self-center col-span-6 col-start-1 row-start-5 lg:col-span-4 lg:col-start-2 justify-self-center">
-          <p className="p-4 text-lg font-medium text-center lg:text-xl text-adlerdarkblue">
-            <Trans
-              i18nKey="projectInformation"
-              ns="learningSpace"
-              components={[
-                <a
-                  key={0}
-                  target="_blank"
-                  href="https://projekt-adler.eu"
-                  title={translate("linkInfo").toString()}
-                  rel="noreferrer"
-                  className="underline text-adleroceanblue hover:text-nodehandlecolor"
+            {canClose && (
+              <section className="w-full flex justify-center content-center h-12">
+                <StyledButton
+                  shape={"freefloatcenter"}
+                  onClick={() => controller.closeLoadingScreen()}
+                  className="p-5 scale-60 lg:scale-90"
                 >
-                  {}
-                </a>,
-              ]}
-              values={{ homepageLink: translate("homepage") }}
-            />
-          </p>
-        </section>
+                  {translate("enterLearningSpace")}
+                </StyledButton>
+              </section>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="fixed bottom-4 w-full flex flex-col justify-center items-center gap-2 px-4">
+        <p className="text-sm portrait:text-[10px] font-medium  text-adlerdarkblue">
+          <Trans
+            i18nKey="projectInformation"
+            ns="learningSpace"
+            components={[
+              <a
+                key={0}
+                target="_blank"
+                href="https://projekt-adler.eu"
+                title={translate("linkInfo").toString()}
+                rel="noreferrer"
+                className="underline text-adleroceanblue hover:text-nodehandlecolor"
+              >
+                {}
+              </a>,
+            ]}
+            values={{ homepageLink: translate("homepage") }}
+          />
+        </p>
 
-        <p className="self-end col-span-6 col-start-1 row-start-6 p-2 mb-8 text-xs text-center rounded-lg text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center">
+        <p className="text-xs portrait:text-[8px]">
           {translate("copyright", { ns: "start" })}
         </p>
-      </main>
+      </div>
     </div>
   );
 }
