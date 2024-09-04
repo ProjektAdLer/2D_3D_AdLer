@@ -22,10 +22,10 @@ export default function LoadingScreen() {
 
   return (
     <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-start">
-      <div className="grid grid-rows-8 h-[85vh]">
-        <section className="row-span-3 portrait:row-span-2 flex w-full justify-center items-center gap-8 portrait:gap-8 portrait:px-4">
+      <div className="grid grid-rows-7 h-[85vh] xl:pt-24">
+        <section className="row-span-2 portrait:row-span-2 flex w-full justify-center items-center gap-8 portrait:gap-8 portrait:px-4">
           <img
-            className="w-full m-4 xs:w-18 md:w-32 lg:w-36 xl:w-48 portrait:w-16 animate-wiggle"
+            className="w-full m-4 xs:w-16 md:w-24 lg:w-32 xl:w-48 portrait:w-16 animate-wiggle"
             src={logo}
             alt="AdlerEngine Logo"
           />
@@ -35,10 +35,12 @@ export default function LoadingScreen() {
           )}
         </section>
 
-        <div className="row-span-5 portrait:row-span-6 w-[85vw] max-w-6xl portrait:h-[70vh] flex flex-col ">
-          <h1 className="pl-4 pb-1 font-bold">Steuerung</h1>
+        <div className="row-span-4 portrait:row-span-5 w-[85vw] max-w-6xl portrait:h-[70vh] flex flex-col justify-center">
+          <h1 className="pl-4 pb-1 font-bold">
+            {translate("sidebar_controls")}
+          </h1>
           <ControlsExplanationContent className="gap-4 bg-buttonbgblue p-4 rounded-xl" />
-          <div className="w-full flex justify-center items-center pt-16 portrait:pt-4 ">
+          <div className="w-full flex justify-center items-center pt-16 portrait:pt-8 ">
             {!canClose && (
               <section className="w-full h-12 flex justify-center content-center">
                 <div className="flex scale-60 rounded-lg lg:scale-50 border-4 border-white">

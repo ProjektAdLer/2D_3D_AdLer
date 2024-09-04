@@ -33,7 +33,7 @@ export default function ControlsExplanationModal({
         showModal={showConfirmation && !confirmationShownOnce}
         canClose={false}
       >
-        <div className="w-[90vw] flex flex-row portrait:flex-col justify-between gap-12">
+        <div className="w-[90vw] max-w-6xl flex flex-row portrait:flex-col justify-between gap-12">
           <p>{translate("confirmation")}</p>
           <div className="flex flex-row gap-4">
             <StyledButton
@@ -58,7 +58,10 @@ export default function ControlsExplanationModal({
         }}
       >
         <ControlsExplanationContent
-          className={tailwindMerge(className, "max-w-[90vw] max-h-[80vh]")}
+          className={tailwindMerge(
+            className,
+            "max-w-[90vw] max-h-[80vh] max-w-6xl"
+          )}
         />
       </StyledModal>
     </React.Fragment>
