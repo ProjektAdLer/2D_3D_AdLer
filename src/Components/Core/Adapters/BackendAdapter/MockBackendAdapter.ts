@@ -213,7 +213,7 @@ export default class MockBackendAdapter implements IBackendPort {
       gradedQuestion: {
         id: submissionData.questionID,
         status: "Incorrect",
-        answers: undefined,
+        answers: null!,
       },
     };
 
@@ -245,6 +245,35 @@ export default class MockBackendAdapter implements IBackendPort {
         backendResponse.gradedQuestion.status = "Correct";
       }
     }
+    submissionData.selectedAnswers.map((selected) => {
+      if (selected) {
+        if (backendResponse.gradedQuestion.answers === null) {
+          backendResponse.gradedQuestion.answers = [
+            {
+              checked: true,
+              correct: true,
+            },
+          ];
+        } else
+          backendResponse.gradedQuestion.answers!.push({
+            checked: true,
+            correct: true,
+          });
+      } else {
+        if (backendResponse.gradedQuestion.answers === null) {
+          backendResponse.gradedQuestion.answers = [
+            {
+              checked: false,
+              correct: false,
+            },
+          ];
+        } else
+          backendResponse.gradedQuestion.answers!.push({
+            checked: false,
+            correct: false,
+          });
+      }
+    });
 
     this.updateFakeBackEnd(backendResponse);
 
