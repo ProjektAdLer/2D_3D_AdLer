@@ -9,15 +9,18 @@ const getMoodleURL = () => {
   if (process.env.NODE_ENV === "production") {
     console.log("We are in Production");
 
-    if (window?._env_?.MOODLE_URL && typeof window?._env_?.MOODLE_URL === "string") {
+    if (
+      window?._env_?.MOODLE_URL &&
+      typeof window?._env_?.MOODLE_URL === "string"
+    ) {
       return window._env_.MOODLE_URL;
     }
   }
-  if (!process.env.REACT_APP_API_MOODLE_URL) {
+  if (!process.env.REACT_APP_MOODLE_SERVER_URL) {
     console.error("No API Server URL set!");
     throw new Error("No API Server URL set!");
   }
-  return process.env.REACT_APP_API_MOODLE_URL;
+  return process.env.REACT_APP_MOODLE_SERVER_URL;
 };
 
 const getServerURL = () => {
