@@ -5,7 +5,7 @@ import { parseBool } from "./Lib/ParseBool";
 // So we have to use console.log and console.error here.
 
 // Get the Server URL from config file in Public folder if we are in Production.
-const getMoodleURL = () => {
+export const getMoodleURL = () => {
   if (process.env.NODE_ENV === "production") {
     console.log("We are in Production");
 
@@ -23,7 +23,7 @@ const getMoodleURL = () => {
   return process.env.REACT_APP_MOODLE_SERVER_URL;
 };
 
-const getServerURL = () => {
+export const getServerURL = () => {
   if (process.env.NODE_ENV === "production") {
     console.log("We are in Production");
 
