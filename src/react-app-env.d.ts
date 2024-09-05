@@ -20,5 +20,5 @@ declare module "recast-detour";
 declare module "h5p-standalone";
 
 interface Window {
-  _env_: { API_URL: string? }?;
+  _env_: { API_URL: string?; MOODLE_URL?: string? }?;
 }
