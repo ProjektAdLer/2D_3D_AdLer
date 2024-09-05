@@ -1,4 +1,10 @@
-import { Mesh, TransformNode, Vector3 } from "@babylonjs/core";
+import {
+  Mesh,
+  Quaternion,
+  Tools,
+  TransformNode,
+  Vector3,
+} from "@babylonjs/core";
 import type { AnimationGroup, Nullable, Texture } from "@babylonjs/core";
 import SCENE_TYPES, {
   ScenePresenterFactory,
@@ -62,12 +68,16 @@ export default class AvatarView {
       "AvatarModelRootNode",
       this.scenePresenter.Scene
     );
-    this.viewModel.modelRootNode.position = new Vector3(0, 0.05, 0);
+    this.viewModel.modelRootNode.position = new Vector3(0, 0.05, 0); // place model 0.05 above the ground ~ FK
     this.viewModel.modelRootNode.setParent(this.viewModel.parentNode);
     this.viewModel.meshes[0].setParent(this.viewModel.modelRootNode);
 
-    this.viewModel.parentNode.position = this.determineSpawnLocation();
-    // place model 0.05 above the ground ~ FK
+    const [spawnPosition, spawnRotation] = this.determineSpawnLocation();
+    this.viewModel.parentNode.position = spawnPosition;
+    this.viewModel.modelRootNode.rotationQuaternion = Quaternion.RotationAxis(
+      Vector3.Up(),
+      Tools.ToRadians(spawnRotation)
+    );
 
     // animation setup
     result.animationGroups.forEach((animationGroup) => {
@@ -139,13 +149,15 @@ export default class AvatarView {
     await this.viewModel.characterNavigator.IsReady;
   }
 
-  private determineSpawnLocation(): Vector3 {
+  private determineSpawnLocation(): [Vector3, number] {
     let spawnLocation;
+    let spawnRotation;
     if (
       this.viewModel.learningSpaceTemplateType ===
       LearningSpaceTemplateType.None
     ) {
       spawnLocation = new Vector3(0, 0, 0);
+      spawnRotation = 0;
     } else {
       let spawnPoint = LearningSpaceTemplateLookup.getLearningSpaceTemplate(
         this.viewModel.learningSpaceTemplateType
@@ -155,9 +167,10 @@ export default class AvatarView {
         0,
         spawnPoint.position.y
       );
+      spawnRotation = spawnPoint.orientation.rotation;
     }
 
-    return spawnLocation;
+    return [spawnLocation, spawnRotation];
   }
 
   @bind

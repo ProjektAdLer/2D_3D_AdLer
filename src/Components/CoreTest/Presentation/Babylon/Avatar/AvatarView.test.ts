@@ -87,7 +87,7 @@ describe("AvatarView", () => {
     CoreDIContainer.restore();
   });
 
-  describe("setup", () => {
+  describe("setup/cleanup", () => {
     // ANF-ID: [EZZ0018]
     test("asyncSetup creates character animator", async () => {
       scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
@@ -109,6 +109,29 @@ describe("AvatarView", () => {
       await systemUnderTest.asyncSetup();
 
       expect(viewModel.characterNavigator).toBe(characterNavigatorMock);
+    });
+
+    test("setupCleanup callback clears timeouts", async () => {
+      const clearTimeoutMock = jest.spyOn(global, "clearTimeout");
+      let callbackRef: () => void;
+      scenePresenterMock.addDisposeSceneCallback.mockImplementation(
+        (callback) => {
+          callbackRef = callback;
+        }
+      );
+
+      viewModel.setEyeTimer = setTimeout(() => {}, 100000);
+      viewModel.resetEyeTimer = setTimeout(() => {}, 100000);
+
+      systemUnderTest["setupCleanup"]();
+      callbackRef!();
+
+      expect(clearTimeoutMock).toHaveBeenCalledTimes(2);
+      expect(clearTimeoutMock).toHaveBeenCalledWith(viewModel.setEyeTimer);
+      expect(clearTimeoutMock).toHaveBeenCalledWith(viewModel.resetEyeTimer);
+
+      clearTimeoutMock.mockRestore();
+      jest.clearAllTimers();
     });
   });
 
