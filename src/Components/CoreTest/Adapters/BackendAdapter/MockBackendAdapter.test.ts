@@ -304,6 +304,24 @@ describe("MockBackendAdapter", () => {
     let response = mockGetQuestionResponseFromSubmission(questionSubmissionTO);
     response.gradedQuestion.status = "Correct";
     response.gradedTask.taskStatus = "Incorrect";
+    response.gradedQuestion.answers = [
+      {
+        checked: true,
+        correct: true,
+      },
+      {
+        checked: true,
+        correct: true,
+      },
+      {
+        checked: false,
+        correct: false,
+      },
+      {
+        checked: false,
+        correct: false,
+      },
+    ];
     await expect(
       systemUnderTest.getAdaptivityElementQuestionResponse(
         "",
