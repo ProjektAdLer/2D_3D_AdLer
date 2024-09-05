@@ -12,6 +12,7 @@ import {
   ExecuteCodeAction,
   Mesh,
   Quaternion,
+  Tools,
   TransformNode,
   Vector3,
 } from "@babylonjs/core";
@@ -171,25 +172,16 @@ export default class StoryNPCView {
         ? this.viewModel.introIdlePosRotation
         : this.viewModel.outroIdlePosRotation;
     } else {
-      [spawnPosition, spawnRotation] =
-        this.calculateAvatarOffsetSpawnLocation();
+      spawnPosition = this.viewModel.introCutsceneSpawnPosition;
+      spawnRotation = this.viewModel.introCutsceneRotation;
     }
 
     // apply spawn position and rotation
     this.viewModel.parentNode.position = spawnPosition;
     this.viewModel.modelRootNode.rotationQuaternion = Quaternion.RotationAxis(
       Vector3.Up(),
-      spawnRotation
+      Tools.ToRadians(spawnRotation)
     );
-  }
-
-  private calculateAvatarOffsetSpawnLocation(): [Vector3, number] {
-    // TODO: correct for avatar rotation
-    const spawnLocation = this.viewModel.avatarPosition.add(
-      this.viewModel.introSpawnPositionOffsetFromAvatar
-    );
-
-    return [spawnLocation, Math.PI];
   }
 
   private createCharacterAnimator(): void {

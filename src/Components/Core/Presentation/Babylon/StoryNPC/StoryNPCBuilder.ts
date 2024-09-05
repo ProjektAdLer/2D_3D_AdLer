@@ -91,6 +91,14 @@ export default class StoryNPCBuilder
       this.viewModel!.introIdlePosRotation =
         template.introStoryElementIdlePoint.orientation.rotation;
 
+      this.viewModel!.introCutsceneSpawnPosition = new Vector3(
+        template.introCutsceneSpawnPoint.position.x,
+        0,
+        template.introCutsceneSpawnPoint.position.y
+      );
+      this.viewModel!.introCutsceneRotation =
+        template.introCutsceneSpawnPoint.orientation.rotation;
+
       this.viewModel!.outroIdlePosition = new Vector3(
         template.outroStoryElementIdlePoint.position.x,
         0,

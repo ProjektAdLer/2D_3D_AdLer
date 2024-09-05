@@ -40,11 +40,12 @@ export default class StoryNPCViewModel {
   avatarPosition: Vector3 = new Vector3(0, 0, 0);
   introIdlePosition: Vector3 = new Vector3(0, 0, 0);
   introIdlePosRotation: number = 0;
+  introCutsceneSpawnPosition: Vector3 = new Vector3(0, 0, 0);
+  introCutsceneRotation: number = 0;
   outroIdlePosition: Vector3 = new Vector3(0, 0, 0);
   outroIdlePosRotation: number = 0;
 
   // readonly configuration properties
-  readonly introSpawnPositionOffsetFromAvatar: Vector3 = new Vector3(0, 0, 5);
   readonly cutSceneDistanceFromAvatar: number = 1.5;
   readonly iconYOffset: number = 2.3;
   readonly movementRange: number = 5; // in m

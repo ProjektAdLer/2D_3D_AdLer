@@ -16,6 +16,7 @@ import {
   NullEngine,
   Quaternion,
   Scene,
+  Tools,
   TransformNode,
   Vector3,
 } from "@babylonjs/core";
@@ -215,7 +216,10 @@ describe("StoryNPCView", () => {
 
       expect(viewModel.parentNode.position).toEqual(new Vector3(4, 2, 0));
       expect(viewModel.modelRootNode.rotationQuaternion).toEqual(
-        Quaternion.RotationAxis(Vector3.Up(), (3 / 4) * Math.PI)
+        Quaternion.RotationAxis(
+          Vector3.Up(),
+          Tools.ToRadians((3 / 4) * Math.PI)
+        )
       );
     });
 
@@ -229,18 +233,20 @@ describe("StoryNPCView", () => {
         "mockParentNode",
         new Scene(new NullEngine())
       );
-      viewModel.state.Value = StoryNPCState.CutScene;
-      viewModel.avatarPosition = new Vector3(10, 0, 0);
-      // @ts-ignore
-      viewModel.introSpawnPositionOffsetFromAvatar = new Vector3(1, 0, 0);
-      viewModel.parentNode.position = new Vector3(0, 0, 0);
       viewModel.storyType = StoryElementType.Intro;
+      viewModel.state.Value = StoryNPCState.CutScene;
+      viewModel.parentNode.position = new Vector3(0, 0, 0);
+      viewModel.introCutsceneSpawnPosition = new Vector3(4, 2, 0);
+      viewModel.introCutsceneRotation = (3 / 4) * Math.PI;
 
       systemUnderTest["setSpawnLocation"]();
 
-      expect(viewModel.parentNode.position).toEqual(new Vector3(11, 0, 0));
+      expect(viewModel.parentNode.position).toEqual(new Vector3(4, 2, 0));
       expect(viewModel.modelRootNode.rotationQuaternion).toEqual(
-        Quaternion.RotationAxis(Vector3.Up(), Math.PI)
+        Quaternion.RotationAxis(
+          Vector3.Up(),
+          Tools.ToRadians((3 / 4) * Math.PI)
+        )
       );
     });
 
