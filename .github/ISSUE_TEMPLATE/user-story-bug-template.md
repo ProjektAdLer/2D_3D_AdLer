@@ -30,9 +30,10 @@ assignees: ""
 
 (für weitere Fragen)
 
-**Ursache (erst bei Fix angeben):**
+**Akzeptanzkrieterien**
 
-(wird durch Team 3D ausgefüllt)
+- [ ] Akzeptanzkriterium 1
+- [ ] Akzeptanzkriterium 2
 
 **Lösung (erst bei Fix angeben):**
 
