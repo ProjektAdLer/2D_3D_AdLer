@@ -97,6 +97,10 @@ export const LearningSpaceTemplate_L: ILearningSpaceTemplate = {
     position: { x: -1.2, y: -6.8 },
     orientation: { rotation: -45 },
   },
+  introCutsceneSpawnPoint: {
+    position: { x: -3.2, y: -4.6 },
+    orientation: { rotation: 90 },
+  },
   outroStoryElementIdlePoint: {
     position: { x: -0.8, y: 4.4 },
     orientation: { rotation: 180 },

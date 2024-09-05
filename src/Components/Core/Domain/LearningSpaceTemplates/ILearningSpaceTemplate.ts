@@ -29,5 +29,6 @@ export default interface ILearningSpaceTemplate {
   windows: Transform[];
   playerSpawnPoint: Transform;
   introStoryElementIdlePoint: Transform;
+  introCutsceneSpawnPoint: Transform;
   outroStoryElementIdlePoint: Transform;
 }
