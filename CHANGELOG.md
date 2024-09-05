@@ -20,6 +20,9 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
+- avatar spawn rotation not being applied
+- intro story NPC spawn when in cutscene after entering a new learning space
+
 ### Deprecated
 
 ### Security
