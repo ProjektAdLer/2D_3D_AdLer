@@ -245,7 +245,7 @@ export default class MockBackendAdapter implements IBackendPort {
         backendResponse.gradedQuestion.status = "Correct";
       }
     }
-    submissionData.selectedAnswers.map((selected) => {
+    submissionData.selectedAnswers.forEach((selected) => {
       if (selected) {
         if (backendResponse.gradedQuestion.answers === null) {
           backendResponse.gradedQuestion.answers = [
