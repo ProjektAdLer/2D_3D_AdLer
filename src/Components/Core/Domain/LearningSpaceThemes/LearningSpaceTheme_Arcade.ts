@@ -26,10 +26,10 @@ const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
     [LearningElementTypes.image]: [
       LearningElementModelTypeEnums.ImageElementModelTypes.Gameposter1,
       LearningElementModelTypeEnums.ImageElementModelTypes.Gameposter2,
-      LearningElementModelTypeEnums.ImageElementModelTypes.Cardboardcutout,
+      LearningElementModelTypeEnums.ImageElementModelTypes.CardboardCutout,
     ],
     [LearningElementTypes.video]: [
-      LearningElementModelTypeEnums.VideoElementModelTypes.vrdesk,
+      LearningElementModelTypeEnums.VideoElementModelTypes.VrDesk,
     ],
     [LearningElementTypes.pdf]: [
       LearningElementModelTypeEnums.TextElementModelTypes.ComicShelfsmall,

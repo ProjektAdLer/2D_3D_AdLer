@@ -53,9 +53,9 @@ const LearningElementModelLookup: {
   [LearningElementModelTypeEnums.ImageElementModelTypes
     .Gameposter2]: require("../../../../Assets/3dModels/arcadeTheme/l_image_gameposter_2.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .Cardboardcutout]: require("../../../../Assets/3dModels/arcadeTheme/l_image_cardboardcutout_1.glb"),
+    .CardboardCutout]: require("../../../../Assets/3dModels/arcadeTheme/l_image_cardboardcutout_1.glb"),
   [LearningElementModelTypeEnums.VideoElementModelTypes
-    .vrdesk]: require("../../../../Assets/3dModels/arcadeTheme/l_video_vrdesk_1.glb"),
+    .VrDesk]: require("../../../../Assets/3dModels/arcadeTheme/l_video_vrdesk_1.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
     .ArcadeNPC]: require("../../../../Assets/3dModels/arcadeTheme/a_npc_sheriffjustice.glb"),
 
@@ -67,17 +67,17 @@ const LearningElementModelLookup: {
   [LearningElementModelTypeEnums.H5pElementModelTypes
     .DrawingTable2]: require("../../../../Assets/3dModels/campusTheme/l_h5p_drawingtable_2.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .Daylightprojector]: require("../../../../Assets/3dModels/campusTheme/l_h5p_daylightprojector_1.glb"),
+    .DaylightProjector]: require("../../../../Assets/3dModels/campusTheme/l_h5p_daylightprojector_1.glb"),
   [LearningElementModelTypeEnums.TextElementModelTypes
     .LibraryShelf]: require("../../../../Assets/3dModels/campusTheme/l_text_libraryshelf_1.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .sciencegeo1]: require("../../../../Assets/3dModels/campusTheme/l_image_sciencegeo_1.glb"),
+    .ScienceGeo1]: require("../../../../Assets/3dModels/campusTheme/l_image_sciencegeo_1.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .sciencebio1]: require("../../../../Assets/3dModels/campusTheme/l_image_sciencebio_1.glb"),
+    .ScienceBio1]: require("../../../../Assets/3dModels/campusTheme/l_image_sciencebio_1.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .sciencewhiteboard]: require("../../../../Assets/3dModels/campusTheme/l_image_sciencewhiteboard_1.glb"),
+    .ScienceWhiteboard]: require("../../../../Assets/3dModels/campusTheme/l_image_sciencewhiteboard_1.glb"),
   [LearningElementModelTypeEnums.VideoElementModelTypes
-    .movieprojector]: require("../../../../Assets/3dModels/campusTheme/l_video_movieprojector_1.glb"),
+    .MovieProjector]: require("../../../../Assets/3dModels/campusTheme/l_video_movieprojector_1.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
     .CampusNPC]: require("../../../../Assets/3dModels/campusTheme/a_npc_dozentlukas.glb"),
 

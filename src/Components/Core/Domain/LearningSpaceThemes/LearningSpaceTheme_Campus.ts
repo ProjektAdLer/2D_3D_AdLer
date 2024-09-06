@@ -10,24 +10,24 @@ export const LearningSpaceTheme_CampusAB: ILearningSpaceTheme = {
       LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard2,
       LearningElementModelTypeEnums.H5pElementModelTypes.DeskPC3,
       LearningElementModelTypeEnums.H5pElementModelTypes.DrawingTable2,
-      LearningElementModelTypeEnums.H5pElementModelTypes.Daylightprojector,
+      LearningElementModelTypeEnums.H5pElementModelTypes.DaylightProjector,
     ],
     [LearningElementTypes.primitiveH5P]: [
       LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard2,
       LearningElementModelTypeEnums.H5pElementModelTypes.DeskPC3,
       LearningElementModelTypeEnums.H5pElementModelTypes.DrawingTable2,
-      LearningElementModelTypeEnums.H5pElementModelTypes.Daylightprojector,
+      LearningElementModelTypeEnums.H5pElementModelTypes.DaylightProjector,
     ],
     [LearningElementTypes.text]: [
       LearningElementModelTypeEnums.TextElementModelTypes.LibraryShelf,
     ],
     [LearningElementTypes.image]: [
-      LearningElementModelTypeEnums.ImageElementModelTypes.sciencegeo1,
-      LearningElementModelTypeEnums.ImageElementModelTypes.sciencebio1,
-      LearningElementModelTypeEnums.ImageElementModelTypes.sciencewhiteboard,
+      LearningElementModelTypeEnums.ImageElementModelTypes.ScienceGeo1,
+      LearningElementModelTypeEnums.ImageElementModelTypes.ScienceBio1,
+      LearningElementModelTypeEnums.ImageElementModelTypes.ScienceWhiteboard,
     ],
     [LearningElementTypes.video]: [
-      LearningElementModelTypeEnums.VideoElementModelTypes.movieprojector,
+      LearningElementModelTypeEnums.VideoElementModelTypes.MovieProjector,
     ],
     [LearningElementTypes.pdf]: [
       LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,

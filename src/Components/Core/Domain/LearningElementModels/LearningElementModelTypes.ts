@@ -17,20 +17,20 @@ enum ImageElementModelTypes {
   //arcade
   Gameposter1 = "l_image_gameposter_1",
   Gameposter2 = "l_image_gameposter_2",
-  Cardboardcutout = "l_image_cardboardcutout_1",
+  CardboardCutout = "l_image_cardboardcutout_1",
   //campus
-  sciencegeo1 = "l_image_sciencegeo_1",
-  sciencebio1 = "l_image_sciencebio_1",
-  sciencewhiteboard = "l_image_sciencewhiteboard_1",
+  ScienceGeo1 = "l_image_sciencegeo_1",
+  ScienceBio1 = "l_image_sciencebio_1",
+  ScienceWhiteboard = "l_image_sciencewhiteboard_1",
 }
 
 enum VideoElementModelTypes {
   //default
   Television = "l_video_television_1",
   //arcade
-  vrdesk = "l_video_vrdesk_1",
+  VrDesk = "l_video_vrdesk_1",
   //campus
-  movieprojector = "l_video_movieprojector_1",
+  MovieProjector = "l_video_movieprojector_1",
 }
 
 // enum PdfElementModelTypes {}
@@ -51,7 +51,7 @@ enum H5pElementModelTypes {
   Blackboard2 = "l_h5p_blackboard_2",
   DeskPC3 = "l_h5p_deskpc_3",
   DrawingTable2 = "l_h5p_drawingtable_2",
-  Daylightprojector = "l_h5p_daylightprojector_1",
+  DaylightProjector = "l_h5p_daylightprojector_1",
 }
 
 enum QuizElementModelTypes {
@@ -60,6 +60,7 @@ enum QuizElementModelTypes {
   ArcadeNPC = "a_npc_sheriffjustice",
   CampusNPC = "a_npc_dozentlukas",
 }
+
 enum TrophyElementModelTypes {
   BronzeTrophy = "l_trophy_bronze",
   SilverTrophy = "l_trophy_silver",
