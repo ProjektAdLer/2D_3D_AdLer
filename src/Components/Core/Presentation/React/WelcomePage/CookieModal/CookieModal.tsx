@@ -30,7 +30,7 @@ export default function CookieModal() {
 
         <div className="flex justify-end gap-2">
           <StyledButton
-            shape="freefloatcenter"
+            shape="freeFloatCenter"
             data-testid="cookieDecline"
             title={translate("cookieTitle").toString()}
             onClick={() => {
@@ -41,7 +41,7 @@ export default function CookieModal() {
             {translate("cookieDecline")}
           </StyledButton>
           <StyledButton
-            shape="freefloatcenter"
+            shape="freeFloatCenter"
             data-testid="cookieAcceptAll"
             title={translate("cookieTitle").toString()}
             onClick={() => {

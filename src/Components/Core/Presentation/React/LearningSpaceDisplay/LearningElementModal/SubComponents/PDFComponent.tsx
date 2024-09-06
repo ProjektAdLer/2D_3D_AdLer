@@ -70,7 +70,7 @@ function MobilePDFComponent({
     <div className="flex-col h-full">
       <div className="flex flex-row justify-center w-full h-6 mb-2">
         <StyledButton
-          shape="freefloatcenter"
+          shape="freeFloatCenter"
           className=""
           onClick={previousPage}
         >
@@ -79,7 +79,7 @@ function MobilePDFComponent({
         <p className="mx-8">
           Page {pageNumber} of {numPages}
         </p>
-        <StyledButton shape="freefloatcenter" className="" onClick={nextPage}>
+        <StyledButton shape="freeFloatCenter" className="" onClick={nextPage}>
           {">"}
         </StyledButton>
       </div>

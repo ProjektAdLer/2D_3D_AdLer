@@ -10,11 +10,11 @@ export type StyledButtonColor =
   | "highlight";
 export type StyledButtonShape =
   | "square"
-  | "freefloatleft"
-  | "freefloatcenter"
+  | "freeFloatLeft"
+  | "freeFloatCenter"
   | "smallCloseButton"
   | "closeButton"
-  | "freefloatcenternopadding";
+  | "freeFloatCenterNoPadding";
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   shape?: StyledButtonShape;
@@ -23,6 +23,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   icon?: string;
   containerClassName?: string;
 }
+
 export default function StyledButton({
   shape = "square",
   color = "default",
@@ -44,13 +45,13 @@ export default function StyledButton({
     // Shapes
     square:
       "justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square",
-    freefloatleft: "px-2 py-1",
-    freefloatcenter: "flex px-2 py-1 justify-center",
+    freeFloatLeft: "px-2 py-1",
+    freeFloatCenter: "flex px-2 py-1 justify-center",
     smallCloseButton:
       "justify-center p-1 md:w-7 md:h-7 sm:w-6 sm:h-6 w-4 h-4 aspect-square",
     closeButton:
       "justify-center p-1 md:w-12 md:h-12 sm:w-10 sm:h-10 w-8 h-8 aspect-square",
-    freefloatcenternopadding: "flex justify-center",
+    freeFloatCenterNoPadding: "flex justify-center",
   };
 
   return (

@@ -89,7 +89,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
       {isPrimitive && (
         <div className="grid mt-2 mb-1 justify-items-end">
           <StyledButton
-            shape="freefloatcenter"
+            shape="freeFloatCenter"
             onClick={async () => {
               if (
                 isPrimitive &&

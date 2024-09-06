@@ -16,7 +16,7 @@ export default function LearningWorldSelectionRow({
       icon={icon}
       containerClassName="w-full"
       className="w-full xl:pl-8 "
-      shape="freefloatcenter"
+      shape="freeFloatCenter"
       onClick={onClickCallback}
       color={selected ? "pressed" : "default"}
     >

@@ -12,7 +12,7 @@ export default function StorySelection({
   return (
     <div className="flex flex-col items-center justify-center w-full row-span-4 gap-4 pb-16 lg:flex-row lg:pb-8">
       <StyledButton
-        shape="freefloatcenter"
+        shape="freeFloatCenter"
         onClick={() => controller.onIntroButtonClicked()}
         className="!text-xl w-32"
         data-testid="intro"
@@ -21,7 +21,7 @@ export default function StorySelection({
       </StyledButton>
 
       <StyledButton
-        shape="freefloatcenter"
+        shape="freeFloatCenter"
         onClick={() => controller.onOutroButtonClicked()}
         className="!text-xl w-32"
         data-testid="outro"

@@ -71,7 +71,7 @@ export default function AdaptivityElementQuestionSelection({
             className="flex items-center w-full gap-4 "
           >
             <StyledButton
-              shape="freefloatcenter"
+              shape="freeFloatCenter"
               className="w-full col-span-2 md:col-span-1"
               onClick={() => onSelectQuestion(question)}
             >
@@ -137,7 +137,7 @@ export default function AdaptivityElementQuestionSelection({
                   ) {
                     return (
                       <StyledButton
-                        shape="freefloatcenter"
+                        shape="freeFloatCenter"
                         className="w-full h-full "
                         key={"hint-" + hint.hintID}
                         onClick={() => onSelectHint(hint, question)}

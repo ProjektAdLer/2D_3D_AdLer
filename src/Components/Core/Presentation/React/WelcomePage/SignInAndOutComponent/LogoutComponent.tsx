@@ -39,7 +39,7 @@ export default function LogoutComponent({
       {userLoggedIn && (
         <StyledButton
           color={userLoggedIn ? "success" : "default"}
-          shape="freefloatleft"
+          shape="freeFloatLeft"
           data-testid="login-button"
           className="flex h-10 gap-2 m-1 !border-b-[1px] !border-r-[1px] pointer-events-none w-fit"
         >
@@ -53,7 +53,7 @@ export default function LogoutComponent({
       )}
       {userLoggedIn && (
         <StyledButton
-          shape="freefloatleft"
+          shape="freeFloatLeft"
           className="h-6 !bg-red-300 w-fit absolute bottom-[45px] right-1 portrait:-left-2 portrait:-top-4"
           onClick={() => controller.logout()}
           data-testid="logout"

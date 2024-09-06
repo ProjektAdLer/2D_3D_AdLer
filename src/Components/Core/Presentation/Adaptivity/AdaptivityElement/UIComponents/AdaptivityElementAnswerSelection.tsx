@@ -64,7 +64,7 @@ export default function AdaptivityElementAnswerSelection({
         {question.questionAnswers.map((answer, index) => (
           <StyledButton
             key={answer.answerIndex}
-            shape="freefloatcenter"
+            shape="freeFloatCenter"
             onClick={() => {
               onAnswerClicked(index);
             }}
@@ -82,7 +82,7 @@ export default function AdaptivityElementAnswerSelection({
       <div className="flex items-end justify-end gap-2 pt-8 font-bold lg:w-1/6">
         <StyledButton
           className="box-border "
-          shape="freefloatcenter"
+          shape="freeFloatCenter"
           onClick={() => {
             submitSelection();
           }}

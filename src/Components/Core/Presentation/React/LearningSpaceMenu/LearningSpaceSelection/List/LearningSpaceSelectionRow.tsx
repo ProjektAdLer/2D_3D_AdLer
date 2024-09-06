@@ -18,7 +18,7 @@ export default function LearningSpaceSelectionRow({
       icon={icon}
       containerClassName="w-full"
       className="xl:pl-8 w-[100%]"
-      shape="freefloatcenter"
+      shape="freeFloatCenter"
       onClick={onClickCallback}
       color={selected ? "pressed" : "default"}
     >

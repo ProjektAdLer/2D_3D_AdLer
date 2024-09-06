@@ -43,7 +43,7 @@ export default function AdaptivityElementHint({
           <div>{hint.hintAction.textData}</div>
         )}
       <div className="flex justify-end w-full">
-        <StyledButton shape="freefloatcenter" onClick={closeHint}>
+        <StyledButton shape="freeFloatCenter" onClick={closeHint}>
           <p className="text-sm">{translate("nextButton")}</p>
         </StyledButton>
       </div>

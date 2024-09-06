@@ -78,7 +78,7 @@ export default function AdaptivityElementTaskSelection({
             className="flex flex-col text-sm"
           >
             <StyledButton
-              shape="freefloatcenter"
+              shape="freeFloatCenter"
               className="w-full max-w-2xl"
               onClick={() => onSelectTask(task)}
             >

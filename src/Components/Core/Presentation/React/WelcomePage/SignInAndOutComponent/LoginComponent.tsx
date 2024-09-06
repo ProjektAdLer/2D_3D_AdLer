@@ -83,7 +83,7 @@ export default function LoginComponent({
               }}
             />
             <StyledButton
-              shape="freefloatcenter"
+              shape="freeFloatCenter"
               data-testid="loginButton"
               onClick={handleSubmit}
             >

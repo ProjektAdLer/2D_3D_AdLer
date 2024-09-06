@@ -42,7 +42,7 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
     >
       <StyledButton
         disabled={false}
-        shape="freefloatcenter"
+        shape="freeFloatCenter"
         className="flex w-[100%] mb-2 "
         onClick={controller.onExitButtonClicked}
       >
@@ -80,7 +80,7 @@ function createSpaceButton(
       icon={icon}
       key={learningSpaceTO.id}
       disabled={!learningSpaceTO.isAvailable}
-      shape="freefloatcenter"
+      shape="freeFloatCenter"
       className="flex w-[100%] mb-2"
       onClick={() =>
         controller.onPrecursorOrSuccessorSpaceClicked(learningSpaceTO.id)

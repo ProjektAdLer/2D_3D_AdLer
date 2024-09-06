@@ -65,7 +65,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
         {isAvailable && (
           <StyledButton
             color="highlight"
-            shape="freefloatleft"
+            shape="freeFloatLeft"
             className="self-center block m-2 portrait:p-2 justify-self-center animate-bounce-once bg-nodehandlecolor"
             onClick={controller.onLearningSpaceButtonClicked}
           >

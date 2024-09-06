@@ -64,7 +64,7 @@ export default function LoadingScreen() {
           {canClose && (
             <section className="w-full flex justify-center content-center h-12">
               <StyledButton
-                shape={"freefloatcenter"}
+                shape={"freeFloatCenter"}
                 onClick={() => controller.closeLoadingScreen()}
                 className="p-5 scale-60 lg:scale-90"
               >

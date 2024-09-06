@@ -16,7 +16,7 @@ export default function MoodleButton({ className }: AdLerUIComponent) {
 
   return (
     <StyledButton
-      shape="freefloatcenternopadding"
+      shape="freeFloatCenterNoPadding"
       containerClassName=" w-full lg:w-1/2 h-full"
       onClick={() => {
         window.open(viewModel.moodleUrl, "_self");

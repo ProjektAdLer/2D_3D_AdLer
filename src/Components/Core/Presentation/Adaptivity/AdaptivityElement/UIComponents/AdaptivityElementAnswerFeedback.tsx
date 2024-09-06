@@ -79,7 +79,7 @@ export default function AdaptivityElementAnswerFeedback({
         )}
       </div>
       <div className="flex justify-end w-full">
-        <StyledButton shape="freefloatcenter" onClick={closeFeedback}>
+        <StyledButton shape="freeFloatCenter" onClick={closeFeedback}>
           <p className="text-sm">{translate("nextButton")}</p>
         </StyledButton>
       </div>

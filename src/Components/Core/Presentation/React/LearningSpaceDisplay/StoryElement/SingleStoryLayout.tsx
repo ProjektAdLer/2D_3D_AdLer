@@ -32,7 +32,7 @@ export default function SingleStoryLayout({
         {withBackButton && (
           <>
             <StyledButton
-              shape="freefloatleft"
+              shape="freeFloatLeft"
               onClick={() => controller.onBackToSelectionButtonClicked()}
               data-testid="back"
             >
@@ -43,7 +43,7 @@ export default function SingleStoryLayout({
 
         {/* Storyelement abschließen Button */}
         <StyledButton
-          shape="freefloatcenter"
+          shape="freeFloatCenter"
           onClick={() => controller.closePanel()}
           data-testid="close"
         >
