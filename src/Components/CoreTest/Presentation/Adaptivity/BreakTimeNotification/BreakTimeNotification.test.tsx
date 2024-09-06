@@ -90,9 +90,7 @@ describe("BreakTimeNotification", () => {
 
     closeButton.click();
 
-    expect(
-      mockController.minimizeOrMaximizeBreakNotification
-    ).toHaveBeenCalledTimes(1);
+    expect(mockController.closeBreakNotification).toHaveBeenCalledTimes(1);
   });
 
   test.each([

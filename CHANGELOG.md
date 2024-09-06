@@ -15,6 +15,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - wrong space icon in SideBar to correct spaceMenuIcon
+- break time notification closes instead of minimizing from big modal
 
 ### Removed
 
