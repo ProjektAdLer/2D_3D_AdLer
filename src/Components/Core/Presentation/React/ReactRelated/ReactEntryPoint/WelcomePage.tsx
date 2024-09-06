@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import LogoutComponent from "~ReactComponents/WelcomePage/SignInAndOutComponent/LogoutComponent";
 import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
 import LMSButton from "~ReactComponents/WelcomePage/LMSButton/LMSButtonView";
-import { config } from "src/config";
 
 export default function WelcomePage() {
   const { t: translate } = useTranslation("start");
