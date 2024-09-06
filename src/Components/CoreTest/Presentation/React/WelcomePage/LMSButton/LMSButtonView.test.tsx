@@ -1,21 +1,21 @@
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
-import MoodleButton from "../../../../../Core/Presentation/React/WelcomePage/MoodleButton/MoodleButtonView";
-import MoodleButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/MoodleButton/MoodleButtonViewModel";
+import LMSButton from "../../../../../Core/Presentation/React/WelcomePage/LMSButton/LMSButtonView";
+import LMSButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/LMSButton/LMSButtonViewModel";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 
-let mockViewModel = new MoodleButtonViewModel();
+let mockViewModel = new LMSButtonViewModel();
 const windowMock = jest.spyOn(window, "open");
 
-describe("MoodleButton", () => {
+describe("LMSButton", () => {
   test("should render", () => {
     useBuilderMock([mockViewModel, undefined]);
 
     render(
       <Provider container={CoreDIContainer}>
-        <MoodleButton />
+        <LMSButton />
       </Provider>
     );
   });
@@ -23,7 +23,7 @@ describe("MoodleButton", () => {
   test("onClick should work", () => {
     const componentUnderTest = render(
       <Provider container={CoreDIContainer}>
-        <MoodleButton />
+        <LMSButton />
       </Provider>
     );
     fireEvent.click(componentUnderTest.getByRole("button"));

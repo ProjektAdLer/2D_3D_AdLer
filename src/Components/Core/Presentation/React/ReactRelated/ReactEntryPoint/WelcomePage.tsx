@@ -5,7 +5,7 @@ import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/Help
 import { useTranslation } from "react-i18next";
 import LogoutComponent from "~ReactComponents/WelcomePage/SignInAndOutComponent/LogoutComponent";
 import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
-import MoodleButton from "~ReactComponents/WelcomePage/MoodleButton/MoodleButtonView";
+import LMSButton from "~ReactComponents/WelcomePage/LMSButton/LMSButtonView";
 import { config } from "src/config";
 
 export default function WelcomePage() {
@@ -46,7 +46,7 @@ export default function WelcomePage() {
       <LogoutComponent className="relative z-0 flex flex-col self-end col-span-2 col-start-7 row-start-6 gap-2 justify-self-end" />
 
       {/* <CookieModal /> */}
-      {config.moodleURL !== undefined && <MoodleButton />}
+      <LMSButton />
 
       <p className="self-end p-2 text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1 portrait:col-span-6 portrait:text-xs landscape:col-span-4 landscape:col-start-3 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6">
         {translate("copyright")}
