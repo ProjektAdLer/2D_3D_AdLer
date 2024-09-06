@@ -40,12 +40,16 @@ import StoryElementBuilder from "~ReactComponents/LearningSpaceDisplay/StoryElem
 import CookieModalBuilder from "~ReactComponents/WelcomePage/CookieModal/CookieModalBuilder";
 import ReturnHomeModalBuilder from "~ReactComponents/LearningWorldMenu/ReturnHomeModal/ReturnHomeModalBuilder";
 import ControlsExplanationModalBuilder from "~ReactComponents/GeneralComponents/ControlsExplanationModal/ControlsExplanationModalBuilder";
+import MoodleButtonBuilder from "../../Presentation/React/WelcomePage/MoodleButton/MoodleButtonBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
     PresentationDirector
   );
 
+  bind<IPresentationBuilder>(BUILDER_TYPES.IMoodleButtonBuilder).to(
+    MoodleButtonBuilder
+  );
   bind<IPresentationBuilder>(BUILDER_TYPES.IHelpDeskButtonBuilder).to(
     HelpDeskButtonBuilder
   );

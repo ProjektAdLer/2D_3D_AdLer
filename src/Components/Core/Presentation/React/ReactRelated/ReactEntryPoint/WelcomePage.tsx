@@ -5,6 +5,8 @@ import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/Help
 import { useTranslation } from "react-i18next";
 import LogoutComponent from "~ReactComponents/WelcomePage/SignInAndOutComponent/LogoutComponent";
 import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
+import MoodleButton from "~ReactComponents/WelcomePage/MoodleButton/MoodleButtonView";
+import { config } from "src/config";
 
 export default function WelcomePage() {
   const { t: translate } = useTranslation("start");
@@ -23,10 +25,6 @@ export default function WelcomePage() {
         <h1 className="p-2 text-xl font-extrabold text-center justify-self-center portrait:text-xl lg:text-4xl 2xl:text-8xl">
           {translate("welcome")}
         </h1>
-        {/* <p className="-mt-3 text-lg text-center portrait:text-xs">
-          Loggen Sie sich zunächst in Moodle ein. Wählen Sie dann aus, wie es
-          weitergehen soll.
-        </p> */}
         <LoginComponent className="flex flex-col items-center justify-around col-span-6 col-start-2 xl:pt-8 lg:pt-4" />
       </section>
 
@@ -48,6 +46,7 @@ export default function WelcomePage() {
       <LogoutComponent className="relative z-0 flex flex-col self-end col-span-2 col-start-7 row-start-6 gap-2 justify-self-end" />
 
       {/* <CookieModal /> */}
+      {config.moodleURL !== undefined && <MoodleButton />}
 
       <p className="self-end p-2 text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1 portrait:col-span-6 portrait:text-xs landscape:col-span-4 landscape:col-start-3 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6">
         {translate("copyright")}

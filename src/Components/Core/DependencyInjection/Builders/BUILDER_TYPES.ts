@@ -41,6 +41,7 @@ const BUILDER_TYPES = {
   ICookieModalBuilder: Symbol("ICookieModalBuilder"),
   IReturnHomeModalBuilder: Symbol("IReturnHomeModalBuilder"),
   IControlsExplanationModalBuilder: Symbol("IControlsExplanationModalBuilder"),
+  IMoodleButtonBuilder: Symbol("IMoodleButtonBuilder"),
 };
 
 export default BUILDER_TYPES;
