@@ -6,6 +6,6 @@ export default class AdaptivityElementQuestionPresentationUpdateTO {
   };
   questionInfo: {
     questionId: number;
-    answers: [{ checked: boolean; correct: boolean }];
+    answers: { checked: boolean; correct: boolean }[];
   };
 }

@@ -11,12 +11,10 @@ export default class AdaptivityElementQuestionResponse {
     id: number;
     status: string;
     answers:
-      | [
-          {
-            checked: boolean;
-            correct: boolean;
-          }
-        ]
+      | {
+          checked: boolean;
+          correct: boolean;
+        }[]
       | undefined;
   };
 }
