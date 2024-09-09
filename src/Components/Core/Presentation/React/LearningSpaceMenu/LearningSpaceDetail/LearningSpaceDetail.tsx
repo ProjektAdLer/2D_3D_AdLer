@@ -30,7 +30,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
   >(viewModel.elements);
   const [requiredPoints] = useObservable<number>(viewModel.requiredPoints);
   const [spaces] = useObservable<LearningSpaceDetailLearningSpaceData[]>(
-    viewModel.spaces
+    viewModel.spaces,
   );
   const [isAvailable] = useObservable<boolean>(viewModel.isAvailable);
 
@@ -52,7 +52,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
     <main
       className={tailwindMerge(
         className,
-        "flex flex-col gap-2 w-full self-start h-[100svh] portrait:h-[45svh]"
+        "flex flex-col gap-2 w-full self-start h-[100svh] portrait:h-[45svh]",
       )}
     >
       <article className="flex flex-row portrait:flex-col portrait:items-between portrait:justify-center portrait:h-[25%] portrait:gap-2 items-center justify-between h-[10%] p-1 pb-4 border-b border-gray-500">
@@ -66,7 +66,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
           <StyledButton
             color="highlight"
             shape="freeFloatLeft"
-            className="self-center block m-2 portrait:p-2 justify-self-center animate-bounce-once bg-nodehandlecolor"
+            className="self-center block m-2 portrait:p-2 justify-self-center animate-bounce-once font-bold bg-nodehandlecolor"
             onClick={controller.onLearningSpaceButtonClicked}
           >
             {translate("learningSpaceButton")}
