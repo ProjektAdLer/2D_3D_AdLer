@@ -29,7 +29,7 @@ module.exports = {
     config.preset = "ts-jest";
     config.testEnvironment = "jsdom";
     config.transformIgnorePatterns = [
-      "<rootDir>/node_modules/(?!((@babylonjs)|(axios)|(earcut)|(history)(.*)))",
+      "<rootDir>/node_modules/(?!((@babylonjs)|(history)(.*)))",
     ];
     config.testPathIgnorePatterns = ["<rootDir>/node_modules/"];
     config.collectCoverage = true;

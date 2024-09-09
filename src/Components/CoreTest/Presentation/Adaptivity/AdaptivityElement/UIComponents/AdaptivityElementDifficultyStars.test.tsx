@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import React from "react";
 import AdaptivityElementDifficultyStars, {
   AdaptivityElementDifficultyStarState,
@@ -21,27 +21,25 @@ describe("AdaptivityElementDifficultyStars", () => {
         mediumState={state}
         hardState={state}
         starClassName=""
-      />,
+      />
     );
     expect(container).toMatchSnapshot();
   });
 
   test("should only render one star with withEmptySlots set to false and only easy set to required solved", () => {
-    const { getAllByRole, getAllByTestId, getByTestId } = render(
+    const { getAllByRole, getAllByTestId } = render(
       <AdaptivityElementDifficultyStars
         easyState={AdaptivityElementDifficultyStarState.RequiredSolved}
         mediumState={AdaptivityElementDifficultyStarState.Empty}
         hardState={AdaptivityElementDifficultyStarState.Empty}
         starClassName=""
         withEmptySlots={false}
-      />,
+      />
     );
 
-    waitFor(() => {
-      expect(getAllByRole("img").length).toEqual(1);
-    });
+    expect(getAllByRole("img").length).toBe(1);
     expect(() => {
       getAllByTestId("empty-star-slot");
-    }).toThrow("Unable to find an element");
+    }).toThrowError("Unable to find an element");
   });
 });
