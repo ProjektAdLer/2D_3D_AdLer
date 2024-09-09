@@ -6,6 +6,7 @@ import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";
 import LMSButtonController from "./LMSButtonController";
+import moodleIcon from "../../../../../../Assets/icons/16-moodle/moodle-icon-nobg.svg";
 
 export default function LMSButton({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
@@ -18,15 +19,13 @@ export default function LMSButton({ className }: AdLerUIComponent) {
 
   return (
     <StyledButton
-      shape="freeFloatCenterNoPadding"
-      containerClassName=" w-full lg:w-1/2 h-full"
+      shape="freeFloatCenter"
+      containerClassName=" w-full h-full"
       onClick={controller.openLMSPage}
-      className={
-        `relative !px-0 !py-0 flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover !bg-learningworldbg` +
-        tailwindMerge(className)
-      }
+      className={`relative gap-2 flex m-2` + tailwindMerge(className)}
     >
-      {translate("moodleButton")}
+      <img className="w-[35px] lg:w-[50px]" src={moodleIcon} alt="icon" />
+      <p className="portrait:hidden font-bold">{translate("moodleButton")}</p>
     </StyledButton>
   );
 }
