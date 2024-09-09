@@ -21,8 +21,8 @@ export default function LoadingScreen() {
   if (!viewModel || !controller || !isOpen) return null;
 
   return (
-    <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-start">
-      <div className="grid grid-rows-8 max-h-[1000px] 2xl:pt-8">
+    <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-center pb-24">
+      <div className="grid grid-rows-8 max-h-[1000px]">
         <section className="row-span-2 portrait:row-span-2 grid grid-cols-2 portrait:flex w-full justify-center items-center gap-8 portrait:gap-8 ">
           <img
             className="w-full m-4 xs:w-16 md:w-24 lg:w-32 xl:w-48 portrait:w-16 animate-wiggle place-self-end"
