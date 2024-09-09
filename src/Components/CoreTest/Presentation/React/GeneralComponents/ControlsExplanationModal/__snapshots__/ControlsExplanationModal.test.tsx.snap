@@ -37,7 +37,7 @@ exports[`ControlsExplanationModal should render 1`] = `
           class="px-1 overflow-auto rounded-lg font-regular h-fit"
         >
           <div
-            class="max-h-[80vh] max-w-6xl grid grid-cols-4 portrait:grid-cols-1 gap-8 pb-4 text-xs lg:text-sm overflow-y-auto"
+            class="portrait:max-w-[90vw] max-h-[80vh] max-w-6xl grid grid-cols-4 portrait:grid-cols-1 gap-8 pb-4 text-xs lg:text-sm overflow-y-auto"
           >
             <div
               class="flex flex-col gap-4"
