@@ -43,7 +43,7 @@ export default function LoadingScreen() {
           </h1>
           <ControlsExplanationContent className="gap-4 bg-buttonbgblue p-4 rounded-xl" />
         </div>
-        <div className="flex flex-col justify-center items-center pt-16 portrait:pt-8">
+        <div className="flex flex-col justify-center items-center pt-16 portrait:pt-8 h-16">
           {!canClose && (
               <div className="flex gap-1 rounded-lg border-4 border-white ">
                 <div className="w-6 h-6 animateColor" ></div>

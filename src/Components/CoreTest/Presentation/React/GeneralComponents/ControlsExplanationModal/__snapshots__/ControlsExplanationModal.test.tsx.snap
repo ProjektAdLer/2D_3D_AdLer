@@ -214,6 +214,13 @@ exports[`ControlsExplanationModal should render 1`] = `
                 </p>
               </div>
             </div>
+            <div
+              class="col-span-4 portrait:col-span-1 flex flex-col gap-1 text-center portrait:text-start text-xs"
+            >
+              <p>
+                Sie können die Steuerungs-Erklärung jederzeit über das Menü in der 3D-Ansicht erneut aufrufen.
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -180,6 +180,13 @@ exports[`ControlsExplanationContent should render 1`] = `
         </p>
       </div>
     </div>
+    <div
+      class="col-span-4 portrait:col-span-1 flex flex-col gap-1 text-center portrait:text-start text-xs"
+    >
+      <p>
+        confirmation
+      </p>
+    </div>
   </div>
 </div>
 `;
