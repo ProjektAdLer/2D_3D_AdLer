@@ -22,10 +22,10 @@ export default function LoadingScreen() {
 
   return (
     <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-start">
-      <div className="grid grid-rows-8  max-h-[1000px] portrait:max-h-[50vh] xl:pt-24">
-        <section className="row-span-2 portrait:row-span-2 flex w-full justify-center items-center gap-8 portrait:gap-8 portrait:px-4">
+      <div className="grid grid-rows-8 max-h-[1000px] 2xl:pt-8">
+        <section className="row-span-2 portrait:row-span-2 grid grid-cols-2 portrait:flex w-full justify-center items-center gap-8 portrait:gap-8 ">
           <img
-            className="w-full m-4 xs:w-16 md:w-24 lg:w-32 xl:w-48 portrait:w-16 animate-wiggle"
+            className="w-full m-4 xs:w-16 md:w-24 lg:w-32 xl:w-48 portrait:w-16 animate-wiggle place-self-end"
             src={logo}
             alt="AdlerEngine Logo"
           />
@@ -43,26 +43,24 @@ export default function LoadingScreen() {
           </h1>
           <ControlsExplanationContent className="gap-4 bg-buttonbgblue p-4 rounded-xl" />
         </div>
-        <div className="w-full flex justify-center items-center pt-16 portrait:pt-8 ">
+        <div className="flex flex-col justify-center items-center pt-16 portrait:pt-8">
           {!canClose && (
-            <section className="w-full h-12 flex justify-center content-center">
-              <div className="flex scale-60 rounded-lg lg:scale-50 border-4 border-white">
-                <div className="w-10 h-10 mx-1 animate-loadtileone bg-adlerdarkblue"></div>
-                <div className="w-10 h-10 mx-1 animate-loadtiletwo bg-adlerdarkblue"></div>
-                <div className="w-10 h-10 mx-1 animate-loadtilethree bg-adlerdarkblue"></div>
-                <div className="w-10 h-10 mx-1 animate-loadtilefour bg-adlerdarkblue"></div>
-                <div className="w-10 h-10 mx-1 animate-loadtilefive bg-adlerdarkblue"></div>
-                <div className="w-10 h-10 mx-1 animate-loadtilesix bg-adlerdarkblue"></div>
-                <div className="w-10 h-10 mx-1 animate-loadtileseven bg-adlerdarkblue"></div>
-                <div className="w-10 h-10 mx-1 animate-loadtileeight bg-adlerdarkblue"></div>
-                <div className="w-10 h-10 mx-1 animate-loadtilenine bg-adlerdarkblue"></div>
-                <div className="w-10 h-10 mx-1 animate-loadtileten bg-adlerdarkblue"></div>
+              <div className="flex gap-1 rounded-lg border-4 border-white ">
+                <div className="w-6 h-6 animateColor" ></div>
+                <div className="w-6 h-6 animateColor1"></div>
+                <div className="w-6 h-6 animateColor2"></div>
+                <div className="w-6 h-6 animateColor3"></div>
+                <div className="w-6 h-6 animateColor4"></div>
+                <div className="w-6 h-6 animateColor5"></div>
+                <div className="w-6 h-6 animateColor6"></div>
+                <div className="w-6 h-6 animateColor7"></div>
+                <div className="w-6 h-6 animateColor8"></div>
+                <div className="w-6 h-6 animateColor9"></div>
               </div>
-            </section>
           )}
 
           {canClose && (
-            <section className="w-full flex justify-center content-center h-12">
+            <section className="flex justify-center h-12">
               <StyledButton
                 shape={"freeFloatCenter"}
                 onClick={() => controller.closeLoadingScreen()}
@@ -75,7 +73,7 @@ export default function LoadingScreen() {
         </div>
       </div>
       <div className="fixed bottom-4 w-full flex flex-col justify-center items-center gap-2 px-4">
-        <p className="text-sm portrait:text-[10px] font-medium  text-adlerdarkblue">
+        <p className="text-sm portrait:text-[10px] font-medium  text-adlerdarkblue portrait:leading-normal">
           <Trans
             i18nKey="projectInformation"
             ns="learningSpace"
@@ -95,7 +93,7 @@ export default function LoadingScreen() {
           />
         </p>
 
-        <p className="text-xs portrait:text-[8px]">
+        <p className="text-xs portrait:text-[8px] portrait:leading-normal">
           {translate("copyright", { ns: "start" })}
         </p>
       </div>

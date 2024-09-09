@@ -1,6 +1,7 @@
 {
   "title": "3D-Steuerung",
 
+  "confirmationHeading": "Hinweis",
   "confirmation": "Sie können die Steuerungs-Erklärung jederzeit über das Menü in der 3D-Ansicht erneut aufrufen.",
 
   "controlAvatar": "Avatar bewegen",

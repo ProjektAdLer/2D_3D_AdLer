@@ -46,6 +46,104 @@ body {
   background-color: #a1c8e5;
 }
 
+/*Animiertes Styling für LadeBalken im Ladescreen */
+.animateColor {
+  background-color: #172d4d;
+  animation-name: loadingColor;
+  animation-duration: 10s;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+}
+
+.animateColor1 {
+  background-color: #172d4d;
+  animation-name: loadingColor;
+  animation-duration: 10s;
+  animation-delay: 1s;
+  animation-iteration-count: infinite;
+}
+
+.animateColor2 {
+  background-color: #172d4d;
+  animation-name: loadingColor;
+  animation-duration: 10s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+}
+
+.animateColor3 {
+  background-color: #172d4d;
+  animation-name: loadingColor;
+  animation-duration: 10s;
+  animation-delay: 3s;
+  animation-iteration-count: infinite;
+} 
+
+.animateColor4 {
+  background-color: #172d4d;
+  animation-name: loadingColor;
+  animation-duration: 10s;
+  animation-delay: 4s;
+  animation-iteration-count: infinite;
+}
+
+.animateColor5 {
+  background-color: #172d4d;
+  animation-name: loadingColor;
+  animation-duration: 10s;
+  animation-delay: 5s;
+  animation-iteration-count: infinite;
+}
+
+.animateColor6 {
+  background-color: #172d4d;
+  animation-name: loadingColor;
+  animation-duration: 10s;
+  animation-delay: 6s;
+  animation-iteration-count: infinite;
+}
+
+.animateColor7 {
+  background-color: #172d4d;
+  animation-name: loadingColor;
+  animation-duration: 10s;
+  animation-delay: 7s;
+  animation-iteration-count: infinite;
+} 
+
+.animateColor8 {
+  background-color: #172d4d;
+  animation-name: loadingColor;
+  animation-duration: 10s;
+  animation-delay: 8s;
+  animation-iteration-count: infinite;
+} 
+
+.animateColor9 {
+  background-color: #172d4d;
+  animation-name: loadingColor;
+  animation-duration: 10s;
+  animation-delay: 9s;
+  animation-iteration-count: infinite;
+}
+
+.animateColor10 {
+  background-color: #172d4d;
+  animation-name: loadingColor;
+  animation-duration: 10s;
+  animation-delay: 10s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes loadingColor {
+  0%, 20% {
+    background-color: #172d4d;
+  }
+  10% {
+    background-color: #e9d6b3;
+  }
+}
+
 /*Styles für die Anzeige des Inspectors*/
 
 #inspector-host,
