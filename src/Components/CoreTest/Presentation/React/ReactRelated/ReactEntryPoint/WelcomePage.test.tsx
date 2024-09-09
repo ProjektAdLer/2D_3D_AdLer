@@ -9,6 +9,9 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 jest.mock(
   "../../../../../Core/Presentation/React/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView.tsx"
 );
+jest.mock(
+  "../../../../../Core/Presentation/React/WelcomePage/LMSButton/LMSButtonView.tsx"
+);
 
 describe("Welcome Page", () => {
   test("should render", () => {
