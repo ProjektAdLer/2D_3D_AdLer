@@ -48,33 +48,36 @@ exports[`ControlsExplanationModal should render 1`] = `
                 Avatar bewegen
               </h3>
               <div
-                class="flex flex-row gap-2"
+                class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
               >
                 <img
-                  alt="Icon"
+                  alt="Linksklick"
                   class="w-6"
+                  src="left-click.svg"
                 />
                 <p>
                   Linksklick auf eine Position
                 </p>
               </div>
               <div
-                class="flex flex-row gap-2"
+                class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
               >
                 <img
-                  alt="Icon"
+                  alt="Einfacher Touch"
                   class="w-6"
+                  src="touch.svg"
                 />
                 <p>
                   Einfacher Touch auf eine Position
                 </p>
               </div>
               <div
-                class="flex flex-row gap-2"
+                class=" flex flex-row gap-2 justify-start items-start"
               >
                 <img
                   alt="Icon"
                   class="w-6"
+                  src="hint.svg"
                 />
                 <p>
                   Der Avatar kann nur innerhlab des mit Fussboden begrenzten Raums bewegt werden
@@ -90,33 +93,36 @@ exports[`ControlsExplanationModal should render 1`] = `
                 Inhalte öffnen
               </h3>
               <div
-                class="flex flex-row gap-2"
+                class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
               >
                 <img
                   alt="Icon"
                   class="w-6"
+                  src="left-click.svg"
                 />
                 <p>
                   Linksklick auf ein 3D Objekt
                 </p>
               </div>
               <div
-                class="flex flex-row gap-2"
+                class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
               >
                 <img
                   alt="Icon"
                   class="w-6"
+                  src="touch.svg"
                 />
                 <p>
                   Einfacher Touch auf ein 3D Objekt
                 </p>
               </div>
               <div
-                class="flex flex-row gap-2"
+                class="flex flex-row gap-2 justify-start items-start"
               >
                 <img
                   alt="Icon"
                   class="w-6"
+                  src="hint.svg"
                 />
                 <div
                   class="flex flex-col gap-1"
@@ -139,33 +145,36 @@ exports[`ControlsExplanationModal should render 1`] = `
                 Kamera drehen
               </h3>
               <div
-                class="flex flex-row gap-2"
+                class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
               >
                 <img
                   alt="Icon"
                   class="w-6"
+                  src="middle-mouse-click-and-drag.svg"
                 />
                 <p>
                   Mausrad drücken und seitliche Bewegung
                 </p>
               </div>
               <div
-                class="flex flex-row gap-2"
+                class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
               >
                 <img
                   alt="Icon"
                   class="w-6"
+                  src="touch-and-drag.svg"
                 />
                 <p>
                   Einfacher Touch und seitliche Bewegung
                 </p>
               </div>
               <div
-                class="flex flex-row gap-2"
+                class="flex flex-row gap-2 justify-start items-start"
               >
                 <img
                   alt="Icon"
                   class="w-6"
+                  src="hint.svg"
                 />
                 <p>
                   Die Kamera ist um 45° nach links und rechts schwenkbar
@@ -181,33 +190,36 @@ exports[`ControlsExplanationModal should render 1`] = `
                 Kamera zoomen
               </h3>
               <div
-                class="flex flex-row gap-2"
+                class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
               >
                 <img
                   alt="Icon"
                   class="w-6"
+                  src="middle-mouse-click.svg"
                 />
                 <p>
                   Mausrad drehen
                 </p>
               </div>
               <div
-                class="flex flex-row gap-2"
+                class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
               >
                 <img
                   alt="Icon"
                   class="w-6"
+                  src="touch-zoom.svg"
                 />
                 <p>
                   Zwei Touchpunkte entfernen / annäheren
                 </p>
               </div>
               <div
-                class="flex flex-row gap-2"
+                class="flex flex-row gap-2 justify-start items-start"
               >
                 <img
                   alt="Icon"
                   class="w-6"
+                  src="hint.svg"
                 />
                 <p>
                   Die Kamera ist in einem bestimmen Nah- und Fernbereich zoombar
