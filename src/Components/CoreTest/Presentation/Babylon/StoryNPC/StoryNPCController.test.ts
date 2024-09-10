@@ -25,13 +25,13 @@ describe("StoryNPCController", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(CORE_TYPES.INavigation).toConstantValue(
-      navigationMock
+      navigationMock,
     );
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.IStoryElementPresenter
+      PRESENTATION_TYPES.IStoryElementPresenter,
     ).toConstantValue(storyElementPresenterMock);
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
+      PRESENTATION_TYPES.IBottomTooltipPresenter,
     ).toConstantValue(bottomTooltipPresenterMock);
   });
 
@@ -64,8 +64,8 @@ describe("StoryNPCController", () => {
       new Vector3(
         viewModel.iconScaleUpOnHover,
         viewModel.iconScaleUpOnHover,
-        viewModel.iconScaleUpOnHover
-      )
+        viewModel.iconScaleUpOnHover,
+      ),
     );
   });
 
@@ -126,5 +126,21 @@ describe("StoryNPCController", () => {
     systemUnderTest.picked();
 
     expect(viewModel.state.Value).toBe(StoryNPCState.Stop);
+  });
+
+  test("onAvatarInteractableChange calls displayTooltip when isInteractable is true", () => {
+    viewModel.isInteractable.Value = true; // should automatically call onAvatarInteractableChange
+
+    expect(bottomTooltipPresenterMock.display).toHaveBeenCalledTimes(1);
+  });
+
+  test("onAvatarInteractableChange calls hide on bottomTooltipPresenter when isInteractable is false", () => {
+    systemUnderTest["proximityToolTipId"] = 42; // set tooltip id to non-default value
+
+    viewModel.isInteractable.Value = true; // set to true to call display
+    viewModel.isInteractable.Value = false; // should automatically call onAvatarInteractableChange
+
+    expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
+    expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledWith(42);
   });
 });

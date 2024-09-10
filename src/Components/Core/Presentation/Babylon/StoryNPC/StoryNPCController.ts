@@ -19,7 +19,7 @@ export default class StoryNPCController implements IStoryNPCController {
 
   constructor(private viewModel: StoryNPCViewModel) {
     this.bottomTooltipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
+      PRESENTATION_TYPES.IBottomTooltipPresenter,
     );
     this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
@@ -61,9 +61,10 @@ export default class StoryNPCController implements IStoryNPCController {
           this.viewModel.state.Value +
           "isInteractable: " +
           this.viewModel.isInteractable.Value +
-          ")"
+          ")",
       );
   }
+
   @bind
   private onAvatarInteractableChange(isInteractable: boolean): void {
     if (isInteractable && this.proximityToolTipId === -1) {
@@ -75,18 +76,27 @@ export default class StoryNPCController implements IStoryNPCController {
   }
 
   private displayTooltip(): number {
-    let tooltipText: string;
-    if (this.viewModel.storyType === StoryElementType.Intro)
-      tooltipText = i18next.t("introNPC", { ns: "learningSpace" });
-    else if (this.viewModel.storyType === StoryElementType.Outro)
-      tooltipText = i18next.t("outroNPC", { ns: "learningSpace" });
-    else tooltipText = i18next.t("introOutroNPC", { ns: "learningSpace" });
+    const tooltipText = i18next.t(
+      (() => {
+        switch (this.viewModel.storyType) {
+          case StoryElementType.Intro:
+            return "introNPC";
+          case StoryElementType.Outro:
+            return "outroNPC";
+          case StoryElementType.IntroOutro:
+          case StoryElementType.None:
+          default:
+            return "introOutroNPC";
+        }
+      })(),
+      { ns: "learningSpace" },
+    );
 
     return this.bottomTooltipPresenter.display(
       tooltipText,
       undefined,
       undefined,
-      this.picked
+      this.picked,
     );
   }
 
@@ -95,7 +105,7 @@ export default class StoryNPCController implements IStoryNPCController {
       mesh.scaling = new Vector3(
         mesh.scaling._x * this.viewModel.iconScaleUpOnHover,
         mesh.scaling._y * this.viewModel.iconScaleUpOnHover,
-        mesh.scaling._z * this.viewModel.iconScaleUpOnHover
+        mesh.scaling._z * this.viewModel.iconScaleUpOnHover,
       );
     });
   }
