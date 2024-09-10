@@ -22,8 +22,8 @@ export default function LoadingScreen() {
 
   return (
     <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-center pb-24">
-      <div className="grid grid-rows-8 max-h-[1000px]">
-        <section className="row-span-2 portrait:row-span-2 grid grid-cols-2 portrait:flex w-full justify-center items-center gap-8 portrait:gap-8 ">
+      <div className="grid max-h-[1000px]">
+        <section className="row-span-2 portrait:row-span-2 grid grid-cols-2 portrait:flex w-full justify-center items-center gap-8 ">
           <img
             className="w-full m-4 xs:w-16 md:w-24 lg:w-32 xl:w-48 portrait:w-16 animate-wiggle place-self-end"
             src={logo}
@@ -45,18 +45,18 @@ export default function LoadingScreen() {
         </div>
         <div className="flex flex-col justify-center items-center pt-16 portrait:pt-8 h-16">
           {!canClose && (
-              <div className="flex gap-1 rounded-lg border-4 border-white ">
-                <div className="w-6 h-6 animateColor" ></div>
-                <div className="w-6 h-6 animateColor1"></div>
-                <div className="w-6 h-6 animateColor2"></div>
-                <div className="w-6 h-6 animateColor3"></div>
-                <div className="w-6 h-6 animateColor4"></div>
-                <div className="w-6 h-6 animateColor5"></div>
-                <div className="w-6 h-6 animateColor6"></div>
-                <div className="w-6 h-6 animateColor7"></div>
-                <div className="w-6 h-6 animateColor8"></div>
-                <div className="w-6 h-6 animateColor9"></div>
-              </div>
+            <div className="flex gap-1 rounded-lg border-4 border-white ">
+              <div className="w-6 h-6 animateColor"></div>
+              <div className="w-6 h-6 animateColor1"></div>
+              <div className="w-6 h-6 animateColor2"></div>
+              <div className="w-6 h-6 animateColor3"></div>
+              <div className="w-6 h-6 animateColor4"></div>
+              <div className="w-6 h-6 animateColor5"></div>
+              <div className="w-6 h-6 animateColor6"></div>
+              <div className="w-6 h-6 animateColor7"></div>
+              <div className="w-6 h-6 animateColor8"></div>
+              <div className="w-6 h-6 animateColor9"></div>
+            </div>
           )}
 
           {canClose && (
