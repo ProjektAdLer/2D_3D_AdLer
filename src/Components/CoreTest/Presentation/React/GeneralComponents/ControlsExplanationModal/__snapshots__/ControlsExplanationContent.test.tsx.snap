@@ -3,200 +3,177 @@
 exports[`ControlsExplanationContent should render 1`] = `
 <div>
   <div
-    class="grid grid-cols-4 portrait:grid-cols-1 gap-8 pb-4 text-xs lg:text-sm overflow-y-auto"
+    class="grid landscape:grid-rows-6 landscape:grid-flow-col portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto gap-x-8 landscape:gap-y-2 portrait:gap-6 pb-4 text-xs lg:text-sm"
   >
-    <div
-      class="flex flex-col gap-4"
+    <h3
+      class="font-bold self-center text-adlerdarkblue"
     >
-      <h3
-        class="font-bold"
-      >
-        controlAvatar
-      </h3>
-      <div
-        class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
-      >
-        <img
-          alt="Linksklick"
-          class="w-6"
-          src="left-click.svg"
-        />
-        <p>
-          controlAvatarMouse
-        </p>
-      </div>
-      <div
-        class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
-      >
-        <img
-          alt="Einfacher Touch"
-          class="w-6"
-          src="touch.svg"
-        />
-        <p>
-          controlAvatarTouch
-        </p>
-      </div>
-      <div
-        class=" flex flex-row gap-2 justify-start items-start"
-      >
-        <img
-          alt="Icon"
-          class="w-6"
-          src="hint.svg"
-        />
-        <p>
-          controlAvatarHint
-        </p>
-      </div>
-    </div>
+      controlAvatar
+    </h3>
     <div
-      class="flex flex-col gap-4"
+      class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
     >
-      <h3
-        class="font-bold"
-      >
-        openContent
-      </h3>
-      <div
-        class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
-      >
-        <img
-          alt="Icon"
-          class="w-6"
-          src="left-click.svg"
-        />
-        <p>
-          openContentMouse
-        </p>
-      </div>
-      <div
-        class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
-      >
-        <img
-          alt="Icon"
-          class="w-6"
-          src="touch.svg"
-        />
-        <p>
-          openContentTouch
-        </p>
-      </div>
-      <div
-        class="flex flex-row gap-2 justify-start items-start"
-      >
-        <img
-          alt="Icon"
-          class="w-6"
-          src="hint.svg"
-        />
-        <div
-          class="flex flex-col gap-1"
-        >
-          <p>
-            openContentHint1
-          </p>
-          <p>
-            openContentHint2
-          </p>
-        </div>
-      </div>
-    </div>
-    <div
-      class="flex flex-col gap-4"
-    >
-      <h3
-        class="font-bold"
-      >
-        rotateCamera
-      </h3>
-      <div
-        class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
-      >
-        <img
-          alt="Icon"
-          class="w-6"
-          src="middle-mouse-click-and-drag.svg"
-        />
-        <p>
-          rotateCameraMouse
-        </p>
-      </div>
-      <div
-        class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
-      >
-        <img
-          alt="Icon"
-          class="w-6"
-          src="touch-and-drag.svg"
-        />
-        <p>
-          rotateCameraTouch
-        </p>
-      </div>
-      <div
-        class="flex flex-row gap-2 justify-start items-start"
-      >
-        <img
-          alt="Icon"
-          class="w-6"
-          src="hint.svg"
-        />
-        <p>
-          rotateCameraHint
-        </p>
-      </div>
-    </div>
-    <div
-      class="flex flex-col gap-4"
-    >
-      <h3
-        class="font-bold"
-      >
-        zoomCamera
-      </h3>
-      <div
-        class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
-      >
-        <img
-          alt="Icon"
-          class="w-6"
-          src="middle-mouse-click.svg"
-        />
-        <p>
-          zoomCameraMouse
-        </p>
-      </div>
-      <div
-        class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
-      >
-        <img
-          alt="Icon"
-          class="w-6"
-          src="touch-zoom.svg"
-        />
-        <p>
-          zoomCameraTouch
-        </p>
-      </div>
-      <div
-        class="flex flex-row gap-2 justify-start items-start"
-      >
-        <img
-          alt="Icon"
-          class="w-6"
-          src="hint.svg"
-        />
-        <p>
-          zoomCameraHint
-        </p>
-      </div>
-    </div>
-    <div
-      class="col-span-4 portrait:col-span-1 flex flex-col gap-1 text-center portrait:text-start text-xs"
-    >
+      <img
+        alt="Linksklick"
+        class="w-6"
+        src="left-click.svg"
+      />
       <p>
-        confirmation
+        controlAvatarMouse
+      </p>
+    </div>
+    <div
+      class="flex flex-row gap-2 justify-start items-start"
+    >
+      <img
+        alt="Einfacher Touch"
+        class="w-6"
+        src="touch.svg"
+      />
+      <p>
+        controlAvatarTouch
+      </p>
+    </div>
+    <div
+      class="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6"
+    >
+      <img
+        alt="Icon"
+        class="w-6"
+        src="hint.svg"
+      />
+      <p>
+        controlAvatarHint
+      </p>
+    </div>
+    <h3
+      class="font-bold  self-center text-adlerdarkblue"
+    >
+      openContent
+    </h3>
+    <div
+      class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
+    >
+      <img
+        alt="Icon"
+        class="w-6"
+        src="left-click.svg"
+      />
+      <p>
+        openContentMouse
+      </p>
+    </div>
+    <div
+      class="flex flex-row gap-2 justify-start items-start"
+    >
+      <img
+        alt="Icon"
+        class="w-6"
+        src="touch.svg"
+      />
+      <p>
+        openContentTouch
+      </p>
+    </div>
+    <div
+      class="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6"
+    >
+      <img
+        alt="Icon"
+        class="w-6"
+        src="hint.svg"
+      />
+      <div
+        class="flex flex-col gap-1"
+      >
+        <p>
+          openContentHint1
+        </p>
+        <p>
+          openContentHint2
+        </p>
+      </div>
+    </div>
+    <h3
+      class="font-bold  self-center text-adlerdarkblue"
+    >
+      rotateCamera
+    </h3>
+    <div
+      class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
+    >
+      <img
+        alt="Icon"
+        class="w-6"
+        src="middle-mouse-click-and-drag.svg"
+      />
+      <p>
+        rotateCameraMouse
+      </p>
+    </div>
+    <div
+      class="flex flex-row gap-2 justify-start items-start"
+    >
+      <img
+        alt="Icon"
+        class="w-6"
+        src="touch-and-drag.svg"
+      />
+      <p>
+        rotateCameraTouch
+      </p>
+    </div>
+    <div
+      class="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6"
+    >
+      <img
+        alt="Icon"
+        class="w-6"
+        src="hint.svg"
+      />
+      <p>
+        rotateCameraHint
+      </p>
+    </div>
+    <h3
+      class="font-bold  self-center text-adlerdarkblue"
+    >
+      zoomCamera
+    </h3>
+    <div
+      class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
+    >
+      <img
+        alt="Icon"
+        class="w-6"
+        src="middle-mouse-click.svg"
+      />
+      <p>
+        zoomCameraMouse
+      </p>
+    </div>
+    <div
+      class="flex flex-row gap-2 justify-start items-start"
+    >
+      <img
+        alt="Icon"
+        class="w-6"
+        src="touch-zoom.svg"
+      />
+      <p>
+        zoomCameraTouch
+      </p>
+    </div>
+    <div
+      class="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6"
+    >
+      <img
+        alt="Icon"
+        class="w-6"
+        src="hint.svg"
+      />
+      <p>
+        zoomCameraHint
       </p>
     </div>
   </div>
