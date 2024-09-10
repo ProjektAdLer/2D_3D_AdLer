@@ -18,7 +18,7 @@ export default function ControlsExplanationContent({
     <div
       className={tailwindMerge(
         className,
-        "grid landscape:grid-rows-6 landscape:grid-flow-col portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto gap-x-8 landscape:gap-y-2 portrait:gap-6 pb-4 text-xs lg:text-sm ",
+        "grid landscape:grid-rows-6 landscape:grid-flow-col portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto gap-x-8 landscape:gap-y-3 portrait:gap-6 pb-4 text-xs lg:text-sm ",
       )}
     >
       {/* Avatar Controls */}
