@@ -31,14 +31,14 @@ export default function LoadingScreen() {
           />
 
           {viewModel.loadStep.Value && (
-            <p className="text-sm lg:text-lg xl:text-xl">
+            <p className="text-sm font-bold lg:text-lg xl:text-xl text-adlerdarkblue">
               {viewModel.loadStep.Value}
             </p>
           )}
         </section>
 
         <div className="row-span-4 w-[85vw] max-w-6xl portrait:h-[60vh] flex flex-col justify-center">
-          <h1 className="pl-4 pb-1 font-bold">
+          <h1 className="pl-4 pb-1 font-bold text-adlerdarkblue">
             {translate("sidebar_controls")}
           </h1>
           <ControlsExplanationContent className="gap-4 bg-buttonbgblue p-4 rounded-xl" />
@@ -64,7 +64,7 @@ export default function LoadingScreen() {
               <StyledButton
                 shape={"freeFloatCenter"}
                 onClick={() => controller.closeLoadingScreen()}
-                className="p-5 scale-60 lg:scale-90"
+                className="p-5 scale-60 lg:scale-90 font-bold"
               >
                 {translate("enterLearningSpace")}
               </StyledButton>
