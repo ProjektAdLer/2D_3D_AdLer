@@ -1,6 +1,7 @@
 import AWT from "../Types/AWT";
 import { MockAdaptivityData } from "./MockAdaptivityData";
 
+/* istanbul ignore next */
 const SmallWorldAWT: AWT = {
   fileVersion: "0.4",
   amgVersion: "1.0",

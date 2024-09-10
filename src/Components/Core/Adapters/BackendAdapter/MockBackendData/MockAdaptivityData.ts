@@ -1,6 +1,7 @@
 import { APIAdaptivity } from "../Types/AWT";
 import AdaptivityElementStatusResponse from "../Types/AdaptivityElementStatusResponse";
 
+/* istanbul ignore next */
 export const MockAdaptivityData: APIAdaptivity = {
   introText: "Hier wird das Adaptivitätselement erklärt",
   adaptivityTasks: [
@@ -499,6 +500,7 @@ export const MockAdaptivityData: APIAdaptivity = {
   ],
 };
 
+/* istanbul ignore next */
 export const MockAdaptivityElementStatusResponse: AdaptivityElementStatusResponse =
   {
     element: {

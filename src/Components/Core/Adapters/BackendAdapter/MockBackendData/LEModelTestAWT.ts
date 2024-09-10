@@ -1,5 +1,6 @@
 import AWT from "../Types/AWT";
 
+/* istanbul ignore next */
 const LEModelTestAWT: AWT = {
   fileVersion: "0.1",
   world: {

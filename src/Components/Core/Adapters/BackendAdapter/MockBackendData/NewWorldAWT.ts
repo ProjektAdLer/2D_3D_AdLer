@@ -1,5 +1,6 @@
 import AWT from "../Types/AWT";
 
+/* istanbul ignore next */
 const NewWorldAWT: AWT = {
   fileVersion: "0.4",
   amgVersion: "1.0.0",
