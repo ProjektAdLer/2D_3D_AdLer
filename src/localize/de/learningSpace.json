@@ -29,5 +29,8 @@
   "sidebar_mainMenu": "Hauptmenü",
   "sidebar_fullScreen": "Vollbild",
   "sidebar_help": "Hilfe-Fenster",
-  "sidebar_controls": "Steuerung"
+  "sidebar_controls": "Steuerung",
+
+  "hint_controlsExplanationModal": "Sie können die Steuerungs-Erklärung jederzeit über das Menü in der 3D-Ansicht erneut aufrufen."
+
 }

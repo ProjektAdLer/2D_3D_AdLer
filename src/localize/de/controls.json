@@ -7,7 +7,7 @@
   "controlAvatar": "Avatar bewegen",
   "controlAvatarMouse": "Linksklick auf eine Position",
   "controlAvatarTouch": "Einfacher Touch auf eine Position",
-  "controlAvatarHint": "Der Avatar kann nur innerhlab des mit Fussboden begrenzten Raums bewegt werden",
+  "controlAvatarHint": "Der Avatar kann nur innerhalb des mit Fussboden begrenzten Raums bewegt werden",
 
   "openContent": "Inhalte öffnen",
   "openContentMouse": "Linksklick auf ein 3D Objekt",

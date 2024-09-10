@@ -18,91 +18,71 @@ export default function ControlsExplanationContent({
     <div
       className={tailwindMerge(
         className,
-        "grid grid-cols-4 portrait:grid-cols-1 gap-8 pb-4 text-xs lg:text-sm overflow-y-auto",
+        "grid landscape:grid-rows-6 landscape:grid-flow-col portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto gap-x-8 landscape:gap-y-2 portrait:gap-6 pb-4 text-xs lg:text-sm ",
       )}
     >
       {/* Avatar Controls */}
-      <div className="flex flex-col gap-4">
-        <h3 className="font-bold text-adlerdarkblue">
-          {translate("controlAvatar")}
-        </h3>
+        <h3 className="font-bold self-center text-adlerdarkblue">{translate("controlAvatar")}</h3>
         <div className="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start">
           <img className="w-6" alt="Linksklick" src={leftClickIcon}></img>
           <p>{translate("controlAvatarMouse")}</p>
         </div>
-        <div className="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start">
+        <div className="flex flex-row gap-2 justify-start items-start">
           <img className="w-6" alt="Einfacher Touch" src={touchIcon}></img>
           <p>{translate("controlAvatarTouch")}</p>
         </div>
-        <div className=" flex flex-row gap-2 justify-start items-start">
+        <div className="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6">
           <img className="w-6" alt="Icon" src={hintIcon}></img>
           <p>{translate("controlAvatarHint")}</p>
         </div>
-      </div>
 
       {/* Open Content Controls */}
-      <div className="flex flex-col gap-4">
-        <h3 className="font-bold text-adlerdarkblue">
-          {translate("openContent")}
-        </h3>
+        <h3 className="font-bold  self-center text-adlerdarkblue">{translate("openContent")}</h3>
         <div className="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start">
           <img className="w-6" alt="Icon" src={leftClickIcon}></img>
           <p>{translate("openContentMouse")}</p>
         </div>
-        <div className="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start">
+        <div className="flex flex-row gap-2 justify-start items-start">
           <img className="w-6" alt="Icon" src={touchIcon}></img>
           <p>{translate("openContentTouch")}</p>
         </div>
-        <div className="flex flex-row gap-2 justify-start items-start">
+        <div className="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6">
           <img className="w-6" alt="Icon" src={hintIcon}></img>
           <div className="flex flex-col gap-1">
             <p>{translate("openContentHint1")}</p>
             <p>{translate("openContentHint2")}</p>
           </div>
         </div>
-      </div>
 
       {/* Rotate Camera Controls */}
-      <div className="flex flex-col gap-4">
-        <h3 className="font-bold text-adlerdarkblue">
-          {translate("rotateCamera")}
-        </h3>
+        <h3 className="font-bold  self-center text-adlerdarkblue">{translate("rotateCamera")}</h3>
         <div className="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start">
           <img className="w-6" alt="Icon" src={middleMouseDragIcon}></img>
           <p>{translate("rotateCameraMouse")}</p>
         </div>
-        <div className="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start">
+        <div className="flex flex-row gap-2 justify-start items-start">
           <img className="w-6" alt="Icon" src={touchDragIcon}></img>
           <p>{translate("rotateCameraTouch")}</p>
         </div>
-        <div className="flex flex-row gap-2 justify-start items-start">
+        <div className="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6">
           <img className="w-6" alt="Icon" src={hintIcon}></img>
           <p>{translate("rotateCameraHint")}</p>
         </div>
-      </div>
 
       {/* Zoom Camera Controls */}
-      <div className="flex flex-col gap-4">
-        <h3 className="font-bold text-adlerdarkblue">
-          {translate("zoomCamera")}
-        </h3>
+        <h3 className="font-bold  self-center text-adlerdarkblue">{translate("zoomCamera")}</h3>
         <div className="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start">
           <img className="w-6" alt="Icon" src={middleMouseIcon}></img>
           <p>{translate("zoomCameraMouse")}</p>
         </div>
-        <div className="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start">
+        <div className="flex flex-row gap-2 justify-start items-start">
           <img className="w-6" alt="Icon" src={touchZoomIcon}></img>
           <p>{translate("zoomCameraTouch")}</p>
         </div>
-        <div className="flex flex-row gap-2 justify-start items-start">
+        <div className="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6">
           <img className="w-6" alt="Icon" src={hintIcon}></img>
           <p>{translate("zoomCameraHint")}</p>
         </div>
-      </div>
-      <div className="col-span-4 portrait:col-span-1 flex flex-col gap-1 text-center portrait:text-start text-xs">
-        {/* <h3 className="font-bold">{translate("confirmationHeading")}</h3> */}
-        <p>{translate("confirmation")}</p>
-      </div>
     </div>
   );
 }

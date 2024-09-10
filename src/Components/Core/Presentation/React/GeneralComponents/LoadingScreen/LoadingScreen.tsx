@@ -38,11 +38,13 @@ export default function LoadingScreen() {
         </section>
 
         <div className="row-span-4 w-[85vw] max-w-6xl portrait:h-[60vh] flex flex-col justify-center">
-          <h1 className="pl-4 pb-1 font-bold text-adlerdarkblue">
+          <h1 className="pl-4 pb-1 font-bold text-adlerblue">
             {translate("sidebar_controls")}
           </h1>
-          <ControlsExplanationContent className="gap-4 bg-buttonbgblue p-4 rounded-xl" />
+          <ControlsExplanationContent/>
+          <p className="text-xs text-center w-full">{translate("hint_controlsExplanationModal")}</p>
         </div>
+
         <div className="flex flex-col justify-center items-center pt-16 portrait:pt-8 h-16">
           {!canClose && (
             <div className="flex gap-1 rounded-lg border-4 border-white ">
@@ -86,7 +88,7 @@ export default function LoadingScreen() {
                 rel="noreferrer"
                 className="underline text-adleroceanblue hover:text-nodehandlecolor"
               >
-                {}
+                { }
               </a>,
             ]}
             values={{ homepageLink: translate("homepage") }}
