@@ -108,7 +108,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
     if (this.stateMachine.CurrentState === CharacterAnimationStates.Walking) {
       const absoluteVelocity = this.getCharacterVelocity().length();
 
-      this.setWalkingAnimationSpeed(absoluteVelocity);
+      this.setWalkingAnimationSpeed(absoluteVelocity * 0.6);
       this.rotateCharacter(absoluteVelocity);
     }
   }

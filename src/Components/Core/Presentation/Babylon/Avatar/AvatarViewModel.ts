@@ -24,7 +24,7 @@ export default class AvatarViewModel {
   public learningSpaceTemplateType: LearningSpaceTemplateType;
 
   // blink animation
-  public readonly blinkTextureUOffset: number = 0.21;
+  public readonly blinkTextureUOffset: number = 0.112;
   public readonly blinkDuration: number = 200; // in ms
   public readonly blinkInterval: number = 4000; // in ms
   public readonly blinkIntervalMaxOffset: number = 2000; // in ms (random offset up to this value is added to blinkInterval)
