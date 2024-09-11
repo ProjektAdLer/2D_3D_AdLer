@@ -49,19 +49,19 @@ describe("StoryNPCView", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
-      scenePresenterFactoryMock
+      scenePresenterFactoryMock,
     );
     CoreDIContainer.rebind(
-      PRESENTATION_TYPES.ICharacterAnimator
+      PRESENTATION_TYPES.ICharacterAnimator,
     ).toConstantValue(characterAnimatorMock);
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.IStoryElementPresenter
+      PRESENTATION_TYPES.IStoryElementPresenter,
     ).toConstantValue(storyElementPresenterMock);
     CoreDIContainer.rebind(CORE_TYPES.INavigation).toConstantValue(
-      navigationMock
+      navigationMock,
     );
     CoreDIContainer.rebind(
-      PRESENTATION_TYPES.ICharacterNavigator
+      PRESENTATION_TYPES.ICharacterNavigator,
     ).toConstantValue(characterNavigatorMock);
   });
 
@@ -80,12 +80,12 @@ describe("StoryNPCView", () => {
     test("asyncSetupStoryNPC does not throw", async () => {
       const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
       const mockIdleAnimationGroup = new AnimationGroup(
-        "anim_idle",
-        new Scene(new NullEngine())
+        "ac_anim_idle2",
+        new Scene(new NullEngine()),
       );
       const mockWalkAnimationGroup = new AnimationGroup(
-        "anim_walk",
-        new Scene(new NullEngine())
+        "ac_anim_walkcycle",
+        new Scene(new NullEngine()),
       );
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
@@ -99,7 +99,7 @@ describe("StoryNPCView", () => {
       scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
 
       navigationMock.Plugin.getClosestPoint.mockImplementation(
-        (vector: Vector3) => vector
+        (vector: Vector3) => vector,
       );
 
       await expect(systemUnderTest.asyncSetupStoryNPC()).resolves.not.toThrow();
@@ -122,8 +122,8 @@ describe("StoryNPCView", () => {
     test("loadElementModel gets idleAnimation from loading results", async () => {
       const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
       const mockIdleAnimationGroup = new AnimationGroup(
-        "anim_idle",
-        new Scene(new NullEngine())
+        "ac_anim_idle2",
+        new Scene(new NullEngine()),
       );
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
@@ -134,15 +134,15 @@ describe("StoryNPCView", () => {
 
       await systemUnderTest["loadElementModel"]();
 
-      expect(systemUnderTest["idleAnimation"]).toBe(mockIdleAnimationGroup);
+      expect(systemUnderTest["idleAnimation"]).toEqual(mockIdleAnimationGroup);
     });
 
     // ANF-ID: [EZZ0022]
     test("loadElementModel gets walkAnimation from loading results", async () => {
       const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
       const mockWalkAnimationGroup = new AnimationGroup(
-        "anim_walk",
-        new Scene(new NullEngine())
+        "ac_anim_walkcycle",
+        new Scene(new NullEngine()),
       );
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
@@ -174,7 +174,7 @@ describe("StoryNPCView", () => {
       ];
       viewModel.modelRootNode = new TransformNode(
         "mockNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
 
       systemUnderTest["createParentNode"]();
@@ -201,11 +201,11 @@ describe("StoryNPCView", () => {
     test("setSpawnLocation sets the position and rotation to value from viewModel when state is Idle", () => {
       viewModel.modelRootNode = new TransformNode(
         "mockRootNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
       viewModel.parentNode = new TransformNode(
         "mockParentNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
       viewModel.state.Value = StoryNPCState.Idle;
       viewModel.storyType = StoryElementType.Intro;
@@ -218,8 +218,8 @@ describe("StoryNPCView", () => {
       expect(viewModel.modelRootNode.rotationQuaternion).toEqual(
         Quaternion.RotationAxis(
           Vector3.Up(),
-          Tools.ToRadians((3 / 4) * Math.PI)
-        )
+          Tools.ToRadians((3 / 4) * Math.PI),
+        ),
       );
     });
 
@@ -227,11 +227,11 @@ describe("StoryNPCView", () => {
     test("setSpawnLocation calcualtes spawn location when state is not Idle", () => {
       viewModel.modelRootNode = new TransformNode(
         "mockRootNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
       viewModel.parentNode = new TransformNode(
         "mockParentNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
       viewModel.storyType = StoryElementType.Intro;
       viewModel.state.Value = StoryNPCState.CutScene;
@@ -245,8 +245,8 @@ describe("StoryNPCView", () => {
       expect(viewModel.modelRootNode.rotationQuaternion).toEqual(
         Quaternion.RotationAxis(
           Vector3.Up(),
-          Tools.ToRadians((3 / 4) * Math.PI)
-        )
+          Tools.ToRadians((3 / 4) * Math.PI),
+        ),
       );
     });
 
@@ -261,7 +261,7 @@ describe("StoryNPCView", () => {
 
       const mockModelRootNode = new TransformNode(
         "mockRootNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
       viewModel.modelRootNode = mockModelRootNode;
 
@@ -276,12 +276,12 @@ describe("StoryNPCView", () => {
       viewModel.modelMeshes = [mockMesh];
       const mockParentNode = new TransformNode(
         "mockParentNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
       viewModel.parentNode = mockParentNode;
       const mockModelRootNode = new TransformNode(
         "mockRootNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
       viewModel.modelRootNode = mockModelRootNode;
       const mockCharacterAnimator = mock<ICharacterAnimator>();
@@ -294,7 +294,7 @@ describe("StoryNPCView", () => {
       expect(characterNavigatorMock.setup).toHaveBeenCalledWith(
         mockParentNode,
         mockCharacterAnimator,
-        expect.any(Boolean)
+        expect.any(Boolean),
       );
     });
 
@@ -302,7 +302,7 @@ describe("StoryNPCView", () => {
       systemUnderTest["setupCleanup"]();
 
       expect(scenePresenterMock.addDisposeSceneCallback).toHaveBeenCalledTimes(
-        1
+        1,
       );
     });
   });
@@ -318,7 +318,7 @@ describe("StoryNPCView", () => {
       systemUnderTest["setupInteractions"]();
 
       viewModel.modelMeshes[0].actionManager!.processTrigger(
-        ActionManager.OnPickTrigger
+        ActionManager.OnPickTrigger,
       );
 
       expect(controllerMock.picked).toHaveBeenCalledTimes(1);
@@ -336,7 +336,7 @@ describe("StoryNPCView", () => {
 
       expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
         viewModel.modelMeshes[0],
-        expect.any(Color3)
+        expect.any(Color3),
       );
     });
   });
@@ -369,7 +369,7 @@ describe("StoryNPCView", () => {
         systemUnderTest,
         // @ts-ignore
         "startRandomMovementIdleTimeout",
-        "get"
+        "get",
       );
 
       systemUnderTest["onStateChanged"](StoryNPCState.RandomMovement);
@@ -388,7 +388,7 @@ describe("StoryNPCView", () => {
       expect(characterNavigatorMock.startMovement).toBeCalledTimes(1);
       expect(characterNavigatorMock.startMovement).toBeCalledWith(
         new Vector3(4, 2, 0),
-        expect.any(Function)
+        expect.any(Function),
       );
     });
 
@@ -399,7 +399,7 @@ describe("StoryNPCView", () => {
       viewModel.introIdlePosRotation = Math.PI;
       viewModel.modelRootNode = new TransformNode(
         "mockRootNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
 
       viewModel.characterNavigator = characterNavigatorMock;
@@ -407,13 +407,13 @@ describe("StoryNPCView", () => {
         (target: Vector3, callback?: () => void) => {
           viewModel.modelRootNode.position = target;
           callback!();
-        }
+        },
       );
 
       systemUnderTest["moveToIdlePosition"]();
 
       expect(viewModel.modelRootNode.rotationQuaternion).toEqual(
-        Quaternion.RotationAxis(Vector3.Up(), Math.PI)
+        Quaternion.RotationAxis(Vector3.Up(), Math.PI),
       );
     });
 
@@ -424,7 +424,7 @@ describe("StoryNPCView", () => {
       viewModel.avatarPosition = new Vector3(10, 0, 0);
       viewModel.parentNode = new TransformNode(
         "mockParentNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
       viewModel.parentNode.position = new Vector3(0, 0, 0);
 
@@ -443,7 +443,7 @@ describe("StoryNPCView", () => {
       viewModel.avatarPosition = new Vector3(10, 0, 0);
       viewModel.parentNode = new TransformNode(
         "mockParentNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
       viewModel.parentNode.position = new Vector3(0, 0, 0);
 
@@ -451,7 +451,7 @@ describe("StoryNPCView", () => {
       characterNavigatorMock.startMovement.mockImplementationOnce(
         (target: Vector3, callback?: () => void) => {
           callback!();
-        }
+        },
       );
 
       jest.useFakeTimers();
@@ -460,18 +460,18 @@ describe("StoryNPCView", () => {
 
       expect(storyElementPresenterMock.open).toBeCalledTimes(1);
       expect(storyElementPresenterMock.open).toBeCalledWith(
-        StoryElementType.Intro
+        StoryElementType.Intro,
       );
     });
 
     // ANF-ID: [EZZ0025]
     test("setRandomMovementTarget calls startMovement on the characterNavigator with a target", () => {
       navigationMock.Plugin.getRandomPointAround.mockReturnValue(
-        new Vector3(2, 0, 2)
+        new Vector3(2, 0, 2),
       );
       viewModel.parentNode = new TransformNode(
         "mockParentNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
       viewModel.parentNode.position = new Vector3(0, 0, 0);
       viewModel.characterNavigator = characterNavigatorMock;
@@ -482,18 +482,18 @@ describe("StoryNPCView", () => {
       expect(characterNavigatorMock.startMovement).toBeCalledTimes(1);
       expect(characterNavigatorMock.startMovement).toBeCalledWith(
         expect.any(Vector3),
-        systemUnderTest["startRandomMovementIdleTimeout"]
+        systemUnderTest["startRandomMovementIdleTimeout"],
       );
     });
 
     // ANF-ID: [EZZ0025]
     test("startRandomMovementIdleTimeout calls setRandomTarget after the idleTime", () => {
       navigationMock.Plugin.getRandomPointAround.mockReturnValue(
-        new Vector3(2, 0, 2)
+        new Vector3(2, 0, 2),
       );
       viewModel.parentNode = new TransformNode(
         "mockParentNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
       viewModel.parentNode.position = new Vector3(0, 0, 0);
       viewModel.characterNavigator = characterNavigatorMock;
@@ -503,7 +503,7 @@ describe("StoryNPCView", () => {
         systemUnderTest,
         // prevent incorrect ts error for spying on private method
         // @ts-ignore
-        "setRandomMovementTarget"
+        "setRandomMovementTarget",
       );
 
       // trigger call startRandomMovementIdleTimeout to by setting state to RandomMovement
@@ -522,11 +522,11 @@ describe("StoryNPCView", () => {
 
       // mock correct target selection in case early return fails
       navigationMock.Plugin.getRandomPointAround.mockReturnValue(
-        new Vector3(2, 0, 2)
+        new Vector3(2, 0, 2),
       );
       viewModel.parentNode = new TransformNode(
         "mockParentNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
       viewModel.parentNode.position = new Vector3(0, 0, 0);
       viewModel.characterNavigator = characterNavigatorMock;
@@ -550,20 +550,20 @@ describe("StoryNPCView", () => {
 
       expect(scenePresenterMock.HighlightLayer.removeMesh).toBeCalledTimes(2);
       expect(scenePresenterMock.HighlightLayer.removeMesh).toBeCalledWith(
-        viewModel.modelMeshes[0]
+        viewModel.modelMeshes[0],
       );
       expect(scenePresenterMock.HighlightLayer.removeMesh).toBeCalledWith(
-        viewModel.iconMeshes[0]
+        viewModel.iconMeshes[0],
       );
 
       expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledTimes(2);
       expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
         viewModel.modelMeshes[0],
-        new Color3(1, 0, 0)
+        new Color3(1, 0, 0),
       );
       expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
         viewModel.iconMeshes[0],
-        new Color3(1, 0, 0)
+        new Color3(1, 0, 0),
       );
     });
 
@@ -583,7 +583,7 @@ describe("StoryNPCView", () => {
       systemUnderTest["updateHighlight"]();
 
       expect(systemUnderTest["changeHighlightColor"]).toBeCalledWith(
-        HighlightColors.NonLearningElementBase
+        HighlightColors.NonLearningElementBase,
       );
     });
 
@@ -595,8 +595,8 @@ describe("StoryNPCView", () => {
 
       expect(systemUnderTest["changeHighlightColor"]).toBeCalledWith(
         HighlightColors.getNonInteractableColor(
-          HighlightColors.NonLearningElementBase
-        )
+          HighlightColors.NonLearningElementBase,
+        ),
       );
     });
   });
