@@ -9,7 +9,7 @@ export default class LearningElementModalViewModel {
   filePath = new Observable<string>();
   isScoreable = new Observable<boolean>();
 
-  readonly openDelay: number = 800;
+  readonly openDelay: number = 1600;
 
   parentSpaceID = new Observable<ComponentID>();
   parentWorldID = new Observable<ComponentID>();

@@ -32,14 +32,14 @@ export default class CharacterNavigator
   implements ICharacterNavigator
 {
   private readonly agentParams: IAgentParameters = {
-    radius: 0.4,
+    radius: 0.3,
     height: 1,
     maxAcceleration: 30.0,
     maxSpeed: 3.5,
     collisionQueryRange: 2,
     pathOptimizationRange: 0.0,
     separationWeight: 1.0,
-    reachRadius: 0.5, // acts as stopping distance
+    reachRadius: 0.3, // acts as stopping distance
   };
   private readonly earlyStoppingPatience = 400; // in ms
   private readonly earlyStoppingVelocityThreshold = 0.3;
@@ -62,7 +62,7 @@ export default class CharacterNavigator
   constructor() {
     super();
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
-      SCENE_TYPES.ScenePresenterFactory
+      SCENE_TYPES.ScenePresenterFactory,
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
@@ -71,7 +71,7 @@ export default class CharacterNavigator
   public setup(
     parentNode: TransformNode,
     characterAnimator: ICharacterAnimator,
-    verbose?: boolean
+    verbose?: boolean,
   ): void {
     this.parentNode = parentNode;
     this.characterAnimator = characterAnimator;
@@ -86,11 +86,11 @@ export default class CharacterNavigator
 
   public startMovement(
     target: Vector3,
-    onTargetReachedCallback?: () => void
+    onTargetReachedCallback?: () => void,
   ): void {
     // only actually move to new target if transition was successful or character is already walking
     const transitionSuccessful = this.characterAnimator.transition(
-      CharacterAnimationActions.MovementStarted
+      CharacterAnimationActions.MovementStarted,
     );
     if (
       !transitionSuccessful &&
@@ -107,7 +107,7 @@ export default class CharacterNavigator
     // setup observers
     this.checkEarlyStoppingObserverRef =
       this.scenePresenter.Scene.onBeforeRenderObservable.add(
-        this.checkEarlyStopping
+        this.checkEarlyStopping,
       );
     this.targetReachedCallback = onTargetReachedCallback ?? null;
     this.targetReachedObserverRef =
@@ -117,7 +117,7 @@ export default class CharacterNavigator
             if (onTargetReachedCallback) onTargetReachedCallback();
             this.stopMovement();
           }
-        }
+        },
       );
 
     this.debug_drawPath(target);
@@ -127,7 +127,7 @@ export default class CharacterNavigator
   public stopMovement(): void {
     this.navigation.Crowd.agentTeleport(
       this.agentIndex,
-      this.parentNode.position
+      this.parentNode.position,
     );
     this.characterAnimator.transition(CharacterAnimationActions.TargetReached);
 
@@ -140,13 +140,13 @@ export default class CharacterNavigator
 
     // snap to navmesh if character is placed outside of it
     this.parentNode.position = this.navigation.Plugin.getClosestPoint(
-      this.parentNode.position
+      this.parentNode.position,
     );
 
     this.agentIndex = this.navigation.Crowd.addAgent(
       this.parentNode.position,
       this.agentParams,
-      this.parentNode
+      this.parentNode,
     );
 
     this.debug_drawCircle(this.agentParams.radius, Color3.Blue());
@@ -158,7 +158,7 @@ export default class CharacterNavigator
   @bind
   private checkEarlyStopping(scene: Scene): void {
     const velocity = this.navigation.Crowd.getAgentVelocity(
-      this.agentIndex
+      this.agentIndex,
     ).length();
 
     if (velocity < this.earlyStoppingVelocityThreshold) {
@@ -175,13 +175,13 @@ export default class CharacterNavigator
   private resetObservers(): void {
     if (this.targetReachedObserverRef !== null) {
       this.navigation.Crowd.onReachTargetObservable.remove(
-        this.targetReachedObserverRef
+        this.targetReachedObserverRef,
       );
       this.targetReachedObserverRef = null;
     }
     if (this.checkEarlyStoppingObserverRef !== null) {
       this.scenePresenter.Scene.onBeforeRenderObservable.remove(
-        this.checkEarlyStoppingObserverRef
+        this.checkEarlyStoppingObserverRef,
       );
       this.checkEarlyStoppingObserverRef = null;
     }
@@ -193,12 +193,12 @@ export default class CharacterNavigator
 
     let pathPoints = this.navigation.Plugin.computePath(
       this.navigation.Crowd.getAgentPosition(this.agentIndex),
-      target
+      target,
     );
     this.debug_pathLine = MeshBuilder.CreateDashedLines(
       "navigation path",
       { points: pathPoints, updatable: true, instance: this.debug_pathLine },
-      this.scenePresenter.Scene
+      this.scenePresenter.Scene,
     );
   }
 
@@ -212,13 +212,13 @@ export default class CharacterNavigator
         thickness: 0.03,
         tessellation: 32,
       },
-      this.scenePresenter.Scene
+      this.scenePresenter.Scene,
     );
 
     if (color) {
       const material = new StandardMaterial(
         "debug radius material",
-        this.scenePresenter.Scene
+        this.scenePresenter.Scene,
       );
       material.diffuseColor = color;
       circle.material = material;
