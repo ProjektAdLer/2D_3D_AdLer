@@ -64,16 +64,16 @@ describe("AvatarView", () => {
     // setup dependency injection
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
-      scenePresenterFactoryMock
+      scenePresenterFactoryMock,
     );
     CoreDIContainer.rebind<IMovementIndicator>(
-      PRESENTATION_TYPES.IMovementIndicator
+      PRESENTATION_TYPES.IMovementIndicator,
     ).toConstantValue(movementIndicatorMock);
     CoreDIContainer.rebind<ICharacterAnimator>(
-      PRESENTATION_TYPES.ICharacterAnimator
+      PRESENTATION_TYPES.ICharacterAnimator,
     ).toConstantValue(characterAnimatorMock);
     CoreDIContainer.rebind<ICharacterNavigator>(
-      PRESENTATION_TYPES.ICharacterNavigator
+      PRESENTATION_TYPES.ICharacterNavigator,
     ).toConstantValue(characterNavigatorMock);
   });
 
@@ -91,7 +91,7 @@ describe("AvatarView", () => {
     // ANF-ID: [EZZ0018]
     test("asyncSetup creates character animator", async () => {
       scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
-        new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
+        new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       setupScenePresenterLoadGTLFModelMock();
 
@@ -102,7 +102,7 @@ describe("AvatarView", () => {
 
     test("asyncSetup creates character navigator", async () => {
       scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
-        new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
+        new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       setupScenePresenterLoadGTLFModelMock();
 
@@ -117,7 +117,7 @@ describe("AvatarView", () => {
       scenePresenterMock.addDisposeSceneCallback.mockImplementation(
         (callback) => {
           callbackRef = callback;
-        }
+        },
       );
 
       viewModel.setEyeTimer = setTimeout(() => {}, 100000);
@@ -158,10 +158,10 @@ describe("AvatarView", () => {
 
       expect(setTimeoutMock).toHaveBeenCalledTimes(1);
       expect(setTimeoutMock.mock.calls[0][1]).toBeGreaterThanOrEqual(
-        viewModel.blinkInterval
+        viewModel.blinkInterval,
       );
       expect(setTimeoutMock.mock.calls[0][1]).toBeLessThanOrEqual(
-        viewModel.blinkInterval + viewModel.blinkIntervalMaxOffset
+        viewModel.blinkInterval + viewModel.blinkIntervalMaxOffset,
       );
 
       setTimeoutMock.mockRestore();
@@ -177,7 +177,7 @@ describe("AvatarView", () => {
       jest.runOnlyPendingTimers();
 
       expect(viewModel.eyeTextures[0].uOffset).toBe(
-        viewModel.blinkTextureUOffset
+        viewModel.blinkTextureUOffset,
       );
 
       jest.clearAllTimers();
@@ -206,7 +206,7 @@ describe("AvatarView", () => {
       systemUnderTest["setBlinkTimeout"]();
       jest.runOnlyPendingTimers();
       expect(viewModel.eyeTextures[0].uOffset).toBe(
-        viewModel.blinkTextureUOffset
+        viewModel.blinkTextureUOffset,
       );
 
       jest.runOnlyPendingTimers();
@@ -220,7 +220,7 @@ describe("AvatarView", () => {
     // ANF-ID: [EZZ0017]
     test("loadAvatarAsync calls the scenePresenter to load avatar models", async () => {
       scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
-        new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
+        new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       setupScenePresenterLoadGTLFModelMock();
 
@@ -231,24 +231,24 @@ describe("AvatarView", () => {
 
     test("loadAvatarAsync gets the parent node for the avatar", async () => {
       scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
-        new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
+        new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       setupScenePresenterLoadGTLFModelMock();
 
       await systemUnderTest["loadAvatarAsync"]();
 
       expect(
-        scenePresenterMock.Scene.getTransformNodeByName
+        scenePresenterMock.Scene.getTransformNodeByName,
       ).toHaveBeenCalledWith("AvatarParentNode");
     });
 
     test.skip("loadAvatarAsync sets the parent node as parent of the first loaded mesh", async () => {
       const parentNode = new TransformNode(
         "AvatarParentNode",
-        new Scene(new NullEngine())
+        new Scene(new NullEngine()),
       );
       scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
-        parentNode
+        parentNode,
       );
 
       const mockMesh = setupScenePresenterLoadGTLFModelMock();
@@ -261,10 +261,10 @@ describe("AvatarView", () => {
 
     test("loadAvatarAsync gets idleAnimation from loading results", async () => {
       scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
-        new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
+        new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       const mockAnimationGroup = mockDeep<AnimationGroup>();
-      mockAnimationGroup.name = "anim_idle";
+      mockAnimationGroup.name = "ac_anim_idle";
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
@@ -272,15 +272,15 @@ describe("AvatarView", () => {
 
       await systemUnderTest["loadAvatarAsync"]();
 
-      expect(systemUnderTest["idleAnimation"]).toBe(mockAnimationGroup);
+      expect(systemUnderTest["idleAnimation"]).toEqual(mockAnimationGroup);
     });
 
     test("loadAvatarAsync gets walkAnimation from loading results", async () => {
       scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
-        new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
+        new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       const mockAnimationGroup = mockDeep<AnimationGroup>();
-      mockAnimationGroup.name = "anim_walk";
+      mockAnimationGroup.name = "ac_anim_walkcycle";
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
@@ -288,15 +288,15 @@ describe("AvatarView", () => {
 
       await systemUnderTest["loadAvatarAsync"]();
 
-      expect(systemUnderTest["walkAnimation"]).toBe(mockAnimationGroup);
+      expect(systemUnderTest["walkAnimation"]).toEqual(mockAnimationGroup);
     });
 
     test("loadAvatarAsync gets interactionAnimation from loading results", async () => {
       scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
-        new TransformNode("AvatarParentNode", new Scene(new NullEngine()))
+        new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       const mockAnimationGroup = mockDeep<AnimationGroup>();
-      mockAnimationGroup.name = "anim_interact";
+      mockAnimationGroup.name = "ac_anim_interact";
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
@@ -304,7 +304,9 @@ describe("AvatarView", () => {
 
       await systemUnderTest["loadAvatarAsync"]();
 
-      expect(systemUnderTest["interactionAnimation"]).toBe(mockAnimationGroup);
+      expect(systemUnderTest["interactionAnimation"]).toEqual(
+        mockAnimationGroup,
+      );
     });
   });
 
