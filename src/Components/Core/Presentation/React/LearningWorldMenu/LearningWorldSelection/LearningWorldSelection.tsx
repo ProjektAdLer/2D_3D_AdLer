@@ -24,10 +24,10 @@ export default function LearningWorldSelection({
 }: AdLerUIComponent) {
   const loadUserWorldsInfoUseCase =
     useInjection<ILoadUserLearningWorldsInfoUseCase>(
-      USECASE_TYPES.ILoadUserLearningWorldsInfoUseCase
+      USECASE_TYPES.ILoadUserLearningWorldsInfoUseCase,
     );
   const loadingScreenPresenter = useInjection<ILoadingScreenPresenter>(
-    PRESENTATION_TYPES.ILoadingScreenPresenter
+    PRESENTATION_TYPES.ILoadingScreenPresenter,
   );
 
   const [viewModel, controller] = useBuilder<
@@ -48,14 +48,14 @@ export default function LearningWorldSelection({
       loadingScreenPresenter.lockLoadingLock();
       loadingScreenPresenter.showLoadingScreen();
       loadingScreenPresenter.pushLoadStep(
-        translate("loadLearningWorldOverview")
+        translate("loadLearningWorldOverview"),
       );
       loadUserLearningWorldsInfoAsync();
     }
   }, [viewModel, loadUserWorldsInfoUseCase, translate, loadingScreenPresenter]);
 
   const [worlds] = useObservable<LearningWorldSelectionLearningWorldData[]>(
-    viewModel?.userWorlds
+    viewModel?.userWorlds,
   );
   const [newData] = useObservable<boolean>(viewModel?.newData);
   useEffect(() => {

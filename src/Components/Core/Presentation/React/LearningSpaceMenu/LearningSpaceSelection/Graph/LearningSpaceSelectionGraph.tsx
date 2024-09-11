@@ -70,7 +70,7 @@ export default function LearningSpaceSelectionGraph(props: {
     const setupGraph = async () => {
       logger.log(
         LogLevelTypes.INFO,
-        "LearningSpaceSelectionGraph, Graph Setup"
+        "LearningSpaceSelectionGraph, Graph Setup",
       );
 
       const requirementsTrees = createRequirementTrees(spaces);
@@ -79,20 +79,20 @@ export default function LearningSpaceSelectionGraph(props: {
       // extract node ids from spaces and requirements for layouting
       const spaceIDs = spaceNodes.map((node) => node.id);
       const requirementsNodeIDs = requirementsTrees.nodes.map(
-        (node) => node.id
+        (node) => node.id,
       );
 
       // graph layout with elk
       const elkGraph: ElkNode = createElkGraph(
         [...spaceIDs, ...requirementsNodeIDs],
-        requirementsTrees.edges
+        requirementsTrees.edges,
       );
       await elk.layout(elkGraph);
 
       // apply node positions from elk graph to react flow nodes
       const nodes = applyNodePositions(
         [...spaceNodes, ...requirementsTrees.nodes],
-        elkGraph
+        elkGraph,
       );
 
       reactFlowInstance.setNodes(nodes);
@@ -121,7 +121,7 @@ export default function LearningSpaceSelectionGraph(props: {
         reactFlowInstance.setNodes(nodes);
       }
     },
-    [props.controller, reactFlowInstance]
+    [props.controller, reactFlowInstance],
   );
 
   return (
@@ -137,7 +137,8 @@ export default function LearningSpaceSelectionGraph(props: {
         fitViewOptions={{ padding: 0.2 }}
       >
         <Background size={2} />
-        {/* <MiniMap /> */}
+
+        {/* BACKGROUND CANNOT BE PICTURE */}
         <Controls showInteractive={false} />
       </ReactFlow>
     </div>
@@ -145,7 +146,7 @@ export default function LearningSpaceSelectionGraph(props: {
 }
 
 function createRequirementTrees(
-  spaces: LearningSpaceSelectionLearningSpaceData[]
+  spaces: LearningSpaceSelectionLearningSpaceData[],
 ): { nodes: Node[]; edges: Edge[] } {
   return spaces.reduce(
     (accumulatedArrays, space) => {
@@ -192,7 +193,7 @@ function createRequirementTrees(
       return accumulatedArrays;
     },
     // empty starting arrays
-    { nodes: [], edges: [] } as { nodes: Node[]; edges: Edge[] }
+    { nodes: [], edges: [] } as { nodes: Node[]; edges: Edge[] },
   );
 }
 
@@ -219,13 +220,13 @@ function createElkGraph(nodes: string[], edges: Edge[]): ElkNode {
 
 function createSpaceNodes(
   spaces: LearningSpaceSelectionLearningSpaceData[],
-  lastSelectedSpaceID: number
+  lastSelectedSpaceID: number,
 ): Node[] {
   const nodes = spaces.map((space) => {
     const hasInput = space.requirementsSyntaxTree !== null;
 
     const hasOutput = spaces.some((inputSpace) =>
-      inputSpace.requirementsSyntaxTree?.containsID(space.id)
+      inputSpace.requirementsSyntaxTree?.containsID(space.id),
     );
 
     let spaceIcon: string;

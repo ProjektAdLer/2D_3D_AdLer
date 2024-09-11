@@ -2,6 +2,8 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import { Handle, Node, Position } from "reactflow";
 import { memo } from "react";
 
+import swegedBackground from "../../../../../../../Assets/misc/MenuSelectionBackgrounds/Sweged_Beispielbild.png";
+
 type LearningSpaceSelectionSpaceNodeData = {
   label: string;
   input: boolean;
@@ -13,12 +15,17 @@ export type LearningSpaceSelectionSpaceNodeType =
   Node<LearningSpaceSelectionSpaceNodeData>;
 
 function LearningSpaceSelectionSpaceNode(
-  props: Partial<LearningSpaceSelectionSpaceNodeType>
+  props: Partial<LearningSpaceSelectionSpaceNodeType>,
 ) {
   return (
-    <>
+    <div>
+      <img
+        className="fixed h-32 -translate-y-10 -z-50"
+        src={swegedBackground}
+        alt="Hintergrundbild"
+      />
       <StyledButton
-        className="justify-between w-44 "
+        className="justify-between w-44"
         shape="freeFloatLeft"
         color={props.data?.lastSelected ? "pressed" : "default"}
         icon={props.data?.icon}
@@ -31,7 +38,7 @@ function LearningSpaceSelectionSpaceNode(
       {props.data?.output && (
         <Handle type="source" position={Position.Bottom} />
       )}
-    </>
+    </div>
   );
 }
 
