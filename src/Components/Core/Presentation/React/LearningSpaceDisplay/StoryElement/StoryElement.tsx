@@ -6,7 +6,7 @@ import defaultNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_defa
 import defaultNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_defaultnpc_close.png";
 import robotNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot.png";
 import robotNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot_close.png";
-import closeIcon from "../../../../../../Assets/icons/53-close/close-icon-nobg.svg";
+import closeIcon from "../../../../../../Assets/icons/close.svg";
 
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
@@ -29,7 +29,7 @@ import { useEffect, useState } from "react";
 
 function getNPCImage(
   model: LearningElementModel | null,
-  close: boolean
+  close: boolean,
 ): string {
   switch (model) {
     case LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC:
@@ -51,14 +51,14 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   >(BUILDER_TYPES.IStoryElementBuilder);
   const [isOpen] = useObservable<boolean>(viewModel?.isOpen);
   const [storyTypeToDisplay] = useObservable<StoryElementType>(
-    viewModel?.storyTypeToDisplay
+    viewModel?.storyTypeToDisplay,
   );
   const [outroUnlocked] = useObservable<boolean>(viewModel?.isOutroUnlocked);
   const [introCutsceneRunning] = useObservable<boolean>(
-    viewModel?.isIntroCutsceneRunning
+    viewModel?.isIntroCutsceneRunning,
   );
   const [outroCutsceneRunning] = useObservable<boolean>(
-    viewModel?.isOutroCutsceneRunning
+    viewModel?.isOutroCutsceneRunning,
   );
   const [introModelType] = useObservable(viewModel?.introModelType);
   const [outroModelType] = useObservable(viewModel?.outroModelType);
@@ -108,7 +108,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                 StoryElementType.Intro
                 ? introModelType
                 : outroModelType,
-              true
+              true,
             )}
           />
         </div>
@@ -128,7 +128,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                     StoryElementType.Intro
                     ? introModelType
                     : outroModelType,
-                  false
+                  false,
                 )}
               />
 

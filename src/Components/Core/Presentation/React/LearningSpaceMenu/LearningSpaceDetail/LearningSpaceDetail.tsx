@@ -9,7 +9,7 @@ import { LearningElementTypeStrings } from "../../../../Domain/Types/LearningEle
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import LearningSpaceDetailController from "./LearningSpaceDetailController";
 import { getLearningElementIcon } from "../../../Utils/GetLearningElementIcon";
-import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
+import coinIcon from "../../../../../../Assets/icons/coin.svg";
 import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
 import greenSwosh from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";

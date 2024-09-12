@@ -6,7 +6,7 @@ import defaultNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_defa
 import defaultNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_defaultnpc_close.png";
 import robotNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot.png";
 import robotNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot_close.png";
-import closeIcon from "../../../../../../Assets/icons/53-close/close-icon-nobg.svg";
+import closeIcon from "../../../../../../Assets/icons/close.svg";
 
 import requiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-solved-icon.svg";
 import requiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-tried.svg";
@@ -76,19 +76,19 @@ export default function AdaptivityElementDialogContainer({
   // -- Observables --
   const [isOpen] = useObservable<boolean>(viewmodel?.isOpen);
   const [currentTask] = useObservable<AdaptivityTask | null>(
-    viewmodel?.currentTask
+    viewmodel?.currentTask,
   );
   const [currentQuestion] = useObservable<AdaptivityQuestion | null>(
-    viewmodel?.currentQuestion
+    viewmodel?.currentQuestion,
   );
   const [selectedHint] = useObservable<AdaptivityHint | null>(
-    viewmodel?.selectedHint
+    viewmodel?.selectedHint,
   );
   const [contentData] = useObservable(viewmodel?.contentData);
   const [footerText] = useObservable<string>(viewmodel?.footerText);
   const [showAnswerFeedback] = useObservable<boolean>(viewmodel?.showFeedback);
   const [showFooterTooltip] = useObservable<boolean>(
-    viewmodel?.showFooterTooltip
+    viewmodel?.showFooterTooltip,
   );
   const [model] = useObservable<LearningElementModel>(viewmodel?.model);
 
@@ -102,11 +102,11 @@ export default function AdaptivityElementDialogContainer({
     if (!contentData) return;
     const completedTasks = contentData.tasks.reduce(
       (acc, task) => (task.hasBeenCompleted && task.isRequired ? ++acc : acc),
-      0
+      0,
     );
     const requiredTasks = contentData.tasks.reduce(
       (acc, task) => (task.isRequired ? ++acc : acc),
-      0
+      0,
     );
     setProgressPercentage((completedTasks / requiredTasks) * 100);
   }, [contentData, currentTask]);
@@ -141,62 +141,62 @@ export default function AdaptivityElementDialogContainer({
               event.stopPropagation();
             }}
           >
-              {/* Header */}
-              <div className="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
-                {!(currentTask === null && currentQuestion === null) &&
-                  !showAnswerFeedback && (
-                    <StyledButton
-                      onClick={controller.back}
-                      className="w-8 h-8 p-1 mr-2 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-                      shape="closeButton"
-                    >
-                      {"\u25C0"}
-                    </StyledButton>
-                  )}
-
-                {currentTask === null && currentQuestion === null && (
-                  <div className="w-[50px] lg:w-[50px] bg-buttonbgblue rounded-full text-sm">
-                    <CircularProgressbarWithChildren
-                      value={progressPercentage}
-                      strokeWidth={10}
-                      styles={buildStyles({
-                        strokeLinecap: "butt",
-                        pathTransitionDuration: 1.5,
-
-                        // Colors
-                        trailColor: "#E64B17",
-                        pathColor: `#59B347`,
-                      })}
-                    >
-                      {Math.round(progressPercentage) + "%"}
-                    </CircularProgressbarWithChildren>
-                  </div>
+            {/* Header */}
+            <div className="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
+              {!(currentTask === null && currentQuestion === null) &&
+                !showAnswerFeedback && (
+                  <StyledButton
+                    onClick={controller.back}
+                    className="w-8 h-8 p-1 mr-2 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+                    shape="closeButton"
+                  >
+                    {"\u25C0"}
+                  </StyledButton>
                 )}
 
+              {currentTask === null && currentQuestion === null && (
+                <div className="w-[50px] lg:w-[50px] bg-buttonbgblue rounded-full text-sm">
+                  <CircularProgressbarWithChildren
+                    value={progressPercentage}
+                    strokeWidth={10}
+                    styles={buildStyles({
+                      strokeLinecap: "butt",
+                      pathTransitionDuration: 1.5,
+
+                      // Colors
+                      trailColor: "#E64B17",
+                      pathColor: `#59B347`,
+                    })}
+                  >
+                    {Math.round(progressPercentage) + "%"}
+                  </CircularProgressbarWithChildren>
+                </div>
+              )}
+
+              <img
+                className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
+                alt="LearningImage!"
+                data-testid="npcImage"
+                src={getNPCImage(model, false)}
+              ></img>
+
+              <div className="w-full text-xs lg:text-lg">{headerText}</div>
+
+              <StyledButton
+                onClick={controller.closeModal}
+                className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+                shape="closeButton"
+              >
                 <img
-                  className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
-                  alt="LearningImage!"
-                  data-testid="npcImage"
-                  src={getNPCImage(model, false)}
+                  src={closeIcon}
+                  className="lg:w-10 md:w-8 sm:w-6"
+                  alt="CloseButton"
                 ></img>
+              </StyledButton>
+            </div>
 
-                <div className="w-full text-xs lg:text-lg">{headerText}</div>
-
-                <StyledButton
-                  onClick={controller.closeModal}
-                  className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-                  shape="closeButton"
-                >
-                  <img
-                    src={closeIcon}
-                    className="lg:w-10 md:w-8 sm:w-6"
-                    alt="CloseButton"
-                  ></img>
-                </StyledButton>
-              </div>
-
-              {/* Content */}
-              <div className="overflow-auto max-h-[80vh] lg:max-h-[16vh] xl:max-h-[20vh]">
+            {/* Content */}
+            <div className="overflow-auto max-h-[80vh] lg:max-h-[16vh] xl:max-h-[20vh]">
               {currentTask === null && currentQuestion === null && (
                 <div className=" flex items-center justify-center px-1 mb-4 h-fit rounded-lg font-regular !text-sm lg:mx-4">
                   <AdaptivityElementTaskSelection

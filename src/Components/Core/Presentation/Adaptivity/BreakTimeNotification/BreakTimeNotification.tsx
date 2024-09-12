@@ -11,7 +11,7 @@ import { AdLerUIComponent } from "../../../Types/ReactTypes";
 import tailwindMerge from "../../Utils/TailwindMerge";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import pauseIcon from "../../../../../Assets/icons/42-pause-icon/47-pause-icon-nobg.svg";
-import closeIcon from "../../../../../../src/Assets/icons/53-close/close-icon-nobg.svg";
+import closeIcon from "../../../../../../src/Assets/icons/close.svg";
 import { useEffect, useState } from "react";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import { useTranslation } from "react-i18next";
@@ -40,7 +40,7 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
     let breakContent = ChooseRandomBreakContent(
       breakType,
       viewModel,
-      randomNumber
+      randomNumber,
     );
     setChosenBreakContent(breakContent);
   }, [randomNumber, viewModel, breakType]);
@@ -89,7 +89,7 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
       {RenderBreakContent(
         controller,
         chosenBreakContent,
-        viewModel.slideIndex.Value
+        viewModel.slideIndex.Value,
       )}
     </StyledModal>
   );
@@ -98,13 +98,13 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
 function ChooseRandomBreakContent(
   breakType: BreakTimeNotificationType,
   viewModel: BreakTimeNotificationViewModel,
-  randomNumber: number
+  randomNumber: number,
 ) {
   let randomIndex = 0;
   switch (breakType) {
     case BreakTimeNotificationType.Short: {
       let notSeenBeforeShortBreaks = viewModel.shortBreakContentPool.filter(
-        (shortBreaks) => !shortBreaks.seenBefore
+        (shortBreaks) => !shortBreaks.seenBefore,
       );
       randomIndex = Math.floor(randomNumber * notSeenBeforeShortBreaks.length);
       viewModel.shortBreakContentPool[randomIndex].seenBefore = true;
@@ -112,7 +112,7 @@ function ChooseRandomBreakContent(
     }
     case BreakTimeNotificationType.Medium: {
       let notSeenBeforeMediumBreaks = viewModel.mediumBreakContentPool.filter(
-        (mediumBreaks) => !mediumBreaks.seenBefore
+        (mediumBreaks) => !mediumBreaks.seenBefore,
       );
       randomIndex = Math.floor(randomNumber * notSeenBeforeMediumBreaks.length);
       viewModel.mediumBreakContentPool[randomIndex].seenBefore = true;
@@ -120,7 +120,7 @@ function ChooseRandomBreakContent(
     }
     case BreakTimeNotificationType.Long: {
       let notSeenBeforeLongBreaks = viewModel.longBreakContentPool.filter(
-        (longBreaks) => !longBreaks.seenBefore
+        (longBreaks) => !longBreaks.seenBefore,
       );
       randomIndex = Math.floor(randomNumber * notSeenBeforeLongBreaks.length);
       viewModel.longBreakContentPool[randomIndex].seenBefore = true;
@@ -134,7 +134,7 @@ function ChooseRandomBreakContent(
 function RenderBreakContent(
   controller: IBreakTimeNotificationController,
   chosenBreakContent: breakObject,
-  currentSlideIndex: number
+  currentSlideIndex: number,
 ) {
   return (
     <div className="pb-4 max-h-[90vh] portrait:max-w-[90vw]">

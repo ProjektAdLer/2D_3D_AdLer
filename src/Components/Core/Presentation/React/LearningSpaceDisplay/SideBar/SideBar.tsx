@@ -3,7 +3,7 @@ import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import FullscreenSwitch from "~ReactComponents/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitch";
 import engineLogo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
-import hamburgerButton from "../../../../../../Assets/icons/31-hamburger-icon/hamburger-icon-nobg.svg";
+import hamburgerButton from "../../../../../../Assets/icons/hamburger-menu.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import SideBarViewModel from "./SideBarViewModel";
 import SideBarController from "./SideBarController";

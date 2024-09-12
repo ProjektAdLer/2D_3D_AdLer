@@ -11,7 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
+import coinIcon from "../../../../../../Assets/icons/coin.svg";
 import LearningSpaceScorePanelController from "./LearningSpaceScorePanelController";
 
 interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {}

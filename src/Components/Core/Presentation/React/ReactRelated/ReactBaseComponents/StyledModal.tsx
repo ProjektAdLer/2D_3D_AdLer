@@ -1,7 +1,7 @@
 import React from "react";
 import StyledContainer from "./StyledContainer";
 import StyledButton from "./StyledButton";
-import closeIcon from "../../../../../../Assets/icons/53-close/close-icon-nobg.svg";
+import closeIcon from "../../../../../../Assets/icons/close.svg";
 
 type Props = Partial<{
   hasFooter?: boolean;

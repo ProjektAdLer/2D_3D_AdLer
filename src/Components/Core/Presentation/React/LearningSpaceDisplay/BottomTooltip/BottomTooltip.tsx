@@ -8,7 +8,7 @@ import { getLearningElementIcon } from "../../../Utils/GetLearningElementIcon";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
-import coinIcon from "../../../../../../Assets/icons/08-coin/coin-icon-nobg.svg";
+import coinIcon from "../../../../../../Assets/icons/coin.svg";
 import { AdLerUIComponent } from "../../../../Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 
