@@ -15,6 +15,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - new coin.svg
 - new close.svg
 - new hamburger-menu.svg
+- new character models
 
 ### Changed
 
