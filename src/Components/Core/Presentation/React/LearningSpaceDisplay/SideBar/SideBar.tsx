@@ -10,6 +10,7 @@ import SideBarController from "./SideBarController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import worldIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
 import spaceMenuIcon from "../../../../../../Assets/icons/24-spacemenu/spacemenu-icon-nobg.svg";
+import controlsIcon from "../../../../../../Assets/icons/controls.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
@@ -18,7 +19,7 @@ import { useTranslation } from "react-i18next";
 
 export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
   const [, controller] = useBuilder<SideBarViewModel, SideBarController>(
-    BUILDER_TYPES.IMenuBarBuilder
+    BUILDER_TYPES.IMenuBarBuilder,
   );
   const { t: translate } = useTranslation("learningSpace");
 
@@ -41,11 +42,11 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
     >
       <StyledContainer className="flex flex-col p-2 rounded-lg w-44 lg:w-64 bg-whitetrans">
         <div className="flex flex-row items-center">
-          <StyledButton onClick={controller.onSpaceMenuButtonClicked}>
-            <img src={spaceMenuIcon} alt="" />
+          <StyledButton onClick={controller.onMainMenuButtonClicked}>
+            <img src={engineLogo} alt="" />
           </StyledButton>
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {translate("sidebar_learningSpaceMenu")}
+            {translate("sidebar_mainMenu")}
           </p>
         </div>
 
@@ -59,11 +60,20 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
         </div>
 
         <div className="flex flex-row items-center">
-          <StyledButton onClick={controller.onMainMenuButtonClicked}>
-            <img src={engineLogo} alt="" />
+          <StyledButton onClick={controller.onSpaceMenuButtonClicked}>
+            <img src={spaceMenuIcon} alt="" />
           </StyledButton>
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {translate("sidebar_mainMenu")}
+            {translate("sidebar_learningSpaceMenu")}
+          </p>
+        </div>
+
+        <div className="flex flex-row items-center">
+          <StyledButton onClick={controller.onControlsExplanationButtonClicked}>
+            <img src={controlsIcon} alt="Steuerungserklärung" />
+          </StyledButton>
+          <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
+            {translate("sidebar_controls")}
           </p>
         </div>
 
@@ -71,15 +81,6 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           <FullscreenSwitch />
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
             {translate("sidebar_fullScreen")}
-          </p>
-        </div>
-
-        <div className="flex flex-row items-center">
-          <StyledButton onClick={controller.onControlsExplanationButtonClicked}>
-            <img src={engineLogo} alt="" />
-          </StyledButton>
-          <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {translate("sidebar_controls")}
           </p>
         </div>
 

@@ -34,11 +34,19 @@
 
 @layer components {
   .text-outline {
-    text-shadow: -1px -1px 0 rgb(233, 242, 250, 0.4),
-      0 -1px 0 rgb(233, 242, 250, 0.4), 1px -1px 0 rgb(233, 242, 250, 0.4),
-      1px 0 0 rgb(233, 242, 250, 0.4), 1px 1px 0 rgb(233, 242, 250, 0.4),
-      0 1px 0 rgb(233, 242, 250, 0.4), -1px 1px 0 rgb(233, 242, 250, 0.4),
+    text-shadow:
+      -1px -1px 0 rgb(233, 242, 250, 0.4),
+      0 -1px 0 rgb(233, 242, 250, 0.4),
+      1px -1px 0 rgb(233, 242, 250, 0.4),
+      1px 0 0 rgb(233, 242, 250, 0.4),
+      1px 1px 0 rgb(233, 242, 250, 0.4),
+      0 1px 0 rgb(233, 242, 250, 0.4),
+      -1px 1px 0 rgb(233, 242, 250, 0.4),
       -1px 0 0 rgb(233, 242, 250, 0.4);
+  }
+  .background-fade-out {
+    /*background: linear-gradient(0deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.0) 100%), linear-gradient(90deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.0) 100%), linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.0) 100%), linear-gradient(270deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.0) 100%);*/
+    box-shadow: 0 0 40px #ffffff;
   }
 }
 
@@ -77,7 +85,7 @@ body {
   animation-duration: 5s;
   animation-delay: 1.5s;
   animation-iteration-count: infinite;
-} 
+}
 
 .animateColor4 {
   background-color: #172d4d;
@@ -109,7 +117,7 @@ body {
   animation-duration: 5s;
   animation-delay: 3.5s;
   animation-iteration-count: infinite;
-} 
+}
 
 .animateColor8 {
   background-color: #172d4d;
@@ -117,7 +125,7 @@ body {
   animation-duration: 5s;
   animation-delay: 4s;
   animation-iteration-count: infinite;
-} 
+}
 
 .animateColor9 {
   background-color: #172d4d;
@@ -136,7 +144,8 @@ body {
 }
 
 @keyframes loadingColor {
-  0%, 20% {
+  0%,
+  20% {
     background-color: #172d4d;
   }
   10% {

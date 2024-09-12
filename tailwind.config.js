@@ -175,7 +175,7 @@ module.exports = {
       colors: {
         babylonbg: "#33334d", //Babylon Default Hintergrundfarbe
         blacktrans: "rgba(0,0,0,0.5)",
-        whitetrans: "rgba(255,255,255,0.3)",
+        whitetrans: "rgba(255,255,255,0.4)",
         adlerblue: "#a1c8e5",
         adlerdarkblue: "rgb(23,45,77)" /*#172d4d*/,
         adlergreen: "#59b347",
@@ -184,9 +184,11 @@ module.exports = {
         adlertextgrey: "#111111",
         adlerbuttonlocked: "#b9bfc6",
         adlerdeactivatedtext: "#e9e9e9",
-        adlerbggradientfrom: "#a1c8e5",
-        adlerbggradientto: "#e2eaf2",
+        adlerbggradientfrom: "#a1c8e5" /*= adlerblue*/,
+        adlerbggradientto:
+          "#e2eaf2" /* sollte an buttonbgblue angepasst werden*/,
         nodehandlecolor: "#e9d6b3",
+        adleryellow: "#f0d642",
         adleroceanblue: "#45a0e5",
         iconfillcolor: "#cfd8e5",
         // Neue Farben, immer direkt in Styleguide 2D in der Dokumentation der Engine dokumentieren!
