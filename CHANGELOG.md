@@ -11,11 +11,14 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Added
 
 - controls explanation to learning space display
+- BottomTooltip acts like a button when hovered with mouse, to be clear that it can be clicked
 
 ### Changed
 
 - wrong space icon in SideBar to correct spaceMenuIcon
 - break time notification closes instead of minimizing from big modal
+- hover color for buttons to meet accesibility expectations
+- rearranged SideBarMenu order to a logic order
 
 ### Removed
 
