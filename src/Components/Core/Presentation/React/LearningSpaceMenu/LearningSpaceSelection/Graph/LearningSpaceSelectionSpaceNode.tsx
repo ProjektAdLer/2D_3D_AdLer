@@ -3,6 +3,9 @@ import { Handle, Node, Position } from "reactflow";
 import { memo } from "react";
 
 import swegedBackground from "../../../../../../../Assets/misc/MenuSelectionBackgrounds/Sweged_Beispielbild.png";
+import Danger from "../../../../../../../Assets/misc/MenuSelectionBackgrounds/Danger1.png";
+import Level from "../../../../../../../Assets/misc/MenuSelectionBackgrounds/Level1.png";
+import Town from "../../../../../../../Assets/misc/MenuSelectionBackgrounds/Town1.png";
 
 type LearningSpaceSelectionSpaceNodeData = {
   label: string;
@@ -20,8 +23,8 @@ function LearningSpaceSelectionSpaceNode(
   return (
     <div>
       <img
-        className="fixed h-32 -translate-y-10 -z-50"
-        src={swegedBackground}
+        className="fixed block max-w-full m-auto -translate-y-1/4 min-h-20 aspect-auto -z-50"
+        src={Danger}
         alt="Hintergrundbild"
       />
       <StyledButton
