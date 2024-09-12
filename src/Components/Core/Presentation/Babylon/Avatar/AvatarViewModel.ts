@@ -33,7 +33,7 @@ export default class AvatarViewModel {
   public eyeTextures: Texture[];
 
   // navigation
-  public readonly pointerMovementThreshold: number = 0.65;
+  public readonly pointerMovementThreshold: number = 0.5;
   public movementTarget: Observable<Nullable<Vector3>> = new Observable<
     Nullable<Vector3>
   >(null);

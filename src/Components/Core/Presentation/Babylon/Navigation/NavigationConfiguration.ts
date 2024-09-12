@@ -4,16 +4,16 @@ import { injectable } from "inversify";
 @injectable()
 export default class NavigationConfiguration {
   public navmeshParameters: INavMeshParameters = {
-    cs: 0.2,
+    cs: 0.1,
     ch: 0.2,
     walkableSlopeAngle: 10,
-    walkableHeight: 3.0,
+    walkableHeight: 5.0,
     walkableClimb: 0.05,
-    walkableRadius: 2,
-    maxEdgeLen: 5,
-    maxSimplificationError: 1.3,
-    minRegionArea: 8,
-    mergeRegionArea: 20,
+    walkableRadius: 4,
+    maxEdgeLen: 3,
+    maxSimplificationError: 1,
+    minRegionArea: 20,
+    mergeRegionArea: 0,
     maxVertsPerPoly: 6,
     detailSampleDist: 6,
     detailSampleMaxError: 1,
