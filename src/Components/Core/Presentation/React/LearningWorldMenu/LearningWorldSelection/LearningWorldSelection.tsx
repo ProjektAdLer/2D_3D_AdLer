@@ -7,7 +7,7 @@ import LearningWorldSelectionViewModel, {
   LearningWorldSelectionLearningWorldData,
 } from "./LearningWorldSelectionViewModel";
 
-import worldSolved from "../../../../../../Assets/icons/14-1-world-completed/world-completed-icon-nobg.svg";
+import worldSolved from "../../../../../../Assets/icons/world-completed.svg";
 import worldAvailable from "../../../../../../Assets/icons/world.svg";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import { useInjection } from "inversify-react";

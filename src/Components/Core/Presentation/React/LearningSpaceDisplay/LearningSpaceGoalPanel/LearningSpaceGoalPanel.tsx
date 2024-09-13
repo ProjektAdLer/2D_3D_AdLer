@@ -8,8 +8,7 @@ import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/S
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { useTranslation } from "react-i18next";
 
-import GoalLogo from "../../../../../../Assets/icons/20-goal/goal-icon.svg";
-import GoalIcon from "../../../../../../Assets/icons/20-goal/goal-icon-adlerblue-bg.svg";
+import GoalIcon from "../../../../../../Assets/icons/goals.svg";
 
 export default function LearningSpaceGoalPanel() {
   const [viewModel, controller] = useBuilder<
@@ -43,7 +42,7 @@ export default function LearningSpaceGoalPanel() {
                   {/* Header */}
                   <div className="flex flex-row ">
                     <img
-                      src={GoalLogo}
+                      src={GoalIcon}
                       alt="Lernziel Logo"
                       className="h-4 pr-2 lg:h-6"
                     />

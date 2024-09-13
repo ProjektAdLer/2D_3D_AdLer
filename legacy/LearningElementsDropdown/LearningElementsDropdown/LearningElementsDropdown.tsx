@@ -9,7 +9,7 @@ import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/S
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
-import elementsIcon from "../../../../../../Assets/icons/25-elements/elements-icon.svg";
+import elementsIcon from "../../../../../../Assets/icons/learning-elements.svg";
 
 export default function LearningElementsDropdown() {
   const [viewModel, controller] = useBuilder<

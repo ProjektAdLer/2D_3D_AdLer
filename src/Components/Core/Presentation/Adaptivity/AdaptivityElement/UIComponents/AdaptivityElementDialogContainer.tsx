@@ -8,13 +8,13 @@ import robotNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerob
 import robotNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot_close.png";
 import closeIcon from "../../../../../../Assets/icons/close.svg";
 
-import requiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-solved-icon.svg";
-import requiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-tried.svg";
-import requiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-unsolved-icon.svg";
-import notRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-solved.svg";
-import notRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-tried.svg";
-import notRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-unsolved-icon.svg";
-import placeholderIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-placeholder.svg";
+import requiredSolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-hard-required-solved-icon.svg";
+import requiredTriedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-hard-required-tried.svg";
+import requiredUnsolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-hard-required-unsolved-icon.svg";
+import notRequiredSolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-medium-solved.svg";
+import notRequiredTriedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-medium-tried.svg";
+import notRequiredUnsolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-medium-unsolved-icon.svg";
+import placeholderIcon from "../../../../../../Assets/icons/diffculties-adaptivity-placeholder.svg";
 import requiredTaskIcon from "../../../../../../Assets/icons/required.svg";
 import solvedTaskIcon from "../../../../../../Assets/icons/check-solution.svg";
 

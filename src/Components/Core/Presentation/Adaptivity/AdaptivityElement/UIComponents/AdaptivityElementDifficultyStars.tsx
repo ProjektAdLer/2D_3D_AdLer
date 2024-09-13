@@ -1,24 +1,24 @@
 import tailwindMerge from "../../../Utils/TailwindMerge";
 
-import placeholderIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-placeholder.svg";
-import easyRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-easy-required-unsolved-icon.svg";
-import easyNotRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-easy-unsolved-icon.svg";
-import easyRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-easy-required-solved.svg";
-import easyRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-easy-required-tried.svg";
-import easyNotRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-easy-solved.svg";
-import easyNotRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-easy-tried.svg";
-import mediumRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-required-unsolved-icon.svg";
-import mediumNotRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-unsolved-icon.svg";
-import mediumRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-required-solved.svg";
-import mediumRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-required-tried.svg";
-import mediumNotRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-solved.svg";
-import mediumNotRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-tried.svg";
-import hardRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-unsolved-icon.svg";
-import hardNotRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-unsolved-icon.svg";
-import hardRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-solved-icon.svg";
-import hardRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-required-tried.svg";
-import hardNotRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-tried.svg";
-import hardNotRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-hard-solved-icon.svg";
+import placeholderIcon from "../../../../../../Assets/icons/diffculties-adaptivity-placeholder.svg";
+import easyRequiredUnsolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-easy-required-unsolved-icon.svg";
+import easyNotRequiredUnsolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-easy-unsolved-icon.svg";
+import easyRequiredSolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-easy-required-solved.svg";
+import easyRequiredTriedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-easy-required-tried.svg";
+import easyNotRequiredSolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-easy-solved.svg";
+import easyNotRequiredTriedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-easy-tried.svg";
+import mediumRequiredUnsolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-medium-required-unsolved-icon.svg";
+import mediumNotRequiredUnsolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-medium-unsolved-icon.svg";
+import mediumRequiredSolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-medium-required-solved.svg";
+import mediumRequiredTriedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-medium-required-tried.svg";
+import mediumNotRequiredSolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-medium-solved.svg";
+import mediumNotRequiredTriedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-medium-tried.svg";
+import hardRequiredUnsolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-hard-required-unsolved-icon.svg";
+import hardNotRequiredUnsolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-hard-unsolved-icon.svg";
+import hardRequiredSolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-hard-required-solved-icon.svg";
+import hardRequiredTriedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-hard-required-tried.svg";
+import hardNotRequiredTriedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-hard-tried.svg";
+import hardNotRequiredSolvedIcon from "../../../../../../Assets/icons/diffculties-adaptivity-hard-solved-icon.svg";
 
 export enum AdaptivityElementDifficultyStarState {
   Empty,
@@ -38,7 +38,7 @@ enum AdaptivityElementQuestionDifficulty {
 
 function getIcon(
   difficulty: AdaptivityElementQuestionDifficulty,
-  status: AdaptivityElementDifficultyStarState
+  status: AdaptivityElementDifficultyStarState,
 ): string | undefined {
   switch (difficulty) {
     case AdaptivityElementQuestionDifficulty.Easy:

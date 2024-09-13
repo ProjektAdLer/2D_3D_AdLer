@@ -4,7 +4,7 @@ import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservab
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import ILearningWorldCompletionModalController from "./ILearningWorldCompletionModalController";
 import LearningWorldCompletionModalViewModel from "./LearningWorldCompletionModalViewModel";
-import SolutionIcon from "../../../../../../Assets/icons/14-1-world-completed/world-completed-icon-nobg.svg";
+import SolutionIcon from "../../../../../../Assets/icons/world-completed.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";
@@ -28,7 +28,7 @@ export default function LearningWorldCompletionModal({
     <StyledModal
       className={tailwindMerge(
         className,
-        "flex flex-col items-center justify-center"
+        "flex flex-col items-center justify-center",
       )}
       title={translate("learningWorldCompleted").toString()}
       showModal={showModal && !viewModel.wasClosedOnce}
