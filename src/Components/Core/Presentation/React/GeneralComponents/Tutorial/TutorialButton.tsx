@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-import manualIcon from "../../../../../../Assets/icons/37-manual/manual-icon-nobg.svg";
+import manualIcon from "../../../../../../Assets/icons/manual.svg";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 

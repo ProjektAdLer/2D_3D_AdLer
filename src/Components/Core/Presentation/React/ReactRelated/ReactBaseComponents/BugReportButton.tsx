@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import bugReportIcon from "../../../../../../Assets/icons/38-bug-report/bug-report-icon-nobg.svg";
+import bugReportIcon from "../../../../../../Assets/icons/bug-report.svg";
 
 export default function BugReportButton() {
   const openInNewTab = useCallback((url: string) => {
