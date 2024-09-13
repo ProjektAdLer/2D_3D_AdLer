@@ -10,7 +10,7 @@ import { BreakTimeNotificationType } from "src/Components/Core/Domain/Entities/A
 import { AdLerUIComponent } from "../../../Types/ReactTypes";
 import tailwindMerge from "../../Utils/TailwindMerge";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-import pauseIcon from "../../../../../Assets/icons/42-pause-icon/47-pause-icon-nobg.svg";
+import pauseIcon from "../../../../../Assets/icons/pause.svg";
 import closeIcon from "../../../../../../src/Assets/icons/close.svg";
 import { useEffect, useState } from "react";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";

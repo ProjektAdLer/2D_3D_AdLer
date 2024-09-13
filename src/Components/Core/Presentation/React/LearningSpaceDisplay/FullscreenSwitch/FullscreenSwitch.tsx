@@ -1,7 +1,7 @@
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import FullscreenSwitchController from "./FullscreenSwitchController";
 import FullscreenSwitchViewModel from "./FullscreenSwitchViewModel";
-import fullscreenIcon from "../../../../../../Assets/icons/12-fullscreen/fullscreen-icon-nobg.svg";
+import fullscreenIcon from "../../../../../../Assets/icons/fullscreen.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 

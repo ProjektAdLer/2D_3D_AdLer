@@ -4,7 +4,7 @@ import SignInAndOutComponentController from "./SignInAndOutComponentController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-import moodleIcon from "../../../../../../Assets/icons/16-moodle/moodle-icon-nobg.svg";
+import moodleIcon from "../../../../../../Assets/icons/moodle.svg";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import { useInjection } from "inversify-react";
@@ -20,11 +20,11 @@ export default function LogoutComponent({
     SignInAndOutComponentController
   >(BUILDER_TYPES.ISignInAndOutComponentBuilder);
   const getLoginStatusUseCase = useInjection<IGetLoginStatusUseCase>(
-    USECASE_TYPES.IGetLoginStatusUseCase
+    USECASE_TYPES.IGetLoginStatusUseCase,
   );
 
   const [userLoggedIn, setUserLoggedIn] = useObservable<boolean>(
-    viewModel?.userLoggedIn
+    viewModel?.userLoggedIn,
   );
   const [userName, setUserName] = useObservable<string>(viewModel?.userName);
 

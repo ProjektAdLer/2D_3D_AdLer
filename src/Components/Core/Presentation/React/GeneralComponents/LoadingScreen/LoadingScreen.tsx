@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
+import logo from "../../../../../../Assets/icons/adler-engine.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import LoadingScreenViewModel from "./LoadingScreenViewModel";
@@ -41,8 +41,10 @@ export default function LoadingScreen() {
           <h1 className="portrait:pb-6 font-bold text-adlerdarkblue">
             {translate("sidebar_controls")}
           </h1>
-          <ControlsExplanationContent/>
-          <p className="text-xs text-center w-full">{translate("hint_controlsExplanationModal")}</p>
+          <ControlsExplanationContent />
+          <p className="text-xs text-center w-full">
+            {translate("hint_controlsExplanationModal")}
+          </p>
         </div>
 
         <div className="flex flex-col justify-center items-center pt-16 portrait:pt-8 h-16">
@@ -88,7 +90,7 @@ export default function LoadingScreen() {
                 rel="noreferrer"
                 className="underline text-adleroceanblue hover:text-nodehandlecolor"
               >
-                { }
+                {}
               </a>,
             ]}
             values={{ homepageLink: translate("homepage") }}

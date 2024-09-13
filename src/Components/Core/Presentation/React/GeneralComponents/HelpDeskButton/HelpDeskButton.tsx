@@ -1,5 +1,5 @@
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-import helpIcon from "../../../../../../Assets/icons/26-help/help-icon.svg";
+import helpIcon from "../../../../../../Assets/icons/help.svg";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";

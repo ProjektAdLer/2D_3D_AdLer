@@ -1,13 +1,13 @@
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import LearningWorldDetailViewModel from "./LearningWorldDetailViewModel";
-import worldIcon from "../../../../../../Assets/icons/14-world/world-icon-nobg.svg";
+import worldIcon from "../../../../../../Assets/icons/world.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
 import ILearningWorldDetailController from "./ILearningWorldDetailController";
-import greenSwosh from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
-import spaceIcon from "../../../../../../Assets/icons/13-space/space-icon-nobg.svg";
+import greenSwosh from "../../../../../../Assets/icons/check-solution.svg";
+import spaceIcon from "../../../../../../Assets/icons/space.svg";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";

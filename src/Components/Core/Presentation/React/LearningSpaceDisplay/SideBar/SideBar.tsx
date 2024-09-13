@@ -2,14 +2,14 @@ import CustomDropdown from "../../ReactRelated/ReactBaseComponents/CustomDropdow
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import FullscreenSwitch from "~ReactComponents/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitch";
-import engineLogo from "../../../../../../Assets/icons/00-engine-logo/adler-engine-logo.svg";
+import engineLogo from "../../../../../../Assets/icons/adler-engine.svg";
 import hamburgerButton from "../../../../../../Assets/icons/hamburger-menu.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import SideBarViewModel from "./SideBarViewModel";
 import SideBarController from "./SideBarController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import worldIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
-import spaceMenuIcon from "../../../../../../Assets/icons/24-spacemenu/spacemenu-icon-nobg.svg";
+import worldIcon from "../../../../../../Assets/icons/world-menu.svg";
+import spaceMenuIcon from "../../../../../../Assets/icons/space-menu.svg";
 import controlsIcon from "../../../../../../Assets/icons/controls.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";

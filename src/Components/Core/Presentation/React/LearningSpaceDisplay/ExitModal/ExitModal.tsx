@@ -9,9 +9,9 @@ import { useCallback } from "react";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
-import spaceSolved from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
-import spaceAvailable from "../../../../../../Assets/icons/27-1-lock-open/lock-icon-open-nobg.svg";
-import spaceLocked from "../../../../../../Assets/icons/27-lock-closed/lock-icon-closed-nobg.svg";
+import spaceSolved from "../../../../../../Assets/icons/check-solution.svg";
+import spaceAvailable from "../../../../../../Assets/icons/unlocked.svg";
+import spaceLocked from "../../../../../../Assets/icons/locked.svg";
 import { useTranslation } from "react-i18next";
 
 export default function ExitModal({ className }: AdLerUIComponent<{}>) {
@@ -37,7 +37,7 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
       showModal={isOpen}
       className={tailwindMerge(
         className,
-        "flex flex-col justify-center gap-2 p-5 rounded-lg"
+        "flex flex-col justify-center gap-2 p-5 rounded-lg",
       )}
     >
       <StyledButton
@@ -59,7 +59,7 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
         viewModel.precursorSpaces.Value.map(
           (precursorSpace: LearningSpaceTO) => {
             return createSpaceButton(precursorSpace, controller);
-          }
+          },
         )}
     </StyledModal>
   );
@@ -67,7 +67,7 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
 
 function createSpaceButton(
   learningSpaceTO: LearningSpaceTO,
-  controller: IExitModalController
+  controller: IExitModalController,
 ) {
   let icon: string;
   if (learningSpaceTO.currentScore >= learningSpaceTO.requiredScore)

@@ -2,7 +2,7 @@ import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import LoginComponentController from "./LoginComponentController";
 import LoginComponentViewModel from "./LoginComponentViewModel";
-import moodleIcon from "../../../../../../Assets/icons/16-moodle/moodle-icon-nobg.svg";
+import moodleIcon from "../../../../../../Assets/icons/moodle.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import { createPortal } from "react-dom";
@@ -25,12 +25,12 @@ export default function LoginComponent({
     LoginComponentController
   >(BUILDER_TYPES.ISignInAndOutComponentBuilder);
   const getLoginStatusUseCase = useInjection<IGetLoginStatusUseCase>(
-    USECASE_TYPES.IGetLoginStatusUseCase
+    USECASE_TYPES.IGetLoginStatusUseCase,
   );
 
   const [, setModalVisible] = useObservable<boolean>(viewModel?.modalVisible);
   const [userLoggedIn, setUserLoggedIn] = useObservable<boolean>(
-    viewModel?.userLoggedIn
+    viewModel?.userLoggedIn,
   );
   const [userName] = useObservable<string>(viewModel?.userName);
 
@@ -74,7 +74,7 @@ export default function LoginComponent({
         <div className="z-10">
           <LoginModal viewModel={viewModel} controller={controller} />
         </div>,
-        document.body
+        document.body,
       )}
     </div>
   );

@@ -15,8 +15,8 @@ import notRequiredSolvedIcon from "../../../../../../Assets/icons/40-difficultie
 import notRequiredTriedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-tried.svg";
 import notRequiredUnsolvedIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-medium-unsolved-icon.svg";
 import placeholderIcon from "../../../../../../Assets/icons/40-difficulties-adaptivity/diffculties-adaptivity-placeholder.svg";
-import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
-import solvedTaskIcon from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
+import requiredTaskIcon from "../../../../../../Assets/icons/required.svg";
+import solvedTaskIcon from "../../../../../../Assets/icons/check-solution.svg";
 
 import AdaptivityElementDifficultyStars, {
   AdaptivityElementDifficultyStarState,

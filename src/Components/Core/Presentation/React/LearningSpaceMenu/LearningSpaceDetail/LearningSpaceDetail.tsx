@@ -3,7 +3,7 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import LearningSpaceDetailViewModel, {
   LearningSpaceDetailLearningSpaceData,
 } from "./LearningSpaceDetailViewModel";
-import spaceIcon from "../../../../../../Assets/icons/13-space/space-icon-nobg.svg";
+import spaceIcon from "../../../../../../Assets/icons/space.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import { LearningElementTypeStrings } from "../../../../Domain/Types/LearningElementTypes";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
@@ -11,7 +11,7 @@ import LearningSpaceDetailController from "./LearningSpaceDetailController";
 import { getLearningElementIcon } from "../../../Utils/GetLearningElementIcon";
 import coinIcon from "../../../../../../Assets/icons/coin.svg";
 import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
-import greenSwosh from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
+import greenSwosh from "../../../../../../Assets/icons/check-solution.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";

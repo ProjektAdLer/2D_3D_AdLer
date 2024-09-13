@@ -10,11 +10,11 @@ import AdaptivityElementDifficultyStars, {
 import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 import { useTranslation } from "react-i18next";
 
-import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
-import solvedTaskIcon from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
+import requiredTaskIcon from "../../../../../../Assets/icons/required.svg";
+import solvedTaskIcon from "../../../../../../Assets/icons/check-solution.svg";
 
 export function getAdaptivityQuestionStarState(
-  question: AdaptivityQuestion | undefined
+  question: AdaptivityQuestion | undefined,
 ): AdaptivityElementDifficultyStarState {
   if (question === undefined) return AdaptivityElementDifficultyStarState.Empty;
   else if (question.isRequired) {
@@ -54,22 +54,22 @@ export default function AdaptivityElementTaskSelection({
           task.questions.find(
             (question) =>
               question.difficulty ===
-              AdaptivityElementQuestionDifficultyTypes.easy
-          )
+              AdaptivityElementQuestionDifficultyTypes.easy,
+          ),
         );
         const mediumStatus = getAdaptivityQuestionStarState(
           task.questions.find(
             (question) =>
               question.difficulty ===
-              AdaptivityElementQuestionDifficultyTypes.medium
-          )
+              AdaptivityElementQuestionDifficultyTypes.medium,
+          ),
         );
         const hardStatus = getAdaptivityQuestionStarState(
           task.questions.find(
             (question) =>
               question.difficulty ===
-              AdaptivityElementQuestionDifficultyTypes.hard
-          )
+              AdaptivityElementQuestionDifficultyTypes.hard,
+          ),
         );
 
         return (
@@ -115,7 +115,7 @@ export default function AdaptivityElementTaskSelection({
             </StyledButton>
           </div>
         );
-      })
+      }),
     );
   }, [tasks, onSelectTask]);
 

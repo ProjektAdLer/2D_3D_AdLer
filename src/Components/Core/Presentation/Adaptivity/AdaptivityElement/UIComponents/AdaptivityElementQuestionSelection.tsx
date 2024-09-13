@@ -11,8 +11,8 @@ import AdaptivityElementDifficultyStars, {
 } from "./AdaptivityElementDifficultyStars";
 import { useTranslation } from "react-i18next";
 
-import requiredTaskIcon from "../../../../../../Assets/icons/41-required-adaptivity/required-adaptivity.svg";
-import solvedTaskIcon from "../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
+import requiredTaskIcon from "../../../../../../Assets/icons/required.svg";
+import solvedTaskIcon from "../../../../../../Assets/icons/check-solution.svg";
 
 export default function AdaptivityElementQuestionSelection({
   selectedTask,
@@ -25,7 +25,7 @@ export default function AdaptivityElementQuestionSelection({
   onSelectQuestion: (selectedQuestion: AdaptivityQuestion) => void;
   onSelectHint: (
     selectedHint: AdaptivityHint,
-    associatedQuestion: AdaptivityQuestion
+    associatedQuestion: AdaptivityQuestion,
   ) => void;
 }>) {
   const { t: translate } = useTranslation("learningElement");
@@ -34,7 +34,7 @@ export default function AdaptivityElementQuestionSelection({
     setHeaderText(
       translate("taskSelectionTitle", {
         selectedTaskTitle: selectedTask.taskTitle,
-      })
+      }),
     );
   }, [setHeaderText, selectedTask, translate]);
 

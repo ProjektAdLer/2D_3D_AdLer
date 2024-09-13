@@ -1,4 +1,4 @@
-import logExportIcon from "../../../../../../Assets/icons/39-log-export/log-export-icon-nobg.svg";
+import logExportIcon from "../../../../../../Assets/icons/log-export.svg";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";

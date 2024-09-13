@@ -6,9 +6,9 @@ import LearningSpaceSelectionViewModel, {
 } from "../LearningSpaceSelectionViewModel";
 
 // icons
-import spaceSolved from "../../../../../../../Assets/icons/17-1-solution-check/check-solution-icon-nobg.svg";
-import spaceAvailable from "../../../../../../../Assets/icons/27-1-lock-open/lock-icon-open-nobg.svg";
-import spaceLocked from "../../../../../../../Assets/icons/27-lock-closed/lock-icon-closed-nobg.svg";
+import spaceSolved from "../../../../../../../Assets/icons/check-solution.svg";
+import spaceAvailable from "../../../../../../../Assets/icons/unlocked.svg";
+import spaceLocked from "../../../../../../../Assets/icons/locked.svg";
 import { useCallback } from "react";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 
@@ -17,14 +17,14 @@ export default function LearningSpaceSelectionList(props: {
   viewModel: LearningSpaceSelectionViewModel;
 }) {
   const [spaces] = useObservable<LearningSpaceSelectionLearningSpaceData[]>(
-    props.viewModel.spaces
+    props.viewModel.spaces,
   );
   const [selectedRowID] = useObservable<number>(
-    props.viewModel.selectedSpaceID
+    props.viewModel.selectedSpaceID,
   );
   const onRowClicked = useCallback(
     (id: ComponentID) => props.controller.onLearningSpaceClicked(id),
-    [props.controller]
+    [props.controller],
   );
   let spaceIcon: string;
 

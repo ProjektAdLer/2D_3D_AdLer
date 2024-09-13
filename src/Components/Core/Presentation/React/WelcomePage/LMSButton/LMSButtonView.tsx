@@ -6,7 +6,7 @@ import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";
 import LMSButtonController from "./LMSButtonController";
-import moodleIcon from "../../../../../../Assets/icons/16-moodle/moodle-icon-nobg.svg";
+import moodleIcon from "../../../../../../Assets/icons/moodle.svg";
 
 export default function LMSButton({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<

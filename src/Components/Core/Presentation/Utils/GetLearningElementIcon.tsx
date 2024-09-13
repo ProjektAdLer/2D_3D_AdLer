@@ -3,7 +3,7 @@ import h5pIcon from "../../../../Assets/icons/05-h5p/h5p-icon-nobg.svg";
 import videoIcon from "../../../../Assets/icons/07-video/video-icon-nobg.svg";
 import imageIcon from "../../../../Assets/icons/04-image/image-icon.svg";
 import taskIcon from "../../../../Assets/icons/03-task/task-icon-middle-nocheck-nobg.svg";
-import quizIcon from "../../../../Assets/icons/36-adaptivity-quiz/adaptivity-quiz-icon-nobg.svg";
+import quizIcon from "../../../../Assets/icons/adaptivity-quiz.svg";
 import {
   LearningElementTypeStrings,
   LearningElementTypes,

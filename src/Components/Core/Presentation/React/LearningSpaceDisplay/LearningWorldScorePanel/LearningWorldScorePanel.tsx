@@ -9,7 +9,7 @@ import {
   CircularProgressbarWithChildren,
 } from "react-circular-progressbar";
 import { useEffect, useState } from "react";
-import worldIcon from "../../../../../../Assets/icons/14-world/world-icon-nobg.svg";
+import worldIcon from "../../../../../../Assets/icons/world.svg";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import ICalculateLearningWorldScoreUseCase from "src/Components/Core/Application/UseCases/CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
 import CoreDIContainer from "src/Components/Core/DependencyInjection/CoreDIContainer";
@@ -20,7 +20,7 @@ export default function LearningWorldScorePanel({
   ...rest
 }: React.DetailedHTMLProps<PanelProps, HTMLDivElement>) {
   const [viewModel] = useBuilder<LearningWorldScorePanelViewModel, undefined>(
-    BUILDER_TYPES.ILearningWorldScorePanelBuilder
+    BUILDER_TYPES.ILearningWorldScorePanelBuilder,
   );
 
   const [scoreInfo] = useObservable<ScoreInfo>(viewModel?.scoreInfo);
@@ -33,7 +33,7 @@ export default function LearningWorldScorePanel({
   useEffect(() => {
     const calculateWorldScore =
       CoreDIContainer.get<ICalculateLearningWorldScoreUseCase>(
-        USECASE_TYPES.ICalculateLearningWorldScoreUseCase
+        USECASE_TYPES.ICalculateLearningWorldScoreUseCase,
       );
 
     calculateWorldScore.execute();

@@ -6,8 +6,8 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import MenuHeaderBarController from "./MenuHeaderBarController";
 import MenuHeaderBarViewModel from "./MenuHeaderBarViewModel";
-import homeIcon from "../../../../../../Assets/icons/22-home-icon/home-icon-nobg.svg";
-import worldIcon from "../../../../../../Assets/icons/23-world-menu/worldmenu-icon-nobg.svg";
+import homeIcon from "../../../../../../Assets/icons/home.svg";
+import worldIcon from "../../../../../../Assets/icons/world-menu.svg";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import HelpDeskModal from "../HelpDeskModal/HelpDeskModal";
 import HelpDeskButton from "../HelpDeskButton/HelpDeskButton";
