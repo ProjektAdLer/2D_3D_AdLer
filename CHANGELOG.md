@@ -12,9 +12,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 - controls explanation to learning space display
 - BottomTooltip acts like a button when hovered with mouse, to be clear that it can be clicked
-- new coin.svg
-- new close.svg
-- new hamburger-menu.svg
+- refactored ui icons
 - new character models
 
 ### Changed
@@ -24,6 +22,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - hover color for buttons to meet accesibility expectations
 - rearranged SideBarMenu order to a logic order
 - updated libraries
+- background color in learningElementsGoalPanel
 
 ### Removed
 
