@@ -23,6 +23,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - break time notification closes instead of minimizing from big modal
 - hover color for buttons to meet accesibility expectations
 - rearranged SideBarMenu order to a logic order
+- updated libraries
 
 ### Removed
 
