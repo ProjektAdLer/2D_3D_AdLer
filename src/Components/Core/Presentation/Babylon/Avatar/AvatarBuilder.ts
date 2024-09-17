@@ -11,6 +11,7 @@ import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/Lear
 import ILearningSpacePresenter from "../LearningSpaces/ILearningSpacePresenter";
 import IAvatarBuilder from "./IAvatarBuilder";
 import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 export default class AvatarBuilder
   extends AsyncPresentationBuilder<
@@ -31,18 +32,22 @@ export default class AvatarBuilder
   override buildViewModel(): void {
     super.buildViewModel();
     this.viewModel!.learningSpaceTemplateType = this.learningSpaceTemplateType;
+    this.viewModel!.focusSelection = CoreDIContainer.get(
+      PRESENTATION_TYPES.IAvatarFocusSelection,
+    );
   }
 
   override buildPresenter(): void {
     // create presenter via DI because it also acts as port for the avatar
     this.presenter = CoreDIContainer.get<IAvatarPresenter>(
-      PORT_TYPES.IAvatarPort
+      PORT_TYPES.IAvatarPort,
     );
     this.presenter.ViewModel = this.viewModel!;
 
     CoreDIContainer.get<ILearningWorldPort>(
-      PORT_TYPES.ILearningWorldPort
+      PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter, HistoryWrapper.currentLocationScope());
+    this.viewModel!.focusSelection.registerAvatarPresenter(this.presenter);
   }
 
   override buildController(): void {
@@ -56,7 +61,7 @@ export default class AvatarBuilder
 
     this.view!.asyncSetup().then(
       () => this.resolveIsCompleted(),
-      (e) => console.log(e)
+      (e) => console.log(e),
     );
   }
 }

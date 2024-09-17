@@ -3,6 +3,7 @@ import AvatarViewModel from "./AvatarViewModel";
 import IAvatarPresenter from "./IAvatarPresenter";
 import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
 import CharacterAnimationActions from "../CharacterAnimator/CharacterAnimationActions";
+import { Vector3 } from "@babylonjs/core";
 
 /**
  * @class AvatarPresenter
@@ -16,6 +17,10 @@ export default class AvatarPresenter implements IAvatarPresenter {
     this.viewModel = newViewModel;
   }
 
+  public get AvatarPosition(): Vector3 {
+    return this.viewModel.parentNode?.position;
+  }
+
   onStoryElementCutSceneTriggered(): void {
     this.viewModel.inputEnabled.Value = false;
   }
@@ -26,7 +31,7 @@ export default class AvatarPresenter implements IAvatarPresenter {
 
   public onLearningElementLoaded(learningElementTO: LearningElementTO): void {
     this.viewModel.characterAnimator.transition(
-      CharacterAnimationActions.InteractionStarted
+      CharacterAnimationActions.InteractionStarted,
     );
   }
 }
