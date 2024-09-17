@@ -31,12 +31,11 @@ export default class AvatarController implements IAvatarController {
 
   private keyMovementTarget: Nullable<Vector3> = null;
   private pointerMovementTarget: Nullable<Vector3> = null;
-  private lastFramePosition: Nullable<Vector3> = null;
 
   constructor(private viewModel: AvatarViewModel) {
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
-      SCENE_TYPES.ScenePresenterFactory
+      SCENE_TYPES.ScenePresenterFactory,
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
 
@@ -45,9 +44,6 @@ export default class AvatarController implements IAvatarController {
     //   this.processKeyboardEvent
     // );
     this.scenePresenter.Scene.onBeforeRenderObservable.add(this.applyInputs);
-    this.scenePresenter.Scene.onAfterRenderObservable.add(
-      this.broadcastNewAvatarPosition
-    );
   }
 
   @bind
@@ -60,7 +56,7 @@ export default class AvatarController implements IAvatarController {
       this.viewModel.movementTarget.Value = this.keyMovementTarget;
       this.viewModel.characterNavigator.startMovement(
         this.keyMovementTarget,
-        this.onMovementTargetReached
+        this.onMovementTargetReached,
       );
     } else if (this.pointerMovementTarget !== null) {
       const movementDistance = this.pointerMovementTarget
@@ -71,7 +67,7 @@ export default class AvatarController implements IAvatarController {
         this.viewModel.movementTarget.Value = this.pointerMovementTarget;
         this.viewModel.characterNavigator.startMovement(
           this.pointerMovementTarget,
-          this.onMovementTargetReached
+          this.onMovementTargetReached,
         );
       }
     }
@@ -87,7 +83,7 @@ export default class AvatarController implements IAvatarController {
   @bind
   private processKeyboardEvent(
     eventData: KeyboardInfo,
-    eventState: EventState
+    eventState: EventState,
   ) {
     if (
       eventData.type !== KeyboardEventTypes.KEYDOWN ||
@@ -101,11 +97,11 @@ export default class AvatarController implements IAvatarController {
         this.viewModel.parentNode
           .getChildren<ArcRotateCamera>()![0]
           .getDirection(this.getReferenceAxisByKey(eventData.event.key))
-          .normalize()
+          .normalize(),
       )
       .normalize();
     this.keyMovementTarget = this.navigation.Plugin.getClosestPoint(
-      this.keyMovementTarget
+      this.keyMovementTarget,
     );
   }
 
@@ -140,7 +136,7 @@ export default class AvatarController implements IAvatarController {
       this.navigation.Plugin.getClosestPoint(pickedPointOnGround);
     const distanceToSnappedPoint = Vector3.Distance(
       pickedPointOnGround,
-      snappedPoint
+      snappedPoint,
     );
 
     // if the snapped point is already on the navmesh (ie. close to the projected point), use it as the movement target
@@ -160,23 +156,6 @@ export default class AvatarController implements IAvatarController {
       // snap adjusted target to navmesh again
       this.pointerMovementTarget =
         this.navigation.Plugin.getClosestPoint(adjustedTarget);
-    }
-  }
-
-  @bind
-  private broadcastNewAvatarPosition(): void {
-    if (
-      this.lastFramePosition === null ||
-      Vector3.Distance(
-        this.lastFramePosition,
-        this.viewModel.parentNode.position
-      ) > 0.1
-    ) {
-      this.learningSpacePresenter.broadcastAvatarPosition(
-        this.viewModel.parentNode.position,
-        this.viewModel.interactionRadius
-      );
-      this.lastFramePosition = this.viewModel.parentNode.position;
     }
   }
 }

@@ -9,10 +9,12 @@ import Observable from "src/Lib/Observable";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
 import ICharacterNavigator from "../CharacterNavigator/ICharacterNavigator";
+import IAvatarFocusSelection from "./AvatarFocusSelection/IAvatarFokusSelection";
 
 export default class AvatarViewModel {
   public characterNavigator: ICharacterNavigator;
   public characterAnimator: ICharacterAnimator;
+  public focusSelection: IAvatarFocusSelection;
 
   public meshes: Mesh[];
 
