@@ -1,4 +1,11 @@
-import { useEffect, useRef } from "react";
+import {
+  useEffect,
+  useRef,
+  CSSProperties,
+  useReducer,
+  useState,
+  useCallback,
+} from "react";
 import { H5P as H5PPlayer } from "h5p-standalone";
 import LearningElementModalViewModel from "../LearningElementModalViewModel";
 import ILearningElementModalController from "../ILearningElementModalController";
@@ -13,16 +20,44 @@ export default function H5PContent({
 }) {
   const h5pContainerRef = useRef<HTMLDivElement>(null);
 
+  const targetViewPort = {
+    height: window.innerHeight,
+    width: window.innerWidth,
+    ratio: window.innerWidth / window.innerHeight,
+  };
+
+  function h5pResizing() {
+    if (h5pContainerRef.current?.style.visibility) {
+      const h5pRef = h5pContainerRef.current;
+      const h5pRatio = h5pRef.clientWidth / h5pRef.clientHeight;
+
+      if (h5pRatio < targetViewPort.ratio) {
+        h5pRef.style.width = targetViewPort.height * h5pRatio - 20 + "px";
+        h5pRef.style.height = targetViewPort.height + "px";
+      } else {
+        h5pRef.style.width = "100%";
+        h5pRef.style.height = "auto";
+      }
+
+      window.dispatchEvent(new Event("resize"));
+      h5pRef.style.visibility = "visible";
+    }
+  }
+
   useEffect(() => {
     const debug = async () => {
       if (h5pContainerRef.current) {
         const el = h5pContainerRef.current;
-        await new H5PPlayer(el, createH5POptions(viewModel));
+        new H5PPlayer(el, createH5POptions(viewModel)).then(() => {
+          //@ts-ignore
+          H5P.externalDispatcher.on("xAPI", controller.h5pEventCalled);
+          // @ts-ignore
+          H5P.xAPICompletedListener = controller.xAPICompletedListener;
 
-        //@ts-ignore
-        H5P.externalDispatcher.on("xAPI", controller.h5pEventCalled);
-        // @ts-ignore
-        H5P.xAPICompletedListener = controller.xAPICompletedListener;
+          setTimeout(() => {
+            h5pResizing();
+          }, 1000);
+        });
       }
     };
     debug();
@@ -39,8 +74,8 @@ export default function H5PContent({
   return (
     <div className="App">
       <div
-        className=" w-[80vw] h-[80vh] sm:h-[80vh] sm:w-[90vw] xl:h-[85vh] xl:w-[80vw] xl:scale-75"
         id="h5p-container"
+        style={{ visibility: "hidden" }}
         ref={h5pContainerRef}
       ></div>
     </div>
