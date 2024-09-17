@@ -8,20 +8,25 @@ import ICharacterNavigator from "../../Presentation/Babylon/CharacterNavigator/I
 import CharacterNavigator from "../../Presentation/Babylon/CharacterNavigator/CharacterNavigator";
 import IAvatarCameraPresenter from "../../Presentation/Babylon/AvatarCamera/IAvatarCameraPresenter";
 import AvatarCameraPresenter from "../../Presentation/Babylon/AvatarCamera/AvatarCameraPresenter";
+import IAvatarFocusSelection from "../../Presentation/Babylon/Avatar/AvatarFocusSelection/IAvatarFokusSelection";
+import AvatarFocusSelection from "../../Presentation/Babylon/Avatar/AvatarFocusSelection/AvatarFocusSelection";
 
 const PresentationDIContainer = new ContainerModule((bind) => {
   bind<IMovementIndicator>(PRESENTATION_TYPES.IMovementIndicator).to(
-    MovementIndicator
+    MovementIndicator,
   );
   bind<ICharacterAnimator>(PRESENTATION_TYPES.ICharacterAnimator).to(
-    CharacterAnimator
+    CharacterAnimator,
   );
   bind<ICharacterNavigator>(PRESENTATION_TYPES.ICharacterNavigator).to(
-    CharacterNavigator
+    CharacterNavigator,
   );
   bind<IAvatarCameraPresenter>(PRESENTATION_TYPES.IAvatarCameraPresenter).to(
-    AvatarCameraPresenter
+    AvatarCameraPresenter,
   );
+  bind<IAvatarFocusSelection>(PRESENTATION_TYPES.IAvatarFocusSelection)
+    .to(AvatarFocusSelection)
+    .inSingletonScope();
 });
 
 export default PresentationDIContainer;
