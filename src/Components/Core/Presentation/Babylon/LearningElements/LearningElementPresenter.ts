@@ -7,6 +7,15 @@ export default class LearningElementPresenter
 {
   constructor(private viewModel: LearningElementViewModel) {}
 
+  get Position(): Vector3 {
+    const { min, max } =
+      this.viewModel.modelMeshes[0].getHierarchyBoundingVectors();
+    return min
+      .add(max)
+      .scale(0.5)
+      .multiplyInPlace(new Vector3(1, 0, 1));
+  }
+
   onLearningElementScored(hasScored: boolean, elementID: number): void {
     if (this.viewModel.id === elementID) {
       this.viewModel.hasScored.Value = hasScored;
@@ -23,11 +32,11 @@ export default class LearningElementPresenter
     }
   }
 
-  onAvatarPositionChanged(position: Vector3, interactionRadius: number): void {
-    const distance = Vector3.Distance(position, this.viewModel.position);
+  onFocused(): void {
+    this.viewModel.isInteractable.Value = true;
+  }
 
-    if (distance <= interactionRadius)
-      this.viewModel.isInteractable.Value = true;
-    else this.viewModel.isInteractable.Value = false;
+  onUnfocused(): void {
+    this.viewModel.isInteractable.Value = false;
   }
 }

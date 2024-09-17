@@ -13,6 +13,8 @@ import LearningElementTO from "src/Components/Core/Application/DataTransferObjec
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
 import ILearningElementBuilder from "./ILearningElementBuilder";
 import { LocationScope } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
+import IAvatarFocusSelection from "../Avatar/AvatarFocusSelection/IAvatarFokusSelection";
 
 @injectable()
 export default class LearningElementBuilder
@@ -32,7 +34,7 @@ export default class LearningElementBuilder
       LearningElementViewModel,
       LearningElementController,
       LearningElementView,
-      LearningElementPresenter
+      LearningElementPresenter,
     );
   }
 
@@ -62,8 +64,11 @@ export default class LearningElementBuilder
     super.buildPresenter();
 
     CoreDIContainer.get<ILearningWorldPort>(
-      PORT_TYPES.ILearningWorldPort
+      PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, LocationScope._sceneRendering);
+    CoreDIContainer.get<IAvatarFocusSelection>(
+      PRESENTATION_TYPES.IAvatarFocusSelection,
+    ).registerFocusable(this.presenter!);
   }
 
   override buildView(): void {
@@ -75,7 +80,7 @@ export default class LearningElementBuilder
       },
       (e) => {
         console.log(e);
-      }
+      },
     );
   }
 }
