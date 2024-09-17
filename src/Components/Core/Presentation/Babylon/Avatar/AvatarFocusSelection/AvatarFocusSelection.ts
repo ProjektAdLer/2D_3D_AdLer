@@ -1,0 +1,143 @@
+import Observable from "src/Lib/Observable";
+import IAvatarPresenter from "../IAvatarPresenter";
+import IAvatarFokusable from "./IAvatarFocusable";
+import IAvatarFocusSelection from "./IAvatarFokusSelection";
+import { injectable } from "inversify";
+import SCENE_TYPES, {
+  ScenePresenterFactory,
+} from "~DependencyInjection/Scenes/SCENE_TYPES";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import LearningSpaceSceneDefinition from "../../SceneManagement/Scenes/LearningSpaceSceneDefinition";
+import bind from "bind-decorator";
+import {
+  Color3,
+  MeshBuilder,
+  StandardMaterial,
+  Vector3,
+} from "@babylonjs/core";
+import { config } from "src/config";
+
+@injectable()
+export default class AvatarFocusSelection implements IAvatarFocusSelection {
+  private readonly squaredInteractionDistance: number = 1.6 ** 2; // squared distance for performance, change first value to change distance
+  private readonly squaredAvatarMovementThreshold: number = 0.05 ** 2;
+
+  private focusables: IAvatarFokusable[] = [];
+  private avatarPresenter: IAvatarPresenter;
+  private previousAvatarPosition: Vector3 | null = null;
+
+  readonly CurrentFocus: Observable<IAvatarFokusable | null> =
+    new Observable<IAvatarFokusable | null>(null);
+
+  constructor() {
+    const scenePresenter = CoreDIContainer.get<ScenePresenterFactory>(
+      SCENE_TYPES.ScenePresenterFactory,
+    )(LearningSpaceSceneDefinition);
+
+    scenePresenter.Scene.onBeforeRenderObservable.add(this.updateFocus);
+
+    scenePresenter.Scene.onBeforeRenderObservable.add(
+      this.setupOnBeforeFirstFrame,
+      undefined,
+      false,
+      undefined,
+      true,
+    );
+  }
+
+  registerAvatarPresenter(avatarPresenter: IAvatarPresenter): void {
+    this.avatarPresenter = avatarPresenter;
+  }
+
+  registerFocusable(focusable: IAvatarFokusable): void {
+    this.focusables.push(focusable);
+  }
+
+  isInFocus(focusable: IAvatarFokusable): boolean {
+    return this.CurrentFocus.Value === focusable;
+  }
+
+  @bind
+  private setupOnBeforeFirstFrame(): void {
+    this.previousAvatarPosition = this.avatarPresenter.AvatarPosition;
+
+    if (config.isDebug)
+      this.focusables.forEach((focusable) => {
+        this.debug_drawInteractionRadius(focusable.Position);
+      });
+  }
+
+  @bind
+  private updateFocus(): void {
+    // skip update without avatar or focusables
+    if (!this.avatarPresenter || this.focusables.length === 0) return;
+
+    // skip update if avatar has not moved enough
+    const currentAvatarPosition = this.avatarPresenter.AvatarPosition;
+    const distance = Vector3.DistanceSquared(
+      this.previousAvatarPosition ?? Vector3.Zero(),
+      currentAvatarPosition,
+    );
+    if (
+      this.previousAvatarPosition &&
+      currentAvatarPosition &&
+      Vector3.DistanceSquared(
+        this.previousAvatarPosition,
+        currentAvatarPosition,
+      ) < this.squaredAvatarMovementThreshold
+    ) {
+      console.log("skip update if avatar has not moved enough, " + distance);
+      return;
+    }
+    this.previousAvatarPosition = currentAvatarPosition;
+
+    // determine closest focusable
+    let newFocus: IAvatarFokusable | null = null;
+    let shortestDistance = this.squaredInteractionDistance;
+    for (let i = 0; i < this.focusables.length; i++) {
+      const distance = Vector3.DistanceSquared(
+        currentAvatarPosition,
+        this.focusables[i].Position,
+      ); // use squared distance for performance
+
+      if (distance < shortestDistance) {
+        newFocus = this.focusables[i];
+        shortestDistance = distance;
+      }
+    }
+
+    // change focus and notify focusables
+    if (newFocus !== this.CurrentFocus.Value) {
+      this.CurrentFocus.Value?.onUnfocused &&
+        this.CurrentFocus.Value.onUnfocused();
+
+      console.log("change focus and notify focusables");
+
+      if (newFocus !== null) this.CurrentFocus.Value = newFocus;
+      else this.CurrentFocus.Value = null;
+
+      this.CurrentFocus.Value?.onFocused && this.CurrentFocus.Value.onFocused();
+    }
+  }
+
+  private debug_drawInteractionRadius(position: Vector3) {
+    if (!config.isDebug) return;
+
+    const scenePresenter = CoreDIContainer.get<ScenePresenterFactory>(
+      SCENE_TYPES.ScenePresenterFactory,
+    )(LearningSpaceSceneDefinition);
+
+    const circle = MeshBuilder.CreateTorus(
+      "circle",
+      {
+        diameter: Math.sqrt(this.squaredInteractionDistance) * 2,
+        thickness: 0.01,
+        tessellation: 64,
+      },
+      scenePresenter.Scene,
+    );
+    circle.position = position;
+    circle.material = new StandardMaterial("material", scenePresenter.Scene);
+    (circle.material as StandardMaterial).diffuseColor = Color3.Teal();
+  }
+}
