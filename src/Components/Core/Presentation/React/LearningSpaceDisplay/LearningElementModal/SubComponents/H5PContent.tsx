@@ -20,16 +20,16 @@ export default function H5PContent({
 }) {
   const h5pContainerRef = useRef<HTMLDivElement>(null);
 
-  const targetViewPort = {
-    height: window.innerHeight,
-    width: window.innerWidth,
-    ratio: window.innerWidth / window.innerHeight,
-  };
-
   function h5pResizing() {
     if (h5pContainerRef.current?.style.visibility) {
       const h5pRef = h5pContainerRef.current;
       const h5pRatio = h5pRef.clientWidth / h5pRef.clientHeight;
+
+      const targetViewPort = {
+        height: window.innerHeight,
+        width: window.innerWidth,
+        ratio: window.innerWidth / window.innerHeight,
+      };
 
       if (h5pRatio < targetViewPort.ratio) {
         h5pRef.style.width = targetViewPort.height * h5pRatio - 20 + "px";
