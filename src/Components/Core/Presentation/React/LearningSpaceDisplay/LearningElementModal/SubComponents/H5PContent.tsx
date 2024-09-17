@@ -22,25 +22,27 @@ export default function H5PContent({
 
   function h5pResizing() {
     if (h5pContainerRef.current?.style.visibility) {
-      const h5pRef = h5pContainerRef.current;
+      const h5pDiv = h5pContainerRef.current;
+      const h5pRef = document.getElementsByClassName("h5p-iframe-wrapper")[0] as HTMLDivElement;
       const h5pRatio = h5pRef.clientWidth / h5pRef.clientHeight;
 
       const targetViewPort = {
         height: window.innerHeight,
         width: window.innerWidth,
-        ratio: window.innerWidth / window.innerHeight,
+        ratio: window.innerWidth / window.innerHeight
       };
 
+      console.log("h5pRatio", h5pRatio);
+      console.log("targetViewPort", targetViewPort.ratio);
+
       if (h5pRatio < targetViewPort.ratio) {
-        h5pRef.style.width = targetViewPort.height * h5pRatio - 20 + "px";
-        h5pRef.style.height = targetViewPort.height + "px";
+        h5pDiv.style.width = targetViewPort.height * (h5pRatio - 0.1) + "px";
       } else {
-        h5pRef.style.width = "100%";
-        h5pRef.style.height = "auto";
+        h5pDiv.style.width = "90vw";
       }
 
       window.dispatchEvent(new Event("resize"));
-      h5pRef.style.visibility = "visible";
+      h5pDiv.style.visibility = "visible";
     }
   }
 
@@ -75,7 +77,7 @@ export default function H5PContent({
     <div className="App">
       <div
         id="h5p-container"
-        style={{ visibility: "hidden" }}
+        style={{ visibility: "hidden"}}
         ref={h5pContainerRef}
       ></div>
     </div>
