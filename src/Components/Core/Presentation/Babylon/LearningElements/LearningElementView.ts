@@ -36,10 +36,10 @@ export default class LearningElementView {
 
   constructor(
     private viewModel: LearningElementViewModel,
-    private controller: ILearningElementController
+    private controller: ILearningElementController,
   ) {
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
-      SCENE_TYPES.ScenePresenterFactory
+      SCENE_TYPES.ScenePresenterFactory,
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
 
@@ -51,7 +51,7 @@ export default class LearningElementView {
   public async setupLearningElement(): Promise<void> {
     await Promise.all([this.loadElementModel(), this.loadIconModel()]);
     this.setupInteractions();
-    this.addMeshesToHighlightLayer();
+    this.updateHighlight();
     this.positionModel();
   }
 
@@ -63,13 +63,13 @@ export default class LearningElementView {
 
     this.viewModel.modelMeshes = (await this.scenePresenter.loadModel(
       modelLink,
-      true
+      true,
     )) as Mesh[];
   }
 
   private async loadIconModel(): Promise<void> {
     this.viewModel.iconMeshes = (await this.scenePresenter.loadModel(
-      iconLinks[this.viewModel.type as LearningElementTypes]!
+      iconLinks[this.viewModel.type as LearningElementTypes]!,
     )) as Mesh[];
   }
 
@@ -85,45 +85,35 @@ export default class LearningElementView {
 
     // register interaction callbacks
     actionManager.registerAction(
-      new ExecuteCodeAction(ActionManager.OnPickTrigger, this.controller.picked)
+      new ExecuteCodeAction(
+        ActionManager.OnPickTrigger,
+        this.controller.picked,
+      ),
     );
     actionManager.registerAction(
       new ExecuteCodeAction(
         ActionManager.OnPointerOverTrigger,
-        this.controller.pointerOver
-      )
+        this.controller.pointerOver,
+      ),
     );
     actionManager.registerAction(
       new ExecuteCodeAction(
         ActionManager.OnPointerOutTrigger,
-        this.controller.pointerOut
-      )
+        this.controller.pointerOut,
+      ),
     );
-  }
-
-  private addMeshesToHighlightLayer(): void {
-    const highlightColor = this.viewModel.hasScored.Value
-      ? HighlightColors.LearningElementSolved
-      : HighlightColors.LearningElementUnsolved;
-
-    this.viewModel.modelMeshes.forEach((mesh) => {
-      this.scenePresenter.HighlightLayer.addMesh(mesh, highlightColor);
-    });
-    this.viewModel.iconMeshes.forEach((mesh) => {
-      this.scenePresenter.HighlightLayer.addMesh(mesh, highlightColor);
-    });
   }
 
   private positionModel(): void {
     if (this.viewModel.modelMeshes && this.viewModel.iconMeshes) {
       this.viewModel.modelMeshes[0].position = this.viewModel.position;
       this.viewModel.iconMeshes[0].position = this.viewModel.position.add(
-        new Vector3(0, this.viewModel.iconYOffset, 0)
+        new Vector3(0, this.viewModel.iconYOffset, 0),
       );
 
       this.viewModel.modelMeshes[0].rotate(
         Vector3.Up(),
-        Tools.ToRadians(this.viewModel.rotation)
+        Tools.ToRadians(this.viewModel.rotation),
       );
       this.viewModel.iconMeshes[0].rotation = new Vector3(0, -Math.PI / 4, 0);
     }
