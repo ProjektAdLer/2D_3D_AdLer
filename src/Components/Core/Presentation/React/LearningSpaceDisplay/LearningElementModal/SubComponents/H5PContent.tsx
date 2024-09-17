@@ -77,7 +77,7 @@ export default function H5PContent({
     <div className="App">
       <div
         id="h5p-container"
-        style={{ visibility: "hidden"}}
+        style={{ visibility: "hidden", width: "50vw" }}
         ref={h5pContainerRef}
       ></div>
     </div>
