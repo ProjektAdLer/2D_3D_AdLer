@@ -10,28 +10,29 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- controls explanation to learning space display
-- BottomTooltip acts like a button when hovered with mouse, to be clear that it can be clicked
-- refactored ui icons
-- new character models
+- controls explanation to learning space display are now shown in the loading screen
+- new character models have been added
+- welcome screen now has a new button to directly open the associated moodle
 
 ### Changed
 
-- wrong space icon in SideBar to correct spaceMenuIcon
-- break time notification closes instead of minimizing from big modal
+- break time notification now closes instead of minimizing from big modal
 - hover color for buttons to meet accesibility expectations
-- rearranged SideBarMenu order to a logic order
-- updated libraries
+- rearranged SideBarMenu into a more logical order
 - background color in learningElementsGoalPanel
+- refactored ui icons
+- BottomTooltip now behaves like a button when hovered with mouse, to be clear that it can be clicked
 
 ### Removed
 
-- deprecated and unused icons
+- deprecated and unused icons have been deleted
 
 ### Fixed
 
-- avatar spawn rotation not being applied
-- intro story NPC spawn when in cutscene after entering a new learning space
+- wrong space icon in SideBar now depicts correct spaceMenuIcon
+- avatar spawn rotation is now being applied
+- intro story NPC now spawn during cutscene after entering a new learning space
+- fixed several button placement inconsistencies
 
 ### Deprecated
 
