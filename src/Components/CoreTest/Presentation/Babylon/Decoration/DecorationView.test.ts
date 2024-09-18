@@ -68,7 +68,6 @@ describe("DecorationView", () => {
       LearningSpaceTheme_Arcade.outsideDecorationModels[
         LearningSpaceTemplateType.L
       ],
-      false,
     );
     expect(viewModel.outsideMeshes).toStrictEqual([mockMesh]);
   });
