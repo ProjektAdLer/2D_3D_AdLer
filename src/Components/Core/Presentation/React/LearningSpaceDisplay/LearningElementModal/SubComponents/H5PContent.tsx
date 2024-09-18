@@ -41,7 +41,7 @@ export default function H5PContent({
       console.log(h5pDiv);
 
       if (h5pRatio < targetViewPort.ratio) {
-        h5pDiv.style.width = targetViewPort.height * 0.8 * h5pRatio + "px";
+        h5pDiv.style.width = targetViewPort.height * 0.82 * h5pRatio + "px";
       } else {
         h5pDiv.style.width = "90vw";
       }
@@ -55,7 +55,7 @@ export default function H5PContent({
     const debug = async () => {
       if (h5pContainerRef.current) {
         const el = h5pContainerRef.current;
-        new H5PPlayer(el, createH5POptions(viewModel)).then(() => {
+        await new H5PPlayer(el, createH5POptions(viewModel)).then(() => {
           //@ts-ignore
           H5P.externalDispatcher.on("xAPI", controller.h5pEventCalled);
           // @ts-ignore
@@ -82,7 +82,7 @@ export default function H5PContent({
     <div className="App max-h-[90vh] overflow-y-auto">
       <div
         id="h5p-container"
-        style={{ visibility: "hidden", width: "90vw" }}
+        style={{ visibility: "hidden", width: "500px" }}
         ref={h5pContainerRef}
       ></div>
     </div>
