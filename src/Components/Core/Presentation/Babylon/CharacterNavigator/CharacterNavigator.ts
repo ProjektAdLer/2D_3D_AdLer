@@ -39,7 +39,7 @@ export default class CharacterNavigator
     collisionQueryRange: 2,
     pathOptimizationRange: 0.0,
     separationWeight: 1.0,
-    reachRadius: 0.3, // acts as stopping distance
+    reachRadius: 0.2, // acts as stopping distance
   };
   private readonly earlyStoppingPatience = 400; // in ms
   private readonly earlyStoppingVelocityThreshold = 0.3;
