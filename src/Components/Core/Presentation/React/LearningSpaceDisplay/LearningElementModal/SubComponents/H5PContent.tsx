@@ -23,20 +23,25 @@ export default function H5PContent({
   function h5pResizing() {
     if (h5pContainerRef.current?.style.visibility) {
       const h5pDiv = h5pContainerRef.current;
-      const h5pRef = document.getElementsByClassName("h5p-iframe-wrapper")[0] as HTMLDivElement;
+      const h5pRef = document.getElementsByClassName(
+        "h5p-iframe-wrapper"
+      )[0] as HTMLDivElement;
       const h5pRatio = h5pRef.clientWidth / h5pRef.clientHeight;
+
+      //Set Overflow to H5P Content
 
       const targetViewPort = {
         height: window.innerHeight,
         width: window.innerWidth,
-        ratio: window.innerWidth / window.innerHeight
+        ratio: window.innerWidth / window.innerHeight,
       };
 
       console.log("h5pRatio", h5pRatio);
       console.log("targetViewPort", targetViewPort.ratio);
+      console.log(h5pDiv);
 
       if (h5pRatio < targetViewPort.ratio) {
-        h5pDiv.style.width = targetViewPort.height * (h5pRatio - 0.1) + "px";
+        h5pDiv.style.width = targetViewPort.height * 0.8 * h5pRatio + "px";
       } else {
         h5pDiv.style.width = "90vw";
       }
@@ -74,10 +79,10 @@ export default function H5PContent({
   }, [controller, viewModel]);
 
   return (
-    <div className="App">
+    <div className="App max-h-[90vh] overflow-y-auto">
       <div
         id="h5p-container"
-        style={{ visibility: "hidden", width: "50vw" }}
+        style={{ visibility: "hidden", width: "90vw" }}
         ref={h5pContainerRef}
       ></div>
     </div>
