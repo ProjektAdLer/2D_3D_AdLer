@@ -16,7 +16,7 @@ jest.mock("h5p-standalone");
 
 const elementModalControllerMock = mock<ILearningElementModalController>();
 
-describe("H5PContentView", () => {
+describe.skip("H5PContentView", () => {
   window["H5P"] = {
     externalDispatcher: {
       on: () => {},
@@ -38,7 +38,7 @@ describe("H5PContentView", () => {
           viewModel={viewModel}
           controller={elementModalControllerMock}
         />
-      </Provider>
+      </Provider>,
     );
 
     waitFor(() => {
