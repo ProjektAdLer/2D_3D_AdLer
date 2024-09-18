@@ -36,12 +36,8 @@ export default function H5PContent({
         ratio: window.innerWidth / window.innerHeight,
       };
 
-      console.log("h5pRatio", h5pRatio);
-      console.log("targetViewPort", targetViewPort.ratio);
-      console.log(h5pDiv);
-
       if (h5pRatio < targetViewPort.ratio) {
-        h5pDiv.style.width = targetViewPort.height * 0.82 * h5pRatio + "px";
+        h5pDiv.style.width = targetViewPort.height * 0.80 * h5pRatio + "px";
       } else {
         h5pDiv.style.width = "90vw";
       }
@@ -82,7 +78,7 @@ export default function H5PContent({
     <div className="App max-h-[90vh] overflow-y-auto">
       <div
         id="h5p-container"
-        style={{ visibility: "hidden", width: "500px" }}
+        style={{ visibility: "hidden", width: "90vw" }}
         ref={h5pContainerRef}
       ></div>
     </div>
