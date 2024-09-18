@@ -5,12 +5,12 @@ import { getLearningElementIcon } from "../../../Core/Presentation/Utils/GetLear
 // components is the path to the icon.
 describe("GetLearningElementIcon should return a react component for valid element types", () => {
   test.each([
-    ["text" as LearningElementTypeStrings, "text-icon"],
-    ["image" as LearningElementTypeStrings, "image-icon"],
-    ["video" as LearningElementTypeStrings, "video-icon"],
-    ["h5p" as LearningElementTypeStrings, "h5p-icon"],
-    ["pdf" as LearningElementTypeStrings, "text-icon"],
-    ["adaptivity" as LearningElementTypeStrings, "quiz-icon"],
+    ["text" as LearningElementTypeStrings, "text.svg"],
+    ["image" as LearningElementTypeStrings, "image.svg"],
+    ["video" as LearningElementTypeStrings, "video"],
+    ["h5p" as LearningElementTypeStrings, "h5p"],
+    ["pdf" as LearningElementTypeStrings, "text"],
+    ["adaptivity" as LearningElementTypeStrings, "quiz"],
   ])("should run for %s", (type, expected) => {
     const result = getLearningElementIcon(type);
     expect(result.props["src"]).toContain(expected);
@@ -18,6 +18,6 @@ describe("GetLearningElementIcon should return a react component for valid eleme
 
   test("should return default task icon, if no valid input is delivered", () => {
     const result = getLearningElementIcon("" as LearningElementTypeStrings);
-    expect(result.props["src"]).toContain("task-icon");
+    expect(result.props["src"]).toContain("learning-elements");
   });
 });
