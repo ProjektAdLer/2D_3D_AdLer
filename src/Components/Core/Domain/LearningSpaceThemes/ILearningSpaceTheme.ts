@@ -1,9 +1,13 @@
 import { LearningElementModel } from "../LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypes } from "../Types/LearningElementTypes";
-import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
+import { LearningSpaceTemplateType } from "../Types/LearningSpaceTemplateType";
 
 type LearningElementModelsMap = Readonly<
   Record<LearningElementTypes, LearningElementModel[]>
+>;
+
+type LearningSpaceDecorationMap = Readonly<
+  Record<LearningSpaceTemplateType, string>
 >;
 
 export default interface ILearningSpaceTheme {
@@ -16,9 +20,6 @@ export default interface ILearningSpaceTheme {
   readonly windowModel: string;
   readonly ambienceModel: string;
   readonly storyElementModel: LearningElementModel;
-  readonly decorationModelLinkLShape: string;
-  readonly decorationModelLinkDShape: string;
-  readonly decorationModelLinkTShape: string;
-  readonly decorationModelLink2x2: string;
-  readonly decorationModelLink2x3: string;
+  readonly insideDecorationModels: LearningSpaceDecorationMap;
+  readonly outsideDecorationModels: LearningSpaceDecorationMap;
 }

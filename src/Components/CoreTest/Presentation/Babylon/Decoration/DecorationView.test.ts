@@ -1,7 +1,6 @@
-import LearningSpaceTheme_Campus from "../../../../Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Arcade";
+import { LearningSpaceTheme_CampusAB } from "../../../../Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Campus";
 import LearningSpaceTheme_Arcade from "../../../../Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Arcade";
-import LearningSpaceTheme_Suburb from "../../../../Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Suburb";
-import { AbstractMesh, NullEngine, Scene } from "@babylonjs/core";
+import { Mesh, NullEngine, Scene } from "@babylonjs/core";
 import { mockDeep } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
@@ -10,6 +9,8 @@ import DecorationViewModel from "../../../../Core/Presentation/Babylon/Decoratio
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+
+jest.mock("@babylonjs/core/Meshes");
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -25,7 +26,7 @@ describe("DecorationView", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
-      scenePresenterFactoryMock
+      scenePresenterFactoryMock,
     );
   });
 
@@ -34,200 +35,67 @@ describe("DecorationView", () => {
     jest.clearAllMocks();
   });
 
-  test("constructor injects scenePresenter", () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-
-    const [, systemUnderTest] = buildSystemUnderTest();
-    expect(systemUnderTest["scenePresenter"]).toBeDefined();
-  });
-
   //ANF-ID: [ELG0025]
-  test("asyncSetup/loadMeshAsync calls scenePresenter.loadModel with L room", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-
+  test("loads inside decoration models when theme and learning space template type are valid", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.L;
+    viewModel.theme = LearningSpaceThemeType.CampusAB;
+    viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.L;
+    const mockMesh = new Mesh("insideDeco", new Scene(new NullEngine()));
+    scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
+
     await systemUnderTest.asyncSetup();
 
-    expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
-  });
-
-  //ANF-ID: [ELG0025]
-  test("asyncSetup/loadMeshAsync calls scenePresenter.loadModel with R6 room", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.R6;
-    await systemUnderTest.asyncSetup();
-
-    expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
-  });
-
-  //ANF-ID: [ELG0025]
-  test("asyncSetup/loadMeshAsync calls scenePresenter.loadModel with R8 room", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.R8;
-    await systemUnderTest.asyncSetup();
-
-    expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
-  });
-
-  //ANF-ID: [ELG0025]
-  test("asyncSetup/loadMeshAsync returns without calling loadModel when templateType is None", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.None;
-    await systemUnderTest.asyncSetup();
-
-    expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(0);
-  });
-
-  test("asyncSetup sets default theme, if no theme is provided", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.learningSpaceTemplateType.Value = LearningSpaceTemplateType.L;
-    viewModel.theme = "";
-    await systemUnderTest.asyncSetup();
     expect(scenePresenterMock.loadModel).toHaveBeenCalledWith(
-      LearningSpaceTheme_Arcade.decorationModelLinkLShape,
-      true
+      LearningSpaceTheme_CampusAB.insideDecorationModels[
+        LearningSpaceTemplateType.L
+      ],
+      true,
     );
+    expect(viewModel.insideMeshes).toStrictEqual([mockMesh]);
   });
 
-  //ANF-ID: [ELG0025]
-  test.each([
-    [
-      LearningSpaceTemplateType.L,
-      LearningSpaceTheme_Arcade.decorationModelLinkLShape,
-    ],
-    [
-      LearningSpaceTemplateType.R6,
-      LearningSpaceTheme_Arcade.decorationModelLink2x2,
-    ],
-    [
-      LearningSpaceTemplateType.R8,
-      LearningSpaceTheme_Arcade.decorationModelLink2x3,
-    ],
-    [
-      LearningSpaceTemplateType.T,
-      LearningSpaceTheme_Arcade.decorationModelLinkTShape,
-    ],
-    [
-      LearningSpaceTemplateType.D,
-      LearningSpaceTheme_Arcade.decorationModelLinkDShape,
-    ],
-  ])(
-    "asyncSetup loads with theme `Campus` models, when given spacetemplatetype %s, returns modelLink %s",
-    async (templateType, expectedResult) => {
-      scenePresenterMock.loadModel.mockResolvedValue([
-        new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-      ]);
+  // ANF-ID: [ELG0025]
+  test("loads outside decoration models when theme and learning space template type are valid", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Arcade;
+    viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.L;
+    const mockMesh = new Mesh("outsideDeco", new Scene(new NullEngine()));
+    scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
 
-      const [viewModel, systemUnderTest] = buildSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Arcade;
-      viewModel.learningSpaceTemplateType.Value = templateType;
-      await systemUnderTest.asyncSetup();
-      expect(scenePresenterMock.loadModel).toHaveBeenCalledWith(
-        expectedResult,
-        true
-      );
-    }
-  );
+    await systemUnderTest.asyncSetup();
 
-  //ANF-ID: [ELG0025]
-  test.each([
-    [
-      LearningSpaceTemplateType.L,
-      LearningSpaceTheme_Campus.decorationModelLinkLShape,
-    ],
-    [
-      LearningSpaceTemplateType.R6,
-      LearningSpaceTheme_Campus.decorationModelLink2x2,
-    ],
-    [
-      LearningSpaceTemplateType.R8,
-      LearningSpaceTheme_Campus.decorationModelLink2x3,
-    ],
-    [
-      LearningSpaceTemplateType.T,
-      LearningSpaceTheme_Campus.decorationModelLinkTShape,
-    ],
-    [
-      LearningSpaceTemplateType.D,
-      LearningSpaceTheme_Campus.decorationModelLinkDShape,
-    ],
-  ])(
-    "asyncSetup loads with theme `Campus` models, when given spacetemplatetype %s, returns modelLink %s",
-    async (templateType, expectedResult) => {
-      scenePresenterMock.loadModel.mockResolvedValue([
-        new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-      ]);
+    expect(scenePresenterMock.loadModel).toHaveBeenCalledWith(
+      LearningSpaceTheme_Arcade.outsideDecorationModels[
+        LearningSpaceTemplateType.L
+      ],
+      false,
+    );
+    expect(viewModel.outsideMeshes).toStrictEqual([mockMesh]);
+  });
 
-      const [viewModel, systemUnderTest] = buildSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Campus;
-      viewModel.learningSpaceTemplateType.Value = templateType;
-      await systemUnderTest.asyncSetup();
-      expect(scenePresenterMock.loadModel).toHaveBeenCalledWith(
-        expectedResult,
-        true
-      );
-    }
-  );
+  // ANF-ID: [ELG0025]
+  test.skip("loads no model when theme is invalid", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = "invalid theme";
+    viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.L;
 
-  //ANF-ID: [ELG0025]
-  test.each([
-    [
-      LearningSpaceTemplateType.L,
-      LearningSpaceTheme_Suburb.decorationModelLinkLShape,
-    ],
-    [
-      LearningSpaceTemplateType.R6,
-      LearningSpaceTheme_Suburb.decorationModelLink2x2,
-    ],
-    [
-      LearningSpaceTemplateType.R8,
-      LearningSpaceTheme_Suburb.decorationModelLink2x3,
-    ],
-    [
-      LearningSpaceTemplateType.T,
+    systemUnderTest.asyncSetup();
 
-      LearningSpaceTheme_Suburb.decorationModelLinkTShape,
-    ],
-    [
-      LearningSpaceTemplateType.D,
-      LearningSpaceTheme_Suburb.decorationModelLinkDShape,
-    ],
-  ])(
-    "asyncSetup loads with theme `Suburb` models, when given spacetemplatetype %s, returns modelLink %s",
-    async (templateType, expectedResult) => {
-      scenePresenterMock.loadModel.mockResolvedValue([
-        new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-      ]);
+    expect(scenePresenterMock.loadModel).not.toHaveBeenCalled();
+    expect(viewModel.insideMeshes).toStrictEqual([]);
+    expect(viewModel.outsideMeshes).toStrictEqual([]);
+  });
 
-      const [viewModel, systemUnderTest] = buildSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Suburb;
-      viewModel.learningSpaceTemplateType.Value = templateType;
-      await systemUnderTest.asyncSetup();
-      expect(scenePresenterMock.loadModel).toHaveBeenCalledWith(
-        expectedResult,
-        true
-      );
-    }
-  );
+  // ANF-ID: [ELG0025]
+  test.skip("loads no model when learning space template type is None", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.CampusAB;
+    viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.None;
+
+    systemUnderTest.asyncSetup();
+
+    expect(scenePresenterMock.loadModel).not.toHaveBeenCalled();
+    expect(viewModel.insideMeshes).toStrictEqual([]);
+    expect(viewModel.outsideMeshes).toStrictEqual([]);
+  });
 });

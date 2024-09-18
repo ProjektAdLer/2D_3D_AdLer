@@ -23,12 +23,12 @@ export default class DecorationBuilder extends AsyncPresentationBuilder<
   buildViewModel(): void {
     if (this.spaceTemplate === undefined)
       throw new Error(
-        "SpaceTemplate is not defined. Set before using the builder."
+        "SpaceTemplate is not defined. Set before using the builder.",
       );
 
     super.buildViewModel();
 
-    this.viewModel!.learningSpaceTemplateType.Value = this.spaceTemplate;
+    this.viewModel!.learningSpaceTemplateType = this.spaceTemplate;
     this.viewModel!.theme = this.theme;
   }
 
@@ -41,7 +41,7 @@ export default class DecorationBuilder extends AsyncPresentationBuilder<
       },
       (error) => {
         console.error(error);
-      }
+      },
     );
   }
 }

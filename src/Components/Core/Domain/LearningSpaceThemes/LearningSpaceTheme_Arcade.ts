@@ -1,5 +1,6 @@
 import { LearningElementModelTypeEnums } from "../LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypes } from "../Types/LearningElementTypes";
+import { LearningSpaceTemplateType } from "../Types/LearningSpaceTemplateType";
 import ILearningSpaceTheme from "./ILearningSpaceTheme";
 
 const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
@@ -50,11 +51,22 @@ const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
   ambienceModel: require("../../../../Assets/3dModels/arcadeTheme/env_arcade.glb"),
   storyElementModel:
     LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC,
-  decorationModelLinkLShape: require("../../../../Assets/3dModels/arcadeTheme/dLShape Sampleroom - Deko.glb"),
-  decorationModelLink2x2: require("../../../../Assets/3dModels/arcadeTheme/d2x2Shape Sampleroom - Deko.glb"),
-  decorationModelLink2x3: require("../../../../Assets/3dModels/arcadeTheme/d2x3Shape Sampleroom - Deko.glb"),
-  decorationModelLinkTShape: require("../../../../Assets/3dModels/arcadeTheme/dTShape Sampleroom - Deko.glb"),
-  decorationModelLinkDShape: require("../../../../Assets/3dModels/arcadeTheme/dDShape Sampleroom - Deko.glb"),
+  insideDecorationModels: {
+    [LearningSpaceTemplateType.L]: require("../../../../Assets/3dModels/arcadeTheme/d_roomcomp_L_arcade_In.glb"),
+    [LearningSpaceTemplateType.R6]: require("../../../../Assets/3dModels/arcadeTheme/d_roomcomp_R6_arcade_In.glb"),
+    [LearningSpaceTemplateType.R8]: require("../../../../Assets/3dModels/arcadeTheme/d_roomcomp_R8_arcade_In.glb"),
+    [LearningSpaceTemplateType.D]: require("../../../../Assets/3dModels/arcadeTheme/d_roomcomp_D_arcade_In.glb"),
+    [LearningSpaceTemplateType.T]: require("../../../../Assets/3dModels/arcadeTheme/d_roomcomp_T_arcade_In.glb"),
+    [LearningSpaceTemplateType.None]: "",
+  },
+  outsideDecorationModels: {
+    [LearningSpaceTemplateType.L]: require("../../../../Assets/3dModels/arcadeTheme/d_roomcomp_L_arcade_Out.glb"),
+    [LearningSpaceTemplateType.R6]: require("../../../../Assets/3dModels/arcadeTheme/d_roomcomp_R6_arcade_Out.glb"),
+    [LearningSpaceTemplateType.R8]: require("../../../../Assets/3dModels/arcadeTheme/d_roomcomp_R8_arcade_Out.glb"),
+    [LearningSpaceTemplateType.D]: require("../../../../Assets/3dModels/arcadeTheme/d_roomcomp_D_arcade_Out.glb"),
+    [LearningSpaceTemplateType.T]: require("../../../../Assets/3dModels/arcadeTheme/d_roomcomp_T_arcade_Out.glb"),
+    [LearningSpaceTemplateType.None]: "",
+  },
 };
 
 export default LearningSpaceTheme_Arcade;

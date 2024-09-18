@@ -1,5 +1,6 @@
 import { LearningElementModelTypeEnums } from "../LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypes } from "../Types/LearningElementTypes";
+import { LearningSpaceTemplateType } from "../Types/LearningSpaceTemplateType";
 import ILearningSpaceTheme from "./ILearningSpaceTheme";
 
 export const LearningSpaceTheme_CampusAB: ILearningSpaceTheme = {
@@ -48,11 +49,22 @@ export const LearningSpaceTheme_CampusAB: ILearningSpaceTheme = {
   ambienceModel: require("../../../../Assets/3dModels/campusTheme/env_campus_ab.glb"),
   storyElementModel:
     LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
-  decorationModelLinkLShape: require("../../../../Assets/3dModels/campusTheme/dLShape Sampleroom - Deko.glb"),
-  decorationModelLink2x2: require("../../../../Assets/3dModels/campusTheme/d2x2Shape Sampleroom - Deko.glb"),
-  decorationModelLink2x3: require("../../../../Assets/3dModels/campusTheme/d2x3Shape Sampleroom - Deko.glb"),
-  decorationModelLinkTShape: require("../../../../Assets/3dModels/campusTheme/dTShape Sampleroom - Deko.glb"),
-  decorationModelLinkDShape: require("../../../../Assets/3dModels/campusTheme/dDShape Sampleroom - Deko.glb"),
+  insideDecorationModels: {
+    [LearningSpaceTemplateType.L]: require("../../../../Assets/3dModels/campusTheme/d_roomcomp_L_campus_In.glb"),
+    [LearningSpaceTemplateType.R6]: require("../../../../Assets/3dModels/campusTheme/d_roomcomp_R6_campus_In.glb"),
+    [LearningSpaceTemplateType.R8]: require("../../../../Assets/3dModels/campusTheme/d_roomcomp_R8_campus_In.glb"),
+    [LearningSpaceTemplateType.D]: require("../../../../Assets/3dModels/campusTheme/d_roomcomp_D_campus_In.glb"),
+    [LearningSpaceTemplateType.T]: require("../../../../Assets/3dModels/campusTheme/d_roomcomp_T_campus_In.glb"),
+    [LearningSpaceTemplateType.None]: "",
+  },
+  outsideDecorationModels: {
+    [LearningSpaceTemplateType.L]: "",
+    [LearningSpaceTemplateType.R6]: "",
+    [LearningSpaceTemplateType.R8]: "",
+    [LearningSpaceTemplateType.D]: "",
+    [LearningSpaceTemplateType.T]: "",
+    [LearningSpaceTemplateType.None]: "",
+  },
 };
 
 export const LearningSpaceTheme_CampusKE: ILearningSpaceTheme = {
@@ -65,12 +77,6 @@ export const LearningSpaceTheme_CampusKE: ILearningSpaceTheme = {
   windowModel: LearningSpaceTheme_CampusAB.windowModel,
   ambienceModel: require("../../../../Assets/3dModels/campusTheme/env_campus_ke.glb"),
   storyElementModel: LearningSpaceTheme_CampusAB.storyElementModel,
-  decorationModelLinkLShape:
-    LearningSpaceTheme_CampusAB.decorationModelLinkLShape,
-  decorationModelLink2x2: LearningSpaceTheme_CampusAB.decorationModelLink2x2,
-  decorationModelLink2x3: LearningSpaceTheme_CampusAB.decorationModelLink2x3,
-  decorationModelLinkTShape:
-    LearningSpaceTheme_CampusAB.decorationModelLinkTShape,
-  decorationModelLinkDShape:
-    LearningSpaceTheme_CampusAB.decorationModelLinkDShape,
+  insideDecorationModels: LearningSpaceTheme_CampusAB.insideDecorationModels,
+  outsideDecorationModels: LearningSpaceTheme_CampusAB.outsideDecorationModels,
 };
