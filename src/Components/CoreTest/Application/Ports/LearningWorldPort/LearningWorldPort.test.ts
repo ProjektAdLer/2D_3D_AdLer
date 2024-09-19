@@ -13,7 +13,6 @@ import AdaptivityElementProgressTO from "../../../../Core/Application/DataTransf
 import AdaptivityElementProgressUpdateTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 import AdaptivityElementHintTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
 import UserLearningWorldsInfoTO from "../../../../Core/Application/DataTransferObjects/UserLearningWorldsInfoTO";
-import StoryElementTextTO from "../../../../Core/Application/DataTransferObjects/StoryElementTextTO";
 import StoryElementTO from "../../../../Core/Application/DataTransferObjects/StoryElementTO";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 
@@ -40,7 +39,7 @@ describe("LearningWorldPort", () => {
     systemUnderTest.onUserInitialLearningWorldsInfoLoaded(mockedUserWorldsTO);
 
     expect(
-      worldAdapterMock.onUserInitialLearningWorldsInfoLoaded
+      worldAdapterMock.onUserInitialLearningWorldsInfoLoaded,
     ).toBeCalledWith(mockedUserWorldsTO);
   });
 
@@ -52,7 +51,7 @@ describe("LearningWorldPort", () => {
     systemUnderTest.onUserLearningWorldsInfoLoaded(mockedUserWorldsTO);
 
     expect(worldAdapterMock.onUserLearningWorldsInfoLoaded).toBeCalledWith(
-      mockedUserWorldsTO
+      mockedUserWorldsTO,
     );
   });
 
@@ -64,7 +63,7 @@ describe("LearningWorldPort", () => {
     systemUnderTest.onLearningWorldLoaded(mockedWorldTO);
 
     expect(worldAdapterMock.onLearningWorldLoaded).toBeCalledWith(
-      mockedWorldTO
+      mockedWorldTO,
     );
   });
 
@@ -76,7 +75,7 @@ describe("LearningWorldPort", () => {
     systemUnderTest.onLearningWorldScored(mockedWorldScoreTO);
 
     expect(worldAdapterMock.onLearningWorldScored).toBeCalledWith(
-      mockedWorldScoreTO
+      mockedWorldScoreTO,
     );
   });
 
@@ -88,7 +87,7 @@ describe("LearningWorldPort", () => {
     systemUnderTest.onLearningSpaceLoaded(mockedSpaceTO);
 
     expect(worldAdapterMock.onLearningSpaceLoaded).toBeCalledWith(
-      mockedSpaceTO
+      mockedSpaceTO,
     );
   });
 
@@ -100,7 +99,7 @@ describe("LearningWorldPort", () => {
     systemUnderTest.onLearningSpaceScored(mockedSpaceScoreTO);
 
     expect(worldAdapterMock.onLearningSpaceScored).toBeCalledWith(
-      mockedSpaceScoreTO
+      mockedSpaceScoreTO,
     );
   });
   test("onLearningSpacePrecursorandSuccessorLoaded calls a registered adapter", () => {
@@ -109,11 +108,11 @@ describe("LearningWorldPort", () => {
     const mockedSpacePuSTO = mock<LearningSpacePrecursorAndSuccessorTO>();
 
     systemUnderTest.onLearningSpacePrecursorAndSuccessorLoaded(
-      mockedSpacePuSTO
+      mockedSpacePuSTO,
     );
 
     expect(
-      worldAdapterMock.onLearningSpacePrecursorAndSuccessorLoaded
+      worldAdapterMock.onLearningSpacePrecursorAndSuccessorLoaded,
     ).toBeCalledWith(mockedSpacePuSTO);
   });
 
@@ -125,7 +124,7 @@ describe("LearningWorldPort", () => {
     systemUnderTest.onLearningElementLoaded(mockedElementTO);
 
     expect(worldAdapterMock.onLearningElementLoaded).toBeCalledWith(
-      mockedElementTO
+      mockedElementTO,
     );
   });
 
@@ -155,7 +154,7 @@ describe("LearningWorldPort", () => {
     systemUnderTest.onAdaptivityElementLoaded(mockAdaptivityElementProgressTO);
 
     expect(worldAdapterMock.onAdaptivityElementLoaded).toBeCalledWith(
-      mockAdaptivityElementProgressTO
+      mockAdaptivityElementProgressTO,
     );
   });
 
@@ -166,11 +165,11 @@ describe("LearningWorldPort", () => {
       mock<AdaptivityElementProgressUpdateTO>();
 
     systemUnderTest.onAdaptivityElementAnswerEvaluated(
-      mockAdaptivityElementProgressUpdateTO
+      mockAdaptivityElementProgressUpdateTO,
     );
 
     expect(worldAdapterMock.onAdaptivityElementAnswerEvaluated).toBeCalledWith(
-      mockAdaptivityElementProgressUpdateTO
+      mockAdaptivityElementProgressUpdateTO,
     );
   });
 
@@ -180,11 +179,11 @@ describe("LearningWorldPort", () => {
     const mockAdaptivityElementHintTO = mock<AdaptivityElementHintTO>();
 
     systemUnderTest.onAdaptivityElementUserHintInformed(
-      mockAdaptivityElementHintTO
+      mockAdaptivityElementHintTO,
     );
 
     expect(worldAdapterMock.onAdaptivityElementUserHintInformed).toBeCalledWith(
-      mockAdaptivityElementHintTO
+      mockAdaptivityElementHintTO,
     );
   });
 
@@ -196,7 +195,7 @@ describe("LearningWorldPort", () => {
     systemUnderTest.onStoryElementLoaded(mockStoryElementTO);
 
     expect(worldAdapterMock.onStoryElementLoaded).toBeCalledWith(
-      mockStoryElementTO
+      mockStoryElementTO,
     );
   });
 
@@ -208,7 +207,7 @@ describe("LearningWorldPort", () => {
 
     expect(worldAdapterMock.onStoryElementCutSceneTriggered).toBeCalledWith(1);
     expect(
-      worldAdapterMock.onStoryElementCutSceneTriggered
+      worldAdapterMock.onStoryElementCutSceneTriggered,
     ).toHaveBeenCalledWith(StoryElementType.Intro);
   });
 
@@ -219,5 +218,9 @@ describe("LearningWorldPort", () => {
     systemUnderTest.onStoryElementCutSceneFinished();
 
     expect(worldAdapterMock.onStoryElementCutSceneFinished).toBeCalled();
+  });
+
+  test("name returns LEARNING-WORLD-PORT", () => {
+    expect(systemUnderTest.name()).toBe("LEARNINGWORLD-PORT");
   });
 });

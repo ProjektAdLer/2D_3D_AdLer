@@ -19,12 +19,12 @@ describe("NotificationPort", () => {
 
     systemUnderTest.displayNotification(
       "error message",
-      "error" as NotificationType
+      "error" as NotificationType,
     );
 
     expect(uiAdapterMock.displayNotification).toBeCalledWith(
       "error message",
-      "error" as NotificationType
+      "error" as NotificationType,
     );
   });
 
@@ -36,7 +36,11 @@ describe("NotificationPort", () => {
     systemUnderTest.displayBreakTimeNotification(breakType);
 
     expect(uiAdapterMock.displayBreakTimeNotification).toBeCalledWith(
-      breakType
+      breakType,
     );
+  });
+
+  test("name returns NOTIFICATION-PORT", () => {
+    expect(systemUnderTest.name()).toBe("NOTIFICATION-PORT");
   });
 });

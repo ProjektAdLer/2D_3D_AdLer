@@ -46,4 +46,8 @@ describe("LMSPort", () => {
     expect(lmsAdapterMock1.onLogoutSuccessful).toHaveBeenCalledTimes(1);
     expect(lmsAdapterMock2.onLogoutSuccessful).toHaveBeenCalledTimes(1);
   });
+
+  test("name returns LMS-PORT", () => {
+    expect(systemUnderTest.name()).toBe("LMS-PORT");
+  });
 });
