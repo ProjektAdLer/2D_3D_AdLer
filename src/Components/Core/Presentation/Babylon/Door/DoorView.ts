@@ -35,12 +35,12 @@ export default class DoorView extends Readyable {
 
   constructor(
     private viewModel: DoorViewModel,
-    private controller: IDoorController
+    private controller: IDoorController,
   ) {
     super();
 
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
-      SCENE_TYPES.ScenePresenterFactory
+      SCENE_TYPES.ScenePresenterFactory,
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
     this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
@@ -48,7 +48,7 @@ export default class DoorView extends Readyable {
     this.openTheDoorSound = new Sound(
       "openTheDoor",
       soundLink,
-      this.scenePresenter.Scene
+      this.scenePresenter.Scene,
     );
     this.openTheDoorSound.setVolume(0.5);
     if (this.viewModel.isOpen.Value) {
@@ -56,7 +56,7 @@ export default class DoorView extends Readyable {
         this.scenePresenter.Scene.beginAnimation(
           this.viewModel.meshes[0],
           0,
-          45
+          45,
         );
       });
     } else viewModel.isOpen.subscribe(this.onIsOpenChanged);
@@ -69,7 +69,7 @@ export default class DoorView extends Readyable {
     this.positionMesh();
     if (this.viewModel.isExit) this.setupAnimation();
     this.registerActions();
-    this.addToHighlightLayer();
+    this.updateHighlight();
 
     this.resolveIsReady();
   }
@@ -86,7 +86,7 @@ export default class DoorView extends Readyable {
 
   private getModelLinkByThemeAndType(): string {
     const themeConfig = LearningSpaceThemeLookup.getLearningSpaceTheme(
-      this.viewModel.theme
+      this.viewModel.theme,
     );
 
     return this.viewModel.isExit
@@ -96,13 +96,13 @@ export default class DoorView extends Readyable {
 
   private setupAnimation(): void {
     const meshToRotate = this.viewModel.meshes.find(
-      (mesh) => mesh.id === "Door"
+      (mesh) => mesh.id === "Door",
     );
 
     if (meshToRotate === undefined) {
       this.logger.log(
         LogLevelTypes.WARN,
-        "DoorView: No submesh with name Door found. Door animation will not work."
+        "DoorView: No submesh with name Door found. Door animation will not work.",
       );
       return;
     }
@@ -111,7 +111,7 @@ export default class DoorView extends Readyable {
       "doorAnimation",
       "rotation.y",
       30,
-      Animation.ANIMATIONTYPE_FLOAT
+      Animation.ANIMATIONTYPE_FLOAT,
     );
 
     const initialRotation = Tools.ToRadians(meshToRotate.rotation.y);
@@ -133,7 +133,7 @@ export default class DoorView extends Readyable {
       this.viewModel.meshes[0].rotation = new Vector3(
         0.0,
         Tools.ToRadians(this.viewModel.rotation),
-        0.0
+        0.0,
       );
     }
   }
@@ -145,20 +145,11 @@ export default class DoorView extends Readyable {
         this.scenePresenter.Scene.beginAnimation(
           this.viewModel.meshes.find((mesh) => mesh.id === "Door"),
           0,
-          45
+          45,
         );
         this.openTheDoorSound.play();
       });
     }
-  }
-
-  private addToHighlightLayer(): void {
-    this.viewModel.meshes.forEach((mesh) => {
-      this.scenePresenter.HighlightLayer.addMesh(
-        mesh,
-        HighlightColors.NonLearningElementBase
-      );
-    });
   }
 
   private registerActions(): void {
@@ -167,20 +158,20 @@ export default class DoorView extends Readyable {
       mesh.actionManager.registerAction(
         new ExecuteCodeAction(
           ActionManager.OnPickTrigger,
-          this.controller.picked
-        )
+          this.controller.picked,
+        ),
       );
       mesh.actionManager.registerAction(
         new ExecuteCodeAction(
           ActionManager.OnPointerOverTrigger,
-          this.controller.pointerOver
-        )
+          this.controller.pointerOver,
+        ),
       );
       mesh.actionManager.registerAction(
         new ExecuteCodeAction(
           ActionManager.OnPointerOutTrigger,
-          this.controller.pointerOut
-        )
+          this.controller.pointerOut,
+        ),
       );
     });
   }
@@ -199,8 +190,8 @@ export default class DoorView extends Readyable {
     else
       this.changeHighlightColor(
         HighlightColors.getNonInteractableColor(
-          HighlightColors.NonLearningElementBase
-        )
+          HighlightColors.NonLearningElementBase,
+        ),
       );
   }
 }

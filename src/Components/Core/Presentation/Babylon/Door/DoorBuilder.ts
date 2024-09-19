@@ -13,6 +13,8 @@ import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentatio
 import IDoorBuilder from "./IDoorBuilder";
 import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 import { LocationScope } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import IAvatarFocusSelection from "../Avatar/AvatarFocusSelection/IAvatarFokusSelection";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 @injectable()
 export default class DoorBuilder
@@ -64,14 +66,17 @@ export default class DoorBuilder
       },
       (error) => {
         console.error(error);
-      }
+      },
     );
   }
 
   override buildPresenter(): void {
     super.buildPresenter();
     CoreDIContainer.get<ILearningWorldPort>(
-      PORT_TYPES.ILearningWorldPort
+      PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, LocationScope._sceneRendering);
+    CoreDIContainer.get<IAvatarFocusSelection>(
+      PRESENTATION_TYPES.IAvatarFocusSelection,
+    ).registerFocusable(this.presenter!);
   }
 }

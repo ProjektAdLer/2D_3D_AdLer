@@ -11,12 +11,16 @@ export default class DoorPresenter implements IDoorPresenter {
     }
   }
 
-  onAvatarPositionChanged(position: Vector3, interactionRadius: number): void {
-    const distance = Vector3.Distance(position, this.viewModel.position);
+  get FocusableCenterPosition(): Vector3 {
+    return this.viewModel.position;
+  }
 
-    if (distance <= interactionRadius)
-      this.viewModel.isInteractable.Value = true;
-    else this.viewModel.isInteractable.Value = false;
+  onFocused(): void {
+    this.viewModel.isInteractable.Value = true;
+  }
+
+  onUnfocused(): void {
+    this.viewModel.isInteractable.Value = false;
   }
 
   onLearningSpaceScored(spaceScoreTO: LearningSpaceScoreTO): void {
