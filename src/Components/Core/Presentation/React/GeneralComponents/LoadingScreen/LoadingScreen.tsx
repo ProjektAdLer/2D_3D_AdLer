@@ -37,7 +37,7 @@ export default function LoadingScreen() {
           )}
         </section>
 
-        <div className="row-span-4 w-[85vw] max-w-6xl portrait:h-[60vh] bg-buttonbgblue p-4 rounded-xl overflow-y-auto">
+        <div className="row-span-4 w-[85vw] max-w-6xl portrait:h-[50vh] bg-buttonbgblue p-4 rounded-xl overflow-y-auto">
           <h1 className="portrait:pb-6 font-bold text-adlerdarkblue">
             {translate("sidebar_controls")}
           </h1>
