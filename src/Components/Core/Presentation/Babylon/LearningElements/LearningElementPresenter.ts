@@ -5,15 +5,21 @@ import LearningElementViewModel from "./LearningElementViewModel";
 export default class LearningElementPresenter
   implements ILearningElementPresenter
 {
+  private centerPosition: Vector3;
+
   constructor(private viewModel: LearningElementViewModel) {}
 
-  get Position(): Vector3 {
-    const { min, max } =
-      this.viewModel.modelMeshes[0].getHierarchyBoundingVectors();
-    return min
-      .add(max)
-      .scale(0.5)
-      .multiplyInPlace(new Vector3(1, 0, 1));
+  get CenterPosition(): Vector3 {
+    if (!this.centerPosition) {
+      const { min, max } =
+        this.viewModel.modelMeshes[0].getHierarchyBoundingVectors();
+      this.centerPosition = min
+        .add(max)
+        .scale(0.5)
+        .multiplyInPlace(new Vector3(1, 0, 1));
+    }
+
+    return this.centerPosition;
   }
 
   onLearningElementScored(hasScored: boolean, elementID: number): void {
