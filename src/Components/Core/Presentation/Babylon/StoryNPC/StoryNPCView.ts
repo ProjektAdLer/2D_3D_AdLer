@@ -39,10 +39,10 @@ export default class StoryNPCView {
 
   constructor(
     private viewModel: StoryNPCViewModel,
-    private controller: IStoryNPCController
+    private controller: IStoryNPCController,
   ) {
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
-      SCENE_TYPES.ScenePresenterFactory
+      SCENE_TYPES.ScenePresenterFactory,
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
@@ -57,7 +57,7 @@ export default class StoryNPCView {
     this.createParentNode();
     this.setSpawnLocation();
     this.setupInteractions();
-    this.addMeshesToHighlightLayer();
+    this.updateHighlight();
     this.createCharacterAnimator();
     this.createCharacterNavigator();
     this.setupCleanup();
@@ -89,17 +89,17 @@ export default class StoryNPCView {
     // so that it can be rotated without affecting gltf coordinate system conversions in __root__ node created by Babylon
     this.viewModel.modelRootNode = new TransformNode(
       "NPCRootNode",
-      this.scenePresenter.Scene
+      this.scenePresenter.Scene,
     );
     this.viewModel.modelMeshes[0].setParent(this.viewModel.modelRootNode);
   }
 
   private async loadIconModel(): Promise<void> {
     this.viewModel.iconMeshes = (await this.scenePresenter.loadModel(
-      iconLink
+      iconLink,
     )) as Mesh[];
     this.viewModel.iconMeshes[0].position.addInPlace(
-      new Vector3(0, this.viewModel.iconYOffset, 0)
+      new Vector3(0, this.viewModel.iconYOffset, 0),
     );
     this.viewModel.iconMeshes[0].rotation = new Vector3(0, -Math.PI / 4, 0);
   }
@@ -107,7 +107,7 @@ export default class StoryNPCView {
   private createParentNode(): void {
     this.viewModel.parentNode = new TransformNode(
       "NPCParentNode",
-      this.scenePresenter.Scene
+      this.scenePresenter.Scene,
     );
     this.viewModel.modelRootNode.setParent(this.viewModel.parentNode);
     this.viewModel.iconMeshes[0].setParent(this.viewModel.parentNode);
@@ -125,35 +125,23 @@ export default class StoryNPCView {
 
     // register interaction callbacks
     actionManager.registerAction(
-      new ExecuteCodeAction(ActionManager.OnPickTrigger, this.controller.picked)
+      new ExecuteCodeAction(
+        ActionManager.OnPickTrigger,
+        this.controller.picked,
+      ),
     );
     actionManager.registerAction(
       new ExecuteCodeAction(
         ActionManager.OnPointerOverTrigger,
-        this.controller.pointerOver
-      )
+        this.controller.pointerOver,
+      ),
     );
     actionManager.registerAction(
       new ExecuteCodeAction(
         ActionManager.OnPointerOutTrigger,
-        this.controller.pointerOut
-      )
+        this.controller.pointerOut,
+      ),
     );
-  }
-
-  private addMeshesToHighlightLayer(): void {
-    this.viewModel.modelMeshes.forEach((mesh) => {
-      this.scenePresenter.HighlightLayer.addMesh(
-        mesh,
-        HighlightColors.NonLearningElementBase
-      );
-    });
-    this.viewModel.iconMeshes.forEach((mesh) => {
-      this.scenePresenter.HighlightLayer.addMesh(
-        mesh,
-        HighlightColors.NonLearningElementBase
-      );
-    });
   }
 
   private setSpawnLocation(): void {
@@ -180,31 +168,31 @@ export default class StoryNPCView {
     this.viewModel.parentNode.position = spawnPosition;
     this.viewModel.modelRootNode.rotationQuaternion = Quaternion.RotationAxis(
       Vector3.Up(),
-      Tools.ToRadians(spawnRotation)
+      Tools.ToRadians(spawnRotation),
     );
   }
 
   private createCharacterAnimator(): void {
     this.viewModel.characterAnimator = CoreDIContainer.get<ICharacterAnimator>(
-      PRESENTATION_TYPES.ICharacterAnimator
+      PRESENTATION_TYPES.ICharacterAnimator,
     );
     this.viewModel.characterAnimator.setup(
       () => this.viewModel.characterNavigator.CharacterVelocity,
       this.viewModel.modelRootNode,
       this.idleAnimation,
-      this.walkAnimation
+      this.walkAnimation,
     );
   }
 
   private createCharacterNavigator(): void {
     this.viewModel.characterNavigator =
       CoreDIContainer.get<ICharacterNavigator>(
-        PRESENTATION_TYPES.ICharacterNavigator
+        PRESENTATION_TYPES.ICharacterNavigator,
       );
     this.viewModel.characterNavigator.setup(
       this.viewModel.parentNode,
       this.viewModel.characterAnimator,
-      config.isDebug
+      config.isDebug,
     );
 
     if (this.viewModel.state.Value === StoryNPCState.RandomMovement)
@@ -251,18 +239,18 @@ export default class StoryNPCView {
         Vector3.Up(),
         this.viewModel.storyType === StoryElementType.Intro
           ? this.viewModel.introIdlePosRotation
-          : this.viewModel.outroIdlePosRotation
+          : this.viewModel.outroIdlePosRotation,
       );
     });
   }
 
   private startCutSceneMovement(): void {
     // npc stops in specific distance from avatar
-    const targetOffset = this.viewModel.avatarPosition
+    const targetOffset = this.viewModel.avatarSpawnPosition
       .subtract(this.viewModel.parentNode.position)
       .normalize()
       .scale(this.viewModel.cutSceneDistanceFromAvatar);
-    const target = this.viewModel.avatarPosition.subtract(targetOffset);
+    const target = this.viewModel.avatarSpawnPosition.subtract(targetOffset);
 
     // go to avatar
     this.viewModel.cutSceneTimer = setTimeout(() => {
@@ -282,14 +270,14 @@ export default class StoryNPCView {
     do {
       target = this.navigation.Plugin.getRandomPointAround(
         this.viewModel.parentNode.position,
-        this.viewModel.movementRange
+        this.viewModel.movementRange,
       );
       distance = Vector3.Distance(target, this.viewModel.parentNode.position);
     } while (distance < this.viewModel.minMovementDistance);
 
     this.viewModel.characterNavigator.startMovement(
       target,
-      this.startRandomMovementIdleTimeout
+      this.startRandomMovementIdleTimeout,
     );
   }
 
@@ -318,8 +306,8 @@ export default class StoryNPCView {
     else
       this.changeHighlightColor(
         HighlightColors.getNonInteractableColor(
-          HighlightColors.NonLearningElementBase
-        )
+          HighlightColors.NonLearningElementBase,
+        ),
       );
   }
 }

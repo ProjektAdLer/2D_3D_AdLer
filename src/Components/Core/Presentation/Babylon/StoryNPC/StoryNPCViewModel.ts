@@ -19,7 +19,7 @@ export enum StoryNPCState {
 export default class StoryNPCViewModel {
   storyElementPresenter: IStoryElementPresenter =
     CoreDIContainer.get<IStoryElementPresenter>(
-      PRESENTATION_TYPES.IStoryElementPresenter
+      PRESENTATION_TYPES.IStoryElementPresenter,
     );
 
   // observable runtime properties
@@ -37,7 +37,7 @@ export default class StoryNPCViewModel {
   storyType: StoryElementType;
   idleTimer: NodeJS.Timeout;
   cutSceneTimer: NodeJS.Timeout;
-  avatarPosition: Vector3 = new Vector3(0, 0, 0);
+  avatarSpawnPosition: Vector3 = new Vector3(0, 0, 0);
   introIdlePosition: Vector3 = new Vector3(0, 0, 0);
   introIdlePosRotation: number = 0;
   introCutsceneSpawnPosition: Vector3 = new Vector3(0, 0, 0);
