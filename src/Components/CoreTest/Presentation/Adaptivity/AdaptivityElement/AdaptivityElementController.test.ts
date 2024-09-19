@@ -74,22 +74,22 @@ describe("AdaptivityElementController", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(
-      USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
+      USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase,
     ).toConstantValue(submitSelectionUseCaseMock);
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      worldPortMock
+      worldPortMock,
     );
     CoreDIContainer.rebind(
-      USECASE_TYPES.IDisplayAdaptivityHintLearningElementUseCase
+      USECASE_TYPES.IDisplayAdaptivityHintLearningElementUseCase,
     ).toConstantValue(displayLearningElmentUseCaseMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.ILoadExternalLearningElementUseCase
+      USECASE_TYPES.ILoadExternalLearningElementUseCase,
     ).toConstantValue(loadExternalLearningElementUseCaseMock);
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
+      PRESENTATION_TYPES.IBottomTooltipPresenter,
     ).toConstantValue(mock());
     CoreDIContainer.rebind(
-      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase,
     ).toConstantValue(beginStoryElementOutroCutSceneMock);
   });
 
@@ -112,7 +112,7 @@ describe("AdaptivityElementController", () => {
   test("closeModal calls beginStoryElementOutroCutSceneUseCase", () => {
     systemUnderTest.closeModal();
     expect(
-      systemUnderTest["beginStoryElementOutroCutSceneUseCase"].execute
+      systemUnderTest["beginStoryElementOutroCutSceneUseCase"].execute,
     ).toHaveBeenCalledWith({
       scoredLearningElementID: viewModel.elementID.Value,
     });
@@ -169,7 +169,7 @@ describe("AdaptivityElementController", () => {
       AdaptivityElementActionTypes.ContentAction;
     await systemUnderTest.selectHint(contentQuestion.hints[0], contentQuestion);
     expect(
-      loadExternalLearningElementUseCaseMock.executeAsync
+      loadExternalLearningElementUseCaseMock.executeAsync,
     ).toHaveBeenCalled();
   });
 
@@ -181,22 +181,6 @@ describe("AdaptivityElementController", () => {
     };
     await systemUnderTest.selectHint(mockHint, mockQuestion);
     expect(viewModel.currentQuestion.Value).toBe(mockQuestion);
-  });
-
-  test.skip("selectHint calls worldPort.onLearningElementHighlighted with hintActionData", async () => {
-    const hint: AdaptivityHint = {
-      hintID: 1,
-      showOnIsWrong: false,
-      hintAction: {
-        hintActionType: AdaptivityElementActionTypes.ReferenceAction,
-        idData: 42,
-        textData: "TestHintActionData",
-      },
-    };
-
-    await systemUnderTest.selectHint(hint, mockQuestion);
-
-    expect(worldPortMock.onLearningElementHighlighted).toBeCalledWith(42);
   });
 
   test("submitSelection calls SubmitSelectionUseCase", () => {
@@ -269,9 +253,9 @@ describe("AdaptivityElementController", () => {
     loadExternalLearningElementUseCaseMock.executeAsync.mockImplementation(
       () => {
         throw new Error(
-          `Could not find element with ID ${mockElementID} in world 0`
+          `Could not find element with ID ${mockElementID} in world 0`,
         );
-      }
+      },
     );
     systemUnderTest.loadExternalContentReference(mockElementID, mockQuestion);
     expect(viewModel.selectedHint.Value).toEqual({
@@ -289,7 +273,7 @@ describe("AdaptivityElementController", () => {
     loadExternalLearningElementUseCaseMock.executeAsync.mockImplementation(
       () => {
         throw new Error(`Found more than one element with ID`);
-      }
+      },
     );
     systemUnderTest.loadExternalContentReference(1, mockQuestion);
     expect(viewModel.selectedHint.Value).toEqual({
