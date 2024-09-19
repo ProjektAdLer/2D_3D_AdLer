@@ -10,6 +10,10 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 export default class StoryNPCPresenter implements IStoryNPCPresenter {
   private logger: ILoggerPort;
 
+  get FocusableCenterPosition(): Vector3 {
+    return this.viewModel.parentNode.position;
+  }
+
   constructor(private viewModel: StoryNPCViewModel) {
     this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
   }
@@ -19,17 +23,12 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
       this.viewModel.state.Value = StoryNPCState.RandomMovement;
   }
 
-  onAvatarPositionChanged(position: Vector3, interactionRadius: number): void {
-    const distance = Vector3.Distance(
-      position,
-      this.viewModel.parentNode.position
-    );
+  onFocused(): void {
+    this.viewModel.isInteractable.Value = true;
+  }
 
-    this.viewModel.avatarPosition = position;
-
-    if (distance <= interactionRadius) {
-      this.viewModel.isInteractable.Value = true;
-    } else this.viewModel.isInteractable.Value = false;
+  onUnfocused(): void {
+    this.viewModel.isInteractable.Value = false;
   }
 
   onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
@@ -43,7 +42,7 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
 
     this.logger.log(
       LogLevelTypes.INFO,
-      `StoryNPCPresenter (onStoryElementCutSceneTriggered): ${this.viewModel.storyType} Cutscene triggered`
+      `StoryNPCPresenter (onStoryElementCutSceneTriggered): ${this.viewModel.storyType} Cutscene triggered`,
     );
   }
 
@@ -53,7 +52,7 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
       this.viewModel.state.Value = StoryNPCState.RandomMovement;
       this.logger.log(
         LogLevelTypes.INFO,
-        `StoryNPCPresenter (onStoryElementCutSceneFinished): ${this.viewModel.storyType} Cutscene finished`
+        `StoryNPCPresenter (onStoryElementCutSceneFinished): ${this.viewModel.storyType} Cutscene finished`,
       );
     }
   }

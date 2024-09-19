@@ -22,6 +22,7 @@ import SCENE_TYPES, {
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import { LocationScope } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import IAvatarFocusSelection from "../Avatar/AvatarFocusSelection/IAvatarFokusSelection";
 
 @injectable()
 export default class StoryNPCBuilder
@@ -46,11 +47,11 @@ export default class StoryNPCBuilder
       StoryNPCViewModel,
       StoryNPCController,
       StoryNPCView,
-      StoryNPCPresenter
+      StoryNPCPresenter,
     );
 
     const scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
-      SCENE_TYPES.ScenePresenterFactory
+      SCENE_TYPES.ScenePresenterFactory,
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
   }
@@ -80,13 +81,13 @@ export default class StoryNPCBuilder
 
     if (this.learningSpaceTemplateType !== LearningSpaceTemplateType.None) {
       const template = LearningSpaceTemplateLookup.getLearningSpaceTemplate(
-        this.learningSpaceTemplateType
+        this.learningSpaceTemplateType,
       );
 
       this.viewModel!.introIdlePosition = new Vector3(
         template.introStoryElementIdlePoint.position.x,
         0,
-        template.introStoryElementIdlePoint.position.y
+        template.introStoryElementIdlePoint.position.y,
       );
       this.viewModel!.introIdlePosRotation =
         template.introStoryElementIdlePoint.orientation.rotation;
@@ -94,7 +95,7 @@ export default class StoryNPCBuilder
       this.viewModel!.introCutsceneSpawnPosition = new Vector3(
         template.introCutsceneSpawnPoint.position.x,
         0,
-        template.introCutsceneSpawnPoint.position.y
+        template.introCutsceneSpawnPoint.position.y,
       );
       this.viewModel!.introCutsceneRotation =
         template.introCutsceneSpawnPoint.orientation.rotation;
@@ -102,15 +103,15 @@ export default class StoryNPCBuilder
       this.viewModel!.outroIdlePosition = new Vector3(
         template.outroStoryElementIdlePoint.position.x,
         0,
-        template.outroStoryElementIdlePoint.position.y
+        template.outroStoryElementIdlePoint.position.y,
       );
       this.viewModel!.outroIdlePosRotation =
         template.outroStoryElementIdlePoint.orientation.rotation;
 
-      this.viewModel!.avatarPosition = new Vector3(
+      this.viewModel!.avatarSpawnPosition = new Vector3(
         template.playerSpawnPoint.position.x,
         0,
-        template.playerSpawnPoint.position.y
+        template.playerSpawnPoint.position.y,
       );
     }
   }
@@ -119,7 +120,7 @@ export default class StoryNPCBuilder
     super.buildView();
     this.view!.asyncSetupStoryNPC().then(
       () => this.resolveIsCompleted(),
-      (e) => console.log(e)
+      (e) => console.log(e),
     );
   }
 
@@ -131,19 +132,22 @@ export default class StoryNPCBuilder
     }
 
     CoreDIContainer.bind<IStoryNPCPresenter>(
-      PRESENTATION_TYPES.IStoryNPCPresenter
+      PRESENTATION_TYPES.IStoryNPCPresenter,
     ).toConstantValue(this.presenter!);
 
     const learningWorldPort = CoreDIContainer.get<ILearningWorldPort>(
-      PORT_TYPES.ILearningWorldPort
+      PORT_TYPES.ILearningWorldPort,
     );
     learningWorldPort.registerAdapter(
       this.presenter!,
-      LocationScope._sceneRendering
+      LocationScope._sceneRendering,
     );
-
     this.scenePresenter.addDisposeSceneCallback(() => {
       learningWorldPort.unregisterAdapter(this.presenter!);
     });
+
+    CoreDIContainer.get<IAvatarFocusSelection>(
+      PRESENTATION_TYPES.IAvatarFocusSelection,
+    ).registerFocusable(this.presenter!);
   }
 }
