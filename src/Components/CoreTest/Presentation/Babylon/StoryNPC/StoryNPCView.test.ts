@@ -71,7 +71,7 @@ describe("StoryNPCView", () => {
 
   beforeEach(() => {
     viewModel = new StoryNPCViewModel();
-    viewModel.avatarPosition = new Vector3(0, 0, 0);
+    viewModel.avatarSpawnPosition = new Vector3(0, 0, 0);
     controllerMock = mock<IStoryNPCController>();
     systemUnderTest = new StoryNPCView(viewModel, controllerMock);
   });
@@ -323,22 +323,6 @@ describe("StoryNPCView", () => {
 
       expect(controllerMock.picked).toHaveBeenCalledTimes(1);
     });
-
-    //ANF-ID: [ELG0031]
-    test("async setup adds mesh to the scene presenters HighlightLayer", async () => {
-      viewModel.modelMeshes = [
-        new Mesh("mockMesh", new Scene(new NullEngine())),
-      ];
-
-      viewModel.iconMeshes = [];
-
-      systemUnderTest["addMeshesToHighlightLayer"]();
-
-      expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
-        viewModel.modelMeshes[0],
-        expect.any(Color3),
-      );
-    });
   });
 
   describe("movement", () => {
@@ -421,7 +405,7 @@ describe("StoryNPCView", () => {
     test("startCutSceneMovement calls startMovement on the characterNavigator after timeout", () => {
       viewModel.characterNavigator = characterNavigatorMock;
       viewModel.storyType = StoryElementType.Intro;
-      viewModel.avatarPosition = new Vector3(10, 0, 0);
+      viewModel.avatarSpawnPosition = new Vector3(10, 0, 0);
       viewModel.parentNode = new TransformNode(
         "mockParentNode",
         new Scene(new NullEngine()),
@@ -440,7 +424,7 @@ describe("StoryNPCView", () => {
     // ANF-ID: [EZZ0026]
     test("startCutSceneMovement calls open on the storyElementPresenter after cutscene position reached", () => {
       viewModel.storyType = StoryElementType.Intro;
-      viewModel.avatarPosition = new Vector3(10, 0, 0);
+      viewModel.avatarSpawnPosition = new Vector3(10, 0, 0);
       viewModel.parentNode = new TransformNode(
         "mockParentNode",
         new Scene(new NullEngine()),
@@ -587,6 +571,7 @@ describe("StoryNPCView", () => {
       );
     });
 
+    // ANF-ID: [EZZ0031]
     test("updateHighlight sets highlight color correctly when not interactable", () => {
       viewModel.isInteractable.Value = false;
       systemUnderTest["changeHighlightColor"] = jest.fn();
