@@ -64,7 +64,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   const [outroModelType] = useObservable(viewModel?.outroModelType);
 
   const [titleText, setTitleText] = useState("");
-  const [contentTexts, setContentTexts] = useState<string[]>([""]);
+  const [contentTexts, setContentTexts] = useState("");
 
   const { t: translate } = useTranslation("learningSpace");
 
@@ -74,13 +74,13 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
     switch (storyTypeToDisplay) {
       case StoryElementType.Intro:
         setTitleText(translate("introStoryTitle").toString());
-        setContentTexts(viewModel.introTexts.Value);
+        setContentTexts(viewModel.introTexts.Value.join("\n"));
         break;
       case StoryElementType.Outro:
         setTitleText(translate("outroStoryTitle").toString());
-        if (outroUnlocked) setContentTexts(viewModel.outroTexts.Value);
-        else
-          setContentTexts(translate("outroLockedText").toString().split("\n"));
+        if (outroUnlocked)
+          setContentTexts(viewModel.outroTexts.Value.join("\n"));
+        else setContentTexts(translate("outroLockedText").toString());
         break;
       case StoryElementType.IntroOutro:
         setTitleText(translate("introOutroStoryTitle").toString());
@@ -159,7 +159,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
             {(storyTypeToDisplay === StoryElementType.Intro ||
               storyTypeToDisplay === StoryElementType.Outro) && (
               <SingleStoryLayout
-                contentTexts={contentTexts}
+                contentTexts={contentTexts.split("\n")}
                 controller={controller}
                 withBackButton={
                   !introCutsceneRunning &&

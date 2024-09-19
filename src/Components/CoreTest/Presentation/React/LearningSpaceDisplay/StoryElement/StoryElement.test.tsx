@@ -116,7 +116,7 @@ describe("StoryElement", () => {
 
   //ANF-ID: [EWE0040]
   // TODO: fix this test. Causes infinite rerenders of the component for some reason -mk
-  test.skip("should render with outroTitle and outroLockedText placeholder when storyTypeToDisplay is Outro and isOutroUnlocked is false", () => {
+  test("should render with outroTitle and outroLockedText placeholder when storyTypeToDisplay is Outro and isOutroUnlocked is false", () => {
     viewModel.storyTypeToDisplay.Value = StoryElementType.Outro;
     viewModel.isOutroUnlocked.Value = false;
     useBuilderMock([viewModel, fakeController]);
@@ -164,7 +164,7 @@ describe("StoryElement", () => {
       const backButton = componentUnderTest.getByText("backButton");
 
       expect(backButton).toBeInTheDocument();
-    }
+    },
   );
 
   test.each([
@@ -196,9 +196,9 @@ describe("StoryElement", () => {
 
       waitFor(() => {
         expect(
-          componentUnderTest.getByText("backButton")
+          componentUnderTest.getByText("backButton"),
         ).not.toBeInTheDocument();
       });
-    }
+    },
   );
 });
