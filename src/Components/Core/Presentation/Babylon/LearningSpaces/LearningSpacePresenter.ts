@@ -11,7 +11,6 @@ import IStandInDecorationBuilder from "../StandInDecoration/IStandInDecorationBu
 import IDoorBuilder from "../Door/IDoorBuilder";
 import IWindowBuilder from "../Window/IWindowBuilder";
 import SeededRNG from "../../Utils/SeededRNG";
-import { Vector3 } from "@babylonjs/core/Maths/math";
 import IDoorPresenter from "../Door/IDoorPresenter";
 import ILearningElementPresenter from "../LearningElements/ILearningElementPresenter";
 import IStoryNPCPresenter from "../StoryNPC/IStoryNPCPresenter";
@@ -36,10 +35,10 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     }
 
     this.director = CoreDIContainer.get<IPresentationDirector>(
-      BUILDER_TYPES.IPresentationDirector
+      BUILDER_TYPES.IPresentationDirector,
     );
     this.decorationBuilder = CoreDIContainer.get<IDecorationBuilder>(
-      BUILDER_TYPES.IDecorationBuilder
+      BUILDER_TYPES.IDecorationBuilder,
     );
   }
 
@@ -55,23 +54,8 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     await this.createStoryNPCs(spaceTO);
   }
 
-  broadcastAvatarPosition(position: Vector3, interactionRadius: number): void {
-    for (const doorPresenter of this.doorPresenters) {
-      doorPresenter.onAvatarPositionChanged(position, interactionRadius);
-    }
-    for (const elementPresenter of this.elementPresenters) {
-      elementPresenter.onAvatarPositionChanged(position, interactionRadius);
-    }
-    for (const npcPresenter of this.storyNPCPresenters) {
-      npcPresenter.onAvatarPositionChanged(position, interactionRadius);
-    }
-    for (const storyNPCPresenter of this.storyNPCPresenters) {
-      storyNPCPresenter.onAvatarPositionChanged(position, interactionRadius);
-    }
-  }
-
   private async fillLearningElementSlots(
-    spaceTO: LearningSpaceTO
+    spaceTO: LearningSpaceTO,
   ): Promise<void> {
     const loadingCompletePromises: Promise<void>[] = [];
     const elementBuilders: ILearningElementBuilder[] = [];
@@ -87,7 +71,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
           // create stand in decoration for empty slots
           const standInDecorationBuilder =
             CoreDIContainer.get<IStandInDecorationBuilder>(
-              BUILDER_TYPES.IStandInDecorationBuilder
+              BUILDER_TYPES.IStandInDecorationBuilder,
             );
 
           standInDecorationBuilder.position = elementPosition[0];
@@ -97,13 +81,13 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
           standInDecorationBuilder.theme = this.viewModel.theme;
 
           loadingCompletePromises.push(
-            this.director.buildAsync(standInDecorationBuilder)
+            this.director.buildAsync(standInDecorationBuilder),
           );
         }
       } else {
         // create learning element for non-empty slots
         const elementBuilder = CoreDIContainer.get<ILearningElementBuilder>(
-          BUILDER_TYPES.ILearningElementBuilder
+          BUILDER_TYPES.ILearningElementBuilder,
         );
 
         elementBuilder.elementData = spaceTO.elements[i]!;
@@ -122,7 +106,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
 
   private async createExitDoor(spaceTO: LearningSpaceTO): Promise<void> {
     const exitDoorBuilder = CoreDIContainer.get<IDoorBuilder>(
-      BUILDER_TYPES.IDoorBuilder
+      BUILDER_TYPES.IDoorBuilder,
     );
     let exitDoorPosition = this.viewModel.exitDoorPosition;
     exitDoorBuilder.position = exitDoorPosition[0];
@@ -139,7 +123,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
 
   private async createEntryDoor(): Promise<void> {
     const entryDoorBuilder = CoreDIContainer.get<IDoorBuilder>(
-      BUILDER_TYPES.IDoorBuilder
+      BUILDER_TYPES.IDoorBuilder,
     );
     let entryDoorPosition = this.viewModel.entryDoorPosition;
     entryDoorBuilder.position = entryDoorPosition[0];
@@ -158,7 +142,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     const loadingWindowPromises: Promise<void>[] = [];
     for (const windowPosition of this.viewModel.windowPositions) {
       const windowBuilder = CoreDIContainer.get<IWindowBuilder>(
-        BUILDER_TYPES.IWindowBuilder
+        BUILDER_TYPES.IWindowBuilder,
       );
       windowBuilder.position = windowPosition[0];
       windowBuilder.rotation = windowPosition[1];
@@ -172,7 +156,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     for (const storyElement of spaceTO.storyElements) {
       if (storyElement.storyType !== StoryElementType.None) {
         const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
-          BUILDER_TYPES.IStoryNPCBuilder
+          BUILDER_TYPES.IStoryNPCBuilder,
         );
         storyNPCBuilder.storyType = storyElement.storyType;
         storyNPCBuilder.modelType = storyElement.modelType!;
@@ -202,13 +186,13 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
       if (examinedCornerPoints.has(wallSegment.start)) {
         cornerPoleData = this.computeCornerPoleData(
           segmentData,
-          previousSegmentData!
+          previousSegmentData!,
         );
       } else examinedCornerPoints.add(wallSegment.start);
       if (examinedCornerPoints.has(wallSegment.end)) {
         cornerPoleData = this.computeCornerPoleData(
           firstSegmentData!,
-          segmentData!
+          segmentData!,
         );
       } else examinedCornerPoints.add(wallSegment.end);
       previousSegmentData = segmentData;
@@ -227,7 +211,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     let endCornerPoint = this.viewModel.spaceCornerPoints[wallSegment.end];
     let angle = Math.atan2(
       endCornerPoint.z - startCornerPoint.z,
-      endCornerPoint.x - startCornerPoint.x
+      endCornerPoint.x - startCornerPoint.x,
     );
     let startPosition = { x: 0, z: 0 };
     let endPosition = { x: 0, z: 0 };
@@ -251,7 +235,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
 
   private computeCornerPoleData(
     segmentData: LearningSpaceWallSegmentLocationData,
-    previousSegmentData: LearningSpaceWallSegmentLocationData
+    previousSegmentData: LearningSpaceWallSegmentLocationData,
   ): LearningSpaceCornerPoleLocationData {
     let cornerPoint = this.viewModel.spaceCornerPoints[segmentData.index];
     let angle = (segmentData.angle + previousSegmentData.angle) / 2;
