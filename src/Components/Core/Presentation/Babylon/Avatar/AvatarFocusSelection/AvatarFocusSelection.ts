@@ -41,7 +41,7 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
       undefined,
       false,
       undefined,
-      true,
+      true, // unregister after first call
     );
   }
 
@@ -63,7 +63,7 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
 
     if (config.isDebug)
       this.focusables.forEach((focusable) => {
-        this.debug_drawInteractionRadius(focusable.Position);
+        this.debug_drawInteractionRadius(focusable.FocusableCenterPosition);
       });
   }
 
@@ -74,10 +74,6 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
 
     // skip update if avatar has not moved enough
     const currentAvatarPosition = this.avatarPresenter.AvatarPosition;
-    const distance = Vector3.DistanceSquared(
-      this.previousAvatarPosition ?? Vector3.Zero(),
-      currentAvatarPosition,
-    );
     if (
       this.previousAvatarPosition &&
       currentAvatarPosition &&
@@ -86,7 +82,6 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
         currentAvatarPosition,
       ) < this.squaredAvatarMovementThreshold
     ) {
-      console.log("skip update if avatar has not moved enough, " + distance);
       return;
     }
     this.previousAvatarPosition = currentAvatarPosition;
@@ -97,7 +92,7 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
     for (let i = 0; i < this.focusables.length; i++) {
       const distance = Vector3.DistanceSquared(
         currentAvatarPosition,
-        this.focusables[i].Position,
+        this.focusables[i].FocusableCenterPosition,
       ); // use squared distance for performance
 
       if (distance < shortestDistance) {
@@ -110,8 +105,6 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
     if (newFocus !== this.CurrentFocus.Value) {
       this.CurrentFocus.Value?.onUnfocused &&
         this.CurrentFocus.Value.onUnfocused();
-
-      console.log("change focus and notify focusables");
 
       if (newFocus !== null) this.CurrentFocus.Value = newFocus;
       else this.CurrentFocus.Value = null;
@@ -127,8 +120,15 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
       SCENE_TYPES.ScenePresenterFactory,
     )(LearningSpaceSceneDefinition);
 
+    const point = MeshBuilder.CreateSphere(
+      "focusableCenter",
+      {
+        diameter: 0.1,
+      },
+      scenePresenter.Scene,
+    );
     const circle = MeshBuilder.CreateTorus(
-      "circle",
+      "focusableInteractionRadius",
       {
         diameter: Math.sqrt(this.squaredInteractionDistance) * 2,
         thickness: 0.01,
@@ -136,8 +136,12 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
       },
       scenePresenter.Scene,
     );
+
+    point.position = position;
     circle.position = position;
-    circle.material = new StandardMaterial("material", scenePresenter.Scene);
-    (circle.material as StandardMaterial).diffuseColor = Color3.Teal();
+    const material = new StandardMaterial("material", scenePresenter.Scene);
+    material.diffuseColor = Color3.Teal();
+    circle.material = material;
+    point.material = material;
   }
 }
