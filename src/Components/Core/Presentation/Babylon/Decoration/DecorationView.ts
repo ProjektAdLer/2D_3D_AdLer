@@ -29,13 +29,9 @@ export default class DecorationView {
     insideDeco: AbstractMesh[];
     outsideDeco: AbstractMesh[];
   }> {
-    const theme = LearningSpaceThemeLookup.getLearningSpaceTheme(
-      this.viewModel.theme,
-    );
     if (
-      !theme ||
       this.viewModel.learningSpaceTemplateType ===
-        LearningSpaceTemplateType.None
+      LearningSpaceTemplateType.None
     ) {
       return { insideDeco: [], outsideDeco: [] };
     }
@@ -43,25 +39,33 @@ export default class DecorationView {
     const scenePresenter = CoreDIContainer.get<ScenePresenterFactory>(
       SCENE_TYPES.ScenePresenterFactory,
     )(LearningSpaceSceneDefinition);
+    const themeConfig = LearningSpaceThemeLookup.getLearningSpaceTheme(
+      this.viewModel.theme,
+    );
 
     let insideDeco: AbstractMesh[] = [];
     if (
-      theme.insideDecorationModels[this.viewModel.learningSpaceTemplateType] !==
-      ""
+      themeConfig.insideDecorationModels[
+        this.viewModel.learningSpaceTemplateType
+      ] !== ""
     )
       insideDeco = await scenePresenter.loadModel(
-        theme.insideDecorationModels[this.viewModel.learningSpaceTemplateType],
+        themeConfig.insideDecorationModels[
+          this.viewModel.learningSpaceTemplateType
+        ],
         true,
       );
 
     let outsideDeco: AbstractMesh[] = [];
     if (
-      theme.outsideDecorationModels[
+      themeConfig.outsideDecorationModels[
         this.viewModel.learningSpaceTemplateType
       ] !== ""
     )
       outsideDeco = await scenePresenter.loadModel(
-        theme.outsideDecorationModels[this.viewModel.learningSpaceTemplateType],
+        themeConfig.outsideDecorationModels[
+          this.viewModel.learningSpaceTemplateType
+        ],
       );
 
     return { insideDeco, outsideDeco };

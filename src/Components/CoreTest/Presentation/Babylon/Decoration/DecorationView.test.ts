@@ -73,20 +73,7 @@ describe("DecorationView", () => {
   });
 
   // ANF-ID: [ELG0025]
-  test.skip("loads no model when theme is invalid", async () => {
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.theme = "invalid theme";
-    viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.L;
-
-    systemUnderTest.asyncSetup();
-
-    expect(scenePresenterMock.loadModel).not.toHaveBeenCalled();
-    expect(viewModel.insideMeshes).toStrictEqual([]);
-    expect(viewModel.outsideMeshes).toStrictEqual([]);
-  });
-
-  // ANF-ID: [ELG0025]
-  test.skip("loads no model when learning space template type is None", async () => {
+  test("loads no model when learning space template type is None", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     viewModel.theme = LearningSpaceThemeType.CampusAB;
     viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.None;
