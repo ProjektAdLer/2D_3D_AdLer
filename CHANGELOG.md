@@ -10,6 +10,22 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+### Changed
+
+### Removed
+
+### Fixed
+
+### Deprecated
+
+### Security
+
+</details>
+
+## Version 2.5.0 - 19.09.24
+
+### Added
+
 - controls explanation to learning space display are now shown in the loading screen
 - new character models have been added
 - welcome screen now has a new button to directly open the associated moodle
@@ -33,12 +49,6 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - avatar spawn rotation is now being applied
 - intro story NPC now spawn during cutscene after entering a new learning space
 - fixed several button placement inconsistencies
-
-### Deprecated
-
-### Security
-
-</details>
 
 ## Version 2.4.0 - 02.09.24
 
