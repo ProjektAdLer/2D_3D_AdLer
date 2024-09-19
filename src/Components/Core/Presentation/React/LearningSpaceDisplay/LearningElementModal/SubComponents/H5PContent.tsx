@@ -1,11 +1,4 @@
-import {
-  useEffect,
-  useRef,
-  CSSProperties,
-  useReducer,
-  useState,
-  useCallback,
-} from "react";
+import { useEffect, useRef } from "react";
 import { H5P as H5PPlayer } from "h5p-standalone";
 import LearningElementModalViewModel from "../LearningElementModalViewModel";
 import ILearningElementModalController from "../ILearningElementModalController";
@@ -24,7 +17,7 @@ export default function H5PContent({
     if (h5pContainerRef.current?.style.visibility) {
       const h5pDiv = h5pContainerRef.current;
       const h5pRef = document.getElementsByClassName(
-        "h5p-iframe-wrapper"
+        "h5p-iframe-wrapper",
       )[0] as HTMLDivElement;
       const h5pRatio = h5pRef.clientWidth / h5pRef.clientHeight;
 
@@ -37,7 +30,7 @@ export default function H5PContent({
       };
 
       if (h5pRatio < targetViewPort.ratio) {
-        h5pDiv.style.width = targetViewPort.height * 0.80 * h5pRatio + "px";
+        h5pDiv.style.width = targetViewPort.height * 0.8 * h5pRatio + "px";
       } else {
         h5pDiv.style.width = "90vw";
       }
