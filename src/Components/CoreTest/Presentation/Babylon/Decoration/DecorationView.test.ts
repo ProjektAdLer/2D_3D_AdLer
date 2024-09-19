@@ -78,7 +78,7 @@ describe("DecorationView", () => {
     viewModel.theme = LearningSpaceThemeType.CampusAB;
     viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.None;
 
-    systemUnderTest.asyncSetup();
+    await systemUnderTest.asyncSetup();
 
     expect(scenePresenterMock.loadModel).not.toHaveBeenCalled();
     expect(viewModel.insideMeshes).toStrictEqual([]);
