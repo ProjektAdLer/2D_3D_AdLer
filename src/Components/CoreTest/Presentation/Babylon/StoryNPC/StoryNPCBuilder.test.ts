@@ -11,17 +11,18 @@ import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/Learnin
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import { StoryNPCState } from "../../../../Core/Presentation/Babylon/StoryNPC/StoryNPCViewModel";
 import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
-import LearningSpaceTemplateLookup from "../../../../Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
 import {
   HistoryWrapper,
   LocationScope,
 } from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import IAvatarFocusSelection from "../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/IAvatarFokusSelection";
 
 jest.spyOn(PresentationBuilder.prototype, "buildPresenter");
 jest.spyOn(PresentationBuilder.prototype, "buildView");
 
 const learningWorldPortMock = mock<ILearningWorldPort>();
 const bottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
+const avatarFocusSelectionMock = mock<IAvatarFocusSelection>();
 
 describe("StoryNPCBuilder", () => {
   let systemUnderTest: StoryNPCBuilder;
@@ -29,14 +30,17 @@ describe("StoryNPCBuilder", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      learningWorldPortMock
+      learningWorldPortMock,
     );
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.IStoryElementPresenter
+      PRESENTATION_TYPES.IStoryElementPresenter,
     ).toConstantValue(mock());
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
+      PRESENTATION_TYPES.IBottomTooltipPresenter,
     ).toConstantValue(bottomTooltipPresenterMock);
+    CoreDIContainer.rebind(
+      PRESENTATION_TYPES.IAvatarFocusSelection,
+    ).toConstantValue(avatarFocusSelectionMock);
   });
 
   beforeEach(() => {
@@ -68,7 +72,7 @@ describe("StoryNPCBuilder", () => {
     systemUnderTest.buildViewModel();
 
     expect(systemUnderTest["viewModel"]?.storyType).toBe(
-      StoryElementType.Intro
+      StoryElementType.Intro,
     );
   });
 
@@ -91,7 +95,7 @@ describe("StoryNPCBuilder", () => {
       initialState,
       storyType,
       noLearningElementHasScored,
-      learningSpaceCompleted
+      learningSpaceCompleted,
     ) => {
       systemUnderTest.modelType = "";
       systemUnderTest.learningSpaceTemplateType = LearningSpaceTemplateType.L;
@@ -102,7 +106,7 @@ describe("StoryNPCBuilder", () => {
       systemUnderTest.buildViewModel();
 
       expect(systemUnderTest["viewModel"]?.state.Value).toBe(initialState);
-    }
+    },
   );
 
   // ANF-ID: [EZZ0023]
@@ -165,7 +169,22 @@ describe("StoryNPCBuilder", () => {
     expect(learningWorldPortMock.registerAdapter).toHaveBeenCalledTimes(1);
     expect(learningWorldPortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"],
-      LocationScope._sceneRendering
+      LocationScope._sceneRendering,
+    );
+  });
+
+  test("buildPresenter registers presenter with avatar focus selection", () => {
+    systemUnderTest.modelType = "test";
+    systemUnderTest.learningSpaceTemplateType = LearningSpaceTemplateType.L;
+
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildController();
+
+    systemUnderTest.buildPresenter();
+
+    expect(avatarFocusSelectionMock.registerFocusable).toHaveBeenCalledTimes(1);
+    expect(avatarFocusSelectionMock.registerFocusable).toHaveBeenCalledWith(
+      systemUnderTest["presenter"],
     );
   });
 });
