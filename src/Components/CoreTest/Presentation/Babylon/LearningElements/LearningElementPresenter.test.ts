@@ -1,6 +1,7 @@
+import mock from "jest-mock-extended/lib/Mock";
 import LearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementPresenter";
 import LearningElementViewModel from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementViewModel";
-import { Vector3 } from "@babylonjs/core";
+import { Mesh, Vector3 } from "@babylonjs/core";
 
 describe("LearningElementPresenter", () => {
   let systemUnderTest: LearningElementPresenter;
@@ -9,6 +10,31 @@ describe("LearningElementPresenter", () => {
   beforeEach(() => {
     viewModel = new LearningElementViewModel();
     systemUnderTest = new LearningElementPresenter(viewModel);
+  });
+
+  test("FocusableCenterPosition getter calculates value on first call", () => {
+    const mockMesh = mock<Mesh>();
+    mockMesh.getHierarchyBoundingVectors.mockReturnValue({
+      min: new Vector3(0, 0, 0),
+      max: new Vector3(0, 1, 42),
+    });
+    viewModel.modelMeshes = [mockMesh];
+
+    expect(systemUnderTest["centerPosition"]).toBeUndefined();
+    expect(systemUnderTest.FocusableCenterPosition).toEqual(
+      new Vector3(0, 0, 21),
+    );
+  });
+
+  test("FocusableCenterPosition getter returns cached value on subsequent calls", () => {
+    const mockMesh = mock<Mesh>();
+    viewModel.modelMeshes = [mockMesh];
+    systemUnderTest["centerPosition"] = new Vector3(0, 0, 21);
+
+    expect(mockMesh.getHierarchyBoundingVectors).not.toHaveBeenCalled();
+    expect(systemUnderTest.FocusableCenterPosition).toEqual(
+      new Vector3(0, 0, 21),
+    );
   });
 
   test("onLearningElementScored sets is hasScored if the id matches", () => {
@@ -57,19 +83,19 @@ describe("LearningElementPresenter", () => {
   });
 
   // ANF-ID: [EWE0035]
-  test("onAvatarPositionChanged sets isInteractable to true when the avatar is in the interaction radius", () => {
-    viewModel.position = new Vector3(0, 0, 0);
+  test("onFocused sets isInteractable to true", () => {
     viewModel.isInteractable.Value = false;
-    systemUnderTest.onAvatarPositionChanged(new Vector3(0, 0, 0), 1);
+
+    systemUnderTest.onFocused();
 
     expect(viewModel.isInteractable.Value).toBe(true);
   });
 
   // ANF-ID: [EWE0035]
-  test("onAvatarPositionChanged sets isInteractable to false when the avatar is outside the interaction radius", () => {
-    viewModel.position = new Vector3(0, 0, 0);
+  test("onUnfocused sets isInteractable to false", () => {
     viewModel.isInteractable.Value = true;
-    systemUnderTest.onAvatarPositionChanged(new Vector3(0, 0, 2), 1);
+
+    systemUnderTest.onUnfocused();
 
     expect(viewModel.isInteractable.Value).toBe(false);
   });
