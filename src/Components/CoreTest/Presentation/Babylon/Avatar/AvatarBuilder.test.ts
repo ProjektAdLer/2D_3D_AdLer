@@ -13,15 +13,17 @@ import IMovementIndicator from "../../../../Core/Presentation/Babylon/MovementIn
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
 import ILearningSpacePresenter from "../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpacePresenter";
+import IAvatarFocusSelection from "../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/IAvatarFokusSelection";
 
 jest.mock("../../../../Core/Presentation/Babylon/Avatar/AvatarController");
 const setViewModelMock = jest.spyOn(
   AvatarPresenter.prototype,
   "ViewModel",
-  "set"
+  "set",
 );
 
 const movementIndicatorMock = mock<MovementIndicator>();
+const avatarFocusSelectionMock = mock<IAvatarFocusSelection>();
 
 describe("AvatarBuilder", () => {
   let systemUnderTest: AvatarBuilder;
@@ -29,8 +31,11 @@ describe("AvatarBuilder", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind<IMovementIndicator>(
-      PRESENTATION_TYPES.IMovementIndicator
+      PRESENTATION_TYPES.IMovementIndicator,
     ).toConstantValue(movementIndicatorMock);
+    CoreDIContainer.rebind<IAvatarFocusSelection>(
+      PRESENTATION_TYPES.IAvatarFocusSelection,
+    ).toConstantValue(avatarFocusSelectionMock);
   });
 
   beforeEach(() => {
@@ -49,26 +54,40 @@ describe("AvatarBuilder", () => {
 
     expect(systemUnderTest["viewModel"]).toBeDefined();
     expect(systemUnderTest["viewModel"]!.learningSpaceTemplateType).toEqual(
-      LearningSpaceTemplateType.L
+      LearningSpaceTemplateType.L,
     );
   });
+
   test("buildViewModel concludes the build step successfully and sets playerspawnpoint to zero in the viewModel, if no data is given", () => {
     systemUnderTest.buildViewModel();
 
     expect(systemUnderTest["viewModel"]).toBeDefined();
     expect(systemUnderTest["viewModel"]!.learningSpaceTemplateType).toEqual(
-      undefined
+      undefined,
     );
   });
 
   test("buildPresenter builds the AvatarPresenter and sets the ViewModel with its setter", () => {
+    systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 
     expect(systemUnderTest["presenter"]).toBeInstanceOf(AvatarPresenter);
     expect(systemUnderTest["presenter"]).toBe(
-      CoreDIContainer.get<IAvatarPort>(PORT_TYPES.IAvatarPort)
+      CoreDIContainer.get<IAvatarPort>(PORT_TYPES.IAvatarPort),
     );
     expect(setViewModelMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("buildPresenter registers the presenter with avatar focus selection", () => {
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildPresenter();
+
+    expect(
+      avatarFocusSelectionMock.registerAvatarPresenter,
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      avatarFocusSelectionMock.registerAvatarPresenter,
+    ).toHaveBeenCalledWith(systemUnderTest["presenter"]);
   });
 
   test("buildCOntroller sets the learning space presenter on the controller", () => {
@@ -79,7 +98,7 @@ describe("AvatarBuilder", () => {
     systemUnderTest.buildController();
 
     expect(systemUnderTest["controller"]!.learningSpacePresenter).toBe(
-      mockLearningSpacePresenter
+      mockLearningSpacePresenter,
     );
   });
 
