@@ -19,50 +19,51 @@ describe("DoorPresenter", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
+      PRESENTATION_TYPES.IBottomTooltipPresenter,
     ).toConstantValue(mockBottomTooltipPresenter);
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.IExitModalPresenter
+      PRESENTATION_TYPES.IExitModalPresenter,
     ).toConstantValue(mockExitModalPresenter);
   });
 
   beforeEach(() => {
-    systemUnderTest = new DoorPresenter(new DoorViewModel());
+    viewModel = new DoorViewModel();
+    systemUnderTest = new DoorPresenter(viewModel);
   });
 
   test("constructor throws error if undefined is passed as view model", () => {
     expect(() => {
       //@ts-ignore
       new DoorPresenter(undefined);
-    }).toThrowError();
+    }).toThrow();
   });
 
-  test("onAvatarPositionChanged sets isInteractable to true if avatar is within interaction radius", () => {
-    viewModel = new DoorViewModel();
-    viewModel.position = new Vector3(0, 0, 0);
-    systemUnderTest = new DoorPresenter(viewModel);
+  test("onFocused sets isInteractable to true", () => {
+    viewModel.isInteractable.Value = false;
 
-    systemUnderTest.onAvatarPositionChanged(viewModel.position, 1);
+    systemUnderTest.onFocused();
 
     expect(viewModel.isInteractable.Value).toBe(true);
   });
 
-  test("onAvatarPositionChanged sets isInteractable to false if avatar is outside interaction radius", () => {
-    viewModel = new DoorViewModel();
+  test("onUnfocused sets isInteractable to false", () => {
     viewModel.isInteractable.Value = true;
-    viewModel.position = new Vector3(0, 0, 0);
-    systemUnderTest = new DoorPresenter(viewModel);
 
-    systemUnderTest.onAvatarPositionChanged(new Vector3(42, 42, 42), 0);
+    systemUnderTest.onUnfocused();
 
     expect(viewModel.isInteractable.Value).toBe(false);
   });
 
+  test("FocusableCenterPosition getter return position from viewmodel", () => {
+    const mockPosition = new Vector3(42, 42, 42);
+    viewModel.position = mockPosition;
+
+    expect(systemUnderTest.FocusableCenterPosition).toBe(mockPosition);
+  });
+
   test("onLearningSpaceScored sets isOpen to true if space id is matching, isExit is true and current score is greater than or equal to required score", () => {
-    viewModel = new DoorViewModel();
     viewModel.isExit = true;
     viewModel.spaceID = 1;
-    systemUnderTest = new DoorPresenter(viewModel);
     const spaceScoreTO = new LearningSpaceScoreTO();
     spaceScoreTO.spaceID = 1;
     spaceScoreTO.currentScore = 1;
@@ -76,9 +77,7 @@ describe("DoorPresenter", () => {
 
   //ANF-ID: [EWE0036, EWE0042]
   test("onStoryElementCutSceneTriggered sets isInputEnabled to false if a story element intro or outro cutscene is triggered", () => {
-    viewModel = new DoorViewModel();
     viewModel.isInputEnabled.Value = true;
-    systemUnderTest = new DoorPresenter(viewModel);
 
     systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.None);
 
@@ -87,9 +86,7 @@ describe("DoorPresenter", () => {
 
   //ANF-ID: [EWE0043]
   test("onStoryElementCutSceneTriggered sets isInputEnabled to true if any story element cutscene is finished", () => {
-    viewModel = new DoorViewModel();
     viewModel.isInputEnabled.Value = false;
-    systemUnderTest = new DoorPresenter(viewModel);
 
     systemUnderTest.onStoryElementCutSceneFinished();
 
