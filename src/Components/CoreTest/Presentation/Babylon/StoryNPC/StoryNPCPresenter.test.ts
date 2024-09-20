@@ -21,7 +21,7 @@ describe("StoryNPCPresenter", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.IStoryElementPresenter
+      PRESENTATION_TYPES.IStoryElementPresenter,
     ).toConstantValue(storyElementPresenterMock);
     CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
   });
@@ -36,27 +36,19 @@ describe("StoryNPCPresenter", () => {
   });
 
   // ANF-ID: [EWE0039]
-  test("onAvatarPositionChanged sets isInteractable to true when the avatar is in the interaction radius", () => {
-    viewModel.parentNode = new TransformNode(
-      "mockParentNode",
-      new Scene(new NullEngine())
-    );
-    viewModel.parentNode.position = new Vector3(0, 0, 0);
+  test("onFocused sets isInteractable to true", () => {
     viewModel.isInteractable.Value = false;
-    systemUnderTest.onAvatarPositionChanged(new Vector3(0, 0, 0), 1);
+
+    systemUnderTest.onFocused();
 
     expect(viewModel.isInteractable.Value).toBe(true);
   });
 
   // ANF-ID: [EWE0039]
-  test("onAvatarPositionChanged sets isInteractable to false when the avatar is outside the interaction radius", () => {
-    viewModel.parentNode = new TransformNode(
-      "mockParentNode",
-      new Scene(new NullEngine())
-    );
-    viewModel.parentNode.position = new Vector3(0, 0, 0);
+  test("onUnfocused sets isInteractable to false", () => {
     viewModel.isInteractable.Value = true;
-    systemUnderTest.onAvatarPositionChanged(new Vector3(0, 0, 2), 1);
+
+    systemUnderTest.onUnfocused();
 
     expect(viewModel.isInteractable.Value).toBe(false);
   });
