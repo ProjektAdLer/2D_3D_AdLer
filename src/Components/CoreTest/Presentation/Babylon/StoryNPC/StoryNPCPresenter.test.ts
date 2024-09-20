@@ -35,6 +35,18 @@ describe("StoryNPCPresenter", () => {
     systemUnderTest = new StoryNPCPresenter(viewModel);
   });
 
+  test("FocusableCenterPosition returns parent node position from viewmodel", () => {
+    viewModel.parentNode = new TransformNode(
+      "parent",
+      new Scene(new NullEngine()),
+    );
+    viewModel.parentNode.position = new Vector3(1, 2, 3);
+
+    expect(systemUnderTest.FocusableCenterPosition).toEqual(
+      new Vector3(1, 2, 3),
+    );
+  });
+
   // ANF-ID: [EWE0039]
   test("onFocused sets isInteractable to true", () => {
     viewModel.isInteractable.Value = false;
