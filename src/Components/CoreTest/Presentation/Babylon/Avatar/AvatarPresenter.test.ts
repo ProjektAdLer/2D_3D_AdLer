@@ -4,13 +4,14 @@ import AvatarPresenter from "../../../../Core/Presentation/Babylon/Avatar/Avatar
 import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
 import { mock } from "jest-mock-extended";
 import CharacterAnimationActions from "../../../../Core/Presentation/Babylon/CharacterAnimator/CharacterAnimationActions";
+import { Vector3 } from "@babylonjs/core";
 
 describe("AvatarPresenter", () => {
   let systemUnderTest: AvatarPresenter;
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.get<AvatarPresenter>(
-      PORT_TYPES.IAvatarPort
+      PORT_TYPES.IAvatarPort,
     );
   });
 
@@ -22,6 +23,15 @@ describe("AvatarPresenter", () => {
     const viewModel = new AvatarViewModel();
     systemUnderTest.ViewModel = viewModel;
     expect(systemUnderTest["viewModel"]).toBe(viewModel);
+  });
+
+  test("AvatarPosition getter return parent node position from viewmodel", () => {
+    const viewModel = new AvatarViewModel();
+    viewModel.parentNode = mock();
+    viewModel.parentNode.position = new Vector3(1, 2, 3);
+    systemUnderTest.ViewModel = viewModel;
+
+    expect(systemUnderTest.AvatarPosition).toEqual(new Vector3(1, 2, 3));
   });
 
   //ANF-ID:[EWE0036,EWE0042]
@@ -55,7 +65,7 @@ describe("AvatarPresenter", () => {
 
     expect(viewModel.characterAnimator.transition).toBeCalledTimes(1);
     expect(viewModel.characterAnimator.transition).toBeCalledWith(
-      CharacterAnimationActions.InteractionStarted
+      CharacterAnimationActions.InteractionStarted,
     );
   });
 });
