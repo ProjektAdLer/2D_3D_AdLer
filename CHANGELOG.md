@@ -22,6 +22,12 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 </details>
 
+## Version 2.5.1 - 20.09.24
+
+### Fixed
+
+- adaptivity element characters should not be running infinitely on their spot anymore
+
 ## Version 2.5.0 - 19.09.24
 
 ### Added
