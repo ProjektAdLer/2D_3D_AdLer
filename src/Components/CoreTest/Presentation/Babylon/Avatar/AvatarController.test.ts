@@ -41,7 +41,7 @@ const characterNavigatorMock = mock<CharacterNavigator>();
 function setupMockedPointerInfo(
   type: number = PointerEventTypes.POINTERTAP,
   isPickInfoNull: boolean = false,
-  pickedPoint: Vector3 | null = new Vector3(42, 42, 42)
+  pickedPoint: Vector3 | null = new Vector3(42, 42, 42),
 ): PointerInfo {
   const mouseEventMock = mock<IMouseEvent>();
 
@@ -68,10 +68,10 @@ describe("AvatarController", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
-      scenePresenterFactoryMock
+      scenePresenterFactoryMock,
     );
     CoreDIContainer.rebind<INavigation>(CORE_TYPES.INavigation).toConstantValue(
-      navigationMock
+      navigationMock,
     );
   });
 
@@ -89,56 +89,20 @@ describe("AvatarController", () => {
   describe("callbacks", () => {
     test("observer callback is added to onPointerObservable in the constructor", () => {
       expect(
-        scenePresenterMock.Scene.onPointerObservable.add
+        scenePresenterMock.Scene.onPointerObservable.add,
       ).toHaveBeenCalledWith(systemUnderTest["processPointerEvent"]);
     });
 
     test.skip("observer callback is added to onKeyboardObservable in the constructor", () => {
       expect(
-        scenePresenterMock.Scene.onKeyboardObservable.add
+        scenePresenterMock.Scene.onKeyboardObservable.add,
       ).toHaveBeenCalledWith(systemUnderTest["processKeyboardEvent"]);
     });
 
     test("observer callback is added to onBeforeRenderObservable in the constructor", () => {
       expect(
-        scenePresenterMock.Scene.onBeforeRenderObservable.add
+        scenePresenterMock.Scene.onBeforeRenderObservable.add,
       ).toHaveBeenCalledWith(systemUnderTest["applyInputs"]);
-    });
-  });
-
-  describe("position broadcast", () => {
-    test("broadcastNewAvatarPosition broadcasts the new avatar position if no lastFramePosition is set", () => {
-      viewModel.parentNode = new TransformNode("mockParentNode");
-      viewModel.parentNode.position = new Vector3(42, 42, 42);
-      systemUnderTest["lastFramePosition"] = null;
-      const mockLearningSpacePresenter = mockDeep<ILearningSpacePresenter>();
-      systemUnderTest["learningSpacePresenter"] = mockLearningSpacePresenter;
-
-      systemUnderTest["broadcastNewAvatarPosition"]();
-
-      expect(
-        mockLearningSpacePresenter.broadcastAvatarPosition
-      ).toHaveBeenCalledTimes(1);
-      expect(
-        mockLearningSpacePresenter.broadcastAvatarPosition
-      ).toHaveBeenCalledWith(new Vector3(42, 42, 42), expect.any(Number));
-    });
-
-    test("broadcastNewAvatarPosition broadcasts the new avatar position if the distance between lastFramePosition and current position is greater than the broadcastThreshold", () => {
-      viewModel.parentNode = new TransformNode("mockParentNode");
-      viewModel.parentNode.position = new Vector3(42, 42, 42);
-      systemUnderTest["lastFramePosition"] = new Vector3(0, 0, 0);
-      const mockLearningSpacePresenter = mockDeep<ILearningSpacePresenter>();
-      systemUnderTest["learningSpacePresenter"] = mockLearningSpacePresenter;
-
-      systemUnderTest["broadcastNewAvatarPosition"]();
-
-      expect(
-        mockLearningSpacePresenter.broadcastAvatarPosition
-      ).toHaveBeenCalledTimes(1);
-      expect(
-        mockLearningSpacePresenter.broadcastAvatarPosition
-      ).toHaveBeenCalledWith(new Vector3(42, 42, 42), expect.any(Number));
     });
   });
 
@@ -168,9 +132,9 @@ describe("AvatarController", () => {
         expect(characterNavigatorMock.startMovement).toHaveBeenCalledTimes(1);
         expect(characterNavigatorMock.startMovement).toHaveBeenCalledWith(
           target,
-          systemUnderTest["onMovementTargetReached"]
+          systemUnderTest["onMovementTargetReached"],
         );
-      }
+      },
     );
 
     // ANF-ID: [EZZ0015]
@@ -199,9 +163,9 @@ describe("AvatarController", () => {
         expect(characterNavigatorMock.startMovement).toHaveBeenCalledTimes(1);
         expect(characterNavigatorMock.startMovement).toHaveBeenCalledWith(
           target,
-          systemUnderTest["onMovementTargetReached"]
+          systemUnderTest["onMovementTargetReached"],
         );
-      }
+      },
     );
 
     test("applyInputs resets keyMovementTarget and pointerMovementTarget to null", () => {
@@ -260,7 +224,7 @@ describe("AvatarController", () => {
       expect(systemUnderTest["keyMovementTarget"].z).toBe(1);
       expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledTimes(1);
       expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledWith(
-        new Vector3(42, 42, 42)
+        new Vector3(42, 42, 42),
       );
     });
 
@@ -278,7 +242,7 @@ describe("AvatarController", () => {
         expect(result.x).toEqual(expected.x);
         expect(result.y).toEqual(expected.y);
         expect(result.z).toEqual(expected.z);
-      }
+      },
     );
 
     // ANF-ID: [EZZ0015]
@@ -286,7 +250,7 @@ describe("AvatarController", () => {
       let invalidPointerInfo = setupMockedPointerInfo(
         PointerEventTypes.POINTERMOVE,
         false,
-        new Vector3(0, 0, 0)
+        new Vector3(0, 0, 0),
       );
 
       systemUnderTest["processPointerEvent"](invalidPointerInfo);
@@ -300,7 +264,7 @@ describe("AvatarController", () => {
       let invalidPointerInfo = setupMockedPointerInfo(
         PointerEventTypes.POINTERTAP,
         true,
-        new Vector3(0, 0, 0)
+        new Vector3(0, 0, 0),
       );
 
       systemUnderTest["processPointerEvent"](invalidPointerInfo);
@@ -314,7 +278,7 @@ describe("AvatarController", () => {
       let invalidPointerInfo = setupMockedPointerInfo(
         PointerEventTypes.POINTERTAP,
         false,
-        null
+        null,
       );
 
       systemUnderTest["processPointerEvent"](invalidPointerInfo);
@@ -328,10 +292,10 @@ describe("AvatarController", () => {
       const pointerInfo = setupMockedPointerInfo(
         PointerEventTypes.POINTERTAP,
         false,
-        new Vector3(42, 42, 42)
+        new Vector3(42, 42, 42),
       );
       recastJSPluginMock.getClosestPoint.mockReturnValueOnce(
-        new Vector3(42, 0, 42.05)
+        new Vector3(42, 0, 42.05),
       );
 
       systemUnderTest["processPointerEvent"](pointerInfo);
@@ -351,10 +315,10 @@ describe("AvatarController", () => {
     const pointerInfo = setupMockedPointerInfo(
       PointerEventTypes.POINTERTAP,
       false,
-      new Vector3(42, 42, 42)
+      new Vector3(42, 42, 42),
     );
     recastJSPluginMock.getClosestPoint.mockReturnValueOnce(
-      new Vector3(42, 0, 42.5)
+      new Vector3(42, 0, 42.5),
     );
     recastJSPluginMock.getClosestPoint.mockImplementationOnce((target) => {
       return target;
