@@ -68,7 +68,7 @@ export default function H5PContent({
   }, [controller, viewModel]);
 
   return (
-    <div className="App max-h-[90vh] overflow-y-auto">
+    <div className="App max-h-[85vh] overflow-y-auto">
       <div
         id="h5p-container"
         style={{ visibility: "hidden", width: "90vw" }}
