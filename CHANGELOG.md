@@ -12,6 +12,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+- Streamlined various different close buttons across the program with a new icon
+
 ### Removed
 
 ### Fixed
