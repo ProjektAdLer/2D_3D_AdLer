@@ -61,7 +61,7 @@ describe("BreakTimeNotification", () => {
     fireEvent.click(screen.getByAltText("Pause Icon"));
 
     expect(
-      mockController.minimizeOrMaximizeBreakNotification
+      mockController.minimizeOrMaximizeBreakNotification,
     ).toHaveBeenCalledTimes(1);
   });
 
@@ -73,7 +73,7 @@ describe("BreakTimeNotification", () => {
     viewModel.showMinimizedModal.Value = true;
 
     render(<BreakTimeNotification />);
-    fireEvent.click(screen.getByAltText("CloseIcon"));
+    fireEvent.click(screen.getByAltText("CloseButton"));
 
     expect(mockController.closeBreakNotification).toHaveBeenCalledTimes(1);
   });
@@ -111,6 +111,6 @@ describe("BreakTimeNotification", () => {
         fireEvent.click(renderResult.getByTestId(testid));
         expect(mockController.setSliderIndex).toHaveBeenCalledWith(index);
       });
-    }
+    },
   );
 });

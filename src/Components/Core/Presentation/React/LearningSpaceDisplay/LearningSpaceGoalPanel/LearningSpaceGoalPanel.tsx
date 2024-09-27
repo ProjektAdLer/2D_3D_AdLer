@@ -9,6 +9,7 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import { useTranslation } from "react-i18next";
 
 import GoalIcon from "../../../../../../Assets/icons/goals.svg";
+import CloseButton from "~ReactComponents/ReactRelated/ReactBaseComponents/CloseButton";
 
 export default function LearningSpaceGoalPanel() {
   const [viewModel, controller] = useBuilder<
@@ -79,14 +80,13 @@ export default function LearningSpaceGoalPanel() {
                   )}
                 </div>
                 <div className="flex flex-col justify-end pl-4">
-                  <StyledButton
-                    shape="closeButton"
+                  <CloseButton
                     onClick={() => {
                       controller.closePanel();
                     }}
                   >
                     {translate("confirmButton")}
-                  </StyledButton>
+                  </CloseButton>
                 </div>
               </div>
             )}

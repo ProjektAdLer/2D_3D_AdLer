@@ -32,7 +32,6 @@ import IAdaptivityElementController from "../IAdaptivityElementController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
-import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "../../../../Types/ReactTypes";
 import AdaptivityElementTaskSelection from "./AdaptivityElementTaskSelection";
@@ -50,6 +49,7 @@ import {
   LearningElementModelTypeEnums,
 } from "../../../../Domain/LearningElementModels/LearningElementModelTypes";
 import { useTranslation } from "react-i18next";
+import CloseButton from "~ReactComponents/ReactRelated/ReactBaseComponents/CloseButton";
 
 function getNPCImage(model: LearningElementModel, close: boolean): string {
   switch (model) {
@@ -145,13 +145,12 @@ export default function AdaptivityElementDialogContainer({
             <div className="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
               {!(currentTask === null && currentQuestion === null) &&
                 !showAnswerFeedback && (
-                  <StyledButton
+                  <CloseButton
                     onClick={controller.back}
                     className="w-8 h-8 p-1 mr-2 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-                    shape="closeButton"
                   >
                     {"\u25C0"}
-                  </StyledButton>
+                  </CloseButton>
                 )}
 
               {currentTask === null && currentQuestion === null && (
@@ -182,17 +181,16 @@ export default function AdaptivityElementDialogContainer({
 
               <div className="w-full text-xs lg:text-lg">{headerText}</div>
 
-              <StyledButton
+              <CloseButton
                 onClick={controller.closeModal}
                 className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-                shape="closeButton"
               >
                 <img
                   src={closeIcon}
                   className="lg:w-10 md:w-8 sm:w-6"
                   alt="CloseButton"
                 ></img>
-              </StyledButton>
+              </CloseButton>
             </div>
 
             {/* Content */}
@@ -207,7 +205,7 @@ export default function AdaptivityElementDialogContainer({
                 </div>
               )}
               {currentTask !== null && currentQuestion === null && (
-                <div className=" flex items-center justify-center px-1 mb-4 rounded-lg font-regular lg:mx-4">
+                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular lg:mx-4">
                   <AdaptivityElementQuestionSelection
                     selectedTask={currentTask}
                     setHeaderText={setHeaderText}
@@ -277,14 +275,13 @@ export default function AdaptivityElementDialogContainer({
                             <h1 className="text-xs font-bold lg:text-xl">
                               {translate("headerLegend")}
                             </h1>
-                            <StyledButton
-                              shape="closeButton"
+                            <CloseButton
                               onClick={() => {
                                 controller.hideFooterTooltip();
                               }}
                             >
                               x
-                            </StyledButton>
+                            </CloseButton>
                           </div>
                           <h3 className="text-sm font-bold">
                             {translate("headerLegendTask")}
