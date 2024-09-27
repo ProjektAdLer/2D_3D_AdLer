@@ -54,10 +54,10 @@ export default function SingleStoryLayout({
         </StyledButton>
 
         {contentTexts.length > 1 && (
-          <div className="grid w-16 mx-1 gap-2 grid-cols-2 lg:w-32 justify-items-end">
+          <div className="grid w-16 grid-cols-2 gap-2 mx-1 lg:w-32 justify-items-end">
             <div>
               <StyledButton
-                shape="closeButton"
+                shape="smallSquare"
                 onClick={() => setPageId(Math.max(0, pageId - 1))}
                 disabled={pageId <= 0}
                 data-testid="back"
@@ -68,7 +68,7 @@ export default function SingleStoryLayout({
 
             <div className="col-start-2">
               <StyledButton
-                shape="closeButton"
+                shape="smallSquare"
                 onClick={() =>
                   setPageId(Math.min(contentTexts.length, pageId + 1))
                 }

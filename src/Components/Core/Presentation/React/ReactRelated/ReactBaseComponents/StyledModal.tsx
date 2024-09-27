@@ -1,7 +1,7 @@
 import React from "react";
 import StyledContainer from "./StyledContainer";
-import StyledButton from "./StyledButton";
 import closeIcon from "../../../../../../Assets/icons/close.svg";
+import CloseButton from "./CloseButton";
 
 type Props = Partial<{
   hasFooter?: boolean;
@@ -59,8 +59,7 @@ export default function StyledModal({
           <div className="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit">
             <div className="w-full">{title}</div>
             {canClose && (
-              <StyledButton
-                shape={smallCloseButton ? "smallCloseButton" : "closeButton"}
+              <CloseButton
                 onClick={(event) => {
                   onClose?.();
                 }}
@@ -70,7 +69,7 @@ export default function StyledModal({
                   className="lg:w-10 md:w-8 sm:w-6"
                   alt="CloseButton"
                 ></img>
-              </StyledButton>
+              </CloseButton>
             )}
           </div>
           {/*Content*/}

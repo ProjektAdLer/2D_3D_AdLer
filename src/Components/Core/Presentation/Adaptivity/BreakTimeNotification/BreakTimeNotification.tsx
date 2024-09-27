@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import CloseButton from "~ReactComponents/ReactRelated/ReactBaseComponents/CloseButton";
 
 export default function BreakTimeNotification({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
@@ -65,8 +66,7 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
           <h1 className="text-xl font-bold">{translate("pauseInfo")}</h1>
           <p className="text-sm">{translate("pauseExplanation")}</p>
         </div>
-        <StyledButton
-          shape="smallCloseButton"
+        <CloseButton
           className="place-self-start flex items-center justify-center border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue rounded-lg font-bold"
           onClick={() => controller.closeBreakNotification()}
         >
@@ -75,7 +75,7 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
             className="lg:w-10 md:w-8 sm:w-6"
             alt="CloseIcon"
           ></img>
-        </StyledButton>
+        </CloseButton>
       </StyledContainer>
     );
 

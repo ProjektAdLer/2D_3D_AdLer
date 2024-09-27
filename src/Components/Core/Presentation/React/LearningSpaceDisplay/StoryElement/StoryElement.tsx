@@ -17,7 +17,6 @@ import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservab
 import { useTranslation } from "react-i18next";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
-import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import {
   LearningElementModel,
@@ -26,6 +25,7 @@ import {
 import StorySelection from "./StorySelection";
 import SingleStoryLayout from "./SingleStoryLayout";
 import { useEffect, useState } from "react";
+import CloseButton from "~ReactComponents/ReactRelated/ReactBaseComponents/CloseButton";
 
 function getNPCImage(
   model: LearningElementModel | null,
@@ -137,17 +137,16 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
 
               {/* Close Button (only in selection) */}
               {storyTypeToDisplay === StoryElementType.IntroOutro && (
-                <StyledButton
+                <CloseButton
                   onClick={() => controller.closePanel()}
                   className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
-                  shape="closeButton"
                 >
                   <img
                     src={closeIcon}
                     className="lg:w-10 md:w-8 sm:w-6"
                     alt="CloseButton"
                   />
-                </StyledButton>
+                </CloseButton>
               )}
             </div>
 
