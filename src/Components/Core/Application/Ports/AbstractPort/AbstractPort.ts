@@ -40,7 +40,7 @@ export default abstract class AbstractPort<T> implements IAbstractPort<T> {
     } else {
       this.logger.log(
         LogLevelTypes.WARN,
-        'Adapter "' + adapter + '" is already registered with: ' + this
+        'Adapter "' + adapter + '" is already registered with: ' + this,
       );
     }
   }
@@ -64,14 +64,6 @@ export default abstract class AbstractPort<T> implements IAbstractPort<T> {
       if (notGlobalAndNotSameLocation) {
         this.mappedAdapters.get(scope)?.splice(0);
       }
-
-      console.log(this.name(), scope);
-      console.log(
-        "clearing Adapters: ",
-        notGlobalAndNotSameLocation,
-        "size: ",
-        this.mappedAdapters.get(scope)?.length
-      );
     });
   }
 }
