@@ -21,7 +21,7 @@ describe("LearningElementPresenter", () => {
     viewModel.modelMeshes = [mockMesh];
 
     expect(systemUnderTest["centerPosition"]).toBeUndefined();
-    expect(systemUnderTest.FocusableCenterPosition).toEqual(
+    expect(systemUnderTest.getFocusableCenterPosition()).toEqual(
       new Vector3(0, 0, 21),
     );
   });
@@ -32,7 +32,7 @@ describe("LearningElementPresenter", () => {
     systemUnderTest["centerPosition"] = new Vector3(0, 0, 21);
 
     expect(mockMesh.getHierarchyBoundingVectors).not.toHaveBeenCalled();
-    expect(systemUnderTest.FocusableCenterPosition).toEqual(
+    expect(systemUnderTest.getFocusableCenterPosition()).toEqual(
       new Vector3(0, 0, 21),
     );
   });

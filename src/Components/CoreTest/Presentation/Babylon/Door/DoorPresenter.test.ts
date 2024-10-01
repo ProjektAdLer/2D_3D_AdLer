@@ -58,7 +58,7 @@ describe("DoorPresenter", () => {
     const mockPosition = new Vector3(42, 42, 42);
     viewModel.position = mockPosition;
 
-    expect(systemUnderTest.FocusableCenterPosition).toBe(mockPosition);
+    expect(systemUnderTest.getFocusableCenterPosition()).toBe(mockPosition);
   });
 
   test("onLearningSpaceScored sets isOpen to true if space id is matching, isExit is true and current score is greater than or equal to required score", () => {
