@@ -42,7 +42,7 @@ describe("StoryNPCPresenter", () => {
     );
     viewModel.parentNode.position = new Vector3(1, 2, 3);
 
-    expect(systemUnderTest.FocusableCenterPosition).toEqual(
+    expect(systemUnderTest.getFocusableCenterPosition()).toEqual(
       new Vector3(1, 2, 3),
     );
   });
