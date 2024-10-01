@@ -22,14 +22,14 @@ export default function AdaptivityElementAnswerSelection({
 }) {
   const [answerColors, setAnswerColors] = useState<StyledButtonColor[]>([]);
   const [isAnyAnswerSelected, setIsAnyAnswerSelected] = useState<boolean>(
-    getIsAnyAnswerSelected(question)
+    getIsAnyAnswerSelected(question),
   );
 
   const { t: translate } = useTranslation("learningElement");
   const [text] = useState<string>(
     (question.isMultipleChoice
       ? translate("multipleChoiceSelected")
-      : translate("singleChoiceSelected")) + question.questionText
+      : translate("singleChoiceSelected")) + question.questionText,
   );
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function AdaptivityElementAnswerSelection({
 
       setAnswerColors(newColors);
     },
-    [question]
+    [question],
   );
 
   return (
@@ -79,23 +79,25 @@ export default function AdaptivityElementAnswerSelection({
         ))}
       </div>
 
-      <div className="flex items-end justify-end gap-2 pt-8 font-bold lg:w-1/6">
-        <StyledButton
-          className="box-border "
-          shape="freeFloatCenter"
-          onClick={() => {
-            submitSelection();
-          }}
-          disabled={!isAnyAnswerSelected || question.isCompleted === true}
-        >
-          <p className="text-sm">
-            {question.isCompleted
-              ? translate("questionAlreadyAnswered")
-              : question.isMultipleChoice
-              ? translate("submitAnswers")
-              : translate("submitAnswer")}
-          </p>
-        </StyledButton>
+      <div className="flex items-end justify-end w-auto gap-2 pt-8 font-bold lg:w-1/6">
+        <div className="fixed">
+          <StyledButton
+            className="box-border "
+            shape="freeFloatCenter"
+            onClick={() => {
+              submitSelection();
+            }}
+            disabled={!isAnyAnswerSelected || question.isCompleted === true}
+          >
+            <p className="text-sm">
+              {question.isCompleted
+                ? translate("questionAlreadyAnswered")
+                : question.isMultipleChoice
+                  ? translate("submitAnswers")
+                  : translate("submitAnswer")}
+            </p>
+          </StyledButton>
+        </div>
       </div>
     </div>
   );
