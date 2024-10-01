@@ -11,7 +11,7 @@ export default class DoorPresenter implements IDoorPresenter {
     }
   }
 
-  get FocusableCenterPosition(): Vector3 {
+  getFocusableCenterPosition(): Vector3 {
     return this.viewModel.position;
   }
 
