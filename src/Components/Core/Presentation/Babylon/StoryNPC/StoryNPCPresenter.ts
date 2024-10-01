@@ -10,12 +10,12 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 export default class StoryNPCPresenter implements IStoryNPCPresenter {
   private logger: ILoggerPort;
 
-  get FocusableCenterPosition(): Vector3 {
-    return this.viewModel.parentNode.position;
-  }
-
   constructor(private viewModel: StoryNPCViewModel) {
     this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
+  }
+
+  getFocusableCenterPosition(): Vector3 {
+    return this.viewModel.parentNode.position;
   }
 
   changeStateFromStopToRandomMovement() {

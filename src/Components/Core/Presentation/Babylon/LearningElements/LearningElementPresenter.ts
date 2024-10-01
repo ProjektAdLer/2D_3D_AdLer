@@ -9,7 +9,7 @@ export default class LearningElementPresenter
 
   constructor(private viewModel: LearningElementViewModel) {}
 
-  get FocusableCenterPosition(): Vector3 {
+  getFocusableCenterPosition(): Vector3 {
     if (!this.centerPosition) {
       const { min, max } =
         this.viewModel.modelMeshes[0].getHierarchyBoundingVectors();

@@ -28,10 +28,10 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
 
   private focusables: IAvatarFokusable[] = [];
   private avatarPresenter: IAvatarPresenter | null = null;
-  private previousAvatarPosition: Vector3 | null = null;
+  private lastUpdateAvatarPosition: Vector3 | null = null;
 
-  readonly CurrentFocus: Observable<IAvatarFokusable | null> =
-    new Observable<IAvatarFokusable | null>(null);
+  readonly CurrentFocus: Observable<Readonly<IAvatarFokusable | null>> =
+    new Observable<Readonly<IAvatarFokusable | null>>(null);
 
   constructor() {
     this.scenePresenter = CoreDIContainer.get<ScenePresenterFactory>(
@@ -63,11 +63,14 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
 
   @bind
   private setupOnBeforeFirstFrame(): void {
-    this.previousAvatarPosition = this.avatarPresenter!.AvatarPosition;
+    this.lastUpdateAvatarPosition = this.avatarPresenter!.AvatarPosition;
 
+    /* istanbul ignore next */
     if (config.isDebug)
       this.focusables.forEach((focusable) => {
-        this.debug_drawInteractionRadius(focusable.FocusableCenterPosition);
+        this.debug_drawInteractionRadius(
+          focusable.getFocusableCenterPosition(),
+        );
       });
   }
 
@@ -76,20 +79,20 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
     // skip update without avatar or focusables
     if (!this.avatarPresenter || this.focusables.length === 0) return;
 
-    // skip update if avatar has not moved enough
     const currentAvatarPosition = this.avatarPresenter.AvatarPosition;
 
+    // skip update if avatar has not moved enough
     if (
-      this.previousAvatarPosition &&
+      this.lastUpdateAvatarPosition &&
       currentAvatarPosition &&
       Vector3.DistanceSquared(
-        this.previousAvatarPosition,
+        this.lastUpdateAvatarPosition,
         currentAvatarPosition,
       ) < this.squaredAvatarMovementThreshold
     ) {
       return;
     }
-    this.previousAvatarPosition = currentAvatarPosition;
+    this.lastUpdateAvatarPosition = currentAvatarPosition;
 
     // determine closest focusable
     let newFocus: IAvatarFokusable | null = null;
@@ -97,7 +100,7 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
     for (let i = 0; i < this.focusables.length; i++) {
       const distance = Vector3.DistanceSquared(
         currentAvatarPosition,
-        this.focusables[i].FocusableCenterPosition,
+        this.focusables[i].getFocusableCenterPosition(),
       ); // use squared distance for performance
 
       if (distance < shortestDistance) {
@@ -111,8 +114,7 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
       this.CurrentFocus.Value?.onUnfocused &&
         this.CurrentFocus.Value.onUnfocused();
 
-      if (newFocus !== null) this.CurrentFocus.Value = newFocus;
-      else this.CurrentFocus.Value = null;
+      this.CurrentFocus.Value = newFocus;
 
       this.CurrentFocus.Value?.onFocused && this.CurrentFocus.Value.onFocused();
     }
@@ -132,6 +134,7 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
       .inSingletonScope();
   }
 
+  /* istanbul ignore next */
   private debug_drawInteractionRadius(position: Vector3) {
     if (!config.isDebug) return;
 
