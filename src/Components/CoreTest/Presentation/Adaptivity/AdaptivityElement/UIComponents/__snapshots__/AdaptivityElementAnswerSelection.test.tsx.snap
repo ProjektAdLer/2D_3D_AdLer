@@ -23,21 +23,25 @@ exports[`AdaptivityElementAnswerSelection should render 1`] = `
       </div>
     </div>
     <div
-      class="flex items-end justify-end gap-2 pt-8 font-bold lg:w-1/6"
+      class="flex items-end justify-end w-auto gap-2 pt-8 font-bold lg:w-1/6"
     >
       <div
-        class=""
+        class="fixed"
       >
-        <button
-          class="px-2 py-1 justify-center box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-white overflow-hidden"
-          disabled=""
+        <div
+          class=""
         >
-          <p
-            class="text-sm"
+          <button
+            class="px-2 py-1 justify-center box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-white overflow-hidden"
+            disabled=""
           >
-            submitAnswer
-          </p>
-        </button>
+            <p
+              class="text-sm"
+            >
+              submitAnswer
+            </p>
+          </button>
+        </div>
       </div>
     </div>
   </div>

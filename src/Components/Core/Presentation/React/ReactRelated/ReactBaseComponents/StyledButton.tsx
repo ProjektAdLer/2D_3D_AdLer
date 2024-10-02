@@ -48,8 +48,7 @@ export default function StyledButton({
     freeFloatLeft: "px-2 py-1",
     freeFloatCenter: "flex px-2 py-1 justify-center",
     freeFloatCenterNoPadding: "flex justify-center",
-    smallSquare:
-      "justify-center p-1 md:w-12 md:h-12 sm:w-10 sm:h-10 w-8 h-8 aspect-square",
+    smallSquare: "justify-center px-2 py-1 aspect-square",
   };
 
   return (
