@@ -85,6 +85,7 @@ describe("AvatarFocusSelection", () => {
     jest.restoreAllMocks();
   });
 
+  // ANF-ID: [EZZ0031]
   test("updateFocus sets closest focusable inside the interaction radius as current focus", () => {
     jest
       .spyOn(AvatarPresenter.prototype, "AvatarPosition", "get")
