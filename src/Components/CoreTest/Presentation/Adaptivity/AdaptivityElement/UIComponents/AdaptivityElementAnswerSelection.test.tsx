@@ -18,6 +18,7 @@ describe("AdaptivityElementAnswerSelection", () => {
               answerIndex: 0,
               answerText: "testAnswerText",
               isSelected: false,
+              isCorrect: false,
             },
           ],
           hints: [],
@@ -25,7 +26,7 @@ describe("AdaptivityElementAnswerSelection", () => {
         setHeaderText={() => {}}
         submitSelection={() => {}}
         closeSelection={() => {}}
-      />
+      />,
     );
 
     expect(container).toMatchSnapshot();
@@ -47,6 +48,7 @@ describe("AdaptivityElementAnswerSelection", () => {
               answerIndex: 0,
               answerText: "testAnswerText",
               isSelected: false,
+              isCorrect: false,
             },
           ],
           hints: [],
@@ -54,7 +56,7 @@ describe("AdaptivityElementAnswerSelection", () => {
         setHeaderText={() => {}}
         submitSelection={() => {}}
         closeSelection={() => {}}
-      />
+      />,
     );
     expect(getByText("submitAnswer").closest("button")).toBeDisabled();
   });
@@ -75,6 +77,7 @@ describe("AdaptivityElementAnswerSelection", () => {
               answerIndex: 0,
               answerText: "testAnswerText",
               isSelected: false,
+              isCorrect: false,
             },
           ],
           hints: [],
@@ -82,7 +85,7 @@ describe("AdaptivityElementAnswerSelection", () => {
         setHeaderText={() => {}}
         submitSelection={() => {}}
         closeSelection={() => {}}
-      />
+      />,
     );
     expect(getByText("submitAnswers").closest("button")).toBeDisabled();
   });
@@ -104,6 +107,7 @@ describe("AdaptivityElementAnswerSelection", () => {
               answerIndex: 0,
               answerText: "testAnswerText",
               isSelected: true, // must be true to enable submit button
+              isCorrect: false,
             },
           ],
           hints: [],
@@ -111,7 +115,7 @@ describe("AdaptivityElementAnswerSelection", () => {
         setHeaderText={() => {}}
         submitSelection={submitSelection}
         closeSelection={() => {}}
-      />
+      />,
     );
 
     getByText("submitAnswer").click();
@@ -125,6 +129,7 @@ describe("AdaptivityElementAnswerSelection", () => {
       answerIndex: 0,
       answerText: "testAnswerText",
       isSelected: false,
+      isCorrect: false,
     };
     const { getByText } = render(
       <AdaptivityElementAnswerSelection
@@ -141,7 +146,7 @@ describe("AdaptivityElementAnswerSelection", () => {
         setHeaderText={() => {}}
         submitSelection={() => {}}
         closeSelection={() => {}}
-      />
+      />,
     );
 
     for (let i = 0; i < 2; i++) {
@@ -179,12 +184,42 @@ describe("AdaptivityElementAnswerSelection", () => {
         setHeaderText={() => {}}
         submitSelection={() => {}}
         closeSelection={() => {}}
-      />
+      />,
     );
 
     getByText("testAnswerText1").click();
 
     expect(answer1.isSelected).toBe(true);
     expect(answer2.isSelected).toBe(false);
+  });
+
+  // ANF-ID: [ELG0034]
+  test("answer button is green if answer is correct and question is already completed", () => {
+    const { container } = render(
+      <AdaptivityElementAnswerSelection
+        question={{
+          questionID: 0,
+          questionText: "testQuestionText",
+          isMultipleChoice: false,
+          difficulty: 0,
+          isCompleted: true,
+          isRequired: false,
+          questionAnswers: [
+            {
+              answerIndex: 0,
+              answerText: "testAnswerText",
+              isSelected: true,
+              isCorrect: true,
+            },
+          ],
+          hints: [],
+        }}
+        setHeaderText={() => {}}
+        submitSelection={() => {}}
+        closeSelection={() => {}}
+      />,
+    );
+
+    expect(container).toMatchSnapshot();
   });
 });
