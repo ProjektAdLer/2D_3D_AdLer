@@ -11,7 +11,7 @@ import worldSolved from "../../../../../../Assets/icons/world-completed.svg";
 import worldAvailable from "../../../../../../Assets/icons/world.svg";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import { useInjection } from "inversify-react";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import ILoadUserLearningWorldsInfoUseCase from "src/Components/Core/Application/UseCases/LoadUserLearningWorldsInfo/ILoadUserLearningWorldsInfoUseCase";
@@ -63,6 +63,16 @@ export default function LearningWorldSelection({
   }, [newData, viewModel]);
   const [selectedWorldID] = useObservable<number>(viewModel?.selectedWorldID);
 
+  const scrollTarget = useRef<HTMLLIElement>(null);
+  const [firstTimeFocus, setFirstTimeFocus] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (firstTimeFocus && scrollTarget.current) {
+      scrollTarget.current.scrollIntoView({ block: "center" });
+      setFirstTimeFocus(false);
+    }
+  }, [selectedWorldID, firstTimeFocus]);
+
   if (!viewModel || !controller) return null;
 
   return (
@@ -74,7 +84,15 @@ export default function LearningWorldSelection({
           else worldIcon = worldAvailable;
 
           return (
-            <li className="flex items-center" key={world.id}>
+            <li
+              className="flex items-center"
+              key={world.id}
+              ref={
+                world.id === viewModel.selectedWorldID.Value
+                  ? scrollTarget
+                  : null
+              }
+            >
               <LearningWorldSelectionRow
                 icon={worldIcon}
                 title={world.name}

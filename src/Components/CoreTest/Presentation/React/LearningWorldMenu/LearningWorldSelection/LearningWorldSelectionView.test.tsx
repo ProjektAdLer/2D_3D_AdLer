@@ -23,10 +23,10 @@ describe("LearningWorldSelection", () => {
     CoreDIContainer.unbindAll();
 
     CoreDIContainer.bind<ILoadUserLearningWorldsInfoUseCase>(
-      USECASE_TYPES.ILoadUserLearningWorldsInfoUseCase
+      USECASE_TYPES.ILoadUserLearningWorldsInfoUseCase,
     ).toConstantValue(loadUserLearningWorldsInfoUseCase);
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.ILoadingScreenPresenter
+      PRESENTATION_TYPES.ILoadingScreenPresenter,
     ).toConstantValue(loadingScreenPresenterMock);
   });
 
@@ -45,7 +45,7 @@ describe("LearningWorldSelection", () => {
     const container = render(
       <Provider container={CoreDIContainer}>
         <LearningWorldSelection />
-      </Provider>
+      </Provider>,
     );
 
     // click on the first row
@@ -60,7 +60,7 @@ describe("LearningWorldSelection", () => {
     const { container } = render(
       <Provider container={CoreDIContainer}>
         <LearningWorldSelection />
-      </Provider>
+      </Provider>,
     );
 
     expect(container.firstChild).toBeNull();
@@ -72,7 +72,7 @@ describe("LearningWorldSelection", () => {
     const { container } = render(
       <Provider container={CoreDIContainer}>
         <LearningWorldSelection />
-      </Provider>
+      </Provider>,
     );
 
     expect(container.firstChild).toBeNull();
@@ -93,7 +93,46 @@ describe("LearningWorldSelection", () => {
     render(
       <Provider container={CoreDIContainer}>
         <LearningWorldSelection />
-      </Provider>
+      </Provider>,
     );
+  });
+
+  test("scrolls to selectedWorldID after view is rendered", () => {
+    Element.prototype.scrollIntoView = jest.fn();
+
+    const vm = new LearningWorldSelectionViewModel();
+    vm.selectedWorldID.Value = 3;
+    vm.userWorlds.Value = [
+      {
+        id: 1,
+        name: "world1",
+        isCompleted: true,
+      },
+      {
+        id: 2,
+        name: "world2",
+        isCompleted: true,
+      },
+      {
+        id: 3,
+        name: "world3",
+        isCompleted: false,
+      },
+      {
+        id: 4,
+        name: "world4",
+        isCompleted: false,
+      },
+    ];
+    const controllerMock = mock<ILearningWorldSelectionController>();
+    useBuilderMock([vm, controllerMock]);
+
+    render(
+      <Provider container={CoreDIContainer}>
+        <LearningWorldSelection />
+      </Provider>,
+    );
+
+    expect(Element.prototype.scrollIntoView).toHaveBeenCalled();
   });
 });
