@@ -5,6 +5,7 @@ import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import ControlsExplanationModalViewModel from "../../../../../Core/Presentation/React/GeneralComponents/ControlsExplanationModal/ControlsExplanationModalViewModel";
+import "@testing-library/jest-dom";
 
 describe("ControlsExplanationModal", () => {
   beforeEach(() => {
