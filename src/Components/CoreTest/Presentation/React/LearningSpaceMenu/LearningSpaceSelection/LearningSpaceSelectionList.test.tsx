@@ -19,7 +19,7 @@ describe("LearningSpaceSelectionList", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind<ICalculateLearningSpaceScoreUseCase>(
-      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase
+      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase,
     ).toConstantValue(calculateSpaceScoreUseCaseMock);
   });
 
@@ -46,7 +46,7 @@ describe("LearningSpaceSelectionList", () => {
           controller={controllerMock}
           viewModel={vm}
         />
-      </Provider>
+      </Provider>,
     );
 
     // click on the first row
@@ -72,7 +72,7 @@ describe("LearningSpaceSelectionList", () => {
           controller={controllerMock}
           viewModel={vm}
         />
-      </Provider>
+      </Provider>,
     );
 
     // click on the first row
@@ -98,7 +98,7 @@ describe("LearningSpaceSelectionList", () => {
           controller={controllerMock}
           viewModel={vm}
         />
-      </Provider>
+      </Provider>,
     );
 
     // click on the first row
@@ -125,7 +125,7 @@ describe("LearningSpaceSelectionList", () => {
           controller={controllerMock}
           viewModel={vm}
         />
-      </Provider>
+      </Provider>,
     );
   });
 
@@ -147,7 +147,53 @@ describe("LearningSpaceSelectionList", () => {
           viewModel={vm}
           controller={controllerMock}
         />
-      </Provider>
+      </Provider>,
     );
+  });
+
+  test("scrolls to selected learning Space after list is rendered", () => {
+    Element.prototype.scrollIntoView = jest.fn();
+
+    const vm = new LearningSpaceSelectionViewModel();
+    vm.spaces.Value = [
+      {
+        id: 1,
+        name: "test",
+        isAvailable: true,
+        isCompleted: true,
+      } as LearningSpaceSelectionLearningSpaceData,
+      {
+        id: 2,
+        name: "test",
+        isAvailable: true,
+        isCompleted: false,
+      } as LearningSpaceSelectionLearningSpaceData,
+      {
+        id: 3,
+        name: "test",
+        isAvailable: false,
+        isCompleted: false,
+      } as LearningSpaceSelectionLearningSpaceData,
+      {
+        id: 4,
+        name: "test",
+        isAvailable: false,
+        isCompleted: false,
+      } as LearningSpaceSelectionLearningSpaceData,
+    ];
+
+    vm.selectedSpaceID.Value = 3;
+    const controllerMock = mock<ILearningSpaceSelectionController>();
+
+    render(
+      <Provider container={CoreDIContainer}>
+        <LearningSpaceSelectionList
+          viewModel={vm}
+          controller={controllerMock}
+        />
+      </Provider>,
+    );
+
+    expect(Element.prototype.scrollIntoView).toHaveBeenCalled();
   });
 });

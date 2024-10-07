@@ -9,7 +9,7 @@ import LearningSpaceSelectionViewModel, {
 import spaceSolved from "../../../../../../../Assets/icons/check-solution.svg";
 import spaceAvailable from "../../../../../../../Assets/icons/unlocked.svg";
 import spaceLocked from "../../../../../../../Assets/icons/locked.svg";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 
 export default function LearningSpaceSelectionList(props: {
@@ -26,10 +26,21 @@ export default function LearningSpaceSelectionList(props: {
     (id: ComponentID) => props.controller.onLearningSpaceClicked(id),
     [props.controller],
   );
+
+  const scrollTarget = useRef<HTMLLIElement>(null);
+  const [firstTimeFocus, setFirstTimeFocus] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (firstTimeFocus && scrollTarget.current) {
+      scrollTarget.current.scrollIntoView({ block: "nearest" });
+      setFirstTimeFocus(false);
+    }
+  }, [selectedRowID, firstTimeFocus]);
+
   let spaceIcon: string;
 
   return (
-    <ul className="flex flex-col w-full gap-4 pt-4 p-2 lg:p-8">
+    <ul className="flex flex-col w-full gap-4 p-2 pt-4 lg:p-8">
       {spaces?.map((space) => {
         if (space.isCompleted) spaceIcon = spaceSolved;
         else if (space.isAvailable) spaceIcon = spaceAvailable;
@@ -39,6 +50,7 @@ export default function LearningSpaceSelectionList(props: {
           <li
             className="flex items-center"
             key={space.id.toString() + space.name}
+            ref={space.id === selectedRowID ? scrollTarget : null}
           >
             <LearningSpaceSelectionRow
               icon={spaceIcon}
