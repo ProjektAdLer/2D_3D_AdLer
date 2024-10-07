@@ -1,11 +1,10 @@
-import { render } from "@testing-library/react";
+import { act, render } from "@testing-library/react";
 import React from "react";
 import ControlsExplanationModal from "../../../../../Core/Presentation/React/GeneralComponents/ControlsExplanationModal/ControlsExplanationModal";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import ControlsExplanationModalViewModel from "../../../../../Core/Presentation/React/GeneralComponents/ControlsExplanationModal/ControlsExplanationModalViewModel";
-import { act } from "react-dom/test-utils";
 
 describe("ControlsExplanationModal", () => {
   beforeEach(() => {
@@ -19,17 +18,18 @@ describe("ControlsExplanationModal", () => {
     const { container } = render(
       <Provider container={CoreDIContainer}>
         <ControlsExplanationModal />
-      </Provider>
+      </Provider>,
     );
 
     expect(container.firstChild).toBeNull();
   });
 
+  // ANF-ID: [EZZ0033]
   test("should render", () => {
     const { container } = render(
       <Provider container={CoreDIContainer}>
         <ControlsExplanationModal />
-      </Provider>
+      </Provider>,
     );
 
     expect(container).not.toBeEmptyDOMElement();
@@ -40,7 +40,7 @@ describe("ControlsExplanationModal", () => {
     const { container, getByRole } = render(
       <Provider container={CoreDIContainer}>
         <ControlsExplanationModal />
-      </Provider>
+      </Provider>,
     );
     const closeButton = getByRole("button", { hidden: true });
 
