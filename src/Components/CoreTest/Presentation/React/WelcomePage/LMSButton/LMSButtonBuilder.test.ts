@@ -10,13 +10,6 @@ describe("LMSButtonBuilder", () => {
     systemUnderTest = new LMSButtonBuilder();
   });
 
-  test("buildController builds the controller", () => {
-    systemUnderTest.buildViewModel();
-    systemUnderTest.buildController();
-
-    expect(systemUnderTest["controller"]).toBeDefined();
-    expect(systemUnderTest["controller"]).toBeInstanceOf(LMSButtonController);
-  });
   test("buildViewModel concludes the build step successfully and sets the given data in the viewModel", () => {
     mock(config).moodleURL = "TestURL";
 

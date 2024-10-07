@@ -12,6 +12,7 @@ describe("LMSButtonController", () => {
     systemUnderTest = new LMSButtonController(vm);
   });
 
+  // ANF-ID: [EZZ0032]
   test("openLMSPage should work", () => {
     systemUnderTest.openLMSPage();
     expect(windowMock).toHaveBeenCalled();

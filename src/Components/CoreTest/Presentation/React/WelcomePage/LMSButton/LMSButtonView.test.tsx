@@ -10,13 +10,14 @@ import { render } from "@testing-library/react";
 let mockViewModel = new LMSButtonViewModel();
 
 describe("LMSButton", () => {
+  // ANF-ID: [EZZ0032]
   test("should render", () => {
     useBuilderMock([mockViewModel, LMSButtonController]);
 
     render(
       <Provider container={CoreDIContainer}>
         <LMSButton />
-      </Provider>
+      </Provider>,
     );
   });
 });
