@@ -28,7 +28,9 @@ export default function LearningWorldScorePanel({
 
   useEffect(() => {
     if (!scoreInfo) return;
-    setPercentage((scoreInfo.currentScore / scoreInfo.requiredScore) * 100);
+    if (scoreInfo.requiredScore === 0) return setPercentage(100);
+    else
+      setPercentage((scoreInfo.currentScore / scoreInfo.requiredScore) * 100);
   }, [scoreInfo?.currentScore, scoreInfo?.requiredScore, scoreInfo]);
   useEffect(() => {
     const calculateWorldScore =
