@@ -121,6 +121,7 @@ describe("LearningElementView", () => {
     );
   });
 
+  // ANF-ID: [EZZ0034]
   test("async setup calls scene presenter to load model and icon", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new Mesh("TestMesh", new Scene(new NullEngine())),

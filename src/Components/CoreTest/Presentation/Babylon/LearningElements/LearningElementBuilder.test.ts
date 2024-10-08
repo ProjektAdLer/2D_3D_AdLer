@@ -36,6 +36,7 @@ const mockElementData: LearningElementTO = {
   hasScored: false,
   model: LearningElementModelTypeEnums.H5pElementModelTypes.GreySlotmachine,
   theme: LearningSpaceThemeType.Campus,
+  isScoreable: false,
 };
 const mockElementPosition: [Vector3, number] = [new Vector3(1, 2, 3), 0];
 
@@ -81,6 +82,7 @@ describe("LearningElementBuilder", () => {
     }).toThrowError("elementPosition is undefined");
   });
 
+  // ANF-ID: [ELG0028, EZZ0034]
   test("buildViewModel concludes the build step successfully and sets the given data in the viewModel", () => {
     systemUnderTest.elementData = mockElementData;
     systemUnderTest.elementPosition = mockElementPosition;
