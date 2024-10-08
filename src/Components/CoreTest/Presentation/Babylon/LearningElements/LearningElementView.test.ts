@@ -36,8 +36,6 @@ function buildSystemUnderTest(): [
 }
 
 describe("LearningElementView", () => {
-  let systemUnderTest: LearningElementView;
-
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
@@ -132,7 +130,7 @@ describe("LearningElementView", () => {
 
     await systemUnderTest.setupLearningElement();
 
-    expect(scenePresenterMock.loadModel).toBeCalledTimes(2);
+    expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(2);
   });
 
   test("async setup sets an action manager for each model mesh", async () => {
@@ -260,7 +258,7 @@ describe("LearningElementView", () => {
 
     await systemUnderTest.setupLearningElement();
 
-    expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
+    expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
       mesh,
       expect.any(Color3),
     );
@@ -300,7 +298,10 @@ describe("LearningElementView", () => {
 
     await systemUnderTest.setupLearningElement();
 
-    expect(mockedMesh.rotate).toBeCalledWith(Vector3.Up(), Tools.ToRadians(42));
+    expect(mockedMesh.rotate).toHaveBeenCalledWith(
+      Vector3.Up(),
+      Tools.ToRadians(42),
+    );
   });
 
   test("changeHighlightColor changes the color of the highlight layer when the hasScored value in the viewModel is set", async () => {
