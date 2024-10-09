@@ -6,8 +6,8 @@ import USECASE_TYPES from "../../../../../../Core/DependencyInjection/UseCases/U
 import mock from "jest-mock-extended/lib/Mock";
 import type IEntityContainer from "../../../../../../Core/Domain/EntityContainer/IEntityContainer";
 import CORE_TYPES from "../../../../../../Core/DependencyInjection/CoreTypes";
-import PauseOverallTimeSpentTimerUseCase from "../../../../../../Core/Application/UseCases/Adaptivity/GetOverallTimeSpent/PauseOverallTimeSpentTimer/PauseOverallTimeSpentTimerUseCase";
-import IStartOverallTimeSpentTimerUseCase from "../../../../../../Core/Application/UseCases/Adaptivity/GetOverallTimeSpent/StartOverallTimeSpentTimer/IStartOverallTimeSpentTimerUseCase";
+import IStartOverallTimeSpentTimerUseCase from "../../../../../../Core/Application/UseCases/Adaptivity/OverallTimeSpent/StartOverallTimeSpentTimer/IStartOverallTimeSpentTimerUseCase";
+import PauseOverallTimeSpentTimerUseCase from "../../../../../../Core/Application/UseCases/Adaptivity/OverallTimeSpent/PauseOverallTimeSpentTimer/PauseOverallTimeSpentTimerUseCase";
 
 const entitycontainermock = mock<IEntityContainer>();
 const startUseCaseMock = mock<IStartOverallTimeSpentTimerUseCase>();
@@ -20,11 +20,11 @@ describe("PauseOverallTimeSpentNotificationTimerUseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind<IEntityContainer>(
-      CORE_TYPES.IEntityContainer
+      CORE_TYPES.IEntityContainer,
     ).toConstantValue(entitycontainermock);
 
     CoreDIContainer.rebind<IStartOverallTimeSpentTimerUseCase>(
-      USECASE_TYPES.IStartOverallTimeSpentTimerUseCase
+      USECASE_TYPES.IStartOverallTimeSpentTimerUseCase,
     ).toConstantValue(startUseCaseMock);
   });
 
@@ -34,7 +34,7 @@ describe("PauseOverallTimeSpentNotificationTimerUseCase", () => {
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(
-      PauseOverallTimeSpentTimerUseCase
+      PauseOverallTimeSpentTimerUseCase,
     );
     entity = new BreakTimeNotificationEntity();
     entitycontainermock.getEntitiesOfType.mockReturnValue([entity]);
@@ -42,7 +42,7 @@ describe("PauseOverallTimeSpentNotificationTimerUseCase", () => {
 
   test("internalExecute calls StartOverallTimeSpentAdaptivityTimerUseCase on short breaktype", () => {
     jest.useFakeTimers();
-    entity.notificationIterator = 0;
+    entity.breakTimeIntervalCounter = 0;
 
     entitycontainermock.getEntitiesOfType.mockReturnValue([entity]);
 
@@ -56,7 +56,7 @@ describe("PauseOverallTimeSpentNotificationTimerUseCase", () => {
 
   test("internalExecute calls StartOverallTimeSpentAdaptivityTimerUseCase on medium breaktype", () => {
     jest.useFakeTimers();
-    entity.notificationIterator = 4;
+    entity.breakTimeIntervalCounter = 4;
 
     entitycontainermock.getEntitiesOfType.mockReturnValue([entity]);
 
@@ -70,7 +70,7 @@ describe("PauseOverallTimeSpentNotificationTimerUseCase", () => {
 
   test("internalExecute calls not StartOverallTimeSpentAdaptivityTimerUseCase on long breaktype", () => {
     jest.useFakeTimers();
-    entity.notificationIterator = 8;
+    entity.breakTimeIntervalCounter = 8;
 
     entitycontainermock.getEntitiesOfType.mockReturnValue([entity]);
 
