@@ -34,9 +34,11 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
   useEffect(() => {
     setRandomNumber(Math.random());
   }, [viewModel?.showModal]);
+
   useEffect(() => {
     controller.setSliderIndex(1);
   }, [controller]);
+
   useEffect(() => {
     let breakContent = ChooseRandomBreakContent(
       breakType,
@@ -152,6 +154,7 @@ function RenderBreakContent(
               src={chosenBreakContent.image1}
               title="Pausenhinweis"
               alt=""
+              data-testid="id-slide-1"
             ></img>
           )}
           {currentSlideIndex === 2 && (
@@ -161,6 +164,7 @@ function RenderBreakContent(
               src={chosenBreakContent.image2}
               title="Pausenhinweis"
               alt=""
+              data-testid="id-slide-2"
             ></img>
           )}
           {currentSlideIndex === 3 && (
@@ -170,6 +174,7 @@ function RenderBreakContent(
               src={chosenBreakContent.image3}
               title="Pausenhinweis"
               alt=""
+              data-testid="id-slide-3"
             ></img>
           )}
           {currentSlideIndex === 4 && (
@@ -179,6 +184,7 @@ function RenderBreakContent(
               src={chosenBreakContent.image4}
               title="Pausenhinweis"
               alt=""
+              data-testid="id-slide-4"
             ></img>
           )}
         </div>

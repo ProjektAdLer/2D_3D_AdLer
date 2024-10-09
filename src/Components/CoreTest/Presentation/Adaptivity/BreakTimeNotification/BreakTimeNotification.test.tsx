@@ -1,10 +1,12 @@
 import {
+  cleanup,
   fireEvent,
   getByText,
   render,
   screen,
   waitFor,
 } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import React from "react";
 import BreakTimeNotification from "../../../../Core/Presentation/Adaptivity/BreakTimeNotification/BreakTimeNotification";
 import useBuilderMock from "../../React/ReactRelated/CustomHooks/useBuilder/useBuilderMock";
@@ -77,6 +79,55 @@ describe("BreakTimeNotification", () => {
 
     expect(mockController.closeBreakNotification).toHaveBeenCalledTimes(1);
   });
+
+  // ANF-ID: [EKJ0002]
+  test.each([
+    [
+      "id-slide-1",
+      1,
+      [
+        BreakTimeNotificationType.Short,
+        BreakTimeNotificationType.Medium,
+        BreakTimeNotificationType.Long,
+      ],
+    ],
+    [
+      "id-slide-2",
+      2,
+      [
+        BreakTimeNotificationType.Short,
+        BreakTimeNotificationType.Medium,
+        BreakTimeNotificationType.Long,
+      ],
+    ],
+    [
+      "id-slide-3",
+      3,
+      [
+        BreakTimeNotificationType.Short,
+        BreakTimeNotificationType.Medium,
+        BreakTimeNotificationType.Long,
+      ],
+    ],
+    [
+      "id-slide-4",
+      4,
+      [BreakTimeNotificationType.Short, BreakTimeNotificationType.Medium],
+    ],
+  ])(
+    "should render slide with id %s, index %s and type %s ",
+    (testid, index, types) => {
+      types.forEach((type) => {
+        useBuilderMock([viewModel, mockController]);
+        viewModel.showModal.Value = true;
+        viewModel.breakType.Value = type;
+        viewModel.slideIndex.Value = index;
+        render(<BreakTimeNotification />);
+        expect(screen.getByTestId(testid)).toBeInTheDocument();
+        cleanup();
+      });
+    },
+  );
 
   // ANF-ID: [EKJ0004, EKJ0005, EKJ0006]
   test("click on close button calls closedBreakNotification on controller", () => {
