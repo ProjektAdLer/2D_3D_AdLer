@@ -10,12 +10,10 @@ import ReactFlow, {
   Background,
   Controls,
   Edge,
-  // MiniMap,
   Node,
   NodeMouseHandler,
   NodeTypes,
   useReactFlow,
-  XYPosition,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { CSSProperties, useCallback, useEffect } from "react";
@@ -23,8 +21,6 @@ import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservab
 import LearningSpaceSelectionSpaceNode, {
   LearningSpaceSelectionSpaceNodeType,
 } from "./LearningSpaceSelectionSpaceNode";
-import ELK, { ElkNode, LayoutOptions } from "elkjs/lib/elk.bundled.js";
-import { ElkExtendedEdge } from "elkjs";
 import {
   BooleanAndNode,
   BooleanIDNode,
@@ -37,17 +33,14 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import * as dagre from "@dagrejs/dagre";
 
-const elk = new ELK();
-
-const NODE_WIDTH = 176;
+const SPACE_NODE_WIDTH = 176;
+const REQ_NODE_WIDTH = 65;
 const NODE_HEIGHT = 60;
-// see more options for layered algorithm: https://www.eclipse.org/elk/reference/algorithms/org-eclipse-elk-layered.html
-const ELK_LAYOUT_OPTIONS: LayoutOptions = {
-  "elk.algorithm": "layered",
-  "elk.direction": "DOWN",
-  "elk.alignment": "V_CENTER",
-  "elk.edgeRouting": "SPLINES",
+// see https://github.com/dagrejs/dagre/wiki#configuring-the-layout for more options
+const dagreLayoutConfig: dagre.GraphLabel = {
+  ranksep: 25,
 };
 
 const nodeTypes: NodeTypes = {
@@ -83,16 +76,17 @@ export default function LearningSpaceSelectionGraph(props: {
       );
 
       // graph layout with elk
-      const elkGraph: ElkNode = createElkGraph(
-        [...spaceIDs, ...requirementsNodeIDs],
+      const layoutedNodes = layoutNodesWithDagre(
+        spaceIDs,
+        requirementsNodeIDs,
         requirementsTrees.edges,
       );
-      await elk.layout(elkGraph);
 
       // apply node positions from elk graph to react flow nodes
-      const nodes = applyNodePositions(
-        [...spaceNodes, ...requirementsTrees.nodes],
-        elkGraph,
+      const nodes = applyDagreNodePositions(
+        spaceNodes,
+        requirementsTrees.nodes,
+        layoutedNodes,
       );
 
       reactFlowInstance.setNodes(nodes);
@@ -137,84 +131,10 @@ export default function LearningSpaceSelectionGraph(props: {
         fitViewOptions={{ padding: 0.2 }}
       >
         <Background size={2} />
-        {/* <MiniMap /> */}
         <Controls showInteractive={false} />
       </ReactFlow>
     </div>
   );
-}
-
-function createRequirementTrees(
-  spaces: LearningSpaceSelectionLearningSpaceData[],
-): { nodes: Node[]; edges: Edge[] } {
-  return spaces.reduce(
-    (accumulatedArrays, space) => {
-      // skip spaces that have no requirements
-      if (space.requirementsSyntaxTree === null) return accumulatedArrays;
-
-      for (let requirementsTreeNode of space.requirementsSyntaxTree) {
-        // create a new graph edge for each node in the syntax tree
-        const targetString =
-          requirementsTreeNode.parentNodeID === "root"
-            ? space.id.toString()
-            : requirementsTreeNode.parentNodeID;
-
-        accumulatedArrays.edges.push({
-          id: requirementsTreeNode.node.ID + "-" + targetString,
-          source: requirementsTreeNode.node.ID,
-          target: targetString,
-          style: {
-            stroke: "black",
-            // strokeDasharray: requiredSpace.isCompleted ? "" : "6 5",
-          } as CSSProperties,
-        } as Edge);
-
-        // create a new graph node if the node is a boolean operator
-        if (!(requirementsTreeNode.node instanceof BooleanIDNode)) {
-          let operatorTypeString: BooleanOperatorType;
-          if (requirementsTreeNode.node instanceof BooleanAndNode)
-            operatorTypeString = "and";
-          else if (requirementsTreeNode.node instanceof BooleanOrNode)
-            operatorTypeString = "or";
-
-          accumulatedArrays.nodes.push({
-            id: requirementsTreeNode.node.ID,
-            data: {
-              operatorType: operatorTypeString!,
-            },
-            position: { x: 0, y: 0 },
-            type: "requirementNode",
-          } as Node);
-        }
-      }
-
-      // return the arrays to be used in the next iteration
-      return accumulatedArrays;
-    },
-    // empty starting arrays
-    { nodes: [], edges: [] } as { nodes: Node[]; edges: Edge[] },
-  );
-}
-
-function createElkGraph(nodes: string[], edges: Edge[]): ElkNode {
-  return {
-    id: "root",
-    layoutOptions: ELK_LAYOUT_OPTIONS,
-    children: nodes.map((node) => {
-      return {
-        id: node,
-        width: NODE_WIDTH,
-        height: NODE_HEIGHT,
-      } as ElkNode;
-    }),
-    edges: edges.map((edge) => {
-      return {
-        id: edge.id,
-        sources: [edge.source],
-        targets: [edge.target],
-      } as ElkExtendedEdge;
-    }),
-  };
 }
 
 function createSpaceNodes(
@@ -248,8 +168,6 @@ function createSpaceNodes(
       position: { x: 0, y: 0 },
       connectable: false,
       deletable: false,
-      height: NODE_HEIGHT,
-      width: NODE_WIDTH,
     };
     return node;
   });
@@ -257,21 +175,128 @@ function createSpaceNodes(
   return nodes;
 }
 
-function applyNodePositions(nodes: Node[], elkGraph: ElkNode): Node[] {
-  const nodesWithPositions = nodes.map((node) => {
-    const nodePosition: XYPosition = calculateNodePosition(node.id, elkGraph);
-    return {
-      ...node,
-      position: nodePosition,
-    };
-  });
-  return nodesWithPositions;
+function createRequirementTrees(
+  spaces: LearningSpaceSelectionLearningSpaceData[],
+): { nodes: Node[]; edges: Edge[] } {
+  return spaces.reduce(
+    (accumulatedArrays, space) => {
+      // skip spaces that have no requirements
+      if (space.requirementsSyntaxTree === null) return accumulatedArrays;
+
+      for (let requirementsTreeNode of space.requirementsSyntaxTree) {
+        // create a new graph edge for each node in the syntax tree
+        const targetString =
+          requirementsTreeNode.parentNodeID === "root"
+            ? space.id.toString()
+            : requirementsTreeNode.parentNodeID;
+
+        accumulatedArrays.edges.push({
+          id: requirementsTreeNode.node.ID + "-" + targetString,
+          source: requirementsTreeNode.node.ID,
+          target: targetString,
+          style: {
+            stroke: "black",
+          } as CSSProperties,
+        } as Edge);
+
+        // create a new graph node if the node is a boolean operator
+        if (!(requirementsTreeNode.node instanceof BooleanIDNode)) {
+          let operatorTypeString: BooleanOperatorType;
+          if (requirementsTreeNode.node instanceof BooleanAndNode)
+            operatorTypeString = "and";
+          else if (requirementsTreeNode.node instanceof BooleanOrNode)
+            operatorTypeString = "or";
+
+          accumulatedArrays.nodes.push({
+            id: requirementsTreeNode.node.ID,
+            data: {
+              operatorType: operatorTypeString!,
+            },
+            position: { x: 0, y: 0 },
+            type: "requirementNode",
+          } as Node);
+        }
+      }
+
+      // return the arrays to be used in the next iteration
+      return accumulatedArrays;
+    },
+    // empty starting arrays
+    { nodes: [], edges: [] } as { nodes: Node[]; edges: Edge[] },
+  );
 }
 
-function calculateNodePosition(id: string, elkGraph: ElkNode): XYPosition {
-  const elkNode = elkGraph.children!.find((child) => child.id === id);
-  return {
-    x: elkNode!.x! - NODE_WIDTH / 2,
-    y: elkNode!.y! - NODE_HEIGHT / 2,
-  };
+// layouts the nodes with dagre and returns a list of nodes with their positions and the ids in the label field
+function layoutNodesWithDagre(
+  spaceNodes: string[],
+  requirementsNodes: string[],
+  edges: Edge[],
+): dagre.Node[] {
+  const graph = new dagre.graphlib.Graph();
+
+  // set graph configuration (needs to be an emtpy object at the least for some reason)
+  graph.setGraph(dagreLayoutConfig);
+
+  // default to assigning a new object as a label for each new edge (needs to be done for some reason)
+  graph.setDefaultEdgeLabel(function () {
+    return {};
+  });
+
+  spaceNodes.forEach((node) => {
+    graph.setNode(node, { width: SPACE_NODE_WIDTH, height: NODE_HEIGHT });
+  });
+  requirementsNodes.forEach((node) => {
+    graph.setNode(node, { width: SPACE_NODE_WIDTH, height: NODE_HEIGHT });
+  });
+
+  edges.forEach((edge) => {
+    graph.setEdge(edge.source, edge.target);
+  });
+
+  dagre.layout(graph);
+
+  const nodes = graph.nodes().map((node) => {
+    const nodeData = graph.node(node);
+    return {
+      label: node, // use label field to safe node id for later use
+      x: nodeData.x,
+      y: nodeData.y,
+      width: nodeData.width,
+      height: nodeData.height,
+    };
+  });
+
+  return nodes;
+}
+
+function applyDagreNodePositions(
+  spaceNodes: Node[],
+  requirementNodes: Node[],
+  dagreNodes: dagre.Node[],
+): Node[] {
+  const nodesWithPositions = spaceNodes.map((node) => {
+    const dagreNode = dagreNodes.find((n) => n.label === node.id);
+    return {
+      ...node,
+      position: {
+        x: dagreNode!.x - SPACE_NODE_WIDTH / 2,
+        y: dagreNode!.y - NODE_HEIGHT / 2,
+      },
+    };
+  });
+
+  nodesWithPositions.push(
+    ...requirementNodes.map((node, index) => {
+      const dagreNode = dagreNodes.find((n) => n.label === node.id);
+      return {
+        ...node,
+        position: {
+          x: dagreNode!.x - REQ_NODE_WIDTH / 2,
+          y: dagreNode!.y - NODE_HEIGHT / 2,
+        },
+      };
+    }),
+  );
+
+  return nodesWithPositions;
 }

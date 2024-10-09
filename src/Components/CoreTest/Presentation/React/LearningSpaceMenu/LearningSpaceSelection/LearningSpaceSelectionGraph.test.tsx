@@ -5,29 +5,14 @@ import ILearningSpaceSelectionController from "../../../../../Core/Presentation/
 import LearningSpaceSelectionGraph from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceSelection/Graph/LearningSpaceSelectionGraph";
 import LearningSpaceSelectionViewModel from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelectionViewModel";
 import { ReactFlowProvider } from "reactflow";
-import { ElkLayoutArguments, ElkNode } from "elkjs/lib/elk.bundled.js";
 import {
   BooleanAndNode,
   BooleanIDNode,
   BooleanOrNode,
 } from "../../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
+import "@testing-library/jest-dom";
 
 const controllerMock = mock<ILearningSpaceSelectionController>();
-
-// mock elk to prevent async layouting
-jest.mock("elkjs/lib/elk.bundled.js", () => {
-  return function () {
-    return {
-      layout: (graph: ElkNode, args?: ElkLayoutArguments) => {
-        graph.children!.forEach((child) => {
-          child.x = 42;
-          child.y = 42;
-        });
-        return Promise.resolve(graph);
-      },
-    };
-  };
-});
 
 describe("LearningSpaceSelectionGraph", () => {
   let vmMock: LearningSpaceSelectionViewModel;
@@ -43,10 +28,11 @@ describe("LearningSpaceSelectionGraph", () => {
           controller={controllerMock}
           viewModel={vmMock}
         />
-      </ReactFlowProvider>
+      </ReactFlowProvider>,
     );
 
     expect(container).not.toBeEmptyDOMElement();
+    expect(container).toMatchSnapshot();
   });
 
   // ANF-ID: [EWE0024, EWE0025]
@@ -81,7 +67,7 @@ describe("LearningSpaceSelectionGraph", () => {
           controller={controllerMock}
           viewModel={vmMock}
         />
-      </ReactFlowProvider>
+      </ReactFlowProvider>,
     );
 
     const nodes = container.querySelectorAll(".react-flow__node");
@@ -128,7 +114,7 @@ describe("LearningSpaceSelectionGraph", () => {
           controller={controllerMock}
           viewModel={vmMock}
         />
-      </ReactFlowProvider>
+      </ReactFlowProvider>,
     );
 
     const nodes = container.querySelectorAll(".react-flow__node");
@@ -173,7 +159,7 @@ describe("LearningSpaceSelectionGraph", () => {
           controller={controllerMock}
           viewModel={vmMock}
         />
-      </ReactFlowProvider>
+      </ReactFlowProvider>,
     );
 
     const edges = container.querySelectorAll(".react-flow__edge");
@@ -203,7 +189,7 @@ describe("LearningSpaceSelectionGraph", () => {
           controller={controllerMock}
           viewModel={vmMock}
         />
-      </ReactFlowProvider>
+      </ReactFlowProvider>,
     );
     const node = await container.findByTestId("rf__node-42");
 
@@ -231,7 +217,7 @@ describe("LearningSpaceSelectionGraph", () => {
           controller={controllerMock}
           viewModel={vmMock}
         />
-      </ReactFlowProvider>
+      </ReactFlowProvider>,
     );
 
     waitFor(() => {
@@ -257,7 +243,7 @@ describe("LearningSpaceSelectionGraph", () => {
           controller={controllerMock}
           viewModel={vmMock}
         />
-      </ReactFlowProvider>
+      </ReactFlowProvider>,
     );
 
     waitFor(() => {
@@ -284,7 +270,7 @@ describe("LearningSpaceSelectionGraph", () => {
           controller={controllerMock}
           viewModel={vmMock}
         />
-      </ReactFlowProvider>
+      </ReactFlowProvider>,
     );
 
     waitFor(() => {
