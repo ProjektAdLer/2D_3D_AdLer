@@ -6,5 +6,5 @@ export enum BreakTimeNotificationType {
 }
 
 export default class BreakTimeNotificationEntity {
-  notificationIterator: number;
+  breakTimeIntervalCounter: number;
 }

@@ -6,11 +6,11 @@ import SpaceSelection from "~ReactComponents/LearningSpaceMenu/LearningSpaceSele
 import { useInjection } from "inversify-react";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import BreakTimeNotification from "../../../Adaptivity/BreakTimeNotification/BreakTimeNotification";
-import ICreateOverallTimeSpentTimerUseCase from "src/Components/Core/Application/UseCases/Adaptivity/GetOverallTimeSpent/CreateOverallTimeSpentTimer/ICreateOverallTimeSpentTimerUseCase";
+import ICreateOverallTimeSpentTimerUseCase from "src/Components/Core/Application/UseCases/Adaptivity/OverallTimeSpent/CreateOverallTimeSpentTimer/ICreateOverallTimeSpentTimerUseCase";
 
 export default function LearningSpaceMenu() {
   const createTimerUseCase = useInjection<ICreateOverallTimeSpentTimerUseCase>(
-    USECASE_TYPES.ICreateOverallTimeSpentTimerUseCase
+    USECASE_TYPES.ICreateOverallTimeSpentTimerUseCase,
   );
 
   useEffect(() => {

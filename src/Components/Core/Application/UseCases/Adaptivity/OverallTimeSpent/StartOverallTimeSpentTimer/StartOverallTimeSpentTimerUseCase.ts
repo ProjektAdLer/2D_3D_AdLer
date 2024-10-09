@@ -20,29 +20,31 @@ export default class StartOverallTimeSpentTimerUseCase
     @inject(PORT_TYPES.INotificationPort)
     private notificationPort: INotificationPort,
     @inject(USECASE_TYPES.IPauseOverallTimeSpentTimerUseCase)
-    private pauseOverallTimeSpentTimerUseCase: IPauseOverallTimeSpentTimerUseCase
+    private pauseOverallTimeSpentTimerUseCase: IPauseOverallTimeSpentTimerUseCase,
   ) {}
 
   execute() {
     const timer = this.container.getEntitiesOfType(BreakTimeNotificationEntity);
 
-    setTimeout(() => {
-      timer[0].notificationIterator++;
-      if (timer[0].notificationIterator === 4) {
-        this.notificationPort.displayBreakTimeNotification(
-          BreakTimeNotificationType.Medium
-        );
-      } else if (timer[0].notificationIterator === 8) {
-        this.notificationPort.displayBreakTimeNotification(
-          BreakTimeNotificationType.Long
-        );
-      } else {
-        this.notificationPort.displayBreakTimeNotification(
-          BreakTimeNotificationType.Short
-        );
-      }
-      this.pauseOverallTimeSpentTimerUseCase.internalExecute(this);
-    }, 30 * 1000 * 60);
-    // 30 minuten (Lernzeitraum)
+    setTimeout(
+      () => {
+        timer[0].breakTimeIntervalCounter++;
+        if (timer[0].breakTimeIntervalCounter === 4) {
+          this.notificationPort.displayBreakTimeNotification(
+            BreakTimeNotificationType.Medium,
+          );
+        } else if (timer[0].breakTimeIntervalCounter === 8) {
+          this.notificationPort.displayBreakTimeNotification(
+            BreakTimeNotificationType.Long,
+          );
+        } else {
+          this.notificationPort.displayBreakTimeNotification(
+            BreakTimeNotificationType.Short,
+          );
+        }
+        this.pauseOverallTimeSpentTimerUseCase.internalExecute(this);
+      },
+      30 * 1000 * 60, // 30 minuten (Lernzeitraum)
+    );
   }
 }

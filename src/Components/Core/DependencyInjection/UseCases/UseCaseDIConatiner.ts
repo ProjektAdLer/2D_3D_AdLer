@@ -36,12 +36,6 @@ import ILoadAdaptivityElementUseCase from "../../Application/UseCases/Adaptivity
 import LoadAdaptivityElementUseCase from "../../Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/LoadAdaptivityElementUseCase";
 import ISubmitAdaptivityElementSelectionUseCase from "../../Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/ISubmitAdaptivityElementSelectionUseCase";
 import SubmitAdaptivityElementSelectionUseCase from "../../Application/UseCases/Adaptivity/SubmitAdaptivityElementSelectionUseCase/SubmitAdaptivityElementSelectionUseCase";
-import StartOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/GetOverallTimeSpent/StartOverallTimeSpentTimer/StartOverallTimeSpentTimerUseCase";
-import IStartOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/GetOverallTimeSpent/StartOverallTimeSpentTimer/IStartOverallTimeSpentTimerUseCase";
-import ICreateOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/GetOverallTimeSpent/CreateOverallTimeSpentTimer/ICreateOverallTimeSpentTimerUseCase";
-import CreateOverallTimeSpentUseCase from "../../Application/UseCases/Adaptivity/GetOverallTimeSpent/CreateOverallTimeSpentTimer/CreateOverallTimeSpentTimerUseCase";
-import IPauseOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/GetOverallTimeSpent/PauseOverallTimeSpentTimer/IPauseOverallTimeSpentTimerUseCase";
-import PauseOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/GetOverallTimeSpent/PauseOverallTimeSpentTimer/PauseOverallTimeSpentTimerUseCase";
 import IGetAdaptivityElementStatusUseCase from "../../Application/UseCases/Adaptivity/GetAdaptivityElementStatusUseCase/IGetAdaptivityElementStatusUseCase";
 import GetAdaptivityElementStatusUseCase from "../../Application/UseCases/Adaptivity/GetAdaptivityElementStatusUseCase/GetAdaptivityElementStatusUseCase";
 import ILoadExternalLearningElementUseCase from "../../Application/UseCases/Adaptivity/LoadExternalLearningElementUseCase/ILoadExternalLearningElementUseCase";
@@ -64,17 +58,23 @@ import IEndStoryElementCutScene from "../../Application/UseCases/EndStoryElement
 import EndStoryElementCutSceneUseCase from "../../Application/UseCases/EndStoryElementCutScene/EndStoryElementCutSceneUseCase";
 import IBeginStoryElementOutroCutSceneUseCase from "../../Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 import BeginStoryElementOutroCutSceneUseCase from "../../Application/UseCases/BeginStoryElementOutroCutScene/BeginStoryElementOutroCutScene";
+import IStartOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/StartOverallTimeSpentTimer/IStartOverallTimeSpentTimerUseCase";
+import StartOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/StartOverallTimeSpentTimer/StartOverallTimeSpentTimerUseCase";
+import ICreateOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/CreateOverallTimeSpentTimer/ICreateOverallTimeSpentTimerUseCase";
+import CreateOverallTimeSpentUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/CreateOverallTimeSpentTimer/CreateOverallTimeSpentTimerUseCase";
+import IPauseOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/PauseOverallTimeSpentTimer/IPauseOverallTimeSpentTimerUseCase";
+import PauseOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/PauseOverallTimeSpentTimer/PauseOverallTimeSpentTimerUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
   // Use Cases always have to be Singleton
   bind<ILoadUserInitialLearningWorldsInfoUseCase>(
-    USECASE_TYPES.ILoadUserInitialLearningWorldsInfoUseCase
+    USECASE_TYPES.ILoadUserInitialLearningWorldsInfoUseCase,
   )
     .to(LoadUserInitialLearningWorldsInfoUseCase)
     .inSingletonScope();
   bind<ILoadUserLearningWorldsInfoUseCase>(
-    USECASE_TYPES.ILoadUserLearningWorldsInfoUseCase
+    USECASE_TYPES.ILoadUserLearningWorldsInfoUseCase,
   )
     .to(LoadUserLearningWorldsInfoUseCase)
     .inSingletonScope();
@@ -83,7 +83,7 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(LoadLearningWorldUseCase)
     .inSingletonScope();
   bind<ISetWorldCompletionModalToShownUseCase>(
-    USECASE_TYPES.ISetWorldCompletionModalToShownUseCase
+    USECASE_TYPES.ISetWorldCompletionModalToShownUseCase,
   )
     .to(SetWorldCompletionModalToShownUseCase)
     .inSingletonScope();
@@ -101,13 +101,13 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .inSingletonScope();
 
   bind<ICalculateLearningSpaceScoreUseCase>(
-    USECASE_TYPES.ICalculateLearningSpaceScoreUseCase
+    USECASE_TYPES.ICalculateLearningSpaceScoreUseCase,
   )
     .to(CalculateLearningSpaceScoreUseCase)
     .inSingletonScope();
 
   bind<ICalculateLearningWorldScoreUseCase>(
-    USECASE_TYPES.ICalculateLearningWorldScoreUseCase
+    USECASE_TYPES.ICalculateLearningWorldScoreUseCase,
   )
     .to(CalculateLearningWorldScoreUseCase)
     .inSingletonScope();
@@ -125,7 +125,7 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .inSingletonScope();
 
   bind<IGetLearningElementSourceUseCase>(
-    USECASE_TYPES.IGetLearningElementSourceUseCase
+    USECASE_TYPES.IGetLearningElementSourceUseCase,
   )
     .to(GetLearningElementSourceUseCase)
     .inSingletonScope();
@@ -143,66 +143,66 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .inSingletonScope();
 
   bind<ICalculateLearningSpaceAvailabilityUseCase>(
-    USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase
+    USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase,
   )
     .to(CalculateLearningSpaceAvailabilityUseCase)
     .inSingletonScope();
   bind<IGetLearningSpacePrecursorAndSuccessorUseCase>(
-    USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
+    USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase,
   )
     .to(GetLearningSpacePrecursorAndSuccessorUseCase)
     .inSingletonScope();
 
   bind<ILoadAdaptivityElementUseCase>(
-    USECASE_TYPES.ILoadAdaptivityElementUseCase
+    USECASE_TYPES.ILoadAdaptivityElementUseCase,
   )
     .to(LoadAdaptivityElementUseCase)
     .inSingletonScope();
 
   bind<IGetAdaptivityElementStatusUseCase>(
-    USECASE_TYPES.IGetAdaptivityElementStatusUseCase
+    USECASE_TYPES.IGetAdaptivityElementStatusUseCase,
   )
     .to(GetAdaptivityElementStatusUseCase)
     .inSingletonScope();
 
   bind<ISubmitAdaptivityElementSelectionUseCase>(
-    USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
+    USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase,
   )
     .to(SubmitAdaptivityElementSelectionUseCase)
     .inSingletonScope();
 
   bind<IStartOverallTimeSpentTimerUseCase>(
-    USECASE_TYPES.IStartOverallTimeSpentTimerUseCase
+    USECASE_TYPES.IStartOverallTimeSpentTimerUseCase,
   )
     .to(StartOverallTimeSpentTimerUseCase)
     .inSingletonScope();
 
   bind<ICreateOverallTimeSpentTimerUseCase>(
-    USECASE_TYPES.ICreateOverallTimeSpentTimerUseCase
+    USECASE_TYPES.ICreateOverallTimeSpentTimerUseCase,
   )
     .to(CreateOverallTimeSpentUseCase)
     .inSingletonScope();
 
   bind<IPauseOverallTimeSpentTimerUseCase>(
-    USECASE_TYPES.IPauseOverallTimeSpentTimerUseCase
+    USECASE_TYPES.IPauseOverallTimeSpentTimerUseCase,
   )
     .to(PauseOverallTimeSpentTimerUseCase)
     .inSingletonScope();
 
   bind<ILoadExternalLearningElementUseCase>(
-    USECASE_TYPES.ILoadExternalLearningElementUseCase
+    USECASE_TYPES.ILoadExternalLearningElementUseCase,
   )
     .to(LoadExternalLearningElementUseCase)
     .inSingletonScope();
 
   bind<IScoreAdaptivityElementUseCase>(
-    USECASE_TYPES.IScoreAdaptivityElementUseCase
+    USECASE_TYPES.IScoreAdaptivityElementUseCase,
   )
     .to(ScoreAdaptivityElementUseCase)
     .inSingletonScope();
 
   bind<IDisplayAdaptivityHintLearningElementUseCase>(
-    USECASE_TYPES.IDisplayAdaptivityHintLearningElementUseCase
+    USECASE_TYPES.IDisplayAdaptivityHintLearningElementUseCase,
   )
     .to(DisplayAdaptivityHintLearningElementUseCase)
     .inSingletonScope();
@@ -216,12 +216,12 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .inSingletonScope();
 
   bind<IBeginStoryElementIntroCutSceneUseCase>(
-    USECASE_TYPES.IBeginStoryElementIntroCutSceneUseCase
+    USECASE_TYPES.IBeginStoryElementIntroCutSceneUseCase,
   )
     .to(BeginStoryElementIntroCutSceneUseCase)
     .inSingletonScope();
   bind<IBeginStoryElementOutroCutSceneUseCase>(
-    USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+    USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase,
   )
     .to(BeginStoryElementOutroCutSceneUseCase)
     .inSingletonScope();

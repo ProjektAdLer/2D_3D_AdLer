@@ -1,10 +1,10 @@
-import type IStartOverallTimeSpentNotificationTimerUseCase from "src/Components/Core/Application/UseCases/Adaptivity/GetOverallTimeSpent/StartOverallTimeSpentTimer/IStartOverallTimeSpentTimerUseCase";
 import BreakTimeNotificationEntity from "src/Components/Core/Domain/Entities/Adaptivity/BreakTimeNotificationEntity";
 import { inject, injectable } from "inversify";
 import ICreateOverallTimeSpentUseCase from "./ICreateOverallTimeSpentTimerUseCase";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import type IStartOverallTimeSpentNotificationTimerUseCase from "../StartOverallTimeSpentTimer/IStartOverallTimeSpentTimerUseCase";
 
 @injectable()
 export default class CreateOverallTimeSpentUseCase
@@ -14,7 +14,7 @@ export default class CreateOverallTimeSpentUseCase
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
     @inject(USECASE_TYPES.IStartOverallTimeSpentTimerUseCase)
-    private startTimerUseCase: IStartOverallTimeSpentNotificationTimerUseCase
+    private startTimerUseCase: IStartOverallTimeSpentNotificationTimerUseCase,
   ) {}
 
   execute(): void {
@@ -27,9 +27,9 @@ export default class CreateOverallTimeSpentUseCase
 
     this.container.useSingletonEntity<BreakTimeNotificationEntity>(
       {
-        notificationIterator: 0,
+        breakTimeIntervalCounter: 0,
       } as BreakTimeNotificationEntity,
-      BreakTimeNotificationEntity
+      BreakTimeNotificationEntity,
     );
 
     this.startTimerUseCase.execute();

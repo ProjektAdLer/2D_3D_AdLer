@@ -12,33 +12,42 @@ export default class PauseOverallTimeSpentTimerUseCase
 {
   constructor(
     @inject(CORE_TYPES.IEntityContainer)
-    private container: IEntityContainer
+    private container: IEntityContainer,
   ) {}
 
   internalExecute(startTimerUseCase: IStartOverallTimeSpentTimerUseCase): void {
     const timerEntity = this.container.getEntitiesOfType(
-      BreakTimeNotificationEntity
+      BreakTimeNotificationEntity,
     );
 
-    switch (timerEntity[0].notificationIterator) {
+    switch (timerEntity[0].breakTimeIntervalCounter) {
       case 4:
-        setTimeout(() => {
-          startTimerUseCase.execute();
-        }, BreakTimeNotificationType.Medium * 1000 * 60);
+        setTimeout(
+          () => {
+            startTimerUseCase.execute();
+          },
+          BreakTimeNotificationType.Medium * 1000 * 60,
+        );
         break;
 
       case 8:
         //Resets the timer (starting from 0 after long break)
-        timerEntity[0].notificationIterator = 0;
-        setTimeout(() => {
-          startTimerUseCase.execute();
-        }, BreakTimeNotificationType.Long * 1000 * 60);
+        timerEntity[0].breakTimeIntervalCounter = 0;
+        setTimeout(
+          () => {
+            startTimerUseCase.execute();
+          },
+          BreakTimeNotificationType.Long * 1000 * 60,
+        );
         break;
 
       default:
-        setTimeout(() => {
-          startTimerUseCase.execute();
-        }, BreakTimeNotificationType.Short * 1000 * 60);
+        setTimeout(
+          () => {
+            startTimerUseCase.execute();
+          },
+          BreakTimeNotificationType.Short * 1000 * 60,
+        );
         break;
     }
   }
