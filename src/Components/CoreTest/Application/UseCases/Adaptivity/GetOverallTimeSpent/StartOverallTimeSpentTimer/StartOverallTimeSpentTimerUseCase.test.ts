@@ -21,15 +21,15 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind<INotificationPort>(
-      PORT_TYPES.INotificationPort
+      PORT_TYPES.INotificationPort,
     ).toConstantValue(notificationPortmock);
 
     CoreDIContainer.rebind<IEntityContainer>(
-      CORE_TYPES.IEntityContainer
+      CORE_TYPES.IEntityContainer,
     ).toConstantValue(entitycontainermock);
 
     CoreDIContainer.rebind<IPauseOverallTimeSpentTimerUseCase>(
-      USECASE_TYPES.IPauseOverallTimeSpentTimerUseCase
+      USECASE_TYPES.IPauseOverallTimeSpentTimerUseCase,
     ).toConstantValue(pauseUseCaseMock);
   });
 
@@ -39,10 +39,11 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(
-      StartOverallTimeSpentTimerUseCase
+      StartOverallTimeSpentTimerUseCase,
     );
   });
 
+  //ANF-ID: [EKJ0001]
   test("execute notifies NotificationPort (type: short)", () => {
     jest.useFakeTimers();
     const entity = new BreakTimeNotificationEntity();
@@ -54,14 +55,16 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
 
     jest.advanceTimersByTime(30 * 1000 * 60 + 1);
     expect(
-      notificationPortmock.displayBreakTimeNotification
+      notificationPortmock.displayBreakTimeNotification,
     ).toHaveBeenCalledTimes(1);
     expect(
-      notificationPortmock.displayBreakTimeNotification
+      notificationPortmock.displayBreakTimeNotification,
     ).toHaveBeenCalledWith(BreakTimeNotificationType.Short);
 
     jest.useRealTimers();
   });
+
+  //ANF-ID: [EKJ0001]
   test("execute notifies NotificationPort (type: medium)", () => {
     jest.useFakeTimers();
     const entity = new BreakTimeNotificationEntity();
@@ -73,14 +76,16 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
 
     jest.advanceTimersByTime(30 * 1000 * 60 + 1);
     expect(
-      notificationPortmock.displayBreakTimeNotification
+      notificationPortmock.displayBreakTimeNotification,
     ).toHaveBeenCalledTimes(1);
     expect(
-      notificationPortmock.displayBreakTimeNotification
+      notificationPortmock.displayBreakTimeNotification,
     ).toHaveBeenCalledWith(BreakTimeNotificationType.Medium);
 
     jest.useRealTimers();
   });
+
+  //ANF-ID: [EKJ0001]
   test("execute notifies NotificationPort (type: long)", () => {
     jest.useFakeTimers();
     const entity = new BreakTimeNotificationEntity();
@@ -92,10 +97,10 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
 
     jest.advanceTimersByTime(30 * 1000 * 60 + 1);
     expect(
-      notificationPortmock.displayBreakTimeNotification
+      notificationPortmock.displayBreakTimeNotification,
     ).toHaveBeenCalledTimes(1);
     expect(
-      notificationPortmock.displayBreakTimeNotification
+      notificationPortmock.displayBreakTimeNotification,
     ).toHaveBeenCalledWith(BreakTimeNotificationType.Long);
 
     jest.useRealTimers();
