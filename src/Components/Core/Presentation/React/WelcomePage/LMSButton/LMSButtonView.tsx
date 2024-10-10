@@ -9,10 +9,9 @@ import LMSButtonController from "./LMSButtonController";
 import moodleIcon from "../../../../../../Assets/icons/moodle.svg";
 
 export default function LMSButton({ className }: AdLerUIComponent) {
-  const [viewModel, controller] = useBuilder<
-    LMSButtonViewModel,
-    LMSButtonController
-  >(BUILDER_TYPES.IMoodleButtonBuilder);
+  const [, controller] = useBuilder<LMSButtonViewModel, LMSButtonController>(
+    BUILDER_TYPES.IMoodleButtonBuilder,
+  );
   const { t: translate } = useTranslation("start");
 
   return (
