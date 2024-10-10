@@ -15,8 +15,6 @@ export default function LMSButton({ className }: AdLerUIComponent) {
   >(BUILDER_TYPES.IMoodleButtonBuilder);
   const { t: translate } = useTranslation("start");
 
-  console.log(viewModel);
-
   return (
     <StyledButton
       shape="freeFloatCenter"
