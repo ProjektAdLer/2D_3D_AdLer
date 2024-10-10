@@ -1,6 +1,7 @@
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { Handle, Node, Position } from "reactflow";
 import { memo } from "react";
+import { SPACE_NODE_WIDTH } from "./LearningSpaceSelectionGraph";
 
 type LearningSpaceSelectionSpaceNodeData = {
   label: string;
@@ -20,10 +21,10 @@ function LearningSpaceSelectionSpaceNode(
       {props.data?.input && <Handle type="target" position={Position.Top} />}
 
       <StyledButton
-        className="justify-between w-44"
         shape="freeFloatLeft"
         color={props.data?.lastSelected ? "pressed" : "default"}
         icon={props.data?.icon}
+        style={{ width: SPACE_NODE_WIDTH }}
       >
         <p className="truncate">{props.data!.label}</p>
       </StyledButton>

@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { Handle, Node, Position } from "reactflow";
+import { REQ_NODE_WIDTH } from "./LearningSpaceSelectionGraph";
 
 export type BooleanOperatorType = "and" | "or";
 
@@ -19,7 +20,10 @@ function LearningSpaceSelectionRequirementNode(
     <>
       <Handle type={"target"} position={Position.Top}></Handle>
 
-      <div className="flex items-center justify-center w-16 h-10 text-lg font-bold border-b-2 border-r-2 rounded-md border-1 bg-nodehandlecolor border-adlerdarkblue">
+      <div
+        className="flex items-center justify-center h-10 text-lg font-bold border-b-2 border-r-2 rounded-md border-1 bg-nodehandlecolor border-adlerdarkblue"
+        style={{ width: REQ_NODE_WIDTH }}
+      >
         <p className="font-[roboto] uppercase text-adlerdarkblue">
           {props.data?.operatorType === "and" && translate("nodeAND")}
           {props.data?.operatorType === "or" && translate("nodeOR")}

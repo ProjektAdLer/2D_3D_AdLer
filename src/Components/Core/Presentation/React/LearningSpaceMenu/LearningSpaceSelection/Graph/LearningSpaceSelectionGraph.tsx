@@ -35,12 +35,13 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import * as dagre from "@dagrejs/dagre";
 
-const SPACE_NODE_WIDTH = 176;
-const REQ_NODE_WIDTH = 65;
+export const SPACE_NODE_WIDTH = 200; // to be used in LearningSpaceSelectionSpaceNode.tsx
+export const REQ_NODE_WIDTH = 64; // to be used in LearningSpaceSelectionRequirementNode.tsx
 const NODE_HEIGHT = 60;
 // see https://github.com/dagrejs/dagre/wiki#configuring-the-layout for more options
 const dagreLayoutConfig: dagre.GraphLabel = {
   ranksep: 25,
+  nodesep: 25,
 };
 
 const nodeTypes: NodeTypes = {
