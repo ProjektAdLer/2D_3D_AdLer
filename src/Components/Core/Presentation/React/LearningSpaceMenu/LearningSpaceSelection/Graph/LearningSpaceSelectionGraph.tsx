@@ -44,6 +44,7 @@ const dagreLayoutConfig: dagre.GraphLabel = {
   nodesep: 25,
 };
 
+// node types for react flow with reference to the components
 const nodeTypes: NodeTypes = {
   spaceNode: LearningSpaceSelectionSpaceNode,
   requirementNode: LearningSpaceSelectionRequirementNode,
@@ -76,14 +77,14 @@ export default function LearningSpaceSelectionGraph(props: {
         (node) => node.id,
       );
 
-      // graph layout with elk
+      // graph layout with dagre
       const layoutedNodes = layoutNodesWithDagre(
         spaceIDs,
         requirementsNodeIDs,
         requirementsTrees.edges,
       );
 
-      // apply node positions from elk graph to react flow nodes
+      // apply node positions to react flow nodes
       const nodes = applyDagreNodePositions(
         spaceNodes,
         requirementsTrees.nodes,
