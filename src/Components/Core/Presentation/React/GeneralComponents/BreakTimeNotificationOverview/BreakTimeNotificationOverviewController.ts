@@ -1,0 +1,4 @@
+import IBreakTimeNotificationOverviewController from "./IBreakTimeNotificationOverviewController";
+
+export default class BreakTimeNotificationOverviewController
+  implements IBreakTimeNotificationOverviewController {}
