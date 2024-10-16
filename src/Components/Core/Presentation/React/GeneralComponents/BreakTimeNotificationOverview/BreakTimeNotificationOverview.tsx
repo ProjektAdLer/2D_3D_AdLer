@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import IBreakTimeNotification from "src/Components/Core/Domain/BreakTimeNotifications/IBreakTimeNotification";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-import { useState } from "react";
+import BreakTimeNotificationContent from "./BreakTimeNotificationContent";
 
 function BreakTimeNotificationThumbnail({
   notification,
@@ -21,7 +21,7 @@ function BreakTimeNotificationThumbnail({
   return (
     <div>
       <StyledButton onClick={onClick}>
-        <img src={notification.image1} />
+        <img src={notification.images[0]} />
       </StyledButton>
       <div onClick={onClick}>{translate(notification.titleKey)}</div>
     </div>
@@ -31,21 +31,22 @@ function BreakTimeNotificationThumbnail({
 function BreakTimeNotificationThumbnailSection({
   title,
   notifications,
-  onClick,
+  controller,
 }: {
   title: string;
   notifications: IBreakTimeNotification[];
-  onClick: (selectedNotification: IBreakTimeNotification) => void;
+  controller: IBreakTimeNotificationOverviewController;
 }) {
   return (
     <div>
-      <h2>{title}</h2>
+      <h1>{title}</h1>
+      {/* TODO: change this to whatever is needed for styling  */}
       <ul>
         {notifications.map((notification) => (
           <BreakTimeNotificationThumbnail
             key={notification.titleKey}
             notification={notification}
-            onClick={() => onClick(notification)}
+            onClick={() => controller.selectNotification(notification)}
           />
         ))}
       </ul>
@@ -60,8 +61,7 @@ export default function BreakTimeNotificationOverview() {
   >(BUILDER_TYPES.IBreakTimeNotificationOverviewBuilder);
 
   const [showModal, setShowModal] = useObservable(viewModel.showModal);
-  const [selectedNotification, setSelectedNotification] =
-    useState<IBreakTimeNotification | null>(null);
+  const [selectedNotification] = useObservable(viewModel.selectedNotification);
 
   const { t: translate } = useTranslation("breakTime");
 
@@ -79,22 +79,25 @@ export default function BreakTimeNotificationOverview() {
           <BreakTimeNotificationThumbnailSection
             title={translate("shortBreaks")}
             notifications={viewModel.shortBreakTimeNotifications}
-            onClick={setSelectedNotification}
+            controller={controller}
           />
           <BreakTimeNotificationThumbnailSection
             title={translate("mediumBreaks")}
             notifications={viewModel.mediumBreakTimeNotifications}
-            onClick={setSelectedNotification}
+            controller={controller}
           />
           <BreakTimeNotificationThumbnailSection
             title={translate("longBreaks")}
             notifications={viewModel.longBreakTimeNotifications}
-            onClick={setSelectedNotification}
+            controller={controller}
           />
         </div>
       )}
 
-      {/* Single */}
+      {/* Single Notification */}
+      <BreakTimeNotificationContent
+        breakTimeNotification={selectedNotification!}
+      />
     </StyledModal>
   );
 }
