@@ -34,7 +34,7 @@ export default function BreakTimeNotificationContent({
         </div>
 
         {/* Image Slide Navigation Dots */}
-        {breakTimeNotification.images.length < 1 && (
+        {breakTimeNotification.images.length > 1 && (
           <div className="z-10 flex gap-4 lg:gap-6 slider-nav">
             {breakTimeNotification.images.map((_, index) => {
               return (
