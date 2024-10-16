@@ -21,7 +21,10 @@ function BreakTimeNotificationThumbnail({
   return (
     <div>
       <StyledButton onClick={onClick}>
-        <img src={notification.images[0]} />
+        <img
+          src={notification.images[0]}
+          alt={translate(notification.titleKey) + "Thumbnail"}
+        />
       </StyledButton>
       <div onClick={onClick}>{translate(notification.titleKey)}</div>
     </div>
@@ -40,8 +43,7 @@ function BreakTimeNotificationThumbnailSection({
   return (
     <div>
       <h1>{title}</h1>
-      {/* TODO: change this to whatever is needed for styling  */}
-      <ul>
+      <div className="grid grid-cols-5 gap-5">
         {notifications.map((notification) => (
           <BreakTimeNotificationThumbnail
             key={notification.titleKey}
@@ -49,7 +51,7 @@ function BreakTimeNotificationThumbnailSection({
             onClick={() => controller.selectNotification(notification)}
           />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
@@ -72,10 +74,11 @@ export default function BreakTimeNotificationOverview() {
     <StyledModal
       title={translate("overviewTitle")!}
       onClose={() => setShowModal(false)}
+      showModal={showModal}
     >
       {/* Selection */}
       {!selectedNotification && (
-        <div>
+        <div className="">
           <BreakTimeNotificationThumbnailSection
             title={translate("shortBreaks")}
             notifications={viewModel.shortBreakTimeNotifications}
@@ -95,9 +98,16 @@ export default function BreakTimeNotificationOverview() {
       )}
 
       {/* Single Notification */}
-      <BreakTimeNotificationContent
-        breakTimeNotification={selectedNotification!}
-      />
+      {selectedNotification && (
+        <div>
+          <BreakTimeNotificationContent
+            breakTimeNotification={selectedNotification!}
+          />
+          <StyledButton onClick={controller.returnToOverview}>
+            {"<"}
+          </StyledButton>
+        </div>
+      )}
     </StyledModal>
   );
 }
