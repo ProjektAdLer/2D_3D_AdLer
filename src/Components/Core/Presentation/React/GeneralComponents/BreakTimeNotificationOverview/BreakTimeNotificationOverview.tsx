@@ -62,7 +62,7 @@ export default function BreakTimeNotificationOverview() {
     IBreakTimeNotificationOverviewController
   >(BUILDER_TYPES.IBreakTimeNotificationOverviewBuilder);
 
-  const [showModal, setShowModal] = useObservable(viewModel.showModal);
+  const [showModal] = useObservable(viewModel.showModal);
   const [selectedNotification] = useObservable(viewModel.selectedNotification);
 
   const { t: translate } = useTranslation("breakTime");
