@@ -98,7 +98,6 @@ export const shortBreakTimeNotificationContents: IBreakTimeNotification[] = [
       SmallBreakL1Slide1Image,
       SmallBreakL1Slide2Image,
       SmallBreakL1Slide3Image,
-      "",
     ],
     seenBefore: false,
   },
