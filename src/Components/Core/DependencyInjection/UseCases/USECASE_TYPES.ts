@@ -1,22 +1,22 @@
 const USECASE_TYPES = {
   ILoadUserInitialLearningWorldsInfoUseCase: Symbol(
-    "ILoadUserInitialLearningWorldsInfoUseCase"
+    "ILoadUserInitialLearningWorldsInfoUseCase",
   ),
   ILoadUserLearningWorldsInfoUseCase: Symbol(
-    "ILoadUserLearningWorldsInfoUseCase"
+    "ILoadUserLearningWorldsInfoUseCase",
   ),
   ISetWorldCompletionModalToShownUseCase: Symbol(
-    "ISetWorldCompletionModalToShownUseCase"
+    "ISetWorldCompletionModalToShownUseCase",
   ),
   ILoadLearningWorldUseCase: Symbol("ILoadLearningWorldUseCase"),
   ILoadAvatarUseCase: Symbol("ILoadAvatarUseCase"),
   ILoadLearningElementUseCase: Symbol("ILoadLearningElementUseCase"),
   IScoreLearningElementUseCase: Symbol("IScoreLearningElementUseCase"),
   ICalculateLearningSpaceScoreUseCase: Symbol(
-    "ICalculateLearningSpaceScoreUseCase"
+    "ICalculateLearningSpaceScoreUseCase",
   ),
   ICalculateLearningWorldScoreUseCase: Symbol(
-    "ICalculateLearningWorldScoreUseCase"
+    "ICalculateLearningWorldScoreUseCase",
   ),
   ILoginUseCase: Symbol("ILoginUseCase"),
   ILoadLearningSpaceUseCase: Symbol("ILoadLearningSpaceUseCase"),
@@ -26,43 +26,46 @@ const USECASE_TYPES = {
   ISetUserLocationUseCase: Symbol("ISetUserLocationUseCase"),
   IGetUserLocationUseCase: Symbol("IGetUserLocationUseCase"),
   ICalculateLearningSpaceAvailabilityUseCase: Symbol(
-    "ICalculateLearningSpaceAvailabilityUseCase"
+    "ICalculateLearningSpaceAvailabilityUseCase",
   ),
   IGetLearningSpacePrecursorAndSuccessorUseCase: Symbol(
-    "IGetLearningSpacePrecursorAndSuccessorUseCase"
+    "IGetLearningSpacePrecursorAndSuccessorUseCase",
   ),
   ILoadAdaptivityElementUseCase: Symbol("ILoadAdaptivityElementUseCase"),
   IGetAdaptivityElementStatusUseCase: Symbol(
-    "IGetAdaptivityElementStatusUseCase"
+    "IGetAdaptivityElementStatusUseCase",
   ),
   ISubmitAdaptivityElementSelectionUseCase: Symbol(
-    "ISubmitAdaptivityElementSelectionUseCase"
+    "ISubmitAdaptivityElementSelectionUseCase",
   ),
   IStartOverallTimeSpentTimerUseCase: Symbol(
-    "IStartOverallTimeSpentTimerUseCase"
+    "IStartOverallTimeSpentTimerUseCase",
   ),
   ICreateOverallTimeSpentTimerUseCase: Symbol(
-    "ICreateOverallTimeSpentTimerUseCase"
+    "ICreateOverallTimeSpentTimerUseCase",
   ),
   IPauseOverallTimeSpentTimerUseCase: Symbol(
-    "IPauseOverallTimeSpentTimerUseCase"
+    "IPauseOverallTimeSpentTimerUseCase",
   ),
   ILoadExternalLearningElementUseCase: Symbol(
-    "ILoadExternalLearningElementUseCase"
+    "ILoadExternalLearningElementUseCase",
   ),
   IScoreAdaptivityElementUseCase: Symbol("IScoreAdaptivityElementUseCase"),
   IDisplayAdaptivityHintLearningElementUseCase: Symbol(
-    "IDisplayAdaptivityHintLearningElementUseCase"
+    "IDisplayAdaptivityHintLearningElementUseCase",
   ),
   ILogoutUseCase: Symbol("ILogoutUseCase"),
   ILoadStoryElementUseCase: Symbol("ILoadStoryElementUseCase"),
   IBeginStoryElementIntroCutSceneUseCase: Symbol(
-    "IBeginStoryElementCutSceneUseCase"
+    "IBeginStoryElementCutSceneUseCase",
   ),
   IBeginStoryElementOutroCutSceneUseCase: Symbol(
-    "IBeginStoryElementOutroCutSceneUseCase"
+    "IBeginStoryElementOutroCutSceneUseCase",
   ),
   IEndStoryElementCutSceneUseCase: Symbol("IEndStoryElementCutSceneUseCase"),
+  IGetUnseenBreakTimeNotificationUseCase: Symbol(
+    "IGetUnseenBreakTimeNotificationUseCase",
+  ),
 };
 
 export default USECASE_TYPES;

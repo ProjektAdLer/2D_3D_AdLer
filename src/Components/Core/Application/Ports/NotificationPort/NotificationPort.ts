@@ -3,8 +3,8 @@ import INotificationPort from "../Interfaces/INotificationPort";
 import INotificationAdapter from "./INotificationAdapter";
 import type { NotificationType } from "./INotificationAdapter";
 import AbstractPort from "../AbstractPort/AbstractPort";
-import { BreakTimeNotificationType } from "src/Components/Core/Domain/Entities/Adaptivity/BreakTimeNotificationEntity";
 import bind from "bind-decorator";
+import type IBreakTimeNotification from "../../../Domain/BreakTimeNotifications/IBreakTimeNotification";
 
 @injectable()
 export default class NotificationPort
@@ -27,11 +27,13 @@ export default class NotificationPort
   }
 
   @bind
-  displayBreakTimeNotification(type: BreakTimeNotificationType): void {
+  displayBreakTimeNotification(
+    notificationToDisplay: IBreakTimeNotification,
+  ): void {
     this.mappedAdapters.forEach((adapter) => {
       adapter.forEach((value) => {
         if (value.displayBreakTimeNotification)
-          value.displayBreakTimeNotification(type);
+          value.displayBreakTimeNotification(notificationToDisplay);
       });
     });
   }

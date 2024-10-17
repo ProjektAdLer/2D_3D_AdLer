@@ -64,6 +64,8 @@ import ICreateOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adap
 import CreateOverallTimeSpentUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/CreateOverallTimeSpentTimer/CreateOverallTimeSpentTimerUseCase";
 import IPauseOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/PauseOverallTimeSpentTimer/IPauseOverallTimeSpentTimerUseCase";
 import PauseOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/PauseOverallTimeSpentTimer/PauseOverallTimeSpentTimerUseCase";
+import IGetUnseenBreakTimeNotificationUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/GetUnseenBreakTimeNotification/IGetUnseenBreakTimeNotificationUseCase";
+import GetUnseenBreakTimeNotificationUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/GetUnseenBreakTimeNotification/GetUnseenBreakTimeNotificationUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -73,6 +75,7 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
   )
     .to(LoadUserInitialLearningWorldsInfoUseCase)
     .inSingletonScope();
+
   bind<ILoadUserLearningWorldsInfoUseCase>(
     USECASE_TYPES.ILoadUserLearningWorldsInfoUseCase,
   )
@@ -82,6 +85,7 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
   bind<ILoadLearningWorldUseCase>(USECASE_TYPES.ILoadLearningWorldUseCase)
     .to(LoadLearningWorldUseCase)
     .inSingletonScope();
+
   bind<ISetWorldCompletionModalToShownUseCase>(
     USECASE_TYPES.ISetWorldCompletionModalToShownUseCase,
   )
@@ -147,6 +151,7 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
   )
     .to(CalculateLearningSpaceAvailabilityUseCase)
     .inSingletonScope();
+
   bind<IGetLearningSpacePrecursorAndSuccessorUseCase>(
     USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase,
   )
@@ -228,6 +233,12 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<IEndStoryElementCutScene>(USECASE_TYPES.IEndStoryElementCutSceneUseCase)
     .to(EndStoryElementCutSceneUseCase)
+    .inSingletonScope();
+
+  bind<IGetUnseenBreakTimeNotificationUseCase>(
+    USECASE_TYPES.IGetUnseenBreakTimeNotificationUseCase,
+  )
+    .to(GetUnseenBreakTimeNotificationUseCase)
     .inSingletonScope();
 });
 
