@@ -30,7 +30,7 @@ export default function BreakTimeNotificationContent({
             title="Pausenhinweis"
             alt=""
             data-testid="id-slide-2"
-          ></img>
+          />
         </div>
 
         {/* Image Slide Navigation Dots */}
