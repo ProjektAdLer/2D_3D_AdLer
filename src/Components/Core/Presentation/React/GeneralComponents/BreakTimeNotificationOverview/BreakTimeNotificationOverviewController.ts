@@ -17,4 +17,10 @@ export default class BreakTimeNotificationOverviewController
   returnToOverview(): void {
     this.viewModel.selectedNotification.Value = null;
   }
+
+  @bind
+  closeModal(): void {
+    this.viewModel.showModal.Value = false;
+    this.viewModel.selectedNotification.Value = null;
+  }
 }

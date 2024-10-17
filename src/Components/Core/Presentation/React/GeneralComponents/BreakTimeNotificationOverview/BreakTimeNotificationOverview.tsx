@@ -73,7 +73,7 @@ export default function BreakTimeNotificationOverview() {
   return (
     <StyledModal
       title={translate("overviewTitle")!}
-      onClose={() => setShowModal(false)}
+      onClose={controller.closeModal}
       showModal={showModal}
     >
       {/* Selection */}

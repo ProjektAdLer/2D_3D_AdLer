@@ -3,4 +3,5 @@ import IBreakTimeNotification from "src/Components/Core/Domain/BreakTimeNotifica
 export default interface IBreakTimeNotificationOverviewController {
   selectNotification(notification: IBreakTimeNotification): void;
   returnToOverview(): void;
+  closeModal(): void;
 }
