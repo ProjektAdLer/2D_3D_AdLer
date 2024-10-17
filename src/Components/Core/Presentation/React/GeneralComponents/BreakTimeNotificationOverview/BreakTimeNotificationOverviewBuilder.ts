@@ -5,19 +5,8 @@ import IBreakTimeNotificationOverviewController from "./IBreakTimeNotificationOv
 import IBreakTimeNotificationOverviewPresenter from "./IBreakTimeNotificationOverviewPresenter";
 import BreakTimeNotificationOverviewViewModel from "./BreakTimeNotificationOverviewViewModel";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
-
-/*
-This Template Provides the whole scaffolding for a React Component.
-Copy below lines in the DI Container and its Types
-
-bind<IPresentationBuilder>(BUILDER_TYPES.IBreakTimeNotificationOverviewBuilder).to(BreakTimeNotificationOverviewBuilder);
-IBreakTimeNotificationOverviewBuilder: Symbol("IBreakTimeNotificationOverviewBuilder"),
-
-director.Builder = CoreDIContainer.get<IPresentationBuilder>(
-  BUILDER_TYPES.IBreakTimeNotificationOverviewBuilder
-);
-director.build();
-*/
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 @injectable()
 export default class BreakTimeNotificationOverviewBuilder extends PresentationBuilder<
@@ -33,5 +22,22 @@ export default class BreakTimeNotificationOverviewBuilder extends PresentationBu
       undefined,
       BreakTimeNotificationOverviewPresenter,
     );
+  }
+
+  buildPresenter(): void {
+    super.buildPresenter();
+    // ensure that previous instances of the presenter are unbound, when changing between spaces
+    if (
+      CoreDIContainer.isBound(
+        PRESENTATION_TYPES.IBreakTimeNotificationOverviewPresenter,
+      )
+    )
+      CoreDIContainer.unbind(
+        PRESENTATION_TYPES.IBreakTimeNotificationOverviewPresenter,
+      );
+
+    CoreDIContainer.bind<IBreakTimeNotificationOverviewPresenter>(
+      PRESENTATION_TYPES.IBreakTimeNotificationOverviewPresenter,
+    ).toConstantValue(this.presenter!);
   }
 }

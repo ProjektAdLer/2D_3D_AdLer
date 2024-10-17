@@ -1,1 +1,3 @@
-export default interface IBreakTimeNotificationOverviewPresenter {}
+export default interface IBreakTimeNotificationOverviewPresenter {
+  openModal(): void;
+}

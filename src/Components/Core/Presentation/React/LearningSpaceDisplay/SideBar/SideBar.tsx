@@ -35,8 +35,6 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           ></img>
         </StyledButton>
       }
-      // initialOpen has to be true for it to render properly on intialization
-      // Depends on LoadSpace useCase within SpaceSceneDefinition
       initialOpen={false}
       useAsTriggerOnly={true}
     >
@@ -65,6 +63,15 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           </StyledButton>
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
             {translate("sidebar_learningSpaceMenu")}
+          </p>
+        </div>
+
+        <div className="flex flex-row items-center">
+          <StyledButton onClick={controller.onBreakTimeButtonClicked}>
+            {/* TODO: <img src={spaceMenuIcon} alt="" /> */}
+          </StyledButton>
+          <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
+            {translate("sidebar_breakTime")}
           </p>
         </div>
 
