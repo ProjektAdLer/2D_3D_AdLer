@@ -25,10 +25,8 @@ export default class NotificationPort
     logMessage: string,
     message: string,
   ): void {
-    if (type !== "notification") {
-      const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
-      logger.log(type, logMessage);
-    }
+    const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
+    logger.log(type, logMessage);
     this.mappedAdapters.forEach((adapter) => {
       adapter.forEach((value) => {
         if (value.displayNotification) value.displayNotification(type, message);

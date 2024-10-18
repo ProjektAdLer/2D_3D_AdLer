@@ -33,8 +33,6 @@ export default function NotificationManager({
         return "Error";
       case LogLevelTypes.WARN:
         return "Warning";
-      case "notification":
-        return "Notification";
     }
   };
 
