@@ -8,7 +8,6 @@ import BreakTimeNotificationOverviewViewModel from "../../../../../Core/Presenta
 import "@testing-library/jest-dom";
 import IBreakTimeNotificationOverviewController from "../../../../../Core/Presentation/React/GeneralComponents/BreakTimeNotificationOverview/IBreakTimeNotificationOverviewController";
 import mock from "jest-mock-extended/lib/Mock";
-import { get } from "http";
 
 describe("BreakTimeNotificationOverview", () => {
   test("should render", () => {
