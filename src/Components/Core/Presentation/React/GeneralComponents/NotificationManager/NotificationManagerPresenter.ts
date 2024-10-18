@@ -6,10 +6,10 @@ export default class NotificationManagerPresenter
   implements INotificationManagerPresenter
 {
   constructor(private viewModel: NotificationManagerViewModel) {}
-  displayNotification(errorMessage: string, type: NotificationType): void {
-    this.viewModel.errors.Value = [
-      ...this.viewModel.errors.Value,
-      { message: errorMessage, type: type },
+  displayNotification(type: NotificationType, message: string): void {
+    this.viewModel.messages.Value = [
+      ...this.viewModel.messages.Value,
+      { message: message, type: type },
     ];
   }
 }

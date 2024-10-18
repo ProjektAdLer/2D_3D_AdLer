@@ -21,7 +21,7 @@ export default class LoginUseCase implements ILoginUseCase {
     @inject(CORE_TYPES.IBackendAdapter) private backendAdapter: IBackendPort,
     @inject(PORT_TYPES.ILMSPort) private lmsPort: ILMSPort,
     @inject(PORT_TYPES.INotificationPort)
-    private notificationPort: INotificationPort
+    private notificationPort: INotificationPort,
   ) {}
   async executeAsync(data: {
     username: string;
@@ -31,20 +31,18 @@ export default class LoginUseCase implements ILoginUseCase {
       this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0]
         ?.isLoggedIn
     ) {
-      this.logger.log(
+      this.notificationPort.onNotificationTriggered(
         LogLevelTypes.WARN,
-        "LoginUseCase: User tried logging into Moodle while already logged in"
-      );
-      this.notificationPort.displayNotification(
+        "LoginUseCase: User tried logging into Moodle while already logged in",
         "You are already logged in to Moodle",
-        "error"
       );
       this.lmsPort.onLoginFailure(
         i18next.t("alreadyLoggedIn", { ns: "start" }),
-        ""
+        "",
       );
       return Promise.resolve();
     }
+
     let userToken: string;
 
     try {
@@ -55,27 +53,27 @@ export default class LoginUseCase implements ILoginUseCase {
     } catch (error) {
       // server timeout
       if (error instanceof AxiosError && error.code === "ECONNABORTED") {
-        this.logger.log(
+        this.notificationPort.onNotificationTriggered(
           LogLevelTypes.WARN,
-          "LoginUseCase: Connection timeout exceeded with error: " + error
+          "LoginUseCase: Connection timeout exceeded with error: " + error,
+          "Timeout",
         );
-        this.notificationPort.displayNotification("Timeout", "error");
         this.lmsPort.onLoginFailure(
           i18next.t("loginFail", { ns: "start" }) +
             " " +
             i18next.t("serverTimeOut"),
-          i18next.t("loginRetry")
+          i18next.t("loginRetry"),
         );
       } else {
         // wrong password or username
-        this.logger.log(
+        this.notificationPort.onNotificationTriggered(
           LogLevelTypes.WARN,
-          "LoginUseCase: User tried logging in with wrong Info: " + error
+          "LoginUseCase: User tried logging in with wrong Info: " + error,
+          "Falsche Daten!",
         );
-        this.notificationPort.displayNotification("Falsche Daten!", "error");
         this.lmsPort.onLoginFailure(
           i18next.t("loginFail", { ns: "start" }),
-          i18next.t("loginFailAdvise")
+          i18next.t("loginFailAdvise"),
         );
       }
       return Promise.resolve();
@@ -87,12 +85,13 @@ export default class LoginUseCase implements ILoginUseCase {
         username: data.username,
         userToken: userToken,
       },
-      UserDataEntity
+      UserDataEntity,
     );
 
+    // use notification?
     this.logger.log(
       LogLevelTypes.INFO,
-      "LoginUseCase: User logged in successfully"
+      "LoginUseCase: User logged in successfully",
     );
     this.lmsPort.onLoginSuccessful(data.username);
 

@@ -6,6 +6,10 @@ import { BreakTimeNotificationType } from "src/Components/Core/Domain/Entities/A
 
 export default interface INotificationPort
   extends IAbstractPort<INotificationAdapter> {
-  displayNotification(errorMessage: string, type: NotificationType): void;
+  onNotificationTriggered(
+    type: NotificationType,
+    logMessage: string,
+    message: string,
+  ): void;
   displayBreakTimeNotification(type: BreakTimeNotificationType): void;
 }

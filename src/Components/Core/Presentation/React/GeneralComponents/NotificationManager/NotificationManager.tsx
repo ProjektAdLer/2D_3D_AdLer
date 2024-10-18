@@ -1,5 +1,5 @@
 import {
-  ErrorMessage,
+  Message,
   NotificationType,
 } from "src/Components/Core/Application/Ports/NotificationPort/INotificationAdapter";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
@@ -10,6 +10,7 @@ import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledModal from "../../ReactRelated/ReactBaseComponents/StyledModal";
 import NotificationManagerController from "./NotificationManagerController";
 import NotificationManagerViewModel from "./NotificationManagerViewModel";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 export default function NotificationManager({
   className,
@@ -20,16 +21,18 @@ export default function NotificationManager({
     NotificationManagerController
   >(BUILDER_TYPES.IModalManagerBuilder);
 
-  const [notifications, setNotifications] = useObservable<ErrorMessage[]>(
-    viewModel?.errors
+  const [notifications, setNotifications] = useObservable<Message[]>(
+    viewModel?.messages,
   );
 
   if (notifications == null || notifications.length === 0) return null;
 
   const getTypeString = (type: NotificationType) => {
     switch (type) {
-      case "error":
+      case LogLevelTypes.ERROR:
         return "Error";
+      case LogLevelTypes.WARN:
+        return "Warning";
       case "notification":
         return "Notification";
     }

@@ -63,7 +63,7 @@ export default class LoadLearningWorldUseCase
     @inject(USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase)
     private calculateSpaceAvailabilityUseCase: ICalculateLearningSpaceAvailabilityUseCase,
     @inject(USECASE_TYPES.IGetLoginStatusUseCase)
-    private getLoginStatusUseCase: IInternalGetLoginStatusUseCase
+    private getLoginStatusUseCase: IInternalGetLoginStatusUseCase,
   ) {}
 
   private semaphore = new Semaphore("LoadWorld in Use", 1);
@@ -75,7 +75,7 @@ export default class LoadLearningWorldUseCase
 
     this.logger.log(
       LogLevelTypes.TRACE,
-      "LoadLearningWorldUseCase (internalExecuteAsync): Loaded world and cumulated space scores."
+      "LoadLearningWorldUseCase (internalExecuteAsync): Loaded world and cumulated space scores.",
     );
     return loadedWorld;
   }
@@ -87,7 +87,7 @@ export default class LoadLearningWorldUseCase
 
     this.logger.log(
       LogLevelTypes.TRACE,
-      "LoadLearningWorldUseCase (executeAsync): Loaded world and cumulated space scores."
+      "LoadLearningWorldUseCase (executeAsync): Loaded world and cumulated space scores.",
     );
     this.worldPort.onLearningWorldLoaded(loadedWorld);
   }
@@ -97,7 +97,7 @@ export default class LoadLearningWorldUseCase
     if (!loginStatus.isLoggedIn) {
       this.logger.log(
         LogLevelTypes.ERROR,
-        "LoadLearningWorldUseCase: User is not logged in!"
+        "LoadLearningWorldUseCase: User is not logged in!",
       );
       return Promise.reject("User is not logged in");
     }
@@ -105,16 +105,13 @@ export default class LoadLearningWorldUseCase
     const userData = this.container.getEntitiesOfType(UserDataEntity);
     if (
       userData[0].availableWorlds.find(
-        (world) => world.worldID === data.worldID
+        (world) => world.worldID === data.worldID,
       ) === undefined
     ) {
-      this.notificationPort.displayNotification(
-        "World is not available!",
-        "error"
-      );
-      this.logger.log(
+      this.notificationPort.onNotificationTriggered(
         LogLevelTypes.ERROR,
-        "LoadLearningWorldUseCase: World is not available!"
+        "LoadLearningWorldUseCase: World is not available!",
+        "World is not available!",
       );
       return Promise.reject("World is not available");
     }
@@ -125,13 +122,13 @@ export default class LoadLearningWorldUseCase
     // search for world entity with given ID in all world entities
     let worldEntity = this.container.filterEntitiesOfType(
       LearningWorldEntity,
-      (WorldEntity) => WorldEntity.id === data.worldID
+      (WorldEntity) => WorldEntity.id === data.worldID,
     )[0];
 
     if (!worldEntity) {
       worldEntity = await this.loadLearningWorldFromBackend(
         userData[0].userToken,
-        data.worldID
+        data.worldID,
       );
     }
 
@@ -165,7 +162,7 @@ export default class LoadLearningWorldUseCase
 
   private async loadLearningWorldFromBackend(
     userToken: string,
-    worldID: number
+    worldID: number,
   ): Promise<LearningWorldEntity> {
     const [apiWorldDataResponse, apiWorldScoreResponse] = await Promise.all([
       this.backendAdapter.getWorldData({
@@ -179,18 +176,18 @@ export default class LoadLearningWorldUseCase
       this.createLearningSpaceEntities(
         worldID,
         apiWorldDataResponse,
-        apiWorldScoreResponse
+        apiWorldScoreResponse,
       );
 
     const worldEntity = this.createLearningWorldEntity(
       worldID,
       spaceEntities,
-      apiWorldDataResponse
+      apiWorldDataResponse,
     );
 
     this.createExternalLearningElementEntities(
       apiWorldDataResponse.externalElements,
-      worldID
+      worldID,
     );
 
     return worldEntity;
@@ -199,7 +196,7 @@ export default class LoadLearningWorldUseCase
   private createLearningSpaceEntities(
     worldID: number,
     apiWorldDataResponse: Partial<BackendWorldTO>,
-    apiWorldScoreResponse: LearningWorldStatusTO
+    apiWorldScoreResponse: LearningWorldStatusTO,
   ): LearningSpaceEntity[] {
     const spaceEntities: LearningSpaceEntity[] = [];
 
@@ -209,7 +206,7 @@ export default class LoadLearningWorldUseCase
             worldID,
             space.elements,
             apiWorldScoreResponse,
-            space.templateStyle
+            space.templateStyle,
           )
         : [];
 
@@ -231,11 +228,11 @@ export default class LoadLearningWorldUseCase
               space.outroStory,
               worldID,
               space.id,
-              space.templateStyle
+              space.templateStyle,
             ),
           },
-          LearningSpaceEntity
-        )
+          LearningSpaceEntity,
+        ),
       );
     });
 
@@ -247,17 +244,17 @@ export default class LoadLearningWorldUseCase
     outroStoryElement: BackendStoryTO | null,
     worldID: number,
     spaceID: number,
-    spaceTheme: LearningSpaceThemeType
+    spaceTheme: LearningSpaceThemeType,
   ): StoryElementEntity[] {
     const storyElementEntities: StoryElementEntity[] = [];
 
     const introStoryModel = this.getStoryElementModelType(
       spaceTheme,
-      introStoryElement?.elementModel
+      introStoryElement?.elementModel,
     );
     const outroStoryModel = this.getStoryElementModelType(
       spaceTheme,
-      outroStoryElement?.elementModel
+      outroStoryElement?.elementModel,
     );
 
     // create combined intro-outro story element if both are present and have the same model
@@ -277,8 +274,8 @@ export default class LoadLearningWorldUseCase
             storyType: StoryElementType.IntroOutro,
             hasOutroTriggered: false,
           },
-          StoryElementEntity
-        )
+          StoryElementEntity,
+        ),
       );
     } else {
       // create separate intro and outro story elements if present
@@ -293,8 +290,8 @@ export default class LoadLearningWorldUseCase
               storyType: StoryElementType.Intro,
               hasOutroTriggered: null,
             },
-            StoryElementEntity
-          )
+            StoryElementEntity,
+          ),
         );
       }
       if (outroStoryElement !== null) {
@@ -308,8 +305,8 @@ export default class LoadLearningWorldUseCase
               storyType: StoryElementType.Outro,
               hasOutroTriggered: false,
             },
-            StoryElementEntity
-          )
+            StoryElementEntity,
+          ),
         );
       }
     }
@@ -319,7 +316,7 @@ export default class LoadLearningWorldUseCase
 
   getStoryElementModelType(
     spaceTheme: LearningSpaceThemeType,
-    modelType?: LearningElementModel
+    modelType?: LearningElementModel,
   ): LearningElementModel {
     if (
       modelType === undefined ||
@@ -336,7 +333,7 @@ export default class LoadLearningWorldUseCase
     worldID: number,
     elements: (BackendLearningElementTO | BackendAdaptivityElementTO | null)[],
     worldStatus: LearningWorldStatusTO,
-    spaceTheme: LearningSpaceThemeType
+    spaceTheme: LearningSpaceThemeType,
   ): (LearningElementEntity | null)[] {
     return elements.map((element) => {
       if (element === null) {
@@ -350,7 +347,7 @@ export default class LoadLearningWorldUseCase
       ) {
         const elementModelsForTheme =
           LearningSpaceThemeLookup.getLearningSpaceTheme(
-            spaceTheme
+            spaceTheme,
           ).learningElementModels;
         const elementModelsForType =
           elementModelsForTheme[element.type as LearningElementTypes];
@@ -375,13 +372,13 @@ export default class LoadLearningWorldUseCase
 
       newElementEntity = this.container.createEntity(
         newElementEntity,
-        LearningElementEntity
+        LearningElementEntity,
       );
 
       if (element instanceof BackendAdaptivityElementTO) {
         this.createAdaptivityElementEntity(
           newElementEntity,
-          element.adaptivity
+          element.adaptivity,
         );
       }
 
@@ -391,21 +388,21 @@ export default class LoadLearningWorldUseCase
 
   private createAdaptivityElementEntity(
     element: LearningElementEntity,
-    adaptivityData: AdaptivityElementDataTO
+    adaptivityData: AdaptivityElementDataTO,
   ) {
     let entity = new AdaptivityElementEntity();
     entity = Object.assign(entity, structuredClone(adaptivityData));
     entity.element = element;
     this.container.createEntity<AdaptivityElementEntity>(
       entity,
-      AdaptivityElementEntity
+      AdaptivityElementEntity,
     );
   }
 
   private createLearningWorldEntity(
     worldID: number,
     spaceEntities: LearningSpaceEntity[],
-    apiWorldDataResponse: Partial<BackendWorldTO>
+    apiWorldDataResponse: Partial<BackendWorldTO>,
   ): LearningWorldEntity {
     const worldEntity = this.container.createEntity<LearningWorldEntity>(
       {
@@ -416,7 +413,7 @@ export default class LoadLearningWorldUseCase
         description: apiWorldDataResponse.description,
         evaluationLink: apiWorldDataResponse.evaluationLink,
       },
-      LearningWorldEntity
+      LearningWorldEntity,
     );
 
     return worldEntity;
@@ -424,7 +421,7 @@ export default class LoadLearningWorldUseCase
 
   private createExternalLearningElementEntities(
     externalElements: BackendBaseElementTO[] | undefined,
-    worldID: number
+    worldID: number,
   ) {
     if (externalElements === undefined || externalElements.length === 0) {
       return;
@@ -437,13 +434,13 @@ export default class LoadLearningWorldUseCase
           name: element.name,
           type: element.type,
         },
-        ExternalLearningElementEntity
+        ExternalLearningElementEntity,
       );
     });
   }
 
   private createLearningWorldTOFromLearningWorldEntity(
-    entityToConvert: LearningWorldEntity
+    entityToConvert: LearningWorldEntity,
   ): LearningWorldTO {
     // this will need to be changed when entity and TO are not matching in structure anymore
     let worldTO = new LearningWorldTO();

@@ -16,25 +16,22 @@ export default class GetLoginStatusUseCase implements IGetLoginStatusUseCase {
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
     @inject(PORT_TYPES.INotificationPort)
-    private notificationPort: INotificationPort
+    private notificationPort: INotificationPort,
   ) {}
 
   internalExecute(): LoginStatusTO {
     const userDataEntity =
       this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
     if (!userDataEntity?.isLoggedIn) {
-      this.notificationPort.displayNotification(
-        "User is not logged in!",
-        "error"
-      );
-      this.logger.log(
+      this.notificationPort.onNotificationTriggered(
         LogLevelTypes.ERROR,
-        `InternalGetLoginStatusUseCase: Checked LoginStatus: ${userDataEntity?.isLoggedIn}. User is not logged in!`
+        `InternalGetLoginStatusUseCase: Checked LoginStatus: ${userDataEntity?.isLoggedIn}. User is not logged in!`,
+        "User is not logged in!",
       );
     } else {
       this.logger.log(
         LogLevelTypes.TRACE,
-        `InternalGetLoginStatusUseCase: Checked LoginStatus: ${userDataEntity?.isLoggedIn}.`
+        `InternalGetLoginStatusUseCase: Checked LoginStatus: ${userDataEntity?.isLoggedIn}.`,
       );
     }
     return {
@@ -48,7 +45,7 @@ export default class GetLoginStatusUseCase implements IGetLoginStatusUseCase {
 
     this.logger.log(
       LogLevelTypes.TRACE,
-      `GetLoginStatusUseCase: Checked LoginStatus: ${userDataEntity?.isLoggedIn}.`
+      `GetLoginStatusUseCase: Checked LoginStatus: ${userDataEntity?.isLoggedIn}.`,
     );
     return {
       isLoggedIn: userDataEntity?.isLoggedIn ?? false,
