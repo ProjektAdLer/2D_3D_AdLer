@@ -1,0 +1,305 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BreakTimeNotificationOverview should render 1`] = `
+<div>
+  <div
+    class="z-50 flex items-center justify-center flex gap-2 m-2 w-fit h-fit text-adlertextgrey"
+  >
+    <div
+      class="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans"
+    >
+      <div
+        class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden"
+      >
+        <div
+          class="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit"
+        >
+          <div
+            class="w-full"
+          >
+            overviewTitle
+          </div>
+          <button
+            class="justify-center p-1 md:w-7 md:h-7 sm:w-6 sm:h-6 w-4 h-4 aspect-square"
+          >
+            <img
+              alt="CloseButton"
+              class="w-6 h-6"
+              src="close.svg"
+            />
+          </button>
+        </div>
+        <div
+          class="px-1 overflow-auto rounded-lg font-regular h-fit"
+        >
+          <div
+            class=""
+          >
+            <div>
+              <h1>
+                shortBreaks
+              </h1>
+              <div
+                class="grid grid-cols-5 gap-5"
+              >
+                <div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      data-testid="B3"
+                    >
+                      <img
+                        alt="B3Thumbnail"
+                        src="smallBreakContent-B3-slide1.png"
+                      />
+                    </button>
+                  </div>
+                  <div>
+                    B3
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      data-testid="B7"
+                    >
+                      <img
+                        alt="B7Thumbnail"
+                        src="smallBreakContent-B7-slide1.png"
+                      />
+                    </button>
+                  </div>
+                  <div>
+                    B7
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      data-testid="B8"
+                    >
+                      <img
+                        alt="B8Thumbnail"
+                        src="smallBreakContent-B8-slide1.png"
+                      />
+                    </button>
+                  </div>
+                  <div>
+                    B8
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      data-testid="E2"
+                    >
+                      <img
+                        alt="E2Thumbnail"
+                        src="smallBreakContent-E2-slide1.png"
+                      />
+                    </button>
+                  </div>
+                  <div>
+                    E2
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      data-testid="E4"
+                    >
+                      <img
+                        alt="E4Thumbnail"
+                        src="smallBreakContent-E4-slide1.png"
+                      />
+                    </button>
+                  </div>
+                  <div>
+                    E4
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      data-testid="E10"
+                    >
+                      <img
+                        alt="E10Thumbnail"
+                        src="smallBreakContent-E10-slide1.png"
+                      />
+                    </button>
+                  </div>
+                  <div>
+                    E10
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      data-testid="L1"
+                    >
+                      <img
+                        alt="L1Thumbnail"
+                        src="smallBreakContent-L1-slide1.png"
+                      />
+                    </button>
+                  </div>
+                  <div>
+                    L1
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      data-testid="L3"
+                    >
+                      <img
+                        alt="L3Thumbnail"
+                        src="smallBreakContent-L3-slide1.png"
+                      />
+                    </button>
+                  </div>
+                  <div>
+                    L3
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      data-testid="L5"
+                    >
+                      <img
+                        alt="L5Thumbnail"
+                        src="smallBreakContent-L5-slide1.png"
+                      />
+                    </button>
+                  </div>
+                  <div>
+                    L5
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      data-testid="U3"
+                    >
+                      <img
+                        alt="U3Thumbnail"
+                        src="smallBreakContent-U3-slide1.png"
+                      />
+                    </button>
+                  </div>
+                  <div>
+                    U3
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h1>
+                mediumBreaks
+              </h1>
+              <div
+                class="grid grid-cols-5 gap-5"
+              >
+                <div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      data-testid="S1"
+                    >
+                      <img
+                        alt="S1Thumbnail"
+                        src="mediumBreakContent-S1-slide1.png"
+                      />
+                    </button>
+                  </div>
+                  <div>
+                    S1
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      data-testid="S3"
+                    >
+                      <img
+                        alt="S3Thumbnail"
+                        src="mediumBreakContent-S3-slide1.png"
+                      />
+                    </button>
+                  </div>
+                  <div>
+                    S3
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h1>
+                longBreaks
+              </h1>
+              <div
+                class="grid grid-cols-5 gap-5"
+              >
+                <div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      data-testid="H1"
+                    >
+                      <img
+                        alt="H1Thumbnail"
+                        src="longBreakContent-H1-slide1.png"
+                      />
+                    </button>
+                  </div>
+                  <div>
+                    H1
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -20,7 +20,7 @@ function BreakTimeNotificationThumbnail({
 
   return (
     <div>
-      <StyledButton onClick={onClick}>
+      <StyledButton onClick={onClick} data-testid={notification.titleKey}>
         <img
           src={notification.images[0]}
           alt={translate(notification.titleKey) + "Thumbnail"}
@@ -62,8 +62,8 @@ export default function BreakTimeNotificationOverview() {
     IBreakTimeNotificationOverviewController
   >(BUILDER_TYPES.IBreakTimeNotificationOverviewBuilder);
 
-  const [showModal] = useObservable(viewModel.showModal);
-  const [selectedNotification] = useObservable(viewModel.selectedNotification);
+  const [showModal] = useObservable(viewModel?.showModal);
+  const [selectedNotification] = useObservable(viewModel?.selectedNotification);
 
   const { t: translate } = useTranslation("breakTime");
 
