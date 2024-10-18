@@ -84,55 +84,6 @@ describe("BreakTimeNotification", () => {
     expect(mockController.closeBreakNotification).toHaveBeenCalledTimes(1);
   });
 
-  // ANF-ID: [EKJ0002]
-  test.skip.each([
-    [
-      "id-slide-1",
-      1,
-      [
-        BreakTimeNotificationType.Short,
-        BreakTimeNotificationType.Medium,
-        BreakTimeNotificationType.Long,
-      ],
-    ],
-    [
-      "id-slide-2",
-      2,
-      [
-        BreakTimeNotificationType.Short,
-        BreakTimeNotificationType.Medium,
-        BreakTimeNotificationType.Long,
-      ],
-    ],
-    [
-      "id-slide-3",
-      3,
-      [
-        BreakTimeNotificationType.Short,
-        BreakTimeNotificationType.Medium,
-        BreakTimeNotificationType.Long,
-      ],
-    ],
-    [
-      "id-slide-4",
-      4,
-      [BreakTimeNotificationType.Short, BreakTimeNotificationType.Medium],
-    ],
-  ])(
-    "should render slide with id %s, index %s and type %s ",
-    (testid, index, types) => {
-      types.forEach((type) => {
-        useBuilderMock([viewModel, mockController]);
-        viewModel.showModal.Value = true;
-        viewModel.breakType.Value = type;
-        viewModel.slideIndex.Value = index;
-        render(<BreakTimeNotification />);
-        expect(screen.getByTestId(testid)).toBeInTheDocument();
-        cleanup();
-      });
-    },
-  );
-
   // ANF-ID: [EKJ0004, EKJ0005, EKJ0006]
   test("click on close button calls closedBreakNotification on controller", () => {
     useBuilderMock([viewModel, mockController]);
@@ -147,25 +98,4 @@ describe("BreakTimeNotification", () => {
 
     expect(mockController.closeBreakNotification).toHaveBeenCalledTimes(1);
   });
-
-  test.skip.each([
-    ["breakSliderButton1", 1],
-    ["breakSliderButton2", 2],
-    ["breakSliderButton3", 3],
-    ["breakSliderButton4", 4],
-  ])(
-    "should call controller if button with id %s is clicked and sets slider index to %s",
-    (testid, index) => {
-      useBuilderMock([viewModel, mockController]);
-      viewModel.showModal.Value = true;
-      viewModel.notificationToDisplay.Value =
-        shortBreakTimeNotificationContents[0];
-
-      const renderResult = render(<BreakTimeNotification />);
-      waitFor(() => {
-        fireEvent.click(renderResult.getByTestId(testid));
-        expect(mockController.setSliderIndex).toHaveBeenCalledWith(index);
-      });
-    },
-  );
 });
