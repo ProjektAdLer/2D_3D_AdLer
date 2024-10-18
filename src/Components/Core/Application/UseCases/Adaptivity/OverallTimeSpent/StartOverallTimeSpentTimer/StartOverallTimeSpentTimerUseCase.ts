@@ -30,15 +30,15 @@ export default class StartOverallTimeSpentTimerUseCase
       () => {
         timer[0].breakTimeIntervalCounter++;
         if (timer[0].breakTimeIntervalCounter === 4) {
-          this.notificationPort.displayBreakTimeNotification(
+          this.notificationPort.onBreakTimeNotificationTriggered(
             BreakTimeNotificationType.Medium,
           );
         } else if (timer[0].breakTimeIntervalCounter === 8) {
-          this.notificationPort.displayBreakTimeNotification(
+          this.notificationPort.onBreakTimeNotificationTriggered(
             BreakTimeNotificationType.Long,
           );
         } else {
-          this.notificationPort.displayBreakTimeNotification(
+          this.notificationPort.onBreakTimeNotificationTriggered(
             BreakTimeNotificationType.Short,
           );
         }

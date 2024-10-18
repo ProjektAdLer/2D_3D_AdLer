@@ -35,7 +35,7 @@ export default class NotificationPort
   }
 
   @bind
-  displayBreakTimeNotification(type: BreakTimeNotificationType): void {
+  onBreakTimeNotificationTriggered(type: BreakTimeNotificationType): void {
     this.mappedAdapters.forEach((adapter) => {
       adapter.forEach((value) => {
         if (value.displayBreakTimeNotification)

@@ -11,5 +11,5 @@ export default interface INotificationPort
     logMessage: string,
     message: string,
   ): void;
-  displayBreakTimeNotification(type: BreakTimeNotificationType): void;
+  onBreakTimeNotificationTriggered(type: BreakTimeNotificationType): void;
 }
