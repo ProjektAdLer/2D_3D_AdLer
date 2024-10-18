@@ -29,7 +29,6 @@ export default function BreakTimeNotificationContent({
             src={breakTimeNotification.images[currentSlide]}
             title="Pausenhinweis"
             alt=""
-            data-testid="id-slide-2"
           />
         </div>
 

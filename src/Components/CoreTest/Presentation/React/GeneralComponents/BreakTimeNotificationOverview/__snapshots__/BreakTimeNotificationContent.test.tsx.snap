@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BreakTimeNotificationContent should render 1`] = `
+<div>
+  <div
+    class="pb-4 max-h-[90vh] portrait:max-w-[90vw]"
+  >
+    <div
+      class="flex flex-col items-center gap-6 mx-0 my-auto slider-wrapper"
+    >
+      <div
+        class="flex flex-col gap-4 overflow-y-auto items-center justify-center slider portrait:max-w-[90vw] max-h-[90vh]"
+      >
+        <p
+          class="w-full pb-4 pl-6 text-sm font-bold md:text-xl lg:text-xl max-w-[60vw] ultraWide:max-w-[40vw] text-adlerdarkblue"
+        >
+          shortBreakBase 
+          infoMobilization 
+        </p>
+        <img
+          alt=""
+          class="object-cover max-h-[60vh] portrait:max-w-full rounded-lg"
+          id="slide-2"
+          src="smallBreakContent-B3-slide1.png"
+          title="Pausenhinweis"
+        />
+      </div>
+      <div
+        class="z-10 flex gap-4 lg:gap-6 slider-nav"
+      >
+        <button
+          class="bg-yellow-400 w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+          data-testid="breakSliderButton0"
+        />
+        <button
+          class="bg-white w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+          data-testid="breakSliderButton1"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
