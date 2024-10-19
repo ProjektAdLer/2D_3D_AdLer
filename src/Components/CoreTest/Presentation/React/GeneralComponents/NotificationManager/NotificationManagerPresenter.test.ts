@@ -11,8 +11,8 @@ describe("NotificationManagerPresenter", () => {
   });
 
   test("should set the name of the world in the vm ", () => {
-    systemUnderTest.displayNotification("Hello World", "notification");
-    expect(vm.errors.Value).toEqual([
+    systemUnderTest.displayNotification("notification", "Hello World");
+    expect(vm.messages.Value).toEqual([
       {
         message: "Hello World",
         type: "notification",

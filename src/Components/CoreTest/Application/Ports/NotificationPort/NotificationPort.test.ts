@@ -5,6 +5,7 @@ import INotificationAdapter, {
   NotificationType,
 } from "../../../../Core/Application/Ports/NotificationPort/INotificationAdapter";
 import { BreakTimeNotificationType } from "../../../../Core/Domain/Entities/Adaptivity/BreakTimeNotificationEntity";
+import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 
 describe("NotificationPort", () => {
   let systemUnderTest: NotificationPort;
@@ -17,14 +18,15 @@ describe("NotificationPort", () => {
     const uiAdapterMock = mock<INotificationAdapter>();
     systemUnderTest.registerAdapter(uiAdapterMock);
 
-    systemUnderTest.displayNotification(
-      "error message",
-      "error" as NotificationType,
+    systemUnderTest.onNotificationTriggered(
+      LogLevelTypes.ERROR,
+      "logmessage",
+      "message" as NotificationType,
     );
 
     expect(uiAdapterMock.displayNotification).toBeCalledWith(
-      "error message",
-      "error" as NotificationType,
+      LogLevelTypes.ERROR,
+      "message" as NotificationType,
     );
   });
 
@@ -33,7 +35,7 @@ describe("NotificationPort", () => {
     systemUnderTest.registerAdapter(uiAdapterMock);
     const breakType = BreakTimeNotificationType.Medium;
 
-    systemUnderTest.displayBreakTimeNotification(breakType);
+    systemUnderTest.onBreakTimeNotificationTriggered(breakType);
 
     expect(uiAdapterMock.displayBreakTimeNotification).toBeCalledWith(
       breakType,

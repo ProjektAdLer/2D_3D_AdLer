@@ -8,6 +8,7 @@ import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import INotificationPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
+import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 
 const backendMock = mock<IBackendPort>();
 const worldPortMock = mock<ILearningWorldPort>();
@@ -21,22 +22,22 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind<IEntityContainer>(
-      CORE_TYPES.IEntityContainer
+      CORE_TYPES.IEntityContainer,
     ).toConstantValue(entityContainerMock);
     CoreDIContainer.rebind(PORT_TYPES.INotificationPort).toConstantValue(
-      notificationPortMock
+      notificationPortMock,
     );
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      worldPortMock
+      worldPortMock,
     );
     CoreDIContainer.rebind(CORE_TYPES.IBackendAdapter).toConstantValue(
-      backendMock
+      backendMock,
     );
   });
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(
-      LoadUserInitialLearningWorldsInfoUseCase
+      LoadUserInitialLearningWorldsInfoUseCase,
     );
   });
 
@@ -52,16 +53,17 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
     ]);
 
     await expect(systemUnderTest.executeAsync()).rejects.toEqual(
-      "User is not logged in"
+      "User is not logged in",
     );
 
     expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
-      UserDataEntity
+      UserDataEntity,
     );
 
-    expect(notificationPortMock.displayNotification).toHaveBeenCalledWith(
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.ERROR,
+      "InternalGetLoginStatusUseCase: Checked LoginStatus: false. User is not logged in!",
       "User is not logged in!",
-      "error"
     );
   });
 
@@ -69,11 +71,11 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([]);
 
     await expect(systemUnderTest.executeAsync()).rejects.toEqual(
-      "User is not logged in"
+      "User is not logged in",
     );
 
     expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
-      UserDataEntity
+      UserDataEntity,
     );
   });
 
@@ -87,12 +89,13 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
     await expect(systemUnderTest.executeAsync()).rejects.not.toBeUndefined();
 
     expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
-      UserDataEntity
+      UserDataEntity,
     );
 
-    expect(notificationPortMock.displayNotification).toHaveBeenCalledWith(
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.ERROR,
+      "InternalGetLoginStatusUseCase: Checked LoginStatus: false. User is not logged in!",
       "User is not logged in!",
-      "error"
     );
   });
 
@@ -145,7 +148,7 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
     await systemUnderTest.executeAsync();
 
     expect(
-      worldPortMock.onUserInitialLearningWorldsInfoLoaded
+      worldPortMock.onUserInitialLearningWorldsInfoLoaded,
     ).toHaveBeenCalledTimes(1);
   });
 

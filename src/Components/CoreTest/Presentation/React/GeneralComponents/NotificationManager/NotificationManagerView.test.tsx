@@ -11,8 +11,8 @@ let fakeModel = new NotificationManagerViewModel();
 const fakeController = mock<INotificationManagerController>();
 
 describe("NotificationManager", () => {
-  test("should render multible modals", () => {
-    fakeModel.errors.Value = [
+  test("should render multiple modals", () => {
+    fakeModel.messages.Value = [
       {
         message: "test",
         type: "error",

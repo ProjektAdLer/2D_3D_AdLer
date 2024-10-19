@@ -7,6 +7,7 @@ import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityCon
 import GetLoginStatusUseCase from "../../../../Core/Application/UseCases/GetLoginStatus/GetLoginStatusUseCase";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 
 const entityContainerMock = mock<IEntityContainer>();
 const notificationPortMock = mock<INotificationPort>();
@@ -17,10 +18,10 @@ describe("GetLoginStatus", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
-      entityContainerMock
+      entityContainerMock,
     );
     CoreDIContainer.rebind(PORT_TYPES.INotificationPort).toConstantValue(
-      notificationPortMock
+      notificationPortMock,
     );
   });
   beforeEach(() => {
@@ -43,11 +44,12 @@ describe("GetLoginStatus", () => {
       userName: undefined,
     });
     expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
-      UserDataEntity
+      UserDataEntity,
     );
-    expect(notificationPortMock.displayNotification).toHaveBeenCalledWith(
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.ERROR,
+      "InternalGetLoginStatusUseCase: Checked LoginStatus: false. User is not logged in!",
       "User is not logged in!",
-      "error"
     );
   });
 
@@ -60,11 +62,12 @@ describe("GetLoginStatus", () => {
       userName: undefined,
     });
     expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
-      UserDataEntity
+      UserDataEntity,
     );
-    expect(notificationPortMock.displayNotification).toHaveBeenCalledWith(
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.ERROR,
+      "InternalGetLoginStatusUseCase: Checked LoginStatus: undefined. User is not logged in!",
       "User is not logged in!",
-      "error"
     );
   });
 
@@ -81,7 +84,7 @@ describe("GetLoginStatus", () => {
       userName: undefined,
     });
     expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
-      UserDataEntity
+      UserDataEntity,
     );
   });
   test("Execute: Returns LoginStatusTO", async () => {
@@ -98,7 +101,7 @@ describe("GetLoginStatus", () => {
       userName: "test",
     });
     expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
-      UserDataEntity
+      UserDataEntity,
     );
   });
   test("Execute: Returns LoginStatusTO when not logged in", async () => {
@@ -114,7 +117,7 @@ describe("GetLoginStatus", () => {
       userName: undefined,
     });
     expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
-      UserDataEntity
+      UserDataEntity,
     );
   });
   test("Execute: Returns LoginStatusTO when no Entityobject is found", async () => {
@@ -126,7 +129,7 @@ describe("GetLoginStatus", () => {
       userName: undefined,
     });
     expect(entityContainerMock.getEntitiesOfType).toHaveBeenCalledWith(
-      UserDataEntity
+      UserDataEntity,
     );
   });
 });

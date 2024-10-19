@@ -10,6 +10,7 @@ import ILMSPort from "../../../../Core/Application/Ports/Interfaces/ILMSPort";
 import INotificationPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
 import i18next from "i18next";
 import { AxiosError } from "axios";
+import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendMock = mock<IBackendPort>();
@@ -23,16 +24,16 @@ describe("LoginUseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind<ILMSPort>(PORT_TYPES.ILMSPort).toConstantValue(
-      lmsPortMock
+      lmsPortMock,
     );
     CoreDIContainer.rebind<IBackendPort>(
-      CORE_TYPES.IBackendAdapter
+      CORE_TYPES.IBackendAdapter,
     ).toConstantValue(backendMock);
     CoreDIContainer.rebind<IEntityContainer>(
-      CORE_TYPES.IEntityContainer
+      CORE_TYPES.IEntityContainer,
     ).toConstantValue(entityContainerMock);
     CoreDIContainer.rebind<INotificationPort>(
-      PORT_TYPES.INotificationPort
+      PORT_TYPES.INotificationPort,
     ).toConstantValue(notificationPortMock);
   });
 
@@ -59,15 +60,16 @@ describe("LoginUseCase", () => {
     expect(lmsPortMock.onLoginFailure).toHaveBeenCalled();
     expect(lmsPortMock.onLoginFailure).toHaveBeenCalledWith(
       i18next.t("alreadyLoggedIn", { ns: "start" }),
-      ""
+      "",
     );
 
-    expect(notificationPortMock.displayNotification).toHaveBeenCalledWith(
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
       expect.any(String),
-      "error"
+      "You are already logged in to Moodle",
     );
 
-    notificationPortMock.displayNotification.mockReset();
+    notificationPortMock.onNotificationTriggered.mockReset();
   });
 
   // ANF-ID: [EZZ0001]
@@ -91,7 +93,7 @@ describe("LoginUseCase", () => {
         username: "username",
         isLoggedIn: true,
       },
-      UserDataEntity
+      UserDataEntity,
     );
 
     expect(lmsPortMock.onLoginSuccessful).toHaveBeenCalled();
@@ -123,7 +125,7 @@ describe("LoginUseCase", () => {
     expect(lmsPortMock.onLoginFailure).toHaveBeenCalled();
     expect(lmsPortMock.onLoginFailure).toHaveBeenCalledWith(
       i18next.t("loginFail", { ns: "start" }),
-      i18next.t("loginFailAdvise")
+      i18next.t("loginFailAdvise"),
     );
   });
 
@@ -144,7 +146,7 @@ describe("LoginUseCase", () => {
       i18next.t("loginFail", { ns: "start" }) +
         " " +
         i18next.t("serverTimeOut"),
-      i18next.t("loginRetry")
+      i18next.t("loginRetry"),
     );
   });
 });
