@@ -43,7 +43,7 @@ function BreakTimeNotificationThumbnailSection({
   return (
     <div className="">
       <h1 className="text-lg pt-2">{title}</h1>
-      <div className="grid grid-cols-5 gap-5 pt-4 bg-whitetrans rounded-lg p-4">
+      <div className="grid portrait:grid-cols-2 grid-cols-5 gap-5 pt-4 bg-whitetrans rounded-lg p-4 max-h-[30vh] overflow-y-auto">
         {notifications.map((notification) => (
           <BreakTimeNotificationThumbnail
             key={notification.titleKey}
@@ -78,7 +78,7 @@ export default function BreakTimeNotificationOverview() {
     >
       {/* Selection */}
       {!selectedNotification && (
-        <div className="text-md font-bold text-adlerdarkblue pl-1">
+        <div className="text-md font-bold text-adlerdarkblue pl-1 overflow-y-auto">
           <BreakTimeNotificationThumbnailSection
             title={translate("30 Minuten Pausenhinweise")}
             notifications={viewModel.shortBreakTimeNotifications}
