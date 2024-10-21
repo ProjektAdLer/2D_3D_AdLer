@@ -19,14 +19,21 @@ function BreakTimeNotificationThumbnail({
   const { t: translate } = useTranslation("breakTime");
 
   return (
-    <div>
-      <StyledButton onClick={onClick} data-testid={notification.titleKey}>
-        <img
-          src={notification.images[0]}
-          alt={translate(notification.titleKey) + "Thumbnail"}
-        />
+    <div className="flex flex-col">
+      <StyledButton
+        className="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw]"
+        shape="freeFloatCenter"
+        onClick={onClick}
+        data-testid={notification.titleKey}
+      >
+        <div className="flex flex-col">
+          <img
+            src={notification.images[0]}
+            alt={translate(notification.titleKey) + "Thumbnail"}
+          />
+          <p onClick={onClick}>{translate(notification.titleKey)}</p>
+        </div>
       </StyledButton>
-      <div onClick={onClick}>{translate(notification.titleKey)}</div>
     </div>
   );
 }
@@ -41,8 +48,8 @@ function BreakTimeNotificationThumbnailSection({
   controller: IBreakTimeNotificationOverviewController;
 }) {
   return (
-    <div className="">
-      <h1 className="text-lg pt-2">{title}</h1>
+    <div>
+      <h1 className="text-lg pt-2 pb-2">{title}</h1>
       <div className="grid portrait:grid-cols-2 grid-cols-5 gap-5 pt-4 bg-whitetrans rounded-lg p-4 max-h-[30vh] overflow-y-auto">
         {notifications.map((notification) => (
           <BreakTimeNotificationThumbnail
@@ -78,7 +85,7 @@ export default function BreakTimeNotificationOverview() {
     >
       {/* Selection */}
       {!selectedNotification && (
-        <div className="text-md font-bold text-adlerdarkblue pl-1 overflow-y-auto">
+        <div className="text-md font-bold text-adlerdarkblue pl-1 overflow-y-auto max-h-[90vh] lg:max-h-[85vh]">
           <BreakTimeNotificationThumbnailSection
             title={translate("30 Minuten Pausenhinweise")}
             notifications={viewModel.shortBreakTimeNotifications}
