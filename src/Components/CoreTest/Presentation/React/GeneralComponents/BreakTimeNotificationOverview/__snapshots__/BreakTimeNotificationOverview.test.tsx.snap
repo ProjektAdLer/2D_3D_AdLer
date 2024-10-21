@@ -17,7 +17,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
           <div
             class="w-full"
           >
-            overviewTitle
+            Pausenhinweise
           </div>
           <button
             class="justify-center p-1 md:w-7 md:h-7 sm:w-6 sm:h-6 w-4 h-4 aspect-square"
@@ -33,14 +33,18 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
           class="px-1 overflow-auto rounded-lg font-regular h-fit"
         >
           <div
-            class=""
+            class="text-md font-bold text-adlerdarkblue pl-1"
           >
-            <div>
-              <h1>
-                shortBreaks
+            <div
+              class=""
+            >
+              <h1
+                class="text-lg pt-2"
+              >
+                30 Minuten Pausenhinweise
               </h1>
               <div
-                class="grid grid-cols-5 gap-5"
+                class="grid grid-cols-5 gap-5 pt-4 bg-whitetrans rounded-lg p-4"
               >
                 <div>
                   <div
@@ -224,12 +228,16 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                 </div>
               </div>
             </div>
-            <div>
-              <h1>
-                mediumBreaks
+            <div
+              class=""
+            >
+              <h1
+                class="text-lg pt-2"
+              >
+                2 Stunden Pausenhinweise
               </h1>
               <div
-                class="grid grid-cols-5 gap-5"
+                class="grid grid-cols-5 gap-5 pt-4 bg-whitetrans rounded-lg p-4"
               >
                 <div>
                   <div
@@ -269,12 +277,16 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                 </div>
               </div>
             </div>
-            <div>
-              <h1>
-                longBreaks
+            <div
+              class=""
+            >
+              <h1
+                class="text-lg pt-2"
+              >
+                4 Stunden Pausenhinweise
               </h1>
               <div
-                class="grid grid-cols-5 gap-5"
+                class="grid grid-cols-5 gap-5 pt-4 bg-whitetrans rounded-lg p-4"
               >
                 <div>
                   <div
