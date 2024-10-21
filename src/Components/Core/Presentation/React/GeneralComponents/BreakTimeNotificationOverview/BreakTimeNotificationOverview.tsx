@@ -41,9 +41,9 @@ function BreakTimeNotificationThumbnailSection({
   controller: IBreakTimeNotificationOverviewController;
 }) {
   return (
-    <div>
-      <h1>{title}</h1>
-      <div className="grid grid-cols-5 gap-5">
+    <div className="">
+      <h1 className="text-lg pt-2">{title}</h1>
+      <div className="grid grid-cols-5 gap-5 pt-4 bg-whitetrans rounded-lg p-4">
         {notifications.map((notification) => (
           <BreakTimeNotificationThumbnail
             key={notification.titleKey}
@@ -72,25 +72,25 @@ export default function BreakTimeNotificationOverview() {
 
   return (
     <StyledModal
-      title={translate("overviewTitle")!}
+      title={translate("Pausenhinweise")!}
       onClose={controller.closeModal}
       showModal={showModal}
     >
       {/* Selection */}
       {!selectedNotification && (
-        <div className="">
+        <div className="text-md font-bold text-adlerdarkblue pl-1">
           <BreakTimeNotificationThumbnailSection
-            title={translate("shortBreaks")}
+            title={translate("30 Minuten Pausenhinweise")}
             notifications={viewModel.shortBreakTimeNotifications}
             controller={controller}
           />
           <BreakTimeNotificationThumbnailSection
-            title={translate("mediumBreaks")}
+            title={translate("2 Stunden Pausenhinweise")}
             notifications={viewModel.mediumBreakTimeNotifications}
             controller={controller}
           />
           <BreakTimeNotificationThumbnailSection
-            title={translate("longBreaks")}
+            title={translate("4 Stunden Pausenhinweise")}
             notifications={viewModel.longBreakTimeNotifications}
             controller={controller}
           />
@@ -99,12 +99,15 @@ export default function BreakTimeNotificationOverview() {
 
       {/* Single Notification */}
       {selectedNotification && (
-        <div>
+        <div className="flex flex-col items-end">
           <BreakTimeNotificationContent
             breakTimeNotification={selectedNotification!}
           />
-          <StyledButton onClick={controller.returnToOverview}>
-            {"<"}
+          <StyledButton
+            shape="freeFloatCenter"
+            onClick={controller.returnToOverview}
+          >
+            {"Zurück zur Übersicht"}
           </StyledButton>
         </div>
       )}
