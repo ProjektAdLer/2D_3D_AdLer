@@ -9,6 +9,7 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type INotificationPort from "../../../../Ports/Interfaces/INotificationPort";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IPauseOverallTimeSpentTimerUseCase from "../PauseOverallTimeSpentTimer/IPauseOverallTimeSpentTimerUseCase";
+import type IGetUnseenBreakTimeNotificationUseCase from "../GetUnseenBreakTimeNotification/IGetUnseenBreakTimeNotificationUseCase";
 
 @injectable()
 export default class StartOverallTimeSpentTimerUseCase
@@ -21,6 +22,8 @@ export default class StartOverallTimeSpentTimerUseCase
     private notificationPort: INotificationPort,
     @inject(USECASE_TYPES.IPauseOverallTimeSpentTimerUseCase)
     private pauseOverallTimeSpentTimerUseCase: IPauseOverallTimeSpentTimerUseCase,
+    @inject(USECASE_TYPES.IGetUnseenBreakTimeNotificationUseCase)
+    private getUnseenStoryElementsUseCase: IGetUnseenBreakTimeNotificationUseCase,
   ) {}
 
   execute() {
@@ -30,16 +33,22 @@ export default class StartOverallTimeSpentTimerUseCase
       () => {
         timer[0].breakTimeIntervalCounter++;
         if (timer[0].breakTimeIntervalCounter === 4) {
-          this.notificationPort.onBreakTimeNotificationTriggered(
-            BreakTimeNotificationType.Medium,
+          this.notificationPort.displayBreakTimeNotification(
+            this.getUnseenStoryElementsUseCase.internalExecute(
+              BreakTimeNotificationType.Medium,
+            ),
           );
         } else if (timer[0].breakTimeIntervalCounter === 8) {
-          this.notificationPort.onBreakTimeNotificationTriggered(
-            BreakTimeNotificationType.Long,
+          this.notificationPort.displayBreakTimeNotification(
+            this.getUnseenStoryElementsUseCase.internalExecute(
+              BreakTimeNotificationType.Long,
+            ),
           );
         } else {
-          this.notificationPort.onBreakTimeNotificationTriggered(
-            BreakTimeNotificationType.Short,
+          this.notificationPort.displayBreakTimeNotification(
+            this.getUnseenStoryElementsUseCase.internalExecute(
+              BreakTimeNotificationType.Short,
+            ),
           );
         }
         this.pauseOverallTimeSpentTimerUseCase.internalExecute(this);

@@ -31,14 +31,4 @@ describe("BreakTimeNotificationController", () => {
     systemUnderTest.minimizeOrMaximizeBreakNotification();
     expect(viewModel.showMinimizedModal.Value).toEqual(true);
   });
-
-  //ANF-ID: [EKJ0003]
-  test("setSliderIndex sets correct value in the viewModel", () => {
-    viewModel = new BreakTimeNotificationViewModel();
-    viewModel.slideIndex.Value = 1;
-    systemUnderTest = new BreakTimeNotificationController(viewModel);
-
-    systemUnderTest.setSliderIndex(2);
-    expect(viewModel.slideIndex.Value).toEqual(2);
-  });
 });

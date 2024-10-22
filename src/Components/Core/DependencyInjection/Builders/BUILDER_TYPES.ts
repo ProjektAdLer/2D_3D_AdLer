@@ -18,7 +18,7 @@ const BUILDER_TYPES = {
   ILearningSpaceDetailBuilder: Symbol("ILearningSpaceDetailBuilder"),
   ILearningWorldDetailBuilder: Symbol("ILearningWorldDetailBuilder"),
   ILearningWorldCompletionModalBuilder: Symbol(
-    "ILearningWorldCompletionModalBuilder"
+    "ILearningWorldCompletionModalBuilder",
   ),
   IMenuBarBuilder: Symbol("IMenuBarBuilder"),
   IUseGuideBuilder: Symbol("IUseGuideBuilder"),
@@ -42,6 +42,9 @@ const BUILDER_TYPES = {
   IReturnHomeModalBuilder: Symbol("IReturnHomeModalBuilder"),
   IControlsExplanationModalBuilder: Symbol("IControlsExplanationModalBuilder"),
   IMoodleButtonBuilder: Symbol("IMoodleButtonBuilder"),
+  IBreakTimeNotificationOverviewBuilder: Symbol(
+    "IBreakTimeNotificationOverviewBuilder",
+  ),
 };
 
 export default BUILDER_TYPES;

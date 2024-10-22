@@ -13,7 +13,7 @@ const mockHistoryBack = jest.spyOn(history, "back");
 
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitch",
-  () => "string"
+  () => "string",
 );
 
 describe("SideBar", () => {
@@ -21,7 +21,6 @@ describe("SideBar", () => {
 
   beforeEach(() => {
     viewModel = new SideBarViewModel();
-    viewModel.isDisabled = new Observable<boolean>(false);
   });
 
   test("should render", () => {

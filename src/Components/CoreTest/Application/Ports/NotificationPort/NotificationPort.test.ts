@@ -6,6 +6,8 @@ import INotificationAdapter, {
 } from "../../../../Core/Application/Ports/NotificationPort/INotificationAdapter";
 import { BreakTimeNotificationType } from "../../../../Core/Domain/Entities/Adaptivity/BreakTimeNotificationEntity";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
+import { LocationScope } from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import IBreakTimeNotification from "../../../../Core/Domain/BreakTimeNotifications/IBreakTimeNotification";
 
 describe("NotificationPort", () => {
   let systemUnderTest: NotificationPort;
@@ -16,7 +18,7 @@ describe("NotificationPort", () => {
 
   test("displayNotification calls a registered adapter", () => {
     const uiAdapterMock = mock<INotificationAdapter>();
-    systemUnderTest.registerAdapter(uiAdapterMock);
+    systemUnderTest.registerAdapter(uiAdapterMock, LocationScope._global);
 
     systemUnderTest.onNotificationTriggered(
       LogLevelTypes.ERROR,
@@ -24,7 +26,7 @@ describe("NotificationPort", () => {
       "message" as NotificationType,
     );
 
-    expect(uiAdapterMock.displayNotification).toBeCalledWith(
+    expect(uiAdapterMock.displayNotification).toHaveBeenCalledWith(
       LogLevelTypes.ERROR,
       "message" as NotificationType,
     );
@@ -32,13 +34,19 @@ describe("NotificationPort", () => {
 
   test("displayBreakTimeNotification calls a registered adapter", () => {
     const uiAdapterMock = mock<INotificationAdapter>();
-    systemUnderTest.registerAdapter(uiAdapterMock);
-    const breakType = BreakTimeNotificationType.Medium;
+    systemUnderTest.registerAdapter(uiAdapterMock, LocationScope._global);
 
-    systemUnderTest.onBreakTimeNotificationTriggered(breakType);
+    const notification: IBreakTimeNotification = {
+      titleKey: "short_break",
+      titleMessageKeys: ["short_break_message"],
+      images: [],
+      seenBefore: false,
+    };
 
-    expect(uiAdapterMock.displayBreakTimeNotification).toBeCalledWith(
-      breakType,
+    systemUnderTest.displayBreakTimeNotification(notification);
+
+    expect(uiAdapterMock.displayBreakTimeNotification).toHaveBeenCalledWith(
+      notification,
     );
   });
 

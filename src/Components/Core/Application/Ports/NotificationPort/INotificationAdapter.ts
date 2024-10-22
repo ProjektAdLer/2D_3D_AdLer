@@ -1,5 +1,5 @@
-import { BreakTimeNotificationType } from "src/Components/Core/Domain/Entities/Adaptivity/BreakTimeNotificationEntity";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import IBreakTimeNotification from "../../../Domain/BreakTimeNotifications/IBreakTimeNotification";
 
 export type NotificationType = LogLevelTypes.ERROR | LogLevelTypes.WARN;
 export type Message = {
@@ -9,5 +9,7 @@ export type Message = {
 
 export default interface INotificationAdapter {
   displayNotification?(type: NotificationType, message: string): void;
-  displayBreakTimeNotification?(type: BreakTimeNotificationType): void;
+  displayBreakTimeNotification?(
+    notificationToDisplay: IBreakTimeNotification,
+  ): void;
 }

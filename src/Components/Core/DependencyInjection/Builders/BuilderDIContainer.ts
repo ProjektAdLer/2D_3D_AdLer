@@ -41,118 +41,122 @@ import CookieModalBuilder from "~ReactComponents/WelcomePage/CookieModal/CookieM
 import ReturnHomeModalBuilder from "~ReactComponents/LearningWorldMenu/ReturnHomeModal/ReturnHomeModalBuilder";
 import ControlsExplanationModalBuilder from "~ReactComponents/GeneralComponents/ControlsExplanationModal/ControlsExplanationModalBuilder";
 import LMSButtonBuilder from "../../Presentation/React/WelcomePage/LMSButton/LMSButtonBuilder";
+import BreakTimeNotificationOverviewBuilder from "~ReactComponents/GeneralComponents/BreakTimeNotificationOverview/BreakTimeNotificationOverviewBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
-    PresentationDirector
+    PresentationDirector,
   );
 
   bind<IPresentationBuilder>(BUILDER_TYPES.IMoodleButtonBuilder).to(
-    LMSButtonBuilder
+    LMSButtonBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IHelpDeskButtonBuilder).to(
-    HelpDeskButtonBuilder
+    HelpDeskButtonBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IHelpDeskModalBuilder).to(
-    HelpDeskModalBuilder
+    HelpDeskModalBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILoadingScreenBuilder).to(
-    LoadingScreenBuilder
+    LoadingScreenBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IDoorBuilder).to(DoorBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IWindowBuilder).to(WindowBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningSpaceScorePanelBuilder).to(
-    LearningSpaceScorePanelBuilder
+    LearningSpaceScorePanelBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldScorePanelBuilder).to(
-    LearningWorldScorePanelBuilder
+    LearningWorldScorePanelBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementModalBuilder).to(
-    ElementModalBuilder
+    ElementModalBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningSpaceBuilder).to(
-    LearningSpaceBuilder
+    LearningSpaceBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningElementBuilder).to(
-    LearningElementBuilder
+    LearningElementBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarBuilder).to(AvatarBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IModalManagerBuilder).to(
-    NotificationManagerBuilder
+    NotificationManagerBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ISignInAndOutComponentBuilder).to(
-    SignInAndOutComponentBuilder
+    SignInAndOutComponentBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IBottomTooltipBuilder).to(
-    BottomTooltipBuilder
+    BottomTooltipBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldNamePanelBuilder).to(
-    SpaceNamePanelBuilder
+    SpaceNamePanelBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IFullscreenSwitchBuilder).to(
-    FullscreenSwitchBuilder
+    FullscreenSwitchBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningSpaceGoalPanelBuilder).to(
-    LearningSpaceGoalPanelBuilder
+    LearningSpaceGoalPanelBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IHeaderBarBuilder).to(
-    MenuHeaderBarBuilder
+    MenuHeaderBarBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningSpaceSelectionBuilder).to(
-    SpaceSelectionBuilder
+    SpaceSelectionBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningSpaceDetailBuilder).to(
-    LearningSpaceDetailBuilder
+    LearningSpaceDetailBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldDetailBuilder).to(
-    LearningWorldDetailBuilder
+    LearningWorldDetailBuilder,
   );
   bind<IPresentationBuilder>(
-    BUILDER_TYPES.ILearningWorldCompletionModalBuilder
+    BUILDER_TYPES.ILearningWorldCompletionModalBuilder,
   ).to(LearningWorldCompletionModalBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IMenuBarBuilder).to(SideBarBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldMenuButtonBuilder).to(
-    LearningWorldMenuButtonBuilder
+    LearningWorldMenuButtonBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarCameraBuilder).to(
-    AvatarCameraBuilder
+    AvatarCameraBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IExitModalBuilder).to(
-    ExitModalBuilder
+    ExitModalBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldSelectionBuilder).to(
-    LearningWorldSelectionBuilder
+    LearningWorldSelectionBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IAmbienceBuilder).to(
-    AmbienceBuilder
+    AmbienceBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IDecorationBuilder).to(
-    DecorationBuilder
+    DecorationBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IStandInDecorationBuilder).to(
-    StandInDecorationBuilder
+    StandInDecorationBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IAdaptivityElementBuilder).to(
-    AdaptivityElementBuilder
+    AdaptivityElementBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IBreakTimeNotificationBuilder).to(
-    BreakTimeNotificationBuilder
+    BreakTimeNotificationBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IStoryElementBuilder).to(
-    StoryElementBuilder
+    StoryElementBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IStoryNPCBuilder).to(
-    StoryNPCBuilder
+    StoryNPCBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ICookieModalBuilder).to(
-    CookieModalBuilder
+    CookieModalBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IReturnHomeModalBuilder).to(
-    ReturnHomeModalBuilder
+    ReturnHomeModalBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IControlsExplanationModalBuilder).to(
-    ControlsExplanationModalBuilder
+    ControlsExplanationModalBuilder,
   );
+  bind<IPresentationBuilder>(
+    BUILDER_TYPES.IBreakTimeNotificationOverviewBuilder,
+  ).to(BreakTimeNotificationOverviewBuilder);
 });
 
 export default BuilderDIContainer;

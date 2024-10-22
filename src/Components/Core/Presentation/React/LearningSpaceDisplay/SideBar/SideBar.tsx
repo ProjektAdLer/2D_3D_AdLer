@@ -11,6 +11,7 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import worldIcon from "../../../../../../Assets/icons/world-menu.svg";
 import spaceMenuIcon from "../../../../../../Assets/icons/space-menu.svg";
 import controlsIcon from "../../../../../../Assets/icons/controls.svg";
+import pauseIcon from "../../../../../../Assets/icons/pause.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
@@ -35,8 +36,6 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           ></img>
         </StyledButton>
       }
-      // initialOpen has to be true for it to render properly on intialization
-      // Depends on LoadSpace useCase within SpaceSceneDefinition
       initialOpen={false}
       useAsTriggerOnly={true}
     >
@@ -65,6 +64,15 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           </StyledButton>
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
             {translate("sidebar_learningSpaceMenu")}
+          </p>
+        </div>
+
+        <div className="flex flex-row items-center">
+          <StyledButton onClick={controller.onBreakTimeButtonClicked}>
+            <img src={pauseIcon} alt="" />
+          </StyledButton>
+          <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
+            {translate("sidebar_breakTime")}
           </p>
         </div>
 

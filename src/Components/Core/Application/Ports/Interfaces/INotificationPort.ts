@@ -2,7 +2,7 @@ import { IAbstractPort } from "./IAbstractPort";
 import INotificationAdapter, {
   NotificationType,
 } from "../NotificationPort/INotificationAdapter";
-import { BreakTimeNotificationType } from "src/Components/Core/Domain/Entities/Adaptivity/BreakTimeNotificationEntity";
+import IBreakTimeNotification from "../../../Domain/BreakTimeNotifications/IBreakTimeNotification";
 
 export default interface INotificationPort
   extends IAbstractPort<INotificationAdapter> {
@@ -11,5 +11,7 @@ export default interface INotificationPort
     logMessage: string,
     message: string,
   ): void;
-  onBreakTimeNotificationTriggered(type: BreakTimeNotificationType): void;
+  displayBreakTimeNotification(
+    notificationToDisplay: IBreakTimeNotification,
+  ): void;
 }

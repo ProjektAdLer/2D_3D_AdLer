@@ -3,8 +3,8 @@ import INotificationPort from "../Interfaces/INotificationPort";
 import INotificationAdapter from "./INotificationAdapter";
 import type { NotificationType } from "./INotificationAdapter";
 import AbstractPort from "../AbstractPort/AbstractPort";
-import { BreakTimeNotificationType } from "src/Components/Core/Domain/Entities/Adaptivity/BreakTimeNotificationEntity";
 import bind from "bind-decorator";
+import type IBreakTimeNotification from "../../../Domain/BreakTimeNotifications/IBreakTimeNotification";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ILoggerPort from "../Interfaces/ILoggerPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
@@ -27,6 +27,7 @@ export default class NotificationPort
   ): void {
     const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
     logger.log(type, logMessage);
+
     this.mappedAdapters.forEach((adapter) => {
       adapter.forEach((value) => {
         if (value.displayNotification) value.displayNotification(type, message);
@@ -35,11 +36,13 @@ export default class NotificationPort
   }
 
   @bind
-  onBreakTimeNotificationTriggered(type: BreakTimeNotificationType): void {
+  displayBreakTimeNotification(
+    notificationToDisplay: IBreakTimeNotification,
+  ): void {
     this.mappedAdapters.forEach((adapter) => {
       adapter.forEach((value) => {
         if (value.displayBreakTimeNotification)
-          value.displayBreakTimeNotification(type);
+          value.displayBreakTimeNotification(notificationToDisplay);
       });
     });
   }

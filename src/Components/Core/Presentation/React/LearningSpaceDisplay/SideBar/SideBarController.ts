@@ -3,6 +3,7 @@ import ISideBarController from "./ISideBarController";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IControlsExplanationModalPresenter from "~ReactComponents/GeneralComponents/ControlsExplanationModal/IControlsExplanationModalPresenter";
+import IBreakTimeNotificationOverviewPresenter from "~ReactComponents/GeneralComponents/BreakTimeNotificationOverview/IBreakTimeNotificationOverviewPresenter";
 
 export default class SideBarController implements ISideBarController {
   onMainMenuButtonClicked(): void {
@@ -19,7 +20,13 @@ export default class SideBarController implements ISideBarController {
 
   onControlsExplanationButtonClicked(): void {
     CoreDIContainer.get<IControlsExplanationModalPresenter>(
-      PRESENTATION_TYPES.IControlsExplanationModalPresenter
+      PRESENTATION_TYPES.IControlsExplanationModalPresenter,
+    ).openModal();
+  }
+
+  onBreakTimeButtonClicked(): void {
+    CoreDIContainer.get<IBreakTimeNotificationOverviewPresenter>(
+      PRESENTATION_TYPES.IBreakTimeNotificationOverviewPresenter,
     ).openModal();
   }
 }
