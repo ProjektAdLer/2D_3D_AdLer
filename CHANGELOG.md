@@ -18,6 +18,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
+- fixed incorrect display of story element text on space transition
+
 ### Deprecated
 
 ### Security

@@ -1,8 +1,10 @@
+import { LearningElementModel } from "./../../../../Domain/LearningElementModels/LearningElementModelTypes";
 import bind from "bind-decorator";
 import IStoryElementPresenter from "./IStoryElementPresenter";
 import StoryElementViewModel from "./StoryElementViewModel";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
+import Observable from "src/Lib/Observable";
 
 export default class StoryElementPresenter implements IStoryElementPresenter {
   constructor(private viewModel: StoryElementViewModel) {}
@@ -35,6 +37,17 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
 
   @bind
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
+    this.viewModel.introTexts.Value = [];
+    this.viewModel.outroTexts.Value = [];
+
+    this.viewModel.isOutroUnlocked.Value = false;
+    this.viewModel.isOutroCutsceneRunning.Value = false;
+    this.viewModel.isIntroCutsceneRunning.Value = false;
+
+    this.viewModel.introModelType = new Observable<LearningElementModel>();
+    this.viewModel.outroModelType = new Observable<LearningElementModel>();
+    this.viewModel.storyTypeToDisplay.Value = StoryElementType.None;
+
     this.viewModel.isOutroUnlocked.Value =
       learningSpaceTO.currentScore >= learningSpaceTO.requiredScore;
 
