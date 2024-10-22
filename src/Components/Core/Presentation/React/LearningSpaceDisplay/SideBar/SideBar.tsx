@@ -67,14 +67,14 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           </p>
         </div>
 
-        <div className="flex flex-row items-center">
+        {/* <div className="flex flex-row items-center">
           <StyledButton onClick={controller.onBreakTimeButtonClicked}>
             <img src={pauseIcon} alt="" />
           </StyledButton>
           <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
             {translate("sidebar_breakTime")}
           </p>
-        </div>
+        </div> */}
 
         <div className="flex flex-row items-center">
           <StyledButton onClick={controller.onControlsExplanationButtonClicked}>
