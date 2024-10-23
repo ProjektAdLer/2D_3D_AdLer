@@ -24,7 +24,7 @@ import {
 } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
 import StorySelection from "./StorySelection";
 import SingleStoryLayout from "./SingleStoryLayout";
-import { useEffect, useState } from "react";
+import { useCallback } from "react";
 import CloseButton from "~ReactComponents/ReactRelated/ReactBaseComponents/CloseButton";
 
 function getNPCImage(
@@ -63,31 +63,31 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   const [introModelType] = useObservable(viewModel?.introModelType);
   const [outroModelType] = useObservable(viewModel?.outroModelType);
 
-  const [titleText, setTitleText] = useState("");
-  const [contentTexts, setContentTexts] = useState("");
-
   const { t: translate } = useTranslation("learningSpace");
 
-  useEffect(() => {
-    if (!viewModel) return;
-
+  const getTitleText = useCallback(() => {
     switch (storyTypeToDisplay) {
       case StoryElementType.Intro:
-        setTitleText(translate("introStoryTitle").toString());
-        setContentTexts(viewModel.introTexts.Value.join("\n"));
-        break;
+        return translate("introStoryTitle").toString();
       case StoryElementType.Outro:
-        setTitleText(translate("outroStoryTitle").toString());
-        if (outroUnlocked)
-          setContentTexts(viewModel.outroTexts.Value.join("\n"));
-        else setContentTexts(translate("outroLockedText").toString());
-        break;
+        return translate("outroStoryTitle").toString();
       case StoryElementType.IntroOutro:
-        setTitleText(translate("introOutroStoryTitle").toString());
-        break;
+        return translate("introOutroStoryTitle").toString();
       case StoryElementType.None:
       default:
-        break;
+        return "";
+    }
+  }, [storyTypeToDisplay, translate]);
+
+  const getContentTexts = useCallback(() => {
+    switch (storyTypeToDisplay) {
+      case StoryElementType.Intro:
+        return viewModel.introTexts.Value;
+      case StoryElementType.Outro:
+        if (outroUnlocked) return viewModel.outroTexts.Value;
+        else return [translate("outroLockedText").toString()];
+      default:
+        return [];
     }
   }, [viewModel, storyTypeToDisplay, outroUnlocked, translate]);
 
@@ -133,7 +133,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
               />
 
               {/* Title */}
-              <div className="w-full lg:text-xl">{titleText}</div>
+              <div className="w-full lg:text-xl">{getTitleText()}</div>
 
               {/* Close Button (only in selection) */}
               {storyTypeToDisplay === StoryElementType.IntroOutro && (
@@ -158,7 +158,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
             {(storyTypeToDisplay === StoryElementType.Intro ||
               storyTypeToDisplay === StoryElementType.Outro) && (
               <SingleStoryLayout
-                contentTexts={contentTexts.split("\n")}
+                contentTexts={getContentTexts()}
                 controller={controller}
                 withBackButton={
                   !introCutsceneRunning &&
