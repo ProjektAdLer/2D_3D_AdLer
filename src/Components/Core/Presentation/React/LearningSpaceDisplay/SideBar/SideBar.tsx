@@ -11,7 +11,7 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import worldIcon from "../../../../../../Assets/icons/world-menu.svg";
 import spaceMenuIcon from "../../../../../../Assets/icons/space-menu.svg";
 import controlsIcon from "../../../../../../Assets/icons/controls.svg";
-import pauseIcon from "../../../../../../Assets/icons/pause.svg";
+// import pauseIcon from "../../../../../../Assets/icons/pause.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
