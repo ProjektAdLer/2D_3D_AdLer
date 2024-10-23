@@ -15,8 +15,10 @@ export default class LearningElementModalPresenter
     this.viewModel.isScoreable.Value = elementTO.isScoreable;
 
     if (this.viewModel.isScoreable.Value) {
+      this.viewModel.isVisible.Value = false;
+      this.viewModel.isOpen.Value = true;
       setTimeout(() => {
-        this.viewModel.isOpen.Value = true;
+        this.viewModel.isVisible.Value = true;
       }, this.viewModel.openDelay);
     } else {
       this.viewModel.isOpen.Value = true;

@@ -18,7 +18,7 @@ import { useTranslation } from "react-i18next";
 
 const createModalContent = (
   viewModel: LearningElementModalViewModel,
-  controller: ILearningElementModalController
+  controller: ILearningElementModalController,
 ) => {
   switch (viewModel.type.Value) {
     case LearningElementTypes.h5p:
@@ -60,6 +60,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
   const [isOpen] = useObservable<boolean>(viewModel?.isOpen);
   const [elementType] = useObservable<string>(viewModel?.type);
   const { t: translate } = useTranslation("learningElement");
+  const [isVisible] = useObservable<boolean>(viewModel?.isVisible);
 
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;
@@ -82,8 +83,9 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
       className={tailwindMerge(
         className,
         "flex flex-col justify-center gap-2 p-2 m-3 rounded-lg",
-        modalStyleByTypeMap[elementType as keyof typeof modalStyleByTypeMap]
+        modalStyleByTypeMap[elementType as keyof typeof modalStyleByTypeMap],
       )}
+      style={{ visibility: isVisible ? "visible" : "hidden" }}
     >
       {createModalContent(viewModel, controller)}
       {isPrimitive && (
