@@ -6,11 +6,9 @@ import UserLocationTO from "../../DataTransferObjects/UserLocationTO";
 import IGetUserLocationUseCase from "./IGetUserLocationUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
-import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import type { IInternalGetLoginStatusUseCase } from "../GetLoginStatus/IGetLoginStatusUseCase";
 import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import { ErrorTypes } from "src/Components/Core/Domain/Types/ErrorTypes";
+import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
 
 @injectable()
 export default class GetUserLocationUseCase implements IGetUserLocationUseCase {
@@ -19,8 +17,6 @@ export default class GetUserLocationUseCase implements IGetUserLocationUseCase {
     private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
-    @inject(USECASE_TYPES.IGetLoginStatusUseCase)
-    private getLoginStatusUseCase: IInternalGetLoginStatusUseCase,
     @inject(PORT_TYPES.INotificationPort)
     private notificationPort: INotificationPort,
   ) {}
@@ -32,7 +28,7 @@ export default class GetUserLocationUseCase implements IGetUserLocationUseCase {
       this.notificationPort.onNotificationTriggered(
         LogLevelTypes.ERROR,
         `GetUserLocationUseCase: User is not logged in!`,
-        ErrorTypes.USER_NOT_LOGGED_IN,
+        NotificationMessages.USER_NOT_LOGGED_IN,
       );
       return {
         worldID: undefined,
