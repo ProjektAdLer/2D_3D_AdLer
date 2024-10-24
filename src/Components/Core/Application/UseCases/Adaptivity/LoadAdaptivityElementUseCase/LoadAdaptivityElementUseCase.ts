@@ -14,6 +14,7 @@ import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IE
 import type IGetAdaptivityElementStatusUseCase from "../GetAdaptivityElementStatusUseCase/IGetAdaptivityElementStatusUseCase";
 import type INotificationPort from "../../../Ports/Interfaces/INotificationPort";
 import { ErrorTypes } from "src/Components/Core/Domain/Types/ErrorTypes";
+import { FlowGraphConsoleLogBlock } from "@babylonjs/core";
 
 @injectable()
 export default class LoadAdaptivityElementUseCase
@@ -59,14 +60,14 @@ export default class LoadAdaptivityElementUseCase
         `Could not find element with ID ${elementID} in world ${userLocation.worldID}`,
         ErrorTypes.ELEMENT_NOT_FOUND,
       );
-      Promise.resolve();
+      return Promise.resolve();
     } else if (elementEntity.length > 1) {
       this.notificationPort.onNotificationTriggered(
         LogLevelTypes.WARN,
         `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`,
         ErrorTypes.ELEMENT_NOT_UNIQUE,
       );
-      Promise.resolve();
+      return Promise.resolve();
     }
 
     let adaptivityTO = new AdaptivityElementProgressTO();

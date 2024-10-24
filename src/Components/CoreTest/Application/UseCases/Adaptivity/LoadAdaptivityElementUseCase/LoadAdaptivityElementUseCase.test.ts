@@ -12,7 +12,11 @@ import IGetUserLocationUseCase from "../../../../../Core/Application/UseCases/Ge
 import UserLocationTO from "../../../../../Core/Application/DataTransferObjects/UserLocationTO";
 import LearningElementEntity from "../../../../../Core/Domain/Entities/LearningElementEntity";
 import IGetAdaptivityElementStatusUseCase from "../../../../../Core/Application/UseCases/Adaptivity/GetAdaptivityElementStatusUseCase/IGetAdaptivityElementStatusUseCase";
+import Logger from "../../../../../Core/Adapters/Logger/Logger";
+import INotificationPort from "../../../../../Core/Application/Ports/Interfaces/INotificationPort";
 
+const loggerMock = mock<Logger>();
+const notificationPortMock = mock<INotificationPort>();
 const worldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
@@ -38,17 +42,21 @@ describe("LoadAdaptivityElementUseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      worldPortMock
+      worldPortMock,
     );
-    CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
-      entityContainerMock
-    );
+    CoreDIContainer.rebind<IEntityContainer>(
+      CORE_TYPES.IEntityContainer,
+    ).toConstantValue(entityContainerMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetAdaptivityElementStatusUseCase
+      USECASE_TYPES.IGetAdaptivityElementStatusUseCase,
     ).toConstantValue(getAdaptivityElementStatusUseCaseMock);
+    CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
+    CoreDIContainer.rebind<INotificationPort>(
+      PORT_TYPES.INotificationPort,
+    ).toConstantValue(notificationPortMock);
   });
 
   beforeEach(() => {
@@ -59,14 +67,58 @@ describe("LoadAdaptivityElementUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  test("should throw, if AdpativityElement is not found", async () => {
+  //ANF-ID: [EZZ0013]
+  test("should call notificationport if user is not in learningspace", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: undefined,
+      worldID: undefined,
+    } as UserLocationTO);
+    await systemUnderTest.executeAsync(0);
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledTimes(
+      1,
+    );
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      "WARN",
+      `LoadAdaptivityElementUseCase: User is not in a space!`,
+      "User is not in a space!",
+    );
+  });
+
+  test("should call NotificationPort if AdpativityElement is not found", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
       worldID: 1,
     } as UserLocationTO);
-    entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
-    await expect(systemUnderTest.executeAsync(0)).rejects.toThrow(
-      "Could not find element"
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
+
+    await systemUnderTest.executeAsync(0);
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledTimes(
+      1,
+    );
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      "WARN",
+      "Could not find element with ID 0 in world 1",
+      "Could not find element!",
+    );
+  });
+
+  test("should call NotificationPort if more than one AdaptivityElement is found", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      { id: 0 },
+      { id: 0 },
+    ]);
+    await systemUnderTest.executeAsync(0);
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledTimes(
+      1,
+    );
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      "WARN",
+      "Found more than one element with ID 0 in world 1",
+      "Found more than one element!",
     );
   });
 
@@ -86,10 +138,10 @@ describe("LoadAdaptivityElementUseCase", () => {
     entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
       (entityType, callback) => {
         filterResult = callback(
-          adaptivityElementEntityMock as AdaptivityElementEntity
+          adaptivityElementEntityMock as AdaptivityElementEntity,
         );
         return [adaptivityElementEntityMock];
-      }
+      },
     );
 
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
@@ -97,31 +149,6 @@ describe("LoadAdaptivityElementUseCase", () => {
     systemUnderTest.executeAsync(0);
 
     expect(filterResult).toBe(true);
-  });
-
-  //ANF-ID: [EZZ0013]
-  test("should throw, if user is not in learningspace", async () => {
-    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
-      spaceID: undefined,
-      worldID: undefined,
-    } as UserLocationTO);
-    await expect(systemUnderTest.executeAsync(0)).rejects.toThrow(
-      "User is not in a space!"
-    );
-  });
-
-  test("should throw, if more than one AdaptivityElement is found", async () => {
-    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
-      spaceID: 1,
-      worldID: 1,
-    } as UserLocationTO);
-    entityContainerMock.filterEntitiesOfType.mockReturnValue([
-      { id: 0 },
-      { id: 1 },
-    ]);
-    await expect(systemUnderTest.executeAsync(0)).rejects.toThrow(
-      "Found more than one element"
-    );
   });
 
   // ANF-ID: [EWE0013]
