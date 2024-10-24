@@ -12,6 +12,9 @@ import ILoadLearningElementUseCase from "./ILoadLearningElementUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
+import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
+import { ErrorTypes } from "src/Components/Core/Domain/Types/ErrorTypes";
+import { AxiosError } from "axios";
 
 @injectable()
 export default class LoadLearningElementUseCase
@@ -27,7 +30,9 @@ export default class LoadLearningElementUseCase
     @inject(USECASE_TYPES.IGetLearningElementSourceUseCase)
     private getElementSourceUseCase: IGetLearningElementSourceUseCase,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
-    private getUserLocationUseCase: IGetUserLocationUseCase
+    private getUserLocationUseCase: IGetUserLocationUseCase,
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort,
   ) {}
 
   async executeAsync(data: {
@@ -37,48 +42,61 @@ export default class LoadLearningElementUseCase
     // get the current user location
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
-      throw new Error(`User is not in a space!`);
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.WARN,
+        `LoadLearningElementUseCase: User is not in a space!`,
+        ErrorTypes.USER_NOT_IN_SPACE,
+      );
+      return Promise.resolve();
     }
 
     const elementID = data.elementID;
     const elementEntity =
       this.entityContainer.filterEntitiesOfType<LearningElementEntity>(
         LearningElementEntity,
-        (e) => e.id === elementID && e.parentWorldID === userLocation.worldID
+        (e) => e.id === elementID && e.parentWorldID === userLocation.worldID,
       );
 
     if (elementEntity.length === 0) {
-      this.logger.log(
-        LogLevelTypes.ERROR,
-        `Could not find element with ID ${elementID} in world ${userLocation.worldID}`
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.WARN,
+        `Could not find element with ID ${elementID} in world ${userLocation.worldID}`,
+        ErrorTypes.ELEMENT_NOT_FOUND,
       );
-      throw new Error(
-        `Could not find element with ID ${elementID} in world ${userLocation.worldID}`
-      );
+      return Promise.resolve();
     } else if (elementEntity.length > 1) {
-      this.logger.log(
-        LogLevelTypes.ERROR,
-        `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.WARN,
+        `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`,
+        ErrorTypes.ELEMENT_NOT_UNIQUE,
       );
-      throw new Error(
-        `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`
-      );
+      return Promise.resolve();
     }
     let elementTO = this.toTO(elementEntity[0]);
 
-    elementTO.filePath =
-      await this.getElementSourceUseCase.internalExecuteAsync({
-        elementID: elementID,
-        worldID: elementTO.parentWorldID,
-      });
+    try {
+      elementTO.filePath =
+        await this.getElementSourceUseCase.internalExecuteAsync({
+          elementID: elementID,
+          worldID: elementTO.parentWorldID,
+        });
 
-    elementTO.isScoreable = data.isScoreable;
+      elementTO.isScoreable = data.isScoreable;
 
-    this.logger.log(
-      LogLevelTypes.TRACE,
-      `Loaded element ${elementID} in world ${userLocation.worldID}.`
-    );
-    this.worldPort.onLearningElementLoaded(elementTO);
+      this.logger.log(
+        LogLevelTypes.TRACE,
+        `Loaded element ${elementID} in world ${userLocation.worldID}.`,
+      );
+      this.worldPort.onLearningElementLoaded(elementTO);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        this.notificationPort.onNotificationTriggered(
+          LogLevelTypes.WARN,
+          `LoadLearningElementUseCase: Axios encountered error: ${error.code}`,
+          ErrorTypes.BACKEND_ERROR,
+        );
+      }
+    }
 
     return Promise.resolve();
   }
