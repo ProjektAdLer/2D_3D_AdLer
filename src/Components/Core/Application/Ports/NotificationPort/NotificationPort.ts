@@ -23,14 +23,15 @@ export default class NotificationPort
   onNotificationTriggered(
     type: NotificationType,
     logMessage: string,
-    message: string,
+    notificationMessage: string,
   ): void {
     const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
     logger.log(type, logMessage);
 
     this.mappedAdapters.forEach((adapter) => {
       adapter.forEach((value) => {
-        if (value.displayNotification) value.displayNotification(type, message);
+        if (value.displayNotification)
+          value.displayNotification(type, notificationMessage);
       });
     });
   }

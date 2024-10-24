@@ -9,7 +9,7 @@ export default interface INotificationPort
   onNotificationTriggered(
     type: NotificationType,
     logMessage: string,
-    message: string,
+    notificationMessage: string,
   ): void;
   displayBreakTimeNotification(
     notificationToDisplay: IBreakTimeNotification,
