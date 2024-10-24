@@ -1,4 +1,3 @@
-import { ErrorTypes } from "./../../../../Core/Domain/Types/ErrorTypes";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
@@ -13,6 +12,7 @@ import UserLocationTO from "../../../../Core/Application/DataTransferObjects/Use
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import INotificationPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
+import { NotificationMessages } from "../../../../Core/Domain/Types/NotificationMessages";
 
 const worldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
@@ -102,7 +102,7 @@ describe("LoadLearningElementUseCase", () => {
     expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
       `Could not find element with ID 2 in world 1`,
-      ErrorTypes.ELEMENT_NOT_FOUND,
+      NotificationMessages.ELEMENT_NOT_FOUND,
     );
   });
 
@@ -125,7 +125,7 @@ describe("LoadLearningElementUseCase", () => {
     expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
       `Found more than one element with ID 1 in world 1`,
-      ErrorTypes.ELEMENT_NOT_UNIQUE,
+      NotificationMessages.ELEMENT_NOT_UNIQUE,
     );
   });
 
@@ -171,7 +171,7 @@ describe("LoadLearningElementUseCase", () => {
     expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
       `LoadLearningElementUseCase: User is not in a space!`,
-      ErrorTypes.USER_NOT_IN_SPACE,
+      NotificationMessages.USER_NOT_IN_SPACE,
     );
   });
 });
