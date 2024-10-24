@@ -88,9 +88,10 @@ export default class CalculateLearningWorldScoreUseCase
     // get the requested space
     const world = worlds.find((s) => s.id === worldID);
     if (!world) {
-      this.logger.log(
+      this.notificationPort.onNotificationTriggered(
         LogLevelTypes.ERROR,
         `CalculateLearningWorldScoreUseCase: Could not find world with id ${worldID}`,
+        NotificationMessages.WORLD_NOT_FOUND,
       );
       throw new Error(`Could not find world with id ${worldID}`);
     }

@@ -13,12 +13,14 @@ import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUs
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
 import LearningSpaceScoreTO from "../../../../Core/Application/DataTransferObjects/LearningSpaceScoreTO";
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
+import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
 
 const worldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const calculateSpaceScoreMock =
   mock<IInternalCalculateLearningSpaceScoreUseCase>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
+const loggerMock = mock<ILoggerPort>();
 
 const userLocationTO: UserLocationTO = {
   worldID: 1,
@@ -31,17 +33,18 @@ describe("Calculate Learning World Score UseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
-      entityContainerMock
+      entityContainerMock,
     );
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      worldPortMock
+      worldPortMock,
     );
     CoreDIContainer.rebind(
-      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase
+      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase,
     ).toConstantValue(calculateSpaceScoreMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
+    CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
   });
 
   afterAll(() => {
@@ -50,7 +53,7 @@ describe("Calculate Learning World Score UseCase", () => {
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(
-      CalculateLearningWorldScoreUseCase
+      CalculateLearningWorldScoreUseCase,
     );
   });
 
@@ -66,7 +69,7 @@ describe("Calculate Learning World Score UseCase", () => {
             },
           ],
         },
-      ])
+      ]),
     );
     calculateSpaceScoreMock.internalExecute.mockReturnValueOnce({
       currentScore: 10,
@@ -192,13 +195,17 @@ describe("Calculate Learning World Score UseCase", () => {
     }).toThrow();
   });
 
-  test("should throw an error if the user location doesn't contain a worldID", () => {
+  test("should call logger and return if the user location doesn't contain a worldID", () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce(
-      {} as UserLocationTO
+      {} as UserLocationTO,
     );
 
-    expect(() => {
-      systemUnderTest.execute();
-    }).toThrow();
+    systemUnderTest.execute();
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      "WARN",
+      "CalculateLearningWorldScoreUseCase: User is not in a world!",
+    );
+    expect(worldPortMock.onLearningWorldScored).not.toHaveBeenCalled();
   });
 });

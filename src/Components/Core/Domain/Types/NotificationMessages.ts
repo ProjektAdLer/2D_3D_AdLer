@@ -4,5 +4,5 @@ export enum NotificationMessages {
   ELEMENT_NOT_FOUND = "Could not find element!",
   ELEMENT_NOT_UNIQUE = "Found more than one element!",
   BACKEND_ERROR = "Backend encountered an error!",
-  WORLD_NOT_FOUND = "Could not find any worlds!",
+  WORLD_NOT_FOUND = "Could not find needed learning world data!",
 }
