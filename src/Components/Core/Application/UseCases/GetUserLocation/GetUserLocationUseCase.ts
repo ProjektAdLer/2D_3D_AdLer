@@ -8,6 +8,9 @@ import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type { IInternalGetLoginStatusUseCase } from "../GetLoginStatus/IGetLoginStatusUseCase";
+import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import { ErrorTypes } from "src/Components/Core/Domain/Types/ErrorTypes";
 
 @injectable()
 export default class GetUserLocationUseCase implements IGetUserLocationUseCase {
@@ -17,33 +20,38 @@ export default class GetUserLocationUseCase implements IGetUserLocationUseCase {
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.IGetLoginStatusUseCase)
-    private getLoginStatusUseCase: IInternalGetLoginStatusUseCase
+    private getLoginStatusUseCase: IInternalGetLoginStatusUseCase,
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort,
   ) {}
 
   execute(): UserLocationTO {
-    const loginStatus = this.getLoginStatusUseCase.internalExecute();
-
-    if (!loginStatus.isLoggedIn) {
-      this.logger.log(
-        LogLevelTypes.ERROR,
-        "GetUserLocationUseCase: User is not logged in, cannot get current location."
-      );
-      throw new Error("User is not logged in, cannot get current location");
-    }
-
     let userDataEntity =
       this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
-
+    if (!userDataEntity.isLoggedIn) {
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.ERROR,
+        `GetUserLocationUseCase: User is not logged in!`,
+        ErrorTypes.USER_NOT_LOGGED_IN,
+      );
+      return {
+        worldID: undefined,
+        spaceID: undefined,
+      };
+    }
     if (userDataEntity.currentWorldID === undefined) {
       this.logger.log(
-        LogLevelTypes.ERROR,
-        "GetUserLocationUseCase: User is not in a world, cannot get current location."
+        LogLevelTypes.WARN,
+        "GetUserLocationUseCase: User is not in a world while trying to get location.",
       );
-      throw new Error("User is not in a world, cannot get current location");
+      return {
+        worldID: undefined,
+        spaceID: undefined,
+      };
     }
     this.logger.log(
       LogLevelTypes.TRACE,
-      `GetUserLocationUseCase: User is in Location: World: ${userDataEntity.currentWorldID}, Space: ${userDataEntity.currentSpaceID}.`
+      `GetUserLocationUseCase: User is in Location: World: ${userDataEntity.currentWorldID}, Space: ${userDataEntity.currentSpaceID}.`,
     );
     return {
       worldID: userDataEntity.currentWorldID,

@@ -9,8 +9,6 @@ import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IE
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../../GetUserLocation/IGetUserLocationUseCase";
-import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import type INotificationPort from "../../../Ports/Interfaces/INotificationPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
 
@@ -27,8 +25,6 @@ export default class GetAdaptivityElementStatusUseCase
     private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
-    @inject(PORT_TYPES.INotificationPort)
-    private notificationPort: INotificationPort,
   ) {}
 
   async internalExecuteAsync(data: AdaptivityElementProgressTO): Promise<void> {

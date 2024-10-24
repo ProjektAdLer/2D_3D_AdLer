@@ -118,7 +118,7 @@ describe("LoadAdaptivityElementUseCase", () => {
     expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
       "WARN",
       "Found more than one element with ID 0 in world 1",
-      "Found more than one element!",
+      "Found more than one element when only one was expected!",
     );
   });
 

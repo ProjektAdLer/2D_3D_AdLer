@@ -5,8 +5,16 @@ import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityCon
 import { mock } from "jest-mock-extended";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
+import INotificationPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
+import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import Logger from "../../../../Core/Adapters/Logger/Logger";
+import { IInternalGetLoginStatusUseCase } from "../../../../Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
+import { get } from "http";
 
 const entityContainerMock = mock<IEntityContainer>();
+const notificationPortMock = mock<INotificationPort>();
+const getLoginStatusUseCaseMock = mock<IInternalGetLoginStatusUseCase>();
+const loggerMock = mock<Logger>();
 
 describe("SetUserLocationUseCase", () => {
   let systemUnderTest: GetUserLocationUseCase;
@@ -14,13 +22,20 @@ describe("SetUserLocationUseCase", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind<IEntityContainer>(
-      CORE_TYPES.IEntityContainer
+      CORE_TYPES.IEntityContainer,
     ).toConstantValue(entityContainerMock);
+    CoreDIContainer.rebind<INotificationPort>(
+      PORT_TYPES.INotificationPort,
+    ).toConstantValue(notificationPortMock);
+    CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
+    CoreDIContainer.rebind<IInternalGetLoginStatusUseCase>(
+      USECASE_TYPES.IGetLoginStatusUseCase,
+    ).toConstantValue(getLoginStatusUseCaseMock);
   });
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.get(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     );
   });
 
@@ -28,34 +43,42 @@ describe("SetUserLocationUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  test("throws error when no user entity is present on the container", () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValue([]);
+  test("calls notificationPort with Error if user is not logged in", () => {
+    let userDataEntity = {
+      isLoggedIn: false,
+      currentWorldID: undefined,
+      currentSpaceID: 1,
+    };
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
+    systemUnderTest.execute();
 
-    expect(() => systemUnderTest.execute()).toThrowError(
-      "User is not logged in, cannot get current location"
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledTimes(
+      1,
+    );
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      "ERROR",
+      `GetUserLocationUseCase: User is not logged in!`,
+      "User is not logged in!",
     );
   });
 
-  test("throws error when user entity is present but user is not logged in", () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValue([
-      {
-        isLoggedIn: false,
-      },
-    ]);
-
-    expect(() => systemUnderTest.execute()).toThrowError();
-  });
-
   // ANF-ID: [ELG0009]
-  test("throws error when world id is not set on the user entity", () => {
-    entityContainerMock.getEntitiesOfType.mockReturnValue([
-      {
-        isLoggedIn: true,
-        currentSpaceID: 1,
-      },
-    ]);
+  test("calls logger with a warning if world id is not set on the user entity", () => {
+    let userDataEntity = {
+      isLoggedIn: true,
+      currentWorldID: undefined,
+      currentSpaceID: 1,
+    };
 
-    expect(() => systemUnderTest.execute()).toThrowError();
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
+
+    systemUnderTest.execute();
+
+    expect(loggerMock.log).toHaveBeenCalledTimes(1);
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      "WARN",
+      "GetUserLocationUseCase: User is not in a world while trying to get location.",
+    );
   });
 
   test("returns current world and space id from the user entity", () => {
@@ -64,6 +87,10 @@ describe("SetUserLocationUseCase", () => {
       currentWorldID: 1,
       currentSpaceID: 1,
     };
+    getLoginStatusUseCaseMock.internalExecute.mockReturnValue({
+      userName: "test",
+      isLoggedIn: true,
+    });
     entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
 
     let result = systemUnderTest.execute();
