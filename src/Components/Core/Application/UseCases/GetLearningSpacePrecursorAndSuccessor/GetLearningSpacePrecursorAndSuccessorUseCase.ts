@@ -32,45 +32,50 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
     @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
     private calculateSpaceScore: IInternalCalculateLearningSpaceScoreUseCase,
     @inject(USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase)
-    private calculateSpaceAvailabilityUseCase: ICalculateLearningSpaceAvailabilityUseCase
+    private calculateSpaceAvailabilityUseCase: ICalculateLearningSpaceAvailabilityUseCase,
   ) {}
 
   execute(): LearningSpacePrecursorAndSuccessorTO {
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
-      throw new Error(`UserLocation is empty or incomplete!`);
+      this.logger.log(
+        LogLevelTypes.WARN,
+        `GetLearningSpacePrecursorAndSuccessorUseCase: User is not logged in!`,
+      );
+      return { precursorSpaces: [], successorSpaces: [] };
     }
-    // Load current world and space data
+    // Load current world data
     const worldEntity = this.entityContainer
       .getEntitiesOfType(LearningWorldEntity)
       .find((world) => world.id === userLocation.worldID);
     if (!worldEntity) {
       this.logger.log(
-        LogLevelTypes.ERROR,
-        `GetLearningSpacePrecursorAndSuccessorUseCase: World ${userLocation.worldID} not found!`
+        LogLevelTypes.WARN,
+        `GetLearningSpacePrecursorAndSuccessorUseCase: World ${userLocation.worldID} not found!`,
       );
-      throw new Error(`World ${userLocation.worldID} not found!`);
+      return { precursorSpaces: [], successorSpaces: [] };
     }
+    // Load current space data
     const currentSpace = worldEntity.spaces.find(
-      (space) => space.id === userLocation.spaceID
+      (space) => space.id === userLocation.spaceID,
     );
     if (!currentSpace) {
       this.logger.log(
-        LogLevelTypes.ERROR,
-        `GetLearningSpacePrecursorAndSuccessorUseCase: Space ${userLocation.spaceID} not found!`
+        LogLevelTypes.WARN,
+        `GetLearningSpacePrecursorAndSuccessorUseCase: Space ${userLocation.spaceID} not found!`,
       );
-      throw new Error(`Space ${userLocation.spaceID} not found!`);
+      return { precursorSpaces: [], successorSpaces: [] };
     }
     //Determine precursor room IDs
     const precursorSpaceIDs =
       LearningSpaceAvailabilityStringParser.parseToIdArray(
-        currentSpace.requirements
+        currentSpace.requirements,
       );
     //Load precursor rooms and push them into the precursorSpaces array
     let precursorSpaces: LearningSpaceTO[] = [];
     precursorSpaceIDs.forEach((id) => {
       const matchingSpaceEntity = worldEntity.spaces.find(
-        (space) => space.id === id
+        (space) => space.id === id,
       );
       if (matchingSpaceEntity) {
         let spaceTO = this.toTO(matchingSpaceEntity);
@@ -79,13 +84,13 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
     });
     precursorSpaces = this.fillSpaceWithScoringAndAvailabilityData(
       precursorSpaces,
-      worldEntity.id
+      worldEntity.id,
     );
     //Determine successorSpaces and push them into the successorSpaces array
     const successorSpaceEntities = worldEntity.spaces.filter((space) =>
       LearningSpaceAvailabilityStringParser.parseToIdArray(
-        space.requirements
-      ).includes(userLocation.spaceID!)
+        space.requirements,
+      ).includes(userLocation.spaceID!),
     );
     let successorSpaces: LearningSpaceTO[] = [];
     successorSpaceEntities.forEach((spaceEntity) => {
@@ -94,17 +99,16 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
     });
     successorSpaces = this.fillSpaceWithScoringAndAvailabilityData(
       successorSpaces,
-      worldEntity.id
+      worldEntity.id,
     );
     const returnValue = {
-      id: userLocation.spaceID,
       precursorSpaces: precursorSpaces,
       successorSpaces: successorSpaces,
     } as LearningSpacePrecursorAndSuccessorTO;
     this.worldPort.onLearningSpacePrecursorAndSuccessorLoaded(returnValue);
     this.logger.log(
       LogLevelTypes.TRACE,
-      `GetLearningSpacePrecursorAndSuccessorUseCase: Loaded precursor and successor spaces.`
+      `GetLearningSpacePrecursorAndSuccessorUseCase: Loaded precursor and successor spaces.`,
     );
     return returnValue;
   }
@@ -116,7 +120,7 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
   }
   private fillSpaceWithScoringAndAvailabilityData(
     spaces: LearningSpaceTO[],
-    worldID: ComponentID
+    worldID: ComponentID,
   ): LearningSpaceTO[] {
     spaces.forEach((spaceTO) => {
       const spaceScoreTO = this.calculateSpaceScore.internalExecute({

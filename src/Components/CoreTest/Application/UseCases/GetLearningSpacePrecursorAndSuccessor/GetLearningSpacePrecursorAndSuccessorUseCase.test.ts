@@ -22,22 +22,22 @@ describe("GetLearningSpacePrecursorAndSuccessorUseCase", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind<IEntityContainer>(
-      CORE_TYPES.IEntityContainer
+      CORE_TYPES.IEntityContainer,
     ).toConstantValue(entityContainerMock);
     CoreDIContainer.rebind<IGetUserLocationUseCase>(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
     CoreDIContainer.rebind<IInternalCalculateLearningSpaceScoreUseCase>(
-      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase
+      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase,
     ).toConstantValue(internalCalculateLearningSpaceScoreUseCaseMock);
     CoreDIContainer.rebind<ICalculateLearningSpaceAvailabilityUseCase>(
-      USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase
+      USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase,
     ).toConstantValue(calculateLearningSpaceAvailabilityUseCaseMock);
   });
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.get(
-      USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
+      USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase,
     );
   });
 
@@ -45,24 +45,24 @@ describe("GetLearningSpacePrecursorAndSuccessorUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  test("throws error when no world entity is present on the container", () => {
+  test("returns empty Arrays if no world entity is present on the container", () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({} as any);
 
-    expect(() => systemUnderTest.execute()).toThrowError(
-      "UserLocation is empty or incomplete!"
-    );
+    let result = systemUnderTest.execute();
+
+    expect(result).toMatchObject({ precursorSpaces: [], successorSpaces: [] });
   });
 
   //ANF-ID: [EZZ0013]
-  test("throws error when no space entity is present on the container", () => {
+  test("returns empty Arrays if no space entity is present on the container", () => {
     let worldID = 1;
     getUserLocationUseCaseMock.execute.mockReturnValue({ worldID } as any);
 
-    expect(() => systemUnderTest.execute()).toThrowError(
-      "UserLocation is empty or incomplete!"
-    );
+    let result = systemUnderTest.execute();
+
+    expect(result).toMatchObject({ precursorSpaces: [], successorSpaces: [] });
   });
-  test("throws error when no matching world entity is present in the container", () => {
+  test("returns empty Arrays if  no matching world entity is present in the container", () => {
     let worldID = 1;
     let spaceID = 1;
     getUserLocationUseCaseMock.execute.mockReturnValue({
@@ -73,9 +73,11 @@ describe("GetLearningSpacePrecursorAndSuccessorUseCase", () => {
       { name: "world", id: 2 },
     ]);
 
-    expect(() => systemUnderTest.execute()).toThrowError("World 1 not found!");
+    let result = systemUnderTest.execute();
+
+    expect(result).toMatchObject({ precursorSpaces: [], successorSpaces: [] });
   });
-  test("throws error when no matching space entity is present in the container", () => {
+  test("returns empty Arrays if no matching space entity is present in the container", () => {
     let worldID = 1;
     let spaceID = 1;
     getUserLocationUseCaseMock.execute.mockReturnValue({
@@ -86,7 +88,9 @@ describe("GetLearningSpacePrecursorAndSuccessorUseCase", () => {
       { name: "world", id: 1, spaces: [{ name: "space", id: 2 }] },
     ]);
 
-    expect(() => systemUnderTest.execute()).toThrowError("Space 1 not found!");
+    let result = systemUnderTest.execute();
+
+    expect(result).toMatchObject({ precursorSpaces: [], successorSpaces: [] });
   });
 
   // ANF-ID: [EWE0029]
@@ -137,18 +141,17 @@ describe("GetLearningSpacePrecursorAndSuccessorUseCase", () => {
         requiredScore: 1,
         currentScore: 1,
         maxScore: 1,
-      }
+      },
     );
     calculateLearningSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
       {
         requirementsString: "1",
         requirementsSyntaxTree: null,
         isAvailable: true,
-      }
+      },
     );
 
     let expected = {
-      id: 2,
       precursorSpaces: [
         {
           id: 1,
