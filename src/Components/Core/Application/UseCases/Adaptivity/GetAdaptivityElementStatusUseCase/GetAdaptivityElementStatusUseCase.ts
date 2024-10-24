@@ -9,6 +9,10 @@ import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IE
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../../GetUserLocation/IGetUserLocationUseCase";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import type INotificationPort from "../../../Ports/Interfaces/INotificationPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import { ErrorTypes } from "src/Components/Core/Domain/Types/ErrorTypes";
 
 @injectable()
 export default class GetAdaptivityElementStatusUseCase
@@ -22,7 +26,9 @@ export default class GetAdaptivityElementStatusUseCase
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
-    private getUserLocationUseCase: IGetUserLocationUseCase
+    private getUserLocationUseCase: IGetUserLocationUseCase,
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort,
   ) {}
 
   async internalExecuteAsync(data: AdaptivityElementProgressTO): Promise<void> {
@@ -32,7 +38,11 @@ export default class GetAdaptivityElementStatusUseCase
 
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
-      throw new Error(`User is not in a space!`);
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `GetAdaptivityElementStatusUseCase: User is not in a space!`,
+      );
+      throw new Error(ErrorTypes.USER_NOT_IN_SPACE);
     }
 
     const response =

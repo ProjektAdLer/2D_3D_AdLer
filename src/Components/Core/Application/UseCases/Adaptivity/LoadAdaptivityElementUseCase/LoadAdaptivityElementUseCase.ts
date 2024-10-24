@@ -12,6 +12,8 @@ import type IGetUserLocationUseCase from "../../GetUserLocation/IGetUserLocation
 import AdaptivityElementEntity from "src/Components/Core/Domain/Entities/Adaptivity/AdaptivityElementEntity";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import type IGetAdaptivityElementStatusUseCase from "../GetAdaptivityElementStatusUseCase/IGetAdaptivityElementStatusUseCase";
+import type INotificationPort from "../../../Ports/Interfaces/INotificationPort";
+import { ErrorTypes } from "src/Components/Core/Domain/Types/ErrorTypes";
 
 @injectable()
 export default class LoadAdaptivityElementUseCase
@@ -27,13 +29,20 @@ export default class LoadAdaptivityElementUseCase
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
     @inject(USECASE_TYPES.IGetAdaptivityElementStatusUseCase)
-    private getAdaptivityElementStatusUseCase: IGetAdaptivityElementStatusUseCase
+    private getAdaptivityElementStatusUseCase: IGetAdaptivityElementStatusUseCase,
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort,
   ) {}
 
   async executeAsync(elementID: ComponentID): Promise<void> {
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
-      throw new Error(`User is not in a space!`);
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.WARN,
+        `LoadAdaptivityElementUseCase: User is not in a space!`,
+        ErrorTypes.USER_NOT_IN_SPACE,
+      );
+      return Promise.resolve();
     }
 
     const elementEntity =
@@ -41,46 +50,59 @@ export default class LoadAdaptivityElementUseCase
         AdaptivityElementEntity,
         (e) =>
           e.element.id === elementID &&
-          e.element.parentWorldID === userLocation.worldID
+          e.element.parentWorldID === userLocation.worldID,
       );
 
     if (elementEntity.length === 0) {
-      this.logger.log(
-        LogLevelTypes.ERROR,
-        `Could not find element with ID ${elementID} in world ${userLocation.worldID}`
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.WARN,
+        `Could not find element with ID ${elementID} in world ${userLocation.worldID}`,
+        ErrorTypes.ELEMENT_NOT_FOUND,
       );
-      throw new Error(
-        `Could not find element with ID ${elementID} in world ${userLocation.worldID}`
-      );
+      Promise.resolve();
     } else if (elementEntity.length > 1) {
-      this.logger.log(
-        LogLevelTypes.ERROR,
-        `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.WARN,
+        `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`,
+        ErrorTypes.ELEMENT_NOT_UNIQUE,
       );
-      throw new Error(
-        `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`
-      );
+      Promise.resolve();
     }
 
     let adaptivityTO = new AdaptivityElementProgressTO();
     adaptivityTO = Object.assign(
       adaptivityTO,
-      structuredClone(elementEntity[0])
+      structuredClone(elementEntity[0]),
     );
     adaptivityTO.elementName = elementEntity[0].element.name;
     adaptivityTO.id = elementEntity[0].element.id;
     adaptivityTO.model = elementEntity[0].element.model;
 
-    await this.getAdaptivityElementStatusUseCase.internalExecuteAsync(
-      adaptivityTO
-    );
+    try {
+      await this.getAdaptivityElementStatusUseCase.internalExecuteAsync(
+        adaptivityTO,
+      );
 
-    this.worldPort.onAdaptivityElementLoaded(adaptivityTO);
+      this.worldPort.onAdaptivityElementLoaded(adaptivityTO);
 
-    this.logger.log(
-      LogLevelTypes.TRACE,
-      "LoadAdaptivityElementUsecase: Loaded."
-    );
+      this.logger.log(
+        LogLevelTypes.TRACE,
+        "LoadAdaptivityElementUsecase: Loaded.",
+      );
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        error.message === ErrorTypes.USER_NOT_IN_SPACE
+      ) {
+        this.notificationPort.onNotificationTriggered(
+          LogLevelTypes.WARN,
+          `LoadAdaptivityElementUseCase: User is not in a space!`,
+          ErrorTypes.USER_NOT_IN_SPACE,
+        );
+        throw error;
+      }
+    }
+
     return Promise.resolve();
   }
 }
