@@ -23,7 +23,7 @@ export default class NotificationPort
   onNotificationTriggered(
     type: NotificationType,
     logMessage: string,
-    notificationMessage: string,
+    notificationMessage: string, // TODO: change type to NotificationMessages
   ): void {
     const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
     logger.log(type, logMessage);

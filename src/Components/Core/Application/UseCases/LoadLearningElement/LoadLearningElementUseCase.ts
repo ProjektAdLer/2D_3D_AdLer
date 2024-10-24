@@ -13,7 +13,7 @@ import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
-import { ErrorTypes } from "src/Components/Core/Domain/Types/ErrorTypes";
+import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
 import { AxiosError } from "axios";
 
 @injectable()
@@ -45,7 +45,7 @@ export default class LoadLearningElementUseCase
       this.notificationPort.onNotificationTriggered(
         LogLevelTypes.WARN,
         `LoadLearningElementUseCase: User is not in a space!`,
-        ErrorTypes.USER_NOT_IN_SPACE,
+        NotificationMessages.USER_NOT_IN_SPACE,
       );
       return Promise.resolve();
     }
@@ -61,14 +61,14 @@ export default class LoadLearningElementUseCase
       this.notificationPort.onNotificationTriggered(
         LogLevelTypes.WARN,
         `Could not find element with ID ${elementID} in world ${userLocation.worldID}`,
-        ErrorTypes.ELEMENT_NOT_FOUND,
+        NotificationMessages.ELEMENT_NOT_FOUND,
       );
       return Promise.resolve();
     } else if (elementEntity.length > 1) {
       this.notificationPort.onNotificationTriggered(
         LogLevelTypes.WARN,
         `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`,
-        ErrorTypes.ELEMENT_NOT_UNIQUE,
+        NotificationMessages.ELEMENT_NOT_UNIQUE,
       );
       return Promise.resolve();
     }
@@ -93,7 +93,7 @@ export default class LoadLearningElementUseCase
         this.notificationPort.onNotificationTriggered(
           LogLevelTypes.WARN,
           `LoadLearningElementUseCase: Axios encountered error: ${error.code}`,
-          ErrorTypes.BACKEND_ERROR,
+          NotificationMessages.BACKEND_ERROR,
         );
       }
     }

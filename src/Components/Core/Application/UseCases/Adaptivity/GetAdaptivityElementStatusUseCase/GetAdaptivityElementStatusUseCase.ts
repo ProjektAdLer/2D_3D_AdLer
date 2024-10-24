@@ -12,7 +12,7 @@ import type IGetUserLocationUseCase from "../../GetUserLocation/IGetUserLocation
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type INotificationPort from "../../../Ports/Interfaces/INotificationPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
-import { ErrorTypes } from "src/Components/Core/Domain/Types/ErrorTypes";
+import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
 
 @injectable()
 export default class GetAdaptivityElementStatusUseCase
@@ -42,7 +42,7 @@ export default class GetAdaptivityElementStatusUseCase
         LogLevelTypes.ERROR,
         `GetAdaptivityElementStatusUseCase: User is not in a space!`,
       );
-      throw new Error(ErrorTypes.USER_NOT_IN_SPACE);
+      throw new Error(NotificationMessages.USER_NOT_IN_SPACE);
     }
 
     const response =

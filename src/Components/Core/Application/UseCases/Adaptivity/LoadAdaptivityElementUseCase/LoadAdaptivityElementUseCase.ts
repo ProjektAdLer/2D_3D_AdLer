@@ -13,7 +13,7 @@ import AdaptivityElementEntity from "src/Components/Core/Domain/Entities/Adaptiv
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import type IGetAdaptivityElementStatusUseCase from "../GetAdaptivityElementStatusUseCase/IGetAdaptivityElementStatusUseCase";
 import type INotificationPort from "../../../Ports/Interfaces/INotificationPort";
-import { ErrorTypes } from "src/Components/Core/Domain/Types/ErrorTypes";
+import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
 
 @injectable()
 export default class LoadAdaptivityElementUseCase
@@ -40,7 +40,7 @@ export default class LoadAdaptivityElementUseCase
       this.notificationPort.onNotificationTriggered(
         LogLevelTypes.WARN,
         `LoadAdaptivityElementUseCase: User is not in a space!`,
-        ErrorTypes.USER_NOT_IN_SPACE,
+        NotificationMessages.USER_NOT_IN_SPACE,
       );
       return Promise.resolve();
     }
@@ -57,14 +57,14 @@ export default class LoadAdaptivityElementUseCase
       this.notificationPort.onNotificationTriggered(
         LogLevelTypes.WARN,
         `Could not find element with ID ${elementID} in world ${userLocation.worldID}`,
-        ErrorTypes.ELEMENT_NOT_FOUND,
+        NotificationMessages.ELEMENT_NOT_FOUND,
       );
       return Promise.resolve();
     } else if (elementEntity.length > 1) {
       this.notificationPort.onNotificationTriggered(
         LogLevelTypes.WARN,
         `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`,
-        ErrorTypes.ELEMENT_NOT_UNIQUE,
+        NotificationMessages.ELEMENT_NOT_UNIQUE,
       );
       return Promise.resolve();
     }
@@ -92,12 +92,12 @@ export default class LoadAdaptivityElementUseCase
     } catch (error) {
       if (
         error instanceof Error &&
-        error.message === ErrorTypes.USER_NOT_IN_SPACE
+        error.message === NotificationMessages.USER_NOT_IN_SPACE
       ) {
         this.notificationPort.onNotificationTriggered(
           LogLevelTypes.WARN,
           `LoadAdaptivityElementUseCase: User is not in a space!`,
-          ErrorTypes.USER_NOT_IN_SPACE,
+          NotificationMessages.USER_NOT_IN_SPACE,
         );
         throw error;
       }

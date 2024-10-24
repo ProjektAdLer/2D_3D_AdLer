@@ -15,6 +15,9 @@ import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLe
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
+import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
+
 @injectable()
 export default class CalculateLearningWorldScoreUseCase
   implements ICalculateLearningWorldScoreUseCase
@@ -29,7 +32,9 @@ export default class CalculateLearningWorldScoreUseCase
     @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
     private calculateSpaceScoreUseCase: IInternalCalculateLearningSpaceScoreUseCase,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
-    private getUserLocationUseCase: IGetUserLocationUseCase
+    private getUserLocationUseCase: IGetUserLocationUseCase,
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort,
   ) {}
 
   internalExecute({
@@ -38,38 +43,44 @@ export default class CalculateLearningWorldScoreUseCase
     const result = this.calculateLearningWorldScore(worldID);
     this.logger.log(
       LogLevelTypes.TRACE,
-      `CalculateLearningWorldScoreUseCase: InternalExecute, WorldID: ${worldID}."`
+      `CalculateLearningWorldScoreUseCase: InternalExecute, WorldID: ${worldID}."`,
     );
     return result;
   }
+
   execute(): void {
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID) {
-      throw new Error(`User is not in a world!`);
+      this.logger.log(
+        LogLevelTypes.WARN,
+        `CalculateLearningWorldScoreUseCase: User is not in a world!`,
+      );
+      return;
     }
 
     const result = this.calculateLearningWorldScore(userLocation.worldID);
 
     this.logger.log(
       LogLevelTypes.TRACE,
-      `CalculateLearningWorldScoreUseCase: Execute, WorldID: ${userLocation.worldID}."`
+      `CalculateLearningWorldScoreUseCase: Execute, WorldID: ${userLocation.worldID}."`,
     );
     this.worldPort.onLearningWorldScored(result);
   }
 
   private calculateLearningWorldScore(
-    worldID: ComponentID
+    worldID: ComponentID,
   ): LearningWorldScoreTO {
     const worlds =
       this.entitiyContainer.filterEntitiesOfType<LearningWorldEntity>(
         LearningWorldEntity,
-        (e) => e.id === worldID
+        (e) => e.id === worldID,
       );
 
     if (worlds.length === 0) {
-      this.logger.log(
+      this.notificationPort.onNotificationTriggered(
         LogLevelTypes.ERROR,
-        `CalculateLearningWorldScoreUseCase: Could not find any worlds!`
+        `CalculateLearningWorldScoreUseCase: Could not find any worlds!`,
+        NotificationMessages.WORLD_NOT_FOUND,
       );
       throw new Error(`Could not find any worlds!`);
     }
@@ -79,7 +90,7 @@ export default class CalculateLearningWorldScoreUseCase
     if (!world) {
       this.logger.log(
         LogLevelTypes.ERROR,
-        `CalculateLearningWorldScoreUseCase: Could not find world with id ${worldID}`
+        `CalculateLearningWorldScoreUseCase: Could not find world with id ${worldID}`,
       );
       throw new Error(`Could not find world with id ${worldID}`);
     }
