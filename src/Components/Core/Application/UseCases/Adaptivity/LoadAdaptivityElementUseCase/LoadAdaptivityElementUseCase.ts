@@ -14,7 +14,6 @@ import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IE
 import type IGetAdaptivityElementStatusUseCase from "../GetAdaptivityElementStatusUseCase/IGetAdaptivityElementStatusUseCase";
 import type INotificationPort from "../../../Ports/Interfaces/INotificationPort";
 import { ErrorTypes } from "src/Components/Core/Domain/Types/ErrorTypes";
-import { FlowGraphConsoleLogBlock } from "@babylonjs/core";
 
 @injectable()
 export default class LoadAdaptivityElementUseCase
