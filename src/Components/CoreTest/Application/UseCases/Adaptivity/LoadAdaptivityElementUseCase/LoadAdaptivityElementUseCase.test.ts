@@ -1,3 +1,4 @@
+import { NotificationMessages } from "./../../../../../Core/Domain/Types/NotificationMessages";
 import AdaptivityElementEntity from "../../../../../Core/Domain/Entities/Adaptivity/AdaptivityElementEntity";
 import LoadAdaptivityElementUseCase from "../../../../../Core/Application/UseCases/Adaptivity/LoadAdaptivityElementUseCase/LoadAdaptivityElementUseCase";
 import { mock } from "jest-mock-extended";
@@ -14,6 +15,7 @@ import LearningElementEntity from "../../../../../Core/Domain/Entities/LearningE
 import IGetAdaptivityElementStatusUseCase from "../../../../../Core/Application/UseCases/Adaptivity/GetAdaptivityElementStatusUseCase/IGetAdaptivityElementStatusUseCase";
 import Logger from "../../../../../Core/Adapters/Logger/Logger";
 import INotificationPort from "../../../../../Core/Application/Ports/Interfaces/INotificationPort";
+import { AxiosError } from "axios";
 
 const loggerMock = mock<Logger>();
 const notificationPortMock = mock<INotificationPort>();
@@ -172,5 +174,30 @@ describe("LoadAdaptivityElementUseCase", () => {
 
     await systemUnderTest.executeAsync(0);
     expect(worldPortMock.onAdaptivityElementLoaded).toHaveBeenCalled();
+  });
+
+  test("catches exception of getAdaptivityElementStatusUseCase and throws error again", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      {
+        id: 0,
+        element: learningElement,
+        introText: "",
+        shuffleTask: false,
+        tasks: [],
+        parentWorldID: 1,
+      } as AdaptivityElementEntity,
+    ]);
+
+    getAdaptivityElementStatusUseCaseMock.internalExecuteAsync.mockRejectedValue(
+      new Error(NotificationMessages.USER_NOT_IN_SPACE),
+    );
+
+    await expect(systemUnderTest.executeAsync(0)).rejects.toThrow(
+      NotificationMessages.USER_NOT_IN_SPACE,
+    );
   });
 });
