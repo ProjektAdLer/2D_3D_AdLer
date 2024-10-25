@@ -13,6 +13,7 @@ import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/IL
 import INotificationPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 import { NotificationMessages } from "../../../../Core/Domain/Types/NotificationMessages";
+import { AxiosError } from "axios";
 
 const worldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
@@ -65,7 +66,9 @@ describe("LoadLearningElementUseCase", () => {
 
     systemUnderTest.executeAsync({ elementID: 1, isScoreable: true });
 
-    expect(getElementSourceUseCaseMock.internalExecuteAsync).toBeCalledTimes(1);
+    expect(
+      getElementSourceUseCaseMock.internalExecuteAsync,
+    ).toHaveBeenCalledTimes(1);
   });
 
   test("calls the port with the TO", async () => {
@@ -172,6 +175,44 @@ describe("LoadLearningElementUseCase", () => {
       LogLevelTypes.WARN,
       `LoadLearningElementUseCase: User is not in a space!`,
       NotificationMessages.USER_NOT_IN_SPACE,
+    );
+  });
+
+  test("should catch exception if getElementSourceUseCase throws error", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
+    let filterReturn: boolean;
+    entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
+      <T>(
+        entityType: ConstructorReference<T>,
+        filter: (entity: T) => boolean,
+      ) => {
+        filterReturn = filter(new entityType());
+        return [
+          {
+            elements: [],
+          },
+        ];
+      },
+    );
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      {
+        worldID: 1,
+      },
+    ]);
+
+    let error = new AxiosError();
+    error.code = "error";
+
+    getElementSourceUseCaseMock.internalExecuteAsync.mockRejectedValue(error);
+    await systemUnderTest.executeAsync({ elementID: 1, isScoreable: true });
+
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `LoadLearningElementUseCase: Axios encountered error: error`,
+      NotificationMessages.BACKEND_ERROR,
     );
   });
 });
