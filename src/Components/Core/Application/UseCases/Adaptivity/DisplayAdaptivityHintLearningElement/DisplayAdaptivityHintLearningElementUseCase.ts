@@ -14,6 +14,10 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILearningWorldPort from "../../../Ports/Interfaces/ILearningWorldPort";
 import AdaptivityElementHintTO from "../../../DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
 import { AdaptivityElementActionTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
+import { AxiosError } from "axios";
+import type INotificationPort from "../../../Ports/Interfaces/INotificationPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
 
 @injectable()
 export default class DisplayAdaptivityHintLearningElementUseCase
@@ -31,14 +35,21 @@ export default class DisplayAdaptivityHintLearningElementUseCase
     @inject(USECASE_TYPES.ILoadLearningElementUseCase)
     private loadLearningElementUseCase: ILoadLearningElementUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
-    private worldPort: ILearningWorldPort
+    private worldPort: ILearningWorldPort,
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort,
   ) {}
 
   async executeAsync(elementID: ComponentID): Promise<void> {
     const location = this.getUserLocationUseCase.execute();
 
     if (!location.spaceID || !location.worldID) {
-      throw new Error(`User not in a space!`);
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.WARN,
+        `LoadAdaptivityElementUseCase: User is not in a space!`,
+        NotificationMessages.USER_NOT_IN_SPACE,
+      );
+      return Promise.resolve();
     }
 
     // get spaces of current learning world
@@ -46,23 +57,31 @@ export default class DisplayAdaptivityHintLearningElementUseCase
       LearningSpaceEntity,
       (entity: LearningSpaceEntity) => {
         return entity.parentWorldID === location.worldID;
-      }
+      },
     );
 
     if (spaces.length === 0) {
-      throw new Error(
-        "Could not find space for currently active learning world."
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.WARN,
+        `LoadAdaptivityElementUseCase: Could not find space for currently active learning world!`,
+        NotificationMessages.ELEMENT_NOT_FOUND,
       );
+      return Promise.resolve();
     }
 
     // get learning element with given id in current learning world
     const elements = this.entityContainer.filterEntitiesOfType(
       LearningElementEntity,
-      (e) => e.id === elementID && e.parentWorldID === location.worldID
+      (e) => e.id === elementID && e.parentWorldID === location.worldID,
     );
 
     if (elements.length === 0) {
-      throw new Error("Could not find referenced learning element.");
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.WARN,
+        `Could not find referenced element with ID ${elementID} in space ${spaces[0].id}`,
+        NotificationMessages.ELEMENT_NOT_FOUND,
+      );
+      return Promise.resolve();
     }
 
     // check if element is in current space
@@ -72,10 +91,20 @@ export default class DisplayAdaptivityHintLearningElementUseCase
 
     // element is in space
     if (isInCurrentSpace) {
-      await this.loadLearningElementUseCase.executeAsync({
-        elementID: elementID,
-        isScoreable: true,
-      });
+      try {
+        await this.loadLearningElementUseCase.executeAsync({
+          elementID: elementID,
+          isScoreable: true,
+        });
+      } catch (error) {
+        if (error instanceof AxiosError) {
+          this.notificationPort.onNotificationTriggered(
+            LogLevelTypes.WARN,
+            `LoadLearningElementUseCase: Backend encountered error: ${error.code}`,
+            NotificationMessages.BACKEND_ERROR,
+          );
+        }
+      }
     } else {
       const destinationSpace = spaces.find((space) => {
         return space.elements?.find((element) => {
@@ -84,7 +113,12 @@ export default class DisplayAdaptivityHintLearningElementUseCase
       });
 
       if (destinationSpace === undefined) {
-        throw new Error("No space contains referenced learning element");
+        this.notificationPort.onNotificationTriggered(
+          LogLevelTypes.WARN,
+          `No space contains referenced learning element with ID ${elementID}`,
+          NotificationMessages.ELEMENT_NOT_FOUND,
+        );
+        return Promise.resolve();
       }
 
       // check if space is available
@@ -95,10 +129,20 @@ export default class DisplayAdaptivityHintLearningElementUseCase
         });
 
       if (spaceAvailability.isAvailable) {
-        await this.loadLearningElementUseCase.executeAsync({
-          elementID: elementID,
-          isScoreable: false,
-        });
+        try {
+          await this.loadLearningElementUseCase.executeAsync({
+            elementID: elementID,
+            isScoreable: false,
+          });
+        } catch (error) {
+          if (error instanceof AxiosError) {
+            this.notificationPort.onNotificationTriggered(
+              LogLevelTypes.WARN,
+              `LoadLearningElementUseCase: Backend encountered error: ${error.code}`,
+              NotificationMessages.BACKEND_ERROR,
+            );
+          }
+        }
       } else {
         // tell player where to find learning element
         this.worldPort.onAdaptivityElementUserHintInformed({

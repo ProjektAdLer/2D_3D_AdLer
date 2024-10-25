@@ -16,6 +16,10 @@ import ICalculateLearningSpaceAvailabilityUseCase from "../../../../../Core/Appl
 import LearningSpaceAvailabilityTO from "../../../../../Core/Application/DataTransferObjects/LearningSpaceAvailabilityTO";
 import ILoadLearningElementUseCase from "../../../../../Core/Application/UseCases/LoadLearningElement/ILoadLearningElementUseCase";
 import { LearningElementModelTypeEnums } from "../../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
+import { AxiosError } from "axios";
+import INotificationPort from "../../../../../Core/Application/Ports/Interfaces/INotificationPort";
+import { LogLevelTypes } from "../../../../../Core/Domain/Types/LogLevelTypes";
+import { NotificationMessages } from "../../../../../Core/Domain/Types/NotificationMessages";
 
 const entityContainer = mock<IEntityContainer>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
@@ -23,6 +27,7 @@ const wordlPortMock = mock<ILearningWorldPort>();
 const calculateLearingSpaceAvailabilityUseCaseMock =
   mock<ICalculateLearningSpaceAvailabilityUseCase>();
 const loadLearningElementUseCaseMock = mock<ILoadLearningElementUseCase>();
+const notificationPortMock = mock<INotificationPort>();
 
 describe("DisplayLearningElementUseCase", () => {
   let systemUnderTest: DisplayLearningElementUseCase;
@@ -31,24 +36,28 @@ describe("DisplayLearningElementUseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
-      entityContainer
+      entityContainer,
     );
 
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
 
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      wordlPortMock
+      wordlPortMock,
     );
 
     CoreDIContainer.rebind(
-      USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase
+      USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase,
     ).toConstantValue(calculateLearingSpaceAvailabilityUseCaseMock);
 
     CoreDIContainer.rebind(
-      USECASE_TYPES.ILoadLearningElementUseCase
+      USECASE_TYPES.ILoadLearningElementUseCase,
     ).toConstantValue(loadLearningElementUseCaseMock);
+
+    CoreDIContainer.rebind(PORT_TYPES.INotificationPort).toConstantValue(
+      notificationPortMock,
+    );
   });
 
   afterAll(() => {
@@ -60,14 +69,17 @@ describe("DisplayLearningElementUseCase", () => {
   });
 
   //ANF-ID: [EZZ0013]
-  test("should throw, if user is not in space", async () => {
+  test("calls notificationport, if user is not in space", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: undefined,
       spaceID: undefined,
     } as UserLocationTO);
 
-    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
-      `User not in a space!`
+    systemUnderTest.executeAsync(1);
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `LoadAdaptivityElementUseCase: User is not in a space!`,
+      NotificationMessages.USER_NOT_IN_SPACE,
     );
 
     getUserLocationUseCaseMock.execute.mockReturnValue({
@@ -75,8 +87,11 @@ describe("DisplayLearningElementUseCase", () => {
       spaceID: undefined,
     } as UserLocationTO);
 
-    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
-      `User not in a space!`
+    systemUnderTest.executeAsync(1);
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `LoadAdaptivityElementUseCase: User is not in a space!`,
+      NotificationMessages.USER_NOT_IN_SPACE,
     );
 
     getUserLocationUseCaseMock.execute.mockReturnValue({
@@ -84,12 +99,15 @@ describe("DisplayLearningElementUseCase", () => {
       spaceID: 1,
     } as UserLocationTO);
 
-    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
-      `User not in a space!`
+    systemUnderTest.executeAsync(1);
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `LoadAdaptivityElementUseCase: User is not in a space!`,
+      NotificationMessages.USER_NOT_IN_SPACE,
     );
   });
 
-  test("should throw, if no space space is found", async () => {
+  test("calls notificationport, if no space is found", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
       spaceID: 1,
@@ -97,12 +115,16 @@ describe("DisplayLearningElementUseCase", () => {
 
     entityContainer.filterEntitiesOfType.mockReturnValue([]);
 
-    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
-      `Could not find space for currently active learning world.`
+    systemUnderTest.executeAsync(1);
+
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `LoadAdaptivityElementUseCase: Could not find space for currently active learning world!`,
+      NotificationMessages.ELEMENT_NOT_FOUND,
     );
   });
 
-  test("should throw, if no element is found", async () => {
+  test("calls notificationport, if no element is found", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
       spaceID: 1,
@@ -114,12 +136,16 @@ describe("DisplayLearningElementUseCase", () => {
 
     entityContainer.filterEntitiesOfType.mockReturnValueOnce([]);
 
-    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
-      "Could not find referenced learning element."
+    systemUnderTest.executeAsync(1);
+
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `Could not find referenced element with ID 1 in space 0`,
+      NotificationMessages.ELEMENT_NOT_FOUND,
     );
   });
 
-  test("should throw, if no space has referenced element", async () => {
+  test("calls notificationport, if no space has referenced element", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValue({
       worldID: 1,
       spaceID: 1,
@@ -133,8 +159,12 @@ describe("DisplayLearningElementUseCase", () => {
       { id: 0, elements: [{ id: 1 }] } as LearningSpaceEntity,
     ]);
 
-    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
-      "No space contains referenced learning element"
+    systemUnderTest.executeAsync(1);
+
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `No space contains referenced learning element with ID 1`,
+      NotificationMessages.ELEMENT_NOT_FOUND,
     );
   });
 
@@ -153,7 +183,7 @@ describe("DisplayLearningElementUseCase", () => {
       (mock, callback) => {
         filterResult = callback(learningSpaceEntityMock);
         return [learningSpaceEntityMock];
-      }
+      },
     );
 
     entityContainer.filterEntitiesOfType.mockReturnValueOnce([]);
@@ -184,10 +214,10 @@ describe("DisplayLearningElementUseCase", () => {
       (mock, callback) => {
         filterResult = callback(learningElementEntityMock);
         return [learningElementEntityMock];
-      }
+      },
     );
     calculateLearingSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
-      { isAvailable: true } as LearningSpaceAvailabilityTO
+      { isAvailable: true } as LearningSpaceAvailabilityTO,
     );
     await systemUnderTest.executeAsync(42);
     expect(filterResult).toBe(true);
@@ -215,7 +245,7 @@ describe("DisplayLearningElementUseCase", () => {
     await systemUnderTest.executeAsync(42);
 
     expect(
-      wordlPortMock.onAdaptivityElementUserHintInformed
+      wordlPortMock.onAdaptivityElementUserHintInformed,
     ).not.toHaveBeenCalled();
 
     expect(loadLearningElementUseCaseMock.executeAsync).toHaveBeenCalledWith({
@@ -247,17 +277,17 @@ describe("DisplayLearningElementUseCase", () => {
     calculateLearingSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
       {
         isAvailable: true,
-      } as LearningSpaceAvailabilityTO
+      } as LearningSpaceAvailabilityTO,
     );
 
     await systemUnderTest.executeAsync(42);
 
     expect(
-      wordlPortMock.onAdaptivityElementUserHintInformed
+      wordlPortMock.onAdaptivityElementUserHintInformed,
     ).not.toHaveBeenCalled();
 
     expect(
-      calculateLearingSpaceAvailabilityUseCaseMock.internalExecute
+      calculateLearingSpaceAvailabilityUseCaseMock.internalExecute,
     ).toHaveBeenCalled();
 
     expect(loadLearningElementUseCaseMock.executeAsync).toHaveBeenCalledWith({
@@ -284,13 +314,13 @@ describe("DisplayLearningElementUseCase", () => {
     calculateLearingSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
       {
         isAvailable: false,
-      } as LearningSpaceAvailabilityTO
+      } as LearningSpaceAvailabilityTO,
     );
 
     await systemUnderTest.executeAsync(1);
 
     expect(
-      wordlPortMock.onAdaptivityElementUserHintInformed
+      wordlPortMock.onAdaptivityElementUserHintInformed,
     ).toHaveBeenCalledWith({
       hintID: -1,
       showOnIsWrong: true,
@@ -300,5 +330,73 @@ describe("DisplayLearningElementUseCase", () => {
           "Der Hinweis für diese Frage ist das Lernelement `TestLernelement` im Lernraum `Testraum`",
       },
     });
+  });
+
+  test("should catch error if loadLearningElementUseCase throws exception if learningelement is in current space", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: 2,
+    } as UserLocationTO);
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([
+      {
+        id: 2,
+        elements: [
+          { id: 42 } as LearningElementEntity,
+        ] as LearningElementEntity[],
+      } as LearningSpaceEntity,
+    ]);
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([
+      { id: 42, name: "test" } as LearningElementEntity,
+    ]);
+
+    let error = new AxiosError();
+    error.code = "error";
+    loadLearningElementUseCaseMock.executeAsync.mockRejectedValue(error);
+    await systemUnderTest.executeAsync(42);
+
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `LoadLearningElementUseCase: Backend encountered error: error`,
+      NotificationMessages.BACKEND_ERROR,
+    );
+  });
+
+  test("should catch error if loadLearningElementUseCase throws exception if learningelement is in another space", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: 2,
+    } as UserLocationTO);
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([
+      {
+        id: 10,
+        elements: [
+          { id: 42 } as LearningElementEntity,
+        ] as LearningElementEntity[],
+      } as LearningSpaceEntity,
+    ]);
+
+    entityContainer.filterEntitiesOfType.mockReturnValueOnce([
+      { id: 42, name: "test" } as LearningElementEntity,
+    ]);
+
+    calculateLearingSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
+      {
+        isAvailable: true,
+      } as LearningSpaceAvailabilityTO,
+    );
+
+    let error = new AxiosError();
+    error.code = "error";
+    loadLearningElementUseCaseMock.executeAsync.mockRejectedValue(error);
+    await systemUnderTest.executeAsync(42);
+
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `LoadLearningElementUseCase: Backend encountered error: error`,
+      NotificationMessages.BACKEND_ERROR,
+    );
   });
 });
