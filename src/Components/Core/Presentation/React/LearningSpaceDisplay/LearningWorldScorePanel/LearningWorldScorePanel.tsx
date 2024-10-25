@@ -13,6 +13,9 @@ import worldIcon from "../../../../../../Assets/icons/world.svg";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import ICalculateLearningWorldScoreUseCase from "src/Components/Core/Application/UseCases/CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
 import CoreDIContainer from "src/Components/Core/DependencyInjection/CoreDIContainer";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
 
 interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -38,7 +41,14 @@ export default function LearningWorldScorePanel({
         USECASE_TYPES.ICalculateLearningWorldScoreUseCase,
       );
 
-    calculateWorldScore.execute();
+    try {
+      calculateWorldScore.execute();
+    } catch (e) {
+      CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger).log(
+        LogLevelTypes.ERROR,
+        `LearningWorldScorePanel: Error while calculating world score. Error: ${e}`,
+      );
+    }
   }, []);
 
   if (!viewModel) return null;
