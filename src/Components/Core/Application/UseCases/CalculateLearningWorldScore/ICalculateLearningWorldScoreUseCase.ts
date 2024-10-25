@@ -5,6 +5,7 @@ import LearningWorldScoreTO from "../../DataTransferObjects/LearningWorldScoreTO
 
 export default interface ICalculateLearningWorldScoreUseCase
   extends ISynchronousUsecase<void, void> {}
+
 export interface InternalCalculateLearningWorldScoreUseCaseParams {
   worldID: ComponentID;
 }

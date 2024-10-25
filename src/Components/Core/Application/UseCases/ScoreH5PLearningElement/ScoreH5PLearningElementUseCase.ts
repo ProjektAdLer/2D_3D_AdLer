@@ -33,7 +33,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
     @inject(USECASE_TYPES.ICalculateLearningWorldScoreUseCase)
     private calculateWorldScoreUseCase: IInternalCalculateLearningWorldScoreUseCase,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
-    private getUserLocationUseCase: IGetUserLocationUseCase
+    private getUserLocationUseCase: IGetUserLocationUseCase,
   ) {}
 
   async executeAsync(data: {
@@ -53,7 +53,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
     if (!userLocation.worldID || !userLocation.spaceID) {
       this.logger.log(
         LogLevelTypes.ERROR,
-        `ScoreH5PLearningElementUseCase: User is not in a space!`
+        `ScoreH5PLearningElementUseCase: User is not in a space!`,
       );
       throw new Error(`User is not in a space!`);
     }
@@ -77,7 +77,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
               entity.id === data.elementID &&
               entity.parentWorldID === userLocation.worldID
             );
-          }
+          },
         );
 
       if (elements.length === 0)
@@ -91,7 +91,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
       const space: LearningSpaceEntity =
         this.entityContainer.filterEntitiesOfType<LearningSpaceEntity>(
           LearningSpaceEntity,
-          (space) => space?.id === userLocation.spaceID
+          (space) => space?.id === userLocation.spaceID,
         )[0];
       if (!space) {
         return this.rejectWithWarning("Space with given element not found!");
@@ -101,9 +101,20 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
       if (!element.hasScored) {
         element.hasScored = true;
 
-        const newWorldScore = this.calculateWorldScoreUseCase.internalExecute({
-          worldID: userLocation.worldID,
-        });
+        try {
+          const newWorldScore = this.calculateWorldScoreUseCase.internalExecute(
+            {
+              worldID: userLocation.worldID,
+            },
+          );
+          this.worldPort.onLearningWorldScored(newWorldScore);
+        } catch (e) {
+          this.logger.log(
+            LogLevelTypes.ERROR,
+            `ScoreH5PLearningElementUseCase: Error calculating new world score: ${e}`,
+          );
+        }
+
         const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
           worldID: userLocation.worldID,
           spaceID: userLocation.spaceID,
@@ -111,7 +122,6 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
 
         this.worldPort.onLearningElementScored(true, data.elementID);
         this.worldPort.onLearningSpaceScored(newSpaceScore);
-        this.worldPort.onLearningWorldScored(newWorldScore);
       }
     }
 
@@ -121,7 +131,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
   private rejectWithWarning(message: string): Promise<boolean> {
     this.logger.log(
       LogLevelTypes.WARN,
-      "ScoreH5PLearningElementUseCase: " + message
+      "ScoreH5PLearningElementUseCase: " + message,
     );
     return Promise.reject(message);
   }

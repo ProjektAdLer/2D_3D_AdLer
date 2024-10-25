@@ -31,8 +31,6 @@ export default class ScoreAdaptivityElementUseCase
     private calculateSpaceScoreUseCase: IInternalCalculateLearningSpaceScoreUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
-    @inject(USECASE_TYPES.IGetLoginStatusUseCase)
-    private getLoginStatusUseCase: IInternalGetLoginStatusUseCase
   ) {}
 
   internalExecute(elementID: ComponentID): void {
@@ -40,7 +38,7 @@ export default class ScoreAdaptivityElementUseCase
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
       this.warn(
-        "User is not in a world or space! Trying to score element " + elementID
+        "User is not in a world or space! Trying to score element " + elementID,
       );
       return;
     }
@@ -50,7 +48,7 @@ export default class ScoreAdaptivityElementUseCase
         LearningElementEntity,
         (entity) =>
           entity.parentWorldID === userLocation.worldID &&
-          entity.id === elementID
+          entity.id === elementID,
       );
 
     if (elements.length === 0) {
@@ -67,9 +65,17 @@ export default class ScoreAdaptivityElementUseCase
 
     elements[0].hasScored = true;
 
-    const newWorldScore = this.calculateWorldScoreUseCase.internalExecute({
-      worldID: userLocation.worldID,
-    });
+    try {
+      const newWorldScore = this.calculateWorldScoreUseCase.internalExecute({
+        worldID: userLocation.worldID,
+      });
+      this.worldPort.onLearningWorldScored(newWorldScore);
+    } catch (e) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `ScoreAdaptivityElementUseCase: Error calculating new world score: ${e}`,
+      );
+    }
 
     const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
       worldID: userLocation.worldID,
@@ -78,7 +84,6 @@ export default class ScoreAdaptivityElementUseCase
 
     this.worldPort.onLearningElementScored(true, elementID);
     this.worldPort.onLearningSpaceScored(newSpaceScore);
-    this.worldPort.onLearningWorldScored(newWorldScore);
   }
 
   private warn(message: string, id?: ComponentID): void {
@@ -86,7 +91,7 @@ export default class ScoreAdaptivityElementUseCase
       LogLevelTypes.WARN,
       `ScoreLearningElementUseCase: ` +
         message +
-        `${id ? " ElementID: " + id : ""}`
+        `${id ? " ElementID: " + id : ""}`,
     );
   }
 }

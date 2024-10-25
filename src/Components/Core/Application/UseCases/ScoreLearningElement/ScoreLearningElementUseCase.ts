@@ -33,7 +33,7 @@ export default class ScoreLearningElementUseCase
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
-    private getUserLocationUseCase: IGetUserLocationUseCase
+    private getUserLocationUseCase: IGetUserLocationUseCase,
   ) {}
 
   async executeAsync(elementID: ComponentID): Promise<void> {
@@ -45,7 +45,7 @@ export default class ScoreLearningElementUseCase
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
       return this.rejectWithWarning(
-        "User is not in a space! Trying to score elememt " + elementID
+        "User is not in a space! Trying to score elememt " + elementID,
       );
     }
 
@@ -54,12 +54,12 @@ export default class ScoreLearningElementUseCase
       await this.backendAdapter.scoreElement(
         userEntity.userToken,
         elementID,
-        userLocation.worldID
+        userLocation.worldID,
       );
     } catch (e) {
       return this.rejectWithWarning(
         "Backend call failed with error: " + e,
-        elementID
+        elementID,
       );
     }
 
@@ -68,7 +68,7 @@ export default class ScoreLearningElementUseCase
         LearningElementEntity,
         (entity) =>
           entity.parentWorldID === userLocation.worldID &&
-          entity.id === elementID
+          entity.id === elementID,
       );
 
     if (elements.length === 0)
@@ -76,15 +76,23 @@ export default class ScoreLearningElementUseCase
     else if (elements.length > 1)
       return this.rejectWithWarning(
         "More than one matching element found!",
-        elementID
+        elementID,
       );
 
     if (!elements[0].hasScored) {
       elements[0].hasScored = true;
 
-      const newWorldScore = this.calculateWorldScoreUseCase.internalExecute({
-        worldID: userLocation.worldID,
-      });
+      try {
+        const newWorldScore = this.calculateWorldScoreUseCase.internalExecute({
+          worldID: userLocation.worldID,
+        });
+        this.worldPort.onLearningWorldScored(newWorldScore);
+      } catch (e) {
+        this.logger.log(
+          LogLevelTypes.ERROR,
+          `ScoreLearningElementUseCase: Error calculating new world score: ${e}`,
+        );
+      }
 
       const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
         worldID: userLocation.worldID,
@@ -93,7 +101,6 @@ export default class ScoreLearningElementUseCase
 
       this.worldPort.onLearningElementScored(true, elementID);
       this.worldPort.onLearningSpaceScored(newSpaceScore);
-      this.worldPort.onLearningWorldScored(newWorldScore);
     }
   }
 
@@ -102,7 +109,7 @@ export default class ScoreLearningElementUseCase
       LogLevelTypes.WARN,
       `ScoreLearningElementUseCase: ` +
         message +
-        `${id ? " ElementID: " + id : ""}`
+        `${id ? " ElementID: " + id : ""}`,
     );
     return Promise.reject(message);
   }
