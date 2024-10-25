@@ -16,7 +16,7 @@ export default class GetLearningElementSourceUseCase
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(CORE_TYPES.IBackendAdapter)
-    private backend: IBackendPort
+    private backend: IBackendPort,
   ) {}
 
   async internalExecuteAsync(data: {
@@ -27,17 +27,23 @@ export default class GetLearningElementSourceUseCase
       this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0]
         .userToken;
 
-    const resp = await this.backend.getElementSource({
-      userToken: token,
-      elementID: data.elementID,
-      worldID: data.worldID,
-    });
-
-    this.logger.log(
-      LogLevelTypes.TRACE,
-      `GetLearningElementSourceUseCase: Got source for element ${data.elementID} in world ${data.worldID}`
-    );
-
-    return resp;
+    try {
+      const resp = await this.backend.getElementSource({
+        userToken: token,
+        elementID: data.elementID,
+        worldID: data.worldID,
+      });
+      this.logger.log(
+        LogLevelTypes.TRACE,
+        `GetLearningElementSourceUseCase: Got source for element ${data.elementID} in world ${data.worldID}`,
+      );
+      return resp;
+    } catch (error) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `GetLearningElementSourceUseCase: Backend encountered error for element ${data.elementID} in world ${data.worldID}!`,
+      );
+      throw error;
+    }
   }
 }
