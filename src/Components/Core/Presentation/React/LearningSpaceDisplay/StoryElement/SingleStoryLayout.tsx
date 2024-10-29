@@ -23,7 +23,7 @@ export default function SingleStoryLayout({
   return (
     <React.Fragment>
       {/* Story Text */}
-      <div className="flex items-center justify-center p-2 bg-buttonbgblue rounded-xl whitespace-pre-line">
+      <div className="flex items-center p-2 bg-buttonbgblue rounded-xl whitespace-pre-line">
         {contentTexts[pageId]}
       </div>
 
