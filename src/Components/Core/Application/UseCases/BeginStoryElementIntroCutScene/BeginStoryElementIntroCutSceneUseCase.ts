@@ -47,7 +47,7 @@ export default class BeginStoryElementIntroCutSceneUseCase
 
     if (elements.length === 0) return;
 
-    let spaceScore;
+    let spaceScore = undefined;
     try {
       spaceScore = this.calculateLearningSpaceScoreUseCase.internalExecute({
         spaceID: elements[0].spaceID,
@@ -62,7 +62,7 @@ export default class BeginStoryElementIntroCutSceneUseCase
       );
     }
 
-    if (spaceScore === undefined || spaceScore.currentScore === 0) {
+    if (spaceScore !== undefined && spaceScore.currentScore === 0) {
       this.loadStoryElementUseCase.execute(StoryElementType.Intro);
       this.worldPort.onStoryElementCutSceneTriggered(StoryElementType.Intro);
     }
