@@ -30,7 +30,7 @@ export default class LoadUserLearningWorldsInfoUseCase
     @inject(USECASE_TYPES.ILoadUserInitialLearningWorldsInfoUseCase)
     private loadInitialWorldsInfo: IInternalLoadUserInitialLearningWorldsInfoUseCase,
     @inject(USECASE_TYPES.ILoadLearningWorldUseCase)
-    private loadWorld: IInternalLoadLearningWorldUseCase
+    private loadWorld: IInternalLoadLearningWorldUseCase,
   ) {}
 
   async executeAsync(): Promise<void> {
@@ -51,17 +51,26 @@ export default class LoadUserLearningWorldsInfoUseCase
           .then(() => {
             let worldEntity = this.container.filterEntitiesOfType(
               LearningWorldEntity,
-              (WorldEntity) => WorldEntity.id === world.worldID
+              (WorldEntity) => WorldEntity.id === world.worldID,
             )[0];
 
             let worldCompleted = true;
             worldEntity.spaces.forEach((space) => {
-              let spaceScores = this.calculateSpaceScore.internalExecute({
-                spaceID: space.id,
-                worldID: worldEntity.id,
-              });
+              try {
+                let spaceScores = this.calculateSpaceScore.internalExecute({
+                  spaceID: space.id,
+                  worldID: worldEntity.id,
+                });
 
-              if (spaceScores.currentScore < spaceScores.requiredScore) {
+                if (spaceScores.currentScore < spaceScores.requiredScore) {
+                  worldCompleted = false;
+                }
+              } catch (e) {
+                this.logger.log(
+                  LogLevelTypes.WARN,
+                  "LoadUserLearningWorldsInfoUseCase: Failed to calculate space score!" +
+                    e,
+                );
                 worldCompleted = false;
               }
             });
@@ -71,7 +80,7 @@ export default class LoadUserLearningWorldsInfoUseCase
               worldName: worldEntity.name,
               isCompleted: worldCompleted,
             });
-          })
+          }),
       );
     });
     await Promise.allSettled(loadWorldPromise);
@@ -82,7 +91,7 @@ export default class LoadUserLearningWorldsInfoUseCase
 
     this.logger.log(
       LogLevelTypes.TRACE,
-      "LoadUserLearningWorldsUseCase: Loading user learning worlds"
+      "LoadUserLearningWorldsUseCase: Loading user learning worlds",
     );
     this.worldPort.onUserLearningWorldsInfoLoaded(userWorlds);
     return Promise.resolve();

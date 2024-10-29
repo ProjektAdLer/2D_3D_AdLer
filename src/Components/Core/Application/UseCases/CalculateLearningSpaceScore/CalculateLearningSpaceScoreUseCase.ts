@@ -29,7 +29,7 @@ export default class CalculateLearningSpaceScoreUseCase
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
-    private getUserLocationUseCase: IGetUserLocationUseCase
+    private getUserLocationUseCase: IGetUserLocationUseCase,
   ) {}
 
   internalExecute({
@@ -39,7 +39,7 @@ export default class CalculateLearningSpaceScoreUseCase
     const result = this.calculateLearningSpaceScore(spaceID, worldID);
     this.logger.log(
       LogLevelTypes.TRACE,
-      `CalculateLearningSpaceScoreUseCase: InternalExecute, SpaceID: ${spaceID}, WorldID: ${worldID}."`
+      `CalculateLearningSpaceScoreUseCase: InternalExecute, SpaceID: ${spaceID}, WorldID: ${worldID}."`,
     );
     return result;
   }
@@ -48,36 +48,36 @@ export default class CalculateLearningSpaceScoreUseCase
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
       this.logger.log(
-        LogLevelTypes.ERROR,
-        `CalculateLearningSpaceScoreUseCase: User is not in a space!`
+        LogLevelTypes.WARN,
+        `CalculateLearningSpaceScoreUseCase: User is not in a space!`,
       );
-      throw new Error(`User is not in a space!`);
+      return;
     }
 
     const result = this.calculateLearningSpaceScore(
       userLocation.spaceID,
-      userLocation.worldID
+      userLocation.worldID,
     );
     this.logger.log(
       LogLevelTypes.TRACE,
-      `CalculateLearningSpaceScoreUseCase: Execute, SpaceID: ${userLocation.spaceID}, WorldID: ${userLocation.worldID}."`
+      `CalculateLearningSpaceScoreUseCase: Execute, SpaceID: ${userLocation.spaceID}, WorldID: ${userLocation.worldID}."`,
     );
     this.worldPort.onLearningSpaceScored(result);
   }
 
   private calculateLearningSpaceScore(
     spaceID: ComponentID,
-    worldID: ComponentID
+    worldID: ComponentID,
   ): LearningSpaceScoreTO {
     const spaces =
       this.entitiyContainer.filterEntitiesOfType<LearningSpaceEntity>(
         LearningSpaceEntity,
-        (e) => e.id === spaceID && e.parentWorldID === worldID
+        (e) => e.id === spaceID && e.parentWorldID === worldID,
       );
     if (spaces.length === 0 || spaces.length > 1) {
       this.logger.log(
         LogLevelTypes.ERROR,
-        `CalculateLearningSpaceScoreUseCase: Could not find matching space.`
+        `CalculateLearningSpaceScoreUseCase: Could not find matching space.`,
       );
       throw new Error(`Could not find matching space`);
     }

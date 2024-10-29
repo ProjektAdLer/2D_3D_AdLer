@@ -115,13 +115,22 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
           );
         }
 
-        const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
-          worldID: userLocation.worldID,
-          spaceID: userLocation.spaceID,
-        });
+        try {
+          const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute(
+            {
+              worldID: userLocation.worldID,
+              spaceID: userLocation.spaceID,
+            },
+          );
+          this.worldPort.onLearningSpaceScored(newSpaceScore);
+        } catch (e) {
+          this.logger.log(
+            LogLevelTypes.ERROR,
+            `ScoreH5PLearningElementUseCase: Error calculating new space score: ${e}`,
+          );
+        }
 
         this.worldPort.onLearningElementScored(true, data.elementID);
-        this.worldPort.onLearningSpaceScored(newSpaceScore);
       }
     }
 

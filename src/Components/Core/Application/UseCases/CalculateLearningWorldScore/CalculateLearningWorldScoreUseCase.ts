@@ -101,14 +101,23 @@ export default class CalculateLearningWorldScoreUseCase
     let maxScore: number = 0;
     let requiredScore: number = 0;
     world.spaces.forEach((space) => {
-      const spaceScore: LearningSpaceScoreTO =
-        this.calculateSpaceScoreUseCase.internalExecute({
-          spaceID: space.id,
-          worldID: world.id,
-        });
-      currentScore += spaceScore.currentScore;
-      maxScore += spaceScore.maxScore;
-      requiredScore += spaceScore.requiredScore;
+      try {
+        const spaceScore: LearningSpaceScoreTO =
+          this.calculateSpaceScoreUseCase.internalExecute({
+            spaceID: space.id,
+            worldID: world.id,
+          });
+
+        currentScore += spaceScore.currentScore;
+        maxScore += spaceScore.maxScore;
+        requiredScore += spaceScore.requiredScore;
+      } catch (e) {
+        this.logger.log(
+          LogLevelTypes.ERROR,
+          `CalculateLearningWorldScoreUseCase: Error calculating space score: ${e}`,
+        );
+        throw new Error(`Error calculating space score: ${e}`);
+      }
     });
 
     const result: LearningWorldScoreTO = {

@@ -30,7 +30,7 @@ export default class BeginStoryElementOutroCutSceneUseCase
     @inject(USECASE_TYPES.ILoadStoryElementUseCase)
     private loadStoryElementUseCase: ILoadStoryElementUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
-    private worldPort: ILearningWorldPort
+    private worldPort: ILearningWorldPort,
   ) {}
 
   execute({
@@ -46,7 +46,8 @@ export default class BeginStoryElementOutroCutSceneUseCase
         (entity) =>
           entity.worldID === userLocation.worldID &&
           entity.spaceID === userLocation.spaceID &&
-          (entity.storyType & StoryElementType.Outro) === StoryElementType.Outro
+          (entity.storyType & StoryElementType.Outro) ===
+            StoryElementType.Outro,
       );
 
     if (storyElementsInSpace.length === 0) return; // return if space has no story elements
@@ -56,7 +57,7 @@ export default class BeginStoryElementOutroCutSceneUseCase
         LearningElementEntity,
         (entity) =>
           entity.id === scoredLearningElementID &&
-          entity.parentWorldID === userLocation.worldID
+          entity.parentWorldID === userLocation.worldID,
       );
 
     if (
@@ -67,7 +68,7 @@ export default class BeginStoryElementOutroCutSceneUseCase
         LogLevelTypes.WARN,
         "Could not find scored learning element with id " +
           scoredLearningElementID +
-          " in BeginStoryElementOutroCutSceneUseCase"
+          " in BeginStoryElementOutroCutSceneUseCase",
       );
       return;
     }
@@ -83,21 +84,31 @@ export default class BeginStoryElementOutroCutSceneUseCase
       return;
     }
 
-    const spaceScore = this.calculateLearningSpaceScoreUseCase.internalExecute({
-      spaceID: storyElementEntity.spaceID,
-      worldID: storyElementEntity.worldID,
-    });
+    try {
+      const spaceScore =
+        this.calculateLearningSpaceScoreUseCase.internalExecute({
+          spaceID: storyElementEntity.spaceID,
+          worldID: storyElementEntity.worldID,
+        });
 
-    // only trigger cut scene if the score was below the required score before scoring the element
-    // to prevent triggering the cut scene multiple times
-    if (
-      spaceScore.currentScore - scoredLearningElement.value <
-        spaceScore.requiredScore &&
-      spaceScore.currentScore >= spaceScore.requiredScore
-    ) {
-      storyElementEntity.hasOutroTriggered = true;
-      this.loadStoryElementUseCase.execute(StoryElementType.Outro);
-      this.worldPort.onStoryElementCutSceneTriggered(StoryElementType.Outro);
+      // only trigger cut scene if the score was below the required score before scoring the element
+      // to prevent triggering the cut scene multiple times
+      if (
+        spaceScore.currentScore - scoredLearningElement.value <
+          spaceScore.requiredScore &&
+        spaceScore.currentScore >= spaceScore.requiredScore
+      ) {
+        storyElementEntity.hasOutroTriggered = true;
+        this.loadStoryElementUseCase.execute(StoryElementType.Outro);
+        this.worldPort.onStoryElementCutSceneTriggered(StoryElementType.Outro);
+      }
+    } catch (e) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        "BeginStoryElementOutroCutSceneUseCase: " +
+          e +
+          ". Couldn't trigger outro cutscene.",
+      );
     }
   }
 }

@@ -23,7 +23,7 @@ export default class CalculateLearningSpaceAvailabilityUseCase
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
-    private calculateLearningSpaceScoreUseCase: IInternalCalculateLearningSpaceScoreUseCase
+    private calculateLearningSpaceScoreUseCase: IInternalCalculateLearningSpaceScoreUseCase,
   ) {}
 
   internalExecute({
@@ -32,12 +32,12 @@ export default class CalculateLearningSpaceAvailabilityUseCase
   }: InternalCalculateLearningSpaceAvailabilityUseCaseParams): LearningSpaceAvailabilityTO {
     const spaces = this.entityContainer.filterEntitiesOfType(
       LearningSpaceEntity,
-      (s) => s.id === spaceID && s.parentWorldID === worldID
+      (s) => s.id === spaceID && s.parentWorldID === worldID,
     );
     if (spaces.length === 0 || spaces.length > 1) {
       this.logger.log(
         LogLevelTypes.ERROR,
-        `CalculateLearningSpaceAvailabilityUseCase: Space ${spaceID} not found!`
+        `CalculateLearningSpaceAvailabilityUseCase: Space ${spaceID} not found!`,
       );
       throw new Error(`Could not find space with id ${spaceID}`);
     }
@@ -53,7 +53,7 @@ export default class CalculateLearningSpaceAvailabilityUseCase
 
     const requirementsSyntaxTree =
       LearningSpaceAvailabilityStringParser.parseToSyntaxTree(
-        space.requirements
+        space.requirements,
       );
 
     const requirementsIdArray =
@@ -61,21 +61,28 @@ export default class CalculateLearningSpaceAvailabilityUseCase
 
     const evaluationMap = new Map<ComponentID, boolean>();
     requirementsIdArray.forEach((id) => {
-      const requiredSpaceScore: LearningSpaceScoreTO =
-        this.calculateLearningSpaceScoreUseCase.internalExecute({
-          spaceID: id,
-          worldID: worldID,
-        });
+      try {
+        const requiredSpaceScore: LearningSpaceScoreTO =
+          this.calculateLearningSpaceScoreUseCase.internalExecute({
+            spaceID: id,
+            worldID: worldID,
+          });
 
-      evaluationMap.set(
-        id,
-        requiredSpaceScore.currentScore >= requiredSpaceScore.requiredScore
-      );
+        evaluationMap.set(
+          id,
+          requiredSpaceScore.currentScore >= requiredSpaceScore.requiredScore,
+        );
+      } catch (e) {
+        this.logger.log(
+          LogLevelTypes.ERROR,
+          `CalculateLearningSpaceAvailabilityUseCase: Error calculating required space score: ${e}. This could lead to an incorrectly unavailable space.`,
+        );
+      }
     });
 
     this.logger.log(
       LogLevelTypes.TRACE,
-      `CalculateLearningSpaceAvailabilityUseCase: InternalExecute, SpaceID: ${spaceID}, WorldID: ${worldID}."`
+      `CalculateLearningSpaceAvailabilityUseCase: InternalExecute, SpaceID: ${spaceID}, WorldID: ${worldID}."`,
     );
 
     return {

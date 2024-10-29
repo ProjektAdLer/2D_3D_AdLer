@@ -15,6 +15,8 @@ import type { IInternalCalculateLearningSpaceScoreUseCase } from "src/Components
 import type ICalculateLearningSpaceAvailabilityUseCase from "../CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
+import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
 
 @injectable()
 export default class LoadLearningSpaceUseCase
@@ -34,7 +36,9 @@ export default class LoadLearningSpaceUseCase
     @inject(USECASE_TYPES.ISetUserLocationUseCase)
     private setUserLocationUseCase: ISetUserLocationUseCase,
     @inject(USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase)
-    private calculateSpaceAvailabilityUseCase: ICalculateLearningSpaceAvailabilityUseCase
+    private calculateSpaceAvailabilityUseCase: ICalculateLearningSpaceAvailabilityUseCase,
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort,
   ) {}
 
   async executeAsync(data: {
@@ -52,7 +56,7 @@ export default class LoadLearningSpaceUseCase
 
     // try to find the room with a matching id
     let spaceEntity = worldEntity.spaces.find(
-      (spaceEntity) => spaceEntity.id === data.spaceID
+      (spaceEntity) => spaceEntity.id === data.spaceID,
     );
 
     if (!spaceEntity) {
@@ -60,19 +64,28 @@ export default class LoadLearningSpaceUseCase
         LogLevelTypes.ERROR,
         "LoadLearningSpaceUseCase: SpaceEntity with " +
           data.spaceID +
-          " not found."
+          " not found.",
       );
       return Promise.reject("SpaceEntity with " + data.spaceID + " not found");
     }
 
     // create SpaceTO and fill with scoring data
     let spaceTO = this.toTO(spaceEntity);
-    const spaceScoreTO = this.calculateSpaceScore.internalExecute({
-      spaceID: spaceTO.id,
-      worldID: worldEntity.id,
-    });
-    spaceTO.currentScore = spaceScoreTO.currentScore;
-    spaceTO.maxScore = spaceScoreTO.maxScore;
+    try {
+      const spaceScoreTO = this.calculateSpaceScore.internalExecute({
+        spaceID: spaceTO.id,
+        worldID: worldEntity.id,
+      });
+      spaceTO.currentScore = spaceScoreTO.currentScore;
+      spaceTO.maxScore = spaceScoreTO.maxScore;
+    } catch (e) {
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.ERROR,
+        "LoadLearningSpaceUseCase: Failed to calculate space score. " + e,
+        NotificationMessages.SPACE_SCORING_FAILED,
+      );
+      return;
+    }
 
     // fill with availability data
     const availabilityData =
@@ -91,7 +104,7 @@ export default class LoadLearningSpaceUseCase
     });
     this.logger.log(
       LogLevelTypes.TRACE,
-      "LoadLearningSpaceUseCase: Loaded space."
+      "LoadLearningSpaceUseCase: Loaded space.",
     );
     this.worldPort.onLearningSpaceLoaded(spaceTO);
   }
@@ -106,7 +119,7 @@ export default class LoadLearningSpaceUseCase
   private getLearningWorldEntity(worldID: ComponentID): LearningWorldEntity {
     return this.container.filterEntitiesOfType<LearningWorldEntity>(
       LearningWorldEntity,
-      (entity) => entity.id === worldID
+      (entity) => entity.id === worldID,
     )[0];
   }
 }

@@ -10,6 +10,8 @@ import type ILearningWorldPort from "../../Ports/Interfaces/ILearningWorldPort";
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import type ILoadStoryElementUseCase from "../LoadStoryElement/ILoadStoryElementUseCase";
+import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 @injectable()
 export default class BeginStoryElementIntroCutSceneUseCase
@@ -25,7 +27,9 @@ export default class BeginStoryElementIntroCutSceneUseCase
     @inject(USECASE_TYPES.ILoadStoryElementUseCase)
     private loadStoryElementUseCase: ILoadStoryElementUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
-    private worldPort: ILearningWorldPort
+    private worldPort: ILearningWorldPort,
+    @inject(CORE_TYPES.ILogger)
+    private logger: ILoggerPort,
   ) {}
 
   execute(): void {
@@ -37,17 +41,28 @@ export default class BeginStoryElementIntroCutSceneUseCase
         (entity) =>
           entity.worldID === userLocation.worldID &&
           entity.spaceID === userLocation.spaceID &&
-          (entity.storyType & StoryElementType.Intro) === StoryElementType.Intro
+          (entity.storyType & StoryElementType.Intro) ===
+            StoryElementType.Intro,
       );
 
     if (elements.length === 0) return;
 
-    const spaceScore = this.calculateLearningSpaceScoreUseCase.internalExecute({
-      spaceID: elements[0].spaceID,
-      worldID: elements[0].worldID,
-    });
+    let spaceScore;
+    try {
+      spaceScore = this.calculateLearningSpaceScoreUseCase.internalExecute({
+        spaceID: elements[0].spaceID,
+        worldID: elements[0].worldID,
+      });
+    } catch (e) {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        "BeginStoryElementIntroCutSceneUseCase: " +
+          e +
+          ". Starting intro cutscene anyway.",
+      );
+    }
 
-    if (spaceScore.currentScore === 0) {
+    if (spaceScore === undefined || spaceScore.currentScore === 0) {
       this.loadStoryElementUseCase.execute(StoryElementType.Intro);
       this.worldPort.onStoryElementCutSceneTriggered(StoryElementType.Intro);
     }

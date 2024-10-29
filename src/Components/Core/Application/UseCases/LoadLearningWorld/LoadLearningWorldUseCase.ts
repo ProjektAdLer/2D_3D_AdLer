@@ -40,6 +40,7 @@ import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElement
 import BackendStoryTO from "../../DataTransferObjects/BackendStoryTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import type { IInternalGetLoginStatusUseCase } from "../GetLoginStatus/IGetLoginStatusUseCase";
+import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
 
 @injectable()
 export default class LoadLearningWorldUseCase
@@ -139,12 +140,20 @@ export default class LoadLearningWorldUseCase
 
     // cumulate element scores for each space
     worldTO.spaces.forEach((space) => {
-      let spaceScores = this.calculateSpaceScore.internalExecute({
-        spaceID: space.id,
-        worldID: worldEntity.id,
-      });
-      space.currentScore = spaceScores.currentScore;
-      space.maxScore = spaceScores.maxScore;
+      try {
+        let spaceScores = this.calculateSpaceScore.internalExecute({
+          spaceID: space.id,
+          worldID: worldEntity.id,
+        });
+        space.currentScore = spaceScores.currentScore;
+        space.maxScore = spaceScores.maxScore;
+      } catch (e) {
+        this.notificationPort.onNotificationTriggered(
+          LogLevelTypes.ERROR,
+          "LoadLearningWorldUseCase: Failed to calculate space score. " + e,
+          NotificationMessages.SPACE_SCORING_FAILED,
+        );
+      }
 
       let spaceAvailability =
         this.calculateSpaceAvailabilityUseCase.internalExecute({

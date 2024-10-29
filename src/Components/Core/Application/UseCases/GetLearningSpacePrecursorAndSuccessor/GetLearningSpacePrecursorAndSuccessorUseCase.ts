@@ -16,6 +16,9 @@ import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import type ICalculateLearningSpaceAvailabilityUseCase from "../CalculateLearningSpaceAvailability/ICalculateLearningSpaceAvailabilityUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
+import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
+
 @injectable()
 export default class GetLearningSpacePrecursorAndSuccessorUseCase
   implements IGetLearningSpacePrecursorAndSuccessorUseCase
@@ -33,6 +36,8 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
     private calculateSpaceScore: IInternalCalculateLearningSpaceScoreUseCase,
     @inject(USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase)
     private calculateSpaceAvailabilityUseCase: ICalculateLearningSpaceAvailabilityUseCase,
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort,
   ) {}
 
   execute(): LearningSpacePrecursorAndSuccessorTO {
@@ -44,6 +49,7 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
       );
       return { precursorSpaces: [], successorSpaces: [] };
     }
+
     // Load current world data
     const worldEntity = this.entityContainer
       .getEntitiesOfType(LearningWorldEntity)
@@ -55,6 +61,7 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
       );
       return { precursorSpaces: [], successorSpaces: [] };
     }
+
     // Load current space data
     const currentSpace = worldEntity.spaces.find(
       (space) => space.id === userLocation.spaceID,
@@ -66,11 +73,13 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
       );
       return { precursorSpaces: [], successorSpaces: [] };
     }
+
     //Determine precursor room IDs
     const precursorSpaceIDs =
       LearningSpaceAvailabilityStringParser.parseToIdArray(
         currentSpace.requirements,
       );
+
     //Load precursor rooms and push them into the precursorSpaces array
     let precursorSpaces: LearningSpaceTO[] = [];
     precursorSpaceIDs.forEach((id) => {
@@ -86,6 +95,7 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
       precursorSpaces,
       worldEntity.id,
     );
+
     //Determine successorSpaces and push them into the successorSpaces array
     const successorSpaceEntities = worldEntity.spaces.filter((space) =>
       LearningSpaceAvailabilityStringParser.parseToIdArray(
@@ -101,10 +111,12 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
       successorSpaces,
       worldEntity.id,
     );
+
     const returnValue = {
       precursorSpaces: precursorSpaces,
       successorSpaces: successorSpaces,
     } as LearningSpacePrecursorAndSuccessorTO;
+
     this.worldPort.onLearningSpacePrecursorAndSuccessorLoaded(returnValue);
     this.logger.log(
       LogLevelTypes.TRACE,
@@ -118,17 +130,27 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
     spaceTO = Object.assign(spaceTO, structuredClone(spaceEntity));
     return spaceTO;
   }
+
   private fillSpaceWithScoringAndAvailabilityData(
     spaces: LearningSpaceTO[],
     worldID: ComponentID,
   ): LearningSpaceTO[] {
     spaces.forEach((spaceTO) => {
-      const spaceScoreTO = this.calculateSpaceScore.internalExecute({
-        spaceID: spaceTO.id,
-        worldID: worldID,
-      });
-      spaceTO.currentScore = spaceScoreTO.currentScore;
-      spaceTO.maxScore = spaceScoreTO.maxScore;
+      try {
+        const spaceScoreTO = this.calculateSpaceScore.internalExecute({
+          spaceID: spaceTO.id,
+          worldID: worldID,
+        });
+        spaceTO.currentScore = spaceScoreTO.currentScore;
+        spaceTO.maxScore = spaceScoreTO.maxScore;
+      } catch (e) {
+        this.notificationPort.onNotificationTriggered(
+          LogLevelTypes.ERROR,
+          `Error while calculating space score for space ${spaceTO.id}. ${e}`,
+          NotificationMessages.SPACE_SCORING_FAILED,
+        );
+      }
+
       // fill with availability data
       const availabilityData =
         this.calculateSpaceAvailabilityUseCase.internalExecute({

@@ -11,10 +11,13 @@ import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUs
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
 import ILearningWorldPort from "../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
+import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 
 const worldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
+const loggerMock = mock<ILoggerPort>();
 
 describe("Calculate Learning Space Score UseCase", () => {
   let systemUnderTest: CalculateLearningSpaceScoreUseCase;
@@ -23,19 +26,20 @@ describe("Calculate Learning Space Score UseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
-      entityContainerMock
+      entityContainerMock,
     );
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      worldPortMock
+      worldPortMock,
     );
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
+    CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
   });
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(
-      CalculateLearningSpaceScoreUseCase
+      CalculateLearningSpaceScoreUseCase,
     );
   });
 
@@ -55,7 +59,7 @@ describe("Calculate Learning Space Score UseCase", () => {
           parentWorldID: 1,
           elements: [],
         },
-      ])
+      ]),
     );
 
     systemUnderTest["calculateLearningSpaceScore"](1, 1);
@@ -87,7 +91,7 @@ describe("Calculate Learning Space Score UseCase", () => {
 
     expect(entityContainerMock.filterEntitiesOfType).toHaveBeenCalledWith(
       LearningSpaceEntity,
-      expect.any(Function)
+      expect.any(Function),
     );
     expect(result).toMatchObject({
       currentScore: 20,
@@ -130,26 +134,34 @@ describe("Calculate Learning Space Score UseCase", () => {
     }).toThrow();
   });
 
-  test("execute throws when the worldID in the user location is undefined", () => {
+  test("calls logger with warning when the worldID in the user location is undefined", () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
       worldID: undefined,
     } as UserLocationTO);
 
-    expect(() => {
-      systemUnderTest.execute();
-    }).toThrow();
+    systemUnderTest.execute();
+
+    expect(worldPortMock.onLearningSpaceScored).not.toHaveBeenCalled();
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      expect.any(String),
+    );
   });
 
-  test("execute throws when the spaceID in the user location is undefined", () => {
+  test("calls logger with warning when the spaceID in the user location is undefined", () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: undefined,
       worldID: 1,
     } as UserLocationTO);
 
-    expect(() => {
-      systemUnderTest.execute();
-    }).toThrow();
+    systemUnderTest.execute();
+
+    expect(worldPortMock.onLearningSpaceScored).not.toHaveBeenCalled();
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      expect.any(String),
+    );
   });
 
   test("execute should call WorldPort.onLearningSpaceScored", () => {

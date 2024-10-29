@@ -12,7 +12,6 @@ import type { IInternalCalculateLearningWorldScoreUseCase } from "../../Calculat
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILearningWorldPort from "../../../Ports/Interfaces/ILearningWorldPort";
-import type { IInternalGetLoginStatusUseCase } from "../../GetLoginStatus/IGetLoginStatusUseCase";
 
 @injectable()
 export default class ScoreAdaptivityElementUseCase
@@ -77,13 +76,20 @@ export default class ScoreAdaptivityElementUseCase
       );
     }
 
-    const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
-      worldID: userLocation.worldID,
-      spaceID: userLocation.spaceID,
-    });
+    try {
+      const newSpaceScore = this.calculateSpaceScoreUseCase.internalExecute({
+        worldID: userLocation.worldID,
+        spaceID: userLocation.spaceID,
+      });
+      this.worldPort.onLearningSpaceScored(newSpaceScore);
+    } catch (e) {
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `ScoreAdaptivityElementUseCase: Error calculating new space score: ${e}`,
+      );
+    }
 
     this.worldPort.onLearningElementScored(true, elementID);
-    this.worldPort.onLearningSpaceScored(newSpaceScore);
   }
 
   private warn(message: string, id?: ComponentID): void {
