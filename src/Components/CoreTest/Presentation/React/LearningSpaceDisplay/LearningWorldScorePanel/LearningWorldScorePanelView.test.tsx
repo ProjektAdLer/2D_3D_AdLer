@@ -9,6 +9,9 @@ import { mock } from "jest-mock-extended";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import ILearningWorldScorePanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningWorldScorePanel/ILearningWorldScorePanelPresenter";
+import ILoggerPort from "../../../../../Core/Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
+import { LogLevelTypes } from "../../../../../Core/Domain/Types/LogLevelTypes";
 
 let mockedViewModel = new LearningWorldScorePanelViewModel();
 mockedViewModel.scoreInfo.Value = {
@@ -22,7 +25,7 @@ describe("Learning World Score Panel View", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(
-      USECASE_TYPES.ICalculateLearningWorldScoreUseCase
+      USECASE_TYPES.ICalculateLearningWorldScoreUseCase,
     ).toConstantValue(calculateWorldScoreMock);
   });
 
@@ -59,5 +62,22 @@ describe("Learning World Score Panel View", () => {
     };
 
     await waitFor(() => expect(comp.container).toHaveTextContent("100%"));
+  });
+
+  test("logs error when CalculateLearningWorldScoreUseCase throws", () => {
+    useBuilderMock([mockedViewModel, undefined]);
+    calculateWorldScoreMock.execute.mockImplementation(() => {
+      throw new Error("Test Error");
+    });
+
+    const loggerMock = mock<ILoggerPort>();
+    CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
+
+    render(<LearningWorldScorePanel />);
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.ERROR,
+      expect.any(String),
+    );
   });
 });

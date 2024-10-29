@@ -35,6 +35,7 @@ export default function LearningWorldScorePanel({
     else
       setPercentage((scoreInfo.currentScore / scoreInfo.requiredScore) * 100);
   }, [scoreInfo?.currentScore, scoreInfo?.requiredScore, scoreInfo]);
+
   useEffect(() => {
     const calculateWorldScore =
       CoreDIContainer.get<ICalculateLearningWorldScoreUseCase>(
