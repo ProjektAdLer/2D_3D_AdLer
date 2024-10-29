@@ -16,6 +16,8 @@ import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/Learnin
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 import { IInternalCalculateLearningSpaceScoreUseCase } from "../../../../Core/Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
+import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 
 const entityContainerMock = mock<IEntityContainer>();
 const notificationPortMock = mock<INotificationPort>();
@@ -25,6 +27,7 @@ const worldPortMock = mock<ILearningWorldPort>();
 const loadLearningWorldUseCaseMock = mock<IInternalLoadLearningWorldUseCase>();
 const calculateSpaceScoreMock =
   mock<IInternalCalculateLearningSpaceScoreUseCase>();
+const loggerMock = mock<ILoggerPort>();
 
 const learningWorldEntity: Partial<LearningWorldEntity> = {
   name: "worldEntity",
@@ -53,9 +56,10 @@ const setupMocks = () => {
   loadUserInitialLearningWorldsInfoUseCaseMock.internalExecuteAsync.mockResolvedValue(
     {
       worldInfo: [{ worldID: 1, worldName: "TestWorld" }],
-    } as UserInitialLearningWorldsInfoTO
+    } as UserInitialLearningWorldsInfoTO,
   );
 
+  // @ts-ignore
   loadLearningWorldUseCaseMock.internalExecuteAsync.mockResolvedValue({
     name: "worldTO",
     spaces: [
@@ -98,6 +102,7 @@ const setupMocks = () => {
     spaceID: 1,
   });
 };
+
 describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
   let systemUnderTest: LoadUserLearningWorldsInfoUseCase;
 
@@ -105,28 +110,29 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind<IEntityContainer>(
-      CORE_TYPES.IEntityContainer
+      CORE_TYPES.IEntityContainer,
     ).toConstantValue(entityContainerMock);
     CoreDIContainer.rebind(PORT_TYPES.INotificationPort).toConstantValue(
-      notificationPortMock
+      notificationPortMock,
     );
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      worldPortMock
+      worldPortMock,
     );
     CoreDIContainer.rebind(
-      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase
+      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase,
     ).toConstantValue(calculateSpaceScoreMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.ILoadLearningWorldUseCase
+      USECASE_TYPES.ILoadLearningWorldUseCase,
     ).toConstantValue(loadLearningWorldUseCaseMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.ILoadUserInitialLearningWorldsInfoUseCase
+      USECASE_TYPES.ILoadUserInitialLearningWorldsInfoUseCase,
     ).toConstantValue(loadUserInitialLearningWorldsInfoUseCaseMock);
+    CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
   });
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(
-      LoadUserLearningWorldsInfoUseCase
+      LoadUserLearningWorldsInfoUseCase,
     );
   });
 
@@ -140,10 +146,10 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
     await systemUnderTest.executeAsync();
 
     expect(
-      worldPortMock.onUserInitialLearningWorldsInfoLoaded
+      worldPortMock.onUserInitialLearningWorldsInfoLoaded,
     ).toHaveBeenCalledTimes(1);
     expect(worldPortMock.onUserLearningWorldsInfoLoaded).toHaveBeenCalledTimes(
-      1
+      1,
     );
   });
 
@@ -155,11 +161,25 @@ describe("LoadUserInitialLearningWorldsInfoUseCase", () => {
       (entityType, callback) => {
         filterResult = callback(learningWorldEntity);
         return [learningWorldEntity];
-      }
+      },
     );
 
     await systemUnderTest.executeAsync();
 
     expect(filterResult).toBe(true);
+  });
+
+  test("calls logger with warning if CalculateLearningSpaceScoreUseCase throws error for one space", async () => {
+    setupMocks();
+    calculateSpaceScoreMock.internalExecute.mockImplementation(() => {
+      throw new Error("test");
+    });
+
+    await systemUnderTest.executeAsync();
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      expect.any(String),
+    );
   });
 });
