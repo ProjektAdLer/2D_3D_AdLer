@@ -5,10 +5,13 @@ import CalculateLearningSpaceAvailabilityUseCase from "../../../../Core/Applicat
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 
 const entityContainerMock = mock<IEntityContainer>();
 const calculateLearningSpaceScoreUseCaseMock =
   mock<IInternalCalculateLearningSpaceScoreUseCase>();
+const loggerMock = mock<ILoggerPort>();
 
 describe("CalculateLearningSpaceAvailabilityUseCase", () => {
   let systemUnderTest: CalculateLearningSpaceAvailabilityUseCase;
@@ -17,16 +20,17 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
-      entityContainerMock
+      entityContainerMock,
     );
     CoreDIContainer.rebind(
-      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase
+      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase,
     ).toConstantValue(calculateLearningSpaceScoreUseCaseMock);
+    CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
   });
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(
-      CalculateLearningSpaceAvailabilityUseCase
+      CalculateLearningSpaceAvailabilityUseCase,
     );
   });
 
@@ -105,15 +109,24 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
   });
 
   //ANF-ID: [EZZ0013]
-  test("internalExecute throws an error if the space is not found", () => {
+  test("internalExecute returns isavailable:false and warns in the logger if the space is not found", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
+    const result = systemUnderTest.internalExecute({
+      spaceID: 1,
+      worldID: 1,
+    });
 
-    expect(() =>
-      systemUnderTest.internalExecute({
-        spaceID: 1,
-        worldID: 1,
-      })
-    ).toThrowError();
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      expect.stringContaining(
+        "CalculateLearningSpaceAvailabilityUseCase: Space 1 not found!",
+      ),
+    );
+    expect(result).toStrictEqual({
+      requirementsString: "",
+      requirementsSyntaxTree: null,
+      isAvailable: false,
+    });
   });
 
   test("internalExecute throws an error if more than one space with given id is found", () => {
@@ -125,13 +138,22 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
         id: 1,
       },
     ]);
+    const result = systemUnderTest.internalExecute({
+      spaceID: 1,
+      worldID: 1,
+    });
 
-    expect(() =>
-      systemUnderTest.internalExecute({
-        spaceID: 1,
-        worldID: 1,
-      })
-    ).toThrowError();
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      expect.stringContaining(
+        "CalculateLearningSpaceAvailabilityUseCase: Space 1 not found!",
+      ),
+    );
+    expect(result).toStrictEqual({
+      requirementsString: "",
+      requirementsSyntaxTree: null,
+      isAvailable: false,
+    });
   });
 
   test("internalExecute returns false and calls logger.error if the requirements string is invalid", () => {
@@ -146,7 +168,7 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
       systemUnderTest.internalExecute({
         spaceID: 1,
         worldID: 1,
-      })
+      }),
     ).toThrowError();
   });
 

@@ -36,10 +36,14 @@ export default class CalculateLearningSpaceAvailabilityUseCase
     );
     if (spaces.length === 0 || spaces.length > 1) {
       this.logger.log(
-        LogLevelTypes.ERROR,
+        LogLevelTypes.WARN,
         `CalculateLearningSpaceAvailabilityUseCase: Space ${spaceID} not found!`,
       );
-      throw new Error(`Could not find space with id ${spaceID}`);
+      return {
+        requirementsString: "",
+        requirementsSyntaxTree: null,
+        isAvailable: false,
+      };
     }
     const space = spaces[0];
 
