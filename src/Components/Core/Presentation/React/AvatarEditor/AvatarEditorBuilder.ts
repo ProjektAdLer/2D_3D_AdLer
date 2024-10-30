@@ -4,7 +4,7 @@ import AvatarEditorPresenter from "./AvatarEditorPresenter";
 import IAvatarEditorController from "./IAvatarEditorController";
 import IAvatarEditorPresenter from "./IAvatarEditorPresenter";
 import AvatarEditorViewModel from "./AvatarEditorViewModel";
-import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
+import PresentationBuilder from "../../PresentationBuilder/PresentationBuilder";
 
 @injectable()
 export default class AvatarEditorBuilder extends PresentationBuilder<

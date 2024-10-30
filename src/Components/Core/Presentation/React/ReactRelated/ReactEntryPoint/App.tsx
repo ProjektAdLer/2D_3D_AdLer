@@ -12,7 +12,7 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import InternetLossModal from "~ReactComponents/GeneralComponents/InternetLossModal/InternetLossModal";
 import LoadingScreen from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreen";
 import "src/localize/i18next-config";
-import AvatarEditor from "~ReactComponents/AvatarEditor/AvatarEditor/AvatarEditor";
+import AvatarEditor from "~ReactComponents/AvatarEditor/AvatarEditor";
 
 export interface IAppProps {}
 

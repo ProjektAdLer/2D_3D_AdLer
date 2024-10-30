@@ -42,7 +42,7 @@ import ReturnHomeModalBuilder from "~ReactComponents/LearningWorldMenu/ReturnHom
 import ControlsExplanationModalBuilder from "~ReactComponents/GeneralComponents/ControlsExplanationModal/ControlsExplanationModalBuilder";
 import LMSButtonBuilder from "../../Presentation/React/WelcomePage/LMSButton/LMSButtonBuilder";
 import BreakTimeNotificationOverviewBuilder from "~ReactComponents/GeneralComponents/BreakTimeNotificationOverview/BreakTimeNotificationOverviewBuilder";
-import AvatarEditorBuilder from "~ReactComponents/AvatarEditor/AvatarEditor/AvatarEditorBuilder";
+import AvatarEditorBuilder from "~ReactComponents/AvatarEditor/AvatarEditorBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
