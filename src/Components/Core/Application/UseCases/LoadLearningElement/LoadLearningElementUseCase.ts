@@ -50,24 +50,24 @@ export default class LoadLearningElementUseCase
       return Promise.resolve();
     }
 
-    const elementID = data.elementID;
     const elementEntity =
       this.entityContainer.filterEntitiesOfType<LearningElementEntity>(
         LearningElementEntity,
-        (e) => e.id === elementID && e.parentWorldID === userLocation.worldID,
+        (e) =>
+          e.id === data.elementID && e.parentWorldID === userLocation.worldID,
       );
 
     if (elementEntity.length === 0) {
       this.notificationPort.onNotificationTriggered(
         LogLevelTypes.WARN,
-        `Could not find element with ID ${elementID} in world ${userLocation.worldID}`,
+        `LoadLearningElementUseCase: Could not find element with ID ${data.elementID} in world ${userLocation.worldID}`,
         NotificationMessages.ELEMENT_NOT_FOUND,
       );
       return Promise.resolve();
     } else if (elementEntity.length > 1) {
       this.notificationPort.onNotificationTriggered(
         LogLevelTypes.WARN,
-        `Found more than one element with ID ${elementID} in world ${userLocation.worldID}`,
+        `LoadLearningElementUseCase: Found more than one element with ID ${data.elementID} in world ${userLocation.worldID}`,
         NotificationMessages.ELEMENT_NOT_UNIQUE,
       );
       return Promise.resolve();
@@ -77,7 +77,7 @@ export default class LoadLearningElementUseCase
     try {
       elementTO.filePath =
         await this.getElementSourceUseCase.internalExecuteAsync({
-          elementID: elementID,
+          elementID: data.elementID,
           worldID: elementTO.parentWorldID,
         });
 
@@ -85,7 +85,7 @@ export default class LoadLearningElementUseCase
 
       this.logger.log(
         LogLevelTypes.TRACE,
-        `Loaded element ${elementID} in world ${userLocation.worldID}.`,
+        `Loaded element ${data.elementID} in world ${userLocation.worldID}.`,
       );
       this.worldPort.onLearningElementLoaded(elementTO);
     } catch (error) {

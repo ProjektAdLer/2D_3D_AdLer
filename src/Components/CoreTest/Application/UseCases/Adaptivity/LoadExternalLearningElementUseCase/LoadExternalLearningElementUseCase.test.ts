@@ -12,11 +12,15 @@ import IGetLearningElementSourceUseCase from "../../../../../Core/Application/Us
 import ILearningWorldPort from "../../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import { ConstructorReference } from "../../../../../Core/Types/EntityManagerTypes";
+import INotificationPort from "../../../../../Core/Application/Ports/Interfaces/INotificationPort";
+import { LogLevelTypes } from "../../../../../Core/Domain/Types/LogLevelTypes";
+import { NotificationMessages } from "../../../../../Core/Domain/Types/NotificationMessages";
 
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 const entityContainerMock = mock<IEntityContainer>();
 const getElementSourceUseCaseMock = mock<IGetLearningElementSourceUseCase>();
 const worldPortMock = mock<ILearningWorldPort>();
+const notificationPortMock = mock<INotificationPort>();
 
 describe("LoadExternalLearningElementUseCase", () => {
   let systemUnderTest: LoadExternalLearningElementUseCase;
@@ -25,25 +29,28 @@ describe("LoadExternalLearningElementUseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
 
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
-      entityContainerMock
+      entityContainerMock,
     );
 
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetLearningElementSourceUseCase
+      USECASE_TYPES.IGetLearningElementSourceUseCase,
     ).toConstantValue(getElementSourceUseCaseMock);
 
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      worldPortMock
+      worldPortMock,
+    );
+    CoreDIContainer.rebind(PORT_TYPES.INotificationPort).toConstantValue(
+      notificationPortMock,
     );
   });
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(
-      LoadExternalLearningElementUseCase
+      LoadExternalLearningElementUseCase,
     );
   });
 
@@ -58,8 +65,12 @@ describe("LoadExternalLearningElementUseCase", () => {
       worldID: 1,
     } as UserLocationTO);
 
-    await expect(systemUnderTest.executeAsync(2)).rejects.toThrow(
-      `User is not in a space!`
+    await systemUnderTest.executeAsync(2);
+
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `LoadExternalLearningElementUseCase: User is not in a space!`,
+      NotificationMessages.USER_NOT_IN_SPACE,
     );
   });
 
@@ -71,8 +82,12 @@ describe("LoadExternalLearningElementUseCase", () => {
 
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 
-    await expect(systemUnderTest.executeAsync(2)).rejects.toThrow(
-      "Could not find element"
+    await systemUnderTest.executeAsync(1);
+
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `LoadExternalLearningElementUseCase: Could not find element with ID 1 in world 1`,
+      NotificationMessages.ELEMENT_NOT_FOUND,
     );
   });
 
@@ -89,9 +104,12 @@ describe("LoadExternalLearningElementUseCase", () => {
         id: 1,
       },
     ]);
+    await systemUnderTest.executeAsync(1);
 
-    await expect(systemUnderTest.executeAsync(1)).rejects.toThrow(
-      "Found more than one element"
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `LoadExternalLearningElementUseCase: Found more than one element with ID 1 in world 1`,
+      NotificationMessages.ELEMENT_NOT_UNIQUE,
     );
   });
 
@@ -156,7 +174,7 @@ describe("LoadExternalLearningElementUseCase", () => {
     entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
       <T>(
         entityType: ConstructorReference<T>,
-        filter: (entity: T) => boolean
+        filter: (entity: T) => boolean,
       ) => {
         filterReturn = filter(new entityType());
         return [
@@ -164,7 +182,7 @@ describe("LoadExternalLearningElementUseCase", () => {
             elements: [],
           },
         ];
-      }
+      },
     );
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
       {

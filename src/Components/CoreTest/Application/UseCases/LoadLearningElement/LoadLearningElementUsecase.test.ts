@@ -104,7 +104,7 @@ describe("LoadLearningElementUseCase", () => {
 
     expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
-      `Could not find element with ID 2 in world 1`,
+      `LoadLearningElementUseCase: Could not find element with ID 2 in world 1`,
       NotificationMessages.ELEMENT_NOT_FOUND,
     );
   });
@@ -127,7 +127,7 @@ describe("LoadLearningElementUseCase", () => {
 
     expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
-      `Found more than one element with ID 1 in world 1`,
+      `LoadLearningElementUseCase: Found more than one element with ID 1 in world 1`,
       NotificationMessages.ELEMENT_NOT_UNIQUE,
     );
   });
