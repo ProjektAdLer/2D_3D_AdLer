@@ -2,7 +2,8 @@
   "welcome": "Willkommen in AdLer!",
   "moodleLoginSubheading": "Bitte loggen Sie sich ein.",
   "loginSuccessfullSubheading": "Login erfolgreich!",
-  "learningWorldButton": "zum Lernwelt-Menü",
+  "learningWorldButton": "Zum Lernwelt-Menü",
+  "avatarEditorButton": "Zum Avatar-Editor",
   "copyright": "© Projekt AdLer, Technische Hochschule Aschaffenburg, Hochschule für angewandte Wissenschaften Kempten, ZFH - Zentrum für Fernstudien im Hochschulverbund",
 
   "userName": "Nutzername",

@@ -1,5 +1,5 @@
 import Observable from "../../../../../../Lib/Observable";
 
-export default class LearningWorldMenuButtonViewModel {
+export default class WelcomePageButtonViewModel {
   userLoggedIn = new Observable<boolean>();
 }

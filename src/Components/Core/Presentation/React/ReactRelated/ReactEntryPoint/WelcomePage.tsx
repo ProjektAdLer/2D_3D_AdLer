@@ -4,7 +4,7 @@ import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/He
 import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
 import { useTranslation } from "react-i18next";
 import LogoutComponent from "~ReactComponents/WelcomePage/SignInAndOutComponent/LogoutComponent";
-import LearningWorldMenuButton from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
+import WelcomePageButton from "~ReactComponents/WelcomePage/WelcomePageButton/WelcomePageButtonView";
 import LMSButton from "~ReactComponents/WelcomePage/LMSButton/LMSButtonView";
 
 export default function WelcomePage() {
@@ -28,18 +28,16 @@ export default function WelcomePage() {
       </section>
 
       <section className="flex items-center justify-around col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:h-full portrait:flex-col portrait:row-start-3 portrait:row-span-3 portrait:col-start-2 portrait:gap-6">
-        <LearningWorldMenuButton />
-        {/*         <StyledButton
-          disabled
-          shape="freefloatcenter"
-          containerClassName="w-full h-full"
-          className="relative !px-0 !py-0 flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover !bg-avatarcreatorbg"
-        >
-          <div className="w-full h-full bg-black opacity-50" />
-          <p className="absolute p-4 mx-auto text-2xl font-bold rounded-lg text-center bg-adlerbuttonlocked lg:bottom-[42%] portrait:bottom-[20%] portrait:text-lg bottom-32 text-adlerdeactivatedtext">
-            Der Avatar Creator ist demnächst verfügbar!
-          </p>
-        </StyledButton> */}
+        <WelcomePageButton
+          backgroundImage="!bg-learningworldbg"
+          historyPath="/worldmenu"
+          label={translate("learningWorldButton")}
+        />
+        <WelcomePageButton
+          backgroundImage="!bg-avatarcreatorbg"
+          historyPath="/avatarEditor"
+          label={translate("avatarEditorButton")}
+        />
       </section>
 
       <LogoutComponent className="relative z-0 flex flex-col self-end col-span-2 col-start-7 row-start-6 gap-2 justify-self-end" />

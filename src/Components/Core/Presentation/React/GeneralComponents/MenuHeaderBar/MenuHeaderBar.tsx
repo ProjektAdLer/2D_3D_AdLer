@@ -14,7 +14,7 @@ import HelpDeskButton from "../HelpDeskButton/HelpDeskButton";
 import { useTranslation } from "react-i18next";
 
 interface MenuHeaderBarProps extends React.HTMLAttributes<HTMLDivElement> {
-  location: "world" | "space";
+  location: "world" | "space" | "editor";
 }
 
 export default function MenuHeaderBar({

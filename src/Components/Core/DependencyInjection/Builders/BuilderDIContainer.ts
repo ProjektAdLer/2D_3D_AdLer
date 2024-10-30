@@ -20,7 +20,7 @@ import SpaceSelectionBuilder from "~ReactComponents/LearningSpaceMenu/LearningSp
 import LearningSpaceDetailBuilder from "~ReactComponents/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetailBuilder";
 import LearningWorldCompletionModalBuilder from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModalBuilder";
 import SideBarBuilder from "~ReactComponents/LearningSpaceDisplay/SideBar/SideBarBuilder";
-import LearningWorldMenuButtonBuilder from "~ReactComponents/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonBuilder";
+import WelcomePageButtonBuilder from "~ReactComponents/WelcomePage/WelcomePageButton/WelcomePageButtonBuilder";
 import AvatarCameraBuilder from "../../Presentation/Babylon/AvatarCamera/AvatarCameraBuilder";
 import ExitModalBuilder from "~ReactComponents/LearningSpaceDisplay/ExitModal/ExitModalBuilder";
 import LearningWorldSelectionBuilder from "~ReactComponents/LearningWorldMenu/LearningWorldSelection/LearningWorldSelectionBuilder";
@@ -42,6 +42,7 @@ import ReturnHomeModalBuilder from "~ReactComponents/LearningWorldMenu/ReturnHom
 import ControlsExplanationModalBuilder from "~ReactComponents/GeneralComponents/ControlsExplanationModal/ControlsExplanationModalBuilder";
 import LMSButtonBuilder from "../../Presentation/React/WelcomePage/LMSButton/LMSButtonBuilder";
 import BreakTimeNotificationOverviewBuilder from "~ReactComponents/GeneralComponents/BreakTimeNotificationOverview/BreakTimeNotificationOverviewBuilder";
+import AvatarEditorBuilder from "~ReactComponents/AvatarEditor/AvatarEditor/AvatarEditorBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -113,7 +114,7 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   ).to(LearningWorldCompletionModalBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IMenuBarBuilder).to(SideBarBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningWorldMenuButtonBuilder).to(
-    LearningWorldMenuButtonBuilder,
+    WelcomePageButtonBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarCameraBuilder).to(
     AvatarCameraBuilder,
@@ -157,6 +158,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(
     BUILDER_TYPES.IBreakTimeNotificationOverviewBuilder,
   ).to(BreakTimeNotificationOverviewBuilder);
+  bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarEditorBuilder).to(
+    AvatarEditorBuilder,
+  );
 });
 
 export default BuilderDIContainer;

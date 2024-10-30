@@ -7,10 +7,7 @@ import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 
 jest.mock(
-  "../../../../../Core/Presentation/React/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView.tsx"
-);
-jest.mock(
-  "../../../../../Core/Presentation/React/WelcomePage/LMSButton/LMSButtonView.tsx"
+  "../../../../../Core/Presentation/React/WelcomePage/LMSButton/LMSButtonView.tsx",
 );
 
 describe("Welcome Page", () => {
@@ -19,7 +16,7 @@ describe("Welcome Page", () => {
     render(
       <Provider container={CoreDIContainer}>
         <WelcomePage />
-      </Provider>
+      </Provider>,
     );
   });
 });

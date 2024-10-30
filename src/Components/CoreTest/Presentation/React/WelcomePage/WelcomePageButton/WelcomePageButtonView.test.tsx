@@ -1,16 +1,16 @@
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
-import LearningWorldMenuButton from "../../../../../Core/Presentation/React/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonView";
-import LearningWorldMenuButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/LearningWorldMenuButton/LearningWorldMenuButtonViewModel";
 import history from "history/browser";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import { mock } from "jest-mock-extended";
 import IGetLoginStatusUseCase from "../../../../../Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import WelcomePageButtonViewModel from "../../../../../Core/Presentation/React/WelcomePage/WelcomePageButton/WelcomePageButtonViewModel";
+import WelcomePageButton from "../../../../../Core/Presentation/React/WelcomePage/WelcomePageButton/WelcomePageButtonView";
 
-let mockViewModel = new LearningWorldMenuButtonViewModel();
+let mockViewModel = new WelcomePageButtonViewModel();
 const historyPushMock = jest.spyOn(history, "push");
 const getLoginStatusUseCaseMock = mock<IGetLoginStatusUseCase>();
 
@@ -18,7 +18,7 @@ describe("LearningWorldMenuButton", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind<IGetLoginStatusUseCase>(
-      USECASE_TYPES.IGetLoginStatusUseCase
+      USECASE_TYPES.IGetLoginStatusUseCase,
     ).toConstantValue(getLoginStatusUseCaseMock);
   });
 
@@ -35,8 +35,8 @@ describe("LearningWorldMenuButton", () => {
 
     render(
       <Provider container={CoreDIContainer}>
-        <LearningWorldMenuButton />
-      </Provider>
+        <WelcomePageButton />
+      </Provider>,
     );
   });
 
@@ -51,11 +51,11 @@ describe("LearningWorldMenuButton", () => {
 
     render(
       <Provider container={CoreDIContainer}>
-        <LearningWorldMenuButton />
-      </Provider>
+        <WelcomePageButton />
+      </Provider>,
     );
 
-    expect(getLoginStatusUseCaseMock.execute).toBeCalledTimes(1);
+    expect(getLoginStatusUseCaseMock.execute).toHaveBeenCalledTimes(1);
   });
 
   test("LearningWorldMenuButton Tailwind Styling contains grey backgroundColor if not logged in", () => {
@@ -68,8 +68,8 @@ describe("LearningWorldMenuButton", () => {
 
     const componentUnderTest = render(
       <Provider container={CoreDIContainer}>
-        <LearningWorldMenuButton />
-      </Provider>
+        <WelcomePageButton />
+      </Provider>,
     );
 
     const buttonStyle = componentUnderTest.getByRole("button").className;
@@ -86,8 +86,8 @@ describe("LearningWorldMenuButton", () => {
 
     const componentUnderTest = render(
       <Provider container={CoreDIContainer}>
-        <LearningWorldMenuButton />
-      </Provider>
+        <WelcomePageButton />
+      </Provider>,
     );
 
     const buttonStyle = componentUnderTest.getByRole("button").className;
@@ -104,8 +104,8 @@ describe("LearningWorldMenuButton", () => {
 
     const componentUnderTest = render(
       <Provider container={CoreDIContainer}>
-        <LearningWorldMenuButton />
-      </Provider>
+        <WelcomePageButton />
+      </Provider>,
     );
 
     let button: HTMLElement = componentUnderTest.getByRole("button");

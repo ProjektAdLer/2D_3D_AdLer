@@ -45,6 +45,7 @@ const BUILDER_TYPES = {
   IBreakTimeNotificationOverviewBuilder: Symbol(
     "IBreakTimeNotificationOverviewBuilder",
   ),
+  IAvatarEditorBuilder: Symbol("IAvatarEditorBuilder"),
 };
 
 export default BUILDER_TYPES;
