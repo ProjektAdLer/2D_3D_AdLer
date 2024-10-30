@@ -29,7 +29,7 @@ export default function MenuHeaderBar({
 
   const [currentWorldName] = useObservable<string>(viewModel?.currentWorldName);
 
-  const { t: translate } = useTranslation("worldMenu");
+  const { t: translate } = useTranslation("start");
 
   if (!viewModel || !controller) return null;
 
@@ -53,6 +53,9 @@ export default function MenuHeaderBar({
           {location === "space" ? currentWorldName : null}
           {location === "world"
             ? translate("learningWorldMenuTitle").toString()
+            : null}
+          {location === "editor"
+            ? translate("avatarEditorTitle").toString()
             : null}
         </StyledContainer>
       </div>

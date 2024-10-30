@@ -6,6 +6,9 @@
   "avatarEditorButton": "Zum Avatar-Editor",
   "copyright": "© Projekt AdLer, Technische Hochschule Aschaffenburg, Hochschule für angewandte Wissenschaften Kempten, ZFH - Zentrum für Fernstudien im Hochschulverbund",
 
+  "learningWorldMenuTitle": "Lernwelt-Menü",
+  "avatarEditorTitle": "Avatar-Editor",
+
   "userName": "Nutzername",
   "password": "Passwort",
   "loginFail": "Login fehlgeschlagen.",
