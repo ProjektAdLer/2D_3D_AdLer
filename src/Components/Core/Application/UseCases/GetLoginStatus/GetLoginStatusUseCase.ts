@@ -43,15 +43,14 @@ export default class GetLoginStatusUseCase implements IGetLoginStatusUseCase {
     const userDataEntity =
       this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
     if (!userDataEntity?.isLoggedIn) {
-      this.notificationPort.onNotificationTriggered(
-        LogLevelTypes.ERROR,
+      this.logger.log(
+        LogLevelTypes.TRACE,
         `GetLoginStatusUseCase: Checked LoginStatus: ${userDataEntity?.isLoggedIn}. User is not logged in!`,
-        "User is not logged in!",
       );
     } else {
       this.logger.log(
         LogLevelTypes.TRACE,
-        `GetLoginStatusUseCase: Checked LoginStatus: ${userDataEntity?.isLoggedIn}.`,
+        `GetLoginStatusUseCase: Checked LoginStatus: ${userDataEntity?.isLoggedIn}. User is logged in!`,
       );
     }
     return {
