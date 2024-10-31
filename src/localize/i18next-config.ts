@@ -11,6 +11,7 @@ import de_breakTime from "./de/breakTime.json";
 import de_learningElement from "./de/learningElement.json";
 import de_spaceGoal from "./de/spaceGoal.json";
 import de_controls from "./de/controls.json";
+import de_avatarEditor from "./de/avatarEditor.json";
 
 const resources = {
   de: {
@@ -24,6 +25,7 @@ const resources = {
     learningElement: de_learningElement,
     spaceGoal: de_spaceGoal,
     controls: de_controls,
+    avatarEditor: de_avatarEditor,
   },
 };
 const defaultNS = "start";
@@ -42,6 +44,7 @@ i18next.use(initReactI18next).init({
     "learningElement",
     "spaceGoal",
     "controls",
+    "avatarEditor",
   ],
   resources: resources,
   defaultNS: defaultNS,

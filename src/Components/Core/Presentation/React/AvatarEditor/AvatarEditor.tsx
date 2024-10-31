@@ -4,6 +4,18 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import React, { useState } from "react";
 import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBar";
+import AvatarEditorCategoryTabButton from "./AvatarEditorCategoryTabButton";
+import {
+  AvatarEditorCategory,
+  OAvatarEditorCategory,
+} from "./AvatarEditorCategories";
+import AvatarEditorHairCategory from "./AvatarEditorCategoryContents/AvatarEditorHairCategory";
+import AvatarEditorFaceCategory from "./AvatarEditorCategoryContents/AvatarEditorFaceCategory";
+
+const AvatarEditorCategoryContents = {
+  [OAvatarEditorCategory.HAIR]: AvatarEditorHairCategory,
+  [OAvatarEditorCategory.FACE]: AvatarEditorFaceCategory,
+};
 
 export default function AvatarEditor() {
   const [viewModel, controller] = useBuilder<
@@ -11,7 +23,9 @@ export default function AvatarEditor() {
     IAvatarEditorController
   >(BUILDER_TYPES.IAvatarEditorBuilder);
 
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState<AvatarEditorCategory>(
+    OAvatarEditorCategory.HAIR,
+  );
 
   if (!viewModel || !controller) return null;
 
@@ -19,9 +33,35 @@ export default function AvatarEditor() {
     <React.Fragment>
       <div className="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden">
         <div className="grid order-2 grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 portrait:gap-4 grow lg:rounded-lg">
-          <div className="col-start-1"></div>
-          <div className="col-start-2">rechts</div>
+          {/* Categories (Left Side) */}
+          <div className="col-start-1">
+            {/* Category Tabs */}
+            <div className="flex flex-row space-x-4 p-4">
+              {Object.values(OAvatarEditorCategory)
+                .filter((category) => typeof category === "number")
+                .map((category) => (
+                  <AvatarEditorCategoryTabButton
+                    className="flex w-full h-12"
+                    key={category}
+                    category={category as AvatarEditorCategory}
+                    active={activeTab === category}
+                    onClick={() => setActiveTab(category)}
+                  />
+                ))}
+            </div>
+
+            {/* Category Contents */}
+            <div className="p-4">
+              {AvatarEditorCategoryContents[activeTab]({
+                controller,
+              })}
+            </div>
+          </div>
+
+          {/* Avatar Preview (Right Side) */}
+          <div className="col-start-2">AVATAR THUMBNAIL</div>
         </div>
+
         <MenuHeaderBar
           location="editor"
           className="self-center order-1 w-full p-2 font-semibold"
