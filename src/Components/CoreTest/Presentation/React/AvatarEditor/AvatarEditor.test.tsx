@@ -3,7 +3,7 @@ import { act, fireEvent, render } from "@testing-library/react";
 import AvatarEditor from "../../../../../Components/Core/Presentation/React/AvatarEditor/AvatarEditor";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import { OAvatarEditorCategory } from "../../../../Core/Presentation/React/AvatarEditor/AvatarEditorCategories";
+import { OAvatarEditorCategory } from "../../../../Core/Presentation/React/AvatarEditor/AvatarEditorCategories/AvatarEditorCategories";
 
 describe("AvatarEditor", () => {
   test("should renders", () => {

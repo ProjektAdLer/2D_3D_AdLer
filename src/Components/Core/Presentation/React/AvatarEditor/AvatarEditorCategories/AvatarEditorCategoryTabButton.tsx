@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import {
   AvatarEditorCategory,
   OAvatarEditorCategory,
-} from "./AvatarEditorCategories/AvatarEditorCategories";
+} from "./AvatarEditorCategories";
 
 type AvatarEditorCategoryTabButtonProps = {
   category: AvatarEditorCategory;

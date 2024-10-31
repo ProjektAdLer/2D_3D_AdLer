@@ -4,13 +4,13 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import React, { useState } from "react";
 import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBar";
-import AvatarEditorCategoryTabButton from "./AvatarEditorCategoryTabButton";
+import AvatarEditorCategoryTabButton from "./AvatarEditorCategories/AvatarEditorCategoryTabButton";
 import {
   AvatarEditorCategory,
   OAvatarEditorCategory,
-} from "./AvatarEditorCategories";
-import AvatarEditorHairCategory from "./AvatarEditorCategoryContents/AvatarEditorHairCategory";
-import AvatarEditorFaceCategory from "./AvatarEditorCategoryContents/AvatarEditorFaceCategory";
+} from "./AvatarEditorCategories/AvatarEditorCategories";
+import AvatarEditorHairCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorHairCategory";
+import AvatarEditorFaceCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorFaceCategory";
 
 const AvatarEditorCategoryContents = {
   [OAvatarEditorCategory.HAIR]: AvatarEditorHairCategory,
