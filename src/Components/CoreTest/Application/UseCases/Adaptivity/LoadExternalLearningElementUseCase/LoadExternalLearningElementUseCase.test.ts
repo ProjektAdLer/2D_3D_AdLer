@@ -15,6 +15,7 @@ import { ConstructorReference } from "../../../../../Core/Types/EntityManagerTyp
 import INotificationPort from "../../../../../Core/Application/Ports/Interfaces/INotificationPort";
 import { LogLevelTypes } from "../../../../../Core/Domain/Types/LogLevelTypes";
 import { NotificationMessages } from "../../../../../Core/Domain/Types/NotificationMessages";
+import { AxiosError } from "axios";
 
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 const entityContainerMock = mock<IEntityContainer>();
@@ -59,7 +60,7 @@ describe("LoadExternalLearningElementUseCase", () => {
   });
 
   //ANF-ID: [EZZ0013]
-  test("should throw, if user is not in LearningSpace", async () => {
+  test("should call notification port, if user is not in LearningSpace", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: undefined,
       worldID: 1,
@@ -74,7 +75,7 @@ describe("LoadExternalLearningElementUseCase", () => {
     );
   });
 
-  test("should throw, if the external LearningElement is not found", async () => {
+  test("should call notification port, if the external LearningElement is not found", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
       worldID: 1,
@@ -91,7 +92,7 @@ describe("LoadExternalLearningElementUseCase", () => {
     );
   });
 
-  test("should throw, if more than one external LearningElement is found", async () => {
+  test("should call notification port, if more than one external LearningElement is found", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
       worldID: 1,
@@ -110,6 +111,31 @@ describe("LoadExternalLearningElementUseCase", () => {
       LogLevelTypes.WARN,
       `LoadExternalLearningElementUseCase: Found more than one element with ID 1 in world 1`,
       NotificationMessages.ELEMENT_NOT_UNIQUE,
+    );
+  });
+
+  test("should call the notification port, if the backend call failed", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      {
+        id: 1,
+        worldID: 1,
+      } as ExternalLearningElementEntity,
+    ]);
+
+    getElementSourceUseCaseMock.internalExecuteAsync.mockRejectedValue(
+      new AxiosError("error", "testerror"),
+    );
+
+    await systemUnderTest.executeAsync(1);
+
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `LoadExternalLearningElementUseCase: Axios encountered error: testerror`,
+      NotificationMessages.BACKEND_ERROR,
     );
   });
 
