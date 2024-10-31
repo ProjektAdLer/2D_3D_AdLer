@@ -23,6 +23,7 @@ export default function AvatarEditorCategoryTabButton(
 
   return (
     <button
+      data-testid={`avatar-editor-category-tab-${props.category}`}
       className={`grow ${props.active ? "bg-adlerbggradientfrom" : "bg-adlerbggradientto"}`}
       onClick={props.onClick}
     >
