@@ -25,6 +25,7 @@ Beschreibe das Problem möglichst kurz und präzise mit allen nötigen Informati
 - [ ] User Story ist für jeden beteiligten Entwickler klar verständlich
 - [ ] User Story Aufwand ist geschätzt
 - [ ] User Story hat Akzeptanzkriterien
+- [ ] Stakeholder, die Task blockieren können, ermittlelt und ggf. informiert
 
 **Definition of Done**
 

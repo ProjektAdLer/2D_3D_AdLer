@@ -21,6 +21,7 @@ Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 - [ ] User Story ist für jeden beteiligten Entwickler klar verständlich
 - [ ] User Story Aufwand ist geschätzt
 - [ ] User Story hat Akzeptanzkriterien
+- [ ] Stakeholder, die Task blockieren können, ermittlelt und ggf. informiert
 
 **Definition of Done**
 

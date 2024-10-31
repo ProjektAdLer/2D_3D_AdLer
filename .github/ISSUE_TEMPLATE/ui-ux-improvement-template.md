@@ -29,6 +29,7 @@ Um die _Problemstellung_ zu adressieren implementieren wir _Funktionalität_ / �
 - [ ] User Story ist für jeden beteiligten Entwickler/Designer klar verständlich
 - [ ] User Story Aufwand ist geschätzt
 - [ ] User Story hat Akzeptanzkriterien
+- [ ] Stakeholder, die Task blockieren können, ermittlelt und ggf. informiert
 
 **Definition of Done**
 
