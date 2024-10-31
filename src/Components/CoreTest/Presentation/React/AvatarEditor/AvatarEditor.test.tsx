@@ -3,10 +3,7 @@ import { act, fireEvent, render } from "@testing-library/react";
 import AvatarEditor from "../../../../../Components/Core/Presentation/React/AvatarEditor/AvatarEditor";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import AvatarEditorCategoryTabButton from "../../../../Core/Presentation/React/AvatarEditor/AvatarEditorCategoryTabButton";
 import { OAvatarEditorCategory } from "../../../../Core/Presentation/React/AvatarEditor/AvatarEditorCategories";
-import AvatarEditorHairCategory from "../../../../Core/Presentation/React/AvatarEditor/AvatarEditorCategoryContents/AvatarEditorHairCategory";
-import AvatarEditorFaceCategory from "../../../../Core/Presentation/React/AvatarEditor/AvatarEditorCategoryContents/AvatarEditorFaceCategory";
 
 describe("AvatarEditor", () => {
   test("should renders", () => {
