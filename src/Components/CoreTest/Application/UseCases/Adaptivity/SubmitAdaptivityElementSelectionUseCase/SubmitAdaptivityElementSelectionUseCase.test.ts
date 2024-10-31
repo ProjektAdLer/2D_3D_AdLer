@@ -15,6 +15,9 @@ import UserLocationTO from "../../../../../Core/Application/DataTransferObjects/
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import AdaptivityElementQuestionResponse from "../../../../../Core/Adapters/BackendAdapter/Types/AdaptivityElementQuestionResponse";
 import IScoreAdaptivityElementUseCase from "../../../../../Core/Application/UseCases/Adaptivity/ScoreAdaptivityElementUseCase/IScoreAdaptivityElementUseCase";
+import INotificationPort from "../../../../../Core/Application/Ports/Interfaces/INotificationPort";
+import { LogLevelTypes } from "../../../../../Core/Domain/Types/LogLevelTypes";
+import { NotificationMessages } from "../../../../../Core/Domain/Types/NotificationMessages";
 
 const worldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
@@ -22,6 +25,7 @@ const backendPortMock = mock<IBackendPort>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 const scoreAdaptivityElementUseCaseMock =
   mock<IScoreAdaptivityElementUseCase>();
+const notificationPortMock = mock<INotificationPort>();
 
 const submitted: AdaptivityElementQuestionSubmissionTO = {
   elementID: 1,
@@ -36,25 +40,29 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      worldPortMock
+      worldPortMock,
     );
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
-      entityContainerMock
+      entityContainerMock,
     );
     CoreDIContainer.rebind(CORE_TYPES.IBackendAdapter).toConstantValue(
-      backendPortMock
+      backendPortMock,
     );
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.IScoreAdaptivityElementUseCase
+      USECASE_TYPES.IScoreAdaptivityElementUseCase,
     ).toConstantValue(scoreAdaptivityElementUseCaseMock);
+
+    CoreDIContainer.rebind(PORT_TYPES.INotificationPort).toConstantValue(
+      notificationPortMock,
+    );
   });
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(
-      SubmitAdaptivityElementSelectionUseCase
+      SubmitAdaptivityElementSelectionUseCase,
     );
   });
 
@@ -62,7 +70,7 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  test("throws error when worldID is not set", async () => {
+  test("should call notificationport if worldID is not set", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       {} as UserDataEntity,
     ]);
@@ -71,11 +79,15 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
       spaceID: 1,
     });
 
-    const result = systemUnderTest.executeAsync(submitted);
-    await expect(result).rejects.toThrowError();
+    await systemUnderTest.executeAsync(submitted);
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `SubmitAdaptivityElementSelectionUseCase: User is not in a space!`,
+      NotificationMessages.USER_NOT_IN_SPACE,
+    );
   });
 
-  test("throws error when spaceID is not set", async () => {
+  test("should call notificationport if spaceID is not set", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([
       {} as UserDataEntity,
     ]);
@@ -84,8 +96,33 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
       spaceID: undefined,
     });
 
-    const result = systemUnderTest.executeAsync(submitted);
-    await expect(result).rejects.toThrowError();
+    await systemUnderTest.executeAsync(submitted);
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `SubmitAdaptivityElementSelectionUseCase: User is not in a space!`,
+      NotificationMessages.USER_NOT_IN_SPACE,
+    );
+  });
+
+  test("should call notificationport if backendAdapter throws an error", async () => {
+    entityContainerMock.getEntitiesOfType.mockReturnValue([
+      {} as UserDataEntity,
+    ]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 1,
+      spaceID: 1,
+    });
+
+    backendPortMock.getAdaptivityElementQuestionResponse.mockRejectedValue(
+      new Error("Backend Error"),
+    );
+
+    await systemUnderTest.executeAsync(submitted);
+    expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      `SubmitAdaptivityElementSelectionUseCase: Error while submitting adaptivity element selection!`,
+      NotificationMessages.BACKEND_ERROR,
+    );
   });
 
   // ANF-ID: [EWE0005]
@@ -116,7 +153,7 @@ describe("SubmitAdaptivityElementSelectionUseCase", () => {
     await systemUnderTest.executeAsync(submitted);
 
     expect(scoreAdaptivityElementUseCaseMock.internalExecute).toBeCalledTimes(
-      1
+      1,
     );
     expect(scoreAdaptivityElementUseCaseMock.internalExecute).toBeCalledWith(1);
   });

@@ -15,6 +15,8 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../../GetUserLocation/IGetUserLocationUseCase";
 import type IScoreAdaptivityElementUseCase from "../ScoreAdaptivityElementUseCase/IScoreAdaptivityElementUseCase";
 import AdaptivityElementQuestionPresentationUpdateTO from "../../../DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionPresentationUpdateTO";
+import type INotificationPort from "../../../Ports/Interfaces/INotificationPort";
+import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
 
 @injectable()
 export default class SubmitAdaptivityElementSelectionUseCase
@@ -32,11 +34,13 @@ export default class SubmitAdaptivityElementSelectionUseCase
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private userLocationUseCase: IGetUserLocationUseCase,
     @inject(USECASE_TYPES.IScoreAdaptivityElementUseCase)
-    private scoreAdaptivityElementUseCase: IScoreAdaptivityElementUseCase
+    private scoreAdaptivityElementUseCase: IScoreAdaptivityElementUseCase,
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort,
   ) {}
 
   async executeAsync(
-    submission: AdaptivityElementQuestionSubmissionTO
+    submission: AdaptivityElementQuestionSubmissionTO,
   ): Promise<void> {
     const token =
       this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0]
@@ -44,20 +48,34 @@ export default class SubmitAdaptivityElementSelectionUseCase
 
     const userLocation = this.userLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
-      throw new Error(`User is not in a space!`);
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.WARN,
+        `SubmitAdaptivityElementSelectionUseCase: User is not in a space!`,
+        NotificationMessages.USER_NOT_IN_SPACE,
+      );
+      return Promise.resolve();
     }
 
-    const backendResult =
-      await this.backendAdapter.getAdaptivityElementQuestionResponse(
-        token,
-        userLocation.worldID,
-        submission
+    let backendResult;
+    try {
+      backendResult =
+        await this.backendAdapter.getAdaptivityElementQuestionResponse(
+          token,
+          userLocation.worldID,
+          submission,
+        );
+    } catch (error) {
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.WARN,
+        `SubmitAdaptivityElementSelectionUseCase: Error while submitting adaptivity element selection!`,
+        NotificationMessages.BACKEND_ERROR,
       );
-
+      return Promise.resolve();
+    }
     // score the element
     if (backendResult.elementScore.success === true) {
       this.scoreAdaptivityElementUseCase.internalExecute(
-        backendResult.elementScore.elementId
+        backendResult.elementScore.elementId,
       );
     }
 
@@ -94,7 +112,7 @@ export default class SubmitAdaptivityElementSelectionUseCase
           },
         };
       this.worldPort.onAdaptivityElementQuestionAnsweredCorrectly(
-        questionPresentationUpdateTO
+        questionPresentationUpdateTO,
       );
     }
 
@@ -102,7 +120,7 @@ export default class SubmitAdaptivityElementSelectionUseCase
 
     this.logger.log(
       LogLevelTypes.TRACE,
-      `SubmitAdaptivityElementSelectionUseCase: User submitted in adaptivityelement: Element: ${progressUpdateTO.elementInfo.elementId}, Question: ${progressUpdateTO.questionInfo.questionId}`
+      `SubmitAdaptivityElementSelectionUseCase: User submitted in adaptivityelement: Element: ${progressUpdateTO.elementInfo.elementId}, Question: ${progressUpdateTO.questionInfo.questionId}`,
     );
 
     return Promise.resolve();
