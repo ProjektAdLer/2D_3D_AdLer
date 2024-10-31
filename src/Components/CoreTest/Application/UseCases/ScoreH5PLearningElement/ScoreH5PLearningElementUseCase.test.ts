@@ -35,7 +35,7 @@ spaceEntityMock.id = 1;
 const setupEntityContainerMock = (
   userEntityMock: UserDataEntity[],
   elementEntityMock: LearningElementEntity[],
-  spaceEntityMock: LearningSpaceEntity[]
+  spaceEntityMock: LearningSpaceEntity[],
 ) => {
   entityContainerMock.getEntitiesOfType.mockImplementation((entityType) => {
     if (entityType === UserDataEntity) {
@@ -60,7 +60,7 @@ const setupEntityContainerMock = (
         return spaceEntityMock;
       }
       return [];
-    }
+    },
   );
 };
 
@@ -88,31 +88,31 @@ describe("ScoreH5PLearningElementUseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(CORE_TYPES.IBackendAdapter).toConstantValue(
-      backendAdapterMock
+      backendAdapterMock,
     );
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
-      entityContainerMock
+      entityContainerMock,
     );
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      worldPortMock
+      worldPortMock,
     );
     CoreDIContainer.rebind(
-      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase
+      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase,
     ).toConstantValue(calculateSpaceScoreUseCaseMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.ICalculateLearningWorldScoreUseCase
+      USECASE_TYPES.ICalculateLearningWorldScoreUseCase,
     ).toConstantValue(calculateWorldScoreUseCaseMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase,
     ).toConstantValue(beginStoryElementOutroCutSceneUseCaseMock);
   });
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.get(
-      USECASE_TYPES.IScoreH5PLearningElementUseCase
+      USECASE_TYPES.IScoreH5PLearningElementUseCase,
     );
     elementEntityMock.id = 1;
     elementEntityMock.hasScored = false;
@@ -124,7 +124,10 @@ describe("ScoreH5PLearningElementUseCase", () => {
 
   test("executeAsync should reject if data is undefined", async () => {
     await expect(
-      systemUnderTest.executeAsync({ xapiData: undefined as any, elementID: 1 })
+      systemUnderTest.executeAsync({
+        xapiData: undefined as any,
+        elementID: 1,
+      }),
     ).rejects.toContain("data is (atleast partly) undefined");
   });
 
@@ -137,12 +140,12 @@ describe("ScoreH5PLearningElementUseCase", () => {
     setupEntityContainerMock(
       [userEntityMock],
       [elementEntityMock],
-      [spaceEntityMock]
+      [spaceEntityMock],
     );
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     await expect(
-      systemUnderTest.executeAsync(executeAsyncParams)
+      systemUnderTest.executeAsync(executeAsyncParams),
     ).resolves.toBe(true);
   });
 
@@ -155,7 +158,7 @@ describe("ScoreH5PLearningElementUseCase", () => {
     setupEntityContainerMock(
       [userEntityMock],
       [elementEntityMock],
-      [spaceEntityMock]
+      [spaceEntityMock],
     );
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
@@ -181,7 +184,7 @@ describe("ScoreH5PLearningElementUseCase", () => {
     setupEntityContainerMock(
       [userEntityMock],
       [elementEntityMock],
-      [spaceEntityMock]
+      [spaceEntityMock],
     );
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
@@ -193,7 +196,7 @@ describe("ScoreH5PLearningElementUseCase", () => {
 
     expect(entityContainerMock.filterEntitiesOfType).toHaveBeenCalledWith(
       LearningSpaceEntity,
-      expect.any(Function)
+      expect.any(Function),
     );
   });
 
@@ -206,7 +209,7 @@ describe("ScoreH5PLearningElementUseCase", () => {
     setupEntityContainerMock(
       [userEntityMock],
       [elementEntityMock],
-      [spaceEntityMock]
+      [spaceEntityMock],
     );
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
@@ -217,7 +220,7 @@ describe("ScoreH5PLearningElementUseCase", () => {
     }
 
     expect(
-      calculateSpaceScoreUseCaseMock.internalExecute
+      calculateSpaceScoreUseCaseMock.internalExecute,
     ).not.toHaveBeenCalled();
   });
 
@@ -229,7 +232,7 @@ describe("ScoreH5PLearningElementUseCase", () => {
     setupEntityContainerMock(
       [userEntityMock],
       [elementEntityMock],
-      [spaceEntityMock]
+      [spaceEntityMock],
     );
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
@@ -243,7 +246,7 @@ describe("ScoreH5PLearningElementUseCase", () => {
       {
         spaceID: 1,
         worldID: 1,
-      }
+      },
     );
   });
 
@@ -255,7 +258,7 @@ describe("ScoreH5PLearningElementUseCase", () => {
     setupEntityContainerMock(
       [userEntityMock],
       [elementEntityMock],
-      [spaceEntityMock]
+      [spaceEntityMock],
     );
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
@@ -267,7 +270,7 @@ describe("ScoreH5PLearningElementUseCase", () => {
 
     expect(worldPortMock.onLearningElementScored).toHaveBeenCalledWith(
       true,
-      executeAsyncParams.elementID
+      executeAsyncParams.elementID,
     );
   });
 
@@ -279,14 +282,29 @@ describe("ScoreH5PLearningElementUseCase", () => {
     setupEntityContainerMock(
       [userEntityMock],
       [elementEntityMock],
-      [spaceEntityMock]
+      [spaceEntityMock],
     );
 
-    try {
-      await systemUnderTest.executeAsync(executeAsyncParams);
-    } catch (e) {
-      expect(e.message).toBe("User is not in a space!");
-    }
+    await expect(
+      systemUnderTest.executeAsync(executeAsyncParams),
+    ).rejects.toContain("User is not in a space!");
+  });
+
+  test("executeAsync rejects if backend call fails", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
+    setupEntityContainerMock(
+      [userEntityMock],
+      [elementEntityMock],
+      [spaceEntityMock],
+    );
+    backendAdapterMock.scoreH5PElement.mockResolvedValue(false);
+
+    await expect(
+      systemUnderTest.executeAsync(executeAsyncParams),
+    ).rejects.toContain("Backend call failed!");
   });
 
   test("executeAsync rejects if EntityContainer returns no matching element entity", async () => {
@@ -298,7 +316,7 @@ describe("ScoreH5PLearningElementUseCase", () => {
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     await expect(
-      systemUnderTest.executeAsync(executeAsyncParams)
+      systemUnderTest.executeAsync(executeAsyncParams),
     ).rejects.toContain("No matching element found");
   });
 
@@ -310,12 +328,12 @@ describe("ScoreH5PLearningElementUseCase", () => {
     setupEntityContainerMock(
       [userEntityMock],
       [elementEntityMock, elementEntityMock],
-      [spaceEntityMock]
+      [spaceEntityMock],
     );
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     await expect(
-      systemUnderTest.executeAsync(executeAsyncParams)
+      systemUnderTest.executeAsync(executeAsyncParams),
     ).rejects.toContain("More than one matching element found");
   });
 
@@ -328,7 +346,7 @@ describe("ScoreH5PLearningElementUseCase", () => {
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     await expect(
-      systemUnderTest.executeAsync(executeAsyncParams)
+      systemUnderTest.executeAsync(executeAsyncParams),
     ).rejects.toContain("Space with given element not found");
   });
 
@@ -344,14 +362,14 @@ describe("ScoreH5PLearningElementUseCase", () => {
 
     expect(loggerMock).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
-      expect.stringContaining(warningMessage)
+      expect.stringContaining(warningMessage),
     );
   });
 
   test("rejectWithWarning rejects with given message", async () => {
     const warningMessage = "warning message";
     await expect(
-      systemUnderTest["rejectWithWarning"](warningMessage)
+      systemUnderTest["rejectWithWarning"](warningMessage),
     ).rejects.toContain(warningMessage);
   });
 });

@@ -51,11 +51,7 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
     // get the current user location
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
-      this.logger.log(
-        LogLevelTypes.ERROR,
-        `ScoreH5PLearningElementUseCase: User is not in a space!`,
-      );
-      throw new Error(`User is not in a space!`);
+      return this.rejectWithWarning("User is not in a space!");
     }
 
     // call backend
@@ -65,9 +61,11 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
       courseID: userLocation.worldID,
       rawH5PEvent: data.xapiData,
     });
-
+    if (!scoredSuccessful) {
+      return this.rejectWithWarning("Backend call failed!");
+    }
     // do scoring, if backend call returned successful scoring
-    if (scoredSuccessful) {
+    else {
       // get element
       const elements: LearningElementEntity[] =
         this.entityContainer.filterEntitiesOfType<LearningElementEntity>(
@@ -134,6 +132,10 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
       }
     }
 
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      `Scored h5p element ${data.elementID} in world ${userLocation.worldID}.`,
+    );
     return Promise.resolve(scoredSuccessful);
   }
 
