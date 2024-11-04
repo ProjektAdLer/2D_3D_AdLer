@@ -76,6 +76,7 @@
     "@types/react-pdf": "^7.0.0",
     "@types/react-router-dom": "^5.3.3",
     "@types/uuid": "^10.0.0",
+    "@types/webpack-env": "^1.18.5",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "coveralls": "^3.1.1",
     "cross-env": "^7.0.3",

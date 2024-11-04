@@ -23,7 +23,7 @@
     "preserveConstEnums": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": ["reflect-metadata", "jest"],
+    "types": ["reflect-metadata", "jest", "webpack-env"],
     "strictPropertyInitialization": false,
     "baseUrl": ".",
     "paths": {
