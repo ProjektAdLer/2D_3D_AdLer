@@ -32,9 +32,13 @@ export default function AvatarEditor() {
   return (
     <React.Fragment>
       <div className="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden">
-        <div className="grid order-2 grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 portrait:gap-4 grow lg:rounded-lg">
+        <MenuHeaderBar
+          location="editor"
+          className="self-center w-full p-2 font-semibold"
+        />
+        <div className="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 portrait:gap-4 grow lg:rounded-lg">
           {/* Categories (Left Side) */}
-          <div className="col-start-1">
+          <div className="portrait:order-2">
             {/* Category Tabs */}
             <div className="flex flex-row justify-center space-x-4 p-4">
               {Object.values(OAvatarEditorCategory)
@@ -59,13 +63,8 @@ export default function AvatarEditor() {
           </div>
 
           {/* Avatar Preview (Right Side) */}
-          <div className="col-start-2">AVATAR THUMBNAIL</div>
+          <div className="p-4">AVATAR THUMBNAIL</div>
         </div>
-
-        <MenuHeaderBar
-          location="editor"
-          className="self-center order-1 w-full p-2 font-semibold"
-        />
       </div>
     </React.Fragment>
   );
