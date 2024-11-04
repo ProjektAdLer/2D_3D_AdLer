@@ -45,7 +45,6 @@ export default function AvatarEditor() {
                 .filter((category) => typeof category === "number")
                 .map((category) => (
                   <AvatarEditorCategoryTabButton
-                    className=""
                     key={category}
                     category={category as AvatarEditorCategory}
                     active={activeTab === category}
