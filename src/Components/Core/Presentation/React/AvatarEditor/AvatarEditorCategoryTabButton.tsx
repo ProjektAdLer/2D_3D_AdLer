@@ -4,6 +4,9 @@ import {
   AvatarEditorCategory,
   OAvatarEditorCategory,
 } from "./AvatarEditorCategories/AvatarEditorCategories";
+import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import tailwindMerge from "../../Utils/TailwindMerge";
+import { className } from "@babylonjs/core";
 
 type AvatarEditorCategoryTabButtonProps = {
   category: AvatarEditorCategory;
@@ -22,12 +25,11 @@ export default function AvatarEditorCategoryTabButton(
   const { t: translate } = useTranslation("avatarEditor");
 
   return (
-    <button
+    <StyledButton
       data-testid={`avatar-editor-category-tab-${props.category}`}
-      className={`grow ${props.active ? "bg-adlerbggradientfrom" : "bg-adlerbggradientto"}`}
       onClick={props.onClick}
     >
       {translate(AvatarEditorCategoryTitles[props.category])}
-    </button>
+    </StyledButton>
   );
 }

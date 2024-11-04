@@ -4,6 +4,7 @@ import {
   AvatarEditorCategory,
   OAvatarEditorCategory,
 } from "./AvatarEditorCategories";
+import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 type AvatarEditorCategoryTabButtonProps = {
   category: AvatarEditorCategory;
@@ -22,12 +23,13 @@ export default function AvatarEditorCategoryTabButton(
   const { t: translate } = useTranslation("avatarEditor");
 
   return (
-    <button
+    <StyledButton
+      style={{ backgroundColor: "red" }}
       data-testid={`avatar-editor-category-tab-${props.category}`}
-      className={`grow ${props.active ? "bg-adlerbggradientfrom" : "bg-adlerbggradientto"}`}
+      className={`${props.active ? "!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent !hover:border-transparent" : ""}`}
       onClick={props.onClick}
     >
       {translate(AvatarEditorCategoryTitles[props.category])}
-    </button>
+    </StyledButton>
   );
 }

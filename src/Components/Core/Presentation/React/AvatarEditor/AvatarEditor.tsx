@@ -36,12 +36,12 @@ export default function AvatarEditor() {
           {/* Categories (Left Side) */}
           <div className="col-start-1">
             {/* Category Tabs */}
-            <div className="flex flex-row space-x-4 p-4">
+            <div className="flex flex-row justify-center space-x-4 p-4">
               {Object.values(OAvatarEditorCategory)
                 .filter((category) => typeof category === "number")
                 .map((category) => (
                   <AvatarEditorCategoryTabButton
-                    className="flex w-full h-12"
+                    className=""
                     key={category}
                     category={category as AvatarEditorCategory}
                     active={activeTab === category}
