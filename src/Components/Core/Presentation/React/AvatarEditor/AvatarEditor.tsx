@@ -11,6 +11,8 @@ import {
 } from "./AvatarEditorCategories/AvatarEditorCategories";
 import AvatarEditorHairCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorHairCategory";
 import AvatarEditorFaceCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorFaceCategory";
+import AvatarEditorPreview from "./AvatarEditorPreview/AvatarEditorPreview";
+import LoadingScreen from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreen";
 
 const AvatarEditorCategoryContents = {
   [OAvatarEditorCategory.HAIR]: AvatarEditorHairCategory,
@@ -62,8 +64,11 @@ export default function AvatarEditor() {
           </div>
 
           {/* Avatar Preview (Right Side) */}
-          <div className="p-4">AVATAR THUMBNAIL</div>
+          <div className="p-4">
+            <AvatarEditorPreview className="w-full h-full" />
+          </div>
         </div>
+        <LoadingScreen />
       </div>
     </React.Fragment>
   );

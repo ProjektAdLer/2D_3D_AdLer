@@ -4,34 +4,35 @@ import ScenePresenter from "../../Presentation/Babylon/SceneManagement/ScenePres
 import AbstractSceneDefinition from "../../Presentation/Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
 import LearningSpaceSceneDefinition from "../../Presentation/Babylon/SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import SCENE_TYPES from "./SCENE_TYPES";
+import AvatarEditorPreviewSceneDefinition from "~ReactComponents/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewSceneDefinition";
 
 const ScenesDIContainer = new ContainerModule((bind) => {
   // ScenePresenter Factory
   bind<interfaces.Factory<IScenePresenter>>(
-    SCENE_TYPES.ScenePresenterFactory
+    SCENE_TYPES.ScenePresenterFactory,
   ).toFactory<
     IScenePresenter,
     [interfaces.ServiceIdentifier<AbstractSceneDefinition>]
   >((context: interfaces.Context) => {
     return (
-      sceneDefinition: interfaces.ServiceIdentifier<AbstractSceneDefinition>
+      sceneDefinition: interfaces.ServiceIdentifier<AbstractSceneDefinition>,
     ) => {
       // return binding with given scene definition if it already exists
       if (
         context.container.isBoundNamed(
           SCENE_TYPES.IScenePresenter,
-          sceneDefinition.toString()
+          sceneDefinition.toString(),
         )
       ) {
         return context.container.getNamed<IScenePresenter>(
           SCENE_TYPES.IScenePresenter,
-          sceneDefinition.toString()
+          sceneDefinition.toString(),
         );
       }
       // otherwise create a new binding
       else {
         const scenePresenter = new ScenePresenter(
-          context.container.get<AbstractSceneDefinition>(sceneDefinition)
+          context.container.get<AbstractSceneDefinition>(sceneDefinition),
         );
         context.container
           .bind<IScenePresenter>(SCENE_TYPES.IScenePresenter)
@@ -45,7 +46,10 @@ const ScenesDIContainer = new ContainerModule((bind) => {
 
   // Scenes
   bind<AbstractSceneDefinition>(LearningSpaceSceneDefinition).to(
-    LearningSpaceSceneDefinition
+    LearningSpaceSceneDefinition,
+  );
+  bind<AbstractSceneDefinition>(AvatarEditorPreviewSceneDefinition).to(
+    AvatarEditorPreviewSceneDefinition,
   );
 });
 

@@ -97,7 +97,9 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
       <div
         class="p-4"
       >
-        AVATAR THUMBNAIL
+        <mockedavatareditorpreview
+          class="w-full h-full"
+        />
       </div>
     </div>
   </div>
@@ -201,7 +203,9 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
       <div
         class="p-4"
       >
-        AVATAR THUMBNAIL
+        <mockedavatareditorpreview
+          class="w-full h-full"
+        />
       </div>
     </div>
   </div>
@@ -305,7 +309,9 @@ exports[`AvatarEditor should renders 1`] = `
       <div
         class="p-4"
       >
-        AVATAR THUMBNAIL
+        <mockedavatareditorpreview
+          class="w-full h-full"
+        />
       </div>
     </div>
   </div>

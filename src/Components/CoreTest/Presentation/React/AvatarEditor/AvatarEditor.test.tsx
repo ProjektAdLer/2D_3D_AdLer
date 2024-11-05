@@ -9,6 +9,11 @@ import AvatarEditorViewModel from "../../../../Core/Presentation/React/AvatarEdi
 import IAvatarEditorController from "../../../../Core/Presentation/React/AvatarEditor/IAvatarEditorController";
 import mock from "jest-mock-extended/lib/Mock";
 
+jest.mock(
+  "~ReactComponents/AvatarEditor/AvatarEditorPreview/AvatarEditorPreview",
+  () => "MockedAvatarEditorPreview",
+);
+
 describe("AvatarEditor", () => {
   test("should renders", () => {
     useBuilderMock([
