@@ -51,7 +51,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                     class=""
                   >
                     <button
-                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                       data-testid="B3"
                     >
                       <div
@@ -75,7 +75,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                     class=""
                   >
                     <button
-                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                       data-testid="B7"
                     >
                       <div
@@ -99,7 +99,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                     class=""
                   >
                     <button
-                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                       data-testid="B8"
                     >
                       <div
@@ -123,7 +123,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                     class=""
                   >
                     <button
-                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                       data-testid="E2"
                     >
                       <div
@@ -147,7 +147,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                     class=""
                   >
                     <button
-                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                       data-testid="E4"
                     >
                       <div
@@ -171,7 +171,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                     class=""
                   >
                     <button
-                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                       data-testid="E10"
                     >
                       <div
@@ -195,7 +195,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                     class=""
                   >
                     <button
-                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                       data-testid="L1"
                     >
                       <div
@@ -219,7 +219,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                     class=""
                   >
                     <button
-                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                       data-testid="L3"
                     >
                       <div
@@ -243,7 +243,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                     class=""
                   >
                     <button
-                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                       data-testid="L5"
                     >
                       <div
@@ -267,7 +267,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                     class=""
                   >
                     <button
-                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                       data-testid="U3"
                     >
                       <div
@@ -302,7 +302,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                     class=""
                   >
                     <button
-                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                       data-testid="S1"
                     >
                       <div
@@ -326,7 +326,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                     class=""
                   >
                     <button
-                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                       data-testid="S3"
                     >
                       <div
@@ -361,7 +361,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
                     class=""
                   >
                     <button
-                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+                      class="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw] px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
                       data-testid="H1"
                     >
                       <div
