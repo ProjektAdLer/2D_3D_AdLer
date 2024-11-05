@@ -18,7 +18,7 @@ export default function AvatarEditorHairCategory(
         image,
       }))}
       columns={5}
-      mobileColumns={2}
+      mobileColumns={3}
       onTileClick={(id) => {
         console.log(id);
       }}

@@ -10,7 +10,7 @@ export default function Tile(props: TileProps) {
   return (
     <div className="flex flex-col">
       <StyledButton
-        className="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw]"
+        className=""
         shape="freeFloatCenter"
         onClick={props.onClick}
       >

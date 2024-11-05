@@ -24,9 +24,8 @@ export default function AvatarEditorCategoryTabButton(
 
   return (
     <StyledButton
-      style={{ backgroundColor: "red" }}
       data-testid={`avatar-editor-category-tab-${props.category}`}
-      className={`${props.active ? "!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent !hover:border-transparent" : ""}`}
+      className={`${props.active ? "!bg-adleryellow translate-x-[1px] translate-y-[5px] !border-b-2 !border-r-2 !border-transparent" : ""}`}
       onClick={props.onClick}
     >
       {translate(AvatarEditorCategoryTitles[props.category])}

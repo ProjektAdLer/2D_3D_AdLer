@@ -36,11 +36,11 @@ export default function AvatarEditor() {
           location="editor"
           className="self-center w-full p-2 font-semibold"
         />
-        <div className="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 portrait:gap-4 grow lg:rounded-lg">
+        <div className="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2  grow lg:rounded-lg">
           {/* Categories (Left Side) */}
-          <div className="portrait:order-2">
+          <div className="portrait:order-2 portrait:bg-whitetrans portrait:rounded-xl">
             {/* Category Tabs */}
-            <div className="flex flex-row justify-center space-x-4 p-4">
+            <div className="flex flex-row justify-center space-x-4 p-4 ">
               {Object.values(OAvatarEditorCategory)
                 .filter((category) => typeof category === "number")
                 .map((category) => (
@@ -54,7 +54,7 @@ export default function AvatarEditor() {
             </div>
 
             {/* Category Contents */}
-            <div className="p-4">
+            <div className="p-4 overflow-auto">
               {AvatarEditorCategoryContents[activeTab]({
                 controller,
               })}
