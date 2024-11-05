@@ -4,9 +4,18 @@ import AvatarEditor from "../../../../../Components/Core/Presentation/React/Avat
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import { OAvatarEditorCategory } from "../../../../Core/Presentation/React/AvatarEditor/AvatarEditorCategories/AvatarEditorCategories";
+import useBuilderMock from "../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import AvatarEditorViewModel from "../../../../Core/Presentation/React/AvatarEditor/AvatarEditorViewModel";
+import IAvatarEditorController from "../../../../Core/Presentation/React/AvatarEditor/IAvatarEditorController";
+import mock from "jest-mock-extended/lib/Mock";
 
 describe("AvatarEditor", () => {
   test("should renders", () => {
+    useBuilderMock([
+      new AvatarEditorViewModel(),
+      mock<IAvatarEditorController>(),
+    ]);
+
     const { container } = render(
       <Provider container={CoreDIContainer}>
         <AvatarEditor />
@@ -16,9 +25,26 @@ describe("AvatarEditor", () => {
     expect(container).toMatchSnapshot();
   });
 
+  test("doesn't render without viewModel or controller", () => {
+    useBuilderMock([undefined, undefined]);
+
+    const { container } = render(
+      <Provider container={CoreDIContainer}>
+        <AvatarEditor />
+      </Provider>,
+    );
+
+    expect(container).toBeEmptyDOMElement();
+  });
+
   test.each([[OAvatarEditorCategory.HAIR], [OAvatarEditorCategory.FACE]])(
     "should render %s category when tab button is clicked",
     (category) => {
+      useBuilderMock([
+        new AvatarEditorViewModel(),
+        mock<IAvatarEditorController>(),
+      ]);
+
       const result = render(
         <Provider container={CoreDIContainer}>
           <AvatarEditor />
