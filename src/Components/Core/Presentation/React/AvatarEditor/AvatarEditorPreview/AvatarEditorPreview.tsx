@@ -9,7 +9,7 @@ type AvatarEditorPreviewProps = {
 export default function AvatarEditorPreview(props: AvatarEditorPreviewProps) {
   return (
     <BabylonCanvas
-      className={tailwindMerge("", props.className ?? "")}
+      className={tailwindMerge("rounded-xl", props.className ?? "")}
       sceneDefinitionType={AvatarEditorPreviewSceneDefinition}
     />
   );
