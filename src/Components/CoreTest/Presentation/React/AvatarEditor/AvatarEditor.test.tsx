@@ -1,5 +1,6 @@
 import React from "react";
 import { act, fireEvent, render } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import AvatarEditor from "../../../../../Components/Core/Presentation/React/AvatarEditor/AvatarEditor";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
