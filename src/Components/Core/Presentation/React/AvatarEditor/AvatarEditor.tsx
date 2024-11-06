@@ -40,7 +40,7 @@ export default function AvatarEditor() {
         />
         <div className="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2  grow lg:rounded-lg">
           {/* Categories (Left Side) */}
-          <div className="portrait:order-2 portrait:bg-whitetrans portrait:rounded-xl">
+          <div className="portrait:order-2 ">
             {/* Category Tabs */}
             <div className="flex flex-row justify-center space-x-4 p-4 ">
               {Object.values(OAvatarEditorCategory)
