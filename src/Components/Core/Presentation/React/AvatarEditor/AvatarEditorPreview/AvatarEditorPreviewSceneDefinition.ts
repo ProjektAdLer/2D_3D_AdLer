@@ -35,7 +35,7 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
 
   protected async initializeScene(): Promise<void> {
     // this.scene.clearColor = new Color4(1, 0, 1, 1); // pink for debugging
-    this.scene.clearColor = new Color4(0.66, 0.83, 0.98, 1);
+    this.scene.clearColor = new Color4(0.91, 0.945, 0.977);
 
     // Lights
     const hemiLight = new HemisphericLight(
