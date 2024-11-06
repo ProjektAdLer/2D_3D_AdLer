@@ -14,7 +14,7 @@ type TileLayoutProps = {
 export default function TileGridLayout(props: TileLayoutProps) {
   return (
     <div
-      className={`max-h-[77vh] portrait:max-h-[30vh] overflow-auto grid portrait:grid-cols-${props.mobileColumns ?? props.columns} grid-cols-${props.columns} gap-5 pt-4 rounded-lg p-4 overflow-y-auto`}
+      className={`grid portrait:grid-cols-${props.mobileColumns ?? props.columns} grid-cols-${props.columns} gap-5 pt-4 rounded-lg p-4`}
     >
       {props.tileContents.map((tile) => (
         <Tile
