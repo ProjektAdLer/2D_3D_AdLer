@@ -32,23 +32,23 @@ describe("ScoreAdaptivityElementUseCase", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
-      entityContainerMock
+      entityContainerMock,
     );
     CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.ICalculateLearningWorldScoreUseCase
+      USECASE_TYPES.ICalculateLearningWorldScoreUseCase,
     ).toConstantValue(calculateWorldScoreUseCaseMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase
+      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase,
     ).toConstantValue(calculateSpaceScoreUseCaseMock);
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      worldPortMock
+      worldPortMock,
     );
     CoreDIContainer.rebind(
-      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase,
     ).toConstantValue(beginStoryElementOutroCutSceneUseCaseMock);
   });
 
@@ -73,7 +73,9 @@ describe("ScoreAdaptivityElementUseCase", () => {
 
     expect(loggerMock.log).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
-      expect.stringContaining("User is not in a world or space!")
+      expect.stringContaining(
+        "ScoreLearningElementUseCase: User is not in a space!",
+      ),
     );
     expect(worldPortMock.onLearningElementScored).not.toHaveBeenCalled();
   });
@@ -91,7 +93,9 @@ describe("ScoreAdaptivityElementUseCase", () => {
 
     expect(loggerMock.log).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
-      expect.stringContaining("User is not in a world or space!")
+      expect.stringContaining(
+        "ScoreLearningElementUseCase: User is not in a space!",
+      ),
     );
     expect(worldPortMock.onLearningElementScored).not.toHaveBeenCalled();
   });
@@ -110,7 +114,9 @@ describe("ScoreAdaptivityElementUseCase", () => {
 
     expect(loggerMock.log).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
-      expect.stringContaining("No matching element found!")
+      expect.stringContaining(
+        "ScoreLearningElementUseCase: Could not find element with ID 42 in world 42",
+      ),
     );
     expect(worldPortMock.onLearningElementScored).not.toHaveBeenCalled();
   });
@@ -129,7 +135,9 @@ describe("ScoreAdaptivityElementUseCase", () => {
 
     expect(loggerMock.log).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
-      expect.stringContaining("More than one matching element found!")
+      expect.stringContaining(
+        "ScoreLearningElementUseCase: More than one element with ID 42 in world 42",
+      ),
     );
     expect(worldPortMock.onLearningElementScored).not.toHaveBeenCalled();
   });
@@ -153,7 +161,7 @@ describe("ScoreAdaptivityElementUseCase", () => {
       worldID: 42,
     };
     calculateWorldScoreUseCaseMock.internalExecute.mockReturnValue(
-      newWorldScore
+      newWorldScore,
     );
     const newSpaceScore = {
       currentScore: 42,
@@ -162,20 +170,20 @@ describe("ScoreAdaptivityElementUseCase", () => {
       spaceID: 24,
     };
     calculateSpaceScoreUseCaseMock.internalExecute.mockReturnValue(
-      newSpaceScore
+      newSpaceScore,
     );
 
     systemUnderTest.internalExecute(42);
 
     expect(worldPortMock.onLearningElementScored).toHaveBeenCalledWith(
       true,
-      42
+      42,
     );
     expect(worldPortMock.onLearningSpaceScored).toHaveBeenCalledWith(
-      newSpaceScore
+      newSpaceScore,
     );
     expect(worldPortMock.onLearningWorldScored).toHaveBeenCalledWith(
-      newWorldScore
+      newWorldScore,
     );
   });
 
@@ -194,7 +202,7 @@ describe("ScoreAdaptivityElementUseCase", () => {
     systemUnderTest.internalExecute(42);
 
     expect(
-      beginStoryElementOutroCutSceneUseCaseMock.execute
+      beginStoryElementOutroCutSceneUseCaseMock.execute,
     ).not.toHaveBeenCalled();
   });
 
@@ -219,7 +227,7 @@ describe("ScoreAdaptivityElementUseCase", () => {
       (mock, callback) => {
         filterResult = callback(learningElementMock);
         return [learningElementMock];
-      }
+      },
     );
     systemUnderTest.internalExecute(2);
     expect(filterResult).toBe(true);

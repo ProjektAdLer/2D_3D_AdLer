@@ -12,6 +12,8 @@ import type { IInternalCalculateLearningWorldScoreUseCase } from "../../Calculat
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILearningWorldPort from "../../../Ports/Interfaces/ILearningWorldPort";
+import type INotificationPort from "../../../Ports/Interfaces/INotificationPort";
+import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
 
 @injectable()
 export default class ScoreAdaptivityElementUseCase
@@ -30,14 +32,18 @@ export default class ScoreAdaptivityElementUseCase
     private calculateSpaceScoreUseCase: IInternalCalculateLearningSpaceScoreUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort,
   ) {}
 
   internalExecute(elementID: ComponentID): void {
     // get the current user location
     const userLocation = this.getUserLocationUseCase.execute();
     if (!userLocation.worldID || !userLocation.spaceID) {
-      this.warn(
-        "User is not in a world or space! Trying to score element " + elementID,
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.WARN,
+        `ScoreLearningElementUseCase: User is not in a space!`,
+        NotificationMessages.USER_NOT_IN_SPACE,
       );
       return;
     }
@@ -51,10 +57,18 @@ export default class ScoreAdaptivityElementUseCase
       );
 
     if (elements.length === 0) {
-      this.warn("No matching element found!", elementID);
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.WARN,
+        `ScoreLearningElementUseCase: Could not find element with ID ${elementID} in world ${userLocation.worldID}`,
+        NotificationMessages.ELEMENT_NOT_FOUND,
+      );
       return;
     } else if (elements.length > 1) {
-      this.warn("More than one matching element found!", elementID);
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.WARN,
+        `ScoreLearningElementUseCase: More than one element with ID ${elementID} in world ${userLocation.worldID}`,
+        NotificationMessages.ELEMENT_NOT_UNIQUE,
+      );
       return;
     }
 
@@ -90,14 +104,5 @@ export default class ScoreAdaptivityElementUseCase
     }
 
     this.worldPort.onLearningElementScored(true, elementID);
-  }
-
-  private warn(message: string, id?: ComponentID): void {
-    this.logger.log(
-      LogLevelTypes.WARN,
-      `ScoreLearningElementUseCase: ` +
-        message +
-        `${id ? " ElementID: " + id : ""}`,
-    );
   }
 }
