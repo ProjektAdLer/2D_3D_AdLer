@@ -2,10 +2,7 @@ import { inject, injectable } from "inversify";
 import AbstractSceneDefinition from "../../Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
 import type IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import type IAvatarBuilder from "../../Babylon/Avatar/IAvatarBuilder";
 import {
-  ArcRotateCamera,
-  ArcRotateCameraPointersInput,
   Color3,
   Color4,
   DirectionalLight,
@@ -19,6 +16,7 @@ import {
   Vector3,
 } from "@babylonjs/core";
 import { ShadowOnlyMaterial } from "@babylonjs/materials/shadowOnly/shadowOnlyMaterial";
+import AvatarEditorPreviewCameraBuilder from "./AvatarEditorPreviewCamera/AvatarEditorPreviewCameraBuilder";
 
 const modelLink = require("../../../../../Assets/3dModels/sharedModels/3DModel_Avatar_male.glb");
 
@@ -27,8 +25,8 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
   constructor(
     @inject(BUILDER_TYPES.IPresentationDirector)
     private director: IPresentationDirector,
-    @inject(BUILDER_TYPES.IAvatarBuilder)
-    private avatarBuilder: IAvatarBuilder,
+    @inject(BUILDER_TYPES.IAvatarEditorPreviewCameraBuilder)
+    private cameraBuilder: AvatarEditorPreviewCameraBuilder,
   ) {
     super();
   }
@@ -36,6 +34,9 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
   protected async initializeScene(): Promise<void> {
     // this.scene.clearColor = new Color4(1, 0, 1, 1); // pink for debugging
     this.scene.clearColor = new Color4(0.91, 0.945, 0.977);
+
+    // Create Preview Camera
+    this.director.build(this.cameraBuilder);
 
     // Lights
     const hemiLight = new HemisphericLight(
@@ -58,6 +59,9 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
       this.scene,
     );
     fillLight.intensity = 0.7;
+
+    keyLight.parent = this.scene.activeCamera;
+    fillLight.parent = this.scene.activeCamera;
 
     // Avatar Placeholder
     let avatar: Mesh[];
@@ -103,44 +107,6 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
     shadowGenerator.useBlurExponentialShadowMap = true;
     shadowGenerator.blurScale = 10;
     shadowGenerator.darkness = 0.6;
-
-    // Camera
-    const defaultBetaRotation = Math.PI / 2;
-    const zoomedOutTarget = new Vector3(0, -0.2, 0);
-    const zoomedInTarget = new Vector3(0, 0.5, 0);
-    const camera = new ArcRotateCamera(
-      "camera",
-      Math.PI / 2,
-      defaultBetaRotation,
-      3,
-      zoomedOutTarget,
-      this.scene,
-    );
-    camera.upperBetaLimit = defaultBetaRotation;
-    camera.lowerBetaLimit = defaultBetaRotation;
-    camera.lowerRadiusLimit = 1;
-    camera.upperRadiusLimit = 3;
-    camera.minZ = 0; // basically remove near clipping plane
-
-    // Camera Inputs
-    camera.inputs.attached.mousewheel.attachControl();
-    camera.inputs.attached.pointers.attachControl();
-    const pointersInput = camera.inputs.attached
-      .pointers as ArcRotateCameraPointersInput;
-    pointersInput.multiTouchPanAndZoom = true;
-    pointersInput.pinchZoom = true;
-    camera.wheelDeltaPercentage = 0.01;
-
-    // Camera Zoom Target Shift
-    this.scene.onBeforeRenderObservable.add(() => {
-      const amount =
-        (camera.radius - camera.lowerRadiusLimit!) /
-        (camera.upperRadiusLimit! - camera.lowerRadiusLimit!);
-      camera.target = Vector3.Lerp(zoomedInTarget, zoomedOutTarget, amount);
-    });
-
-    keyLight.parent = camera;
-    fillLight.parent = camera;
 
     new FreeCamera("debugCamera", new Vector3(0, 1, -5), this.scene); // TODO: remove debug camera
   }

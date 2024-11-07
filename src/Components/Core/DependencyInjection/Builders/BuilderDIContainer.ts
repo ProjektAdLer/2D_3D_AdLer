@@ -43,6 +43,7 @@ import ControlsExplanationModalBuilder from "~ReactComponents/GeneralComponents/
 import LMSButtonBuilder from "../../Presentation/React/WelcomePage/LMSButton/LMSButtonBuilder";
 import BreakTimeNotificationOverviewBuilder from "~ReactComponents/GeneralComponents/BreakTimeNotificationOverview/BreakTimeNotificationOverviewBuilder";
 import AvatarEditorBuilder from "src/Components/Core/Presentation/AvatarEditor/AvatarEditorBuilder";
+import AvatarEditorPreviewCameraBuilder from "../../Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewCamera/AvatarEditorPreviewCameraBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -161,6 +162,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarEditorBuilder).to(
     AvatarEditorBuilder,
   );
+  bind<IPresentationBuilder>(
+    BUILDER_TYPES.IAvatarEditorPreviewCameraBuilder,
+  ).to(AvatarEditorPreviewCameraBuilder);
 });
 
 export default BuilderDIContainer;
