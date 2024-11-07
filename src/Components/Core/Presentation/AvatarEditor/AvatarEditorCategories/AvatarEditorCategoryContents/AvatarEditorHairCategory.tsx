@@ -2,7 +2,7 @@ import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGr
 import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps";
 
 const hairThumbnailImages = require.context(
-  "../../../../../../../Assets/3dModels/avatar/hair/hairstyles",
+  "../../../../../../Assets/3dModels/avatar/hair/hairstyles",
 );
 const hairThumbnailImageList = hairThumbnailImages
   .keys()
