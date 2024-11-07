@@ -1,17 +1,17 @@
 import React from "react";
 import { act, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import AvatarEditor from "../../../../../Components/Core/Presentation/React/AvatarEditor/AvatarEditor";
+import AvatarEditor from "../../../Core/Presentation/AvatarEditor/AvatarEditor";
 import { Provider } from "inversify-react";
-import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import { OAvatarEditorCategory } from "../../../../Core/Presentation/React/AvatarEditor/AvatarEditorCategories/AvatarEditorCategories";
-import useBuilderMock from "../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
-import AvatarEditorViewModel from "../../../../Core/Presentation/React/AvatarEditor/AvatarEditorViewModel";
-import IAvatarEditorController from "../../../../Core/Presentation/React/AvatarEditor/IAvatarEditorController";
+import CoreDIContainer from "../../../Core/DependencyInjection/CoreDIContainer";
+import { OAvatarEditorCategory } from "../../../Core/Presentation/AvatarEditor/AvatarEditorCategories/AvatarEditorCategories";
+import useBuilderMock from "../React/ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import AvatarEditorViewModel from "../../../Core/Presentation/AvatarEditor/AvatarEditorViewModel";
+import IAvatarEditorController from "../../../Core/Presentation/AvatarEditor/IAvatarEditorController";
 import mock from "jest-mock-extended/lib/Mock";
 
 jest.mock(
-  "~ReactComponents/AvatarEditor/AvatarEditorPreview/AvatarEditorPreview",
+  "../../../Core/Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreview",
   () => "MockedAvatarEditorPreview",
 );
 

@@ -4,7 +4,7 @@ import ScenePresenter from "../../Presentation/Babylon/SceneManagement/ScenePres
 import AbstractSceneDefinition from "../../Presentation/Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
 import LearningSpaceSceneDefinition from "../../Presentation/Babylon/SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import SCENE_TYPES from "./SCENE_TYPES";
-import AvatarEditorPreviewSceneDefinition from "~ReactComponents/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewSceneDefinition";
+import AvatarEditorPreviewSceneDefinition from "src/Components/Core/Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewSceneDefinition";
 
 const ScenesDIContainer = new ContainerModule((bind) => {
   // ScenePresenter Factory

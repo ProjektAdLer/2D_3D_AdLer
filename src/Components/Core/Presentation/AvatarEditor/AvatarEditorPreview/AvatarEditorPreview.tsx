@@ -1,6 +1,6 @@
-import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
+import BabylonCanvas from "../../Babylon/SceneManagement/BabylonCanvas";
 import AvatarEditorPreviewSceneDefinition from "./AvatarEditorPreviewSceneDefinition";
-import tailwindMerge from "../../../Utils/TailwindMerge";
+import tailwindMerge from "../../Utils/TailwindMerge";
 
 type AvatarEditorPreviewProps = {
   className?: string;

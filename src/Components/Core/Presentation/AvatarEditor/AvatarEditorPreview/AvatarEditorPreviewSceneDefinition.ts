@@ -1,8 +1,8 @@
 import { inject, injectable } from "inversify";
-import AbstractSceneDefinition from "../../../Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
-import type IPresentationDirector from "../../../PresentationBuilder/IPresentationDirector";
+import AbstractSceneDefinition from "../../Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
+import type IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import type IAvatarBuilder from "../../../Babylon/Avatar/IAvatarBuilder";
+import type IAvatarBuilder from "../../Babylon/Avatar/IAvatarBuilder";
 import {
   ArcRotateCamera,
   ArcRotateCameraPointersInput,
@@ -20,7 +20,7 @@ import {
 } from "@babylonjs/core";
 import { ShadowOnlyMaterial } from "@babylonjs/materials/shadowOnly/shadowOnlyMaterial";
 
-const modelLink = require("../../../../../../Assets/3dModels/sharedModels/3DModel_Avatar_male.glb");
+const modelLink = require("../../../../../Assets/3dModels/sharedModels/3DModel_Avatar_male.glb");
 
 @injectable()
 export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDefinition {
