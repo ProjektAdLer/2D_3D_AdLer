@@ -26,7 +26,7 @@ export default class LoadLearningSpaceUseCase
     @inject(CORE_TYPES.ILogger)
     private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
-    private container: IEntityContainer,
+    private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.ILoadLearningWorldUseCase)
     private loadWorldUseCase: ILoadLearningWorldUseCase,
     @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
@@ -55,19 +55,19 @@ export default class LoadLearningSpaceUseCase
     }
 
     // try to find the room with a matching id
-    let spaceEntity = worldEntity.spaces.find(
-      (spaceEntity) => spaceEntity.id === data.spaceID,
-    );
-
-    if (!spaceEntity) {
+    const spaces =
+      this.entityContainer.filterEntitiesOfType<LearningSpaceEntity>(
+        LearningSpaceEntity,
+        (e) => e.id === data.spaceID && e.parentWorldID === data.worldID,
+      );
+    if (spaces.length === 0 || spaces.length > 1) {
       this.logger.log(
         LogLevelTypes.ERROR,
-        "LoadLearningSpaceUseCase: SpaceEntity with " +
-          data.spaceID +
-          " not found.",
+        `LoadLearningSpaceUseCase: Could not find matching Space with ID ${data.spaceID}.`,
       );
-      return Promise.reject("SpaceEntity with " + data.spaceID + " not found");
+      throw new Error(`Could not find matching space`);
     }
+    const spaceEntity = spaces[0];
 
     // create SpaceTO and fill with scoring data
     let spaceTO = this.toTO(spaceEntity);
@@ -117,7 +117,7 @@ export default class LoadLearningSpaceUseCase
   }
 
   private getLearningWorldEntity(worldID: ComponentID): LearningWorldEntity {
-    return this.container.filterEntitiesOfType<LearningWorldEntity>(
+    return this.entityContainer.filterEntitiesOfType<LearningWorldEntity>(
       LearningWorldEntity,
       (entity) => entity.id === worldID,
     )[0];

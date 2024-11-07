@@ -77,7 +77,7 @@ export default class CalculateLearningSpaceScoreUseCase
     if (spaces.length === 0 || spaces.length > 1) {
       this.logger.log(
         LogLevelTypes.ERROR,
-        `CalculateLearningSpaceScoreUseCase: Could not find matching space.`,
+        `CalculateLearningSpaceScoreUseCase: Could not find matching space with ID ${spaceID}.`,
       );
       throw new Error(`Could not find matching space`);
     }

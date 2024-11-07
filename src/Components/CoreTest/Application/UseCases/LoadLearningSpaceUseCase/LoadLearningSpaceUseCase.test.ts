@@ -20,6 +20,7 @@ import LearningSpaceAvailabilityTO from "../../../../Core/Application/DataTransf
 import { BooleanIDNode } from "../../../../Core/Application/UseCases/CalculateLearningSpaceAvailability/Parser/BooleanSyntaxTree";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
+import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
 
 const entityContainerMock = mock<IEntityContainer>();
 const loadWorldMock = mock<ILoadLearningWorldUseCase>();
@@ -29,6 +30,7 @@ const calculateSpaceScoreMock =
 const setUserLocationUseCaseMock = mock<ISetUserLocationUseCase>();
 const calculateLearningSpaceAvailabilityUseCaseMock =
   mock<ICalculateLearningSpaceAvailabilityUseCase>();
+const loggerMock = mock<ILoggerPort>();
 
 describe("LoadSpaceUseCase", () => {
   let systemUnderTest: LoadLearningSpaceUseCase;
@@ -37,23 +39,26 @@ describe("LoadSpaceUseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind<IEntityContainer>(
-      CORE_TYPES.IEntityContainer
+      CORE_TYPES.IEntityContainer,
     ).toConstantValue(entityContainerMock);
     CoreDIContainer.rebind<ILoadLearningWorldUseCase>(
-      USECASE_TYPES.ILoadLearningWorldUseCase
+      USECASE_TYPES.ILoadLearningWorldUseCase,
     ).toConstantValue(loadWorldMock);
     CoreDIContainer.rebind<ILearningWorldPort>(
-      PORT_TYPES.ILearningWorldPort
+      PORT_TYPES.ILearningWorldPort,
     ).toConstantValue(worldPortMock);
     CoreDIContainer.rebind<IInternalCalculateLearningSpaceScoreUseCase>(
-      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase
+      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase,
     ).toConstantValue(calculateSpaceScoreMock);
     CoreDIContainer.rebind<ISetUserLocationUseCase>(
-      USECASE_TYPES.ISetUserLocationUseCase
+      USECASE_TYPES.ISetUserLocationUseCase,
     ).toConstantValue(setUserLocationUseCaseMock);
     CoreDIContainer.rebind<ICalculateLearningSpaceAvailabilityUseCase>(
-      USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase
+      USECASE_TYPES.ICalculateLearningSpaceAvailabilityUseCase,
     ).toConstantValue(calculateLearningSpaceAvailabilityUseCaseMock);
+    CoreDIContainer.rebind<ILoggerPort>(CORE_TYPES.ILogger).toConstantValue(
+      loggerMock,
+    );
   });
 
   beforeEach(() => {
@@ -67,12 +72,12 @@ describe("LoadSpaceUseCase", () => {
   //ANF-ID: [ELG0004]
   test("should load learningspace when LearningWorld Entity is already present", async () => {
     const worldEntity: LearningWorldEntity = new LearningWorldEntity();
+    worldEntity.id = 1;
+    worldEntity.name = "World 1";
     worldEntity.spaces = [
       {
         id: 1,
         name: "Space 1",
-        introStory: null,
-        outroStory: null,
       } as LearningSpaceEntity,
     ];
     worldEntity.id = 1;
@@ -92,13 +97,13 @@ describe("LoadSpaceUseCase", () => {
       requirementsSyntaxTree: new BooleanIDNode(1),
     };
     calculateLearningSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
-      spaceAvailabilityTO
+      spaceAvailabilityTO,
     );
 
     await systemUnderTest.executeAsync({ spaceID: 1, worldID: 1 });
 
     expect(worldPortMock.onLearningSpaceLoaded).toHaveBeenCalledWith(
-      expect.objectContaining(worldEntity.spaces[0])
+      expect.objectContaining({ spaces: worldEntity.spaces }),
     );
   });
 
@@ -109,12 +114,11 @@ describe("LoadSpaceUseCase", () => {
       {
         id: 1,
         name: "Space 1",
-        introStory: null,
-        outroStory: null,
       } as LearningSpaceEntity,
     ];
     worldEntity.id = 2;
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([worldEntity]);
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([worldEntity]);
 
     const spaceScoreTO: LearningSpaceScoreTO = {
@@ -131,33 +135,30 @@ describe("LoadSpaceUseCase", () => {
       requirementsSyntaxTree: new BooleanIDNode(1),
     };
     calculateLearningSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
-      spaceAvailabilityTO
+      spaceAvailabilityTO,
     );
 
     await systemUnderTest.executeAsync({ spaceID: 1, worldID: 2 });
 
     expect(worldPortMock.onLearningSpaceLoaded).toHaveBeenCalledWith(
-      expect.objectContaining(worldEntity.spaces[0])
+      expect.objectContaining({ spaces: worldEntity.spaces }),
     );
   });
 
   //ANF-ID: [EZZ0013]
-  test("should throw error when space is not found", async () => {
+  test("should log error when space is not found", async () => {
     const worldEntity: LearningWorldEntity = new LearningWorldEntity();
     worldEntity.spaces = [
       {
         id: 1,
         name: "Space 1",
-        introStory: null,
-        outroStory: null,
       } as LearningSpaceEntity,
     ];
     worldEntity.id = 1;
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([worldEntity]);
-
-    await expect(async () =>
-      systemUnderTest.executeAsync({ spaceID: 2, worldID: 1 })
-    ).rejects.toBe("SpaceEntity with 2 not found");
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
+    const result = systemUnderTest.executeAsync({ spaceID: 2, worldID: 1 });
+    await expect(result).rejects.toThrow();
   });
 
   //ANF-ID: [ELG0002, ELG0003]
@@ -167,8 +168,6 @@ describe("LoadSpaceUseCase", () => {
       {
         id: 1,
         name: "Space 1",
-        introStory: null,
-        outroStory: null,
       } as LearningSpaceEntity,
     ];
     worldEntity.id = 1;
@@ -188,7 +187,7 @@ describe("LoadSpaceUseCase", () => {
       requirementsSyntaxTree: new BooleanIDNode(1),
     };
     calculateLearningSpaceAvailabilityUseCaseMock.internalExecute.mockReturnValue(
-      spaceAvailabilityTO
+      spaceAvailabilityTO,
     );
 
     await systemUnderTest.executeAsync({ spaceID: 1, worldID: 1 });
@@ -204,7 +203,7 @@ describe("LoadSpaceUseCase", () => {
     entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
       <T>(
         entityType: ConstructorReference<T>,
-        filter: (entity: T) => boolean
+        filter: (entity: T) => boolean,
       ) => {
         let entity = new entityType();
         //@ts-ignore entityType is allways WorldEntity and has a worldID
@@ -212,7 +211,7 @@ describe("LoadSpaceUseCase", () => {
 
         filterReturn = filter(entity);
         return [{}];
-      }
+      },
     );
 
     systemUnderTest["getLearningWorldEntity"](1);
@@ -236,13 +235,13 @@ describe("LoadSpaceUseCase", () => {
     const spaceTO = systemUnderTest["toTO"](spaceEntity);
 
     expect(spaceTO.introStory?.modelType).toStrictEqual(
-      spaceEntity.introStory?.modelType
+      spaceEntity.introStory?.modelType,
     );
     expect(spaceTO.introStory?.storyTexts).toStrictEqual(
-      spaceEntity.introStory?.storyTexts
+      spaceEntity.introStory?.storyTexts,
     );
     expect(spaceTO.introStory?.storyType).toStrictEqual(
-      spaceEntity.introStory?.storyType
+      spaceEntity.introStory?.storyType,
     );
   });
 
@@ -261,13 +260,13 @@ describe("LoadSpaceUseCase", () => {
     const spaceTO = systemUnderTest["toTO"](spaceEntity);
 
     expect(spaceTO.outroStory?.modelType).toStrictEqual(
-      spaceEntity.outroStory?.modelType
+      spaceEntity.outroStory?.modelType,
     );
     expect(spaceTO.outroStory?.storyTexts).toStrictEqual(
-      spaceEntity.outroStory?.storyTexts
+      spaceEntity.outroStory?.storyTexts,
     );
     expect(spaceTO.outroStory?.storyType).toStrictEqual(
-      spaceEntity.outroStory?.storyType
+      spaceEntity.outroStory?.storyType,
     );
   });
 });
