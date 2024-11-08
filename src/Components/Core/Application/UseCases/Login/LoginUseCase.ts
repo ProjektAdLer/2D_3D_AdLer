@@ -11,6 +11,7 @@ import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import { AxiosError } from "axios";
 import i18next from "i18next";
+import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
 
 @injectable()
 export default class LoginUseCase implements ILoginUseCase {
@@ -34,7 +35,7 @@ export default class LoginUseCase implements ILoginUseCase {
       this.notificationPort.onNotificationTriggered(
         LogLevelTypes.WARN,
         "LoginUseCase: User tried logging into Moodle while already logged in",
-        "You are already logged in to Moodle",
+        NotificationMessages.ALREADY_LOGGED_IN,
       );
       this.lmsPort.onLoginFailure(
         i18next.t("alreadyLoggedIn", { ns: "start" }),
@@ -56,7 +57,7 @@ export default class LoginUseCase implements ILoginUseCase {
         this.notificationPort.onNotificationTriggered(
           LogLevelTypes.WARN,
           "LoginUseCase: Connection timeout exceeded with error: " + error,
-          "Timeout",
+          NotificationMessages.BACKEND_ERROR,
         );
         this.lmsPort.onLoginFailure(
           i18next.t("loginFail", { ns: "start" }) +
@@ -69,7 +70,7 @@ export default class LoginUseCase implements ILoginUseCase {
         this.notificationPort.onNotificationTriggered(
           LogLevelTypes.WARN,
           "LoginUseCase: User tried logging in with wrong Info: " + error,
-          "Falsche Daten!",
+          NotificationMessages.WRONG_LOGIN_CREDENTIALS,
         );
         this.lmsPort.onLoginFailure(
           i18next.t("loginFail", { ns: "start" }),
@@ -88,7 +89,6 @@ export default class LoginUseCase implements ILoginUseCase {
       UserDataEntity,
     );
 
-    // use notification?
     this.logger.log(
       LogLevelTypes.INFO,
       "LoginUseCase: User logged in successfully",

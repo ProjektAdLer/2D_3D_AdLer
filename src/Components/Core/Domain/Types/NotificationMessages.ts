@@ -6,4 +6,6 @@ export enum NotificationMessages {
   BACKEND_ERROR = "Backend encountered an error!",
   WORLD_NOT_FOUND = "Could not find needed learning world data!",
   SPACE_SCORING_FAILED = "Failed to calculate space score!",
+  ALREADY_LOGGED_IN = "User is already logged in!",
+  WRONG_LOGIN_CREDENTIALS = "User tried logging in with wrong Info!",
 }

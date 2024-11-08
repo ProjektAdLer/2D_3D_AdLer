@@ -17,15 +17,15 @@ export default class SetUserLocationUseCase implements ISetUserLocationUseCase {
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.IGetLoginStatusUseCase)
-    private getLoginStatusUseCase: IInternalGetLoginStatusUseCase
+    private getLoginStatusUseCase: IInternalGetLoginStatusUseCase,
   ) {}
 
   execute(data: { worldID?: number; spaceID?: number }): void {
     const loginStatus = this.getLoginStatusUseCase.internalExecute();
     if (!loginStatus.isLoggedIn) {
       this.logger.log(
-        LogLevelTypes.ERROR,
-        "SetUserLocationUseCase: User is not logged in, cannot set current location"
+        LogLevelTypes.WARN,
+        "SetUserLocationUseCase: User is not logged in, cannot set current location",
       );
       return;
     }
@@ -50,8 +50,8 @@ export default class SetUserLocationUseCase implements ISetUserLocationUseCase {
       worldEntity!.lastVisitedSpaceID = data.spaceID;
     }
     this.logger.log(
-      LogLevelTypes.INFO,
-      `User location set to: ${data.worldID} + ${data.spaceID}`
+      LogLevelTypes.TRACE,
+      `SetUserLocationUseCase: User location set to: ${data.worldID} + ${data.spaceID}`,
     );
   }
 }

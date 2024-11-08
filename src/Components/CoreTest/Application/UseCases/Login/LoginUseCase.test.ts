@@ -66,7 +66,7 @@ describe("LoginUseCase", () => {
     expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
       expect.any(String),
-      "You are already logged in to Moodle",
+      "User is already logged in!",
     );
 
     notificationPortMock.onNotificationTriggered.mockReset();

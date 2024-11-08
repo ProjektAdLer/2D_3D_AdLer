@@ -18,16 +18,16 @@ describe("SetUserLocationUseCase", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind<IEntityContainer>(
-      CORE_TYPES.IEntityContainer
+      CORE_TYPES.IEntityContainer,
     ).toConstantValue(entityContainerMock);
     CoreDIContainer.rebind<IInternalGetLoginStatusUseCase>(
-      USECASE_TYPES.IGetLoginStatusUseCase
+      USECASE_TYPES.IGetLoginStatusUseCase,
     ).toConstantValue(getLoginStatusUseCaseMock);
   });
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.get(
-      USECASE_TYPES.ISetUserLocationUseCase
+      USECASE_TYPES.ISetUserLocationUseCase,
     );
   });
   afterEach(() => {
@@ -38,7 +38,7 @@ describe("SetUserLocationUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  test("throws error when user entity is present but user is not logged in", () => {
+  test("logs warning when user entity is present but user is not logged in", () => {
     getLoginStatusUseCaseMock.internalExecute.mockReturnValue({
       isLoggedIn: false,
       userName: "test",
@@ -47,8 +47,8 @@ describe("SetUserLocationUseCase", () => {
     systemUnderTest.execute({ worldID: 1, spaceID: 1 });
 
     expect(loggerMock).toHaveBeenCalledWith(
-      LogLevelTypes.ERROR,
-      "SetUserLocationUseCase: User is not logged in, cannot set current location"
+      LogLevelTypes.WARN,
+      "SetUserLocationUseCase: User is not logged in, cannot set current location",
     );
   });
 
