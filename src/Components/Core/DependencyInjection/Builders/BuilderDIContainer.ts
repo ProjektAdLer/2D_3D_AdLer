@@ -44,6 +44,7 @@ import LMSButtonBuilder from "../../Presentation/React/WelcomePage/LMSButton/LMS
 import BreakTimeNotificationOverviewBuilder from "~ReactComponents/GeneralComponents/BreakTimeNotificationOverview/BreakTimeNotificationOverviewBuilder";
 import AvatarEditorBuilder from "src/Components/Core/Presentation/AvatarEditor/AvatarEditorBuilder";
 import AvatarEditorPreviewCameraBuilder from "../../Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewCamera/AvatarEditorPreviewCameraBuilder";
+import AvatarEditorPreviewBuilder from "../../Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -165,6 +166,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(
     BUILDER_TYPES.IAvatarEditorPreviewCameraBuilder,
   ).to(AvatarEditorPreviewCameraBuilder);
+  bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarEditorPreviewBuilder).to(
+    AvatarEditorPreviewBuilder,
+  );
 });
 
 export default BuilderDIContainer;
