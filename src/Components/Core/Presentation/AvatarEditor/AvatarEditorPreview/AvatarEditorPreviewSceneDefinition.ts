@@ -6,7 +6,6 @@ import {
   Color3,
   Color4,
   DirectionalLight,
-  FreeCamera,
   HemisphericLight,
   Mesh,
   MeshBuilder,
@@ -32,7 +31,6 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
   }
 
   protected async initializeScene(): Promise<void> {
-    // this.scene.clearColor = new Color4(1, 0, 1, 1); // pink for debugging
     this.scene.clearColor = new Color4(0.91, 0.945, 0.977);
 
     // Create Preview Camera
@@ -107,7 +105,5 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
     shadowGenerator.useBlurExponentialShadowMap = true;
     shadowGenerator.blurScale = 10;
     shadowGenerator.darkness = 0.6;
-
-    new FreeCamera("debugCamera", new Vector3(0, 1, -5), this.scene); // TODO: remove debug camera
   }
 }
