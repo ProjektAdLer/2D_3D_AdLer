@@ -30,7 +30,7 @@ export default function RangeSlider(props: RangeSliderProps) {
     <div className="flex items-center justify-center gap-2 text-xl font-bold">
       {props.buttons && (
         <StyledButton
-          shape="freeFloatCenter"
+          shape="smallSquare"
           className="w-10"
           data-testid="leftRangeSliderButton"
           onClick={() =>
@@ -43,21 +43,25 @@ export default function RangeSlider(props: RangeSliderProps) {
           {!props.buttons.imageLeft && "-"}
         </StyledButton>
       )}
-      <input
-        type="range"
-        min={props.min}
-        max={props.max}
-        step={props.step}
-        value={value}
-        name="Slider"
-        alt="SliderComponent"
-        onChange={(e) => {
-          setValue(parseFloat(e.target.value));
-        }}
-      ></input>
+      <div className="flex !flex-col justify-center items-center">
+        <p>{value}</p>
+        <input
+          type="range"
+          min={props.min}
+          max={props.max}
+          step={props.step}
+          value={value}
+          name="Slider"
+          alt="SliderComponent"
+          onChange={(e) => {
+            setValue(parseFloat(e.target.value));
+          }}
+        ></input>
+      </div>
+
       {props.buttons && (
         <StyledButton
-          shape="freeFloatCenter"
+          shape="smallSquare"
           className="w-10"
           data-testid="rightRangeSliderButton"
           onClick={() =>

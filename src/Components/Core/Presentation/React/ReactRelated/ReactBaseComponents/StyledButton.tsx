@@ -67,7 +67,13 @@ export default function StyledButton({
         )}
         {...rest}
       >
-        {icon && <img alt="" className={"h-6 lg:h-8 pr-2"} src={icon}></img>}
+        {icon && (
+          <img
+            alt=""
+            className={icon && children ? "h-6 lg:h-8 pr-2" : "h-8 lg:h-12"}
+            src={icon}
+          ></img>
+        )}
         {children}
       </button>
     </div>
