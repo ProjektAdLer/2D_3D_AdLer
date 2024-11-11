@@ -18,12 +18,12 @@ export default function AvatarEditorPreview(props: AvatarEditorPreviewProps) {
   >(BUILDER_TYPES.IAvatarEditorPreviewBuilder);
 
   return (
-    <div className={tailwindMerge(props.className ?? "flex")}>
+    <div className={tailwindMerge(props.className ?? " ")}>
       <BabylonCanvas
-        className={"rounded-xl w-full"}
+        className={"rounded-xl w-full h-full"}
         sceneDefinitionType={AvatarEditorPreviewSceneDefinition}
       />
-      <div className="absolute bottom-0 flex space-x-2 p-2">
+      <div className="absolute bottom-4 portrait:bottom-2 flex justify-center w-full space-x-2 p-2">
         <StyledButton
           onMouseDown={controller.onTurnLeftDown}
           onMouseUp={controller.onTurnLeftUp}
