@@ -3,13 +3,13 @@
 exports[`AvatarEditorPreview should render 1`] = `
 <div>
   <div
-    class="flex"
+    class=""
   >
     <mockedbabyloncanvas
-      class="rounded-xl w-full"
+      class="rounded-xl w-full h-full"
     />
     <div
-      class="absolute bottom-0 flex space-x-2 p-2"
+      class="absolute bottom-4 portrait:bottom-2 flex justify-center w-full space-x-2 p-2"
     >
       <div
         class=""
