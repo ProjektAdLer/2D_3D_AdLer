@@ -10,6 +10,9 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- new icons for avatar creator categories and door icons in 2d
+- new 3d icons for doors
+
 ### Changed
 
 - Streamlined various different close buttons across the program with a new icon
