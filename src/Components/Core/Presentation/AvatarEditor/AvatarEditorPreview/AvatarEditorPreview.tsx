@@ -25,24 +25,28 @@ export default function AvatarEditorPreview(props: AvatarEditorPreviewProps) {
       />
       <div className="absolute bottom-4 portrait:bottom-2 flex justify-center w-full space-x-2 p-2">
         <StyledButton
+          data-testid="left-turn-button"
           onMouseDown={controller.onTurnLeftDown}
           onMouseUp={controller.onTurnLeftUp}
         >
           {"<"}
         </StyledButton>
         <StyledButton
+          data-testid="zoom-in-button"
           onMouseDown={controller.onZoomInDown}
           onMouseUp={controller.onZoomInUp}
         >
           {"+"}
         </StyledButton>
         <StyledButton
+          data-testid="zoom-out-button"
           onMouseDown={controller.onZoomOutDown}
           onMouseUp={controller.onZoomOutUp}
         >
           {"-"}
         </StyledButton>
         <StyledButton
+          data-testid="right-turn-button"
           onMouseDown={controller.onTurnRightDown}
           onMouseUp={controller.onTurnRightUp}
         >

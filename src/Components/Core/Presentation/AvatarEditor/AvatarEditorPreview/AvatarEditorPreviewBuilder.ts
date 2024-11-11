@@ -12,6 +12,7 @@ export default class AvatarEditorPreviewBuilder extends PresentationBuilder<
   undefined
 > {
   constructor() {
+    /* istanbul ignore next */
     super(
       AvatarEditorPreviewViewModel,
       AvatarEditorPreviewController,
