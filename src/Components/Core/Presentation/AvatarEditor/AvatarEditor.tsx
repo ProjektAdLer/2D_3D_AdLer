@@ -14,11 +14,6 @@ import AvatarEditorFaceCategory from "./AvatarEditorCategories/AvatarEditorCateg
 import AvatarEditorPreview from "./AvatarEditorPreview/AvatarEditorPreview";
 import LoadingScreen from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreen";
 
-const AvatarEditorCategoryContents = {
-  [OAvatarEditorCategory.HAIR]: AvatarEditorHairCategory,
-  [OAvatarEditorCategory.FACE]: AvatarEditorFaceCategory,
-};
-
 export default function AvatarEditor() {
   const [viewModel, controller] = useBuilder<
     AvatarEditorViewModel,
@@ -57,9 +52,12 @@ export default function AvatarEditor() {
 
             {/* Category Contents */}
             <div className="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto">
-              {AvatarEditorCategoryContents[activeTab]({
-                controller,
-              })}
+              {activeTab === OAvatarEditorCategory.HAIR && (
+                <AvatarEditorHairCategory controller={controller} />
+              )}
+              {activeTab === OAvatarEditorCategory.FACE && (
+                <AvatarEditorFaceCategory controller={controller} />
+              )}
             </div>
           </div>
 
