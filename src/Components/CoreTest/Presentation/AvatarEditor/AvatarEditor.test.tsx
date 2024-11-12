@@ -14,6 +14,14 @@ jest.mock(
   "../../../Core/Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreview",
   () => "MockedAvatarEditorPreview",
 );
+jest.mock(
+  "../../../Core/Presentation/AvatarEditor/AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorHairCategory",
+  () => "MockedAvatarEditorHairCategory",
+);
+jest.mock(
+  "../../../Core/Presentation/AvatarEditor/AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorFaceCategory",
+  () => "MockedAvatarEditorFaceCategory",
+);
 
 describe("AvatarEditor", () => {
   test("should renders", () => {
