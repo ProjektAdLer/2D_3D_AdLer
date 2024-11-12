@@ -1,5 +1,10 @@
 {
   "hairColorTitle": "Haarfarbe",
   "hairstylesTitle": "Frisur",
-  "beardsTitle": "Bart"
+  "beardsTitle": "Bart",
+
+  "eyebrowsTitle": "Augenbrauen",
+  "eyesTitle": "Augen",
+  "mouthTitle": "Mund",
+  "noseTitle": "Nase"
 }
