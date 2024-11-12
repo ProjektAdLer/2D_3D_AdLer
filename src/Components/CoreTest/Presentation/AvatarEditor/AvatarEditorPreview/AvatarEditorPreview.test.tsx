@@ -49,7 +49,7 @@ describe("AvatarEditorPreview", () => {
 
     const leftTurnButton = renderResult.getByTestId("left-turn-button");
 
-    fireEvent.mouseDown(leftTurnButton);
+    fireEvent.pointerDown(leftTurnButton);
 
     expect(controllerMock.onTurnLeftDown).toHaveBeenCalledTimes(1);
   });
@@ -65,7 +65,7 @@ describe("AvatarEditorPreview", () => {
 
     const leftTurnButton = renderResult.getByTestId("left-turn-button");
 
-    fireEvent.mouseUp(leftTurnButton);
+    fireEvent.pointerUp(leftTurnButton);
 
     expect(controllerMock.onTurnLeftUp).toHaveBeenCalledTimes(1);
   });
@@ -81,7 +81,7 @@ describe("AvatarEditorPreview", () => {
 
     const zoomInButton = renderResult.getByTestId("zoom-in-button");
 
-    fireEvent.mouseDown(zoomInButton);
+    fireEvent.pointerDown(zoomInButton);
 
     expect(controllerMock.onZoomInDown).toHaveBeenCalledTimes(1);
   });
@@ -97,7 +97,7 @@ describe("AvatarEditorPreview", () => {
 
     const zoomInButton = renderResult.getByTestId("zoom-in-button");
 
-    fireEvent.mouseUp(zoomInButton);
+    fireEvent.pointerUp(zoomInButton);
 
     expect(controllerMock.onZoomInUp).toHaveBeenCalledTimes(1);
   });
@@ -113,7 +113,7 @@ describe("AvatarEditorPreview", () => {
 
     const zoomOutButton = renderResult.getByTestId("zoom-out-button");
 
-    fireEvent.mouseDown(zoomOutButton);
+    fireEvent.pointerDown(zoomOutButton);
 
     expect(controllerMock.onZoomOutDown).toHaveBeenCalledTimes(1);
   });
@@ -129,7 +129,7 @@ describe("AvatarEditorPreview", () => {
 
     const zoomOutButton = renderResult.getByTestId("zoom-out-button");
 
-    fireEvent.mouseUp(zoomOutButton);
+    fireEvent.pointerUp(zoomOutButton);
 
     expect(controllerMock.onZoomOutUp).toHaveBeenCalledTimes(1);
   });
@@ -145,7 +145,7 @@ describe("AvatarEditorPreview", () => {
 
     const rightTurnButton = renderResult.getByTestId("right-turn-button");
 
-    fireEvent.mouseDown(rightTurnButton);
+    fireEvent.pointerDown(rightTurnButton);
 
     expect(controllerMock.onTurnRightDown).toHaveBeenCalledTimes(1);
   });
@@ -161,7 +161,7 @@ describe("AvatarEditorPreview", () => {
 
     const rightTurnButton = renderResult.getByTestId("right-turn-button");
 
-    fireEvent.mouseUp(rightTurnButton);
+    fireEvent.pointerUp(rightTurnButton);
 
     expect(controllerMock.onTurnRightUp).toHaveBeenCalledTimes(1);
   });
