@@ -1,5 +1,4 @@
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
-import { useTranslation } from "react-i18next";
 import {
   AvatarEditorCategory,
   OAvatarEditorCategory,
@@ -8,9 +7,9 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 
 import hairCategoryIcon from "../../../../../Assets/icons/hair.svg";
 import faceCategoryIcon from "../../../../../Assets/icons/face.svg";
-import bodyCategoryIcon from "../../../../../Assets/icons/body.svg";
-import clothingCategoryIcon from "../../../../../Assets/icons/clothing.svg";
-import accessoiresCategoryIcon from "../../../../../Assets/icons/accessoires.svg";
+// import bodyCategoryIcon from "../../../../../Assets/icons/body.svg";
+// import clothingCategoryIcon from "../../../../../Assets/icons/clothing.svg";
+// import accessoiresCategoryIcon from "../../../../../Assets/icons/accessoires.svg";
 
 type AvatarEditorCategoryTabButtonProps = {
   category: AvatarEditorCategory;
@@ -18,33 +17,20 @@ type AvatarEditorCategoryTabButtonProps = {
   onClick: () => void;
 } & AdLerUIComponent;
 
-const AvatarEditorCategoryTitles = {
-  [OAvatarEditorCategory.HAIR]: "hair",
-  [OAvatarEditorCategory.FACE]: "face",
+const AvatarEditorCategoryIcons = {
+  [OAvatarEditorCategory.HAIR]: hairCategoryIcon,
+  [OAvatarEditorCategory.FACE]: faceCategoryIcon,
 };
 
 export default function AvatarEditorCategoryTabButton(
   props: AvatarEditorCategoryTabButtonProps,
 ) {
-  const { t: translate } = useTranslation("avatarEditor");
-
-  function getIconsForCategory(category: AvatarEditorCategory) {
-    switch (category) {
-      case OAvatarEditorCategory.HAIR:
-        return hairCategoryIcon;
-      case OAvatarEditorCategory.FACE:
-        return faceCategoryIcon;
-      default:
-        return "";
-    }
-  }
-
   return (
     <StyledButton
       data-testid={`avatar-editor-category-tab-${props.category}`}
       className={`${props.active ? "!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent " : ""}`}
       onClick={props.onClick}
-      icon={getIconsForCategory(props.category)}
+      icon={AvatarEditorCategoryIcons[props.category]}
     ></StyledButton>
   );
 }
