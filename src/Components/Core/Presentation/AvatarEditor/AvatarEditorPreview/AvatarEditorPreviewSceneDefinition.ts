@@ -31,7 +31,11 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
   }
 
   protected async initializeScene(): Promise<void> {
-    this.scene.clearColor = new Color4(0.91, 0.945, 0.977);
+    this.scene.clearColor = new Color4(
+      0.9137254901960784,
+      0.8392156862745098,
+      0.7019607843137254,
+    );
 
     // Create Preview Camera
     this.director.build(this.cameraBuilder);
