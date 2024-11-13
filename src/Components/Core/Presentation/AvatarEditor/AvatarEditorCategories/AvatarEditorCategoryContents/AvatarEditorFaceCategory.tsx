@@ -1,6 +1,4 @@
-import RangeSlider from "~ReactComponents/ReactRelated/ReactBaseComponents/RangeSlider";
 import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps";
-import faceCategoryIcon from "../../../../../../Assets/icons/face.svg";
 import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGridLayout";
 import { useTranslation } from "react-i18next";
 
