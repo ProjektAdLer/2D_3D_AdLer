@@ -57,13 +57,26 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
       </div>
     </div>
     <div
-      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2  grow lg:rounded-lg"
+      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:order-2 "
+        class="flex flex-col portrait:order-2"
       >
         <div
-          class="flex flex-row justify-center space-x-4 p-4 "
+          class="flex flex-row items-center justify-center"
+        >
+          <div
+            class="flex flex-col items-center justify-center"
+          >
+            <div
+              class="text-2xl font-bold text-darkblue"
+            >
+              Haare
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex flex-row justify-center p-2 space-x-4 "
         >
           <div
             class=""
@@ -90,6 +103,34 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
                 alt=""
                 class="h-8 lg:h-12"
                 src="face.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer landscape:hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent active:bg-adleryellow text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+              data-testid="avatar-editor-category-tab-2"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="accessoires.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer landscape:hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent active:bg-adleryellow text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+              data-testid="avatar-editor-category-tab-3"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="clothing.svg"
               />
             </button>
           </div>
@@ -171,13 +212,26 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
       </div>
     </div>
     <div
-      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2  grow lg:rounded-lg"
+      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:order-2 "
+        class="flex flex-col portrait:order-2"
       >
         <div
-          class="flex flex-row justify-center space-x-4 p-4 "
+          class="flex flex-row items-center justify-center"
+        >
+          <div
+            class="flex flex-col items-center justify-center"
+          >
+            <div
+              class="text-2xl font-bold text-darkblue"
+            >
+              Gesicht
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex flex-row justify-center p-2 space-x-4 "
         >
           <div
             class=""
@@ -204,6 +258,34 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
                 alt=""
                 class="h-8 lg:h-12"
                 src="face.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer landscape:hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent active:bg-adleryellow text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+              data-testid="avatar-editor-category-tab-2"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="accessoires.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer landscape:hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent active:bg-adleryellow text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+              data-testid="avatar-editor-category-tab-3"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="clothing.svg"
               />
             </button>
           </div>
@@ -285,13 +367,26 @@ exports[`AvatarEditor should renders 1`] = `
       </div>
     </div>
     <div
-      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2  grow lg:rounded-lg"
+      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:order-2 "
+        class="flex flex-col portrait:order-2"
       >
         <div
-          class="flex flex-row justify-center space-x-4 p-4 "
+          class="flex flex-row items-center justify-center"
+        >
+          <div
+            class="flex flex-col items-center justify-center"
+          >
+            <div
+              class="text-2xl font-bold text-darkblue"
+            >
+              Haare
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex flex-row justify-center p-2 space-x-4 "
         >
           <div
             class=""
@@ -318,6 +413,34 @@ exports[`AvatarEditor should renders 1`] = `
                 alt=""
                 class="h-8 lg:h-12"
                 src="face.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer landscape:hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent active:bg-adleryellow text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+              data-testid="avatar-editor-category-tab-2"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="accessoires.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer landscape:hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent active:bg-adleryellow text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+              data-testid="avatar-editor-category-tab-3"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="clothing.svg"
               />
             </button>
           </div>
