@@ -33,11 +33,24 @@ export default function AvatarEditor() {
           location="editor"
           className="self-center w-full p-2 font-semibold"
         />
-        <div className="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2  grow lg:rounded-lg">
+        <div className="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg">
           {/* Categories (Left Side) */}
-          <div className="flex flex-col portrait:order-2 ">
+
+          <div className="flex flex-col portrait:order-2">
             {/* Category Tabs */}
-            <div className="flex flex-row justify-center space-x-4 p-4 ">
+            {/* Category Header */}
+            <div className="flex flex-row items-center justify-center">
+              <div className="flex flex-col items-center justify-center">
+                <div className="text-2xl font-bold text-darkblue">
+                  {activeTab === OAvatarEditorCategory.HAIR && "Haare"}
+                  {activeTab === OAvatarEditorCategory.FACE && "Gesicht"}
+                  {activeTab === OAvatarEditorCategory.ACCESSOIRE &&
+                    "Accessoires"}
+                  {activeTab === OAvatarEditorCategory.CLOTHING && "Kleidung"}
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-row justify-center p-2 space-x-4 ">
               {Object.values(OAvatarEditorCategory)
                 .filter((category) => typeof category === "number")
                 .map((category) => (

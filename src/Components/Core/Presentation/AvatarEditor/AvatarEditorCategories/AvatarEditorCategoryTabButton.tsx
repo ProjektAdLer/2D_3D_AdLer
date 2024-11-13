@@ -7,9 +7,9 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 
 import hairCategoryIcon from "../../../../../Assets/icons/hair.svg";
 import faceCategoryIcon from "../../../../../Assets/icons/face.svg";
+import accessoiresCategoryIcon from "../../../../../Assets/icons/accessoires.svg";
+import clothingCategoryIcon from "../../../../../Assets/icons/clothing.svg";
 // import bodyCategoryIcon from "../../../../../Assets/icons/body.svg";
-// import clothingCategoryIcon from "../../../../../Assets/icons/clothing.svg";
-// import accessoiresCategoryIcon from "../../../../../Assets/icons/accessoires.svg";
 
 type AvatarEditorCategoryTabButtonProps = {
   category: AvatarEditorCategory;
@@ -20,6 +20,8 @@ type AvatarEditorCategoryTabButtonProps = {
 const AvatarEditorCategoryIcons = {
   [OAvatarEditorCategory.HAIR]: hairCategoryIcon,
   [OAvatarEditorCategory.FACE]: faceCategoryIcon,
+  [OAvatarEditorCategory.ACCESSOIRE]: accessoiresCategoryIcon,
+  [OAvatarEditorCategory.CLOTHING]: clothingCategoryIcon,
 };
 
 export default function AvatarEditorCategoryTabButton(
