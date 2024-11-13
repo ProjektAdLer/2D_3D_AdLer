@@ -3,19 +3,23 @@ import AbstractSceneDefinition from "../../Babylon/SceneManagement/Scenes/Abstra
 import type IPresentationDirector from "../../PresentationBuilder/IPresentationDirector";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import {
+  BackgroundMaterial,
   Color3,
   Color4,
   DirectionalLight,
   HemisphericLight,
   Mesh,
   MeshBuilder,
+  ReflectiveShadowMap,
   SceneLoader,
   ShadowGenerator,
   StandardMaterial,
+  Texture,
   Vector3,
 } from "@babylonjs/core";
 import { ShadowOnlyMaterial } from "@babylonjs/materials/shadowOnly/shadowOnlyMaterial";
 import AvatarEditorPreviewCameraBuilder from "./AvatarEditorPreviewCamera/AvatarEditorPreviewCameraBuilder";
+import backGroundMatTexture from "../../../../../Assets/textures/avatar/AvatarEditorBackground.png";
 
 const modelLink = require("../../../../../Assets/3dModels/sharedModels/3DModel_Avatar_male.glb");
 
@@ -53,7 +57,7 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
       new Vector3(1, -1, 1),
       this.scene,
     );
-    keyLight.intensity = 1.8;
+    keyLight.intensity = 2.5;
 
     const fillLight = new DirectionalLight(
       "fillLight",
@@ -64,6 +68,13 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
 
     keyLight.parent = this.scene.activeCamera;
     fillLight.parent = this.scene.activeCamera;
+
+    const rsm = new ReflectiveShadowMap(this.scene, keyLight, {
+      width: 512,
+      height: 512,
+    });
+    rsm.addMesh();
+    // no specific mesh transmitted to addMesh, so all meshes in the scene are added and will be rendered in the RSM
 
     // Avatar Placeholder
     let avatar: Mesh[];
@@ -86,6 +97,24 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
     shadowMat.activeLight = keyLight;
     groundPlane.material = shadowMat;
     groundPlane.receiveShadows = true;
+
+    // Material for Background
+    const backgroundMat = new BackgroundMaterial("backgroundMat", this.scene);
+    backgroundMat.diffuseTexture = new Texture(
+      backGroundMatTexture,
+      this.scene,
+    );
+
+    //Background for the Avatar
+    const background = MeshBuilder.CreatePlane(
+      "background",
+      { size: 20 },
+      this.scene,
+    );
+    background.position = new Vector3(0, 0, 10);
+    background.rotation = new Vector3(0, 0, 0);
+    background.material = backgroundMat;
+    background.parent = this.scene.activeCamera;
 
     const podium = MeshBuilder.CreateCylinder(
       "podium",
