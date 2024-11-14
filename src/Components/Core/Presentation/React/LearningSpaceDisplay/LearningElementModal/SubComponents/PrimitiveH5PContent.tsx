@@ -68,7 +68,9 @@ export default function H5PContent({
           result.div.style.width = "90vw";
         }
 
-        lastRenderedWidth = Math.round(entry.contentRect.width);
+        if (entry.contentRect) {
+          lastRenderedWidth = Math.round(entry.contentRect.width);
+        }
         window.dispatchEvent(new Event("resize"));
       }
     });
@@ -94,6 +96,7 @@ export default function H5PContent({
       id="h5p-container"
       style={{ visibility: "hidden", width: "90vw" }}
       ref={h5pContainerRef}
+      data-testid="primitiveH5pContent-testid"
     ></div>
   );
 }

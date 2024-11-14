@@ -40,12 +40,11 @@ export default function H5PContent({
     const debug = async () => {
       if (h5pContainerRef.current) {
         const el = h5pContainerRef.current;
-        await new H5PPlayer(el, createH5POptions(viewModel)).then(() => {
-          //@ts-ignore
-          H5P.externalDispatcher.on("xAPI", controller.h5pEventCalled);
-          // @ts-ignore
-          H5P.xAPICompletedListener = controller.xAPICompletedListener;
-        });
+        await new H5PPlayer(el, createH5POptions(viewModel));
+        //@ts-ignore
+        H5P.externalDispatcher.on("xAPI", controller.h5pEventCalled);
+        // @ts-ignore
+        H5P.xAPICompletedListener = controller.xAPICompletedListener;
       }
     };
     debug();
@@ -83,7 +82,9 @@ export default function H5PContent({
           result.div.style.width = "90vw";
         }
 
-        lastRenderedWidth = Math.round(entry.contentRect.width);
+        if (entry.contentRect) {
+          lastRenderedWidth = Math.round(entry.contentRect.width);
+        }
         window.dispatchEvent(new Event("resize"));
       }
     });
@@ -109,6 +110,7 @@ export default function H5PContent({
       id="h5p-container"
       style={{ visibility: "hidden", width: "90vw" }}
       ref={h5pContainerRef}
+      data-testid="h5pContent-testid"
     ></div>
   );
 }
