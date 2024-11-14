@@ -25,14 +25,20 @@ export default function AvatarEditorHairCategory(
 
   return (
     <div className="flex flex-col">
-      <h1 className="text-2xl font-bold">{translate("hairColorTitle")}</h1>
-      <ColorPicker
-        colors={defaultColorPickerSchema}
-        onColorClick={(color) => {
-          console.log(color);
-        }}
-      />
-      <h1 className="text-2xl font-bold">{translate("hairstylesTitle")}</h1>
+      <div className="pb-2 border-b border-gray-500">
+        <h1 className="text-2xl font-bold">{translate("hairColorTitle")}</h1>
+      </div>
+      <div className="flex flex-col h-20 p-2 m-2 bg-slate-200">
+        <ColorPicker
+          colors={defaultColorPickerSchema}
+          onColorClick={(color) => {
+            console.log(color);
+          }}
+        />
+      </div>
+      <div className="pb-2 border-b border-gray-500">
+        <h1 className="text-2xl font-bold">{translate("hairstylesTitle")}</h1>
+      </div>
       <TileGridLayout
         tileContents={hairThumbnailImageList.map((image, index) => ({
           id: index,
@@ -44,7 +50,9 @@ export default function AvatarEditorHairCategory(
           console.log(id);
         }}
       />
-      <h1 className="text-2xl font-bold">{translate("beardsTitle")}</h1>
+      <div className="pb-2 border-b border-gray-500">
+        <h1 className="text-2xl font-bold">{translate("beardsTitle")}</h1>
+      </div>
       <TileGridLayout
         tileContents={beardThumbnailImageList.map((image, index) => ({
           id: index,
