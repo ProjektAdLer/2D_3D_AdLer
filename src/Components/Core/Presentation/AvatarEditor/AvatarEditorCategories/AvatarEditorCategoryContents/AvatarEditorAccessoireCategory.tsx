@@ -2,33 +2,33 @@ import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps
 import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGridLayout";
 import { useTranslation } from "react-i18next";
 
-const eyebrowsThumbnails = require.context(
-  "../../../../../../Assets/textures/avatar/face/eyebrows",
+const headgearThumbnails = require.context(
+  "../../../../../../Assets/3dModels/avatar/accessoires/headgear",
 );
-const eyebrowsThumbnailsList = eyebrowsThumbnails
+const headgearThumbnailsList = headgearThumbnails
   .keys()
-  .map((key) => eyebrowsThumbnails(key));
+  .map((key) => headgearThumbnails(key));
 
-const eyesThumbnails = require.context(
-  "../../../../../../Assets/textures/avatar/face/eyes",
+const glassesThumbnails = require.context(
+  "../../../../../../Assets/3dModels/avatar/accessoires/glasses",
 );
-const eyesThumbnailsList = eyesThumbnails
+const glassesThumbnailsList = glassesThumbnails
   .keys()
-  .map((key) => eyesThumbnails(key));
+  .map((key) => glassesThumbnails(key));
 
-const mouthThumbnails = require.context(
-  "../../../../../../Assets/textures/avatar/face/mouths",
+const backpackThumbnails = require.context(
+  "../../../../../../Assets/3dModels/avatar/accessoires/backpack",
 );
-const mouthThumbnailsList = mouthThumbnails
+const backpackThumbnailsList = backpackThumbnails
   .keys()
-  .map((key) => mouthThumbnails(key));
+  .map((key) => backpackThumbnails(key));
 
-const noseThumbnails = require.context(
-  "../../../../../../Assets/textures/avatar/face/noses",
+const otherThumbnails = require.context(
+  "../../../../../../Assets/3dModels/avatar/accessoires/other",
 );
-const noseThumbnailsList = noseThumbnails
+const otherThumbnailsList = otherThumbnails
   .keys()
-  .map((key) => noseThumbnails(key));
+  .map((key) => otherThumbnails(key));
 
 export default function AvatarEditorAccessoireCategory(
   props: AvatarEditorCategoryContentProps,
@@ -41,7 +41,7 @@ export default function AvatarEditorAccessoireCategory(
         <h1 className="text-2xl font-bold">{translate("headgearTitle")}</h1>
       </div>
       <TileGridLayout
-        tileContents={eyebrowsThumbnailsList.map((image, index) => ({
+        tileContents={headgearThumbnailsList.map((image, index) => ({
           id: index,
           image,
         }))}
@@ -56,7 +56,21 @@ export default function AvatarEditorAccessoireCategory(
         <h1 className="text-2xl font-bold">{translate("glassesTitle")}</h1>
       </div>
       <TileGridLayout
-        tileContents={eyesThumbnailsList.map((image, index) => ({
+        tileContents={glassesThumbnailsList.map((image, index) => ({
+          id: index,
+          image,
+        }))}
+        columns={5}
+        mobileColumns={3}
+        onTileClick={(id) => {
+          console.log(id);
+        }}
+      />
+      <div className="pb-2 border-b border-gray-500">
+        <h1 className="text-2xl font-bold">{translate("backpackTitle")}</h1>
+      </div>
+      <TileGridLayout
+        tileContents={backpackThumbnailsList.map((image, index) => ({
           id: index,
           image,
         }))}
@@ -70,7 +84,7 @@ export default function AvatarEditorAccessoireCategory(
         <h1 className="text-2xl font-bold">{translate("otherTitle")}</h1>
       </div>
       <TileGridLayout
-        tileContents={noseThumbnailsList.map((image, index) => ({
+        tileContents={otherThumbnailsList.map((image, index) => ({
           id: index,
           image,
         }))}
