@@ -1,6 +1,8 @@
 import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGridLayout";
 import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps";
 import { useTranslation } from "react-i18next";
+import ColorPicker from "~ReactComponents/GeneralComponents/ColorPicker/ColorPicker";
+import { defaultColorPickerSchema } from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerColors";
 
 const hairThumbnailImages = require.context(
   "../../../../../../Assets/3dModels/avatar/hair/hairstyles",
@@ -24,7 +26,12 @@ export default function AvatarEditorHairCategory(
   return (
     <div className="flex flex-col">
       <h1 className="text-2xl font-bold">{translate("hairColorTitle")}</h1>
-      COLORPICKER tba
+      <ColorPicker
+        colors={defaultColorPickerSchema}
+        onColorClick={(color) => {
+          console.log(color);
+        }}
+      />
       <h1 className="text-2xl font-bold">{translate("hairstylesTitle")}</h1>
       <TileGridLayout
         tileContents={hairThumbnailImageList.map((image, index) => ({

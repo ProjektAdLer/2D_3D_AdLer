@@ -191,3 +191,12 @@ body {
 .slider::-webkit-scrollbar {
   display: none;
 }
+
+.colorpicker-colors {
+  transition: all 0.2s ease;
+}
+
+.colorpicker-colors:hover {
+  transition: all 0.2s ease;
+  transform: scale(1.4);
+}

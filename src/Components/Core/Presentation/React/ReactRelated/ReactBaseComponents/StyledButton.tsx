@@ -7,13 +7,15 @@ export type StyledButtonColor =
   | "success"
   | "pressed"
   | "locked"
-  | "highlight";
+  | "highlight"
+  | "nothing";
 export type StyledButtonShape =
   | "square"
   | "freeFloatLeft"
   | "freeFloatCenter"
   | "freeFloatCenterNoPadding"
   | "smallSquare";
+export type StyledButtonFeedback = "defaultFeedback" | "nothing";
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   shape?: StyledButtonShape;
@@ -21,12 +23,14 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   icon?: string;
   containerClassName?: string;
+  feedback?: StyledButtonFeedback;
 }
 
 export default function StyledButton({
   shape = "square",
   color = "default",
   disabled = false,
+  feedback = "defaultFeedback",
   icon,
   children,
   className,
@@ -41,6 +45,7 @@ export default function StyledButton({
     locked: "bg-adlerbuttonlocked",
     highlight:
       "bg-adlerdarkblue text-buttonbgblue hover:text-adlerdarkblue border-buttonbgblue",
+    nothing: "",
 
     // Shapes
     square:
@@ -49,6 +54,8 @@ export default function StyledButton({
     freeFloatCenter: "flex px-2 py-1 justify-center",
     freeFloatCenterNoPadding: "flex justify-center",
     smallSquare: "justify-center px-2 py-1 aspect-square",
+
+    defaultFeedback: "landscape:hover:bg-adleryellow active:bg-adleryellow",
   };
 
   return (
@@ -61,8 +68,9 @@ export default function StyledButton({
           disabled
             ? "box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-white overflow-hidden"
             : tailwindMerge(
-                "flex items-center text-sm rounded-lg hover:cursor-pointer  landscape:hover:bg-adleryellow  lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent active:bg-adleryellow text-adlerdarkblue font-regular  border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer",
+                "flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular  border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer",
                 buttonConfig[color],
+                buttonConfig[feedback],
               ),
         )}
         {...rest}
