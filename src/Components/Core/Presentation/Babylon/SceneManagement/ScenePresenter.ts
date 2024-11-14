@@ -54,14 +54,14 @@ export default class ScenePresenter implements IScenePresenter {
   async loadModel(
     url: string,
     isRelevantForNavigation: boolean = false,
-    onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>
+    onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>,
   ): Promise<AbstractMesh[]> {
     const result = await SceneLoader.ImportMeshAsync(
       "",
       url,
       "",
       this.Scene,
-      onProgress
+      onProgress,
     );
 
     if (isRelevantForNavigation) {
@@ -74,14 +74,14 @@ export default class ScenePresenter implements IScenePresenter {
   async loadGLTFModel(
     url: string,
     isRelevantForNavigation: boolean = false,
-    onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>
+    onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>,
   ): Promise<ISceneLoaderAsyncResult> {
     const result = await SceneLoader.ImportMeshAsync(
       "",
       url,
       "",
       this.Scene,
-      onProgress
+      onProgress,
     );
 
     if (isRelevantForNavigation) {
@@ -107,12 +107,13 @@ export default class ScenePresenter implements IScenePresenter {
 
   async createScene(
     engine: Engine,
-    sceneOptions?: SceneOptions
+    sceneOptions?: SceneOptions,
   ): Promise<void> {
     await this.sceneDefinition.createScene(engine, sceneOptions);
   }
 
   disposeScene(): void {
+    this.logger.log(LogLevelTypes.INFO, "Disposing scene");
     this.navigationMeshes = [];
     this.disposeSceneCallbacks.forEach((callback) => callback());
     this.disposeSceneCallbacks = [];

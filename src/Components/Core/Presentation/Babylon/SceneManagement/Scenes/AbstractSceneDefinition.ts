@@ -11,7 +11,7 @@ import { Semaphore } from "src/Lib/Semaphore";
 export default abstract class AbstractSceneDefinition {
   private semaphore = new Semaphore(
     "AbstractSceneDefinition scene creation running",
-    1
+    1,
   );
 
   /**
@@ -42,7 +42,7 @@ export default abstract class AbstractSceneDefinition {
    **/
   async createScene(
     engine: Engine,
-    sceneOptions?: SceneOptions
+    sceneOptions?: SceneOptions,
   ): Promise<void> {
     let lock = await this.semaphore.acquire();
 
@@ -52,7 +52,7 @@ export default abstract class AbstractSceneDefinition {
     await Promise.all(
       this.preTasks.map(async (task) => {
         await task();
-      })
+      }),
     );
 
     await this.initializeScene();
@@ -65,6 +65,10 @@ export default abstract class AbstractSceneDefinition {
   disposeScene(): void {
     this.scene.dispose();
     this.highlightLayer?.dispose();
+    this.semaphore = new Semaphore(
+      "AbstractSceneDefinition scene creation running",
+      1,
+    );
   }
 
   /**
