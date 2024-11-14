@@ -37,7 +37,9 @@ export default function AvatarEditorFaceCategory(
 
   return (
     <div className="flex flex-col">
-      <h1 className="text-2xl font-bold">{translate("eyebrowsTitle")}</h1>
+      <div className="pb-2 border-b border-gray-500">
+        <h1 className="text-2xl font-bold">{translate("eyebrowsTitle")}</h1>
+      </div>
       <TileGridLayout
         tileContents={eyebrowsThumbnailsList.map((image, index) => ({
           id: index,
@@ -50,7 +52,9 @@ export default function AvatarEditorFaceCategory(
         }}
       />
 
-      <h1 className="text-2xl font-bold">{translate("eyesTitle")}</h1>
+      <div className="pb-2 border-b border-gray-500">
+        <h1 className="text-2xl font-bold">{translate("eyesTitle")}</h1>
+      </div>
       <TileGridLayout
         tileContents={eyesThumbnailsList.map((image, index) => ({
           id: index,
@@ -62,8 +66,9 @@ export default function AvatarEditorFaceCategory(
           console.log(id);
         }}
       />
-
-      <h1 className="text-2xl font-bold">{translate("noseTitle")}</h1>
+      <div className="pb-2 border-b border-gray-500">
+        <h1 className="text-2xl font-bold">{translate("noseTitle")}</h1>
+      </div>
       <TileGridLayout
         tileContents={noseThumbnailsList.map((image, index) => ({
           id: index,
@@ -75,8 +80,9 @@ export default function AvatarEditorFaceCategory(
           console.log(id);
         }}
       />
-
-      <h1 className="text-2xl font-bold">{translate("mouthTitle")}</h1>
+      <div className="pb-2 border-b border-gray-500">
+        <h1 className="text-2xl font-bold">{translate("mouthTitle")}</h1>
+      </div>
       <TileGridLayout
         tileContents={mouthThumbnailsList.map((image, index) => ({
           id: index,

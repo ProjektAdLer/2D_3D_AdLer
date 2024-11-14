@@ -50,6 +50,7 @@ export default function AvatarEditorHairCategory(
           console.log(id);
         }}
       />
+
       <div className="pb-2 border-b border-gray-500">
         <h1 className="text-2xl font-bold">{translate("beardsTitle")}</h1>
       </div>
