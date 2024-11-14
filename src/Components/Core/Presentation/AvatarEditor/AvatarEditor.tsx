@@ -11,6 +11,8 @@ import {
 } from "./AvatarEditorCategories/AvatarEditorCategories";
 import AvatarEditorHairCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorHairCategory";
 import AvatarEditorFaceCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorFaceCategory";
+import AvatarEditorAccessoireCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorAccessoireCategory";
+import AvatarEditorClothingCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorClothingCategory";
 import AvatarEditorPreview from "./AvatarEditorPreview/AvatarEditorPreview";
 import LoadingScreen from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreen";
 
@@ -70,6 +72,12 @@ export default function AvatarEditor() {
               )}
               {activeTab === OAvatarEditorCategory.FACE && (
                 <AvatarEditorFaceCategory controller={controller} />
+              )}
+              {activeTab === OAvatarEditorCategory.ACCESSOIRE && (
+                <AvatarEditorAccessoireCategory controller={controller} />
+              )}
+              {activeTab === OAvatarEditorCategory.CLOTHING && (
+                <AvatarEditorClothingCategory controller={controller} />
               )}
             </div>
           </div>
