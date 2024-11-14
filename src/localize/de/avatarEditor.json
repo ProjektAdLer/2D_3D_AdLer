@@ -6,5 +6,13 @@
   "eyebrowsTitle": "Augenbrauen",
   "eyesTitle": "Augen",
   "mouthTitle": "Mund",
-  "noseTitle": "Nase"
+  "noseTitle": "Nase",
+
+  "headgearTitle": "Kopfbedeckung",
+  "glassesTitle": "Brille",
+  "otherTitle": "Sonstiges",
+
+  "shirtTitle": "Oberteil",
+  "pantsTitle": "Hose",
+  "shoesTitle": "Schuhe"
 }
