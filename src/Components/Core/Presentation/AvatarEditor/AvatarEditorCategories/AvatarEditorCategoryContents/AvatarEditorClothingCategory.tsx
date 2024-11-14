@@ -1,34 +1,29 @@
 import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps";
 import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGridLayout";
 import { useTranslation } from "react-i18next";
+import ColorPicker from "~ReactComponents/GeneralComponents/ColorPicker/ColorPicker";
+import { defaultColorPickerSchema } from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerColors";
 
-const eyebrowsThumbnails = require.context(
-  "../../../../../../Assets/textures/avatar/face/eyebrows",
+const shirtsThumbnails = require.context(
+  "../../../../../../Assets/3dModels/avatar/clothing/shirts",
 );
-const eyebrowsThumbnailsList = eyebrowsThumbnails
+const shirtThumbnailsList = shirtsThumbnails
   .keys()
-  .map((key) => eyebrowsThumbnails(key));
+  .map((key) => shirtsThumbnails(key));
 
-const eyesThumbnails = require.context(
-  "../../../../../../Assets/textures/avatar/face/eyes",
+const pantsThumbnails = require.context(
+  "../../../../../../Assets/3dModels/avatar/clothing/pants",
 );
-const eyesThumbnailsList = eyesThumbnails
+const pantsThumbnailsList = pantsThumbnails
   .keys()
-  .map((key) => eyesThumbnails(key));
+  .map((key) => pantsThumbnails(key));
 
-const mouthThumbnails = require.context(
-  "../../../../../../Assets/textures/avatar/face/mouths",
+const shoesThumbnails = require.context(
+  "../../../../../../Assets/3dModels/avatar/clothing/shoes",
 );
-const mouthThumbnailsList = mouthThumbnails
+const shoesThumbnailsList = shoesThumbnails
   .keys()
-  .map((key) => mouthThumbnails(key));
-
-const noseThumbnails = require.context(
-  "../../../../../../Assets/textures/avatar/face/noses",
-);
-const noseThumbnailsList = noseThumbnails
-  .keys()
-  .map((key) => noseThumbnails(key));
+  .map((key) => shoesThumbnails(key));
 
 export default function AvatarEditorClothingCategory(
   props: AvatarEditorCategoryContentProps,
@@ -38,10 +33,21 @@ export default function AvatarEditorClothingCategory(
   return (
     <div className="flex flex-col">
       <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("eyebrowsTitle")}</h1>
+        <h1 className="text-2xl font-bold">{translate("shirtsColorTitle")}</h1>
+      </div>
+      <div className="flex flex-col w-full p-2 m-2 overflow-y-auto h-52">
+        <ColorPicker
+          colors={defaultColorPickerSchema}
+          onColorClick={(color) => {
+            console.log(color);
+          }}
+        />
+      </div>
+      <div className="pb-2 border-b border-gray-500">
+        <h1 className="text-2xl font-bold">{translate("shirtsTitle")}</h1>
       </div>
       <TileGridLayout
-        tileContents={eyebrowsThumbnailsList.map((image, index) => ({
+        tileContents={shirtThumbnailsList.map((image, index) => ({
           id: index,
           image,
         }))}
@@ -53,10 +59,22 @@ export default function AvatarEditorClothingCategory(
       />
 
       <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("eyesTitle")}</h1>
+        <h1 className="text-2xl font-bold">{translate("pantsColorTitle")}</h1>
+      </div>
+      <div className="flex flex-col w-full p-2 m-2 overflow-y-auto h-52">
+        <ColorPicker
+          colors={defaultColorPickerSchema}
+          onColorClick={(color) => {
+            console.log(color);
+          }}
+        />
+      </div>
+
+      <div className="pb-2 border-b border-gray-500">
+        <h1 className="text-2xl font-bold">{translate("pantsTitle")}</h1>
       </div>
       <TileGridLayout
-        tileContents={eyesThumbnailsList.map((image, index) => ({
+        tileContents={pantsThumbnailsList.map((image, index) => ({
           id: index,
           image,
         }))}
@@ -67,24 +85,21 @@ export default function AvatarEditorClothingCategory(
         }}
       />
       <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("noseTitle")}</h1>
+        <h1 className="text-2xl font-bold">{translate("shoesColorTitle")}</h1>
       </div>
-      <TileGridLayout
-        tileContents={noseThumbnailsList.map((image, index) => ({
-          id: index,
-          image,
-        }))}
-        columns={5}
-        mobileColumns={3}
-        onTileClick={(id) => {
-          console.log(id);
-        }}
-      />
+      <div className="flex flex-col w-full p-2 m-2 overflow-y-auto h-52">
+        <ColorPicker
+          colors={defaultColorPickerSchema}
+          onColorClick={(color) => {
+            console.log(color);
+          }}
+        />
+      </div>
       <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("mouthTitle")}</h1>
+        <h1 className="text-2xl font-bold">{translate("shoesTitle")}</h1>
       </div>
       <TileGridLayout
-        tileContents={mouthThumbnailsList.map((image, index) => ({
+        tileContents={shoesThumbnailsList.map((image, index) => ({
           id: index,
           image,
         }))}

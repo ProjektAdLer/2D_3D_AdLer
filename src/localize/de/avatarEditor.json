@@ -13,7 +13,10 @@
   "backpackTitle": "Rucksack",
   "otherTitle": "Sonstiges",
 
-  "shirtTitle": "Oberteil",
+  "shirtsColorTitle": "Oberteilfarbe",
+  "shirtsTitle": "Oberteil",
+  "pantsColorTitle": "Hosenfarbe",
   "pantsTitle": "Hose",
+  "shoesColorTitle": "Schuhfarbe",
   "shoesTitle": "Schuhe"
 }
