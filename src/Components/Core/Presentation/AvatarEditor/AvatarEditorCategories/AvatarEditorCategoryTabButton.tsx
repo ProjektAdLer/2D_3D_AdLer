@@ -9,7 +9,7 @@ import hairCategoryIcon from "../../../../../Assets/icons/hair.svg";
 import faceCategoryIcon from "../../../../../Assets/icons/face.svg";
 import accessoiresCategoryIcon from "../../../../../Assets/icons/accessoires.svg";
 import clothingCategoryIcon from "../../../../../Assets/icons/clothing.svg";
-// import bodyCategoryIcon from "../../../../../Assets/icons/body.svg";
+import bodyCategoryIcon from "../../../../../Assets/icons/body.svg";
 
 type AvatarEditorCategoryTabButtonProps = {
   category: AvatarEditorCategory;
@@ -22,6 +22,7 @@ const AvatarEditorCategoryIcons = {
   [OAvatarEditorCategory.FACE]: faceCategoryIcon,
   [OAvatarEditorCategory.ACCESSOIRE]: accessoiresCategoryIcon,
   [OAvatarEditorCategory.CLOTHING]: clothingCategoryIcon,
+  [OAvatarEditorCategory.BODY]: bodyCategoryIcon,
 };
 
 export default function AvatarEditorCategoryTabButton(

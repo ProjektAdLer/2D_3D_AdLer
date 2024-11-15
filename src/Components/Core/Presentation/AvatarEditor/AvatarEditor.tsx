@@ -15,6 +15,7 @@ import AvatarEditorAccessoireCategory from "./AvatarEditorCategories/AvatarEdito
 import AvatarEditorClothingCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorClothingCategory";
 import AvatarEditorPreview from "./AvatarEditorPreview/AvatarEditorPreview";
 import LoadingScreen from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreen";
+import AvatarEditorBodyCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorBodyCategory";
 
 export default function AvatarEditor() {
   const [viewModel, controller] = useBuilder<
@@ -49,6 +50,7 @@ export default function AvatarEditor() {
                   {activeTab === OAvatarEditorCategory.ACCESSOIRE &&
                     "Accessoires"}
                   {activeTab === OAvatarEditorCategory.CLOTHING && "Kleidung"}
+                  {activeTab === OAvatarEditorCategory.BODY && "Körperform"}
                 </div>
               </div>
             </div>
@@ -78,6 +80,9 @@ export default function AvatarEditor() {
               )}
               {activeTab === OAvatarEditorCategory.CLOTHING && (
                 <AvatarEditorClothingCategory controller={controller} />
+              )}
+              {activeTab === OAvatarEditorCategory.BODY && (
+                <AvatarEditorBodyCategory controller={controller} />
               )}
             </div>
           </div>

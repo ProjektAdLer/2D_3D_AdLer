@@ -3,6 +3,7 @@ export const OAvatarEditorCategory = {
   FACE: 1,
   ACCESSOIRE: 2,
   CLOTHING: 3,
+  BODY: 4,
 } as const;
 
 export type AvatarEditorCategory =

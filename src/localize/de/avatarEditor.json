@@ -18,5 +18,9 @@
   "pantsColorTitle": "Hosenfarbe",
   "pantsTitle": "Hose",
   "shoesColorTitle": "Schuhfarbe",
-  "shoesTitle": "Schuhe"
+  "shoesTitle": "Schuhe",
+
+  "bodyColorTitle": "Hautfarbe",
+  "upperBodyTitle": "Oberkörper",
+  "lowerBodyTitle": "Unterkörper"
 }
