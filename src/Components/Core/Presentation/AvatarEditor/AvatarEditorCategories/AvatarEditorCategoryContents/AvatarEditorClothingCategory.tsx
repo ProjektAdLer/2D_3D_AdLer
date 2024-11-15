@@ -35,7 +35,7 @@ export default function AvatarEditorClothingCategory(
       <div className="pb-2 border-b border-gray-500">
         <h1 className="text-2xl font-bold">{translate("shirtsColorTitle")}</h1>
       </div>
-      <div className="flex flex-col w-full p-2 m-2 overflow-y-auto h-52">
+      <div className="w-full p-2 m-2">
         <ColorPicker
           colors={defaultColorPickerSchema}
           onColorClick={(color) => {
@@ -61,7 +61,7 @@ export default function AvatarEditorClothingCategory(
       <div className="pb-2 border-b border-gray-500">
         <h1 className="text-2xl font-bold">{translate("pantsColorTitle")}</h1>
       </div>
-      <div className="flex flex-col w-full p-2 m-2 overflow-y-auto h-52">
+      <div className="w-full p-2 m-2">
         <ColorPicker
           colors={defaultColorPickerSchema}
           onColorClick={(color) => {
@@ -87,7 +87,7 @@ export default function AvatarEditorClothingCategory(
       <div className="pb-2 border-b border-gray-500">
         <h1 className="text-2xl font-bold">{translate("shoesColorTitle")}</h1>
       </div>
-      <div className="flex flex-col w-full p-2 m-2 overflow-y-auto h-52">
+      <div className="w-full flex p-2 m-2">
         <ColorPicker
           colors={defaultColorPickerSchema}
           onColorClick={(color) => {

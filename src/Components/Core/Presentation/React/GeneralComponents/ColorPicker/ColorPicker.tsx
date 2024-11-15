@@ -27,7 +27,7 @@ type colorPickerprops = {
 
 export default function ColorPicker(props: Readonly<colorPickerprops>) {
   return (
-    <div className="grid grid-cols-4 gap-2 lg:grid-cols-8 md:grid-cols-6 place-items-center">
+    <div className="inline-grid grid-cols-8 gap-2 row-span-8">
       {props.colors.map((color, index) => {
         return (
           <ColorButton key={index} color={color} onClick={props.onColorClick} />
