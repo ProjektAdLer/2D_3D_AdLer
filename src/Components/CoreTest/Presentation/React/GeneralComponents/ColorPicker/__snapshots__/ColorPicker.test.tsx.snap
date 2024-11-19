@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="grid grid-cols-4 gap-2 lg:grid-cols-8 md:grid-cols-6 place-items-center"
+        class="inline-grid grid-cols-8 gap-2 row-span-8"
       >
         <div
           class=""
@@ -525,7 +525,7 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="grid grid-cols-4 gap-2 lg:grid-cols-8 md:grid-cols-6 place-items-center"
+      class="inline-grid grid-cols-8 gap-2 row-span-8"
     >
       <div
         class=""
