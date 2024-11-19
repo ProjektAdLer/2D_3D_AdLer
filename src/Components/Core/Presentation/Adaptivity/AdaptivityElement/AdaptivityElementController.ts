@@ -27,11 +27,11 @@ export default class AdaptivityElementController
 
   constructor(private viewModel: AdaptivityElementViewModel) {
     this.bottomToolTipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
+      PRESENTATION_TYPES.IBottomTooltipPresenter,
     );
     this.beginStoryElementOutroCutSceneUseCase =
       CoreDIContainer.get<IBeginStoryElementOutroCutSceneUseCase>(
-        USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+        USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase,
       );
   }
 
@@ -66,7 +66,7 @@ export default class AdaptivityElementController
   @bind
   async selectHint(
     selectedHint: AdaptivityHint,
-    associatedQuestion: AdaptivityQuestion
+    associatedQuestion: AdaptivityQuestion,
   ): Promise<void> {
     this.viewModel.currentQuestion.Value = associatedQuestion;
 
@@ -76,7 +76,7 @@ export default class AdaptivityElementController
       selectedHint.hintAction.idData !== undefined
     ) {
       await CoreDIContainer.get<IDisplayAdaptivityHintLearningElementUseCase>(
-        USECASE_TYPES.IDisplayAdaptivityHintLearningElementUseCase
+        USECASE_TYPES.IDisplayAdaptivityHintLearningElementUseCase,
       ).executeAsync(selectedHint.hintAction.idData);
     } else if (
       selectedHint.hintAction.hintActionType ===
@@ -85,7 +85,7 @@ export default class AdaptivityElementController
     ) {
       this.loadExternalContentReference(
         selectedHint.hintAction.idData,
-        associatedQuestion
+        associatedQuestion,
       );
     }
     // check if selected hint in vm was not set in usecase
@@ -109,7 +109,7 @@ export default class AdaptivityElementController
     };
 
     await CoreDIContainer.get<ISubmitAdaptivityElementSelectionUseCase>(
-      USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase
+      USECASE_TYPES.ISubmitAdaptivityElementSelectionUseCase,
     ).executeAsync(submission);
   }
 
@@ -141,7 +141,11 @@ export default class AdaptivityElementController
 
   @bind
   showFooterTooltip(): void {
-    this.viewModel.showFooterTooltip.Value = true;
+    if (this.viewModel.showFooterTooltip.Value) {
+      this.viewModel.showFooterTooltip.Value = false;
+    } else {
+      this.viewModel.showFooterTooltip.Value = true;
+    }
   }
 
   @bind
@@ -152,14 +156,14 @@ export default class AdaptivityElementController
   @bind
   async loadExternalContentReference(
     elementID: ComponentID,
-    associatedQuestion: AdaptivityQuestion
+    associatedQuestion: AdaptivityQuestion,
   ): Promise<void> {
     this.viewModel.selectedHint.Value = null;
     //TODO: filter out hints in LoadLearningWorldUseCase that reference invalid
     //learningelement or external elements to avoid error handling here
     try {
       await CoreDIContainer.get<ILoadExternalLearningElementUseCase>(
-        USECASE_TYPES.ILoadExternalLearningElementUseCase
+        USECASE_TYPES.ILoadExternalLearningElementUseCase,
       ).executeAsync(elementID);
     } catch (error) {
       if (error instanceof Error) {

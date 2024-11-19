@@ -25,6 +25,7 @@
   "adaptivityIntro": "Hallo, ich helfe Ihnen zu lernen. Suchen Sie sich ein Thema aus und wir arbeiten gemeinsam an Ihrem Wissen.",
 
   "legendHover": "Klicken Sie hier, um die Symbollegende anzuzeigen",
+  "legendClose": "Klicken Sie hier, um die Symbollegende zu schließen",
   "headerLegend": "Symbollegende Adaptivitätselement",
   "headerLegendTask": "Symbole für Aufgaben",
   "legendTaskRequired": "Diese Aufgabe ist für den Abschluss des Adaptivitätselements erforderlich",

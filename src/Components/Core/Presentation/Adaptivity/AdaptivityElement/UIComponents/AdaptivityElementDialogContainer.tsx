@@ -266,7 +266,9 @@ export default function AdaptivityElementDialogContainer({
                           controller.showFooterTooltip();
                         }}
                       >
-                        {translate("legendHover")}
+                        {showFooterTooltip
+                          ? translate("legendClose")
+                          : translate("legendHover")}
                       </p>
 
                       {showFooterTooltip && (
