@@ -232,4 +232,63 @@ describe("ScoreAdaptivityElementUseCase", () => {
     systemUnderTest.internalExecute(2);
     expect(filterResult).toBe(true);
   });
+
+  test("catches Error if calculateWorldScoreUseCase throws an error", () => {
+    const userEntity = mock<UserDataEntity>();
+    userEntity.isLoggedIn = true;
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userEntity]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 42,
+      spaceID: 24,
+    });
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      { parentWorldID: 42, id: 42 },
+    ]);
+    calculateWorldScoreUseCaseMock.internalExecute.mockImplementation(() => {
+      throw new Error("Test error");
+    });
+
+    systemUnderTest.internalExecute(42);
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.ERROR,
+      expect.stringContaining(
+        "ScoreAdaptivityElementUseCase: Error calculating new world score: Error: Test error",
+      ),
+    );
+  });
+
+  test("catches Error if calculateSpaceScoreUseCase throws an error", () => {
+    const userEntity = mock<UserDataEntity>();
+    userEntity.isLoggedIn = true;
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userEntity]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({
+      worldID: 42,
+      spaceID: 24,
+    });
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      { parentWorldID: 42, id: 42 },
+    ]);
+    const newWorldScore = {
+      currentScore: 42,
+      maxScore: 42,
+      requiredScore: 42,
+      worldID: 42,
+    };
+    calculateWorldScoreUseCaseMock.internalExecute.mockReturnValue(
+      newWorldScore,
+    );
+    calculateSpaceScoreUseCaseMock.internalExecute.mockImplementation(() => {
+      throw new Error("Test error");
+    });
+
+    systemUnderTest.internalExecute(42);
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.ERROR,
+      expect.stringContaining(
+        "ScoreAdaptivityElementUseCase: Error calculating new space score: Error: Test error",
+      ),
+    );
+  });
 });
