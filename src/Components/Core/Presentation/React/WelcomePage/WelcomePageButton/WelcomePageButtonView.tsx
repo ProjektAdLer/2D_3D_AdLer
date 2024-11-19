@@ -38,7 +38,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
   return (
     <StyledButton
       shape="freeFloatCenterNoPadding"
-      containerClassName="w-full h-full portrait:w-1/2 lg:w-1/2 aspect-square"
+      containerClassName=" h-full portrait:w-1/2 aspect-square"
       onClick={() => history.push(props.historyPath)}
       disabled={!userLoggedIn}
       className={tailwindMerge(
