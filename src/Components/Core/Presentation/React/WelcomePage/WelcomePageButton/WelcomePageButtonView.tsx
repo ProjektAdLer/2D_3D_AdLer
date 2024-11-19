@@ -38,7 +38,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
   return (
     <StyledButton
       shape="freeFloatCenterNoPadding"
-      containerClassName="w-full lg:w-1/2 h-full"
+      containerClassName="w-full h-full portrait:w-1/2 lg:w-1/2 aspect-square"
       onClick={() => history.push(props.historyPath)}
       disabled={!userLoggedIn}
       className={tailwindMerge(
@@ -48,7 +48,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
       )}
     >
       {userLoggedIn ? (
-        <>
+        <div className="w-full h-full flex justify-center align-center bg-gray-100 opacity-90 hover:opacity-100">
           <video
             ref={videoRef}
             src={props.backgroundVideo}
@@ -59,18 +59,20 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
           >
             <track kind="captions"></track>
           </video>
-          <p className="absolute p-4 mx-auto text-2xl font-bold rounded-lg text-center bg-buttonbgblue lg:bottom-[42%] portrait:bottom-[20%] portrait:text-lg bottom-32 text-adlerdarkblue ">
+          <p className="absolute p-4 mx-auto font-bold rounded-lg !text-xs lg:text-2xl text-center bg-buttonbgblue lg:bottom-[42%] portrait:bottom-[20%] bottom-32 text-adlerdarkblue ">
             {props.label}
           </p>
-        </>
+        </div>
       ) : (
-        <video
-          ref={videoRef}
-          src={props.backgroundVideo}
-          className="object-cover w-full h-full grayscale"
-        >
-          <track kind="captions"></track>
-        </video>
+        <div className="w-full h-full flex justify-center align-center bg-gray-100 opacity-90">
+          <video
+            ref={videoRef}
+            src={props.backgroundVideo}
+            className="object-cover w-full h-full grayscale"
+          >
+            <track kind="captions"></track>
+          </video>
+        </div>
       )}
     </StyledButton>
   );
