@@ -6,6 +6,7 @@ import NotificationManager from "../../../../../Core/Presentation/React/GeneralC
 import NotificationManagerViewModel from "../../../../../Core/Presentation/React/GeneralComponents/NotificationManager/NotificationManagerViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import React from "react";
+import { LogLevelTypes } from "../../../../../Core/Domain/Types/LogLevelTypes";
 
 let fakeModel = new NotificationManagerViewModel();
 const fakeController = mock<INotificationManagerController>();
@@ -15,15 +16,15 @@ describe("NotificationManager", () => {
     fakeModel.messages.Value = [
       {
         message: "test",
-        type: "error",
+        type: LogLevelTypes.ERROR,
       },
       {
         message: "test",
-        type: "error",
+        type: LogLevelTypes.ERROR,
       },
       {
         message: "test2",
-        type: "notification",
+        type: LogLevelTypes.WARN,
       },
     ];
     useBuilderMock([fakeModel, fakeController]);
