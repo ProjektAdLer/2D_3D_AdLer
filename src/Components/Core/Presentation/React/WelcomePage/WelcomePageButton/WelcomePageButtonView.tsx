@@ -45,10 +45,14 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
         props.className ?? "",
       )}
     >
-      <div className="w-full h-full bg-black opacity-30 hover:opacity-20" />
-      <p className="absolute p-4 mx-auto text-2xl font-bold rounded-lg text-center bg-buttonbgblue lg:bottom-[42%] portrait:bottom-[20%] portrait:text-lg bottom-32 text-adlerdarkblue">
-        {props.label}
-      </p>
+      {userLoggedIn && (
+        <>
+          <div className="w-full h-full bg-black opacity-30 hover:opacity-20" />
+          <p className="absolute p-4 mx-auto text-2xl font-bold rounded-lg text-center bg-buttonbgblue lg:bottom-[42%] portrait:bottom-[20%] portrait:text-lg bottom-32 text-adlerdarkblue">
+            {props.label}
+          </p>
+        </>
+      )}
     </StyledButton>
   );
 }
