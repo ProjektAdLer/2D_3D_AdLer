@@ -54,21 +54,23 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
             src={props.backgroundVideo}
             onMouseEnter={() => videoRef.current?.play()}
             onMouseLeave={() => videoRef.current?.pause()}
-            loop
-            className="w-full h-full object-cover"
-          ></video>
+            loop={true}
+            className="object-cover w-full h-full"
+          >
+            <track kind="captions"></track>
+          </video>
           <p className="absolute p-4 mx-auto text-2xl font-bold rounded-lg text-center bg-buttonbgblue lg:bottom-[42%] portrait:bottom-[20%] portrait:text-lg bottom-32 text-adlerdarkblue ">
             {props.label}
           </p>
         </>
       ) : (
-        <>
-          <video
-            ref={videoRef}
-            src={props.backgroundVideo}
-            className="w-full h-full object-cover grayscale"
-          ></video>
-        </>
+        <video
+          ref={videoRef}
+          src={props.backgroundVideo}
+          className="object-cover w-full h-full grayscale"
+        >
+          <track kind="captions"></track>
+        </video>
       )}
     </StyledButton>
   );
