@@ -269,4 +269,28 @@ describe("LoadSpaceUseCase", () => {
       spaceEntity.outroStory?.storyType,
     );
   });
+
+  test("filterEntitiesOfType filter callback returns true if the space has the correct id and parentWorldID", () => {
+    let filterResult;
+    entityContainerMock.filterEntitiesOfType.mockImplementation((_, cb) => {
+      filterResult = cb({
+        id: 1,
+        parentWorldID: 1,
+      });
+
+      return [
+        {
+          id: 1,
+          requirements: "(2)^(3)",
+        },
+      ];
+    });
+
+    systemUnderTest.executeAsync({
+      spaceID: 1,
+      worldID: 1,
+    });
+
+    expect(filterResult).toBe(true);
+  });
 });
