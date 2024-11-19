@@ -15,9 +15,9 @@ module.exports = {
     extend: {
       backgroundImage: {
         learningworldbg:
-          "url('/src/Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.png')",
+          "url('/src/Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.jpg')",
         avatarcreatorbg:
-          "url('/src/Assets/misc/WelcomeScreenButtonBackgrounds/AvatarCreatorButtonBackground.png')",
+          "url('/src/Assets/misc/WelcomeScreenButtonBackgrounds/AvatarEditorButtonBackground.jpg')",
       },
       keyframes: {
         wiggle: {

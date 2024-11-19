@@ -6,6 +6,8 @@ import { useTranslation } from "react-i18next";
 import LogoutComponent from "~ReactComponents/WelcomePage/SignInAndOutComponent/LogoutComponent";
 import WelcomePageButton from "~ReactComponents/WelcomePage/WelcomePageButton/WelcomePageButtonView";
 import LMSButton from "~ReactComponents/WelcomePage/LMSButton/LMSButtonView";
+import learningWorldButtonBackgroundVideo from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/BackgroundVideoLernweltButton.mp4";
+import avatarEditorButtonBackgroundVideo from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/BackgroundVideoAvatarEditorButton.mp4";
 
 export default function WelcomePage() {
   const { t: translate } = useTranslation("start");
@@ -29,12 +31,12 @@ export default function WelcomePage() {
 
       <section className="flex items-center justify-around col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:h-full portrait:flex-col portrait:row-start-3 portrait:row-span-3 portrait:col-start-2 portrait:gap-6">
         <WelcomePageButton
-          backgroundImage="!bg-learningworldbg"
+          backgroundVideo={learningWorldButtonBackgroundVideo}
           historyPath="/worldmenu"
           label={translate("learningWorldButton")}
         />
         <WelcomePageButton
-          backgroundImage="!bg-avatarcreatorbg"
+          backgroundVideo={avatarEditorButtonBackgroundVideo}
           historyPath="/avatarEditor"
           label={translate("avatarEditorButton")}
         />
