@@ -1,6 +1,8 @@
+import { Style } from "@babylonjs/gui";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import IBreakTimeNotification from "src/Components/Core/Domain/BreakTimeNotifications/IBreakTimeNotification";
+import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 export default function BreakTimeNotificationContent({
   breakTimeNotification,
@@ -22,14 +24,45 @@ export default function BreakTimeNotificationContent({
             })}
           </p>
 
-          {/* Image Slide */}
-          <img
-            id="slide-2"
-            className="object-cover max-h-[60vh] portrait:max-w-full rounded-lg"
-            src={breakTimeNotification.images[currentSlide]}
-            title="Pausenhinweis"
-            alt=""
-          />
+          {/* Image Slider */}
+          <div className="w-full flex flex-row justify-center align-center">
+            {/* Button left*/}
+            <div className="flex justify-start items-center w-12">
+              {currentSlide > 0 && (
+                <StyledButton
+                  shape="smallSquare"
+                  className=" bg-whitetrans rounded-xl w-full "
+                  onClick={() => {
+                    setCurrentSlide(currentSlide - 1);
+                  }}
+                >
+                  <p className="rotate-180">&#10140;</p>
+                </StyledButton>
+              )}
+            </div>
+            {/* Image Slide */}
+            <img
+              id="slide-2"
+              className="object-cover max-h-[60vh] portrait:max-w-[70vw] rounded-lg"
+              src={breakTimeNotification.images[currentSlide]}
+              title="Pausenhinweis"
+              alt=""
+            />
+            {/* Button right*/}
+            <div className="flex justify-end items-center w-12">
+              {currentSlide < breakTimeNotification.images.length - 1 && (
+                <StyledButton
+                  shape="smallSquare"
+                  className="bg-whitetrans rounded-xl w-full  "
+                  onClick={() => {
+                    setCurrentSlide(currentSlide + 1);
+                  }}
+                >
+                  <p className="">&#10140;</p>
+                </StyledButton>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Image Slide Navigation Dots */}
