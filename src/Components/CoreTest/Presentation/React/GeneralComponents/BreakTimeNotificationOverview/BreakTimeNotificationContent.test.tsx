@@ -25,7 +25,7 @@ describe("BreakTimeNotificationContent", () => {
 
     act(() => {
       const navigationDots = renderResult.getAllByRole("button");
-      fireEvent.click(navigationDots[1]);
+      fireEvent.click(navigationDots[2]);
     });
 
     expect(renderResult.getByRole("presentation").getAttribute("src")).toBe(
