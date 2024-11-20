@@ -1,4 +1,3 @@
-import { Style } from "@babylonjs/gui";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import IBreakTimeNotification from "src/Components/Core/Domain/BreakTimeNotifications/IBreakTimeNotification";
