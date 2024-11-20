@@ -8,7 +8,7 @@ import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/Learnin
 export default class LearningElementViewModel {
   // constants
   public readonly iconScaleUpOnHover: number = 1.05;
-  public readonly iconYOffset: number = 2.3;
+  public readonly iconYOffset: number = 2.5;
   public readonly highlightTimeout: number = 10000; // in ms
 
   // meshes

@@ -56,7 +56,7 @@ describe("LearningElementView", () => {
     const [viewModel, ,] = buildSystemUnderTest();
 
     // only check for length, because the callback is anonymous
-    expect(viewModel.hasScored["subscribers"].length).toBe(1);
+    expect(viewModel.hasScored["subscribers"].length).toBe(2);
   });
 
   //ANF-ID: [ELG0027]
@@ -305,9 +305,7 @@ describe("LearningElementView", () => {
   });
 
   test("changeHighlightColor changes the color of the highlight layer when the hasScored value in the viewModel is set", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new Mesh("TestMesh", new Scene(new NullEngine())),
-    ]);
+    scenePresenterMock.loadModel.mockResolvedValue([mock<Mesh>()]);
 
     const [viewModel, , systemUnderTest] = buildSystemUnderTest();
     viewModel.theme = LearningSpaceThemeType.Campus;

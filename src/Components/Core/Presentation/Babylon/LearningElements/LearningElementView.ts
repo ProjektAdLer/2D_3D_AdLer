@@ -31,6 +31,17 @@ const iconLinks: { [key in LearningElementTypes]?: any } = {
   [LearningElementTypes.notAnElement]: [],
 };
 
+const checkedIconLinks: { [key in LearningElementTypes]?: any } = {
+  [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/sharedModels/l-icons-h5p-check.glb"),
+  [LearningElementTypes.primitiveH5P]: require("../../../../../Assets/3dModels/sharedModels/l-icons-h5p-check.glb"),
+  [LearningElementTypes.text]: require("../../../../../Assets/3dModels/sharedModels/l-icons-text-check.glb"),
+  [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/sharedModels/l-icons-text-check.glb"),
+  [LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/l-icons-image-check.glb"),
+  [LearningElementTypes.video]: require("../../../../../Assets/3dModels/sharedModels/l-icons-video-check.glb"),
+  [LearningElementTypes.adaptivity]: require("../../../../../Assets/3dModels/sharedModels/l-icons-adaptivityQuiz-check.glb"),
+  [LearningElementTypes.notAnElement]: [],
+};
+
 export default class LearningElementView {
   private scenePresenter: IScenePresenter;
 
@@ -44,6 +55,7 @@ export default class LearningElementView {
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
 
     viewModel.hasScored.subscribe(this.updateHighlight);
+    viewModel.hasScored.subscribe(() => this.loadIconModel());
     viewModel.isHighlighted.subscribe(this.updateHighlight);
     viewModel.isInteractable.subscribe(this.updateHighlight);
   }
@@ -52,25 +64,48 @@ export default class LearningElementView {
     await Promise.all([this.loadElementModel(), this.loadIconModel()]);
     this.setupInteractions();
     this.updateHighlight();
-    this.positionModel();
   }
 
   private async loadElementModel(): Promise<void> {
-    let modelLink;
-
     // get link to model by name if given
-    modelLink = LearningElementModelLookup[this.viewModel.modelType];
+    const modelLink = LearningElementModelLookup[this.viewModel.modelType];
 
     this.viewModel.modelMeshes = (await this.scenePresenter.loadModel(
       modelLink,
       true,
     )) as Mesh[];
+
+    // position and rotate model
+    this.viewModel.modelMeshes[0].position = this.viewModel.position;
+    this.viewModel.modelMeshes[0].rotate(
+      Vector3.Up(),
+      Tools.ToRadians(this.viewModel.rotation),
+    );
   }
 
-  private async loadIconModel(): Promise<void> {
+  @bind private async loadIconModel(): Promise<void> {
+    // dispose old icon meshes on score change
+    if (this.viewModel.iconMeshes && this.viewModel.iconMeshes.length > 0) {
+      this.viewModel.iconMeshes.forEach((mesh) => mesh.dispose());
+    }
+
+    const modelLink = this.viewModel.hasScored.Value
+      ? checkedIconLinks[this.viewModel.type as LearningElementTypes]!
+      : iconLinks[this.viewModel.type as LearningElementTypes]!;
+
     this.viewModel.iconMeshes = (await this.scenePresenter.loadModel(
-      iconLinks[this.viewModel.type as LearningElementTypes]!,
+      modelLink,
     )) as Mesh[];
+
+    // position and rotate icon
+    this.viewModel.iconMeshes[0].position = this.viewModel.position.add(
+      new Vector3(0, this.viewModel.iconYOffset, 0),
+    );
+    this.viewModel.iconMeshes[0].rotation = new Vector3(
+      0,
+      (7 * Math.PI) / 4,
+      0,
+    );
   }
 
   private setupInteractions(): void {
@@ -104,21 +139,6 @@ export default class LearningElementView {
     );
   }
 
-  private positionModel(): void {
-    if (this.viewModel.modelMeshes && this.viewModel.iconMeshes) {
-      this.viewModel.modelMeshes[0].position = this.viewModel.position;
-      this.viewModel.iconMeshes[0].position = this.viewModel.position.add(
-        new Vector3(0, this.viewModel.iconYOffset, 0),
-      );
-
-      this.viewModel.modelMeshes[0].rotate(
-        Vector3.Up(),
-        Tools.ToRadians(this.viewModel.rotation),
-      );
-      this.viewModel.iconMeshes[0].rotation = new Vector3(0, -Math.PI / 4, 0);
-    }
-  }
-
   private changeHighlightColor(color: Color3): void {
     this.viewModel.modelMeshes?.forEach((mesh) => {
       this.scenePresenter.HighlightLayer.removeMesh(mesh);
@@ -130,8 +150,7 @@ export default class LearningElementView {
     });
   }
 
-  @bind
-  private updateHighlight(): void {
+  @bind private updateHighlight(): void {
     let highlightColor: Color3;
 
     // set base color
