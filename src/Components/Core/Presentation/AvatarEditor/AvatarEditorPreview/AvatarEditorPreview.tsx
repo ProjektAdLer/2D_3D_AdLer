@@ -27,6 +27,7 @@ export default function AvatarEditorPreview(props: AvatarEditorPreviewProps) {
         <StyledButton
           data-testid="left-turn-button"
           onPointerDown={controller.onTurnLeftDown}
+          onPointerOut={controller.onTurnLeftUp}
           onPointerUp={controller.onTurnLeftUp}
         >
           {"<"}
@@ -34,6 +35,7 @@ export default function AvatarEditorPreview(props: AvatarEditorPreviewProps) {
         <StyledButton
           data-testid="zoom-in-button"
           onPointerDown={controller.onZoomInDown}
+          onPointerOut={controller.onZoomInUp}
           onPointerUp={controller.onZoomInUp}
         >
           {"+"}
@@ -41,6 +43,7 @@ export default function AvatarEditorPreview(props: AvatarEditorPreviewProps) {
         <StyledButton
           data-testid="zoom-out-button"
           onPointerDown={controller.onZoomOutDown}
+          onPointerOut={controller.onZoomOutUp}
           onPointerUp={controller.onZoomOutUp}
         >
           {"-"}
@@ -48,6 +51,7 @@ export default function AvatarEditorPreview(props: AvatarEditorPreviewProps) {
         <StyledButton
           data-testid="right-turn-button"
           onPointerDown={controller.onTurnRightDown}
+          onPointerOut={controller.onTurnRightUp}
           onPointerUp={controller.onTurnRightUp}
         >
           {">"}
