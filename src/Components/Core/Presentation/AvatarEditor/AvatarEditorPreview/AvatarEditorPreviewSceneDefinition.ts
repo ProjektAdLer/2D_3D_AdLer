@@ -41,7 +41,7 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
       0.7019607843137254,
     );
 
-    // Create Preview Camera
+    // Preview Camera
     this.director.build(this.cameraBuilder);
 
     // Lights
@@ -91,9 +91,22 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
     groundPlane.material = shadowMat;
     groundPlane.receiveShadows = true;
 
-    // Material for Background
+    // Podium
+    const podium = MeshBuilder.CreateCylinder(
+      "podium",
+      { diameterTop: 1, diameterBottom: 1, height: 0.05, tessellation: 64 },
+      this.scene,
+    );
+    podium.position.y = -1;
+    podium.material = new StandardMaterial("podiumMat", this.scene);
+    (podium.material as StandardMaterial).diffuseColor = new Color3(
+      0.5,
+      0.5,
+      0.5,
+    );
+    podium.receiveShadows = true;
 
-    //Background for the Avatar
+    // Camera Background
     const background = MeshBuilder.CreatePlane(
       "background",
       { size: 20 },
@@ -108,20 +121,6 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
       this.scene,
     );
     background.material = backgroundMat;
-
-    const podium = MeshBuilder.CreateCylinder(
-      "podium",
-      { diameterTop: 1, diameterBottom: 1, height: 0.05, tessellation: 64 },
-      this.scene,
-    );
-    podium.position.y = -1;
-    podium.material = new StandardMaterial("podiumMat", this.scene);
-    (podium.material as StandardMaterial).diffuseColor = new Color3(
-      0.5,
-      0.5,
-      0.5,
-    );
-    podium.receiveShadows = true;
 
     // Shadow Generator
     const shadowGenerator = new ShadowGenerator(1024, keyLight);
