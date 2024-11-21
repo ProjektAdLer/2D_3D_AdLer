@@ -69,13 +69,6 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
     keyLight.parent = this.scene.activeCamera;
     fillLight.parent = this.scene.activeCamera;
 
-    const rsm = new ReflectiveShadowMap(this.scene, keyLight, {
-      width: 512,
-      height: 512,
-    });
-    rsm.addMesh();
-    // no specific mesh transmitted to addMesh, so all meshes in the scene are added and will be rendered in the RSM
-
     // Avatar Placeholder
     let avatar: Mesh[];
     await SceneLoader.ImportMeshAsync("", modelLink, "", this.scene).then(
@@ -99,11 +92,6 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
     groundPlane.receiveShadows = true;
 
     // Material for Background
-    const backgroundMat = new BackgroundMaterial("backgroundMat", this.scene);
-    backgroundMat.diffuseTexture = new Texture(
-      backGroundMatTexture,
-      this.scene,
-    );
 
     //Background for the Avatar
     const background = MeshBuilder.CreatePlane(
@@ -113,8 +101,13 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
     );
     background.position = new Vector3(0, 0, 10);
     background.rotation = new Vector3(0, 0, 0);
-    background.material = backgroundMat;
     background.parent = this.scene.activeCamera;
+    const backgroundMat = new BackgroundMaterial("backgroundMat", this.scene);
+    backgroundMat.diffuseTexture = new Texture(
+      backGroundMatTexture,
+      this.scene,
+    );
+    background.material = backgroundMat;
 
     const podium = MeshBuilder.CreateCylinder(
       "podium",
