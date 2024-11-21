@@ -50,6 +50,7 @@ const BUILDER_TYPES = {
     "IAvatarEditorPreviewCameraBuilder",
   ),
   IAvatarEditorPreviewBuilder: Symbol("IAvatarEditorPreviewBuilder"),
+  IAvatarEditorPreviewModelBuilder: Symbol("IAvatarEditorPreviewModelBuilder"),
 };
 
 export default BUILDER_TYPES;

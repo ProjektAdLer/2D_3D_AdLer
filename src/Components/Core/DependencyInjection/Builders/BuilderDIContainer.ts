@@ -45,6 +45,7 @@ import BreakTimeNotificationOverviewBuilder from "~ReactComponents/GeneralCompon
 import AvatarEditorBuilder from "src/Components/Core/Presentation/AvatarEditor/AvatarEditorBuilder";
 import AvatarEditorPreviewCameraBuilder from "../../Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewCamera/AvatarEditorPreviewCameraBuilder";
 import AvatarEditorPreviewBuilder from "../../Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewBuilder";
+import AvatarEditorPreviewModelBuilder from "../../Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewModel/AvatarEditorPreviewModelBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -168,6 +169,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   ).to(AvatarEditorPreviewCameraBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarEditorPreviewBuilder).to(
     AvatarEditorPreviewBuilder,
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IAvatarEditorPreviewModelBuilder).to(
+    AvatarEditorPreviewModelBuilder,
   );
 });
 

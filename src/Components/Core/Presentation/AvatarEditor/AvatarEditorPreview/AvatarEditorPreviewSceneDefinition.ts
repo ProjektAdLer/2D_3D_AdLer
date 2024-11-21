@@ -10,17 +10,14 @@ import {
   HemisphericLight,
   Mesh,
   MeshBuilder,
-  SceneLoader,
   ShadowGenerator,
   StandardMaterial,
   Texture,
   Vector3,
 } from "@babylonjs/core";
-import { ShadowOnlyMaterial } from "@babylonjs/materials/shadowOnly/shadowOnlyMaterial";
 import AvatarEditorPreviewCameraBuilder from "./AvatarEditorPreviewCamera/AvatarEditorPreviewCameraBuilder";
 import backGroundMatTexture from "../../../../../Assets/textures/avatar/AvatarEditorBackground.png";
-
-const modelLink = require("../../../../../Assets/3dModels/sharedModels/3DModel_Avatar_male.glb");
+import AvatarEditorPreviewModelBuilder from "./AvatarEditorPreviewModel/AvatarEditorPreviewModelBuilder";
 
 @injectable()
 export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDefinition {
@@ -29,6 +26,8 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
     private director: IPresentationDirector,
     @inject(BUILDER_TYPES.IAvatarEditorPreviewCameraBuilder)
     private cameraBuilder: AvatarEditorPreviewCameraBuilder,
+    @inject(BUILDER_TYPES.IAvatarEditorPreviewModelBuilder)
+    private previewModelBuilder: AvatarEditorPreviewModelBuilder,
   ) {
     super();
   }
@@ -69,13 +68,9 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
     fillLight.parent = this.scene.activeCamera;
 
     // Avatar Placeholder
-    let avatar: Mesh[];
-    await SceneLoader.ImportMeshAsync("", modelLink, "", this.scene).then(
-      (result) => {
-        avatar = result.meshes as Mesh[];
-        avatar[0].position.y = -1;
-      },
-    );
+    let avatarMeshes: Mesh[];
+    await this.director.buildAsync(this.previewModelBuilder);
+    avatarMeshes = this.previewModelBuilder.getViewModel()!.baseModelMeshes;
 
     // Ground Plane
     const groundPlane = MeshBuilder.CreatePlane(
@@ -85,9 +80,10 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
     );
     groundPlane.position.y = -1;
     groundPlane.rotation.x = Math.PI / 2;
-    const shadowMat = new ShadowOnlyMaterial("shadowOnly", this.scene);
-    shadowMat.activeLight = keyLight;
-    groundPlane.material = shadowMat;
+    const groundMat = new BackgroundMaterial("groundMat", this.scene);
+    groundMat.shadowOnly = true;
+    groundMat.primaryColor = new Color3(0, 0, 0);
+    groundPlane.material = groundMat;
     groundPlane.receiveShadows = true;
 
     // Podium
@@ -123,7 +119,7 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
 
     // Shadow Generator
     const shadowGenerator = new ShadowGenerator(1024, keyLight);
-    avatar!.forEach((mesh) => {
+    avatarMeshes!.forEach((mesh) => {
       shadowGenerator.addShadowCaster(mesh);
     });
     shadowGenerator.useBlurExponentialShadowMap = true;
