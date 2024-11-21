@@ -10,7 +10,6 @@ import {
   HemisphericLight,
   Mesh,
   MeshBuilder,
-  ReflectiveShadowMap,
   SceneLoader,
   ShadowGenerator,
   StandardMaterial,
