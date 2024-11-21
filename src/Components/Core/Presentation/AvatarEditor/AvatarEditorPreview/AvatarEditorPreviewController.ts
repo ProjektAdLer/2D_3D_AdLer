@@ -77,9 +77,8 @@ export default class AvatarEditorPreviewController
 
   private getCamera(): ArcRotateCamera {
     // get camera on demand to avoid race conditions
-    if (!this.camera)
-      this.camera = this.scenePresenter.Scene.activeCamera as ArcRotateCamera;
-    return this.camera;
+    return (this.camera ??= this.scenePresenter.Scene
+      .activeCamera as ArcRotateCamera);
   }
 
   private removeSceneObserver() {
