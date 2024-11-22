@@ -16,11 +16,6 @@ import ILearningSpacePresenter from "../../../../Core/Presentation/Babylon/Learn
 import IAvatarFocusSelection from "../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/IAvatarFokusSelection";
 
 jest.mock("../../../../Core/Presentation/Babylon/Avatar/AvatarController");
-const setViewModelMock = jest.spyOn(
-  AvatarPresenter.prototype,
-  "ViewModel",
-  "set",
-);
 
 const movementIndicatorMock = mock<MovementIndicator>();
 const avatarFocusSelectionMock = mock<IAvatarFocusSelection>();
@@ -67,17 +62,6 @@ describe("AvatarBuilder", () => {
     );
   });
 
-  test("buildPresenter builds the AvatarPresenter and sets the ViewModel with its setter", () => {
-    systemUnderTest.buildViewModel();
-    systemUnderTest.buildPresenter();
-
-    expect(systemUnderTest["presenter"]).toBeInstanceOf(AvatarPresenter);
-    expect(systemUnderTest["presenter"]).toBe(
-      CoreDIContainer.get<IAvatarPort>(PORT_TYPES.IAvatarPort),
-    );
-    expect(setViewModelMock).toHaveBeenCalledTimes(1);
-  });
-
   test("buildPresenter registers the presenter with avatar focus selection", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
@@ -90,7 +74,7 @@ describe("AvatarBuilder", () => {
     ).toHaveBeenCalledWith(systemUnderTest["presenter"]);
   });
 
-  test("buildCOntroller sets the learning space presenter on the controller", () => {
+  test("buildController sets the learning space presenter on the controller", () => {
     systemUnderTest["viewModel"] = mock<AvatarViewModel>();
     const mockLearningSpacePresenter = mock<ILearningSpacePresenter>();
     systemUnderTest["learningSpacePresenter"] = mockLearningSpacePresenter;

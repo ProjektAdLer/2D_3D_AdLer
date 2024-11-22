@@ -11,11 +11,7 @@ import { Vector3 } from "@babylonjs/core";
  */
 @injectable()
 export default class AvatarPresenter implements IAvatarPresenter {
-  private viewModel: AvatarViewModel;
-
-  public set ViewModel(newViewModel: AvatarViewModel) {
-    this.viewModel = newViewModel;
-  }
+  constructor(private viewModel: AvatarViewModel) {}
 
   public get AvatarPosition(): Vector3 {
     return this.viewModel.parentNode?.position;

@@ -4,9 +4,7 @@ import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementT
 import { Vector3 } from "@babylonjs/core";
 
 export default interface IAvatarPresenter extends ILearningWorldAdapter {
-  set ViewModel(newViewModel: AvatarViewModel);
   get AvatarPosition(): Vector3;
-
   onStoryElementCutSceneTriggered(storyType: StoryElementType): void;
   onStoryElementCutSceneFinished(): void;
 }
