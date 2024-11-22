@@ -25,6 +25,8 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import HighlightColors from "../HighlightColors";
 
 const soundLink = require("../../../../../Assets/Sounds/door_opening.mp3");
+const iconLinkEntryDoor = require("../../../../../Assets/3dModels/sharedModels/d-icons-door-in.glb");
+const iconLinkExitDoor = require("../../../../../Assets/3dModels/sharedModels/d-icons-door-out.glb");
 
 export default class DoorView extends Readyable {
   private scenePresenter: IScenePresenter;
@@ -67,6 +69,7 @@ export default class DoorView extends Readyable {
   public async asyncSetup(): Promise<void> {
     await this.loadMeshAsync();
     this.positionMesh();
+    await this.loadIconModel();
     if (this.viewModel.isExit) this.setupAnimation();
     this.registerActions();
     this.updateHighlight();
@@ -181,6 +184,10 @@ export default class DoorView extends Readyable {
       this.scenePresenter.HighlightLayer.removeMesh(mesh);
       this.scenePresenter.HighlightLayer.addMesh(mesh, color);
     });
+    this.viewModel.iconMeshes?.forEach((mesh) => {
+      this.scenePresenter.HighlightLayer.removeMesh(mesh);
+      this.scenePresenter.HighlightLayer.addMesh(mesh, color);
+    });
   }
 
   @bind
@@ -193,5 +200,30 @@ export default class DoorView extends Readyable {
           HighlightColors.NonLearningElementBase,
         ),
       );
+  }
+
+  @bind private async loadIconModel(): Promise<void> {
+    const doorRotationInRadians = (this.viewModel.rotation * Math.PI) / 180;
+
+    this.viewModel.iconMeshes = (await this.scenePresenter.loadModel(
+      this.viewModel.isExit ? iconLinkExitDoor : iconLinkEntryDoor,
+    )) as Mesh[];
+    // position and rotate icon
+    // Door is off centered, so we need to adjust the icon position based on rotation
+    let doorPosition = { ...this.viewModel.position };
+    this.viewModel.iconMeshes[0].position = new Vector3(
+      doorPosition._x +
+        Math.sin(doorRotationInRadians) * 0.4 +
+        Math.cos(doorRotationInRadians) * 0.1,
+      doorPosition._y + this.viewModel.iconYOffset,
+      doorPosition._z +
+        Math.sin(doorRotationInRadians) * 0.1 +
+        Math.cos(doorRotationInRadians) * 0.4,
+    );
+    this.viewModel.iconMeshes[0].rotation = new Vector3(
+      0,
+      (7 * Math.PI) / 4,
+      0,
+    );
   }
 }

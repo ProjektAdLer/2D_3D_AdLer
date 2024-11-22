@@ -31,6 +31,7 @@ const loggerMock = mock<ILoggerPort>();
 
 function buildSystemUnderTest(): [DoorViewModel, DoorView] {
   const viewModel = new DoorViewModel();
+  viewModel.position = new Vector3(1, 2, 3);
   const controller = mock<IDoorController>();
   const systemUnderTest = new DoorView(viewModel, controller);
   return [viewModel, systemUnderTest];
@@ -40,7 +41,7 @@ describe("DoorView", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
-      scenePresenterFactoryMock
+      scenePresenterFactoryMock,
     );
     CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
   });
@@ -76,14 +77,13 @@ describe("DoorView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
-
     const viewModel = new DoorViewModel();
     viewModel.isOpen.Value = true;
+    viewModel.position = new Vector3(1, 2, 3);
     viewModel.theme = LearningSpaceThemeType.Campus;
 
     const controller = mock<IDoorController>();
     const systemUnderTest = new DoorView(viewModel, controller);
-
     await systemUnderTest.asyncSetup();
 
     expect(viewModel.isOpen["subscribers"]).toStrictEqual([]);
@@ -91,7 +91,7 @@ describe("DoorView", () => {
     expect(scenePresenterMock.Scene.beginAnimation).toHaveBeenCalledWith(
       viewModel.meshes[0],
       expect.any(Number),
-      expect.any(Number)
+      expect.any(Number),
     );
   });
 
@@ -105,7 +105,7 @@ describe("DoorView", () => {
     viewModel.theme = LearningSpaceThemeType.Campus;
 
     await systemUnderTest.asyncSetup();
-    expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
+    expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(2);
   });
 
   test("asyncSetup/loadMeshAsync sets rotationQuaternion of each loaded mesh to null", async () => {
@@ -134,7 +134,7 @@ describe("DoorView", () => {
     expect(loggerMock.log).toHaveBeenCalledTimes(1);
     expect(loggerMock.log).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
-      expect.stringContaining("No submesh with name Door found.")
+      expect.stringContaining("No submesh with name Door found."),
     );
   });
 
@@ -157,21 +157,22 @@ describe("DoorView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
-
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
+
     viewModel.theme = LearningSpaceThemeType.Campus;
-    const position = new Vector3(1, 2, 3);
-    viewModel.position = position;
 
-    await systemUnderTest.asyncSetup();
+    // await systemUnderTest.asyncSetup();
+    await systemUnderTest["loadMeshAsync"]();
+    systemUnderTest["positionMesh"]();
 
-    expect(viewModel.meshes[0].position).toStrictEqual(position);
+    expect(viewModel.meshes[0].position).toStrictEqual(new Vector3(1, 2, 3));
   });
 
   // ANF-ID: [ELG0019]
   test("positionMesh sets rotation of the first mesh to viewModel.rotation", async () => {
     scenePresenterMock.loadModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+      new AbstractMesh("TestMesh2", new Scene(new NullEngine())),
     ]);
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
@@ -179,10 +180,11 @@ describe("DoorView", () => {
     viewModel.rotation = newRotation;
     viewModel.theme = LearningSpaceThemeType.Campus;
 
-    await systemUnderTest.asyncSetup();
+    await systemUnderTest["loadMeshAsync"]();
+    systemUnderTest["positionMesh"]();
 
     expect(viewModel.meshes[0].rotation.y).toStrictEqual(
-      Tools.ToRadians(newRotation)
+      Tools.ToRadians(newRotation),
     );
   });
 
@@ -201,7 +203,7 @@ describe("DoorView", () => {
     expect(scenePresenterMock.Scene.beginAnimation).toHaveBeenCalledWith(
       mockMesh,
       expect.any(Number),
-      expect.any(Number)
+      expect.any(Number),
     );
   });
 
@@ -216,7 +218,7 @@ describe("DoorView", () => {
 
     expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
       mockMesh,
-      HighlightColors.NonLearningElementBase
+      HighlightColors.NonLearningElementBase,
     );
   });
 
@@ -232,8 +234,8 @@ describe("DoorView", () => {
     expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
       mockMesh,
       HighlightColors.getNonInteractableColor(
-        HighlightColors.NonLearningElementBase
-      )
+        HighlightColors.NonLearningElementBase,
+      ),
     );
   });
 
@@ -245,7 +247,7 @@ describe("DoorView", () => {
     viewModel.isInteractable.Value = true;
     systemUnderTest["viewModel"].meshes.forEach((mesh) => {
       expect(
-        mesh.actionManager?.hasSpecificTrigger(ActionManager.OnPickTrigger)
+        mesh.actionManager?.hasSpecificTrigger(ActionManager.OnPickTrigger),
       );
     });
   });
@@ -271,6 +273,6 @@ describe("DoorView", () => {
       const link = systemUnderTest["getModelLinkByThemeAndType"]();
 
       expect(link).toBeDefined();
-    }
+    },
   );
 });
