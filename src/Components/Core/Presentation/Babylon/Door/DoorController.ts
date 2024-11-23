@@ -8,6 +8,7 @@ import IExitModalPresenter from "~ReactComponents/LearningSpaceDisplay/ExitModal
 import IGetLearningSpacePrecursorAndSuccessorUseCase from "src/Components/Core/Application/UseCases/GetLearningSpacePrecursorAndSuccessor/IGetLearningSpacePrecursorAndSuccessorUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import i18next from "i18next";
+import { DoorTypes } from "src/Components/Core/Domain/Types/DoorTypes";
 
 export default class DoorController implements IDoorController {
   private bottomTooltipPresenter: IBottomTooltipPresenter;
@@ -17,10 +18,10 @@ export default class DoorController implements IDoorController {
 
   constructor(private viewModel: DoorViewModel) {
     this.bottomTooltipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
+      PRESENTATION_TYPES.IBottomTooltipPresenter,
     );
     this.exitModalPresenter = CoreDIContainer.get<IExitModalPresenter>(
-      PRESENTATION_TYPES.IExitModalPresenter
+      PRESENTATION_TYPES.IExitModalPresenter,
     );
 
     this.viewModel.isInteractable.subscribe(this.onAvatarInteractableChange);
@@ -47,7 +48,7 @@ export default class DoorController implements IDoorController {
       this.viewModel.isInputEnabled.Value
     ) {
       CoreDIContainer.get<IGetLearningSpacePrecursorAndSuccessorUseCase>(
-        USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
+        USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase,
       ).execute();
       this.exitModalPresenter.open(this.viewModel.isExit);
     }
@@ -68,9 +69,9 @@ export default class DoorController implements IDoorController {
       this.viewModel.isExit
         ? i18next.t("exitDoor", { ns: "learningSpace" })
         : i18next.t("enterDoor", { ns: "learningSpace" }),
+      this.viewModel.isExit ? DoorTypes.exitDoor : DoorTypes.entryDoor,
       undefined,
-      undefined,
-      this.picked
+      this.picked,
     );
   }
 }

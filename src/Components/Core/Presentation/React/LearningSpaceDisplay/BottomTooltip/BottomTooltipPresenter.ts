@@ -6,12 +6,13 @@ import {
 } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { injectable } from "inversify";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
+import { DoorTypeStrings } from "src/Components/Core/Domain/Types/DoorTypes";
 
 interface BottomTooltipData {
   id: number;
   show: boolean;
   text: string;
-  iconType: LearningElementTypeStrings;
+  iconType: LearningElementTypeStrings | DoorTypeStrings;
   points: number;
   showPoints: boolean;
   onClickCallback: () => void;
@@ -26,9 +27,11 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
 
   display(
     text: string,
-    iconType: LearningElementTypeStrings = LearningElementTypes.notAnElement,
+    iconType:
+      | LearningElementTypeStrings
+      | DoorTypeStrings = LearningElementTypes.notAnElement,
     points: number | undefined = undefined,
-    onClickCallback?: () => void
+    onClickCallback?: () => void,
   ): number {
     const data: BottomTooltipData = {
       id: this.idCounter++,
