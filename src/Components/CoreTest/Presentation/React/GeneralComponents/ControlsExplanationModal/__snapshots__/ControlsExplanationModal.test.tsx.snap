@@ -36,12 +36,12 @@ exports[`ControlsExplanationModal should render 1`] = `
             class="portrait:max-w-[90vw] max-h-[80vh] max-w-6xl grid landscape:grid-rows-6 landscape:grid-flow-col portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto gap-x-8 landscape:gap-y-3 portrait:gap-6 pb-4 text-xs lg:text-sm"
           >
             <h3
-              class="self-center font-bold text-adlerdarkblue"
+              class="font-bold self-center text-adlerdarkblue"
             >
               Avatar bewegen
             </h3>
             <div
-              class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
+              class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
             >
               <img
                 alt="Linksklick"
@@ -53,7 +53,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <div
-              class="flex flex-row items-start justify-start gap-2"
+              class="flex flex-row gap-2 justify-start items-start"
             >
               <img
                 alt="Einfacher Touch"
@@ -65,7 +65,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <div
-              class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
+              class="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6"
             >
               <img
                 alt="Icon"
@@ -77,12 +77,12 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <h3
-              class="self-center font-bold text-adlerdarkblue"
+              class="font-bold  self-center text-adlerdarkblue"
             >
               Inhalte öffnen
             </h3>
             <div
-              class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
+              class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
             >
               <img
                 alt="Icon"
@@ -94,7 +94,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <div
-              class="flex flex-row items-start justify-start gap-2"
+              class="flex flex-row gap-2 justify-start items-start"
             >
               <img
                 alt="Icon"
@@ -106,7 +106,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <div
-              class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
+              class="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6"
             >
               <img
                 alt="Icon"
@@ -125,12 +125,12 @@ exports[`ControlsExplanationModal should render 1`] = `
               </div>
             </div>
             <h3
-              class="self-center font-bold text-adlerdarkblue"
+              class="font-bold  self-center text-adlerdarkblue"
             >
               Kamera drehen
             </h3>
             <div
-              class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
+              class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
             >
               <img
                 alt="Icon"
@@ -142,7 +142,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <div
-              class="flex flex-row items-start justify-start gap-2"
+              class="flex flex-row gap-2 justify-start items-start"
             >
               <img
                 alt="Icon"
@@ -154,7 +154,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <div
-              class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
+              class="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6"
             >
               <img
                 alt="Icon"
@@ -166,12 +166,12 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <h3
-              class="self-center font-bold text-adlerdarkblue"
+              class="font-bold  self-center text-adlerdarkblue"
             >
               Kamera zoomen
             </h3>
             <div
-              class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
+              class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
             >
               <img
                 alt="Icon"
@@ -183,7 +183,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <div
-              class="flex flex-row items-start justify-start gap-2"
+              class="flex flex-row gap-2 justify-start items-start"
             >
               <img
                 alt="Icon"
@@ -195,7 +195,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <div
-              class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
+              class="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6"
             >
               <img
                 alt="Icon"

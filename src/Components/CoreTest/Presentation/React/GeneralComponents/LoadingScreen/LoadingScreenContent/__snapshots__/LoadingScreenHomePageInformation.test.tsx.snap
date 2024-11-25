@@ -22,6 +22,7 @@ exports[`LoadingScreenHomePageInformation should render 1`] = `
           <a
             class="opacity-75 hover:opacity-100"
             href="https://projekt-adler.eu"
+            rel="noreferrer"
             target="_blank"
           >
             <img
