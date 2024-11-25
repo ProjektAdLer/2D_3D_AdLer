@@ -6,12 +6,12 @@ exports[`ControlsExplanationContent should render 1`] = `
     class="grid landscape:grid-rows-6 landscape:grid-flow-col portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto gap-x-8 landscape:gap-y-3 portrait:gap-6 pb-4 text-xs lg:text-sm"
   >
     <h3
-      class="font-bold self-center text-adlerdarkblue"
+      class="self-center font-bold text-adlerdarkblue"
     >
       controlAvatar
     </h3>
     <div
-      class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
+      class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
     >
       <img
         alt="Linksklick"
@@ -23,7 +23,7 @@ exports[`ControlsExplanationContent should render 1`] = `
       </p>
     </div>
     <div
-      class="flex flex-row gap-2 justify-start items-start"
+      class="flex flex-row items-start justify-start gap-2"
     >
       <img
         alt="Einfacher Touch"
@@ -35,7 +35,7 @@ exports[`ControlsExplanationContent should render 1`] = `
       </p>
     </div>
     <div
-      class="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6"
+      class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
     >
       <img
         alt="Icon"
@@ -47,12 +47,12 @@ exports[`ControlsExplanationContent should render 1`] = `
       </p>
     </div>
     <h3
-      class="font-bold  self-center text-adlerdarkblue"
+      class="self-center font-bold text-adlerdarkblue"
     >
       openContent
     </h3>
     <div
-      class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
+      class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
     >
       <img
         alt="Icon"
@@ -64,7 +64,7 @@ exports[`ControlsExplanationContent should render 1`] = `
       </p>
     </div>
     <div
-      class="flex flex-row gap-2 justify-start items-start"
+      class="flex flex-row items-start justify-start gap-2"
     >
       <img
         alt="Icon"
@@ -76,7 +76,7 @@ exports[`ControlsExplanationContent should render 1`] = `
       </p>
     </div>
     <div
-      class="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6"
+      class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
     >
       <img
         alt="Icon"
@@ -95,12 +95,12 @@ exports[`ControlsExplanationContent should render 1`] = `
       </div>
     </div>
     <h3
-      class="font-bold  self-center text-adlerdarkblue"
+      class="self-center font-bold text-adlerdarkblue"
     >
       rotateCamera
     </h3>
     <div
-      class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
+      class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
     >
       <img
         alt="Icon"
@@ -112,7 +112,7 @@ exports[`ControlsExplanationContent should render 1`] = `
       </p>
     </div>
     <div
-      class="flex flex-row gap-2 justify-start items-start"
+      class="flex flex-row items-start justify-start gap-2"
     >
       <img
         alt="Icon"
@@ -124,7 +124,7 @@ exports[`ControlsExplanationContent should render 1`] = `
       </p>
     </div>
     <div
-      class="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6"
+      class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
     >
       <img
         alt="Icon"
@@ -136,12 +136,12 @@ exports[`ControlsExplanationContent should render 1`] = `
       </p>
     </div>
     <h3
-      class="font-bold  self-center text-adlerdarkblue"
+      class="self-center font-bold text-adlerdarkblue"
     >
       zoomCamera
     </h3>
     <div
-      class="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start"
+      class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
     >
       <img
         alt="Icon"
@@ -153,7 +153,7 @@ exports[`ControlsExplanationContent should render 1`] = `
       </p>
     </div>
     <div
-      class="flex flex-row gap-2 justify-start items-start"
+      class="flex flex-row items-start justify-start gap-2"
     >
       <img
         alt="Icon"
@@ -165,7 +165,7 @@ exports[`ControlsExplanationContent should render 1`] = `
       </p>
     </div>
     <div
-      class="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6"
+      class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
     >
       <img
         alt="Icon"

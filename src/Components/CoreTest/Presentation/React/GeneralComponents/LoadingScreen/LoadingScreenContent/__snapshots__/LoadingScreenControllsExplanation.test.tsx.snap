@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingScreenControlsExplanation should render 1`] = `
+<div>
+  <div
+    class="row-span-4 w-[85vw] max-w-6xl portrait:h-[50vh] bg-buttonbgblue p-4 rounded-xl overflow-y-auto"
+  >
+    <h1
+      class="font-bold portrait:pb-6 text-adlerdarkblue"
+    >
+      sidebar_controls
+    </h1>
+    <div
+      class="grid landscape:grid-rows-6 landscape:grid-flow-col portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto gap-x-8 landscape:gap-y-3 portrait:gap-6 pb-4 text-xs lg:text-sm"
+    >
+      <h3
+        class="self-center font-bold text-adlerdarkblue"
+      >
+        controlAvatar
+      </h3>
+      <div
+        class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
+      >
+        <img
+          alt="Linksklick"
+          class="w-6"
+          src="left-click.svg"
+        />
+        <p>
+          controlAvatarMouse
+        </p>
+      </div>
+      <div
+        class="flex flex-row items-start justify-start gap-2"
+      >
+        <img
+          alt="Einfacher Touch"
+          class="w-6"
+          src="touch.svg"
+        />
+        <p>
+          controlAvatarTouch
+        </p>
+      </div>
+      <div
+        class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
+      >
+        <img
+          alt="Icon"
+          class="w-6"
+          src="hint.svg"
+        />
+        <p>
+          controlAvatarHint
+        </p>
+      </div>
+      <h3
+        class="self-center font-bold text-adlerdarkblue"
+      >
+        openContent
+      </h3>
+      <div
+        class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
+      >
+        <img
+          alt="Icon"
+          class="w-6"
+          src="left-click.svg"
+        />
+        <p>
+          openContentMouse
+        </p>
+      </div>
+      <div
+        class="flex flex-row items-start justify-start gap-2"
+      >
+        <img
+          alt="Icon"
+          class="w-6"
+          src="touch.svg"
+        />
+        <p>
+          openContentTouch
+        </p>
+      </div>
+      <div
+        class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
+      >
+        <img
+          alt="Icon"
+          class="w-6"
+          src="hint.svg"
+        />
+        <div
+          class="flex flex-col gap-1"
+        >
+          <p>
+            openContentHint1
+          </p>
+          <p>
+            openContentHint2
+          </p>
+        </div>
+      </div>
+      <h3
+        class="self-center font-bold text-adlerdarkblue"
+      >
+        rotateCamera
+      </h3>
+      <div
+        class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
+      >
+        <img
+          alt="Icon"
+          class="w-6"
+          src="middle-mouse-click-and-drag.svg"
+        />
+        <p>
+          rotateCameraMouse
+        </p>
+      </div>
+      <div
+        class="flex flex-row items-start justify-start gap-2"
+      >
+        <img
+          alt="Icon"
+          class="w-6"
+          src="touch-and-drag.svg"
+        />
+        <p>
+          rotateCameraTouch
+        </p>
+      </div>
+      <div
+        class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
+      >
+        <img
+          alt="Icon"
+          class="w-6"
+          src="hint.svg"
+        />
+        <p>
+          rotateCameraHint
+        </p>
+      </div>
+      <h3
+        class="self-center font-bold text-adlerdarkblue"
+      >
+        zoomCamera
+      </h3>
+      <div
+        class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
+      >
+        <img
+          alt="Icon"
+          class="w-6"
+          src="middle-mouse-click.svg"
+        />
+        <p>
+          zoomCameraMouse
+        </p>
+      </div>
+      <div
+        class="flex flex-row items-start justify-start gap-2"
+      >
+        <img
+          alt="Icon"
+          class="w-6"
+          src="touch-zoom.svg"
+        />
+        <p>
+          zoomCameraTouch
+        </p>
+      </div>
+      <div
+        class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
+      >
+        <img
+          alt="Icon"
+          class="w-6"
+          src="hint.svg"
+        />
+        <p>
+          zoomCameraHint
+        </p>
+      </div>
+    </div>
+    <p
+      class="w-full text-xs text-center"
+    >
+      hint_controlsExplanationModal
+    </p>
+  </div>
+</div>
+`;

@@ -13,6 +13,8 @@ import InternetLossModal from "~ReactComponents/GeneralComponents/InternetLossMo
 import LoadingScreen from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreen";
 import "src/localize/i18next-config";
 import AvatarEditor from "src/Components/Core/Presentation/AvatarEditor/AvatarEditor";
+import LoadingScreenControlsExplanation from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreenContent/LoadingScreenControlsExplanation";
+import LoadingScreenHomePageInformation from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreenContent/LoadingScreenHomePageInformation";
 
 export interface IAppProps {}
 
@@ -42,7 +44,15 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
   if (location?.pathname.includes("/spacedisplay")) {
     return (
       <>
-        <LoadingScreen />
+        <LoadingScreen
+          content={<LoadingScreenControlsExplanation />}
+          i18nKeys={{
+            namespace: "learningSpace",
+            button: "enterLearningSpace",
+            onLoading: "loadLearningSpace",
+            onLoadingFinished: "finishedLoadingLearningSpace",
+          }}
+        />
         <LearningSpace />
         <InternetLossModal />
       </>
@@ -50,7 +60,15 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
   } else if (location?.pathname.includes("/worldmenu")) {
     return (
       <>
-        <LoadingScreen />
+        <LoadingScreen
+          content={<LoadingScreenHomePageInformation />}
+          i18nKeys={{
+            namespace: "worldMenu",
+            button: "finishedLearningWorldOverview",
+            onLoading: "loadLearningWorldOverview",
+          }}
+          autoClose={true}
+        />
         <LearningWorldMenu />
         <InternetLossModal />
       </>

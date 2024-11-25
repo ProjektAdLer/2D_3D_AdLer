@@ -2,7 +2,7 @@ import IAvatarEditorController from "./IAvatarEditorController";
 import AvatarEditorViewModel from "./AvatarEditorViewModel";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import React, { useState } from "react";
+import { useState } from "react";
 import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBar";
 import AvatarEditorCategoryTabButton from "./AvatarEditorCategories/AvatarEditorCategoryTabButton";
 import {
@@ -14,8 +14,9 @@ import AvatarEditorFaceCategory from "./AvatarEditorCategories/AvatarEditorCateg
 import AvatarEditorAccessoireCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorAccessoireCategory";
 import AvatarEditorClothingCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorClothingCategory";
 import AvatarEditorPreview from "./AvatarEditorPreview/AvatarEditorPreview";
-import LoadingScreen from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreen";
 import AvatarEditorBodyCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorBodyCategory";
+import LoadingScreen from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreen";
+import LoadingScreenHomePageInformation from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreenContent/LoadingScreenHomePageInformation";
 
 export default function AvatarEditor() {
   const [viewModel, controller] = useBuilder<
@@ -30,70 +31,77 @@ export default function AvatarEditor() {
   if (!viewModel || !controller) return null;
 
   return (
-    <React.Fragment>
-      <div className="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden">
-        <MenuHeaderBar
-          location="editor"
-          className="self-center w-full p-2 font-semibold"
-        />
-        <div className="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg">
-          {/* Categories (Left Side) */}
+    <div className="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden">
+      <MenuHeaderBar
+        location="editor"
+        className="self-center w-full p-2 font-semibold"
+      />
+      <div className="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg">
+        {/* Categories (Left Side) */}
 
-          <div className="flex flex-col portrait:order-2">
-            {/* Category Tabs */}
-            {/* Category Header */}
-            <div className="flex flex-row items-center justify-center">
-              <div className="flex flex-col items-center justify-center">
-                <div className="text-2xl font-bold text-darkblue">
-                  {activeTab === OAvatarEditorCategory.HAIR && "Haare"}
-                  {activeTab === OAvatarEditorCategory.FACE && "Gesicht"}
-                  {activeTab === OAvatarEditorCategory.ACCESSOIRE &&
-                    "Accessoires"}
-                  {activeTab === OAvatarEditorCategory.CLOTHING && "Kleidung"}
-                  {activeTab === OAvatarEditorCategory.BODY && "Körperform"}
-                </div>
+        <div className="flex flex-col portrait:order-2">
+          {/* Category Tabs */}
+          {/* Category Header */}
+          <div className="flex flex-row items-center justify-center">
+            <div className="flex flex-col items-center justify-center">
+              <div className="text-2xl font-bold text-darkblue">
+                {activeTab === OAvatarEditorCategory.HAIR && "Haare"}
+                {activeTab === OAvatarEditorCategory.FACE && "Gesicht"}
+                {activeTab === OAvatarEditorCategory.ACCESSOIRE &&
+                  "Accessoires"}
+                {activeTab === OAvatarEditorCategory.CLOTHING && "Kleidung"}
+                {activeTab === OAvatarEditorCategory.BODY && "Körperform"}
               </div>
             </div>
-            <div className="flex flex-row justify-center p-2 space-x-4 ">
-              {Object.values(OAvatarEditorCategory)
-                .filter((category) => typeof category === "number")
-                .map((category) => (
-                  <AvatarEditorCategoryTabButton
-                    key={category}
-                    category={category as AvatarEditorCategory}
-                    active={activeTab === category}
-                    onClick={() => setActiveTab(category)}
-                  />
-                ))}
-            </div>
-
-            {/* Category Contents */}
-            <div className="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto">
-              {activeTab === OAvatarEditorCategory.HAIR && (
-                <AvatarEditorHairCategory controller={controller} />
-              )}
-              {activeTab === OAvatarEditorCategory.FACE && (
-                <AvatarEditorFaceCategory controller={controller} />
-              )}
-              {activeTab === OAvatarEditorCategory.ACCESSOIRE && (
-                <AvatarEditorAccessoireCategory controller={controller} />
-              )}
-              {activeTab === OAvatarEditorCategory.CLOTHING && (
-                <AvatarEditorClothingCategory controller={controller} />
-              )}
-              {activeTab === OAvatarEditorCategory.BODY && (
-                <AvatarEditorBodyCategory controller={controller} />
-              )}
-            </div>
+          </div>
+          <div className="flex flex-row justify-center p-2 space-x-4 ">
+            {Object.values(OAvatarEditorCategory)
+              .filter((category) => typeof category === "number")
+              .map((category) => (
+                <AvatarEditorCategoryTabButton
+                  key={category}
+                  category={category as AvatarEditorCategory}
+                  active={activeTab === category}
+                  onClick={() => setActiveTab(category)}
+                />
+              ))}
           </div>
 
-          {/* Avatar Preview (Right Side) */}
-          <div className="p-4">
-            <AvatarEditorPreview className="relative w-full h-full" />
+          {/* Category Contents */}
+          <div className="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto">
+            {activeTab === OAvatarEditorCategory.HAIR && (
+              <AvatarEditorHairCategory controller={controller} />
+            )}
+            {activeTab === OAvatarEditorCategory.FACE && (
+              <AvatarEditorFaceCategory controller={controller} />
+            )}
+            {activeTab === OAvatarEditorCategory.ACCESSOIRE && (
+              <AvatarEditorAccessoireCategory controller={controller} />
+            )}
+            {activeTab === OAvatarEditorCategory.CLOTHING && (
+              <AvatarEditorClothingCategory controller={controller} />
+            )}
+            {activeTab === OAvatarEditorCategory.BODY && (
+              <AvatarEditorBodyCategory controller={controller} />
+            )}
           </div>
         </div>
-        <LoadingScreen />
+
+        {/* Avatar Preview (Right Side) */}
+        <div className="p-4">
+          <AvatarEditorPreview className="relative w-full h-full" />
+        </div>
       </div>
-    </React.Fragment>
+      <LoadingScreen
+        content={<LoadingScreenHomePageInformation />}
+        i18nKeys={{
+          namespace: "avatarEditor",
+          button: "enterAvatarEditor",
+          onLoading: "loadAvatarEditor",
+          onLoadingFinished: "finishedAvatarEditor",
+        }}
+        autoClose={true}
+      />
+    </div>
   );
 }
