@@ -27,7 +27,7 @@ exports[`LoadingScreenHomePageInformation should render 1`] = `
           >
             <img
               alt="adlerHomepage"
-              src="AdLerHomepage.png"
+              src="AdLerHomepage.jpg"
             />
           </a>
         </div>

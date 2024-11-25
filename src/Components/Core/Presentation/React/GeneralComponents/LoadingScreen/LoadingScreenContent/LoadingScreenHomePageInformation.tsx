@@ -1,5 +1,5 @@
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
-import adlerHomepage from "../../../../../../../Assets/misc/AdLerHomepage.png";
+import adlerHomepage from "../../../../../../../Assets/misc/AdLerHomepage.jpg";
 import tailwindMerge from "src/Components/Core/Presentation/Utils/TailwindMerge";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { useTranslation } from "react-i18next";
