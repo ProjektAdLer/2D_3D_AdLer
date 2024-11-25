@@ -1,4 +1,8 @@
 {
+  "loadAvatarEditor": "Lade Avatar-Editor...",
+  "finishedAvatarEditor": "Avatar-Editor fertig geladen!",
+  "enterAvatarEditor": "Weiter zum Avatar-Editor",
+
   "hairColorTitle": "Haarfarbe",
   "hairstylesTitle": "Frisur",
   "beardsTitle": "Bart",

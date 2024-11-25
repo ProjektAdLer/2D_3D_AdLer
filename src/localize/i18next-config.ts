@@ -12,6 +12,7 @@ import de_learningElement from "./de/learningElement.json";
 import de_spaceGoal from "./de/spaceGoal.json";
 import de_controls from "./de/controls.json";
 import de_avatarEditor from "./de/avatarEditor.json";
+import de_loadingScreen from "./de/loadingScreen.json";
 
 const resources = {
   de: {
@@ -26,6 +27,7 @@ const resources = {
     spaceGoal: de_spaceGoal,
     controls: de_controls,
     avatarEditor: de_avatarEditor,
+    loadingScreen: de_loadingScreen,
   },
 };
 const defaultNS = "start";
