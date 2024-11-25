@@ -23,6 +23,7 @@ export default function LoadingScreenHomePageInformation({
           <a
             href="https://projekt-adler.eu"
             target="_blank"
+            rel="noreferrer"
             className="opacity-75 hover:opacity-100"
           >
             <img src={adlerHomepage} alt="adlerHomepage" />
