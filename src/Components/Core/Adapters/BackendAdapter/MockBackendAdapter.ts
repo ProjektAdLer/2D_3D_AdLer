@@ -11,10 +11,6 @@ import IBackendPort, {
   UserCredentialParams,
 } from "../../Application/Ports/Interfaces/IBackendPort";
 import LearningWorldStatusTO from "../../Application/DataTransferObjects/LearningWorldStatusTO";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import ILoggerPort from "../../Application/Ports/Interfaces/ILoggerPort";
-import CORE_TYPES from "~DependencyInjection/CoreTypes";
-import { LogLevelTypes } from "../../Domain/Types/LogLevelTypes";
 import AdaptivityElementQuestionSubmissionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 import AdaptivityElementQuestionResponse from "./Types/AdaptivityElementQuestionResponse";
 import AdaptivityElementStatusResponse from "./Types/AdaptivityElementStatusResponse";
