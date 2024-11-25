@@ -29,7 +29,6 @@
     "reactflow": "^11.11.4",
     "recast-detour": "^1.6.3",
     "reflect-metadata": "^0.2.2",
-    "rfc6902": "^5.1.1",
     "tailwind-merge": "^2.5.2"
   },
   "scripts": {

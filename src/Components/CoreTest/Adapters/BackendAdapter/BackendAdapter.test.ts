@@ -89,7 +89,7 @@ describe("BackendAdapter", () => {
       space.elements?.forEach((element) => {
         if (element instanceof BackendAdaptivityElementTO) {
           expect(element.adaptivity).toEqual(
-            expect.any(AdaptivityElementDataTO)
+            expect.any(AdaptivityElementDataTO),
           );
         } else if (element instanceof BackendLearningElementTO) {
           expect(element).toEqual(expectedLearningElementTO);
@@ -154,7 +154,7 @@ describe("BackendAdapter", () => {
         headers: {
           token: "token",
         },
-      }
+      },
     );
     expect(returnedVal).toBe(true);
   });
@@ -165,9 +165,8 @@ describe("BackendAdapter", () => {
         worlds: [{ worldId: 1, worldName: "string" }],
       },
     } as AxiosResponse<CoursesAvailableForUserResponse>);
-    const returnedVal = await systemUnderTest.getCoursesAvailableForUser(
-      "token"
-    );
+    const returnedVal =
+      await systemUnderTest.getCoursesAvailableForUser("token");
 
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
     expect(mockedAxios.get).toHaveBeenCalledWith("/Worlds", {
@@ -204,7 +203,7 @@ describe("BackendAdapter", () => {
         headers: {
           token: "token",
         },
-      }
+      },
     );
     expect(returnedVal).toEqual(true);
   });
@@ -226,7 +225,7 @@ describe("BackendAdapter", () => {
         headers: {
           token: "token",
         },
-      }
+      },
     );
     expect(returnedVal).toEqual("string");
   });
@@ -282,63 +281,12 @@ describe("BackendAdapter", () => {
         headers: {
           token: "token",
         },
-      }
+      },
     );
     expect(returnedVal).toEqual({
       elementID: 1,
       success: true,
     });
-  });
-
-  test("should get Player Data", async () => {
-    mockedAxios.get.mockResolvedValue({
-      data: {
-        playerGender: "string",
-        playerWorldColor: "string",
-      },
-    });
-    const returnedVal = await systemUnderTest.getPlayerData("token");
-
-    expect(mockedAxios.get).toHaveBeenCalledTimes(1);
-    expect(mockedAxios.get).toHaveBeenCalledWith("/PlayerData", {
-      headers: {
-        token: "token",
-      },
-    });
-    expect(returnedVal).toEqual({
-      playerGender: "string",
-      playerWorldColor: "string",
-    });
-  });
-
-  test("should update Player Data", async () => {
-    mockedAxios.patch.mockResolvedValue({
-      data: {
-        playerGender: "string",
-        playerWorldColor: "string",
-      },
-    });
-    const returnedVal = await systemUnderTest.updatePlayerData("token", {
-      playerGender: "string1",
-    });
-
-    expect(mockedAxios.patch).toHaveBeenCalledTimes(1);
-
-    expect(returnedVal).toEqual({
-      playerGender: "string",
-      playerWorldColor: "string",
-    });
-  });
-
-  test("should delete Player Data", async () => {
-    mockedAxios.delete.mockResolvedValue({
-      data: true,
-    });
-    const returnedVal = await systemUnderTest.deletePlayerData("token");
-
-    expect(mockedAxios.delete).toHaveBeenCalledTimes(1);
-
-    expect(returnedVal).toEqual(true);
   });
 
   test("should update adaptivity data", async () => {
@@ -375,7 +323,7 @@ describe("BackendAdapter", () => {
         headers: {
           token: "token",
         },
-      }
+      },
     );
     expect(returnedVal).toEqual({
       elementScore: {
@@ -435,7 +383,7 @@ describe("BackendAdapter", () => {
         headers: {
           token: "token",
         },
-      }
+      },
     );
     expect(returnedVal).toEqual({
       element: {

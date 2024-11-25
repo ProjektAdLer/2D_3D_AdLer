@@ -2,7 +2,6 @@ import { injectable } from "inversify";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import LearningElementScoreTO from "../../Application/DataTransferObjects/LearningElementScoreTO";
-import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import BackendAdapterUtils from "./BackendAdapterUtils";
 import IBackendPort, {
@@ -31,28 +30,6 @@ import AWT from "./Types/AWT";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendPort {
-  deletePlayerData(userToken: string): Promise<boolean> {
-    const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
-    logger.log(LogLevelTypes.DEBUG, "MockBackendAdapter.deletePlayerData");
-    return Promise.resolve(true);
-  }
-
-  updatePlayerData(
-    userToken: string,
-    playerData: Partial<PlayerDataTO>
-  ): Promise<PlayerDataTO> {
-    return Promise.resolve(
-      Object.assign(new PlayerDataTO(), playerData) as PlayerDataTO
-    );
-  }
-
-  getPlayerData(userToken: string): Promise<PlayerDataTO> {
-    return Promise.resolve({
-      playerGender: "Male",
-      playerWorldColor: "Blue",
-    });
-  }
-
   getElementScore({
     userToken,
     elementID,
@@ -66,7 +43,7 @@ export default class MockBackendAdapter implements IBackendPort {
 
   getWorldStatus(
     userToken: string,
-    worldID: ComponentID
+    worldID: ComponentID,
   ): Promise<LearningWorldStatusTO> {
     return Promise.resolve({
       worldID: worldID,
@@ -110,14 +87,14 @@ export default class MockBackendAdapter implements IBackendPort {
     else worldToUse = NewWorldAWT;
 
     const elementType = worldToUse.world.elements.find(
-      (element) => element.elementId === elementID
+      (element) => element.elementId === elementID,
     )!.elementCategory;
 
     switch (elementType) {
       case "h5p":
       case "primitiveH5P":
         return Promise.reject(
-          "H5P elements are not supported in the backend mock."
+          "H5P elements are not supported in the backend mock.",
         );
       case "video":
         //return Promise.resolve("https://youtu.be/8X4cDoM3R7E?t=189");
@@ -129,19 +106,19 @@ export default class MockBackendAdapter implements IBackendPort {
         return Promise.resolve(
           "http://" +
             window.location.host +
-            "/SampleLearningElementData/testBild.png"
+            "/SampleLearningElementData/testBild.png",
         );
       case "text":
         return Promise.resolve(
           "http://" +
             window.location.host +
-            "/SampleLearningElementData/fktohneParamohneRueckgabeohneDeklaration.c"
+            "/SampleLearningElementData/fktohneParamohneRueckgabeohneDeklaration.c",
         );
       case "pdf":
         return Promise.resolve(
           "http://" +
             window.location.host +
-            "/SampleLearningElementData/testPDF.pdf"
+            "/SampleLearningElementData/testPDF.pdf",
         );
       /* istanbul ignore next */
       default:
@@ -175,7 +152,7 @@ export default class MockBackendAdapter implements IBackendPort {
   scoreElement(
     userToken: string,
     elementID: ComponentID,
-    courseID: ComponentID
+    courseID: ComponentID,
   ): Promise<boolean> {
     return Promise.resolve(true);
   }
@@ -199,7 +176,7 @@ export default class MockBackendAdapter implements IBackendPort {
   getAdaptivityElementQuestionResponse(
     userToken: string,
     worldID: number,
-    submissionData: AdaptivityElementQuestionSubmissionTO
+    submissionData: AdaptivityElementQuestionSubmissionTO,
   ): Promise<AdaptivityElementQuestionResponse> {
     const backendResponse: AdaptivityElementQuestionResponse = {
       elementScore: {
@@ -290,11 +267,11 @@ export default class MockBackendAdapter implements IBackendPort {
 
   private updateFakeBackEnd(response: AdaptivityElementQuestionResponse) {
     const BackendTask = MockAdaptivityElementStatusResponse.tasks.find(
-      (task) => task.taskId === response.gradedTask.taskId
+      (task) => task.taskId === response.gradedTask.taskId,
     );
 
     const BackendQuestion = MockAdaptivityElementStatusResponse.questions.find(
-      (question) => question.id === response.gradedQuestion.id
+      (question) => question.id === response.gradedQuestion.id,
     );
 
     BackendQuestion!.status = response.gradedQuestion.status;
@@ -308,16 +285,16 @@ export default class MockBackendAdapter implements IBackendPort {
 
     // check if task of AE is complete
     const currentTask = MockAdaptivityData.adaptivityTasks.find(
-      (t) => t.taskId === BackendTask?.taskId
+      (t) => t.taskId === BackendTask?.taskId,
     );
 
     const isTaskComplete = currentTask!.adaptivityQuestions.every(
       (question) => {
         const q = MockAdaptivityElementStatusResponse.questions.find(
-          (q) => q.id === question.questionId
+          (q) => q.id === question.questionId,
         );
         return q!.status === AdaptivityElementStatusTypes.Correct;
-      }
+      },
     );
 
     if (isTaskComplete) {
@@ -330,17 +307,17 @@ export default class MockBackendAdapter implements IBackendPort {
     if (!isTaskComplete) {
       // check if required question answered correct
       const currentQuestion = currentTask?.adaptivityQuestions.find(
-        (q) => q.questionId === BackendQuestion?.id
+        (q) => q.questionId === BackendQuestion?.id,
       );
 
       const taskDifficulty = MockAdaptivityData.adaptivityTasks.find(
-        (t) => t.taskId === BackendTask?.taskId
+        (t) => t.taskId === BackendTask?.taskId,
       )!.requiredDifficulty;
 
       const questionDifficulty = MockAdaptivityData.adaptivityTasks
         .flatMap((task) => {
           return task.adaptivityQuestions.find(
-            (question) => question.questionId === currentQuestion?.questionId
+            (question) => question.questionId === currentQuestion?.questionId,
           )?.questionDifficulty;
         })
         .filter((e) => e !== undefined)[0];
@@ -359,11 +336,11 @@ export default class MockBackendAdapter implements IBackendPort {
     const RequiredTasks = MockAdaptivityElementStatusResponse.tasks.filter(
       (task) => {
         const rt = MockAdaptivityData.adaptivityTasks.filter(
-          (t) => t.optional === false
+          (t) => t.optional === false,
         );
         const r = rt.find((t) => t.taskId === task.taskId);
         return r;
-      }
+      },
     );
 
     const isEveryTaskComplete = RequiredTasks.every((task) => {

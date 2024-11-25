@@ -3,7 +3,6 @@ import { AdaptivityElementDataTO } from "./../../../Core/Application/DataTransfe
 import { mock } from "jest-mock-extended";
 import { config } from "../../../../config";
 import MockBackendAdapter from "../../../Core/Adapters/BackendAdapter/MockBackendAdapter";
-import PlayerDataTO from "../../../Core/Application/DataTransferObjects/PlayerDataTO";
 import LearningWorldStatusTO from "../../../Core/Application/DataTransferObjects/LearningWorldStatusTO";
 import { XAPIEvent } from "../../../Core/Application/UseCases/ScoreH5PLearningElement/IScoreH5PLearningElementUseCase";
 import {
@@ -21,7 +20,7 @@ import AdaptivityElementQuestionResponse from "../../../Core/Adapters/BackendAda
 const oldConfigValue = config.useFakeBackend;
 
 let mockGetQuestionResponseFromSubmission = (
-  submission: AdaptivityElementQuestionSubmissionTO
+  submission: AdaptivityElementQuestionSubmissionTO,
 ): AdaptivityElementQuestionResponse => {
   return {
     elementScore: {
@@ -69,7 +68,7 @@ describe("MockBackendAdapter", () => {
       space.elements?.forEach((element) => {
         if (element instanceof BackendAdaptivityElementTO) {
           expect(element.adaptivity).toEqual(
-            expect.any(AdaptivityElementDataTO)
+            expect.any(AdaptivityElementDataTO),
           );
         } else if (element instanceof BackendLearningElementTO) {
           expect(element).toEqual(expectedLearningElementTO);
@@ -81,7 +80,7 @@ describe("MockBackendAdapter", () => {
   });
 
   test.todo(
-    "add tests for specific desired element types and structure in BackendWorldTO"
+    "add tests for specific desired element types and structure in BackendWorldTO",
   );
   // expect(result.spaces).toHaveLength(4);
   // expect(result.spaces![0].elements).toEqual(
@@ -96,7 +95,7 @@ describe("MockBackendAdapter", () => {
 
   test("scoreElement resolves", async () => {
     await expect(
-      systemUnderTest.scoreElement("token", 42, 1)
+      systemUnderTest.scoreElement("token", 42, 1),
     ).resolves.toBeTruthy();
   });
 
@@ -105,13 +104,13 @@ describe("MockBackendAdapter", () => {
       systemUnderTest.loginUser({
         username: "test",
         password: "test",
-      })
+      }),
     ).resolves.toEqual("fakeToken");
   });
 
   test("should get Courses Available For User", async () => {
     await expect(
-      systemUnderTest.getCoursesAvailableForUser("token")
+      systemUnderTest.getCoursesAvailableForUser("token"),
     ).resolves.toEqual({
       courses: [
         {
@@ -138,7 +137,7 @@ describe("MockBackendAdapter", () => {
         h5pID: 1,
         userToken: "token",
         rawH5PEvent: h5pMock,
-      })
+      }),
     ).resolves.toEqual(true);
   });
 
@@ -150,9 +149,9 @@ describe("MockBackendAdapter", () => {
           userToken: "token",
           worldID: 1,
           elementID: elementID,
-        })
+        }),
       ).resolves.toEqual(expect.any(String));
-    }
+    },
   );
 
   test("should get World Status", async () => {
@@ -193,30 +192,11 @@ describe("MockBackendAdapter", () => {
         userToken: "token",
         elementID: 1,
         worldID: 1,
-      })
+      }),
     ).resolves.toEqual({
       elementID: 1,
       success: true,
     });
-  });
-
-  test("should get Player Data", async () => {
-    await expect(systemUnderTest.getPlayerData("token")).resolves.toEqual({
-      playerGender: "Male",
-      playerWorldColor: "Blue",
-    });
-  });
-
-  test("should update Player Data", async () => {
-    await expect(
-      systemUnderTest.updatePlayerData("token", {})
-    ).resolves.toEqual(new PlayerDataTO());
-  });
-
-  test("should resolve with true when trying to delete Player Data", async () => {
-    await expect(systemUnderTest.deletePlayerData("token")).resolves.toEqual(
-      true
-    );
   });
 
   test("should get adaptivity question response for single-choice questions", async () => {
@@ -254,8 +234,8 @@ describe("MockBackendAdapter", () => {
       systemUnderTest.getAdaptivityElementQuestionResponse(
         "",
         0,
-        questionSubmissionTO
-      )
+        questionSubmissionTO,
+      ),
     ).resolves.toStrictEqual(response_1);
 
     // second single-choice question (in second task)
@@ -288,8 +268,8 @@ describe("MockBackendAdapter", () => {
       systemUnderTest.getAdaptivityElementQuestionResponse(
         "",
         0,
-        questionSubmissionTO
-      )
+        questionSubmissionTO,
+      ),
     ).resolves.toStrictEqual(response_2);
   });
 
@@ -326,8 +306,8 @@ describe("MockBackendAdapter", () => {
       systemUnderTest.getAdaptivityElementQuestionResponse(
         "",
         0,
-        questionSubmissionTO
-      )
+        questionSubmissionTO,
+      ),
     ).resolves.toStrictEqual(response);
   });
 
@@ -337,7 +317,7 @@ describe("MockBackendAdapter", () => {
         userToken: "",
         elementID: 1,
         worldID: 1,
-      })
+      }),
     ).resolves.toStrictEqual(MockAdaptivityElementStatusResponse);
   });
 

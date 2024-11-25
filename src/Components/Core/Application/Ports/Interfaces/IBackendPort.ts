@@ -2,7 +2,6 @@ import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import CourseListTO from "../../DataTransferObjects/CourseListTO";
 import LearningWorldStatusTO from "../../DataTransferObjects/LearningWorldStatusTO";
 import LearningElementScoreTO from "../../DataTransferObjects/LearningElementScoreTO";
-import PlayerDataTO from "../../DataTransferObjects/PlayerDataTO";
 import BackendWorldTO from "../../DataTransferObjects/BackendWorldTO";
 import { XAPIEvent } from "../../UseCases/ScoreH5PLearningElement/IScoreH5PLearningElementUseCase";
 import AdaptivityElementQuestionSubmissionTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
@@ -33,15 +32,6 @@ export type ElementDataParams = {
 };
 
 export default interface IBackendPort {
-  deletePlayerData(userToken: string): Promise<boolean>;
-
-  updatePlayerData(
-    userToken: string,
-    playerData: Partial<PlayerDataTO>
-  ): Promise<PlayerDataTO>;
-
-  getPlayerData(userToken: string): Promise<PlayerDataTO>;
-
   getElementScore({
     userToken,
     elementID,
@@ -56,12 +46,12 @@ export default interface IBackendPort {
   scoreElement(
     userToken: string,
     elementID: ComponentID,
-    courseID: ComponentID
+    courseID: ComponentID,
   ): Promise<boolean>;
 
   getWorldStatus(
     userToken: string,
-    worldID: number
+    worldID: number,
   ): Promise<LearningWorldStatusTO>;
 
   scoreH5PElement(data: ScoreH5PElementParams): Promise<boolean>;
@@ -79,7 +69,7 @@ export default interface IBackendPort {
   getAdaptivityElementQuestionResponse(
     userToken: string,
     worldID: number,
-    submissionData: AdaptivityElementQuestionSubmissionTO
+    submissionData: AdaptivityElementQuestionSubmissionTO,
   ): Promise<AdaptivityElementQuestionResponse>;
 
   getAdaptivityElementStatusResponse({

@@ -11,14 +11,11 @@ import IBackendPort, {
 import CourseListTO from "../../Application/DataTransferObjects/CourseListTO";
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import LearningElementScoreTO from "../../Application/DataTransferObjects/LearningElementScoreTO";
-import { createPatch } from "rfc6902";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
 import BackendAdapterUtils from "./BackendAdapterUtils";
-import PlayerDataTO from "../../Application/DataTransferObjects/PlayerDataTO";
 import WorldStatusResponse, {
   CoursesAvailableForUserResponse,
   ElementScoreResponse,
-  PlayerDataResponse,
 } from "./Types/BackendResponseTypes";
 import LearningWorldStatusTO from "../../Application/DataTransferObjects/LearningWorldStatusTO";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
@@ -38,56 +35,18 @@ export default class BackendAdapter implements IBackendPort {
     } catch (error) {
       logger.log(
         LogLevelTypes.ERROR,
-        "Could not set Axios Base URL to: " + config.serverURL
+        "Could not set Axios Base URL to: " + config.serverURL,
       );
       if (config.isDebug)
         logger.log(
           LogLevelTypes.DEBUG,
-          "If you want to use the Fake Backend, set the environment variable REACT_APP_USE_FAKEBACKEND to true."
+          "If you want to use the Fake Backend, set the environment variable REACT_APP_USE_FAKEBACKEND to true.",
         );
       throw error;
     }
 
     // set default timeout for axios
     axios.defaults.timeout = 3000;
-  }
-  async deletePlayerData(userToken: string): Promise<boolean> {
-    const isSuccess = await axios.delete<boolean>("/PlayerData", {
-      headers: {
-        token: userToken,
-      },
-    });
-
-    return isSuccess.data;
-  }
-
-  async updatePlayerData(
-    userToken: string,
-    playerData: Partial<PlayerDataTO>
-  ): Promise<PlayerDataTO> {
-    const patchRequest = createPatch({}, playerData);
-
-    const resp = await axios.patch<PlayerDataResponse>(
-      "/PlayerData",
-      patchRequest,
-      {
-        headers: {
-          token: userToken,
-        },
-      }
-    );
-
-    return resp.data;
-  }
-
-  async getPlayerData(userToken: string): Promise<PlayerDataTO> {
-    const resp = await axios.get<PlayerDataResponse>("/PlayerData", {
-      headers: {
-        token: userToken,
-      },
-    });
-
-    return resp.data as PlayerDataTO;
   }
 
   async getElementScore({
@@ -101,7 +60,7 @@ export default class BackendAdapter implements IBackendPort {
         headers: {
           token: userToken,
         },
-      }
+      },
     );
 
     return resp.data as LearningElementScoreTO;
@@ -119,7 +78,7 @@ export default class BackendAdapter implements IBackendPort {
           headers: {
             token: userToken,
           },
-        }
+        },
       )
       .then((response) => response.data.filePath);
   }
@@ -136,7 +95,7 @@ export default class BackendAdapter implements IBackendPort {
         headers: {
           token: data.userToken,
         },
-      }
+      },
     );
 
     return response.data.isSuccess;
@@ -145,7 +104,7 @@ export default class BackendAdapter implements IBackendPort {
   async scoreElement(
     userToken: string,
     elementID: ComponentID,
-    courseID: ComponentID
+    courseID: ComponentID,
   ): Promise<boolean> {
     const response = await axios.patch<{
       isSuccess: boolean;
@@ -156,7 +115,7 @@ export default class BackendAdapter implements IBackendPort {
         headers: {
           token: userToken,
         },
-      }
+      },
     );
 
     return response.data.isSuccess;
@@ -164,7 +123,7 @@ export default class BackendAdapter implements IBackendPort {
 
   async getWorldStatus(
     userToken: string,
-    worldID: number
+    worldID: number,
   ): Promise<LearningWorldStatusTO> {
     const resp = await axios.get<WorldStatusResponse>(
       "/Worlds/" + worldID + "/status",
@@ -172,7 +131,7 @@ export default class BackendAdapter implements IBackendPort {
         headers: {
           token: userToken,
         },
-      }
+      },
     );
 
     const worldStatusTO = new LearningWorldStatusTO();
@@ -209,7 +168,7 @@ export default class BackendAdapter implements IBackendPort {
         response.data.worlds.map((world) => ({
           courseID: world.worldId,
           courseName: world.worldName,
-        }))
+        })),
       );
 
     const courseListTO = new CourseListTO();
@@ -233,7 +192,7 @@ export default class BackendAdapter implements IBackendPort {
   async getAdaptivityElementQuestionResponse(
     userToken: string,
     worldID: number,
-    submissionData: AdaptivityElementQuestionSubmissionTO
+    submissionData: AdaptivityElementQuestionSubmissionTO,
   ): Promise<AdaptivityElementQuestionResponse> {
     const response = await axios.patch<AdaptivityElementQuestionResponse>(
       "/Elements/World/" +
@@ -247,7 +206,7 @@ export default class BackendAdapter implements IBackendPort {
         headers: {
           token: userToken,
         },
-      }
+      },
     );
     return response.data;
   }
@@ -263,7 +222,7 @@ export default class BackendAdapter implements IBackendPort {
         headers: {
           token: userToken,
         },
-      }
+      },
     );
     return response.data;
   }

@@ -1,10 +1,5 @@
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 
-export type PlayerDataResponse = {
-  playerGender: string;
-  playerWorldColor: string;
-};
-
 export type ElementScoreResponse = {
   elementID: number;
   success: boolean;
