@@ -118,7 +118,9 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
                 title={translate("linkInfo").toString()}
                 rel="noreferrer"
                 className="underline text-adleroceanblue hover:text-nodehandlecolor"
-              ></a>,
+              >
+                {}
+              </a>,
             ]}
             values={{ homepageLink: translate("homepage") }}
           />
