@@ -42,14 +42,10 @@ export default function LearningWorldSelection({
     const loadUserLearningWorldsInfoAsync = async (): Promise<void> => {
       await loadUserWorldsInfoUseCase.executeAsync();
       loadingScreenPresenter.releaseLoadingLock();
-      loadingScreenPresenter.closeLoadingScreen();
     };
+
     if (viewModel) {
       loadingScreenPresenter.lockLoadingLock();
-      loadingScreenPresenter.showLoadingScreen();
-      loadingScreenPresenter.pushLoadStep(
-        translate("loadLearningWorldOverview"),
-      );
       loadUserLearningWorldsInfoAsync();
     }
   }, [viewModel, loadUserWorldsInfoUseCase, translate, loadingScreenPresenter]);

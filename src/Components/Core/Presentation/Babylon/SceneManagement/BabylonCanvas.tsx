@@ -25,7 +25,7 @@ export type BabylonCanvasProps = {
 export default function BabylonCanvas(
   props: AdLerUIComponent<
     BabylonCanvasProps & React.HTMLAttributes<HTMLCanvasElement>
-  >
+  >,
 ) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const {
@@ -47,7 +47,7 @@ export default function BabylonCanvas(
 
     // call LoadingScreen
     const loadingScreenPresenter = CoreDIContainer.get<ILoadingScreenPresenter>(
-      PRESENTATION_TYPES.ILoadingScreenPresenter
+      PRESENTATION_TYPES.ILoadingScreenPresenter,
     );
     loadingScreenPresenter.lockLoadingLock();
     loadingScreenPresenter.showLoadingScreen();
@@ -57,20 +57,16 @@ export default function BabylonCanvas(
       canvasRef.current,
       antialias,
       engineOptions,
-      adaptToDeviceRatio
+      adaptToDeviceRatio,
     );
 
     // create scene
     const scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
-      SCENE_TYPES.ScenePresenterFactory
+      SCENE_TYPES.ScenePresenterFactory,
     );
     const scenePresenter = scenePresenterFactory(sceneDefinitionType);
     const createSceneAsync = async () => {
-      loadingScreenPresenter.pushLoadStep(translate("loadLearningSpace"));
       await scenePresenter.createScene(engine, sceneOptions).then(() => {
-        loadingScreenPresenter.pushLoadStep(
-          translate("finishedLoadingLearningSpace")
-        );
         loadingScreenPresenter.releaseLoadingLock();
       });
       scenePresenter.startRenderLoop();
