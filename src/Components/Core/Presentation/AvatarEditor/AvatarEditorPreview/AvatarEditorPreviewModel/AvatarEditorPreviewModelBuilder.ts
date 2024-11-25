@@ -4,6 +4,10 @@ import IAvatarEditorPreviewModelPresenter from "./IAvatarEditorPreviewModelPrese
 import AvatarEditorPreviewModelViewModel from "./AvatarEditorPreviewModelViewModel";
 import AvatarEditorPreveiwModelView from "./AvatarEditorPreviewModelView";
 import AsyncPresentationBuilder from "../../../PresentationBuilder/AsyncPresentationBuilder";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import IAvatarPort from "src/Components/Core/Application/Ports/Interfaces/IAvatarPort";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import { LocationScope } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 @injectable()
 export default class AvatarEditorPreviewModelBuilder extends AsyncPresentationBuilder<
@@ -27,6 +31,15 @@ export default class AvatarEditorPreviewModelBuilder extends AsyncPresentationBu
     this.view!.asyncSetup().then(
       () => this.resolveIsCompleted(),
       (e) => console.log(e),
+    );
+  }
+
+  buildPresenter(): void {
+    super.buildPresenter();
+
+    CoreDIContainer.get<IAvatarPort>(PORT_TYPES.IAvatarPort).registerAdapter(
+      this.presenter!,
+      LocationScope.avatarEditor,
     );
   }
 }

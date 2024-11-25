@@ -66,6 +66,8 @@ import IPauseOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adapt
 import PauseOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/PauseOverallTimeSpentTimer/PauseOverallTimeSpentTimerUseCase";
 import IGetUnseenBreakTimeNotificationUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/GetUnseenBreakTimeNotification/IGetUnseenBreakTimeNotificationUseCase";
 import GetUnseenBreakTimeNotificationUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/GetUnseenBreakTimeNotification/GetUnseenBreakTimeNotificationUseCase";
+import IUpdateAvatarConfigUseCase from "../../Application/UseCases/UpdateAvatarConfig/IUpdateAvatarConfigUseCase";
+import UpdateAvatarConfigUseCase from "../../Application/UseCases/UpdateAvatarConfig/UpdateAvatarConfigUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -239,6 +241,10 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.IGetUnseenBreakTimeNotificationUseCase,
   )
     .to(GetUnseenBreakTimeNotificationUseCase)
+    .inSingletonScope();
+
+  bind<IUpdateAvatarConfigUseCase>(USECASE_TYPES.IUpdateAvatarConfigUseCase)
+    .to(UpdateAvatarConfigUseCase)
     .inSingletonScope();
 });
 

@@ -39,6 +39,7 @@ export default class GetLoginStatusUseCase implements IGetLoginStatusUseCase {
       userName: userDataEntity?.username ?? undefined,
     };
   }
+
   execute(): LoginStatusTO {
     const userDataEntity =
       this.container.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];

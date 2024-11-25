@@ -6,6 +6,7 @@ export enum LocationScope {
   worldMenu = "worldmenu",
   spaceMenu = "spacemenu",
   spaceDisplay = "spacedisplay",
+  avatarEditor = "avatarEditor",
   _sceneRendering = "_sceneRendering", // for presenter that need to be cleared between learning spaces
   _global = "_global",
 }

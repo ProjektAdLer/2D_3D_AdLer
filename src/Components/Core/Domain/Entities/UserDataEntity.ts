@@ -1,4 +1,5 @@
 import { ComponentID } from "../Types/EntityTypes";
+import AvatarEntity from "./AvatarEntity";
 
 export default class UserDataEntity {
   userToken: string;
@@ -8,4 +9,5 @@ export default class UserDataEntity {
   currentWorldID: ComponentID | undefined = undefined;
   currentSpaceID: ComponentID | undefined = undefined;
   lastVisitedWorldID: ComponentID | undefined = undefined;
+  avatar: AvatarEntity;
 }
