@@ -3,28 +3,28 @@ import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGr
 import { useTranslation } from "react-i18next";
 
 const eyebrowsThumbnails = require.context(
-  "../../../../../../Assets/textures/avatar/face/eyebrows",
+  "../../../../../../Assets/avatarEditorThumbnails/face/eyebrows",
 );
 const eyebrowsThumbnailsList = eyebrowsThumbnails
   .keys()
   .map((key) => eyebrowsThumbnails(key));
 
 const eyesThumbnails = require.context(
-  "../../../../../../Assets/textures/avatar/face/eyes",
+  "../../../../../../Assets/avatarEditorThumbnails/face/eyes",
 );
 const eyesThumbnailsList = eyesThumbnails
   .keys()
   .map((key) => eyesThumbnails(key));
 
 const mouthThumbnails = require.context(
-  "../../../../../../Assets/textures/avatar/face/mouths",
+  "../../../../../../Assets/avatarEditorThumbnails/face/mouths",
 );
 const mouthThumbnailsList = mouthThumbnails
   .keys()
   .map((key) => mouthThumbnails(key));
 
 const noseThumbnails = require.context(
-  "../../../../../../Assets/textures/avatar/face/noses",
+  "../../../../../../Assets/avatarEditorThumbnails/face/noses",
 );
 const noseThumbnailsList = noseThumbnails
   .keys()

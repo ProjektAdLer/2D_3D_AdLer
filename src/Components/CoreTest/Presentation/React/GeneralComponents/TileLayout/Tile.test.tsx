@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import Tile from "../../../../../Core/Presentation/React/GeneralComponents/TileLayout/Tile";
 
-const img = require("../../../../../../Assets/3dModels/avatar/hair/hairstyles/Hair_backhead_256.png");
+const img = require("../../../../../../Assets/avatarEditorThumbnails/hair/hairstyles/Hair_backhead_256.png");
 
 describe("Tile", () => {
   test("should render", () => {

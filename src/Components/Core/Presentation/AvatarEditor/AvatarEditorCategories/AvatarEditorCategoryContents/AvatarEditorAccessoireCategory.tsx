@@ -3,28 +3,28 @@ import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGr
 import { useTranslation } from "react-i18next";
 
 const headgearThumbnails = require.context(
-  "../../../../../../Assets/3dModels/avatar/accessoires/headgear",
+  "../../../../../../Assets/avatarEditorThumbnails/accessoires/headgear",
 );
 const headgearThumbnailsList = headgearThumbnails
   .keys()
   .map((key) => headgearThumbnails(key));
 
 const glassesThumbnails = require.context(
-  "../../../../../../Assets/3dModels/avatar/accessoires/glasses",
+  "../../../../../../Assets/avatarEditorThumbnails/accessoires/glasses",
 );
 const glassesThumbnailsList = glassesThumbnails
   .keys()
   .map((key) => glassesThumbnails(key));
 
 const backpackThumbnails = require.context(
-  "../../../../../../Assets/3dModels/avatar/accessoires/backpack",
+  "../../../../../../Assets/avatarEditorThumbnails/accessoires/backpack",
 );
 const backpackThumbnailsList = backpackThumbnails
   .keys()
   .map((key) => backpackThumbnails(key));
 
 const otherThumbnails = require.context(
-  "../../../../../../Assets/3dModels/avatar/accessoires/other",
+  "../../../../../../Assets/avatarEditorThumbnails/accessoires/other",
 );
 const otherThumbnailsList = otherThumbnails
   .keys()

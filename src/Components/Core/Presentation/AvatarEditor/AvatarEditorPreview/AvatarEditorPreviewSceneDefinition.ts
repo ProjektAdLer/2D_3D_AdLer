@@ -16,8 +16,9 @@ import {
   Vector3,
 } from "@babylonjs/core";
 import AvatarEditorPreviewCameraBuilder from "./AvatarEditorPreviewCamera/AvatarEditorPreviewCameraBuilder";
-import backGroundMatTexture from "../../../../../Assets/textures/avatar/AvatarEditorBackground.png";
 import AvatarEditorPreviewModelBuilder from "./AvatarEditorPreviewModel/AvatarEditorPreviewModelBuilder";
+
+import backGroundMatTexture from "../../../../../Assets/textures/avatarEditor/AvatarEditorBackground.png";
 
 @injectable()
 export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDefinition {

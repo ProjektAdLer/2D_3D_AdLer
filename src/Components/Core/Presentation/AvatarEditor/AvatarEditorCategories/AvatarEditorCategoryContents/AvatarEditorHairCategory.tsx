@@ -5,14 +5,14 @@ import ColorPicker from "~ReactComponents/GeneralComponents/ColorPicker/ColorPic
 import { defaultColorPickerSchema } from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerColors";
 
 const hairThumbnailImages = require.context(
-  "../../../../../../Assets/3dModels/avatar/hair/hairstyles",
+  "../../../../../../Assets/avatarEditorThumbnails/hair/hairstyles",
 );
 const hairThumbnailImageList = hairThumbnailImages
   .keys()
   .map((key) => hairThumbnailImages(key));
 
 const beardThumbnailImages = require.context(
-  "../../../../../../Assets/3dModels/avatar/hair/beards",
+  "../../../../../../Assets/avatarEditorThumbnails/hair/beards",
 );
 const beardThumbnailImageList = beardThumbnailImages
   .keys()

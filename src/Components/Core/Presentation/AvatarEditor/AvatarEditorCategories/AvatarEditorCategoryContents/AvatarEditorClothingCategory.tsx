@@ -5,21 +5,21 @@ import ColorPicker from "~ReactComponents/GeneralComponents/ColorPicker/ColorPic
 import { defaultColorPickerSchema } from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerColors";
 
 const shirtsThumbnails = require.context(
-  "../../../../../../Assets/3dModels/avatar/clothing/shirts",
+  "../../../../../../Assets/avatarEditorThumbnails/clothing/shirts",
 );
 const shirtThumbnailsList = shirtsThumbnails
   .keys()
   .map((key) => shirtsThumbnails(key));
 
 const pantsThumbnails = require.context(
-  "../../../../../../Assets/3dModels/avatar/clothing/pants",
+  "../../../../../../Assets/avatarEditorThumbnails/clothing/pants",
 );
 const pantsThumbnailsList = pantsThumbnails
   .keys()
   .map((key) => pantsThumbnails(key));
 
 const shoesThumbnails = require.context(
-  "../../../../../../Assets/3dModels/avatar/clothing/shoes",
+  "../../../../../../Assets/avatarEditorThumbnails/clothing/shoes",
 );
 const shoesThumbnailsList = shoesThumbnails
   .keys()
