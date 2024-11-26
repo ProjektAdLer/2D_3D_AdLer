@@ -3,13 +3,14 @@ import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps
 import { useTranslation } from "react-i18next";
 import ColorPicker from "~ReactComponents/GeneralComponents/ColorPicker/ColorPicker";
 import { defaultColorPickerSchema } from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerColors";
+import { AvatarHairModels } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
 
-const hairThumbnailImages = require.context(
-  "../../../../../../Assets/avatarEditorThumbnails/hair/hairstyles",
-);
-const hairThumbnailImageList = hairThumbnailImages
-  .keys()
-  .map((key) => hairThumbnailImages(key));
+const hairThumbnails = Object.values(AvatarHairModels).map((type) => ({
+  type: type,
+  image: require(
+    `../../../../../../Assets/avatarEditorThumbnails/hair/hairstyles/Hair_${type}.png`,
+  ),
+}));
 
 const beardThumbnailImages = require.context(
   "../../../../../../Assets/avatarEditorThumbnails/hair/beards",
@@ -40,14 +41,16 @@ export default function AvatarEditorHairCategory(
         <h1 className="text-2xl font-bold">{translate("hairstylesTitle")}</h1>
       </div>
       <TileGridLayout
-        tileContents={hairThumbnailImageList.map((image, index) => ({
+        tileContents={hairThumbnails.map((thumbnail, index) => ({
           id: index,
-          image,
+          image: thumbnail.image,
         }))}
         columns={5}
         mobileColumns={3}
         onTileClick={(id) => {
-          console.log(id);
+          props.controller.onAvatarConfigChanged({
+            hair: hairThumbnails[id].type,
+          });
         }}
       />
 

@@ -7,11 +7,11 @@ import {
   AvatarShirtModels,
 } from "./AvatarModelTypes";
 
-export const AvatarHairModelsLookup: {
-  [key in AvatarHairModels]: any;
-} = {
-  [AvatarHairModels.PLACEHOLDER]: require("../../../Assets/AvatarModels/hair_placeholder.png"), // TODO: replace with actual asset
-};
+// export const AvatarHairModelsLookup: {
+//   [key in AvatarHairModels]: any;
+// } = {
+//   [AvatarHairModels.PLACEHOLDER]: require("../../../Assets/AvatarModels/hair_placeholder.png"), // TODO: replace with actual asset
+// };
 
 export const AvatarBeardModelsLookup: {
   [key in AvatarBeardModels]: any;

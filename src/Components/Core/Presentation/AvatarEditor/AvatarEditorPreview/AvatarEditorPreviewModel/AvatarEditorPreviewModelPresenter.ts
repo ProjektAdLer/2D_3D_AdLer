@@ -10,6 +10,8 @@ export default class AvatarEditorPreviewModelPresenter
   onAvatarConfigChanged(newAvatarConfig: AvatarConfigTO): void {
     this.viewModel.avatarConfig.Value = newAvatarConfig;
 
+    console.log("Avatar config changed", newAvatarConfig);
+
     // TODO: Implement the logic to update the avatar model based on the new config
   }
 }
