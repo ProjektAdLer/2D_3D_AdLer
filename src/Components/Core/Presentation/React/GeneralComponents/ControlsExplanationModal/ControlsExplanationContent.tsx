@@ -10,6 +10,10 @@ import touchDragIcon from "src/Assets/icons/touch-and-drag.svg";
 import touchZoomIcon from "src/Assets/icons/touch-zoom.svg";
 import hintIcon from "src/Assets/icons/hint.svg";
 
+import LearningElementUnsolvedIcon from "src/Assets/icons/HighlightColors/LearningElementUnsolvedIcon.svg";
+import LearningElementSolvedIcon from "src/Assets/icons/HighlightColors/LearningElementSolvedIcon.svg";
+import NonLearningElementBaseIcon from "src/Assets/icons/HighlightColors/NonLearningElementBaseIcon.svg";
+
 export default function ControlsExplanationContent({
   className,
 }: AdLerUIComponent<{}>) {
@@ -22,67 +26,96 @@ export default function ControlsExplanationContent({
       )}
     >
       {/* Avatar Controls */}
-        <h3 className="font-bold self-center text-adlerdarkblue">{translate("controlAvatar")}</h3>
-        <div className="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start">
-          <img className="w-6" alt="Linksklick" src={leftClickIcon}></img>
-          <p>{translate("controlAvatarMouse")}</p>
-        </div>
-        <div className="flex flex-row gap-2 justify-start items-start">
-          <img className="w-6" alt="Einfacher Touch" src={touchIcon}></img>
-          <p>{translate("controlAvatarTouch")}</p>
-        </div>
-        <div className="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6">
-          <img className="w-6" alt="Icon" src={hintIcon}></img>
-          <p>{translate("controlAvatarHint")}</p>
-        </div>
+      <h3 className="self-center font-bold text-adlerdarkblue">
+        {translate("controlAvatar")}
+      </h3>
+      <div className="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0">
+        <img className="w-6" alt="Linksklick" src={leftClickIcon}></img>
+        <p>{translate("controlAvatarMouse")}</p>
+      </div>
+      <div className="flex flex-row items-start justify-start gap-2">
+        <img className="w-6" alt="Einfacher Touch" src={touchIcon}></img>
+        <p>{translate("controlAvatarTouch")}</p>
+      </div>
+      <div className="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6">
+        <img className="w-6" alt="Icon" src={hintIcon}></img>
+        <p>{translate("controlAvatarHint")}</p>
+      </div>
 
       {/* Open Content Controls */}
-        <h3 className="font-bold  self-center text-adlerdarkblue">{translate("openContent")}</h3>
-        <div className="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start">
-          <img className="w-6" alt="Icon" src={leftClickIcon}></img>
-          <p>{translate("openContentMouse")}</p>
+      <h3 className="self-center font-bold text-adlerdarkblue">
+        {translate("openContent")}
+      </h3>
+      <div className="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0">
+        <img className="w-6" alt="Icon" src={leftClickIcon}></img>
+        <p>{translate("openContentMouse")}</p>
+      </div>
+      <div className="flex flex-row items-start justify-start gap-2">
+        <img className="w-6" alt="Icon" src={touchIcon}></img>
+        <p>{translate("openContentTouch")}</p>
+      </div>
+      <div className="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6">
+        <img className="w-6" alt="Icon" src={hintIcon}></img>
+        <div className="flex flex-col gap-1">
+          <p>{translate("openContentHint1")}</p>
+          <p>{translate("openContentHint2")}</p>
         </div>
-        <div className="flex flex-row gap-2 justify-start items-start">
-          <img className="w-6" alt="Icon" src={touchIcon}></img>
-          <p>{translate("openContentTouch")}</p>
-        </div>
-        <div className="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6">
-          <img className="w-6" alt="Icon" src={hintIcon}></img>
-          <div className="flex flex-col gap-1">
-            <p>{translate("openContentHint1")}</p>
-            <p>{translate("openContentHint2")}</p>
-          </div>
-        </div>
+      </div>
 
       {/* Rotate Camera Controls */}
-        <h3 className="font-bold  self-center text-adlerdarkblue">{translate("rotateCamera")}</h3>
-        <div className="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start">
-          <img className="w-6" alt="Icon" src={middleMouseDragIcon}></img>
-          <p>{translate("rotateCameraMouse")}</p>
-        </div>
-        <div className="flex flex-row gap-2 justify-start items-start">
-          <img className="w-6" alt="Icon" src={touchDragIcon}></img>
-          <p>{translate("rotateCameraTouch")}</p>
-        </div>
-        <div className="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6">
-          <img className="w-6" alt="Icon" src={hintIcon}></img>
-          <p>{translate("rotateCameraHint")}</p>
-        </div>
+      <h3 className="self-center font-bold text-adlerdarkblue">
+        {translate("rotateCamera")}
+      </h3>
+      <div className="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0">
+        <img className="w-6" alt="Icon" src={middleMouseDragIcon}></img>
+        <p>{translate("rotateCameraMouse")}</p>
+      </div>
+      <div className="flex flex-row items-start justify-start gap-2">
+        <img className="w-6" alt="Icon" src={touchDragIcon}></img>
+        <p>{translate("rotateCameraTouch")}</p>
+      </div>
+      <div className="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6">
+        <img className="w-6" alt="Icon" src={hintIcon}></img>
+        <p>{translate("rotateCameraHint")}</p>
+      </div>
 
       {/* Zoom Camera Controls */}
-        <h3 className="font-bold  self-center text-adlerdarkblue">{translate("zoomCamera")}</h3>
-        <div className="min-h-10 portrait:min-h-0 flex flex-row gap-2 justify-start items-start">
-          <img className="w-6" alt="Icon" src={middleMouseIcon}></img>
-          <p>{translate("zoomCameraMouse")}</p>
-        </div>
-        <div className="flex flex-row gap-2 justify-start items-start">
-          <img className="w-6" alt="Icon" src={touchZoomIcon}></img>
-          <p>{translate("zoomCameraTouch")}</p>
-        </div>
-        <div className="landscape:row-span-3 flex flex-row gap-2 justify-start items-start portrait:pb-6">
-          <img className="w-6" alt="Icon" src={hintIcon}></img>
-          <p>{translate("zoomCameraHint")}</p>
-        </div>
+      <h3 className="self-center font-bold text-adlerdarkblue">
+        {translate("zoomCamera")}
+      </h3>
+      <div className="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0">
+        <img className="w-6" alt="Icon" src={middleMouseIcon}></img>
+        <p>{translate("zoomCameraMouse")}</p>
+      </div>
+      <div className="flex flex-row items-start justify-start gap-2">
+        <img className="w-6" alt="Icon" src={touchZoomIcon}></img>
+        <p>{translate("zoomCameraTouch")}</p>
+      </div>
+      <div className="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6">
+        <img className="w-6" alt="Icon" src={hintIcon}></img>
+        <p>{translate("zoomCameraHint")}</p>
+      </div>
+
+      {/* Highlight Colors */}
+      <h3 className="self-center font-bold text-adlerdarkblue">
+        {"Highlight Farben"}
+      </h3>
+      <div className="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0">
+        <img className="w-6" alt="Icon" src={LearningElementUnsolvedIcon}></img>
+        <p>{translate("LearningElementUnsolvedIcon")}</p>
+      </div>
+      <div className="flex flex-row items-start justify-start gap-2">
+        <img className="w-6" alt="Icon" src={LearningElementSolvedIcon}></img>
+        <p>{translate("LearningElementSolvedIcon")}</p>
+      </div>
+      <div className="flex flex-row items-start justify-start gap-2">
+        <img className="w-6" alt="Icon" src={NonLearningElementBaseIcon}></img>
+        <p>{translate("NonLearningElementBaseIcon")}</p>
+      </div>
+      <div className="flex flex-row items-start justify-start gap-2">
+        <img className="w-6" alt="Icon" src={hintIcon}></img>
+        <p>{translate("HighlightHint")}</p>
+      </div>
     </div>
   );
 }

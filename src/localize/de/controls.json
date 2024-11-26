@@ -23,5 +23,10 @@
   "zoomCamera": "Kamera zoomen",
   "zoomCameraMouse": "Mausrad drehen",
   "zoomCameraTouch": "Zwei Touchpunkte entfernen / annäheren",
-  "zoomCameraHint": "Die Kamera ist in einem bestimmen Nah- und Fernbereich zoombar"
+  "zoomCameraHint": "Die Kamera ist in einem bestimmen Nah- und Fernbereich zoombar",
+
+  "LearningElementUnsolvedIcon": "Orangene Umrandung besitzen Lernelemente, die nicht abgeschlossen sind",
+  "LearningElementSolvedIcon": "Grüne Umrandung besitzen Lernelemente, die abgeschlossen sind",
+  "NonLearningElementBaseIcon": "Violette Umrandung besitzen Elemente, die anderweitig interagierbar sind",
+  "HighlightHint": "Die Farben werden intensiver, wenn der Avatar nahe genug an den Elementen ist und mit ihnen interagieren kann"
 }
