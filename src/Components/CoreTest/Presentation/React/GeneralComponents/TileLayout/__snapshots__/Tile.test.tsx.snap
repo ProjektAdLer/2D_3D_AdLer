@@ -13,7 +13,7 @@ exports[`Tile should render 1`] = `
       >
         <img
           alt="undefinedThumbnail"
-          src="Hair_backhead_256.png"
+          src="Hair_Backhead.png"
         />
       </div>
     </button>
