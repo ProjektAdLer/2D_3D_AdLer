@@ -156,27 +156,34 @@ export default class DoorView extends Readyable {
   }
 
   private registerActions(): void {
+    // create one action manager for all meshes
+    const actionManager = new ActionManager(this.scenePresenter.Scene);
     this.viewModel.meshes.forEach((mesh) => {
-      mesh.actionManager = new ActionManager(this.scenePresenter.Scene);
-      mesh.actionManager.registerAction(
-        new ExecuteCodeAction(
-          ActionManager.OnPickTrigger,
-          this.controller.picked,
-        ),
-      );
-      mesh.actionManager.registerAction(
-        new ExecuteCodeAction(
-          ActionManager.OnPointerOverTrigger,
-          this.controller.pointerOver,
-        ),
-      );
-      mesh.actionManager.registerAction(
-        new ExecuteCodeAction(
-          ActionManager.OnPointerOutTrigger,
-          this.controller.pointerOut,
-        ),
-      );
+      mesh.actionManager = actionManager;
     });
+    this.viewModel.iconMeshes.forEach((mesh) => {
+      mesh.actionManager = actionManager;
+    });
+
+    // register interaction callbacks
+    actionManager.registerAction(
+      new ExecuteCodeAction(
+        ActionManager.OnPickTrigger,
+        this.controller.picked,
+      ),
+    );
+    actionManager.registerAction(
+      new ExecuteCodeAction(
+        ActionManager.OnPointerOverTrigger,
+        this.controller.pointerOver,
+      ),
+    );
+    actionManager.registerAction(
+      new ExecuteCodeAction(
+        ActionManager.OnPointerOutTrigger,
+        this.controller.pointerOut,
+      ),
+    );
   }
 
   private changeHighlightColor(color: Color3): void {
