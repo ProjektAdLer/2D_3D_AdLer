@@ -3,7 +3,7 @@
  */
 export interface AvatarColor {
   /**
-   * The unique identifier for the color.
+   * The id of the color on the color palette.
    */
   id: number;
 
