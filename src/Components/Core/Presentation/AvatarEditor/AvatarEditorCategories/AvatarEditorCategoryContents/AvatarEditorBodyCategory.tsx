@@ -1,23 +1,31 @@
+import { useState } from "react";
 import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps";
 import { useTranslation } from "react-i18next";
-import ColorPicker from "~ReactComponents/GeneralComponents/ColorPicker/ColorPicker";
-import { defaultColorPickerSchema } from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerColors";
+import ColorPickerButton from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerButton";
 import RangeSlider from "~ReactComponents/ReactRelated/ReactBaseComponents/RangeSlider";
+import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerModal";
 
 export default function AvatarEditorBodyCategory(
   props: AvatarEditorCategoryContentProps,
 ) {
   const { t: translate } = useTranslation("avatarEditor");
+  const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col items-center">
       <div className="pb-2 border-b border-gray-500">
         <h1 className="text-2xl font-bold">{translate("bodyColorTitle")}</h1>
       </div>
       <div className="w-full p-2 m-2">
-        <ColorPicker
-          colors={defaultColorPickerSchema}
-          onColorClick={(color) => {
+        <ColorPickerButton
+          className=""
+          currentColor="#000000"
+          onClick={() => setShowModal(true)}
+        />
+        <ColorPickerModal
+          showModal={showModal}
+          onClose={() => setShowModal(false)}
+          onColorClickFunction={(color) => {
             console.log(color);
           }}
         />
