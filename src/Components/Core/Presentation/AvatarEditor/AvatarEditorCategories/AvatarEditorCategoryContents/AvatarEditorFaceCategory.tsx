@@ -60,7 +60,7 @@ export default function AvatarEditorFaceCategory(
           id: index,
           image,
         }))}
-        columns={5}
+        columns={4}
         mobileColumns={3}
         onTileClick={(id) => {
           console.log(id);

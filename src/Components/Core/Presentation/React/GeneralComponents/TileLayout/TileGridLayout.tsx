@@ -12,10 +12,20 @@ type TileLayoutProps = {
 };
 
 export default function TileGridLayout(props: TileLayoutProps) {
+  const mobileColumns = props.mobileColumns ?? props.columns;
+
+  const gridClasses = [
+    "grid",
+    `portrait:grid-cols-${mobileColumns}`,
+    `grid-cols-${props.columns}`,
+    "gap-5",
+    "pt-4",
+    "rounded-lg",
+    "p-4",
+  ].join(" ");
+
   return (
-    <div
-      className={`grid portrait:grid-cols-${props.mobileColumns ?? props.columns} grid-cols-${props.columns} gap-5 pt-4 rounded-lg p-4`}
-    >
+    <div className={gridClasses}>
       {props.tileContents.map((tile) => (
         <Tile
           key={tile.id}
