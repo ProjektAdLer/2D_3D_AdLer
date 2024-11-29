@@ -15,7 +15,7 @@ export default function ColorPickerButton({
     <div className={tailwindMerge(className, "")}>
       <StyledButton onClick={onClick} shape="freeFloatCenter">
         {/* <img className="w-10 xl:w-12" src={helpIcon} alt="Help Icon" /> */}
-        {currentColor.hexColor}
+        {currentColor.nameKey}
       </StyledButton>
     </div>
   );
