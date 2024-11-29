@@ -1,12 +1,12 @@
 import { render } from "@testing-library/react";
 import ColorPicker from "../../../../../Core/Presentation/React/GeneralComponents/ColorPicker/ColorPicker";
-import { defaultColorPickerSchema } from "../../../../../Core/Presentation/React/GeneralComponents/ColorPicker/ColorPickerColors";
+import AvatarColorPalette from "../../../../../Core/Domain/AvatarModels/AvatarColorPalette";
 import React from "react";
 
 describe("ColorPicker", () => {
   test("should render", () => {
     const container = render(
-      <ColorPicker colors={defaultColorPickerSchema} onColorClick={() => {}} />,
+      <ColorPicker colors={AvatarColorPalette} onColorClick={() => {}} />,
     );
 
     expect(container).toMatchSnapshot();
@@ -17,7 +17,7 @@ describe("ColorPicker", () => {
 
     const container = render(
       <ColorPicker
-        colors={defaultColorPickerSchema}
+        colors={AvatarColorPalette}
         onColorClick={(color: string) => {
           mockCallback();
         }}
