@@ -1,8 +1,10 @@
 import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps";
 import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGridLayout";
 import { useTranslation } from "react-i18next";
-import ColorPicker from "~ReactComponents/GeneralComponents/ColorPicker/ColorPicker";
 import AvatarColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
+import ColorPickerButton from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerButton";
+import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerModal";
+import { useState } from "react";
 
 const shirtsThumbnails = require.context(
   "../../../../../../Assets/avatarEditorThumbnails/clothing/shirts",
@@ -29,6 +31,10 @@ export default function AvatarEditorClothingCategory(
   props: AvatarEditorCategoryContentProps,
 ) {
   const { t: translate } = useTranslation("avatarEditor");
+  const [showModal, setShowModal] = useState(false);
+  const [shirtColor, setShirtColor] = useState(AvatarColorPalette[0]);
+  const [pantsColor, setPantsColor] = useState(AvatarColorPalette[0]);
+  const [shoesColor, setShoesColor] = useState(AvatarColorPalette[0]);
 
   return (
     <div className="flex flex-col">
@@ -36,10 +42,16 @@ export default function AvatarEditorClothingCategory(
         <h1 className="text-2xl font-bold">{translate("shirtsColorTitle")}</h1>
       </div>
       <div className="w-full p-2 m-2">
-        <ColorPicker
-          colors={AvatarColorPalette}
-          onColorClick={(color) => {
-            console.log(color);
+        <ColorPickerButton
+          className=""
+          currentColor={shirtColor}
+          onClick={() => setShowModal(true)}
+        />
+        <ColorPickerModal
+          showModal={showModal}
+          onClose={() => setShowModal(false)}
+          onColorClickFunction={(color) => {
+            setShirtColor(color);
           }}
         />
       </div>
@@ -62,10 +74,16 @@ export default function AvatarEditorClothingCategory(
         <h1 className="text-2xl font-bold">{translate("pantsColorTitle")}</h1>
       </div>
       <div className="w-full p-2 m-2">
-        <ColorPicker
-          colors={AvatarColorPalette}
-          onColorClick={(color) => {
-            console.log(color);
+        <ColorPickerButton
+          className=""
+          currentColor={pantsColor}
+          onClick={() => setShowModal(true)}
+        />
+        <ColorPickerModal
+          showModal={showModal}
+          onClose={() => setShowModal(false)}
+          onColorClickFunction={(color) => {
+            setPantsColor(color);
           }}
         />
       </div>
@@ -87,11 +105,17 @@ export default function AvatarEditorClothingCategory(
       <div className="pb-2 border-b border-gray-500">
         <h1 className="text-2xl font-bold">{translate("shoesColorTitle")}</h1>
       </div>
-      <div className="flex w-full p-2 m-2">
-        <ColorPicker
-          colors={AvatarColorPalette}
-          onColorClick={(color) => {
-            console.log(color);
+      <div className="w-full p-2 m-2">
+        <ColorPickerButton
+          className=""
+          currentColor={shoesColor}
+          onClick={() => setShowModal(true)}
+        />
+        <ColorPickerModal
+          showModal={showModal}
+          onClose={() => setShowModal(false)}
+          onColorClickFunction={(color) => {
+            setShoesColor(color);
           }}
         />
       </div>

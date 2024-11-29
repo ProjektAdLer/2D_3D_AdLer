@@ -1,9 +1,11 @@
 import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGridLayout";
 import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps";
 import { useTranslation } from "react-i18next";
-import ColorPicker from "~ReactComponents/GeneralComponents/ColorPicker/ColorPicker";
 import { AvatarHairModels } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
 import AvatarColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
+import { useState } from "react";
+import ColorPickerButton from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerButton";
+import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerModal";
 
 const hairThumbnails = Object.values(AvatarHairModels).map((type) => ({
   type: type,
@@ -23,6 +25,8 @@ export default function AvatarEditorHairCategory(
   props: AvatarEditorCategoryContentProps,
 ) {
   const { t: translate } = useTranslation("avatarEditor");
+  const [showModal, setShowModal] = useState(false);
+  const [hairColor, setHairColor] = useState(AvatarColorPalette[0]);
 
   return (
     <div className="flex flex-col">
@@ -30,10 +34,16 @@ export default function AvatarEditorHairCategory(
         <h1 className="text-2xl font-bold">{translate("hairColorTitle")}</h1>
       </div>
       <div className="w-full p-2 m-2">
-        <ColorPicker
-          colors={AvatarColorPalette}
-          onColorClick={(color) => {
-            console.log(color);
+        <ColorPickerButton
+          className=""
+          currentColor={hairColor}
+          onClick={() => setShowModal(true)}
+        />
+        <ColorPickerModal
+          showModal={showModal}
+          onClose={() => setShowModal(false)}
+          onColorClickFunction={(color) => {
+            setHairColor(color);
           }}
         />
       </div>
