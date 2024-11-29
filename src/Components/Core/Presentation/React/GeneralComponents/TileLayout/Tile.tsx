@@ -10,6 +10,7 @@ export default function Tile(props: TileProps) {
   return (
     <StyledButton
       className="flex flex-col"
+      containerClassName="w-full h-full"
       shape="freeFloatCenter"
       onClick={props.onClick}
     >
