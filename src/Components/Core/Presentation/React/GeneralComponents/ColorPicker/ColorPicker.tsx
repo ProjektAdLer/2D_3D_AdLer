@@ -20,12 +20,12 @@ function ColorButton(props: Readonly<Props>) {
   );
 }
 
-type colorPickerprops = {
+type colorPickerProps = {
   colors: string[];
   onColorClick: (color: string) => void;
 };
 
-export default function ColorPicker(props: Readonly<colorPickerprops>) {
+export default function ColorPicker(props: Readonly<colorPickerProps>) {
   return (
     <div className="inline-grid grid-cols-8 gap-2 row-span-8">
       {props.colors.map((color, index) => {
