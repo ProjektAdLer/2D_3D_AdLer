@@ -2,7 +2,6 @@ import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { AvatarColor } from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
-import { useEffect, useState } from "react";
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   currentColor: AvatarColor;
