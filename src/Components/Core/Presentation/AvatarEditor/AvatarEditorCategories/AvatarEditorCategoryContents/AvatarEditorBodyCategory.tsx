@@ -11,6 +11,7 @@ export default function AvatarEditorBodyCategory(
 ) {
   const { t: translate } = useTranslation("avatarEditor");
   const [showModal, setShowModal] = useState(false);
+  const [currentColor, setCurrentColor] = useState(AvatarColorPalette[0]);
 
   return (
     <div className="flex flex-col items-center">
@@ -20,14 +21,14 @@ export default function AvatarEditorBodyCategory(
       <div className="w-full p-2 m-2">
         <ColorPickerButton
           className=""
-          currentColor={AvatarColorPalette[0]}
+          currentColor={currentColor}
           onClick={() => setShowModal(true)}
         />
         <ColorPickerModal
           showModal={showModal}
           onClose={() => setShowModal(false)}
           onColorClickFunction={(color) => {
-            console.log(color);
+            setCurrentColor(color);
           }}
         />
       </div>
