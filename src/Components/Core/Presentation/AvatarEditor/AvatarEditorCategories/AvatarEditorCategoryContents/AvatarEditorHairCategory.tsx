@@ -2,7 +2,6 @@ import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGr
 import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps";
 import { useTranslation } from "react-i18next";
 import ColorPicker from "~ReactComponents/GeneralComponents/ColorPicker/ColorPicker";
-import { defaultColorPickerSchema } from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerColors";
 import { AvatarHairModels } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
 import AvatarColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
 

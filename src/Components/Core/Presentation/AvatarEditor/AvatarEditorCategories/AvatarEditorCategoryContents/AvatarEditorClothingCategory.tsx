@@ -2,7 +2,6 @@ import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps
 import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGridLayout";
 import { useTranslation } from "react-i18next";
 import ColorPicker from "~ReactComponents/GeneralComponents/ColorPicker/ColorPicker";
-import { defaultColorPickerSchema } from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerColors";
 import AvatarColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
 
 const shirtsThumbnails = require.context(
