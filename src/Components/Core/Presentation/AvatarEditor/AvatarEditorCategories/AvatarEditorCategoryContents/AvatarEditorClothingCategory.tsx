@@ -31,7 +31,9 @@ export default function AvatarEditorClothingCategory(
   props: AvatarEditorCategoryContentProps,
 ) {
   const { t: translate } = useTranslation("avatarEditor");
-  const [showModal, setShowModal] = useState(false);
+  const [showShirtModal, setShowShirtModal] = useState(false);
+  const [showPantsModal, setShowPantsModal] = useState(false);
+  const [showShoesModal, setShowShoesModal] = useState(false);
   const [shirtColor, setShirtColor] = useState(AvatarColorPalette[0]);
   const [pantsColor, setPantsColor] = useState(AvatarColorPalette[0]);
   const [shoesColor, setShoesColor] = useState(AvatarColorPalette[0]);
@@ -45,11 +47,11 @@ export default function AvatarEditorClothingCategory(
         <ColorPickerButton
           className=""
           currentColor={shirtColor}
-          onClick={() => setShowModal(true)}
+          onClick={() => setShowShirtModal(true)}
         />
         <ColorPickerModal
-          showModal={showModal}
-          onClose={() => setShowModal(false)}
+          showModal={showShirtModal}
+          onClose={() => setShowShirtModal(false)}
           onColorClickFunction={(color) => {
             setShirtColor(color);
           }}
@@ -77,11 +79,11 @@ export default function AvatarEditorClothingCategory(
         <ColorPickerButton
           className=""
           currentColor={pantsColor}
-          onClick={() => setShowModal(true)}
+          onClick={() => setShowPantsModal(true)}
         />
         <ColorPickerModal
-          showModal={showModal}
-          onClose={() => setShowModal(false)}
+          showModal={showPantsModal}
+          onClose={() => setShowPantsModal(false)}
           onColorClickFunction={(color) => {
             setPantsColor(color);
           }}
@@ -109,11 +111,11 @@ export default function AvatarEditorClothingCategory(
         <ColorPickerButton
           className=""
           currentColor={shoesColor}
-          onClick={() => setShowModal(true)}
+          onClick={() => setShowShoesModal(true)}
         />
         <ColorPickerModal
-          showModal={showModal}
-          onClose={() => setShowModal(false)}
+          showModal={showShoesModal}
+          onClose={() => setShowShoesModal(false)}
           onColorClickFunction={(color) => {
             setShoesColor(color);
           }}
