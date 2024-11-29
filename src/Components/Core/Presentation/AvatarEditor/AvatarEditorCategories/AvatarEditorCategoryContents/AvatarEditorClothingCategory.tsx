@@ -3,6 +3,7 @@ import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGr
 import { useTranslation } from "react-i18next";
 import ColorPicker from "~ReactComponents/GeneralComponents/ColorPicker/ColorPicker";
 import { defaultColorPickerSchema } from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerColors";
+import AvatarColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
 
 const shirtsThumbnails = require.context(
   "../../../../../../Assets/avatarEditorThumbnails/clothing/shirts",
@@ -37,7 +38,7 @@ export default function AvatarEditorClothingCategory(
       </div>
       <div className="w-full p-2 m-2">
         <ColorPicker
-          colors={defaultColorPickerSchema}
+          colors={AvatarColorPalette}
           onColorClick={(color) => {
             console.log(color);
           }}
@@ -63,7 +64,7 @@ export default function AvatarEditorClothingCategory(
       </div>
       <div className="w-full p-2 m-2">
         <ColorPicker
-          colors={defaultColorPickerSchema}
+          colors={AvatarColorPalette}
           onColorClick={(color) => {
             console.log(color);
           }}
@@ -87,9 +88,9 @@ export default function AvatarEditorClothingCategory(
       <div className="pb-2 border-b border-gray-500">
         <h1 className="text-2xl font-bold">{translate("shoesColorTitle")}</h1>
       </div>
-      <div className="w-full flex p-2 m-2">
+      <div className="flex w-full p-2 m-2">
         <ColorPicker
-          colors={defaultColorPickerSchema}
+          colors={AvatarColorPalette}
           onColorClick={(color) => {
             console.log(color);
           }}

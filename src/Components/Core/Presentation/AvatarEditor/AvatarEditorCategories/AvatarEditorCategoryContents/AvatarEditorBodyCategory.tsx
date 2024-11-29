@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import ColorPickerButton from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerButton";
 import RangeSlider from "~ReactComponents/ReactRelated/ReactBaseComponents/RangeSlider";
 import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerModal";
+import AvatarColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
 
 export default function AvatarEditorBodyCategory(
   props: AvatarEditorCategoryContentProps,
@@ -19,7 +20,7 @@ export default function AvatarEditorBodyCategory(
       <div className="w-full p-2 m-2">
         <ColorPickerButton
           className=""
-          currentColor="#000000"
+          currentColor={AvatarColorPalette[0]}
           onClick={() => setShowModal(true)}
         />
         <ColorPickerModal

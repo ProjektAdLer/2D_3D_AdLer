@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import ColorPicker from "~ReactComponents/GeneralComponents/ColorPicker/ColorPicker";
 import { defaultColorPickerSchema } from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerColors";
 import { AvatarHairModels } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
+import AvatarColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
 
 const hairThumbnails = Object.values(AvatarHairModels).map((type) => ({
   type: type,
@@ -31,7 +32,7 @@ export default function AvatarEditorHairCategory(
       </div>
       <div className="w-full p-2 m-2">
         <ColorPicker
-          colors={defaultColorPickerSchema}
+          colors={AvatarColorPalette}
           onColorClick={(color) => {
             console.log(color);
           }}

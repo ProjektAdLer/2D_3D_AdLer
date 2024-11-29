@@ -1,13 +1,15 @@
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import ColorPicker from "./ColorPicker";
-import { defaultColorPickerSchema } from "./ColorPickerColors";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
+import AvatarColorPalette, {
+  AvatarColor,
+} from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
 
 type Props = AdLerUIComponent<{
   showModal: boolean;
   onClose: () => void;
-  onColorClickFunction: (color: string) => void;
+  onColorClickFunction: (color: AvatarColor) => void;
 }>;
 
 export default function ColorPickerModal({
@@ -21,7 +23,7 @@ export default function ColorPickerModal({
     <div>
       <StyledModal showModal={showModal} canClose={false}>
         <ColorPicker
-          colors={defaultColorPickerSchema}
+          colors={AvatarColorPalette}
           onColorClick={(color) => {
             onColorClickFunction(color);
           }}

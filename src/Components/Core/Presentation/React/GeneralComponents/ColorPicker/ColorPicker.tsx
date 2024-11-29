@@ -1,8 +1,9 @@
+import { AvatarColor } from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 type Props = {
-  color: string;
-  onClick: (color: string) => void;
+  color: AvatarColor;
+  onClick: (color: AvatarColor) => void;
 };
 
 function ColorButton(props: Readonly<Props>) {
@@ -12,7 +13,7 @@ function ColorButton(props: Readonly<Props>) {
       shape="square"
       color="nothing"
       feedback="nothing"
-      style={{ backgroundColor: props.color }}
+      style={{ backgroundColor: props.color.hexColor }}
       onClick={() => {
         props.onClick(props.color);
       }}
@@ -21,8 +22,8 @@ function ColorButton(props: Readonly<Props>) {
 }
 
 type colorPickerProps = {
-  colors: string[];
-  onColorClick: (color: string) => void;
+  colors: AvatarColor[];
+  onColorClick: (color: AvatarColor) => void;
 };
 
 export default function ColorPicker(props: Readonly<colorPickerProps>) {
