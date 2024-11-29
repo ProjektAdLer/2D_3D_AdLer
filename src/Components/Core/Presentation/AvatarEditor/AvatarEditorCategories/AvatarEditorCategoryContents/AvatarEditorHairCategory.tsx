@@ -31,23 +31,6 @@ export default function AvatarEditorHairCategory(
   return (
     <div className="flex flex-col">
       <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("hairColorTitle")}</h1>
-      </div>
-      <div className="w-full p-2 m-2">
-        <ColorPickerButton
-          className=""
-          currentColor={hairColor}
-          onClick={() => setShowModal(true)}
-        />
-        <ColorPickerModal
-          showModal={showModal}
-          onClose={() => setShowModal(false)}
-          onColorClickFunction={(color) => {
-            setHairColor(color);
-          }}
-        />
-      </div>
-      <div className="pb-2 border-b border-gray-500">
         <h1 className="text-2xl font-bold">{translate("hairstylesTitle")}</h1>
       </div>
       <TileGridLayout
@@ -78,6 +61,20 @@ export default function AvatarEditorHairCategory(
           console.log(id);
         }}
       />
+      <div className="w-full p-2 m-2">
+        <ColorPickerButton
+          className=""
+          currentColor={hairColor}
+          onClick={() => setShowModal(true)}
+        />
+        <ColorPickerModal
+          showModal={showModal}
+          onClose={() => setShowModal(false)}
+          onColorClickFunction={(color) => {
+            setHairColor(color);
+          }}
+        />
+      </div>
     </div>
   );
 }

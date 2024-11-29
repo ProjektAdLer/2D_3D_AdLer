@@ -41,23 +41,6 @@ export default function AvatarEditorClothingCategory(
   return (
     <div className="flex flex-col">
       <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("shirtsColorTitle")}</h1>
-      </div>
-      <div className="w-full p-2 m-2">
-        <ColorPickerButton
-          className=""
-          currentColor={shirtColor}
-          onClick={() => setShowShirtModal(true)}
-        />
-        <ColorPickerModal
-          showModal={showShirtModal}
-          onClose={() => setShowShirtModal(false)}
-          onColorClickFunction={(color) => {
-            setShirtColor(color);
-          }}
-        />
-      </div>
-      <div className="pb-2 border-b border-gray-500">
         <h1 className="text-2xl font-bold">{translate("shirtsTitle")}</h1>
       </div>
       <TileGridLayout
@@ -71,21 +54,17 @@ export default function AvatarEditorClothingCategory(
           console.log(id);
         }}
       />
-
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("pantsColorTitle")}</h1>
-      </div>
       <div className="w-full p-2 m-2">
         <ColorPickerButton
           className=""
-          currentColor={pantsColor}
-          onClick={() => setShowPantsModal(true)}
+          currentColor={shirtColor}
+          onClick={() => setShowShirtModal(true)}
         />
         <ColorPickerModal
-          showModal={showPantsModal}
-          onClose={() => setShowPantsModal(false)}
+          showModal={showShirtModal}
+          onClose={() => setShowShirtModal(false)}
           onColorClickFunction={(color) => {
-            setPantsColor(color);
+            setShirtColor(color);
           }}
         />
       </div>
@@ -104,23 +83,21 @@ export default function AvatarEditorClothingCategory(
           console.log(id);
         }}
       />
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("shoesColorTitle")}</h1>
-      </div>
       <div className="w-full p-2 m-2">
         <ColorPickerButton
           className=""
-          currentColor={shoesColor}
-          onClick={() => setShowShoesModal(true)}
+          currentColor={pantsColor}
+          onClick={() => setShowPantsModal(true)}
         />
         <ColorPickerModal
-          showModal={showShoesModal}
-          onClose={() => setShowShoesModal(false)}
+          showModal={showPantsModal}
+          onClose={() => setShowPantsModal(false)}
           onColorClickFunction={(color) => {
-            setShoesColor(color);
+            setPantsColor(color);
           }}
         />
       </div>
+
       <div className="pb-2 border-b border-gray-500">
         <h1 className="text-2xl font-bold">{translate("shoesTitle")}</h1>
       </div>
@@ -135,6 +112,20 @@ export default function AvatarEditorClothingCategory(
           console.log(id);
         }}
       />
+      <div className="w-full p-2 m-2">
+        <ColorPickerButton
+          className=""
+          currentColor={shoesColor}
+          onClick={() => setShowShoesModal(true)}
+        />
+        <ColorPickerModal
+          showModal={showShoesModal}
+          onClose={() => setShowShoesModal(false)}
+          onColorClickFunction={(color) => {
+            setShoesColor(color);
+          }}
+        />
+      </div>
     </div>
   );
 }
