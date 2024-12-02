@@ -41,6 +41,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
       containerClassName=" h-full portrait:w-1/2 aspect-square"
       onClick={() => history.push(props.historyPath)}
       disabled={!userLoggedIn}
+      feedback="nothing"
       className={tailwindMerge(
         `relative !px-0 !py-0 flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover`,
         props.backgroundVideo,
@@ -48,7 +49,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
       )}
     >
       {userLoggedIn ? (
-        <div className="w-full h-full flex justify-center align-center bg-gray-100 opacity-90 hover:opacity-100">
+        <div className="flex justify-center w-full h-full bg-gray-100 align-center opacity-90 hover:opacity-100">
           <video
             ref={videoRef}
             src={props.backgroundVideo}
@@ -64,7 +65,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
           </p>
         </div>
       ) : (
-        <div className="w-full h-full flex justify-center align-center bg-gray-100 opacity-90">
+        <div className="flex justify-center w-full h-full bg-gray-100 align-center opacity-90">
           <video
             ref={videoRef}
             src={props.backgroundVideo}
