@@ -205,6 +205,13 @@ body {
   width: 100%;
 }
 
+.bodyProportionContainer {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  row-gap: 20px;
+}
+
 .numberInputField {
   text-align: center;
   background-color: transparent;

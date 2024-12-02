@@ -5,6 +5,9 @@ import ColorPickerButton from "~ReactComponents/GeneralComponents/ColorPicker/Co
 import RangeSlider from "~ReactComponents/ReactRelated/ReactBaseComponents/RangeSlider";
 import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerModal";
 import AvatarColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
+// TODO: update Icons
+import bodySmallIcon from "../../../../../../Assets/icons/body-small.svg";
+import bodyBigIcon from "../../../../../../Assets/icons/body-big.svg";
 
 export default function AvatarEditorBodyCategory(
   props: AvatarEditorCategoryContentProps,
@@ -33,17 +36,39 @@ export default function AvatarEditorBodyCategory(
         />
       </div>
       <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("upperBodyTitle")}</h1>
-      </div>
-      <div>
-        <RangeSlider min={0} max={100} step={1} callback={console.log} />
+        <h1 className="text-2xl font-bold">
+          {translate("bodyProportionsTitle")}
+        </h1>
       </div>
 
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("lowerBodyTitle")}</h1>
-      </div>
-      <div>
-        <RangeSlider min={0} max={42} step={1} callback={console.log} />
+      <div className="bodyProportionContainer">
+        <div className="flex items-center">
+          <h3 className="text-xl font-bold">{translate("upperBodyTitle")}</h3>
+        </div>
+        <div>
+          <RangeSlider
+            min={0}
+            max={1}
+            step={0.01}
+            callback={console.log}
+            displayFactor={100}
+            buttons={{ imageLeft: bodySmallIcon, imageRight: bodyBigIcon }}
+          />
+        </div>
+
+        <div className="flex items-center">
+          <h3 className="text-xl font-bold">{translate("lowerBodyTitle")}</h3>
+        </div>
+        <div>
+          <RangeSlider
+            min={0}
+            max={1}
+            step={0.01}
+            callback={console.log}
+            displayFactor={100}
+            buttons={{ imageLeft: bodySmallIcon, imageRight: bodyBigIcon }}
+          />
+        </div>
       </div>
     </div>
   );
