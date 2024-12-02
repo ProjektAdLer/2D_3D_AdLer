@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import StyledButton from "./StyledButton";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
 type buttonsProps = {
   imageLeft?: string;
@@ -12,6 +13,8 @@ type RangeSliderProps = {
   max: number;
   step: number;
   initialValue?: number;
+  displayFactor?: number;
+  fractionDigits?: number;
   buttons?: buttonsProps; // if buttons are definded without images then - / + buttons will be displayed ~ sb
   callback: (value: number) => void;
 } & AdLerUIComponent;
@@ -21,16 +24,27 @@ export default function RangeSlider(props: RangeSliderProps) {
     props.initialValue ? props.initialValue : props.min,
   );
   const [step] = useState<number>(props.step ? props.step : 0);
+  const [displayFactor] = useState<number>(
+    props.displayFactor ? props.displayFactor : 1,
+  );
+  const [fractionDigits] = useState<number>(
+    props.fractionDigits ? props.fractionDigits : 0,
+  );
 
   useEffect(() => {
     props.callback(value);
   }, [props, value]);
 
   return (
-    <div className="flex items-center justify-center gap-2 text-xl font-bold">
+    <div
+      className={tailwindMerge(
+        props.className,
+        "flex grow items-center gap-4 p-2 ",
+      )}
+    >
       {props.buttons && (
         <StyledButton
-          shape="smallSquare"
+          shape={"square"}
           className="w-10"
           data-testid="leftRangeSliderButton"
           onClick={() =>
@@ -43,9 +57,28 @@ export default function RangeSlider(props: RangeSliderProps) {
           {!props.buttons.imageLeft && "-"}
         </StyledButton>
       )}
-      <div className="flex !flex-col justify-center items-center">
-        <p>{value}</p>
+      <div className="flex !flex-col justify-center items-center grow text-xl font-bold">
         <input
+          type="number"
+          className="mb-1.5 numberInputField"
+          min={props.min * displayFactor}
+          max={props.max * displayFactor}
+          value={(value * displayFactor).toFixed(fractionDigits)}
+          onChange={(e) => {
+            let inputValue = parseFloat(e.target.value);
+            if (Number.isNaN(inputValue)) {
+              return;
+            }
+            if (inputValue > props.max * displayFactor) {
+              inputValue = props.max * displayFactor;
+            } else if (inputValue < props.min * displayFactor) {
+              inputValue = props.min * displayFactor;
+            }
+            setValue(inputValue / displayFactor);
+          }}
+        ></input>
+        <input
+          className="rangeSlider"
           type="range"
           min={props.min}
           max={props.max}
@@ -58,10 +91,9 @@ export default function RangeSlider(props: RangeSliderProps) {
           }}
         ></input>
       </div>
-
       {props.buttons && (
         <StyledButton
-          shape="smallSquare"
+          shape={"square"}
           className="w-10"
           data-testid="rightRangeSliderButton"
           onClick={() =>
