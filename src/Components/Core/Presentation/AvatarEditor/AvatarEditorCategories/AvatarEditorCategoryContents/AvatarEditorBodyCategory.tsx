@@ -17,7 +17,7 @@ export default function AvatarEditorBodyCategory(
   const [skinColor, setSkinColor] = useState(AvatarColorPalette[0]);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col">
       <div className="pb-2 border-b border-gray-500">
         <h1 className="text-2xl font-bold">{translate("bodyColorTitle")}</h1>
       </div>
