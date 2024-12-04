@@ -30,6 +30,10 @@ export default function RangeSlider(props: RangeSliderProps) {
   const [fractionDigits] = useState<number>(
     props.fractionDigits ? props.fractionDigits : 0,
   );
+  const [intervalID, setIntervalID] = useState<NodeJS.Timeout>();
+  const [intervalActive, setIntervalActive] = useState<boolean>(false);
+
+  const intervalDelay = 300; // delay between value in-/decrements in ms
 
   useEffect(() => {
     props.callback(value);
@@ -47,9 +51,29 @@ export default function RangeSlider(props: RangeSliderProps) {
           shape={"square"}
           className="w-10"
           data-testid="leftRangeSliderButton"
-          onClick={() =>
-            setValue(value - step >= props.min ? value - step : props.min)
-          }
+          onMouseDown={() => {
+            setIntervalID(
+              setInterval(() => {
+                setIntervalActive(true);
+                setValue((value) =>
+                  value - step >= props.min ? value - step : props.min,
+                );
+              }, intervalDelay),
+            );
+          }}
+          onMouseLeave={() => {
+            setIntervalActive(false);
+            clearInterval(intervalID);
+          }}
+          onClick={() => {
+            if (!intervalActive) {
+              setValue((value) =>
+                value - step >= props.min ? value - step : props.min,
+              );
+            }
+            setIntervalActive(false);
+            clearInterval(intervalID);
+          }}
         >
           {props.buttons.imageLeft && (
             <img src={props.buttons?.imageLeft} alt="" />
@@ -96,9 +120,29 @@ export default function RangeSlider(props: RangeSliderProps) {
           shape={"square"}
           className="w-10"
           data-testid="rightRangeSliderButton"
-          onClick={() =>
-            setValue(value + step <= props.max ? value + step : props.max)
-          }
+          onMouseDown={() => {
+            setIntervalID(
+              setInterval(() => {
+                setIntervalActive(true);
+                setValue((value) =>
+                  value + step <= props.max ? value + step : props.max,
+                );
+              }, intervalDelay),
+            );
+          }}
+          onMouseLeave={() => {
+            setIntervalActive(false);
+            clearInterval(intervalID);
+          }}
+          onClick={() => {
+            if (!intervalActive) {
+              setValue((value) =>
+                value + step <= props.max ? value + step : props.max,
+              );
+            }
+            setIntervalActive(false);
+            clearInterval(intervalID);
+          }}
         >
           {props.buttons.imageRight && (
             <img src={props.buttons?.imageRight} alt="" />
