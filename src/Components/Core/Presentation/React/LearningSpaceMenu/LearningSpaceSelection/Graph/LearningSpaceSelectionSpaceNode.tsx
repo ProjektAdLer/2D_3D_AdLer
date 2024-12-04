@@ -25,6 +25,7 @@ function LearningSpaceSelectionSpaceNode(
         color={props.data?.lastSelected ? "pressed" : "default"}
         icon={props.data?.icon}
         style={{ width: SPACE_NODE_WIDTH }}
+        title={props.data?.label}
       >
         <p className="truncate">{props.data!.label}</p>
       </StyledButton>

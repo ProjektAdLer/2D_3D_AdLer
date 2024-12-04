@@ -21,6 +21,7 @@ export default function LearningSpaceSelectionRow({
       shape="freeFloatCenter"
       onClick={onClickCallback}
       color={selected ? "pressed" : "default"}
+      title={spaceTitle}
     >
       {spaceTitle}
     </StyledButton>
