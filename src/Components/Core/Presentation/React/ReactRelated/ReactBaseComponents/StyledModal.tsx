@@ -7,6 +7,7 @@ type Props = Partial<{
   hasFooter?: boolean;
   showModal: boolean;
   smallCloseButton: boolean;
+  lefthalfshift?: boolean;
   children: React.ReactNode;
   title: string;
   canClose: boolean;
@@ -18,8 +19,10 @@ type Props = Partial<{
 /**
  * A generic, styled modal component. Can be used to display any content.
  *
+ * @param hasFooter decides, if the modal should have a footer
  * @param showModal decides, if the modal should be shown
  * @param smallCloseButton can be used to depict smaller X button
+ * @param lefthalfshift can be used to center the modal on the left half of the screen
  * @param children the content of the modal
  * @param title the title of the modal
  * @param onClose the callback, that is called, when the modal is closed
@@ -30,6 +33,7 @@ export default function StyledModal({
   hasFooter = false,
   showModal,
   smallCloseButton = false,
+  lefthalfshift = false,
   children,
   title,
   canClose = true,
@@ -45,6 +49,7 @@ export default function StyledModal({
     >
       <div
         className="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans"
+        style={lefthalfshift ? { width: "50%" } : {}}
         onClick={onClose}
         // onKeyDown={onClose}
         // tabIndex={0}

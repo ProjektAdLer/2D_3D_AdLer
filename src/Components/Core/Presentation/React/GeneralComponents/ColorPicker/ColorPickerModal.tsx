@@ -23,7 +23,7 @@ export default function ColorPickerModal({
   if (!showModal) return null;
   return (
     <div>
-      <StyledModal showModal={showModal} canClose={false}>
+      <StyledModal showModal={showModal} canClose={false} lefthalfshift={true}>
         <ColorPicker
           colors={colorPalette}
           onColorClick={(color) => {

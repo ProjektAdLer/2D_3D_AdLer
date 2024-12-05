@@ -11,6 +11,7 @@ Object {
         >
           <div
             class="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans"
+            style="width: 50%;"
           >
             <div
               class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden"
@@ -564,6 +565,7 @@ Object {
       >
         <div
           class="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans"
+          style="width: 50%;"
         >
           <div
             class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden"
