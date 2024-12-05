@@ -3,7 +3,7 @@ import CoreDIContainer from "../../../../../../src/Components/Core/DependencyInj
 import AvatarConfigTO from "../../../../Core/Application/DataTransferObjects/AvatarConfigTO";
 import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
-import { AvatarHairModels } from "../../../../Core/Domain/AvatarModels/AvatarModelTypes";
+import { OAvatarHairModels } from "../../../../Core/Domain/AvatarModels/AvatarModelTypes";
 import AvatarEntity from "../../../../Core/Domain/Entities/AvatarEntity";
 import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
 import { mock } from "jest-mock-extended";
@@ -66,7 +66,7 @@ describe("UpdateAvatarConfigUseCase", () => {
     const userDataEntity = {
       avatar: {
         roundness: 0,
-        hair: AvatarHairModels.PLACEHOLDER,
+        hair: OAvatarHairModels.MediumPonytail,
       } as AvatarEntity,
     };
 
@@ -75,7 +75,9 @@ describe("UpdateAvatarConfigUseCase", () => {
     systemUnderTest.execute(avatarConfig);
 
     expect(userDataEntity.avatar.roundness).toEqual(0.5);
-    expect(userDataEntity.avatar.hair).toEqual(AvatarHairModels.PLACEHOLDER);
+    expect(userDataEntity.avatar.hair).toEqual(
+      OAvatarHairModels.MediumPonytail,
+    );
   });
 
   test("calls onAvatarConfigChanged on avatar port", () => {
@@ -85,7 +87,7 @@ describe("UpdateAvatarConfigUseCase", () => {
     const userDataEntity = {
       avatar: {
         roundness: 0,
-        hair: AvatarHairModels.PLACEHOLDER,
+        hair: OAvatarHairModels.MediumPonytail,
       } as AvatarEntity,
     };
 

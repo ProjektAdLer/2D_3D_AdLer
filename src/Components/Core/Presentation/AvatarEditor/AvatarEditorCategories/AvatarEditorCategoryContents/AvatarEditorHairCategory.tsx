@@ -1,25 +1,44 @@
 import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGridLayout";
 import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps";
 import { useTranslation } from "react-i18next";
-import { AvatarHairModels } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
-import AvatarColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
+import {
+  OAvatarBeardModels,
+  AvatarHairModels,
+  AvatarNoneModel,
+  AvatarBeardModels,
+  OAvatarHairModels,
+} from "../../../../../Core/Domain/AvatarModels/AvatarModelTypes";
+import AvatarColorPalette from "../../../../../Core/Domain/AvatarModels/AvatarColorPalette";
 import { useState } from "react";
 import ColorPickerButton from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerButton";
 import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerModal";
 
-const hairThumbnails = Object.values(AvatarHairModels).map((type) => ({
+const noneThumbnail = {
+  type: AvatarNoneModel.None,
+  image: require("../../../../../../Assets/avatarEditorThumbnails/hair/hairstyles/Hair_Backhead.png"),
+};
+
+const hairThumbnails = Object.values(OAvatarHairModels).map<{
+  type: AvatarHairModels; // use union type with AvatarNoneModel
+  image: any;
+}>((type) => ({
   type: type,
   image: require(
-    `../../../../../../Assets/avatarEditorThumbnails/hair/hairstyles/Hair_${type}.png`,
+    `../../../../../../Assets/avatarEditorThumbnails/hair/hairstyles/${type}.png`,
   ),
 }));
+hairThumbnails.unshift(noneThumbnail);
 
-const beardThumbnailImages = require.context(
-  "../../../../../../Assets/avatarEditorThumbnails/hair/beards",
-);
-const beardThumbnailImageList = beardThumbnailImages
-  .keys()
-  .map((key) => beardThumbnailImages(key));
+const beardThumbnails = Object.values(OAvatarBeardModels).map<{
+  type: AvatarBeardModels; // use union type with AvatarNoneModel
+  image: any;
+}>((type) => ({
+  type: type,
+  image: require(
+    `../../../../../../Assets/avatarEditorThumbnails/hair/beards/${type}.png`,
+  ),
+}));
+beardThumbnails.unshift(noneThumbnail);
 
 export default function AvatarEditorHairCategory(
   props: AvatarEditorCategoryContentProps,
@@ -51,14 +70,16 @@ export default function AvatarEditorHairCategory(
         <h1 className="text-2xl font-bold">{translate("beardsTitle")}</h1>
       </div>
       <TileGridLayout
-        tileContents={beardThumbnailImageList.map((image, index) => ({
+        tileContents={beardThumbnails.map((thumbnail, index) => ({
           id: index,
-          image,
+          image: thumbnail.image,
         }))}
         columns={5}
         mobileColumns={3}
         onTileClick={(id) => {
-          console.log(id);
+          props.controller.onAvatarConfigChanged({
+            beard: beardThumbnails[id].type,
+          });
         }}
       />
       <div className="w-full p-2 m-2">

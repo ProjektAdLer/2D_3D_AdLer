@@ -1,36 +1,54 @@
-export enum AvatarHairModels {
-  Dreads_Topback = "Dreads_Topback",
-  Dreads_Bandana = "Dreads_Bandana",
-  Dreads_Downknot = "Dreads_Downknot",
-  Backhead = "Backhead",
-  Long = "Long",
-  Long_Bangs = "Long_Bangs",
-  Long_Clampback = "Long_Clampback",
-  Long_Wavy = "Long_Wavy",
-  Medium_Dut = "Medium_Dut",
-  Medium_Napoleon = "Medium_Napoleon",
-  Medium_Ponytail = "Medium_Ponytail",
-  Medium_Pushed_Back = "Medium_Pushed_Back",
-  Medium_Shaggy = "Medium_Shaggy",
-  Medium_Straight = "Medium_Straight",
-  Short_Bald = "Short_Bald",
-  Short_Balding = "Short_Balding",
-  Short_Baldtop = "Short_Baldtop",
-  Short_Receding = "Short_Receding",
-  Short_Curly = "Short_Curly",
-  Short_Faux = "Short_Faux",
-  Short_FringeParted = "Short_FringeParted",
-  Short_FrontParting = "Short_FrontParting",
-  // Short_Nerdy = "Short_Nerdy", // thumbnail still missing
-  Short_Pigtails = "Short_Pigtails",
-  Short_PigtailsPunk = "Short_PigtailsPunk",
-  Short_SideFling = "Short_SideFling",
-  Short_SideFringe = "Short_SideFringe",
-  Short_SideParting = "Short_SideParting",
-  Short_Vanilla = "Short_Vanilla",
-}
+// None
+export const AvatarNoneModel = {
+  None: "none",
+} as const;
 
-export enum AvatarBeardModels {}
+// Hair
+export const OAvatarHairModels = {
+  MediumPonytail: "hairMediumPonytail",
+  MediumStraight: "hairMediumStraight",
+
+  //TODO: add more hair models when assets are available
+  // DreadsTopback: "hairDreadsTopback",
+  // DreadsBandana: "hairDreadsBandana",
+  // DreadsDownknot: "hairDreadsDownknot",
+  // Backhead: "hairBackhead",
+  // Long: "hairLong",
+  // LongBangs: "hairLongBangs",
+  // LongClampback: "hairLongClampback",
+  // LongWavy: "hairLongWavy",
+  // MediumDut: "hairMediumDut",
+  // MediumNapoleon: "hairMediumNapoleon",
+  // MediumPushedBack: "hairMediumPushedBack",
+  // MediumShaggy: "hairMediumShaggy",
+  // ShortBald: "hairShortBald",
+  // ShortBalding: "hairShortBalding",
+  // ShortBaldtop: "hairShortBaldtop",
+  // ShortReceding: "hairShortReceding",
+  // ShortCurly: "hairShortCurly",
+  // ShortFaux: "hairShortFaux",
+  // ShortFringeParted: "hairShortFringeParted",
+  // ShortFrontParting: "hairShortFrontParting",
+  // ShortPigtails: "hairShortPigtails",
+  // ShortPigtailsPunk: "hairShortPigtailsPunk",
+  // ShortSideFling: "hairShortSideFling",
+  // ShortSideFringe: "hairShortSideFringe",
+  // ShortSideParting: "hairShortSideParting",
+  // ShortVanilla: "hairShortVanilla",
+} as const;
+export type AvatarHairModels =
+  | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
+  | (typeof OAvatarHairModels)[keyof typeof OAvatarHairModels];
+
+// Beards
+export const OAvatarBeardModels = {
+  //TODO: add more beard models when assets are available
+  Medium: "beardMedium",
+  MustacheHogan: "beardMustacheHogan",
+} as const;
+export type AvatarBeardModels =
+  | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
+  | (typeof OAvatarBeardModels)[keyof typeof OAvatarBeardModels];
 
 export enum AvatarHeadgearModels {}
 
