@@ -7,7 +7,7 @@ import AsyncPresentationBuilder from "../../../PresentationBuilder/AsyncPresenta
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import IAvatarPort from "src/Components/Core/Application/Ports/Interfaces/IAvatarPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import { LocationScope } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 @injectable()
 export default class AvatarEditorPreviewModelBuilder extends AsyncPresentationBuilder<
@@ -39,7 +39,7 @@ export default class AvatarEditorPreviewModelBuilder extends AsyncPresentationBu
 
     CoreDIContainer.get<IAvatarPort>(PORT_TYPES.IAvatarPort).registerAdapter(
       this.presenter!,
-      LocationScope.avatarEditor,
+      HistoryWrapper.currentLocationScope(),
     );
   }
 }
