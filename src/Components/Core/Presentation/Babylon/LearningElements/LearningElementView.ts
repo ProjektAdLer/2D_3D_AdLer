@@ -20,25 +20,26 @@ import LearningElementModelLookup from "src/Components/Core/Domain/LearningEleme
 import HighlightColors from "../HighlightColors";
 
 const iconLinks: { [key in LearningElementTypes]?: any } = {
-  [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb"),
-  [LearningElementTypes.primitiveH5P]: require("../../../../../Assets/3dModels/sharedModels/l-icons-h5p-1.glb"),
-  [LearningElementTypes.text]: require("../../../../../Assets/3dModels/sharedModels/l-icons-text-1.glb"),
-  [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/sharedModels/l-icons-text-1.glb"),
-  [LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/l-icons-image-1.glb"),
-  [LearningElementTypes.video]: require("../../../../../Assets/3dModels/sharedModels/l-icons-video-1.glb"),
+  [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-h5p-interactive-element.glb"),
+  [LearningElementTypes.primitiveH5P]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-h5p-interactive-element.glb"),
+  [LearningElementTypes.text]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-text-papyrus.glb"),
+  [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-text-papyrus.glb"),
+  [LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-image-abstract-painting.glb"),
+  [LearningElementTypes.video]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-video-tv.glb"),
   //[LearningElementTypes.story]: require("../../../../../Assets/3dModels/sharedModels/l-icons-story-1.glb"),
-  [LearningElementTypes.adaptivity]: require("../../../../../Assets/3dModels/sharedModels/l-icons-adaptivity-1.glb"),
+  [LearningElementTypes.adaptivity]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-adaptivity-kite.glb"),
   [LearningElementTypes.notAnElement]: [],
 };
 
 const checkedIconLinks: { [key in LearningElementTypes]?: any } = {
-  [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/sharedModels/l-icons-h5p-check.glb"),
-  [LearningElementTypes.primitiveH5P]: require("../../../../../Assets/3dModels/sharedModels/l-icons-h5p-check.glb"),
-  [LearningElementTypes.text]: require("../../../../../Assets/3dModels/sharedModels/l-icons-text-check.glb"),
-  [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/sharedModels/l-icons-text-check.glb"),
-  [LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/l-icons-image-check.glb"),
-  [LearningElementTypes.video]: require("../../../../../Assets/3dModels/sharedModels/l-icons-video-check.glb"),
-  [LearningElementTypes.adaptivity]: require("../../../../../Assets/3dModels/sharedModels/l-icons-adaptivityQuiz-check.glb"),
+  [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-h5p-interactive-element-checked.glb"),
+  [LearningElementTypes.primitiveH5P]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-h5p-interactive-element-checked.glb"),
+  [LearningElementTypes.text]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-text-papyrus-checked.glb"),
+  [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-text-papyrus-checked.glb"),
+  //[LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/l-icons-image-check.glb"),
+  [LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-image-abstract-painting-checked.glb"),
+  [LearningElementTypes.video]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-video-tv-checked.glb"),
+  [LearningElementTypes.adaptivity]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-adaptivity-kite-checked.glb"),
   [LearningElementTypes.notAnElement]: [],
 };
 

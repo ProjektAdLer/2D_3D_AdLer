@@ -1,5 +1,5 @@
 import textIcon from "../../../../Assets/icons/text.svg";
-import h5pIcon from "../../../../Assets/icons/h5p.svg";
+import h5pIcon from "../../../../Assets/icons/interactive-element.svg";
 import videoIcon from "../../../../Assets/icons/video.svg";
 import imageIcon from "../../../../Assets/icons/image.svg";
 import learningElementsIcon from "../../../../Assets/icons/learning-elements.svg";

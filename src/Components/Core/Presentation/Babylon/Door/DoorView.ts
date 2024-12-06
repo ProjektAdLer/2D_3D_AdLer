@@ -25,8 +25,8 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import HighlightColors from "../HighlightColors";
 
 const soundLink = require("../../../../../Assets/Sounds/door_opening.mp3");
-const iconLinkEntryDoor = require("../../../../../Assets/3dModels/sharedModels/d-icons-door-in.glb");
-const iconLinkExitDoor = require("../../../../../Assets/3dModels/sharedModels/d-icons-door-out.glb");
+const iconLinkEntryDoor = require("../../../../../Assets/3dModels/sharedModels/3dIcons/d-icons-door-door-in.glb");
+const iconLinkExitDoor = require("../../../../../Assets/3dModels/sharedModels/3dIcons/d-icons-door-door-out.glb");
 
 export default class DoorView extends Readyable {
   private scenePresenter: IScenePresenter;
