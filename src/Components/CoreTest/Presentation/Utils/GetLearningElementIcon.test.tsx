@@ -8,7 +8,7 @@ describe("GetLearningElementIcon should return a react component for valid eleme
     ["text" as LearningElementTypeStrings, "text.svg"],
     ["image" as LearningElementTypeStrings, "image.svg"],
     ["video" as LearningElementTypeStrings, "video"],
-    ["h5p" as LearningElementTypeStrings, "h5p"],
+    ["h5p" as LearningElementTypeStrings, "interactive-element.svg"],
     ["pdf" as LearningElementTypeStrings, "text"],
     ["adaptivity" as LearningElementTypeStrings, "quiz"],
   ])("should run for %s", (type, expected) => {
