@@ -1,5 +1,5 @@
 import AvatarEditorPreviewModelViewModel from "./AvatarEditorPreviewModelViewModel";
-import { ISceneLoaderAsyncResult, Mesh, TransformNode } from "@babylonjs/core";
+import { Mesh, TransformNode } from "@babylonjs/core";
 import IScenePresenter from "../../../Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import SCENE_TYPES, {
@@ -24,25 +24,18 @@ export default class AvatarEditorPreviewModelView {
   }
 
   async asyncSetup(): Promise<void> {
+    // load base model and position it
     const result = await this.scenePresenter.loadGLTFModel(baseModelLink);
     this.viewModel.baseModelMeshes = result.meshes as Mesh[];
     this.viewModel.baseModelMeshes[0].position.y = -1;
 
-    this.viewModel.hairAnchorNode = this.getAnchorNodeByName(
-      result,
-      "anker_hair",
+    // find anchor nodes
+    this.viewModel.hairAnchorNode = result.transformNodes.find(
+      (node) => node.name === "anker_hair",
     )!;
-    this.viewModel.beardAnchorNode = this.getAnchorNodeByName(
-      result,
-      "anker_beard",
+    this.viewModel.beardAnchorNode = result.transformNodes.find(
+      (node) => node.name === "anker_beard",
     )!;
-  }
-
-  private getAnchorNodeByName(
-    loadingResults: ISceneLoaderAsyncResult,
-    name: string,
-  ): TransformNode | undefined {
-    return loadingResults.transformNodes.find((mesh) => mesh.name === name);
   }
 
   private onAvatarConfigChanged(): void {
