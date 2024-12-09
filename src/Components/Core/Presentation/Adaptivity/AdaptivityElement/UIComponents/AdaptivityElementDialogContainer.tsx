@@ -50,6 +50,7 @@ import {
 } from "../../../../Domain/LearningElementModels/LearningElementModelTypes";
 import { useTranslation } from "react-i18next";
 import CloseButton from "~ReactComponents/ReactRelated/ReactBaseComponents/CloseButton";
+import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 function getNPCImage(model: LearningElementModel, close: boolean): string {
   switch (model) {
@@ -145,12 +146,12 @@ export default function AdaptivityElementDialogContainer({
             <div className="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
               {!(currentTask === null && currentQuestion === null) &&
                 !showAnswerFeedback && (
-                  <CloseButton
+                  <StyledButton
                     onClick={controller.back}
                     className="w-8 h-8 p-1 mr-2 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
                   >
                     {"\u25C0"}
-                  </CloseButton>
+                  </StyledButton>
                 )}
 
               {currentTask === null && currentQuestion === null && (
