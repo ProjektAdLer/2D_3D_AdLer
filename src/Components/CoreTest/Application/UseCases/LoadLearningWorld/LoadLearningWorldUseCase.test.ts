@@ -15,7 +15,6 @@ import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 import LearningSpaceEntity from "../../../../Core/Domain/Entities/LearningSpaceEntity";
 import LearningElementEntity from "../../../../Core/Domain/Entities/LearningElementEntity";
 import LearningWorldEntity from "../../../../Core/Domain/Entities/LearningWorldEntity";
-import ILoadAvatarUseCase from "../../../../Core/Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import { minimalGetWorldDataResponse } from "../../../Adapters/BackendAdapter/BackendResponses";
 import { IInternalCalculateLearningSpaceScoreUseCase } from "../../../../Core/Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
@@ -45,7 +44,6 @@ const backendMock = mock<IBackendPort>();
 const worldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const notificationPortMock = mock<INotificationPort>();
-const loadAvatarUsecaseMock = mock<ILoadAvatarUseCase>();
 const calculateSpaceScoreUseCaseMock =
   mock<IInternalCalculateLearningSpaceScoreUseCase>();
 const setUserLocationUseCaseMock = mock<ISetUserLocationUseCase>();
@@ -207,9 +205,6 @@ describe("LoadLearningWorldUseCase", () => {
     );
     CoreDIContainer.rebind(PORT_TYPES.INotificationPort).toConstantValue(
       notificationPortMock,
-    );
-    CoreDIContainer.rebind(USECASE_TYPES.ILoadAvatarUseCase).toConstantValue(
-      loadAvatarUsecaseMock,
     );
     CoreDIContainer.rebind(
       USECASE_TYPES.ICalculateLearningSpaceScoreUseCase,
@@ -902,7 +897,7 @@ describe("LoadLearningWorldUseCase", () => {
       type: "h5p",
       description: "",
       model:
-        LearningElementModelTypeEnums.ImageElementModelTypes.Cardboardcutout,
+        LearningElementModelTypeEnums.ImageElementModelTypes.CardboardCutout,
       goals: [""],
     };
     const worldStatusTO: LearningWorldStatusTO = {
@@ -961,7 +956,7 @@ describe("LoadLearningWorldUseCase", () => {
       goals: [],
       type: "h5p",
       model:
-        LearningElementModelTypeEnums.ImageElementModelTypes.Cardboardcutout,
+        LearningElementModelTypeEnums.ImageElementModelTypes.CardboardCutout,
       parentWorldID: 5,
     } as LearningElementEntity;
 
