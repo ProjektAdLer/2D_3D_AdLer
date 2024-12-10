@@ -39,10 +39,10 @@ describe("UpdateAvatarConfigUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  test("logs error if no user data entity found", () => {
+  test("logs error if no user data entity found", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([]);
 
-    systemUnderTest.execute({});
+    await systemUnderTest.executeAsync({});
 
     expect(loggerMock.log).toHaveBeenCalledWith(
       LogLevelTypes.ERROR,
@@ -50,10 +50,10 @@ describe("UpdateAvatarConfigUseCase", () => {
     );
   });
 
-  test("logs error if multiple user data entities found", () => {
+  test("logs error if multiple user data entities found", async () => {
     entityContainerMock.getEntitiesOfType.mockReturnValue([{}, {}]);
 
-    systemUnderTest.execute({});
+    await systemUnderTest.executeAsync({});
 
     expect(loggerMock.log).toHaveBeenCalledWith(
       LogLevelTypes.ERROR,
@@ -61,7 +61,17 @@ describe("UpdateAvatarConfigUseCase", () => {
     );
   });
 
-  test("updates avatar config in user data entity", () => {
+  test("calls loadAvatarConfigUseCase if avatar config not loaded", async () => {
+    const userDataEntity = {};
+
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
+
+    await systemUnderTest.executeAsync({});
+
+    expect(avatarPortMock.onAvatarConfigLoaded).toHaveBeenCalledTimes(1);
+  });
+
+  test("updates avatar config in user data entity", async () => {
     const avatarConfig: Partial<AvatarConfigTO> = {
       roundness: 0.5,
     };
@@ -74,7 +84,7 @@ describe("UpdateAvatarConfigUseCase", () => {
 
     entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
 
-    systemUnderTest.execute(avatarConfig);
+    await systemUnderTest.executeAsync(avatarConfig);
 
     expect(userDataEntity.avatar.roundness).toEqual(0.5);
     expect(userDataEntity.avatar.hair).toEqual(
@@ -82,7 +92,7 @@ describe("UpdateAvatarConfigUseCase", () => {
     );
   });
 
-  test("calls onAvatarConfigChanged on avatar port", () => {
+  test("calls onAvatarConfigChanged on avatar port", async () => {
     const avatarConfig: Partial<AvatarConfigTO> = {
       roundness: 0.5,
     };
@@ -95,7 +105,7 @@ describe("UpdateAvatarConfigUseCase", () => {
 
     entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
 
-    systemUnderTest.execute(avatarConfig);
+    await systemUnderTest.executeAsync(avatarConfig);
 
     expect(avatarPortMock.onAvatarConfigChanged).toHaveBeenCalledWith(
       userDataEntity.avatar,
@@ -103,7 +113,7 @@ describe("UpdateAvatarConfigUseCase", () => {
     );
   });
 
-  test("doesn't call onAvatarConfigChanged when change is already present in current config", () => {
+  test("doesn't call onAvatarConfigChanged when change is already present in current config", async () => {
     const avatarConfig: Partial<AvatarConfigTO> = {
       roundness: 0.5,
     };
@@ -116,12 +126,12 @@ describe("UpdateAvatarConfigUseCase", () => {
 
     entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
 
-    systemUnderTest.execute(avatarConfig);
+    await systemUnderTest.executeAsync(avatarConfig);
 
     expect(avatarPortMock.onAvatarConfigChanged).not.toHaveBeenCalled();
   });
 
-  test("diff and new avatar config passed to onAvatarConfigChanged do match", () => {
+  test("diff and new avatar config passed to onAvatarConfigChanged do match", async () => {
     const avatarConfig: Partial<AvatarConfigTO> = {
       roundness: 0.5,
     };
@@ -129,7 +139,7 @@ describe("UpdateAvatarConfigUseCase", () => {
 
     entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
 
-    systemUnderTest.execute(avatarConfig);
+    await systemUnderTest.executeAsync(avatarConfig);
 
     expect(
       avatarPortMock.onAvatarConfigChanged.mock.lastCall![0],

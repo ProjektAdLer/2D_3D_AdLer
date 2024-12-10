@@ -5,10 +5,11 @@ import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContai
 import AvatarConfigTO from "../../DataTransferObjects/AvatarConfigTO";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type IAvatarPort from "../../Ports/Interfaces/IAvatarPort";
-import AvatarEntity from "src/Components/Core/Domain/Entities/AvatarEntity";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import type ILoadAvatarConfigUseCase from "../LoadAvatarConfig/ILoadAvatarConfigUseCase";
 
 @injectable()
 export default class UpdateAvatarConfigUseCase
@@ -21,9 +22,11 @@ export default class UpdateAvatarConfigUseCase
     private avatarPort: IAvatarPort,
     @inject(CORE_TYPES.ILogger)
     private logger: ILoggerPort,
+    @inject(USECASE_TYPES.ILoadAvatarConfigUseCase)
+    private loadAvatarUseCase: ILoadAvatarConfigUseCase,
   ) {}
 
-  execute(newAvatarConfig: Partial<AvatarConfigTO>): void {
+  async executeAsync(newAvatarConfig: Partial<AvatarConfigTO>): Promise<void> {
     let userDataEntities =
       this.entityContainer.getEntitiesOfType(UserDataEntity);
     if (userDataEntities.length === 0) {
@@ -34,17 +37,9 @@ export default class UpdateAvatarConfigUseCase
       return;
     }
 
-    // TODO: this is a workaround when no config is available, remove when loading initial avatar config is implemented
-    if (!userDataEntities[0].avatar) {
-      userDataEntities[0].avatar = Object.assign(
-        new AvatarEntity(),
-        newAvatarConfig,
-      );
-      this.avatarPort.onAvatarConfigChanged(
-        Object.assign({}, userDataEntities[0].avatar), // clone to prevent changes to propagate
-        newAvatarConfig,
-      );
-    }
+    // load avatar config if not already loaded
+    if (!userDataEntities[0].avatar)
+      await this.loadAvatarUseCase.executeAsync();
 
     // compute difference between new and current avatar config
     let difference: any = {}; // actually Partial<AvatarConfigTO>, but TS doesn't like that

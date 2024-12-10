@@ -6,11 +6,8 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 export default class AvatarEditorController implements IAvatarEditorController {
   onAvatarConfigChanged(changes: Partial<AvatarConfigTO>): void {
-    const updateAvatarConfigUseCase =
-      CoreDIContainer.get<IUpdateAvatarConfigUseCase>(
-        USECASE_TYPES.IUpdateAvatarConfigUseCase,
-      );
-
-    updateAvatarConfigUseCase.execute(changes);
+    CoreDIContainer.get<IUpdateAvatarConfigUseCase>(
+      USECASE_TYPES.IUpdateAvatarConfigUseCase,
+    ).executeAsync(changes);
   }
 }

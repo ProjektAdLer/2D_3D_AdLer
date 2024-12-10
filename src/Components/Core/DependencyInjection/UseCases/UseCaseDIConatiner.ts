@@ -94,7 +94,7 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(SetWorldCompletionModalToShownUseCase)
     .inSingletonScope();
 
-  bind<ILoadAvatarConfigUseCase>(USECASE_TYPES.ILoadAvatarUseCase)
+  bind<ILoadAvatarConfigUseCase>(USECASE_TYPES.ILoadAvatarConfigUseCase)
     .to(LoadAvatarConfigUseCase)
     .inSingletonScope();
 

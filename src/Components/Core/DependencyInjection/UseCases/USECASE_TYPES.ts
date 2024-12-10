@@ -9,7 +9,7 @@ const USECASE_TYPES = {
     "ISetWorldCompletionModalToShownUseCase",
   ),
   ILoadLearningWorldUseCase: Symbol("ILoadLearningWorldUseCase"),
-  ILoadAvatarUseCase: Symbol("ILoadAvatarUseCase"),
+  ILoadAvatarConfigUseCase: Symbol("ILoadAvatarConfigUseCase"),
   ILoadLearningElementUseCase: Symbol("ILoadLearningElementUseCase"),
   IScoreLearningElementUseCase: Symbol("IScoreLearningElementUseCase"),
   ICalculateLearningSpaceScoreUseCase: Symbol(
