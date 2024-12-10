@@ -13,14 +13,16 @@ import { useState } from "react";
 import ColorPickerButton from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerButton";
 import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerModal";
 
+import noneIcon from "../../../../../../Assets/icons/close.svg";
+
 const noneThumbnail = {
   type: AvatarNoneModel.None,
-  image: require("../../../../../../Assets/avatarEditorThumbnails/hair/hairstyles/Hair_Backhead.png"),
+  image: noneIcon,
 };
 
 const hairThumbnails = Object.values(OAvatarHairModels).map<{
   type: AvatarHairModels; // use union type with AvatarNoneModel
-  image: any;
+  image: string;
 }>((type) => ({
   type: type,
   image: require(
@@ -31,7 +33,7 @@ hairThumbnails.unshift(noneThumbnail);
 
 const beardThumbnails = Object.values(OAvatarBeardModels).map<{
   type: AvatarBeardModels; // use union type with AvatarNoneModel
-  image: any;
+  image: string;
 }>((type) => ({
   type: type,
   image: require(
