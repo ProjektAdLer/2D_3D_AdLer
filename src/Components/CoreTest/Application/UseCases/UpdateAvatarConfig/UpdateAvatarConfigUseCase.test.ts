@@ -31,6 +31,8 @@ describe("UpdateAvatarConfigUseCase", () => {
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(UpdateAvatarConfigUseCase);
+
+    jest.resetAllMocks();
   });
 
   afterAll(() => {
@@ -97,6 +99,40 @@ describe("UpdateAvatarConfigUseCase", () => {
 
     expect(avatarPortMock.onAvatarConfigChanged).toHaveBeenCalledWith(
       userDataEntity.avatar,
+      avatarConfig,
     );
+  });
+
+  test("doesn't call onAvatarConfigChanged when change is already present in current config", () => {
+    const avatarConfig: Partial<AvatarConfigTO> = {
+      roundness: 0.5,
+    };
+    const userDataEntity = {
+      avatar: {
+        roundness: 0.5,
+        hair: OAvatarHairModels.MediumPonytail,
+      } as AvatarEntity,
+    };
+
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
+
+    systemUnderTest.execute(avatarConfig);
+
+    expect(avatarPortMock.onAvatarConfigChanged).not.toHaveBeenCalled();
+  });
+
+  test("diff and new avatar config passed to onAvatarConfigChanged do match", () => {
+    const avatarConfig: Partial<AvatarConfigTO> = {
+      roundness: 0.5,
+    };
+    const userDataEntity = {};
+
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
+
+    systemUnderTest.execute(avatarConfig);
+
+    expect(
+      avatarPortMock.onAvatarConfigChanged.mock.lastCall![0],
+    ).toMatchObject(avatarPortMock.onAvatarConfigChanged.mock.lastCall![1]);
   });
 });

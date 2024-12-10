@@ -23,7 +23,7 @@ export default class UpdateAvatarConfigUseCase
     private logger: ILoggerPort,
   ) {}
 
-  execute(avatarConfig: Partial<AvatarConfigTO>): void {
+  execute(newAvatarConfig: Partial<AvatarConfigTO>): void {
     let userDataEntities =
       this.entityContainer.getEntitiesOfType(UserDataEntity);
     if (userDataEntities.length === 0) {
@@ -34,13 +34,38 @@ export default class UpdateAvatarConfigUseCase
       return;
     }
 
+    // TODO: this is a workaround when no config is available, remove when loading initial avatar config is implemented
+    if (!userDataEntities[0].avatar) {
+      userDataEntities[0].avatar = Object.assign(
+        new AvatarEntity(),
+        newAvatarConfig,
+      );
+      this.avatarPort.onAvatarConfigChanged(
+        Object.assign({}, userDataEntities[0].avatar), // clone to prevent changes to propagate
+        newAvatarConfig,
+      );
+    }
+
+    // compute difference between new and current avatar config
+    let difference: any = {}; // actually Partial<AvatarConfigTO>, but TS doesn't like that
+    for (const key in newAvatarConfig) {
+      const typedKey = key as keyof AvatarConfigTO;
+      if (newAvatarConfig[typedKey] !== userDataEntities[0].avatar[typedKey])
+        difference[typedKey] = newAvatarConfig[typedKey];
+    }
+
+    // skip update if no actual changes
+    if (Object.keys(difference).length === 0) return;
+
+    // apply new config to avatar entity
     userDataEntities[0].avatar = Object.assign(
-      userDataEntities[0].avatar ?? new AvatarEntity(),
-      avatarConfig,
+      userDataEntities[0].avatar,
+      newAvatarConfig,
     );
 
     this.avatarPort.onAvatarConfigChanged(
-      Object.assign({}, userDataEntities[0].avatar),
+      Object.assign({}, userDataEntities[0].avatar), // clone to prevent changes to propagate
+      difference as Partial<AvatarConfigTO>,
     );
   }
 }

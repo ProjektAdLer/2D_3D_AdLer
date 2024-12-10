@@ -13,11 +13,14 @@ export default class AvatarPort
     return "AVATAR-PORT";
   }
 
-  onAvatarConfigChanged(newAvatarConfig: AvatarConfigTO): void {
+  onAvatarConfigChanged(
+    newAvatarConfig: AvatarConfigTO,
+    avatarConfigDiff: Partial<AvatarConfigTO>,
+  ): void {
     this.mappedAdapters.forEach((adapters) => {
       adapters.forEach((adapter) => {
         if (adapter.onAvatarConfigChanged)
-          adapter.onAvatarConfigChanged(newAvatarConfig);
+          adapter.onAvatarConfigChanged(newAvatarConfig, avatarConfigDiff);
       });
     });
   }
