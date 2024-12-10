@@ -3,8 +3,8 @@ import CalculateLearningSpaceScoreUseCase from "../../Application/UseCases/Calcu
 import ICalculateLearningSpaceScoreUseCase from "../../Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import ILoadLearningElementUseCase from "../../Application/UseCases/LoadLearningElement/ILoadLearningElementUseCase";
 import LoadLearningElementUseCase from "../../Application/UseCases/LoadLearningElement/LoadLearningElementUseCase";
-import ILoadAvatarUseCase from "../../Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
-import LoadAvatarUseCase from "../../Application/UseCases/LoadAvatar/LoadAvatarUseCase";
+import ILoadAvatarConfigUseCase from "../../Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
+import LoadAvatarConfigUseCase from "../../Application/UseCases/LoadAvatarConfig/LoadAvatarConfigUseCase";
 import ILoadLearningSpaceUseCase from "../../Application/UseCases/LoadLearningSpace/ILoadLearningSpaceUseCase";
 import LoadLearningSpaceUseCase from "../../Application/UseCases/LoadLearningSpace/LoadLearningSpaceUseCase";
 import ILoadLearningWorldUseCase from "../../Application/UseCases/LoadLearningWorld/ILoadLearningWorldUseCase";
@@ -94,8 +94,8 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .to(SetWorldCompletionModalToShownUseCase)
     .inSingletonScope();
 
-  bind<ILoadAvatarUseCase>(USECASE_TYPES.ILoadAvatarUseCase)
-    .to(LoadAvatarUseCase)
+  bind<ILoadAvatarConfigUseCase>(USECASE_TYPES.ILoadAvatarUseCase)
+    .to(LoadAvatarConfigUseCase)
     .inSingletonScope();
 
   bind<IScoreLearningElementUseCase>(USECASE_TYPES.IScoreLearningElementUseCase)

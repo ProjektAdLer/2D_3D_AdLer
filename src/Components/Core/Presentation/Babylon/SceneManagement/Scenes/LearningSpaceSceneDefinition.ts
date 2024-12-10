@@ -13,7 +13,6 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import bind from "bind-decorator";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type ILoadLearningSpaceUseCase from "src/Components/Core/Application/UseCases/LoadLearningSpace/ILoadLearningSpaceUseCase";
-import type ILoadAvatarUseCase from "src/Components/Core/Application/UseCases/LoadAvatar/ILoadAvatarUseCase";
 import type IPresentationDirector from "../../../PresentationBuilder/IPresentationDirector";
 import type IPresentationBuilder from "../../../PresentationBuilder/IPresentationBuilder";
 import type INavigation from "../../Navigation/INavigation";
@@ -47,8 +46,6 @@ export default class LearningSpaceSceneDefinition
     private navigation: INavigation,
     @inject(USECASE_TYPES.ILoadLearningSpaceUseCase)
     private loadSpaceUseCase: ILoadLearningSpaceUseCase,
-    @inject(USECASE_TYPES.ILoadAvatarUseCase)
-    private loadAvatarUseCase: ILoadAvatarUseCase,
     @inject(BUILDER_TYPES.IAvatarCameraBuilder)
     private avatarCameraBuilder: IPresentationBuilder,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
@@ -56,13 +53,13 @@ export default class LearningSpaceSceneDefinition
     @inject(BUILDER_TYPES.IAmbienceBuilder)
     private ambienceBuilder: IAmbienceBuilder,
     @inject(PORT_TYPES.ILearningWorldPort)
-    private learningWorldPort: ILearningWorldPort
+    private learningWorldPort: ILearningWorldPort,
   ) {
     super();
     this.learningWorldPort.registerAdapter(this, LocationScope._global);
   }
 
-  protected override preTasks = [this.loadAvatarPreTask, this.loadSpacePreTask];
+  protected override preTasks = [this.loadSpacePreTask];
 
   protected override async initializeScene(): Promise<void> {
     this.scene.clearColor = new Color4(0.66, 0.83, 0.98, 1);
@@ -104,11 +101,6 @@ export default class LearningSpaceSceneDefinition
   override disposeScene(): void {
     super.disposeScene();
     this.navigation.reset();
-  }
-
-  @bind
-  private async loadAvatarPreTask(): Promise<void> {
-    await this.loadAvatarUseCase.executeAsync();
   }
 
   @bind
