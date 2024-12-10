@@ -40,6 +40,8 @@ export default class LoadAvatarConfigUseCase
       // let avatarConfig = await this.backend.loadAvatarConfigAsync();
     }
 
-    this.avatarPort.onAvatarConfigLoaded(userDataEntities[0].avatar);
+    this.avatarPort.onAvatarConfigLoaded(
+      Object.assign({}, userDataEntities[0].avatar),
+    );
   }
 }
