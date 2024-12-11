@@ -13,6 +13,7 @@ exports[`Tile should render 1`] = `
       >
         <img
           alt="undefinedThumbnail"
+          class="w-full h-full"
           src="Hair_Backhead.png"
         />
       </div>

@@ -16,6 +16,7 @@ exports[`TileGridLayout should render 1`] = `
         >
           <img
             alt="titleThumbnail"
+            class="w-full h-full"
             src="image"
           />
           <p>
