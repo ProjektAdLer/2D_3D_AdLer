@@ -14,7 +14,7 @@ Object {
             style="width: 50%;"
           >
             <div
-              class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden"
+              class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden flex flex-col"
             >
               <div
                 class="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit"
@@ -24,7 +24,7 @@ Object {
                 />
               </div>
               <div
-                class="px-1 overflow-auto rounded-lg font-regular h-fit"
+                class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter"
               >
                 <div
                   class="inline-grid grid-cols-8 gap-2 row-span-8"
@@ -568,7 +568,7 @@ Object {
           style="width: 50%;"
         >
           <div
-            class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden"
+            class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden flex flex-col"
           >
             <div
               class="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit"
@@ -578,7 +578,7 @@ Object {
               />
             </div>
             <div
-              class="px-1 overflow-auto rounded-lg font-regular h-fit"
+              class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter"
             >
               <div
                 class="inline-grid grid-cols-8 gap-2 row-span-8"

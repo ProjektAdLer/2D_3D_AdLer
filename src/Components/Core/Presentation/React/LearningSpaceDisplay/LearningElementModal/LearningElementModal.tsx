@@ -71,6 +71,34 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
     viewModel.type.Value === LearningElementTypes.video ||
     viewModel.type.Value === LearningElementTypes.image ||
     viewModel.type.Value === LearningElementTypes.pdf;
+
+  const completionButton = () => {
+    return (
+      <div className="sticky bottom-0 grid mt-3 mb-2 justify-items-end">
+        <StyledButton
+          shape="freeFloatCenter"
+          disabled={
+            viewModel.type.Value === LearningElementTypes.h5p &&
+            !viewModel.hasScored.Value
+          }
+          onClick={async () => {
+            if (
+              isPrimitive &&
+              viewModel.type?.Value !== "h5p" &&
+              viewModel.isScoreable?.Value === true
+            ) {
+              await controller.scoreLearningElement();
+            }
+            controller.closeModal();
+            controller.showBottomToolTip();
+          }}
+        >
+          {translate("submitElement")}
+        </StyledButton>
+      </div>
+    );
+  };
+
   return (
     <StyledModal
       title={viewModel.name.Value}
@@ -79,35 +107,17 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
         controller.showBottomToolTip();
       }}
       smallCloseButton={isPrimitive}
+      hasFooter={true}
+      footer={completionButton()}
       showModal={isOpen}
       className={tailwindMerge(
         className,
-        "flex flex-col justify-center gap-2 p-2 m-3 rounded-lg",
+        "justify-center gap-2 p-2 m-3 rounded-lg",
         modalStyleByTypeMap[elementType as keyof typeof modalStyleByTypeMap],
       )}
       style={{ visibility: isVisible ? "visible" : "hidden" }}
     >
       {createModalContent(viewModel, controller)}
-      {isPrimitive && (
-        <div className="grid mt-2 mb-1 justify-items-end">
-          <StyledButton
-            shape="freeFloatCenter"
-            onClick={async () => {
-              if (
-                isPrimitive &&
-                viewModel.type?.Value !== "h5p" &&
-                viewModel.isScoreable?.Value === true
-              ) {
-                await controller.scoreLearningElement();
-              }
-              controller.closeModal();
-              controller.showBottomToolTip();
-            }}
-          >
-            {translate("submitElement")}
-          </StyledButton>
-        </div>
-      )}
     </StyledModal>
   );
 }

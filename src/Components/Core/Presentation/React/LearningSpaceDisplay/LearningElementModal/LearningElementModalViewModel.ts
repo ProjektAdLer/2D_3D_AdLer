@@ -10,6 +10,8 @@ export default class LearningElementModalViewModel {
   isScoreable = new Observable<boolean>();
   isVisible = new Observable<boolean>(true);
 
+  hasScored = new Observable<boolean>();
+
   readonly openDelay: number = 1600;
 
   parentSpaceID = new Observable<ComponentID>();

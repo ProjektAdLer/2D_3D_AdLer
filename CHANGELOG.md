@@ -13,6 +13,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - new icons for avatar creator categories and door icons in 2d
 - new 3d icons for doors
 - new 2d & 3d icon for previously known h5p element
+- added completion button in modal for h5p elements
 
 ### Changed
 

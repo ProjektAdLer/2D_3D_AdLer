@@ -9,7 +9,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
       class="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans"
     >
       <div
-        class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden"
+        class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden flex flex-col"
       >
         <div
           class="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit"
@@ -30,7 +30,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
           </button>
         </div>
         <div
-          class="px-1 overflow-auto rounded-lg font-regular h-fit"
+          class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter"
         >
           <div
             class="text-md font-bold text-adlerdarkblue pl-1 overflow-y-auto max-h-[90vh] lg:max-h-[85vh]"

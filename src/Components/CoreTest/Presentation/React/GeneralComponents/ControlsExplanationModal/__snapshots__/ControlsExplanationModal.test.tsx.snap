@@ -9,7 +9,7 @@ exports[`ControlsExplanationModal should render 1`] = `
       class="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans"
     >
       <div
-        class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden"
+        class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden flex flex-col"
       >
         <div
           class="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit"
@@ -30,7 +30,7 @@ exports[`ControlsExplanationModal should render 1`] = `
           </button>
         </div>
         <div
-          class="px-1 overflow-auto rounded-lg font-regular h-fit"
+          class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter"
         >
           <div
             class="portrait:max-w-[90vw] max-h-[80vh] max-w-6xl grid landscape:grid-rows-6 landscape:grid-flow-col portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto gap-x-8 landscape:gap-y-3 portrait:gap-6 pb-4 text-xs lg:text-sm"

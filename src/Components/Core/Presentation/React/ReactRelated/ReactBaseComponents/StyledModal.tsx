@@ -12,7 +12,7 @@ type Props = Partial<{
   title: string;
   canClose: boolean;
   onClose: () => void;
-  footer: string;
+  footer: JSX.Element;
   [x: string]: any;
 }>;
 
@@ -59,7 +59,7 @@ export default function StyledModal({
           onClick={(event) => {
             event.stopPropagation();
           }}
-          className="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden"
+          className="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden flex flex-col"
         >
           <div className="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit">
             <div className="w-full">{title}</div>
@@ -78,15 +78,11 @@ export default function StyledModal({
             )}
           </div>
           {/*Content*/}
-          <div className="px-1 overflow-auto rounded-lg font-regular h-fit">
+          <div className="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter">
             {children}
           </div>
           {/*Optional Footer*/}
-          {hasFooter && (
-            <div className="modal-footer ">
-              <p>{footer}</p>
-            </div>
-          )}
+          {hasFooter && <>{footer}</>}
         </div>
       </div>
     </StyledContainer>

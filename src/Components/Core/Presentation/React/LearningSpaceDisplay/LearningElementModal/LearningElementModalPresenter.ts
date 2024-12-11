@@ -1,6 +1,7 @@
 import LearningElementTO from "src/Components/Core/Application/DataTransferObjects/LearningElementTO";
 import ILearningElementModalPresenter from "./ILearningElementModalPresenter";
 import LearningElementModalViewModel from "./LearningElementModalViewModel";
+import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 
 export default class LearningElementModalPresenter
   implements ILearningElementModalPresenter
@@ -13,6 +14,7 @@ export default class LearningElementModalPresenter
     this.viewModel.name.Value = elementTO.name;
     this.viewModel.filePath.Value = elementTO.filePath ?? "";
     this.viewModel.isScoreable.Value = elementTO.isScoreable;
+    this.viewModel.hasScored.Value = elementTO.hasScored;
 
     if (this.viewModel.isScoreable.Value) {
       this.viewModel.isVisible.Value = false;
@@ -22,6 +24,12 @@ export default class LearningElementModalPresenter
       }, this.viewModel.openDelay);
     } else {
       this.viewModel.isOpen.Value = true;
+    }
+  }
+
+  onLearningElementScored(hasScored: boolean, elementID: ComponentID): void {
+    if (this.viewModel.id.Value === elementID) {
+      this.viewModel.hasScored.Value = hasScored;
     }
   }
 }
