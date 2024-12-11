@@ -81,7 +81,7 @@ export default function RangeSlider(props: RangeSliderProps) {
           {!props.buttons.imageLeft && "-"}
         </StyledButton>
       )}
-      <div className="flex !flex-col justify-center items-center grow text-xl font-bold">
+      <div className="flex !flex-col justify-center items-center grow text-xl font-bold pb-8">
         <input
           type="number"
           className="mb-1.5 numberInputField"
