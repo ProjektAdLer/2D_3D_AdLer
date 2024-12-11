@@ -17,6 +17,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Streamlined various different close buttons across the program with a new icon
+- new header in WelcomePage - now in nice 3D type
 
 ### Removed
 
