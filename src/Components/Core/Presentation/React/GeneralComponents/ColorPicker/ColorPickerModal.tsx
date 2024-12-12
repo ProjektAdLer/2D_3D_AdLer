@@ -24,19 +24,21 @@ export default function ColorPickerModal({
   return (
     <div>
       <StyledModal showModal={showModal} canClose={false} lefthalfshift={true}>
-        <ColorPicker
-          colors={colorPalette}
-          onColorClick={(color) => {
-            onColorClickFunction(color);
-          }}
-        />
-        <StyledButton
-          className="self-center"
-          onClick={onClose}
-          shape={"freeFloatCenter"}
-        >
-          Zurück
-        </StyledButton>
+        <div className="p-2">
+          <ColorPicker
+            colors={colorPalette}
+            onColorClick={(color) => {
+              onColorClickFunction(color);
+            }}
+          />
+          <StyledButton
+            className="self-center"
+            onClick={onClose}
+            shape={"freeFloatCenter"}
+          >
+            Zurück
+          </StyledButton>
+        </div>
       </StyledModal>
     </div>
   );

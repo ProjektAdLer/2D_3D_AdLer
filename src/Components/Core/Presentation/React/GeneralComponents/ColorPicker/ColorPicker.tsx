@@ -9,7 +9,7 @@ type Props = {
 function ColorButton(props: Readonly<Props>) {
   return (
     <StyledButton
-      className="flex m-0.5 border colorpicker-colors"
+      className="flex m-2 border colorpicker-colors"
       shape="square"
       color="nothing"
       feedback="nothing"
@@ -28,7 +28,7 @@ type colorPickerProps = {
 
 export default function ColorPicker(props: Readonly<colorPickerProps>) {
   return (
-    <div className="inline-grid grid-cols-8 gap-2 row-span-8">
+    <div className="inline-grid grid-cols-8 row-span-8">
       {props.colors.map((color, index) => {
         return (
           <ColorButton key={index} color={color} onClick={props.onColorClick} />
