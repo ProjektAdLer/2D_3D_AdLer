@@ -23,11 +23,11 @@ export default function AvatarEditorBodyCategory(
       </div>
       <div className="w-full p-2 m-2">
         <ColorPickerButton
-          className=""
           currentColor={skinColor}
           onClick={() => setShowModal(true)}
         />
         <ColorPickerModal
+          title={translate("bodyColorTitle")}
           showModal={showModal}
           onClose={() => setShowModal(false)}
           onColorClickFunction={(color) => {

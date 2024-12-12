@@ -91,6 +91,7 @@ export default function AvatarEditorHairCategory(
           onClick={() => setShowModal(true)}
         />
         <ColorPickerModal
+          title={translate("hairColorTitle")}
           showModal={showModal}
           onClose={() => setShowModal(false)}
           onColorClickFunction={(color) => {

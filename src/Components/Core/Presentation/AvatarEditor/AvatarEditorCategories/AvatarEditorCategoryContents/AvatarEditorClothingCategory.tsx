@@ -56,11 +56,11 @@ export default function AvatarEditorClothingCategory(
       />
       <div className="w-full p-2 m-2">
         <ColorPickerButton
-          className=""
           currentColor={shirtColor}
           onClick={() => setShowShirtModal(true)}
         />
         <ColorPickerModal
+          title={translate("shirtsColorTitle")}
           showModal={showShirtModal}
           onClose={() => setShowShirtModal(false)}
           onColorClickFunction={(color) => {
@@ -85,11 +85,11 @@ export default function AvatarEditorClothingCategory(
       />
       <div className="w-full p-2 m-2">
         <ColorPickerButton
-          className=""
           currentColor={pantsColor}
           onClick={() => setShowPantsModal(true)}
         />
         <ColorPickerModal
+          title={translate("pantsColorTitle")}
           showModal={showPantsModal}
           onClose={() => setShowPantsModal(false)}
           onColorClickFunction={(color) => {
@@ -114,11 +114,11 @@ export default function AvatarEditorClothingCategory(
       />
       <div className="w-full p-2 m-2">
         <ColorPickerButton
-          className=""
           currentColor={shoesColor}
           onClick={() => setShowShoesModal(true)}
         />
         <ColorPickerModal
+          title={translate("shoesColorTitle")}
           showModal={showShoesModal}
           onClose={() => setShowShoesModal(false)}
           onColorClickFunction={(color) => {

@@ -7,6 +7,7 @@ import AvatarColorPalette, {
 } from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
 
 type Props = AdLerUIComponent<{
+  title: string;
   colorPalette?: AvatarColor[];
   showModal: boolean;
   onClose: () => void;
@@ -14,6 +15,7 @@ type Props = AdLerUIComponent<{
 }>;
 
 export default function ColorPickerModal({
+  title,
   colorPalette = AvatarColorPalette,
   onClose,
   showModal = false,
@@ -25,6 +27,7 @@ export default function ColorPickerModal({
     <div>
       <StyledModal showModal={showModal} canClose={false} lefthalfshift={true}>
         <div className="p-2">
+          <h1 className="text-2xl font-bold">{title}</h1>
           <ColorPicker
             colors={colorPalette}
             onColorClick={(color) => {
