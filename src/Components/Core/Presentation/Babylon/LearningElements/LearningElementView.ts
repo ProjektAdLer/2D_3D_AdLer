@@ -18,6 +18,9 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import bind from "bind-decorator";
 import LearningElementModelLookup from "src/Components/Core/Domain/LearningElementModels/LearningElementModelLookup";
 import HighlightColors from "../HighlightColors";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 const iconLinks: { [key in LearningElementTypes]?: any } = {
   [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-h5p-interactive-element.glb"),
@@ -26,7 +29,6 @@ const iconLinks: { [key in LearningElementTypes]?: any } = {
   [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-text-papyrus.glb"),
   [LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-image-abstract-painting.glb"),
   [LearningElementTypes.video]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-video-tv.glb"),
-  //[LearningElementTypes.story]: require("../../../../../Assets/3dModels/sharedModels/l-icons-story-1.glb"),
   [LearningElementTypes.adaptivity]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-adaptivity-kite.glb"),
   [LearningElementTypes.notAnElement]: [],
 };
@@ -45,6 +47,7 @@ const checkedIconLinks: { [key in LearningElementTypes]?: any } = {
 
 export default class LearningElementView {
   private scenePresenter: IScenePresenter;
+  private logger: ILoggerPort;
 
   constructor(
     private viewModel: LearningElementViewModel,
@@ -54,11 +57,20 @@ export default class LearningElementView {
       SCENE_TYPES.ScenePresenterFactory,
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
+    this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
-    viewModel.hasScored.subscribe(this.updateHighlight);
-    viewModel.hasScored.subscribe(() => this.loadIconModel());
-    viewModel.isHighlighted.subscribe(this.updateHighlight);
-    viewModel.isInteractable.subscribe(this.updateHighlight);
+    viewModel.hasScored.subscribe(() => {
+      this.updateHighlight();
+      this.loadIconModel();
+    });
+    viewModel.isHighlighted.subscribe((newValue) => {
+      this.updateHighlight();
+      this.toggleIconFloatAnimation(newValue);
+    });
+    viewModel.isInteractable.subscribe((newValue) => {
+      this.updateHighlight();
+      this.toggleIconFloatAnimation(newValue);
+    });
   }
 
   public async setupLearningElement(): Promise<void> {
@@ -88,17 +100,17 @@ export default class LearningElementView {
     // dispose old icon meshes on score change
     if (this.viewModel.iconMeshes && this.viewModel.iconMeshes.length > 0) {
       this.viewModel.iconMeshes.forEach((mesh) => mesh.dispose());
+      this.viewModel.iconFloatingAnimation?.dispose();
     }
 
+    // load model
     const modelLink = this.viewModel.hasScored.Value
       ? checkedIconLinks[this.viewModel.type as LearningElementTypes]!
       : iconLinks[this.viewModel.type as LearningElementTypes]!;
+    const loadingResults = await this.scenePresenter.loadGLTFModel(modelLink);
 
-    this.viewModel.iconMeshes = (await this.scenePresenter.loadModel(
-      modelLink,
-    )) as Mesh[];
-
-    // position and rotate icon
+    // get meshes, position and rotate icon
+    this.viewModel.iconMeshes = loadingResults.meshes as Mesh[];
     this.viewModel.iconMeshes[0].position = this.viewModel.position.add(
       new Vector3(0, this.viewModel.iconYOffset, 0),
     );
@@ -107,6 +119,22 @@ export default class LearningElementView {
       (7 * Math.PI) / 4,
       0,
     );
+
+    // get floating animation, pause if not interactable from the start
+    if (
+      loadingResults.animationGroups.length > 1 ||
+      loadingResults.animationGroups.length === 0
+    ) {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        "Expected exactly one animation group for icon model, but got " +
+          loadingResults.animationGroups.length +
+          " instead. Using first animation group.",
+      );
+    }
+    this.viewModel.iconFloatingAnimation = loadingResults.animationGroups[0];
+    if (!this.viewModel.isInteractable.Value)
+      this.viewModel.iconFloatingAnimation.pause();
   }
 
   private setupInteractions(): void {
@@ -165,5 +193,11 @@ export default class LearningElementView {
       highlightColor = HighlightColors.getNonInteractableColor(highlightColor);
 
     this.changeHighlightColor(highlightColor);
+  }
+
+  @bind private toggleIconFloatAnimation(isInteractable: boolean): void {
+    if (!this.viewModel.iconFloatingAnimation) return;
+    if (isInteractable) this.viewModel.iconFloatingAnimation.restart();
+    else this.viewModel.iconFloatingAnimation.pause();
   }
 }

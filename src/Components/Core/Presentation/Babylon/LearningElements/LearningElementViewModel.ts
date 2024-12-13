@@ -1,5 +1,5 @@
 import { ComponentID } from "../../../Domain/Types/EntityTypes";
-import { Mesh, Vector3 } from "@babylonjs/core";
+import { AnimationGroup, Mesh, Vector3 } from "@babylonjs/core";
 import Observable from "../../../../../Lib/Observable";
 import { LearningElementTypeStrings } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { LearningElementModel } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
@@ -14,6 +14,9 @@ export default class LearningElementViewModel {
   // meshes
   public modelMeshes: Mesh[];
   public iconMeshes: Mesh[];
+
+  // animations
+  public iconFloatingAnimation: AnimationGroup;
 
   // element properties
   public id: ComponentID;
