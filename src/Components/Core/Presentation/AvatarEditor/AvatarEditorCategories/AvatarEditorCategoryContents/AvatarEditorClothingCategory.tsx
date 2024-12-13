@@ -65,6 +65,9 @@ export default function AvatarEditorClothingCategory(
           onClose={() => setShowShirtModal(false)}
           onColorClickFunction={(color) => {
             setShirtColor(color);
+            props.controller.onAvatarConfigChanged({
+              shirtColor: color,
+            });
           }}
         />
       </div>
@@ -94,6 +97,9 @@ export default function AvatarEditorClothingCategory(
           onClose={() => setShowPantsModal(false)}
           onColorClickFunction={(color) => {
             setPantsColor(color);
+            props.controller.onAvatarConfigChanged({
+              pantsColor: color,
+            });
           }}
         />
       </div>
@@ -123,6 +129,9 @@ export default function AvatarEditorClothingCategory(
           onClose={() => setShowShoesModal(false)}
           onColorClickFunction={(color) => {
             setShoesColor(color);
+            props.controller.onAvatarConfigChanged({
+              shoesColor: color,
+            });
           }}
         />
       </div>

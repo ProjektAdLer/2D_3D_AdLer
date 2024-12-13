@@ -1,3 +1,4 @@
+import { AvatarColor } from "../AvatarModels/AvatarColorPalette";
 import {
   AvatarBeardModels,
   AvatarGlassesModels,
@@ -25,7 +26,7 @@ export default class AvatarEntity {
   // Hair
   public hair: AvatarHairModels;
   public beard: AvatarBeardModels;
-  public hairColor: number;
+  public hairColor: AvatarColor;
 
   // Accessories
   public headgear: AvatarHeadgearModels;
@@ -34,14 +35,14 @@ export default class AvatarEntity {
 
   // Clothes
   public shirt: AvatarShirtModels;
-  public shirtColor: number;
+  public shirtColor: AvatarColor;
   public pants: AvatarPantsModels;
-  public pantsColor: number;
+  public pantsColor: AvatarColor;
   public shoes: AvatarShoesModels;
-  public shoesColor: number;
+  public shoesColor: AvatarColor;
 
   // Body
-  public skinColor: number;
+  public skinColor: AvatarColor;
   public roundness: number; // 0-1 morph target weight
   // TODO: add more body features
 }

@@ -96,6 +96,9 @@ export default function AvatarEditorHairCategory(
           onClose={() => setShowModal(false)}
           onColorClickFunction={(color) => {
             setHairColor(color);
+            props.controller.onAvatarConfigChanged({
+              hairColor: color,
+            });
           }}
         />
       </div>

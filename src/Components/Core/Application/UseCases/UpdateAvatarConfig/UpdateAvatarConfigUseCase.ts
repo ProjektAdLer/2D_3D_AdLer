@@ -58,6 +58,11 @@ export default class UpdateAvatarConfigUseCase
       newAvatarConfig,
     );
 
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      `Avatar config updated: ${JSON.stringify(difference)}`,
+    );
+
     this.avatarPort.onAvatarConfigChanged(
       Object.assign({}, userDataEntities[0].avatar), // clone to prevent changes to propagate
       difference as Partial<AvatarConfigTO>,

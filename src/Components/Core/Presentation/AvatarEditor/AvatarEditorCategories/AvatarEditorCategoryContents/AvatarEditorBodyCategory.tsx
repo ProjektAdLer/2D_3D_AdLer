@@ -32,6 +32,9 @@ export default function AvatarEditorBodyCategory(
           onClose={() => setShowModal(false)}
           onColorClickFunction={(color) => {
             setSkinColor(color);
+            props.controller.onAvatarConfigChanged({
+              skinColor: color,
+            });
           }}
         />
       </div>
