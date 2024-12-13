@@ -60,7 +60,7 @@ export default class UpdateAvatarConfigUseCase
 
     this.logger.log(
       LogLevelTypes.TRACE,
-      `Avatar config updated: ${JSON.stringify(difference)}`,
+      `UpdateAvatarConfigUseCase: Avatar config updated. ${JSON.stringify(difference)}`,
     );
 
     this.avatarPort.onAvatarConfigChanged(
