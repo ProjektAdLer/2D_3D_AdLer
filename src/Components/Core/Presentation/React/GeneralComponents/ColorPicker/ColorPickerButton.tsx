@@ -2,6 +2,7 @@ import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { AvatarColor } from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
+import { useTranslation } from "react-i18next";
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   currentColor: AvatarColor;
@@ -12,6 +13,7 @@ export default function ColorPickerButton({
   className,
   currentColor,
 }: AdLerUIComponent<React.DetailedHTMLProps<ButtonProps, HTMLButtonElement>>) {
+  const { t: translate } = useTranslation("avatarEditor");
   return (
     <div className={tailwindMerge(className, "")}>
       <StyledButton onClick={onClick} shape="freeFloatCenter">
@@ -20,7 +22,7 @@ export default function ColorPickerButton({
           className={`border-2 border-black rounded m-2 h-5 w-5`}
           style={{ backgroundColor: currentColor.hexColor }}
         />
-        {currentColor.nameKey}
+        {translate(currentColor.nameKey)}
       </StyledButton>
     </div>
   );

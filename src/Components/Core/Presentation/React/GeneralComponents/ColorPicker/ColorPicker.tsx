@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { AvatarColor } from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
@@ -7,6 +8,7 @@ type Props = {
 };
 
 function ColorButton(props: Readonly<Props>) {
+  const { t: translate } = useTranslation("avatarEditor");
   return (
     <StyledButton
       className="flex m-2 border colorpicker-colors"
@@ -17,6 +19,7 @@ function ColorButton(props: Readonly<Props>) {
       onClick={() => {
         props.onClick(props.color);
       }}
+      title={translate(props.color.nameKey)!}
     ></StyledButton>
   );
 }
