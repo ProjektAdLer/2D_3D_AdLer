@@ -48,7 +48,7 @@ export default function SingleStoryLayout({
           data-testid="close"
         >
           {
-            "Danke und mach's gut!"
+            "Zurück zum Lernraum"
             //translate("closeButton")
           }
         </StyledButton>
