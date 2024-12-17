@@ -107,8 +107,8 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
         controller.showBottomToolTip();
       }}
       smallCloseButton={isPrimitive}
-      hasFooter={true}
-      footer={completionButton()}
+      hasFooter={isPrimitive}
+      footer={isPrimitive ? completionButton() : undefined}
       showModal={isOpen}
       className={tailwindMerge(
         className,
