@@ -9,12 +9,14 @@ import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/Get
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 type WelcomePageButtonProps = {
   backgroundVideo: string;
   historyPath: string;
   label: string;
+  isPlaceholder?: boolean;
 } & AdLerUIComponent;
 
 export default function WelcomePageButton(props: WelcomePageButtonProps) {
@@ -29,6 +31,8 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
     viewModel?.userLoggedIn,
   );
 
+  const translate = useTranslation("start").t;
+
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -40,7 +44,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
       shape="freeFloatCenterNoPadding"
       containerClassName=" h-full portrait:w-1/2 aspect-square"
       onClick={() => history.push(props.historyPath)}
-      disabled={!userLoggedIn}
+      disabled={props.isPlaceholder ?? !userLoggedIn}
       feedback="nothing"
       className={tailwindMerge(
         `relative !px-0 !py-0 flex flex-col items-center justify-end !w-full !h-full col-span-3 col-start-6 bg-cover`,
@@ -48,7 +52,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
         props.className ?? "",
       )}
     >
-      {userLoggedIn ? (
+      {!props.isPlaceholder && userLoggedIn ? (
         <div className="flex justify-center w-full h-full bg-gray-100 align-center opacity-90 hover:opacity-100">
           <video
             ref={videoRef}
@@ -60,7 +64,11 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
           >
             <track kind="captions"></track>
           </video>
-          <p className="absolute p-4 mx-auto font-bold rounded-lg !text-xs lg:text-2xl text-center bg-buttonbgblue lg:bottom-[42%] portrait:bottom-[20%] bottom-32 text-adlerdarkblue ">
+          <p
+            className="absolute p-4 mx-auto font-bold rounded-lg !text-xs lg:text-2xl text-center bg-buttonbgblue lg:bottom-[42%] portrait:bottom-[20%] bottom-32 text-adlerdarkblue "
+            onMouseEnter={() => videoRef.current?.play()}
+            onMouseLeave={() => videoRef.current?.pause()}
+          >
             {props.label}
           </p>
         </div>
@@ -73,6 +81,11 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
           >
             <track kind="captions"></track>
           </video>
+          {(props.isPlaceholder ?? false) && userLoggedIn && (
+            <p className="absolute p-4 mx-auto font-bold rounded-lg !text-xs lg:text-2xl text-center bg-buttonbgblue lg:bottom-[42%] portrait:bottom-[20%] bottom-32 text-adlerdarkblue ">
+              {translate("comingSoon") + props.label}
+            </p>
+          )}
         </div>
       )}
     </StyledButton>
