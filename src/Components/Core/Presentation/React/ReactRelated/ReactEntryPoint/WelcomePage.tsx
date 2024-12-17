@@ -1,6 +1,5 @@
 import LoginComponent from "~ReactComponents/WelcomePage/SignInAndOutComponent/LoginComponent";
 import logo from "../../../../../../Assets/icons/adler-engine.svg";
-import welcomeGraphic from "../../../../../../Assets/graphics/welcome-screen-greeting.png";
 import welcomeVideo from "../../../../../../Assets/graphics/anim-adler-welcome.webm";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
 import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
@@ -54,6 +53,7 @@ export default function WelcomePage() {
           backgroundVideo={avatarEditorButtonBackgroundVideo}
           historyPath="/avatarEditor"
           label={translate("avatarEditorButton")}
+          isPlaceholder={true}
         />
       </section>
 
