@@ -3237,7 +3237,6 @@ The following npm packages may be included in this product:
  - canvas@2.11.2
  - html-parse-stringify@3.0.1
  - https-proxy-agent@5.0.1
- - rfc6902@5.1.1
  - tr46@0.0.3
 
 These packages each contain the following license:
