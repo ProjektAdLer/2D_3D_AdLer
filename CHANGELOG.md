@@ -10,28 +10,43 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- new icons for avatar creator categories and door icons in 2d
-- new 3d icons for doors
-- new 2d & 3d icon for previously known h5p element
+- new icons for avatar creator categories
 - added completion button in modal for h5p elements
 
 ### Changed
 
-- Streamlined various different close buttons across the program with a new icon
-- new header in WelcomePage - now in nice 3D type
-
 ### Removed
 
 ### Fixed
-
-- fixed incorrect display of story element text on space transition
-- incorrect locations on 3d icons
 
 ### Deprecated
 
 ### Security
 
 </details>
+
+## Version 2.6.0 - 17.12.24
+
+### Added
+
+- new icons for door icons in 2d
+- new 3d icons for doors
+- new 2d & 3d icon for previously known h5p element
+- more robust error messaging
+- additional buttons for changing break notification slides
+- adaptivity element legend is minimized after closing the dialog window
+- title tooltips to buttons in space selection
+
+### Changed
+
+- streamlined various different close buttons across the program with a new icon
+- new header in WelcomePage - now in nice 3D type
+
+### Fixed
+
+- fixed incorrect display of story element text on space transition
+- incorrect locations on 3d icons
+- issue where a single reload of the browser page set the application to an invalid state
 
 ## Version 2.5.1 - 20.09.24
 
