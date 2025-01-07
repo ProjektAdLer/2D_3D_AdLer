@@ -53,7 +53,7 @@ export default function WelcomePage() {
           backgroundVideo={avatarEditorButtonBackgroundVideo}
           historyPath="/avatarEditor"
           label={translate("avatarEditorButton")}
-          isPlaceholder={true}
+          isPlaceholder={false}
         />
       </section>
 
