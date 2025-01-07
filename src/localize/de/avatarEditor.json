@@ -3,9 +3,16 @@
   "finishedAvatarEditor": "Avatar-Editor fertig geladen!",
   "enterAvatarEditor": "Weiter zum Avatar-Editor",
 
+  "none": "Auswahl aufheben",
+
   "hairColorTitle": "Haarfarbe",
   "hairstylesTitle": "Frisur",
+  "hairMediumPonytail": "Mittlerer Pferdeschwanz",
+  "hairMediumStraight": "Mittellang glatt",
+
   "beardsTitle": "Bart",
+  "beardMedium": "Mittellang",
+  "beardMustacheHogan": "Hogan",
 
   "eyebrowsTitle": "Augenbrauen",
   "eyesTitle": "Augen",

@@ -13,6 +13,7 @@ export default function Tile(props: TileProps) {
       containerClassName="w-full h-full"
       shape="freeFloatCenter"
       onClick={props.onClick}
+      title={props.title}
     >
       <div className="flex flex-col">
         <img
@@ -20,7 +21,7 @@ export default function Tile(props: TileProps) {
           src={props.image}
           alt={props.title + "Thumbnail"}
         />
-        {props.title && <p onClick={props.onClick}>{props.title}</p>}
+        {/* {props.title && <p onClick={props.onClick}>{props.title}</p>} */}
       </div>
     </StyledButton>
   );
