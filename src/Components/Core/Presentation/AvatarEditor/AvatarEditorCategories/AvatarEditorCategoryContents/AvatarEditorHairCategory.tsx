@@ -13,7 +13,7 @@ import { useState } from "react";
 import ColorPickerButton from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerButton";
 import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerModal";
 
-import noneIcon from "../../../../../../Assets/icons/close.svg";
+import noneIcon from "../../../../../../Assets/avatarEditorThumbnails/none_Thumbnail.svg";
 
 const noneThumbnail = {
   type: AvatarNoneModel.None,
