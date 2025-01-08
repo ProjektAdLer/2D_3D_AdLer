@@ -59,6 +59,7 @@ export default function AvatarEditorHairCategory(
           id: index,
           image: thumbnail.image,
           title: translate(thumbnail.type).toString() ?? "",
+          active: false,
         }))}
         columns={5}
         mobileColumns={3}

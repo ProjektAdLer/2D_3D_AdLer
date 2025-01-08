@@ -5,6 +5,7 @@ export type TileLayoutProps = {
     id: number;
     title?: string;
     image: string;
+    active?: boolean;
   }[];
   columns: number;
   mobileColumns?: number;
@@ -47,6 +48,7 @@ export default function TileGridLayout(props: TileLayoutProps) {
           key={tile.id}
           title={tile.title}
           image={tile.image}
+          active={tile.active}
           onClick={() => props.onTileClick(tile.id)}
         />
       ))}

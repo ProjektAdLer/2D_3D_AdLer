@@ -3,6 +3,7 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 type TileProps = {
   title?: string;
   image: string;
+  active?: boolean;
   onClick: () => void;
 };
 
@@ -14,6 +15,7 @@ export default function Tile(props: TileProps) {
       shape="freeFloatCenter"
       onClick={props.onClick}
       title={props.title}
+      color={props.active ? "active" : "default"}
     >
       <div className="flex flex-col">
         <img
