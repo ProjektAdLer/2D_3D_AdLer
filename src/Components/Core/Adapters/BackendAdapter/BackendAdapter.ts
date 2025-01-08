@@ -228,8 +228,8 @@ export default class BackendAdapter implements IBackendPort {
     return response.data;
   }
 
-  async getAvatarConfig(userToken: string): Promise<string> {
-    const response = await axios.get<string>("/Player/Avatar", {
+  async getAvatarConfig(userToken: string): Promise<AvatarConfigTO> {
+    const response = await axios.get<AvatarConfigTO>("/Player/Avatar", {
       headers: {
         token: userToken,
       },

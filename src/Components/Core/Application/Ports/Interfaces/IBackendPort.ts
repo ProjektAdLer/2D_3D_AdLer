@@ -79,7 +79,7 @@ export default interface IBackendPort {
     worldID,
   }: ElementDataParams): Promise<AdaptivtyElementStatusResponse>;
 
-  getAvatarConfig(userToken: string): Promise<string>;
+  getAvatarConfig(userToken: string): Promise<AvatarConfigTO>;
 
   updateAvatarConfig(
     userToken: string,

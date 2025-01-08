@@ -38,17 +38,6 @@ export default class MockBackendAdapter implements IBackendPort {
     });
   }
 
-  async getAvatarConfig(userToken: string): Promise<string> {
-    return "avatarConfig-Response";
-  }
-
-  async updateAvatarConfig(
-    userToken: string,
-    avatarConfig: AvatarConfigTO,
-  ): Promise<boolean> {
-    return true;
-  }
-
   getWorldStatus(
     userToken: string,
     worldID: ComponentID,
@@ -359,5 +348,38 @@ export default class MockBackendAdapter implements IBackendPort {
       response.elementScore.success = true;
       MockAdaptivityElementStatusResponse.element.success = true;
     }
+  }
+
+  // Avatar Config
+
+  async getAvatarConfig(userToken: string): Promise<AvatarConfigTO> {
+    return Promise.resolve({
+      // Face (all texture indices)
+      eyes: 0,
+      nose: 0,
+      mouth: 0,
+      eyebrows: 0,
+
+      // Hair
+      hair: "hairMediumPonytail",
+      beard: "beardMedium",
+      hairColor: { id: 8, nameKey: "Blue 1", hexColor: "#043675" },
+
+      // Accessories
+
+      // Clothes
+
+      // Body
+      skinColor: { id: 24, nameKey: "Orange 1", hexColor: "#b76000" },
+      roundness: 0.5, // 0-1 morph target weight
+      // TODO: add more body features
+    } as AvatarConfigTO);
+  }
+
+  async updateAvatarConfig(
+    userToken: string,
+    avatarConfig: AvatarConfigTO,
+  ): Promise<boolean> {
+    return true;
   }
 }
