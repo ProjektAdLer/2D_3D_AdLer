@@ -25,6 +25,7 @@ import { LogLevelTypes } from "../../Domain/Types/LogLevelTypes";
 import AdaptivityElementQuestionSubmissionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 import AdaptivityElementQuestionResponse from "./Types/AdaptivityElementQuestionResponse";
 import AdaptivtyElementStatusResponse from "./Types/AdaptivityElementStatusResponse";
+import AvatarConfigTO from "../../Application/DataTransferObjects/AvatarConfigTO";
 
 @injectable()
 export default class BackendAdapter implements IBackendPort {
@@ -224,6 +225,29 @@ export default class BackendAdapter implements IBackendPort {
         },
       },
     );
+    return response.data;
+  }
+
+  async getAvatarConfig(userToken: string): Promise<string> {
+    const response = await axios.get<string>("/Player/Avatar", {
+      headers: {
+        token: userToken,
+      },
+    });
+
+    return response.data;
+  }
+
+  async updateAvatarConfig(
+    userToken: string,
+    avatarConfig: AvatarConfigTO,
+  ): Promise<boolean> {
+    const response = await axios.post<boolean>("/Player/Avatar", avatarConfig, {
+      headers: {
+        token: userToken,
+      },
+    });
+
     return response.data;
   }
 }

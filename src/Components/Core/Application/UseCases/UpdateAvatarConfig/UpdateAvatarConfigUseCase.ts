@@ -10,6 +10,7 @@ import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type ILoadAvatarConfigUseCase from "../LoadAvatarConfig/ILoadAvatarConfigUseCase";
+import type IBackendPort from "../../Ports/Interfaces/IBackendPort";
 
 @injectable()
 export default class UpdateAvatarConfigUseCase
@@ -24,6 +25,8 @@ export default class UpdateAvatarConfigUseCase
     private logger: ILoggerPort,
     @inject(USECASE_TYPES.ILoadAvatarConfigUseCase)
     private loadAvatarUseCase: ILoadAvatarConfigUseCase,
+    @inject(CORE_TYPES.IBackendAdapter)
+    private backend: IBackendPort,
   ) {}
 
   async executeAsync(newAvatarConfig: Partial<AvatarConfigTO>): Promise<void> {
@@ -56,6 +59,12 @@ export default class UpdateAvatarConfigUseCase
     userDataEntities[0].avatar = Object.assign(
       userDataEntities[0].avatar,
       newAvatarConfig,
+    );
+
+    //TODO: Post new (complete) avatar config to backend
+    this.backend.updateAvatarConfig(
+      userDataEntities[0].userToken,
+      userDataEntities[0].avatar,
     );
 
     this.logger.log(

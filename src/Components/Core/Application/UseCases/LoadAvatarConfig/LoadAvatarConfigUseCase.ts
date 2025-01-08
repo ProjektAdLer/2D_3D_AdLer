@@ -37,7 +37,11 @@ export default class LoadAvatarConfigUseCase
     // TODO: actually load avatar config from backend
     if (!userDataEntities[0].avatar) {
       userDataEntities[0].avatar = new AvatarEntity();
-      // let avatarConfig = await this.backend.loadAvatarConfigAsync();
+      let avatarConfig = await this.backend.getAvatarConfig(
+        userDataEntities[0].userToken,
+      );
+
+      console.log(avatarConfig);
     }
 
     this.avatarPort.onAvatarConfigLoaded(
