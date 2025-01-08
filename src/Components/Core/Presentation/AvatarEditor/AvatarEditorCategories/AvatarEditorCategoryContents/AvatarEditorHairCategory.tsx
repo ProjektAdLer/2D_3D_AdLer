@@ -58,7 +58,7 @@ export default function AvatarEditorHairCategory(
         tileContents={hairThumbnails.map((thumbnail, index) => ({
           id: index,
           image: thumbnail.image,
-          title: translate(thumbnail.type) ?? "",
+          title: translate(thumbnail.type).toString() ?? "",
         }))}
         columns={5}
         mobileColumns={3}
@@ -76,7 +76,7 @@ export default function AvatarEditorHairCategory(
         tileContents={beardThumbnails.map((thumbnail, index) => ({
           id: index,
           image: thumbnail.image,
-          title: translate(thumbnail.type) ?? "",
+          title: translate(thumbnail.type).toString() ?? "",
         }))}
         columns={5}
         mobileColumns={3}
