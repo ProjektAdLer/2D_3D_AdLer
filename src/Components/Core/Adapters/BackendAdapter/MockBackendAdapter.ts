@@ -23,6 +23,7 @@ import SmallWorldAWT from "./MockBackendData/SmallWorldAWT";
 import BigWorldAWT from "./MockBackendData/BigWorldAWT";
 import NewWorldAWT from "./MockBackendData/NewWorldAWT";
 import AWT from "./Types/AWT";
+import AvatarConfigTO from "../../Application/DataTransferObjects/AvatarConfigTO";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendPort {
@@ -35,6 +36,17 @@ export default class MockBackendAdapter implements IBackendPort {
       elementID,
       success: true,
     });
+  }
+
+  async getAvatarConfig(userToken: string): Promise<string> {
+    return "avatarConfig-Response";
+  }
+
+  async updateAvatarConfig(
+    userToken: string,
+    avatarConfig: AvatarConfigTO,
+  ): Promise<boolean> {
+    return true;
   }
 
   getWorldStatus(
