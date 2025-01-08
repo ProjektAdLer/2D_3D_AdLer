@@ -32,6 +32,7 @@ export default function AvatarEditorCategoryTabButton(
     <StyledButton
       data-testid={`avatar-editor-category-tab-${props.category}`}
       className={`${props.active ? "!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent " : ""}`}
+      color={props.active ? "active" : "default"}
       onClick={props.onClick}
       icon={AvatarEditorCategoryIcons[props.category]}
     ></StyledButton>

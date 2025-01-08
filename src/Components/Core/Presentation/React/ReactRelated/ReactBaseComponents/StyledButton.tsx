@@ -8,6 +8,7 @@ export type StyledButtonColor =
   | "pressed"
   | "locked"
   | "highlight"
+  | "active"
   | "nothing";
 export type StyledButtonShape =
   | "square"
@@ -45,6 +46,7 @@ export default function StyledButton({
     locked: "bg-adlerbuttonlocked",
     highlight:
       "bg-adlerdarkblue text-buttonbgblue hover:text-adlerdarkblue border-buttonbgblue",
+    active: "bg-adleryellow",
     nothing: "",
 
     // Shapes
