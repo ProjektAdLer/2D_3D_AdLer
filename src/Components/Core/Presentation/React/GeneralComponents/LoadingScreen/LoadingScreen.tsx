@@ -53,8 +53,6 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
     }
   }, [externalLoadText]);
 
-  console.log("open?: ", isOpen);
-
   if (!viewModel || !controller || !isOpen) return null;
 
   return (

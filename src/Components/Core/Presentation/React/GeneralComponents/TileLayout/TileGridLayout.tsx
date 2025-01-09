@@ -31,9 +31,6 @@ export default function TileGridLayout(props: TileLayoutProps) {
   const mobileColumns = `grid-cols-${props.mobileColumns ?? props.columns}`;
   const desktopColumns = `grid-cols-${props.columns}`;
 
-  console.log(validClasses.includes(mobileColumns));
-  console.log(validClasses.includes(desktopColumns));
-
   return (
     // weird class names are for ensuring that no classes are purged by tailwind
     <div
