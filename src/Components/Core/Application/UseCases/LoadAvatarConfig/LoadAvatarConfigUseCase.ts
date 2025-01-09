@@ -24,6 +24,7 @@ export default class LoadAvatarConfigUseCase
   ) {}
 
   async executeAsync(): Promise<void> {
+    console.log("LoadAvatarConfigUseCase.executeAsync");
     let userDataEntities =
       this.entityContainer.getEntitiesOfType(UserDataEntity);
     if (userDataEntities.length === 0) {
@@ -34,18 +35,15 @@ export default class LoadAvatarConfigUseCase
       return;
     }
 
-    // TODO: actually load avatar config from backend
+    let avatarConfig = userDataEntities[0].avatar;
+    // load avatar config from backend
     if (!userDataEntities[0].avatar) {
       userDataEntities[0].avatar = new AvatarEntity();
-      let avatarConfig = await this.backend.getAvatarConfig(
+      avatarConfig = await this.backend.getAvatarConfig(
         userDataEntities[0].userToken,
       );
-
-      console.log(avatarConfig);
     }
-
-    this.avatarPort.onAvatarConfigLoaded(
-      Object.assign({}, userDataEntities[0].avatar),
-    );
+    console.log("LoadAvatar:", avatarConfig);
+    this.avatarPort.onAvatarConfigLoaded(Object.assign({}, avatarConfig));
   }
 }

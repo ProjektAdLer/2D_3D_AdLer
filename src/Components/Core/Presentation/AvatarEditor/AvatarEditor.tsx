@@ -2,7 +2,7 @@ import IAvatarEditorController from "./IAvatarEditorController";
 import AvatarEditorViewModel from "./AvatarEditorViewModel";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBar";
 import AvatarEditorCategoryTabButton from "./AvatarEditorCategories/AvatarEditorCategoryTabButton";
 import {
@@ -17,6 +17,9 @@ import AvatarEditorPreview from "./AvatarEditorPreview/AvatarEditorPreview";
 import AvatarEditorBodyCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorBodyCategory";
 import LoadingScreen from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreen";
 import LoadingScreenHomePageInformation from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreenContent/LoadingScreenHomePageInformation";
+import { useInjection } from "inversify-react";
+import ILoadAvatarConfigUseCase from "../../Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 export default function AvatarEditor() {
   const [viewModel, controller] = useBuilder<
@@ -27,6 +30,15 @@ export default function AvatarEditor() {
   const [activeTab, setActiveTab] = useState<AvatarEditorCategory>(
     OAvatarEditorCategory.HAIR,
   );
+  const loadAvatarConfigUseCase = useInjection<ILoadAvatarConfigUseCase>(
+    USECASE_TYPES.ILoadAvatarConfigUseCase,
+  );
+
+  useEffect(() => {
+    if (!controller) return;
+    loadAvatarConfigUseCase.executeAsync();
+    console.log("AvatarEditor loaded");
+  }, [controller]);
 
   if (!viewModel || !controller) return null;
 
