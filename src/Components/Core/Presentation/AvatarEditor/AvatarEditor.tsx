@@ -38,7 +38,7 @@ export default function AvatarEditor() {
     if (!controller) return;
     loadAvatarConfigUseCase.executeAsync();
     console.log("AvatarEditor loaded");
-  }, [controller]);
+  }, [controller, loadAvatarConfigUseCase]);
 
   if (!viewModel || !controller) return null;
 
