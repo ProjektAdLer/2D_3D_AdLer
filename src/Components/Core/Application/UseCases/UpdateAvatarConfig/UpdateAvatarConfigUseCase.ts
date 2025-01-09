@@ -61,7 +61,7 @@ export default class UpdateAvatarConfigUseCase
       newAvatarConfig,
     );
 
-    //TODO: Post new (complete) avatar config to backend
+    //Post new (complete) avatar config to backend
     this.backend.updateAvatarConfig(
       userDataEntities[0].userToken,
       userDataEntities[0].avatar,
