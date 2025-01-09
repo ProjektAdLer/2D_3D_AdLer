@@ -10,10 +10,12 @@ import { mock } from "jest-mock-extended";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 import IAvatarPort from "../../../../Core/Application/Ports/Interfaces/IAvatarPort";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
 
 const entityContainerMock = mock<IEntityContainer>();
 const loggerMock = mock<ILoggerPort>();
 const avatarPortMock = mock<IAvatarPort>();
+const backendAdapterMock = mock<IBackendPort>();
 
 describe("UpdateAvatarConfigUseCase", () => {
   let systemUnderTest: UpdateAvatarConfigUseCase;
@@ -26,6 +28,9 @@ describe("UpdateAvatarConfigUseCase", () => {
     CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
     CoreDIContainer.rebind(PORT_TYPES.IAvatarPort).toConstantValue(
       avatarPortMock,
+    );
+    CoreDIContainer.rebind(CORE_TYPES.IBackendAdapter).toConstantValue(
+      backendAdapterMock,
     );
   });
 
