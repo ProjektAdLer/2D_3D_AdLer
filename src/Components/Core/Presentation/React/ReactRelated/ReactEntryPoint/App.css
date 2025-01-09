@@ -229,3 +229,22 @@ input::-webkit-inner-spin-button {
 .scrollGutter {
   scrollbar-gutter: stable;
 }
+
+.accordion {
+  transition: all 1s;
+}
+
+.accordionOpening {
+  transition: all 0.25s;
+  position: relative;
+  visibility: visible;
+  opacity: 1;
+  height: 1;
+}
+
+.accordionCollapsing {
+  position: relative;
+  opacity: 0;
+  height: 0;
+  transform: scale(0%);
+}

@@ -10,7 +10,6 @@ import {
   OAvatarEditorCategory,
 } from "./AvatarEditorCategories/AvatarEditorCategories";
 import AvatarEditorHairCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorHairCategory";
-import AvatarEditorFaceCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorFaceCategory";
 import AvatarEditorAccessoireCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorAccessoireCategory";
 import AvatarEditorClothingCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorClothingCategory";
 import AvatarEditorPreview from "./AvatarEditorPreview/AvatarEditorPreview";
@@ -20,6 +19,7 @@ import LoadingScreenHomePageInformation from "~ReactComponents/GeneralComponents
 import { useInjection } from "inversify-react";
 import ILoadAvatarConfigUseCase from "../../Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import AvatarEditorFaceCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorFaceCategory";
 
 export default function AvatarEditor() {
   const [viewModel, controller] = useBuilder<
@@ -50,7 +50,6 @@ export default function AvatarEditor() {
       />
       <div className="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg">
         {/* Categories (Left Side) */}
-
         <div className="flex flex-col portrait:order-2">
           {/* Category Tabs */}
           {/* Category Header */}
@@ -82,19 +81,34 @@ export default function AvatarEditor() {
           {/* Category Contents */}
           <div className="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto">
             {activeTab === OAvatarEditorCategory.HAIR && (
-              <AvatarEditorHairCategory controller={controller} />
+              <AvatarEditorHairCategory
+                controller={controller}
+                viewModel={viewModel}
+              />
             )}
             {activeTab === OAvatarEditorCategory.FACE && (
-              <AvatarEditorFaceCategory controller={controller} />
+              <AvatarEditorFaceCategory
+                controller={controller}
+                viewModel={viewModel}
+              />
             )}
             {activeTab === OAvatarEditorCategory.ACCESSOIRE && (
-              <AvatarEditorAccessoireCategory controller={controller} />
+              <AvatarEditorAccessoireCategory
+                controller={controller}
+                viewModel={viewModel}
+              />
             )}
             {activeTab === OAvatarEditorCategory.CLOTHING && (
-              <AvatarEditorClothingCategory controller={controller} />
+              <AvatarEditorClothingCategory
+                controller={controller}
+                viewModel={viewModel}
+              />
             )}
             {activeTab === OAvatarEditorCategory.BODY && (
-              <AvatarEditorBodyCategory controller={controller} />
+              <AvatarEditorBodyCategory
+                controller={controller}
+                viewModel={viewModel}
+              />
             )}
           </div>
         </div>

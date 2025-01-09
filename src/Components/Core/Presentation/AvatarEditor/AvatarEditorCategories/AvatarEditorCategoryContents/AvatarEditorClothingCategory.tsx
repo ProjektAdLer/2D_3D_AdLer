@@ -5,6 +5,7 @@ import AvatarColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarCo
 import ColorPickerButton from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerButton";
 import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerModal";
 import { useState } from "react";
+import AccordionElement from "~ReactComponents/GeneralComponents/Accordion/AccordionElement";
 
 const shirtsThumbnails = require.context(
   "../../../../../../Assets/avatarEditorThumbnails/clothing/shirts",
@@ -38,103 +39,128 @@ export default function AvatarEditorClothingCategory(
   const [pantsColor, setPantsColor] = useState(AvatarColorPalette[0]);
   const [shoesColor, setShoesColor] = useState(AvatarColorPalette[0]);
 
+  const TileGridShirts = () => {
+    return (
+      <>
+        <TileGridLayout
+          tileContents={shirtThumbnailsList.map((image, index) => ({
+            id: index,
+            image,
+          }))}
+          columns={5}
+          mobileColumns={3}
+          onTileClick={(id) => {
+            console.log(id);
+          }}
+        />
+        <div className="w-full p-2 m-2">
+          <ColorPickerButton
+            currentColor={shirtColor}
+            onClick={() => setShowShirtModal(true)}
+          />
+          <ColorPickerModal
+            title={translate("shirtsColorTitle")}
+            showModal={showShirtModal}
+            onClose={() => setShowShirtModal(false)}
+            onColorClickFunction={(color) => {
+              setShirtColor(color);
+              props.controller.onAvatarConfigChanged({
+                shirtColor: color,
+              });
+            }}
+          />
+        </div>
+      </>
+    );
+  };
+
+  const TileGridPants = () => {
+    return (
+      <>
+        <TileGridLayout
+          tileContents={pantsThumbnailsList.map((image, index) => ({
+            id: index,
+            image,
+          }))}
+          columns={5}
+          mobileColumns={3}
+          onTileClick={(id) => {
+            console.log(id);
+          }}
+        />
+        <div className="w-full p-2 m-2">
+          <ColorPickerButton
+            currentColor={pantsColor}
+            onClick={() => setShowPantsModal(true)}
+          />
+          <ColorPickerModal
+            title={translate("pantsColorTitle")}
+            showModal={showPantsModal}
+            onClose={() => setShowPantsModal(false)}
+            onColorClickFunction={(color) => {
+              setPantsColor(color);
+              props.controller.onAvatarConfigChanged({
+                pantsColor: color,
+              });
+            }}
+          />
+        </div>
+      </>
+    );
+  };
+
+  const TileGridShoes = () => {
+    return (
+      <>
+        <TileGridLayout
+          tileContents={shoesThumbnailsList.map((image, index) => ({
+            id: index,
+            image,
+          }))}
+          columns={5}
+          mobileColumns={3}
+          onTileClick={(id) => {
+            console.log(id);
+          }}
+        />
+        <div className="w-full p-2 m-2">
+          <ColorPickerButton
+            currentColor={shoesColor}
+            onClick={() => setShowShoesModal(true)}
+          />
+          <ColorPickerModal
+            title={translate("shoesColorTitle")}
+            showModal={showShoesModal}
+            onClose={() => setShowShoesModal(false)}
+            onColorClickFunction={(color) => {
+              setShoesColor(color);
+              props.controller.onAvatarConfigChanged({
+                shoesColor: color,
+              });
+            }}
+          />
+        </div>
+      </>
+    );
+  };
+
   return (
     <div className="flex flex-col">
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("shirtsTitle")}</h1>
-      </div>
-      <TileGridLayout
-        tileContents={shirtThumbnailsList.map((image, index) => ({
-          id: index,
-          image,
-        }))}
-        columns={5}
-        mobileColumns={3}
-        onTileClick={(id) => {
-          console.log(id);
-        }}
+      <AccordionElement
+        header={translate("shirtsTitle").toString()}
+        isOpen={props.viewModel.clothingMenuVisibility.shirts}
+        content={TileGridShirts()}
       />
-      <div className="w-full p-2 m-2">
-        <ColorPickerButton
-          currentColor={shirtColor}
-          onClick={() => setShowShirtModal(true)}
-        />
-        <ColorPickerModal
-          title={translate("shirtsColorTitle")}
-          showModal={showShirtModal}
-          onClose={() => setShowShirtModal(false)}
-          onColorClickFunction={(color) => {
-            setShirtColor(color);
-            props.controller.onAvatarConfigChanged({
-              shirtColor: color,
-            });
-          }}
-        />
-      </div>
-
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("pantsTitle")}</h1>
-      </div>
-      <TileGridLayout
-        tileContents={pantsThumbnailsList.map((image, index) => ({
-          id: index,
-          image,
-        }))}
-        columns={5}
-        mobileColumns={3}
-        onTileClick={(id) => {
-          console.log(id);
-        }}
+      <AccordionElement
+        header={translate("pantsTitle").toString()}
+        isOpen={props.viewModel.clothingMenuVisibility.pants}
+        content={TileGridPants()}
       />
-      <div className="w-full p-2 m-2">
-        <ColorPickerButton
-          currentColor={pantsColor}
-          onClick={() => setShowPantsModal(true)}
-        />
-        <ColorPickerModal
-          title={translate("pantsColorTitle")}
-          showModal={showPantsModal}
-          onClose={() => setShowPantsModal(false)}
-          onColorClickFunction={(color) => {
-            setPantsColor(color);
-            props.controller.onAvatarConfigChanged({
-              pantsColor: color,
-            });
-          }}
-        />
-      </div>
-
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("shoesTitle")}</h1>
-      </div>
-      <TileGridLayout
-        tileContents={shoesThumbnailsList.map((image, index) => ({
-          id: index,
-          image,
-        }))}
-        columns={5}
-        mobileColumns={3}
-        onTileClick={(id) => {
-          console.log(id);
-        }}
+      <AccordionElement
+        header={translate("shoesTitle").toString()}
+        isOpen={props.viewModel.clothingMenuVisibility.shoes}
+        content={TileGridShoes()}
       />
-      <div className="w-full p-2 m-2">
-        <ColorPickerButton
-          currentColor={shoesColor}
-          onClick={() => setShowShoesModal(true)}
-        />
-        <ColorPickerModal
-          title={translate("shoesColorTitle")}
-          showModal={showShoesModal}
-          onClose={() => setShowShoesModal(false)}
-          onColorClickFunction={(color) => {
-            setShoesColor(color);
-            props.controller.onAvatarConfigChanged({
-              shoesColor: color,
-            });
-          }}
-        />
-      </div>
     </div>
   );
 }

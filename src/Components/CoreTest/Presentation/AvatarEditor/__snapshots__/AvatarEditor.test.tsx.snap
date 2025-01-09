@@ -154,6 +154,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
         >
           <mockedavatareditorhaircategory
             controller="undefined"
+            viewmodel="[object Object]"
           />
         </div>
       </div>
@@ -323,6 +324,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
         >
           <mockedavatareditorfacecategory
             controller="undefined"
+            viewmodel="[object Object]"
           />
         </div>
       </div>
@@ -492,6 +494,7 @@ exports[`AvatarEditor should renders 1`] = `
         >
           <mockedavatareditorhaircategory
             controller="undefined"
+            viewmodel="[object Object]"
           />
         </div>
       </div>

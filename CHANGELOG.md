@@ -14,6 +14,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - added completion button in modal for h5p elements
 - added translated tooltips on avatarEditor thumbnails
 - added button to remove selection in avatarEditor
+- added accordion menu to avatar editor
 
 ### Changed
 

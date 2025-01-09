@@ -14,6 +14,7 @@ import ColorPickerButton from "~ReactComponents/GeneralComponents/ColorPicker/Co
 import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerModal";
 
 import noneIcon from "../../../../../../Assets/avatarEditorThumbnails/none_Thumbnail.svg";
+import AccordionElement from "~ReactComponents/GeneralComponents/Accordion/AccordionElement";
 
 const noneThumbnail = {
   type: AvatarNoneModel.None,
@@ -49,11 +50,8 @@ export default function AvatarEditorHairCategory(
   const [showModal, setShowModal] = useState(false);
   const [hairColor, setHairColor] = useState(AvatarColorPalette[0]);
 
-  return (
-    <div className="flex flex-col">
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("hairstylesTitle")}</h1>
-      </div>
+  const TileGridHairStyles = () => {
+    return (
       <TileGridLayout
         tileContents={hairThumbnails.map((thumbnail, index) => ({
           id: index,
@@ -69,10 +67,11 @@ export default function AvatarEditorHairCategory(
           });
         }}
       />
+    );
+  };
 
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("beardsTitle")}</h1>
-      </div>
+  const TileGridBeards = () => {
+    return (
       <TileGridLayout
         tileContents={beardThumbnails.map((thumbnail, index) => ({
           id: index,
@@ -86,6 +85,21 @@ export default function AvatarEditorHairCategory(
             beard: beardThumbnails[id].type,
           });
         }}
+      />
+    );
+  };
+
+  return (
+    <div className="flex flex-col">
+      <AccordionElement
+        header={translate("hairstylesTitle").toString()}
+        isOpen={props.viewModel.hairMenuVisibility.hairstyles}
+        content={TileGridHairStyles()}
+      />
+      <AccordionElement
+        header={translate("beardsTitle").toString()}
+        isOpen={props.viewModel.hairMenuVisibility.beards}
+        content={TileGridBeards()}
       />
       <div className="w-full p-2 m-2">
         <ColorPickerButton

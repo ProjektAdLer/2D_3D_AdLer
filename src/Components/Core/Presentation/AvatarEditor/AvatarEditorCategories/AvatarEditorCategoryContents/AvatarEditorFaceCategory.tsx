@@ -1,6 +1,7 @@
 import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps";
 import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGridLayout";
 import { useTranslation } from "react-i18next";
+import AccordionElement from "~ReactComponents/GeneralComponents/Accordion/AccordionElement";
 
 const eyebrowsThumbnails = require.context(
   "../../../../../../Assets/avatarEditorThumbnails/face/eyebrows",
@@ -35,11 +36,8 @@ export default function AvatarEditorFaceCategory(
 ) {
   const { t: translate } = useTranslation("avatarEditor");
 
-  return (
-    <div className="flex flex-col">
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("eyebrowsTitle")}</h1>
-      </div>
+  const TileGridEyebrows = () => {
+    return (
       <TileGridLayout
         tileContents={eyebrowsThumbnailsList.map((image, index) => ({
           id: index,
@@ -51,24 +49,27 @@ export default function AvatarEditorFaceCategory(
           console.log(id);
         }}
       />
+    );
+  };
 
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("eyesTitle")}</h1>
-      </div>
+  const TileGridEyes = () => {
+    return (
       <TileGridLayout
         tileContents={eyesThumbnailsList.map((image, index) => ({
           id: index,
           image,
         }))}
-        columns={4}
+        columns={5}
         mobileColumns={3}
         onTileClick={(id) => {
           console.log(id);
         }}
       />
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("noseTitle")}</h1>
-      </div>
+    );
+  };
+
+  const TileGridNoses = () => {
+    return (
       <TileGridLayout
         tileContents={noseThumbnailsList.map((image, index) => ({
           id: index,
@@ -80,9 +81,11 @@ export default function AvatarEditorFaceCategory(
           console.log(id);
         }}
       />
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("mouthTitle")}</h1>
-      </div>
+    );
+  };
+
+  const TielGridMouths = () => {
+    return (
       <TileGridLayout
         tileContents={mouthThumbnailsList.map((image, index) => ({
           id: index,
@@ -93,6 +96,31 @@ export default function AvatarEditorFaceCategory(
         onTileClick={(id) => {
           console.log(id);
         }}
+      />
+    );
+  };
+
+  return (
+    <div className="flex flex-col overflow-y-hidden">
+      <AccordionElement
+        header={translate("eyebrowsTitle").toString()}
+        isOpen={props.viewModel.faceMenuVisibility.eyebrows}
+        content={TileGridEyebrows()}
+      />
+      <AccordionElement
+        header={translate("eyesTitle").toString()}
+        isOpen={props.viewModel.faceMenuVisibility.eyes}
+        content={TileGridEyes()}
+      />
+      <AccordionElement
+        header={translate("noseTitle").toString()}
+        isOpen={props.viewModel.faceMenuVisibility.noses}
+        content={TileGridNoses()}
+      />
+      <AccordionElement
+        header={translate("mouthTitle").toString()}
+        isOpen={props.viewModel.faceMenuVisibility.mouths}
+        content={TielGridMouths()}
       />
     </div>
   );

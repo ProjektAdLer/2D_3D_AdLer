@@ -1,6 +1,7 @@
 import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps";
 import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGridLayout";
 import { useTranslation } from "react-i18next";
+import AccordionElement from "~ReactComponents/GeneralComponents/Accordion/AccordionElement";
 
 const headgearThumbnails = require.context(
   "../../../../../../Assets/avatarEditorThumbnails/accessoires/headgear",
@@ -35,11 +36,8 @@ export default function AvatarEditorAccessoireCategory(
 ) {
   const { t: translate } = useTranslation("avatarEditor");
 
-  return (
-    <div className="flex flex-col">
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("headgearTitle")}</h1>
-      </div>
+  const TileGridHeadGear = () => {
+    return (
       <TileGridLayout
         tileContents={headgearThumbnailsList.map((image, index) => ({
           id: index,
@@ -51,10 +49,11 @@ export default function AvatarEditorAccessoireCategory(
           console.log(id);
         }}
       />
+    );
+  };
 
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("glassesTitle")}</h1>
-      </div>
+  const TileGridGlasses = () => {
+    return (
       <TileGridLayout
         tileContents={glassesThumbnailsList.map((image, index) => ({
           id: index,
@@ -66,9 +65,11 @@ export default function AvatarEditorAccessoireCategory(
           console.log(id);
         }}
       />
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("backpackTitle")}</h1>
-      </div>
+    );
+  };
+
+  const TileGridBackpacks = () => {
+    return (
       <TileGridLayout
         tileContents={backpackThumbnailsList.map((image, index) => ({
           id: index,
@@ -80,9 +81,11 @@ export default function AvatarEditorAccessoireCategory(
           console.log(id);
         }}
       />
-      <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">{translate("otherTitle")}</h1>
-      </div>
+    );
+  };
+
+  const TileGridOthers = () => {
+    return (
       <TileGridLayout
         tileContents={otherThumbnailsList.map((image, index) => ({
           id: index,
@@ -93,6 +96,31 @@ export default function AvatarEditorAccessoireCategory(
         onTileClick={(id) => {
           console.log(id);
         }}
+      />
+    );
+  };
+
+  return (
+    <div className="flex flex-col">
+      <AccordionElement
+        header={translate("headgearTitle").toString()}
+        isOpen={props.viewModel.accessoireMenuVisibility.headGear}
+        content={TileGridHeadGear()}
+      />
+      <AccordionElement
+        header={translate("glassesTitle").toString()}
+        isOpen={props.viewModel.accessoireMenuVisibility.glasses}
+        content={TileGridGlasses()}
+      />
+      <AccordionElement
+        header={translate("backpackTitle").toString()}
+        isOpen={props.viewModel.accessoireMenuVisibility.backpack}
+        content={TileGridBackpacks()}
+      />
+      <AccordionElement
+        header={translate("otherTitle").toString()}
+        isOpen={props.viewModel.accessoireMenuVisibility.other}
+        content={TileGridOthers()}
       />
     </div>
   );
