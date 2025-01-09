@@ -15,6 +15,7 @@ export default class AvatarPort
 
   onAvatarConfigLoaded(avatarConfig: AvatarConfigTO): void {
     this.mappedAdapters.forEach((adapters) => {
+      console.log("AvatarPort.onAvatarConfigLoaded", adapters);
       adapters.forEach((adapter) => {
         if (adapter.onAvatarConfigLoaded)
           adapter.onAvatarConfigLoaded(avatarConfig);
