@@ -5,6 +5,10 @@ import IAvatarEditorController from "./IAvatarEditorController";
 import IAvatarEditorPresenter from "./IAvatarEditorPresenter";
 import AvatarEditorViewModel from "./AvatarEditorViewModel";
 import PresentationBuilder from "../PresentationBuilder/PresentationBuilder";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import IAvatarPort from "../../Application/Ports/Interfaces/IAvatarPort";
 
 @injectable()
 export default class AvatarEditorBuilder extends PresentationBuilder<
@@ -19,6 +23,14 @@ export default class AvatarEditorBuilder extends PresentationBuilder<
       AvatarEditorController,
       undefined,
       AvatarEditorPresenter,
+    );
+  }
+
+  override buildPresenter(): void {
+    super.buildPresenter();
+    CoreDIContainer.get<IAvatarPort>(PORT_TYPES.IAvatarPort).registerAdapter(
+      this.presenter!,
+      HistoryWrapper.currentLocationScope(),
     );
   }
 }
