@@ -104,22 +104,22 @@ export default function AvatarEditorFaceCategory(
     <div className="flex flex-col overflow-y-hidden">
       <AccordionElement
         header={translate("eyebrowsTitle").toString()}
-        isOpen={props.viewModel.faceMenuVisibility.eyebrows}
+        isOpen={props.viewModel.uiVisiblity.faceMenu.eyebrows}
         content={TileGridEyebrows()}
       />
       <AccordionElement
         header={translate("eyesTitle").toString()}
-        isOpen={props.viewModel.faceMenuVisibility.eyes}
+        isOpen={props.viewModel.uiVisiblity.faceMenu.eyes}
         content={TileGridEyes()}
       />
       <AccordionElement
         header={translate("noseTitle").toString()}
-        isOpen={props.viewModel.faceMenuVisibility.noses}
+        isOpen={props.viewModel.uiVisiblity.faceMenu.noses}
         content={TileGridNoses()}
       />
       <AccordionElement
         header={translate("mouthTitle").toString()}
-        isOpen={props.viewModel.faceMenuVisibility.mouths}
+        isOpen={props.viewModel.uiVisiblity.faceMenu.mouths}
         content={TielGridMouths()}
       />
     </div>

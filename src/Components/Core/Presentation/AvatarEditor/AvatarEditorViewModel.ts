@@ -42,29 +42,28 @@ export default class AvatarEditorViewModel {
   // UI Component Visibility
   // --------------------------------------------------------------
 
-  hairMenuVisibility: AvatarConfigHairIconVisibility = {
-    hairstyles: new Observable<boolean>(false),
-    beards: new Observable<boolean>(false),
-  };
-
-  faceMenuVisibility: AvatarConfigFaceIconVisibility = {
-    eyebrows: new Observable<boolean>(false),
-    eyes: new Observable<boolean>(false),
-    noses: new Observable<boolean>(false),
-    mouths: new Observable<boolean>(false),
-  } as AvatarConfigFaceIconVisibility;
-
-  accessoireMenuVisibility: AvatarConfigAccessoireIconVisibility = {
-    headGear: new Observable<boolean>(false),
-    glasses: new Observable<boolean>(false),
-    backpack: new Observable<boolean>(false),
-    other: new Observable<boolean>(false),
-  };
-
-  clothingMenuVisibility: AvatarConfigClothingIconVisibility = {
-    shirts: new Observable<boolean>(false),
-    pants: new Observable<boolean>(false),
-    shoes: new Observable<boolean>(false),
+  uiVisiblity: AvatarEditorUI = {
+    hairMenu: {
+      hairstyles: new Observable<boolean>(false),
+      beards: new Observable<boolean>(false),
+    },
+    faceMenu: {
+      eyebrows: new Observable<boolean>(false),
+      eyes: new Observable<boolean>(false),
+      noses: new Observable<boolean>(false),
+      mouths: new Observable<boolean>(false),
+    },
+    accessoireMenu: {
+      headGear: new Observable<boolean>(false),
+      glasses: new Observable<boolean>(false),
+      backpack: new Observable<boolean>(false),
+      other: new Observable<boolean>(false),
+    },
+    clothingMenu: {
+      shirts: new Observable<boolean>(false),
+      pants: new Observable<boolean>(false),
+      shoes: new Observable<boolean>(false),
+    },
   };
 }
 
@@ -91,4 +90,11 @@ export interface AvatarConfigClothingIconVisibility {
   shirts: Observable<boolean>;
   pants: Observable<boolean>;
   shoes: Observable<boolean>;
+}
+
+export interface AvatarEditorUI {
+  hairMenu: AvatarConfigHairIconVisibility;
+  faceMenu: AvatarConfigFaceIconVisibility;
+  accessoireMenu: AvatarConfigAccessoireIconVisibility;
+  clothingMenu: AvatarConfigClothingIconVisibility;
 }

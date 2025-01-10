@@ -104,22 +104,22 @@ export default function AvatarEditorAccessoireCategory(
     <div className="flex flex-col">
       <AccordionElement
         header={translate("headgearTitle").toString()}
-        isOpen={props.viewModel.accessoireMenuVisibility.headGear}
+        isOpen={props.viewModel.uiVisiblity.accessoireMenu.headGear}
         content={TileGridHeadGear()}
       />
       <AccordionElement
         header={translate("glassesTitle").toString()}
-        isOpen={props.viewModel.accessoireMenuVisibility.glasses}
+        isOpen={props.viewModel.uiVisiblity.accessoireMenu.glasses}
         content={TileGridGlasses()}
       />
       <AccordionElement
         header={translate("backpackTitle").toString()}
-        isOpen={props.viewModel.accessoireMenuVisibility.backpack}
+        isOpen={props.viewModel.uiVisiblity.accessoireMenu.backpack}
         content={TileGridBackpacks()}
       />
       <AccordionElement
         header={translate("otherTitle").toString()}
-        isOpen={props.viewModel.accessoireMenuVisibility.other}
+        isOpen={props.viewModel.uiVisiblity.accessoireMenu.other}
         content={TileGridOthers()}
       />
     </div>

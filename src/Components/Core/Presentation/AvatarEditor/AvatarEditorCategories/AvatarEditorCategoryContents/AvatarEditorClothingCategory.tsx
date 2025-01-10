@@ -148,17 +148,17 @@ export default function AvatarEditorClothingCategory(
     <div className="flex flex-col">
       <AccordionElement
         header={translate("shirtsTitle").toString()}
-        isOpen={props.viewModel.clothingMenuVisibility.shirts}
+        isOpen={props.viewModel.uiVisiblity.clothingMenu.shirts}
         content={TileGridShirts()}
       />
       <AccordionElement
         header={translate("pantsTitle").toString()}
-        isOpen={props.viewModel.clothingMenuVisibility.pants}
+        isOpen={props.viewModel.uiVisiblity.clothingMenu.pants}
         content={TileGridPants()}
       />
       <AccordionElement
         header={translate("shoesTitle").toString()}
-        isOpen={props.viewModel.clothingMenuVisibility.shoes}
+        isOpen={props.viewModel.uiVisiblity.clothingMenu.shoes}
         content={TileGridShoes()}
       />
     </div>

@@ -93,12 +93,12 @@ export default function AvatarEditorHairCategory(
     <div className="flex flex-col">
       <AccordionElement
         header={translate("hairstylesTitle").toString()}
-        isOpen={props.viewModel.hairMenuVisibility.hairstyles}
+        isOpen={props.viewModel.uiVisiblity.hairMenu.hairstyles}
         content={TileGridHairStyles()}
       />
       <AccordionElement
         header={translate("beardsTitle").toString()}
-        isOpen={props.viewModel.hairMenuVisibility.beards}
+        isOpen={props.viewModel.uiVisiblity.hairMenu.beards}
         content={TileGridBeards()}
       />
       <div className="w-full p-2 m-2">
