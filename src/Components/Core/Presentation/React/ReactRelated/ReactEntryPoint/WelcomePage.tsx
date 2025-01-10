@@ -24,7 +24,7 @@ export default function WelcomePage() {
       <HelpDeskModal />
 
       <section className="flex flex-col items-center portrait:row-start-1 portrait:row-span-1 portrait:col-start-2 portrait:col-span-6 landscape:col-span-6 landscape:col-start-2 landscape:row-start-1 text-adlerdarkblue lg:landscape:col-span-7 lg:landscape:col-start-1 xl:landscape:col-start-2 xl:landscape:col-span-6 lg:landscape:row-start-1">
-        <h1 className="landscape:hidden  p-2 text-xl font-extrabold text-center justify-self-center portrait:text-xl lg:text-4xl 2xl:text-8xl">
+        <h1 className="p-2 text-xl font-extrabold text-center landscape:hidden justify-self-center portrait:text-xl lg:text-4xl 2xl:text-8xl">
           {translate("welcome")}
         </h1>
         <video
@@ -53,7 +53,6 @@ export default function WelcomePage() {
           backgroundVideo={avatarEditorButtonBackgroundVideo}
           historyPath="/avatarEditor"
           label={translate("avatarEditorButton")}
-          isPlaceholder={false}
         />
       </section>
 
