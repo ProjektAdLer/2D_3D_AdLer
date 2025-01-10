@@ -12,15 +12,21 @@ import {
 
 export default class AvatarEditorViewModel {
   // Face
-  eyebrows: Observable<number>;
-  eyes: Observable<number>;
-  nose: Observable<number>;
-  mouth: Observable<number>;
+  eyebrows: Observable<number> = new Observable<number>(0);
+  eyes: Observable<number> = new Observable<number>(0);
+  nose: Observable<number> = new Observable<number>(0);
+  mouth: Observable<number> = new Observable<number>(0);
 
   // Hair
-  hair: Observable<AvatarHairModels>;
-  beard: Observable<AvatarBeardModels>;
-  hairColor: Observable<AvatarColor>;
+  hair: Observable<AvatarHairModels> = new Observable<AvatarHairModels>("none");
+  beard: Observable<AvatarBeardModels> = new Observable<AvatarBeardModels>(
+    "none",
+  );
+  hairColor: Observable<AvatarColor> = new Observable<AvatarColor>({
+    id: 33,
+    nameKey: "Brown 2",
+    hexColor: "#4b2a1a",
+  });
 
   // Accessories
   headgear: Observable<AvatarHeadgearModels>;

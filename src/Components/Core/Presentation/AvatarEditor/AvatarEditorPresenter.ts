@@ -3,20 +3,17 @@ import AvatarEditorViewModel from "./AvatarEditorViewModel";
 import AvatarConfigTO from "../../Application/DataTransferObjects/AvatarConfigTO";
 
 export default class AvatarEditorPresenter implements IAvatarEditorPresenter {
-  constructor(private viewModel: AvatarEditorViewModel) {
-    console.log("AvatarEditorPresenter.constructor", viewModel);
-  }
+  constructor(private viewModel: AvatarEditorViewModel) {}
 
   onAvatarConfigLoaded(avatarConfig: AvatarConfigTO) {
-    console.log("AvatarEditorPresenter.onAvatarConfigLoaded", avatarConfig);
-    this.viewModel.hair.Value = avatarConfig.hair;
-    this.viewModel.beard.Value = avatarConfig.beard;
-    this.viewModel.hairColor.Value = avatarConfig.hairColor;
+    this.viewModel.hair.Value = avatarConfig.hair ?? this.viewModel.hair.Value;
+    this.viewModel.beard.Value =
+      avatarConfig.beard ?? this.viewModel.beard.Value;
+    this.viewModel.hairColor.Value =
+      avatarConfig.hairColor ?? this.viewModel.hairColor.Value;
 
-    this.viewModel.eyes.Value = avatarConfig.eyes;
-    this.viewModel.mouth.Value = avatarConfig.mouth;
-    this.viewModel.shirt.Value = avatarConfig.shirt;
-    this.viewModel.pants.Value = avatarConfig.pants;
-    this.viewModel.shoes.Value = avatarConfig.shoes;
+    this.viewModel.eyes.Value = avatarConfig.eyes ?? this.viewModel.eyes.Value;
+    this.viewModel.mouth.Value =
+      avatarConfig.mouth ?? this.viewModel.mouth.Value;
   }
 }
