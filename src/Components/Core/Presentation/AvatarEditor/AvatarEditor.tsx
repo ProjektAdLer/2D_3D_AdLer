@@ -37,7 +37,6 @@ export default function AvatarEditor() {
   useEffect(() => {
     if (!controller) return;
     loadAvatarConfigUseCase.executeAsync();
-    console.log("AvatarEditor loaded");
   }, [controller, loadAvatarConfigUseCase]);
 
   if (!viewModel || !controller) return null;
