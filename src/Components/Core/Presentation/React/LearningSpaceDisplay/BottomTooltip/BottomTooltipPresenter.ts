@@ -7,6 +7,7 @@ import {
 import { injectable } from "inversify";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import { DoorTypeStrings } from "src/Components/Core/Domain/Types/DoorTypes";
+import Observable from "src/Lib/Observable";
 
 interface BottomTooltipData {
   id: number;
@@ -15,6 +16,7 @@ interface BottomTooltipData {
   iconType: LearningElementTypeStrings | DoorTypeStrings;
   points: number;
   showPoints: boolean;
+  hasScored: Observable<boolean>;
   onClickCallback: () => void;
 }
 
@@ -31,6 +33,7 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
       | LearningElementTypeStrings
       | DoorTypeStrings = LearningElementTypes.notAnElement,
     points: number | undefined = undefined,
+    hasScored: Observable<boolean> | undefined = undefined,
     onClickCallback?: () => void,
   ): number {
     const data: BottomTooltipData = {
@@ -40,6 +43,7 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
       iconType: iconType,
       points: points ? points : 0,
       showPoints: points !== undefined,
+      hasScored: hasScored ? hasScored : new Observable<boolean>(false),
       onClickCallback: onClickCallback ?? (() => {}),
     };
     this.dataQueue.push(data);
@@ -83,6 +87,7 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
       this.viewModel.points.Value = data.points;
       this.viewModel.showPoints.Value = data.showPoints;
       this.viewModel.onClickCallback.Value = data.onClickCallback;
+      this.viewModel.hasScored = data.hasScored;
     }
   }
 }

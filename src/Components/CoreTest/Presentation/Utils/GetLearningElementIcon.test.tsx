@@ -1,7 +1,10 @@
 import { LearningElementTypeStrings } from "../../../Core/Domain/Types/LearningElementTypes";
-import { getLearningElementIcon } from "../../../Core/Presentation/Utils/GetLearningElementIcon";
+import {
+  getCheckIcon,
+  getLearningElementIcon,
+} from "../../../Core/Presentation/Utils/GetLearningElementIcon";
 
-// Only smoketest here, because the only idfference between the returned
+// Only smoketest here, because the only difference between the returned
 // components is the path to the icon.
 describe("GetLearningElementIcon should return a react component for valid element types", () => {
   test.each([
@@ -19,5 +22,10 @@ describe("GetLearningElementIcon should return a react component for valid eleme
   test("should return default task icon, if no valid input is delivered", () => {
     const result = getLearningElementIcon("" as LearningElementTypeStrings);
     expect(result.props["src"]).toContain("learning-elements");
+  });
+
+  test("getCheckIcon returns a react component with a checkmark-image", () => {
+    const result = getCheckIcon();
+    expect(result.props["src"]).toContain("check");
   });
 });

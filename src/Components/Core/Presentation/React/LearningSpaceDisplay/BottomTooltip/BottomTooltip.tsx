@@ -4,7 +4,10 @@ import {
   LearningElementTypes,
   LearningElementTypeStrings,
 } from "../../../../Domain/Types/LearningElementTypes";
-import { getLearningElementIcon } from "../../../Utils/GetLearningElementIcon";
+import {
+  getCheckIcon,
+  getLearningElementIcon,
+} from "../../../Utils/GetLearningElementIcon";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
@@ -50,6 +53,7 @@ export default function BottomTooltip({
             iconType !== DoorTypes.entryDoor &&
             iconType !== DoorTypes.exitDoor &&
             getLearningElementIcon(iconType)}
+          {viewModel.hasScored.Value && getCheckIcon()}
           {(iconType === DoorTypes.entryDoor ||
             iconType === DoorTypes.exitDoor) &&
             getDoorIcon(iconType)}

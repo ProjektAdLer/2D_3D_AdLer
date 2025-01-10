@@ -8,6 +8,17 @@ import {
   LearningElementTypeStrings,
   LearningElementTypes,
 } from "../../Domain/Types/LearningElementTypes";
+import checkIcon from "../../../../Assets/icons/check-solution.svg";
+
+export const getCheckIcon = () => {
+  return (
+    <img
+      src={checkIcon}
+      alt="check-icon"
+      className="absolute h-6 translate-x-4 -translate-y-3 lg:h-9 lg:translate-x-6 lg:-translate-y-4"
+    ></img>
+  );
+};
 
 export const getLearningElementIcon = (type: LearningElementTypeStrings) => {
   switch (type) {

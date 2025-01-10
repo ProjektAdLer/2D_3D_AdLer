@@ -96,6 +96,7 @@ export default class StoryNPCController implements IStoryNPCController {
       tooltipText,
       undefined,
       undefined,
+      undefined,
       this.picked,
     );
   }

@@ -1,6 +1,8 @@
 import IBottomTooltipPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import BottomTooltipPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/BottomTooltipPresenter";
 import BottomTooltipViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/BottomTooltipViewModel";
+import Observable from "../../../../../../Lib/Observable";
+import exp from "constants";
 
 describe("BottomTooltipPresenter", () => {
   let systemUnderTest: IBottomTooltipPresenter;
@@ -20,15 +22,17 @@ describe("BottomTooltipPresenter", () => {
     const text = "test";
     const iconType = "test";
     const points = 1;
+    const hasScored = new Observable<boolean>(true);
     const onClickCallback = () => {};
 
-    systemUnderTest.display(text, iconType, points, onClickCallback);
+    systemUnderTest.display(text, iconType, points, hasScored, onClickCallback);
 
     expect(vm.show.Value).toBe(true);
     expect(vm.text.Value).toBe(text);
     expect(vm.iconType.Value).toBe(iconType);
     expect(vm.points.Value).toBe(points);
     expect(vm.showPoints.Value).toBe(true);
+    expect(vm.hasScored.Value).toBe(true);
     expect(vm.onClickCallback.Value).toBe(onClickCallback);
   });
 
