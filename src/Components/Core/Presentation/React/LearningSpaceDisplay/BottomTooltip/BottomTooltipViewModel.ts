@@ -12,4 +12,5 @@ export default class BottomTooltipViewModel {
   points = new Observable<number>();
   showPoints = new Observable<boolean>(true, true);
   onClickCallback = new Observable<() => void>(undefined, true);
+  hasScored = new Observable<boolean>(false);
 }

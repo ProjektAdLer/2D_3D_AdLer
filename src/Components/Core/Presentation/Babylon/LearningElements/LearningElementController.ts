@@ -19,7 +19,7 @@ export default class LearningElementController
 
   constructor(private viewModel: LearningElementViewModel) {
     this.bottomTooltipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
+      PRESENTATION_TYPES.IBottomTooltipPresenter,
     );
 
     this.viewModel.isInteractable.subscribe(this.onAvatarInteractableChange);
@@ -71,19 +71,20 @@ export default class LearningElementController
       this.viewModel.name,
       this.viewModel.type,
       this.viewModel.value,
-      this.picked
+      this.viewModel.hasScored,
+      this.picked,
     );
   }
 
   private startLoadElementUseCase() {
     CoreDIContainer.get<ILoadLearningElementUseCase>(
-      USECASE_TYPES.ILoadLearningElementUseCase
+      USECASE_TYPES.ILoadLearningElementUseCase,
     ).executeAsync({ elementID: this.viewModel.id, isScoreable: true });
   }
 
   private startLoadAdaptivityElementUseCase(): void {
     CoreDIContainer.get<ILoadAdaptivityElementUseCase>(
-      USECASE_TYPES.ILoadAdaptivityElementUseCase
+      USECASE_TYPES.ILoadAdaptivityElementUseCase,
     ).executeAsync(this.viewModel.id);
   }
 
@@ -92,7 +93,7 @@ export default class LearningElementController
       mesh.scaling = new Vector3(
         this.viewModel.iconScaleUpOnHover,
         this.viewModel.iconScaleUpOnHover,
-        this.viewModel.iconScaleUpOnHover
+        this.viewModel.iconScaleUpOnHover,
       );
     });
   }
