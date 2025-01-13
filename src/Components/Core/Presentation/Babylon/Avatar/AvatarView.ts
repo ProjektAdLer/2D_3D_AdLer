@@ -23,7 +23,7 @@ import bind from "bind-decorator";
 import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
 import ICharacterNavigator from "../CharacterNavigator/ICharacterNavigator";
 
-const modelLink = require("../../../../../Assets/3dModels/sharedModels/a_avatar_standardmale_male.glb");
+const modelLink = require("../../../../../Assets/3dModels/sharedModels/a_avatar_standardmale.glb");
 
 export default class AvatarView {
   private scenePresenter: IScenePresenter;
