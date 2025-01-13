@@ -12,7 +12,7 @@ describe("AvatarPort", () => {
     systemUnderTest = CoreDIContainer.resolve(AvatarPort);
   });
 
-  test("name returns AVATR-PORT", () => {
+  test("name returns AVATAR-PORT", () => {
     expect(systemUnderTest.name()).toBe("AVATAR-PORT");
   });
 
