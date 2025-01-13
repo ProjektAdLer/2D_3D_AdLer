@@ -73,7 +73,7 @@ export default class AvatarEditorPreviewModelView {
     if (!modelMap.has(newModel)) {
       const result = await this.scenePresenter.loadGLTFModel(
         require(
-          `../../../../../../Assets/3dModels/sharedModels/avatar/${modelFolder}/${newModel}.glb`,
+          `../../../../../../Assets/3dModels/sharedModels/avatar/${modelFolder}/aa-${newModel}.glb`,
         ),
       );
       modelMap.set(newModel, result.meshes as Mesh[]);
