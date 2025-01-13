@@ -13,7 +13,7 @@ import { useState } from "react";
 import ColorPickerButton from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerButton";
 import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerModal";
 
-import noneIcon from "../../../../../../Assets/avatarEditorThumbnails/none_Thumbnail.svg";
+import noneIcon from "../../../../../../Assets/avatarEditorThumbnails/aa-none_Thumbnail.png";
 import AccordionElement from "~ReactComponents/GeneralComponents/Accordion/AccordionElement";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 
