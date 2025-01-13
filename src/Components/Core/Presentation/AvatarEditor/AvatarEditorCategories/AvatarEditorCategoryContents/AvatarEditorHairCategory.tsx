@@ -8,7 +8,6 @@ import {
   AvatarBeardModels,
   OAvatarHairModels,
 } from "../../../../../Core/Domain/AvatarModels/AvatarModelTypes";
-import AvatarColorPalette from "../../../../../Core/Domain/AvatarModels/AvatarColorPalette";
 import { useState } from "react";
 import ColorPickerButton from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerButton";
 import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerModal";
@@ -49,9 +48,9 @@ export default function AvatarEditorHairCategory(
 ) {
   const { t: translate } = useTranslation("avatarEditor");
   const [showModal, setShowModal] = useState(false);
-  const [hairColor, setHairColor] = useState(AvatarColorPalette[0]);
-  const [hairType, setHairType] = useObservable(props.viewModel.hair);
-  const [beardType, setBeardType] = useObservable(props.viewModel.beard);
+  const [hairColor] = useObservable(props.viewModel.hairColor);
+  const [hairType] = useObservable(props.viewModel.hair);
+  const [beardType] = useObservable(props.viewModel.beard);
 
   const TileGridHairStyles = () => {
     return (
@@ -68,7 +67,6 @@ export default function AvatarEditorHairCategory(
           props.controller.onAvatarConfigChanged({
             hair: hairThumbnails[id].type,
           });
-          setHairType(hairThumbnails[id].type);
         }}
       />
     );
@@ -89,12 +87,11 @@ export default function AvatarEditorHairCategory(
           props.controller.onAvatarConfigChanged({
             beard: beardThumbnails[id].type,
           });
-          setBeardType(beardThumbnails[id].type);
         }}
       />
     );
   };
-
+  if (!props.controller || !props.viewModel) return null;
   return (
     <div className="flex flex-col">
       <AccordionElement
@@ -110,7 +107,9 @@ export default function AvatarEditorHairCategory(
       <div className="w-full p-2 m-2">
         <ColorPickerButton
           className=""
-          currentColor={hairColor}
+          currentColor={
+            hairColor ?? { id: 0, nameKey: "Black 1", hexColor: "#000000" }
+          }
           onClick={() => setShowModal(true)}
         />
         <ColorPickerModal
@@ -118,7 +117,6 @@ export default function AvatarEditorHairCategory(
           showModal={showModal}
           onClose={() => setShowModal(false)}
           onColorClickFunction={(color) => {
-            setHairColor(color);
             props.controller.onAvatarConfigChanged({
               hairColor: color,
             });
