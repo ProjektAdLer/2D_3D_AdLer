@@ -28,7 +28,7 @@ const hairThumbnails = Object.values(OAvatarHairModels).map<{
 }>((type) => ({
   type: type,
   image: require(
-    `../../../../../../Assets/avatarEditorThumbnails/hair/hairstyles/${type}.png`,
+    `../../../../../../Assets/avatarEditorThumbnails/hair/hairstyles/aa-${type}.png`,
   ),
 }));
 hairThumbnails.unshift(noneThumbnail);
@@ -39,7 +39,7 @@ const beardThumbnails = Object.values(OAvatarBeardModels).map<{
 }>((type) => ({
   type: type,
   image: require(
-    `../../../../../../Assets/avatarEditorThumbnails/hair/beards/${type}.png`,
+    `../../../../../../Assets/avatarEditorThumbnails/hair/beards/aa-${type}.png`,
   ),
 }));
 beardThumbnails.unshift(noneThumbnail);

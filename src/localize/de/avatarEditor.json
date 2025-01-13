@@ -7,12 +7,12 @@
 
   "hairColorTitle": "Haarfarbe",
   "hairstylesTitle": "Frisur",
-  "hairMediumPonytail": "Mittlerer Pferdeschwanz",
-  "hairMediumStraight": "Mittellang glatt",
+  "hair-medium-ponytail": "Mittlerer Pferdeschwanz",
+  "hair-medium-straight": "Mittellang glatt",
 
   "beardsTitle": "Bart",
-  "beardMedium": "Mittellang",
-  "beardMustacheHogan": "Hogan",
+  "beard-medium-anchor": "Mittellang",
+  "beard-mustache-hogan": "Hogan",
 
   "eyebrowsTitle": "Augenbrauen",
   "eyesTitle": "Augen",

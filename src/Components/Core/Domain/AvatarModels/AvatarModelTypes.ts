@@ -5,8 +5,8 @@ export const AvatarNoneModel = {
 
 // Hair
 export const OAvatarHairModels = {
-  MediumPonytail: "hairMediumPonytail",
-  MediumStraight: "hairMediumStraight",
+  MediumPonytail: "hair-medium-ponytail",
+  MediumStraight: "hair-medium-straight",
 
   //TODO: add more hair models when assets are available
   // DreadsTopback: "hairDreadsTopback",
@@ -43,8 +43,8 @@ export type AvatarHairModels =
 // Beards
 export const OAvatarBeardModels = {
   //TODO: add more beard models when assets are available
-  Medium: "beardMedium",
-  MustacheHogan: "beardMustacheHogan",
+  Medium: "beard-medium-anchor",
+  MustacheHogan: "beard-mustache-hogan",
 } as const;
 export type AvatarBeardModels =
   | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]

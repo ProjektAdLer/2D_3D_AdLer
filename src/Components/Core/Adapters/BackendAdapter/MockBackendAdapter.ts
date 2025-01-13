@@ -361,8 +361,8 @@ export default class MockBackendAdapter implements IBackendPort {
       eyebrows: 0,
 
       // Hair
-      hair: "hairMediumPonytail",
-      beard: "beardMedium",
+      hair: "hair-medium-ponytail",
+      beard: "beard-medium-anchor",
       hairColor: { id: 8, nameKey: "Blue 1", hexColor: "#043675" },
 
       // Accessories
