@@ -23,7 +23,7 @@ import bind from "bind-decorator";
 import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
 import ICharacterNavigator from "../CharacterNavigator/ICharacterNavigator";
 
-const modelLink = require("../../../../../Assets/3dModels/sharedModels/3DModel_Avatar_male.glb");
+const modelLink = require("../../../../../Assets/3dModels/sharedModels/a_avatar_standardmale_male.glb");
 
 export default class AvatarView {
   private scenePresenter: IScenePresenter;
@@ -34,14 +34,14 @@ export default class AvatarView {
 
   constructor(
     private viewModel: AvatarViewModel,
-    private controller: IAvatarController
+    private controller: IAvatarController,
   ) {
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
-      SCENE_TYPES.ScenePresenterFactory
+      SCENE_TYPES.ScenePresenterFactory,
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
     this.movementIndicator = CoreDIContainer.get<IMovementIndicator>(
-      PRESENTATION_TYPES.IMovementIndicator
+      PRESENTATION_TYPES.IMovementIndicator,
     );
 
     this.viewModel.movementTarget.subscribe(this.onMovementTargetChanged);
@@ -66,7 +66,7 @@ export default class AvatarView {
     // so that it can be rotated without affecting gltf coordinate system conversions in __root__ node created by Babylon
     this.viewModel.modelRootNode = new TransformNode(
       "AvatarModelRootNode",
-      this.scenePresenter.Scene
+      this.scenePresenter.Scene,
     );
     this.viewModel.modelRootNode.position = new Vector3(0, 0.05, 0); // place model 0.05 above the ground ~ FK
     this.viewModel.modelRootNode.setParent(this.viewModel.parentNode);
@@ -76,7 +76,7 @@ export default class AvatarView {
     this.viewModel.parentNode.position = spawnPosition;
     this.viewModel.modelRootNode.rotationQuaternion = Quaternion.RotationAxis(
       Vector3.Up(),
-      Tools.ToRadians(spawnRotation)
+      Tools.ToRadians(spawnRotation),
     );
 
     // animation setup
@@ -98,7 +98,7 @@ export default class AvatarView {
   @bind
   private setupBlinkAnimation(): void {
     const eyeMaterial = this.viewModel.meshes.find(
-      (mesh) => mesh.material?.name === "Eyes_mat"
+      (mesh) => mesh.material?.name === "Eyes_mat",
     )?.material!;
     this.viewModel.eyeTextures = eyeMaterial.getActiveTextures() as Texture[];
 
@@ -107,44 +107,48 @@ export default class AvatarView {
 
   @bind
   private setBlinkTimeout(): void {
-    this.viewModel.setEyeTimer = setTimeout(() => {
-      // set eye texture offset to blink texture
-      this.viewModel.eyeTextures.forEach((texture) => {
-        texture.uOffset = this.viewModel.blinkTextureUOffset;
-      });
-
-      // set timeout to reset eye texture offset and restart blink timeout
-      this.viewModel.resetEyeTimer = setTimeout(() => {
+    this.viewModel.setEyeTimer = setTimeout(
+      () => {
+        // set eye texture offset to blink texture
         this.viewModel.eyeTextures.forEach((texture) => {
-          texture.uOffset = 0;
+          texture.uOffset = this.viewModel.blinkTextureUOffset;
         });
-        this.setBlinkTimeout();
-      }, this.viewModel.blinkDuration);
-    }, this.viewModel.blinkInterval + Math.random() * this.viewModel.blinkIntervalMaxOffset);
+
+        // set timeout to reset eye texture offset and restart blink timeout
+        this.viewModel.resetEyeTimer = setTimeout(() => {
+          this.viewModel.eyeTextures.forEach((texture) => {
+            texture.uOffset = 0;
+          });
+          this.setBlinkTimeout();
+        }, this.viewModel.blinkDuration);
+      },
+      this.viewModel.blinkInterval +
+        Math.random() * this.viewModel.blinkIntervalMaxOffset,
+    );
   }
 
   private createCharacterAnimator(): void {
     this.viewModel.characterAnimator = CoreDIContainer.get<ICharacterAnimator>(
-      PRESENTATION_TYPES.ICharacterAnimator
+      PRESENTATION_TYPES.ICharacterAnimator,
     );
     this.viewModel.characterAnimator.setup(
       () => this.viewModel.characterNavigator.CharacterVelocity,
       this.viewModel.modelRootNode,
       this.idleAnimation,
       this.walkAnimation,
-      this.interactionAnimation
+      this.interactionAnimation,
     );
   }
 
   private async createNPCNavigator(): Promise<void> {
     this.viewModel.characterNavigator =
       CoreDIContainer.get<ICharacterNavigator>(
-        PRESENTATION_TYPES.ICharacterNavigator
+        PRESENTATION_TYPES.ICharacterNavigator,
       );
     this.viewModel.characterNavigator.setup(
       this.viewModel.parentNode,
       this.viewModel.characterAnimator,
-      config.isDebug
+      config.isDebug,
     );
     await this.viewModel.characterNavigator.IsReady;
   }
@@ -160,12 +164,12 @@ export default class AvatarView {
       spawnRotation = 0;
     } else {
       let spawnPoint = LearningSpaceTemplateLookup.getLearningSpaceTemplate(
-        this.viewModel.learningSpaceTemplateType
+        this.viewModel.learningSpaceTemplateType,
       ).playerSpawnPoint;
       spawnLocation = new Vector3(
         spawnPoint.position.x,
         0,
-        spawnPoint.position.y
+        spawnPoint.position.y,
       );
       spawnRotation = spawnPoint.orientation.rotation;
     }
