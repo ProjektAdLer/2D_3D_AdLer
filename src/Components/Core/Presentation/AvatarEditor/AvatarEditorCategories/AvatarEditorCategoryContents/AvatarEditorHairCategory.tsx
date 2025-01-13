@@ -15,6 +15,7 @@ import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/Col
 
 import noneIcon from "../../../../../../Assets/avatarEditorThumbnails/none_Thumbnail.svg";
 import AccordionElement from "~ReactComponents/GeneralComponents/Accordion/AccordionElement";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 
 const noneThumbnail = {
   type: AvatarNoneModel.None,
@@ -49,6 +50,8 @@ export default function AvatarEditorHairCategory(
   const { t: translate } = useTranslation("avatarEditor");
   const [showModal, setShowModal] = useState(false);
   const [hairColor, setHairColor] = useState(AvatarColorPalette[0]);
+  const [hairType, setHairType] = useObservable(props.viewModel.hair);
+  const [beardType, setBeardType] = useObservable(props.viewModel.beard);
 
   const TileGridHairStyles = () => {
     return (
@@ -57,7 +60,7 @@ export default function AvatarEditorHairCategory(
           id: index,
           image: thumbnail.image,
           title: translate(thumbnail.type).toString() ?? "",
-          active: false,
+          active: hairType === thumbnail.type,
         }))}
         columns={5}
         mobileColumns={3}
@@ -65,6 +68,7 @@ export default function AvatarEditorHairCategory(
           props.controller.onAvatarConfigChanged({
             hair: hairThumbnails[id].type,
           });
+          setHairType(hairThumbnails[id].type);
         }}
       />
     );
@@ -77,6 +81,7 @@ export default function AvatarEditorHairCategory(
           id: index,
           image: thumbnail.image,
           title: translate(thumbnail.type).toString() ?? "",
+          active: beardType === thumbnail.type,
         }))}
         columns={5}
         mobileColumns={3}
@@ -84,6 +89,7 @@ export default function AvatarEditorHairCategory(
           props.controller.onAvatarConfigChanged({
             beard: beardThumbnails[id].type,
           });
+          setBeardType(beardThumbnails[id].type);
         }}
       />
     );
