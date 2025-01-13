@@ -20,12 +20,23 @@ describe("AvatarPort", () => {
     const adapter1 = mock<IAvatarAdapter>();
     const adapter2 = mock<IAvatarAdapter>();
     systemUnderTest.registerAdapter(adapter1, LocationScope._global);
-    systemUnderTest.registerAdapter(adapter2, LocationScope._global);
     const mockAvatarConfig = mock<AvatarConfigTO>();
 
-    systemUnderTest.onAvatarConfigChanged(mockAvatarConfig);
+    systemUnderTest.onAvatarConfigChanged(mockAvatarConfig, mockAvatarConfig);
 
     expect(adapter1.onAvatarConfigChanged).toHaveBeenCalledTimes(1);
-    expect(adapter2.onAvatarConfigChanged).toHaveBeenCalledTimes(1);
+    expect(adapter2.onAvatarConfigChanged).toHaveBeenCalledTimes(0);
+  });
+
+  test("onAvatarConfigLoaded calls all registered adapters", () => {
+    const adapter3 = mock<IAvatarAdapter>();
+    const adapter4 = mock<IAvatarAdapter>();
+    systemUnderTest.registerAdapter(adapter3, LocationScope._global);
+    const mockAvatarConfig = mock<AvatarConfigTO>();
+
+    systemUnderTest.onAvatarConfigLoaded(mockAvatarConfig);
+
+    expect(adapter3.onAvatarConfigLoaded).toHaveBeenCalledTimes(1);
+    expect(adapter4.onAvatarConfigLoaded).toHaveBeenCalledTimes(0);
   });
 });
