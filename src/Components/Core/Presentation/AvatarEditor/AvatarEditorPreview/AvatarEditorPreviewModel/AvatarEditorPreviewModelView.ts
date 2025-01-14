@@ -42,14 +42,14 @@ export default class AvatarEditorPreviewModelView {
     if (this.viewModel.avatarConfigDiff.Value.beard)
       this.updateModel(
         this.viewModel.avatarConfigDiff.Value.beard,
-        "beards",
+        "hair/beards",
         this.viewModel.beardMeshes,
         this.viewModel.beardAnchorNode,
       );
     if (this.viewModel.avatarConfigDiff.Value.hair)
       this.updateModel(
         this.viewModel.avatarConfigDiff.Value.hair,
-        "hair",
+        "hair/hairstyle",
         this.viewModel.hairMeshes,
         this.viewModel.hairAnchorNode,
       );
