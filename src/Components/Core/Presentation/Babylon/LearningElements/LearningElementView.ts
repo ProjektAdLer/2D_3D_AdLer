@@ -23,25 +23,25 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 const iconLinks: { [key in LearningElementTypes]?: any } = {
-  [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-h5p-interactive-element.glb"),
-  [LearningElementTypes.primitiveH5P]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-h5p-interactive-element.glb"),
-  [LearningElementTypes.text]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-text-papyrus.glb"),
-  [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-text-papyrus.glb"),
-  [LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-image-abstract-painting.glb"),
-  [LearningElementTypes.video]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-video-tv.glb"),
-  [LearningElementTypes.adaptivity]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-adaptivity-kite.glb"),
+  [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-h5p-interactive-element.glb"),
+  [LearningElementTypes.primitiveH5P]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-h5p-interactive-element.glb"),
+  [LearningElementTypes.text]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-text-papyrus.glb"),
+  [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-text-papyrus.glb"),
+  [LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-image-abstract-painting.glb"),
+  [LearningElementTypes.video]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-video-tv.glb"),
+  [LearningElementTypes.adaptivity]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-adaptivity-kite.glb"),
   [LearningElementTypes.notAnElement]: [],
 };
 
 const checkedIconLinks: { [key in LearningElementTypes]?: any } = {
-  [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-h5p-interactive-element-checked.glb"),
-  [LearningElementTypes.primitiveH5P]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-h5p-interactive-element-checked.glb"),
-  [LearningElementTypes.text]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-text-papyrus-checked.glb"),
-  [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-text-papyrus-checked.glb"),
+  [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-h5p-interactive-element-checked.glb"),
+  [LearningElementTypes.primitiveH5P]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-h5p-interactive-element-checked.glb"),
+  [LearningElementTypes.text]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-text-papyrus-checked.glb"),
+  [LearningElementTypes.pdf]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-text-papyrus-checked.glb"),
   //[LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/l-icons-image-check.glb"),
-  [LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-image-abstract-painting-checked.glb"),
-  [LearningElementTypes.video]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-video-tv-checked.glb"),
-  [LearningElementTypes.adaptivity]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-adaptivity-kite-checked.glb"),
+  [LearningElementTypes.image]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-image-abstract-painting-checked.glb"),
+  [LearningElementTypes.video]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-video-tv-checked.glb"),
+  [LearningElementTypes.adaptivity]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-adaptivity-kite-checked.glb"),
   [LearningElementTypes.notAnElement]: [],
 };
 
