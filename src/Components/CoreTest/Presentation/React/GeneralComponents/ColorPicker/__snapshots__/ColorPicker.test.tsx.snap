@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="inline-grid grid-cols-8 row-span-8"
+        class="inline-grid grid-cols-8 row-span-8 text-adlerdarkblue"
       >
         <div
           class=""
@@ -589,7 +589,7 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="inline-grid grid-cols-8 row-span-8"
+      class="inline-grid grid-cols-8 row-span-8 text-adlerdarkblue"
     >
       <div
         class=""

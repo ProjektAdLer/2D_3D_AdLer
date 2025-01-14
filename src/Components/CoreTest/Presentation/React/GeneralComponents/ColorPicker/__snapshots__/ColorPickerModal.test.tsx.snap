@@ -27,13 +27,13 @@ Object {
                 class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter"
               >
                 <div
-                  class="p-2"
+                  class="p-2 text-adlerdarkblue"
                 >
                   <h1
                     class="text-2xl font-bold"
                   />
                   <div
-                    class="inline-grid grid-cols-8 row-span-8"
+                    class="inline-grid grid-cols-8 row-span-8 text-adlerdarkblue"
                   >
                     <div
                       class=""
@@ -652,13 +652,13 @@ Object {
               class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter"
             >
               <div
-                class="p-2"
+                class="p-2 text-adlerdarkblue"
               >
                 <h1
                   class="text-2xl font-bold"
                 />
                 <div
-                  class="inline-grid grid-cols-8 row-span-8"
+                  class="inline-grid grid-cols-8 row-span-8 text-adlerdarkblue"
                 >
                   <div
                     class=""

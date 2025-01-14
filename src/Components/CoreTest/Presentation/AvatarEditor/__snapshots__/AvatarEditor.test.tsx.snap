@@ -3,7 +3,7 @@
 exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = `
 <div>
   <div
-    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden"
+    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
   >
     <div
       class="self-center w-full p-2 font-semibold flex place-content-stretch"
@@ -173,7 +173,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
 exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = `
 <div>
   <div
-    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden"
+    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
   >
     <div
       class="self-center w-full p-2 font-semibold flex place-content-stretch"
@@ -343,7 +343,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
 exports[`AvatarEditor should renders 1`] = `
 <div>
   <div
-    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden"
+    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
   >
     <div
       class="self-center w-full p-2 font-semibold flex place-content-stretch"
