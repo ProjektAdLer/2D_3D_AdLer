@@ -1,11 +1,11 @@
 import campusNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_dozentlukas.png";
-import campusNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_dozentlukas_close.png";
+import campusNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a-quizbg-dozentlukas-close.png";
 import arcadeNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_sheriffjustice.png";
 import arcadeNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_sheriffjustice_close.png";
-import defaultNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_defaultnpc.png";
-import defaultNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_defaultnpc_close.png";
-import robotNPC from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot.png";
-import robotNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a_npc_alerobot_close.png";
+import defaultNPC from "../../../../../../Assets/misc/quizBackgrounds/a-quizbg-defaultnpc.png";
+import defaultNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a-quizbg-defaultnpc-close.png";
+import robotNPC from "../../../../../../Assets/misc/quizBackgrounds/a-quizbg-alerobot.png";
+import robotNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a-quizbg-alerobot-close.png";
 import closeIcon from "../../../../../../Assets/icons/close.svg";
 
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";

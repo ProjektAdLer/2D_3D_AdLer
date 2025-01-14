@@ -70,7 +70,7 @@ backendAdaptivityElementTOMock.adaptivity = {
   id: 1,
   elementName: "",
   introText: "",
-  model: "a_npc_defaultnpc",
+  model: "a-quizbg-defaultnpc",
   tasks: [],
 } as AdaptivityElementDataTO;
 
