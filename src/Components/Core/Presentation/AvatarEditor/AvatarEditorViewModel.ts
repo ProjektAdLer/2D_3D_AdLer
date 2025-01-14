@@ -50,23 +50,23 @@ export default class AvatarEditorViewModel {
 
   uiVisiblity: AvatarEditorUI = {
     hairMenu: {
-      hairstyles: new Observable<boolean>(false),
-      beards: new Observable<boolean>(false),
+      hairstyles: new Observable<boolean>(true),
+      beards: new Observable<boolean>(true),
     },
     faceMenu: {
-      eyebrows: new Observable<boolean>(false),
+      eyebrows: new Observable<boolean>(true),
       eyes: new Observable<boolean>(false),
       noses: new Observable<boolean>(false),
       mouths: new Observable<boolean>(false),
     },
     accessoireMenu: {
-      headGear: new Observable<boolean>(false),
+      headGear: new Observable<boolean>(true),
       glasses: new Observable<boolean>(false),
       backpack: new Observable<boolean>(false),
       other: new Observable<boolean>(false),
     },
     clothingMenu: {
-      shirts: new Observable<boolean>(false),
+      shirts: new Observable<boolean>(true),
       pants: new Observable<boolean>(false),
       shoes: new Observable<boolean>(false),
     },
