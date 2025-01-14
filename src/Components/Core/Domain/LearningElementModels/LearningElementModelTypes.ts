@@ -3,8 +3,8 @@ enum TextElementModelTypes {
   Bookshelf1 = "l_text_bookshelf_1",
   Bookshelf2 = "l_text_bookshelf_2",
   //arcade
-  ComicShelfbig = "l_text_comicshelfbig_1",
-  ComicShelfsmall = "l_text_comicshelfsmall_1",
+  ComicShelfbig = "l-text-comicshelfbig-1",
+  ComicShelfsmall = "l-text-comicshelfsmall-1",
   //campus
   LibraryShelf = "l_text_libraryshelf_1",
 }
@@ -15,9 +15,9 @@ enum ImageElementModelTypes {
   Painting2 = "l_image_painting_2",
   PaintingEasel = "l_image_paintingeasel_1",
   //arcade
-  Gameposter1 = "l_image_gameposter_1",
-  Gameposter2 = "l_image_gameposter_2",
-  CardboardCutout = "l_image_cardboardcutout_1",
+  Gameposter1 = "l-image-gameposter-1",
+  Gameposter2 = "l-image-gameposter-2",
+  CardboardCutout = "l-image-cardboardcutout-1",
   //campus
   ScienceGeo1 = "l_image_sciencegeo_1",
   ScienceBio1 = "l_image_sciencebio_1",
@@ -28,7 +28,7 @@ enum VideoElementModelTypes {
   //default
   Television = "l_video_television_1",
   //arcade
-  VrDesk = "l_video_vrdesk_1",
+  VrDesk = "l-video-vrdesk-1",
   //campus
   MovieProjector = "l_video_movieprojector_1",
 }
@@ -42,11 +42,11 @@ enum H5pElementModelTypes {
   DrawingTable = "l_h5p_drawingtable_1",
   SlotMachine = "l_h5p_slotmachine_1",
   //arcade
-  GreySlotmachine = "l_h5p_greyslotmachine_1",
-  RedSlotmachine = "l_h5p_redslotmachine_1",
-  PurpleSlotmachine = "l_h5p_purpleslotmachine_1",
-  BlackSlotmachine = "l_h5p_blackslotmachine_1",
-  DeskPC2 = "l_h5p_deskpc_2",
+  GreySlotmachine = "l-h5p-greyslotmachine-1",
+  RedSlotmachine = "l-h5p-redslotmachine-1",
+  PurpleSlotmachine = "l-h5p-purpleslotmachine-1",
+  BlackSlotmachine = "l-h5p-blackslotmachine-1",
+  DeskPC2 = "l-h5p-deskpc-2",
   //campus
   Blackboard2 = "l_h5p_blackboard_2",
   DeskPC3 = "l_h5p_deskpc_3",
@@ -55,9 +55,9 @@ enum H5pElementModelTypes {
 }
 
 enum QuizElementModelTypes {
-  RobotNPC = "a_npc_alerobot",
-  DefaultNPC = "a_npc_defaultnpc",
-  ArcadeNPC = "a_npc_sheriffjustice",
+  RobotNPC = "a-quizbg-alerobot",
+  DefaultNPC = "a-quizbg-defaultnpc",
+  ArcadeNPC = "a-npc-sheriffjustice",
   CampusNPC = "a_npc_dozentlukas",
 }
 
@@ -87,7 +87,7 @@ export const LearningElementModelTypeEnums = {
 
 export function isValidLearningElementModelType(type: string): boolean {
   return Object.values(LearningElementModelTypeEnums).some((enumType) =>
-    Object.values(enumType).includes(type)
+    Object.values(enumType).includes(type),
   );
 }
 

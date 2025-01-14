@@ -8,7 +8,7 @@ import SCENE_TYPES, {
 import AvatarEditorPreviewSceneDefinition from "../AvatarEditorPreviewSceneDefinition";
 import { AvatarNoneModel } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
 
-const baseModelLink = require("../../../../../../Assets/3dModels/sharedModels/avatar/avatarSkeleton.glb");
+const baseModelLink = require("../../../../../../Assets/3dModels/sharedModels/avatar/a-avatar-skeleton.glb");
 
 export default class AvatarEditorPreviewModelView {
   private scenePresenter: IScenePresenter;

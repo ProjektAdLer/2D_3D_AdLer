@@ -26,13 +26,13 @@ describe("LoadStoryElementUseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      worldPortMock
+      worldPortMock,
     );
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
-      entityContainerMock
+      entityContainerMock,
     );
     CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
   });
@@ -61,7 +61,7 @@ describe("LoadStoryElementUseCase", () => {
 
     expect(loggerMock.log).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
-      "User is not in a space!"
+      "User is not in a space!",
     );
     expect(worldPortMock.onStoryElementLoaded).not.toHaveBeenCalled();
   });
@@ -85,7 +85,7 @@ describe("LoadStoryElementUseCase", () => {
 
     expect(loggerMock.log).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
-      "Found more than one space with spaceID 1 in world 1"
+      "Found more than one space with spaceID 1 in world 1",
     );
     expect(worldPortMock.onStoryElementLoaded).not.toHaveBeenCalled();
   });
@@ -102,7 +102,7 @@ describe("LoadStoryElementUseCase", () => {
 
     expect(loggerMock.log).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
-      "Could not find a space with spaceID 1 in world 1"
+      "Could not find a space with spaceID 1 in world 1",
     );
     expect(worldPortMock.onStoryElementLoaded).not.toHaveBeenCalled();
   });
@@ -122,7 +122,7 @@ describe("LoadStoryElementUseCase", () => {
 
     expect(loggerMock.log).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
-      expect.stringContaining("Could not find story element of type")
+      expect.stringContaining("Could not find story element of type"),
     );
     expect(worldPortMock.onStoryElementLoaded).not.toHaveBeenCalled();
   });
@@ -141,7 +141,7 @@ describe("LoadStoryElementUseCase", () => {
             spaceID: 1,
             introStoryTexts: ["intro"],
             outroStoryTexts: ["outro"],
-            modelType: "a_npc_defaultnpc",
+            modelType: "a-quizbg-defaultnpc",
             storyType: StoryElementType.IntroOutro,
           } as StoryElementEntity,
         ],
@@ -153,7 +153,7 @@ describe("LoadStoryElementUseCase", () => {
     expect(worldPortMock.onStoryElementLoaded).toHaveBeenCalledWith({
       introStoryTexts: ["intro"],
       outroStoryTexts: ["outro"],
-      modelType: "a_npc_defaultnpc",
+      modelType: "a-quizbg-defaultnpc",
       storyType: StoryElementType.IntroOutro,
     } as StoryElementTO);
   });
@@ -173,7 +173,7 @@ describe("LoadStoryElementUseCase", () => {
             id: 1,
           } as LearningSpaceEntity,
         ];
-      }
+      },
     );
 
     systemUnderTest["getLearningSpaceEntity"](1, 1);

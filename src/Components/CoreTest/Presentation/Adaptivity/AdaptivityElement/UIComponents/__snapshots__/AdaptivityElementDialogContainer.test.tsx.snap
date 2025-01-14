@@ -1,38 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_alerobot" 1`] = `
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-quizbg-alerobot" 1`] = `
 <img
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a_npc_alerobot_close.png"
+  src="a-quizbg-alerobot_close.png"
 />
 `;
 
-exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_alerobot" 2`] = `
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-quizbg-alerobot" 2`] = `
 <img
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a_npc_alerobot.png"
+  src="a-quizbg-alerobot.png"
 />
 `;
 
-exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_defaultnpc" 1`] = `
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-quizbg-defaultnpc" 1`] = `
 <img
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a_npc_defaultnpc_close.png"
+  src="a-quizbg-defaultnpc-close.png"
 />
 `;
 
-exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_defaultnpc" 2`] = `
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-quizbg-defaultnpc" 2`] = `
 <img
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a_npc_defaultnpc.png"
+  src="a-quizbg-defaultnpc.png"
 />
 `;
 
@@ -41,7 +41,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a_npc_dozentlukas_close.png"
+  src="a-quizbg-dozentlukas-close.png"
 />
 `;
 
@@ -54,21 +54,21 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
 />
 `;
 
-exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_sheriffjustice" 1`] = `
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-sheriffjustice" 1`] = `
 <img
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a_npc_sheriffjustice_close.png"
+  src="a-npc-sheriffjustice_close.png"
 />
 `;
 
-exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_sheriffjustice" 2`] = `
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-sheriffjustice" 2`] = `
 <img
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a_npc_sheriffjustice.png"
+  src="a-npc-sheriffjustice.png"
 />
 `;
 
@@ -87,7 +87,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
           alt="LearningImage!"
           class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
           data-testid="npcImage"
-          src="a_npc_defaultnpc_close.png"
+          src="a-quizbg-defaultnpc-close.png"
         />
       </div>
       <div
@@ -112,7 +112,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
               alt="LearningImage!"
               class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
               data-testid="npcImage"
-              src="a_npc_defaultnpc.png"
+              src="a-quizbg-defaultnpc.png"
             />
             <div
               class="w-full text-xs lg:text-lg"

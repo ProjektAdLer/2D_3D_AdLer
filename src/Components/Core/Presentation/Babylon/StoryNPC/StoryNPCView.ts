@@ -28,7 +28,7 @@ import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementT
 import bind from "bind-decorator";
 import HighlightColors from "../HighlightColors";
 
-import iconLink from "../../../../../Assets/3dModels/sharedModels/3dIcons/l-icons-story-speech-bubble-dots.glb";
+import iconLink from "../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-story-speech-bubble-dots.glb";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;

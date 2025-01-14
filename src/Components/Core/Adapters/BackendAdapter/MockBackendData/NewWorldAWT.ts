@@ -142,7 +142,7 @@ const NewWorldAWT: AWT = {
         elementCategory: "video",
         elementFileType: "url",
         elementMaxScore: 1,
-        elementModel: "l_h5p_blackslotmachine_1",
+        elementModel: "l-h5p-blackslotmachine-1",
       },
       {
         $type: "LearningElement",
@@ -153,7 +153,7 @@ const NewWorldAWT: AWT = {
         elementCategory: "video",
         elementFileType: "url",
         elementMaxScore: 1,
-        elementModel: "l_h5p_purpleslotmachine_1",
+        elementModel: "l-h5p-purpleslotmachine-1",
       },
       {
         $type: "LearningElement",
