@@ -31,7 +31,7 @@ type colorPickerProps = {
 
 export default function ColorPicker(props: Readonly<colorPickerProps>) {
   return (
-    <div className="inline-grid grid-cols-8 row-span-8">
+    <div className="inline-grid grid-cols-8 row-span-8 text-adlerdarkblue">
       {props.colors.map((color, index) => {
         return (
           <ColorButton key={index} color={color} onClick={props.onColorClick} />

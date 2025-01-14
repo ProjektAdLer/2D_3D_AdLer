@@ -42,7 +42,7 @@ export default function AvatarEditor() {
   if (!viewModel || !controller) return null;
 
   return (
-    <div className="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden">
+    <div className="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue">
       <MenuHeaderBar
         location="editor"
         className="self-center w-full p-2 font-semibold"

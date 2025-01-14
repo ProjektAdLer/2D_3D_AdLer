@@ -26,7 +26,7 @@ export default function ColorPickerModal({
   return (
     <div>
       <StyledModal showModal={showModal} canClose={false} lefthalfshift={true}>
-        <div className="p-2">
+        <div className="p-2 text-adlerdarkblue">
           <h1 className="text-2xl font-bold">{title}</h1>
           <ColorPicker
             colors={colorPalette}
