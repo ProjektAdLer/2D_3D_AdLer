@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import ColorPickerButton from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerButton";
 import RangeSlider from "~ReactComponents/ReactRelated/ReactBaseComponents/RangeSlider";
 import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerModal";
-import AvatarColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
 // TODO: update Icons
 import bodySmallIcon from "../../../../../../Assets/icons/body-small.svg";
 import bodyBigIcon from "../../../../../../Assets/icons/body-big.svg";

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import StyledButton from "./StyledButton";
 import tailwindMerge from "../../../Utils/TailwindMerge";
-import AvatarConfigTO from "src/Components/Core/Application/DataTransferObjects/AvatarConfigTO";
 
 type buttonsProps = {
   imageLeft?: string;

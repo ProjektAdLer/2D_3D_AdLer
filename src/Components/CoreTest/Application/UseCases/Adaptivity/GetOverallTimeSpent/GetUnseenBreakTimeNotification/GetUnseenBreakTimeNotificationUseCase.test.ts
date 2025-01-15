@@ -1,5 +1,9 @@
 import GetUnseenBreakTimeNotificationUseCase from "../../../../../../Core/Application/UseCases/Adaptivity/OverallTimeSpent/GetUnseenBreakTimeNotification/GetUnseenBreakTimeNotificationUseCase";
-import { shortBreakTimeNotificationContents } from "../../../../../../Core/Domain/BreakTimeNotifications/BreakTimeNotifications";
+import {
+  longBreakTimeNotificationContents,
+  mediumBreakTimeNotificationContents,
+  shortBreakTimeNotificationContents,
+} from "../../../../../../Core/Domain/BreakTimeNotifications/BreakTimeNotifications";
 import { BreakTimeNotificationType } from "../../../../../../Core/Domain/Entities/Adaptivity/BreakTimeNotificationEntity";
 
 describe("GetUnseenBreakTimeNotificationUseCase", () => {
@@ -10,13 +14,22 @@ describe("GetUnseenBreakTimeNotificationUseCase", () => {
   });
 
   test.each([
-    BreakTimeNotificationType.Short,
-    BreakTimeNotificationType.Medium,
-    BreakTimeNotificationType.Long,
-  ])("returns a BreakTimeNotification for %p", (type) => {
-    const result = systemUnderTest.internalExecute(type);
+    {
+      type: BreakTimeNotificationType.Short,
+      content: shortBreakTimeNotificationContents,
+    },
+    {
+      type: BreakTimeNotificationType.Medium,
+      content: mediumBreakTimeNotificationContents,
+    },
+    {
+      type: BreakTimeNotificationType.Long,
+      content: longBreakTimeNotificationContents,
+    },
+  ])("returns a BreakTimeNotification for %p", (object) => {
+    const result = systemUnderTest.internalExecute(object.type);
 
-    expect(shortBreakTimeNotificationContents).toContain(result);
+    expect(object.content).toContain(result);
   });
 
   test("sets notification.seenBefore true", () => {
