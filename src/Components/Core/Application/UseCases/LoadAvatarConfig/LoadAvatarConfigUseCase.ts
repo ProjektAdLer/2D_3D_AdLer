@@ -8,7 +8,6 @@ import { LogLevelTypes } from "../../../Domain/Types/LogLevelTypes";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import type IBackendPort from "../../Ports/Interfaces/IBackendPort";
-import AvatarEntity from "src/Components/Core/Domain/Entities/AvatarEntity";
 
 @injectable()
 export default class LoadAvatarConfigUseCase
@@ -34,14 +33,14 @@ export default class LoadAvatarConfigUseCase
       return;
     }
 
-    let avatarConfig = userDataEntities[0].avatar;
     // load avatar config from backend
     if (!userDataEntities[0].avatar) {
-      userDataEntities[0].avatar = new AvatarEntity();
-      avatarConfig = await this.backend.getAvatarConfig(
+      userDataEntities[0].avatar = await this.backend.getAvatarConfig(
         userDataEntities[0].userToken,
       );
     }
-    this.avatarPort.onAvatarConfigLoaded(Object.assign({}, avatarConfig));
+    this.avatarPort.onAvatarConfigLoaded(
+      Object.assign({}, userDataEntities[0].avatar),
+    );
   }
 }
