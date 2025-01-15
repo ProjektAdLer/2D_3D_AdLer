@@ -1,7 +1,11 @@
 import IBreakTimeNotification from "src/Components/Core/Domain/BreakTimeNotifications/IBreakTimeNotification";
 import { BreakTimeNotificationType } from "src/Components/Core/Domain/Entities/Adaptivity/BreakTimeNotificationEntity";
 import IGetUnseenBreakTimeNotificationUseCase from "./IGetUnseenBreakTimeNotificationUseCase";
-import { shortBreakTimeNotificationContents } from "src/Components/Core/Domain/BreakTimeNotifications/BreakTimeNotifications";
+import {
+  longBreakTimeNotificationContents,
+  mediumBreakTimeNotificationContents,
+  shortBreakTimeNotificationContents,
+} from "src/Components/Core/Domain/BreakTimeNotifications/BreakTimeNotifications";
 import { injectable } from "inversify";
 
 @injectable()
@@ -18,12 +22,12 @@ export default class GetUnseenBreakTimeNotificationUseCase
 
       case BreakTimeNotificationType.Medium:
         return this.getRandomUnseenBreakTimeNotification(
-          shortBreakTimeNotificationContents,
+          mediumBreakTimeNotificationContents,
         );
 
       case BreakTimeNotificationType.Long:
         return this.getRandomUnseenBreakTimeNotification(
-          shortBreakTimeNotificationContents,
+          longBreakTimeNotificationContents,
         );
     }
   }
