@@ -14,4 +14,8 @@ export default class AvatarEditorPreviewModelPresenter
     this.viewModel.currentAvatarConfig.Value = newAvatarConfig;
     this.viewModel.avatarConfigDiff.Value = avatarConfigDiff;
   }
+
+  onAvatarConfigLoaded(avatarConfig: AvatarConfigTO): void {
+    this.viewModel.currentAvatarConfig.Value = avatarConfig;
+  }
 }

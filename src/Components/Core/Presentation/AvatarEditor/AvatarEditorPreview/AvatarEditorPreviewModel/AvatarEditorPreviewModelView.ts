@@ -6,7 +6,13 @@ import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import AvatarEditorPreviewSceneDefinition from "../AvatarEditorPreviewSceneDefinition";
-import { AvatarNoneModel } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
+import {
+  AvatarBeardModels,
+  AvatarHairModels,
+  AvatarNoneModel,
+} from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
+import ILoadAvatarConfigUseCase from "src/Components/Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 const baseModelLink = require("../../../../../../Assets/3dModels/sharedModels/avatar/a-avatar-skeleton.glb");
 
@@ -36,23 +42,40 @@ export default class AvatarEditorPreviewModelView {
     this.viewModel.beardAnchorNode = result.transformNodes.find(
       (node) => node.name === "anker_beard",
     )!;
+
+    await CoreDIContainer.get<ILoadAvatarConfigUseCase>(
+      USECASE_TYPES.ILoadAvatarConfigUseCase,
+    ).executeAsync();
+
+    console.log(this.viewModel.currentAvatarConfig.Value);
+
+    this.updateModelHair(this.viewModel.currentAvatarConfig.Value.hair);
+    this.updateModelBeard(this.viewModel.currentAvatarConfig.Value.beard);
   }
 
   private onAvatarConfigChanged(): void {
     if (this.viewModel.avatarConfigDiff.Value.beard)
-      this.updateModel(
-        this.viewModel.avatarConfigDiff.Value.beard,
-        "hair/beards",
-        this.viewModel.beardMeshes,
-        this.viewModel.beardAnchorNode,
-      );
+      this.updateModelBeard(this.viewModel.avatarConfigDiff.Value.beard);
     if (this.viewModel.avatarConfigDiff.Value.hair)
-      this.updateModel(
-        this.viewModel.avatarConfigDiff.Value.hair,
-        "hair/hairstyle",
-        this.viewModel.hairMeshes,
-        this.viewModel.hairAnchorNode,
-      );
+      this.updateModelHair(this.viewModel.avatarConfigDiff.Value.hair);
+  }
+
+  private updateModelHair(hair?: AvatarHairModels | undefined) {
+    this.updateModel(
+      hair,
+      "hair/hairstyle",
+      this.viewModel.hairMeshes,
+      this.viewModel.hairAnchorNode,
+    );
+  }
+
+  private updateModelBeard(beard?: AvatarBeardModels | undefined) {
+    this.updateModel(
+      beard,
+      "hair/beards",
+      this.viewModel.beardMeshes,
+      this.viewModel.beardAnchorNode,
+    );
   }
 
   private async updateModel<T>(
