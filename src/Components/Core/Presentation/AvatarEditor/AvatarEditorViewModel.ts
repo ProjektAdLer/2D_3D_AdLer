@@ -41,7 +41,11 @@ export default class AvatarEditorViewModel {
   shoesColor: Observable<AvatarColor>;
 
   // Body
-  skinColor: Observable<AvatarColor>;
+  skinColor: Observable<AvatarColor> = new Observable<AvatarColor>({
+    id: 33,
+    nameKey: "Brown 2",
+    hexColor: "#4b2a1a",
+  });
   roundness: Observable<number>; // 0-1 morph target weight
 
   // --------------------------------------------------------------

@@ -8,14 +8,16 @@ import AvatarColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarCo
 // TODO: update Icons
 import bodySmallIcon from "../../../../../../Assets/icons/body-small.svg";
 import bodyBigIcon from "../../../../../../Assets/icons/body-big.svg";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 
 export default function AvatarEditorBodyCategory(
   props: AvatarEditorCategoryContentProps,
 ) {
   const { t: translate } = useTranslation("avatarEditor");
   const [showModal, setShowModal] = useState(false);
-  const [skinColor, setSkinColor] = useState(AvatarColorPalette[0]);
+  const [skinColor] = useObservable(props.viewModel.skinColor);
 
+  if (!props.controller || !props.viewModel) return null;
   return (
     <div className="flex flex-col">
       <div className="pb-2 border-b border-gray-500">
@@ -23,7 +25,9 @@ export default function AvatarEditorBodyCategory(
       </div>
       <div className="w-full p-2 m-2">
         <ColorPickerButton
-          currentColor={skinColor}
+          currentColor={
+            skinColor ?? { id: 0, nameKey: "Black 1", hexColor: "#000000" }
+          }
           onClick={() => setShowModal(true)}
         />
         <ColorPickerModal
@@ -31,7 +35,6 @@ export default function AvatarEditorBodyCategory(
           showModal={showModal}
           onClose={() => setShowModal(false)}
           onColorClickFunction={(color) => {
-            setSkinColor(color);
             props.controller.onAvatarConfigChanged({
               skinColor: color,
             });
@@ -53,7 +56,9 @@ export default function AvatarEditorBodyCategory(
             min={0}
             max={1}
             step={0.01}
-            callback={console.log}
+            callback={(value) => {
+              props.controller.onAvatarConfigChanged({ roundness: value });
+            }}
             displayFactor={100}
             buttons={{ imageLeft: bodySmallIcon, imageRight: bodyBigIcon }}
           />
@@ -67,7 +72,9 @@ export default function AvatarEditorBodyCategory(
             min={0}
             max={1}
             step={0.01}
-            callback={console.log}
+            callback={(value) => {
+              props.controller.onAvatarConfigChanged({ roundness: value });
+            }}
             displayFactor={100}
             buttons={{ imageLeft: bodySmallIcon, imageRight: bodyBigIcon }}
           />
