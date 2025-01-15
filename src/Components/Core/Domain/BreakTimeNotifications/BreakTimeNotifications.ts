@@ -1,6 +1,6 @@
 // Small Break alles außer H und S
 // Small Break B3
-import SmallBreakB3Slide1Image from "../../../../Assets/BreakTimeAssets/B3/smallBreakContent-B3-slide1.png";
+import SmallBreakB3Slide1Image from "../../../../Assets/BreakTimeAssets/B3/ps-B3-slide1.png";
 import SmallBreakB3Slide2Image from "../../../../Assets/BreakTimeAssets/B3/smallBreakContent-B3-slide2.png";
 // Small Break B7
 import SmallBreakB7Slide1Image from "../../../../Assets/BreakTimeAssets/B7/smallBreakContent-B7-slide1.png";
