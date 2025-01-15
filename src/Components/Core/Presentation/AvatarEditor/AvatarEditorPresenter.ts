@@ -31,6 +31,8 @@ export default class AvatarEditorPresenter implements IAvatarEditorPresenter {
       avatarConfig.headgear ?? this.viewModel.headgear.Value;
     this.viewModel.glasses.Value =
       avatarConfig.glasses ?? this.viewModel.glasses.Value;
+    this.viewModel.backpack.Value =
+      avatarConfig.backpack ?? this.viewModel.backpack.Value;
     //clothes
     //Body
     this.viewModel.skinColor.Value =

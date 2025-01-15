@@ -6,8 +6,10 @@ import {
   AvatarNoneModel,
   OAvatarHeadGearModels,
   AvatarHeadgearModels,
-  AvatarGlassesModels,
   OAvatarGlassesModels,
+  AvatarGlassesModels,
+  OAvatarBackpackModels,
+  AvatarBackpackModels,
 } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
 import noneIcon from "../../../../../../Assets/avatarEditorThumbnails/aa-none_Thumbnail.png";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
@@ -18,7 +20,7 @@ const noneThumbnail = {
 };
 
 const headgearThumbnails = Object.values(OAvatarHeadGearModels).map<{
-  type: AvatarHeadgearModels; // use union type with AvatarNoneModel
+  type: AvatarHeadgearModels;
   image: string;
 }>((type) => ({
   type: type,
@@ -29,7 +31,7 @@ const headgearThumbnails = Object.values(OAvatarHeadGearModels).map<{
 headgearThumbnails.unshift(noneThumbnail);
 
 const glassesThumbnails = Object.values(OAvatarGlassesModels).map<{
-  type: AvatarGlassesModels; // use union type with AvatarNoneModel
+  type: AvatarGlassesModels;
   image: string;
 }>((type) => ({
   type: type,
@@ -39,19 +41,23 @@ const glassesThumbnails = Object.values(OAvatarGlassesModels).map<{
 }));
 glassesThumbnails.unshift(noneThumbnail);
 
-// const glassesThumbnails = require.context(
-//   "../../../../../../Assets/avatarEditorThumbnails/accessoires/glasses",
-// );
-// const glassesThumbnailsList = glassesThumbnails
-//   .keys()
-//   .map((key) => glassesThumbnails(key));
+const backpackThumbnails = Object.values(OAvatarBackpackModels).map<{
+  type: AvatarBackpackModels;
+  image: string;
+}>((type) => ({
+  type: type,
+  image: require(
+    `../../../../../../Assets/avatarEditorThumbnails/accessoires/backpack/aa-${type}.png`,
+  ),
+}));
+backpackThumbnails.unshift(noneThumbnail);
 
-const backpackThumbnails = require.context(
-  "../../../../../../Assets/avatarEditorThumbnails/accessoires/backpack",
-);
-const backpackThumbnailsList = backpackThumbnails
-  .keys()
-  .map((key) => backpackThumbnails(key));
+// const backpackThumbnails = require.context(
+//   "../../../../../../Assets/avatarEditorThumbnails/accessoires/backpack",
+// );
+// const backpackThumbnailsList = backpackThumbnails
+//   .keys()
+//   .map((key) => backpackThumbnails(key));
 
 const otherThumbnails = require.context(
   "../../../../../../Assets/avatarEditorThumbnails/accessoires/other",
@@ -66,6 +72,7 @@ export default function AvatarEditorAccessoireCategory(
   const { t: translate } = useTranslation("avatarEditor");
   const [headgearType] = useObservable(props.viewModel.headgear);
   const [glassesType] = useObservable(props.viewModel.glasses);
+  const [backpackType] = useObservable(props.viewModel.backpack);
 
   const TileGridHeadGear = () => {
     return (
@@ -110,14 +117,18 @@ export default function AvatarEditorAccessoireCategory(
   const TileGridBackpacks = () => {
     return (
       <TileGridLayout
-        tileContents={backpackThumbnailsList.map((image, index) => ({
+        tileContents={backpackThumbnails.map((thumbnail, index) => ({
           id: index,
-          image,
+          image: thumbnail.image,
+          title: translate(thumbnail.type).toString() ?? "",
+          active: backpackType === thumbnail.type,
         }))}
         columns={5}
         mobileColumns={3}
         onTileClick={(id) => {
-          console.log(id);
+          props.controller.onAvatarConfigChanged({
+            backpack: backpackThumbnails[id].type,
+          });
         }}
       />
     );

@@ -95,6 +95,15 @@ export type AvatarGlassesModels =
   | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
   | (typeof OAvatarGlassesModels)[keyof typeof OAvatarGlassesModels];
 
+export const OAvatarBackpackModels = {
+  BackpackSantapack: "backpack-santapack",
+  BackpackThreepouchpack: "backpack-threepouchpack",
+} as const;
+
+export type AvatarBackpackModels =
+  | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
+  | (typeof OAvatarBackpackModels)[keyof typeof OAvatarBackpackModels];
+
 export enum AvatarShirtModels {}
 
 export enum AvatarPantsModels {}

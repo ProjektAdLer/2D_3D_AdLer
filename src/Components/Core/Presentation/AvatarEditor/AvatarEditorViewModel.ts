@@ -8,6 +8,7 @@ import {
   AvatarShirtModels,
   AvatarPantsModels,
   AvatarShoesModels,
+  AvatarBackpackModels,
 } from "../../Domain/AvatarModels/AvatarModelTypes";
 
 export default class AvatarEditorViewModel {
@@ -33,6 +34,8 @@ export default class AvatarEditorViewModel {
     new Observable<AvatarHeadgearModels>("none");
   glasses: Observable<AvatarGlassesModels> =
     new Observable<AvatarGlassesModels>("none");
+  backpack: Observable<AvatarBackpackModels> =
+    new Observable<AvatarBackpackModels>("none");
 
   // Clothes
   shirt: Observable<AvatarShirtModels>;

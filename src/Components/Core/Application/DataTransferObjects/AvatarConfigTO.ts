@@ -1,5 +1,6 @@
 import { AvatarColor } from "../../Domain/AvatarModels/AvatarColorPalette";
 import {
+  AvatarBackpackModels,
   AvatarBeardModels,
   AvatarGlassesModels,
   AvatarHairModels,
@@ -24,6 +25,7 @@ export default class AvatarConfigTO {
   // Accessories
   public headgear: AvatarHeadgearModels;
   public glasses: AvatarGlassesModels;
+  public backpack: AvatarBackpackModels;
   // TODO: add more accessories when assets are available
 
   // Clothes
