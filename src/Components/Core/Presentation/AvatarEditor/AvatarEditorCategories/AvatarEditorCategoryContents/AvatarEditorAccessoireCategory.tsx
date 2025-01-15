@@ -10,6 +10,8 @@ import {
   AvatarGlassesModels,
   OAvatarBackpackModels,
   AvatarBackpackModels,
+  OAvatarOtherModels,
+  AvatarOtherModels,
 } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
 import noneIcon from "../../../../../../Assets/avatarEditorThumbnails/aa-none_Thumbnail.png";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
@@ -52,19 +54,16 @@ const backpackThumbnails = Object.values(OAvatarBackpackModels).map<{
 }));
 backpackThumbnails.unshift(noneThumbnail);
 
-// const backpackThumbnails = require.context(
-//   "../../../../../../Assets/avatarEditorThumbnails/accessoires/backpack",
-// );
-// const backpackThumbnailsList = backpackThumbnails
-//   .keys()
-//   .map((key) => backpackThumbnails(key));
-
-const otherThumbnails = require.context(
-  "../../../../../../Assets/avatarEditorThumbnails/accessoires/other",
-);
-const otherThumbnailsList = otherThumbnails
-  .keys()
-  .map((key) => otherThumbnails(key));
+const otherThumbnails = Object.values(OAvatarOtherModels).map<{
+  type: AvatarOtherModels;
+  image: string;
+}>((type) => ({
+  type: type,
+  image: require(
+    `../../../../../../Assets/avatarEditorThumbnails/accessoires/other/aa-${type}.png`,
+  ),
+}));
+otherThumbnails.unshift(noneThumbnail);
 
 export default function AvatarEditorAccessoireCategory(
   props: AvatarEditorCategoryContentProps,
@@ -73,6 +72,7 @@ export default function AvatarEditorAccessoireCategory(
   const [headgearType] = useObservable(props.viewModel.headgear);
   const [glassesType] = useObservable(props.viewModel.glasses);
   const [backpackType] = useObservable(props.viewModel.backpack);
+  const [otherType] = useObservable(props.viewModel.other);
 
   const TileGridHeadGear = () => {
     return (
@@ -137,14 +137,18 @@ export default function AvatarEditorAccessoireCategory(
   const TileGridOthers = () => {
     return (
       <TileGridLayout
-        tileContents={otherThumbnailsList.map((image, index) => ({
+        tileContents={otherThumbnails.map((thumbnail, index) => ({
           id: index,
-          image,
+          image: thumbnail.image,
+          title: translate(thumbnail.type).toString() ?? "",
+          active: otherType === thumbnail.type,
         }))}
         columns={5}
         mobileColumns={3}
         onTileClick={(id) => {
-          console.log(id);
+          props.controller.onAvatarConfigChanged({
+            other: otherThumbnails[id].type,
+          });
         }}
       />
     );

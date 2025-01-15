@@ -5,6 +5,7 @@ import {
   AvatarGlassesModels,
   AvatarHairModels,
   AvatarHeadgearModels,
+  AvatarOtherModels,
   AvatarPantsModels,
   AvatarShirtModels,
   AvatarShoesModels,
@@ -26,7 +27,7 @@ export default class AvatarConfigTO {
   public headgear: AvatarHeadgearModels;
   public glasses: AvatarGlassesModels;
   public backpack: AvatarBackpackModels;
-  // TODO: add more accessories when assets are available
+  public other: AvatarOtherModels;
 
   // Clothes
   public shirt: AvatarShirtModels;
