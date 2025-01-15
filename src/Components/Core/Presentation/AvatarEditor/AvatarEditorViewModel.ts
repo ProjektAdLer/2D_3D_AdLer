@@ -31,7 +31,8 @@ export default class AvatarEditorViewModel {
   // Accessories
   headgear: Observable<AvatarHeadgearModels> =
     new Observable<AvatarHeadgearModels>("none");
-  glasses: Observable<AvatarGlassesModels>;
+  glasses: Observable<AvatarGlassesModels> =
+    new Observable<AvatarGlassesModels>("none");
 
   // Clothes
   shirt: Observable<AvatarShirtModels>;

@@ -78,7 +78,22 @@ export type AvatarHeadgearModels =
   | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
   | (typeof OAvatarHeadGearModels)[keyof typeof OAvatarHeadGearModels];
 
-export enum AvatarGlassesModels {}
+export const OAvatarGlassesModels = {
+  GlassesBrowline: "glasses-browline",
+  GlassesCateye: "glasses-cateye",
+  GlassesDealwithit: "glasses-dealwithit",
+  GlassesHeart: "glasses-heart",
+  GlassesMonocle: "glasses-monocle",
+  GlassesOval: "glasses-oval",
+  GlassesReading: "glasses-reading",
+  GlassesRectangle: "glasses-rectangle",
+  GlassesRound: "glasses-round",
+  GlassesSunglass: "glasses-sunglass",
+} as const;
+
+export type AvatarGlassesModels =
+  | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
+  | (typeof OAvatarGlassesModels)[keyof typeof OAvatarGlassesModels];
 
 export enum AvatarShirtModels {}
 

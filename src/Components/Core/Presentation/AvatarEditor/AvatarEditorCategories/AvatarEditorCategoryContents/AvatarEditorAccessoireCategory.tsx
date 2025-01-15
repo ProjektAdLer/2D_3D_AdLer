@@ -6,6 +6,8 @@ import {
   AvatarNoneModel,
   OAvatarHeadGearModels,
   AvatarHeadgearModels,
+  AvatarGlassesModels,
+  OAvatarGlassesModels,
 } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
 import noneIcon from "../../../../../../Assets/avatarEditorThumbnails/aa-none_Thumbnail.png";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
@@ -26,19 +28,23 @@ const headgearThumbnails = Object.values(OAvatarHeadGearModels).map<{
 }));
 headgearThumbnails.unshift(noneThumbnail);
 
-// const headgearThumbnails = require.context(
-//   "../../../../../../Assets/avatarEditorThumbnails/accessoires/headgear",
-// );
-// const headgearThumbnailsList = headgearThumbnails
-//   .keys()
-//   .map((key) => headgearThumbnails(key));
+const glassesThumbnails = Object.values(OAvatarGlassesModels).map<{
+  type: AvatarGlassesModels; // use union type with AvatarNoneModel
+  image: string;
+}>((type) => ({
+  type: type,
+  image: require(
+    `../../../../../../Assets/avatarEditorThumbnails/accessoires/glasses/aa-${type}.png`,
+  ),
+}));
+glassesThumbnails.unshift(noneThumbnail);
 
-const glassesThumbnails = require.context(
-  "../../../../../../Assets/avatarEditorThumbnails/accessoires/glasses",
-);
-const glassesThumbnailsList = glassesThumbnails
-  .keys()
-  .map((key) => glassesThumbnails(key));
+// const glassesThumbnails = require.context(
+//   "../../../../../../Assets/avatarEditorThumbnails/accessoires/glasses",
+// );
+// const glassesThumbnailsList = glassesThumbnails
+//   .keys()
+//   .map((key) => glassesThumbnails(key));
 
 const backpackThumbnails = require.context(
   "../../../../../../Assets/avatarEditorThumbnails/accessoires/backpack",
@@ -59,6 +65,7 @@ export default function AvatarEditorAccessoireCategory(
 ) {
   const { t: translate } = useTranslation("avatarEditor");
   const [headgearType] = useObservable(props.viewModel.headgear);
+  const [glassesType] = useObservable(props.viewModel.glasses);
 
   const TileGridHeadGear = () => {
     return (
@@ -83,14 +90,18 @@ export default function AvatarEditorAccessoireCategory(
   const TileGridGlasses = () => {
     return (
       <TileGridLayout
-        tileContents={glassesThumbnailsList.map((image, index) => ({
+        tileContents={glassesThumbnails.map((thumbnail, index) => ({
           id: index,
-          image,
+          image: thumbnail.image,
+          title: translate(thumbnail.type).toString() ?? "",
+          active: glassesType === thumbnail.type,
         }))}
         columns={5}
         mobileColumns={3}
         onTileClick={(id) => {
-          console.log(id);
+          props.controller.onAvatarConfigChanged({
+            glasses: glassesThumbnails[id].type,
+          });
         }}
       />
     );
