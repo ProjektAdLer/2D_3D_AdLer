@@ -27,5 +27,7 @@ export default class AvatarEditorPresenter implements IAvatarEditorPresenter {
       avatarConfig.mouth ?? this.viewModel.mouth.Value;
     this.viewModel.skinColor.Value =
       avatarConfig.skinColor ?? this.viewModel.skinColor.Value;
+    this.viewModel.headgear.Value =
+      avatarConfig.headgear ?? this.viewModel.headgear.Value;
   }
 }

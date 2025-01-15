@@ -2,13 +2,36 @@ import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps
 import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGridLayout";
 import { useTranslation } from "react-i18next";
 import AccordionElement from "~ReactComponents/GeneralComponents/Accordion/AccordionElement";
+import {
+  AvatarNoneModel,
+  OAvatarHeadGearModels,
+  AvatarHeadgearModels,
+} from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
+import noneIcon from "../../../../../../Assets/avatarEditorThumbnails/aa-none_Thumbnail.png";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 
-const headgearThumbnails = require.context(
-  "../../../../../../Assets/avatarEditorThumbnails/accessoires/headgear",
-);
-const headgearThumbnailsList = headgearThumbnails
-  .keys()
-  .map((key) => headgearThumbnails(key));
+const noneThumbnail = {
+  type: AvatarNoneModel.None,
+  image: noneIcon,
+};
+
+const headgearThumbnails = Object.values(OAvatarHeadGearModels).map<{
+  type: AvatarHeadgearModels; // use union type with AvatarNoneModel
+  image: string;
+}>((type) => ({
+  type: type,
+  image: require(
+    `../../../../../../Assets/avatarEditorThumbnails/accessoires/headgear/aa-${type}.png`,
+  ),
+}));
+headgearThumbnails.unshift(noneThumbnail);
+
+// const headgearThumbnails = require.context(
+//   "../../../../../../Assets/avatarEditorThumbnails/accessoires/headgear",
+// );
+// const headgearThumbnailsList = headgearThumbnails
+//   .keys()
+//   .map((key) => headgearThumbnails(key));
 
 const glassesThumbnails = require.context(
   "../../../../../../Assets/avatarEditorThumbnails/accessoires/glasses",
@@ -35,18 +58,23 @@ export default function AvatarEditorAccessoireCategory(
   props: AvatarEditorCategoryContentProps,
 ) {
   const { t: translate } = useTranslation("avatarEditor");
+  const [headgearType] = useObservable(props.viewModel.headgear);
 
   const TileGridHeadGear = () => {
     return (
       <TileGridLayout
-        tileContents={headgearThumbnailsList.map((image, index) => ({
+        tileContents={headgearThumbnails.map((thumbnail, index) => ({
           id: index,
-          image,
+          image: thumbnail.image,
+          title: translate(thumbnail.type).toString() ?? "",
+          active: headgearType === thumbnail.type,
         }))}
         columns={5}
         mobileColumns={3}
         onTileClick={(id) => {
-          console.log(id);
+          props.controller.onAvatarConfigChanged({
+            headgear: headgearThumbnails[id].type,
+          });
         }}
       />
     );
@@ -99,7 +127,7 @@ export default function AvatarEditorAccessoireCategory(
       />
     );
   };
-
+  if (!props.controller || !props.viewModel) return null;
   return (
     <div className="flex flex-col">
       <AccordionElement

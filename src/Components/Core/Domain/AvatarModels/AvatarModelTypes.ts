@@ -35,6 +35,7 @@ export const OAvatarHairModels = {
   HairShortSideParting: "hair-short-side-parting",
   HairShortVanilla: "hair-short-vanilla",
 } as const;
+
 export type AvatarHairModels =
   | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
   | (typeof OAvatarHairModels)[keyof typeof OAvatarHairModels];
@@ -62,7 +63,20 @@ export type AvatarBeardModels =
   | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
   | (typeof OAvatarBeardModels)[keyof typeof OAvatarBeardModels];
 
-export enum AvatarHeadgearModels {}
+export const OAvatarHeadGearModels = {
+  HatsCowboy: "hats-cowboy",
+  HatsCylinder: "hats-cylinder",
+  HatsFroghat: "hats-froghat",
+  HatsKecap: "hats-kecap",
+  HatsSanta: "hats-santa",
+  HatsUniversity: "hats-university",
+  HatsVrgoggle: "hats-vrgoggle",
+  HatsWitch: "hats-witch",
+} as const;
+
+export type AvatarHeadgearModels =
+  | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
+  | (typeof OAvatarHeadGearModels)[keyof typeof OAvatarHeadGearModels];
 
 export enum AvatarGlassesModels {}
 
