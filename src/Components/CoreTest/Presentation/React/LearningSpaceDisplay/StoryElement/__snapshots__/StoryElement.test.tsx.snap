@@ -1,23 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StoryElement displays correct npc thumbnail for model "a-quizbg-alerobot" 1`] = `
-<img
-  alt="LearningImage!"
-  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
-  data-testid="npcImage"
-  src="a-quizbg-alerobot_close.png"
-/>
-`;
-
-exports[`StoryElement displays correct npc thumbnail for model "a-quizbg-defaultnpc" 1`] = `
-<img
-  alt="LearningImage!"
-  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
-  data-testid="npcImage"
-  src="a-quizbg-defaultnpc-close.png"
-/>
-`;
-
 exports[`StoryElement displays correct npc thumbnail for model "a_npc_dozentlukas" 1`] = `
 <img
   alt="LearningImage!"
@@ -33,5 +15,23 @@ exports[`StoryElement displays correct npc thumbnail for model "a-npc-sheriffjus
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
   src="a_npc_sheriffjustice_close.png"
+/>
+`;
+
+exports[`StoryElement displays correct npc thumbnail for model "a-quizbg-alerobot" 1`] = `
+<img
+  alt="LearningImage!"
+  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+  data-testid="npcImage"
+  src="a-quizbg-alerobot-close.png"
+/>
+`;
+
+exports[`StoryElement displays correct npc thumbnail for model "a-quizbg-defaultnpc" 1`] = `
+<img
+  alt="LearningImage!"
+  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+  data-testid="npcImage"
+  src="a-quizbg-defaultnpc-close.png"
 />
 `;
