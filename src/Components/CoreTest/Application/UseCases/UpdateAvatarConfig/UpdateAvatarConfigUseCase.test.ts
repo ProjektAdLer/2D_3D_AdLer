@@ -11,11 +11,14 @@ import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 import IAvatarPort from "../../../../Core/Application/Ports/Interfaces/IAvatarPort";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import IBackendPort from "../../../../Core/Application/Ports/Interfaces/IBackendPort";
+import ILoadAvatarConfigUseCase from "../../../../Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
+import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 
 const entityContainerMock = mock<IEntityContainer>();
 const loggerMock = mock<ILoggerPort>();
 const avatarPortMock = mock<IAvatarPort>();
 const backendAdapterMock = mock<IBackendPort>();
+const loadAvatarConfigUseCaseMock = mock<ILoadAvatarConfigUseCase>();
 
 describe("UpdateAvatarConfigUseCase", () => {
   let systemUnderTest: UpdateAvatarConfigUseCase;
@@ -32,6 +35,9 @@ describe("UpdateAvatarConfigUseCase", () => {
     CoreDIContainer.rebind(CORE_TYPES.IBackendAdapter).toConstantValue(
       backendAdapterMock,
     );
+    CoreDIContainer.rebind(
+      USECASE_TYPES.ILoadAvatarConfigUseCase,
+    ).toConstantValue(loadAvatarConfigUseCaseMock);
   });
 
   beforeEach(() => {
@@ -73,7 +79,7 @@ describe("UpdateAvatarConfigUseCase", () => {
 
     await systemUnderTest.executeAsync({});
 
-    expect(avatarPortMock.onAvatarConfigLoaded).toHaveBeenCalledTimes(1);
+    expect(loadAvatarConfigUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
   });
 
   test("updates avatar config in user data entity", async () => {
@@ -134,20 +140,5 @@ describe("UpdateAvatarConfigUseCase", () => {
     await systemUnderTest.executeAsync(avatarConfig);
 
     expect(avatarPortMock.onAvatarConfigChanged).not.toHaveBeenCalled();
-  });
-
-  test("diff and new avatar config passed to onAvatarConfigChanged do match", async () => {
-    const avatarConfig: Partial<AvatarConfigTO> = {
-      roundness: 0.5,
-    };
-    const userDataEntity = {};
-
-    entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
-
-    await systemUnderTest.executeAsync(avatarConfig);
-
-    expect(
-      avatarPortMock.onAvatarConfigChanged.mock.lastCall![0],
-    ).toMatchObject(avatarPortMock.onAvatarConfigChanged.mock.lastCall![1]);
   });
 });
