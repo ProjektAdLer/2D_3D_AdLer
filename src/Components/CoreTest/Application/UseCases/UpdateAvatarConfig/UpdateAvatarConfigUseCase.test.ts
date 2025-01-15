@@ -89,7 +89,7 @@ describe("UpdateAvatarConfigUseCase", () => {
     const userDataEntity = {
       avatar: {
         roundness: 0,
-        hair: OAvatarHairModels.MediumPonytail,
+        hair: OAvatarHairModels.HairMediumPonytail,
       } as AvatarEntity,
     };
 
@@ -99,7 +99,7 @@ describe("UpdateAvatarConfigUseCase", () => {
 
     expect(userDataEntity.avatar.roundness).toEqual(0.5);
     expect(userDataEntity.avatar.hair).toEqual(
-      OAvatarHairModels.MediumPonytail,
+      OAvatarHairModels.HairMediumPonytail,
     );
   });
 
@@ -110,7 +110,7 @@ describe("UpdateAvatarConfigUseCase", () => {
     const userDataEntity = {
       avatar: {
         roundness: 0,
-        hair: OAvatarHairModels.MediumPonytail,
+        hair: OAvatarHairModels.HairMediumPonytail,
       } as AvatarEntity,
     };
 
@@ -131,7 +131,7 @@ describe("UpdateAvatarConfigUseCase", () => {
     const userDataEntity = {
       avatar: {
         roundness: 0.5,
-        hair: OAvatarHairModels.MediumPonytail,
+        hair: OAvatarHairModels.HairMediumPonytail,
       } as AvatarEntity,
     };
 
