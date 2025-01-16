@@ -140,4 +140,13 @@ export type AvatarShirtModels =
   | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
   | (typeof OAvatarShirtModels)[keyof typeof OAvatarShirtModels];
 
-export enum AvatarShoesModels {}
+export const OAvatarShoesModels = {
+  ShoesBoots: "shoes-boots",
+  ShoesSantaboots: "shoes-santaboots",
+  ShoesSantaheels: "shoes-santaheels",
+  ShoesTrainers: "shoes-trainers",
+} as const;
+
+export type AvatarShoesModels =
+  | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
+  | (typeof OAvatarShoesModels)[keyof typeof OAvatarShoesModels];

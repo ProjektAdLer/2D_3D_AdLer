@@ -58,7 +58,9 @@ export default class AvatarEditorViewModel {
     nameKey: "Brown 2",
     hexColor: "#4b2a1a",
   });
-  shoes: Observable<AvatarShoesModels>;
+  shoes: Observable<AvatarShoesModels> = new Observable<AvatarShoesModels>(
+    "none",
+  );
   shoesColor: Observable<AvatarColor> = new Observable<AvatarColor>({
     id: 33,
     nameKey: "Brown 2",

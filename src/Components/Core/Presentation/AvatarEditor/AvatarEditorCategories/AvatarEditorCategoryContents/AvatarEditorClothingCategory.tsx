@@ -12,6 +12,8 @@ import {
   AvatarPantsModels,
   OAvatarShirtModels,
   AvatarShirtModels,
+  OAvatarShoesModels,
+  AvatarShoesModels,
 } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
 import noneIcon from "../../../../../../Assets/avatarEditorThumbnails/aa-none_Thumbnail.png";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
@@ -43,12 +45,16 @@ const pantsThumbnails = Object.values(OAvatarPantsModels).map<{
 }));
 pantsThumbnails.unshift(noneThumbnail);
 
-const shoesThumbnails = require.context(
-  "../../../../../../Assets/avatarEditorThumbnails/clothing/shoes",
-);
-const shoesThumbnailsList = shoesThumbnails
-  .keys()
-  .map((key) => shoesThumbnails(key));
+const shoesThumbnails = Object.values(OAvatarShoesModels).map<{
+  type: AvatarShoesModels;
+  image: string;
+}>((type) => ({
+  type: type,
+  image: require(
+    `../../../../../../Assets/avatarEditorThumbnails/clothing/shoes/aa-${type}.png`,
+  ),
+}));
+shoesThumbnails.unshift(noneThumbnail);
 
 export default function AvatarEditorClothingCategory(
   props: AvatarEditorCategoryContentProps,
@@ -61,7 +67,8 @@ export default function AvatarEditorClothingCategory(
   const [shirtColor] = useObservable(props.viewModel.shirtColor);
   const [pantsType] = useObservable(props.viewModel.pants);
   const [pantsColor] = useObservable(props.viewModel.pantsColor);
-  const [shoesColor, setShoesColor] = useState(AvatarColorPalette[0]);
+  const [shoesType] = useObservable(props.viewModel.shoes);
+  const [shoesColor] = useObservable(props.viewModel.shoesColor);
 
   const TileGridShirts = () => {
     return (
@@ -147,14 +154,18 @@ export default function AvatarEditorClothingCategory(
     return (
       <>
         <TileGridLayout
-          tileContents={shoesThumbnailsList.map((image, index) => ({
+          tileContents={shoesThumbnails.map((thumbnails, index) => ({
             id: index,
-            image,
+            image: thumbnails.image,
+            title: translate(thumbnails.type).toString() ?? "",
+            active: shoesType === thumbnails.type,
           }))}
           columns={5}
           mobileColumns={3}
           onTileClick={(id) => {
-            console.log(id);
+            props.controller.onAvatarConfigChanged({
+              shoes: shoesThumbnails[id].type,
+            });
           }}
         />
         <div className="w-full p-2 m-2">
@@ -169,7 +180,6 @@ export default function AvatarEditorClothingCategory(
             showModal={showShoesModal}
             onClose={() => setShowShoesModal(false)}
             onColorClickFunction={(color) => {
-              setShoesColor(color);
               props.controller.onAvatarConfigChanged({
                 shoesColor: color,
               });
