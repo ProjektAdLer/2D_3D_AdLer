@@ -1,7 +1,6 @@
 import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps";
 import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGridLayout";
 import { useTranslation } from "react-i18next";
-import AvatarColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
 import ColorPickerButton from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerButton";
 import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/ColorPickerModal";
 import { useState } from "react";
