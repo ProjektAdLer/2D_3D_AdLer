@@ -83,7 +83,9 @@ export default function AvatarEditorClothingCategory(
         />
         <div className="w-full p-2 m-2">
           <ColorPickerButton
-            currentColor={shirtColor}
+            currentColor={
+              shirtColor ?? { id: 0, nameKey: "Black 1", hexColor: "#000000" }
+            }
             onClick={() => setShowShirtModal(true)}
           />
           <ColorPickerModal
@@ -121,7 +123,9 @@ export default function AvatarEditorClothingCategory(
         />
         <div className="w-full p-2 m-2">
           <ColorPickerButton
-            currentColor={pantsColor}
+            currentColor={
+              pantsColor ?? { id: 0, nameKey: "Black 1", hexColor: "#000000" }
+            }
             onClick={() => setShowPantsModal(true)}
           />
           <ColorPickerModal
@@ -155,7 +159,9 @@ export default function AvatarEditorClothingCategory(
         />
         <div className="w-full p-2 m-2">
           <ColorPickerButton
-            currentColor={shoesColor}
+            currentColor={
+              shoesColor ?? { id: 0, nameKey: "Black 1", hexColor: "#000000" }
+            }
             onClick={() => setShowShoesModal(true)}
           />
           <ColorPickerModal
@@ -173,7 +179,7 @@ export default function AvatarEditorClothingCategory(
       </>
     );
   };
-
+  if (!props.controller || !props.viewModel) return null;
   return (
     <div className="flex flex-col">
       <AccordionElement
