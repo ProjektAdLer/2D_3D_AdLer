@@ -44,7 +44,9 @@ export default class AvatarEditorViewModel {
   // Clothes
   shirt: Observable<AvatarShirtModels>;
   shirtColor: Observable<AvatarColor>;
-  pants: Observable<AvatarPantsModels>;
+  pants: Observable<AvatarPantsModels> = new Observable<AvatarPantsModels>(
+    "none",
+  );
   pantsColor: Observable<AvatarColor>;
   shoes: Observable<AvatarShoesModels>;
   shoesColor: Observable<AvatarColor>;
