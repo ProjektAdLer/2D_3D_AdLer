@@ -121,10 +121,23 @@ export const OAvatarPantsModels = {
   PantsSanta: "pants-santa",
   PantsStockings: "pants-stockings",
 } as const;
+
 export type AvatarPantsModels =
   | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
   | (typeof OAvatarPantsModels)[keyof typeof OAvatarPantsModels];
 
-export enum AvatarShirtModels {}
+export const OAvatarShirtModels = {
+  ShirtsDress: "shirts-dress",
+  ShirtsHoodie: "shirts-hoodie",
+  ShirtsLongdress: "shirts-longdress",
+  ShirtsSweatshirt: "shirts-sweatshirt",
+  ShirtsTopcoatsanta: "shirts-topcoatsanta",
+  ShirtsTopdresssanta: "shirts-topdresssanta",
+  ShirtsVest: "shirts-vest",
+} as const;
+
+export type AvatarShirtModels =
+  | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
+  | (typeof OAvatarShirtModels)[keyof typeof OAvatarShirtModels];
 
 export enum AvatarShoesModels {}
