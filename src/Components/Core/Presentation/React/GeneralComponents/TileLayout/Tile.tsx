@@ -16,6 +16,7 @@ export default function Tile(props: TileProps) {
       onClick={props.onClick}
       title={props.title}
       color={props.active ? "active" : "default"}
+      data-testid={props.title}
     >
       <div className="flex flex-col">
         <img

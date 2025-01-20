@@ -114,7 +114,7 @@ export default function AvatarEditor() {
 
         {/* Avatar Preview (Right Side) */}
         <div className="p-4">
-          <AvatarEditorPreview className="relative w-full h-full z-10" />
+          <AvatarEditorPreview className="relative z-10 w-full h-full" />
         </div>
       </div>
       <LoadingScreen

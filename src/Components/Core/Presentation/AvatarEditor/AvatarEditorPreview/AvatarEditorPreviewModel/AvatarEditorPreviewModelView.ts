@@ -1,5 +1,5 @@
 import AvatarEditorPreviewModelViewModel from "./AvatarEditorPreviewModelViewModel";
-import { Mesh, TransformNode } from "@babylonjs/core";
+import { Mesh, Texture, TransformNode } from "@babylonjs/core";
 import IScenePresenter from "../../../Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import SCENE_TYPES, {
@@ -13,6 +13,12 @@ import {
 } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
 import ILoadAvatarConfigUseCase from "src/Components/Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import {
+  AvatarEyeBrowTexture,
+  AvatarEyeTexture,
+  AvatarMouthTexture,
+  AvatarNoseTexture,
+} from "src/Components/Core/Domain/AvatarModels/AvatarFaceUVTexture";
 
 const baseModelLink = require("../../../../../../Assets/3dModels/sharedModels/avatar/a-avatar-skeleton.glb");
 
@@ -47,17 +53,28 @@ export default class AvatarEditorPreviewModelView {
       USECASE_TYPES.ILoadAvatarConfigUseCase,
     ).executeAsync();
 
-    console.log(this.viewModel.currentAvatarConfig.Value);
-
     this.updateModelHair(this.viewModel.currentAvatarConfig.Value.hair);
     this.updateModelBeard(this.viewModel.currentAvatarConfig.Value.beard);
+    this.updateEyeBrows(this.viewModel.currentAvatarConfig.Value.eyebrows);
+    this.updateEyes(this.viewModel.currentAvatarConfig.Value.eyes);
+    this.updateNose(this.viewModel.currentAvatarConfig.Value.nose);
+    this.updateMouth(this.viewModel.currentAvatarConfig.Value.mouth);
   }
 
   private onAvatarConfigChanged(): void {
+    console.log(this.viewModel.avatarConfigDiff.Value);
     if (this.viewModel.avatarConfigDiff.Value.beard)
       this.updateModelBeard(this.viewModel.avatarConfigDiff.Value.beard);
     if (this.viewModel.avatarConfigDiff.Value.hair)
       this.updateModelHair(this.viewModel.avatarConfigDiff.Value.hair);
+    if (this.viewModel.avatarConfigDiff.Value.eyebrows !== undefined)
+      this.updateEyeBrows(this.viewModel.avatarConfigDiff.Value.eyebrows);
+    if (this.viewModel.avatarConfigDiff.Value.eyes !== undefined)
+      this.updateEyes(this.viewModel.avatarConfigDiff.Value.eyes);
+    if (this.viewModel.avatarConfigDiff.Value.nose !== undefined)
+      this.updateNose(this.viewModel.avatarConfigDiff.Value.nose);
+    if (this.viewModel.avatarConfigDiff.Value.mouth !== undefined)
+      this.updateMouth(this.viewModel.avatarConfigDiff.Value.mouth);
   }
 
   private updateModelHair(hair?: AvatarHairModels | undefined) {
@@ -76,6 +93,50 @@ export default class AvatarEditorPreviewModelView {
       this.viewModel.beardMeshes,
       this.viewModel.beardAnchorNode,
     );
+  }
+
+  private updateEyeBrows(eyebrow?: number) {
+    let eyebrowMat = this.viewModel.baseModelMeshes.find((mesh) =>
+      mesh.material?.name.includes("Eyebrow_mat"),
+    )?.material!;
+
+    let texture = eyebrowMat.getActiveTextures()[0] as Texture;
+    const tmp = AvatarEyeBrowTexture[eyebrow!];
+    texture.uOffset = tmp.uOffset;
+    texture.vOffset = tmp.vOffset;
+  }
+
+  private updateEyes(eyes?: number) {
+    let eyeMat = this.viewModel.baseModelMeshes.find((mesh) =>
+      mesh.material?.name.includes("Eyes_mat"),
+    )?.material!;
+
+    let texture = eyeMat.getActiveTextures()[0] as Texture;
+    const tmp = AvatarEyeTexture[eyes!];
+    texture.uOffset = tmp.uOffset;
+    texture.vOffset = tmp.vOffset;
+  }
+
+  private updateNose(nose?: number) {
+    let noseMat = this.viewModel.baseModelMeshes.find((mesh) =>
+      mesh.material?.name.includes("Nose_mat"),
+    )?.material!;
+
+    let texture = noseMat.getActiveTextures()[0] as Texture;
+    const tmp = AvatarNoseTexture[nose!];
+    texture.uOffset = tmp.uOffset;
+    texture.vOffset = tmp.vOffset;
+  }
+
+  private updateMouth(mouth?: number) {
+    let mouthMat = this.viewModel.baseModelMeshes.find((mesh) =>
+      mesh.material?.name.includes("Mouth_mat"),
+    )?.material!;
+
+    let texture = mouthMat.getActiveTextures()[0] as Texture;
+    const tmp = AvatarMouthTexture[mouth!];
+    texture.uOffset = tmp.uOffset;
+    texture.vOffset = tmp.vOffset;
   }
 
   private async updateModel<T>(

@@ -51,29 +51,32 @@ describe("AvatarEditor", () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  test.each([[OAvatarEditorCategory.HAIR], [OAvatarEditorCategory.FACE]])(
-    "should render %s category when tab button is clicked",
-    (category) => {
-      useBuilderMock([
-        new AvatarEditorViewModel(),
-        mock<IAvatarEditorController>(),
-      ]);
+  test.each([
+    [OAvatarEditorCategory.HAIR],
+    [OAvatarEditorCategory.FACE],
+    [OAvatarEditorCategory.ACCESSOIRE],
+    [OAvatarEditorCategory.CLOTHING],
+    [OAvatarEditorCategory.BODY],
+  ])("should render %s category when tab button is clicked", (category) => {
+    useBuilderMock([
+      new AvatarEditorViewModel(),
+      mock<IAvatarEditorController>(),
+    ]);
 
-      const result = render(
-        <Provider container={CoreDIContainer}>
-          <AvatarEditor />
-        </Provider>,
-      );
+    const result = render(
+      <Provider container={CoreDIContainer}>
+        <AvatarEditor />
+      </Provider>,
+    );
 
-      const tabButton = result.getByTestId(
-        `avatar-editor-category-tab-${category}`,
-      );
+    const tabButton = result.getByTestId(
+      `avatar-editor-category-tab-${category}`,
+    );
 
-      act(() => {
-        fireEvent.click(tabButton);
-      });
+    act(() => {
+      fireEvent.click(tabButton);
+    });
 
-      expect(result.container).toMatchSnapshot();
-    },
-  );
+    expect(result.container).toMatchSnapshot();
+  });
 });

@@ -2,51 +2,89 @@ import AvatarEditorCategoryContentProps from "./AvatarEditorCategoryContentProps
 import TileGridLayout from "~ReactComponents/GeneralComponents/TileLayout/TileGridLayout";
 import { useTranslation } from "react-i18next";
 import AccordionElement from "~ReactComponents/GeneralComponents/Accordion/AccordionElement";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
+import {
+  AvatarEyeBrowTexture,
+  AvatarEyeTexture,
+  AvatarMouthTexture,
+  AvatarNoseTexture,
+} from "src/Components/Core/Domain/AvatarModels/AvatarFaceUVTexture";
 
-const eyebrowsThumbnails = require.context(
-  "../../../../../../Assets/avatarEditorThumbnails/face/eyebrows",
-);
-const eyebrowsThumbnailsList = eyebrowsThumbnails
-  .keys()
-  .map((key) => eyebrowsThumbnails(key));
+const eyebrowsThumbnails = Object.values(AvatarEyeBrowTexture).map<{
+  id: number;
+  image: string;
+  title: string;
+}>((entry) => ({
+  id: entry.id,
+  image: require(
+    `../../../../../../Assets/avatarEditorThumbnails/face/eyebrows/${entry.name}.png`,
+  ),
+  title: entry.name,
+}));
 
-const eyesThumbnails = require.context(
-  "../../../../../../Assets/avatarEditorThumbnails/face/eyes",
-);
-const eyesThumbnailsList = eyesThumbnails
-  .keys()
-  .map((key) => eyesThumbnails(key));
+const eyesThumbnails = Object.values(AvatarEyeTexture).map<{
+  id: number;
+  image: string;
+  title: string;
+}>((entry) => ({
+  id: entry.id,
+  image: require(
+    `../../../../../../Assets/avatarEditorThumbnails/face/eyes/${entry.name}.png`,
+  ),
+  title: entry.name,
+}));
 
-const mouthThumbnails = require.context(
-  "../../../../../../Assets/avatarEditorThumbnails/face/mouths",
-);
-const mouthThumbnailsList = mouthThumbnails
-  .keys()
-  .map((key) => mouthThumbnails(key));
+const nosesThumbnails = Object.values(AvatarNoseTexture).map<{
+  id: number;
+  image: string;
+  title: string;
+}>((entry) => ({
+  id: entry.id,
+  image: require(
+    `../../../../../../Assets/avatarEditorThumbnails/face/noses/${entry.name}.png`,
+  ),
+  title: entry.name,
+}));
 
-const noseThumbnails = require.context(
-  "../../../../../../Assets/avatarEditorThumbnails/face/noses",
-);
-const noseThumbnailsList = noseThumbnails
-  .keys()
-  .map((key) => noseThumbnails(key));
+const mouthThumbnails = Object.values(AvatarMouthTexture).map<{
+  id: number;
+  image: string;
+  title: string;
+}>((entry) => ({
+  id: entry.id,
+  image: require(
+    `../../../../../../Assets/avatarEditorThumbnails/face/mouths/${entry.name}.png`,
+  ),
+  title: entry.name,
+}));
 
 export default function AvatarEditorFaceCategory(
   props: AvatarEditorCategoryContentProps,
 ) {
   const { t: translate } = useTranslation("avatarEditor");
+  const [eyebrowType] = useObservable(props.viewModel.eyebrows);
+  const [eyeType] = useObservable(props.viewModel.eyes);
+  const [noseType] = useObservable(props.viewModel.nose);
+  const [mouthType] = useObservable(props.viewModel.mouth);
 
   const TileGridEyebrows = () => {
     return (
       <TileGridLayout
-        tileContents={eyebrowsThumbnailsList.map((image, index) => ({
+        tileContents={eyebrowsThumbnails.map((entry, index) => ({
           id: index,
-          image,
+          image: entry.image,
+          active:
+            index !== undefined
+              ? eyebrowType === AvatarEyeBrowTexture[index].id
+              : false,
+          title: translate(AvatarEyeBrowTexture[index].name).toString(),
         }))}
         columns={5}
         mobileColumns={3}
         onTileClick={(id) => {
-          console.log(id);
+          props.controller.onAvatarConfigChanged({
+            eyebrows: id,
+          });
         }}
       />
     );
@@ -55,14 +93,21 @@ export default function AvatarEditorFaceCategory(
   const TileGridEyes = () => {
     return (
       <TileGridLayout
-        tileContents={eyesThumbnailsList.map((image, index) => ({
+        tileContents={eyesThumbnails.map((entry, index) => ({
           id: index,
-          image,
+          image: entry.image,
+          active:
+            index !== undefined
+              ? eyeType === AvatarEyeTexture[index].id
+              : false,
+          title: translate(AvatarEyeTexture[index].name).toString(),
         }))}
         columns={4}
         mobileColumns={3}
         onTileClick={(id) => {
-          console.log(id);
+          props.controller.onAvatarConfigChanged({
+            eyes: id,
+          });
         }}
       />
     );
@@ -71,14 +116,21 @@ export default function AvatarEditorFaceCategory(
   const TileGridNoses = () => {
     return (
       <TileGridLayout
-        tileContents={noseThumbnailsList.map((image, index) => ({
+        tileContents={nosesThumbnails.map((entry, index) => ({
           id: index,
-          image,
+          image: entry.image,
+          active:
+            index !== undefined
+              ? noseType === AvatarNoseTexture[index].id
+              : false,
+          title: translate(AvatarNoseTexture[index].name).toString(),
         }))}
         columns={5}
         mobileColumns={3}
         onTileClick={(id) => {
-          console.log(id);
+          props.controller.onAvatarConfigChanged({
+            nose: id,
+          });
         }}
       />
     );
@@ -87,14 +139,19 @@ export default function AvatarEditorFaceCategory(
   const TielGridMouths = () => {
     return (
       <TileGridLayout
-        tileContents={mouthThumbnailsList.map((image, index) => ({
+        tileContents={mouthThumbnails.map((entry, index) => ({
           id: index,
-          image,
+          image: entry.image,
+          active:
+            index !== undefined
+              ? mouthType === AvatarMouthTexture[index].id
+              : false,
+          title: translate(AvatarMouthTexture[index].name).toString(),
         }))}
         columns={5}
         mobileColumns={3}
         onTileClick={(id) => {
-          console.log(id);
+          props.controller.onAvatarConfigChanged({ mouth: id });
         }}
       />
     );

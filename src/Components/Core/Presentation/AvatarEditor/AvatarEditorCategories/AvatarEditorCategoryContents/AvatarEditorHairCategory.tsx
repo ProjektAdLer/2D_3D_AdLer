@@ -91,7 +91,7 @@ export default function AvatarEditorHairCategory(
       />
     );
   };
-  if (!props.controller || !props.viewModel) return null;
+
   return (
     <div className="flex flex-col">
       <AccordionElement

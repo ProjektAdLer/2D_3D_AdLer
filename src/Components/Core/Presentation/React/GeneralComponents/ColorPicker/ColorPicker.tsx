@@ -20,6 +20,7 @@ function ColorButton(props: Readonly<Props>) {
         props.onClick(props.color);
       }}
       title={translate(props.color.nameKey)!}
+      data-testid={props.color.nameKey}
     ></StyledButton>
   );
 }

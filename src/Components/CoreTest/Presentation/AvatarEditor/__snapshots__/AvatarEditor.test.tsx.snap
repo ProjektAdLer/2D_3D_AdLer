@@ -340,6 +340,809 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
 </div>
 `;
 
+exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = `
+<div>
+  <div
+    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
+  >
+    <div
+      class="self-center w-full p-2 font-semibold flex place-content-stretch"
+    >
+      <div
+        class="flex items-center w-1/2 place-content-stretch justify-self-start "
+      >
+        <div
+          class=""
+        >
+          <button
+            class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          >
+            <img
+              alt="Home Icon"
+              class="w-10 xl:w-12 "
+              src="home.svg"
+            />
+          </button>
+        </div>
+      </div>
+      <div
+        class="flex justify-center w-full"
+      >
+        <div
+          class="text-xl truncate lg:text-4xl font-[roboto] flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
+        >
+          Avatar-Editor
+        </div>
+      </div>
+      <div
+        class="flex justify-end w-1/2 "
+      >
+        <div
+          class=""
+        >
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            >
+              <img
+                alt="Help Icon"
+                class="w-10 xl:w-12"
+                src="help.svg"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg"
+    >
+      <div
+        class="flex flex-col portrait:order-2"
+      >
+        <div
+          class="flex flex-row items-center justify-center"
+        >
+          <div
+            class="flex flex-col items-center justify-center"
+          >
+            <div
+              class="text-2xl font-bold text-darkblue"
+            >
+              Accessoires
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex flex-row justify-center p-2 space-x-4 "
+        >
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-0"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="hair.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-1"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="face.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-2"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="accessoires.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-3"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="clothing.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-4"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="body.svg"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto"
+        >
+          <div
+            class="flex flex-col"
+          >
+            <div
+              class="pb-2 border-b border-gray-500"
+            >
+              <button
+                class="content-start w-full text-left"
+              >
+                <h1
+                  class="text-2xl font-bold"
+                >
+                  ▶ Kopfbedeckung
+                </h1>
+              </button>
+            </div>
+            <div>
+              <div
+                class="accordionCollapsing"
+              />
+            </div>
+            <div
+              class="pb-2 border-b border-gray-500"
+            >
+              <button
+                class="content-start w-full text-left"
+              >
+                <h1
+                  class="text-2xl font-bold"
+                >
+                  ▶ Brille
+                </h1>
+              </button>
+            </div>
+            <div>
+              <div
+                class="accordionCollapsing"
+              />
+            </div>
+            <div
+              class="pb-2 border-b border-gray-500"
+            >
+              <button
+                class="content-start w-full text-left"
+              >
+                <h1
+                  class="text-2xl font-bold"
+                >
+                  ▶ Rucksack
+                </h1>
+              </button>
+            </div>
+            <div>
+              <div
+                class="accordionCollapsing"
+              />
+            </div>
+            <div
+              class="pb-2 border-b border-gray-500"
+            >
+              <button
+                class="content-start w-full text-left"
+              >
+                <h1
+                  class="text-2xl font-bold"
+                >
+                  ▶ Sonstiges
+                </h1>
+              </button>
+            </div>
+            <div>
+              <div
+                class="accordionCollapsing"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="p-4"
+      >
+        <mockedavatareditorpreview
+          class="relative w-full h-full z-10"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = `
+<div>
+  <div
+    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
+  >
+    <div
+      class="self-center w-full p-2 font-semibold flex place-content-stretch"
+    >
+      <div
+        class="flex items-center w-1/2 place-content-stretch justify-self-start "
+      >
+        <div
+          class=""
+        >
+          <button
+            class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          >
+            <img
+              alt="Home Icon"
+              class="w-10 xl:w-12 "
+              src="home.svg"
+            />
+          </button>
+        </div>
+      </div>
+      <div
+        class="flex justify-center w-full"
+      >
+        <div
+          class="text-xl truncate lg:text-4xl font-[roboto] flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
+        >
+          Avatar-Editor
+        </div>
+      </div>
+      <div
+        class="flex justify-end w-1/2 "
+      >
+        <div
+          class=""
+        >
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            >
+              <img
+                alt="Help Icon"
+                class="w-10 xl:w-12"
+                src="help.svg"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg"
+    >
+      <div
+        class="flex flex-col portrait:order-2"
+      >
+        <div
+          class="flex flex-row items-center justify-center"
+        >
+          <div
+            class="flex flex-col items-center justify-center"
+          >
+            <div
+              class="text-2xl font-bold text-darkblue"
+            >
+              Kleidung
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex flex-row justify-center p-2 space-x-4 "
+        >
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-0"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="hair.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-1"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="face.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-2"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="accessoires.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-3"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="clothing.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-4"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="body.svg"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto"
+        >
+          <div
+            class="flex flex-col"
+          >
+            <div
+              class="pb-2 border-b border-gray-500"
+            >
+              <button
+                class="content-start w-full text-left"
+              >
+                <h1
+                  class="text-2xl font-bold"
+                >
+                  ▶ Oberteil
+                </h1>
+              </button>
+            </div>
+            <div>
+              <div
+                class="accordionCollapsing"
+              />
+            </div>
+            <div
+              class="pb-2 border-b border-gray-500"
+            >
+              <button
+                class="content-start w-full text-left"
+              >
+                <h1
+                  class="text-2xl font-bold"
+                >
+                  ▶ Hose
+                </h1>
+              </button>
+            </div>
+            <div>
+              <div
+                class="accordionCollapsing"
+              />
+            </div>
+            <div
+              class="pb-2 border-b border-gray-500"
+            >
+              <button
+                class="content-start w-full text-left"
+              >
+                <h1
+                  class="text-2xl font-bold"
+                >
+                  ▶ Schuhe
+                </h1>
+              </button>
+            </div>
+            <div>
+              <div
+                class="accordionCollapsing"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="p-4"
+      >
+        <mockedavatareditorpreview
+          class="relative w-full h-full z-10"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = `
+<div>
+  <div
+    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
+  >
+    <div
+      class="self-center w-full p-2 font-semibold flex place-content-stretch"
+    >
+      <div
+        class="flex items-center w-1/2 place-content-stretch justify-self-start "
+      >
+        <div
+          class=""
+        >
+          <button
+            class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          >
+            <img
+              alt="Home Icon"
+              class="w-10 xl:w-12 "
+              src="home.svg"
+            />
+          </button>
+        </div>
+      </div>
+      <div
+        class="flex justify-center w-full"
+      >
+        <div
+          class="text-xl truncate lg:text-4xl font-[roboto] flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
+        >
+          Avatar-Editor
+        </div>
+      </div>
+      <div
+        class="flex justify-end w-1/2 "
+      >
+        <div
+          class=""
+        >
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            >
+              <img
+                alt="Help Icon"
+                class="w-10 xl:w-12"
+                src="help.svg"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg"
+    >
+      <div
+        class="flex flex-col portrait:order-2"
+      >
+        <div
+          class="flex flex-row items-center justify-center"
+        >
+          <div
+            class="flex flex-col items-center justify-center"
+          >
+            <div
+              class="text-2xl font-bold text-darkblue"
+            >
+              Körperform
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex flex-row justify-center p-2 space-x-4 "
+        >
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-0"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="hair.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-1"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="face.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-2"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="accessoires.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-3"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="clothing.svg"
+              />
+            </button>
+          </div>
+          <div
+            class=""
+          >
+            <button
+              class="!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatar-editor-category-tab-4"
+            >
+              <img
+                alt=""
+                class="h-8 lg:h-12"
+                src="body.svg"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto"
+        >
+          <div
+            class="flex flex-col"
+          >
+            <div
+              class="pb-2 border-b border-gray-500"
+            >
+              <h1
+                class="text-2xl font-bold"
+              >
+                Hautfarbe
+              </h1>
+            </div>
+            <div
+              class="w-full p-2 m-2"
+            >
+              <div
+                class=""
+              >
+                <div
+                  class=""
+                >
+                  <button
+                    class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                  >
+                    <div
+                      class="border-2 border-black rounded m-2 h-5 w-5"
+                      style="background-color: rgb(75, 42, 26);"
+                    />
+                    Braun 2
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="pb-2 border-b border-gray-500"
+            >
+              <h1
+                class="text-2xl font-bold"
+              >
+                Körperproportionen
+              </h1>
+            </div>
+            <div
+              class="bodyProportionContainer"
+            >
+              <div
+                class="flex items-center"
+              >
+                <h3
+                  class="text-xl font-bold"
+                >
+                  Oberkörper
+                </h3>
+              </div>
+              <div>
+                <div
+                  class="flex grow items-center gap-4 p-2"
+                >
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="leftRangeSliderButton"
+                    >
+                      <img
+                        alt=""
+                        src="body-small.svg"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    class="flex !flex-col justify-center items-center grow text-xl font-bold pb-8"
+                  >
+                    <input
+                      class="mb-1.5 numberInputField"
+                      max="100"
+                      min="0"
+                      type="number"
+                      value="0"
+                    />
+                    <input
+                      alt="SliderComponent"
+                      class="rangeSlider"
+                      max="1"
+                      min="0"
+                      name="Slider"
+                      step="0.01"
+                      type="range"
+                      value="0"
+                    />
+                  </div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="rightRangeSliderButton"
+                    >
+                      <img
+                        alt=""
+                        src="body-big.svg"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="flex items-center"
+              >
+                <h3
+                  class="text-xl font-bold"
+                >
+                  Unterkörper
+                </h3>
+              </div>
+              <div>
+                <div
+                  class="flex grow items-center gap-4 p-2"
+                >
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="leftRangeSliderButton"
+                    >
+                      <img
+                        alt=""
+                        src="body-small.svg"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    class="flex !flex-col justify-center items-center grow text-xl font-bold pb-8"
+                  >
+                    <input
+                      class="mb-1.5 numberInputField"
+                      max="100"
+                      min="0"
+                      type="number"
+                      value="0"
+                    />
+                    <input
+                      alt="SliderComponent"
+                      class="rangeSlider"
+                      max="1"
+                      min="0"
+                      name="Slider"
+                      step="0.01"
+                      type="range"
+                      value="0"
+                    />
+                  </div>
+                  <div
+                    class=""
+                  >
+                    <button
+                      class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="rightRangeSliderButton"
+                    >
+                      <img
+                        alt=""
+                        src="body-big.svg"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="p-4"
+      >
+        <mockedavatareditorpreview
+          class="relative w-full h-full z-10"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`AvatarEditor should renders 1`] = `
 <div>
   <div
@@ -411,7 +1214,7 @@ exports[`AvatarEditor should renders 1`] = `
             <div
               class="text-2xl font-bold text-darkblue"
             >
-              Haare
+              Gesicht
             </div>
           </div>
         </div>
@@ -422,7 +1225,7 @@ exports[`AvatarEditor should renders 1`] = `
             class=""
           >
             <button
-              class="!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-0"
             >
               <img
@@ -436,7 +1239,7 @@ exports[`AvatarEditor should renders 1`] = `
             class=""
           >
             <button
-              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              class="!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-1"
             >
               <img
@@ -492,7 +1295,7 @@ exports[`AvatarEditor should renders 1`] = `
         <div
           class="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto"
         >
-          <mockedavatareditorhaircategory
+          <mockedavatareditorfacecategory
             controller="undefined"
             viewmodel="[object Object]"
           />

@@ -13,6 +13,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Black 1"
             style="background-color: rgb(0, 0, 0);"
             title="Black 1"
           />
@@ -22,6 +23,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Black 2"
             style="background-color: rgb(27, 27, 27);"
             title="Black 2"
           />
@@ -31,6 +33,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Black 3"
             style="background-color: rgb(49, 49, 49);"
             title="Black 3"
           />
@@ -40,6 +43,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Black 4"
             style="background-color: rgb(85, 85, 85);"
             title="Black 4"
           />
@@ -49,6 +53,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Black 5"
             style="background-color: rgb(118, 118, 118);"
             title="Black 5"
           />
@@ -58,6 +63,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Black 6"
             style="background-color: rgb(148, 148, 148);"
             title="Black 6"
           />
@@ -67,6 +73,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Black 7"
             style="background-color: rgb(179, 179, 179);"
             title="Black 7"
           />
@@ -76,6 +83,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Black 8"
             style="background-color: rgb(206, 206, 206);"
             title="Black 8"
           />
@@ -85,6 +93,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Blue 1"
             style="background-color: rgb(4, 54, 117);"
             title="Blue 1"
           />
@@ -94,6 +103,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Blue 2"
             style="background-color: rgb(4, 54, 117);"
             title="Blue 2"
           />
@@ -103,6 +113,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Blue 3"
             style="background-color: rgb(47, 145, 205);"
             title="Blue 3"
           />
@@ -112,6 +123,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Blue 4"
             style="background-color: rgb(131, 174, 206);"
             title="Blue 4"
           />
@@ -121,6 +133,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Blue 5"
             style="background-color: rgb(23, 96, 127);"
             title="Blue 5"
           />
@@ -130,6 +143,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Blue 6"
             style="background-color: rgb(83, 152, 176);"
             title="Blue 6"
           />
@@ -139,6 +153,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Blue 7"
             style="background-color: rgb(148, 183, 195);"
             title="Blue 7"
           />
@@ -148,6 +163,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Blue 8"
             style="background-color: rgb(180, 198, 206);"
             title="Blue 8"
           />
@@ -157,6 +173,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Red 1"
             style="background-color: rgb(139, 21, 24);"
             title="Red 1"
           />
@@ -166,6 +183,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Red 2"
             style="background-color: rgb(164, 30, 34);"
             title="Red 2"
           />
@@ -175,6 +193,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Red 3"
             style="background-color: rgb(189, 44, 48);"
             title="Red 3"
           />
@@ -184,6 +203,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Red 4"
             style="background-color: rgb(206, 65, 69);"
             title="Red 4"
           />
@@ -193,6 +213,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Red 5"
             style="background-color: rgb(135, 26, 11);"
             title="Red 5"
           />
@@ -202,6 +223,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Red 6"
             style="background-color: rgb(168, 65, 30);"
             title="Red 6"
           />
@@ -211,6 +233,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Red 7"
             style="background-color: rgb(193, 100, 63);"
             title="Red 7"
           />
@@ -220,6 +243,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Red 8"
             style="background-color: rgb(205, 173, 162);"
             title="Red 8"
           />
@@ -229,6 +253,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Orange 1"
             style="background-color: rgb(183, 96, 0);"
             title="Orange 1"
           />
@@ -238,6 +263,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Orange 2"
             style="background-color: rgb(201, 131, 0);"
             title="Orange 2"
           />
@@ -247,6 +273,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Orange 3"
             style="background-color: rgb(206, 161, 0);"
             title="Orange 3"
           />
@@ -256,6 +283,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Orange 4"
             style="background-color: rgb(206, 183, 83);"
             title="Orange 4"
           />
@@ -265,6 +293,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Orange 5"
             style="background-color: rgb(170, 149, 1);"
             title="Orange 5"
           />
@@ -274,6 +303,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Orange 6"
             style="background-color: rgb(194, 175, 9);"
             title="Orange 6"
           />
@@ -283,6 +313,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Orange 7"
             style="background-color: rgb(204, 196, 40);"
             title="Orange 7"
           />
@@ -292,6 +323,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Orange 8"
             style="background-color: rgb(204, 202, 165);"
             title="Orange 8"
           />
@@ -301,6 +333,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 1"
             style="background-color: rgb(37, 22, 12);"
             title="Brown 1"
           />
@@ -310,6 +343,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 2"
             style="background-color: rgb(75, 42, 26);"
             title="Brown 2"
           />
@@ -319,6 +353,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 3"
             style="background-color: rgb(99, 61, 41);"
             title="Brown 3"
           />
@@ -328,6 +363,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 4"
             style="background-color: rgb(131, 91, 50);"
             title="Brown 4"
           />
@@ -337,6 +373,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 5"
             style="background-color: rgb(187, 152, 113);"
             title="Brown 5"
           />
@@ -346,6 +383,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 6"
             style="background-color: rgb(166, 148, 125);"
             title="Brown 6"
           />
@@ -355,6 +393,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 7"
             style="background-color: rgb(177, 162, 139);"
             title="Brown 7"
           />
@@ -364,6 +403,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 8"
             style="background-color: rgb(187, 169, 137);"
             title="Brown 8"
           />
@@ -373,6 +413,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 9"
             style="background-color: rgb(125, 67, 55);"
             title="Brown 9"
           />
@@ -382,6 +423,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 10"
             style="background-color: rgb(185, 121, 71);"
             title="Brown 10"
           />
@@ -391,6 +433,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 11"
             style="background-color: rgb(172, 125, 89);"
             title="Brown 11"
           />
@@ -400,6 +443,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 12"
             style="background-color: rgb(103, 127, 136);"
             title="Brown 12"
           />
@@ -409,6 +453,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 13"
             style="background-color: rgb(178, 150, 118);"
             title="Brown 13"
           />
@@ -418,6 +463,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 14"
             style="background-color: rgb(191, 161, 131);"
             title="Brown 14"
           />
@@ -427,6 +473,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 15"
             style="background-color: rgb(201, 178, 166);"
             title="Brown 15"
           />
@@ -436,6 +483,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Brown 16"
             style="background-color: rgb(204, 190, 184);"
             title="Brown 16"
           />
@@ -445,6 +493,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Violet 1"
             style="background-color: rgb(169, 9, 179);"
             title="Violet 1"
           />
@@ -454,6 +503,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Violet 2"
             style="background-color: rgb(197, 94, 202);"
             title="Violet 2"
           />
@@ -463,6 +513,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Violet 3"
             style="background-color: rgb(200, 166, 203);"
             title="Violet 3"
           />
@@ -472,6 +523,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Violet 4"
             style="background-color: rgb(203, 192, 204);"
             title="Violet 4"
           />
@@ -481,6 +533,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Violet 5"
             style="background-color: rgb(80, 12, 140);"
             title="Violet 5"
           />
@@ -490,6 +543,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Violet 6"
             style="background-color: rgb(134, 63, 179);"
             title="Violet 6"
           />
@@ -499,6 +553,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Violet 7"
             style="background-color: rgb(163, 112, 195);"
             title="Violet 7"
           />
@@ -508,6 +563,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Violet 8"
             style="background-color: rgb(189, 170, 203);"
             title="Violet 8"
           />
@@ -517,6 +573,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Green 1"
             style="background-color: rgb(13, 85, 2);"
             title="Green 1"
           />
@@ -526,6 +583,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Green 2"
             style="background-color: rgb(25, 154, 9);"
             title="Green 2"
           />
@@ -535,6 +593,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Green 3"
             style="background-color: rgb(58, 198, 30);"
             title="Green 3"
           />
@@ -544,6 +603,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Green 4"
             style="background-color: rgb(130, 206, 132);"
             title="Green 4"
           />
@@ -553,6 +613,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Green 5"
             style="background-color: rgb(59, 102, 19);"
             title="Green 5"
           />
@@ -562,6 +623,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Green 6"
             style="background-color: rgb(112, 150, 54);"
             title="Green 6"
           />
@@ -571,6 +633,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Green 7"
             style="background-color: rgb(157, 177, 107);"
             title="Green 7"
           />
@@ -580,6 +643,7 @@ Object {
         >
           <button
             class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+            data-testid="Green 8"
             style="background-color: rgb(189, 198, 165);"
             title="Green 8"
           />
@@ -596,6 +660,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Black 1"
           style="background-color: rgb(0, 0, 0);"
           title="Black 1"
         />
@@ -605,6 +670,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Black 2"
           style="background-color: rgb(27, 27, 27);"
           title="Black 2"
         />
@@ -614,6 +680,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Black 3"
           style="background-color: rgb(49, 49, 49);"
           title="Black 3"
         />
@@ -623,6 +690,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Black 4"
           style="background-color: rgb(85, 85, 85);"
           title="Black 4"
         />
@@ -632,6 +700,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Black 5"
           style="background-color: rgb(118, 118, 118);"
           title="Black 5"
         />
@@ -641,6 +710,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Black 6"
           style="background-color: rgb(148, 148, 148);"
           title="Black 6"
         />
@@ -650,6 +720,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Black 7"
           style="background-color: rgb(179, 179, 179);"
           title="Black 7"
         />
@@ -659,6 +730,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Black 8"
           style="background-color: rgb(206, 206, 206);"
           title="Black 8"
         />
@@ -668,6 +740,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Blue 1"
           style="background-color: rgb(4, 54, 117);"
           title="Blue 1"
         />
@@ -677,6 +750,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Blue 2"
           style="background-color: rgb(4, 54, 117);"
           title="Blue 2"
         />
@@ -686,6 +760,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Blue 3"
           style="background-color: rgb(47, 145, 205);"
           title="Blue 3"
         />
@@ -695,6 +770,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Blue 4"
           style="background-color: rgb(131, 174, 206);"
           title="Blue 4"
         />
@@ -704,6 +780,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Blue 5"
           style="background-color: rgb(23, 96, 127);"
           title="Blue 5"
         />
@@ -713,6 +790,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Blue 6"
           style="background-color: rgb(83, 152, 176);"
           title="Blue 6"
         />
@@ -722,6 +800,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Blue 7"
           style="background-color: rgb(148, 183, 195);"
           title="Blue 7"
         />
@@ -731,6 +810,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Blue 8"
           style="background-color: rgb(180, 198, 206);"
           title="Blue 8"
         />
@@ -740,6 +820,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Red 1"
           style="background-color: rgb(139, 21, 24);"
           title="Red 1"
         />
@@ -749,6 +830,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Red 2"
           style="background-color: rgb(164, 30, 34);"
           title="Red 2"
         />
@@ -758,6 +840,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Red 3"
           style="background-color: rgb(189, 44, 48);"
           title="Red 3"
         />
@@ -767,6 +850,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Red 4"
           style="background-color: rgb(206, 65, 69);"
           title="Red 4"
         />
@@ -776,6 +860,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Red 5"
           style="background-color: rgb(135, 26, 11);"
           title="Red 5"
         />
@@ -785,6 +870,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Red 6"
           style="background-color: rgb(168, 65, 30);"
           title="Red 6"
         />
@@ -794,6 +880,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Red 7"
           style="background-color: rgb(193, 100, 63);"
           title="Red 7"
         />
@@ -803,6 +890,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Red 8"
           style="background-color: rgb(205, 173, 162);"
           title="Red 8"
         />
@@ -812,6 +900,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Orange 1"
           style="background-color: rgb(183, 96, 0);"
           title="Orange 1"
         />
@@ -821,6 +910,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Orange 2"
           style="background-color: rgb(201, 131, 0);"
           title="Orange 2"
         />
@@ -830,6 +920,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Orange 3"
           style="background-color: rgb(206, 161, 0);"
           title="Orange 3"
         />
@@ -839,6 +930,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Orange 4"
           style="background-color: rgb(206, 183, 83);"
           title="Orange 4"
         />
@@ -848,6 +940,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Orange 5"
           style="background-color: rgb(170, 149, 1);"
           title="Orange 5"
         />
@@ -857,6 +950,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Orange 6"
           style="background-color: rgb(194, 175, 9);"
           title="Orange 6"
         />
@@ -866,6 +960,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Orange 7"
           style="background-color: rgb(204, 196, 40);"
           title="Orange 7"
         />
@@ -875,6 +970,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Orange 8"
           style="background-color: rgb(204, 202, 165);"
           title="Orange 8"
         />
@@ -884,6 +980,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 1"
           style="background-color: rgb(37, 22, 12);"
           title="Brown 1"
         />
@@ -893,6 +990,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 2"
           style="background-color: rgb(75, 42, 26);"
           title="Brown 2"
         />
@@ -902,6 +1000,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 3"
           style="background-color: rgb(99, 61, 41);"
           title="Brown 3"
         />
@@ -911,6 +1010,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 4"
           style="background-color: rgb(131, 91, 50);"
           title="Brown 4"
         />
@@ -920,6 +1020,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 5"
           style="background-color: rgb(187, 152, 113);"
           title="Brown 5"
         />
@@ -929,6 +1030,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 6"
           style="background-color: rgb(166, 148, 125);"
           title="Brown 6"
         />
@@ -938,6 +1040,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 7"
           style="background-color: rgb(177, 162, 139);"
           title="Brown 7"
         />
@@ -947,6 +1050,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 8"
           style="background-color: rgb(187, 169, 137);"
           title="Brown 8"
         />
@@ -956,6 +1060,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 9"
           style="background-color: rgb(125, 67, 55);"
           title="Brown 9"
         />
@@ -965,6 +1070,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 10"
           style="background-color: rgb(185, 121, 71);"
           title="Brown 10"
         />
@@ -974,6 +1080,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 11"
           style="background-color: rgb(172, 125, 89);"
           title="Brown 11"
         />
@@ -983,6 +1090,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 12"
           style="background-color: rgb(103, 127, 136);"
           title="Brown 12"
         />
@@ -992,6 +1100,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 13"
           style="background-color: rgb(178, 150, 118);"
           title="Brown 13"
         />
@@ -1001,6 +1110,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 14"
           style="background-color: rgb(191, 161, 131);"
           title="Brown 14"
         />
@@ -1010,6 +1120,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 15"
           style="background-color: rgb(201, 178, 166);"
           title="Brown 15"
         />
@@ -1019,6 +1130,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Brown 16"
           style="background-color: rgb(204, 190, 184);"
           title="Brown 16"
         />
@@ -1028,6 +1140,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Violet 1"
           style="background-color: rgb(169, 9, 179);"
           title="Violet 1"
         />
@@ -1037,6 +1150,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Violet 2"
           style="background-color: rgb(197, 94, 202);"
           title="Violet 2"
         />
@@ -1046,6 +1160,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Violet 3"
           style="background-color: rgb(200, 166, 203);"
           title="Violet 3"
         />
@@ -1055,6 +1170,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Violet 4"
           style="background-color: rgb(203, 192, 204);"
           title="Violet 4"
         />
@@ -1064,6 +1180,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Violet 5"
           style="background-color: rgb(80, 12, 140);"
           title="Violet 5"
         />
@@ -1073,6 +1190,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Violet 6"
           style="background-color: rgb(134, 63, 179);"
           title="Violet 6"
         />
@@ -1082,6 +1200,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Violet 7"
           style="background-color: rgb(163, 112, 195);"
           title="Violet 7"
         />
@@ -1091,6 +1210,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Violet 8"
           style="background-color: rgb(189, 170, 203);"
           title="Violet 8"
         />
@@ -1100,6 +1220,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Green 1"
           style="background-color: rgb(13, 85, 2);"
           title="Green 1"
         />
@@ -1109,6 +1230,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Green 2"
           style="background-color: rgb(25, 154, 9);"
           title="Green 2"
         />
@@ -1118,6 +1240,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Green 3"
           style="background-color: rgb(58, 198, 30);"
           title="Green 3"
         />
@@ -1127,6 +1250,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Green 4"
           style="background-color: rgb(130, 206, 132);"
           title="Green 4"
         />
@@ -1136,6 +1260,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Green 5"
           style="background-color: rgb(59, 102, 19);"
           title="Green 5"
         />
@@ -1145,6 +1270,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Green 6"
           style="background-color: rgb(112, 150, 54);"
           title="Green 6"
         />
@@ -1154,6 +1280,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Green 7"
           style="background-color: rgb(157, 177, 107);"
           title="Green 7"
         />
@@ -1163,6 +1290,7 @@ Object {
       >
         <button
           class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+          data-testid="Green 8"
           style="background-color: rgb(189, 198, 165);"
           title="Green 8"
         />
