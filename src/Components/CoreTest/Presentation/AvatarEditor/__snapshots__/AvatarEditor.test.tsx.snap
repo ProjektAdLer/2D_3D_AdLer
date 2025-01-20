@@ -162,7 +162,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
         class="p-4"
       >
         <mockedavatareditorpreview
-          class="relative w-full h-full"
+          class="relative w-full h-full z-10"
         />
       </div>
     </div>
@@ -332,7 +332,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
         class="p-4"
       >
         <mockedavatareditorpreview
-          class="relative w-full h-full"
+          class="relative w-full h-full z-10"
         />
       </div>
     </div>
@@ -502,7 +502,7 @@ exports[`AvatarEditor should renders 1`] = `
         class="p-4"
       >
         <mockedavatareditorpreview
-          class="relative w-full h-full"
+          class="relative w-full h-full z-10"
         />
       </div>
     </div>
