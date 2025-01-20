@@ -5,1251 +5,1221 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div>
+      <div
+        class="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans"
+      >
         <div
-          class="z-50 flex items-center justify-center flex gap-2 m-2 w-fit h-fit text-adlertextgrey"
+          class="flex portrait:flex-col items-center justify-center h-full w-full"
         >
           <div
-            class="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans"
-            style="width: 50%;"
+            class=" z-50 p-4 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden flex flex-col text-adlerdarkblue"
           >
+            <h1
+              class="text-2xl font-bold"
+            />
             <div
-              class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden flex flex-col"
+              class="inline-grid grid-cols-8 row-span-8 text-adlerdarkblue"
             >
               <div
-                class="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit"
+                class=""
               >
-                <div
-                  class="w-full"
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(0, 0, 0);"
+                  title="Black 1"
                 />
               </div>
               <div
-                class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter"
+                class=""
               >
-                <div
-                  class="p-2 text-adlerdarkblue"
-                >
-                  <h1
-                    class="text-2xl font-bold"
-                  />
-                  <div
-                    class="inline-grid grid-cols-8 row-span-8 text-adlerdarkblue"
-                  >
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(0, 0, 0);"
-                        title="Black 1"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(27, 27, 27);"
-                        title="Black 2"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(49, 49, 49);"
-                        title="Black 3"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(85, 85, 85);"
-                        title="Black 4"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(118, 118, 118);"
-                        title="Black 5"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(148, 148, 148);"
-                        title="Black 6"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(179, 179, 179);"
-                        title="Black 7"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(206, 206, 206);"
-                        title="Black 8"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(4, 54, 117);"
-                        title="Blue 1"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(4, 54, 117);"
-                        title="Blue 2"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(47, 145, 205);"
-                        title="Blue 3"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(131, 174, 206);"
-                        title="Blue 4"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(23, 96, 127);"
-                        title="Blue 5"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(83, 152, 176);"
-                        title="Blue 6"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(148, 183, 195);"
-                        title="Blue 7"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(180, 198, 206);"
-                        title="Blue 8"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(139, 21, 24);"
-                        title="Red 1"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(164, 30, 34);"
-                        title="Red 2"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(189, 44, 48);"
-                        title="Red 3"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(206, 65, 69);"
-                        title="Red 4"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(135, 26, 11);"
-                        title="Red 5"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(168, 65, 30);"
-                        title="Red 6"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(193, 100, 63);"
-                        title="Red 7"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(205, 173, 162);"
-                        title="Red 8"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(183, 96, 0);"
-                        title="Orange 1"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(201, 131, 0);"
-                        title="Orange 2"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(206, 161, 0);"
-                        title="Orange 3"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(206, 183, 83);"
-                        title="Orange 4"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(170, 149, 1);"
-                        title="Orange 5"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(194, 175, 9);"
-                        title="Orange 6"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(204, 196, 40);"
-                        title="Orange 7"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(204, 202, 165);"
-                        title="Orange 8"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(37, 22, 12);"
-                        title="Brown 1"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(75, 42, 26);"
-                        title="Brown 2"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(99, 61, 41);"
-                        title="Brown 3"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(131, 91, 50);"
-                        title="Brown 4"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(187, 152, 113);"
-                        title="Brown 5"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(166, 148, 125);"
-                        title="Brown 6"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(177, 162, 139);"
-                        title="Brown 7"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(187, 169, 137);"
-                        title="Brown 8"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(125, 67, 55);"
-                        title="Brown 9"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(185, 121, 71);"
-                        title="Brown 10"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(172, 125, 89);"
-                        title="Brown 11"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(103, 127, 136);"
-                        title="Brown 12"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(178, 150, 118);"
-                        title="Brown 13"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(191, 161, 131);"
-                        title="Brown 14"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(201, 178, 166);"
-                        title="Brown 15"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(204, 190, 184);"
-                        title="Brown 16"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(169, 9, 179);"
-                        title="Violet 1"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(197, 94, 202);"
-                        title="Violet 2"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(200, 166, 203);"
-                        title="Violet 3"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(203, 192, 204);"
-                        title="Violet 4"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(80, 12, 140);"
-                        title="Violet 5"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(134, 63, 179);"
-                        title="Violet 6"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(163, 112, 195);"
-                        title="Violet 7"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(189, 170, 203);"
-                        title="Violet 8"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(13, 85, 2);"
-                        title="Green 1"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(25, 154, 9);"
-                        title="Green 2"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(58, 198, 30);"
-                        title="Green 3"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(130, 206, 132);"
-                        title="Green 4"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(59, 102, 19);"
-                        title="Green 5"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(112, 150, 54);"
-                        title="Green 6"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(157, 177, 107);"
-                        title="Green 7"
-                      />
-                    </div>
-                    <div
-                      class=""
-                    >
-                      <button
-                        class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                        style="background-color: rgb(189, 198, 165);"
-                        title="Green 8"
-                      />
-                    </div>
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="self-center px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
-                    >
-                      Zurück
-                    </button>
-                  </div>
-                </div>
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(27, 27, 27);"
+                  title="Black 2"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(49, 49, 49);"
+                  title="Black 3"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(85, 85, 85);"
+                  title="Black 4"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(118, 118, 118);"
+                  title="Black 5"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(148, 148, 148);"
+                  title="Black 6"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(179, 179, 179);"
+                  title="Black 7"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(206, 206, 206);"
+                  title="Black 8"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(4, 54, 117);"
+                  title="Blue 1"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(4, 54, 117);"
+                  title="Blue 2"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(47, 145, 205);"
+                  title="Blue 3"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(131, 174, 206);"
+                  title="Blue 4"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(23, 96, 127);"
+                  title="Blue 5"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(83, 152, 176);"
+                  title="Blue 6"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(148, 183, 195);"
+                  title="Blue 7"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(180, 198, 206);"
+                  title="Blue 8"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(139, 21, 24);"
+                  title="Red 1"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(164, 30, 34);"
+                  title="Red 2"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(189, 44, 48);"
+                  title="Red 3"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(206, 65, 69);"
+                  title="Red 4"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(135, 26, 11);"
+                  title="Red 5"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(168, 65, 30);"
+                  title="Red 6"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(193, 100, 63);"
+                  title="Red 7"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(205, 173, 162);"
+                  title="Red 8"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(183, 96, 0);"
+                  title="Orange 1"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(201, 131, 0);"
+                  title="Orange 2"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(206, 161, 0);"
+                  title="Orange 3"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(206, 183, 83);"
+                  title="Orange 4"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(170, 149, 1);"
+                  title="Orange 5"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(194, 175, 9);"
+                  title="Orange 6"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(204, 196, 40);"
+                  title="Orange 7"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(204, 202, 165);"
+                  title="Orange 8"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(37, 22, 12);"
+                  title="Brown 1"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(75, 42, 26);"
+                  title="Brown 2"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(99, 61, 41);"
+                  title="Brown 3"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(131, 91, 50);"
+                  title="Brown 4"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(187, 152, 113);"
+                  title="Brown 5"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(166, 148, 125);"
+                  title="Brown 6"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(177, 162, 139);"
+                  title="Brown 7"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(187, 169, 137);"
+                  title="Brown 8"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(125, 67, 55);"
+                  title="Brown 9"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(185, 121, 71);"
+                  title="Brown 10"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(172, 125, 89);"
+                  title="Brown 11"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(103, 127, 136);"
+                  title="Brown 12"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(178, 150, 118);"
+                  title="Brown 13"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(191, 161, 131);"
+                  title="Brown 14"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(201, 178, 166);"
+                  title="Brown 15"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(204, 190, 184);"
+                  title="Brown 16"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(169, 9, 179);"
+                  title="Violet 1"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(197, 94, 202);"
+                  title="Violet 2"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(200, 166, 203);"
+                  title="Violet 3"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(203, 192, 204);"
+                  title="Violet 4"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(80, 12, 140);"
+                  title="Violet 5"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(134, 63, 179);"
+                  title="Violet 6"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(163, 112, 195);"
+                  title="Violet 7"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(189, 170, 203);"
+                  title="Violet 8"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(13, 85, 2);"
+                  title="Green 1"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(25, 154, 9);"
+                  title="Green 2"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(58, 198, 30);"
+                  title="Green 3"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(130, 206, 132);"
+                  title="Green 4"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(59, 102, 19);"
+                  title="Green 5"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(112, 150, 54);"
+                  title="Green 6"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(157, 177, 107);"
+                  title="Green 7"
+                />
+              </div>
+              <div
+                class=""
+              >
+                <button
+                  class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                  style="background-color: rgb(189, 198, 165);"
+                  title="Green 8"
+                />
               </div>
             </div>
+            <div
+              class=""
+            >
+              <button
+                class="self-center px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              >
+                Zurück
+              </button>
+            </div>
           </div>
+          <div
+            class="w-1/2"
+          />
         </div>
       </div>
     </div>
   </body>,
   "container": <div>
-    <div>
+    <div
+      class="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans"
+    >
       <div
-        class="z-50 flex items-center justify-center flex gap-2 m-2 w-fit h-fit text-adlertextgrey"
+        class="flex portrait:flex-col items-center justify-center h-full w-full"
       >
         <div
-          class="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans"
-          style="width: 50%;"
+          class=" z-50 p-4 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden flex flex-col text-adlerdarkblue"
         >
+          <h1
+            class="text-2xl font-bold"
+          />
           <div
-            class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden flex flex-col"
+            class="inline-grid grid-cols-8 row-span-8 text-adlerdarkblue"
           >
             <div
-              class="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit"
+              class=""
             >
-              <div
-                class="w-full"
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(0, 0, 0);"
+                title="Black 1"
               />
             </div>
             <div
-              class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter"
+              class=""
             >
-              <div
-                class="p-2 text-adlerdarkblue"
-              >
-                <h1
-                  class="text-2xl font-bold"
-                />
-                <div
-                  class="inline-grid grid-cols-8 row-span-8 text-adlerdarkblue"
-                >
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(0, 0, 0);"
-                      title="Black 1"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(27, 27, 27);"
-                      title="Black 2"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(49, 49, 49);"
-                      title="Black 3"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(85, 85, 85);"
-                      title="Black 4"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(118, 118, 118);"
-                      title="Black 5"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(148, 148, 148);"
-                      title="Black 6"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(179, 179, 179);"
-                      title="Black 7"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(206, 206, 206);"
-                      title="Black 8"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(4, 54, 117);"
-                      title="Blue 1"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(4, 54, 117);"
-                      title="Blue 2"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(47, 145, 205);"
-                      title="Blue 3"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(131, 174, 206);"
-                      title="Blue 4"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(23, 96, 127);"
-                      title="Blue 5"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(83, 152, 176);"
-                      title="Blue 6"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(148, 183, 195);"
-                      title="Blue 7"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(180, 198, 206);"
-                      title="Blue 8"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(139, 21, 24);"
-                      title="Red 1"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(164, 30, 34);"
-                      title="Red 2"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(189, 44, 48);"
-                      title="Red 3"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(206, 65, 69);"
-                      title="Red 4"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(135, 26, 11);"
-                      title="Red 5"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(168, 65, 30);"
-                      title="Red 6"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(193, 100, 63);"
-                      title="Red 7"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(205, 173, 162);"
-                      title="Red 8"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(183, 96, 0);"
-                      title="Orange 1"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(201, 131, 0);"
-                      title="Orange 2"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(206, 161, 0);"
-                      title="Orange 3"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(206, 183, 83);"
-                      title="Orange 4"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(170, 149, 1);"
-                      title="Orange 5"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(194, 175, 9);"
-                      title="Orange 6"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(204, 196, 40);"
-                      title="Orange 7"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(204, 202, 165);"
-                      title="Orange 8"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(37, 22, 12);"
-                      title="Brown 1"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(75, 42, 26);"
-                      title="Brown 2"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(99, 61, 41);"
-                      title="Brown 3"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(131, 91, 50);"
-                      title="Brown 4"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(187, 152, 113);"
-                      title="Brown 5"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(166, 148, 125);"
-                      title="Brown 6"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(177, 162, 139);"
-                      title="Brown 7"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(187, 169, 137);"
-                      title="Brown 8"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(125, 67, 55);"
-                      title="Brown 9"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(185, 121, 71);"
-                      title="Brown 10"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(172, 125, 89);"
-                      title="Brown 11"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(103, 127, 136);"
-                      title="Brown 12"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(178, 150, 118);"
-                      title="Brown 13"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(191, 161, 131);"
-                      title="Brown 14"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(201, 178, 166);"
-                      title="Brown 15"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(204, 190, 184);"
-                      title="Brown 16"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(169, 9, 179);"
-                      title="Violet 1"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(197, 94, 202);"
-                      title="Violet 2"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(200, 166, 203);"
-                      title="Violet 3"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(203, 192, 204);"
-                      title="Violet 4"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(80, 12, 140);"
-                      title="Violet 5"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(134, 63, 179);"
-                      title="Violet 6"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(163, 112, 195);"
-                      title="Violet 7"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(189, 170, 203);"
-                      title="Violet 8"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(13, 85, 2);"
-                      title="Green 1"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(25, 154, 9);"
-                      title="Green 2"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(58, 198, 30);"
-                      title="Green 3"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(130, 206, 132);"
-                      title="Green 4"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(59, 102, 19);"
-                      title="Green 5"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(112, 150, 54);"
-                      title="Green 6"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(157, 177, 107);"
-                      title="Green 7"
-                    />
-                  </div>
-                  <div
-                    class=""
-                  >
-                    <button
-                      class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                      style="background-color: rgb(189, 198, 165);"
-                      title="Green 8"
-                    />
-                  </div>
-                </div>
-                <div
-                  class=""
-                >
-                  <button
-                    class="self-center px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
-                  >
-                    Zurück
-                  </button>
-                </div>
-              </div>
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(27, 27, 27);"
+                title="Black 2"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(49, 49, 49);"
+                title="Black 3"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(85, 85, 85);"
+                title="Black 4"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(118, 118, 118);"
+                title="Black 5"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(148, 148, 148);"
+                title="Black 6"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(179, 179, 179);"
+                title="Black 7"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(206, 206, 206);"
+                title="Black 8"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(4, 54, 117);"
+                title="Blue 1"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(4, 54, 117);"
+                title="Blue 2"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(47, 145, 205);"
+                title="Blue 3"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(131, 174, 206);"
+                title="Blue 4"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(23, 96, 127);"
+                title="Blue 5"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(83, 152, 176);"
+                title="Blue 6"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(148, 183, 195);"
+                title="Blue 7"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(180, 198, 206);"
+                title="Blue 8"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(139, 21, 24);"
+                title="Red 1"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(164, 30, 34);"
+                title="Red 2"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(189, 44, 48);"
+                title="Red 3"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(206, 65, 69);"
+                title="Red 4"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(135, 26, 11);"
+                title="Red 5"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(168, 65, 30);"
+                title="Red 6"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(193, 100, 63);"
+                title="Red 7"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(205, 173, 162);"
+                title="Red 8"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(183, 96, 0);"
+                title="Orange 1"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(201, 131, 0);"
+                title="Orange 2"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(206, 161, 0);"
+                title="Orange 3"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(206, 183, 83);"
+                title="Orange 4"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(170, 149, 1);"
+                title="Orange 5"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(194, 175, 9);"
+                title="Orange 6"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(204, 196, 40);"
+                title="Orange 7"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(204, 202, 165);"
+                title="Orange 8"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(37, 22, 12);"
+                title="Brown 1"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(75, 42, 26);"
+                title="Brown 2"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(99, 61, 41);"
+                title="Brown 3"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(131, 91, 50);"
+                title="Brown 4"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(187, 152, 113);"
+                title="Brown 5"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(166, 148, 125);"
+                title="Brown 6"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(177, 162, 139);"
+                title="Brown 7"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(187, 169, 137);"
+                title="Brown 8"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(125, 67, 55);"
+                title="Brown 9"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(185, 121, 71);"
+                title="Brown 10"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(172, 125, 89);"
+                title="Brown 11"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(103, 127, 136);"
+                title="Brown 12"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(178, 150, 118);"
+                title="Brown 13"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(191, 161, 131);"
+                title="Brown 14"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(201, 178, 166);"
+                title="Brown 15"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(204, 190, 184);"
+                title="Brown 16"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(169, 9, 179);"
+                title="Violet 1"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(197, 94, 202);"
+                title="Violet 2"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(200, 166, 203);"
+                title="Violet 3"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(203, 192, 204);"
+                title="Violet 4"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(80, 12, 140);"
+                title="Violet 5"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(134, 63, 179);"
+                title="Violet 6"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(163, 112, 195);"
+                title="Violet 7"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(189, 170, 203);"
+                title="Violet 8"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(13, 85, 2);"
+                title="Green 1"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(25, 154, 9);"
+                title="Green 2"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(58, 198, 30);"
+                title="Green 3"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(130, 206, 132);"
+                title="Green 4"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(59, 102, 19);"
+                title="Green 5"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(112, 150, 54);"
+                title="Green 6"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(157, 177, 107);"
+                title="Green 7"
+              />
+            </div>
+            <div
+              class=""
+            >
+              <button
+                class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
+                style="background-color: rgb(189, 198, 165);"
+                title="Green 8"
+              />
             </div>
           </div>
+          <div
+            class=""
+          >
+            <button
+              class="self-center px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            >
+              Zurück
+            </button>
+          </div>
         </div>
+        <div
+          class="w-1/2"
+        />
       </div>
     </div>
   </div>,
