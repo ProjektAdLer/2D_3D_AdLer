@@ -162,7 +162,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
         class="p-4"
       >
         <mockedavatareditorpreview
-          class="relative w-full h-full z-10"
+          class="relative z-10 w-full h-full"
         />
       </div>
     </div>
@@ -332,7 +332,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
         class="p-4"
       >
         <mockedavatareditorpreview
-          class="relative w-full h-full z-10"
+          class="relative z-10 w-full h-full"
         />
       </div>
     </div>
@@ -504,14 +504,190 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
                 <h1
                   class="text-2xl font-bold"
                 >
-                  ▶ Kopfbedeckung
+                  ▼ Kopfbedeckung
                 </h1>
               </button>
             </div>
             <div>
               <div
-                class="accordionCollapsing"
-              />
+                class="accordionOpening"
+              >
+                <div
+                  class="grid gap-5 pt-4 rounded-lg p-4 portrait:grid-cols-3 grid-cols-5"
+                >
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="Auswahl aufheben"
+                      title="Auswahl aufheben"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="Auswahl aufhebenThumbnail"
+                          class="w-full h-full"
+                          src="aa-none_Thumbnail.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="hats-cowboy"
+                      title="hats-cowboy"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="hats-cowboyThumbnail"
+                          class="w-full h-full"
+                          src="aa-hats-cowboy.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="hats-cylinder"
+                      title="hats-cylinder"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="hats-cylinderThumbnail"
+                          class="w-full h-full"
+                          src="aa-hats-cylinder.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="hats-froghat"
+                      title="hats-froghat"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="hats-froghatThumbnail"
+                          class="w-full h-full"
+                          src="aa-hats-froghat.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="hats-kecap"
+                      title="hats-kecap"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="hats-kecapThumbnail"
+                          class="w-full h-full"
+                          src="aa-hats-kecap.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="hats-santa"
+                      title="hats-santa"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="hats-santaThumbnail"
+                          class="w-full h-full"
+                          src="aa-hats-santa.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="hats-university"
+                      title="hats-university"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="hats-universityThumbnail"
+                          class="w-full h-full"
+                          src="aa-hats-university.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="hats-vrgoggle"
+                      title="hats-vrgoggle"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="hats-vrgoggleThumbnail"
+                          class="w-full h-full"
+                          src="aa-hats-vrgoggle.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="hats-witch"
+                      title="hats-witch"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="hats-witchThumbnail"
+                          class="w-full h-full"
+                          src="aa-hats-witch.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
             <div
               class="pb-2 border-b border-gray-500"
@@ -574,7 +750,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
         class="p-4"
       >
         <mockedavatareditorpreview
-          class="relative w-full h-full z-10"
+          class="relative z-10 w-full h-full"
         />
       </div>
     </div>
@@ -746,14 +922,192 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
                 <h1
                   class="text-2xl font-bold"
                 >
-                  ▶ Oberteil
+                  ▼ Oberteil
                 </h1>
               </button>
             </div>
             <div>
               <div
-                class="accordionCollapsing"
-              />
+                class="accordionOpening"
+              >
+                <div
+                  class="grid gap-5 pt-4 rounded-lg p-4 portrait:grid-cols-3 grid-cols-5"
+                >
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="Auswahl aufheben"
+                      title="Auswahl aufheben"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="Auswahl aufhebenThumbnail"
+                          class="w-full h-full"
+                          src="aa-none_Thumbnail.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="shirts-dress"
+                      title="shirts-dress"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="shirts-dressThumbnail"
+                          class="w-full h-full"
+                          src="aa-shirts-dress.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="shirts-hoodie"
+                      title="shirts-hoodie"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="shirts-hoodieThumbnail"
+                          class="w-full h-full"
+                          src="aa-shirts-hoodie.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="shirts-longdress"
+                      title="shirts-longdress"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="shirts-longdressThumbnail"
+                          class="w-full h-full"
+                          src="aa-shirts-longdress.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="shirts-sweatshirt"
+                      title="shirts-sweatshirt"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="shirts-sweatshirtThumbnail"
+                          class="w-full h-full"
+                          src="aa-shirts-sweatshirt.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="shirts-topcoatsanta"
+                      title="shirts-topcoatsanta"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="shirts-topcoatsantaThumbnail"
+                          class="w-full h-full"
+                          src="aa-shirts-topcoatsanta.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="shirts-topdresssanta"
+                      title="shirts-topdresssanta"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="shirts-topdresssantaThumbnail"
+                          class="w-full h-full"
+                          src="aa-shirts-topdresssanta.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                  <div
+                    class="w-full h-full"
+                  >
+                    <button
+                      class="flex-col px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="shirts-vest"
+                      title="shirts-vest"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <img
+                          alt="shirts-vestThumbnail"
+                          class="w-full h-full"
+                          src="aa-shirts-vest.png"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="w-full p-2 m-2"
+                >
+                  <div
+                    class=""
+                  >
+                    <div
+                      class=""
+                    >
+                      <button
+                        class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      >
+                        <div
+                          class="border-2 border-black rounded m-2 h-5 w-5"
+                          style="background-color: rgb(75, 42, 26);"
+                        />
+                        Braun 2
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div
               class="pb-2 border-b border-gray-500"
@@ -798,7 +1152,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
         class="p-4"
       >
         <mockedavatareditorpreview
-          class="relative w-full h-full z-10"
+          class="relative z-10 w-full h-full"
         />
       </div>
     </div>
@@ -1135,7 +1489,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
         class="p-4"
       >
         <mockedavatareditorpreview
-          class="relative w-full h-full z-10"
+          class="relative z-10 w-full h-full"
         />
       </div>
     </div>
@@ -1214,7 +1568,7 @@ exports[`AvatarEditor should renders 1`] = `
             <div
               class="text-2xl font-bold text-darkblue"
             >
-              Gesicht
+              Haare
             </div>
           </div>
         </div>
@@ -1225,7 +1579,7 @@ exports[`AvatarEditor should renders 1`] = `
             class=""
           >
             <button
-              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              class="!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-0"
             >
               <img
@@ -1239,7 +1593,7 @@ exports[`AvatarEditor should renders 1`] = `
             class=""
           >
             <button
-              class="!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
+              class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-1"
             >
               <img
@@ -1295,7 +1649,7 @@ exports[`AvatarEditor should renders 1`] = `
         <div
           class="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto"
         >
-          <mockedavatareditorfacecategory
+          <mockedavatareditorhaircategory
             controller="undefined"
             viewmodel="[object Object]"
           />
@@ -1305,7 +1659,7 @@ exports[`AvatarEditor should renders 1`] = `
         class="p-4"
       >
         <mockedavatareditorpreview
-          class="relative w-full h-full z-10"
+          class="relative z-10 w-full h-full"
         />
       </div>
     </div>
