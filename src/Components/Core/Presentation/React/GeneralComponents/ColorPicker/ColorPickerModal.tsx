@@ -24,7 +24,7 @@ export default function ColorPickerModal({
 }: AdLerUIComponent<Props>) {
   if (!showModal) return null;
   return (
-    <div className="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans">
+    <div className="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans z-10">
       <div className="flex portrait:flex-col items-center justify-center h-full w-full">
         <div className=" z-50 p-4 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden flex flex-col text-adlerdarkblue">
           <h1 className="text-2xl font-bold">{title}</h1>
